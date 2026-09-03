@@ -685,16 +685,26 @@ class TemplateTrigger:
     # Lane 2/3 NPC-presence gate (Phase A, 2026-05-14). The named NPC must be
     # co-located with the player per their declared [[npcs.schedules]].
     #
-    # ⚠️ THIS GATES TWO PATHS AND ONLY TWO. `requiresNpc` is read in exactly
-    #    setup.checkRandomEncounters (v2.py:5245) — Lane 2 random ambients,
-    #    trigger_mode = "random" — and setup.checkAndSubstituteCanvas
-    #    (v2.py:5318) — Lane 3 substitution targets, substitution_only = true.
-    #    On EVERY other path it does nothing at all. An auto-firing canvas is
-    #    selected by selectAutoFireCanvasForLocation -> isCanvasValid
-    #    (v2.py:4559), which reads schedules, conditions and repeatability and
-    #    never looks at this field; isCanvasValidForSelection (v2.py:4584) is
-    #    the same. So on a one-shot meeting canvas, `trigger.schedules` is what
-    #    stops it firing in an empty room, and this field is documentation.
+    # ⚠️ THIS GATES THREE PATHS, NOT ALL OF THEM. `requiresNpc` is read in
+    #    setup.checkRandomEncounters (v2.py:5540) — Lane 2 random ambients,
+    #    trigger_mode = "random"; setup.checkAndSubstituteCanvas (v2.py:5611) —
+    #    Lane 3 substitution targets, substitution_only = true; and, since
+    #    2026-09-03, THE SOLO LANE, via setup._npcPresentForCanvas (v2.py:4815),
+    #    called from selectSoloActivityCanvasesForLocation and from the inline
+    #    blocked/cooldown loop in renderSoloActivities.
+    #
+    #    It still does NOT gate AUTO-FIRE. A non-repeatable canvas is selected by
+    #    selectAutoFireCanvasForLocation -> isCanvasValid (v2.py:4845), which
+    #    reads schedules, conditions and repeatability and deliberately never
+    #    looks at this field: isCanvasValid is shared with _tryRule on a
+    #    substitution target, and 78 one-shot meetings across 8 games hang off
+    #    it. So on a one-shot MEETING canvas, `trigger.schedules` is still what
+    #    stops it firing in an empty room.
+    #
+    #    The 2026-09-03 change exists because inertness on the manual lane made
+    #    the field optional in practice: 61 solo-lane canvases corpus-wide are
+    #    bound to a person and 7 declared it. A field nobody is punished for
+    #    omitting does not get written.
     #
     #    An earlier version of this comment said requires_npc "lets authors drop
     #    per-canvas location+time gates", with no scope on the claim. A game was

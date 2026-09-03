@@ -3565,6 +3565,10 @@ setup._getNpcUuidToSlug = function() {{
 // Used by schedule functions that need all time windows, not just currently active ones.
 setup._isCanvasAvailable = function(c) {{
     try {{
+        // The author's on/off switch — a canvas that never surfaces on its own must
+        // not imply an NPC is somewhere, nor appear in the weekly activities table.
+        // Covers all four consumers of this helper at once.
+        if (c.isActive === false) return false;
         // Check conditions if present
         if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
             return false;
@@ -4692,7 +4696,7 @@ setup.selectAutoFireCanvasForLocation = function(locationId) {{
             if (c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5 — defensive filter
-            if (!setup.isCanvasValid(c)) continue;
+            if (!setup.isCanvasSelectable(c)) continue;
             if ((c.priority || 0) > bestPriority) {{
                 bestPriority = c.priority || 0;
                 best = c;
@@ -4723,7 +4727,7 @@ setup.selectNpcPortraitCanvasesForLocation = function(locationId) {{
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5
             if (!c.npcId) continue;
-            if (!setup.isCanvasValid(c)) continue;
+            if (!setup.isCanvasSelectable(c)) continue;
             if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
             if (c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs)) continue;
             if (!npcAffordable[c.npcId]) npcAffordable[c.npcId] = [];
@@ -4754,7 +4758,8 @@ setup.selectSoloActivityCanvasesForLocation = function(locationId) {{
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5
             if (c.npcId) continue;  // belongs to portrait path
-            if (!setup.isCanvasValid(c)) continue;
+            if (!setup._npcPresentForCanvas(c, locationId)) continue;
+            if (!setup.isCanvasSelectable(c)) continue;
             if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
             if (c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs)) continue;
             picks.push(c);
@@ -4801,7 +4806,47 @@ setup.markChoiceVisited = function(choiceKey) {{
 }};
 
 // ===== Priority-Based Canvas Selection =====
+
+// Is the character this canvas is bound to standing where the player is?
+// `requires_npc` used to be read on exactly two paths — trigger_mode "random" and
+// substitution_only — which made it INERT on the manual lanes: an author could write
+// it or omit it and the game played identically. So they omitted it. Of 61 solo-lane
+// canvases bound to a person corpus-wide, 7 declared it, and the lint that hunts this
+// defect keys on the field and therefore saw 11% of its own subject.
+//
+// Same shape as checkRandomEncounters and _tryRule use, deliberately: getNpcLocation
+// only, no declared-schedule requirement, fail closed when the NPC resolves nowhere.
+// The point is that `requires_npc` now means ONE thing everywhere it is read.
+setup._npcPresentForCanvas = function(c, locationId) {{
+    if (!c || !c.requiresNpc) return true;      // no binding, no gate
+    try {{
+        var npcLoc = setup.getNpcLocation(c.requiresNpc);
+        return !!(npcLoc && npcLoc.location === locationId);
+    }} catch (e) {{
+        return false;
+    }}
+}};
+
+// Is this canvas allowed to surface ON ITS OWN — auto-fire, a lane row, a random roll?
+//
+// ⚠️ This is NOT isCanvasValid, and the asymmetry is the entire design. `is_active =
+// false` means "never surfaces by itself"; it does NOT mean "unaddressable". A canvas
+// can still be a substitution target, and three of the four canvases in this repo that
+// declare the flag ARE substitution targets (the_allowance's bathroom walk-ins, fired
+// by activity_wash at 0.32/0.30/0.28). _tryRule resolves those through getCanvasById,
+// which is built from help_data.locationCanvases — so an inactive canvas stays in that
+// index and stays valid to _tryRule. Fold this check into isCanvasValid and three
+// tier-4 scenes stop firing, silently, with no build error.
+setup.isCanvasSelectable = function(c) {{
+    if (c && c.isActive === false) return false;
+    return setup.isCanvasValid(c);
+}};
+
 // Check if a canvas is valid (schedule, conditions, repeatability)
+// ⚠️ DO NOT add requiresNpc or isActive here. This is the shared chokepoint: the
+// auto-fire selector calls it (78 one-shot meetings across 8 games would tighten at
+// once) and so does _tryRule on a substitution target (see isCanvasSelectable above).
+// Presence belongs to _npcPresentForCanvas, the on/off switch to isCanvasSelectable.
 setup.isCanvasValid = function(c) {{
     try {{
         // Check schedule if present
@@ -5202,7 +5247,7 @@ setup.renderNpcPortraits = function(locationId) {{
             if ((c.triggerMode || "manual") === "random") continue;
             if (!c.npcId) continue;
             if (npcActivities[c.npcId]) continue;  // NPC already has affordable pick
-            if (!setup.isCanvasValid(c)) continue;
+            if (!setup.isCanvasSelectable(c)) continue;
             if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
             if (!(c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs))) continue;
             if (!npcBlockedAll[c.npcId]) npcBlockedAll[c.npcId] = [];
@@ -5320,7 +5365,11 @@ setup.renderSoloActivities = function(locationId) {{
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.npcId) continue;  // Has NPC = shown as portrait, not here
-            if (!setup.isCanvasValid(c)) {{
+            // Above the showWhenBlocked branches on purpose: "he is not here" is not a
+            // cooldown, and cooldownMessage defaults to "Available again later", which
+            // would be a lie. Hide the row; do not explain it.
+            if (!setup._npcPresentForCanvas(c, locationId)) continue;
+            if (!setup.isCanvasSelectable(c)) {{
                 // E21 — if author opted in, surface as a grayed cooldown entry
                 if (c.showWhenBlocked) {{
                     soloCooldownBlocked.push(c);
@@ -5444,7 +5493,7 @@ setup.checkRandomEncounters = function(locationId) {{
         // Filter to valid canvases (schedule, conditions, repeatability)
         var valid = [];
         for (var j = 0; j < randomCanvases.length; j++) {{
-            if (setup.isCanvasValid(randomCanvases[j])) {{
+            if (setup.isCanvasSelectable(randomCanvases[j])) {{
                 valid.push(randomCanvases[j]);
             }}
         }}
@@ -5559,6 +5608,12 @@ setup.checkAndSubstituteCanvas = function(parentCanvasId) {{
         var _tryRule = function(s) {{
             var target = setup.getCanvasById(s.target_canvas_id);
             if (!target) return null;
+            // ⚠️ isCanvasValid, NOT isCanvasSelectable, and that is deliberate.
+            // `is_active = false` means "never surfaces on its own" — it does not mean
+            // unaddressable. Three of the four canvases in this repo that declare the
+            // flag are substitution targets (the_allowance's bathroom walk-ins), and
+            // swapping this line for the selectable variant deletes them from the game
+            // silently, with no build error and no symptom until somebody plays a wash.
             if (!setup.isCanvasValid(target)) return null;
             if (s.conditions && !setup.triggerConditionsSatisfied(s.conditions)) return null;
             if (target.requiresNpc) {{
@@ -11823,6 +11878,16 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 if trigger and hasattr(trigger, 'metadata') and trigger.metadata:
                     requires_npc = trigger.metadata.get("requires_npc") or None
 
+                # The author's on/off switch. A real column on CanvasTrigger
+                # (apps/stories/models.py:353), written identically by both build paths
+                # (template_import.py:7210, game_graph.py:308) — and, until now, read by
+                # nothing in this generator, so four canvases across two games shipped
+                # switched on after their authors switched them off.
+                # ⚠️ The canvas STAYS in this index when inactive. It is what
+                # getCanvasById builds _canvasByIdMap from, and a substitution target
+                # has to stay resolvable. Suppression happens in isCanvasSelectable.
+                is_active = bool(getattr(trigger, 'is_active', True)) if trigger else True
+
                 location_canvas_list.append({
                     "id": str(canvas.id),
                     "name": canvas.name,  # For grouping tiers by activity name
@@ -11844,6 +11909,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "substitutionOnly": substitution_only,  # PRD 25 — excludes from selectors
                     "entryOnlyFromPassages": entry_only_from_passages,  # L2-2 anti-toggle gate
                     "requiresNpc": requires_npc,  # Phase A — NPC presence gate
+                    "isActive": is_active,  # author's on/off switch — read by isCanvasSelectable
                 })
 
                 # Add to canvas-to-activity mapping for shared daily limits

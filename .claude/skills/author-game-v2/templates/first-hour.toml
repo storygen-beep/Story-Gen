@@ -210,13 +210,19 @@ npc           = "<npc_id>"     # THE PORTRAIT. Also the presence gate: the rende
                                # where the player is standing (v2.py:5194-5199). Without
                                # it there is no face, no presence check, and the link
                                # label becomes `name` above — tokens and all.
-requires_npc  = "<npc_id>"     # NOT a substitute. Inert here; read on exactly two
-                               # paths — trigger_mode = "random" (v2.py:5343) and
-                               # substitution_only (v2.py:5486). Keep it: free, and it
-                               # documents intent.
+requires_npc  = "<npc_id>"     # NOT a substitute for `npc` — it draws no face. It DOES
+                               # gate: read on three paths since 2026-09-03 — random
+                               # ambients, substitution targets, and the solo lane
+                               # (_npcPresentForCanvas). On a canvas with `npc` set the
+                               # portrait's own check is stricter, so this is belt and
+                               # braces here; on a solo-lane row it is the only gate.
 is_repeatable = true
 priority      = 6
-is_active     = true
+is_active     = true           # the author's off switch, and it works since 2026-09-03.
+                               # false = never surfaces on its own (no auto-fire, no lane
+                               # row, no random roll, no schedules-page entry) — but STILL
+                               # reachable as a substitution target. `substitution_only`
+                               # is the field for "dispatcher only"; this one is "off".
 
 [canvases.trigger.conditions]
 version = "1.0"

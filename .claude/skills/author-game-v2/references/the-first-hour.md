@@ -587,17 +587,23 @@ build**. The field the engine reads is `TemplateTrigger.npc` (`:642`), carried t
    you wrote for the author's benefit becomes the words on the player's screen — `@` tokens and all,
    because `name` is not a field the engine resolves tokens in (`engine.md` §43).
 
-> ### ⚠️ `requires_npc` is a different field and does not stand in for this one.
+> ### ⚠️ `requires_npc` is a different field. It gates the row; it does not draw the face.
 >
-> It is read on exactly two paths — `trigger_mode = "random"` (`v2.py:5343`) and
-> `substitution_only` (`v2.py:5486`). On an ordinary manual repeatable canvas it is **inert**:
-> `isCanvasValid` never looks at it. Keep it — it is free and it records intent — but a hub carrying
-> `requires_npc` and no `npc` has no face, no presence check, and no window.
+> **Corrected 2026-09-03.** It is now read on three paths — `trigger_mode = "random"`,
+> `substitution_only`, and **the solo lane**, through `setup._npcPresentForCanvas`. A solo-lane row
+> carrying it renders only while that character is standing where the player is. It still does
+> **not** gate the auto-fire path (`engine.md` §31), and it still draws no portrait.
 >
-> This is the same shape as F5's auto-fire correction, one path over. Where a person-bound surface
-> genuinely should not be a portrait — an activity that happens in a place while somebody is around,
-> rather than a surface on that person — **`trigger.schedules` is what gates it**, exactly as for a
-> meeting.
+> **Until that change it was inert on the manual lane, and the inertness was the whole problem.**
+> Writing it and omitting it played identically, so authors omitted it: of **61** solo-lane canvases
+> bound to a person corpus-wide, **7** declared it — and the lint that hunts this defect keys on the
+> field, so it was seeing 11% of its own subject. A field nobody is punished for leaving out is not
+> a field, it is a comment.
+>
+> A hub carrying `requires_npc` and no `npc` still has no face and no portrait window. Where a
+> person-bound surface genuinely should not be a portrait — an activity that happens in a place
+> while somebody is around, rather than a surface on that person — `requires_npc` now does the
+> presence half on its own, and `trigger.schedules` remains what narrows it to a *time*.
 
 **Measured failure, and it is why this section exists.** `orientation` put `npc` on `[[canvases]]`
 on all thirteen of its character surfaces and shipped with zero portraits, every character rendered

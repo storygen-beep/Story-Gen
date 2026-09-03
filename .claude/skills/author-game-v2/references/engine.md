@@ -1431,7 +1431,14 @@ unbuilt on purpose.
 
 ## 31. `requires_npc` does NOT gate an auto-firing canvas
 
-**The field is real and it works — on two paths out of three.** A canvas that AUTO-FIRES on
+> ⚠️ **Scoped 2026-09-03.** The heading is still true and the rest of this section still holds
+> for the auto-fire path. What changed is the count: `requires_npc` is now read on **three**
+> paths, not two — random ambients, substitution targets, and **the solo lane**, through
+> `setup._npcPresentForCanvas`. See §46. The auto-fire path was left alone on purpose: its
+> validator `isCanvasValid` is shared with `_tryRule`, and 78 one-shot meetings across 8 games
+> hang off it.
+
+**The field is real and it works — on the paths that read it.** A canvas that AUTO-FIRES on
 entry never consults it, so a one-shot written as "fires where the character is" fires whether
 they are there or not.
 
@@ -2623,3 +2630,81 @@ Three consequences, and the first is the one that matters:
    `translateX(-50%)`. The warning variant `.effect-toast.notify-warning` was deliberately given
    wrapping (`v2.py:18246`); the green one never was. **Not fixed** — recorded here so a future
    change is a decision rather than a discovery.
+
+---
+
+## 46. The two switches on a location screen, and what each one now does
+
+Shipped 2026-09-03. Both fields existed, both were author-facing, and neither did anything on the
+lane an author actually watches.
+
+### 46.1 `requires_npc` gates the SOLO lane
+
+`setup._npcPresentForCanvas(c, locationId)` (`v2.py:4815`) — same shape as the two paths that
+already read the field: `getNpcLocation` only, no declared-schedule requirement, fail closed when
+the NPC resolves nowhere. Called from `selectSoloActivityCanvasesForLocation` and from the inline
+blocked/cooldown loop in `renderSoloActivities`, in both cases **after** the `npcId` split, so it
+only ever runs on solo-lane rows.
+
+The guard sits **above** both `showWhenBlocked` branches on purpose. *"He is not here"* is not a
+cooldown, and `cooldownMessage` defaults to `"Available again later"` — surfacing that would be a
+lie. Hide the row; do not explain it.
+
+> **Why it was worth an engine change rather than a rule.** The field was inert on this lane, so
+> writing it and omitting it played identically — and authors omitted it. Of **61** solo-lane
+> canvases bound to a person corpus-wide, **7** declared it, and the lint that hunts this defect
+> (`bound to a person, no face`) keys on the field, so it saw 11% of its own subject. A field
+> nobody is punished for leaving out is a comment.
+
+**Measured**, live, before and after, over a 7-day × 4-hour grid at each surface:
+
+```
+the_allowance  walkin_joss_wash     28/28 slots → 0/28
+the_allowance  walkin_martin_wash   28/28 slots → 0/28
+the_allowance  walkin_gareth_wash   28/28 slots → 0/28
+vesper         react_renner_threat  28/28 slots → 7/28   ← only while Renner is at the Anchor
+the_route      house_the_evening     7/28 slots → 7/28   ← unchanged; Roy is there in all seven
+```
+
+### 46.2 `is_active = false` means "never surfaces on its own"
+
+`setup.isCanvasSelectable(c)` (`v2.py:4835`) = `c.isActive !== false && setup.isCanvasValid(c)`,
+swapped in at the **six** selection sites: auto-fire, the portrait selector, the solo selector,
+both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAvailable`
+(`v2.py:3566`), which covers the four schedule/planner consumers at once.
+
+Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
+written identically by both build paths (`template_import.py:7210`, `game_graph.py:308`), and read
+by **nothing** in the generator. Four canvases in two games shipped switched on after their authors
+switched them off.
+
+> **`forty_miles` is the one that cost content.** `canvas_back_room_key` ships inactive so v0.1's
+> back-room door stays locked — its own TOML says *"`is_active = false` means it never fires in
+> play, so the door stays locked for the whole of v0.1 and gate 9 still counts the choice as
+> visible-locked."* Measured before the fix: entering the stock room at `nights = 60` auto-fired
+> it and set the flag. The declared locked door opened in v0.1.
+
+### 46.3 ⚠️ The trap: `isCanvasValid` must stay clean, and so must `locationCanvases`
+
+**`is_active = false` does not mean unaddressable.** Three of the four canvases that declare it —
+`the_allowance`'s bathroom walk-ins — are **substitution targets** of `activity_wash` at
+0.32/0.30/0.28. `_tryRule` resolves them through `setup.getCanvasById`, which builds its map from
+`help_data.locationCanvases`.
+
+So two things must NOT happen, and both look like the obvious implementation:
+
+| tempting | what it costs |
+|---|---|
+| fold the check into `setup.isCanvasValid` | `_tryRule` calls it on the target — the three walk-ins stop firing, silently |
+| drop the canvas from `help_data.locationCanvases` | `getCanvasById` cannot resolve it — same outcome, same silence |
+| add it to `_build_flag_unlock_map` | `forty_miles` hard-fails with `✗ back_room_key — NEVER SET` |
+
+An inactive canvas therefore **stays in the index and keeps its passages**, and `_tryRule` keeps
+calling the bare `isCanvasValid`. That asymmetry is the design, and it carries a comment at the
+call site saying so. Verified live: after the change `walkin_joss_wash` still fires as a
+substitution on `activity_wash` (26 of 60 rolls at Monday 06:45, when Joss is in the bathroom)
+while rendering as a standalone row in 0 of 28 slots.
+
+**`substitution_only = true` is the field for "dispatcher only, not a button."** Three of the four
+`is_active = false` declarations in this repo look like an author reaching for it and finding the
+wrong switch. Both fields now work; they mean different things.

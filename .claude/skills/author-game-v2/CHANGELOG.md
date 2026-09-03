@@ -5,6 +5,89 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-03 — two switches on a location screen that had never been wired
+
+**ENGINE** — `generators/v2.py` (`_npcPresentForCanvas`, `isCanvasSelectable`, six selection sites,
+`_isCanvasAvailable`, the `isActive` payload key) · `template_import.py` (the `requires_npc` doc
+block that said "TWO PATHS AND ONLY TWO") · **NEW** `tests/test_canvas_presence_and_active.py`
+(12 tests). **SKILL** — `references/engine.md` (§31 scoped, new §46) ·
+`references/the-first-hour.md` (F5b) · `templates/first-hour.toml` ·
+`references/the-sheets.md` (the survey) · `scripts/gates.py` (the lint note).
+
+LO, after this morning's fold: *"Also check the skill if it properly prevent these or not… These
+activities shouldnt be solo activities instead should be proper NPC activities."*
+
+**The audit's answer was no, and the reason was not doctrine.** The lint `bound to a person, no
+face` keys on `requires_npc`. Measured across the corpus: **61** solo-lane canvases are bound to a
+person and **7** declare the field — so the lint was seeing 11% of its own subject. Cause: the field
+was **inert** on that lane. `isCanvasValid` never read it; only random ambients and substitution
+targets did. Writing it and omitting it played identically, so authors omitted it. **A field nobody
+is punished for leaving out is a comment, and no rule written on top of one can hold.**
+
+Three fields on this one surface looked like switches. `requires_npc` was inert;
+`substitution_only` works but is silently dropped if nested one table too high (already gated);
+**`is_active` was read by nothing at all** — a real column on `CanvasTrigger`, written by both build
+paths, and `grep -rn is_active apps/game_generation/` returned nothing.
+
+### Shipped
+
+1. **`setup._npcPresentForCanvas`** gates the solo lane, same shape as the two paths that already
+   read the field. Above both `showWhenBlocked` branches on purpose — *"he is not here"* is not a
+   cooldown, and `cooldownMessage` defaults to *"Available again later"*, which would be a lie.
+2. **`setup.isCanvasSelectable`** = `isActive !== false && isCanvasValid`, at the six selection
+   sites, plus one guard in `_isCanvasAvailable` covering the four planner consumers.
+3. **`isCanvasValid` deliberately untouched** — the auto-fire selector calls it, and 78 one-shot
+   meetings across 8 games hang off it. The 2026-08-22 refusal to tighten it stands; `engine.md`
+   §31 is scoped rather than deleted.
+
+### ⚠️ The finding that changed the design, and it came from an adversarial read
+
+The plan said to suppress an inactive canvas from `help_data.locationCanvases`. **That would have
+silently deleted three tier-4 explicit scenes from a shipped game.** `the_allowance`'s three
+bathroom walk-ins carry `is_active = false` **and** are substitution targets of `activity_wash`
+(0.32/0.30/0.28); `_tryRule` resolves them through `getCanvasById`, which builds its map from that
+index. Folding the check into `isCanvasValid` does the same damage, because `_tryRule` calls it on
+the target. Both were verified against the source before the design changed.
+
+So: **`is_active = false` means "never surfaces on its own", not "unaddressable".** The canvas stays
+in the index, keeps its passages, and `_tryRule` keeps the bare validator. The asymmetry carries a
+comment at the call site, and two tests guard it.
+
+Three of those four declarations look like an author reaching for `substitution_only` and finding
+the wrong switch. Both fields work now; they mean different things, and `engine.md` §46 says so.
+
+### Two shipped defects found, reported, NOT repaired — LO's call, engine only
+
+- **`forty_miles` was leaking its own locked door.** `canvas_back_room_key` ships
+  `is_active = false` so v0.1's back room stays shut; its TOML says *"it never fires in play."*
+  Measured: `entered stock room, landed → Canvas_canvas_back_room_key_Node_base · flag = True`.
+  After: `→ Location_the_stock_room · flag = None`, and `✓ All flag chains valid` — the located
+  setter still resolves, because `_build_flag_unlock_map` was left alone.
+- **`the_allowance` renders three switched-off walk-ins at every hour** — *"Your father at the
+  door"*, *"Gareth, and the apology"*, *"Joss, in the doorway"*, 28 of 28 probed slots.
+
+Both need a rebuild to take the fix. Nothing under `games/` was touched.
+
+### Not built
+
+**`--sheets`.** Proposed as the check that would have caught the morning's defect at design time,
+then costed: **2 of 33 games have sheets**, in two incompatible formats, with prose row labels that
+name no canvas id and four markers that change what a row means. Dropped; the survey is written into
+`the-sheets.md` S1 so it is not re-proposed blind. **A gate on "is this row a person"** was also
+prototyped — 27 hits across 10 games, roughly half correct as written, because *"Go in while he's at
+work"* and *"The room after he has gone"* are about the person's **absence**. The lint stays a list.
+
+**Verified.** `--selfcheck` **48/48 gates · 38/38 lints · 5/5 modes · 137 rules, 0 pointing at
+nothing**, exit 0, unchanged — nothing was added to the scoreboard. **All 26 games' gate verdicts
+captured before and after: 0 moved.** `node --check` clean on the emitted engine block. **369 passed,
+7 skipped** (357 + 12 new); the 12 were re-run against the stashed pre-change generator and **8
+failed**, the other 4 being regression guards that were correct before and must stay correct. Live,
+in a headless browser, before and after on a 7-day × 4-hour grid at each of the seven affected
+surfaces — and `walkin_joss_wash` still fires as a substitution 26 times in 60 rolls while rendering
+as a standalone row 0 times in 28 slots.
+
+---
+
 ## 2026-09-03 — a second surface for the same person is a node inside the first, not a row beside it
 
 **`references/the-first-hour.md`** (F5b gains the half it was missing) ·

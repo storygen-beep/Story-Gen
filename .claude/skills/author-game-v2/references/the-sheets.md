@@ -79,6 +79,36 @@ prints both.**
 reads a sheets folder. Until something does, every count on a sheet belongs on the **intent** side of
 the measured/intent split, however carefully it was counted.
 
+> ### ⚠️ One was proposed on 2026-09-03, costed, and dropped. Read this before proposing it again.
+>
+> The occasion: `orientation`'s place sheets declared **one cast row per person** and the build
+> shipped two — the defect that produced *"Ask him about the campus / Ask whom???"*. Both documents
+> existed and nothing compared them, so a sheet-versus-build row diff looked like the cheapest
+> instrument on the table. A survey of every game says the artefact it would read does not exist yet:
+>
+> - **2 of 33 games have a `sheets/` directory at all** — `night_desk` (7 place sheets) and
+>   `orientation` (12). Nothing else in the repo has one.
+> - **The two use incompatible formats.** `orientation` writes markdown tables under `## The list`;
+>   `night_desk` writes fixed-width ASCII inside `<pre>`, where a row is distinguished from an
+>   annotation by 2-space against 6-space indentation. Two parsers, 19 files.
+> - **A row label is prose and never an id.** Of 43 row cells across the 12 `orientation` tables,
+>   **zero** contain a backtick. `night_desk`'s sheets contain no canvas id anywhere. Joining a row
+>   to a canvas needs fuzzy name matching.
+> - **Four markers change what a row means** — `**bold**` is a row, `├ *italic*` is explicitly *not*
+>   a row, `~~struck~~` is deleted, `*(walk-in)*` is an ambient. Ignoring them miscounts 6 of 12.
+> - **The built side is ambiguous too.** `the_kitchen` is 14 canvases, or 5 repeatable, or 3 once
+>   `hub_*` and `walkin_*` come out — and which the sheet meant is a convention, not a fact.
+>
+> **The finding is the deliverable.** A check that runs on one game, needs two parsers and a fuzzy
+> join, and compares against a denominator nobody has defined is not an instrument. It becomes one
+> when sheets are corpus-wide and a row names its canvas; both are cheap to do while writing, and
+> neither is worth retrofitting to 31 games.
+>
+> **Known and unchecked, found by that survey:** `act_quad_row` was deleted from `orientation`'s
+> build and is still named 3 times across `the_quad.md` and `the_row.md`. `night_desk`'s
+> `the_lot.md` declares 3 rows against 4 built. Sheet drift is real; it is just not yet
+> mechanically detectable.
+
 ## S2 · A PLACE SHEET SAYS WHAT IT HANGS OFF
 
 Every place sheet carries an **`ENTERED FROM`** row. The decision sheet carries the map **archetype**

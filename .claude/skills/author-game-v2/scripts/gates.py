@@ -9266,15 +9266,16 @@ def main():
         if len(face_lints) > 10:
             print(f"          · … and {len(face_lints)-10} more")
         print("          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the"
-              " portrait AND gates the surface on that character's own [[npcs.schedules]];"
-              " `requires_npc` does neither here (v2.py:5343 and :5486 are its only readers)."
-              " An activity that happens in a place while somebody is around is a legitimate"
-              " shape — window it with trigger.schedules. A surface ON that person wants the"
-              " face, and when the face is already taken by a higher-priority canvas the surface"
-              " is a NODE INSIDE that canvas, not a second one beside it — a node has no priority"
-              " to lose (F5b). Corpus: 21 hits in 5 of 26 games, and everything outside"
-              " orientation is a walk-in or a windowed scene, which is why this cannot fail"
-              " anything)")
+              " portrait AND gates the surface on that character's own [[npcs.schedules]]."
+              " `requires_npc` draws no face, but since 2026-09-03 it DOES gate the solo lane"
+              " (setup._npcPresentForCanvas) as well as random ambients and substitution targets,"
+              " so a row carrying it is at least hidden while that person is elsewhere — it is"
+              " the FACE that is still missing. An activity that happens in a place while somebody"
+              " is around is a legitimate shape. A surface ON that person wants the face, and when"
+              " the face is already taken by a higher-priority canvas the surface is a NODE INSIDE"
+              " that canvas, not a second one beside it — a node has no priority to lose (F5b)."
+              " Corpus: 21 hits in 5 of 26 games, and everything outside orientation is a walk-in"
+              " or a windowed scene, which is why this cannot fail anything)")
 
     if tok_summary:
         print(f"  {'─'*72}")
