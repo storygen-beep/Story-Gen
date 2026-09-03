@@ -15,8 +15,9 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
-    // Listed 2026-09-03. Authored with author-game-v2. 14 locations, 202 nodes, 7 characters,
-    // 12 guidance cards, 6 walk-ins, 20,343 words, 45/46 gates.
+    // Listed 2026-09-03, updated 2026-09-04. Authored with author-game-v2. 15 locations,
+    // 89 canvases, 212 nodes, 7 characters, 12 guidance cards, 11 walk-ins, 8 garments,
+    // 110 block_pools, 21,537 words, 45/46 gates.
     //
     // A GROUND-UP RE-AUTHOR OF `vesper` UNDER v2. The live vesper (0.2.0, this list) is NOT
     // touched by it and is not going anywhere; this is a separate game with a separate title,
@@ -26,14 +27,26 @@ window.GAMES = [
     // What v2 bought over the shipped game: seven numbered arcs that CONVERT into their
     // repeatable surfaces rather than starting converted; three access tiers (cover/service/
     // drain) that open content instead of colouring it; a wardrobe of eight garments, each
-    // earned somewhere different, wired to a state-reactive sidebar portrait; and 103
+    // earned somewhere different, wired to a state-reactive sidebar portrait; and 110
     // block_pools, the variant primitive documented in four places and used by zero v2 games
     // before this one.
     //
-    // ⚠️ IT IS 69% WRITTEN AND THAT IS THE ONE RED GATE. 20,343 words against a declared
-    // 29,600, 10 of 14 rooms inside their own budget. The four short ones are renner_depot,
-    // penthouse, underworld_strip and vance_securities — every room works and those four are
-    // thin. ~7,400 words owed, distributed per board.locations[].fill.
+    // ⚠️ SHE LIVES AT THE SPIRE, and getting that wrong was the biggest single defect this
+    // build has carried. The re-author started her at Kess's berth paying ten a night on frame
+    // one; the original houses her in the tower — a company room with a free charging cradle —
+    // and gates the bench at the berth behind earning it. That made her HOUSING an arc shipped
+    // in its converted state, the exact failure the-arc.md exists to stop, committed on the
+    // player's own bed. And it meant the obligation never ignited: ten a night was a fact she
+    // woke up to rather than the price of not going back. Fixed 2026-09-04 — wren_room off the
+    // plaza, a free cradle capped at once a night, and a milestone that takes both away. The
+    // opening did not move: the game still opens on a stranger's workbench in the Reach.
+    //
+    // ⚠️ IT IS 69% WRITTEN AND THAT IS THE ONE RED GATE. 21,537 words against a declared
+    // 31,100, 11 of 15 rooms inside their own budget. The four short ones are renner_depot
+    // (966/2,500), penthouse (751/2,000), underworld_strip (266/1,000) and vance_securities
+    // (1,017/1,500). Every room works and those four are thin. ~9,600 words owed, distributed
+    // per board.locations[].fill — and the budgets have never been re-declared to match
+    // delivery, which is the exact failure gate 1 was rebuilt to catch.
     //
     // ⚠️ NO MEDIA SHIPS WITH THIS LISTING. The build reads 265 clips in place from
     // games/vesper/videos, and .gitignore keeps games/*/output/videos out of the repo until a
@@ -42,8 +55,8 @@ window.GAMES = [
     // and re-add — it is 145 MB into a repo already packed at 3.0 GiB.
     //
     // ⚠️ IT HAS NOT BEEN THROUGH A SHIP GATE and carries no `version` for that reason. v0.1
-    // stops at a BUILD boundary, not an ending: the quest ladder ends on an honest wall card
-    // and Cain's shutter is the visible locked door the release closes on.
+    // stops at a BUILD boundary, not an ending, and closes on two visible locked doors: Cain's
+    // shutter (`drain gte 100`) and the bench at Kess's berth (`relation gte 60`).
     //
     // ⚠️ THE TITLE HAS NOT BEEN CHECKED against the storefronts for a collision, and it is
     // immutable once anything ships.
@@ -51,7 +64,7 @@ window.GAMES = [
     title: "Vesper: Undertow",
     badge: "v2",
     dev: true,
-    summary: `A company asset with no self yet, put out of the tower and down into the Reach with five coin and a bed she has to pay for nightly. Three ways up out of it and they are not the same ladder: what she wears through a door that reads her, what she will let a room use her for, and what she can take out of a man while he thinks he is taking. Seven people who each own a different part of the city — the mechanic who reads her as an interesting problem and is the only one who can put anything inside her on purpose, the man who still owns her and sells Spire paper under a flat name after midnight, the one who searches her at his door every visit and has never once wanted her. She starts owned. What she is climbing toward is being the one who decides who gets used.`,
+    summary: `A company asset with no self yet. She still sleeps in the tower — a numbered door on a floor the directory does not list, a bed she rarely uses, a charging cradle that costs nothing because the company pays for the current the way it pays for the linen. Her days are down in the Reach under the dock road, and there are three ways up out of it that are not the same ladder: what she wears through a door that reads her, what she will let a room use her for, and what she can take out of a man while he thinks he is taking. Seven people who each own a different part of the city — the mechanic who reads her as an interesting problem and is the only one who can put anything inside her on purpose, the man who still owns her and sells Spire paper under a flat name after midnight, the one who searches her at his door every visit and has never once wanted her. Sooner or later the company notices what she is doing down there, and then the cradle is somebody else's and a bed costs ten a night. She starts owned. What she is climbing toward is being the one who decides who gets used.`,
   },
   {
     // Listed 2026-09-02. Authored with author-game-v2. 10 locations, 43 canvases, 5 characters,
