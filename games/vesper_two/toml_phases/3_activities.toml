@@ -29,6 +29,9 @@ location      = "kess_berth"
 is_repeatable = true
 priority      = 4
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "kess_tenant", operator = "is_true" },
+] }
 substitutions = [
   { target_canvas_id = "walkin_kess_berth", chance = 0.12, exclusive_group = "the_bench", conditions = { version = "1.0", logic = "AND", items = [
     { type = "trait", subject = "player", trait_key = "seated", operator = "gte", value = 1 } ] } },
@@ -68,6 +71,16 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
+text             = "Sleep on the bench instead."
+targetType       = "node"
+nodeId           = "act_feed_line.cot"
+show_when_locked = true
+locked_text      = "A stripped bench along the wall past the hull, a pad on it, her bag under it. It is not the cradle and it is not a room, and it would be the first place in her life nobody signed for. He has not offered and there is no reason yet for it to be hers."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_kess", trait_key = "relation", operator = "gte", value = 60 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
 text        = "A night on the line. (10 coin.)"
 targetType  = "node"
 nodeId      = "act_feed_line.out1"
@@ -105,6 +118,19 @@ text = "Done."
 destinationType = "specific"
 locationId      = "kess_berth"
 time_progression_minutes = 540
+
+[[canvases.nodes]]
+id   = "cot"
+name = "The bench"
+blocks = [ { type = "paragraph", content = "Not this release." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "kess_berth"
 
 [[canvases.nodes]]
 id   = "out2"
@@ -1191,6 +1217,14 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 
 [[canvases.nodes.exit_block.choices]]
+text       = "Up to your own floor."
+targetType = "node"
+nodeId     = "amb_spire_plaza.home"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "badge_pulled", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
 text       = "Round to the service door. (20 min.)"
 targetType = "node"
 nodeId     = "amb_spire_plaza.side"
@@ -1217,6 +1251,22 @@ text = "In."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "vance_securities"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "home"
+name = "The asset level"
+blocks = [
+  { type = "paragraph", content = "The lift takes your palm without a word and stops at a floor the directory does not list. Narrow corridors, numbered doors, no windows, and quiet the way a kept place is quiet." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down the corridor."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
 time_progression_minutes = 10
 
 [[canvases.nodes]]
@@ -1667,3 +1717,199 @@ text = "Enough."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "underworld_bar"
+
+# =============================================================================
+# WREN'S ROOM — the thing the original had and this build did not.
+#
+# In `vesper` her home is three rooms deep in the tower: wren_floor (an asset
+# level of numbered doors), wren_room, and the cradle as a fourth location. One
+# room and one row inside it carry the same meaning at a fifteenth of the map.
+#
+# ⚠️ THE CRADLE CARRIES A BRAKE, and it is not decoration. `charge` IS gated at 30
+# with `gte`, so it is one of the eight meters `the climb is paid for` prices. A
+# free, uncapped cradle makes it freely farmable and turns that gate red — the gate
+# three passes were spent earning. max_triggers_per_day = 1 is the brake, and a
+# sleep once a night is what this is anyway. The feed line at the berth stays
+# day-capped AND priced, so the contrast is intact: free-but-once against
+# paid-and-once, and the difference between the two is the whole ignition.
+# =============================================================================
+
+[[canvases]]
+id          = "amb_wren_room"
+name        = "Wren's room"
+description = "home_base while the tower still houses her. A room she does not own, on a floor the directory does not list."
+
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wren's room"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "A bed she rarely uses, a cradle in the corner, and nothing on the walls. There is a drawer with three things in it and she could not tell you which of the three she chose." },
+    { type = "paragraph", content = "The door has a number and not a name. Every door on this corridor has a number and not a name, there are eleven of them, and she has never found out what is behind nine." },
+    { type = "paragraph", content = "It is warm, it is clean, the linen is changed on a Tuesday by somebody she has never seen, and nothing in it is hers in any sense a court would recognise." },
+    { type = "paragraph", content = "There is no lock on the inside. There is no lock on the inside of any of them, and it took her a year to notice, because for the first year it did not occur to her to try." },
+    { type = "paragraph", content = "From this high the Reach is a dark seam under the dock road with about four lights in it. She has started being able to pick out which four." },
+    { type = "paragraph", content = "The corridor smells of the same cleaning product as every corridor in the building, which on the executive floors reads as care and on this one reads as inventory." },
+    { type = "paragraph", content = "There is a maintenance panel by the skirting with a seal on it dated the year she was commissioned. Whatever runs behind the wall of this room has not needed a person since before she existed." },
+  ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "unknown" }, content = "Asset housing reminder. Personal effects are limited to the issued drawer. Corridor storage will be cleared without notice." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Linen service, this floor, Tuesday. Occupants need not be present and are asked not to be." },
+    { type = "dialog", props = { speaker = "unknown" }, content = "Charging faults are reported through facilities, not through your supervising officer. Facilities operate weekdays." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "service", operator = "gte", value = 8 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "You come back up smelling of a bar and get into a bed the company launders, and the two facts sit in the same room without touching. That cannot hold, and you know the shape of how it ends." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Four hundred nights in this room and you could not describe it to somebody. It is a place to be switched off in, and it was built by people who were being kind about it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Open the drawer."
+targetType = "node"
+nodeId     = "amb_wren_room.drawer"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the bed for a while. (20 min.)"
+targetType = "node"
+nodeId     = "amb_wren_room.sit"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the lift."
+targetType = "node"
+nodeId     = "amb_wren_room.out"
+
+[[canvases.nodes]]
+id   = "sit"
+name = "The bed"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The bed is for sitting on, mostly. Sleeping is what the cradle is for and the bed is what a room has in it, and somebody costed both without noticing the difference." },
+    { type = "paragraph", content = "The drawer has a company comb, a spare set of grays, and a photograph of a coastline that came with the room. You have kept the photograph and do not know why, and you have decided not to look into it." },
+    { type = "paragraph", content = "Nobody comes to this corridor. In four hundred nights you have heard somebody else's door twice, and both times you stood still until it stopped." },
+    { type = "paragraph", content = "Sitting here with the coveralls still on and the Reach on your hands is the only version of this room that has ever felt like yours, and it is going to be the reason you lose it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Enough."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "drawer"
+name = "The drawer"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "A company comb, a spare set of grays folded the way the linen service folds them, and a photograph of a coastline. Three things, and the company issued two of them." },
+    { type = "paragraph", content = "The photograph was in the drawer when the room was assigned. It is a coastline with a white building on it and no people, and it is the only image in this building that is not a logo or a floor plan." },
+    { type = "paragraph", content = "You have never added a fourth thing. You have thought about it, in the specific way of somebody testing whether they are allowed to, and then not done it, which is its own answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cover", operator = "gte", value = 10 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "What you wear down the hill now does not fold like the grays do, and it does not go in this drawer. It stays in a rack in a workshop under the dock road, which is where it makes sense." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [] } }, blocks = [
+    { type = "paragraph", content = "Everything you own is in this drawer and it does not fill it, and you have never once thought of that as a problem to solve." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Shut it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "out"
+name = "The corridor"
+blocks = [ { type = "paragraph", content = "The corridor is the same in both directions and the lift is at the end you always use." } ]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 10
+
+[[canvases]]
+id          = "act_the_cradle"
+name        = "Power down"
+description = "The free charge, once a night, for as long as the company is still housing her. THE THING SHE LOSES — the ten a night at the berth only bites because this was free first."
+
+[canvases.trigger]
+location             = "wren_room"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Power down"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You strip to nothing and back into the cradle, because it reads better with nothing between the contacts and the skin. They find their points along your spine, cold and familiar. The quiet closes over the top of you like water." },
+    { type = "paragraph", content = "Nine hours of nothing that costs nothing. The company pays for the current the way it pays for the linen, without ever mentioning either, and that is what being owned is actually like most of the time." },
+    { type = "paragraph", content = "The cradle was fitted before you were, and it is the only thing in the room made for you specifically. You have never decided how to feel about that and you power down before you get anywhere." },
+    { type = "paragraph", content = "There is a moment on the way down where the room is still there and you are not tracking it any more, and that moment is the closest thing to rest anybody has ever given you for free." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Power down. (9h.)"
+targetType = "node"
+nodeId     = "act_the_cradle.woke"
+effects = [
+  { targetType = "player", trait = "charge", op = "set", value = 100 },
+  { targetType = "player", trait = "clean",  op = "set", value = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay up."
+targetType = "node"
+nodeId     = "amb_wren_room.base"
+
+[[canvases.nodes]]
+id   = "woke"
+name = "Morning"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "When it lets you go it is morning again, the charge full and the hours you spent down there walked back into you. Nothing about the room has moved." },
+    { type = "paragraph", content = "You wake at full and it takes about a minute to remember what you did the previous night. There is a version of you that does not bother remembering, and she is easier." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 540

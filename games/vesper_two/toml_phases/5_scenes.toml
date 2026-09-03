@@ -5060,3 +5060,69 @@ text = "Into the room."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "bastien_backroom"
+
+# =============================================================================
+# THE BADGE — the ignition, and the step this build was missing.
+#
+# Her housing was an ARC in the original (cradle → cot, gated on berth_home) and
+# this build shipped it converted: she woke up a tenant on frame one with ten coin
+# a night already due. That is the same "authored in its converted state" failure
+# the-arc.md exists to stop, committed on the player's own bed.
+#
+# ⚠️ GATED ON kess_tenant AS WELL AS service. The feed line must be ARMED before
+# the cradle is taken away, or a player who reaches service 10 without having
+# rented from Kess loses every charge source in the game at once.
+# =============================================================================
+
+[[canvases]]
+id          = "arc_badge_pulled"
+name        = "The floor is reassigned"
+description = "MILESTONE at wren_room. Sets badge_pulled, which closes the room and the free cradle. What it turns ON is the feed line as the only charge in the game — the ten a night only bites because this was free first."
+
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "badge_pulled", operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key  = "kess_tenant",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "service",      operator = "gte", value = 10 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The floor is reassigned"
+blocks = [
+  { type = "paragraph", content = "There is a crate outside the door with your name on a label and the drawer's three things in it. The comb, the spare grays, the photograph of a coastline. Somebody has folded the grays." },
+  { type = "paragraph", content = "The notice is taped to the number. Asset housing is being consolidated, this floor is being reassigned, and the effective date was yesterday. It is addressed to the room and not to you." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You are still on the register, that has not changed. It is the accommodation that has changed. There is a difference and I am told it is an important one." },
+  { type = "paragraph", content = "Nobody came down to say it. Nobody was ever going to come down to say it, and the crate is the saying — a company can end four hundred nights with a label and a piece of tape and never once use a verb about it." },
+  { type = "paragraph", content = "The cradle is behind the door and the door does not take your palm now. Whatever is in you still needs charging tonight and there is exactly one place left in this city that will do it, and it costs ten." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Take the crate and go down."
+targetType  = "node"
+nodeId      = "arc_badge_pulled.down"
+flagEffects = [ { targetType = "player", flag = "badge_pulled", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "down"
+name = "The lift, last time"
+blocks = [
+  { type = "paragraph", content = "The lift takes you down and does not stop at that floor again. You have the crate under one arm and forty minutes of walking ahead of you, and by the bottom of the hill you have worked out that nothing about your day has actually changed except where it ends." },
+  { type = "paragraph", content = "The Reach is a dark seam with about four lights in it, and one of them is a bench you can afford." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down the hill."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 20

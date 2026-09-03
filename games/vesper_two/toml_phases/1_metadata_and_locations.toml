@@ -28,7 +28,7 @@ name             = "Spire Plaza"
 description      = "Glass, badges, and a lobby that decides whether she is staff before she has said anything."
 image            = "locations/spire_plaza.jpg"
 entry_from       = "the_street"
-navigation_order = ["vance_securities", "penthouse"]
+navigation_order = ["vance_securities", "penthouse", "wren_room"]
 costs            = { time = 20 }
 
 [[locations]]
@@ -38,6 +38,18 @@ description      = "An un-indexed file room being audited shut. One man works he
 image            = "locations/vance_securities.jpg"
 entry_from       = "spire_plaza"
 navigation_order = []
+
+[[locations]]
+id               = "wren_room"
+name             = "Wren's Room"
+description      = "Hers, in the way a tool's drawer is the tool's. A bed she rarely uses, a charging cradle in the corner, nothing on the walls. Clean, bare, company issue."
+image            = "locations/wren_room.jpg"
+entry_from       = "spire_plaza"
+navigation_order = []
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "badge_pulled", operator = "is_false" },
+] }
+blocked_message  = "The lift does not take her palm for that floor any more. Somebody in an office decided it and nobody came down to say so."
 
 [[locations]]
 id               = "penthouse"

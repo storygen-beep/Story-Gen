@@ -18,6 +18,8 @@
     },
     "who_she_is": "Wren, a Vance Dynamics asset. She serves the company and the man who owns her and she is good at it. She has no self yet and is not looking for one.",
     "obligation": "The feed line — ten coin a night, paid to Kess at the berth. A paid night buys her charge and a few days of his attention. Miss it and she is off the line, and off the line she runs down.",
+    "hold_kind": "bill",
+    "hold_collector": "npc_kess",
     "appetite": "To be the one who decides who gets used. She starts as the thing the company points at people; every man in the city is above her. It cannot be finished — there is always another hand higher up the leash. When the coin stops counting the act does not change, only the reason does.",
     "ascent": "At the bottom she takes what she is given, in the two rooms she is allowed into, in what she was issued. At the top she picks the man, the room and the hour, and walks into places that would have thrown her out. Three tiers, climbed separately: cover (how brazenly she wears the body as a tool), service (who she will let use her, and where), drain (taking a man in order to take something off him).",
     "charge": "reversal",
@@ -247,6 +249,36 @@
         "The anchor is at 33% and converging on its planned 30.4% as the rest fills — do not top it up.",
         "`grays` naming question still LO's call."
       ]
+    },
+    {
+      "date": "2026-09-04",
+      "pass": "E11",
+      "what": "She lives at the Spire again. wren_room restored, the cradle is free, and losing it is the ignition.",
+      "why": "LO: 'In the original vesper she starts with living at the spire not at the kess.' Verified — the original opens at canvas_opening_office at 20:00 and houses her three rooms deep in the tower (wren_floor / wren_room / cradle), with the_cot at Kess's berth GATED on berth_home. This build had wren_room, cradle and berth_home appearing zero times and started her at kess_berth paying ten a night on frame one. Two consequences worse than the setting: her housing was an arc shipped in its converted state, and the obligation never ignited.",
+      "los_call_on_pacing": "'Games open i think around kess or stranger.' So the opening stays in the Reach — open_boot still hands off to kess_berth at 10:33 and meet_kess still fires. Only where she SLEEPS moved.",
+      "built": [
+        "wren_room off spire_plaza, fill 1500 declared before the prose. Board 29,600 → 31,100; the plan anchor check is 9,000/31,100 = 28.9%, clear of the 25% floor.",
+        "act_the_cradle — free, max_triggers_per_day = 1, charge and clean to 100.",
+        "arc_badge_pulled — the milestone that closes the room and the cradle, gated on service 10 AND kess_tenant.",
+        "act_feed_line's trigger now requires kess_tenant, which is what Kess's sheet always said.",
+        "the_cot authored LOCKED at kess_berth — the second visible door this release ends on.",
+        "board.map.home_base: kess_berth → wren_room. sheets/places/wren_room.md written."
+      ],
+      "deviations_from_the_approved_plan": [
+        "⚠️ wren_room hangs off spire_plaza, NOT the penthouse LO approved. The route up from amb_spire_plaza is gated `met_mercer is_true`, so hanging her room there would have put her own room behind meeting the man who used to own her. spire_plaza also matches the original, which put her on an asset level rather than on his floor. Told LO in the same turn.",
+        "⚠️ the_cot is keyed on `npc_kess relation gte 60`, not the original's `berth_home` flag. The flag-chain validator HARD-FAILS a flag that is read and never set, and nothing sets it on purpose. Same idiom cain_lab already uses (`drain gte 100`).",
+        "⚠️ wardrobe_location STAYS at kess_berth. `cover` is an ascent tier and its eight garments live on that rack; moving it into a room badge_pulled closes would take the tier with it."
+      ],
+      "the_risk_that_was_measured_not_assumed": "`charge` IS gated at 30 with gte, so it is one of the eight meters `the climb is paid for` prices. A free uncapped cradle would have made it freely farmable and turned that gate red — the gate three passes were spent earning. Checked BEFORE writing the canvas, not after. max_triggers_per_day = 1 is the brake; the gate stayed green.",
+      "evidence": [
+        "45/46 judged gates pass. 11/15 rooms on budget. 21,537 of 31,100 words.",
+        "world reachable 15/15 on foot; the map is a place, residents have homes, a need shuts a door, ends on an opening (9 locked choices) all green.",
+        "check_beats 68/68 no findings; check_people clean; git status games/vesper empty."
+      ],
+      "open": [
+        "⚠️ THE PORTAL LISTING IS NOW STALE. games-data.js says '14 locations… 20,343 words' and the build is 15 locations / 21,537 / 31,100 declared. It needs updating in the next commit.",
+        "Remaining fill: renner_depot (1,534), penthouse (1,249), underworld_strip (734), vance_securities (483), wren_room (390)."
+      ]
     }
   ],
   "board": {
@@ -371,6 +403,27 @@
         ],
         "serves": {
           "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "wren_room",
+        "job": "Her room in the tower, while the tower still houses her. The free cradle, and the thing she loses.",
+        "anchor": false,
+        "fill": 1500,
+        "has_cycling_pool": false,
+        "labels": [
+          "private",
+          "zone:spire",
+          "home_base",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "charge",
+            "clean"
+          ],
           "work": [],
           "people": []
         }
@@ -714,7 +767,7 @@
     "map": {
       "archetype": "nested_zones",
       "shape": "One street at ground level. Three districts hang off it: the Spire uphill behind glass, the Waterfront along the dock road, and the Reach down under it. Everything else is a room inside one of those three.",
-      "home_base": "kess_berth",
+      "home_base": "wren_room",
       "exterior": "the_street",
       "homes": {
         "npc_mercer": "mercer_room",
