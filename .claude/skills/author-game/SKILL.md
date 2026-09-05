@@ -108,10 +108,23 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 
   All three have runnable audits — `references/rts-flat-prose.md` §7. Run them; don't eyeball them.
 
+  **And a fourth thing, which is not an axis — the LOAD the prose puts on the reader.** The three axes make
+  prose flat, spoken and in-person, and a game can satisfy all three and still be **hard to read**. That is
+  not a taste question and it is not unmeasurable: **Rules 11–14** (`references/rts-flat-prose.md`) cap the
+  dash rate, ban the three "load" constructions (`, which is` · saying what did *not* happen · history on a
+  repeatable screen), require an untaught word to be glossed or replaced, and hold every explicit beat on the
+  body. Each was written against a measured field, and **one command prints all of them** —
+  `python3 .claude/skills/author-game-v2/scripts/gates.py <slug>`, which reads a v1 game unmodified (§7
+  check 8). This arrived after two players read a shipped game of ours, called it *"an underpowered AI whose
+  mother language isn't english"*, and said it made the story hard to follow. It passed every check that
+  existed that day.
+
   **The three axes serve one end.** This is a porn game: the prose is written to **arouse** the player, and
   the player is its **erotic subject** — not a protagonist she watches. Flat is the shape; hot is the job.
   Person/still-point choices that make the player a spectator **cool the porn** — buy them on purpose, never
-  by default. The target + its audit: `references/rts-flat-prose.md` **Rule 9 + §7 check 7**.
+  by default. The target + its audit: `references/rts-flat-prose.md` **Rule 9 + §7 check 7** (the read) and
+  **Rule 14 + §7 check 8** (the number — every explicit beat stays on the body, 3+ body words in every band
+  it can render).
 
 ## Engine ground-truth (verified — so no reference reinvents a knob)
 1. **Real built-in player traits:** `corruption`, `arousal`, `energy`, `hygiene`, `money` (engine-privileged,

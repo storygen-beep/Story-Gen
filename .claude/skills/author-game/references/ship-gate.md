@@ -237,6 +237,15 @@ game**, not just the beat you last touched.
       stale.
 - [ ] `rts-flat-prose.md` §7 checks **3** (the narration:dialogue ratio, report the number) and **7** (the
       arousal read-audit) at whole-game scope.
+- [ ] `rts-flat-prose.md` §7 check **8** — the counters for Rules 11–14:
+      `python3 .claude/skills/author-game-v2/scripts/gates.py <slug>`. **Report the six numbers**
+      (`prose texture` · `the sentence explains itself` · `what did not happen` ·
+      `history on a repeatable screen` · `the words the player has to already own` · `the act nodes`)
+      and clear each bar, or log why not. Ignore every structural gate it fails — those judge a v2 world
+      model this skill does not build (§7 check 8 says which lines to read).
+      ⚠️ **This is the check that a shipped release failed in front of players.** vesper 0.2.0 passed
+      everything above it and still read, in two players' words, like *"an underpowered AI whose mother
+      language isn't english."*
 - [ ] `location-design.md` §6 — the room-content floor, re-run against the finished map: no reachable room
       with neither plot nor ambient life.
 

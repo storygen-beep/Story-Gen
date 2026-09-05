@@ -20,7 +20,7 @@ is_active     = true
 id   = "base"
 name = "Take the car"
 blocks = [
-  { type = "paragraph", content = "A company car idles at the curb. Down to the Reach and the docks, or further down still — under them, to the half of the city that never comes up in daylight." },
+  { type = "paragraph", content = "A company car idles at the curb. Down to the Reach and the docks, or further down still. Under them, to the half of the city that never comes up in daylight." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -47,7 +47,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "riding"
 name = "Ride down"
 blocks = [
-  { type = "paragraph", content = "She gives the docks address and the car pulls out without a word. The Spire's glass falls away behind her; the city gets lower, wetter, dirtier the whole way down." },
+  { type = "paragraph", content = "She gives the docks address and the car pulls out in silence. The Spire's glass falls away behind her; the city gets lower, wetter, dirtier the whole way down." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -65,7 +65,7 @@ time_progression_minutes = 30
 id   = "riding_underworld"
 name = "Ride down"
 blocks = [
-  { type = "paragraph", content = "She gives an address that isn't on any manifest. The car takes her down past the docks and lets her out at a freight door under everything, where the city goes down instead of up. The driver doesn't wait to see her through it." },
+  { type = "paragraph", content = "She gives an address off the manifests. The car takes her down past the docks and lets her out at a freight door under everything, where the city goes down instead of up. The driver pulls away while she is still walking to it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -91,7 +91,7 @@ is_active     = true
 id   = "base"
 name = "Take the car"
 blocks = [
-  { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers — or down under the boards, into the other half of the Reach, the part that doesn't come up in daylight." },
+  { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers. Or down under the boards, into the other half of the Reach, the part that stays down in daylight." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -170,7 +170,7 @@ time_progression_minutes = 10
 id   = "riding_under"
 name = "Down under"
 blocks = [
-  { type = "paragraph", content = "She leaves the car and goes down on foot — off the lit strip, past the boards, to the freight door under the docks where the man already has his hand out." },
+  { type = "paragraph", content = "She leaves the car and goes down on foot. Off the lit strip, past the boards, to the freight door under the docks where the man already has his hand out." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -203,7 +203,7 @@ is_active     = true
 id   = "base"
 name = "Take the car"
 blocks = [
-  { type = "paragraph", content = "She gives the address of a door that isn't on any manifest and waits. The car comes down for her the way it came down before — no questions, no record of the fare. Up to the towers, or only as far as the docks." },
+  { type = "paragraph", content = "She gives the address of a door off the manifests and waits. The car comes down for her the way it came down before. No questions, no record of the fare. Up to the towers, or only as far as the docks." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -240,7 +240,7 @@ time_progression_minutes = 30
 id   = "riding_reach"
 name = "Up to the docks"
 blocks = [
-  { type = "paragraph", content = "The car takes her the short way — out from under the boards and back onto the waterfront, where the Reach keeps its daylight face and nobody down there knows her by it." },
+  { type = "paragraph", content = "The car takes her the short way. Out from under the boards and back onto the waterfront, where the Reach keeps its daylight face and nobody down there knows her by it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -279,7 +279,7 @@ end_time   = "05:00"
 id   = "base"
 name = "Power down"
 blocks = [
-  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water. When it lets her go it's morning again — a new day, the charge full, the hours she spent out there walked back into her." },
+  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water. When it lets her go it's morning again. A new day, the charge full, the hours she spent out there walked back into her." },
 ]
 
 [canvases.nodes.exit_block]
@@ -312,7 +312,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Charge up"
 blocks = [
-  { type = "paragraph", content = "Not a full night — just a couple hours hooked to the cradle's feed line, eyes open. Her cells pull back to full. Then she unhooks, the day still going." },
+  { type = "paragraph", content = "Two hours hooked to the cradle's feed line, eyes open. Less than a night. Her cells pull back to full. Then she unhooks, the day still going." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -373,7 +373,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Recharge the emitter"
 blocks = [
-  { type = "paragraph", content = "She bleeds the cradle's charge into the emitter's cell until it reads full — three. Then she pockets it and goes." },
+  { type = "paragraph", content = "She bleeds the cradle's charge into the emitter's cell until it reads full. Three. Then she pockets it and goes." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -463,7 +463,7 @@ locationId = "the_cot"
 id   = "rough"
 name = "Crash rough"
 blocks = [
-  { type = "paragraph", content = "She doesn't pay for the line — just drops onto the pad and lets the cot's trickle-tap do what it can. A couple hours of half-sleep, one eye on the water, and her cells claw back partway. Not full. Enough to move. She's up before she's rested, the way the Reach teaches you to be." },
+  { type = "paragraph", content = "She skips the line and drops onto the pad, letting the cot's trickle-tap do what it can. A couple hours of half-sleep, one eye on the water, and her cells claw back partway. Not full. Enough to move. She's up before she's rested, the way the Reach teaches you to be." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -479,7 +479,7 @@ blocks = [
   # rev 131 — the emitter is named here for the same reason it now reloads here: the cradle's reload is
   # Spire-side and gone, and a charge that refills without the prose ever saying so is a system the player
   # never learns they have. One clause, on the current that was already doing the work.
-  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's not the cradle's clean pull — it's a breaking-dock rig meant for hulls — but it takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, and she bleeds the tail of it into the emitter's cell until that reads three. The night walked back into her. She unhooks into a new day." },
+  { type = "paragraph", content = "She pays Kess his coin and hooks into the feed line proper. It's a breaking-dock rig meant for hulls. Rougher than the cradle's clean pull. It takes her down the whole way and holds her there till morning. Charge full, the drain rebuilt its one shot off the same current, and she bleeds the tail of it into the emitter's cell until that reads three. The night walked back into her. She unhooks into a new day." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -510,8 +510,8 @@ id   = "base"
 name = "The memory store"
 blocks = [
   { type = "image", props = { file = "activities/chip_view.jpg", description = "A dark holographic memory-archive interface, an empty grid of storage slots glowing faintly, one greyed-out slot ringed and labelled at the center.", search_queries = ["dark holographic interface empty grid", "sci-fi data archive screen glowing"] } },
-  { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets — the place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
-  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify. She closes that thought too." },
+  { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets. The place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
+  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store. Then notices she's opened it more often than the task log would ever justify. She closes that thought too." },
 ]
 
 [canvases.nodes.exit_block]
@@ -548,7 +548,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Drill"
 blocks = [
-  { type = "paragraph", content = "The floor's empty, the door shut. No one watches an asset in its own quarters. She uses the hour the way the company never told her to — drilling the body they built, sharpening it past the spec on her file. It's the one thing here that's only hers." },
+  { type = "paragraph", content = "The floor's empty, the door shut. No one watches an asset in its own quarters. She uses the hour the way the company never told her to. Drilling the body they built, sharpening it past the spec on her file. It's the one thing here that's only hers." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -614,12 +614,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 25 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She runs the forms against the empty air — strikes, breaks, the throw that ends a man. Her body obeys a half-beat slow, the way a tool obeys before it's been worked hard. Clumsy still. But the half-beat is shorter than it was yesterday." },
+    { type = "paragraph", content = "She runs the forms against the empty air. Strikes, breaks, the throw that ends a man. Her body obeys a half-beat slow, the way a tool obeys before it's been worked hard. Clumsy still. But the half-beat is shorter than it was yesterday." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 25 },
     ] } }, blocks = [
-    { type = "paragraph", content = "No hesitation now. The forms come fast and flat and final — strike, break, the throw — each one landing where a throat or a knee would be. Whatever they built her for, this wasn't on the spec. She's better than the file says. She keeps that to herself." },
+    { type = "paragraph", content = "No hesitation now. The forms come fast and flat and final. Strike, break, the throw. Each one lands where a throat or a knee would be. Whatever they built her for, this wasn't on the spec. She's better than the file says. She keeps that to herself." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -638,12 +638,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She practices the small things — weight rolled onto the outside of the foot, breath dropped low, the timing of a turned back. Her own joints betray her with a tick of sound she'd never have caught a week ago. She catches it now. That's the start of it." },
+    { type = "paragraph", content = "She practices the small things. Weight rolled onto the outside of the foot, breath dropped low, the timing of a turned back. Her own joints betray her with a tick of sound she'd never have caught a week ago. She catches it now. That's the start of it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 25 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She moves through her own quarters and the room doesn't register her — no sound, no shift of air, nothing for a camera to hold. A thing that can't be seen can go where it isn't allowed. She doesn't let the thought finish." },
+    { type = "paragraph", content = "She moves through her own quarters and the room doesn't register her. No sound, no shift of air, nothing for a camera to hold. A thing that can't be seen goes where it likes. She doesn't let the thought finish." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -676,7 +676,7 @@ id   = "base"
 name = "Walk the wreckage"
 blocks = [
   { type = "image", props = { file = "locations/facility_ruins.jpg", description = "A burned-out industrial facility at night, scorched frame and melted racks against dock lights.", search_queries = ["burned warehouse ruins night", "abandoned factory fire damage dark"] } },
-  { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it slowly, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
+  { type = "paragraph", content = "The facility is a black skeleton against the dock lights. Scorched frame, melted racks, the smell of old smoke that never washed out. She walks it slowly, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel. Someone came through and let them out before he burned it down. The dread-place. The first one." },
 ]
 
 [canvases.nodes.exit_block]
@@ -709,13 +709,13 @@ name = "Work the burned yard"
 blocks = [
   { type = "image", props = { file = "locations/renner_burned_yard.jpg", description = "A torched industrial yard at night, scorched slab and downed fencing, a guard's flashlight sweeping the dark.", search_queries = ["burned yard night flashlight guard", "torched warehouse lot dark security"] } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 1 } ] } }, blocks = [
-    { type = "paragraph", content = "The fence is down on the water side. Past it the yard is black glass and bent steel — and a guard with a torch, walking the line where the gate used to be. Getting in means getting past him." },
+    { type = "paragraph", content = "The fence is down on the water side. Past it the yard is black glass and bent steel. A guard with a torch walks the line where the gate used to be. Getting in means getting past him." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
-    { type = "paragraph", content = "She's inside the outer line now. Deeper in there are more lights and more men — Renner doesn't watch a dead yard this hard for nothing. Whatever's worth guarding is further back." },
+    { type = "paragraph", content = "She's inside the outer line now. Deeper in there are more lights and more men. Renner guards a dead yard this hard for a reason. Whatever's worth guarding is further back." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
-    { type = "paragraph", content = "She's been all the way to the back of it. There's nothing left in the yard she hasn't already put her hands on." },
+    { type = "paragraph", content = "She's been all the way to the back of it. She has put her hands on everything in the yard." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -748,7 +748,7 @@ locationId = "the_waterfront"
 id   = "guard1"
 name = "The gate guard"
 blocks = [
-  { type = "paragraph", content = "One man, one torch, bored and slow — the easy one, the test before the real ones. He hasn't seen her yet." },
+  { type = "paragraph", content = "One man, one torch, bored and slow. The easy one, the test before the real ones. He hasn't seen her yet." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -784,7 +784,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 id   = "guard2"
 name = "The inner men"
 blocks = [
-  { type = "paragraph", content = "Two of them here, awake and armed, working a pattern between the racks. Past the easy line — these ones would hurt her if she let them." },
+  { type = "paragraph", content = "Two of them here, awake and armed, working a pattern between the racks. Past the easy line. These ones would hurt her if she let them." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -820,7 +820,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 id   = "guard3"
 name = "The back of the yard"
 blocks = [
-  { type = "paragraph", content = "The heaviest watch is here, at the back — a knot of his best men around a strongroom the fire didn't reach. Whatever Renner's keeping, it's behind them." },
+  { type = "paragraph", content = "The heaviest watch is here, at the back. A knot of his best men around a strongroom the fire missed. Whatever Renner's keeping, it's behind them." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -860,7 +860,7 @@ blocks = [
     { type = "paragraph", content = "She's through the gate and into the outer yard, the guard behind her none the wiser or none the able. The dark swallows her." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
-    { type = "paragraph", content = "Deeper now, in among the racks where the lights are — and past the men who'd have stopped her. She keeps to the shadow and goes on." },
+    { type = "paragraph", content = "Deeper now, in among the racks where the lights are. Past the men who'd have stopped her. She keeps to the shadow and goes on." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
     { type = "paragraph", content = "The back of the yard, the strongroom, the thing they were all standing around. She's in." },
@@ -882,7 +882,7 @@ id   = "weapon_scene"
 name = "Put them under"
 blocks = [
   { type = "video", props = { pool_dir = "sex/yard_emitter_fire_t5", pool = 4, description = "A woman riding a slack, dazed man on the ground in a dim industrial yard while other limp men slump nearby.", search_queries = ["dark warehouse riding limp man amateur", "dim garage cowgirl riding slumped man", "night alley riding man on the ground amateur"] } },
-  { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side — just leverage; she works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
+  { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath. Pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side. Just leverage. She works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -897,7 +897,7 @@ time_progression_minutes = 120
 id   = "flee"
 name = "Break and run"
 blocks = [
-  { type = "paragraph", content = "It goes against her — too many, or too sharp, or her own body too slow. She breaks for the downed fence and is over the water side before the torches swing round. Nothing gained tonight. She walks it off." },
+  { type = "paragraph", content = "It goes against her. Too many, or too sharp, or her own body too slow. She breaks for the downed fence and is over the water side before the torches swing round. Nothing gained tonight. She walks it off." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -926,7 +926,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "What the yard was"
 blocks = [
-  { type = "paragraph", content = "Inside the outer line she finds the shape of it under the burn: not just a storage yard. Loading bays built for things heavier than crates, restraint points set into a slab, a billing wall scorched but legible — shipments logged out to the same Vance facility she's already walked the ashes of. Renner moved more than equipment through here. He just never asked what for." },
+  { type = "paragraph", content = "Inside the outer line she finds the shape of it under the burn: not just a storage yard. Loading bays built for things heavier than crates, restraint points set into a slab, a billing wall scorched but legible. Shipments logged out to the same Vance facility she's already walked the ashes of. Renner moved more than equipment through here. He just never asked what for." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -955,7 +955,7 @@ id   = "base"
 name = "The broken thing"
 blocks = [
   { type = "image", props = { file = "activities/arousal_weapon.jpg", description = "A small fire-damaged sci-fi handheld device on a workbench, casing cracked open, fine emitter components inside, faintly lit.", search_queries = ["broken sci-fi handheld device cracked", "damaged futuristic gadget internals glowing"] } },
-  { type = "paragraph", content = "In a melted equipment locker, half-slagged but whole at the core, is a device she knows in her hands before she knows in her head — the same build as the thing inside her, the one that makes a body want against its own sense. A field emitter. Renner had one off the line and never fired it. Heat-warped, dead. But the core is sound. She pockets it. Fixed, it's a way past any man who'd otherwise put her down." },
+  { type = "paragraph", content = "In a melted equipment locker, half-slagged but whole at the core, is a device she knows in her hands before she knows in her head. The same build as the thing inside her, the one that makes a body want against its own sense. A field emitter. Renner had one off the line and never fired it. Heat-warped, dead. But the core is sound. She pockets it. Fixed, it's a way past any man who'd otherwise put her down." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -983,8 +983,8 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The heart of it"
 blocks = [
-  { type = "paragraph", content = "The strongroom is what he saved. Two personnel files, a man each — his own people, the two who moved the materials. Both stamped CLOSED. Under each, a death notice, and under that, more notices: wives, children, the whole line, the dates all the same night. Renner didn't just fire them. He erased them. And paperclipped to the back, the thing he's really hiding: where the two men came from before Vance — the same name twice, a place down in the city that isn't on any map. The underworld. That's the thread Cain followed back. That's where it goes." },
-  { type = "paragraph", content = "Standing in it, something turns over in her — not a thought, a feeling, brief and uninvited: she has stood in a room like this before, on the other side of the file. Then it's gone, filed under nothing." },
+  { type = "paragraph", content = "The strongroom is what he saved. Two personnel files, a man each. His own people, the two who moved the materials. Both stamped CLOSED. Under each, a death notice, and under that, more notices: wives, children, the whole line, the dates all the same night. Renner didn't just fire them. He erased them. And paperclipped to the back, the thing he's really hiding: where the two men came from before Vance. The same name twice, a place down in the city the maps leave blank. The underworld. That's the thread Cain followed back. That's where it goes." },
+  { type = "paragraph", content = "Standing in it, something turns over in her. Not a thought. A feeling, brief and uninvited: she has stood in a room like this before, on the other side of the file. Then it's gone, filed under nothing." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1017,7 +1017,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Fix the emitter"
 blocks = [
-  { type = "paragraph", content = "The emitter sits on her bench, casing off, guts exposed. She knows the architecture of it the way she knows her own — because it is her own, scaled down to a handheld. Heat-warp on the field coils, a cracked driver. Slow work, and hers alone." },
+  { type = "paragraph", content = "The emitter sits on her bench, casing off, guts exposed. She knows the architecture of it the way she knows her own. Because it is her own, scaled down to a handheld. Heat-warp on the field coils, a cracked driver. Slow work, and hers alone." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1046,10 +1046,10 @@ id   = "progress"
 name = "Coming together"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 2 } ] } }, blocks = [
-    { type = "paragraph", content = "She straightens the field coils, one pass, and tests the draw. Dead still — but cleaner dead than it was. More to do." },
+    { type = "paragraph", content = "She straightens the field coils, one pass, and tests the draw. Dead still. Cleaner dead than it was. More to do." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "gte", value = 2 } ] } }, blocks = [
-    { type = "paragraph", content = "Driver reseated, coils true. It draws a charge now and holds it — a flicker of the field crossing her own skin, the faint unwanted warmth of it. Almost. One more pass and it fires." },
+    { type = "paragraph", content = "Driver reseated, coils true. It draws a charge now and holds it. A flicker of the field crossing her own skin, the faint unwanted warmth of it. Almost. One more pass and it fires." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -1064,7 +1064,7 @@ time_progression_minutes = 120
 id   = "done"
 name = "It fires"
 blocks = [
-  { type = "paragraph", content = "Last pass. She powers it and the field comes up clean, a low hum she feels in her teeth — and, testing it on herself a half-second too long, a heat low in her belly she didn't ask for and shuts off fast. It works. A second weapon now, hers, that the company never issued and doesn't know she has. A way past any man she can't fight." },
+  { type = "paragraph", content = "Last pass. She powers it and the field comes up clean, a low hum she feels in her teeth. She tests it on herself a half-second too long and gets a heat low in her belly she didn't ask for. She shuts it off fast. It works. A second weapon now, hers, that the company never issued and doesn't know she has. A way past any man who outmatches her." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1095,7 +1095,7 @@ id   = "base"
 name = "Switch weapon"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] } }, blocks = [
-    { type = "paragraph", content = "The emitter sits charged on the bench. One core, one weapon — it feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
+    { type = "paragraph", content = "The emitter sits charged on the bench. One core, one weapon. It feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] } }, blocks = [
     { type = "paragraph", content = "The emitter's live in her hand, the drain inside her gone quiet behind it. One core, one weapon. Right now it's the emitter." },
@@ -1155,7 +1155,7 @@ name = "Switch weapon"
 blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a work-cradle and a bench of tools.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] } }, blocks = [
-    { type = "paragraph", content = "The emitter lies on Kess's bench between two things he is not working on. One core, one weapon — it feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
+    { type = "paragraph", content = "The emitter lies on Kess's bench between two things he is not working on. One core, one weapon. It feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] } }, blocks = [
     { type = "paragraph", content = "The emitter's live in her coat, the drain inside her gone quiet behind it. One core, one weapon. Right now it's the emitter, and the gate is the only place down here that cares." },
@@ -1201,7 +1201,7 @@ id   = "base"
 name = "The man at the door"
 blocks = [
   { type = "image", props = { file = "locations/underworld_gate.jpg", description = "A heavy unmarked freight door under the docks at night, a big man standing before it, one hand out.", search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"] } },
-  { type = "paragraph", content = "The man at the door doesn't ask her name. He looks her over the way a turnstile would and holds out a hand. \"Coin,\" he says. \"Or you're not my problem.\" Behind him the stairs go down into red light and noise. There's more than one way through a man like this. The coin he wants isn't company credits — it's underworld scrip: earned down here, spent down here, worth nothing up top." },
+  { type = "paragraph", content = "The man at the door asks for coin, not a name. He looks her over the way a turnstile would and holds out a hand. \"Coin,\" he says. \"Or you're not my problem.\" Behind him the stairs go down into red light and noise. There's more than one way through a man like this. The coin he wants is underworld scrip, not company credits. Earned down here, spent down here, worth nothing up top." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1234,7 +1234,7 @@ id   = "weapon_scene"
 name = "Put him under"
 blocks = [
   { type = "video", props = { pool_dir = "sex/arousal_weapon_use_t5", pool = 4, description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
-  { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair, gets his cock out, and rides him against the wall in quick flat strokes, fast and clinical, giving him nothing but the friction. He spills into her with his eyes rolling white and sags down the bricks, under. He'll wake on the steps in an hour with no memory, and never know she walked past him. The stairs are open." },
+  { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes. The bored menace gone, breath short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair, gets his cock out, and rides him against the wall in quick flat strokes, fast and clinical, giving him nothing but the friction. He spills into her with his eyes rolling white and sags down the bricks, under. He'll wake on the steps in an hour with no memory, and never know she walked past him. The stairs are open." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1265,7 +1265,7 @@ id   = "base"
 name = "Exit Underworld"
 blocks = [
   { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A crowded underground market street at night, red light, stalls, bodies, neon in a language that isn't quite any language.", search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"] } },
-  { type = "paragraph", content = "She walks back up the strip — the house, the pit, the market closing behind her, and past them the dark where the real city keeps its teeth. Down here nobody was looking for her. It's the closest thing to free she's felt." },
+  { type = "paragraph", content = "She walks back up the strip. The house, the pit, the market closing behind her, and past them the dark where the real city keeps its teeth. Down here nobody was looking for her. It's the closest thing to free she's felt." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1312,7 +1312,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Take a shift"
 blocks = [
-  { type = "paragraph", content = "The madam counts her with one look and tips her head at the rooms. No contract, no company, no Mercer signing her out — just a door, a client, and coin at the end that goes in her pocket and nowhere else. The thing she's built for, sold for once, on her own account." },
+  { type = "paragraph", content = "The madam counts her with one look and tips her head at the rooms. No contract, no company, no Mercer signing her out. Just a door, a client, and coin at the end that goes in her pocket and nowhere else. The thing she's built for, sold for once, on her own account." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1346,7 +1346,7 @@ description = "Triggerless brothel sex loop (reached only from the 'Take a clien
 id   = "intro"
 name = "The client"
 blocks = [
-  { type = "paragraph", content = "The madam points her at a door. The man inside doesn't look up from his drink until she's undressed — then he looks her over the way men look over rented things, deciding where to start. No name, no preamble. He paid for the hour and means to use it." },
+  { type = "paragraph", content = "The madam points her at a door. The man inside keeps his eyes on his drink until she's undressed. Then he looks her over the way men look over rented things, deciding where to start. No name, no preamble. He paid for the hour and means to use it." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1364,7 +1364,7 @@ blocks = [
   # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
   # again every later visit. Folder is the truth; `pool` is only find-media's target.
   { type = "video", props = { pool_dir = "sex/brothel_oral_t5", pool = 4, description = "On her knees in a dim red-lit room, an anonymous client's cock in her mouth, his hand fisted in her hair setting the pace while she services him flatly.", search_queries = ["brothel blowjob red room pov", "escort kneeling blowjob dim light"] } },
-  { type = "paragraph", content = "On her knees between his, she takes his cock in her mouth and works it the way the trade taught her — steady, practiced, her eyes somewhere past his hip. He fists a hand in her hair and sets the pace. She lets him. None of it reaches her." },
+  { type = "paragraph", content = "On her knees between his, she takes his cock in her mouth and works it the way the trade taught her. Steady, practiced, her eyes somewhere past his hip. He fists a hand in her hair and sets the pace. She lets him. None of it reaches her." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1404,7 +1404,7 @@ blocks = [
   # this clip plays 4-6x inside ONE visit (that grind is how loop_npc_pleasure reaches 50) and
   # again every later visit. Folder is the truth; `pool` is only find-media's target.
   { type = "video", props = { pool_dir = "sex/brothel_vaginal_t5", pool = 4, description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
-  { type = "paragraph", content = "She climbs on and takes his cock without ceremony, sinks down and rides, hips keeping a rhythm that has nothing to do with her. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them." },
+  { type = "paragraph", content = "She climbs on and takes his cock briskly, sinks down and rides, hips keeping a rhythm that belongs to the job. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1494,7 +1494,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He finishes in her ass and stays a moment, breathing, then steps back. His weight and his cum and then nothing — the same nothing as every man down here. She straightens. The next one's already on the stairs." },
+    { type = "paragraph", content = "He finishes in her ass and stays a moment, breathing, then steps back. His weight and his cum and then nothing. The same nothing as every man down here. She straightens. The next one's already on the stairs." },
     { type = "video", props = { pool_dir = "sex/brothel_finish_ass_t5", pool = 4, description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
   ] },
 ]
@@ -1577,7 +1577,7 @@ time_progression_minutes = 120
 id   = "win_hard"
 name = "The hard bout"
 blocks = [
-  { type = "paragraph", content = "This one's real — fast, trained, in it to hurt her. For a few seconds it's almost a fight. Then the thing they built her to be takes over, and what's left on the dirt isn't getting up. The crowd goes quiet. The purse is heavy. Someone in the dark is watching her now." },
+  { type = "paragraph", content = "This one's real. Fast, trained, in it to hurt her. For a few seconds it's almost a fight. Then the thing they built her to be takes over, and what's left on the dirt isn't getting up. The crowd goes quiet. The purse is heavy. Someone in the dark is watching her now." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1630,7 +1630,7 @@ locationId = "underworld_market"
 id   = "weapon"
 name = "A weapon"
 blocks = [
-  { type = "paragraph", content = "She buys a blade the way a soldier does — by balance, not by looks — and a thing to hide it in. Her hands are deadlier leaving than they were coming in. Coin well spent." },
+  { type = "paragraph", content = "She buys a blade the way a soldier does. By balance, not by looks. And a thing to hide it in. Her hands are deadlier leaving than they were coming in. Coin well spent." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1643,7 +1643,7 @@ time_progression_minutes = 30
 id   = "gear"
 name = "Gear"
 blocks = [
-  { type = "paragraph", content = "Soft soles, a light that isn't a light, a tool roll that opens what's meant to stay shut. The kind of kit that turns a careful woman into one nobody sees. Coin well spent." },
+  { type = "paragraph", content = "Soft soles, a light that isn't a light, a tool roll that opens what's meant to stay shut. The kind of kit that turns a careful woman invisible. Coin well spent." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1656,7 +1656,7 @@ time_progression_minutes = 30
 id   = "pens"
 name = "The pens"
 blocks = [
-  { type = "paragraph", content = "Behind the chain they keep people the way the market keeps anything — by weight and condition, tagged, waiting on a buyer. She walks the line because she makes herself walk it. Most are just people, stolen and sold. But one of them, a girl too still, too even, watches her back with eyes that don't track quite right — and something in Wren's chest does a thing it has no name for, a recognition she shuts off before it finishes. She's looked at her own reflection in a cage. She shuts it down and walks out." },
+  { type = "paragraph", content = "Behind the chain they keep people the way the market keeps anything. By weight and condition, tagged, waiting on a buyer. She walks the line because she makes herself walk it. Most are just people, stolen and sold. But one of them, a girl too still, too even, watches her back with eyes that don't track quite right. Something in Wren's chest does a thing it has no name for, a recognition she shuts off before it finishes. She's looked at her own reflection in a cage. She shuts it down and walks out." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1717,7 +1717,7 @@ id   = "base"
 name = "The bonded stall"
 blocks = [
   { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
-  { type = "paragraph", content = "Two tables past the blades a man does bonded freight — grey courier cases stacked to his shoulder, each with a reader plate let into the lid. Nothing down here moves without a hand on it at both ends." },
+  { type = "paragraph", content = "Two tables past the blades a man does bonded freight. Grey courier cases stacked to his shoulder, each with a reader plate let into the lid. Nothing down here moves without a hand on it at both ends." },
   { type = "dialog", props = { speaker = "player" }, content = "It keeps the hand that opens it." },
   { type = "paragraph", content = "That's the whole product, he says. Anyone can carry a box. The case is how you prove who took delivery, and it holds that a year." },
 ]
@@ -1776,26 +1776,26 @@ blocks = [
   # second part would do better than the first. Four exclusive bands on part_spec, each naming what Kess sent
   # her for at hub_kess_berth.debrief. Adjacent [group] blocks merge into ONE if/elseif chain, so what matters
   # is that no two can match — the gte/lt pairs below cannot.
-  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. The man behind the tables doesn't look up until she says what she is after." },
+  { type = "paragraph", content = "Past the blades and the field-kit there are three tables nobody stops at, stacked with the insides of things: salvage boards, drawer after drawer of small dead components sorted by nothing. The man behind the tables keeps his head down until she says what she is after." },
   # SPEC 0 — the first guess. Kess's own dispatch word, from kess_the_chip_not_the_key: "Bring me a talkback."
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt", value = 1 },
     ] } }, blocks = [
-      { type = "paragraph", content = "A talkback. He doesn't blink at the word — just turns a drawer round and lets her pick out of forty of them, none of which he can tell apart either." },
+      { type = "paragraph", content = "A talkback. He doesn't blink at the word. He turns a drawer round and lets her pick out of forty of them, none of which he can tell apart either." },
   ] },
   # SPEC 1 — the sweep head. Listens across instead of shouting on one channel.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 1 },
       { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 2 },
     ] } }, blocks = [
-      { type = "paragraph", content = "A sweep head. That gets a second look — sweeps come off signal boards, and nobody buys one to fix a signal board. He puts a flat grey wafer on the cloth and names a price without being asked." },
+      { type = "paragraph", content = "A sweep head. That gets a second look. Sweeps come off signal boards, and nobody buys one to fix a signal board. He puts a flat grey wafer on the cloth and names a price unasked." },
   ] },
   # SPEC 2 — the isolator. Takes the bite. Dead stock, which is why he undersells it.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "part_spec", operator = "gte", value = 2 },
       { type = "trait", subject = "player", trait_key = "part_spec", operator = "lt",  value = 3 },
     ] } }, blocks = [
-      { type = "paragraph", content = "An isolator. He tells her it's dead stock and nobody's asked for one in two years, which she already knew, because the man who sent her said the same sentence. It is heavier than it looks." },
+      { type = "paragraph", content = "An isolator. He tells her it's dead stock and it's sat on that shelf two years, which she already knew, because the man who sent her said the same sentence. It is heavier than it looks." },
   ] },
   # SPEC 3 — the stacked talkback. The last one, and the only cycle where the stall itself notices.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -1832,7 +1832,7 @@ locationId = "underworld_market"
 id   = "buy"
 name = "A part"
 blocks = [
-  { type = "paragraph", content = "The man behind the drawers doesn't ask what it's for and doesn't look up while she pays, which is the only service on offer down here and the only one worth coin. It goes in her coat with the other thing she is not carrying openly." },
+  { type = "paragraph", content = "The man behind the drawers takes the coin with his eyes down and lets the question go. That is the only service on offer down here and the only one worth coin. It goes in her coat with the other thing she is not carrying openly." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1861,7 +1861,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Wash up"
 blocks = [
-  { type = "paragraph", content = "She strips and stands under the water until whatever the work left on her is gone — sweat, a client's hands, the smell of the docks. The company keeps her maintained; this part she does for herself, the one washing that isn't on anyone's schedule. She comes out clean, and for a minute, almost new." },
+  { type = "paragraph", content = "She strips and stands under the water until whatever the work left on her is gone. Sweat, a client's hands, the smell of the docks. The company keeps her maintained; this part she does for herself, the one washing that is hers alone. She comes out clean, and for a minute, almost new." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1962,7 +1962,7 @@ locationId = "wren_room"
 id   = "dock"
 name = "Into the coveralls"
 blocks = [
-  { type = "paragraph", content = "Heavy canvas, worn at the knees by somebody else first, and it smells of a shed. In the mirror there is a woman who lifts things for a living and no reason at all to look at her twice, which is the entire point of it." },
+  { type = "paragraph", content = "Heavy canvas, worn at the knees by somebody else first, and it smells of a shed. In the mirror there is a woman who lifts things for a living and no reason at all to look at her twice. That is the entire point of it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1976,7 +1976,7 @@ time_progression_minutes = 15
 id   = "analyst"
 name = "Into the analyst kit"
 blocks = [
-  { type = "paragraph", content = "Grey, cut close, a size too junior to be worth resenting. It is the same trick as the coveralls run the other way — not a woman nobody looks at, a woman everybody has already decided they know." },
+  { type = "paragraph", content = "Grey, cut close, a size too junior to be worth resenting. It is the same trick as the coveralls run the other way. Not a woman nobody looks at. A woman everybody has already decided they know." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1990,7 +1990,7 @@ time_progression_minutes = 15
 id   = "grays"
 name = "Back into grays"
 blocks = [
-  { type = "paragraph", content = "The company line goes back on and sits the way it always sits, which is correctly. She has never once chosen these and has never once been out of them long enough to notice she wasn't." },
+  { type = "paragraph", content = "The company line goes back on and sits the way it always sits. That is correctly. She has never once chosen these and has never once been out of them long enough to notice she wasn't." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -2033,7 +2033,7 @@ time_progression_minutes = 15
 [[canvases]]
 id          = "cell_sleep"
 name        = "Lie down"
-description = "beat_0038. Wren-solo @captive_room. The cell's day-router: advances ~9h, restores Charge (clamp=true caps at 100), and carries a GUARANTEED band-selected night use (+12 core_strain). Not random -> bypasses the hardcoded visit-cooldown. Sleep cannot outrun the ladder. Guarded captivity_broken is_false."
+description = "beat_0038. Wren-solo @captive_room. The cell's day-router: advances ~9h, restores Charge (clamp=true caps at 100), and carries a GUARANTEED band-selected night use (+12 core_strain). Not random -> bypasses the hardcoded visit-cooldown. The ladder outruns sleep. Guarded captivity_broken is_false."
 
 [canvases.trigger]
 location      = "captive_room"
@@ -2049,16 +2049,16 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Lie down"
 blocks = [
-  { type = "paragraph", content = "The light doesn't go off, so she turns her face to the wall and powers down anyway. The bed is bolted down and the mattress smells of other people. She goes under fast, the way she always does, and it doesn't matter at all, because the door opens in the night. It always opens in the night." },
+  { type = "paragraph", content = "The light doesn't go off, so she turns her face to the wall and powers down anyway. The bed is bolted down and the mattress smells of other people. She goes under fast, the way she always does, and the door opens in the night anyway. It always opens in the night." },
 
   # ── Nominal — Bastien alone — hot & degrading.
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt", value = 24 },
     ] } }, blocks = [
     { type = "video", props = { file = "sex/cell_sleep_nominal_t5.webm", description = "man fucking sleeping woman from behind in dark bedroom pov", search_queries = ["man fucking sleeping woman from behind in dark bedroom pov"] } },
-    { type = "paragraph", content = "She's down on the mat with her back to the wall, trying to drop under, when the weight settles in behind her and Bastien starts using her before she's all the way awake — cock worked into her cunt from behind, unhurried, one hand laid flat on the sternum plate so he can feel it tick while he does it. The charge climbs with every slow shove and runs down to the empty socket at the base of her spine and stops there, nowhere to go, stacking behind the plate in the dark." },
-    { type = "paragraph", content = "He finishes inside her and the read-out clicks up one notch and holds — it never drops — and he wipes off on the small of her back and leaves her where she lies. *Logged as rest. It isn't.*" },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't mind me. Go back under, filthy thing — I'm just reading you." },
+    { type = "paragraph", content = "She's down on the mat with her back to the wall, trying to drop under, when the weight settles in behind her and Bastien starts using her before she's all the way awake. His cock works into her cunt from behind, unhurried, one hand laid flat on the sternum plate so he can feel it tick while he does it. The charge climbs with every slow shove and runs down to the empty socket at the base of her spine and stops there, nowhere to go, stacking behind the plate in the dark." },
+    { type = "paragraph", content = "He finishes inside her and the readout clicks up one notch and holds. It never drops. He wipes off on the small of her back and leaves her where she lies. *Logged as rest. It isn't.*" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't mind me. Go back under, filthy thing. I'm just reading you." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it goes. One more on the count and nowhere for it to run. Bought that too." },
   ] },
 
@@ -2068,9 +2068,9 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 48 },
     ] } }, blocks = [
     { type = "video", props = { file = "sex/cell_sleep_hot_t5.webm", description = "multiple men using woman in bed at night gangbang dark pov", search_queries = ["multiple men using woman in bed at night gangbang dark pov"] } },
-    { type = "paragraph", content = "She surfaces because there are hands on her that aren't one man's — the crew have let themselves in in the dark, and she wakes already being used, a cock working her cunt while another feeds itself into her mouth and a third pair of hands just paws her tits like they're checking she's still warm. She can't tell how many; they pass her between them in the black, laughing low, and every load that goes in stacks up behind the plate with the drain gone and the socket empty, filling and filling with nowhere to send it." },
+    { type = "paragraph", content = "She surfaces because there are hands on her that aren't one man's. The crew have let themselves in in the dark, and she wakes already being used, a cock working her cunt while another feeds itself into her mouth and a third pair of hands just paws her tits like they're checking she's still warm. She can't tell how many; they pass her between them in the black, laughing low, and every load that goes in stacks up behind the plate with the drain gone and the socket empty, filling and filling with nowhere to send it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Left the door open for the lads. She sleeps better with a hole full — don't you, slut." },
-    { type = "paragraph", content = "\"She's awake — watch, the little machine's awake.\"" },
+    { type = "paragraph", content = "\"She's awake. Watch. The little machine's awake.\"" },
     { type = "paragraph", content = "\"Doesn't matter if she is. Open, bought-and-paid-for.\"" },
     { type = "paragraph", content = "\"Pass her down, I've not had a turn.\"" },
   ] },
@@ -2081,10 +2081,10 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 72 },
     ] } }, blocks = [
     { type = "video", props = { file = "sex/cell_sleep_faulting_t5.webm", description = "rough gangbang woman held down spitroast marked bed dark", search_queries = ["rough gangbang woman held down spitroast marked bed dark"] } },
-    { type = "paragraph", content = "They don't let her stay under at all now — every time she starts to slip they haul her back onto her knees and use her hard, one fisting her hair down onto his cock till she gags and drools, another driving into her from behind, handprints coming up on her ass and a set of fingermarks banding her throat. Then they flip her and take her in the ass — the drain inverted, the thing that used to TAKE from a man now only pouring INTO her — and Bastien holds her jaw and makes her come on it because forcing it spikes the read-out fastest, and the number jumps two, three, climbing in the dark while she can't tell sleep from being fucked." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her come — that's what moves the count, not the fucking. Force it. Watch the plate, not her." },
+    { type = "paragraph", content = "They keep her surfacing now. Every time she starts to slip they haul her back onto her knees and use her hard, one fisting her hair down onto his cock till she gags and drools, another driving into her from behind, handprints coming up on her ass and a set of fingermarks banding her throat. Then they flip her and take her in the ass. The drain is inverted now, the thing that used to TAKE from a man only pouring INTO her. Bastien holds her jaw and makes her come on it because forcing it spikes the readout fastest, and the number jumps two, three, climbing in the dark while she can't tell sleep from being fucked." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her come. That's what moves the count, not the fucking. Force it. Watch the plate, not her." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Up it goes. Look at that. Passed round all night and still filling." },
-    { type = "paragraph", content = "\"She's shaking — do it again, it likes it.\"" },
+    { type = "paragraph", content = "\"She's shaking. Do it again, it likes it.\"" },
     { type = "paragraph", content = "\"Hold her mouth, she's trying to check out.\"" },
     { type = "paragraph", content = "\"Mark her up, no one's counting bruises.\"" },
   ] },
@@ -2094,10 +2094,10 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 72 },
     ] } }, blocks = [
     { type = "video", props = { file = "sex/cell_sleep_failing_t5.webm", description = "exhausted limp woman used rough gangbang dark heavy", search_queries = ["exhausted limp woman used rough gangbang dark heavy"] } },
-    { type = "paragraph", content = "By the small hours her body's half-quitting under them — legs gone loose, breath sawing, the sternum plate flickering its read-out where it should hold steady — and none of them slow down for it. The charge has stacked up so high with nowhere to drain that every load now lands as a wet flare of pain instead of anything else, and they force her over the edge anyway, again, the pleasure coming out the wrong way and hurting, the plate stuttering the number up past where the light stays on. She's limp between them, used front and back, drooled-on and slack, and Bastien just leans in close to read the flicker off her chest and not her face at all." },
+    { type = "paragraph", content = "By the small hours her body's half-quitting under them. Legs gone loose, breath sawing, the sternum plate flickering its readout where it should hold steady. None of them slow down for it. The charge has stacked up so high with nowhere to drain that every load now lands as a wet flare of pain instead of anything else, and they force her over the edge anyway, again, the pleasure coming out the wrong way and hurting, the plate stuttering the number up past where the light stays on. She's limp between them, used front and back, drooled-on and slack, and Bastien just leans in close to read the flicker off her chest and not her face at all." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "It's browning out. Good — keep going. I want to see how high it climbs before the light won't hold." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not her, idiot — the plate. Watch the plate. She's just the socket." },
-    { type = "paragraph", content = "\"Something's wrong with it — look, it's flickering.\"" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not her, idiot. The plate. Watch the plate. She's just the socket." },
+    { type = "paragraph", content = "\"Something's wrong with it. Look, it's flickering.\"" },
     { type = "paragraph", content = "\"Boss says keep going, so keep going.\"" },
     { type = "paragraph", content = "\"Still warm, still open. Who cares if it's breaking.\"" },
   ] },
@@ -2165,7 +2165,7 @@ id   = "listen"
 name = "Listen at the door"
 blocks = [
   { type = "paragraph", content = "Steel carries. She sits with her shoulder against it and counts: five voices, six, one that comes and goes and never finishes a sentence because the others stop talking when it does. Cards, some nights. A radio. A long argument about a boat that she thinks is not about a boat." },
-  { type = "paragraph", content = "Nothing about her. That's the part she keeps turning over. Whatever she is to them, she isn't a thing they discuss." },
+  { type = "paragraph", content = "Nothing about her. That's the part she keeps turning over. Whatever she is to them, she is beneath discussing." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -2197,13 +2197,13 @@ time_progression_minutes = 30
 id   = "hold_still"
 name = "Hold still and feel the fault"
 blocks = [
-  { type = "paragraph", content = "She lies on her back and stops doing anything at all, and listens to herself the way she listened to the door. The charge sits under her sternum with nowhere to be. It has a sound. It has, she realises, started to have a smell — hot dust, the inside of a machine that has been run too long." },
+  { type = "paragraph", content = "She lies on her back and stops doing anything at all, and listens to herself the way she listened to the door. The charge sits under her sternum with nowhere to be. It has a sound. It has, she realises, started to have a smell. Hot dust, the inside of a machine that has been run too long." },
 
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "flag", subject = "player", flag_key = "glitch_iii_seen", operator = "is_false" },
     ] } }, blocks = [
     { type = "paragraph", content = "And then the fault opens, the way a badly-set bone opens, and something comes up through it that was never filed anywhere she can reach." },
-    { type = "paragraph", content = "A hand at the back of her neck. Not holding her — resting there, the thumb moving once, slowly, along the seam. Somebody standing behind her while she looks at something she cannot see, and in the whole of her body, in the whole of the record, no fear at all. Not permitted absence of fear. The other kind. The kind that is simply not there because there is nothing in the room that could hurt her." },
+    { type = "paragraph", content = "A hand at the back of her neck. Not holding her. Resting there, the thumb moving once, slowly, along the seam. Somebody standing behind her while she looks at something she cannot see, and in the whole of her body, in the whole of the record, no fear at all. Not permitted absence of fear. The other kind. The kind that is simply not there because there is nothing in the room that could hurt her." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Whose hand." },
     { type = "paragraph", content = "It closes. It goes back down wherever it lives. She lies in a room she cannot leave with men on the other side of the door and she finds that she is holding the back of her own neck, and that her eyes have gone wet, and that she has no idea, none, whose hand that was." },
   ] },
@@ -2211,7 +2211,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "flag", subject = "player", flag_key = "glitch_iii_seen", operator = "is_true" },
     ] } }, blocks = [
-    { type = "paragraph", content = "She reaches for it again — the hand, the seam, the quiet — and it isn't there. The fault doesn't open twice for the same thing. What's left is the pressure, and the hot-dust smell, and the certainty that it is worse than it was." },
+    { type = "paragraph", content = "She reaches for it again. The hand, the seam, the quiet. It isn't there. The fault opens once for a thing, and once only. What's left is the pressure, and the hot-dust smell, and the certainty that it is worse than it was." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -2266,7 +2266,7 @@ name = "The far end of the row"
 blocks = [
   { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
   { type = "paragraph", content = "Past the blades, past the drawers of dead components, past the pens. The last three tables are curtained on three sides and the woman behind them does not sell anything you can hold up to the light." },
-  { type = "paragraph", content = "She deals in the paperwork of being somebody — a face, a history thin enough not to check and thick enough not to ask about, and the clothes that make a stranger believe both without being told." },
+  { type = "paragraph", content = "She deals in the paperwork of being somebody. A face, a history thin enough not to check and thick enough not to ask about, and the clothes that make a stranger believe both unprompted." },
   { type = "paragraph", content = "The price is the price. She does not haggle and she does not explain what any of it costs her to arrange." },
 ]
 [canvases.nodes.exit_block]
@@ -2295,7 +2295,7 @@ locationId = "underworld_market"
 id   = "buy"
 name = "The face"
 blocks = [
-  { type = "paragraph", content = "It takes the afternoon and most of it is sitting still. The woman works close, without conversation, the way Kess works, and asks her exactly one question, which is whether anyone has ever taken a print of her." },
+  { type = "paragraph", content = "It takes the afternoon and most of it is sitting still. The woman works close, in silence, the way Kess works, and asks her exactly one question. That is whether anyone has ever taken a print of her." },
   { type = "paragraph", content = "She says no. It is the first lie the face tells and it is told before the face exists." },
   { type = "paragraph", content = "What comes out at the end is not a mask and does not feel like one. It is a set of small differences that add up to somebody else, and a bag of clothes that belong to the somebody else rather than to her." },
   { type = "paragraph", content = "\"Don't wear it in front of anyone who knew the old one,\" the woman says, folding the bag shut. \"That's not me being careful. That's the whole of what you paid for.\"" },
@@ -2391,14 +2391,14 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 2 },
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 3 },
     ] } }, blocks = [
-      { type = "paragraph", content = "Behind the taps now, which is a different job entirely. Everything said in this room gets said at the counter eventually, and Sol has spent thirty years standing here hearing all of it and repeating none." },
+      { type = "paragraph", content = "Behind the taps now. That is a different job entirely. Everything said in this room gets said at the counter eventually, and Sol has spent thirty years standing here hearing all of it and repeating none." },
   ] },
   # RUNG 3 — the floor, in less. HIS call, relayed. Ceiling row (b) — exposure and handling.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt",  value = 4 },
     ] } }, blocks = [
-      { type = "paragraph", content = "Back on the floor, in what came down from the back room in a bag with no note. Sol handed it over without a word and without meeting her eye, which told her whose bag it was more clearly than a note would have." },
+      { type = "paragraph", content = "Back on the floor, in what came down from the back room in a bag with no note. Sol handed it over in silence and without meeting her eye, which told her whose bag it was more clearly than a note would have." },
   ] },
   # RUNG 4 — the room is open. The floor work continues, and that is the point: she is still staff.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -2476,7 +2476,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "lt", value = 2 },
     ] } }, blocks = [
       { type = "paragraph", content = "Six hours of it. Her hands go raw in the water and her back finds the exact place three steps with a loaded tray puts the weight, and she learns the room the way you only learn a room by carrying things across it." },
-      { type = "paragraph", content = "Twice in the night the back door opens and closes and she does not turn round, because the girls who turn round are the ones Sol talks to afterwards." },
+      { type = "paragraph", content = "Twice in the night the back door opens and closes and she keeps her back to it, because the girls who turn round are the ones Sol talks to afterwards." },
   ] },
   # RUNG 2 — the counter. She hears things, and the one she keeps is about the room and not about a man.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -2500,15 +2500,15 @@ blocks = [
       # be filled from its shelf because `grab` derives the filename from the key. As a folder it
       # is one shelf and one row, and the pool is curated by adding or removing clips.
       { type = "video", props = { pool_dir = "sex/bar_floor_handled_t4", pool = 3, description = "A waitress in a short tight dress leaning across a low bar table with a tray, a seated man's hand up the back of her thigh, the room carrying on around them.", search_queries = ["waitress groped serving drinks bar clothed", "short dress waitress hand under skirt bar table"] } },
-      { type = "paragraph", content = "The dress is short and the material is thin and it was cut for a woman standing still, which is not what the job is. Bending for the low tables is the whole of the arithmetic and everyone in the room has done it." },
-      { type = "paragraph", content = "Hands land. Not often and never hard — a palm flat on her ass while she reaches across, a hand up under the hem that finds her cunt through nothing at all and is gone before she straightens, knuckles dragging her tits through the thin material as she leans past. She sets the glasses down and moves on and it costs her nothing, and that is the part she notices." },
+      { type = "paragraph", content = "The dress is short and the material is thin and it was cut for a woman standing still. That is not what the job is. Bending for the low tables is the whole of the arithmetic and everyone in the room has done it." },
+      { type = "paragraph", content = "Hands land. Not often and never hard. A palm flat on her ass while she reaches across, a hand up under the hem that finds her cunt through nothing at all and is gone before she straightens, knuckles dragging her tits through the thin material as she leans past. She sets the glasses down and moves on and it costs her nothing, and that is the part she notices." },
       { type = "paragraph", content = "Nobody goes further than that. They look at the back door first, every one of them, and then they take their hand back." },
   ] },
   # RUNG 4 — the room is open. Flat, and the change is in how the room treats her.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "bar_rung", operator = "gte", value = 4 },
     ] } }, blocks = [
-      { type = "paragraph", content = "Nobody's hand goes anywhere near her now. The dress is the same dress and the tables are the same height, and the whole room has quietly agreed she is not theirs to touch any more." },
+      { type = "paragraph", content = "Nobody's hand goes anywhere near her now. The dress is the same dress and the tables are the same height, and the whole room has quietly agreed she is off limits now." },
       { type = "paragraph", content = "It is not respect. It is the same instinct that makes them all check the back door first, arriving one step earlier." },
   ] },
 ]
@@ -2570,7 +2570,7 @@ name = "Something that runs off nothing"
 blocks = [
   { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
   { type = "paragraph", content = "The blade tables want forty and she has stood at them twice and walked off twice, because a knife in that room is a thing she would have to be willing to use on a man she needs conscious." },
-  { type = "paragraph", content = "What she is actually short of is the emitter, and the emitter is not an option. One core feeds one weapon and the drain has to be the one that is live, every night she goes in — and a Vance field unit in her coat would come out of it at the door, in front of the room, in a man's hand." },
+  { type = "paragraph", content = "What she is actually short of is the emitter, and the emitter is not an option. One core feeds one weapon and the drain has to be the one that is live, every night she goes in. A Vance field unit in her coat would come out of it at the door, in front of the room, in a man's hand." },
   { type = "paragraph", content = "So: the box at the end of the row with the cheap gear in it, where a hand-taser is thirty coin and every woman working a floor down here has one." },
 ]
 [canvases.nodes.exit_block]
@@ -2592,7 +2592,7 @@ locationId = "underworld_market"
 id   = "buy"
 name = "The taser"
 blocks = [
-  { type = "paragraph", content = "It is a grey plastic thing the size of her palm with a thumb-switch and a charge light that does not work. The man selling it does not ask what it is for, because down here nobody has ever had to explain that one." },
+  { type = "paragraph", content = "It is a grey plastic thing the size of her palm with a thumb-switch and a charge light that does not work. The man selling it takes her coin and leaves the question alone, because down here nobody has ever had to explain that one." },
   { type = "paragraph", content = "It goes in the coat, in the lining, where he is going to look." },
 ]
 [canvases.nodes.exit_block]
@@ -2644,7 +2644,7 @@ id   = "base"
 name = "Go back through the door"
 blocks = [
   { type = "image", props = { file = "scenes/backroom_ruin.jpg", description = "A burned-out back room days after a fire, soaked ash and charred paper inches deep on the floor, an empty scorched wall where shelving stood, daylight through a broken door.", search_queries = ["burned out room ash charred paper floor aftermath", "fire damaged office soaked debris daylight through door"] } },
-  { type = "paragraph", content = "The Undertow does not open in the evenings any more. Sol is in it most days with a shovel and a bucket and no particular plan, and he lets her past the tape because she is the only one of the staff who came back at all." },
+  { type = "paragraph", content = "The Undertow opens days only now. Sol is in it most days with a shovel and a bucket and no particular plan, and he lets her past the tape because she is the only one of the staff who came back at all." },
   { type = "paragraph", content = "The back door is off its frame. What is behind it is a burned floor two inches deep in other people's paperwork, and most of it is worth exactly what it looks like." },
 ]
 [canvases.nodes.exit_block]
@@ -2676,7 +2676,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "ruin_depth", operator = "lt", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "An hour on her knees in wet ash. Manifests, bills of lading, a decade of somebody moving cargo that was never cargo. All of it worthless and all of it his, and none of it what he was actually keeping." },
-    { type = "paragraph", content = "The spines with the dates on them are gone. Not burned — gone. Somebody lifted whole years off that wall before the fire and the fire was for the rest." },
+    { type = "paragraph", content = "The spines with the dates on them are gone. Not burned. Gone. Somebody lifted whole years off that wall before the fire and the fire was for the rest." },
   ] },
   # BAND 2 — the first name off her own index.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -2782,7 +2782,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "paragraph", content = "The slot is lit. Not greyed — lit, with a size on the counter beside it and a date column that has stopped being blank. FRAGMENT 01, in her own handwriting, holding something at last." },
+    { type = "paragraph", content = "The slot is lit. Not greyed. Lit, with a size on the counter beside it and a date column that has stopped being blank. FRAGMENT 01, in her own handwriting, holding something at last." },
     { type = "paragraph", content = "She opens it. The data is there, and it is intact, and reading it does nothing at all. It is a clean file about somebody she has never met, and the somebody is her." },
   ] },
   # BAND C — two seated. Second slot has no label, because she never got a night quiet enough to write one.
@@ -2790,7 +2790,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "pieces_seated", operator = "gte", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "Two of them lit now, side by side. The first still says FRAGMENT 01 in her own hand. The second carries no label at all, because nobody ever gave her a night quiet enough to write one." },
-    { type = "paragraph", content = "Both intact. Both hers. Both about as much use to her as a stranger's file left open on a bench, and she has stopped expecting that to change, which is its own kind of answer." },
+    { type = "paragraph", content = "Both intact. Both hers. Both about as much use to her as a stranger's file left open on a bench, and she has stopped expecting that to change. That is its own kind of answer." },
   ] },
 ]
 
@@ -2847,14 +2847,14 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "grier_met", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "A name and a district is not an address. She spends an afternoon on it and it costs her nothing but the afternoon — old men in the Reach are a small list, and a machinist who stopped is a shorter one." },
-    { type = "paragraph", content = "Third try, a chandler on the water gives it up without being pushed: a lockup off the back lane, roller door, chained from the inside. He says the name like it is a thing that used to be worth something." },
+    { type = "paragraph", content = "A name and a district is not an address. She spends an afternoon on it and it costs her the afternoon and only that. Old men in the Reach are a small list, and a machinist who stopped is a shorter one." },
+    { type = "paragraph", content = "Third try, a ship's supplier on the water gives it up unpushed: a lockup off the back lane, roller door, chained from the inside. He says the name like it is a thing that used to be worth something." },
   ] },
   # BAND B — the walk, every time after.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "grier_met", operator = "is_true" },
     ] } }, blocks = [
-    { type = "paragraph", content = "Off the water, up the back lane, past the bins and the dead van. The roller door is down the way it is always down, and the side door is not locked, because nothing in there is worth the walk." },
+    { type = "paragraph", content = "Off the water, up the back lane, past the bins and the dead van. The roller door is down the way it is always down, and the side door hangs open, because the contents are worthless." },
   ] },
 ]
 
@@ -2888,13 +2888,13 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "The bag is under the cot where it lives. Twenty minutes at the cracked glass over the basin and she is somebody else — she has the order of it now, and her hands do most of it without being asked." },
+    { type = "paragraph", content = "The bag is under the cot where it lives. Twenty minutes at the cracked glass over the basin and she is somebody else. She has the order of it now, and her hands do most of it on their own." },
   ] },
   # BAND B — it is on. Standing in her own room as somebody else.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
     ] } }, blocks = [
-    { type = "paragraph", content = "She is wearing it now, in her own room, with nobody to be it at. It comes off in about a minute and goes back on in twenty, which is the exchange rate on being nobody." },
+    { type = "paragraph", content = "She is wearing it now, in her own room, with the door shut and the room empty. It comes off in about a minute and goes back on in twenty. That is the exchange rate on being nobody." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -2929,7 +2929,7 @@ locationId = "the_cot"
 id   = "on"
 name = "Put it on"
 blocks = [
-  { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She does not look at the whole of it until the end." },
+  { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She looks at the whole of it only at the end." },
   { type = "paragraph", content = "The woman in the glass has a job at a bar off the strip, no history anybody has asked about, and nothing at all to do with a programme that closed eleven years ago." },
 ]
 [canvases.nodes.exit_block]
@@ -2950,8 +2950,8 @@ id   = "off"
 name = "Take it off"
 blocks = [
   { type = "paragraph", content = "It comes off faster than it goes on. A minute at the basin, the water going grey, and the woman who has been carrying trays for a man who owned her stops existing over a cracked sink in a ship-breaker's yard." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing out there is hers while this is off. Sol does not know her. The floor is not her floor and the rota does not have her on it, and the room behind the door is a room she has never been invited into. All of that belongs to a woman with no name who does not exist until she puts it back on." },
-  { type = "paragraph", content = "She does it anyway, most nights, for an hour, and could not give a reason that would survive being said out loud." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing out there is hers while this is off. Sol does not know her. The floor is not her floor and the roster does not have her on it, and the room behind the door is a room she has never been invited into. All of that belongs to a woman with no name who does not exist until she puts it back on." },
+  { type = "paragraph", content = "She does it anyway, most nights, for an hour, and would struggle to give a reason that survives being said out loud." },
   { type = "paragraph", content = "The face in the glass is four years older than the paperwork says and has a designation on a page in a file under the cot, and it is the only thing in this city that nobody sold her." },
 ]
 [canvases.nodes.exit_block]
@@ -3102,7 +3102,7 @@ blocks = [
   { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
   { type = "paragraph", content = "The same three curtained tables at the end of the row, and the same woman behind them, and not one sign anywhere on her that she recognises a face she cut herself." },
   { type = "dialog", props = { speaker = "player" }, content = "Not a face this time. A history. Somewhere that trained me, somewhere that had me for two years, and a card that gets looked at once by a floor that is hiring in a hurry." },
-  { type = "paragraph", content = "The woman pulls a drawer out from under the table and sets three blanks on the cloth without answering, which is how she says yes." },
+  { type = "paragraph", content = "The woman pulls a drawer out from under the table and sets three blanks on the cloth and lets the question sit. That is how she says yes." },
   { type = "paragraph", content = "\"Readers,\" she says. \"You want the Rise. Everybody who has asked me for this in a month wants the Rise, and none of you can read half as fast as you all think you can.\"" },
 ]
 [canvases.nodes.exit_block]
@@ -3131,9 +3131,9 @@ locationId = "underworld_market"
 id   = "buy"
 name = "Two years somewhere that never existed"
 blocks = [
-  { type = "paragraph", content = "It takes an hour and a half and none of it is done to her. The woman works at a bench under a lamp with a scalpel and a stack of blanks, and the only part that needs Wren at all is holding still for the picture." },
+  { type = "paragraph", content = "It takes an hour and a half, and all of it is done to the paper. The woman works at a bench under a lamp with a scalpel and a stack of blanks, and the only part that needs Wren at all is holding still for the picture." },
   { type = "paragraph", content = "\"The hand on these is not mine,\" she says, not looking up. \"There is a man down here now who came out of the towers last winter with nothing on him but what he knew about paper. You are paying for his week, mostly, and he does not want to be thanked.\"" },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "She knows exactly one man who came down out of the Spire last winter with nothing on him. She does not ask." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She knows exactly one man who came down out of the Spire last winter with only what he knew. She does not ask." },
   { type = "paragraph", content = "What she takes away is a card in a sleeve, two years of employment somewhere that has never existed, and a bag of clothes cut for a floor where nobody does anything at all with their hands." },
 ]
 [canvases.nodes.exit_block]
@@ -3167,7 +3167,7 @@ is_active     = true
 id   = "base"
 name = "Back down to the Reach"
 blocks = [
-  { type = "paragraph", content = "The lift works and the stairs are open concrete and both come out at the same desk with the same man reading behind it. He does not look up on the way out either." },
+  { type = "paragraph", content = "The lift works and the stairs are open concrete and both come out at the same desk with the same man reading behind it. He keeps his head down on the way out too." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -3213,9 +3213,9 @@ id   = "base"
 name = "Take a day on the floor"
 blocks = [
   { type = "image", props = { file = "activities/work_the_archive.jpg", description = "A woman at one of twenty desks on an unfinished open office floor, reading from a screen among rows of other silent readers. avoid: modern startup office, avoid: people talking, avoid: bright colourful decor.", search_queries = ["woman at desk reading screen open plan unfinished office rows", "rows of silent workers at screens bare concrete office floor"] } },
-  { type = "paragraph", content = "The work is eleven years of somebody else's notes in no order at all — lab logs, procurement, three different hands, half of it scanned crooked. She is given a range of dates and told to say what is in it." },
-  { type = "paragraph", content = "She is faster than the twenty other people on this floor and she is faster than she lets herself look. By the middle of the afternoon she has stopped reading the words and started reading the shape of them, which is not a thing she has ever had to explain to anybody." },
-  { type = "paragraph", content = "Nobody talks. The ceiling is open above the desks and sound goes straight up into the ducting, so even the coughing is polite." },
+  { type = "paragraph", content = "The work is eleven years of somebody else's notes in no order at all. Lab logs, procurement, three different hands, half of it scanned crooked. She is given a range of dates and told to say what is in it." },
+  { type = "paragraph", content = "She is faster than the twenty other people on this floor and she is faster than she lets herself look. By the middle of the afternoon she has stopped reading the words and started reading the shape of them. That is not a thing she has ever had to explain to anybody." },
+  { type = "paragraph", content = "Nobody talks. The ceiling is open above the desks and sound goes straight up into the vents, so even the coughing is polite." },
   # ── TRACK B — THE SUSPICION LADDER (beat_0131, rev 181). §9: "it is the READING that exposes her, not the
   # sex," and "the two tracks never touch." So: nothing in these bands mentions the lab, the bench or the
   # man's hands, and nothing in loop_sabin_lab mentions the archive. She can be fucking him four floors up
@@ -3237,19 +3237,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "lt",  value = 6 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He stops at the end of her desk on the way past now, and what he asks about is not the files. It is the reading itself — what order she goes in, and what she is looking at when she is not looking at the words." },
+    { type = "paragraph", content = "He stops at the end of her desk on the way past now, and what he asks about is not the files. It is the reading itself. What order she goes in, and what she is looking at when she is not looking at the words." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You are not scanning. I have watched people scan and it does not look like that. You go down a column and then you stop, and the stopping is the part I cannot account for." },
-    { type = "paragraph", content = "She gives him an answer that is true and useless — practice, and a good memory for shapes. He takes it, and nods, and writes something down on the corner of the sheet before he goes." },
+    { type = "paragraph", content = "She gives him an answer that is true and useless. Practice, and a good memory for shapes. He takes it, and nods, and writes something down on the corner of the sheet before he goes." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 6 },
       { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "lt",  value = 9 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He puts a page in front of her that is not out of the range she was given. Older, a different hand, and half of it is a notation nobody outside a company lab has ever had a reason to be able to read." },
+    { type = "paragraph", content = "He puts a page in front of her from well inside the range she was given. Older, a different hand, and half of it is a notation nobody outside a company lab has ever had a reason to be able to read." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Humour me. What does the second column say." },
     { type = "paragraph", content = "She reads it. It takes about four seconds, and she has answered out loud before the part of her that keeps her alive has caught up with the part of her that likes being good at things." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Right. Yes. That is what it says." },
-    { type = "paragraph", content = "He does not say anything else about it. He takes the page back, and goes up to the lab, and she sits at that desk for the rest of the shift listening to the ducting." },
+    { type = "paragraph", content = "He leaves it there. He takes the page back, and goes up to the lab, and she sits at that desk for the rest of the shift listening to the vents." },
   ] },
   # ── BAND 4 (beat_0132, rev 182) — §21 OPEN ITEM 2, ANSWERED. How close does he get, and what does the
   # last band say? He gets ALL THE WAY and stops, and he says so out loud, in order, as a list.
@@ -3267,7 +3267,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sabin_suspects", operator = "gte", value = 9 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He does not ask her anything for a week. Then he comes down the row on a Thursday and sits on the corner of her desk, which he has never done, and looks at her for a while before he starts." },
+    { type = "paragraph", content = "He lets a week go by before he asks her anything. Then he comes down the row on a Thursday and sits on the corner of her desk, which he has never done, and looks at her for a while before he starts." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You read a notation you have never been taught. You correct my arithmetic in your head and then decide whether to mention it. Nine hours and you do not get tired, and you do not eat. I have been keeping a list." },
     { type = "paragraph", content = "He says all of it evenly, in order, the way he reads a column out. It takes about twenty seconds and there is nothing at all underneath it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I am going to stop keeping it. Whatever you were before this and whoever is paying for it is not in my fee. It has never once been in my fee. Be here at eight and read what I put in front of you." },
@@ -3334,7 +3334,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Four floors up"
 blocks = [
-  { type = "paragraph", content = "The lift takes four floors in about nine seconds and opens on a level with the lights already on and nobody in it. Nobody comes up here. There is nothing on this floor to come up for except the man at the far end of it." },
+  { type = "paragraph", content = "The lift takes four floors in about nine seconds and opens on a level with the lights already on and the floor empty. Nobody comes up here. There is nothing on this floor to come up for except the man at the far end of it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -3384,7 +3384,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "npc_at_location", location_id = "sabin_lab", npc_id = "npc_sabin", operator = "is_present" },
     ] } }, blocks = [
-    { type = "paragraph", content = "He says something at the bench that is not aimed at her and does not need an answer, and is still saying it when the stair door goes. He does not look up. He is not being rude about it; he has simply not finished the sentence." },
+    { type = "paragraph", content = "He says something at the bench, aimed at the work rather than at her, and is still saying it when the stair door goes. He keeps his head down. It is not rudeness; he has simply not finished the sentence." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -3478,7 +3478,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Eleven characters. Count them yourself, twice, before you walk it in there. I've done nine and thought it was eleven before now and so has every man who ever made one of these." },
   { type = "paragraph", content = "Then he wipes it down, wraps it, and holds onto it for a second longer than he needs to when he hands it over." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Understand what you're buying. That'll hold a dial forever. It holds a man exactly until the day one of them opens it up and reads it, and then it holds nothing at all and everybody who was in that log is in it." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "He wants the method, not the contents. Nobody opens a thing they already know how to copy. She is buying months, and she does not get to know how many." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He wants the method, not the contents. A man who can copy a thing has no reason to open it. She is buying months, and the number stays his." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -3597,7 +3597,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_false" },
     ] } }, blocks = [
-    { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in two acts and eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
+    { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
     { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
@@ -3606,7 +3606,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_true" },
     ] } }, blocks = [
-    { type = "paragraph", content = "She does not have to stop this time. He said again, and he is not a man who says a thing twice, so all she has to do is be in the room on a night he is likely to look — and she is in the room on the first one." },
+    { type = "paragraph", content = "She does not have to stop this time. He said again, and he is not a man who says a thing twice, so all she has to do is be in the room on a night he is likely to look. She is in the room on the first one." },
     { type = "paragraph", content = "He comes in and does not sit down and does not take his coat off, and he waits, because this time there is a question on the floor between them and it is hers and not his." },
     { type = "dialog", props = { speaker = "player" }, content = "Take me back." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Three words. She has spent nine years getting things out of men without ever once asking for anything, and it turns out asking takes about a second and a half." },
@@ -3681,9 +3681,9 @@ blocks = [
   { type = "paragraph", content = "He comes, because he always comes. She has stopped pretending to herself that she works out when and started simply waiting for it, which takes a day and a half this time." },
   { type = "dialog", props = { speaker = "player" }, content = "It went up. A man came down for it in a case with a lock on it and took it up the tower, and the man who watched that happen is forty minutes' walk from here and will not talk to you." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "No." },
-  { type = "paragraph", content = "That is all of it. Not an argument, not a reason — a door closing, and she has watched enough men close enough doors to know she is not getting this one open by pushing on it." },
+  { type = "paragraph", content = "That is all of it. Not an argument, not a reason. A door closing. She has watched enough men close enough doors to know she is not getting this one open by pushing on it." },
   { type = "dialog", props = { speaker = "player" }, content = "I am not asking you to talk to him. I am asking you to stand in his room while he talks to me, because he has the half you have not got and you have the half he will never get, and I am the only thing either of you will let through a door." },
-  { type = "paragraph", content = "He looks at the floor for a while, the way he looked at it on the end of her bunk, and then he picks his coat up off the bench and holds the door open, which is his entire answer." },
+  { type = "paragraph", content = "He looks at the floor for a while, the way he looked at it on the end of her bunk, and then he picks his coat up off the bench and holds the door open. That is his entire answer." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
