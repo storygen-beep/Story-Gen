@@ -8,6 +8,41 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-05
+- **`references/rts-flat-prose.md` — added Rules 11–14 (the LEGIBILITY rules) and §7 check 8 (their
+  counter); `SKILL.md` and `references/ship-gate.md` repointed at both.** The skill had nine numbered rules
+  covering *shape* (flat, spoken, in-person, crude) and **nothing covering LOAD** — how hard the sentences
+  are to read. That gap shipped: two players read vesper 0.2.0 and called the prose *"an underpowered AI
+  whose mother language isn't english,"* saying it made the story **hard to follow**
+  (`.claude/skills/author-game-v2/scripts/gates.py:150`, `:7402`). It had passed every §7 check that existed.
+  The four new rules are **Rule 11** dashes stay rare (ceiling 35/10k, field p50 0.99; the fix is a full
+  stop, never a comma), **Rule 12** the load rules — L1 no `, which is` · L2 say what happened not what
+  didn't · L3 a repeatable screen carries no history, **Rule 13** the words the player has to already own
+  (gloss on first use or use the plain word; plain word always on a label; the false-friend table),
+  **Rule 14** the pivot — an explicit beat stays on the body for its whole length, 3+ body words in every
+  band a node can render. Every threshold is the v2 skill's, cited to its source rather than re-derived;
+  §10 now names `gates.py` + `author-game-v2/references/register.md` as the evidence owners and records what
+  was deliberately **not** imported (reason axis, two-halves sentence, `block_pool`, act menus,
+  clip-on-beat — all of them change a scene's *structure*, and 11–14 are in-place prose rules by design).
+  Header/contents/§3 preamble corrected 9 → 14 rules, and §3 now states that 11–14 do not relax at a Lane-4
+  capstone (11–13 are whole-game rates, so a capstone cannot buy itself dashes; 14 is *tightest* there).
+  **Verified** by running the counter on a real v1 game — `python3 .claude/skills/author-game-v2/scripts/gates.py vesper`
+  returns 18/40 judged gates and emits every lint the new §7 check 8 table names, so the command in the rule
+  is the command that runs; `gates.py --beat <file>` verified separately on a probe beat (returns the
+  per-sentence `body words by sentence` row that Rule 14's diagnostic reads off).
+  ⚠️ **The count of rules in this file was already wrong before this change** — the header said "9" while
+  Rule 10 had been added below Rule 9. Fixed in passing; Rule 10 still sits above Rule 9 in the file, which
+  is cosmetic and left alone.
+  ⚠️ **The examples were re-scored against the rules they sit beside, and four of them failed.** A ✅ under
+  Rule 11 carried `has been` (L3's marker), a ✅ under L2 fixed the negation by reintroducing an L3 marker, a
+  ✅ under L3 used `has been` itself, and a ✅ under Rule 13 contained a dash two rules after Rule 11 banned
+  it. All four rewritten before commit. `author-game-v2/references/register.md` records this exact failure
+  five times over ("an example outranks every rule beside it") — **when you add a rule to this file, re-score
+  every example beside it the same day.**
+  ⚠️ **Nothing here changes what a scene DOES.** No rule added by this entry can be satisfied by adding a
+  beat, a canvas, a flag, a media block or a state read. That was the constraint the rules were selected
+  under, and it is why only four of v2's register rules came across.
+
 ## 2026-09-03
 - `references/media.md` + `references/rts-flat-prose.md` — repointed the two citations of
   `archive/the_inheritance_v1`, which was deleted from the working tree today along with 31 game folders

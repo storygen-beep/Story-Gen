@@ -3,7 +3,7 @@
 Read this before you write any scene body — the `paragraph` / `dialog` / `cascade` blocks inside a
 canvas. (For the `cascade` block's buildable shape + the **cascade-last** ordering rule — a `cascade` must be a
 node's last content block, or trailing prose renders below the reveal link — see `references/engine-reference.md`,
-the cascade section.) It is the **HOW** of register: the three axes, the nine numbered rules, the tiers, and the
+the cascade section.) It is the **HOW** of register: the three axes, the fourteen numbered rules, the tiers, and the
 pre-emit checklist. The **WHY** (density of decision-pressure over density of prose, the
 throttle/odometer model) lives in `references/rts-design-philosophy.md` — don't re-derive it here.
 
@@ -36,7 +36,7 @@ eight serve it.**
 ## Contents
 - §1 — The measured shape of RTS (ground truth)
 - §2 — Register is THREE axes: person · density · mode
-- §3 — The 9 mechanical prose rules
+- §3 — The 14 mechanical prose rules
 - §4 — Choice-label discipline
 - §5 — The three tiers = three beat counts
 - §6 — Canvas budget = beats × 35–40
@@ -152,10 +152,16 @@ repetition erodes intensity.)
 
 ---
 
-## §3 — The 9 mechanical prose rules
+## §3 — The 14 mechanical prose rules
 
-Every Lane 1/2/3 scene body satisfies all 9. (Lane 4 capstones relax Rules 3/5/7 — see §5 Tier-3.
+Every Lane 1/2/3 scene body satisfies all 14. (Lane 4 capstones relax Rules 3/5/7 — see §5 Tier-3.
 **Rules 1, 2, 4 and 9 never relax.**)
+
+⚠️ **Rules 11–14 never relax either, capstones included.** Rules 11–13 are measured as a rate over the whole
+game, so a Tier-3 capstone is a rounding error in the denominator and cannot buy itself dashes, glosses or
+untaught words. A capstone earns *more beats and richer sentences* (§5), never a heavier load on the reader.
+Rule 14 is the tightest of the four at a capstone, because a capstone is usually the hottest thing in the
+game.
 
 ### Rule 1 — Write in the game's DECLARED person
 
@@ -449,6 +455,205 @@ Rule 2 still binds. **Audited by §7 check 7.**
 
 ---
 
+### Rule 11 — Dashes stay rare
+
+**Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
+
+**Why this rule exists, and why it arrived late.** Two players read a shipped game of ours and called the
+prose *"an underpowered AI whose mother language isn't english"* — and said it **made the story hard to
+follow** (`.claude/skills/author-game-v2/scripts/gates.py:150`, `:7402`). Dash density is the marker readers
+reach for most often when they say that, and until this rule landed **nothing in this skill mentioned it.**
+The game they read passed every check in §7. It was field-normal on the one axis §7 measured and far
+off-field on one that nothing measured.
+
+Measured 2026-08-27 over the 25-game mopoga corpus (`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/`):
+
+| | dashes per 10,000 prose words |
+|---|---|
+| field p50 | **0.99** |
+| field p75 | 4.21 |
+| field p90 | 17.46 |
+| field p95 | 25.72 |
+| field max (`apocalyptic-world`) | **35.41** |
+| **vesper**, measured 2026-09-05 | **118.3** — 819 dashes in 69,243 words, **3.4× the corpus maximum** |
+
+Half the corpus writes fewer than **one** dash per ten thousand words. The ceiling is the corpus **maximum**,
+so a game only fails once it has left the distribution entirely. Treat a pass as *"still inside the field,"*
+never as a target.
+
+**The rule.** A beat gets a dash when no other mark will do the job. **Two dashes in one beat is a habit, not
+a choice.** When you find a pair holding an aside, the aside is usually a sentence.
+
+> ⚠️ **The fix is never a comma.** This is the wrong turn already taken once, and the `humanizer` skill
+> prescribes it, so it will be suggested again. Swapping the mark leaves the joint in place — the reader
+> still holds the sentence open and nothing reads easier. Measured across two of our own games: dash rate
+> fell 3.5× and comma joints per sentence went **up**. **Split the sentence, or cut the clause it was
+> carrying.**
+
+**Worked, on real vesper lines:**
+
+| ❌ shipped | ✅ the aside was a sentence |
+|---|---|
+| "he jerks his head at the glassed-in box at the back of the yard — his office — and doesn't quite look at her" | "he jerks his head at the glassed-in box at the back of the yard. His office. He doesn't quite look at her." |
+| "Her left leg — braced, taking her weight on the knee — simply stops." | "Her left leg is braced, taking her weight on the knee. It stops." |
+| "the sound of the door — not the men's door, the far one, the one that has never once opened while she was awake — coming off its hinges" | "the sound of a door coming off its hinges. The far one. The one that stays shut while she is awake." |
+
+Note what the third fix also does: it drops a negation (Rule 12 L2). The two defects travel together, because
+both are the same habit of loading one sentence with a fact and a correction to the fact.
+
+---
+
+### Rule 12 — The load rules: hand the reader a fact, not a thing to work out
+
+Three sub-rules, one principle. Each is a **list to read**, never a score to chase — the numbers say where to
+look, the reading says what to change.
+
+#### L1 · No `, which is` · no `, which means`
+
+A fact followed by an explanation of the fact, welded into one sentence. The gloss is always more abstract
+than the thing it glosses, which is why it costs the reader instead of helping them.
+
+Detector: `,\s*(which|who)\s+(means|is|are|was|were)\b`. Field maximum over 27 games: **0.24 per 1,000 words**.
+**vesper: 0.65 — 33 instances** (2026-09-05).
+
+> ❌ "It comes off in about a minute and goes back on in twenty, which is the exchange rate on being nobody."
+> ✅ "It comes off in about a minute. It goes back on in twenty. That is the exchange rate on being nobody."
+
+The fix is a full stop. The observation survives; the reader stops carrying the first clause while parsing
+the second.
+
+#### L2 · Say what happened, not what didn't
+
+Behind almost every negation is a positive fact that is **shorter and more specific**.
+
+Measured narration-only across 25 games: p50 **12.06%** of sentences carry a negation · p90 16.38% · **max
+25.76%** (`become-taxi-driver`). **vesper: 39.6% of 3,250 sentences — 111 canvases over the field maximum**
+(2026-09-05). Worst offenders `activity_the_face` 73%, `activity_say_yes` 69%, `rue_hub` 67%.
+
+> ❌ "There is no way to reach him."   ✅ name what she *can* reach, or what reaching costs.
+> ❌ "He doesn't talk and doesn't tell her to go."   ✅ "He drinks. She stays."
+> ❌ "The coveralls aren't on her — she's in her own clothes"   ✅ "She's in her own clothes."
+> ❌ "nobody's asked for one in two years"   ✅ "it's dead stock."
+
+⚠️ **A negation is not banned — a negation standing where a fact goes is.** *"He looks at her the way a man
+looks at a receipt"* is fine. *"He doesn't look at her the way a man looks at a person"* makes the reader
+build the thing and then delete it.
+
+#### L3 · A repeatable screen carries no history
+
+A one-time canvas is exactly where the doctrine says to **put** history. A screen the player re-enters on
+visit thirty cannot say how long it has been, because it does not know.
+
+Marker set is temporal: `used to · ago · since · has been · N days/weeks/months/years`. Field over 27 games:
+p50 1.64% · p90 3.94% · **max 5.41%**. **vesper: 4.9% — 48 of 989 sentences on repeatable canvases.**
+
+> ❌ (`activity_say_yes`, repeatable) "She has spent this whole chapter learning to read men and he has been
+>   doing it to her the entire time for free."
+> ✅ "She reads men for a living. He reads her for free."
+
+⚠️ Note the second half of that failure: **"this whole chapter"** is the game narrating its own structure to
+a player who is not reading chapters. That is Rule 10's defect (asserting elapsed time the player controls)
+arriving through a different door — a sandbox has no chapters, no acts and no weeks.
+
+---
+
+### Rule 13 — The words the player has to already own
+
+**Invented words are safe. Real regional and technical objects are the trap** — they look defined and are
+not, because the fiction never taught them and the reader's own vocabulary does not carry them.
+
+Measured against the 25-game field's own vocabulary (words used by 4+ games —
+`.claude/skills/author-game-v2/scripts/genre_words.txt`): the field runs locale-locked nouns at **0.8 per
+10,000 words**. **vesper: 230 words the 27-game field never uses, 483 uses across 58,384 words** (2026-09-05).
+
+`emitter ×23 · hull ×15 · readout ×15 · ledger ×11 · fragment ×10 · audit ×9 · spec ×8 · coveralls ×7 ·
+seeding ×7 · ducting ×6 · manifests ×6 · programme ×6 · designation ×5 · invoices ×5 · talkback ×5`
+
+**The rule.** Gloss it in the sentence that first uses it, or use the plain word.
+
+> ❌ "She reads the emitter's readout."
+> ✅ "She reads the little screen on the emitter. A number, climbing." *(glossed once, on first use)*
+> ✅ "She reads the dial." *(plain word — usually the better line)*
+
+> ⚠️ **On a LABEL the "or" collapses — plain word, no exception.** A button cannot carry its own gloss, and
+> the player reads it before whatever paragraph would have explained it. A canvas `name`, a location `name`
+> and a choice's `text` get the plain word every time, however well the scene behind them glosses it.
+
+**The false friend is worse than the unknown word**, because the player does not stop. A common word means
+something else here, they read their own meaning, and nothing tells them they are wrong:
+
+| vesper's word | what it means here | what the player reads |
+|---|---|---|
+| `meter` ×11 | a coin-fed prepayment box on the wall | a stat bar |
+| `braces` ×2 | suspenders | teeth braces |
+| `pitch` ×2 | the rent on a trading spot | a sound, or a throw |
+| `torch` ×8 | a cutting torch | a flashlight |
+
+⚠️ **Read the list; do not read the number.** vesper's `torch` is correct as written — it is a cutting torch
+and the scenes establish it. A false-friend detector is a prompt to check, never a verdict.
+
+---
+
+### Rule 14 — The pivot: an explicit beat stays on the body for its whole length
+
+Rule 9 names the target — write to arouse. **This rule is the measurable form of it**, and it is the one
+defect that recurs no matter how many times Rule 9 is restated.
+
+> **An explicit beat stays on the body for its whole length.** Not "contains a crude word." Not "is about
+> sex." **Stays on it** — from the first sentence to the last, the beat describes what is physically
+> happening to whose body.
+
+#### The diagnostic that catches it while writing
+
+> **Read the beat's last sentence. If it is about what the moment MEANS rather than what is HAPPENING, the
+> beat has pivoted.**
+
+The shape is always identical: name one body part, then leave the body for the rest of the beat. **The three
+pivot targets, named so they are catchable:**
+
+1. **He knows.** *"…and he does not stop, and it is you who steps back, and it is you whose face is burning."*
+2. **She is ashamed.** *"…and you lie there afterwards deciding not to have noticed what did it."*
+3. **What this says about her.** *"…and the arithmetic does not come out the way it is supposed to."*
+
+All three are good sentences. All three belong in the game. **None belongs at the end of an explicit beat.**
+
+#### Where the interiority goes instead
+
+Its own beat, *after*. A `thought_bubble` following the act is the register working; the same thought folded
+into the act is the defect. Splitting costs nothing — cascade beats are free (§9, Rule 7).
+
+```
+beat 1   the body, start to finish, three-plus named            ← explicit
+beat 2   what it meant, what she is going to do about it        ← interiority
+```
+
+> ⚠️ **On a SHIPPED game you may not be able to add a beat.** Adding one changes the click count of a scene
+> players have already played. The in-place fix is to **rewrite the last sentence into an event** rather than
+> relocate it: *"You hear the noise you make and you keep making it"* is interiority-adjacent and still
+> describes something happening. The psychology survives; the camera does not leave.
+
+#### The measured target
+
+**3+ words from the frozen list, in every explicit beat.** Not a game-wide average — a game-wide share cannot
+see the screen the player is on. Measured on vesper 2026-09-05: **23 of 31 act and finish beats scored under
+3**, median **2** body words, and 8 of its 10 sex loops came back *"3 of 3 warm, not explicit."* The
+game-wide figure passed comfortably while every act surface in it ran cold.
+
+> ⚠️ **Count the BAND, not the node.** A finisher is banded by definition — it elects on `loop_stage` — and a
+> player sees exactly one band. One game's finisher scored 6 folded together while **every band it could
+> actually render put two body words on the screen.** Score the thinnest band a node can render.
+
+**What the fix is NOT.** Not word-stuffing: eleven rewrites moved a game from 7.5% to 9.4% without adding one
+gratuitous noun — the words arrived because the camera stayed on the body long enough to need them. Not
+loosening the wordlist either; when prose scores low, the prose is what is wrong.
+
+**And drive the sweep off the measurement, never off a category.** The first backward application of this
+rule rewrote "the three repeatable sex loops," worked, and left four canvases in the protagonist's own
+bedroom under the floor for two further increments because they were never in the named category. **Score
+every beat, sort ascending, fix everything under 3.**
+
+---
+
 ## §4 — Choice-label discipline
 
 Labels are **two populations**, and the numbers are not close:
@@ -530,7 +735,8 @@ beat** when the honest fix is **cut a beat**.
 
 Run **1–3** on the beat you just wrote, before `merge_toml_phases`. Run **3** on the whole game at every
 milestone build and **report the number**; run **7** at every milestone too — it is the arousal gate, and
-nothing else in this list can see a cold game.
+nothing else in this list can see a cold game. **Run 8 at every milestone as well** — it is one command, it
+covers Rules 11–14, and it is the only check here that sees an *unreadable* game.
 
 ### 1 — Declared person (Rule 1)
 Read `authoring_state.json` → `register.person`. For `person = "second"` (the default), list every
@@ -614,9 +820,10 @@ it a Lane-2 ambient with more than **9**? Then it will grate on the third re-rea
   never ship this — it reads like a literary novel," rewrite it flat.
 - *"Would RTS have given this moment this FEW clicks?"* If no — add beats.
 
-### 7 — Written to arouse (Rule 9) — not greppable; read it
-Arousal is not a word count, so this one is a read, not a grep — run it at every milestone. Read three
-ordinary (non-payoff) beats and one sex scene and ask:
+### 7 — Written to arouse (Rule 9) — the read
+Whether a scene is *hot* is not a word count, so this one is a read — run it at every milestone. (The part of
+it that **is** countable now has a number: Rule 14 and check 8.) Read three ordinary (non-payoff) beats and
+one sex scene and ask:
 - **Body or world?** Do the narration words land on the player's body / arousal / exposure, or on the room,
   the mood, the plot, the apparatus? An ordinary beat whose words are about the world is drifting to story
   (Rules 3, 9A).
@@ -629,6 +836,45 @@ ordinary (non-payoff) beats and one sex scene and ask:
 
 The failure this catches passes checks 1–6: `the_inheritance` is clean on person, density, and mode and
 still elides every act. Clean shape, no heat.
+
+### 8 — The counters (Rules 11–14) — run the scoreboard; do not eyeball it
+Checks 1–7 are greps and reads, and between them they missed everything two players caught in one sitting.
+Rules 11–14 exist because of that, and each was written against a number. **One command prints all of them:**
+
+```bash
+python3 .claude/skills/author-game-v2/scripts/gates.py <slug>
+```
+
+> ⚠️ **It belongs to the v2 skill and it reads a v1 game unmodified** — verified on `vesper` 2026-09-05
+> (18/40 judged gates, every lint below emitted). **Ignore the structural gates it fails.** Ascent tiers,
+> standing surfaces, act menus, `v2_state.json` — those judge a world model this skill does not build, and a
+> red there is not a defect in a v1 game. Read only these lines:
+
+| the line it prints | rule | the bar |
+|---|---|---|
+| `prose texture` | 11 | ≤ **35** dashes/10k · field p50 0.99 |
+| `lint · the sentence explains itself` | 12 L1 | field max **0.24** per 1,000 words |
+| `lint · what did not happen` | 12 L2 | field max **25.76%** of sentences |
+| `lint · history on a repeatable screen` | 12 L3 | field max **5.41%** of sentences |
+| `lint · the words the player has to already own` | 13 | **a list to read**, never a number |
+| `lint · the act nodes` | 14 | every band a node can render at **3+** |
+| `sentence length` | 2 | median ≤ 14 |
+| `somebody speaks` | 4 | ≤ 5:1 narration to dialogue |
+
+**Before a game exists — or on one beat you are mid-way through writing:**
+
+```bash
+python3 .claude/skills/author-game-v2/scripts/gates.py --beat <path-to-a-text-file>
+```
+
+It measures loose prose the way the build measures a beat: word count, explicit count with the matched words
+named, median sentence, dash rate, act rungs named — and **`body words by sentence`**, which is the pivot
+diagnostic (Rule 14) as a row of numbers. A beat reading `4 3 2` kept the camera on the body; one reading
+`3 1 0` pivoted off it, and the trailing zero is the sentence to rewrite. Always exits 0 — it reports, it
+never judges.
+
+**Checks 7 and 8 are not alternatives.** 7 sees a game that is *cold*. 8 sees a game that is *hard to read*.
+`vesper` shipped as both, and the only one anyone wrote to us about was the second.
 
 ---
 
@@ -764,6 +1010,13 @@ player's own interior (the player's POV *is* the scene; thought-bubbles are for 
 
 - **The WHY** — density of decision-pressure over density of prose, throttle vs odometer, the two-axis
   gate: `references/rts-design-philosophy.md` (P1–P11).
+- **The measurements behind Rules 11–14** — the 25/27-game mopoga corpus, every threshold with its
+  provenance, and the script that prints them: `.claude/skills/author-game-v2/scripts/gates.py` (the
+  `THRESHOLDS` block comments carry the derivation) and `.claude/skills/author-game-v2/references/register.md`
+  ("Dashes stay rare" · "The load rules" · "The words the player has to already own" · the pivot rule).
+  **Those files own the evidence; this file owns the rules and does not re-derive them.** What is deliberately
+  *not* imported from v2: the reason axis, the two-halves sentence, `block_pool`, act menus and clip-on-beat —
+  every one of them changes a scene's structure, and Rules 11–14 are in-place prose rules by design.
 - **Which register value each LANE takes** (the lane → value lookup): `references/lanes.md` "Voice
   register". **The three axes are DEFINED here, in this file** (§2) — `lanes.md` says which value a lane
   picks, it does not define the axis. (Before 2026-07-14 the two files pointed at each other and neither

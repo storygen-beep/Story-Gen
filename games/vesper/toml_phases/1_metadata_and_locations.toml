@@ -20,7 +20,7 @@
 [player]
 id          = "player"
 name        = "Wren"
-description = "A Vance Dynamics asset. She serves the company and the man who owns her, and she's good at it. The only thing she feels is the sex she's used for — everything else is quiet. She believes that's all she's ever been."
+description = "A Vance Dynamics asset. She serves the company and the man who owns her, and she's good at it. The only thing she feels is the sex she's used for. Everything else is quiet. She believes that's all she's ever been."
 portrait    = "wren.jpg"
 customizable = false   # fixed identity — protects the Wren / buried-Vesper reveal
 
@@ -312,7 +312,7 @@ feed_line_days = 1
 [[npcs]]
 id          = "npc_mercer"
 name        = "Mercer"
-description = "Her direct owner and handler. He runs her missions and uses her as he pleases — sex and chores, however he orders it — and he knows every one of her secrets. Cold the way ownership is cold: she's an investment he maintains, not a person he sees."
+description = "Her direct owner and handler. He runs her missions and uses her as he pleases. Sex and chores, however he orders it. And he knows every one of her secrets. Cold the way ownership is cold: she's an investment he maintains, not a person he sees."
 portrait    = "mercer.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -367,7 +367,7 @@ activity   = "keeping night hours behind his own stall"
 [[npcs]]
 id          = "npc_renner"
 name        = "Renner"
-description = "The equipment supplier whose gear outfitted the facility Cain burned down — though he never knew what it was for. Cain gutted his business; now he's a husk of a man clawing at the wreck of it, broke and blacklisted and drinking. He hired cheap hands to help rebuild. He's mean to the help and he doesn't look twice at her. Yet."
+description = "The equipment supplier whose gear outfitted the facility Cain burned down. Though he never knew what it was for. Cain gutted his business; now he's a husk of a man clawing at the wreck of it, broke and blacklisted and drinking. He hired cheap hands to help rebuild. He's mean to the help and he doesn't look twice at her. Yet."
 portrait    = "renner.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
@@ -402,7 +402,7 @@ activity   = "drinking at the Anchor"
 [[npcs]]
 id          = "npc_sol"
 name        = "Sol"
-description = "The Undertow's bartender, down in the underworld — outlasted every owner this bar has had, and it's had a few. He hears everything said over his counter and repeats none of it, unless you're the kind he's decided he likes. Bring him a dead man's name and he knows who ran it and where the survivor still turns up. No arc, no conquest."
+description = "The Undertow's bartender, down in the underworld. Outlasted every owner this bar has had, and it's had a few. He hears everything said over his counter and repeats none of it, unless you're the kind he's decided he likes. Bring him a dead man's name and he knows who ran it and where the survivor still turns up. No arc, no conquest."
 portrait    = "sol.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -421,7 +421,7 @@ activity   = "tending the bar"
 [[npcs]]
 id          = "npc_bastien"
 name        = "Bastien"
-description = "The underworld's quiet owner — the bar and The House both, worked through a web of connections, never in front. By the time the trail reaches him he already knows she's Mercer's and what she's been doing. Not a mark she seduces: the man who catches her."
+description = "The underworld's quiet owner. The bar and The House both, worked through a web of connections, never in front. By the time the trail reaches him he already knows she's Mercer's and what she's been doing. Not a mark she seduces: the man who catches her."
 portrait    = "bastien.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
@@ -455,7 +455,7 @@ activity   = "keeping the back room"
 [[npcs]]
 id          = "npc_rue"
 name        = "Rue"
-description = "The madam of The House — counts heads and coin, decides who serves her few exclusive clients. Took the underworld the hard way and deals straight with whoever deals straight back. Not a mark, and not for sale herself: the one steady face down here. She's the door to the work, and to the Sunday regular the hunt needs."
+description = "The madam of The House. Counts heads and coin, decides who serves her few exclusive clients. Took the underworld the hard way and deals straight with whoever deals straight back. Not a mark, and not for sale herself: the one steady face down here. She's the door to the work, and to the Sunday regular the hunt needs."
 portrait    = "rue.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -484,7 +484,7 @@ activity   = "running the House into the small hours"
 [[npcs]]
 id          = "npc_marsh"
 name        = "Marsh"
-description = "A careful little fixer who ran cargo with Doss and Rourke and outlived them both. Keeps one habit — the same girl at The House every Sunday night, exact to the hour, checks a room's exits before he checks the girl. Whatever a careful man knows he keeps behind a quiet face; the drain is the only thing that opens it."
+description = "A careful little fixer who ran cargo with Doss and Rourke and outlived them both. Keeps one habit. The same girl at The House every Sunday night, exact to the hour, checks a room's exits before he checks the girl. Whatever a careful man knows he keeps behind a quiet face; the drain is the only thing that opens it."
 portrait    = "marsh.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -521,7 +521,7 @@ activity   = "his standing Sunday booking"
 [[npcs]]
 id          = "npc_kess"
 name        = "Kess"
-description = "An off-books ship-breaker in the Reach — cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way he reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back) — until a frame he can't put a book to walks in and he can't help himself. Wants coin, and the problem nobody else can solve."
+description = "An off-books ship-breaker in the Reach. Cuts decommissioned machines down for parts and does quiet illegal repair on the side. Reads a body the way he reads a hull: what it's made of, what's failing, what it costs to hold. Won't touch company work (company work touches back). Until a frame he can't put a book to walks in and he can't help himself. Wants coin, and the problem nobody else can solve."
 portrait    = "kess.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -547,7 +547,7 @@ activity   = "cutting a hull down"
 [[npcs]]
 id          = "npc_calloway"
 name        = "Calloway"
-description = "The company man who runs the hunt for the rogue from inside Vance Securities — and keeps a file room nobody audits. Humiliated, sidelined, the audit closing on him; everyone treats him as a crank chasing a ghost. Starving to be believed. She's the first to take his hunt seriously."
+description = "The company man who runs the hunt for the rogue from inside Vance Securities. And keeps a file room nobody audits. Humiliated, sidelined, the audit closing on him; everyone treats him as a crank chasing a ghost. Starving to be believed. She's the first to take his hunt seriously."
 portrait    = "calloway.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
@@ -574,7 +574,7 @@ activity   = "working the rogue-hunt files"
 [[npcs]]
 id          = "npc_vane"
 name        = "Vane"
-description = "Calloway's trusted teammate — and secretly the leak. He copies sensitive files (nothing ever goes missing) and feeds the copies to the courier Colm, who runs them to Bastien. The ghost Calloway's hunted for two years is the man at his elbow. She catches him, blackmails him to pull her file, and he runs when it all comes apart."
+description = "Calloway's trusted teammate. And secretly the leak. He copies sensitive files (nothing ever goes missing) and feeds the copies to the courier Colm, who runs them to Bastien. The ghost Calloway's hunted for two years is the man at his elbow. She catches him, blackmails him to pull her file, and he runs when it all comes apart."
 portrait    = "vane.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -607,7 +607,7 @@ activity   = "his routine in the docs department"
 [[npcs]]
 id          = "npc_colm"
 name        = "Colm"
-description = "Bastien's courier — the off-record kind that never shows up in any ledger. He drinks at the Undertow every night and carries what the firm's leak feeds him down to the buyer. She works him for one thing: the face of the man inside who hands him the copies."
+description = "Bastien's courier. The off-record kind that never shows up in any ledger. He drinks at the Undertow every night and carries what the firm's leak feeds him down to the buyer. She works him for one thing: the face of the man inside who hands him the copies."
 portrait    = "colm.jpg"
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
@@ -685,7 +685,7 @@ arc_stages  = ["The burnout"]
 [[npcs]]
 id          = "npc_cain"
 name        = "Cain"
-description = "The rogue asset the company built her to kill — an early build with a lot of miles on him, taking Vance apart a year at a time on paper and putting the good pieces in himself. Bastien has supplied him for eleven years and has never had an address. Speaks little, explains nothing, and is the only person in the Reach who has ever looked at her face and used her name. NOT a conquest and NOT reachable: no schedule, no hub, no location that stays open."
+description = "The rogue asset the company built her to kill. An early build with a lot of miles on him, taking Vance apart a year at a time on paper and putting the good pieces in himself. Bastien has supplied him for eleven years and has never had an address. Speaks little, explains nothing, and is the only person in the Reach who has ever looked at her face and used her name. NOT a conquest and NOT reachable: no schedule, no hub, no location that stays open."
 portrait    = "cain.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -707,7 +707,7 @@ arc_stages  = ["The shape"]
 [[npcs]]
 id          = "npc_grier"
 name        = "Grier"
-description = "The old machinist, down in the Reach. He was an ASSISTANT and he never built anybody — he handed tools to the men who did, first to a team that failed on Cain and then to the one that did not fail on her. He was in the room the night they cut her memory into three parts, and he walked out of it the same night with Cain's and a third of hers, and he has never once known whose the third was. Nine years of drink since. Helping Cain cost him everything he had and he has decided, at length, that this was Cain's fault. Sour, unhurried, completely unimpressed, and the one man in this city who can tell what she is by looking at her."
+description = "The old machinist, down in the Reach. He was an ASSISTANT and he never built anybody. He handed tools to the men who did, first to a team that failed on Cain and then to the one that did not fail on her. He was in the room the night they cut her memory into three parts, and he walked out of it the same night with Cain's and a third of hers, and he has never once known whose the third was. Nine years of drink since. Helping Cain cost him everything he had and he has decided, at length, that this was Cain's fault. Sour, unhurried, completely unimpressed, and the one man in this city who can tell what she is by looking at her."
 portrait    = "grier.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -730,7 +730,7 @@ activity   = "drinking through the afternoon"
 [[npcs]]
 id          = "npc_sabin"
 name        = "Sabin"
-description = "The Chairman's new roboticist, four months into the job and paid very well to be there. He was handed a knowledge base eleven years deep and told to reproduce a method whose author is dead, and he is not cruel and not cold — he is simply working, and he has no idea what most of what he is reading actually is. He needs fast readers and he hires them on their papers. He is the only person in the game who asks her what she thinks and then stops talking and waits for the answer."
+description = "The Chairman's new roboticist, four months into the job and paid very well to be there. He was handed a knowledge base eleven years deep and told to reproduce a method whose author is dead, and he is not cruel and not cold. He is simply working, and he has no idea what most of what he is reading actually is. He needs fast readers and he hires them on their papers. He is the only person in the game who asks her what she thinks and then stops talking and waits for the answer."
 portrait    = "sabin.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
@@ -915,7 +915,7 @@ corruption = 0
 [[locations]]
 id               = "spire_plaza"
 name             = "Spire Plaza"
-description      = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. THE SPIRE — the corporate core, clean and lit and watched. The company car waits at the curb to run her down to the Reach."
+description      = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. THE SPIRE. The corporate core, clean and lit and watched. The company car waits at the curb to run her down to the Reach."
 image            = "locations/spire_plaza.jpg"
 navigation_order = ["atrium"]
 # Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
@@ -929,7 +929,7 @@ navigation_order = ["atrium"]
 [[locations]]
 id          = "vance_securities"
 name        = "Vance Securities"
-description = "An internal division high in Vance Tower — Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
+description = "An internal division high in Vance Tower. Calloway's floor, and the file room nobody audits. Quiet, over-lit, under-staffed: a man chasing a ghost through paper the company would rather forget."
 image       = "locations/vance_securities.jpg"
 image_search_queries = ["over-lit corporate office floor empty cubicles daytime", "quiet understaffed office division fluorescent filing stacks"]
 entry_from  = "spire_plaza"
@@ -949,7 +949,7 @@ blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens w
 [[locations]]
 id               = "docs_department"
 name             = "The Docs Department"
-description      = "The division's official archive — glass walls, a front desk with a bored clerk, two guards who don't blink. Nothing like Calloway's paper hoard down the hall: every badge is logged, every drawer is watched, and the files that actually matter sit behind a vault door nobody without clearance walks through."
+description      = "The division's official archive. Glass walls, a front desk with a bored clerk, two guards who don't blink. Nothing like Calloway's paper hoard down the hall: every badge is logged, every drawer is watched, and the files that actually matter sit behind a vault door nobody without clearance walks through."
 image            = "locations/docs_department.jpg"
 image_search_queries = ["high security corporate records archive glass walls front desk", "secure document archive office locked filing cabinets wide"]
 entry_from       = "vance_securities"
@@ -961,7 +961,7 @@ navigation_order = ["docs_vault"]
 [[locations]]
 id          = "docs_vault"
 name        = "The Vault"
-description = "The deep archive. Two-man clearance, biometric on the door, a guard either side who's been told her badge doesn't reach. Whatever Mercer sent her for is in there — ten feet away and a world out of reach."
+description = "The deep archive. Two-man clearance, biometric on the door, a guard either side who's been told her badge doesn't reach. Whatever Mercer sent her for is in there. Ten feet away and a world out of reach."
 image       = "locations/docs_vault.jpg"
 image_search_queries = ["secure archive vault heavy steel door biometric lock", "sealed records vault dim corporate deep archive door"]
 entry_from  = "docs_department"
@@ -996,7 +996,7 @@ blocked_message = "Not anymore. The penthouse is the Chairman's ground now, and 
 [[locations]]
 id               = "wren_floor"
 name             = "Wren's Floor"
-description      = "The asset level — narrow corridors, numbered doors, no windows. Quiet the way a kept place is quiet."
+description      = "The asset level. Narrow corridors, numbered doors, no windows. Quiet the way a kept place is quiet."
 image            = "locations/wren_floor.jpg"
 entry_from       = "atrium"
 navigation_order = ["wren_room"]
@@ -1012,7 +1012,7 @@ navigation_order = ["cradle"]
 [[locations]]
 id          = "cradle"
 name        = "The Cradle"
-description = "The charging cradle. She powers down here and wakes here — the reset, the start of every day. When something leaks through the quiet, it leaks here."
+description = "The charging cradle. She powers down here and wakes here. The reset, the start of every day. When something leaks through the quiet, it leaks here."
 image       = "locations/cradle.jpg"
 entry_from  = "wren_room"
 
@@ -1021,7 +1021,7 @@ entry_from  = "wren_room"
 [[locations]]
 id               = "the_waterfront"
 name             = "The Waterfront"
-description      = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH — the city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
+description      = "The docks strip. Wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH. The city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
 image            = "locations/the_waterfront.jpg"
 navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard"]
 # Top-level street hub (NO entry_from) — the Reach's living surface + the travel anchor.
@@ -1040,7 +1040,7 @@ entry_from  = "the_waterfront"
 [[locations]]
 id          = "renner_depot"
 name        = "Renner's Depot"
-description = "A gutted equipment yard — half-empty racks, crates Cain's people didn't bother to take, a forklift nobody's fixed. He's trying to rebuild it on cheap hands and credit he doesn't have. The work floor's out front; his office is the glassed-in box in back, and you don't go in there until he wants you to."
+description = "A gutted equipment yard. Half-empty racks, crates Cain's people didn't bother to take, a forklift nobody's fixed. He's trying to rebuild it on cheap hands and credit he doesn't have. The work floor's out front; his office is the glassed-in box in back, and you don't go in there until he wants you to."
 image       = "locations/renner_depot.jpg"
 entry_from  = "the_waterfront"
 # Office FOLDED here (Fork A) — a register-shift on the depot hub gated renner_office_open,
@@ -1049,7 +1049,7 @@ entry_from  = "the_waterfront"
 [[locations]]
 id          = "facility_ruins"
 name        = "The Facility"
-description = "What's left of the Vance asset-facility Cain burned to the ground — scorched frame, melted server racks, the smell of old smoke that never washed out. The first dread-place. Something in the wreckage is going to look like it belongs to her."
+description = "What's left of the Vance asset-facility Cain burned to the ground. Scorched frame, melted server racks, the smell of old smoke that never washed out. The first dread-place. Something in the wreckage is going to look like it belongs to her."
 image       = "locations/facility_ruins.jpg"
 entry_from  = "the_waterfront"
 
@@ -1060,7 +1060,7 @@ entry_from  = "the_waterfront"
 [[locations]]
 id          = "the_site"
 name        = "The Site"
-description = "Somewhere out past the container stacks — the place Cain just walked away from. She doesn't have it yet."
+description = "Somewhere out past the container stacks. The place Cain just walked away from. She doesn't have it yet."
 image       = "locations/the_site.jpg"
 # RE-PARENTED: the deep end of the underworld now (where Cain is), not a Waterfront card. Still locked
 # on the_site_open (never set this chunk) — the frontier far end, reached THROUGH the underworld strip.
@@ -1079,7 +1079,7 @@ blocked_message = "Past the strip the city goes dark and deep, and that's where 
 [[locations]]
 id          = "renner_burned_yard"
 name        = "The Burned Yard"
-description = "Renner's old yard, three streets past the depot — what Cain left of it. Torched to the slab, fence down, but his men still walk it with lights, turning back anyone who comes to pick the bones. Whatever he's keeping out here, he keeps it watched."
+description = "Renner's old yard, three streets past the depot. What Cain left of it. Torched to the slab, fence down, but his men still walk it with lights, turning back anyone who comes to pick the bones. Whatever he's keeping out here, he keeps it watched."
 image       = "locations/renner_burned_yard.jpg"
 image_search_queries = ["burned yard night flashlight guard", "torched warehouse lot dark security"]
 entry_from  = "the_waterfront"
@@ -1101,7 +1101,7 @@ blocked_message = "You've no reason to be out at his burned yard — not yet. Ge
 [[locations]]
 id          = "kess_berth"
 name        = "The Berth"
-description = "A flooded breaking-dock cut in under the docks, off the strip — a stripped hull up on the blocks in black water, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works down here takes machines apart for a living — and, for the right coin, puts them back."
+description = "A flooded breaking-dock cut in under the docks, off the strip. A stripped hull up on the blocks in black water, cutting-gear and parts bins and a work-cradle rigged for something bigger than a person. Whoever works down here takes machines apart for a living. And, for the right coin, puts them back."
 image       = "locations/kess_berth.jpg"
 image_search_queries = ["flooded ship breaking dock underground night", "gutted hull workshop cutting torch dark"]
 entry_from  = "underworld_strip"
@@ -1127,7 +1127,7 @@ blocked_message = "A breaking-dock off the strip, chained and dark. Whoever stri
 [[locations]]
 id          = "underworld_gate"
 name        = "The Underworld Gate"
-description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up — the part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
+description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up. The part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
 image       = "locations/underworld_gate.jpg"
 image_search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"]
 # rev 60: reached via the travel car (activity_travel_to_reach / activity_travel_to_spire drop you here).
@@ -1157,7 +1157,7 @@ auto_exit   = false
 [[locations]]
 id               = "underworld_strip"
 name             = "The Underground"
-description      = "Down past the gate the city turns inside out — wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
+description      = "Down past the gate the city turns inside out. Wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
 navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
@@ -1165,7 +1165,7 @@ navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "u
 [[locations]]
 id          = "underworld_brothel"
 name        = "The House"
-description = "A working house off the strip — rooms by the hour, a madam who counts heads and coin. They'll take her on a shift; down here the thing the company uses her for is just a trade, and the coin is hers."
+description = "A working house off the strip. Rooms by the hour, a madam who counts heads and coin. They'll take her on a shift; down here the thing the company uses her for is just a trade, and the coin is hers."
 image       = "locations/underworld_brothel.jpg"
 image_search_queries = ["brothel interior red light hallway", "old bordello parlor dim velvet"]
 entry_from  = "underworld_strip"
@@ -1181,7 +1181,7 @@ entry_from  = "underworld_strip"
 [[locations]]
 id          = "underworld_market"
 name        = "The Black Market"
-description = "Stalls and back-rooms where coin buys what's off every shelf above — weapons, gear, and people, penned at the far end like the rest of the stock. She knows the look of the merchandise better than she'd like."
+description = "Stalls and back-rooms where coin buys what's off every shelf above. Weapons, gear, and people, penned at the far end like the rest of the stock. She knows the look of the merchandise better than she'd like."
 image       = "locations/underworld_market.jpg"
 image_search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"]
 entry_from  = "underworld_strip"
@@ -1203,7 +1203,7 @@ navigation_order = ["mercer_room"]
 [[locations]]
 id          = "mercer_room"
 name        = "The Lockup"
-description = "A rented room behind the market stalls — concrete, one bulb, a bed that came with the rent and a door that bolts from the inside. The kind of address a man takes when he has money and no name to put on a lease. Whatever he sells out front, he sleeps back here."
+description = "A rented room behind the market stalls. Concrete, one bulb, a bed that came with the rent and a door that bolts from the inside. The kind of address a man takes when he has money and no name to put on a lease. Whatever he sells out front, he sleeps back here."
 image       = "locations/mercer_room.jpg"
 image_search_queries = ["bare concrete room single bulb empty wide", "windowless rented room mattress bare bulb"]
 entry_from  = "underworld_market"
@@ -1220,7 +1220,7 @@ blocked_message = "Somebody rents it and keeps it bolted. Not a door that opens 
 [[locations]]
 id          = "underworld_bar"
 name        = "The Undertow"
-description = "A bar off the strip, quieter than the rest of the underground — low light, older money, men who talk in the corners and go still when you pass. It runs cleaner than a place this deep has any right to, and it plainly belongs to someone; nobody says who. Sol works the taps and hears all of it."
+description = "A bar off the strip, quieter than the rest of the underground. Low light, older money, men who talk in the corners and go still when you pass. It runs cleaner than a place this deep has any right to, and it plainly belongs to someone; nobody says who. Sol works the taps and hears all of it."
 image       = "locations/underworld_bar.jpg"
 image_search_queries = ["dim underground speakeasy bar red light", "quiet noir back-alley bar low light"]
 entry_from  = "underworld_strip"
@@ -1257,7 +1257,7 @@ entry_from  = "underworld_strip"
 [[locations]]
 id          = "underworld_bar_bathroom"
 name        = "The Bathroom"
-description = "One cubicle, one cracked basin and a bolt that turns. It smells of the bar and of the cheap pink soap somebody refills without being asked. There is a hook on the back of the door, which is the whole of what the Undertow provides its staff."
+description = "One cubicle, one cracked basin and a bolt that turns. It smells of the bar and of the cheap pink soap somebody refills unasked. There is a hook on the back of the door, which is the whole of what the Undertow provides its staff."
 image       = "locations/underworld_bar_bathroom.jpg"
 image_search_queries = ["small dingy bar bathroom cubicle cracked basin", "dim staff toilet tiled wall single bulb"]
 entry_from  = "underworld_bar"
@@ -1337,7 +1337,7 @@ auto_exit   = false
 [[locations]]
 id          = "crew_den"
 name        = "The Crew's Rooms"
-description = "A dead man's rooms down past the market, off a stair nobody's cleared — where Doss and Rourke and the rest holed up before Renner put them in the ground. The door still answers to a key under the third stair, and nobody's been back. Nobody but her."
+description = "A dead man's rooms down past the market, off a stair nobody's cleared. Where Doss and Rourke and the rest holed up before Renner put them in the ground. The door still answers to a key under the third stair, and nobody's been back. Nobody but her."
 image       = "locations/crew_den.jpg"
 image_search_queries = ["abandoned tenement room ransacked dim", "cleared-out dead man rooms dark dockside"]
 entry_from  = "underworld_strip"
@@ -1466,7 +1466,7 @@ auto_exit   = false
 [[locations]]
 id          = "the_rise_floor"
 name        = "The Floor"
-description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it — cable trays, bare ducting, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. From this height the Spire is a shape in the weather to the north, and she looks at it once and then does not again."
+description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it. Cable trays, bare vents, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. From this height the Spire is a shape in the weather to the north, and she looks at it once and then does not again."
 image       = "locations/the_rise_floor.jpg"
 image_search_queries = ["open plan office floor unfinished ceiling cable trays rows of desks", "half built office interior bare concrete glass wall workers at screens"]
 auto_exit   = false
@@ -1539,7 +1539,7 @@ auto_exit   = false
 [[locations]]
 id          = "cain_lab"
 name        = "The Lab"
-description = "Somewhere she was carried to with her head down. Long benches under work-lamps, a body-frame standing empty at the far end, and paper everywhere — filed, stacked, annotated, years of it, in a hand that presses hard. Nothing in the room was bought new. Everything in it has been taken from somewhere that could afford it."
+description = "Somewhere she was carried to with her head down. Long benches under work-lamps, a body-frame standing empty at the far end, and paper everywhere. Filed, stacked, annotated, years of it, in a hand that presses hard. Nothing in the room was bought new. Everything in it has been taken from somewhere that could afford it."
 image       = "locations/cain_lab.jpg"
 image_search_queries = ["cluttered underground workshop long benches work lamps night", "improvised laboratory salvaged equipment dim industrial interior"]
 auto_exit   = false
