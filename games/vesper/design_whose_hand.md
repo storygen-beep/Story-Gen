@@ -2370,3 +2370,83 @@ when the whole `AND` fails, so an exclusive PAIR that both grey out prints two r
 Measured live: post-ladder with a bottle in her coat the page carried the live choice **and both greyed
 lines**. Only one of an exclusive pair may grey, and its reason must be true in **both** of its failure
 states — so the surviving one states where the bottle comes from rather than what her hands are holding.
+
+---
+
+## 25. WHAT SHE ASKS HIM FOR — beat_0146 (rev 197). The drawer she was never told about.
+
+**Added 2026-09-07.** LO was reading `cap_grier_gives` and asked the question the scene invites: *if she has
+known about that drawer for years, why is she only asking now?* He was right, and for a bigger reason than
+tone.
+
+### 25.1 The drawer was never established anywhere
+
+Two reads settle it:
+
+- **Cain never says drawer.** `cap_the_question`'s ladder gives her one sentence and a name — *"A man in the
+  Reach. He has had it nine years and he has never once known what it was."* Then *"Grier."* Nothing about
+  where he keeps it.
+- **The drain never says drawer.** `grier_drain_canvas.d0` is a theatre, three trays, and a man walking out
+  with two of them. It never shows his room. Her closing thought is the whole of what she takes away:
+  *"He still has it. It has been in this room the entire time she has been coming here."*
+
+So she knows **he took it**, **he kept it**, and **it is in that room**. The one fact she does not have is
+**which drawer** — and the shipped line had her opening with it, and then bragging about it: *"as though she
+has known about it for years."*
+
+### 25.2 She is not asking a question, and the chapter spent four afternoons proving she cannot
+
+Card W states the wall in the plainest terms the game owns: *"He threw you out the first time you asked him a
+straight question. **There is no question that works on this man.**"* Grier says it himself at `wall3`:
+*"Do not ask me about that."*
+
+If a straight question worked here, the ladder had no reason to exist. **What changed after the drain is not
+that he softened — it is that she stopped needing to ask.** So the beat is a collection, not an interview:
+
+> She does her coat up and tells him to give her the one he kept. Not a question. Not what it is, not how he
+> came by it, and no account of how she knows. Just give it to her.
+
+And **he** supplies the drawer, because it is his drawer and it is the only thing in the room she does not
+already know. His old *"Which drawer."* is gone; what replaces it is nine years of nobody ever having said
+that to him, and then he crosses to the bench on his own. The good clause survives untouched — *"what takes
+him the time is not deciding. It is shifting nine years of junk off the top of it."*
+
+**He does not ask how she knows.** `grier_drain_canvas.done` locks that he wakes up *"none the wiser"*, and
+an interrogation would drag the faceless man in the corridor into the open, which §8 and §17 reserve.
+
+`d0`'s exit link moved with it: **"Ask him for the thing in the drawer."** → **"Ask him for it."**
+
+### 25.3 The second tray, answered — one line, in his mouth, twelve beats later
+
+**He walks out with two and the game only ever accounted for one.** `d0`: *"He takes the one he came for and
+the one sitting next to it."* `hub_grier.the_third`: *"There were three on that stand and I walked out with
+two of them."* He hands her one at `cap_grier_gives`. Nothing anywhere said where the other went.
+
+Closed inside the scene already built for his grievance, where he is spilling rather than answering, at no
+new click:
+
+> "And I had two of them for about nine steps. The one I was sent for went out of my arms at the door into
+> somebody else's, which was the arrangement. The one I kept was the one nobody had asked me for."
+
+It matches `d0` word for word, **invents no fourth piece** — the three are spoken for: the drawer, the Rise,
+and the case that went up — and **never names Cain**, so §17 holds and `beat_0139` keeps its reveal. It also
+buys Grier one more thing to be sour about: he did the job, handed over the prize, and kept the scrap, and
+the scrap was the only thing in that room that mattered.
+
+### 25.4 What was NOT moved, and why
+
+**The Cain conversation stays at `beat_0138`.** LO's instinct — *why does she not just ask about Cain and
+what happened* — is the right scene, and it is already built: `hub_grier.the_third` carries the grievance
+(*"He asked me for one night and by the Friday I had none of that"*), the three trays, and where the third
+went. Pulling it forward would have emptied the release's late beat.
+
+**And the hand-over still answers exactly ONE question.** Its own prose says why: *"he is spent and he has
+nothing left to hold over her, and that is the only reason the next question gets an answer."* That one
+answer is **the Rise**, which is `rise_named`, which is `beat_0128`'s gate. A second question there would
+falsify card W in the same breath the game asserts it.
+
+**⚠️ AND THE DEFECT CLASS IS OLDER THAN THIS BEAT: prose that hands the player a fact the character was
+never given.** It is not caught by any gate — `gates.py` measures texture, not knowledge, and the flag chain
+was perfectly sound the whole time. The check is one question, asked of any line where a character names a
+specific thing: **which canvas told her that?** If the answer is *none*, the character has to be the one who
+says it.

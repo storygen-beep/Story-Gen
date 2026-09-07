@@ -15138,6 +15138,7 @@ blocks = [
     { advance_text = "And the trays.", blocks = [
         { type = "paragraph", content = "And then it comes out sideways, the way the useful things always come out of him. Not offered, spilled, in the middle of a sentence that was going somewhere else." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "There were three on that stand and I walked out with two of them, and I have never said that to a living soul, and I am saying it to you because you are the only one left it is any business of." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "And I had two of them for about nine steps. The one I was sent for went out of my arms at the door into somebody else's, which was the arrangement. The one I kept was the one nobody had asked me for." },
     ] },
     { advance_text = "Ask about the third.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Where did the third one go." },
@@ -15694,7 +15695,7 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Ask him for the thing in the drawer."
+text = "Ask him for it."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "grier_room"
@@ -15746,11 +15747,11 @@ id   = "base"
 name = "The thing in the drawer"
 blocks = [
   { type = "image", props = { file = "scenes/grier_drawer.jpg", description = "An old mans hands lifting a small dull component out of a cluttered drawer full of fuses and junk in a dim workshop. avoid: a clean drawer, avoid: a glowing or futuristic object, avoid: a jewellery box.", search_queries = ["hands taking small part from cluttered drawer of fuses workshop", "old man opening junk drawer dim workshop close up"] } },
-  { type = "paragraph", content = "She does her coat up and asks him, flat, for the thing in the drawer under the bench. Not what it is. Not how he came by it. Just the thing in the drawer, as though she has known about it for years." },
+  { type = "paragraph", content = "She does her coat up and tells him to give her the one he kept. Not a question. Not what it is, not how he came by it, and no account of how she knows. Just give it to her." },
   { type = "cascade", props = { beats = [
     { advance_text = "Wait.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Which drawer." },
-        { type = "paragraph", content = "He knows exactly which drawer. He goes to it and stands over it with his back to her a while, and what takes him the time is not deciding. It is shifting nine years of junk off the top of it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years. Nobody has ever come into this room and said that to me." },
+        { type = "paragraph", content = "He does not ask her how she knows. He goes to the bench and stands over the drawer under it with his back to her a while, and what takes him the time is not deciding. It is shifting nine years of junk off the top of it." },
     ] },
     { advance_text = "Let him talk.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years this has sat in with the fuses. I could not tell you what it does. It does not read on anything I own and I gave up trying somewhere around the second year, and I have not had it out since." },
