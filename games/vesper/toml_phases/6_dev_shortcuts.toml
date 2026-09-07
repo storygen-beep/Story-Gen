@@ -503,6 +503,7 @@ flagEffects = [
 #                             post-chapter surface reads. Setting owner_drained alone is NOT enough.
 #   leash_cut + file_read   — the chip is out and her page is open. leash_cut is what re-bands hub_kess_berth
 #                             and what retires the whole parts-loop conversation.
+#   controller_off + leash_answered — the two the first cut MISSED; see the warning below.
 #   part_installed = 1      — canon: mercer_drain_canvas.d1 does NOT burn the fourth part, and cap_extraction's own
 #                             prose says "the fourth part is still in her and the key is still beside it".
 #   part_spec = 3, spec_pending = 0, mercer_attempts = 3 — the loop finished and was debriefed, so no stall.
@@ -514,6 +515,27 @@ flagEffects = [
 #   brothel_hired + rue_introduced — The House is her income, and she needs 120 coin for the face plus 30 for
 #                             the taser. 150 is seeded so the first purchase is immediate, but the earners
 #                             are live either way.
+# ⚠️ controller_off AND leash_answered ARE LOAD-BEARING AND WERE MISSING FROM ALL THREE END-STATE JUMPS —
+# this one, dev_jump_whose_hand and dev_jump_whose_hand_end. Found live at beat_0148 by a tester who took the
+# 0.2.1 jump and got a beat out of the middle of The Leash. Same class as the plan_made hole found at
+# beat_0140, and the reason it hid so long is that both flags are pure connective tissue: nothing in the
+# chapter's prose names them and each has exactly ONE setter in the entire game — kess_print_read sets
+# controller_off (5_scenes.toml:6771) and the fire sets leash_answered (5_scenes.toml:7625). Both sit on the
+# spine these jumps claim to have run, so leaving them out produced a state that contradicted itself: leash
+# cut, chip read, and the key never switched off. Three surfaces read it wrong at once —
+#   1. kess_print_read re-fired at her own dock mid-chapter. Its gate is owner_print_taken is_true +
+#      controller_off is_false + feed_line_days gte 1 + Kess present, and the jumps satisfied all four.
+#   2. Mercer's quest card showed the OPEN parts-loop directive (parts_loop_open is_true + leash_answered
+#      is_false) instead of the drained end-state card, so the finished chapter read as still running.
+#   3. loop_mercer_finisher took exit D (controller_off is_false -> .cold; 5_scenes.toml:7299), which is
+#      declared ahead of every other Mercer band, so the standing drain loop returned nothing.
+# The chain is strictly monotonic — owner_print_taken -> controller_off -> owner_drained -> parts_loop_open
+# -> leash_answered (5_scenes.toml:7308) — and the flag lists below are now written in that order so a gap is
+# visible on sight. ANY JUMP THAT SEEDS leash_cut MUST CARRY BOTH. Shipped saves were never affected: a real
+# player passes through both setters, and cap_chip_read gates THE FACE on leash_cut, so the chapters cannot
+# overlap in an authored playthrough.
+# ⚠️ dev_jump_loop_armed is deliberately NOT changed. It is a repeatable mid-loop top-up taken after
+# dev_jump_parts_loop, by which point kess_print_read has already fired and set controller_off itself.
 # ⚠️ THE CHAPTER'S OWN COUNTERS ARE SET TO 0 EXPLICITLY rather than left to default, so the jump is idempotent
 # — a tester can take it twice mid-run and get a clean chapter start instead of a half-climbed ladder.
 # Gated dev_mode_enabled; inert in every shipped build.
@@ -623,8 +645,12 @@ flagEffects = [
   { targetType = "player", flag = "mercer_found",            op = "set" },
   { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
   { targetType = "player", flag = "owner_print_taken",       op = "set" },
-  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
   { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
   { targetType = "player", flag = "leash_cut",               op = "set" },
   { targetType = "player", flag = "file_read",               op = "set" },
   # ── and stopped one step short: THE FACE's opening beat is the thing under test ──
@@ -784,8 +810,12 @@ flagEffects = [
   { targetType = "player", flag = "mercer_found",            op = "set" },
   { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
   { targetType = "player", flag = "owner_print_taken",       op = "set" },
-  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
   { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
   { targetType = "player", flag = "leash_cut",               op = "set" },
   { targetType = "player", flag = "file_read",               op = "set" },
   { targetType = "player", flag = "chip_read",               op = "set" },
@@ -973,8 +1003,12 @@ flagEffects = [
   { targetType = "player", flag = "mercer_found",            op = "set" },
   { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
   { targetType = "player", flag = "owner_print_taken",       op = "set" },
-  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
   { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
   { targetType = "player", flag = "leash_cut",               op = "set" },
   { targetType = "player", flag = "file_read",               op = "set" },
   { targetType = "player", flag = "chip_read",               op = "set" },

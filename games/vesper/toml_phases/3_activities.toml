@@ -79,7 +79,7 @@ time_progression_minutes = 30   # rev 67: time only — no Charge cost on the ca
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car"
-description = "Wren-solo travel picker @ the_waterfront (rev 60). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). Spire = car (time+charge); Underworld = a short local descent (opening_done)."
+description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named + face_worn. The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -92,20 +92,63 @@ id   = "base"
 name = "Take the car"
 blocks = [
   { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers. Or down under the boards, into the other half of the Reach, the part that stays down in daylight." },
+  # ── beat_0147 (rev 198) — WHY THERE IS NO RIDE UP, in prose rather than as a greyed menu line.
+  # ⚠️ TWO BANDS AND THEY ARE MUTUALLY EXCLUSIVE BY CONSTRUCTION (A needs rise_named is_false, B needs it
+  # is_true). That matters: adjacent [group] blocks MERGE into a single if/elseif chain and first match wins,
+  # so a pair that could both be true would silently kill the second. Both are dead pre-seal.
+  # ⚠️ BAND A IS THE REWRITE. The old locked_text blamed "her face on every camera at the curb" — beatable, and
+  # the game beats it two beats later. What is NOT beatable is a door keyed to an employee she is no longer
+  # dressed as, and a deep-vault flag with her prints on it climbing to the man at the top of the building
+  # (cap_1a_close, Mercer's own line). The face gets her onto the street; it was never going to get her inside.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Up to the towers is not a road any more. Vance's doors up there are keyed to a woman she is not dressed as, and the flag she set off in that vault is still climbing to the man at the top of them." },
+  ] },
+  # ── BAND B — she has somewhere to go and is standing in the wrong face. Guidance: the face comes on at the cot.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "She could take the car up. Not in this face. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ── PRE-SEAL: the ride she has always taken. UNCHANGED except that show_when_locked is GONE (beat_0147).
+# ⚠️ WHY THE GREYED LINE WENT. The old locked_text said the Spire was shut because "her face on every camera at
+# the curb" — and react_rise_no_face (5_scenes) has the BOUGHT FACE BEAT THAT EXACT CAMERA: without it she turns
+# round in the lift, with it she walks in. cap_bastien_notices proved the same face on the man who kept her in a
+# cell. So the stated lock was the one thing she had already solved, and a player who bought a face was being
+# told a reason he could see through. The real reason is now two [group] paragraphs in the node body below —
+# prose in the scene, which is where a state this load-bearing belongs, not a menu tooltip.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_to_spire.riding_spire"
-# THE ARCHIVE 1a seal (Phase 2): once she's blown (archive_1a_done), the ride up is dead — greyed-visible with the
-# security line so the block reads on the try. locked_text is written FOR the locked (post-blowup) state, so it's
-# never stale (cf. toml-gotchas show_when_locked trap — that trap is a consumed is_false clause showing a PRE-state).
-show_when_locked = true
-locked_text = "The Spire's sealed to her now — sweeps on every floor, her face on every camera at the curb. Going up is walking into the net. There's no ride back."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
+# ── POST-SEAL: the ride back up, in somebody else's face. beat_0147 (rev 198), LO's call.
+# ⚠️ THREE CLAUSES AND EACH ONE EARNS ITS PLACE. archive_1a_done is_true makes this and the choice above
+# MUTUALLY EXCLUSIVE by construction, so the menu never shows two ways up. face_worn because riding up as
+# herself is suicide and the game has said so since beat_0116. rise_named because without it a greyed "The
+# Rise" card would sit on the plaza for the whole first half of this release, promising content — gating the
+# ROAD on Grier naming the place makes that window ZERO and keeps his mouth as the telegraph, which is what
+# §6 wanted. version="1.0" or the gate fails OPEN.
+# ⚠️ THE PLAZA IS NOT THE TOWER. This lands her on the public level and nothing else opens with it: wren_floor,
+# penthouse, vance_securities and docs_vault are all locked door-by-door in 1_metadata, and wren_floor's lock
+# seals wren_room and the cradle behind it (which is what keeps Kess's rent alive).
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the plaza."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_covered"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
@@ -115,22 +158,10 @@ nodeId     = "activity_travel_to_spire.riding_under"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
-# ── THE RISE — beat_0129 (rev 179), WHOSE HAND. The way in, and it is a CHOICE and not a nav card.
-# ⚠️ GATED ON rise_named AND NOTHING ELSE, DELIBERATELY. She can walk up to that building the moment Grier
-# names it, in her own face, with no papers — and she MUST be able to, because save-safety §5's heal lives
-# on the point-of-need reaction up there and a heal the stranded player cannot reach is not a heal. The
-# tokens gate the HIRING, not the road.
-# ⚠️ NO show_when_locked. The trap that flag walks into is a consumed is_false clause showing a PRE-state
-# (toml-gotchas), and there is a worse problem here: before Grier names the place she does not know the
-# building exists, so a greyed "Up to the Rise" on the travel menu would tell her about it two beats early.
-# The frontier telegraph for this one is a man saying its name out loud, which is better than a card.
-[[canvases.nodes.exit_block.choices]]
-text       = "Up to the Rise."
-targetType = "node"
-nodeId     = "activity_travel_to_spire.riding_rise"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
-] }
+# ── THE RISE's express off this menu was DELETED at beat_0147 (rev 198). The building moved into the Spire
+# district, so the road to it is the ride up to the plaza above and then its own nav card on that plaza
+# (the_rise_floor now carries entry_from = spire_plaza). One route, not two. The old rise_named gate lives on
+# in the ride-up choice above, doing the same job it always did.
 
 [[canvases.nodes]]
 id   = "riding_spire"
@@ -148,23 +179,32 @@ time_progression_minutes = 30
 # rev 67: no Charge cost — this is the ONLY way back to the cradle, so a tax here was always a soft-lock
 # risk the clamp merely hid. Time still rolls (see the ride-to-Reach note).
 
-# ⚠️ ON FOOT, NOT IN THE CAR. The Rise is on the edge of this district (§6) — siting it here is what turns
-# the CAIN -> GRIER -> SABIN chain into a walk instead of a commute, and putting her in a car for ten
-# minutes would quietly undo that. Ten minutes, no Charge, same as the descent to the gate.
+# ── riding_covered — beat_0147 (rev 198). THE RIDE BACK UP, in somebody else's face.
+# ⚠️ THIS REPLACES riding_rise, WHICH IS DELETED. That node walked her to a tower on the edge of the Reach
+# ("It is a walk and not a ride… out of the low end of the Reach"); the building now stands in the Spire
+# district, so the walk is gone and its crane-and-lobby material is folded into paragraph two here, where it
+# does telegraph work on every ride instead of once.
+# ⚠️ A SEPARATE NODE AND NOT riding_spire, DELIBERATELY. riding_spire closes on "Home, if that's the word for
+# the place that owns you" — true when she still lived there and false the moment she stopped. Sending the
+# post-seal ride through it would have her call the plaza home while she is riding up disguised.
+# ⚠️ REPEATABLE, SO PARAGRAPH TWO MUST RE-READ. "still going up" rather than a first-sight reveal: this fires
+# on every commute for the rest of the act.
+# 30 min and no Charge, matching riding_spire — the ride down (activity_travel_to_reach) is ungated on the
+# seal, so there is no stranding at either end.
 [[canvases.nodes]]
-id   = "riding_rise"
-name = "Up to the Rise"
+id   = "riding_covered"
+name = "Ride up"
 blocks = [
-  { type = "paragraph", content = "It is a walk and not a ride. Twenty floors of it stand up out of the low end of the Reach with eight of them lit and the rest open concrete, and a crane on the top that has not moved in the time it takes her to get there." },
-  { type = "paragraph", content = "The lobby is a desk, a man reading, and a lift that works. Nothing in the building is finished, and that includes whatever is supposed to stop her walking into it." },
+  { type = "paragraph", content = "She calls the car in a face that is not hers and the driver takes the fare without looking at it twice. The docks fall away behind her and the towers climb back up until the glass has the sky again." },
+  { type = "paragraph", content = "Across the plaza the second one is still going up. Twenty floors with eight of them lit and the rest open concrete, and a crane on the top that has not moved since somebody stopped paying for it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Go up."
+text = "Out at the plaza."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_rise_floor"
-time_progression_minutes = 10
+locationId               = "spire_plaza"
+time_progression_minutes = 30
 
 [[canvases.nodes]]
 id   = "riding_under"
@@ -191,7 +231,7 @@ time_progression_minutes = 10
 [[canvases]]
 id          = "activity_travel_from_gate"
 name        = "Take the car"
-description = "Wren-solo travel picker @ underworld_gate (rev 67b). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge."
+description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named + face_worn — and this is the picker that matters, because she sleeps at the cot and commutes from here."
 
 [canvases.trigger]
 location      = "underworld_gate"
@@ -204,18 +244,46 @@ id   = "base"
 name = "Take the car"
 blocks = [
   { type = "paragraph", content = "She gives the address of a door off the manifests and waits. The car comes down for her the way it came down before. No questions, no record of the fare. Up to the towers, or only as far as the docks." },
+  # ── beat_0147 (rev 198) — the same two exclusive bands the waterfront picker carries, and they matter MORE
+  # here: she sleeps at the cot, so this gate is the commute she actually takes. Different words, same states.
+  # ⚠️ Exclusive by construction (A needs rise_named is_false, B needs is_true) — adjacent [group] blocks merge
+  # into one if/elseif chain and first match wins, so overlapping bands would kill the second silently.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "The towers are still up there and every door in them is shut to her by name. She got out of that building carrying a flag with her prints on it, and the flag is the part that is still moving." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "There is a reason to go up now and she is wearing the wrong face for it. The bought one goes on at the cot and nowhere else, and it is a walk back through the gate to get it." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ── PRE-SEAL. show_when_locked and its locked_text are GONE (beat_0147): that line said the towers were "the
+# one place she can't go now", which stopped being true the moment the plaza re-opened on a bought face. The
+# post-seal states are answered by the two bands above instead.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_from_gate.riding_up"
-# THE ARCHIVE 1a seal (Phase 2): blown = no way back up to the Spire. Greyed-visible; the Reach ride below stays open.
-show_when_locked = true
-locked_text = "Not up there. The Spire's locked down over her — the towers are the one place she can't go now."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
+# ── POST-SEAL, IN COVER. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers
+# two rides up. Same three-clause gate as the waterfront picker; see the long note there for why each clause.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the plaza."
+targetType = "node"
+nodeId     = "activity_travel_from_gate.riding_up_covered"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
@@ -231,6 +299,25 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Ride up to the Plaza."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 30
+
+# ── riding_up_covered — beat_0147 (rev 198). Out of the freight door and straight up to the plaza.
+# ⚠️ NOT riding_up, which closes on "she's the company's problem to look at" — a line written for an asset
+# still on the books. Post-seal she rides up as nobody, which is the whole point of the 120 coin.
+# 30 min, no Charge, matching riding_up.
+[[canvases.nodes]]
+id   = "riding_up_covered"
+name = "Ride up"
+blocks = [
+  { type = "paragraph", content = "The freight door shuts behind her and the red light goes with it. The car climbs out of the dark, past the docks, up until the glass takes the sky again, and nobody at the top of it is looking for the woman who gets out." },
+  { type = "paragraph", content = "Across the plaza the second tower is still going up. Eight floors lit, the rest open concrete, and a crane on the top that has not moved in a while." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out at the plaza."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "spire_plaza"
@@ -3038,6 +3125,268 @@ destinationType = "specific"
 locationId      = "the_cot"
 
 # ═══ activity_bar_change — beat_0116 (rev 167). The bathroom. Two garments, no browsing. ═══════════════
+# ═══ THE COT'S THREE UPKEEP CARDS — beat_0147 (rev 198) ═══════════════════════════════
+# WHY THESE EXIST. The Archive 1a seal cut 25 repeatable Spire canvases. Most were rebuilt down here as the
+# chapter went on — charging became the cot's feed line (kess_1b_open), canvas_chip_view became
+# canvas_chip_view_cot, the wardrobe moved (wardrobe_location is a scalar and already points at the_cot),
+# activity_swap_weapon got activity_swap_weapon_berth. THREE NEVER DID, and they were the three nobody
+# noticed because nothing hard-fails when they go:
+#
+#   • activity_wash    — THE ONLY +hygiene IN THE GAME. Eleven surfaces drain it 30 at a time; post-seal the
+#                        sidebar reads "Condition: Filthy" forever with no way to clear it. Nothing soft-locks
+#                        (the sole hygiene GATE is the Spire picker's own ride down, which she reaches by car),
+#                        but a one-way meter is worse than no meter.
+#   • activity_train   — fighting/stealth gate the good branches of the burned-yard crawl and the yard SURVIVES
+#                        the seal. She can still crawl it; she could never train for it again.
+#   • activity_repair_weapon — find the emitter late, miss a session before the seal, and arousal_weapon_ready
+#                        never sets. That weapon is dead permanently, with a green build.
+#
+# ⚠️ GATED berth_home AND NOT opening_done. berth_home is set by kess_1b_open, which needs archive_1a_done
+# — so these can NEVER co-exist with the wren_room originals, in any save, in either direction. No collision,
+# no double card, and no need to touch the shipped three. version="1.0" or the gates fail OPEN.
+# ⚠️ NEW PROSE, NOT COPIES, WHEREVER THE ROOM IS IN THE WORDS. The Spire versions are set in an asset's
+# private quarters ("The floor's empty, the door shut. No one watches an asset in its own quarters"). Here she
+# is on a rented cot in a working breaking-dock with Kess forty feet away. The location-neutral tier bodies
+# (the combat forms, the two repair passes) are the same woman doing the same thing and are reused as-is; every
+# line that named the room is rewritten.
+# MEDIA: none new — these are bench-and-body surfaces and the cot's own art carries them.
+
+# ── Wash — the tap the cot's description already promises ("a tap spliced off the same feed line"). ─────
+[[canvases]]
+id          = "activity_wash_cot"
+name        = "Wash up"
+description = "beat_0147 (rev 198). Wren-solo @the_cot. Repeatable, pri 3, gated berth_home is_true. The post-seal rebuild of activity_wash, which died with wren_room and was the ONLY +hygiene surface in the game. Restores hygiene to 100 (clamped), 30 min, no coin — the water is off the feed line she already pays Kess for, so charging twice for one bill would be the upkeep meter eating itself. Cannot co-exist with activity_wash: berth_home requires archive_1a_done, which is what killed wren_room."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Wash up"
+blocks = [
+  { type = "paragraph", content = "There is a tap past the hull and a drain in the concrete under it, and the water comes off the same line that charges her. She strips in a working dock with Kess forty feet off and his back turned, and gets the day off standing up. Cold the whole way through, and hers." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off. Dressed."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 100, clamp = true },
+]
+
+# ── Drill — same soft caps as the shipped card (+3 under 30, +1 from 30–50), same 15 energy, same 120 min.
+# ⚠️ THE STEALTH CHOICES KEEP yard_caught_once. She learns to be quiet because the yard caught her once;
+# that reason did not move when the bed did, and dropping it would hand her the drill before the lesson.
+[[canvases]]
+id          = "activity_train_cot"
+name        = "Drill"
+description = "beat_0147 (rev 198). Wren-solo @the_cot. Repeatable, pri 3, gated berth_home is_true. The post-seal rebuild of activity_train, which died with wren_room. Combat/Stealth drills, 15 energy + 120 min, soft cap +3 under 30 and +1 from 30-50; stealth still gated yard_caught_once. Matters because fighting/stealth gate the burned-yard crawl's better branches and the yard outlives the seal — without this she can walk into the yard forever and never improve at it."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Drill"
+blocks = [
+  { type = "paragraph", content = "Concrete floor, a stripped hull for a wall, and nobody down here who minds what she does with an hour. She drills the body they built out of her in a yard that takes machines apart for a living. Kess does not look up once." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Combat drill — early band (+3 while < 30)
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train_cot.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 30 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 3 }]
+
+# Combat drill — plateau band (+1 while 30–50)
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train_cot.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
+
+# Stealth drill — early band (+3 while < 30)
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train_cot.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 30 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 3 }]
+
+# Stealth drill — plateau band (+1 while 30–50)
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train_cot.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Enough for now."
+targetType = "location"
+locationId = "the_cot"
+
+# Combat result — the shipped tier bodies, which name no room and needed none. Exit burns the 120 min.
+[[canvases.nodes]]
+id   = "combat"
+name = "Combat drill"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She runs the forms against the empty air. Strikes, breaks, the throw that ends a man. Her body obeys a half-beat slow, the way a tool obeys before it's been worked hard. Clumsy still. But the half-beat is shorter than it was yesterday." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "No hesitation now. The forms come fast and flat and final. Strike, break, the throw. Each one lands where a throat or a knee would be. Whatever they built her for, this wasn't on the spec. She's better than the file says. She keeps that to herself." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Rack it. Catch your breath."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 120
+
+# Stealth result — the high band is REWRITTEN: the shipped one moved "through her own quarters", and she has
+# not had quarters since the seal. The dock does the same job and does it better, because it is not hers either.
+[[canvases.nodes]]
+id   = "stealth"
+name = "Stealth drill"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She practices the small things. Weight rolled onto the outside of the foot, breath dropped low, the timing of a turned back. Her own joints betray her with a tick of sound she'd never have caught a week ago. She catches it now. That's the start of it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She moves the length of the dock and nothing registers her. No sound off the wet concrete, no shift of air, nothing for a camera to hold. A thing that can't be seen goes where it likes. She doesn't let the thought finish." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Ease off. Settle."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 120
+
+# ── Fix the emitter — 3 sessions, 15 energy + 120 min each, final one SETS arousal_weapon_ready. ──────
+# ⚠️ ON HER COT AND NOT ON KESS'S BENCH, AND HIS OWN RULE IS WHY: "you keep your hands off my gear"
+# (kess_1b_open). It is her weapon, so it is her lap. That also keeps it clear of salvage_repair_hub, which is
+# a different job on a different meter and is gated salvage_done is_false anyway.
+[[canvases]]
+id          = "activity_repair_weapon_cot"
+name        = "Fix the emitter"
+description = "beat_0147 (rev 198). Wren-solo @the_cot. Repeatable, pri 4, gated berth_home is_true + has_arousal_weapon is_true + arousal_weapon_ready is_false. The post-seal rebuild of activity_repair_weapon, which died with wren_room. Three sessions on weapon_repair 0-3, 15 energy + 120 min each; the last sets arousal_weapon_ready and arousal_charge 3. Without it, a player who finds the emitter in the burned yard late and does not finish all three passes before the seal owns a weapon that can never be repaired, with a green build."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "berth_home",           operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "has_arousal_weapon",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Fix the emitter"
+blocks = [
+  { type = "paragraph", content = "The emitter comes out of her bag and onto the flat of the cot, casing off, guts open. Kess's bench is twenty feet away and it is not hers to use. She knows the architecture of this thing the way she knows her own, because it is her own, scaled down to a handheld." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Work on it."
+targetType = "node"
+nodeId     = "activity_repair_weapon_cot.progress"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 2 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "weapon_repair", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Finish it."
+targetType = "node"
+nodeId     = "activity_repair_weapon_cot.done"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 3 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "weapon_repair", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "set", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "arousal_weapon_ready", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it for now."
+targetType = "location"
+locationId = "the_cot"
+
+[[canvases.nodes]]
+id   = "progress"
+name = "Coming together"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "She straightens the field coils, one pass, and tests the draw. Dead still. Cleaner dead than it was. More to do." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "gte", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "Driver reseated, coils true. It draws a charge now and holds it. A flicker of the field crossing her own skin, the faint unwanted warmth of it. Almost. One more pass and it fires." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Set it down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 120
+
+[[canvases.nodes]]
+id   = "done"
+name = "It fires"
+blocks = [
+  { type = "paragraph", content = "Last pass. She powers it and the field comes up clean, a low hum she feels in her teeth. She tests it on herself a half-second too long and gets a heat low in her belly she didn't ask for. She shuts it off fast. It works. A second weapon now, hers, that the company never issued and cannot take back." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stow it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 120
+
 # Wren-solo @underworld_bar_bathroom. Repeatable, pri 3, gated bar_rung gte 3.
 # ⚠️ THIS IS NOT A SECOND WARDROBE. wardrobe_location is a scalar and stays at the_cot, where her own things
 # are and where the four equipped-based undress portraits fire. This is two `equip` effects behind two
@@ -3231,8 +3580,8 @@ time_progression_minutes = 90
 # guard, it is the stairs.
 [[canvases]]
 id          = "activity_leave_the_rise"
-name        = "Back down to the Reach"
-description = "beat_0129 (rev 179). The guaranteed exit from the_rise_floor. Repeatable, pri 1, UNCONDITIONAL — the room is nav-invisible and every other surface on the floor is gated, so without this a hired player in full cover at the wrong hour has an empty page. Exits to the_waterfront, 10 min on foot."
+name        = "Back down to the plaza"
+description = "beat_0129 (rev 179), RE-POINTED at beat_0147 (rev 198). The guaranteed exit from the_rise_floor. Repeatable, pri 1, UNCONDITIONAL — every other surface on the floor is gated, so without this a hired player in full cover at the wrong hour has an empty page. Exits to spire_plaza (was the_waterfront, before the building moved into the Spire district), 10 min."
 [canvases.trigger]
 location      = "the_rise_floor"
 is_repeatable = true
@@ -3247,10 +3596,13 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down to the road."
+text = "Out onto the plaza."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+# ⚠️ beat_0147 (rev 198) — WAS the_waterfront. The Rise moved into the Spire district, so leaving it has to put
+# her back on spire_plaza; the old target teleported her from the towers to the docks in ten minutes. This is
+# the mandatory half of the move — entry_from on the_rise_floor is the other.
+locationId               = "spire_plaza"
 time_progression_minutes = 10
 
 # ── work_the_archive — the day job. Repeatable, pri 3, capped 1/day. ──────────────────────────────────
