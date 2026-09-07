@@ -2170,9 +2170,15 @@ auto_exit   = false
 # entry_from here would have parked a greyed "The Floor" on the Waterfront grid from the game's first hour.
 # ⚠️ auto_exit = false IS THE OTHER HALF. A nav-invisible room builds its grid from children, has none, and
 # an empty navigation_html trips the list-every-location FALLBACK (v2.py:19386). Both halves or neither.
-# ⚠️ THE WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated
-# rise_named. THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that
-# every nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
+# ⚠️ CORRECTED beat_0153 (rev 204) — THIS PARAGRAPH DESCRIBED A ROUTE THAT NO LONGER EXISTS. It read "THE
+# WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated rise_named", and
+# that express (riding_rise) was DELETED by beat_0147 in the same commit that gave this location
+# entry_from = spire_plaza. The way in is a NAV CARD off the plaza, and it carries NO entry_conditions, so
+# it is live the instant the plaza is reachable. That is why the rise_named gate has to live on the ROAD to
+# the plaza and cannot move onto this location: a locked location always renders a GREYED card and there is
+# no hide path, so gating here would park the promise on the plaza instead of hiding it.
+# ⚠️ THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that every
+# nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
 [[locations]]
 id          = "the_rise_floor"
 name        = "The Floor"
@@ -2716,7 +2722,7 @@ time_progression_minutes = 30   # rev 67: time only — no Charge cost on the ca
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car"
-description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named + face_worn. The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
+description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named alone (face_worn cut at beat_0153 — enforced by react_rise_no_face on the floor instead). The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -2744,12 +2750,16 @@ blocks = [
       { type = "paragraph", content = "Up to the towers is not a road any more. Vance's doors up there are keyed to a woman she is not dressed as, and the flag she set off in that vault is still climbing to the man at the top of them." },
   ] },
   # ── BAND B — she has somewhere to go and is standing in the wrong face. Guidance: the face comes on at the cot.
+  # ⚠️ IT IS A WARNING AND NO LONGER A REFUSAL — beat_0153 (rev 204). The ride up stopped being gated on
+  # face_worn, so this band now prints BESIDE a live "Ride up to the plaza." A paragraph that says she cannot
+  # go while the menu offers the ride is the coat-label defect again, so the prose states the RISK and lets
+  # her take it. The bounce is real and it is one layer in: react_rise_no_face turns her round on the floor.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "She could take the car up. Not in this face. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
+      { type = "paragraph", content = "She could take the car up in this face and get as far as a desk. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -2768,13 +2778,24 @@ nodeId     = "activity_travel_to_spire.riding_spire"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-# ── POST-SEAL: the ride back up, in somebody else's face. beat_0147 (rev 198), LO's call.
-# ⚠️ THREE CLAUSES AND EACH ONE EARNS ITS PLACE. archive_1a_done is_true makes this and the choice above
-# MUTUALLY EXCLUSIVE by construction, so the menu never shows two ways up. face_worn because riding up as
-# herself is suicide and the game has said so since beat_0116. rise_named because without it a greyed "The
-# Rise" card would sit on the plaza for the whole first half of this release, promising content — gating the
-# ROAD on Grier naming the place makes that window ZERO and keeps his mouth as the telegraph, which is what
-# §6 wanted. version="1.0" or the gate fails OPEN.
+# ── POST-SEAL: the ride back up. beat_0147 (rev 198); face_worn clause CUT at beat_0153 (rev 204).
+# ⚠️ TWO CLAUSES NOW. LO cut the third after playing it: "i didnt want it to go away. But the nested
+# locations inside it can be locked." He is right, and the plaza was already built that way —
+# vance_securities and penthouse each close on archive_1a_done and are shut post-seal on their OWN gates.
+# The road was never what protected them; all it did was make the district unreachable for a whole chapter.
+# ⚠️ WHAT face_worn WAS DOING, AND WHERE IT WENT — one layer in, onto a card that was already built for it.
+# react_rise_no_face (5_scenes) is repeatable at pri 9 on the_rise_floor, gated cover_research EQUIPPED +
+# face_worn is_false: "the kit without the face is the company's own asset walking into a Vance building in
+# a costume." It bounces her to the_waterfront. A player who rides up in the wrong face now gets TOLD, in
+# the building, instead of finding a road that never appears. The suicide line from beat_0116 stands; it is
+# enforced at the door rather than at the kerb.
+# ⚠️ rise_named STAYS AND IT IS THE CLAUSE THAT CANNOT MOVE. the_rise_floor carries entry_from = spire_plaza
+# and NO entry_conditions, so it is a LIVE nav card the instant the plaza is reachable. Gating the location
+# instead would not hide it — a locked location always renders a GREYED card and there is no hide path
+# (_render_location_nav_card, v2.py:19829) — so the promise would sit on that plaza for the whole first half
+# of the release. Gating the ROAD on Grier's mouth makes that window ZERO, which is what §6 wanted.
+# ⚠️ archive_1a_done is_true still makes this and the choice above MUTUALLY EXCLUSIVE by construction, so the
+# menu never shows two ways up. version="1.0" or the gate fails OPEN.
 # ⚠️ THE PLAZA IS NOT THE TOWER. This lands her on the public level and nothing else opens with it: wren_floor,
 # penthouse, vance_securities and docs_vault are all locked door-by-door in 1_metadata, and wren_floor's lock
 # seals wren_room and the cradle behind it (which is what keeps Kess's rent alive).
@@ -2785,7 +2806,6 @@ nodeId     = "activity_travel_to_spire.riding_covered"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
@@ -2868,7 +2888,7 @@ time_progression_minutes = 10
 [[canvases]]
 id          = "activity_travel_from_gate"
 name        = "Take the car"
-description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named + face_worn — and this is the picker that matters, because she sleeps at the cot and commutes from here."
+description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named alone (face_worn cut at beat_0153) — and this is the picker that matters, because she sleeps at the cot and commutes from here."
 
 [canvases.trigger]
 location      = "underworld_gate"
@@ -2896,7 +2916,7 @@ blocks = [
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "There is a reason to go up now and she is wearing the wrong face for it. The bought one goes on at the cot and nowhere else, and it is a walk back through the gate to get it." },
+      { type = "paragraph", content = "There is a reason to go up now and she is wearing the wrong face for it. The car will still take her. The bought one goes on at the cot and nowhere else, and it is a walk back through the gate to get it." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -2911,8 +2931,10 @@ nodeId     = "activity_travel_from_gate.riding_up"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-# ── POST-SEAL, IN COVER. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers
-# two rides up. Same three-clause gate as the waterfront picker; see the long note there for why each clause.
+# ── POST-SEAL. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers two
+# rides up. Same TWO-clause gate as the waterfront picker (face_worn cut at beat_0153); see the long note
+# there. ⚠️ THIS IS THE PICKER THAT MATTERS: she sleeps at the cot and commutes from this gate, so the face
+# clause was cutting her daily route, not an occasional one.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the plaza."
 targetType = "node"
@@ -2920,7 +2942,6 @@ nodeId     = "activity_travel_from_gate.riding_up_covered"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
@@ -19489,10 +19510,16 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
+# ── THE WAY OFF THE HUB — beat_0150 (rev 201). SAME EDIT AS hub_grier, SAME REASON. ──────────────────
+# ⚠️ IT WAS "Back out to the bar." -> underworld_bar AT ZERO MINUTES. Getting in through the door costs 15
+# (:12620) and the room card costs 15, so this was the free route out of the Undertow. Now the building
+# always costs 15 and only the conversation is free.
+# ⚠️ IT COULD NOT BE DELETED — the sub-nodes exit to bastien_backroom, so a base node with no exit seals
+# the player inside the canvas. "Get dressed." already exits to bastien_backroom; this is that pattern.
 [[canvases.nodes.exit_block.choices]]
-text       = "Back out to the bar."
+text       = "Step away."
 targetType = "location"
-locationId = "underworld_bar"
+locationId = "bastien_backroom"
 
 # ── talk — the standing feel. A block_pool, the shipped hub_mercer_room.talk shape. ─────────────────────
 # ⚠️ REWRITTEN WHOLESALE at beat_0101. He has never met her, so nothing here can reference the cell.
@@ -20790,32 +20817,32 @@ text       = "The old machinist has a piece of your childhood in a drawer and no
 tip        = "His room is off the lane in the Reach and he is in it from ten in the morning. Sit with him, or take a bottle down from the Anchor and drink with him. The bottle is faster and it costs twenty a time."
 when = [
   { flag  = "grier_met", op = "is_true" },
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt", value = 12 },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt", value = 10 },
 ]
 goals = [
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 12, label = "Get him used to you" },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 10, label = "Get him used to you" },
 ]
 
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_grier"
 text       = "He has stopped watching the door when it opens. He gives instructions now and he expects them followed, and he has still not been decent about one minute of it. That is the deal and it was never going to be a different one."
-tip        = "Go and stand between his knees when he tells you to. Keep drinking with him and keep climbing. The last rung on his portrait is the one that opens the drawer."
+tip        = "Keep taking a bottle down and keep climbing. Lean over him when you pour and he pays the most for it. The last rung on his portrait is the one that opens the drawer."
 when = [
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 12 },
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt",  value = 20 },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 10 },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt",  value = 14 },
 ]
 goals = [
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 20, label = "Get all the way up" },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 14, label = "Get all the way up" },
 ]
 
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_grier"
-text       = "The wall is his and it is nine years old. He can be worked all night and get nowhere, and he is sour about that too, and he has watched better than you try. Three nights of it is what it takes. A bottle now puts one of those nights back."
-tip        = "Take him whenever he is in. Let him have the rest of it, work him up, and take the finish in your ass. That is the only one that drains. Leave the bottle at the bar on the nights that matter."
+text       = "He lets you into the room now and he is sour about every minute of it, and that is the deal you made. What you came down the lane for is six feet from his chair, in a drawer full of fuses, and to him it is a dud part he gave up on in the second year. There is one way to get at what a man carries, and you have used it on better men than him."
+tip        = "Take him whenever he is in. Let him have the rest of it, work him up, and take the finish in your ass. That is the only one that drains. Carry the drain itself, charged, before you walk down there. The emitter is the wrong tool for this."
 when = [
-  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 20 },
+  { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 14 },
   { trait = "grier_drains_done", subject = "player", op = "lt", value = 1 },
 ]
 goals = [
@@ -20919,28 +20946,46 @@ when = [
 # ⚠️ THE FINISHER'S EXIT IS DELIBERATELY LEFT ALONE. Returning to the room is the HOUSE PATTERN for every
 # loop in the game — Renner to renner_depot, Calloway to vance_securities, Mercer to penthouse. The
 # difference was never the exit; it was that all of those rooms have a nav grid and this one does not.
+# ⚠️ AND THAT DIAGNOSIS WAS RIGHT AND THE FIX WAS HALF — corrected at beat_0150 (rev 201), the same edit
+# made to grier_room_offhours in the same beat. A guard gated on the NPC being ABSENT covers the dead room
+# and leaves the LIVE one exactly as it was: through his whole 20:00-23:59 window the room page carried a
+# portrait and no exit, and the only way out of the building was inside hub_bastien's menu. The room needs
+# an exit in BOTH states, so the gate is gone and the prose is banded instead.
+# ⚠️ THE ROOM PAGE DOES RENDER. selectAutoFireCanvasForLocation skips repeatable canvases outright
+# (v2.py:4695), so hub_bastien never takes the page over — it is a portrait on a page whose navigation div
+# is empty. This card is a solo canvas (no npcId) and renderSoloActivities puts it on that same page.
+# ⚠️ THE IMAGE STAYS FIRST AND OUTSIDE THE BANDS. It is the room, true in both states, and keeping it out
+# leaves the two [group] blocks ADJACENT so they merge into one if/elseif chain (v2.py:15077).
+# ⚠️ THE NAME IS THE CARD LABEL (v2.py:11829) and had to stop being "after he has gone".
 # MEDIA: reuses locations/bastien_backroom.jpg — the room, which is what this beat is about.
 [[canvases]]
 id          = "bastien_backroom_offhours"
-name        = "The room after he has gone"
-description = "beat_0114 (rev 165). DEAD-ROOM GUARD @bastien_backroom, and a SOFT-LOCK FIX found by LO in play. Repeatable, pri 1, gated npc_at_location bastien_backroom/npc_bastien/is_absent. The room is nav-invisible (no entry_from, auto_exit false) so its built passage has an EMPTY navigation div, and its only exit is hub_bastien's rung — a PORTRAIT hub that renders only while he is present, 20:00-23:59. Every action inside spends that 240-minute window (door search +15, talk +30, facial/inside finish +60), so a player who finishes late is sealed in with no link on the page. Shape copied exactly from mercer_room_offhours / berth_offhours. Exits to underworld_bar."
+name        = "Out through the bar"
+description = "beat_0114 (rev 165), UNGATED at beat_0150 (rev 201). THE ROOM'S OWN EXIT @bastien_backroom. Repeatable, pri 1, no conditions. The room is nav-invisible (no entry_from, auto_exit false) so its built passage has an EMPTY navigation div, and hub_bastien is a repeatable portrait hub that never auto-fires — so the room page renders every visit and this solo card is the only exit on it. Was gated npc_bastien is_absent, which hid the card for the whole of his 20:00-23:59 window. Two bands on his presence. Exits to underworld_bar, 15 min."
 [canvases.trigger]
 location      = "bastien_backroom"
 is_repeatable = true
 priority      = 1
 is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  # ⚠️ version = "1.0" or the condition FAILS OPEN and this renders while he is standing in the room.
-  { type = "npc_at_location", location_id = "bastien_backroom", npc_id = "npc_bastien", operator = "is_absent" },
-] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The room after he has gone"
+name = "Out through the bar"
 blocks = [
   { type = "image", props = { file = "locations/bastien_backroom.jpg", description = "A private back room behind a bar — a desk with nothing on it, a good chair set to see the door, better furniture than the room deserves.", search_queries = ["private back room behind bar desk armchair dim", "noir speakeasy office low light leather chair"] } },
-  { type = "paragraph", content = "The chair that sees the door is empty and the lamp over the desk is off. He goes when he goes and he does not say so, and nobody who works here has ever been told where." },
-  { type = "paragraph", content = "The door onto the bar is on the latch from this side. That is the only courtesy the room has ever shown her. She lets herself out through a room with the stools up on the tables." },
+  # BAND 1 — he is at the desk. The bar out front is still open and the stools are still down.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "bastien_backroom", npc_id = "npc_bastien", operator = "is_present" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is at the desk with the lamp on and does not look up when she goes. The door onto the bar is on the latch from this side, the way it always is, and the stools are down." },
+  ] },
+  # BAND 2 — the shipped pair, unchanged. Out of window, and the room is dead.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "bastien_backroom", npc_id = "npc_bastien", operator = "is_absent" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The chair that sees the door is empty and the lamp over the desk is off. He goes when he goes and he does not say so, and nobody who works here has ever been told where." },
+    { type = "paragraph", content = "The door onto the bar is on the latch from this side. That is the only courtesy the room has ever shown her. She lets herself out through a room with the stools up on the tables." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -21396,22 +21441,30 @@ flagEffects = [
 # block carries no conditions, so it would render on top of EVERY band. It cannot be wrapped in its own
 # lt 6 group either — adjacent [group] blocks merge into ONE if/elseif chain and first match wins. This is
 # the beat_0122 trap that hit hub_colm_undertow's establishing image (:9851), one hub over.
-# ⚠️ THE BAND EDGES ARE THE UNLOCKS — 4 / 12 / 20 at beat_0143, was 6 / 12 / 20 — so the prose changes on
-# the same visit a new choice appears. 6 stopped being an unlock when the look rung was cut; 4 is the tease.
-# The flash at 10 sits inside band 2 and explains itself through its own locked_text. Prose only, no image blocks: the shipped base carried none and the media debt belongs on
-# the rungs, where there is something new to see.
+# ⚠️ THE BAND EDGES ARE THE UNLOCKS — 4 / 10 / 14 at beat_0151, was 4 / 12 / 20, was 6 / 12 / 20 — so the
+# prose changes on the same visit a new choice appears. 6 stopped being an unlock when the look rung was
+# cut at beat_0143; 12 stopped being one when the hands rung was cut at beat_0151. What is left is 4 (the
+# tease opens), 10 (the flash opens) and 14 (the knees rung opens), and every one of the three is a thing
+# the player has not seen. Prose only, no image blocks: the shipped base carried none and the media debt
+# belongs on the rung, where there is something new to see.
+# ⚠️ BAND 3 IS THE ONE THE CUT NEARLY BROKE. It ended on "Come here. Stand where I can reach you." — the
+# order the hands rung answered. An order with no answering choice is the coat-label defect one layer up,
+# so the line was re-pointed at the bottle. Read a band's LAST line against the exit block before moving
+# any edge on this hub; three of the four bands end on an instruction.
 # ⚠️ EVERY RUNG EXITS TO the_waterfront, LIKE THE SHIPPED sit RUNG. Not back into the room. One rung per
-# trip is what makes card W's "as many afternoons as it takes" true; letting her chain all four in one
-# visit would collapse the whole ladder into a single afternoon.
-# ⚠️ THRESHOLDS 6/12/20 ARE KINDER THAN COLM'S 12/24 ON PURPOSE — his room costs a 30-minute walk each way
-# that the Undertow does not, and the genre's disease is lostness plus grind (the mopoga read).
-# MEDIA: one slot (scenes/grier_hands.jpg) and one pool — scenes/grier_look.jpg RETIRED with its rung at
-# beat_0143, and it comes off beat_0141's list.
+# trip is what makes card W's "as many afternoons as it takes" true; letting her chain them in one visit
+# would collapse the whole ladder into a single afternoon.
+# ⚠️ THRESHOLDS ARE KINDER THAN COLM'S 12/24 ON PURPOSE — his room costs a 30-minute walk each way that the
+# Undertow does not, and the genre's disease is lostness plus grind (the mopoga read). beat_0151 made them
+# kinder again by necessity: cutting the free +4 doubled the back half of the climb at the sit rung's +2,
+# so the top gate came down to 14 rather than leave ten relation points with nothing new in them.
+# MEDIA: one pool — scenes/grier_look.jpg RETIRED with its rung at beat_0143 and scenes/grier_hands.jpg
+# RETIRED with its rung at beat_0151. Both come off beat_0141's list.
 # (sex/grier_room_oral_t4). One asset, one block.
 [[canvases]]
 id          = "hub_grier"
 name        = "Grier"
-description = "beat_0124 (rev 174), rungs added beat_0125 (rev 175), WHOSE HAND. Grier's standing portrait hub @grier_room. Repeatable, pri 4, npc + requires_npc = npc_grier, gated grier_met is_true. NO day cap — the 30-minute walk plus his hours are the throttle. THE LADDER RUNS ON PLAIN relation, no counter trait. TWO TRACKS: what SHE does, inside the drink (just drink +2 / the coat at gte 4, +3 / the pour at gte 10, +4, all needing a bottle), and what HE does, on the rungs (sit ungated +2 / his hands at gte 12, +4 / her knees at gte 20, +4, SETS grier_opened_up). The old look rung was cut at beat_0143: its scene was her opening her coat under a bulb, which is the flash, one visit later. Base banded four ways on the same axis. It runs on spite, not desire — he is rude the whole way up and it never turns into affection. The knees rung is the first explicit surface and HE DOES NOT FINISH; the wall is content here before it is a mechanic at beat_0126."
+description = "beat_0124 (rev 174), rungs added beat_0125 (rev 175), WHOSE HAND. Grier's standing portrait hub @grier_room. Repeatable, pri 4, npc + requires_npc = npc_grier, gated grier_met is_true. NO day cap — the 30-minute walk plus his hours are the throttle. THE LADDER RUNS ON PLAIN relation, no counter trait. TWO TRACKS: what SHE does, inside the drink (just drink +2 / the glass at gte 4, +3 / the pour at gte 10, +4, all needing a bottle), and what HE does, on the rungs (sit ungated +2 / her knees at gte 14, +4, SETS grier_opened_up). TWO RUNGS CUT: look at beat_0143 (its scene was her opening her coat under a bulb, which is the flash one visit later) and hands at beat_0151 (a free repeatable +4 that set no flag, closed on nothing, and would have sat beside the loop for the rest of the game). Base banded four ways on the same axis. It runs on spite, not desire — he is rude the whole way up and it never turns into affection. The knees rung is the first explicit surface and HE DOES NOT FINISH; the wall is content here before it is a mechanic at beat_0126."
 [canvases.trigger]
 location      = "grier_room"
 requires_npc  = "npc_grier"
@@ -21436,25 +21489,34 @@ blocks = [
     { type = "paragraph", content = "He does not tell her to get out again. He does not ask her to sit down either. She comes in, and he keeps drinking, and the afternoon goes past at the pace of a man who has nowhere to be in it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Door was open. Door is always open. Nothing in here worth the walk, which you will work out on your own eventually." },
   ] },
-  # BAND 2 — 4 to 11. He has stopped watching the door. The looking starts here.
+  # BAND 2 — 4 to 9. He has stopped watching the door. The looking starts here.
+  # ⚠️ UPPER EDGE 12 -> 10 AT beat_0151. 12 was the hands gate and stopped being an unlock when that rung
+  # was cut; 10 is where the flash opens inside the drink. Same move band 1's edge made at beat_0143.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 4  },
-      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 10 },
     ] } }, blocks = [
     { type = "paragraph", content = "She has been in that chair enough times now that he stops watching the door when it opens. He does not say hello. He pours, and he looks at her over the top of it for longer than he used to." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years I have not had one of you in a room. Forgot how still you sit. Nothing on you moves unless you decide it moves. Bring the bottle over here when you pour it. I am not getting up for it and you are already halfway across." },
   ] },
-  # BAND 3 — 12 to 19. Proprietary. He gives instructions now and expects them followed.
+  # BAND 3 — 10 to 13. Proprietary. He gives instructions now and expects them followed.
+  # ⚠️ THE LINE CHANGED AT beat_0151 AND THAT IS THE WHOLE REASON THE CUT WAS FIVE EDITS AND NOT ONE. The
+  # shipped line ended "Come here. Stand where I can reach you." — a direct order, and the choice that
+  # answered it was the hands rung. Cut the rung and he gives an instruction the menu cannot obey, which is
+  # the coat-label defect again one layer up: the prose says one thing and the exit block offers another.
+  # The order is now pointed at what IS on this menu in this band — the bottle she carries and never drinks.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 12 },
-      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 10 },
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 14 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has stopped pouring by the time she is through the door. The bottle stays on the arm of the chair and he sits forward with his forearms on his knees, looking at her the way a job comes up the bench." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You keep coming back to a man with nothing. You want something, you are not getting it, and you keep coming back anyway. I have decided I do not care why. Come here. Stand where I can reach you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You keep coming back to a man with nothing. You want something, you are not getting it, and you keep coming back anyway. I have decided I do not care why. Pour mine and put the cap back on yours. You never drink it and I have stopped pretending I have not noticed." },
   ] },
-  # BAND 4 — gte 20. She is a thing he is used to. He does not get up and he does not ask.
+  # BAND 4 — gte 14. She is a thing he is used to. He does not get up and he does not ask.
+  # ⚠️ LOWER EDGE 20 -> 14 AT beat_0151, tracking the knees gate down. This band is the ORDER band and it
+  # must open on the same number the rung it orders opens on, or "Coat." prints with nothing under it.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 14 },
     ] } }, blocks = [
     { type = "paragraph", content = "He does not get up any more and he does not ask her anything. The chair is where he wants her and they both know it, and the only thing he says when she comes through the door is what he wants doing." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Coat." },
@@ -21487,18 +21549,24 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key  = "bottle_held",     operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key   = "grier_opened_up", operator = "is_false" },
 ] }
-# ── THE BOTTLE AFTER THE LADDER (beat_0144) — THE ONE CHOICE IN THIS GAME WITH A REAL COST. ───────────
+# ── THE BOTTLE AFTER THE LADDER (beat_0144, repointed beat_0152) — WHAT AN HOUR OF HIM COSTS. ─────────
 # ⚠️ IT EXISTS BECAUSE THE DRINK WAS A DEAD BUTTON. Nothing on this man reads relation above 20 (the knees
 # rung is the highest gate in the game on npc_grier), so once grier_opened_up is set the old drink choice
 # charged 20 coin to move a number no condition, cost or quest goal ever looks at. Audited and found at
 # rev 195; §22.10 had deferred the content that gives it a meaning and this is that content.
 # ⚠️ THE WARNING IS IN THE LABEL, so it can never be a trap. The player is told what it costs before the
 # click, which is the same contract as "Buy a bottle. (20 coin.)" and the opposite of a hidden penalty.
-# ⚠️ IT SUBTRACTS A NIGHT. The wall runs on grier_nights: loop_grier_finisher's first band catches every
-# elected finish while it is lt 3, and each of wall1/wall2/wall3 bumps it. A bottle puts one back. That is
-# §8's own logic charged to the player — nine years of drink is why he cannot finish, and she has been
-# carrying the last month of it down the lane herself.
-# ⚠️ NO NEW TRAIT AND NO daily_tick ENTRY. The counter already exists and already means exactly this.
+# ⚠️ IT USED TO SUBTRACT A NIGHT AND NOW IT BUYS A CONFESSION — beat_0152 (rev 203). The wall ran on
+# grier_nights and this choice put one back, which was §8's logic charged to the player. LO cut the wall, so
+# the effect had nowhere to land and this choice was a dead button for the second time in its life (that is
+# exactly what beat_0144 built it to stop being). It is not deleted: it inherits wall2's two lines — eleven
+# years with his hands inside things like her, and nobody poured it down him — which needed a drunk man
+# talking and never needed a failed fuck. The twenty coin now buys the only characterisation of Grier that
+# grier_drain_canvas.d0 does not deliver.
+# ⚠️ IT DEPOSITS NOTHING, KNOWINGLY. gates.py's "what a paid repeatable leaves behind" lint counts this; it
+# is a lint and not a gate, and its own reference text says a pure sink is not a defect. The alternative was
+# +relation, but nothing on this man reads relation above 14, so that would be a number moved for the
+# instrument rather than for the player. The deposit here is the content.
 [[canvases.nodes.exit_block.choices]]
 # ⚠️ NO show_when_locked ON THIS ONE, AND THAT IS THE ENGINE AND NOT A PREFERENCE. The locked branch fires
 # when the WHOLE `AND` fails, so an exclusive PAIR that both grey out prints two reasons in every state —
@@ -21513,18 +21581,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key  = "bottle_held",     operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key   = "grier_opened_up", operator = "is_true" },
 ] }
-# ── RUNG 2 (beat_0125) — he handles her. Not a stroke, a check, and he names it in shop terms. ──
-# ⚠️ RELABELLED AT beat_0142. "Let him put his hands on you" is permission granted to a man who has not
-# asked; band 3 of the base node now has him asking, and the label is a bare physical action, her answer.
-# ⚠️ THIS IS RUNG 1 NOW. The look rung above it was cut at beat_0143 and the numbering closed up.
-[[canvases.nodes.exit_block.choices]]
-text       = "Go and stand between his knees."
-targetType = "node"
-nodeId     = "hub_grier.hands"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 12 },
-] }
-# ── RUNG 3 (beat_0125) — the first explicit rung, AND THE WALL. Sets grier_opened_up.
+# ── THE ONLY RUNG (beat_0125, was RUNG 3) — the first explicit surface, AND THE WALL. Sets grier_opened_up.
+# ⚠️ GATE PULLED 20 -> 14 AT beat_0151 WITH THE hands RUNG CUT. The edges of this ladder are its unlocks and
+# nothing else (band 2's comment says so in as many words), so removing an unlock has to close the gap it
+# leaves rather than leave ten relation points of repeat visits standing between the flash and this. The
+# surviving unlocks are 4 / 10 / 14 and every one of them opens something the player has not seen.
+# ⚠️ SAFE TO RE-GATE. grier does not exist in releases/v0.2.0.html — 0 occurrences of hub_grier, npc_grier,
+# grier_room or the bare name — so no shipped save has ever carried a relation on this man.
 # ⚠️ RE-GATED AT beat_0126 WITH grier_opened_up is_false, AND THE NODE IS NOT DELETED. This is the FIRST
 # explicit night and nothing else; once it has happened, loop_grier_room is the surface and two competing
 # oral rungs on one portrait would only split the player's attention — one of them carrying the wall and one
@@ -21535,15 +21598,16 @@ text       = "Get down in front of him."
 targetType = "node"
 nodeId     = "hub_grier.knees"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation",  operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation",  operator = "gte", value = 14 },
   { type = "flag",  subject = "player", flag_key = "grier_opened_up", operator = "is_false" },
 ] }
 # ── THE LOOP ENTRY (beat_0126) — takes rung 3's place once the first night has happened. ──
 # ⚠️ THE FIVE-TRAIT RESET IS THE SHIPPED LOOP-ENTRY DISCIPLINE, verbatim from hub_colm_undertow's
 # "Take him in the back" (:9942) and Calloway's #7 rung. Without it a loop entered twice in one evening
 # starts at whatever pleasure and pose the last visit left behind, and the climax-elect is live on arrival.
-# ⚠️ NO relation CLAUSE BEYOND THE FLAG. grier_opened_up is only ever set at relation gte 20, so the rung
-# gate is already carried; a second clause here would be a second thing to keep in sync for no gain.
+# ⚠️ NO relation CLAUSE BEYOND THE FLAG. grier_opened_up is only ever set at relation gte 14 (20 before
+# beat_0151 cut the hands rung), so the rung gate is already carried; a second clause here would be a
+# second thing to keep in sync for no gain.
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him have the rest of it."
 targetType = "node"
@@ -21576,10 +21640,18 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "cain_absent_confirmed", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "third_located",         operator = "is_false" },
 ] }
+# ── THE WAY OFF THE HUB — beat_0150 (rev 201). IT STEPS BACK INTO THE ROOM, IT DOES NOT LEAVE. ────────
+# ⚠️ IT WAS "Leave him to it." -> the_waterfront AT ZERO MINUTES, AND THAT WAS FREE TRAVEL. Walking in
+# costs 30 (activity_go_to_grier), leaving by the room card costs 30 (grier_room_offhours), and this one
+# charged nothing — so the cheapest route out of the Reach ran through Grier's menu. Now the building
+# always costs 30 and only the conversation is free.
+# ⚠️ IT COULD NOT SIMPLY BE DELETED. Every sub-node on this hub exits to grier_room, so a base node with
+# no exit seals the player inside the canvas with no link on the page. drink_plain already exits to
+# grier_room, so the target is the shipped pattern and not a new one.
 [[canvases.nodes.exit_block.choices]]
-text       = "Leave him to it."
+text       = "Step away."
 targetType = "location"
-locationId = "the_waterfront"
+locationId = "grier_room"
 
 [[canvases.nodes]]
 id   = "sit"
@@ -21651,12 +21723,26 @@ nodeId     = "hub_grier.drink_plain"
 # ── THE TEASE — gated relation gte 4, which is TWO visits in and below every rung on the hub. ──
 # ⚠️ GREYED WITH A REASON, not hidden. Same discipline as the bottle itself: the ladder is the content and a
 # choice that silently appears teaches nothing. The locked_text describes the locked state.
+# ⚠️ REWRITTEN AT beat_0150 (rev 201) — THE RUNG WAS NOT A TEASE. It had her take her coat off and put it on
+# the chair back: she performed no act, he did all the work, and it was the only middle rung of a tease
+# ladder in this game carrying no media block. Three things came off the coat with it.
+#   (i)   THE LABEL LIED. It read "Let the coat fall open" while the prose put the coat over the chair —
+#         a leftover from the look rung cut at beat_0143, whose scene WAS the coat opening and which moved
+#         to the flash (design_whose_hand:2256). The label stayed behind and nothing re-read it.
+#   (ii)  IT PRE-SPENT BAND 4. At relation gte 20 the whole of Grier's line is "Coat." — an order. On the
+#         bottle path she had been doing it voluntarily since relation 4, so the order landed toothless.
+#   (iii) THE FLASH REFERENCED WEEKS THAT DID NOT EXIST — "You are doing that on purpose. HAVE BEEN FOR
+#         WEEKS." Nothing below it was deniable, so there were no weeks. This rung is now those weeks.
+# ⚠️ THE TWO RUNGS SPLIT ON DENIABILITY, NOT ON SKIN. Four seconds she can deny here; sustained and named
+# out loud at the flash. That is the escalation, and it is carried by the prose and the duration rather
+# than by the clip — the two pool descriptions must stay distinct at harvest or find-media returns the
+# same four clips twice.
 [[canvases.nodes.exit_block.choices]]
-text             = "Let the coat fall open."
+text             = "Keep bending down for your glass."
 targetType       = "node"
 nodeId           = "hub_grier.drink_tease"
 show_when_locked = true
-locked_text      = "He is still watching the door more than he is watching her. Nothing she did with a coat tonight would land on a man who has not decided she is furniture yet."
+locked_text      = "He is still watching the door more than he is watching her. She could bend double in that chair tonight and he would not look up off the bottle."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 4 },
 ] }
@@ -21696,14 +21782,27 @@ flagEffects = [
   { targetType = "player", flag = "grier_drank_with", op = "set" },
 ]
 
-# ── drink_tease — +3. The coat, and he covers the looking with a criticism. ───────────────────────────
+# ── drink_tease — +3. THE DENIABLE ONE. Rewritten wholesale at beat_0150 (rev 201). ──────────────────
+# ⚠️ THE PROP WAS ALREADY SHIPPED AND WAS NEVER USED. The drink parent node puts her full glass on the
+# boards by her foot and leaves it there — "whatever they put in her does not take drink" (:14878) — so
+# she has a permanent reason to bend down and never a reason to drink. Two visits of that is the "weeks"
+# the flash refers back to, and it costs the fiction nothing because the glass is already on the floor.
+# ⚠️ HE NEVER SAYS HE LIKES IT. He complains about the interruption and then stops talking, which is the
+# tell. No compliment survives anywhere on this man — beat_0125's rule, and §8's whole argument.
+# ⚠️ THE LAST SENTENCE IS ACTION, NOT MEANING (register.md, the pivot rule). What it meant to either of
+# them is not in this node and must not be added to it.
+# ⚠️ pool = 2, NOT 4. drink_flash strictly dominates from relation 10 at identical cost — one bottle,
+# 60 minutes, both set grier_drank_with — so this node's live window is relation 4-9, about two views a
+# playthrough. A 4-clip pool would never reach clip 3. Naming follows the shipped rung_renner_tease_t2.
 [[canvases.nodes]]
 id   = "drink_tease"
-name = "The coat"
+name = "The glass"
 blocks = [
-  { type = "paragraph", content = "The ring throws heat and she puts her coat over the back of the chair instead of keeping it on. Two buttons down on the blouse under it. She leaves them where they are and goes on listening." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Sit up. You are slumping and it looks wrong on a thing built to stand. And do your shirt. It is distracting a man who is trying to talk." },
-  { type = "paragraph", content = "He does not look away while he says it. He loses the end of the sentence about the jig and does not go back for it, and he pours himself the fourth one earlier than he did last week." },
+  { type = "video", props = { pool_dir = "scenes/rung_grier_tease_t2", pool = 2, description = "A woman in an open-necked blouse bending down out of her chair toward the floor in a dim filthy workshop, the front of her blouse hanging open, a heavy older seated man watching from an armchair with a glass. Must show: downblouse cleavage, her clothed and bending, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["downblouse bending forward cleavage clothed gif", "woman bending over showing down her top older man watching gif", "downblouse tease dim room seated man gif"] } },
+  { type = "paragraph", content = "Her glass has stood full on the boards by her foot since he poured it, and she goes down after it, slow, every time he gets near the end of a sentence. Two buttons are down. She did those before she sat." },
+  { type = "paragraph", content = "From that chair he gets the whole way down the front of her every time, four seconds of it, and she is back up before either of them has to decide what it was." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Put that up on the arm where you can reach it. You are going up and down like a bloody bench press and I am losing my thread." },
+  { type = "paragraph", content = "She leaves it where it is. He does not ask again and he does not go back for the thread, and the next time she goes down for the glass he stops talking altogether until she is back up." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -21762,7 +21861,10 @@ blocks = [
   { type = "paragraph", content = "He is on the third before she has her coat off, and he does not read the label this time. The bottle from Tuesday is on the boards by the chair with about an inch left standing in the bottom of it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Good. Sit. I have had a day, and the day had a man in it who wanted a thing dressing back by hand and then looked at my hands." },
   { type = "paragraph", content = "She pours for him and keeps pouring for him and he goes soft and slow and pleased about it, further under than she has ever taken him, and somewhere around the fifth one his sentences stop finishing." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "He will not get there tonight. She knew that when she paid for it at the bar and she bought it anyway, because an hour of him talking is worth a night of him failing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Eleven years I had my hands inside things like you. Every seam, every join, elbow deep in it. Never once thought about having one on that bench. Now I do, and this is what I get to do about it." },
+  { type = "paragraph", content = "He says it to the middle of the room with the glass resting on his chest, and then he says the other half of it before she has worked out whether she is supposed to answer the first." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "And I did that to myself, before you say it. Nobody poured it down me. There is not a man alive I can send the bill to, though I have had nine years of working out where I would post it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty coin at the bar for an hour of a drunk man talking to the ceiling, and he has just told her more about himself than the whole ladder did." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -21773,43 +21875,26 @@ locationId               = "grier_room"
 time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "bottle_held",  op = "set", value = 0,  clamp = true },
-  { targetType = "player", trait = "grier_nights", op = "add", value = -1, clamp = true },
 ]
 
-# ── RUNG 2 — "hands". Gated relation gte 12. +4, 60 min. ──────────────────────────────────────────────
-# ⚠️ IT IS A CHECK, NOT A CARESS, AND THE VERBS CARRY THAT. He weighs, he presses, he finds a seam. The
-# one line where he says out loud what it means to him is his OWN line, not narration — Rule 4, and the
-# same fix that pulled beat_0122's Colm band down off 3.0:1.
-[[canvases.nodes]]
-id   = "hands"
-name = "His hands on her"
-blocks = [
-  { type = "image", props = { file = "scenes/grier_hands.jpg", description = "An older seated man in a filthy workshop with both hands on the throat and jaw of a woman standing between his knees, examining rather than embracing her. avoid: kissing, avoid: a tender or romantic pose, avoid: a clean room.", search_queries = ["seated man hands on standing womans throat jaw dim workshop", "man examining woman standing between his knees dim room"] } },
-  { type = "paragraph", content = "He does not stand up for it. She comes to the chair and stands between his knees with her coat off, and he works both thumbs up the sides of her throat until he finds the seam under her jaw." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "There. That ridge, under there. That is a joint line and it has no business still being findable at nine years. They rushed you out of the door." },
-  { type = "paragraph", content = "His hands go down her. Not a stroke. A check. He takes the whole weight of one tit in his palm and moves it, watching how it sits when he lets go, then does the other one and grunts at what he finds." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Fit is good. Hips are good. Whoever did your back did it twice and the second time was cheap, and you will feel that one before you are forty." },
-  { type = "paragraph", content = "He turns her by the hip, puts his hand flat between her shoulder blades and presses until she bends where he wants her, and the whole time his breathing does not change and neither does his face." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years, and one of you walks in off the lane and lets me do that. Same time next week, is it." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Go."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_waterfront"
-time_progression_minutes = 60
-effects = [
-  { targetType = "npc", npcId = "npc_grier", trait = "relation", op = "add", value = 4, clamp = true },
-]
-
-# ── RUNG 3 — "knees". Gated relation gte 20. +4, 90 min. SETS grier_opened_up. ────────────────────────
+# ── THE RUNG — "knees". Gated relation gte 14. +4, 90 min. SETS grier_opened_up. ─────────────────────
+# ⚠️ GATE 20 -> 14 AND IT IS THE LADDER'S ONLY RUNG AS OF beat_0151. "hands" was cut above it: a free
+# repeatable +4 that set no flag, closed on nothing, and sat beside the loop for the rest of the game.
 # ⚠️ THE FIRST EXPLICIT SURFACE IN THIS RELEASE, AND IT IS FULL CRUDE (§14 row b). Cock, mouth, deep,
 # swallow — the ceiling is a ceiling and writing under it is the defect. She is NEVER shown enjoying it:
 # his room is work.
-# ⚠️ AND HE DOES NOT FINISH. This is §8's wall arriving as CONTENT, one beat before it is a mechanic. If
-# the player does not meet it until beat_0126's loop exists, the first failed finish reads as a bug
-# report; met here, inside a rung she chose, it reads as the thing the whole ladder is for.
+# ⚠️ AND HE DOES NOT FINISH — IN HER MOUTH. RE-ATTRIBUTED AT beat_0152 (rev 203) AND THE DISTINCTION IS
+# THE WHOLE POINT. This scene used to be §8's wall arriving as CONTENT: he could not finish AT ALL, ever,
+# and the shipped lines said so — "It has gone again", "you will have your jaw off before that comes back",
+# "it is nine years of that bottle". With the wall cut, the very next thing the player does is open the loop
+# and drain him on the first ass finish, so those lines would have had him permanently ruined in one scene
+# and working fine in the next, two clicks apart.
+# ⚠️ THE FIX IS FOUR LINES AND NOT A REWRITE. He now fails at the ACT, not as a man: "it is not going to
+# come off a mouth", "that is not the end of me that answers any more". The bottle is still named, still
+# nine years, still his own fault — it explains why the easy way out of him is gone, not why he can never.
+# That lands the anal finish later on the reason the game already gives everywhere else (Marsh's loop, in
+# its own words: "the mouth and the cunt don't cost him that"), and it costs this scene nothing: the jaw,
+# the boards printing her knees, the contempt and the crude register are all untouched.
 # ⚠️ EVERY EXPLICIT BEAT STAYS ON THE BODY FOR ITS WHOLE LENGTH. The interiority is beat 6, on its own,
 # after — never folded into a beat that is still describing the act.
 # ⚠️ THE CASCADE IS THE LAST BLOCK IN THE NODE (cascade-order guard). Six beats, FIVE clicks.
@@ -21840,11 +21925,11 @@ blocks = [
     ] },
     { advance_text = "Keep going.", blocks = [
         { type = "paragraph", content = "She keeps at it until her jaw aches and the boards have printed her knees, and he gets hard, properly hard, and stays there for a while. His hand goes into her hair. His hips do not move at all." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Wait. Wait. No. No, it has gone. It has gone again." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Wait. Wait. No. No, it has gone. It is not going to come off a mouth, that is all that is." },
     ] },
     { advance_text = "Do not stop.", blocks = [
         { type = "paragraph", content = "He softens in her mouth across about a minute and she works him the whole minute anyway, harder, deeper, hand and mouth together, and none of it makes the slightest difference to him." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Leave it. Leave it. You will have your jaw off before that comes back and I have watched better than you try." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Leave it. Leave it. You will have your jaw off and it will still be down there sulking, because that is not the end of me that answers any more and it has not been for years." },
     ] },
     { advance_text = "Get up off the floor.", blocks = [
         # ⚠️ TWO BANDS ON grier_drank_with (beat_0142). The free path gets the shipped line unchanged. The
@@ -21854,12 +21939,12 @@ blocks = [
         { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
             { type = "flag", subject = "player", flag_key = "grier_drank_with", operator = "is_false" },
           ] } }, blocks = [
-          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and whatever he has in a drawer is behind it." },
+          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. Nine years of that bottle have taken the easy way out of him, and whatever he has in a drawer is behind whatever way is left." },
         ] },
         { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
             { type = "flag", subject = "player", flag_key = "grier_drank_with", operator = "is_true" },
           ] } }, blocks = [
-          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and she has been walking the last month of it down the lane herself, twenty coin a time, out of money she earned on her back. Whatever he has in a drawer is behind that." },
+          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. Nine years of that bottle have taken the easy way out of him, and she has been walking the last month of it down the lane herself, twenty coin a time, out of money she earned on her back. Whatever he has in a drawer is behind whatever way is left." },
         ] },
         { type = "paragraph", content = "She wipes her chin on the back of her wrist and finds her coat where she left it. Behind her the glass goes back down on the arm of the chair, exactly where it was when she came in." },
     ] },
@@ -21951,32 +22036,53 @@ flagEffects = [
   { targetType = "player", flag = "third_located", op = "set" },
 ]
 
-# ── grier_room_offhours — the way out. Repeatable, pri 1. A SOFT-LOCK GUARD. ───────────────────────────
-# ⚠️ MANDATORY, NOT TIDINESS, AND THE GAME HAS ALREADY BEEN BITTEN BY EXACTLY THIS. grier_room is
-# nav-invisible, so its built passage carries an EMPTY navigation div and hub_grier's exit is the only way
-# out — and hub_grier is a PORTRAIT hub, so it renders only while he is present. His window is 10:00-23:59;
-# "Sit with him a while" costs 60 minutes. Enter at 23:30, sit, and it is 00:30 with no portrait, no nav
-# card and no link on the page. That is bastien_backroom's beat_0114 soft-lock, one room over.
-# ⚠️ SHAPE COPIED, NOT INVENTED: berth_offhours / mercer_room_offhours / bastien_backroom_offhours —
-# repeatable, priority 1, gated on the NPC being ABSENT, exiting to the parent street.
+# ── grier_room_offhours — THE ROOM'S OWN EXIT. Repeatable, pri 1, UNGATED. ────────────────────────────
+# ⚠️ WAS A HALF-FIX AND IS NOW THE WHOLE ONE — beat_0150 (rev 201), LO found it in play. The original was
+# gated npc_grier is_absent, which is the shape beat_0114 copied from berth_offhours. That gate makes the
+# card disappear EXACTLY WHEN HE IS THERE, so from 10:00 to 23:59 the room page carried a portrait and
+# nothing else and the only way out of the building was inside Grier's menu.
+# ⚠️ THE ROOM PAGE DOES RENDER, AND THAT IS THE ENGINE FACT THE OLD GATE MISSED.
+# selectAutoFireCanvasForLocation skips repeatable canvases outright — "if (c.isRepeatable) continue"
+# (v2.py:4695) — so hub_grier never takes the page over. Location_grier_room renders every visit with his
+# portrait on it and an EMPTY navigation div (grier_room is nav-invisible: no entry_from, auto_exit false,
+# 1_metadata:1476). This card is a solo canvas (no npcId), so renderSoloActivities puts it on that page.
+# ⚠️ cain_lab_offhours HAD IT RIGHT FIRST. It gates on a FLAG (lab_seen, :14205), not on presence, so its
+# exit card renders always. Same nav-invisible room, same guard pattern, correct gate. This is that.
+# ⚠️ conditions REMOVED ENTIRELY rather than emptied. A located repeatable canvas with no conditions block
+# is shipped practice — hub_sol_undertow is the precedent, and it is the only one, so it was checked
+# rather than assumed. An exit that is the sole way out of a sealed room may not carry a gate to typo.
+# ⚠️ THE NAME IS THE CARD LABEL (display_name = canvas.name, v2.py:11829), so it has to be true in both
+# states — "The lane, at this hour" is a lie while he is sitting in the chair. It is ALSO the
+# canTriggerActivity day-cap key, harmless here (repeatable, no maxPerDay) but the reason this cannot be
+# called "Down the lane": that is activity_go_to_grier's name and would collide on that global key.
+# ⚠️ TWO BANDS, ADJACENT ON PURPOSE. Consecutive [group] blocks merge into ONE if/elseif chain
+# (v2.py:15077) and these two are mutually exclusive by construction, which is what the merge wants.
 [[canvases]]
 id          = "grier_room_offhours"
-name        = "The lane, at this hour"
-description = "beat_0124 (rev 174). Soft-lock guard @grier_room. Repeatable, pri 1, gated npc_at_location grier_room/npc_grier/is_absent. grier_room is nav-invisible (empty navigation div) and hub_grier is a portrait hub that stops rendering when he is out of window, so without this a player who sits with him at 23:30 is sealed in at 00:30 with no link on the page. Exits to the_waterfront."
+name        = "Out through the side door"
+description = "beat_0124 (rev 174), UNGATED at beat_0150 (rev 201). THE ROOM'S OWN EXIT @grier_room. Repeatable, pri 1, no conditions. grier_room is nav-invisible (empty navigation div) and hub_grier is a repeatable portrait hub that never auto-fires, so the room page renders every visit and this solo card is the only exit on it. Was gated npc_grier is_absent, which hid the card for the whole of his 10:00-23:59 window and left the hub menu as the only way out of the building. Two bands on his presence. Exits to the_waterfront, 30 min."
 [canvases.trigger]
 location      = "grier_room"
 is_repeatable = true
 priority      = 1
 is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", location_id = "grier_room", npc_id = "npc_grier", operator = "is_absent" },
-] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "The lane, at this hour"
+name = "Out through the side door"
 blocks = [
-  { type = "paragraph", content = "The chair is empty and the ring is cold and the bottle is where he left it. Wherever a man like that goes after midnight, it is not far and it is not interesting." },
+  # BAND 1 — he is in the chair. She is leaving the building, not finding an empty room.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "grier_room", npc_id = "npc_grier", operator = "is_present" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He does not look up when she goes. Three glasses down and talking to the room about a tolerance, and the side door is where she left it, hanging open on a lockup with nothing in it worth taking." },
+  ] },
+  # BAND 2 — the shipped line, unchanged. Out of window, and the room is dead.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "grier_room", npc_id = "npc_grier", operator = "is_absent" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The chair is empty and the ring is cold and the bottle is where he left it. Wherever a man like that goes after midnight, it is not far and it is not interesting." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -22161,41 +22267,38 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 
 # ── loop_grier_finisher — THE SWITCHBOARD. TRIGGERLESS. ───────────────────────────────────────────────
 #
-# ⚠️ THE PARTITION, in the order the clauses are declared. Four exclusive [group] bands, eight exits:
-#   W1 grier_nights lt 1 ......... any elected finish -> .wall1   THE BOTTLE
-#   W2 grier_nights 1 ............ any elected finish -> .wall2   WHAT HE USED TO HAVE HIS HANDS INSIDE
-#   W3 grier_nights 2 ............ any elected finish -> .wall3   THE TRAYS
-#   A  broken · finisher lt 2 .... reset + exit, no drain (the shipped contract, taught by playing it)
-#   B  broken · anal · weapon 2 .. wrong gear, no drain
-#   C  broken · anal · charge 0 .. empty drain, no drain
-#   D  broken · anal · armed · grier_drains_done lt 1 ....... .d0    THE DRAIN LANDS
-#   E  broken · anal · armed · grier_drains_done gte 1 ...... .done  the warm tap
+# ⚠️ THE PARTITION, in the order the clauses are declared. Three exclusive [group] bands, five exits:
+#   A  finisher lt 2 .................................. reset + exit, no drain (the shipped contract)
+#   B  anal · weapon 2 ................................ wrong gear, no drain
+#   C  anal · charge 0 ................................ empty drain, no drain
+#   D  anal · armed · grier_drains_done lt 1 .......... .d0    THE DRAIN LANDS
+#   E  anal · armed · grier_drains_done gte 1 ......... .done  the warm tap
 #
-# ⚠️ W1-W3 CATCH EVERY FINISHER TYPE, WHICH NO OTHER LOOP IN THIS GAME DOES. See the rig banner: below
-# the break he does not finish at all, so the type she elected only decides which way it failed.
+# ⚠️ THE WALL IS GONE AS OF beat_0152 (rev 203), LO's call after playing it: "I think I want it to work
+# normally in the first try itself." What stood here was a fourth band, FIRST in the chain, catching every
+# elected finish while grier_nights lt 3 — three failed nights, three confessions, then the break. It was
+# the only loop in this game that departed from the shipped facial/inside/ass contract, and this canvas now
+# reads exactly like loop_colm_finisher. Nothing reads grier_nights any more; the trait stays DECLARED
+# (0_systems_spec.toml, 1_metadata) because deleting a trait key strands a save, and it stays at 0 forever.
+# ⚠️ THE CUT WAS NOT ONE BAND. hub_grier.knees was the wall arriving as CONTENT one beat early — six beats
+# of him failing in her mouth — so leaving it alone would have had him unable to finish at all in one scene
+# and finishing fine in the next. Its failure is re-attributed to the ACT rather than to the man; see the
+# header there. And hub_grier.drink_after existed only to subtract a night, so it inherited wall2's
+# confession instead of being deleted.
 # ⚠️ B AND C ARE LOCATION EXITS WITH THE EXPLANATION IN THE LABEL, the loop_mercer_finisher shape
-# (:7322). They matter here because Grier is the first Act-2 drain a player can walk into carrying the
-# emitter, and a silent nothing on the one night the wall finally broke would be unforgivable.
-# ⚠️ CHARGE BURNS ON D AND E ONLY — the two that actually drain. W1-W3 reach and get nothing, so they
-# cost the afternoon and not also the charge; doubling the price of a failure is a grind complaint.
+# (:7322). They matter more now, not less: with the wall gone the FIRST ass finish is the drain, so a
+# player who walks in carrying the emitter would otherwise spend the one beat that matters on silence.
+# ⚠️ CHARGE BURNS ON D AND E ONLY — the two that actually drain.
 [[canvases]]
 id          = "loop_grier_finisher"
-name        = "He does not finish"
-description = "beat_0126 (rev 176). Triggerless finisher @grier_room, THE SWITCHBOARD. Four exclusive [group] bands: the WALL band catches every finisher type while grier_nights lt 3 (§8 — below the break nothing finishes at all, which is why this loop departs from the shipped facial/inside contract), then facial(0)/inside(1)/ass(2) above it. Eight exits: three wall exits picked off grier_nights (each bumps it), reset-and-go for facial/inside, wrong-gear and empty-drain location exits with the reason in the label, then .d0 (the drain lands) and .done (the warm tap) off grier_drains_done. Charge burns on the two draining exits only."
+name        = "The finish"
+description = "beat_0126 (rev 176), THE WALL CUT AT beat_0152 (rev 203). Triggerless finisher @grier_room, THE SWITCHBOARD. Three exclusive [group] bands on sex_finisher_type — facial(0) / inside(1) / ass(2) — which is the shipped loop_colm_finisher shape exactly. Five exits: reset-and-go for facial/inside, wrong-gear and empty-drain location exits with the reason in the label, then .d0 (the drain lands, grier_drains_done lt 1) and .done (the warm tap) above it. Charge burns on the two draining exits only. Grier used to be the game one exception: a WALL band caught every elected finish while grier_nights lt 3, so nothing finished at all for three nights. LO played it and cut it — he drains on the FIRST ass finish now, like every other man in this game."
 [[canvases.nodes]]
 id   = "climax"
-name = "He does not finish"
+name = "The finish"
 blocks = [
-  # BAND W — THE WALL. FIRST IN THE CHAIN AND IT CATCHES EVERY TYPE.
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "grier_nights", operator = "lt", value = 3 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "He gets close. She feels it start to gather in him, the whole body going tight for it, his grip changing on her. Then it is simply not there any more, and what is inside her softens while she is still working." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "...No. No, that is it gone." },
-  ] },
   # BAND A — broken, facial. The shipped contract: he had the afternoon and she took nothing.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 0 },
     ] } }, blocks = [
     { type = "video", props = { pool_dir = "sex/grier_finish_facial_t5", pool = 4, description = "A heavy older man finishing on the face of a woman kneeling in front of his armchair in a filthy room, then looking down at it. Must show: him seated, her kneeling, a facial finish. Avoid: her swallowing instead, avoid: a clean room, avoid: a young man.", search_queries = ["facial cumshot on kneeling woman older seated man gif", "cum on her face amateur homemade older man gif"] } },
@@ -22204,7 +22307,6 @@ blocks = [
   ] },
   # BAND B — broken, inside her.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 1 },
     ] } }, blocks = [
     { type = "video", props = { pool_dir = "sex/grier_finish_inside_t5", pool = 4, description = "A heavy older man finishing inside a woman lying back on a cluttered workshop bench, holding her hips down against the wood. Must show: her on the bench, him standing, finishing inside. Avoid: anal, avoid: pulling out to finish on her, avoid: a bed.", search_queries = ["creampie on workbench amateur gif", "finishing inside her holding her hips homemade gif"] } },
@@ -22213,72 +22315,20 @@ blocks = [
   ] },
   # BAND C — broken, the ass finish. THE DRAIN OPENS.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/grier_finish_anal_t5", pool = 4, description = "A heavy older man finishing in the ass of a woman held face down over a workshop bench, gripping her hips and holding still at the end. Must show: anal finish from behind, her face-down, him holding still. Avoid: pulling out to finish on her, avoid: a facial, avoid: her looking back.", search_queries = ["anal creampie bent over bench holding her hips gif", "cum inside her ass from behind amateur homemade gif"] } },
     { type = "paragraph", content = "He finishes in her ass and the drain opens under it the way it is built to. The shudder cracking him wide, her hand still shut on his wrist, nine years of him starting to come loose down her arm." },
   ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-# ── W1 / W2 / W3 — the three failed nights. Same label; only one ever renders. Each bumps the counter. ──
-[[canvases.nodes.exit_block.choices]]
-text       = "Let it go — he is not getting there tonight."
-targetType = "node"
-nodeId     = "grier_drain_canvas.wall1"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights", operator = "lt", value = 1 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "grier_nights",      op = "add", value = 1 },
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
-text       = "Let it go — he is not getting there tonight."
-targetType = "node"
-nodeId     = "grier_drain_canvas.wall2"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "grier_nights", operator = "lt",  value = 2 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "grier_nights",      op = "add", value = 1 },
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
-text       = "Let it go — he is not getting there tonight."
-targetType = "node"
-nodeId     = "grier_drain_canvas.wall3"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "grier_nights", operator = "lt",  value = 3 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "grier_nights",      op = "add", value = 1 },
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-# ── A. broken, facial / inside — reset + exit. No drain. ──
+# ── A. facial / inside — reset + exit. No drain. The shipped contract. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Get your coat."
 targetType = "location"
 locationId = "the_waterfront"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "lt",  value = 2 },
 ] }
 time_progression_minutes = 60
@@ -22295,7 +22345,6 @@ text       = "Let it go — wrong gear."
 targetType = "location"
 locationId = "the_waterfront"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 2 },
 ] }
@@ -22313,7 +22362,6 @@ text       = "Let it go — the drain is empty. Take a night on the feed line at
 targetType = "location"
 locationId = "the_waterfront"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "lt",  value = 1 },
@@ -22326,13 +22374,12 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# ── D. THE DRAIN LANDS — the first one. grier_drains_done 0 -> 1. The night they cut her into three. ──
+# ── D. THE DRAIN LANDS — the FIRST ass finish. grier_drains_done 0 -> 1. The night they cut her into three. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Take what he carries."
 targetType = "node"
 nodeId     = "grier_drain_canvas.d0"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
@@ -22354,7 +22401,6 @@ text       = "Drink him down again."
 targetType = "node"
 nodeId     = "grier_drain_canvas.done"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "grier_nights",      operator = "gte", value = 3 },
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
@@ -22383,58 +22429,7 @@ effects = [
 [[canvases]]
 id          = "grier_drain_canvas"
 name        = "What he carries"
-description = "beat_0126 (rev 176). Triggerless Grier payloads @grier_room, reached only from loop_grier_finisher's exits (every bump, burn and reset lives on those choices). wall1/wall2/wall3 = the three failed nights, each leaking one more thing — the bottle, what he used to have his hands inside, and the trays. d0 = THE DRAIN LANDS: Grier's memory of the extraction, the three trays, and him walking out with two of them; it does NOT open the piece itself (§18.3 reserves the childhood for the capstone) and the second man in the corridor has no face (§8/§17). done = the repeatable warm tap. No effects on any node."
-
-# WALL 1 — the bottle. He blames it, sourly, and will not look at her.
-[[canvases.nodes]]
-id   = "wall1"
-name = "Not tonight"
-blocks = [
-  { type = "paragraph", content = "He gets himself back into his trousers sitting down, which takes three goes, and does not look at her once while he does it. The glass is back in his hand before he has finished with the belt." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "That is the bottle. Nine years of the bottle and nothing whatever to do with you, so do not sit there on my bench working out what you did wrong. You did it fine. It does not matter." },
-  { type = "paragraph", content = "She is still on the wood with his handprint going pink between her shoulder blades and an afternoon gone and nothing at all to show for it." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Get your coat."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "the_waterfront"
-
-# WALL 2 — the first crack. What he used to have his hands inside.
-[[canvases.nodes]]
-id   = "wall2"
-name = "Further, and still not there"
-blocks = [
-  { type = "paragraph", content = "It gets further this time. Far enough that he swears at the ceiling and puts a hand over his eyes and stays like that, still inside her, with her bent over the bench underneath him going nowhere." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Eleven years I had my hands inside things like you. Every seam, every join, elbow deep in it. Never once thought about having one on that bench. Now I do, and this is what I get to do about it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "And I did that to myself, before you say it. Nobody poured it down me. There is not a man alive I can send the bill to, though I have had nine years of working out where I would post it." },
-  { type = "paragraph", content = "He goes and sits down. The bottle is where the bottle always is. She pulls her clothes together in a room that has stopped paying her any attention at all." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Get your coat."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "the_waterfront"
-
-# WALL 3 — THE TRAYS. He says enough for her to know he was in the room, and does not notice he said it.
-[[canvases.nodes]]
-id   = "wall3"
-name = "A breath off it"
-blocks = [
-  { type = "paragraph", content = "The closest yet. He is a breath off it, hands locked on her hips, and then it goes out of him like a light and he is standing there holding her with nothing left to do with her at all." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You are the wrong shape for me to be doing this to. I know what is under it. I have had one of you open on a table with the whole of it laid out in trays and I still cannot finish in you." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Do not ask me about that. You know what happens in here when you ask me things, and nothing about it has changed since." },
-  { type = "paragraph", content = "He says it at the wall and not at her, and does not appear to notice he has said it. She lies still on the bench and lets him not notice." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "Trays. Not a rumour, not a file. He was standing in the room." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Get your coat."
-[canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "the_waterfront"
+description = "beat_0126 (rev 176), wall nodes cut at beat_0152 (rev 203). Triggerless Grier payloads @grier_room, reached only from loop_grier_finisher's exits (every burn and reset lives on those choices). wall1/wall2/wall3 — the three failed nights — are GONE with the wall; wall2's confession moved into hub_grier.drink_after, wall3's trays are delivered in full by d0 below, and wall1's line only meant anything after a failure. d0 = THE DRAIN LANDS: Grier's memory of the extraction, the three trays, and him walking out with two of them; it does NOT open the piece itself (§18.3 reserves the childhood for the capstone) and the second man in the corridor has no face (§8/§17). done = the repeatable warm tap. No effects on any node."
 
 # d0 — THE DRAIN LANDS. Five beats, four clicks (counted off the built game, not off the file).
 # ⚠️ BEAT 0's advance_text IS NEVER RENDERED (measured at beat_0125) — its blocks come up with the node
@@ -22447,7 +22442,6 @@ locationId      = "the_waterfront"
 id   = "d0"
 name = "What he carries"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/grier_finish_anal_t5", pool = 4, description = "A heavy older man finishing in the ass of a woman held face down over a workshop bench, gripping her hips and holding still at the end. Must show: anal finish from behind, her face-down, him holding still. Avoid: pulling out to finish on her, avoid: a facial, avoid: her looking back.", search_queries = ["anal creampie bent over bench holding her hips gif", "cum inside her ass from behind amateur homemade gif"] } },
   { type = "paragraph", content = "What comes down her arm is not routes and drops the way a courier comes apart. It is one room, kept for nine years the way a man keeps a thing he has decided was somebody else's fault, and she is standing in it." },
   { type = "cascade", props = { beats = [
     { advance_text = "Look at it.", blocks = [
@@ -25600,7 +25594,6 @@ effects = [
   { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
   # ── WHOSE HAND, through beat 13 ──
   { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
-  { targetType = "player", trait = "grier_nights",        op = "set", value = 3 },
   { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
   { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
   { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },

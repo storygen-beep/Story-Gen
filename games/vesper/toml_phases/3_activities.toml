@@ -79,7 +79,7 @@ time_progression_minutes = 30   # rev 67: time only — no Charge cost on the ca
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car"
-description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named + face_worn. The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
+description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named alone (face_worn cut at beat_0153 — enforced by react_rise_no_face on the floor instead). The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -107,12 +107,16 @@ blocks = [
       { type = "paragraph", content = "Up to the towers is not a road any more. Vance's doors up there are keyed to a woman she is not dressed as, and the flag she set off in that vault is still climbing to the man at the top of them." },
   ] },
   # ── BAND B — she has somewhere to go and is standing in the wrong face. Guidance: the face comes on at the cot.
+  # ⚠️ IT IS A WARNING AND NO LONGER A REFUSAL — beat_0153 (rev 204). The ride up stopped being gated on
+  # face_worn, so this band now prints BESIDE a live "Ride up to the plaza." A paragraph that says she cannot
+  # go while the menu offers the ride is the coat-label defect again, so the prose states the RISK and lets
+  # her take it. The bounce is real and it is one layer in: react_rise_no_face turns her round on the floor.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "She could take the car up. Not in this face. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
+      { type = "paragraph", content = "She could take the car up in this face and get as far as a desk. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -131,13 +135,24 @@ nodeId     = "activity_travel_to_spire.riding_spire"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-# ── POST-SEAL: the ride back up, in somebody else's face. beat_0147 (rev 198), LO's call.
-# ⚠️ THREE CLAUSES AND EACH ONE EARNS ITS PLACE. archive_1a_done is_true makes this and the choice above
-# MUTUALLY EXCLUSIVE by construction, so the menu never shows two ways up. face_worn because riding up as
-# herself is suicide and the game has said so since beat_0116. rise_named because without it a greyed "The
-# Rise" card would sit on the plaza for the whole first half of this release, promising content — gating the
-# ROAD on Grier naming the place makes that window ZERO and keeps his mouth as the telegraph, which is what
-# §6 wanted. version="1.0" or the gate fails OPEN.
+# ── POST-SEAL: the ride back up. beat_0147 (rev 198); face_worn clause CUT at beat_0153 (rev 204).
+# ⚠️ TWO CLAUSES NOW. LO cut the third after playing it: "i didnt want it to go away. But the nested
+# locations inside it can be locked." He is right, and the plaza was already built that way —
+# vance_securities and penthouse each close on archive_1a_done and are shut post-seal on their OWN gates.
+# The road was never what protected them; all it did was make the district unreachable for a whole chapter.
+# ⚠️ WHAT face_worn WAS DOING, AND WHERE IT WENT — one layer in, onto a card that was already built for it.
+# react_rise_no_face (5_scenes) is repeatable at pri 9 on the_rise_floor, gated cover_research EQUIPPED +
+# face_worn is_false: "the kit without the face is the company's own asset walking into a Vance building in
+# a costume." It bounces her to the_waterfront. A player who rides up in the wrong face now gets TOLD, in
+# the building, instead of finding a road that never appears. The suicide line from beat_0116 stands; it is
+# enforced at the door rather than at the kerb.
+# ⚠️ rise_named STAYS AND IT IS THE CLAUSE THAT CANNOT MOVE. the_rise_floor carries entry_from = spire_plaza
+# and NO entry_conditions, so it is a LIVE nav card the instant the plaza is reachable. Gating the location
+# instead would not hide it — a locked location always renders a GREYED card and there is no hide path
+# (_render_location_nav_card, v2.py:19829) — so the promise would sit on that plaza for the whole first half
+# of the release. Gating the ROAD on Grier's mouth makes that window ZERO, which is what §6 wanted.
+# ⚠️ archive_1a_done is_true still makes this and the choice above MUTUALLY EXCLUSIVE by construction, so the
+# menu never shows two ways up. version="1.0" or the gate fails OPEN.
 # ⚠️ THE PLAZA IS NOT THE TOWER. This lands her on the public level and nothing else opens with it: wren_floor,
 # penthouse, vance_securities and docs_vault are all locked door-by-door in 1_metadata, and wren_floor's lock
 # seals wren_room and the cradle behind it (which is what keeps Kess's rent alive).
@@ -148,7 +163,6 @@ nodeId     = "activity_travel_to_spire.riding_covered"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
@@ -231,7 +245,7 @@ time_progression_minutes = 10
 [[canvases]]
 id          = "activity_travel_from_gate"
 name        = "Take the car"
-description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named + face_worn — and this is the picker that matters, because she sleeps at the cot and commutes from here."
+description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named alone (face_worn cut at beat_0153) — and this is the picker that matters, because she sleeps at the cot and commutes from here."
 
 [canvases.trigger]
 location      = "underworld_gate"
@@ -259,7 +273,7 @@ blocks = [
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "There is a reason to go up now and she is wearing the wrong face for it. The bought one goes on at the cot and nowhere else, and it is a walk back through the gate to get it." },
+      { type = "paragraph", content = "There is a reason to go up now and she is wearing the wrong face for it. The car will still take her. The bought one goes on at the cot and nowhere else, and it is a walk back through the gate to get it." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -274,8 +288,10 @@ nodeId     = "activity_travel_from_gate.riding_up"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-# ── POST-SEAL, IN COVER. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers
-# two rides up. Same three-clause gate as the waterfront picker; see the long note there for why each clause.
+# ── POST-SEAL. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers two
+# rides up. Same TWO-clause gate as the waterfront picker (face_worn cut at beat_0153); see the long note
+# there. ⚠️ THIS IS THE PICKER THAT MATTERS: she sleeps at the cot and commutes from this gate, so the face
+# clause was cutting her daily route, not an occasional one.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the plaza."
 targetType = "node"
@@ -283,7 +299,6 @@ nodeId     = "activity_travel_from_gate.riding_up_covered"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_true"  },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
