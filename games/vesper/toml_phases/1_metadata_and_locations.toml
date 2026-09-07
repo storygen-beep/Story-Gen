@@ -1495,9 +1495,15 @@ auto_exit   = false
 # entry_from here would have parked a greyed "The Floor" on the Waterfront grid from the game's first hour.
 # ⚠️ auto_exit = false IS THE OTHER HALF. A nav-invisible room builds its grid from children, has none, and
 # an empty navigation_html trips the list-every-location FALLBACK (v2.py:19386). Both halves or neither.
-# ⚠️ THE WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated
-# rise_named. THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that
-# every nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
+# ⚠️ CORRECTED beat_0153 (rev 204) — THIS PARAGRAPH DESCRIBED A ROUTE THAT NO LONGER EXISTS. It read "THE
+# WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated rise_named", and
+# that express (riding_rise) was DELETED by beat_0147 in the same commit that gave this location
+# entry_from = spire_plaza. The way in is a NAV CARD off the plaza, and it carries NO entry_conditions, so
+# it is live the instant the plaza is reachable. That is why the rise_named gate has to live on the ROAD to
+# the plaza and cannot move onto this location: a locked location always renders a GREYED card and there is
+# no hide path, so gating here would park the promise on the plaza instead of hiding it.
+# ⚠️ THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that every
+# nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
 [[locations]]
 id          = "the_rise_floor"
 name        = "The Floor"

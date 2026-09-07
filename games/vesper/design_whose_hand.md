@@ -329,6 +329,11 @@ That is the point, and it is the register: sour, mean, unhurried, and completely
 
 ### ⚠️ THE WALL — he cannot finish
 
+> **CUT 2026-09-08 (beat_0152, rev 203). This whole section is now the record of what beat 5 argued, not
+> the shipped shape.** LO played it: *"I think I want it to work normally in the first try itself."* Grier
+> drains on the FIRST ass finish now, like every other man in the game. `grier_nights` still exists as a
+> declared trait and is read by nothing. **§26 has the cut, its four knock-ons and the measurements.**
+
 **Nine years of drink.** The drain fires on an anal finish and most nights he cannot get there at all. She can
 suck him, ride him, take him however he wants it, and fire nothing.
 
@@ -843,7 +848,7 @@ Gate keys are **working names** — they become real at beat 1 and are immutable
 | 2 | **Cain opens the release** ✅ | 4 · auto-fire one-shot ×2 | `the_cot` **→** `cain_lab` | `lab_seen` | To be told what she is |
 | 3 | **Grier — found** ✅ | 4 · npc-intro + 1 · hub + guard | `grier_room` (nav-invisible) | `cain_named_grier` | The man who touched her memory |
 | 4 | **Grier — the ladder** ✅ | 1 · portrait hub + rungs | Grier's room | `relation` bands 6 / 12 / 20 → sets `grier_opened_up` | To be worth using |
-| 5 | **Grier — the wall breaks · PIECE ONE · he names The Rise** ✅ | 1 · loop → finisher → 4 · drain → 4 · auto-fire | Grier's room | `grier_opened_up` · `grier_nights gte 3` | To make a ruined man finish |
+| 5 | **Grier — PIECE ONE · he names The Rise** ✅ | 1 · loop → finisher → 4 · drain → 4 · auto-fire | Grier's room | `grier_opened_up` → the ass finish → `grier_drains_done` *(the `grier_nights gte 3` wall was cut at beat_0152)* | To get at what he carries |
 | 6 | **Install one — nothing** ✅ | 4 · auto-fire one-shot ×2 | `the_cot` **→** `cain_lab` | `piece_one_held` + `pieces_seated lt 1` | To feel it land |
 | 7 | **The way in** ✅ | 3 · solo | `underworld_market` — the row, not Vane | `rise_named` + `cover_research not_owned` | A door |
 | 8 | **Hired** ✅ — *the floor only; the other two rooms ship with the beats that open them* | 4 · npc-intro + 3 · day job + 3 bounces | `the_rise_floor` | `cover_research` equipped **+** `face_worn` | To be inside |
@@ -927,8 +932,9 @@ on the Reach grid for two acts — the shape `beat_0120` deleted from the Undert
 
 **So Grier's room reuses the route beat 2 built:** nav-invisible (`auto_exit = false`, no `entry_from`) ·
 `activity_go_to_grier` at `the_waterfront` is the door, gated `cain_named_grier` · `grier_room_offhours`
-(priority 1) is the way out. **This is the same pattern as `cain_lab`, now used twice — and it is what
-The Rise should use at beat 8 too**, for exactly the same reason.
+(priority 1, **ungated since beat_0150**) is the way out, in every state. **This is the same pattern as
+`cain_lab`, now used twice — and it is what The Rise should use at beat 8 too**, for exactly the same
+reason.
 
 **Two bands on the door card** — the finding (once; Cain gave a name and a district, never an address) and
 the walk (every time after). It answers *how did she get there* without spending a beat on a fetch quest.
@@ -942,6 +948,30 @@ no stated reason.**
 navigation div and the portrait hub is the only way out — and the hub stops rendering when he is out of
 window. Sitting with him at 23:30 costs 60 minutes and seals her in at 00:30. That is `bastien_backroom`'s
 `beat_0114` soft-lock, one room over.
+
+**⚠️ AND THE GUARD WAS ONLY HALF THE FIX — corrected at beat_0150 (rev 201), LO found it in play.** Gating
+it `npc_grier is_absent` covers the dead room and leaves the live one exactly as it was: through the whole
+of his 10:00–23:59 window the room page carried his portrait and **no exit**, and the only way out of the
+building was inside his menu. The gate is gone; the prose is banded on his presence instead.
+
+**The engine fact the original gate missed:** `selectAutoFireCanvasForLocation` skips repeatable canvases
+outright — `if (c.isRepeatable) continue` (`v2.py:4695`) — so `hub_grier` **never takes the page over**.
+`Location_grier_room` renders on every visit, with his portrait on it and an empty navigation div. The
+guard is a solo canvas (no `npcId`), so `renderSoloActivities` puts it on that same page. It was always
+meant to be the room's own exit; it was gated as though it were an after-hours scene.
+
+**`cain_lab_offhours` had it right first** — it gates on a **flag** (`lab_seen`), not on presence, so its
+card renders always. Same nav-invisible room, same guard pattern, correct gate.
+
+**It also closed a free-travel hole.** Walking in costs 30 minutes; leaving by the card costs 30; the hub's
+`"Leave him to it."` charged **nothing**, so the cheapest route out of the Reach ran through Grier's menu.
+It is now `"Step away."` into `grier_room` — the conversation is free, the building always costs 30. The
+choice could not simply be deleted: every sub-node on the hub exits to `grier_room`, so a base node with
+no exit seals the player inside the canvas.
+
+**Same two edits shipped at `bastien_backroom` in the same beat** — identical shape, identical reasoning,
+and the only other nav-invisible room with a portrait hub. `kess_berth` and `mercer_room` are clean; both
+have real `entry_from` nav.
 
 ---
 
@@ -986,6 +1016,12 @@ dark. Reverted.
 **Author beat 0 knowing its label is decorative.** Do not spend a good line on it and do not try to remove it.
 
 ### ⚠️ THE WALL HAD TO BE TOTAL, AND THAT BROKE A SHIPPED CONTRACT — built at beat 5
+
+> **SUPERSEDED 2026-09-08 (beat_0152, rev 203). The contract is un-broken.** The wall band is deleted and
+> `loop_grier_finisher` now bands on `sex_finisher_type` alone — facial(0) / inside(1) / ass(2) — which is
+> `loop_colm_finisher`'s shape exactly. The reasoning below was sound *given a wall*; there is no wall.
+> Kept because it is the clearest statement in this book of why a PARTIAL wall would have been worse than
+> either a total one or none, and that lesson survives the cut. See §26.
 
 **Recorded 2026-08-26.** Every other loop in this game ships the same rule: a facial or a finish inside works
 normally and **only the ass finish drains**. Grier cannot use it. §8 says in its own words that she can suck
@@ -2080,6 +2116,11 @@ The rung he was looking for is there. `hub_grier` ships four — `sit` (ungated,
 +3) / `hands` (gte 12, +4) / `knees` (gte 20, +4) — and `hands` sits exactly between standing and the
 blowjob. Nothing is skipped.
 
+> **Superseded, 2026-09-08 (beat_0151).** Two of those four rungs are gone: `look` at beat_0143 and `hands`
+> at beat_0151. The ladder is now `sit` (ungated, +2) / `knees` (gte **14**, +4), with the escalation she
+> controls living inside the drink at 4 and 10. §25 has the reasoning. Read this section as the record of
+> what beat_0142 argued, not as the current shape.
+
 **What is missing is the exchange.** She sits in a chair three times, in silence, while he drinks and
 ignores her — *"It is not a question and she does not answer it"* — and the man opens by +2 a visit. The
 ladder is paid for in clicks. §8 gave him a want (getting one of *them* on her knees) and the base bands
@@ -2170,6 +2211,18 @@ not a preference.
 `npc_grier.relation = 14` has the `hands` rung open right now. Gate the ladder on a bottle counter and that
 player loads 0.2.1 to find rungs they already earned locked again, with nothing on screen explaining it.
 
+> **⚠️ THE PREMISE OF THIS SECTION IS FALSE AND WAS FALSE WHEN IT WAS WRITTEN. Corrected 2026-09-08
+> (beat_0151), measured not assumed:** `hub_grier`, `npc_grier`, `grier_room` and the bare string `grier`
+> each return **0 occurrences** in `games/vesper/releases/v0.2.0.html`. Grier is a beat_0124 character and
+> ships for the first time in 0.2.1. **No 0.2.0 save has ever carried a relation on this man**, so no save
+> could have had the `hands` rung open, and his gates were always free to move — which is what let
+> beat_0151 pull `knees` from 20 to 14.
+>
+> The conclusion below still stands on its own merit (the bottle reads better as a lever than as a key),
+> but it was reached from a save-compatibility constraint that does not exist. Flagged here because
+> inventing a constraint and then designing around it is the failure the two standing rules exist to catch,
+> and it survived three beats unchallenged in a design doc.
+
 So: **no existing rung gains a `bottle_held` clause.** Same four rungs, same gates, same effects, same
 scenes. The bottle is a lever beside the ladder, not a rung of it.
 
@@ -2214,6 +2267,10 @@ stops him finishing. One line, once, never repeated.
 **That is what the wall is for.** It stops being a grind tax in front of the payoff and becomes a consequence
 she authored.
 
+> **Superseded 2026-09-08 (beat_0152).** The wall is cut, so the bottle has no night to put back. The
+> choice was not deleted — it inherited `wall2`'s confession instead, and the twenty coin now buys the one
+> piece of Grier that `d0` does not deliver. §26.3.
+
 ### 22.10 Held for the next beat, not this one
 
 **A bottle brought to the LOOP makes it worse.** Once `grier_opened_up` is set, turning up with one means he
@@ -2243,11 +2300,35 @@ bulb."* The player had already watched her do that twice. The rung read as the g
 | choice | gate | pays | what it is |
 |---|---|---|---|
 | Just drink, and let him talk | — | +2 | the method: let it run, ask him nothing |
-| Let the coat fall open | `relation gte 4` | +3 | he covers the looking with a criticism |
+| Keep bending down for your glass | `relation gte 4` | +3 | the deniable one — four seconds, and he complains |
 | Lean over him when you pour | `relation gte 10` | +4 | nobody is calling it an accident |
 
 Both gated choices render **greyed with a reason** rather than hidden, the same discipline as the bottle
 itself: the ladder is the content, and a choice that silently appears teaches nothing.
+
+**⚠️ RUNG 2 WAS REWRITTEN AT beat_0150 (rev 201) — it was not a tease.** It had her take her coat off and
+put it on the chair back: she performed no act, he did all the work, and it was the only middle rung of a
+tease ladder in this game carrying **no media block**. Three things came off the coat with it.
+
+1. **The label lied.** It read *"Let the coat fall open"* while the prose put the coat over the chair — a
+   leftover from the `look` rung cut at beat_0143, whose scene *was* the coat opening and which moved to
+   the flash (§23.3). The label stayed behind and nothing re-read it.
+2. **It pre-spent band 4.** At `relation gte 20` the whole of Grier's line is `"Coat."` — an order. On the
+   bottle path she had been doing it voluntarily since relation 4, so the order landed toothless.
+3. **The flash referenced weeks that did not exist** — *"You are doing that on purpose. **Have been for
+   weeks.**"* Nothing below it was deniable, so there were no weeks. Rung 2 is now those weeks.
+
+**The two rungs split on deniability, not on skin.** Four seconds she can deny at rung 2; sustained and
+named out loud at rung 3. The prop was already shipped and never used: the `drink` parent puts her full
+glass on the boards by her foot and leaves it there — *"whatever they put in her does not take drink"* — so
+she has a permanent reason to bend down and never a reason to drink. He complains about the interruption
+and then stops talking, which is the tell; no compliment survives anywhere on this man.
+
+**Media: `scenes/rung_grier_tease_t2`, `pool = 2`, not 4.** `drink_flash` strictly dominates from relation
+10 at identical cost — one bottle, 60 minutes, both set `grier_drank_with` — so this node's live window is
+relation 4–9, about two views a playthrough, and a 4-clip pool would never reach clip 3. **At harvest the
+two pool descriptions must stay distinct**, or find-media returns the same clips twice: rungs 2 and 3 now
+share a visual register and the escalation is carried by prose and duration, not by the clip.
 
 ### 23.3 ⚠️ THE look RUNG IS DELETED — LO's call
 
@@ -2275,23 +2356,94 @@ the two tracks alternate all the way up:
 | relation | what opens | whose move |
 |---|---|---|
 | 0 | Sit with him · Drink → just drink | — |
-| **4** | Drink → let the coat fall open | **hers** |
+| **4** | Drink → keep bending down for your glass | **hers** |
 | **10** | Drink → lean over him when you pour | **hers** |
-| **12** | Go and stand between his knees | **his** |
-| **20** | Get down in front of him | **his** |
+| **14** | Get down in front of him | **his** |
 
-The base node's bands moved with it — **4 / 12 / 20**, was 6 / 12 / 20 — because the edges are the unlocks
-and 6 stopped being one. Band 2's dialogue asked for the bulb and now asks her to bring the bottle over when
-she pours, which is the thing that actually opens next.
+*(Row **12**, `Go and stand between his knees`, was cut at beat_0151 — see §25. The knees gate came down
+from 20 to 14 with it.)*
 
-**Measured: free path 8 trips and no coin; bottle path 4 trips and 80 coin.** The free path is one trip
-slower than before, because the deleted rung was a +3 she could take in the same visit as the drink. That is
-the correct direction: the free path should be the long way round.
+The base node's bands moved with it — **4 / 10 / 14**, was 4 / 12 / 20, was 6 / 12 / 20 — because the edges
+are the unlocks and each retired rung took an edge with it. Band 2's dialogue asked for the bulb and now
+asks her to bring the bottle over when she pours, which is the thing that actually opens next.
 
 ### 23.5 What did not move
 
-No new flag, no new trait, no change to the `hands` gate (12), the `knees` gate (20) or `grier_opened_up`.
-The loop still needs no bottle. `sit` is still free and still finishes the whole arc alone.
+No new flag, no new trait, no change to `grier_opened_up`. The loop still needs no bottle. `sit` is still
+free and still finishes the whole arc alone.
+
+---
+
+## 25. THE HANDS RUNG IS CUT — beat_0151 (rev 202). One free +4 that closed on nothing.
+
+**Added 2026-09-08, after LO read the rung in play.** His words: *"I think it didn't hold much value."*
+
+### 25.1 What was wrong with it
+
+`hub_grier.hands` — *"Go and stand between his knees"*, relation gte 12, +4, 60 min — was a scene he was
+not wrong about. Three things, and none of them is the prose:
+
+**It never closed.** Its only gate was `relation gte 12`. No flag, no upper bound. At relation 40, long
+after the loop was open, the hub menu read `Go and stand between his knees` directly above `Let him have
+the rest of it` — a clothed body-check parked beside the sex loop. That is exactly the failure the `knees`
+choice was re-gated to avoid at beat_0126, in that comment's own words: *"two competing oral rungs on one
+portrait would only split the player's attention… which would read as the game disagreeing with itself."*
+`knees` got the fix. `hands` never did.
+
+**It was a pure number pump.** No flag set, nothing opened, nothing closed. The whole mechanical job was
++4. After the first view every click was a sixty-minute button.
+
+**It undercut the drink.** beat_0142/0143 built a three-rung bottle economy so that *she* escalates and
+pays twenty coin a time for it. Two relation points above the flash, a free +4 appeared beside it.
+
+### 25.2 What the cut nearly broke — read the band's last line
+
+The base node bands on relation, and **band 3 ended on a direct order**:
+
+> *"…I have decided I do not care why. **Come here. Stand where I can reach you.**"*
+
+That order **was** the hands rung. Delete the rung and Grier gives an instruction no choice on the menu can
+obey — the coat-label defect of §23.2 one layer up: the prose says one thing and the exit block offers
+another. The line is now pointed at the object that *is* on the menu in that band, the bottle she carries
+and never drinks: *"Pour mine and put the cap back on yours. You never drink it and I have stopped
+pretending I have not noticed."*
+
+**The general rule this beat earns: before moving any edge on a banded hub, read each band's last line
+against the exit block.** Three of `hub_grier`'s four bands end on an instruction, and a band whose
+instruction has no answering choice is a defect the build cannot see.
+
+### 25.3 Closing the gap the cut left
+
+With `hands` gone the last new thing unlocked at **10** and the next at **20** — ten relation points with
+nothing new in them, crossed on a `sit` rung worth +2, which is five repeat visits of one scene. The genre's
+disease is lostness plus grind (the mopoga read), and that is grind.
+
+So the knees gate came down **20 → 14**, and band 4 came down with it. The surviving edges are **4 / 10 /
+14** and every one of the three opens something the player has not seen — the rule the base node's own
+banner already stated: *the band edges are the unlocks*.
+
+**Save-safe, verified rather than assumed:** `grier` returns 0 occurrences in `releases/v0.2.0.html`
+(`hub_grier`, `npc_grier`, `grier_room` and the bare name all 0). No shipped save has ever carried a
+relation on this man, so his gates are free to move.
+
+### 25.4 The five edits
+
+1. the choice `Go and stand between his knees.` — deleted
+2. the node `hands` — deleted (27 lines)
+3. band 3's dangling order — rewritten onto the bottle; band edges 12→10, 20→14
+4. `knees` gate 20 → 14
+5. quest cards re-banded to the new edges — goals 10, then 14, then the wall card at 14; card 2's tip
+   named the cut rung verbatim and now names the pour
+
+`scenes/grier_hands.jpg` retires with the rung and comes off beat_0141's harvest list. It was never
+harvested, so the cut costs nothing in media.
+
+**Measured after:** merge validates · `check_quest_cards` all measures pass, 87 cards · `gates.py` 21 FAILs,
+unchanged, and authored nodes 429 → **428**, exactly the one deleted · build errors unchanged at the three
+known beat_0141 files · `Go and stand between his knees`, `hub_grier_Node_hands`, `grier_hands.jpg` and
+`Stand where I can reach you` all **0 hits** in the built HTML · live at relations 3/6/11/13/14/22 with 0 JS
+errors: each band prints its own line, band 4 and the knees rung flip together at exactly 14, and with a
+bottle the drink sub-menu greys at 3, opens the tease at 6 and adds the pour at 11.
 
 ---
 
@@ -2593,3 +2745,168 @@ beat_0141's three known missing media files.
 
 **`a locked door says why` moved 25% → 28% mute and it is an artefact, not a regression.** The absolute mute
 count is unchanged at four; removing two *good* `show_when_locked` choices shrank the denominator.
+
+---
+
+## 26. THE WALL COMES DOWN — beat_0152 (rev 203). Grier drains on the first ass finish.
+
+**Added 2026-09-08.** LO played the loop and called it: *"I think I want it to work normally in the first
+try itself."* Asked to confirm the shape — *"So it will drain grier in the first cum inside ass right??"* —
+and then: *"Go ahead."*
+
+### 26.1 What the wall was, and what it cost
+
+`loop_grier_finisher`'s first `[group]` band caught **every** elected finish while `grier_nights lt 3`.
+Grier was the only man in this game who finished on nothing: not the mouth, not the cunt, not the ass. Three
+failed nights, each leaking one more thing — the bottle, eleven years with his hands inside things like her,
+the trays — then the break, then the drain.
+
+The argument for it (§8, and the *had to be total* section) was that a partial wall is a lie the player
+disproves on night one, and that the three nights were content rather than a tax. That argument was
+internally sound. It was still three afternoons standing between a player and the release's first piece.
+
+**After the cut:** three exclusive bands on `sex_finisher_type` — facial(0) / inside(1) / ass(2) — which is
+`loop_colm_finisher`'s shape exactly. Five exits instead of eight. Grier stopped being the exception.
+
+`grier_nights` stays **declared and defaulted** in `0_systems_spec.toml` and `1_metadata`, read by nothing.
+Deleting a trait key strands a save; a trait that sits at 0 forever costs nothing.
+
+### 26.2 The knock-on that made this five edits — read the band's last line
+
+**`hub_grier.knees` was the wall arriving as content one beat early.** Six beats of him failing in her
+mouth, and the lines were categorical:
+
+> "Wait. Wait. No. No, it has gone. **It has gone again.**"
+> "You will have your jaw off **before that comes back** and I have watched better than you try."
+> *"It is not a mood and it is not her. **It is nine years of that bottle**…"*
+
+Leave those and the player reads, two clicks apart: he can **never** finish → he finishes fine. The scene
+that opens the loop would have refuted the loop.
+
+**The fix is four lines and not a rewrite. He fails at the ACT, not as a man:**
+
+> "No, it has gone. **It is not going to come off a mouth**, that is all that is."
+> "You will have your jaw off and it will still be down there sulking, because **that is not the end of me
+> that answers** any more and it has not been for years."
+> *"Nine years of that bottle have taken **the easy way** out of him…"*
+
+The bottle is still named, still nine years, still his own fault — it explains why the easy way out of him
+is gone, not why he can never. The anal finish then lands on the reason the game already gives everywhere
+else; Marsh's loop says it outright: *"the mouth and the cunt don't cost him that."*
+
+Nothing else in the scene moved. The jaw, the boards printing her knees, the contempt, the crude register.
+
+**The rule this earns, and it generalises past Grier:** a banded scene's last line is usually an instruction
+or a claim about state. Before deleting the mechanic it describes, read it. beat_0151 learned the same thing
+one layer up when cutting the `hands` rung left band 3 giving an order no choice could obey.
+
+### 26.3 Where the three confessions went
+
+| | line | outcome |
+|---|---|---|
+| `wall1` | *"That is the bottle… You did it fine. It does not matter."* | **binned** — it exculpates her after a failure, and there is no failure |
+| `wall2` | *"Eleven years I had my hands inside things like you…"* + *"I did that to myself… Nobody poured it down me."* | **moved into `hub_grier.drink_after`** |
+| `wall3` | *"…one of you open on a table with the whole of it laid out in **trays**"* | **binned** — `d0` delivers the reveal in full and in vision |
+
+`drink_after` is why wall2 had somewhere to go. That choice — *Drink with him. (He will be further gone.)* —
+existed for exactly one effect, `grier_nights -1`, and beat_0144 built it **because the post-ladder drink
+was already a dead button once**. Cutting the wall would have made it dead a second time. It needed a drunk
+man talking, which is what the node already is (*"somewhere around the fifth one his sentences stop
+finishing"*), so it inherited the confession instead of being deleted. The twenty coin now buys the only
+characterisation of Grier that `d0` does not carry.
+
+⚠️ **It deposits no state, knowingly.** `gates.py`'s *what a paid repeatable leaves behind* lint counts
+that; it is a lint, not a gate, and its own text says a pure sink is not a defect. The alternative was
++relation — but nothing on this man reads relation above 14, so that would be a number moved for the
+instrument rather than for the player. The deposit here is the content.
+
+### 26.4 The rest
+
+- **Quest card 3** was the wall in prose (*"Three nights of it is what it takes"*). Rewritten. First draft
+  pushed `check_quest_cards`' *what did not happen* measure from 25.7% to **26.3% against a 25.76% field
+  max** — four negations in one card. Re-cut in positives; back to 25.7%, pass. Worth recording: that
+  measure sits one-twentieth of a point under its ceiling, so **any** new card is a live risk.
+- **`6_dev_shortcuts.toml`** set `grier_nights = 3` to pre-break the wall for a jump. Removed — harmless
+  once nothing reads it, but a lie in a debug tool.
+- **Renamed:** the finisher canvas AND its climax node were both called *"He does not finish"*. Both are
+  *"The finish"*. The node name was missed on the first pass and caught by the built-HTML sweep.
+
+### 26.5 Measured
+
+Merge validates · `check_quest_cards` all measures pass, 87 cards · `gates.py` **21 FAILs**, unchanged ·
+authored nodes **428 → 425**, exactly the three wall nodes · build errors unchanged at the three known
+beat_0141 files · `He does not finish`, `Let it go — he is not getting there tonight.`, `It has gone again`
+and `you will have your jaw off before that comes back` all **0 hits** in the built HTML.
+
+Live, 0 JS errors: the first ass finish with the drain armed offers `Take what he carries.` and lands on
+`Canvas_grier_drain_canvas_Node_d0`; that walks into `cap_grier_gives` **in the same visit** with
+`piece_one_held` and `rise_named` both set; facial and inside each render their own band and exit via
+`Get your coat.`; the wrong-gear and empty-drain bounces still print their reasons; `knees` plays through
+carrying none of the three stale lines; `drink_after` renders both confession halves, spends the bottle and
+moves no counter.
+
+---
+
+## 27. THE ROAD TO THE PLAZA STOPS BEING CUT — beat_0153 (rev 204).
+
+**Added 2026-09-08.** LO, reading the travel gates: *"So when the wren run of with mercer to underworld that
+option goes away?? If yes, i did nt wanted it to go away. But the nested locations inside it can be locked."*
+
+### 27.1 He is right, and the plaza was already built the way he describes
+
+Two pickers offer the ride up — `activity_travel_to_spire` @`the_waterfront` and `activity_travel_from_gate`
+@`underworld_gate`. Each carried two mutually exclusive rides banded on `archive_1a_done`, and the post-seal
+one needed **three** flags: `archive_1a_done` + `rise_named` + `face_worn`.
+
+So from the archive job until Grier named The Rise, **there was no road up at all** — and the gate picker is
+the one that matters, because she sleeps at the cot and commutes from there.
+
+What the road gate was protecting turns out to be already protected, door by door:
+
+| on the plaza | its own gate |
+|---|---|
+| `vance_securities` | `salvage_relaunched` + `archive_1a_done is_false` — shut post-seal |
+| `atrium` → `penthouse` | `archive_1a_done is_false` — shut post-seal |
+| `atrium` itself | open |
+| `the_rise_floor` | **no entry_conditions at all** |
+
+### 27.2 `face_worn` came off; `rise_named` could not
+
+**`face_worn` is cut from both pickers.** What it enforced — that riding up in her own face is suicide,
+canon since beat_0116 — moves one layer in, onto a card **already built for exactly this**:
+`react_rise_no_face`, repeatable pri 9 on `the_rise_floor`, gated `cover_research` EQUIPPED + `face_worn
+is_false`: *"the kit without the face is the company's own asset walking into a Vance building in a
+costume."* It bounces her to the waterfront. She now gets **told, in the building**, instead of finding a
+road that never appears.
+
+**`rise_named` stays, and it is the clause that cannot move.** `the_rise_floor` carries
+`entry_from = spire_plaza` and no conditions, so it is a live nav card the instant the plaza is reachable.
+Gating the *location* would not hide it — a locked location always renders a **greyed** card and there is no
+hide path (`_render_location_nav_card`, `v2.py:19829`) — so the promise would sit on that plaza for the
+whole first half of the release. Gating the **road** on Grier's mouth makes that window zero.
+
+### 27.3 Two paragraphs became warnings instead of refusals
+
+Each picker's base node carries a band on `face_worn is_false` that told her she could not go. With the ride
+live beside it, that is the coat-label defect again — prose saying one thing, the menu offering another. Both
+now state the **risk** and let her take it:
+
+> "She could take the car up **in this face and get as far as a desk**. The one that gets her past a camera
+> on a column comes on at her own cot…"
+>
+> "There is a reason to go up now and she is wearing the wrong face for it. **The car will still take her.**"
+
+### 27.4 A stale comment, found and fixed
+
+`the_rise_floor`'s header claimed *"THE WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's
+third exit, gated rise_named."* That express (`riding_rise`) was **deleted by beat_0147**, in the same change
+that gave this location `entry_from = spire_plaza`. The comment described a route that had not existed for
+five beats, and it is the exact comment a future author would have trusted when deciding where the gate
+lives. Corrected in place with the engine reason spelled out.
+
+### 27.5 Measured
+
+Merge validates · build errors unchanged · `check_quest_cards` all measures pass · `gates.py` 21 FAILs and
+425/425 nodes, both unchanged. Live, 0 JS errors, with `archive_1a_done` and `rise_named` set and
+`face_worn` **off**: the waterfront picker offers `Ride up to the plaza.` and prints the warning band; the
+gate picker offers it too and prints *"The car will still take her."*

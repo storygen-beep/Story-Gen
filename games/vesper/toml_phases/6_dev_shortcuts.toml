@@ -949,7 +949,6 @@ effects = [
   { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
   # ── WHOSE HAND, through beat 13 ──
   { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
-  { targetType = "player", trait = "grier_nights",        op = "set", value = 3 },
   { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
   { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
   { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
