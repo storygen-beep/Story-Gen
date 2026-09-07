@@ -13621,11 +13621,11 @@ when = [
 # that has to carry it. The walkthrough line still names PLACE + PERSON + VERB and it now names BOTH routes
 # up, free and paid, because the free one still works and a tip that hid it would read as a paywall.
 # The card's own text is untouched and still true: there is nothing to buy off him. The piece is not for
-# sale and he does not know he is holding it. What five coin buys is an hour, not a fact.
+# sale and he does not know he is holding it. What twenty coin buys is an hour, not a fact.
 [[quest_cards]]
 priority   = 10
 text       = "You found him, and he had you the second you were in the doorway — shoulders sit wrong on people, and yours sit exactly right. He handed tools to the men who built you and he has been drinking about it for nine years. He is carrying a piece of your childhood in that room and he has never once known what it is, which means there is nothing to buy off him and no trade to offer him. You asked him one straight question and he put you out on the lane."
-tip        = "Go back down the lane to the Reach and keep turning up at Grier's room. The door is never locked and he is in it from ten in the morning. Sitting with him works and costs nothing, and it is slow. The faster way is the bottom shelf at the Anchor, five coin a bottle: take one down with you and drink with him, and the hour buys you a second thing in the same visit."
+tip        = "Go back down the lane to the Reach and keep turning up at Grier's room. The door is never locked and he is in it from ten in the morning. Sitting with him works and costs nothing, and it is slow. The faster way costs money. The bottom shelf at the Anchor is twenty coin a bottle: take one down with you and drink with him, and the hour buys you a second thing in the same visit."
 when = [
   { flag = "grier_met",       op = "is_true"  },
   { flag = "grier_opened_up", op = "is_false" },
@@ -14579,7 +14579,7 @@ text             = "Drink with him."
 targetType       = "node"
 nodeId           = "hub_grier.drink"
 show_when_locked = true
-locked_text      = "Her hands are empty and he pours his own. The Anchor keeps the cheap stuff on the bottom shelf at five coin a bottle, two streets off the water, and it is on the way down."
+locked_text      = "Her hands are empty and he pours his own. The Anchor sells off the bottom shelf at twenty coin a bottle, two streets off the water, and it is on the way down."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "bottle_held", operator = "gte", value = 1 },
 ] }
@@ -14676,7 +14676,7 @@ blocks = [
   # card W's tip names the Anchor, but a mechanic the player is only ever told about by the UI is a mechanic
   # the game did not earn. He asks for it himself, sourly, out of the free rung — so the lever is discovered
   # by doing the boring thing, which is exactly the visit it is meant to replace.
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "If you are going to keep sitting in that chair you can start bringing something with you. I am not pouring for two off my own shelf, and there is a bar on the water that sells it for five." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "If you are going to keep sitting in that chair you can start bringing something with you. I am not pouring for two off my own shelf. There is a bar on the water that will rob you of twenty for it, and you will pay it, and we both know that." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -14693,7 +14693,7 @@ effects = [
 # ⚠️ IT EXITS TO grier_room AND NOT TO the_waterfront, AND IT IS THE ONLY NODE ON THIS HUB THAT DOES.
 # Every rung dumps her on the street on purpose (see the banner above): one rung per trip is what makes
 # card W's "as many afternoons as it takes" true. This is the exception, and the exception IS the purchase.
-# Five coin at the Anchor buys her a second action in the same visit and saves a 30-minute walk each way.
+# Twenty coin at the Anchor buys her a second action in the same visit and saves a 30-minute walk each way.
 # It cannot be chained: she can carry one bottle and this node spends it, so a trip is at most one drink
 # and one rung. Exiting to your own location is house pattern, not an invention (hub_colm_undertow,
 # hub_bastien, rung_mercer_hands_on, and about a hundred more).
@@ -14870,7 +14870,7 @@ blocks = [
         { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
             { type = "flag", subject = "player", flag_key = "grier_drank_with", operator = "is_true" },
           ] } }, blocks = [
-          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and she has been walking the last month of it down the lane herself, five coin at a time. Whatever he has in a drawer is behind that." },
+          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and she has been walking the last month of it down the lane herself, twenty coin a time, out of money she earned on her back. Whatever he has in a drawer is behind that." },
         ] },
         { type = "paragraph", content = "She wipes her chin on the back of her wrist and finds her coat where she left it. Behind her the glass goes back down on the arm of the chair, exactly where it was when she came in." },
     ] },

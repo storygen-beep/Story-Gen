@@ -2131,7 +2131,7 @@ the one man in the city who would notice why.
 Ceiling row (b) is unchanged and governs every new line: sour, unhurried, proprietary rather than jeering,
 **she is never shown enjoying it, his room is work.**
 
-### 22.4 What the 5 coin actually buys — the exit, not the relation
+### 22.4 What the 20 coin actually buys — the exit, not the relation
 
 **⚠️ REJECTED: a big relation number on the give.** The first cut priced it at +5. At +5 a player buys four
 bottles, reaches 20, and jumps straight to `knees` without ever doing the light or the hands — the whisky
@@ -2143,10 +2143,16 @@ The drink pays **+3**, and what it really buys is the **exit**:
 > real afternoons and card W's *"as many afternoons as it takes"* is true. **The drink node is the one
 > exception: it exits to `grier_room`,** so the hub re-renders and she can do a rung the same visit.
 
-That is the purchase. 5 coin saves a 30-minute walk each way. It cannot be chained — one bottle carried, one
-bottle spent — so a trip is at most one drink plus one rung.
+That is the purchase. 20 coin saves a 30-minute walk each way. It cannot be chained, because she carries one
+bottle and this node spends it, so a trip is at most one drink plus one rung.
 
-Measured: **free path 7 trips, bottle path 4 trips and 20 coin.**
+Measured: **free path 7 trips, bottle path 4 trips and 80 coin.**
+
+**⚠️ 20 A BOTTLE AND NOT 5 — LO's call, raised 2026-09-07 before the price ever shipped.** The first cut put it
+at the gate toll, where it was a habit rather than a cost. At 20 it sits with the part (25) and the taser (30),
+and the full climb is 80, which is two thirds of the face. The price is the argument: she pays a part's price
+for something he is through by dark, again and again, and nothing in the game ever tells her it was worth it.
+It still gates nothing — the free rung is on the same hub, so an empty pocket costs her walking, never content.
 
 **⚠️ EXITING TO YOUR OWN LOCATION IS HOUSE PATTERN, NOT AN INVENTION.** ~100 canvases in this game do it,
 `hub_colm_undertow`, `hub_bastien` and `rung_mercer_hands_on` among them.

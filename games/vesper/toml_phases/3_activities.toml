@@ -2830,15 +2830,18 @@ conditions = { version = "1.0", logic = "AND", items = [
 # ⚠️ GATED grier_met SO IT CANNOT EXIST BEFORE THE REASON FOR IT. beat_0117's lesson on the taser: a buy card
 # the player can find before anything has made them want it means the reasoning arrives after the purchase.
 # She has to have met the man and been thrown out of his room first.
-# ⚠️ 5 COIN. The cheapest thing in the game — the gate toll's price, against 25 for a part, 30 for the taser
-# and 120 for the face. It is not meant to bite. What it buys is the exit on hub_grier.drink, which saves a
-# 30-minute walk each way; the coin is a habit, not a wall. "Coin gates PROGRESS, never action" and the free
-# rung is still there.
+# ⚠️ 20 COIN, AND IT IS MEANT TO BITE. LO's call, raised from 5 after the first cut. It sits with the part at
+# 25 and the taser at 30 rather than with the gate toll at 5, so the full climb is four bottles and 80 coin,
+# which is two thirds of the face. That is the argument the price makes: she is paying a part's price for
+# something a man finishes in an afternoon, over and over, and the game never tells her it is worth it.
+# ⚠️ AND IT STILL GATES NOTHING. "Coin gates PROGRESS, never action" (3_activities:409) — the free rung is
+# right there on the same hub, so a player with an empty pocket walks the long way up and loses no content.
+# What the 20 buys is the exit on hub_grier.drink and the walk it saves, never a rung she could not reach.
 # MEDIA: none new — reuses locations/the_anchor.jpg, the way activity_buy_taser reuses the market.
 [[canvases]]
 id          = "activity_buy_bottle"
 name        = "Something to take down the lane"
-description = "beat_0142 (rev 193), WHOSE HAND. Wren-solo @the_anchor. Repeatable trigger, pri 3, gated grier_met is_true + bottle_held lt 1. Buy = 5 coin -> bottle_held = 1, +15 min. The one lever on Grier's ladder: he is a drunk, the bottle is on the arm of his chair in every band of his hub, and it is the only object in that room with no verb attached. NOT a key — no rung reads bottle_held. It buys hub_grier.drink, which exits back into the room instead of onto the street, so the 5 coin is a saved walk and a faster climb. No npc clauses, so it renders outside Renner's 19:00-23:00 window."
+description = "beat_0142 (rev 193), WHOSE HAND. Wren-solo @the_anchor. Repeatable trigger, pri 3, gated grier_met is_true + bottle_held lt 1. Buy = 20 coin -> bottle_held = 1, +15 min. The one lever on Grier's ladder: he is a drunk, the bottle is on the arm of his chair in every band of his hub, and it is the only object in that room with no verb attached. NOT a key — no rung reads bottle_held. It buys hub_grier.drink, which exits back into the room instead of onto the street, so the 20 coin is a saved walk and a faster climb, never a rung she could not otherwise reach. No npc clauses, so it renders outside Renner's 19:00-23:00 window."
 [canvases.trigger]
 location      = "the_anchor"
 is_repeatable = true
@@ -2855,15 +2858,15 @@ name = "Something to take down the lane"
 blocks = [
   { type = "image", props = { file = "locations/the_anchor.jpg", description = "A dim dive bar with dark wood, dead neon and a bartender behind it.", search_queries = ["dive bar dark wood dim neon", "empty bar counter bartender low light"] } },
   { type = "paragraph", content = "Grier pours another one and does not offer her any. That is the whole of the hour, every time, and it has been the whole of the hour for a month. He drinks his own and she sits and watches him do it." },
-  { type = "paragraph", content = "The Anchor keeps the cheap stuff on the bottom shelf where nobody has to be asked twice about it. Five coin a bottle. The bartender puts it on the wood without a word and does not ask who it is for." },
+  { type = "paragraph", content = "The Anchor keeps the bottom shelf for men who have stopped tasting it. Twenty coin, which is what a part costs, for something he will be through by dark. The bartender puts it on the wood and does not ask who it is for." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a bottle. (5 coin.)"
+text       = "Buy a bottle. (20 coin.)"
 targetType = "node"
 nodeId     = "activity_buy_bottle.buy"
-costs      = [{ trait = "coin", value = 5 }]
+costs      = [{ trait = "coin", value = 20 }]
 effects = [
   { targetType = "player", trait = "bottle_held", op = "set", value = 1, clamp = true },
 ]
