@@ -2450,3 +2450,146 @@ never given.** It is not caught by any gate — `gates.py` measures texture, not
 was perfectly sound the whole time. The check is one question, asked of any line where a character names a
 specific thing: **which canvas told her that?** If the answer is *none*, the character has to be the one who
 says it.
+
+---
+
+## 26. THE PLAZA REOPENS — beat_0147 (rev 198). A road cut, a door locked, three verbs put back.
+
+LO was reading the travel menu and asked why the Rise is a new building instead of somewhere in the Spire.
+Working the question read-only turned up two defects the build could never have flagged, and produced one
+design decision that is his.
+
+### 26.1 The seal's stated reason was one the game defeats forty beats later
+
+The card that blocked the ride up said the Spire was shut because *"sweeps on every floor, her face on every
+camera at the curb."* But `react_rise_no_face` says the opposite about the same camera: without the bought
+face she turns round inside the lift doors, and with it she walks in. `cap_bastien_notices` had already
+proved that face on the man who kept her in a cell for eight scenes.
+
+**So the lock the game kept asserting was the one thing the player had spent 120 coin solving.** LO spotted
+it from inside the build, which is the only place it is visible — nothing in the TOML contradicts itself,
+and no gate reads two strings against each other.
+
+**What is actually true is one paragraph earlier in the same scene.** Mercer, at the 1a close: *"A deep-vault
+flag with my asset's **fingerprints** on it, and it is climbing, and it does not stop until it reaches Vance
+himself."* Not a face. A record of whose hands opened the vault, moving upward. A new face does not give her
+new hands, and Vance's own doors are keyed to an employee she is no longer dressed as.
+
+That reason now lives in two mutually exclusive `[group]` paragraphs on each travel picker's base node rather
+than in a greyed `locked_text`. **Prose, not a tooltip** — the state is load-bearing enough to be in the room.
+
+### 26.2 The seal deleted three verbs and nobody noticed for a whole act
+
+`archive_1a_done` cut 25 repeatable Spire canvases. Most were rebuilt down in the underworld as the chapter
+went — charging became the cot's feed line, `canvas_chip_view` became `canvas_chip_view_cot`, the wardrobe
+moved (`wardrobe_location` is a scalar and already points at `the_cot`), `activity_swap_weapon` got a berth
+twin. **Three never were**, and they are exactly the three whose absence hard-fails nothing:
+
+| lost | what it cost |
+|---|---|
+| `activity_wash` | **the only `+hygiene` surface in the game.** Eleven surfaces drain it 30 at a time. Post-seal the sidebar read *"Condition: Filthy"* forever with no way to clear it |
+| `activity_train` | `fighting`/`stealth` gate the burned yard's better branches and the yard **outlives** the seal — she could walk in forever and never improve at it |
+| `activity_repair_weapon` | find the emitter late, miss a session before the seal, and `arousal_weapon_ready` never sets. That weapon is dead permanently, with a green build |
+
+Rebuilt at `the_cot` as `activity_wash_cot` / `activity_train_cot` / `activity_repair_weapon_cot`, gated
+`berth_home` — which requires `archive_1a_done`, so they **can never co-exist** with the wren_room originals
+in any save, in either direction. No collision, and the shipped three were not touched.
+
+**⚠️ THE DEFECT CLASS: a zone-seal is a deletion, and a deletion has an inventory.** Cutting the road to a
+district silently cuts every verb in it. Nothing in the build says so — `no canvas key is discarded` passes,
+every node stays reachable, and a one-way meter looks exactly like a working one. The check when any zone
+closes is a list: **what could she do in there, and where does each one live now?** Three of ours had no
+answer for the length of an act.
+
+### 26.3 The plaza reopens and the tower is locked door by door — LO's call
+
+Instead of cutting the road, cut the doors. `spire_plaza` is reachable again post-seal on
+`rise_named` **AND** `face_worn`; every one of Vance's own doors is locked individually.
+
+```
+spire_plaza      OPEN   (post-seal: rise_named + face_worn)
+├── the_rise_floor  OPEN   ← the Rise, moved (26.4)
+└── atrium          OPEN   ← she gets into the lobby
+    ├── penthouse      LOCKED — the Chairman's ground
+    └── wren_floor     LOCKED — she isn't Wren in that building any more
+        └── wren_room → cradle   sealed behind it
+vance_securities LOCKED
+└── docs_vault    LOCKED (vault_cleared, never set)
+```
+
+**The atrium stays open deliberately.** Stopped at the plaza she never sees the doors, and the doors are the
+point: she walks into the lobby of the building that owned her and reads two she cannot take.
+
+**`wren_floor` is the beat.** LO's reason, and it is the face's own price: the bought face is what gets her
+back into this district and it is the exact reason this corridor stays shut, because the only person it
+opens for is Wren and she did not come up as Wren. It never reopens.
+
+**⚠️ THE LOCK IS SHAPED `archive_1a_done is_false`, which is the penthouse's shape, and that is what makes it
+save-safe.** Every pre-seal save behaves exactly as it does today — floor open, `wren_room` and the cradle
+behind it open, wash and drill and repair still up there. Only the post-seal state moves.
+
+**⚠️ AND ONE LOCK SEALS THREE ROOMS, WHICH IS LOAD-BEARING FOR THE ECONOMY AND NOT ONLY THE FICTION.**
+cradle → wren_room → wren_floor. A reopened cradle is **free charging**, and free charging kills Kess's rent
+— *"half a charge if you're cheap, a full night on the line if you pay for it."* The cot has to stay the
+only bed, and it is the wren_floor lock that keeps it one.
+
+**Two blocked-messages were stale and are now reachable.** `penthouse` claimed *"her face is on every list in
+the building"* — false under a working face. `vance_securities` still said *"Mercer hasn't sent her up there
+yet"*, a **pre-dispatch** line about a man the 1a close ran out of the city: the `show_when_locked`
+stale-pre-state trap, live, and invisible only because nobody could reach the door.
+
+**The one-shot audit.** 19 one-shot Spire canvases could in principle fire late once the plaza opens. Almost
+all are gated on flags the 1a close consumes. Two are not — `canvas_glitch_recurrence_i`/`ii` at the cradle,
+and `canvas_opening_office` at the penthouse, which carries **no conditions at all**. Both sit behind the
+wren_floor and penthouse locks, so neither can reach. Checked, not assumed.
+
+### 26.4 The Rise moves into the Spire district
+
+LO's call. It stood on the edge of the Reach and was reached by a travel choice off the waterfront; it now
+stands across the plaza from the tower she cannot enter, and it is a **nav card on that plaza** rather than a
+menu line. `activity_travel_to_spire.riding_rise` and its choice are deleted; `activity_leave_the_rise` was
+re-pointed from `the_waterfront` to `spire_plaza` — the mandatory half, or leaving the building teleports her
+to the docks.
+
+**§6's three load-bearing claims all survive.** The security is unfinished (Vance putting his new tower in
+his own district is *more* believable than cheap dock ground, not less); the building is empty, which is what
+§9 needs for the silence; and the Spire is visible from it — now out the window rather than weather on a
+horizon.
+
+**What is spent is §8's walk.** Cain → Grier → Sabin was one district on foot. Grier is still down the lane
+off the waterfront and Sabin is now up top, so the chain is a walk plus a car. LO accepted that cost in the
+open: *"the 30 min car ride is fine, no issues in it."*
+
+**⚠️ THE GREYED-CARD PROBLEM THAT MADE EVERY OTHER ROOM A CARD DOES NOT BITE HERE.** The engine renders a
+locked child as a greyed card and gives no way to hide it (`v2.py:20444`), which is why seven live rooms in
+this game are card-reached. But the plaza is only standable-on with `rise_named` already set, so by the time
+the card could render, Grier has named the building. **The greyed window is zero and the telegraph stays a
+man's mouth.**
+
+Five strings assumed it stood by the docks and moved with it: the floor's own description (*"a shape in the
+weather to the north"*), the deleted ride node, the piece-one quest tip, the end-of-build tip, and **Grier's
+naming line** — which keeps *"you can see it from the top of the lane"* and gains *"going up beside the big
+one"*, because a tower is visible from the docks and he still has to site it.
+
+### 26.5 What was checked and left alone
+
+- **No stranding.** `activity_travel_to_reach` is **not** gated on the seal — the Reach ride wants
+  `hygiene gte 40` and the Underworld ride wants `opening_done`. She can always get back down, and 26.2's
+  wash card covers the filthy case.
+- **The 1a close's own closing paragraph stays** (*"Sweeps on every floor now, her face on every camera at the
+  curb"*), and so do the three other in-scene mentions. Those are narration in the moment and they are true —
+  they **did** put her face out. Only the standing **guidance** changed.
+- **The Rise keeps its name and all three ids.** `the_rise_floor` keeps `auto_exit = false`; `sabin_lab` and
+  `the_dry_store` keep their own card doors off the floor, and the floor's nav div stays empty.
+- **`hide_when_locked`** — the engine gap behind all seven card-rooms — is recorded and **not** built here.
+  Its own change, its own build.
+
+### 26.6 Measures
+
+`no canvas key is discarded` PASS · **429/429 authored nodes reachable** (+8 net: two ride nodes and seven
+across the three cot cards, less the deleted `riding_rise`) · prose texture 16.3/10k PASS · median sentence
+**9** · somebody speaks **2.7:1** · clip coverage 92% · `check_quest_cards.py` **6/6**. Build errors stay at
+beat_0141's three known missing media files.
+
+**`a locked door says why` moved 25% → 28% mute and it is an artefact, not a regression.** The absolute mute
+count is unchanged at four; removing two *good* `show_when_locked` choices shrank the denominator.

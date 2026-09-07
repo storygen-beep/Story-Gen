@@ -926,8 +926,13 @@ id               = "spire_plaza"
 name             = "Spire Plaza"
 description      = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. THE SPIRE. The corporate core, clean and lit and watched. The company car waits at the curb to run her down to the Reach."
 image            = "locations/spire_plaza.jpg"
-navigation_order = ["atrium"]
+navigation_order = ["atrium", "the_rise_floor"]
 # Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
+# ⚠️ beat_0147 (rev 198) — THE PLAZA SURVIVES THE 1a SEAL NOW. It used to be unreachable post-blowup because
+# BOTH rides up were cut (3_activities); the ride is now re-opened on rise_named + face_worn, and the tower is
+# locked door-by-door instead of by cutting the road. The street is public and the bought face beats a camera
+# on a column — that is what the face is FOR, and react_rise_no_face already says so. What she cannot do is
+# walk through any of Vance's own doors, and she can now stand at the foot of them and read why.
 
 # ── vance_securities — Calloway's division + the un-indexed file room (The Archive 1a) ──
 # NEW (beat_0056). Topside/Spire, off spire_plaza. LOCKED until the mission is dispatched — gated on the shipped
@@ -949,7 +954,11 @@ entry_conditions = { version = "1.0", items = [
   # already unreachable (cut ride up), so this message is effectively never seen; it's insurance against a stray path.
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-blocked_message = "Mercer hasn't sent her up there yet. The Calloway job opens when he gives the word."
+# ⚠️ beat_0147 (rev 198) — REWRITTEN. The old line ("Mercer hasn't sent her up there yet. The Calloway job
+# opens when he gives the word.") was written for the PRE-dispatch state and went stale the moment the 1a close
+# ran Mercer out of the city — the toml-gotchas stale-pre-state trap, live, and now reachable because the plaza
+# re-opens. This line is true in BOTH states: before, nobody has sent her; after, there is nobody left to.
+blocked_message = "She has never once walked onto that floor on her own account. It opens when somebody sends her up, and nobody is sending her up."
 
 # ── docs_department — the official high-security archive (another office on the Vance Securities floor) ──
 # NEW (division build-out). Child of vance_securities (same floor). The OFFICIAL archive — glass, a front desk
@@ -1000,7 +1009,10 @@ entry_from  = "atrium"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
-blocked_message = "Not anymore. The penthouse is the Chairman's ground now, and her face is on every list in the building."
+# ⚠️ beat_0147 (rev 198) — the second clause used to read "and her face is on every list in the building",
+# which the bought face makes false: react_rise_no_face has that same camera beaten by that same face. What
+# stops her here is the lift and the man at the top of it, not recognition.
+blocked_message = "Not anymore. That floor is the Chairman's ground now, and the lift will not take her up to it on a badge she bought at a market stall."
 
 [[locations]]
 id               = "wren_floor"
@@ -1009,6 +1021,20 @@ description      = "The asset level. Narrow corridors, numbered doors, no window
 image            = "locations/wren_floor.jpg"
 entry_from       = "atrium"
 navigation_order = ["wren_room"]
+# ⚠️ beat_0147 (rev 198) — LOCKED FOREVER FROM THE 1a CLOSE, and it is the face's own price. LO's call: the
+# bought face is what gets her back into this district and it is the exact reason this floor stays shut, because
+# the only person that corridor opens for is Wren and she did not come up as Wren. It never re-opens — not on
+# face_worn, not on papers, not at any point in this act.
+# ⚠️ THE SHAPE IS THE PENTHOUSE'S, DELIBERATELY: `archive_1a_done is_false`, so every PRE-seal save behaves
+# exactly as it does today (floor open, wren_room and the cradle behind it open) and only the post-seal state
+# changes. version="1.0" or the lock fails OPEN.
+# ⚠️ ONE LOCK SEALS THREE ROOMS — cradle -> wren_room -> wren_floor. That is load-bearing for the ECONOMY, not
+# just the fiction: a re-opened cradle is free charging, and free charging kills Kess's rent ("half a charge if
+# you're cheap, a full night on the line if you pay for it", kess_1b_open). The cot has to stay the only bed.
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+] }
+blocked_message = "The one door in this city her face won't open. Past it are numbered rooms keyed to a woman who works here, and she came up wearing somebody who doesn't."
 
 [[locations]]
 id               = "wren_room"
@@ -1475,9 +1501,25 @@ auto_exit   = false
 [[locations]]
 id          = "the_rise_floor"
 name        = "The Floor"
-description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it. Cable trays, bare vents, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. From this height the Spire is a shape in the weather to the north, and she looks at it once and then does not again."
+description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it. Cable trays, bare vents, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. Through it the Spire stands across the plaza close enough to count the floors on, and she looks at it once and then does not again."
 image       = "locations/the_rise_floor.jpg"
 image_search_queries = ["open plan office floor unfinished ceiling cable trays rows of desks", "half built office interior bare concrete glass wall workers at screens"]
+# ⚠️ beat_0147 (rev 198) — THE BUILDING MOVED. It was sited on the edge of the Reach and reached by a travel
+# choice off the waterfront (activity_travel_to_spire.riding_rise, both now deleted). LO's call: it stands in
+# the Spire district, a second Vance tower going up across the plaza from the one she cannot enter.
+# ⚠️ WHY THE MOVE IS SAFE — and why it is better. §6's three load-bearing claims all survive: the security is
+# unfinished (Vance putting his new tower in his own district is MORE believable than cheap dock ground, not
+# less), the building is empty (§9 needs that for the silence), and the Spire is visible from it (now out the
+# window rather than weather on a horizon). What is SPENT is §8's Cain -> Grier -> Sabin walk: Grier is down
+# the lane off the waterfront and Sabin is up top, so the chain is now a walk plus a car. LO accepted that cost
+# explicitly ("the 30 min car ride is fine").
+# ⚠️ WHY IT IS A REAL DOOR AND NOT A CARD. The engine renders a locked child as a GREYED card (v2.py:20444)
+# with no way to hide it, which is why every "ships with the beat" room in this game is card-reached. Here the
+# card cannot leak: the plaza is only reachable on rise_named + face_worn, so by the time she can stand on it
+# Grier has already named this building. The greyed window is ZERO and the telegraph stays a man's mouth.
+# ⚠️ auto_exit STAYS false — activity_leave_the_rise is still the way out (re-pointed to spire_plaza), and
+# sabin_lab / the_dry_store keep their own card doors off this floor. Nothing else in the building moves.
+entry_from  = "spire_plaza"
 auto_exit   = false
 
 # ── sabin_lab — beat_0130 (rev 180). THE SECOND OF THE RISE'S THREE ROOMS. ────────────────────────────

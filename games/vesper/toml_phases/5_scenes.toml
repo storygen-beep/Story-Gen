@@ -5317,7 +5317,23 @@ id   = "base"
 name = "Kess"
 blocks = [
   { type = "image", props = { file = "locations/kess_berth.jpg", description = "A flooded ship-breaking dock lit by work-lamps, a stripped hull on blocks, a man at a work-cradle.", search_queries = ["flooded ship breaking dock work lamps night", "gutted hull workshop cutting torch dark"] } },
-  { type = "paragraph", content = "Black water, the hull on its blocks, the smell of cut steel. Kess is at the bench with the cot behind him and her two locked things somewhere under the mess he calls an order." },
+  # ⚠️ THIS PARAGRAPH IS UNCONDITIONAL AND MUST STAY TRUE IN EVERY STATE THE HUB CAN RENDER. It sits above
+  # the band chain, so it is the one line on this canvas that cannot describe a moment — the hub is gated
+  # berth_home alone and never closes, so whatever it asserts is asserted from 1b through the end of the
+  # game. It used to say "her two locked things", meaning the sealed file and the controller she set down
+  # at kess_1b_open, and BOTH halves go false during 1b: cap_extraction sends the file out of the room
+  # under her arm, and by then neither thing is locked (kess_print_read kills the key, cap_extraction opens
+  # the page). It was rendering directly above band Z1, where Kess says he has nothing of hers left —
+  # found live at beat_0149. THE KEY IS THE HALF THAT NEVER MOVES: it is on his bench from the moment
+  # berth_home is set (:5270, the same scene where she sets it down) and it is still there at the end —
+  # kess_the_chip_not_the_key, "The key is where he left it, on the cloth, dead. He has not put it away."
+  # No container is named on purpose, so this contradicts neither the work node's tray-and-rag nor that
+  # cloth. Anything added here has to clear the same bar; state-dependent colour belongs in a band below.
+  # ⚠️ AND IT CANNOT BE BANDED IN PLACE. _convert_blocks_to_game_html collects only CONSECUTIVE [group]
+  # blocks into one if/elseif chain (v2.py:15077), so a pair of bands dropped in here would merge with the
+  # seven below and swallow the whole leash_cut read-out. Above the image is the only safe placement, and
+  # that puts prose over the establishing shot. Keep this one flat and true.
+  { type = "paragraph", content = "Black water, the hull on its blocks, the smell of cut steel. Kess is at the bench with the cot behind him and her key somewhere under the mess he calls an order." },
   # ══ BANDS Z1 / Z2 — THE FACE (beat_0095, rev 146). THE POST-CHAPTER STATE, AND THEY GO FIRST. ══════════
   # ⚠️ THIS IS A REPAIR, NOT AN ADDITION, and it is the same defect rev 143 fixed one beat earlier arriving
   # from the other direction. Every band below was authored for the parts loop and crosses feed_line_days ×
@@ -11148,7 +11164,7 @@ when = [
 priority   = 12
 npc_id     = "npc_calloway"
 text       = "The last true believer in a dying division, still at that desk, still chasing a leak that stopped bleeding the day you closed it. He never learned what the woman who took his hunt seriously was actually hunting, and now he never will."
-tip        = "Calloway's closed out. The Spire is sealed to you. Sweeps on every floor, your face on every camera at the curb. The file room and the man in it are both behind glass. What he gave you, you already have."
+tip        = "Calloway's closed out. The plaza is walkable again in a bought face; his floor is not. That division opens when somebody sends you up, and there is nobody left to send you. The file room and the man in it are both behind glass. What he gave you, you already have."
 # ⚠️ rev 142 (beat_0092) — the ✓ badge, same sweep as Renner, Colm and Mercer. This one earns it hardest: the
 # card already says in words that the man is behind glass, and it still rendered in the shape of a live
 # instruction. Default label, no terminal_text — his arc is finished and nothing about him is coming back.
@@ -13668,7 +13684,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "It took four afternoons on that bench and it came all at once. The night they took it, rather than the thing in the drawer. A theatre with the lights down, four people who were in no hurry, three trays at the head of the table, and an assistant nobody would miss for an hour who walked out through the yard door carrying two of them. You were the tray on the left. He never knew there was a you. He put it in your hand without being asked twice and told you not to tell him what it was."
-tip        = "Two things are open and they do not block each other. Cain can seat what you are carrying, but there is no lab you can walk to. He finds you, so go about your business and let him. And Grier named the other one: THE RISE, a half-built Vance tower on the edge of the Reach, hiring readers off the street. You cannot walk in on your own word. You need papers, and papers are sold at the far end of the row at the market, by the woman who made your face."
+tip        = "Two things are open and they do not block each other. Cain can seat what you are carrying, but there is no lab you can walk to. He finds you, so go about your business and let him. And Grier named the other one: THE RISE, a half-built Vance tower going up across the plaza from the one that threw you out, hiring readers off the street. The car will take you back up there with the face on. You still cannot walk in on your own word: you need papers, and papers are sold at the far end of the row at the market, by the woman who made your face."
 when = [
   { flag  = "piece_one_held", op = "is_true" },
   { trait = "pieces_seated", subject = "player", op = "lt", value = 1 },
@@ -13982,7 +13998,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You got them into one room and it cost Grier the only sentence he had been saving for nine years, which he spent on what you do on his bench twice a week, and he watched Cain's face the whole way through it. Then he gave you the answer anyway, because he was a good man once. The third tray was FILLED LAST. They finished the other two, shut them, and went back into you for it, and it took another hour. Cain asked whether it was filled last, and nobody asks that unless they already know what went in. There was somebody in your life. They took him out of you and they kept him, and he is in a box at the top of that tower, and a stranger has had him for nine years and has not sold him and has not burned him."
-tip        = "That is where this build ends. Cain would not say who, and you have watched something go out of his face twice in a week now and you cannot name it either time. There is nothing to go and get: that tower is sealed, your face is on every camera at the curb, and the store under his lab is shut behind you. What is still standing is everything you built to get here. GRIER is in his room off the lane from ten in the morning and not one thing about that has closed. SABIN is on the floor at eight and up in his lab from eleven, the reading still pays fifteen a shift, and he still clears the bench for you. The strip, the market, The House and the pit are where you left them, and so is everybody who was already yours. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
+tip        = "That is where this build ends. Cain would not say who, and you have watched something go out of his face twice in a week now and you cannot name it either time. There is nothing to go and get: you can stand at the foot of that tower now and every door in it above the lobby is shut to you, and the store under his lab is shut behind you. What is still standing is everything you built to get here. GRIER is in his room off the lane from ten in the morning and not one thing about that has closed. SABIN is on the floor at eight and up in his lab from eleven, the reading still pays fifteen a shift, and he still clears the bench for you. The strip, the market, The House and the pit are where you left them, and so is everybody who was already yours. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
 terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
 when = [
@@ -15766,7 +15782,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "It never stopped. First thing I ever said to you. There is a half-built tower going up on the edge of this district — Vance money, twenty floors, eight of them with lights in and the rest bare concrete." },
     ] },
     { advance_text = "Get the name.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "The Rise, they are calling it. You can see it from the top of the lane. They are taking readers on off the street and checking nothing, because whoever is up there wants it finished this year." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "The Rise, they are calling it. You can see it from the top of the lane on a clear day, going up beside the big one. They are taking readers on off the street and checking nothing, because whoever is up there wants it finished this year." },
         { type = "paragraph", content = "He goes back to the chair. The bottle is where the bottle always is, the drawer is standing open and empty behind him, and he does not look at it once on the way past." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "A tower on the edge of his own district, hiring anybody who can read. That is where the second one is. She is going to need papers that say she can." },
     ] },
