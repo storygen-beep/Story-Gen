@@ -8,6 +8,42 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-07
+- **`scripts/check_quest_cards.py` — NEW. The guidance page had no instrument at all, and it was the worst
+  prose in the game.** §7 check 8 tells you to run `author-game-v2/scripts/gates.py`, and G43 builds its
+  prose model from **canvases** and reads `Beat.text` (`gates.py:7423`). `quest_cards` is a sibling key of
+  `canvases` and never enters that model. Proof by arithmetic on vesper at rev 195: the gate reported **115
+  dashes for the whole game** while the 79 quest cards alone held **153**. Measured: **161.5 dashes per 10k**
+  against the game's own 16.5 and Rule 11's ceiling of 35 (field p50 0.99), 0.64 glosses/1k against a field
+  max of 0.24, **39.4% negation sentences** against a field max of 25.76%, median sentence 15 against a
+  ceiling of 14. The rev-191 readability pass never touched a card
+  (`git show 556bad2 -- 5_scenes.toml | grep -c '^[-+]tip'` → 0). So the densest, hardest-to-read prose in
+  the game was the page whose whole job is to un-confuse a lost player, and that is the SAME failure that
+  produced the original complaint — doctrine with no counter — one surface over.
+  The script gates four prose measures plus two structural ones that this audit had to find by hand:
+  **the goals are a chain** (consecutive story goals shut by the flag that opens the next — a PROPERTY, not
+  a simulation; see below) and **every ladder has a section** (a character with a relation-gated rung on
+  their own hub and no quest card renders NO section on the page at all, because the QuestsPage widget
+  builds that list from `_allCards` → distinct `npc_id`).
+  ⚠️ **Two false-positive classes were found in the first cut and killed before it shipped**, and both are
+  written into the docstrings so the next author does not repeat them. (1) The chain check began as a
+  synthetic state-walk; it bridged 158 of 207 states and reported a pair no player can reach, because a
+  spine card can open on a flag **no other card names**, set by a canvas rather than by the card before it.
+  Replaced with the daisy property, which proves exclusivity where it holds and reports a break for a human
+  to read rather than failing it. (2) The ladder check began as "every portrait hub needs a card" and
+  flagged six characters, four of them a bartender, a mechanic, a madam and a one-off — surfaces obeying the
+  doctrine. Narrowed to a hub carrying a choice gated on that character's own `relation`, which is what
+  makes a hub a *climb*; it then flagged exactly the two real ones.
+  ⚠️ **It is deliberately NOT part of `gates.py`.** That file is the v2 skill's and carried 246 lines of
+  in-flight work at the time (`lint_mute_cards`, which already reads `quest_cards`); editing it would have
+  collided with work in progress. A `check_*.py` in this skill is also the house pattern —
+  `check_cascade_order.py`, `check_render_buckets.py`, `check_guide_numbers.py`.
+  **Verified** end to end on vesper: 6/6 FAIL at the start, 6/6 PASS after the rewrite it drove — dashes
+  152 → **0**, glosses 7 → **0**, negations 39.4% → **25.4%**, median sentence 15 → **11**, ladders without
+  a section 2 → **0**.
+- **`references/ship-gate.md` §5 — the new script wired in beside check 8**, with the reason check 8 alone
+  is not enough (it cannot see a quest card) and the vesper numbers that prove it.
+
 ## 2026-09-05
 - **`references/rts-flat-prose.md` — added Rules 11–14 (the LEGIBILITY rules) and §7 check 8 (their
   counter); `SKILL.md` and `references/ship-gate.md` repointed at both.** The skill had nine numbered rules
