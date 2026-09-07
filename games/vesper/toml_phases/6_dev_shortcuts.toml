@@ -667,7 +667,7 @@ flagEffects = [
 [[canvases]]
 id          = "dev_jump_whose_hand"
 name        = "▶ 0.2.1: the 0.2.0 end-state (WHOSE HAND opens)"
-description = "DEV JUMP. Seeds the complete 0.2.0 end-state — everything of 0.1.8 plus THE FACE run to its last beat (face bought and worn, the bar climbed to bar_rung 4, Bastien drained twice, the taser through the door, the raid survived, cain_named, lab_seen) — and drops at the_cot with cain_named_grier UNSET, so cain_comes_for_her auto-fires on arrival and WHOSE HAND opens. Coin 80 (the cover papers are 60). Every WHOSE HAND flag and counter explicitly cleared so the jump is idempotent. Gated dev_mode_enabled; inert in shipped builds."
+description = "DEV JUMP. Seeds the complete 0.2.0 end-state — everything of 0.1.8 plus THE FACE run to its last beat (face bought and worn, the bar climbed to bar_rung 4, Bastien drained twice, the taser through the door, the raid survived, cain_named, lab_seen) — and drops at the_cot with cain_named_grier UNSET, so cain_comes_for_her auto-fires on arrival and WHOSE HAND opens. Coin 220 at beat_0142 (was 80): the cover papers are 60 and Grier's ladder is four bottles at 20, so 80 could buy one or the other and not both. Every WHOSE HAND flag and counter explicitly cleared so the jump is idempotent. Gated dev_mode_enabled; inert in shipped builds."
 
 [canvases.trigger]
 location      = "underworld_strip"
@@ -725,7 +725,7 @@ effects = [
   { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
   { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
   # ── the purse and the upkeep: the cover papers are 60 ──
-  { targetType = "player", trait = "coin",                op = "set", value = 80 },
+  { targetType = "player", trait = "coin",                op = "set", value = 220 },
   { targetType = "player", trait = "energy",              op = "set", value = 100 },
   { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
   # ── WHOSE HAND's own counters, zeroed so the jump is idempotent ──
