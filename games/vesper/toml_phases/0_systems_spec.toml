@@ -514,6 +514,17 @@ hidden = true
 [[traits.labels]]
 key    = "sabin_suspects"
 hidden = true
+# bottle_held 0/1 — beat_0142 (rev 193). Carrying a bottle of whisky down the lane to Grier. The same
+# bought-then-spent shape as part_held and case_held: activity_buy_bottle sets it to 1 at the Anchor and
+# hub_grier.drink takes it back to 0, so she can carry exactly one and the card returns when her hands are
+# empty. Hidden — no sidebar row, no entry in the traits dump. The player reads it off the drink choice,
+# which greys with a reason when she has nothing to pour.
+# ⚠️ IT IS A LEVER BESIDE THE LADDER AND NEVER A RUNG OF IT. No rung on hub_grier reads this key. The ladder
+# is still plain npc_grier.relation at 6/12/20, because this is a shipped game and a save sitting at
+# relation 14 must not load to find earned rungs locked again (save-safety §2, and §22.6 of the design).
+[[traits.labels]]
+key    = "bottle_held"
+hidden = true
 
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])

@@ -522,6 +522,17 @@ hidden = true
 [[traits.labels]]
 key    = "sabin_suspects"
 hidden = true
+# bottle_held 0/1 — beat_0142 (rev 193). Carrying a bottle of whisky down the lane to Grier. The same
+# bought-then-spent shape as part_held and case_held: activity_buy_bottle sets it to 1 at the Anchor and
+# hub_grier.drink takes it back to 0, so she can carry exactly one and the card returns when her hands are
+# empty. Hidden — no sidebar row, no entry in the traits dump. The player reads it off the drink choice,
+# which greys with a reason when she has nothing to pour.
+# ⚠️ IT IS A LEVER BESIDE THE LADDER AND NEVER A RUNG OF IT. No rung on hub_grier reads this key. The ladder
+# is still plain npc_grier.relation at 6/12/20, because this is a shipped game and a save sitting at
+# relation 14 must not load to find earned rungs locked again (save-safety §2, and §22.6 of the design).
+[[traits.labels]]
+key    = "bottle_held"
+hidden = true
 
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])
@@ -961,6 +972,15 @@ grier_drains_done = 0
 #     and the swap rides sabin_drains_done, so a player who never takes a shift is never locked out.
 sabin_drains_done = 0
 sabin_suspects    = 0
+# bottle_held 0/1 — beat_0142 (rev 193). A bottle of whisky in her coat, bought at the Anchor for the walk
+# down to Grier. Same bought-then-spent shape as part_held: activity_buy_bottle sets it to 1 and
+# hub_grier.drink takes it back to 0, so she carries one at a time and the buy card returns the moment her
+# hands are empty. Full reasoning in 0_systems_spec and in §22 of design_whose_hand.md.
+# ⚠️ DECLARED HERE AND NOT ONLY IN THE LABELS BLOCK, for the pieces_seated reason above. This is a SHIPPED
+# game and core_traits is what the cross-release backfill initialises (setup.backfillStateDefaults), so a
+# 0.2.0 save loads with bottle_held = 0 rather than undefined, and the drink choice's `gte 1` compares a
+# number instead of comparing against undefined.
+bottle_held       = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -5388,6 +5408,79 @@ locationId = "the_cot"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "store_carried_seen", operator = "is_true" },
 ] }
+
+# ── activity_buy_bottle — beat_0142 (rev 193), WHOSE HAND. THE ONE LEVER ON GRIER. ────────────────────
+# ⚠️ THE ANCHOR AND NOT THE MARKET, AND THE REASON IS THE CLICK COUNT. the_anchor is entry_from
+# the_waterfront — the same street activity_go_to_grier sits on, one click off the walk. underworld_market
+# is a car ride, a 5-coin gate toll and the strip, which would turn every visit to Grier into a six-click
+# errand. That is the genre's diagnosed disease, lostness plus grind, and it is what the 30-minute walk is
+# already spending. The bar's own description carries a bartender; nothing new has to be staged.
+# ⚠️ NO npc AND NO requires_npc, DELIBERATELY. Every other canvas at this location is requires_npc
+# npc_renner and his schedule is 19:00-23:00. A solo card renders in the solo-link bucket, never competes
+# for his portrait, and works at any hour — which this needs, because Grier is in from 10:00 and she should
+# be able to buy on the way down at eleven in the morning.
+# ⚠️ REPEATABLE TRIGGER, GATED ON THE COUNTER AND NOT ON A FLAG. Same shape as activity_buy_part: the card
+# is present whenever her hands are empty and gone while she is carrying one, so there is no stockpiling and
+# no burned gate. It survives an unaffordable visit rather than silently vanishing.
+# ⚠️ GATED grier_met SO IT CANNOT EXIST BEFORE THE REASON FOR IT. beat_0117's lesson on the taser: a buy card
+# the player can find before anything has made them want it means the reasoning arrives after the purchase.
+# She has to have met the man and been thrown out of his room first.
+# ⚠️ 5 COIN. The cheapest thing in the game — the gate toll's price, against 25 for a part, 30 for the taser
+# and 120 for the face. It is not meant to bite. What it buys is the exit on hub_grier.drink, which saves a
+# 30-minute walk each way; the coin is a habit, not a wall. "Coin gates PROGRESS, never action" and the free
+# rung is still there.
+# MEDIA: none new — reuses locations/the_anchor.jpg, the way activity_buy_taser reuses the market.
+[[canvases]]
+id          = "activity_buy_bottle"
+name        = "Something to take down the lane"
+description = "beat_0142 (rev 193), WHOSE HAND. Wren-solo @the_anchor. Repeatable trigger, pri 3, gated grier_met is_true + bottle_held lt 1. Buy = 5 coin -> bottle_held = 1, +15 min. The one lever on Grier's ladder: he is a drunk, the bottle is on the arm of his chair in every band of his hub, and it is the only object in that room with no verb attached. NOT a key — no rung reads bottle_held. It buys hub_grier.drink, which exits back into the room instead of onto the street, so the 5 coin is a saved walk and a faster climb. No npc clauses, so it renders outside Renner's 19:00-23:00 window."
+[canvases.trigger]
+location      = "the_anchor"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "grier_met",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "bottle_held", operator = "lt", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to take down the lane"
+blocks = [
+  { type = "image", props = { file = "locations/the_anchor.jpg", description = "A dim dive bar with dark wood, dead neon and a bartender behind it.", search_queries = ["dive bar dark wood dim neon", "empty bar counter bartender low light"] } },
+  { type = "paragraph", content = "Grier pours another one and does not offer her any. That is the whole of the hour, every time, and it has been the whole of the hour for a month. He drinks his own and she sits and watches him do it." },
+  { type = "paragraph", content = "The Anchor keeps the cheap stuff on the bottom shelf where nobody has to be asked twice about it. Five coin a bottle. The bartender puts it on the wood without a word and does not ask who it is for." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy a bottle. (5 coin.)"
+targetType = "node"
+nodeId     = "activity_buy_bottle.buy"
+costs      = [{ trait = "coin", value = 5 }]
+effects = [
+  { targetType = "player", trait = "bottle_held", op = "set", value = 1, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it on the shelf."
+targetType = "location"
+locationId = "the_anchor"
+
+[[canvases.nodes]]
+id   = "buy"
+name = "The bottle"
+blocks = [
+  { type = "paragraph", content = "It is a squat brown thing with a label that has been printed crooked and a cap that turns too easily. Nothing about it is good. It is the same shelf he has been drinking off for nine years." },
+  { type = "paragraph", content = "It goes in the inside pocket of her coat, where the weight of it sits against her ribs the whole way down the lane." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_anchor"
+time_progression_minutes = 15
 
 # ── activity_go_to_grier — beat_0124 (rev 174), WHOSE HAND. THE WAY INTO GRIER'S ROOM. ────────────────
 # ⚠️ THIS CARD IS THE ROOM'S FRONT DOOR. grier_room is nav-invisible (see its banner in 1_metadata) because a
@@ -19889,10 +19982,17 @@ when = [
 # VERB (the Reach, Grier, keep turning up).
 # ⚠️ CLOSED BY beat_0125 (rev 175) — hub_grier.knees sets grier_opened_up. Card X opens on the same flag,
 # the fifteenth time a card in this game closes on the next one's setter. No goals block: flag milestone.
+# ⚠️ THE TIP WAS REWRITTEN AT beat_0142 BECAUSE IT HAD BECOME FALSE. It opened "There is no clever way
+# through this one" and closed on "as many afternoons as it takes", and the bottle is a clever way. This
+# card covers exactly the grier_met -> grier_opened_up window the drink rung lives in, so it is the card
+# that has to carry it. The walkthrough line still names PLACE + PERSON + VERB and it now names BOTH routes
+# up, free and paid, because the free one still works and a tip that hid it would read as a paywall.
+# The card's own text is untouched and still true: there is nothing to buy off him. The piece is not for
+# sale and he does not know he is holding it. What five coin buys is an hour, not a fact.
 [[quest_cards]]
 priority   = 10
 text       = "You found him, and he had you the second you were in the doorway — shoulders sit wrong on people, and yours sit exactly right. He handed tools to the men who built you and he has been drinking about it for nine years. He is carrying a piece of your childhood in that room and he has never once known what it is, which means there is nothing to buy off him and no trade to offer him. You asked him one straight question and he put you out on the lane."
-tip        = "There is no clever way through this one. Go back down the lane to the Reach and keep turning up at Grier's room — the door is never locked and he is in it from ten in the morning. What you are doing is making yourself a thing he is used to, and that takes as many afternoons as it takes."
+tip        = "Go back down the lane to the Reach and keep turning up at Grier's room. The door is never locked and he is in it from ten in the morning. Sitting with him works and costs nothing, and it is slow. The faster way is the bottom shelf at the Anchor, five coin a bottle: take one down with you and drink with him, and the hour buys you a second thing in the same visit."
 when = [
   { flag = "grier_met",       op = "is_true"  },
   { flag = "grier_opened_up", op = "is_false" },
@@ -20806,7 +20906,7 @@ blocks = [
       { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 12 },
     ] } }, blocks = [
     { type = "paragraph", content = "She has been in that chair enough times now that he stops watching the door when it opens. He does not say hello. He pours, and he looks at her over the top of it for longer than he used to." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years I have not had one of you in a room. Forgot how still you sit. Nothing on you moves unless you decide it moves. No person does that." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Nine years I have not had one of you in a room. Forgot how still you sit. Nothing on you moves unless you decide it moves. Stand up under that bulb and let me look at you properly. I will tell you where they cut corners." },
   ] },
   # BAND 3 — 12 to 19. Proprietary. He gives instructions now and expects them followed.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -20814,7 +20914,7 @@ blocks = [
       { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 20 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has stopped pouring by the time she is through the door. The bottle stays on the arm of the chair and he sits forward with his forearms on his knees, looking at her the way a job comes up the bench." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You keep coming back to a man with nothing. So you want something, and you are not getting it, and you keep coming back anyway. I have decided I do not care why." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You keep coming back to a man with nothing. You want something, you are not getting it, and you keep coming back anyway. I have decided I do not care why. Come here. Stand where I can reach you." },
   ] },
   # BAND 4 — gte 20. She is a thing he is used to. He does not get up and he does not ask.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -20830,17 +20930,46 @@ type = "choices"
 text       = "Sit with him a while."
 targetType = "node"
 nodeId     = "hub_grier.sit"
-# ── RUNG 1 (beat_0125) — the spec check. No compliment, no want. He reads her like wear on a bearing. ──
+# ── THE BOTTLE (beat_0142, rev 193) — THE ONE LEVER, AND IT IS NOT A RUNG. ────────────────────────────
+# ⚠️ IT SITS DIRECTLY UNDER sit BECAUSE IT REPLACES IT ON ANY VISIT SHE CAN AFFORD. Sitting is the free
+# slow path and it stays: "Coin gates PROGRESS, never action" (3_activities:409), so a player with nothing
+# in her pocket still finishes the whole arc. This is the same hour, bought.
+# ⚠️ NO relation CLAUSE. The drink is available from the bottom of the ladder to the top, because it is a
+# lever beside the ladder and never a rung of it — no gate on this hub reads bottle_held, and a live 0.2.0
+# save at relation 14 must keep every rung it earned (§22.6).
+# ⚠️ GREYED WITH A REASON RATHER THAN HIDDEN. The activity_buy_part pattern (3_activities:1822): a choice
+# that silently vanishes while the Story-Goal says bring him something is the lostness failure, and this is
+# the surface the mechanic is learned from. The locked_text is written FOR the locked state — it describes
+# empty hands, not a consumed pre-state, so it can never go stale.
 [[canvases.nodes.exit_block.choices]]
-text       = "Stand under the light for him."
+text             = "Drink with him."
+targetType       = "node"
+nodeId           = "hub_grier.drink"
+show_when_locked = true
+locked_text      = "Her hands are empty and he pours his own. The Anchor keeps the cheap stuff on the bottom shelf at five coin a bottle, two streets off the water, and it is on the way down."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bottle_held", operator = "gte", value = 1 },
+] }
+# ── RUNG 1 (beat_0125) — the spec check. No compliment, no want. He reads her like wear on a bearing. ──
+# ⚠️ RELABELLED AT beat_0142. It read "Stand under the light for him", which made her volunteer a thing
+# nobody had asked her for. The ask now lands in HIS OWN MOUTH at the end of band 2, on the same visit this
+# choice appears, so the invitation is on screen before the click instead of buried inside the payoff.
+# ⚠️ THE LABEL IS A BARE PHYSICAL ACTION, which is this hub's own style — "Get down in front of him", not a
+# permission granted and not an order followed. Both were tried: "Do what he said" reads as obedience to a
+# man she is in fact working, and "Stop teasing him" is FALSE ON THE FREE PATH, because a player who
+# climbed on sit alone has never teased him. A label has to be true on both routes up.
+[[canvases.nodes.exit_block.choices]]
+text       = "Open your coat under the bulb."
 targetType = "node"
 nodeId     = "hub_grier.look"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 6 },
 ] }
 # ── RUNG 2 (beat_0125) — he handles her. Not a stroke, a check, and he names it in shop terms. ──
+# ⚠️ RELABELLED AT beat_0142, same reason as rung 1. "Let him put his hands on you" is permission granted to
+# a man who has not asked; band 3 now has him asking, and the label is her answer.
 [[canvases.nodes.exit_block.choices]]
-text       = "Let him put his hands on you."
+text       = "Go and stand between his knees."
 targetType = "node"
 nodeId     = "hub_grier.hands"
 conditions = { version = "1.0", logic = "AND", items = [
@@ -20910,6 +21039,11 @@ blocks = [
   { type = "paragraph", content = "She takes the other chair, which has a coat on it and has had a coat on it for a long time, and she moves the coat and sits down and does not say anything at all." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You are still here." },
   { type = "paragraph", content = "It is not a question and she does not answer it, and after a while he pours another one and does not offer her any, and that is the whole of the hour." },
+  # ⚠️ THE ONLY PLACE THE BOTTLE IS TAUGHT IN FICTION (beat_0142). The drink choice greys with a reason and
+  # card W's tip names the Anchor, but a mechanic the player is only ever told about by the UI is a mechanic
+  # the game did not earn. He asks for it himself, sourly, out of the free rung — so the lever is discovered
+  # by doing the boring thing, which is exactly the visit it is meant to replace.
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "If you are going to keep sitting in that chair you can start bringing something with you. I am not pouring for two off my own shelf, and there is a bar on the water that sells it for five." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -20920,6 +21054,77 @@ locationId               = "the_waterfront"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_grier", trait = "relation", op = "add", value = 2, clamp = true },
+]
+
+# ── "drink" (beat_0142, rev 193) — THE BOTTLE, AND WHAT SHE DOES WITH THE HOUR IT BUYS. ───────────────
+# ⚠️ IT EXITS TO grier_room AND NOT TO the_waterfront, AND IT IS THE ONLY NODE ON THIS HUB THAT DOES.
+# Every rung dumps her on the street on purpose (see the banner above): one rung per trip is what makes
+# card W's "as many afternoons as it takes" true. This is the exception, and the exception IS the purchase.
+# Five coin at the Anchor buys her a second action in the same visit and saves a 30-minute walk each way.
+# It cannot be chained: she can carry one bottle and this node spends it, so a trip is at most one drink
+# and one rung. Exiting to your own location is house pattern, not an invention (hub_colm_undertow,
+# hub_bastien, rung_mercer_hands_on, and about a hundred more).
+# ⚠️ +3 AND NOT +5. The first cut priced it at +5, which let a player buy four bottles, hit relation 20 and
+# jump straight to knees without ever doing the light or the hands. The whisky would have made the entire
+# sexual ladder skippable. What it buys is the exit, not the number.
+# ⚠️ THREE ADJACENT [group] BLOCKS ON PLAIN relation = ONE exclusive if/elseif chain, edges at 6 and 12, the
+# same two numbers the light and the hands unlock on. hub_colm_undertow's `drink` node exactly.
+# ⚠️ SHE IS WORKING HIM, NOT FLIRTING WITH HIM (§14 row b). The teasing is hers and deniable, he is sour
+# about it the whole way, and it never turns into warmth. She cannot get drunk, so every one of these hours
+# is a sober woman watching a drunk man talk, and he is the one man in the city who would clock that.
+# MEDIA: two new slots — scenes/grier_drink.jpg on the node lead, and the pool scenes/rung_grier_flash_t3
+# on band 3 only. One asset, one block; a pool and not a single clip, because the node is repeatable.
+[[canvases.nodes]]
+id   = "drink"
+name = "Drink with him"
+blocks = [
+  { type = "image", props = { file = "scenes/grier_drink.jpg", description = "A bottle and two glasses on the arm of a chair in a filthy workshop back room, an older unshaven man drinking, a woman sitting across from him with a full glass by her foot. avoid: smiling, avoid: a clean or bright room, avoid: nudity.", search_queries = ["man drinking whisky armchair dim workshop woman sitting", "bottle and two glasses squalid back room low light"] } },
+  { type = "paragraph", content = "She puts the bottle on the arm of the chair where his glass lives. He reads the label the way he reads everything, front and back, and puts it down again without saying one word about it." },
+  { type = "paragraph", content = "Then he pours two. Hers goes on the boards by her foot and stays there, because whatever they put in her does not take drink. He clocked that on the first bottle and has not mentioned it since." },
+  # BAND 1 — lt 6. He talks. She lets it run and asks him nothing, which is the whole method.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt", value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Three glasses in he starts talking and all of it is bench work. Tolerances. A jig he built for a man who never paid him. She lets it run and does not ask him a single question." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Everything gets stamped out now. Eleven thousand of a thing and not one of them touched by a hand. You would not know what I am on about, and that is restful, so I am going to keep going." },
+  ] },
+  # BAND 2 — 6 to 11. The coat comes off and stays off. He covers the looking with a criticism.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 6  },
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "lt",  value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The ring throws heat and she puts her coat over the back of the chair instead of keeping it on. Two buttons down on the blouse under it. She leaves them where they are and goes on listening." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Sit up. You are slumping and it looks wrong on a thing built to stand. And do your shirt. It is distracting a man who is trying to talk." },
+    { type = "paragraph", content = "He does not look away while he says it. He loses the end of the sentence about the jig and does not go back for it, and he pours himself the fourth one earlier than he did last week." },
+  ] },
+  # BAND 3 — gte 12. Nobody is calling it an accident. He says so out loud and refuses to stop it.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_grier", trait_key = "relation", operator = "gte", value = 12 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "scenes/rung_grier_flash_t3", pool = 3, description = "A woman in an open blouse leaning over the arm of a chair to pour a drink for a heavy older seated man in a dim filthy room, her front on show, him looking. Must show: her leaning over him clothed but open, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["woman open blouse leaning over seated older man pouring drink gif", "cleavage flash leaning over man in armchair dim room gif", "woman teasing older man dim room clothed gif"] } },
+    { type = "paragraph", content = "She does not bother with the buttons any more. She pours his third one leaning over the arm of the chair so he gets the whole of it down her front, and she stays there while he drinks it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You are doing that on purpose. Have been for weeks. I am not going to ask you to stop and you know I am not, so we can both leave it where it is." },
+    { type = "paragraph", content = "She sits back down and crosses her legs and lets him take the talk wherever he wants it. Somewhere under all of it he says a thing about a bench nine years ago, and she keeps every word of it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let the hour go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "grier_room"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_grier", trait = "relation",    op = "add", value = 3, clamp = true },
+  { targetType = "player", trait = "bottle_held", op = "set", value = 0, clamp = true },
+]
+# ⚠️ grier_drank_with EXISTS FOR ONE BAND AND NOTHING ELSE — the thought at the end of the knees rung, where
+# the player who has been feeding him gets a different last line from the player who climbed on sit alone.
+# It gates nothing and it is read nowhere else. A FLAG and not a trait because its setter is located
+# (hub_grier is at grier_room), which is what the flag-chain validator wants; and additive on a shipped
+# game, so a 0.2.0 save loads with it false and reads the free-path band, which is true for that save.
+flagEffects = [
+  { targetType = "player", flag = "grier_drank_with", op = "set" },
 ]
 
 # ── RUNG 1 — "look". Gated relation gte 6. +3, 60 min. ────────────────────────────────────────────────
@@ -21020,7 +21225,20 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Leave it. Leave it. You will have your jaw off before that comes back and I have watched better than you try." },
     ] },
     { advance_text = "Get up off the floor.", blocks = [
-        { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and whatever he has in a drawer is behind it." },
+        # ⚠️ TWO BANDS ON grier_drank_with (beat_0142). The free path gets the shipped line unchanged. The
+        # player who has been carrying bottles down the lane gets told what she bought, once, and never
+        # again — the wall stops being a tax in front of the payoff and becomes a thing she built.
+        # Adjacent groups, mutually exclusive, so exactly one renders and the beat count does not move.
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+            { type = "flag", subject = "player", flag_key = "grier_drank_with", operator = "is_false" },
+          ] } }, blocks = [
+          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and whatever he has in a drawer is behind it." },
+        ] },
+        { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+            { type = "flag", subject = "player", flag_key = "grier_drank_with", operator = "is_true" },
+          ] } }, blocks = [
+          { type = "thought_bubble", props = { speaker = "player" }, content = "It is not a mood and it is not her. It is nine years of that bottle, and she has been walking the last month of it down the lane herself, five coin at a time. Whatever he has in a drawer is behind that." },
+        ] },
         { type = "paragraph", content = "She wipes her chin on the back of her wrist and finds her coat where she left it. Behind her the glass goes back down on the arm of the chair, exactly where it was when she came in." },
     ] },
   ] } },

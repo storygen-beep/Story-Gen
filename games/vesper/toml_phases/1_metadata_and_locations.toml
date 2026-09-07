@@ -297,6 +297,15 @@ grier_drains_done = 0
 #     and the swap rides sabin_drains_done, so a player who never takes a shift is never locked out.
 sabin_drains_done = 0
 sabin_suspects    = 0
+# bottle_held 0/1 — beat_0142 (rev 193). A bottle of whisky in her coat, bought at the Anchor for the walk
+# down to Grier. Same bought-then-spent shape as part_held: activity_buy_bottle sets it to 1 and
+# hub_grier.drink takes it back to 0, so she carries one at a time and the buy card returns the moment her
+# hands are empty. Full reasoning in 0_systems_spec and in §22 of design_whose_hand.md.
+# ⚠️ DECLARED HERE AND NOT ONLY IN THE LABELS BLOCK, for the pieces_seated reason above. This is a SHIPPED
+# game and core_traits is what the cross-release backfill initialises (setup.backfillStateDefaults), so a
+# 0.2.0 save loads with bottle_held = 0 rather than undefined, and the drink choice's `gte 1` compares a
+# number instead of comparing against undefined.
+bottle_held       = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
