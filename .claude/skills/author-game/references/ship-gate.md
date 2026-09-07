@@ -246,6 +246,19 @@ game**, not just the beat you last touched.
       ⚠️ **This is the check that a shipped release failed in front of players.** vesper 0.2.0 passed
       everything above it and still read, in two players' words, like *"an underpowered AI whose mother
       language isn't english."*
+      ⚠️ **AND IT DOES NOT READ QUEST CARDS.** `gates.py` builds its prose model from canvases and reads
+      `Beat.text`; `quest_cards` is a sibling key of `canvases` and never enters that model. Run the next
+      check as well or the guidance page ships unmeasured.
+- [ ] `python .claude/skills/author-game/scripts/check_quest_cards.py games/<slug>/toml_phases/7_final_game.toml`
+      — exit 0. Six measures: the four Rule 11/12/2 counters on card prose, plus **the goals are a chain**
+      (consecutive story goals shut by the flag that opens the next) and **every ladder has a section** (a
+      character with a gated rung on their own hub and no quest card renders NO section on the guidance
+      page at all — the QuestsPage widget builds that list from the cards themselves).
+      ⚠️ **Audited on vesper 2026-09-07 and it was the worst prose in the game**: 79 cards at **161.5
+      dashes per 10k** against the game's own 16.5 and a ceiling of 35, 39.4% negation sentences, median
+      sentence 15. The page a *lost* player opens was the hardest page to read, and no instrument looked at
+      it. The same audit found the release's two new characters with no section on it while five finished
+      ones all read "Arc complete".
 - [ ] `location-design.md` §6 — the room-content floor, re-run against the finished map: no reachable room
       with neither plot nor ambient life.
 
