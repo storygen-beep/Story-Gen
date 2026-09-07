@@ -2066,3 +2066,150 @@ funeral, and it is 48 words of narration against 95 of dialogue.
    `cap_grier_gives`, `cap_sabin_hires`. One line each (`npc_at_location … is_present`), proved on
    `cap_sabin_consults`. It re-opens three validated beats, so it is LO's call and not mine. Five older
    canvases outside this release have the same hole and are explicitly **not** in scope here.
+
+---
+
+## 22. THE BOTTLE — beat_0142 (rev 193). What she actually does to climb him.
+
+**Added 2026-09-07, after LO played the shipped hub.** His words: *"the incremental choices doesnt make
+proper sense, from stand for him to direct blowjob feels illogical."*
+
+### 22.1 The defect is not a missing rung
+
+The rung he was looking for is there. `hub_grier` ships four — `sit` (ungated, +2) / `look` (relation gte 6,
++3) / `hands` (gte 12, +4) / `knees` (gte 20, +4) — and `hands` sits exactly between standing and the
+blowjob. Nothing is skipped.
+
+**What is missing is the exchange.** She sits in a chair three times, in silence, while he drinks and
+ignores her — *"It is not a question and she does not answer it"* — and the man opens by +2 a visit. The
+ladder is paid for in clicks. §8 gave him a want (getting one of *them* on her knees) and the base bands
+narrate him warming, but nothing she **does** causes any of it.
+
+**And the invitation is behind the choice instead of in front of it.** The button reads *"Stand under the
+light for him"* and she volunteers it, uninvited, with no stated reason. He does ask — *"He points at the
+bulb with two fingers"* — but only inside the payoff, after the click. On screen the order is backwards.
+
+**The band edges make it worse, not better.** The base bands change at 6 / 12 / 20, which are the unlock
+numbers, so the player reads *"he looks at her over the top of it for longer than he used to"* and receives
+*open your coat under a bulb* in the same breath. He glances at her once; her next move is to display
+herself.
+
+### 22.2 The fix is the object the room already has
+
+He drinks in all four bands. The bottle is on the arm of the chair in five separate blocks. §8 makes nine
+years of it the reason he can never finish, and her own thought at `knees` already says so:
+*"It is nine years of that bottle."*
+
+**It is the most-repeated object in that room and the only one with no verb attached.** LO's call is to give
+it one, and it is right.
+
+**⚠️ AND THE PATTERN IS SHIPPED, ONE HUB OVER.** `hub_colm_undertow` is literally *"Can I buy you a drink?"*
+and *"Buy him another,"* with a `drink` node banded three ways on plain `relation`, +3, 60 minutes, exiting
+back into its own room — and its band prose names the mechanic out loud: *"Nobody buys a man this many rounds
+for the conversation."* Grier is the game's actual alcoholic and the one ladder that does not use drink.
+
+**The whisky carries three jobs at once, which is why it is the right object:**
+
+1. It buys his tolerance — the climb.
+2. It loosens his mouth, so **he** starts asking for things — which repairs 22.1's staging.
+3. It is why he cannot come — already in the game, §8, unchanged.
+
+### 22.3 ⚠️ SHE IS WORKING HIM, NOT OBEYING HIM
+
+**Rejected: relabelling the light rung to "Do what he said."** It reads as obedience to a rude drunk and it
+is the wrong character. She tried a straight question at the first meeting and he threw her out — *"Out."*
+Talking is proven dead. The bottle is the only lever that has ever made this man say more than four words,
+and she has found it.
+
+So the teasing lives **inside** the drinking, hers and deniable: the coat falls open, a leg, she does not fix
+her collar, while he is mid-sentence about benches. The labels become her call —
+**"Stop teasing him."** — referencing her own campaign rather than his instruction.
+
+**She cannot get drunk.** Every one of these afternoons she is completely sober while he is not, and he is
+the one man in the city who would notice why.
+
+Ceiling row (b) is unchanged and governs every new line: sour, unhurried, proprietary rather than jeering,
+**she is never shown enjoying it, his room is work.**
+
+### 22.4 What the 5 coin actually buys — the exit, not the relation
+
+**⚠️ REJECTED: a big relation number on the give.** The first cut priced it at +5. At +5 a player buys four
+bottles, reaches 20, and jumps straight to `knees` without ever doing the light or the hands — the whisky
+would make the entire sexual ladder skippable. Killed.
+
+The drink pays **+3**, and what it really buys is the **exit**:
+
+> **⚠️ EVERY OTHER RUNG EXITS TO `the_waterfront`** — one rung per trip, deliberately, so the ladder takes
+> real afternoons and card W's *"as many afternoons as it takes"* is true. **The drink node is the one
+> exception: it exits to `grier_room`,** so the hub re-renders and she can do a rung the same visit.
+
+That is the purchase. 5 coin saves a 30-minute walk each way. It cannot be chained — one bottle carried, one
+bottle spent — so a trip is at most one drink plus one rung.
+
+Measured: **free path 7 trips, bottle path 4 trips and 20 coin.**
+
+**⚠️ EXITING TO YOUR OWN LOCATION IS HOUSE PATTERN, NOT AN INVENTION.** ~100 canvases in this game do it,
+`hub_colm_undertow`, `hub_bastien` and `rung_mercer_hands_on` among them.
+
+### 22.5 ⚠️ IT IS A NODE ON THE HUB AND NEVER A SECOND CANVAS
+
+Only one repeatable canvas is allowed per location + NPC + overlapping window; the build warns and tells you
+to put multiple interactions inside a single canvas as choices. A second repeatable at `grier_room` bound to
+`npc_grier` would trip it. The drink is a node, its choice sits under *"Sit with him a while,"* and that is
+not a preference.
+
+### 22.6 The bottle is a SHORTCUT and never a KEY
+
+**This is a shipped game and that is what decides the shape.** A live 0.2.0 save sitting at
+`npc_grier.relation = 14` has the `hands` rung open right now. Gate the ladder on a bottle counter and that
+player loads 0.2.1 to find rungs they already earned locked again, with nothing on screen explaining it.
+
+So: **no existing rung gains a `bottle_held` clause.** Same four rungs, same gates, same effects, same
+scenes. The bottle is a lever beside the ladder, not a rung of it.
+
+- **`sit` stays free.** A player with no coin finishes the whole arc, just slower —
+  *"Coin gates PROGRESS, never action"* (`3_activities.toml:409`).
+- **The loop never needs a bottle.** `knees` stays once-only and still sets `grier_opened_up`, which still
+  swaps the rung for `loop_grier_room`. Bottles buy the climb, never the payoff — and the fiction is better
+  for it: she stops bringing them once she has him, **and it still does not work.** Nine years already did
+  that; one bottle less does not undo it.
+
+### 22.7 How the player finds out it exists — three surfaces, none of them a wiki
+
+1. **His mouth.** `hub_grier.sit` already ends with *"he pours another one and does not offer her any."*
+   That line gains his one instruction: bring your own next time.
+2. **The menu.** The drink choice renders **greyed with a reason** when she is empty-handed —
+   `show_when_locked` + `locked_text` naming the Anchor, the `activity_buy_part` pattern
+   (`3_activities.toml:1822`). A choice that silently vanishes while the Story-Goal says bring him something
+   is the lostness failure. The locked text is written for the locked state, so it can never go stale.
+3. **⚠️ CARD W IS NOW FALSE AND MUST BE REWRITTEN.** Its tip reads *"There is no clever way through this
+   one… that takes as many afternoons as it takes."* With the bottle there is a clever way, and card W covers
+   exactly the `grier_met` → `grier_opened_up` window the drink rung lives in. New tip names PLACE + PERSON
+   + VERB: buy a bottle at the Anchor, take it down the lane. **Card X stays** — the loop needs no bottle.
+
+### 22.8 Why the Anchor and not the market
+
+`the_anchor` is `entry_from = "the_waterfront"` — the same street `activity_go_to_grier` is on, one click
+from the walk. Its own description already carries *"a bartender who's seen everyone's worst night."*
+
+`underworld_market` is a car ride, a 5-coin gate toll and the strip. Routing her there would make every visit
+to Grier a six-click errand, which is the genre's diagnosed disease — lostness plus grind, the mopoga read.
+
+**⚠️ THE BUY CARD TAKES NO NPC CLAUSES.** Every existing canvas at the Anchor is `requires_npc = npc_renner`,
+and his schedule is 19:00–23:00. A solo card with no `npc`/`requires_npc` renders in the solo-link bucket,
+never competes for his portrait, and works at any hour — which the game needs, because Grier is in from
+10:00.
+
+### 22.9 The line at `knees`
+
+Her thought at beat 6 extends to name what she has been doing: she has been buying him the exact thing that
+stops him finishing. One line, once, never repeated.
+
+**That is what the wall is for.** It stops being a grind tax in front of the payoff and becomes a consequence
+she authored.
+
+### 22.10 Held for the next beat, not this one
+
+**A bottle brought to the LOOP makes it worse.** Once `grier_opened_up` is set, turning up with one means he
+is drunker and the finish is even less likely — a choice with a real downside, which this game has few of.
+It would also need card X's tip rewritten. LO's call: ship it second.
