@@ -2219,3 +2219,154 @@ she authored.
 **A bottle brought to the LOOP makes it worse.** Once `grier_opened_up` is set, turning up with one means he
 is drunker and the finish is even less likely — a choice with a real downside, which this game has few of.
 It would also need card X's tip rewritten. LO's call: ship it second.
+
+---
+
+## 23. TWO TRACKS — beat_0143 (rev 195). She escalates in the drink; he escalates on the rungs.
+
+**Added 2026-09-07, same day as §22, after LO read the built hub menu.** His words: *"drink with him,
+inside that choice I want tease him and flash him. Open your coat under the bulb. this one makes zero sense
+for tease and flash."*
+
+### 23.1 §22 fixed the ladder and reproduced its own defect one layer down
+
+§22's whole argument was that the climb happened *to* the player: she sat in silence and the man opened.
+The drink node it shipped then did exactly that again inside itself — three prose bands on `relation` that
+escalated **by themselves** as the number rose. She took her coat off because a counter said so.
+
+**And it collided with the rung above it.** Band 2 was her coat over the chair with two buttons down. Band 3
+was her leaning over him to pour. Then, one visit later, a rung appeared called *"Open your coat under the
+bulb."* The player had already watched her do that twice. The rung read as the game repeating itself.
+
+### 23.2 The drink is now a menu, and the choice is hers
+
+| choice | gate | pays | what it is |
+|---|---|---|---|
+| Just drink, and let him talk | — | +2 | the method: let it run, ask him nothing |
+| Let the coat fall open | `relation gte 4` | +3 | he covers the looking with a criticism |
+| Lean over him when you pour | `relation gte 10` | +4 | nobody is calling it an accident |
+
+Both gated choices render **greyed with a reason** rather than hidden, the same discipline as the bottle
+itself: the ladder is the content, and a choice that silently appears teaches nothing.
+
+### 23.3 ⚠️ THE look RUNG IS DELETED — LO's call
+
+Its scene was her opening her coat under a bulb, which is what the flash now is. Two surfaces for one act,
+six relation apart, is the game disagreeing with itself.
+
+**It was free to delete, and this is the one release where that is true.** `hub_grier` does not appear in
+`releases/v0.2.0.html` — zero occurrences of `hub_grier`, `npc_grier` or `grier_room`. No save has ever
+seen the node. The same cut after 0.2.1 ships would be a save-safety event.
+
+**Its best line survived and moved to the flash.** *"Somebody put four hours into that jaw and about nine
+seconds into your wrists"* is §8's argument in one sentence — he does not want her because she is
+beautiful, he wants her because she is one of them — and it belongs in the beat where he has just been given
+a proper look. He takes the glass off her, turns her hand over in the light, and reads her build quality.
+
+Three things named it and all three moved: the hub description, **card X's text** (which said *"and under
+the light, and onto your knees"* and would otherwise have been a lie), and the media slot
+`scenes/grier_look.jpg`, now retired off beat_0141's list.
+
+### 23.4 The system that comes out of it
+
+**She escalates inside the drink. He escalates on the rungs.** The gates interleave rather than stack, so
+the two tracks alternate all the way up:
+
+| relation | what opens | whose move |
+|---|---|---|
+| 0 | Sit with him · Drink → just drink | — |
+| **4** | Drink → let the coat fall open | **hers** |
+| **10** | Drink → lean over him when you pour | **hers** |
+| **12** | Go and stand between his knees | **his** |
+| **20** | Get down in front of him | **his** |
+
+The base node's bands moved with it — **4 / 12 / 20**, was 6 / 12 / 20 — because the edges are the unlocks
+and 6 stopped being one. Band 2's dialogue asked for the bulb and now asks her to bring the bottle over when
+she pours, which is the thing that actually opens next.
+
+**Measured: free path 8 trips and no coin; bottle path 4 trips and 80 coin.** The free path is one trip
+slower than before, because the deleted rung was a +3 she could take in the same visit as the drink. That is
+the correct direction: the free path should be the long way round.
+
+### 23.5 What did not move
+
+No new flag, no new trait, no change to the `hands` gate (12), the `knees` gate (20) or `grier_opened_up`.
+The loop still needs no bottle. `sit` is still free and still finishes the whole arc alone.
+
+---
+
+## 24. THE GUIDANCE PAGE — beat_0144 (rev 196). The page a lost player opens.
+
+**Added 2026-09-07 after LO asked for a read-only audit of the quest cards.** The spine came back clean:
+19 cards, #60 to #78, each shut by the flag that opens the next, **exactly one live at every one of the 19
+states**, and all 18 chain flags with real setters. Four defects sat around it. LO's call was the complete
+fix.
+
+### 24.1 The cards were the worst prose in the game, and no gate read them
+
+| | quest cards | game | ceiling | field p50 |
+|---|---|---|---|---|
+| em dashes /10k | **161.5** | 16.5 | 35 | 0.99 |
+| glosses /1k | 0.64 | 0 | 0.24 max | |
+| negation sentences | 39.4% | 31.7% | 25.76% max | |
+| median sentence | 15 | 9 | 14 | |
+
+**Why nobody saw it.** `gates.py:7423` builds its prose model from **canvases** and reads `Beat.text`.
+`quest_cards` is a sibling key of `canvases` and never enters that model. The arithmetic proves it: the gate
+reported **115 dashes for the whole game** while the cards alone held **153**. The rev-191 readability pass
+never touched one (`git show 556bad2 -- 5_scenes.toml | grep -c '^[-+]tip'` → 0).
+
+**That is the original F95 failure, one surface over** — doctrine with no counter — landing on the page
+whose entire job is to un-confuse somebody.
+
+**Fixed both halves.** All 87 cards rewritten against Rules 11 to 14, and a new instrument,
+`.claude/skills/author-game/scripts/check_quest_cards.py`, wired into `ship-gate.md` §5. Result: **dashes
+152 → 0, glosses 7 → 0, negations 39.4% → 25.4%, median sentence 15 → 11.**
+
+**⚠️ Prose-truth held.** The rewrite moves prose while every field sits still, so §4's detector is blind to
+it by construction. Checked by diffing every number-word and place-word card by card: **74 of 79 identical**,
+and the five that moved are the beat_0143 rung fix plus four idioms. No price, wage, window or place changed.
+
+### 24.2 Grier and Sabin had no section at all
+
+Measured live mid-ladder: five sections rendered, Renner / Calloway / Colm / Mercer / Bastien, **every one
+reading "Arc complete."** So a player halfway up Grier opened the guidance page and was told every character
+in the game was finished, with the man she was working on nowhere on it. Sabin the same. **They are the two
+new characters of this release.**
+
+The QuestsPage widget builds its per-character list from the cards (`_allCards` → distinct `npc_id`). No
+cards, no section.
+
+**Four cards each, shape copied from Colm's ladder** (rev 98): a card per band on plain `relation` with a
+numeric `goals` bar on the same axis, then a completion card carrying `terminal = true`.
+
+These are **the chapter's first progress bars**. The spine's deliberate no-`goals` decision was about flag
+milestones and the Frame-3 blank-card trap; every NPC ladder in this game carries a bar.
+
+### 24.3 Card W argued with itself
+
+Its text said *"there is nothing to buy off him and no trade to offer him"* and its tip, four lines later,
+said *"twenty coin a bottle."* Both true and the card never reconciled them. The text now names what is
+unbuyable: **the piece**, which is not for sale at any price because the man holding it does not know he
+holds it. The same edit killed one of the seven glosses.
+
+### 24.4 The bottle after the ladder — §22.10's deferred content, now due
+
+Nothing on Grier reads `relation` above 20; the knees rung is the highest gate in the game on him. So once
+`grier_opened_up` was set, "Drink with him" charged 20 coin to move a number no condition, cost or quest
+goal ever looks at.
+
+**It now costs a night.** A second choice, exclusive on `grier_opened_up`, with the warning **in the label**
+so it can never be a trap, routing to `hub_grier.drink_after`, which subtracts 1 from `grier_nights`
+(clamped at 0). The wall already runs on that counter: the finisher's first band catches every elected
+finish while it is `lt 3`, and each wall node bumps it. A bottle puts one back.
+
+No new trait, no `daily_tick` entry, no OR-condition the engine cannot express. **The only choice in this
+game with a real downside**, and it is §8's own logic charged to the player: nine years of drink is why he
+cannot finish, and she has been carrying the last month of it down the lane herself.
+
+**⚠️ AND IT TAUGHT US THE `show_when_locked` TRAP WEARING AN EXCLUSIVITY CLAUSE.** The locked branch fires
+when the whole `AND` fails, so an exclusive PAIR that both grey out prints two reasons in every state.
+Measured live: post-ladder with a bottle in her coat the page carried the live choice **and both greyed
+lines**. Only one of an exclusive pair may grey, and its reason must be true in **both** of its failure
+states — so the surviving one states where the bottle comes from rather than what her hands are holding.
