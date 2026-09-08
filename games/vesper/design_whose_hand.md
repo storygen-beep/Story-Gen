@@ -2998,3 +2998,103 @@ measures pass with *what did not happen* down 25.7% → **24.9%** and the median
 `gates.py` **21 FAILs and 425/425 nodes**, both unchanged (this beat adds and removes no nodes) · in the
 built HTML `will not finish`, `costs you a night`, `never once bought you a finish` and `He will be further
 gone` all return **0**, and the one surviving `further gone` is line 1333's, a different man entirely.
+
+---
+
+## §29 — beat_0155 (rev 206). ONE ROAD, AND THE TOWER BECOMES A DOOR.
+
+LO, reading the ride-up gates: *"in all three cases it should show ride up to spire (even text should be
+same and location should be same too). After archive done, it should check on the face on or off, if off the
+locations the building should remain closed up there."* Then, on the lock-versus-bounce trade: **"Go with
+lock."**
+
+### 29.1 What the road was doing, and why it was the wrong place for it
+
+Two exclusive ride choices banded on `archive_1a_done`, so the menu line changed its wording *and* its target
+across the seal, and between the seal and Grier naming the tower there was **no way up at all**. Three beats
+of gate history had accumulated on it: beat_0147 opened the post-seal ride, beat_0153 cut `face_worn` off it,
+beat_0155 cut the last two clauses.
+
+**The plaza's own header had argued for this since beat_0147** — *"the tower is locked door-by-door instead
+of by cutting the road. The street is public and the bought face beats a camera on a column."* The road gate
+was the compromise that survived its own argument. A road that comes and goes teaches the player the world is
+unstable, and it was duplicating work the doors already do.
+
+Now: one label, one node, one destination, in every state, from both pickers.
+
+### 29.2 The argument that died, recorded because it was right until it was not
+
+Three beats' worth of comments reasoned that `rise_named` **could not** move onto `the_rise_floor`, because a
+locked location always renders a greyed nav card and there is no hide path. **That engine fact is true and
+was re-verified here:** `_render_location_nav_card` ends on
+`<<if navDestUnlocked>>{open}<<else>>{locked}<</if>>` (`v2.py:20423`) with no third branch, and the only
+filter on the destination list is the static `offscreen` property (`v2.py:20475`).
+
+What changed is the design, not the engine. **The promise should be visible.** This is a sandbox; a door you
+cannot open yet is the loop, and `docs_vault` has shipped that exact shape since the division build-out —
+gated on a trait nothing ever sets, *"she can look at the wall she can't cross."*
+
+### 29.3 The name — "The Second Tower"
+
+The display name was **"The Floor"**: the name of a room *inside* a building, opaque on a plaza grid and
+useless as a promise. It is now what anyone standing on that plaza can see.
+
+The rename protects the reveal rather than spending it. Grier's scene gives the player four things — whose it
+is (Vance money), what is in it (the study never stopped), that it hires off the street, and its street name
+(*"The Rise, they are calling it"*). **"The Second Tower" gives away none of them.** His own line already
+frames it relationally: *"going up beside the big one."* And the game had written the phrase itself already —
+`riding_up_covered`'s second paragraph opened *"Across the plaza the second tower is still going up."*
+
+So the card is the **question** and Grier is the **answer**, which is a better shape than a card that appears
+only after it has been solved.
+
+**Renaming is save-safe and it was checked before the edit, not after.** `_location_passage_name`
+(`v2.py:12666`) keys off the location *slug* and says so in its docstring: *"renaming a room no longer moves
+its passage → a save parked there still resolves."* The `id` does not move. Ripple was measured first:
+`"The Floor"` appeared in exactly two places in the whole game.
+
+### 29.4 The lock, and the single-string constraint
+
+`the_rise_floor` had **no `entry_conditions` at all** — the only thing hiding it was an unreachable plaza. It
+now carries `rise_named` **AND** `face_worn`, with `version = "1.0"`, without which the engine returns true
+for any conditions block and the gate **fails open with no build error** — a no-op that still passes every
+instrument.
+
+⚠️ **`blocked_message` is a single static string with no state banding.** `navDestBlockedReason`
+(`v2.py:5032`) returns `loc.blocked_message` or falls back to a formatted condition dump. So one line has to
+be true in *both* failure states — no name yet, and wrong face — which is the same discipline `hub_grier`'s
+exclusive `show_when_locked` pair ships under.
+
+### 29.5 What the lock cost
+
+`react_rise_no_face` is **deleted**. It bounced her out of the lift with the kit on and the wrong face; with
+the door gated on `face_worn` that state can no longer reach the floor, so it became content nothing could
+open. This reverses beat_0153 by one notch — that beat deliberately chose a scene over a lock, and LO chose
+back. The trade is a menu that never changes shape, paid for with ~40 words. Its two good lines survive: the
+face-goes-on-at-the-cot thought is in the `blocked_message`, and the kerb-side version is band B on both
+travel pickers.
+
+`react_rise_no_kit` is untouched and still bounces — `cover_research UNEQUIPPED` is reachable with the face
+on, which is exactly the state that should be sent to the market.
+
+### 29.6 The Vance doors do not move
+
+`vance_securities` shuts on `archive_1a_done` and never re-opens, face or no face. **The face is a costume,
+not an alibi:** it works on a new employer with no file on her and does nothing in the building that already
+has one. Making Vance's own doors face-beatable would refund the archive job.
+
+*Recorded, not done:* `atrium` is a child of the plaza with no gate at all, and its own description says the
+security desk *"knows her face"*. Post-seal that is arguably a hole.
+
+### 29.7 Measured
+
+Merge validates · build errors unchanged at the three known beat_0141 media files · `check_quest_cards` all
+measures pass · `gates.py` **21 FAILs**, unchanged, and authored nodes **425 → 422**, exactly the three
+deleted (`react_rise_no_face`, `riding_covered`, `riding_up_covered`).
+
+Live headless, **0 JS errors**: both pickers offer exactly one `Ride up to the Spire.` in all four states
+(pre-seal; post-seal unnamed; named face-off; named face-on) and the old `Ride up to the plaza.` is gone
+everywhere. On the plaza the card reads **The Second Tower** in every state, is non-clickable and prints its
+reason in three of them, and is clickable only on `rise_named` + `face_worn`. No strand: the floor keeps
+`Back down to the plaza`, and a direct jump with the gate failing renders the blocked page with a `Go back`
+link rather than stranding. `react_rise_no_kit` still plays end to end.
