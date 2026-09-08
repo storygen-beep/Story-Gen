@@ -471,10 +471,13 @@ hidden = true
 key    = "ruin_depth"
 hidden = true
 # WHOSE HAND (beat_0126) — Grier's loop. Both hidden; no sidebar row, no entry in the traits dump. The player
-# reads grier_nights off the three written failed nights and grier_drains_done off what the finish gives her.
-# ⚠️ NEITHER IS THE LADDER'S AXIS. That is plain npc_grier.relation (beat_0125). grier_nights counts nights he
-# was WORKED AND DID NOT FINISH, which is not the same fact as how far up the ladder she is, and the wall's
-# chain wants its own axis to compare — mercer_attempts' argument exactly.
+# reads grier_drains_done off what the finish gives her.
+# ⚠️ grier_nights IS DEAD AS OF beat_0152 (rev 203) AND STAYS DECLARED ANYWAY. LO cut the wall, so he drains
+# on the FIRST ass finish and nothing in the game reads this key — no condition, no cost, no effect, no card.
+# The key and its default stay because saves carry it and a key read by nothing costs nothing; deleting one
+# is how a load goes undefined. It counted nights he was WORKED AND DID NOT FINISH, which was never the same
+# fact as how far up the ladder she is, and the wall's chain wanted its own axis — mercer_attempts' argument.
+# ⚠️ NEITHER IS THE LADDER'S AXIS. That is plain npc_grier.relation (beat_0125).
 # ⚠️ AND THEY ARE TRAITS BECAUSE THEIR SETTER IS TRIGGERLESS. loop_grier_finisher has no location, and the
 # hint system resolves a flag through the canvas that SETS it, so a flag set only on a triggerless canvas has
 # nowhere to point. The two flags this chapter actually gates on — piece_one_held and rise_named — are set by
