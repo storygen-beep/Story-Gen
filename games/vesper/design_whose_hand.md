@@ -3098,3 +3098,202 @@ everywhere. On the plaza the card reads **The Second Tower** in every state, is 
 reason in three of them, and is clickable only on `rise_named` + `face_worn`. No strand: the floor keeps
 `Back down to the plaza`, and a direct jump with the gate failing renders the blocked page with a `Go back`
 link rather than stranding. `react_rise_no_kit` still plays end to end.
+
+---
+
+## §30 — beat_0156 (rev 207). SABIN'S LADDER GETS ITS MIDDLE.
+
+LO, reading the built game: *"For Sabin no tease nothing direct kiss?? Why is that??"* Then, on the axis:
+*"Was she using love or lust, I think lust here."* Then, on the kiss: *"yes, and remove kiss right??"* —
+answered **no**, keep it and move it, and he took that.
+
+### The defect, measured
+
+His ladder ran `ask` → `late` → `kiss` → `bench`: two conversation rungs, a kiss, then penetrative sex. The
+cheapest climb to the bench was **7 visits with 5 of them carrying no body at all** — the longest dry stretch
+of any on-ramp in this game. `late`'s own header says *"NOTHING HAPPENS IN THIS RUNG AND THAT IS CORRECT"*,
+which is true of the rung and false of the band it sat in: relation 6–11 offered exactly two choices and both
+were talking.
+
+**The media said the same thing.** The `_tN` suffix is the heat tier. Renner ships `t2`/`t3`/`t4`, Grier
+ships `t2`/`t3`; Sabin shipped **nothing below `t4`** and was the only portrait hub in the release going
+straight from a photograph of an empty office to a `t5` video.
+
+### Why it happened — the original call was half right
+
+§9's own record (`:1268`): *"Rung 3 is a kiss, and she starts it. Grier's ladder was body-inspection the whole
+way up... Repeating that shape would have made two ladders read as one ladder written twice."*
+
+Sound about **content**, wrong about **structure**. Grier's signature is *what happens* in his tease rungs — a
+machinist reading build quality off a part — not that he has any. Avoiding that never required deleting the
+tier; it required writing a different one. The beat deleted the tier.
+
+### The second finding — there was no lust axis on him at all
+
+`0_systems_spec.toml:240` calls `corruption` *"the NPCs' LIVE seduction axis."* Live consumers measured:
+`npc_renner` 25 gates, `npc_calloway` 8, **`npc_grier` 0, `npc_sabin` 0**. Renner's grope rung bands on it and
+plays as two different men (`5_scenes.toml:769`, `:776`).
+
+So the honest answer to *love or lust* was **neither**: Sabin's ladder ran on plain `relation`, which §9
+defines as **access** — *"what climbs is how far into his building she is allowed to stand"* (`:1256`). A door
+count. That is what read dry. `corruption = 0` is now declared on him and the two new rungs feed it.
+
+### What shipped
+
+| rung | gate before | gate after | relation | corruption |
+|---|---|---|---|---|
+| `ask` | 0 | 0 | +2 | — |
+| `late` | 6 | **4** | +3 | — |
+| **`tease`** | — | **7** | **+3** | **+2** |
+| **`flash`** | — | **10** | **+4** | **+2** |
+| `kiss` | 12 | **14** | +4 | — |
+| `bench` | 20 | **18** | +4 | — |
+
+Cheapest path `ask`(2) `ask`(4) `late`(7) `tease`(10) `flash`(14) `kiss`(18) → `bench`: **6 climbing visits,
+3 of them carrying body**, against 7 and 2 before. The climb got *shorter* and the middle got filled.
+
+**Flash at 10 and kiss at 14 land exactly on Grier's flash and knees gates**, which `:1264` requires — *"A
+player who learned that rhythm one NPC ago should not be re-taught it."*
+
+### The register — it inverts Grier rather than repeating him
+
+> **Grier's tease runs on him LOOKING and never admitting it. Sabin's runs on him refusing to look and
+> ANNOUNCING that he failed.**
+
+Both props were already shipped and neither is invented: **the box behind the box** is his own band-2 line
+(*"Second box. No, the one behind it"*), and **the glass on two sides with the lights always on**
+(`1_metadata:1589`) is a mirror after dark — which is how a man who will not look still gets to look. The
+flash then **takes the reflection away**: she comes round to his side, so reading the page means looking up at
+her. That is `hub_grier`'s own rule — *"THE TWO RUNGS SPLIT ON DENIABILITY, NOT ON SKIN"* — reached through
+Sabin's prop instead of Grier's.
+
+**The flash's "fortnight" is true here, and Grier's weeks were not.** `drink_flash` shipped referencing weeks
+nothing below it had earned; beat_0150 caught it and fixed it by making the tease those weeks. Sabin's tease
+sits below his flash from the first build, so the callback is structurally true on day one — and must stay
+that way if either gate ever moves.
+
+**He offers to stop in both high bands and she declines.** Not a softening. He is the one man in this game who
+asks and then waits for the answer (his own declaration), and §11's capstone needs *"she has never once been
+fucked without working"* to be something the player FELT. A man checking while she keeps not answering is the
+coldest reading of this ladder available, and it is the honest one.
+
+### Three traps worth keeping
+
+- **⚠️ The effects ride the EXIT, not the choice.** Choice effects fire on CLICK, exit effects on RENDER
+  (`template_import.py:1968`). On the choice, `+2 corruption` would land *before* the node rendered and the
+  very first view of each rung would print the HIGH band. On the exit, the first view is always the low one.
+- **⚠️ Bands at `gte 4`, not higher.** The first pitch said 12; that was wrong arithmetic. The rungs pay +2
+  each and the ladder affords roughly two clicks, so 12 would never have fired once. At 4 the axis flips on
+  the third body-rung click.
+- **⚠️ The base bands and the quest cards both track the unlocks.** Band edges moved to `lt 4 / 4-9 / 10-13 /
+  gte 14` (`hub_grier`'s rule: the ORDER band must open on the number the rung it orders opens on). The three
+  banded cards were re-banded to **10 / 18 rather than 14 / 18** — tracking the kiss gate would have left card
+  2 a one-visit window, since the kiss pays +4 off 14 and lands on 18.
+
+### What was NOT done, and why
+
+LO's proposed order ended `blowjob → vaginal → anal`. Those are **poses inside the loop**, not rungs —
+`base_oral_sabin` / `base_vaginal_sabin` / `base_anal_sabin`, freely selectable on `sex_stage`, the shipped rig
+on all eight loop NPCs. Converting them would break the five-trait loop-entry reset, contradict the intro's
+own design (*"there is no wall here... she picks"*), and — the killer — **the drain fires only on the anal
+finish**, so anal as a sixth rung would put the entire mechanical point of Sabin behind the grind. That is the
+mopoga lostness-and-grind disease.
+
+**Open and deferred:** whether Sabin's `corruption` surfaces as a visible bar. The spec says corruption is not
+hidden, so it may; arguably right (watching a decent man come apart) and arguably wrong (he does not know he
+is being worked). No cheat-page row was added — those are explicit per-NPC rows (`0_systems_spec.toml:614`).
+
+**Media:** two new pools, `scenes/rung_sabin_tease_t2` (pool 2) and `scenes/rung_sabin_flash_t3` (pool 3).
+Debt 46 → **48**. Their query plans share no lead phrase — tease leads on *reaching across a surface*, flash on
+*standing over him* — per `design_media_pools.md §3`, or find-media returns the same clips twice.
+
+---
+
+## §31 — beat_0157 (rev 208). THE CONFESSION SHE ALREADY WATCHED.
+
+LO, reading `hub_grier.the_third` in the built game, asked a plain story question — *"how 8 can happen before
+2?"* — and it turned up a real defect and an error of mine. The error first, because the method matters more
+than the fix.
+
+### ⚠️ I TRACED THE CHAIN WITH A SCRIPT THAT COULD NOT SEE HALF THE GATES
+
+To answer whether the Cain ending required Grier's drain, I wrote a throwaway walker that followed flag
+setters backward. Its condition regex matched `flag_key` and **silently skipped `trait_key`**. It returned
+"no drain anywhere on the Cain path," and I reported that as a finding and then built three messages of
+design argument on top of it — including a proposed fix for a hole that does not exist.
+
+The truth, read directly out of the file:
+
+```
+cap_the_price (:17398):  pieces_seated gte 2      ← BOTH PIECES REQUIRED
+```
+
+`pieces_seated` is a **trait**, so the walker never saw it. Piece one comes only from `cap_grier_gives` off
+`grier_drains_done`; piece two only from Sabin. So the drain is **mandatory**, the Cain question is
+unreachable without it, and every "the drain is optional" claim is withdrawn.
+
+**The lesson worth keeping: a negative result from a grep is the weakest evidence there is.** "I found no
+drain gate" needed a second check that the search could see drain gates at all. LO caught it by asking the
+story question the tooling could not ask — *how can the last step come before the second one*.
+
+**A second instance of the same fault, same session:** looking up Grier's `d0` by `id   = "d0"` matched
+**Mercer's** drain node, because every drain canvas has a node with that id. Scope the lookup to the canvas
+first. Both errors are the same shape — trusting a lookup without checking it could hit the wrong thing.
+
+### The defect that survived, and got sharper
+
+Because the drain is required three links upstream, `grier_drain_canvas.d0` **always** plays first. It shows
+her the extraction from inside Grier's own head: three trays on the stand, a man dividing what came out of
+the head between them, and *"He takes the one he came for and the one sitting next to it."*
+
+Then `the_third` had him confess exactly that, as news:
+
+> *"There were three on that stand and I walked out with two of them, and **I have never said that to a living
+> soul**..."*
+
+What I first flagged as an ordering risk is a **certainty — 100% of players get the confession after the
+memory.** The old setup paragraph framed it as a revelation, and it cannot be one.
+
+### What shipped — one beat, four blocks
+
+Measured against `d0` block by block, only the framing was wrong:
+
+| his claim | did she see it in the drain? |
+|---|---|
+| three trays on the stand | **yes** (`:15692`) |
+| he walked out with two | **yes** (`:15697`) |
+| one the commission, one not | **yes** (`:15700`) |
+| **the handoff at the door** | **NO** — she saw a faceless man *waiting*, never the exchange |
+| **that it was "the arrangement"** | **NO** — a prior deal, not an ambush |
+
+- **Block 1, rewritten** — one sentence appended: *"She has already stood in that room and watched him do
+  it."* The beat now knows what the player knows.
+- **Block 2, untouched.** His confession is **true for him** — he has no idea what she is, and that gap is
+  the beat. Editing his line would hand him knowledge the fiction never gives him.
+- **Block 3, NEW** — *"She does not move her face. There is one thing she could say that would stop him, and
+  saying it means telling him what she does with her hand on a man's back, so she lets him have the whole of
+  it instead."*
+- **Block 4, untouched** — the handoff, the only new information in the beat.
+
+**Why it is better than what it replaced.** The old beat was a reveal that could not reveal. The new one is a
+man handing over the one thing he has never told anybody, to a woman who watched him do it and keeps her face
+straight — because reacting would mean explaining how she knows. That is colder than the confession was, and
+it uses the mandatory drain as setup instead of being undercut by it.
+
+### What was checked and deliberately left alone
+
+- **§13's last scene.** Grier recites the trays again *to Cain*, who genuinely does not know, and it sets up
+  Cain's *"Was the third one filled last."* — the conjunction only he could reach, and the scene's real
+  payload. Correct as shipped; the repetition there is the point.
+- **The four-month line** at the top of `the_third`. The mandatory drain guarantees she has been through his
+  ladder and his loop, so the history it describes is real. No band needed.
+- **A `grier_opened_up` gate on the Cain question**, which LO asked for. Already enforced transitively
+  through `pieces_seated gte 2`; an explicit clause would be a no-op.
+
+### The bug class
+
+Same as beat_0154: a sentence that was true when written and became false when something upstream changed,
+with **no instrument in the repo able to detect it**. The build passes, the gates pass, the grammar is fine.
+Only reading it against what the player has already been shown catches it. beat_0154 found its instances by
+sweeping the built HTML for wall-era strings; this one was found by a player asking why the story order did
+not make sense.
