@@ -743,7 +743,7 @@ id          = "npc_sabin"
 name        = "Sabin"
 description = "The Chairman's new roboticist, four months into the job and paid very well to be there. He was handed a knowledge base eleven years deep and told to reproduce a method whose author is dead, and he is not cruel and not cold. He is simply working, and he has no idea what most of what he is reading actually is. He needs fast readers and he hires them on their papers. He is the only person in the game who asks her what she thinks and then stops talking and waits for the answer."
 portrait    = "sabin.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The scientist"]
 

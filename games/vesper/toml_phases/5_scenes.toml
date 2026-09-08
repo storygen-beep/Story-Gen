@@ -14087,9 +14087,11 @@ when = [
 ]
 
 # ═══ Quests page — SABIN'S SECTION (beat_0144). Same shape, same reason. ═══════════════════════════════
-# ⚠️ HIS LADDER IS 6 / 12 / 20 ON plain npc_sabin.relation (stay while the floor empties / kiss him at the
-# bench / let him have you over the bench), then sabin_drains_done. The first band spans the 6 rung the way
-# Colm's spans his ungated ones.
+# ⚠️ HIS LADDER IS 4 / 7 / 10 / 14 / 18 ON npc_sabin.relation (stay while the floor empties / reach across
+# the bench / the page round to his side / kiss him at the bench / over the bench), then sabin_drains_done.
+# ⚠️ RE-BANDED AT beat_0156 TO 10 / 18, NOT 14 / 18. Tracking the kiss gate would leave card 2 a ONE-VISIT
+# window (the kiss pays +4 off 14 and lands on 18), so card 1 now runs to the flash and card 2 covers the
+# flash, the kiss and the bench. Card 1's goal label still fits: 10 is where he stops being talked to.
 # ⚠️ TRACK B STAYS OFF THESE CARDS. §9: the reading is what exposes her and the two tracks never touch, so
 # sabin_suspects is named nowhere here. It gates nothing and a card that counted it would turn an optional
 # day job into a thing the page tells her to be careful about.
@@ -14100,23 +14102,23 @@ text       = "Four months into eleven years of a dead man's filing, and he hired
 tip        = "Take shifts on the floor at THE RISE, in the kit and in the face every time. He is down there mornings, eight until eleven, and up in his lab from eleven until ten at night."
 when = [
   { flag  = "sabin_met", op = "is_true" },
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt", value = 12 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt", value = 10 },
 ]
 goals = [
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 12, label = "Get him talking" },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 10, label = "Get him talking" },
 ]
 
 [[quest_cards]]
 priority   = 11
 npc_id     = "npc_sabin"
 text       = "He moved you off the floor and up to the lab and it cost him nothing at all to do it. He is glad of the company. He has no idea this is a thing about him, and he can go on having no idea, because the room he works in is the room you came for."
-tip        = "Keep going up to the lab at THE RISE. Kiss him at the bench once he is comfortable enough. What you want is not in the filing, it is on the shelf the filing came off."
+tip        = "Keep going up to the lab at THE RISE. Reach across the bench for what he asks for, take the page round to his side, and kiss him once he is comfortable enough. What you want is not in the filing, it is on the shelf the filing came off."
 when = [
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 12 },
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt",  value = 20 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 10 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt",  value = 18 },
 ]
 goals = [
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 20, label = "Get to the bench" },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 18, label = "Get to the bench" },
 ]
 
 [[quest_cards]]
@@ -14125,7 +14127,7 @@ npc_id     = "npc_sabin"
 text       = "Over the bench, four floors up, with his hand across your mouth because that level has nothing on it to stop a sound getting out. He apologised to the stacks he knocked down. He knows where every last piece of that archive is kept and he has never once had to think about it."
 tip        = "Clear the bench whenever he is up there. Work him up and take it in your ass. No other finish drains him. What comes out of him is a floor, a rack and an eleven-character reference."
 when = [
-  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 20 },
+  { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 18 },
   { trait = "sabin_drains_done", subject = "player", op = "lt", value = 1 },
 ]
 goals = [
@@ -15238,9 +15240,24 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "He was one of yours. Did he tell you that, or did he let you work it out? Before you. The run they failed on. They got him walking and got nothing else out of him, and everything since he has done to himself, in a room, with a mirror in it." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "He is not a thing that was made properly. He is a thing they gave up on that would not lie down, and that is worse, and you can tell him I said so." },
     ] },
+    # ── THE TRAYS — REWRITTEN beat_0157 (rev 208). SHE HAS ALREADY SEEN THIS AND THE BEAT NOW KNOWS IT. ──
+    # ⚠️ THE DRAIN IS MANDATORY UPSTREAM AND THAT IS PROVEN, NOT ASSUMED: cap_the_price gates on
+    # pieces_seated gte 2 (:17398), piece one comes only from cap_grier_gives off grier_drains_done, and the
+    # whole Cain chain hangs off price_named. So d0 ALWAYS plays before this scene — she has stood in that
+    # room, counted the three trays and watched him lift two. There is no ordering where his confession is
+    # news, and the old setup paragraph framed it as though there were.
+    # ⚠️ HIS FIRST LINE IS KEPT WORD FOR WORD. "I have never said that to a living soul" is TRUE FOR HIM —
+    # he has no idea what she is, and that gap is the beat. Rewriting his line to acknowledge her would hand
+    # him knowledge the fiction never gives him.
+    # ⚠️ THE LAST LINE IS THE ONLY NEW INFORMATION IN THE BEAT AND MUST SURVIVE ANY FUTURE EDIT. d0 shows a
+    # faceless man WAITING in the corridor (:15697); it never shows the exchange. The handoff at the door and
+    # the word "arrangement" — a prior deal rather than an ambush — are hers for the first time here.
+    # ⚠️ NO THOUGHT BUBBLE. The holding-still paragraph performs it; a bubble would state the meaning the
+    # paragraph already carries, and the next beat is where her mind is allowed to go.
     { advance_text = "And the trays.", blocks = [
-        { type = "paragraph", content = "And then it comes out sideways, the way the useful things always come out of him. Not offered, spilled, in the middle of a sentence that was going somewhere else." },
+        { type = "paragraph", content = "And then it comes out sideways, the way the useful things always come out of him. Not offered, spilled, in the middle of a sentence that was going somewhere else. She has already stood in that room and watched him do it." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "There were three on that stand and I walked out with two of them, and I have never said that to a living soul, and I am saying it to you because you are the only one left it is any business of." },
+        { type = "paragraph", content = "She does not move her face. There is one thing she could say that would stop him, and saying it means telling him what she does with her hand on a man's back, so she lets him have the whole of it instead." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "And I had two of them for about nine steps. The one I was sent for went out of my arms at the door into somebody else's, which was the arrangement. The one I kept was the one nobody had asked me for." },
     ] },
     { advance_text = "Ask about the third.", blocks = [
@@ -16301,7 +16318,7 @@ flagEffects = [
 [[canvases]]
 id          = "hub_sabin"
 name        = "Sabin"
-description = "beat_0130 (rev 180), WHOSE HAND. Sabin's standing portrait hub @sabin_lab. Repeatable, pri 4, npc + requires_npc = npc_sabin, gated sabin_consulted is_true. NO day cap — the trip up plus his 11:00-22:00 lab window are the throttle. THE LADDER RUNS ON PLAIN relation, no counter trait: ask what it means (ungated, +2) / stay after the floor empties (gte 6, +3) / kiss him at the bench (gte 12, +4) / over the bench (gte 20, +4, SETS sabin_opened_up). Base banded four ways on the same axis, edges at the unlocks. It runs on him being decent and glad of the company, which is the exact opposite of Grier's and is what makes it the colder of the two."
+description = "beat_0130 (rev 180), TEASE+FLASH ADDED beat_0156 (rev 207), WHOSE HAND. Sabin's standing portrait hub @sabin_lab. Repeatable, pri 4, npc + requires_npc = npc_sabin, gated sabin_consulted is_true. NO day cap — the trip up plus his 11:00-22:00 lab window are the throttle. THE LADDER IS SIX RUNGS ON relation: ask what it means (ungated, +2) / stay after the floor empties (gte 4, +3) / reach across the bench (gte 7, +3) / take the page round to his side (gte 10, +4) / kiss him at the bench (gte 14, +4) / over the bench (gte 18, +4, SETS sabin_opened_up). The two middle rungs ALSO pay +2 npc corruption, which is his lust axis and bands them low/high at 4 — the only thing on this man that reads corruption. Base banded four ways on relation, edges at the unlocks: lt 4 / 4-9 / 10-13 / gte 14. It runs on him being decent and glad of the company, which is the exact opposite of Grier's and is what makes it the colder of the two."
 [canvases.trigger]
 location      = "sabin_lab"
 requires_npc  = "npc_sabin"
@@ -16319,30 +16336,30 @@ name = "Sabin"
 blocks = [
   # BAND 1 — lt 6. He is talking before she is close enough to be talked to.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt", value = 6 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt", value = 4 },
     ] } }, blocks = [
     { type = "paragraph", content = "He does not stop working when she comes up the room. The bench is eleven years in stacks and he is somewhere in the middle of it, and he is talking before she is close enough to be talked to." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "There you are. Tell me why a man orders forty litres of a thing he only ever logs using two of. No — do not tell me. Read it first and then tell me." },
   ] },
   # BAND 2 — 6 to 11. He has stopped explaining what things are.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 6  },
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt",  value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 4  },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt",  value = 10 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has stopped saying what any of it is. Things get put into her hands on the assumption that she knows what they are for, and he has been right about that twice now without ever checking." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Second box. No, the one behind it. He was running two of these in parallel and calling them both by the same word. That is the entire reason nothing in this room adds up." },
   ] },
   # BAND 3 — 12 to 19. Same three feet of bench, and half of it is not about the archive.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 12 },
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt",  value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 10 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "lt",  value = 14 },
     ] } }, blocks = [
     { type = "paragraph", content = "They work the same three feet of bench now. He talks the whole time and half of it is not about the archive at all, and she has started answering the half that is not." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You are the only person in this building I do not have to say a sentence to twice. I am aware of how that sounds coming from me. I have decided not to think about it very hard." },
   ] },
   # BAND 4 — gte 20. The bench is clear before she gets there and he has stopped explaining why.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 20 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 14 },
     ] } }, blocks = [
     { type = "paragraph", content = "The bench is clear when she comes up now. He does it before she gets there, and he has stopped saying it is so they can spread the stacks out, and neither of them has said anything about that either." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Shut the stair door. It does not shut. Push it to anyway." },
@@ -16354,23 +16371,43 @@ type = "choices"
 text       = "Ask him what it means."
 targetType = "node"
 nodeId     = "hub_sabin.ask"
-# ── RUNG 1 (beat_0130) — after the floor below goes home. THE SILENCE GETS ITS PHYSICAL CAUSE HERE. ──
+# ── RUNG 1 (beat_0130, re-gated 4 at beat_0156) — after the floor below goes home. THE SILENCE GETS ITS PHYSICAL CAUSE HERE. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Stay while the floor empties."
 targetType = "node"
 nodeId     = "hub_sabin.late"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 6 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 4 },
 ] }
-# ── RUNG 2 (beat_0130) — SHE does it, deliberately, mid-sentence. ──
+# ── RUNG 2 (beat_0156) — THE TEASE. Gated relation gte 7. The deniable one; he uses the glass. ──
+# ⚠️ NO show_when_locked ON EITHER NEW RUNG, AND THAT IS DELIBERATE. hub_grier greys its two, but that hub
+# carries an exclusive PAIR whose locked branches both fire in every state — the trap beat_0154 measured
+# live. These two are a plain ascending ladder with nothing exclusive about them, so a greyed line would
+# only print a second reason under a first. The base node's four bands already say where she stands.
+[[canvases.nodes.exit_block.choices]]
+text       = "Reach across the bench for it."
+targetType = "node"
+nodeId     = "hub_sabin.tease"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 7 },
+] }
+# ── RUNG 3 (beat_0156) — THE FLASH. Gated relation gte 10. She takes the reflection away. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the page round to his side."
+targetType = "node"
+nodeId     = "hub_sabin.flash"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 10 },
+] }
+# ── RUNG 4 (beat_0130, re-gated 14 at beat_0156) — SHE does it, deliberately, mid-sentence. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Kiss him at the bench."
 targetType = "node"
 nodeId     = "hub_sabin.kiss"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 12 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 14 },
 ] }
-# ── RUNG 3 (beat_0130) — the first explicit rung. Sets sabin_opened_up.
+# ── RUNG 5 (beat_0130, re-gated 18 at beat_0156) — the first explicit rung. Sets sabin_opened_up.
 # ⚠️ RE-GATED AT beat_0131 WITH sabin_opened_up is_false, AND THE NODE IS NOT DELETED. This is the FIRST
 # night and nothing else; once it has happened loop_sabin_lab is the surface, and two explicit surfaces on
 # one portrait would only split the player's attention. The scene stays in the file because the flag it sets
@@ -16380,7 +16417,7 @@ text       = "Let him have you over the bench."
 targetType = "node"
 nodeId     = "hub_sabin.bench"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "relation", operator = "gte", value = 18 },
   { type = "flag",  subject = "player", flag_key = "sabin_opened_up", operator = "is_false" },
 ] }
 # ── THE LOOP ENTRY (beat_0131) — takes rung 3's place once the first night has happened. ──
@@ -16437,7 +16474,7 @@ effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 2, clamp = true },
 ]
 
-# ── RUNG 1 — "late". Gated relation gte 6. +3, 60 min. ───────────────────────────────────────────────
+# ── RUNG 1 — "late". Gated relation gte 4 (was 6, beat_0156). +3, 60 min. ───────────────────────────
 # ⚠️ THE SILENCE IS ESTABLISHED HERE, ONCE, AND IT IS A PROPERTY OF THE LEVEL. §9 requires that she cannot
 # make a sound up there and §6 gives it a physical cause — no partitions, no carpet, an open ceiling. Saying
 # it inside a rung she chose is what makes it a rule of the room by the time rung 3 needs it, instead of an
@@ -16468,7 +16505,120 @@ effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 3, clamp = true },
 ]
 
-# ── RUNG 2 — "kiss". Gated relation gte 12. +4, 60 min. ──────────────────────────────────────────────
+# ── RUNG 2 (beat_0156, rev 207) — "tease". Gated relation gte 7. +3 relation, +2 corruption, 60 min. ──
+# ⚠️ THE TIER SABIN NEVER HAD. His ladder ran ask -> late -> kiss -> bench: two conversation rungs, then a
+# kiss, then penetrative sex — 7 climbing visits with 5 carrying no body at all, the longest dry stretch of
+# any on-ramp in this game. beat_0130's header argued a kiss instead of body-inspection because repeating
+# Grier "would make two ladders read as one ladder written twice". Right about Grier's CONTENT, wrong about
+# the TIER, and the tier went out with it. Renner ships t2/t3/t4 and Grier t2/t3; Sabin shipped nothing
+# below t4 and was the only portrait hub in the release going straight from a photograph to a t5 video.
+# ⚠️ IT INVERTS GRIER RATHER THAN REPEATING HIM. Grier's tease runs on him LOOKING and never admitting it —
+# drink_tease ends "he does not ask again and he does not go back for the thread". Sabin's runs on him
+# refusing to look and ANNOUNCING that he failed. Same escalation, opposite man, and it is his own
+# established tic: he narrates his lapses out loud (":16496" — on the record before he is asked).
+# ⚠️ BOTH PROPS ARE SHIPPED, NOT INVENTED. The box behind the box is his own band-2 line ("Second box. No,
+# the one behind it") and the glass is the room's own description (1_metadata:1589 — "Glass on two sides,
+# lights that stay on whether anybody is in it or not"). Lit inside and dark outside, that window is a
+# mirror, which is how a man who will not look still gets to look.
+# ⚠️ THE TWO BANDS ARE AN EXCLUSIVE PAIR AND THE LAST PARAGRAPH BREAKS THE CHAIN. Adjacent [group] blocks
+# merge into ONE if/elseif chain and first match wins, so the plain paragraph after them is what guarantees
+# the close prints in both states.
+# ⚠️ THE EFFECTS RIDE THE EXIT, NOT THE CHOICE. Choice effects fire on CLICK, exit effects on RENDER
+# (template_import.py:1968). On the choice, +2 corruption would land BEFORE the node rendered and the very
+# first view of this rung would print the HIGH band. On the exit, the first view is always the low one.
+# ⚠️ BANDS AT gte 4, NOT HIGHER. The two new rungs pay +2 corruption each and the ladder affords roughly two
+# clicks, so a band at 10 or 12 would never fire once. At 4 the axis flips on the third body-rung click —
+# a reward for lingering, exactly like Grier's tease having a two-view window.
+# ⚠️ pool = 2, NOT 4. flash strictly dominates from relation 10 at identical cost (60 min, same exit), so
+# this node's live window is relation 7-9: one or two views a playthrough, and a 4-clip pool would never
+# reach clip 3. Same arithmetic and the same pool size as rung_grier_tease_t2.
+# ⚠️ THE LAST SENTENCE IS ACTION, NOT MEANING (register.md, the pivot rule). What it meant to either of them
+# is not in this node and must not be added to it.
+[[canvases.nodes]]
+id   = "tease"
+name = "The box behind the box"
+blocks = [
+  { type = "video", props = { pool_dir = "scenes/rung_sabin_tease_t2", pool = 2, description = "A woman in an open-necked blouse leaning right across a long workbench reaching for something at the back, her top hanging open as she stretches, a seated man further down the bench in a bright glass-walled room. Must show: her clothed and reaching across a surface, downblouse from his side, him seated and looking. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: a bedroom.", search_queries = ["woman reaching across desk leaning forward cleavage office gif", "downblouse leaning over table reaching bright room gif", "stretching across workbench blouse open seated man gif"] } },
+  { type = "paragraph", content = "He wants the box behind the box, the way he always does, and she goes across the bench for it instead of round. Two buttons were down before she came up the stairs. She takes her time getting there." },
+  { type = "paragraph", content = "Glass on two sides, the lights on in here, and nothing but dark outside. The window hands him the whole front of her while he is looking straight down at a page, and he does not have to move his head to take it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "lt", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He watches the reflection until she straightens up, and then he looks at the bench, and then he says it out loud, because he has never once in his life let a thing like that go unsaid." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "The window works both ways after dark. I am telling you because if I say nothing now I become a man who said nothing, and I would rather be the other kind." },
+    { type = "paragraph", content = "He does not ask her to do up the buttons and he does not look at them again." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He does not look at the bench this time. He holds the glass while she is bent across it, and when she straightens up and catches him in the reflection he stays exactly where he is." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "No. I was not checking a reading and I am not going to say I was. If you would rather I stopped, say so and I will stop. You are not saying so." },
+    { type = "paragraph", content = "She does not say so. He turns back to the page and his hand stays where it stopped." },
+  ] },
+  { type = "paragraph", content = "The box he sent her for is the one already open in front of him. Neither of them says anything about that, and the next thing he needs is off the same shelf." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down and out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_sabin", trait = "relation",   op = "add", value = 3, clamp = true },
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 2, clamp = true },
+]
+
+# ── RUNG 3 (beat_0156, rev 207) — "flash". Gated relation gte 10. +4 relation, +2 corruption, 60 min. ──
+# ⚠️ THE ESCALATION IS DENIABILITY, NOT SKIN — hub_grier's rule ("THE TWO RUNGS SPLIT ON DENIABILITY, NOT
+# ON SKIN"), reached through Sabin's own prop instead of Grier's. The tease handed him a reflection to hide
+# in. This rung takes the reflection away: she comes round to his side, so looking at the page means looking
+# up at her, and there is no version of that he can call an accident.
+# ⚠️ ITS "FORTNIGHT" IS TRUE, AND GRIER'S WEEKS WERE NOT. drink_flash shipped referencing weeks that did not
+# exist — beat_0150 caught it ("Nothing below it was deniable, so there were no weeks") and fixed it by
+# making the tease those weeks. Sabin's tease sits below this rung from the first build, so the callback is
+# structurally true on day one and must stay that way if either gate ever moves.
+# ⚠️ HE OFFERS TO STOP IN THE HIGH BAND AND SHE DECLINES. That is not a softening: he is the one man in this
+# game who asks and then waits for the answer (npc_sabin's own declaration), and §11's capstone needs "she
+# has never once been fucked without working" to be a thing the player FELT. A man checking while she keeps
+# not answering is the coldest reading of this ladder available, and it is the honest one.
+# ⚠️ pool = 3, matching rung_grier_flash_t3. Live window is relation 10-13 before the kiss dominates.
+# ⚠️ THE QUERIES MUST NOT SHARE A LEAD PHRASE WITH THE TEASE POOL (design_media_pools.md §3) or find-media
+# returns the same clips twice. Tease leads on reaching across a surface; this one on standing over him.
+[[canvases.nodes]]
+id   = "flash"
+name = "His side of the bench"
+blocks = [
+  { type = "video", props = { pool_dir = "scenes/rung_sabin_flash_t3", pool = 3, description = "A woman in an open blouse standing over a seated man at a workbench, leaning in to hold a page down in front of him so her front is at his eye level, both clothed, in a bright over-lit room. Must show: her standing over him, him seated and looking up, her leaning in. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: her sitting.", search_queries = ["woman standing over seated man at desk leaning in cleavage gif", "leaning over man sitting at desk open blouse bright office gif", "standing over him looking up at her office gif"] } },
+  { type = "paragraph", content = "She comes round to his side with the page and stands over him to put it down. No window this time. He has to look up, and looking up puts her at his eye level with nothing else in the frame." },
+  { type = "paragraph", content = "She keeps one hand flat on the page while he reads it, so it stays where she put it, and she stays where she is. It is a page he has read before and it takes him a long time." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "lt", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He gets through the same four lines three times and then gives up on them out loud, which is the only way this man has ever given up on anything." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I have lost my thread. That is not the page's fault. I am going to sit here and be embarrassed for a moment and then I am going to ask you to hand me the next one anyway." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He does not pretend to read it. He turns the page face down on the bench and looks at her from the stool, unhurried, taking as long over it as she took getting there." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You have been doing this for a fortnight and I have known for a fortnight. Tell me to stop looking and I will. I have noticed you keep not telling me." },
+  ] },
+  { type = "paragraph", content = "She hands him the next one. He asks for the one after that without looking down at the bench, and he gets through none of it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down and out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_sabin", trait = "relation",   op = "add", value = 4, clamp = true },
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 2, clamp = true },
+]
+
+# ── RUNG 4 — "kiss". Gated relation gte 14 (was 12, beat_0156). +4, 60 min. KEPT, AND MOVED UP. ────
 # ⚠️ A KISS AND NOT A SECOND PAIR OF HANDS. hub_grier's ladder was body-inspection the whole way up because
 # he is a machinist reading build quality off a part. Repeating that shape here would make two ladders read
 # as one ladder written twice, and the release's whole claim (§15) is two repeatable surfaces that feel
@@ -16497,7 +16647,7 @@ effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 4, clamp = true },
 ]
 
-# ── RUNG 3 — "bench". Gated relation gte 20. +4, 90 min. SETS sabin_opened_up. ───────────────────────
+# ── RUNG 5 — "bench". Gated relation gte 18 (was 20, beat_0156). +4, 90 min. SETS sabin_opened_up. ──
 # ⚠️ THE RELEASE'S SECOND EXPLICIT SURFACE AND IT IS FULL CRUDE (§14 row a). Cock, cunt, ass, cum — the
 # ceiling is a ceiling and writing under it is the defect.
 # ⚠️ ITS CONTENT IS THE SILENCE. Clean, over-lit, controlled, everything held down and nothing said — the
