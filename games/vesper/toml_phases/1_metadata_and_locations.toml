@@ -930,11 +930,17 @@ description      = "The chrome public level at the foot of Vance Tower. Suits cr
 image            = "locations/spire_plaza.jpg"
 navigation_order = ["atrium", "the_rise_floor"]
 # Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
-# ⚠️ beat_0147 (rev 198) — THE PLAZA SURVIVES THE 1a SEAL NOW. It used to be unreachable post-blowup because
-# BOTH rides up were cut (3_activities); the ride is now re-opened on rise_named + face_worn, and the tower is
-# locked door-by-door instead of by cutting the road. The street is public and the bought face beats a camera
-# on a column — that is what the face is FOR, and react_rise_no_face already says so. What she cannot do is
-# walk through any of Vance's own doors, and she can now stand at the foot of them and read why.
+# ⚠️ beat_0147 (rev 198), FINISHED AT beat_0155 (rev 206) — THE PLAZA IS ALWAYS REACHABLE. It used to be
+# unreachable post-blowup because BOTH rides up were cut (3_activities); beat_0147 re-opened the ride on
+# rise_named + face_worn, beat_0153 cut the face clause, and beat_0155 cut the last two. There is now ONE
+# ride up, ungated, with one label and one destination in every state, and the tower is locked door by door
+# — which is what this note argued for from the start. The street is public and the bought face beats a
+# camera on a column; that is what the face is FOR. What she cannot do is walk through any of Vance's own
+# doors, and she can stand at the foot of them and read why.
+# ⚠️ THE THREE CARDS OFF THIS PLAZA ARE THE WHOLE MODEL. atrium is open. vance_securities shuts on
+# archive_1a_done and NEVER re-opens, face or no face — the face is a costume, not an alibi, and making
+# Vance's own doors face-beatable would refund the archive job. the_rise_floor is the one door the face
+# opens, because Sabin is a new employer with no file on her.
 
 # ── vance_securities — Calloway's division + the un-indexed file room (The Archive 1a) ──
 # NEW (beat_0056). Topside/Spire, off spire_plaza. LOCKED until the mission is dispatched — gated on the shipped
@@ -1012,8 +1018,9 @@ entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
 ] }
 # ⚠️ beat_0147 (rev 198) — the second clause used to read "and her face is on every list in the building",
-# which the bought face makes false: react_rise_no_face has that same camera beaten by that same face. What
-# stops her here is the lift and the man at the top of it, not recognition.
+# which the bought face makes false: the whole point of the bought face is that it beats that same camera.
+# What stops her here is the lift and the man at the top of it, not recognition. (That claim used to cite
+# react_rise_no_face, which beat_0155 deleted when the face check moved onto the_rise_floor's own door.)
 blocked_message = "Not anymore. That floor is the Chairman's ground now, and the lift will not take her up to it on a badge she bought at a market stall."
 
 [[locations]]
@@ -1491,24 +1498,38 @@ auto_exit   = false
 # rule beat_0122 derived when it moved the whole building out of beat 1: A LOCATION SHIPS WITH THE BEAT
 # THAT OPENS IT. Shipping all three now would park two greyed cards carrying blocked_messages that promise
 # content one and three beats away.
-# ⚠️ NAV-INVISIBLE, AND FOR THE SAME REASON grier_room AND cain_lab ARE. the_waterfront is the Reach's
-# street hub and is reachable in Act 1 (1_metadata:893); a locked location ALWAYS renders a greyed nav card
-# carrying its blocked_message (_render_location_nav_card, v2.py:19829) and there is NO hide path. An
-# entry_from here would have parked a greyed "The Floor" on the Waterfront grid from the game's first hour.
-# ⚠️ auto_exit = false IS THE OTHER HALF. A nav-invisible room builds its grid from children, has none, and
-# an empty navigation_html trips the list-every-location FALLBACK (v2.py:19386). Both halves or neither.
-# ⚠️ CORRECTED beat_0153 (rev 204) — THIS PARAGRAPH DESCRIBED A ROUTE THAT NO LONGER EXISTS. It read "THE
-# WAY IN IS A TRAVEL CHOICE, NOT A NAV CARD — activity_travel_to_spire's third exit, gated rise_named", and
-# that express (riding_rise) was DELETED by beat_0147 in the same commit that gave this location
-# entry_from = spire_plaza. The way in is a NAV CARD off the plaza, and it carries NO entry_conditions, so
-# it is live the instant the plaza is reachable. That is why the rise_named gate has to live on the ROAD to
-# the plaza and cannot move onto this location: a locked location always renders a GREYED card and there is
-# no hide path, so gating here would park the promise on the plaza instead of hiding it.
+# ⚠️ auto_exit = false. A nav-invisible room builds its grid from children, has none, and an empty
+# navigation_html trips the list-every-location FALLBACK (v2.py:19386). activity_leave_the_rise is the way
+# out, repeatable at priority 1 — the guaranteed exit every such room in this game has had since
+# bastien_backroom's soft-lock at beat_0114.
+# ⚠️ THE GATE MOVED OFF THE ROAD AND ONTO THIS DOOR — beat_0155 (rev 206), and it is the whole beat.
+# Until now this location carried NO entry_conditions at all: the only thing hiding it was that the plaza
+# was unreachable, because both rides up were gated rise_named + archive_1a_done. LO cut that ("in all three
+# cases it should show ride up to spire, even text should be same and location should be same too... if the
+# face is off the building should remain closed up there"), so the road is unconditional and the lock is
+# here.
+# ⚠️ THE ARGUMENT THIS REPLACES WAS RIGHT ON THE ENGINE AND WRONG ON THE DESIGN. It ran: rise_named cannot
+# move onto the location, because a locked location ALWAYS renders a greyed nav card carrying its
+# blocked_message (_render_location_nav_card, v2.py:20423 — the last line is <<if navDestUnlocked>>open<<else>>
+# locked<</if>>, with no third branch) and the only destination filter is the static `offscreen` property
+# (v2.py:20475), so the promise would sit on the plaza for half the release. The engine facts are still true
+# and re-verified at beat_0155. What changed is that the promise SHOULD be visible: this is a sandbox and a
+# door you cannot open yet is the loop, which is why docs_vault has shipped the identical shape since the
+# division build-out ("she can look at the wall she can't cross").
+# ⚠️ AND THAT IS WHY THE DISPLAY NAME MOVED. It was "The Floor" — the name of a room inside a building,
+# opaque on a plaza grid and useless as a promise. It is now what anyone standing on that plaza can see. The
+# card is the QUESTION; Grier is still the ANSWER, and he gives it three things the card withholds: whose it
+# is (Vance money), what is in it (the study never stopped), and its street name ("The Rise, they are
+# calling it"). His own line already frames it this way — "going up beside the big one".
+# ⚠️ RENAMING IS SAVE-SAFE AND VERIFIED. _location_passage_name (v2.py:12666) keys off the location SLUG and
+# says so: "renaming a room no longer moves its passage -> a save parked there still resolves." The id does
+# NOT move. Ripple was measured before the change: "The Floor" appeared in exactly two places in the game,
+# its own declaration and one comment.
 # ⚠️ THE WAY OUT IS activity_leave_the_rise, repeatable at priority 1, the guaranteed exit that every
 # nav-invisible room in this game has had since bastien_backroom's soft-lock at beat_0114.
 [[locations]]
 id          = "the_rise_floor"
-name        = "The Floor"
+name        = "The Second Tower"
 description = "Twenty desks and twenty screens on a slab of a floor with the ceiling still open above it. Cable trays, bare vents, and a wall of glass on the long side that nobody has got round to fitting blinds to. The readers do not talk. Through it the Spire stands across the plaza close enough to count the floors on, and she looks at it once and then does not again."
 image       = "locations/the_rise_floor.jpg"
 image_search_queries = ["open plan office floor unfinished ceiling cable trays rows of desks", "half built office interior bare concrete glass wall workers at screens"]
@@ -1521,14 +1542,28 @@ image_search_queries = ["open plan office floor unfinished ceiling cable trays r
 # window rather than weather on a horizon). What is SPENT is §8's Cain -> Grier -> Sabin walk: Grier is down
 # the lane off the waterfront and Sabin is up top, so the chain is now a walk plus a car. LO accepted that cost
 # explicitly ("the 30 min car ride is fine").
-# ⚠️ WHY IT IS A REAL DOOR AND NOT A CARD. The engine renders a locked child as a GREYED card (v2.py:20444)
-# with no way to hide it, which is why every "ships with the beat" room in this game is card-reached. Here the
-# card cannot leak: the plaza is only reachable on rise_named + face_worn, so by the time she can stand on it
-# Grier has already named this building. The greyed window is ZERO and the telegraph stays a man's mouth.
+# ⚠️ THE GREYED WINDOW USED TO BE ZERO AND IS NOW THE WHOLE FIRST HALF OF THE RELEASE, ON PURPOSE. This
+# block argued the card could not leak because the plaza was only reachable on rise_named + face_worn. The
+# road is unconditional as of beat_0155, so the card is up from the first hour — greyed, named for what she
+# can see, carrying its blocked_message. That is the promise, not a leak.
 # ⚠️ auto_exit STAYS false — activity_leave_the_rise is still the way out (re-pointed to spire_plaza), and
 # sabin_lab / the_dry_store keep their own card doors off this floor. Nothing else in the building moves.
+# ⚠️ THE LOCK IS TWO CLAUSES AND version="1.0" IS LOAD-BEARING. Without the version key the engine returns
+# true for any conditions block and the gate FAILS OPEN with no build error, which would make this whole
+# beat a no-op that still passes every instrument. rise_named keeps Grier as the telegraph; face_worn is
+# LO's call, and it is the one the player can act on.
+# ⚠️ blocked_message IS A SINGLE STATIC STRING WITH NO STATE BANDING — navDestBlockedReason (v2.py:5032)
+# returns loc.blocked_message or falls back to a formatted dump of the conditions. So this line has to be
+# true in BOTH failure states, no name yet AND wrong face, which is the same discipline hub_grier's
+# exclusive show_when_locked pair ships under. It also carries what react_rise_no_face used to say from
+# inside the lift: the face goes on at the cot, before she leaves, and a lobby is not where it gets fixed.
 entry_from  = "spire_plaza"
 auto_exit   = false
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "face_worn",  operator = "is_true" },
+] }
+blocked_message = "A hoarding, a lift lobby, and a desk with a man on it who checks faces. She has no business in there that she could say out loud, and she is standing in the one the company has on every camera on this plaza. That face goes on at her own cot before she leaves. It has never once gone on in a lobby."
 
 # ── sabin_lab — beat_0130 (rev 180). THE SECOND OF THE RISE'S THREE ROOMS. ────────────────────────────
 # the_dry_store is still not here: it opens at beat_0132 with the swap, because a location ships with the

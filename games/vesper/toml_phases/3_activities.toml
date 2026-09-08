@@ -79,7 +79,7 @@ time_progression_minutes = 30   # rev 67: time only — no Charge cost on the ca
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car"
-description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). TWO exclusive rides up, banded on archive_1a_done: the shipped one pre-seal, and riding_covered post-seal on rise_named alone (face_worn cut at beat_0153 — enforced by react_rise_no_face on the floor instead). The Rise express (riding_rise) is DELETED — the building moved into the Spire district and is a nav card off the plaza now. The seal reason moved out of a greyed locked_text and into two exclusive [group] paragraphs on the base node."
+description = "Wren-solo travel picker @ the_waterfront (rev 60, RE-CUT at beat_0147 rev 198). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). ONE ride up, UNGATED, since beat_0155 (rev 206) — one label, one node, one destination, in every state. It used to be two exclusive rides banded on archive_1a_done, so the menu line changed its wording and vanished entirely between the seal and Grier naming the tower; riding_covered is merged into riding_spire and deleted, and the last gate clauses went with it. The question they asked is asked at the tower's own door now (the_rise_floor carries entry_conditions rise_named + face_worn). The Rise express (riding_rise) was deleted at beat_0147 when the building moved into the Spire district. The seal reason lives in two exclusive [group] paragraphs on the base node, re-aimed at beat_0155 from 'there is no road' to 'the doors up there are shut'."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -92,78 +92,61 @@ id   = "base"
 name = "Take the car"
 blocks = [
   { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers. Or down under the boards, into the other half of the Reach, the part that stays down in daylight." },
-  # ── beat_0147 (rev 198) — WHY THERE IS NO RIDE UP, in prose rather than as a greyed menu line.
-  # ⚠️ TWO BANDS AND THEY ARE MUTUALLY EXCLUSIVE BY CONSTRUCTION (A needs rise_named is_false, B needs it
-  # is_true). That matters: adjacent [group] blocks MERGE into a single if/elseif chain and first match wins,
-  # so a pair that could both be true would silently kill the second. Both are dead pre-seal.
-  # ⚠️ BAND A IS THE REWRITE. The old locked_text blamed "her face on every camera at the curb" — beatable, and
-  # the game beats it two beats later. What is NOT beatable is a door keyed to an employee she is no longer
-  # dressed as, and a deep-vault flag with her prints on it climbing to the man at the top of the building
-  # (cap_1a_close, Mercer's own line). The face gets her onto the street; it was never going to get her inside.
+  # ── beat_0147 (rev 198), RE-AIMED AT beat_0155 (rev 206) — WHAT IS SHUT UP THERE, in prose.
+  # ⚠️ THESE BANDS USED TO EXPLAIN A MISSING ROAD AND THE ROAD IS BACK. Band A opened "Up to the towers is not
+  # a road any more", which stopped being true the moment beat_0155 made the ride unconditional. The seal's
+  # consequence is real and it survives; it just moved up the hill, off the kerb and onto the doors.
+  # ⚠️ TWO BANDS, MUTUALLY EXCLUSIVE BY CONSTRUCTION (A needs rise_named is_false, B needs it is_true).
+  # Adjacent [group] blocks MERGE into a single if/elseif chain and first match wins, so a pair that could
+  # both be true would silently kill the second. Both are dead pre-seal.
+  # ⚠️ NEITHER IS A REFUSAL. The menu offers the ride in every state, so a paragraph saying she cannot go
+  # would be the coat-label defect. A states what is shut and why; B tells her what the tower checks at its
+  # own door, which is a thing she can go and fix.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "Up to the towers is not a road any more. Vance's doors up there are keyed to a woman she is not dressed as, and the flag she set off in that vault is still climbing to the man at the top of them." },
+      { type = "paragraph", content = "The car still goes up. What is up there is a plaza she can stand on and a row of Vance doors that are shut to her now, keyed to a woman she is no longer dressed as, with the flag she set off in that vault still climbing to the man at the top of them." },
   ] },
-  # ── BAND B — she has somewhere to go and is standing in the wrong face. Guidance: the face comes on at the cot.
-  # ⚠️ IT IS A WARNING AND NO LONGER A REFUSAL — beat_0153 (rev 204). The ride up stopped being gated on
-  # face_worn, so this band now prints BESIDE a live "Ride up to the plaza." A paragraph that says she cannot
-  # go while the menu offers the ride is the coat-label defect again, so the prose states the RISK and lets
-  # her take it. The bounce is real and it is one layer in: react_rise_no_face turns her round on the floor.
+  # ── BAND B — she has somewhere to go up there and is standing in the wrong face.
+  # ⚠️ THE LOCK IS ON THE TOWER NOW, NOT ON THE ROAD AND NOT ON A BOUNCE — beat_0155. react_rise_no_face is
+  # DELETED; the_rise_floor carries entry_conditions face_worn + rise_named and its blocked_message says the
+  # same thing on the card. This paragraph is the kerb-side version, so it points at the fix (the cot) rather
+  # than repeating the refusal she is about to read on the door.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "face_worn",       operator = "is_false" },
     ] } }, blocks = [
-      { type = "paragraph", content = "She could take the car up in this face and get as far as a desk. The one that gets her past a camera on a column comes on at her own cot, and the one she is standing in is on file in every building on that plaza." },
+      { type = "paragraph", content = "She can ride up in this one and get as far as the plaza. The tower checks at its own lobby, and the face that gets her past that desk goes on at her cot before she leaves, because there is no version of this where she fixes it standing in a lift." },
   ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-# ── PRE-SEAL: the ride she has always taken. UNCHANGED except that show_when_locked is GONE (beat_0147).
-# ⚠️ WHY THE GREYED LINE WENT. The old locked_text said the Spire was shut because "her face on every camera at
-# the curb" — and react_rise_no_face (5_scenes) has the BOUGHT FACE BEAT THAT EXACT CAMERA: without it she turns
-# round in the lift, with it she walks in. cap_bastien_notices proved the same face on the man who kept her in a
-# cell. So the stated lock was the one thing she had already solved, and a player who bought a face was being
-# told a reason he could see through. The real reason is now two [group] paragraphs in the node body below —
-# prose in the scene, which is where a state this load-bearing belongs, not a menu tooltip.
+# ── THE RIDE UP. show_when_locked went at beat_0147; the last gate went at beat_0155.
+# ⚠️ WHY THE GREYED LINE WENT (beat_0147). The old locked_text said the Spire was shut because of "her face on
+# every camera at the curb" — the one thing she had already solved, so a player who bought a face was being
+# told a reason he could see through. The real reason became two [group] paragraphs in the node body above,
+# which is where a state this load-bearing belongs rather than in a menu tooltip.
 [[canvases.nodes.exit_block.choices]]
+# ── THE ONLY WAY UP, AND IT IS UNGATED — beat_0155 (rev 206). Its post-seal twin (riding_covered) is gone.
+# ⚠️ NO CONDITIONS BLOCK AT ALL, WHICH IS THE POINT. The street is public; what she cannot do is walk through
+# a door up there, and every one of those doors carries its own lock and its own reason. Putting a condition
+# back here re-creates the disappearing menu line this beat exists to kill.
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_to_spire.riding_spire"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
-] }
-# ── POST-SEAL: the ride back up. beat_0147 (rev 198); face_worn clause CUT at beat_0153 (rev 204).
-# ⚠️ TWO CLAUSES NOW. LO cut the third after playing it: "i didnt want it to go away. But the nested
-# locations inside it can be locked." He is right, and the plaza was already built that way —
-# vance_securities and penthouse each close on archive_1a_done and are shut post-seal on their OWN gates.
-# The road was never what protected them; all it did was make the district unreachable for a whole chapter.
-# ⚠️ WHAT face_worn WAS DOING, AND WHERE IT WENT — one layer in, onto a card that was already built for it.
-# react_rise_no_face (5_scenes) is repeatable at pri 9 on the_rise_floor, gated cover_research EQUIPPED +
-# face_worn is_false: "the kit without the face is the company's own asset walking into a Vance building in
-# a costume." It bounces her to the_waterfront. A player who rides up in the wrong face now gets TOLD, in
-# the building, instead of finding a road that never appears. The suicide line from beat_0116 stands; it is
-# enforced at the door rather than at the kerb.
-# ⚠️ rise_named STAYS AND IT IS THE CLAUSE THAT CANNOT MOVE. the_rise_floor carries entry_from = spire_plaza
-# and NO entry_conditions, so it is a LIVE nav card the instant the plaza is reachable. Gating the location
-# instead would not hide it — a locked location always renders a GREYED card and there is no hide path
-# (_render_location_nav_card, v2.py:19829) — so the promise would sit on that plaza for the whole first half
-# of the release. Gating the ROAD on Grier's mouth makes that window ZERO, which is what §6 wanted.
-# ⚠️ archive_1a_done is_true still makes this and the choice above MUTUALLY EXCLUSIVE by construction, so the
-# menu never shows two ways up. version="1.0" or the gate fails OPEN.
-# ⚠️ THE PLAZA IS NOT THE TOWER. This lands her on the public level and nothing else opens with it: wren_floor,
-# penthouse, vance_securities and docs_vault are all locked door-by-door in 1_metadata, and wren_floor's lock
-# seals wren_room and the cradle behind it (which is what keeps Kess's rent alive).
-[[canvases.nodes.exit_block.choices]]
-text       = "Ride up to the plaza."
-targetType = "node"
-nodeId     = "activity_travel_to_spire.riding_covered"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-] }
+# ── THE POST-SEAL RIDE WAS DELETED AT beat_0155 (rev 206), AND SO WAS ITS GATE. ──────────────────────
+# It was "Ride up to the plaza." on archive_1a_done + rise_named, exclusive with the choice above. Three
+# beats of gate history landed here — beat_0147 opened it, beat_0153 cut face_worn off it, and beat_0155
+# removed the last two clauses by moving the whole question onto the tower's own door.
+# ⚠️ THE ARGUMENT THAT DIED, RECORDED BECAUSE IT WAS RIGHT UNTIL IT WAS NOT. This block used to reason that
+# rise_named "CANNOT MOVE" onto the location, because a locked location always renders a GREYED card with no
+# hide path (_render_location_nav_card, v2.py:20423) and so the promise would sit on the plaza for half the
+# release. The engine fact is still true and still verified. What changed is that LO wants the promise
+# VISIBLE: the tower is renamed for what she can see from the ground, so the greyed card is the question and
+# Grier's mouth is still the answer — he gives it a name, an owner, and a way in. docs_vault has shipped that
+# exact shape since the division build-out ("she can look at the wall she can't cross").
 # Down under the docks to the underworld gate — local descent, no car; gated opening_done.
 [[canvases.nodes.exit_block.choices]]
 text       = "Down under the docks — the Underworld."
@@ -180,8 +163,39 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[canvases.nodes]]
 id   = "riding_spire"
 name = "Ride up"
+# ── THE ONE RIDE UP — beat_0155 (rev 206). riding_covered IS MERGED IN HERE AND DELETED.
+# ⚠️ ONE LABEL, ONE NODE, ONE DESTINATION, ALWAYS. LO: "in all three cases it should show ride up to spire,
+# even text should be same and location should be same too." There used to be two exclusive rides banded on
+# archive_1a_done, so the menu line changed its wording and its target across the seal and vanished entirely
+# between the seal and Grier naming the tower. A road that comes and goes teaches the player the world is
+# unstable, and it was doing a job the plaza's own doors already do — the tower is locked door by door now
+# (1_metadata, the_rise_floor).
+# ⚠️ WHAT THE SPLIT WAS PROTECTING, AND WHERE IT WENT. riding_spire closed on "Home, if that's the word for
+# the place that owns you" — true while she lived up there and false the moment the vault flag went up. That
+# is the ONE line that could not survive a merge, so it is a band rather than a deletion.
+# ⚠️ THE BANDS ARE EXCLUSIVE BY CONSTRUCTION (is_false / is_true on the same flag) — adjacent [group] blocks
+# MERGE into a single if/elseif chain and first match wins, so a pair that could both be true would silently
+# kill the second. The tower paragraph below them is a PLAIN paragraph, which breaks the chain and is why it
+# can print in every state.
+# ⚠️ NO face_worn CLAUSE ANYWHERE IN THE RIDE. The fare line is written true in both faces on purpose: the
+# face stopped being a road gate at beat_0153 and stops being mentioned at the kerb here. It is checked at
+# the tower's door, which is the whole point of this beat.
+# ⚠️ THE TOWER PARAGRAPH IS THE RELEASE'S PROMISE AND IT MUST RE-READ — "still going up", not a first-sight
+# reveal. This fires on every commute for the rest of the act, and it is what makes the greyed card on the
+# plaza legible before Grier gives the building a name.
 blocks = [
-  { type = "paragraph", content = "She calls the car. The docks recede behind her; the towers climb back up until the glass swallows the sky again. Home, if that's the word for the place that owns you." },
+  { type = "paragraph", content = "She calls the car. The docks fall away behind her and the towers climb back up until the glass has the sky again. The driver takes the fare and does not look at it twice." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Home, if that is the word for the place that owns you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "She used to call this coming home. The plaza is still a public street and the car still stops on it, and every door she used to walk through off it is shut to a woman whose prints are on a vault flag." },
+  ] },
+  { type = "paragraph", content = "Across the plaza the second one is still going up. Twenty floors with eight of them lit and the rest open concrete, and a crane on the top that has not moved since somebody stopped paying for it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -192,33 +206,6 @@ locationId               = "spire_plaza"
 time_progression_minutes = 30
 # rev 67: no Charge cost — this is the ONLY way back to the cradle, so a tax here was always a soft-lock
 # risk the clamp merely hid. Time still rolls (see the ride-to-Reach note).
-
-# ── riding_covered — beat_0147 (rev 198). THE RIDE BACK UP, in somebody else's face.
-# ⚠️ THIS REPLACES riding_rise, WHICH IS DELETED. That node walked her to a tower on the edge of the Reach
-# ("It is a walk and not a ride… out of the low end of the Reach"); the building now stands in the Spire
-# district, so the walk is gone and its crane-and-lobby material is folded into paragraph two here, where it
-# does telegraph work on every ride instead of once.
-# ⚠️ A SEPARATE NODE AND NOT riding_spire, DELIBERATELY. riding_spire closes on "Home, if that's the word for
-# the place that owns you" — true when she still lived there and false the moment she stopped. Sending the
-# post-seal ride through it would have her call the plaza home while she is riding up disguised.
-# ⚠️ REPEATABLE, SO PARAGRAPH TWO MUST RE-READ. "still going up" rather than a first-sight reveal: this fires
-# on every commute for the rest of the act.
-# 30 min and no Charge, matching riding_spire — the ride down (activity_travel_to_reach) is ungated on the
-# seal, so there is no stranding at either end.
-[[canvases.nodes]]
-id   = "riding_covered"
-name = "Ride up"
-blocks = [
-  { type = "paragraph", content = "She calls the car in a face that is not hers and the driver takes the fare without looking at it twice. The docks fall away behind her and the towers climb back up until the glass has the sky again." },
-  { type = "paragraph", content = "Across the plaza the second one is still going up. Twenty floors with eight of them lit and the rest open concrete, and a crane on the top that has not moved since somebody stopped paying for it." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out at the plaza."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "spire_plaza"
-time_progression_minutes = 30
 
 [[canvases.nodes]]
 id   = "riding_under"
@@ -245,7 +232,7 @@ time_progression_minutes = 10
 [[canvases]]
 id          = "activity_travel_from_gate"
 name        = "Take the car"
-description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. Post-seal the ride up re-opens via riding_up_covered on rise_named alone (face_worn cut at beat_0153) — and this is the picker that matters, because she sleeps at the cot and commutes from here."
+description = "Wren-solo travel picker @ underworld_gate (rev 67b, RE-CUT at beat_0147 rev 198). The ride OUT: up to the Spire (spire_plaza) or up to the Reach (the_waterfront). Replaces the waterfront's car, which the gate used to inherit with the WRONG menu (offered the Underworld she was standing in; couldn't offer the Reach). Time only, no Charge. ONE ride up, UNGATED, since beat_0155 (rev 206): riding_up_covered is merged into riding_up and deleted, and both gate clauses are gone. This is the picker that matters — she sleeps at the cot and commutes from here, so a menu line that came and went was doing it to her daily route."
 
 [canvases.trigger]
 location      = "underworld_gate"
@@ -278,28 +265,16 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-# ── PRE-SEAL. show_when_locked and its locked_text are GONE (beat_0147): that line said the towers were "the
-# one place she can't go now", which stopped being true the moment the plaza re-opened on a bought face. The
-# post-seal states are answered by the two bands above instead.
+# ── THE ONLY WAY UP, UNGATED — beat_0155 (rev 206). Its post-seal twin ("Ride up to the plaza." on
+# archive_1a_done + rise_named) is DELETED, and so is this one's archive_1a_done is_false clause.
+# ⚠️ NO CONDITIONS BLOCK, WHICH IS THE POINT. LO: one label, one destination, in all three states. The
+# question the two gates were asking is asked at the tower's own door now (1_metadata, the_rise_floor).
+# show_when_locked and its locked_text went at beat_0147: that line called the towers "the one place she
+# can't go now", which stopped being true the moment the plaza re-opened.
 [[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the Spire."
 targetType = "node"
 nodeId     = "activity_travel_from_gate.riding_up"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
-] }
-# ── POST-SEAL. Mutually exclusive with the choice above by archive_1a_done, so the menu never offers two
-# rides up. Same TWO-clause gate as the waterfront picker (face_worn cut at beat_0153); see the long note
-# there. ⚠️ THIS IS THE PICKER THAT MATTERS: she sleeps at the cot and commutes from this gate, so the face
-# clause was cutting her daily route, not an occasional one.
-[[canvases.nodes.exit_block.choices]]
-text       = "Ride up to the plaza."
-targetType = "node"
-nodeId     = "activity_travel_from_gate.riding_up_covered"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "rise_named",      operator = "is_true"  },
-] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Up to the Reach."
 targetType = "node"
@@ -308,8 +283,28 @@ nodeId     = "activity_travel_from_gate.riding_reach"
 [[canvases.nodes]]
 id   = "riding_up"
 name = "Ride up"
+# ── THE ONE RIDE UP FROM THE GATE — beat_0155 (rev 206). riding_up_covered IS MERGED IN HERE AND DELETED.
+# ⚠️ THIS IS THE PICKER THAT MATTERS. She sleeps at the cot and commutes from this gate, so a menu line that
+# appeared and vanished here was doing it to her daily route, not to an occasional trip.
+# ⚠️ THE ONE LINE THAT COULD NOT SURVIVE A MERGE is riding_up's close, "she's the company's problem to look
+# at" — written for an asset still on the books and false the moment the vault flag went up. It is a band.
+# ⚠️ BANDS ARE EXCLUSIVE BY CONSTRUCTION (is_false / is_true on one flag), because adjacent [group] blocks
+# merge into a single if/elseif chain and first match wins. The tower paragraph after them is a PLAIN
+# paragraph, which breaks the chain and is why it prints in every state.
+# ⚠️ IT MUST RE-READ — "still going up", not a first-sight reveal. This is the commute.
 blocks = [
-  { type = "paragraph", content = "The freight door shuts behind her and the red light goes with it. The car climbs out of the dark, past the docks, up until the glass takes the sky again and she's the company's problem to look at." },
+  { type = "paragraph", content = "The freight door shuts behind her and the red light goes with it. The car climbs out of the dark, past the docks, up until the glass takes the sky again." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_false" },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Out at the top she is the company's problem to look at again, which is the arrangement." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "archive_1a_done", operator = "is_true"  },
+    ] } }, blocks = [
+      { type = "paragraph", content = "Out at the top nobody is looking for the woman who gets out of the car. The plaza is a public street and it stays one; it is the doors off it that have her name." },
+  ] },
+  { type = "paragraph", content = "Across the plaza the second tower is still going up. Eight floors lit, the rest open concrete, and a crane on the top that has not moved in a while." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -319,25 +314,9 @@ destinationType          = "specific"
 locationId               = "spire_plaza"
 time_progression_minutes = 30
 
-# ── riding_up_covered — beat_0147 (rev 198). Out of the freight door and straight up to the plaza.
-# ⚠️ NOT riding_up, which closes on "she's the company's problem to look at" — a line written for an asset
-# still on the books. Post-seal she rides up as nobody, which is the whole point of the 120 coin.
-# 30 min, no Charge, matching riding_up.
-[[canvases.nodes]]
-id   = "riding_up_covered"
-name = "Ride up"
-blocks = [
-  { type = "paragraph", content = "The freight door shuts behind her and the red light goes with it. The car climbs out of the dark, past the docks, up until the glass takes the sky again, and nobody at the top of it is looking for the woman who gets out." },
-  { type = "paragraph", content = "Across the plaza the second tower is still going up. Eight floors lit, the rest open concrete, and a crane on the top that has not moved in a while." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out at the plaza."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "spire_plaza"
-time_progression_minutes = 30
-
+# ── riding_up_covered WAS DELETED AT beat_0155 (rev 206) — merged into riding_up above. Its two paragraphs
+# both survive there: the un-looked-at arrival as the post-seal band, and the tower across the plaza as the
+# plain paragraph that prints on every ride.
 [[canvases.nodes]]
 id   = "riding_reach"
 name = "Up to the docks"
