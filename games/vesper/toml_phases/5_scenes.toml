@@ -13653,22 +13653,34 @@ when = [
   { flag = "grier_opened_up", op = "is_false" },
 ]
 
-# ══ CARD X — THE WALL (beat_0125, rev 175). Opens on the flag that closes W. ═══════════════════════════
-# ⚠️ IT NAMES ONE OBSTACLE AND NOTHING ELSE. The player has just been on her knees for an hour and a half
-# and got nothing out of it, and a card that answered with "keep turning up" a second time would read as
-# the game not noticing. The rung changed and so does the card: the job is no longer access, it is a
-# FINISH, and the card says out loud what is in the way of it.
+# ══ CARD X — THE JOB IS A FINISH (beat_0125, rev 175; REWRITTEN AT beat_0154, rev 205). ════════════════
+# ⚠️ IT NAMES ONE OBSTACLE AND NOTHING ELSE. The player has just been on her knees for an hour and a half,
+# and a card that answered with "keep turning up" a second time would read as the game not noticing. The
+# rung changed and so does the card: the job is no longer access, it is a FINISH.
+# ⚠️ IT DESCRIBED THE WALL UNTIL rev 205, AND THE WALL WAS CUT AT rev 203. This is the card the player
+# reads for the WHOLE window between the knees scene and the drain, and it told them the thing they were
+# about to do was impossible ("he still will not finish") and that the bottle would set them back ("from
+# here it costs you a night"). Both stopped being true at beat_0152 and neither was caught in that beat.
+# Found by sweeping the BUILT HTML for wall-era strings, which is the sweep a content cut owes.
+# ⚠️ WRITTEN IN POSITIVES ON PURPOSE, AND IT IS A BUDGET AND NOT A STYLE NOTE. check_quest_cards' negation
+# measure sat at 25.66% against a field-max ceiling of 25.76% — at a fixed sentence count the whole game's
+# budget was 5 negation sentences and this one card spent all 5. The rewrite carries ZERO and the aggregate
+# drops to 24.87%, which is headroom the next beat gets to spend.
+# ⚠️ THE RELOAD IS THE COT, NOT THE CRADLE, and naming the wrong one here would point the player at a room
+# she cannot reach. One lock seals cradle -> wren_room -> wren_floor (1_metadata:1029) and the cradle is
+# route-cut the moment archive_1a_done fires; this card's window is entirely post-seal. The live reload is
+# activity_kess_cot.night — "A night on the feed line. (10 coin — full charge, weapons reloaded.)"
+# ⚠️ IT DOES NOT DUPLICATE THE PORTRAIT CARD, which renders in Grier's own section at the same time. That
+# one owns the rung instructions and the room ("six feet from his chair, in a drawer full of fuses"). This
+# one keeps the main-arc frame — the childhood, the collecting — and owns the hours and the reload.
 # ⚠️ NO goals BLOCK — flag milestone, not a meter. A numeric goal here walks into the Frame-3 trap (met
 # goal + no ready_canvas + not terminal renders a blank card).
 # ⚠️ NOT terminal. Card U owns the only terminal_text in this game and it is shut.
-# ⚠️ THE TIP NAMES PLACE + PERSON + VERB and it does NOT promise a number of tries. beat_0126 settled the
-# counter at three failed nights, and the card STILL does not quote it: the wall is a thing he is, not a
-# meter she fills, and a number on the card would turn three written scenes into a progress bar.
 # ⚠️ CLOSED BY beat_0126 (rev 176) — cap_grier_gives sets piece_one_held. Card Y opens on the same flag.
 [[quest_cards]]
 priority   = 10
-text       = "He lets you into the room now, and his hands on you, and onto your knees, and he has not been decent to you once. That is not the problem. The problem is that nine years of that bottle have taken something back off him, and you can work him until your jaw gives out and he still will not finish. Whatever he has in a drawer in there, it is behind that."
-tip        = "Keep going back to Grier in the Reach and keep working him. The rungs are on his portrait in that room and the last one is the one that matters. He does not get there most afternoons and nothing skips it. A bottle buys you access and it has never once bought you a finish, and from here it costs you a night: take one down now and he is further gone, not closer. Turn up, do the work, and go back the next day."
+text       = "He lets you into the room now, and his hands on you, and onto your knees, and he is sour about every minute of it. That was always the deal and you took it with your eyes open. The first piece of you has been in that room the whole time you have been working him. He kept it because it read as a spare part, and it stopped reading at all in the second year. He will give it up once you have had what he is carrying. There is exactly one thing you do to a man that gets you that far in."
+tip        = "Go down the lane to the Reach and turn up at Grier's room. He is in it from ten in the morning and the door stays open. Climb the rungs on his portrait, open the loop, and take the finish in your ass. That is the finish that costs a man his guard, and it is the only one that drains. Wear the drain itself when you go down, and leave the emitter behind. If it is spent, a night on the feed line at Kess's cot is ten coin and reloads it. Twenty coin at the Anchor still buys you an hour of him, and what it buys now is him talking."
 when = [
   { flag = "grier_opened_up", op = "is_true"  },
   { flag = "piece_one_held",  op = "is_false" },
@@ -14764,13 +14776,16 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key  = "bottle_held",     operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key   = "grier_opened_up", operator = "is_false" },
 ] }
-# ── THE BOTTLE AFTER THE LADDER (beat_0144, repointed beat_0152) — WHAT AN HOUR OF HIM COSTS. ─────────
-# ⚠️ IT EXISTS BECAUSE THE DRINK WAS A DEAD BUTTON. Nothing on this man reads relation above 20 (the knees
-# rung is the highest gate in the game on npc_grier), so once grier_opened_up is set the old drink choice
-# charged 20 coin to move a number no condition, cost or quest goal ever looks at. Audited and found at
-# rev 195; §22.10 had deferred the content that gives it a meaning and this is that content.
-# ⚠️ THE WARNING IS IN THE LABEL, so it can never be a trap. The player is told what it costs before the
-# click, which is the same contract as "Buy a bottle. (20 coin.)" and the opposite of a hidden penalty.
+# ── THE BOTTLE AFTER THE LADDER (beat_0144, repointed beat_0152) — WHAT AN HOUR OF HIM BUYS. ──────────
+# ⚠️ IT EXISTS BECAUSE THE DRINK WAS A DEAD BUTTON. Nothing on this man reads relation above 14 (the knees
+# rung is the highest gate in the game on npc_grier, pulled 20 -> 14 at beat_0151), so once grier_opened_up
+# is set the old drink choice charged 20 coin to move a number no condition, cost or quest goal ever looks
+# at. Audited and found at rev 195; §22.10 had deferred the content that gives it a meaning and this is it.
+# ⚠️ THE LABEL NAMES THE PRODUCT, NOT A PRICE — CORRECTED AT beat_0154 (rev 205). beat_0144 wrote the
+# parenthetical as a cost WARNING, "(He will be further gone.)", because back then the hour really did
+# subtract a night. The wall went at rev 203 and the warning stayed, so the game was discouraging a click
+# that costs a bottle and pays out the only characterisation of Grier that d0 does not deliver. Same length,
+# same register, opposite job: it now says what being that far down gets her.
 # ⚠️ IT USED TO SUBTRACT A NIGHT AND NOW IT BUYS A CONFESSION — beat_0152 (rev 203). The wall ran on
 # grier_nights and this choice put one back, which was §8's logic charged to the player. LO cut the wall, so
 # the effect had nowhere to land and this choice was a dead button for the second time in its life (that is
@@ -14789,7 +14804,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 # lines. Only one of an exclusive pair may grey, and its reason has to be true in BOTH of its failure
 # states, which is why the twin above now states where the bottle comes from rather than what her hands
 # are holding. This is the toml-gotchas show_when_locked trap wearing an exclusivity clause.
-text             = "Drink with him. (He will be further gone.)"
+text             = "Drink with him. (He talks when he is this far down.)"
 targetType       = "node"
 nodeId           = "hub_grier.drink_after"
 conditions = { version = "1.0", logic = "AND", items = [
@@ -15063,12 +15078,20 @@ flagEffects = [
   { targetType = "player", flag = "grier_drank_with", op = "set" },
 ]
 
-# ── drink_after (beat_0144) — a bottle once she already has him. IT COSTS A NIGHT. ───────────────────
-# ⚠️ SHE KNOWS. This is the one node in the game where the player spends money to make the thing they want
-# LESS likely, and it only works if she knows she is doing it. Her thought says so, once, and the prose does
-# not moralise about it — §14 row b, and the interiority gets its own beat rather than being folded in.
-# ⚠️ NO relation EFFECT. Above 20 the number buys nothing and printing +3 into it would be the dead button
-# again wearing a scene. The only thing that moves here is grier_nights, downward.
+# ── drink_after (beat_0144, REPOINTED beat_0152) — a bottle once she already has him. IT BUYS AN HOUR. ─
+# ⚠️ THIS HEADER SAID "IT COSTS A NIGHT" UNTIL beat_0154 (rev 205), AND IT HAD BEEN FALSE FOR TWO BEATS.
+# It argued this was "the one node in the game where the player spends money to make the thing they want
+# LESS likely" and closed on "the only thing that moves here is grier_nights, downward". The wall went at
+# rev 203, the effect went with it, and the choice header forty lines up was repointed while this one was
+# left arguing the other side. A file that contradicts itself inside one node is how the next author gets
+# taught the wrong mechanic.
+# ⚠️ WHAT IT DOES NOW: 20 coin of bottle and 60 minutes, and it pays out wall2's confession — eleven years
+# with his hands inside things like her, and nobody poured it down him. No counter moves. That is the
+# node's whole deposit and it is deliberate (see the choice header above on the gates.py sink lint).
+# ⚠️ NO relation EFFECT. Above 14 the number buys nothing and printing +3 into it would be the dead button
+# again wearing a scene. The 20 coin buys content, which is the only thing left on this man worth buying.
+# ⚠️ THE INTERIORITY GETS ITS OWN BEAT, never folded into one that is still describing the room — §14 row b.
+# Her thought closes the node and prices the hour honestly, and the prose does not moralise about it.
 [[canvases.nodes]]
 id   = "drink_after"
 name = "One more, then"

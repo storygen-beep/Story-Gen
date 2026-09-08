@@ -332,7 +332,7 @@ That is the point, and it is the register: sour, mean, unhurried, and completely
 > **CUT 2026-09-08 (beat_0152, rev 203). This whole section is now the record of what beat 5 argued, not
 > the shipped shape.** LO played it: *"I think I want it to work normally in the first try itself."* Grier
 > drains on the FIRST ass finish now, like every other man in the game. `grier_nights` still exists as a
-> declared trait and is read by nothing. **§26 has the cut, its four knock-ons and the measurements.**
+> declared trait and is read by nothing. **§26 has the cut, its four knock-ons and the measurements; §28 has the three surfaces it missed.**
 
 **Nine years of drink.** The drain fires on an anal finish and most nights he cannot get there at all. She can
 suck him, ride him, take him however he wants it, and fire nothing.
@@ -1021,7 +1021,7 @@ dark. Reverted.
 > `loop_grier_finisher` now bands on `sex_finisher_type` alone — facial(0) / inside(1) / ass(2) — which is
 > `loop_colm_finisher`'s shape exactly. The reasoning below was sound *given a wall*; there is no wall.
 > Kept because it is the clearest statement in this book of why a PARTIAL wall would have been worse than
-> either a total one or none, and that lesson survives the cut. See §26.
+> either a total one or none, and that lesson survives the cut. See §26, and §28 for the leftovers.
 
 **Recorded 2026-08-26.** Every other loop in this game ships the same rule: a facial or a finish inside works
 normally and **only the ass finish drains**. Grier cannot use it. §8 says in its own words that she can suck
@@ -2269,7 +2269,8 @@ she authored.
 
 > **Superseded 2026-09-08 (beat_0152).** The wall is cut, so the bottle has no night to put back. The
 > choice was not deleted — it inherited `wall2`'s confession instead, and the twenty coin now buys the one
-> piece of Grier that `d0` does not deliver. §26.3.
+> piece of Grier that `d0` does not deliver. §26.3, and §28.4 for the label that kept warning about the
+> price for two more beats.
 
 ### 22.10 Held for the next beat, not this one
 
@@ -2910,3 +2911,90 @@ Merge validates · build errors unchanged · `check_quest_cards` all measures pa
 425/425 nodes, both unchanged. Live, 0 JS errors, with `archive_1a_done` and `rise_named` set and
 `face_worn` **off**: the waterfront picker offers `Ride up to the plaza.` and prints the warning band; the
 gate picker offers it too and prints *"The car will still take her."*
+
+---
+
+## §28 — beat_0154 (rev 205). THE WALL'S LEFTOVERS.
+
+beat_0152 cut the wall. It repointed the finisher band, binned the three wall nodes, re-attributed `knees`,
+moved wall2's confession into `drink_after` and rewrote the portrait cards. **It missed three surfaces, and
+one of them was the card the player reads for the entire run-up to the drain.**
+
+### 28.1 How they were found, which is the reusable part
+
+Not by re-reading the beat. By sweeping the **built HTML** for wall-era strings:
+
+```
+will not finish ......... 1        costs you a night ....... 1
+He will be further gone . 1        three nights ............ 0
+```
+
+A content cut owes that sweep. The beat that removes a mechanic knows the exact sentences the mechanic was
+described in; grepping the shipped artifact for them is cheap, and it is the only check that catches prose
+which no gate reads. `check_quest_cards` passed at rev 203 and `gates.py` held at 21 FAILs — neither
+instrument has any way to know a true sentence became a false one.
+
+### 28.2 Card X — the one that mattered
+
+`5_scenes.toml`, band `grier_opened_up is_true` + `piece_one_held is_false`, priority 10, no `npc_id`, so it
+is the **main story thread's** card for the whole window between the knees scene and the drain. It said:
+
+> *"...you can work him until your jaw gives out and **he still will not finish**."*
+> *"A bottle... has **never once bought you a finish**, and from here **it costs you a night**."*
+
+The guidance page — the one surface a lost player opens — was telling them the thing they were about to do
+was impossible, and that the purchase they might make would set them back. Both rewritten.
+
+**Two facts the new tip had to get right, and one of them nearly went wrong.**
+
+The reload is the **cot, not the cradle**. One lock seals cradle → `wren_room` → `wren_floor`
+(`1_metadata:1029`) and the cradle is route-cut the moment `archive_1a_done` fires; this card's window is
+entirely post-seal. The live reload is `activity_kess_cot.night` — *"A night on the feed line. (10 coin —
+full charge, weapons reloaded.)"* A tip naming the cradle would have pointed the player at a room she cannot
+reach, which is a worse defect than the one being fixed.
+
+And it must not duplicate the portrait card at `:14056`, which renders in Grier's own section at the same
+time. That one owns the rungs and the room; this one owns the main-arc frame, the hours, and the reload.
+
+### 28.3 The negation budget, which was at zero and nobody knew
+
+`check_quest_cards`'s *what did not happen* measure sat at **25.66% against a field-max ceiling of 25.76%**
+— 193 negation sentences over 752. At a fixed sentence count the whole game's remaining budget was **five**,
+and this one card was spending all five.
+
+| | sentences | negation sentences | aggregate |
+|---|---|---|---|
+| card X at rev 204 | 9 | 5 | 25.66% |
+| the rewrite | 13 | **0** | **24.87%** |
+
+Measured, not estimated: the projection was run against the instrument's own regex and sentence splitter
+before a line was written, and the build came back at 24.9% exactly. The wall lines *were* the negations —
+a card describing an impossibility is written in the negative by nature — so cutting them bought 0.8 points
+of headroom back for the next beat. **Write the projection first when a gate has no room. It costs one
+`python3 -` and it is the difference between a rewrite and a rewrite plus a re-cut.**
+
+### 28.4 The label that warned about a price that no longer exists
+
+`Drink with him. (He will be further gone.)` — beat_0144 wrote that parenthetical as a **cost warning**, and
+its header said so: *"THE WARNING IS IN THE LABEL, so it can never be a trap."* Correct then. After rev 203
+there is no cost, and what sits behind the label is wall2's confession — the only characterisation of Grier
+that `d0` does not deliver. The game was discouraging its own content. Same length, same register, opposite
+job: **`(He talks when he is this far down.)`**
+
+### 28.5 Comments that argued both sides
+
+`drink_after`'s **node** header was still titled *"IT COSTS A NIGHT"* and closed on *"the only thing that
+moves here is `grier_nights`, downward"*, while its **choice** header forty lines above had been correctly
+repointed at beat_0152. One node, two opposite accounts of the same mechanic. Also corrected: *"nothing on
+this man reads relation above 20"* (the `knees` gate came down to 14 at beat_0151, and the same block
+already said 14 twelve lines later), and the two `grier_nights` declaration sites in `0_systems_spec` and
+`1_metadata`, which still described a live counter. The key and its default **stay** — saves carry it, a key
+read by nothing costs nothing, and deleting one is how a load goes undefined.
+
+### 28.6 Measured
+
+Merge validates · build errors unchanged at the three known beat_0141 media files · `check_quest_cards` all
+measures pass with *what did not happen* down 25.7% → **24.9%** and the median holding at 12 ·
+`gates.py` **21 FAILs and 425/425 nodes**, both unchanged (this beat adds and removes no nodes) · in the
+built HTML `will not finish`, `costs you a night`, `never once bought you a finish` and `He will be further
+gone` all return **0**, and the one surviving `further gone` is line 1333's, a different man entirely.

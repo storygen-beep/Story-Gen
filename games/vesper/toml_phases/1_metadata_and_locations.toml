@@ -273,10 +273,12 @@ pieces_seated = 0
 # grier_nights 0-3 + grier_drains_done — beat_0126 (rev 176), WHOSE HAND. Grier's loop, and NEITHER of them
 # is the ladder's axis: that is plain npc_grier.relation, decided at beat_0125 after the build said a counter
 # would buy nothing.
-#   • grier_nights = how many nights he was worked and DID NOT FINISH. That is a different fact from how far
-#     up the ladder she is — she can sit with him for a month and never have tried. Every elected finish
-#     below the break bumps it and routes to its own written failure; at 3 the wall breaks. mercer_attempts'
-#     shape, for the same reason: one axis for one exclusive chain.
+#   • grier_nights = how many nights he was worked and DID NOT FINISH. ⚠️ DEAD SINCE beat_0152 (rev 203) —
+#     LO cut the wall and Grier drains on the FIRST ass finish now, like every other man in this game. NO
+#     CONDITION, COST, EFFECT OR CARD READS THIS KEY any more. It stays declared and defaulted on purpose:
+#     saves carry it, a key read by nothing costs nothing, and deleting one is how a load goes undefined.
+#     What it used to do: every elected finish below the break bumped it and routed to its own written
+#     failure, and at 3 the wall broke. mercer_attempts' shape, one axis for one exclusive chain.
 #   • grier_drains_done = the twin of colm_drains_done / calloway_drains_done / bastien_drains_done. It picks
 #     .d0 from .done and it is what cap_grier_gives triggers on.
 # ⚠️ BOTH ARE TRAITS AND NOT FLAGS BECAUSE THEIR SETTER IS TRIGGERLESS. loop_grier_finisher has no location,
