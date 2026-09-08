@@ -21739,7 +21739,7 @@ effects = [
 # ⚠️ SHE IS WORKING HIM, NOT FLIRTING WITH HIM (§14 row b). He is sour about all of it and it never turns
 # into warmth. She cannot get drunk, so every one of these hours is a sober woman watching a drunk man talk,
 # and he is the one man in the city who would clock that.
-# MEDIA: two slots — scenes/grier_drink.jpg on the lead, the pool scenes/rung_grier_flash_t3 on the flash.
+# MEDIA: two slots — scenes/grier_drink.jpg on the lead, the pool scenes/rung_grier_flash_t5 on the flash.
 # scenes/grier_look.jpg is RETIRED with the rung and comes off beat_0141's list.
 [[canvases.nodes]]
 id   = "drink"
@@ -21834,7 +21834,7 @@ flagEffects = [
 id   = "drink_tease"
 name = "The glass"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_grier_tease_t2", pool = 2, description = "A woman in an open-necked blouse bending down out of her chair toward the floor in a dim filthy workshop, the front of her blouse hanging open, a heavy older seated man watching from an armchair with a glass. Must show: downblouse cleavage, her clothed and bending, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["downblouse bending forward cleavage clothed gif", "woman bending over showing down her top older man watching gif", "downblouse tease dim room seated man gif"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_grier_tease_t5", pool = 2, description = "A woman in an open-necked blouse bending down out of her chair toward the floor in a dim filthy workshop, the front of her blouse hanging open, a heavy older seated man watching from an armchair with a glass. Must show: downblouse cleavage, her clothed and bending, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["downblouse bending forward cleavage clothed gif", "woman bending over showing down her top older man watching gif", "downblouse tease dim room seated man gif"] } },
   { type = "paragraph", content = "Her glass has stood full on the boards by her foot since he poured it, and she goes down after it, slow, every time he gets near the end of a sentence. Two buttons are down. She did those before she sat." },
   { type = "paragraph", content = "From that chair he gets the whole way down the front of her every time, four seconds of it, and she is back up before either of them has to decide what it was." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Put that up on the arm where you can reach it. You are going up and down like a bloody bench press and I am losing my thread." },
@@ -21862,7 +21862,7 @@ flagEffects = [
 id   = "drink_flash"
 name = "The pour"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_grier_flash_t3", pool = 3, description = "A woman in an open blouse leaning over the arm of a chair to pour a drink for a heavy older seated man in a dim filthy room, her front on show, him looking. Must show: her leaning over him clothed but open, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["woman open blouse leaning over seated older man pouring drink gif", "cleavage flash leaning over man in armchair dim room gif", "woman teasing older man dim room clothed gif"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_grier_flash_t5", pool = 3, description = "A woman in an open blouse leaning over the arm of a chair to pour a drink for a heavy older seated man in a dim filthy room, her front on show, him looking. Must show: her leaning over him clothed but open, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["woman open blouse leaning over seated older man pouring drink gif", "cleavage flash leaning over man in armchair dim room gif", "woman teasing older man dim room clothed gif"] } },
   { type = "paragraph", content = "She does not bother with the buttons. She pours his next one leaning over the arm of the chair so he gets the whole of it down her front, and she stays there while he drinks it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You are doing that on purpose. Have been for weeks. I am not going to ask you to stop and you know I am not, so we can both leave it where it is." },
   { type = "paragraph", content = "Then he takes the glass off her and holds her there by the wrist, in the light, and turns her hand over and looks at it, and what comes out of him is not about any of what she was doing." },
@@ -23117,7 +23117,7 @@ flagEffects = [
 # and here the door up is cheaper than Grier's walk, so the routing has to do more work. The descent is
 # folded into the minutes on each exit.
 # ⚠️ NO DAY CAP. The trip up and his 11:00-22:00 window are the throttle, as with Grier.
-# MEDIA: two new slots (scenes/sabin_after_eight.jpg, scenes/sabin_kiss.jpg) and one new pool
+# MEDIA: two new slots (scenes/sabin_after_eight.jpg, scenes/sabin_kiss_t4.webm) and one new pool
 # (sex/sabin_bench_t5). One asset, one block.
 [[canvases]]
 id          = "hub_sabin"
@@ -23335,14 +23335,14 @@ effects = [
 # a reward for lingering, exactly like Grier's tease having a two-view window.
 # ⚠️ pool = 2, NOT 4. flash strictly dominates from relation 10 at identical cost (60 min, same exit), so
 # this node's live window is relation 7-9: one or two views a playthrough, and a 4-clip pool would never
-# reach clip 3. Same arithmetic and the same pool size as rung_grier_tease_t2.
+# reach clip 3. Same arithmetic and the same pool size as rung_grier_tease_t5.
 # ⚠️ THE LAST SENTENCE IS ACTION, NOT MEANING (register.md, the pivot rule). What it meant to either of them
 # is not in this node and must not be added to it.
 [[canvases.nodes]]
 id   = "tease"
 name = "The box behind the box"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_sabin_tease_t2", pool = 2, description = "A woman in an open-necked blouse leaning right across a long workbench reaching for something at the back, her top hanging open as she stretches, a seated man further down the bench in a bright glass-walled room. Must show: her clothed and reaching across a surface, downblouse from his side, him seated and looking. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: a bedroom.", search_queries = ["woman reaching across desk leaning forward cleavage office gif", "downblouse leaning over table reaching bright room gif", "stretching across workbench blouse open seated man gif"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_sabin_tease_t5", pool = 2, description = "A woman in an open-necked blouse leaning right across a long workbench reaching for something at the back, her top hanging open as she stretches, a seated man further down the bench in a bright glass-walled room. Must show: her clothed and reaching across a surface, downblouse from his side, him seated and looking. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: a bedroom.", search_queries = ["woman reaching across desk leaning forward cleavage office gif", "downblouse leaning over table reaching bright room gif", "stretching across workbench blouse open seated man gif"] } },
   { type = "paragraph", content = "He wants the box behind the box, the way he always does, and she goes across the bench for it instead of round. Two buttons were down before she came up the stairs. She takes her time getting there." },
   { type = "paragraph", content = "Glass on two sides, the lights on in here, and nothing but dark outside. The window hands him the whole front of her while he is looking straight down at a page, and he does not have to move his head to take it." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -23386,14 +23386,14 @@ effects = [
 # game who asks and then waits for the answer (npc_sabin's own declaration), and §11's capstone needs "she
 # has never once been fucked without working" to be a thing the player FELT. A man checking while she keeps
 # not answering is the coldest reading of this ladder available, and it is the honest one.
-# ⚠️ pool = 3, matching rung_grier_flash_t3. Live window is relation 10-13 before the kiss dominates.
+# ⚠️ pool = 3, matching rung_grier_flash_t5. Live window is relation 10-13 before the kiss dominates.
 # ⚠️ THE QUERIES MUST NOT SHARE A LEAD PHRASE WITH THE TEASE POOL (design_media_pools.md §3) or find-media
 # returns the same clips twice. Tease leads on reaching across a surface; this one on standing over him.
 [[canvases.nodes]]
 id   = "flash"
 name = "His side of the bench"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_sabin_flash_t3", pool = 3, description = "A woman in an open blouse standing over a seated man at a workbench, leaning in to hold a page down in front of him so her front is at his eye level, both clothed, in a bright over-lit room. Must show: her standing over him, him seated and looking up, her leaning in. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: her sitting.", search_queries = ["woman standing over seated man at desk leaning in cleavage gif", "leaning over man sitting at desk open blouse bright office gif", "standing over him looking up at her office gif"] } },
+  { type = "video", props = { pool_dir = "scenes/rung_sabin_flash_t5", pool = 3, description = "A woman in an open blouse standing over a seated man at a workbench, leaning in to hold a page down in front of him so her front is at his eye level, both clothed, in a bright over-lit room. Must show: her standing over him, him seated and looking up, her leaning in. Avoid: nudity, avoid: sex, avoid: a dim or coloured room, avoid: her sitting.", search_queries = ["woman standing over seated man at desk leaning in cleavage gif", "leaning over man sitting at desk open blouse bright office gif", "standing over him looking up at her office gif"] } },
   { type = "paragraph", content = "She comes round to his side with the page and stands over him to put it down. No window this time. He has to look up, and looking up puts her at his eye level with nothing else in the frame." },
   { type = "paragraph", content = "She keeps one hand flat on the page while he reads it, so it stays where she put it, and she stays where she is. It is a page he has read before and it takes him a long time." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -23433,7 +23433,7 @@ effects = [
 id   = "kiss"
 name = "At the bench"
 blocks = [
-  { type = "image", props = { file = "scenes/sabin_kiss.jpg", description = "A woman kissing a man backed against a long workbench in a bright empty lab at night, one of her hands flat on his chest. avoid: a bedroom, avoid: soft romantic lighting, avoid: other people in shot.", search_queries = ["woman kissing man against workbench bright lab night", "couple kissing standing at laboratory bench empty room"] } },
+  { type = "video", props = { file = "scenes/sabin_kiss_t4.webm", description = "A woman kissing a man backed against a long workbench in a bright empty lab at night, one of her hands flat on his chest. avoid: a bedroom, avoid: soft romantic lighting, avoid: other people in shot.", search_queries = ["woman kissing man against workbench bright lab night gif", "couple kissing standing at laboratory bench empty room gif"] } },
   { type = "paragraph", content = "She does it at twenty past nine, between one stack and the next, while he is still mid-sentence about a numbering system. Hand flat on his chest, two steps forward until the bench stops him, and her mouth on his." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "...ah. Right. Yes." },
   { type = "paragraph", content = "He is careful about it for perhaps four seconds and then he is not careful at all. One hand in her hair, the other one back on the bench taking his weight, and the numbering system does not come up again." },

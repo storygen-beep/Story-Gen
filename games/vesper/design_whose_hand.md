@@ -2325,7 +2325,7 @@ glass on the boards by her foot and leaves it there — *"whatever they put in h
 she has a permanent reason to bend down and never a reason to drink. He complains about the interruption
 and then stops talking, which is the tell; no compliment survives anywhere on this man.
 
-**Media: `scenes/rung_grier_tease_t2`, `pool = 2`, not 4.** `drink_flash` strictly dominates from relation
+**Media: `scenes/rung_grier_tease_t5`, `pool = 2`, not 4.** `drink_flash` strictly dominates from relation
 10 at identical cost — one bottle, 60 minutes, both set `grier_drank_with` — so this node's live window is
 relation 4–9, about two views a playthrough, and a 4-clip pool would never reach clip 3. **At harvest the
 two pool descriptions must stay distinct**, or find-media returns the same clips twice: rungs 2 and 3 now
@@ -3203,7 +3203,7 @@ mopoga lostness-and-grind disease.
 hidden, so it may; arguably right (watching a decent man come apart) and arguably wrong (he does not know he
 is being worked). No cheat-page row was added — those are explicit per-NPC rows (`0_systems_spec.toml:614`).
 
-**Media:** two new pools, `scenes/rung_sabin_tease_t2` (pool 2) and `scenes/rung_sabin_flash_t3` (pool 3).
+**Media:** two new pools, `scenes/rung_sabin_tease_t5` (pool 2) and `scenes/rung_sabin_flash_t5` (pool 3).
 Debt 46 → **48**. Their query plans share no lead phrase — tease leads on *reaching across a surface*, flash on
 *standing over him* — per `design_media_pools.md §3`, or find-media returns the same clips twice.
 
