@@ -804,8 +804,13 @@ activity   = "at the bench with the archive open"
 id         = "company_grays"
 name       = "Company grays"
 slot       = "dress"
-# no type tag needed — grays is the portrait's default_image (only cover_dockhand carries a
-# worn_type tag, for its outfit rule); tagging grays would trip the "type has no rule" build warning
+# ⚠️ TAGGED AT beat_0167 (rev 219). This read "no type tag needed — grays is the portrait's default_image
+# ... tagging grays would trip the 'type has no rule' build warning". True while it had no rule, and the
+# reason five of the twelve dress/face states were wrong: falling through to default_image is only correct
+# while nothing ABOVE it can claim her, and the bare face_worn catch-all could — put a bought face on over
+# company uniform and the sidebar showed her in the second-hand kit. Its rule ships in the same pass, so
+# the warning stays silent.
+type       = "grays"
 image      = "clothing/company_grays.jpg"
 initial    = true
 beauty     = 1
@@ -877,6 +882,10 @@ corruption = 0
 # ⚠️ NO `initial` — she does not own it. Granted un-worn by activity_buy_face (3_activities) for coin.
 # beauty/corruption stay 0: this game does not use the worn_beauty/worn_corruption axes.
 [[clothing]]
+# ⚠️ TAGGED AT beat_0167 (rev 219). It rode the face_worn catch-all, which is right only while the face is
+# ON — and face_worn is a toggle (activity_the_face, 3_activities:3067/:3077), so with it off she stood in
+# the second-hand kit and the sidebar showed company grays. Its own rule points at the SAME image.
+type       = "cover_stranger"
 id         = "cover_stranger"
 name       = "Second-hand kit"
 slot       = "dress"
@@ -923,6 +932,11 @@ corruption = 0
 # replaces whatever was there, so changing into this takes the kit off and changing back puts it on — and
 # because the FACE is a flag now, neither swap touches who she looks like or whether she has a job.
 [[clothing]]
+# ⚠️ TAGGED AT beat_0167 (rev 219) — THE ONE THAT NEEDED A NEW PICTURE. Untyped, it matched no rule at all:
+# face off it fell to the grays, face on the catch-all showed the second-hand kit. Wrong in both, which is
+# what LO read in play. Its portrait slot (portraits/wren_dress_undertow.jpg) ships EMPTY and the build
+# reports it missing until the art lands; the rule is live the moment the file appears.
+type       = "dress_undertow"
 id         = "dress_undertow"
 name       = "The dress he sent down"
 slot       = "dress"
