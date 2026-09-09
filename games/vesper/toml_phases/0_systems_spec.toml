@@ -145,6 +145,22 @@ when  = { worn_type = "cover" }
 image = "portraits/wren_cover_analyst.jpg"
 when  = { worn_type = "cover_analyst" }
 
+# THE RESEARCH-FLOOR KIT — the fifth face (beat_0159). What she is seen as at The Rise.
+# ⚠️ IT MUST SIT ABOVE THE face_worn RULE. setup.getPlayerPortrait breaks on the FIRST matching outfit
+# (v2.py:1780, `if (ok) { img = outfits[j].image; break; }`), so the catch-all below would swallow this one
+# if it were declared after it. That ordering IS the whole defect this rule fixes: cover_research shipped
+# with no `type`, so it matched no outfit rule, fell through to the face_worn catch-all, and the sidebar
+# showed the same second-hand-kit portrait on the research floor as at the berth — LO, playing it: "on
+# getting the lab outfit the wren portrait doesn't change." It never had a picture to change to.
+# ⚠️ BOTH TOKENS IN ONE `when`, and that is not belt-and-braces. The resolver checks worn_type and flag
+# independently (v2.py:1774-1779), and the Rise's own gates are the SAME conjunction on all four of its
+# surfaces — cover_research equipped + face_worn is_true (3_activities:3630, :3752, :3935). She is never on
+# that floor as herself. With the face off, the kit is just clothes and she falls through to the grays,
+# which is the correct read and the behaviour every untyped garment already has.
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_research.jpg"
+when  = { worn_type = "cover_research", flag = "face_worn" }
+
 # ⚠️ beat_0116 (rev 167) — THE FACE IS NO LONGER A GARMENT, AND THE OLD NOTE HERE WAS WRONG ABOUT THE ENGINE.
 # It said: "the rule is keyed on the dress item's type BECAUSE THAT IS THE ONLY AXIS THE RESOLVER HAS, so the
 # garment carries the face. That is a deliberate compression." The resolver takes worn_type, corruption AND
@@ -157,8 +173,11 @@ when  = { worn_type = "cover_analyst" }
 # and cover_stranger goes back to being what it physically always was — the plain second-hand kit she bought
 # with it. The rule below keys on the FLAG, so the face survives any change of clothes, which is the whole
 # point: she can be in the bar dress or in her own coat and still not be Wren.
-# ⚠️ THIS RULE SITS FIRST AND WINS. One portrait covers every outfit she can be seen in while disguised, so
-# there is no face-by-outfit matrix to harvest — and she can only wear the bar dress while wearing the face.
+# ⚠️ THIS RULE IS THE CATCH-ALL AND IT SITS LAST ON PURPOSE (it used to sit first, and the note here used to
+# say so — corrected at beat_0159 when the research kit got its own face above). It still covers every
+# disguised outfit that has no rule of its own: the second-hand kit and the bar dress both land here, so
+# there is no face-by-outfit matrix to harvest. Anything added ABOVE it is an outfit that earns its own
+# picture; anything added BELOW it is dead code, because the resolver breaks on the first match.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_stranger.jpg"
 when  = { flag = "face_worn" }
@@ -212,6 +231,102 @@ bands = [
   { min = 24, max = 47, text = "Core: Damaged",  icon = "◔" },
   { min = 48, max = 71, text = "Core: Critical", icon = "◑" },
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
+]
+
+# ─── THE WEAPON ON HER — beat_0160 (rev 211). FOUR ROWS, EXACTLY ONE EVER ON SCREEN. ──────────────
+#
+# ⚠️ THE DEFECT THESE FIX IS WRITTEN TWENTY LINES BELOW, in the labels block: "Weapon charges — internal;
+# the fire choices' locked_text / hide-when-empty communicate the state." They do communicate it — AT THE
+# MOMENT OF REFUSAL, after the player has crossed the map, spent the hours and reached the finish. LO, playing
+# it: he reached Sabin's drain, was told "the drain is empty", and had no way to have known. Both levers are
+# invisible (`hidden = true`), both gate content on five characters, and NOTHING on any screen read them.
+# Measured at the time: 10 places in the game SPEND the drain's one shot, 2 reload it, and after the 1a seal
+# takes wren_floor (and the cradle with it) only ONE reload is left in the whole game.
+#
+# ⚠️ ONLY THE CARRIED WEAPON RENDERS. One core feeds one weapon (equipped_weapon 0/1/2), so the row that is
+# on screen IS the answer to "wrong gear" — the sibling refusal of "the drain is empty", and the other half
+# of what LO could not see. The weapon she is NOT carrying cannot fire, so its charge is not HUD information;
+# it belongs on the swap screen, which is where she is standing when she'd want it.
+#
+# ⚠️ `version = "1.0"` IS LOAD-BEARING ON EVERY show_when AND FAILS **OPEN**. v2.py:4036 —
+# `if (!conditions.version || conditions.version !== '1.0') return true;` — so a block missing it is not
+# ignored, it is SATISFIED, and the row renders unconditionally. Drop it here and "Emitter: empty" appears
+# on a brand-new save, before she has ever seen an emitter. No build error. Same trap as conditions{}.
+#
+# ⚠️ AND `subject = "player"` IS MANDATORY ON EVERY PREDICATE, where the failure runs the OTHER way.
+# v2.py:4101 / :4149 push `false` for any item missing `subject`, or using `trait`/`flag` where the evaluator
+# wants `trait_key`/`flag_key` — so the AND fails and the row NEVER RENDERS, in any state, with a green build.
+# Nothing validates a show_when: template_import's sidebar loop does not read it and validate_flag_chains
+# (v2.py:12340) walks canvases and story_arc only. The two traps point in opposite directions; check both.
+#
+# ⚠️ FIRST AUTHORED USE OF show_when IN ANY GAME IN THIS REPO. The only producer today is the engine's own
+# auto-emitter (v2.py:8585), and no built game carries one. Every mechanism is proven alone; the composition
+# is not, so this shipped only after all four states were eyeballed in a browser.
+#
+# ⚠️ ICONS ARE ◇ / ◆ AND DELIBERATELY NOT THE CIRCLES. core_strain above owns ○ ◔ ◑ ◕ and can be on screen
+# at the same time; the same four glyphs meaning two unrelated things is how a HUD stops being readable.
+
+# ROW 1 — UNARMED. No show_when needed: the 0-0 band simply fails to match at 1 or 2 and trait_status_text
+# renders NOTHING when no band matches (v2.py:17269), so this row self-hides whenever she is carrying
+# anything. It exists because equipped_weapon = 0 is a REAL state with a whole chapter in it — set at
+# hunt_the_grab and captivity_recovery (5_scenes:2482, :2640), restored at captivity_cain (:3803) — and
+# silence there reads as a broken HUD. "Unarmed" reads as the room. The row she has been checking all game
+# goes bare the moment Bastien's men strip her, and that is the chapter saying so in the chrome.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "equipped_weapon"
+bands = [
+  { min = 0, max = 0, text = "Unarmed", icon = "✕" },
+]
+
+# ROW 2 — THE DRAIN (equipped_weapon 1). One shot, and the whole truth-drain economy runs on it.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "drain_charge"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
+] }
+bands = [
+  { min = 0, max = 0, text = "Drain: spent",  icon = "◇" },
+  { min = 1,          text = "Drain: loaded", icon = "◆" },   # NO max — 1 is the only loaded value
+]
+
+# ROW 3 — THE EMITTER, WORKING (equipped_weapon 2, owned, not broken).
+# ⚠️ THE arousal_weapon_ready CLAUSE IS NOT REDUNDANT. The swap activities already gate on it, so in normal
+# play equipped_weapon = 2 implies she owns one — but the dev shortcuts write equipped_weapon directly
+# (6_dev_shortcuts.toml), and a jumped state should not invent an emitter she has not found yet.
+# ⚠️ FOUR BANDS FOR A TRAIT GATED ONLY AT `gte 1`. That is deliberate and it is not a meter-ceiling defect:
+# this is a RESOURCE COUNT, not a gate ladder. Nothing unlocks at 3 — but "two shots left" is the thing a
+# player rations against, and one bar that says loaded/not-loaded would throw that away.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "arousal_charge"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+bands = [
+  { min = 0, max = 0, text = "Emitter: empty",     icon = "◇"   },
+  { min = 1, max = 1, text = "Emitter: one shot",  icon = "◆"   },
+  { min = 2, max = 2, text = "Emitter: two shots", icon = "◆◆"  },
+  { min = 3,          text = "Emitter: full",      icon = "◆◆◆" },   # NO max — 3 is the full cell
+]
+
+# ROW 4 — THE EMITTER, BROKEN. Exclusive with row 3 on the same clause (`gte 1` against its `lt 1`), so the
+# two can never both render. ONE unbounded band: unset max defaults to 1e9 (v2.py:17262), so it matches
+# whatever charge is sitting in the cell — which is the point, because a broken emitter's charge is not
+# information, the broken is. Live between the captivity release and repair session 12.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "arousal_charge"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "gte", value = 1 },
+] }
+bands = [
+  { min = 0, text = "Emitter: broken", icon = "✕" },
 ]
 
 # ─── (Leash sidebar row REMOVED — LO's call 2026-07-16) ────────────────────────────────────────────
@@ -273,7 +388,12 @@ hidden = true
 [[traits.labels]]
 key    = "weapon_repair"
 hidden = true
-# Weapon charges — internal; the fire choices' locked_text / hide-when-empty communicate the state.
+# Weapon charges — internal to the TRAITS DUMP, and that is now the only sense in which they are internal.
+# ⚠️ THIS COMMENT USED TO END "the fire choices' locked_text / hide-when-empty communicate the state", and
+# that was the defect. The fire choices DO communicate it — at the moment of refusal, after the player has
+# crossed the map and reached the finish. Since beat_0160 the state is on the HUD (the four weapon rows
+# above). `hidden = true` STAYS: it suppresses the raw number in <<playerTraits>> and the Stats page
+# (v2.py:1198-1201, type-agnostic), which is what keeps the sidebar band from doubling up with a bare int.
 [[traits.labels]]
 key    = "drain_charge"
 hidden = true
