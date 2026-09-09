@@ -48,11 +48,22 @@ distinguishing a forgotten tag from an intentional `_base`). Then `propose_tag`:
 | no | — | hard_nsfw | **auto-retag `_t5`**, announce |
 | no | — | borderline | **ASK** the heat (t3 peck / t4 makeout / t5+ explicit); suggest t4 |
 | no | — | sfw / unknown | leave (untagged = base = SFW, already correct) |
-| yes | SFW (base/t2/t3) | hard_nsfw | **auto-retag `_t5`**, announce |
+| yes | SFW (base/location ONLY) | hard_nsfw | **auto-retag `_t5`**, announce |
 | yes | SFW | borderline | **ASK** (current tag may be fine); suggest t4 |
 | yes | SFW | sfw / unknown | leave |
+| yes | t2/t3 (lowest authored rungs) | anything | **leave** — see below |
 | yes | NSFW (t4+) | sfw (vanilla, no act/nudity) | **ASK** before demoting; suggest base |
 | yes | NSFW | hard_nsfw / borderline / unknown | leave (tag stands) |
+
+⚠️ **`SFW_TIERS` is `{base, location}` — a tease is NEVER SFW** (LO's ruling 2026-08-04;
+engine half in `apps/common/media_band.py` commit `b5c411b`, this half 2026-09-09). Any
+authored `_tN` suffix means the author put the beat on the sexual ladder. t2/t3/t4 are
+BORDERLINE.
+
+**t2 and t3 are left alone in every branch.** They are on the ladder, so nothing up-grades
+them; they are also its bottom rung, so a vanilla-reading description must not propose
+demoting them to `base` — `base` means *off the ladder entirely*, which is the one thing an
+authored suffix rules out. t4+ keeps its down-grade ask.
 
 **Asymmetry by design:** up-grades on explicit content are confident **auto** (routing a
 sex scene to stock is just broken); **down-grades and all borderline calls are ASKED** —

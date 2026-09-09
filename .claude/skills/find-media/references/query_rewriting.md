@@ -193,15 +193,24 @@ What `check_tier_alignment()` actually enforces, and only this:
     act word beside it — Google weights every token and the mood words have the bigger
     SFW cluster.
 
-Three blind spots to hold in your head, because the report will not mention them:
+Four blind spots to hold in your head, because the report will not mention them:
 
-1. **t4 is checked by neither rule** — it is in `BORDERLINE_TIERS`, which appears in
-   neither branch. The whole clothed→explicit span passes tier check silently.
-2. **t0 and t1 are checked by neither rule either.** `infer_tier_tagged` returns them
-   happily, but `scene_semantics.SFW_TIERS` is `{base, t2, t3, location}` — t0/t1 sit in no
-   tier set, so a t0 slot carrying `blowjob` passes silently. (`tier_format_check.py` does
-   know t0/t1 at the pre-install gate; the query validator does not.)
-3. **On `--target pornhub`, the vanilla checks can only ever fire on `romantic`, `sweet`
+1. **t4 is checked by neither rule, and that is DELIBERATE** — it is the makeout/oral band,
+   where a hard act word is correct (`sex/grier_room_oral_t4` legitimately queries a
+   kneeling blowjob), and it must never be *forced* to carry one either. Scoping the
+   2026-09-09 tease rule to all of `BORDERLINE_TIERS` flagged that beat twice on its first
+   run; the rule is `LOWEST_AUTHORED_TIERS` (t2/t3) only.
+2. **t2 and t3 ARE checked, since 2026-09-09** — `tier_mismatch:tease_query_has_hard_act_word`
+   fires when a tease tier carries an ACT_ANCHOR, i.e. a t5 beat wearing a t2 tag. They are
+   not required to carry one; `cleavage`/`downblouse`/`tease` are the vocabulary and none is
+   an anchor. ⚠️ This branch exists *because* t2/t3 left `SFW_TIERS` that day: the first rule
+   is SFW-only and every later rule is NSFW-only, so without it the move would have silently
+   **stopped** checking the tease tiers rather than checking them correctly.
+3. **t0 and t1 are checked by neither rule.** `infer_tier_tagged` returns them happily, but
+   `scene_semantics.SFW_TIERS` is `{base, location}` — t0/t1 sit in no tier set, so a t0 slot
+   carrying `blowjob` passes silently. (`tier_format_check.py` does know t0/t1 at the
+   pre-install gate; the query validator does not.)
+4. **On `--target pornhub`, the vanilla checks can only ever fire on `romantic`, `sweet`
    or `gentle`** — `strip_banned()` runs first inside `validate_query()` and
    `tender`/`loving`/`intimate`/`passionate`/`sensual` are banned words, so they are gone
    before `check_tier_alignment()` sees the string. On the default Google target nothing

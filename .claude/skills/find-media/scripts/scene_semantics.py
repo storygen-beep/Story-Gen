@@ -25,9 +25,24 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-SFW_TIERS = {"base", "t2", "t3", "location"}
-BORDERLINE_TIERS = {"t4"}
+# LO's ruling, 2026-08-04: **a tease is never SFW.** Any authored tier suffix means the
+# author put that beat on the sexual ladder; only `base` / `location` / no-suffix is clean.
+# The engine half shipped that day (`apps/common/media_band.py` TIER_BAND, commit b5c411b);
+# this — "the other half", named in that commit message — landed 2026-09-09.
+#
+# The set that was here read as if SFW meant *wayfinding*: a location or establishing shot
+# the player reads to know where they are. A tease is not that. vesper's
+# `rung_renner_tease_t2` sits on a repeatable hub gated `corruption >= 0` with no upper
+# bound, so it is clickable from the first minute of the game to the last.
+SFW_TIERS = {"base", "location"}
+BORDERLINE_TIERS = {"t2", "t3", "t4"}
 NSFW_TIERS = {"t5", "t6", "t7", "t8"}
+
+# The lowest authored rungs. They are BORDERLINE (never SFW), but they are also the bottom
+# of the ladder, so a vanilla-reading description must not propose demoting them to `base` —
+# `base` means "not on the sexual ladder at all", which is exactly what an authored suffix
+# rules out. See the down-grade branch in propose_tag.
+LOWEST_AUTHORED_TIERS = {"t2", "t3"}
 
 SEXUAL_TERMS_FOR_SFW_CHECK = {
     "sex", "fuck", "blowjob", "handjob", "fingering", "cunnilingus",
@@ -157,9 +172,17 @@ ANIMATED_KEYWORDS = {
 # "kiss"/"bath" with "fuck" because all three are motion; rating must keep them apart
 # because a clothed kiss is stock-findable while a sex act is not. The routing question
 # is "is there nudity or a sex act?" — not "is it motion?".
+# NOTE: bare "flash" is deliberately NOT here, by the same MEMBERSHIP RULE that keeps the
+# position names out of ACT_ANCHORS above — a word belongs only if it has no common
+# non-sexual reading. Measured across the source phase files 2026-09-09: every bare `flash`
+# in the corpus is a CLOTHED tease ("lifting her skirt to flash the underwear beneath
+# (stays clothed, withheld)", "cleavage flash leaning over man in armchair"), while the one
+# genuine nudity use is the inflected "woman flashing tits bending over". Word-boundary
+# matching keeps them separate, so dropping `flash` costs nothing and stops three false
+# hard_nsfw reads. It stays in ANIMATED_KEYWORDS: a flash is motion whatever it reveals.
 RATING_NUDITY = {
     "nude", "naked", "topless", "bottomless",
-    "undress", "undressing", "strip", "stripping", "flash", "flashing",
+    "undress", "undressing", "strip", "stripping", "flashing",
 }
 # Stock genuinely can't serve these → confident NSFW.
 # NOTE: bare "facial" is deliberately NOT here — it is a spa treatment in a domestic
@@ -242,6 +265,38 @@ def infer_tier(file_path: str) -> str:
     return infer_tier_tagged(file_path)[0]
 
 
+# Authors write a beat as `<prose>. Must show: <required>. Avoid: a, avoid: b, avoid: c.`
+# Word-matching that raw string reads the AVOID list as content: a clothed tease saying
+# "avoid: sex" matched `sex` in RATING_HARD_NSFW and proposed an unattended `auto_retag`
+# to _t5. Four vesper rungs were retagged that way on 2026-09-08.
+_AVOID_CLAUSE_RE = re.compile(r"\bavoid:", re.I)
+
+
+def _searchable_text(description: str, search_queries: list[str]) -> str:
+    """The description WITHOUT its trailing avoid-directives, plus the queries verbatim.
+
+    Measured over all 379 media descriptions in the source phase files of vesper,
+    vesper_two and orientation (2026-09-09), which is what makes truncation safe here:
+
+    - `avoid` ALWAYS takes a colon — zero occurrences as an ordinary verb.
+    - The avoid block is ALWAYS terminal. The first `avoid:` starts at 60-80% of the
+      string, and 0 of the 60 descriptions carrying one ever resume prose after it —
+      only more `avoid:` clauses follow. So nothing the classifier needs is lost.
+    - `avoid:` / `Avoid:` / `Must show:` are the ONLY colon-introducers in the corpus.
+
+    `Must show:` is deliberately KEPT: it is the strongest positive statement in a block,
+    and 12 of the 40 that carry one supply the only RATING_HARD_NSFW word their
+    description has ("Must show: ... his cock in her mouth ...").
+
+    `search_queries` are deliberately KEPT WHOLE: they are pure positive retrieval
+    strings (1 negation word in 761), and they carry the entire rating for 119 blocks
+    whose prose is euphemistic.
+    """
+    m = _AVOID_CLAUSE_RE.search(description or "")
+    prose = description[: m.start()] if m else (description or "")
+    return " ".join([prose] + list(search_queries)).lower()
+
+
 def classify_content_family(description: str, search_queries: list[str]) -> tuple[str, list[str]]:
     """Return (family, matched_keywords) where family is 'static', 'animated', or 'ambiguous'.
 
@@ -252,8 +307,11 @@ def classify_content_family(description: str, search_queries: list[str]) -> tupl
     A WEAK_STATIC_KEYWORDS hit alone is NOT enough to call a scene static — it returns
     'ambiguous', which the format check treats as "accept the author's extension". This
     fails safe: an unrecognised act word can no longer be overruled by the word "standing".
+
+    Reads through `_searchable_text`, so a still portrait whose description says
+    "avoid: kissing" is no longer told to become a .webm.
     """
-    blob = " ".join([description] + list(search_queries)).lower()
+    blob = _searchable_text(description, search_queries)
 
     def hits(words: set[str]) -> list[str]:
         return sorted({kw for kw in words if re.search(rf"\b{re.escape(kw)}\b", blob)})
@@ -319,8 +377,11 @@ def classify_content_rating(description: str, search_queries: list[str]) -> tupl
     WEAK_STATIC_KEYWORDS are not in RATING_SFW, so a lone posture word yields 'unknown'
     and propose_tag leaves the author's tag alone — rather than asking to down-grade a
     t5 to base because the description contained the word "standing".
+
+    Reads through `_searchable_text`, so an `avoid:` directive can no longer be scored as
+    content. This drives an AUTO retag, so a false positive here is unattended.
     """
-    blob = " ".join([description] + list(search_queries)).lower()
+    blob = _searchable_text(description, search_queries)
 
     def hits(words: set[str]) -> list[str]:
         return sorted({w for w in words if re.search(rf"\b{re.escape(w)}\b", blob)})
@@ -368,6 +429,11 @@ def propose_tag(file_path: str, tier: str, was_tagged: bool, signal: str,
         return mk("t5", "auto_retag", f"tagged {tier} (SFW) but description is explicit ({cue}) → NSFW")
     if tag_is_sfw and signal == "borderline":
         return mk("t4", "ask", f"tagged {tier} (SFW) but borderline content ({cue}) — confirm")
-    if tag_is_nsfw and signal == "sfw":
+    # Down-grade proposes `base`, which means "off the sexual ladder entirely". For t4+ that
+    # is a real question to put to the author. For the lowest authored rungs it is not: they
+    # are already the bottom, and LO's 2026-08-04 ruling is that an authored suffix IS the
+    # author saying the beat is on the ladder. Demoting a t2 tease because its prose reads
+    # vanilla would relitigate that by machine.
+    if tag_is_nsfw and signal == "sfw" and tier not in LOWEST_AUTHORED_TIERS:
         return mk("base", "ask", f"tagged {tier} (NSFW) but content reads vanilla ({cue}) — confirm down-grade")
     return mk(None, "leave", "tag consistent with content")

@@ -1,6 +1,84 @@
 # find-media — CHANGELOG
 
-## 2026-08-09 (latest) — `grab` now COMPRESSES on install, so the installed extension is `.mp4`
+## 2026-09-09 (latest) — an `avoid:` clause is a directive, not content; and a tease is never SFW
+
+Three defects in `scripts/scene_semantics.py`, stacked, produced four **unattended**
+`auto_retag → _t5` proposals on vesper's clothed tease/flash rungs on 2026-09-08. LO accepted
+them at the time; the shelves survived only because the wave briefs told every agent that the
+beat DESCRIPTION overrides the tier. Fixing one defect alone leaves the others live — the
+flash rung needed two of the three.
+
+- **`scene_semantics.py` — negation blindness (the bug).** `classify_content_rating` joined the
+  description and the author's queries into one blob and word-matched it, so a beat reading
+  *"Must show: downblouse cleavage … Avoid: nudity, avoid: sex"* matched `sex` in
+  `RATING_HARD_NSFW` and rated explicit. The instruction NOT to show something was scored as a
+  description of showing it. New `_searchable_text()` truncates the description at the first
+  `avoid:` and is now the single blob-builder for **both** classifier axes — the format axis had
+  the same bug, and a still portrait saying *"avoid: kissing"* was being told to become `.webm`.
+  **`Must show:` is deliberately kept** (12 of 40 supply the only hard word their description
+  has) and **`search_queries` are kept whole** (they carry the entire rating for 119 blocks with
+  euphemistic prose).
+
+- **Why truncation is safe here, measured across all 379 media descriptions** in the source
+  phase files of vesper / vesper_two / orientation (`7_final_game.toml` excluded — generated):
+  60 carry `avoid:`; `avoid` **always** takes a colon and **never** appears as an ordinary verb;
+  `avoid:` / `Avoid:` / `Must show:` are the only colon-introducers in the corpus; and the avoid
+  block is **always terminal** — 0 of 60 resume prose after it. Effect: exactly **4 signals
+  change, and all 4 are the false positives**. Four more keep their signal but stop reporting
+  evidence lifted from their own avoid list (`mercer_print_ass_t5` no longer claims `anal`,
+  `penetration`) — that list is printed to the human in the proposal's reason string.
+
+- **`scene_semantics.py` — bare `flash` left `RATING_NUDITY`.** Corpus census: all three bare
+  `flash` uses are clothed teases (*"lifting her skirt to flash the underwear beneath (stays
+  clothed, withheld)"*, *"cleavage flash leaning over man in armchair"*); the one genuine nudity
+  use is the inflected *"woman flashing tits bending over"*. `flashing` stays. This is the
+  module's own MEMBERSHIP RULE — *a word belongs only if it has no common non-sexual reading* —
+  which was written for `ACT_ANCHORS` and had never been applied to the rating sets. It stays in
+  `ANIMATED_KEYWORDS`: a flash is motion whatever it reveals.
+
+- **`scene_semantics.py` — `SFW_TIERS` is now `{base, location}`.** This is the outstanding half
+  of commit `b5c411b` (2026-08-04), whose own message said *"scene_semantics.py is the other half
+  and is NOT updated here"* — five weeks open. t2/t3 join t4 in `BORDERLINE_TIERS`, matching
+  `TIER_BAND` in `apps/common/media_band.py`. The engine comment pointing at "the plan's Part 3"
+  is corrected; that plan no longer exists anywhere (searched commits, all 33 plan files, and the
+  transcripts).
+
+- ⚠️ **The tier move was not a straight swap — it carried two traps, both fixed here.**
+  **(a)** `validate_queries.check_tier_alignment`'s first rule is `SFW_TIERS`-only and every later
+  rule is `NSFW_TIERS`-only, so moving t2/t3 between them dropped them out of **every** branch:
+  a t2 slot querying `blowjob gif` went from one issue to **zero**, which reads as a clean query
+  rather than as a bug. Added `tier_mismatch:tease_query_has_hard_act_word`.
+  **(b)** The down-grade branch proposes `base` — *off the sexual ladder entirely* — which an
+  authored suffix rules out by LO's own ruling. New `LOWEST_AUTHORED_TIERS` exempts t2/t3; t4+
+  keeps its ask.
+
+- ⚠️ **And the fix for (a) had its own trap.** Scoping the new rule to all of
+  `BORDERLINE_TIERS` flagged **t4**, which is the makeout/ORAL band where a hard act word is
+  correct — `sex/grier_room_oral_t4` legitimately queries a kneeling blowjob, and it was flagged
+  twice on the first run. The rule is `LOWEST_AUTHORED_TIERS` only. t4's exemption predates it
+  and is stated at the `no_act_anchor` rule.
+
+- **`scripts/test_scene_semantics.py` — NEW, 32 tests.** Nothing tested this module before:
+  `test_query_anchor.py` imports only `ACT_ANCHORS` and `check_tier_alignment`, no test
+  parametrised t2/t3, and the repo's pytest never reaches `.claude/` (`testpaths = ["tests"]`).
+  Every string in the first two groups is a **real vesper caption**, per the
+  `test_cocky_is_not_a_cock` precedent in `tests/test_media_band.py`. The load-bearing ones are
+  `test_a_tease_tier_is_still_checked` (trap a — the failure that looks like silence) and
+  `test_t4_keeps_its_exemption` (the trap inside that fix).
+
+- **Verified.** 50 skill tests green (`test_scene_semantics.py` + `test_query_anchor.py`);
+  `tests/test_media_band.py` 43 green, engine half untouched. `validate_queries.py` on vesper's
+  54 missing slots: **`TIER RETAG` section empty**, `Format OK: 54/54`, and passing queries
+  unchanged at 82/109 — the 27 remaining are all the pre-existing `no_act_anchor` issue in the
+  authored queries, none of them from this change.
+
+- **Known and accepted, not fixed.** `oral` (matches "oral history") stays in
+  `SEXUAL_TERMS_FOR_SFW_CHECK`, where it does a *different* job correctly — the SFW-query-leak
+  check — and removing it would weaken that. `tier_format_check.py` keeps its own independent
+  `SFW_TIERS` including t0/t1: moving t2/t3 there changes install-gate extensions, a video size
+  floor and a magic-byte check, and v3 installs nothing so it never runs that gate.
+
+## 2026-08-09 — `grab` now COMPRESSES on install, so the installed extension is `.mp4`
 
 - **`SKILL.md` §6 INSTALL** — documented the new auto-compress step in `grab`. An animated
   download (`.gif/.webm/.mov/.mkv/.avi/.m4v`) is re-encoded to **H.264 CRF 23** between the

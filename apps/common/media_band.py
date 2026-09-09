@@ -55,10 +55,8 @@ NSFW_BANDS = ("explicit", "nudity", "borderline")
 # The tier vocabulary, mapped onto the bands above. A literal map rather than a numeric
 # comparison so the non-numeric tiers ("base", "location") have somewhere to land.
 #
-# ⚠️ This DIVERGES from find-media's `SFW_TIERS`
-# (.claude/skills/find-media/scripts/scene_semantics.py:28-30), which puts t2 and t3 in the
-# SFW set. LO's ruling, 2026-08-04: **a tease is never SFW.** Any authored tier suffix means
-# the author put the beat on the sexual ladder; only `base` / `location` / no suffix is clean.
+# LO's ruling, 2026-08-04: **a tease is never SFW.** Any authored tier suffix means the
+# author put the beat on the sexual ladder; only `base` / `location` / no suffix is clean.
 #
 # The skill's set was written as if SFW meant *wayfinding* — a location or establishing shot
 # the player reads to know where they are. A t2 tease on a permanent hub rung is nothing like
@@ -66,8 +64,15 @@ NSFW_BANDS = ("explicit", "nudity", "borderline")
 # with no upper bound, so it is clickable from the first minute to the last. Calling that SFW
 # is what let it ship as a single unrotated clip.
 #
-# `scene_semantics.py` is the other half of this fix and is not yet updated — until it is,
-# find-media will still route t2/t3 searches as SFW. See the plan's Part 3.
+# `scene_semantics.py` was the other half of this fix. It LANDED 2026-09-09 — its
+# `SFW_TIERS` is now `{base, location}` and t2/t3 sit in its `BORDERLINE_TIERS`, matching
+# the map below. The two files agree; the hand-override callers needed is gone.
+#
+# Note the fix was not a straight swap. Moving t2/t3 out of the SFW set drops them out of
+# every branch of `validate_queries.check_tier_alignment` (SFW-only first rule, NSFW-only
+# rest), so it shipped with a new `LOWEST_AUTHORED_TIERS` branch — otherwise the "fix" would
+# have silently stopped checking the tease tiers. Pinned by
+# `.claude/skills/find-media/scripts/test_scene_semantics.py`.
 TIER_BAND = {
     "base": "clean", "location": "clean",
     "t2": "borderline", "t3": "borderline", "t4": "borderline",
