@@ -20677,7 +20677,7 @@ flagEffects = [
 [[quest_cards]]
 priority   = 10
 text       = "Three of them came through the wall and none of them were there for Bastien. You put him down yourself, with thirty coin of grey plastic against the back of his neck, because the man who came through the alley door for him was the only lead you have ever had and he was about to walk out with him. One of them said your designation out loud. Four letters and eleven digits off your own page. So the company knows the difference between an asset that broke and an asset that is walking around. And Cain got exactly one thing out of that room, and it was not the wall, and it was not Bastien. It was you. In a lab you could not find again he looked at your face for the first time and used a name that nobody in the Reach has ever heard."
-tip        = "The Undertow does not open in the evenings now, but Sol is in there most days with a shovel and he will let you past. The good years came off that wall before the fire, and what is left on the floor is the junk Bastien sold for cash, with a few sheets in it that carry designations in your own format and dates in the second column. Go and get them. And whatever Cain was going to say next, he will say himself: there is no lab you can walk to and there never was, so go about your business and let him find you at the cot. If you want more of this sooner, Support Us in the sidebar."
+tip        = "Go back down to your own cot. Whatever Cain was going to say next, he will say himself, and there is no lab you can walk to and there never was: he comes to you, and walking in the door is all it takes. The Undertow floor is still there if you want it. Sol is in most days with a shovel and will let you past, and what is left is the junk Bastien sold for cash, with a few sheets in it that carry designations in your own format and dates in the second column. If you want more of this sooner, Support Us in the sidebar."
 # ⚠️ CLOSED BY beat_0123 (rev 174). cap_cain_opens sets cain_named_grier, which shuts this card. Fourteenth
 # time in this game. IT IS NOT TIDINESS: the moment the next chapter's first scene fires, this card is a
 # report on a build that has already been continued. Card V opens on the same flag, so the spine never goes
@@ -20686,6 +20686,15 @@ tip        = "The Undertow does not open in the evenings now, but Sol is in ther
 when = [
   { flag = "raid_done",        op = "is_true"  },
   { flag = "cain_named_grier", op = "is_false" },
+]
+# ⚠️ GOALS ADDED beat_0165 (rev 217), AND THIS CARD HAD NONE FOR THE WHOLE OF 0.2.1'S OPENING. It is the
+# only spine card live between cap_the_lab (which ends the last release) and cap_cain_opens (two scenes
+# into this one), so it was carrying the new chapter's guidance as prose with no objective line at all.
+# ⚠️ THE GOAL IS THE CARD'S OWN CLOSER, which is the beat_0161 pattern and is what makes it safe: the
+# `To advance` frame renders only while a goal is UNMET (quests.md §6), and cain_named_grier can only
+# become true at the instant this card retires, so the blank-card trap cannot fire.
+goals = [
+  { flag = "cain_named_grier", op = "is_true", label = "Go back to your cot and let him come" },
 ]
 
 # ══ CARD V — WHOSE HAND's spine (beat_0123, rev 174). The release's Story-Goals card. ═══════════════════
@@ -20781,7 +20790,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "It took four afternoons on that bench and it came all at once. The night they took it, rather than the thing in the drawer. A theatre with the lights down, four people who were in no hurry, three trays at the head of the table, and an assistant nobody would miss for an hour who walked out through the yard door carrying two of them. You were the tray on the left. He never knew there was a you. He put it in your hand without being asked twice and told you not to tell him what it was."
-tip        = "Two things are open and they do not block each other. Cain can seat what you are carrying, but there is no lab you can walk to. He finds you, and the one place he ever finds you is the cot. Go back down to the berth and sleep, and let him. And Grier named the other one: THE RISE, a half-built Vance tower going up across the plaza from the one that threw you out, hiring readers off the street. The car will take you back up there with the face on. You still cannot walk in on your own word: you need papers, and papers are sold at the far end of the row at the market, by the woman who made your face."
+tip        = "Two things are open and they do not block each other. Cain can seat what you are carrying, but there is no lab you can walk to. He finds you, and the one place he ever finds you is the cot. Go back down to the cot and walk in. That is all it takes. And Grier named the other one: THE RISE, a half-built Vance tower going up across the plaza from the one that threw you out, hiring readers off the street. The car will take you back up there with the face on. You still cannot walk in on your own word: you need papers, and papers are sold at the far end of the row at the market, by the woman who made your face."
 when = [
   { flag  = "piece_one_held", op = "is_true" },
   { trait = "pieces_seated", subject = "player", op = "lt", value = 1 },
@@ -20917,7 +20926,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Four minutes in the book, and the case in the lining of your coat is a recording of you being made. What is on rack four now is a piece of a hull Kess stripped in the spring with eleven characters cut into the end of it, and it will sit there holding a number for as long as nobody opens it up and reads it. Sabin wants the method and the method is in how the capture was taken, not in what it says. Nobody reads a thing they already know how to copy."
-tip        = "Cain can seat it, and there is still no lab you can walk to. He finds you, and he finds you at the cot, the same as last time. Go back down to the berth and sleep on it. And keep the job: the day you stop turning up on that floor is the day somebody has a reason to wonder about the reader who signed the store book."
+tip        = "Cain can seat it, and there is still no lab you can walk to. He finds you, and he finds you at the cot, the same as last time. Go back down to the cot again. Walking in is enough. And keep the job: the day you stop turning up on that floor is the day somebody has a reason to wonder about the reader who signed the store book."
 # ⚠️ CLOSER ADDED beat_0133 (rev 183) ON A TRAIT, NOT A FLAG — pieces_seated lt 2, the same move card Y made
 # at beat_0127. The install bumps a counter that three surfaces already read (§16.2); a parallel flag would
 # be a second source of truth for one fact.
