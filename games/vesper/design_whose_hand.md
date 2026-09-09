@@ -3297,3 +3297,104 @@ with **no instrument in the repo able to detect it**. The build passes, the gate
 Only reading it against what the player has already been shown catches it. beat_0154 found its instances by
 sweeping the built HTML for wall-era strings; this one was found by a player asking why the story order did
 not make sense.
+
+---
+
+## §32 — beat_0158 (rev 209). THE RECONCILE, AND THE MEDIA-SLOT CORRECTIONS.
+
+A bookkeeping beat: no new canvases, no prose. It exists because a session's worth of TOML changes had
+shipped with no beat id, and because `beat-authoring.md`'s reconcile — which runs **first, every continue
+turn** — had not.
+
+### The retag was internally contradictory, and only four of its five changes were wrong
+
+`089461b` ("media tier retag — 5 slots corrected") did five things that pulled against each other:
+
+| change | effect |
+|---|---|
+| `rung_grier_tease_t2` → `t5` | **broke** the ladder |
+| `rung_grier_flash_t3` → `t5` | **broke** the ladder |
+| `rung_sabin_tease_t2` → `t5` | **broke** the ladder |
+| `rung_sabin_flash_t3` → `t5` | **broke** the ladder |
+| `sabin_kiss.jpg` → `sabin_kiss_t4.webm` | **fixed** a real gap |
+
+A kiss at `t4` and a downblouse tease at `t5` cannot both be right — that rates the kiss as milder than the
+look while placing it two rungs later. Sabin had **no `t4` at all** before that fifth change, so it filled a
+genuine hole. The four were reverted (7 occurrences including 3 comment references); the fifth stands.
+
+All three ladders are coherent again:
+
+| | t2 | t3 | t4 | t5 |
+|---|---|---|---|---|
+| Renner | tease | flash | grope | loop + finishes |
+| Grier | tease | flash | `grier_room_oral_t4` | loop + finishes |
+| Sabin | tease | flash | kiss, `sabin_loop_t4` | bench + finishes |
+
+### ⚠️ THE PRE-FLIGHT THAT PAID FOR ITSELF — now mandatory
+
+**Renaming a `pool_dir` silently orphans whatever is on disk.** No build error fires; the slot simply renders
+empty. The check ran one command before the rename and found **12 live clips (~7 MB)** sitting under the old
+`_t5` names. Without it they would have been stranded exactly the way an earlier slot was.
+
+**Never rename a `pool_dir` without first running `ls games/<slug>/videos/<namespace>/ | grep <name>`.**
+
+### The retag pipeline has a clean record — measured, not assumed
+
+94 slots across six retag rounds. Cross-referencing every TOML media path against disk: **29 missing, and
+only 4 of them were ever retagged** — the four deliberately emptied here. Rounds 2–4 (June–August, 89 slots
+across the cell, salvage, Mercer and Renner content) **all resolve.** Rounds 5–6 touched 5 slots, all
+Grier/Sabin, none outside this release.
+
+So the retag is not the source of missing media, and three of this session's hypotheses about it were wrong.
+The real breakdown of 28 missing: 4 emptied on purpose · 14 Grier/Sabin loop and finish pools never filled ·
+10 older debt.
+
+### `sex/colm_ruin_t4` is new content, not a broken rename
+
+Chased three times and misdiagnosed twice. It is **not** a retag casualty and **not** a rename. `a0e808d`
+relocated the Undertow's back room in the fiction, so `loop_colm_backroom.intro` gained a **second banded
+video block** for the post-relocation state. The pre-relocation twin `sex/colm_backroom_t4` is still live
+with 4 clips. `colm_ruin_t4` is simply a slot that was created and never filled — and renaming the old folder
+onto it, which was proposed, would have **stolen the working band's media**.
+
+### ⚠️ THE DRIFT CHECK CANNOT RUN ON THIS GAME
+
+`beat-authoring.md`'s reconcile asks that every `authored`/`validated` beat's `produced_canvas_ids` still
+appear in the merged TOML. This ledger carries that field on **zero of 135** plan entries — it uses a prose
+`canvases` key instead. The check therefore reports "no drift" **because it can see nothing.** That is a false
+negative, not a pass. Either backfill the field or stop citing the check as evidence.
+
+(The same failure shape bit twice more this session: a flag-chain walker whose regex matched `flag_key` and
+silently skipped `trait_key`, and an `id = "d0"` lookup that matched Mercer's drain node instead of Grier's.
+**A negative result from a search is the weakest evidence there is** — always verify the search can see what
+you are claiming is absent.)
+
+### Grier's `corruption` axis — prepared, held
+
+He has no `corruption` and nothing reads it. Declaring it now would be the **dead meter**
+`trait-design.md:155` names: *"a meter reserved for a later act is a dead meter today."* So it ships in the
+same beat as the bands that read it, not before.
+
+The model fits him — `trait-design.md:46`'s honeypot row (`relation` = ACCESS, `corruption` = SEDUCTION, the
+player is the still point and **he** falls) names *"an owned weapon (Vesper's Renner)"* as its exemplar. But
+`:48` says reserve the two-meter model for **1–2 core arcs**, and Grier would be the **fourth** after Renner,
+Calloway and Sabin. A deliberate yes, not drift.
+
+### Also in this beat
+
+- **Four rung slots emptied** at LO's call: picks cleared (`media_options.json` 108 → 105), 12 clips moved to
+  `.find-media/_removed_2026-09-09/`, **`options` (236) and `queries` left intact** so every stocked
+  candidate and the whole search history survive. The shelves stay keyed to the old `_t5` names on purpose —
+  the corrected slots start clean rather than inheriting candidates hunted against the wrong heat.
+- **`scenes/wren_in_the_frame.jpg` cut** from `cap_install_one`, and the comment at `:17237` that justified a
+  later scene having no image ("one asset, one block") **restamped** — that argument dies with the asset, and
+  leaving it would have invited a future re-add for an expired reason. Same class as §28 and §31.
+- **`next_up` carried two duplicate `beat_0141` rows**, the first naming a pool that no longer exists.
+  Collapsed to one carrying the current 28-slot list.
+
+### Still open, and not this beat's to close
+
+The two flash rungs' **prose and media descriptions**. The shipped text still says *clothed* and
+*avoid: nudity*, which does not match the footage now in hand — the block and the paragraph have to land
+together or the page contradicts itself. Grier's opening line *"She does not bother with the buttons"*
+specifically breaks if the act is no longer about buttons.
