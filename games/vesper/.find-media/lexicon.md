@@ -1372,3 +1372,145 @@ retail-PLACE noun: it returns shop interiors, racks and piles, never one garment
 garment-as-object corpus is exclusively NEW-PRODUCT stock. **A worn second-hand dress isolated
 as an object does not exist as a photograph at this framing** — provenance is not a property a
 product shot can carry. Eight of that slot's ten queries were condemned proving it.
+
+---
+
+# The DOWNBLOUSE / clothed-tease corpus — measured 2026-09-09
+
+Four slots (`rung_grier_tease_t5`, `rung_grier_flash_t5`, `rung_sabin_tease_t5`,
+`rung_sabin_flash_t5`), all the same beat family: a woman clothed, blouse open, leaning or
+bending so her cleavage is on show, a seated man watching. All four say *"Avoid: nudity,
+avoid: sex."* This is a **retrieval** record, not a correctness one.
+
+## 🔴 The structural finding — the watching man does not exist here
+
+| term | what it does | evidence | verdict |
+|---|---|---|---|
+| `man watching` | makes the **VIEWER** the man — the grid becomes POV JOI | `femdom-pov.me` went 3 → 18, top host by 2× | **CONFIRMED unbuyable** |
+| `seated man` | loses the query outright | `downblouse tease seated man office gif` → rejected at the gate, stocked 0 | **CONFIRMED.** Merely NAMING him is enough |
+| (no man token at all) | `femdom-pov.me` still arrives unasked | **5 sightings across 4 slots**, on chips with no man/watching token | **The corpus is structurally solo/POV** |
+
+**The downblouse corpus does not contain a second person in frame.** Four independent
+confirmations. Do not spend a fifth query on it — the beat's "him seated and looking" has to be
+carried by prose. `femdom-pov.me` is not drift: "DownBlouse Jerk" is simply a large share of
+the indexed corpus, and its tiles are on-beat clothed downblouse despite the host name.
+
+## Occupation-naming-HER — a strong lever, but NOT uniformly safe
+
+Naming the woman's role cannot fire the identity reversal `old man`/`handyman` cause, and it
+smuggles in the geometry for free.
+
+| term | verdict |
+|---|---|
+| `waitress`, `bartender`, `secretary`, `teacher`, `nurse` | ✅ **CONFIRMED SAFE** — ~100% tease-aggregator hosts, zero Tenor, on-beat 70–90%. `nurse` is the one that buys a **bright over-lit room** directly |
+| `maid` + `cleaning` | ✅ **CONFIRMED, and the best find of the wave** — `cleaning` is the motion verb this family was missing. It encodes the downward reach without going near the poisoned `forward` |
+| 🔴 `barmaid` | **POISON.** It has its own dominant *bottomless* series (Jeny Smith) — 7 of the first 15 tiles were that one set. Lower-body nudity, wrong body region, and the beat forbids nudity. **Rejected twice, independently** |
+
+**The family is not uniformly safe. Check each occupation on the grid before trusting it.**
+
+## Motion and viewpoint
+
+| term | verdict |
+|---|---|
+| 🔴 `bending forward` / `leaning **forward**` | **POISON** — fitness/sports posture. Killed this exact vocabulary once; dropping `cleavage` (the obvious suspect) made it *worse* |
+| ✅ `leaning over`, `leaning in`, `bending over`, `reaching over` | **SAFE.** ⚠️ **This narrows the poison to the token `forward`, not to "lean"/"bend"** — a 2026-09-09 correction to the earlier note |
+| ⚠️ `bending over` | safe on crowd, but pays a **~25% upskirt / bare-ass tax** — wrong end of the body for a cleavage beat |
+| ✅ **`looking down her shirt`** | **names the CAMERA rather than her body.** Sits natively in the corpus and returned an almost fully-new url set against a 196-option shelf (3 dedupes). **The best top-up route for an already-crowded downblouse slot** |
+| 🔴 `pouring drink` | **Tenor turf** — a huge reaction-gif phrase; it ate the query (38/83 Tenor). The pour geometry is not buyable through the verb |
+| 🔴 `voyeur` | ~25% upskirt/ass drift |
+
+## Setting — a SURFACE is buyable, a ROOM is not
+
+| term | verdict |
+|---|---|
+| ✅ `kitchen counter`, `office`, `desk` | **work — they are BODY-POSITION surfaces.** They say where her torso is, which the corpus indexes |
+| 🔴 `garage` | **INERT.** Anchor and crowd held, and **not one tile showed a garage.** The token bought nothing |
+| 🔴 `dim filthy workshop`, `bright glass-walled room` | not retrievable. Buy the setting through the woman's JOB, not the room |
+
+## The ballast rule — the sharpest single measurement of the wave
+
+Two queries differing by **ONE token**, same slot:
+
+| query | Tenor urls | outcome |
+|---|---|---|
+| `kitchen counter downblouse reaching over **cleavage** gif` | **25** | rejected |
+| `kitchen counter downblouse reaching over **amateur** gif` | **0** | stocked 46/46 |
+
+**A tease query has no hard act word holding it up, so the anti-studio modifier does that job.
+`amateur` is not optional on this vocabulary.** (Contrast a `gangbang` query, where the anchor
+is heavy enough that `amateur` can be dropped with no harm.)
+
+## ⚠️ Sharpened, same wave — the occupation is LOAD-BEARING, not merely safe
+
+A controlled result on `rung_sabin_tease_t5`. Chip 2 carried the **full** kit —
+`downblouse` + `tease` + `amateur` ballast — and still collapsed: `lab bench downblouse tease
+amateur gif` put **femdom-pov.me at #2 with 27%** of the harvest and the grid was branded JOI.
+The only thing it lacked versus the two chips that landed was **an occupation naming her**.
+
+So the rule is stronger than "occupation buys the geometry for free":
+
+> **The occupation is what holds a tease query up.** `downblouse` + `amateur` alone is not
+> enough ballast. Without a human noun the query has no centre, and Google reallocates the
+> weight to the corpus's own centre of gravity — the DownBlouse Jerk studio.
+
+And a room token is worse than inert:
+
+| room token | what happened |
+|---|---|
+| `garage` | crowd held, **zero** tiles showed a garage — bought nothing |
+| `lab bench` | **collapsed the query** into branded JOI (femdom-pov #2, 27%) |
+
+**A room token contributes no signal, so its weight is reallocated to whatever the corpus
+centres on.** Naming the room is not neutral — it is a hole in the query.
+
+Corollary, measured on both ends of the brightness axis: **"bright over-lit room" and "dim
+filthy workshop" are equally unbuyable.** Bright arrives incidentally via `office` / `nurse`
+framing; it is never bought by naming it.
+
+**Still formally untested:** `bench` alone as a surface token — the one probe confounded it
+with `lab`.
+
+## Wave 5, 2026-09-09 — `standing` is buyable WHEN GUARDED, and the room stays unbuyable
+
+Two top-up agents on the flash rungs, after the shelves were re-keyed off the reverted `_t5`
+tags. Both slots were already 5 authored queries deep, so these were genuine new angles, not
+rewords.
+
+### The correction: `standing` is not poison here
+
+The skill's global list has `standing` alone as art-nude/stock vocabulary that outvotes even a
+nudity word (measured 60/105 stock + wiki + gallery hosts on an earlier run). On this
+vocabulary it does not, provided both guards are present:
+
+| query | Tenor | stock/wiki/gallery hosts | verdict |
+|---|---|---|---|
+| `downblouse standing over table amateur gif` | 5 / 68 | **0** | stocked 41 |
+
+`downblouse` + `amateur` beside it held the query on the aggregators. The cost was not stock
+photography at all — it was a ~12-url femdom/upskirt tail (`femdom-pov.me` 8, two `pantiesless`
+hosts 4), which the grid glance cleared: no upskirt and no POV-JOI on the first screen.
+
+**So "her standing over him" — the half of the sabin flash beat nobody had hunted — is
+retrievable.** The general warning about `standing` stands for queries that lack this kit.
+
+### Occupations, current ledger for the tease/flash family
+
+| lands | spent and dead |
+|---|---|
+| `waitress`, `hostess`, `cleaner`, `secretary`, `teacher`, `nurse`, `bartender`, `maid`, `stewardess` | `barmaid` — **both** attempts rejected at the gate |
+
+`hostess` is the pick for Grier's room: it carries the bar register in one token without
+`barmaid`'s failure. `stewardess` is the pick when the beat needs her *standing over seated
+people* — serving in an aisle buys that geometry without spending the posture word at all,
+which is the cheaper route to the same composition as the guarded `standing` above.
+
+### Two things that are now confirmed, not suspected
+
+**The seated man is unbuyable — fifth and sixth confirmations.** `femdom-pov.me` surfaced
+*unasked* on the `cleaner` chip (6 urls) and again on `standing over table` (8), on queries that
+named no second person at all. The downblouse corpus turns any second body into either the
+viewer or a CFNM/JOI frame. Stop testing it; a human pick has to accept solo composition.
+
+**The room is unbuyable at both ends, restated with new evidence.** `cleaner` bought the
+chore posture for Grier's dim filthy workshop and returned bright domestic interiors anyway.
+Occupation tokens buy geometry, never grime and never light.
