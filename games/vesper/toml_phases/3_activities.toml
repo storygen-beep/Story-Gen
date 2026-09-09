@@ -3836,31 +3836,46 @@ time_progression_minutes = 5
 # the one who names it, because he is the only person in this game who tells her the whole price.
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
 
-# ── kess_makes_the_blank — the decoy. Repeatable shop screen @kess_berth, pri 4. ──────────────────────
-# ⚠️ REPEATABLE AND OWNERSHIP-SHAPED, the activity_buy_papers pattern (:3085). A one-shot that costs coin is
-# a trap: a player who cannot afford it when it fires has burned the scene. Repeatable + a `decoy_made
-# is_false` gate means she can come back, and it closes itself the moment it has done its job.
-# ⚠️ PRESENCE IS A CONDITION, NOT requires_npc. The render-bucket guard flags requires_npc WITHOUT npc= as a
-# silent drop to a flat solo link, and this IS a solo activity that happens to need him at the bench. The
-# npc_at_location clause does the gating and the guard stays clean. (It is also the clause beat_0130 proved
-# an auto-fire needs anyway — requires_npc is not read on that path at all.)
+# ── kess_makes_the_blank — the decoy. TRIGGERLESS since beat_0163 (rev 215); a rung on hub_kess_berth. ──
+# ⚠️ IT USED TO CARRY ITS OWN TRIGGER AND RENDER AS A BARE TEXT LINK, which is what LO found in play. A
+# canvas with no npc= field goes to the solo-link bucket (v2.py:4760), so the swap's one shop screen sat in
+# a list under Kess's own portrait card instead of inside it.
+# ⚠️ AND THE OBVIOUS FIX WOULD HAVE COST MORE THAN IT BOUGHT. Adding npc = "npc_kess" does not add a second
+# card: the portrait path keeps exactly ONE canvas per NPC, highest priority wins (v2.py:4739,
+# `picks[slug] = npcAffordable[slug][0]`). This was pri 4 and hub_kess_berth is pri 3, so the blank would
+# have EATEN his hub for the whole swap arc — and the hub is the screen that tells her the feed line has
+# lapsed and points at the cot. One lost surface traded for another.
+# ⚠️ SO IT COMES OFF THE LOCATION PAGE AND BECOMES A RUNG on hub_kess_berth, one choice up from
+# "Give him the part." — the kess_install_part route (5_scenes:6947), same bench, same man.
+# ⚠️ BUT NOT TRIGGERLESS, AND kess_install_part IS NOT THE PRECEDENT FOR THAT HALF. Deleting the trigger
+# outright HARD-FAILS the flag-chain validator (v2.py:12454): this canvas SETS decoy_made, and
+# activity_into_the_store requires it, so the setter must carry a location. kess_install_part gets away
+# with having no trigger only because everything it sets is a TRAIT (part_held, part_installed) and the
+# validator checks flags. So the trigger stays, and substitution_only takes it out of every render path:
+# the auto-fire selector (v2.py:4698), the portrait selector (:4728) and the solo selector (:4759) all
+# skip it, and it cannot fall through to a greyed blocked row either, because that branch needs a
+# CANVAS-level cost (:5385) and the 45 coin sits on a choice inside instead.
+# ⚠️ THE npc_at_location CLAUSE IS DROPPED, NOT MOVED. The hub already carries requires_npc = "npc_kess",
+# which is the same 10:00-22:00 window; restating it on the rung would be a second source of truth.
 # ⚠️ FORTY-FIVE COIN, against the credential's sixty. The day job pays fifteen, so it is three shifts or one
-# night of something else — deliberately affordable without the floor, because the floor is optional.
+# night of something else — deliberately affordable without the floor, because the floor is optional. The
+# cost stays on the choice INSIDE this canvas, so nothing about the money or the affordability filter moved.
 # ⚠️ SHE TELLS HIM THE TRUTH. Kess is the one person in this game who has never been handled, and the beat
 # where he asks what it has to survive and she answers plainly is what earns his warning at the end of it.
 [[canvases]]
 id          = "kess_makes_the_blank"
 name        = "Something to leave behind"
-description = "beat_0132 (rev 182), WHOSE HAND. Wren-solo @kess_berth. Repeatable, pri 4, gated sabin_drains_done gte 1 + decoy_made is_false + npc_kess present. THE DECOY: a blank of the same physical type, carrying the same eleven characters, that will hold a temperature — which is the entire specification, because beat_0131's drain established that a temperature is the only thing anybody in that building checks. 45 coin, 120 min, SETS decoy_made. She tells him what it is for; he builds it better than she asked and then tells her exactly how long it lasts, because he is the only person in this game who quotes the whole price."
+description = "beat_0132 (rev 182), moved into the hub at beat_0163 (rev 215), WHOSE HAND. Wren-solo @kess_berth. SUBSTITUTION_ONLY — renders on no page; reached only from hub_kess_berth's 'Have him make you a blank.' rung, gated sabin_drains_done gte 1 + decoy_made is_false (presence comes from the hub's own requires_npc). It keeps a located trigger because it SETS decoy_made and the flag-chain validator hard-fails a flag whose setter has no location. THE DECOY: a blank of the same physical type, carrying the same eleven characters, that will hold a temperature — which is the entire specification, because beat_0131's drain established that a temperature is the only thing anybody in that building checks. 45 coin, 120 min, SETS decoy_made. She tells him what it is for; he builds it better than she asked and then tells her exactly how long it lasts, because he is the only person in this game who quotes the whole price."
 [canvases.trigger]
 location      = "kess_berth"
 is_repeatable = true
 priority      = 4
 is_active     = true
+# The trigger exists for the VALIDATOR, not for the player — see the substitution_only note above.
+substitution_only = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sabin_drains_done", operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key  = "decoy_made",        operator = "is_false" },
-  { type = "npc_at_location", location_id = "kess_berth", npc_id = "npc_kess", operator = "is_present" },
 ] }
 
 [[canvases.nodes]]
@@ -3987,52 +4002,60 @@ time_progression_minutes = 5
 # no bench. She stays in. He reads it, because reading her is the only thing he has ever done.
 # ⚠️ THAT IS ALSO THE THEME ARRIVING AS A MECHANIC. The price is being somewhere that stopping is all there
 # is left, and the way she buys it is by stopping. It costs her two days and the card says so.
+# ⚠️ SPLIT IN TWO AT beat_0163 (rev 215) — CARD A IS THIS ONE, CARD B IS activity_ask_him_back BELOW. The
+# canvas shipped as ONE card named "Stop for two days" with both trips banded inside a single node, and LO
+# read the label in play and could not tell what it did. Three separate defects, and none of them fixable
+# in place:
+#   1. The name stated a PRICE, not an act. Every other card at the cot names a verb — Wash, Train,
+#      A night on the feed line.
+#   2. The clock was a lie. It charged 90 minutes and said two days.
+#   3. Band B contradicted the label in its own first line — "She does not have to stop this time."
+# The exit block (clock AND door) is per NODE and both bands were [group]s inside `base`, so one name, one
+# cost, one exit. Two names or two costs means two canvases.
+# ⚠️ THE SPLIT AXIS IS NOT INVENTED — the QUEST CARDS already split on it. Card AH (5_scenes:13942) fires on
+# price_named + capstone_failed is_false and shouts "the only answer you have is to STOP, at the cot"; card
+# AI (5_scenes:13966) fires on capstone_failed is_true and shouts "Go back to the cot and ASK HIM. Out loud,
+# in words." Each card below takes its name from its own tip's shouted word, so no quest card needed editing
+# and the guidance surface and the menu now say the same thing.
+# ⚠️ THIS ONE KEEPS THE SHIPPED id. Renaming a display name is save-safe; renaming an id is not, and this
+# canvas is live in 0.2.x saves. Card B is a new id, which is extend-only.
 # ⚠️ REPEATABLE, NOT A ONE-SHOT. A one-shot that costs two days is a scene a player can lose to a mistimed
-# click. Gated capstone_failed is_false for now — the SECOND trip is beat_0136's, and it is a different act
-# and gets its own band there rather than a silent reuse of this one.
+# click.
+# ⚠️ TWO REAL DAYS SINCE beat_0163 (rev 215) — LO's call, and it is the third defect's actual fix. It was
+# 90 minutes. advanceTime rolls days in a while loop (v2.py:5698), so 2880 always advances exactly two, and
+# only feed_line_days decays daily (1_metadata_and_locations:315) — so stopping costs her two days off
+# Kess's time on the key, which is the price the prose already says she pays. She comes back owing him.
+# Nothing else in the game reads the day counter: the one days_since_flag gate (5_scenes:858) only gets
+# MORE satisfied. It is by a wide margin the biggest clock jump in the game; the next is 540, a night.
 # MEDIA: none. It reuses the room she is standing in, and the point of it is that nothing happens.
 [[canvases]]
 id          = "activity_say_yes"
-name        = "Stop for two days"
-description = "beat_0135 (rev 185), WHOSE HAND. Wren-solo @the_cot. Repeatable, pri 4, gated price_named is_true + capstone_failed is_false. HOW SHE ANSWERS A MAN WHO ASKED HER NOTHING: she has no way to reach Cain, so she does the only thing available and stops — no shifts, no tower, no lane — and he reads it. The theme arriving as a mechanic. Costs two days of clock. Exits type=location into room_no_name, which is nav-invisible and reachable by no other route."
+name        = "Stop, and stay in."
+description = "beat_0135 (rev 185), split and re-clocked at beat_0163 (rev 215), WHOSE HAND. Wren-solo @the_cot. CARD A of two — repeatable, pri 4, gated price_named is_true + vesper_named is_false + capstone_failed is_false. HOW SHE ANSWERS A MAN WHO ASKED HER NOTHING: she has no way to reach Cain, so she does the only thing available and stops — no shifts, no tower, no lane — and he reads it. The theme arriving as a mechanic. Costs 2880 minutes, two real days, which is two days off feed_line_days. The name echoes card AH's tip verbatim ('the only answer you have is to STOP, at the cot'). Exits type=location into room_no_name, which is nav-invisible and reachable by no other route."
 [canvases.trigger]
 location      = "the_cot"
 is_repeatable = true
 priority      = 4
 is_active     = true
-# ⚠️ TRIGGER WIDENED AT beat_0136 (rev 186) AND THE NODE BANDED. It was gated capstone_failed is_false
-# because the second trip did not exist yet; it does now, and it is A DIFFERENT ACT rather than a silent
-# reuse of the first. Band A is her ANSWERING a man who asked her nothing. Band B is her ASKING, which she
-# has never done in this game for anything, and it costs her one night instead of two because he told her
-# there would be an again and he does not say things twice.
-# ⚠️ IT NOW CLOSES ON vesper_named, not on capstone_failed. She never goes back to that room after the fire.
+# ⚠️ capstone_failed is_false IS BACK ON THE TRIGGER, where it sat before beat_0136 widened it. The band it
+# used to select is now this whole canvas, and card B carries the is_true side. vesper_named stays as the
+# closer on both: she never goes back to that room after the fire.
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "price_named",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "vesper_named", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "price_named",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vesper_named",    operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_false" },
 ] }
 
 [[canvases.nodes]]
 id   = "base"
-name = "Stop for two days"
+name = "Stop, and stay in."
 blocks = [
-  # BAND A — the first trip. She is answering a question he did not ask.
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_false" },
-    ] } }, blocks = [
-    { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
-    { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
-    { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
-  ] },
-  # BAND B — the second trip. She is asking, which she has never done for anything.
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_true" },
-    ] } }, blocks = [
-    { type = "paragraph", content = "She does not have to stop this time. He said again, and he is not a man who says a thing twice, so all she has to do is be in the room on a night he is likely to look. She is in the room on the first one." },
-    { type = "paragraph", content = "He comes in and does not sit down and does not take his coat off, and he waits, because this time there is a question on the floor between them and it is hers and not his." },
-    { type = "dialog", props = { speaker = "player" }, content = "Take me back." },
-    { type = "thought_bubble", props = { speaker = "player" }, content = "Three words. She has spent nine years getting things out of men without ever once asking for anything, and it turns out asking takes about a second and a half." },
-  ] },
+  # The first trip. She is answering a question he did not ask. Band A verbatim, group wrapper removed —
+  # the trigger selects it now.
+  { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
+  { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -4040,7 +4063,51 @@ text = "Go with him."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "room_no_name"
-time_progression_minutes = 90
+time_progression_minutes = 2880
+
+# ── activity_ask_him_back — CARD B of the beat_0163 (rev 215) split. SHE ASKS, OUT LOUD. ──────────────
+# ⚠️ NEW CANVAS, NOT A RENAME. It carries beat_0136's band B verbatim, lifted out of activity_say_yes's
+# node with its group wrapper removed. Nothing here was rewritten; it was moved so it could have its own
+# name and its own clock, which is what the split was for.
+# ⚠️ IT IS A DIFFERENT ACT AND ALWAYS WAS. Card A is her ANSWERING a man who asked her nothing. This is her
+# ASKING, which she has never done in this game for anything, and the old shared label — "Stop for two
+# days" — contradicted its own opening line, because she does not stop this time.
+# ⚠️ ONE NIGHT, NOT TWO DAYS. 540 minutes, the same as a night on the feed line, because he told her there
+# would be an again and he does not say things twice: all she has to do is be in the room on a night he is
+# likely to look, and she is in the room on the first one.
+# ⚠️ THE NAME ECHOES CARD AI'S TIP (5_scenes:13966) — "Go back to the cot and ASK HIM. Out loud, in words."
+# MEDIA: none, the same as card A.
+[[canvases]]
+id          = "activity_ask_him_back"
+name        = "Ask him, out loud."
+description = "beat_0136 (rev 186), lifted into its own canvas at beat_0163 (rev 215), WHOSE HAND. Wren-solo @the_cot. CARD B of two — repeatable, pri 4, gated price_named is_true + vesper_named is_false + capstone_failed is_true. She does not stop this time; she is in the room on the first night he is likely to look, and she asks him in three words, which she has never done in this game for anything. 540 minutes, one night, against card A's two days. The name echoes card AI's tip verbatim. Exits type=location into room_no_name, the same door card A uses."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "price_named",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vesper_named",    operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "capstone_failed", operator = "is_true"  },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ask him, out loud."
+blocks = [
+  { type = "paragraph", content = "She does not have to stop this time. He said again, and he is not a man who says a thing twice, so all she has to do is be in the room on a night he is likely to look. She is in the room on the first one." },
+  { type = "paragraph", content = "He comes in and does not sit down and does not take his coat off, and he waits, because this time there is a question on the floor between them and it is hers and not his." },
+  { type = "dialog", props = { speaker = "player" }, content = "Take me back." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Three words. She has spent nine years getting things out of men without ever once asking for anything, and it turns out asking takes about a second and a half." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "room_no_name"
+time_progression_minutes = 540
 
 # ── activity_leave_somewhere — the way back. Repeatable, pri 1, UNCONDITIONAL. ────────────────────────
 # ⚠️ THE HOUSE RULE, FIFTH TIME: room_no_name is nav-invisible, so its passage carries an EMPTY navigation
@@ -4079,17 +4146,32 @@ time_progression_minutes = 60
 # ⚠️ HE REFUSES FIRST, AND THAT IS THE POINT. Grier's own line at beat_0138 is that Cain has not been down
 # that lane once in nine years, not even to see whether the man was still breathing. Getting him there is
 # the whole ask, and he does it because she asked and for no other reason he is willing to give.
-# ⚠️ REPEATABLE, gated third_located + two_men_done is_false. Nothing costs coin here, but a one-shot on the
-# release's final on-ramp is a scene a mistimed click can lose, and activity_say_yes set the precedent.
+# ⚠️ AUTO-FIRE ONE-SHOT SINCE beat_0163 (rev 215), AND IT WAS REPEATABLE FOR THE WRONG REASON. The old
+# comment here read "a one-shot on the release's final on-ramp is a scene a mistimed click can lose" — true
+# of a CLICKABLE one-shot, and the whole objection dies when the canvas fires by itself. LO's read in play
+# was that the release's last on-ramp rendered as an unremarkable text link in a list of six, which it did:
+# no npc= field means the solo-link bucket (v2.py:4760), and Cain can never have a portrait card because he
+# has no schedule row and never will (1_metadata_and_locations:691).
+# ⚠️ THE ROOM ALREADY HAS SIX OF THESE. cap_the_wait, cain_comes_for_her, cain_comes_again,
+# cain_comes_third, cap_the_price and cap_the_question are all @the_cot, one-shot, priority 10. The auto-fire
+# path never reads requires_npc, which is exactly why a schedule-less speaker works in it.
+# ⚠️ PRIORITY 9, NOT 10, AND ON PURPOSE. cap_the_question (gated vesper_named) can be live at the same
+# time as this one and both are one-shots; a tie at 10 makes which-fires-first arbitrary. At 9 the six
+# established Cain beats always drain first and this fires on the next visit. Still capstone shape.
+# ⚠️ IT NOW SETS cain_came_along, AND THAT IS THE REAL REPAIR. The exit used to be a bare door, so
+# cap_the_two_men — the release's LAST SCENE — fired on third_located alone. activity_go_to_grier
+# (:2986) is repeatable and gated cain_named_grier by itself, so a player could walk back down that lane
+# unaccompanied and get the two-men scene with Cain standing in it, never having asked him. The whole
+# on-ramp was skippable. The flag is the gate that closes it.
 # MEDIA: none. It is her room and a walk, and the image belongs to the room they are walking to.
 [[canvases]]
 id          = "activity_ask_him_to_come"
 name        = "Ask him to come with you"
-description = "beat_0139 (rev 189), WHOSE HAND. Wren-solo @the_cot. Repeatable, pri 4, gated third_located is_true + two_men_done is_false. THE LAST ON-RAMP, and it is an ASK: every pickup is a spent one-shot and card AL ends on 'put them in one'. He refuses first — he has not been down that lane in nine years — and then goes, because she asked. Exits type=location into grier_room, 120 min."
+description = "beat_0139 (rev 189), converted to auto-fire at beat_0163 (rev 215), WHOSE HAND. Wren-solo @the_cot. AUTO-FIRE ONE-SHOT, pri 9, gated third_located is_true + two_men_done is_false. THE LAST ON-RAMP, and it is an ASK: every pickup is a spent one-shot and card AL ends on 'put them in one'. He refuses first — he has not been down that lane in nine years — and then goes, because she asked. Exits type=location into grier_room, 120 min, SETS cain_came_along, which cap_the_two_men now requires — without it the finale fired whether or not she ever asked him."
 [canvases.trigger]
 location      = "the_cot"
-is_repeatable = true
-priority      = 4
+is_repeatable = false
+priority      = 9
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "third_located", operator = "is_true"  },
@@ -4114,3 +4196,9 @@ text = "Take him down the lane."
 destinationType          = "specific"
 locationId               = "grier_room"
 time_progression_minutes = 120
+# ⚠️ THE FLAG THAT MAKES THE ASK MANDATORY (beat_0163, rev 215). cap_the_two_men reads it; see the header
+# comment above for why the finale used to fire without it. flagEffects belongs INSIDE the config table on
+# a type="location" exit — the_third (5_scenes:15347) is the shape.
+flagEffects = [
+  { targetType = "player", flag = "cain_came_along", op = "set" },
+]

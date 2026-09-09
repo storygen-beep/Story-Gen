@@ -885,9 +885,17 @@ beauty     = 0
 corruption = 0
 
 # THE TOWER COVER (beat_0122, rev 174) — WHOSE HAND. What she wears onto a research floor at The Rise.
-# ⚠️ NO `type`, DELIBERATELY — cover_stranger's shape, not cover_analyst's. The player-portrait axis keys on
-# the `face_worn` FLAG since beat_0116, so a `type` here would be an outfit-rule orphan the build warns
-# about. Gates key on the item id (`clothing_item cover_research equipped`), never on type.
+# ⚠️ `type` ADDED AT beat_0159, AND THE NOTE THAT USED TO BE HERE WAS THE DEFECT. It read: "NO `type`,
+# DELIBERATELY — cover_stranger's shape, not cover_analyst's... a `type` here would be an outfit-rule orphan
+# the build warns about." The premise was right and the conclusion was backwards: a type with no rule is an
+# orphan, so the answer is to write the RULE, not to leave the garment typeless. Without one it matched no
+# outfit rule, fell through to the face_worn catch-all, and wore the second-hand kit's portrait on the
+# research floor — LO, playing it: "on getting the lab outfit the wren portrait doesn't change."
+# ⚠️ THE TYPE IS PORTRAIT-ONLY AND CHANGES NOTHING ELSE. Every gate in the game reads this item by ID
+# (`clothing_item cover_research equipped`, 3_activities:3514, :3630, :3752, :3935), never by type, and
+# equipped state is stored by id — so this is save-safe on a shipped game (save-safety.md: adding a field is
+# an ADD, and the id, the slot and the name are all untouched).
+# ⚠️ ITS RULE MUST STAY ABOVE THE face_worn CATCH-ALL in 0_systems_spec — the resolver breaks on first match.
 # ⚠️ SAME `dress` SLOT as the other three covers, which is the point: equipItem replaces whatever is in the
 # slot, so putting this on takes the second-hand kit off and vice versa. One cover at a time.
 # ⚠️ NO `initial` — she does not own it, and NO GRANT IS AUTHORED IN THIS BEAT. The grant lands at
@@ -903,6 +911,7 @@ corruption = 0
 id         = "cover_research"
 name       = "Research-floor kit"
 slot       = "dress"
+type       = "cover_research"               # portrait axis ONLY: the research-floor face (own outfit rule)
 image      = "clothing/cover_research.jpg"
 beauty     = 0
 corruption = 0
