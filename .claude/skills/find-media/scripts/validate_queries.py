@@ -66,6 +66,7 @@ from scene_semantics import (  # noqa: E402,F401
     ANIMATED_EXTENSIONS,
     ANIMATED_KEYWORDS,
     BORDERLINE_TIERS,
+    LOWEST_AUTHORED_TIERS,
     NON_CANVAS_TYPES,
     NSFW_TIERS,
     RATING_BORDERLINE,
@@ -232,6 +233,26 @@ def check_tier_alignment(query: str, tier: str) -> tuple[bool, list[str]]:
 
     if tier in SFW_TIERS and has_sexual:
         issues.append("tier_mismatch:sfw_query_has_sexual_term")
+
+    # ⚠️ t2/t3 moved out of SFW_TIERS on 2026-09-09 (LO's "a tease is never SFW" ruling).
+    # Without this branch they would land in NO branch at all — the SFW rule above is
+    # SFW_TIERS-only and every rule below is NSFW_TIERS-only, so the move would have
+    # silently STOPPED checking the tease tiers instead of checking them correctly.
+    # Measured before this branch existed: t2 `blowjob gif` went from one issue to zero.
+    #
+    # The rule is the mirror of the SFW one rather than a copy of the NSFW ones: a tease
+    # beat must not carry a HARD act word (that is a t5 beat wearing a t2 tag), but it is
+    # also never required to carry one — which is why the NSFW `no_act_anchor` rule stays
+    # NSFW-only. `cleavage`, `downblouse`, `tease` are the vocabulary here, and none of
+    # them is in ACT_ANCHORS.
+    #
+    # ⚠️ LOWEST_AUTHORED_TIERS, not BORDERLINE_TIERS — t4 must stay exempt. t4 is the
+    # makeout/oral band, where a hard act word is CORRECT: vesper's `sex/grier_room_oral_t4`
+    # legitimately queries `kneeling blowjob older man in armchair`. Scoping this to the
+    # whole borderline set flagged that beat twice on the first run. t4's exemption predates
+    # this branch and is stated at the `no_act_anchor` rule below.
+    if tier in LOWEST_AUTHORED_TIERS and has_act_anchor:
+        issues.append("tier_mismatch:tease_query_has_hard_act_word")
     # For the vanilla branches, "has an act word" must consult BOTH lists: `cumshot`, `bj`,
     # `anal`, `deepthroat` live only in ACT_ANCHORS, so has_sexual alone calls a
     # cumshot query act-less. (has_sexual keeps its original narrow job in the SFW branch
