@@ -23423,11 +23423,24 @@ flagEffects = [
 # ⚠️ THE BAND EDGES ARE THE RUNG UNLOCKS — 6 / 12 / 20 — so the prose moves on the same visit a new choice
 # appears. Same arithmetic as hub_grier, and that is deliberate: a player who learned that rhythm one NPC
 # ago should not be re-taught it. THE TWO LADDERS DIFFER IN REGISTER, NOT IN NUMBERS.
-# ⚠️ EVERY RUNG EXITS TO the_waterfront — OUT OF THE BUILDING, not back to the floor. Exiting to
-# the_rise_floor would leave her one pri-5 card and five minutes from the next rung on the same evening,
-# which collapses the ladder into one night. That is the failure hub_grier's rungs were routed away from,
-# and here the door up is cheaper than Grier's walk, so the routing has to do more work. The descent is
-# folded into the minutes on each exit.
+# ⚠️ EVERY RUNG EXITS TO sabin_lab — REVERSED AT beat_0166 (rev 218), LO's call, AND THE OLD ROUTING WAS A
+# COPIED TARGET. Every rung used to land at the_waterfront, and the comment here defended it as a throttle:
+# exiting to the_rise_floor would leave her one pri-5 card and five minutes from the next rung, collapsing
+# the ladder into one night. The reasoning was right and the arithmetic was not. Costed properly, the ride
+# back is 30 minutes (activity_travel_to_spire), spire_plaza -> the_rise_floor is a NAV CARD and free, and
+# "Four floors up" is 5: 35 minutes. At 60 + 35 a full seven-rung climb is 11.1 hours against his
+# 11:00-22:00 window, so the eject bought ONE in-game day and charged a cross-city teleport on every click
+# to do it.
+# ⚠️ AND IT WAS COPIED FROM A CASE WHERE IT IS CORRECT. hub_grier's rungs return to grier_room and his LOOPS
+# exit to the_waterfront — which is right, because grier_room hangs off the waterfront and that is simply
+# the street outside his door. sabin_lab is four floors up a Vance tower at the SPIRE. The same target that
+# means "step outside" for Grier means "cross the city" here.
+# ⚠️ SO THE LADDER IS UNTHROTTLED NOW AND THAT IS A KNOWN, ACCEPTED TRADE (option A, LO). The rungs cost
+# nothing but time — no coin, no Charge, no day cap — so a player who pushes can climb 0 to 22 in one
+# afternoon. The throttle that was considered and REJECTED was max_triggers_per_day on this canvas:
+# loop_sabin_lab and loop_sabin_finisher are both triggerless and reached only through "Clear the bench.",
+# so a day cap here would also cap the sex loop AND the drain, and a player who came up without a charged
+# drain would burn a whole day. If a throttle is ever wanted it belongs on the six RUNGS alone.
 # ⚠️ NO DAY CAP. The trip up and his 11:00-22:00 window are the throttle, as with Grier.
 # MEDIA: two new slots (scenes/sabin_after_eight.jpg, scenes/sabin_kiss_t4.webm) and one new pool
 # (sex/sabin_bench_t5). One asset, one block.
@@ -23581,10 +23594,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 2, clamp = true },
@@ -23612,10 +23625,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 3, clamp = true },
@@ -23675,10 +23688,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation",   op = "add", value = 3, clamp = true },
@@ -23731,10 +23744,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation",   op = "add", value = 4, clamp = true },
@@ -23761,10 +23774,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 60
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 4, clamp = true },
@@ -23820,10 +23833,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 90
 effects = [
   { targetType = "npc", npcId = "npc_sabin", trait = "relation", op = "add", value = 4, clamp = true },
@@ -24244,10 +24257,10 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Down and out."
+text = "Leave it there."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "sabin_lab"
 time_progression_minutes = 0
 
 # ═══ beat_0132 (rev 182) — WHOSE HAND beat 11. PIECE TWO — THE SWAP. ══════════════════════════════════
