@@ -152,14 +152,17 @@ when  = { worn_type = "cover_analyst" }
 # with no `type`, so it matched no outfit rule, fell through to the face_worn catch-all, and the sidebar
 # showed the same second-hand-kit portrait on the research floor as at the berth — LO, playing it: "on
 # getting the lab outfit the wren portrait doesn't change." It never had a picture to change to.
-# ⚠️ BOTH TOKENS IN ONE `when`, and that is not belt-and-braces. The resolver checks worn_type and flag
-# independently (v2.py:1774-1779), and the Rise's own gates are the SAME conjunction on all four of its
-# surfaces — cover_research equipped + face_worn is_true (3_activities:3630, :3752, :3935). She is never on
-# that floor as herself. With the face off, the kit is just clothes and she falls through to the grays,
-# which is the correct read and the behaviour every untyped garment already has.
+# ⚠️ THE face_worn CLAUSE WAS DROPPED AT beat_0167 (rev 219). It read
+# `{ worn_type = "cover_research", flag = "face_worn" }`, and the note here argued that with the face off
+# "the kit is just clothes and she falls through to the grays, which is the correct read". It is not.
+# face_worn is a TOGGLE — activity_the_face sets it at :3067 and UNSETS it at :3077 — so kit-without-face is
+# a state the player reaches at will from her own bunk, and in it the sidebar showed her in company grays
+# while she stood there in the research kit. Every dress now answers for its own picture; the face is
+# approximate in that one state (the art carries the bob) and the CLOTHES are right, which is the axis LO
+# was reading. Getting both axes right needs a second image per dress and is not worth it.
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_research.jpg"
-when  = { worn_type = "cover_research", flag = "face_worn" }
+when  = { worn_type = "cover_research" }
 
 # ⚠️ beat_0116 (rev 167) — THE FACE IS NO LONGER A GARMENT, AND THE OLD NOTE HERE WAS WRONG ABOUT THE ENGINE.
 # It said: "the rule is keyed on the dress item's type BECAUSE THAT IS THE ONLY AXIS THE RESOLVER HAS, so the
@@ -178,6 +181,40 @@ when  = { worn_type = "cover_research", flag = "face_worn" }
 # disguised outfit that has no rule of its own: the second-hand kit and the bar dress both land here, so
 # there is no face-by-outfit matrix to harvest. Anything added ABOVE it is an outfit that earns its own
 # picture; anything added BELOW it is dead code, because the resolver breaks on the first match.
+# ═══ beat_0167 (rev 219) — EVERY DRESS ANSWERS FOR ITS OWN PICTURE ════════════════════════════════════
+# LO, in play: "Change cloths have old dresses but doesn't change there portrait."
+# ⚠️ THE MEASUREMENT. Six dresses crossed with face on/off is twelve states, and FIVE were wrong: grays with
+# the face on, the research kit and the second-hand kit with it off, and the Undertow dress in BOTH. One
+# cause — three of the six carried no `type`, so they matched no rule, and the bare face_worn catch-all
+# below swallowed whatever it could reach while the rest fell to default_image.
+# ⚠️ ORDER BARELY MATTERS AMONG THESE. Every dress carries exactly one type and they all occupy the same
+# `dress` slot, so at most one type rule can match at a time. The ONE rule whose position is load-bearing is
+# the face_worn catch-all, which must stay last — the resolver breaks on first match (v2.py:1780).
+# ⚠️ NO GATE IS AFFECTED, CHECKED RATHER THAN ASSUMED. `worn_type` appears five times in this game's data and
+# every one is a comment or a rule in this block; ZERO conditions read it. Every arc still demands its cover
+# by item id (cover_dockhand/cover_analyst/cover_research `equipped`, ~40 gates). Adding a type is
+# portrait-axis only and cannot open or shut a single surface. LO's own call: no garment is removed or locked.
+# ⚠️ AND THE COMMENT AT 1_metadata:808 WAS RIGHT UNTIL THIS BEAT — "tagging grays would trip the 'type has no
+# rule' build warning." It would have, alone. Each new tag lands with its rule in the same pass, so the
+# warning stays silent, and a silent build is the instrument that proves none was missed.
+
+# THE BAR DRESS — the one new asset. Bastien sends it down at rung_bar_promotion_3: "A dress. Short, thin,
+# cut close, and the right size." Worn at the Undertow, where she is always in the bought face, so the
+# reference is wren_cover_stranger.jpg — the same keying beat_0159 used for the research kit.
+[[player_portrait.outfits]]
+image = "portraits/wren_dress_undertow.jpg"
+when  = { worn_type = "dress_undertow" }
+
+# THE SECOND-HAND KIT — its own rule now rather than riding the catch-all, so it survives the face coming off.
+[[player_portrait.outfits]]
+image = "portraits/wren_cover_stranger.jpg"
+when  = { worn_type = "cover_stranger" }
+
+# THE GRAYS — explicit, so the catch-all below can no longer claim her when she puts a face on over uniform.
+[[player_portrait.outfits]]
+image = "portraits/wren_grays.jpg"
+when  = { worn_type = "grays" }
+
 [[player_portrait.outfits]]
 image = "portraits/wren_cover_stranger.jpg"
 when  = { flag = "face_worn" }
