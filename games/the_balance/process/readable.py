@@ -202,7 +202,15 @@ def scan(text, genders=None):
     out = []
     for m in re.finditer(r"@\w+(?:\.\w+)?|[A-Za-z][A-Za-z'’-]*", text):
         word = m.group(0)
+        # ⚠️ STRIP THE POSSESSIVE BEFORE ANY LOOKUP. "Tasha's wardrobe … her lights"
+        # was flagged because "tasha's" is not "tasha" in the cast list, and the
+        # capitalisation fallback then skipped it for sitting at a sentence start.
+        # A name in the possessive is still the antecedent.
         low = word.lower().strip("'’-")
+        for suffix in ("'s", "’s", "s'", "s’"):
+            if low.endswith(suffix) and len(low) > len(suffix):
+                low = low[: -len(suffix)] if suffix.startswith(("'", "’")) else low[:-1]
+                break
         if word.startswith("@"):
             slug = low.lstrip("@").split(".")[0]
             out.append(("ref", word, genders.get(slug, UNKNOWN)))
@@ -338,6 +346,39 @@ def dangling(game):
     return sorted(hits, key=lambda h: (not h[4], h[0], h[1]))
 
 
+def dangling_locations(game):
+    """Check A, again, over the text of a PLACE.
+
+    ⚠️ ADDED AFTER THIS LINT MISSED FOUR. It walked canvases only, and a room's
+    description is read on EVERY entry — more often than any canvas. `the_kitchen`
+    said "the chore list is on the fridge in his handwriting", `nate_room` opened
+    "His door is at the end of the landing", and neither names anybody. A location
+    has no arrival context at all: you walked in, and the first thing on screen is
+    the description, so there is nothing before it by definition.
+
+    These surfaces resolve @tokens (v2.py:10035 description, :9910 blocked_message,
+    :10059 variants), so the fix is the same one the opening used.
+    """
+    genders = npc_genders(game)
+    hits = []
+    for loc in game.get("locations") or []:
+        fields = [(f, loc.get(f)) for f in ("description", "blocked_message")]
+        fields += [("description_variant", v.get("text"))
+                   for v in loc.get("description_variants") or []]
+        for field, text in fields:
+            if not isinstance(text, str):
+                continue
+            known = set()
+            for kind, payload, gender in scan(text, genders):
+                if kind == "ref":
+                    known.add((payload, gender))
+                elif not answers(known, gender):
+                    excerpt = text if len(text) <= 88 else text[:85] + "…"
+                    hits.append((loc.get("id"), field, payload, excerpt))
+                    break
+    return hits
+
+
 def first_line(node):
     for block in blocks_of(node):
         if block.get("type") in PROSE_TYPES and isinstance(block.get("content"), str):
@@ -391,8 +432,16 @@ def main():
     game = tomllib.loads(merged.read_text(encoding="utf-8"))
 
     hits = dangling(game)
+    loc_hits = dangling_locations(game)
     print(f"\n  readable — {label}")
-    print(f"  {len(hits)} pronoun(s) with nothing to point at\n")
+    print(f"  {len(hits) + len(loc_hits)} pronoun(s) with nothing to point at "
+          f"({len(hits)} on a screen, {len(loc_hits)} in a place's own text)\n")
+    if loc_hits:
+        print("  IN A LOCATION DESCRIPTION — read on EVERY entry, and nothing precedes it")
+        for lid, field, word, excerpt in loc_hits:
+            print(f"    \"{word}\"  {lid}.{field}")
+            print(f"           {excerpt}")
+        print()
     if hits:
         print("  A PRONOUN WITH NO ANTECEDENT — the player cannot tell who this is")
         for cid, nid, word, line, one_shot in hits:
@@ -400,7 +449,7 @@ def main():
             print(f"    \"{word}\"  {cid} / {nid}{mark}")
             print(f"           {line}")
         print()
-    else:
+    elif not loc_hits:
         print("  every third-person pronoun has somebody named or roled ahead of it\n")
 
     rows = verbless(game)
@@ -422,7 +471,7 @@ def main():
     print("  A LIST, NEVER A SCORE. Fragments are legitimate writing. What is not")
     print("  legitimate is a sentence the reader cannot resolve — see process/README.md §5a")
     print("  for the three forces that produce these, and §5b for the ladder that fixes them.\n")
-    return 1 if hits else 0
+    return 1 if (hits or loc_hits) else 0
 
 
 if __name__ == "__main__":

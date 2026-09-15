@@ -289,7 +289,7 @@ name = "The fridge"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in his handwriting and the other three do not, which is the whole system." },
+  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in @gil's handwriting and the other three do not. That is the whole system." },
   { type = "paragraph", content = "The list is where it always is, held on with the magnet from a tire place. Today it says the car. The car takes the longest and he knows that." },
   { type = "paragraph", content = "Dishes today. There are enough of them in the sink to be somebody else's, and the somebody else is not going to be named." },
 ]
@@ -830,7 +830,7 @@ type = "block_pool"
 blocks = [
   { type = "paragraph", content = "The second one runs straight off the first and the room does not empty in between, so you keep your seat and your bag stays where it is." },
   { type = "paragraph", content = "Ninety minutes with no window in this room. By the end of it the air has been breathed twice and everybody is writing slower." },
-  { type = "paragraph", content = "He puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four." },
+  { type = "paragraph", content = "The lecturer puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four." },
 ]
 
 [canvases.nodes.exit_block]

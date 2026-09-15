@@ -48,7 +48,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in his handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
+description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
 image       = "locations/the_kitchen.jpg"
 image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
 entry_from  = "the_hall"
@@ -64,7 +64,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "nate_room"
 name        = "His Room"
-description = "His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself."
+description = "@nate's door is at the end of the landing, and it is not always shut. Nothing else about this room announces itself."
 image       = "locations/nate_room.jpg"
 image_search_queries = ["young man bedroom desk monitor dim", "messy student bedroom bed desk night"]
 entry_from  = "the_hall"
@@ -72,7 +72,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "tasha_room"
 name        = "Tasha's Room"
-description = "Her wardrobe takes one whole wall and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not."
+description = "Tasha's wardrobe takes one whole wall, and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not."
 image       = "locations/tasha_room.jpg"
 image_search_queries = ["young woman bedroom wardrobe fairy lights mirror", "girl bedroom clothes rail lights makeup"]
 entry_from  = "the_hall"
@@ -88,7 +88,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, the washing machine, and the light he leaves on. Half the list on the fridge lives out here."
+description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
 image       = "locations/the_garage.jpg"
 image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
