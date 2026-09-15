@@ -1,0 +1,1787 @@
+# =============================================================================
+# The Balance — 3 · the repeatable half
+#
+# SLICE 2. The shift. The first thing in this game she does more than once.
+#
+# ⚠️ L3 — A REPEATABLE SCREEN CARRIES NO HISTORY. Every sentence here is
+# something happening now. No "used to", no "since", no "three weeks of". What
+# reads as depth on visit one is furniture by visit nineteen, and our games run
+# to 12.1% history against a field maximum of 5.41%.
+#
+# ⚠️ TWO canvases, not one. A condition cannot read the weekday, so a single
+# canvas covering both rosters would let her work four days while she is still on
+# the floor — and two shifts against a $150 Friday IS the squeeze the first build
+# runs on. The roster has to bite.
+# =============================================================================
+
+# --- THE FLOOR · two shifts, the worst two -----------------------------------
+
+[[canvases]]
+id   = "shift_floor"
+name = "Work the shift"
+description = "The ordinary shift at the floor. Tuesday and Sunday, twelve to five, $55 with tips. Body varies on every entry. Sometimes a customer asks instead — that is the substitution rules below."
+
+[canvases.trigger]
+location      = "the_cafe"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+costs         = [{ trait = "clean", value = 20 }]
+show_when_blocked = true
+cooldown_message = "You are not on the schedule today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
+] }
+
+# Tuesday and Sunday. 0 = Monday, so 1 and 6 — the two nobody wants.
+[[canvases.trigger.schedules]]
+weekdays   = [1, 6]
+start_time = "12:00"
+end_time   = "17:00"
+
+# ⚠️ ONLY SOME CUSTOMERS ASK, ONLY WHEN THE ROOM ALLOWS IT — the cafe sheet's own
+# two brakes, as a dice roll inside a routine. A matching rule plays its target IN
+# PLACE of this canvas, so each target carries the shift's own pay and count: it
+# was still a shift, with something in it. Further rung first, so it wins when both
+# are open.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_showing"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 8 },
+  { type = "flag", subject = "player", flag_key = "cust_hand_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_hand"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shift"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Five hours of carrying plates to people who are mid-sentence. The window table turns over four times. Your feet go at about hour three and the last two are hour three continuing." },
+  { type = "paragraph", content = "The machine wants its tray emptied twice and nobody else empties it. Owen watches you do it the first time and not the second, which is how he says a thing is yours now." },
+  { type = "paragraph", content = "A slow one. You wipe tables that are already clean, because standing still where he can see you is worse work than working." },
+  { type = "paragraph", content = "The lunch lot arrive together and leave together and the floor between the counter and the window ends up with all of it on. You get most of it up before he is out of the office." },
+  { type = "paragraph", content = "Two hours of nobody, then a coach party, then nobody again. The tips are a handful of coins and one note left flat under a saucer, which is the only part worth counting." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Table six has been waiting. I'm not telling you again, I'm telling you now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "That one's done properly. Do the next one the same." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're quick. Quick isn't tidy. I want both and I'm not choosing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Go home. You're on again Sunday." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Clock off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 300
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 55
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "shifts_worked"
+op         = "add"
+value      = 1
+
+# --- THE COUNTER · four shifts, and some say in which ------------------------
+# Same $55. The counter pays in SHIFTS, not in a rate — the rate only moves at
+# closing. Different words, because the worst two shifts and four she had some say
+# in are not the same afternoon.
+
+[[canvases]]
+id   = "shift_counter"
+name = "Work the counter"
+# ⚠️ The NAME, not the id, is the key of `game_state.activity_trigger_history`,
+# which is where max_triggers_per_day is counted. Two canvases sharing a name share
+# one day bucket. Harmless while only one of them can ever be open — but it is a
+# silent coupling and a distinct name costs nothing.
+description = "The shift once she is on the counter. Four days, $220 a week — the first week she can pay Friday and still eat. Everyone in the room has to come to her."
+
+[canvases.trigger]
+location      = "the_cafe"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 6
+is_active     = true
+costs         = [{ trait = "clean", value = 20 }]
+show_when_blocked = true
+cooldown_message = "You are not on the schedule today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "12:00"
+end_time   = "17:00"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_showing"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 8 },
+  { type = "flag", subject = "player", flag_key = "cust_hand_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_hand"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shift"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, and most of them look at you for the length of the saying." },
+  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor and it is more of you on show, and those two facts arrived together." },
+  { type = "paragraph", content = "Owen takes the floor and leaves you the counter, which means he is out there with his back to you for most of the afternoon and you can feel exactly when it isn't." },
+  { type = "paragraph", content = "Four deep at one, nobody at three. The queue is the part that pays; the empty hour is the part where the man at the window is still there." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Counter's yours today. Don't let the queue get round the door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Till was eleven out on Tuesday. I'm not saying it was you. I'm saying I count it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're better at this than the floor. That's why you're on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Clock off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 300
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 55
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "shifts_worked"
+op         = "add"
+value      = 1
+
+# --- SLEEP · the only thing that turns the week -----------------------------
+# ⚠️ WITHOUT THIS FRIDAY IS UNREACHABLE. advanceDay() is what rolls the day name,
+# the day counter, the week on a Monday, [player.trait_decay] and the
+# [engine.daily_tick] clears — and the only thing that calls it is the clock
+# crossing midnight. Before this canvas the sidebar's wait buttons were the sole
+# way to get there, and rest decayed with nothing to refill it.
+#
+# ⚠️ FIXED +540, NOT "until morning". There is no sleep-until-hour key, and the
+# fixed number is the design anyway: the_week.md says she can stay up as late as
+# she likes and it costs her the next morning. Bed at ten is up at seven. Bed at
+# one is up at ten, and the nine o'clock is gone.
+
+[[canvases]]
+id   = "sleep"
+name = "Sleep"
+description = "Nine hours from whenever she lies down. Fills rest. The clock crossing midnight is what fires advanceDay, so this is the week's only engine."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Bed"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, and neither of those things is going to keep you awake." },
+  { type = "paragraph", content = "Nine hours if nothing wakes you. The house does its noises — the heating, a door, a car on the street — and you sleep through all of it the way you have learned to." },
+  { type = "paragraph", content = "You are asleep before you have finished deciding what tomorrow costs. That is the one thing this room is reliably good for." },
+  { type = "paragraph", content = "Shoes off, jeans on the chair, door pushed to. It is not shut, because his rule about the door is one you keep without thinking about it now." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "her_room"
+time_progression_minutes = 540
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "rest"
+op         = "set"
+value      = 100
+
+# --- THE CHORE LIST · the rule that can be tightened -------------------------
+# the_house.md: bins, laundry, dishes, the car. $5 each, ONE PAID A DAY, and he
+# only pays for what is on the list that day. Half an hour — so the paid one is
+# $10 an hour against the cafe's $9. The money was never why chores are bad.
+# THE TIME IS.
+
+[[canvases]]
+id   = "chore"
+name = "The list on the fridge"
+description = "One paid chore a day, $5, half an hour. After a missed Friday the list is longer and the same $5 costs an hour — that is the rule tightening, and he never says why."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+] }
+
+# the_house_day.md: "@gil notices things there — the chores, the hours she keeps,
+# whether Friday got paid." He is in that room morning and evening and until now
+# he never once came through the door while she was working.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gil_notices"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The fridge"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in his handwriting and the other three do not, which is the whole system." },
+  { type = "paragraph", content = "The list is where it always is, held on with the magnet from a tire place. Today it says the car. The car takes the longest and he knows that." },
+  { type = "paragraph", content = "Dishes today. There are enough of them in the sink to be somebody else's, and the somebody else is not going to be named." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "There are two more lines on the list than there were. Neither of the new ones has a date against it, so neither of them pays. They still have to be done." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the one with today's date on it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the whole list. Only one of them pays."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_kitchen"
+
+# --- THE SHOWER · the only tap `clean` has ----------------------------------
+# ⚠️ BEFORE THIS CANVAS `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a
+# shift and nothing raised it, so about a week in she dropped under 40, the tips
+# ladder shut, and it never reopened. No gate caught that — it is a hole, not a
+# score.
+#
+# the_house_day.md: one bathroom, shared with Nate and Tasha. Taken 7 to 8 in the
+# morning — that is the running shower in the opening — and taken 5 to 10 in the
+# evening, which is Tasha before she goes out. So it is free in the middle of the
+# day, when class and the middle shift run, and free after ten, when she is only
+# home because something ran over. BEING CLEAN IS NEVER FREE.
+
+[[canvases]]
+id   = "wash"
+name = "Get in the shower"
+description = "Restores clean. Only available in the hours the bathroom is actually free, which are the hours she is meant to be somewhere else."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Somebody is in there."
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "17:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
+# The lock works. It does not always get used, and Tasha does not always knock.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "tasha_walks_in"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "tasha_room", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shower"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
+  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it, and you stand there longer than washing takes." },
+  { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "set"
+value      = 100
+
+# --- GOING LIVE · the second way to make Friday -----------------------------
+# the_phone.md: she needs to be clean, to be alone, and about an hour. One place
+# at the first build — her own room with the door shut, which is the same door
+# @gil's rule says stays open when anyone is on the landing.
+#
+# ⚠️ ALONE IS A SCHEDULE HERE, NOT A PRESENCE CHECK. There is no engine door or
+# privacy state, and Nate and Tasha have no rooms and no content yet — declaring
+# them now to power one condition would spend them early. the_phone.md already
+# names the hours: the house is quietest on weekday afternoons and after everyone
+# is asleep. Those are exactly the hours the middle shift wants too, which is the
+# collision the design is built on.
+
+[[canvases]]
+id   = "stream"
+name = "Go live"
+description = "A session in her room, door shut. Pays a rolled amount inside a band that followers lift. Exposure moves by 3 on a first time and 1 on a repeat, which is what stops her grinding it."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+costs         = [{ trait = "clean", value = 15 }]
+show_when_blocked = true
+cooldown_message = "Not with the house like this."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "12:00"
+end_time   = "16:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Door shut"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Door shut, phone up against the books at the angle that cuts you off at the mouth. The light from the window is doing most of the work. Forty-one people, then sixty, then it stops climbing and settles." },
+  { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other and one of them saying hello to you by name." },
+  { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them and it does not make you feel anything." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Somebody asks. That is how it always starts — not pushed, asked, and the answer is yours."
+
+# ⚠️ speaker = "unknown" renders as "Stranger" with a silhouette (v2.py:15517).
+# That is exactly what the_phone.md wants: nobody watching has a name, and nobody
+# she knows is on the other side of it. The chat can speak without being cast.
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "take the top off. you know why we're here" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "you were gone four days. i checked every night" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "turn the lamp round, we can't see anything" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "do the thing from last time" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "how much to see your face" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take your top off."
+targetType = "node"
+nodeId     = "stream.rung_top"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take everything off."
+targetType = "node"
+nodeId     = "stream.rung_naked"
+show_when_locked = true
+locked_text = "Nobody has asked for that yet."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do what they're asking for."
+targetType = "node"
+nodeId     = "stream.rung_touch"
+show_when_locked = true
+locked_text = "Not yet, and they haven't asked yet either."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit and talk to them. Nothing else."
+targetType = "node"
+nodeId     = "stream.payout"
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 3, max = 10 } },
+]
+
+# ⚠️ THE ACT BEATS STAY ON THE BODY FOR THEIR WHOLE LENGTH. Read each last
+# sentence: it is what is HAPPENING, never what it MEANT. The interiority is not
+# cut — it is on the payout node, which is the beat after. A beat is a NODE, so
+# folding the thought in here would make one beat that pivots.
+
+[[canvases.nodes]]
+id   = "rung_top"
+name = "Top off"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You get the hem up and over your head and drop it out of frame. Your tits are in the light and your face is not. The count jumps thirty in four seconds. You sit back on your heels so they can see properly. Somebody types that your nipples are hard. Somebody else types that he can see your tits better than the last one."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_false" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 25, max = 60 } },
+  { targetType = "player", trait = "corruption", op = "add", value = 2 },
+]
+flagEffects = [{ targetType = "player", flag = "stream_top_done", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_true" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 5, max = 15 } },
+]
+
+[[canvases.nodes]]
+id   = "rung_naked"
+name = "Nothing on"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Everything goes. You kneel up into the light with nothing on and let them look before you move at all. They ask you to turn around. You turn. They get your ass, and you hold it there while the number climbs. Then you come back round and sit with your knees apart, and they get your tits and your cunt in the same frame."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_false" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 60, max = 140 } },
+  { targetType = "player", trait = "corruption", op = "add", value = 3 },
+]
+flagEffects = [{ targetType = "player", flag = "stream_naked_done", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_true" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 10, max = 30 } },
+]
+
+[[canvases.nodes]]
+id   = "rung_touch"
+name = "What they asked for"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You put two fingers in your mouth because somebody asked for that. Then you put them between your legs. It takes a minute to stop performing it. Two fingers into your cunt, thumb working your clit. Your hips go on their own. You come with your free hand flat on your own tits, the phone four feet away, sixty people behind it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_touch_done", operator = "is_false" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 120, max = 260 } },
+  { targetType = "player", trait = "corruption", op = "add", value = 4 },
+]
+flagEffects = [{ targetType = "player", flag = "stream_touch_done", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wind it up."
+targetType = "node"
+nodeId     = "stream.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_touch_done", operator = "is_true" },
+] }
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 20, max = 50 } },
+]
+
+# --- THE PAYOUT · the beat after, and the rolled money ----------------------
+# ⚠️ `value = { type = "random", min, max }` is a real engine shape
+# (_resolve_effect_value, v2.py:14434) and it is honoured on this path. It ships
+# in vesper. the_phone.md: "There's no way to work out in advance what a night
+# clears — which is the point, because Friday is a fixed number and this isn't."
+#
+# The three bands are mutually exclusive, so exactly one ever renders.
+
+[[canvases.nodes]]
+id   = "payout"
+name = "Close the app"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The number is bigger than it was an hour ago and it is not going back down. Neither is the other thing, the one that isn't on the screen." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "An hour. That was the cost, and the hour was the cheap part of it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody out there knows what road you live on. That is the whole arrangement, and it holds right up until it doesn't." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You close the app and put the phone face down on the books. The landing is quiet. It has been quiet the whole time."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count it."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 500 },
+] }
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 8, max = 25 } }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count it."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 500 },
+  { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 2000 },
+] }
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 20, max = 60 } }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count it."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
+] }
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 50, max = 120 } }]
+
+# =============================================================================
+# CAMPUS · FOUR SUBJECTS, NINE TO TWELVE
+#
+# ⚠️ REST'S DOOR, AT LAST. It has been a declared need since slice 1, filled by
+# sleeping and read by NOTHING — the one meter gates.py still called a number the
+# player watches move. college.md always said what it was for: "low, she misses
+# the nine o'clock, and attendance is the only road to her marks."
+#
+# ⚠️ FOUR DISTINCT CANVAS NAMES. max_triggers_per_day is counted off the NAME in
+# game_state.activity_trigger_history, so two classes sharing one would share a
+# day bucket and she could only ever attend one of them.
+# =============================================================================
+
+[[canvases]]
+id   = "class_1"
+name = "The nine o'clock lecture"
+description = "One of the four. Attending adds 30 to attend_1; it falls 8 a day, so twice a week holds her level and skipping sinks this subject on its own."
+
+[canvases.trigger]
+location      = "the_lecture_hall"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Nothing on in here now."
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2]
+start_time = "09:00"
+end_time   = "10:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The nine o'clock lecture"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "A hundred and ten people and a man at the bottom who has been giving this one for eleven years. You are in row nine. Nobody down there has ever known your name and nobody is going to." },
+  { type = "paragraph", content = "Row nine, aisle seat, bag on the next chair so nobody takes it. The lights go down for the slides and half the room stops pretending." },
+  { type = "paragraph", content = "Somebody two rows down is watching a match on their phone with the sound off. The man at the bottom can see it and has decided not to mind." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit through it."
+targetType = "location"
+locationId = "the_lecture_hall"
+time_progression_minutes = 90
+show_when_locked = true
+locked_text = "You would not make ninety minutes. You barely made the stairs."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
+] }
+effects = [{ targetType = "player", trait = "attend_1", op = "add", value = 30, clamp = true }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give it a miss."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "class_2"
+name = "The ten thirty lecture"
+description = "One of the four. Attending adds 30 to attend_2; it falls 8 a day, so twice a week holds her level and skipping sinks this subject on its own."
+
+[canvases.trigger]
+location      = "the_lecture_hall"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Nothing on in here now."
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2]
+start_time = "10:30"
+end_time   = "12:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ten thirty lecture"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The second one runs straight off the first and the room does not empty in between, so you keep your seat and your bag stays where it is." },
+  { type = "paragraph", content = "Ninety minutes with no window in this room. By the end of it the air has been breathed twice and everybody is writing slower." },
+  { type = "paragraph", content = "He puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit through it."
+targetType = "location"
+locationId = "the_lecture_hall"
+time_progression_minutes = 90
+show_when_locked = true
+locked_text = "You would not make ninety minutes. You barely made the stairs."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
+] }
+effects = [{ targetType = "player", trait = "attend_2", op = "add", value = 30, clamp = true }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give it a miss."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "class_3"
+name = "The nine o'clock class"
+description = "One of the four. Attending adds 30 to attend_3; it falls 8 a day, so twice a week holds her level and skipping sinks this subject on its own."
+
+[canvases.trigger]
+location      = "the_classroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Nothing on in here now."
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3]
+start_time = "09:00"
+end_time   = "10:30"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "sam_sits_down"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_sam", location_id = "the_classroom", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The nine o'clock class"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Twelve chairs round three tables pushed together, and everybody can see everybody. @cara is not in this one. Sam is, and he has done the reading." },
+  { type = "paragraph", content = "Small enough that she goes round the table. You get asked something in the first ten minutes because you are sitting where the light is." },
+  { type = "paragraph", content = "Three tables, twelve people, and a door that does not shut properly. You can hear the corridor the whole way through." },
+]
+
+# the_campus.md: "Not having done the homework is visible to everybody." This is
+# what missing class costs TODAY, with no exams and no letter home built yet.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "attend_3", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You have not been here in two weeks and it is a room of twelve people, so that is not a private fact. She asks you something you would have known and you sit in the gap where the answer goes." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit through it."
+targetType = "location"
+locationId = "the_classroom"
+time_progression_minutes = 90
+show_when_locked = true
+locked_text = "You would not make ninety minutes. You barely made the stairs."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
+] }
+effects = [{ targetType = "player", trait = "attend_3", op = "add", value = 30, clamp = true }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give it a miss."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "class_4"
+name = "The ten thirty class"
+description = "One of the four. Attending adds 30 to attend_4; it falls 8 a day, so twice a week holds her level and skipping sinks this subject on its own."
+
+[canvases.trigger]
+location      = "the_classroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Nothing on in here now."
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3]
+start_time = "10:30"
+end_time   = "12:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ten thirty class"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The same twelve people, an hour later, less awake. Somebody has brought food in and is eating it under the table like that is subtle." },
+  { type = "paragraph", content = "She asks for the reading in the first five minutes. Two people have it and everybody finds out which two." },
+  { type = "paragraph", content = "The last one before lunch, so the room is already half out of the door in its head." },
+]
+
+# the_campus.md: "Not having done the homework is visible to everybody." This is
+# what missing class costs TODAY, with no exams and no letter home built yet.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "attend_4", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You have not been here in two weeks and it is a room of twelve people, so that is not a private fact. She asks you something you would have known and you sit in the gap where the answer goes." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit through it."
+targetType = "location"
+locationId = "the_classroom"
+time_progression_minutes = 90
+show_when_locked = true
+locked_text = "You would not make ninety minutes. You barely made the stairs."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
+] }
+effects = [{ targetType = "player", trait = "attend_4", op = "add", value = 30, clamp = true }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give it a miss."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+
+# --- THE UNION TABLE · the one person who costs her -------------------------
+# the_cast.md: everybody else in this game pays her; @cara costs her, an hour at
+# a time, which is the one thing she is running out of. And what @cara says out
+# loud IS how rest and clean get said without a number on screen — so the bands
+# below are gated on those two and nothing else.
+
+[[canvases]]
+id   = "union_cara"
+name = "Sit with Cara"
+description = "An hour that buys nothing the game can count. Her lines read rest and clean, which is how those two get spoken instead of displayed."
+
+[canvases.trigger]
+location      = "the_union"
+npc           = "npc_cara"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 5
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The far table"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "She has got the far table and her coat is still on, because she is always cold in here and she has never once mentioned it." },
+  { type = "paragraph", content = "She waves the chair out with her foot before you have got across the room. There is already a second tray on the table and it is for you." },
+  { type = "paragraph", content = "She is halfway through telling somebody else a story when you sit down, and she starts it again from the beginning for you." },
+]
+
+# ⚠️ THESE THREE ARE ONE IF/ELSEIF CHAIN, NOT THREE BLOCKS. Adjacent [group]
+# blocks MERGE, so only the first matching band renders — and that is the right
+# behaviour here, kept on purpose. A friend says the most pressing thing, not
+# three things in a row. The order IS the priority: how wrecked she looks, then
+# the bathroom, then where she was on Thursday.
+#
+# ⚠️ No numbers on screen anywhere. This is rest and clean being SAID.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "lt", value = 45 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cara" }, content = "You look wrecked. And don't say the bus, because I get the same bus." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 45 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cara" }, content = "Here. Use mine, it's in my bag. I'm not being off with you, I just know what that house is like for the bathroom." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "attend_3", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cara" }, content = "Where were you Thursday? She went round the table and you weren't in it and I didn't have anything to tell her." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay the hour."
+targetType = "location"
+locationId = "the_union"
+time_progression_minutes = 60
+effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say you've got a shift."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -1 }]
+
+# --- SAM · he is talking, and that is all -----------------------------------
+# the_cast.md says exactly that for the first build. He gives nothing the game
+# can count. He is the ordinary life she is trading away.
+
+[[canvases]]
+id   = "sam_talks"
+name = "Talk to Sam"
+description = "One conversation. Not a climb yet — the cast page is explicit that in the first build he is talking and that is all."
+
+[canvases.trigger]
+location      = "the_union"
+npc           = "npc_sam"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four other people"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "He is at a table with four other people and he moves along without making anything of it, which is the thing he does that nobody else on this campus does." },
+  { type = "paragraph", content = "He asks what you thought of the reading. Not to catch you out. He actually wants to know, which is worse." },
+  { type = "paragraph", content = "Somebody at his table says something about you being the one who is always leaving, and he says you work, and that is the end of it." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_sam" }
+content = "You're always going somewhere. One of these days you should not go somewhere and see what happens."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay a bit."
+targetType = "location"
+locationId = "the_union"
+time_progression_minutes = 30
+effects = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go. You've got the bus."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+
+# =============================================================================
+# BEING PICKED ON · the first thing in this game that happens TO her
+#
+# ⚠️ trigger_mode = "random" — the FIRST in this game. Six slices and the harness
+# reported "the world interrupts the player: n/a" every time, because everything
+# she has ever done she went and clicked. These fire on ARRIVAL, roll their
+# chance, and the engine sets a per-room cooldown of 3 on a hit so they cannot
+# spam.
+#
+# ⚠️ NOBODY IN THESE HAS A NAME. That is what makes it cheap enough to be
+# everywhere — the same reason the walk-ins work.
+#
+# ⚠️ THE BANDS ARE ONE IF/ELSEIF CHAIN. Adjacent [group] blocks merge, and that is
+# exactly what exclusive bands want, so the trap is the tool here. The order is
+# the priority: the jacket first, then how far out she already is.
+#
+# ⚠️ TWO HARD RULES OFF THE PAGE. It NEVER blocks her — she still makes the class,
+# the shift and the bus, so every exit here is free. And it is NEVER violent.
+# =============================================================================
+
+[[canvases]]
+id   = "picked_quad"
+name = "On the quad"
+description = "Random ambient. Keys off exposure, which is how exposure is FELT — she never sees a number, she finds out where she is because strangers know things. Silent while a dare has bought her a quiet week."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.35
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "On the quad"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Without the jacket you are the thing being looked at from three sides of this quad at once, and not one of them has to pretend it is anything else." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "Does your mum know about the room with the lamp in it?" },
+  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right. Not a guess — a Tuesday, and you know which one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "That's her, that's the one." },
+  { type = "paragraph", content = "Said at your volume as you pass, and the two of them watch to see whether you heard. Somebody has decided what you are and it has gone round." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Three people take the bench you were walking at, and the last one looks straight at you while she sits down on it. Nobody says anything. You are just the one who was walking at it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing. Keep going."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say something back."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+show_when_locked = true
+locked_text = "Nobody here is on your side. It would only give them more of it."
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
+] }
+effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+
+[[canvases]]
+id   = "picked_union"
+name = "At the union"
+description = "Random ambient. Keys off exposure, which is how exposure is FELT — she never sees a number, she finds out where she is because strangers know things. Silent while a dare has bought her a quiet week."
+
+[canvases.trigger]
+location      = "the_union"
+is_repeatable = true
+max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.35
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "At the union"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "The queue is twenty minutes and you spend every one of them being the thing three separate tables are having a look at." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "Apparently there's a lamp and a stack of books and everything." },
+  { type = "paragraph", content = "He says it to his friend at your volume, without looking over. The detail is right, and that is the part that goes through you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You are three words into asking whether the seat is free when the two of them start a different conversation over the top of you, finish it, and then look up as though you have only just arrived." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, and not one of those bags belongs to anybody who is sitting down." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing. Keep going."
+targetType = "location"
+locationId = "the_union"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say something back."
+targetType = "location"
+locationId = "the_union"
+time_progression_minutes = 5
+show_when_locked = true
+locked_text = "Nobody here is on your side. It would only give them more of it."
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
+] }
+effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+
+[[canvases]]
+id   = "picked_lecture"
+name = "In the lecture hall"
+description = "Random ambient. Keys off exposure, which is how exposure is FELT — she never sees a number, she finds out where she is because strangers know things. Silent while a dare has bought her a quiet week."
+
+[canvases.trigger]
+location      = "the_lecture_hall"
+is_repeatable = true
+max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.35
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "In the lecture hall"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "A hundred and ten people in steep rows and you are the one that two rows of them keep turning round for." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "Bit of a funny angle you film at." },
+  { type = "paragraph", content = "He says it going past your row and does not stop, and for the rest of the hour you cannot work out whether the whole room heard it or only you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Somebody behind you says your name to somebody else and then goes quiet when you turn round, which is worse than if they had carried on with it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Row nine is full when you get to it, which it has never once been, and the two on the aisle do the thing where they move their knees a quarter of an inch." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing. Keep going."
+targetType = "location"
+locationId = "the_lecture_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say something back."
+targetType = "location"
+locationId = "the_lecture_hall"
+time_progression_minutes = 5
+show_when_locked = true
+locked_text = "Nobody here is on your side. It would only give them more of it."
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
+] }
+effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+
+[[canvases]]
+id   = "picked_stop"
+name = "At the stop"
+description = "Random ambient. Keys off exposure, which is how exposure is FELT — she never sees a number, she finds out where she is because strangers know things. Silent while a dare has bought her a quiet week."
+
+[canvases.trigger]
+location      = "the_bus_stop"
+is_repeatable = true
+max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.35
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "At the stop"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Forty minutes at a stop on a main road, and you are aware of every car that goes past and every one that slows." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, on a Tuesday, at four in the afternoon, and is gone before you can decide what that was." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Two girls from your year in the shelter, and one of them says something to the other, and neither of them stops talking when you sit down." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Somebody steps in front of you when the bus pulls in, then says sorry without looking at you, which is the same as not saying it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing. Keep going."
+targetType = "location"
+locationId = "the_bus_stop"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say something back."
+targetType = "location"
+locationId = "the_bus_stop"
+time_progression_minutes = 5
+show_when_locked = true
+locked_text = "Nobody here is on your side. It would only give them more of it."
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
+] }
+effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+
+# =============================================================================
+# TALK · how she finds out what people say about her
+#
+# ⚠️ IT COSTS HER A FEW MINUTES. Listening is something she CHOOSES, not something
+# that happens at her while she walks past — which is the whole difference
+# between this and being picked on, and they are the same sentence from two
+# sides: a rumour she catches at the union on Tuesday is what somebody says to
+# her face on the quad on Thursday.
+#
+# ⚠️ THIS IS HOW THE PLAYER FINDS OUT EXPOSURE MOVED. No number, no bar, just two
+# people talking who do not know she is behind them. The bands are one if/elseif
+# chain and they get SHARPER as she climbs: about other people, then about her,
+# then specific enough to frighten her.
+#
+# ⚠️ HONEST LIMIT, WRITTEN DOWN: talk.md gives this two jobs and only one can land
+# yet. "Where people are" points at the row, the gym and her messages, and none of
+# those is built, so what ships here is the mirror. The pointing half arrives with
+# the row.
+# =============================================================================
+
+[[canvases]]
+id   = "listen_union"
+name = "Sit and listen"
+description = "Talk. A few minutes, and what she hears gets sharper as exposure climbs. She never sees a number \u2014 this IS the number."
+
+[canvases.trigger]
+location      = "the_union"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cara_catches"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_cara", location_id = "the_union", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sit and listen"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Two of them behind you, not lowering their voices because they have not looked round. One of them describes a room — a lamp, a stack of books, the angle. It is your room. He has never been in it and he has the angle right." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your name goes past you in somebody else's sentence, two tables over, attached to a word you do not catch. They do not look up. It is not about you being there. It is just about you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Somebody is getting off with somebody at the row on Friday and four people have opinions. Nobody says your name. Nobody has any reason to." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stop listening."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_union"
+time_progression_minutes = 15
+
+[[canvases]]
+id   = "listen_quad"
+name = "Stand about a minute"
+description = "Talk. A few minutes, and what she hears gets sharper as exposure climbs. She never sees a number \u2014 this IS the number."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "bree_catches"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_bree", location_id = "the_quad", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Stand about a minute"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You get most of a sentence about what somebody would pay, and the number is close enough to a real one that you stop walking for a second." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Bree is telling it to three people who were not there, and in her version you said yes faster than you did. Nobody is going to correct her, including you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly and almost none of it has ever been about you." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stop listening."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 10
+
+[[canvases]]
+id   = "listen_before"
+name = "The ten minutes before it starts"
+description = "Talk. A few minutes, and what she hears gets sharper as exposure climbs. She never sees a number \u2014 this IS the number."
+
+[canvases.trigger]
+location      = "the_lecture_hall"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ten minutes before it starts"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The two behind you have a phone between them and they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room, and they both go quiet when you turn round." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Somebody two seats along asks somebody else whether it is true. She does not say what. The other one says probably, and they both laugh at the probably." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people and nobody in this room has any idea who you are." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stop listening."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_lecture_hall"
+time_progression_minutes = 10
+
+# --- THE CLASSROOM BETWEEN CLASSES ------------------------------------------
+# walking_in.md: in the first build ONE walk-in on strangers is open and it HAS
+# to be this one — otherwise every door she walks in on for four weeks is at
+# home, and the whole point of the game is that college is what changes her.
+#
+# ⚠️ WHAT CLIMBS IS HER REACTION, NOT HER ACTIONS. Corruption decides what is on
+# the menu; she still picks from it. And NEVER HIDE THE OPTION SHE CANNOT TAKE —
+# she sees there is something there and that she cannot do it, one line, not an
+# empty screen. That is how the meter stays readable without being a number.
+#
+# ⚠️ THE TWO METERS DO DIFFERENT JOBS: watching is free, being SEEN watching is
+# not. So staying moves corruption and nothing else; letting herself be seen is
+# the only rung here that touches exposure.
+
+[[canvases]]
+id   = "classroom_door"
+name = "The door's open"
+description = "The one campus walk-in in the first build. Empty room on a nine-to-twelve timetable. The reaction menu is corruption-gated and the unreachable rungs render locked with their reason."
+
+[canvases.trigger]
+location      = "the_classroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+# Empty all day on the three days nothing is timetabled in here, and after twelve
+# on the two days something is.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "09:00"
+end_time   = "16:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3]
+start_time = "12:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Between classes"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The door is open about a hand's width and the lights are off in there, which they are not at this hour unless somebody has turned them off." },
+  { type = "paragraph", content = "You go in for the charger you left under the table and you are two steps in before the sound resolves into what it is." },
+  { type = "paragraph", content = "Nobody books this room after twelve. Somebody has worked that out before you did, and they have worked it out properly." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Two of them against the table at the far end. Her skirt is up round her hips and one foot is off the floor. He is fucking her slowly against the edge of it. One hand is spread on the table, the other under her thigh, holding it where he wants it. Neither of them has looked at the door. You can see his cock going into her cunt every time he draws back."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Freeze in the doorway."
+targetType = "node"
+nodeId     = "classroom_door.froze"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay and watch properly."
+targetType = "node"
+nodeId     = "classroom_door.watched"
+show_when_locked = true
+locked_text = "You can see that you could. You cannot make yourself."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let them see you there."
+targetType = "node"
+nodeId     = "classroom_door.seen"
+show_when_locked = true
+locked_text = "Not that. Not yet, and not in a room with a door onto a corridor."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+] }
+
+[[canvases.nodes]]
+id   = "froze"
+name = "The doorway"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You do not go in and you do not go out. You stand in the gap with your hand still on the frame for about four seconds, which is three and a half seconds longer than you meant to, and then you are in the corridor and moving."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Corridor."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "watched"
+name = "Properly"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stand where the door hides most of you and watch him fuck her against the table. Her skirt is bunched at her waist. His hand comes off the table to get at her tits through the shirt and he does not break the rhythm doing it. She goes up on her toes every time he comes forward. You can hear his cock in her under the noise from the corridor."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go, before somebody comes down the corridor."
+targetType = "node"
+nodeId     = "classroom_door.after"
+
+[[canvases.nodes]]
+id   = "seen"
+name = "She looks up"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay in the open part of the doorway. You do not move when she opens her eyes. She looks straight at you over his shoulder. She does not stop him. She does not tell him. She holds your eye and lets you watch his cock go into her cunt, twice more, on purpose. Then she puts a hand on his ass and pulls him in harder, still looking at you."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go."
+targetType = "node"
+nodeId     = "classroom_door.after"
+effects = [
+  { targetType = "player", trait = "exposure", op = "add", value = 4 },
+  { targetType = "player", trait = "corruption", op = "add", value = 3 },
+]
+
+[[canvases.nodes]]
+id   = "after"
+name = "The corridor"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, and it is not the part you would have guessed."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 2

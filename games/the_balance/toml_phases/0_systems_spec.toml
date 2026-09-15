@@ -1,0 +1,441 @@
+# =============================================================================
+# The Balance — 0 · systems spec
+#
+# SLICE 1 — the opening and asking for the job. Not v0.1.
+# Every value traces to a sheet or to v2_state.json; nothing was invented here.
+#
+# ⚠️ NEVER hand-edit 7_final_game.toml — it is the merge output.
+# =============================================================================
+
+[project]
+id              = "the_balance"
+title           = "The Balance"
+version         = "0.0.1"
+release_date    = "2026-09-15"
+starting_canvas = "canvas_opening"
+quests_engine   = "v2"
+
+# ⚠️ quests_engine MUST live in [project]. template_import.py:1729 reads it only
+# from the project table, and :2615 gates the whole [[quest_cards]] block on it, so
+# a copy in [settings] parses, builds green, and DROPS EVERY CARD SILENTLY. Caught
+# live here on 2026-09-15 by playtest's guidance check reporting 0 of 2. The same
+# mistake is currently shipping in games/vesper_two.
+
+# ⚠️ Save slots namespace off Util.slugify(title), so the title is frozen from
+# here — a rename strands every save a player has made.
+
+[settings]
+narration_person  = "second"      # per-game, IMMUTABLE. v2_state.json declares it.
+clothing_enabled  = false         # no wardrobe is designed yet. Slice only.
+
+# ⚠️ [settings.rent] is deliberately ABSENT even though Friday's $150 looks exactly
+# like rent. money.md puts the payment in the kitchen, handed over, as a scene Gil
+# is in — an engine demand would narrate it twice. Revisit when Friday is written.
+
+[time]
+starting_hour = 7
+starting_day  = "Monday"
+starting_week = 1
+
+# The clock, computed against OPENING.md's "about seven thirty":
+#   07:00 boot renders in her bedroom
+#   +3   default node hop (v2.py:13200) -> the landing
+#   +27  declared on the landing's choice   -> 07:30 in the kitchen
+#   the bus is then 40 minutes and $2, charged as entry costs on the_strip
+# ⚠️ current_minute is hard-coded to 0 at init (v2.py:1451), so a half-past start
+# cannot be declared — it has to be walked to.
+
+[player]
+id           = "player"
+name         = "Nell"
+description  = "Eighteen, first Monday of term. Your mum married into this house three years ago and it came with a step dad, a step brother and a step sister. You are the only person in it who is going anywhere."
+# \u26a0\ufe0f SECOND PERSON. This renders on the character screen, which is the first
+# prose in the game, and it shipped once as third person against narration_person.
+# It cannot say @gil either \u2014 the player has not named him yet at that point.
+customizable = true
+
+# ⚠️ customizable = true with declared fields builds a CustomizeCharacters passage
+# and REPOINTS THE AGE GATE AT IT (v2.py:1065, :9251). That is the Want's call, on
+# the record: the distinctive axis is the cast, not the player. The headings on
+# that screen are hard-coded product voice — if they read badly, that is why.
+
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Her name"
+default = "Nell"
+
+# ⚠️ v2.py:9294 emits a name textbox for EVERY customizable NPC unconditionally,
+# so Gil and Nate are player-renameable. Every authored line about them must read
+# back as @gil / @nate and never a typed name.
+
+[player.core_traits]
+exposure       = 5     # ascent tier — starts at 5, not 0 (her_meters.md)
+corruption     = 5     # ascent tier
+reputation     = 5     # ascent tier
+rest           = 100   # a need
+clean          = 100   # a need
+cash           = 10    # ⚠️ NOT on any sheet. See the note below.
+debt_left      = 2400  # money.md — the semester
+fridays_missed = 0
+shifts_worked  = 0     # the cafe. Never goes down (the_move_up.md)
+move_up        = 0     # 0 no job · 1 the floor · 2 the counter · 3 closing
+owen_standing  = 0     # the second key on every step up
+home_after_ten = 0     # times she has come through the front door after his rule.
+                       # the_house.md: "After that the front door is a thing she
+                       # has to come through, and he's up." Read at the dinner
+                       # table — he notices the hours she keeps.
+crowd_standing = 0     # where she stands with Jules's lot. Moved by every dare
+                       # taken AND every dare refused, and by answering back in
+                       # front of people. NOT the same as `reputation`, which is
+                       # how much of the campus has heard of her.
+dare_chain     = 0     # A POSITION IN A CHAIN, NOT A TALLY. 0 none, 1 the union,
+                       # 2 the jacket. It decides which dare comes next and
+                       # nothing else. SYSTEMS.md settled that a count of dares
+                       # taken was a second copy of crowd_standing.
+dare_cooldown  = 0     # days until a refused dare comes back. the_dares.md:
+                       # "the same dare comes back about a week later, in front
+                       # of more people." Saying no never shuts a door — it
+                       # costs a louder week and it comes round again.
+quiet_week     = 0     # days left of the random picking-on being off. THE ONLY
+                       # THING A DARE BUYS in the first build — the row, the
+                       # parties and being let in are all waiting, so the only
+                       # honest payoff in four weeks is the thing already running,
+                       # turned down for a week.
+
+# ⚠️ ATTENDANCE IS A FALLING METER, AND college.md COUNTS MISSES. That is a
+# translation, not a redesign, and here is why: the engine cannot count a miss
+# because ABSENCE IS THE ABSENCE OF AN EVENT — nothing fires when she does not
+# come, and there is no conditional day-tick to hang it on. So each subject falls
+# 8 a day and going to class adds 30. Twice a week is +60 against -56, so showing
+# up holds her level and every class she skips sinks that subject on its own.
+# The bands land where the sheet put them: under 40 it is noticed, under 20 the
+# mark cannot come back on homework alone.
+attend_1       = 100   # lecture hall, Monday and Wednesday, nine to ten thirty
+attend_2       = 100   # lecture hall, Monday and Wednesday, ten thirty to twelve
+attend_3       = 100   # the classroom, Tuesday and Thursday, nine to ten thirty
+attend_4       = 100   # the classroom, Tuesday and Thursday, ten thirty to twelve
+nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when she
+                       # opens his door; counted down by [engine.daily_tick]. While
+                       # it is above zero her own door cannot stay shut, so the
+                       # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
+                       # when the flag has never been set, which would shut the
+                       # stream from the first minute of the game.
+followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this since
+                       # the summer, quietly, to a few hundred people who have
+                       # never seen her face. That is why one of them already
+                       # knows her name.
+
+# ⚠️ cash = 10 IS A GUESS AND HAS TO GO TO LO. No sheet says what she starts with,
+# and SYSTEMS.md's own tail flags it: "nothing yet says what her cash is for beyond
+# Friday and the bus." At $0 the bus is unaffordable, so the chore stops being a
+# choice and becomes a wall — which is the one thing money.md says chores must not
+# be. $10 is five bus rides and nothing else.
+
+[player.trait_decay]
+rest  = 20             # ⚠️ POSITIVE magnitudes — the amount to LOSE per day.
+clean = 10
+attend_1 = 8
+attend_2 = 8
+attend_3 = 8
+attend_4 = 8             # her_meters.md's table says BOTH needs fall every day.
+                       # Slice 1 declared rest only, off a stale reading of
+                       # CARRIED.md. A shift spends clean on top of this.
+
+# --- the sidebar -------------------------------------------------------------
+# All three meters read as WORDS. her_meters.md: a visible number invites farming.
+#
+# ⚠️ Banded to the FULL five-step ladder (5 · 20 · 40 · 65 · 85), which this slice
+# reaches none of. That is deliberate here and WRONG at v0.1 — the skill's rule is
+# to band to what the build actually reaches. Re-band before anything ships.
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "exposure"
+bands = [
+  { min = 0,  max = 19,  text = "nobody has seen her face" },
+  { min = 20, max = 39,  text = "a few strangers have" },
+  { min = 40, max = 64,  text = "people on campus place her" },
+  { min = 65, max = 84,  text = "somebody she knows has seen it" },
+  { min = 85, max = 100, text = "she can't be casual anywhere" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "corruption"
+# ⚠️ BANDED TO WHAT THE BUILD ACTUALLY REACHES. The design ladder is five steps
+# at 5/20/40/65/85 (her_meters.md) and the highest authored corruption gate in
+# this build is 30, so the last two words were promising rungs the game does not
+# contain. They come back when the content that reaches them does.
+bands = [
+  { min = 0,  max = 9,   text = "she wouldn't" },
+  { min = 10, max = 24,  text = "she might" },
+  { min = 25, max = 100, text = "she has, once" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "reputation"
+# Same reason as corruption: the highest authored reputation gate is 20, so the
+# top three words were describing a person this build cannot produce yet.
+bands = [
+  { min = 0,  max = 9,   text = "nobody knows her" },
+  { min = 10, max = 19,  text = "they know the name" },
+  { min = 20, max = 100, text = "she gets spoken to" },
+]
+
+# ⚠️ A banded stat MUST be hidden in [[traits.labels]] or the band AND the raw
+# number both render (engine.md §30).
+
+[[traits.labels]]
+key    = "exposure"
+label  = "Exposure"
+hidden = true
+
+[[traits.labels]]
+key    = "corruption"
+label  = "Corruption"
+hidden = true
+
+[[traits.labels]]
+key    = "reputation"
+label  = "Reputation"
+hidden = true
+
+[[traits.labels]]
+key   = "rest"
+label = "Rest"
+
+[[traits.labels]]
+key   = "clean"
+label = "Clean"
+# ⚠️ clean is not decoration from here on. her_meters.md: low and she will not
+# be looked at — nothing on exposure opens. It is the gate on the tips ladder.
+
+[[traits.labels]]
+key   = "cash"
+label = "Cash"
+
+# ⚠️ VISIBLE ON PURPOSE, and it is the only meter in the game that is.
+# the_phone.md: "She can see how many. The number sits on the app screen and she
+# watches it move — it's the one number in the game that only ever goes up."
+# Her three meters read as words precisely so they cannot be farmed; this one is
+# meant to be watched.
+[[traits.labels]]
+key   = "followers"
+label = "Followers"
+
+[[traits.labels]]
+key    = "debt_left"
+label  = "Owed to @gil"
+hidden = true
+
+[[traits.labels]]
+key    = "fridays_missed"
+label  = "Fridays missed"
+hidden = true
+
+[[traits.labels]]
+key    = "shifts_worked"
+label  = "Shifts worked"
+hidden = true
+
+[[traits.labels]]
+key    = "move_up"
+label  = "At the cafe"
+hidden = true
+
+[[traits.labels]]
+key    = "owen_standing"
+label  = "Owen"
+hidden = true
+
+[[traits.labels]]
+key    = "nate_landing"
+label  = "@nate on the landing"
+hidden = true
+
+[[traits.labels]]
+key    = "home_after_ten"
+label  = "Nights in after ten"
+hidden = true
+
+[[traits.labels]]
+key    = "crowd_standing"
+label  = "Where you stand with them"
+hidden = true
+
+[[traits.labels]]
+key    = "dare_chain"
+label  = "The dares"
+hidden = true
+
+[[traits.labels]]
+key    = "dare_cooldown"
+label  = "Before she asks again"
+hidden = true
+
+[[traits.labels]]
+key    = "quiet_week"
+label  = "A quiet week"
+hidden = true
+
+[[traits.labels]]
+key    = "attend_1"
+label  = "Attendance, first period Mon/Wed"
+hidden = true
+
+[[traits.labels]]
+key    = "attend_2"
+label  = "Attendance, second period Mon/Wed"
+hidden = true
+
+[[traits.labels]]
+key    = "attend_3"
+label  = "Attendance, first period Tue/Thu"
+hidden = true
+
+[[traits.labels]]
+key    = "attend_4"
+label  = "Attendance, second period Tue/Thu"
+hidden = true
+
+# --- the day rollover --------------------------------------------------------
+# ⚠️ THE KEYS ARE flagEffects / traitEffects. `clear_flags` / `set_traits` are
+# invented, parse fine, build green, and are silently ignored.
+
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "chore_paid_today", op = "unset" },
+  # the jacket is back on in the morning. Dare two lasts exactly one day.
+  { targetType = "player", flag = "jacket_off", op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
+  { targetType = "player", trait = "quiet_week",   op = "add", value = -1 },
+  { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
+]
+# It runs past zero into negatives and that is harmless — every read is `lte 0`.
+
+# --- guidance ----------------------------------------------------------------
+# quests_engine = "v2" turns the sidebar entry and the page ON, so the cards are
+# not optional decoration — with none authored it is a nav link to an empty page.
+
+[[quest_cards]]
+id    = "card_friday"
+group = "the_debt"
+text = "You owe @gil $150 on Friday. He paid the semester up front and your mum doesn't know he did."
+tip  = "Friday evening, in the kitchen. He's always there at six."
+when = [
+  { flag = "opening_done", op = "is_true" },
+]
+
+# \u26a0\ufe0f A card condition is `{ flag, op }` or `{ trait, subject, op, value }` and the
+# key is `when`, NOT `conditions` — a CANVAS condition uses trait_key + operator.
+# Same words, two parsers. And `when` is REQUIRED: validate() refuses a card that
+# does not scope itself to a state window, which is how a guidance page stops being
+# a wall of every hint at once.
+
+# The job, as a two-card group: only the winner in a group renders, so these are one
+# line on the page that changes when she gets the job.
+
+[[quest_cards]]
+id    = "card_the_job"
+group = "the_cafe"
+text  = "There's a job going at the cafe. He said it once and he won't say it again."
+tip   = "The cafe is downtown, off the strip. The bus is $2 and forty minutes."
+when  = [
+  { flag = "opening_done", op = "is_true" },
+  { flag = "has_job", op = "is_false" },
+]
+
+[[quest_cards]]
+id    = "card_on_the_floor"
+group = "the_cafe"
+text  = "Two shifts, Tuesday and Sunday. About $110 on a good week, against a $150 Friday."
+tip   = "The hours are Owen's to give. Working them is the only thing that has ever moved him."
+when  = [
+  { flag = "has_job", op = "is_true" },
+]
+
+[[quest_cards]]
+id    = "card_debt_running"
+group = "the_debt"
+text  = "Under two thousand one hundred of it left. Thirteen more Fridays, and then the next semester posts for more."
+tip   = "It only moves in the kitchen, on a Friday, in cash."
+when  = [
+  { trait = "debt_left", subject = "player", op = "lte", value = 2100 },
+]
+
+[[quest_cards]]
+id    = "card_behind_3"
+group = "college"
+text  = "You are behind in the nine o'clock class, and that is a room of twelve people."
+tip   = "Tuesday and Thursday, nine to ten thirty, in the classroom."
+when  = [
+  { trait = "attend_3", subject = "player", op = "lte", value = 40 },
+]
+
+[[quest_cards]]
+id    = "card_behind_4"
+group = "college"
+text  = "You are behind in the ten thirty class, and that is a room of twelve people."
+tip   = "Tuesday and Thursday, ten thirty to twelve, in the classroom."
+when  = [
+  { trait = "attend_4", subject = "player", op = "lte", value = 40 },
+]
+
+[[quest_cards]]
+id    = "card_behind_1"
+group = "college"
+text  = "You are behind in the nine o'clock lecture. Nobody down there has noticed. The sheet has."
+tip   = "Monday and Wednesday, nine to ten thirty, in the lecture hall."
+when  = [
+  { trait = "attend_1", subject = "player", op = "lte", value = 40 },
+]
+
+[[quest_cards]]
+id    = "card_behind_2"
+group = "college"
+text  = "You are behind in the ten thirty lecture. Nobody down there has noticed. The sheet has."
+tip   = "Monday and Wednesday, ten thirty to twelve, in the lecture hall."
+when  = [
+  { trait = "attend_2", subject = "player", op = "lte", value = 40 },
+]
+
+[[quest_cards]]
+id    = "card_classes"
+group = "college"
+text  = "Four subjects, nine to twelve, each one twice a week. Nobody chases you for missing one."
+tip   = "Two in the lecture hall on Monday and Wednesday. Two in the classroom on Tuesday and Thursday."
+when  = [
+  { flag = "opening_done", op = "is_true" },
+]
+
+[[quest_cards]]
+id    = "card_dare_1"
+group = "the_crowd"
+text  = "Jules asks for things on the quad, out loud, in front of people. You answer on the spot."
+tip   = "The first one is a minute of your face and nothing else. Saying no shuts no doors."
+when  = [
+  { trait = "dare_chain", subject = "player", op = "lte", value = 0 },
+  { flag = "opening_done", op = "is_true" },
+]
+
+[[quest_cards]]
+id    = "card_dare_2"
+group = "the_crowd"
+text  = "The next one is not a minute. It is the rest of the day, and you agree to all of it in two seconds."
+tip   = "She asks on the quad, between classes."
+when  = [
+  { trait = "dare_chain", subject = "player", op = "eq", value = 1 },
+]
+
+[[quest_cards]]
+id    = "card_quiet"
+group = "the_crowd"
+text  = "Nobody has started on you this week. Nobody said why and nobody is going to."
+tip   = "It runs out. Then it starts again."
+when  = [
+  { trait = "quiet_week", subject = "player", op = "gte", value = 1 },
+]

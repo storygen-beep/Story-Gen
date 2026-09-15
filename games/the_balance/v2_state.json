@@ -1,0 +1,1492 @@
+{
+  "slug": "the_balance",
+  "phase": "sheets",
+  "_READ_FIRST": "games/the_balance/process/README.md — THIS GAME OVERRIDES THE SKILL. The Want is SIX things and holds nothing countable (if the game can count it, it is a system). The board does NOT run as one lump or as a fixed block queue: it runs as STEPS agreed one at a time, and the OPENING was step 2 (sheets/OPENING.md), before systems, places and people. Our step page says WHAT for this game; the skill says HOW — never copy the skill's rules into games/the_balance/process/. Guards are one page per step and CARRIED.md rows falling, not a stop count. Verdict boxes are two, not four. Tier rungs start at 5 not 15. Anything LO reads obeys the readability rules in section 5. Cut Want material lives in process/CARRIED.md — consume it, do not re-derive it. games/orientation is off-limits by LO's explicit instruction. Read that file before acting, and again at the top of every step. Keep this key alive in every edit to this file.",
+  "process_doc": "games/the_balance/process/README.md",
+  "narration_person": "second",
+  "protagonist": "Nell",
+  "want": {
+    "player": {
+      "who": "female",
+      "definition": "blank",
+      "definition_note": "CHOSEN, not defaulted. Field runs 19 blank / 10 written and blank holds 80.4% of top-30 engagement; every prior v2 game is `written` and no ledger records anyone picking it. Blank here means her PAST is not written — her face is fixed by real-performer media either way. The premise takes it: she has lived in Gil's house three years and nobody in it has revised their picture of her since she was fifteen. Cost accepted: no inherited history to gate on, so every gate hangs on the start choice or on a meter.",
+      "customization": {
+        "fields": 3,
+        "note": "her name (`text`, reserved id `name`) + `relationship_options` on npc_gil and on npc_nate. The distinctive axis is the cast, not the player (the-want.md W4). Read back as `@player`, `@gil.rel`, `@nate.rel`. ⚠️ v2.py:9294 emits a name textbox for every customizable NPC unconditionally, so Gil and Nate are player-renameable and every line about them uses `@gil` / `@nate`, never a typed name. Lynn, Tasha, Owen, Hale and Reyes stay fixed."
+      },
+      "start_choice_note": "DELETED 2026-09-11 at LO's call. Three flags (past_camera/past_counter/past_quiet) that were three difficulty settings in a costume. The gate `the start choice is read` now reports n/a, which is not a pass — a declared absence. Full reasoning, including why freedom-25.9% does NOT argue for it, is process/CARRIED.md §13. Do not rebuild it."
+    },
+    "who_she_is": "Nell, 18. Her mother married Gil Barnes three years ago and the house came with him, with his son Nate, 20, and his daughter Tasha, 21. She has just started at the college on the other side of town, and she is the only person in that house who is going anywhere. What she has to lose: nobody here has revised their picture of her since she was fifteen.",
+    "obligation": "Gil paid her tuition. She pays him back weekly and it is most of an honest week's work. It never finishes — the next semester posts. And Lynn does not know he paid. NUMBERS AND MECHANISM: process/CARRIED.md §4-§6, owned by block 1 S3.",
+    "hold_kind": "bill",
+    "hold_collector": "npc_gil",
+    "appetite": "To be looked at by people who were not supposed to be looking, and to be the one who decided they would. It cannot complete: every room she gets into has a room behind it, and the camera supplies strangers faster than she can use them. Where the hold stops being the reason — the Friday the debt is clear and she sets the phone against the books and goes live anyway.",
+    "charge": "taboo + transformation",
+    "why_this_person": {
+      "npc_gil": "he paid for her and has never once mentioned it, and she cannot work out whether that is decency or a debt she has not been shown the size of",
+      "npc_nate": "a senior at her college who was fine before she moved in. He cannot stand her, and underneath it he wants her — hiding that is the only thing he is good at, and her climb with him is making him show it",
+      "npc_tasha": "two years ahead and already does all of it without apology. She is what the player is being shown she could be. She laughs at Nell; she cannot out her",
+      "npc_lynn": "not wanted — she is the price tag. Every hour Gil is not in the kitchen is an hour Lynn is on a ward, and that is what makes it cost",
+      "npc_owen": "he decides what her week is worth, in hours, and he is the first person to want something from her that was not free",
+      "npc_hale": "the one man whose approval is worth something on paper, and the only person on that campus who can hand her money that is not a shift",
+      "npc_sam": "In her class, her age, and the ONLY person in the game she is the one who wants. Every other climb is somebody wanting her; this one runs the other way, and until he existed she had no want of her own anywhere. Everybody likes him, which is the mechanic and not the flavour: being seen with him is worth something and losing him is visible to people who are not her. He is the ordinary life she is trading away and the person she has to lie to - the only cost in this game with no money attached. He says no by BELIEVING her. First build: talking, and that is all.",
+      "npc_cara": "Her friend, and the only person in the game who wants nothing off her. She wants her TIME - the one thing Nell is running out of - so she is a cost where everyone else is a payer, which is what makes dropping her the cheapest hour to free up and what makes it hurt. She is the other end of the phone: the messages in talk.md are hers. She says no by going quiet, never by confronting.",
+      "npc_reyes": "he is the consequence. A strict officer who wants nothing from her, which is what makes him different from every other man in the game",
+      "npc_jules": "she runs the crowd and she is the one making Nell small, so being pushed around and being let in are the same channel. She does not giggle — she assesses, which makes a dare read as a test that can be passed. She is a target in the end",
+      "npc_bree": "not wanted — she is the crowd's mouth, the one who says the cruel thing out loud. Thin on purpose",
+      "npc_paige": "not wanted — lovely to her face, and she lets Bree do the talking. Thin on purpose"
+    },
+    "last_read_at_release": null,
+    "world": "A college town. The house on the near side, the campus across town, the strip downtown where the cafe is.",
+    "cut_log": "WANT.md went 4,203 words -> 586 on 2026-09-11. The rule, LO's: if the game can count it, it is a system; the Want holds what the game IS. Every cut item is in process/CARRIED.md against the block that owns it. hold_kind/hold_collector stay here because the `collector is also the target` lint reads them — the LEDGER is what instruments read, WANT.md is the human compass. They are not the same file."
+  },
+  "releases": [],
+  "promises": [],
+  "decisions": [
+    {
+      "at": "want",
+      "note": "Founded 2026-09-10. LO ruled out reusing games/orientation entirely ('ignore it like it was deleted'), so nothing here is derived from it."
+    },
+    {
+      "at": "want",
+      "note": "`blank` over `written`. Field 19/10 with blank holding 80.4% of top-30 engagement; every prior v2 game is `written` with no recorded choice. Cost: no inherited history to gate on."
+    },
+    {
+      "at": "want",
+      "note": "`bill` with a named collector, taken from LO over my `ambition` proposal. I argued ambition (5 of 23, the field's largest; bill is 4th) because a collector who is also a target is the architecture nobody chooses and everybody ships. LO's version is better on ignition — the man she owes sits at her kitchen table — so the defect is answered by the three hold_constraints instead of by changing the hold."
+    },
+    {
+      "at": "want",
+      "note": "Walk-ins over the wall. LO replaced an abstract 'hears her through the wall' Nate surface with walking in on him, and on Lynn and Gil in the master bedroom. Better content and it satisfies the walk-in floor gate (the-surfaces.md R3). Built as arcs, not one-shot scenes."
+    },
+    {
+      "at": "want",
+      "note": "`nested_zones` over `two_hub`. The premise is genuinely three grounds — house, campus, downtown — and two_hub cannot hold three (the-map.md R0). nested_zones is named 'the default to beat'; chosen anyway, with the reason, rather than drifted into."
+    },
+    {
+      "at": "want",
+      "note": "Tier rungs start at 5, not 15. All sixteen declared tiers across five prior v2 games sit at 15 because templates/board.toml carries that table; the field runs 8-17 rungs starting around 5."
+    },
+    {
+      "at": "want",
+      "note": "Gil strict and sober, per LO. A drunk step father hands her an excuse for every act, which contradicts §4b (design what stops her, not a reason to go). The rules become nerve rungs and the chores become the economy's floor."
+    },
+    {
+      "at": "want",
+      "note": "29 locations / ~116,200 words / anchor `the_cafe` at 29.3%. Deliberately the reference game's seed distribution (25 locations, 116,540 words, anchor 30%, tail to 302). Accepted consequence: the `location fill` gate reads RED until fill catches up, and that red is the release backlog."
+    },
+    {
+      "at": "want",
+      "note": "Vocabulary pass run at the Want, not at the build. Rejected on 0-of-27: undeclared, bursar, registrar, enrollment/enrolment, assistantship, seminar, camgirl, livestream, laundromat, stockroom, carrel, and the closed compounds stepdad/stepsis/stepbrother. Dialect fixes caught in the WANT itself: cheque->check, recognising->recognizing, promotions->promotion, runners->joggers. The field writes the spaced forms `step dad` / `step sister` / `step brother`."
+    },
+    {
+      "at": "want",
+      "note": "WANT.md cut from 4,203 words to 586, over eight rounds with LO. The stopping rule is his: if the game can count it, it is a system; the Want holds what the game IS. Six items survive — who she is, the appetite, the world, the charge, the eight people, second person. None is countable."
+    },
+    {
+      "at": "want",
+      "note": "The start choice is DELETED, not deferred. It was three difficulty settings dressed as memories. The freedom=25.9% figure that justified it means freedom DURING PLAY ('farmer, slave merchant, bounty hunter... you can be whatever you want'), not a three-way pick at minute zero — and this game already has that. The creation screen's relationship picker remains."
+    },
+    {
+      "at": "want",
+      "note": "The debt and the four meters were reclassified as SYSTEMS and left the Want. Both were defended and then conceded: a debt is a number, and meters are systems by definition. Only the situation stays — she owes her step dad and her mum doesn't know."
+    },
+    {
+      "at": "want",
+      "note": "Three of the four Gil constraints became structural rather than written rules: his ladder has no self-opening rungs (so he cannot initiate — there is no mechanism), the income rungs clear the debt (arithmetic), and the build already prints his explicit rank. 'Strict and does not drink' moved into his cast line because it is who he is."
+    },
+    {
+      "at": "want",
+      "note": "process/CARRIED.md created as a TEMPORARY holding file. The cut only simplifies the Want if every cut item lands somewhere that will build it; if it lands nowhere we deleted the game. A row is deleted when its block consumes it; the file is deleted when the last row goes."
+    },
+    {
+      "at": "want",
+      "note": "2026-09-12, LO: the board runs as STEPS, not as a fixed block queue. Agree what a step holds, write The Balance's one page for it, two boxes, next. The division is his: OUR step says WHAT (the room, the hour, the person, the choice); the SKILL says HOW. My first draft of the opening step was five items that were all the skill's checklist reworded; a copy rots when the skill changes and it makes him read an engine checklist to review a story decision."
+    },
+    {
+      "at": "want",
+      "note": "The opening moved from block 4 to step 2, ahead of systems/places/people. Reason: it is the most concrete question in the game and it CREATES the rooms and people it needs, where an abstract step drifts vague (S1 asked for everything the game tracks before one thing had been decided). Coverage is the cost and CARRIED.md plus the Want's eight people are the checklist against it."
+    },
+    {
+      "at": "want",
+      "note": "sheets/OPENING.md written and approved in principle by LO before writing. Cold open naming nobody: bedroom (18 today, step dad paid the tuition, first payment Friday, mum does not know) -> hallway (shower, a closed door, mum's bag gone) -> hands over into the kitchen about 07:30 with Gil at the table, the chore list on the fridge and a bus in twenty minutes. First free choice is chore-for-money vs eat with him vs leave early: money against time on the first click. A staged open was rejected because it puts the collector on screen one as the game's first face."
+    },
+    {
+      "at": "want",
+      "note": "Next-step rule, 2026-09-12: blocked first, then whatever the most things wait on, else what the player sees next. The queue is the tail of each sheet (what it hands to the steps after it) — no separate to-do file. The ORDER is per-game; only the loop, the rule, the tail and one-page-per-step carry between games. LO left the END of the step list open deliberately ('no end is fine for now'); the risk is recorded in process/README.md §2."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/money.md written. $2,400 a semester, $150 every Friday, sixteen weeks clears it, next semester posts for more. Three earners at the first build (cafe, going live, chores capped) with Hale's reading, Tasha's parties/bar and the till/pawn held for later releases — six routes cut to three so each is deep. Ignition not tax: week one is two short shifts (under $150) and by about week four a clean week is ~$220, so honest work covers the settle with ~$70 left. Missing a Friday rolls over: the cost is social (he asks in front of Lynn) and then the house rules tighten for a week. lynn_knows write-list closed to four writers. CARRIED rows 4, 5, 7 and the arithmetic half of 6 consumed."
+    },
+    {
+      "at": "want",
+      "note": "sheets/places/the_house.md written. Nine rooms: her bedroom, the landing, kitchen, living room, bathroom, Nate's room, Tasha's room, the master bedroom, the garage. LO named the living room (rest + TV), the master bedroom, the step brother's room and the shared bathroom as must-haves, and ruled Tasha lives at home. Three of them carry systems rather than scenery: the living room is the free hour, the two bedroom doors are the walk-ins, the bathroom is `clean` and the lock. The landing is built as the door junction, not as a corridor. Chores landed here because the chores are here: bins, laundry, dishes, the car, $5 each, one paid a day (~$35 a week — real in week one, pocket change by week four). Gil's three rules are wired to objects: the front door after ten, her bedroom door open when anyone is on the landing (the same door the stream needs shut), the list before she leaves."
+    },
+    {
+      "at": "want",
+      "note": "sheets/places/the_cafe.md written, LO's shape. Three places: the cafe (one room — no separate floor, the counter is a spot not a location), the office out back (Owen's, LOCKED at the first build and the door the first release ends on), and a COMMON toilet shared with customers. Two ladders on one place, deliberately different shapes: customers are many/shallow/cash (a hand not moved, showing more, the toilet for money — asked for with TIPS, ~$10/$30/$80, LO's addition) and Owen is one man/deep/pays in hours and access (tables, counter, closing, keys, opens alone). PROMOTION NEEDS BOTH KEYS — shifts worked AND how far she has gone with him — because adult-only promotion makes the waitress work pointless and turns the cafe into a menu. Customer cash is the fastest money in the game, so its brakes are declared here: only some customers, only when the room allows, always costs cover. Shift ~5 hours; week one two shifts ~$110 (under the $150), by week four four or five for ~$220."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/the_week.md written — the clock, taken next because the opening, the house and the cafe were all written and all three were stuck on it. Wake 07:00, game starts 07:30, no forced bedtime. Classes 09:00-12:00 weekdays; three cafe shifts that CANNOT all be had: early 07:00-12:00 costs a class, middle 12:00-17:00 fits, closing 17:00-22:00 breaks Gil's ten o'clock rule and is the shift where Owen is the only other person in the building. House presence: Gil kitchen till eight and back by six, garage late; Lynn nights on the ward three times a week (so the master bedroom is only live on the nights she is home); Nate almost always in; Tasha in at four, out Friday and Saturday nights. House quietest on weekday afternoons, fullest Sunday. Friday's $150 is handed over in the kitchen at six. Bus 40 minutes and $2 each way, walking an hour, a lift from Gil free and a favour. Owen confirmed male at LO's call before this."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/the_phone.md written. Messages + camera app only at the first build; no bank, map, job board or battery; paid tier is a later release. ONE place to go live at first — her own room with the door shut, deliberately the same door Gil's rule keeps open, so the stream is wired to a house rule from session one. Needs clean + alone + an hour. Pays ~$20 early (less than a shift, more than a chore, one hour not five), $50+ once she has regulars. Cost is cover and nothing buys it back; as cover falls she starts being recognized in the street, which OPENS content rather than only punishing. Best hours are weekday afternoons and after the house sleeps — the same hours the cafe wants, so the two earners compete for the same clock. Dane and Reyes are both already watching and she does not know."
+    },
+    {
+      "at": "want",
+      "note": "LO's revision to the phone, same day: it is a STREAMING app, not a camera app, and the payout is a RANGE rolled per session, not a flat number — $8-25 starting out, $20-60 with a few regulars, $50-120 known. FOLLOWERS lift the range and rise when she streams and further when she does something new. Two consequences taken with it: the player cannot compute how many sessions clear Friday (the settle is fixed, the income is not), and followers/cover become two one-way numbers moving in opposite directions off the same act — followers never fall (reward stacking), cover never returns (price stacking)."
+    },
+    {
+      "at": "want",
+      "note": "No subscription model in this game at all, LO's call — not deferred, dropped. People FOLLOW her (free) and every stream pays on the night, with the roll's range lifted by the follower count. Corrected in the phone sheet, money sheet, DECISIONS.md Q4 and Reyes's line (he pays her on stream, he is not a subscriber), and in CARRIED's motel row. Earlier entries in this log that say 'camera app' or 'paid tier' are superseded by this one."
+    },
+    {
+      "at": "want",
+      "note": "LO: the follower count is SHOWN to her, on the app screen. Taken with two consequences. (1) The payout bands become visible thresholds — under 500 / 500 / 2,000 — so the next band is a door she can see, which is the release doctrine's shape applied to a number. (2) It cannot start at zero: the Want already says Reyes has been paying her since March, so she has been streaming quietly since the summer to a few hundred people who have never seen her face, and that is why one of them already knows her name. Recommended and flagged to the meters step: followers are a number she sees, cover is NOT — cover should read as words, or the player farms it."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/her_meters.md written — Q1 answered ON HER, not per-person, and the page says so in the open so LO can overrule it there. Four: nerve (caught-able places and hours), appetite (what she takes and whether she asks), standing (campus reach — it delivers people and almost never refuses), cover (renamed from `anonymous`, only falls, and falling OPENS being recognized as much as it shuts being casual). `audience` DELETED as a fifth meter: it meant how many are watching, which is the follower count already visible on the phone — one idea, one number. Nerve/appetite/standing display as WORDS not scores (a number invites farming); followers stay a number because she is meant to watch it climb. Needs kept: rest and clean, with clean gating going live. Rungs start at 5 per O3; what sits at each step is deliberately NOT decided here. CARRIED rows 1, 2 and 3 consumed; the bottom/top door lists stay in CARRIED for the places and scenes steps."
+    },
+    {
+      "at": "want",
+      "note": "LO 2026-09-13: cover is CUT and the rest renamed — nerve -> exposure, appetite -> corruption, standing -> reputation. Three meters, not four. Exposure absorbs what cover/`anonymous` measured: it is both how far into the open she will go AND how much of her has been seen, so it climbs and never comes back, and being recognized still opens content instead of only punishing. All three names clear the 27-game vocabulary check (corruption is the field's most-read system). Propagated to her_meters, the_phone, money, the_cafe, DECISIONS row 5 and CARRIED. Nothing is built, so no saves break."
+    },
+    {
+      "at": "want",
+      "note": "Cast cut from eight to SEVEN, LO 2026-09-13. Dane is gone: 'dont add customers as NPCs', so cafe customers stay faceless and the tips ladder runs on strangers. Nate rewritten — a senior at her college, hostile, who wants her underneath and hides it; her climb is making him show it, and the walk-in is where it first cracks. He is now in BOTH her worlds (house and campus), so 'almost always in' is corrected on the house and week pages. Tasha can no longer out her (contradicted the Want; the Want line is rewritten) — she is the example and the supplier, not a threat. Owen is a STRICT boss and his office is NOT locked, so the first release's visible locked door moves to the CLOSING SHIFT — the schedule with her name not on it, and the hours when the cafe is him and her. Reyes no longer pays her: the 'since March' line also put him paying a seventeen-year-old, and LO chose simple — a strict officer, consequence only, wanting nothing from her."
+    },
+    {
+      "at": "want",
+      "note": "sheets/people/the_cast.md written — seven blocks, six lines each: what they want, where they are, what they give, how they refuse. Gil's block carries the structural rule in the open (he never opens a step; every step with him is one she opens). Nate is the biggest ladder in the house — from cannot stand her to showing it — and he is the only character in both her worlds. Owen refuses by giving the shift to somebody else, never by threatening. Hale's lever is marks, which need attendance, which needs sleep, so he is wired to the needs. Reyes is a threat with NO trigger yet and the page says so."
+    },
+    {
+      "at": "want",
+      "note": "Campus built as a WORLD, not a corridor, over four rounds with LO. sheets/places/the_campus.md: nine places, all open at the first build — quad (the root, where being known is READ), lecture hall (a hundred people, only the sheet knows she came), classroom (a dozen, Hale in the room, undone homework is visible), department, library, union, gym, a FRIEND'S DORM ROOM (LO said yes — the only private room on campus she can be invited into), and the row. THE ROW IS CAMPUS-SIDE at LO's call: being known pays off within walking distance of where it was earned, and the way home is through the park against a ten o'clock. Two teaching rooms, not five identical ones, because they apply different pressure. LO refused a campus restroom and refused any campus earner: every campus hour is hours and bus fare going out, which is what makes the cafe and the phone the only ways out of Friday."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/college.md. Campus measures two things that fight each other — marks and being known — and her hours only stretch to one while the cafe eats them too. Marks: classes 9-12, Hale sets and grades everything, exams week 8 and finals week 16 on the SAME sixteen weeks that clear the debt. The teeth cost nothing to build: if she fails, Gil's money was wasted, and the warning letter after bad exams goes TO THE HOUSE — the cheapest route in the game to losing the secret about who paid. Being known: two crowds (the crowd, and the serious ones), she starts outside both, and THE CROWD CAN SHUT HER OUT — a door that never closes is not a door. Three activities only, each passing LO's test that it must move a meter and put her in a room with someone: parties at the row (dares are the climb), the gym, and posing for the art class (looked at on purpose by people who are allowed to — pays standing, not money). Clubs, study groups and sign-up sheets refused by name."
+    },
+    {
+      "at": "want",
+      "note": "LO 2026-09-13, two corrections to campus. (1) The friend's DORM ROOM is removed — campus now has eight places and NO private room at all, so everything there happens where someone could walk past. (2) Teaching is not Hale-only: four subjects, four teachers, attendance and marks counted PER SUBJECT so she can be fine in one class and sinking in another. Hale teaches one of the four — his is the one where being liked changes the number — and the other three are names on a timetable that can each become a real character in a later release."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/walking_in.md — LO's campus brainstorm landed as ONE mechanic reused in both halves of the game rather than a campus cast. She walks in on people: at home two doors she knows (Nate, the master bedroom on the nights Lynn is in it), on campus strangers in six rooms (library third floor after eight, gym showers, the department corridor once empty, a classroom between classes, behind the row houses, the quad late) who need no names. WHAT CLIMBS IS HER REACTION, NOT HER ACTIONS: back out / freeze / stay and watch / let herself be seen / be spoken to / be asked in. LO's addition: the menu is gated by CORRUPTION — low, watching is not on offer at all — and taking the furthest thing available is what raises it, so the ladder climbs itself and nothing is ground. Split of the two meters falls out: corruption is how far she will go, exposure is what it costs when she is seen. First walk-in is written for her with no choice offered; locked options are SHOWN as a line, never hidden, which is how the meters stay readable with no number on screen. The engine already does walk-ins as chance rules banded on corruption, so this needs no new machinery."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/being_known.md split out of college.md (which hit 680 words against our own one-page rule; now 304 and 458). LO's combine: THE GIRL WHO RUNS THE CROWD IS ALSO THE ONE MAKING HER SMALL, with her friends, on the quad. So being pushed around and being let in are the same channel — every dare is a humiliation and an invitation and the player cannot take one without the other. Three rules keep it a climb instead of cruelty: every round visibly moves her closer, she can always walk away at a cost in standing, and getting in does not end it. Her friends are in Nate's year so campus and house stop being two games, and she ends up a target herself — the only thread between two women. Cut from my own earlier proposal, which LO rejected wholesale: four archetype names (the friend, the queen bee, Nate's mate, the watcher), rivalry as its own system, bullies as separate people. A boyfriend is HELD, and if he ever comes in he comes in as an alibi, not a romance. Gossip is now required, not optional: without something telling her where people are she goes to class and goes home and no walk-in happens."
+    },
+    {
+      "at": "want",
+      "note": "sheets/SYSTEMS.md — the master list, written LAST instead of first, at LO's prompting ('many things here can be its own systems'). Done as a COLLECTION job from the eight pages already written, which is why it works now: at the start it would have been guesswork, and that is exactly the S1-first ordering LO threw out. 22 tracked things in seven groups. Three findings the list caught and no single page could: (1) GOSSIP HAS NO SOURCE — two pages depend on her knowing where people are and nothing produces it, so the campus walk-ins never fire; (2) four systems are fed in ONE place and read everywhere — followers (phone), shifts and the move up (cafe), marks (class), standing with the crowd (quad/row) — which is the property night_desk's six ambient systems lacked; (3) two candidates to cut: `streams done` duplicates followers, `dares taken` duplicates standing with the crowd."
+    },
+    {
+      "at": "want",
+      "note": "sheets/systems/talk.md — the hole SYSTEMS.md caught, closed the same day. One system, not two, because both halves come from the same act (standing somewhere and listening): it tells her WHERE PEOPLE ARE (which is what makes the campus walk-ins and the parties reachable instead of blind luck) and it tells her WHAT PEOPLE SAY ABOUT HER (which is how reputation and exposure become visible with no number on screen). Six sources: union tables, the minutes before class, the quad, the gym locker room, the row, her messages. Costs her a few minutes — listening is chosen, not ambient wallpaper. Three rules keep it a rumour: it goes stale (tonight means tonight), it is sometimes wrong, and it sharpens as she climbs until somebody is describing a room she recognizes. Declared cost: it is a lot of small writing that must change as she does."
+    },
+    {
+      "at": "want",
+      "note": "Jules named and written into the cast (21, runs the crowd). Chosen over Bree and Paige for the lead because the design hangs on a dare reading as a TEST rather than a joke — she watches, decides and is usually right — and because the later reversal, when she is the one being looked at, needs someone worth waiting for. The two rejected names became her two: Bree says the cruel thing out loud, Paige is lovely to her face and lets Bree do it. Both deliberately THIN — the crowd's voice, not two more ladders — and both in Nate's year, which is how the quad gets home before Nell does. Cast page renamed from THE SEVEN to THE CAST: eight written, two thin."
+    },
+    {
+      "at": "want",
+      "note": "The first build is HER FIRST FOUR WEEKS, written to sheets/RELEASE.md. Reached by the picking rule running out: every remaining tail row is the same kind of work (steps, scenes, lines), nothing is blocked on a decision, so the next question is necessarily what ships and what waits. Four weeks is not arbitrary - money.md already fixed it: the build has to reach about week four or the squeeze never lifts on screen. IN: the opening as written; the house (nine rooms, chores, Gil's rules, two doors with one step each); the cafe (room + toilet, two shifts rising to four, two customer steps, the move up to the counter); the phone (going live in her room, followers, the pay range); campus THIN (classes, quad, union, talk, Jules's first two dares); eight people. OUT: gym, library, department, art class, the row on a party night, Hale beyond a name, the three other teachers, Reyes, the letter home, exams, the one who recognizes her. ENDS ON: the closing shift - visible on the schedule from week one, her name not on it, and it needs BOTH keys (shifts worked and how far she has gone with Owen). Campus is in rather than held because the whole point of the game is that college is what changes her; a first build without it is a game about a girl with two jobs. It is thin because every campus room wants talk lines plus a walk-in at three heights, which is the largest pile of writing in the design."
+    },
+    {
+      "at": "want",
+      "note": "sheets/RELEASE.md proposes the FINISH LINE for the step list, which LO left deliberately open on 2026-09-12 ('no end is fine for now') and which process/README.md says is his to close, not ours. The proposal: the step list ends when the six rows of what-is-in have a page each, and nothing else. Pending his tick on the two boxes. Also mapped RELEASE -> kind 'decision' in scripts/notion_sheets_sync.py FILE_KIND so the page sorts first in the review order instead of last as an untyped sheet."
+    },
+    {
+      "at": "want",
+      "note": "CARA added - the friend, the ninth name. Chosen over Mae (quiet) and Priya (organized) because the loss has to be LEGIBLE and only a talker going quiet is legible: the message thread visibly thins. Her job is structural, not warm - with nobody on Nell's side, nothing she loses reads as a loss, and she is the one claim on Nell's HOURS in a game where every other person pays her. She also fills a hole talk.md had: 'her messages' was one of six sources of talk with nobody on the other end. In the first build she only ever repeats what the crowd says and never knows it is true; finding out is a later build. Of the four campus faces the campus page left as job titles, three are now settled: Cara is the friend, Jules runs the parties, one-of-Nate's-friends is CUT (Bree and Paige are in his year and already carry the quad home before she does), and the one who recognizes her stays held."
+    },
+    {
+      "at": "want",
+      "note": "DECISIONS.md row 9 corrected rather than quietly broken. It read 'Cast of 8 ... a ninth is a new release, not a rewrite', and Cara is a ninth. The row's real intent was about CLIMBS - the failure named right above it is 'eight climbs that never touch'. Cara has no climb: no steps, nothing to unlock, nothing to trade. So the row now counts climbs, not names: eight climbs plus three thin faces who have none. Adding a ninth CLIMB is still a new build."
+    },
+    {
+      "at": "want",
+      "note": "BEING PICKED ON written as its own system (sheets/systems/being_picked_on.md), at LO's call - he asked for bullying to work the way the walk-ins do. TWO sources: random faceless people (quad, lecture hall, union, bus stop - a seat taken, something said as she passes) and the named crowd. It KEYS OFF EXPOSURE, which is how exposure gets felt without a number on screen: early it is petty and general, late it is specific enough that she knows which night it came from. It is talk.md turned around - talk is what she hears without being meant to, this is the same sentence said to her face, and pairing a Tuesday rumour with a Thursday remark makes both land. What she can do is set by WHERE SHE STANDS, not corruption: a girl nobody knows cannot answer back. Answering back in front of people is the only thing it writes. Jules's version always ends in a dare and the random kind never does - which is why getting in reads as an escape from the thing the crowd is doing. Two rules: it never blocks her (weather, not a wall) and it is never violent."
+    },
+    {
+      "at": "want",
+      "note": "SAM added, and the CLASSROOM becomes the first build's only campus walk-in. Chosen over Theo and Miles because being liked by everyone is load-bearing: it makes being seen with him worth something and makes losing him visible to people other than her. The gap he fills is real and was not spotted until LO asked for 'one more guy she can talk to' - every man in the cast was older, hostile or paying, so the protagonist had no want of her own anywhere in the game. The classroom walk-in costs nothing (the room and the hour already exist, it is empty between classes) and it fixes the hole that all six campus walk-in rooms were on the waiting list, leaving four weeks where every door she opens on people is at home - which makes the HOUSE the thing that changes her when the whole point is that college is."
+    },
+    {
+      "at": "want",
+      "note": "REPUTATION'S FIRST-BUILD PAYOFF PARKED at LO's call ('hold on to reputation for a while'). The open problem stays on the record: all three things being known can buy - the row, the gym, the art class - are on the waiting list, so in four weeks reputation climbs and delivers nobody. The proposed fix that is NOT adopted yet: the payoff is the laughing stopping - same quad, same people, treating her differently - which costs no new room. being_picked_on.md writes 'somebody answers for her' as parked for the same reason, so the two unpark together."
+    },
+    {
+      "at": "want",
+      "note": "THE DARES WRITTEN as their own system sheet (sheets/systems/the_dares.md), ahead of the cafe's move up, because three pages promised them and none held a step: being_known ('the dares are a climb nobody has written a single step of'), the_cast (Jules), RELEASE (campus, first build). Shape agreed with LO in chat before writing: Jules says it out loud on the quad in front of people; Nell answers on the spot; given on the quad and done elsewhere the same day. First two are (1) say something stupid to a stranger at the union, over in a minute, (2) the jacket goes in her bag and she stays like that till she goes home - four hours agreed to in two seconds. Two is shut until one is done: a chain, not a number. Saying no never shuts a door; it costs a louder week and the dare returns."
+    },
+    {
+      "at": "want",
+      "note": "WHAT A DARE BUYS - LO picked option B. The open question put to him: with reputation's payoff parked, a dare moves her visibly closer and reaches the house (Bree and Paige are in Nate's year) but unlocks nothing, because the row, the gym and the art class all wait. Option A was to leave it and risk a player doing dare one, getting nothing back, and never doing dare two. Option B, chosen: the week after a dare the RANDOM picking-on goes quiet - strangers stop, nobody says why - then it starts again. Cheapest possible payoff: it uses a system already written (being_picked_on), adds no room and no person, and does NOT unpark reputation. Wired into being_picked_on.md's body. Open risk recorded on the dares page: if the player cannot tell the quiet week happened, it bought nothing."
+    },
+    {
+      "at": "want",
+      "note": "'DARES TAKEN' SETTLED, one of the two things SYSTEMS.md flagged as counted twice. As a NUMBER it was a second copy of where she stands with the crowd, and it is cut. What stays is her POSITION IN THE DARE CHAIN, which is a different object - it decides which dare comes next, and dare two is shut until dare one is done. SYSTEMS.md section 3 and RELEASE.md's tail both updated; 'streams done' vs 'followers' is still open and unresolved."
+    },
+    {
+      "at": "want",
+      "note": "SHE DOES NOT START WITH THE JOB - LO's call. There is an opening at the cafe and she has to apply. Gil names it at the kitchen table in the opening, one line, never repeated, and he does not mention Friday - it puts the debt and the job in the same breath, which is him saying how to pay him without asking. Applying is her first meeting with Owen and delivers his character for free. HE NEVER TURNS HER DOWN: if the door can shut the game can stall on day one, so the no is in the hours, not at the door - two shifts, the worst two. She can put the cafe off entirely; the phone pays the same night, and the cost of putting it off is the first Friday she cannot pay, which the 'Fridays she missed' counter already holds. Free rhyme: the schedule with her name not on it happens on day one and again at the build's ending."
+    },
+    {
+      "at": "want",
+      "note": "THE CAFE LADDER CUT FROM FIVE STEPS TO THREE - LO: 'she doesnt have to open or close the cafe herself. Cafe can open at a schedule and close at a schedule.' HER OWN KEYS and SHE OPENS ALONE are deleted: they climb into being trusted with a building, which is a promotion in a job and not a step in this game. The cafe keeps its own opening hours like every other room, so no new machinery. Closing survives untouched because its value was never the locking up - it is being home after Gil's ten, and the building being him and her. Replacement rung above closing, parked for a later build: SHE WRITES HER OWN SCHEDULE, which in a game whose squeeze is hours is the most valuable thing the cafe can hand her. DECISIONS.md row 4 corrected on the record rather than quietly."
+    },
+    {
+      "at": "want",
+      "note": "THE MOVE UP WRITTEN (sheets/systems/the_move_up.md). Both of my leans adopted after LO said go ahead. (1) SHE CANNOT SLIDE BACKWARDS: shifts worked never drops; Owen's only punishment is HOLDING her where she is - she meets the step and nothing happens - and he never announces it, because the schedule is how he talks. (2) SHIFTS ALONE CAN NEVER REACH CLOSING: both keys or the door stays shut. The work proves she is able and never answers why he would be alone in a locked building with her at ten. The reverse is also enforced: going further with him while the work is sloppy moves her nowhere, because he is a strict boss first - that is what stops the cafe becoming a menu. Plan amounts: floor 2 shifts ~$55 each, counter 4 shifts ~$60 and some say in which, closing 5 shifts with the late one ~$70. Open risk on the page: 'nothing happens' has to be visible or it reads as a bug."
+    },
+    {
+      "at": "want",
+      "note": "LYNN STAYS UNTOUCHED - LO re-confirmed after asking what it meant ('keep her untouched'). What it means: Nell never has anything sexual with her mum, no steps and no climb; Lynn can be SEEN through the master bedroom door, in the bed, with Gil, and that is all. Why it holds: the whole game runs on her not knowing, so if Lynn becomes a climb the secret has nothing left to protect and the debt, the house rules and Gil's ladder all lose their footing; and somebody in the game has to only lose, or nothing Nell does costs her anything. Recorded as a CALL, not a limit - the master bedroom door is heavier for it, not lighter."
+    },
+    {
+      "at": "want",
+      "note": "THE TWO DOORS AT HOME WRITTEN (sheets/systems/the_two_doors.md). The rule the page is checked against: campus walk-ins are faceless and nothing happens after, so THESE TWO NEED AN AFTER. Nate's door: he knows every time, and the first thing it buys her is a WORSE week (he says no by getting worse) before it cracks him - the biggest climb in the house has to cost before it pays. The master bedroom: Gil and Lynn, the nights Lynn is off the ward, before ten - she saw and he does not know, and that is the first thing she holds over anybody. It also solves a real hole: Gil never opens a step and nothing until now gave her a way to open one. How far that door goes is Gil and only Gil. No gossip at home - the house teaches its own hours (her mum's shift times are on that bedroom wall, Nate's door is not always shut), which is the deliberate contrast with campus. Being caught at home does NOT move exposure: exposure is strangers, at home it is one person with a name."
+    },
+    {
+      "at": "want",
+      "note": "MY LEAN, NOT LO'S ANSWER, on the open question 'does Gil ever find out she watched': NOT in this build, and when he does, SHE TELLS HIM rather than him catching her - him catching her would hand him a first move the whole design says he does not have. Written onto the page as a lean and flagged as one. First build holds ONE STEP per door, as RELEASE.md already promised: Nate's is the first walk-in in the game and is written FOR her with no choice offered (walking_in rule 1), the master bedroom is the first one she gets a choice in and at the start the choice is back out or stand there."
+    },
+    {
+      "at": "want",
+      "note": "THE HOUSE WRITTEN HOUR BY HOUR (sheets/systems/the_house_day.md) - LO asked whether household routine already existed. It half did: the_week.md held who is in the BUILDING, the_house.md held the MORNING only and said so in its own tail. What was missing was which room each of them stands in. The page invents nothing - same nine rooms, same four people. Rule it is checked against, written into the header against the night_desk failure (six ambient systems producing six chore-list place sheets): every line either puts somebody in a room she can do something with or empties a room she needs; 'Tasha eats at six' is not content. Three things it settles that other pages were already leaning on: (1) THE BATHROOM - one, shared with Nate and Tasha, and the hours it is free are the hours she is meant to be at class or on a shift, so CLEAN finally has something standing in its way instead of filling itself; (2) DINNER at about seven, the one hour nothing can be avoided, where Gil notices and Nate can needle her in front of people for free - the same move Bree makes on the quad; (3) her mum's three ward nights are the single biggest thing on the page - no dinner, an empty evening, the master bedroom shut on a man on his own, and the mornings after have her asleep down the hall while the house is otherwise empty. Also fixes a quiet assumption: the house is only truly empty four days in seven."
+    },
+    {
+      "at": "want",
+      "note": "LO TICKED THE FIRST BUILD on 2026-09-15. sheets/RELEASE.md is [READY]: the build is her first four weeks, ending on the closing shift. THE STEP LIST IS CLOSED - no more design pages. The risk it had been left open on since 9-12 stays written on the page: there is always one more sensible page, and nine of our last ten v2 games died with pages and no build."
+    },
+    {
+      "at": "want",
+      "note": "THE FIVE OPEN NUMBERS SET, each on the page that owns it rather than on a new numbers page, so there is no second source of truth. (1) A SHIFT is five hours at $9 plus about $10 in tips = $55; two shifts $110 (under the $150), four shifts $220 (pays Friday with $70 left), closing is $11 an hour with better tips = about $70 because it is late and nobody else is on the floor. Deliberate: THE COUNTER PAYS IN SHIFTS, NOT IN A RATE - the rate only moves at closing, which is the page's own rule doing its job. the_move_up.md's earlier $60 counter figure was wrong against money.md's $220 and is corrected. (2) A CHORE TAKES HALF AN HOUR: $5 for half an hour is $10/hour against the cafe's $9, so the money is not why chores are bad - the TIME is, and 'chores first' means the unpaid ones still have to be done. She can do four and be paid for one. (3) EXPOSURE PER STREAM: plus one point for a session the same as the last, plus three for a first time, against named steps fifteen to twenty points apart - so ordinary nights barely shift her and there is nothing to grind. (4) ATTENDANCE DOES NOT EARN MARKS, IT STOPS HER LOSING THEM: each subject meets twice a week, miss one and nothing happens, miss two and it is noticed, miss three and the mark cannot recover on homework alone and the only way up is asking the teacher - which is exactly what Hale is for, and why the lever on her is sleep first. (5) THE FIVE METER STEPS at 5, 20, 40, 65, 85, starting at 5, with the words named for all three meters in a table. Steps get further apart on purpose: the game opens fast and never runs out of room."
+    },
+    {
+      "at": "sheets",
+      "note": "PHASE want -> sheets, AND THE BOARD BLOCK WRITTEN, 2026-09-15. The ledger had no `board` key at all while twenty-one design sheets sat on disk. gates.py reads six board.* keys and SILENTLY DEGRADES to global backstops when they are missing - the-sheets.md S7's recorded failure, where six gates degraded and one printed '[top-3 guess - no v2_state.json]' with the file sitting right there. Every value was copied from a page that already decided it, not re-derived: who_climbs=player from DECISIONS.md Q1 · ascent_tiers exposure/corruption/reputation and rungs 5-20-40-65-85 from her_meters.md · the 30 locations and their fills from process/CARRIED.md 9 · needs rest and clean from her_meters.md · economy $150 against $220 from money.md · characters from people/the_cast.md · map nested_zones, home_base her_room, exterior the_street as ROOT, anchor the_cafe from CARRIED.md 9. TWO THINGS ARE NEW AND BOTH ARE FLAGGED: (a) the cafe toilet had no word budget because the cafe sheet added it after CARRIED's table was written - given 2,000, a round build-phase number, not a story call. (b) map.r1_signoff is written as NOT SIGNED: LO decided the house half and the cafe half on the place sheets, but the full 30-location map has never been put in front of him AS A MAP, and the-map.md says the author of a map cannot sign it. Ask before v0.1 ships. Totals: 30 locations, 118,200 words budgeted, anchor 28.8%, every fill round - which matters because gate 1 refuses to credit a budget that is mostly non-round, after three early v2 games back-filled fill from delivered word counts (0 of 24 round) and scored 8/8 against a record of themselves. Phase moved to `sheets` because the skill builds v0.1 IN that phase; `release` is set after the first ship."
+    },
+    {
+      "at": "sheets",
+      "note": "THE FIRST BUILD IS A SLICE, NOT v0.1. LO's call on 2026-09-15, choosing option B over writing the remaining scene piles on paper first: build the smallest thing that can be clicked and look at it in a browser. The slice is KITCHEN TO THE JOB - her bedroom, the hallway, the kitchen at seven thirty with Gil's one line about the cafe and the three-way first choice, out the door, the bus, the cafe, asking Owen. It ends the moment he answers. Deliverable is an HTML file he can play. THE REASON is the number this game's own process file was built around: ten v2 games exist, nine shipped nothing, median life two days, and all nine died with pages and no build. This game had twenty-one pages and no build. The slice is not content - it is the pipe. It forces the house and the cafe into existence as real rooms, Nell as the player, Gil and Owen as real people, the clock, the money and the first flag, on two scenes instead of on twenty. Gates will be red on a slice by definition (location fill, the explicit floor, every volume gate) and that is NOT to be chased green - the numbers are a baseline, and green belongs to v0.1."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 1 IS BUILT AND PLAYS, 2026-09-15. games/the_balance/output/index.html. Eight locations (her room, the landing, the kitchen, the street, the bus stop, the strip, the cafe, the office), two people (@gil, Owen), two canvases, ten beats, 401 player-facing words. Merge and package both green: 'validation: OK', 'Validation passed', 'All flag chains valid', tweego compiled. playtest.py 8/8 universal checks. A hand-written walk of all three kitchen paths asserts on STATE and is clean: boot 07:00 -> 07:03 -> 07:30 in the kitchen exactly as the clock comment computes it, the chore pays $5 and costs thirty minutes, the bus takes $2 and forty, opening_done sets on all three exits, has_job and move_up = 1 set on taking the job, and walking out without asking leaves the canvas there to come back to. Beats measure 31-46 words against the field's 37, median sentence 5-13 against a ceiling of 14, zero dashes. Vocabulary clean except the cast's own name. THE GATES ARE RED AND THAT IS CORRECT: 15 fail, because a two-scene slice is being measured against a 30-location, 11-character declaration. location fill reads 401 delivered against 118,200 budgeted. The explicit floor is 0% because nothing in a kitchen, a bus and a job interview is explicit. 'residents have homes' fails on six characters whose homes are budgeted and not built. None of that is chased; the numbers are the baseline."
+    },
+    {
+      "at": "sheets",
+      "note": "FOUR THINGS THE BUILD CAUGHT THAT NO SHEET COULD. (1) quests_engine MUST live in [project], not [settings]. template_import.py:1729 reads it only from the project table and :2615 gates the entire [[quest_cards]] block on it, so a copy in [settings] parses, builds green and DROPS EVERY CARD SILENTLY. Found live — playtest reported 0 of 2 cards resolving. games/vesper_two is currently shipping this mistake and its guidance page is empty; not fixed here, it is another game. (2) A quest card's routing key is `when`, not `conditions`, and it is REQUIRED — validate() refuses a card that does not scope itself to a state window. (3) NOTHING CLAMPS A TRAIT TO ITS STARTING CEILING. Eating breakfast was written as rest +5 and pushed rest to 105 out of 100. Caught on a live walk, not by any gate. It matters the moment her bed is written. The effect became @gil relation +1 instead, which is what sitting down with him actually buys. (4) op = 'subtract' is not an engine op — written once here by reflex, caught before the build, corrected to a negative add. ALSO ON THE RECORD: cash starts at 10 and NO SHEET SAYS SO. At $0 the bus is unaffordable and the chore stops being a choice and becomes a wall, which money.md says chores must never be. $10 is five bus rides and nothing else. It is a guess and it needs LO."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 2 BUILT: THE WORKING CAFE, 2026-09-15. LO's call, and it is exactly RELEASE.md's cafe row. Adds: the ordinary shift as the game's FIRST REPEATABLE SURFACE (two canvases, shift_floor and shift_counter) · the first two customer steps · the move up to the counter · the office scene that is the second key · the schedule on the wall · the cafe toilet as a room. Nine locations, nine canvases, 25 nodes, 1,477 words. THE ROSTER IS ENFORCED, NOT NARRATED. [[canvases.trigger.schedules]] takes weekdays/start_time/end_time, so 'Tuesday and Sunday, the two nobody wants' is a real gate: verified live that the shift does not exist Monday, Wednesday or Thursday, and not before noon or after five. TWO canvases rather than one because a condition cannot read the weekday, and one canvas covering both rosters would let her work four days while still on the floor — which is the entire squeeze. BOTH KEYS VERIFIED: eight shifts with no standing is refused, standing with three shifts is refused, eight-and-standing passes. THE DICE: the customer steps are [[canvases.trigger.substitutions]] with substitution_only — a roll inside the routine, which is the cafe sheet's 'only some customers ask' as a mechanism. Measured 12 of 40 shifts at chance 0.35, and 0 of 20 while clean sat under 40."
+    },
+    {
+      "at": "sheets",
+      "note": "FIVE MORE THINGS THE BUILD CAUGHT. (1) A SUBSTITUTION REPLACES THE SCREEN, NOT THE BOOKKEEPING. The parent shift's pay, count and five hours all apply on entry and THEN the target renders. The customer canvases were written carrying the shift payoff on the assumption they replaced it, and a shift where a customer asked paid $120 and counted twice. They now carry the TIP ONLY. Caught on a live walk; every gate was green through it. (2) A BEAT IS A NODE, so an explicit paragraph and the thought after it on the SAME node are ONE beat whose last sentence is about what the moment meant — the pivot, exactly as register.md describes. Split onto their own nodes; both beats now register as explicit (3+ frozen-list words) and neither pivots. Cost: nothing. (3) EXPOSURE WAS A NUMBER, NOT A METER. It was raised twice and read by nothing. Step two now reads it at 8, which is what her_meters.md says exposure is FOR. (4) max_triggers_per_day is counted off the canvas NAME in game_state.activity_trigger_history, so two canvases sharing a name share one day bucket. Renamed. (5) A gate is right about a thing a human cannot see: the customer canvases looked like uncapped income because nothing in the file said they were only reachable through a capped parent. Declared."
+    },
+    {
+      "at": "sheets",
+      "note": "THE BIGGEST REMAINING HOLE, NAMED SO IT IS NOT REDISCOVERED: FRIDAY IS NOT BUILT. She can now earn $55 a shift and there is nothing anywhere that takes $150 off her. gates.py says it plainly — 'the obligation is charged: declared 150 cash, largest authored outflow 2' — and 'sinks >= sources' reads 1 to 5. The entire game is a girl paying a man back every Friday and the payment does not exist on screen, so every dollar the cafe pays means nothing yet. It is one scene in the kitchen at six on a Friday, with @gil already there, and it is the obvious next slice. Out of scope here only because LO scoped slice 2 to the cafe."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 3 BUILT: FRIDAY, AND THE WEEK TURNS, 2026-09-15. Three canvases: sleep, the chore list, and the payment. The loop the game is named after now closes on screen — gates.py 'the obligation is charged' went from 'declared 150, largest authored outflow 2' to 'charged by an authored charge of 150'. SLEEP WAS A HARD DEPENDENCY, not scope creep: advanceDay() is what rolls the day name, the day and week counters, [player.trait_decay] and the [engine.daily_tick] clears, and the ONLY thing that calls it is the clock crossing midnight. Before this, Friday was reachable only by mashing the sidebar's wait button, and rest decayed with nothing to refill it. Sleep is a fixed +540 minutes rather than 'until morning' because no sleep-until-hour key exists — and the fixed number is the design anyway: the_week.md says she can stay up as late as she likes and it costs her the next morning. Bed at ten is up at seven; bed at one is up at ten and the nine o'clock is gone. [settings.rent] STAYS OUT, now with the reason measured rather than assumed: the engine's rent only sets rent_state.is_due on the due weekday inside advanceDay. It deducts nothing and narrates nothing. The payment here is a scene with a man in it."
+    },
+    {
+      "at": "sheets",
+      "note": "WHAT MISSING A FRIDAY COSTS — LO's call, 2026-09-15, from three options. HE TIGHTENS A RULE AND SAYS NOTHING. Two more lines appear on the list on the fridge, neither with a date against it, so neither pays, and they still have to be done: the paid chore goes from half an hour to a whole hour for the same $5. That is the_cast.md's Gil doing exactly what it says he does — he says no by saying nothing and tightening the rules. He never mentions the money and he never explains the list. LO also chose HE IS THERE ALL FRIDAY EVENING rather than six o'clock sharp: she can only miss it by staying out, which is a choice, and a player who has not learned the rule does not lose a week to a clock they could not see. IMPLEMENTED ON THE COUNT, NOT A FLAG. It was first written as a `house_tight` flag that paying cleared. gates.py was right that `fridays_missed` was then raised and read by nothing — a number the player watches move. SYSTEMS.md's own line for that meter is 'how tight the house rules get', so the fridge reads the count directly and the flag is deleted. One fewer flag, and he does not forget a missed Friday because the next one was paid."
+    },
+    {
+      "at": "sheets",
+      "note": "WHAT IS STILL OPEN AFTER SLICE 3. `rest` is the last player meter nothing reads: it is filled by sleep and gated by nobody, because its door is the nine o'clock class and college is not built. That is a named gap, NOT a gate to be silenced — bolting a fake condition onto it to turn the scoreboard green is the thing this game's process exists to prevent. `somebody speaks` has got worse, 11.1:1 against a 5:1 ceiling, and the cause is honest: sleep and the chore are surfaces with nobody in them, and @gil's whole character is that he says two words on a Friday. The talking in this game lives on the quad, at the union, in Cara's messages and at the dinner table, and none of those is built. Do not pad the built surfaces to move that number."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 4 BUILT: THE SHOWER AND THE PHONE, 2026-09-15. 14 canvases, 10 locations, 36 beats, 2,477 words. TWO THINGS FORCED IT. (1) `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a shift and NO effect anywhere raised it, because there was no bathroom. About a week in she dropped under 40, the tips ladder shut and never reopened. No gate caught this — it is a hole a player falls into, not a score. (2) Friday was not a choice: one road to $150 in a game whose first real choice is supposed to be slow-and-honest against fast-and-seen. THE BATHROOM is free 08:00-17:00 and after 22:00 and taken otherwise, which is the_house_day.md's own line doing its job: being clean is never free, and the hours it is easiest are the hours she is meant to be somewhere else. THE STREAM runs 12:00-16:00 on weekdays and after 22:00 any day — exactly the hours the middle shift wants, which is the collision the design is built on. Verified live on both."
+    },
+    {
+      "at": "sheets",
+      "note": "THE ROLLED PAYOUT IS AN ENGINE SHAPE, NOT A WORKAROUND. `value = { type = \"random\", min = N, max = M }` is resolved by _resolve_effect_value (v2.py:14434) and is honoured on exit_block config effects and on choice effects. It ships in vesper's sex loop. I had planned to fake it with three substitution canvases; the real shape is one line. Verified live: six sessions at 380 followers paid 13, 16, 21, 11, 21, 9 — all inside $8-25. The three bands are condition-gated choices on `followers`, mutually exclusive, so exactly one renders: under 500 pays $8-25, 500+ pays $20-60, 2000+ pays $50-120. All three verified with five rolls each. ⚠️ ONE COST: the trait-effects PREVIEW path cannot read the random dict and logs 'Error extracting trait effects from canvas Go live'. It is a warning, the build is green, and the effect applies — the preview is the thing that is lost, and that path is documented as preview-not-apply. EXPOSURE MOVES 3 ON A FIRST TIME AND 1 ON A REPEAT, per rung, via a per-rung flag — verified both. That is what stops her grinding it: the named meter steps sit 15-20 apart, so a run of ordinary nights barely shifts her and a run of new ones changes what she is."
+    },
+    {
+      "at": "sheets",
+      "note": "THE PHONE SUBSYSTEM EXISTS AND WAS DELIBERATELY NOT USED. [phone] is real — enabled, apps (chat, social_feed, dating, gallery, quests, fast_jobs, bank, custom), threaded conversations — and NO game in this repo uses it; there is no 8_phone.toml anywhere. Its social_feed `post_actions` even rolls followers_min..followers_max into a counter_trait with a daily cap and a corruption gate. It is still the wrong shape here: a post_action is a BUTTON, not a scene — one trait, no prose, no choice — and the_phone.md's session is 'she is asked, and saying yes is hers'. The other app is chat, chat is Cara's, and Cara is not in the game, so turning the phone on now buys one idle button and an empty inbox. Revisit with Cara. WHAT DID GET USED: speaker = \"unknown\" renders a dialog block as 'Stranger' with a silhouette (v2.py:15517). That is precisely the faceless viewer and the faceless customer both sheets ask for, and it let the chat and the cafe customers speak without being cast. `somebody speaks` went 14.3:1 to 9.2:1 on the back of it. It is still over the 5:1 ceiling and the gate now names `sleep` — a girl alone in bed, 122 words, nobody to talk to. That is where padding would start, so that is where it stops."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 5 BUILT: THE HOUSE AND THE TWO DOORS, 2026-09-15. 19 canvases, 15 locations, 5 people, 45 beats, 3,116 words. The nine rooms the_house.md declares are all built. @nate, Tasha and Lynn are in, with schedules taken row by row off the_house_day.md's hour-by-hour table — @nate in the bathroom 07:00-07:45 (that is the running shower in the opening), on the sofa 19:00-22:00, and in his room with the door not quite shut from 22:00; Tasha home at four, the bathroom 17:00-18:00 before she goes out, and gone Friday and Saturday; Lynn on the ward Monday, Wednesday and Friday and in that bedroom the other four nights. @gil's evening was split — kitchen 18:00-21:00, then upstairs — and FRIDAY WAS NARROWED TO 17:00-21:00 to match, because the portrait lane checks presence and a window that outran his hours would render a link to a man who is not in the room."
+    },
+    {
+      "at": "sheets",
+      "note": "THE TWO DOORS, AND THEY ARE DIFFERENT SHAPES ON PURPOSE. @NATE'S offers NO CHOICE — she opens it, she sees, she leaves — because the_two_doors.md says the first walk-in in the game is written for her so the second one means something. Verified live: one way out, no menu. He knows every time, so there is no uncaught version. THE MASTER BEDROOM is the first she gets a choice in and the choice is back out or stand there; watching properly is not on the menu because she cannot make herself. Verified: back out leaves nothing, standing there sets saw_them, and NEITHER MOVES EXPOSURE — exposure is strangers knowing things, and at home it is one person with a name. A quarter of the time the landing board goes under her and she is in the bathroom with the tap running before her mum finishes the sentence; nothing is seen and nothing is set. Live windows all confirmed: his door only after ten, hers only on the four nights Lynn is home, 21:00-22:00, and not on a ward night."
+    },
+    {
+      "at": "sheets",
+      "note": "BOTH DOORS GOT THEIR AFTER, WHICH IS THE PAGE'S OWN HEADER RULE — a door with nothing behind it the next morning is a campus door standing in a house. @NATE'S AFTER, LO's call: he is on the landing for seven days, so her own door cannot stay shut and GOING LIVE IS OFF. It costs her the fastest money in the game the week after she opened his door, which is 'the cost comes first' made literal. Implemented as a countdown trait decremented by [engine.daily_tick], NOT days_since_flag — that condition FAILS when the flag has never been set, which would have shut the stream from the first minute of the game. Verified at 7, 3 and 0 days. @GIL'S AFTER, LO's call: once she has stood there, a new choice appears at the Friday table — she asks for more time, pays 75, he says 'Next week, then' and counts it anyway, and IT DOES NOT GO ON THE MISSED COUNT. She spends it without a word and he still never opens a step. That closes the hole the sheet names in its own tail: a thing she holds that she can never spend is not a mechanic, it is a memory."
+    },
+    {
+      "at": "sheets",
+      "note": "THE GATES EARNED THEIR KEEP THIS SLICE. Adding three scheduled people turned `the walk-in floor` against the game, exactly as expected: G30 joins the author's OWN board — she works alone here, someone is scheduled here, so someone can interrupt her — and the house was suddenly claiming rooms were shared while nothing ever came through a door. Two canvases answered it, and both were lines already sitting on the sheets: TASHA WITHOUT WARNING in the bathroom (the_house_day.md names her in those words) and @GIL IN THE DOORWAY while she does the chore (the_house_day.md: he notices the chores, the hours she keeps, whether Friday got paid). 1/2 -> 4/4. `standing surface` also caught that Tasha and Lynn had schedules and no canvas of their own — a name on a timetable — fixed by binding their substitution canvases to them; 3/5 -> 5/5. `residents have homes` 5/11 -> 9/11 as the five rooms landed. The scoreboard reads 25 pass / 15 fail, and the two gates that moved are ones no human was going to notice."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 6 BUILT: CAMPUS PART ONE, CLASS IS REAL, 2026-09-15. 26 canvases, 19 locations, 7 people, 4,453 player-facing words. CAMPUS SPLIT, at LO's call, because RELEASE.md says in its own words that it is the largest pile of writing in the design. This piece is the four rooms (quad, lecture hall, classroom, union), the four subjects, and Cara and Sam. HALE IS DELIBERATELY OUT, also LO's call: missing class costs her and there is NO remedy, because the remedy is asking a teacher and his room is the department and the department is not built. The crowd, the dares, being picked on, talk as a rumour system and the classroom walk-in are all the next piece."
+    },
+    {
+      "at": "sheets",
+      "note": "THE OLDEST GAP IN THE GAME IS CLOSED: `rest` HAS A DOOR. It has been a declared need since slice 1, filled by sleeping, and read by nothing — gates.py called it a number the player watches move, correctly, for four slices. college.md always said what it was for: 'low, she misses the nine o'clock.' Under 25 rest the class choice now renders LOCKED with its reason — 'You would not make ninety minutes. You barely made the stairs.' Verified at 100, 30, 20 and 5. `a need shuts a door` went 1/2 to 2/2 and `a meter is read` is now 16/16: EVERY meter in this game is read by something. Scoreboard 27 pass / 13 fail, up from 25/15, with five walks clean and 8/8 on the harness."
+    },
+    {
+      "at": "sheets",
+      "note": "ATTENDANCE IS A FALLING METER AND college.md COUNTS MISSES — THAT IS A TRANSLATION, WRITTEN DOWN AS ONE. The engine cannot count a miss because ABSENCE IS THE ABSENCE OF AN EVENT: nothing fires when she does not come, and there is no conditional day-tick to hang it on. So each subject starts at 100, falls 8 a day through [player.trait_decay] — the same machinery rest and clean already use — and attending adds 30. Twice a week is +60 against -56, so turning up holds her level and every skipped class sinks that subject on its own. The bands land where the sheet put them: under 40 it is noticed, under 20 the mark cannot come back on homework alone. Verified: attending moves ONE subject and not the other three, and a slept night takes 8 off each. WHAT MISSING COSTS TODAY, with no exams and no letter home: the_campus.md's own line — not having done the homework is visible to everybody. Under 40 the classroom scene puts her in the gap where the answer goes, in front of twelve people. MARKS ARE NOT DECLARED: nothing could read them until exams exist, and a trait nothing reads is the defect I keep getting caught on."
+    },
+    {
+      "at": "sheets",
+      "note": "TWO ENGINE TRAPS, ONE OF WHICH TURNED OUT TO BE THE BETTER WRITING. (1) ADJACENT [group] BLOCKS MERGE INTO ONE IF/ELSEIF CHAIN. @cara has three bands — how wrecked she looks, the bathroom, where she was on Thursday — and only the first matching one rendered. That is the documented trap and I walked into it. KEPT ON PURPOSE: a friend says the most pressing thing, not three things in a row, and the order is now the priority. Verified all four states including saying nothing when Nell is fine. This is also how rest and clean get SAID rather than displayed, which is what the_cast.md asks for. (2) A SUBSTITUTION REPLACES THE SCREEN BEFORE ANY CHOICE IS CLICKED, so Sam's walk-in had to carry attend_3 itself — the parent class's +30 lives on a choice that never fires on that path. Same lesson as the cafe customers, different shape. THE GATES AGAIN FOUND WHAT I COULD NOT SEE: two scheduled people in four new rooms made fresh claims, and `the walk-in floor` named the classroom — two activities, a man scheduled in it, and nobody ever came through the door. Sam sitting down next to her is the answer, and it is exactly what the_cast.md says he is in the first build: talking, and that is all."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 7 BUILT: THE CROWD, 2026-09-15. 35 canvases, 19 locations, 10 people, 5,848 player-facing words. Jules, Bree and Paige; the random picking-on in four rooms; both dares. THE WORLD INTERRUPTS HER FOR THE FIRST TIME. Six slices and the harness reported 'the world interrupts the player: n/a, no trigger_mode = random canvases' every single run — everything she had ever done, she went and clicked. Four ambients now fire on ARRIVAL at 0.35 (LO's one campus visit in three), with the engine's own per-room cooldown of 3 stopping them spamming. Measured live: 19 of 40 arrivals on the quad, and the harness's new check resolves one in 4 of 4 locations across six hours of a Monday. The harness went 8/8 to 10/10 — two checks that had been n/a since slice 1 now run."
+    },
+    {
+      "at": "sheets",
+      "note": "EXPOSURE IS NOW FELT INSTEAD OF DISPLAYED. being_picked_on.md: she never sees a number, she finds out where her exposure is because strangers know things. Three bands per room, verified live: at 5 it is petty and general and not really about her; at 25 somebody has decided what she is and it has gone round; at 60 a boy she has never spoken to says a detail that is RIGHT, and she knows which Tuesday it came off. The bands are adjacent [group] blocks — one if/elseif chain — which is the merge trap used deliberately as a tool for the third slice running. ANSWERING BACK IS SET BY WHERE SHE STANDS: refused under crowd_standing 10 with its reason on screen, and it is the only thing in that system that writes anything. IT NEVER BLOCKS HER — proven, not asserted: over 20 arrivals at the lecture hall, 4 were interrupted by an ambient and class was still reachable on every single one."
+    },
+    {
+      "at": "sheets",
+      "note": "THE DARES, AND WHAT THEY ACTUALLY BUY. Jules says it out loud on the quad and Nell answers ON THE SPOT. Dare one is accepted on the quad and DONE AT THE UNION — the dare is what walks her into a room she would otherwise have no reason to enter — and she is reached through Jules at the window table, because that is what Jules said would happen. Dare two is shut until one is done: a chain, not a number. Verified at chain 0, 1 and 2. NO IS WRITTEN AS LOUDLY AS YES: both refusals have their own beat, neither shuts a door, each costs standing and sets a seven-day cooldown, and she asks again after it — verified including that she does not ask twice in one day. THE ONLY THING A DARE BUYS is the random picking-on going quiet for a week: 0 hits in 30 arrivals during it. And DARE TWO CHANGES THE REST OF THE DAY, LO's call — jacket_off gives the picking-on a fourth band, so the four hours she agreed to in two seconds are delivered by the system that was already running, and the flag is cleared by the nightly tick. `reputation` MOVES FOR THE FIRST TIME IN SEVEN SLICES on dare two, because dare two is public and about her."
+    },
+    {
+      "at": "sheets",
+      "note": "THE SCOREBOARD CAUGHT SIX THINGS AND EVERY ONE WAS REAL. 30 pass / 10 fail, the best yet, after: (1) `meter ceiling` — corruption and reputation's sidebar bands promised rungs at 40/65/85 that the build's highest authored gates (30 and 20) cannot reach. I FLAGGED THIS MYSELF IN SLICE 1 as 'deliberate here and WRONG at v0.1' and then left it for six slices; the gate enforced it. Both are now banded to what the game actually contains, and the top words come back with the content that reaches them. (2) `a meter is read` — reputation was raised by dare two and read by nothing. It now gates answering back, via logic = \"OR\" alongside crowd_standing, which is being_known.md's own line: reputation brings people to her, it almost never says no, it delivers. (3) `speakers are named` — five thought_bubbles had no props.speaker. Every thought in this game is hers; now it says so. (4) `standing surface` — Bree and Paige had schedules and nothing of their own, a name on a timetable. They have one surface each now and both are straight off the cast page: Paige is lovely to your face and lets Bree do it anyway, and Bree is in @nate's year, which is how the quad reaches the dinner table without anybody writing a new room for it. (5) `what she picks is read` — the player names her and the game had never once said it back. Paige does. (6) Two schedule rows for Jules OVERLAPPED, and rows are first-match-wins, so her union row was dead and she was on the quad all afternoon — which meant the window table she had just promised to be at was empty."
+    },
+    {
+      "at": "sheets",
+      "note": "SLICE 8 BUILT: THE FIRST BUILD IS CONTENT-COMPLETE, 2026-09-15. 43 canvases, 19 locations, 10 people, 6,300 player-facing words. 31 gates pass, seven walks clean, harness 10/10. Every row of sheets/RELEASE.md's 'what's in' is now built, and the thing it ends on — the closing shift on the office wall, visible and locked, WHICH SHE DOES NOT GET — is correct per the_move_up.md: 'where the first build ends: the schedule with her name not on the closing shift.' ⚠️ A CORRECTION ON THE RECORD: I told LO that Hale and the department were what the six rows still owed. THAT WAS WRONG. RELEASE.md lists Hale by name in 'what waits', along with the department, the library, the gym, the row, the art class, exams, the letter home, Reyes and the person who recognizes her. What the rows actually owed was four things, and this slice built them."
+    },
+    {
+      "at": "sheets",
+      "note": "THE FOUR. (1) DINNER — seven o'clock on the four nights Lynn is off the ward. All four at one table, verified room by room across all seven days: Tue/Thu/Sun all four, Saturday three because Tasha is out, and NOBODY on Mon/Wed/Fri because those are ward nights and the sheet says an empty evening. @gil's bands read the chores, Friday and THE HOURS SHE KEEPS; @nate needles her in front of people once she has opened his door, which is the same move Bree makes on the quad; Tasha performs; her mum says that is lovely twice about two different things and hears neither. Leaving early is noticed by everybody at the table. (2) IN BY TEN — his third rule finally exists. Coming through after 22:15 puts him at the bottom of the stairs with a cup he is not drinking, costs 10 rest, and counts, and THE COUNT IS WHAT DINNER READS. (3) TALK — three rooms, and it gets sharper as she climbs: at 5 nobody says her name, at 25 her name goes past in somebody else's sentence, at 60 a stranger describes her own room and has the angle right. (4) THE CLASSROOM BETWEEN CLASSES — the one campus walk-in the first build gets, because otherwise every door she opens for four weeks is at home."
+    },
+    {
+      "at": "sheets",
+      "note": "THE WRITING FAILED ITS OWN INSTRUMENT AND WAS FIXED. The three classroom beats came out 0 OF 3 REGISTERING AS EXPLICIT, with median sentences of 25, 18 and 24 against a ceiling of 14. I had written around the bodies — 'he is in her', 'you can hear it' — which is the exact failure register.md calls sweeping past the rule instead of applying it, and CLAUDE.md calls the defect: flat and coy is the failure state. Rewritten on the body with the frozen-list words the instrument counts, sentences split. Now 3/3, and across the WHOLE GAME 10 of 10 explicit beats register, ZERO pivot, median sentence 11. ALSO FIXED, all caught by gates: `the walk-in floor` — the quad and the union had her standing there listening with people scheduled in the room and nobody ever coming through, so @cara catches her at it at the union and Bree does on the quad; 5/7 to 7/7. `the climb is paid for` — answering back and dare one had no cap the gate could see; both are once a day now, which is also just true. Vocabulary: cardigan, seminar, verb and one more 'half eleven' all out; clean but for cast names."
+    },
+    {
+      "at": "sheets",
+      "note": "WHAT IS STILL RED AND WHY, so the next session does not chase it. NINE gates fail and they sort into three piles. MEDIA (3): an explicit beat carries a clip, traversal heat, and location fill — all three want media or volume and there is not one image on disk. CONTENT THAT IS DELIBERATELY IN 'WHAT WAITS' (4): residents have homes (Hale's department and Reyes's station are not built), guidance exists, sinks >= sources (nothing to spend money on but Friday and the bus), ascent tiers expand the world (the tiers gate acts, not places, until the row and the gym exist). AND TWO THAT ARE REAL WORK: `somebody speaks` at 7.3:1 against a 5:1 ceiling, improved from 14.3:1 but still over — and `every hub is met first`, 0 of 10, because every character's portrait is live on turn one with no condition. That last one is a genuine pre-ship pass, not a patch: it wants a met-flag and a first encounter per person, and doing it badly would put ten gates in front of the player on day one."
+    }
+  ],
+  "board": {
+    "systems": [
+      {
+        "id": "exposure",
+        "kind": "sourced",
+        "key": "exposure",
+        "fed_at": [
+          "her_room",
+          "the_cafe_toilet",
+          "the_quad",
+          "the_motel"
+        ],
+        "labels": [
+          "checks_exposure"
+        ],
+        "read_by": "what she is offered at every door, and who places her face"
+      },
+      {
+        "id": "corruption",
+        "kind": "sourced",
+        "key": "corruption",
+        "fed_at": [
+          "the_cafe",
+          "the_back_room",
+          "nate_room",
+          "the_master_bedroom"
+        ],
+        "labels": [
+          "checks_corruption"
+        ],
+        "read_by": "what is on the menu at every door — it is the furthest thing she will take"
+      },
+      {
+        "id": "reputation",
+        "kind": "sourced",
+        "key": "reputation",
+        "fed_at": [
+          "the_quad",
+          "the_row"
+        ],
+        "labels": [
+          "checks_reputation"
+        ],
+        "read_by": "invitations, how people speak to her, and what reaches Nate's year"
+      },
+      {
+        "id": "rest",
+        "kind": "ambient",
+        "key": "rest",
+        "fed_at": [
+          "her_room",
+          "the_front_room"
+        ],
+        "labels": [
+          "has_bed"
+        ],
+        "read_by": "the nine o'clock class, which is the road to her marks"
+      },
+      {
+        "id": "clean",
+        "kind": "ambient",
+        "key": "clean",
+        "fed_at": [
+          "the_bathroom",
+          "the_gym",
+          "the_laundry"
+        ],
+        "labels": [
+          "has_shower"
+        ],
+        "read_by": "going live at all, and being looked at at work"
+      },
+      {
+        "id": "cash",
+        "kind": "ambient",
+        "key": "cash",
+        "fed_at": [
+          "the_cafe",
+          "her_room",
+          "the_kitchen"
+        ],
+        "labels": [],
+        "read_by": "Friday, the bus, clothes, and anything she buys"
+      },
+      {
+        "id": "debt_left",
+        "kind": "sourced",
+        "key": "debt_left",
+        "fed_at": [
+          "the_kitchen"
+        ],
+        "labels": [],
+        "read_by": "the end of a semester, and Gil"
+      },
+      {
+        "id": "fridays_missed",
+        "kind": "sourced",
+        "key": "fridays_missed",
+        "fed_at": [
+          "the_kitchen"
+        ],
+        "labels": [],
+        "read_by": "how tight the house rules get"
+      },
+      {
+        "id": "has_job",
+        "kind": "sourced",
+        "key": "has_job",
+        "fed_at": [
+          "the_cafe"
+        ],
+        "labels": [],
+        "read_by": "everything else at the cafe"
+      },
+      {
+        "id": "shifts_worked",
+        "kind": "sourced",
+        "key": "shifts_worked",
+        "fed_at": [
+          "the_cafe"
+        ],
+        "labels": [],
+        "read_by": "how far up she is — and it never goes down"
+      },
+      {
+        "id": "move_up",
+        "kind": "sourced",
+        "key": "move_up",
+        "fed_at": [
+          "the_back_room"
+        ],
+        "labels": [],
+        "read_by": "which hours she can work, her rate, and the closing shift"
+      },
+      {
+        "id": "owen_standing",
+        "kind": "sourced",
+        "key": "owen_standing",
+        "fed_at": [
+          "the_cafe",
+          "the_back_room"
+        ],
+        "labels": [],
+        "read_by": "how far up she can go, and what he asks for at each step"
+      },
+      {
+        "id": "followers",
+        "kind": "sourced",
+        "key": "followers",
+        "fed_at": [
+          "her_room",
+          "the_motel"
+        ],
+        "labels": [
+          "can_stream"
+        ],
+        "read_by": "what a session pays, and what people ask her for"
+      },
+      {
+        "id": "attendance",
+        "kind": "sourced",
+        "key": "attendance",
+        "fed_at": [
+          "the_lecture_hall"
+        ],
+        "labels": [
+          "has_class"
+        ],
+        "read_by": "her marks — miss three and homework alone cannot fix it"
+      },
+      {
+        "id": "marks",
+        "kind": "sourced",
+        "key": "marks",
+        "fed_at": [
+          "the_lecture_hall",
+          "the_library"
+        ],
+        "labels": [],
+        "read_by": "the letter home, Hale, and whether she is failing"
+      },
+      {
+        "id": "week",
+        "kind": "ambient",
+        "key": "week",
+        "fed_at": [],
+        "labels": [],
+        "read_by": "exams, the debt, and the next semester posting"
+      },
+      {
+        "id": "crowd_standing",
+        "kind": "sourced",
+        "key": "crowd_standing",
+        "fed_at": [
+          "the_quad",
+          "the_row"
+        ],
+        "labels": [],
+        "read_by": "invitations, parties, and Nate's friends"
+      },
+      {
+        "id": "talk",
+        "kind": "sourced",
+        "key": "talk",
+        "fed_at": [
+          "the_union",
+          "the_quad",
+          "the_lecture_hall",
+          "the_gym",
+          "the_row",
+          "her_room"
+        ],
+        "labels": [
+          "has_talk"
+        ],
+        "read_by": "where people are tonight, and what is said about her. It goes stale and is sometimes wrong"
+      },
+      {
+        "id": "dare_chain",
+        "kind": "sourced",
+        "key": "dare_chain",
+        "fed_at": [
+          "the_quad"
+        ],
+        "labels": [],
+        "read_by": "which dare comes next, and the week the picking-on goes quiet"
+      },
+      {
+        "id": "chores_today",
+        "kind": "ambient",
+        "key": "chores_today",
+        "fed_at": [
+          "the_kitchen",
+          "the_garage",
+          "the_laundry"
+        ],
+        "labels": [
+          "has_chore"
+        ],
+        "read_by": "cash, and whether Gil has anything to say"
+      },
+      {
+        "id": "home_after_ten",
+        "kind": "sourced",
+        "key": "home_after_ten",
+        "fed_at": [
+          "the_street"
+        ],
+        "labels": [],
+        "read_by": "the rules, and what is still open to her that week"
+      },
+      {
+        "id": "lynn_knows",
+        "kind": "sourced",
+        "key": "lynn_knows",
+        "fed_at": [
+          "the_kitchen"
+        ],
+        "labels": [],
+        "read_by": "the whole house. Only four things may ever flip it"
+      },
+      {
+        "id": "doors_opened",
+        "kind": "sourced",
+        "key": "doors_opened",
+        "fed_at": [
+          "nate_room",
+          "the_master_bedroom"
+        ],
+        "labels": [],
+        "read_by": "how far each of those two doors goes"
+      }
+    ],
+    "who_climbs": "player",
+    "who_climbs_note": "DECISIONS.md Q1, answered. The meters live on HER and everyone reads them. The other way gives all eleven their own set and the game becomes eleven climbs that never touch.",
+    "ascent_tiers": [
+      "exposure",
+      "corruption",
+      "reputation"
+    ],
+    "ceilings": {
+      "exposure": 100,
+      "corruption": 100,
+      "reputation": 100
+    },
+    "rungs": [
+      5,
+      20,
+      40,
+      65,
+      85
+    ],
+    "rungs_note": "Five steps each, same five numbers under all three, she starts at 5 on all three. Override O3 — the skill's template ships a table starting at 15 and all sixteen declared tiers across five prior v2 games copied it. The words at each step are in sheets/systems/her_meters.md.",
+    "locations": [
+      {
+        "id": "the_cafe",
+        "job": "ANCHOR. Owen's schedule is her week. The floor is public and she is looked at doing it. The till is money with risk. Closing is an hour where Owen is the only one there.",
+        "anchor": true,
+        "fill": 34000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public",
+          "workplace"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "shift",
+            "tips",
+            "the till"
+          ],
+          "people": [
+            "npc_owen"
+          ]
+        }
+      },
+      {
+        "id": "her_room",
+        "job": "home_base. Door shut, phone against the books, the stream. Built out of pools, never one paragraph.",
+        "anchor": false,
+        "fill": 8000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private",
+          "home_base"
+        ],
+        "serves": {
+          "needs": [
+            "rest"
+          ],
+          "work": [
+            "the stream"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_row",
+        "job": "The party houses. Tasha's invitations, and where reputation cashes out.",
+        "anchor": false,
+        "fill": 5000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_jules",
+            "npc_tasha",
+            "npc_bree"
+          ]
+        }
+      },
+      {
+        "id": "the_bar",
+        "job": "She is 18 — getting in is the gate. Tasha, or a shift behind it. Older men, night money.",
+        "anchor": false,
+        "fill": 5000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "night money"
+          ],
+          "people": [
+            "npc_tasha"
+          ]
+        }
+      },
+      {
+        "id": "the_garage",
+        "job": "Gil, the car, and the hour after the house is asleep.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "chores"
+          ],
+          "people": [
+            "npc_gil"
+          ]
+        }
+      },
+      {
+        "id": "nate_room",
+        "job": "The door she can open. His arc lives here.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_nate"
+          ]
+        }
+      },
+      {
+        "id": "the_department",
+        "job": "Hale's office, after the corridor empties.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "reading for Hale"
+          ],
+          "people": [
+            "npc_hale"
+          ]
+        }
+      },
+      {
+        "id": "the_gym",
+        "job": "Locker room, showers, and the one place on the map where being looked at costs nothing yet.",
+        "anchor": false,
+        "fill": 4000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_master_bedroom",
+        "job": "Live only on Lynn's nights off. The door is not always shut.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_gil",
+            "npc_lynn"
+          ]
+        }
+      },
+      {
+        "id": "the_bathroom",
+        "job": "clean. The mirror. Tasha, without warning.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private",
+          "shared"
+        ],
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [],
+          "people": [
+            "npc_tasha",
+            "npc_nate"
+          ]
+        }
+      },
+      {
+        "id": "tasha_room",
+        "job": "Her wardrobe, her lights, and the advice she gives whether or not it was asked for.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_tasha"
+          ]
+        }
+      },
+      {
+        "id": "the_mall",
+        "job": "Clothes that gate exposure rungs. The changing rooms are their own surface. A kiosk job.",
+        "anchor": false,
+        "fill": 3500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "a kiosk job"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_kitchen",
+        "job": "Lynn, Sunday morning, the number, and the chores that pay. Friday's $150 is handed over here.",
+        "anchor": false,
+        "fill": 3200,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "chores"
+          ],
+          "people": [
+            "npc_gil",
+            "npc_lynn"
+          ]
+        }
+      },
+      {
+        "id": "the_library",
+        "job": "Reading for Hale. The third floor is empty after eight.",
+        "anchor": false,
+        "fill": 3200,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "reading for Hale"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_park",
+        "job": "On the walk to the stop. Joggers at six, the lot after dark. Where both grounds' people cross.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_reyes"
+          ]
+        }
+      },
+      {
+        "id": "the_back_room",
+        "job": "The cafe's office, Owen's. Not locked. The other half of the cafe, at closing.",
+        "anchor": false,
+        "fill": 3000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "the move up"
+          ],
+          "people": [
+            "npc_owen"
+          ]
+        }
+      },
+      {
+        "id": "the_quad",
+        "job": "Campus exterior. Ambient traffic — where reputation is read, and where Jules says a dare out loud.",
+        "anchor": false,
+        "fill": 2800,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_jules",
+            "npc_bree",
+            "npc_cara"
+          ]
+        }
+      },
+      {
+        "id": "the_front_room",
+        "job": "Nate is here. Between the hall and everywhere, so she crosses him to leave and to come home.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "rest"
+          ],
+          "work": [],
+          "people": [
+            "npc_nate"
+          ]
+        }
+      },
+      {
+        "id": "the_motel",
+        "job": "Where the stream goes when it cannot be her room, and where a follower becomes a person.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "the stream"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_strip",
+        "job": "Downtown exterior, and the alley behind it.",
+        "anchor": false,
+        "fill": 2500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_cafe_toilet",
+        "job": "Shared with the customers, so anyone can open it. The only private room she has outside her own bedroom, and the far end of the tips ladder.",
+        "anchor": false,
+        "fill": 2000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "private",
+          "shared"
+        ],
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [
+            "tips"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_hospital",
+        "job": "Lynn's nights. Also a clinic, and a paid study that pays too well.",
+        "anchor": false,
+        "fill": 2000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "a paid study"
+          ],
+          "people": [
+            "npc_lynn"
+          ]
+        }
+      },
+      {
+        "id": "the_station",
+        "job": "The consequence surface — the till, the park after dark, a report about the stream. Reyes works it.",
+        "anchor": false,
+        "fill": 2000,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_reyes"
+          ]
+        }
+      },
+      {
+        "id": "the_lecture_hall",
+        "job": "Attendance, and attendance is what gates Hale.",
+        "anchor": false,
+        "fill": 1800,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "class"
+          ],
+          "people": [
+            "npc_hale",
+            "npc_sam",
+            "npc_cara"
+          ]
+        }
+      },
+      {
+        "id": "the_pawn_shop",
+        "job": "Money in reverse — sell what she owns. There is a camera in the back.",
+        "anchor": false,
+        "fill": 1500,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "selling what she owns"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_union",
+        "job": "The job board and the cheapest food on the map.",
+        "anchor": false,
+        "fill": 1200,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:campus",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_sam",
+            "npc_cara",
+            "npc_jules"
+          ]
+        }
+      },
+      {
+        "id": "the_street",
+        "job": "Her block, and the bus stop on it. Being seen coming home at an hour she should not be. The exterior ROOT.",
+        "anchor": false,
+        "fill": 1200,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public",
+          "exterior"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_laundry",
+        "job": "Midnight, strangers, and nothing to do but wait.",
+        "anchor": false,
+        "fill": 800,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:downtown",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "clean"
+          ],
+          "work": [
+            "chores"
+          ],
+          "people": []
+        }
+      },
+      {
+        "id": "the_hall",
+        "job": "The landing. Four doors and the bathroom open off it. Who is in.",
+        "anchor": false,
+        "fill": 600,
+        "has_cycling_pool": false,
+        "labels": [
+          "zone:house",
+          "indoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_bus_stop",
+        "job": "A corridor, and declared as one.",
+        "anchor": false,
+        "fill": 400,
+        "has_cycling_pool": false,
+        "labels": [
+          "outdoors",
+          "public",
+          "corridor"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      }
+    ],
+    "needs": [
+      {
+        "key": "rest",
+        "falls": "a day, and harder on a late night or a closing shift",
+        "fills": "her bed at her_room; an hour on the sofa at the_front_room",
+        "costs": "free, but it is the hour she was going to earn in",
+        "shuts": "low and she misses the nine o'clock, and attendance is the only road to her marks"
+      },
+      {
+        "key": "clean",
+        "falls": "a shift, the gym, and sex",
+        "fills": "the_bathroom, the gym showers, the_laundry",
+        "costs": "free, but the bathroom is shared and free exactly when she should be somewhere else",
+        "shuts": "low and nothing on exposure opens — she will not go live, and the floor at work reads it"
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_gil",
+        "name": "Gil",
+        "role": "her step dad",
+        "surfaces": 3,
+        "schedule_rows": 3,
+        "why_wanted": "He paid the tuition and never mentions it. He is the collector and a target at once — and he never opens a step, so every one of them is hers to open.",
+        "meters": {
+          "relation": "how much of the house he lets her have. Read at his rules, never at a rung he starts"
+        }
+      },
+      {
+        "id": "npc_nate",
+        "name": "Nate",
+        "role": "her step brother, 20",
+        "surfaces": 3,
+        "schedule_rows": 3,
+        "why_wanted": "He wants her and hiding it is the only thing he is good at. The climb is making him show it.",
+        "meters": {
+          "relation": "how much he has stopped pretending. He says no by getting worse about it"
+        }
+      },
+      {
+        "id": "npc_tasha",
+        "name": "Tasha",
+        "role": "her step sister, 21",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "She wants an audience and will happily make Nell into one. She is an example, not a threat — she cannot out her.",
+        "meters": {
+          "relation": "whether she is laughing at her or handing her something"
+        }
+      },
+      {
+        "id": "npc_lynn",
+        "name": "Lynn",
+        "role": "her mum",
+        "surfaces": 1,
+        "schedule_rows": 2,
+        "why_wanted": "She wants her daughter to be fine and is too tired to check. NEVER TOUCHED — she is the price, not a person to be won.",
+        "meters": {}
+      },
+      {
+        "id": "npc_owen",
+        "name": "Owen",
+        "role": "the cafe owner",
+        "surfaces": 4,
+        "schedule_rows": 2,
+        "why_wanted": "He wants her and he pays in hours rather than cash. A strict boss first, which is what makes the hours land.",
+        "meters": {
+          "relation": "how far she has gone with him — one of the two keys on every step up",
+          "corruption": "what he will ask for next"
+        }
+      },
+      {
+        "id": "npc_hale",
+        "name": "Hale",
+        "role": "her professor",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "why_wanted": "He wants to be the one who shaped her. He sets and grades one of her four subjects himself, so the lever is her marks.",
+        "meters": {
+          "relation": "whether the door is open after the corridor empties"
+        }
+      },
+      {
+        "id": "npc_jules",
+        "name": "Jules",
+        "role": "she runs the crowd, 21",
+        "surfaces": 3,
+        "schedule_rows": 3,
+        "why_wanted": "She wants to be the one everyone arranges themselves around. She is the one making Nell small, so every dare is a humiliation and a way in at once.",
+        "meters": {
+          "relation": "how far into the crowd she is — and in the end Jules is a target herself"
+        }
+      },
+      {
+        "id": "npc_bree",
+        "name": "Bree and Paige",
+        "role": "the two beside Jules",
+        "surfaces": 1,
+        "schedule_rows": 2,
+        "why_wanted": "The crowd's voice, thin on purpose. They are in Nate's year, which is how the quad gets home before she does.",
+        "meters": {}
+      },
+      {
+        "id": "npc_sam",
+        "name": "Sam",
+        "role": "in her class",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "why_wanted": "The only one she chooses. Every other climb is somebody wanting her; this one runs the other way, and he is the ordinary life she is trading away.",
+        "meters": {
+          "relation": "the one thing in this game with no money attached to it"
+        }
+      },
+      {
+        "id": "npc_cara",
+        "name": "Cara",
+        "role": "her friend",
+        "surfaces": 2,
+        "schedule_rows": 3,
+        "why_wanted": "The only one who wants nothing. Everybody else pays her; Cara costs her time — which is exactly what she is running out of.",
+        "meters": {
+          "relation": "how reachable she still is. She says no by going quiet"
+        }
+      },
+      {
+        "id": "npc_reyes",
+        "name": "Reyes",
+        "role": "the officer",
+        "surfaces": 1,
+        "schedule_rows": 3,
+        "why_wanted": "He wants the rules kept and nothing from her, which makes him the only man in the game she cannot trade with.",
+        "meters": {}
+      }
+    ],
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "A college town. One street at ground level with the bus stop on it. Three grounds hang off it: the house on the near side, the campus across town, and the strip downtown where the cafe is. Everything else is a room inside one of those three.",
+      "home_base": "her_room",
+      "exterior": "the_street",
+      "homes": {
+        "npc_gil": "the_master_bedroom",
+        "npc_lynn": "the_master_bedroom",
+        "npc_nate": "nate_room",
+        "npc_tasha": "tasha_room",
+        "npc_owen": "the_cafe",
+        "npc_hale": "the_department",
+        "npc_reyes": "the_station",
+        "npc_jules": "offscreen",
+        "npc_bree": "offscreen",
+        "npc_sam": "offscreen",
+        "npc_cara": "offscreen"
+      },
+      "bridges": [
+        {
+          "from": "the_street",
+          "to": "the_bus_stop",
+          "costs": {
+            "time": 5
+          }
+        },
+        {
+          "from": "the_bus_stop",
+          "to": "the_quad",
+          "costs": {
+            "time": 40,
+            "money": 2
+          }
+        },
+        {
+          "from": "the_bus_stop",
+          "to": "the_strip",
+          "costs": {
+            "time": 40,
+            "money": 2
+          }
+        },
+        {
+          "from": "the_street",
+          "to": "the_park",
+          "costs": {
+            "time": 15
+          }
+        }
+      ],
+      "r1_signoff": "NOT SIGNED. The house half and the cafe half were decided with LO on the place sheets (2026-09-12 and 2026-09-14) and he added the living room, the master bedroom, Nate's room and the bathroom by name. The full 30-location map in process/CARRIED.md 9 has never been put in front of him AS A MAP. the-map.md says the author of a map cannot sign it. Ask before v0.1 ships."
+    },
+    "economy": {
+      "currency": "cash",
+      "symbol": "$",
+      "obligation": "She owes Gil $2,400 for the semester and pays him back $150 every Friday evening, in the kitchen. Her mum does not know he paid.",
+      "obligation_amount": 150,
+      "week_income": 220,
+      "obligation_moves": "The semester clears in sixteen weeks and then the next one posts, for more, and nobody explains the rise. Week one she is not on the schedule at all — she does not have the job yet.",
+      "sinks": [
+        "Friday's $150 to Gil",
+        "the bus, $2 each way",
+        "clothes at the mall that gate exposure rungs",
+        "the cheapest food on the map at the union"
+      ],
+      "currency_note": "currency IS the trait key, not the word for the money. gates.py looks for canvases gating on a trait of this name, so `dollar` against a `cash` trait reported 0 of everything. vesper_two's coin/coin is the working shape."
+    }
+  }
+}
