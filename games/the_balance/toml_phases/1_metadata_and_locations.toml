@@ -102,8 +102,11 @@ description = "A pole, a timetable nobody has updated, and a bench somebody has 
 image       = "locations/the_bus_stop.jpg"
 image_search_queries = ["empty bus stop bench suburban street daytime", "bus shelter timetable pole roadside"]
 entry_from  = "the_street"
-navigation_order = ["the_strip", "the_quad"]
 costs       = { time = 5 }
+# ⚠️ NO navigation_order ANY MORE. The strip and the campus used to be listed
+# here, and the validator hard-fails a navigation_order entry that is not a real
+# child ("includes 'the_quad' which is not a destination"). They are reached by
+# `catch_the_bus`, an activity on this screen, and that is the whole point.
 
 [[locations]]
 id          = "the_strip"
@@ -111,12 +114,24 @@ name        = "The Strip"
 description = "Downtown, such as it is. A run of shops, half of them open, and the cafe about midway along with its lights on. Forty minutes of your morning to stand here."
 image       = "locations/the_strip.jpg"
 image_search_queries = ["small town main street shopfronts daytime", "downtown strip shops sidewalk morning"]
-entry_from  = "the_bus_stop"
 navigation_order = ["the_cafe"]
-costs       = { time = 40, cash = 2 }
-# ⚠️ THE BUS. Entry costs are charged moving IN, so the ride out is $2 and forty
-# minutes and the ride home is currently free. Asymmetric on purpose in a slice —
-# walking (free, an hour) is the other route and is not built yet.
+auto_exit   = false
+# ⚠️ NO entry_from, AND auto_exit = false. BOTH HALVES OR NEITHER.
+#
+# THE FARE IS NOT A PROPERTY OF THIS PLACE. It used to be — `costs = { time = 40,
+# cash = 2 }` sat here and on the quad, and the engine charges a destination's
+# entry cost on ANY move into it (v2.py:16267), including the move back from one
+# of its own children. So stepping out of the cafe charged bus fare again and
+# burned forty minutes, and under $2 it charged nothing because it BLOCKED her,
+# in a room whose only exit was this one. The fare now lives on the choices in
+# `catch_the_bus` / `bus_back_strip`, which is where board.map always put it.
+#
+# Dropping entry_from alone would not be enough: _ordered_navigation builds a
+# location's nav grid from its CHILDREN (whoever points entry_from at it), so the
+# card would still sit on the bus stop and the bus could be walked around. And
+# auto_exit = false alone would not be enough either — it only suppresses the
+# automatic "Leave" link. The pattern and the reasoning are vesper's
+# (1_metadata_and_locations.toml:1395-1401).
 
 # --- campus ------------------------------------------------------------------
 # ⚠️ CAMPUS NEVER GIVES HER MONEY. Every hour here is hours and bus fare going
@@ -129,9 +144,12 @@ name        = "The Quad"
 description = "Grass, benches, and the paths everybody cuts across instead of using. Everything on this campus hangs off it, and between classes it is where people find out who you are by looking."
 image       = "locations/the_quad.jpg"
 image_search_queries = ["university quad students walking grass daytime", "college campus lawn paths students"]
-entry_from  = "the_bus_stop"
 navigation_order = ["the_lecture_hall", "the_classroom", "the_union"]
-costs       = { time = 40, cash = 2 }
+auto_exit   = false
+# ⚠️ Same as the strip, and this is the one that broke a save: the lecture hall,
+# the classroom and the union all hang off this hub, so a toll here charged the
+# bus fare every time she walked out of a lecture. The way back to town is
+# `bus_back_quad`, an activity on this screen.
 
 [[locations]]
 id          = "the_lecture_hall"

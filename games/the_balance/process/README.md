@@ -629,7 +629,30 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    one-time steps that *convert* into a repeatable. Across this repo: 1,396 canvases and no
    character anywhere has a second thing that happens. The pull toward authoring a hub in its
    finished state on day one is documented behaviour, not carelessness. Assume you are doing it.
-6. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
+6. **A location's `costs` block is a toll on the ROOM, not on the ROAD — never put one on a hub.**
+   The engine charges a destination's entry cost on *any* move into it (`v2.py:16267`), and it
+   cannot tell arriving from town apart from walking back out of one of that place's own rooms.
+   `the_quad` carried the bus fare, so leaving a lecture re-charged $2 and forty minutes, on a hub
+   with six rooms hanging off it. **And at $0 the failure was a coin flip, not a clean refusal:**
+   the intercept runs on `passagestart` and its `return` does not cancel navigation, so the
+   destination still rendered — a random ambient firing there took the screen and she got in free
+   and uncharged, and when nothing fired the queued `Engine.play("TravelBlock")` won and its only
+   link went back where she came from. Both branches verified on the pre-fix build.
+   The fare now lives on choices inside `catch_the_bus` / `bus_back_quad` / `bus_back_strip`, which
+   is where `v2_state.json` `board.map.bridges` always put it — *an edge between two places*.
+   ⚠️ Two engine facts to keep: `navigation_order` **hard-fails** the validator if it names anything
+   that is not a real child, and a location's `parent` makes it **inherit the parent's canvases**
+   (`v2.py:20660`), so neither is a way to hide a nav card.
+7. **No instrument walks the map by clicking, except `walks.py travel`.** Every other route here
+   teleports with `stand_at` + `goto`, and `playtest.py`'s *every location resolves* only proves a
+   passage renders — a one-way room renders perfectly. If you change the shape of the map, that
+   route is the check.
+8. **`gates.py` G11 *world reachable* now FAILS this game, and the fail is expected.** The gate
+   floods `entry_from` + `navigation_order` on foot and exempts a sealed zone's *entrance*
+   (`auto_exit = false`) but not the rooms behind it, so the six campus and strip interiors read as
+   stranded. They are not: `walks.py travel` proves every one can be left, broke. Fixing the gate
+   means editing the skill, which is LO's call and has not been made — see §0.
+9. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 
