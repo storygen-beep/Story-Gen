@@ -235,7 +235,7 @@ label = "Followers"
 
 [[traits.labels]]
 key    = "debt_left"
-label  = "Owed to @gil"
+label  = "Owed on Friday"
 hidden = true
 
 [[traits.labels]]
@@ -260,7 +260,7 @@ hidden = true
 
 [[traits.labels]]
 key    = "nate_landing"
-label  = "@nate on the landing"
+label  = "Somebody on the landing"
 hidden = true
 
 [[traits.labels]]
@@ -333,7 +333,7 @@ traitEffects = [
 [[quest_cards]]
 id    = "card_friday"
 group = "the_debt"
-text = "You owe @gil $150 on Friday. He paid the semester up front and your mum doesn't know he did."
+text = "A hundred and fifty goes back every Friday. The semester was paid up front and your mum doesn't know who paid it."
 tip  = "Friday evening, in the kitchen. He's always there at six."
 when = [
   { flag = "opening_done", op = "is_true" },
@@ -518,7 +518,7 @@ entry_from  = "the_hall"
 
 [[locations]]
 id          = "nate_room"
-name        = "@nate's Room"
+name        = "His Room"
 description = "His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself."
 image       = "locations/nate_room.jpg"
 image_search_queries = ["young man bedroom desk monitor dim", "messy student bedroom bed desk night"]
@@ -718,13 +718,13 @@ activity   = "working the floor"
 [[npcs]]
 id          = "npc_nate"
 name        = "Nate"
-description = "@gil's son, twenty, a senior at your college. He was fine before you moved in and he has never pretended otherwise. He wants you out of his way and hiding the rest of it is the only thing he is good at."
+description = "Twenty, a senior at your college, and he has lived in this house longer than you have. He was fine before you moved in and he has never pretended otherwise. He wants you out of his way and hiding the rest of it is the only thing he is good at."
 portrait    = "nate.jpg"
 role        = "step brother"
 relationship = "step brother"
-relationship_options = ["step brother", "@gil's son", "housemate", "stepbrother"]
+relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
-tags        = ["wants you gone", "can't stop looking", "tells @gil things", "on the sofa by seven"]
+tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
@@ -773,7 +773,7 @@ activity   = "in his room with the door not quite shut"
 [[npcs]]
 id          = "npc_tasha"
 name        = "Tasha"
-description = "@gil's daughter, twenty-one. She wants an audience and she will happily make you into one. She cannot out you, she does not know anything, and she is an example rather than a threat."
+description = "The daughter of the house, twenty-one. She wants an audience and she will happily make you into one. She cannot out you, she does not know anything, and she is an example rather than a threat."
 portrait    = "tasha.jpg"
 role        = "step sister"
 customizable = false
@@ -816,7 +816,7 @@ activity   = "in, with music on"
 [[npcs]]
 id          = "npc_lynn"
 name        = "Lynn"
-description = "Your mum. She wants you to be fine and she is too tired to check. She does not know @gil paid for any of it, and everything in this house happens while she is out or asleep."
+description = "Your mum. She wants you to be fine and she is too tired to check. She does not know who paid for any of it, and everything in this house happens while she is out or asleep."
 portrait    = "lynn.jpg"
 role        = "mum"
 customizable = false
@@ -945,12 +945,12 @@ activity   = "at the table nearest the window, facing out into the room"
 [[npcs]]
 id          = "npc_bree"
 name        = "Bree"
-description = "She says the thing out loud so Jules does not have to. She is in @nate's year, which is how the quad gets home before you do."
+description = "She says the thing out loud so Jules does not have to. She is in the year above, which is how the quad gets home before you do."
 portrait    = "bree.jpg"
 role        = "says it out loud"
 customizable = false
 relationship = "the one who says it"
-tags        = ["says the cruel thing", "in @nate's year", "laughs first", "never on her own"]
+tags        = ["says the cruel thing", "in the year above", "laughs first", "never on her own"]
 core_traits = { relation = 0 }
 flag_keys   = []
 
@@ -964,12 +964,12 @@ activity   = "doing the talking"
 [[npcs]]
 id          = "npc_paige"
 name        = "Paige"
-description = "Lovely to your face, every time, and she lets Bree do it anyway. Also in @nate's year."
+description = "Lovely to your face, every time, and she lets Bree do it anyway. Also in the year above."
 portrait    = "paige.jpg"
 role        = "lovely to your face"
 customizable = false
 relationship = "the one who is nice about it"
-tags        = ["lovely to your face", "lets Bree do it", "in @nate's year", "apologises for nothing"]
+tags        = ["lovely to your face", "lets Bree do it", "in the year above", "apologises for nothing"]
 core_traits = { relation = 0 }
 flag_keys   = []
 
@@ -1025,7 +1025,7 @@ content = "Eighteen last month. College starts today, across town, in a room you
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The semester is paid for and it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
+content = "The semester is paid for, but it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -1046,7 +1046,7 @@ name = "The landing"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The shower is running. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
+content = "The shower is running and the bathroom is gone until whoever it is comes out. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -1077,7 +1077,7 @@ content = "Job going at the cafe on the strip. Card in the window."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "That is the whole of it. He doesn't mention Friday, and he won't say it twice."
+content = "That is the whole of it. He doesn't mention Friday, because he has already said it once."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1186,7 +1186,7 @@ content = "You take your bag and pull the door until it catches, because it does
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Four doors down to the stop. Early for nothing in particular, which is still better than late."
+content = "Four doors down to the stop. Early for nothing in particular. Still better than late."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -1428,7 +1428,7 @@ name = "The shift"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Five hours of carrying plates to people who are mid-sentence. The window table turns over four times. Your feet go at about hour three and the last two are hour three continuing." },
-  { type = "paragraph", content = "The machine wants its tray emptied twice and nobody else empties it. Owen watches you do it the first time and not the second, which is how he says a thing is yours now." },
+  { type = "paragraph", content = "The machine wants its tray emptied twice, but nobody else empties it. Owen watches you do it the first time and not the second. That is how he says a thing is yours now." },
   { type = "paragraph", content = "A slow one. You wipe tables that are already clean, because standing still where he can see you is worse work than working." },
   { type = "paragraph", content = "The lunch lot arrive together and leave together and the floor between the counter and the window ends up with all of it on. You get most of it up before he is out of the office." },
   { type = "paragraph", content = "Two hours of nobody, then a coach party, then nobody again. The tips are a handful of coins and one note left flat under a saucer, which is the only part worth counting." },
@@ -1521,9 +1521,9 @@ name = "The shift"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, and most of them look at you for the length of the saying." },
-  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor and it is more of you on show, and those two facts arrived together." },
-  { type = "paragraph", content = "Owen takes the floor and leaves you the counter, which means he is out there with his back to you for most of the afternoon and you can feel exactly when it isn't." },
+  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, so most of them look at you for the length of the saying." },
+  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor but more of you on show, and the two arrived together." },
+  { type = "paragraph", content = "Owen takes the floor and leaves you the counter. He is out there with his back to you most of the afternoon, and you can feel exactly when it isn't." },
   { type = "paragraph", content = "Four deep at one, nobody at three. The queue is the part that pays; the empty hour is the part where the man at the window is still there." },
 ]
 
@@ -1587,7 +1587,7 @@ name = "Bed"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, and neither of those things is going to keep you awake." },
+  { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, but neither of those things is going to keep you awake." },
   { type = "paragraph", content = "Nine hours if nothing wakes you. The house does its noises — the heating, a door, a car on the street — and you sleep through all of it the way you have learned to." },
   { type = "paragraph", content = "You are asleep before you have finished deciding what tomorrow costs. That is the one thing this room is reliably good for." },
   { type = "paragraph", content = "Shoes off, jeans on the chair, door pushed to. It is not shut, because his rule about the door is one you keep without thinking about it now." },
@@ -1742,7 +1742,7 @@ name = "The shower"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
-  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it, and you stand there longer than washing takes." },
+  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it. You stand there longer than washing takes." },
   { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
 ]
 
@@ -1805,8 +1805,8 @@ name = "Door shut"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Door shut, phone up against the books at the angle that cuts you off at the mouth. The light from the window is doing most of the work. Forty-one people, then sixty, then it stops climbing and settles." },
-  { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other and one of them saying hello to you by name." },
-  { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them and it does not make you feel anything." },
+  { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other. One of them says hello to you by name." },
+  { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them, but it does not make you feel anything." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1824,7 +1824,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, and the shower is not free at this hour either." },
+  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, but the shower is not free at this hour either." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2244,7 +2244,7 @@ name = "The nine o'clock class"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Twelve chairs round three tables pushed together, and everybody can see everybody. @cara is not in this one. Sam is, and he has done the reading." },
+  { type = "paragraph", content = "Twelve chairs round three tables pushed together, so everybody can see everybody. @cara is not in this one. Sam is, and he has done the reading." },
   { type = "paragraph", content = "Small enough that she goes round the table. You get asked something in the first ten minutes because you are sitting where the light is." },
   { type = "paragraph", content = "Three tables, twelve people, and a door that does not shut properly. You can hear the corridor the whole way through." },
 ]
@@ -2452,7 +2452,7 @@ type = "block_pool"
 blocks = [
   { type = "paragraph", content = "He is at a table with four other people and he moves along without making anything of it, which is the thing he does that nobody else on this campus does." },
   { type = "paragraph", content = "He asks what you thought of the reading. Not to catch you out. He actually wants to know, which is worse." },
-  { type = "paragraph", content = "Somebody at his table says something about you being the one who is always leaving, and he says you work, and that is the end of it." },
+  { type = "paragraph", content = "Somebody at his table says something about you being the one who is always leaving, but he says you work, and that is the end of it." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2544,7 +2544,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "That's her, that's the one." },
-  { type = "paragraph", content = "Said at your volume as you pass, and the two of them watch to see whether you heard. Somebody has decided what you are and it has gone round." },
+  { type = "paragraph", content = "Said at your volume as you pass, then the two of them watch to see whether you heard. Somebody has decided what you are, and it has gone round." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2634,7 +2634,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, and not one of those bags belongs to anybody who is sitting down." },
+  { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, but not one of those bags belongs to anybody who is sitting down." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2687,7 +2687,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "A hundred and ten people in steep rows and you are the one that two rows of them keep turning round for." },
+  { type = "paragraph", content = "A hundred and ten people in steep rows. You are the one that two rows of them keep turning round for." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2697,7 +2697,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "Bit of a funny angle you film at." },
-  { type = "paragraph", content = "He says it going past your row and does not stop, and for the rest of the hour you cannot work out whether the whole room heard it or only you." },
+  { type = "paragraph", content = "He says it going past your row and does not stop. For the rest of the hour you cannot work out whether the whole room heard it or only you." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2768,7 +2768,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Forty minutes at a stop on a main road, and you are aware of every car that goes past and every one that slows." },
+  { type = "paragraph", content = "Forty minutes at a stop on a main road. You are aware of every car that goes past, and of every one that slows." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2786,7 +2786,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Two girls from your year in the shelter, and one of them says something to the other, and neither of them stops talking when you sit down." },
+  { type = "paragraph", content = "Two girls from your year in the shelter. One of them says something to the other, but neither of them stops talking when you sit down." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2952,7 +2952,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly and almost none of it has ever been about you." },
+  { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly, but almost none of it has ever been about you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2989,7 +2989,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "The two behind you have a phone between them and they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room, and they both go quiet when you turn round." },
+  { type = "paragraph", content = "The two behind you have a phone between them, but they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room. They both go quiet when you turn round." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -3007,7 +3007,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people and nobody in this room has any idea who you are." },
+  { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people, but nobody in this room has any idea who you are." },
 ]
 
 [canvases.nodes.exit_block]
@@ -3116,7 +3116,7 @@ name = "The doorway"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You do not go in and you do not go out. You stand in the gap with your hand still on the frame for about four seconds, which is three and a half seconds longer than you meant to, and then you are in the corridor and moving."
+content = "You do not go in and you do not go out. You stand in the gap with your hand still on the frame for about four seconds. You meant it to be half of one. Then you are in the corridor and moving."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -3176,7 +3176,7 @@ name = "The corridor"
 [[canvases.nodes.blocks]]
 type    = "thought_bubble"
 props   = { speaker = "player" }
-content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, and it is not the part you would have guessed."
+content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, but it is not the part you would have guessed."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -3439,7 +3439,7 @@ name = "The short way"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You walk round the table and pick the glass up from the other side, standing straight the whole way. He takes the thirty back off the table and puts a five down instead, and neither of you says a word about either number."
+content = "You walk round the table and pick the glass up from the other side, standing straight the whole way. He takes the thirty back off the table and puts a five down instead, but neither of you says a word about either number."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -3600,7 +3600,7 @@ name = "Four lines"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He has the pen out and the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
+content = "He has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
@@ -3664,7 +3664,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Four marks against your name now, and one of them is a Thursday, which is a day people want. Nobody wrote anything about it and nobody is going to." },
+  { type = "paragraph", content = "Four marks against your name now, and one of them is a Thursday. People want Thursdays. Nobody wrote anything about it and nobody is going to." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -3737,7 +3737,7 @@ content = "@gil is at the table with the radio on low and nothing in front of hi
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "A hundred and fifty. He has never once said the number out loud and he has never once had to."
+content = "A hundred and fifty. He has never once said the number out loud, because he has never once had to."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -3817,7 +3817,7 @@ name = "Not this week"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You say it and he nods, once, and does not ask what happened to it. He does not ask when, either. The radio stays where it is and he lets the quiet go on a beat longer than it needs to."
+content = "You say it and he nods, once, but does not ask what happened to it. He does not ask when, either. The radio stays where it is and he lets the quiet go on a beat longer than it needs to."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
@@ -3849,7 +3849,7 @@ name = "A bit more time"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You put seventy-five on the table and say you will make the rest up. You do not explain and he does not ask you to, which is not how he was about it in week one."
+content = "You put seventy-five on the table and say you will make the rest up. You do not explain and he does not ask you to. In week one he asked."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
@@ -4028,7 +4028,7 @@ name = "Not shut"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The door is pushed to and not shut, and the lamp is on inside. You can hear the bed. Not much of it. Enough to know what you are hearing, and how long it has been going on."
+content = "The door is pushed to but not shut, and the lamp is on inside. You can hear the bed. Not much of it. Enough to know what you are hearing, and how long it has been going on."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -4070,7 +4070,7 @@ name = "Yours"
 [[canvases.nodes.blocks]]
 type    = "thought_bubble"
 props   = { speaker = "player" }
-content = "He has no idea you were on the other side of that door. He is going to sit at the table on Friday and take a hundred and fifty off you and he still will not know."
+content = "He has no idea you were on the other side of that door. He is going to sit at the table on Friday and take a hundred and fifty off you, and he still will not know."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4187,7 +4187,7 @@ content = "You've got about four minutes and then I need this light. You can bor
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "She does her eyes in the mirror and talks at your reflection the whole time, and it does not occur to her once that any of this is a thing you might mind."
+content = "She does her eyes in the mirror and talks at your reflection the whole time. It does not occur to her once that any of this is a thing you might mind."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4249,7 +4249,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Then he takes the cup and goes, and you cannot tell whether that was a comment or a sentence. It is never one or the other with him. That is the whole method."
+content = "Then he takes the cup and goes. You cannot tell whether that was a comment or a sentence. It is never one or the other with him. That is the whole method."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4437,7 +4437,7 @@ content = "She said no. She actually said no."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Bree does it loud enough for the path. Jules does not join in and does not stop her, and that is the arrangement they have. You are still standing where you were, and nothing about the rest of your day has changed except how it is going to sound."
+content = "Bree does it loud enough for the path. Jules does not join in and does not stop her. That is the arrangement they have. You are still standing where you were, and nothing about the rest of your day has changed except how it is going to sound."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4488,7 +4488,7 @@ name = "The table by the window"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "They are at the window table with three coffees and nothing in front of them, facing out into the room, and they have been there long enough to have picked where they are looking."
+content = "They are at the window table with three coffees and nothing else in front of them, facing out into the room. They have been there long enough to have picked where they are looking."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -4522,7 +4522,7 @@ content = "Right. Well. You've done it now. Go on."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He goes back to his book and he is kinder about it than any of the three at the window, and that is the bit you carry out of the room. It took under a minute. Bree is still laughing when you get there."
+content = "He goes back to his book, and he is kinder about it than any of the three at the window. That is the bit you carry out of the room. It took under a minute. Bree is still laughing when you get there."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4668,7 +4668,7 @@ name = "In the bag"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You get it off in the middle of the path, roll it, and put it in the bag, and the air on your arms is the first thing that tells you the size of what you just agreed to. Six hours. You had two seconds."
+content = "You get it off in the middle of the path, roll it, and put it in the bag. Then the air on your arms tells you the size of what you just agreed to. Six hours. You had two seconds."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
@@ -4677,7 +4677,7 @@ content = "There. That wasn't hard, was it."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "She says it without any edge on it at all, and goes back to her phone, and Paige tells you she likes the top, and means it, and that is not better."
+content = "She says it without any edge on it at all, then goes back to her phone. Paige tells you she likes the top, and means it. That is worse than Bree would have been."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4923,7 +4923,7 @@ name = "Four of you"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Your mum is still in the coat she travels in and she has not sat down so much as landed. Everybody eats. The radio is on in the corner for the same reason it is always on." },
-  { type = "paragraph", content = "Four plates, one table, and the chair you end up in is the one facing the door, which is the one nobody wants and nobody says why." },
+  { type = "paragraph", content = "Four plates, one table, and the chair you end up in is the one facing the door. Nobody wants that chair and nobody says why." },
   { type = "paragraph", content = "It is the one hour of the week where all four of you are in the same room with nothing else to do, and everybody handles that differently." },
 ]
 
@@ -4967,7 +4967,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Your mum says that is lovely, twice, about two different things, and neither time did she hear which thing it was."
+content = "Your mum says that is lovely, twice, about two different things, but neither time did she hear which thing it was."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -5053,7 +5053,7 @@ name = "He's up"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The front door has a way of going that you cannot do anything about, and the hall light is on, and it was not on from the street."
+content = "The front door has a way of going that you cannot do anything about. The hall light is on, but it was not on from the street."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -5155,7 +5155,7 @@ name = "Caught at it"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You are standing near enough to hear and not near enough to be part of it, which is a position with a look to it, and Bree clocks you in it."
+content = "You are standing near enough to hear and not near enough to be part of it. It is a position with a look to it, and Bree clocks you in it."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"

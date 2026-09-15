@@ -63,7 +63,7 @@ entry_from  = "the_hall"
 
 [[locations]]
 id          = "nate_room"
-name        = "@nate's Room"
+name        = "His Room"
 description = "His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself."
 image       = "locations/nate_room.jpg"
 image_search_queries = ["young man bedroom desk monitor dim", "messy student bedroom bed desk night"]
@@ -263,13 +263,13 @@ activity   = "working the floor"
 [[npcs]]
 id          = "npc_nate"
 name        = "Nate"
-description = "@gil's son, twenty, a senior at your college. He was fine before you moved in and he has never pretended otherwise. He wants you out of his way and hiding the rest of it is the only thing he is good at."
+description = "Twenty, a senior at your college, and he has lived in this house longer than you have. He was fine before you moved in and he has never pretended otherwise. He wants you out of his way and hiding the rest of it is the only thing he is good at."
 portrait    = "nate.jpg"
 role        = "step brother"
 relationship = "step brother"
-relationship_options = ["step brother", "@gil's son", "housemate", "stepbrother"]
+relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
-tags        = ["wants you gone", "can't stop looking", "tells @gil things", "on the sofa by seven"]
+tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
@@ -318,7 +318,7 @@ activity   = "in his room with the door not quite shut"
 [[npcs]]
 id          = "npc_tasha"
 name        = "Tasha"
-description = "@gil's daughter, twenty-one. She wants an audience and she will happily make you into one. She cannot out you, she does not know anything, and she is an example rather than a threat."
+description = "The daughter of the house, twenty-one. She wants an audience and she will happily make you into one. She cannot out you, she does not know anything, and she is an example rather than a threat."
 portrait    = "tasha.jpg"
 role        = "step sister"
 customizable = false
@@ -361,7 +361,7 @@ activity   = "in, with music on"
 [[npcs]]
 id          = "npc_lynn"
 name        = "Lynn"
-description = "Your mum. She wants you to be fine and she is too tired to check. She does not know @gil paid for any of it, and everything in this house happens while she is out or asleep."
+description = "Your mum. She wants you to be fine and she is too tired to check. She does not know who paid for any of it, and everything in this house happens while she is out or asleep."
 portrait    = "lynn.jpg"
 role        = "mum"
 customizable = false
@@ -490,12 +490,12 @@ activity   = "at the table nearest the window, facing out into the room"
 [[npcs]]
 id          = "npc_bree"
 name        = "Bree"
-description = "She says the thing out loud so Jules does not have to. She is in @nate's year, which is how the quad gets home before you do."
+description = "She says the thing out loud so Jules does not have to. She is in the year above, which is how the quad gets home before you do."
 portrait    = "bree.jpg"
 role        = "says it out loud"
 customizable = false
 relationship = "the one who says it"
-tags        = ["says the cruel thing", "in @nate's year", "laughs first", "never on her own"]
+tags        = ["says the cruel thing", "in the year above", "laughs first", "never on her own"]
 core_traits = { relation = 0 }
 flag_keys   = []
 
@@ -509,12 +509,12 @@ activity   = "doing the talking"
 [[npcs]]
 id          = "npc_paige"
 name        = "Paige"
-description = "Lovely to your face, every time, and she lets Bree do it anyway. Also in @nate's year."
+description = "Lovely to your face, every time, and she lets Bree do it anyway. Also in the year above."
 portrait    = "paige.jpg"
 role        = "lovely to your face"
 customizable = false
 relationship = "the one who is nice about it"
-tags        = ["lovely to your face", "lets Bree do it", "in @nate's year", "apologises for nothing"]
+tags        = ["lovely to your face", "lets Bree do it", "in the year above", "apologises for nothing"]
 core_traits = { relation = 0 }
 flag_keys   = []
 
