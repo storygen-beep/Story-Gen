@@ -338,6 +338,88 @@ Applies to `DECISIONS.md`, every sheet, and every block review. Not to this file
 
 ---
 
+## 5a · WHY the prose keeps coming out compressed
+
+**Read this before §5b.** §5b says what to do. This says what you are fighting, and a session that
+does not know why will re-derive the same shortcuts and call them craft.
+
+**The evidence that a note alone is not enough:** §5b was written on **2026-09-15**. On
+**2026-09-16** the opening shipped reading *"Your mum doesn't know he paid."* — a pronoun pointing at
+nobody, on the game's first screen — out of the same session that wrote §5b. That is why §5a has a
+script attached (`process/readable.py`) and §5b did not.
+
+Three forces push every beat the same way. Nothing in the build pushes back.
+
+### 1 · Every writing threshold is a maximum. There is no minimum.
+
+`gates.py:7390` is the whole thing in one line:
+
+```python
+gate("sentence length", ... med_sent <= SENTENCE_CEILING, ...)
+```
+
+**It passes more comfortably the shorter you write.** A median of three words clears it by the widest
+margin available. Same direction for every other threshold that touches prose — `DASH_CEILING`,
+`NARRATION_DIALOGUE_CEILING`, `MENU_CEILING`, `FIELD_NEGATION_MAX`.
+
+⚠️ **Say this precisely.** The claim is *no floor on sentence-level readability*, **not** "no floors
+at all." `EXPLICIT_BEAT_FLOOR` and `EXPLICIT_BEAT_MEDIA_FLOOR` are real floors — they are about
+explicit content and media volume. `MEDIAN_LOCATION_WORDS` is a volume target, and 3,000 words of
+fragments clears it. Grep `gates.py` for `too short`, `sentence_floor`, `min_words`, `finite verb` or
+`antecedent`: **nothing comes back.** That is the actual gap.
+
+Cutting a word always makes the score better or leaves it flat. **Nothing in the build has ever told
+this repo it went too far.**
+
+### 2 · The beat budget makes grammar the cheapest thing to cut
+
+~35–40 words per beat is correct and measured (`register.md:387`). But when you shop for words to
+lose, the subject and the verb are the cheapest, because they carry no *information*:
+
+```
+"You turned eighteen last month."   5 words, 1 fact
+"Eighteen last month."              3 words, 1 fact   ← saves 2, loses the sentence
+```
+
+The fact survives the cut. The sentence does not. **Nothing measures the sentence.** The budget is
+not the bug; the absence of anything noticing what the budget was paid for is.
+
+### 3 · Caveman ultra bleeds from chat into the beat
+
+`CLAUDE.md:60` puts this repo's **chat** in a register that drops articles and likes fragments.
+`CLAUDE.md:86` draws the line itself:
+
+> **A beat is persisted text.** Compression has never governed a beat and must not start.
+
+The prose is written in the same session as the chat, and it leaks. ***"Eighteen last month."* is
+caveman ultra** — the chat register, rendered to a player. The boundary is already written down. It
+was crossed anyway, which is what a boundary with no instrument behind it does.
+
+### The standing instruction
+
+> Before writing any beat, **read it as someone who has played nothing.** Every sentence needs a
+> subject and a verb. Every pronoun needs somebody on the same screen to point at. The word budget is
+> never paid for by deleting grammar.
+
+### The instrument
+
+`venv/bin/python games/the_balance/process/readable.py` — **a list, never a score**, same contract as
+`joints.py` and `tokens.py`. It refuses to score compression, because `register.md:1041-1043` measured
+fragment density across the field and **refused a threshold** (5.3%–58.6%); fragments are legitimate
+writing. It finds two things that are *facts* instead:
+
+- **A pronoun with nothing to point at** — gender-aware, which is the whole point: *"your mum"* is
+  present on screen one and is exactly who *"he"* is not. Canvases with an `npc` on their trigger are
+  exempt, because the player clicked that person's name to get in.
+- **Short sentences carrying no finite verb**, one-shot screens first. Approximate by design and
+  printed for a human, never judged.
+
+It is regression-tested against the bug that caused it: run it with
+`--toml <(git show 5f8424a:games/the_balance/toml_phases/7_final_game.toml)` and it must flag
+`canvas_opening / wake`. **A check that cannot catch the defect it was written for is decoration.**
+
+---
+
 ## 5b · Writing what the player reads
 
 §5 governs the documents LO signs. This governs the prose on the other side of a click, and it
