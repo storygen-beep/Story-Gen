@@ -1,0 +1,526 @@
+# =============================================================================
+# The Balance — 1 · locations and people
+#
+# SLICE 1. Eight rooms and two people — the fewest that let her get from her bed
+# to Owen. The other twenty-two locations are budgeted in v2_state.json board.locations
+# and are not built yet.
+#
+# ⚠️ [[npcs]] and their [[npcs.schedules]] live in THIS one file. A schedule block
+# that drifts below the next [[npcs]] header silently re-attaches to that NPC.
+# =============================================================================
+
+# --- the house ---------------------------------------------------------------
+
+[[locations]]
+id          = "the_street"
+name        = "Your Street"
+description = "Parked cars and the same row of houses in both directions. The bus stop is at the corner, four doors down. Everything that isn't this house is on the other side of it."
+image       = "locations/the_street.jpg"
+image_search_queries = ["quiet suburban residential street row houses morning", "ordinary street bus stop corner overcast"]
+navigation_order = ["the_hall", "the_bus_stop", "the_garage"]
+# ROOT. No entry_from — the exterior the whole map hangs off (v2_state board.map).
+
+[[locations]]
+id          = "the_hall"
+name        = "The Landing"
+description = "The middle of the house. Four doors and the bathroom open off it, and you can hear which of them has somebody behind it. Your mum's bag is gone from the hook."
+image       = "locations/the_hall.jpg"
+image_search_queries = ["upstairs landing four doors carpet house interior", "narrow hallway bedroom doors daylight"]
+entry_from  = "the_street"
+navigation_order = ["her_room", "the_kitchen", "the_bathroom", "the_front_room", "nate_room", "tasha_room", "the_master_bedroom"]
+
+[[locations]]
+id          = "her_room"
+name        = "Your Room"
+description = "Bed against one wall, desk against the other, and the door that's meant to stay open when anyone's on the landing. Your phone is on the books where you left it."
+image       = "locations/her_room.jpg"
+image_search_queries = ["small teenage girl bedroom desk bed daylight", "cramped bedroom single bed study desk phone"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "the_bathroom"
+name        = "The Bathroom"
+description = "The shower, the mirror, and a lock that works. It is the only room in this house that is ever properly yours, and it is yours for about as long as nobody else wants it."
+image       = "locations/the_bathroom.jpg"
+image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "the_kitchen"
+name        = "The Kitchen"
+description = "The chore list is on the fridge in his handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
+image       = "locations/the_kitchen.jpg"
+image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "the_front_room"
+name        = "The Front Room"
+description = "The sofa, the TV, and the window onto the street. It sits between the hall and everywhere, so you cross it to leave and you cross it to come home."
+image       = "locations/the_front_room.jpg"
+image_search_queries = ["ordinary family living room sofa tv evening", "small front room couch television lamp"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "nate_room"
+name        = "@nate's Room"
+description = "His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself."
+image       = "locations/nate_room.jpg"
+image_search_queries = ["young man bedroom desk monitor dim", "messy student bedroom bed desk night"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "tasha_room"
+name        = "Tasha's Room"
+description = "Her wardrobe takes one whole wall and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not."
+image       = "locations/tasha_room.jpg"
+image_search_queries = ["young woman bedroom wardrobe fairy lights mirror", "girl bedroom clothes rail lights makeup"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "the_master_bedroom"
+name        = "The Master Bedroom"
+description = "Your mum and @gil's room. Her shift times are on the wall by the door in her own handwriting, and you have read them a hundred times for ordinary reasons."
+image       = "locations/the_master_bedroom.jpg"
+image_search_queries = ["ordinary main bedroom double bed lamp night", "master bedroom dim lamp bed doorway"]
+entry_from  = "the_hall"
+
+[[locations]]
+id          = "the_garage"
+name        = "The Garage"
+description = "The car, the bins, the washing machine, and the light he leaves on. Half the list on the fridge lives out here."
+image       = "locations/the_garage.jpg"
+image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
+entry_from  = "the_street"
+
+# --- getting anywhere --------------------------------------------------------
+
+[[locations]]
+id          = "the_bus_stop"
+name        = "The Bus Stop"
+description = "A pole, a timetable nobody has updated, and a bench somebody has had a go at. The bus into town is two dollars and it takes forty minutes to do what a car does in fifteen."
+image       = "locations/the_bus_stop.jpg"
+image_search_queries = ["empty bus stop bench suburban street daytime", "bus shelter timetable pole roadside"]
+entry_from  = "the_street"
+navigation_order = ["the_strip", "the_quad"]
+costs       = { time = 5 }
+
+[[locations]]
+id          = "the_strip"
+name        = "The Strip"
+description = "Downtown, such as it is. A run of shops, half of them open, and the cafe about midway along with its lights on. Forty minutes of your morning to stand here."
+image       = "locations/the_strip.jpg"
+image_search_queries = ["small town main street shopfronts daytime", "downtown strip shops sidewalk morning"]
+entry_from  = "the_bus_stop"
+navigation_order = ["the_cafe"]
+costs       = { time = 40, cash = 2 }
+# ⚠️ THE BUS. Entry costs are charged moving IN, so the ride out is $2 and forty
+# minutes and the ride home is currently free. Asymmetric on purpose in a slice —
+# walking (free, an hour) is the other route and is not built yet.
+
+# --- campus ------------------------------------------------------------------
+# ⚠️ CAMPUS NEVER GIVES HER MONEY. Every hour here is hours and bus fare going
+# out, and that is deliberate: it is what makes the cafe and the phone feel like
+# the only two ways out of the Friday payment.
+
+[[locations]]
+id          = "the_quad"
+name        = "The Quad"
+description = "Grass, benches, and the paths everybody cuts across instead of using. Everything on this campus hangs off it, and between classes it is where people find out who you are by looking."
+image       = "locations/the_quad.jpg"
+image_search_queries = ["university quad students walking grass daytime", "college campus lawn paths students"]
+entry_from  = "the_bus_stop"
+navigation_order = ["the_lecture_hall", "the_classroom", "the_union"]
+costs       = { time = 40, cash = 2 }
+
+[[locations]]
+id          = "the_lecture_hall"
+name        = "The Lecture Hall"
+description = "A hundred people in steep rows and a man at the bottom who has never learned any of their names. Nobody notices whether you came. The sheet does."
+image       = "locations/the_lecture_hall.jpg"
+image_search_queries = ["university lecture theatre tiered seats students", "large lecture hall students seated"]
+entry_from  = "the_quad"
+
+[[locations]]
+id          = "the_classroom"
+name        = "The Classroom"
+description = "A dozen chairs round three tables pushed together. Small enough that not having done the reading is a thing everybody in the room watches happen."
+image       = "locations/the_classroom.jpg"
+image_search_queries = ["small university seminar room tables students", "classroom tables chairs whiteboard daylight"]
+entry_from  = "the_quad"
+
+[[locations]]
+id          = "the_union"
+name        = "The Union"
+description = "The cheapest food on the map and forty tables. You are either at one with somebody or at one on your own, and both of those are visible from the door."
+image       = "locations/the_union.jpg"
+image_search_queries = ["student union cafeteria tables students eating", "university canteen tables food counter"]
+entry_from  = "the_quad"
+
+# --- the cafe ----------------------------------------------------------------
+
+[[locations]]
+id          = "the_cafe"
+name        = "The Cafe"
+description = "Tables, a counter, a window onto the strip. Warm in a way the street isn't. Somebody could sit at one of these tables and look at you for an hour and have paid for the right to."
+image       = "locations/the_cafe.jpg"
+image_search_queries = ["small independent cafe interior tables counter window", "coffee shop interior daytime empty tables"]
+entry_from  = "the_strip"
+navigation_order = ["the_back_room", "the_cafe_toilet"]
+costs       = { time = 2 }
+
+[[locations]]
+id          = "the_cafe_toilet"
+name        = "The Toilet"
+description = "One room, shared with the customers, so the person who opens it next could be anybody. A mirror over the sink and a lock that works. It is the only door you can shut on yourself that isn't your own bedroom."
+image       = "locations/the_cafe_toilet.jpg"
+image_search_queries = ["small single cafe restroom mirror sink", "public toilet single room mirror door"]
+entry_from  = "the_cafe"
+
+[[locations]]
+id          = "the_back_room"
+name        = "The Office"
+description = "Out the back, past the machine. A desk, a filing cabinet, the schedule on the wall with everyone's hours on it. The door has a lock and it isn't locked."
+image       = "locations/the_back_room.jpg"
+image_search_queries = ["small cluttered back office desk filing cabinet", "cafe back office schedule wall desk"]
+entry_from  = "the_cafe"
+
+# --- the people --------------------------------------------------------------
+# ⚠️ Two. Nate and Tasha are a shower running and a shut door in the opening prose
+# and are deliberately NOT declared — an NPC with no surface is a name in a list.
+
+[[npcs]]
+id          = "npc_gil"
+name        = "Gil"
+description = "Your mum's husband of three years, and the reason you are at college at all. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
+portrait    = "gil.jpg"
+role        = "step dad"
+relationship = "step dad"
+relationship_options = ["step dad", "mum's husband", "dad", "uncle"]
+customizable = true
+tags        = ["runs the house his way", "never mentions what he paid", "up before everyone", "does not drink"]
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+
+# ⚠️ customizable = true means the player can rename him, so every authored line
+# says @gil and never "Gil".
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:30"
+end_time   = "08:00"
+activity   = "at the table with the radio on"
+
+# the_week.md: "@gil is there because he's always there at six." Friday evening is
+# when the $150 is handed over, so he has to actually BE in the room.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "21:00"
+activity   = "at the table with the radio on low"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "23:30"
+activity   = "upstairs, door pushed to"
+
+[[npcs]]
+id          = "npc_owen"
+name        = "Owen"
+description = "He owns the cafe and he is on the floor of it more than he needs to be. Exact about the work, quick to notice when it is sloppy, and he hands out nothing for nothing."
+portrait    = "owen.jpg"
+role        = "cafe owner"
+relationship = "the man who owns the cafe"
+customizable = false
+tags        = ["exact about the work", "notices sloppy", "pays in hours", "never raises his voice"]
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Nobody",          # 0 — she has not asked
+  "On the floor",    # 1 — the worst two shifts
+  "On the counter",  # 2 — four shifts, and some say in which
+  "Closing",         # 3 — the building is him and her
+]
+
+[[npcs.schedules]]
+location   = "the_cafe"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "22:00"
+activity   = "working the floor"
+# ⚠️ ONE row, all day, every day. The_move_up.md says the no is in the hours and
+# never at the door — a schedule that can put him out of reach on the first
+# morning would stall the slice on its only real choice.
+
+# ⚠️ THREE MORE, AND THEY EXIST TO PUT SOMEBODY IN A ROOM SHE CAN DO SOMETHING
+# WITH, OR TO EMPTY A ROOM SHE NEEDS. the_house_day.md's header rule. Every row
+# below is off that page's hour-by-hour table; none of it is invented here.
+
+[[npcs]]
+id          = "npc_nate"
+name        = "Nate"
+description = "@gil's son, twenty, a senior at your college. He was fine before you moved in and he has never pretended otherwise. He wants you out of his way and hiding the rest of it is the only thing he is good at."
+portrait    = "nate.jpg"
+role        = "step brother"
+relationship = "step brother"
+relationship_options = ["step brother", "@gil's son", "housemate", "stepbrother"]
+customizable = true
+tags        = ["wants you gone", "can't stop looking", "tells @gil things", "on the sofa by seven"]
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Can't stand you",   # 0
+  "Caught looking",    # 1 — the door
+  "Showing it",        # 2 — later
+]
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time   = "07:45"
+activity   = "in the shower, taking his time about it"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5, 6]
+start_time = "19:00"
+end_time   = "20:00"
+activity   = "at the table, eating fast so he can get up"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "19:00"
+end_time   = "22:00"
+activity   = "on the sofa with the TV on"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5, 6]
+start_time = "20:00"
+end_time   = "22:00"
+activity   = "on the sofa with the TV on"
+
+# His door, and the hours it is not always shut. This row IS the invitation —
+# the_two_doors.md: nothing announces it.
+[[npcs.schedules]]
+location   = "nate_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "in his room with the door not quite shut"
+
+[[npcs]]
+id          = "npc_tasha"
+name        = "Tasha"
+description = "@gil's daughter, twenty-one. She wants an audience and she will happily make you into one. She cannot out you, she does not know anything, and she is an example rather than a threat."
+portrait    = "tasha.jpg"
+role        = "step sister"
+customizable = false
+relationship = "step sister"
+tags        = ["wants an audience", "lends you things", "advice you didn't ask for", "out Friday and Saturday"]
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "tasha_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "17:00"
+activity   = "home, lights on, door open"
+
+# Her hour in the bathroom before she goes out — which is exactly the hour Nell
+# would want it. This row is why `clean` is tight.
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "doing her face with the door unlocked"
+
+# She is at the table on the nights she is in — which is not Friday or Saturday.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 6]
+start_time = "19:00"
+end_time   = "20:00"
+activity   = "at the table with a story she is halfway through"
+
+[[npcs.schedules]]
+location   = "tasha_room"
+weekdays   = [0, 1, 2, 3, 6]
+start_time = "18:00"
+end_time   = "23:59"
+activity   = "in, with music on"
+
+[[npcs]]
+id          = "npc_lynn"
+name        = "Lynn"
+description = "Your mum. She wants you to be fine and she is too tired to check. She does not know @gil paid for any of it, and everything in this house happens while she is out or asleep."
+portrait    = "lynn.jpg"
+role        = "mum"
+customizable = false
+relationship = "your mum"
+tags        = ["three nights on the ward", "asleep by ten", "too tired to check", "never asks twice"]
+core_traits = { relation = 0 }
+flag_keys   = []
+
+# ⚠️ NEVER TOUCHED. She is the price, not a person to be won — standing call,
+# re-confirmed by LO. She is here to put a second person in that bedroom, which
+# is the entire weight of the door, and for no other reason.
+#
+# Ward nights are Monday, Wednesday and Friday, so she is HOME Tuesday, Thursday,
+# Saturday and Sunday. Those are the nights the master bedroom has two people in it.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5, 6]
+start_time = "19:00"
+end_time   = "20:00"
+activity   = "at the table, still in the coat she travels in"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "in bed with the lamp on, off the ward"
+
+# --- the two on campus who want nothing from her -----------------------------
+# The crowd — Jules, Bree and Paige — is the NEXT piece. These two are the friend
+# and the one she chooses, and neither of them is a climb yet.
+
+[[npcs]]
+id          = "npc_cara"
+name        = "Cara"
+description = "Your friend since the first week, and the only person in this game who wants nothing off you. Everybody else pays you. She costs you — an hour at a time, which is the one thing you are running out of."
+portrait    = "cara.jpg"
+role        = "your friend"
+customizable = false
+relationship = "the friend you made in week one"
+tags        = ["wants your time", "notices you look wrecked", "never asks twice", "still talks to you like September"]
+core_traits = { relation = 10 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "the_union"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "12:00"
+end_time   = "14:30"
+activity   = "at the far table with her coat still on"
+
+[[npcs.schedules]]
+location   = "the_quad"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:40"
+end_time   = "09:00"
+activity   = "on the bench nearest the doors, waiting for you"
+
+[[npcs]]
+id          = "npc_sam"
+name        = "Sam"
+description = "In two of your classes. He is your age, he is not paying for anything, and he asks for nothing you could put a price on. Everybody likes him, and being seen with him is worth something."
+portrait    = "sam.jpg"
+role        = "in your class"
+customizable = false
+relationship = "the one in your class"
+tags        = ["everybody likes him", "asks for nothing", "believes you", "does the reading"]
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "the_classroom"
+weekdays   = [1, 3]
+start_time = "08:45"
+end_time   = "12:00"
+activity   = "already there, with the reading done"
+
+[[npcs.schedules]]
+location   = "the_union"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "12:00"
+end_time   = "14:00"
+activity   = "at a table with four other people"
+
+# --- the crowd ---------------------------------------------------------------
+# ⚠️ ONE PERSON, BOTH JOBS, and that is what makes this work: Jules is the one
+# making her small AND the one who can let her in. Being pushed around and being
+# let in are the same channel, so the player cannot take one without the other.
+
+[[npcs]]
+id          = "npc_jules"
+name        = "Jules"
+description = "Twenty-one, and the one everyone else arranges themselves around. She does not giggle and she does not raise her voice. She watches, she decides, and she is usually right, which is what makes arguing with her hard."
+portrait    = "jules.jpg"
+role        = "runs the crowd"
+customizable = false
+relationship = "the one everyone watches"
+tags        = ["never raises her voice", "decides who is in", "lets Bree do the talking", "usually right"]
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "The joke",        # 0 — she is what they laugh at
+  "Doing it",        # 1 — the first dare
+  "Nearly in",       # 2 — the second
+]
+
+# ⚠️ THESE TWO ROWS MUST NOT OVERLAP. Schedule rows are walked in declaration
+# order, FIRST MATCH WINS — so an overlapping union row is dead and she resolves
+# to the quad all afternoon. She gives the dare on the quad before one, and she
+# is at the window table after it, which is what "we'll be at the table by the
+# window" has to mean for the room to actually contain her.
+[[npcs.schedules]]
+location   = "the_quad"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "13:00"
+activity   = "on the wall by the doors with the other two"
+
+[[npcs.schedules]]
+location   = "the_union"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "13:00"
+end_time   = "16:00"
+activity   = "at the table nearest the window, facing out into the room"
+
+[[npcs]]
+id          = "npc_bree"
+name        = "Bree"
+description = "She says the thing out loud so Jules does not have to. She is in @nate's year, which is how the quad gets home before you do."
+portrait    = "bree.jpg"
+role        = "says it out loud"
+customizable = false
+relationship = "the one who says it"
+tags        = ["says the cruel thing", "in @nate's year", "laughs first", "never on her own"]
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "the_quad"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "14:00"
+activity   = "doing the talking"
+
+[[npcs]]
+id          = "npc_paige"
+name        = "Paige"
+description = "Lovely to your face, every time, and she lets Bree do it anyway. Also in @nate's year."
+portrait    = "paige.jpg"
+role        = "lovely to your face"
+customizable = false
+relationship = "the one who is nice about it"
+tags        = ["lovely to your face", "lets Bree do it", "in @nate's year", "apologises for nothing"]
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "the_quad"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "14:00"
+activity   = "laughing a beat after Bree"

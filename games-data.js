@@ -15,6 +15,30 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-09-15. Authored with author-game-v2, under the per-game process in
+    // games/the_balance/process/README.md. 19 locations, 43 canvases, 10 characters,
+    // 12 guidance cards, 7 walk-ins, 24 block_pools, 6,300 words, 31/40 gates.
+    //
+    // \u26a0\ufe0f DEV + DEBUG BUILD, ON PURPOSE. output/ is built with --dev --debug, so the
+    // [DEV MODE] banner, the sidebar jump list and the [IMAGE MISSING] placeholders are all
+    // live. It is here to be played and poked at, not shipped. No `version` field for the
+    // same reason: nothing has been released.
+    //
+    // NO MEDIA AT ALL: 29 slots declared (19 locations, 10 portraits) and zero files on
+    // disk. Missing images render as nothing, so the game reads clean \u2014 but every
+    // location card and portrait is empty.
+    //
+    // Content-complete against its own first-build page (games/the_balance/sheets/RELEASE.md):
+    // the opening, the whole house and both doors, the cafe and the move up to the counter,
+    // the phone, Friday, campus, the crowd and both dares. What it ENDS on is the closing
+    // shift on the office wall, which she can see and cannot have.
+    slug: "the_balance",
+    title: "The Balance",
+    badge: "v2",
+    dev: true,
+    summary: `Nell is eighteen and three weeks into college, and her step dad paid for it. She pays him back a hundred and fifty every Friday, in cash, at the kitchen table, and her mum does not know there is a number. There are two ways to make that money and they cost different things: five hours on the floor of a cafe for fifty-five, or an hour in her own room with the door shut and the phone against the books, which pays whatever it pays and puts a little more of her somewhere it cannot be taken back from. Everything wants the same hours \u2014 the nine o'clock she has to be awake for, the shift that pays, the afternoon the house is finally empty. On the quad a girl who never raises her voice has decided she is worth making small, and the way out of that is doing what she asks. At home there are two doors that are not always shut. The cafe has a closing shift on the wall with somebody else's name on it.`,
+  },
+  {
     // Listed 2026-09-03, updated 2026-09-04. Authored with author-game-v2. 15 locations,
     // 89 canvases, 212 nodes, 7 characters, 12 guidance cards, 11 walk-ins, 8 garments,
     // 110 block_pools, 21,537 words, 45/46 gates.

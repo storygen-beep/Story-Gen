@@ -1,0 +1,361 @@
+# =============================================================================
+# The Balance — 2 · the one-shots
+#
+# SLICE 1. Two canvases: the opening, and asking for the job.
+#
+# ⚠️ A CHOICE cannot be a location exit — an exit_block is EITHER `choices` OR
+# `location` (validator: "choices[0].targetType invalid"). So the three answers in
+# the kitchen route to three nodes, and THOSE nodes carry the way out of the house.
+#
+# ⚠️ Every line about Gil reads @gil. He is player-renameable (v2.py:9294).
+# =============================================================================
+
+# --- A1 · THE OPENING --------------------------------------------------------
+# sheets/OPENING.md. Three screens, and the first two name nobody at all.
+
+[[canvases]]
+id   = "canvas_opening"
+name = "<Opening>"
+description = "Boot. Her room, the landing, the kitchen at seven thirty. Three facts, then @gil's one line about the cafe, then the first free choice — money against time. Sets opening_done."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Monday"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Eighteen last month. College starts today, across town, in a room you have never stood in."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The semester is paid for and it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum doesn't know he paid."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "node"
+nodeId     = "canvas_opening.landing"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "landing"
+name = "The landing"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The shower is running. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Downstairs somebody has the radio on low."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go down."
+targetType = "node"
+nodeId     = "canvas_opening.kitchen"
+time_progression_minutes = 27
+# 07:00 + 3 + 27 = 07:30 in the kitchen, which is the hour OPENING.md names.
+
+[[canvases.nodes]]
+id   = "kitchen"
+name = "Half seven"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@gil is at the table with the paper folded to the part he wants. He doesn't look up."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "Job going at the cafe on the strip. Card in the window."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "That is the whole of it. He doesn't mention Friday, and he won't say it twice."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the bins first. He pays for one a day."
+targetType = "node"
+nodeId     = "canvas_opening.chore"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat."
+targetType = "node"
+nodeId     = "canvas_opening.eat"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go now. The bus is in twenty minutes."
+targetType = "node"
+nodeId     = "canvas_opening.leave"
+
+[[canvases.nodes]]
+id   = "chore"
+name = "The bins"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The bins are round the side and the truck comes at eight, so it is you dragging them to the front in your college clothes."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Ten minutes, and your hands smell like the bin. He puts five dollars on the table without looking up."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it and go."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_street"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "opening_done"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "chore_paid_today"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 5
+
+[[canvases.nodes]]
+id   = "eat"
+name = "Breakfast"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You sit. He pushes the box across and you eat half a bowl while the radio does the weather."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He doesn't ask about college. You don't tell him. It is the nearest thing to a conversation this house does before eight."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get your bag."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_street"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "opening_done"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 1
+# ⚠️ effects say `npcId`; a CONDITION on the same character says `npc_id`.
+#
+# This was `rest +5` and it pushed rest to 105 — nothing clamps a trait to its
+# starting ceiling, caught on a live walk. Eating is not rest anyway. What sitting
+# down actually buys is the only thing it can: the_cast.md says @gil never opens a
+# step and every one of them is hers to open, and this is the smallest one there is.
+
+[[canvases.nodes]]
+id   = "leave"
+name = "Out"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take your bag and pull the door until it catches, because it doesn't unless you do."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Four doors down to the stop. Early for nothing in particular, which is still better than late."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "The street."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_street"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "opening_done"
+op         = "set"
+
+# --- A2 · ASKING FOR THE JOB -------------------------------------------------
+# sheets/systems/the_move_up.md. Step ZERO of the cafe arc — not the cafe.
+#
+# ⚠️ REPEATABLE on purpose, and rendered as Owen's own link at the location
+# (npc inside [canvases.trigger]). She is allowed to walk out without asking —
+# the_move_up.md: "She can put it off." A non-repeatable one-shot would burn on
+# the walk-out and she could never come back, which stalls the slice on its only
+# real choice. The gate is has_job, so it stops offering itself the moment she
+# has the job.
+
+[[canvases]]
+id   = "canvas_ask_owen"
+name = "Ask about the job"
+description = "Her first meeting with Owen. He never turns her down — the no is in the hours. Taking it sets has_job and move_up = 1: two shifts, the worst two, $110 against a $150 Friday."
+
+[canvases.trigger]
+location      = "the_cafe"
+npc           = "npc_owen"
+is_repeatable = true
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He is behind the counter with a cloth in his hand and he watches you the whole way across the floor."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "You're not a customer."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He says it flat. Not rude. Exact."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about the card in the window."
+targetType = "node"
+nodeId     = "canvas_ask_owen.hired"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy a coffee and go."
+targetType = "node"
+nodeId     = "canvas_ask_owen.walked_out"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 2 },
+] }
+# The one thing money opens in this slice. Walking out is only an option if she can
+# afford the coffee she is hiding behind — broke, the only way out is to ask.
+
+[[canvases.nodes]]
+id   = "hired"
+name = "The hours"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Nine an hour, tips are yours, five hours a shift. Two to start. Tuesday and Sunday, the two nobody wants."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He says it like a man who has said it before and has never once been argued out of the number."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "canvas_ask_owen.the_number"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "the_number"
+name = "Two lines at the bottom"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He writes your name at the bottom of the schedule in the office, under four people who were already on it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Tuesday half past six, Sunday seven. Don't be late on the first one."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Two shifts is a hundred and ten on a good week, with tips. Friday is a hundred and fifty."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back out to the floor."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "has_job"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "move_up"
+op         = "set"
+value      = 1
+
+[[canvases.nodes]]
+id   = "walked_out"
+name = "The card is still there"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You buy a coffee you don't want and drink half of it by the window."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The card is still in the glass when you go. It will still be there tomorrow. Probably."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = -2
+# ⚠️ op = "subtract" IS NOT AN ENGINE OP. It parses, validates, builds green
+# and does nothing at all (engine.md §21b). A negative `add` is the only way down.
