@@ -380,6 +380,22 @@ it says is ever *against* what it just said. Every fact arrives as an addition.
 **Never a comma.** Swapping the mark leaves the joint in place. **Never "add a clause"** — see the
 trap below.
 
+#### ⚠️ Split is the rung that bites back
+
+**Split takes one over-joined sentence and can hand back two under-joined ones.** That is a lateral
+move, not a fix, and the 2026-09-15 pass made it on the last line of the game's opening:
+
+> *Early for nothing in particular, which is still better than late.* (one sentence, 14 words)
+> → *Early for nothing in particular. Still better than late.* (two fragments, 5 and 4)
+
+The gloss died and the compression got worse. **Split only when both halves keep a finite verb and
+the relationship survives the cut.** Otherwise the rung you want is 3, not 2.
+
+The same pass then over-corrected the other way: joining every clause pushed the opening to a median
+of **18 words** a sentence against `SENTENCE_CEILING = 14` (`gates.py:133`, field median 10). Naming
+a relationship does not mean welding the facts into one sentence. Two joined sentences beat one long
+one. **The target is that no fact arrives unattached — not that no sentence ends.**
+
 ### ⚠️ The trap: do not trade `and` for `, which is`
 
 The game already over-used the one subordinator it had — the `, which is` clause that explains the
@@ -405,6 +421,44 @@ Named explicitly, because the obvious over-correction is worse than the original
 - **The coordination ratio.** Ours sits inside the field's range and always did. This is about
   recoverability, not length — and `register.md:640` still says escalate by adding beats, never by
   lengthening sentences.
+
+### ⚠️ A pronoun is a joint too, and it needs something to point at
+
+The sharpest compression defect in the first build was not a conjunction. It was `he`.
+
+Screen one of the game ended *"Your mum doesn't know he paid."* — and **the player had met nobody.**
+No name, no role, no antecedent anywhere on the screen. The reader cannot assemble the sentence at
+all, which is the complaint that started this whole pass in its purest form.
+
+The cause is a misread of the design sheet. `sheets/OPENING.md` says *"nobody is named yet"* — and
+its own bullets say *"her **step dad** paid her tuition"*. **"Nobody is named" withholds the NAME.
+It does not mean nobody is identified.** The author dropped the role along with the name and left a
+pronoun pointing at nothing.
+
+**The fix is `@gil.rel`, and it is the exact opposite of §5c's fix.** §5c is about surfaces the
+engine does not resolve, where the text must need neither name nor relationship. Canvas block prose
+is a surface that **does** resolve (`v2.py:15483`), and `@gil.rel` emits
+`<<print $npcs["npc_gil"].relationship>>` (`v2.py:14976`). `CustomizeCharacters` is the start
+passage (`v2.py:1075`), so the player has already picked the relationship before the opening renders,
+and `relationship = "step dad"` is seeded in the TOML so an untouched listbox still prints a word.
+Verified live under two choices: *"Your step dad paid"* and *"Your uncle paid"*.
+
+**So: strip a token off a label, put one into prose.** Before using a pronoun on an early screen,
+find its antecedent on that same screen. If there isn't one, the pronoun is the defect.
+
+### ⚠️ A whole-game rate cannot see the screen that matters most
+
+`joints.py` reports per 1,000 words over ~7,200 words. The opening canvas is under 300 of them, so
+**it cannot move a single number on that page however badly it is written** — and it is the one
+screen every player reads. It shipped at a median of 9 words a sentence against 13 for the rest of
+the game, through a pass that was driven by those rates and came back green.
+
+Worse: **a screen of pure fragments scores perfectly on `and per 1,000 words`**, because prose with
+no joints has no joints to count. Under-joining is invisible to a joint rate by construction.
+
+`joints.py` now prints a **per-canvas median sentence length** under the rates. Not a threshold — a
+spread, so a canvas far from its own game's middle gets looked at. It found five more on its first
+run: `wash` and `listen_union` at 7, `sam_talks`, `canvas_ask_owen` and `dare_1_offer` at 8.
 
 ### What the pass moved, 2026-09-15
 

@@ -35,11 +35,11 @@ name = "Monday"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Eighteen last month. College starts today, across town, in a room you have never stood in."
+content = "You turned eighteen last month. College starts today, across town, in a room you have never stood in."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The semester is paid for, but it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
+content = "Your @gil.rel paid the semester up front, not you. A hundred and fifty goes back to him on Friday, and on every Friday after that."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -60,11 +60,11 @@ name = "The landing"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The shower is running and the bathroom is gone until whoever it is comes out. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
+content = "The shower is running, so the bathroom is gone until whoever is in there comes out. Of the two doors on the landing, one is shut and one stands open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Downstairs somebody has the radio on low."
+content = "Downstairs somebody has the radio on low. You could not say which of them it is."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -82,7 +82,7 @@ name = "Half seven"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "@gil is at the table with the paper folded to the part he wants. He doesn't look up."
+content = "@gil is at the table with the paper folded to the part he wants. He doesn't look up when you come in."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
@@ -91,7 +91,7 @@ content = "Job going at the cafe on the strip. Card in the window."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "That is the whole of it. He doesn't mention Friday, because he has already said it once."
+content = "He says it to the paper and not to you. He doesn't mention Friday, because he has already said it once."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -120,11 +120,11 @@ name = "The bins"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The bins are round the side and the truck comes at eight, so it is you dragging them to the front in your college clothes."
+content = "The bins are round the side and the truck comes at eight. So it is you dragging them to the front, in your college clothes."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Ten minutes, and your hands smell like the bin. He puts five dollars on the table without looking up."
+content = "Ten minutes, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -157,11 +157,11 @@ name = "Breakfast"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You sit. He pushes the box across and you eat half a bowl while the radio does the weather."
+content = "You sit down and he pushes the box across without a word. You eat half a bowl while the radio does the weather."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He doesn't ask about college. You don't tell him. It is the nearest thing to a conversation this house does before eight."
+content = "He doesn't ask about college and you don't tell him. That is the nearest thing to a conversation this house does before eight."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -200,7 +200,7 @@ content = "You take your bag and pull the door until it catches, because it does
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Four doors down to the stop. Early for nothing in particular. Still better than late."
+content = "Four doors down to the stop, and you get there early for nothing in particular. Early is still better than late."
 
 [canvases.nodes.exit_block]
 type = "location"
