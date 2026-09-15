@@ -71,7 +71,7 @@ name = "The shift"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Five hours of carrying plates to people who are mid-sentence. The window table turns over four times. Your feet go at about hour three and the last two are hour three continuing." },
-  { type = "paragraph", content = "The machine wants its tray emptied twice and nobody else empties it. Owen watches you do it the first time and not the second, which is how he says a thing is yours now." },
+  { type = "paragraph", content = "The machine wants its tray emptied twice, but nobody else empties it. Owen watches you do it the first time and not the second. That is how he says a thing is yours now." },
   { type = "paragraph", content = "A slow one. You wipe tables that are already clean, because standing still where he can see you is worse work than working." },
   { type = "paragraph", content = "The lunch lot arrive together and leave together and the floor between the counter and the window ends up with all of it on. You get most of it up before he is out of the office." },
   { type = "paragraph", content = "Two hours of nobody, then a coach party, then nobody again. The tips are a handful of coins and one note left flat under a saucer, which is the only part worth counting." },
@@ -164,9 +164,9 @@ name = "The shift"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, and most of them look at you for the length of the saying." },
-  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor and it is more of you on show, and those two facts arrived together." },
-  { type = "paragraph", content = "Owen takes the floor and leaves you the counter, which means he is out there with his back to you for most of the afternoon and you can feel exactly when it isn't." },
+  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, so most of them look at you for the length of the saying." },
+  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor but more of you on show, and the two arrived together." },
+  { type = "paragraph", content = "Owen takes the floor and leaves you the counter. He is out there with his back to you most of the afternoon, and you can feel exactly when it isn't." },
   { type = "paragraph", content = "Four deep at one, nobody at three. The queue is the part that pays; the empty hour is the part where the man at the window is still there." },
 ]
 
@@ -230,7 +230,7 @@ name = "Bed"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, and neither of those things is going to keep you awake." },
+  { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, but neither of those things is going to keep you awake." },
   { type = "paragraph", content = "Nine hours if nothing wakes you. The house does its noises — the heating, a door, a car on the street — and you sleep through all of it the way you have learned to." },
   { type = "paragraph", content = "You are asleep before you have finished deciding what tomorrow costs. That is the one thing this room is reliably good for." },
   { type = "paragraph", content = "Shoes off, jeans on the chair, door pushed to. It is not shut, because his rule about the door is one you keep without thinking about it now." },
@@ -385,7 +385,7 @@ name = "The shower"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
-  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it, and you stand there longer than washing takes." },
+  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it. You stand there longer than washing takes." },
   { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
 ]
 
@@ -448,8 +448,8 @@ name = "Door shut"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Door shut, phone up against the books at the angle that cuts you off at the mouth. The light from the window is doing most of the work. Forty-one people, then sixty, then it stops climbing and settles." },
-  { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other and one of them saying hello to you by name." },
-  { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them and it does not make you feel anything." },
+  { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other. One of them says hello to you by name." },
+  { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them, but it does not make you feel anything." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -467,7 +467,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, and the shower is not free at this hour either." },
+  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, but the shower is not free at this hour either." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -887,7 +887,7 @@ name = "The nine o'clock class"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Twelve chairs round three tables pushed together, and everybody can see everybody. @cara is not in this one. Sam is, and he has done the reading." },
+  { type = "paragraph", content = "Twelve chairs round three tables pushed together, so everybody can see everybody. @cara is not in this one. Sam is, and he has done the reading." },
   { type = "paragraph", content = "Small enough that she goes round the table. You get asked something in the first ten minutes because you are sitting where the light is." },
   { type = "paragraph", content = "Three tables, twelve people, and a door that does not shut properly. You can hear the corridor the whole way through." },
 ]
@@ -1095,7 +1095,7 @@ type = "block_pool"
 blocks = [
   { type = "paragraph", content = "He is at a table with four other people and he moves along without making anything of it, which is the thing he does that nobody else on this campus does." },
   { type = "paragraph", content = "He asks what you thought of the reading. Not to catch you out. He actually wants to know, which is worse." },
-  { type = "paragraph", content = "Somebody at his table says something about you being the one who is always leaving, and he says you work, and that is the end of it." },
+  { type = "paragraph", content = "Somebody at his table says something about you being the one who is always leaving, but he says you work, and that is the end of it." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1187,7 +1187,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "That's her, that's the one." },
-  { type = "paragraph", content = "Said at your volume as you pass, and the two of them watch to see whether you heard. Somebody has decided what you are and it has gone round." },
+  { type = "paragraph", content = "Said at your volume as you pass, then the two of them watch to see whether you heard. Somebody has decided what you are, and it has gone round." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1277,7 +1277,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, and not one of those bags belongs to anybody who is sitting down." },
+  { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, but not one of those bags belongs to anybody who is sitting down." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1330,7 +1330,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "A hundred and ten people in steep rows and you are the one that two rows of them keep turning round for." },
+  { type = "paragraph", content = "A hundred and ten people in steep rows. You are the one that two rows of them keep turning round for." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1340,7 +1340,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "Bit of a funny angle you film at." },
-  { type = "paragraph", content = "He says it going past your row and does not stop, and for the rest of the hour you cannot work out whether the whole room heard it or only you." },
+  { type = "paragraph", content = "He says it going past your row and does not stop. For the rest of the hour you cannot work out whether the whole room heard it or only you." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1411,7 +1411,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Forty minutes at a stop on a main road, and you are aware of every car that goes past and every one that slows." },
+  { type = "paragraph", content = "Forty minutes at a stop on a main road. You are aware of every car that goes past, and of every one that slows." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1429,7 +1429,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Two girls from your year in the shelter, and one of them says something to the other, and neither of them stops talking when you sit down." },
+  { type = "paragraph", content = "Two girls from your year in the shelter. One of them says something to the other, but neither of them stops talking when you sit down." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1595,7 +1595,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly and almost none of it has ever been about you." },
+  { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly, but almost none of it has ever been about you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1632,7 +1632,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "The two behind you have a phone between them and they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room, and they both go quiet when you turn round." },
+  { type = "paragraph", content = "The two behind you have a phone between them, but they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room. They both go quiet when you turn round." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1650,7 +1650,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people and nobody in this room has any idea who you are." },
+  { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people, but nobody in this room has any idea who you are." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1759,7 +1759,7 @@ name = "The doorway"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You do not go in and you do not go out. You stand in the gap with your hand still on the frame for about four seconds, which is three and a half seconds longer than you meant to, and then you are in the corridor and moving."
+content = "You do not go in and you do not go out. You stand in the gap with your hand still on the frame for about four seconds. You meant it to be half of one. Then you are in the corridor and moving."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -1819,7 +1819,7 @@ name = "The corridor"
 [[canvases.nodes.blocks]]
 type    = "thought_bubble"
 props   = { speaker = "player" }
-content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, and it is not the part you would have guessed."
+content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, but it is not the part you would have guessed."
 
 [canvases.nodes.exit_block]
 type = "location"

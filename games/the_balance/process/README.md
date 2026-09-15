@@ -55,6 +55,11 @@ built          SLICE 8, 9-15  games/the_balance/output/index.html · 19 location
                               classroom walk-in) · slice 9 THE PHONE (@cara's messages, the
                               first 8_phone.toml in this repo) and the stream block that was
                               telling her the wrong reason. CONTENT-COMPLETE, not yet shipped
+                              9-15 THE JOINT PASS — 46 narration blocks rewritten after LO read
+                              the build and found the prose packed facts together without
+                              saying how they related. `but` ran at 0.14 per 1,000 words
+                              against a field MINIMUM of 2.46, and zero in narration. Now
+                              2.79. See §5b — the rule and the numbers live there
 written        WANT.md · v2_state.json · DECISIONS.md · sheets/RELEASE.md
                sheets/OPENING.md · sheets/SYSTEMS.md
                systems: money · the_week · the_phone · her_meters · college
@@ -297,6 +302,8 @@ that are LO's; the other two boxes are ignored.
 | O3 | **Tier rungs start at 5, not 15** | `templates/board.toml` ships a band table starting at 15 and **all sixteen declared tiers across five v2 games copied it.** The field runs 8–17 rungs starting around 5. A session that opens the template will write 15 |
 | O4 | **`DECISIONS.md` written at the WANT phase** | The skill puts it at sheets. Its A block — what cannot be undone — is decided at the Want, and putting it in front of LO later means it is already spent. The file says in its own header that it is partial and re-issued in full at sheets |
 | O5 | **Anything LO reads obeys §5** | §5 |
+| O12 | **This game's checks live in `process/`, not the scratchpad** | `.claude/agents/v2-player.md:75-79` says probe scripts go in the scratchpad and *never* into `games/`. That rule is right about throwaway probes and wrong about a regression suite: eight walkthrough scripts were written during slices 1–8, lived in the scratchpad, and were wiped. **A check that dies with the session is not a check.** `process/joints.py`, `process/tokens.py` and `process/walks.py` are checked in. Run all three before calling a slice done |
+| O11 | **Anything the PLAYER reads obeys §5b and §5c** | §5b is how a sentence is joined; §5c is when an `@token` is a bug. The skill's `register.md` governs length, density and the explicit pivot, and nothing in it governs how two clauses are joined. The first build ran `but` at 0.14 per 1,000 words against a field **minimum** of 2.46 — zero in narration. Run `process/joints.py` before calling prose done |
 | O6 | **A wide map with a red fill gate is accepted** | 29 locations, ~116,200 words budgeted. `location fill` reads red until the prose catches up. `the-board.md` says treat every location as a debt; the red is the backlog. Do not "fix" it by shrinking the declared world |
 | O8 | **The Want is six things and holds nothing countable** | §1b. It was 4,203 words and became 586. Cut material is in `CARRIED.md` against its owning block |
 | O9 | **No start choice.** Deleted, not deferred | `CARRIED.md` §13. The gate reports n/a forever, which is a declared absence and not a pass. Do not rebuild it |
@@ -328,6 +335,140 @@ Applies to `DECISIONS.md`, every sheet, and every block review. Not to this file
 > decision removed.
 
 **The test:** could someone who has not read this skill say what they are being asked to decide?
+
+---
+
+## 5b · Writing what the player reads
+
+§5 governs the documents LO signs. This governs the prose on the other side of a click, and it
+exists because the two are different voices and only one of them had a rule.
+
+> **The incident, 2026-09-15.** LO read the first build and said the writing was *"very short and
+> compressed and several pieces of information were packed together without clear grammatical
+> relationships."* Measured against the 25-game field corpus, one number was outside the
+> distribution entirely, and it was not the one I first blamed:
+>
+> ```
+>                          field, 25 games        the_balance
+>   but per 1,000 words    2.46 – 8.44 (med 4.68)     0.14      BELOW THE FIELD MINIMUM
+>   and per 1,000 words    9.3  – 41.1 (med 22.8)    41.8       above the field maximum
+>   coordination : subordination   0.95 – 3.89        3.17      inside
+> ```
+>
+> Not below the median — below the **minimum**. Zero of the 25 games come in under 0.5. In narration
+> alone the game ran a flat **zero** across 5,775 words: the two uses in the whole build were both
+> spoken by characters. The house carries it too — `vesper` 1.19, `vesper_two` 0.28, all three
+> outside the field's range on the low side.
+
+### The rule
+
+**The joint between two clauses is a choice, and two of the available joints carry no information.**
+`and` and a bare full stop both mean *here is the next thing*. When they do most of the joining, the
+reader is handed the facts and left to work out how they relate.
+
+**If the reader has to supply the relationship, the sentence is not finished.**
+
+**`but` is the one to watch.** A narrator that never contradicts itself is the tell, because nothing
+it says is ever *against* what it just said. Every fact arrives as an addition.
+
+### The ladder, in order
+
+1. **Cut.** The clause was often doing nothing, and the fact beside it was already carrying the beat.
+2. **Split.** Two sentences, if neither clause needs the other.
+3. **Name the relationship** — `but`, `because`, `so`, `though`, `while`, `then`.
+
+**Never a comma.** Swapping the mark leaves the joint in place. **Never "add a clause"** — see the
+trap below.
+
+### ⚠️ The trap: do not trade `and` for `, which is`
+
+The game already over-used the one subordinator it had — the `, which is` clause that explains the
+fact just written. The skill's `register.md` load rule L1 bans it outright, the field runs a median
+of 0.06 against our 3.46 per 1,000 words, and a pass that adds relationship words can very easily
+add glosses instead.
+
+**`but` and `because` join two facts. `, which is` appends an opinion about one of them.** Where a
+judgment is worth keeping, give it its own sentence — that is L1's own prescription:
+
+> *Jules does not join in and does not stop her, and that is the arrangement they have.*
+> → *Jules does not join in and does not stop her. That is the arrangement they have.*
+
+### What is NOT a defect
+
+Named explicitly, because the obvious over-correction is worse than the original.
+
+- **Short sentences and fragments.** The skill measured fragments across the field and **refused** a
+  threshold — the range is 5.3% to 58.6% and nothing survives it. *"Six hours. You had two seconds."*
+  is correct: the contrast is unmissable without a conjunction.
+- **`and` joining a real sequence** of physical actions, which is most of what an explicit beat is,
+  or two properties of one subject.
+- **The coordination ratio.** Ours sits inside the field's range and always did. This is about
+  recoverability, not length — and `register.md:640` still says escalate by adding beats, never by
+  lengthening sentences.
+
+### What the pass moved, 2026-09-15
+
+46 narration blocks across `2_one_shots`, `3_activities` and `5_scenes`. Dialogue and phone messages
+were left alone: speech already used `but` and people talk in fragments on purpose.
+
+```
+                         before    after     field
+  and per 1,000 words      41.8     36.1     9.3 – 41.1     back inside
+  but per 1,000 words      0.14     2.79     2.46 – 8.44    back inside
+  coordination : subord.   3.17     2.63     0.95 – 3.89    inside throughout
+  welded glosses             23       13     —              down, never up
+  total words            7,197    7,171     —              the pass is word-negative
+```
+
+**Measure it with `venv/bin/python games/the_balance/process/joints.py`.** It prints the numbers
+beside the field and grades nothing. It is a list, never a score: the field corpus is built HTML and
+ours is authored TOML, so a rate over word count is comparable and anything per-sentence is not.
+
+**Not fixed here:** `vesper` and `vesper_two` carry the same habit and were not rewritten. The skill
+was not edited either — §0 of this file stands.
+
+---
+
+## 5c · An `@token` is right in prose and wrong in a label
+
+**`npc_gil` and `npc_nate` are `customizable = true`** (`1_metadata_and_locations.toml:200`, `:271`).
+The player can rename them, and a listbox lets them change the relationship too. That is why the
+prose says `@gil` and must keep saying it.
+
+**But the generator only resolves tokens where it calls a resolver.** Everywhere else the raw `@gil`
+goes on screen.
+
+| resolves — keep the token | never resolves — write text instead |
+|---|---|
+| canvas block `content`, canvas choice `text` | a location `name` |
+| a location `description`, `blocked_message`, `description_variants[].text` | an npc `description`, `tags[]`, `relationship_options[]` |
+| door `description`, door option `text` and `locked_text` | a quest card `text`, `tip`, `ready_text` |
+| npc `role` | `traits.labels[].label` |
+| every phone surface, and `story_arc` emotion ranges | a canvas choice `locked_text` |
+
+> **The incident, 2026-09-16.** The first build shipped **nine** leaks. The character-creation
+> screen — the very first screen — read *"@gil's son, twenty, a senior at your college."* And
+> `locations[nate_room].name = "@nate's Room"` printed on **nine** surfaces: the nav card, the nav
+> link, the room heading, the back and leave links, the Quests 📍 line, the Cast 📍 line and the
+> schedule table. It survived nine slices because those are the two screens nobody tests.
+
+### The fix is the ROLE, and not even that
+
+⚠️ **Do not write "Gil".** A hardcoded name breaks the moment a player renames him, which is the
+entire reason the token exists. And **do not write "your step dad" either** — the relationship is a
+listbox too (`["step dad", "mum's husband", "dad", "uncle"]`).
+
+**On a non-resolving surface, write text that needs neither the name nor the relationship.**
+`@nate's Room` became **`His Room`**. *"@gil's son, twenty"* became *"Twenty, a senior at your
+college, and he has lived in this house longer than you have."* Most of them read better afterwards:
+*"in @nate's year"* became *"in the year above"*, which is clearer than the name ever was.
+
+⚠️ **On the character screen a resolved token would be wrong anyway** — nobody has been named yet
+when it renders. `0_systems_spec.toml:52` already says so about the player's own description.
+
+**Check it with `venv/bin/python games/the_balance/process/tokens.py`.** `gates.py` has this lint
+too, but it scans eight hardcoded keys, top-level only, and drops any value that is not a string
+(`gates.py:1292`) — which hides every list field, and that is where three of the nine were.
 
 ---
 

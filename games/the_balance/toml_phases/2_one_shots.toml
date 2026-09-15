@@ -39,7 +39,7 @@ content = "Eighteen last month. College starts today, across town, in a room you
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The semester is paid for and it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
+content = "The semester is paid for, but it wasn't your money. A hundred and fifty goes back on Friday, and every Friday after."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -60,7 +60,7 @@ name = "The landing"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The shower is running. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
+content = "The shower is running and the bathroom is gone until whoever it is comes out. One door shut, one open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -91,7 +91,7 @@ content = "Job going at the cafe on the strip. Card in the window."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "That is the whole of it. He doesn't mention Friday, and he won't say it twice."
+content = "That is the whole of it. He doesn't mention Friday, because he has already said it once."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -200,7 +200,7 @@ content = "You take your bag and pull the door until it catches, because it does
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Four doors down to the stop. Early for nothing in particular, which is still better than late."
+content = "Four doors down to the stop. Early for nothing in particular. Still better than late."
 
 [canvases.nodes.exit_block]
 type = "location"

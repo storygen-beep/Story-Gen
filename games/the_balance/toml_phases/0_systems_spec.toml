@@ -227,7 +227,7 @@ label = "Followers"
 
 [[traits.labels]]
 key    = "debt_left"
-label  = "Owed to @gil"
+label  = "Owed on Friday"
 hidden = true
 
 [[traits.labels]]
@@ -252,7 +252,7 @@ hidden = true
 
 [[traits.labels]]
 key    = "nate_landing"
-label  = "@nate on the landing"
+label  = "Somebody on the landing"
 hidden = true
 
 [[traits.labels]]
@@ -325,7 +325,7 @@ traitEffects = [
 [[quest_cards]]
 id    = "card_friday"
 group = "the_debt"
-text = "You owe @gil $150 on Friday. He paid the semester up front and your mum doesn't know he did."
+text = "A hundred and fifty goes back every Friday. The semester was paid up front and your mum doesn't know who paid it."
 tip  = "Friday evening, in the kitchen. He's always there at six."
 when = [
   { flag = "opening_done", op = "is_true" },
