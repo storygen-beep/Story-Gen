@@ -1000,7 +1000,12 @@ activity   = "laughing a beat after Bree"
 
 [[canvases]]
 id   = "canvas_opening"
-name = "<Opening>"
+name = "Opening"
+# ⚠️ NO ANGLE BRACKETS. The skill's template writes placeholders as <Opening>,
+# and this one was copied and never filled in. SugarCube reads <Opening> as an
+# HTML tag, hunts for a closing </Opening> and prints an error on every screen of
+# this canvas — but ONLY in a --debug build, which is where the canvas name gets
+# rendered. It sat here through eight slices because no ordinary build shows it.
 description = "Boot. Her room, the landing, the kitchen at seven thirty. Three facts, then @gil's one line about the cafe, then the first free choice — money against time. Sets opening_done."
 
 [canvases.trigger]
