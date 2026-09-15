@@ -22,7 +22,7 @@ navigation_order = ["the_hall", "the_bus_stop", "the_garage"]
 
 [[locations]]
 id          = "the_hall"
-name        = "The Landing"
+name        = "Home"
 description = "The middle of the house. Four doors and the bathroom open off it, and you can hear which of them has somebody behind it. Your mum's bag is gone from the hook."
 image       = "locations/the_hall.jpg"
 image_search_queries = ["upstairs landing four doors carpet house interior", "narrow hallway bedroom doors daylight"]
