@@ -146,6 +146,59 @@ def profile(text):
     }
 
 
+def by_canvas(merged):
+    """Median sentence length per canvas — the check the global rates cannot do.
+
+    WHY THIS EXISTS. The rates above are per 1,000 words over the whole game. The
+    opening canvas is under 300 of those words, so it cannot move a single number
+    on this page no matter how badly it is written — and it is the one screen every
+    player reads. It shipped at a median of 9 words a sentence against 13 for the
+    rest of the game, through a pass that was driven by these rates and came back
+    green. That is not the instrument being wrong; it is the instrument being asked
+    a question it does not answer.
+
+    Worse, a screen of pure fragments scores PERFECTLY on `and per 1,000 words`,
+    because prose with no joints has no joints to count. Under-joining is invisible
+    to a joint rate by construction. This function is how it becomes visible.
+
+    Not a threshold. SENTENCE_CEILING = 14 lives in gates.py and is measured over
+    the whole game; a canvas is allowed to sit either side of it. What this prints
+    is the SPREAD, so a canvas far from its own game's middle gets looked at.
+    """
+    game = tomllib.loads(pathlib.Path(merged).read_text(encoding="utf-8"))
+    rows = []
+    for canvas in game.get("canvases") or []:
+        text = " ".join(_canvas_prose(canvas))
+        lengths = [len(s.split()) for s in _sentences(text)]
+        if len(lengths) < 3:          # too little prose for a median to mean anything
+            continue
+        rows.append((canvas.get("id", "?"), sum(lengths), statistics.median(lengths), max(lengths)))
+    return rows
+
+
+def _sentences(text):
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
+
+
+def _canvas_prose(canvas, types=("paragraph", "thought_bubble")):
+    out = []
+
+    def walk(blocks):
+        for block in blocks or []:
+            if not isinstance(block, dict):
+                continue
+            if block.get("type") in types and isinstance(block.get("content"), str):
+                out.append(block["content"])
+            props = block.get("props") or {}
+            for beat in props.get("beats") or []:
+                walk(beat.get("blocks"))
+            walk(props.get("blocks") or block.get("blocks"))
+
+    for node in canvas.get("nodes") or []:
+        walk(node.get("blocks"))
+    return out
+
+
 def field_profiles():
     """The same 25 games the skill's writing thresholds were measured over."""
     slugs = json.loads(FIELD_SLUGS.read_text())["field"].keys()
@@ -219,6 +272,15 @@ def main():
         for other in others:
             p = profile(our_prose(f"games/{other}/toml_phases/7_final_game.toml"))
             print(f"    {other:12} but {p['but_1k']:5.2f}/1k   and {p['and_1k']:5.1f}/1k   ratio {p['ratio']:4.2f}:1")
+
+    rows = by_canvas(merged)
+    if rows:
+        middle = statistics.median([r[2] for r in rows])
+        print(f"\n  per canvas — median sentence length, game middle {middle:.0f} words")
+        print("  the rates above are per 1,000 words and CANNOT see a short canvas. This can.")
+        for rank, (cid, words, med, longest) in enumerate(sorted(rows, key=lambda r: (r[2], r[1]))[:5]):
+            mark = "  <-- the most compressed screen in the game" if rank == 0 else ""
+            print(f"    {cid:28} {words:5,}w   median {med:4.0f}   longest {longest:3d}{mark}")
 
     print("\n  A LIST, NEVER A SCORE. Short sentences, fragments, and `and` joining a real")
     print("  sequence are not defects — our coordination ratio sits inside the field's range.")
