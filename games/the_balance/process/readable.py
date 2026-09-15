@@ -88,6 +88,18 @@ ROLE_GENDER = {
     "officer": UNKNOWN, "friend": UNKNOWN, "driver": UNKNOWN, "nurse": UNKNOWN,
 }
 
+# ⚠️ A PERSON NOUN IS AN ANTECEDENT TOO. Found by reading this lint's own output:
+# it flagged "the man at the window table puts a ten under his saucer" and
+# "Somebody two seats along ... She does not say what", and in both the prose is
+# correct — an unnamed person introduced as a common noun is exactly who the pronoun
+# then refers to. Without these the lint blames the game for its own blind spot.
+PERSON_NOUNS = {
+    "man": MALE, "men": MALE, "guy": MALE, "bloke": MALE, "lad": MALE, "boy": MALE,
+    "woman": FEMALE, "women": FEMALE, "girl": FEMALE, "lady": FEMALE,
+    "somebody": UNKNOWN, "someone": UNKNOWN, "person": UNKNOWN, "people": UNKNOWN,
+    "stranger": UNKNOWN, "customer": UNKNOWN, "student": UNKNOWN, "nobody": UNKNOWN,
+}
+
 # Words that are capitalised mid-sentence without being anybody's name. Without
 # this list every weekday and month reads as a character.
 NOT_A_NAME = {
@@ -198,7 +210,18 @@ def scan(text, genders=None):
         if low in ROLE_GENDER:
             out.append(("ref", word, ROLE_GENDER[low]))
             continue
-        # A capitalised word that does not open a sentence is a name.
+        if low in PERSON_NOUNS:
+            out.append(("ref", word, PERSON_NOUNS[low]))
+            continue
+        # ⚠️ A CAST NAME COUNTS WHEREVER IT SITS, sentence-initial included. The
+        # position rule below exists to stop "Monday" reading as a character; applying
+        # it to a declared NPC name made the lint flag "Owen watches you do it … that
+        # is how he says a thing is yours" and "Bree is telling it … in her version".
+        # Both are correct prose. Check the cast list before the position heuristic.
+        if low in genders:
+            out.append(("ref", word, genders[low]))
+            continue
+        # Otherwise: a capitalised word that does not open a sentence is a name.
         before = text[:m.start()].rstrip()
         sentence_initial = (not before) or before[-1] in ".!?\"”"
         if word[0].isupper() and not sentence_initial and low not in NOT_A_NAME:
