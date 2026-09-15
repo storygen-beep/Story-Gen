@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nine routes through The Balance, one per slice, driven in a real browser.
+"""Ten routes through The Balance, one per slice, driven in a real browser.
 
 Run from the repo root:
 
@@ -277,6 +277,89 @@ def walk_phone(page, rep):
               warm > rel and cold == 0, f"{rel} -> {warm} -> {cold}")
 
 
+def walk_travel(page, rep):
+    """Slice 10 — the map itself. Every room can be left, and being broke never
+    seals her into one.
+
+    ⚠️ THIS IS THE ROUTE THAT WOULD HAVE CAUGHT THE SOFTLOCK, AND THAT IS WHY IT
+    CLICKS INSTEAD OF TELEPORTING. Every other route here moves with stand_at +
+    goto, so not one of them has ever traversed an exit LINK — which is exactly
+    how a one-way room shipped. the_quad used to carry `costs = { time = 40,
+    cash = 2 }`, the bus fare, and a location's entry cost is charged on ANY move
+    into it (v2.py:16267), including the move back out of one of its own rooms.
+
+    ⚠️ AND WHAT IT DID AT $0 WAS WORSE THAN A CLEAN BLOCK — it was a COIN FLIP.
+    The intercept runs on `passagestart` and its `return` does not cancel the
+    navigation, so the destination still rendered: if a random ambient auto-fired
+    at the quad it took the screen and she got in FREE, uncharged; if nothing
+    fired, the queued Engine.play("TravelBlock") won and the only link on it went
+    back where she came from. Verified on the pre-fix build, both branches.
+
+    ⚠️ quiet_week SILENCES THE AMBIENTS ON PURPOSE. A random canvas taking the
+    screen on arrival is the documented cause of three false failures in this
+    file (see the module docstring), so this route removes the dice and asks
+    `current_location` — state — whether she moved.
+    """
+    # --- broke, in the deepest room on campus --------------------------------
+    start(page, "Monday", 11, "the_lecture_hall")
+    apply_effect(page, "cash", "set", 0, clamp=False)
+    apply_effect(page, "quiet_week", "set", 7, clamp=False)
+    goto(page, "Location_the_lecture_hall")
+    before = sv(page)["game_state"]["time_state"]
+    click(page, "Leave The Lecture Hall")
+    rep.check("broke, she can still walk out of a lecture",
+              sv(page)["player"]["current_location"] == "the_quad",
+              f'{sv(page)["player"]["current_location"]} · {passage(page)}')
+
+    after = sv(page)["game_state"]["time_state"]
+    moved = ((after["current_hour"] * 60 + after["current_minute"])
+             - (before["current_hour"] * 60 + before["current_minute"]))
+    rep.check("crossing her own campus costs nothing and no time",
+              cash(page) == 0 and moved == 0,
+              f"cash {cash(page)}, clock moved {moved} minutes")
+
+    # --- and off it, on foot, for nothing ------------------------------------
+    # Whether the way home is OFFERED is the whole safety net, so this one asks
+    # the rendered links — play() alone would prove the canvas exists, not that a
+    # player could ever reach it.
+    goto(page, "Location_the_quad")
+    rep.check("the way home is offered on the quad",
+              any("bus home" in l.lower() for l in links(page)), str(links(page))[:120])
+    rep.check("the way home opens", play(page, "bus_back_quad") is True)
+    click(page, "Walk it")
+    rep.check("broke, she can still get home",
+              sv(page)["player"]["current_location"] == "the_street",
+              f'{sv(page)["player"]["current_location"]} · {passage(page)}')
+
+    # --- and the fare still bites when she has it ----------------------------
+    start(page, "Monday", 9, "the_bus_stop")
+    apply_effect(page, "cash", "set", 10, clamp=False)
+    apply_effect(page, "quiet_week", "set", 7, clamp=False)
+    rep.check("the bus is a thing she chooses", play(page, "catch_the_bus") is True)
+    t0 = sv(page)["game_state"]["time_state"]
+    click(page, "Up to the campus")
+    rep.check("the bus goes to the campus",
+              sv(page)["player"]["current_location"] == "the_quad",
+              f'{sv(page)["player"]["current_location"]} · {passage(page)}')
+    t1 = sv(page)["game_state"]["time_state"]
+    mins = ((t1["current_hour"] * 60 + t1["current_minute"])
+            - (t0["current_hour"] * 60 + t0["current_minute"]))
+    rep.check("the bus charges two dollars and forty minutes",
+              cash(page) == 8 and mins == 40,
+              f"cash 10 -> {cash(page)}, {mins} minutes")
+
+    # --- with nothing in her pocket the fare is shown, not hidden ------------
+    # COUNTS, not label text: the labels carry the price as a numeral for
+    # gates.py G21 and will be reworded again. Two paid choices grey out, the two
+    # walks and the way out stay live.
+    apply_effect(page, "cash", "set", 0, clamp=False)
+    play(page, "catch_the_bus")
+    rep.check("broke, the fare greys out instead of vanishing",
+              len(locked(page)) == 2, f"{len(locked(page))} locked: {str(locked(page))[:90]}")
+    rep.check("broke, the free routes stay live",
+              len(links(page)) == 3, f"{len(links(page))} live: {str(links(page))[:90]}")
+
+
 ROUTES = {
     "opening": walk_opening,
     "shift": walk_shift,
@@ -287,6 +370,7 @@ ROUTES = {
     "crowd": walk_crowd,
     "house": walk_house,
     "phone": walk_phone,
+    "travel": walk_travel,
 }
 
 

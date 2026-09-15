@@ -1835,3 +1835,179 @@ targetType = "player"
 trait      = "corruption"
 op         = "add"
 value      = 2
+
+# =============================================================================
+# TRAVEL · the fare is on the road, not on the room
+#
+# ⚠️ WHY THESE EXIST AT ALL. The bus used to be `costs = { time = 40, cash = 2 }`
+# on the_quad and the_strip. A location's entry cost is charged on ANY move into
+# it (v2.py:16267) — it cannot tell the difference between arriving from town and
+# walking back out of a lecture. So every exit from a campus room re-charged the
+# fare, and under $2 it BLOCKED her in a room whose only exit was that one. That
+# is a dead save, and it is reachable on day one from a $10 start.
+#
+# ⚠️ CHOICE-LEVEL `costs`, NOT TRIGGER-LEVEL. An unaffordable CHOICE renders as a
+# greyed dead span with the shortfall appended — "(Requires 2 Cash (you have 0))"
+# (v2.py:13650-13657). So at nothing she SEES the fare and the walk under it. A
+# trigger cost would instead give her a live link to a blocked screen
+# (v2.py:14035), which is the shape that hid the problem in the first place.
+#
+# ⚠️ THE PRICE IS WRITTEN INTO THE LABEL BY HAND, AS A NUMERAL. Nothing prints a
+# cost on an affordable choice (v2.py:13505), and gates.py G21 "a price is on its
+# label" greps the label for the literal amount — "Two dollars" FAILS it, "$2"
+# passes. It is right to: the player is budgeting against a $150 Friday, and a
+# price she cannot see is a plan she cannot make. And choice costs get NO
+# validation — a typo is dropped silently at parse and the bus is free on a green
+# build. Read the built html, never the TOML.
+#
+# ⚠️ REPEATABLE, so none of these auto-fires (selectAutoFireCanvasForLocation
+# skips isRepeatable) — each is a link in the activity list, like sleep or wash.
+# No max_triggers_per_day: she travels as often as she likes.
+#
+# Numbers are the sheet's, not mine — the_campus.md: "Forty minutes and $2 on the
+# bus, or an hour on foot."
+# =============================================================================
+
+[[canvases]]
+id   = "catch_the_bus"
+name = "Get the bus"
+description = "The way out of her street. Two dollars and forty minutes each way, or an hour on foot for nothing. The only door between the house and everywhere else."
+
+[canvases.trigger]
+location      = "the_bus_stop"
+is_repeatable = true
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The timetable"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The timetable is a printed sheet behind scratched plastic and the times on it stopped being right a while ago. The bus comes when it comes. The only other way is your own feet."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Up to the campus. $2, forty minutes."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 40
+costs      = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Into town. $2, forty minutes."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 40
+costs      = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk up to the campus. An hour."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk into town. An hour."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "the_bus_stop"
+# ⚠️ THE WAY OUT OF THE SCREEN. Without it the only exits from this canvas all
+# move her, so opening the timetable would commit her to a journey.
+
+[[canvases]]
+id   = "bus_back_quad"
+name = "The bus home"
+description = "The way off campus. Same fare as the way out, and the same hour on foot if she has not got it."
+
+[canvases.trigger]
+location      = "the_quad"
+is_repeatable = true
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The far side of the block"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The stop for town is round the far side of the science block, under a shelter with a roof that does nothing at all. Your street is forty minutes that way, or an hour of walking."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get the bus home. $2, forty minutes."
+targetType = "location"
+locationId = "the_street"
+time_progression_minutes = 40
+costs      = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk it. An hour."
+targetType = "location"
+locationId = "the_street"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "the_quad"
+
+[[canvases]]
+id   = "bus_back_strip"
+name = "The bus home"
+description = "The way off the strip. Same fare as the way out, and the same hour on foot if she has not got it."
+
+[canvases.trigger]
+location      = "the_strip"
+is_repeatable = true
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Outside the chemist"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The stop is outside the chemist at the end of the run, and the shelter there is a pole and a sign and nothing else. Your street is forty minutes from here, or an hour if you walk."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get the bus home. $2, forty minutes."
+targetType = "location"
+locationId = "the_street"
+time_progression_minutes = 40
+costs      = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk it. An hour."
+targetType = "location"
+locationId = "the_street"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "the_strip"
