@@ -424,16 +424,11 @@ description = "A session in her room, door shut. Pays a rolled amount inside a b
 [canvases.trigger]
 location      = "her_room"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 15 }]
 show_when_blocked = true
-cooldown_message = "Not with the house like this."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
-] }
+cooldown_message = "Somebody is always in at this hour."
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -456,6 +451,58 @@ blocks = [
   { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other and one of them saying hello to you by name." },
   { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them and it does not make you feel anything." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate is in and out of his room all week at hours that are not hours, and your door does not stay shut while somebody is on that landing. Not tonight. Not while he is like this." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, and the shower is not free at this hour either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You already did one tonight. Going back on an hour later is a different thing from doing it once, and you are not sure yet what that thing is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set the phone up."
+targetType = "node"
+nodeId     = "stream.live"
+show_when_locked = true
+locked_text = "Not tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
+  { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it tonight."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "live"
+name = "Forty-one people"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -664,6 +711,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 500 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 8, max = 25 } }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -675,6 +723,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 500 },
   { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 2000 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 20, max = 60 } }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -685,6 +734,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 50, max = 120 } }]
 
 # =============================================================================

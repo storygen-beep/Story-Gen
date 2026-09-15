@@ -317,6 +317,7 @@ flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
+  { targetType = "player", flag = "streamed_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
@@ -1780,16 +1781,11 @@ description = "A session in her room, door shut. Pays a rolled amount inside a b
 [canvases.trigger]
 location      = "her_room"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 15 }]
 show_when_blocked = true
-cooldown_message = "Not with the house like this."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
-] }
+cooldown_message = "Somebody is always in at this hour."
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -1812,6 +1808,58 @@ blocks = [
   { type = "paragraph", content = "You push the books into a stack and the phone into the stack and check the frame twice. Your chin is out of it. The chat is three people talking to each other and one of them saying hello to you by name." },
   { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them and it does not make you feel anything." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate is in and out of his room all week at hours that are not hours, and your door does not stay shut while somebody is on that landing. Not tonight. Not while he is like this." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You look at the angle you would be filming at and you know exactly what it would pick up. Not like this. You would want the shower first, and the shower is not free at this hour either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You already did one tonight. Going back on an hour later is a different thing from doing it once, and you are not sure yet what that thing is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set the phone up."
+targetType = "node"
+nodeId     = "stream.live"
+show_when_locked = true
+locked_text = "Not tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
+  { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it tonight."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "live"
+name = "Forty-one people"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -2020,6 +2068,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 500 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 8, max = 25 } }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2031,6 +2080,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 500 },
   { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 2000 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 20, max = 60 } }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2041,6 +2091,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
 ] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 50, max = 120 } }]
 
 # =============================================================================
@@ -5136,4 +5187,211 @@ conditions = { version = "1.0", logic = "OR", items = [
   { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
 ] }
 effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+
+# ══════════════════════════════════════════════════════════════════
+# Phase: 8_phone.toml
+# ══════════════════════════════════════════════════════════════════
+
+# =============================================================================
+# The Balance — 8 · the phone
+#
+# ⚠️ FIRST 8_phone.toml IN THIS REPO. No game here has ever had one. The merger
+# has always known the filename (merge_toml_phases.py) and it merges LAST.
+#
+# ⚠️ ONE APP, AND EVERYTHING ON IT IS @cara's. the_cast.md: "she's also the other
+# end of the phone: the messages are hers." She is the only person who texts her
+# about anything but work.
+#
+# ⚠️ NO FEED AND NO POSTING BUTTON, on purpose. A social_feed `post_action` rolls
+# followers into a trait from a sidebar button that is live in every room — she
+# would earn followers on the bus, and the door being shut is the entire weight
+# of that scene. Going live stays a canvas in her room.
+#
+# ⚠️ The `custom` app type is UNUSABLE from TOML: the importer parses only id,
+# type, label, icon and post_actions, so `passage` is never read and a custom app
+# always falls through to the placeholder renderer. That is why the follower
+# count stays in the sidebar and why the stream's block reasons had to be fixed
+# inside that canvas instead of on a phone screen.
+#
+# ⚠️ Reply effects go through Number(eff.value || 0), so a random-range dict is
+# NaN here. Fixed numbers only on this file.
+# =============================================================================
+
+[phone]
+enabled       = true
+purchase_flag = "opening_done"
+# The button appears when the game proper starts, not over the three screens of
+# the opening where nobody is named yet.
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+# --- 1 · she is still talking to you like September -------------------------
+
+[[phone.conversations]]
+id     = "cara_hello"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "right so I've worked out the bus. you have to get the one BEFORE the one that says it goes there. I have lost forty minutes learning this"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "are you about at lunch or are you doing the thing where you vanish"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'm about. Union, usual table.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }] },
+  { text = "Can't today. Sorry.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -1 }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "ok well I'll be there anyway so if you change your mind I'm the one with the coat on indoors"
+
+# --- 2 · she is pleased for you and it costs her something -------------------
+
+[[phone.conversations]]
+id     = "cara_job"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "YOU GOT IT. ok I'm made up for you, genuinely"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "when are you actually free now though. like actually. don't do the thing where you say soon"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Sunday after the shift. I'll come to you.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 3 }] },
+  { text = "Soon.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }] },
+]
+
+# --- 3 · she repeats what the crowd says and never knows it is true ----------
+# the_cast.md, in those words. It arrives once her exposure is up enough that
+# there is something going round, and she has no idea she is telling her about
+# herself.
+
+[[phone.conversations]]
+id     = "cara_rumour"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 8 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok don't be weird but there's a thing going round about a girl in our year doing stuff online. like properly"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "and everyone's being SO horrible about it and I keep thinking, she's just broke isn't she. that's all it is"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Yeah. She's probably just broke.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
+  { text = "Who's saying it?", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "everyone. that's the thing. nobody's even started it, it's just there"
+
+# --- 4a · WARM · the coffee that actually gets arranged ---------------------
+
+[[phone.conversations]]
+id     = "cara_coffee"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 4 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 14 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "right. I'm booking you. an actual hour where you're not going anywhere after"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you've been on that bus more than you've been anywhere else and I'm the only one who's noticed, which is a bit grim when you say it out loud"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Book me then.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 3 }] },
+  { text = "I've got a shift. I've always got a shift.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "I know. that's sort of what I'm saying"
+
+# --- 4b · COOL · two lines, and no reply offered ----------------------------
+# She never confronts and never judges. She just gets harder to reach.
+
+[[phone.conversations]]
+id     = "cara_cool"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 6 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 6 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "saw you go past the union today"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "anyway. hope work's ok"
+
+# --- 5 · the last one ------------------------------------------------------
+
+[[phone.conversations]]
+id     = "cara_last"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 10 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 2 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "happy Thursday"
 
