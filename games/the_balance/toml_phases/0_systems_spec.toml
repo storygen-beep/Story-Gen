@@ -309,6 +309,7 @@ flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
+  { targetType = "player", flag = "streamed_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },

@@ -52,7 +52,9 @@ built          SLICE 8, 9-15  games/the_balance/output/index.html · 19 location
                               door) · slice 7 THE CROWD (Jules, Bree and Paige, the random
                               picking-on, both dares — and the world interrupts her for the
                               first time) · slice 8 FINISHING IT (dinner, in by ten, talk, the
-                              classroom walk-in). CONTENT-COMPLETE, not yet shipped
+                              classroom walk-in) · slice 9 THE PHONE (@cara's messages, the
+                              first 8_phone.toml in this repo) and the stream block that was
+                              telling her the wrong reason. CONTENT-COMPLETE, not yet shipped
 written        WANT.md · v2_state.json · DECISIONS.md · sheets/RELEASE.md
                sheets/OPENING.md · sheets/SYSTEMS.md
                systems: money · the_week · the_phone · her_meters · college
