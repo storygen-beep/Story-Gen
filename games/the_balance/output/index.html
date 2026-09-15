@@ -10912,7 +10912,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_kitchen&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;The Kitchen&lt;/h2&gt;
-&lt;p&gt;The chore list is on the fridge in his handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what&#39;s on the list that day.&lt;/p&gt;
+&lt;p&gt;The chore list is on the fridge in &lt;&lt;print $npcs[&quot;npc_gil&quot;].name&gt;&gt;&#39;s handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what&#39;s on the list that day.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_kitchen&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -10940,7 +10940,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;set $game_state.visited_locations.push(&quot;nate_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;nate_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;His Room&lt;/h2&gt;
-&lt;p&gt;His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself.&lt;/p&gt;
+&lt;p&gt;&lt;&lt;print $npcs[&quot;npc_nate&quot;].name&gt;&gt;&#39;s door is at the end of the landing, and it is not always shut. Nothing else about this room announces itself.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;nate_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;nate_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -10954,7 +10954,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;set $game_state.visited_locations.push(&quot;tasha_room&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;tasha_room&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;Tasha&#39;s Room&lt;/h2&gt;
-&lt;p&gt;Her wardrobe takes one whole wall and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not.&lt;/p&gt;
+&lt;p&gt;Tasha&#39;s wardrobe takes one whole wall, and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;tasha_room&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;tasha_room&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -10982,7 +10982,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;set $game_state.visited_locations.push(&quot;the_garage&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;&lt;&lt;set _autoFire = setup.getStoryCanvasRedirect(&quot;the_garage&quot;)&gt;&gt;&lt;&lt;if _autoFire&gt;&gt;&lt;&lt;goto _autoFire&gt;&gt;&lt;&lt;else&gt;&gt;&lt;h2&gt;The Garage&lt;/h2&gt;
-&lt;p&gt;The car, the bins, the washing machine, and the light he leaves on. Half the list on the fridge lives out here.&lt;/p&gt;
+&lt;p&gt;The car, the bins, the washing machine, and the light &lt;&lt;print $npcs[&quot;npc_gil&quot;].name&gt;&gt; leaves on. Half the list on the fridge lives out here.&lt;/p&gt;
 &lt;&lt;= setup.renderNpcPortraits(&quot;the_garage&quot;)&gt;&gt;
 &lt;&lt;= setup.renderSoloActivities(&quot;the_garage&quot;)&gt;&gt;
 &lt;div class=&quot;location-navigation&quot;&gt;
@@ -11559,7 +11559,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;link &quot;Leave it.&quot; &quot;Location_the_back_room&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="Canvas_move_up_counter_Node_base" tags="" position="350,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; The counter &lt;span style=&quot;opacity:0.7;&quot;&gt;(move_up_counter)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Four lines&lt;/div&gt;
-&lt;p&gt;He has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;owen.jpg&quot; alt=&quot;Owen&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Owen&lt;/strong&gt;&lt;span class=&quot;dialog-role&quot;&gt;cafe owner&lt;/span&gt; Counter from Thursday. Same money an hour, four days instead of two. And tell me which of them you want and I&#39;ll see.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;That last part is the part he has never said to you before.&lt;/p&gt;
+&lt;p&gt;Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait&quot;&gt;&lt;img src=&quot;owen.jpg&quot; alt=&quot;Owen&quot; onerror=&quot;this.style.display=&#39;none&#39;;this.parentElement.innerHTML=&#39;&amp;lt;svg viewBox=&amp;quot;0 0 100 100&amp;quot; xmlns=&amp;quot;http://www.w3.org/2000/svg&amp;quot;&amp;gt;&amp;lt;circle cx=&amp;quot;50&amp;quot; cy=&amp;quot;35&amp;quot; r=&amp;quot;20&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;ellipse cx=&amp;quot;50&amp;quot; cy=&amp;quot;85&amp;quot; rx=&amp;quot;35&amp;quot; ry=&amp;quot;25&amp;quot; fill=&amp;quot;#6c757d&amp;quot;/&amp;gt;&amp;lt;/svg&amp;gt;&#39;;&quot; /&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong&gt;Owen&lt;/strong&gt;&lt;span class=&quot;dialog-role&quot;&gt;cafe owner&lt;/span&gt; Counter from Thursday. Same money an hour, four days instead of two. And tell me which of them you want and I&#39;ll see.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;That last part is the part he has never said to you before.&lt;/p&gt;
 
 &lt;&lt;set $game_state.current_canvas = &quot;move_up_counter&quot;&gt;&gt;
 &lt;&lt;set $game_state.current_node = &quot;move_up_counter.base&quot;&gt;&gt;
@@ -11601,7 +11601,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 
 
 [[Go back out.-&gt;Location_the_cafe]]</tw-passagedata><tw-passagedata pid="77" name="Canvas_cust_showing_Node_base" tags="" position="850,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Thirty on the table &lt;span style=&quot;opacity:0.7;&quot;&gt;(cust_showing)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Before he asks&lt;/div&gt;
-&lt;p&gt;He puts thirty on the table before he orders, which is the asking, and then he orders. The far glass is the one he wants clearing and it is right against the wall.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait portrait-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;35&quot; r=&quot;20&quot; fill=&quot;#6c757d&quot;/&gt;&lt;ellipse cx=&quot;50&quot; cy=&quot;85&quot; rx=&quot;35&quot; ry=&quot;25&quot; fill=&quot;#6c757d&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong class=&quot;dlg-inline&quot;&gt;Stranger&lt;/strong&gt; Flat white. And the far glass wants clearing, when you&#39;ve got a minute.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Two tables have people at them. Neither is looking this way yet.&lt;/p&gt;
+&lt;p&gt;A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall.&lt;/p&gt;&lt;div class=&quot;dialog-block dialog-npc&quot;&gt;&lt;div class=&quot;portrait portrait-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;35&quot; r=&quot;20&quot; fill=&quot;#6c757d&quot;/&gt;&lt;ellipse cx=&quot;50&quot; cy=&quot;85&quot; rx=&quot;35&quot; ry=&quot;25&quot; fill=&quot;#6c757d&quot;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;div class=&quot;dialog-content&quot;&gt;&lt;strong class=&quot;dlg-inline&quot;&gt;Stranger&lt;/strong&gt; Flat white. And the far glass wants clearing, when you&#39;ve got a minute.&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Two tables have people at them. Neither is looking this way yet.&lt;/p&gt;
 
 &lt;&lt;set $game_state.current_canvas = &quot;cust_showing&quot;&gt;&gt;
 &lt;&lt;set $game_state.current_node = &quot;cust_showing.base&quot;&gt;&gt;
@@ -12005,7 +12005,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;elseif _bp is 1&gt;&gt;
 &lt;p&gt;Ninety minutes with no window in this room. By the end of it the air has been breathed twice and everybody is writing slower.&lt;/p&gt;
 &lt;&lt;else&gt;&gt;
-&lt;p&gt;He puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four.&lt;/p&gt;
+&lt;p&gt;The lecturer puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four.&lt;/p&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $game_state.current_canvas = &quot;class_2&quot;&gt;&gt;
@@ -12380,7 +12380,7 @@ try {
 &lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; The list on the fridge &lt;span style=&quot;opacity:0.7;&quot;&gt;(chore)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; The fridge&lt;/div&gt;
 &lt;&lt;set _bp to random(0, 2)&gt;&gt;
 &lt;&lt;if _bp is 0&gt;&gt;
-&lt;p&gt;Bins, laundry, dishes, the car. One of them has today&#39;s date against it in his handwriting and the other three do not, which is the whole system.&lt;/p&gt;
+&lt;p&gt;Bins, laundry, dishes, the car. One of them has today&#39;s date against it in &lt;&lt;print $npcs[&quot;npc_gil&quot;].name&gt;&gt;&#39;s handwriting and the other three do not. That is the whole system.&lt;/p&gt;
 &lt;&lt;elseif _bp is 1&gt;&gt;
 &lt;p&gt;The list is where it always is, held on with the magnet from a tire place. Today it says the car. The car takes the longest and he knows that.&lt;/p&gt;
 &lt;&lt;else&gt;&gt;
@@ -13494,7 +13494,7 @@ try {
 
 &lt;div class=&quot;review-node&quot;&gt;
 &lt;h4&gt;NODE: Four lines&lt;/h4&gt;
-&lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;npc:&lt;/strong&gt; Counter from Thursday. Same money an hour, four days instead of two. And tell me which of them you want and I&amp;#x27;ll see.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;That last part is the part he has never said to you before.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: location&lt;/em&gt;&lt;/div&gt;
@@ -13537,7 +13537,7 @@ try {
 
 &lt;div class=&quot;review-node&quot;&gt;
 &lt;h4&gt;NODE: Before he asks&lt;/h4&gt;
-&lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;He puts thirty on the table before he orders, which is the asking, and then he orders. The far glass is the one he wants clearing and it is right against the wall.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-dialog&quot;&gt;&lt;blockquote&gt;&lt;strong&gt;unknown:&lt;/strong&gt; Flat white. And the far glass wants clearing, when you&amp;#x27;ve got a minute.&lt;/blockquote&gt;&lt;/div&gt;
 &lt;div class=&quot;review-block review-block-paragraph&quot;&gt;&lt;p&gt;Two tables have people at them. Neither is looking this way yet.&lt;/p&gt;&lt;/div&gt;
 &lt;div class=&quot;exit-info&quot;&gt;&lt;em&gt;Exit: choices&lt;/em&gt;&lt;ul&gt;&lt;li&gt;Reach for it the short way.&lt;/li&gt;&lt;li&gt;Reach across the table for it.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;

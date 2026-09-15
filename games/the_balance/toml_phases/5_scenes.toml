@@ -156,7 +156,7 @@ name = "Before he asks"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He puts thirty on the table before he orders, which is the asking, and then he orders. The far glass is the one he wants clearing and it is right against the wall."
+content = "A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall."
 
 # The customers stay FACELESS — strangers with money, never people with names.
 # "unknown" is the block type that says that and still lets them talk.
@@ -401,7 +401,7 @@ name = "Four lines"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
+content = "Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"

@@ -503,7 +503,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in his handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
+description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
 image       = "locations/the_kitchen.jpg"
 image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
 entry_from  = "the_hall"
@@ -519,7 +519,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "nate_room"
 name        = "His Room"
-description = "His door is at the end of the landing and it is not always shut. That is the whole of it. Nothing about this room announces itself."
+description = "@nate's door is at the end of the landing, and it is not always shut. Nothing else about this room announces itself."
 image       = "locations/nate_room.jpg"
 image_search_queries = ["young man bedroom desk monitor dim", "messy student bedroom bed desk night"]
 entry_from  = "the_hall"
@@ -527,7 +527,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "tasha_room"
 name        = "Tasha's Room"
-description = "Her wardrobe takes one whole wall and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not."
+description = "Tasha's wardrobe takes one whole wall, and her lights are the only ones in this house that were chosen. She gives advice in here whether it was asked for or not."
 image       = "locations/tasha_room.jpg"
 image_search_queries = ["young woman bedroom wardrobe fairy lights mirror", "girl bedroom clothes rail lights makeup"]
 entry_from  = "the_hall"
@@ -543,7 +543,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, the washing machine, and the light he leaves on. Half the list on the fridge lives out here."
+description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
 image       = "locations/the_garage.jpg"
 image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
@@ -1646,7 +1646,7 @@ name = "The fridge"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in his handwriting and the other three do not, which is the whole system." },
+  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in @gil's handwriting and the other three do not. That is the whole system." },
   { type = "paragraph", content = "The list is where it always is, held on with the magnet from a tire place. Today it says the car. The car takes the longest and he knows that." },
   { type = "paragraph", content = "Dishes today. There are enough of them in the sink to be somebody else's, and the somebody else is not going to be named." },
 ]
@@ -2187,7 +2187,7 @@ type = "block_pool"
 blocks = [
   { type = "paragraph", content = "The second one runs straight off the first and the room does not empty in between, so you keep your seat and your bag stays where it is." },
   { type = "paragraph", content = "Ninety minutes with no window in this room. By the end of it the air has been breathed twice and everybody is writing slower." },
-  { type = "paragraph", content = "He puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four." },
+  { type = "paragraph", content = "The lecturer puts up a slide with four lines on it and talks for twenty minutes about the second one. You write down all four." },
 ]
 
 [canvases.nodes.exit_block]
@@ -3355,7 +3355,7 @@ name = "Before he asks"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He puts thirty on the table before he orders, which is the asking, and then he orders. The far glass is the one he wants clearing and it is right against the wall."
+content = "A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall."
 
 # The customers stay FACELESS — strangers with money, never people with names.
 # "unknown" is the block type that says that and still lets them talk.
@@ -3600,7 +3600,7 @@ name = "Four lines"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
+content = "Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
