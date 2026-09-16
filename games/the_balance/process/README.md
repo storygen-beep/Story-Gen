@@ -794,8 +794,38 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    only whether an NPC has *any* bound canvas anywhere and *any* schedule row (`gates.py:5282-5287`);
    Tasha passed it on a `substitution_only` canvas that can never render a portrait. The check that
    does see it is `process/presence.py`, and widening the gate would be a skill edit — see §0.
+   ⚠️ **Two more ways a portrait never appears, both found the hard way.** The *selector*
+   (`selectNpcPortraitCanvasesForLocation`, `v2.py:4718-4744`) does **not** check presence; the
+   *renderer* does, after it (`v2.py:5281-5291`). So a canvas can be perfectly selectable and still
+   render nothing — which is how `office_closer`, the second key of the whole cafe ladder, sat
+   unreachable while @owen was only ever scheduled on the cafe floor. And a **substitution is only
+   as live as its host**: `tasha_walks_in` is bound to the bathroom, but it rides `wash`, which is
+   shut for the exact hour Tasha is in there. `presence.py` checks both.
 
-11. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
+11. **AN ARC RUNG IS A TRIGGERLESS CANVAS, AND TWO CHECKS DISAGREE ABOUT WHERE ITS FLAG GOES.**
+   `CARRIED.md:215` — an arc is *numbered one-time steps, each gated on the flag the one before
+   it set*. Build a rung as a NODE inside its own hub and `gates.py` cannot see the self-limit:
+   `_routes` skips any choice whose target is the same canvas (`gates.py:3473`,
+   `if tgt == c["id"]: continue`), so the hub reads as a free climb. Build it as a triggerless
+   canvas — the architecture the gate's own docstring describes — and the **flag-chain validator
+   hard-fails** the build: *"ensure all required flags are set by a canvas with location/schedule"*.
+   A triggerless rung cannot be both.
+   **The build wins.** The flag is set on the located hub choice, the rungs stay triggerless, and
+   `the climb is paid for` reports `corruption` as a free route through `hub_tasha_bath`. **It is
+   not** — every rung carries its own `is_false` and fires exactly once ever, proved live: a spent
+   rung vanishes from the screen. Setting the flag in BOTH places was tried and fails too — the
+   unlock map is first-writer-wins over a canvas list in **reverse declaration order**, so the
+   triggerless rung claims the flag and the build breaks again. `gates.py:403` states the
+   principle: *"a check that fails a game for obeying the doctrine is a bug in the check."*
+   ⚠️ **Do not contort the content to turn this green.** Like G11 in item 9, it is an expected red.
+   ⚠️ Two more from the same pass: a rung that is one-time must **hide** when spent, not carry
+   `show_when_locked` — `locked_text` can only describe one of *not yet* and *already done*, and
+   all seven of `vesper_two`'s hub ladders hide. The visible locked door goes on **one** dedicated
+   line instead (`walking_in.md:61`, "one line, not an empty screen"). And a triggerless canvas is
+   exempt from nothing in `readable.py`: the pronoun check excuses a canvas with an `npc` on its
+   trigger, a rung has no trigger, so a rung opening on "She" flags — name her.
+
+12. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 

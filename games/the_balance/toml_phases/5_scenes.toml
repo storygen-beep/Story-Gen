@@ -446,6 +446,15 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
 ] }
 
+# ⚠️ THE OFFICE OWED A WALK-IN THE MOMENT @owen STOOD IN IT. Giving him a 21:00
+# row made `the_back_room` a room where she does a solo thing with somebody
+# scheduled there, and `gates.py` "the walk-in floor" dropped to 8/9. the-surfaces.md
+# R3: one canvas, substitution_only, bands on the axis the odds ride. The rule goes
+# on the HOST, and `chance` is a float in [0.0, 1.0].
+[[canvases.trigger.substitutions]]
+target_canvas_id = "owen_at_the_board"
+chance           = 0.4
+
 [[canvases.nodes]]
 id   = "base"
 name = "The board"
@@ -1011,6 +1020,15 @@ npcId      = "npc_tasha"
 trait      = "relation"
 op         = "add"
 value      = 1
+
+# ⚠️ STEP ZERO OF HER ARC, AND IT USED TO SET NOTHING. This is the one time the
+# walk-in runs the other way — she comes in on Nell. the_two_doors.md:10-12: a
+# door with a NAMED person behind it needs an after, or it is a campus door
+# standing in a house. `tasha_seen` is that after's first gate.
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_seen"
+op         = "set"
 
 # --- @GIL COMES IN WHILE SHE'S DOING IT -------------------------------------
 # One canvas, substitution_only, on the chore. He notices things in that room —
@@ -2757,3 +2775,629 @@ clamp      = true
 targetType = "player"
 flag       = "sofa_today"
 op         = "set"
+
+# =============================================================================
+# TASHA — THE FOURTH ARC
+#
+# DECISIONS.md:109 names eight climbs including her; :110 lists three written
+# ladders and she is not one of them. CARRIED.md:215-218 defines what one is: a
+# numbered ladder of one-time steps, each gated on the flag the one before it set,
+# whose LAST STEP CONVERTS the act into something she can simply do — and warns
+# that across 1,396 canvases in this repo no character has a second thing that
+# happens, because every hub gets authored in its converted state on day one.
+#
+# ⚠️ THE DIRECTION IS HERS, NOT NELL'S. the_cast.md:35 — "Wants an audience, and
+# she'll happily make Nell into one." So this is not Nell looking at Tasha's
+# expense. It is Tasha performing and Nell made the audience, which is also what
+# her ceiling's third axis means: CARRIED.md:191 gives her tier 3 as "full — cunt,
+# cum, slut, AND THE WORDS SHE USES ABOUT NELL TO MEN". Nobody else in the cast
+# has a public-language dimension.
+#
+# ⚠️ THE HOUR. 17:00-18:00, hers, before she goes out — the_house_day.md:33 calls
+# it "exactly the hour Nell would want it". The bathroom was empty 17:00-22:00:
+# `wash` runs 08:00-17:00 and 22:00-23:59, and `tasha_walks_in` rides `wash`, so
+# it cannot fire in her own hour either. the_two_doors.md:78 said it outright —
+# "the bathroom now has hours on it, and still nothing has ever happened in it".
+#
+# ⚠️ NO TRIGGER SCHEDULE AND NO max_triggers_per_day. `requires_npc` resolves
+# through getNpcLocation, so her schedule row IS this canvas's hours and the two
+# cannot drift. A day cap on a canvas carrying an `npc` deletes the person rather
+# than spending the act (README §6).
+#
+# ⚠️ TWO WAYS IN, because the first one is a dice roll. `tasha_walks_in` is a 0.3
+# substitution — an arc whose entrance depends on it would strand players who
+# never rolled it. The other route is her room: `hub_tasha_room` pays relation,
+# and relation 6 is a few afternoons of it. The on-ramp is the bedroom; the stage
+# is in here.
+#
+# ⚠️ NEVER HIDE THE OPTION SHE CANNOT TAKE — walking_in.md:59. Every locked rung
+# renders with one line of reason. And walking_in.md:31: WHAT CLIMBS IS HER
+# REACTION, NOT HER ACTIONS. Corruption decides what is on the menu; she still
+# picks from it. Shape copied from `classroom_door`, which is this game's own
+# working example of both rules.
+# =============================================================================
+
+[[canvases]]
+id   = "hub_tasha_bath"
+name = "Tasha"
+description = "Portrait hub @ the_bathroom, her hour. Carries the arc ladder as corruption-gated choices. Retires when `tasha_open` converts it into `loop_tasha_bath`."
+
+[canvases.trigger]
+location      = "the_bathroom"
+requires_npc  = "npc_tasha"
+npc           = "npc_tasha"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "tasha_open",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her hour"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The door is not locked because it never is when it is her hour. She has the good light on and her bag open across the sink, and she is doing one eye with her mouth half open." },
+  { type = "paragraph", content = "Steam still on the glass and her stuff over every flat surface in here. She is in a towel with her hair up, going through the bag for something she has already used once." },
+  { type = "paragraph", content = "She has forty minutes and she is spending them like she has three hours. The radio is on her phone on the cistern. She does not stop for you coming in." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Shut it behind you. Not because of me, because the landing gets cold and then he moans about the heating." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "You can stay while I do this. I talk better when there is somebody to talk at, and you are not going anywhere." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Hold that. No, up a bit, so I can see what I am doing. Thank you. See, this is why I like you being in here." },
+]
+
+# She refers to it, once she has walked in on you — which is what `tasha_seen` is
+# for now that rung 1 reads relation instead.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "You went that colour again. I walked in on you, it is not the other way round, and you are the one still thinking about it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ EVERY RUNG CARRIES ITS OWN `is_false` AND THAT IS WHAT MAKES IT AN ARC.
+# CARRIED.md:215-218 — "a numbered ladder of ONE-TIME steps, each gated on the flag
+# the one before it set". Without the self-gate a rung replays forever and the
+# ladder is a menu; the first build of this canvas did exactly that and the live
+# walk caught it.
+#
+# ⚠️ RUNG 1 READS RELATION, NOT `tasha_seen`, and that is deliberate.
+# `tasha_walks_in` is a 0.3 substitution — an arc whose entrance is a dice roll
+# strands anyone who never rolled it. Relation is the reliable road in and the
+# walk-in feeds the same number (+1), so it still counts toward getting here.
+# `tasha_seen` survives as a prose band above, not as a gate. And it could not
+# have been an OR anyway: the evaluator takes one flat items list with one logic
+# (v2.py:4037-4039), so `flag is_false AND (A OR B)` is not expressible.
+# ⚠️ THE FLAG IS SET HERE, ON THE LOCATED HUB CHOICE, AND IT CANNOT MOVE.
+# The flag-chain validator HARD-FAILS a flag that a trigger or a choice reads when
+# its only setter is a TRIGGERLESS canvas — "ensure all required flags are set by a
+# canvas with location/schedule". `loop_tasha_bath` reads `tasha_open is_true`, so
+# a located setter must exist, and the rungs are triggerless by design.
+#
+# ⚠️ AND THAT LEAVES ONE SCOREBOARD LINE RED ON PURPOSE. gates.py `the climb is
+# paid for` calls a route self-limiting only when the TARGET canvas sets the flag
+# the choice reads `is_false` (gates.py:3489-3491). A triggerless rung cannot both
+# be the located setter the build demands and the target setter the gate looks for,
+# so the gate reports `corruption` as a free climb through this hub. IT IS NOT:
+# every rung carries its own `is_false` and fires exactly once ever — proved live,
+# a spent rung vanishes from the screen. Setting the flag in both places was tried
+# and does not work either: the unlock map is first-writer-wins over a canvas list
+# in reverse declaration order, so the triggerless rung claims the flag and the
+# build fails again. gates.py:403 states the principle — "a check that fails a game
+# for obeying the doctrine is a bug in the check". Do not contort this to go green.
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay while she gets changed."
+targetType = "node"
+nodeId     = "arc_tasha_01.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "tasha_shows", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_tasha", trait_key = "relation", operator = "gte", value = 6 },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_shows", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do not look away this time."
+targetType = "node"
+nodeId     = "arc_tasha_02.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "tasha_shows",   operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "tasha_watched", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "corruption",   operator = "gte", value = 15 },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_watched", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put your hand out."
+targetType = "node"
+nodeId     = "arc_tasha_03.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "tasha_watched", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "tasha_open",    operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "corruption",   operator = "gte", value = 30 },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_open", op = "set" }]
+
+# ⚠️ THE WALL, AND IT IS ONE LINE RATHER THAN THREE GREYED RUNGS.
+# walking_in.md:61 — "She sees that there's something there and that she can't do
+# it, ONE LINE, not an empty screen." The first build of this canvas put
+# `show_when_locked` on each rung instead, and the live walk caught what that
+# does: a rung she has ALREADY TAKEN keeps rendering, greyed, with a reason that
+# says "not yet". A one-time step has two unavailable states and locked_text can
+# only describe one of them, so the rungs hide — which is what all seven of
+# vesper_two's `hub_*` ladders do — and the wall lives here instead.
+#
+# It is gated on the flag that RETIRES this canvas, so it can never render live:
+# while the hub exists the ladder is unfinished, and the moment `tasha_open` is
+# set `loop_tasha_bath` takes the portrait and this screen is gone.
+[[canvases.nodes.exit_block.choices]]
+text       = "There is further than this."
+targetType = "node"
+nodeId     = "hub_tasha_bath.done"
+show_when_locked = true
+locked_text = "There is further than this, and she has not offered it, and it is not yours to start."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_true" },
+] }
+
+# Unconditional — the free door, and the only live one on the first visit.
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "node"
+nodeId     = "hub_tasha_bath.done"
+
+[[canvases.nodes]]
+id   = "done"
+name = "The landing"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You pull the door to behind you. She is still talking on the other side of it for a sentence and a half before she works out you have gone."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_bathroom"
+
+# --- THE CONVERSION ----------------------------------------------------------
+# CARRIED.md:215-218 — the last step of an arc converts the act into something she
+# can SIMPLY DO. `hub_tasha_bath` retires on `tasha_open` and this takes the
+# portrait: priority 6 against the hub's 5, the same way vesper_two's `loop_*`
+# canvases outrank their `hub_*`.
+#
+# ⚠️ THE BRAKE IS ON THE CHOICE, NOT THE TRIGGER — `tasha_bath_today`, cleared in
+# [engine.daily_tick]. A trigger day-cap would take her out of the room she is
+# standing in. Her hour is one hour, so the clock does most of the work anyway.
+#
+# ⚠️ POOLED, AND THAT IS THE POINT. CARRIED.md:210-212: a re-entered surface must
+# VARY — block_pool for undirected variety, stacked group bands for directed —
+# and block_pool has 0 uses across every other v2 game. This is a surface she
+# comes back to; written as one paragraph it rots on the third read.
+#
+# ⚠️ ONE ASSET, ONE BLOCK. Every pool_dir below is used exactly once; media review
+# dedupes by file, so a reused pool silently collapses two beats into one.
+
+[[canvases]]
+id   = "loop_tasha_bath"
+name = "Tasha"
+description = "The converted surface. Her hour, and it runs both ways now. Tier 3: her ceiling is full, and the axis nobody else has is what she says about Nell to other people."
+
+[canvases.trigger]
+location      = "the_bathroom"
+requires_npc  = "npc_tasha"
+npc           = "npc_tasha"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her hour"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "She has left the door open a hand's width. Doors in this house do not work like that. She is on the edge of the bath in her underwear with one leg up, not doing anything yet, waiting to see if you come in." },
+  { type = "paragraph", content = "She is out of the shower and she has not bothered with the towel at all. She says your name once, through the door, in the voice she uses for asking somebody to pass her something." },
+  { type = "paragraph", content = "The good light, the bag across the sink, and her already naked on the mat with her back against the bath. She has not started her face. She was never going to start with her face." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "I told the girls at work about you. Not all of it. Enough that they ask after you now, and you should hear what they call you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Forty minutes. Lock it this time, because he is in the garage and he does come up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Do not stand there doing the face. Get down here, I am going out at seven whatever happens." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down on the mat with her."
+targetType = "node"
+nodeId     = "loop_tasha_bath.act"
+show_when_locked = true
+locked_text = "You have had her hour today. She has an hour, not an evening."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_bath_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_bath_today", op = "set" }]
+
+# Unconditional — the free door, and she is not owed it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "node"
+nodeId     = "loop_tasha_bath.not"
+
+[[canvases.nodes]]
+id   = "act"
+name = "The mat"
+
+[[canvases.nodes.blocks]]
+type  = "video"
+props = { pool_dir = "sex/tasha_bath_loop_t5", pool = 6, description = "Two women on a bathroom floor, one going down on the other, unhurried and practised.", search_queries = ["lesbian oral bathroom floor", "woman going down on woman bathroom tiles"] }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "She gets a hand in your hair and puts you where she wants you, and her cunt is already wet on your mouth before you have properly started. Her heel goes into your back. She says do that again, and you do that again." },
+  { type = "paragraph", content = "You get your tongue on her clit and she goes quiet, which from her is the loudest thing available. Her thighs come up either side of your head. She holds you there with one hand and the bath rail with the other." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tasha", trait_key = "relation", operator = "gte", value = 30 },
+] } }
+blocks = [
+  { type = "paragraph", content = "She turns you over on the mat when she is done and puts her mouth on your cunt without asking whether you wanted that, because by now she knows. She licks you until your heels skid on the tile." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "She cums on your mouth with her hand flat on the top of your head, holding you still through it, and lets go the second it is finished. Her leg slides off your shoulder. The radio is still going on the cistern." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay on the floor a minute."
+targetType = "node"
+nodeId     = "loop_tasha_bath.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Seven o'clock"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She is back at the mirror in ninety seconds doing the eye she never finished, talking about a bar on the strip and who is going to be in it. You are still sat on the mat with your back against the bath."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "It costs her nothing. That is not a complaint and it is not a reason to stop, and both of those have been true for about three weeks now."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up before she goes out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 40
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "set"
+value      = 100
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes]]
+id   = "not"
+name = "Not tonight"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She says fine, in the tone that means fine, and asks you to pass the bag on your way past. It is not held against you. Nothing with her is ever held against you, and that turns out to be the problem."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 5
+
+
+# --- THE WALK-IN THE OFFICE OWED --------------------------------------------
+# Substitution on reading the board. He is in here from nine now, so the room she
+# used to have to herself is a room he is standing in. the_move_up.md:62-66 — the
+# schedule IS how he talks, and this is him watching her read it.
+#
+# ⚠️ No `requires_npc` is needed: the host's own hours are all day, and the
+# substitution path checks the target's presence itself (v2.py:5606-5623). It is
+# declared anyway so the rule cannot fire on an afternoon he is on the floor.
+
+[[canvases]]
+id   = "owen_at_the_board"
+name = "He is already in here"
+description = "Substitution on reading the schedule. @owen is at the board when she comes in for it. Reads move_up, costs nothing, and changes only where she is standing."
+
+[canvases.trigger]
+location          = "the_back_room"
+npc               = "npc_owen"
+requires_npc      = "npc_owen"
+is_repeatable     = true
+substitution_only = true
+priority          = 4
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Next week"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "He is already at the board with the pen when you come in, and he does not move out of the way. You read next week over his shoulder because there is nowhere else to read it from." },
+  { type = "paragraph", content = "The office light is off and the one over the desk is on. He has the pen in his teeth and both hands on the sheet, and he says your name without turning round." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Four this week. You will notice which four. I did that on purpose and I am not going to say anything else about it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Two. I know exactly what you are looking at, and it goes up when it goes up." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He writes a name in the Thursday box and it is not yours. He does it while you are stood there reading it, and he does not hurry, and then he caps the pen."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out the front."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_back_room"
+time_progression_minutes = 10
+
+# --- RUNG 1 · she does not cover up -----------------------------------------
+# ⚠️ TRIGGERLESS ON PURPOSE. gates.py:3473 skips a route whose target is the
+# SAME canvas (`tgt == c["id"]`), so a rung written as a node inside its own hub
+# makes its one-time self-limit invisible to `the climb is paid for` — the gate
+# then reads the hub as a free corruption route. It is also the architecture the
+# skill describes: "a RUNG in this architecture is a triggerless canvas reached by
+# a hub choice". A triggerless canvas that nothing links to is DELETED from the
+# build silently (engine.md §8) — the hub choice IS the link, written in the same
+# edit. The flag is set on THIS canvas's exit, because the self-limit test asks
+# whether the TARGET sets the flag the choice reads `is_false`.
+[[canvases]]
+id   = "arc_tasha_01"
+name = "The towel on the floor"
+description = "Rung 1 of Tasha's arc. Triggerless — reached only from hub_tasha_bath, which reads the flag this sets."
+
+[[canvases.nodes]]
+id   = "base"
+name = "The towel on the floor"
+
+[[canvases.nodes.blocks]]
+type  = "video"
+props = { pool_dir = "sex/tasha_bath_towel_t4", pool = 4, description = "A young woman standing naked at a bathroom mirror doing her makeup, unhurried, a towel on the floor.", search_queries = ["naked at bathroom mirror doing makeup", "nude woman getting ready mirror steam"] }
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Tasha is naked at the mirror with the towel already on the floor. She does not reach for it. Her tits move when she leans into the glass, and she turns to get the light on her ass and carries on talking."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_tasha" }
+content = "Oh, sit down. You have seen me in less than this and you have got the same everything I have."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "She is not showing you. She is just not hiding, and the difference between those two is the only thing you can think about on the landing afterwards."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, eventually."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# --- RUNG 2 · she performs it at you ----------------------------------------
+# ⚠️ TRIGGERLESS ON PURPOSE. gates.py:3473 skips a route whose target is the
+# SAME canvas (`tgt == c["id"]`), so a rung written as a node inside its own hub
+# makes its one-time self-limit invisible to `the climb is paid for` — the gate
+# then reads the hub as a free corruption route. It is also the architecture the
+# skill describes: "a RUNG in this architecture is a triggerless canvas reached by
+# a hub choice". A triggerless canvas that nothing links to is DELETED from the
+# build silently (engine.md §8) — the hub choice IS the link, written in the same
+# edit. The flag is set on THIS canvas's exit, because the self-limit test asks
+# whether the TARGET sets the flag the choice reads `is_false`.
+[[canvases]]
+id   = "arc_tasha_02"
+name = "In the mirror"
+description = "Rung 2. Corruption 15 on the hub choice; the ceiling here is her tier 2."
+
+[[canvases.nodes]]
+id   = "base"
+name = "In the mirror"
+
+[[canvases.nodes.blocks]]
+type  = "video"
+props = { pool_dir = "sex/tasha_bath_fingers_t4", pool = 4, description = "A woman sitting on the edge of a bath with her legs open, fingering herself while watching someone in the mirror.", search_queries = ["woman fingering herself edge of bath", "girl masturbating bathroom watching mirror"] }
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Tasha sits back on the edge of the bath with her knees open and puts two fingers in her cunt. Slow. She watches you in the mirror instead of looking down, and her other hand works her clit without hurrying."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_tasha" }
+content = "Do not go red. You do this. Everyone does this. The only difference is I do not pretend I am doing something else."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Her thighs go tight and stay tight and she does not close her eyes once. She comes with her mouth open and no noise at all, and then she reaches past you for the bag."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "You stayed. You did not have to, and she did not ask. Nobody in that room made you do anything. That is the bit that will not sit down afterwards."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Say nothing about it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 25
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 4
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+# --- RUNG 3 · it stops running one way --------------------------------------
+# ⚠️ TRIGGERLESS ON PURPOSE. gates.py:3473 skips a route whose target is the
+# SAME canvas (`tgt == c["id"]`), so a rung written as a node inside its own hub
+# makes its one-time self-limit invisible to `the climb is paid for` — the gate
+# then reads the hub as a free corruption route. It is also the architecture the
+# skill describes: "a RUNG in this architecture is a triggerless canvas reached by
+# a hub choice". A triggerless canvas that nothing links to is DELETED from the
+# build silently (engine.md §8) — the hub choice IS the link, written in the same
+# edit. The flag is set on THIS canvas's exit, because the self-limit test asks
+# whether the TARGET sets the flag the choice reads `is_false`.
+[[canvases]]
+id   = "arc_tasha_03"
+name = "Your hand"
+description = "Rung 3, and the conversion. Setting `tasha_open` retires the hub and opens loop_tasha_bath."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Your hand"
+
+[[canvases.nodes.blocks]]
+type  = "video"
+props = { pool_dir = "sex/tasha_bath_hand_t5", pool = 4, description = "A woman guiding another woman's hand between her legs on a bathroom floor, close, both of them still half dressed.", search_queries = ["woman guides another woman's hand between her legs", "lesbian fingering bathroom floor close"] }
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Tasha takes your wrist and puts your hand between her legs. Her cunt is wet enough that your fingers go in without her helping. She tells you how to move them, then stops telling you, and cums on your hand with her mouth open."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_tasha" }
+content = "There. That is all it was. You have been stood in that doorway for a month looking like it was a maths problem."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She wipes your fingers on the towel herself, one at a time, and goes back to the mirror. The eye she had not finished is still not finished. She starts it again from the beginning."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "She will say it to somebody. Not to hurt you — she will say it the way she says everything, because it happened and she was there. That is the part you cannot take back."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and sit down somewhere."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 4

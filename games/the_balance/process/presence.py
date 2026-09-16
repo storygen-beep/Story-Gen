@@ -47,8 +47,9 @@ fifth is a defect:
     covered       she SPEAKS on a screen that exists in this room. `dinner` is one
                   table holding Gil, Nate and Tasha — three rows, one surface, and
                   that is good writing, not a hole.
-    substitution  a substitution_only canvas bound to her here. Real content that
-                  rides another activity; never a portrait.
+    substitution  a substitution_only canvas bound to her here whose HOST is live
+                  in these hours. Real content that rides another activity; never
+                  a portrait. A substitution whose host is shut backs nothing.
     occupancy     declared below, with its reason. The row exists to block a door,
                   to put a second body in a room, or to gate somebody else's scene.
     DEAD          none of the above, and the report names the exact weekdays.
@@ -205,11 +206,18 @@ def speakers_of(canvas):
     return found
 
 
-def classify(row, npc, here):
+def classify(row, npc, here, hosts_of):
     """(verdict, detail, dead_days) for one schedule row.
 
     `dead_days` is the subset of the row's own weekdays that nothing backs — the
     row is a defect only on those days.
+
+    ⚠️ A SUBSTITUTION IS ONLY AS LIVE AS ITS HOST. A substitution_only canvas has
+    no hours of its own; it replaces a host on entry, so it can only reach the
+    player during the hours that host is available. Tasha is the case that proved
+    it: `tasha_walks_in` is bound to the bathroom and her own bathroom row is
+    17:00-18:00, but it rides `wash`, which is shut 17:00-22:00. Scoring the row
+    "substitution" on the canvas's own existence called an empty hour backed.
     """
     key = (npc["id"], row["location"])
     if key in OCCUPANCY_ROWS:
@@ -241,7 +249,18 @@ def classify(row, npc, here):
                 ", ".join(why), set())
 
     if subs and not backed:
-        return "substitution", ", ".join(c["id"] for c in subs), set()
+        live_subs = []
+        for c in subs:
+            for host in hosts_of.get(c["id"], []):
+                if live_days(row, host):
+                    live_subs.append(f"{c['id']} on {host['id']}")
+                    break
+        if live_subs:
+            return "substitution", ", ".join(live_subs), set()
+        dead_subs = ", ".join(c["id"] for c in subs)
+        hosted = ", ".join(h["id"] for c in subs for h in hosts_of.get(c["id"], [])) or "no host"
+        return "DEAD", (f"{dead_subs} is bound here but only runs as a substitution "
+                        f"on {hosted}, which is not live in these hours"), want
 
     detail = (f"{len(here)} canvas(es) at {row['location']}"
               + (f"; backed only by {', '.join(why)}" if why else ", none of them hers"))
@@ -266,6 +285,16 @@ def main():
         stands_at[npc["id"]] = {s.get("location")
                                 for s in (npc.get("schedules") or [])}
 
+    # child canvas id -> the host canvases that name it as a substitution target.
+    # The rule lives on the HOST (gates.py:3272-3283), never on the walk-in.
+    hosts_of = {}
+    for c in game.get("canvases", []):
+        host = canvas_facts(c)
+        for rule in ((c.get("trigger") or {}).get("substitutions") or []):
+            tgt = rule.get("target_canvas_id")
+            if tgt:
+                hosts_of.setdefault(tgt, []).append(host)
+
     rows, dead, deferred, capped, ladder, stranded = [], [], [], [], [], []
     for npc in game.get("npcs", []):
         for sched in npc.get("schedules", []) or []:
@@ -276,7 +305,7 @@ def main():
                 "end_time": sched.get("end_time", "23:59"),
             }
             verdict, detail, dead_days = classify(
-                row, npc, by_location.get(row["location"], []))
+                row, npc, by_location.get(row["location"], []), hosts_of)
             entry = (npc["name"], npc["id"], row, verdict, detail, dead_days)
             rows.append(entry)
             if verdict == "DEAD":
