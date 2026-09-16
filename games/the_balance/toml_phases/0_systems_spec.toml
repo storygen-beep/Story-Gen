@@ -329,6 +329,9 @@ flagEffects = [
   # `crowd_standing` gates content at 10 and became free to reach.
   { targetType = "player", flag = "paige_today", op = "unset" },
   { targetType = "player", flag = "bree_today", op = "unset" },
+  # Tasha's converted surface. Her hour is one hour; the cap is on the choice so
+  # she stays in the room she is standing in.
+  { targetType = "player", flag = "tasha_bath_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },

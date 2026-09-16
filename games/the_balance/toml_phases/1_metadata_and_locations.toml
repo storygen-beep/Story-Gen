@@ -264,15 +264,38 @@ arc_stages  = [
   "Closing",         # 3 — the building is him and her
 ]
 
+# ⚠️ THE LAST HOUR, AND IT MUST BE DECLARED ABOVE THE CAFE ROW. `getNpcLocation`
+# walks declared rows in order and FIRST MATCH WINS (v2.py:3661-3669), so the
+# 07:00-22:00 floor row below would swallow this window if it came first.
+#
+# Without this row `office_closer` — the SECOND KEY, the only writer of
+# `owen_standing` — could never render. The portrait grid is filtered on
+# `getNpcLocation(slug).location === locationId` (v2.py:5281-5291) and he was only
+# ever scheduled on the floor, so the whole cafe ladder stopped after `move_up = 1`:
+# no second key, so `move_up_counter` never fired, so the counter never opened.
+# Verified live before and after. `process/presence.py` reports the class.
+#
+# the_move_up.md:40 puts closing at five to ten, and `office_closer`'s own first
+# line is "He is at the schedule on the wall with a pen, working out next week" —
+# which is this hour, in this room.
+[[npcs.schedules]]
+location   = "the_back_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "22:00"
+activity   = "in the office with next week's schedule and a pen"
+
 [[npcs.schedules]]
 location   = "the_cafe"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "07:00"
 end_time   = "22:00"
 activity   = "working the floor"
-# ⚠️ ONE row, all day, every day. The_move_up.md says the no is in the hours and
-# never at the door — a schedule that can put him out of reach on the first
-# morning would stall the slice on its only real choice.
+# ⚠️ ONE row for the floor, all day, every day. The_move_up.md says the no is in
+# the hours and never at the door — a schedule that can put him out of reach on
+# the first morning would stall the slice on its only real choice. The office row
+# above is the ONE exception and it is the last hour of the day, long after the
+# opening; it takes him off the floor from nine, which is where he should be.
 
 # ⚠️ THREE MORE, AND THEY EXIST TO PUT SOMEBODY IN A ROOM SHE CAN DO SOMETHING
 # WITH, OR TO EMPTY A ROOM SHE NEEDS. the_house_day.md's header rule. Every row
