@@ -302,7 +302,7 @@ that are LO's; the other two boxes are ignored.
 | O3 | **Tier rungs start at 5, not 15** | `templates/board.toml` ships a band table starting at 15 and **all sixteen declared tiers across five v2 games copied it.** The field runs 8–17 rungs starting around 5. A session that opens the template will write 15 |
 | O4 | **`DECISIONS.md` written at the WANT phase** | The skill puts it at sheets. Its A block — what cannot be undone — is decided at the Want, and putting it in front of LO later means it is already spent. The file says in its own header that it is partial and re-issued in full at sheets |
 | O5 | **Anything LO reads obeys §5** | §5 |
-| O12 | **This game's checks live in `process/`, not the scratchpad** | `.claude/agents/v2-player.md:75-79` says probe scripts go in the scratchpad and *never* into `games/`. That rule is right about throwaway probes and wrong about a regression suite: eight walkthrough scripts were written during slices 1–8, lived in the scratchpad, and were wiped. **A check that dies with the session is not a check.** `process/joints.py`, `process/tokens.py` and `process/walks.py` are checked in. Run all three before calling a slice done |
+| O12 | **This game's checks live in `process/`, not the scratchpad** | `.claude/agents/v2-player.md:75-79` says probe scripts go in the scratchpad and *never* into `games/`. That rule is right about throwaway probes and wrong about a regression suite: eight walkthrough scripts were written during slices 1–8, lived in the scratchpad, and were wiped. **A check that dies with the session is not a check.** `process/joints.py`, `process/tokens.py`, `process/readable.py`, `process/presence.py` and `process/walks.py` are checked in. Run all five before calling a slice done |
 | O11 | **Anything the PLAYER reads obeys §5b and §5c** | §5b is how a sentence is joined; §5c is when an `@token` is a bug. The skill's `register.md` governs length, density and the explicit pivot, and nothing in it governs how two clauses are joined. The first build ran `but` at 0.14 per 1,000 words against a field **minimum** of 2.46 — zero in narration. Run `process/joints.py` before calling prose done |
 | O6 | **A wide map with a red fill gate is accepted** | 29 locations, ~116,200 words budgeted. `location fill` reads red until the prose catches up. `the-board.md` says treat every location as a debt; the red is the backlog. Do not "fix" it by shrinking the declared world |
 | O8 | **The Want is six things and holds nothing countable** | §1b. It was 4,203 words and became 586. Cut material is in `CARRIED.md` against its owning block |
@@ -433,6 +433,35 @@ Each check is regression-tested against the bug that caused it — see the file'
 two commands. Check A must flag `canvas_opening / wake` at `5f8424a`; check C must find **five** at
 `1c9837c` and **zero** at HEAD. **A check that cannot catch the defect it was written for is
 decoration.**
+
+### The other instrument, and it is not about prose
+
+`venv/bin/python games/the_balance/process/presence.py` — **also a list, never a score.** It answers
+one question the other four cannot: **does every `[[npcs.schedules]]` row have something behind it?**
+
+LO walked into Tasha's room on 2026-09-16, saw her face on the door, and found an empty room. Both
+halves were behaving: the nav card and the threshold read presence from the **schedule alone**
+(`getNpcsPresentAtLocation`, `v2.py:5056`), while the portrait grid inside the room wants a schedule
+**and a selectable canvas** (`renderNpcPortraits`, `v2.py:5222`). That split is deliberate — a
+housemate showering has to show on the map and block the door with nothing to click
+(`v2.py:5270-5281`). The door was not lying. The room was empty.
+
+It classifies every row and only the fifth verdict is a defect — **portrait** · **covered** (she
+SPEAKS on a screen in that room: `dinner` is one table holding Gil, Nate and Tasha, three rows and
+one surface) · **substitution** · **occupancy** (declared in the file, with its reason) · **DEAD**.
+Two more lists: **STRANDED**, a portrait bound to a room its NPC is never scheduled into, which can
+never render at all; and **DAY-CAPPED**, below.
+
+⚠️ **The row is judged PER WEEKDAY.** Asking only "does anything here overlap at all" is what hides
+@gil: he is at the kitchen table 18:00–21:00 all seven nights, `friday_payment` is the only thing
+bound to him there, and one Friday would score the whole row backed while six evenings stay dead.
+
+⚠️ **`OCCUPANCY_ROWS` and `DEFERRED_ROWS` are hand-maintained, and that is the point.** An exemption
+the script works out for itself is an exemption that grows quietly. The deferred rows are reprinted
+every run so that deferring stays a decision somebody made.
+
+Regression anchors, in the file's own docstring: at `6e0bd9d` it must report **4 DEAD**, **4
+day-capped**, **1 stranded**; at HEAD, **0** and **0**.
 
 ---
 
@@ -734,7 +763,39 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    (`auto_exit = false`) but not the rooms behind it, so the six campus and strip interiors read as
    stranded. They are not: `walks.py travel` proves every one can be left, broke. Fixing the gate
    means editing the skill, which is LO's call and has not been made — see §0.
-10. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
+10. **THE DOOR AND THE ROOM ASK DIFFERENT QUESTIONS, AND A DAY CAP ON A PERSON DELETES HER.**
+   The nav card, the map badge and the threshold screen all read presence from the **schedule
+   alone** (`setup.getNpcsPresentAtLocation`, `v2.py:5056`). The clickable portrait grid inside the
+   room reads the schedule **and** a selectable canvas (`renderNpcPortraits`, `v2.py:5222`), and
+   that is deliberate — `v2.py:5270-5281` says so: *only offer a click where there is an
+   interaction*, which is how a housemate showering shows on the map and blocks the door without
+   being clickable. So a room with nobody's canvas in it puts a face on the door and nothing behind
+   it. `tasha_room` and `the_front_room` shipped exactly that.
+   **And the second half is worse, because it looks like a throttle.** A `max_triggers_per_day` on
+   a canvas that carries an `npc` does not spend the act — it removes the person from the screen
+   while their own timetable still has them in the room. Cara sits at that table until half two and
+   one click used to end her. The cap belongs on the **choice**, as a `_today` flag cleared in
+   `[engine.daily_tick]`; `engine.md` §28.1 — a choice runs `flagEffects` *before* `advanceTime`, a
+   node exit runs it *after*, and `advanceTime` rolls the day inside itself, so a cap written on an
+   exit that crosses midnight locks the rung out of the **following** day, silently. Field check:
+   vesper 14 NPC surfaces, vesper_two 16, and **not one of the 30 uses a trigger day-cap**. This
+   game used one on ten of eleven.
+   ⚠️ **`triggerConditionsSatisfied` takes one flat `items` list with one `logic` (`v2.py:4037-4039`)
+   and does not nest**, so `flag AND (A OR B)` cannot be written as one condition. Paige and Bree
+   are one act split across two choices for exactly that reason.
+   ⚠️ **`requires_npc` is now used here** (`v2.py:11877` → `:11911` → `_npcPresentForCanvas`
+   `v2.py:4820-4828`, whose `catch` returns **false**). It is used *instead of* a
+   `[[canvases.trigger.schedules]]` block on a hub, not alongside one — vesper_two carries both,
+   which duplicates the person's timetable and can drift from it.
+   ⚠️ **A substitution rule goes on the HOST canvas, never on the walk-in** (`gates.py:3272-3283`
+   counts them off the host's trigger, and the engine reads them the same way), and `chance` is a
+   **float in [0.0, 1.0]** — `45` fails the build outright.
+   **`gates.py` G6 `standing surface` cannot see any of this.** It reads 10/10 PASS because it asks
+   only whether an NPC has *any* bound canvas anywhere and *any* schedule row (`gates.py:5282-5287`);
+   Tasha passed it on a `substitution_only` canvas that can never render a portrait. The check that
+   does see it is `process/presence.py`, and widening the gate would be a skill edit — see §0.
+
+11. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 

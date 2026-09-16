@@ -998,11 +998,16 @@ id   = "union_cara"
 name = "Sit with Cara"
 description = "An hour that buys nothing the game can count. Her lines read rest and clean, which is how those two get spoken instead of displayed."
 
+# ⚠️ NO max_triggers_per_day, AND THAT IS THE POINT. A cap on the TRIGGER does not
+# spend the hour, it deletes Cara: she is scheduled at that table until half two,
+# and one click used to remove her portrait from the screen while she was still
+# sitting there. The cap now lives on the paying choice as `cara_today`, cleared in
+# [engine.daily_tick]. Same throttle, exactly one hour a day, and she stays in the
+# room. engine.md §28; process/presence.py is the check.
 [canvases.trigger]
 location      = "the_union"
 npc           = "npc_cara"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 5
 is_active     = true
 
@@ -1055,13 +1060,26 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
+# ⚠️ THE FLAG GOES ON THE CHOICE, NEVER ON A NODE EXIT — engine.md §28.1. A choice
+# runs flagEffects before advanceTime; a node exit runs advanceTime first, and
+# advanceTime rolls the day inside itself, so a cap written on an exit that crosses
+# midnight locks the rung out of the FOLLOWING day, silently. Measured in off_season.
 [[canvases.nodes.exit_block.choices]]
 text       = "Stay the hour."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 60
-effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+show_when_locked = true
+locked_text = "You have had your hour. She would give you another one and you do not have it."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cara_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "cara_today", op = "set" }]
 
+# The brush-off is deliberately NOT capped. It costs her the relation and it walks
+# her out of the room, so repeating it is its own punishment — and it is what keeps
+# a free, unconditional door on this screen once the hour is spent.
 [[canvases.nodes.exit_block.choices]]
 text       = "Say you've got a shift."
 targetType = "location"
@@ -1078,11 +1096,13 @@ id   = "sam_talks"
 name = "Talk to Sam"
 description = "One conversation. Not a climb yet — the cast page is explicit that in the first build he is talking and that is all."
 
+# ⚠️ No max_triggers_per_day — the cap is on the choice, as `sam_today`. Same
+# reason as Cara above: he is at that table until two and the trigger cap used to
+# take him off the screen for the rest of it.
 [canvases.trigger]
 location      = "the_union"
 npc           = "npc_sam"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 4
 is_active     = true
 
@@ -1111,8 +1131,15 @@ text       = "Stay a bit."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 30
-effects = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+show_when_locked = true
+locked_text = "You already stayed. Staying twice is the sort of thing he would notice."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sam_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "sam_today", op = "set" }]
 
+# Unconditional, and it stays that way — this is the free door on a spent day.
 [[canvases.nodes.exit_block.choices]]
 text       = "Go. You've got the bus."
 targetType = "location"

@@ -310,6 +310,25 @@ flagEffects = [
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
+  # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
+  # max_triggers_per_day on a canvas that carries an `npc` does not spend the act,
+  # it deletes the person: Cara sits at that table until half two and Sam until
+  # two, and one click used to remove their portraits for the rest of it. The cap
+  # moved onto the paying choice. engine.md §28.2 — a flag read `is_false` and
+  # cleared but never SET is a cap that never closes, and nothing in the toolchain
+  # objects, so these two lines and the setters have to stay in step.
+  { targetType = "player", flag = "cara_today", op = "unset" },
+  { targetType = "player", flag = "sam_today", op = "unset" },
+  # The two rooms that used to hold nobody. `sofa_today` is shared by BOTH front
+  # room canvases — the solo hour and @nate's hub — so it is one hour on that sofa
+  # a day whichever way she sits down.
+  { targetType = "player", flag = "tasha_today", op = "unset" },
+  { targetType = "player", flag = "sofa_today", op = "unset" },
+  # The quad pair. Their caps came OFF the trigger and back on as choice flags —
+  # taking them off outright made gates.py "the climb is paid for" fail, because
+  # `crowd_standing` gates content at 10 and became free to reach.
+  { targetType = "player", flag = "paige_today", op = "unset" },
+  { targetType = "player", flag = "bree_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
