@@ -1211,10 +1211,35 @@ content = "Bree is already laughing. Jules is not. She is waiting, with her head
 [canvases.nodes.exit_block]
 type = "choices"
 
+# ⚠️ ONE YES, TWO LABELS, AND DELIBERATELY NO CORRUPTION GATE ON EITHER.
+#
+# LO: "when low on corruption she is innocent, there can't be a plain yes
+# option?" He is right about the flatness and the fix is not a lock. the_dares.md
+# makes dare one the ON-RAMP — "she answers on the spot", and two is shut until
+# one is done — so hiding the yes at low corruption shuts the whole chain behind
+# the house content. And the same page says corruption is "the body ones only",
+# which dare one is not, so this rung must not move the meter either.
+#
+# What it can do is READ the meter. Same node, same effects, different words: at
+# corruption under 15 agreeing is a flinch and the label says so; above it, she
+# has a flat yes available to her, and the flatness is hers. The cost of saying
+# it is carried by the prose on the other side, which is where the_dares.md puts
+# it — "her face, and nothing else".
+[[canvases.nodes.exit_block.choices]]
+text       = "Say yes. You cannot think how not to."
+targetType = "node"
+nodeId     = "dare_1_offer.yes"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] }
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Say yes."
 targetType = "node"
 nodeId     = "dare_1_offer.yes"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Say no."
@@ -1225,9 +1250,27 @@ nodeId     = "dare_1_offer.no"
 id   = "yes"
 name = "All right"
 
+# Two adjacent groups merge into one <<if>>/<<else>> chain, and the one with no
+# conditions is the else. The paragraph after them is outside the chain and
+# renders either way.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "It is out of your mouth before you have decided anything, and your face goes while every one of them is still looking at it. That is the part she wanted and it is the part you cannot take back." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You say it flat, the way you would agree to carry something down a flight of stairs. Nobody gets to watch you decide, and that is the only piece of this that stays yours." },
+]
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You say all right, and Jules nods once and goes back to her phone like the thing is already done. Bree tells Paige something behind her hand. Nobody walks with you."
+content = "Jules nods once and goes back to her phone like the thing is already done. Bree tells Paige something behind her hand. Nobody walks with you."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -1332,18 +1375,39 @@ nodeId     = "dare_1_do.bottled"
 id   = "done"
 name = "A minute"
 
+# ⚠️ THE CHOICE SAID "Do it." AND SHE DID NOT DO IT. The old version had her walk
+# up and announce the dare — "I have been asked to say something stupid to a
+# stranger and this is it" — which is the one move that costs her nothing. It
+# makes her the witty one, hands the man the joke, and leaves the rung empty:
+# the_dares.md prices dare one at "her face, and nothing else", and announcing it
+# is exactly how somebody keeps their face. She says the stupid thing now.
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You stop at his elbow and tell him, clearly, that you have been asked to say something stupid to a stranger and that this is it. He looks up. He works out in about two seconds exactly what is happening and where it is being watched from."
+content = "You stop at the man's elbow and tell him, louder than you meant to, that the milk at the counter is free and he should take some while it lasts. None of it is true."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You hear your own voice do it from somewhere outside your head, and you cannot look at the window table while it is happening. Your face is doing the whole thing for you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You keep your voice flat and your face still and you say it the way you would read a number off a page. Doing it badly is the part they came for, and they do not get it." },
+]
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "unknown" }
-content = "Right. Well. You've done it now. Go on."
+content = "Right. Thanks. I'll bear that in mind."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He goes back to his book, and he is kinder about it than any of the three at the window. That is the bit you carry out of the room. It took under a minute. Bree is still laughing when you get there."
+content = "He goes back to his book without once looking over at the window table, which is kinder than anything the three of them have in them. It took under a minute. Bree is still laughing when you get there."
 
 [canvases.nodes.exit_block]
 type = "location"
