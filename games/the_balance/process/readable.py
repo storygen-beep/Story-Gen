@@ -42,7 +42,29 @@ is correct writing. So this file scores nothing. It finds two defects that are
 FACTS rather than judgments, and prints them for a human to read — the same
 contract as joints.py and tokens.py.
 
+A third check joined them on 2026-09-16, after LO read the college scenes and
+asked "What happened on Tuesday?? People are talking about it in college??".
+Nothing had happened on Tuesday. That is check A one level out: a pronoun points
+at a PERSON with nobody to point at, "the thing on Tuesday" points at an EVENT
+that never happened. Same failure, so it lives in the same file.
+
 Sentence length per canvas lives in joints.py, not here.
+
+HOW TO PROVE THIS FILE STILL WORKS
+----------------------------------
+A check that cannot catch the bug that caused it is decoration. Each check has a
+commit whose TOML it MUST flag — run it with --toml against that revision:
+
+    git show 5f8424a:games/the_balance/toml_phases/7_final_game.toml > /tmp/a.toml
+    venv/bin/python games/the_balance/process/readable.py --toml /tmp/a.toml
+    # check A must flag canvas_opening / wake — "Your mum doesn't know he paid."
+
+    git show 1c9837c:games/the_balance/toml_phases/7_final_game.toml > /tmp/c.toml
+    venv/bin/python games/the_balance/process/readable.py --toml /tmp/c.toml
+    # check C must flag 5: gil_notices, paige_is_nice and bree_takes_it_home (all
+    # three in a block_pool), picked_quad's "you know which one", and
+    # friday_payment/less "about Tuesday" — plus dinner and picked_stop on the
+    # eyeball list. Against HEAD it must find ZERO.
 """
 
 import pathlib
@@ -135,6 +157,64 @@ FINITE_VERBS = {
     "mention", "mentions", "mentioned", "beats", "beat", "counts", "count",
 }
 CONTRACTED = re.compile(r"\b\w+n't\b|\b\w+'(s|re|ve|ll|d|m)\b", re.I)
+
+# ── check C · an event the player was never given ────────────────────────────
+#
+# LO, 2026-09-16: "What happened on Tuesday?? People are talking about it in
+# college??" Nothing had happened on Tuesday. Three characters referred to it on
+# the first morning of the game.
+#
+# THIS IS CHECK A ONE LEVEL OUT. A pronoun points at a PERSON; "the thing on
+# Tuesday" points at an EVENT. Both fail the same way — the prose assumes a memory
+# the player was never given — so they belong in the same file.
+#
+# ⚠️ THE PATTERNS ARE DELIBERATELY NARROW, and the narrowness is the whole design.
+# A weekday on its own is NOT a hit: this game's shifts really are Tuesday and
+# Sunday, Friday really is the payment, classes really are Monday/Wednesday and
+# Tuesday/Thursday. Those are standing facts the game declares, and flagging them
+# would bury the real hits — which is exactly how an earlier version of this file
+# reported 22 rows with 15 of its own bugs among them. What is listed is a
+# reference to a SPECIFIC PAST OCCASION.
+WEEKDAY = "monday|tuesday|wednesday|thursday|friday|saturday|sunday"
+WEEKDAY_NAMES = tuple(WEEKDAY.split("|"))
+
+# Each row is (pattern, why, needs_a_flag).
+#
+# ⚠️ needs_a_flag IS THE INTERESTING COLUMN. Most of these can honestly be carried
+# by a METER, because a meter can encode an occurrence: attend_3 below 40 means she
+# really did skip the class, dare_chain at 1 means she really did the dare. But
+# three of them do not claim that a thing happened — they claim THE PLAYER
+# REMEMBERS IT ("you know which one", "the thing on", a bare "what happened"). No
+# threshold can establish a memory. Those need a flag, and a trait-only gate leaves
+# them on the defect list.
+EVENT_PATTERNS = (
+    (re.compile(rf"\babout (?:the \w+ on )?(?:{WEEKDAY})\b", re.I),
+     "somebody is expected to know what happened that day", False),
+    (re.compile(rf"\b(?:{WEEKDAY}) night\b", re.I),
+     "a specific night, which the clock never recorded", False),
+    (re.compile(rf"\b(?:was|were|had)\b[^.!?]*\b(?:{WEEKDAY})\b", re.I),
+     "puts her somewhere on a named day, in the past", False),
+    # "on a Tuesday" is a particular unnamed Tuesday. "is a Thursday" is not — that
+    # is one of her shifts, and an earlier draft of this pattern flagged it.
+    (re.compile(rf"\bon a (?:{WEEKDAY})\b", re.I),
+     "one particular day, in a canvas that fires on any of them", False),
+    (re.compile(r"\bthe thing on\b", re.I),
+     '"the thing" is an event the player has to recognise', True),
+    (re.compile(r"\byou know which one\b", re.I),
+     "claims she remembers a particular occasion", True),
+    # "what happened TO IT" carries its own antecedent — the money she just said she
+    # has not got. Only the bare form points off the screen.
+    (re.compile(r"\bwhat happened\b(?!\s+to\s+(?:it|that|this|them|him|her|the)\b)", re.I),
+     "points at an event without naming it", True),
+    (re.compile(r"\b(?:last night|last week|the other day|that night)\b", re.I),
+     "a past occasion the state may not have", False),
+)
+
+# A flag that is true for essentially the whole game proves nothing about any
+# particular event. `opening_done` is set on screen three and never unset, so a
+# canvas gated only on it is, for this check, ungated.
+UNIVERSAL_FLAGS = {"opening_done"}
+
 
 # A curated verb list will always miss something — "You use it." has a verb and an
 # earlier version listed it. This catches the misses syntactically instead of growing
@@ -379,6 +459,126 @@ def dangling_locations(game):
     return hits
 
 
+def gates(conditions):
+    """(constrains state at all, constrains it with a FLAG) for a condition list.
+
+    Any flag / trait / npc item is the author reaching for a condition, which is the
+    work this check asks for. A universal flag does not count: `opening_done` is set
+    on screen three and never unset, so a canvas gated only on it is, for this
+    check, ungated. A FLAG is a record that a thing HAPPENED; a trait threshold is a
+    level, which is usually enough and is never enough for a claimed memory.
+    """
+    any_gate = flag_gate = False
+    for cond in conditions or []:
+        for item in (cond.get("items") or []):
+            if not isinstance(item, dict):
+                continue
+            kind, key = item.get("type"), item.get("flag_key")
+            if kind == "flag" and key in UNIVERSAL_FLAGS:
+                continue
+            any_gate = True
+            if kind == "flag":
+                flag_gate = True
+    return any_gate, flag_gate
+
+
+def scoped_blocks(node):
+    """(block, conditions in scope, inside a pool) for every block a node renders.
+
+    ⚠️ blocks_of() flattens the containers away, which is right for check A and
+    wrong here: this check is ENTIRELY about what encloses a line. A `group` adds
+    its conditions to the scope of everything inside it. A `block_pool` adds
+    nothing and never can — it renders as `<<set _bp to random(0, N)>>` over its
+    members (v2.py:15088) and reads no conditions at any depth. That is the
+    mechanism behind every hit this check was written for.
+    """
+    out = []
+
+    def walk(blocks, scope, in_pool):
+        for block in blocks or []:
+            if not isinstance(block, dict):
+                continue
+            props = block.get("props") or {}
+            kind = block.get("type")
+            inner = scope
+            if kind == "group":
+                cond = props.get("conditions") or block.get("conditions")
+                if isinstance(cond, dict) and cond.get("items"):
+                    inner = scope + [cond]
+            out.append((block, inner, in_pool))
+            for beat in props.get("beats") or []:
+                walk(beat.get("blocks"), inner, in_pool)
+            walk(props.get("blocks") or block.get("blocks"), inner,
+                 in_pool or kind == "block_pool")
+
+    walk(node.get("blocks"), [], False)
+    return out
+
+
+def pinned_weekdays(canvas):
+    """Weekday names the canvas's own trigger schedules pin it to.
+
+    A line may name the day it actually fires on. `[[canvases.trigger.schedules]]`
+    carries `weekdays` as engine indices, 0 = Monday (engine.md §24.2).
+    """
+    days = set()
+    trigger = canvas.get("trigger") or {}
+    for sched in trigger.get("schedules") or []:
+        for idx in sched.get("weekdays") or []:
+            if isinstance(idx, int) and 0 <= idx < 7:
+                days.add(WEEKDAY_NAMES[idx])
+    return days
+
+
+def unearned_events(game):
+    """Check C — a line about an event, with nothing in scope that proves it.
+
+    Returns (defects, unpinned_days). The first is a list in the same sense as
+    check A: the state cannot back the claim, so the player cannot either. The
+    second is an eyeball list — the event IS gated, but the line names a DAY the
+    gate never recorded, which is the half that gating alone does not fix.
+    """
+    defects, unpinned = [], []
+    for canvas in game.get("canvases") or []:
+        trigger_conditions = []
+        tc = (canvas.get("trigger") or {}).get("conditions")
+        if isinstance(tc, dict) and tc.get("items"):
+            trigger_conditions.append(tc)
+        pinned = pinned_weekdays(canvas)
+
+        for node in canvas.get("nodes") or []:
+            for block, scope, in_pool in scoped_blocks(node):
+                if block.get("type") not in PROSE_TYPES + ("dialog",):
+                    continue
+                text = block.get("content")
+                if not isinstance(text, str):
+                    continue
+                for pattern, why, needs_flag in EVENT_PATTERNS:
+                    hit = pattern.search(text)
+                    if not hit:
+                        continue
+                    named = {d for d in WEEKDAY_NAMES
+                             if re.search(rf"\b{d}\b", hit.group(0), re.I)}
+                    # ⚠️ A SCHEDULE IS A GATE, BUT ONLY AN EXACT ONE. friday_payment
+                    # says "on a Friday" and fires on nothing else —
+                    # `[[canvases.trigger.schedules]]` weekdays = [4]. That day is
+                    # proved, whatever the conditions say, so it is not a hit.
+                    # `named <= pinned` was wrong here and let a real one through: a
+                    # canvas scheduled all seven days would "prove" any day it cared
+                    # to name, which is the claim itself.
+                    if named and named == pinned:
+                        break
+                    any_gate, flag_gate = gates(trigger_conditions + scope)
+                    row = (canvas.get("id"), node.get("id"), hit.group(0).strip(),
+                           why, text if len(text) <= 96 else text[:93] + "…", in_pool)
+                    if not any_gate or (needs_flag and not flag_gate):
+                        defects.append(row)
+                    elif named:
+                        unpinned.append(row)
+                    break
+    return defects, unpinned
+
+
 def first_line(node):
     for block in blocks_of(node):
         if block.get("type") in PROSE_TYPES and isinstance(block.get("content"), str):
@@ -452,6 +652,30 @@ def main():
     elif not loc_hits:
         print("  every third-person pronoun has somebody named or roled ahead of it\n")
 
+    bad_events, unpinned_days = unearned_events(game)
+    if bad_events:
+        print(f"  {len(bad_events)} line(s) about an event the player was never given")
+        print("  A CLAIM THE STATE CANNOT BACK — nothing on this route says it happened\n")
+        for cid, nid, phrase, why, line, in_pool in bad_events:
+            mark = "  <-- IN A block_pool, WHICH CAN NEVER BE GATED" if in_pool else ""
+            print(f"    \"{phrase}\"  {cid} / {nid}{mark}")
+            print(f"           {why}")
+            print(f"           {line}")
+        print()
+    else:
+        print("  every line about a past event has something in scope that proves it\n")
+
+    if unpinned_days:
+        print(f"  {len(unpinned_days)} line(s) name a DAY the gate never recorded "
+              f"— NOT defects, a list to eyeball")
+        print("  The event is gated. The day is the other half: a meter counts THAT she")
+        print("  came in late, never WHICH NIGHT. If the state cannot name the day,")
+        print("  neither can the character.\n")
+        for cid, nid, phrase, why, line, in_pool in unpinned_days:
+            print(f"    \"{phrase}\"  {cid} / {nid}")
+            print(f"           {line}")
+        print()
+
     rows = verbless(game)
     if rows:
         opening = [r for r in rows if r[0] == "canvas_opening"]
@@ -468,10 +692,12 @@ def main():
             print(f"    … and {len(rest) - 12} more")
         print()
 
-    print("  A LIST, NEVER A SCORE. Fragments are legitimate writing. What is not")
-    print("  legitimate is a sentence the reader cannot resolve — see process/README.md §5a")
-    print("  for the three forces that produce these, and §5b for the ladder that fixes them.\n")
-    return 1 if (hits or loc_hits) else 0
+    print("  A LIST, NEVER A SCORE. Fragments are legitimate writing, and so is a weekday")
+    print("  the game actually declares — her shifts really are Tuesday and Sunday. What is")
+    print("  not legitimate is a sentence the reader cannot resolve, or an event they were")
+    print("  never given. See process/README.md §5a for the three forces that produce these,")
+    print("  and §5b for the ladder that fixes them.\n")
+    return 1 if (hits or loc_hits or bad_events) else 0
 
 
 if __name__ == "__main__":
