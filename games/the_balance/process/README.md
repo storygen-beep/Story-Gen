@@ -406,17 +406,33 @@ was crossed anyway, which is what a boundary with no instrument behind it does.
 `venv/bin/python games/the_balance/process/readable.py` — **a list, never a score**, same contract as
 `joints.py` and `tokens.py`. It refuses to score compression, because `register.md:1041-1043` measured
 fragment density across the field and **refused a threshold** (5.3%–58.6%); fragments are legitimate
-writing. It finds two things that are *facts* instead:
+writing. It finds three things that are *facts* instead:
 
-- **A pronoun with nothing to point at** — gender-aware, which is the whole point: *"your mum"* is
-  present on screen one and is exactly who *"he"* is not. Canvases with an `npc` on their trigger are
-  exempt, because the player clicked that person's name to get in.
-- **Short sentences carrying no finite verb**, one-shot screens first. Approximate by design and
+- **A · a pronoun with nothing to point at** — gender-aware, which is the whole point: *"your mum"*
+  is present on screen one and is exactly who *"he"* is not. Canvases with an `npc` on their trigger
+  are exempt, because the player clicked that person's name to get in.
+- **B · short sentences carrying no finite verb**, one-shot screens first. Approximate by design and
   printed for a human, never judged.
+- **C · a line about an event the player was never given** — *"the thing on Tuesday"*, *"you know
+  which one"*, *"You were in late Tuesday"* — with nothing in scope that proves it happened. This is
+  A one level out: a pronoun points at a **person**, this points at an **event**.
 
-It is regression-tested against the bug that caused it: run it with
-`--toml <(git show 5f8424a:games/the_balance/toml_phases/7_final_game.toml)` and it must flag
-`canvas_opening / wake`. **A check that cannot catch the defect it was written for is decoration.**
+**What makes C usable is what it refuses to flag.** A weekday on its own is not a hit — her shifts
+really are Tuesday and Sunday, Friday really is the payment. It wants a reference to a *specific past
+occasion*, and it clears one three ways: a **flag** (the thing is recorded), a **trait** (a meter can
+encode an occurrence — `attend_3 < 40` means she really did skip it), or an **exact schedule** (a
+canvas that fires only on Friday may say *"on a Friday"*). Three phrases are not clearable by a meter
+at all, because they claim the player **remembers** — *"you know which one"*, *"the thing on"*, a bare
+*"what happened"*. No threshold establishes a memory. And a second, softer list catches what gating
+alone misses: **the event is proved but the DAY is not**.
+
+⚠️ `opening_done` counts as **no gate**. It is set on screen three and never unset, so a canvas gated
+only on it is ungated for this purpose.
+
+Each check is regression-tested against the bug that caused it — see the file's own docstring for the
+two commands. Check A must flag `canvas_opening / wake` at `5f8424a`; check C must find **five** at
+`1c9837c` and **zero** at HEAD. **A check that cannot catch the defect it was written for is
+decoration.**
 
 ---
 
