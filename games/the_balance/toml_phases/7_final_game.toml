@@ -318,6 +318,25 @@ flagEffects = [
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
+  # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
+  # max_triggers_per_day on a canvas that carries an `npc` does not spend the act,
+  # it deletes the person: Cara sits at that table until half two and Sam until
+  # two, and one click used to remove their portraits for the rest of it. The cap
+  # moved onto the paying choice. engine.md §28.2 — a flag read `is_false` and
+  # cleared but never SET is a cap that never closes, and nothing in the toolchain
+  # objects, so these two lines and the setters have to stay in step.
+  { targetType = "player", flag = "cara_today", op = "unset" },
+  { targetType = "player", flag = "sam_today", op = "unset" },
+  # The two rooms that used to hold nobody. `sofa_today` is shared by BOTH front
+  # room canvases — the solo hour and @nate's hub — so it is one hour on that sofa
+  # a day whichever way she sits down.
+  { targetType = "player", flag = "tasha_today", op = "unset" },
+  { targetType = "player", flag = "sofa_today", op = "unset" },
+  # The quad pair. Their caps came OFF the trigger and back on as choice flags —
+  # taking them off outright made gates.py "the climb is paid for" fail, because
+  # `crowd_standing` gates content at 10 and became free to reach.
+  { targetType = "player", flag = "paige_today", op = "unset" },
+  { targetType = "player", flag = "bree_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
@@ -2373,11 +2392,16 @@ id   = "union_cara"
 name = "Sit with Cara"
 description = "An hour that buys nothing the game can count. Her lines read rest and clean, which is how those two get spoken instead of displayed."
 
+# ⚠️ NO max_triggers_per_day, AND THAT IS THE POINT. A cap on the TRIGGER does not
+# spend the hour, it deletes Cara: she is scheduled at that table until half two,
+# and one click used to remove her portrait from the screen while she was still
+# sitting there. The cap now lives on the paying choice as `cara_today`, cleared in
+# [engine.daily_tick]. Same throttle, exactly one hour a day, and she stays in the
+# room. engine.md §28; process/presence.py is the check.
 [canvases.trigger]
 location      = "the_union"
 npc           = "npc_cara"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 5
 is_active     = true
 
@@ -2430,13 +2454,26 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
+# ⚠️ THE FLAG GOES ON THE CHOICE, NEVER ON A NODE EXIT — engine.md §28.1. A choice
+# runs flagEffects before advanceTime; a node exit runs advanceTime first, and
+# advanceTime rolls the day inside itself, so a cap written on an exit that crosses
+# midnight locks the rung out of the FOLLOWING day, silently. Measured in off_season.
 [[canvases.nodes.exit_block.choices]]
 text       = "Stay the hour."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 60
-effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+show_when_locked = true
+locked_text = "You have had your hour. She would give you another one and you do not have it."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cara_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "cara_today", op = "set" }]
 
+# The brush-off is deliberately NOT capped. It costs her the relation and it walks
+# her out of the room, so repeating it is its own punishment — and it is what keeps
+# a free, unconditional door on this screen once the hour is spent.
 [[canvases.nodes.exit_block.choices]]
 text       = "Say you've got a shift."
 targetType = "location"
@@ -2453,11 +2490,13 @@ id   = "sam_talks"
 name = "Talk to Sam"
 description = "One conversation. Not a climb yet — the cast page is explicit that in the first build he is talking and that is all."
 
+# ⚠️ No max_triggers_per_day — the cap is on the choice, as `sam_today`. Same
+# reason as Cara above: he is at that table until two and the trigger cap used to
+# take him off the screen for the rest of it.
 [canvases.trigger]
 location      = "the_union"
 npc           = "npc_sam"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 4
 is_active     = true
 
@@ -2486,8 +2525,15 @@ text       = "Stay a bit."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 30
-effects = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+show_when_locked = true
+locked_text = "You already stayed. Staying twice is the sort of thing he would notice."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sam_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "sam_today", op = "set" }]
 
+# Unconditional, and it stays that way — this is the free door on a spent day.
 [[canvases.nodes.exit_block.choices]]
 text       = "Go. You've got the bus."
 targetType = "location"
@@ -5175,11 +5221,23 @@ id   = "paige_is_nice"
 name = "Paige"
 description = "She is lovely to your face, every time, and she lets Bree do it anyway. Costs nothing, gives nothing, and is worse than being sneered at."
 
+# ⚠️ NO max_triggers_per_day, AND NO CHOICE FLAG EITHER. She is on that wall from
+# ten until two and the trigger cap used to take her off the screen after one
+# click. Nothing replaced it, because the cap was never holding anything shut:
+#   · `crowd_standing` is read SEVEN times in this game and all seven are the same
+#     `gte 10` threshold, so once it is crossed the meter is inert — climbing it
+#     further buys nothing.
+#   · `npc_paige.relation` is read by no condition anywhere.
+#   · The choices cost ten minutes each, and the clock is the thing she is short
+#     of. An afternoon spent on this wall is an afternoon gone.
+# And the day flag could not have gone on the second choice regardless: its gate
+# is an OR, the evaluator takes one flat `items` list with one `logic`
+# (v2.py:4037-4039), and there is no nesting — so an AND cap cannot be added
+# without deleting the reputation route into it.
 [canvases.trigger]
 location      = "the_quad"
 npc           = "npc_paige"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 3
 is_active     = true
 
@@ -5228,8 +5286,27 @@ text       = "Take it at face value."
 targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 10
-effects = [{ targetType = "npc", npcId = "npc_paige", trait = "relation", op = "add", value = 2 }]
+show_when_locked = true
+locked_text = "You have already been decent at her once today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "paige_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "npc", npcId = "npc_paige", trait = "relation", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
 
+# ⚠️ TWO CHOICES FOR ONE ACT, AND THE ENGINE LEAVES NO OTHER SHAPE. The day cap
+# has to be ANDed onto the standing gate, and `triggerConditionsSatisfied` takes one
+# flat `items` list with ONE `logic` (v2.py:4037-4039) — there is no nesting, so
+# `flag AND (crowd OR reputation)` cannot be written as a single condition. Folding
+# the OR into an AND would delete the reputation route, and that route is authored
+# forward: `reputation` starts at 5 and has exactly ONE source in the build
+# (`dare_2_offer` +6), so it tops out at 11 and every `gte 20` read is waiting on a
+# later release. So: one choice per route, both capped by the same flag. Only the
+# crowd_standing one shows when locked, so today the player sees exactly one.
+#
+# ⚠️ AND THE CAP IS NOT OPTIONAL. Taking it off the trigger without replacing it
+# made `gates.py` "the climb is paid for" fail — `crowd_standing` gates content at
+# 10 and became reachable with no cost, no cap and 20 minutes of game time.
 [[canvases.nodes.exit_block.choices]]
 text       = "Say you know what she does after."
 targetType = "location"
@@ -5237,22 +5314,46 @@ locationId = "the_quad"
 time_progression_minutes = 10
 show_when_locked = true
 locked_text = "Not to her. Not with nobody behind you."
-conditions = { version = "1.0", logic = "OR", items = [
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "paige_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+] }
+effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
+
+# The reputation route. Hidden, not shown-locked — see above.
+[[canvases.nodes.exit_block.choices]]
+text       = "Say you know what she does after."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "paige_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
 ] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
+
+# Unconditional — the free door on a spent day. Both of Paige's paying choices
+# carry the cap, so without this the screen would have no way off it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her get on with it."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
 
 [[canvases]]
 id   = "bree_takes_it_home"
 name = "Bree"
 description = "She is in @nate's year. What happens on this quad is at the dinner table tonight, and that is how a dare reaches the house without anybody writing a new room for it."
 
+# ⚠️ No max_triggers_per_day — same measurement as `paige_is_nice` above, and the
+# same OR-gate that cannot carry an AND cap. "Say nothing." is unconditional and
+# stays that way: it is the free door on this screen.
 [canvases.trigger]
 location      = "the_quad"
 npc           = "npc_bree"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 3
 is_active     = true
 
@@ -5298,6 +5399,19 @@ targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
 
+# ⚠️ TWO CHOICES FOR ONE ACT, AND THE ENGINE LEAVES NO OTHER SHAPE. The day cap
+# has to be ANDed onto the standing gate, and `triggerConditionsSatisfied` takes one
+# flat `items` list with ONE `logic` (v2.py:4037-4039) — there is no nesting, so
+# `flag AND (crowd OR reputation)` cannot be written as a single condition. Folding
+# the OR into an AND would delete the reputation route, and that route is authored
+# forward: `reputation` starts at 5 and has exactly ONE source in the build
+# (`dare_2_offer` +6), so it tops out at 11 and every `gte 20` read is waiting on a
+# later release. So: one choice per route, both capped by the same flag. Only the
+# crowd_standing one shows when locked, so today the player sees exactly one.
+#
+# ⚠️ AND THE CAP IS NOT OPTIONAL. Taking it off the trigger without replacing it
+# made `gates.py` "the climb is paid for" fail — `crowd_standing` gates content at
+# 10 and became reachable with no cost, no cap and 20 minutes of game time.
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell her to use her own words, then."
 targetType = "location"
@@ -5305,11 +5419,26 @@ locationId = "the_quad"
 time_progression_minutes = 5
 show_when_locked = true
 locked_text = "Nobody here is on your side. It would only give her more of it."
-conditions = { version = "1.0", logic = "OR", items = [
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "bree_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
+] }
+effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "bree_today", op = "set" }]
+
+# The reputation route. Hidden rather than shown-locked, so the two never render
+# as a pair — today it cannot fire at all.
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her to use her own words, then."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "bree_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
 ] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "bree_today", op = "set" }]
 
 # --- DINNER · the one hour nothing can be avoided ---------------------------
 # the_house_day.md. Everyone at one table on the nights her mum is off the ward.
@@ -5610,6 +5739,574 @@ conditions = { version = "1.0", logic = "OR", items = [
   { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
 ] }
 effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+
+# =============================================================================
+# THE TWO ROOMS THAT HELD NOBODY
+#
+# LO played the 2026-09-16 build, saw Tasha's face on her bedroom door, walked in,
+# and found an empty room. The door was not lying: the nav card and the threshold
+# read presence from the SCHEDULE alone (setup.getNpcsPresentAtLocation,
+# v2.py:5056), while the portrait grid inside the room also wants a selectable
+# canvas (renderNpcPortraits, v2.py:5222). Both rooms below had zero canvases of
+# any kind, so both people were permanently un-clickable in rooms their own
+# timetable put them in.
+#
+# ⚠️ THESE ARE HUBS, AND A HUB CARRIES NO max_triggers_per_day. A cap on a trigger
+# that also carries an `npc` does not spend the act — it deletes the person. The
+# cap lives on the paying CHOICE, as a `_today` flag cleared in
+# [engine.daily_tick], which is the only shape that works and the only one the
+# engine documents (engine.md §28, §28.1). vesper carries 14 NPC surfaces and
+# vesper_two 16, and not one of the 30 uses a trigger day-cap. This game used one
+# on ten of eleven.
+#
+# ⚠️ requires_npc IS NEW TO THIS GAME and is the presence gate proper: read at
+# v2.py:11877, emitted :11911, enforced in setup._npcPresentForCanvas
+# (v2.py:4820-4828) whose catch returns FALSE. No NPC in the room, no hub. It is
+# used INSTEAD OF a [[canvases.trigger.schedules]] block, not alongside one —
+# vesper_two carries both, which duplicates the person's own timetable and can
+# drift from it silently. Here the hub's hours ARE the schedule rows.
+#
+# ⚠️ Neither room is a crude surface and neither must become one. CARRIED.md:203
+# puts Tasha's explicit register in the BATHROOM and Nate's in HIS ROOM. Tasha's
+# room is clothes, advice and being noticed; the front room is the sit-down.
+#
+# The check that catches the next one is process/presence.py.
+# =============================================================================
+
+# --- TASHA'S ROOM · four o'clock --------------------------------------------
+# the_house_day.md:22, verbatim: "Tasha home, her lights on, her door open |
+# clothes, advice she didn't ask for, and somebody who notices what she's wearing".
+# the_cast.md:35-38: she wants an audience, she gives clothes and advice that is
+# not wrong, and she says no by laughing. She CANNOT out her — she does not know
+# anything, and she is an example rather than a threat.
+#
+# ⚠️ FIRST RUNG ONLY. DECISIONS.md:109 names Tasha as one of eight climbs and :110
+# lists three written ladders, none of them hers. process/README.md §6 item 5: the
+# pull toward authoring a hub in its finished state on day one is documented
+# behaviour, not carelessness. This is the meeting-height version and it is meant
+# to look unfinished.
+#
+# ⚠️ Tasha is NOT renameable (CARRIED.md:265) — she is written as "Tasha".
+# @gil and @nate are, and every line about them uses the token.
+
+[[canvases]]
+id   = "hub_tasha_room"
+name = "Tasha"
+description = "Portrait hub @ tasha_room. Her wardrobe, her lights, and the advice she gives whether or not it was asked for. No day cap on the trigger — the cap is `tasha_today`, on the choices."
+
+[canvases.trigger]
+location      = "tasha_room"
+requires_npc  = "npc_tasha"
+npc           = "npc_tasha"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her lights are on"
+
+# ⚠️ POOLED, because this screen is re-entered every afternoon of the game.
+# process/README.md §6 item 4 — a repeatable surface written as one paragraph is a
+# defect here, and block_pool has 0 uses across every v2 game.
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Her door is open because it is always open. She is sat on the floor against the bed with the wardrobe hanging over her, going through a rail of things she has already decided about." },
+  { type = "paragraph", content = "The lights are on around the mirror and the big light is off. No other room in this house has had a choice made about it. She looks up before you have knocked." },
+  { type = "paragraph", content = "There is a pile on the bed that is going out with her and a pile on the chair that is not. She moves things between them while she talks, but she never stops talking." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Come in, don't hover. Hovering is a thing you do and I have been meaning to say." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Right, sit. I want to say something and you are not going to like it, and I am going to be right." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "@player. That is the third day in that top. I am not being funny, I am telling you because nobody else will." },
+]
+
+# ⚠️ ONE IF/ELSEIF CHAIN — adjacent [group] blocks MERGE (CARRIED.md:260-262), and
+# that is the right behaviour here. She says the most pressing thing, not three
+# things. The order is the priority: the week he is on the landing, then how late
+# she has been, then nothing in particular.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "What is wrong with @nate. He has been up and down that landing all week like he is waiting for the post." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "You were in late. I heard the door. I am not @gil, I do not care, I am just saying I heard it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Everyone at this house acts like going out is a thing you have to earn. It is not. You just go." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "I got these off a girl at work for nothing because I asked. That is the whole thing. People hand you stuff if you ask." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ The cap is here, not on the trigger, and BOTH rungs share the flag — one hour
+# of Tasha a day. engine.md §28.1: a choice runs flagEffects BEFORE advanceTime,
+# so a cap set here survives a midnight roll; set on a node exit it would lock the
+# rung out of the following day, silently.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her pick something out for you."
+targetType = "node"
+nodeId     = "hub_tasha_room.lent"
+show_when_locked = true
+locked_text = "She has done you once today. Twice in a day is a thing she would tell people about."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and let her talk."
+targetType = "node"
+nodeId     = "hub_tasha_room.talk"
+show_when_locked = true
+locked_text = "You have had the advice. There is only so much of it in one afternoon."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_today", op = "set" }]
+
+# Unconditional, and it stays that way — the free door on a spent day.
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "node"
+nodeId     = "hub_tasha_room.done"
+
+[[canvases.nodes]]
+id   = "lent"
+name = "Off the rail"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She has you stand where the mirror is and she holds two things against you without asking, and puts one back. What she hands over is better than anything you own and she does not make a thing of it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_tasha" }
+content = "Keep it. I have got three. And do not wear it round the house, that is a waste of it."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "She gave it away in nine seconds and it did not cost her anything to do. That is the part you keep turning over on the way back to your room."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it with you."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "tasha_room"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# The flag a later release reads — she has been dressed by Tasha once, and the
+# campus is where that gets noticed. Nothing reads it yet, on purpose.
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_lent"
+op         = "set"
+
+[[canvases.nodes]]
+id   = "talk"
+name = "Advice you did not ask for"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "You say sorry before you ask for anything. Watch yourself do it. Then stop, and see what happens. Nothing happens." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Money is not the problem in this house. Asking is the problem in this house. You have never once asked @gil for anything." },
+  # ⚠️ This said "where they need you on a Saturday" and readable.py's check C
+  # flagged it: a named day inside a block_pool, which can never be gated, so it
+  # can fire on a morning that has no Saturday behind it. The day was decoration —
+  # the advice is about being needed, not about which day. README §5b.
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Do not do the job where they are nice to you. Do the job where they need you and nobody else will do it. Being needed is the whole of it." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She is not wrong and she has never once been wrong, and she says all of it lying back on the bed with one shoe on, like it cost her nothing to work out and it probably did not."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the landing."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "tasha_room"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "done"
+name = "Her door"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She is already back in the wardrobe before you are out of the door, still talking, and it takes her a second to notice the room is empty."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "tasha_room"
+
+# --- THE FRONT ROOM · seven to ten ------------------------------------------
+# the_house_day.md:25: "Nate on the sofa with the TV. Tasha upstairs. Gil in the
+# garage | the cheap hour that costs nothing but time — and the only one where
+# Nate is somewhere she can sit down". And :76, under "What it hands to the steps
+# after it": "the sofa hour with Nate is the only place in the house they sit down
+# together, AND NOTHING USES IT". That line is what this section closes.
+#
+# v2_state.json board.needs.rest already declared the surface — "her bed at
+# her_room; an hour on the sofa at the_front_room" — and no canvas implemented it,
+# so `sleep` was the only thing in the game that restored rest.
+#
+# ⚠️ TWO CANVASES, ON PURPOSE, because the engine renders them in two different
+# buckets. A canvas carrying an `npc` renders ONLY as a portrait and only while
+# that person is scheduled in the room; a canvas without one renders as a solo
+# activity link (v2.py:5367 skips anything with an npcId). One canvas cannot be
+# both, so a room that needs a person AND a thing to do without them needs two.
+# They share `sofa_today`: one hour on that sofa a day, whichever way she sits down.
+#
+# ⚠️ THIS IS NOT NATE'S ARC AND MUST NOT TOUCH IT. His climb is the door at
+# nate_room — walks in, backs out, walks in again (CARRIED.md:221-223) — gated on
+# `nate_seen is_false`, and the_two_doors.md:70-75 holds the first build to the
+# walk-in with no choice offered. The front room is the sit-down: rest, crossing
+# him, and being needled in front of the TV. His crude register is his room
+# (CARRIED.md:203), never here.
+
+[[canvases]]
+id   = "sofa_hour"
+name = "An hour on the sofa"
+description = "Solo. The rest surface board.needs.rest declared and nothing implemented — sleep was the only fill in the game. Bands on whether @nate is on it."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+# ⚠️ THE RULE GOES ON THE HOST, NOT ON THE WALK-IN. gates.py:3272-3283 counts
+# substitutions off the host canvas's own trigger and the engine reads them the
+# same way, so a rule written on the substitute is invisible to both. `chance` is
+# a FLOAT IN [0.0, 1.0] — 45 fails the build with "must be a float in [0.0, 1.0]".
+# `nate_sits_down` carries requires_npc, so it cannot fire on an evening he is out.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "nate_sits_down"
+chance           = 0.45
+
+[[canvases.nodes]]
+id   = "base"
+name = "The sofa"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The TV is on for whoever is in the room and nobody has chosen it. The sofa takes your weight the way it has taken everybody's, and the window behind it has the street going past in it." },
+  { type = "paragraph", content = "You sit down without meaning to stay, but the room does the rest. It is warm, the light is off, and there is nothing in here that anybody wants from you." },
+  { type = "paragraph", content = "There is a plate on the arm that is not yours and a blanket over the back that is. This is the room you cross to get anywhere, and sitting down in it feels like getting away with something." },
+]
+
+# ⚠️ ONE IF/ELSEIF CHAIN — adjacent [group] blocks merge. He is on the sofa or he
+# is not, and the first branch is the one that matters.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_front_room", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate has the end with the remote and he does not move up. You take the other end. Neither of you says anything about it, but neither of you leaves either. That is the whole hour." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Nobody else is in. The house does the noises it does when it is empty, and you can hear @gil out in the garage doing something to the car that does not need doing." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay the hour."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+show_when_locked = true
+locked_text = "You have had your hour in here today. Any more of it and it stops being rest."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sofa_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "add", value = 15, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "sofa_today", op = "set" }]
+
+# Unconditional — the free door on a spent day.
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "hub_nate_sofa"
+name = "Nate"
+description = "Portrait hub @ the_front_room, evenings. He needles her in front of the TV — the_house_day.md:48, the same move Bree makes on the quad. No day cap on the trigger; the sit-down shares `sofa_today` with the solo canvas."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_nate"
+npc           = "npc_nate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "He has the remote"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "He is along the sofa with his feet up on the arm and the remote on his chest, and he does not look over when you come in. He knows exactly how long you have been stood there." },
+  { type = "paragraph", content = "The TV is on something he is not watching. He has his phone in the other hand and he is doing both badly. He shifts a foot when you get near the sofa, but he is not making room." },
+  { type = "paragraph", content = "He got in before you and he has taken the whole thing, the way he takes the bathroom and the table. It is not a room he wants, but it is a room he wants you to have to ask for." },
+]
+
+# ⚠️ ONE CHAIN. The week he is on the landing first, then what Bree has taken
+# home — being_known.md:42, she is in his year, so the quad reaches this sofa —
+# then the ordinary version.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are up and down that landing at all hours. I hear all of it. I am just saying I hear it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Bree says you are in with them now. She thought it was funny. I said it would not last and she thought that was funny too." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "There is a chair. There has always been a chair. I do not know why we do this every night." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Did you do the bins. He will ask me and I am not lying for you again, because I did not lie for you the first time." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit at the other end of it anyway."
+targetType = "node"
+nodeId     = "hub_nate_sofa.sat"
+show_when_locked = true
+locked_text = "You have had your hour in here today, and a second one would be a point you were making."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sofa_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "sofa_today", op = "set" }]
+
+# Unconditional — the free door.
+[[canvases.nodes.exit_block.choices]]
+text       = "Cross the room."
+targetType = "node"
+nodeId     = "hub_nate_sofa.done"
+
+[[canvases.nodes]]
+id   = "sat"
+name = "The other end"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take the other end and he does not move his feet, so you sit round them. He does not put his phone down and he does not change what is on, and after about ten minutes he stops pretending to look at either."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "He watches you in the window rather than turning his head, because the street is dark and the glass has the room in it. You let him. Neither of you has said anything for twenty minutes and the hour goes anyway." },
+  { type = "paragraph", content = "Somewhere in it he moves his feet off the arm and onto the floor, which puts him upright and a foot closer, and he does it like it was about the cushion." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He wants you out of this house and he will not get up off this sofa, and both of those are true at once and have been since June."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up before he does."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "rest"
+op         = "add"
+value      = 15
+clamp      = true
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "done"
+name = "Through"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You go through and he puts his feet back up before you are out of the room."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "On."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_front_room"
+
+# --- THE WALK-IN ON THE SOFA HOUR -------------------------------------------
+# `gates.py` "the walk-in floor" went 7/7 to 7/8 the moment `sofa_hour` existed:
+# a room where she does a solo thing with somebody scheduled in it has to carry a
+# walk-in, or she is alone in a room that contains another person. the-surfaces.md
+# R3 — ONE canvas, substitution_only = true, [group] bands on the axis the odds
+# ride. Not a scene.
+#
+# ⚠️ substitution_only means it NEVER renders a portrait and never appears as a
+# link. It replaces `sofa_hour` on entry. It also MUST declare a location:
+# getCanvasById indexes only location-bound canvases (v2.py:3177), so a triggerless
+# substitution target silently never fires.
+#
+# It restores the hour exactly as the plain sofa would — the walk-in costs her the
+# room, not the rest. Same `sofa_today` flag, set on the exit's own config.
+
+[[canvases]]
+id   = "nate_sits_down"
+name = "He comes in and sits down"
+description = "Substitution on the sofa hour. @nate takes the other end while she is already on it. The hour restores exactly as it would have; what it costs is that it stops being her room."
+
+[canvases.trigger]
+location          = "the_front_room"
+npc               = "npc_nate"
+requires_npc      = "npc_nate"
+is_repeatable     = true
+substitution_only = true
+priority          = 4
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The other end"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You have been on it twenty minutes when @nate comes through with a plate and stops. He looks at the sofa and he looks at you on it, and then he sits down on the other end anyway." },
+  { type = "paragraph", content = "The door goes and it is @nate, and he is in the room before he has seen you. He does not go back out. He takes the far end and puts the TV on something neither of you picked." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are in here now as well. There is nowhere in this house you are not." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "I am not moving, so do not start." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You can stay. I am not going to talk to you, but you can stay." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Neither of you gets up for the rest of it. He watches the TV and you watch the window, and the reflection has the pair of you in it at opposite ends of the same sofa, not moving."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay the hour anyway."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "rest"
+op         = "add"
+value      = 15
+clamp      = true
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "sofa_today"
+op         = "set"
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 8_phone.toml
