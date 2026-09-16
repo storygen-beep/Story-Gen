@@ -1888,7 +1888,7 @@ name = "The timetable"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The timetable is a printed sheet behind scratched plastic and the times on it stopped being right a while ago. The bus comes when it comes. The only other way is your own feet."
+content = "The timetable is a printed sheet behind scratched plastic, and the times on it stopped being right a while ago. The bus comes when it comes. Walking it takes an hour and costs nothing but the hour."
 
 [canvases.nodes.exit_block]
 type = "choices"
