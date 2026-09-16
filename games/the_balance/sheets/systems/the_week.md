@@ -39,7 +39,7 @@ page now — and so is what that costs her.
 |---|---|
 | **Gil** | kitchen until eight, back by six, and in the garage late |
 | **Lynn** | nights on the ward three times a week. Home the other nights, asleep by ten |
-| **Nate** | a senior at her college — out most weekdays, home evenings and odd hours |
+| **Nate** | the year above her at the same college — out most weekdays, home evenings and odd hours |
 | **Tasha** | out until four most days, then in. Out again on Friday and Saturday nights |
 
 So the house is at its quietest **weekday afternoons**, and at its fullest **Sunday**.
