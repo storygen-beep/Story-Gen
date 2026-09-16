@@ -794,6 +794,16 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    only whether an NPC has *any* bound canvas anywhere and *any* schedule row (`gates.py:5282-5287`);
    Tasha passed it on a `substitution_only` canvas that can never render a portrait. The check that
    does see it is `process/presence.py`, and widening the gate would be a skill edit — see §0.
+   ⚠️ **`time_of_day` is how ONE hub serves two schedule rows with different content.**
+   `v2.py:4272-4277`, delegating to `setup.isCurrentTimeSlot` so the overnight wrap behaves exactly
+   as an NPC schedule does. It is a **window re-read on every access, not a latch**, and an omitted
+   `end_time` means one hour. @gil sits at the kitchen table 06:30-08:00 and again 18:00-21:00, and
+   `hub_gil_kitchen` covers both from one canvas because `requires_npc` makes his rows the canvas's
+   hours — a `[[canvases.trigger.schedules]]` block would duplicate them and could drift.
+   ⚠️ **A second repeatable canvas on the same NPC + location emits a build WARNING and is still
+   correct** when priority separates them: `friday_payment` at 11 beats `hub_gil_kitchen` at 5, so
+   Friday opens on the money and the hub takes the portrait back once it is spent. Same shape as
+   `hub_tasha_bath` / `loop_tasha_bath`. Verify live, then leave the warning alone.
    ⚠️ **Two more ways a portrait never appears, both found the hard way.** The *selector*
    (`selectNpcPortraitCanvasesForLocation`, `v2.py:4718-4744`) does **not** check presence; the
    *renderer* does, after it (`v2.py:5281-5291`). So a canvas can be perfectly selectable and still
