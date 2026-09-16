@@ -835,7 +835,46 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    exempt from nothing in `readable.py`: the pronoun check excuses a canvas with an `npc` on its
    trigger, a rung has no trigger, so a rung opening on "She" flags — name her.
 
-12. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
+13. **A CANVAS HAS EXACTLY ONE HOME, and it is decided at build time.** `_get_return_location`
+   (`v2.py:13232`) turns the trigger location into `Location_<slug>` and every `destinationType =
+   "trigger"` exit returns there; the only alternatives are `specific` and `node`, both also
+   build-time constants. So **a scene that can happen in two places is two canvases**, never one
+   that roams — a roaming canvas would deposit the player in whichever room it was declared at, and
+   the travel intercept would then charge her the entry cost for a move she never made.
+   ⚠️ This is why the phone's Go Live app is a **launcher**, not a button. Each option names a
+   canvas; the engine resolves it at build time to `{passage, canvasId, locationId}` and the row is
+   live only where `$player.current_location` already equals that `locationId`. The location match
+   is not flavour — it is what makes the canvas's single return target, by construction, the room
+   she is standing in.
+   ⚠️ **A launcher option must run the selector before it offers the link.** A direct `Engine.play`
+   into a canvas node bypasses schedule, trigger conditions, `max_triggers_per_day`, `requires_npc`
+   and `is_active` — all of those live in JS selectors a canvas passage never calls. It does *not*
+   bypass costs; the cost gate is emitted into the passage itself (`v2.py:14035`). Call
+   `setup.isCanvasSelectable`, **not** `isCanvasValidForSelection` — the latter skips the daily cap
+   on purpose, and the passage does not enforce it either, so a once-a-day scene would replay all
+   day.
+   ⚠️ **A locked row has THREE reasons and needs three sentences.** Wrong place is the engine's to
+   write (it knows the room); *not yet* is the author's `locked_text`; *not now* is the canvas's own
+   `cooldown_message`. Collapsing them tells a player short on a meter to come back later, which is
+   a lie she can act on. Same failure as the stale "not yet" on a spent rung in item 11.
+   ⚠️ **Never render a gate with `formatCanvasConditions` in this game.** It prints a trait gate as
+   a number, and `exposure` / `corruption` / `reputation` are all `hidden = true` in
+   `[[traits.labels]]` precisely so the raw score never shows.
+
+14. **`hidden_from_location` is not `substitution_only`.** Both exclude a canvas from the room
+   screen, and they mean different things: `substitution_only` says *this is a Lane 3 substitution
+   target*, `hidden_from_location` says *this is reachable only through a declared door*. Reusing
+   the first for the second sends the next author hunting for the rule that fires it, and trips the
+   `substitution_only` + npc conflict warning at `template_import.py:4790`.
+   ⚠️ **It takes FIVE filters, not three.** The three pure selectors (`v2.py:4698`, `:4728`,
+   `:4759`) are the obvious ones, but `renderSoloActivities` and `renderNpcPortraits` each collect
+   their blocked/cooldown rows in an **inline loop with no such guard** — so a canvas carrying
+   `show_when_blocked` would still appear on its own room screen, greyed, with a reason.
+   ⚠️ **`substitution_only` itself is missing those two filters** (2026-09-17). No shipped game hits
+   it today, because no game pairs `substitution_only` with `show_when_blocked` or `costs`. Left
+   unfixed deliberately — it changes behaviour in games this pass did not touch, so it is LO's call.
+
+15. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 

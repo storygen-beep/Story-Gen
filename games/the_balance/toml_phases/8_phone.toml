@@ -4,20 +4,27 @@
 # ⚠️ FIRST 8_phone.toml IN THIS REPO. No game here has ever had one. The merger
 # has always known the filename (merge_toml_phases.py) and it merges LAST.
 #
-# ⚠️ ONE APP, AND EVERYTHING ON IT IS @cara's. the_cast.md: "she's also the other
-# end of the phone: the messages are hers." She is the only person who texts her
-# about anything but work.
+# ⚠️ TWO APPS, WHICH IS WHAT the_phone.md ALWAYS SAID: "Two things only: messages,
+# and a streaming app." The messages are all @cara's — the_cast.md: "she's also the
+# other end of the phone: the messages are hers." She is the only person who texts
+# her about anything but work.
 #
-# ⚠️ NO FEED AND NO POSTING BUTTON, on purpose. A social_feed `post_action` rolls
-# followers into a trait from a sidebar button that is live in every room — she
-# would earn followers on the bus, and the door being shut is the entire weight
-# of that scene. Going live stays a canvas in her room.
+# ⚠️ STILL NO FEED AND NO POSTING BUTTON, and the reason has not changed. A
+# social_feed `post_action` rolls followers into a trait from a sidebar button that
+# is live in every room — she would earn followers on the bus, and the door being
+# shut is the entire weight of that scene.
 #
-# ⚠️ The `custom` app type is UNUSABLE from TOML: the importer parses only id,
-# type, label, icon and post_actions, so `passage` is never read and a custom app
-# always falls through to the placeholder renderer. That is why the follower
-# count stays in the sidebar and why the stream's block reasons had to be fixed
-# inside that canvas instead of on a phone screen.
+# What changed is that a BUTTON is not the only thing a phone can hold. Going live
+# is a `launcher` app: every option names a canvas, and an option is live only where
+# that canvas lives. It pays nothing on this screen. It hands her to the scene, and
+# the scene charges the hour, the shower and the exposure exactly as it did when the
+# link sat on her bedroom wall.
+#
+# ⚠️ A CANVAS HAS EXACTLY ONE HOME, so a session in two places is two canvases, not
+# one that roams. The trigger location is also the passage the scene returns her to
+# (v2.py _get_return_location, resolved at build time). That is why `stream` keeps
+# `location = "her_room"` while carrying `hidden_from_location` — it still has a
+# room to come back to, it is just no longer offered on that room's screen.
 #
 # ⚠️ Reply effects go through Number(eff.value || 0), so a random-range dict is
 # NaN here. Fixed numbers only on this file.
@@ -33,6 +40,41 @@ purchase_flag = "opening_done"
 id    = "messages"
 type  = "chat"
 label = "Messages"
+
+# --- the streaming app -------------------------------------------------------
+# her_meters.md is the rule this is checked against: "going further means she can
+# reach more — more places, more people, more hours. Never a bigger number."
+# Exposure's stated job there is "opens places and hours", and before this it
+# opened neither — 22 prose bands and two dice rolls, and not one door.
+#
+# ⚠️ EACH locked_text ANSWERS ONE STATE ONLY: not enough of her is out there yet.
+# The other two refusals are written elsewhere on purpose, because one line cannot
+# mean three things — that is the trap that put a stale "not yet" on a spent rung
+# of Tasha's ladder. "Not here — Your Room." comes from the engine, which knows
+# where the canvas lives. "Somebody is always in at this hour." is the canvas's own
+# cooldown_message.
+#
+# ⚠️ AND NO NUMBER IN ANY OF THEM. All three ascent meters are hidden = true in
+# [[traits.labels]] so the raw score never renders. A locked row reading
+# "Exposure 20+" would be the first number in the game.
+
+[[phone.apps]]
+id        = "golive"
+type      = "launcher"
+label     = "Go Live"
+no_answer = "Not from here. Not with this many people about."
+
+[[phone.apps.options]]
+text   = "Your room, door shut."
+canvas = "stream"
+show_when_locked = true
+locked_text = "Not tonight."
+
+[[phone.apps.options]]
+text   = "The one at work, with the lock."
+canvas = "stream_toilet"
+show_when_locked = true
+locked_text = "Not that. Not somewhere anybody could put a hand on the door."
 
 # --- 1 · she is still talking to you like September -------------------------
 

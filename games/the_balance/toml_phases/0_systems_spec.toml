@@ -310,6 +310,11 @@ flagEffects = [
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
+  # Which band the toilet payout screen shows. Set on the way in, read once on the
+  # way out, cleared here. `toilet_far_done` is the PERMANENT twin and must never
+  # appear in this block — it is what makes the first time in that room worth three
+  # points of exposure and every time after worth one.
+  { targetType = "player", flag = "toilet_far", op = "unset" },
   # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
   # max_triggers_per_day on a canvas that carries an `npc` does not spend the act,
   # it deletes the person: Cara sits at that table until half two and Sam until

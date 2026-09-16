@@ -276,18 +276,34 @@ class TemplateClothingRequirements:
 
 # -------- Phone System Data Shapes --------
 
-VALID_PHONE_APP_TYPES = {"chat", "social_feed", "gallery", "dating", "custom", "quests", "fast_jobs", "bank"}
+VALID_PHONE_APP_TYPES = {
+    "chat", "social_feed", "gallery", "dating", "custom", "quests",
+    "fast_jobs", "bank", "launcher",
+}
 
 
 @dataclass
 class TemplatePhoneApp:
     id: str
-    type: str  # "chat", "social_feed", "gallery", "custom", "quests"
+    type: str  # "chat", "social_feed", "gallery", "custom", "quests", "launcher"
     label: str = ""
     icon: str = ""  # Relative to video_folder, optional
     # doc 45 G2 — social_feed posting actions (selfie/lewd/nude analog).
     # Each: {label, corruption_min?, followers_min, followers_max, daily_cap?, counter_trait}
     post_actions: List[Dict[str, Any]] = field(default_factory=list)
+    # A "launcher" app is a DOOR, not a button: each option names a canvas, and
+    # tapping it leaves the phone and plays that canvas. The door screen on a
+    # location (Doc 73, setup.renderDoorOptions) is the same widget, so an option
+    # carries the same fields: {text, canvas, show_when_locked?, locked_text?}.
+    #
+    # WHY A DOOR AND NOT A BUTTON: a phone button is live in every room, so a
+    # button that pays would pay anywhere. An option is only live where its
+    # canvas lives, because a canvas has exactly one home — its trigger location
+    # is also the passage it returns the player to, resolved at build time.
+    options: List[Dict[str, Any]] = field(default_factory=list)
+    # Shown when no option on a launcher is offerable right now. The door screen's
+    # `no_answer` serves the same purpose: one short line beats an empty screen.
+    no_answer: str = ""
 
 
 @dataclass
@@ -682,6 +698,17 @@ class TemplateTrigger:
     # renderSoloActivities + selectAutoFireCanvasForLocation (PRD 25 §5.5).
     # Reachable ONLY as the target of another canvas's substitution rule.
     substitution_only: bool = False
+    # When True, this canvas keeps its trigger location — which is the passage it
+    # RETURNS the player to (v2.py _get_return_location) — but is never offered on
+    # that location's own screen. Reachable only through a declared door: a
+    # [[phone.apps]] launcher option, or another canvas that targets it.
+    #
+    # WHY NOT REUSE substitution_only: that flag means "this is a Lane 3
+    # substitution target", and the next author reading it on a phone-launched
+    # canvas would go looking for the rule that fires it. It also trips the
+    # substitution_only + npc conflict warning below. Same three selectors, two
+    # different authorial claims.
+    hidden_from_location: bool = False
     # Lane 2/3 NPC-presence gate (Phase A, 2026-05-14). The named NPC must be
     # co-located with the player per their declared [[npcs.schedules]].
     #
@@ -2025,6 +2052,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         if isinstance(sub, dict) and sub.get("target_canvas_id")
                     ],
                     substitution_only=bool(trig_def.get("substitution_only", False)),
+                    hidden_from_location=bool(trig_def.get("hidden_from_location", False)),
                     # Phase A — Lane 2/3 NPC presence gate. AND-gates with all
                     # other trigger conditions; engine resolves NPC location
                     # against [[npcs.schedules]] at fire-time.
@@ -2744,6 +2772,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     label=_require_str(a_raw, "label", ""),
                     icon=_require_str(a_raw, "icon", ""),
                     post_actions=list(a_raw.get("post_actions") or []),
+                    options=[o for o in (a_raw.get("options") or []) if isinstance(o, dict)],
+                    no_answer=_require_str(a_raw, "no_answer", ""),
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -4372,6 +4402,13 @@ def validate(template: GameTemplate) -> List[str]:
 
     # ===== Story validation (optional) =====
     canvas_ids = {c.id for c in getattr(template, "canvases", [])}
+    # A canvas's trigger location is also the passage it returns the player to
+    # (v2.py _get_return_location), so a canvas without one has no home. The phone
+    # launcher validation below needs to know which those are.
+    canvas_without_trigger_location = {
+        c.id for c in getattr(template, "canvases", [])
+        if not (getattr(c, "trigger", None) and getattr(c.trigger, "location", ""))
+    }
     if template.starting_canvas and template.starting_canvas not in canvas_ids:
         errors.append(
             f"starting_canvas '{template.starting_canvas}' not found in canvases"
@@ -4501,6 +4538,56 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(
                         f"{owhere} is show_when_locked with no locked_text, and the "
                         f"location has no blocked_message to fall back to — a locked "
+                        f"row must say why"
+                    )
+
+    # ===== Launcher-app validation (phone) =====
+    # A launcher option is a door option that lives on the phone instead of on a
+    # threshold, so it is checked against the same rules — and it has to be checked
+    # HERE rather than in the phone block above, because `canvas_ids` is not built
+    # until this point and the comment above says not to rebuild that set locally.
+    if template.phone_enabled and template.phone:
+        for ai, app in enumerate(template.phone.apps):
+            if app.type != "launcher":
+                if app.options:
+                    errors.append(
+                        f"phone.apps[{ai}] '{app.id}' has options but type is "
+                        f"'{app.type}' — only a launcher app renders options"
+                    )
+                continue
+            if not app.options:
+                errors.append(
+                    f"phone.apps[{ai}] '{app.id}' is a launcher with no options — "
+                    f"it would render an empty screen"
+                )
+            for oi, opt in enumerate(app.options):
+                owhere = f"phone.apps[{ai}].options[{oi}]"
+                if not str(opt.get("text") or "").strip():
+                    errors.append(
+                        f"{owhere} has no text — it would render as a blank button"
+                    )
+                cid = str(opt.get("canvas") or "")
+                if not cid:
+                    errors.append(f"{owhere} needs a canvas to open")
+                elif cid not in canvas_ids:
+                    errors.append(
+                        f"{owhere} canvas '{cid}' not found in canvases"
+                    )
+                # A launcher option is only ever live where its canvas lives, so a
+                # canvas with no trigger location has no door and would be offered
+                # nowhere. Silent, and impossible to spot in a built game.
+                elif cid in canvas_without_trigger_location:
+                    errors.append(
+                        f"{owhere} canvas '{cid}' has no trigger location, so the "
+                        f"option could never be offered anywhere — give the canvas a "
+                        f"location, or drop the option"
+                    )
+                # The same rule the door screen enforces: a locked row must say why.
+                # The phone has no location blocked_message to fall back on, so the
+                # text is required outright.
+                if opt.get("show_when_locked") and not str(opt.get("locked_text") or "").strip():
+                    errors.append(
+                        f"{owhere} is show_when_locked with no locked_text — a locked "
                         f"row must say why"
                     )
 
@@ -6898,7 +6985,11 @@ def _assemble_project_metadata(project, template):
             "purchase_flag": phone.purchase_flag,
             "apps": [
                 {"id": a.id, "type": a.type, "label": a.label, "icon": a.icon,
-                 **({"post_actions": a.post_actions} if a.post_actions else {})}
+                 **({"post_actions": a.post_actions} if a.post_actions else {}),
+                 # Emitted only when non-empty so every game without a launcher
+                 # app produces a byte-identical payload.
+                 **({"options": a.options} if a.options else {}),
+                 **({"no_answer": a.no_answer} if a.no_answer else {})}
                 for a in phone.apps
             ],
             "conversations": [
@@ -7234,6 +7325,7 @@ def create_project_from_template(
                             # PRD 25 — Lane 3 dispatcher substitution
                             "substitutions": c.trigger.substitutions if c.trigger.substitutions else None,
                             "substitution_only": c.trigger.substitution_only if c.trigger.substitution_only else None,
+                            "hidden_from_location": c.trigger.hidden_from_location if c.trigger.hidden_from_location else None,
                             # L2-2 — Lane 2 anti-toggle cooldown (location slugs)
                             "entry_only_from": c.trigger.entry_only_from if c.trigger.entry_only_from else None,
                             # Phase A (2026-05-14) — Lane 2/3 NPC presence gate.

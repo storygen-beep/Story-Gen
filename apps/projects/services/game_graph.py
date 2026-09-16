@@ -327,6 +327,9 @@ def build_game_graph(
                             "substitution_only": c.trigger.substitution_only
                             if c.trigger.substitution_only
                             else None,
+                            "hidden_from_location": c.trigger.hidden_from_location
+                            if c.trigger.hidden_from_location
+                            else None,
                             "entry_only_from": c.trigger.entry_only_from
                             if c.trigger.entry_only_from
                             else None,
