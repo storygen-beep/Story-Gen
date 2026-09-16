@@ -224,6 +224,22 @@ def walk_crowd(page, rep):
     before = traits(page).get("dare_chain") or 0
     rep.check("the chain starts at nothing", before == 0, f"dare_chain = {before}")
 
+    # ⚠️ NOBODY TALKS ABOUT A DARE THAT HAS NOT HAPPENED. Bree's "knows, by the
+    # way" and Paige's "about the dare" used to be members of an unconditional
+    # block_pool, so either could be the first thing that character ever said —
+    # about an event the player had never seen. A pool cannot be gated
+    # (v2.py:15088), so they are group rungs now. Sampled, because a pool answers
+    # differently on every visit and one quiet visit proves nothing.
+    crowd_talk = set()
+    for _ in range(16):
+        play(page, "bree_takes_it_home")
+        crowd_talk.add(body(page))
+        play(page, "paige_is_nice")
+        crowd_talk.add(body(page))
+    rep.check("before a dare, nobody refers to one",
+              not any("knows, by the way" in b or "about the dare" in b for b in crowd_talk),
+              f"{len(crowd_talk)} screens sampled at dare_chain 0")
+
     # Offering is not doing. dare_1_offer sends her to the union; the chain, the
     # standing and the quiet week are all set on dare_1_do's exit.
     play(page, "dare_1_offer")
@@ -239,6 +255,17 @@ def walk_crowd(page, rep):
     rep.check("and it buys the quiet week",
               (traits(page).get("quiet_week") or 0) > 0,
               f"quiet_week = {traits(page).get('quiet_week')}")
+
+    # ...and once it HAS happened, the crowd has it. The other half of the gate:
+    # a rung that never fires is as wrong as one that always does.
+    stand_at(page, "the_quad")
+    after_talk = set()
+    for _ in range(16):
+        play(page, "bree_takes_it_home")
+        after_talk.add(body(page))
+    rep.check("after a dare, it reaches her brother's year",
+              any("knows, by the way" in b for b in after_talk),
+              f"{len(after_talk)} screens sampled at dare_chain {after}")
 
 
 def walk_house(page, rep):

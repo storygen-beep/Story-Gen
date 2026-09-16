@@ -528,6 +528,58 @@ Verified live under two choices: *"Your step dad paid"* and *"Your uncle paid"*.
 **So: strip a token off a label, put one into prose.** Before using a pronoun on an early screen,
 find its antecedent on that same screen. If there isn't one, the pronoun is the defect.
 
+### ⚠️ A NAMED DAY IS A CLAIM, AND THE GAME HAS TO BE ABLE TO BACK IT
+
+LO, 2026-09-16, reading the college scenes: *"What happened on Tuesday?? People are talking about it
+in college??"* Nothing had happened on Tuesday. Three characters referred to it anyway, on the first
+morning of the game.
+
+This is the **same defect as the dangling pronoun one section up**, one level out. A pronoun points at
+a person; *"the thing on Tuesday"* points at an **event**. Both fail the same way: the prose assumes a
+memory the player was never given.
+
+**The test.** For every specific a line names — a weekday, *"the thing on X"*, *"you know which one"*,
+*"what happened"* — ask: **can the state prove it?**
+
+- ✅ **Earned** — a standing fact the game declares. Her shifts *are* Tuesday and Sunday, Friday *is*
+  the payment, classes *are* Monday/Wednesday and Tuesday/Thursday. Say those days freely.
+- ✅ **Earned** — gated on the thing itself. Cara's *"Where were you Thursday?"* sits under
+  `attend_3 < 40`, so she really did miss it.
+- ❌ **Unearned** — a specific past event with no flag or trait behind it. *"He knows about Tuesday"*,
+  *"Neither of you says anything about Tuesday night"*, *"a Tuesday, and you know which one."*
+
+**And gating is only half of it — drop the invented day too.** @gil's dinner line was correctly gated
+on `home_after_ten >= 1`, and still said *"on Tuesday"*. The meter counts that she came in late; it
+has never recorded **which night**. If the state cannot name the day, neither can the character.
+
+#### The mechanism: `block_pool` cannot be gated, at any depth
+
+`block_pool` renders as `<<set _bp to random(0, N)>>` and an if/elseif chain of its members
+(`v2.py:15088`). **It reads no conditions.** All three leaking lines were pool members — which is why
+they could greet a player on day one.
+
+**The fix is a ladder with a pool inside each rung.** Consecutive `group` blocks merge into one
+`<<if>>/<<elseif>>/<<else>>` chain, a group with **no** conditions becomes the `<<else>>`, and a group
+renders its children through the same converter — so a pool nests inside a branch and keeps its
+variety:
+
+```toml
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
+] } }
+blocks = [ { type = "block_pool", blocks = [ ...the lines that need the event... ] } ]
+
+[[canvases.nodes.blocks]]
+type = "group"                       # no conditions — this is the <<else>>
+blocks = [ { type = "block_pool", blocks = [ ...the lines that are always true... ] } ]
+```
+
+⚠️ **Both halves get walked.** A rung that never fires is as wrong as one that always does, so
+`walks.py crowd` samples sixteen screens on each side of the gate — once at `dare_chain 0` to prove
+nobody mentions a dare, once after to prove somebody does. One visit proves nothing about a pool.
+
 ### ⚠️ A whole-game rate cannot see the screen that matters most
 
 `joints.py` reports per 1,000 words over ~7,200 words. The opening canvas is under 300 of them, so
@@ -622,7 +674,10 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
 3. **Also 0 of 27, already rejected:** undeclared · bursar · registrar · enrollment/enrolment ·
    assistantship · seminar · camgirl · livestream · laundromat · stockroom · carrel. `referrals` is
    0 of 27 too — legal in the ledger, never on a button.
-4. **`block_pool` has never been used by any v2 game** — 46 uses in `the_long_summer`, 14 in
+4. **`block_pool` cannot be gated, and that is how three lines about a Tuesday that never happened
+   shipped.** It is `random(0, N)` and nothing else (`v2.py:15088`) — no conditions, at any depth. A
+   pool member is a line that can fire on the first morning of the game. See §5b. And separately:
+   **`block_pool` has never been used by any v2 game** — 46 uses in `the_long_summer`, 14 in
    `under_one_roof`, 6 in `vesper`, 0 across every v2 game. This game's three arcs are where that
    stops. A repeatable surface written as one paragraph is a defect here.
 5. **The three arcs must stay arcs.** Nate's door, the master bedroom, the cafe floor — numbered

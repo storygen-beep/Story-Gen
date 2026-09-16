@@ -1177,7 +1177,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "Does your mum know about the room with the lamp in it?" },
-  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right. Not a guess — a Tuesday, and you know which one." },
+  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right, and it is not a guess. Somebody has described that room to him, and it is the room you sleep in." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1420,7 +1420,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, on a Tuesday, at four in the afternoon, and is gone before you can decide what that was." },
+  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, at four in the afternoon, and is gone again before you can decide what that was." },
 ]
 
 [[canvases.nodes.blocks]]

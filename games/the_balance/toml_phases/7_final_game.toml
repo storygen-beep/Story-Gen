@@ -2552,7 +2552,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "unknown" }, content = "Does your mum know about the room with the lamp in it?" },
-  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right. Not a guess — a Tuesday, and you know which one." },
+  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right, and it is not a guess. Somebody has described that room to him, and it is the room you sleep in." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -2795,7 +2795,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, on a Tuesday, at four in the afternoon, and is gone before you can decide what that was." },
+  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, at four in the afternoon, and is gone again before you can decide what that was." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -4052,7 +4052,7 @@ content = "Next week, then."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He counts the seventy-five anyway. Neither of you says anything about Tuesday night, because he does not know there is anything to say."
+content = "He counts the seventy-five anyway. Neither of you says anything about where the rest of it is coming from, because he does not know there is anything to ask."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -4432,13 +4432,33 @@ name = "Doorway"
 type    = "paragraph"
 content = "He comes through for the radio and stops in the doorway instead, with his cup, watching you do it. Not checking. Just there, for longer than getting a cup takes."
 
+# ⚠️ A LADDER, NOT A POOL, BECAUSE A POOL CANNOT BE GATED. block_pool renders as
+# `<<set _bp to random(0,N)>>` and nothing else (v2.py:15088) — no conditions, at
+# any depth. "You were in late Tuesday." used to sit in the pool below and could
+# fire on the first morning of the game, about a night that had not happened.
+# Consecutive groups merge into ONE if/elseif/else chain and a group with no
+# conditions becomes the `<<else>>`, so a pool nested inside each branch gives
+# both the gate and the variety.
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
+] } }
 blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were in late Tuesday." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "The car one's been on there since Monday." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Your mum's on nights again Thursday." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "That's the wrong bin for that." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were in late again." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "I heard the door go. It was gone eleven." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "The car one's been on there since Monday." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Your mum's on nights again Thursday." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "That's the wrong bin for that." },
+  ] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -4996,12 +5016,29 @@ name = "On her own for once"
 type    = "paragraph"
 content = "She is on the wall on her own for once, and she moves her bag so there is room, and she means it."
 
+# ⚠️ The third line used to be "the thing on Tuesday" and sat in the pool, so it
+# could greet a player who had never met Jules. dare_chain rises when she does a
+# dare and dare_cooldown when she refuses one, so either means it happened.
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+props = { conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "gte", value = 1 },
+] } }
 blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "@player, that colour is really good on you. I mean it, I'd never get away with it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Are you all right? You look like you've been up. You can say if you have." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Don't listen to her about the thing on Tuesday. She's like that with everybody at first." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Don't listen to her about the dare. She's like that with everybody at first." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Are you all right? You look like you've been up. You can say if you have." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "@player, that colour is really good on you. I mean it, I'd never get away with it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Are you all right? You look like you've been up. You can say if you have." },
+  ] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -5048,12 +5085,29 @@ is_active     = true
 id   = "base"
 name = "Your brother's year"
 
+# ⚠️ "He knows about Tuesday, by the way" used to be a pool member, so it could be
+# the first thing Bree ever said to her — about a Tuesday that had not happened,
+# to a brother she had not been seen with.
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+props = { conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "gte", value = 1 },
+] } }
 blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "Your brother's in two of my classes. Well. Step. He never says step either." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "I'll see @nate at four. Anything you want passing on, or shall I just use my own words." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "He knows about Tuesday, by the way. I didn't even have to tell him properly, I just started it." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "@nate knows, by the way. I didn't even have to tell him properly, I just started it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "I'll see @nate at four. Anything you want passing on, or shall I just use my own words." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "Your brother's in two of my classes. Well. Step. He never says step either." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "I'll see @nate at four. Anything you want passing on, or shall I just use my own words." },
+  ] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -5138,7 +5192,7 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
 ] } }
 blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were coming in at half past eleven on Tuesday. I'm not asking where from. I'm saying I was up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were coming in at half past eleven. I'm not asking where from. I'm saying I was up." },
 ]
 
 [[canvases.nodes.blocks]]
