@@ -19,7 +19,7 @@
 - **He never opens a step.** Every step with him is one she opens. There is no move he can make on
   his own, which is the whole reason the game can have him at the kitchen table.
 
-## Nate — her step brother, 20, a senior at her college
+## Nate — her step brother, 20, the year above her at the same college
 
 - **Wants** her out of his way. He was fine before she moved in and he's never pretended otherwise.
 - **Underneath, he wants her, and hiding it is the only thing he's good at.** Her climb with him is
