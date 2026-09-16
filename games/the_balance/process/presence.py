@@ -125,10 +125,6 @@ DEFERRED_ROWS = {
     ("npc_cara", "the_quad"):
         "the 08:40-09:00 bench before class. the_cast.md:105 puts her there — 'in "
         "the ten minutes before class' — and no canvas uses it. A 20-minute window.",
-    ("npc_gil", "the_kitchen"):
-        "he is at that table 18:00-21:00 every night and `friday_payment` is the "
-        "only thing bound to him there, on a Friday schedule. Six evenings a week "
-        "he is present and un-clickable. Needs a kitchen hub, which is new content.",
 }
 
 

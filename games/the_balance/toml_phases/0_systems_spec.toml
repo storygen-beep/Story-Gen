@@ -332,6 +332,9 @@ flagEffects = [
   # Tasha's converted surface. Her hour is one hour; the cap is on the choice so
   # she stays in the room she is standing in.
   { targetType = "player", flag = "tasha_bath_today", op = "unset" },
+  # @gil at the table. One sit-down a day; the question he will not answer is
+  # one-time and is NOT cleared here.
+  { targetType = "player", flag = "gil_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
