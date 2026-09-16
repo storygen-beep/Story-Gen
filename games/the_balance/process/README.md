@@ -709,21 +709,32 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    destination still rendered — a random ambient firing there took the screen and she got in free
    and uncharged, and when nothing fired the queued `Engine.play("TravelBlock")` won and its only
    link went back where she came from. Both branches verified on the pre-fix build.
-   The fare now lives on choices inside `catch_the_bus` / `bus_back_quad` / `bus_back_strip`, which
-   is where `v2_state.json` `board.map.bridges` always put it — *an edge between two places*.
+   The fare now lives on choices inside six travel canvases — `catch_the_bus` / `walk_it`,
+   `bus_back_quad` / `walk_back_quad`, `bus_back_strip` / `walk_back_strip` — which is where
+   `v2_state.json` `board.map.bridges` always put it: *an edge between two places*. **Six and not
+   three:** they began as three canvases that each offered "bus or walk" as choices on one screen,
+   and LO killed it — *"Walk are choice in the get the bus link. That's wrong."* If she is walking
+   she is not getting the bus, and a screen called **Get the bus** that offers a way to not get the
+   bus is a menu pretending to be a place. A canvas `name` is the link label on the room screen, so
+   two canvases is two links and the choice is made before she opens either.
    ⚠️ Two engine facts to keep: `navigation_order` **hard-fails** the validator if it names anything
    that is not a real child, and a location's `parent` makes it **inherit the parent's canvases**
    (`v2.py:20660`), so neither is a way to hide a nav card.
-7. **No instrument walks the map by clicking, except `walks.py travel`.** Every other route here
+7. **The activity list is REVERSE TOML declaration order — not priority.** `v2.py:688` sorts
+   canvases on `_seq` with `reverse=True`, mirroring the ORM's `Meta.ordering = -created_at`. **The
+   canvas declared LAST renders FIRST** on the room screen. Swapping two canvases' `priority` to
+   reorder their links does nothing at all, which is how this was found; all six travel canvases sit
+   at 7 and the walk is declared above the bus so the bus reads first.
+8. **No instrument walks the map by clicking, except `walks.py travel`.** Every other route here
    teleports with `stand_at` + `goto`, and `playtest.py`'s *every location resolves* only proves a
    passage renders — a one-way room renders perfectly. If you change the shape of the map, that
    route is the check.
-8. **`gates.py` G11 *world reachable* now FAILS this game, and the fail is expected.** The gate
+9. **`gates.py` G11 *world reachable* now FAILS this game, and the fail is expected.** The gate
    floods `entry_from` + `navigation_order` on foot and exempts a sealed zone's *entrance*
    (`auto_exit = false`) but not the rooms behind it, so the six campus and strip interiors read as
    stranded. They are not: `walks.py travel` proves every one can be left, broke. Fixing the gate
    means editing the skill, which is LO's call and has not been made — see §0.
-9. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
+10. **`notion_sheets_sync.py` was patched on 2026-09-11** so `write_review_order` creates
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 
