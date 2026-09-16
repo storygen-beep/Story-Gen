@@ -346,14 +346,19 @@ def walk_travel(page, rep):
               f"cash {cash(page)}, clock moved {moved} minutes")
 
     # --- and off it, on foot, for nothing ------------------------------------
-    # Whether the way home is OFFERED is the whole safety net, so this one asks
-    # the rendered links — play() alone would prove the canvas exists, not that a
-    # player could ever reach it.
+    # THE WALK IS ITS OWN LINK, and that is the check. LO killed the first version
+    # of this, where one canvas offered "bus or walk" as choices on one screen:
+    # "Walk are choice in the get the bus link. That's wrong." A canvas `name` is
+    # the link label on the location screen, so two canvases means two links and
+    # the choice is made before she opens either. Whether the free one is OFFERED
+    # is the whole safety net, so this asks the rendered links.
     goto(page, "Location_the_quad")
-    rep.check("the way home is offered on the quad",
-              any("bus home" in l.lower() for l in links(page)), str(links(page))[:120])
-    rep.check("the way home opens", play(page, "bus_back_quad") is True)
-    click(page, "Walk it")
+    offered = links(page)
+    rep.check("both ways home are their own link on the quad",
+              any("bus home" in l.lower() for l in offered)
+              and any("walk home" in l.lower() for l in offered), str(offered)[:130])
+    rep.check("the free one opens", play(page, "walk_back_quad") is True)
+    click(page, "Home. An hour")
     rep.check("broke, she can still get home",
               sv(page)["player"]["current_location"] == "the_street",
               f'{sv(page)["player"]["current_location"]} · {passage(page)}')
@@ -362,6 +367,11 @@ def walk_travel(page, rep):
     start(page, "Monday", 9, "the_bus_stop")
     apply_effect(page, "cash", "set", 10, clamp=False)
     apply_effect(page, "quiet_week", "set", 7, clamp=False)
+    goto(page, "Location_the_bus_stop")
+    offered = links(page)
+    rep.check("both ways out are their own link at the stop",
+              any("get the bus" in l.lower() for l in offered)
+              and any("walk it" in l.lower() for l in offered), str(offered)[:130])
     rep.check("the bus is a thing she chooses", play(page, "catch_the_bus") is True)
     t0 = sv(page)["game_state"]["time_state"]
     click(page, "Up to the campus")
@@ -377,14 +387,16 @@ def walk_travel(page, rep):
 
     # --- with nothing in her pocket the fare is shown, not hidden ------------
     # COUNTS, not label text: the labels carry the price as a numeral for
-    # gates.py G21 and will be reworded again. Two paid choices grey out, the two
-    # walks and the way out stay live.
+    # gates.py G21 and will be reworded again.
     apply_effect(page, "cash", "set", 0, clamp=False)
+    stand_at(page, "the_bus_stop")
     play(page, "catch_the_bus")
-    rep.check("broke, the fare greys out instead of vanishing",
+    rep.check("broke, both fares grey out instead of vanishing",
               len(locked(page)) == 2, f"{len(locked(page))} locked: {str(locked(page))[:90]}")
-    rep.check("broke, the free routes stay live",
-              len(links(page)) == 3, f"{len(links(page))} live: {str(links(page))[:90]}")
+    play(page, "walk_it")
+    rep.check("broke, the walk is untouched on its own screen",
+              not locked(page) and len(links(page)) == 3,
+              f"{len(locked(page))} locked, {len(links(page))} live: {str(links(page))[:90]}")
 
 
 ROUTES = {
