@@ -1320,6 +1320,12 @@ class TweeComprehensiveGeneratorV2:
                         app["_icon_src"] = ""
                 else:
                     app["_icon_src"] = ""
+                # A launcher's options carry their targets resolved at build time.
+                # Idempotent: reads `canvas` and writes beside it, never over it, so a
+                # second generate() on the same Project object (this loop mutates
+                # project.metadata in place) resolves to the same answer.
+                if app.get("type") == "launcher":
+                    app["options"] = self._launcher_options_for_payload(app.get("options"))
             phone_posts = phone_settings.get("posts", [])
             phone_profiles = phone_settings.get("profiles", [])
             # Validate and track post images and profile photos
@@ -2519,6 +2525,7 @@ setup.openPhoneApp = function(appId) {{
     else if (appDef.type === "custom" && appDef.passage) {{ setup._renderCustom(appId, appDef.label, appDef.passage); }}
     else if (appDef.type === "fast_jobs") {{ setup._renderFastJobs(appId, appDef.label); }}
     else if (appDef.type === "bank") {{ setup._renderBank(appId, appDef.label); }}
+    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer); }}
     else {{ setup._renderPlaceholder(appDef); }}
 }};
 
@@ -3095,6 +3102,83 @@ setup.bankTransfer = function(dir) {{
     setup._renderBank(setup._phoneApp, '');
 }};
 
+// ===== The launcher app — a DOOR on the phone =====
+// The option list on a `type = "launcher"` app. Every option names a canvas and,
+// when it is live, tapping it leaves the phone and plays that canvas.
+//
+// The markup is deliberately the room's own, for the same reason renderDoorOptions
+// gives: a player should not have to learn a new surface. Live rows are the phone's
+// .phone-daily-btn, locked rows its .phone-daily-locked.
+//
+// WHY A DOOR AND NOT A BUTTON. The phone button is live in every room, so anything
+// that PAYS from the phone pays anywhere. An option pays nowhere — it hands the
+// player to a canvas, and the canvas charges its own costs, spends its own time and
+// returns her to its own home. That is what keeps a phone-launched scene honest.
+//
+// PURE RENDER. This writes nothing. Everything moves inside the canvas, after the jump.
+setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
+    var sv = State.variables;
+    var here = String((sv.player || {{}}).current_location || '');
+    var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || '') + '</span><span class="phone-close">&times;</span></div>';
+    html += '<div class="phone-screen"><div class="phone-launcher">';
+    var shown = 0;
+    // ⚠️ MID-SCENE IS NOT A PLACE. current_location is written only by Location_
+    // passages, so inside a canvas it still names the room she walked in from and
+    // every row would read live. Tapping one would Engine.play away and abandon the
+    // scene she is standing in. isRerenderSafe is exactly the "she is somewhere,
+    // not mid-something" test, and it is what the phone's own commitMoment uses.
+    var placed = setup.isRerenderSafe(State.passage);
+    for (var i = 0; options && i < options.length; i++) {{
+        var o = options[i] || {{}};
+        var text = String(o.text || '');
+        if (!text || !o.passage) continue;   // resolved nowhere — never link nowhere
+        var why = '';
+        if (!placed || String(o.locationId) !== here) {{
+            // WRONG PLACE. The engine writes this one, naming the room, because the
+            // author cannot: one locked_text cannot also mean "not yet" and "not now".
+            why = o.locationName ? ('Not here \\u2014 ' + o.locationName + '.') : 'Not here.';
+        }} else {{
+            var c = setup.getCanvasById(o.canvasId);
+            if (!c) continue;
+            if (c.isActive === false) continue;                       // author's off switch
+            if (!setup._npcPresentForCanvas(c, o.locationId)) continue;  // "he is not here" is not a cooldown
+            // ⚠️ GATED AND NOT-NOW ARE TWO DIFFERENT REFUSALS AND GET TWO DIFFERENT
+            // LINES. "You are not there yet" is the author's to write, because only
+            // the author knows what the gate means; "not at this hour" is the
+            // canvas's own cooldown_message. Collapse them and a player who is short
+            // on a meter gets told to come back later, which is a lie she can act on.
+            // The gate that actually decides is still isCanvasSelectable below —
+            // this branch only picks the sentence.
+            if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
+                why = String(o.locked_text || c.cooldownMessage || 'Not yet.');
+            }} else if (!setup.isCanvasSelectable(c) ||
+                       !setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) {{
+                why = String(c.cooldownMessage || o.locked_text || 'Not right now.');
+            }} else if (c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs)) {{
+                // Deliberately NOT clickable, which is where this differs from the room
+                // screen: from the phone a blocked tap would close the phone, change the
+                // screen and land on a gate whose only link is Back. Say it here instead.
+                why = String(setup.getCostBlockedMessage(c.costs) || '');
+            }}
+        }}
+        if (!why) {{
+            html += '<a class="phone-daily-btn phone-launch" data-link="' + o.passage + '">' + text + '</a>';
+            shown++;
+        }} else if (o.show_when_locked) {{
+            html += '<div class="phone-daily-locked">' + text + (why ? ' \\u2014 <em>' + why + '</em>' : '') + '</div>';
+            shown++;
+        }}
+    }}
+    if (shown === 0) {{
+        var na = String(noAnswer || '');
+        html += '<div class="phone-empty">' + (na || 'Nothing here right now.') + '</div>';
+    }}
+    html += '</div></div>';
+    jQuery('.phone-frame').html(html);
+    setup._phoneView = 'launcher';
+    setup._phoneApp = appId;
+}};
+
 setup._renderPlaceholder = function(appDef) {{
     var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + appDef.label + '</span><span class="phone-close">&times;</span></div>';
     html += '<div class="phone-screen"><div class="phone-placeholder"><p>Coming Soon</p></div></div>';
@@ -3151,7 +3235,8 @@ jQuery(document).on('click', '.phone-back', function() {
 // The commit is CONDITIONAL: setup.commitMoment no-ops on a canvas node, because committing a
 // post-render state there would make the node's own advanceTime/trait scripts re-fire on every
 // reload. Phoning mid-scene therefore still doesn't survive a refresh — deliberately.
-// .phone-gallery-link is exempt: it Engine.plays, so the navigation commits for it.
+// .phone-gallery-link and .phone-launch are exempt: they Engine.play, so the
+// navigation commits for them.
 jQuery(document).on('click', '.phone-reply-btn', function(e) {
     e.preventDefault();
     setup.sendPhoneReply(jQuery(this).data('conv-id'), parseInt(jQuery(this).data('choice'), 10), parseInt(jQuery(this).data('round'), 10) || 1);
@@ -3170,6 +3255,15 @@ jQuery(document).on('click', '.phone-post-btn', function(e) {
     setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-gallery-link', function(e) {
+    e.preventDefault();
+    var link = jQuery(this).data('link');
+    if (link) { setup.closePhone(); Engine.play(String(link)); }
+});
+// Launcher: leave the phone and play the canvas. Same exemption as the gallery link
+// above — it Engine.plays, so the navigation commits for it. Do NOT add
+// setup.commitMoment() here; it would publish a moment on the passage we are about
+// to leave.
+jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
     if (link) { setup.closePhone(); Engine.play(String(link)); }
@@ -4696,6 +4790,7 @@ setup.selectAutoFireCanvasForLocation = function(locationId) {{
             if (c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5 — defensive filter
+            if (c.hiddenFromLocation) continue;  // door-only — reachable from a launcher, never from this screen
             if (!setup.isCanvasSelectable(c)) continue;
             if ((c.priority || 0) > bestPriority) {{
                 bestPriority = c.priority || 0;
@@ -4726,6 +4821,7 @@ setup.selectNpcPortraitCanvasesForLocation = function(locationId) {{
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5
+            if (c.hiddenFromLocation) continue;  // door-only — reachable from a launcher, never from this screen
             if (!c.npcId) continue;
             if (!setup.isCanvasSelectable(c)) continue;
             if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
@@ -4757,6 +4853,7 @@ setup.selectSoloActivityCanvasesForLocation = function(locationId) {{
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.substitutionOnly) continue;  // PRD 25 §5.5
+            if (c.hiddenFromLocation) continue;  // door-only — reachable from a launcher, never from this screen
             if (c.npcId) continue;  // belongs to portrait path
             if (!setup._npcPresentForCanvas(c, locationId)) continue;
             if (!setup.isCanvasSelectable(c)) continue;
@@ -5246,6 +5343,7 @@ setup.renderNpcPortraits = function(locationId) {{
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (!c.npcId) continue;
+            if (c.hiddenFromLocation) continue;  // door-only — reachable from a launcher, never from this screen
             if (npcActivities[c.npcId]) continue;  // NPC already has affordable pick
             if (!setup.isCanvasSelectable(c)) continue;
             if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
@@ -5365,6 +5463,7 @@ setup.renderSoloActivities = function(locationId) {{
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.npcId) continue;  // Has NPC = shown as portrait, not here
+            if (c.hiddenFromLocation) continue;  // door-only — reachable from a launcher, never from this screen
             // Above the showWhenBlocked branches on purpose: "he is not here" is not a
             // cooldown, and cooldownMessage defaults to "Available again later", which
             // would be a lie. Hide the row; do not explain it.
@@ -9237,6 +9336,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 }
 .effect-toast.phone-notify { background: #0a84ff; }
 .phone-daily-locked { color: #888; font-size: 13px; padding: 6px 14px; text-align: right; opacity: 0.75; }
+/* The launcher's option list. Reuses the phone's own button and locked-row classes;
+   only the alignment is overridden, because .phone-daily-locked is right-aligned for
+   chat topics and a door list reads left-to-right like the room screen it mirrors. */
+.phone-launcher { padding: 8px; }
+.phone-launcher .phone-daily-btn { text-align: left; margin-bottom: 8px; }
+.phone-launcher .phone-daily-locked { text-align: left; padding: 8px 14px; }
 .phone-quests { padding: 8px; }
 .phone-quest-card { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
 .phone-quest-card.quest-completed { opacity: 0.6; }
@@ -11860,6 +11965,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 if trigger and hasattr(trigger, 'metadata') and trigger.metadata:
                     substitution_only = bool(trigger.metadata.get("substitution_only", False))
 
+                # A canvas that keeps its home for RETURNING to but is never offered
+                # on that home's screen — reachable only through a declared door
+                # (a phone launcher option). Same exclusions as substitution_only,
+                # a different authorial claim. See template_import.py's field comment.
+                hidden_from_location = False
+                if trigger and hasattr(trigger, 'metadata') and trigger.metadata:
+                    hidden_from_location = bool(trigger.metadata.get("hidden_from_location", False))
+
                 # L2-2 — Lane 2 anti-toggle cooldown. Translate location slugs
                 # → runtime passage names at build time so engine doesn't need
                 # a slug→passage helper. Empty list = no gate (default behavior).
@@ -11911,6 +12024,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "requiresNpc": requires_npc,  # Phase A — NPC presence gate
                     "isActive": is_active,  # author's on/off switch — read by isCanvasSelectable
                 })
+                # Door-only: off its own room's screen, still returning there. Added
+                # ONLY when set — every game that authors none must emit a
+                # byte-identical payload, and the runtime reads a missing key as
+                # falsy exactly as it must for a save written before this shipped.
+                if hidden_from_location:
+                    location_canvas_list[-1]["hiddenFromLocation"] = True
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -12661,6 +12780,71 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     )
             options.append(o)
         out["options"] = options
+        return out
+
+    def _launcher_options_for_payload(self, options) -> list:
+        """A phone launcher's options, with every target RESOLVED here, at generation
+        time — the same contract `_door_for_payload` states above, because a launcher
+        option IS a door option that happens to live on the phone.
+
+        Each option gains three keys the runtime needs and must never compute:
+
+            passage      the canvas's entry passage (Canvas_<slug>_Node_<slug>)
+            canvasId     the canvas UUID, for looking up availability at runtime
+            locationId   the canvas's TRIGGER location UUID
+
+        ⚠️ `locationId` IS THE CORRECTNESS PROOF, NOT A CONVENIENCE. A canvas has
+        exactly one home: `_get_return_location` resolves its trigger location at
+        build time and that is the passage every exit returns to. So the option is
+        only ever offered where `$player.current_location` already equals this — which
+        makes the canvas's single return target, by construction, the room she is
+        standing in.
+
+        ⚠️ AND IT MUST COME FROM THE CANVAS'S OWN TRIGGER, never from which key the
+        canvas sits under in help_data.locationCanvases. That index inherits down a
+        location hierarchy (_get_canvases_for_location_with_inheritance), so a canvas
+        triggered at a parent appears under every child. Match on the index key and a
+        launch from the child returns her to the PARENT, and the travel intercept then
+        charges her entry costs for a move she never made.
+
+        An option whose canvas cannot be resolved is DROPPED and the drop is loud —
+        a door must never render a link that goes nowhere.
+        """
+        entries = self._canvas_entry_passages()
+        out = []
+        for opt in (options or []):
+            if not isinstance(opt, dict):
+                continue
+            o = dict(opt)
+            o["text"] = self._resolve_at_references(str(o.get("text") or ""))
+            if o.get("locked_text"):
+                o["locked_text"] = self._resolve_at_references(str(o["locked_text"]))
+            cid = str(o.get("canvas") or "")
+            prefix = self._sanitize_canvas_name(cid)
+            target = entries.get(prefix)
+            canvas = None
+            for c in self.story_canvases:
+                try:
+                    if self._sanitize_canvas_name(self._get_canvas_slug(c)) == prefix:
+                        canvas = c
+                        break
+                except ValueError:
+                    continue
+            trigger_loc = str(getattr(getattr(canvas, 'trigger', None), 'location_id', '') or '')
+            if not target or not canvas or not trigger_loc:
+                logger.warning(
+                    "Launcher option %r targets canvas %r, which is not in the build "
+                    "or has no trigger location. The option is dropped — a canvas "
+                    "without a home can never be offered anywhere.",
+                    o.get("text"), cid,
+                )
+                continue
+            o["passage"] = target
+            o["canvasId"] = str(canvas.id)
+            o["locationId"] = trigger_loc
+            loc = self._get_location_by_id(trigger_loc)
+            o["locationName"] = getattr(loc, 'name', '') if loc else ''
+            out.append(o)
         return out
 
     def _location_passage_name(self, loc):

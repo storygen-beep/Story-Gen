@@ -318,6 +318,11 @@ flagEffects = [
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
+  # Which band the toilet payout screen shows. Set on the way in, read once on the
+  # way out, cleared here. `toilet_far_done` is the PERMANENT twin and must never
+  # appear in this block — it is what makes the first time in that room worth three
+  # points of exposure and every time after worth one.
+  { targetType = "player", flag = "toilet_far", op = "unset" },
   # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
   # max_triggers_per_day on a canvas that carries an `npc` does not spend the act,
   # it deletes the person: Cara sits at that table until half two and Sam until
@@ -1852,6 +1857,12 @@ is_active     = true
 costs         = [{ trait = "clean", value = 15 }]
 show_when_blocked = true
 cooldown_message = "Somebody is always in at this hour."
+# ⚠️ THE PHONE IS THE ONLY DOOR INTO THIS NOW. the_phone.md always said the app
+# was on the phone; the first build put the link on her bedroom wall instead.
+# The location stays because it is where the scene RETURNS her — a canvas has
+# exactly one home and this is it. `hidden_from_location` takes it off her room's
+# activity list without taking away the room.
+hidden_from_location = true
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -2154,6 +2165,246 @@ text       = "Count it."
 targetType = "location"
 locationId = "her_room"
 time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
+] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 50, max = 120 } }]
+
+# --- GOING LIVE, THE OTHER PLACE · exposure's first door --------------------
+# her_meters.md, on exposure: "opens places and hours — the door left open, the
+# room with people in it." Until this canvas it opened neither. Twenty-two prose
+# bands read the meter and two dice rolls read it, and nothing she could choose.
+#
+# WHY THE TOILET AT WORK AND NOT SOMEWHERE OUTDOORS. the_phone.md names the
+# problem this solves in its own words: the house is quietest on weekday
+# afternoons, and "those are exactly the hours the cafe wants too, which is the
+# collision the design is built on." Her room is unusable during a shift. This is
+# the only place she can go live while she is earning, and that is what the
+# exposure buys — a door, not a bigger number.
+#
+# The room has been declared since slice 1 and held ZERO canvases. Its own
+# description is the whole brief: "shared with the customers, so the person who
+# opens it next could be anybody... a lock that works. It is the only door you can
+# shut on yourself that isn't your own bedroom."
+#
+# ⚠️ SHARES `streamed_today` WITH `stream`. One session a night, wherever she does
+# it. the_phone.md pays "on the night", not per room.
+#
+# ⚠️ NO MEDIA, MATCHING `stream`. That canvas declares none either. Adding a pool
+# here and not there would move `traversal heat` on a lie.
+#
+# ⚠️ DISTINCT `name`. canTriggerActivity keys the daily counter off the canvas
+# NAME (v2.py:11914 canvasIdToActivityName), so a second canvas called "Go live"
+# would silently share this one's day bucket. Neither carries
+# max_triggers_per_day today, but the name has to be right before one does.
+
+[[canvases]]
+id   = "stream_toilet"
+name = "Go live at work"
+description = "The second place she can go live, and the first thing exposure has ever opened. Shorter than the bedroom session, worth the same money, and it costs more of her because anybody could try the handle."
+
+[canvases.trigger]
+location      = "the_cafe_toilet"
+is_repeatable = true
+priority      = 5
+is_active     = true
+costs         = [{ trait = "clean", value = 15 }]
+show_when_blocked = true
+cooldown_message = "Not with the floor this busy."
+# The phone is the only door into this, same as `stream`.
+hidden_from_location = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "opening_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "exposure",     operator = "gte", value = 20 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "A lock that works"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The lock turns and the handle goes dead in your hand. It is a cheap one and it holds anyway. Somebody runs a tap on the other side of the wall while you stand the phone on the cistern and tip it up at yourself." },
+  { type = "paragraph", content = "You prop the phone against the mirror, which gives them two of you at once, and they will like that more than it deserves. The extractor fan is loud enough to cover a voice and nothing else." },
+  { type = "paragraph", content = "Somebody laughs out on the floor, near enough to be at the door. You wait for it to move off, and it does, and you are still in here with your thumb over the button." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You look at what the lens would pick up on you after four hours on the floor, and you know exactly what it is. Not in here. There is nowhere in this building to fix it either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You already gave them one today. Going back on in a room that is not yours, three hours later, is a different thing again, and you have no name for that one yet." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Check the lock again and start."
+targetType = "node"
+nodeId     = "stream_toilet.live"
+show_when_locked = true
+locked_text = "Not in here. Not today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "flag",  subject = "player", flag_key  = "streamed_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wash your hands and go back out."
+targetType = "location"
+locationId = "the_cafe_toilet"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "live"
+name = "Eleven people, then twenty"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Eleven of them, then twenty. One of them types that he can hear a hand dryer. Another asks where you are, and you do not answer, and the not answering is most of what they are here for."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "unknown" }, content = "where is that. that's not your room" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "is there a lock on it or not" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "you won't. you've never done it anywhere but that one room" },
+  { type = "dialog", props = { speaker = "unknown" }, content = "someone is going to walk in on you" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Only as far as the top."
+targetType = "node"
+nodeId     = "stream_toilet.payout"
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 5, max = 15 } },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Everything, and be quick about it."
+targetType = "node"
+nodeId     = "stream_toilet.payout"
+show_when_locked = true
+locked_text = "Not here. You have not done that anywhere yet."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "toilet_far_done",   operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "toilet_far", op = "set" },
+  { targetType = "player", flag = "toilet_far_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 25, max = 60 } },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Everything, and be quick about it."
+targetType = "node"
+nodeId     = "stream_toilet.payout"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "toilet_far_done", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "toilet_far", op = "set" }]
+effects = [
+  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
+  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 15, max = 40 } },
+]
+
+[[canvases.nodes]]
+id   = "payout"
+name = "Back out on the floor"
+
+# ⚠️ ONE `toilet_far` FLAG READ HERE AND CLEARED NIGHTLY, so the two bands are
+# exclusive and the screen never shows both. `toilet_far_done` is the permanent
+# one — it is what makes the first time here move exposure by three and every time
+# after by one, which is the_phone.md's own rule.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "toilet_far", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your top comes off and then everything under it, in a room that smells of hand soap and bleach. The count jumps twenty while you are still working your jeans down over your heels." },
+  { type = "paragraph", content = "You brace a hand on the cistern and put two fingers in yourself standing up, and they can read it off your face a good second before you tip the phone down to show them." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "toilet_far", operator = "is_false" },
+] } }
+blocks = [
+  { type = "paragraph", content = "The top comes off and stays off, and that is all they get. You hold at the angle that gives them the underside of your tits in the mirror and let them look until the count stops climbing." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Fourteen minutes, and your name is on the rota on the wall out there. Those two facts are now in the same building, and one of them used to be somewhere else." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody watching knows what town this is. That was the whole arrangement, and it held right up until you carried it to work." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Somebody tried the handle about a minute in, and you did not stop. You are going to think about that later and you are not going to like where it lands." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You close the app, run the tap for the sound of it, and dry your hands. The floor is exactly as loud as it was. Nobody out there has looked up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "location"
+locationId = "the_cafe_toilet"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 500 },
+] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 8, max = 25 } }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "location"
+locationId = "the_cafe_toilet"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 500 },
+  { type = "trait", subject = "player", trait_key = "followers", operator = "lt",  value = 2000 },
+] }
+flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
+effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 20, max = 60 } }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "location"
+locationId = "the_cafe_toilet"
+time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
 ] }
@@ -7240,20 +7491,27 @@ locationId      = "the_kitchen"
 # ⚠️ FIRST 8_phone.toml IN THIS REPO. No game here has ever had one. The merger
 # has always known the filename (merge_toml_phases.py) and it merges LAST.
 #
-# ⚠️ ONE APP, AND EVERYTHING ON IT IS @cara's. the_cast.md: "she's also the other
-# end of the phone: the messages are hers." She is the only person who texts her
-# about anything but work.
+# ⚠️ TWO APPS, WHICH IS WHAT the_phone.md ALWAYS SAID: "Two things only: messages,
+# and a streaming app." The messages are all @cara's — the_cast.md: "she's also the
+# other end of the phone: the messages are hers." She is the only person who texts
+# her about anything but work.
 #
-# ⚠️ NO FEED AND NO POSTING BUTTON, on purpose. A social_feed `post_action` rolls
-# followers into a trait from a sidebar button that is live in every room — she
-# would earn followers on the bus, and the door being shut is the entire weight
-# of that scene. Going live stays a canvas in her room.
+# ⚠️ STILL NO FEED AND NO POSTING BUTTON, and the reason has not changed. A
+# social_feed `post_action` rolls followers into a trait from a sidebar button that
+# is live in every room — she would earn followers on the bus, and the door being
+# shut is the entire weight of that scene.
 #
-# ⚠️ The `custom` app type is UNUSABLE from TOML: the importer parses only id,
-# type, label, icon and post_actions, so `passage` is never read and a custom app
-# always falls through to the placeholder renderer. That is why the follower
-# count stays in the sidebar and why the stream's block reasons had to be fixed
-# inside that canvas instead of on a phone screen.
+# What changed is that a BUTTON is not the only thing a phone can hold. Going live
+# is a `launcher` app: every option names a canvas, and an option is live only where
+# that canvas lives. It pays nothing on this screen. It hands her to the scene, and
+# the scene charges the hour, the shower and the exposure exactly as it did when the
+# link sat on her bedroom wall.
+#
+# ⚠️ A CANVAS HAS EXACTLY ONE HOME, so a session in two places is two canvases, not
+# one that roams. The trigger location is also the passage the scene returns her to
+# (v2.py _get_return_location, resolved at build time). That is why `stream` keeps
+# `location = "her_room"` while carrying `hidden_from_location` — it still has a
+# room to come back to, it is just no longer offered on that room's screen.
 #
 # ⚠️ Reply effects go through Number(eff.value || 0), so a random-range dict is
 # NaN here. Fixed numbers only on this file.
@@ -7269,6 +7527,41 @@ purchase_flag = "opening_done"
 id    = "messages"
 type  = "chat"
 label = "Messages"
+
+# --- the streaming app -------------------------------------------------------
+# her_meters.md is the rule this is checked against: "going further means she can
+# reach more — more places, more people, more hours. Never a bigger number."
+# Exposure's stated job there is "opens places and hours", and before this it
+# opened neither — 22 prose bands and two dice rolls, and not one door.
+#
+# ⚠️ EACH locked_text ANSWERS ONE STATE ONLY: not enough of her is out there yet.
+# The other two refusals are written elsewhere on purpose, because one line cannot
+# mean three things — that is the trap that put a stale "not yet" on a spent rung
+# of Tasha's ladder. "Not here — Your Room." comes from the engine, which knows
+# where the canvas lives. "Somebody is always in at this hour." is the canvas's own
+# cooldown_message.
+#
+# ⚠️ AND NO NUMBER IN ANY OF THEM. All three ascent meters are hidden = true in
+# [[traits.labels]] so the raw score never renders. A locked row reading
+# "Exposure 20+" would be the first number in the game.
+
+[[phone.apps]]
+id        = "golive"
+type      = "launcher"
+label     = "Go Live"
+no_answer = "Not from here. Not with this many people about."
+
+[[phone.apps.options]]
+text   = "Your room, door shut."
+canvas = "stream"
+show_when_locked = true
+locked_text = "Not tonight."
+
+[[phone.apps.options]]
+text   = "The one at work, with the lock."
+canvas = "stream_toilet"
+show_when_locked = true
+locked_text = "Not that. Not somewhere anybody could put a hand on the door."
 
 # --- 1 · she is still talking to you like September -------------------------
 
