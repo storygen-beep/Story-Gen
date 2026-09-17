@@ -99,6 +99,37 @@ everything.
 **Lynn — the mother — is never touched.** She's seen through a door and that's all.
 Written down here so a later release doesn't quietly read it as an oversight.
 
+#### Amended 2026-09-17 — the television, and only the television
+
+**She is still never touched, and nothing below changes that.** What changed is that she is no
+longer only seen through a door.
+
+LO was shown the paragraph above, verbatim, and chose to cross part of it. The crossing is written
+out here rather than left in a commit message, because the value of this section is that somebody
+can find it.
+
+**What she now does:** she sits on the sofa 20:00–21:00 on the four nights she's off the ward, and
+she is in the room when the fifth channel is on. She moves three steps and stops:
+
+| | |
+|---|---|
+| **at the start** | she doesn't notice. Eyes shut, mug going cold |
+| **after once** | she notices, and says nothing |
+| **after twice** | she knows what's on and stays where she is |
+
+**What is still off-limits, and is not up for reinterpretation:**
+
+- **She is never touched, at any height, by anybody.** No contact, ever.
+- **She is never in a scene as a body.** She is a person in a room.
+- **The three steps above are the whole of it.** There is no fourth, and `lynn_tv` is read by the
+  television and by nothing else in the game.
+- **She still has no sexual content of her own** and is not a climb anybody is working towards.
+
+**Why it was allowed:** the reason she exists is that everything in this house happens while she's
+out or asleep — she's the price, not a person to be won. Sitting through something she won't look at
+is that idea, not an exception to it. If a later release wants more than this, it is a new decision
+and it belongs under this heading too.
+
 ---
 
 # 3. Changeable, but expensive

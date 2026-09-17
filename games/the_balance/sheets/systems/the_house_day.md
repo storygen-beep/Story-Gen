@@ -22,8 +22,9 @@
 | **four** | Tasha home, her lights on, her door open | clothes, advice she didn't ask for, and somebody who notices what she's wearing |
 | **six** | Gil back, in the kitchen, then the garage | the ten o'clock starts existing again |
 | **about seven** | **everyone at the table**, on the nights her mum is home | the one hour she can't avoid anybody |
-| **seven to ten** | Nate on the sofa with the TV. Tasha upstairs. Gil in the garage | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
-| **after ten** | Gil still in the garage. Her mum asleep. Tasha out on Friday and Saturday. **Nate's door** | the house at its most open, and the hour she is only in if she broke the rule to get here |
+| **eight to nine** | **her mum on the sofa on her own until half past, then Gil.** Nate upstairs, out of the way | **the television hour.** The one window in the game where one parent is in a room without the other |
+| **nine to ten** | parents gone up. **Nate comes back down**, set off, room to himself | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
+| **after ten** | Her mum asleep. Tasha out on Friday and Saturday. **Nate's door** | the house at its most open, and the hour she is only in if she broke the rule to get here |
 | **after half eleven** | everybody asleep, each in their own room | nothing is open and nobody is watching. **The first hours in this game where the house is full and none of it is available** |
 
 ## Everybody sleeps, and that is most of why the house has people in it
@@ -47,6 +48,26 @@ watching, and it is the only company in that whole eight-hour window.
 are in bed: Nate's door and Tasha's room both hold their own hours now, and the shower walk-in keeps
 the ones it always had. What the sleeping hours buy is a house that is occupied, not a house with
 more to do in it.
+
+## The television is the second thing in this house she can operate
+
+**Five channels, a button to change them, a button to turn it off, and it remembers.** She can put
+it on any hour she's in that room — including the whole empty afternoon, which until now had nothing
+in it at all.
+
+**On or off splits the room in two.** With the set on she's watching; with it off she's sitting with
+whoever's there. The off button is how she moves between them, which is why it exists.
+
+**What she can leave on depends on who's sitting there.** Channels one to four are nothing. The
+fifth is, and with her mum on her own it goes unnoticed — *she wants her daughter to be fine and
+she's too tired to check*, which is the line on the cast page and is now a mechanic.
+
+**Nobody changes overnight and nobody changes twice in an evening.** Leaving it on in front of a
+parent costs the hour, so each of them moves one step a day at most, and there are two steps each.
+After that they've changed and it stays changed.
+
+**Nate is not part of it.** He doesn't watch television and he isn't in the room while the parents
+are. That's the point of him coming down at nine.
 
 ## The bathroom is the tightest room in the house
 

@@ -232,12 +232,28 @@ activity   = "at the table with the radio on"
 
 # the_week.md: "@gil is there because he's always there at six." Friday evening is
 # when the $150 is handed over, so he has to actually BE in the room.
+#
+# ⚠️ ENDS AT 20:30, NOT 21:00, since the television. He clears the table and comes
+# through for the last half hour of the news. `friday_payment` was shortened to
+# match in the same pass — its own comment says a Friday window that outran his
+# kitchen hours renders a link to a man who is not in the room.
 [[npcs.schedules]]
 location   = "the_kitchen"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "18:00"
-end_time   = "21:00"
+end_time   = "20:30"
 activity   = "at the table with the radio on low"
+
+# ⚠️ HALF AN HOUR, AND THE STAGGER IS THE POINT. Her mum is on that sofa from
+# 20:00 and he arrives at half past, so 20:00-20:30 is the only window in the game
+# where one parent is in a room without the other. What the late channel costs is
+# different in those two halves, and that is the whole television.
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:30"
+end_time   = "21:00"
+activity   = "in the chair by the window, watching the news"
 
 [[npcs.schedules]]
 location   = "the_master_bedroom"
@@ -349,19 +365,30 @@ start_time = "19:00"
 end_time   = "20:00"
 activity   = "at the table, eating fast so he can get up"
 
+# ⚠️ HE DOES NOT WATCH TELEVISION. LO's call, 2026-09-17: "I say he doesnt watches
+# tv. That only parents together." So he is off the sofa for the whole of the
+# parents' hour and comes back down the moment they go up. He is not in a room at
+# all 20:00-21:00 on dinner nights — offscreen on purpose, because a bedroom row
+# with nothing behind it is a presence.py DEAD row and his door is fixed at 22:00.
+#
+# The ward nights are the only ones he gets the early sofa, because there is no
+# dinner to sit at.
 [[npcs.schedules]]
 location   = "the_front_room"
 weekdays   = [0, 2, 4]
 start_time = "19:00"
-end_time   = "22:00"
-activity   = "on the sofa with the TV on"
+end_time   = "20:00"
+activity   = "on the sofa with something on he is not watching"
 
+# The late hour, every night. the_house_day.md calls this one "the house at its
+# most open" — parents upstairs, Tasha out, doors shut. Sitting with him here is
+# the sit-down; the set is off and what was on it is not his business.
 [[npcs.schedules]]
 location   = "the_front_room"
-weekdays   = [1, 3, 5, 6]
-start_time = "20:00"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
 end_time   = "22:00"
-activity   = "on the sofa with the TV on"
+activity   = "on the sofa with his phone, the room to himself"
 
 # His door, and the hours it is not always shut. This row IS the invitation —
 # the_two_doors.md: nothing announces it.
@@ -480,10 +507,26 @@ start_time = "19:00"
 end_time   = "20:00"
 activity   = "at the table, still in the coat she travels in"
 
+# ⚠️ THE HOUR SHE HAS NEVER HAD. Straight from the table to the sofa, and for the
+# first half of it she is the only one in the room — @gil is still clearing the
+# kitchen until half past. This is where her first clickable row in the whole game
+# lives, and it is where the late channel costs least, because she does not look
+# at it. the_cast.md: "she wants her daughter to be fine and she is too tired to
+# check." That line is a mechanic now.
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5, 6]
+start_time = "20:00"
+end_time   = "21:00"
+activity   = "on the sofa with her shoes off and a mug going cold"
+
+# ⚠️ STARTS AT 21:00 NOW, NOT 20:00 — she watches an hour first. `master_bedroom`
+# is scheduled 21:00-22:00 and is gated on her being in this room, so the two
+# doors are untouched: she is back upstairs the minute that scene opens.
 [[npcs.schedules]]
 location   = "the_master_bedroom"
 weekdays   = [1, 3, 5, 6]
-start_time = "20:00"
+start_time = "21:00"
 end_time   = "23:59"
 activity   = "in bed with the lamp on, off the ward"
 

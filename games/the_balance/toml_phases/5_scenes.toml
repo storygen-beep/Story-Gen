@@ -530,12 +530,14 @@ is_active     = true
 [[canvases.trigger.schedules]]
 weekdays   = [4]
 start_time = "17:00"
-end_time   = "21:00"
-# ⚠️ ENDS AT NINE because that is when @gil goes up. His schedule now puts him
-# in the master bedroom from 21:00, and the portrait lane checks presence — a
-# Friday window that outran his hours would render a link to a man who is not in
-# the room. Still "all evening" in the sense LO chose: four hours, and she can
-# only miss it by staying out.
+end_time   = "20:30"
+# ⚠️ ENDS WHEN HE LEAVES THE KITCHEN, and that hour moved. His kitchen row was
+# 18:00-21:00 and is now 18:00-20:30, because the television put him on the sofa
+# for the last half hour. The portrait lane checks presence — a Friday window that
+# outran his kitchen hours would render a link to a man who is not in the room,
+# which is the bug this comment has existed to prevent since the window was first
+# written. Still "all evening" in the sense LO chose: three and a half hours, and
+# she can only miss it by staying out.
 
 [[canvases.nodes]]
 id   = "base"
@@ -2796,6 +2798,639 @@ trait      = "rest"
 op         = "add"
 value      = 15
 clamp      = true
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "sofa_today"
+op         = "set"
+
+# =============================================================================
+# THE TELEVISION
+#
+# LO, 2026-09-17: "Sitting on sofa isnt watching tv. Watching tv 5 channels,
+# change channel button and tv turn off too." He is right, and `sofa_hour` was
+# doing both jobs badly — the set was a noise in the prose and never a thing she
+# operated. This is the set. It has state, it remembers, and it is the first
+# object in this game the player can leave in a condition.
+#
+# ⚠️ NO SCHEDULE, ON PURPOSE. It is on the room's screen every hour she is in
+# there, including the empty afternoon — which is the point. The house holds
+# nobody 08:00-16:00 and until now there was nothing to do in it either. The
+# parents are not what makes the television available; they are who might be
+# sitting there when she puts it on.
+#
+# ⚠️ NO max_triggers_per_day EITHER. Flipping channels is not the act. The hour is
+# capped by `sofa_today`, which every canvas in this room shares — one hour in
+# here a day, and choosing who to spend it with is the decision.
+#
+# ⚠️ TWO GROUP CHAINS, SEPARATED BY A NON-GROUP BLOCK. Adjacent [group] blocks
+# MERGE into one if/elseif chain (CARRIED.md:260-262), which is exactly what each
+# chain wants and a disaster if the two fuse: the channel bands would become
+# alternatives to the people bands and only one would ever render. The paragraph
+# between them is a wall, not decoration.
+#
+# ⚠️ `eq` COMPARES WITH === AND DOES NOT COERCE (v2.py:4150), so every channel
+# band tests a number against a number. `dare_chain` does the same thing already.
+
+[[canvases]]
+id   = "watch_tv"
+name = "The television"
+description = "The set in the front room. Five channels, a button to change them and a button to turn it off, and it remembers what it was left on. What she can leave on depends on who is sitting there."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The set"
+
+# --- CHAIN A · what is actually on -------------------------------------------
+# Five bands, exclusive by construction. The set is off in its own band first,
+# because a dark screen is a different sentence from a channel.
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_false" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The screen is off and the room is the colour the street lamp makes it. The remote is down the side of the cushion where it always is, warm from whoever had it last." },
+    { type = "paragraph", content = "Nothing on. The set gives back the room in grey — the sofa, the doorway, you standing in it with your coat still on." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The news. It is always the news when @gil has had it last. A man at a desk saying numbers about somewhere else, and it is the sound this house makes when nothing is happening in it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 2 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The soap. Two people in a kitchen having the row they have been having since before you moved in, and an audience somewhere going at it every time one of them turns round." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 3 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Football, or the talking that comes before football. Men in a row at a table, and a pitch behind them with nobody on it yet. You could put this on and leave the house." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 4 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Music videos with the sound low. A girl a year or two older than you doing something with her hips at a camera that is much too close, and getting paid for it, and everybody watching it in front of their mothers." },
+]
+
+# ⚠️ CHANNEL FIVE IS THE ONE THE WHOLE CANVAS IS FOR, and it is written crude
+# because that is the register this game ships at (CLAUDE.md, references/
+# register.md). The beat stays on the screen for its whole length — the reaction
+# is the NEXT chain's job, and folding it in here is the pivot the register file
+# names as the recurring defect.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "A woman on her back with her knees up and a man working into her at a steady pace, and the camera close enough that you can see where he goes in. Her tits move with every stroke. The sound is two bodies and her breathing and nothing else." },
+    { type = "paragraph", content = "She is on her knees with his cock in her mouth and both hands flat on his thighs, taking it slow and deep and looking up the whole time. When she pulls off, the string of it hangs between her lip and the head of him before it breaks." },
+    { type = "paragraph", content = "A woman riding a man on a sofa not unlike this one, her back to the camera, her ass coming down on him in a rhythm she is setting herself. He has a hand on each cheek and he is not doing any of the work." },
+  ] },
+]
+
+# --- the wall between the two chains -----------------------------------------
+# ⚠️ DO NOT DELETE THIS PARAGRAPH. Two adjacent group chains fuse into one, and
+# then only one band in the whole canvas ever renders. It is load-bearing.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The room is warm and the window has the street in it."
+
+# --- CHAIN B · who is in here, and what they do about it ---------------------
+# ⚠️ @GIL'S RUNG DECIDES WHEN BOTH ARE IN. He is the one who acts, so his bands
+# come first and the chain stops at the first match. Her mum's bands only render
+# on the half hour before he comes through.
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "gil_tv", operator = "lte", value = 0 },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil does not say anything and he does not reach for the remote. He looks at the screen once, and then at you, and then at the window, and he does not look back at either of them again for the rest of it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "gil_tv", operator = "eq", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil's eyes keep going to it and coming back. Not for long, and never when he thinks you are looking. The window has the screen in it and he has been watching the window for twenty minutes now." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_front_room", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil settles back with his arms along the top of the sofa and watches it. Properly, the way he watches the news. Every so often he says nothing in a way that has weight to it, and you are very aware of how much of the sofa is between you." },
+]
+
+# Her mum, on the half hour she has to herself. ⚠️ SHE IS NEVER TOUCHED — see
+# DECISIONS.md. What climbs is whether she is awake to it, and that is all.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "lynn_tv", operator = "lte", value = 0 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your mum has her eyes shut and the mug going cold against her knee. She does not notice. She has been on a ward since Monday and she would not notice the room on fire." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "lynn_tv", operator = "eq", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your mum's eyes open at the sound of it. She looks at the screen, and then at you, and then back at the window. She does not say anything. She does not go up either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "eq", value = 5 },
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your mum knows what is on and stays where she is. She shifts once to get comfortable and puts the mug on the floor. Whatever the two of you are doing now, it is a thing you both agreed to without either of you saying so." },
+]
+
+# @nate is in this room 21:00-22:00 and he is NOT part of the television. LO:
+# "he doesnt watches tv". One line so the room does not have a hole in it.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_front_room", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate is on the other end with his phone up and the screen lighting the underside of his face. Whatever is on the television is not something he has an opinion about." },
+]
+
+# --- the second wall ---------------------------------------------------------
+# ⚠️ LOAD-BEARING, same as the first one. Chain B above it is a merged if/elseif;
+# the single group below it must NOT join the end of that chain, or the spent-hour
+# line would only ever render on an evening when nobody is in the room.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The remote is on the arm of the sofa."
+
+# ⚠️ THE SPENT HOUR IS NARRATED, NOT A GREYED BUTTON. The seven "Watch it." rows
+# are exclusive on channel and on who is in the room, so show_when_locked on any
+# of them would print its neighbour's reason.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sofa_today", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You have had your hour in this room today. You can stand here and change what is on it, but sitting down again would be a different kind of evening." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ SEVEN DECISIONS AND ONE EXIT, AND THAT CEILING IS THE GATE'S, NOT TASTE.
+# The first draft of this canvas authored FIFTEEN — a "Watch it." per ladder rung
+# per parent — and `gates.py` "a place is not a catalogue" failed it on the spot:
+# the field, measured by playing five games, carries 1-6 things to do on a screen
+# with a median of 3. They were mutually exclusive so only one ever RENDERED, and
+# the gate counts what is authored, which is the right thing to count: fifteen
+# rows is fifteen chances for two conditions to overlap and print the same button
+# twice with different effects.
+#
+# What collapsed them was separating the two acts that were sharing a button.
+# WATCHING is one row and always the same: the hour, the rest. LEAVING IT ON in
+# front of a parent is a different act, and it is the only one that climbs.
+
+# --- ON ----------------------------------------------------------------------
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put it on."
+targetType = "node"
+nodeId     = "watch_tv.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "tv_on", op = "set" }]
+
+# --- THE CHANNEL BUTTON ------------------------------------------------------
+# ⚠️ TWO ROWS, ONE BUTTON. The engine has `add` and `set` and no modulo, so the
+# wrap from five back to one is its own choice on an exclusive condition. Same
+# text on both, so the player never sees the seam.
+#
+# ⚠️ NO HOUR GATE ON CHANNEL FIVE. An earlier draft only put it on the dial after
+# eight, which was my invention and not LO's, and it cost two more rows to the
+# same button. It is also wrong: the hours she is most likely to reach for it are
+# the ones the house is empty, which is 08:00 to 16:00 every day of the week.
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Change the channel."
+targetType = "node"
+nodeId     = "watch_tv.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "lt", value = 5 },
+] }
+effects = [{ targetType = "player", trait = "tv_channel", op = "add", value = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Change the channel."
+targetType = "node"
+nodeId     = "watch_tv.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "gte", value = 5 },
+] }
+effects = [{ targetType = "player", trait = "tv_channel", op = "set", value = 1 }]
+
+# --- THE HOUR ----------------------------------------------------------------
+# One row, whatever is on and whoever is in here. Sitting through it is sitting
+# through it; the prose above already says which of those two things it was.
+#
+# ⚠️ NO show_when_locked. The spent hour is narrated in the block above instead,
+# where a sentence can say which of two things is true. `sofa_hour` in this same
+# room still carries the greyed line, so the rule is still taught.
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Watch it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "sofa_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "add", value = 15, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "sofa_today", op = "set" }]
+
+# --- NOT REACHING FOR THE REMOTE, WHICH IS THE WHOLE CANVAS ------------------
+# ⚠️ THIS IS THE ONLY THING THAT CLIMBS, AND IT COSTS THE HOUR. Both rows carry
+# `sofa_today is_false` and set it, so a rung moves at most once a day and the
+# ladder cannot be ground out in one evening. Two rungs each, +1 corruption a
+# rung, so the LIFETIME yield of this surface is four points — one named step on
+# her_meters.md's ladder, and then it is done. A meter that climbs while the world
+# stays the same size is decoration, and `gates.py` "the climb is paid for"
+# catches it: the first draft moved corruption on a five-minute choice with no
+# hour attached and was flagged as free.
+#
+# ⚠️ `is_absent` ON @gil KEEPS THE TWO ROWS EXCLUSIVE. He is on that sofa
+# 20:30-21:00 and her mum 20:00-21:00, so the half hour before he comes through is
+# the only window where one parent is in a room without the other. Two rows whose
+# conditions can both pass render the SAME BUTTON TWICE with different effects.
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it on."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key  = "sofa_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "gte", value = 5 },
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "gil_tv", operator = "lte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "rest",       op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "gil_tv",     op = "add", value = 1 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1, clamp = true },
+]
+flagEffects = [{ targetType = "player", flag = "sofa_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it on."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "tv_on", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key  = "sofa_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "tv_channel", operator = "gte", value = 5 },
+  { type = "npc_at_location", npc_id = "npc_gil",  location_id = "the_front_room", operator = "is_absent" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+  { type = "trait", subject = "player", trait_key = "lynn_tv", operator = "lte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "rest",       op = "add", value = 15, clamp = true },
+  { targetType = "player", trait = "lynn_tv",    op = "add", value = 1 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1, clamp = true },
+]
+flagEffects = [{ targetType = "player", flag = "sofa_today", op = "set" }]
+
+# --- OFF ---------------------------------------------------------------------
+# ⚠️ THE OFF BUTTON IS WHAT MAKES THE ROOM TWO ROOMS. Both parents' hubs are gated
+# on `tv_on is_false`, so with the set on the room offers the television and with
+# it off the room offers the person. That is the whole split, and it is why this
+# is not a button for the sake of a button. LO: "Sitting on sofa isnt watching tv."
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn it off."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "tv_on", op = "unset" }]
+
+# Unconditional, and an exit rather than a decision. The free door on a spent
+# evening — `gates.py` "a spent day still has a door".
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 5
+
+# =============================================================================
+# THE TWO PARENTS ON THAT SOFA — the television OFF
+#
+# ⚠️ BOTH ARE GATED ON `tv_on is_false`, AND THAT IS THE DESIGN, NOT A DETAIL.
+# With the set on the room offers the television; with it off the room offers the
+# person. One room, two things, and the off button is how she moves between them.
+# LO's objection is what produced this — "sitting on sofa isnt watching tv."
+#
+# ⚠️ NO max_triggers_per_day ON EITHER. 0_systems_spec.toml records why: a day cap
+# on a canvas carrying an `npc` does not spend the act, it DELETES THE PERSON —
+# her mum is in that room for one hour and one click would remove her portrait for
+# the rest of it. The caps are flags on the choices.
+#
+# ⚠️ EACH ONE'S HOURS ARE ITS PARENT'S HOURS. @gil is on that sofa 20:30-21:00 and
+# her mum 20:00-21:00, and a hub that outran those would render a card for
+# somebody who is not in the room — the bug `friday_payment`'s comment has been
+# guarding against since it was written.
+
+[[canvases]]
+id   = "hub_gil_sofa"
+# ⚠️ NOT "@gil". A canvas `name` is the link label on the room screen and tokens
+# are NOT resolved there — `tokens.py` catches it as a leak and the player reads
+# the @ sign. This matches `hub_gil_kitchen`, which is the same card in the other
+# room.
+name = "Gil"
+description = "Portrait hub @ the_front_room, 20:30-21:00. The half hour he comes through for the end of the news. Shares `gil_today` with the kitchen hub — one sit-down with him a day, wherever it happens."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_gil"
+npc           = "npc_gil"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:30"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The chair by the window"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "@gil is in the chair by the window with the screen dark and the street going past behind him. He has the look of a man who sat down for ten minutes an hour ago. He does not ask what you want." },
+  { type = "paragraph", content = "The set is off and he has not put it back on. He is sat forward with his forearms on his knees, working at something in his head, and the room is quiet enough that you can hear the fridge from here." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down with him for a bit."
+targetType = "node"
+nodeId     = "hub_gil_sofa.sat"
+show_when_locked = true
+locked_text = "You have sat with him once today. Twice would be a thing, and he would notice it was a thing."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "gil_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "gil_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "sat"
+name = "The other end"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take the end of the sofa. He does not move and he does not look over, and after a while the not-talking stops being awkward and turns into the two of you being in a room. It is the closest this house gets."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "There is a list on that fridge. I am not going to say it twice and I am not going to say it again after tonight." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You are in late a lot. I am not asking. I am telling you I have noticed." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Your mother is on nights again Wednesday. Somebody should be in this house at a normal hour." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay until he goes up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "sofa_today"
+op         = "set"
+
+# -----------------------------------------------------------------------------
+# ⚠️ HER MUM'S FIRST CLICKABLE ROW IN THE WHOLE GAME. Before this she was declared,
+# given a portrait and two schedule rows, and had ZERO surfaces — a condition on
+# `master_bedroom` and one substitution_only canvas, and nothing else. LO asked
+# where she was; this is the answer.
+#
+# ⚠️ SHE IS STILL NEVER TOUCHED. DECISIONS.md carries the crossing LO made on the
+# television and what it does not cover. Nothing here is a climb toward her: the
+# hour asks for nothing, gives rest, and costs nothing, which is what makes her
+# the only person in this house who does not want something. That IS the content.
+
+[[canvases]]
+id   = "hub_lynn_sofa"
+name = "Your mum"
+description = "Portrait hub @ the_front_room, 20:00-21:00 on the four nights she is off the ward. The one hour in the game that asks nothing of her. She is never touched and there is no ladder here."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_lynn"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "tv_on", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "20:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shoes off"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum has her shoes off and her feet up on the arm, and a mug on the floor she has not touched since she put it there. The set is off. She is not asleep, but she is not far from it." },
+  { type = "paragraph", content = "She is in the corner of the sofa with the lamp on beside her, still in the cardigan she travels in. She looks up when you come in and she smiles before she has worked out which of you it is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with her."
+targetType = "node"
+nodeId     = "hub_lynn_sofa.sat"
+show_when_locked = true
+locked_text = "You have had your hour in this room today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "sofa_today", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her sleep."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "sat"
+name = "An hour that wants nothing"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You sit down next to her and she moves her feet without opening her eyes. She asks how college is and she is asleep before you have finished answering, and the answer you were giving her was not true anyway."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You look like I do. That is not a thing I want to be right about." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Sit down. You do not have to talk, I have had people talking at me since six." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Ten more minutes and I am going up. Stay down here as long as you like." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Nobody in this room wants anything off you. It is the only hour of the week that is true, and it is going to cost you the one you could have spent earning."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay until she goes up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "rest"
+op         = "add"
+value      = 20
+clamp      = true
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_lynn"
+trait      = "relation"
+op         = "add"
+value      = 2
 
 [[canvases.nodes.exit_block.config.flagEffects]]
 targetType = "player"
