@@ -420,12 +420,28 @@ value      = 100
 # at the first build — her own room with the door shut, which is the same door
 # @gil's rule says stays open when anyone is on the landing.
 #
-# ⚠️ ALONE IS A SCHEDULE HERE, NOT A PRESENCE CHECK. There is no engine door or
-# privacy state, and Nate and Tasha have no rooms and no content yet — declaring
-# them now to power one condition would spend them early. the_phone.md already
-# names the hours: the house is quietest on weekday afternoons and after everyone
-# is asleep. Those are exactly the hours the middle shift wants too, which is the
-# collision the design is built on.
+# ⚠️ ALONE USED TO BE A SCHEDULE HERE AND IS NOW A DOOR. Until 2026-09-17 this
+# canvas carried two schedule rows — weekdays 12:00-16:00 and 22:00-23:59 — chosen
+# because the house happened to be empty in those hours, and the comment that stood
+# here admitted it outright: "there is no engine door or privacy state." There is
+# one now. `door_locked` is set by `her_door` in her own room, and it is the whole
+# gate. The clock has nothing to do with it any more.
+#
+# ⚠️ WHY THE SCHEDULES HAD TO GO RATHER THAN STAY AS A FLOOR. Schedules are not
+# part of `conditions` — a canvas with schedules is dead outside them, full stop,
+# so "empty house OR shut door" cannot be expressed with one of each. Keeping them
+# would have meant the lock did nothing in the other twenty hours.
+#
+# ⚠️ AND IT HAD TO BECOME A DOOR THE DAY @nate CAME HOME AT THREE. His new
+# 15:00-18:00 row sits inside the old weekday window. The build would not have said
+# a word: she would simply have been going live with him down the landing, against
+# hours that were picked on the promise nobody was in.
+#
+# ⚠️ ADDING `conditions` HERE TURNS ON A STRING THAT HAS NEVER RENDERED. The phone
+# launcher shows an option's `locked_text` only when its canvas HAS trigger
+# conditions (v2.py:3152-3153); with none, it fell through to `cooldown_message`
+# instead. 8_phone.toml's "Not tonight." was unreachable for the whole of the first
+# build and is live from this pass, so it was rewritten to name the door.
 
 [[canvases]]
 id   = "stream"
@@ -439,23 +455,16 @@ priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 15 }]
 show_when_blocked = true
-cooldown_message = "Somebody is always in at this hour."
+cooldown_message = "Not with that door open."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] }
 # ⚠️ THE PHONE IS THE ONLY DOOR INTO THIS NOW. the_phone.md always said the app
 # was on the phone; the first build put the link on her bedroom wall instead.
 # The location stays because it is where the scene RETURNS her — a canvas has
 # exactly one home and this is it. `hidden_from_location` takes it off her room's
 # activity list without taking away the room.
 hidden_from_location = true
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "12:00"
-end_time   = "16:00"
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "22:00"
-end_time   = "23:59"
 
 [[canvases.nodes]]
 id   = "base"
@@ -2406,3 +2415,112 @@ costs      = [{ trait = "cash", value = 2 }]
 text       = "Not yet."
 targetType = "location"
 locationId = "the_strip"
+
+# =============================================================================
+# HER DOOR · the first thing in this game that makes @gil's rule mechanical
+#
+# the_house.md has said it since the first draft and nothing has ever enforced it:
+# "Her door stays open when someone's on the landing. So closing it is already a
+# small decision, and it's the same door the stream needs shut."
+#
+# ⚠️ IT IS THE TELEVISION'S SHAPE, ON PURPOSE. One object, two buttons, and it
+# remembers — including the asymmetry that took a build to get right: SHUT returns
+# to the node so she stays and reads the new state, OPEN returns to the location so
+# the room re-renders and whatever the shut door was hiding comes back.
+#
+# ⚠️ TWO ROWS SAY "Shut the door." AND THAT IS NOT A DUPLICATE. They are exclusive
+# on the `house_empty` stage helper, so exactly one ever renders. The television
+# pass shipped this pattern twice and the 54-state sweep proved no label doubles.
+#
+# ⚠️ `door_locked` CLEARS OVERNIGHT, `door_noticed` DOES NOT. The flag is today's
+# decision; the tally is what @gil has seen, and he does not forget it by morning.
+# =============================================================================
+
+[[canvases]]
+id   = "her_door"
+name = "The door"
+description = "The lock on her own door. Sets `door_locked`, which is now the only gate on going live. Shutting it while anybody is in the house puts one on `door_noticed`, which @gil reads at the table."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shut, or not"
+
+# ONE if/elseif chain — adjacent group blocks merge, and exclusive bands are
+# exactly what that is for. Order is the priority: shut first, then the two ways
+# of being open.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "The door is shut and the little button on the handle is in. It took one second and it is the only second of the day that is entirely yours. The room is the same room and it is not the same room." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "stage", helper = "house_empty", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Open, onto a landing with nobody on it. You can hear the fridge from here and nothing else. An open door costs you nothing this hour, but there are not many hours in a week like this one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Open, because those are his rules, and there is somebody in this house. Not outside it. Somewhere down there, moving about, and the gap between your door and the frame is four inches of his house." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut the door."
+targetType = "node"
+nodeId     = "her_door.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_false" },
+  { type = "stage", helper = "house_empty", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "set" }]
+
+# The same act, and the only difference is that somebody is in to see it. This is
+# the row that costs, and what it costs is not paid today.
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut the door."
+targetType = "node"
+nodeId     = "her_door.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_false" },
+  { type = "stage", helper = "house_empty", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "set" }]
+effects = [{ targetType = "player", trait = "door_noticed", op = "add", value = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Open it again."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 2

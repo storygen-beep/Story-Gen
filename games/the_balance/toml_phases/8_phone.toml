@@ -64,11 +64,17 @@ type      = "launcher"
 label     = "Go Live"
 no_answer = "Not from here. Not with this many people about."
 
+# ⚠️ THIS `locked_text` NEVER RENDERED UNTIL 2026-09-17. The launcher reaches for
+# it only when the canvas it points at HAS trigger conditions (v2.py:3152-3153),
+# and `stream` had none — two schedule rows and nothing else — so every refusal
+# fell through to the canvas's `cooldown_message` instead. The door lock gave the
+# canvas conditions, which turned this string on for the first time, so it stopped
+# being "Not tonight." and started naming the actual reason.
 [[phone.apps.options]]
 text   = "Your room, door shut."
 canvas = "stream"
 show_when_locked = true
-locked_text = "Not tonight."
+locked_text = "Not with the door open. It is four inches of his house and anybody on that landing has it."
 
 [[phone.apps.options]]
 text   = "The one at work, with the lock."

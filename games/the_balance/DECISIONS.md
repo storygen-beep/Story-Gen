@@ -94,6 +94,16 @@ nothing there to break.
 so it lives in his description rather than here. A drunk step dad hands her an excuse for
 everything.
 
+**He works for himself, out of the van — added 2026-09-17, and it is load-bearing now.** The first
+build never said what he did for a living, which left four things in the game with no cause: the van
+and the lifts, **$2,400 handed over in cash** by a man who pays **$5 a chore**, the list on the
+fridge in his own handwriting, and the cast sheet's promise that he is "in the garage late."
+
+⚠️ **He is comfortable, and that is the part that cannot change.** The alternative on the table was a
+business going under, which would have made the $150 something he *needs*. That contradicts decision
+3 below: the debt is about **control**, and the economy, the house story and three meters hang off
+it being about control. LO was shown the failing version and did not take it.
+
 ### One thing that stays off-limits
 
 **Lynn — the mother — is never touched.** She's seen through a door and that's all.

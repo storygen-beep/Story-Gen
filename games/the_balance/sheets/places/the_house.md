@@ -13,15 +13,15 @@
 
 | room | what it's for | who's in it |
 |---|---|---|
-| **Her bedroom** | sleep, rest, change, and the phone against the books | nobody, unless they knock |
+| **Her bedroom** | sleep, rest, change, the phone against the books — and **a door she can shut**, which is the only thing that lets her go live | nobody, unless they knock |
 | **The landing** | the middle of the house — four doors and the bathroom open off it | whoever is moving between rooms |
 | **The kitchen** | food, the chore list on the fridge, and Friday's $150 handed over | Gil in the mornings |
 | **The living room** | the sofa and **the television, which she can actually work** — five channels, a button to change them and a button to turn it off. Rest, and an hour that costs nothing | her mum from eight, Gil from half past, Nate once they've gone up |
 | **The bathroom** | the shower, and being clean enough to go live. It has a lock | shared with Nate and Tasha |
-| **Nate's room** | his door, and it isn't always shut | Nate, evenings and odd hours |
+| **Nate's room** | his door. Shut in the afternoon and not always shut at night, and the difference is the whole of him | Nate, three to six and again from ten |
 | **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |
 | **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall | only with the door open |
-| **The garage** | the car, the bins, the laundry — where half the chores are | Gil, late |
+| **The garage** | **Gil's workshop.** The van, his tools on the wall in the order he wants them, the bins and the washing machine. Where half the chores are | Nate one till three, doing his dad's work. Gil at five, unloading |
 
 **The way out** is the front door onto her street, and the bus stop on it. The bus costs money and
 forty minutes. A lift from Gil is a favour.
@@ -42,7 +42,9 @@ be paid for one.**
 
 - **In by ten.** After that the front door is a thing she has to come through, and he's up.
 - **Her door stays open when someone's on the landing.** So closing it is already a small decision,
-  and it's the same door the stream needs shut.
+  and it's the same door the stream needs shut. **This is a mechanic now, not a mood** — shutting it
+  is a button in her own room, going live is impossible without it, and shutting it on a house with
+  somebody in it goes on a count he reads at the dinner table.
 - **Chores first.** The list gets done before she goes anywhere, or he notices.
 
 ## What the house is like in the morning

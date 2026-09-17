@@ -106,7 +106,20 @@ DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 # it: @nate is in nate_room twice now, awake 22:00-23:59 with `nate_door` behind it
 # and asleep 00:00-07:00 with nothing, and a room-level exemption would have
 # excused both. The awake row has to stay under scrutiny, so the key names the hour.
+#
+# ⚠️ AN OFFSCREEN LOCATION IS INVISIBLE TO THIS SCRIPT, AND THAT IS NOT A BUG WORTH
+# FIXING HERE. The engine knows the property — `_loc_offscreen` at v2.py:20653 is
+# what stops `the_gym` rendering a nav card — but this file never reads
+# `location.properties`, so an offscreen row falls through to the "none of them
+# hers" branch and reports every weekday dead. Teaching the script the property
+# would be a real fix and it would also be a second place the rule lives; one
+# written exemption, with the reason on it, is the same answer for less.
 OCCUPANCY_ROWS = {
+    ("npc_nate", "the_gym", "18:00"):
+        "he is out. `the_gym` is an offscreen location — no nav card, no exits into "
+        "it, and she can never follow him there (v2.py:20653-20659). The row exists "
+        "so that the hour has a name instead of being a hole in the table, which is "
+        "what 08:00-15:00 still is. There is nothing to click BY DESIGN.",
     ("npc_nate", "the_bathroom", "07:00"):
         "the shower in the opening. This row is what makes the bathroom taken — it "
         "blocks the door and shows him on the card, and there is nothing to click. "

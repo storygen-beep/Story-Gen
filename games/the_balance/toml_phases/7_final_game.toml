@@ -153,6 +153,18 @@ followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this 
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
                        # knows her name.
+# --- her own door ------------------------------------------------------------
+# ⚠️ A TALLY, AND IT NEVER GOES DOWN. Every other counter in this block is either
+# a position in a chain or a countdown; this one is the number of times she has
+# shut her door on a house with somebody in it. the_house.md has always said the
+# rule — "her door stays open when someone's on the landing" — and until now
+# nothing in the game enforced it or noticed it being broken.
+#
+# ⚠️ NOT IN [engine.daily_tick]. The flag `door_locked` clears overnight because
+# the decision is a daily one; this does not, because @gil keeps count. It is read
+# in exactly one place — the dinner table, beside the chores and the hours she
+# keeps, which is where he reads everything else about how she is living.
+door_noticed   = 0
 
 # ⚠️ cash = 10 IS A GUESS AND HAS TO GO TO LO. No sheet says what she starts with,
 # and SYSTEMS.md's own tail flags it: "nothing yet says what her cash is for beyond
@@ -337,6 +349,15 @@ flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
+  # Her door is open again by morning, for the same reason the jacket is back on:
+  # the rule is @gil's and the house resets to it. Shutting it is a decision she
+  # makes fresh every day, which is the only thing that stops one five-minute
+  # click buying every hour of the rest of the game.
+  #
+  # ⚠️ ITS TALLY, `door_noticed`, IS DELIBERATELY NOT HERE — same split as
+  # `toilet_far` above and its permanent twin. The flag is today; the tally is what
+  # @gil has seen, and that does not go back to nothing overnight.
+  { targetType = "player", flag = "door_locked", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
   # Which band the toilet payout screen shows. Set on the way in, read once on the
   # way out, cleared here. `toilet_far_done` is the PERMANENT twin and must never
@@ -381,6 +402,12 @@ flagEffects = [
   # @gil at the table. One sit-down a day; the question he will not answer is
   # one-time and is NOT cleared here.
   { targetType = "player", flag = "gil_today", op = "unset" },
+  # @nate, and the same rule as @gil — one go at being in a room with him a day,
+  # wherever it happens. Shared by his three new surfaces: the kitchen at noon, the
+  # garage at one, his shut door at three. NOT shared with `hub_nate_sofa`, which
+  # is on `sofa_today` with everything else in the front room, because that hour is
+  # capped by the room rather than by him.
+  { targetType = "player", flag = "nate_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
@@ -388,6 +415,39 @@ traitEffects = [
   { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
 ]
 # It runs past zero into negatives and that is harmless — every read is `lte 0`.
+
+# --- IS THE HOUSE EMPTY ------------------------------------------------------
+# The first named gate in this game, and it exists because the engine's condition
+# logic is ONE FLAT LEVEL. `triggerConditionsSatisfied` reads a single `items` list
+# under a single `logic` (v2.py:4133) and does not nest, so "the house is empty OR
+# her door is shut" cannot be written as one condition block. A stage helper is the
+# documented way round it: the helper holds the AND, and the thing that reads it is
+# one item in somebody else's OR. Helpers may hold PRIMITIVES ONLY — one level of
+# nesting, never two (v2.py:4427).
+#
+# ⚠️ SIX ROOMS, NOT SEVEN, AND NOT THE GARAGE.
+#   · `the_hall` holds ZERO schedule rows, so a gate on it is true forever. A dead
+#     clause in a six-clause AND is invisible — nothing in the toolchain objects —
+#     which is exactly the defect class presence.py exists to catch.
+#   · `the_garage` is left out on purpose. @nate is out there 13:00-15:00 and @gil
+#     17:00-18:00, and neither of them can be heard from her room. Including it
+#     would quietly cost her the whole afternoon she just got.
+#
+# ⚠️ npc_id IS OMITTED ON PURPOSE. With no `npc_id` the condition asks whether the
+# room holds ANYBODY (v2.py:4477-4483, setup.getNpcsAtLocation at :3788) rather
+# than naming four people per room and going stale the next time somebody's hours
+# move. The engine's own formatter renders it as "<Room> must be empty".
+[[engine.stage_helpers]]
+name        = "house_empty"
+description = "Nobody is in any of the six rooms she could be heard from."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen",        operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_front_room",     operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_master_bedroom", operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_bathroom",       operator = "is_absent" },
+  { type = "npc_at_location", location_id = "nate_room",          operator = "is_absent" },
+  { type = "npc_at_location", location_id = "tasha_room",         operator = "is_absent" },
+] }
 
 # --- guidance ----------------------------------------------------------------
 # quests_engine = "v2" turns the sidebar entry and the page ON, so the cards are
@@ -606,10 +666,28 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
+description = "The van, the bins, the washing machine, and the light @gil leaves on. His tools are on the wall in the order he wants them and half the list on the fridge lives out here."
 image       = "locations/the_garage.jpg"
-image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
+image_search_queries = ["cluttered home garage workbench tools van night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
+
+# --- WHERE HE IS WHEN HE IS NOT HERE ------------------------------------------
+# ⚠️ offscreen = true IS A BARE TOP-LEVEL KEY on the location, not a sub-table
+# (template_import.py:1944). It renders no nav card and never appears in any exit
+# list (v2.py:20653-20659), and `world reachable` exempts it (gates.py:5485). The
+# only thing it is for is letting a schedule row say where somebody actually went.
+#
+# ⚠️ IT IS ALSO INVISIBLE TO presence.py, which has no idea the property exists —
+# @nate's 18:00 row here needs a hand-written OCCUPANCY_ROWS entry or the run
+# reports a DEAD row and exits 1.
+#
+# ⚠️ A [locations.door] on one of these is a validation error, and so is a `costs`
+# block that nobody can ever pay. Keep it bare.
+[[locations]]
+id          = "the_gym"
+name        = "The Gym"
+description = "Not a place you have ever been. It is where @nate is between six and seven, and the only thing in his week he does not make a joke out of."
+offscreen   = true
 
 # --- getting anywhere --------------------------------------------------------
 
@@ -728,13 +806,18 @@ entry_from  = "the_cafe"
 [[npcs]]
 id          = "npc_gil"
 name        = "Gil"
-description = "Your mum's husband of three years, and the reason you are at college at all. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
+description = "Your mum's husband of three years, and the reason you are at college at all. He works for himself, out of the van, and the garage is where the job lives when he is not on it. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
 portrait    = "gil.jpg"
 role        = "step dad"
 relationship = "step dad"
 relationship_options = ["step dad", "mum's husband", "dad", "uncle"]
 customizable = true
-tags        = ["runs the house his way", "never mentions what he paid", "up before everyone", "does not drink"]
+# ⚠️ EXACTLY FOUR — the importer hard-fails at five. "up before everyone" came out
+# to make room for the trade, and it is the only one of the five the game already
+# says elsewhere: his sleep row's activity is literally "asleep, and up before
+# anybody". The other four are load-bearing — DECISIONS.md:93 says a drunk step dad
+# would hand her an excuse for everything.
+tags        = ["works for himself, out of the van", "runs the house his way", "never mentions what he paid", "does not drink"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 
@@ -747,6 +830,27 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "06:30"
 end_time   = "08:00"
 activity   = "at the table with the radio on"
+
+# --- HE WORKS FOR HIMSELF, AND THE GARAGE IS THE WORKSHOP ---------------------
+# The cast sheet has said "in the garage late" since the first draft and no row in
+# this game has ever put him out there. This is that row.
+#
+# ⚠️ IT IS THE HOUR BEFORE THE KITCHEN, NOT AFTER IT. Everything from 18:00 on is
+# load-bearing — the kitchen holds `friday_payment` and `dinner`, 20:30 is the
+# television stagger, and 21:00-23:30 upstairs IS one of the two doors. An hour
+# taken from any of those would cost a working surface. 17:00-18:00 was empty.
+#
+# It is also what makes the money make sense. A man who counts five dollars a chore
+# handed over two thousand four hundred in cash without mentioning it, and nothing
+# in the game has ever said how. He is self-employed, he has had good years, and
+# the list on the fridge is in his handwriting because writing jobs down is what he
+# does all day.
+[[npcs.schedules]]
+location   = "the_garage"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "unloading the van, still in his work clothes"
 
 # the_week.md: "@gil is there because he's always there at six." Friday evening is
 # when the $150 is handed over, so he has to actually BE in the room.
@@ -860,7 +964,7 @@ role        = "step brother"
 relationship = "step brother"
 relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
-tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
+tags        = ["wants you gone", "can't stop looking", "tells the house things", "does his dad's work for nothing"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
@@ -876,9 +980,64 @@ start_time = "07:00"
 end_time   = "07:45"
 activity   = "in the shower, taking his time about it"
 
+# --- HIS AFTERNOON, AND IT IS THE BIGGEST EMPTY BLOCK IN THE GAME -------------
+# He is a year ahead of her at the same college and the timetable ends at noon —
+# class_2 and class_4 both run to 12:00, Monday to Thursday. Until now he vanished
+# from 07:45 to 19:00 and so did everybody else, which is why the house held nobody
+# at all between eight in the morning and four in the afternoon, seven days a week.
+#
+# ⚠️ EVERY ONE OF THESE FOUR ROWS HAS A CANVAS BEHIND IT, and that is not optional.
+# presence.py backs a row four ways — portrait, covered, substitution, occupancy —
+# and a row with none of them is DEAD. `kitchen_nate_lunch`, `garage_nate` and
+# `hub_nate_room` exist for these three; the gym is an OCCUPANCY_ROWS entry because
+# she cannot follow him there.
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [1, 3, 5, 6]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "13:00"
+activity   = "standing at the counter eating something out of the packet"
+
+# ⚠️ THE GARAGE'S FIRST OCCUPANT. It has been a declared room with no people and no
+# canvases since the game was built, and the house sheet has always promised half
+# the chore list lives out there. He does his dad's work because he is asked to and
+# because saying no costs more than doing it, which is the same arithmetic she is
+# on with the $150.
+[[npcs.schedules]]
+location   = "the_garage"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "15:00"
+activity   = "sorting his dad's work out, because he was asked to"
+
+# ⚠️ THIS ROW OVERLAPS HER STREAM HOURS ON PURPOSE. Going live used to be gated on
+# a clock that assumed an empty house; from this pass it is gated on her door being
+# shut. Him being down the landing at three in the afternoon is exactly what the
+# lock is for, and it is the first time in the game the two facts meet.
+[[npcs.schedules]]
+location   = "nate_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+activity   = "in his room with the door shut and something on"
+
+# ⚠️ AN OFFSCREEN LOCATION, AND THE FIRST ONE IN THIS REPO. `the_gym` renders no
+# nav card and she can never travel to it (v2.py:20653-20659) — it exists so that
+# "he is out" is a place rather than a hole in the table. College is still a hole,
+# by LO's call: the gym is the hour worth naming.
+[[npcs.schedules]]
+location   = "the_gym"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "at the gym, which is the one thing he is not sarcastic about"
+
+# ⚠️ ALL SEVEN NIGHTS NOW, NOT FOUR. He used to eat in the front room on the nights
+# her mum was on the ward; LO's call, 2026-09-17, is that dinner is the kitchen for
+# everyone who is home. The front-room row that held those three nights is gone.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "19:00"
 end_time   = "20:00"
 activity   = "at the table, eating fast so he can get up"
@@ -886,18 +1045,17 @@ activity   = "at the table, eating fast so he can get up"
 # ⚠️ HE DOES NOT WATCH TELEVISION. LO's call, 2026-09-17: "I say he doesnt watches
 # tv. That only parents together." So he is off the sofa for the whole of the
 # parents' hour and comes back down the moment they go up. He is not in a room at
-# all 20:00-21:00 on dinner nights — offscreen on purpose, because a bedroom row
-# with nothing behind it is a presence.py DEAD row and his door is fixed at 22:00.
+# all 20:00-21:00 — offscreen on purpose, because a bedroom row with nothing
+# behind it is a presence.py DEAD row and his door is fixed at 22:00.
 #
-# The ward nights are the only ones he gets the early sofa, because there is no
-# dinner to sit at.
-[[npcs.schedules]]
-location   = "the_front_room"
-weekdays   = [0, 2, 4]
-start_time = "19:00"
-end_time   = "20:00"
-activity   = "on the sofa with something on he is not watching"
-
+# ⚠️ THE 21:00 ROW BELOW SURVIVED A DELETION, AND HERE IS WHY IT HAD TO. LO asked
+# for him off the sofa entirely. Three surfaces hang off these front-room hours and
+# NOT ONE of them carries a schedule of its own: `hub_nate_sofa` (a portrait hub on
+# `requires_npc`), `nate_sits_down` (a substitution on `sofa_hour`), and
+# `sofa_hour`'s own prose bands on whether he is on it. Deleting the row would have
+# darkened all three in silence — no build error, no gate, nothing. He is off the
+# sofa for the television hour, which is what the change was actually for.
+#
 # The late hour, every night. the_house_day.md calls this one "the house at its
 # most open" — parents upstairs, Tasha out, doors shut. Sitting with him here is
 # the sit-down; the set is off and what was on it is not his business.
@@ -2015,12 +2173,28 @@ value      = 100
 # at the first build — her own room with the door shut, which is the same door
 # @gil's rule says stays open when anyone is on the landing.
 #
-# ⚠️ ALONE IS A SCHEDULE HERE, NOT A PRESENCE CHECK. There is no engine door or
-# privacy state, and Nate and Tasha have no rooms and no content yet — declaring
-# them now to power one condition would spend them early. the_phone.md already
-# names the hours: the house is quietest on weekday afternoons and after everyone
-# is asleep. Those are exactly the hours the middle shift wants too, which is the
-# collision the design is built on.
+# ⚠️ ALONE USED TO BE A SCHEDULE HERE AND IS NOW A DOOR. Until 2026-09-17 this
+# canvas carried two schedule rows — weekdays 12:00-16:00 and 22:00-23:59 — chosen
+# because the house happened to be empty in those hours, and the comment that stood
+# here admitted it outright: "there is no engine door or privacy state." There is
+# one now. `door_locked` is set by `her_door` in her own room, and it is the whole
+# gate. The clock has nothing to do with it any more.
+#
+# ⚠️ WHY THE SCHEDULES HAD TO GO RATHER THAN STAY AS A FLOOR. Schedules are not
+# part of `conditions` — a canvas with schedules is dead outside them, full stop,
+# so "empty house OR shut door" cannot be expressed with one of each. Keeping them
+# would have meant the lock did nothing in the other twenty hours.
+#
+# ⚠️ AND IT HAD TO BECOME A DOOR THE DAY @nate CAME HOME AT THREE. His new
+# 15:00-18:00 row sits inside the old weekday window. The build would not have said
+# a word: she would simply have been going live with him down the landing, against
+# hours that were picked on the promise nobody was in.
+#
+# ⚠️ ADDING `conditions` HERE TURNS ON A STRING THAT HAS NEVER RENDERED. The phone
+# launcher shows an option's `locked_text` only when its canvas HAS trigger
+# conditions (v2.py:3152-3153); with none, it fell through to `cooldown_message`
+# instead. 8_phone.toml's "Not tonight." was unreachable for the whole of the first
+# build and is live from this pass, so it was rewritten to name the door.
 
 [[canvases]]
 id   = "stream"
@@ -2034,23 +2208,16 @@ priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 15 }]
 show_when_blocked = true
-cooldown_message = "Somebody is always in at this hour."
+cooldown_message = "Not with that door open."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] }
 # ⚠️ THE PHONE IS THE ONLY DOOR INTO THIS NOW. the_phone.md always said the app
 # was on the phone; the first build put the link on her bedroom wall instead.
 # The location stays because it is where the scene RETURNS her — a canvas has
 # exactly one home and this is it. `hidden_from_location` takes it off her room's
 # activity list without taking away the room.
 hidden_from_location = true
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "12:00"
-end_time   = "16:00"
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "22:00"
-end_time   = "23:59"
 
 [[canvases.nodes]]
 id   = "base"
@@ -4001,6 +4168,115 @@ costs      = [{ trait = "cash", value = 2 }]
 text       = "Not yet."
 targetType = "location"
 locationId = "the_strip"
+
+# =============================================================================
+# HER DOOR · the first thing in this game that makes @gil's rule mechanical
+#
+# the_house.md has said it since the first draft and nothing has ever enforced it:
+# "Her door stays open when someone's on the landing. So closing it is already a
+# small decision, and it's the same door the stream needs shut."
+#
+# ⚠️ IT IS THE TELEVISION'S SHAPE, ON PURPOSE. One object, two buttons, and it
+# remembers — including the asymmetry that took a build to get right: SHUT returns
+# to the node so she stays and reads the new state, OPEN returns to the location so
+# the room re-renders and whatever the shut door was hiding comes back.
+#
+# ⚠️ TWO ROWS SAY "Shut the door." AND THAT IS NOT A DUPLICATE. They are exclusive
+# on the `house_empty` stage helper, so exactly one ever renders. The television
+# pass shipped this pattern twice and the 54-state sweep proved no label doubles.
+#
+# ⚠️ `door_locked` CLEARS OVERNIGHT, `door_noticed` DOES NOT. The flag is today's
+# decision; the tally is what @gil has seen, and he does not forget it by morning.
+# =============================================================================
+
+[[canvases]]
+id   = "her_door"
+name = "The door"
+description = "The lock on her own door. Sets `door_locked`, which is now the only gate on going live. Shutting it while anybody is in the house puts one on `door_noticed`, which @gil reads at the table."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shut, or not"
+
+# ONE if/elseif chain — adjacent group blocks merge, and exclusive bands are
+# exactly what that is for. Order is the priority: shut first, then the two ways
+# of being open.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "The door is shut and the little button on the handle is in. It took one second and it is the only second of the day that is entirely yours. The room is the same room and it is not the same room." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "stage", helper = "house_empty", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Open, onto a landing with nobody on it. You can hear the fridge from here and nothing else. An open door costs you nothing this hour, but there are not many hours in a week like this one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Open, because those are his rules, and there is somebody in this house. Not outside it. Somewhere down there, moving about, and the gap between your door and the frame is four inches of his house." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut the door."
+targetType = "node"
+nodeId     = "her_door.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_false" },
+  { type = "stage", helper = "house_empty", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "set" }]
+
+# The same act, and the only difference is that somebody is in to see it. This is
+# the row that costs, and what it costs is not paid today.
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut the door."
+targetType = "node"
+nodeId     = "her_door.base"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_false" },
+  { type = "stage", helper = "house_empty", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "set" }]
+effects = [{ targetType = "player", trait = "door_noticed", op = "add", value = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Open it again."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "door_locked", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "door_locked", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 2
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 5_scenes.toml
@@ -5977,6 +6253,19 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
 ] } }
 blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "There's more on that list this week. I'd get it done." },
+]
+
+# ⚠️ THE DOOR, AND HE COUNTED IT BEFORE HE MENTIONED IT. `door_noticed` goes up
+# every time she shuts her door on a house with somebody in it, and it does not
+# clear overnight. Three is where he says something, which is how he says
+# everything — late, once, and without finishing it.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "door_noticed", operator = "gte", value = 3 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "That door of yours is shut a lot in the afternoons. There's a reason it stays open and I've never had to explain it to anybody else in this house." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -8316,6 +8605,448 @@ text = "On."
 destinationType = "specific"
 locationId      = "the_kitchen"
 
+# =============================================================================
+# THE HOUSE IN THE AFTERNOON · four surfaces for four schedule rows
+#
+# ⚠️ EVERY ONE OF THESE EXISTS BECAUSE A SCHEDULE ROW NEEDS A SURFACE. presence.py
+# backs a row four ways — portrait, covered, substitution, occupancy — and a row
+# with none of them is DEAD. @nate's new hours (kitchen 12:00, garage 13:00, his
+# room 15:00) and @gil's garage hour are the rows; these are the surfaces.
+#
+# ⚠️ ALL FOUR CARRY AN EXPLICIT SCHEDULE FENCE. A canvas with no schedule is live
+# whenever its LOCATION is, so an unfenced `hub_nate_room` would render against a
+# man asleep at three in the morning. process/README.md §6 item 16.
+#
+# ⚠️ NO max_triggers_per_day ON ANY OF THEM. A day cap on a canvas that carries an
+# `npc` does not spend the act, it deletes the person — 0_systems_spec.toml:319.
+# The caps are flags on the choices: `nate_today` across his three new surfaces,
+# and `gil_today` shared with the kitchen and sofa hubs he already has.
+# =============================================================================
+
+[[canvases]]
+id   = "kitchen_nate"
+name = "Nate"
+description = "Portrait hub @ the_kitchen. Noon every day, and seven o'clock on the three nights there is no dinner. Shares `nate_today`."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_nate"
+npc           = "npc_nate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "13:00"
+
+# ⚠️ THE WARD NIGHTS ONLY, AND presence.py IS WHY THIS ROW EXISTS. Moving @nate to
+# the kitchen for dinner all seven nights left him at that table on Mon/Wed/Fri
+# with nothing behind it — `dinner` is gated on her mum being present and she is on
+# the ward those nights, so it never fires. Three dead evenings, and the build said
+# nothing. The dinner nights are deliberately NOT in this list: `dinner` covers him
+# there, and a second Nate surface in the same hour would be two cards for one man.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "19:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Standing at the counter"
+
+# ⚠️ GROUPS, NOT ONE POOL. A `block_pool` cannot be gated (process/README.md §6
+# item 4), and this canvas now covers two different hours — midday in his coat, and
+# seven at night with nobody cooking. One pool would have put him fresh out of a
+# lecture at the dinner table three nights a week.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:00", end_time = "13:00" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@nate is against the counter eating something straight out of the packet, still in his coat. He got out of the same building you did and he got here first, and he wants you to know both of those things without saying either." },
+    { type = "paragraph", content = "The kitchen smells like toast and he has not washed the pan. He is on his phone with one hand and eating with the other, and he moves about four inches when you need the drawer he is stood in front of." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Nobody has cooked. Your mum is on the ward and @gil ate at six, and @nate is at the table with a plate he made himself and the radio on for company it is not providing. Three of the four chairs are empty." },
+    { type = "paragraph", content = "Seven o'clock on a ward night. The table is his and he has spread out across it, and he does not move anything when you come in. He eats like somebody who has worked all afternoon, because he has." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Eat something while he's there."
+targetType = "node"
+nodeId     = "kitchen_nate.ate"
+show_when_locked = true
+locked_text = "You have had one go at being in a room with him today. That is the number this house runs at."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "nate_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wait until he's gone."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "ate"
+name = "Twenty minutes"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You make something and eat it standing up at the other end of the counter, because sitting down would look like you meant to be in here. He does not leave and he does not talk to you, and both of those are decisions."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are up and down that landing a lot this week. I would keep an eye on that if I were you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He has got me out in that garage again after this. You get a list on the fridge. I get the actual job." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Do not touch the middle shelf. That is his and he counts it, and I am not being blamed for you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You were in the nine o'clock. I saw you come out of it on your own, same as always." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the plate in the sink."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+# --- THE GARAGE, AND SOMEBODY IS FINALLY IN IT -------------------------------
+# It has been a declared room with no people and no canvases since the first
+# build. These two rows are the first thing that has ever been in it.
+
+[[canvases]]
+id   = "garage_nate"
+name = "Nate"
+description = "Portrait hub @ the_garage, 13:00-15:00. He does his dad's work because saying no costs more than doing it, which is the same arithmetic she is on with the $150. Shares `nate_today`."
+
+[canvases.trigger]
+location      = "the_garage"
+requires_npc  = "npc_nate"
+npc           = "npc_nate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "His dad's work"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The up-and-over is halfway and @nate is under the strip light with the van's back doors open, putting things back on the wall in the order they are drawn on it. He has been at it long enough to have stopped being annoyed about it." },
+  { type = "paragraph", content = "He is on the floor with a box between his knees, counting fittings into it off a list in his dad's handwriting. The radio is on out here too. Nobody in this family can work in a quiet room." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him a hand with it."
+targetType = "node"
+nodeId     = "garage_nate.helped"
+show_when_locked = true
+locked_text = "You have had one go at being in a room with him today. That is the number this house runs at."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "nate_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "helped"
+name = "The other end of it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take the other end of whatever he is lifting and for about forty minutes the two of you work without a word. It is the most straightforward you have ever been with each other. He does not say thanks, but he does not tell you to go either."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He said your name on Friday and then he did not finish the sentence. That is worse than him finishing it. Ask me how I know." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He has never once paid me for this. You get five quid for the bins. I get told I live here." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He was self-employed before he met your mother and he will be doing this when he is seventy. There is no version of him that stops." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wash your hands inside."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_garage"
+time_progression_minutes = 40
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "add"
+value      = -5
+
+[[canvases]]
+id   = "garage_gil"
+name = "Gil"
+description = "Portrait hub @ the_garage, 17:00-18:00. Back off the job, unloading. The first room in this game that is HIS, and she is the one standing in it. Shares `gil_today` with the kitchen and sofa hubs."
+
+[canvases.trigger]
+location      = "the_garage"
+requires_npc  = "npc_gil"
+npc           = "npc_gil"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Still in his work clothes"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "@gil has the van open and he is carrying things in off it one at a time, in the order he wants them on the wall. His hands are black to the wrist and he has not been inside the house yet. This is the hour nobody in here has ever seen." },
+  { type = "paragraph", content = "He is sat sideways in the van door writing on a pad against his knee, still in the boots. There is a flask on the bumper that has been empty since about eleven. He looks up when your shadow goes across him and then back down." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand out here with him a while."
+targetType = "node"
+nodeId     = "garage_gil.stood"
+show_when_locked = true
+locked_text = "You have sat with him once today. Twice would be a thing, and he would notice it was a thing."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "gil_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "gil_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back in."
+targetType = "location"
+locationId = "the_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "stood"
+name = "The wall with the tools on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You lean on the bench while he finishes. He does not stop working to talk to you and he does not mind you there, and it takes about ten minutes to work out those are two different things in him."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "I have had a bad payer this month as well. It happens. The difference is I do not stop paying the people underneath me while I wait." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Everything on that wall is where it is so I can find it in the dark. That is not tidiness. That is a day not costing me an hour." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "I put your brother on this because he is here. I would put you on it if you were ever in at four." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Twenty-two years I have not had anybody to send an invoice to about it. You do not get a sick day. You get a worse week." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to shut up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_garage"
+time_progression_minutes = 25
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# --- HIS DOOR IN THE AFTERNOON, AND IT IS SHUT -------------------------------
+# ⚠️ THIS IS NOT THE WALK-IN. `nate_door` is fenced to 22:00-23:59 and fires once
+# ever. This is the other twelve hours of him being behind that door, and the
+# difference is the whole point: at ten at night it is open four inches, and at
+# four in the afternoon it is shut and she knocks or she does not.
+
+[[canvases]]
+id   = "hub_nate_room"
+name = "Nate"
+description = "Portrait hub @ nate_room, 15:00-18:00. His door is shut in the afternoon. Deliberately NOT the walk-in — `nate_door` keeps its own 22:00 window. Shares `nate_today`."
+
+[canvases.trigger]
+location      = "nate_room"
+requires_npc  = "npc_nate"
+npc           = "npc_nate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shut, this time of day"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "His door is shut and there is something playing behind it, low enough that it is not for anybody else. The landing outside it is where you stand every day on the way to your own room and you have never once knocked on it in daylight." },
+  { type = "paragraph", content = "Shut, and the light is off under it, and he is in there. You hear him move when you stop outside. He heard you stop, then. That works both ways and always has." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Knock."
+targetType = "node"
+nodeId     = "hub_nate_room.knocked"
+show_when_locked = true
+locked_text = "You have had one go at being in a room with him today. That is the number this house runs at."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "nate_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go to your own room."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "knocked"
+name = "What"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The music does not go off. He says what through the door, in the voice of somebody who already knows it is you, and you end up saying whatever you came to say to four inches of painted wood."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "It is shut in the day. You worked that out, did you. Took you long enough." },
+  { type = "paragraph", content = "He does not open it and you do not ask him to. Whatever this is now, it happens at night with a lamp on and neither of you has said one word about it in the hours in between." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "If it is about the bathroom, use it. You do not have to come and tell me you are going to." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "I have been in that garage since one. Whatever it is, it is not going to be my problem for another hour." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 1
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 8_phone.toml
 # ══════════════════════════════════════════════════════════════════
@@ -8386,11 +9117,17 @@ type      = "launcher"
 label     = "Go Live"
 no_answer = "Not from here. Not with this many people about."
 
+# ⚠️ THIS `locked_text` NEVER RENDERED UNTIL 2026-09-17. The launcher reaches for
+# it only when the canvas it points at HAS trigger conditions (v2.py:3152-3153),
+# and `stream` had none — two schedule rows and nothing else — so every refusal
+# fell through to the canvas's `cooldown_message` instead. The door lock gave the
+# canvas conditions, which turned this string on for the first time, so it stopped
+# being "Not tonight." and started naming the actual reason.
 [[phone.apps.options]]
 text   = "Your room, door shut."
 canvas = "stream"
 show_when_locked = true
-locked_text = "Not tonight."
+locked_text = "Not with the door open. It is four inches of his house and anybody on that landing has it."
 
 [[phone.apps.options]]
 text   = "The one at work, with the lock."
