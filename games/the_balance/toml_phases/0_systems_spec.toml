@@ -412,6 +412,23 @@ flagEffects = [
   # is on `sofa_today` with everything else in the front room, because that hour is
   # capped by the room rather than by him.
   { targetType = "player", flag = "nate_today", op = "unset" },
+  # Her mum, and the same rule as the other two. One go at being in a room with
+  # her a day, wherever it happens — breakfast on a ward morning, the house at ten,
+  # or the hob at six. She is home so few hours that without this the three of them
+  # could all be spent in one day and she would be back to being furniture.
+  #
+  # ⚠️ NOT SHARED WITH `hub_lynn_sofa`. That surface is on `sofa_today` with
+  # everything else in the front room, because that hour is capped by the ROOM
+  # rather than by her, and it has been since the television. So a day can hold one
+  # hour of her mum plus one hour on that sofa, and they can be the same woman.
+  { targetType = "player", flag = "lynn_today", op = "unset" },
+  # ⚠️ THE FOOD, AND BOTH SURFACES SET IT. `cook` on a ward night, `cook_with_mum`
+  # on the other four. `dinner` reads it and does not care which it was. It clears
+  # here because a meal is a day: tomorrow nobody has cooked again.
+  { targetType = "player", flag = "cooked_today", op = "unset" },
+  # Fifteen minutes of standing in the kitchen doing nothing. On the CHOICE rather
+  # than the trigger, so the room keeps its card once it is spent.
+  { targetType = "player", flag = "kettle_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },

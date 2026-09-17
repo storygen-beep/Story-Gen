@@ -174,6 +174,48 @@ not gated high — it is not authored.** There is nothing in the file to raise a
 statement of it the game has — the one person in the house with nothing to take, being taken from
 anyway. **Two crossings is where this stops.** A third goes under this heading or it does not happen.
 
+#### Amended a third time 2026-09-17 — her week, and NOT her body
+
+**This is not the third crossing the paragraph above forbids, and the distinction is the whole
+entry.** The two amendments above are about what may be done *to* her. This one is about **where she
+is at four in the afternoon**, and it takes nothing off the list. Logged here anyway, because the
+sentence it bends is in her cast entry and somebody will read the two pages together.
+
+**The line it bends:** `the_cast.md` — *"Gives the hours. Everything in this game happens while
+she's out or asleep."*
+
+**What was actually true before it:** she had six schedule rows and **about sixty hours a week where
+she was awake, at home, and the game said she was not in the house.** Seventeen empty hours a day on
+Monday, Wednesday and Friday; thirteen on the mornings after; twelve on Sunday, her only day off.
+Gil's gap is nine hours and it is 08:00–17:00, because he is on a job. Hers was not a job. It was an
+unwritten row.
+
+**What she now has:** breakfast and the morning on her ward days, the sofa on the afternoons after
+one, the hob at six on the four nights she is home. It is a **night nurse's** week, which keeps her
+out of the way on its own — asleep before a shift, asleep after one, gone for three whole nights.
+
+**What is still off-limits, and this pass adds nothing to any of it:**
+
+- **Never touched.** Unchanged.
+- **Never in a scene as a body** beyond the two bathroom rungs already logged. Nothing here is a
+  body. She is at a sink, at an ironing board, at a hob.
+- **No new rung, no arousal, no arc.** She carries `relation` and nothing else, and the two bands
+  written for it are a question about money and a sentence about liking the company.
+- **Two crossings is still where it stops.** This is not a third one.
+
+**Why it was allowed:** LO asked where she was, having read the schedule himself, and the honest
+answer was nowhere. An absence is a design; a hole is not. **She is still the price** — the hours
+she gives are the ward and the sleep, and those are untouched. What she got back is the hours she
+was already spending in this house with nobody writing them down.
+
+⚠️ **AND THE HOURS SHE IS *NOT* IN THE HOUSE ARE LOAD-BEARING.** The first draft of this week ran
+her chores to 14:00 and her nap from 14:00, and between them those two rows left the house occupied
+every minute of every day: **17 empty hours a week went to zero.** `house_empty` is read by
+`her_door`, so the branch where shutting her own door costs nothing became unreachable and every
+stream in the game would have gone on Gil's count forever. The build was green, presence.py was
+green, gates.py was green. Only the live walk caught it. **Any future change to her hours has to
+re-measure the empty window**, and there is a route in `walks.py` that does.
+
 ---
 
 # 3. Changeable, but expensive

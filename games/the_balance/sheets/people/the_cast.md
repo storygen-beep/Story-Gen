@@ -49,9 +49,18 @@
 ## Lynn — her mum
 
 - **Wants** her daughter to be fine, and she is too tired to check.
-- **Found** on the ward three nights a week, asleep by ten on the others.
-- **Gives** the hours. Everything in this game happens while she's out or asleep.
-- **Never touched.** She's the price, not a person to be won.
+- **Found** on the ward Monday, Wednesday and Friday nights — and **in the house the rest of the
+  time, doing it.** Breakfast and the whole morning on her ward days, the sofa on the afternoons
+  after one, the hob at six on the four nights she's home.
+- **Gives** the hours — but she is no longer only an absence. She had about **sixty hours a week
+  where she was awake, at home, and the game said she wasn't there.** Now she has a week, and it is
+  a night nurse's week, which keeps her out of the way on its own: asleep before a shift, asleep
+  after one, gone for three whole nights.
+- **The only hour she is awake and not wrecked** is breakfast on a ward morning. That is the hour
+  she could check on her daughter, and she still doesn't.
+- **Helping her is the warmest thing in the game** and the only long stretch where the two of them
+  are alone in the house. It pays nothing and it costs an hour.
+- **Never touched.** She's the price, not a person to be won. The hours changed; that has not.
 
 ## Owen — the cafe owner
 

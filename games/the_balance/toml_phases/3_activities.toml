@@ -333,6 +333,123 @@ text       = "Leave it."
 targetType = "location"
 locationId = "the_kitchen"
 
+# --- THE KETTLE · the light thing the kitchen never had ---------------------
+# ⚠️ THE ROOM HAD ONE CARD. `chore` was it, and `chore` is capped at one a day, so
+# from the moment she did it the anchor room of the house rendered EMPTY every
+# hour nobody happened to be standing in it. Measured across a full week before
+# this: the kitchen showed one card at half four in the afternoon and one at ten
+# at night, seven days out of seven.
+#
+# ⚠️ THIS IS `sofa_hour` FOR THE KITCHEN AND IT IS COPIED ON PURPOSE. The front
+# room works because it holds something to do alone, something with an object, and
+# a card per person. That is `the-surfaces.md` R2 — a room's list is needs, work
+# and people — and the kitchen had the work and half the people.
+#
+# ⚠️ FIFTEEN MINUTES AND +10 `rest`, ONCE A DAY. `rest` falls 20 a day, `sleep`
+# sets it to 100 and the sofa gives 15 to 20, so this cannot be farmed into a
+# replacement for either. The flag is on the CHOICE, not the trigger, so the room
+# keeps its card after she has had it — a door, in the sense `a spent day still
+# has a door` means.
+#
+# ⚠️ NO HUNGER METER, AND THAT WAS THE CALL. A third need that falls every day
+# would make the kitchen compulsory rather than worth going to, which is a chore
+# and not content. It moves the meter the game already has.
+
+[[canvases]]
+id   = "kettle"
+name = "Put the kettle on"
+description = "Solo @ the_kitchen, any hour. Fifteen minutes and a little rest, once a day. Bands on who is in the room, which is the point of it — it is an excuse to be in the kitchen when somebody else is."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The kettle"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The kettle is where it always is and there is always about an inch in it. You put more in. It takes two minutes and there is nothing to do with those two minutes." },
+  { type = "paragraph", content = "There is a mug on the drainer that is nearly yours. The list on the fridge is in @gil's handwriting. You have read it four hundred times, but you read it again anyway." },
+  { type = "paragraph", content = "The bread is out. There is enough of it for one round of something and nobody will notice it has gone, and that is most of what this kitchen is for." },
+]
+
+# --- WHO IS STANDING IN IT ----------------------------------------------------
+# ⚠️ THESE BANDS ARE THE WHOLE VALUE OF THE CANVAS. A kettle is not content. An
+# excuse to be in a room with somebody at half seven in the morning IS, and this
+# is the only surface in the kitchen with no clock and no person on its trigger,
+# so it is the one that can catch whoever happens to be in here.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil is at the table behind you with the radio going. He does not offer and you do not ask, and the second mug you get down is not a question either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Make me one while you're stood there. I'll drink half of it and leave the rest, we both know that." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate is in the way of the drawer and he knows he is in the way of the drawer. He moves when you are close enough that moving is the smaller thing to do." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Do mine. Not that mug, the good one. You know the one, don't pretend you don't know the one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "There is nobody in here. The house does the noises it does with nothing in it, and the kettle getting loud is the loudest thing that has happened all afternoon." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand and drink it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 15
+show_when_locked = true
+locked_text = "You have already stood in this kitchen doing nothing today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "kettle_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "add", value = 10, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "kettle_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it with you."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
 # --- THE SHOWER · the only tap `clean` has ----------------------------------
 # ⚠️ BEFORE THIS CANVAS `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a
 # shift and nothing raised it, so about a week in she dropped under 40, the tips

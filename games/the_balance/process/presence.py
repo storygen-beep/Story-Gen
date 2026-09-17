@@ -178,6 +178,17 @@ OCCUPANCY_ROWS = {
         "belongs in it is still unwritten, and that stays the next piece of work — "
         "but the row is doing a job today whether or not that scene ever lands: it "
         "puts somebody in the house who is not watching.",
+
+    # --- her mum's week, rewritten 2026-09-17 --------------------------------
+    ("npc_lynn", "the_master_bedroom", "15:00"):
+        "asleep before a night shift, Mon/Wed/Fri afternoons. She works the ward "
+        "those nights and sleeping the afternoon before one is what people who do "
+        "this actually do. There is nothing to click and there must not be. What "
+        "the row BUYS is @nate's door: he is in his room 15:00-18:00 with it not "
+        "quite shut, and from this pass her mother is asleep behind the next one "
+        "for the whole of it. It also turns `house_empty` false for those hours, "
+        "so shutting her own door to go live goes on @gil's count more often — "
+        "which is the only thing `door_noticed` exists for. NEVER TOUCHED.",
 }
 
 # Real holes, named to LO and deferred by him on 2026-09-16. They are printed every

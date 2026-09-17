@@ -1110,6 +1110,34 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    mechanic as broken. Two older routes also had to be **inverted** in this pass — they were
    asserting the exact opposite of the new behaviour and had been right when written.
 
+21. **AN EMPTY HOUSE IS A RESOURCE, AND NOTHING IN THE TOOLCHAIN COUNTS IT.** Added 2026-09-17
+   with the kitchen pass, after it cost the game every free minute it had and no instrument noticed.
+
+   Her mum got a week. Two of her new rows were `the_kitchen` 09:00–14:00 and `the_master_bedroom`
+   14:00–18:30, which touch end to end. Between them, and the rows everybody else already had,
+   **the house went from 17 empty hours a week to zero.** Measured after the fact, never before.
+
+   `house_empty` is a `[[engine.stage_helpers]]` gate over six rooms, and it is read in exactly one
+   place — `her_door`, for three prose bands and an exclusive choice. With the helper permanently
+   false, **the branch where shutting her own door costs nothing became unreachable for the entire
+   game**, `door_noticed` climbed on every stream, and Gil's dinner line about it fired in week one.
+
+   ⚠️ **NOTHING CAUGHT IT AND NOTHING COULD HAVE.** The build was green. `presence.py` was green —
+   a fuller house is *more* backed, not less. `gates.py` was green on all 42, including
+   `a locked door says why` and `ends on an opening`, because the choice still renders, it is just
+   never live. The only thing that went red was **four assertions in one `walks.py` route** that
+   happened to stand in an empty house at two on a Monday and ask the engine.
+
+   **The rule:** a schedule row does not only add presence, it **subtracts absence**, and absence is
+   what half this game's content is gated on. Any pass that moves anybody's hours re-measures the
+   empty window before it measures anything else — one loop over the seven days and the six rooms in
+   the helper. The `kitchen` route in `walks.py` now asserts it directly, and
+   `DECISIONS.md`'s third Lynn amendment carries the same warning where a writer will hit it.
+
+   ⚠️ **AND THE SAME CLASS AS ITEM 18.** That one said deleting a row darkens surfaces that never
+   named it. This one is its mirror: **adding a row darkens surfaces that never named the row
+   either** — they named the silence around it.
+
 ---
 
 ## 7 · How this ends

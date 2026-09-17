@@ -67,6 +67,25 @@ def cash(page):
     return traits(page).get("cash")
 
 
+def offered(page, loc, cid):
+    """Would this room offer this canvas, standing here right now?
+
+    ⚠️ NOT `play()`. play() jumps straight to the passage and proves only that the
+    passage exists — it walks past the trigger schedule, the conditions and the
+    `requires_npc` resolution, which are the whole of what a fence IS. This asks the
+    engine the same question the room asks when it draws its card list.
+    """
+    return bool(page.evaluate(
+        """(a) => {
+            var L = SugarCube.setup.help_data.locationCanvases[a[0]] || [];
+            for (var i = 0; i < L.length; i++) {
+                if (L[i].id !== a[1]) continue;
+                return !!SugarCube.setup.isCanvasSelectable(L[i]);
+            }
+            return false;
+        }""", [loc, cid]))
+
+
 def start(page, day="Monday", hour=12, where="her_room"):
     """Put her somewhere at a time, past the opening, ready to act."""
     apply_flag(page, "opening_done", "set")
@@ -530,13 +549,18 @@ def walk_afternoon(page, rep):
                         ".map(function(c){return c.id;})")),
               "selectable at 23:00")
 
-    # Ward nights: he is at that table and dinner does not fire.
+    # ⚠️ THIS BLOCK USED TO ASSERT THE OPPOSITE. Until the kitchen pass `dinner` was
+    # gated on her mum and did not fire on a ward night, so `kitchen_nate` carried a
+    # [0, 2, 4] 19:00 window to keep him from being a dead row. `dinner` runs all
+    # seven nights now and that window came off, so what backs him at that table is
+    # `dinner` itself — presence.py counts him because he SPEAKS in it.
     start(page, "Monday", 19, "the_kitchen")
     rep.check("on a ward night he is still at the table",
               npc_at(page, "npc_nate") == "the_kitchen", str(npc_at(page, "npc_nate")))
-    play(page, "kitchen_nate")
-    rep.check("and he has something behind him there", "kitchen_nate" in passage(page),
-              passage(page))
+    rep.check("and the thing behind him there is dinner, not a second card",
+              offered(page, "the_kitchen", "dinner")
+              and not offered(page, "the_kitchen", "kitchen_nate"),
+              "dinner offered, kitchen_nate not")
 
 
 def walk_bathroom(page, rep):
@@ -778,8 +802,164 @@ def walk_ambients(page, rep):
               "canvasSubstitutions")
 
 
+def walk_kitchen(page, rep):
+    """Slice 15 — the kitchen has three meals with people at them, and her mum
+    has a week.
+
+    ⚠️ WHAT THIS ROUTE EXISTS TO CATCH IS THE THING IT ALREADY CAUGHT ONCE. Her
+    mum's first draft ran the house 09:00-14:00 and napped from 14:00, and between
+    them those two rows left the house OCCUPIED EVERY MINUTE OF EVERY DAY — 17 empty
+    hours a week went to zero. `house_empty` is read by `her_door`, so the branch
+    where shutting her door costs nothing became unreachable and every stream in the
+    game would have gone on @gil's count. The build was green. presence.py was
+    green. gates.py was green. Four assertions in `lock` went red at once.
+    """
+    # ── the three meals ──────────────────────────────────────────────────────
+    start(page, "Monday", 7, "the_kitchen")
+    set_time(page, "Monday", 7, 50)
+    here = npcs_at(page, "the_kitchen")
+    rep.check("breakfast on a ward morning holds three of them",
+              len(here) == 3, str(here))
+    rep.check("and one of them is her mum, who used to be asleep or gone",
+              npc_at(page, "npc_lynn") == "the_kitchen", str(npc_at(page, "npc_lynn")))
+    rep.check("@nate is out of the shower and in the room",
+              npc_at(page, "npc_nate") == "the_kitchen", str(npc_at(page, "npc_nate")))
+    rep.check("her mum's breakfast card is offered",
+              offered(page, "the_kitchen", "hub_lynn_kitchen"), "hub_lynn_kitchen")
+
+    set_time(page, "Saturday", 7, 50)
+    rep.check("at the weekend breakfast is @gil on his own",
+              npcs_at(page, "the_kitchen") == ["npc_gil"], str(npcs_at(page, "the_kitchen")))
+    rep.check("and he is there at all, which he was not before this pass",
+              npc_at(page, "npc_gil") == "the_kitchen", str(npc_at(page, "npc_gil")))
+
+    start(page, "Monday", 12, "the_kitchen")
+    set_time(page, "Monday", 12, 30)
+    rep.check("lunch has two people in it and needed no canvas to",
+              sorted(npcs_at(page, "the_kitchen")) == ["npc_lynn", "npc_nate"],
+              str(npcs_at(page, "the_kitchen")))
+
+    start(page, "Tuesday", 19, "the_kitchen")
+    set_time(page, "Tuesday", 19, 30)
+    rep.check("dinner on a full night is four of them",
+              len(npcs_at(page, "the_kitchen")) == 4, str(npcs_at(page, "the_kitchen")))
+    rep.check("and dinner fires", offered(page, "the_kitchen", "dinner"), "dinner")
+    rep.check("Tasha has a card at that table for the first time",
+              offered(page, "the_kitchen", "hub_tasha_kitchen"), "hub_tasha_kitchen")
+
+    start(page, "Monday", 19, "the_kitchen")
+    set_time(page, "Monday", 19, 30)
+    rep.check("on a ward night the table is two of them",
+              len(npcs_at(page, "the_kitchen")) == 2, str(npcs_at(page, "the_kitchen")))
+    rep.check("and dinner fires anyway, which it never used to",
+              offered(page, "the_kitchen", "dinner"), "dinner")
+    rep.check("Tasha's card is correctly absent on a night she is not there",
+              not offered(page, "the_kitchen", "hub_tasha_kitchen"), "no hub_tasha_kitchen")
+
+    # ── her mum's week ───────────────────────────────────────────────────────
+    start(page, "Monday", 10, "the_kitchen")
+    rep.check("at ten on a ward day she is doing the house",
+              npc_at(page, "npc_lynn") == "the_kitchen", str(npc_at(page, "npc_lynn")))
+    rep.check("and helping her is a card",
+              offered(page, "the_kitchen", "chores_with_mum"), "chores_with_mum")
+
+    start(page, "Monday", 14, "her_room")
+    rep.check("at two she is out at the shop and the house is EMPTY",
+              npc_at(page, "npc_lynn") is None
+              and bool(sv(page, "SugarCube.setup.triggerConditionsSatisfied("
+                             "SugarCube.setup.stage_helpers_map['house_empty'].conditions)")),
+              f"lynn={npc_at(page, 'npc_lynn')}")
+
+    start(page, "Monday", 16, "the_hall")
+    rep.check("at four she is asleep before the shift",
+              npc_at(page, "npc_lynn") == "the_master_bedroom", str(npc_at(page, "npc_lynn")))
+    rep.check("and there is nothing to click on a sleeping woman",
+              not offered(page, "the_master_bedroom", "hub_lynn_bed"), "occupancy only")
+
+    start(page, "Tuesday", 16, "the_front_room")
+    rep.check("the morning after a ward night she is on the sofa at four",
+              npc_at(page, "npc_lynn") == "the_front_room", str(npc_at(page, "npc_lynn")))
+    rep.check("and her sofa card covers the afternoon as well as the evening",
+              offered(page, "the_front_room", "hub_lynn_sofa"), "hub_lynn_sofa at 16:00")
+
+    start(page, "Sunday", 10, "the_kitchen")
+    rep.check("Sunday is no longer twelve empty hours",
+              npc_at(page, "npc_lynn") == "the_kitchen", str(npc_at(page, "npc_lynn")))
+
+    # ── cooking ──────────────────────────────────────────────────────────────
+    start(page, "Monday", 17, "the_kitchen")
+    rep.check("on a ward night she can cook", offered(page, "the_kitchen", "cook"), "cook")
+    rep.check("and her mum's version is correctly not offered",
+              not offered(page, "the_kitchen", "cook_with_mum"), "no cook_with_mum")
+    before = cash(page)
+    play(page, "cook")
+    click(page, "Make something proper")
+    click(page, "Get out of the kitchen")
+    rep.check("cooking sets the flag the table reads",
+              flags(page).get("cooked_today") is True,
+              f"cooked_today = {flags(page).get('cooked_today')}")
+    # ⚠️ ASSERT THE DELTA, NOT THE BALANCE. Running the whole suite carries cash in
+    # from `opening`, so a literal here reads as a failure on the second route and a
+    # pass on its own — the exact false alarm this file's header warns about.
+    rep.check("and it pays in @gil, never in cash",
+              (snapshot(page).get(("npc_gil", "relation")) or 0) > 0
+              and cash(page) == before,
+              f"gil={snapshot(page).get(('npc_gil', 'relation'))} cash {before} -> {cash(page)}")
+    rep.check("once it is made, the card is gone for the day",
+              not offered(page, "the_kitchen", "cook"), "cook spent")
+
+    start(page, "Tuesday", 18, "the_kitchen")
+    rep.check("on her mum's night it is the other surface",
+              offered(page, "the_kitchen", "cook_with_mum")
+              and not offered(page, "the_kitchen", "cook"), "cook_with_mum only")
+    rep.check("she is at the hob before @gil comes down",
+              npc_at(page, "npc_lynn") == "the_kitchen", str(npc_at(page, "npc_lynn")))
+    play(page, "cook_with_mum")
+    click(page, "Help her with it")
+    click(page, "Get it on the table")
+    rep.check("helping her sets the same flag",
+              flags(page).get("cooked_today") is True,
+              f"cooked_today = {flags(page).get('cooked_today')}")
+    rep.check("and it moves the one meter she has",
+              (snapshot(page).get(("npc_lynn", "relation")) or 0) > 0,
+              f"lynn relation = {snapshot(page).get(('npc_lynn', 'relation'))}")
+    rep.check("one go at her mum a day, wherever it happens",
+              flags(page).get("lynn_today") is True,
+              f"lynn_today = {flags(page).get('lynn_today')}")
+
+    # The cap is on HER, not on the hour — the house at ten spends the hob at six.
+    start(page, "Sunday", 10, "the_kitchen")
+    apply_flag(page, "lynn_today", "set")
+    set_time(page, "Sunday", 18)
+    # ⚠️ `locked()` is the right instrument here and `links()` is not — the row
+    # renders greyed with its `locked_text`, it does not disappear (the-surfaces
+    # R5, and the pattern `hub_gil_kitchen` has used since the afternoon pass).
+    play(page, "cook_with_mum")
+    # ⚠️ `locked()` RETURNS THE locked_text, NOT THE LABEL (playtest.py). So the
+    # thing to look for is the refusal the author wrote, not the choice it replaced.
+    rep.check("having helped in the morning, the evening greys out",
+              any("go at your mum" in x for x in locked(page))
+              and not any("Help her" in x for x in links(page)),
+              f"locked={locked(page)}")
+
+    # ── the kettle ───────────────────────────────────────────────────────────
+    start(page, "Monday", 16, "the_kitchen")
+    apply_effect(page, "rest", "set", 40)
+    rep.check("the kitchen has a light thing at four in the afternoon",
+              offered(page, "the_kitchen", "kettle"), "kettle")
+    play(page, "kettle")
+    click(page, "Stand and drink it")
+    rep.check("standing in it repairs a little rest",
+              (traits(page).get("rest") or 0) > 40, f"rest = {traits(page).get('rest')}")
+    rep.check("and it is once a day", flags(page).get("kettle_today") is True,
+              f"kettle_today = {flags(page).get('kettle_today')}")
+    rep.check("spent, the room KEEPS the card — the cap is on the choice",
+              offered(page, "the_kitchen", "kettle"), "kettle still offered")
+
+
 ROUTES = {
     "opening": walk_opening,
+    "kitchen": walk_kitchen,
     "shift": walk_shift,
     "friday": walk_friday,
     "stream": walk_stream,
