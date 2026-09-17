@@ -100,22 +100,62 @@ DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 # ⚠️ HAND-MAINTAINED, AND THAT IS THE POINT. An exemption the script works out for
 # itself is an exemption that grows quietly. Writing the reason out loud is the
 # whole value — each of these rows is doing a job that is not being clicked on.
+#
+# ⚠️ KEYED (npc, location, start_time) — BY THE ROW, NOT BY THE ROOM. It used to be
+# (npc, location), which was fine while nobody slept anywhere. The sleep rows broke
+# it: @nate is in nate_room twice now, awake 22:00-23:59 with `nate_door` behind it
+# and asleep 00:00-07:00 with nothing, and a room-level exemption would have
+# excused both. The awake row has to stay under scrutiny, so the key names the hour.
 OCCUPANCY_ROWS = {
-    ("npc_nate", "the_bathroom"):
+    ("npc_nate", "the_bathroom", "07:00"):
         "the shower in the opening. This row is what makes the bathroom taken — it "
         "blocks the door and shows him on the card, and there is nothing to click. "
         "v2.py:5270-5281 names exactly this case as intentional.",
-    ("npc_lynn", "the_master_bedroom"):
+    ("npc_lynn", "the_master_bedroom", "20:00"):
         "she is the second body behind that door, which is the entire weight of it. "
         "NEVER TOUCHED at any height — standing call, DECISIONS.md:97-100.",
-    ("npc_gil", "the_master_bedroom"):
+    ("npc_gil", "the_master_bedroom", "21:00"):
         "the other half of the same door. The surface is `master_bedroom`, which is "
         "solo by design: she is looking, not talking to anybody.",
-    ("npc_lynn", "the_kitchen"):
+    ("npc_lynn", "the_kitchen", "19:00"):
         "she is the CONDITION for dinner, not a guest at it — `dinner`'s trigger is "
         "`npc_at_location npc_lynn is_present`, so this row is what makes that scene "
         "exist on the four nights she is off the ward. She does not speak in it and "
         "she is never touched.",
+
+    # --- the sleep rows, added 2026-09-17 ------------------------------------
+    # A sleep row is an occupancy row by definition: it exists to put a body in a
+    # room, and a body asleep is never a thing to click. What each one buys is
+    # written out here, because a row nobody can justify should be deleted, not
+    # exempted.
+    ("npc_gil", "the_master_bedroom", "23:30"):
+        "asleep. The awake half of his night — 21:00-23:30, 'door pushed to' — is "
+        "the master-bedroom door and is NOT exempt; it is backed by `master_bedroom`. "
+        "This row is what makes the house occupied after half eleven, and on ward "
+        "nights it is what leaves him in there on his own until half six.",
+    ("npc_nate", "nate_room", "00:00"):
+        "asleep. His 22:00-23:59 row is the invitation and carries `nate_door`, which "
+        "now holds its own 22:00-23:59 schedule so it cannot reach into these hours. "
+        "This row exists so the landing is not empty at three in the morning.",
+    ("npc_tasha", "tasha_room", "00:00"):
+        "asleep, weeknights. Her 16:00-17:00 and 18:00-23:59 rows carry "
+        "`hub_tasha_room`, which is now fenced to 16:00-23:59 so it cannot reach in "
+        "here. Nothing is clickable while she is asleep and nothing should be.",
+    ("npc_tasha", "tasha_room", "04:00"):
+        "asleep, after Friday and Saturday nights out. the_cast.md:36 — 'out until "
+        "four … gone Friday and Saturday nights'. Same fence as the weeknight row.",
+    ("npc_lynn", "the_master_bedroom", "00:00"):
+        "asleep, the other half of her four nights at home. `master_bedroom` carries "
+        "its own 21:00-22:00 schedule, so these hours open nothing. NEVER TOUCHED.",
+    ("npc_lynn", "the_master_bedroom", "08:00"):
+        "asleep after a ward night, Tue/Thu/Sat mornings. THE ROW the_house_day.md "
+        "has been asking for since it was written — 'her mum asleep down the hall on "
+        "a weekday morning is the quietest room in the game and nothing happens in it "
+        "yet'. 08:00-16:00 was empty in all nine rooms every day of the week before "
+        "this; these are the only hours of it that now hold anybody. The scene that "
+        "belongs in it is still unwritten, and that stays the next piece of work — "
+        "but the row is doing a job today whether or not that scene ever lands: it "
+        "puts somebody in the house who is not watching.",
 }
 
 # Real holes, named to LO and deferred by him on 2026-09-16. They are printed every
@@ -215,7 +255,10 @@ def classify(row, npc, here, hosts_of):
     17:00-18:00, but it rides `wash`, which is shut 17:00-22:00. Scoring the row
     "substitution" on the canvas's own existence called an empty hour backed.
     """
-    key = (npc["id"], row["location"])
+    # ⚠️ Keyed by the ROW, not the room — start_time is part of it. @nate is in
+    # nate_room twice (awake at 22:00, asleep at 00:00) and only the second is
+    # exempt; a room-level key would have excused both.
+    key = (npc["id"], row["location"], row["start_time"])
     if key in OCCUPANCY_ROWS:
         return "occupancy", OCCUPANCY_ROWS[key], set()
 

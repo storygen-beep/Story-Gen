@@ -728,6 +728,17 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
 ] }
 
+# ⚠️ HOURS ADDED WITH @nate's SLEEP ROW, AND THEY CHANGE NOTHING. Until he had one,
+# his only nate_room row was 22:00-23:59 and this canvas inherited exactly that
+# window by having none of its own. He is now in that room 00:00-07:00 as well, and
+# a canvas with no schedule is live whenever its location is — so without this the
+# one-time walk-in could fire at six in the morning, against prose that has the
+# lamp on and him holding her eye. These three lines reproduce yesterday's window.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
 [[canvases.nodes]]
 id   = "base"
 name = "Four inches"
@@ -2272,6 +2283,17 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
+
+# ⚠️ HOURS ADDED WITH HER SLEEP ROWS, AND THEY CHANGE NOTHING. Her in-room rows
+# were 16:00-17:00 and 18:00-23:59, and this hub had no schedule of its own, so it
+# inherited exactly those. She is now also in there 00:00-10:00 on weekdays and
+# 04:00-12:00 at weekends — asleep — and every line on this screen is awake
+# behaviour: "she looks up before you have knocked". 16:00-23:59 covers both of
+# yesterday's windows and nothing else.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "23:59"
 
 [[canvases.nodes]]
 id   = "base"
