@@ -5295,25 +5295,41 @@ value      = -75
 [[canvases]]
 id   = "nate_door"
 name = "His door isn't shut"
-description = "Walk-in on @nate. No choice by design. He knows every time, and what it buys her first is a worse week: he is on the landing for seven days and her own door cannot stay shut, so the stream is off."
+description = "RANDOM AMBIENT on @nate's room, rolled on arrival whenever he is in it and awake. The first one is written for her and costs a week; every one after is a ladder crossed with HIS arousal."
 
+# ⚠️ trigger_mode = "random" SINCE 2026-09-17, AND IT USED TO FIRE ONCE IN THE WHOLE
+# GAME. It was gated `nate_seen is_false`, so the biggest climb in this house had
+# exactly one screen. LO: "Wtf, why once a game. It should be dice roll."
+#
+# ⚠️ `requires_npc` IS WHAT MAKES THE HOURS HIS. The random path reads `requiresNpc`
+# and nothing else (v2.py:5637-5648) — it resolves through getNpcLocation at the
+# moment she walks in, so this canvas's hours ARE his schedule and the two cannot
+# drift. `npc` is kept for presence.py, which does not read the random path.
+#
+# ⚠️ AND THE FENCE IS STILL NEEDED, BECAUSE HE SLEEPS IN HERE. `requires_npc` alone
+# is true 00:00-07:00 as well. These two windows are his two AWAKE nate_room rows
+# and nothing else.
+#
+# ⚠️ NO max_triggers_per_day. The brake is the engine's own: a hit sets a 3-visit
+# cooldown on the room (v2.py:5667), so she cannot walk in and out at it.
 [canvases.trigger]
 location      = "nate_room"
 npc           = "npc_nate"
+requires_npc  = "npc_nate"
 is_repeatable = true
-max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.35
 priority      = 8
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 
-# ⚠️ HOURS ADDED WITH @nate's SLEEP ROW, AND THEY CHANGE NOTHING. Until he had one,
-# his only nate_room row was 22:00-23:59 and this canvas inherited exactly that
-# window by having none of its own. He is now in that room 00:00-07:00 as well, and
-# a canvas with no schedule is live whenever its location is — so without this the
-# one-time walk-in could fire at six in the morning, against prose that has the
-# lamp on and him holding her eye. These three lines reproduce yesterday's window.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "22:00"
@@ -5325,15 +5341,112 @@ name = "Four inches"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "His door is open four inches and the lamp is on. @nate is on the bed with his laptop turned away and his cock in his hand. He is working at it in long slow pulls, balls tight up against the base of it. Not hurrying. He turns his head and sees you. He does not stop. He does not cover himself. His fist keeps going on his cock and he holds your eye while it does, jaw set, like he is daring you to be the one who looks away."
+content = "His door is open four inches and the lamp is on. @nate is on the bed with his laptop turned away and his cock in his hand. He is working at it in long slow pulls, balls tight up against the base of it. Not hurrying."
+
+# ⚠️ ONE IF/ELSEIF CHAIN — WHAT HE DOES, AND IT IS HIS METER THAT DECIDES IT.
+# LO's ask: "climb should depends on the player and nate traits." Her corruption is
+# on the CHOICES below and decides what she can make herself do; his arousal is
+# here and decides what happens when he looks up. Same act, different scene.
+#
+# ⚠️ BANDED TO WHAT HE ACTUALLY REACHES. He starts at 0 and the first walk-in pays
+# +3, so the bottom band is 3-5 and not 0 — a band under 3 would be unreachable the
+# moment this scene has run once. Above that: `bath_nate` pays +4, this canvas's
+# top rung +4, and `nate_walks_in` +2 a day.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+] } }
+blocks = [
+  { type = "paragraph", content = "He turns his head and sees you. He does not stop. He does not cover himself. His fist keeps going on his cock and he holds your eye while it does, jaw set, like he is daring you to be the one who looks away." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nate", trait_key = "arousal", operator = "gte", value = 10 },
+] } }
+blocks = [
+  { type = "paragraph", content = "He is not surprised. He does not turn his head, and he does not change what his hand is doing. After a second he angles his hips off the bed so you can see it properly. He left that door like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are early. Come in or stand there, I do not care which, but pick one and stop doing that thing with the handle." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nate", trait_key = "arousal", operator = "gte", value = 6 },
+] } }
+blocks = [
+  { type = "paragraph", content = "He knows it is you and he does not stop, but he does not look over either. His jaw goes tight. His hand keeps its rhythm, and the whole performance is aimed at the wall. Neither of you has ever said one word about this." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "He hears the board. His hand stops dead, and the duvet comes over him in one movement. He lies there looking at the ceiling until you go. It will not have happened, but he will be worse with you about the bins for a week." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Do you want something, or is this a hobby now." },
+]
+
+# WALL. Without a non-group block here the band below would merge into the chain
+# above as one more elseif, and it is a different question entirely.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The landing is cold and the board under your left foot is the loud one."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Standing here and watching him finish is not a thing you can make yourself do. You know it is available. That is a different sentence than it used to be and you are aware of that as well." },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
+# ⚠️ THE FIRST ONE IS WRITTEN FOR HER AND NO CHOICE IS OFFERED — walking_in.md's
+# first rule, and it survives the conversion intact. The week only exists on this
+# row, because exit-block effects CANNOT carry conditions (v2.py:14544 iterates
+# them unconditionally) and a repeatable seven-day landing would turn her stream
+# off for the rest of the game.
 [[canvases.nodes.exit_block.choices]]
 text       = "Get off the landing."
 targetType = "node"
 nodeId     = "nate_door.after"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get off the landing."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the doorway."
+targetType = "node"
+nodeId     = "nate_door.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "nate_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him see you looking."
+targetType = "node"
+nodeId     = "nate_door.caught"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_watched", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "nate_caught", operator = "is_false" },
+] }
 
 [[canvases.nodes]]
 id   = "after"
@@ -5387,6 +5500,96 @@ trait      = "arousal"
 op         = "add"
 value      = 3
 
+[[canvases.nodes]]
+id   = "watched"
+name = "Until he is finished"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay in the gap with your hand still on the frame. His fist goes on his cock in the same slow pulls. His breathing changes about a minute before the rest of him does, but you are four feet away and you do not miss any of it."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He finishes into his own hand with his head back and his eyes shut. Your door is shut before he has moved. You stand behind it with your heart going like you ran up the stairs."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 2
+
+[[canvases.nodes]]
+id   = "caught"
+name = "The door the rest of the way"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You push it and let it go wide, and you stand in the middle of it where there is nothing to be mistaken about. He looks straight at you. His hand does not stop, but this time you are the one who does not look away."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_nate" }
+content = "Go on then. You have been doing this for weeks and neither of us has said it, so you can stand there and say nothing at me properly for once."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He finishes with you in the doorway watching him do it, and he holds your eye the whole way through, and when it is over he wipes his hand on the duvet and picks his phone up like the two of you agreed something."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down the landing."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_caught"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 4
+
 # --- THE MASTER BEDROOM · she saw, and he doesn't know ----------------------
 # Live only on the nights her mum is HOME off the ward, before ten. Her shift
 # times are on the wall in that room and she has read them a hundred times for
@@ -5401,10 +5604,23 @@ id   = "master_bedroom"
 name = "The door is pushed to"
 description = "The first door she gets a CHOICE in, and the choice is back out or stand there. Watching properly is not on the menu — she can't make herself. Standing there sets saw_them, which she spends on a Friday."
 
+# ⚠️ trigger_mode = "random" SINCE 2026-09-17. It was a link she clicked, once a
+# day. LO: "Not once a day should be same dice roll." The condition below is what
+# makes the hours right — her mum has to be in that room, which is 21:00-22:00 on
+# the four nights she is off the ward and never otherwise.
+#
+# ⚠️ NO max_triggers_per_day ANY MORE. The brake is the engine's 3-visit room
+# cooldown (v2.py:5667). A day cap would also have been the wrong shape for a roll.
+#
+# ⚠️ THE SUBSTITUTION SURVIVES THE CONVERSION AND THIS WAS CHECKED. The 25% roll to
+# `master_caught` is emitted into this canvas's OWN first node (v2.py:13523), not
+# into whatever selected it, so it fires however she arrives — clicked, rolled or
+# routed. Nothing about that scene changed.
 [canvases.trigger]
 location      = "the_master_bedroom"
 is_repeatable = true
-max_triggers_per_day = 1
+trigger_mode  = "random"
+chance        = 0.4
 priority      = 9
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
@@ -9249,7 +9465,7 @@ value      = 2
 [[canvases]]
 id   = "hub_nate_room"
 name = "Nate"
-description = "Portrait hub @ nate_room, 15:00-18:00. His door is shut in the afternoon. Deliberately NOT the walk-in — `nate_door` keeps its own 22:00 window. Shares `nate_today`."
+description = "Portrait hub @ nate_room. His shut door in the afternoon AND at night. Deliberately NOT the walk-in — `nate_door` is a random roll over the same hours, and this is what the room offers when the roll misses."
 
 [canvases.trigger]
 location      = "nate_room"
@@ -9262,20 +9478,47 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 
+# ⚠️ BOTH OF HIS AWAKE ROWS NOW, NOT JUST THE AFTERNOON. `nate_door` became a
+# random roll in the same pass, and a random canvas is skipped from every room list
+# (v2.py:3910 and six twins) AND from presence.py's backing walk. So his 22:00 row
+# would have had nothing behind it, and the room would have rendered empty on every
+# missed roll. This is the card the roll sits on top of.
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "15:00"
 end_time   = "18:00"
 
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
 [[canvases.nodes]]
 id   = "base"
 name = "Shut, this time of day"
 
+# ⚠️ TWO POOLS BEHIND A TIME GATE. This canvas covers the afternoon AND the hours
+# after ten now, and a `block_pool` cannot be gated (README §6 item 4) — one pool
+# would have had her never knocking "in daylight" at eleven at night.
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "15:00", end_time = "18:00" },
+] } }
 blocks = [
-  { type = "paragraph", content = "His door is shut and there is something playing behind it, low enough that it is not for anybody else. The landing outside it is where you stand every day on the way to your own room and you have never once knocked on it in daylight." },
-  { type = "paragraph", content = "Shut, and the light is off under it, and he is in there. You hear him move when you stop outside. He heard you stop, then. That works both ways and always has." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "His door is shut and there is something playing behind it, low enough that it is not for anybody else. The landing outside it is where you stand every day on the way to your own room and you have never once knocked on it in daylight." },
+    { type = "paragraph", content = "Shut, and the light is off under it, and he is in there. You hear him move when you stop outside. He heard you stop, then. That works both ways and always has." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Gone eleven and his light is still on under the door. The rest of the landing is dark and the house has done its noises for the night, and there is nobody up to ask what you are doing standing here." },
+    { type = "paragraph", content = "The door is to, not shut, and the gap has a strip of lamplight in it. You could knock. You could also not, and he would never know which of those you had spent a minute deciding between." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -10179,6 +10422,387 @@ npcId      = "npc_nate"
 trait      = "arousal"
 op         = "add"
 value      = 2
+
+# =============================================================================
+# THE HOUSE STARTS HAPPENING TO HER · one new roll, two cards behind the others
+#
+# ⚠️ EVERY ROLL IS FENCED TO ITS PERSON TWICE OVER. `requires_npc` makes the hours
+# theirs at the moment she walks in (v2.py:5637-5648) so the two can never drift;
+# the schedule fence then cuts out the hours they are ASLEEP in the same room,
+# which `requires_npc` on its own would happily roll against.
+#
+# ⚠️ AND EVERY ROOM WITH A ROLL IN IT KEEPS A CARD. A random canvas is skipped from
+# every room list and from presence.py's backing walk, so a room holding only a
+# roll renders empty on a miss and reports its schedule row dead. LO's call:
+# "if they are present, then they should have the Hub menu canvases."
+# =============================================================================
+
+[[canvases]]
+id   = "tasha_caught"
+name = "Her door is shut"
+description = "RANDOM AMBIENT on @tasha's room. @nate leaves his open four inches on purpose; she shut hers and did not hear the landing. Three rungs on corruption 15 and 30."
+
+[canvases.trigger]
+location      = "tasha_room"
+npc           = "npc_tasha"
+requires_npc  = "npc_tasha"
+is_repeatable = true
+trigger_mode  = "random"
+chance        = 0.3
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+# Her two awake `tasha_room` rows. She is also asleep in here 00:00-10:00 on
+# weekdays and 04:00-12:00 at weekends, and those are exactly what this excludes.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "17:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 6]
+start_time = "18:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She did not hear the board"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The door goes because you pushed it. Tasha is on her back on top of the covers with her skirt shoved up round her waist, two fingers working in her cunt, her other hand over her own mouth. The music is loud enough that she has not heard one thing."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_caught_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She has not moved the music down since. She has not put a lock on that door either, and she is a woman who checks her own reflection in the back of a spoon, so neither of those is an accident any more." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "This is the one thing she does not narrate. Every other part of Tasha is out loud and aimed at a room, and she has her hand over her own mouth so that a house of four people will not find out she wants anything." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The hinge is the quiet one. That is the only reason you are still stood in it."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You pull it to and go, and you are three steps down the landing before you work out that your hands are shaking. She will come down at seven and talk at you about a girl at work and she will never know." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull it to and go."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the gap."
+targetType = "node"
+nodeId     = "tasha_caught.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "tasha_caught_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her find you there."
+targetType = "node"
+nodeId     = "tasha_caught.seen"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_caught_watched", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "tasha_caught_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "watched"
+name = "With her hand over her mouth"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay. Her knees go further apart, her wrist speeds up, and the sound she makes into her own palm is nothing like her speaking voice. Her back comes up off the bed and stays up for a long second. Then she is flat again, breathing."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She lies there with her arm across her eyes. You get the door shut on the quiet hinge and you are on your own landing before she has thought about the room having a door in it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_caught_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes]]
+id   = "seen"
+name = "Caught wanting something"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You do not go and you do not hide, and halfway through she opens her eyes and you are stood in her doorway looking at her. Her hand comes off her mouth. Her other one does not come out of her, and for about two seconds neither of you does anything at all."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_tasha" }
+content = "Don't. Do not do the face. You have seen me in less than this in that bathroom about forty times and you have never once looked at me like that."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She gets her skirt down and sits up on the edge of the bed with her hair everywhere. She is not embarrassed about her body, because she never is. She is embarrassed that you know she wanted something badly enough to be quiet about it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_tasha" }
+content = "Shut the door on your way out. From the outside. And Nell — you knock in this house. You do it for him. You can do it for me."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, from the outside."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_caught_seen"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# --- THE TWO CARDS IN THAT BEDROOM -------------------------------------------
+# ⚠️ BOTH EXIST BECAUSE `master_bedroom` BECAME A ROLL. presence.py skips random
+# canvases, and @lynn's 21:00 row was backed by `master_caught` as a SUBSTITUTION —
+# a verdict that needs its host live in those hours. The moment the host went
+# random the script stopped seeing it and that row would have reported DEAD.
+#
+# ⚠️ AND THEY SPLIT BY NIGHT, NOT BY PERSON. Ward nights he is in that room on his
+# own, which the_house_day.md has called "the master bedroom door shut on a man on
+# his own" since it was written and nothing has ever used. The other four she is in
+# there too, and those are the nights the roll can fire.
+
+[[canvases]]
+id   = "hub_gil_bed"
+name = "Gil"
+description = "Portrait hub @ the_master_bedroom, ward nights only. The three nights a week he is upstairs on his own with the door pushed to. Shares `gil_today` with the kitchen, the sofa and the garage."
+
+[canvases.trigger]
+location      = "the_master_bedroom"
+requires_npc  = "npc_gil"
+npc           = "npc_gil"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_master_bedroom", operator = "is_absent" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "21:00"
+end_time   = "23:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Door pushed to"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The door is pushed to and the lamp is on behind it, and there is no bed noise and no telly and no phone. @gil is sat up with a folder open on his knees and a pen he is not using, on the third night this week his wife has been at work." },
+  { type = "paragraph", content = "He is on top of the covers in a t-shirt with the invoices spread over her side of the bed. On the nights she is on the ward, that half of it is just a flat surface." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say goodnight properly."
+targetType = "node"
+nodeId     = "hub_gil_bed.sat"
+show_when_locked = true
+locked_text = "You have sat with him once today. Twice would be a thing, and he would notice it was a thing."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "gil_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "gil_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "sat"
+name = "The edge of the bed"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You end up on the corner of the bed with the folder between you. He moves it about four inches so there is room. Nobody in this house has ever made you more welcome than that, but nobody is going to say so."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "saw_them", operator = "is_true" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "That board outside has gone under somebody twice this week. If you want something at eleven at night you can knock like anybody else." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Three nights a week for six years. You do not get used to it. You get used to saying you are used to it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "I was going to do these at the table and your brother had the radio on. A man cannot add up through a radio." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Go to bed. I am not being funny with you. It is late and one of us has to be up at half six and it is going to be me." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to bed."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# ⚠️ SHE IS STILL NEVER TOUCHED, AND THIS CARD DOES NOT CHANGE THAT. DECISIONS.md
+# has been amended twice — the television and the bathroom — and both amendments
+# hold here. This is a person in a room saying goodnight: no relation climb towards
+# her, no body, no rung, and nothing that reads it but this screen.
+
+[[canvases]]
+id   = "hub_lynn_bed"
+name = "Your mum"
+description = "Portrait hub @ the_master_bedroom, the four nights she is off the ward. In bed with the lamp on. Her second clickable row in the game, and it asks nothing of her."
+
+[canvases.trigger]
+location      = "the_master_bedroom"
+requires_npc  = "npc_lynn"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The lamp on her side"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is propped on one elbow with the lamp on her side and a paperback she has been on the same page of since Tuesday. The shift times are on the wall by the door in her own writing and she does not look at them any more." },
+  { type = "paragraph", content = "She has got her reading glasses on, the duvet up under her arms, the radio going very low. She is asleep about four minutes after you get there, whether you are still talking or not." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on the end of the bed a minute."
+targetType = "node"
+nodeId     = "hub_lynn_bed.sat"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her sleep."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "sat"
+name = "She asks the same four things"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You sit on the end of it. She asks whether you have eaten, whether the bus was all right, whether you need anything for college, whether you are happy. In that order, but she is asleep before the answer to the fourth one."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_lynn" }
+content = "You would tell me, wouldn't you. If something was going on. You would not do the thing where you sort it out yourself and I find out in about a year."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "She is going to be asleep in ninety seconds. That is the only reason this is a question she can afford to ask."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn her lamp off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "rest"
+op         = "add"
+value      = 10
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 8_phone.toml

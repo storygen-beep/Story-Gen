@@ -124,7 +124,11 @@ OCCUPANCY_ROWS = {
         "the shower in the opening. This row is what makes the bathroom taken — it "
         "blocks the door and shows him on the card, and there is nothing to click. "
         "v2.py:5270-5281 names exactly this case as intentional.",
-    ("npc_lynn", "the_master_bedroom", "20:00"):
+    # ⚠️ THIS KEY SAID "20:00" UNTIL 2026-09-17 AND HAD MATCHED NOTHING SINCE THE
+    # TELEVISION PASS MOVED HER ROW TO 21:00. It cost nothing only because the row
+    # was being backed another way; it is the same orphan class as the 08:00 -> 08:15
+    # one, and the third time this happens the key shape is the thing to argue with.
+    ("npc_lynn", "the_master_bedroom", "21:00"):
         "she is the second body behind that door, which is the entire weight of it. "
         "NEVER TOUCHED at any height — standing call, DECISIONS.md:97-100.",
     ("npc_gil", "the_master_bedroom", "21:00"):

@@ -1067,6 +1067,49 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    DEAD. That is the right cost of keying by the row; a room-level key would have gone on excusing
    whatever replaced it.
 
+20. **A RANDOM CANVAS IS INVISIBLE TO ALMOST EVERYTHING, AND THAT IS THE WHOLE COST OF ONE.** Added
+   2026-09-17 with the house ambients, which turned two clicked scenes into dice and wrote a third.
+
+   **(a) IT IS SKIPPED FROM EVERY ROOM LIST AND FROM `presence.py`.** Seven selectors in `v2.py`
+   (`:3910`, `:4027`, `:4791`, `:4822`, `:4854`, `:5344`, `:5464`) drop it, and `presence.py:275-276`
+   drops it too. So converting a clicked scene to a roll **empties its room on every miss** and
+   **reports that room's schedule row DEAD**, in one move, with a green build. The answer is not to
+   teach the script about randoms — it is that **a room with a roll in it keeps a card**. LO settled
+   it: *"if they are present, then they should have the Hub menu canvases."*
+
+   **(b) `requires_npc` IS THE ONLY GATE THE RANDOM PATH APPLIES**, and it is not `npc`.
+   `v2.py:5637-5648` reads `requiresNpc` and resolves it through `getNpcLocation` at the moment she
+   arrives — so the canvas's hours *are* that person's schedule and the two can never drift.
+   ⚠️ A canvas carrying `npc` and no `requires_npc` rolls **with the person out of the room**.
+
+   **(c) AND `requires_npc` INCLUDES THEIR SLEEP ROW.** @nate is in `nate_room` 00:00–07:00 asleep;
+   presence alone would have rolled a sex scene against him at four in the morning. **Every random
+   canvas needs a schedule fence on top**, covering the awake hours only. Fenced twice, deliberately.
+
+   **(d) `play()` PROVES NOTHING ABOUT A ROLL.** It is `Engine.play()` on the passage, so it renders
+   the scene whatever the dice, the fence or the NPC's whereabouts said. What has to be asserted is
+   **selectability** — `isCanvasSelectable` plus the `requiresNpc` resolution, asked of the engine
+   directly. `walks.py walk_ambients` carries that helper.
+
+   **(e) SUBSTITUTIONS SURVIVE THE CONVERSION, AND THIS WAS CHECKED RATHER THAN HOPED.** The roll to
+   a `substitution_only` canvas is emitted into the **host's own first node** (`v2.py:13523`), not
+   into whatever selected the host, so it fires however she arrives — clicked, rolled or routed
+   through a door. `master_caught` needed no edit.
+
+   **(f) EXIT-BLOCK EFFECTS CANNOT BE CONDITIONAL.** `v2.py:14544` iterates them unconditionally and
+   there is no precedent anywhere in `games/`. A price that must be charged **once** — @nate's
+   seven-day landing — needs its own node, reached by an exclusive choice, not a gated effect.
+
+   ⚠️ **AND THE THIRD ORPHANED `OCCUPANCY_ROWS` KEY.** `("npc_lynn","the_master_bedroom","20:00")`
+   had matched nothing since the television pass moved her row to 21:00. That is items 18(a) and
+   19's cousin, three passes running. The key shape is right; **the discipline is to re-grep the
+   exemption table whenever any row's `start_time` moves.**
+
+   ⚠️ **EVERY ROUTE IN `walks.py` SHARES ONE PAGE AND ONE SAVE.** A route that asserts a first-time
+   price must reset the flag itself, or it silently takes the repeat path and reports a working
+   mechanic as broken. Two older routes also had to be **inverted** in this pass — they were
+   asserting the exact opposite of the new behaviour and had been right when written.
+
 ---
 
 ## 7 · How this ends

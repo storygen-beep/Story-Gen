@@ -188,6 +188,13 @@ def walk_doors(page, rep):
     """Slice 5 — his door costs a week of the stream; hers is spent on Friday."""
     start(page, "Wednesday", 23, "nate_room")
     landing = traits(page).get("nate_landing") or 0
+    # ⚠️ EVERY ROUTE IN THIS FILE SHARES ONE PAGE AND ONE SAVE. `nate_seen` may
+    # already be set by a route that ran earlier, and since the ambients pass the
+    # week is charged on the FIRST walk-in only — so without this reset the route
+    # takes the cheap repeat path and reports a working price as broken.
+    apply_flag(page, "nate_seen", "unset")
+    apply_effect(page, "nate_landing", "set", 0, clamp=False)
+    landing = 0
     rep.check("his door opens after ten", play(page, "nate_door") is True, passage(page))
     # The cost is charged on the exit of the FOLLOWING node, not on the choice.
     click(page, "Get off the landing")
@@ -511,9 +518,13 @@ def walk_afternoon(page, rep):
     play(page, "hub_nate_room")
     rep.check("his shut door is a surface at four", "hub_nate_room" in passage(page),
               passage(page))
+    # ⚠️ THIS ASSERTION USED TO BE ITS OWN OPPOSITE. Until the ambients pass the
+    # knock was fenced to the afternoon and `nate_door` owned the night. `nate_door`
+    # is a random roll now, and a random canvas is skipped from every room list — so
+    # without the knock covering these hours his room would render empty on a miss.
     start(page, "Tuesday", 23, "nate_room")
-    rep.check("and it is NOT one at eleven, where the walk-in lives",
-              "hub_nate_room" not in str(sv(
+    rep.check("and it covers his night hours too, now the walk-in is a roll",
+              "hub_nate_room" in str(sv(
                   page, "SugarCube.setup.help_data.locationCanvases['nate_room']"
                         ".filter(function(c){return SugarCube.setup.isCanvasSelectable(c);})"
                         ".map(function(c){return c.id;})")),
@@ -647,6 +658,126 @@ def walk_bathroom(page, rep):
               "tasha_bath" in passage(page), passage(page))
 
 
+def walk_ambients(page, rep):
+    """Slice 14 — the three rolls, and the cards they sit on top of.
+
+    ⚠️ A RANDOM CANVAS CANNOT BE REACHED BY CLICKING, AND `play()` PROVES NOTHING
+    ABOUT IT. play() is Engine.play() on the passage (playtest.py:245) — it would
+    render the scene whatever the roll, the fence or the NPC's whereabouts said.
+    What has to be asserted is SELECTABILITY: does the engine consider this canvas
+    a candidate right now. That is `isCanvasSelectable` plus the requiresNpc check
+    the random path applies on top of it (v2.py:5637-5648), asked directly.
+    """
+    def rollable(page, loc, cid):
+        """Would the engine offer this random canvas here, right now?"""
+        return sv(page, (
+            "(function(){var L=SugarCube.setup.help_data.locationCanvases['%s']||[];"
+            "for(var i=0;i<L.length;i++){var c=L[i];"
+            "if(c.id!=='%s') continue;"
+            "if(!SugarCube.setup.isCanvasSelectable(c)) return false;"
+            "if(!c.requiresNpc) return true;"
+            "var l=SugarCube.setup.getNpcLocation(c.requiresNpc);"
+            "return !!(l && l.location==='%s');}"
+            "return null;})()" % (loc, cid, loc)))
+
+    start(page, "Tuesday", 16, "nate_room")
+    rep.check("@nate's door is a roll now, not a one-shot",
+              rollable(page, "nate_room", "nate_door") is True, "16:00 Tuesday")
+    rep.check("and the room still offers the knock behind it",
+              rollable(page, "nate_room", "hub_nate_room") is not None
+              and play(page, "hub_nate_room") is True, passage(page))
+
+    # THE FENCES. requires_npc alone would roll against a sleeping man.
+    start(page, "Tuesday", 23, "nate_room")
+    rep.check("it rolls at eleven at night as well",
+              rollable(page, "nate_room", "nate_door") is True, "23:00")
+    start(page, "Tuesday", 4, "nate_room")
+    rep.check("he is in that room at four in the morning",
+              npc_at(page, "npc_nate") == "nate_room", str(npc_at(page, "npc_nate")))
+    rep.check("and it does NOT roll on him asleep",
+              rollable(page, "nate_room", "nate_door") is False, "04:00")
+    start(page, "Tuesday", 12, "nate_room")
+    rep.check("nor when he is out of the room",
+              rollable(page, "nate_room", "nate_door") is False, "12:00")
+
+    # THE FIRST ONE IS WRITTEN FOR HER, AND IT IS THE ONLY ONE THAT COSTS A WEEK.
+    start(page, "Tuesday", 23, "nate_room")
+    apply_flag(page, "nate_seen", "unset")
+    apply_effect(page, "nate_landing", "set", 0, clamp=False)
+    play(page, "nate_door")
+    rep.check("first time, no choice is offered", len(links(page)) == 1, str(links(page))[:110])
+    click(page, "Get off the landing")
+    click(page, "Your room")
+    rep.check("the first one costs the week",
+              (traits(page).get("nate_landing") or 0) == 7,
+              f"nate_landing = {traits(page).get('nate_landing')}")
+
+    apply_effect(page, "nate_landing", "set", 0, clamp=False)
+    apply_effect(page, "corruption", "set", 5, clamp=False)
+    play(page, "nate_door")
+    rep.check("after that there is no choice she can afford yet",
+              len(links(page)) == 1, str(links(page))[:110])
+    click(page, "Get off the landing")
+    rep.check("and the week does NOT come back",
+              (traits(page).get("nate_landing") or 0) == 0,
+              f"nate_landing = {traits(page).get('nate_landing')}")
+
+    # HER AXIS.
+    apply_effect(page, "corruption", "set", 15, clamp=False)
+    play(page, "nate_door")
+    rep.check("at fifteen she can stay", any("doorway" in x for x in links(page)),
+              str(links(page))[:110])
+    click(page, "Stay in the doorway")
+    click(page, "Your room")
+    apply_effect(page, "corruption", "set", 30, clamp=False)
+    play(page, "nate_door")
+    rep.check("at thirty she can let him see her",
+              any("see you looking" in x for x in links(page)), str(links(page))[:110])
+
+    # HIS AXIS — same screen, different man.
+    apply_effect(page, "arousal", "set", 0, target="npc", npc_id="npc_nate", clamp=False)
+    play(page, "nate_door")
+    low = body(page)
+    apply_effect(page, "arousal", "set", 12, target="npc", npc_id="npc_nate", clamp=False)
+    play(page, "nate_door")
+    rep.check("his arousal changes what he does about it", low != body(page),
+              body(page)[:110])
+
+    # THE PARENTS.
+    start(page, "Tuesday", 21, "the_master_bedroom")
+    rep.check("the parents' scene is a roll now",
+              rollable(page, "the_master_bedroom", "master_bedroom") is True, "Tue 21:00")
+    start(page, "Monday", 21, "the_master_bedroom")
+    rep.check("and never on a ward night",
+              rollable(page, "the_master_bedroom", "master_bedroom") is False, "Mon 21:00")
+    rep.check("which is the night @gil has a card in there instead",
+              play(page, "hub_gil_bed") is True, passage(page))
+    start(page, "Tuesday", 22, "the_master_bedroom")
+    rep.check("and her mum has one the other four", play(page, "hub_lynn_bed") is True,
+              passage(page))
+
+    # TASHA.
+    start(page, "Tuesday", 20, "tasha_room")
+    rep.check("@tasha's room rolls in the evening",
+              rollable(page, "tasha_room", "tasha_caught") is True, "Tue 20:00")
+    start(page, "Tuesday", 8, "tasha_room")
+    rep.check("she is asleep in there at eight",
+              npc_at(page, "npc_tasha") == "tasha_room", str(npc_at(page, "npc_tasha")))
+    rep.check("and it does NOT roll on her asleep",
+              rollable(page, "tasha_room", "tasha_caught") is False, "08:00")
+    start(page, "Tuesday", 20, "tasha_room")
+    apply_effect(page, "corruption", "set", 30, clamp=False)
+    apply_flag(page, "tasha_caught_watched", "set")
+    play(page, "tasha_caught")
+    rep.check("her top rung is being caught wanting it",
+              any("find you there" in x for x in links(page)), str(links(page))[:110])
+
+    # AND THE SUBSTITUTION SURVIVED THE CONVERSION.
+    rep.check("`master_caught` is still bound to its host",
+              "master_caught" in str(sv(page, "SugarCube.setup.canvasSubstitutions")),
+              "canvasSubstitutions")
+
+
 ROUTES = {
     "opening": walk_opening,
     "shift": walk_shift,
@@ -655,6 +786,7 @@ ROUTES = {
     "lock": walk_lock,
     "afternoon": walk_afternoon,
     "bathroom": walk_bathroom,
+    "ambients": walk_ambients,
     "doors": walk_doors,
     "class": walk_class,
     "crowd": walk_crowd,
