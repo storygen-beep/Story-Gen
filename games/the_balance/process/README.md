@@ -878,6 +878,52 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    `games/<slug>/sheets/` before writing. Before that, pushing a game whose only sheet was the
    root-level `DECISIONS.md` crashed *after* the Notion writes had succeeded.
 
+16. **A SLEEP ROW IS THREE PROBLEMS, AND ONLY THE FIRST ONE IS OBVIOUS.** Added 2026-09-17 when
+   four sleep schedules went in and the house stopped being empty at night. Anyone adding a night
+   row after this needs all three.
+
+   **(a) The weekday list is the morning she wakes up on, never the night she went to bed.**
+   Presence runs two checks and the **weekday one runs first, against today**
+   (`v2.py:3446`, then `:3448`). So `weekdays = [0]` with `23:00-07:00` puts the NPC on site
+   Monday night and **deletes them at midnight**, because `todayIndex` is Tuesday by then. The time
+   wrap itself is fine — `v2.py:3784` handles `endTotal < startTotal` — it is the day list that
+   breaks. Two shapes are safe and this game uses both: **start at `00:00`** so the row never
+   crosses midnight at all (@nate, Tasha, @lynn), or **run all seven days** so there is no day to
+   get wrong (@gil, 23:30-06:30, one row). Verified live on `forty_miles` with nine
+   `getNpcLocation()` probes across the midnight and week boundaries. **Nothing in `gates.py` can
+   catch this** — gate 6 checks a row *exists*, never that it resolves at the hours it claims.
+
+   **(b) ASLEEP AND AWAKE ARE TWO ROWS, NEVER ONE WIDENED ROW.** The first draft of this pass
+   extended @gil's `21:00-23:30` and @nate's `22:00-23:59` rows to cover the night. Both of those
+   rows **are** content: `"upstairs, door pushed to"` is the master-bedroom door and
+   `"in his room with the door not quite shut"` is what `nate_door` hangs off. Widening them would
+   have replaced two invitations with a man asleep. LO caught it — *"he must be doing something else
+   in the room"*. The `activity` string is the only thing that distinguishes the two states and the
+   engine cannot read it, so the separation has to be structural.
+
+   **(c) PRESENCE IS A CONDITION, so every new hour silently widens whatever is gated on it.**
+   Before adding a row, scan every `npc_at_location … is_present` in the game plus every canvas
+   carrying `npc` or `requires_npc` in that location, and check which of them have **hours of their
+   own**. A canvas with no schedule is live whenever its location is. This pass found three that
+   had none and would have leaked into the sleeping hours:
+
+   | | leaked to | fenced with |
+   |---|---|---|
+   | `nate_door` | 00:00-07:00 | its own `[[canvases.trigger.schedules]]` 22:00-23:59 |
+   | `hub_tasha_room` | 00:00-10:00 / 04:00-12:00 | its own schedules 16:00-23:59 |
+   | `tasha_walks_in` (rides `wash`) | 08:00-10:00 / 08:00-12:00 | a `time_of_day` item, 16:00-23:59 |
+
+   Each fence is set to **the window that was already live**, so no observable behaviour moved —
+   31/31 live probes, including both sides of every handover. `master_bedroom` needed nothing: it
+   already carried `21:00-22:00`, which is why @lynn can now be in that room at nine in the morning
+   without opening the two-doors scene.
+
+   **(d) And then `presence.py` will call every one of them DEAD**, because a sleeping body is a row
+   with nothing behind it. They belong in `OCCUPANCY_ROWS` with a written reason. That table was
+   re-keyed from `(npc, location)` to **`(npc, location, start_time)`** in the same pass: @nate now
+   has two `nate_room` rows and only the sleeping one is exempt, so a room-level key would have
+   quietly excused the awake row that `nate_door` depends on.
+
 ---
 
 ## 7 · How this ends

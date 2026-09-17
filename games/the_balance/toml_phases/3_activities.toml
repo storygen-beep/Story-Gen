@@ -370,11 +370,22 @@ start_time = "22:00"
 end_time   = "23:59"
 
 # The lock works. It does not always get used, and Tasha does not always knock.
+#
+# ⚠️ THE time_of_day ITEM ARRIVED WITH HER SLEEP ROWS AND CHANGES NOTHING. This
+# rule fires where `wash`'s hours (08:00-17:00, 22:00-23:59) overlap Tasha being in
+# her room, which used to be 16:00-17:00 and 22:00-23:59 and nothing else. She now
+# also occupies that room 00:00-10:00 on weekdays and 04:00-12:00 at weekends,
+# ASLEEP — which would have put her through this door at nine in the morning.
+# 16:00-23:59 reproduces the old overlap exactly.
+#
+# `time_of_day` delegates to setup.isCurrentTimeSlot (v2.py:4366), the same
+# function the schedules use, so there is no second implementation of the wrap.
 [[canvases.trigger.substitutions]]
 target_canvas_id = "tasha_walks_in"
 chance = 0.3
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", npc_id = "npc_tasha", location_id = "tasha_room", operator = "is_present" },
+  { type = "time_of_day", start_time = "16:00", end_time = "23:59" },
 ] }
 
 [[canvases.nodes]]

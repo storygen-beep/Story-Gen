@@ -731,6 +731,22 @@ start_time = "21:00"
 end_time   = "23:30"
 activity   = "upstairs, door pushed to"
 
+# ⚠️ ASLEEP IS ITS OWN ROW, NEVER AN EXTENSION OF THE ONE ABOVE. That 21:00-23:30
+# row is the master-bedroom door — "door pushed to" is the whole invitation, and
+# `master_bedroom` is scheduled 21:00-22:00 inside it. Widening it to cover the
+# night would have deleted the door and left a man asleep in its place.
+#
+# All seven days, so the midnight wrap resolves in ONE row: the time check
+# (v2.py:3784) handles endTotal < startTotal, and the weekday check (v2.py:3446)
+# runs against TODAY, which only breaks a row whose weekday list is partial. Hands
+# over to his 06:30 kitchen row with no gap.
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:30"
+end_time   = "06:30"
+activity   = "asleep, and up before anybody"
+
 [[npcs]]
 id          = "npc_owen"
 name        = "Owen"
@@ -841,6 +857,21 @@ start_time = "22:00"
 end_time   = "23:59"
 activity   = "in his room with the door not quite shut"
 
+# ⚠️ SEPARATE FROM THE ROW ABOVE, for the same reason as @gil's. `nate_door` is the
+# first walk-in in the game and it hangs off "the door not quite shut" — prose that
+# has the lamp on and him looking back at her. Folding asleep into that row would
+# have let the one-time walk-in fire at six in the morning against it. `nate_door`
+# now carries its own 22:00-23:59 schedule so it stays exactly where it was.
+#
+# Starts at 00:00, so it never crosses midnight and the weekday list is never the
+# problem. Hands over to his 07:00 bathroom row.
+[[npcs.schedules]]
+location   = "nate_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "07:00"
+activity   = "asleep with the lamp still on"
+
 [[npcs]]
 id          = "npc_tasha"
 name        = "Tasha"
@@ -884,6 +915,31 @@ start_time = "18:00"
 end_time   = "23:59"
 activity   = "in, with music on"
 
+# ⚠️ TWO SLEEP ROWS, AND THE WEEKDAY LIST IS THE MORNING SHE WAKES UP ON — never
+# the night she went to bed. Both start at 00:00 or later so neither crosses
+# midnight, which is the only shape that is safe for a partial weekday list:
+# presence checks the weekday FIRST, against today (v2.py:3446), so a Monday-only
+# row running 23:00-07:00 deletes her the moment the clock passes twelve.
+#
+# Weekday: she is in from 18:00 on Mon/Tue/Wed/Thu/Sun, so the mornings after are
+# Tue/Wed/Thu/Fri/Mon. Out at 10:00 — the_cast.md:36 has her "out until four".
+[[npcs.schedules]]
+location   = "tasha_room"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "00:00"
+end_time   = "10:00"
+activity   = "asleep, music still going"
+
+# Weekend: "gone Friday and Saturday nights" and "out until four" — so Friday night
+# lands on Saturday morning and Saturday night on Sunday morning. She comes in at
+# four and sleeps through the morning the house is fullest.
+[[npcs.schedules]]
+location   = "tasha_room"
+weekdays   = [5, 6]
+start_time = "04:00"
+end_time   = "12:00"
+activity   = "asleep in what she went out in"
+
 [[npcs]]
 id          = "npc_lynn"
 name        = "Lynn"
@@ -915,6 +971,41 @@ weekdays   = [1, 3, 5, 6]
 start_time = "20:00"
 end_time   = "23:59"
 activity   = "in bed with the lamp on, off the ward"
+
+# The other half of her four nights at home. Weekday list is the morning she wakes
+# up on: Tue night runs into Wed, Thu into Fri, Sat into Sun, Sun into Mon. Starts
+# at 00:00 so it never crosses midnight, which is what makes a partial weekday list
+# safe here.
+#
+# ⚠️ This does NOT open `master_bedroom`. That canvas carries its own 21:00-22:00
+# schedule, so her being in the room at three in the morning changes nothing a
+# player can reach. Checked every npc_at_location in the game before adding it.
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4, 6]
+start_time = "00:00"
+end_time   = "06:30"
+activity   = "asleep, the alarm set for a shift she is not on"
+
+# ⚠️ THE ROW the_house_day.md HAS BEEN ASKING FOR SINCE IT WAS WRITTEN. Its own
+# hand-off list says "her mum asleep down the hall on a weekday morning is the
+# quietest room in the game and nothing happens in it yet", and its weekday table
+# says "eight to twelve — nobody, except on ward mornings, when her mum is asleep
+# down the hall."
+#
+# She works the ward Monday, Wednesday and Friday nights, so she comes home and
+# sleeps it off on Tuesday, Thursday and Saturday mornings. Those are the only
+# hours between 08:00 and 16:00 when anybody at all is in this house — every other
+# hour of that window was empty in all nine rooms, seven days a week.
+#
+# She is still NEVER TOUCHED and still has no clickable row anywhere. What this
+# buys is a person in the house who is not watching.
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "08:00"
+end_time   = "14:00"
+activity   = "asleep with the curtains shut, straight off the ward"
 
 # --- the two on campus who want nothing from her -----------------------------
 # The crowd — Jules, Bree and Paige — is the NEXT piece. These two are the friend
@@ -1798,11 +1889,22 @@ start_time = "22:00"
 end_time   = "23:59"
 
 # The lock works. It does not always get used, and Tasha does not always knock.
+#
+# ⚠️ THE time_of_day ITEM ARRIVED WITH HER SLEEP ROWS AND CHANGES NOTHING. This
+# rule fires where `wash`'s hours (08:00-17:00, 22:00-23:59) overlap Tasha being in
+# her room, which used to be 16:00-17:00 and 22:00-23:59 and nothing else. She now
+# also occupies that room 00:00-10:00 on weekdays and 04:00-12:00 at weekends,
+# ASLEEP — which would have put her through this door at nine in the morning.
+# 16:00-23:59 reproduces the old overlap exactly.
+#
+# `time_of_day` delegates to setup.isCurrentTimeSlot (v2.py:4366), the same
+# function the schedules use, so there is no second implementation of the wrap.
 [[canvases.trigger.substitutions]]
 target_canvas_id = "tasha_walks_in"
 chance = 0.3
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", npc_id = "npc_tasha", location_id = "tasha_room", operator = "is_present" },
+  { type = "time_of_day", start_time = "16:00", end_time = "23:59" },
 ] }
 
 [[canvases.nodes]]
@@ -4558,6 +4660,17 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
 ] }
 
+# ⚠️ HOURS ADDED WITH @nate's SLEEP ROW, AND THEY CHANGE NOTHING. Until he had one,
+# his only nate_room row was 22:00-23:59 and this canvas inherited exactly that
+# window by having none of its own. He is now in that room 00:00-07:00 as well, and
+# a canvas with no schedule is live whenever its location is — so without this the
+# one-time walk-in could fire at six in the morning, against prose that has the
+# lamp on and him holding her eye. These three lines reproduce yesterday's window.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
 [[canvases.nodes]]
 id   = "base"
 name = "Four inches"
@@ -6102,6 +6215,17 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
+
+# ⚠️ HOURS ADDED WITH HER SLEEP ROWS, AND THEY CHANGE NOTHING. Her in-room rows
+# were 16:00-17:00 and 18:00-23:59, and this hub had no schedule of its own, so it
+# inherited exactly those. She is now also in there 00:00-10:00 on weekdays and
+# 04:00-12:00 at weekends — asleep — and every line on this screen is awake
+# behaviour: "she looks up before you have knocked". 16:00-23:59 covers both of
+# yesterday's windows and nothing else.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "23:59"
 
 [[canvases.nodes]]
 id   = "base"
