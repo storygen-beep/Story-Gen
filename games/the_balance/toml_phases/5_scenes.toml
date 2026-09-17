@@ -529,11 +529,13 @@ is_active     = true
 
 [[canvases.trigger.schedules]]
 weekdays   = [4]
-start_time = "17:00"
+start_time = "18:30"
 end_time   = "20:30"
-# ⚠️ ENDS WHEN HE LEAVES THE KITCHEN, and that hour moved. His kitchen row was
-# 18:00-21:00 and is now 18:00-20:30, because the television put him on the sofa
-# for the last half hour. The portrait lane checks presence — a Friday window that
+# ⚠️ STARTS AND ENDS WITH HIS KITCHEN HOURS, AND BOTH ENDS HAVE MOVED NOW. The row
+# was 18:00-21:00; the television took the last half hour and put him on the sofa,
+# and the bathroom took the first half hour and put him in the shower. The window
+# here has to follow both. It carried a dead 17:00-18:00 hour before this pass —
+# that was a real defect, quiet because the portrait lane fails CLOSED. The portrait lane checks presence — a Friday window that
 # outran his kitchen hours would render a link to a man who is not in the room,
 # which is the bug this comment has existed to prevent since the window was first
 # written. Still "all evening" in the sense LO chose: three and a half hours, and
@@ -3515,7 +3517,7 @@ name = "Her hour"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "The door is not locked because it never is when it is her hour. She has the good light on and her bag open across the sink, and she is doing one eye with her mouth half open." },
+  { type = "paragraph", content = "She has the good light on and her bag open across the sink, and she is doing one eye with her mouth half open. She locked it and she opened it for you without asking who it was." },
   { type = "paragraph", content = "Steam still on the glass and her stuff over every flat surface in here. She is in a towel with her hair up, going through the bag for something she has already used once." },
   { type = "paragraph", content = "She has forty minutes and she is spending them like she has three hours. The radio is on her phone on the cistern. She does not stop for you coming in." },
 ]
@@ -4540,7 +4542,7 @@ blocks = [
 type = "group"
 blocks = [
   { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He has never once paid me for this. You get five quid for the bins. I get told I live here." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He has never once paid me for this. You get five dollars for the bins. I get told I live here." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "He was self-employed before he met your mother and he will be doing this when he is seventy. There is no version of him that stops." },
   ] },
 ]
@@ -4762,3 +4764,842 @@ npcId      = "npc_nate"
 trait      = "relation"
 op         = "add"
 value      = 1
+
+# =============================================================================
+# THE BATHROOM · the knock, the lock, and what is behind it
+#
+# ⚠️ EVERY CANVAS IN THIS BLOCK IS DOOR-ONLY. `hidden_from_location = true` keeps
+# them off the room's own activity list while leaving them in the build with a
+# resolvable entry passage — the engine's five render selectors skip them and
+# nothing else does (v2.py:4793, :4824, :4856, :5346, :5466, all commented
+# "door-only — reachable from a launcher, never from this screen"). They need a
+# trigger `location` all the same: a canvas with no trigger is pruned before the
+# door is built and its option is silently DROPPED (v2.py:12766-12781).
+#
+# ⚠️ NONE OF THEM CARRIES AN `npc`. A canvas with one renders as a portrait card in
+# the room, which is the bucket the two Tasha hubs already own at that hour. These
+# are reached from the threshold or not at all.
+#
+# ⚠️ THE ROWS THEY BACK. presence.py backs a schedule row four ways and a DOOR IS
+# NOT ONE OF THEM — it never reads locations[].door. What backs @gil's, @lynn's and
+# @tasha's new bathroom rows is that each of them SPEAKS in here: speakers_of()
+# walks every dict for props.npcId at any depth, so one line inside a conditional
+# band counts.
+# =============================================================================
+
+[[canvases]]
+id   = "bath_knock"
+name = "Knock"
+description = "Door-only. The answer through a locked bathroom door, banded by who is behind it. Sets `knocked_once`, which is what makes the lock worth looking at."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Through the door"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Two knocks. The water does not stop, and nothing happens for long enough that you start to go, and then @gil turns it off. He waits until you have heard it go quiet before he says anything at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Twenty minutes. You knew that when you came up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "And if it is about Friday, it is Friday either way. Knocking on a door at six does not move Friday." },
+  { type = "paragraph", content = "The water goes back on. That is the whole conversation and it is the same one every time, and you are stood on a landing with your hand still up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You knock once, quietly, because it is ten to eight in the morning and your mum has been on her feet since seven the night before." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Two minutes, love. Two minutes and it is yours." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Have you eaten? There is bread. Do not go out on nothing again, I am not asking you, I am telling you." },
+  { type = "paragraph", content = "She says it like somebody apologising, in her own house, to her own daughter, for washing. It takes eleven minutes and you do not knock again." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You knock and @nate does not turn the water off to answer, so whatever he says comes through it half-drowned, and he does not repeat it. He is in there forty-five minutes on a weekday, but the bus does not wait for either of you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Use the one downstairs. There isn't one downstairs. That's the joke." },
+  { type = "paragraph", content = "He has made it before. He will make it again on a morning when you are actually late, and he knows exactly which mornings those are." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+# THE FLAG THE WHOLE ROOM TURNS ON. walking_in.md's first rule as a mechanic: the
+# first one is written for her and no choice is offered, and it is what makes the
+# second one mean something. She cannot reach for a screwdriver until this house
+# has stood her on a landing at least once.
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "knocked_once"
+op         = "set"
+
+# --- THE LOCK ----------------------------------------------------------------
+
+[[canvases]]
+id   = "bath_break"
+name = "The lock"
+description = "Door-only, one-time, empty room. She breaks it. Sets `lock_broken`, which opens every walk-in in this room AND takes her own privacy away in the same act."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "A brass button and two screws"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "It is a brass button on the inside of the handle and two screws holding the plate over it. The screws are painted into the wood. Nobody has had that plate off since before you lived here."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You could take the plate off, turn the barrel round the wrong way and put it back, and it would look exactly like it looks now. It would push in and it would not catch. It would take about four minutes."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "It works both ways. That is not a thing you have failed to notice. That is a thing you have already decided about."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it alone."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the barrel round."
+targetType = "node"
+nodeId     = "bath_break.done"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "done"
+name = "It pushes in and it does not catch"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The plate goes back on and the paint line still lines up. You push the button in and pull the handle, but it opens, and you do it three more times to be sure, standing in a bathroom on your own in the middle of the afternoon."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Nobody will look at it. It is a door in a house where everybody is tired. They will push the button in the way they always have, but the room only goes on feeling shut to them, and it stopped being shut this afternoon."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "This was the only room in this house that was ever properly yours. You gave that up about four minutes ago, and you are the one who did it, and you did it to get at them."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wash your hands and go down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "lock_broken"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+# --- WHAT IS BEHIND IT, ONE CANVAS PER PERSON --------------------------------
+# ⚠️ THE LADDER IS walking_in.md's, AND IT IS HER REACTION THAT CLIMBS, NOT HER
+# ACTIONS: back out · stay and watch · let herself be seen. Corruption decides what
+# is on the menu and she still picks from it. Banded at 15 and 30, which are the
+# values this build actually reaches — the sidebar collapses everything over 25
+# into one word, so a rung above 30 would be invisible to the player.
+#
+# ⚠️ A TAKEN RUNG HIDES, IT DOES NOT GREY. `show_when_locked` on a one-time rung
+# keeps rendering "not yet" after it has been spent — the correction recorded on
+# hub_tasha_bath's ladder. What she cannot reach yet is carried by a PROSE BAND
+# instead, which is walking_in.md's second rule met without spending a choice row.
+#
+# ⚠️ BEING CAUGHT AT HOME DOES NOT MOVE EXPOSURE. the_two_doors.md: what it moves
+# is where she stands with THEM. Corruption only, in here.
+
+[[canvases]]
+id   = "bath_nate"
+name = "The door that does not catch"
+description = "Door-only walk-in on @nate, his 07:00-07:45 shower. Three rungs on corruption 15 and 30. Costs her the bus, which is the sharpest price in the house."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 8
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ten past seven"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The handle gives and the steam comes out at you. @nate has one hand flat on the tiles and the other on his cock, working it slow with the water coming off his shoulders, and he has been in here long enough that the glass has gone white everywhere except where he is leaning."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_bath_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "He knows the lock does not catch. He has known for weeks, but he gets in there at seven anyway, and he does not hurry, and he never once checks the handle. Nothing in this house has ever come nearer to an invitation." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You are out of the doorway before you have decided to be. Standing there and watching it happen is not a thing you can make yourself do yet, and the wanting to is worse than the not doing it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get out."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the doorway."
+targetType = "node"
+nodeId     = "bath_nate.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "nate_bath_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him see you there."
+targetType = "node"
+nodeId     = "bath_nate.seen"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "nate_bath_watched", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "nate_bath_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "watched"
+name = "Long enough to be watching"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay. His fist goes up and down the length of it and his balls are drawn up tight and he is breathing through his mouth, and you watch the whole of it from four feet away with the steam wetting your face."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He finishes against the tiles with his forehead on his arm, and he says something into it that is not a word, and it is the only sound he has made the whole time."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_nate" }
+content = "Whoever that is, I can hear the landing board. It is not subtle. It has never once been subtle."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He says it to the tiles, tired, without turning round. You are in your own room before the water goes off and your hands are not steady on your own door."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_bath_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 4
+
+[[canvases.nodes]]
+id   = "seen"
+name = "He does not stop"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You push the door the rest of the way and stand in it, and you wait for him to turn round. He does. His hand does not stop on his cock. He looks at you through the glass and keeps going and lets you see him do it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_nate" }
+content = "Shut the door. I did not say leave. Stood on a landing for ten minutes like the board does not make a noise, and then you knock. You have never once just knocked."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You shut it with yourself on the inside and you stand against it while he finishes looking straight at you, and neither of you says a word after that one."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down to the bus you already missed."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_bath_seen"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 4
+
+[[canvases]]
+id   = "bath_tasha"
+name = "Her half hour"
+description = "Door-only walk-in on @tasha's 17:00-17:30 shower. Separate from her arc in `hub_tasha_bath`, which runs on the makeup half and is reached by knocking."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 8
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Over the music"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Tasha has the radio up on the cistern and she is behind glass that is clear from the hip up, soaping her tits with her head back and her mouth open on a word of the song she has got wrong. Tasha in a shower is Tasha anywhere else, only wet."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_tasha" }
+content = "— and I would do it AGAIN, I would do it agaaain — Nell, is that you? If that is you, pass me the blue one off the side. If it is one of them, get out."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You pull it shut again. She did not hear it over the radio and she would not have cared if she had, and that is somehow the part you cannot stand in the doorway with." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut it again."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay where you are."
+targetType = "node"
+nodeId     = "bath_tasha.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "tasha_bath_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her catch you at it."
+targetType = "node"
+nodeId     = "bath_tasha.seen"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "tasha_bath_watched", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "tasha_bath_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "watched"
+name = "The whole of it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stand inside the door with your back to it. She washes between her legs the way anybody does, quick and ordinary and without a thought in her head about it, and you watch her do it and you know exactly what you are doing."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She turns the water off and reaches for the towel and you are out and on the landing before the glass moves."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_tasha" }
+content = "You left that door open, by the way. Do not worry about it. Half this family would not notice if I came down the stairs in nothing."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She says it at dinner, to the table, in the middle of a story about a girl at work. Nobody looks up. She has no idea she has just told you what she thinks happened."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "The landing."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_bath_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 4
+
+[[canvases.nodes]]
+id   = "seen"
+name = "She does not scream"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay until she looks over, and she does, and she sees you standing there watching her wash. She does not cover anything. She pushes the glass back a hand's width and stands there wet with the water still running."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_tasha" }
+content = "Well, look at you. Come here and do my back then, if you are going to be in here anyway. No, come ON, the water is going cold and I have got to be out by half past."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "That is the whole of it. No argument, no fuss, nothing held over you. You wash her back and she talks the entire time, and being let in is somehow worse than being caught."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry your hands."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 25
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_bath_seen"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+# --- @gil, AND HE DOES NOT KNOW ----------------------------------------------
+# ⚠️ HE GETS NO MOVE IN HERE, AT ANY RUNG. the_two_doors.md: "@gil never opens a
+# step. She opens all of them", and "the top of this door is her in that room with
+# him" — which is the ENDING, not a bathroom at six o'clock. So the third rung is
+# her letting herself be seen and him STILL not knowing it happened. Same shape as
+# the master bedroom: she saw, she holds it, he has no idea.
+
+[[canvases]]
+id   = "bath_gil"
+name = "Twenty-five minutes"
+
+description = "Door-only walk-in on @gil's 18:00-18:30 shower. Three rungs and he never gets a move — the top of his arc is elsewhere and this must not spend it."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 8
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The day coming off him"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@gil has his back to the door with both hands on the tiles and his head down under the water. He is bigger with his clothes off than he is at the table. There is a line across his neck where the sun stopped and everything below it is white."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "saw_them", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "You have seen him do something else with that back and those hands, through a different door, on a night your mum was in the room. This is the same man an hour after a day's work and it is nothing like it and it is exactly like it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The door is shut again in under a second and you are three steps down the landing. He owns this house and you owe him two thousand four hundred dollars and you have just opened a door on him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut it. Now."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand there and look."
+targetType = "node"
+nodeId     = "bath_gil.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "gil_bath_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Come the rest of the way in."
+targetType = "node"
+nodeId     = "bath_gil.seen"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "gil_bath_watched", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "gil_bath_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "watched"
+name = "He turns round"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He turns to get at the soap and you get all of him, soft and heavy against his thigh, and the water running off it. He is not looking at the door. He has never once in three years thought about that door."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_gil" }
+content = "Ten minutes. Whoever that is, ten minutes, and then I want that kitchen clear because I have got an invoice to do and I am not doing it round the four of you."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "He is going to sit at the table on Friday and take a hundred and fifty off you, and this is the second thing about him you have that he does not know you have."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down before he turns the water off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "gil_bath_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 4
+
+[[canvases.nodes]]
+id   = "seen"
+name = "Inside, with the door shut"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You come in and push it to behind you and stand against the sink with the steam going over you, close enough to touch the glass. You watch him wash his cock with one hand the way a man does when he thinks he is on his own."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He does not turn round. You are in the room with him for four minutes and the only thing that happens is that he talks at a door he thinks is shut."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_gil" }
+content = "If that is you, there is a list on that fridge and one of the four things on it takes eight minutes. Do that one and we will say no more about the week."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You are out of the door before the towel comes down off the rail. He finishes the sentence to an empty landing and never learns he did."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "He still does not know. Every step in this is one you took, and there is exactly one left, and he is not going to be the one who takes it either."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "gil_bath_seen"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 6
+
+# --- HER MUM, AND THIS IS A CROSSING WITH A DATE ON IT ------------------------
+# ⚠️ DECISIONS.md SAID "SHE IS NEVER IN A SCENE AS A BODY" AND LO CROSSED IT ON
+# 2026-09-17, a second time, logged under the same heading as the television. The
+# limits that did NOT move, and are not up for reinterpretation:
+#
+#   · She is never touched, at any height, by anybody.
+#   · TWO RUNGS AND THERE IS NO THIRD. She is never seen seeing — the "let herself
+#     be seen" rung that @nate, @tasha and @gil all carry does not exist here, at
+#     any corruption, ever.
+#   · She is not a climb anybody works towards. No relation, no arousal, no arc.
+#   · Nothing in the game reads these two flags except this canvas.
+#
+# ⚠️ AND THE CHARGE IS THE TRESPASS, NOT THE BODY. the_cast.md: "she's the price,
+# not a person to be won." What is unbearable in here is how ordinary and how tired
+# it is, and that Nell is the one standing in the door.
+
+[[canvases]]
+id   = "bath_lynn"
+name = "Ten to eight"
+description = "Door-only walk-in on her mum's 07:45-08:15 ward-morning shower. TWO RUNGS ONLY — there is no being-seen rung and there never is. DECISIONS.md, amended twice."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+hidden_from_location = true
+priority      = 8
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Twelve hours off a ward"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is sat down in the bottom of the bath with her knees up and the water running on her back, not washing, just sat there. She is forty-one and she has been on her feet since seven last night and her body looks like it."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You have the door shut before she can look up. Your heart is going and you could not tell anybody what for. There is nothing in that room. It is your mum, having a bath, in her own house, on the one morning she gets one." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut it."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the gap a second."
+targetType = "node"
+nodeId     = "bath_lynn.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "lynn_bath_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "watched"
+name = "Nothing happens"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay. She washes her face with both hands and holds them there a while, and her tits are a nurse's tits at the end of a night shift and her legs have the marks of the shoes still on them. Nothing about it is for anybody."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She never looks at the door. She talks to the tiles instead, the way people do at the end of a night, in the voice she uses on the phone to her sister."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_lynn" }
+content = "Right. Come on. Up, out, bed, and do not think about Thursday until Thursday. Nell has got herself out of the door, she is fine, she is fine."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She gets out slowly and puts the towel round herself in a room she thinks is locked, and she has just said your name to nobody, and you are stood in the gap."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+props = { speaker = "player" }
+content = "That was not anything. You did it anyway, and you will know you did it every time she asks whether you have eaten."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get out before she turns round."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "lynn_bath_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+# --- AND IT WORKS BOTH WAYS --------------------------------------------------
+# ⚠️ substitution_only: reachable ONLY as `wash`'s dice roll, and only once
+# `lock_broken` is set. This is the price of the screwdriver, and it is the same
+# shape as `tasha_walks_in` deliberately — the difference is that Tasha comes
+# through a door Nell forgot to lock, and @nate comes through one that cannot be.
+
+[[canvases]]
+id   = "nate_walks_in"
+name = "The button that does not hold"
+description = "Substitution on the shower, live only once `lock_broken` is set. @nate comes in while she is in there. Restores clean like any wash; what it costs is the thing she did to that handle herself."
+
+[canvases.trigger]
+location          = "the_bathroom"
+npc               = "npc_nate"
+is_repeatable     = true
+max_triggers_per_day = 1
+substitution_only = true
+priority          = 5
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "He does not knock"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The handle goes and @nate is in with the door shut behind him before the steam has moved. He does not look over and he does not apologise. He runs the tap and cleans his hands off in it and takes his time about the drying."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_bath_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Funny how that stopped catching. Round about the same week you started coming up here at seven." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are behind glass. Relax. I have seen worse in a swimming pool." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Lock it if you want me out. Oh. Right." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He is in here ninety seconds and the glass is clear from the hip up and he looks exactly once, on his way out, and lets you see him do it. You did that. You are the reason that handle turns."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish, with the door watched."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "set"
+value      = 100
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 1
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 2

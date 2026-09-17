@@ -1023,6 +1023,50 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    ⚠️ **`setup` is not a page global — it is `SugarCube.setup`.** A bare `setup.` in a `sv()`
    expression throws `ReferenceError` and the route reports as a crash, not a failure.
 
+19. **A DOOR IS FOUR MECHANISMS AND THREE OF THEM BIT.** Added 2026-09-17 with the bathroom, the
+   first `[locations.door]` in this game.
+
+   **(a) `show_when_locked` GREYS A ROW WHEN ITS CONDITIONS *FAIL*, AND THERE IS NO "GREYED NOW,
+   GONE LATER".** Two live runs to get one refusal right. Draft one gated the greyed row on the lock
+   being INTACT — those conditions *passed*, so it rendered as a live link straight into the knock.
+   Draft two moved `show_when_locked` onto the four per-person rows, each gated on the lock being
+   broken: correct while it is intact, and after breaking it the three rows for people **not** in
+   the room failed their own presence clause and greyed, so one live row came with three greyed
+   twins. **A shown-locked row always renders — live or greyed, never absent** (`v2.py:3323-3336`),
+   so no set of conditions expresses "visible while blocked, gone once open". The refusal belongs in
+   `description_variants` on the threshold, which is also what the field does: a median eight-word
+   in-fiction line, not a UI label. **Neither draft failed anything** — not merge, not `--validate`,
+   not `package`, not one of the 42 gates.
+
+   **(b) A DOOR'S GREYED ROW IS `.solo-activity-cooldown`, NOT `.locked-choice`.** `v2.py:3333`,
+   deliberately the room's own markup so a threshold reads as a room screen. `playtest.py`'s
+   `locked()` looks for `.locked-choice`, which is the CANVAS mechanism, and returns `[]` on a door.
+   Assert on `body()` there.
+
+   **(c) THE THRESHOLD IS A PURE RENDER AND WRITES NO `current_location`** (`v2.py:10078-10093`,
+   whitelisted in `isRerenderSafe`). The assertion every other route in `walks.py` uses —
+   `current_location == the slug` — **fails on a doored location** and reports a working door as
+   broken. Assert `passage(page) == "Door_<slug>"`.
+
+   **(d) AND NOTHING REACHES A DOOR EXCEPT A NAV CARD.** `goto`, `stand_at` and `play` all address a
+   passage directly; only engine-generated nav surfaces route through the threshold
+   (`v2.py:20601`). A route that wants to test one has to CLICK the card — and `start()` is not
+   enough on its own, because this build opens on `CustomizeCharacters` and `stand_at` writes state
+   without rendering a screen, so the click lands on the character-creation form. `goto` the hall
+   first.
+
+   **(e) `hidden_from_location` IS THE DOOR-ONLY MECHANISM AND IT WORKS.** Read in exactly five
+   places, all render selectors, each commented *"door-only — reachable from a launcher, never from
+   this screen"* (`v2.py:4793` + four twins). The canvas still needs a trigger `location` or
+   `_compute_included_canvases` prunes it and the door option is **dropped with only a log
+   warning**. Verified end to end: seven such canvases, zero dropped.
+
+   ⚠️ **AND ONE THAT IS NOT THE DOOR'S FAULT.** `OCCUPANCY_ROWS` is keyed
+   `(npc, location, start_time)` — item 18(a)'s cousin. Moving @lynn's sleep row by **fifteen
+   minutes** to make room for her shower orphaned a pre-existing exemption and the row reported
+   DEAD. That is the right cost of keying by the row; a room-level key would have gone on excusing
+   whatever replaced it.
+
 ---
 
 ## 7 · How this ends

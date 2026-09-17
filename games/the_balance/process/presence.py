@@ -160,7 +160,12 @@ OCCUPANCY_ROWS = {
     ("npc_lynn", "the_master_bedroom", "00:00"):
         "asleep, the other half of her four nights at home. `master_bedroom` carries "
         "its own 21:00-22:00 schedule, so these hours open nothing. NEVER TOUCHED.",
-    ("npc_lynn", "the_master_bedroom", "08:00"):
+    # ⚠️ THE HOUR IN THIS KEY MOVED 08:00 -> 08:15 ON 2026-09-17 AND THE ROW WENT
+    # DEAD UNTIL IT WAS CHANGED HERE TOO. That is the cost of keying by the row
+    # rather than by the room, and it is the right cost — a room-level key would
+    # have gone on quietly excusing whatever replaced this. Her bathroom row starts
+    # at 07:45 and she cannot be in two places, so the sleep moved to let her wash.
+    ("npc_lynn", "the_master_bedroom", "08:15"):
         "asleep after a ward night, Tue/Thu/Sat mornings. THE ROW the_house_day.md "
         "has been asking for since it was written — 'her mum asleep down the hall on "
         "a weekday morning is the quietest room in the game and nothing happens in it "

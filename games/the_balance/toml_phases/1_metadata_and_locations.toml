@@ -45,6 +45,193 @@ image       = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
 entry_from  = "the_hall"
 
+# The room's own line stops being true the day she breaks the lock.
+[[locations.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+text = "The shower, the mirror, and a lock that turns without catching on anything. It was the only room in this house that was ever properly yours. You are the one who changed that, and you did it on purpose."
+
+# =============================================================================
+# THE DOOR · a threshold instead of the room. engine.md §44, the-map.md R6.
+#
+# ⚠️ R6c SAYS A SHARED ROOM GETS NO DOOR, AND THIS IS A DELIBERATE OVERRULE.
+# "A bathroom, a kitchen, a front room — she walks in. Occupancy is a row INSIDE
+# the room, not a threshold in front of it… a locked bathroom is a sentence, not a
+# screen." Measured across 27 shipped sandboxes. LO was shown it and chose the
+# screen, because in THIS house the lock is a thing she can act on and a sentence
+# cannot be acted on. `gates.py lint_doors` prints the objection on every run —
+# "the_bathroom is scheduled for 4 characters" — and that finding is EXPECTED, is
+# advisory, and must not be silenced.
+#
+# ⚠️ THE TWO-CLICK TAX IS REAL AND IT IS THE PRICE. This is the room she visits
+# most, and an empty bathroom is now one extra click, every time, all game.
+#
+# ⚠️ EVERY `canvas_id` BELOW MUST EXIST AND CARRY A TRIGGER LOCATION. A canvas with
+# no trigger is pruned before the door is built and the option is DROPPED with only
+# a log warning (v2.py:12766-12781). All four targets live at `the_bathroom` with
+# `hidden_from_location = true`, which is the engine's own "door-only" mechanism —
+# five render selectors skip them and nothing else does (v2.py:4793 and four twins).
+#
+# ⚠️ EVERY `conditions` BLOCK CARRIES version = "1.0". Without it the engine fails
+# OPEN and the option is never gated at all.
+[locations.door]
+description = "The door at the top of the stairs. Nobody is behind it and the light is off."
+# R6: the field's refusal runs a median of eight words and is allowed to be the
+# same line every time. The value of the screen is its structure.
+no_answer   = "You stand outside it a minute. There is nothing to be done about a door."
+
+# FIRST MATCH WINS, and `description` above is the <<else>>. Broken-lock variants
+# come first so they beat the locked ones for the same person.
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+text = "The light is on and the fan is going, and the handle turns the whole way. It has turned the whole way since the afternoon you made sure it would. Whoever is in there does not know that yet, or has stopped minding."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
+] }
+text = "The handle does not turn. The water is going hard enough to hear from the stairs and his boots are outside the door with the day still on them. He is in there twenty-five minutes and he locks it every single time."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+] }
+text = "The handle does not turn, and there is no noise behind it except the water. She has been on a ward for twelve hours and this is the half hour she gets before she sleeps through the middle of the day."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
+] }
+text = "The handle does not turn. There is music coming through it and she is singing over the top of the music without getting any of it right. Tasha locks doors the way she does everything, loudly and without meaning much by it."
+
+[[locations.door.description_variants]]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
+] }
+text = "The handle does not turn. The fan is on and the water has been running long enough to have gone through the tank, and he is not hurrying, and there is a bus in twenty minutes that you are going to be on and he is not."
+
+# --- the ways through --------------------------------------------------------
+
+[[locations.door.options]]
+text       = "Go in."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
+] }
+goes_to    = { type = "enter" }
+
+# ⚠️ TASHA'S KNOCK IS THE ONLY ONE THAT OPENS, and it routes straight into her
+# existing hub rather than the shared knock canvas. She locks it against @nate and
+# @gil and lets Nell in, which is better characterisation than the line it
+# replaced — and it is also load-bearing: `hub_tasha_bath` is her entire three-rung
+# arc, it has no schedule of its own, and gating it behind a broken lock would have
+# put a finished, shipped ladder out of reach for the first stretch of the game.
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_false" },
+] }
+goes_to    = { type = "canvas", canvas_id = "hub_tasha_bath" }
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_true" },
+] }
+goes_to    = { type = "canvas", canvas_id = "loop_tasha_bath" }
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_knock" }
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_knock" }
+
+[[locations.door.options]]
+text       = "Knock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_knock" }
+
+# The whole point of the broken lock. FOUR ROWS, ONE PER PERSON, and exactly one
+# can ever be live at a time.
+#
+# ⚠️ THE REFUSAL IS IN THE PROSE, NOT ON A ROW, AND IT TOOK TWO LIVE RUNS TO GET
+# THERE. `show_when_locked` greys a row when its conditions FAIL — so the first
+# draft, which gated the greyed row on the lock being INTACT, PASSED those
+# conditions and rendered a live link instead of a refusal. Moving the flag onto the
+# four per-person rows fixed that and broke the other end: after the lock is broken,
+# the three rows for people who are NOT in the room fail their own presence clause
+# and grey, so one live "Open it anyway." came with three greyed twins.
+#
+# A shown-locked row always renders — live or greyed, never absent — so no set of
+# conditions gives "greyed while locked, gone once broken". The door's own
+# description_variants carry it instead, which is what the field does: a median
+# eight-word in-fiction refusal on the threshold, not a UI label.
+#
+# ⚠️ FOUR CANVASES AND NOT ONE, AND THE REASON IS A GATE. A single walk-in canvas
+# carrying all four ladders would author twelve choices on one screen against
+# `a place is not a catalogue`'s cap of eight — the same defect the television
+# pass shipped and had to unpick. Door options are invisible to that gate; a
+# canvas exit_block is not. Splitting by person puts four rows on each screen.
+[[locations.door.options]]
+text       = "Open it anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_nate" }
+
+[[locations.door.options]]
+text       = "Open it anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_tasha" }
+
+[[locations.door.options]]
+text       = "Open it anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_gil" }
+
+[[locations.door.options]]
+text       = "Open it anyway."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_lynn" }
+
+# ⚠️ `knocked_once` IS THE GATE, AND THAT IS walking_in.md RULE 1 AS A MECHANIC:
+# "the first one is written for her… it teaches what this is, and it makes the
+# second one mean something." She cannot reach for the screwdriver until the house
+# has refused her at that door at least once.
+[[locations.door.options]]
+text       = "Have a proper look at that lock."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "knocked_once", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_false" },
+] }
+goes_to    = { type = "canvas", canvas_id = "bath_break" }
+
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
@@ -281,10 +468,27 @@ activity   = "unloading the van, still in his work clothes"
 # through for the last half hour of the news. `friday_payment` was shortened to
 # match in the same pass — its own comment says a Friday window that outran his
 # kitchen hours renders a link to a man who is not in the room.
+# --- HE COMES IN OFF THE VAN FILTHY AND HE IS NOT SITTING DOWN LIKE THAT -------
+# ⚠️ HALF AN HOUR TAKEN OFF THE FRONT OF THE KITCHEN, and it is the only half hour
+# in his day that could be taken. 08:00-17:00 he is at work; 17:00 is the garage;
+# 19:00 is dinner; 20:30 is the television stagger; 21:00-23:30 upstairs IS one of
+# the two doors. The kitchen was the only row with slack at either end.
+#
+# ⚠️ `friday_payment` MOVED WITH IT — 17:00-20:30 became 18:30-20:30. Its own
+# comment has warned since the first build that a window outrunning his kitchen
+# hours renders a link to a man who is not in the room. It already carried a dead
+# hour before this; leaving it would have made the dead stretch ninety minutes.
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "18:30"
+activity   = "in the shower with the door locked, getting the day off him"
+
 [[npcs.schedules]]
 location   = "the_kitchen"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "18:00"
+start_time = "18:30"
 end_time   = "20:30"
 activity   = "at the table with the radio on low"
 
@@ -533,12 +737,31 @@ activity   = "home, lights on, door open"
 
 # Her hour in the bathroom before she goes out — which is exactly the hour Nell
 # would want it. This row is why `clean` is tight.
+#
+# ⚠️ ONE ROW SPLIT IN TWO, AND THE TOTAL WINDOW IS UNCHANGED ON PURPOSE.
+# `hub_tasha_bath` and `loop_tasha_bath` carry NO schedule of their own — her
+# bathroom row IS their hours, by design, so that the two can never drift. Adding a
+# new hour anywhere in this room would have handed her whole three-rung arc a
+# second daily slot without a line being written. 17:00-17:30 and 17:30-18:00 add
+# up to exactly what was here before, so neither hub moved.
+#
+# ⚠️ "with the door unlocked" IS GONE, and that cost something. LO's call
+# 2026-09-17: everybody locks it now. Not locking it used to be her in two places —
+# this row and the hub's opening line — and both were rewritten. `tasha_walks_in`
+# is untouched: "The lock you didn't turn" is about NELL's lock, not hers.
 [[npcs.schedules]]
 location   = "the_bathroom"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "17:00"
+end_time   = "17:30"
+activity   = "in the shower with the door locked, singing badly"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:30"
 end_time   = "18:00"
-activity   = "doing her face with the door unlocked"
+activity   = "doing her face, and she will open it for you"
 
 # She is at the table on the nights she is in — which is not Friday or Saturday.
 [[npcs.schedules]]
@@ -654,12 +877,35 @@ activity   = "asleep, the alarm set for a shift she is not on"
 # hours between 08:00 and 16:00 when anybody at all is in this house — every other
 # hour of that window was empty in all nine rooms, seven days a week.
 #
-# She is still NEVER TOUCHED and still has no clickable row anywhere. What this
-# buys is a person in the house who is not watching.
+# She is still NEVER TOUCHED. What this buys is a person in the house who is not
+# watching.
+#
+# --- AND SHE WASHES THE WARD OFF BEFORE SHE GETS INTO THAT BED -----------------
+# ⚠️ 07:45 IS CHOSEN SO IT CANNOT TOUCH @nate's ROW. He has the bathroom 07:00-07:45
+# on weekdays, which includes the Tuesday and Thursday she comes home on. Starting
+# at 07:30 would have put two people in one room and left the door screen unable to
+# say which. Her sleep row moved 08:00 -> 08:15 for the same reason in the other
+# direction — nobody is ever in two places.
+#
+# ⚠️ AND IT IS EXACTLY THE TWENTY MINUTES NELL HAS. The game starts at 07:00 and
+# puts her in the kitchen at 07:30 with the bus twenty minutes off. This row is the
+# only content in the house that costs her a class to reach.
+#
+# ⚠️ WHAT SHE IS DOING IN THERE IS A CROSSING AND IT IS LOGGED. DECISIONS.md said
+# "never in a scene as a body" and LO crossed it on 2026-09-17, a second time and
+# under the same heading. She climbs TWO rungs, never the third — she is never seen
+# seeing, at any corruption, and there is no fourth step.
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [1, 3, 5]
+start_time = "07:45"
+end_time   = "08:15"
+activity   = "washing the ward off, with the door locked"
+
 [[npcs.schedules]]
 location   = "the_master_bedroom"
 weekdays   = [1, 3, 5]
-start_time = "08:00"
+start_time = "08:15"
 end_time   = "14:00"
 activity   = "asleep with the curtains shut, straight off the ward"
 

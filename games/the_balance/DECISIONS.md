@@ -140,6 +140,40 @@ out or asleep — she's the price, not a person to be won. Sitting through somet
 is that idea, not an exception to it. If a later release wants more than this, it is a new decision
 and it belongs under this heading too.
 
+#### Amended again 2026-09-17 — the bathroom, and it is the last one
+
+**This is the "new decision" the paragraph above asks for**, written where it said to write it. The
+line it crosses is its own: *"She is never in a scene as a body."* LO was shown that sentence, and
+the sentence saying any extension had to be logged here first, and chose to cross it.
+
+**What she now does:** she has the bathroom **07:45–08:15 on Tuesday, Thursday and Saturday**,
+coming off a ward. Nell can walk in on her once the lock is broken, and there is a written scene
+behind it.
+
+**Two rungs, and the third does not exist:**
+
+| | |
+|---|---|
+| **back out** | always |
+| **stay in the gap and watch** | corruption 15 |
+| ~~let herself be seen~~ | **never, at any corruption, for her and only for her** |
+
+Nate, Tasha and Gil all carry a third rung where Nell lets herself be caught looking. **Lynn's is
+not gated high — it is not authored.** There is nothing in the file to raise a number into.
+
+**What is still off-limits, and is not up for reinterpretation:**
+
+- **She is never touched, at any height, by anybody.** Unchanged, and this pass adds no contact.
+- **She never gets a move.** No relation, no arousal, no arc, nothing that climbs towards her. The
+  scene pays corruption to Nell and nothing to anybody else.
+- **She is never seen seeing.** The two rungs above are the whole of it.
+- **What the scene is about is the trespass, not the body.** She is forty-one, she has been on her
+  feet for twelve hours, and what is unbearable in that room is that Nell is standing in the door.
+
+**Why it was allowed:** the same reason as the television. She is the price, and this is the clearest
+statement of it the game has — the one person in the house with nothing to take, being taken from
+anyway. **Two crossings is where this stops.** A third goes under this heading or it does not happen.
+
 ---
 
 # 3. Changeable, but expensive

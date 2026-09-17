@@ -116,12 +116,52 @@ him in the week that is not about the house.
 ⚠️ **The garage opens off the street, not the landing.** So going out to it from inside is two moves,
 and that is left alone deliberately — it is a garage.
 
-## The bathroom is the tightest room in the house
+## The bathroom is the tightest room in the house, and now it has a door on it
 
-**One bathroom, shared with Nate and Tasha, and it has a lock.** *Clean* is the meter she needs
-before she goes live and before anybody looks at her properly.
+**One bathroom, four people, and every one of them locks it.**
 
-- **Mornings it is taken** — that is what the running shower in the opening is.
+| when | who |
+|---|---|
+| **07:00–07:45** weekdays | Nate, taking his time about it |
+| **07:45–08:15** Tue/Thu/Sat | **her mum**, washing a ward off before she sleeps through the day |
+| **17:00–17:30** | **Tasha**, in the shower with the radio up |
+| 17:30–18:00 | Tasha, doing her face — and she opens it for Nell |
+| **18:00–18:30** | **Gil**, straight off the van |
+
+**Clicking the bathroom no longer puts her in it.** She lands on the door instead, and the door tells
+her who is behind it and whether the handle turns. Empty, she goes in. Occupied, she knocks.
+
+**Knocking is how the game teaches her the lock.** Gil gives her twenty minutes and goes back to the
+water. Nate makes the joke about the bathroom downstairs that does not exist. Her mum says two
+minutes and takes eleven and apologises for it. **Nobody lets her in except Tasha**, who locks it
+against the men and opens it for her without asking who it is.
+
+### And then she takes the plate off
+
+**A brass button and two screws, and about four minutes.** Once she has been refused at that door,
+she can turn the barrel round the wrong way and put it back, and it will look exactly the same and
+it will never catch again.
+
+**After that, nobody in this house can lock that door.** Not them, and not her.
+
+> the_bathroom's own line used to be *"the only room in this house that is ever properly yours."*
+> She is the one who ended that, and the room's description says so afterwards.
+
+**What it costs her is the room.** `wash` stops being private: Tasha has always come through that
+door because Nell forgets the button, and Nate starts coming through it because the button stopped
+working and he is the one who would notice.
+
+**What it buys is three ladders** — back out, stay and watch, let herself be seen — on Nate, Tasha
+and Gil. **Her mum has two and never the third**, and that is written down in `DECISIONS.md` rather
+than left to be read off a number.
+
+### And it is still the room she needs
+
+*Clean* is the meter she needs before she goes live and before anybody looks at her properly, and
+none of the above made that easier.
+
+- **Mornings it is taken** — that is what the running shower in the opening is, and it is Nate, and
+  after quarter to eight on three days a week it is her mum instead.
 - **Tasha has it for an hour before she goes out**, which is the early evening, which is when Nell
   would want it.
 - **It is free in the middle of the day**, when the house is empty and she should be at class or on
@@ -170,9 +210,8 @@ fixed or a dice roll · anything about the two doors past which hours they are o
   two — so this stopped being a thing to build and became a thing to write
 - the house is occupied at night and there is nothing to do in it at night. That is the right order
   to have built them in and it is only half the job
-- **the bathroom is the next room, and it is a whole pass on its own** — a threshold with three
-  states, and all four of them with hours in there and a scene behind each. Nothing in this pass
-  touched that room
+- **the bathroom is done** — a threshold, four sets of hours, a lock she can break and four scenes
+  behind it
 - **@nate's afternoon door is shut and she can knock on it, and that is all it does yet.** The
   walk-in is still one-time and still fixed at ten at night. Six hours a day of him being behind
   that door now exist and the door has one thing to say

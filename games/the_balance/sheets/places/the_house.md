@@ -17,7 +17,7 @@
 | **The landing** | the middle of the house — four doors and the bathroom open off it | whoever is moving between rooms |
 | **The kitchen** | food, the chore list on the fridge, and Friday's $150 handed over | Gil in the mornings |
 | **The living room** | the sofa and **the television, which she can actually work** — five channels, a button to change them and a button to turn it off. Rest, and an hour that costs nothing | her mum from eight, Gil from half past, Nate once they've gone up |
-| **The bathroom** | the shower, and being clean enough to go live. It has a lock | shared with Nate and Tasha |
+| **The bathroom** | the shower, being clean enough to go live, and **a lock she can break.** She knocks on it until she stops knocking | **all four of them** — Nate at seven, your mum at quarter to eight on ward mornings, Tasha at five, Gil at six |
 | **Nate's room** | his door. Shut in the afternoon and not always shut at night, and the difference is the whole of him | Nate, three to six and again from ten |
 | **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |
 | **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall | only with the door open |
