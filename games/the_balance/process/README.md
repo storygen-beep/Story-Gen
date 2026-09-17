@@ -48,14 +48,14 @@ commits — 11 feat, 12 fix — and not one design round.** Measured on `7_final
 ```
                                    founding    2026-09-18
 canvases                                 43            85
-one-time canvases (arc rungs)             5             5
+one-time canvases (arc rungs)             2             5
 NPCs                                     10            10
 [[quests]]                                0             0
 ```
 
-Forty-two canvases were added and every one of them is repeatable. The last one-time canvas in the
-game landed in `86cc9f1`, before the house passes started. Six passes built a stage and nobody
-walked onto it.
+Forty-two canvases were added and **thirty-nine of them are repeatable.** The three that are not
+are `arc_tasha_01/02/03`, one ladder, added in `86cc9f1` before the six house passes started —
+after which nobody gained a step. The house passes built a stage and nobody walked onto it.
 
 The sheets did not stop it, because they were not consulted. They were **written afterwards**: 328
 lines added to six pages across eight commits after the founding build, every one in the same commit
@@ -99,7 +99,7 @@ what he has approved since.** Until he rules on those 328 lines they are not cit
 
 ### "Big" is measured by kind, not by size
 
-Six passes added 42 canvases and about 12,000 words and changed nothing about what the game is.
+Six passes added 31 canvases and about 12,000 words and gave no character a new step. Volume moved; shape did not.
 Volume is the wrong instrument.
 
 **Always bucket 2 or 3 — this is world shape:**
