@@ -116,6 +116,51 @@ him in the week that is not about the house.
 ⚠️ **The garage opens off the street, not the landing.** So going out to it from inside is two moves,
 and that is left alone deliberately — it is a garage.
 
+## Three doors in this house are dice now
+
+Everything else in here waits to be clicked. **These three happen to her.**
+
+| room | when it rolls |
+|---|---|
+| **@nate's** | 15:00–18:00 and 22:00–23:59 — both the hours he is in there awake |
+| **the master bedroom** | 21:00–22:00 on the four nights her mum is off the ward |
+| **@tasha's** | 16:00–17:00 and 18:00–midnight |
+
+**They only roll while that person is actually in the room.** The canvas reads their schedule at the
+moment she walks in, so the two can never drift apart — and each one is fenced out of the hours they
+are *asleep* in the same room, which the presence check on its own would happily roll against.
+
+**A hit puts a three-visit cooldown on the room.** She cannot walk in and out at it.
+
+### And every room with a roll in it keeps a card
+
+A random scene is invisible to the room's own list, so a room holding only a roll renders **empty**
+every time the dice miss. That is why:
+
+- **@nate's shut door now covers his night hours too**, not just the afternoon
+- **the master bedroom has a card for each of them** — @gil on the three ward nights he is up there
+  on his own, her mum on the other four
+
+### @nate's door stopped being a one-off
+
+It fired **once in the entire game** before this. Now it rolls, and it reads two meters at once:
+
+| | |
+|---|---|
+| **her corruption** | what she can make herself do — leave, stay, or let him see her |
+| **his arousal** | what he does about it — stop and pretend it never happened, not stop and not look at her, or not be surprised at all |
+
+**The first one still costs the week.** Seven days of him on the landing with her own door unable to
+stay shut. Every one after is cheap, or the stream would never run again.
+
+### @tasha's is the new one, and it is the opposite of his
+
+**He leaves his door open four inches on purpose. She shut hers and did not hear the landing.**
+
+And being caught is not the same thing for her. Tasha does not mind being looked at — she has spent
+the whole game not minding. What she minds is being **found out wanting something**, which is the one
+part of herself she does not say out loud.
+
 ## The bathroom is the tightest room in the house, and now it has a door on it
 
 **One bathroom, four people, and every one of them locks it.**
@@ -208,8 +253,9 @@ fixed or a dice roll · anything about the two doors past which hours they are o
 - her mum asleep down the hall on a weekday morning is the quietest room in the game and nothing
   happens in it yet. **She is now actually in there** — Tuesday, Thursday and Saturday, eight to
   two — so this stopped being a thing to build and became a thing to write
-- the house is occupied at night and there is nothing to do in it at night. That is the right order
-  to have built them in and it is only half the job
+- the house is occupied at night and **three of its doors now open on their own**. What is still
+  entirely clicked is every ordinary hour: nothing has ever simply happened to her in the kitchen, on
+  the landing or on the way through the front room
 - **the bathroom is done** — a threshold, four sets of hours, a lock she can break and four scenes
   behind it
 - **@nate's afternoon door is shut and she can knock on it, and that is all it does yet.** The

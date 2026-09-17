@@ -27,8 +27,13 @@ showers, the department corridor once it empties, a classroom between classes, b
 houses, the quad late. **Nobody in these needs a name**, which is what makes it cheap enough to be
 everywhere.
 
-⚠️ **In the first build only one of them is open: the classroom between classes.** The rest of that
-list is waiting. It has to be one of them, because otherwise every door she walks in on for four
+**At home, all three doors are dice now.** @nate's room, the master bedroom and @tasha's room each
+roll on arrival, only while that person is actually in there and awake, and a hit puts a three-visit
+cooldown on the room so it cannot be walked in and out of. **This is the first thing in this game
+that happens TO her at home** — everything else in the house waits to be clicked.
+
+⚠️ **On campus, in the first build only one of them is open: the classroom between classes.** The
+rest of that list is waiting. It has to be one of them, because otherwise every door she walks in on for four
 weeks is at home — and the whole point of the game is that college is what changes her. The
 classroom costs nothing: the room is already there, and it is empty on a nine to twelve timetable.
 

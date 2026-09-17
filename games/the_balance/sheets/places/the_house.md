@@ -19,8 +19,8 @@
 | **The living room** | the sofa and **the television, which she can actually work** — five channels, a button to change them and a button to turn it off. Rest, and an hour that costs nothing | her mum from eight, Gil from half past, Nate once they've gone up |
 | **The bathroom** | the shower, being clean enough to go live, and **a lock she can break.** She knocks on it until she stops knocking | **all four of them** — Nate at seven, your mum at quarter to eight on ward mornings, Tasha at five, Gil at six |
 | **Nate's room** | his door. Shut in the afternoon and not always shut at night, and the difference is the whole of him | Nate, three to six and again from ten |
-| **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |
-| **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall | only with the door open |
+| **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not — and **a shut door she doesn't always hear you through** | Tasha, four till five and six till midnight |
+| **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall. **A card each when they're in, and the other thing is a dice roll** | Gil from nine, her mum too on the four nights she's home |
 | **The garage** | **Gil's workshop.** The van, his tools on the wall in the order he wants them, the bins and the washing machine. Where half the chores are | Nate one till three, doing his dad's work. Gil at five, unloading |
 
 **The way out** is the front door onto her street, and the bus stop on it. The bus costs money and
