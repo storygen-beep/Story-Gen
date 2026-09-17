@@ -43,6 +43,8 @@
 - **Gives** clothes, parties, and advice that isn't wrong.
 - **Says no by** laughing at her. **She cannot out her** — she doesn't know, and she's an example,
   not a threat.
+- **She locks the bathroom door and opens it for Nell anyway.** Everybody in this house locks that
+  door; she is the only one who lets somebody in. Knocking on her is not a refusal, it is the way in.
 
 ## Lynn — her mum
 

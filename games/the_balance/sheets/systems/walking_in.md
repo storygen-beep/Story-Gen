@@ -12,9 +12,15 @@
 
 She opens a door, or turns a corner, and there are people in the middle of something.
 
-**At home it's two doors and she knows who's behind them** — Nate's room, and the master bedroom on
-the nights her mum is in it. **Those two have their own page**, because the people behind them have
-names and that changes everything about how they work.
+**At home it's three doors and she knows who's behind them** — Nate's room, the master bedroom on
+the nights her mum is in it, and **the bathroom, which is all four of them and is the only one she
+had to break to get**. The first two have their own page, because the people behind them have names
+and that changes everything about how they work.
+
+**The bathroom is the one where the door itself is the mechanic.** Everybody locks it. All she can
+do is knock, and being refused is what teaches her the lock is the problem — and then she can take
+a screwdriver to it, once, and after that nobody in this house can lock that door again. **It works
+both ways, and that is the price.** She is in that shower too.
 
 **On campus it's strangers, and it's everywhere:** the library's third floor after eight, the gym
 showers, the department corridor once it empties, a classroom between classes, behind the row

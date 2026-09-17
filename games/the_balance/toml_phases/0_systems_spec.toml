@@ -145,6 +145,18 @@ followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this 
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
                        # knows her name.
+# --- the bathroom lock --------------------------------------------------------
+# ⚠️ NOT TRAITS. `knocked_once` and `lock_broken` are FLAGS and live in the flag
+# store, not here — this comment sits in the trait block only because that is where
+# a reader looks for the bathroom and there is nothing to find. Both are permanent
+# and NEITHER is in [engine.daily_tick]: a broken lock does not mend overnight, and
+# the game must not forget she has already been refused at that door.
+#
+# ⚠️ THE ROOM HAS TWO ERAS AND ONE ACT BETWEEN THEM. Before: everybody locks it and
+# all she can do is knock. After: nobody can, and the price is that `wash` stops
+# being private — the substitution rules on it read `lock_broken` too. She breaks
+# it to get at them; it means they can get at her.
+
 # --- her own door ------------------------------------------------------------
 # ⚠️ A TALLY, AND IT NEVER GOES DOWN. Every other counter in this block is either
 # a position in a chain or a countdown; this one is the number of times she has

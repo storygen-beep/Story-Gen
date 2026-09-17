@@ -528,6 +528,125 @@ def walk_afternoon(page, rep):
               passage(page))
 
 
+def walk_bathroom(page, rep):
+    """Slice 13 — the threshold, the lock, and what is behind it.
+
+    ⚠️ THE DOOR IS A PURE RENDER (v2.py:10078-10093). It writes no `current_location`
+    and is whitelisted in isRerenderSafe, so the assertion every other route in this
+    file uses — current_location == the slug — FAILS on a doored location and would
+    report a working threshold as broken. Assert on `passage()` here instead.
+
+    ⚠️ AND `start()` IS NOT ENOUGH ON ITS OWN. This build opens on
+    CustomizeCharacters (v2.py:700 — any game with customizable NPCs does), and
+    `stand_at` writes state without rendering a screen, so a click lands on the
+    character-creation form. Every card click below is preceded by an explicit
+    goto to the hall.
+
+    ⚠️ AND NOTHING ELSE IN THIS FILE REACHES IT. `goto`, `stand_at` and `play` all
+    address a passage directly and bypass the threshold entirely; only an
+    engine-generated nav surface routes through it (v2.py:20601). That is why this
+    route CLICKS the card.
+    """
+    # Empty room, mid-morning. One way through and it is the plain one.
+    start(page, "Monday", 10, "the_hall")
+    goto(page, "Location_the_hall")
+    click(page, "The Bathroom")
+    rep.check("the bathroom is a threshold now, not a room",
+              passage(page) == "Door_the_bathroom", passage(page))
+    rep.check("a pure render writes no location",
+              sv(page)["player"]["current_location"] != "the_bathroom",
+              str(sv(page)["player"]["current_location"]))
+    rep.check("empty, the only way through is in",
+              links(page) and all("Knock" not in x for x in links(page)),
+              str(links(page))[:110])
+
+    # @nate is in there at ten past seven and everybody locks it.
+    start(page, "Tuesday", 7, "the_hall")
+    apply_flag(page, "lock_broken", "unset")
+    rep.check("at ten past seven the room is his",
+              npc_at(page, "npc_nate") == "the_bathroom", str(npc_at(page, "npc_nate")))
+    goto(page, "Location_the_hall")
+    click(page, "The Bathroom")
+    rep.check("locked, she can knock", any("Knock" in x for x in links(page)),
+              str(links(page))[:110])
+    # ⚠️ THE REFUSAL IS PROSE ON THE THRESHOLD, NOT A GREYED ROW. A shown-locked row
+    # always renders, live or greyed, so no set of conditions gives "greyed while
+    # locked, absent once broken" — the door says it in fiction instead.
+    rep.check("locked, the threshold says so in its own words",
+              "handle does not turn" in body(page), body(page)[:120])
+    rep.check("and there is no way in offered at all",
+              not any("Open it anyway" in x for x in links(page)), str(links(page))[:110])
+    rep.check("the lock cannot be looked at with somebody behind it",
+              not any("lock" in x.lower() for x in links(page)), str(links(page))[:110])
+
+    click(page, "Knock")
+    rep.check("being refused is what teaches her the lock",
+              flags(page).get("knocked_once") is True,
+              f"knocked_once = {flags(page).get('knocked_once')}")
+
+    # Now the room is empty and she has been refused once.
+    start(page, "Tuesday", 10, "the_hall")
+    goto(page, "Location_the_hall")
+    click(page, "The Bathroom")
+    rep.check("empty and refused once, the lock is worth a look",
+              any("lock" in x.lower() for x in links(page)), str(links(page))[:110])
+    click(page, "proper look")
+    click(page, "Turn the barrel round")
+    rep.check("breaking it sticks", flags(page).get("lock_broken") is True,
+              f"lock_broken = {flags(page).get('lock_broken')}")
+
+    # @gil showers at six now, and the handle turns.
+    start(page, "Tuesday", 18, "the_hall")
+    rep.check("at six the bathroom is @gil's",
+              npc_at(page, "npc_gil") == "the_bathroom", str(npc_at(page, "npc_gil")))
+    goto(page, "Location_the_hall")
+    click(page, "The Bathroom")
+    rep.check("broken, both ways through are live",
+              any("Knock" in x for x in links(page))
+              and any("Open it anyway" in x for x in links(page)),
+              str(links(page))[:130])
+    rep.check("and the threshold stops saying it is shut",
+              "handle does not turn" not in body(page), body(page)[:120])
+
+    # The ladder. Corruption decides the menu; she still picks from it.
+    apply_effect(page, "corruption", "set", 5, clamp=False)
+    play(page, "bath_gil")
+    rep.check("at five she can only get out", len(links(page)) == 1, str(links(page))[:110])
+    apply_effect(page, "corruption", "set", 15, clamp=False)
+    play(page, "bath_gil")
+    rep.check("at fifteen she can stay", any("Stand there" in x for x in links(page)),
+              str(links(page))[:110])
+    click(page, "Stand there")
+    rep.check("staying is one-time and it is recorded",
+              flags(page).get("gil_bath_watched") is True,
+              f"gil_bath_watched = {flags(page).get('gil_bath_watched')}")
+    apply_effect(page, "corruption", "set", 30, clamp=False)
+    play(page, "bath_gil")
+    rep.check("at thirty the top rung opens",
+              any("rest of the way" in x for x in links(page)), str(links(page))[:110])
+
+    # ⚠️ HER MUM HAS TWO RUNGS AND NEVER A THIRD. DECISIONS.md, amended twice.
+    start(page, "Tuesday", 8, "her_room")
+    apply_effect(page, "corruption", "set", 95, clamp=False)
+    apply_flag(page, "lynn_bath_watched", "set")
+    play(page, "bath_lynn")
+    rep.check("her mum is never seen seeing, at any corruption",
+              not any("see you" in x.lower() or "catch you" in x.lower()
+                      for x in links(page) + locked(page)),
+              str(links(page) + locked(page))[:130])
+
+    # Tasha locks it too, and opens it for her — her whole arc is behind a knock now.
+    start(page, "Tuesday", 17, "the_hall")
+    apply_effect(page, "corruption", "set", 5, clamp=False)
+    rep.check("at five she has the bathroom",
+              npc_at(page, "npc_tasha") == "the_bathroom", str(npc_at(page, "npc_tasha")))
+    goto(page, "Location_the_hall")
+    click(page, "The Bathroom")
+    click(page, "Knock")
+    rep.check("knocking on @tasha lands in her hub, not a refusal",
+              "tasha_bath" in passage(page), passage(page))
+
+
 ROUTES = {
     "opening": walk_opening,
     "shift": walk_shift,
@@ -535,6 +654,7 @@ ROUTES = {
     "stream": walk_stream,
     "lock": walk_lock,
     "afternoon": walk_afternoon,
+    "bathroom": walk_bathroom,
     "doors": walk_doors,
     "class": walk_class,
     "crowd": walk_crowd,

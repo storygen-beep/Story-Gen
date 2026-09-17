@@ -388,16 +388,50 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "time_of_day", start_time = "16:00", end_time = "23:59" },
 ] }
 
+# ⚠️ THIS IS WHAT THE BROKEN LOCK COSTS HER, AND IT BELONGS IN THE SAME PASS AS
+# THE BREAKING. @tasha has always come through that door because Nell forgets to
+# turn the button; @nate comes through it because the button stopped working and he
+# is the one person in this house who would notice that and use it.
+#
+# No time_of_day needed — his `nate_room` rows are 15:00-18:00 and 22:00-23:59, and
+# where those overlap `wash`'s own hours IS the window. One less thing to drift.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "nate_walks_in"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "nate_room", operator = "is_present" },
+] }
+
 [[canvases.nodes]]
 id   = "base"
 name = "The shower"
 
+# ⚠️ TWO POOLS BEHIND A GATE, BECAUSE A block_pool CANNOT BE GATED ITSELF
+# (README §6 item 4). Two of the three original lines are about locking the door,
+# and the day she turns that barrel round they stop being true. Adjacent groups
+# merge into one if/elseif chain, which is exactly what two exclusive states want.
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_false" },
+] } }
 blocks = [
-  { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
-  { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it. You stand there longer than washing takes." },
-  { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
+    { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it. You stand there longer than washing takes." },
+    { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You push the button in out of habit and it goes in and holds nothing. Twenty minutes under the water, but with your ear on the landing the whole of it. That is not the same twenty minutes it used to be." },
+    { type = "paragraph", content = "The mirror goes white. You put the towel over the handle, but a towel over a handle is the whole of what you have now, and you are the one who arranged that with a screwdriver." },
+    { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back at the angle it was, and you keep looking at the door while you do it, and nothing comes through it." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
