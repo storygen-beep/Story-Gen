@@ -145,6 +145,18 @@ followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this 
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
                        # knows her name.
+# --- her own door ------------------------------------------------------------
+# ⚠️ A TALLY, AND IT NEVER GOES DOWN. Every other counter in this block is either
+# a position in a chain or a countdown; this one is the number of times she has
+# shut her door on a house with somebody in it. the_house.md has always said the
+# rule — "her door stays open when someone's on the landing" — and until now
+# nothing in the game enforced it or noticed it being broken.
+#
+# ⚠️ NOT IN [engine.daily_tick]. The flag `door_locked` clears overnight because
+# the decision is a daily one; this does not, because @gil keeps count. It is read
+# in exactly one place — the dinner table, beside the chores and the hours she
+# keeps, which is where he reads everything else about how she is living.
+door_noticed   = 0
 
 # ⚠️ cash = 10 IS A GUESS AND HAS TO GO TO LO. No sheet says what she starts with,
 # and SYSTEMS.md's own tail flags it: "nothing yet says what her cash is for beyond
@@ -329,6 +341,15 @@ flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
   # the jacket is back on in the morning. Dare two lasts exactly one day.
   { targetType = "player", flag = "jacket_off", op = "unset" },
+  # Her door is open again by morning, for the same reason the jacket is back on:
+  # the rule is @gil's and the house resets to it. Shutting it is a decision she
+  # makes fresh every day, which is the only thing that stops one five-minute
+  # click buying every hour of the rest of the game.
+  #
+  # ⚠️ ITS TALLY, `door_noticed`, IS DELIBERATELY NOT HERE — same split as
+  # `toilet_far` above and its permanent twin. The flag is today; the tally is what
+  # @gil has seen, and that does not go back to nothing overnight.
+  { targetType = "player", flag = "door_locked", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
   # Which band the toilet payout screen shows. Set on the way in, read once on the
   # way out, cleared here. `toilet_far_done` is the PERMANENT twin and must never
@@ -373,6 +394,12 @@ flagEffects = [
   # @gil at the table. One sit-down a day; the question he will not answer is
   # one-time and is NOT cleared here.
   { targetType = "player", flag = "gil_today", op = "unset" },
+  # @nate, and the same rule as @gil — one go at being in a room with him a day,
+  # wherever it happens. Shared by his three new surfaces: the kitchen at noon, the
+  # garage at one, his shut door at three. NOT shared with `hub_nate_sofa`, which
+  # is on `sofa_today` with everything else in the front room, because that hour is
+  # capped by the room rather than by him.
+  { targetType = "player", flag = "nate_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
@@ -380,6 +407,39 @@ traitEffects = [
   { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
 ]
 # It runs past zero into negatives and that is harmless — every read is `lte 0`.
+
+# --- IS THE HOUSE EMPTY ------------------------------------------------------
+# The first named gate in this game, and it exists because the engine's condition
+# logic is ONE FLAT LEVEL. `triggerConditionsSatisfied` reads a single `items` list
+# under a single `logic` (v2.py:4133) and does not nest, so "the house is empty OR
+# her door is shut" cannot be written as one condition block. A stage helper is the
+# documented way round it: the helper holds the AND, and the thing that reads it is
+# one item in somebody else's OR. Helpers may hold PRIMITIVES ONLY — one level of
+# nesting, never two (v2.py:4427).
+#
+# ⚠️ SIX ROOMS, NOT SEVEN, AND NOT THE GARAGE.
+#   · `the_hall` holds ZERO schedule rows, so a gate on it is true forever. A dead
+#     clause in a six-clause AND is invisible — nothing in the toolchain objects —
+#     which is exactly the defect class presence.py exists to catch.
+#   · `the_garage` is left out on purpose. @nate is out there 13:00-15:00 and @gil
+#     17:00-18:00, and neither of them can be heard from her room. Including it
+#     would quietly cost her the whole afternoon she just got.
+#
+# ⚠️ npc_id IS OMITTED ON PURPOSE. With no `npc_id` the condition asks whether the
+# room holds ANYBODY (v2.py:4477-4483, setup.getNpcsAtLocation at :3788) rather
+# than naming four people per room and going stale the next time somebody's hours
+# move. The engine's own formatter renders it as "<Room> must be empty".
+[[engine.stage_helpers]]
+name        = "house_empty"
+description = "Nobody is in any of the six rooms she could be heard from."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_kitchen",        operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_front_room",     operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_master_bedroom", operator = "is_absent" },
+  { type = "npc_at_location", location_id = "the_bathroom",       operator = "is_absent" },
+  { type = "npc_at_location", location_id = "nate_room",          operator = "is_absent" },
+  { type = "npc_at_location", location_id = "tasha_room",         operator = "is_absent" },
+] }
 
 # --- guidance ----------------------------------------------------------------
 # quests_engine = "v2" turns the sidebar entry and the page ON, so the cards are

@@ -13,7 +13,13 @@
 
 - **Wants** his house run his way, and to never be thanked for the tuition. He's strict, he doesn't
   drink, and he has never once mentioned what he paid.
-- **Found** in the kitchen until eight, back by six, in the garage late.
+- **Works for himself, out of the van.** A trade, and the garage is the workshop — the tools are on
+  the wall in the order they're drawn on it, and the list on the fridge is in the same handwriting
+  as the ones he writes for himself. **This is the answer to the one odd thing about him:** a man who
+  counts five dollars a chore handed over $2,400 in cash without mentioning it. He's had good years.
+  He's also never had anybody to send an invoice to about a bad day.
+- **Found** in the garage at five with the van open, the kitchen until eight and back in it by six,
+  and upstairs by nine.
 - **Gives** chore money, lifts, and the debt itself.
 - **Says no by** saying nothing and tightening the rules.
 - **He never opens a step.** Every step with him is one she opens. There is no move he can make on

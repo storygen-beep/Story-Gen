@@ -88,10 +88,28 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
+description = "The van, the bins, the washing machine, and the light @gil leaves on. His tools are on the wall in the order he wants them and half the list on the fridge lives out here."
 image       = "locations/the_garage.jpg"
-image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
+image_search_queries = ["cluttered home garage workbench tools van night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
+
+# --- WHERE HE IS WHEN HE IS NOT HERE ------------------------------------------
+# ⚠️ offscreen = true IS A BARE TOP-LEVEL KEY on the location, not a sub-table
+# (template_import.py:1944). It renders no nav card and never appears in any exit
+# list (v2.py:20653-20659), and `world reachable` exempts it (gates.py:5485). The
+# only thing it is for is letting a schedule row say where somebody actually went.
+#
+# ⚠️ IT IS ALSO INVISIBLE TO presence.py, which has no idea the property exists —
+# @nate's 18:00 row here needs a hand-written OCCUPANCY_ROWS entry or the run
+# reports a DEAD row and exits 1.
+#
+# ⚠️ A [locations.door] on one of these is a validation error, and so is a `costs`
+# block that nobody can ever pay. Keep it bare.
+[[locations]]
+id          = "the_gym"
+name        = "The Gym"
+description = "Not a place you have ever been. It is where @nate is between six and seven, and the only thing in his week he does not make a joke out of."
+offscreen   = true
 
 # --- getting anywhere --------------------------------------------------------
 
@@ -210,13 +228,18 @@ entry_from  = "the_cafe"
 [[npcs]]
 id          = "npc_gil"
 name        = "Gil"
-description = "Your mum's husband of three years, and the reason you are at college at all. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
+description = "Your mum's husband of three years, and the reason you are at college at all. He works for himself, out of the van, and the garage is where the job lives when he is not on it. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
 portrait    = "gil.jpg"
 role        = "step dad"
 relationship = "step dad"
 relationship_options = ["step dad", "mum's husband", "dad", "uncle"]
 customizable = true
-tags        = ["runs the house his way", "never mentions what he paid", "up before everyone", "does not drink"]
+# ⚠️ EXACTLY FOUR — the importer hard-fails at five. "up before everyone" came out
+# to make room for the trade, and it is the only one of the five the game already
+# says elsewhere: his sleep row's activity is literally "asleep, and up before
+# anybody". The other four are load-bearing — DECISIONS.md:93 says a drunk step dad
+# would hand her an excuse for everything.
+tags        = ["works for himself, out of the van", "runs the house his way", "never mentions what he paid", "does not drink"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 
@@ -229,6 +252,27 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "06:30"
 end_time   = "08:00"
 activity   = "at the table with the radio on"
+
+# --- HE WORKS FOR HIMSELF, AND THE GARAGE IS THE WORKSHOP ---------------------
+# The cast sheet has said "in the garage late" since the first draft and no row in
+# this game has ever put him out there. This is that row.
+#
+# ⚠️ IT IS THE HOUR BEFORE THE KITCHEN, NOT AFTER IT. Everything from 18:00 on is
+# load-bearing — the kitchen holds `friday_payment` and `dinner`, 20:30 is the
+# television stagger, and 21:00-23:30 upstairs IS one of the two doors. An hour
+# taken from any of those would cost a working surface. 17:00-18:00 was empty.
+#
+# It is also what makes the money make sense. A man who counts five dollars a chore
+# handed over two thousand four hundred in cash without mentioning it, and nothing
+# in the game has ever said how. He is self-employed, he has had good years, and
+# the list on the fridge is in his handwriting because writing jobs down is what he
+# does all day.
+[[npcs.schedules]]
+location   = "the_garage"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "unloading the van, still in his work clothes"
 
 # the_week.md: "@gil is there because he's always there at six." Friday evening is
 # when the $150 is handed over, so he has to actually BE in the room.
@@ -342,7 +386,7 @@ role        = "step brother"
 relationship = "step brother"
 relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
-tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
+tags        = ["wants you gone", "can't stop looking", "tells the house things", "does his dad's work for nothing"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
@@ -358,9 +402,64 @@ start_time = "07:00"
 end_time   = "07:45"
 activity   = "in the shower, taking his time about it"
 
+# --- HIS AFTERNOON, AND IT IS THE BIGGEST EMPTY BLOCK IN THE GAME -------------
+# He is a year ahead of her at the same college and the timetable ends at noon —
+# class_2 and class_4 both run to 12:00, Monday to Thursday. Until now he vanished
+# from 07:45 to 19:00 and so did everybody else, which is why the house held nobody
+# at all between eight in the morning and four in the afternoon, seven days a week.
+#
+# ⚠️ EVERY ONE OF THESE FOUR ROWS HAS A CANVAS BEHIND IT, and that is not optional.
+# presence.py backs a row four ways — portrait, covered, substitution, occupancy —
+# and a row with none of them is DEAD. `kitchen_nate_lunch`, `garage_nate` and
+# `hub_nate_room` exist for these three; the gym is an OCCUPANCY_ROWS entry because
+# she cannot follow him there.
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [1, 3, 5, 6]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "13:00"
+activity   = "standing at the counter eating something out of the packet"
+
+# ⚠️ THE GARAGE'S FIRST OCCUPANT. It has been a declared room with no people and no
+# canvases since the game was built, and the house sheet has always promised half
+# the chore list lives out there. He does his dad's work because he is asked to and
+# because saying no costs more than doing it, which is the same arithmetic she is
+# on with the $150.
+[[npcs.schedules]]
+location   = "the_garage"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "15:00"
+activity   = "sorting his dad's work out, because he was asked to"
+
+# ⚠️ THIS ROW OVERLAPS HER STREAM HOURS ON PURPOSE. Going live used to be gated on
+# a clock that assumed an empty house; from this pass it is gated on her door being
+# shut. Him being down the landing at three in the afternoon is exactly what the
+# lock is for, and it is the first time in the game the two facts meet.
+[[npcs.schedules]]
+location   = "nate_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+activity   = "in his room with the door shut and something on"
+
+# ⚠️ AN OFFSCREEN LOCATION, AND THE FIRST ONE IN THIS REPO. `the_gym` renders no
+# nav card and she can never travel to it (v2.py:20653-20659) — it exists so that
+# "he is out" is a place rather than a hole in the table. College is still a hole,
+# by LO's call: the gym is the hour worth naming.
+[[npcs.schedules]]
+location   = "the_gym"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "at the gym, which is the one thing he is not sarcastic about"
+
+# ⚠️ ALL SEVEN NIGHTS NOW, NOT FOUR. He used to eat in the front room on the nights
+# her mum was on the ward; LO's call, 2026-09-17, is that dinner is the kitchen for
+# everyone who is home. The front-room row that held those three nights is gone.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "19:00"
 end_time   = "20:00"
 activity   = "at the table, eating fast so he can get up"
@@ -368,18 +467,17 @@ activity   = "at the table, eating fast so he can get up"
 # ⚠️ HE DOES NOT WATCH TELEVISION. LO's call, 2026-09-17: "I say he doesnt watches
 # tv. That only parents together." So he is off the sofa for the whole of the
 # parents' hour and comes back down the moment they go up. He is not in a room at
-# all 20:00-21:00 on dinner nights — offscreen on purpose, because a bedroom row
-# with nothing behind it is a presence.py DEAD row and his door is fixed at 22:00.
+# all 20:00-21:00 — offscreen on purpose, because a bedroom row with nothing
+# behind it is a presence.py DEAD row and his door is fixed at 22:00.
 #
-# The ward nights are the only ones he gets the early sofa, because there is no
-# dinner to sit at.
-[[npcs.schedules]]
-location   = "the_front_room"
-weekdays   = [0, 2, 4]
-start_time = "19:00"
-end_time   = "20:00"
-activity   = "on the sofa with something on he is not watching"
-
+# ⚠️ THE 21:00 ROW BELOW SURVIVED A DELETION, AND HERE IS WHY IT HAD TO. LO asked
+# for him off the sofa entirely. Three surfaces hang off these front-room hours and
+# NOT ONE of them carries a schedule of its own: `hub_nate_sofa` (a portrait hub on
+# `requires_npc`), `nate_sits_down` (a substitution on `sofa_hour`), and
+# `sofa_hour`'s own prose bands on whether he is on it. Deleting the row would have
+# darkened all three in silence — no build error, no gate, nothing. He is off the
+# sofa for the television hour, which is what the change was actually for.
+#
 # The late hour, every night. the_house_day.md calls this one "the house at its
 # most open" — parents upstairs, Tasha out, doors shut. Sitting with him here is
 # the sit-down; the set is off and what was on it is not his business.

@@ -967,6 +967,62 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    - `an explicit beat carries a clip` moves **2/12 → 2/13**. The fifth channel adds an explicit
      beat and this game has **zero media files on disk**. That is the media backlog, not this pass.
 
+18. **DELETING A SCHEDULE ROW IS NOT THE OPPOSITE OF ADDING ONE.** Added 2026-09-17 with the house
+   pass. Item 16 covered what a new row breaks; this is the other direction, and it is quieter.
+
+   **(a) A ROW CAN BE THE ONLY SCHEDULE THREE SURFACES HAVE.** LO asked for @nate off the sofa
+   entirely. His two front-room rows are the only hours behind `hub_nate_sofa` (a portrait hub on
+   `requires_npc`), `nate_sits_down` (a substitution on `sofa_hour`) and `sofa_hour`'s own prose
+   bands on whether he is on it — **and not one of those three carries a schedule of its own**, so
+   all three would have gone dark with no build error, no failing gate and no line of output
+   anywhere. **Before deleting a row, grep the location for `requires_npc`, for substitutions, and
+   for prose bands that read `npc_at_location`.** The 21:00 row was kept, which got LO ninety per
+   cent of what he asked for and cost nothing.
+
+   **(b) WIDENING A ROW CAN STRAND ITS OWN EVENINGS.** Moving @nate's dinner from four nights to
+   seven put him at the kitchen table on the three nights `dinner` does not fire — it is gated on
+   her mum being present and she is on the ward those nights. `presence.py` caught it as **three
+   dead weekdays on one row**, which is exactly what per-weekday judging is for; a whole-row check
+   would have called it backed. The fix was a second schedule window on his kitchen canvas covering
+   `[0, 2, 4]` only, deliberately excluding the nights `dinner` already covers him.
+
+   **(c) `offscreen = true` IS INVISIBLE TO `presence.py`.** It is a **bare top-level key** on the
+   location (`template_import.py:1944`), not a sub-table. The engine honours it — `_loc_offscreen`
+   at `v2.py:20653` keeps it off every nav surface, and `gates.py:5485` exempts it from *world
+   reachable* — but `presence.py` never reads `location.properties`, so a row pointing at one falls
+   through to "none of them hers", reports every weekday dead, and `main()` exits 1. It takes a
+   hand-written `OCCUPANCY_ROWS` entry. ⚠️ A `[locations.door]` on an offscreen location is a
+   **validation error** (`template_import.py:4440`), and `the_gym` is the first offscreen location
+   in this repo.
+
+   **(d) `triggerConditionsSatisfied` HAS ONE FLAT LEVEL, AND `stage_helpers` IS THE ONLY WAY ROUND
+   IT.** One `items` list under one `logic` (`v2.py:4133`), so *A AND (B OR C)* cannot be written as
+   one condition block. A named `[[engine.stage_helpers]]` holds the inner AND and is read as
+   `{ type = "stage", helper = "…", operator = "is_true" }` (`v2.py:4430`). **Helpers may hold
+   primitives only — one level, never two** (`v2.py:4427`), and a missing helper fails **closed**.
+   ⚠️ `house_empty` gates on **six rooms, not seven**: `the_hall` holds zero schedule rows, so a
+   clause on it is true forever, and a dead clause inside a six-clause AND is invisible.
+
+   **(e) `npc_at_location` WITH NO `npc_id` ASKS "IS ANYBODY IN THIS ROOM".** First-class, not a
+   trick — `v2.py:4477-4483`, helper `getNpcsAtLocation` at `:3788`, and the engine's own formatter
+   renders it as *"<Room> must be empty"*. Naming four people per room instead goes stale the next
+   time somebody's hours move.
+
+   **(f) ADDING TRIGGER `conditions` TO A CANVAS TURNS ON THE PHONE LAUNCHER'S `locked_text`.** The
+   launcher reaches for an option's `locked_text` only when its canvas **has** trigger conditions
+   (`v2.py:3152-3153`); with none it falls through to the canvas's `cooldown_message`. `stream` had
+   no conditions for the whole of the first build, so `8_phone.toml`'s "Not tonight." **had never
+   rendered once.** Giving the stream a door lock switched it on. Check the launcher text whenever a
+   canvas gains its first condition.
+
+   **(g) `play()` SKIPS TRIGGER CONDITIONS, SO A GATE NEEDS ITS OWN ROUTE.** `playtest.py:245` is
+   `Engine.play()` on the canvas passage — it proves the scene works and says nothing about whether
+   the player could have got there. `walk_stream` passed unchanged the day the stream stopped being
+   schedule-gated and started being door-gated. `walks.py` gained `lock` and `afternoon` for this;
+   both ask the engine directly via `sv(page, "SugarCube.setup.triggerConditionsSatisfied(...)")`.
+   ⚠️ **`setup` is not a page global — it is `SugarCube.setup`.** A bare `setup.` in a `sv()`
+   expression throws `ReferenceError` and the route reports as a crash, not a failure.
+
 ---
 
 ## 7 · How this ends

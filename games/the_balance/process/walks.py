@@ -39,7 +39,7 @@ sys.path.insert(0, ".claude/skills/author-game-v2/scripts")
 from playtest import (  # noqa: E402
     open_game, enter_game, sv, traits, flags, body, links, locked,
     click, play, goto, passage, set_time, advance_time, stand_at,
-    apply_effect, Report,
+    apply_effect, snapshot, npcs_at, npc_at, Report,
 )
 
 BUILD = "games/the_balance/output/index.html"
@@ -399,11 +399,142 @@ def walk_travel(page, rep):
               f"{len(locked(page))} locked, {len(links(page))} live: {str(links(page))[:90]}")
 
 
+def walk_lock(page, rep):
+    """Slice 11 — her own door, and the fact that it is now the gate on going live.
+
+    ⚠️ THIS ROUTE EXISTS BECAUSE `walk_stream` CANNOT COVER IT. That route reaches
+    the scene with play(), which is Engine.play() on the canvas passage and skips
+    trigger conditions entirely (playtest.py:245). It proves the scene works and
+    says nothing at all about whether the door is shut. From 2026-09-17 the door IS
+    the gate, so the gate needs a route that goes the way a player goes.
+    """
+    # 14:00 Monday — inside the window the stream used to be scheduled for, and the
+    # house is empty. If the schedules were still there this would pass on the clock.
+    start(page, "Monday", 14, "her_room")
+    apply_flag(page, "door_locked", "unset")
+    rep.check("the house is empty at two on a Monday",
+              sv(page, "SugarCube.setup.triggerConditionsSatisfied("
+                       "SugarCube.setup.stage_helpers_map['house_empty'].conditions)") is True,
+              "house_empty helper")
+
+    goto(page, "Location_her_room")
+    rep.check("her door is a row in her own room",
+              any("door" in x.lower() for x in links(page)), str(links(page))[:90])
+
+    play(page, "her_door")
+    rep.check("with nobody in, one way to shut it is offered",
+              sum(1 for x in links(page) if "Shut the door" in x) == 1,
+              str(links(page))[:110])
+    click(page, "Shut the door")
+    rep.check("shutting it sets the flag", flags(page).get("door_locked") is True,
+              f"door_locked = {flags(page).get('door_locked')}")
+    rep.check("an empty house costs her nothing to shut it out",
+              (traits(page).get("door_noticed") or 0) == 0,
+              f"door_noticed = {traits(page).get('door_noticed')}")
+
+    # The same act with somebody in. @nate is in his room 15:00-18:00 now, which is
+    # the row that made the old schedule-gated stream wrong in the first place.
+    start(page, "Monday", 16, "her_room")
+    apply_flag(page, "door_locked", "unset")
+    rep.check("at four he is home", npc_at(page, "npc_nate") == "nate_room",
+              str(npc_at(page, "npc_nate")))
+    play(page, "her_door")
+    rep.check("with him in, still exactly one way to shut it",
+              sum(1 for x in links(page) if "Shut the door" in x) == 1,
+              str(links(page))[:110])
+    click(page, "Shut the door")
+    rep.check("shutting it on a full house is counted",
+              (traits(page).get("door_noticed") or 0) == 1,
+              f"door_noticed = {traits(page).get('door_noticed')}")
+
+    rep.check("shut, the door offers the way back open",
+              any("Open it again" in x for x in links(page)), str(links(page))[:110])
+    click(page, "Open it again")
+    rep.check("opening it clears the flag", not flags(page).get("door_locked"),
+              f"door_locked = {flags(page).get('door_locked')}")
+    rep.check("the tally does NOT come back down",
+              (traits(page).get("door_noticed") or 0) == 1,
+              f"door_noticed = {traits(page).get('door_noticed')}")
+
+    # THE GATE ITSELF, asked of the engine rather than of a label.
+    stream_ok = ("SugarCube.setup.triggerConditionsSatisfied((SugarCube.setup.help_data.locationCanvases"
+                 "['her_room'].filter(function(c){return c.id==='stream';})[0]||{})"
+                 ".conditions)")
+    rep.check("door open, the stream is shut — at two on a Monday, inside its old window",
+              sv(page, stream_ok) is False, "stream trigger conditions")
+    apply_flag(page, "door_locked", "set")
+    rep.check("door shut, the stream opens", sv(page, stream_ok) is True,
+              "stream trigger conditions")
+
+    # And the hours really are gone: Saturday morning was refused by the old
+    # schedules and is the proof the clock no longer has anything to do with it.
+    set_time(page, "Saturday", 9)
+    rep.check("shut, it opens on a Saturday morning the old schedule refused",
+              sv(page, stream_ok) is True, "Saturday 09:00")
+
+    # The day tick puts the house back to his rule.
+    advance_time(page, 60 * 20)
+    rep.check("the door is open again by morning",
+              not flags(page).get("door_locked"),
+              f"door_locked = {flags(page).get('door_locked')}")
+
+
+def walk_afternoon(page, rep):
+    """Slice 12 — the hours the house used to hold nobody at all."""
+    start(page, "Tuesday", 12, "the_kitchen")
+    rep.check("at noon he is in the kitchen", npc_at(page, "npc_nate") == "the_kitchen",
+              str(npc_at(page, "npc_nate")))
+    rep.check("and there is a card for him",
+              "Nate" in npcs_at(page, "the_kitchen") or npcs_at(page, "the_kitchen"),
+              str(npcs_at(page, "the_kitchen"))[:90])
+
+    start(page, "Tuesday", 14, "the_garage")
+    rep.check("at two he is in the garage — a room that held nobody",
+              npc_at(page, "npc_nate") == "the_garage", str(npc_at(page, "npc_nate")))
+    play(page, "garage_nate")
+    click(page, "Give him a hand")
+    rep.check("helping him moves him", (snapshot(page).get(("npc_nate", "relation")) or 0) > 0,
+              f"relation = {snapshot(page).get(('npc_nate', 'relation'))}")
+    rep.check("and it costs her clean", (traits(page).get("clean") or 0) < 100,
+              f"clean = {traits(page).get('clean')}")
+    rep.check("one go at him a day, wherever it happens",
+              flags(page).get("nate_today") is True,
+              f"nate_today = {flags(page).get('nate_today')}")
+
+    start(page, "Tuesday", 17, "the_garage")
+    rep.check("at five it is @gil out there instead",
+              npc_at(page, "npc_gil") == "the_garage" and npc_at(page, "npc_nate") != "the_garage",
+              f"gil={npc_at(page, 'npc_gil')} nate={npc_at(page, 'npc_nate')}")
+
+    # The fence on his afternoon door — the sleep-pass lesson, checked.
+    start(page, "Tuesday", 16, "nate_room")
+    play(page, "hub_nate_room")
+    rep.check("his shut door is a surface at four", "hub_nate_room" in passage(page),
+              passage(page))
+    start(page, "Tuesday", 23, "nate_room")
+    rep.check("and it is NOT one at eleven, where the walk-in lives",
+              "hub_nate_room" not in str(sv(
+                  page, "SugarCube.setup.help_data.locationCanvases['nate_room']"
+                        ".filter(function(c){return SugarCube.setup.isCanvasSelectable(c);})"
+                        ".map(function(c){return c.id;})")),
+              "selectable at 23:00")
+
+    # Ward nights: he is at that table and dinner does not fire.
+    start(page, "Monday", 19, "the_kitchen")
+    rep.check("on a ward night he is still at the table",
+              npc_at(page, "npc_nate") == "the_kitchen", str(npc_at(page, "npc_nate")))
+    play(page, "kitchen_nate")
+    rep.check("and he has something behind him there", "kitchen_nate" in passage(page),
+              passage(page))
+
+
 ROUTES = {
     "opening": walk_opening,
     "shift": walk_shift,
     "friday": walk_friday,
     "stream": walk_stream,
+    "lock": walk_lock,
+    "afternoon": walk_afternoon,
     "doors": walk_doors,
     "class": walk_class,
     "crowd": walk_crowd,

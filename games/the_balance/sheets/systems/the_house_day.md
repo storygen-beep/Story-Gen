@@ -18,10 +18,13 @@
 |---|---|---|
 | **seven to eight** | Gil at the kitchen table. The shower is running and it's Nate or Tasha. Her mum gone, or coming in off the ward | the chore list and Friday are both in the kitchen, and so is he. **Twenty minutes to the bus** |
 | **eight to twelve** | nobody — except on ward mornings, when **her mum is asleep down the hall** | the house is only empty four days in seven, and she has to learn which |
-| **twelve to four** | nobody at all | **her window.** The door shut, the phone up, the bathroom free. It is also exactly when the middle shift runs |
+| **twelve** | **Nate home first**, in the kitchen, eating out of the packet in his coat | college ends at noon for both of them. The kitchen has a person in it at midday for the first time |
+| **one to three** | **Nate in the garage**, doing his dad's work | the room that held nobody now holds somebody for two hours a day |
+| **three to six** | **Nate upstairs, door shut** | **her window is no longer an empty house.** She can still go live — but only with her own door shut, and now that means something |
 | **four** | Tasha home, her lights on, her door open | clothes, advice she didn't ask for, and somebody who notices what she's wearing |
-| **six** | Gil back, in the kitchen, then the garage | the ten o'clock starts existing again |
-| **about seven** | **everyone at the table**, on the nights her mum is home | the one hour she can't avoid anybody |
+| **five** | **Gil back off the job, in the garage with the van open** | an hour of him nobody in this house has ever seen |
+| **six** | Gil in the kitchen | the ten o'clock starts existing again |
+| **seven** | **everyone at the table.** Nate eats there all seven nights now, not four | the one hour she can't avoid anybody |
 | **eight to nine** | **her mum on the sofa on her own until half past, then Gil.** Nate upstairs, out of the way | **the television hour.** The one window in the game where one parent is in a room without the other |
 | **nine to ten** | parents gone up. **Nate comes back down**, set off, room to himself | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
 | **after ten** | Her mum asleep. Tasha out on Friday and Saturday. **Nate's door** | the house at its most open, and the hour she is only in if she broke the rule to get here |
@@ -68,6 +71,50 @@ After that they've changed and it stays changed.
 
 **Nate is not part of it.** He doesn't watch television and he isn't in the room while the parents
 are. That's the point of him coming down at nine.
+
+## Her door is the third thing in this house she can operate
+
+**One button in her own room. Shut, or open. It remembers until morning.**
+
+`the_house.md` has carried Gil's rule since the first draft — *her door stays open when anyone's on
+the landing* — and for the whole of the first build nothing enforced it and nothing noticed it being
+broken. It does both now.
+
+**Shutting it is what lets her go live.** Not the hour. Going live used to be allowed between twelve
+and four on weekdays and after ten at night, and those hours were picked for one reason: the house
+happened to be empty in them. **It isn't any more** — Nate is upstairs from three — so the clock has
+been taken off it entirely. The door is the whole gate.
+
+**Which means the hours opened right up.** Saturday morning, Sunday afternoon, six in the evening
+with everybody downstairs. Any hour she is willing to shut that door.
+
+**And shutting it on a full house is counted.** Not stopped, and nothing happens on the day. It goes
+on a tally that never goes back down, and at three he says something about it at the table — once,
+late, and without finishing it, the way he says everything.
+
+| | |
+|---|---|
+| **house empty** | shutting it costs nothing at all |
+| **anybody in** | the same act, and it goes on the count |
+
+**The tally is the only meter in this game @gil keeps himself.** Everything else he reads — the
+chores, Friday, the hours she keeps — is a thing the game was already counting. This one exists
+because he is the one who cares about it.
+
+## The garage is where he works, and it is not a cupboard
+
+**Gil is self-employed.** A trade, out of the van, and the garage is the workshop. Nothing in the
+first build said so, which left four facts standing with no cause: the van, the lifts, **$2,400 in
+cash from a man who counts $5 a chore**, and a chore list on the fridge in his own handwriting.
+
+**Nate does his dad's work from one till three**, for nothing, because saying no costs more than
+doing it. That is the same arithmetic she is on with the $150, and neither of them has said so.
+
+**Gil is out there at five**, back off the job, unloading, still in the boots. It is the only hour of
+him in the week that is not about the house.
+
+⚠️ **The garage opens off the street, not the landing.** So going out to it from inside is two moves,
+and that is left alone deliberately — it is a garage.
 
 ## The bathroom is the tightest room in the house
 
@@ -123,3 +170,9 @@ fixed or a dice roll · anything about the two doors past which hours they are o
   two — so this stopped being a thing to build and became a thing to write
 - the house is occupied at night and there is nothing to do in it at night. That is the right order
   to have built them in and it is only half the job
+- **the bathroom is the next room, and it is a whole pass on its own** — a threshold with three
+  states, and all four of them with hours in there and a scene behind each. Nothing in this pass
+  touched that room
+- **@nate's afternoon door is shut and she can knock on it, and that is all it does yet.** The
+  walk-in is still one-time and still fixed at ten at night. Six hours a day of him being behind
+  that door now exist and the door has one thing to say
