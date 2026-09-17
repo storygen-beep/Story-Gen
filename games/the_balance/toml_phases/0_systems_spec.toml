@@ -121,6 +121,26 @@ nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when 
                        # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
                        # when the flag has never been set, which would shut the
                        # stream from the first minute of the game.
+# --- the television in the front room ----------------------------------------
+# ⚠️ THREE POSITIONS, NOT THREE TALLIES — same shape as `dare_chain` above, and
+# the same reason. None of them counts anything; each one says where a thing has
+# got to. Nothing decays them and nothing clears them overnight: the set
+# remembers what it was left on, and the two counters are an arc.
+#
+# ⚠️ `gil_tv` AND `lynn_tv` ARE NOT CORRUPTION METERS, AND THAT WAS LO'S CALL ON
+# 2026-09-17. her_meters.md's one call is "everything lives on her, not on each
+# person — give each person their own and the game becomes eight separate climbs
+# that never touch". These two are read by the television and by nothing else, so
+# there is no second climb. The `corruption` field declared on @gil, @nate, Tasha
+# and @owen stays dead. If either parent ever earns a real arc, a position can be
+# promoted into a meter; a meter cannot be walked back once things read it.
+tv_channel     = 1     # 1 the news · 2 the soap · 3 sport · 4 music · 5 the late one
+gil_tv         = 0     # 0 he puts the news back on · 1 he leaves it and does not
+                       # look at it · 2 he stays in the room and watches it
+lynn_tv        = 0     # 0 she does not notice · 1 she notices and says nothing ·
+                       # 2 she knows, and stays. ⚠️ SHE IS STILL NEVER TOUCHED —
+                       # DECISIONS.md carries the crossing and what it does not
+                       # cover.
 followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this since
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
@@ -324,9 +344,22 @@ flagEffects = [
   # objects, so these two lines and the setters have to stay in step.
   { targetType = "player", flag = "cara_today", op = "unset" },
   { targetType = "player", flag = "sam_today", op = "unset" },
-  # The two rooms that used to hold nobody. `sofa_today` is shared by BOTH front
-  # room canvases — the solo hour and @nate's hub — so it is one hour on that sofa
-  # a day whichever way she sits down.
+  # The two rooms that used to hold nobody. `sofa_today` is shared by ALL FIVE
+  # front room canvases — the solo hour, @nate's hub, the television, and both
+  # parents' hubs — so it is one hour in that room a day whichever way she spends
+  # it, and choosing who to spend it with is the decision.
+  #
+  # ⚠️ IT IS ALSO WHAT PACES THE TELEVISION'S TWO LADDERS. "Leave it on." carries
+  # `sofa_today is_false` and sets it, so `gil_tv` and `lynn_tv` move at most once
+  # a day each and the climb cannot be ground out in one evening. It is also what
+  # makes those rungs COST something: `gates.py` "the climb is paid for" flagged
+  # the first draft, where the corruption came off a five-minute choice with no
+  # hour attached.
+  #
+  # ⚠️ `tv_channel`, `gil_tv`, `lynn_tv` AND `tv_on` ARE DELIBERATELY ABSENT FROM
+  # THIS BLOCK. The set remembers what it was left on and the counters are an arc —
+  # same rule as `toilet_far_done` above. Clearing any of them overnight would
+  # reset the climb every morning and nothing in the toolchain would say a word.
   { targetType = "player", flag = "tasha_today", op = "unset" },
   { targetType = "player", flag = "sofa_today", op = "unset" },
   # The quad pair. Their caps came OFF the trigger and back on as choice flags —

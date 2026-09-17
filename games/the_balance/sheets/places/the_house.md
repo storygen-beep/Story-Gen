@@ -16,7 +16,7 @@
 | **Her bedroom** | sleep, rest, change, and the phone against the books | nobody, unless they knock |
 | **The landing** | the middle of the house — four doors and the bathroom open off it | whoever is moving between rooms |
 | **The kitchen** | food, the chore list on the fridge, and Friday's $150 handed over | Gil in the mornings |
-| **The living room** | the sofa and the TV. Rest, and an hour that costs nothing | Nate, once he's back |
+| **The living room** | the sofa and **the television, which she can actually work** — five channels, a button to change them and a button to turn it off. Rest, and an hour that costs nothing | her mum from eight, Gil from half past, Nate once they've gone up |
 | **The bathroom** | the shower, and being clean enough to go live. It has a lock | shared with Nate and Tasha |
 | **Nate's room** | his door, and it isn't always shut | Nate, evenings and odd hours |
 | **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |

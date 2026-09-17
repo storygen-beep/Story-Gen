@@ -924,6 +924,49 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
    has two `nate_room` rows and only the sleeping one is exempt, so a room-level key would have
    quietly excused the awake row that `nate_door` depends on.
 
+17. **A CANVAS THAT IS AN OBJECT, NOT AN ACTIVITY.** Added 2026-09-17 with the television, which is
+   the first thing in this game the player can leave in a state. Four rules, and three of them cost
+   a rebuild to learn.
+
+   **(a) ONE BUTTON PER ACT, NOT ONE ROW PER OUTCOME.** The first draft authored **fifteen** choices
+   on one screen — a `Watch it.` per ladder rung per parent, each with different effects. They were
+   mutually exclusive so only one ever *rendered*, and `gates.py` **"a place is not a catalogue"
+   failed it anyway**, correctly: it counts what is authored, because fifteen rows is fifteen
+   chances for two conditions to overlap and print the same button twice with different effects.
+   The field, measured by playing five games, carries **1–6 things to do on a screen, median 3**.
+
+   What collapsed it to seven was noticing that one button was doing two jobs. **Watching** is
+   always the same — the hour, the rest, one row. **Leaving it on in front of a parent** is a
+   different act and is the only one that climbs. Separating them removed eight rows and made the
+   screen say what it means.
+
+   **(b) A LADDER THAT MOVES ON A FIVE-MINUTE CHOICE IS FREE, AND THE SCOREBOARD KNOWS.**
+   `gates.py` **"the climb is paid for"** caught the first draft moving `corruption` off a
+   five-minute row with no hour attached — *"3 of 12 gated meters can be raised for free"*. Game
+   time is **not** a cost as far as that gate is concerned; it wants `costs` or a day-cap flag
+   cleared in `[engine.daily_tick]`. The fix was to put the climb on the row that already spends
+   `sofa_today`, which is both what the gate wants and what the fiction wanted anyway.
+
+   **(c) TWO ADJACENT GROUP CHAINS FUSE, AND A WALL IS A REAL BLOCK.** Adjacent `[group]` blocks
+   merge into one if/elseif chain (CARRIED.md:260-262). This canvas needs **three** chains — what is
+   on, who is in the room, and whether the hour is spent — so it carries two plain paragraphs
+   between them whose only job is to stop the fusion. They are load-bearing and commented as such;
+   deleting one silently deletes a whole chain's worth of prose.
+
+   **(d) A POSITION TRAIT MUST STAY OUT OF THE DAILY TICK, and nothing will tell you.** `tv_channel`,
+   `gil_tv` and `lynn_tv` are positions, not tallies, like `dare_chain` and `vesper`'s
+   `equipped_weapon`. Clearing any of them overnight would reset the climb every morning and the
+   build would stay green. `eq` compares with `===` and does **not** coerce (`v2.py:4150`), so a
+   channel band tests a number against a number.
+
+   **Two known false readings this creates, both expected:**
+   - `the climb is paid for` now lists **`tv_channel` 1 → gate at 5, free, 4 clicks**. It is a
+     **dial, not an ascent meter** — a television whose channel button charged money would be
+     absurd. The gate cannot tell a selector from a climb. Same class of expected fail as G11
+     *world reachable* in item 9.
+   - `an explicit beat carries a clip` moves **2/12 → 2/13**. The fifth channel adds an explicit
+     beat and this game has **zero media files on disk**. That is the media backlog, not this pass.
+
 ---
 
 ## 7 · How this ends
