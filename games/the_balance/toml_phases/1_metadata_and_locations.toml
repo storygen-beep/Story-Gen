@@ -235,7 +235,7 @@ goes_to    = { type = "canvas", canvas_id = "bath_break" }
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
+description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day. The kettle is always half full and there is always somebody in here at seven."
 image       = "locations/the_kitchen.jpg"
 image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
 entry_from  = "the_hall"
@@ -433,11 +433,22 @@ flag_keys   = []
 # ⚠️ customizable = true means the player can rename him, so every authored line
 # says @gil and never "Gil".
 
+# --- BREAKFAST IS HIS, AND IT RUNS SEVEN DAYS -------------------------------
+# ⚠️ WEEKDAYS-ONLY UNTIL 2026-09-17, WHICH CONTRADICTED THE ROW BELOW IT. His van
+# row is [0..6] — he is out on the job on a Saturday and a Sunday like every other
+# day — so a Monday-to-Friday breakfast had him leaving for work at the weekend
+# without eating. The kitchen held nobody at all on a weekend morning.
+#
+# ⚠️ IT ENDS AT 08:15 NOW, NOT 08:00. @nate's new 07:45-08:15 row is what makes
+# breakfast a table with people at it rather than one man and a radio, and a
+# fifteen-minute overlap was not an hour anybody could be in. Half an hour is.
+# On @lynn's ward days she is in here from 06:30 too, so Monday, Wednesday and
+# Friday breakfast holds three of them and she has twenty minutes to the bus.
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [0, 1, 2, 3, 4]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "06:30"
-end_time   = "08:00"
+end_time   = "08:15"
 activity   = "at the table with the radio on"
 
 # --- HE WORKS FOR HIMSELF, AND THE GARAGE IS THE WORKSHOP ---------------------
@@ -605,6 +616,25 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time   = "07:45"
 activity   = "in the shower, taking his time about it"
+
+# --- BREAKFAST, AND IT IS WHAT MAKES BREAKFAST A TABLE -----------------------
+# LO's call, 2026-09-17: the house has three meals and only one of them had more
+# than one person at it. @gil ate on his own every morning of the game.
+#
+# He comes straight out of the shower into this row, eats standing up with one arm
+# in his coat, and is gone before the bus. That is the character, not a
+# convenience: `kitchen_nate`'s midday prose already has him "eating something
+# straight out of the packet, still in his coat".
+#
+# ⚠️ COLLEGE MORNINGS ONLY, matching the shower row above it. At the weekend he
+# sleeps and breakfast is @gil on his own again, which is the point of having
+# different tables rather than one table seven times.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "07:45"
+end_time   = "08:15"
+activity   = "eating standing up with one arm already in his coat"
 
 # --- HIS AFTERNOON, AND IT IS THE BIGGEST EMPTY BLOCK IN THE GAME -------------
 # He is a year ahead of her at the same college and the timetable ends at noon —
@@ -826,7 +856,7 @@ location   = "the_kitchen"
 weekdays   = [1, 3, 5, 6]
 start_time = "19:00"
 end_time   = "20:00"
-activity   = "at the table, still in the coat she travels in"
+activity   = "at the table she has just cooked at, sitting down for the first time"
 
 # ⚠️ THE HOUR SHE HAS NEVER HAD. Straight from the table to the sofa, and for the
 # first half of it she is the only one in the room — @gil is still clearing the
@@ -908,6 +938,147 @@ weekdays   = [1, 3, 5]
 start_time = "08:15"
 end_time   = "14:00"
 activity   = "asleep with the curtains shut, straight off the ward"
+
+# =============================================================================
+# HER WEEK, REWRITTEN — LO's call, 2026-09-17
+# =============================================================================
+# She had six rows and about sixty hours a week where she was awake, at home, and
+# the game said she was not in the house. Measured before anything was changed:
+# seventeen empty hours a day on Monday, Wednesday and Friday, thirteen on the
+# mornings after, and twelve on Sunday, her only proper day off. @gil's gap is
+# nine hours and it is 08:00-17:00 — he is on the job. Hers was not a job. It was
+# an unwritten row.
+#
+# ⚠️ THIS BENDS HER OWN SHEET AND THE CROSSING IS LOGGED. the_cast.md:53 reads
+# "Gives the hours. Everything in this game happens while she's out or asleep."
+# She is designed as an absence, and filling her day carelessly would close the
+# windows the stream, the landing and the master bedroom all depend on. So the
+# week below is a NIGHT NURSE'S week, which keeps her out of the way on its own:
+# she is asleep for the afternoon before a shift, asleep for the morning after
+# one, and at the ward for three whole nights. She is still NEVER TOUCHED. This
+# is hours, not a rung.
+#
+# ⚠️ EVERY ROW HERE IS EITHER A SCENE OR A WRITTEN EXCUSE. presence.py backs a row
+# four ways and a row with none of them is DEAD. Breakfast is `hub_lynn_kitchen`,
+# the long middle is `chores_with_mum`, the evening is `cook_with_mum`, the
+# afternoon on the sofa widened `hub_lynn_sofa`'s fence, and the nap is an
+# OCCUPANCY_ROWS entry because a woman asleep is not a thing to click.
+
+# --- ward days: breakfast ------------------------------------------------------
+# Monday, Wednesday and Friday she works that night, so the day is hers and she
+# has slept the night before. This is the only hour in the week she is awake, at
+# home, and NOT wrecked — and her sheet's whole line is "too tired to check". This
+# is the hour she could check.
+#
+# ⚠️ IT OVERLAPS @gil AND @nate ON PURPOSE. His row runs 06:30-08:15 and @nate's
+# new one 07:45-08:15, so on these three mornings the table holds three of them
+# and Nell has twenty minutes before the bus. Tuesday and Thursday it is the two
+# men. At the weekend it is @gil on his own. Three different tables, which is the
+# point of the rows rather than one row seven times.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "06:30"
+end_time   = "09:00"
+activity   = "clearing the table and getting a wash on before anybody asks"
+
+# --- ward days and Sunday: doing the house ------------------------------------
+# LO's question was "07:30-14:00 where out?" and the honest answer is that she is
+# not out. She is doing the house. Nowhere is a hole, not an answer.
+#
+# ⚠️ THESE ARE NOT THE CHORES ON THE FRIDGE. That list is bins, laundry, dishes
+# and the car, it is in @gil's handwriting, it pays five dollars and it is NELL'S
+# JOB. What her mum does is the running of the house and nobody pays her for any
+# of it. `chores_with_mum` is helping; `chore` is working.
+#
+# ⚠️ AND IT IS THE ONLY LONG STRETCH IN THE GAME WHERE THE TWO OF THEM ARE ALONE
+# IN THE HOUSE. Everywhere else her mum is asleep, at the ward, or at a table with
+# three other people. It costs less than it reads: Nell is at college 09:00-12:00
+# Monday to Thursday, so the real overlap is Friday, which has no classes and is
+# also the day the $150 is handed over.
+#
+# ⚠️ SUNDAY IS IN THIS ROW AND THAT IS WHAT FIXES SUNDAY. Her one full day off was
+# twelve empty hours. Her morning is still unnamed — she has a lie-in and nobody
+# wakes her — and she picks the house up from nine like every other free day.
+#
+# ⚠️ IT ALSO HANDS LUNCH A SECOND PERSON FOR FREE. @nate is at that counter
+# 12:00-13:00 every day of the week and had it to himself; four days a week his
+# mother is now in the room. No canvas was needed for it.
+# ⚠️ IT ENDS AT 13:00 AND SHE GOES OUT, AND THAT HOLE IS LOAD-BEARING. The first
+# draft of this row ran to 14:00 and, with the nap starting there, it left the
+# house OCCUPIED EVERY MINUTE OF EVERY DAY — measured: 17 empty hours a week went
+# to zero. `house_empty` is read by `her_door`, so the branch where shutting her
+# own door costs her NOTHING became unreachable for the whole game and every
+# stream would have gone on @gil's count forever. Nothing in the build said a
+# word; walks.py caught it on four assertions at once.
+#
+# She does the house in the morning and goes out for the shop after lunch, which
+# is what the hours were always going to be. The windows that survive are
+# 13:00-15:00 on her ward days and Sunday, and 14:00-15:00 on the mornings after.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4, 6]
+start_time = "09:00"
+end_time   = "13:00"
+activity   = "working through the house, ironing in front of nothing"
+
+# --- ward days: the nap before the shift --------------------------------------
+# She is on the ward from half six and a night shift is twelve hours. Sleeping the
+# afternoon before one is what people who do this actually do.
+#
+# ⚠️ WHAT IT BUYS IS @nate's DOOR. He is in his room 15:00-18:00 with it not quite
+# shut, and from this pass her mother is asleep behind the next one for the whole
+# of it. Nothing blocks — `nate_door` is gated on `opening_done` and rolls the
+# same either way. The cost lands on `house_empty`, which goes false, so shutting
+# her own door to go live goes on @gil's count more often. That counter exists for
+# exactly this.
+#
+# ⚠️ OCCUPANCY ONLY. There is nothing to click and there must not be. presence.py
+# carries the written excuse; see its OCCUPANCY_ROWS entry keyed 14:00.
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "15:00"
+end_time   = "18:30"
+activity   = "asleep with the curtains shut, the alarm set for half six"
+
+# --- the nights she is home: up off the ward ----------------------------------
+# She wakes at two having slept since quarter past eight and she is good for
+# nothing. This block was the other hole — five hours a day, three days a week,
+# awake at home and nowhere in the game.
+#
+# ⚠️ NO NEW CANVAS. `hub_lynn_sofa`'s fence widened to cover both her front-room
+# windows, and `sofa_today` caps the room, so sitting with her at three costs the
+# eight o'clock. Choosing which is the decision.
+# ⚠️ FIFTEEN, NOT FOURTEEN. She wakes at two and takes an hour to be a person,
+# which is true of anybody off a night shift and is also what keeps 14:00-15:00
+# the one empty hour on these three days. See the shop hole above.
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+activity   = "on the sofa with the afternoon on, not watching it"
+
+# --- the nights she is home: cooking ------------------------------------------
+# ⚠️ NOBODY IN THIS GAME HAS EVER COOKED. The word appears three times in the whole
+# corpus and all three are scenery, and @nate's own ward-night line says it out
+# loud: "Nobody has cooked." The chore list is bins, laundry, dishes, the car.
+#
+# LO's split, 2026-09-17: when her mum is on the ward Nell cooks; when her mum is
+# home Nell helps her. Two surfaces, one flag — `cooked_today` — and the table
+# reads it either way.
+#
+# ⚠️ IT STARTS AT 18:00, WHICH PUTS BOTH PARENTS IN THIS ROOM FOR THE FIRST TIME.
+# @gil is out of the shower and in here from 18:30. Nothing depends on him being
+# alone in it, and half an hour of the two of them in one kitchen is the thing the
+# house has never shown.
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "cooking, with the radio on somebody else's station"
 
 # --- the two on campus who want nothing from her -----------------------------
 # The crowd — Jules, Bree and Paige — is the NEXT piece. These two are the friend

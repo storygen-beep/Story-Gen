@@ -16,15 +16,16 @@
 
 | when | where they are | what it means for her |
 |---|---|---|
-| **seven to eight** | Gil at the kitchen table. The shower is running and it's Nate or Tasha. Her mum gone, or coming in off the ward | the chore list and Friday are both in the kitchen, and so is he. **Twenty minutes to the bus** |
-| **eight to twelve** | nobody — except on ward mornings, when **her mum is asleep down the hall** | the house is only empty four days in seven, and she has to learn which |
-| **twelve** | **Nate home first**, in the kitchen, eating out of the packet in his coat | college ends at noon for both of them. The kitchen has a person in it at midday for the first time |
-| **one to three** | **Nate in the garage**, doing his dad's work | the room that held nobody now holds somebody for two hours a day |
+| **half six to quarter past eight** | **breakfast, and it is a table now.** Gil with the radio seven days a week. Nate out of the shower at quarter to eight. **Her mum too, on her ward days** | **three of them in one room** on Monday, Wednesday and Friday — the only window in the game where that is true. **Twenty minutes to the bus**, and sitting down costs her some of it |
+| **nine to one** | **her mum doing the house** on ward days and Sunday — the washing, the ironing, the cupboards | **helping her is the only long stretch where the two of them are alone in here.** She's at college Monday to Thursday, so the day this really opens is **Friday** |
+| **twelve** | **Nate home first**, in the kitchen, eating out of the packet in his coat. **Her mum in the room four days a week** | college ends at noon for both of them. Lunch has two people in it and it cost no canvas to do that |
+| **one to three** | **Nate in the garage**, doing his dad's work. Her mum out at the shop | the room that held nobody now holds somebody for two hours a day — and this is **the hole the house needs**, the only stretch that is properly empty |
 | **three to six** | **Nate upstairs, door shut** | **her window is no longer an empty house.** She can still go live — but only with her own door shut, and now that means something |
 | **four** | Tasha home, her lights on, her door open | clothes, advice she didn't ask for, and somebody who notices what she's wearing |
 | **five** | **Gil back off the job, in the garage with the van open** | an hour of him nobody in this house has ever seen |
-| **six** | Gil in the kitchen | the ten o'clock starts existing again |
-| **seven** | **everyone at the table.** Nate eats there all seven nights now, not four | the one hour she can't avoid anybody |
+| **three to six** | **her mum on the sofa** on the four afternoons after a ward night, straight out of a blacked-out bedroom. **Asleep before a shift** on the other three | one card, two windows: sitting with her at three spends the eight o'clock |
+| **six** | Gil in the kitchen. **Her mum at the hob** on the nights she's home — the first time the two of them have been in one room | **somebody cooks.** Her mum's on the ward, so Nell makes it; her mum's home, so Nell helps |
+| **seven** | **everyone at the table, seven nights.** Nate eats there all week, and dinner now fires whether or not her mum is home | the one hour she can't avoid anybody — and the table reads whether the food came off her |
 | **eight to nine** | **her mum on the sofa on her own until half past, then Gil.** Nate upstairs, out of the way | **the television hour.** The one window in the game where one parent is in a room without the other |
 | **nine to ten** | parents gone up. **Nate comes back down**, set off, room to himself | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
 | **after ten** | Her mum asleep. Tasha out on Friday and Saturday. **Nate's door** | the house at its most open, and the hour she is only in if she broke the rule to get here |
@@ -218,12 +219,25 @@ is easiest are the times she is meant to be somewhere else.
 
 ## Dinner is the one hour nothing can be avoided
 
-Everyone at one table, on the nights her mum is off the ward.
+Everyone who is home, at one table, **every night of the week.**
+
+For most of this game it fired four nights out of seven, because it was gated on her mum being in
+the room. On the other three, Gil and Nate sat at that table and **nothing happened at all.**
+
+| | who is at it |
+|---|---|
+| **Tue · Thu · Sun** | all four of them |
+| **Sat** | Gil, Nate, her mum |
+| **Mon · Wed · Fri** | Gil and Nate, and the radio doing the talking |
 
 - **Gil notices things there** — the chores, the hours she keeps, whether Friday got paid.
 - **Nate can needle her in front of people** and it costs him nothing, which is the same move Bree
   makes on the quad.
-- **Tasha performs**, and her mum is too tired to hear any of it.
+- **Tasha performs**, and her mum is too tired to hear any of it. **Backing her up is a card** —
+  and it spends the hour Nell would have had in her room.
+- **Her mum speaks.** She never did. Every line she has is a question she starts and doesn't finish.
+- **The table reads whether anybody cooked.** If Nell did, nobody says so, and Gil has a second
+  helping, and that is how it gets said in this house.
 - **She can skip it.** That is noticed too.
 
 ## The three days that change the house
@@ -232,9 +246,15 @@ Everyone at one table, on the nights her mum is off the ward.
 
 | | what changes |
 |---|---|
-| **ward nights** | no dinner, an empty evening, and **the master bedroom door is shut on a man on his own** |
-| **the mornings after** | her mum asleep down the hall while the house is otherwise empty. The one room she has to be quiet for |
-| **the other four** | dinner happens, her mum is home and asleep by ten, and **the master bedroom door is the other door** |
+| **ward nights** | **her mum is home all day** — breakfast, the house until one, asleep from three. Gone by half six. Dinner is Nell's to cook, and **the master bedroom door is shut on a man on his own** |
+| **the mornings after** | her mum asleep down the hall while the house is otherwise empty, then on the sofa from three. The one room she has to be quiet for |
+| **the other four** | her mum at the hob at six, dinner happens, she's asleep by ten, and **the master bedroom door is the other door** |
+
+**The house is empty eleven hours a week and that number is load-bearing.** One to three on her
+mum's ward days and Sunday, two to three on the mornings after. Everything Nell does with her own
+door shut is measured against it: shutting it on an empty house costs nothing, and shutting it on
+anybody costs a mark on Gil's count. A draft of this page's schedule closed every one of those
+windows by accident and nothing in the build said a word.
 
 **Weekends** have no classes, so every shift is open — and the house is fuller instead, all day.
 
@@ -247,15 +267,23 @@ fixed or a dice roll · anything about the two doors past which hours they are o
 
 ## What it hands to the steps after it
 
-- dinner is an hour with four people in it and no lines written for any of them
+- ~~dinner is an hour with four people in it and no lines written for any of them~~ — **done.**
+  Seven nights, banded on who is actually at the table, and her mum has lines
 - waiting for the bathroom has to be felt as a cost, or *clean* stays a number that fills itself
 - the sofa hour with Nate is the only place in the house they sit down together, and nothing uses it
-- her mum asleep down the hall on a weekday morning is the quietest room in the game and nothing
-  happens in it yet. **She is now actually in there** — Tuesday, Thursday and Saturday, eight to
-  two — so this stopped being a thing to build and became a thing to write
+- her mum asleep down the hall is the quietest room in the game and nothing happens in it yet.
+  **She is in there twice as often now** — Tuesday, Thursday and Saturday eight to two, and
+  Monday, Wednesday and Friday three till half six, which is @nate's door hours. Still a thing to
+  write, not a thing to build
+- **her mum is a person with a week and she is still never touched.** What she does not have is
+  anything that reads her `relation` past the two bands written for it. That meter was dead before
+  this pass; it is alive and shallow now
 - the house is occupied at night and **three of its doors now open on their own**. What is still
-  entirely clicked is every ordinary hour: nothing has ever simply happened to her in the kitchen, on
-  the landing or on the way through the front room
+  entirely clicked is every ordinary hour: **nothing has ever simply happened to her in the kitchen,
+  on the landing or on the way through the front room.** The kitchen now has a surface with no clock
+  and no person on its trigger — the kettle — and that is the place an ordinary-hour roll would land
+- **`the_hall` still holds nobody**, and it is the room every other room opens off. Its own
+  description says you can hear which door has somebody behind it, and nothing reads that
 - **the bathroom is done** — a threshold, four sets of hours, a lock she can break and four scenes
   behind it
 - **@nate's afternoon door is shut and she can knock on it, and that is all it does yet.** The
