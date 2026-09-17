@@ -30,6 +30,151 @@ Promotion is decided after 0.1 ships — see §6.
 
 ---
 
+## 0a · THE GATE — nothing gets built that was not decided first
+
+Added 2026-09-18, after LO read six house passes and said the defect was the process, not the code.
+
+**His words:** *"in the loop there should be something like stop this has not been discussed at all.
+If something has been discussed like lets say map or npc roles, and something needs changes then it
+can be updated directly followed by sheet updates. But if something is new, then it should say that
+this has not yet been discussed, or the updates is big then sheet brainstorming mode should be
+active not direct updating the game."*
+
+### Why it exists — what happened without it
+
+Between the content-complete build (`273f5ec`, 2026-09-15) and 2026-09-18 the game took **24
+commits — 11 feat, 12 fix — and not one design round.** Measured on `7_final_game.toml`:
+
+```
+                                   founding    2026-09-18
+canvases                                 43            85
+one-time canvases (arc rungs)             5             5
+NPCs                                     10            10
+[[quests]]                                0             0
+```
+
+Forty-two canvases were added and every one of them is repeatable. The last one-time canvas in the
+game landed in `86cc9f1`, before the house passes started. Six passes built a stage and nobody
+walked onto it.
+
+The sheets did not stop it, because they were not consulted. They were **written afterwards**: 328
+lines added to six pages across eight commits after the founding build, every one in the same commit
+as the code it describes. A page edited after the fact cannot say no. It is a receipt.
+
+And the one page LO signed was ignored. `sheets/RELEASE.md` is the only page whose heading reads
+`[READY]` — the other nineteen still read `[REVIEW]` — and line 73 says *"the first thing to write
+is the cafe: the move up is the only climb the ending depends on."* The scoreboard today reads
+`the_cafe: declared 34,000 words, delivered 906 (-97%)`, the worst shortfall of any location, and
+`the_cafe is not reachable`. Six passes went to the house instead.
+
+**The defect is not laziness and it is not the code. It is that each pass started from the last
+pass.** That is a local search, and a local search can only add rooms.
+
+### The rule
+
+Before anything under `toml_phases/` is touched, every item in the proposed work is sorted into one
+of three buckets, in writing, in chat:
+
+**1 · DECIDED, and the change is small.** Build it, then hand LO the sheet paragraph that records
+it. Qualifies only when the person, the place and the thing are all already named on a sheet.
+
+**2 · NOT DISCUSSED.** Stop and say so, in those words. No code. It goes to brainstorming.
+
+**3 · DISCUSSED, but the change is big.** Same as 2 — stop, name the page it touches and how, go to
+brainstorming.
+
+### The default is bucket 2
+
+A thing is *not discussed* until proven otherwise, and the proof is a **quotation**: the page, and
+the words on it that decide this. No quotation, no build.
+
+This is the load-bearing half of the rule. The agent sorts the buckets, and the agent sorted
+twenty-four commits as obviously-in-scope by feel. Every one of those passes felt like bucket 1 from
+the inside. A rule applied by feel produces the same file again.
+
+⚠️ **A back-written line is not a citation.** The 328 lines added under `sheets/` after `273f5ec`
+were written by the agent, not by LO. Citing one closes the loop this rule exists to break — write
+it into the sheet, then cite it next pass as proof it was discussed. **Citable = what LO wrote, plus
+what he has approved since.** Until he rules on those 328 lines they are not citable. See §7.
+
+### "Big" is measured by kind, not by size
+
+Six passes added 42 canvases and about 12,000 words and changed nothing about what the game is.
+Volume is the wrong instrument.
+
+**Always bucket 2 or 3 — this is world shape:**
+
+- a new NPC, or an existing one gaining a role they did not have
+- a new location
+- a new meter, or a change to what an existing meter opens
+- a new rung on anybody's ladder, or a new one-time canvas
+- a change to the order of the climb, or to what the ending needs
+
+**Bucket 1 — existing person, existing room, a thing the sheet already names:**
+
+- more prose on a surface that exists
+- a bug fix, a rebalance, a schedule repair
+- another repeatable surface on a rung that is already decided
+
+The test: **rewriting two thousand words of the bathroom is small. Adding one rung to Nate is big.**
+
+### Where the gate sits
+
+**Before plan mode, not inside it.** Every one of the twenty-four commits had a plan, and the plan
+did not stop it, because the plan is written by the same agent that wants to build. The gate has to
+run before the plan exists.
+
+One line per item, in chat:
+
+```
+1. Nate's second rung        BUCKET 2 — not discussed. the_cast.md calls him "the biggest one in
+                             the house" and never says what the rungs are.
+2. hub_lynn_bed              BUCKET 1 — the_cast.md: "Gives the hours." Existing person, existing
+                             room, no rung, no body.
+3. the motel at exposure 40  BUCKET 2 — new location.
+```
+
+LO answers go, or he answers brainstorm. Nothing else happens until he does.
+
+### Brainstorming mode
+
+A conversation, not a document, and it produces **his decision on his page**.
+
+- The agent brings measurements and options. Key points, simple words.
+- The agent never writes a file under `sheets/` — see §0b.
+- When the shape is agreed the agent hands LO the paragraph in chat, written as it should read on
+  the page. He pastes it, edits it, or rewrites it. The file is his.
+- A page is buildable when he says it is.
+
+### The backstop
+
+A judgment rule needs an instrument behind it or it decays. `process/shape.py` — same class as
+`walks.py` and `presence.py` — diffs the built TOML against the previous commit and prints every
+**shape** change: new NPC ids, new location ids, new meters, new one-time canvases, new gated tiers.
+It runs before the commit, and it would have flagged all six house passes.
+
+It is a backstop, not the gate. The gate is the citation, and the gate runs first.
+
+---
+
+## 0b · The sheets are LO's, and the agent does not write them
+
+LO, 2026-09-18: *"wtf, I dont want you to write on sheets stupid."*
+
+**No file under `games/the_balance/sheets/` is edited by the agent, ever** — not a new page, not a
+line, not a status tag, not a typo. Read them freely. When a pass needs a design change, say it in
+chat and let LO decide what goes on the page; when he wants the wording done for him, hand him the
+paragraph in chat and let him place it.
+
+This is what §2 step 2, *"write The Balance's version of it"*, now means: write it **in chat**,
+for him.
+
+`v2_state.json` and everything under `process/` are the agent's files and stay writable.
+⚠️ **`DECISIONS.md` is unresolved** — it mirrors to Notion alongside the sheets (§2, *Where the
+pages live*) and LO has not said which side of the line it sits on. Ask before writing it.
+
+---
+
 ## 1 · Where the game is
 
 ```
@@ -132,6 +277,10 @@ all of it at once.** This game does not do that. It runs the loop LO set on 2026
 3  LO ticks the two boxes
 4  next step
 ```
+
+⚠️ **Amended 2026-09-18 — step 2 is written IN CHAT, and LO puts it on the page.** The agent does
+not edit a file under `sheets/`; see §0b. And step 1 is no longer optional for build work either:
+**§0a runs before any of this**, on every item, every time.
 
 **Our step says WHAT. The skill says HOW.** A step page names the room, the hour, the person and
 the choice — the decisions only this game can make — and then points at the skill for how it gets
@@ -240,7 +389,8 @@ them, a person page is a place x hours grid so it needs its places, a scene is o
 
 `sheets/`, as ordinary sheets — `sheets/OPENING.md`, `sheets/systems/*.md`, and so on. They reach
 Notion; a new folder would not, because the mirror only collects `sheets/**` and `DECISIONS.md`.
-`process/` is for the agent. `sheets/` is for LO.
+`process/` is for the agent. `sheets/` is for LO. **And "for LO" means he writes them** — the agent
+has been read-only on `sheets/` since 2026-09-18 (§0b).
 
 ## 2b · Every step page opens with the rules it can break
 
@@ -1144,12 +1294,19 @@ too, but it scans eight hardcoded keys, top-level only, and drops any value that
 
 After 0.1 ships, one of two things:
 
-- **It worked** → propose promoting §2, §3 and §5 into `author-game-v2`. Not before; the skill's own
+- **It worked** → propose promoting §0a, §2, §3 and §5 into `author-game-v2`. Not before; the skill's own
   rule is that a shape shipped in the format is copied harder than one shipped in a reference, and
   promoting an unproven process to every future game is the failure mode this file exists inside.
 - **It did not** → this file dies with the game and the skill is unchanged.
 
-⚠️ **One outstanding item.** `references/the-sheets.md` gained a rule **S11 · A sheet is read by a
+⚠️ **Outstanding item 1 — the skill's S11.** `references/the-sheets.md` gained a rule **S11 · A sheet is read by a
 person, not by a gate** on 2026-09-11, before LO said not to touch the skill, with a changelog entry
 the same turn. §5 above is that rule's content, held per-game. **S11 is still live in the skill and
 LO has not said whether to revert it.** Do not act on this without asking him.
+
+⚠️ **Outstanding item 2 — the 328 back-written sheet lines.** Between `273f5ec` and 2026-09-18 the
+agent added 328 lines to six pages under `sheets/`, in eight commits, every one of them in the same
+commit as the code it describes. LO has two options on the table and has not picked one: **revert
+them** to what he wrote on 2026-09-15, or **leave them and mark the added sections**. Until he picks,
+§0a's citation rule holds and **none of those lines can be quoted as proof that something was
+discussed.** Do not act on this without asking him.
