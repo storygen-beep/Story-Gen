@@ -2019,63 +2019,10 @@ setup.getCorruptionThreshold = function(item) {
     return 0;
 };
 
-// Human-readable summary of the conditions on an item that are NOT currently met.
-// Generic over any trait, using the same operator vocabulary as
-// triggerConditionsSatisfied so the message can never disagree with the gate.
-// Returns "" if nothing fails (or only un-describable items fail).
-setup.describeUnmetConditions = function(conditions) {
-    if (!conditions || !conditions.items) return "";
-    var sv = State.variables || {};
-    var traits = (sv.player && sv.player.core_traits) || {};
-    var flags = sv.flags || {};
-    var parts = [];
-    function cap(s) { s = String(s == null ? "" : s); return s.charAt(0).toUpperCase() + s.slice(1); }
-    function num(v) { var n = Number(v); return isNaN(n) ? null : n; }
-    for (var i = 0; i < conditions.items.length; i++) {
-        var it = conditions.items[i];
-        if (!it || typeof it !== 'object') continue;
-        if (it.type === 'trait') {
-            var key = it.trait_key;
-            var op = it.operator;
-            var want = it.value;
-            var cur = (it.subject === 'npc') ? null : num(traits[key]);
-            if (cur !== null) {
-                var sat = false;
-                if (op === 'gte') sat = cur >= want;
-                else if (op === 'gt') sat = cur > want;
-                else if (op === 'lte') sat = cur <= want;
-                else if (op === 'lt') sat = cur < want;
-                else if (op === 'eq') sat = cur === want;
-                else if (op === 'ne') sat = cur !== want;
-                if (sat) continue;
-            }
-            var label = cap(key);
-            var phrase;
-            if (op === 'gte') phrase = label + ' ' + want + '+';
-            else if (op === 'gt') phrase = label + ' above ' + want;
-            else if (op === 'lte') phrase = label + ' ' + want + ' or lower';
-            else if (op === 'lt') phrase = label + ' under ' + want;
-            else if (op === 'eq') phrase = label + ' exactly ' + want;
-            else if (op === 'ne') phrase = label + ' not ' + want;
-            else phrase = label + ' ' + op + ' ' + want;
-            if (cur !== null) phrase += ' (you have ' + cur + ')';
-            parts.push(phrase);
-        } else if (it.type === 'flag') {
-            var fkey = String(it.flag_key || '');
-            var fop = it.operator;
-            var v = flags[fkey];
-            var fsat = false;
-            if (fop === 'is_true') fsat = (v === true);
-            else if (fop === 'is_false') fsat = (v === false || v === undefined);
-            else if (fop === 'exists') fsat = Object.prototype.hasOwnProperty.call(flags, fkey);
-            if (fsat) continue;
-            var disp = cap(fkey.replace(/_/g, ' '));
-            parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
-        }
-    }
-    return parts.join(', ');
-};
-
+// NOTE: setup.describeUnmetConditions / describeUnmetTraits / requirementSuffix used to live
+// here. They moved to the always-emitted core block beside triggerConditionsSatisfied when the
+// locked-CHOICE renderer started using them: this block only exists when a game has a shop, and
+// a locked choice does not need one. buyItem below still calls describeUnmetConditions.
 setup.buyItem = function(itemId) {
     var sv = State.variables;
     if (!sv.player || !sv.player.wardrobe) return false;
@@ -4159,6 +4106,116 @@ setup.formatTime = function(hour, minute) {{
     var displayHour = hour % 12 || 12;
     var displayMinute = minute < 10 ? '0' + minute : minute;
     return displayHour + ':' + displayMinute + ' ' + period;
+}};
+
+// ===== Why a gate is shut, in words =====
+// Lives here and not in the shop block (where it was written) because the locked-CHOICE
+// renderer needs it and a game with locked choices need not have a shop. Phrasing mirrors
+// triggerConditionsSatisfied's operator vocabulary directly above, so the message can never
+// disagree with the gate that produced it.
+// Human-readable summary of the conditions on an item that are NOT currently met.
+// Generic over any trait, using the same operator vocabulary as
+// triggerConditionsSatisfied so the message can never disagree with the gate.
+// Returns "" if nothing fails (or only un-describable items fail).
+setup.describeUnmetConditions = function(conditions) {{
+    if (!conditions || !conditions.items) return "";
+    var sv = State.variables || {{}};
+    var traits = (sv.player && sv.player.core_traits) || {{}};
+    var flags = sv.flags || {{}};
+    var parts = [];
+    function cap(s) {{ s = String(s == null ? "" : s); return s.charAt(0).toUpperCase() + s.slice(1); }}
+    function num(v) {{ var n = Number(v); return isNaN(n) ? null : n; }}
+    for (var i = 0; i < conditions.items.length; i++) {{
+        var it = conditions.items[i];
+        if (!it || typeof it !== 'object') continue;
+        if (it.type === 'trait') {{
+            var key = it.trait_key;
+            var op = it.operator;
+            var want = it.value;
+            var cur = (it.subject === 'npc') ? null : num(traits[key]);
+            if (cur !== null) {{
+                var sat = false;
+                if (op === 'gte') sat = cur >= want;
+                else if (op === 'gt') sat = cur > want;
+                else if (op === 'lte') sat = cur <= want;
+                else if (op === 'lt') sat = cur < want;
+                else if (op === 'eq') sat = cur === want;
+                else if (op === 'ne') sat = cur !== want;
+                if (sat) continue;
+            }}
+            // Underscores out, same as the flag branch below has always done —
+            // "Crowd standing 30+", not "Crowd_standing 30+". These strings are read by
+            // the player now that locked CHOICES carry them, not only the shop.
+            var label = cap(String(key).replace(/_/g, ' '));
+            var phrase;
+            if (op === 'gte') phrase = label + ' ' + want + '+';
+            else if (op === 'gt') phrase = label + ' above ' + want;
+            else if (op === 'lte') phrase = label + ' ' + want + ' or lower';
+            else if (op === 'lt') phrase = label + ' under ' + want;
+            else if (op === 'eq') phrase = label + ' exactly ' + want;
+            else if (op === 'ne') phrase = label + ' not ' + want;
+            else phrase = label + ' ' + op + ' ' + want;
+            if (cur !== null) phrase += ' (you have ' + cur + ')';
+            parts.push(phrase);
+        }} else if (it.type === 'flag') {{
+            var fkey = String(it.flag_key || '');
+            var fop = it.operator;
+            var v = flags[fkey];
+            var fsat = false;
+            if (fop === 'is_true') fsat = (v === true);
+            else if (fop === 'is_false') fsat = (v === false || v === undefined);
+            else if (fop === 'exists') fsat = Object.prototype.hasOwnProperty.call(flags, fkey);
+            if (fsat) continue;
+            var disp = cap(fkey.replace(/_/g, ' '));
+            parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }}
+    }}
+    return parts.join(', ');
+}};
+
+// A locked choice's requirement, as a bracket to hang beside the author's line.
+// WHY IT IS MAGNITUDE COMPARISONS ONLY (gte/gt/lte/lt). `eq`/`ne` on a trait is
+// virtually always an internal enum rather than a number the player chases, and live
+// play proved it: vesper's emitter rung is gated on the loadout key (1 = drain,
+// 2 = emitter) and printed that key, underscore and all, beside its authored line.
+// A threshold is worth naming; a state check is plumbing, and the authored line
+// already explains it better.
+// WHY THE THRESHOLD MUST BE 2 OR MORE. A `gte 1` / `lt 1` gate is a boolean wearing a
+// trait's clothes - a thing held, a shot spent, a one-off armed - and naming it puts an
+// internal key on screen for something the player cannot train towards. Measured on
+// vesper's 36 locked trait gates and the split is exact: every gate under 2 is
+// possession or run-state (a bottle in her coat, the quiet pass spent, the weapon
+// broken, noise made), and every gate at 2 or more is a meter she works on (fighting,
+// stealth, hygiene). 18 named, 18 silenced, no judgement call in the middle.
+// WHY IT IS TRAITS-ONLY. describeUnmetConditions above also phrases FLAG gates
+// ("Requires: Raid done"), and a locked choice is very often gated on a hidden plot
+// flag - printing those would spoil the story on a greyed tile. Trait gates are the
+// numbers the player is meant to chase, so they are the ones worth naming. NPC-subject
+// traits are dropped too: the helper renders them as a bare "Corruption 40+" with no
+// idea whose, and the player cannot see an NPC's stats anyway. Anything the helper has
+// no phrasing for (time_of_day, clothing, quest) contributes nothing, so a clock-gated
+// choice appends silence rather than half a sentence.
+setup.REQUIREMENT_OPS = ['gte', 'gt', 'lte', 'lt'];
+setup.describeUnmetTraits = function(conditions) {{
+    if (!conditions || !conditions.items) return "";
+    var items = [];
+    for (var i = 0; i < conditions.items.length; i++) {{
+        var it = conditions.items[i];
+        if (!it || it.type !== 'trait' || it.subject === 'npc') continue;
+        if (setup.REQUIREMENT_OPS.indexOf(it.operator) === -1) continue;
+        if (!(Number(it.value) >= 2)) continue;
+        items.push(it);
+    }}
+    if (!items.length) return "";
+    return setup.describeUnmetConditions({{ version: "1.0", items: items }});
+}};
+
+// The rendered suffix. Empty string when there is nothing a number can explain, so the
+// bracket never opens on its own. Mirrors the COST rung, which has always read
+// "Work a shift (Requires 15 Energy (you have 6))" - one house shape for both tiers.
+setup.requirementSuffix = function(conditions) {{
+    var why = setup.describeUnmetTraits(conditions);
+    return why ? (' (' + why + ')') : '';
 }};
 
 // ===== Trigger Conditions Evaluator =====
@@ -13922,6 +13979,29 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     # no threshold is set, fall back to the
                                     # static span (no behavior change for
                                     # pre-existing locked choices).
+                                    # The live requirement, appended beside the authored
+                                    # line rather than replacing it (the cost rung's
+                                    # shape). Traits only — a flag gate would name a
+                                    # hidden plot flag on a greyed tile, so the helper
+                                    # returns "" and the bracket never opens. It is
+                                    # emitted only when the choice HAS a trait gate, so
+                                    # a flag-only or clock-only lock is byte-identical
+                                    # to what it was before.
+                                    _wants_number = any(
+                                        isinstance(it, dict) and it.get('type') == 'trait'
+                                        and it.get('subject') != 'npc'
+                                        and it.get('operator') in ('gte', 'gt', 'lte', 'lt')
+                                        and isinstance(it.get('value'), (int, float))
+                                        and it.get('value') >= 2
+                                        for it in (choice_conditions or {}).get('items', []) or []
+                                    )
+                                    _req = (
+                                        f'<<= setup.requirementSuffix({conditions_js})>>'
+                                        if _wants_number else ''
+                                    )
+                                    # NOT in title=: a macro inside an attribute is
+                                    # evaluated into the markup and the tooltip would
+                                    # carry raw output.
                                     if locked_text_threshold:
                                         escaped_threshold = locked_text_threshold.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
                                         passage_body += f'<span class="locked-choice" title="{escaped_locked}">'
@@ -13929,10 +14009,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                         passage_body += f'<<run setup.queueGatedNotification("{escaped_threshold}")>>'
                                         passage_body += f'<<run setup.showEffectNotification()>>'
                                         passage_body += '<</button>>'
-                                        passage_body += '</span><br>\n'
+                                        passage_body += f'{_req}</span><br>\n'
                                     else:
                                         passage_body += f'<span class="locked-choice" title="{escaped_locked}">'
-                                        passage_body += f'{escaped_locked}'
+                                        passage_body += f'{escaped_locked}{_req}'
                                         passage_body += '</span><br>\n'
                             passage_body += "<</if>>\n"
 

@@ -9,6 +9,18 @@ how it was verified if relevant (grep / build / live-play).
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
 ## 2026-09-18
+- **`references/engine-reference.md` — `locked_text` is for voice; the engine now writes the number.**
+  LO, on a greyed rung in vesper's bunker: *"then it can say (require fighting greater then 35) for all
+  choices here."* The engine already built that sentence — `setup.describeUnmetConditions` renders
+  `"Fighting 35+ (you have 12)"` and the COST rung has always shown it — but the CONDITION rung printed the
+  author's static line and stopped, so every threshold in every game was a guess. Fixed in the generator
+  (`v2.py`: new `describeUnmetTraits` + `requirementSuffix`, appended beside the authored line, never
+  replacing it) rather than by hand-editing locked_text across four games. The skill entry warns against
+  writing the number yourself now — it would print twice — and records the four deliberate silences (flags,
+  npc traits, `eq`/`ne` enums, `gte 1` booleans) plus the predicates the display helper cannot phrase.
+  Verified: `tests/test_locked_choice_requirement.py` (13 cases, red first), the four games rebuilt green,
+  and a live sweep of every bracket vesper renders — the last two exclusions were found by that sweep, not
+  by review.
 - **`references/lanes.md` — new rule: "A SKILL GATE PUTS ITS COST ON THE WRONG PATH — check the RIGHT one".**
   `vesper` 0.2.2 shipped a five-turn memorised route into a guarded bunker where every mechanic the release
   built — the one free stealth back-out, the `fighting` thresholds, the arousal emitter and its

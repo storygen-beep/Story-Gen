@@ -265,9 +265,30 @@ used to point here as "the full table"; this is it.)
 | `wardrobeEffects` | `:1970` | list | `[{op:"equip"\|"unequip", slot, item_id?}]` **(camelCase)** |
 | `conditions` | `:1971` | table | per-choice gate `{version, items}` — §4. **Needs `version="1.0"` or fails OPEN.** |
 | `show_when_locked` | `:1972` | bool `false` | render greyed when conditions fail |
-| `locked_text` | `:1973` | str | the greyed reason |
+| `locked_text` | `:1973` | str | the greyed reason — **the engine appends the number itself**, see below |
 | `locked_text_threshold` | `:1974` | str | **makes the locked rung a clickable toast-button** — OMIT for a plain greyed span |
 | `rejection_node` | `:1975` | str? | route here on locked-click (Mode B) |
+
+> **⚠️ DO NOT WRITE THE THRESHOLD INTO `locked_text` — the engine adds it (2026-09-18).**
+> A locked choice renders the authored line and then appends the live requirement in a bracket,
+> the way a cost-blocked rung always has:
+>
+> ```
+> Not on this one. Not with what she can do. (Fighting 35+ (you have 12))
+> ```
+>
+> So `locked_text` is for **voice**, never for the number — write "(needs fighting 35)" yourself and the
+> player reads it twice. Emitted by `setup.requirementSuffix` → `setup.describeUnmetTraits`
+> (`v2.py`, beside `triggerConditionsSatisfied`), and it is deliberately narrow: it names a gate only when
+> it is a **player trait**, compared with **gte/gt/lte/lt**, against a threshold of **2 or more**.
+> Everything else stays silent, and the authored line carries it alone:
+> * **flag gates** — would print a hidden plot flag on a greyed tile;
+> * **npc traits** — the player cannot see an NPC's stats;
+> * **`eq`/`ne`** — an internal enum, e.g. a loadout key;
+> * **`gte 1` / `lt 1`** — a boolean wearing a trait's clothes (a thing held, a one-off spent). Measured
+>   across four games: under 2 is always possession or run-state, 2 or more is always a meter.
+> * **`time_of_day`, clothing, quest** — the display helper has no phrasing for them, so the bracket never
+>   opens (a clock gate still needs a hand-written `locked_text`, or it greys out saying nothing).
 | `rejection_effects` | `:1976` | list | effects on rejection-click |
 | `modifier_effects` | `:1977` | list | temporary trait offsets |
 | `passEffects` | `:1909` | list | `[{pass_id}]` — stored as `pass_effects` **(camelCase in TOML)** |
