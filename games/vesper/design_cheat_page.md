@@ -284,6 +284,16 @@ the game is broken. Tracked in §12 so an open decision doesn't ship as a silent
 3. **Stealth row: cap at 9, or sell the full ladder with a warning?** Capping at 9 preserves every yard route
    including the Tier-5 emitter scene. Selling the full ladder needs the requirement text to say what closes.
    Recommend cap 9.
+   > **RESOLVED 2026-09-18 (rev 227) — sell the full ladder, with the warning.** Cap 9 was right while the
+   > yard was the deepest thing in the game. It is not any more: the bunker wants 45 at the far gate, 55 in
+   > the last corridor and 60 on the plant room door, and nine buys none of it, so the row had stopped being
+   > advice and become a dead button. Cap is now **60** and the hint carries what closes, in the row, at the
+   > moment of the press — the requirement this item set. **Fighting went 40 → 70** at the same time, for the
+   > plainer reason that 40 was the last fighting gate *in 0.2.0* and the ladder has moved twice since;
+   > measured, nothing in the build closes as fighting rises. LO found it in play: *"from cheat panel fighting
+   > isnt going up more then 40 and it requires 50."* A cap is a number derived from the game's own gates and
+   > **nothing re-derives it when the ladder grows** — that is the real lesson here, and item 1 below has the
+   > same shape.
 4. **The container's name.** "The Ledger" is a placeholder that fits her. LO's pick.
 5. **Hide the page until the cold open ends?** The #1 studied game hides its cheat glyph until
    `$game.introFinished` — the one thing its menu cannot skip. Cheap for us. Recommend yes.

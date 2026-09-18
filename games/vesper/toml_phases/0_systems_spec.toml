@@ -743,34 +743,51 @@ hint        = "five trips through the gate, or two salvage sessions"
 button_text = "Coin +25"
 
 # FIGHTING — the widest-reaching key in the game: 15 forces the underworld door, 30
-# opens the hard pit bouts (+20 coin instead of +8), 40 clears yard guard 3. Step 5 =
-# the smallest gap between its gates, so it can never jump one. Cap 40 = the last gate.
+# opens the hard pit bouts (+20 coin instead of +8), 55 clears the yard's deepest push,
+# 65 clears Loder at the bunker's worst wrong turn, 70 clears the man on the plant room
+# door. Step 5 = the smallest gap between its gates, so it can never jump one.
+# ⚠️ CAP RAISED 40 -> 70 (rev 227). LO, in play: "from cheat panel fighting isnt going up
+# more then 40 and it requires 50". 40 was correct when this page was written for 0.2.0 —
+# it was the last fighting gate in the game (yard guard 3). Three releases later the
+# ceiling had moved to 70 and the cap had not, so the page stopped at a number no longer
+# connected to anything. The cap is the game's highest `fighting` gate and must be
+# re-derived every time the ladder grows; nothing checks it for us.
+# ⚠️ RAISING FIGHTING DELETES NO CONTENT — measured, the only `fighting lt` gates in the
+# build are the drill's own bands. Stealth is the opposite case; see the next row.
 [[ui.cheat_page.grants]]
 id          = "fighting"
 label       = "Fighting"
 trait       = "fighting"
 op          = "add"
 value       = 5
-cap         = 40
+cap         = 70
 clamp       = true
-hint        = "the door at 15 · hard bouts at 30 · the yard at 40"
+hint        = "the door at 15 · hard bouts at 30 · the yard at 55 · the plant room door at 70"
 at_cap_text = "As sharp as this will make her."
 
-# STEALTH — capped at 9 ON PURPOSE, below guard 1's threshold of 10. The burned yard
-# gates every NON-stealth route on `stealth lt N`, so raising stealth DELETES "take him
-# down", "break and run", and the Tier-5 emitter scene at that guard. Only three guard
-# encounters exist per save, so a stealth-40 player could never see the emitter scene.
-# The yard teaches the rest; this row only opens the door to it.
+# STEALTH — THE ROW THAT CAN COST YOU CONTENT, and it is now sold anyway, with the
+# warning the design required (design_cheat_page.md §11.3: "If LO would rather sell the
+# full ladder, the requirement text must say what closes").
+# ⚠️ CAP RAISED 9 -> 60 (rev 227), and the 9 was not an oversight: the burned yard gates
+# every NON-stealth route on `stealth lt N`, so climbing deletes "take him down", "break
+# and run" and the Tier-5 emitter scene at each guard. Measured on this build: 20 `lt`
+# gates against 19 `gte`, closing at 10, 25, 30, 40, 50 and 55. Four guard encounters
+# exist per save, so a player who buys straight to 60 never sees any of those routes.
+# What changed is that 9 stopped being playable advice. The bunker wants 45 at the far
+# gate, 55 in the last corridor and 60 on the plant room door, and nine buys none of it.
+# ⚠️ THE STEP IS WHAT MAKES THIS HONEST. +5 a press, so the player walks up the ladder
+# themselves and can stop at 9 if the yard matters more to them. The hint says what
+# closes, in the row, at the moment of the press — that is the whole of §11.3.
 [[ui.cheat_page.grants]]
 id          = "stealth"
 label       = "Stealth"
 trait       = "stealth"
 op          = "add"
 value       = 5
-cap         = 9
+cap         = 60
 clamp       = true
-hint        = "enough to start the yard — the yard itself teaches the rest"
-at_cap_text = "Any sharper and she stops needing the quiet routes."
+hint        = "the bunker wants 45, 55, 60 — but every yard fight, escape and Tier-5 scene closes as this climbs (10 · 25 · 30 · 40 · 50 · 55). Stop at 9 to keep them all"
+at_cap_text = "Nothing left that quiet can buy."
 
 # RENNER — the 8-day wall, and it is mandatory: his drain sets names_known, which gates
 # the whole Underworld Hunt. Rungs give +2 each and cost 180 in-game minutes against a

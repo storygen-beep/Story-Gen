@@ -657,6 +657,23 @@ conditions = { version = "1.0", logic = "AND", items = [
 costs   = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
 
+# Combat drill — deep band (+1 while 50–70). ADDED rev 227.
+# ⚠️ WHY THIS BAND HAD TO EXIST. The ladder used to stop at 50 because nothing in the game
+# asked for more. 0.2.2 then shipped guards at 55 and 65, the yard's fourth push at 55, and
+# THE RINGS at 60 and 70 — all of it above the last drill band, which left the underworld
+# market (+5 for 40 coin, uncapped) as the ONLY source. Skill became coin, silently.
+# The cap is the game's highest `fighting` gate, the same number the cheat row uses.
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 70 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
+
 # Stealth drill — early band (+3 while < 30)
 [[canvases.nodes.exit_block.choices]]
 text       = "Stealth drill."
@@ -678,6 +695,23 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
   { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 30 },
   { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
+
+# Stealth drill — deep band (+1 while 50–60). ADDED rev 227, same reason as combat above.
+# ⚠️ AND CLIMBING STILL COSTS HER THE YARD. Every non-stealth route out there is gated on
+# stealth being BELOW a number (10, 25, 30, 40, 50, 55), so this band walks her past the
+# last two. That is the player's choice to make and the cheat row's hint says so out loud;
+# the drill is the slow way to the same place and must not be quieter about it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 60 },
 ] }
 costs   = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
@@ -3321,6 +3355,23 @@ conditions = { version = "1.0", logic = "AND", items = [
 costs   = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
 
+# Combat drill — deep band (+1 while 50–70). ADDED rev 227.
+# ⚠️ WHY THIS BAND HAD TO EXIST. The ladder used to stop at 50 because nothing in the game
+# asked for more. 0.2.2 then shipped guards at 55 and 65, the yard's fourth push at 55, and
+# THE RINGS at 60 and 70 — all of it above the last drill band, which left the underworld
+# market (+5 for 40 coin, uncapped) as the ONLY source. Skill became coin, silently.
+# The cap is the game's highest `fighting` gate, the same number the cheat row uses.
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train_cot.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 70 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
+
 # Stealth drill — early band (+3 while < 30)
 [[canvases.nodes.exit_block.choices]]
 text       = "Stealth drill."
@@ -3342,6 +3393,23 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
   { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 30 },
   { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
+
+# Stealth drill — deep band (+1 while 50–60). ADDED rev 227, same reason as combat above.
+# ⚠️ AND CLIMBING STILL COSTS HER THE YARD. Every non-stealth route out there is gated on
+# stealth being BELOW a number (10, 25, 30, 40, 50, 55), so this band walks her past the
+# last two. That is the player's choice to make and the cheat row's hint says so out loud;
+# the drill is the slow way to the same place and must not be quieter about it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train_cot.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 60 },
 ] }
 costs   = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
