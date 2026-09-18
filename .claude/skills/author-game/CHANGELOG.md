@@ -8,6 +8,28 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-19
+- **`references/media.md` — "Name a new pool after the SCENE, not only the character — and grep before you
+  declare it."** THE COUNT's first cut named three cot-loop pools `sex/bastien_loop_oral_t5`,
+  `sex/bastien_finish_facial_t5` and `sex/bastien_finish_inside_t5` — the exact folders of The Face's back-room
+  loop (`loop_bastien_backroom`, 1c), clips already on disk, so the cot would have played the back room. The
+  skill already states the invariant ("no `pool_dir` is declared twice", beat-authoring.md) and the author's
+  guard checked it only inside the chunk, so part of this is a slip; the part the skill did not name is the
+  trap that produces it — a character's second loop reaches for his first loop's names. Fixed in the game (all
+  seven renamed `sex/bastien_cot_*`) and in the guard (`check_the_count.py` §6 now checks every pool of the chunk
+  against the whole game, and was negative-tested by putting one name back — caught).
+- **`references/engine-reference.md` — `time_of_day` added to the condition-type table, and a new rule: "PROSE
+  THAT FIXES THE HOUR NEEDS THE CLOCK GATE".** Building vesper's THE COUNT, the first night with Bastien — a
+  16-beat scene that opens on the berth gone quiet and the torch off at Kess's bench and ends with him asleep
+  in the dark — shipped to a choice gated only on the calendar day, so it played at noon. An independent review
+  caught it; the fix was a `time_of_day` 22:00–06:00 item plus a quest-card tip naming the window. Root cause
+  is a skill gap as well as a slip: the table that claims to be "the complete live condition type set" listed
+  16 types and omitted `time_of_day`, so an author working from the skill never learns the clock is gateable,
+  and nothing asked whether a scene's words fix the hour. Row added with the evaluator's exact semantics (no
+  operator, end exclusive, earlier end wraps midnight, no end = one hour, cannot be negated), read from
+  `v2.py:4463` and `setup.isCurrentTimeSlot` `:4081`, not from memory; the count corrected to 17. Verified
+  live: `games/vesper/tests/live_the_count.py` [4] — the choice is absent at 21:00 and present at 22:00.
+
 ## 2026-09-18
 - **`references/engine-reference.md` — `locked_text` is for voice; the engine now writes the number.**
   LO, on a greyed rung in vesper's bunker: *"then it can say (require fighting greater then 35) for all
