@@ -448,6 +448,15 @@ hidden = true
 [[traits.labels]]
 key    = "drains_done"
 hidden = true
+# THE WAY DOWN (beat_0173) — bunker route state, internal. Neither is a meter and neither is ever surfaced:
+# bunker_stealth_used is a per-run 0/1 spent by the free back-out, bunker_runs is a prose-only odometer.
+# Unhidden they would show as bare ints in <<playerTraits>> and on the Stats page (v2.py:1198-1201).
+[[traits.labels]]
+key    = "bunker_stealth_used"
+hidden = true
+[[traits.labels]]
+key    = "bunker_runs"
+hidden = true
 # Underworld Hunt gate marker — internal. Set=1 at the drain (both branches); gates the hunt. Never player-facing.
 [[traits.labels]]
 key    = "names_known"

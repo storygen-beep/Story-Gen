@@ -456,6 +456,15 @@ hidden = true
 [[traits.labels]]
 key    = "drains_done"
 hidden = true
+# THE WAY DOWN (beat_0173) — bunker route state, internal. Neither is a meter and neither is ever surfaced:
+# bunker_stealth_used is a per-run 0/1 spent by the free back-out, bunker_runs is a prose-only odometer.
+# Unhidden they would show as bare ints in <<playerTraits>> and on the Stats page (v2.py:1198-1201).
+[[traits.labels]]
+key    = "bunker_stealth_used"
+hidden = true
+[[traits.labels]]
+key    = "bunker_runs"
+hidden = true
 # Underworld Hunt gate marker — internal. Set=1 at the drain (both branches); gates the hunt. Never player-facing.
 [[traits.labels]]
 key    = "names_known"
@@ -957,6 +966,19 @@ vault_cleared = 0
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
 # (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
 emitter_broken    = 0
+# THE WAY DOWN (beat_0173) — the bunker route's only per-run state.
+# ⚠️ bunker_stealth_used — the ONE free stealth back-out per run. 0 = unspent, 1 = spent. There is no engine
+# primitive for per-RUN state: [engine.daily_tick] is day-scoped and the route deliberately advances no day,
+# so it is zeroed on the way IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its
+# five traits on its entry rung. Read by all five caught rooms, written by the back-out and by the descent.
+# ⚠️ bunker_runs — how many times she has been put back to the stair head. Prose only: it bands the descent
+# so the fourth walk down does not read like the first. Gates nothing, and must gate nothing.
+# ⚠️ NO POSITION ODOMETER, DELIBERATELY. The node graph holds her place in the route; a counter beside it
+# would be a second source of truth for the same fact, and the ruin-depth build already shipped that bug
+# once (3_activities:2747 — "band 1 was dead and the first sift jumped straight to the terminal band").
+# Defaults 0 = save-safe: a 0.2.1 save missing both keys reads them as a fresh, unspent run.
+bunker_stealth_used = 0
+bunker_runs         = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
 # bed but THREE DAYS of his time on the key. Set to a literal 3 by activity_kess_cot's paid tier; decremented
@@ -1620,6 +1642,34 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "11:00"
 end_time   = "22:00"
 activity   = "at the bench with the archive open"
+
+# ── beat_0171 (rev 222), THE WAY DOWN — npc_loder. THE MAN WHO RUNS THE ROOM. ────────────────────────
+# ⚠️ ZERO SCHEDULE ROWS, THE npc_enns SHAPE — and here it is not a preference, it is the only legal option.
+# A [[npcs.schedules]] row carries no conditions and outlives its owner (npc_bastien's does, 1_metadata:447),
+# and the nav-card badge is NOT canvas-gated (getNpcsPresentAtLocation, v2.py:4773). Loder exists inside a
+# bunker that is built out of canvas NODES and has no location of its own, so there is nowhere on earth a row
+# could point that would not be a lie. He is a dialogue speaker and nothing else, exactly like npc_enns,
+# npc_voss, npc_reyes and npc_marr — four NPCs in this game already ship this way.
+# ⚠️ INSERTED HERE, AT THE END OF THE ARRAY, DELIBERATELY. npc_sabin's two schedule rows sit directly above
+# this block and the catalog comment below warns about exactly this: anything spliced between an NPC and its
+# schedule re-parents that schedule silently. Appending after the last row, with no rows of my own, is the
+# one insert position that cannot do that.
+# ⚠️ HE IS THE ONLY NAMED MAN IN THE BUNKER. LO's call: one named boss, four anonymous. The other four are
+# narrative guards with no NPC entry, which is this game's house pattern stated twice in its own source
+# (3_activities:771 "GUARDS (narrative, NOT declared NPCs)" and :1274 "Narrative guard, not an NPC").
+# ⚠️ NO core_traits BEYOND relation, AND NO LADDER. He is not a conquest and has no arc. A trait key is
+# immutable once shipped, so naming corruption/arousal axes for a man who will never climb one is how you
+# ship a key you can never remove.
+# MEDIA: one new slot, portraits/loder.jpg — MISSING until the beat_0189 harvest, exactly as cain.jpg,
+# grier.jpg and sabin.jpg each were.
+[[npcs]]
+id          = "npc_loder"
+name        = "Loder"
+description = "The man who runs the room under the Facility. Not company and not hired muscle — a shift supervisor with a clipboard habit, four months into a job he describes to himself as difficult. He has never once been told what the man in the plant room knows, and has never asked, and that is the arrangement he has made with himself."
+portrait    = "loder.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The supervisor"]
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
@@ -3658,8 +3708,15 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
     { type = "paragraph", content = "She's inside the outer line now. Deeper in there are more lights and more men. Renner guards a dead yard this hard for a reason. Whatever's worth guarding is further back." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
-    { type = "paragraph", content = "She's been all the way to the back of it. She has put her hands on everything in the yard." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "She's been all the way to the back of it. She has put her hands on everything in the yard that is standing above the ground." },
+  ] },
+  # beat_0177 (rev 222), THE WAY DOWN — the fourth band. ⚠️ THE BAND ABOVE GAINED AN `lt 4` IN THE SAME EDIT.
+  # Adjacent [group] blocks merge into ONE if/elseif chain, so an open-ended `gte 3` sitting above a `gte 4`
+  # would claim every deeper state and this band would be dead on arrival. The ruin-depth build shipped that
+  # exact bug once already (3_activities:2747).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "And under the strongroom floor as well, which is the part of his yard she had walked over about nine times without once asking what the grating was for." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -3681,6 +3738,14 @@ text       = "Push to the back of it."
 targetType = "node"
 nodeId     = "yard_crawl.guard3"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+# beat_0177 (rev 222), THE WAY DOWN — the fourth push. The yard had three finds and all three were spent,
+# which made every 15-Charge push a pure sink. This is the fourth, and it carries the part Kess needs.
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down under the strongroom floor."
+targetType = "node"
+nodeId     = "yard_crawl.guard4"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] }
 costs      = [{ trait = "energy", value = 15 }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Slip back out."
@@ -3796,6 +3861,43 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 
 # deeper — shared WIN node (yard_depth already +1 on the choice). Prose by NEW depth. Find auto-fires on return.
+# ── guard4 (beat_0177) — depth 3->4, S=F=55. The pit man. Cloned from guard3, thresholds raised. ──
+[[canvases.nodes]]
+id   = "guard4"
+name = "The man on the grating"
+blocks = [
+  { type = "paragraph", content = "There is one man down here and he is sitting on the edge of the opening with his boots hanging into it, because this is where you come when you do not want to be found by the other three. He has not heard her yet." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go past him down the ladder, quiet."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 55 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him off the edge."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 }, { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 55 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the weapon on him."
+targetType = "node"
+nodeId     = "yard_crawl.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Too close — break and run."
+targetType = "node"
+nodeId     = "yard_crawl.flee"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 } ] }
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+
+# deeper — shared WIN node (yard_depth already +1 on the choice). Prose by NEW depth. Find auto-fires on return.
 [[canvases.nodes]]
 id   = "deeper"
 name = "Deeper in"
@@ -3806,8 +3908,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
     { type = "paragraph", content = "Deeper now, in among the racks where the lights are. Past the men who'd have stopped her. She keeps to the shadow and goes on." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] } }, blocks = [
     { type = "paragraph", content = "The back of the yard, the strongroom, the thing they were all standing around. She's in." },
+  ] },
+  # beat_0177 — the fourth band. ⚠️ `lt 4` added to the band above in the same edit; see the base node.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "Down through the grating into a brick pit the size of a lift shaft, dry, and stacked to the shoulder with the overrun off a job somebody paid for twice." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -3853,6 +3959,48 @@ time_progression_minutes = 60
 
 # ── Finds — auto-fire on return to the yard, one per depth tier (priority 9, one-shot) ──────────
 # yard_find_1 (depth>=1): the clue.
+# ── beat_0177 (rev 222), THE WAY DOWN — yard_find_4. THE PART. Auto-fire @renner_burned_yard, pri 9. ──
+# ⚠️ THE FOURTH FIND, AND IT IS WHY THE FOURTH PUSH EXISTS. yard_find_1/2/3 are all spent (yard_clue_seen,
+# has_arousal_weapon, found_dead_men), so before this beat every 15-Charge push into that yard bought
+# nothing at all. The double gate + pri 9 over the crawl's pri 3 is the shipped find pattern, unchanged.
+# ⚠️ THE STENCIL LANDS HERE FIRST, ON PURPOSE. She reads R. RENNER & SON on a crate in his own yard now,
+# and reads the same badly-cut ampersand on the flattened crates in the wet lab under the Facility later
+# (bunker_sides.s2). Yard first, bunker second, because that is the order she walks it.
+# SETS yard_part_found — required by beat_0178's Kess trigger, and this canvas is LOCATED, which is what
+# keeps the flag-chain validator satisfied.
+# MEDIA: none — the yard's own location image is already carried by the crawl.
+[[canvases]]
+id          = "yard_find_4"
+name        = "The overrun"
+description = "beat_0177 (rev 222), THE WAY DOWN. Auto-fire @renner_burned_yard, pri 9, once, gated yard_depth gte 4 + yard_part_found is_false. The fourth find — the Facility job's overrun, still crated, in the pit under the strongroom slab. She takes the one piece that matches what is wired into the plant room down there. SETS yard_part_found. The R. RENNER & SON stencil is introduced here and pays off at bunker_sides.s2."
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth",      operator = "gte", value = 4 },
+  { type = "flag",  subject = "player", flag_key  = "yard_part_found", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The overrun"
+blocks = [
+  { type = "paragraph", content = "It is all one job. Every crate in the pit has the same stencil on the end of it, sprayed through a card that somebody cut by hand and cut badly, so the ampersand has a flat side on it." },
+  { type = "paragraph", content = "R. RENNER & SON. He ordered forty per cent over on a contract he was never paid the back half of, and rather than eat the loss on the books he put the overrun down a hole under his own strongroom and carried it as stock." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Everything that went into that building came out of this yard. Which means the spare for everything in that building is sitting in this pit, in a crate, dry, with his name on it." },
+  { type = "paragraph", content = "She takes one piece. It is a coupler about the length of her forearm with a screened tail on it, and it is the only thing down here that would let a signal off a fixed plant run out to somewhere that is not the plant, and she does not know that yet. Kess will." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up out of the pit."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_burned_yard"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "yard_part_found", op = "set" }]
+
 [[canvases]]
 id          = "yard_find_1"
 name        = "What the yard was"
@@ -7066,6 +7214,159 @@ flagEffects = [
   { targetType = "player", flag = "cain_came_along", op = "set" },
 ]
 
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ THE WAY DOWN (0.2.2) — solo activities. Design: games/vesper/design_the_way_down.md ══════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+#
+# ── beat_0170 — activity_go_after_him. SHE SAYS YES. Wren-solo @the_cot, pri 4. ───────────────────────
+# ⚠️ SHE IS NOT ANSWERING CAIN. She cannot. He has no address and never has (npc_cain description,
+# 1_metadata:699), which is the entire mechanic beat_0135 was built on. So this is not a reply — it is her
+# alone in her room deciding, and the decision is expressed the only way this game expresses decisions,
+# as the next thing she does.
+# ⚠️ AN ACTIVITY, NOT AN AUTO-FIRE, AND THAT IS THE POINT. beat_0169 ends on a request nobody made. If the
+# answer also arrived on its own, the player would never once have been asked. This card sits on her cot
+# until she clicks it.
+# ⚠️ THE MOTIVE IS NOT INSTRUMENTAL AND THE PROSE MUST NOT SMUGGLE ONE IN. LO's call, twice, verbatim:
+# "Complete no on this" to Bastien being the one man who knows what was done to her, then "She goes in
+# because cain wants to save him and he was caught because of her." So: she LOOKS for the angle, in her
+# own idiom, the way she has opened every other problem in this game — and there is not one. The scene is
+# her failing to find a reason and going anyway. Anything that hands her a payoff breaks LO's call.
+# ⚠️ THE TASER IS PHYSICAL, NOT MORAL. She does not think the word guilt and nobody says it. What she has
+# is the memory of a thing in her hand and a man going down on a floor and not being able to get up. That
+# is design_the_face.md §10 — "she believes she watched a man die; what she actually did was hand him
+# over" — rendered as a body, not as a verdict.
+# ⚠️ IT COSTS HER THE THING SHE WANTS. The box at the top of the tower is what she has wanted for two acts
+# and this is weeks she does not spend on it. Named once, flat, not dwelt on.
+# SETS rescue_agreed. No quest card here — every 0.2.2 card lands together at beat_0188.
+[[canvases]]
+id          = "activity_go_after_him"
+name        = "Go and get him out"
+description = "beat_0170 (rev 222), THE WAY DOWN. Wren-solo @the_cot, repeatable, pri 4, gated bastien_alive_known is_true + rescue_agreed is_false. SHE DECIDES, ALONE — she has no way to reach Cain (no address, npc_cain description), so this is not an answer to him, it is the next thing she does. She works the problem for an angle the way she works every problem, finds none, and goes anyway: the two reasons are that Cain wants it and that she is why Bastien is down there. NOTHING INSTRUMENTAL (LO's call, twice). The taser is carried as a physical memory, never as the word guilt. Costs her the tower, named once. SETS rescue_agreed. 6 beats, 5 clicks."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_alive_known", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rescue_agreed",       operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Go and get him out"
+blocks = [
+  { type = "paragraph", content = "She sits on the bunk after he has gone and does the thing she is for, which is opening a problem up and looking for the part of it that is worth something to her." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A bar owner four months into a room under a burned building. He does not know what is in the box. He does not know what she is. He cannot tell her one thing about the man at the top of that tower, because he has never been in the same city as him." },
+        { type = "paragraph", content = "She turns it over twice more and it comes out the same both times. There is nothing in it. There is not one thing in it for her." },
+    ] },
+    { advance_text = "So work out what it costs.", blocks = [
+        { type = "paragraph", content = "And there is a cost, and she can price it, because pricing is also a thing she is for. Weeks. A month if it goes badly. A month of not being on the floor of that tower with a bought face on, working out how a man gets a box out of a room." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is somebody of hers up there in a case with a lock on it and she is going to spend a month underneath a different building entirely." },
+    ] },
+    { advance_text = "Think about the taser.", blocks = [
+        { type = "paragraph", content = "The thing she keeps coming back to is not a feeling. It is her hand. The weight of it, the flat of it against his ribs through the shirt, the click, and the way his legs went before the rest of him did." },
+    ] },
+    { advance_text = "And the floor.", blocks = [
+        { type = "paragraph", content = "He was on the floor of his own back room with his cheek on the boards when they came through the door. He was awake. He could see them coming and he could not get his arms under himself." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They did not catch him. She caught him. They only carried him." },
+    ] },
+    { advance_text = "None of that is a reason.", blocks = [
+        { type = "paragraph", content = "None of which is a reason. She has put men on floors before and slept fine, and she knows that about herself and has never once pretended otherwise." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The reason is that a man stood in this room with the water coming off him and did not ask her for it. That is the whole of the reason and it is not a good one." },
+    ] },
+    { advance_text = "Get up.", blocks = [
+        { type = "paragraph", content = "She gets up off the bunk and takes her coat back off the nail, and that is the decision, made the way she makes all of them, which is by moving before she has finished arguing." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Cain has got the address and nothing else. Somebody built that place. Somebody bolted every door in it to a wall and got paid for it, and there is exactly one man in this city who fits that and she has already had him on his back once." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "rescue_agreed", op = "set" },
+]
+
+# ═══ beat_0178 (rev 222), THE WAY DOWN — KESS BUILDS THE LINK. ════════════════════════════════════════
+# ⚠️ LOCATED TRIGGER + substitution_only, THE kess_makes_the_blank SHAPE EXACTLY (3_activities:3875). It
+# SETS link_built, which bunker_descent's trigger requires, and the flag-chain validator hard-fails a
+# trigger-required flag whose setter has no location. The trigger exists for the validator; the rung on
+# hub_kess_berth is the only way a player reaches it.
+# ⚠️ THE COIN IS ON THE CHOICE INSIDE, NEVER ON THE TRIGGER. A canvas-level cost puts the whole thing into
+# the greyed blocked-row path (v2.py:5385) and a player who cannot pay loses the scene as well as the
+# purchase. 40 coin — the blank was 45, and this is smaller work on a part she brought him herself.
+# ⚠️ HE DOES NOT ASK WHERE SHE IS GOING. He has never once asked. What he does is price the job off what
+# the job implies, and the implication he draws out loud is the only warning in the release: a person who
+# needs to call OUT of somewhere is a person who has thought about not coming out of it.
+# ⚠️ IT CONSUMES NOTHING. yard_part_found stays set — the coupler becomes the link rather than being spent,
+# and there is no second use for it, so burning the flag would only make a save look wrong.
+# MEDIA: none. His berth's own image is carried by the hub.
+[[canvases]]
+id          = "kess_makes_the_link"
+name        = "Something to call out with"
+description = "beat_0178 (rev 222), THE WAY DOWN. Wren-solo @kess_berth, SUBSTITUTION_ONLY (it sets link_built, which bunker_descent's trigger requires, so it must keep a located trigger — the kess_makes_the_blank shape). Reached only from hub_kess_berth's 'Show him the coupler.' rung, gated yard_part_found is_true + link_built is_false. He hangs a signal off the fixed plant under the Facility using the overrun coupler out of Renner's pit, so she can reach Cain from under a slab. 40 coin, on the choice inside. He does not ask where she is going; he prices the job and says the one true thing about it. SETS link_built."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "yard_part_found", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "link_built",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to call out with"
+blocks = [
+  { type = "paragraph", content = "She puts the coupler on the bench in front of him and he picks it up without a word and turns it over twice and reads the tail on it, and then he looks at the stencil on the collar and makes a noise in his throat." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Renner. That is a screened tail off a fixed plant run, that is. That is not a thing you carry. That is a thing you bolt to a wall and leave for twenty years." },
+  { type = "dialog", props = { speaker = "player" }, content = "I am going to be somewhere with a slab over it and I need to reach one person from underneath." },
+  { type = "paragraph", content = "He does not ask where. He has never once asked her where, in four months, which she has stopped noticing and is noticing again now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then you do not want a transmitter, you want a parasite. Whatever is down there is already wired and already drawing, and if it is drawing it is talking to something above the ground. Hang off it and you are on their line, not yours." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him make it. (40 coin.)"
+targetType = "node"
+nodeId     = "kess_makes_the_link.made"
+costs      = [{ trait = "coin", value = 40 }]
+flagEffects = [
+  { targetType = "player", flag = "link_built", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Come back with the coin."
+targetType = "location"
+locationId = "kess_berth"
+
+[[canvases.nodes]]
+id   = "made"
+name = "One person, once"
+blocks = [
+  { type = "paragraph", content = "It takes him most of an afternoon and what he hands her is not much to look at: the coupler, shortened, with a clip on the tail and a flat grey block taped to it about the size of a bar of soap." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Find a run. Anything live, anything fixed. Clip it on the screen, not the core, and it will find its own way up and out. One person, and you have to already know how to reach them, because this end does not look anybody up." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know how to reach him." },
+  { type = "paragraph", content = "He wipes his hands and does not hand it over straight away, which is new." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A person who wants to call out of a place has already worked out they might not walk out of it. I am not telling you not to go. I am telling you I noticed." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four months of rent and a spliced feed line and a bed on a bench, and that is the closest thing to being worried about that she has ever been handed by anybody." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 240
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 5_scenes.toml
 # ══════════════════════════════════════════════════════════════════
@@ -8326,6 +8627,33 @@ type = "choices"
 text       = "Ask him again."
 targetType = "node"
 nodeId     = "renner_control_canvas.again_ask"
+# ⚠️ beat_0175 (rev 222), THE WAY DOWN — THE THIRD ASK. Added to the REPEAT path, never to .intro: the
+# first extraction is Act 1 and is spent, and a player replaying it must not get a chapter they have not
+# reached. The payload lives in its own canvas rather than a node here because renner_control_canvas is
+# TRIGGERLESS and route_learned is required by bunker_descent's trigger — a flag a trigger needs must be
+# set by a canvas with a location or the flag-chain validator hard-fails it. renner_route_canvas carries a
+# located trigger + substitution_only for exactly that reason, which is the kess_makes_the_blank shape.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about the Facility."
+targetType = "node"
+nodeId     = "renner_route_canvas.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rescue_agreed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "route_learned", operator = "is_false" },
+] }
+# ⚠️ beat_0176 (rev 222) — THE RE-ASK, and it is the reason the route is not printed on the Quests page.
+# The five clauses are a thing the PLAYER holds, not a thing the character's journal holds; putting them on
+# a card would delete the mechanic outright. So the safety net is diegetic and it is expensive on purpose —
+# cross the city, work him, get him on his back, take it again. It sets no flag, which is why it can live
+# in this triggerless canvas while beat_0175's payload could not.
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him say the way in again."
+targetType = "node"
+nodeId     = "renner_control_canvas.route_recall"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "route_learned",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_rescued", operator = "is_false" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Just leave him."
 targetType = "location"
@@ -8333,6 +8661,27 @@ locationId = "renner_depot"
 
 # The trimmed re-ask (flavor B) — the same names, nothing new. The one-time revelations live ONLY in
 # .intro (the first extraction); this repeat path never re-dumps them.
+# ── beat_0176 — route_recall. THE SHORT RE-ASK. No flag, no new information, no cascade. ─────────────
+# ⚠️ IT MUST NOT BE A BETTER VERSION OF beat_0175. Same five clauses, flatter, with nothing added — a player
+# who took notes the first time gains nothing by coming back, and a player who did not is not punished
+# beyond the trip. The one thing it carries that the first pass did not is how cheaply he gives it up, which
+# is the quiet horror of the drain stated once and not dwelt on.
+[[canvases.nodes]]
+id   = "route_recall"
+name = "Again, from the plate"
+blocks = [
+  { type = "paragraph", content = "He is open and agreeable and entirely unbothered, and she asks him the same question she asked him the last time and he answers it the same way, in the same order, with the same small pride in the clipping." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "The stair, not the ramp. Left at the pumps, behind the plinths. Right at the ring, into the draught. The far gate, the one with the wedge under it. And the door my conduit turns into." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He would give that to anybody who got him into this chair. Anybody at all, for nothing, twice, and be glad of the company. That is what she left him as and it is not going to be undone." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to come back to himself."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_depot"
+time_progression_minutes = 15
+
 [[canvases.nodes]]
 id   = "again_ask"
 name = "Nothing new"
@@ -12604,6 +12953,18 @@ nodeId     = "kess_makes_the_blank.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sabin_drains_done", operator = "gte", value = 1 },
   { type = "flag",  subject = "player", flag_key  = "decoy_made",        operator = "is_false" },
+] }
+# ⚠️ beat_0178 (rev 222), THE WAY DOWN — THE LINK RUNG, and it sits here for the reason the banner above
+# records: a flag-setting Kess canvas with a live trigger and no npc= renders as a bare solo link under
+# this card and LO could not find the last one. Same fix, same shape — substitution_only on the target, the
+# rung here, and the coin on the choice INSIDE so a player who cannot pay still gets the scene.
+[[canvases.nodes.exit_block.choices]]
+text       = "Show him the coupler."
+targetType = "node"
+nodeId     = "kess_makes_the_link.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "yard_part_found", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "link_built",      operator = "is_false" },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him to it."
@@ -21173,8 +21534,14 @@ text       = "You got them into one room and it cost Grier the only sentence he 
 tip        = "That is where this build ends. Cain would not say who, and you have watched something go out of his face twice in a week now and you cannot name it either time. There is nothing to go and get: you can stand at the foot of that tower now and every door in it above the lobby is shut to you, and the store under his lab is shut behind you. What is still standing is everything you built to get here. GRIER is in his room off the lane from ten in the morning and not one thing about that has closed. SABIN is on the floor at eight and up in his lab from eleven, the reading still pays fifteen a shift, and he still clears the bench for you. The strip, the market, The House and the pit are where you left them, and so is everybody who was already yours. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
 terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
+# ⚠️ CLOSED AT beat_0187 (rev 222), THE WAY DOWN — and this is the §19 boundary check done from BOTH sides.
+# This card carries terminal = true and a tip whose first words are "That is where this build ends." Left
+# on two_men_done alone it keeps saying that while 0.2.2's content is live, so a returning player opens the
+# Quests page after Cain has told them Bastien is alive and is informed the story has stopped. beat_0165
+# logged exactly this failure in the other direction; this is the same seam read from the new side.
 when = [
-  { flag = "two_men_done", op = "is_true" },
+  { flag = "two_men_done",        op = "is_true"  },
+  { flag = "bastien_alive_known", op = "is_false" },
 ]
 
 # ═══ Quests page — GRIER'S SECTION (beat_0144). ════════════════════════════════════════════════════════
@@ -25199,6 +25566,1651 @@ flagEffects = [
   { targetType = "player", flag = "two_men_done", op = "set" },
 ]
 
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ THE WAY DOWN (0.2.2) — beat_0169 onward. Bastien's rescue. ═══════════════════════════════════════
+# Design record: games/vesper/design_the_way_down.md. The release opens on the silence beat_0139 ended on.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+#
+# ── beat_0169 — cap_bastien_alive. THE NEWS. Auto-fire @the_cot, pri 10, ONE-SHOT. ────────────────────
+# ⚠️ IT GATES ON two_men_done, WHICH IS THE LAST FLAG 0.2.1 SETS. That is deliberate: this scene has to
+# land on a man who has just been opened twice in one week (Grier's sentence at beat_0139, the question at
+# beat_0137) and has not spoken since. He is not steady here and the prose does not say so anywhere —
+# it is carried entirely by him STANDING, which he has never done in this room, and by him having walked
+# in the rain before he came down.
+# ⚠️ HE HAS JUST FOUND OUT. LO's call, verbatim: "cain just got to know that bastien is alive and kept and
+# the place too." He is not sitting on it and never was. Four days, and he says the number.
+# ⚠️ THE TRAP IS NAMED EXACTLY ONCE, in his mouth, in six words, and nothing in the scene explains it
+# afterwards. She works it out one beat early in a thought_bubble and he confirms it flat. If a later beat
+# needs to re-explain the trap, that is the signal this one failed.
+# ⚠️ HE DOES NOT ASK HER. The scene ends on the shape of the request sitting in the room unspoken, because
+# a man asking would let her say no to a question. beat_0170 is where she answers a thing nobody said.
+# ⚠️ NO IMAGE, the beat_0127 / beat_0133 reasoning: it is one man saying six sentences in a room the player
+# has seen thirty times. The release's image budget belongs to the bunker.
+# SETS bastien_alive_known. Lead plus nine cascade beats, eight clicks.
+[[canvases]]
+id          = "cap_bastien_alive"
+name        = "He is alive"
+description = "beat_0169 (rev 222), THE WAY DOWN. THE RELEASE'S FIRST SCENE. Auto-fire @the_cot, pri 10, one-shot, gated two_men_done is_true + bastien_alive_known is_false. Cain is a scheduleless speaker (the cap_mercer_resurfaces shape). He has known FOUR DAYS. Carries: Bastien alive, the address (under the Facility, the burned part was the part above ground), what has been done to him and for how long, and THE TRAP — named once, in his mouth, six words, never re-explained. He states that he can go and why going is what the room was built for. HE DOES NOT ASK HER; the scene ends on the unspoken shape of it, which is what beat_0170 answers. SETS bastien_alive_known. Lead plus nine cascade beats, eight clicks."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "two_men_done",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_alive_known", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "He is alive"
+blocks = [
+  { type = "paragraph", content = "He is at the cot when she comes down the boards, and he is standing. He has sat in this room and he has leaned in the doorway of it, and he has never once stood in the middle of it like a man who came in and then forgot the next part." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The coat is dark through at both shoulders. It has not rained since the afternoon, which means he has been walking about in it for a good few hours before he came down here to say whatever this is." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Bastien is alive." },
+    ] },
+    { advance_text = "Put the coat down.", blocks = [
+        { type = "paragraph", content = "She has her own coat half off. She finishes taking it off and puts it on the nail, because the other thing available is standing in the middle of her room holding a coat." },
+        { type = "dialog", props = { speaker = "player" }, content = "I put him on the floor. They came through that door and he was not moving." },
+    ] },
+    { advance_text = "Let him answer it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "He was not moving because you put him on the floor. That is not the same as dead, and you have had four months to let yourself have that and you have not taken it." },
+        { type = "paragraph", content = "He says it without any edge on it at all, which is worse than an edge would be." },
+    ] },
+    { advance_text = "Where.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Under the Facility. The part I burned was the part that was above the ground. There is a good deal more of it than that and it never stopped running." },
+    ] },
+    { advance_text = "How long.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Since that night." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Since that night. Four months, and they have spent them taking him apart over the supply line. What came to me, by what road, out of whose hands." },
+    ] },
+    { advance_text = "And he gave it to them.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "He gave them the line in the first month. Anybody would. Anybody alive would, and I would, and he is not a strong man and he never pretended to be." },
+        { type = "paragraph", content = "He stops there, and lets her do the rest of the arithmetic herself, the way he has let her do every piece of arithmetic she has done since he walked into her life." },
+    ] },
+    { advance_text = "Do the arithmetic.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "One month to get it, and three more after they had it. They are not asking that man anything. They have not been asking him anything since the spring. They are making a noise in a room where somebody can hear it." },
+    ] },
+    { advance_text = "Say it out loud.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "It is bait." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It is a bell, and it is being rung for me." },
+    ] },
+    { advance_text = "Then go and get him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then go down there and get him out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I can. I have had four days and I have got as far as I can. And a room built to shut on one man shuts on him, and then they have got the pair of us, and the box at the top of that tower sits there until somebody else's grandchildren open it." },
+    ] },
+    { advance_text = "Wait for him to ask.", blocks = [
+        { type = "paragraph", content = "He does not ask her. He stands in the middle of her room with the water coming off his coat onto her floor and lets the shape of the thing sit in the air between them, which is a great deal worse than being asked." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I am not going to tell you what it is worth. You were in the room when they took him." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 45
+flagEffects = [
+  { targetType = "player", flag = "bastien_alive_known", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0172 (rev 222), THE WAY DOWN — THE WARREN. THE ROOMS, BEFORE ANYBODY DESCRIBES THEM. ════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ THIS BEAT EXISTS BEFORE beat_0175 FOR ONE REASON AND IT IS THE RELEASE'S ONE NON-NEGOTIABLE ORDERING
+# RULE. Renner's drain payload is a DESCRIPTION OF THESE ROOMS. Written the other way round it becomes a
+# promise to build something, and then the rooms get bent to fit a speech instead of the speech being true.
+# Every place, door and turn Renner names at beat_0175 is a node in this file, authored first.
+#
+# ⚠️ NODES, NOT [[locations]]. Fifteen rooms as locations would each need the nav-invisible double (no
+# entry_from AND auto_exit = false, 1_metadata:1401), each carry a nav card, and each be gated shut after
+# the rescue. As nodes they have none of that and "the bunker closes behind them" is one clause on one
+# trigger. Node routing is validated hard — an unresolved nodeId is a BUILD ERROR (template_import:4932) —
+# so a broken route cannot ship silently, which a fifteen-room location graph absolutely could.
+#
+# ⚠️ THE ROUTE, AND IT IS THE ANSWER KEY. Five turns:
+#     1. THE STAIR      (not the loading ramp, not the cable trench)
+#     2. LEFT           at the pump floor
+#     3. RIGHT          at the ring junction
+#     4. THE FAR GATE   in the rack hall
+#     5. THE DOOR WITH THE CONDUIT OVER IT   (of three identical doors)
+#   Turn five's tell is Renner's own installed conduit, which is the whole design in one object: the way
+#   past the last door is a thing the man she drained bolted to the wall himself.
+#
+# ⚠️ EVERY WRONG DOOR AT TURN N LANDS IN ROOM gN, and the five g-rooms are five DISTINCT places (LO's call).
+# A junction's wrong branches converge on the one occupied space off that junction, which is how a floor
+# actually works and is why two wrong doors can share a room without it reading as a reused asset.
+#
+# ⚠️ THE FOUR SIDE ROOMS HANG OFF THE CORRECT PATH, are optional, are not guard rooms, and each returns to
+# the turn it came from. LO's call: "the place is genuinely large, with rooms off the path that aren't
+# guard rooms." They are 8-10 rooms counting the five route rooms.
+#
+# ⚠️ WHAT THIS BEAT DOES NOT DO. No stealth, no emitter, no fighting, no costs, no counters — a caught room
+# has exactly one way out of it tonight, which is out of the building. beat_0173 is the mechanic. The five
+# explicit caught-beats are beats 0179-0181. Nothing here is a stub: every room is its finished room.
+# MEDIA: none this beat. The pools land with the caught-beats.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── bunker_descent — THE WAY IN. Located @facility_ruins, repeatable, pri 8. ──────────────────────────
+# ⚠️ REPEATABLE AND IT MUST BE. She is thrown back out of this place on every failed run and has to be able
+# to walk back in. The one-shot is the rescue, not the door.
+# ⚠️ THE GATE ARRIVES IN THREE PIECES, AND THAT IS FORCED BY THE ENGINE, NOT A PREFERENCE. The flag-chain
+# validator hard-fails any flag a trigger needs that no located canvas sets ("NEVER SET - no canvas sets
+# this flag"), so route_learned and link_built CANNOT be named here — their setters do not exist until
+# beat_0175 (Renner) and beat_0178 (Kess). Each of those beats adds its own clause to this trigger as part
+# of itself. Same move as cain_came_along, added to cap_the_two_men at beat_0163 for the same reason.
+# ⚠️ SO THE DOOR IS DELIBERATELY UNDER-GATED BETWEEN beat_0172 AND beat_0178 and the release is not
+# playable-correct until both clauses land. That is a build-order window, not a shipped hole. If either
+# clause is missing at beat_0189's reconcile, the route can be walked by a player who never met Renner.
+#   beat_0175 MUST ADD:  { type = "flag", subject = "player", flag_key = "route_learned", operator = "is_true" }
+#   beat_0178 MUST ADD:  { type = "flag", subject = "player", flag_key = "link_built",    operator = "is_true" }
+[[canvases]]
+id          = "bunker_descent"
+name        = "The way down"
+description = "beat_0172 (rev 222), THE WAY DOWN. Located @facility_ruins, REPEATABLE (she is thrown out on every failed run), pri 8, gated rescue_agreed is_true + bastien_rescued is_false. ⚠️ THE route_learned AND link_built CLAUSES ARE ADDED BY beat_0175 AND beat_0178 — the flag-chain validator hard-fails a flag with no located setter, so they cannot be named before their setters exist. The service entrance Renner installed, under the slab that burned. Exits into bunker_route.base, which is turn one's junction and the restart point for the whole route."
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = true
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rescue_agreed",   operator = "is_true"  },
+  # ADDED beat_0175, as the banner above required — renner_route_canvas is its located setter.
+  { type = "flag", subject = "player", flag_key = "route_learned",   operator = "is_true"  },
+  # ADDED beat_0178, as the banner above required — kess_makes_the_link is its located setter.
+  { type = "flag", subject = "player", flag_key = "link_built",      operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_rescued", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The way down"
+blocks = [
+  { type = "paragraph", content = "The slab at the north end is not slab. It is a plate, set flush and tarred over, and the tar is newer than the fire by about four years. She gets a bar under the lip of it and it comes up on a hinge she cannot see, oiled." },
+  { type = "paragraph", content = "Under it there is a stair going down into warm air. The building above her has been dead since the spring. The air coming up out of this hole is moving, which means something down there is still breathing it in and out." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Down."
+targetType = "node"
+nodeId     = "bunker_route.base"
+# ⚠️ THE PER-RUN RESET LIVES HERE AND NOWHERE ELSE. There is no engine hook for run-scoped state —
+# [engine.daily_tick] (0_systems:56) is day-scoped and this route advances no day on purpose — so the free
+# back-out is zeroed on the way in, the same move every sex loop makes on its entry rung.
+costs   = [{ trait = "energy", value = 10 }]
+effects = [
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_runs",         op = "add", value = 1 },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the plate back. Not tonight."
+targetType = "location"
+locationId = "the_waterfront"
+
+# ═══ bunker_route — THE SPINE. Triggerless. base + t1..t5. ════════════════════════════════════════════
+# ⚠️ base IS BOTH THE ENTRANCE AND THE RESTART POINT. Every caught room that does not throw her out of the
+# building throws her back to this node (beat_0173). That is why turn one's junction is the canvas entry
+# and not a numbered node: there is no state to rewind, because the node graph IS the position.
+# ⚠️ NO POSITION COUNTER, DELIBERATELY. An odometer would duplicate what the graph already holds, and a
+# trait key is immutable once shipped. The only per-run state the route needs is the free stealth back-out,
+# and that arrives at beat_0173 where it is used.
+[[canvases]]
+id          = "bunker_route"
+name        = "Under the Facility"
+description = "beat_0172 (rev 222), THE WAY DOWN. TRIGGERLESS — reached from bunker_descent and from every caught room's restart. The five-turn memorised route: base (stair/ramp/trench), t1 (left/right at the pumps), t2 (left/straight/right at the ring), t3 (near/far gate), t4 (three plant doors, the tell is Renner's conduit), t5 (arrival). Wrong doors at turn N all land in bunker_guards.gN. Four optional side rooms hang off the correct path. NO mechanic here — beat_0173 adds stealth, emitter, fighting and costs."
+
+[canvases.trigger]
+# ⚠️ LOCATED + substitution_only, ADDED beat_0185. Two reasons, both real. (1) bunker_bastien SETS
+# bastien_found_alive, which cap_the_extraction's trigger requires, and the flag-chain validator rejects a
+# trigger-required flag whose setter has no location ("MISSING HINT - set by ... but no location/schedule").
+# (2) These rooms ARE under facility_ruins, so attributing them there is true rather than convenient, and it
+# lets the traversal-heat gate see the explicit pools that are physically in that place.
+# substitution_only takes the canvas out of every render path, so nothing appears on the Facility's page —
+# the trigger exists for the validator and the attribution, exactly as it does on kess_makes_the_blank.
+location          = "facility_ruins"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+
+[[canvases.nodes]]
+id   = "base"
+name = "The stair head"
+blocks = [
+  { type = "paragraph", content = "The stair puts her out on a landing with three ways off it. A flight going further down, poured concrete, handrail bolted on. A loading ramp sloping away to the left with rubber matting on it. And a cable trench, chest deep, running off into the dark on the right with the covers lifted." },
+  { type = "paragraph", content = "All three are used. All three have the same grey dust on them and the dust has been walked through recently on every one." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the stair."
+targetType = "node"
+nodeId     = "t1"
+costs = [{ trait = "energy", value = 10 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the loading ramp."
+targetType = "node"
+nodeId     = "bunker_guards.g1"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down into the cable trench."
+targetType = "node"
+nodeId     = "bunker_guards.g1"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back up the stair and out."
+targetType = "location"
+locationId = "facility_ruins"
+
+[[canvases.nodes]]
+id   = "t1"
+name = "The pump floor"
+blocks = [
+  { type = "paragraph", content = "The stair bottoms out in a room full of pumps, six of them on plinths, four running. It is the warmest air she has stood in since the cradle and it smells of hot oil and standing water." },
+  { type = "paragraph", content = "Two ways out. Left, a dry corridor behind the plinths. Right, a corridor with a standpipe in it and the floor wet the whole length." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Left, behind the plinths."
+targetType = "node"
+nodeId     = "t2"
+costs = [{ trait = "energy", value = 10 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "Right, past the standpipe."
+targetType = "node"
+nodeId     = "bunker_guards.g2"
+[[canvases.nodes.exit_block.choices]]
+text       = "Try the door marked STORE."
+targetType = "node"
+nodeId     = "bunker_sides.s1"
+
+[[canvases.nodes]]
+id   = "t2"
+name = "The ring junction"
+blocks = [
+  { type = "paragraph", content = "The corridor opens into a junction where four ways meet under one hanging lamp, and somebody has painted a ring on the floor around the lamp post in yellow, the way you mark a thing men are supposed to stand clear of." },
+  { type = "paragraph", content = "Left is narrow and goes uphill. Straight on is wide and lit. Right is unlit and she can feel the draught out of it on her face." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Right, into the draught."
+targetType = "node"
+nodeId     = "t3"
+costs = [{ trait = "energy", value = 10 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "Left, uphill."
+targetType = "node"
+nodeId     = "bunker_guards.g3"
+[[canvases.nodes.exit_block.choices]]
+text       = "Straight on, into the light."
+targetType = "node"
+nodeId     = "bunker_guards.g3"
+[[canvases.nodes.exit_block.choices]]
+text       = "The side door off the junction."
+targetType = "node"
+nodeId     = "bunker_sides.s2"
+
+[[canvases.nodes]]
+id   = "t3"
+name = "The rack hall"
+blocks = [
+  { type = "paragraph", content = "A long hall with steel racking down both sides, two storeys of it, most of the bays empty and the few that are not holding crates with company stencils gone soft at the edges from the damp." },
+  { type = "paragraph", content = "There are two gates at the far end of it, thirty feet apart in the same wall. The near one is standing open. The far one is shut and has a keypad on it that somebody has propped a wedge against so it cannot latch." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "The far gate, past the wedge."
+targetType = "node"
+nodeId     = "t4"
+costs = [{ trait = "energy", value = 10 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "The near gate, standing open."
+targetType = "node"
+nodeId     = "bunker_guards.g4"
+[[canvases.nodes.exit_block.choices]]
+text       = "The room behind the racking."
+targetType = "node"
+nodeId     = "bunker_sides.s3"
+
+[[canvases.nodes]]
+id   = "t4"
+name = "Three doors"
+blocks = [
+  { type = "paragraph", content = "Past the far gate the corridor ends in three doors in one wall, and they are the same door three times: same grey, same handle, same height, no numbers and no plates on any of them." },
+  { type = "paragraph", content = "There is one thing in the corridor that is not symmetrical. A conduit comes down the wall and runs along over the door heads and turns into exactly one of them, and it is clipped every eighteen inches the whole way, which is a habit and not a spec." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "The door the conduit turns into."
+targetType = "node"
+nodeId     = "t5"
+costs = [{ trait = "energy", value = 10 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "The left-hand door."
+targetType = "node"
+nodeId     = "bunker_guards.g5"
+[[canvases.nodes.exit_block.choices]]
+text       = "The right-hand door."
+targetType = "node"
+nodeId     = "bunker_guards.g5"
+[[canvases.nodes.exit_block.choices]]
+text       = "The door at the corridor's head."
+targetType = "node"
+nodeId     = "bunker_sides.s4"
+
+# ⚠️ RE-POINTED AT beat_0183, as the beat_0172 banner said it would be. The exit went to facility_ruins
+# while the plant room did not exist yet; it now goes through the door.
+[[canvases.nodes]]
+id   = "t5"
+name = "The plant room door"
+blocks = [
+  { type = "paragraph", content = "Behind the conduit door there is a short length of corridor and then one more door, and this one is not like anything else down here. It is a proper door, hung true, with a rubber seal and a small square of wired glass at head height." },
+  { type = "paragraph", content = "The conduit goes into the wall beside it and does not come out again. Whatever the man wired this place for, he wired it to end here." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Look through the glass."
+targetType = "node"
+nodeId     = "bunker_bastien.base"
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out. Not tonight."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+# ═══ bunker_guards — THE FIVE WRONG ROOMS. Triggerless. Five DISTINCT places. ═════════════════════════
+# ⚠️ FIVE ROOMS, FIVE MEN, NO REUSE (LO's call). Four are narrative guards with no NPC entry, which is this
+# game's own stated house pattern (3_activities:771, :1274). The fifth is Loder, the only named man down
+# here, and he is at the deepest wrong turn because that is where getting it wrong costs the most.
+# ⚠️ TONIGHT EACH ROOM HAS EXACTLY ONE WAY OUT — out of the building. beat_0173 adds the free stealth
+# back-out, the emitter and the fight. The prose of being SEEN is finished here and is not revisited.
+[[canvases]]
+id          = "bunker_guards"
+name        = "Somebody is in here"
+description = "beat_0172 (rev 222), THE WAY DOWN. TRIGGERLESS. The five wrong-turn rooms, five distinct places, one man each — four narrative guards with no NPC entry (the house pattern, 3_activities:771/:1274) and Loder at g5, the deepest. Every wrong door at turn N lands in gN. THIS BEAT gives each room one exit only: out of the building. beat_0173 adds stealth/emitter/fighting; beats 0179-0181 add the explicit caught-beats."
+
+[canvases.trigger]
+# ⚠️ LOCATED + substitution_only, ADDED beat_0185. Two reasons, both real. (1) bunker_bastien SETS
+# bastien_found_alive, which cap_the_extraction's trigger requires, and the flag-chain validator rejects a
+# trigger-required flag whose setter has no location ("MISSING HINT - set by ... but no location/schedule").
+# (2) These rooms ARE under facility_ruins, so attributing them there is true rather than convenient, and it
+# lets the traversal-heat gate see the explicit pools that are physically in that place.
+# substitution_only takes the canvas out of every render path, so nothing appears on the Facility's page —
+# the trigger exists for the validator and the attribution, exactly as it does on kess_makes_the_blank.
+location          = "facility_ruins"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+
+[[canvases.nodes]]
+id   = "g1"
+name = "The ramp head"
+blocks = [
+  { type = "paragraph", content = "The ramp and the trench both come out in the same low space, a receiving bay with the roller door bricked up, and there is a man sitting on a crate in the middle of it with a flask between his boots." },
+  { type = "paragraph", content = "He is not on watch. He is on his break, in the one warm corner of his shift, and he looks up because somebody came down the ramp and nobody comes down the ramp. He looks at her for about a second and a half and then he puts the flask down very carefully on the floor." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE FREE BACK-OUT — ONE PER RUN, NOT ONE PER ROOM. bunker_stealth_used is the whole of the budget and
+# it is checked here and spent here. It returns her to the junction she just left, NOT to the stair head,
+# because the fiction is that he never saw her: nothing was lost, so nothing is taken back.
+[[canvases.nodes.exit_block.choices]]
+text             = "Back up the ramp before he is sure."
+targetType       = "node"
+nodeId           = "bunker_route.base"
+show_when_locked = true
+locked_text      = "Too slow, or she has already used the one quiet way out of a room tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1 },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+# ⚠️ THE FIGHT RESTARTS THE ROUTE AND THE PROSE SAYS WHY. A man asleep on a floor gets found; the floor goes
+# hot behind her and the only clean approach left is the one she came in by. No shot spent — that is the
+# whole difference between this and the emitter.
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "g1_down"
+show_when_locked = true
+locked_text      = "Not on this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 25 },
+] }
+# ⚠️ THE EMITTER — beats 0179-0181. costs = arousal_charge, NOT a gte clause plus an effect: `costs` is
+# affordability-enforced by the engine (v2.py:3157-3161) so it greys itself at zero AND deducts, in one
+# line, which is the underworld_gate_check form and the better of the two shipped forms.
+# ⚠️ IT RESTARTS THE ROUTE. A man fucked unconscious on a floor is found exactly as fast as a man beaten
+# unconscious on a floor, so the emitter buys the room and not the run. The shot is the difference.
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "g1_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Break and run."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g2"
+name = "The wet corridor"
+blocks = [
+  { type = "paragraph", content = "The wet corridor is wet because the standpipe halfway along it has no tap on it any more, and there is a man stripped to the waist under it with his head down, washing something off his forearms with a brush." },
+  { type = "paragraph", content = "He hears her before he sees her, because the floor is an inch deep and she is standing in it. He straightens up with the brush still in his hand and the water running off his elbows and does not shout, which is the part she does not like." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE FREE BACK-OUT — ONE PER RUN, NOT ONE PER ROOM. bunker_stealth_used is the whole of the budget and
+# it is checked here and spent here. It returns her to the junction she just left, NOT to the stair head,
+# because the fiction is that he never saw her: nothing was lost, so nothing is taken back.
+[[canvases.nodes.exit_block.choices]]
+text             = "Back out of the water before he looks up."
+targetType       = "node"
+nodeId           = "bunker_route.t1"
+show_when_locked = true
+locked_text      = "Too slow, or she has already used the one quiet way out of a room tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1 },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+# ⚠️ THE FIGHT RESTARTS THE ROUTE AND THE PROSE SAYS WHY. A man asleep on a floor gets found; the floor goes
+# hot behind her and the only clean approach left is the one she came in by. No shot spent — that is the
+# whole difference between this and the emitter.
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "g2_down"
+show_when_locked = true
+locked_text      = "Not on this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 35 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "g2_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Break and run."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g3"
+name = "The mess"
+blocks = [
+  { type = "paragraph", content = "Both the wrong arms of the ring feed into the mess, which is four tables, a urn, a board with a shift rota on it and a smell of fried onions that has got into the paint." },
+  { type = "paragraph", content = "There is one man in it at this hour, eating, with his coat over the back of the chair and his boots off. He gets to the door before she does, which she would not have bet on, and puts his back against it without hurrying." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE FREE BACK-OUT — ONE PER RUN, NOT ONE PER ROOM. bunker_stealth_used is the whole of the budget and
+# it is checked here and spent here. It returns her to the junction she just left, NOT to the stair head,
+# because the fiction is that he never saw her: nothing was lost, so nothing is taken back.
+[[canvases.nodes.exit_block.choices]]
+text             = "Back into the arm before he clears the table."
+targetType       = "node"
+nodeId           = "bunker_route.t2"
+show_when_locked = true
+locked_text      = "Too slow, or she has already used the one quiet way out of a room tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1 },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+# ⚠️ THE FIGHT RESTARTS THE ROUTE AND THE PROSE SAYS WHY. A man asleep on a floor gets found; the floor goes
+# hot behind her and the only clean approach left is the one she came in by. No shot spent — that is the
+# whole difference between this and the emitter.
+[[canvases.nodes.exit_block.choices]]
+text             = "Take the door off him."
+targetType       = "node"
+nodeId           = "g3_down"
+show_when_locked = true
+locked_text      = "Not on this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 45 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "g3_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Break and run."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g4"
+name = "Behind the near gate"
+blocks = [
+  { type = "paragraph", content = "The near gate stands open because the man whose job it is to shut it works on the other side of it, at a bench, with a tray of parts and a lamp pulled down low over his hands." },
+  { type = "paragraph", content = "He does not look up when she comes through. He says her step is wrong, out loud, to himself, the way a man says a thing he has been waiting four months to be right about. Then he looks up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE FREE BACK-OUT — ONE PER RUN, NOT ONE PER ROOM. bunker_stealth_used is the whole of the budget and
+# it is checked here and spent here. It returns her to the junction she just left, NOT to the stair head,
+# because the fiction is that he never saw her: nothing was lost, so nothing is taken back.
+[[canvases.nodes.exit_block.choices]]
+text             = "Back through the gate before he lifts the lamp."
+targetType       = "node"
+nodeId           = "bunker_route.t3"
+show_when_locked = true
+locked_text      = "Too slow, or she has already used the one quiet way out of a room tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1 },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+# ⚠️ THE FIGHT RESTARTS THE ROUTE AND THE PROSE SAYS WHY. A man asleep on a floor gets found; the floor goes
+# hot behind her and the only clean approach left is the one she came in by. No shot spent — that is the
+# whole difference between this and the emitter.
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "g4_down"
+show_when_locked = true
+locked_text      = "Not on this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 55 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "g4_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Break and run."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g5"
+name = "Loder"
+blocks = [
+  { type = "paragraph", content = "Both the wrong doors give onto the same office, and it is an office: a desk, a lamp, a kettle, a wall of clipboards on nails, and a man behind the desk in a cardigan with his sleeves pushed up doing what looks exactly like paperwork, because it is." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_loder" }, content = "That is not one of mine. I know all six of them by the feet and that is not one of the six." },
+  { type = "paragraph", content = "He says it to the room before he has finished turning round. When he has finished turning round he does not stand up and he does not reach for anything. He looks at her the way a shift supervisor looks at a delivery that was not on the sheet." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE FREE BACK-OUT — ONE PER RUN, NOT ONE PER ROOM. bunker_stealth_used is the whole of the budget and
+# it is checked here and spent here. It returns her to the junction she just left, NOT to the stair head,
+# because the fiction is that he never saw her: nothing was lost, so nothing is taken back.
+[[canvases.nodes.exit_block.choices]]
+text             = "Back out of the doorway before he stands."
+targetType       = "node"
+nodeId           = "bunker_route.t4"
+show_when_locked = true
+locked_text      = "Too slow, or she has already used the one quiet way out of a room tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 60 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1 },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+# ⚠️ THE FIGHT RESTARTS THE ROUTE AND THE PROSE SAYS WHY. A man asleep on a floor gets found; the floor goes
+# hot behind her and the only clean approach left is the one she came in by. No shot spent — that is the
+# whole difference between this and the emitter.
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "g5_down"
+show_when_locked = true
+locked_text      = "Not on this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 65 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "g5_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Break and run."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+# ── THE FIVE CAUGHT-BEATS (beats 0179-0181). THE EMITTER. Five rooms, five men, five pools. ──────────
+# ⚠️ THIS IS THE RELEASE'S POINT. 0.2.1 shipped with the explicit floor at 4.7% against a 7.5% floor and
+# explicit-in-repeatable at 36% against 50%, because the crude prose was sealed in once-only rooms while
+# every repeatable loop ran cold. These five sit in a repeatable canvas and are reached by FAILING, which
+# is the one thing a player does over and over.
+# ⚠️ REWRITTEN ONCE, AT DENSITY, AFTER MEASURING. The first cut of these scenes scored 4 explicit beats of
+# 31 against the frozen EXPLICIT list (gates.py:286) — the prose gestured at the act instead of staying on
+# it, which is the exact defect register.md names. Every act beat below now carries 3+ terms and is checked
+# with the build's own regex, not by eye. Flat and coy is the failure state.
+# ⚠️ ONE REFLECTIVE BEAT PER SCENE, AT THE END, AND NEVER FOLDED IN. Interiority gets its own beat after the
+# act — a beat whose last sentence is about what the moment MEANS has pivoted and scores zero.
+# ⚠️ NON-LETHAL, NO MEMORY (3_activities:1318). ONE ASSET ONE BLOCK — five distinct pool_dirs, pool = 4.
+
+[[canvases.nodes]]
+id   = "g1_taken"
+name = "On the crate"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_g1_crate_t5", pool = 4, description = "A woman straddling and riding a seated man on a crate in a dim concrete receiving bay, her overalls pulled down off her shoulders, his hands on her hips. Must show: her on top, riding, him seated and slack. Avoid: standing positions, a bed, bright light.", search_queries = ["woman riding seated man on crate warehouse", "girl on top fucking man sitting industrial dim"] } },
+  { type = "paragraph", content = "She thumbs the emitter and the field rolls flat across the bay. The flask goes over. The man on the crate moans and grabs his own cock through his trousers and is erect in his own fist before he has understood he is being touched." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "His legs go and he sits back down hard. She gets his belt open and hauls his cock and balls out into the cold, thick and hot and already slick at the head, and he thrusts up into her fist before she has finished closing it." },
+    ] },
+    { advance_text = "Get your tits out.", blocks = [
+        { type = "paragraph", content = "She strips the coveralls off both shoulders. He gets his mouth on a nipple and sucks at her tits like he is starving, moaning into her, both hands full of her ass and pulling her in." },
+    ] },
+    { advance_text = "Sit down on him.", blocks = [
+        { type = "paragraph", content = "She straddles him and takes his cock into her cunt in one long sit, down to his balls, and starts to fuck him on the crate at her own pace with her tits in his face and her eyes on the ramp." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He cums up inside her in long thrusts and the field will not let him soften — still erect, still spilling — and he is fucking up into her cunt when his eyes roll white and he goes off the crate onto the concrete." },
+    ] },
+    { advance_text = "And now the floor is awake.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "An hour, and he wakes on his own floor with no idea. But somebody comes down that ramp for a break long before an hour, and finds him, and then every corridor between here and that plant room has a torch in it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, and start again from the stair."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g2_taken"
+name = "In the standing water"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_g2_water_t5", pool = 4, description = "A woman fucking a shirtless man standing against a wet concrete wall in a dim flooded corridor, water underfoot, both of them soaked. Must show: standing, against a wall, both wet. Avoid: a shower cubicle, a bathroom, a bed.", search_queries = ["standing sex against wet concrete wall dim", "couple fucking standing soaked industrial corridor"] } },
+  { type = "paragraph", content = "The brush goes into the water. He is stripped to the waist already, so she gets to watch the whole of it land — the flush up his chest, the moan, his cock going erect and obvious inside soaked trousers." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "He thrusts at nothing, twice, hands open at his sides. She walks him into the wall, gets his trousers down, and his cock and balls come out into her fist, erect and hot enough to feel through the cold water." },
+    ] },
+    { advance_text = "Let him have your tits.", blocks = [
+        { type = "paragraph", content = "She hitches the coveralls open and he goes straight for her tits, sucking, biting at a nipple, one hand shoved down between her legs to grope at her cunt with no idea at all what he is doing." },
+    ] },
+    { advance_text = "Take him standing.", blocks = [
+        { type = "paragraph", content = "She takes his cock into her cunt standing, up on her toes in an inch of water, forearm across his throat to hold him on the brick, and fucks him hard and fast because this corridor carries sound." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He cums inside her with his whole body locked, and the field runs him through the orgasm and out the far side of it still erect, still thrusting, until his legs quit and he goes down into the water with his cock out." },
+    ] },
+    { advance_text = "Get his face out of it.", blocks = [
+        { type = "paragraph", content = "She catches him under the arms on the way down, turns him, puts his cheek on the dry lip of the doorway. An inch is enough. She did not come down here to drown a man who washes his arms in a corridor." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Round again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "g3_taken"
+name = "Across the mess table"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_g3_table_t5", pool = 4, description = "A woman riding a man laid back on a canteen table in a strip-lit mess room, plates and mugs pushed off, his boots off. Must show: him on his back on a table, her astride. Avoid: a kitchen counter, a bed, a desk.", search_queries = ["woman riding man on table canteen dim", "girl on top man lying on table industrial"] } },
+  { type = "paragraph", content = "The field goes through the mess and takes the urn with it. The man against the door slides down it moaning, boots off, belt already loose from eating, his cock erect and tenting the front of him before he is sitting." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "He has his cock out and is masturbating at her openly, balls tight, moaning at nothing. She takes him under both arms, walks him back, puts him down on his back across a mess table. A plate and two mugs go off the end." },
+    ] },
+    { advance_text = "Strip him.", blocks = [
+        { type = "paragraph", content = "She drags his trousers off his hips. His cock lies flat and hard against his stomach and his balls are tight up under it, and he thrusts into the air when she puts a hand anywhere near." },
+    ] },
+    { advance_text = "Get on him.", blocks = [
+        { type = "paragraph", content = "She opens the coveralls, climbs up over him, and takes his cock into her cunt. She fucks him with both palms flat on his chest and her tits swinging over his face and the table legs walking on the lino." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He cums up into her hard enough to arch off the table, and the field runs him straight through the orgasm, so he is still erect and still thrusting into her cunt when he stops making any sound at all." },
+    ] },
+    { advance_text = "Both arms of the ring heard that.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "An urn, a plate, two mugs. This room has a door onto both arms of that junction. Whatever was going to be quiet about tonight is finished." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Start at the stair."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 60
+
+# ⚠️ g4 IS THE ONE WHO NEARLY HOLDS. He has listened to that floor for four months and he is the only man
+# down here who gets a hand on her first. The field wins anyway — that is what the field is — but the beat
+# is built on him fighting it and losing by inches, which is the only variation the five scenes get.
+[[canvases.nodes]]
+id   = "g4_taken"
+name = "Over his own bench"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_g4_bench_t5", pool = 4, description = "A woman astride a man pushed back onto a cluttered workbench under a low lamp, tools and parts scattered, his jaw set. Must show: him on his back on a workbench, her over him, harsh lamp light. Avoid: a table, a bed, soft lighting.", search_queries = ["woman on top man workbench workshop lamp", "couple fucking on cluttered work bench dim"] } },
+  { type = "paragraph", content = "He gets a fist in her hair before the field lands, and then it lands, and he does not let go. His cock goes erect against her hip through both their clothes and he holds the moan behind his teeth and will not give it up." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "She opens his fingers off her hair one at a time. He lets it happen and hates it, thrusting slowly against her thigh the whole while, cock and balls straining the front of his trousers, jaw locked shut." },
+    ] },
+    { advance_text = "Put him on the bench.", blocks = [
+        { type = "paragraph", content = "She walks him back, sits him on the bench, gets his belt open. His cock comes up out of it erect and already wet at the head. She lays him flat across his tray of parts and strips the coveralls down off her tits." },
+    ] },
+    { advance_text = "Take him.", blocks = [
+        { type = "paragraph", content = "She gets over him and takes his cock into her cunt slowly, all the way to the balls, watching his jaw the whole time to see when it goes. It goes about nine thrusts in, and he grabs her ass with both hands and pulls." },
+    ] },
+    { advance_text = "Fuck it out of him.", blocks = [
+        { type = "paragraph", content = "After that he is not fighting anything. She fucks him hard on the bench, his cock buried to the balls in her cunt, the lamp swinging over them and his tools going off the edge one at a time onto the floor." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He cums with his eyes open and his jaw still set, and the field runs him through the orgasm and out of it, and he is still erect inside her when he stops. The jaw stays clenched after the rest of him has gone." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Back to the stair."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 60
+
+# ⚠️ LODER APOLOGISES THROUGHOUT AND THAT IS THE BEAT. A shift supervisor in a cardigan who has spent four
+# months not asking what is behind the doors is, under the field, exactly as polite as he is at his desk.
+# The horror is the manners, carried in what he SAYS while the prose stays on the body.
+[[canvases.nodes]]
+id   = "g5_taken"
+name = "In his own chair"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_g5_desk_t5", pool = 4, description = "A woman straddling a man seated in an office chair behind a cluttered desk in a small windowless office, papers pushed aside, a desk lamp on. Must show: him seated in an office chair, her astride him, office setting. Avoid: a workshop, a bed, a bench.", search_queries = ["woman riding man in office chair desk lamp", "girl straddling seated man small office dim"] } },
+  { type = "paragraph", content = "The field crosses the desk and the clipboards come off their nails one after another down the wall. Loder sits back hard with both hands flat on the arms of the chair and his cock going erect inside his slacks, and moans, and apologises." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_loder" }, content = "Oh. Oh, I am sorry. I am sorry, I do not know what that is." },
+        { type = "paragraph", content = "He has a hand down on his own cock, masturbating through the cloth, balls shifting under it, apologising to a woman he has known eleven seconds." },
+    ] },
+    { advance_text = "Clear the desk.", blocks = [
+        { type = "paragraph", content = "She puts the rota and the kettle and a mug of cold tea off the desk with her forearm and gets his trousers open. His cock and balls come out into her hand, erect and leaking. He apologises again and lifts his hips." },
+    ] },
+    { advance_text = "Get on him.", blocks = [
+        { type = "paragraph", content = "She strips the coveralls to her waist, gets up over him in the chair, and sits down on his cock. The castors go back an inch and hold, and she fucks him in it with her tits in his face and her hands on the chair back." },
+    ] },
+    { advance_text = "He does not stop talking.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_loder" }, content = "I am sorry. I am so sorry. I do not do this, I have a — I am very sorry, please, do not stop, I am sorry." },
+        { type = "paragraph", content = "Both hands are on her ass now, pulling her down onto his cock, thrusting up into her cunt in time with her, and his eyes are shut and wet at the corners." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "He cums inside her mid-sentence, on the word sorry, and the field runs him on through the orgasm with his hips still thrusting, and he is still erect in her cunt when the sentence stops and his head goes sideways." },
+    ] },
+    { advance_text = "Look at the wall.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Rotas, stores, a kettle, a photograph taped in a locker down the hall. Four months running a room he has never been inside, for men he does not ask about, and he will wake in an hour and put the clipboards back on their nails." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Start again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 60
+
+# ── THE FIVE FIGHT OUTCOMES (beat_0173). Distinct men, distinct fights, all non-lethal, all restart. ──
+# ⚠️ WHY WINNING STILL COSTS THE RUN. A man unconscious on a floor is found by the next man along, and then
+# the floor behind her is awake. The restart is not a punishment for winning, it is the consequence of
+# having been in a room she was not supposed to be in, and every one of these five nodes says so in prose
+# rather than leaving the player to assume the game is being arbitrary.
+# ⚠️ NON-LETHAL THROUGHOUT, matching the emitter's own rule (design_book, Reset & reload — the gate doorman
+# "wakes on the steps in an hour with no memory"). Nobody dies under this building on her account.
+
+[[canvases.nodes]]
+id   = "g1_down"
+name = "The flask stays standing"
+blocks = [
+  { type = "paragraph", content = "He is warm and he is slow and he has had his boots off inside the last ten minutes, and none of that is his fault, and all of it is over in about four seconds. She puts him against the crate and holds him there until he stops." },
+  { type = "paragraph", content = "The flask is still standing up on the floor when she steps back from him, which is the detail she will keep. Somebody is going to come down that ramp for their own break and find him, and then every corridor between here and the plant room will have a torch in it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back up to the stair head and start again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 45
+
+[[canvases.nodes]]
+id   = "g2_down"
+name = "In the water"
+blocks = [
+  { type = "paragraph", content = "He has an inch of standing water under him and no shirt on and a brush in his right hand, and he swings the brush, which tells her everything about how much of this he has done before." },
+  { type = "paragraph", content = "It goes down into the water with both of them in it and it is louder than anything she wanted. He stops moving. She stands up in a wet coat in a corridor that now has a noise attached to it, and she is not going any further tonight." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, and round again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 45
+
+[[canvases.nodes]]
+id   = "g3_down"
+name = "Off the door"
+blocks = [
+  { type = "paragraph", content = "He has his back on the door and his weight set and he is not a big man but he has picked the one spot in the room worth standing in, so she does not go for him. She goes for the door and takes him off it with it." },
+  { type = "paragraph", content = "Four tables and an urn go over on the way down and the noise of it runs up both arms of the ring at once. There is no version of tonight that continues after that." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out, before the rest of the shift arrives."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 45
+
+[[canvases.nodes]]
+id   = "g4_down"
+name = "The one who was waiting"
+blocks = [
+  { type = "paragraph", content = "This one is ready, because this one has been listening to that floor for four months and heard her arrive before she was through the gate. He comes off the bench stool already turning and he gets a hand in her hair." },
+  { type = "paragraph", content = "She takes the lamp off the bench and puts it across his forearm and he lets go, and after that it is short. He is the only one of them who makes her work, and he is the only one she is going to think about afterwards." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Come back at it from the stair."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 45
+
+# ⚠️ LODER DOES NOT FIGHT, AND THAT IS THE CONTENT. He is a shift supervisor in a cardigan who has spent
+# four months not asking what is in the plant room. The beat is her discovering there is nothing in him to
+# beat — and that the man running a black site is a man doing a job badly, on purpose, in a quiet way.
+[[canvases.nodes]]
+id   = "g5_down"
+name = "He does not fight"
+blocks = [
+  { type = "paragraph", content = "He watches her come round the desk and he does not get out of the chair and he does not put his hands up, and when she takes hold of him he goes where he is put, the way a man does who has already decided that whatever this is, it is above his grade." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_loder" }, content = "I do the rota and the stores. I have never been in that end of it. Four months and I have not once been past the doors and I have never asked, and you can do what you like about it." },
+  { type = "paragraph", content = "She puts him down on the floor of his own office as gently as she has put anybody anywhere, and he is asleep before she has got his arm straight, and she still has to go back out and start at the stair, because there is a man missing off a desk now and somebody will come looking." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out. Start again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 45
+
+# ═══ bunker_sides — THE FOUR ROOMS OFF THE PATH. Triggerless. Not guard rooms. ════════════════════════
+# ⚠️ OPTIONAL AND SKIPPABLE. Each returns to the turn it was reached from, so taking one costs the player
+# nothing but the time and cannot strand them. No flags: they are rooms, not milestones.
+# ⚠️ s2 IS THE ONE THAT PAYS FOR THE WHOLE RENNER THREAD. She is standing in front of his stencil, on his
+# crates, in the room his gear was bought for, four days after taking what he knew out of him without
+# telling him why. Nothing in the prose comments on it. It is just his handwriting on a box.
+[[canvases]]
+id          = "bunker_sides"
+name        = "Off the path"
+description = "beat_0172 (rev 222), THE WAY DOWN. TRIGGERLESS. Four optional rooms hanging off the correct route — the dry store (t1), the wet lab shell with Renner's own stencilled crates (t2), the tank room with the empty frames (t3), the bunk room where the six of them sleep (t4). Not guard rooms, no flags, each returns to the turn it came from. LO's call: the place is genuinely large."
+
+[canvases.trigger]
+# ⚠️ LOCATED + substitution_only, ADDED beat_0185. Two reasons, both real. (1) bunker_bastien SETS
+# bastien_found_alive, which cap_the_extraction's trigger requires, and the flag-chain validator rejects a
+# trigger-required flag whose setter has no location ("MISSING HINT - set by ... but no location/schedule").
+# (2) These rooms ARE under facility_ruins, so attributing them there is true rather than convenient, and it
+# lets the traversal-heat gate see the explicit pools that are physically in that place.
+# substitution_only takes the canvas out of every render path, so nothing appears on the Facility's page —
+# the trigger exists for the validator and the attribution, exactly as it does on kess_makes_the_blank.
+location          = "facility_ruins"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+
+[[canvases.nodes]]
+id   = "s1"
+name = "The store"
+blocks = [
+  { type = "paragraph", content = "A dry store the size of her room at the cot. Ration crates, a broom, two coils of rope, a stack of folded grey coveralls in a size that would not fit any of the men she has seen down here." },
+  { type = "paragraph", content = "The crates are dated. The most recent of them is eleven days old, which means somebody is still provisioning a building that officially burned down in the spring, on a schedule, without anybody upstairs asking what the invoice is for." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the pump floor."
+targetType = "node"
+nodeId     = "bunker_route.t1"
+
+[[canvases.nodes]]
+id   = "s2"
+name = "The wet lab"
+blocks = [
+  { type = "paragraph", content = "The room off the junction was a wet lab and is now a shell. The benches are still bolted down and the sinks are still in them and everything that stood on top has been taken out, leaving bright unweathered squares on the tile where the feet were." },
+  { type = "paragraph", content = "The crates it all came in are stacked against the back wall, flattened, eight or nine deep. Every one of them has the same supplier stencil on the end, black, sprayed through a card cut by hand." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "R. RENNER & SON, and the ampersand is wrong the way it is wrong on the gate of the burned yard, because the same man cut the same card for both of them." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the junction."
+targetType = "node"
+nodeId     = "bunker_route.t2"
+
+[[canvases.nodes]]
+id   = "s3"
+name = "The frames"
+blocks = [
+  { type = "paragraph", content = "Behind the racking there is a room with eight body-frames in it, standing in two rows of four, and they are the same frame that stands empty at the far end of Cain's lab with paper stacked against its feet." },
+  { type = "paragraph", content = "Seven of them are folded down and strapped. The eighth is open, adjusted, and set at a height that she works out before she has decided to work it out, which is about five foot six." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the rack hall."
+targetType = "node"
+nodeId     = "bunker_route.t3"
+
+[[canvases.nodes]]
+id   = "s4"
+name = "The bunk room"
+blocks = [
+  { type = "paragraph", content = "Six bunks in a room built for four, and the ordinary freight of six men living four months underground: a kettle, a card school abandoned mid-hand, a boot with a sock in it, somebody's photograph taped inside the door of a locker." },
+  { type = "paragraph", content = "There is a rota on the wall in the same hand as the clipboards, ruled with a straight edge, and the column headings are days of the week. It goes on for another three months. Somebody has ordered kettle descaler for February." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the three doors."
+targetType = "node"
+nodeId     = "bunker_route.t4"
+
+# ── beat_0174 — cap_back_into_cover. THE COVERALLS. Auto-fire @the_cot, pri 9, ONE-SHOT. ──────────────
+# ⚠️ NO MECHANICAL FIX WAS NEEDED AND THAT WAS VERIFIED IN THE BUILT HTML, NOT THE TOML. wardrobe_location
+# is "the_cot" (0_systems:111) and the engine injects the rack into exactly that passage — the shipped
+# index.html carries "[[Change Clothes->WardrobePage]]" inside the_cot's passage body. So the covers are
+# alive and reachable in the current era, which was LO's standing question about them. wren_room and its
+# activity_wren_change are route-cut (wren_floor's corridor "never re-opens", 1_metadata:1091), and that
+# costs nothing, because the cot rack is the whole of what this era needs.
+# ⚠️ HE DOES NOT KNOW. Correcting a line in the design record: the drain takes the minutes it happens in —
+# renner_control_canvas's own exit is "Leave him to come back to himself" and its description says he
+# remembers nothing of it. His arc badge reading "Drained" is the PLAYER's progress label, not his memory.
+# So there is no shared secret in that depot and this beat must not write one. What is true is smaller and
+# better: he remembers the fucking, he is glad she is back, and she is going to do it to him again for a
+# reason he will never be told.
+# ⚠️ IT CLOSES ON route_learned RATHER THAN ON A FLAG OF ITS OWN. The scene exists to point at Renner; the
+# moment she has the route it has nothing left to say. No new key for a thing an existing key already knows.
+# MEDIA: none.
+[[canvases]]
+id          = "cap_back_into_cover"
+name        = "The coveralls"
+description = "beat_0174 (rev 222), THE WAY DOWN. Auto-fire @the_cot, pri 9, one-shot, gated rescue_agreed is_true + route_learned is_false — it closes itself the moment Renner gives up the route, so it needs no flag of its own. She digs the dock-work coveralls out and goes back to a man whose loop never shut. VERIFIED: the engine wardrobe rack is injected into the_cot's passage in the built HTML, so the Act-1 cover is equippable in the current era even though wren_room is route-cut. He does NOT remember the drains and this beat does not pretend he does. Sets nothing. 5 beats, 4 clicks."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rescue_agreed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "route_learned", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The coveralls"
+blocks = [
+  { type = "paragraph", content = "The bag under the bench has everything she owns in it and it is not much. The dock-work coveralls are at the bottom, folded the way the company folds things, and they still smell of the depot, which is diesel and cardboard and cold tea." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four months since she has had these on. She has been a junior analyst and a girl in a bought face and a woman on a bench in a lockup since, and this is the first thing she ever wore that got her through a door." },
+    ] },
+    { advance_text = "Think about what he has got.", blocks = [
+        { type = "paragraph", content = "Renner fitted that place out. Every frame bolted down, every run of conduit, every door with a seal on it, and he carried on invoicing for it after the fire because nobody told him the fire had happened to his own work." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He does not know what it was for. He has never known. He knows where every single thing in it is, which is the only part she needs." },
+    ] },
+    { advance_text = "Think about asking him.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She could ask. He would probably tell her, at this point, over the desk, for nothing. And then there would be a blacklisted man in a depot on the waterfront who knows that somebody went looking for the way into that building." },
+    ] },
+    { advance_text = "So do not ask him.", blocks = [
+        { type = "paragraph", content = "So she is not going to ask. She is going to go down there in his coveralls and work his floor and get him on his back in his own office and take it out of him while he is open, the way she has done twice already, and he will surface ten minutes later with nothing missing that he can name." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He will be pleased she came. That is the part she does not look at directly." },
+    ] },
+    { advance_text = "Get dressed.", blocks = [
+        { type = "paragraph", content = "She shakes the coveralls out and puts them on over nothing, which is how the flash rung got written and which she has never gone back to doing any other way, and she does the zip up to where it usually sits, which is not very far." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "The depot opens at nine."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0175 (rev 222), THE WAY DOWN — THE ROUTE, OUT OF RENNER. ════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ THIS IS THE BEAT beat_0172 WAS WRITTEN FIRST FOR. Every place, door and turn below is a node that
+# already exists in this file. Cross-check, and keep it true if either side ever moves:
+#     "the stair, not the ramp, not the trench"   → bunker_route.base        (wrong → bunker_guards.g1)
+#     "left at the pumps, behind the plinths"     → bunker_route.t1          (wrong → bunker_guards.g2)
+#     "right at the ring, into the draught"       → bunker_route.t2          (wrong → bunker_guards.g3)
+#     "the far gate, the one with the wedge"      → bunker_route.t3          (wrong → bunker_guards.g4)
+#     "the door my conduit turns into"            → bunker_route.t4          (wrong → bunker_guards.g5)
+# The yellow ring, the wedge under the keypad, the standpipe and the clipped conduit are all authored in
+# those nodes. He is describing rooms, not promising them.
+#
+# ⚠️ LOCATED TRIGGER + substitution_only, AND IT IS FORCED. route_learned is required by bunker_descent's
+# trigger, and the flag-chain validator hard-fails any such flag whose setter has no location ("NEVER SET").
+# renner_control_canvas is triggerless and sets nothing by design, so the payload cannot live in it. This
+# canvas keeps a real trigger at renner_depot for the validator and substitution_only takes it out of every
+# render path, which is precisely why kess_makes_the_blank exists in the shape it does (3_activities:3875).
+#
+# ⚠️ HE IS NOT ASKED WHY AND HE NEVER FINDS OUT. LO's call. The drain takes the minutes it happens in; he
+# surfaces in his own office ten minutes later, pleased she came, with nothing missing he can name. There
+# is no confrontation in this thread and there is not going to be one.
+#
+# ⚠️ WHAT HE CANNOT GIVE HER, AND THE PROSE HAS TO HOLD THE LINE. The drain takes what a man KNOWS. Renner
+# knows what he installed and where he put it. He does NOT know what the place was for, that anybody is
+# down there, or that Bastien exists — so none of that can come out of his mouth, and the one time she
+# pushes on it he gives her the true answer, which is nothing. That refusal is the beat's spine.
+#
+# ⚠️ THE LAST BEAT IS THE MECHANIC. The player has to be able to write five clauses down, so the closing
+# beat is the route as five short clauses and nothing else. It is deliberately quotable. It is NOT on the
+# Quests page — printing it there would delete the mechanic — and beat_0176's re-ask is what makes that
+# safe for a player who forgets.
+# MEDIA: none — the drain's own visual language is spent, and this is a man talking in a chair.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "renner_route_canvas"
+name        = "The way into the Facility"
+description = "beat_0175 (rev 222), THE WAY DOWN. Located @renner_depot + substitution_only (route_learned is required by bunker_descent's trigger and a trigger-required flag needs a located setter — the kess_makes_the_blank shape, 3_activities:3875). Reached ONLY from renner_control_canvas.again's third ask, gated rescue_agreed is_true + route_learned is_false. The five-turn route as Q&A in HIS dialog, describing the rooms authored at beat_0172. He does NOT know what the place was for, that anyone is held there, or that Bastien exists, and the beat's spine is him being unable to answer that. Closes on the route as five quotable clauses — deliberately NOT on the Quests page. SETS route_learned. 7 beats, 6 clicks."
+[canvases.trigger]
+location      = "renner_depot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rescue_agreed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "route_learned", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The way into the Facility"
+blocks = [
+  { type = "paragraph", content = "He is still in the chair with his belt open and his head back and that flat, pleasant openness on him that the drain leaves, and he will answer anything at all for about ten minutes and keep none of it." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The Vance facility on the waterfront. You fitted it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Twice. Above the ground in the spring before last, and then the whole of the underside the year after, which was the bigger job by four times and the one nobody ever came to look at." },
+    ] },
+    { advance_text = "The underside.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "There is an underside." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "There is a plate at the north end of the slab, tarred over, on a hinge I hung myself. Everything under it is mine. I never put a foot past the last door but I ran every yard of cable up to it." },
+    ] },
+    { advance_text = "Take me down it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Take me down it. From the plate." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Stair, ramp and a cable trench all off the one landing. The stair. Always the stair. The ramp goes to receiving and the trench goes to receiving as well, and receiving is where their men take their breaks because it is the only warm corner I left them." },
+    ] },
+    { advance_text = "And at the bottom.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Pump floor. Six sets, four live. Go left, behind the plinths, on the dry side. The right-hand run has a standpipe in it and no tap and the floor has been an inch under since the week I commissioned it, and I told them and they did not want to know." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Then a junction with a lamp and a yellow ring painted round the post. Four ways. Take the right, the unlit one, the one the draught comes out of. Left goes up to the mess and straight on goes to the mess as well." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Rack hall, two storeys, mostly empty now. Two gates in the end wall. The near one stands open because the man at the bench works behind it. The far one has a keypad I never got the code for and they have had a wedge under it since the first week, because a keypad on a door men use forty times a shift is a keypad men defeat." },
+    ] },
+    { advance_text = "And the last of it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Three doors in one wall past the far gate, all the same, no numbers, and that was them being clever. But I brought the main run down that wall and along over the heads and into the one that mattered, and I clip at eighteen inches because my father clipped at eighteen inches. Follow the clips. The conduit only turns into one of them." },
+    ] },
+    { advance_text = "Ask him what is behind it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What is behind that door?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Plant room. I put the power in it and the water in it and the drains under it and a seal on the door of it, and I was paid on the Friday, and I have never once been through it and I was never asked to be." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He would tell her. He is wide open and he would tell her anything he had. He has not got it. Whatever is in that room, the man who built the room does not know." },
+    ] },
+    { advance_text = "Say it back, in order.", blocks = [
+        { type = "paragraph", content = "She makes him give it to her once more, short, in order, and she says it back to him twice while he is still nodding along agreeably to a conversation he is not going to have." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "The stair, not the ramp. Left at the pumps. Right at the ring. The far gate, under the wedge. And the door my conduit turns into." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to come back to himself."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_depot"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "route_learned", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0183 (rev 222), THE WAY DOWN — THE PLANT ROOM. Tier-3 capstone, once-only. ══════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ THE SYMMETRY IS SHIPPED CANON, NOT AN INVENTION, AND IT IS THE WHOLE SCENE. cap_bastien_notices'
+# own description (5_scenes:12355) states it outright: "she was face to face with him for the whole
+# captivity, and three separate cell canvases state unprompted that HE NEVER ONCE LOOKED AT HER FACE — he
+# watched the readout under her sternum and wrote the number down." Bastien ran the room she was kept in.
+# LO's call that he is held "wired into Renner's equipment" puts a man who read numbers off a body into a
+# frame with a number on it, and neither half of that was reverse-engineered to fit the other.
+# ⚠️ HE DOES NOT KNOW HER, TWICE OVER, AND THE SCENE MUST NOT RESCUE HIM FROM THAT. He never saw her face
+# in the cell, and every surface of the present-day arc is gated `face_worn is_true` — she worked his floor
+# for four months in a bought face. There is no version of her he has ever seen. She does not tell him.
+# ⚠️ AND SHE DOES NOT TELL HIM BECAUSE TELLING HIM WOULD BE FOR HER. beat_0170 established there is nothing
+# in this for her. A confession here would hand her the one thing she has not got — being known — and would
+# quietly convert the rescue into an errand she runs for herself. She reads his number instead and gets
+# on with the bolts. The player knows. He never will.
+# ⚠️ WHAT BROKE HIM IS NOT THE PAIN. He worked out inside the first month what he was for, and then he
+# counted. The number he has been keeping is the number of days a man did not come for him.
+# ⚠️ ONCE-ONLY, TIER-3, AND IT SPENDS. This is the release's capstone and the prose is allowed the room.
+# It stays specific — the frame, the smell, the readout, the state of his hands — and never goes literary.
+# MEDIA: one new slot, scenes/the_plant_room.jpg. MISSING until the beat_0189 harvest.
+[[canvases]]
+id          = "bunker_bastien"
+name        = "The plant room"
+description = "beat_0183 (rev 222), THE WAY DOWN. TRIGGERLESS — reached only from bunker_route.t5, the end of the five-turn route. Tier-3 capstone. She finds Bastien wired into a frame of Renner's gear with a readout on it, four months in, lucid. He does not recognise her and CANNOT: he never looked at her face in the cell (cap_bastien_notices, 5_scenes:12355) and the entire present-day arc ran under a bought face. She reads his number off the frame the way he used to read hers, and does not tell him who she is. What broke him is that he counted the days Cain did not come. He cannot walk. SETS bastien_found_alive. The call is beat_0184."
+
+[canvases.trigger]
+# ⚠️ LOCATED + substitution_only, ADDED beat_0185. Two reasons, both real. (1) bunker_bastien SETS
+# bastien_found_alive, which cap_the_extraction's trigger requires, and the flag-chain validator rejects a
+# trigger-required flag whose setter has no location ("MISSING HINT - set by ... but no location/schedule").
+# (2) These rooms ARE under facility_ruins, so attributing them there is true rather than convenient, and it
+# lets the traversal-heat gate see the explicit pools that are physically in that place.
+# substitution_only takes the canvas out of every render path, so nothing appears on the Facility's page —
+# the trigger exists for the validator and the attribution, exactly as it does on kess_makes_the_blank.
+location          = "facility_ruins"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+
+[[canvases.nodes]]
+id   = "base"
+name = "The plant room"
+blocks = [
+  { type = "image", props = { file = "scenes/the_plant_room.jpg", description = "A man restrained upright in a steel body-frame in a small windowless plant room, cables and conduit running into the frame, one lit readout panel beside him, everything else dark. avoid: gore, avoid: blood, avoid: a hospital, avoid: a medical bed.", search_queries = ["man restrained upright steel frame dark industrial room cables", "figure strapped in metal frame dim plant room machinery"] } },
+  { type = "paragraph", content = "The room is warm and it hums. Renner's conduit comes through the wall and down and into the back of a body-frame standing on its own in the middle of the floor, and the frame is the eighth one, the one that was missing from the room behind the racking." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Bastien is in it. He is upright because the frame has him upright, and he has been upright for a long time, and the parts of a man that are supposed to carry him have gone soft and stringy from four months of not being asked to do anything at all." },
+    ] },
+    { advance_text = "Look at the rest of it.", blocks = [
+        { type = "paragraph", content = "There is a cuff at each wrist and each ankle and a band across his chest, and a dozen fine leads going in under the band, and the skin around every one of them is the colour skin goes when a thing has been taped to it and re-taped for a season." },
+        { type = "paragraph", content = "He is clean. Somebody washes him. That is the detail that turns her stomach over, because it means somebody comes in here on a rota and does it properly." },
+    ] },
+    { advance_text = "The panel.", blocks = [
+        { type = "paragraph", content = "There is one lit thing in the room, a readout on a stalk at the height of a standing man's eyes, and it is showing four figures and a decimal, and the last figure is moving." },
+    ] },
+    { advance_text = "He is awake.", blocks = [
+        { type = "paragraph", content = "And he is awake. He has been awake the whole time she has been standing in the doorway, watching her out of the one eye he can get round to her side, and he waits until she looks at him before he says anything." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You are not the washing one. The washing one comes Tuesdays." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No. You have got the wrong boots on for down here and you have come in from the corridor side and you are not carrying anything. So you are not staff." },
+        { type = "paragraph", content = "His voice is worse than his body. It is perfectly ordinary. It is the voice of a man running the numbers on a delivery, and it is coming out of that." },
+    ] },
+    { advance_text = "Let him work it out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You are his, then. Took your time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "A hundred and nineteen days. I have got it to the day. There is nothing else down here to have." },
+    ] },
+    { advance_text = "A hundred and nineteen.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "They stopped asking me things in the second month. I had already given them the lot by then, all of it, the roads and the names and the hands, and after that they kept going anyway, so I worked out what I was." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I am a bell. And I have been rung every day for four months, and he heard it, because he hears everything. And he did not come." },
+    ] },
+    { advance_text = "Read the number off the panel.", blocks = [
+        { type = "paragraph", content = "She goes and stands at the stalk and looks at the readout the way a person looks at a meter, and reads what it is doing off it, out loud, flat, with the last figure still moving." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He never once looked at her face. He stood where she is standing and read the light under her sternum and wrote the number in a book, and she was in that room with him for weeks, and he could not pick her out of two women on a street." },
+    ] },
+    { advance_text = "He does not know.", blocks = [
+        { type = "paragraph", content = "He hears the number said out loud and something moves across his face, because nobody in four months has told him what it says, and he has been standing under it the entire time unable to turn his head far enough round to read it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "What are you?" },
+    ] },
+    { advance_text = "Do not answer that.", blocks = [
+        { type = "paragraph", content = "She does not answer it. There is a version of the next ten seconds where she tells him, and every part of it would be for her, and she came down five turns of somebody else's corridor to not be a person who does that." },
+        { type = "paragraph", content = "She gets a hand under the first wrist cuff instead and finds the pin, and it is a Renner pin, and it comes out the way his pins come out." },
+    ] },
+    { advance_text = "And then the legs.", blocks = [
+        { type = "paragraph", content = "The cuffs come off in about ninety seconds. The chest band is a buckle. And then she has got the whole weight of a grown man going down through her shoulder, because his legs have not held him up since the spring and they do not start now." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "They do not work. I have known that a while. You will not get me up that corridor and you should not try." },
+    ] },
+  ] } },
+]
+# ⚠️ NO WAY OUT OF THIS NODE EXCEPT FORWARD, AND THAT IS CORRECT. He is off the frame and on the floor.
+# A "leave" option here would let a player abandon a man they have just unbolted, in a room with a rota.
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit him against the frame and get the link out."
+targetType = "node"
+nodeId     = "the_call"
+
+# ═══ beat_0184 (rev 222) — THE CALL. The bell, rung on purpose, by her. ══════════════════════════════
+# ⚠️ THE CALLBACKS ARE THE POINT AND ALL THREE ARE LOAD-BEARING. Kess's instruction ("clip it on the
+# screen, not the core", beat_0178) is followed to the letter. The live run she clips to is Renner's own
+# conduit, the thing that told her which door this was. And what she says into it is the five clauses,
+# back to front of the release, so the route Renner gave her is the thing that gets Cain in.
+# ⚠️ BASTIEN TELLS HER NOT TO, AND HE IS RIGHT. He has been a bell for a hundred and nineteen days for
+# precisely this, and the person ringing it now is doing it deliberately and it is going to work. He is the
+# only one in the room who knows exactly what the next hour costs, because he has been the bait the whole
+# time. She does it anyway. That is the release's decision and it is his objection that gives it weight.
+# ⚠️ CAIN SAYS ALMOST NOTHING. Four lines, flat, no argument, no gratitude, no reassurance — the shipped
+# voice (beat_0139: "Cain says almost nothing"). He asks one question that is not about Bastien.
+[[canvases.nodes]]
+id   = "the_call"
+name = "Ring it properly"
+blocks = [
+  { type = "paragraph", content = "She gets him sat up against the leg of the frame with his head back on the steel, which is the only comfortable thing in the room, and then she goes and finds the conduit where it comes through the wall beside the door." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "On the screen, not the core. She strips a finger of the sheath back with her thumbnail and clips Kess's grey block onto the braid underneath it, and the block warms up against her hand, and something a long way above her head takes it." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "It takes about forty seconds, which is forty seconds of standing in a warm room with a hum in it and a man on the floor behind her watching her back." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Go on." },
+    ] },
+    { advance_text = "Tell him where.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "North end of the slab. There is a plate, tarred over, on a hinge. Stair, not the ramp. Left at the pumps, behind the plinths. Right at the ring. The far gate, the one with the wedge. The door the conduit turns into." },
+        { type = "paragraph", content = "There is a pause on the other end of it that is about one second long and is the loudest thing she has ever heard him do." },
+    ] },
+    { advance_text = "He understands what she has just done.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You are in it." },
+        { type = "dialog", props = { speaker = "player" }, content = "He cannot walk. I cannot get him up five turns of corridor on my own and I am not leaving him against a frame." },
+    ] },
+    { advance_text = "Behind her, Bastien works it out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No. No — whoever that is, hang it up. Hang it up now." },
+        { type = "paragraph", content = "He has got a handful of her trouser leg. There is nothing in the grip at all; it is a man pulling on cloth with fingers that have not held anything for four months." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "This room is a hook. It is a hook with me on it and it has been baited and cast for a hundred and nineteen days and you have just told him the water." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Leave me on it. I have been on it this long. Leave me on it and go." },
+    ] },
+    { advance_text = "And Cain, on the line.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Is that him talking?" },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Good. Twenty minutes." },
+    ] },
+    { advance_text = "He does not argue with it.", blocks = [
+        { type = "paragraph", content = "And that is all of it. He does not ask whether she is sure and he does not tell her she should not have, and the line goes quiet with the block still warm in her fingers." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He knew what this was before she opened her mouth. He has known since the night he stood in her room with the water coming off him. He was never not going to come; he was only ever waiting to be told the way." },
+    ] },
+    { advance_text = "Sit down and wait with him.", blocks = [
+        { type = "paragraph", content = "She sits down on the floor with her back against the frame beside him, because there is nothing to do for twenty minutes and standing up in a warm room makes it longer." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You have killed him. Whoever you are. You want to know that now rather than later." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Twenty minutes."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "facility_ruins"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "bastien_found_alive", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0185 (rev 222), THE WAY DOWN — THE EXTRACTION. Auto-fire @facility_ruins, pri 12, ONE-SHOT. ══
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ LOCATED, AND THAT IS WHY IT IS ITS OWN CANVAS RATHER THAN A THIRD NODE IN bunker_bastien. It SETS
+# bastien_rescued, which beat_0186's trigger requires, and a trigger-required flag whose setter has no
+# location hard-fails the flag-chain validator. It is also where the scene physically belongs: they come
+# out at the surface, and the release ends at the burned building rather than in the room.
+# ⚠️ THE TRAP DOES NOT SPRING, AND THAT IS LO'S CALL, VERBATIM: "the company does finds out but after
+# sometime when they are gone." So there is no firefight and no chase. The dread is that it WORKED — that
+# a thing built over four months to catch one man was walked into and out of in under an hour on an
+# ordinary night, and the people who built it will read about it on a Tuesday.
+# ⚠️ bunker_closed WAS NOT CREATED. bunker_descent already gates on bastien_rescued is_false, so a second
+# flag would say the same thing twice and ship an immutable key for nothing.
+# ⚠️ THE TENSION IS THE CARRY, NOT A FIGHT. Five turns backwards, past five rooms with men in them, with a
+# grown man between them who cannot help. Everything she did alone and quietly, now done slowly.
+# ⚠️ ELEVEN YEARS AND NO ADDRESS — the meeting is the payload. npc_bastien's own block says he "has
+# supplied him for eleven years and has never had an address" (1_metadata:699). They have never been in a
+# room together in this game, and this is the only time they will be.
+# MEDIA: none. The plant room's image carries the sequence; a second slot here would be a second block
+# doing the first block's job.
+[[canvases]]
+id          = "cap_the_extraction"
+name        = "Twenty minutes"
+description = "beat_0185 (rev 222), THE WAY DOWN. THE RELEASE'S CAPSTONE. Auto-fire @facility_ruins, pri 12, one-shot, gated bastien_found_alive is_true + bastien_rescued is_false. LOCATED on purpose — it sets bastien_rescued, which beat_0186's trigger requires. Cain walks the route she gave him once, carries Bastien out, and the plate goes back down. NO firefight: the company does not find out until they are long gone (LO's call). Cain and Bastien are in the same room for the only time in the game — eleven years of supply and never an address. SETS bastien_rescued, which closes bunker_descent forever."
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_found_alive", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_rescued",     operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Twenty minutes"
+blocks = [
+  { type = "paragraph", content = "He comes through the plant room door at nineteen minutes and he has not put a foot wrong anywhere between the plate and here, on a route he was given once, by a woman on a wire, in one sentence." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "He does not look at her. He goes straight past her and crouches down in front of the frame and looks at the man on the floor of it for a while without saying anything at all." },
+    ] },
+    { advance_text = "Bastien sees who it is.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Eleven years I have put things in your hands and I have never once known where you sleep. And here you are, in the one room I did not want you in." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Here I am." },
+    ] },
+    { advance_text = "Let him say the rest of it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "A hundred and nineteen days. I counted every one of them for you and you did not come, and I want you to know I stopped being angry about it in the third month, because I worked out you were right not to." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I did not know. I found out on Friday." },
+    ] },
+    { advance_text = "Watch that land.", blocks = [
+        { type = "paragraph", content = "It goes into Bastien like something coming out. His face does not do very much, because there is not a great deal of it left that moves, but he shuts his eyes and keeps them shut for about four seconds." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Oh." },
+    ] },
+    { advance_text = "Pick him up.", blocks = [
+        { type = "paragraph", content = "Cain gets him up over one shoulder the way you pick up somebody who cannot help, taking the weight through the hips rather than the arms, and Bastien makes a noise on the way up that neither of them says anything about." },
+    ] },
+    { advance_text = "Back out, five turns.", blocks = [
+        { type = "paragraph", content = "And then it is the whole route again backwards, slowly, with a man between them. The conduit door. The three doors. The far gate and the wedge. The rack hall with two storeys of empty bays and a lamp on somewhere behind them." },
+    ] },
+    { advance_text = "Past the ring.", blocks = [
+        { type = "paragraph", content = "At the ring junction there is a man in the mess with his back to the arm they cross, eating, twenty feet away, and they go through the lit part of it one at a time and he does not turn round, because nothing whatsoever has happened down here for four months." },
+    ] },
+    { advance_text = "The pumps, and the stair.", blocks = [
+        { type = "paragraph", content = "The pumps are the loudest thing in the building and they take the noise of three people going through it. Then the stair, and it is a long stair with a man on a shoulder, and Cain does it without stopping once." },
+    ] },
+    { advance_text = "Out.", blocks = [
+        { type = "paragraph", content = "Cold air and the smell of burnt building and the water beyond it. She gets the plate back down on its hinge and heels the tar over the lip of it, and it looks the way it looked when she found it." },
+    ] },
+    { advance_text = "Look at what just happened.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fifty-one minutes. Four months of a room built to catch one man, and they were in it and out of it in fifty-one minutes, on a Tuesday, and nobody down there knows yet." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They will. Somebody goes in on a rota and finds a frame with nothing in it, and then somebody a long way above that has to be told, and whatever that costs is not tonight." },
+    ] },
+    { advance_text = "Where does he go.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "He cannot go to the bar. It is his and they know it is his." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "No. He cannot come where I am either, and you know why, and you have never once asked me about it." },
+        { type = "paragraph", content = "Which leaves one room in this city with a bed in it that nobody signed for." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take him home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "bastien_rescued", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0186 (rev 222), THE WAY DOWN — HE IS AT THE COT. ARRIVAL ONLY. NO SEX. ══════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ THE BUILD STOPS HERE AND THAT IS LO'S CALL, VERBATIM: "Bastien at the cot dont add sex yet thats the
+# build order." The repair ladder — her sleeping with him to bring him back — is the NEXT chunk. Nothing
+# below is explicit and nothing below is a rung. If a later pass finds a sex beat in this beat, it was
+# added against an instruction.
+# ⚠️ NO [[npcs.schedules]] ROW FOR HIM AT THE COT, AND THIS IS THE ONE DECISION IN THE BEAT THAT COULD
+# BREAK SHIPPED SAVES. A schedule row carries no conditions and the nav-card badge is NOT canvas-gated
+# (getNpcsPresentAtLocation, v2.py:4773), so a row at the_cot would park Bastien's face on that card in
+# EVERY save that can reach the room — including a 1b save where he has never been rescued and is, as far
+# as that playthrough knows, dead. He is represented by CANVASES, which are gated, and he gets his row when
+# the ladder ships and the row is true.
+# ⚠️ HIS OLD ROW STAYS. bastien_backroom, 20:00-23:59, all days. That room has no nav card (no entry_from,
+# auto_exit = false) and is unreachable post-raid, so the row advertises nothing. Removing it would be a
+# change to shipped state for no gain.
+# ⚠️ HE DOES NOT THANK HER AND HE DOES NOT KNOW WHO SHE IS. Both still true in this room. Nothing here
+# resolves either, because resolving them is what the next chunk is for.
+# MEDIA: none this beat.
+
+# ── cap_bastien_at_the_cot — THE ARRIVAL. Auto-fire @the_cot, pri 11, ONE-SHOT. ───────────────────────
+[[canvases]]
+id          = "cap_bastien_at_the_cot"
+name        = "The only room nobody signed for"
+description = "beat_0186 (rev 222), THE WAY DOWN. THE BUILD'S LAST SCENE. Auto-fire @the_cot, pri 11, one-shot, gated bastien_rescued is_true + bastien_at_cot is_false. They put him on her bunk because there is nowhere else in the city: the bar is his and they know it is his, and Cain cannot take him. He will not drink. ARRIVAL ONLY — NO SEX, LO's explicit build-order call; the repair ladder is the next chunk. SETS bastien_at_cot, which opens the standing surface below."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_rescued", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_at_cot",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The only room nobody signed for"
+blocks = [
+  { type = "paragraph", content = "Kess watches them come down the boards with a man between them and does not ask one question, which is the fourth or fifth time she has noticed him not asking and the first time she has been grateful for it." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "They put him on the bunk. He weighs about as much as the coat he is not wearing. Cain straightens up, looks at the room for a second the way a man checks the exits, and then puts a hand flat on Bastien's shoulder for a moment and takes it off again." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I will come when I can. Which will not be often and will not be soon." },
+    ] },
+    { advance_text = "And then he is gone.", blocks = [
+        { type = "paragraph", content = "And then she is standing in her own room with a stranger on her bed and the boards going quiet above her, and it is about two in the morning, and she has not eaten since the depot." },
+    ] },
+    { advance_text = "Get him some water.", blocks = [
+        { type = "paragraph", content = "She fills the tin cup off the tap and holds it where he can reach it, and he looks at it for long enough that her arm starts to ache, and then he turns his head away on the pillow. Not weakly. Deliberately." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No." },
+    ] },
+    { advance_text = "Try again.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You have been on a wall for four months. Drink the water." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I know exactly how long I have been on a wall. I am the only person alive who knows it to the day. And I did not ask anybody to take me off it." },
+    ] },
+    { advance_text = "Say the obvious thing.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You are out. It is over." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "It is not over, it has moved. It is in this room now, and you carried it in, and in about a week you are going to work out what you have actually got on that bed and you will wish you had left it bolted to a wall." },
+    ] },
+    { advance_text = "Put the cup down.", blocks = [
+        { type = "paragraph", content = "She puts the cup on the bench beside him where he can reach it if he changes his mind, which he will not tonight, and she sits down on the floor with her back against the bunk because there is nowhere else to sit." },
+    ] },
+    { advance_text = "Look at what is in the room.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A man who kept her in a cell and read a number off her chest for weeks. A man she put on a floor with a taser and handed over without meaning to. A man who does not know either of those things and never will, because she is not going to tell him." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "And he is on her bunk, in the first room in her life that nobody signed for, and he will not drink water. She has no idea at all what a person does next with that." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit with it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 240
+flagEffects = [
+  { targetType = "player", flag = "bastien_at_cot", op = "set" },
+]
+
+# ── amb_bastien_cot — THE STANDING SURFACE. Repeatable @the_cot, pri 2. NOT A RUNG. ───────────────────
+# ⚠️ THIS IS THE VISIBLE LOCKED DOOR AND IT IS THE WHOLE OF WHAT THIS BUILD LEAVES STANDING OF HIM. He is
+# present, he is in a state, and there is nothing to do about it yet. The next chunk turns this into the
+# ladder's on-ramp; tonight it exists so the player can see the problem sitting on the bunk.
+# ⚠️ NEITHER npc NOR requires_npc, DELIBERATELY. He has no schedule row at this location (see the banner
+# above) so requires_npc would never be satisfied, and requires_npc without npc is the render-bucket
+# defect the guard catches. It renders as a solo link until he is scheduled here, which is correct.
+# ⚠️ PRIORITY 2, UNDER activity_kess_cot's 3, so it never takes the bed's card.
+[[canvases]]
+id          = "amb_bastien_cot"
+name        = "He is still on the bunk"
+description = "beat_0186 (rev 222), THE WAY DOWN. Repeatable @the_cot, pri 2, gated bastien_at_cot is_true. The standing surface this build leaves behind: he is there, he is not eating, he is not sleeping, and there is nothing yet to be done about it. NOT A RUNG and NOT EXPLICIT — the repair ladder is the next chunk. No npc/requires_npc (he has no schedule row here on purpose), so it renders as a solo link until he is scheduled."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "He is still on the bunk"
+blocks = [
+  { type = "paragraph", content = "He is where she left him, on his side, facing the wall, with the blanket pushed down off his shoulder because he runs hot and has not said so." },
+  { type = "paragraph", content = "The tin cup is on the bench. The level in it goes down some days and not others, and she has stopped mentioning it, because mentioning it is the fastest way to make it stop going down at all." },
+  { type = "paragraph", content = "He sleeps in the afternoon and lies awake at night with his eyes open in the dark, which she knows because she does the same thing four feet away on the floor." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 15
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0187 (rev 222), THE WAY DOWN — THE QUESTS PAGE. ═════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ A STRICTLY LINEAR CHAIN, EXACTLY ONE CARD LIVE AT A TIME. pickQuestsCard takes the highest-priority
+# MATCH, so two cards live at the same priority is a coin toss about which one the player is shown. Each
+# card below opens on the flag the one before it closes on, which makes the order legible and the page
+# deterministic. It costs a little freedom (Renner before the yard) and buys the player never seeing a
+# card that is not the next thing to do.
+# ⚠️ THE ROUTE IS NOT ON ANY CARD AND MUST NEVER BE. The five clauses are the mechanic; printing them here
+# deletes it. Card 5 points at the door and, instead of the route, names the diegetic safety net — Renner
+# will say it again, for the price of the trip. That is what beat_0176 exists for.
+# ⚠️ WRITTEN TO THE LEGIBILITY BAR (check_quest_cards.py): short sentences, no dashes, no glosses. The
+# mopoga read is that lostness and not grind is this genre's disease, so every tip names a PLACE and a TIME.
+# ⚠️ NO npc_id ON ANY OF THEM. These are the spine, and a card with an npc_id is filed into that character's
+# section instead of the main one.
+
+[[quest_cards]]
+priority   = 10
+text       = "Cain came to the cot and stood in the middle of it, which he has never done. Bastien is alive. He has been alive the whole time, four months, in a room under the Vance facility on the waterfront. The part that burned was the part above the ground. They stopped asking him questions in the second month and kept going anyway, because he is not a prisoner any more. He is bait, and the hook is baited for Cain."
+tip        = "Cain did not ask you for anything. Go back to the cot and decide."
+when = [
+  { flag = "bastien_alive_known", op = "is_true"  },
+  { flag = "rescue_agreed",       op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 10
+text       = "You are going. Cain has the address and nothing else. He does not have the inside of that building: the layout, the doors, the way down. One man in this city does. Renner fitted the whole underside of that facility and never knew what it was for, and he is still on the waterfront, and his office never shut."
+tip        = "Put the dock work coveralls back on at the rack in your room. He is at the depot from nine to six. Work him the way you worked him before, and when he is open, ask him about the Facility."
+goals = [
+  { flag = "route_learned", op = "is_true", label = "Get the way in out of Renner" },
+]
+when = [
+  { flag = "rescue_agreed", op = "is_true"  },
+  { flag = "route_learned", op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 10
+text       = "You have the way in. You cannot call out from under a slab, and if you go down there alone you have no way to reach Cain when you find him. Kess can build you something, but he needs a part, and the part is company plant hardware that nobody sells. Renner ordered forty per cent over on that job and never took the loss on the books."
+tip        = "The burned yard, all the way to the back, and then further. There is a grating under the strongroom floor. The men down there are the hardest in the yard, so bring the drills or bring the emitter."
+goals = [
+  { flag = "yard_part_found", op = "is_true", label = "Find the overrun in the pit" },
+]
+when = [
+  { flag = "route_learned",   op = "is_true"  },
+  { flag = "yard_part_found", op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 10
+text       = "You have the coupler. It is a screened tail off a fixed plant run, which is a thing you bolt to a wall and leave for twenty years, and it came out of a crate with Renner's own stencil on it. Whatever is running under that facility is already wired and already drawing. Kess can hang a signal off it."
+tip        = "Take it to Kess at the berth between ten and ten. Forty coin. Show him the coupler."
+goals = [
+  { flag = "link_built", op = "is_true", label = "Have Kess build the link" },
+]
+when = [
+  { flag = "yard_part_found", op = "is_true"  },
+  { flag = "link_built",      op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 10
+text       = "You have the route and you have the link. There is a plate at the north end of the slab, tarred over, on a hinge Renner hung himself. Everything under it is his work. Five turns between that plate and the door he wired everything to end at, and a wrong turn puts you in a room with a man in it."
+tip        = "The Facility, off the waterfront. Lift the plate at the north end. Go quiet, and remember the five turns, because they are not written down anywhere. If you have lost them, Renner will say them again, and the only cost is the trip and another session with him."
+goals = [
+  { flag = "bastien_rescued", op = "is_true", label = "Get him out" },
+]
+when = [
+  { flag = "link_built",      op = "is_true"  },
+  { flag = "bastien_rescued", op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 10
+text       = "Fifty one minutes, and a room built over four months to catch one man was walked into and out of on an ordinary night. Cain carried him up five turns of his own supplier's corridor. The plate is back down and the tar is heeled over the lip of it and it looks the way it looked. Nobody down there knows yet. Somebody goes in on a rota, finds a frame with nothing in it, and has to tell somebody a long way above them, and that is not tonight."
+tip        = "That is where this build ends. Bastien is on the bunk at the cot and he will not drink the water, and he does not know who you are, and you are not going to tell him. What is still standing is everything that was standing before. Renner's office never shut and his yard has a fourth way down in it now. Grier is in his room off the lane from ten. Sabin is on the floor at eight and in his lab from eleven. The strip, the market, The House and the pit are where you left them. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { flag = "bastien_rescued", op = "is_true" },
+]
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 6_dev_shortcuts.toml
 # ══════════════════════════════════════════════════════════════════
@@ -26255,5 +28267,379 @@ flagEffects = [
   { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
   { targetType = "player", flag = "third_located",           op = "unset" },
   { targetType = "player", flag = "two_men_done",            op = "unset" },
+]
+
+# ═══ beat_0188 (rev 222), THE WAY DOWN — DEV JUMPS. Two, and they bracket the release. ═══════════════
+# ⚠️ SEED LISTS COPIED FROM dev_jump_whose_hand_end, NOT RETYPED. That jump already lands on two_men_done,
+# which is exactly 0.2.2's entry state, so both jumps below carry its 37 trait rows and 79 flag rows
+# verbatim and then override only what this release changes. Retyping eighty flags by hand is how a seeded
+# state ends up quietly contradicting itself.
+# ⚠️ IDEMPOTENT. Every 0.2.2 flag is written explicitly on BOTH jumps — unset on the first, set on the
+# second — so taking either one twice, or taking the second and then the first, lands in a coherent state.
+# ⚠️ ANCHORED TO A REAL LOCATION or the canvas is pruned as unreachable and the sidebar link 404s.
+
+# ── JUMP 1 — the release's first frame. Lands at the cot with cap_bastien_alive armed. ────────────────
+[[canvases]]
+id          = "dev_jump_way_down_start"
+name        = "\u25b6 0.2.2: Cain brings the news"
+description = "DEV JUMP. Seeds the whole of 0.2.1 (dev_jump_whose_hand_end's state, two_men_done set) and explicitly clears every THE WAY DOWN flag, then drops at the_cot where cap_bastien_alive auto-fires. This is the release's first frame. Gated dev_mode_enabled; inert in shipped builds."
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.2 start (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the end of Whose Hand, with nothing of The Way Down done yet. Cain is about to be standing in the middle of the cot." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the cot."
+targetType = "location"
+locationId = "the_cot"
+effects = [
+
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 3 },
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── THE WAY DOWN — cleared ──
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+]
+flagEffects = [
+
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "unset" },
+  { targetType = "player", flag = "vesper_named",            op = "unset" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
+  { targetType = "player", flag = "third_located",           op = "unset" },
+  { targetType = "player", flag = "two_men_done",            op = "unset" },
+  # ── THE WAY DOWN — every flag explicitly UNSET, which is what makes this jump idempotent ──
+  { targetType = "player", flag = "bastien_alive_known", op = "unset" },
+  { targetType = "player", flag = "rescue_agreed",       op = "unset" },
+  { targetType = "player", flag = "route_learned",       op = "unset" },
+  { targetType = "player", flag = "yard_part_found",     op = "unset" },
+  { targetType = "player", flag = "link_built",          op = "unset" },
+  { targetType = "player", flag = "bastien_found_alive", op = "unset" },
+  { targetType = "player", flag = "bastien_rescued",     op = "unset" },
+  { targetType = "player", flag = "bastien_at_cot",      op = "unset" },
+]
+
+# ── JUMP 2 — one click short of the route. Lands at the Facility with the plate liftable. ─────────────
+# ⚠️ THIS IS THE ONE THAT MATTERS FOR TESTING. The route is the release's only new mechanic and it cannot
+# be read off the TOML — it has to be walked. Stealth 45 and fighting 45 are chosen so the back-out is OPEN
+# at turns 1-3 (20/30/40) and SHUT at 4-5 (50/60), and the fight is open at turns 1-2 (25/35) and shut
+# after, so one run exercises both the live and the locked form of every branch.
+# ⚠️ EMITTER EQUIPPED AND FULL, because the three caught-beats are the release's explicit content and a
+# tester carrying the drain cannot reach any of them.
+[[canvases]]
+id          = "dev_jump_way_down_door"
+name        = "\u25b6 0.2.2: at the plate, route in hand"
+description = "DEV JUMP. Seeds THE WAY DOWN through beat_0178 — route learned, part found, link built, yard at depth 4 — and drops at facility_ruins with the emitter equipped and full and stealth/fighting at 45, which opens the back-out at turns 1-3 and the fight at turns 1-2 and leaves the rest locked, so one run shows every branch in both states. The route answer: stair, left at the pumps, right at the ring, the far gate, the door the conduit turns into. Gated dev_mode_enabled; inert in shipped builds."
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.2 at the door (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: Renner has given up the route, Kess has built the link, the coupler came out of the pit. The plate is at the north end of the slab." },
+  { type = "paragraph", content = "The way down is: the stair, not the ramp. Left at the pumps. Right at the ring. The far gate. The door the conduit turns into." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the Facility."
+targetType = "location"
+locationId = "facility_ruins"
+effects = [
+
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 3 },
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── THE WAY DOWN — kitted for the run ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 2 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "stealth",             op = "set", value = 45 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 45 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+]
+flagEffects = [
+
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "unset" },
+  { targetType = "player", flag = "vesper_named",            op = "unset" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
+  { targetType = "player", flag = "third_located",           op = "unset" },
+  { targetType = "player", flag = "two_men_done",            op = "unset" },
+  # ── THE WAY DOWN — through beat_0178, nothing of the rescue itself ──
+  { targetType = "player", flag = "bastien_alive_known", op = "set" },
+  { targetType = "player", flag = "rescue_agreed",       op = "set" },
+  { targetType = "player", flag = "route_learned",       op = "set" },
+  { targetType = "player", flag = "yard_part_found",     op = "set" },
+  { targetType = "player", flag = "arousal_weapon_ready", op = "set" },
+  { targetType = "player", flag = "link_built",          op = "set" },
+  { targetType = "player", flag = "bastien_found_alive", op = "unset" },
+  { targetType = "player", flag = "bastien_rescued",     op = "unset" },
+  { targetType = "player", flag = "bastien_at_cot",      op = "unset" },
 ]
 
