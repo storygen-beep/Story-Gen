@@ -968,14 +968,20 @@ class TweeComprehensiveGeneratorV2:
                                 slug, sch_loc_slug,
                             )
                             continue
-                        resolved_entries.append({
+                        entry = {
                             "location": sch_loc_uuid,
                             "location_slug": sch_loc_slug,
                             "weekdays": list(sch.get("weekdays") or []),
                             "start_time": sch.get("start_time", "00:00"),
                             "end_time": sch.get("end_time"),
                             "activity": sch.get("activity", ""),
-                        })
+                        }
+                        # 2026-09-18 — optional v1.0 conditions; the row applies only while it holds
+                        # (setup._scheduleRowLive). Emitted only when authored, so every existing
+                        # game's setup.npcSchedules is byte-identical.
+                        if sch.get("when"):
+                            entry["when"] = sch["when"]
+                        resolved_entries.append(entry)
                     if resolved_entries:
                         npc_schedules_map[slug] = resolved_entries
         except (AttributeError, TypeError) as e:
@@ -3734,6 +3740,25 @@ setup.getNpcScheduleFromCanvases = function(npcSlug) {{
 }};
 
 // Get the current location of an NPC based on game time (dynamic)
+// ── setup._scheduleRowLive — does this schedule row apply right now, as far as the STORY goes? ──
+// (2026-09-18) A row may carry `when`, a v1.0 conditions table; a row whose `when` fails is treated as
+// ABSENT by every reader below. No `when` = always live, which is every row written before this date.
+// Weekday and time are NOT checked here — each reader already does that its own way.
+// ⚠️ Re-entrancy backstop. The importer rejects npc_at_location in a row's `when` (directly and through a
+// stage helper) because it resolves presence through getNpcLocation, the caller. If one slips through, a
+// conditional row read from inside another row's condition counts as NOT live instead of recursing until
+// the stack overflows — triggerConditionsSatisfied's own catch would otherwise turn that into a fail-OPEN.
+setup._scheduleRowLive = function(row) {{
+    if (!row || !row.when) return true;
+    if (setup._scheduleWhenDepth) return false;
+    setup._scheduleWhenDepth = 1;
+    try {{
+        return !!setup.triggerConditionsSatisfied(row.when);
+    }} finally {{
+        setup._scheduleWhenDepth = 0;
+    }}
+}};
+
 setup.getNpcLocation = function(npcId) {{
     try {{
         var resolvedId = setup.resolveNpcId(npcId);
@@ -3756,6 +3781,7 @@ setup.getNpcLocation = function(npcId) {{
                 var ds = declared[di];
                 if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
                 if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+                if (!setup._scheduleRowLive(ds)) continue;   // `when` fails: this row is not in the story yet / any more
                 return {{
                     location: ds.location,
                     activity: ds.activity || ""
@@ -3821,6 +3847,7 @@ setup.getNpcDaySchedule = function(npcId, dayIndex) {{
         var result = [];
         for (var i = 0; i < entries.length; i++) {{
             var sch = entries[i];
+            if (!setup._scheduleRowLive(sch)) continue;
             // Empty weekdays = all days
             if (!sch.weekdays || sch.weekdays.length === 0 || sch.weekdays.includes(dayIndex)) {{
                 result.push({{
@@ -3855,6 +3882,10 @@ setup.getNpcsWithSchedules = function() {{
                 var c = canvasList[i];
                 if (!c.npcId || !c.hasSchedules) continue;
                 if (found[c.npcId]) continue;
+                // Declared rows are authoritative for this NPC (below) — the canvas scan is only the
+                // fallback for NPCs with none, and must not re-list one whose declared rows are all dead.
+                var cDeclared = (setup.npcSchedules || {{}})[c.npcId];
+                if (cDeclared && cDeclared.length > 0) continue;
                 // Check conditions + completion (NOT time — schedule button should show if NPC has any available canvases)
                 if (!setup._isCanvasAvailable(c)) continue;
                 found[c.npcId] = true;
@@ -3867,7 +3898,13 @@ setup.getNpcsWithSchedules = function() {{
         // back-compat fallback for games that declare no [[npcs.schedules]].)
         var declaredSched = setup.npcSchedules || {{}};
         for (var dSlug in declaredSched) {{
-            if (declaredSched[dSlug] && declaredSched[dSlug].length > 0) found[dSlug] = true;
+            var dRows = declaredSched[dSlug];
+            if (!dRows || dRows.length === 0) continue;
+            // Listed only while at least one row is live. Rows without `when` are always live, so every
+            // game written before 2026-09-18 lists exactly the NPCs it always did.
+            for (var dr = 0; dr < dRows.length; dr++) {{
+                if (setup._scheduleRowLive(dRows[dr])) {{ found[dSlug] = true; break; }}
+            }}
         }}
 
         // Resolve slugs to UUIDs and build result
@@ -3981,6 +4018,9 @@ setup.getNpcAllSchedulesSorted = function(npcId) {{
         var result = [];
         for (var i = 0; i < entries.length; i++) {{
             var sch = entries[i];
+            // HIDDEN, not muted: a row whose `when` fails must not read on this page at all — that is the
+            // whole leak `when` exists to close (a character listed somewhere the story has not put them).
+            if (!setup._scheduleRowLive(sch)) continue;
             result.push({{
                 location: sch.location_slug || sch.location,
                 start_time: sch.start_time || "00:00",
@@ -20209,7 +20249,13 @@ if (clothingMsg) {
      The fix is on the PAGE, never on the rows: navDestUnlocked() is a pure entry_conditions check on the
      location (no current-location dependency, no side effects), so it answers "can she get in right now"
      for any slug. Locked rows are muted and show navDestBlockedReason() instead of the activity, and the
-     NOW badge and its activity line are suppressed entirely rather than naming a door that will not open. -->
+     NOW badge and its activity line are suppressed entirely rather than naming a door that will not open.
+     AMENDED 2026-09-18 — rows CAN now carry conditions (`when`), and the two answer different questions, so
+     both stay. Lock-awareness asks "is the PLACE open"; `when` asks "is the PERSON there in this story".
+     The case lock-awareness cannot cover: vesper's cot is open in every save from 1b on, and Bastien is only
+     on its bunk after a rescue some of those saves never reached. A row whose `when` fails is dropped by
+     getNpcAllSchedulesSorted before it reaches this page (hidden, not muted), and an NPC with no live row is
+     left off the roster by getNpcsWithSchedules. -->
 <<nobr>>
 <<set _currentDay to $game_state.time_state.current_day>>
 <<set _todayIndex to ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(_currentDay)>>

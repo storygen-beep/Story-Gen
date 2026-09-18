@@ -19645,15 +19645,14 @@ flagEffects = [
 # build order." The repair ladder — her sleeping with him to bring him back — is the NEXT chunk. Nothing
 # below is explicit and nothing below is a rung. If a later pass finds a sex beat in this beat, it was
 # added against an instruction.
-# ⚠️ NO [[npcs.schedules]] ROW FOR HIM AT THE COT, AND THIS IS THE ONE DECISION IN THE BEAT THAT COULD
-# BREAK SHIPPED SAVES. A schedule row carries no conditions and the nav-card badge is NOT canvas-gated
-# (getNpcsPresentAtLocation, v2.py:4773), so a row at the_cot would park Bastien's face on that card in
-# EVERY save that can reach the room — including a 1b save where he has never been rescued and is, as far
-# as that playthrough knows, dead. He is represented by CANVASES, which are gated, and he gets his row when
-# the ladder ships and the row is true.
-# ⚠️ HIS OLD ROW STAYS. bastien_backroom, 20:00-23:59, all days. That room has no nav card (no entry_from,
-# auto_exit = false) and is unreachable post-raid, so the row advertises nothing. Removing it would be a
-# change to shipped state for no gain.
+# ⚠️ HIS ROW AT THE COT IS GATED, AND THAT GATE IS THE ONE DECISION HERE THAT COULD BREAK SHIPPED SAVES.
+# When this beat was first written a schedule row carried no conditions, so it had NO row at the cot: the
+# nav-card badge is schedule-driven, not canvas-gated, and a row there would have parked Bastien's face on the
+# cot's card in every 1b+ save — including saves where he was never rescued and is, as far as they know, dead.
+# CORRECTED rev 225 (2026-09-18): the engine now reads `when` on a row. npc_bastien carries a the_cot row gated
+# bastien_at_cot is_true — the flag THIS canvas sets — so it exists for the engine only from tonight on, and
+# amb_bastien_cot below is his portrait card. His back-room row is gated raid_done is_false in the same pass,
+# so it stops existing once the room does (it used to outlive him). check_bunker_route.py §7 guards all three.
 # ⚠️ HE DOES NOT THANK HER AND HE DOES NOT KNOW WHO SHE IS. Both still true in this room. Nothing here
 # resolves either, because resolving them is what the next chunk is for.
 # MEDIA: none this beat.
@@ -19722,16 +19721,20 @@ flagEffects = [
 # ⚠️ THIS IS THE VISIBLE LOCKED DOOR AND IT IS THE WHOLE OF WHAT THIS BUILD LEAVES STANDING OF HIM. He is
 # present, he is in a state, and there is nothing to do about it yet. The next chunk turns this into the
 # ladder's on-ramp; tonight it exists so the player can see the problem sitting on the bunk.
-# ⚠️ NEITHER npc NOR requires_npc, DELIBERATELY. He has no schedule row at this location (see the banner
-# above) so requires_npc would never be satisfied, and requires_npc without npc is the render-bucket
-# defect the guard catches. It renders as a solo link until he is scheduled here, which is correct.
+# ⚠️ HIS PORTRAIT HUB since rev 225 — npc + requires_npc = npc_bastien. It shipped at rev 222 as a solo link
+# because he had no row here and could not have one without the badge leak (banner above). The gated the_cot
+# row makes him present exactly when this card's own condition holds, so the card and the badge agree.
+# ⚠️ STILL NOT A RUNG AND STILL NOT EXPLICIT — the repair ladder is the next chunk (LO's build order). This is
+# the only repeatable canvas for him at the cot, which keeps the one-canvas-per-NPC-window rule clean.
 # ⚠️ PRIORITY 2, UNDER activity_kess_cot's 3, so it never takes the bed's card.
 [[canvases]]
 id          = "amb_bastien_cot"
 name        = "He is still on the bunk"
-description = "beat_0186 (rev 222), THE WAY DOWN. Repeatable @the_cot, pri 2, gated bastien_at_cot is_true. The standing surface this build leaves behind: he is there, he is not eating, he is not sleeping, and there is nothing yet to be done about it. NOT A RUNG and NOT EXPLICIT — the repair ladder is the next chunk. No npc/requires_npc (he has no schedule row here on purpose), so it renders as a solo link until he is scheduled."
+description = "beat_0186 (rev 222, portrait at rev 225), THE WAY DOWN. Bastien's PORTRAIT HUB @the_cot — repeatable, pri 2, npc + requires_npc = npc_bastien, gated bastien_at_cot is_true. Present because npc_bastien's the_cot schedule row is gated on the same flag (the engine's `when`, rev 225), so card and nav badge agree and neither exists before the rescue. The standing surface this build leaves behind: he is there, he is not eating, he is not sleeping, and there is nothing yet to be done about it. NOT A RUNG and NOT EXPLICIT — the repair ladder is the next chunk."
 [canvases.trigger]
 location      = "the_cot"
+requires_npc  = "npc_bastien"
+npc           = "npc_bastien"
 is_repeatable = true
 priority      = 2
 is_active     = true

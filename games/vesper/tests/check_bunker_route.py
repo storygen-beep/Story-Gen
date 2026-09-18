@@ -162,15 +162,50 @@ def main() -> int:
     for flag in ("rescue_agreed", "route_learned", "link_built", "bastien_rescued"):
         check(flag in raw_gate, f"bunker_descent is not gated on {flag}")
 
-    # 7 — no [[npcs.schedules]] row may point at the_cot: a row is unconditional and the nav badge is not
-    #     canvas-gated, so it would park Bastien's face there in saves where he was never rescued.
+    # 7 - BASTIEN AT THE COT, BY SCHEDULE, WITHOUT THE LEAK (rev 225).
+    #
+    # Until 2026-09-18 this section forbade any row at the_cot: a row carried no conditions and the nav badge
+    # is schedule-driven, so a row there parked Bastien's face on the cot's card in every 1b+ save, rescued or
+    # not. The engine now reads an optional `when` on a row (tests/test_npc_schedule_when.py). So the rule is
+    # now the positive one LO asked for - his portrait at the cot - plus the gate that keeps it honest:
+    #   - a row at the_cot exists (a portrait card renders ONLY for an NPC a live row places there,
+    #     renderNpcPortraits), and it is gated bastien_at_cot is_true with version "1.0" (versionless fails
+    #     OPEN, which would be the old leak with extra steps);
+    #   - the back-room row is gated raid_done is_false, so it stops existing once the room does and the
+    #     Schedules page stops listing him in a building nobody can enter;
+    #   - ANY row, anyone's, at the_cot carries a versioned `when` - the cot is reachable in every save;
+    #   - amb_bastien_cot is his portrait hub (npc + requires_npc), not a solo link.
+    def gated(row, flag, want_true):
+        w = row.get("when") or {}
+        if str(w.get("version") or "") != "1.0":
+            return False
+        return any(isinstance(it, dict) and it.get("type") == "flag" and it.get("flag_key") == flag
+                   and it.get("operator") == ("is_true" if want_true else "is_false")
+                   for it in w.get("items") or [])
+
+    bastien = next((n for n in doc.get("npcs", []) if n.get("id") == "npc_bastien"), {})
+    brows = bastien.get("schedules") or []
+    cot_rows = [r for r in brows if r.get("location") == "the_cot"]
+    check(cot_rows, "npc_bastien has no schedule row at the_cot - his portrait card cannot render there")
+    for r in cot_rows:
+        check(gated(r, "bastien_at_cot", True),
+              "npc_bastien's the_cot row is not gated `bastien_at_cot is_true` (version 1.0) - "
+              "his face would park on the cot's nav card in every save, rescued or not")
+    for r in [r for r in brows if r.get("location") == "bastien_backroom"]:
+        check(gated(r, "raid_done", False),
+              "npc_bastien's bastien_backroom row is not gated `raid_done is_false` - it outlives the room")
     for npc in doc.get("npcs", []):
         for row in npc.get("schedules", []) or []:
-            check(row.get("location") != "the_cot",
-                  f"{npc.get('id')} has a schedule row at the_cot — badge leaks into every save")
+            if row.get("location") == "the_cot":
+                check(str((row.get("when") or {}).get("version") or "") == "1.0",
+                      f"{npc.get('id')} has an UNGATED schedule row at the_cot - badge leaks into every save")
         if npc.get("id") == "npc_loder":
             check(not (npc.get("schedules") or []),
                   "npc_loder must have ZERO schedule rows (he exists only inside a bunker that closes)")
+    amb = (canvases.get("amb_bastien_cot") or {}).get("trigger") or {}
+    check(amb.get("npc") == "npc_bastien" and amb.get("requires_npc") == "npc_bastien",
+          "amb_bastien_cot is not Bastien's portrait hub (needs npc + requires_npc = npc_bastien)")
+
 
     # 8 - THE DEV JUMPS MUST START WHERE 0.2.1 ENDS.
     #

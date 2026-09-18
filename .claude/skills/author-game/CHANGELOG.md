@@ -8,6 +8,30 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-18
+- **`references/quests.md`, `references/engine-reference.md`, `references/npc-intro.md`, `references/lanes.md`
+  — schedule rows can carry `when` now; the skill stopped saying they cannot.** An engine feature landed the
+  same day (`template_import.py`, `game_graph.py`, `v2.py`): an optional v1.0 conditions table on a
+  `[[npcs.schedules]]` row, honoured by every row reader through `setup._scheduleRowLive`. The skill taught the
+  opposite in two places — `quests.md` said *"a row cannot be gated and keeps resolving forever"* and put the
+  whole Schedules-page fix *"on the PAGE, never on the rows"* — and that was TRUE, which is why it had to change
+  in the same pass rather than be left to contradict the engine.
+  ⚠️ **What forced it (vesper 0.2.2, LO in play):** Bastien is rescued to the cot, and LO wanted his portrait
+  card there. A portrait renders only for an NPC a row places at that location, and an ungated row at the cot
+  parked his face on its nav card and his name on the Schedules page in every 1b+ save — including saves
+  where he was never rescued. Lock-awareness could not help: the cot is OPEN in all of them. The page fix
+  answers "is the place open"; `when` answers "is the person there in this story". `quests.md` now teaches both
+  as two tools for two questions.
+  ⚠️ `engine-reference.md` also had two stale line refs (`TemplateNPCSchedule :94` → `:106`,
+  `getNpcLocation v2.py:3141` → `:3762`) and gains a worked `when` example; `npc-intro.md`'s "withhold the
+  schedule until the meet" and `lanes.md`'s "drop the post-F window" now name `when` as the clean way.
+  **Verified:** `tests/test_npc_schedule_when.py` 17/17; full suite 6F/472P (the 6 are the pre-existing world
+  entry-view failures); vesper built green and played live in three states — pre-raid (back room, unchanged),
+  post-raid pre-rescue (nowhere: no cot badge, not on the Schedules page), post-rescue (portrait card at the
+  cot, badge, "NOW: The Cot"); the_balance and orientation emit byte-identical `setup.npcSchedules`.
+  `author-game-v2/` was NOT edited — it carries someone else's uncommitted work, and its `gates.py` still
+  counts a `when` row as always live.
+
 ## 2026-09-07
 - **`scripts/check_quest_cards.py` — NEW. The guidance page had no instrument at all, and it was the worst
   prose in the game.** §7 check 8 tells you to run `author-game-v2/scripts/gates.py`, and G43 builds its

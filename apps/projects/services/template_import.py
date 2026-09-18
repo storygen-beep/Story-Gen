@@ -113,6 +113,12 @@ class TemplateNPCSchedule:
     start_time: str = "00:00"  # HH:MM format
     end_time: Optional[str] = None  # HH:MM format (optional)
     activity: str = ""  # Description of what NPC is doing at this location
+    # Optional v1.0 conditions table. The row applies only while it holds; a row whose `when` fails is
+    # treated as ABSENT by every reader (presence, nav badge, portraits, the Schedules page). None = the row
+    # always applies, which is exactly the pre-2026-09-18 behaviour. It exists because rows used to be
+    # unconditional, so a character could not be placed somewhere only after a plot beat without their
+    # face leaking onto that location's nav card in every save that could reach it.
+    when: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -1837,6 +1843,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 raise TypeError(
                     f"npcs[{ni}].schedules[{si}] must be a table, got {type(sch).__name__}"
                 )
+            # `when` keeps {} as {} (not None) so validate() can reject an empty table — an empty
+            # conditions block gates nothing and should be omitted, not shipped looking like a gate.
+            sch_when = sch.get("when")
+            if sch_when is not None and not isinstance(sch_when, dict):
+                raise TypeError(
+                    f"npcs[{ni}].schedules[{si}].when must be a conditions table, "
+                    f"got {type(sch_when).__name__}"
+                )
             npc_schedules.append(
                 TemplateNPCSchedule(
                     location=_require_str(sch, "location", ""),
@@ -1846,6 +1860,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     start_time=_require_str(sch, "start_time", "00:00"),
                     end_time=_require_str(sch, "end_time", "") or None,
                     activity=_require_str(sch, "activity", ""),
+                    when=sch_when,
                 )
             )
         # Parse trait_decay: {trait_name: decay_per_day}
@@ -3574,6 +3589,47 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"npcs[{i}].schedules[{si}].end_time must be HH:MM format or omitted"
                 )
+            # `when` — a row that applies only while a story condition holds (2026-09-18).
+            if sch.when is not None:
+                wctx = f"npcs[{i}].schedules[{si}].when"
+                if not sch.when:
+                    errors.append(
+                        f"{wctx} is empty — omit `when` entirely for a row that always applies"
+                    )
+                elif str(sch.when.get("version") or "") != "1.0":
+                    # triggerConditionsSatisfied returns TRUE for a versionless block, so the row would
+                    # always apply and the leak `when` exists to prevent would come back silently.
+                    errors.append(
+                        f'{wctx} must carry version = "1.0" — without it the engine fails OPEN '
+                        f"and this row is never actually gated"
+                    )
+                else:
+                    _check_cond_block(sch.when, wctx)
+                    # npc_at_location resolves presence through setup.getNpcLocation, which is the
+                    # function evaluating this row — inside a row's `when` it recurses. Reject it
+                    # directly and through a stage helper (helpers may contain it; only stage-in-stage
+                    # nesting is banned for them).
+                    helper_conds = {
+                        h.name: (h.conditions or {}) for h in (template.stage_helpers or [])
+                    }
+                    for item in sch.when.get("items") or []:
+                        if not isinstance(item, dict):
+                            continue
+                        if item.get("type") == "npc_at_location":
+                            errors.append(
+                                f"{wctx} uses npc_at_location, which resolves presence through the "
+                                f"schedule being evaluated and would recurse — gate on a flag or trait"
+                            )
+                        elif item.get("type") == "stage":
+                            hname = str(item.get("helper") or "")
+                            inner = helper_conds.get(hname, {}).get("items") or []
+                            if any(isinstance(x, dict) and x.get("type") == "npc_at_location"
+                                   for x in inner):
+                                errors.append(
+                                    f"{wctx} uses stage helper '{hname}', which contains "
+                                    f"npc_at_location — that resolves presence through the schedule "
+                                    f"being evaluated and would recurse"
+                                )
             # Location validation will be done after loc_index is built
 
     # NPC trait_decay validation
@@ -7149,6 +7205,7 @@ def create_project_from_template(
         if n.portrait:
             npc.ai_behavior_config["portrait"] = n.portrait
         # Store NPC schedules if present
+        # ⚠️ TWIN of game_graph.build_game_graph — a key added here and not there never reaches a build.
         if n.schedules:
             npc.ai_behavior_config["schedules"] = [
                 {
@@ -7157,6 +7214,8 @@ def create_project_from_template(
                     "start_time": sch.start_time,
                     "end_time": sch.end_time,
                     "activity": sch.activity,
+                    # emitted only when authored, so an unconditioned row is stored exactly as before
+                    **({"when": sch.when} if sch.when else {}),
                 }
                 for sch in n.schedules
             ]
