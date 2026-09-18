@@ -28270,10 +28270,23 @@ flagEffects = [
 ]
 
 # ═══ beat_0188 (rev 222), THE WAY DOWN — DEV JUMPS. Two, and they bracket the release. ═══════════════
-# ⚠️ SEED LISTS COPIED FROM dev_jump_whose_hand_end, NOT RETYPED. That jump already lands on two_men_done,
-# which is exactly 0.2.2's entry state, so both jumps below carry its 37 trait rows and 79 flag rows
-# verbatim and then override only what this release changes. Retyping eighty flags by hand is how a seeded
-# state ends up quietly contradicting itself.
+# ⚠️ SEED LISTS COPIED FROM dev_jump_whose_hand_end, THEN CARRIED TO THE END OF 0.2.1 — CORRECTED rev 223.
+# The first cut of this banner claimed that jump "already lands on two_men_done". IT DOES NOT. It lands at
+# 0.2.1 beat 13 and deliberately UNSETS the release's ending flags; the seed was read by flag NAME without
+# its op. Result, caught by LO in play: "0.2.2: Cain brings the news" dropped the player mid-0.2.1 and the
+# cot showed 0.2.1's card A (activity_say_yes, "Stop, and stay in.") instead of the news.
+# The fix sets the six flags 0.2.1's mandatory back half sets in real play, and nothing else:
+#     capstone_failed        cap_capstone_fail     @room_no_name
+#     vesper_named           cap_capstone_fire     @room_no_name
+#     cain_absent_confirmed  cap_the_question      @the_cot
+#     third_located          hub_grier.the_third   @grier_room
+#     cain_came_along        activity_ask_him_to_come @the_cot
+#     two_men_done           cap_the_two_men       @grier_room
+# The five that were `unset` in the copied rows are flipped IN PLACE rather than overridden by a later row,
+# so the result does not depend on flagEffects being applied in list order. grier_drank_with is NOT added:
+# it comes from the optional drinking rung and nothing in the chain requires it.
+# games/vesper/tests/check_bunker_route.py §8 replays both jumps' flagEffects and evaluates the real
+# trigger conditions, so this cannot silently regress.
 # ⚠️ IDEMPOTENT. Every 0.2.2 flag is written explicitly on BOTH jumps — unset on the first, set on the
 # second — so taking either one twice, or taking the second and then the first, lands in a coherent state.
 # ⚠️ ANCHORED TO A REAL LOCATION or the canvas is pruned as unreachable and the sidebar link 404s.
@@ -28282,7 +28295,7 @@ flagEffects = [
 [[canvases]]
 id          = "dev_jump_way_down_start"
 name        = "\u25b6 0.2.2: Cain brings the news"
-description = "DEV JUMP. Seeds the whole of 0.2.1 (dev_jump_whose_hand_end's state, two_men_done set) and explicitly clears every THE WAY DOWN flag, then drops at the_cot where cap_bastien_alive auto-fires. This is the release's first frame. Gated dev_mode_enabled; inert in shipped builds."
+description = "DEV JUMP. Seeds the END of 0.2.1 — dev_jump_whose_hand_end's beat-13 state carried through the six flags the release's back half sets (capstone_failed, vesper_named, cain_absent_confirmed, third_located, cain_came_along, two_men_done; corrected rev 223, it first landed mid-0.2.1) — and explicitly clears every THE WAY DOWN flag, then drops at the_cot where cap_bastien_alive auto-fires. This is the release's first frame. Gated dev_mode_enabled; inert in shipped builds."
 [canvases.trigger]
 location      = "the_waterfront"
 is_repeatable = true
@@ -28438,11 +28451,13 @@ flagEffects = [
   { targetType = "player", flag = "store_carried_seen",      op = "set" },
   { targetType = "player", flag = "price_named",             op = "set" },
   # ── and stopped one beat short: the capstone is the thing under test ──
-  { targetType = "player", flag = "capstone_failed",         op = "unset" },
-  { targetType = "player", flag = "vesper_named",            op = "unset" },
-  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
-  { targetType = "player", flag = "third_located",           op = "unset" },
-  { targetType = "player", flag = "two_men_done",            op = "unset" },
+  { targetType = "player", flag = "capstone_failed",         op = "set" },
+  { targetType = "player", flag = "vesper_named",            op = "set" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "set" },
+  { targetType = "player", flag = "third_located",           op = "set" },
+  { targetType = "player", flag = "two_men_done",            op = "set" },
+  # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
+  { targetType = "player", flag = "cain_came_along",         op = "set" },
   # ── THE WAY DOWN — every flag explicitly UNSET, which is what makes this jump idempotent ──
   { targetType = "player", flag = "bastien_alive_known", op = "unset" },
   { targetType = "player", flag = "rescue_agreed",       op = "unset" },
@@ -28626,11 +28641,13 @@ flagEffects = [
   { targetType = "player", flag = "store_carried_seen",      op = "set" },
   { targetType = "player", flag = "price_named",             op = "set" },
   # ── and stopped one beat short: the capstone is the thing under test ──
-  { targetType = "player", flag = "capstone_failed",         op = "unset" },
-  { targetType = "player", flag = "vesper_named",            op = "unset" },
-  { targetType = "player", flag = "cain_absent_confirmed",   op = "unset" },
-  { targetType = "player", flag = "third_located",           op = "unset" },
-  { targetType = "player", flag = "two_men_done",            op = "unset" },
+  { targetType = "player", flag = "capstone_failed",         op = "set" },
+  { targetType = "player", flag = "vesper_named",            op = "set" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "set" },
+  { targetType = "player", flag = "third_located",           op = "set" },
+  { targetType = "player", flag = "two_men_done",            op = "set" },
+  # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
+  { targetType = "player", flag = "cain_came_along",         op = "set" },
   # ── THE WAY DOWN — through beat_0178, nothing of the rescue itself ──
   { targetType = "player", flag = "bastien_alive_known", op = "set" },
   { targetType = "player", flag = "rescue_agreed",       op = "set" },

@@ -172,6 +172,50 @@ def main() -> int:
             check(not (npc.get("schedules") or []),
                   "npc_loder must have ZERO schedule rows (he exists only inside a bunker that closes)")
 
+    # 8 - THE DEV JUMPS MUST START WHERE 0.2.1 ENDS.
+    #
+    # WARNING: this shipped broken at beat_0188. Both jumps copied their seed from dev_jump_whose_hand_end,
+    # which lands at 0.2.1 beat 13 and deliberately UNSETS the release's ending flags. The seed was read by
+    # flag NAME without its op, so "two_men_done is in the list" was mistaken for "two_men_done is set".
+    # Clicking "0.2.2: Cain brings the news" then showed 0.2.1's card A (activity_say_yes) instead of the
+    # news, because cap_bastien_alive needs two_men_done. The check below replays each jump's flagEffects in
+    # order (last write wins) and evaluates the real trigger conditions against the result.
+    END_OF_021 = ["third_located", "capstone_failed", "vesper_named",
+                  "cain_absent_confirmed", "cain_came_along", "two_men_done"]
+
+    def seeded_flags(jump_id):
+        state = {}
+        for node in canvases[jump_id].get("nodes", []):
+            for ch in (node.get("exit_block") or {}).get("choices", []) or []:
+                for fe in ch.get("flagEffects", []) or []:
+                    state[fe["flag"]] = (fe.get("op") == "set")
+        return state
+
+    def flag_items_hold(canvas_id, state):
+        conds = (canvases[canvas_id].get("trigger") or {}).get("conditions") or {}
+        for it in conds.get("items", []):
+            if it.get("type") != "flag":
+                continue
+            want = it.get("operator") == "is_true"
+            if state.get(it["flag_key"], False) != want:
+                return False, it["flag_key"]
+        return True, None
+
+    for jump in ("dev_jump_way_down_start", "dev_jump_way_down_door"):
+        check(jump in canvases, f"dev jump missing: {jump}")
+        if jump not in canvases:
+            continue
+        st = seeded_flags(jump)
+        for f in END_OF_021:
+            check(st.get(f) is True, f"{jump}: leaves 0.2.1's '{f}' unset - it starts mid-0.2.1, not at its end")
+        ok, _ = flag_items_hold("activity_say_yes", st)
+        check(not ok, f"{jump}: 0.2.1's card A (activity_say_yes) is still live in the seeded state")
+
+    if "dev_jump_way_down_start" in canvases:
+        st = seeded_flags("dev_jump_way_down_start")
+        ok, bad = flag_items_hold("cap_bastien_alive", st)
+        check(ok, f"dev_jump_way_down_start: cap_bastien_alive cannot fire from the seeded state (fails on {bad})")
+
     return report()
 
 
@@ -184,7 +228,7 @@ def report() -> int:
     print("BUNKER-ROUTE GUARD: OK — five turns walkable, every wrong door lands in its own room, "
           "the emitter spends a shot, the back-out is budgeted, Renner's directions match the rooms, "
           "the mnemonic names all five turns in order in both the drain and the re-ask, "
-          "and the route is not printed on the Quests page.")
+          "the route is not printed on the Quests page, and both dev jumps start at the end of 0.2.1.")
     return 0
 
 
