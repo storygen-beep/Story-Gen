@@ -82,7 +82,8 @@ def main():
                 adv = page.evaluate("""() => {
                     const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; };
                     const el = Array.from(document.querySelectorAll('#passages .cascade-advance, #passages a, #passages button'))
-                        .filter(vis).filter(e => !/Back|Save|Journal|Cheat|Quests|Schedule/i.test(e.innerText||''))
+                        .filter(vis).filter(e => !e.classList.contains('link-external'))
+                        .filter(e => !/^(Back|Save|Journal|Cheat|Quests|Schedule)$/i.test((e.innerText||'').trim()))
                         .pop();
                     if (!el) return false; el.click(); return true; }""")
                 page.wait_for_timeout(250)
