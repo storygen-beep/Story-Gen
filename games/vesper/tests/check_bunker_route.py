@@ -216,6 +216,133 @@ def main() -> int:
         ok, bad = flag_items_hold("cap_bastien_alive", st)
         check(ok, f"dev_jump_way_down_start: cap_bastien_alive cannot fire from the seeded state (fails on {bad})")
 
+    # 9 - THE DEV JUMPS MUST CARRY THE WARDROBE A REAL PLAYER HAS BY THE END OF 0.2.1.
+    #
+    # WARNING: this shipped broken too, and LO found it in play: "I dont see the Dock cover at all in the
+    # change cloths menu." A dev jump starts from a fresh StoryInit, so canvas_opening_morning's
+    # `add cover_dockhand` never runs, and both 0.2.2 jumps carried flags and traits but NO wardrobeEffects.
+    # She owned only the four initial garments; hub_depot_floor then substitutes the no-cover squint, so the
+    # drain, route_learned and everything after beat 2 could not be reached from the jump.
+    # The required set is DERIVED, not listed: every garment any non-dev canvas grants with `add`. Nothing in
+    # this game ever removes a garment, so a real end-of-0.2.1 player owns every one of them. A garment
+    # added in a later release joins this set automatically and the jumps must follow it.
+    def is_dev(c):
+        return "dev_mode_enabled" in str((c.get("trigger") or {}).get("conditions", ""))
+
+    def adds_in(c):
+        out = set()
+        for node in c.get("nodes", []):
+            eb = node.get("exit_block") or {}
+            pools = [eb.get("config") or {}] + list(eb.get("choices") or [])
+            for holder in pools:
+                for we in holder.get("wardrobeEffects", []) or []:
+                    if we.get("action") == "add":
+                        out.add(we.get("item_id"))
+        return out
+
+    def wardrobe_ops(c):
+        ops = []
+        for node in c.get("nodes", []):
+            for ch in (node.get("exit_block") or {}).get("choices", []) or []:
+                ops += [(we.get("action"), we.get("item_id")) for we in ch.get("wardrobeEffects", []) or []]
+        return ops
+
+    initial = {i["id"] for i in doc.get("clothing", []) if i.get("initial")}
+    granted_in_play = set()
+    for c in canvases.values():
+        if not is_dev(c):
+            granted_in_play |= adds_in(c)
+    check("cover_dockhand" in granted_in_play, "sanity: nothing in play grants cover_dockhand")
+
+    for jump in ("dev_jump_way_down_start", "dev_jump_way_down_door"):
+        if jump not in canvases:
+            continue
+        ops = wardrobe_ops(canvases[jump])
+        owned = initial | {i for a, i in ops if a == "add"}
+        for item in sorted(granted_in_play - owned):
+            check(False, f"{jump}: never grants '{item}' - a real end-of-0.2.1 player owns it"
+                         + (" (the coveralls: Renner's whole hub gates on it)" if item == "cover_dockhand" else ""))
+        for a, i in ops:
+            if a == "equip":
+                check(i in owned, f"{jump}: equips '{i}' without owning it")
+
+    # 10 - NO EARLIER RELEASE'S ONE-SHOT MAY STILL BE ARMED IN A JUMP, AT ANY PLACE 0.2.2 SENDS THE PLAYER,
+    #      AND THE 0.2.2 PATH ITSELF MUST BE OPEN.
+    #
+    # WARNING: the third seed defect, and the widest. 0.2.1 never went back to Renner or the burned yard, so
+    # dev_jump_whose_hand_end never carried their Act-1 state - and 0.2.2 sends the player straight back to
+    # both. Measured in the built game: renner_hired false (his hub cannot open), npc_renner corruption 0
+    # (no office loop), drains_done 0 (the finisher would replay the ACT-1 first extraction, not .again),
+    # yard_depth 3 with finds 1-3 unset (the Act-1 finds would replay), emitter never found or repaired.
+    # This replays each jump's effects the way the engine does and evaluates real trigger conditions.
+    NEW_0_2_2 = {"cap_bastien_alive", "activity_go_after_him", "cap_back_into_cover", "renner_route_canvas",
+                 "yard_find_4", "kess_makes_the_link", "bunker_descent", "bunker_route", "bunker_guards",
+                 "bunker_sides", "bunker_bastien", "cap_the_extraction", "cap_bastien_at_the_cot",
+                 "amb_bastien_cot"}
+    PLACES = {"the_cot", "renner_depot", "the_anchor", "renner_burned_yard", "kess_berth",
+              "facility_ruins", "the_waterfront"}
+    init_p = dict((doc.get("player") or {}).get("core_traits", {}))
+    npc0 = {n["id"]: dict(n.get("core_traits", {})) for n in doc.get("npcs", [])}
+
+    def replay(jump_id):
+        fl, tr, nt = {}, dict(init_p), {k: dict(v) for k, v in npc0.items()}
+        for node in canvases[jump_id].get("nodes", []):
+            for ch in (node.get("exit_block") or {}).get("choices", []) or []:
+                for fe in ch.get("flagEffects", []) or []:
+                    fl[fe["flag"]] = (fe.get("op") == "set")
+                for e in ch.get("effects", []) or []:
+                    tgt = tr if e.get("targetType") == "player" else nt.setdefault(e.get("npcId"), {})
+                    v = e.get("value") if isinstance(e.get("value"), (int, float)) else 0
+                    tgt[e["trait"]] = v if e.get("op") == "set" else tgt.get(e["trait"], 0) + v
+        return fl, tr, nt
+
+    def holds(conds, st):
+        fl, tr, nt = st
+        for it in (conds or {}).get("items", []):
+            t = it.get("type")
+            if t == "flag" and fl.get(it["flag_key"], False) != (it["operator"] == "is_true"):
+                return False
+            if t == "trait":
+                src = tr if it.get("subject") == "player" else nt.get(it.get("npc_id"), {})
+                val, x, op = src.get(it["trait_key"], 0), it.get("value", 0), it["operator"]
+                if not {"gte": val >= x, "gt": val > x, "lt": val < x, "lte": val <= x,
+                        "eq": val == x, "neq": val != x}.get(op, True):
+                    return False
+        return True     # clothing / presence / time are not modelled; they only ever make this stricter
+
+    def path_gate(canvas_id, node_id, target):
+        for ch in (nodes[canvas_id][node_id].get("exit_block") or {}).get("choices", []) or []:
+            if ch.get("nodeId") == target:
+                return ch.get("conditions")
+        return None
+
+    for jump in ("dev_jump_way_down_start", "dev_jump_way_down_door"):
+        if jump not in canvases:
+            continue
+        st = replay(jump)
+        for cid, c in canvases.items():
+            trg = c.get("trigger") or {}
+            if cid in NEW_0_2_2 or trg.get("location") not in PLACES:
+                continue
+            if trg.get("is_repeatable", True) or trg.get("substitution_only") or is_dev(c):
+                continue
+            check(not holds(trg.get("conditions"), st),
+                  f"{jump}: an earlier release's one-shot '{cid}' is still armed at {trg.get('location')}")
+
+    # the 0.2.2 Renner path must be open from the NEWS jump: hub -> office loop -> anal -> .again
+    st = replay("dev_jump_way_down_start")
+    fl, tr, nt = st
+    check(holds((canvases["hub_depot_floor"].get("trigger") or {}).get("conditions"), st),
+          "dev_jump_way_down_start: hub_depot_floor cannot open (renner_hired)")
+    check(holds(path_gate("hub_depot_floor", "base", "loop_renner_office_sex.intro"), st),
+          "dev_jump_way_down_start: the office loop is shut (office/oral/corruption>=40)")
+    check(nt.get("npc_renner", {}).get("corruption", 0) >= 50,
+          "dev_jump_way_down_start: Renner's corruption is under 50, so the ass finish that IS the drain is locked")
+    check(tr.get("drains_done", 0) >= 1,
+          "dev_jump_way_down_start: drains_done < 1 routes the drain to Act 1's .intro, not .again (the 0.2.2 ask)")
+    check(fl.get("arousal_weapon_ready") and fl.get("has_arousal_weapon"),
+          "dev_jump_way_down_start: the emitter was never found or repaired, so no caught-beat can be reached")
+
     return report()
 
 
@@ -228,7 +355,8 @@ def report() -> int:
     print("BUNKER-ROUTE GUARD: OK — five turns walkable, every wrong door lands in its own room, "
           "the emitter spends a shot, the back-out is budgeted, Renner's directions match the rooms, "
           "the mnemonic names all five turns in order in both the drain and the re-ask, "
-          "the route is not printed on the Quests page, and both dev jumps start at the end of 0.2.1.")
+          "the route is not printed on the Quests page, and both dev jumps start at the end of 0.2.1 "
+          "with the wardrobe a real player has by then.")
     return 0
 
 

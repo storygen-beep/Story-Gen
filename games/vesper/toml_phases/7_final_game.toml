@@ -28315,6 +28315,22 @@ type = "choices"
 text       = "To the cot."
 targetType = "location"
 locationId = "the_cot"
+# ⚠️ THE WARDROBE — ADDED rev 224, AND ITS ABSENCE WAS THE SECOND SEED BUG. A dev jump runs from a fresh
+# StoryInit, so canvas_opening_morning's `add cover_dockhand` never happens and she owned only the four
+# initial garments. LO: "I dont see the Dock cover at all in the change cloths menu." Worse than a missing
+# rack item: hub_depot_floor substitutes the no-cover squint without it, so the drain was unreachable.
+# These five are every garment any canvas in play grants (none is ever removed), which is exactly what a
+# real end-of-0.2.1 player owns. check_bunker_route.py §9 derives that set from the game and fails if a
+# jump falls behind it. Worn: cover_research, as dev_jump_whose_hand_end dresses her — so reaching Renner
+# still means changing at the cot rack, which is the beat this release actually asks the player to do.
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_dockhand" },
+  { action = "add",   item_id = "cover_analyst"  },
+  { action = "add",   item_id = "cover_stranger" },
+  { action = "add",   item_id = "dress_undertow" },
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
 effects = [
 
   # ── the body, and the drain she has spent twice this release ──
@@ -28359,6 +28375,16 @@ effects = [
   { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
   { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
   { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── ACT 1, CARRIED (rev 224). The seed was built for 0.2.1, which never returns to Renner or the yard; 0.2.2
+  # returns to both. Every value is what a real player has after Mission 1 and the yard's three finds:
+  #   drains_done 1   the first drain (loop_renner_finisher adds 1). At 0 the drain replays Act 1's .intro.
+  #   weapon_repair 3 activity_repair_weapon's third session, which is what sets arousal_weapon_ready.
+  #   npc_renner corruption 60 / relation 24 — past the office (relation 21) and the ass finish (corruption 50),
+  #   the same 60 the shipped dev_jump_renner_drain uses.
+  { targetType = "player", trait = "drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "weapon_repair", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+  { targetType = "npc", npcId = "npc_renner", trait = "relation",   op = "set", value = 24 },
   # ── THE WAY DOWN — cleared ──
   { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
   { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
@@ -28458,6 +28484,27 @@ flagEffects = [
   { targetType = "player", flag = "two_men_done",            op = "set" },
   # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
   { targetType = "player", flag = "cain_came_along",         op = "set" },
+  # ── ACT 1, CARRIED (rev 224) — every flag set by its own canvas on the real path: canvas_opening_morning,
+  # cap_renner_hired, work_depot_haul, cap_renner_noticed, the flash rung, cap_renner_blowjob,
+  # ma_renner_blowjob, the loop entry, the anal choice, yard_find_1/2/3, activity_repair_weapon. Without
+  # them the yard replays its Act-1 finds and cap_renner_hired re-fires at the Anchor.
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back", op = "set" },
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
+  { targetType = "player", flag = "yard_clue_seen", op = "set" },
+  { targetType = "player", flag = "has_arousal_weapon", op = "set" },
+  { targetType = "player", flag = "found_dead_men", op = "set" },
+  { targetType = "player", flag = "arousal_weapon_ready", op = "set" },
+  # facility_match_seen — inv_facility_match ("That's mine") is OPTIONAL in real play: nothing reads the flag
+  # but its own trigger. A player who never went to the Facility before 0.2.2 gets it once on the first rescue
+  # trip, which is correct. The jump marks it seen so a tester lands on the descent card, not an Act-1 beat.
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
   # ── THE WAY DOWN — every flag explicitly UNSET, which is what makes this jump idempotent ──
   { targetType = "player", flag = "bastien_alive_known", op = "unset" },
   { targetType = "player", flag = "rescue_agreed",       op = "unset" },
@@ -28500,6 +28547,22 @@ type = "choices"
 text       = "To the Facility."
 targetType = "location"
 locationId = "facility_ruins"
+# ⚠️ THE WARDROBE — ADDED rev 224, AND ITS ABSENCE WAS THE SECOND SEED BUG. A dev jump runs from a fresh
+# StoryInit, so canvas_opening_morning's `add cover_dockhand` never happens and she owned only the four
+# initial garments. LO: "I dont see the Dock cover at all in the change cloths menu." Worse than a missing
+# rack item: hub_depot_floor substitutes the no-cover squint without it, so the drain was unreachable.
+# These five are every garment any canvas in play grants (none is ever removed), which is exactly what a
+# real end-of-0.2.1 player owns. check_bunker_route.py §9 derives that set from the game and fails if a
+# jump falls behind it. Worn: cover_research, as dev_jump_whose_hand_end dresses her — so reaching Renner
+# still means changing at the cot rack, which is the beat this release actually asks the player to do.
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_dockhand" },
+  { action = "add",   item_id = "cover_analyst"  },
+  { action = "add",   item_id = "cover_stranger" },
+  { action = "add",   item_id = "dress_undertow" },
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
 effects = [
 
   # ── the body, and the drain she has spent twice this release ──
@@ -28544,6 +28607,16 @@ effects = [
   { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
   { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
   { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── ACT 1, CARRIED (rev 224). The seed was built for 0.2.1, which never returns to Renner or the yard; 0.2.2
+  # returns to both. Every value is what a real player has after Mission 1 and the yard's three finds:
+  #   drains_done 1   the first drain (loop_renner_finisher adds 1). At 0 the drain replays Act 1's .intro.
+  #   weapon_repair 3 activity_repair_weapon's third session, which is what sets arousal_weapon_ready.
+  #   npc_renner corruption 60 / relation 24 — past the office (relation 21) and the ass finish (corruption 50),
+  #   the same 60 the shipped dev_jump_renner_drain uses.
+  { targetType = "player", trait = "drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "weapon_repair", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+  { targetType = "npc", npcId = "npc_renner", trait = "relation",   op = "set", value = 24 },
   # ── THE WAY DOWN — kitted for the run ──
   { targetType = "player", trait = "equipped_weapon",     op = "set", value = 2 },
   { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
@@ -28648,6 +28721,26 @@ flagEffects = [
   { targetType = "player", flag = "two_men_done",            op = "set" },
   # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
   { targetType = "player", flag = "cain_came_along",         op = "set" },
+  # ── ACT 1, CARRIED (rev 224) — every flag set by its own canvas on the real path: canvas_opening_morning,
+  # cap_renner_hired, work_depot_haul, cap_renner_noticed, the flash rung, cap_renner_blowjob,
+  # ma_renner_blowjob, the loop entry, the anal choice, yard_find_1/2/3, activity_repair_weapon. Without
+  # them the yard replays its Act-1 finds and cap_renner_hired re-fires at the Anchor.
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back", op = "set" },
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
+  { targetType = "player", flag = "yard_clue_seen", op = "set" },
+  { targetType = "player", flag = "has_arousal_weapon", op = "set" },
+  { targetType = "player", flag = "found_dead_men", op = "set" },
+  # facility_match_seen — inv_facility_match ("That's mine") is OPTIONAL in real play: nothing reads the flag
+  # but its own trigger. A player who never went to the Facility before 0.2.2 gets it once on the first rescue
+  # trip, which is correct. The jump marks it seen so a tester lands on the descent card, not an Act-1 beat.
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
   # ── THE WAY DOWN — through beat_0178, nothing of the rescue itself ──
   { targetType = "player", flag = "bastien_alive_known", op = "set" },
   { targetType = "player", flag = "rescue_agreed",       op = "set" },
