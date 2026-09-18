@@ -554,6 +554,45 @@ def main() -> int:
                   f"slab: '{ch.get('text')}' is locked on the clock with no locked_text - the engine "
                   "cannot generate one (time_of_day is absent from describeUnmetConditions)")
 
+    # 12 - "GO AND GET HIM OUT" HAPPENS BY ITSELF, A DAY AFTER THE NEWS (rev 228).
+    #
+    # LO: "Go and get him out can be the capstone like canvas not link but automatically happening."
+    # It used to be a repeatable link on the cot, clickable the same minute Cain left, and the coveralls
+    # scene then auto-fired straight after it - two "she gets ready" scenes back to back. Now the decision is
+    # an auto-fire one calendar day after the news, and the coveralls are its second node.
+    # What must hold, and why a static read is the right tool for these (the day arithmetic itself is JS,
+    # and live_cot_decision.py proves it in the built game):
+    #   - it is a ONE-SHOT and ACTIVE, or it is still a tile the player has to find and click;
+    #   - it waits at least a day. `gte 0` is the link with extra steps - it would fire the moment she walks
+    #     back into the cot after Cain, which is the same minute;
+    #   - it owns the coveralls, and sets rescue_agreed itself, so the flag keeps a LOCATED setter;
+    #   - the old coveralls canvas is retired, not deleted, and cannot fire a second copy of the same scene.
+    go = canvases.get("activity_go_after_him") or {}
+    gt = go.get("trigger") or {}
+    check(gt.get("is_repeatable") is False,
+          "activity_go_after_him is still repeatable - it renders as a tile to click, not a scene that happens")
+    check(gt.get("is_active", True) is not False, "activity_go_after_him is inactive - the decision can never fire")
+    check(gt.get("location") == "the_cot", "activity_go_after_him must stay LOCATED at the_cot (rescue_agreed's setter)")
+    waits = [it for it in (gt.get("conditions") or {}).get("items", [])
+             if it.get("type") == "days_since_flag" and it.get("flag_key") == "bastien_alive_known"]
+    check(bool(waits), "activity_go_after_him has no days_since_flag on bastien_alive_known - it fires the same minute")
+    for it in waits:
+        check(it.get("operator") in ("gte", "gt") and (it.get("value") or 0) >= (1 if it.get("operator") == "gte" else 0),
+              f"activity_go_after_him waits {it.get('operator')} {it.get('value')} days - that is no wait at all")
+    go_nodes = {n["id"]: n for n in go.get("nodes", [])}
+    check("coveralls" in go_nodes, "activity_go_after_him has no coveralls node - the folded scene is missing")
+    check("activity_go_after_him.coveralls" in targets("activity_go_after_him", "base"),
+          "activity_go_after_him.base does not hand on to the coveralls")
+    sets_agreed = any(fe.get("flag") == "rescue_agreed" and fe.get("op") == "set"
+                      for n in go.get("nodes", [])
+                      for holder in [(n.get("exit_block") or {}).get("config") or {}]
+                                    + list((n.get("exit_block") or {}).get("choices") or [])
+                      for fe in holder.get("flagEffects", []) or [])
+    check(sets_agreed, "activity_go_after_him no longer sets rescue_agreed - the route can never open")
+    old = (canvases.get("cap_back_into_cover") or {}).get("trigger") or {}
+    check(old.get("is_active") is False,
+          "cap_back_into_cover is still active - the coveralls scene would play twice, once folded and once on its own")
+
     return report()
 
 

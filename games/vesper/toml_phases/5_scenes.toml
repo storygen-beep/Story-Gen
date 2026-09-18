@@ -19280,7 +19280,13 @@ text       = "Back to the three doors."
 targetType = "node"
 nodeId     = "bunker_route.t4"
 
-# ── beat_0174 — cap_back_into_cover. THE COVERALLS. Auto-fire @the_cot, pri 9, ONE-SHOT. ──────────────
+# ── beat_0174 — cap_back_into_cover. THE COVERALLS. ⚠️ RETIRED rev 228. ─────────────────────────────────
+# ⚠️ ITS SCENE NOW LIVES IN activity_go_after_him.coveralls (3_activities). When the decision became an
+# auto-fire, this one would have fired straight after it on the same cot: two "she gets ready" scenes in a
+# row. It is RETIRED, NOT DELETED, and that is save safety: `is_active = false` means "never surfaces on its
+# own" but the canvas and its passage are still emitted (v2.py:5026), so a save parked inside this scene
+# still loads and walks out of it. Delete it and such a save points at a passage that no longer exists.
+# Content below is left exactly as it shipped, including the "twice already" line the folded copy fixed.
 # ⚠️ NO MECHANICAL FIX WAS NEEDED AND THAT WAS VERIFIED IN THE BUILT HTML, NOT THE TOML. wardrobe_location
 # is "the_cot" (0_systems:111) and the engine injects the rack into exactly that passage — the shipped
 # index.html carries "[[Change Clothes->WardrobePage]]" inside the_cot's passage body. So the covers are
@@ -19299,12 +19305,12 @@ nodeId     = "bunker_route.t4"
 [[canvases]]
 id          = "cap_back_into_cover"
 name        = "The coveralls"
-description = "beat_0174 (rev 222), THE WAY DOWN. Auto-fire @the_cot, pri 9, one-shot, gated rescue_agreed is_true + route_learned is_false — it closes itself the moment Renner gives up the route, so it needs no flag of its own. She digs the dock-work coveralls out and goes back to a man whose loop never shut. VERIFIED: the engine wardrobe rack is injected into the_cot's passage in the built HTML, so the Act-1 cover is equippable in the current era even though wren_room is route-cut. He does NOT remember the drains and this beat does not pretend he does. Sets nothing. 5 beats, 4 clicks."
+description = "RETIRED rev 228 (is_active = false) — the scene now plays as activity_go_after_him.coveralls. beat_0174 (rev 222), THE WAY DOWN. Was: auto-fire @the_cot, pri 9, one-shot, gated rescue_agreed is_true + route_learned is_false — it closes itself the moment Renner gives up the route, so it needs no flag of its own. She digs the dock-work coveralls out and goes back to a man whose loop never shut. VERIFIED: the engine wardrobe rack is injected into the_cot's passage in the built HTML, so the Act-1 cover is equippable in the current era even though wren_room is route-cut. He does NOT remember the drains and this beat does not pretend he does. Sets nothing. 5 beats, 4 clicks."
 [canvases.trigger]
 location      = "the_cot"
 is_repeatable = false
 priority      = 9
-is_active     = true
+is_active     = false      # RETIRED rev 228 — folded into activity_go_after_him.coveralls
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "rescue_agreed", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "route_learned", operator = "is_false" },
@@ -20178,7 +20184,7 @@ time_progression_minutes = 15
 [[quest_cards]]
 priority   = 10
 text       = "Cain came to the cot and stood in the middle of it, which he has never done. Bastien is alive. He has been alive the whole time, four months, in a room under the Vance facility on the waterfront. The part that burned was the part above the ground. They stopped asking him questions in the second month and kept going anyway, because he is not a prisoner any more. He is bait, and the hook is baited for Cain."
-tip        = "Cain did not ask you for anything. Go back to the cot and decide."
+tip        = "Cain did not ask you for anything. Sleep on it. Come back to the cot tomorrow and it will already be decided."
 when = [
   { flag = "bastien_alive_known", op = "is_true"  },
   { flag = "rescue_agreed",       op = "is_false" },

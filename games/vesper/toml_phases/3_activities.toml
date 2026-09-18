@@ -4378,9 +4378,21 @@ flagEffects = [
 # 1_metadata:699), which is the entire mechanic beat_0135 was built on. So this is not a reply — it is her
 # alone in her room deciding, and the decision is expressed the only way this game expresses decisions,
 # as the next thing she does.
-# ⚠️ AN ACTIVITY, NOT AN AUTO-FIRE, AND THAT IS THE POINT. beat_0169 ends on a request nobody made. If the
-# answer also arrived on its own, the player would never once have been asked. This card sits on her cot
-# until she clicks it.
+# ⚠️ AN AUTO-FIRE ONE DAY AFTER THE NEWS — REVERSED AT rev 228, AND BOTH CALLS ARE RECORDED. It shipped at
+# rev 222 as a repeatable link on the cot, on the argument that "if the answer also arrived on its own, the
+# player would never once have been asked." LO made the other call: "Go and get him out can be the capstone
+# like canvas not link but automatically happening." What stops that reading as automatic is the WAIT, not
+# the click: she hears it, the calendar turns (days_since_flag gte 1 on bastien_alive_known — the news
+# scene's exit writes set_day through applyFlagEffect), and the next time she comes home she has already
+# decided. The link could be clicked the same minute Cain left, which was the less considered version.
+# ⚠️ THE id KEEPS ITS `activity_` PREFIX ON PURPOSE. Renaming it would orphan the passage names and the
+# one-shot state in every existing save. It is a capstone now; the prefix is history.
+# ⚠️ THE COVERALLS ARE ITS SECOND NODE, NOT A SECOND SCENE. cap_back_into_cover used to auto-fire straight
+# after this one on the same cot — two "she gets ready" scenes back to back. Folded in as `coveralls`, and
+# the old canvas is retired with is_active = false (kept so a save parked inside it still loads).
+# ⚠️ FOLDING EXPOSED A CONTRADICTION, fixed in the same edit: this scene ended "had him on his back once"
+# and two beats later the coveralls said "the way she has done twice already". The office loop is
+# repeatable, so any count is false for somebody's save. Both lines lost the number.
 # ⚠️ THE MOTIVE IS NOT INSTRUMENTAL AND THE PROSE MUST NOT SMUGGLE ONE IN. LO's call, twice, verbatim:
 # "Complete no on this" to Bastien being the one man who knows what was done to her, then "She goes in
 # because cain wants to save him and he was caught because of her." So: she LOOKS for the angle, in her
@@ -4392,26 +4404,28 @@ flagEffects = [
 # over" — rendered as a body, not as a verdict.
 # ⚠️ IT COSTS HER THE THING SHE WANTS. The box at the top of the tower is what she has wanted for two acts
 # and this is weeks she does not spend on it. Named once, flat, not dwelt on.
-# SETS rescue_agreed. No quest card here — every 0.2.2 card lands together at beat_0188.
+# SETS rescue_agreed on the choice into `coveralls` — the decision commits at the line that says it.
 [[canvases]]
 id          = "activity_go_after_him"
 name        = "Go and get him out"
-description = "beat_0170 (rev 222), THE WAY DOWN. Wren-solo @the_cot, repeatable, pri 4, gated bastien_alive_known is_true + rescue_agreed is_false. SHE DECIDES, ALONE — she has no way to reach Cain (no address, npc_cain description), so this is not an answer to him, it is the next thing she does. She works the problem for an angle the way she works every problem, finds none, and goes anyway: the two reasons are that Cain wants it and that she is why Bastien is down there. NOTHING INSTRUMENTAL (LO's call, twice). The taser is carried as a physical memory, never as the word guilt. Costs her the tower, named once. SETS rescue_agreed. 6 beats, 5 clicks."
+description = "beat_0170 (rev 222, made an auto-fire at rev 228), THE WAY DOWN. Auto-fire @the_cot, ONE-SHOT, pri 10, gated bastien_alive_known is_true + rescue_agreed is_false + days_since_flag(bastien_alive_known) gte 1 — the day after the news. Its second node `coveralls` is the old cap_back_into_cover scene, folded in. SHE DECIDES, ALONE — she has no way to reach Cain (no address, npc_cain description), so this is not an answer to him, it is the next thing she does. She works the problem for an angle the way she works every problem, finds none, and goes anyway: the two reasons are that Cain wants it and that she is why Bastien is down there. NOTHING INSTRUMENTAL (LO's call, twice). The taser is carried as a physical memory, never as the word guilt. Costs her the tower, named once. SETS rescue_agreed. 6 beats, 5 clicks."
 [canvases.trigger]
 location      = "the_cot"
-is_repeatable = true
-priority      = 4
+is_repeatable = false
+priority      = 10
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bastien_alive_known", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "rescue_agreed",       operator = "is_false" },
+  # THE WAIT. A calendar day since Cain stood in this room. `gte 0` would be the link with extra steps.
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_alive_known", operator = "gte", value = 1 },
 ] }
 
 [[canvases.nodes]]
 id   = "base"
 name = "Go and get him out"
 blocks = [
-  { type = "paragraph", content = "She sits on the bunk after he has gone and does the thing she is for, which is opening a problem up and looking for the part of it that is worth something to her." },
+  { type = "paragraph", content = "He has been gone since yesterday and the floor where he stood has dried. She sits on the bunk and does the thing she is for, which is opening a problem up and looking for the part of it that is worth something to her." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "A bar owner four months into a room under a burned building. He does not know what is in the box. He does not know what she is. He cannot tell her one thing about the man at the top of that tower, because he has never been in the same city as him." },
@@ -4434,20 +4448,59 @@ blocks = [
     ] },
     { advance_text = "Get up.", blocks = [
         { type = "paragraph", content = "She gets up off the bunk and takes her coat back off the nail, and that is the decision, made the way she makes all of them, which is by moving before she has finished arguing." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Cain has got the address and nothing else. Somebody built that place. Somebody bolted every door in it to a wall and got paid for it, and there is exactly one man in this city who fits that and she has already had him on his back once." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Cain has got the address and nothing else. Somebody built that place. Somebody bolted every door in it to a wall and got paid for it, and there is exactly one man in this city who fits that and she has already had him on his back." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ rescue_agreed RIDES THIS CHOICE: effects fire on the click, and this is the click after the line that
+# says "that is the decision". It stays inside a LOCATED canvas, so the flag-chain validator's rule — a flag
+# a trigger needs must have a located setter (bunker_descent, the quest cards) — still holds.
+[[canvases.nodes.exit_block.choices]]
+text       = "The bag under the bench."
+targetType = "node"
+nodeId     = "coveralls"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "rescue_agreed", op = "set" },
+]
+
+# ── coveralls — THE OLD cap_back_into_cover SCENE, FOLDED IN (rev 228). Moved verbatim except one line:
+# "the way she has done twice already" lost its number (see the banner). He does NOT remember the drains
+# and this scene must not pretend he does — that note travelled with it from beat_0174.
+[[canvases.nodes]]
+id   = "coveralls"
+name = "The coveralls"
+blocks = [
+  { type = "paragraph", content = "The bag under the bench has everything she owns in it and it is not much. The dock-work coveralls are at the bottom, folded the way the company folds things, and they still smell of the depot, which is diesel and cardboard and cold tea." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four months since she has had these on. She has been a junior analyst and a girl in a bought face and a woman on a bench in a lockup since, and this is the first thing she ever wore that got her through a door." },
+    ] },
+    { advance_text = "Think about what he has got.", blocks = [
+        { type = "paragraph", content = "Renner fitted that place out. Every frame bolted down, every run of conduit, every door with a seal on it, and he carried on invoicing for it after the fire because nobody told him the fire had happened to his own work." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He does not know what it was for. He has never known. He knows where every single thing in it is, which is the only part she needs." },
+    ] },
+    { advance_text = "Think about asking him.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She could ask. He would probably tell her, at this point, over the desk, for nothing. And then there would be a blacklisted man in a depot on the waterfront who knows that somebody went looking for the way into that building." },
+    ] },
+    { advance_text = "So do not ask him.", blocks = [
+        { type = "paragraph", content = "So she is not going to ask. She is going to go down there in his coveralls and work his floor and get him on his back in his own office and take it out of him while he is open, the way she has done before, and he will surface ten minutes later with nothing missing that he can name." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He will be pleased she came. That is the part she does not look at directly." },
+    ] },
+    { advance_text = "Get dressed.", blocks = [
+        { type = "paragraph", content = "She shakes the coveralls out and puts them on over nothing, which is how the flash rung got written and which she has never gone back to doing any other way, and she does the zip up to where it usually sits, which is not very far." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Out."
+text = "The depot opens at nine."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_cot"
-time_progression_minutes = 60
-flagEffects = [
-  { targetType = "player", flag = "rescue_agreed", op = "set" },
-]
+time_progression_minutes = 30
 
 # ═══ beat_0178 (rev 222), THE WAY DOWN — KESS BUILDS THE LINK. ════════════════════════════════════════
 # ⚠️ LOCATED TRIGGER + substitution_only, THE kess_makes_the_blank SHAPE EXACTLY (3_activities:3875). It

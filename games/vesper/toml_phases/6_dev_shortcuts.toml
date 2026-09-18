@@ -1078,7 +1078,7 @@ flagEffects = [
 [[canvases]]
 id          = "dev_jump_way_down_start"
 name        = "\u25b6 0.2.2: Cain brings the news"
-description = "DEV JUMP. Seeds the END of 0.2.1 — dev_jump_whose_hand_end's beat-13 state carried through the six flags the release's back half sets (capstone_failed, vesper_named, cain_absent_confirmed, third_located, cain_came_along, two_men_done; corrected rev 223, it first landed mid-0.2.1) — and explicitly clears every THE WAY DOWN flag, then drops at the_cot where cap_bastien_alive auto-fires. This is the release's first frame. Gated dev_mode_enabled; inert in shipped builds."
+description = "DEV JUMP. Seeds the END of 0.2.1 — dev_jump_whose_hand_end's beat-13 state carried through the six flags the release's back half sets (capstone_failed, vesper_named, cain_absent_confirmed, third_located, cain_came_along, two_men_done; corrected rev 223, it first landed mid-0.2.1) — and explicitly clears every THE WAY DOWN flag, then drops at the_cot where cap_bastien_alive auto-fires. This is the release's first frame. Since rev 228 the decision (activity_go_after_him, with the coveralls as its second node) auto-fires at the cot one calendar day AFTER the news — sleep at the cot once and it plays on waking. Gated dev_mode_enabled; inert in shipped builds."
 [canvases.trigger]
 location      = "the_waterfront"
 is_repeatable = true
