@@ -966,18 +966,31 @@ vault_cleared = 0
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
 # (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
 emitter_broken    = 0
-# THE WAY DOWN (beat_0173) — the bunker route's only per-run state.
-# ⚠️ bunker_stealth_used — the ONE free stealth back-out per run. 0 = unspent, 1 = spent. There is no engine
-# primitive for per-RUN state: [engine.daily_tick] is day-scoped and the route deliberately advances no day,
-# so it is zeroed on the way IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its
-# five traits on its entry rung. Read by all five caught rooms, written by the back-out and by the descent.
+# THE WAY DOWN (beat_0173, extended rev 226) — the bunker route's per-run state.
+# ⚠️ bunker_stealth_used — THE ONE QUIET THING PER RUN. 0 = unspent, 1 = spent. It began (rev 222) as the one
+# free back-out from a caught room; THE RINGS (rev 226) put posted men on the CORRECT path, and their quiet
+# answers draw on the same single budget. So spending it to slip out of g2 means fighting or shooting your
+# way past the far gate, and slipping past the far gate means the door man has to be paid for. That squeeze
+# is the point: one quiet thing, anywhere, per run. There is no engine primitive for per-RUN state —
+# [engine.daily_tick] is day-scoped and the route deliberately advances no day — so it is zeroed on the way
+# IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its five traits on its entry
+# rung. Read by all five caught rooms and all four rings; written by every quiet answer and by the descent.
+# ⚠️ bunker_noise — how loud this RUN has been. +1 for every body she leaves on the correct path (a ring
+# fought or shot). Read by exactly one gate: the door man at the plant room is dozing at `lt 1` and awake
+# above it, which is what makes a silent run worth having. Zeroed with bunker_stealth_used on the way in,
+# and it deliberately SURVIVES a caught room's restart — the run continues and the floor is hot behind her.
+# The man at the readout is exempt on purpose: his back is turned, so putting him down costs no noise.
+# ⚠️ bunker_seen — NOT here; it is a flag, not a trait, because it is a fact about the world and not a
+# quantity. Set the first time she leaves a body on the correct path, read only by the slab (the round
+# stops stopping). No trigger reads it, so it needs no located setter.
 # ⚠️ bunker_runs — how many times she has been put back to the stair head. Prose only: it bands the descent
 # so the fourth walk down does not read like the first. Gates nothing, and must gate nothing.
 # ⚠️ NO POSITION ODOMETER, DELIBERATELY. The node graph holds her place in the route; a counter beside it
 # would be a second source of truth for the same fact, and the ruin-depth build already shipped that bug
 # once (3_activities:2747 — "band 1 was dead and the first sift jumped straight to the terminal band").
-# Defaults 0 = save-safe: a 0.2.1 save missing both keys reads them as a fresh, unspent run.
+# Defaults 0 = save-safe: a 0.2.1 save missing these keys reads them as a fresh, unspent, silent run.
 bunker_stealth_used = 0
+bunker_noise        = 0
 bunker_runs         = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
@@ -986,9 +999,14 @@ bunker_runs         = 0
 # lt 1 = the torch is cold on it). Crash rough sets NOTHING — the free bed keeps her alive, it doesn't buy him.
 # ⚠️ WHY A COUNTDOWN AND NOT A "PAID THROUGH DAY N" INDEX: an effect value is a LITERAL — _resolve_effect_value
 # (v2.py:13519-13578) takes a number or a random dict and raises on anything else, and the runtime path turns a
-# string expression into NaN -> 0, a SILENT no-op with no build error. And no condition type reads the clock:
-# of the 16 in triggerConditionsSatisfied (v2.py:3816+) only days_since_flag touches time_state.day. So
-# "day + 7" is unwritable in both directions. Bounced up to design_book + design_the_leash §16 (rev 114).
+# string expression into NaN -> 0, a SILENT no-op with no build error. And no condition type reads the DAY
+# COUNTER: of the 17 in triggerConditionsSatisfied (v2.py:4166+) only days_since_flag touches
+# time_state.day. So "day + 7" is unwritable in both directions. Bounced up to design_book +
+# design_the_leash §16 (rev 114).
+# ⚠️ CORRECTED rev 226: this used to read "no condition type reads the clock", which is false and was about
+# to become load-bearing. The CLOCK is readable — `time_of_day` (v2.py:4406, start_time/end_time, no
+# operator, handles the overnight wrap) and [[canvases.trigger.schedules]] for weekday+hour. It is the DAY
+# COUNTER that is unreachable. THE RINGS (rev 226) gates the slab's patrol on time_of_day.
 feed_line_days    = 0
 # THE LEASH (beat_0075) — the parts loop's three counters. Kess cannot crack the key clean, so he BUILDS, and
 # a build has to be bought, seated and burned (design_the_leash.md §8). One cycle is: buy a part at the market
@@ -25757,27 +25775,82 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bastien_rescued", operator = "is_false" },
 ] }
 
+# ⚠️ RING 1 LIVES HERE (beat_0191, rev 226) AND NOT IN ITS OWN CANVAS. A repeatable canvas at
+# facility_ruins with no `npc` and no `trigger_mode = "random"` lands in the flat-solo-link render bucket
+# (check_render_buckets.py:59-72), which would put "Somebody is on the slab" on the Facility's page as a
+# tile she has to click. Folding it into the descent puts the round exactly where the player meets it: at
+# the plate, before the bar goes under the lip.
+# ⚠️ TWO COMPLEMENTARY time_of_day WINDOWS, WRITTEN BY HAND, BECAUSE THE PREDICATE CANNOT BE NEGATED.
+# `time_of_day` (v2.py:4406) takes start_time/end_time and NO operator, and its end is EXCLUSIVE and wraps
+# when it is <= start (setup.isCurrentTimeSlot, v2.py:4134). So "20:00"->"00:00" is 20:00-23:59 and
+# "00:00"->"20:00" is the rest, and together they tile the day with no gap and no overlap. A gap would show
+# the player a plate with neither band on it; check_bunker_route.py §11f does the minute arithmetic.
+# ⚠️ ADJACENT GROUPS MERGE INTO ONE if/elseif CHAIN, so the order below IS the logic: watched round first,
+# then the ordinary round, then the clear night.
 [[canvases.nodes]]
 id   = "base"
 name = "The way down"
 blocks = [
-  { type = "paragraph", content = "The slab at the north end is not slab. It is a plate, set flush and tarred over, and the tar is newer than the fire by about four years. She gets a bar under the lip of it and it comes up on a hinge she cannot see, oiled." },
-  { type = "paragraph", content = "Under it there is a stair going down into warm air. The building above her has been dead since the spring. The air coming up out of this hole is moving, which means something down there is still breathing it in and out." },
+  { type = "paragraph", content = "The slab at the north end is not slab. It is a plate, set flush and tarred over, and the tar is newer than the fire by about four years." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "20:00", end_time = "00:00" },
+      { type = "flag", subject = "player", flag_key = "bunker_seen", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There are two of them on the slab and they are not walking it the way they walked it before. They go up the north side together and come back down it together and they do not leave the plate on its own at any point in the round." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "They found the one she left down there. This is what that cost. The round does not break now, and no amount of lying in the frame is going to make it break." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "20:00", end_time = "00:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There are two of them on it tonight. They come up the north side together, split at the stack, meet again at the far corner, and do the whole thing over eight minutes later. Nobody walks a dead building like that for nothing." },
+    { type = "paragraph", content = "The plate is on its own for about forty seconds of every eight minutes. Forty seconds is enough to get a bar under it, or enough to go down it, and not enough to do both and put it back." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "time_of_day", start_time = "00:00", end_time = "20:00" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There is nobody on the slab. She gets a bar under the lip of the plate and it comes up on a hinge she cannot see, oiled." },
+    { type = "paragraph", content = "Under it there is a stair going down into warm air. The building above her has been dead since the spring. The air coming up out of this hole is moving, which means something down there is still breathing it in and out." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ⚠️ locked_text IS NOT OPTIONAL ON A CLOCK GATE. `time_of_day` is absent from describeUnmetConditions and
+# from _renderGoalGate (asserted as a known gap in tests/test_time_of_day.py:126-137), so the engine cannot
+# generate a reason and a greyed choice would say nothing at all.
 [[canvases.nodes.exit_block.choices]]
-text       = "Down."
-targetType = "node"
-nodeId     = "bunker_route.base"
+text             = "Down."
+targetType       = "node"
+nodeId           = "bunker_route.base"
+show_when_locked = true
+locked_text      = "Two of them on the slab, walking it end to end."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "20:00" },
+] }
 # ⚠️ THE PER-RUN RESET LIVES HERE AND NOWHERE ELSE. There is no engine hook for run-scoped state —
-# [engine.daily_tick] (0_systems:56) is day-scoped and this route advances no day on purpose — so the free
-# back-out is zeroed on the way in, the same move every sex loop makes on its entry rung.
+# [engine.daily_tick] (0_systems:56) is day-scoped and this route advances no day on purpose — so the one
+# quiet thing AND the noise are zeroed on the way in, the same move every sex loop makes on its entry rung.
 costs   = [{ trait = "energy", value = 10 }]
 effects = [
   { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
   { targetType = "player", trait = "bunker_runs",         op = "add", value = 1 },
 ]
+# ⚠️ NOT SHOWN WHEN LOCKED, ON PURPOSE. Outside the round there is nothing to wait for, and once they have
+# found a body the prose above says why waiting stopped working. A greyed tile would say it twice.
+# ⚠️ 240 MINUTES, AND THE NUMBER IS FORCED BY THE WINDOW. The round runs 20:00-23:59, four hours. A
+# two-hour wait started at 21:00 ends at 23:00, still inside it, so "let the round go past" would be a lie
+# the player pays ten Charge for and then reads again. Four hours from anywhere inside a four-hour window
+# always lands outside it, so one wait always works, and it costs most of a night.
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie up in the frame until the round is done."
+targetType = "location"
+locationId = "facility_ruins"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "00:00" },
+  { type = "flag", subject = "player", flag_key = "bunker_seen", operator = "is_false" },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+time_progression_minutes = 240
 [[canvases.nodes.exit_block.choices]]
 text       = "Put the plate back. Not tonight."
 targetType = "location"
@@ -25899,10 +25972,13 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ⚠️ RE-POINTED AT beat_0191. The far gate is RIGHT — it is still the answer Renner gives — but it no
+# longer hands straight on to the three doors, because there is a man sitting the far side of it. The wrong
+# door at this turn is untouched and still lands in g4.
 [[canvases.nodes.exit_block.choices]]
 text       = "The far gate, past the wedge."
 targetType = "node"
-nodeId     = "t4"
+nodeId     = "bunker_rings.gate"
 costs = [{ trait = "energy", value = 10 }]
 time_progression_minutes = 15
 [[canvases.nodes.exit_block.choices]]
@@ -25942,21 +26018,26 @@ text       = "The door at the corridor's head."
 targetType = "node"
 nodeId     = "bunker_sides.s4"
 
-# ⚠️ RE-POINTED AT beat_0183, as the beat_0172 banner said it would be. The exit went to facility_ruins
-# while the plant room did not exist yet; it now goes through the door.
+# ⚠️ RE-POINTED TWICE. At beat_0183 the exit stopped being facility_ruins and went through the door. At
+# beat_0191 it stopped going through the door at all: t5 is now THE SCOUT, and what she does here is count.
+# The wired glass has been in this node since beat_0172 doing nothing; this is the job it was shaped for.
+# ⚠️ THE THREE MEN ARE NAMED HERE IN THE ORDER SHE HAS TO TAKE THEM, and bunker_rings takes them in that
+# order: the walker, the man on the chair, the one with the book. Keep the two sides true to each other.
 [[canvases.nodes]]
 id   = "t5"
-name = "The plant room door"
+name = "The last corridor"
 blocks = [
-  { type = "paragraph", content = "Behind the conduit door there is a short length of corridor and then one more door, and this one is not like anything else down here. It is a proper door, hung true, with a rubber seal and a small square of wired glass at head height." },
-  { type = "paragraph", content = "The conduit goes into the wall beside it and does not come out again. Whatever the man wired this place for, he wired it to end here." },
+  { type = "paragraph", content = "Behind the conduit door there is a corridor longer than anything else down here, and at the end of it one more door, and that one is not like anything else either. A proper door, hung true, rubber seal, a small square of wired glass at head height." },
+  { type = "paragraph", content = "There is a man on a chair against it with something short laid across his knees, facing up the corridor at her. There is a second one walking the length between them with his hands behind his back. The conduit goes into the wall beside the door and does not come out again." },
+  { type = "paragraph", content = "Through the glass, over the sitting man's shoulder, a third is standing at a lit stalk with a book open on his forearm, writing something down off it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Nobody has been on a break since the pump floor. Those four upstairs are the ones these three are relieving. Whatever is behind that door, this is the part of the building that is actually working." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Look through the glass."
+text       = "Go up the corridor."
 targetType = "node"
-nodeId     = "bunker_bastien.base"
+nodeId     = "bunker_rings.last"
 time_progression_minutes = 15
 [[canvases.nodes.exit_block.choices]]
 text       = "Back out. Not tonight."
@@ -26684,6 +26765,337 @@ locationId               = "the_cot"
 time_progression_minutes = 30
 
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0191 (rev 226), THE RINGS — THE MEN WHO ARE ACTUALLY GUARDING IT. ═══════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ WHAT WAS WRONG, AND IT WAS NOT "THE PLANT ROOM IS EMPTY". Until this beat the bunker held five men and
+# NOT ONE OF THEM WAS GUARDING ANYTHING: a flask on a break, a man washing his arms, a canteen table, a
+# workbench, a desk — and all five in WRONG-turn rooms. The correct path cost 10 Charge and 15 minutes a
+# turn and nothing else. So the one quiet exit, `fighting`, and the emitter with its 10-coin-and-a-day
+# reload were reachable ONLY by getting a door wrong. A player who remembered Renner's five clauses touched
+# no mechanic this release built and walked into the plant room through an unguarded door.
+# ⚠️ SO: POSTED MEN AT THREE DEPTHS (LO's call, verbatim — "it is about guards guarding him at the
+# different level as security for hideout"). Renner's route gets her through the GEOGRAPHY; these are what
+# stop her. Ring 1 is the slab, above ground, and lives in bunker_descent.base. Ring 2 is one man on the
+# far gate. Ring 3 is his level: a walker, a door man, and a clerk at the readout.
+# ⚠️ THE FIVE LOAFERS ARE NOW THE OFF-SHIFT OF THESE MEN, and that costs no rewrite — it is simply what
+# they were always doing. Nothing already written is contradicted.
+# ⚠️ THE HOOK STAYS A HOOK. Bastien's own line (bunker_bastien.the_call) is that the room is baited and
+# cast. Bait has to look reachable, so the outer rings are deliberately thin — two men on a slab and one
+# man on a gate — and the real weight is on his level, where a rescuer has already committed.
+# ⚠️ WHY A RING LETS HER WALK ON WHEN A WRONG ROOM DOES NOT. A wrong room is the crew's own space and their
+# mates are next door, so the alarm goes up and the fight and the shot buy the ROOM, not the run
+# (bunker_guards banner). A posted man is alone at his post and nobody expects to hear from him for an
+# hour. She clears him and continues — and the cost is carried forward instead: `bunker_noise` below,
+# `bunker_seen` above.
+# ⚠️ THRESHOLDS SIT ON THE SHIPPED LADDER (g1..g5 = 20/25, 30/35, 40/45, 50/55, 60/65). Ring 2 is 45/50 and
+# the corridor man 55/60 — posted men, so above the loafer at the same depth. The door man is 60/70, the
+# only man in the building who outranks Loder, and he is the wall the emitter exists for. The clerk is
+# 35/40 and that is NOT a slip: he is a man with a book and his back turned, not a guard.
+# ⚠️ ONE NEW POOL ONLY. The gate has no emitter branch on purpose — sex/bunker_door_t5 is the sixth and
+# last bunker pool, and the media debt is 8 slots, not 12. ONE ASSET, ONE BLOCK.
+# ⚠️ LOCATED + substitution_only, the bunker_guards shape. These rooms ARE under facility_ruins; the
+# trigger exists for the attribution and for the flag-chain validator, and substitution_only keeps the
+# canvas off every render path so nothing appears on the Facility's page.
+[[canvases]]
+id          = "bunker_rings"
+name        = "Somebody is posted here"
+description = "beat_0191 (rev 226), THE RINGS. TRIGGERLESS in practice (located @facility_ruins + substitution_only, the bunker_guards shape). The posted men ON the correct path, at two depths below ground: `gate` sits between bunker_route.t3 and .t4, and `last`/`door`/`panel` sit between bunker_route.t5 and bunker_bastien.base. Ring 1 is above ground and lives in bunker_descent.base. Every quiet answer spends bunker_stealth_used, the ONE quiet thing per run; every loud answer raises bunker_noise (which the door man reads) and sets bunker_seen (which the slab reads). The clerk at the readout is exempt from noise — his back is turned. Six nodes plus three resolution beats; one new pool, sex/bunker_door_t5."
+
+[canvases.trigger]
+location          = "facility_ruins"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+
+# ── RING 2 — THE FAR GATE. One man, between t3 and t4. ────────────────────────────────────────────────
+# ⚠️ THE WEDGE WAS ALWAYS HIS. bunker_route.t3 already says the far gate has a keypad "that somebody has
+# propped a wedge against so it cannot latch". This beat only names who, and why: a man who has to sit the
+# far side of it all night does not key himself in and out.
+[[canvases.nodes]]
+id   = "gate"
+name = "The man on the gate"
+blocks = [
+  { type = "paragraph", content = "The far gate does not open onto corridor. It opens onto a lobby the size of a lift car, with a stool in it and a lamp on a cord over the stool, and a man sitting sideways on it with his back against the frame and his boots crossed." },
+  { type = "paragraph", content = "He is not eating and he is not washing and he is not doing anything at all, which is the difference. The other men down here were on their breaks. This one is working, and the wedge in the keypad is his, because he is the one who has to come back through it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE QUIET ANSWER SPENDS THE SAME ONE BUDGET AS A CAUGHT ROOM'S BACK-OUT. That is the squeeze the rings
+# exist for: slip out of g2 and the far gate has to be paid for in noise, slip past the far gate and the
+# door man has to be paid for in a shot.
+[[canvases.nodes.exit_block.choices]]
+text             = "Round the back of the racking while the lamp is swinging."
+targetType       = "node"
+nodeId           = "bunker_route.t4"
+show_when_locked = true
+locked_text      = "Not that quiet, or she has already spent the one quiet thing she gets tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 45 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1  },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+time_progression_minutes = 30
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "gate_down"
+show_when_locked = true
+locked_text      = "Not this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 50 },
+] }
+effects     = [{ targetType = "player", trait = "bunker_noise", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "bunker_seen", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out. Not tonight."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "gate_down"
+name = "Behind the racking"
+blocks = [
+  { type = "paragraph", content = "It takes four seconds and the stool goes over louder than he does. She gets him under the arms and drags him back through the gate and in behind the bottom bay of the racking, where a man lying down looks like a bundle until somebody shines something at him." },
+  { type = "paragraph", content = "The wedge stays where it is. Taking it out would latch the gate and a latched gate is the first thing anybody notices down here." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Somebody will want him at some point tonight. Not soon. But the clock she is on now is his, and it started when he went down." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "On. Three doors."
+targetType = "node"
+nodeId     = "bunker_route.t4"
+time_progression_minutes = 15
+
+
+# ── RING 3 — HIS LEVEL. Three men: a walker, a door man, a clerk. ─────────────────────────────────────
+[[canvases.nodes]]
+id   = "last"
+name = "The corridor man"
+blocks = [
+  { type = "paragraph", content = "The walking one comes up the corridor with his hands behind his back, turns short of the conduit door, and goes away again. Eleven paces one way, eleven the other. He has been doing it long enough that he does not look at the walls any more." },
+  { type = "paragraph", content = "Where the conduit drops off the ceiling to go into the wall there is about two feet of dead space behind it, and the lamp above it has been dead longer than the fire. Standing in it means standing still while a man walks past close enough to be heard breathing." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Get in the dead space and let him go by."
+targetType       = "node"
+nodeId           = "door"
+show_when_locked = true
+locked_text      = "Not that still, or she has already spent the one quiet thing she gets tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 55 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1  },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text             = "Take him on the turn."
+targetType       = "node"
+nodeId           = "last_down"
+show_when_locked = true
+locked_text      = "He is bigger than the last one and he is not carrying a flask."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 60 },
+] }
+effects     = [{ targetType = "player", trait = "bunker_noise", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "bunker_seen", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out. Not tonight."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "last_down"
+name = "Eleven paces"
+blocks = [
+  { type = "paragraph", content = "She takes him at the far end of his eleven paces, on the turn, with his hands still behind his back. It is not clean. His boot goes into the wall twice before he stops and the corridor carries both of them the whole way to the door." },
+  { type = "paragraph", content = "The man on the chair at the far end does not get up. He turns his head and looks up the corridor at the dark for a while, and then he faces front again, because down here a noise in the dark is a noise the walking one is supposed to deal with." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "The door, then."
+targetType = "node"
+nodeId     = "door"
+time_progression_minutes = 15
+
+# ⚠️ THE WALL OF THE RUN, AND THE EMITTER IS WHAT IT IS FOR. Three ways past him and the clean one needs a
+# silent run AND an unspent budget, so in practice this is where the shot goes — which ties the release's
+# weapon to the release's capstone through an economy that already exists (design_the_way_down.md §7: three
+# shots, 10 coin and a day at the feed line to get them back).
+[[canvases.nodes]]
+id   = "door"
+name = "The man on the door"
+blocks = [
+  { type = "paragraph", content = "He has a chair, not a stool, and he has it tipped back against the plant room door with a short weapon laid across his knees and his chin down. He is facing up the corridor, which is where she is, and he has been facing up it all night." },
+  { type = "paragraph", content = "Over his shoulder, through the wired glass, the third one is standing at the lit stalk with a book open on his forearm, writing something off the readout. The hum of the room comes through the seal as a pressure rather than a sound." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ bunker_noise lt 1 IS THE WHOLE REWARD FOR A SILENT RUN. Leave a body anywhere on the correct path and
+# this option is gone, because the noise came down the corridor and he is sitting up.
+[[canvases.nodes.exit_block.choices]]
+text             = "He has not moved in ten minutes. Go past him."
+targetType       = "node"
+nodeId           = "panel"
+show_when_locked = true
+locked_text      = "He is sitting up now, or she is not that quiet, or the one quiet thing is already spent."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "bunker_noise",        operator = "lt",  value = 1  },
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 60 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1  },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+time_progression_minutes = 15
+[[canvases.nodes.exit_block.choices]]
+text             = "Put the field on him."
+targetType       = "node"
+nodeId           = "door_taken"
+show_when_locked = true
+locked_text      = "The emitter is empty, or she is carrying the drain instead."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
+  { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
+] }
+costs   = [{ trait = "arousal_charge", value = 1 }]
+effects = [
+  { targetType = "player", trait = "hygiene",      op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "bunker_noise", op = "add", value = 1 },
+]
+flagEffects = [{ targetType = "player", flag = "bunker_seen", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down."
+targetType       = "node"
+nodeId           = "door_down"
+show_when_locked = true
+locked_text      = "He is awake, he is armed, and he is sitting against the only door that matters."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 70 },
+] }
+effects     = [{ targetType = "player", trait = "bunker_noise", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "bunker_seen", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out. Not tonight."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "door_down"
+name = "Out of the chair"
+blocks = [
+  { type = "paragraph", content = "He is out of the chair before she is on him and it is the hardest four seconds she has had since the pit, and it ends with the weapon on the floor and him against the door frame going down it slowly with his eyes already gone." },
+  { type = "paragraph", content = "She catches the chair before it finishes falling. Through the glass the clerk turns a page and does not look up, because the seal on that door is rubber and the room he is standing in hums." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Open it."
+targetType = "node"
+nodeId     = "panel"
+time_progression_minutes = 15
+
+# ⚠️ THE SIXTH AND LAST BUNKER POOL. Five caught rooms plus this one; check_bunker_route.py §3 holds the
+# count. Written at density and MEASURED against gates.py's frozen EXPLICIT list (:286), not by eye — the
+# first cut of the caught-room scenes scored 4 explicit beats of 31 and read fine.
+# ⚠️ ONE REFLECTIVE BEAT, AT THE END, NEVER FOLDED IN. A beat whose last sentence is about what the moment
+# MEANS has pivoted and scores zero.
+# ⚠️ WHAT MAKES THIS ONE ITS OWN SCENE AND NOT A SIXTH COPY: she is doing it with her hand on a door she is
+# about to open, ten feet from the man she came for, with a third man on the other side of the glass.
+[[canvases.nodes]]
+id   = "door_taken"
+name = "Against the door"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bunker_door_t5", pool = 4, description = "A woman straddling and riding a man slumped back in a chair in a narrow dim concrete corridor, her overalls open to the waist, his weapon on the floor beside them. Must show: him seated in a chair, her astride him, corridor setting, low light. Avoid: an office, a bed, a desk, bright light.", search_queries = ["woman riding seated man chair dim corridor", "girl on top fucking man sitting hallway industrial"] } },
+  { type = "paragraph", content = "She thumbs the emitter at four feet and the field goes through him and through the door behind him. His chin comes up. He is erect in his trousers before his hand has finished coming off the weapon, and his cock jumps against the cloth when he moans, once, low, and the chair legs come down." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "She kicks the weapon under the chair and gets his flies open. His cock comes out thick and already wet at the head, and he thrusts up into her fist the second she closes it, balls tight." },
+    ] },
+    { advance_text = "Open the coveralls.", blocks = [
+        { type = "paragraph", content = "She strips the zip down to her waist and puts her tits in his face. He takes a nipple in his mouth and sucks like a man drinking, moaning into it, both hands full of her ass." },
+    ] },
+    { advance_text = "Get on him. Quietly.", blocks = [
+        { type = "paragraph", content = "She straddles the chair and takes his cock into her cunt in one slow sit, and fucks him with her knees taking her weight, because a chair on this floor knocks, and her forearm is across his mouth to hold the moaning in." },
+    ] },
+    { advance_text = "Finish him against the door.", blocks = [
+        { type = "paragraph", content = "He cums up inside her in short hard thrusts with the door taking the sound out of his back, and the field will not let him soften — still erect, still spilling into her cunt — and then he is gone." },
+    ] },
+    { advance_text = "And the clerk has not turned round.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four feet of rubber seal and a humming room, and a man reading a number off a stalk with his back to all of it. Bastien is three steps past that door and has been for a hundred and nineteen days." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get the coveralls done up and open the door."
+targetType = "node"
+nodeId     = "panel"
+time_progression_minutes = 15
+
+# ⚠️ 35/40, AND THAT IS DELIBERATELY BELOW THE MEN ABOVE HIM. He is a clerk with a book and his back turned
+# in a room that hums, not a guard. He is also the last thing between her and the frame, and a wall here —
+# after the emitter has already been spent on the door — would be a cruel one.
+# ⚠️ NO NOISE EITHER WAY. Nothing he does gets heard, so neither does anything done to him.
+[[canvases.nodes]]
+id   = "panel"
+name = "The one with the book"
+blocks = [
+  { type = "paragraph", content = "The door comes off the seal with a sound like a held breath let go and the warm air comes out over her. The clerk is three feet inside it with his back to her and a book open on his forearm, copying the last figure off the stalk." },
+  { type = "paragraph", content = "He has not heard the door and he is not going to. The room hums the way a room hums when something in it has been running for four months. Past him, in the middle of the floor, there is a frame standing on its own with a man in it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Put him down before he turns round."
+targetType       = "node"
+nodeId           = "panel_down"
+show_when_locked = true
+locked_text      = "Not even this one. Not with what she can do."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 40 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text             = "Get an arm round his throat."
+targetType       = "node"
+nodeId           = "panel_down"
+show_when_locked = true
+locked_text      = "Not that quiet, or she has already spent the one quiet thing she gets tonight."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "stealth",             operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "bunker_stealth_used", operator = "lt",  value = 1  },
+] }
+effects = [{ targetType = "player", trait = "bunker_stealth_used", op = "set", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out. Not tonight."
+targetType = "location"
+locationId = "facility_ruins"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "panel_down"
+name = "The book on the floor"
+blocks = [
+  { type = "paragraph", content = "He goes down against the stalk and the book goes with him, and she picks it up before she does anything else, because it is a book of numbers written down every day by somebody who came in here and did it and then went home." },
+  { type = "paragraph", content = "It goes back four months. The handwriting changes twice. There is a tea ring on one of the pages." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Look at the frame."
+targetType = "node"
+nodeId     = "bunker_bastien.base"
+time_progression_minutes = 15
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
 # ═══ beat_0175 (rev 222), THE WAY DOWN — THE ROUTE, OUT OF RENNER. ════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
 # ⚠️ THIS IS THE BEAT beat_0172 WAS WRITTEN FIRST FOR. Every place, door and turn below is a node that
@@ -26841,7 +27253,7 @@ blocks = [
         { type = "paragraph", content = "There is one lit thing in the room, a readout on a stalk at the height of a standing man's eyes, and it is showing four figures and a decimal, and the last figure is moving." },
     ] },
     { advance_text = "He is awake.", blocks = [
-        { type = "paragraph", content = "And he is awake. He has been awake the whole time she has been standing in the doorway, watching her out of the one eye he can get round to her side, and he waits until she looks at him before he says anything." },
+        { type = "paragraph", content = "And he is awake. He has been awake since the door came off its seal, watching her deal with the one at the stalk out of the one eye he can get round to her side, and he waits until she looks at him before he says anything." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You are not the washing one. The washing one comes Tuesdays." },
     ] },
     { advance_text = "Say nothing.", blocks = [
@@ -26988,6 +27400,13 @@ id   = "base"
 name = "Twenty minutes"
 blocks = [
   { type = "paragraph", content = "He comes through the plant room door at nineteen minutes and he has not put a foot wrong anywhere between the plate and here, on a route he was given once, by a woman on a wire, in one sentence." },
+  # ⚠️ ADDED beat_0191. She may have left men on that route and he has just walked past them. One band, on
+  # bunker_noise, because a silent run leaves nothing for him to step over and the line would be a lie.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "bunker_noise", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has come past whatever she left lying in it on the way and he does not mention any of it, then or later." },
+  ] },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "paragraph", content = "He does not look at her. He goes straight past her and crouches down in front of the frame and looks at the man on the floor of it for a while without saying anything at all." },
@@ -28559,7 +28978,7 @@ flagEffects = [
 [[canvases]]
 id          = "dev_jump_way_down_door"
 name        = "\u25b6 0.2.2: at the plate, route in hand"
-description = "DEV JUMP. Seeds THE WAY DOWN through beat_0178 — route learned, part found, link built, yard at depth 4 — and drops at facility_ruins with the emitter equipped and full and stealth/fighting at 45, which opens the back-out at turns 1-3 and the fight at turns 1-2 and leaves the rest locked, so one run shows every branch in both states. The route answer: stair, left at the pumps, right at the ring, the far gate, the door the conduit turns into. Gated dev_mode_enabled; inert in shipped builds."
+description = "DEV JUMP. Seeds THE WAY DOWN through beat_0178 — route learned, part found, link built, yard at depth 4 — and drops at facility_ruins with the emitter equipped and full and stealth/fighting at 60 (raised from 45 at beat_0191, THE RINGS), which opens both answers at every posted man except the door man — whose quiet option also needs a silent run and whose fight stays locked at 70 — and leaves g5's fight locked, so one run shows every branch in both states. The slab is walked 20:00-23:59, so arrive before eight or after midnight. The route answer: stair, left at the pumps, right at the ring, the far gate, the door the conduit turns into. Gated dev_mode_enabled; inert in shipped builds."
 [canvases.trigger]
 location      = "the_waterfront"
 is_repeatable = true
@@ -28655,10 +29074,17 @@ effects = [
   { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
   { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
   { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
-  { targetType = "player", trait = "stealth",             op = "set", value = 45 },
-  { targetType = "player", trait = "fighting",            op = "set", value = 45 },
+  # ⚠️ 60/60, RAISED FROM 45/45 AT beat_0191. THE RINGS put posted men on the correct path and 45 left the
+  # corridor man (55/60) with only one answer and the run able to dead-end on a spent budget. At 60 both
+  # answers are live at the far gate (45/50) and the corridor (55/60), both are live at the clerk (35/40),
+  # the door man's quiet option needs a SILENT run as well as the 60, his fight (70) stays locked so the
+  # wall is visible, and g5's fight (65) stays locked in the caught rooms. One run shows every branch in
+  # both states, which is what this jump is for.
+  { targetType = "player", trait = "stealth",             op = "set", value = 60 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 60 },
   { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },
   { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
   { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
   { targetType = "player", trait = "energy",              op = "set", value = 100 },
   { targetType = "player", trait = "coin",                op = "set", value = 120 },

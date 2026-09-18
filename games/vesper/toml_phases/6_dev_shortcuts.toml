@@ -1309,7 +1309,7 @@ flagEffects = [
 [[canvases]]
 id          = "dev_jump_way_down_door"
 name        = "\u25b6 0.2.2: at the plate, route in hand"
-description = "DEV JUMP. Seeds THE WAY DOWN through beat_0178 — route learned, part found, link built, yard at depth 4 — and drops at facility_ruins with the emitter equipped and full and stealth/fighting at 45, which opens the back-out at turns 1-3 and the fight at turns 1-2 and leaves the rest locked, so one run shows every branch in both states. The route answer: stair, left at the pumps, right at the ring, the far gate, the door the conduit turns into. Gated dev_mode_enabled; inert in shipped builds."
+description = "DEV JUMP. Seeds THE WAY DOWN through beat_0178 — route learned, part found, link built, yard at depth 4 — and drops at facility_ruins with the emitter equipped and full and stealth/fighting at 60 (raised from 45 at beat_0191, THE RINGS), which opens both answers at every posted man except the door man — whose quiet option also needs a silent run and whose fight stays locked at 70 — and leaves g5's fight locked, so one run shows every branch in both states. The slab is walked 20:00-23:59, so arrive before eight or after midnight. The route answer: stair, left at the pumps, right at the ring, the far gate, the door the conduit turns into. Gated dev_mode_enabled; inert in shipped builds."
 [canvases.trigger]
 location      = "the_waterfront"
 is_repeatable = true
@@ -1405,10 +1405,17 @@ effects = [
   { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
   { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
   { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
-  { targetType = "player", trait = "stealth",             op = "set", value = 45 },
-  { targetType = "player", trait = "fighting",            op = "set", value = 45 },
+  # ⚠️ 60/60, RAISED FROM 45/45 AT beat_0191. THE RINGS put posted men on the correct path and 45 left the
+  # corridor man (55/60) with only one answer and the run able to dead-end on a spent budget. At 60 both
+  # answers are live at the far gate (45/50) and the corridor (55/60), both are live at the clerk (35/40),
+  # the door man's quiet option needs a SILENT run as well as the 60, his fight (70) stays locked so the
+  # wall is visible, and g5's fight (65) stays locked in the caught rooms. One run shows every branch in
+  # both states, which is what this jump is for.
+  { targetType = "player", trait = "stealth",             op = "set", value = 60 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 60 },
   { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },
   { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
   { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
   { targetType = "player", trait = "energy",              op = "set", value = 100 },
   { targetType = "player", trait = "coin",                op = "set", value = 120 },

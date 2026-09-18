@@ -9,6 +9,21 @@ how it was verified if relevant (grep / build / live-play).
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
 ## 2026-09-18
+- **`references/lanes.md` — new rule: "A SKILL GATE PUTS ITS COST ON THE WRONG PATH — check the RIGHT one".**
+  `vesper` 0.2.2 shipped a five-turn memorised route into a guarded bunker where every mechanic the release
+  built — the one free stealth back-out, the `fighting` thresholds, the arousal emitter and its
+  10-coin-and-a-day reload — was reachable ONLY by taking a wrong door. The correct path cost 10 Charge and
+  15 minutes a turn and nothing else, five times, and ended at an unguarded door. A player who remembered
+  the directions touched none of it. Root cause is a skill gap, not an author slip: nothing in the skill
+  asked what getting it RIGHT costs, so the failure branch gets written as content and the success branch is
+  left as a corridor — the natural shape for any knowledge gate (a route, a password, an hour, a code).
+  The rule adds the second question, the fix that discharges it (one obstacle on the correct path, drawing
+  on the same budget the failure branch spends, so the two compete), the guard that keeps it honest (the
+  turn must NOT keep its old direct exit, or the obstacle is walk-round scenery and the build stays green),
+  and the limit (every such obstacle needs an always-available way out, or a spent budget soft-locks the
+  player at the deepest point of the thing they worked to reach). Verified by the fix it describes:
+  `games/vesper/design_the_rings.md`, `check_bunker_route.py` §11 negative-tested eight ways, and
+  `live_rings.py` (36 checks) in the built game.
 - **`references/quests.md`, `references/engine-reference.md`, `references/npc-intro.md`, `references/lanes.md`
   — schedule rows can carry `when` now; the skill stopped saying they cannot.** An engine feature landed the
   same day (`template_import.py`, `game_graph.py`, `v2.py`): an optional v1.0 conditions table on a
