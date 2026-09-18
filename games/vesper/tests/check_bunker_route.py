@@ -36,6 +36,21 @@ ROUTE = [
 BACKOUT = {"g1": "bunker_route.base", "g2": "bunker_route.t1", "g3": "bunker_route.t2",
            "g4": "bunker_route.t3",   "g5": "bunker_route.t4"}
 
+# THE RINGS (rev 226) - posted men ON the correct path, as opposed to the five loafers in the wrong rooms.
+# A turn listed here does NOT hand straight on to the next turn: its correct door enters a ring node, and
+# the ring is what hands on. Turn -> (the ring node the correct choice enters, where the ring must come out).
+RINGS = {"t3": ("bunker_rings.gate", "bunker_route.t4")}
+# The deep ring hangs off t5, which is the scout (she counts three men through the wired glass) and is not
+# a turn in ROUTE. Entry node, then the order they must be cleared in, then the room.
+DEEP = ["bunker_rings.last", "bunker_rings.door", "bunker_rings.panel", "bunker_bastien.base"]
+# The nodes where a man is still standing. Each must keep a way OUT of the building - a ring that can
+# trap a run is a soft lock - and each is where the quiet/loud budget is spent.
+RING_ENCOUNTERS = ["gate", "last", "door", "panel"]
+# Resolution beats: the man is down or taken and she walks on. No flee exit; they hand forward.
+RING_OUTCOMES = ["gate_down", "last_down", "door_down", "door_taken", "panel_down"]
+# Where a loud answer costs noise. The panel man is exempt ON PURPOSE: his back is turned.
+RING_LOUD = ["gate", "last", "door"]
+
 fails: list[str] = []
 
 
@@ -49,7 +64,7 @@ def main() -> int:
         doc = tomllib.load(fh)
 
     canvases = {c["id"]: c for c in doc.get("canvases", [])}
-    for cid in ("bunker_route", "bunker_guards", "bunker_descent",
+    for cid in ("bunker_route", "bunker_guards", "bunker_rings", "bunker_descent",
                 "renner_route_canvas", "bunker_bastien", "cap_the_extraction"):
         check(cid in canvases, f"canvas missing: {cid}")
     if fails:
@@ -75,10 +90,19 @@ def main() -> int:
         return out
 
     # 1 — the correct path is walkable end to end, and each wrong door lands in that turn's own room.
+    #     A turn in RINGS hands on THROUGH a posted man instead of straight on, and must not also keep the
+    #     old direct exit, or the ring is scenery a player can walk round.
     for turn, nxt, guard, _ in ROUTE:
         t = targets("bunker_route", turn)
-        check(f"bunker_route.{nxt}" in t,
-              f"route: {turn} has no correct exit to {nxt} (targets={t})")
+        if turn in RINGS:
+            entry, _out = RINGS[turn]
+            check(entry in t,
+                  f"route: {turn}'s correct door must enter the ring at {entry} (targets={t})")
+            check(f"bunker_route.{nxt}" not in t,
+                  f"route: {turn} still hands straight on to {nxt}, so the ring at {entry} is bypassable")
+        else:
+            check(f"bunker_route.{nxt}" in t,
+                  f"route: {turn} has no correct exit to {nxt} (targets={t})")
         check(f"bunker_guards.{guard}" in t,
               f"route: {turn} has no wrong-turn exit to bunker_guards.{guard} (targets={t})")
         for tgt in t:
@@ -116,7 +140,7 @@ def main() -> int:
     # 3 — one asset, one block: every bunker pool_dir is unique
     pools = re.findall(r'pool_dir = "(sex/bunker_[^"]+)"', open(GAME, encoding="utf-8").read())
     check(len(pools) == len(set(pools)), f"pool_dir reused across blocks: {pools}")
-    check(len(pools) == 5, f"expected 5 bunker pools, found {len(pools)}")
+    check(len(pools) == 6, f"expected 6 bunker pools (five caught rooms + the door man), found {len(pools)}")
 
     # 4 - PROSE TRUTH, CHECKED ON THE MNEMONIC LINE, NOT ON THE WHOLE SPEECH.
     #
@@ -312,8 +336,8 @@ def main() -> int:
     # This replays each jump's effects the way the engine does and evaluates real trigger conditions.
     NEW_0_2_2 = {"cap_bastien_alive", "activity_go_after_him", "cap_back_into_cover", "renner_route_canvas",
                  "yard_find_4", "kess_makes_the_link", "bunker_descent", "bunker_route", "bunker_guards",
-                 "bunker_sides", "bunker_bastien", "cap_the_extraction", "cap_bastien_at_the_cot",
-                 "amb_bastien_cot"}
+                 "bunker_rings", "bunker_sides", "bunker_bastien", "cap_the_extraction",
+                 "cap_bastien_at_the_cot", "amb_bastien_cot"}
     PLACES = {"the_cot", "renner_depot", "the_anchor", "renner_burned_yard", "kess_berth",
               "facility_ruins", "the_waterfront"}
     init_p = dict((doc.get("player") or {}).get("core_traits", {}))
@@ -378,6 +402,158 @@ def main() -> int:
     check(fl.get("arousal_weapon_ready") and fl.get("has_arousal_weapon"),
           "dev_jump_way_down_start: the emitter was never found or repaired, so no caught-beat can be reached")
 
+    # 11 - THE RINGS (rev 226). Posted men ON the correct path, at three depths.
+    #
+    # WHY. Until this build the five turns were a memory test and the reward for remembering was that
+    # NOTHING stopped her: base..t4 cost 10 Charge and 15 minutes a turn and nothing else. So the one quiet
+    # exit, `fighting`, and the emitter with its 10-coin/one-day reload were reachable ONLY by taking a
+    # wrong door. A player who got it right never touched a single mechanic the release built, and walked
+    # into the plant room through an unguarded door. The rings put that cost on the correct path.
+    #
+    # What must hold, and why each line is here rather than left to a read:
+    #   - a ring cannot be walked round (checked at §1: the turn must not keep its old direct exit);
+    #   - a ring cannot trap a run - every node with a man still standing keeps a way out of the building;
+    #   - the door man cannot be passed for free, because he is the wall the emitter exists for;
+    #   - a quiet answer anywhere on the route spends the ONE quiet thing per run, the g1-g5 rule applied
+    #     to the correct path;
+    #   - noise is per-RUN state and is zeroed on the way in, the way bunker_stealth_used is;
+    #   - the slab windows tile the whole day, because `time_of_day` cannot be negated (v2.py:4406 takes no
+    #     operator) so a window and its complement are written by hand and a gap is invisible in a build.
+    def ring_reaches(start, want, limit=24):
+        seen, stack = set(), [start]
+        while stack and len(seen) < limit:
+            cur = stack.pop()
+            if cur in seen:
+                continue
+            seen.add(cur)
+            cv, _, nd = cur.partition(".")
+            if cv != "bunker_rings":
+                continue
+            for tgt in targets("bunker_rings", nd):
+                if tgt == want:
+                    return True
+                stack.append(tgt)
+        return False
+
+    def cond_traits(ch):
+        items = (ch.get("conditions") or {}).get("items") or []
+        return {it.get("trait_key") for it in items
+                if isinstance(it, dict) and it.get("type") == "trait"}
+
+    def effect(ch, trait, op, value):
+        return any(e.get("trait") == trait and e.get("op") == op and e.get("value") == value
+                   for e in ch.get("effects") or [])
+
+    # 11a - the shape: t3 hands on through the gate, t5 is the scout, and the deep ring is a chain.
+    entry, out = RINGS["t3"]
+    check(ring_reaches(entry, out), f"ring: {entry} never comes out at {out} - the route is cut at t3")
+    t5_out = targets("bunker_route", "t5")
+    check(DEEP[0] in t5_out, f"ring: t5 must open onto {DEEP[0]}, not the room (targets={t5_out})")
+    check("bunker_bastien.base" not in t5_out,
+          "ring: t5 still opens straight into the plant room - the deep ring is bypassable")
+    for a, b in zip(DEEP, DEEP[1:]):
+        check(ring_reaches(a, b), f"ring: {a} never reaches {b} - the deep ring does not chain")
+
+    # 11b - no ring can trap a run, and every resolution beat hands forward.
+    for n in RING_ENCOUNTERS:
+        check(n in nodes["bunker_rings"], f"ring node missing: {n}")
+        check("@facility_ruins" in targets("bunker_rings", n),
+              f"ring {n}: no way out of the building - a run with nothing left is soft-locked")
+    for n in RING_OUTCOMES:
+        check(n in nodes["bunker_rings"], f"ring outcome node missing: {n}")
+        check(any(not t.startswith("@") for t in targets("bunker_rings", n)),
+              f"ring {n}: a resolution beat that hands nowhere - the man is down and the run stops")
+
+    # 11c - the door man is the wall. Every branch of his that advances is paid for.
+    for ch in choices("bunker_rings", "door"):
+        if ch.get("targetType") != "node":
+            continue
+        traits = cond_traits(ch)
+        paid = any(c.get("trait") == "arousal_charge" for c in ch.get("costs") or [])
+        check(paid or "fighting" in traits or ("stealth" in traits and "bunker_stealth_used" in traits),
+              f"door: '{ch.get('text')}' passes the door man for free")
+    emit = [c for c in choices("bunker_rings", "door") if c.get("nodeId") == "door_taken"]
+    check(bool(emit), "door: no emitter branch to door_taken")
+    if emit:
+        check(any(c.get("trait") == "arousal_charge" and c.get("value") == 1
+                  for c in emit[0].get("costs") or []),
+              "door: the emitter branch must SPEND a shot via `costs` (engine-enforced affordability)")
+
+    # 11d - a quiet answer costs the one quiet thing per run, and spends it.
+    for n in RING_ENCOUNTERS:
+        for ch in choices("bunker_rings", n):
+            if "stealth" not in cond_traits(ch):
+                continue
+            check("bunker_stealth_used" in cond_traits(ch),
+                  f"ring {n}: '{ch.get('text')}' is a quiet pass that is not budgeted - free every room")
+            check(effect(ch, "bunker_stealth_used", "set", 1),
+                  f"ring {n}: '{ch.get('text')}' does not SPEND the quiet pass")
+
+    # 11e - noise: zeroed on the way in, raised by every loud answer except the one with his back turned.
+    down = [c for c in choices("bunker_descent", "base") if c.get("nodeId") == "bunker_route.base"]
+    check(bool(down), "bunker_descent: no 'Down.' choice into the route")
+    if down:
+        check(effect(down[0], "bunker_noise", "set", 0),
+              "bunker_descent: 'Down.' does not zero bunker_noise - noise is per-RUN state")
+    for n in RING_LOUD:
+        for ch in choices("bunker_rings", n):
+            loud = (any(c.get("trait") == "arousal_charge" for c in ch.get("costs") or [])
+                    or "fighting" in cond_traits(ch))
+            if not loud:
+                continue
+            check(effect(ch, "bunker_noise", "add", 1),
+                  f"ring {n}: '{ch.get('text')}' leaves a body and makes no noise")
+            check(any(fe.get("flag") == "bunker_seen" and fe.get("op") == "set"
+                      for fe in ch.get("flagEffects") or []),
+                  f"ring {n}: '{ch.get('text')}' leaves a body on the correct path and the slab never hears")
+    for ch in choices("bunker_rings", "panel"):
+        check(not effect(ch, "bunker_noise", "add", 1),
+              "ring panel: the man with his back turned must not cost noise - he is the quiet kill")
+
+    # 11f - the slab: the patrol window and its complement must tile the day exactly.
+    def time_windows(obj, out=None):
+        out = [] if out is None else out
+        if isinstance(obj, dict):
+            if obj.get("type") == "time_of_day":
+                out.append((obj.get("start_time"), obj.get("end_time")))
+            for v in obj.values():
+                time_windows(v, out)
+        elif isinstance(obj, list):
+            for v in obj:
+                time_windows(v, out)
+        return out
+
+    def spans(win):
+        # end is EXCLUSIVE and wraps when it is <= start (v2.py:4134 isCurrentTimeSlot)
+        a, b = win
+        sh, sm = (int(x) for x in a.split(":"))
+        eh, em = (int(x) for x in b.split(":"))
+        st, en = sh * 60 + sm, eh * 60 + em
+        return [(st, 1440), (0, en)] if en <= st else [(st, en)]
+
+    wins = time_windows(nodes["bunker_descent"]["base"])
+    check(len(wins) >= 2, f"slab: bunker_descent.base carries {len(wins)} time_of_day windows, needs the "
+                          "patrol window AND its complement (time_of_day cannot be negated)")
+    cover = [0] * 1440
+    for w in set(wins):
+        for st, en in spans(w):
+            for m in range(st, en):
+                cover[m] += 1
+    def at(mins):
+        return "never" if not mins else f"{mins[0] // 60:02d}:{mins[0] % 60:02d}"
+
+    gaps = [m for m, c in enumerate(cover) if c == 0]
+    overlaps = [m for m, c in enumerate(cover) if c > 1]
+    check(not gaps, f"slab: {len(gaps)} minutes of the day are in NO window (first at {at(gaps)}) - "
+                    "the descent would render neither band")
+    check(not overlaps, f"slab: {len(overlaps)} minutes are in TWO windows (first at {at(overlaps)}) - "
+                        "the if/elseif chain would take the first and the later band is dead")
+    for ch in choices("bunker_descent", "base"):
+        if time_windows(ch.get("conditions") or {}) and ch.get("show_when_locked"):
+            check(ch.get("locked_text"),
+                  f"slab: '{ch.get('text')}' is locked on the clock with no locked_text - the engine "
+                  "cannot generate one (time_of_day is absent from describeUnmetConditions)")
+
     return report()
 
 
@@ -387,8 +563,10 @@ def report() -> int:
         for f in fails:
             print(f"  - {f}")
         return 1
-    print("BUNKER-ROUTE GUARD: OK — five turns walkable, every wrong door lands in its own room, "
-          "the emitter spends a shot, the back-out is budgeted, Renner's directions match the rooms, "
+    print("BUNKER-ROUTE GUARD: OK — five turns walkable THROUGH the rings and not around them, every wrong "
+          "door lands in its own room, the emitter spends a shot, every quiet answer is budgeted and spent, "
+          "the door man cannot be passed for free, noise is zeroed on the way in and paid on the way past, "
+          "the slab's two clock windows tile the day exactly, Renner's directions match the rooms, "
           "the mnemonic names all five turns in order in both the drain and the re-ask, "
           "the route is not printed on the Quests page, and both dev jumps start at the end of 0.2.1 "
           "with the wardrobe a real player has by then.")

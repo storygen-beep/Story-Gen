@@ -624,6 +624,39 @@ The location screen renders four separate paths; a canvas only appears if it mat
 - `capstone` → a **Lane 4** one-shot gating a milestone.
 - `location_reveal` / `story_turn` → structure + the scenes the new place/turn needs (often a hub + ambients).
 
+## ⚠️ A SKILL GATE PUTS ITS COST ON THE WRONG PATH — check the RIGHT one
+
+Written after `vesper` shipped a five-turn memorised route into a guarded bunker where **every mechanic the
+release built was reachable only by getting a door wrong**. Wrong turn → a room with a man in it, where the
+stealth budget, the fighting threshold and the arousal emitter all live. Right turn → 10 Charge, 15 minutes,
+nothing else, five times, and then the room at the end. A player who remembered the directions touched
+**none of it** and walked in through an unguarded door. Nobody decided that either.
+
+It is the natural shape, which is why it needs a rule. A route, a password, a schedule to learn, a code, a
+sequence — the author writes the **failure** branch as content, because failure is where the drama
+obviously is, and the success branch is left as a corridor.
+
+**The rule: a mechanic the player can avoid by playing well is a mechanic most players never see.**
+
+So when a beat authors *knowledge* as the gate — she learns the way / the name / the hour — ask both:
+
+1. What does getting it **wrong** cost? (Usually already answered; this is the fun part to write.)
+2. What does getting it **right** cost? If the answer is "travel", the skill gate is scenery. **Put one
+   obstacle on the correct path** — one that draws on the same budget the failure branch spends, so the two
+   compete. That is what makes the budget a decision instead of a formality.
+
+`vesper` fixed it by posting men **on** the route at three depths (`design_the_rings.md`). The single
+change that did the work: the one free back-out per run became **the one quiet thing per run**, spendable
+either to escape a wrong room or to pass a right one. Two claims on one budget is the whole mechanic.
+
+**Guard it, because no build will:** a correct path that hands straight on is a green build and a silent
+design failure. `games/vesper/tests/check_bunker_route.py` §1 asserts the turn does **not** keep its old
+direct exit, so the obstacle cannot be walked round.
+
+**And a cost is not a wall.** Every obstacle on the correct path needs an always-available way out of the
+attempt (vesper's is "Back out. Not tonight."), or a player who has spent the budget is soft-locked at the
+deepest point of the thing they worked to reach.
+
 ## ⚠️ A repeatable sex surface is a MENU, not a scene — and check before you add a second one
 
 Written after `vesper` accreted **six sex canvases at one location with no choice of act** across five

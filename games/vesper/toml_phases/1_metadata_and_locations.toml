@@ -122,18 +122,31 @@ vault_cleared = 0
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
 # (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
 emitter_broken    = 0
-# THE WAY DOWN (beat_0173) — the bunker route's only per-run state.
-# ⚠️ bunker_stealth_used — the ONE free stealth back-out per run. 0 = unspent, 1 = spent. There is no engine
-# primitive for per-RUN state: [engine.daily_tick] is day-scoped and the route deliberately advances no day,
-# so it is zeroed on the way IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its
-# five traits on its entry rung. Read by all five caught rooms, written by the back-out and by the descent.
+# THE WAY DOWN (beat_0173, extended rev 226) — the bunker route's per-run state.
+# ⚠️ bunker_stealth_used — THE ONE QUIET THING PER RUN. 0 = unspent, 1 = spent. It began (rev 222) as the one
+# free back-out from a caught room; THE RINGS (rev 226) put posted men on the CORRECT path, and their quiet
+# answers draw on the same single budget. So spending it to slip out of g2 means fighting or shooting your
+# way past the far gate, and slipping past the far gate means the door man has to be paid for. That squeeze
+# is the point: one quiet thing, anywhere, per run. There is no engine primitive for per-RUN state —
+# [engine.daily_tick] is day-scoped and the route deliberately advances no day — so it is zeroed on the way
+# IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its five traits on its entry
+# rung. Read by all five caught rooms and all four rings; written by every quiet answer and by the descent.
+# ⚠️ bunker_noise — how loud this RUN has been. +1 for every body she leaves on the correct path (a ring
+# fought or shot). Read by exactly one gate: the door man at the plant room is dozing at `lt 1` and awake
+# above it, which is what makes a silent run worth having. Zeroed with bunker_stealth_used on the way in,
+# and it deliberately SURVIVES a caught room's restart — the run continues and the floor is hot behind her.
+# The man at the readout is exempt on purpose: his back is turned, so putting him down costs no noise.
+# ⚠️ bunker_seen — NOT here; it is a flag, not a trait, because it is a fact about the world and not a
+# quantity. Set the first time she leaves a body on the correct path, read only by the slab (the round
+# stops stopping). No trigger reads it, so it needs no located setter.
 # ⚠️ bunker_runs — how many times she has been put back to the stair head. Prose only: it bands the descent
 # so the fourth walk down does not read like the first. Gates nothing, and must gate nothing.
 # ⚠️ NO POSITION ODOMETER, DELIBERATELY. The node graph holds her place in the route; a counter beside it
 # would be a second source of truth for the same fact, and the ruin-depth build already shipped that bug
 # once (3_activities:2747 — "band 1 was dead and the first sift jumped straight to the terminal band").
-# Defaults 0 = save-safe: a 0.2.1 save missing both keys reads them as a fresh, unspent run.
+# Defaults 0 = save-safe: a 0.2.1 save missing these keys reads them as a fresh, unspent, silent run.
 bunker_stealth_used = 0
+bunker_noise        = 0
 bunker_runs         = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
@@ -142,9 +155,14 @@ bunker_runs         = 0
 # lt 1 = the torch is cold on it). Crash rough sets NOTHING — the free bed keeps her alive, it doesn't buy him.
 # ⚠️ WHY A COUNTDOWN AND NOT A "PAID THROUGH DAY N" INDEX: an effect value is a LITERAL — _resolve_effect_value
 # (v2.py:13519-13578) takes a number or a random dict and raises on anything else, and the runtime path turns a
-# string expression into NaN -> 0, a SILENT no-op with no build error. And no condition type reads the clock:
-# of the 16 in triggerConditionsSatisfied (v2.py:3816+) only days_since_flag touches time_state.day. So
-# "day + 7" is unwritable in both directions. Bounced up to design_book + design_the_leash §16 (rev 114).
+# string expression into NaN -> 0, a SILENT no-op with no build error. And no condition type reads the DAY
+# COUNTER: of the 17 in triggerConditionsSatisfied (v2.py:4166+) only days_since_flag touches
+# time_state.day. So "day + 7" is unwritable in both directions. Bounced up to design_book +
+# design_the_leash §16 (rev 114).
+# ⚠️ CORRECTED rev 226: this used to read "no condition type reads the clock", which is false and was about
+# to become load-bearing. The CLOCK is readable — `time_of_day` (v2.py:4406, start_time/end_time, no
+# operator, handles the overnight wrap) and [[canvases.trigger.schedules]] for weekday+hour. It is the DAY
+# COUNTER that is unreachable. THE RINGS (rev 226) gates the slab's patrol on time_of_day.
 feed_line_days    = 0
 # THE LEASH (beat_0075) — the parts loop's three counters. Kess cannot crack the key clean, so he BUILDS, and
 # a build has to be bought, seated and burned (design_the_leash.md §8). One cycle is: buy a part at the market
