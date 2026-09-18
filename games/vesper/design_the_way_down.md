@@ -446,6 +446,16 @@ closing mnemonic line and require all five tells **in it, in order**, in both th
 Five deliberate breaks, all now caught: a mis-pointed route exit · mnemonic drift · a free emitter ·
 a schedule row on `npc_loder` · a quest card printing the route.
 
+## Reversed after ship — the decision is an auto-fire (rev 228, 2026-09-18)
+
+`activity_go_after_him` shipped as a repeatable **link** on the cot, on the argument that an auto-fire would
+mean the player was never asked. LO made the other call: *"Go and get him out can be the capstone like canvas
+not link but automatically happening."* The link could be clicked the same minute Cain left; what keeps the
+decision from reading as automatic is the **wait**. It now auto-fires on the first cot visit **one calendar
+day** after the news (`days_since_flag` on `bastien_alive_known`), and the coveralls scene is its second node
+instead of a second auto-fire straight after it. `cap_back_into_cover` is retired (`is_active = false`), not
+deleted, so a save parked inside it still loads.
+
 ## Outstanding — the one thing not done
 **The media harvest. 7 slots, authored and empty:** `portraits/loder.jpg`, `scenes/the_plant_room.jpg`, and
 `sex/bunker_g1_crate_t5` / `g2_water_t5` / `g3_table_t5` / `g4_bench_t5` / `g5_desk_t5` (`pool = 4` each).
