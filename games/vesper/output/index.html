@@ -1461,6 +1461,116 @@ setup.formatTime = function(hour, minute) {
     return displayHour + ':' + displayMinute + ' ' + period;
 };
 
+// ===== Why a gate is shut, in words =====
+// Lives here and not in the shop block (where it was written) because the locked-CHOICE
+// renderer needs it and a game with locked choices need not have a shop. Phrasing mirrors
+// triggerConditionsSatisfied's operator vocabulary directly above, so the message can never
+// disagree with the gate that produced it.
+// Human-readable summary of the conditions on an item that are NOT currently met.
+// Generic over any trait, using the same operator vocabulary as
+// triggerConditionsSatisfied so the message can never disagree with the gate.
+// Returns "" if nothing fails (or only un-describable items fail).
+setup.describeUnmetConditions = function(conditions) {
+    if (!conditions || !conditions.items) return "";
+    var sv = State.variables || {};
+    var traits = (sv.player && sv.player.core_traits) || {};
+    var flags = sv.flags || {};
+    var parts = [];
+    function cap(s) { s = String(s == null ? "" : s); return s.charAt(0).toUpperCase() + s.slice(1); }
+    function num(v) { var n = Number(v); return isNaN(n) ? null : n; }
+    for (var i = 0; i < conditions.items.length; i++) {
+        var it = conditions.items[i];
+        if (!it || typeof it !== 'object') continue;
+        if (it.type === 'trait') {
+            var key = it.trait_key;
+            var op = it.operator;
+            var want = it.value;
+            var cur = (it.subject === 'npc') ? null : num(traits[key]);
+            if (cur !== null) {
+                var sat = false;
+                if (op === 'gte') sat = cur >= want;
+                else if (op === 'gt') sat = cur > want;
+                else if (op === 'lte') sat = cur <= want;
+                else if (op === 'lt') sat = cur < want;
+                else if (op === 'eq') sat = cur === want;
+                else if (op === 'ne') sat = cur !== want;
+                if (sat) continue;
+            }
+            // Underscores out, same as the flag branch below has always done —
+            // "Crowd standing 30+", not "Crowd_standing 30+". These strings are read by
+            // the player now that locked CHOICES carry them, not only the shop.
+            var label = cap(String(key).replace(/_/g, ' '));
+            var phrase;
+            if (op === 'gte') phrase = label + ' ' + want + '+';
+            else if (op === 'gt') phrase = label + ' above ' + want;
+            else if (op === 'lte') phrase = label + ' ' + want + ' or lower';
+            else if (op === 'lt') phrase = label + ' under ' + want;
+            else if (op === 'eq') phrase = label + ' exactly ' + want;
+            else if (op === 'ne') phrase = label + ' not ' + want;
+            else phrase = label + ' ' + op + ' ' + want;
+            if (cur !== null) phrase += ' (you have ' + cur + ')';
+            parts.push(phrase);
+        } else if (it.type === 'flag') {
+            var fkey = String(it.flag_key || '');
+            var fop = it.operator;
+            var v = flags[fkey];
+            var fsat = false;
+            if (fop === 'is_true') fsat = (v === true);
+            else if (fop === 'is_false') fsat = (v === false || v === undefined);
+            else if (fop === 'exists') fsat = Object.prototype.hasOwnProperty.call(flags, fkey);
+            if (fsat) continue;
+            var disp = cap(fkey.replace(/_/g, ' '));
+            parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }
+    }
+    return parts.join(', ');
+};
+
+// A locked choice's requirement, as a bracket to hang beside the author's line.
+// WHY IT IS MAGNITUDE COMPARISONS ONLY (gte/gt/lte/lt). `eq`/`ne` on a trait is
+// virtually always an internal enum rather than a number the player chases, and live
+// play proved it: vesper's emitter rung is gated on the loadout key (1 = drain,
+// 2 = emitter) and printed that key, underscore and all, beside its authored line.
+// A threshold is worth naming; a state check is plumbing, and the authored line
+// already explains it better.
+// WHY THE THRESHOLD MUST BE 2 OR MORE. A `gte 1` / `lt 1` gate is a boolean wearing a
+// trait's clothes - a thing held, a shot spent, a one-off armed - and naming it puts an
+// internal key on screen for something the player cannot train towards. Measured on
+// vesper's 36 locked trait gates and the split is exact: every gate under 2 is
+// possession or run-state (a bottle in her coat, the quiet pass spent, the weapon
+// broken, noise made), and every gate at 2 or more is a meter she works on (fighting,
+// stealth, hygiene). 18 named, 18 silenced, no judgement call in the middle.
+// WHY IT IS TRAITS-ONLY. describeUnmetConditions above also phrases FLAG gates
+// ("Requires: Raid done"), and a locked choice is very often gated on a hidden plot
+// flag - printing those would spoil the story on a greyed tile. Trait gates are the
+// numbers the player is meant to chase, so they are the ones worth naming. NPC-subject
+// traits are dropped too: the helper renders them as a bare "Corruption 40+" with no
+// idea whose, and the player cannot see an NPC's stats anyway. Anything the helper has
+// no phrasing for (time_of_day, clothing, quest) contributes nothing, so a clock-gated
+// choice appends silence rather than half a sentence.
+setup.REQUIREMENT_OPS = ['gte', 'gt', 'lte', 'lt'];
+setup.describeUnmetTraits = function(conditions) {
+    if (!conditions || !conditions.items) return "";
+    var items = [];
+    for (var i = 0; i < conditions.items.length; i++) {
+        var it = conditions.items[i];
+        if (!it || it.type !== 'trait' || it.subject === 'npc') continue;
+        if (setup.REQUIREMENT_OPS.indexOf(it.operator) === -1) continue;
+        if (!(Number(it.value) >= 2)) continue;
+        items.push(it);
+    }
+    if (!items.length) return "";
+    return setup.describeUnmetConditions({ version: "1.0", items: items });
+};
+
+// The rendered suffix. Empty string when there is nothing a number can explain, so the
+// bracket never opens on its own. Mirrors the COST rung, which has always read
+// "Work a shift (Requires 15 Energy (you have 6))" - one house shape for both tiers.
+setup.requirementSuffix = function(conditions) {
+    var why = setup.describeUnmetTraits(conditions);
+    return why ? (' (' + why + ')') : '';
+};
+
 // ===== Trigger Conditions Evaluator =====
 // Evaluates v1.0 trigger conditions against current game state (flags/traits)
 setup.triggerConditionsSatisfied = function(conditions) {
@@ -10744,14 +10854,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Round the back of the racking while the lamp is swinging.&quot; &quot;Canvas_bunker_route_Node_t4&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc0&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(30);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not that quiet, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that quiet, or she has already spent the one quiet thing she gets tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not that quiet, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that quiet, or she has already spent the one quiet thing she gets tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 45}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 50}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_rings:cc1&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_rings_Node_gate_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_noise&quot;, &quot;add&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyFlag(&quot;player&quot;, null, &quot;bunker_seen&quot;, &quot;set&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc1&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not this one. Not with what she can do.&quot;&gt;Not this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not this one. Not with what she can do.&quot;&gt;Not this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 50}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;link &quot;Back out. Not tonight.&quot; &quot;Location_facility_ruins&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(60);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="Canvas_bunker_rings_Node_gate_down" tags="" position="475,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Somebody is posted here &lt;span style=&quot;opacity:0.7;&quot;&gt;(bunker_rings)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Behind the racking&lt;/div&gt;
@@ -10776,14 +10886,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Get in the dead space and let him go by.&quot; &quot;Canvas_bunker_rings_Node_door&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc2&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(15);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not that still, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that still, or she has already spent the one quiet thing she gets tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not that still, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that still, or she has already spent the one quiet thing she gets tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 55}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 60}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_rings:cc3&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Take him on the turn.&quot; &quot;Canvas_bunker_rings_Node_last_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_noise&quot;, &quot;add&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyFlag(&quot;player&quot;, null, &quot;bunker_seen&quot;, &quot;set&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc3&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;He is bigger than the last one and he is not carrying a flask.&quot;&gt;He is bigger than the last one and he is not carrying a flask.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;He is bigger than the last one and he is not carrying a flask.&quot;&gt;He is bigger than the last one and he is not carrying a flask.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 60}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;link &quot;Back out. Not tonight.&quot; &quot;Location_facility_ruins&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(60);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="Canvas_bunker_rings_Node_last_down" tags="" position="725,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Somebody is posted here &lt;span style=&quot;opacity:0.7;&quot;&gt;(bunker_rings)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Eleven paces&lt;/div&gt;
@@ -10808,7 +10918,7 @@ if (clothingMsg) {
 &lt;&lt;link &quot;He has not moved in ten minutes. Go past him.&quot; &quot;Canvas_bunker_rings_Node_panel&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc4&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(15);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;He is sitting up now, or she is not that quiet, or the one quiet thing is already spent.&quot;&gt;He is sitting up now, or she is not that quiet, or the one quiet thing is already spent.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;He is sitting up now, or she is not that quiet, or the one quiet thing is already spent.&quot;&gt;He is sitting up now, or she is not that quiet, or the one quiet thing is already spent.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_noise&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 60}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -10826,7 +10936,7 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_rings_Node_door_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_noise&quot;, &quot;add&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyFlag(&quot;player&quot;, null, &quot;bunker_seen&quot;, &quot;set&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc6&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;He is awake, he is armed, and he is sitting against the only door that matters.&quot;&gt;He is awake, he is armed, and he is sitting against the only door that matters.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;He is awake, he is armed, and he is sitting against the only door that matters.&quot;&gt;He is awake, he is armed, and he is sitting against the only door that matters.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 70}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;link &quot;Back out. Not tonight.&quot; &quot;Location_facility_ruins&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(60);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="Canvas_bunker_rings_Node_door_down" tags="" position="975,975" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Somebody is posted here &lt;span style=&quot;opacity:0.7;&quot;&gt;(bunker_rings)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; Out of the chair&lt;/div&gt;
@@ -10857,14 +10967,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Put him down before he turns round.&quot; &quot;Canvas_bunker_rings_Node_panel_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc7&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not even this one. Not with what she can do.&quot;&gt;Not even this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not even this one. Not with what she can do.&quot;&gt;Not even this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 40}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 35}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_rings:cc8&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Get an arm round his throat.&quot; &quot;Canvas_bunker_rings_Node_panel_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_rings:cc8&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not that quiet, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that quiet, or she has already spent the one quiet thing she gets tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not that quiet, or she has already spent the one quiet thing she gets tonight.&quot;&gt;Not that quiet, or she has already spent the one quiet thing she gets tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 35}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;link &quot;Back out. Not tonight.&quot; &quot;Location_facility_ruins&quot;&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(60);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="81" name="Canvas_bunker_rings_Node_panel_down" tags="" position="100,1100" size="100,100">&lt;div class=&quot;dev-canvas-info&quot;&gt;&lt;strong&gt;Canvas:&lt;/strong&gt; Somebody is posted here &lt;span style=&quot;opacity:0.7;&quot;&gt;(bunker_rings)&lt;/span&gt; | &lt;strong&gt;Node:&lt;/strong&gt; The book on the floor&lt;/div&gt;
@@ -10935,14 +11045,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Back up the ramp before he is sure.&quot; &quot;Canvas_bunker_route_Node_base&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc0&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 20}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_guards:cc1&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_guards_Node_g1_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc1&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 25}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -10969,14 +11079,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Back out of the water before he looks up.&quot; &quot;Canvas_bunker_route_Node_t1&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc3&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 30}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 35}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_guards:cc4&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_guards_Node_g2_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc4&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 35}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -11003,14 +11113,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Back into the arm before he clears the table.&quot; &quot;Canvas_bunker_route_Node_t2&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc6&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 40}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 45}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_guards:cc7&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Take the door off him.&quot; &quot;Canvas_bunker_guards_Node_g3_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc7&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 45}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -11037,14 +11147,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Back through the gate before he lifts the lamp.&quot; &quot;Canvas_bunker_route_Node_t3&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc9&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 50}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 55}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_guards:cc10&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_guards_Node_g4_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc10&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 55}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -11071,14 +11181,14 @@ if (clothingMsg) {
 &lt;&lt;link &quot;Back out of the doorway before he stands.&quot; &quot;Canvas_bunker_route_Node_t4&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.pendingEffects = [];&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.applyAndNotifyTrait(&quot;player&quot;, null, &quot;bunker_stealth_used&quot;, &quot;set&quot;, 1.0, false, null);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.showEffectNotification();&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc12&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Too slow, or she has already used the one quiet way out of a room tonight.&quot;&gt;Too slow, or she has already used the one quiet way out of a room tonight.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;stealth&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 60}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;bunker_stealth_used&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 65}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;bunker_guards:cc13&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;
 &lt;&lt;link &quot;Put him down.&quot; &quot;Canvas_bunker_guards_Node_g5_down&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;bunker_guards:cc13&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not on this one. Not with what she can do.&quot;&gt;Not on this one. Not with what she can do.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;fighting&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 65}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;equipped_weapon&quot;, &quot;operator&quot;: &quot;eq&quot;, &quot;value&quot;: 2}, {&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;arousal_weapon_ready&quot;, &quot;operator&quot;: &quot;is_true&quot;}, {&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;emitter_broken&quot;, &quot;operator&quot;: &quot;lt&quot;, &quot;value&quot;: 1}]})&gt;&gt;
 &lt;&lt;if setup.checkCostsAffordable([{&quot;trait&quot;: &quot;arousal_charge&quot;, &quot;value&quot;: 1}])&gt;&gt;
@@ -17552,7 +17662,7 @@ try {
 &lt;&lt;link &quot;Ride down to the Reach.&quot; &quot;Canvas_activity_travel_to_reach_Node_riding&quot;&gt;&gt;&lt;&lt;script&gt;&gt;setup.markChoiceVisited(&quot;activity_travel_to_reach:cc0&quot;);&lt;&lt;/script&gt;&gt;&lt;&lt;script&gt;&gt;advanceTime(3);&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
-&lt;span class=&quot;locked-choice&quot; title=&quot;Not like this — you&#39;re filthy, and the cover won&#39;t hold with the docks able to smell it on you. Wash up first.&quot;&gt;Not like this — you&#39;re filthy, and the cover won&#39;t hold with the docks able to smell it on you. Wash up first.&lt;/span&gt;&lt;br&gt;
+&lt;span class=&quot;locked-choice&quot; title=&quot;Not like this — you&#39;re filthy, and the cover won&#39;t hold with the docks able to smell it on you. Wash up first.&quot;&gt;Not like this — you&#39;re filthy, and the cover won&#39;t hold with the docks able to smell it on you. Wash up first.&lt;&lt;= setup.requirementSuffix({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;trait&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;trait_key&quot;: &quot;hygiene&quot;, &quot;operator&quot;: &quot;gte&quot;, &quot;value&quot;: 40}]})&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if setup.triggerConditionsSatisfied({&quot;version&quot;: &quot;1.0&quot;, &quot;logic&quot;: &quot;AND&quot;, &quot;items&quot;: [{&quot;type&quot;: &quot;flag&quot;, &quot;subject&quot;: &quot;player&quot;, &quot;flag_key&quot;: &quot;opening_done&quot;, &quot;operator&quot;: &quot;is_true&quot;}]})&gt;&gt;
 &lt;span @class=&quot;setup.isChoiceVisited(&#39;activity_travel_to_reach:cc1&#39;) ? &#39;&#39; : &#39;unlocked-choice&#39;&quot;&gt;

@@ -24,6 +24,8 @@ case and silently fail every overnight one.
 """
 from pathlib import Path
 
+import re
+
 import pytest
 
 V2 = Path("apps/game_generation/twee_comprehensive/generators/v2.py").read_text(
@@ -128,12 +130,37 @@ def test_the_clock_it_reads_is_initialised_in_every_build():
 # --- the seam this engine has bitten us on before -------------------------------
 
 
+def _fn_body(src, name):
+    """The function's OWN body, brace-balanced.
+
+    ⚠️ This used to be `src.split(...)[1][:9000]`, a fixed window, and it was silently
+    dependent on what happened to sit AFTER the function in the emitted file. On
+    2026-09-18 describeUnmetConditions moved up beside triggerConditionsSatisfied (the
+    locked-CHOICE renderer needed it, and it had been living in the shop block, which a
+    game without a shop never emits). Nothing about the gap changed, but the window now
+    reached into triggerConditionsSatisfied — which of course handles time_of_day — and
+    the test failed on its neighbour. Read the body, not a guess at its length.
+    """
+    m = re.search(r"setup\.%s = function\([^)]*\) \{\{?" % re.escape(name), src)
+    assert m, f"{name} not emitted"
+    start = src.index("{", m.start())
+    depth = 0
+    for j in range(start, len(src)):
+        if src[j] == "{":
+            depth += 1
+        elif src[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return src[start:j + 1]
+    raise AssertionError(f"unbalanced body for {name}")
+
+
 @pytest.mark.parametrize("other", ["describeUnmetConditions", "_renderGoalGate"])
 def test_known_gap_is_unchanged(other):
     """⚠️ NOT a bug this feature introduced. These two display helpers already handle no
     `worn_*` predicate; they handle no `time_of_day` either. Pinned so that whoever
     teaches them one predicate teaches them the set."""
-    body = V2.split(f"setup.{other} = function")[1][:9000]
+    body = _fn_body(V2, other)
     assert "time_of_day" not in body
     assert "worn_exposure" not in body
 
