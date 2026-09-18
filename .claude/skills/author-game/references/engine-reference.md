@@ -480,10 +480,23 @@ Dataclass `TemplateNPC` at `template_import.py:107`; parsed at `template_import.
 | `hidden_from_ui` | — | bool | omit from Guide / Stats / sidebar |
 | `trait_decay` | — | table | per-NPC daily decay |
 
-`[[npcs.schedules]]` (`TemplateNPCSchedule` `:94`): `location` (slug→UUID at build), `weekdays`
-(0=Mon…6=Sun, empty=all), `start_time`/`end_time` (`HH:MM`), `activity` (author-side label). The NPC's
-location is **derived** by `getNpcLocation` (`v2.py:3141`, returns `{location, activity}`) — there is no stored location field. Keep rows
-non-overlapping. The **co-location / meta-location** model (an NPC scheduled at the exact canvas location vs
+`[[npcs.schedules]]` (`TemplateNPCSchedule` `:106`): `location` (slug→UUID at build), `weekdays`
+(0=Mon…6=Sun, empty=all), `start_time`/`end_time` (`HH:MM`), `activity` (author-side label), and optional
+**`when`** (2026-09-18) — a v1.0 conditions table; the row applies only while it holds. The NPC's
+location is **derived** by `getNpcLocation` (`v2.py:3762`, returns `{location, activity}`) — there is no stored
+location field; first live row that matches the day and time wins. Keep rows non-overlapping.
+
+**`when` — rows that follow the story.** A row whose `when` fails is treated as **absent** by every reader:
+`getNpcLocation` (so presence, the nav-card badge via `getNpcsPresentAtLocation`, portrait cards, and
+`npc_at_location`), and the Schedules page rows and roster (hidden, not muted). All go through one helper,
+`setup._scheduleRowLive`. No `when` = the row always applies (the pre-2026-09-18 behaviour; every older row).
+Validator (hard errors): `when` must be a non-empty table carrying `version = "1.0"` — a versionless block
+fails OPEN at runtime and the row would silently always apply; and it may not use `npc_at_location`, directly
+or through a `stage` helper, because that resolves presence through the very schedule being evaluated. Use a
+flag or trait. `when` is threaded through BOTH `ai_behavior_config` write sites (`game_graph.py` and
+`template_import.create_project_from_template`) and emitted only where authored. Tests:
+`tests/test_npc_schedule_when.py`. ⚠️ The v2 scoreboard (`author-game-v2/scripts/gates.py`) still reads rows
+statically and counts a `when` row as always live. The **co-location / meta-location** model (an NPC scheduled at the exact canvas location vs
 a shared meta-location) drives the `requires_npc` walk-in direction — design in `references/lanes.md` /
 `references/location-design.md`.
 
@@ -593,6 +606,15 @@ weekdays = [0,1,2,3,4]
 start_time = "07:00"
 end_time = "09:00"
 activity = "Making coffee"
+[[npcs.schedules]]                 # a row that only exists after a story beat
+location = "loc_den"
+weekdays = [5,6]
+start_time = "20:00"
+end_time = "23:00"
+activity = "Watching the match with her"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "den_invite", operator = "is_true" },
+] }
 
 [[locations]]
 id = "loc_kitchen"

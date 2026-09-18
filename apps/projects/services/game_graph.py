@@ -147,6 +147,8 @@ def build_game_graph(
         if n.portrait:
             npc.ai_behavior_config["portrait"] = n.portrait
         if n.schedules:
+            # ⚠️ TWIN of template_import.create_project_from_template — this is the DEFAULT build path,
+            # so a key added only there reaches the database and never reaches a packaged game.
             npc.ai_behavior_config["schedules"] = [
                 {
                     "location": sch.location,
@@ -154,6 +156,8 @@ def build_game_graph(
                     "start_time": sch.start_time,
                     "end_time": sch.end_time,
                     "activity": sch.activity,
+                    # emitted only when authored, so an unconditioned row builds exactly as before
+                    **({"when": sch.when} if sch.when else {}),
                 }
                 for sch in n.schedules
             ]

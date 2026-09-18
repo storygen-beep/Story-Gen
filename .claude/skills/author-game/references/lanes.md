@@ -412,8 +412,9 @@ Vesper shipped courtship offered to a man she already owned, and a hub for a man
 - **Lane-2 ambient pool** — the room-mood ambients still play the old status quo.
 - **Lane-3 walk-in / drain / work buckets** — the "make the rounds," the cover-work grind, the repeatable
   drain (unless the fiction keeps it — a memory-wiped mark can still be a warm tap).
-- **`[[npcs.schedules]]` presence** — if the beat sends the NPC away, drop their post-`F` schedule window,
-  or they linger "present" in a place they've fled (dead presence the player can see but can't act on).
+- **`[[npcs.schedules]]` presence** — if the beat sends the NPC away, gate their post-`F` schedule window
+  with `when = F is_false` (or drop it if no earlier era needs it), or they linger "present" in a place
+  they've fled (dead presence the player can see but can't act on). A row they move INTO gets `when = F is_true`.
 - **The surrounding floor cluster** — the *other* NPCs' walk-ins/ambients that share the location.
 
 ⚠️ **AND THE ONE THAT IS NOT A STALE-PROSE BUG — GATES THAT `F` MAKES PERMANENTLY FALSE.** Everything above

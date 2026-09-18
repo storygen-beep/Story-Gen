@@ -78,8 +78,10 @@ clean assigned-target → travel → meet entrance. Mirror its shape.
 7. **Sequence the cast in waves.** Don't make everyone reachable on Day 1 — stage entrances so each arrival is a
    punctuation mark (immediate cast in the opening; later NPCs earned through story flags). For a **mid-game
    arrival**, the meet-canvas *is* this one-shot, gated on a progression flag — and **withhold the NPC's
-   schedule until the meet fires**, because `getNpcsWithSchedules` leaks every scheduled NPC onto the Schedule
-   page from Day 1 regardless of unlock (`v2.py:3268-3274` — `getNpcsWithSchedules` declared-schedule registry surfaces every declared NPC); a schedule given early spoils the entrance.
+   schedule until the meet fires**, because an ungated row puts every scheduled NPC on the Schedule page from
+   Day 1 regardless of unlock; a schedule given early spoils the entrance. Since 2026-09-18 the clean way to
+   withhold it is `when` on the row, gated on the flag the meet sets (`references/engine-reference.md`) —
+   `getNpcsWithSchedules` lists an NPC only while one of their rows is live.
 
 ---
 

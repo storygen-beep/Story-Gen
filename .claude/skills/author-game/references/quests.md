@@ -267,7 +267,7 @@ player somewhere, so a seal invalidates all of them at once:
 | surface | what goes stale | why it's easy to miss |
 |---|---|---|
 | **quest cards** (`tip`) | a direction into a sealed region | the one people remember to check |
-| **the Schedules page** | an NPC's "NOW: <place>" and their rows | **schedule rows carry no conditions** — the resolver reads five keys and drops the rest, so a row cannot be gated and keeps resolving forever |
+| **the Schedules page** | an NPC's "NOW: <place>" and their rows | an **ungated** row keeps resolving forever. Since 2026-09-18 a row may carry `when` (below) — but a row written without one still resolves in every era, and most shipped rows have none |
 | **off-hours / dead-room cards** | "come back when he's here" for a door that no longer opens | they only render when the player is already lost |
 | **hub and location prose** | any sentence naming a place as a next step | it reads as flavour, so nobody greps it |
 
@@ -277,8 +277,21 @@ hours of every twenty-four**, with his real address filed as the inactive row, p
 a sealed building. A page that names a locked door is **worse than a page that says nothing**, because the
 player walks there.
 
-**The Schedules-page fix is on the PAGE, never on the rows** (the rows are correct, and often cannot be
-dropped — an earlier act still needs them). The engine now checks `setup.navDestUnlocked(slug)` per row,
+**Two fixes, for two different questions — use the right one.**
+
+- **Is the PLACE open?** → fixed on the **page**. The rows are correct and often cannot be dropped — an
+  earlier act still needs them. See below.
+- **Is the PERSON there in this story?** → fixed on the **row**, with `when` (2026-09-18). A row whose `when`
+  fails is treated as absent by everything — presence, the nav-card badge, portraits, and the Schedules page
+  (hidden, not muted). This is the only tool for an NPC who **moves in the story to a place that stays open**:
+  lock-awareness cannot help, because the door is unlocked in every save. Measured case (vesper 0.2.2):
+  Bastien is carried to the cot, which is open in every 1b+ save — his cot row is
+  `when = bastien_at_cot is_true`, and his old back-room row became `when = raid_done is_false` so it stops
+  resolving once the room is gone. Rules: `when` **must** carry `version = "1.0"` (a versionless block fails
+  OPEN — build error), and **must not** use `npc_at_location`, directly or via a `stage` helper (it resolves
+  presence through the schedule being evaluated — build error). Syntax in `engine-reference.md`.
+
+On the page: the engine checks `setup.navDestUnlocked(slug)` per row,
 mutes the unreachable ones with `navDestBlockedReason()`, and suppresses the NOW badge for a locked
 location. What you owe as an author is the **`blocked_message`**: a location with two gates in two acts has
 only one message, so write it to be true in both, or the muted row explains the wrong lock.
