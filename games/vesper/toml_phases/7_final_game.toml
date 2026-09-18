@@ -456,6 +456,11 @@ hidden = true
 [[traits.labels]]
 key    = "drains_done"
 hidden = true
+# THE COUNT (beat_0194, rev 230) — the nights she has come to Bastien, once per calendar day. Internal: it is
+# his number, not a stat on her sheet, and the hub card's bands say where he is in words.
+[[traits.labels]]
+key    = "bastien_mend"
+hidden = true
 # THE WAY DOWN (beat_0173) — bunker route state, internal. Neither is a meter and neither is ever surfaced:
 # bunker_stealth_used is a per-run 0/1 spent by the free back-out, bunker_runs is a prose-only odometer.
 # Unhidden they would show as bare ints in <<playerTraits>> and on the Stats page (v2.py:1198-1201).
@@ -1009,6 +1014,18 @@ emitter_broken    = 0
 bunker_stealth_used = 0
 bunker_noise        = 0
 bunker_runs         = 0
+# THE COUNT (beat_0194, rev 230) — bastien_mend, the one meter of the chunk (design_the_count.md).
+# ⚠️ IT COUNTS THE NIGHTS SHE COMES TO HIM, AND THAT IS THE WHOLE DESIGN. He counted the days a man did not come
+# for him (5_scenes, the plant room banner) and at the cot he starts counting again. This replaces his number:
+# +1 on the first night (amb_bastien_cot.first_night) and +1 on the first "Go to him." of each later calendar
+# day. At 3, cap_bastien_stops_counting fires and he stops.
+# ⚠️ ONCE A DAY, WHILE THE LOOP STAYS OPEN ANY TIME. The meter is paced by bastien_slept's set_day through
+# days_since_flag on two same-label hub choices, not by gating the loop — the loop is the surface he is played
+# on, and locking it to once a day would ration the porn to pace a counter.
+# ⚠️ WRITTEN ONLY ON THE LOCATED HUB. Nothing triggerless touches it, so every reader stays honest.
+# Hidden (0_systems_spec [[traits.labels]]) — the number is his, not a stat on her sheet.
+# Default 0 = save-safe: a 0.2.2 save missing the key reads it as no nights yet.
+bastien_mend        = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
 # bed but THREE DAYS of his time on the key. Set to a literal 3 by activity_kess_cot's paid tier; decremented
@@ -6151,6 +6168,25 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The face"
 blocks = [
+  # ⚠️ THE COUNT (beat_0200, rev 230) — TWO BANDS FOR HIM BEING ON THE BUNK, FIRST IN THE CHAIN. From the night he
+  # is carried in, this is not "her own room, with the door shut and the room empty": there is a man on her
+  # bunk who looked at the bought face across his own floor every night for four months, and the last time he
+  # saw it, it had a taser in its hand. So with him here she changes faces out past the hull, where the bunk
+  # cannot see her. The shipped bands A and B are kept verbatim below as the catch-alls.
+  # BAND A-HIM — it is in the bag, and he is on the bunk.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn",      operator = "is_false" },
+      { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true"  },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The bag is under the bench where it lives. If she puts it on now, she does it behind the hull, out of his sight. He had that face in his back room more nights than she can count, and the last time he saw it, it put him on the floor." },
+  ] },
+  # BAND B-HIM — it is on, and he is on the bunk.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn",      operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She is wearing it in her own room with a man on her bunk who would know it anywhere. She keeps her back to him, and she does not go near the bunk until it is off." },
+  ] },
   # BAND A — it is in the bag. Routine, and the prose says so.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
@@ -6196,8 +6232,19 @@ locationId = "the_cot"
 id   = "on"
 name = "Put it on"
 blocks = [
-  { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She looks at the whole of it only at the end." },
-  { type = "paragraph", content = "The woman in the glass has a job at a bar off the strip, no history anybody has asked about, and nothing at all to do with a programme that closed eleven years ago." },
+  # ⚠️ THE COUNT (beat_0200) — with him on the bunk she does it out past the hull. The shipped text is the catch-all.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She takes the bag round behind the hull and does it there by feel and by the glass off a dead lamp: the hairline first, then the jaw, then the small dull work around the eyes." },
+    { type = "paragraph", content = "When she walks back past the end of the bunk she keeps her face turned to the door. The woman she is now has been on his floor. She is not going to be in his room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_bought", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The order of it is fixed now: the hairline first, then the jaw, then the small dull work around the eyes that does more than any of the rest. She looks at the whole of it only at the end." },
+    { type = "paragraph", content = "The woman in the glass has a job at a bar off the strip, no history anybody has asked about, and nothing at all to do with a programme that closed eleven years ago." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -6216,10 +6263,22 @@ locationId      = "the_cot"
 id   = "off"
 name = "Take it off"
 blocks = [
+  # ⚠️ THE COUNT (beat_0200) — with him on the bunk she takes it off out past the hull and comes back as a face
+  # he has never looked at. The shipped beat is the catch-all, verbatim, in the group below.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "It comes off behind the hull, a minute at the basin with the water going grey, and the woman from his back room is gone before she walks back in." },
+    { type = "paragraph", content = "The face she brings back to the bunk is one he has never looked at. He did not look at it in the cell, and it was never on his floor. It is the only one of her he gets." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_bought", operator = "is_true" },
+    ] } }, blocks = [
   { type = "paragraph", content = "It comes off faster than it goes on. A minute at the basin, the water going grey, and the woman who has been carrying trays for a man who owned her stops existing over a cracked sink in a ship-breaker's yard." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing out there is hers while this is off. Sol does not know her. The floor is not her floor and the roster does not have her on it, and the room behind the door is a room she has never been invited into. All of that belongs to a woman with no name who does not exist until she puts it back on." },
   { type = "paragraph", content = "She does it anyway, most nights, for an hour, and would struggle to give a reason that survives being said out loud." },
   { type = "paragraph", content = "The face in the glass is four years older than the paperwork says and has a designation on a page in a file under the cot, and it is the only thing in this city that nobody sold her." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -7551,6 +7610,75 @@ text = "Take it."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "kess_berth"
+time_progression_minutes = 240
+
+# ═══ beat_0197 (rev 230), THE COUNT — KESS BUILDS THE BRACE. design_the_count.md step 3a. ════════════════
+# ⚠️ THE kess_makes_the_link SHAPE, CLAUSE FOR CLAUSE. It SETS brace_built, which the hub's "Put the brace on
+# him." reads, and a flag a choice reads must have a LOCATED setter — so a located trigger and substitution_only;
+# the rung on hub_kess_berth is the only way a player reaches it. The 40 coin is on the choice INSIDE, never on
+# the trigger: a canvas-level cost greys the whole thing out, and a player who cannot pay would lose Kess's
+# scene as well as the brace.
+# ⚠️ 40 COIN, THE LINK'S PRICE. LO's call was that the brace costs coin; this is the same order of work on the same
+# bench (strapping and two hatch hinges off a hull he is already cutting down), so the same price.
+# ⚠️ HE DOES NOT ASK WHO IT IS FOR. He carried the man past this bench the night they brought him in, did not ask
+# one question then (cap_bastien_at_the_cot), and does not start now. He prices the job off what the job
+# implies, which is his whole character: "reads a body the way he reads a hull" (npc_kess).
+# ⚠️ FIVE MINUTES. His instruction is what the stands node's "One minute. Tomorrow it will be two." answers.
+# MEDIA: none. His berth's own image is carried by the hub.
+[[canvases]]
+id          = "kess_makes_the_brace"
+name        = "Something to stand in"
+description = "beat_0197 (rev 230), THE COUNT, STEP 3a. Wren-solo @kess_berth, SUBSTITUTION_ONLY (it sets brace_built, which amb_bastien_cot's 'Put the brace on him.' reads, so it keeps a located trigger — the kess_makes_the_link shape). Reached only from hub_kess_berth's 'Ask him about something to stand in.' rung, gated bastien_washed is_true + brace_built is_false. He builds a knee brace out of hull strapping and two hatch hinges for the man he carried past his bench. 40 coin, on the choice inside. He does not ask who it is for. SETS brace_built."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_washed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "brace_built",    operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to stand in"
+blocks = [
+  { type = "paragraph", content = "He is under the lamp with a hull plate on the bench when she comes in, and he does not look up until she has said what she wants. Then he puts the torch down." },
+  { type = "dialog", props = { speaker = "player" }, content = "Something he can stand up in. His legs are there. They have forgotten what they are for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I watched the two of you get him down my boards. I know what a long time off his feet does to a knee. You want a frame on the outside of him that does the knee's job until the knee remembers." },
+  { type = "paragraph", content = "He does not ask who the man is. He did not ask the night they carried him past this bench, and he is not going to start now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Hull strapping and two hinges off a hatch. It will not be pretty. It will hold him up, which is not the same as him standing, and he will know the difference before you do." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him make it. (40 coin.)"
+targetType = "node"
+nodeId     = "kess_makes_the_brace.made"
+costs      = [{ trait = "coin", value = 40 }]
+flagEffects = [
+  { targetType = "player", flag = "brace_built", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Come back with the coin."
+targetType = "location"
+locationId = "kess_berth"
+
+[[canvases.nodes]]
+id   = "made"
+name = "Tight enough to hurt"
+blocks = [
+  { type = "paragraph", content = "It takes him the rest of the afternoon. What he hands her is two lengths of grey strapping, one for each leg, riveted to hatch hinges at the knees, with buckles off a cargo harness, and it weighs more than it looks." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Knees in the hinges. Straps above and below, tight enough to hurt. Five minutes the first day. He will want ten. Do not let him have ten." },
+  { type = "paragraph", content = "She carries it past the hull to the cot under her arm. Nobody on the boards looks twice. Down here everybody carries something that used to be part of something else." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
 time_progression_minutes = 240
 
 # ══════════════════════════════════════════════════════════════════
@@ -13151,6 +13279,18 @@ nodeId     = "kess_makes_the_link.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "yard_part_found", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "link_built",      operator = "is_false" },
+] }
+# ⚠️ beat_0197 (rev 230), THE COUNT — THE BRACE RUNG. The link rung's shape exactly, for the link rung's
+# reason: kess_makes_the_brace sets a flag the hub reads, so it keeps a located trigger, and it is
+# substitution_only so it never renders as a bare link under this card. The 40 coin is on the choice INSIDE,
+# so a player who cannot pay still gets the scene and Kess's price and comes back.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him about something to stand in."
+targetType = "node"
+nodeId     = "kess_makes_the_brace.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_washed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "brace_built",    operator = "is_false" },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him to it."
@@ -27683,20 +27823,37 @@ flagEffects = [
   { targetType = "player", flag = "bastien_at_cot", op = "set" },
 ]
 
-# ── amb_bastien_cot — THE STANDING SURFACE. Repeatable @the_cot, pri 2. NOT A RUNG. ───────────────────
-# ⚠️ THIS IS THE VISIBLE LOCKED DOOR AND IT IS THE WHOLE OF WHAT THIS BUILD LEAVES STANDING OF HIM. He is
-# present, he is in a state, and there is nothing to do about it yet. The next chunk turns this into the
-# ladder's on-ramp; tonight it exists so the player can see the problem sitting on the bunk.
-# ⚠️ HIS PORTRAIT HUB since rev 225 — npc + requires_npc = npc_bastien. It shipped at rev 222 as a solo link
-# because he had no row here and could not have one without the badge leak (banner above). The gated the_cot
-# row makes him present exactly when this card's own condition holds, so the card and the badge agree.
-# ⚠️ STILL NOT A RUNG AND STILL NOT EXPLICIT — the repair ladder is the next chunk (LO's build order). This is
-# the only repeatable canvas for him at the cot, which keeps the one-canvas-per-NPC-window rule clean.
+# ── amb_bastien_cot — HIS HUB CARD. Repeatable @the_cot, pri 2. REWRITTEN IN PLACE at beat_0196 (THE COUNT). ──
+# ⚠️ WHAT IT WAS: 0.2.2's visible locked door — "he is present, he is in a state, and there is nothing to do about
+# it yet" — three paragraphs and "Leave him." THE COUNT turns it into the ladder's hub, exactly as that banner
+# said the next chunk would. The id, the priority and the trigger are UNCHANGED, so every save that has him on
+# the bunk keeps its card and its portrait.
+# ⚠️ HIS PORTRAIT HUB since rev 225 — npc + requires_npc = npc_bastien, present from his the_cot schedule row
+# (gated bastien_at_cot, the engine's `when`), so card and nav badge agree.
+# ⚠️ THE ONLY REPEATABLE CANVAS FOR HIM AT THE COT, AND IT MUST STAY THE ONLY ONE. The engine allows one
+# repeatable per NPC + location + window (the build warns on a second). So HER steps are choices here, the
+# loop is triggerless behind a choice here, and HIS steps are one-shots. check_the_count.py §6 counts them.
+# ⚠️ THE BASE TEXT IS ONE if/elseif CHAIN, NEWEST STEP FIRST. Each band opens on the single flag of its step,
+# because every later flag implies every earlier one, and the first match wins. The last band is the catch-all
+# (bastien_at_cot, always true where this card runs) and is the SHIPPED 0.2.2 text, verbatim — a save that has
+# not reached the water sees exactly what it saw before.
+# ⚠️ THE TALLY. From the water on, the bands carry his scratches on the bunk frame: the days since Cain put him
+# down and left, counted the way he counted the last lot, aloud, to the day, in the plant room. It grows through
+# the WEAK stretch and stops at bastien_himself. That is the spine of the chunk made visible on the one card the
+# player opens every day.
+# ⚠️ CHOICES: her next step when its calendar day has come, then (from the first night on) the loop, then
+# "Leave him." — always last, always back to the cot, 15 minutes, as it shipped. Effects ride the choices.
+# ⚠️ THE FACE (beat_0200, rev 230). face_worn is a toggle she works at this cot (activity_the_face), and the
+# face is the new girl off his floor — the one who put a taser in him the night of the raid. If any of his
+# scenes could play while she wears it, "he never learns who she is" would be one click from broken. So the
+# FIRST band of this card is the face-on band, every choice of hers is gated face_worn is_false, and the
+# three auto-fires of the chunk wait for it too. activity_the_face got bands for him being on the bunk: she
+# puts it on and takes it off out past the hull, where the bunk cannot see her.
 # ⚠️ PRIORITY 2, UNDER activity_kess_cot's 3, so it never takes the bed's card.
 [[canvases]]
 id          = "amb_bastien_cot"
-name        = "He is still on the bunk"
-description = "beat_0186 (rev 222, portrait at rev 225), THE WAY DOWN. Bastien's PORTRAIT HUB @the_cot — repeatable, pri 2, npc + requires_npc = npc_bastien, gated bastien_at_cot is_true. Present because npc_bastien's the_cot schedule row is gated on the same flag (the engine's `when`, rev 225), so card and nav badge agree and neither exists before the rescue. The standing surface this build leaves behind: he is there, he is not eating, he is not sleeping, and there is nothing yet to be done about it. NOT A RUNG and NOT EXPLICIT — the repair ladder is the next chunk."
+name        = "Bastien"
+description = "beat_0186 (rev 222, portrait at rev 225), REWRITTEN AS THE COUNT's HUB at beat_0196 (rev 230). Bastien's PORTRAIT HUB @the_cot — repeatable, pri 2, npc + requires_npc = npc_bastien, gated bastien_at_cot is_true. Base text: one if/elseif chain on the latest step (back / himself / bedded / stood / washed / drank / the shipped 0.2.2 text as catch-all), with his tally on the bunk frame growing until he stops counting. Choices: her steps as their days come (Wash him · Put the brace on him · Go to him properly), the loop (Go to him.), and Leave him."
 [canvases.trigger]
 location      = "the_cot"
 requires_npc  = "npc_bastien"
@@ -27710,19 +27867,409 @@ conditions = { version = "1.0", logic = "AND", items = [
 
 [[canvases.nodes]]
 id   = "base"
-name = "He is still on the bunk"
+name = "Bastien"
 blocks = [
-  { type = "paragraph", content = "He is where she left him, on his side, facing the wall, with the blanket pushed down off his shoulder because he runs hot and has not said so." },
-  { type = "paragraph", content = "The tin cup is on the bench. The level in it goes down some days and not others, and she has stopped mentioning it, because mentioning it is the fastest way to make it stop going down at all." },
-  { type = "paragraph", content = "He sleeps in the afternoon and lies awake at night with his eyes open in the dark, which she knows because she does the same thing four feet away on the floor." },
+  # BAND FACE — she is wearing the bought face. FIRST IN THE CHAIN, so it wins over every step band. Every
+  # choice of hers below is gated face_worn is_false, so only "Leave him." shows while it is on.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She comes in wearing the face from his floor and stops before the light off the feed line reaches her. He had this face in his back room more nights than she can count, and the last time, it had a taser in its hand." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Not in this one. Never near him in this one. The bag is under the bench. It comes off behind the hull, out of his sight." },
+  ] },
+  # BAND BACK — bastien_back. Step 7 has happened: the House answered and he is in business from her bench.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_back", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is at her bench in the brace with a pencil behind his ear and a column of figures under his hand. He was doing it before she came in and he goes on doing it now, without looking up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "The House took more last week with nobody watching it than it ever took with me watching. Rue is better than I paid her. Remind me to pay her properly." },
+    { type = "paragraph", content = "The scratches on the bunk frame are still there. He stopped adding to them, and he has not sanded them off either." },
+  ] },
+  # BAND HIMSELF — bastien_himself. Step 5 has happened: the tally has stopped and there is a note to carry.
+  # (Once Rue has answered, step 7 fires on the way in, so this band is only ever seen with the note undelivered.)
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He sits up on the edge of the bunk in the brace, which he could not do the day he first stood, going over something with his lips moving. The row of scratches has not grown since the morning he stopped." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You have not taken it yet. That is all right. It has waited four months. It can wait while you find your boots." },
+  ] },
+  # BAND BEDDED — the first night has happened. On his back now, watching her. The tally still growing.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He lies on his back now, not to the wall. He watches her move round the room the way he used to watch a readout, and when she catches him at it he goes on watching." },
+    { type = "paragraph", content = "There is a new scratch on the bunk frame every morning. The days since Cain put him down on this bunk and left." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do not look at the marks. Look at me, if you want something to look at." },
+  ] },
+  # BAND STOOD — he has stood in the brace. Sitting up on the edge is the day's work now.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_stood", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The brace hangs off the end of the bunk on its straps. For part of every day he sits up on the edge with it on and his hands on his knees, which looks like nothing and costs him everything he has." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "If I go over, let me go over. I have been lifted enough for one life." },
+    { type = "paragraph", content = "The row of scratches by his head is longer every morning. He no longer bothers to hide it from her." },
+  ] },
+  # BAND WASHED — he is clean and sitting up, and still wondering what to call her.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_washed", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is clean, and he sits up against the wall with the blanket over his legs, which is new. When she comes in his eyes go to her hands and stay there a while. He is still wondering what to call her." },
+    { type = "paragraph", content = "One more scratch on the bunk frame than yesterday. He makes it in the mornings, while she is still on the floor." },
+  ] },
+  # BAND DRANK — the water has happened. Still to the wall, but turned so the cup is in reach. The tally starts.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_drank", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The cup on the bench is empty again. He is still to the wall, but he lies the other way round on the pillow now, so that his arm reaches the bench without his having to ask anybody for anything." },
+    { type = "paragraph", content = "There is a scratch on the bunk frame by his head that was not there before, cut with a thumbnail. Then there are two. She knows what he is counting. He counted the last lot out loud to her in the plant room, to the day." },
+  ] },
+  # CATCH-ALL — the night he was carried in, before the water. REWRITTEN at the whole-chunk review: it was the
+  # shipped 0.2.2 text ("The level in it goes down some days and not others", "He sleeps in the afternoon…"), which
+  # was true while 0.2.2 left him on the bunk indefinitely. Now the water fires on the first visit of any later
+  # day, so this band is only ever read on the arrival night, and those lines described days that never happen.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_at_cot", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is where they put him, on his side, facing the wall, with the blanket pushed down off his shoulder because he runs hot and has not said so." },
+    { type = "paragraph", content = "The tin cup is on the bench where she left it, full. It is the middle of the night and his eyes are open. Hers are too, four feet away on the floor." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ── STEP 2 — the washing. HER move. A calendar day after the water. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Wash him."
+targetType = "node"
+nodeId     = "washing"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_drank",  operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "bastien_washed", operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_drank",  operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "bastien_washed", op = "set" },
+]
+# ── STEP 3b — he stands. HER move. The brace is bought from Kess (kess_makes_the_brace, 3_activities); this
+# is putting it on him, a calendar day after the washing at the earliest. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the brace on him."
+targetType = "node"
+nodeId     = "stands"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "brace_built",    operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "bastien_stood",  operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_washed", operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "bastien_stood", op = "set" },
+]
+# ── STEP 4 — the first night. HER move. A calendar day after he stood. The chunk's Tier-3 capstone. ──
+# ⚠️ AT NIGHT ONLY, 22:00-06:00 (added at review, beat_0198). The scene opens on the berth gone quiet and the
+# torch off at Kess's bench (he keeps 10:00-22:00) and ends with him asleep in the dark, so a noon click would
+# have played a night and dropped the player back at the cot at lunchtime. time_of_day wraps midnight and its
+# end is exclusive (v2.py:4406). No complement is needed: outside the window the choice is simply not there,
+# and card E's tip says "tomorrow night, after ten".
+# ⚠️ bastien_slept STARTS HERE and bastien_mend's first +1 IS HERE. From now on the loop's "Go to him." pair reads
+# bastien_slept's set_day, so the flag must exist before the pair can ever be seen — it does, by construction.
+[[canvases.nodes.exit_block.choices]]
+text       = "Go to him properly."
+targetType = "node"
+nodeId     = "first_night"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_stood",  operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "bastien_bedded", operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_stood",  operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+  { type = "time_of_day",     start_time = "22:00", end_time = "06:00" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "bastien_bedded", op = "set" },
+  { targetType = "player", flag = "bastien_slept",  op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "bastien_mend", op = "add", value = 1 },
+]
+# ── THE LOOP — "Go to him.", from the first night on. TWO CHOICES, ONE LABEL, EXACTLY ONE EVER VISIBLE. ──
+# ⚠️ THE LOOP IS OPEN ANY TIME; ONLY THE METER IS PACED. The first of the pair is visible when bastien_slept was
+# last set on an earlier calendar day: it re-sets bastien_slept (which moves set_day to today) and adds 1 to
+# bastien_mend. The second is visible the rest of that day: same loop, no meter, no clock. The two clauses are
+# exact complements (days_since gte 1 / lt 1) and a locked choice is hidden by default (v2.py:14433), so the
+# player sees one "Go to him." every time and never sees the machinery. bastien_slept always exists by the time
+# either is read, because the first night sets it — days_since_flag fails CLOSED on a flag with no set_day.
+# ⚠️ BOTH SETTERS ARE HERE, ON THE LOCATED HUB, never in the triggerless loop — so every reader stays honest.
+# ⚠️ BOTH RESET THE FIVE LOOP TRAITS — the hub_grier entry discipline; without it a loop entered twice in one
+# evening starts halfway to the climax.
+[[canvases.nodes.exit_block.choices]]
+text       = "Go to him."
+targetType = "node"
+nodeId     = "loop_bastien_cot.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_slept",  operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "bastien_slept", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "bastien_mend",      op = "add", value = 1 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go to him."
+targetType = "node"
+nodeId     = "loop_bastien_cot.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_slept",  operator = "lt", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# ── ALWAYS LAST — the shipped exit, now a choice. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him."
+targetType = "location"
+locationId = "the_cot"
+time_progression_minutes = 15
+
+# ── washing — STEP 2, THE WASHING. beat_0196. The first explicit beat of the chunk. WEAK band. ──
+# ⚠️ "The one who washed me in the frame did all of it, every Tuesday" — the plant room's own detail: "somebody
+# comes in here on a rota and does it properly" and "The washing one comes Tuesdays" (bunker_bastien). The first
+# cut had him washed "by people who did the parts they could stand", which contradicted it; fixed at the
+# beat_0198 review, as was "the most he has said since the plant room" (his arrival lines are longer).
+# ⚠️ HIS CONSENT IS ON THE PAGE, FIRST: "If you are going to do this, do all of it." The ceiling row asks for one
+# thing each scene that means yes, and this is it, in his mouth, before she touches him.
+# ⚠️ THE HUMILIATION RUNS ON HIM, NOT ON HER (the WEAK band). His body answers before he does; he tells her to
+# ignore it, to the ceiling; he cannot lift his hips. Nothing degrading is said to her or about her.
+# ⚠️ EVERY ACT BEAT STAYS ON THE BODY and carries 3+ of gates.py's frozen EXPLICIT words, measured per beat, not
+# eyeballed (the 0.2.2 first cut scored 4 of 31 and looked fine by eye). The name question and her thought get
+# beats of their own, AFTER the act — the pivot rule.
+# ⚠️ THE NAME. He asks, once. She does not answer. Any name she has is a lie or a line in a file he read in the
+# cell, and "he never learns who she is" is canon (the plant-room banner). He does not ask again in the chunk.
+# ⚠️ "The mark the frame's band left across his chest" is the plant room's frame (bunker_bastien: "a band across
+# his chest" — one band; the first cut said two marks, fixed at the whole-chunk review), and
+# "read a number off a dial" is what he did to her in the cell. Both are true to shipped scenes.
+# ⚠️ "My pulse is up. You will have noticed. I would have written it down." — HIS CURIOSITY, TURNED ON HIMSELF.
+# The man who took readings off her in the cell reads his own, out loud, while she has him in her hand. It is
+# the one thing he can still do, and it is the WEAK band's humiliation in his own voice.
+[[canvases.nodes]]
+id   = "washing"
+name = "Wash him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_cot_wash_t5", pool = 4, description = "A thin naked man lying on his back on a narrow bunk in a small bare room while a woman sitting beside him washes him with a rag, then takes his cock in her wet hand and strokes him until he comes on his stomach. Must show: him flat and passive on a narrow bed, her hand doing the work, a rag or basin. Avoid: him standing, avoid: a shower or bathtub, avoid: a big bright bedroom, avoid: him touching her.", search_queries = ["woman gives slow handjob to man lying on narrow bed amateur gif", "sponge bath turns into handjob homemade gif", "handjob man lying still on small bed cumshot on stomach gif"] } },
+  { type = "paragraph", content = "She heats water in the pan she cooks in, because there is nothing else, and brings it to the bunk with a rag and the sliver of soap off the shelf. He watches her set it down." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "If you are going to do this, do all of it. The one who washed me in the frame did all of it, every Tuesday, and never once looked at me." },
+        { type = "paragraph", content = "So she does all of it." },
+    ] },
+    { advance_text = "Start at his face.", blocks = [
+        { type = "paragraph", content = "She starts at his face and works down. The beard, the throat, his collarbones, the mark the frame's band left across his chest. By the time she reaches his stomach the water has gone grey." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "She folds the blanket down and he lets her. He is naked on the bunk, and when the rag goes over his cock and under his balls, it thickens in her hand before he has decided anything about it." },
+    ] },
+    { advance_text = "Keep washing him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Ignore that. Nobody has asked it anything in four months. It is making up for lost time." },
+        { type = "paragraph", content = "His cock stands fully erect and jerks when the rag comes near. The rest of him lies naked and still, eyes on the ceiling." },
+    ] },
+    { advance_text = "Take him in your hand.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "My pulse is up. You will have noticed. I would have written it down." },
+        { type = "paragraph", content = "She drops the rag and takes his cock in her wet hand, stroking slowly, root to tip. His balls draw up tight and he moans through his teeth." },
+    ] },
+    { advance_text = "Finish him.", blocks = [
+        { type = "paragraph", content = "She keeps the same slow stroke. His hips try to lift and cannot, and he comes on his back with her fist round his cock, shaking with the orgasm. His cum lands in pale stripes across the band's mark." },
+    ] },
+    { advance_text = "Wring the rag out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "What do I call you?" },
+        { type = "paragraph", content = "She wipes him clean, wrings the rag out and says nothing, and after a while he stops waiting for it. Any name she has is a lie, or a line in a file he once read." },
+    ] },
+    { advance_text = "Take the pan away.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He did not look at her while it happened. After, he looked at her hands, for about as long as it takes to read a number off a dial. That is the part she will think about on the floor tonight." },
+    ] },
+  ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Leave him."
+text = "Let him sleep."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_cot"
-time_progression_minutes = 15
+time_progression_minutes = 30
+
+# ── stands — STEP 3b, HE STANDS. beat_0197. NOT EXPLICIT. ──
+# ⚠️ HE READS THE BRACE THE WAY HE READS EVERYTHING, and prices it without being told what it cost. He does not
+# know Kess and he does not ask; "somebody on the waterfront took the doors off a hull for me" is all he needs.
+# ⚠️ "If I go over, let me go over" is his, here, first — the STOOD band on the hub quotes it back afterwards.
+# ⚠️ THE LAUGH IS AT HIMSELF, AND THAT IS THE POINT. The design first said this was "the first time she hears him
+# laugh". It is not: in the cell he laughed at her (cell_use_inventory, "works the tip of it into the hole, and
+# laughs"). Caught at beat_0197's canon read and made true instead — the last time she heard it, it was at her.
+# ⚠️ THE COUNTING. "One minute. Tomorrow it will be two." He counts minutes the way he counts days on the frame
+# and read numbers off her in the cell. It is the same habit; this is the first time it points forward.
+[[canvases.nodes]]
+id   = "stands"
+name = "Put the brace on him"
+blocks = [
+  { type = "paragraph", content = "She shows him the brace before she does anything with it. He turns it over in his hands, reading the rivets and the buckles the way he once read everything, and prices it without being told what it cost." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Hatch hinges. Somebody on the waterfront took the doors off a hull for me. One day I will want to know who, so I can decide what I owe him." },
+    ] },
+    { advance_text = "Strap him in.", blocks = [
+        { type = "paragraph", content = "She kneels on the boards and straps it on, knee in the hinge, one buckle above and one below, pulled tight enough to hurt the way Kess said. He does not make a sound. He watches her hands the whole time." },
+    ] },
+    { advance_text = "Help him up.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stand back. If I go over, let me go over." },
+        { type = "paragraph", content = "He gets his hands flat on the bunk and pushes, and the hinges take it. For the first time in four months he is on his own feet, with no frame round him." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "He stands for about a minute. His arms shake and the brace creaks with every breath. Then his knees decide for him and he sits down on the bunk much harder than he meant to, and it jolts against the wall." },
+    ] },
+    { advance_text = "Look at him.", blocks = [
+        { type = "paragraph", content = "And he laughs, at himself, short and surprised. The last time she heard him laugh it was at her, in the cell." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "One minute. Tomorrow it will be two. I am counting, you understand. It is what I am for." },
+    ] },
+    { advance_text = "Unbuckle it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It is the first time since the plant room she has seen him enjoy anything, even a thing that failed. She unbuckles the brace and hangs it off the end of the bunk where he can see it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it where he can see it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+
+# ── first_night — STEP 4, THE FIRST NIGHT. beat_0198. TIER-3, ONCE-ONLY, THE CHUNK'S CAPSTONE. WEAK band. ──
+# ⚠️ "MORE BEATS, NOT THICKER BEATS." Sixteen beats at RTS-flat length, not eight long ones. Once-only is what
+# buys the room; it is spent on the number of moments, not on the density of any one of them.
+# ⚠️ HIS CONSENT IS THE FIRST THING SAID. "If this is pity, go back to the floor." — "It is not pity." — "Then
+# come here." The ceiling row asks for one thing each scene that means yes, and here he sets the terms himself.
+# ⚠️ SHE LEADS, BECAUSE HE CANNOT. He cannot lift his hips or hold her weight, and says so ("My hips will not do
+# what I tell them"). The WEAK band's humiliation runs on him; nothing degrading is said to or about her.
+# ⚠️ HE DOES NOT LOOK AT HER FACE. He never did, in the cell (cap_bastien_notices, the three cell canvases), and
+# he does not start now. It is the canon that keeps him from ever knowing her, played as the most intimate
+# thing in the room.
+# ⚠️ SHE IS NAKED IN FRONT OF THE MAN WHO READ HER PLATE, AND THAT IS CANON-SAFE — checked at review, not assumed.
+# cap_bastien_notices: "That readout is dark now and the chip is out, so what he remembers is a machine with a
+# light in it and what is in front of him is a woman." The Face already had him see her body in the back room
+# (loop_bastien_backroom, "Tits, hips, the closed seam") without knowing her. The plate is dark; he reads a woman.
+# ⚠️ THE SYMMETRY IS THE SCENE. He read the light under her sternum and wrote the number down; she puts two
+# fingers on the side of his neck while she fucks him and reads his. "A hundred and ten. You are counting me." —
+# "Somebody should." He reads his own number out loud: the one habit the wall left him.
+# ⚠️ REWRITTEN ON AN INDEPENDENT REVIEW (beat_0198), which found, and this fixed: the moan contradicted the
+# washing ("a sound he has not made in four months" after he moaned under the rag); a night scene on an any-hour
+# choice (now 22:00-06:00); three beats that pivoted to meaning or handed HER something ("climbs past anything
+# he ever read off her" was a score she beat; "What she has is his number" gave her the night) — every act beat
+# now ends on the body; "In the cell he never did either" contradicted him looking at her after the washing;
+# "not a man on a wall" against the plant room's free-standing frame; "the frame creaks" when this chunk's
+# frame is the plant-room rig; "She does not turn over" was not a real alternative from on top of him; the
+# same "fucks him harder" twice; "shaking with the orgasm" lifted from the washing; the read-a-dial simile
+# spent in beat 2 before the pulse beat could pay it; "he watches her come" in a scene where she does not; and a
+# clip brief that asked for a hand at his throat, which is how a harvester finds choking.
+# ⚠️ THE DARK PLATE IS NAMED, ONCE: "His eyes stop once, on the dark plate under her sternum, and move on." It is
+# the first thing a player asks — the man who read that plate for weeks is looking straight at it — and canon
+# answers it: "that readout is dark now and the chip is out, so what he remembers is a machine with a light in
+# it" (cap_bastien_notices). A dark plate is somebody's old hardware, and half the Reach carries some.
+# ⚠️ THE ONE DECISION IS HERS, AND IT IS WHAT SHE DOES NOT DO. The way she was built to finish a man takes
+# something out of him with it (the anal finish IS the drain — design_book, the Leash row). She stays on top
+# and rides him to the end. The word is never said: the chunk never goes there, and the guard forbids it.
+# ⚠️ SHE DOES NOT COME. Her body may answer (she is built to feel the sex she is in), but her interior never
+# claims the night — beat_0170's rule, nothing in this for her. What she keeps is his number coming down.
+# ⚠️ EVERY ACT BEAT CARRIES 3+ OF gates.py's EXPLICIT WORDS AND ENDS ON THE BODY — every one except "Wait for him.",
+# which is his line to the ceiling and scores 0 by design. Measured per beat at review. The decision (the way she
+# was built to finish a man, and did not) is interiority, so it moved out of the act beat into the thought after
+# it (whole-chunk review); the act beat now carries only what she does.
+# ⚠️ "Do not go back to the floor." pays the hub's shipped line — she lies awake on the floor four feet away —
+# and he sleeps in the dark for the first time, which is the first thing that has mended.
+[[canvases.nodes]]
+id   = "first_night"
+name = "Go to him properly"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_cot_first_night_t5", pool = 4, description = "A naked woman on top of a thin naked man who lies flat on his back on a narrow bunk in a small dim room, riding him slowly and doing all the work while he lies still, two of her fingers resting at the side of his neck, not gripping. Must show: her on top, him flat and passive, a narrow bed. Avoid: him on top, avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: rough or violent sex.", search_queries = ["woman riding man lying still on narrow bed amateur gif", "slow cowgirl on skinny man small dark room homemade gif", "girl on top doing all the work man lying flat gif"] } },
+  { type = "paragraph", content = "She waits until the berth goes quiet and the torch is off at Kess's bench. Then she gets up off the floor. He is awake, because he is always awake, and he watches her cross the boards." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "If this is pity, go back to the floor. I have had four months of people doing things to me for their own reasons." },
+        { type = "dialog", props = { speaker = "player" }, content = "It is not pity." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Then come here." },
+    ] },
+    { advance_text = "Undress for him.", blocks = [
+        { type = "paragraph", content = "She undresses and stands in front of him naked. He looks at her tits and her cunt, all of her. His eyes stop on the dark plate under her sternum and move on. Half the Reach carries dead hardware." },
+    ] },
+    { advance_text = "Let him look.", blocks = [
+        { type = "paragraph", content = "He looks at her body and not her face, the way he did in the cell. Under the blanket he is naked and his cock is already erect, lifting the wool." },
+    ] },
+    { advance_text = "Get in with him.", blocks = [
+        { type = "paragraph", content = "She pulls the blanket off and climbs astride him, a knee either side of his hips. He is so thin under her that she feels bone. His cock lies hot against her cunt, the head of it pressed to her clit." },
+    ] },
+    { advance_text = "Start with your mouth.", blocks = [
+        { type = "paragraph", content = "She slides down him and takes his cock in her mouth, sucking him all the way down, a hand flat on his stomach. He moans into the dark, louder than he did under the rag." },
+    ] },
+    { advance_text = "Climb back up him.", blocks = [
+        { type = "paragraph", content = "She lets his cock slip out of her mouth, wet to the root, and licks her way back up his chest, her tits dragging over his stomach. His hands try for her hips and slide straight off." },
+    ] },
+    { advance_text = "Wait for him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "My hips will not do what I tell them. You will have to do all of it." },
+        { type = "paragraph", content = "He says it to the ceiling. His hands close on the pad either side of him and hold on." },
+    ] },
+    { advance_text = "Take him inside.", blocks = [
+        { type = "paragraph", content = "She reaches back, holds his cock steady and sinks down onto it until her cunt has all of him. Then she stays there, not moving, so he can feel it, before she starts to fuck him." },
+    ] },
+    { advance_text = "Ride him.", blocks = [
+        { type = "paragraph", content = "She rides him, rising almost off his cock and sinking back down, her hands flat either side of his head. The bunk creaks. He cannot thrust up to fuck her back, so every stroke is hers." },
+    ] },
+    { advance_text = "Go on.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do not be careful with me. I am past careful." },
+        { type = "paragraph", content = "So she is not. She fucks him harder, her cunt slapping down on his cock, and the bunk knocks the wall each time." },
+    ] },
+    { advance_text = "Find his pulse.", blocks = [
+        { type = "paragraph", content = "She puts two fingers on the side of his neck and reads him the way he read her. Fast and ragged, his cock throbbing in her cunt with every beat of it, while she fucks him." },
+    ] },
+    { advance_text = "Count him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "A hundred and ten. You are counting me." },
+        { type = "dialog", props = { speaker = "player" }, content = "Somebody should." },
+        { type = "paragraph", content = "She grinds her clit down on the root of him, slow now, until his pulse is hammering under her fingers and his cock jerks in her cunt." },
+    ] },
+    { advance_text = "Keep him where he is.", blocks = [
+        { type = "paragraph", content = "She does not lift off him. She keeps his cock deep in her cunt and keeps fucking him slow, her fingers still on his neck, until his breath breaks." },
+    ] },
+    { advance_text = "Let him come.", blocks = [
+        { type = "paragraph", content = "He comes inside her with his head pushed back into the pillow. His thin body jerks under her with the orgasm. She feels every pulse of his cum in her cunt, and keeps her fingers on his neck through all of it." },
+    ] },
+    { advance_text = "Stay on him.", blocks = [
+        { type = "paragraph", content = "His pulse comes down under her fingers, slower and slower, until he is a man lying still in the dark and not a man in a frame." },
+    ] },
+    { advance_text = "Stay with it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is a way she was built to finish a man, and it takes something out of him. She did not use it. She did not come either. That was never what this was." },
+    ] },
+    { advance_text = "Get down.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do not go back to the floor." },
+        { type = "paragraph", content = "She does not. She lies down on the wall side of the bunk, where there is barely room, and after a while he sleeps. For once he does it in the dark." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep beside him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
 
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
 # ═══ beat_0187 (rev 222), THE WAY DOWN — THE QUESTS PAGE. ═════════════════════════════════════════════
@@ -27800,11 +28347,766 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Fifty one minutes, and a room built over four months to catch one man was walked into and out of on an ordinary night. Cain carried him up five turns of his own supplier's corridor. The plate is back down and the tar is heeled over the lip of it and it looks the way it looked. Nobody down there knows yet. Somebody goes in on a rota, finds a frame with nothing in it, and has to tell somebody a long way above them, and that is not tonight."
-tip        = "That is where this build ends. Bastien is on the bunk at the cot and he will not drink the water, and he does not know who you are, and you are not going to tell him. What is still standing is everything that was standing before. Renner's office never shut and his yard has a fourth way down in it now. Grier is in his room off the lane from ten. Sabin is on the floor at eight and in his lab from eleven. The strip, the market, The House and the pit are where you left them. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
+tip        = "Get him home. Your cot at the Berth, tonight. There is nowhere else in the city he can go."
+# ⚠️ THE SEAM (beat_0194, rev 230) — THIS WAS 0.2.2's TERMINAL CARD AND IT IS NOT ANY MORE. THE COUNT picks up at
+# the arrival, so the card hands over there: upper-gated `bastien_at_cot is_false`, `terminal` and
+# `terminal_text` removed, and the tip that said "That is where this build ends" rewritten to point at the cot.
+# It is now live only between the extraction (whose exit is the_waterfront) and the arrival scene at the cot,
+# which is exactly the stretch where "get him home" is the next thing to do. The beat_0165 lesson: the last
+# release's end card was steering the next release's opening. Checked from both sides by check_the_count.py §1.
+when = [
+  { flag = "bastien_rescued", op = "is_true"  },
+  { flag = "bastien_at_cot",  op = "is_false" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0194 (rev 230), THE COUNT — THE QUESTS PAGE. design_the_count.md ═════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ⚠️ A DAISY, ONE CARD LIVE AT A TIME, the 0.2.2 discipline carried on: each card opens on the flag the one
+# before it closes on. The chain is CHAIN in check_the_count.py — bastien_at_cot, drank, washed, brace_built,
+# stood, bedded, himself, house_answered, back — and §1 walks it and fails if two cards are ever live at once.
+# ⚠️ NINE CARDS, NOT THE DESIGN TABLE'S EIGHT. Between Rue's beat (sets house_answered) and the money scene at the
+# cot (sets bastien_back) there is a walk home with an envelope, and with eight cards that stretch had NO card
+# live: card G closed on house_answered and H opened on bastien_back. G2 closes the gap and keeps the daisy.
+# ⚠️ WRITTEN TO THE LEGIBILITY BAR (check_quest_cards.py): short sentences, no dashes, no glosses, few
+# negations. Every tip names a PLACE and a TIME, because the mopoga read is that lostness is the disease.
+# ⚠️ THE DAY WAITS ARE ON THE CARDS. Every step waits a calendar day on the one before it, and a player who is
+# told "go to the cot" and finds nothing new there will think the game is broken. So the cards say "tomorrow".
+# ⚠️ NO npc_id ON ANY OF THEM — these are the spine.
+
+# ── A · he is on the bunk (step 1, the water, is his move: nothing to click) ──
+[[quest_cards]]
+priority   = 10
+text       = "He is on your bunk and the cup on the bench is full. He faces the wall all day and lies awake all night. Cain said he would come when he could. That will be a while. For now it is you, him and a tin cup."
+tip        = "Leave the cup where he can reach it. Sleep. Come home to the cot tomorrow."
+goals = [
+  { flag = "bastien_drank", op = "is_true", label = "Wait for him to drink" },
+]
+when = [
+  { flag = "bastien_at_cot", op = "is_true"  },
+  { flag = "bastien_drank",  op = "is_false" },
+]
+
+# ── B · he drank (step 2, the washing) ──
+[[quest_cards]]
+priority   = 10
+text       = "He drank. He held the cup out without looking at you, and you filled it, and he drank that too. It is the first thing he has asked you for. The last person who washed him did it on a rota, in the frame, on Tuesdays."
+tip        = "He cannot get to the tap. Go to him at the cot tomorrow and wash him."
+goals = [
+  { flag = "bastien_washed", op = "is_true", label = "Wash him" },
+]
+when = [
+  { flag = "bastien_drank",  op = "is_true"  },
+  { flag = "bastien_washed", op = "is_false" },
+]
+
+# ── C · he is clean (step 3a, the brace, is bought from Kess) ──
+[[quest_cards]]
+priority   = 10
+text       = "He is clean, and he let you do it. He asked your name and you kept it. His legs are next. Four months in a frame took the strength out of them, and lying on a bunk will never put it back."
+tip        = "Kess can build him something to stand in. The Berth, between ten and ten. Forty coin. Ask him about it."
+goals = [
+  { flag = "brace_built", op = "is_true", label = "Have Kess build him a brace" },
+]
+when = [
+  { flag = "bastien_washed", op = "is_true"  },
+  { flag = "brace_built",    op = "is_false" },
+]
+
+# ── D · the brace is built (step 3b, he stands) ──
+[[quest_cards]]
+priority   = 10
+text       = "Kess built it out of hull strapping and two hinges off a hatch, for forty coin and no questions. It is in a bag under your bench. It will fit him. Whether he lets you put it on him is another question."
+tip        = "Take it home to the cot and put it on him. Any hour, a day after you washed him."
+goals = [
+  { flag = "bastien_stood", op = "is_true", label = "Put the brace on him" },
+]
+when = [
+  { flag = "brace_built",   op = "is_true"  },
+  { flag = "bastien_stood", op = "is_false" },
+]
+
+# ── E · he stood (step 4, the first night) ──
+[[quest_cards]]
+priority   = 10
+text       = "He stood for about a minute. Then he sat down harder than he meant to, and laughed at himself. The last time you heard him laugh, it was at you, in the cell. He watches you now, all the time, and does not pretend otherwise."
+tip        = "Go to him at the cot tomorrow night, after ten. Go to him properly."
+goals = [
+  { flag = "bastien_bedded", op = "is_true", label = "Go to him properly" },
+]
+when = [
+  { flag = "bastien_stood",  op = "is_true"  },
+  { flag = "bastien_bedded", op = "is_false" },
+]
+
+# ── F · the first night (the loop; the meter; step 5 is his move) ──
+[[quest_cards]]
+priority   = 10
+text       = "You slept with him. He could not hold your weight, so you did all of it, and he let you. The tally on the bunk frame still grows, one scratch every morning. It is the days since Cain put him down and left."
+tip        = "Go to him at the cot once a day. The first night counted. Two more days of it. Then come home the morning after."
+goals = [
+  { flag = "bastien_himself", op = "is_true", label = "Three nights with him" },
+]
+when = [
+  { flag = "bastien_bedded",  op = "is_true"  },
+  { flag = "bastien_himself", op = "is_false" },
+]
+
+# ── G · he stopped counting (step 6, the note, is carried to Rue) ──
+[[quest_cards]]
+priority   = 10
+text       = "He has stopped counting. He sat at your bench in the brace with a pencil and asked if you wanted the number. You said you knew it. Then he told you he was done with it. He wrote a note. It is for the woman who runs the floor at the House."
+tip        = "Take the note to the House, in the Underground. Rue keeps the floor from eight in the morning until three the next morning. Give it to her and nobody else."
+goals = [
+  { flag = "house_answered", op = "is_true", label = "Take his note to Rue" },
+]
+when = [
+  { flag = "bastien_himself", op = "is_true"  },
+  { flag = "house_answered",  op = "is_false" },
+]
+
+# ── G2 · Rue answered (step 7, the money, is his move at the cot) ──
+[[quest_cards]]
+priority   = 10
+text       = "Rue read it twice and then got up out of her chair, which she never does. She gave you a sealed envelope for him, and it is heavier than a letter."
+tip        = "Take it home to your cot. If you are wearing the face, take it off first. He is at your bench."
+goals = [
+  { flag = "bastien_back", op = "is_true", label = "Take the envelope home" },
+]
+when = [
+  { flag = "house_answered", op = "is_true"  },
+  { flag = "bastien_back",   op = "is_false" },
+]
+
+# ── H · THE END CARD. Terminal. Names what is still standing. ──
+[[quest_cards]]
+priority   = 10
+text       = "He counted it out on your blanket, slowly, the way he used to count everything. Four months on a wall, and then your bunk. The man who owns the House and the Undertow is back in business. His office is your bed."
+tip        = "That is where this build ends. Bastien is at the cot and he is himself again. Go to him any night. Renner's office is open and his yard goes four deep. Grier is in his room off the lane from ten. Sabin is on the floor at eight and in his lab from eleven. The Underground, the market, the House and the pit are where you left them. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
 terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
 when = [
-  { flag = "bastien_rescued", op = "is_true" },
+  { flag = "bastien_back", op = "is_true" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ THE COUNT (0.2.3) — BASTIEN AT THE COT, FROM THE BUNK BACK TO HIMSELF. design_the_count.md ═══════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# LO: "we have brought back bastien but now we have to make him normal" — then "Go ahead with your picks,
+# write the full design" and "start implementing each beats one by one". The spine, in one line: he counted
+# the days a man did not come for him; the chunk's one meter, bastien_mend, counts the nights she comes to him,
+# and at 3 he stops counting. Seven one-time steps and a loop. HIS moves are auto-fires (the water, stopping
+# counting, the money); HERS are choices on his hub card, amb_bastien_cot (the washing, the brace, the first
+# night). Steps 1-5 each wait a calendar day on the one before (days_since_flag, the rev-228 mechanism).
+# ⚠️ CANON THAT HOLDS THROUGH ALL OF IT: he never learns who she is and she gives him no name
+# (5_scenes plant-room banner: "The player knows. He never will."); Cain is off-page; and the sex never
+# takes from him — no anal anywhere in the chunk, because the anal finish IS the drain.
+# ⚠️ CEILING ROW: "THE COUNT — Bastien at the cot", signed 2026-09-19 in design_book.md. WEAK band (until he
+# stops counting): she leads, the humiliation runs on him, nothing degrading toward her. HIMSELF band: the
+# signed Leash row returns for him.
+# Guards: games/vesper/tests/check_the_count.py (static) and live_the_count.py (in the built game).
+
+# ── cap_bastien_drinks — STEP 1, THE WATER. beat_0195. Auto-fire @the_cot, pri 10, ONE-SHOT. ─────────
+# ⚠️ HIS MOVE, NOT HERS, AND THAT IS WHY IT IS AN AUTO-FIRE. amb_bastien_cot already says the level in the cup
+# goes down some days and that mentioning it is the fastest way to make it stop. So there is no "give him
+# water" choice to click — a choice would be her asking again. He drinks because she stopped asking, and the
+# player finds out the way she does: by coming into the room.
+# ⚠️ AND NOT IN THE FACE (beat_0200): gated face_worn is_false, so it waits until she comes in as herself — a
+# face he has never looked at. See the banner on amb_bastien_cot.
+# ⚠️ THE DAY'S WAIT is days_since_flag(bastien_at_cot) gte 1. bastien_at_cot is set by the arrival scene's
+# exit through applyFlagEffect, so it always carries set_day in play; the fail-closed case (a flag with no
+# meta) cannot arise from a real save. The night he is carried in, nothing here can fire.
+# ⚠️ BARE AUTO-FIRE, NO npc = — the cap_bastien_at_the_cot shape. He is present at the cot all day from his
+# gated schedule row, and an npc= would move this into the portrait bucket, which is amb_bastien_cot's.
+# ⚠️ PRIORITY 10, and it collides with nothing: check_the_count.py §2 walks the chain seeded from the real
+# end-of-0.2.2 state and fails if two cot auto-fires can ever hold at once.
+# ⚠️ NOT EXPLICIT, AND THE ONE WORD HE SAYS IS THE WHOLE DIALOGUE. "Again." in the voice he used on his own
+# staff at the Undertow — which she knows because she WAS his staff, four months on his floor in a bought face,
+# and he will never know that is why it lands.
+# ⚠️ THE ONE SCENE IN THE CHUNK UNDER THE 1.5:1 NARRATION-TO-DIALOGUE TARGET, ON PURPOSE. The design is that
+# neither of them says anything about it; every other scene with him present carries his voice (he is a talker —
+# "Bastien's what he says"), and the chunk is measured in aggregate at beat_0203.
+# MEDIA: none this beat.
+[[canvases]]
+id          = "cap_bastien_drinks"
+name        = "Again"
+description = "beat_0195 (rev 230), THE COUNT, STEP 1. Auto-fire @the_cot, pri 10, one-shot, gated bastien_at_cot is_true + bastien_drank is_false + days_since_flag(bastien_at_cot) gte 1. He holds the empty cup out without turning over, drinks two more, and says one word. He drank because she stopped asking. SETS bastien_drank, which opens the washing on his hub card a day later."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_at_cot", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "bastien_drank",  operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_at_cot", operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Again"
+blocks = [
+  { type = "paragraph", content = "He is on his side facing the wall, the way he always is when she comes in. The difference is his arm. It hangs out behind him over the edge of the bunk, with the tin cup in his hand." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The cup is empty. Not tipped out under the bunk, not poured through the boards. Dry at the bottom, the way a cup is when somebody has drunk every drop and then held it out and waited." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "She takes it out of his hand. His arm stays out over the edge for a second, as if it has forgotten the way back. Then it goes under the blanket again and he does not turn over." },
+    ] },
+    { advance_text = "Fill it.", blocks = [
+        { type = "paragraph", content = "She fills it off the tap and puts it back in his hand. His fingers close on the tin. He brings it round to his mouth without lifting his head, spills some down his jaw, and drinks the lot." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Again." },
+        { type = "paragraph", content = "Still to the wall. No please in it and no thanks. One word, in the voice he used in his back room, and it is the best thing she has heard since the plant room." },
+    ] },
+    { advance_text = "Fill it again.", blocks = [
+        { type = "paragraph", content = "She fills it again and he drinks that one slower. She fills it a third time and he leaves it. He holds it to his chest in both hands, the tin sweating on his skin. That is enough, then." },
+    ] },
+    { advance_text = "Look at him.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He drank because she stopped asking. That is the whole of it. He could not take a thing from somebody who wanted him to take it, so he waited until nobody was watching and took it from a cup." },
+    ] },
+    { advance_text = "Say nothing about it.", blocks = [
+        { type = "paragraph", content = "She says nothing about it. She sits down on the floor with her back against the bunk, where she has slept since the night he came, and behind her she hears him drink the last of it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave the cup where he can reach it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "bastien_drank", op = "set" },
+]
+
+# ── loop_bastien_cot — THE LOOP. beat_0199. TRIGGERLESS. ────────────────────────────────────────────────
+# ⚠️ THE loop_grier_room RIG, NOT A NEW ONE. Reached only from the hub's "Go to him." pair, which resets the five
+# loop traits (the hub_grier entry discipline). Poses self-loop with loop_npc_pleasure +8..14 per repeat; a
+# climax choice opens at gte 50 and hands to the triggerless finisher. It has no trigger, so it cannot compete
+# with his hub for the one repeatable slot the engine allows him at the cot.
+# ⚠️ NO ANAL, ANYWHERE, AND THE KIT'S STAGE 2 IS NEVER SET. The shipped loops run oral(0) / vaginal(1) / anal(2)
+# on sex_stage and let the ass finish fire the drain. This loop only ever sets sex_stage 0 or 1, never
+# anal_active, and its finisher only knows facial(0) and inside(1). The anal finish IS the drain, and taking from
+# him is the one thing THE COUNT never does. check_the_count.py §6 fails on any write of stage 2, anal_active or
+# finisher 2, and on any mention of the drain's traits.
+# ⚠️ TWO BANDS PER NODE, keyed on bastien_himself — HIMSELF first (beat_0200), WEAK as the catch-all on
+# bastien_bedded. Weak: she leads; his hands grip and cannot hold; he watches. Himself: he takes over — the
+# signed Leash row returns for him (proprietary, unhurried, crude, "That is what that mouth is for"), with its
+# clause (ii) scoped to the back room (design_book, THE COUNT row). A third pose, under him, opens only then.
+# ⚠️ WRITTEN FOR RE-READING. These are the surfaces the player comes back to every night, so every beat is
+# RTS-flat, on the body, 3+ EXPLICIT words, and no image is lifted from the first night's capstone.
+[[canvases]]
+id          = "loop_bastien_cot"
+name        = "Go to him"
+description = "beat_0199 (rev 230), THE COUNT. Bastien's sex loop @the_cot, TRIGGERLESS, reached only from amb_bastien_cot's 'Go to him.' pair (which resets the five loop traits and, once per calendar day, adds 1 to bastien_mend). The loop_grier_room rig: intro, then oral(0) and on-top(1) poses self-looping with loop_npc_pleasure +8..14, climax-elect at gte 50 into loop_bastien_cot_finisher. NO ANAL: sex_stage only ever 0 or 1, anal_active never set, finisher facial(0) / inside(1) only. Two bands per node on bastien_himself: WEAK (she leads) and HIMSELF (he takes over, beat_0200)."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Go to him"
+blocks = [
+  # BAND HIMSELF — he has stopped counting (beat_0200). He takes over, and the signed Leash row is back for him.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is sitting on the edge of the bunk in the brace when she comes to him, and he does not move over. He points at the boards in front of him and watches her strip there, all of it, until she is naked." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Slowly. I am in no hurry, for once in my life. You are going to find out what that is like." },
+  ] },
+  # BAND WEAK — the catch-all. She leads. His hands can grip now and not much more.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He moves over for her as far as the bunk lets him, which is not far. He watches her strip, and when she is naked he holds the blanket up for her with an arm that shakes a little less than it did." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I have been lying here thinking about this since you went out. I would not say that to anybody else." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Your mouth first."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on him."
+targetType = "node"
+nodeId     = "base_ride_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+# ⚠️ THE THIRD POSE, HIMSELF ONLY (beat_0200). He can kneel over her now, in the brace. sex_stage stays 1 — the
+# kit's vaginal slot — because stage 2 is the anal slot and this loop never sets it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie back for him."
+targetType = "node"
+nodeId     = "base_under_bastien"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+
+# Pose: her mouth (sex_stage 0). Self-looping — "Keep him in your mouth." re-targets this node.
+[[canvases.nodes]]
+id   = "base_oral_bastien"
+name = "Your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_cot_oral_t5", pool = 4, description = "A naked woman kneeling on a narrow bunk between the legs of a thin naked man lying on his back or sitting on its edge, sucking his cock, his hand in her hair — resting, or holding her head down. Must show: a narrow bed, her mouth on his cock, his hand in her hair. Avoid: him standing, avoid: a big bright bedroom, avoid: violence or choking.", search_queries = ["woman sucking cock of man lying on narrow bed hand in her hair amateur gif", "slow blowjob man lying still on small bed homemade gif", "girl kneeling on bed blowjob skinny guy on his back gif"] } },
+  # BAND HIMSELF — he sets the pace now, and the diction is his again (the signed Leash row).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He takes her head in both hands and fucks her mouth at his own pace, slow and deep, holding her down on his cock until her eyes water and letting her up to suck at the head only when he has decided to." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That is what that mouth is for. Not for talking. You do not do much of that anyway." },
+  ] },
+  # BAND WEAK — the catch-all.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She kneels naked between his knees and sucks his cock slow, all the way down and all the way back, her fingers spread on his hip bone. His hand finds her hair and rests there. It does not push. It cannot yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take your time. I have nowhere to be." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep him in your mouth."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on him."
+targetType = "node"
+nodeId     = "base_ride_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him come on your face."
+targetType = "node"
+nodeId     = "loop_bastien_cot_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# Pose: on top of him (sex_stage 1). The kit's vaginal slot, re-voiced as her riding him — he is on his back.
+[[canvases.nodes]]
+id   = "base_ride_bastien"
+name = "On top of him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_cot_ride_t5", pool = 4, description = "A naked woman riding a thin naked man who lies on his back on a narrow bunk in a small bare room, his hands gripping her thighs, the bed knocking the wall. Must show: her on top, him on his back on a narrow bed, his hands on her thighs. Avoid: him on top, avoid: a big bright bedroom, avoid: anal.", search_queries = ["woman riding man on narrow bed his hands on her thighs amateur gif", "cowgirl on skinny guy small bed homemade gif", "girl on top riding slow hands on her thighs gif"] } },
+  # BAND HIMSELF — his hips answer him now, and he uses them.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She rides him and he takes her hips in both hands and works her on his cock the way he wants it, dragging her cunt down hard and holding her there, fucking up into her now that his hips answer him." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Four months on a wall, and look what I have got for it. Keep going. I will tell you when you can stop." },
+  ] },
+  # BAND WEAK — the catch-all.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_bedded", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She straddles his hips, takes his cock into her cunt in one long slide and fucks him slowly. The pad slides on the boards. His hands are on her thighs now, which they could not manage the first night, and they hold on." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stay there a moment. Let me feel it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride him."
+targetType = "node"
+nodeId     = "base_ride_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth again."
+targetType = "node"
+nodeId     = "base_oral_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie back for him."
+targetType = "node"
+nodeId     = "base_under_bastien"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_bastien_cot_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# Pose: under him (sex_stage 1 — the kit's vaginal slot; stage 2 is the anal slot and is never set). HIMSELF ONLY.
+# ⚠️ HE LOOKS AT HER FACE. He never did in the cell and did not on the first night; step 5 is the first time he
+# looks her in the face, and this is where he studies it, the way he studied the plate — "I am memorising it."
+# It is safe: this is a face he has never seen, the bought one never comes near him (every surface of his is
+# gated face_worn is_false), and knowing her face is not knowing who she is. (The first cut had "There you are",
+# which reads as recognition and echoes his back-room line to the bought face, "There she is" — cut.)
+[[canvases.nodes]]
+id   = "base_under_bastien"
+name = "Under him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/bastien_cot_under_t5", pool = 4, description = "A thin man kneeling over a woman who lies on her back on a narrow bunk, fucking her slow and deep with his weight on his arms, looking down at her face. Must show: missionary on a narrow bed, him on his knees over her, eye contact. Avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: a muscular man.", search_queries = ["slow missionary on narrow bed looking at her face amateur gif", "man on knees over girl slow deep fucking small bed homemade gif", "eye contact missionary skinny man amateur gif"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She lies back on the bunk and he gets over her on his knees, the brace creaking, and fucks her slow and deep with his weight on his arms, his cock buried in her cunt, looking at her face the whole time now." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Hold still. I have not looked at this face properly before. I am memorising it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "base_under_bastien"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_ride_bastien"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him come on your face."
+targetType = "node"
+nodeId     = "loop_bastien_cot_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_bastien_cot_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# ── loop_bastien_cot_finisher — THE FINISH. beat_0199. TRIGGERLESS. ─────────────────────────────────────
+# ⚠️ TWO FINISHES ONLY — facial(0) and inside(1). There is no ass finish because there is no drain in this loop.
+# ⚠️ WHY THE PROSE SITS IN A ONE-BEAT CASCADE. The clip depends on the finish type and the prose on the finish
+# type AND the band. Adjacent [group] blocks merge into ONE if/elseif chain, so clip groups and prose groups side
+# by side would become a single chain and the first match would swallow the other half. Nested groups have no
+# shipped precedent in this game. So the two clip groups (one pool each — the one-asset-one-block rule) form the
+# node's top-level chain, and the banded prose is its own chain inside a single-beat cascade, which is also the
+# last block in the node as check_cascade_order requires.
+# ⚠️ EVERY EXIT RESETS THE FIVE LOOP TRAITS and returns to the cot — the shipped finisher contract.
+[[canvases]]
+id          = "loop_bastien_cot_finisher"
+name        = "The finish"
+description = "beat_0199 (rev 230), THE COUNT. Triggerless finisher for loop_bastien_cot. Two finishes on sex_finisher_type — on her face (0) and inside her (1); no ass finish, because the loop never goes there and never touches the drain. Clip groups by finish type; prose banded by finish type x bastien_himself inside a single-beat cascade (so the two chains cannot merge). Every exit resets the five loop traits and returns to the cot."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "The finish"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bastien_cot_finish_facial_t5", pool = 4, description = "A thin man coming on the face of a naked woman on a narrow bunk, his hand in her hair. Must show: a facial finish on a narrow bed in a small bare room. Avoid: a big bright bedroom, avoid: violence.", search_queries = ["cumshot on her face man lying on bed hand in her hair amateur gif", "facial from man lying down girl kneeling on bed homemade gif"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/bastien_cot_finish_inside_t5", pool = 4, description = "A thin man coming inside a woman on a narrow bunk, holding her hips hard against him until he has finished. Must show: a creampie finish on a narrow bed. Avoid: pulling out, avoid: anal, avoid: a big bright bedroom.", search_queries = ["creampie girl on top stays down amateur gif", "cowgirl creampie small bed his hands on her thighs homemade gif"] } },
+  ] },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+      # BAND HIMSELF, on her face (beat_0200) — his, and he says so.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+          { type = "flag",  subject = "player", flag_key = "bastien_himself",   operator = "is_true" },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He pulls his cock out and comes on her face, one hand in her hair to hold her where he wants her. His cum lands across her mouth and her cheek and drips onto her tits." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That is mine. Leave it where it is." },
+      ] },
+      # BAND HIMSELF, inside her.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+          { type = "flag",  subject = "player", flag_key = "bastien_himself",   operator = "is_true" },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He comes deep inside her with his hands clamped on her hips, holding her hard on his cock until he has finished, his cum filling her cunt." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Same time tomorrow. I will know if you are late. I always know." },
+      ] },
+      # BAND WEAK, on her face.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He comes with his hand slack in her hair and her mouth just off his cock, and his cum lands on her lips and runs down her chin onto her tits. Then he lies back and breathes." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Come here. Lie down. Do not go anywhere yet." },
+      ] },
+      # BAND WEAK, inside her.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He comes inside her with a sound like something giving way, his fingers dug into her thighs, and she stays down on his cock until his cum has stopped pulsing in her cunt." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Every night. You know that? You have come back every single night." },
+      ] },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie down with him."
+targetType = "location"
+locationId = "the_cot"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+# ── cap_bastien_stops_counting — STEP 5, HE STOPS COUNTING. beat_0200. Auto-fire @the_cot, pri 10, ONE-SHOT. ──
+# ⚠️ HIS MOVE. The chunk's spine lands here: he counted the days a man did not come for him (a hundred and
+# nineteen on the wall, then again on her bunk from the morning Cain put him down), and bastien_mend counted the
+# nights she came to him. At three, he stops. "A man counts the days when nobody is coming."
+# ⚠️ THE MORNING AFTER THE THIRD NIGHT, NOT THE MOMENT SHE CLIMBS OFF HIM: days_since_flag(bastien_slept) gte 1.
+# The loop exits to the cot and an auto-fire runs on arrival, so without the day clause this scene — "she comes
+# in and he is sitting at her bench" — would play while she was still getting dressed (found at beat_0194).
+# ⚠️ AND BY DAY, 06:00-22:00 (whole-chunk review). The day clause alone was not enough: a third night started
+# after about 22:40 ends past midnight, the loop exits to the cot on the NEXT calendar day, and "no new scratch this
+# morning" played straight after the sex. The clock item closes it; the scene says "this morning" and means it.
+# ⚠️ AND NOT IN THE FACE: face_worn is_false, like every surface of his (see amb_bastien_cot's banner).
+# ⚠️ HE LOOKS HER IN THE FACE HERE, for as long as it takes to say why he stopped. It is a face he never saw in the
+# cell and never on his floor, and knowing it is not knowing who she is. (The first cut said "It is the first time
+# he has" — false: the WASHED band already has him looking at her. Cut at review.)
+# ⚠️ "Envelopes only ever came into his back room. This one is going out." — cap_bastien_notices: "a room that
+# takes envelopes in one direction only". The reversal is the scene's one image.
+# ⚠️ THE NOTE. The House is his (npc_bastien: "The bar and The House both"), and Rue's own introduction keeps an
+# owner she never names ("Not the muscle, not the owner"). The note is for her. SETS bastien_note, which opens
+# cap_rue_reads_it at the House, and bastien_himself, which turns every loop band and his hub to HIMSELF.
+# ⚠️ NOT EXPLICIT. He talks — this is the scene where he says the most, and says it plainly.
+# MEDIA: none this beat.
+[[canvases]]
+id          = "cap_bastien_stops_counting"
+name        = "The number"
+description = "beat_0200 (rev 230), THE COUNT, STEP 5. Auto-fire @the_cot, pri 10, one-shot, gated bastien_mend gte 3 + bastien_himself is_false + days_since_flag(bastien_slept) gte 1 + face_worn is_false. He is at her bench in the brace with a pencil; the tally has stopped; he tells her he has stopped counting because somebody comes every night, looks at her face while he says it, and hands her a folded note for the woman who runs the floor at the House. SETS bastien_himself + bastien_note."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait",           subject = "player", trait_key = "bastien_mend",    operator = "gte", value = 3 },
+  { type = "flag",            subject = "player", flag_key  = "bastien_himself", operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key  = "bastien_slept",   operator = "gte", value = 1 },
+  { type = "flag",            subject = "player", flag_key  = "face_worn",       operator = "is_false" },
+  { type = "time_of_day",     start_time = "06:00", end_time = "22:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The number"
+blocks = [
+  { type = "paragraph", content = "He is sitting at her bench in the brace when she comes in, with her pencil and the back of a feed-line docket, and he finishes the line he is writing before he looks up." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The tally on the bunk frame has stopped. There is no new scratch this morning. She notices, and he watches her notice, and neither of them pretends the other did not." },
+    ] },
+    { advance_text = "Say it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You stopped." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do you want the number?" },
+        { type = "dialog", props = { speaker = "player" }, content = "I know the number." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Of course you do. You count too. You have been counting the nights." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "A hundred and nineteen days on the wall, waiting for a man who came in the end. Then I started again the morning he put me down on your bunk and went away." },
+    ] },
+    { advance_text = "Ask him why he stopped.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "A man counts the days when nobody is coming. Somebody comes here every night. So there is nothing left to count." },
+        { type = "paragraph", content = "He says it like a figure off a ledger, and looks her in the face while he does. It is the first time he has." },
+    ] },
+    { advance_text = "Let him look.", blocks = [
+        { type = "paragraph", content = "He folds the docket twice and holds it out between two fingers. Envelopes only ever came into his back room. This one is going out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "The House. The woman who runs the floor, and nobody else. Do not read it." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not because you would not understand it. Because you would, and then you would have to decide what to do about it, and I would rather you did not have to." },
+    ] },
+    { advance_text = "Put it in your coat.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Once he was a name on a set and a voice through a wall. Now he is sitting at her bench giving her an errand, and it is the most ordinary thing that has ever happened in this room." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him writing."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "bastien_himself", op = "set" },
+  { targetType = "player", flag = "bastien_note",    op = "set" },
+]
+
+# ── cap_rue_reads_it — STEP 6, THE HOUSE. beat_0201. Auto-fire @underworld_brothel, pri 10, ONE-SHOT. ──────
+# ⚠️ THE OWNER THE GAME HAS BEEN HOLDING SINCE ACT 2. Rue's first words to her were "I run this house. Not the
+# muscle, not the owner." (rue_intro), and when she was asked who keeps the company paper on the strip she
+# refused to trade in it (wall_rue) — she was protecting him. npc_bastien owns "The bar and The House both".
+# Four months she has run the floor believing him dead. The note tells her otherwise.
+# ⚠️ SHE GETS UP. Every scene of hers is the chair she does not get up from ("She doesn't get up." · "Don't make
+# me regret the chair I didn't get up from."). This is the one time she does. That is the whole reaction.
+# ⚠️ SHE COUNTS. "Her numbers are the same numbers whoever asks" (wall_rue). She has been putting his cut by for
+# four months because somebody had to and she is the one who counts — which is what goes back in the envelope,
+# and what he counts out on the blanket in step 7. Three people counting: him, her, and now Rue.
+# ⚠️ SHE DOES NOT ASK. Not who Wren is to him, not where he is. Down here the not asking is the manners.
+# ⚠️ PRESENCE: npc_at_location … is_present, the cap_sabin_consults fix for open item 5 — an auto-fire must not
+# play a scene with Rue in it while Rue is off the floor (she keeps 08:00-03:00). And rue_introduced is_true, so
+# a player who somehow never met her gets her introduction first rather than a stranger reading his mail.
+# ⚠️ PRIORITY 10 — above rue_intro (9, dead once rue_introduced) and wall_rue (4, a finished 1c one-shot).
+# check_the_count.py §8 walks the House's one-shots over the real end-of-0.2.2 seed.
+# ⚠️ IT EXITS TO THE COT, 60 minutes: she takes the envelope home the same day, and step 7 fires on arrival —
+# the design's "the House and the money the same day".
+# MEDIA: none. The House's own image is carried by the location.
+[[canvases]]
+id          = "cap_rue_reads_it"
+name        = "Not the owner"
+description = "beat_0201 (rev 230), THE COUNT, STEP 6. Auto-fire @underworld_brothel, pri 10, one-shot, gated bastien_note is_true + house_answered is_false + rue_introduced is_true + npc_at_location underworld_brothel npc_rue is_present. Rue reads the note twice and gets up out of the chair she never gets up from; her own line comes back — not the muscle, not the owner — and she hands over the owner's cut she has been putting by for four months, sealed. She does not ask. SETS house_answered and sends her home to the cot, where step 7 fires."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "bastien_note",   operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "house_answered", operator = "is_false" },
+  { type = "flag",            subject = "player", flag_key = "rue_introduced", operator = "is_true"  },
+  { type = "npc_at_location", location_id = "underworld_brothel", npc_id = "npc_rue", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Not the owner"
+blocks = [
+  { type = "paragraph", content = "Rue is doing the book in the open, the way she always does. She sees the folded docket before she sees who is holding it, and the pen stops." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I was told to give you this. You and nobody else." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Told by who?" },
+        { type = "paragraph", content = "She holds the docket out to Rue and says nothing, and Rue looks at her for a long second and takes it." },
+    ] },
+    { advance_text = "Let her read it.", blocks = [
+        { type = "paragraph", content = "Rue unfolds it without getting up, the way she does everything, and reads it twice. The second time she puts the pen down. Then she gets up out of the chair she never gets up from for anybody." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "I run this house. Not the muscle, not the owner. I've said that to every girl who ever walked in here, and I never once said who the owner was. These last four months I thought he was dead." },
+    ] },
+    { advance_text = "Say nothing.", blocks = [
+        { type = "paragraph", content = "Rue does not ask who she is to him. She does not ask where he is. Down here the not asking is the whole of the manners, and Rue has better manners than anyone on the strip." },
+    ] },
+    { advance_text = "Wait for her.", blocks = [
+        { type = "paragraph", content = "Rue takes a fat envelope out of the cash box, seals it with her thumb and writes one word on the front." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "His cut. Four months of it. I kept putting it by, because somebody had to, and I'm the one who counts." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Tell him the rooms are still his. Tell him I kept the book straight. He'll check, and he'll find I did." },
+    ] },
+    { advance_text = "Go.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She walks out of the House with four months of a dead man's money in her coat, and the dead man is sitting at her bench, waiting for it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "house_answered", op = "set" },
+]
+
+# ── cap_bastien_counts_again — STEP 7, COUNTING AGAIN. beat_0202. Auto-fire @the_cot, pri 10, ONE-SHOT. TIER-3. ──
+# ⚠️ THE CHUNK'S LAST IMAGE, AND THE ARRIVAL LINE PAID. The night he was carried in he told her: "in about a week
+# you are going to work out what you have actually got on that bed and you will wish you had left it bolted to a
+# wall" (cap_bastien_at_the_cot). LO's call was that it lands as HE IS DANGEROUS AGAIN, the company coming for
+# him held for later. So: what she has on that bed is the man who owns the underworld, back in business from her
+# bunk, and the first thing he does with it is count.
+# ⚠️ THE COUNT, TURNED THE RIGHT WAY. He counted the days on the wall; he counted them again on her bunk; now he
+# counts money, and "for the first time since the wall the number he is keeping is one he wants to get bigger."
+# ⚠️ HE IS DANGEROUS AND HE KNOWS THE COT IS NOT TO BE KNOWN: "there will be people on the strip who know I am not
+# dead, and none of them will know where I am." It protects her room and keeps the company thread for later.
+# ⚠️ TIER-3, SPENT ON BEATS: ten at RTS-flat length. NOT EXPLICIT — the loop is where he takes her; this is the
+# story's payoff, and it ends on the counting. (gates.py's EXPLICIT list matches "lick", so "licks his thumb"
+# reads as a hit; it is not an explicit beat and is not counted as one here.)
+# ⚠️ AND NOT IN THE FACE: face_worn is_false, like every surface of his.
+# SETS bastien_back, which turns his hub to the BACK band and puts up card H, the chunk's terminal card.
+# MEDIA: none this beat.
+[[canvases]]
+id          = "cap_bastien_counts_again"
+name        = "Counting again"
+description = "beat_0202 (rev 230), THE COUNT, STEP 7 — THE CHUNK'S LAST IMAGE. Auto-fire @the_cot, pri 10, one-shot, Tier-3, gated house_answered is_true + bastien_back is_false + face_worn is_false. She puts Rue's envelope in front of him; he tips four months of the House's money onto her blanket and counts it, unhurried, and says what it is for; the arrival line ('you are going to work out what you have actually got on that bed') lands as the man who owns the underworld doing his books on her blanket. SETS bastien_back (card H, terminal)."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "house_answered", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_back",   operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Counting again"
+blocks = [
+  { type = "paragraph", content = "She puts the envelope down on the bench in front of him without a word. He looks at Rue's one word on the front of it for a long time." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She wrote my name on it. In all the years she ran that floor for me she never once put it on paper. That was the arrangement." },
+    ] },
+    { advance_text = "Watch him.", blocks = [
+        { type = "paragraph", content = "He tears the end off and tips it out onto her blanket, and it is money, a great deal of it, in the soft greasy notes the strip runs on, and he squares the pile with the side of his hand." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "Then he counts it. Unhurried, licking his thumb, laying the notes out in tens in rows across the blanket, his lips moving. His hands go fast for the first time since the wall." },
+    ] },
+    { advance_text = "Keep watching.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Rue kept it straight. Of course she did. She has been counting my money for years, and she has not been wrong once." },
+    ] },
+    { advance_text = "Ask him what it is for.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What is it for?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Starting again. By the end of the month there will be people on the strip who know I am not dead, and none of them will know where I am." },
+    ] },
+    { advance_text = "Look at the bunk.", blocks = [
+        { type = "paragraph", content = "She looks at it. The blanket, the money in rows, the brace hanging off the end, the scratches on the bunk frame that stopped. The night they carried him in, he would not drink the water off the bench." },
+    ] },
+    { advance_text = "Remember what he said.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "In about a week, he said, the night they carried him in, she would work out what she had on that bed. She has. It is the man who owns the underworld, and he is doing his books on her blanket." },
+    ] },
+    { advance_text = "Say it to him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You told me I would wish I had left you on the wall." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "And do you?" },
+        { type = "paragraph", content = "She does not answer that either. He did not expect her to. He goes back to his rows." },
+    ] },
+    { advance_text = "Watch him count.", blocks = [
+        { type = "paragraph", content = "He licks his thumb and finds his place without looking. For the first time since the wall, the number he is keeping is one he wants to get bigger." },
+    ] },
+    { advance_text = "Sit down.", blocks = [
+        { type = "paragraph", content = "She sits on the end of the bunk with her back against the wall and watches him. He counts for an hour without stopping, and he does not lose his place once." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him count."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "bastien_back", op = "set" },
 ]
 
 # ══════════════════════════════════════════════════════════════════
@@ -29354,5 +30656,512 @@ flagEffects = [
   { targetType = "player", flag = "bastien_found_alive", op = "unset" },
   { targetType = "player", flag = "bastien_rescued",     op = "unset" },
   { targetType = "player", flag = "bastien_at_cot",      op = "unset" },
+]
+
+# ═══ beat_0194 (rev 230), THE COUNT — DEV JUMP 1. The chunk's first frame. ═════════════════════════════════
+# ⚠️ COPIED FROM dev_jump_way_down_start, NOT RE-DERIVED. That seed was corrected three times in 0.2.2 (the
+# 0.2.1 back half, the wardrobe, Act 1 carried) and every one of those fixes is load-bearing here too: the cot
+# is gated berth_home, cap_the_wait needs plan_made, the rack needs the five garments. Then carried through a
+# finished rescue. Two trait values are flipped IN PLACE rather than overridden by a later row, the rev-223
+# rule, so the result does not depend on the order effects are applied in: yard_depth 3 -> 4, drains_done 1 -> 2.
+# ⚠️ NOT A FRESH-SAVE HAND-SET. rev 228's first live test proved that a flag set any other way than through a
+# choice's flagEffects has no set_day, and days_since_flag fails closed on it. This click goes through
+# applyFlagEffect, so bastien_at_cot carries today's day and step 1 waits for tomorrow — the same as in play.
+# ⚠️ IDEMPOTENT: every COUNT flag is unset and bastien_mend zeroed, so taking it twice, or after jump 2, lands
+# in the same state. check_the_count.py §1 guards the seed; its wardrobe must equal the 0.2.2 jump's.
+# ⚠️ TAKE IT ON A FRESH SAVE. A dev jump sets flags and traits; it does NOT re-arm one-shot canvases that have
+# already fired in this save. Jump back after finishing the chunk and the one-shots stay spent (found by
+# live_the_count.py [9], which now clears storage before jump 2).
+[[canvases]]
+id          = "dev_jump_count_start"
+name        = "\u25b6 0.2.3: Bastien on the bunk"
+description = "DEV JUMP (THE COUNT, beat_0194). Seeds the END of 0.2.2 — dev_jump_way_down_start's full end-of-0.2.1 state, carried through a finished rescue: all eight flags a 0.2.2 run sets on its mandatory path (bastien_alive_known, rescue_agreed, route_learned, yard_part_found, link_built, bastien_found_alive, bastien_rescued, bastien_at_cot), yard_depth 4 and drains_done 2 — and explicitly clears every THE COUNT flag and bastien_mend. Drops at the_cot the night he was carried in: bastien_at_cot is set by this click, so its set_day is TODAY and cap_bastien_drinks waits for tomorrow, exactly as it does in play."
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.3 start (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the end of The Way Down. Bastien is on the bunk and will not drink, and nothing of The Count has happened yet. Sleep, then come back to the cot tomorrow: the first step waits a calendar day." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the cot."
+targetType = "location"
+locationId = "the_cot"
+# ⚠️ THE WARDROBE — ADDED rev 224, AND ITS ABSENCE WAS THE SECOND SEED BUG. A dev jump runs from a fresh
+# StoryInit, so canvas_opening_morning's `add cover_dockhand` never happens and she owned only the four
+# initial garments. LO: "I dont see the Dock cover at all in the change cloths menu." Worse than a missing
+# rack item: hub_depot_floor substitutes the no-cover squint without it, so the drain was unreachable.
+# These five are every garment any canvas in play grants (none is ever removed), which is exactly what a
+# real end-of-0.2.1 player owns. check_bunker_route.py §9 derives that set from the game and fails if a
+# jump falls behind it. Worn: cover_research, as dev_jump_whose_hand_end dresses her — so reaching Renner
+# still means changing at the cot rack, which is the beat this release actually asks the player to do.
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_dockhand" },
+  { action = "add",   item_id = "cover_analyst"  },
+  { action = "add",   item_id = "cover_stranger" },
+  { action = "add",   item_id = "dress_undertow" },
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
+effects = [
+
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },   # 0.2.2 went four deep (yard_find_4)
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── ACT 1, CARRIED (rev 224). The seed was built for 0.2.1, which never returns to Renner or the yard; 0.2.2
+  # returns to both. Every value is what a real player has after Mission 1 and the yard's three finds:
+  #   drains_done 1   the first drain (loop_renner_finisher adds 1). At 0 the drain replays Act 1's .intro.
+  #   weapon_repair 3 activity_repair_weapon's third session, which is what sets arousal_weapon_ready.
+  #   npc_renner corruption 60 / relation 24 — past the office (relation 21) and the ass finish (corruption 50),
+  #   the same 60 the shipped dev_jump_renner_drain uses.
+  { targetType = "player", trait = "drains_done",   op = "set", value = 2 },   # 0.2.2 drained Renner for the route
+  { targetType = "player", trait = "weapon_repair", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+  { targetType = "npc", npcId = "npc_renner", trait = "relation",   op = "set", value = 24 },
+  # ── THE WAY DOWN — done, and the run's per-run state back at rest ──
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
+  # ── THE COUNT — cleared ──
+  { targetType = "player", trait = "bastien_mend",        op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "coin",                op = "set", value = 120 },
+]
+flagEffects = [
+
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
+  { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "set" },
+  { targetType = "player", flag = "vesper_named",            op = "set" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "set" },
+  { targetType = "player", flag = "third_located",           op = "set" },
+  { targetType = "player", flag = "two_men_done",            op = "set" },
+  # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
+  { targetType = "player", flag = "cain_came_along",         op = "set" },
+  # ── ACT 1, CARRIED (rev 224) — every flag set by its own canvas on the real path: canvas_opening_morning,
+  # cap_renner_hired, work_depot_haul, cap_renner_noticed, the flash rung, cap_renner_blowjob,
+  # ma_renner_blowjob, the loop entry, the anal choice, yard_find_1/2/3, activity_repair_weapon. Without
+  # them the yard replays its Act-1 finds and cap_renner_hired re-fires at the Anchor.
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back", op = "set" },
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
+  { targetType = "player", flag = "yard_clue_seen", op = "set" },
+  { targetType = "player", flag = "has_arousal_weapon", op = "set" },
+  { targetType = "player", flag = "found_dead_men", op = "set" },
+  { targetType = "player", flag = "arousal_weapon_ready", op = "set" },
+  # facility_match_seen — inv_facility_match ("That's mine") is OPTIONAL in real play: nothing reads the flag
+  # but its own trigger. A player who never went to the Facility before 0.2.2 gets it once on the first rescue
+  # trip, which is correct. The jump marks it seen so a tester lands on the descent card, not an Act-1 beat.
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
+  # ── THE WAY DOWN — done. Exactly the eight flags its mandatory path sets (read out of the 0.2.2 canvases'
+  # own flagEffects at beat_0194). bunker_seen is NOT here: it is set only on a loud run, and a silent run is a
+  # finished run too. bastien_at_cot is set by THIS click, so its set_day is today and step 1 waits a day.
+  { targetType = "player", flag = "bastien_alive_known", op = "set" },
+  { targetType = "player", flag = "rescue_agreed",       op = "set" },
+  { targetType = "player", flag = "route_learned",       op = "set" },
+  { targetType = "player", flag = "yard_part_found",     op = "set" },
+  { targetType = "player", flag = "link_built",          op = "set" },
+  { targetType = "player", flag = "bastien_found_alive", op = "set" },
+  { targetType = "player", flag = "bastien_rescued",     op = "set" },
+  { targetType = "player", flag = "bastien_at_cot",      op = "set" },
+  # ── THE COUNT — every flag explicitly UNSET, which is what makes this jump idempotent ──
+  { targetType = "player", flag = "bastien_drank",       op = "unset" },
+  { targetType = "player", flag = "bastien_washed",      op = "unset" },
+  { targetType = "player", flag = "brace_built",         op = "unset" },
+  { targetType = "player", flag = "bastien_stood",       op = "unset" },
+  { targetType = "player", flag = "bastien_bedded",      op = "unset" },
+  { targetType = "player", flag = "bastien_slept",       op = "unset" },
+  { targetType = "player", flag = "bastien_himself",     op = "unset" },
+  { targetType = "player", flag = "bastien_note",        op = "unset" },
+  { targetType = "player", flag = "house_answered",      op = "unset" },
+  { targetType = "player", flag = "bastien_back",        op = "unset" },
+]
+
+# ═══ beat_0203 (rev 230), THE COUNT — DEV JUMP 2. One night short of him stopping counting. ═════════════════
+# ⚠️ THE ONE THAT MATTERS FOR TESTING THE METER. The chunk's only new mechanic is the once-a-day pair on his card,
+# and it cannot be read off the TOML — its arithmetic is bastien_slept's set_day against the calendar. This lands
+# with two nights on the meter and bastien_slept set by the click (today), so a tester sees the free "Go to him."
+# tonight, the counting one tomorrow, and "The number" the morning after that.
+# ⚠️ COPIED FROM dev_jump_count_start, then carried forward in place: the six flags through the first night SET,
+# bastien_mend 2, the brace's 40 coin spent (both of the seed's coin rows flipped, so order cannot matter), and
+# everything after the first night still UNSET — so taking either jump, in either order, lands coherently.
+# ⚠️ TAKE IT ON A FRESH SAVE. A dev jump sets flags and traits; it does NOT re-arm one-shot canvases that have
+# already fired in this save. Jump back after finishing the chunk and the one-shots stay spent (found by
+# live_the_count.py [9], which now clears storage before jump 2).
+[[canvases]]
+id          = "dev_jump_count_one_short"
+name        = "\u25b6 0.2.3: one night short"
+description = "DEV JUMP 2 (THE COUNT, beat_0203). dev_jump_count_start's seed carried through the first night: bastien_drank, bastien_washed, brace_built, bastien_stood, bastien_bedded and bastien_slept SET (the brace's 40 coin spent), bastien_mend = 2, face off, and everything after the first night UNSET. bastien_slept is set by this click, so its set_day is today: tonight's 'Go to him.' is the free one, tomorrow's makes 3, and the morning after that he stops counting. Lands at the cot."
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.3 one night short (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: The Count through the first night. Two nights on the meter. Go to him tonight (it will not count), again tomorrow (it will make three), and the morning after that he stops counting." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the cot."
+targetType = "location"
+locationId = "the_cot"
+# ⚠️ THE WARDROBE — ADDED rev 224, AND ITS ABSENCE WAS THE SECOND SEED BUG. A dev jump runs from a fresh
+# StoryInit, so canvas_opening_morning's `add cover_dockhand` never happens and she owned only the four
+# initial garments. LO: "I dont see the Dock cover at all in the change cloths menu." Worse than a missing
+# rack item: hub_depot_floor substitutes the no-cover squint without it, so the drain was unreachable.
+# These five are every garment any canvas in play grants (none is ever removed), which is exactly what a
+# real end-of-0.2.1 player owns. check_bunker_route.py §9 derives that set from the game and fails if a
+# jump falls behind it. Worn: cover_research, as dev_jump_whose_hand_end dresses her — so reaching Renner
+# still means changing at the cot rack, which is the beat this release actually asks the player to do.
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_dockhand" },
+  { action = "add",   item_id = "cover_analyst"  },
+  { action = "add",   item_id = "cover_stranger" },
+  { action = "add",   item_id = "dress_undertow" },
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
+effects = [
+
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },   # 0.2.2 went four deep (yard_find_4)
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 20 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 80 },   # 120 less the brace
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── ACT 1, CARRIED (rev 224). The seed was built for 0.2.1, which never returns to Renner or the yard; 0.2.2
+  # returns to both. Every value is what a real player has after Mission 1 and the yard's three finds:
+  #   drains_done 1   the first drain (loop_renner_finisher adds 1). At 0 the drain replays Act 1's .intro.
+  #   weapon_repair 3 activity_repair_weapon's third session, which is what sets arousal_weapon_ready.
+  #   npc_renner corruption 60 / relation 24 — past the office (relation 21) and the ass finish (corruption 50),
+  #   the same 60 the shipped dev_jump_renner_drain uses.
+  { targetType = "player", trait = "drains_done",   op = "set", value = 2 },   # 0.2.2 drained Renner for the route
+  { targetType = "player", trait = "weapon_repair", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+  { targetType = "npc", npcId = "npc_renner", trait = "relation",   op = "set", value = 24 },
+  # ── THE WAY DOWN — done, and the run's per-run state back at rest ──
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
+  # ── THE COUNT — through the first night: two nights on the meter ──
+  { targetType = "player", trait = "bastien_mend",        op = "set", value = 2 },
+  { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "coin",                op = "set", value = 80 },   # 120 less the brace
+]
+flagEffects = [
+
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
+  { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "set" },
+  { targetType = "player", flag = "vesper_named",            op = "set" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "set" },
+  { targetType = "player", flag = "third_located",           op = "set" },
+  { targetType = "player", flag = "two_men_done",            op = "set" },
+  # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
+  { targetType = "player", flag = "cain_came_along",         op = "set" },
+  # ── ACT 1, CARRIED (rev 224) — every flag set by its own canvas on the real path: canvas_opening_morning,
+  # cap_renner_hired, work_depot_haul, cap_renner_noticed, the flash rung, cap_renner_blowjob,
+  # ma_renner_blowjob, the loop entry, the anal choice, yard_find_1/2/3, activity_repair_weapon. Without
+  # them the yard replays its Act-1 finds and cap_renner_hired re-fires at the Anchor.
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back", op = "set" },
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
+  { targetType = "player", flag = "yard_clue_seen", op = "set" },
+  { targetType = "player", flag = "has_arousal_weapon", op = "set" },
+  { targetType = "player", flag = "found_dead_men", op = "set" },
+  { targetType = "player", flag = "arousal_weapon_ready", op = "set" },
+  # facility_match_seen — inv_facility_match ("That's mine") is OPTIONAL in real play: nothing reads the flag
+  # but its own trigger. A player who never went to the Facility before 0.2.2 gets it once on the first rescue
+  # trip, which is correct. The jump marks it seen so a tester lands on the descent card, not an Act-1 beat.
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
+  # ── THE WAY DOWN — done. Exactly the eight flags its mandatory path sets (read out of the 0.2.2 canvases'
+  # own flagEffects at beat_0194). bunker_seen is NOT here: it is set only on a loud run, and a silent run is a
+  # finished run too. bastien_at_cot is set by THIS click, so its set_day is today and step 1 waits a day.
+  { targetType = "player", flag = "bastien_alive_known", op = "set" },
+  { targetType = "player", flag = "rescue_agreed",       op = "set" },
+  { targetType = "player", flag = "route_learned",       op = "set" },
+  { targetType = "player", flag = "yard_part_found",     op = "set" },
+  { targetType = "player", flag = "link_built",          op = "set" },
+  { targetType = "player", flag = "bastien_found_alive", op = "set" },
+  { targetType = "player", flag = "bastien_rescued",     op = "set" },
+  { targetType = "player", flag = "bastien_at_cot",      op = "set" },
+  # ── THE COUNT — through the first night SET; everything after it UNSET (idempotent either way) ──
+  { targetType = "player", flag = "bastien_drank",       op = "set"   },
+  { targetType = "player", flag = "bastien_washed",      op = "set"   },
+  { targetType = "player", flag = "brace_built",         op = "set"   },
+  { targetType = "player", flag = "bastien_stood",       op = "set"   },
+  { targetType = "player", flag = "bastien_bedded",      op = "set"   },
+  { targetType = "player", flag = "bastien_slept",       op = "set"   },
+  { targetType = "player", flag = "bastien_himself",     op = "unset" },
+  { targetType = "player", flag = "bastien_note",        op = "unset" },
+  { targetType = "player", flag = "house_answered",      op = "unset" },
+  { targetType = "player", flag = "bastien_back",        op = "unset" },
 ]
 

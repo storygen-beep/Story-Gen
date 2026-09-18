@@ -2048,6 +2048,20 @@ ship + deploy). All `status=planned`.
   pain-as-spectacle, which the rev-122 row already named as the failure mode. The live suite asserts the row
   from both sides: no pack / restraint / sustained-non-con vocabulary, no arousal on her side, no
   damage-as-spectacle, Cain never named — and the charge the row *does* name present on the page.
+- **THE COUNT — Bastien at the cot** *(drafted and **SIGNED 2026-09-19**, rev 229, with the chunk's design —
+  LO: "Go ahead with your picks, write the full design"; full record `games/vesper/design_the_count.md`)* —
+  full crude from the first hot beat (cock, cunt, cum, tits, mouth). **No anal** — the anal finish is the
+  drain, and taking from him is the one thing this chunk never does. **No restraint** — he is the one who was
+  bolted to a wall. **No pack.** His consent is on the page: he never stops her and says one thing each scene
+  that means yes. **Two bands, keyed on `bastien_himself`.** *WEAK* (until he stops counting): she leads; his
+  degradation diction is gone because he has none left; **the humiliation runs on him** — needing to be
+  helped, getting hard when he did not choose to — and nothing degrading goes toward her; his curiosity
+  survives only as watching, reading her like a readout. *HIMSELF* (after): the signed *Leash — Bastien,
+  outside the cell* row returns for him as written — proprietary, unhurried, crude and degrading, curiosity on
+  top — with its clause (i) standing and its clause (ii) **scoped to the back room**, whose own reason
+  (*"the back room is work"*, the charge is the smuggling) does not exist at the cot. **Her side, both bands:**
+  her body may answer — she is built to feel the sex she is in — but her interior never claims the night as
+  hers (beat_0170: nothing in this for her). Tier-3 budget: **two** — the first night and the last image.
 - **The soft / non-sexual surfaces** (hubs, ambients, work, the cradle) stay flat and clean — no gratuitous
   crude on a re-readable everyday beat.
 
@@ -3086,3 +3100,28 @@ nothing to play — does not repeat.**
 **set of names** · **the units as individuals** · **why the drain has never worked on Mercer** (still unspent,
 still owed) · **Bastien's survival** — alive, taken, not dead, and *no body was ever found in the wreckage*
 gets said **once** here in Sol's or Colm's mouth and is never underlined. **His chapter is next.**
+
+---
+
+## The Way Down (0.2.2 · Bastien's rescue) — pointer only
+
+**Not folded into this book.** Its full design record is `games/vesper/design_the_way_down.md`, with the
+guard rings in `design_the_rings.md`. Recorded here so the chapter order in this file is not silently missing
+the link between *Whose Hand* and *The Count*, the same reason The Face has a pointer. Cain brings the news
+that Bastien is alive and held as bait under the burned Facility; she goes because Cain wants it and because
+she is why he is in there; she drains Renner for the way down, builds a link with Kess, breaks in past three
+rings of guards, finds him wired into a frame, calls Cain in, and they carry him out. It ends with him on her
+bunk at the cot, refusing water, not knowing who she is — and no sex at the cot, by LO's build-order call.
+
+---
+
+## THE COUNT (Bastien at the cot) — pointer only
+
+**Not folded into this book.** Its full design record is `games/vesper/design_the_count.md` (locked with LO
+2026-09-19, rev 229; BUILT the same day, rev 230, beats 0194–0203 — media harvest pending). Bastien comes back to himself over about a week of game days, in seven
+one-time steps — water, washing, a brace Kess builds for coin, the first night, then he stops counting — and
+one meter, `bastien_mend`, that counts the nights she comes to him. His tally of the days a man did not come
+is replaced by it. The chunk ends with a note carried to Rue at the House, an envelope carried back, and him
+counting money on her blanket: the man who owns the underworld, back in business from her bunk. He stays at
+the cot; he never learns who she is. Its ceiling row, **THE COUNT — Bastien at the cot**, is signed under
+*Content register & ceilings*.

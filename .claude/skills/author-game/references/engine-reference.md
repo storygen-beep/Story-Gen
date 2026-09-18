@@ -420,8 +420,9 @@ conditions = { version = "1.0", logic = "AND", items = [
 `logic` = `"AND"` (default) or `"OR"` (`v2.py:3537`, `:3871-3872`). `subject` = `"player"` or `"npc"` (npc
 requires `npc_id`).
 
-**The complete live condition `type` set (16 — verified `v2.py:3596-3864`).** Anything else → the item is
-`false` (`v2.py:3866-3867`).
+**The complete live condition `type` set (17 — the 16 verified at `v2.py:3596-3864`, plus `time_of_day`,
+which this table was missing until 2026-09-19 and which lives at `v2.py:4463` today).** Anything else → the
+item is `false` (`v2.py:3866-3867`). *(Line numbers drift as the generator grows; grep the `type ===` string.)*
 
 | `type` | Required fields | Operators / behavior | Code |
 |---|---|---|---|
@@ -440,9 +441,19 @@ requires `npc_id`).
 | `quest` | `quest_id`/`quest`, `operator` | `active` / `completed` / `step_gte` | `:3824` |
 | `corruption_level` | `operator`, `value` | banded 0–4 from tiers `[0,5,15,30,45]` (override `[engine].corruption_tiers`); `gte`/`lt`/`eq` | `:3836`, tiers `v2.py:5622-5628` |
 | `npc_at_location` | `location_id` (`npc_id` optional), `operator` | `is_present` / `is_absent`; with `npc_id` → that NPC at the location, without → any NPC (room occupied/empty) | `:3847` |
+| `time_of_day` | `start_time`, `end_time` (`"HH:MM"`) | **no operator** — true when the clock is in `[start, end)`; **end is exclusive**; an end EARLIER than the start wraps midnight (`"22:00"`–`"06:00"`); no `end_time` = a one-hour window; start == end is an empty window. Cannot be negated, so a complement is written by hand as the other window | `v2.py:4463` → `setup.isCurrentTimeSlot` `:4081` |
 
 *(code-vs-lore: `npc_at_location` IS live (`:3847`) — older corpus drafts omit it entirely, and miss
 `contains`/`not_contains` on `trait`. Treat this code-verified table as the set.)*
+
+> **⚠️ PROSE THAT FIXES THE HOUR NEEDS THE CLOCK GATE.** If a scene's words put it at a time of day — the
+> berth has gone quiet, the torch is off at the bench, he falls asleep in the dark, the bar is opening — then
+> the surface that OPENS it must carry a `time_of_day` item, or the player can click into midnight at noon and
+> be dropped back into the afternoon when it ends. A one-shot is the worst case: it plays once, wrong, forever.
+> The quest card's tip then names the window ("tomorrow night, after ten"), because a choice that is simply
+> absent until 22:00 reads as broken to a player standing there at 15:00. Found on vesper's first night with
+> Bastien (THE COUNT, beat_0198): a 16-beat night scene on a choice gated only on the calendar day. Ask of
+> every scene you write: *does any sentence in it say what time it is?* If yes, gate it on that time.
 
 ### §4.4 — Quest-card conditions are a DIFFERENT, flat shape
 

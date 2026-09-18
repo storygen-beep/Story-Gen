@@ -331,6 +331,14 @@ stay legible:
 Two engine features worth using:
 - **Variant chains** — inside a `group`/`block_pool` (the conditional-content containers), give each branch its
   *own* media block (a different `.webm` per path) so the picture re-renders as state changes.
+- **Name a new pool after the SCENE, not only the character — and grep before you declare it.** A character
+  who gets a second sex loop in a later chapter reaches straight for the natural folder name, and his first
+  loop already owns it: vesper's THE COUNT named its cot loop `sex/bastien_loop_oral_t5` and
+  `sex/bastien_finish_facial_t5`, which were The Face's back-room loop, with clips on disk — the cot would have
+  played the back room, and a chunk-local "no pool declared twice" check passed it. Prefix with the chunk or
+  the place (`sex/bastien_cot_oral_t5`), and run `grep -rn 'pool_dir = "<folder>"' games/<slug>/toml_phases/`
+  (and `ls games/<slug>/videos/<folder>`) before the block is written. The uniqueness check belongs on the
+  WHOLE game, not the chunk.
 - **Media pools — `pool_dir` + `pool`, and they CYCLE.** A folder of clips shown one per visit. The
   shape is in §1; this is **when to reach for one**. Answer the gates in order — the first two decide
   whether a pool is even the right thing, and no amount of clips fixes a wrong answer to either.

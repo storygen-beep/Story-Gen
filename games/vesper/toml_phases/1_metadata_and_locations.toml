@@ -148,6 +148,18 @@ emitter_broken    = 0
 bunker_stealth_used = 0
 bunker_noise        = 0
 bunker_runs         = 0
+# THE COUNT (beat_0194, rev 230) — bastien_mend, the one meter of the chunk (design_the_count.md).
+# ⚠️ IT COUNTS THE NIGHTS SHE COMES TO HIM, AND THAT IS THE WHOLE DESIGN. He counted the days a man did not come
+# for him (5_scenes, the plant room banner) and at the cot he starts counting again. This replaces his number:
+# +1 on the first night (amb_bastien_cot.first_night) and +1 on the first "Go to him." of each later calendar
+# day. At 3, cap_bastien_stops_counting fires and he stops.
+# ⚠️ ONCE A DAY, WHILE THE LOOP STAYS OPEN ANY TIME. The meter is paced by bastien_slept's set_day through
+# days_since_flag on two same-label hub choices, not by gating the loop — the loop is the surface he is played
+# on, and locking it to once a day would ration the porn to pace a counter.
+# ⚠️ WRITTEN ONLY ON THE LOCATED HUB. Nothing triggerless touches it, so every reader stays honest.
+# Hidden (0_systems_spec [[traits.labels]]) — the number is his, not a stat on her sheet.
+# Default 0 = save-safe: a 0.2.2 save missing the key reads it as no nights yet.
+bastien_mend        = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
 # bed but THREE DAYS of his time on the key. Set to a literal 3 by activity_kess_cot's paid tier; decremented
