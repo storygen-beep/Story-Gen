@@ -795,8 +795,15 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
     { type = "paragraph", content = "She's inside the outer line now. Deeper in there are more lights and more men. Renner guards a dead yard this hard for a reason. Whatever's worth guarding is further back." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
-    { type = "paragraph", content = "She's been all the way to the back of it. She has put her hands on everything in the yard." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "She's been all the way to the back of it. She has put her hands on everything in the yard that is standing above the ground." },
+  ] },
+  # beat_0177 (rev 222), THE WAY DOWN — the fourth band. ⚠️ THE BAND ABOVE GAINED AN `lt 4` IN THE SAME EDIT.
+  # Adjacent [group] blocks merge into ONE if/elseif chain, so an open-ended `gte 3` sitting above a `gte 4`
+  # would claim every deeper state and this band would be dead on arrival. The ruin-depth build shipped that
+  # exact bug once already (3_activities:2747).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "And under the strongroom floor as well, which is the part of his yard she had walked over about nine times without once asking what the grating was for." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -818,6 +825,14 @@ text       = "Push to the back of it."
 targetType = "node"
 nodeId     = "yard_crawl.guard3"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+# beat_0177 (rev 222), THE WAY DOWN — the fourth push. The yard had three finds and all three were spent,
+# which made every 15-Charge push a pure sink. This is the fourth, and it carries the part Kess needs.
+[[canvases.nodes.exit_block.choices]]
+text       = "Get down under the strongroom floor."
+targetType = "node"
+nodeId     = "yard_crawl.guard4"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] }
 costs      = [{ trait = "energy", value = 15 }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Slip back out."
@@ -933,6 +948,43 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 
 # deeper — shared WIN node (yard_depth already +1 on the choice). Prose by NEW depth. Find auto-fires on return.
+# ── guard4 (beat_0177) — depth 3->4, S=F=55. The pit man. Cloned from guard3, thresholds raised. ──
+[[canvases.nodes]]
+id   = "guard4"
+name = "The man on the grating"
+blocks = [
+  { type = "paragraph", content = "There is one man down here and he is sitting on the edge of the opening with his boots hanging into it, because this is where you come when you do not want to be found by the other three. He has not heard her yet." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go past him down the ladder, quiet."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 55 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him off the edge."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 }, { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 55 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the weapon on him."
+targetType = "node"
+nodeId     = "yard_crawl.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "emitter_broken", operator = "lt", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Too close — break and run."
+targetType = "node"
+nodeId     = "yard_crawl.flee"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 55 } ] }
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+
+# deeper — shared WIN node (yard_depth already +1 on the choice). Prose by NEW depth. Find auto-fires on return.
 [[canvases.nodes]]
 id   = "deeper"
 name = "Deeper in"
@@ -943,8 +995,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
     { type = "paragraph", content = "Deeper now, in among the racks where the lights are. Past the men who'd have stopped her. She keeps to the shadow and goes on." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 4 } ] } }, blocks = [
     { type = "paragraph", content = "The back of the yard, the strongroom, the thing they were all standing around. She's in." },
+  ] },
+  # beat_0177 — the fourth band. ⚠️ `lt 4` added to the band above in the same edit; see the base node.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 4 } ] } }, blocks = [
+    { type = "paragraph", content = "Down through the grating into a brick pit the size of a lift shaft, dry, and stacked to the shoulder with the overrun off a job somebody paid for twice." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -990,6 +1046,48 @@ time_progression_minutes = 60
 
 # ── Finds — auto-fire on return to the yard, one per depth tier (priority 9, one-shot) ──────────
 # yard_find_1 (depth>=1): the clue.
+# ── beat_0177 (rev 222), THE WAY DOWN — yard_find_4. THE PART. Auto-fire @renner_burned_yard, pri 9. ──
+# ⚠️ THE FOURTH FIND, AND IT IS WHY THE FOURTH PUSH EXISTS. yard_find_1/2/3 are all spent (yard_clue_seen,
+# has_arousal_weapon, found_dead_men), so before this beat every 15-Charge push into that yard bought
+# nothing at all. The double gate + pri 9 over the crawl's pri 3 is the shipped find pattern, unchanged.
+# ⚠️ THE STENCIL LANDS HERE FIRST, ON PURPOSE. She reads R. RENNER & SON on a crate in his own yard now,
+# and reads the same badly-cut ampersand on the flattened crates in the wet lab under the Facility later
+# (bunker_sides.s2). Yard first, bunker second, because that is the order she walks it.
+# SETS yard_part_found — required by beat_0178's Kess trigger, and this canvas is LOCATED, which is what
+# keeps the flag-chain validator satisfied.
+# MEDIA: none — the yard's own location image is already carried by the crawl.
+[[canvases]]
+id          = "yard_find_4"
+name        = "The overrun"
+description = "beat_0177 (rev 222), THE WAY DOWN. Auto-fire @renner_burned_yard, pri 9, once, gated yard_depth gte 4 + yard_part_found is_false. The fourth find — the Facility job's overrun, still crated, in the pit under the strongroom slab. She takes the one piece that matches what is wired into the plant room down there. SETS yard_part_found. The R. RENNER & SON stencil is introduced here and pays off at bunker_sides.s2."
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth",      operator = "gte", value = 4 },
+  { type = "flag",  subject = "player", flag_key  = "yard_part_found", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The overrun"
+blocks = [
+  { type = "paragraph", content = "It is all one job. Every crate in the pit has the same stencil on the end of it, sprayed through a card that somebody cut by hand and cut badly, so the ampersand has a flat side on it." },
+  { type = "paragraph", content = "R. RENNER & SON. He ordered forty per cent over on a contract he was never paid the back half of, and rather than eat the loss on the books he put the overrun down a hole under his own strongroom and carried it as stock." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Everything that went into that building came out of this yard. Which means the spare for everything in that building is sitting in this pit, in a crate, dry, with his name on it." },
+  { type = "paragraph", content = "She takes one piece. It is a coupler about the length of her forearm with a screened tail on it, and it is the only thing down here that would let a signal off a fixed plant run out to somewhere that is not the plant, and she does not know that yet. Kess will." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up out of the pit."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_burned_yard"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "yard_part_found", op = "set" }]
+
 [[canvases]]
 id          = "yard_find_1"
 name        = "What the yard was"
@@ -4202,3 +4300,156 @@ time_progression_minutes = 120
 flagEffects = [
   { targetType = "player", flag = "cain_came_along", op = "set" },
 ]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ THE WAY DOWN (0.2.2) — solo activities. Design: games/vesper/design_the_way_down.md ══════════════
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+#
+# ── beat_0170 — activity_go_after_him. SHE SAYS YES. Wren-solo @the_cot, pri 4. ───────────────────────
+# ⚠️ SHE IS NOT ANSWERING CAIN. She cannot. He has no address and never has (npc_cain description,
+# 1_metadata:699), which is the entire mechanic beat_0135 was built on. So this is not a reply — it is her
+# alone in her room deciding, and the decision is expressed the only way this game expresses decisions,
+# as the next thing she does.
+# ⚠️ AN ACTIVITY, NOT AN AUTO-FIRE, AND THAT IS THE POINT. beat_0169 ends on a request nobody made. If the
+# answer also arrived on its own, the player would never once have been asked. This card sits on her cot
+# until she clicks it.
+# ⚠️ THE MOTIVE IS NOT INSTRUMENTAL AND THE PROSE MUST NOT SMUGGLE ONE IN. LO's call, twice, verbatim:
+# "Complete no on this" to Bastien being the one man who knows what was done to her, then "She goes in
+# because cain wants to save him and he was caught because of her." So: she LOOKS for the angle, in her
+# own idiom, the way she has opened every other problem in this game — and there is not one. The scene is
+# her failing to find a reason and going anyway. Anything that hands her a payoff breaks LO's call.
+# ⚠️ THE TASER IS PHYSICAL, NOT MORAL. She does not think the word guilt and nobody says it. What she has
+# is the memory of a thing in her hand and a man going down on a floor and not being able to get up. That
+# is design_the_face.md §10 — "she believes she watched a man die; what she actually did was hand him
+# over" — rendered as a body, not as a verdict.
+# ⚠️ IT COSTS HER THE THING SHE WANTS. The box at the top of the tower is what she has wanted for two acts
+# and this is weeks she does not spend on it. Named once, flat, not dwelt on.
+# SETS rescue_agreed. No quest card here — every 0.2.2 card lands together at beat_0188.
+[[canvases]]
+id          = "activity_go_after_him"
+name        = "Go and get him out"
+description = "beat_0170 (rev 222), THE WAY DOWN. Wren-solo @the_cot, repeatable, pri 4, gated bastien_alive_known is_true + rescue_agreed is_false. SHE DECIDES, ALONE — she has no way to reach Cain (no address, npc_cain description), so this is not an answer to him, it is the next thing she does. She works the problem for an angle the way she works every problem, finds none, and goes anyway: the two reasons are that Cain wants it and that she is why Bastien is down there. NOTHING INSTRUMENTAL (LO's call, twice). The taser is carried as a physical memory, never as the word guilt. Costs her the tower, named once. SETS rescue_agreed. 6 beats, 5 clicks."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_alive_known", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rescue_agreed",       operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Go and get him out"
+blocks = [
+  { type = "paragraph", content = "She sits on the bunk after he has gone and does the thing she is for, which is opening a problem up and looking for the part of it that is worth something to her." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A bar owner four months into a room under a burned building. He does not know what is in the box. He does not know what she is. He cannot tell her one thing about the man at the top of that tower, because he has never been in the same city as him." },
+        { type = "paragraph", content = "She turns it over twice more and it comes out the same both times. There is nothing in it. There is not one thing in it for her." },
+    ] },
+    { advance_text = "So work out what it costs.", blocks = [
+        { type = "paragraph", content = "And there is a cost, and she can price it, because pricing is also a thing she is for. Weeks. A month if it goes badly. A month of not being on the floor of that tower with a bought face on, working out how a man gets a box out of a room." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "There is somebody of hers up there in a case with a lock on it and she is going to spend a month underneath a different building entirely." },
+    ] },
+    { advance_text = "Think about the taser.", blocks = [
+        { type = "paragraph", content = "The thing she keeps coming back to is not a feeling. It is her hand. The weight of it, the flat of it against his ribs through the shirt, the click, and the way his legs went before the rest of him did." },
+    ] },
+    { advance_text = "And the floor.", blocks = [
+        { type = "paragraph", content = "He was on the floor of his own back room with his cheek on the boards when they came through the door. He was awake. He could see them coming and he could not get his arms under himself." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They did not catch him. She caught him. They only carried him." },
+    ] },
+    { advance_text = "None of that is a reason.", blocks = [
+        { type = "paragraph", content = "None of which is a reason. She has put men on floors before and slept fine, and she knows that about herself and has never once pretended otherwise." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The reason is that a man stood in this room with the water coming off him and did not ask her for it. That is the whole of the reason and it is not a good one." },
+    ] },
+    { advance_text = "Get up.", blocks = [
+        { type = "paragraph", content = "She gets up off the bunk and takes her coat back off the nail, and that is the decision, made the way she makes all of them, which is by moving before she has finished arguing." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Cain has got the address and nothing else. Somebody built that place. Somebody bolted every door in it to a wall and got paid for it, and there is exactly one man in this city who fits that and she has already had him on his back once." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "rescue_agreed", op = "set" },
+]
+
+# ═══ beat_0178 (rev 222), THE WAY DOWN — KESS BUILDS THE LINK. ════════════════════════════════════════
+# ⚠️ LOCATED TRIGGER + substitution_only, THE kess_makes_the_blank SHAPE EXACTLY (3_activities:3875). It
+# SETS link_built, which bunker_descent's trigger requires, and the flag-chain validator hard-fails a
+# trigger-required flag whose setter has no location. The trigger exists for the validator; the rung on
+# hub_kess_berth is the only way a player reaches it.
+# ⚠️ THE COIN IS ON THE CHOICE INSIDE, NEVER ON THE TRIGGER. A canvas-level cost puts the whole thing into
+# the greyed blocked-row path (v2.py:5385) and a player who cannot pay loses the scene as well as the
+# purchase. 40 coin — the blank was 45, and this is smaller work on a part she brought him herself.
+# ⚠️ HE DOES NOT ASK WHERE SHE IS GOING. He has never once asked. What he does is price the job off what
+# the job implies, and the implication he draws out loud is the only warning in the release: a person who
+# needs to call OUT of somewhere is a person who has thought about not coming out of it.
+# ⚠️ IT CONSUMES NOTHING. yard_part_found stays set — the coupler becomes the link rather than being spent,
+# and there is no second use for it, so burning the flag would only make a save look wrong.
+# MEDIA: none. His berth's own image is carried by the hub.
+[[canvases]]
+id          = "kess_makes_the_link"
+name        = "Something to call out with"
+description = "beat_0178 (rev 222), THE WAY DOWN. Wren-solo @kess_berth, SUBSTITUTION_ONLY (it sets link_built, which bunker_descent's trigger requires, so it must keep a located trigger — the kess_makes_the_blank shape). Reached only from hub_kess_berth's 'Show him the coupler.' rung, gated yard_part_found is_true + link_built is_false. He hangs a signal off the fixed plant under the Facility using the overrun coupler out of Renner's pit, so she can reach Cain from under a slab. 40 coin, on the choice inside. He does not ask where she is going; he prices the job and says the one true thing about it. SETS link_built."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "yard_part_found", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "link_built",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to call out with"
+blocks = [
+  { type = "paragraph", content = "She puts the coupler on the bench in front of him and he picks it up without a word and turns it over twice and reads the tail on it, and then he looks at the stencil on the collar and makes a noise in his throat." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Renner. That is a screened tail off a fixed plant run, that is. That is not a thing you carry. That is a thing you bolt to a wall and leave for twenty years." },
+  { type = "dialog", props = { speaker = "player" }, content = "I am going to be somewhere with a slab over it and I need to reach one person from underneath." },
+  { type = "paragraph", content = "He does not ask where. He has never once asked her where, in four months, which she has stopped noticing and is noticing again now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then you do not want a transmitter, you want a parasite. Whatever is down there is already wired and already drawing, and if it is drawing it is talking to something above the ground. Hang off it and you are on their line, not yours." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him make it. (40 coin.)"
+targetType = "node"
+nodeId     = "kess_makes_the_link.made"
+costs      = [{ trait = "coin", value = 40 }]
+flagEffects = [
+  { targetType = "player", flag = "link_built", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Come back with the coin."
+targetType = "location"
+locationId = "kess_berth"
+
+[[canvases.nodes]]
+id   = "made"
+name = "One person, once"
+blocks = [
+  { type = "paragraph", content = "It takes him most of an afternoon and what he hands her is not much to look at: the coupler, shortened, with a clip on the tail and a flat grey block taped to it about the size of a bar of soap." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Find a run. Anything live, anything fixed. Clip it on the screen, not the core, and it will find its own way up and out. One person, and you have to already know how to reach them, because this end does not look anybody up." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know how to reach him." },
+  { type = "paragraph", content = "He wipes his hands and does not hand it over straight away, which is new." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A person who wants to call out of a place has already worked out they might not walk out of it. I am not telling you not to go. I am telling you I noticed." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Four months of rent and a spliced feed line and a bed on a bench, and that is the closest thing to being worried about that she has ever been handed by anybody." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 240

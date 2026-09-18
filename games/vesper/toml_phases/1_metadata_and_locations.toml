@@ -122,6 +122,19 @@ vault_cleared = 0
 # session 12 (core restored). The 4 emitter fire gates AND `emitter_broken lt 1`. Default 0 = save-safe
 # (missing/0 both read "not broken", so shipped saves keep a working emitter — no regression).
 emitter_broken    = 0
+# THE WAY DOWN (beat_0173) — the bunker route's only per-run state.
+# ⚠️ bunker_stealth_used — the ONE free stealth back-out per run. 0 = unspent, 1 = spent. There is no engine
+# primitive for per-RUN state: [engine.daily_tick] is day-scoped and the route deliberately advances no day,
+# so it is zeroed on the way IN (bunker_descent's "Down." choice), exactly the way every sex loop zeroes its
+# five traits on its entry rung. Read by all five caught rooms, written by the back-out and by the descent.
+# ⚠️ bunker_runs — how many times she has been put back to the stair head. Prose only: it bands the descent
+# so the fourth walk down does not read like the first. Gates nothing, and must gate nothing.
+# ⚠️ NO POSITION ODOMETER, DELIBERATELY. The node graph holds her place in the route; a counter beside it
+# would be a second source of truth for the same fact, and the ruin-depth build already shipped that bug
+# once (3_activities:2747 — "band 1 was dead and the first sift jumped straight to the terminal band").
+# Defaults 0 = save-safe: a 0.2.1 save missing both keys reads them as a fresh, unspent run.
+bunker_stealth_used = 0
+bunker_runs         = 0
 # THE LEASH (beat_0069) — the feed-line upkeep. She pays Kess PER NIGHT (his own terms, 5_scenes kess_1b_open:
 # "You pay per night, in coin... Coin dries up, so does the arrangement"), and a paid night buys not just the
 # bed but THREE DAYS of his time on the key. Set to a literal 3 by activity_kess_cot's paid tier; decremented
@@ -785,6 +798,34 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "11:00"
 end_time   = "22:00"
 activity   = "at the bench with the archive open"
+
+# ── beat_0171 (rev 222), THE WAY DOWN — npc_loder. THE MAN WHO RUNS THE ROOM. ────────────────────────
+# ⚠️ ZERO SCHEDULE ROWS, THE npc_enns SHAPE — and here it is not a preference, it is the only legal option.
+# A [[npcs.schedules]] row carries no conditions and outlives its owner (npc_bastien's does, 1_metadata:447),
+# and the nav-card badge is NOT canvas-gated (getNpcsPresentAtLocation, v2.py:4773). Loder exists inside a
+# bunker that is built out of canvas NODES and has no location of its own, so there is nowhere on earth a row
+# could point that would not be a lie. He is a dialogue speaker and nothing else, exactly like npc_enns,
+# npc_voss, npc_reyes and npc_marr — four NPCs in this game already ship this way.
+# ⚠️ INSERTED HERE, AT THE END OF THE ARRAY, DELIBERATELY. npc_sabin's two schedule rows sit directly above
+# this block and the catalog comment below warns about exactly this: anything spliced between an NPC and its
+# schedule re-parents that schedule silently. Appending after the last row, with no rows of my own, is the
+# one insert position that cannot do that.
+# ⚠️ HE IS THE ONLY NAMED MAN IN THE BUNKER. LO's call: one named boss, four anonymous. The other four are
+# narrative guards with no NPC entry, which is this game's house pattern stated twice in its own source
+# (3_activities:771 "GUARDS (narrative, NOT declared NPCs)" and :1274 "Narrative guard, not an NPC").
+# ⚠️ NO core_traits BEYOND relation, AND NO LADDER. He is not a conquest and has no arc. A trait key is
+# immutable once shipped, so naming corruption/arousal axes for a man who will never climb one is how you
+# ship a key you can never remove.
+# MEDIA: one new slot, portraits/loder.jpg — MISSING until the beat_0189 harvest, exactly as cain.jpg,
+# grier.jpg and sabin.jpg each were.
+[[npcs]]
+id          = "npc_loder"
+name        = "Loder"
+description = "The man who runs the room under the Facility. Not company and not hired muscle — a shift supervisor with a clipboard habit, four months into a job he describes to himself as difficult. He has never once been told what the man in the plant room knows, and has never asked, and that is the arrangement he has made with himself."
+portrait    = "loder.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The supervisor"]
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
