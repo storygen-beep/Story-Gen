@@ -86,30 +86,14 @@ clean          = 100   # a need
 cash           = 10    # ⚠️ NOT on any sheet. See the note below.
 debt_left      = 2400  # money.md — the semester
 fridays_missed = 0
-shifts_worked  = 0     # the cafe. Never goes down (the_move_up.md)
-move_up        = 0     # 0 no job · 1 the floor · 2 the counter · 3 closing
-owen_standing  = 0     # the second key on every step up
+# PARKED 2026-09-19 (the climbs) — shifts_worked, move_up, owen_standing: the cafe ladder's
+# counters. Declarations in parked/climbs/systems.toml.
 home_after_ten = 0     # times she has come through the front door after his rule.
                        # the_house.md: "After that the front door is a thing she
                        # has to come through, and he's up." Read at the dinner
                        # table — he notices the hours she keeps.
-crowd_standing = 0     # where she stands with Jules's lot. Moved by every dare
-                       # taken AND every dare refused, and by answering back in
-                       # front of people. NOT the same as `reputation`, which is
-                       # how much of the campus has heard of her.
-dare_chain     = 0     # A POSITION IN A CHAIN, NOT A TALLY. 0 none, 1 the union,
-                       # 2 the jacket. It decides which dare comes next and
-                       # nothing else. SYSTEMS.md settled that a count of dares
-                       # taken was a second copy of crowd_standing.
-dare_cooldown  = 0     # days until a refused dare comes back. the_dares.md:
-                       # "the same dare comes back about a week later, in front
-                       # of more people." Saying no never shuts a door — it
-                       # costs a louder week and it comes round again.
-quiet_week     = 0     # days left of the random picking-on being off. THE ONLY
-                       # THING A DARE BUYS in the first build — the row, the
-                       # parties and being let in are all waiting, so the only
-                       # honest payoff in four weeks is the thing already running,
-                       # turned down for a week.
+# PARKED 2026-09-19 (the climbs) — crowd_standing, dare_chain, dare_cooldown, quiet_week: the
+# dares and what they bought. Declarations in parked/climbs/systems.toml.
 
 # ⚠️ ATTENDANCE IS A FALLING METER, AND college.md COUNTS MISSES. That is a
 # translation, not a redesign, and here is why: the engine cannot count a miss
@@ -123,12 +107,8 @@ attend_1       = 100   # lecture hall, Monday and Wednesday, nine to ten thirty
 attend_2       = 100   # lecture hall, Monday and Wednesday, ten thirty to twelve
 attend_3       = 100   # the classroom, Tuesday and Thursday, nine to ten thirty
 attend_4       = 100   # the classroom, Tuesday and Thursday, ten thirty to twelve
-nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when she
-                       # opens his door; counted down by [engine.daily_tick]. While
-                       # it is above zero her own door cannot stay shut, so the
-                       # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
-                       # when the flag has never been set, which would shut the
-                       # stream from the first minute of the game.
+# PARKED 2026-09-19 (the climbs) — nate_landing, the week @nate's door cost the stream.
+# Declaration in parked/climbs/systems.toml.
 followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this since
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
@@ -243,49 +223,12 @@ key    = "fridays_missed"
 label  = "Fridays missed"
 hidden = true
 
-[[traits.labels]]
-key    = "shifts_worked"
-label  = "Shifts worked"
-hidden = true
-
-[[traits.labels]]
-key    = "move_up"
-label  = "At the cafe"
-hidden = true
-
-[[traits.labels]]
-key    = "owen_standing"
-label  = "Owen"
-hidden = true
-
-[[traits.labels]]
-key    = "nate_landing"
-label  = "Somebody on the landing"
-hidden = true
+# PARKED 2026-09-19 (the climbs) — the labels for the eight counters that went with the
+# climbs. parked/climbs/systems.toml.
 
 [[traits.labels]]
 key    = "home_after_ten"
 label  = "Nights in after ten"
-hidden = true
-
-[[traits.labels]]
-key    = "crowd_standing"
-label  = "Where you stand with them"
-hidden = true
-
-[[traits.labels]]
-key    = "dare_chain"
-label  = "The dares"
-hidden = true
-
-[[traits.labels]]
-key    = "dare_cooldown"
-label  = "Before she asks again"
-hidden = true
-
-[[traits.labels]]
-key    = "quiet_week"
-label  = "A quiet week"
 hidden = true
 
 [[traits.labels]]
@@ -315,8 +258,7 @@ hidden = true
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
-  # the jacket is back on in the morning. Dare two lasts exactly one day.
-  { targetType = "player", flag = "jacket_off", op = "unset" },
+  # PARKED 2026-09-19 (the climbs) — the jacket_off reset went with dare two.
   # Her door is open again by morning, for the same reason the jacket is back on:
   # the rule is @gil's and the house resets to it. Shutting it is a decision she
   # makes fresh every day, which is the only thing that stops one five-minute
@@ -336,14 +278,11 @@ flagEffects = [
   # taking them off outright made gates.py "the climb is paid for" fail, because
   # `crowd_standing` gates content at 10 and became free to reach.
   { targetType = "player", flag = "paige_today", op = "unset" },
-  { targetType = "player", flag = "bree_today", op = "unset" },
+  # PARKED 2026-09-19 (the climbs) — the bree_today reset: both of its setters were climb
+  # choices, and a cap cleared but never set is the defect engine.md §28.2 names.
 ]
-traitEffects = [
-  { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
-  { targetType = "player", trait = "quiet_week",   op = "add", value = -1 },
-  { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
-]
-# It runs past zero into negatives and that is harmless — every read is `lte 0`.
+# PARKED 2026-09-19 (the climbs) — `traitEffects`: all three countdowns (nate_landing,
+# quiet_week, dare_cooldown) belonged to parked climbs, so the key is gone with them.
 
 # --- IS THE HOUSE EMPTY ------------------------------------------------------
 # The first named gate in this game, and it exists because the engine's condition
@@ -474,33 +413,8 @@ when  = [
   { flag = "opening_done", op = "is_true" },
 ]
 
-[[quest_cards]]
-id    = "card_dare_1"
-group = "the_crowd"
-text  = "Jules asks for things on the quad, out loud, in front of people. You answer on the spot."
-tip   = "The first one is a minute of your face and nothing else. Saying no shuts no doors."
-when  = [
-  { trait = "dare_chain", subject = "player", op = "lte", value = 0 },
-  { flag = "opening_done", op = "is_true" },
-]
-
-[[quest_cards]]
-id    = "card_dare_2"
-group = "the_crowd"
-text  = "The next one is not a minute. It is the rest of the day, and you agree to all of it in two seconds."
-tip   = "She asks on the quad, between classes."
-when  = [
-  { trait = "dare_chain", subject = "player", op = "eq", value = 1 },
-]
-
-[[quest_cards]]
-id    = "card_quiet"
-group = "the_crowd"
-text  = "Nobody has started on you this week. Nobody said why and nobody is going to."
-tip   = "It runs out. Then it starts again."
-when  = [
-  { trait = "quiet_week", subject = "player", op = "gte", value = 1 },
-]
+# PARKED 2026-09-19 (the climbs) — card_dare_1, card_dare_2, card_quiet: guidance for the
+# dares. parked/climbs/systems.toml.
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 1_metadata_and_locations.toml
@@ -1257,12 +1171,8 @@ targetType = "player"
 flag       = "opening_done"
 op         = "set"
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_gil"
-trait      = "relation"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — @gil's relation +1 came off this exit. The note that went
+# with it, kept for when it comes back:
 # ⚠️ effects say `npcId`; a CONDITION on the same character says `npc_id`.
 #
 # This was `rest +5` and it pushed rest to 105 — nothing clamps a trait to its
@@ -1410,11 +1320,8 @@ targetType = "player"
 flag       = "has_job"
 op         = "set"
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "move_up"
-op         = "set"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — `move_up set 1`. move_up is the cafe ladder's position;
+# `has_job` above is the job itself.
 
 [[canvases.nodes]]
 id   = "walked_out"
@@ -1481,9 +1388,12 @@ is_active     = true
 costs         = [{ trait = "clean", value = 20 }]
 show_when_blocked = true
 cooldown_message = "You are not on the schedule today."
+# PARKED 2026-09-19 (the climbs) — `move_up lt 2` came off this trigger (it handed the
+# roster over to shift_counter), and both customer substitutions below it went:
+# cust_hand and cust_showing are the customers' ladder. Whole scene in
+# parked/climbs/before_the_strip.toml.
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
 ] }
 
 # Tuesday and Sunday. 0 = Monday, so 1 and 6 — the two nobody wants.
@@ -1491,28 +1401,6 @@ conditions = { version = "1.0", logic = "AND", items = [
 weekdays   = [1, 6]
 start_time = "12:00"
 end_time   = "17:00"
-
-# ⚠️ ONLY SOME CUSTOMERS ASK, ONLY WHEN THE ROOM ALLOWS IT — the cafe sheet's own
-# two brakes, as a dice roll inside a routine. A matching rule plays its target IN
-# PLACE of this canvas, so each target carries the shift's own pay and count: it
-# was still a shift, with something in it. Further rung first, so it wins when both
-# are open.
-[[canvases.trigger.substitutions]]
-target_canvas_id = "cust_showing"
-chance = 0.3
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 8 },
-  { type = "flag", subject = "player", flag_key = "cust_hand_done", operator = "is_true" },
-] }
-
-[[canvases.trigger.substitutions]]
-target_canvas_id = "cust_hand"
-chance = 0.35
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-] }
 
 [[canvases.nodes]]
 id   = "base"
@@ -1552,103 +1440,11 @@ trait      = "cash"
 op         = "add"
 value      = 55
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "shifts_worked"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — `shifts_worked +1`. The count only fed the office and
+# the move up.
 
-# --- THE COUNTER · four shifts, and some say in which ------------------------
-# Same $55. The counter pays in SHIFTS, not in a rate — the rate only moves at
-# closing. Different words, because the worst two shifts and four she had some say
-# in are not the same afternoon.
-
-[[canvases]]
-id   = "shift_counter"
-name = "Work the counter"
-# ⚠️ The NAME, not the id, is the key of `game_state.activity_trigger_history`,
-# which is where max_triggers_per_day is counted. Two canvases sharing a name share
-# one day bucket. Harmless while only one of them can ever be open — but it is a
-# silent coupling and a distinct name costs nothing.
-description = "The shift once she is on the counter. Four days, $220 a week — the first week she can pay Friday and still eat. Everyone in the room has to come to her."
-
-[canvases.trigger]
-location      = "the_cafe"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 6
-is_active     = true
-costs         = [{ trait = "clean", value = 20 }]
-show_when_blocked = true
-cooldown_message = "You are not on the schedule today."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
-] }
-
-[[canvases.trigger.schedules]]
-weekdays   = [1, 3, 5, 6]
-start_time = "12:00"
-end_time   = "17:00"
-
-[[canvases.trigger.substitutions]]
-target_canvas_id = "cust_showing"
-chance = 0.35
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 8 },
-  { type = "flag", subject = "player", flag_key = "cust_hand_done", operator = "is_true" },
-] }
-
-[[canvases.trigger.substitutions]]
-target_canvas_id = "cust_hand"
-chance = 0.35
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "The shift"
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, so most of them look at you for the length of the saying." },
-  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor but more of you on show, and the two arrived together." },
-  { type = "paragraph", content = "Owen takes the floor and leaves you the counter. He is out there with his back to you most of the afternoon, and you can feel exactly when it isn't." },
-  { type = "paragraph", content = "Four deep at one, nobody at three. The queue is the part that pays; the empty hour is the part where the man at the window is still there." },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Counter's yours today. Don't let the queue get round the door." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Till was eleven out on Tuesday. I'm not saying it was you. I'm saying I count it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're better at this than the floor. That's why you're on it." },
-]
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Clock off."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 300
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = 55
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "shifts_worked"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — shift_counter, the four-shift roster after the move up.
+# Verbatim in parked/climbs/cafe.toml.
 
 # --- SLEEP · the only thing that turns the week -----------------------------
 # ⚠️ WITHOUT THIS FRIDAY IS UNREACHABLE. advanceDay() is what rolls the day name,
@@ -1918,14 +1714,8 @@ blocks = [
   { type = "paragraph", content = "It takes four minutes to get the angle right and about nine seconds for the first of them to arrive. Somebody types that they were waiting. You believe them, but it does not make you feel anything." },
 ]
 
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "gte", value = 1 },
-] } }
-blocks = [
-  { type = "paragraph", content = "@nate is in and out of his room all week at hours that are not hours, and your door does not stay shut while somebody is on that landing. Not tonight. Not while he is like this." },
-]
+# PARKED 2026-09-19 (the climbs) — the `nate_landing` line and its lock on "Set the phone
+# up.": the landing week was what @nate's door cost, and the door is parked.
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -1956,7 +1746,6 @@ show_when_locked = true
 locked_text = "Not tonight."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
-  { type = "trait", subject = "player", trait_key = "nate_landing", operator = "lte", value = 0 },
   { type = "flag", subject = "player", flag_key = "streamed_today", operator = "is_false" },
 ] }
 
@@ -1990,157 +1779,15 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Take your top off."
-targetType = "node"
-nodeId     = "stream.rung_top"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Take everything off."
-targetType = "node"
-nodeId     = "stream.rung_naked"
-show_when_locked = true
-locked_text = "Nobody has asked for that yet."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Do what they're asking for."
-targetType = "node"
-nodeId     = "stream.rung_touch"
-show_when_locked = true
-locked_text = "Not yet, and they haven't asked yet either."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
-] }
+# PARKED 2026-09-19 (the climbs) — "Take your top off.", "Take everything off." and "Do what
+# they're asking for.": the stream's three rungs, first step included. Their nodes went too.
+# Whole scene in parked/climbs/before_the_strip.toml.
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit and talk to them. Nothing else."
 targetType = "node"
 nodeId     = "stream.payout"
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 3, max = 10 } },
-]
-
-# ⚠️ THE ACT BEATS STAY ON THE BODY FOR THEIR WHOLE LENGTH. Read each last
-# sentence: it is what is HAPPENING, never what it MEANT. The interiority is not
-# cut — it is on the payout node, which is the beat after. A beat is a NODE, so
-# folding the thought in here would make one beat that pivots.
-
-[[canvases.nodes]]
-id   = "rung_top"
-name = "Top off"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You get the hem up and over your head and drop it out of frame. Your tits are in the light and your face is not. The count jumps thirty in four seconds. You sit back on your heels so they can see properly. Somebody types that your nipples are hard. Somebody else types that he can see your tits better than the last one."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_false" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 25, max = 60 } },
-  { targetType = "player", trait = "corruption", op = "add", value = 2 },
-]
-flagEffects = [{ targetType = "player", flag = "stream_top_done", op = "set" }]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_top_done", operator = "is_true" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 5, max = 15 } },
-]
-
-[[canvases.nodes]]
-id   = "rung_naked"
-name = "Nothing on"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Everything goes. You kneel up into the light with nothing on and let them look before you move at all. They ask you to turn around. You turn. They get your ass, and you hold it there while the number climbs. Then you come back round and sit with your knees apart, and they get your tits and your cunt in the same frame."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_false" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 60, max = 140 } },
-  { targetType = "player", trait = "corruption", op = "add", value = 3 },
-]
-flagEffects = [{ targetType = "player", flag = "stream_naked_done", op = "set" }]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_naked_done", operator = "is_true" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 10, max = 30 } },
-]
-
-[[canvases.nodes]]
-id   = "rung_touch"
-name = "What they asked for"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You put two fingers in your mouth because somebody asked for that. Then you put them between your legs. It takes a minute to stop performing it. Two fingers into your cunt, thumb working your clit. Your hips go on their own. You come with your free hand flat on your own tits, the phone four feet away, sixty people behind it."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_touch_done", operator = "is_false" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 3 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 120, max = 260 } },
-  { targetType = "player", trait = "corruption", op = "add", value = 4 },
-]
-flagEffects = [{ targetType = "player", flag = "stream_touch_done", op = "set" }]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Wind it up."
-targetType = "node"
-nodeId     = "stream.payout"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "stream_touch_done", operator = "is_true" },
-] }
-effects = [
-  { targetType = "player", trait = "exposure",  op = "add", value = 1 },
-  { targetType = "player", trait = "followers", op = "add", value = { type = "random", min = 20, max = 50 } },
-]
+# PARKED 2026-09-19 (the climbs) — exposure +1 and a follower roll came off this choice.
 
 # --- THE PAYOUT · the beat after, and the rolled money ----------------------
 # ⚠️ `value = { type = "random", min, max }` is a real engine shape
@@ -2148,7 +1795,9 @@ effects = [
 # in vesper. the_phone.md: "There's no way to work out in advance what a night
 # clears — which is the point, because Friday is a fixed number and this isn't."
 #
-# The three bands are mutually exclusive, so exactly one ever renders.
+# PARKED 2026-09-19 (the climbs) — the pay was three bands on `followers`, and followers are
+# the stream's climb. The band a fresh save gets ($8-25, followers 380) stays, unconditioned;
+# the 500 and 2,000 bands are in parked/climbs/before_the_strip.toml.
 
 [[canvases.nodes]]
 id   = "payout"
@@ -2174,34 +1823,8 @@ text       = "Count it."
 targetType = "location"
 locationId = "her_room"
 time_progression_minutes = 60
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 500 },
-] }
 flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
 effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 8, max = 25 } }]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Count it."
-targetType = "location"
-locationId = "her_room"
-time_progression_minutes = 60
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 500 },
-  { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 2000 },
-] }
-flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
-effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 20, max = 60 } }]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Count it."
-targetType = "location"
-locationId = "her_room"
-time_progression_minutes = 60
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 2000 },
-] }
-flagEffects = [{ targetType = "player", flag = "streamed_today", op = "set" }]
-effects = [{ targetType = "player", trait = "cash", op = "add", value = { type = "random", min = 50, max = 120 } }]
 
 # =============================================================================
 # CAMPUS · FOUR SUBJECTS, NINE TO TWELVE
@@ -2540,7 +2163,7 @@ locked_text = "You have had your hour. She would give you another one and you do
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "cara_today", operator = "is_false" },
 ] }
-effects     = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }]
+# PARKED 2026-09-19 (the climbs) — @cara's relation +2 came off this choice.
 flagEffects = [{ targetType = "player", flag = "cara_today", op = "set" }]
 
 # The brush-off is deliberately NOT capped. It costs her the relation and it walks
@@ -2551,7 +2174,7 @@ text       = "Say you've got a shift."
 targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
-effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -1 }]
+# PARKED 2026-09-19 (the climbs) — @cara's relation -1 came off this choice.
 
 # --- SAM · he is talking, and that is all -----------------------------------
 # the_cast.md says exactly that for the first build. He gives nothing the game
@@ -2602,7 +2225,7 @@ locked_text = "You already stayed. Staying twice is the sort of thing he would n
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "sam_today", operator = "is_false" },
 ] }
-effects     = [{ targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 2 }]
+# PARKED 2026-09-19 (the climbs) — @sam's relation +2 came off this choice.
 flagEffects = [{ targetType = "player", flag = "sam_today", op = "set" }]
 
 # Unconditional, and it stays that way — this is the free door on a spent day.
@@ -2647,47 +2270,18 @@ priority      = 2
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — this ambient read the climb four ways: `quiet_week` on the
+# trigger (a dare bought it off), the jacket and exposure 20/40 versions, and "Say something
+# back." on crowd_standing / reputation. What a fresh save sees (exposure 5) stays, unconditioned.
+# Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "On the quad"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
-] } }
-blocks = [
-  { type = "paragraph", content = "Without the jacket you are the thing being looked at from three sides of this quad at once, and not one of them has to pretend it is anything else." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "dialog", props = { speaker = "unknown" }, content = "Does your mum know about the room with the lamp in it?" },
-  { type = "paragraph", content = "It is said to your back from six feet away by a boy you have never spoken to. The detail is right, and it is not a guess. Somebody has described that room to him, and it is the room you sleep in." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
-] } }
-blocks = [
-  { type = "dialog", props = { speaker = "unknown" }, content = "That's her, that's the one." },
-  { type = "paragraph", content = "Said at your volume as you pass, then the two of them watch to see whether you heard. Somebody has decided what you are, and it has gone round." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
-] } }
 blocks = [
   { type = "paragraph", content = "Three people take the bench you were walking at, and the last one looks straight at you while she sits down on it. Nobody says anything. You are just the one who was walking at it." },
 ]
@@ -2700,19 +2294,6 @@ text       = "Say nothing. Keep going."
 targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say something back."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 5
-show_when_locked = true
-locked_text = "Nobody here is on your side. It would only give them more of it."
-conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
 
 [[canvases]]
 id   = "picked_union"
@@ -2729,46 +2310,18 @@ priority      = 2
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — this ambient read the climb four ways: `quiet_week` on the
+# trigger (a dare bought it off), the jacket and exposure 20/40 versions, and "Say something
+# back." on crowd_standing / reputation. What a fresh save sees (exposure 5) stays, unconditioned.
+# Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "At the union"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
-] } }
-blocks = [
-  { type = "paragraph", content = "The queue is twenty minutes and you spend every one of them being the thing three separate tables are having a look at." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "dialog", props = { speaker = "unknown" }, content = "Apparently there's a lamp and a stack of books and everything." },
-  { type = "paragraph", content = "He says it to his friend at your volume, without looking over. The detail is right, and that is the part that goes through you." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
-] } }
-blocks = [
-  { type = "paragraph", content = "You are three words into asking whether the seat is free when the two of them start a different conversation over the top of you, finish it, and then look up as though you have only just arrived." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
-] } }
 blocks = [
   { type = "paragraph", content = "The table you were heading for has a bag on every chair by the time you reach it, but not one of those bags belongs to anybody who is sitting down." },
 ]
@@ -2781,19 +2334,6 @@ text       = "Say nothing. Keep going."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say something back."
-targetType = "location"
-locationId = "the_union"
-time_progression_minutes = 5
-show_when_locked = true
-locked_text = "Nobody here is on your side. It would only give them more of it."
-conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
 
 [[canvases]]
 id   = "picked_lecture"
@@ -2810,46 +2350,18 @@ priority      = 2
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — this ambient read the climb four ways: `quiet_week` on the
+# trigger (a dare bought it off), the jacket and exposure 20/40 versions, and "Say something
+# back." on crowd_standing / reputation. What a fresh save sees (exposure 5) stays, unconditioned.
+# Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "In the lecture hall"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
-] } }
-blocks = [
-  { type = "paragraph", content = "A hundred and ten people in steep rows. You are the one that two rows of them keep turning round for." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "dialog", props = { speaker = "unknown" }, content = "Bit of a funny angle you film at." },
-  { type = "paragraph", content = "He says it going past your row and does not stop. For the rest of the hour you cannot work out whether the whole room heard it or only you." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Somebody behind you says your name to somebody else and then goes quiet when you turn round, which is worse than if they had carried on with it." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
-] } }
 blocks = [
   { type = "paragraph", content = "Row nine is full when you get to it, which it has never once been, and the two on the aisle do the thing where they move their knees a quarter of an inch." },
 ]
@@ -2862,19 +2374,6 @@ text       = "Say nothing. Keep going."
 targetType = "location"
 locationId = "the_lecture_hall"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say something back."
-targetType = "location"
-locationId = "the_lecture_hall"
-time_progression_minutes = 5
-show_when_locked = true
-locked_text = "Nobody here is on your side. It would only give them more of it."
-conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
 
 [[canvases]]
 id   = "picked_stop"
@@ -2891,45 +2390,18 @@ priority      = 2
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "quiet_week", operator = "lte", value = 0 },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — this ambient read the climb four ways: `quiet_week` on the
+# trigger (a dare bought it off), the jacket and exposure 20/40 versions, and "Say something
+# back." on crowd_standing / reputation. What a fresh save sees (exposure 5) stays, unconditioned.
+# Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "At the stop"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_true" },
-] } }
-blocks = [
-  { type = "paragraph", content = "Forty minutes at a stop on a main road. You are aware of every car that goes past, and of every one that slows." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Somebody you have never met says goodnight to you by name, at four in the afternoon, and is gone again before you can decide what that was." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Two girls from your year in the shelter. One of them says something to the other, but neither of them stops talking when you sit down." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 20 },
-] } }
 blocks = [
   { type = "paragraph", content = "Somebody steps in front of you when the bus pulls in, then says sorry without looking at you, which is the same as not saying it." },
 ]
@@ -2942,19 +2414,6 @@ text       = "Say nothing. Keep going."
 targetType = "location"
 locationId = "the_bus_stop"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say something back."
-targetType = "location"
-locationId = "the_bus_stop"
-time_progression_minutes = 5
-show_when_locked = true
-locked_text = "Nobody here is on your side. It would only give them more of it."
-conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
 
 # =============================================================================
 # TALK · how she finds out what people say about her
@@ -2998,33 +2457,14 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", npc_id = "npc_cara", location_id = "the_union", operator = "is_present" },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — the exposure 15 and 40 versions of what she overhears.
+# What a fresh save hears (exposure 5) stays, unconditioned. parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "Sit and listen"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Two of them behind you, not lowering their voices because they have not looked round. One of them describes a room — a lamp, a stack of books, the angle. It is your room. He has never been in it and he has the angle right." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Your name goes past you in somebody else's sentence, two tables over, attached to a word you do not catch. They do not look up. It is not about you being there. It is just about you." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
-] } }
 blocks = [
   { type = "paragraph", content = "Somebody is getting off with somebody at the row on Friday and four people have opinions. Nobody says your name. Nobody has any reason to." },
 ]
@@ -3060,33 +2500,14 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", npc_id = "npc_bree", location_id = "the_quad", operator = "is_present" },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — the exposure 15 and 40 versions of what she overhears.
+# What a fresh save hears (exposure 5) stays, unconditioned. parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "Stand about a minute"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "paragraph", content = "You get most of a sentence about what somebody would pay, and the number is close enough to a real one that you stop walking for a second." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Bree is telling it to three people who were not there, and in her version you said yes faster than you did. Nobody is going to correct her, including you." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
-] } }
 blocks = [
   { type = "paragraph", content = "Who is on with who, whose class got moved, and a long thing about a car. The quad talks constantly, but almost none of it has ever been about you." },
 ]
@@ -3115,33 +2536,14 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 
+# PARKED 2026-09-19 (the climbs) — the exposure 15 and 40 versions of what she overhears.
+# What a fresh save hears (exposure 5) stays, unconditioned. parked/climbs/before_the_strip.toml.
 [[canvases.nodes]]
 id   = "base"
 name = "The ten minutes before it starts"
 
 [[canvases.nodes.blocks]]
 type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 40 },
-] } }
-blocks = [
-  { type = "paragraph", content = "The two behind you have a phone between them, but they are not watching a match on it. One of them says a word you have said out loud, on camera, in your own room. They both go quiet when you turn round." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 15 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Somebody two seats along asks somebody else whether it is true. She does not say what. The other one says probably, and they both laugh at the probably." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "lt", value = 15 },
-] } }
 blocks = [
   { type = "paragraph", content = "Who has done the reading, who is dropping it, and whether he marks hard. A hundred people, but nobody in this room has any idea who you are." },
 ]
@@ -3226,25 +2628,9 @@ text       = "Freeze in the doorway."
 targetType = "node"
 nodeId     = "classroom_door.froze"
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Stay and watch properly."
-targetType = "node"
-nodeId     = "classroom_door.watched"
-show_when_locked = true
-locked_text = "You can see that you could. You cannot make yourself."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Let them see you there."
-targetType = "node"
-nodeId     = "classroom_door.seen"
-show_when_locked = true
-locked_text = "Not that. Not yet, and not in a room with a door onto a corridor."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
-] }
+# PARKED 2026-09-19 (the climbs) — "Stay and watch properly." (corruption 15) and "Let them
+# see you there." (corruption 30), with their nodes and the corridor node after them: the
+# door's two rungs. Whole scene in parked/climbs/before_the_strip.toml.
 
 [[canvases.nodes]]
 id   = "froze"
@@ -3263,71 +2649,7 @@ destinationType          = "specific"
 locationId               = "the_quad"
 time_progression_minutes = 5
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 1
-
-[[canvases.nodes]]
-id   = "watched"
-name = "Properly"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You stand where the door hides most of you and watch him fuck her against the table. Her skirt is bunched at her waist. His hand comes off the table to get at her tits through the shirt and he does not break the rhythm doing it. She goes up on her toes every time he comes forward. You can hear his cock in her under the noise from the corridor."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Go, before somebody comes down the corridor."
-targetType = "node"
-nodeId     = "classroom_door.after"
-
-[[canvases.nodes]]
-id   = "seen"
-name = "She looks up"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You stay in the open part of the doorway. You do not move when she opens her eyes. She looks straight at you over his shoulder. She does not stop him. She does not tell him. She holds your eye and lets you watch his cock go into her cunt, twice more, on purpose. Then she puts a hand on his ass and pulls him in harder, still looking at you."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Go."
-targetType = "node"
-nodeId     = "classroom_door.after"
-effects = [
-  { targetType = "player", trait = "exposure", op = "add", value = 4 },
-  { targetType = "player", trait = "corruption", op = "add", value = 3 },
-]
-
-[[canvases.nodes]]
-id   = "after"
-name = "The corridor"
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "Nobody booked that room and nobody will ever know you were at the door. That is the part that is going to stay with you, but it is not the part you would have guessed."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 2
+# PARKED 2026-09-19 (the climbs) — corruption +1 came off this exit.
 
 
 # =============================================================================
@@ -3729,420 +3051,9 @@ locationId = "the_strip"
 # That is the only thing that makes the tips ladder usable at all.
 # =============================================================================
 
-# --- CUSTOMER STEP 1 · a hand that doesn't get moved · $10 -------------------
-# substitution_only: reachable ONLY as a target of the shift's dice roll. It
-# carries the shift's own pay and count, because it WAS the shift.
-
-[[canvases]]
-id   = "cust_hand"
-name = "The window table"
-description = "Customer step one. The bigger note is the asking; taking it is the answer. Carries the shift payoff plus $10. Moves exposure and corruption. Sets cust_hand_done, which opens step two."
-
-[canvases.trigger]
-location          = "the_cafe"
-is_repeatable     = true
-max_triggers_per_day = 1
-substitution_only = true
-priority          = 5
-is_active         = true
-
-[[canvases.nodes]]
-id   = "base"
-name = "Under the saucer"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Four hours in, the man at the window table puts a ten under his saucer where you can see it. The bill was six. He doesn't look up when you come over."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "unknown" }
-content = "No rush. I'm not going anywhere."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "There is nobody at the next two tables. Owen is out the back with the door shut."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Clear the table. Leave the ten."
-targetType = "node"
-nodeId     = "cust_hand.refused"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Clear the table. Take the ten."
-targetType = "node"
-nodeId     = "cust_hand.taken"
-
-[[canvases.nodes]]
-id   = "taken"
-name = "Nine seconds"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You put the plate down. His hand goes flat on the back of your thigh, up under the hem, and stays. You straighten with the tray against your hip. He takes a handful of your ass and tests whether it moves. It doesn't. Two fingers slide along the seam of your panties and press where your cunt is. Twice. Then his hand comes off your ass and he picks his phone up."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Straighten up."
-targetType = "node"
-nodeId     = "cust_hand.after"
-
-[[canvases.nodes]]
-id   = "after"
-name = "Ten dollars"
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "Ten dollars is two hours of the list on the fridge. That took nine seconds and all you had to do was not move."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Take the tray back."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "cust_hand_done"
-op         = "set"
-
-# The TIP only. The shift itself — $55, the count, the five hours — was applied by
-# the parent canvas before this screen ever rendered.
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = 10
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "exposure"
-op         = "add"
-value      = 3
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 4
-
-[[canvases.nodes]]
-id   = "refused"
-name = "Six is six"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You take the plate and the saucer and leave the ten sitting on the table, and he watches you do it. He is gone before you come back round with the cloth. The ten is gone with him."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Finish the shift."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 2
-
-# --- CUSTOMER STEP 2 · showing more · $30 ------------------------------------
-
-[[canvases]]
-id   = "cust_showing"
-name = "Thirty on the table"
-description = "Customer step two. Opens only after step one and at corruption 20. Carries the shift payoff plus $30, and moves exposure harder because more of her has been seen."
-
-[canvases.trigger]
-location          = "the_cafe"
-is_repeatable     = true
-max_triggers_per_day = 1
-substitution_only = true
-priority          = 6
-is_active         = true
-
-[[canvases.nodes]]
-id   = "base"
-name = "Before he asks"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall."
-
-# The customers stay FACELESS — strangers with money, never people with names.
-# "unknown" is the block type that says that and still lets them talk.
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "unknown" }
-content = "Flat white. And the far glass wants clearing, when you've got a minute."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Two tables have people at them. Neither is looking this way yet."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Reach for it the short way."
-targetType = "node"
-nodeId     = "cust_showing.refused"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Reach across the table for it."
-targetType = "node"
-nodeId     = "cust_showing.taken"
-
-[[canvases.nodes]]
-id   = "taken"
-name = "Longer than the glass needs"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You lean across the table. The shirt falls open and you stay down there longer than the glass needs. He doesn't have to move to look at your tits. His thumb gets under the cup and pushes it up off your nipple, and he looks at that too. His other hand goes up the back of your thigh, takes your ass, and stays there."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Take the glass."
-targetType = "node"
-nodeId     = "cust_showing.after"
-
-[[canvases.nodes]]
-id   = "after"
-name = "Thirty"
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "Thirty is half a shift. It is also the first time anyone in this town has seen that much of you, and the room has people in it."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Straighten up."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = 30
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "exposure"
-op         = "add"
-value      = 6
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 5
-
-[[canvases.nodes]]
-id   = "refused"
-name = "The short way"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You walk round the table and pick the glass up from the other side, standing straight the whole way. He takes the thirty back off the table and puts a five down instead, but neither of you says a word about either number."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Finish the shift."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = 5
-
-# --- THE OFFICE · the second key ---------------------------------------------
-# the_move_up.md: BOTH keys, every step, and it needs both. Shifts worked is proof
-# she can do the job. This is the other one — and there is no move he can make on
-# his own, so it is hers to not step back from.
-
-[[canvases]]
-id   = "office_closer"
-name = "The office"
-description = "The second key. He stands closer than he needs to and she chooses whether to step back. Sets owen_standing, without which eight shifts buys nothing."
-
-[canvases.trigger]
-location      = "the_back_room"
-npc           = "npc_owen"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 7
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "shifts_worked", operator = "gte", value = 4 },
-  { type = "trait", subject = "player", trait_key = "owen_standing", operator = "lt", value = 1 },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "At the wall"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He is at the schedule on the wall with a pen, working out next week. The office is small and he moves over to give you room at the board, except that he doesn't move, he comes in beside you."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Thursday I've got you down for. Say now if that's no good, because I'm not moving it twice."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "His arm is against your arm. There is a whole wall free on his other side."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Step back."
-targetType = "node"
-nodeId     = "office_closer.stepped"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Stay where you are."
-targetType = "node"
-nodeId     = "office_closer.stayed"
-
-[[canvases.nodes]]
-id   = "stayed"
-name = "You stay"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You read the board with his arm against yours and neither of you mentions it."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Saturday too, if you want the hours. You'd be on with me."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "His hand comes to rest flat on your lower back, where a hand goes to move somebody out of a doorway. You are not in a doorway. He does not move you."
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "He is a strict boss before he is anything else, and none of that has gone anywhere. It just has a hand on your back now."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Go back out."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "owen_standing"
-op         = "add"
-value      = 1
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 3
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_owen"
-trait      = "relation"
-op         = "add"
-value      = 2
-
-[[canvases.nodes]]
-id   = "stepped"
-name = "You step back"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You take half a step and put the width of a person between you, and he carries on reading the board as though that was the arrangement all along. He talks you through Thursday. Nothing in his voice changes and nothing in it is going to."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Go back out."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 10
-
-# --- THE MOVE UP · both keys, or nothing -------------------------------------
-
-[[canvases]]
-id   = "move_up_counter"
-name = "The counter"
-description = "Step two of the cafe arc. Needs BOTH keys: about eight shifts worked AND owen_standing. Buys four shifts at the same $55 — hours and access, never a better rate."
-
-[canvases.trigger]
-location      = "the_back_room"
-is_repeatable = false
-priority      = 9
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
-  { type = "trait", subject = "player", trait_key = "shifts_worked", operator = "gte", value = 8 },
-  { type = "trait", subject = "player", trait_key = "owen_standing", operator = "gte", value = 1 },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "Four lines"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Counter from Thursday. Same money an hour, four days instead of two. And tell me which of them you want and I'll see."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "That last part is the part he has never said to you before."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Back out to the floor."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "move_up"
-op         = "set"
-value      = 2
+# PARKED 2026-09-19 (the climbs) — the cafe climb: both customer steps (cust_hand,
+# cust_showing), the office (office_closer) and the move up (move_up_counter). Designed work,
+# block 5 of sheets/BASE.md. Verbatim in parked/climbs/cafe.toml.
 
 # --- THE SCHEDULE ON THE WALL · where nothing happening is visible -----------
 # the_move_up.md: his only punishment is holding her where she is, and he never
@@ -4167,23 +3078,12 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The board"
 
+# PARKED 2026-09-19 (the climbs) — the board read `move_up`: the counter version ("Four
+# marks against your name now") and the locked closing-shift choice are the cafe ladder.
+# What a fresh save sees stays, unconditioned. Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Six names down the side and the week across the top. Yours has two marks against it, Tuesday and Sunday, in the same pen as everyone else's. The board is the same board it was last week." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
-] } }
-blocks = [
-  { type = "paragraph", content = "Four marks against your name now, and one of them is a Thursday. People want Thursdays. Nobody wrote anything about it and nobody is going to." },
-]
+type    = "paragraph"
+content = "Six names down the side and the week across the top. Yours has two marks against it, Tuesday and Sunday, in the same pen as everyone else's. The board is the same board it was last week."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -4191,16 +3091,6 @@ content = "The bottom line of the board is the five-to-ten, one name a night, an
 
 [canvases.nodes.exit_block]
 type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Put your name down for a closing shift."
-targetType = "node"
-nodeId     = "the_schedule.base"
-show_when_locked = true
-locked_text = "Your name is not on that line and he has not offered."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 3 },
-] }
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
@@ -4270,14 +3160,8 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 150 },
 ] }
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Ask him for a bit more time."
-targetType = "node"
-nodeId     = "friday_payment.less"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key = "saw_them", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 75 },
-] }
+# PARKED 2026-09-19 (the climbs) — "Ask him for a bit more time.", which spent `saw_them`
+# from the master bedroom door, and its `less` node. parked/climbs/before_the_strip.toml.
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell him you haven't got it."
@@ -4322,12 +3206,7 @@ trait      = "debt_left"
 op         = "add"
 value      = -150
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_gil"
-trait      = "relation"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — @gil's relation +1. Every relation write is a person's ladder.
 
 [[canvases.nodes]]
 id   = "missed"
@@ -4361,315 +3240,8 @@ trait      = "fridays_missed"
 op         = "add"
 value      = 1
 
-[[canvases.nodes]]
-id   = "less"
-name = "A bit more time"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You put seventy-five on the table and say you will make the rest up. You do not explain and he does not ask you to. In week one he asked."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_gil" }
-content = "Next week, then."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He counts the seventy-five anyway. Neither of you says anything about where the rest of it is coming from, because he does not know there is anything to ask."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Go up."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_kitchen"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = -75
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "debt_left"
-op         = "add"
-value      = -75
-
-# \u26a0\ufe0f NO fridays_missed. That is the whole point of the spend \u2014 the week does
-# not go on the count, the list on the fridge does not grow, and she never said a
-# word about why.
-
-# =============================================================================
-# THE TWO DOORS AT HOME
-#
-# ⚠️ These two have NAMES, so each one needs an AFTER. A door with nothing behind
-# it the next morning is a campus door standing in a house. @nate's after is the
-# week he spends on the landing; @gil's is the Friday table.
-#
-# ⚠️ BEING CAUGHT AT HOME DOES NOT MOVE EXPOSURE. Exposure is strangers knowing
-# things. At home it is one person with a name, and what moves is where she
-# stands with him — which is the harder currency, because he is at breakfast.
-# =============================================================================
-
-# --- @NATE'S DOOR · the cost comes first ------------------------------------
-# the_two_doors.md: the first walk-in in the whole game, and it is WRITTEN FOR
-# HER. She opens the door, she sees, she leaves, and NO CHOICE IS OFFERED. It
-# teaches what this is so the second one means something.
-
-[[canvases]]
-id   = "nate_door"
-name = "His door isn't shut"
-description = "Walk-in on @nate. No choice by design. He knows every time, and what it buys her first is a worse week: he is on the landing for seven days and her own door cannot stay shut, so the stream is off."
-
-[canvases.trigger]
-location      = "nate_room"
-npc           = "npc_nate"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 8
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "Four inches"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "His door is open four inches and the lamp is on. @nate is on the bed with his laptop turned away and his cock in his hand. He is working at it in long slow pulls, balls tight up against the base of it. Not hurrying. He turns his head and sees you. He does not stop. He does not cover himself. His fist keeps going on his cock and he holds your eye while it does, jaw set, like he is daring you to be the one who looks away."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Get off the landing."
-targetType = "node"
-nodeId     = "nate_door.after"
-
-[[canvases.nodes]]
-id   = "after"
-name = "Breakfast is in nine hours"
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "He didn't stop. That is the part you carry down to breakfast, and he will be at breakfast, and he will be there every morning after that one."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Your room."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_hall"
-time_progression_minutes = 5
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "nate_seen"
-op         = "set"
-
-# THE WORSE WEEK. Seven days of him on the landing at odd hours, so her own door
-# cannot stay shut and going live is off. The biggest climb in the house COSTS
-# BEFORE IT PAYS — if it paid first, nothing here would be worth the risk.
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "nate_landing"
-op         = "set"
-value      = 7
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_nate"
-trait      = "relation"
-op         = "add"
-value      = 2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_nate"
-trait      = "arousal"
-op         = "add"
-value      = 3
-
-# --- THE MASTER BEDROOM · she saw, and he doesn't know ----------------------
-# Live only on the nights her mum is HOME off the ward, before ten. Her shift
-# times are on the wall in that room and she has read them a hundred times for
-# ordinary reasons — now they are a timetable for something else.
-#
-# ⚠️ Her mum is in the room and is NEVER TOUCHED, at any height. That is the whole
-# weight of this door: the one person she can't have, can't tell, and can't stop
-# taking from. How far it goes in the end is @gil, and only @gil.
-
-[[canvases]]
-id   = "master_bedroom"
-name = "The door is pushed to"
-description = "The first door she gets a CHOICE in, and the choice is back out or stand there. Watching properly is not on the menu — she can't make herself. Standing there sets saw_them, which she spends on a Friday."
-
-[canvases.trigger]
-location      = "the_master_bedroom"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 9
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_master_bedroom", operator = "is_present" },
-] }
-
-[[canvases.trigger.schedules]]
-weekdays   = [1, 3, 5, 6]
-start_time = "21:00"
-end_time   = "22:00"
-
-# Sometimes she doesn't get the chance. A quarter of the time the landing board
-# goes under her or the lamp swings — she is off the landing before she sees
-# anything, and nothing is set.
-[[canvases.trigger.substitutions]]
-target_canvas_id = "master_caught"
-chance = 0.25
-
-[[canvases.nodes]]
-id   = "base"
-name = "Not shut"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "The door is pushed to but not shut, and the lamp is on inside. You can hear the bed. Not much of it. Enough to know what you are hearing, and how long it has been going on."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Her shift times are on the wall on the other side of that door, in her own handwriting. You have read them a hundred times for ordinary reasons."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Back out."
-targetType = "node"
-nodeId     = "master_bedroom.backed_out"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Stand there."
-targetType = "node"
-nodeId     = "master_bedroom.stood"
-
-[[canvases.nodes]]
-id   = "stood"
-name = "The gap in the door"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "@gil has your mum on her front, her shirt shoved up round her waist. He is fucking her slowly. One hand flat between her shoulders, holding her down into the mattress. Her face is turned into the pillow. She is not making a sound. The bed stays quiet because he is going slow enough to keep it that way. You can see his cock going into her cunt every time he draws back."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Go."
-targetType = "node"
-nodeId     = "master_bedroom.after"
-
-[[canvases.nodes]]
-id   = "after"
-name = "Yours"
-
-[[canvases.nodes.blocks]]
-type    = "thought_bubble"
-props   = { speaker = "player" }
-content = "He has no idea you were on the other side of that door. He is going to sit at the table on Friday and take a hundred and fifty off you, and he still will not know."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Your room."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_hall"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "saw_them"
-op         = "set"
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 3
-
-[[canvases.nodes]]
-id   = "backed_out"
-name = "Back out"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You take your hand off the frame and go back along the landing on the outside edges of your feet, the way you already knew how to without ever having decided to learn it."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Your room."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_hall"
-time_progression_minutes = 5
-
-# --- THE CAUGHT VERSION -----------------------------------------------------
-# ⚠️ substitution_only: reachable ONLY as master_bedroom's dice roll. Nothing is
-# seen and nothing is set — and being caught at home does not touch exposure.
-
-[[canvases]]
-id   = "master_caught"
-name = "The board under the landing"
-description = "The caught version of the master bedroom. She is off the landing before she sees anything. Sets nothing."
-
-[canvases.trigger]
-location          = "the_master_bedroom"
-npc               = "npc_lynn"
-is_repeatable     = true
-max_triggers_per_day = 1
-substitution_only = true
-priority          = 9
-is_active         = true
-
-[[canvases.nodes]]
-id   = "base"
-name = "Who's that"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "The board outside their door goes under your weight, the way it has gone under everybody's weight for three years, and the bed stops."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_lynn" }
-content = "Nell? Is that you, love?"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You are in the bathroom with the light on and the tap running before she has finished the sentence. Nobody comes out. After a minute the house goes back to how it was."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Stay in here a while."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_bathroom"
-time_progression_minutes = 15
+# PARKED 2026-09-19 (the climbs) — the two doors at home: nate_door, master_bedroom and its
+# caught version master_caught. Each door is its own step. Verbatim in parked/climbs/house_doors.toml.
 
 # --- TASHA, WITHOUT WARNING -------------------------------------------------
 # the_house_day.md names her exactly like this. She cannot out her, she does not
@@ -4722,12 +3294,7 @@ trait      = "clean"
 op         = "set"
 value      = 100
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_tasha"
-trait      = "relation"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — @tasha's relation +1. Every relation write is a person's ladder.
 
 # --- @GIL COMES IN WHILE SHE'S DOING IT -------------------------------------
 # One canvas, substitution_only, on the chore. He notices things in that room —
@@ -4864,9 +3431,9 @@ locked_text = "You would not make ninety minutes. You barely made the stairs."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "rest", operator = "gte", value = 25 },
 ] }
+# PARKED 2026-09-19 (the climbs) — @sam's relation +1 came off this choice.
 effects = [
   { targetType = "player", trait = "attend_3", op = "add", value = 30, clamp = true },
-  { targetType = "npc", npcId = "npc_sam", trait = "relation", op = "add", value = 1 },
 ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -4875,508 +3442,8 @@ targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
 
-# =============================================================================
-# THE DARES
-#
-# ⚠️ Jules says it OUT LOUD, ON THE QUAD, IN FRONT OF PEOPLE. Not a message and
-# not a job off a list. She answers ON THE SPOT — no going away to think about
-# it, which is what makes it a decision instead of a button.
-#
-# ⚠️ GIVEN ON THE QUAD, DONE SOMEWHERE ELSE, THE SAME DAY. The dare is what walks
-# her into a room she would otherwise have no reason to enter — so dare one is
-# accepted here and done at the union.
-#
-# ⚠️ NO IS WRITTEN AS LOUDLY AS YES. If the page only writes what happens when she
-# does it, it was never a choice. Both refusals below get their own beat.
-# =============================================================================
-
-[[canvases]]
-id   = "dare_1_offer"
-name = "Jules wants a word"
-description = "Dare one, offered. A minute of her face and nothing else. Saying no costs standing and brings it back in a week, in front of more people."
-
-[canvases.trigger]
-location      = "the_quad"
-npc           = "npc_jules"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 8
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "lte", value = 0 },
-  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "lte", value = 0 },
-  { type = "flag", subject = "player", flag_key = "dare_1_pending", operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "On the wall by the doors"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "The three of them are on the wall by the doors and Jules says your name across the whole width of the path, so everybody between you and her looks up to see who it is."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_jules" }
-content = "Go into the union and say something stupid to somebody you've never met. Anything. We'll be at the table by the window."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Bree is already laughing. Jules is not. She is waiting, with her head slightly on one side, and everybody standing near enough is waiting with her."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-# ⚠️ ONE YES, TWO LABELS, AND DELIBERATELY NO CORRUPTION GATE ON EITHER.
-#
-# LO: "when low on corruption she is innocent, there can't be a plain yes
-# option?" He is right about the flatness and the fix is not a lock. the_dares.md
-# makes dare one the ON-RAMP — "she answers on the spot", and two is shut until
-# one is done — so hiding the yes at low corruption shuts the whole chain behind
-# the house content. And the same page says corruption is "the body ones only",
-# which dare one is not, so this rung must not move the meter either.
-#
-# What it can do is READ the meter. Same node, same effects, different words: at
-# corruption under 15 agreeing is a flinch and the label says so; above it, she
-# has a flat yes available to her, and the flatness is hers. The cost of saying
-# it is carried by the prose on the other side, which is where the_dares.md puts
-# it — "her face, and nothing else".
-[[canvases.nodes.exit_block.choices]]
-text       = "Say yes. You cannot think how not to."
-targetType = "node"
-nodeId     = "dare_1_offer.yes"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say yes."
-targetType = "node"
-nodeId     = "dare_1_offer.yes"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say no."
-targetType = "node"
-nodeId     = "dare_1_offer.no"
-
-[[canvases.nodes]]
-id   = "yes"
-name = "All right"
-
-# Two adjacent groups merge into one <<if>>/<<else>> chain, and the one with no
-# conditions is the else. The paragraph after them is outside the chain and
-# renders either way.
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
-] } }
-blocks = [
-  { type = "paragraph", content = "It is out of your mouth before you have decided anything, and your face goes while every one of them is still looking at it. That is the part she wanted and it is the part you cannot take back." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-blocks = [
-  { type = "paragraph", content = "You say it flat, the way you would agree to carry something down a flight of stairs. Nobody gets to watch you decide, and that is the only piece of this that stays yours." },
-]
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Jules nods once and goes back to her phone like the thing is already done. Bree tells Paige something behind her hand. Nobody walks with you."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "The union, then."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 5
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "dare_1_pending"
-op         = "set"
-
-[[canvases.nodes]]
-id   = "no"
-name = "No"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You say no. It comes out smaller than you wanted it and there is a beat where nothing happens at all, which is the worst part of it."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_bree" }
-content = "She said no. She actually said no."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Bree does it loud enough for the path. Jules does not join in and does not stop her. That is the arrangement they have. You are still standing where you were, and nothing about the rest of your day has changed except how it is going to sound."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Keep walking."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 5
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "crowd_standing"
-op         = "add"
-value      = -2
-
-# She asks again in a week, in front of more people. No door shut.
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "dare_cooldown"
-op         = "set"
-value      = 7
-
-# --- DOING IT · the room the dare walks her into -----------------------------
-
-[[canvases]]
-id   = "dare_1_do"
-name = "Somebody you've never met"
-description = "Dare one, done. Sets the chain to 1, which opens dare two, and buys the first quiet week."
-
-[canvases.trigger]
-location      = "the_union"
-npc           = "npc_jules"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 9
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "dare_1_pending", operator = "is_true" },
-] }
-# ⚠️ REPEATABLE ON PURPOSE. Auto-firing would need is_repeatable = false, and
-# that burns once — so if she bottled it the first time and Jules asked again, the
-# union scene would never fire and the chain would stall forever.
-
-[[canvases.nodes]]
-id   = "base"
-name = "The table by the window"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "They are at the window table with three coffees and nothing else in front of them, facing out into the room. They have been there long enough to have picked where they are looking."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "There is a man about forty at the end of the long table with a tray and a book and no interest in anybody. He is the one nearest. That is the whole of the reason."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Do it."
-targetType = "node"
-nodeId     = "dare_1_do.done"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Walk past and out the other door."
-targetType = "node"
-nodeId     = "dare_1_do.bottled"
-
-[[canvases.nodes]]
-id   = "done"
-name = "A minute"
-
-# ⚠️ THE CHOICE SAID "Do it." AND SHE DID NOT DO IT. The old version had her walk
-# up and announce the dare — "I have been asked to say something stupid to a
-# stranger and this is it" — which is the one move that costs her nothing. It
-# makes her the witty one, hands the man the joke, and leaves the rung empty:
-# the_dares.md prices dare one at "her face, and nothing else", and announcing it
-# is exactly how somebody keeps their face. She says the stupid thing now.
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You stop at the man's elbow and tell him, louder than you meant to, that the milk at the counter is free and he should take some while it lasts. None of it is true."
-
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
-] } }
-blocks = [
-  { type = "paragraph", content = "You hear your own voice do it from somewhere outside your head, and you cannot look at the window table while it is happening. Your face is doing the whole thing for you." },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-blocks = [
-  { type = "paragraph", content = "You keep your voice flat and your face still and you say it the way you would read a number off a page. Doing it badly is the part they came for, and they do not get it." },
-]
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "unknown" }
-content = "Right. Thanks. I'll bear that in mind."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He goes back to his book without once looking over at the window table, which is kinder than anything the three of them have in them. It took under a minute. Bree is still laughing when you get there."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Back over to them."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_union"
-time_progression_minutes = 15
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "dare_1_pending"
-op         = "unset"
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "dare_chain"
-op         = "set"
-value      = 1
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "crowd_standing"
-op         = "add"
-value      = 8
-
-# THE ONLY THING A DARE BUYS IN THE FIRST BUILD. Nobody says why and nobody
-# announces it — she just gets a week where the day is only a day.
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "quiet_week"
-op         = "set"
-value      = 7
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_jules"
-trait      = "relation"
-op         = "add"
-value      = 4
-
-[[canvases.nodes]]
-id   = "bottled"
-name = "The other door"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You go the length of the room and out the far side without stopping, and you are outside before you have decided that is what you were doing."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Nobody comes after you. Nobody says anything about it the next day either, which turns out to be its own version of saying something."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "dare_1_pending"
-op         = "unset"
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "crowd_standing"
-op         = "add"
-value      = -3
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "dare_cooldown"
-op         = "set"
-value      = 7
-
-# --- DARE TWO · the first one that does not end when it ends -----------------
-# THAT GAP IS THE CLIMB. One is a minute. Two is four hours of being looked at,
-# and she agrees to all four of them in the two seconds she has to answer.
-#
-# ⚠️ TWO IS SHUT UNTIL ONE IS DONE. A chain, not a number she can reach some
-# other way.
-#
-# ⚠️ Dare two is the FIRST one about her body, so it is the only one that touches
-# exposure and corruption. It is also public, so it is where `reputation` moves
-# for the first time in this game.
-
-[[canvases]]
-id   = "dare_2_offer"
-name = "Jules again"
-description = "Dare two. The jacket goes in her bag here and stays there until she goes home — and the rest of that day is delivered by the picking-on system, which reads jacket_off."
-
-[canvases.trigger]
-location      = "the_quad"
-npc           = "npc_jules"
-is_repeatable = true
-max_triggers_per_day = 1
-priority      = 8
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "lte", value = 0 },
-  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "The wall by the doors"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "She does not say your name across the path this time. She waits until you are close enough that she can say it at a normal volume, which is somehow worse, because it means you are near enough now to be spoken to like that."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_jules" }
-content = "Jacket. In the bag. And it stays in the bag until you go home tonight, and we'll know, because we'll see you."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "What is under it is a top you picked this morning for being under a jacket. Bree has already looked. It is eleven in the morning and you are on a campus you cannot leave until five."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Take it off."
-targetType = "node"
-nodeId     = "dare_2_offer.yes"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Say no."
-targetType = "node"
-nodeId     = "dare_2_offer.no"
-
-[[canvases.nodes]]
-id   = "yes"
-name = "In the bag"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You get it off in the middle of the path, roll it, and put it in the bag. Then the air on your arms tells you the size of what you just agreed to. Six hours. You had two seconds."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_jules" }
-content = "There. That wasn't hard, was it."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "She says it without any edge on it at all, then goes back to her phone. Paige tells you she likes the top, and means it. That is worse than Bree would have been."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Six hours, then."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 10
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "jacket_off"
-op         = "set"
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "dare_chain"
-op         = "set"
-value      = 2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "crowd_standing"
-op         = "add"
-value      = 12
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "exposure"
-op         = "add"
-value      = 4
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "corruption"
-op         = "add"
-value      = 3
-
-# `reputation` moves for the first time in this game. Dare two is public and it
-# is about her, which is exactly what reputation measures.
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "reputation"
-op         = "add"
-value      = 6
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "quiet_week"
-op         = "set"
-value      = 7
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_jules"
-trait      = "relation"
-op         = "add"
-value      = 6
-
-[[canvases.nodes]]
-id   = "no"
-name = "Not that one"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You say no to this one, and it is easier than the first no was, because you have already found out that the ground does not open."
-
-[[canvases.nodes.blocks]]
-type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_jules" }
-content = "All right. Ask me again in a bit and I'll have thought of something else."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "That is the part that stays with you: she did not say no back. She put it down somewhere she can pick it up again, and she let you watch her do it."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Keep walking."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_quad"
-time_progression_minutes = 5
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "crowd_standing"
-op         = "add"
-value      = -2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "dare_cooldown"
-op         = "set"
-value      = 7
+# PARKED 2026-09-19 (the climbs) — Jules's dares: dare_1_offer, dare_1_do, dare_2_offer. A chain
+# goes whole, first step included. Verbatim in parked/climbs/dares.toml.
 
 # --- THE OTHER TWO ----------------------------------------------------------
 # Thin on purpose — the crowd's voice, not two more climbs. But a scheduled
@@ -5416,22 +3483,8 @@ name = "On her own for once"
 type    = "paragraph"
 content = "She is on the wall on her own for once, and she moves her bag so there is room, and she means it."
 
-# ⚠️ The third line used to be "the thing on Tuesday" and sat in the pool, so it
-# could greet a player who had never met Jules. dare_chain rises when she does a
-# dare and dare_cooldown when she refuses one, so either means it happened.
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "gte", value = 1 },
-] } }
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Don't listen to her about the dare. She's like that with everybody at first." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_paige" }, content = "Are you all right? You look like you've been up. You can say if you have." },
-  ] },
-]
-
+# PARKED 2026-09-19 (the climbs) — the after-a-dare lines ("Don't listen to her about the
+# dare"), gated on dare_chain / dare_cooldown. The lines a fresh save hears stay.
 [[canvases.nodes.blocks]]
 type = "group"
 blocks = [
@@ -5458,48 +3511,9 @@ locked_text = "You have already been decent at her once today."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "paige_today", operator = "is_false" },
 ] }
-effects     = [{ targetType = "npc", npcId = "npc_paige", trait = "relation", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
-
-# ⚠️ TWO CHOICES FOR ONE ACT, AND THE ENGINE LEAVES NO OTHER SHAPE. The day cap
-# has to be ANDed onto the standing gate, and `triggerConditionsSatisfied` takes one
-# flat `items` list with ONE `logic` (v2.py:4037-4039) — there is no nesting, so
-# `flag AND (crowd OR reputation)` cannot be written as a single condition. Folding
-# the OR into an AND would delete the reputation route, and that route is authored
-# forward: `reputation` starts at 5 and has exactly ONE source in the build
-# (`dare_2_offer` +6), so it tops out at 11 and every `gte 20` read is waiting on a
-# later release. So: one choice per route, both capped by the same flag. Only the
-# crowd_standing one shows when locked, so today the player sees exactly one.
-#
-# ⚠️ AND THE CAP IS NOT OPTIONAL. Taking it off the trigger without replacing it
-# made `gates.py` "the climb is paid for" fail — `crowd_standing` gates content at
-# 10 and became reachable with no cost, no cap and 20 minutes of game time.
-[[canvases.nodes.exit_block.choices]]
-text       = "Say you know what she does after."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 10
-show_when_locked = true
-locked_text = "Not to her. Not with nobody behind you."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "paige_today", operator = "is_false" },
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-] }
-effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
-flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
-
-# The reputation route. Hidden, not shown-locked — see above.
-[[canvases.nodes.exit_block.choices]]
-text       = "Say you know what she does after."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "paige_today", operator = "is_false" },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
-flagEffects = [{ targetType = "player", flag = "paige_today", op = "set" }]
+# PARKED 2026-09-19 (the climbs) — @paige's relation +2 came off the choice above, and both
+# "Say you know what she does after." choices went: they read crowd_standing / reputation.
 
 # Unconditional — the free door on a spent day. Both of Paige's paying choices
 # carry the cap, so without this the screen would have no way off it.
@@ -5528,22 +3542,8 @@ is_active     = true
 id   = "base"
 name = "Your brother's year"
 
-# ⚠️ "He knows about Tuesday, by the way" used to be a pool member, so it could be
-# the first thing Bree ever said to her — about a Tuesday that had not happened,
-# to a brother she had not been seen with.
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "gte", value = 1 },
-] } }
-blocks = [
-  { type = "block_pool", blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "@nate knows, by the way. I didn't even have to tell him properly, I just started it." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bree" }, content = "I'll see @nate at four. Anything you want passing on, or shall I just use my own words." },
-  ] },
-]
-
+# PARKED 2026-09-19 (the climbs) — the after-a-dare lines ("@nate knows, by the way"),
+# gated on dare_chain / dare_cooldown. The lines a fresh save hears stay.
 [[canvases.nodes.blocks]]
 type = "group"
 blocks = [
@@ -5566,46 +3566,8 @@ targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
 
-# ⚠️ TWO CHOICES FOR ONE ACT, AND THE ENGINE LEAVES NO OTHER SHAPE. The day cap
-# has to be ANDed onto the standing gate, and `triggerConditionsSatisfied` takes one
-# flat `items` list with ONE `logic` (v2.py:4037-4039) — there is no nesting, so
-# `flag AND (crowd OR reputation)` cannot be written as a single condition. Folding
-# the OR into an AND would delete the reputation route, and that route is authored
-# forward: `reputation` starts at 5 and has exactly ONE source in the build
-# (`dare_2_offer` +6), so it tops out at 11 and every `gte 20` read is waiting on a
-# later release. So: one choice per route, both capped by the same flag. Only the
-# crowd_standing one shows when locked, so today the player sees exactly one.
-#
-# ⚠️ AND THE CAP IS NOT OPTIONAL. Taking it off the trigger without replacing it
-# made `gates.py` "the climb is paid for" fail — `crowd_standing` gates content at
-# 10 and became reachable with no cost, no cap and 20 minutes of game time.
-[[canvases.nodes.exit_block.choices]]
-text       = "Tell her to use her own words, then."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 5
-show_when_locked = true
-locked_text = "Nobody here is on your side. It would only give her more of it."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "bree_today", operator = "is_false" },
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-] }
-effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
-flagEffects = [{ targetType = "player", flag = "bree_today", op = "set" }]
-
-# The reputation route. Hidden rather than shown-locked, so the two never render
-# as a pair — today it cannot fire at all.
-[[canvases.nodes.exit_block.choices]]
-text       = "Tell her to use her own words, then."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 5
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key  = "bree_today", operator = "is_false" },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects     = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 3 }]
-flagEffects = [{ targetType = "player", flag = "bree_today", op = "set" }]
+# PARKED 2026-09-19 (the climbs) — both "Tell her to use her own words, then." choices:
+# they read crowd_standing / reputation. They were the only setters of `bree_today`.
 
 # --- DINNER · the one hour nothing can be avoided ---------------------------
 # the_house_day.md. Everyone at one table on the nights her mum is off the ward.
@@ -5666,15 +3628,8 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were coming in at half past eleven. I'm not asking where from. I'm saying I was up." },
 ]
 
-[[canvases.nodes.blocks]]
-type = "group"
-props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
-] } }
-blocks = [
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "She's been going round the landing at all hours. Hasn't she. Opening doors." },
-  { type = "paragraph", content = "He says it to the table, not to you, and then eats. Nobody asks him what he means. He knew nobody would, which is the whole reason he said it." },
-]
+# PARKED 2026-09-19 (the climbs) — @nate's line about the landing, gated on `nate_seen`
+# from his door. parked/climbs/before_the_strip.toml.
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -5696,10 +3651,7 @@ text       = "Sit it out."
 targetType = "location"
 locationId = "the_kitchen"
 time_progression_minutes = 45
-effects = [
-  { targetType = "npc", npcId = "npc_gil",  trait = "relation", op = "add", value = 1 },
-  { targetType = "npc", npcId = "npc_lynn", trait = "relation", op = "add", value = 1 },
-]
+# PARKED 2026-09-19 (the climbs) — @gil and @lynn relation +1 came off this choice.
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take your plate upstairs."
@@ -5727,19 +3679,7 @@ destinationType          = "specific"
 locationId               = "her_room"
 time_progression_minutes = 10
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_gil"
-trait      = "relation"
-op         = "add"
-value      = -2
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_lynn"
-trait      = "relation"
-op         = "add"
-value      = -1
+# PARKED 2026-09-19 (the climbs) — @gil -2 and @lynn -1 relation came off this exit.
 
 # --- IN BY TEN · the third of his three rules -------------------------------
 # the_house.md: "After that the front door is a thing she has to come through,
@@ -5845,14 +3785,13 @@ text       = "Tell her nothing and stay anyway."
 targetType = "location"
 locationId = "the_union"
 time_progression_minutes = 20
-effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }]
+# PARKED 2026-09-19 (the climbs) — @cara's relation +1 here and -2 below came off.
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Say you've got somewhere to be."
 targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
-effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }]
 
 [[canvases]]
 id   = "bree_catches"
@@ -5894,18 +3833,7 @@ targetType = "location"
 locationId = "the_quad"
 time_progression_minutes = 5
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Go over."
-targetType = "location"
-locationId = "the_quad"
-time_progression_minutes = 10
-show_when_locked = true
-locked_text = "Not on an invitation like that one."
-conditions = { version = "1.0", logic = "OR", items = [
-  { type = "trait", subject = "player", trait_key = "crowd_standing", operator = "gte", value = 10 },
-  { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 20 },
-] }
-effects = [{ targetType = "player", trait = "crowd_standing", op = "add", value = 2 }]
+# PARKED 2026-09-19 (the climbs) — "Go over.", which read crowd_standing / reputation.
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 8_phone.toml
@@ -6015,9 +3943,10 @@ content = "are you about at lunch or are you doing the thing where you vanish"
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
+# PARKED 2026-09-19 (the climbs) — @cara's relation +2 / -1 came off these two replies.
 choices = [
-  { text = "I'm about. Union, usual table.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 2 }] },
-  { text = "Can't today. Sorry.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -1 }] },
+  { text = "I'm about. Union, usual table." },
+  { text = "Can't today. Sorry." },
 ]
 [[phone.conversations.blocks]]
 type = "message"
@@ -6047,116 +3976,13 @@ content = "when are you actually free now though. like actually. don't do the th
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
+# PARKED 2026-09-19 (the climbs) — @cara's relation +3 / -2 came off these two replies.
 choices = [
-  { text = "Sunday after the shift. I'll come to you.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 3 }] },
-  { text = "Soon.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }] },
+  { text = "Sunday after the shift. I'll come to you." },
+  { text = "Soon." },
 ]
 
-# --- 3 · she repeats what the crowd says and never knows it is true ----------
-# the_cast.md, in those words. It arrives once her exposure is up enough that
-# there is something going round, and she has no idea she is telling her about
-# herself.
-
-[[phone.conversations]]
-id     = "cara_rumour"
-app    = "messages"
-npc    = "npc_cara"
-notify = "Cara texted you."
-[phone.conversations.trigger]
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
-  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 8 },
-] }
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "ok don't be weird but there's a thing going round about a girl in our year doing stuff online. like properly"
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "and everyone's being SO horrible about it and I keep thinking, she's just broke isn't she. that's all it is"
-[[phone.conversations.blocks]]
-type = "reply"
-round = 1
-choices = [
-  { text = "Yeah. She's probably just broke.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
-  { text = "Who's saying it?", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
-]
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-round = 2
-content = "everyone. that's the thing. nobody's even started it, it's just there"
-
-# --- 4a · WARM · the coffee that actually gets arranged ---------------------
-
-[[phone.conversations]]
-id     = "cara_coffee"
-app    = "messages"
-npc    = "npc_cara"
-notify = "Cara texted you."
-[phone.conversations.trigger]
-conditions = { version = "1.0", items = [
-  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 4 },
-  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 14 },
-] }
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "right. I'm booking you. an actual hour where you're not going anywhere after"
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "you've been on that bus more than you've been anywhere else and I'm the only one who's noticed, which is a bit grim when you say it out loud"
-[[phone.conversations.blocks]]
-type = "reply"
-round = 1
-choices = [
-  { text = "Book me then.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 3 }] },
-  { text = "I've got a shift. I've always got a shift.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }] },
-]
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-round = 2
-content = "I know. that's sort of what I'm saying"
-
-# --- 4b · COOL · two lines, and no reply offered ----------------------------
-# She never confronts and never judges. She just gets harder to reach.
-
-[[phone.conversations]]
-id     = "cara_cool"
-app    = "messages"
-npc    = "npc_cara"
-notify = "Cara texted you."
-[phone.conversations.trigger]
-conditions = { version = "1.0", items = [
-  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 6 },
-  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 6 },
-] }
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "saw you go past the union today"
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "anyway. hope work's ok"
-
-# --- 5 · the last one ------------------------------------------------------
-
-[[phone.conversations]]
-id     = "cara_last"
-app    = "messages"
-npc    = "npc_cara"
-notify = "Cara texted you."
-[phone.conversations.trigger]
-conditions = { version = "1.0", items = [
-  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 10 },
-  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 2 },
-] }
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "happy Thursday"
+# PARKED 2026-09-19 (the climbs) — the rest of Cara's thread: cara_rumour, cara_coffee,
+# cara_cool, cara_last. Each is gated on her relation or on exposure. Verbatim in
+# parked/climbs/cara_thread.toml.
 

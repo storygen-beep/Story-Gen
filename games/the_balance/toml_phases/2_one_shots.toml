@@ -177,12 +177,8 @@ targetType = "player"
 flag       = "opening_done"
 op         = "set"
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "npc"
-npcId      = "npc_gil"
-trait      = "relation"
-op         = "add"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — @gil's relation +1 came off this exit. The note that went
+# with it, kept for when it comes back:
 # ⚠️ effects say `npcId`; a CONDITION on the same character says `npc_id`.
 #
 # This was `rest +5` and it pushed rest to 105 — nothing clamps a trait to its
@@ -330,11 +326,8 @@ targetType = "player"
 flag       = "has_job"
 op         = "set"
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "move_up"
-op         = "set"
-value      = 1
+# PARKED 2026-09-19 (the climbs) — `move_up set 1`. move_up is the cafe ladder's position;
+# `has_job` above is the job itself.
 
 [[canvases.nodes]]
 id   = "walked_out"

@@ -1,0 +1,274 @@
+# PARKED 2026-09-19 (the climbs) — 3 scenes: the two doors at home — Nate's, and the master bedroom with its caught version.
+# Copied verbatim from ccf4541, design comments included. NOT merged: parked/ is outside
+# toml_phases/. This was DESIGNED work — sheets/RELEASE.md and sheets/systems/the_two_doors.md — and it is the ladder
+# layer, block 5 of sheets/BASE.md. It comes back when that ladder has its page.
+
+# ── from toml_phases/5_scenes.toml
+
+# =============================================================================
+# THE TWO DOORS AT HOME
+#
+# ⚠️ These two have NAMES, so each one needs an AFTER. A door with nothing behind
+# it the next morning is a campus door standing in a house. @nate's after is the
+# week he spends on the landing; @gil's is the Friday table.
+#
+# ⚠️ BEING CAUGHT AT HOME DOES NOT MOVE EXPOSURE. Exposure is strangers knowing
+# things. At home it is one person with a name, and what moves is where she
+# stands with him — which is the harder currency, because he is at breakfast.
+# =============================================================================
+
+# --- @NATE'S DOOR · the cost comes first ------------------------------------
+# the_two_doors.md: the first walk-in in the whole game, and it is WRITTEN FOR
+# HER. She opens the door, she sees, she leaves, and NO CHOICE IS OFFERED. It
+# teaches what this is so the second one means something.
+
+[[canvases]]
+id   = "nate_door"
+name = "His door isn't shut"
+description = "Walk-in on @nate. No choice by design. He knows every time, and what it buys her first is a worse week: he is on the landing for seven days and her own door cannot stay shut, so the stream is off."
+
+[canvases.trigger]
+location      = "nate_room"
+npc           = "npc_nate"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four inches"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His door is open four inches and the lamp is on. @nate is on the bed with his laptop turned away and his cock in his hand. He is working at it in long slow pulls, balls tight up against the base of it. Not hurrying. He turns his head and sees you. He does not stop. He does not cover himself. His fist keeps going on his cock and he holds your eye while it does, jaw set, like he is daring you to be the one who looks away."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get off the landing."
+targetType = "node"
+nodeId     = "nate_door.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Breakfast is in nine hours"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He didn't stop. That is the part you carry down to breakfast, and he will be at breakfast, and he will be there every morning after that one."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_seen"
+op         = "set"
+
+# THE WORSE WEEK. Seven days of him on the landing at odd hours, so her own door
+# cannot stay shut and going live is off. The biggest climb in the house COSTS
+# BEFORE IT PAYS — if it paid first, nothing here would be worth the risk.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "nate_landing"
+op         = "set"
+value      = 7
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 3
+
+# --- THE MASTER BEDROOM · she saw, and he doesn't know ----------------------
+# Live only on the nights her mum is HOME off the ward, before ten. Her shift
+# times are on the wall in that room and she has read them a hundred times for
+# ordinary reasons — now they are a timetable for something else.
+#
+# ⚠️ Her mum is in the room and is NEVER TOUCHED, at any height. That is the whole
+# weight of this door: the one person she can't have, can't tell, and can't stop
+# taking from. How far it goes in the end is @gil, and only @gil.
+
+[[canvases]]
+id   = "master_bedroom"
+name = "The door is pushed to"
+description = "The first door she gets a CHOICE in, and the choice is back out or stand there. Watching properly is not on the menu — she can't make herself. Standing there sets saw_them, which she spends on a Friday."
+
+[canvases.trigger]
+location      = "the_master_bedroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_master_bedroom", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "21:00"
+end_time   = "22:00"
+
+# Sometimes she doesn't get the chance. A quarter of the time the landing board
+# goes under her or the lamp swings — she is off the landing before she sees
+# anything, and nothing is set.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "master_caught"
+chance = 0.25
+
+[[canvases.nodes]]
+id   = "base"
+name = "Not shut"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The door is pushed to but not shut, and the lamp is on inside. You can hear the bed. Not much of it. Enough to know what you are hearing, and how long it has been going on."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Her shift times are on the wall on the other side of that door, in her own handwriting. You have read them a hundred times for ordinary reasons."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "node"
+nodeId     = "master_bedroom.backed_out"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand there."
+targetType = "node"
+nodeId     = "master_bedroom.stood"
+
+[[canvases.nodes]]
+id   = "stood"
+name = "The gap in the door"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@gil has your mum on her front, her shirt shoved up round her waist. He is fucking her slowly. One hand flat between her shoulders, holding her down into the mattress. Her face is turned into the pillow. She is not making a sound. The bed stays quiet because he is going slow enough to keep it that way. You can see his cock going into her cunt every time he draws back."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go."
+targetType = "node"
+nodeId     = "master_bedroom.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Yours"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He has no idea you were on the other side of that door. He is going to sit at the table on Friday and take a hundred and fifty off you, and he still will not know."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "saw_them"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes]]
+id   = "backed_out"
+name = "Back out"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take your hand off the frame and go back along the landing on the outside edges of your feet, the way you already knew how to without ever having decided to learn it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+# --- THE CAUGHT VERSION -----------------------------------------------------
+# ⚠️ substitution_only: reachable ONLY as master_bedroom's dice roll. Nothing is
+# seen and nothing is set — and being caught at home does not touch exposure.
+
+[[canvases]]
+id   = "master_caught"
+name = "The board under the landing"
+description = "The caught version of the master bedroom. She is off the landing before she sees anything. Sets nothing."
+
+[canvases.trigger]
+location          = "the_master_bedroom"
+npc               = "npc_lynn"
+is_repeatable     = true
+max_triggers_per_day = 1
+substitution_only = true
+priority          = 9
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Who's that"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The board outside their door goes under your weight, the way it has gone under everybody's weight for three years, and the bed stops."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Nell? Is that you, love?"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You are in the bathroom with the light on and the tap running before she has finished the sentence. Nobody comes out. After a minute the house goes back to how it was."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay in here a while."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 15

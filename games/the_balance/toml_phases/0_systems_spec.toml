@@ -78,30 +78,14 @@ clean          = 100   # a need
 cash           = 10    # ⚠️ NOT on any sheet. See the note below.
 debt_left      = 2400  # money.md — the semester
 fridays_missed = 0
-shifts_worked  = 0     # the cafe. Never goes down (the_move_up.md)
-move_up        = 0     # 0 no job · 1 the floor · 2 the counter · 3 closing
-owen_standing  = 0     # the second key on every step up
+# PARKED 2026-09-19 (the climbs) — shifts_worked, move_up, owen_standing: the cafe ladder's
+# counters. Declarations in parked/climbs/systems.toml.
 home_after_ten = 0     # times she has come through the front door after his rule.
                        # the_house.md: "After that the front door is a thing she
                        # has to come through, and he's up." Read at the dinner
                        # table — he notices the hours she keeps.
-crowd_standing = 0     # where she stands with Jules's lot. Moved by every dare
-                       # taken AND every dare refused, and by answering back in
-                       # front of people. NOT the same as `reputation`, which is
-                       # how much of the campus has heard of her.
-dare_chain     = 0     # A POSITION IN A CHAIN, NOT A TALLY. 0 none, 1 the union,
-                       # 2 the jacket. It decides which dare comes next and
-                       # nothing else. SYSTEMS.md settled that a count of dares
-                       # taken was a second copy of crowd_standing.
-dare_cooldown  = 0     # days until a refused dare comes back. the_dares.md:
-                       # "the same dare comes back about a week later, in front
-                       # of more people." Saying no never shuts a door — it
-                       # costs a louder week and it comes round again.
-quiet_week     = 0     # days left of the random picking-on being off. THE ONLY
-                       # THING A DARE BUYS in the first build — the row, the
-                       # parties and being let in are all waiting, so the only
-                       # honest payoff in four weeks is the thing already running,
-                       # turned down for a week.
+# PARKED 2026-09-19 (the climbs) — crowd_standing, dare_chain, dare_cooldown, quiet_week: the
+# dares and what they bought. Declarations in parked/climbs/systems.toml.
 
 # ⚠️ ATTENDANCE IS A FALLING METER, AND college.md COUNTS MISSES. That is a
 # translation, not a redesign, and here is why: the engine cannot count a miss
@@ -115,12 +99,8 @@ attend_1       = 100   # lecture hall, Monday and Wednesday, nine to ten thirty
 attend_2       = 100   # lecture hall, Monday and Wednesday, ten thirty to twelve
 attend_3       = 100   # the classroom, Tuesday and Thursday, nine to ten thirty
 attend_4       = 100   # the classroom, Tuesday and Thursday, ten thirty to twelve
-nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when she
-                       # opens his door; counted down by [engine.daily_tick]. While
-                       # it is above zero her own door cannot stay shut, so the
-                       # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
-                       # when the flag has never been set, which would shut the
-                       # stream from the first minute of the game.
+# PARKED 2026-09-19 (the climbs) — nate_landing, the week @nate's door cost the stream.
+# Declaration in parked/climbs/systems.toml.
 followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this since
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
@@ -235,49 +215,12 @@ key    = "fridays_missed"
 label  = "Fridays missed"
 hidden = true
 
-[[traits.labels]]
-key    = "shifts_worked"
-label  = "Shifts worked"
-hidden = true
-
-[[traits.labels]]
-key    = "move_up"
-label  = "At the cafe"
-hidden = true
-
-[[traits.labels]]
-key    = "owen_standing"
-label  = "Owen"
-hidden = true
-
-[[traits.labels]]
-key    = "nate_landing"
-label  = "Somebody on the landing"
-hidden = true
+# PARKED 2026-09-19 (the climbs) — the labels for the eight counters that went with the
+# climbs. parked/climbs/systems.toml.
 
 [[traits.labels]]
 key    = "home_after_ten"
 label  = "Nights in after ten"
-hidden = true
-
-[[traits.labels]]
-key    = "crowd_standing"
-label  = "Where you stand with them"
-hidden = true
-
-[[traits.labels]]
-key    = "dare_chain"
-label  = "The dares"
-hidden = true
-
-[[traits.labels]]
-key    = "dare_cooldown"
-label  = "Before she asks again"
-hidden = true
-
-[[traits.labels]]
-key    = "quiet_week"
-label  = "A quiet week"
 hidden = true
 
 [[traits.labels]]
@@ -307,8 +250,7 @@ hidden = true
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
-  # the jacket is back on in the morning. Dare two lasts exactly one day.
-  { targetType = "player", flag = "jacket_off", op = "unset" },
+  # PARKED 2026-09-19 (the climbs) — the jacket_off reset went with dare two.
   # Her door is open again by morning, for the same reason the jacket is back on:
   # the rule is @gil's and the house resets to it. Shutting it is a decision she
   # makes fresh every day, which is the only thing that stops one five-minute
@@ -328,14 +270,11 @@ flagEffects = [
   # taking them off outright made gates.py "the climb is paid for" fail, because
   # `crowd_standing` gates content at 10 and became free to reach.
   { targetType = "player", flag = "paige_today", op = "unset" },
-  { targetType = "player", flag = "bree_today", op = "unset" },
+  # PARKED 2026-09-19 (the climbs) — the bree_today reset: both of its setters were climb
+  # choices, and a cap cleared but never set is the defect engine.md §28.2 names.
 ]
-traitEffects = [
-  { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
-  { targetType = "player", trait = "quiet_week",   op = "add", value = -1 },
-  { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
-]
-# It runs past zero into negatives and that is harmless — every read is `lte 0`.
+# PARKED 2026-09-19 (the climbs) — `traitEffects`: all three countdowns (nate_landing,
+# quiet_week, dare_cooldown) belonged to parked climbs, so the key is gone with them.
 
 # --- IS THE HOUSE EMPTY ------------------------------------------------------
 # The first named gate in this game, and it exists because the engine's condition
@@ -466,30 +405,5 @@ when  = [
   { flag = "opening_done", op = "is_true" },
 ]
 
-[[quest_cards]]
-id    = "card_dare_1"
-group = "the_crowd"
-text  = "Jules asks for things on the quad, out loud, in front of people. You answer on the spot."
-tip   = "The first one is a minute of your face and nothing else. Saying no shuts no doors."
-when  = [
-  { trait = "dare_chain", subject = "player", op = "lte", value = 0 },
-  { flag = "opening_done", op = "is_true" },
-]
-
-[[quest_cards]]
-id    = "card_dare_2"
-group = "the_crowd"
-text  = "The next one is not a minute. It is the rest of the day, and you agree to all of it in two seconds."
-tip   = "She asks on the quad, between classes."
-when  = [
-  { trait = "dare_chain", subject = "player", op = "eq", value = 1 },
-]
-
-[[quest_cards]]
-id    = "card_quiet"
-group = "the_crowd"
-text  = "Nobody has started on you this week. Nobody said why and nobody is going to."
-tip   = "It runs out. Then it starts again."
-when  = [
-  { trait = "quiet_week", subject = "player", op = "gte", value = 1 },
-]
+# PARKED 2026-09-19 (the climbs) — card_dare_1, card_dare_2, card_quiet: guidance for the
+# dares. parked/climbs/systems.toml.

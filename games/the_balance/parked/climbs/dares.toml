@@ -1,0 +1,509 @@
+# PARKED 2026-09-19 (the climbs) — 3 scenes: Jules's two dares.
+# Copied verbatim from ccf4541, design comments included. NOT merged: parked/ is outside
+# toml_phases/. This was DESIGNED work — sheets/RELEASE.md and sheets/systems/the_dares.md — and it is the ladder
+# layer, block 5 of sheets/BASE.md. It comes back when that ladder has its page.
+
+# ── from toml_phases/5_scenes.toml
+
+# =============================================================================
+# THE DARES
+#
+# ⚠️ Jules says it OUT LOUD, ON THE QUAD, IN FRONT OF PEOPLE. Not a message and
+# not a job off a list. She answers ON THE SPOT — no going away to think about
+# it, which is what makes it a decision instead of a button.
+#
+# ⚠️ GIVEN ON THE QUAD, DONE SOMEWHERE ELSE, THE SAME DAY. The dare is what walks
+# her into a room she would otherwise have no reason to enter — so dare one is
+# accepted here and done at the union.
+#
+# ⚠️ NO IS WRITTEN AS LOUDLY AS YES. If the page only writes what happens when she
+# does it, it was never a choice. Both refusals below get their own beat.
+# =============================================================================
+
+[[canvases]]
+id   = "dare_1_offer"
+name = "Jules wants a word"
+description = "Dare one, offered. A minute of her face and nothing else. Saying no costs standing and brings it back in a week, in front of more people."
+
+[canvases.trigger]
+location      = "the_quad"
+npc           = "npc_jules"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "lte", value = 0 },
+  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "lte", value = 0 },
+  { type = "flag", subject = "player", flag_key = "dare_1_pending", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "On the wall by the doors"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The three of them are on the wall by the doors and Jules says your name across the whole width of the path, so everybody between you and her looks up to see who it is."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_jules" }
+content = "Go into the union and say something stupid to somebody you've never met. Anything. We'll be at the table by the window."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Bree is already laughing. Jules is not. She is waiting, with her head slightly on one side, and everybody standing near enough is waiting with her."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ ONE YES, TWO LABELS, AND DELIBERATELY NO CORRUPTION GATE ON EITHER.
+#
+# LO: "when low on corruption she is innocent, there can't be a plain yes
+# option?" He is right about the flatness and the fix is not a lock. the_dares.md
+# makes dare one the ON-RAMP — "she answers on the spot", and two is shut until
+# one is done — so hiding the yes at low corruption shuts the whole chain behind
+# the house content. And the same page says corruption is "the body ones only",
+# which dare one is not, so this rung must not move the meter either.
+#
+# What it can do is READ the meter. Same node, same effects, different words: at
+# corruption under 15 agreeing is a flinch and the label says so; above it, she
+# has a flat yes available to her, and the flatness is hers. The cost of saying
+# it is carried by the prose on the other side, which is where the_dares.md puts
+# it — "her face, and nothing else".
+[[canvases.nodes.exit_block.choices]]
+text       = "Say yes. You cannot think how not to."
+targetType = "node"
+nodeId     = "dare_1_offer.yes"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say yes."
+targetType = "node"
+nodeId     = "dare_1_offer.yes"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say no."
+targetType = "node"
+nodeId     = "dare_1_offer.no"
+
+[[canvases.nodes]]
+id   = "yes"
+name = "All right"
+
+# Two adjacent groups merge into one <<if>>/<<else>> chain, and the one with no
+# conditions is the else. The paragraph after them is outside the chain and
+# renders either way.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "It is out of your mouth before you have decided anything, and your face goes while every one of them is still looking at it. That is the part she wanted and it is the part you cannot take back." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You say it flat, the way you would agree to carry something down a flight of stairs. Nobody gets to watch you decide, and that is the only piece of this that stays yours." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Jules nods once and goes back to her phone like the thing is already done. Bree tells Paige something behind her hand. Nobody walks with you."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "The union, then."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "dare_1_pending"
+op         = "set"
+
+[[canvases.nodes]]
+id   = "no"
+name = "No"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You say no. It comes out smaller than you wanted it and there is a beat where nothing happens at all, which is the worst part of it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_bree" }
+content = "She said no. She actually said no."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Bree does it loud enough for the path. Jules does not join in and does not stop her. That is the arrangement they have. You are still standing where you were, and nothing about the rest of your day has changed except how it is going to sound."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "crowd_standing"
+op         = "add"
+value      = -2
+
+# She asks again in a week, in front of more people. No door shut.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "dare_cooldown"
+op         = "set"
+value      = 7
+
+# --- DOING IT · the room the dare walks her into -----------------------------
+
+[[canvases]]
+id   = "dare_1_do"
+name = "Somebody you've never met"
+description = "Dare one, done. Sets the chain to 1, which opens dare two, and buys the first quiet week."
+
+[canvases.trigger]
+location      = "the_union"
+npc           = "npc_jules"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dare_1_pending", operator = "is_true" },
+] }
+# ⚠️ REPEATABLE ON PURPOSE. Auto-firing would need is_repeatable = false, and
+# that burns once — so if she bottled it the first time and Jules asked again, the
+# union scene would never fire and the chain would stall forever.
+
+[[canvases.nodes]]
+id   = "base"
+name = "The table by the window"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "They are at the window table with three coffees and nothing else in front of them, facing out into the room. They have been there long enough to have picked where they are looking."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "There is a man about forty at the end of the long table with a tray and a book and no interest in anybody. He is the one nearest. That is the whole of the reason."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it."
+targetType = "node"
+nodeId     = "dare_1_do.done"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk past and out the other door."
+targetType = "node"
+nodeId     = "dare_1_do.bottled"
+
+[[canvases.nodes]]
+id   = "done"
+name = "A minute"
+
+# ⚠️ THE CHOICE SAID "Do it." AND SHE DID NOT DO IT. The old version had her walk
+# up and announce the dare — "I have been asked to say something stupid to a
+# stranger and this is it" — which is the one move that costs her nothing. It
+# makes her the witty one, hands the man the joke, and leaves the rung empty:
+# the_dares.md prices dare one at "her face, and nothing else", and announcing it
+# is exactly how somebody keeps their face. She says the stupid thing now.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stop at the man's elbow and tell him, louder than you meant to, that the milk at the counter is free and he should take some while it lasts. None of it is true."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "You hear your own voice do it from somewhere outside your head, and you cannot look at the window table while it is happening. Your face is doing the whole thing for you." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You keep your voice flat and your face still and you say it the way you would read a number off a page. Doing it badly is the part they came for, and they do not get it." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "unknown" }
+content = "Right. Thanks. I'll bear that in mind."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He goes back to his book without once looking over at the window table, which is kinder than anything the three of them have in them. It took under a minute. Bree is still laughing when you get there."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back over to them."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_union"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "dare_1_pending"
+op         = "unset"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "dare_chain"
+op         = "set"
+value      = 1
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "crowd_standing"
+op         = "add"
+value      = 8
+
+# THE ONLY THING A DARE BUYS IN THE FIRST BUILD. Nobody says why and nobody
+# announces it — she just gets a week where the day is only a day.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "quiet_week"
+op         = "set"
+value      = 7
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_jules"
+trait      = "relation"
+op         = "add"
+value      = 4
+
+[[canvases.nodes]]
+id   = "bottled"
+name = "The other door"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You go the length of the room and out the far side without stopping, and you are outside before you have decided that is what you were doing."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Nobody comes after you. Nobody says anything about it the next day either, which turns out to be its own version of saying something."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "dare_1_pending"
+op         = "unset"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "crowd_standing"
+op         = "add"
+value      = -3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "dare_cooldown"
+op         = "set"
+value      = 7
+
+# --- DARE TWO · the first one that does not end when it ends -----------------
+# THAT GAP IS THE CLIMB. One is a minute. Two is four hours of being looked at,
+# and she agrees to all four of them in the two seconds she has to answer.
+#
+# ⚠️ TWO IS SHUT UNTIL ONE IS DONE. A chain, not a number she can reach some
+# other way.
+#
+# ⚠️ Dare two is the FIRST one about her body, so it is the only one that touches
+# exposure and corruption. It is also public, so it is where `reputation` moves
+# for the first time in this game.
+
+[[canvases]]
+id   = "dare_2_offer"
+name = "Jules again"
+description = "Dare two. The jacket goes in her bag here and stays there until she goes home — and the rest of that day is delivered by the picking-on system, which reads jacket_off."
+
+[canvases.trigger]
+location      = "the_quad"
+npc           = "npc_jules"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "dare_chain", operator = "eq", value = 1 },
+  { type = "trait", subject = "player", trait_key = "dare_cooldown", operator = "lte", value = 0 },
+  { type = "flag", subject = "player", flag_key = "jacket_off", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The wall by the doors"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She does not say your name across the path this time. She waits until you are close enough that she can say it at a normal volume, which is somehow worse, because it means you are near enough now to be spoken to like that."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_jules" }
+content = "Jacket. In the bag. And it stays in the bag until you go home tonight, and we'll know, because we'll see you."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "What is under it is a top you picked this morning for being under a jacket. Bree has already looked. It is eleven in the morning and you are on a campus you cannot leave until five."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it off."
+targetType = "node"
+nodeId     = "dare_2_offer.yes"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say no."
+targetType = "node"
+nodeId     = "dare_2_offer.no"
+
+[[canvases.nodes]]
+id   = "yes"
+name = "In the bag"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You get it off in the middle of the path, roll it, and put it in the bag. Then the air on your arms tells you the size of what you just agreed to. Six hours. You had two seconds."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_jules" }
+content = "There. That wasn't hard, was it."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She says it without any edge on it at all, then goes back to her phone. Paige tells you she likes the top, and means it. That is worse than Bree would have been."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Six hours, then."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "jacket_off"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "dare_chain"
+op         = "set"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "crowd_standing"
+op         = "add"
+value      = 12
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "exposure"
+op         = "add"
+value      = 4
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+# `reputation` moves for the first time in this game. Dare two is public and it
+# is about her, which is exactly what reputation measures.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "reputation"
+op         = "add"
+value      = 6
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "quiet_week"
+op         = "set"
+value      = 7
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_jules"
+trait      = "relation"
+op         = "add"
+value      = 6
+
+[[canvases.nodes]]
+id   = "no"
+name = "Not that one"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You say no to this one, and it is easier than the first no was, because you have already found out that the ground does not open."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_jules" }
+content = "All right. Ask me again in a bit and I'll have thought of something else."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "That is the part that stays with you: she did not say no back. She put it down somewhere she can pick it up again, and she let you watch her do it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_quad"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "crowd_standing"
+op         = "add"
+value      = -2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "dare_cooldown"
+op         = "set"
+value      = 7

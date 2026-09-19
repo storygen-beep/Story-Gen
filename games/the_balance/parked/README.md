@@ -89,3 +89,84 @@ page reads *"a senior at her college"*. Round 3 of `sheets/BASE.md` (the househo
   moves, and `move_up_counter` never opens — the ending on `RELEASE.md` can't be reached. Probed live
   after the park: 7/7.
 - **The Go Live launcher**, her room only. **Cara's messages.** The engine, and every sheet.
+
+---
+
+## The climbs — parked the same day
+
+LO, after reading how Jules's dares and the cafe job climb: *"So they shouldn't climb. We are talking
+about base here. Not more than that."* Then: *"Go ahead park all the climb."*
+
+`sheets/BASE.md`'s own test decides what goes: *"If it changes because of what she's done, it belongs to
+a ladder."* **This is different from the first park.** That one took out work nobody designed. This one
+takes out work that **was** designed, on LO's signed pages: `RELEASE.md`, `the_dares.md`,
+`the_move_up.md`, `the_cafe.md`, `the_two_doors.md` and `the_phone.md`. It's block 5, the ladders, and
+it's parked so that the base can be decided without it pulling the rows. **Those pages are still the
+citation** when a ladder brings it back. The TOML here is how it was built, not a new decision.
+
+### The line
+
+**Out (a climb):** anything that reads or moves a progress meter, or is a step in a chain. A chain's
+first step goes too: dare one, "Take your top off.", @nate's door, the first customer.
+
+- her three meters, `exposure` · `corruption` · `reputation`, and `followers`
+- the cafe: `shifts_worked` · `owen_standing` · `move_up` · `cust_hand_done`
+- the dares: `dare_chain` · `dare_cooldown` · `dare_1_pending` · `jacket_off` · `quiet_week` · `crowd_standing`
+- going live: `stream_top_done` · `stream_naked_done` · `stream_touch_done`
+- the doors: `nate_seen` · `nate_landing` · `saw_them`
+- **every NPC `relation` and `arousal` write.** With Cara's later messages parked, nothing read them.
+
+**Stays (base systems, not climbs):**
+- needs: `rest`, `clean`
+- money: `cash`, `debt_left`, the Friday $150, the chore, the bus
+- attendance: `attend_1..4`
+- Gil's rules: `home_after_ten`, `fridays_missed`
+- the job itself: `has_job`
+- the day caps and `door_locked`
+
+`exposure`, `corruption` and `reputation` (with their sidebar words) and `followers` (with its visible
+count) stay **declared**, but nothing moves them.
+
+**A base scene that read a climb keeps exactly what a fresh save sees**, and nothing else. No prose was
+written. **No schedule row moved.**
+
+### What's here
+
+| file in `climbs/` | what |
+|---|---|
+| `cafe.toml` | `shift_counter`, `cust_hand`, `cust_showing`, `office_closer`, `move_up_counter` |
+| `dares.toml` | `dare_1_offer`, `dare_1_do`, `dare_2_offer` |
+| `house_doors.toml` | `nate_door`, `master_bedroom`, `master_caught` |
+| `cara_thread.toml` | `cara_rumour`, `cara_coffee`, `cara_cool`, `cara_last`: each is gated on her relation or on exposure |
+| `systems.toml` | eight counters' declarations and labels, three `[engine.daily_tick]` pieces, the three dare quest cards. Not loadable as one file: each piece goes back into the table named above it |
+| `before_the_strip.toml` | **the 25 base scenes and messages that had a climb cut out, whole, as they stood before the cut**: the stream, the floor shift, the board, Friday, the four picking-on ambients, the three listening scenes, the classroom door, Paige, Bree ×2, dinner, the opening, asking for the job, Cara ×2 at the union, Sam ×2, Tasha walking in, and Cara's first two messages |
+
+Every canvas and message in these files was checked equal to the built one before it came out.
+
+### What the base scenes lost
+
+| scene | cut |
+|---|---|
+| `stream` | the three rungs and their nodes · followers, exposure, corruption · the 500 and 2,000 pay bands (the $8–25 band stays) · the landing week's line and lock |
+| `shift_floor` | both customer swaps · `shifts_worked +1` · `move_up lt 2` |
+| `canvas_ask_owen` | `move_up set 1` |
+| `the_schedule` | the counter version of the board · the locked closing-shift choice |
+| `friday_payment` | "Ask him for a bit more time." and its node |
+| `picked_quad` / `_union` / `_lecture` / `_stop` | the `quiet_week` switch · the jacket and exposure 20/40 versions · "Say something back." |
+| `listen_union` / `_quad` / `_before` | the exposure 15/40 versions |
+| `classroom_door` | "Stay and watch properly." · "Let them see you there." · their nodes and `after` · corruption on the freeze |
+| `paige_is_nice`, `bree_takes_it_home` | the after-a-dare lines · the crowd_standing / reputation choices |
+| `bree_catches` | "Go over." |
+| `dinner` | @nate's landing line |
+| relation writes | the opening, Friday, dinner, Tasha walking in, Cara and Sam at the union, Sam in class, Cara catching her, Paige, Cara's first two messages |
+
+### What this leaves, on purpose
+
+- **No ending.** The closing shift was the last step of the cafe climb.
+- **One explicit beat**, the classroom door's first screen.
+- **Owen's office row stays and is DEAD.** Its only reason was `office_closer`; rows are block 1, and
+  round 4 of `BASE.md` decides it. The "What stayed" entry above predates this.
+- **Jules has no card.** Her rows stay, and `presence.py` lists them.
+- **Cara's messages:** the first two stay (the opening, the job), without relation.
+- `presence.py` now reports 13 DEAD rows. `walks.py` has five more `PARKED_ROUTES`: `cafe_climb`,
+  `stream_climb`, `doors`, `dares`, `cara_thread`.

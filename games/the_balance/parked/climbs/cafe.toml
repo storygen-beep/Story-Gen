@@ -1,0 +1,515 @@
+# PARKED 2026-09-19 (the climbs) — 5 scenes: the cafe climb — the counter shift, both customer steps, the office, the move up.
+# Copied verbatim from ccf4541, design comments included. NOT merged: parked/ is outside
+# toml_phases/. This was DESIGNED work — sheets/RELEASE.md, sheets/systems/the_move_up.md and sheets/places/the_cafe.md — and it is the ladder
+# layer, block 5 of sheets/BASE.md. It comes back when that ladder has its page.
+
+# ── from toml_phases/3_activities.toml
+
+# --- THE COUNTER · four shifts, and some say in which ------------------------
+# Same $55. The counter pays in SHIFTS, not in a rate — the rate only moves at
+# closing. Different words, because the worst two shifts and four she had some say
+# in are not the same afternoon.
+
+[[canvases]]
+id   = "shift_counter"
+name = "Work the counter"
+# ⚠️ The NAME, not the id, is the key of `game_state.activity_trigger_history`,
+# which is where max_triggers_per_day is counted. Two canvases sharing a name share
+# one day bucket. Harmless while only one of them can ever be open — but it is a
+# silent coupling and a distinct name costs nothing.
+description = "The shift once she is on the counter. Four days, $220 a week — the first week she can pay Friday and still eat. Everyone in the room has to come to her."
+
+[canvases.trigger]
+location      = "the_cafe"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 6
+is_active     = true
+costs         = [{ trait = "clean", value = 20 }]
+show_when_blocked = true
+cooldown_message = "You are not on the schedule today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "12:00"
+end_time   = "17:00"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_showing"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 8 },
+  { type = "flag", subject = "player", flag_key = "cust_hand_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "cust_hand"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 40 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shift"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Behind the counter the whole five hours. Everyone who wants anything has to come to you and say it to your face, so most of them look at you for the length of the saying." },
+  { type = "paragraph", content = "You work the machine and the till and the queue at once. It is easier than the floor but more of you on show, and the two arrived together." },
+  { type = "paragraph", content = "Owen takes the floor and leaves you the counter. He is out there with his back to you most of the afternoon, and you can feel exactly when it isn't." },
+  { type = "paragraph", content = "Four deep at one, nobody at three. The queue is the part that pays; the empty hour is the part where the man at the window is still there." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Counter's yours today. Don't let the queue get round the door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Till was eleven out on Tuesday. I'm not saying it was you. I'm saying I count it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're better at this than the floor. That's why you're on it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Clock off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 300
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 55
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "shifts_worked"
+op         = "add"
+value      = 1
+
+# ── from toml_phases/5_scenes.toml
+
+# --- CUSTOMER STEP 1 · a hand that doesn't get moved · $10 -------------------
+# substitution_only: reachable ONLY as a target of the shift's dice roll. It
+# carries the shift's own pay and count, because it WAS the shift.
+
+[[canvases]]
+id   = "cust_hand"
+name = "The window table"
+description = "Customer step one. The bigger note is the asking; taking it is the answer. Carries the shift payoff plus $10. Moves exposure and corruption. Sets cust_hand_done, which opens step two."
+
+[canvases.trigger]
+location          = "the_cafe"
+is_repeatable     = true
+max_triggers_per_day = 1
+substitution_only = true
+priority          = 5
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Under the saucer"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Four hours in, the man at the window table puts a ten under his saucer where you can see it. The bill was six. He doesn't look up when you come over."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "unknown" }
+content = "No rush. I'm not going anywhere."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "There is nobody at the next two tables. Owen is out the back with the door shut."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Clear the table. Leave the ten."
+targetType = "node"
+nodeId     = "cust_hand.refused"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Clear the table. Take the ten."
+targetType = "node"
+nodeId     = "cust_hand.taken"
+
+[[canvases.nodes]]
+id   = "taken"
+name = "Nine seconds"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You put the plate down. His hand goes flat on the back of your thigh, up under the hem, and stays. You straighten with the tray against your hip. He takes a handful of your ass and tests whether it moves. It doesn't. Two fingers slide along the seam of your panties and press where your cunt is. Twice. Then his hand comes off your ass and he picks his phone up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Straighten up."
+targetType = "node"
+nodeId     = "cust_hand.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Ten dollars"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Ten dollars is two hours of the list on the fridge. That took nine seconds and all you had to do was not move."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the tray back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "cust_hand_done"
+op         = "set"
+
+# The TIP only. The shift itself — $55, the count, the five hours — was applied by
+# the parent canvas before this screen ever rendered.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "exposure"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 4
+
+[[canvases.nodes]]
+id   = "refused"
+name = "Six is six"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take the plate and the saucer and leave the ten sitting on the table, and he watches you do it. He is gone before you come back round with the cloth. The ten is gone with him."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish the shift."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 2
+
+# --- CUSTOMER STEP 2 · showing more · $30 ------------------------------------
+
+[[canvases]]
+id   = "cust_showing"
+name = "Thirty on the table"
+description = "Customer step two. Opens only after step one and at corruption 20. Carries the shift payoff plus $30, and moves exposure harder because more of her has been seen."
+
+[canvases.trigger]
+location          = "the_cafe"
+is_repeatable     = true
+max_triggers_per_day = 1
+substitution_only = true
+priority          = 6
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Before he asks"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "A man puts thirty on the table before he orders, and the thirty is the asking. Then he orders. The far glass is the one he wants clearing, and it is right against the wall."
+
+# The customers stay FACELESS — strangers with money, never people with names.
+# "unknown" is the block type that says that and still lets them talk.
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "unknown" }
+content = "Flat white. And the far glass wants clearing, when you've got a minute."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Two tables have people at them. Neither is looking this way yet."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Reach for it the short way."
+targetType = "node"
+nodeId     = "cust_showing.refused"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Reach across the table for it."
+targetType = "node"
+nodeId     = "cust_showing.taken"
+
+[[canvases.nodes]]
+id   = "taken"
+name = "Longer than the glass needs"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You lean across the table. The shirt falls open and you stay down there longer than the glass needs. He doesn't have to move to look at your tits. His thumb gets under the cup and pushes it up off your nipple, and he looks at that too. His other hand goes up the back of your thigh, takes your ass, and stays there."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the glass."
+targetType = "node"
+nodeId     = "cust_showing.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Thirty"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Thirty is half a shift. It is also the first time anyone in this town has seen that much of you, and the room has people in it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Straighten up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "exposure"
+op         = "add"
+value      = 6
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes]]
+id   = "refused"
+name = "The short way"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You walk round the table and pick the glass up from the other side, standing straight the whole way. He takes the thirty back off the table and puts a five down instead, but neither of you says a word about either number."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish the shift."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = 5
+
+# --- THE OFFICE · the second key ---------------------------------------------
+# the_move_up.md: BOTH keys, every step, and it needs both. Shifts worked is proof
+# she can do the job. This is the other one — and there is no move he can make on
+# his own, so it is hers to not step back from.
+
+[[canvases]]
+id   = "office_closer"
+name = "The office"
+description = "The second key. He stands closer than he needs to and she chooses whether to step back. Sets owen_standing, without which eight shifts buys nothing."
+
+[canvases.trigger]
+location      = "the_back_room"
+npc           = "npc_owen"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "shifts_worked", operator = "gte", value = 4 },
+  { type = "trait", subject = "player", trait_key = "owen_standing", operator = "lt", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "At the wall"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He is at the schedule on the wall with a pen, working out next week. The office is small and he moves over to give you room at the board, except that he doesn't move, he comes in beside you."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Thursday I've got you down for. Say now if that's no good, because I'm not moving it twice."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His arm is against your arm. There is a whole wall free on his other side."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "node"
+nodeId     = "office_closer.stepped"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay where you are."
+targetType = "node"
+nodeId     = "office_closer.stayed"
+
+[[canvases.nodes]]
+id   = "stayed"
+name = "You stay"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You read the board with his arm against yours and neither of you mentions it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Saturday too, if you want the hours. You'd be on with me."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His hand comes to rest flat on your lower back, where a hand goes to move somebody out of a doorway. You are not in a doorway. He does not move you."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He is a strict boss before he is anything else, and none of that has gone anywhere. It just has a hand on your back now."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "owen_standing"
+op         = "add"
+value      = 1
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_owen"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes]]
+id   = "stepped"
+name = "You step back"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take half a step and put the width of a person between you, and he carries on reading the board as though that was the arrangement all along. He talks you through Thursday. Nothing in his voice changes and nothing in it is going to."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 10
+
+# --- THE MOVE UP · both keys, or nothing -------------------------------------
+
+[[canvases]]
+id   = "move_up_counter"
+name = "The counter"
+description = "Step two of the cafe arc. Needs BOTH keys: about eight shifts worked AND owen_standing. Buys four shifts at the same $55 — hours and access, never a better rate."
+
+[canvases.trigger]
+location      = "the_back_room"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
+  { type = "trait", subject = "player", trait_key = "shifts_worked", operator = "gte", value = 8 },
+  { type = "trait", subject = "player", trait_key = "owen_standing", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four lines"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Owen has the pen out, but the board is already done. Your name is on four of the days, and the two that were yours are still two of them."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Counter from Thursday. Same money an hour, four days instead of two. And tell me which of them you want and I'll see."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "That last part is the part he has never said to you before."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back out to the floor."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "move_up"
+op         = "set"
+value      = 2

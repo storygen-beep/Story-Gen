@@ -1,0 +1,128 @@
+# PARKED 2026-09-19 (the climbs) — what left toml_phases/0_systems_spec.toml with the climbs:
+# the counters' declarations and labels, the day-rollover lines that only served them, and
+# the dares' quest cards. Verbatim from ccf4541. NOT merged, and NOT loadable as one TOML
+# file: each piece goes back into the table named above it.
+
+# ── [player.core_traits] — the cafe ladder
+shifts_worked  = 0     # the cafe. Never goes down (the_move_up.md)
+move_up        = 0     # 0 no job · 1 the floor · 2 the counter · 3 closing
+owen_standing  = 0     # the second key on every step up
+
+# ── [player.core_traits] — the dares
+crowd_standing = 0     # where she stands with Jules's lot. Moved by every dare
+                       # taken AND every dare refused, and by answering back in
+                       # front of people. NOT the same as `reputation`, which is
+                       # how much of the campus has heard of her.
+dare_chain     = 0     # A POSITION IN A CHAIN, NOT A TALLY. 0 none, 1 the union,
+                       # 2 the jacket. It decides which dare comes next and
+                       # nothing else. SYSTEMS.md settled that a count of dares
+                       # taken was a second copy of crowd_standing.
+dare_cooldown  = 0     # days until a refused dare comes back. the_dares.md:
+                       # "the same dare comes back about a week later, in front
+                       # of more people." Saying no never shuts a door — it
+                       # costs a louder week and it comes round again.
+quiet_week     = 0     # days left of the random picking-on being off. THE ONLY
+                       # THING A DARE BUYS in the first build — the row, the
+                       # parties and being let in are all waiting, so the only
+                       # honest payoff in four weeks is the thing already running,
+                       # turned down for a week.
+
+# ── [player.core_traits] — Nate's door
+nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when she
+                       # opens his door; counted down by [engine.daily_tick]. While
+                       # it is above zero her own door cannot stay shut, so the
+                       # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
+                       # when the flag has never been set, which would shut the
+                       # stream from the first minute of the game.
+
+# ── [[traits.labels]] — shifts_worked
+[[traits.labels]]
+key    = "shifts_worked"
+label  = "Shifts worked"
+hidden = true
+
+# ── [[traits.labels]] — move_up
+[[traits.labels]]
+key    = "move_up"
+label  = "At the cafe"
+hidden = true
+
+# ── [[traits.labels]] — owen_standing
+[[traits.labels]]
+key    = "owen_standing"
+label  = "Owen"
+hidden = true
+
+# ── [[traits.labels]] — nate_landing
+[[traits.labels]]
+key    = "nate_landing"
+label  = "Somebody on the landing"
+hidden = true
+
+# ── [[traits.labels]] — crowd_standing
+[[traits.labels]]
+key    = "crowd_standing"
+label  = "Where you stand with them"
+hidden = true
+
+# ── [[traits.labels]] — dare_chain
+[[traits.labels]]
+key    = "dare_chain"
+label  = "The dares"
+hidden = true
+
+# ── [[traits.labels]] — dare_cooldown
+[[traits.labels]]
+key    = "dare_cooldown"
+label  = "Before she asks again"
+hidden = true
+
+# ── [[traits.labels]] — quiet_week
+[[traits.labels]]
+key    = "quiet_week"
+label  = "A quiet week"
+hidden = true
+
+# ── [engine.daily_tick] — the jacket
+  # the jacket is back on in the morning. Dare two lasts exactly one day.
+  { targetType = "player", flag = "jacket_off", op = "unset" },
+
+# ── [engine.daily_tick] — Bree's cap
+  { targetType = "player", flag = "bree_today", op = "unset" },
+
+# ── [engine.daily_tick] — the three countdowns
+traitEffects = [
+  { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
+  { targetType = "player", trait = "quiet_week",   op = "add", value = -1 },
+  { targetType = "player", trait = "dare_cooldown", op = "add", value = -1 },
+]
+# It runs past zero into negatives and that is harmless — every read is `lte 0`.
+
+# ── [[quest_cards]] — the dares
+[[quest_cards]]
+id    = "card_dare_1"
+group = "the_crowd"
+text  = "Jules asks for things on the quad, out loud, in front of people. You answer on the spot."
+tip   = "The first one is a minute of your face and nothing else. Saying no shuts no doors."
+when  = [
+  { trait = "dare_chain", subject = "player", op = "lte", value = 0 },
+  { flag = "opening_done", op = "is_true" },
+]
+
+[[quest_cards]]
+id    = "card_dare_2"
+group = "the_crowd"
+text  = "The next one is not a minute. It is the rest of the day, and you agree to all of it in two seconds."
+tip   = "She asks on the quad, between classes."
+when  = [
+  { trait = "dare_chain", subject = "player", op = "eq", value = 1 },
+]
+
+[[quest_cards]]
+id    = "card_quiet"
+group = "the_crowd"
+text  = "Nobody has started on you this week. Nobody said why and nobody is going to."
+tip   = "It runs out. Then it starts again."
+when  = [
+  { trait = "quiet_week", subject = "player", op = "gte", value = 1 },
+]
