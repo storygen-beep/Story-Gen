@@ -13,31 +13,18 @@
 
 | room | what it's for | who's in it |
 |---|---|---|
-| **Her bedroom** | sleep, rest, change, the phone against the books — and **a door she can shut**, which is the only thing that lets her go live | nobody, unless they knock |
+| **Her bedroom** | sleep, rest, change, and the phone against the books | nobody, unless they knock |
 | **The landing** | the middle of the house — four doors and the bathroom open off it | whoever is moving between rooms |
-| **The kitchen** | **three meals with people at them**, the chore list on the fridge, the kettle, and Friday's $150 handed over. **She can cook** — her mum's on the ward, so she makes it; her mum's home, so she helps | **breakfast** Gil, Nate, and her mum on ward mornings · **lunch** Nate, and her mum four days a week · **dinner** everyone who's home, seven nights |
-| **The living room** | the sofa and **the television, which she can actually work** — five channels, a button to change them and a button to turn it off. Rest, and an hour that costs nothing | her mum from eight, Gil from half past, Nate once they've gone up |
-| **The bathroom** | the shower, being clean enough to go live, and **a lock she can break.** She knocks on it until she stops knocking | **all four of them** — Nate at seven, your mum at quarter to eight on ward mornings, Tasha at five, Gil at six |
-| **Nate's room** | his door. Shut in the afternoon and not always shut at night, and the difference is the whole of him | Nate, three to six and again from ten |
-| **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not — and **a shut door she doesn't always hear you through** | Tasha, four till five and six till midnight |
-| **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall. **A card each when they're in, and the other thing is a dice roll** | Gil from nine, her mum too on the four nights she's home |
-| **The garage** | **Gil's workshop.** The van, his tools on the wall in the order he wants them, the bins and the washing machine. Where half the chores are | Nate one till three, doing his dad's work. Gil at five, unloading |
+| **The kitchen** | food, the chore list on the fridge, and Friday's $150 handed over | Gil in the mornings |
+| **The living room** | the sofa and the TV. Rest, and an hour that costs nothing | Nate, once he's back |
+| **The bathroom** | the shower, and being clean enough to go live. It has a lock | shared with Nate and Tasha |
+| **Nate's room** | his door, and it isn't always shut | Nate, evenings and odd hours |
+| **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |
+| **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall | only with the door open |
+| **The garage** | the car, the bins, the laundry — where half the chores are | Gil, late |
 
 **The way out** is the front door onto her street, and the bus stop on it. The bus costs money and
 forty minutes. A lift from Gil is a favour.
-
-## Two different jobs, and only one of them is paid
-
-**The list on the fridge is hers.** Bins, laundry, dishes, the car — Gil's handwriting, five dollars
-each, one paid a day. That is a job.
-
-**What her mum does is the house**, and nobody pays her for any of it. Helping with that is not on
-any list and earns nothing. It is the only thing in this game she does for somebody rather than for
-money, and it is the only long stretch where the two of them are alone in here.
-
-**Cooking is the third.** Nobody in this house had ever cooked — the ward nights were bread and
-whatever was in the fridge, and the game said so out loud. Now she can make it when her mum's at
-work, or stand at the hob with her when she isn't. It pays in Gil and in her mum, never in cash.
 
 ## The chore list on the fridge
 
@@ -55,9 +42,7 @@ be paid for one.**
 
 - **In by ten.** After that the front door is a thing she has to come through, and he's up.
 - **Her door stays open when someone's on the landing.** So closing it is already a small decision,
-  and it's the same door the stream needs shut. **This is a mechanic now, not a mood** — shutting it
-  is a button in her own room, going live is impossible without it, and shutting it on a house with
-  somebody in it goes on a count he reads at the dinner table.
+  and it's the same door the stream needs shut.
 - **Chores first.** The list gets done before she goes anywhere, or he notices.
 
 ## What the house is like in the morning

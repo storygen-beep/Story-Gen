@@ -56,6 +56,30 @@ Pointers, not copies — take them from git when a round needs them.
   `PARKED_ROUTES`, not run by default. The lock route's full-house half is at `ff91336` in the same file.
 - **Nine `presence.py` exemptions** for parked rows. Their written reasons are at `ff91336` in that file.
 
+## The writing about it — parked the same day
+
+LO: *"Go ahead takes the yes one out."* Once the scenes were out, the pages still described them. Taken
+out too, as **whole-file copies of the versions that are gone** — not diffs:
+
+| file here | what it is | the live file now |
+|---|---|---|
+| `sheets_as_built/people/the_cast.md` | +22 · Nate's age and year, the house roles | `sheets/people/the_cast.md` at `273f5ec` |
+| `sheets_as_built/places/the_house.md` | +24 · the two kinds of work, cooking | `sheets/places/the_house.md` at `273f5ec` |
+| `sheets_as_built/systems/the_house_day.md` | +232 · sleep, the television, her door, the week | `sheets/systems/the_house_day.md` at `273f5ec` |
+| `sheets_as_built/systems/the_phone.md` | +20 · Go Live, the work toilet | `sheets/systems/the_phone.md` at `273f5ec` |
+| `sheets_as_built/systems/the_week.md` | +1 · Nate "the year above" | `sheets/systems/the_week.md` at `273f5ec` |
+| `sheets_as_built/systems/walking_in.md` | +16 · three doors on dice at home | `sheets/systems/walking_in.md` at `273f5ec` |
+| `DECISIONS_as_built.md` | +117 · her mum's television and bathroom amendments, Gil out of the van | `DECISIONS.md` at `273f5ec` |
+
+Lines added to the pages as they stood at `ff91336`: **315**. The 328 quoted elsewhere counts every
+commit's additions, including lines a later pass rewrote.
+
+⚠️ **One seam this leaves, on purpose.** The game keeps the role-label fix (`f1b2d59`), so @nate's
+description in the build reads *"a year ahead of you at the same college"* while the restored cast
+page reads *"a senior at her college"*. Round 3 of `sheets/BASE.md` (the household) settles which.
+
+**Nothing in this folder is citable** under `process/README.md` §0a. It is what was built, not what LO decided.
+
 ## What stayed, and why
 
 - **The 43 founding scenes**, at `63df046`, with every prose fix.
