@@ -454,33 +454,17 @@ def walk_lock(page, rep):
     click(page, "Shut the door")
     rep.check("shutting it sets the flag", flags(page).get("door_locked") is True,
               f"door_locked = {flags(page).get('door_locked')}")
-    rep.check("an empty house costs her nothing to shut it out",
-              (traits(page).get("door_noticed") or 0) == 0,
-              f"door_noticed = {traits(page).get('door_noticed')}")
 
-    # The same act with somebody in. @nate is in his room 15:00-18:00 now, which is
-    # the row that made the old schedule-gated stream wrong in the first place.
-    start(page, "Monday", 16, "her_room")
-    apply_flag(page, "door_locked", "unset")
-    rep.check("at four he is home", npc_at(page, "npc_nate") == "nate_room",
-              str(npc_at(page, "npc_nate")))
-    play(page, "her_door")
-    rep.check("with him in, still exactly one way to shut it",
-              sum(1 for x in links(page) if "Shut the door" in x) == 1,
-              str(links(page))[:110])
-    click(page, "Shut the door")
-    rep.check("shutting it on a full house is counted",
-              (traits(page).get("door_noticed") or 0) == 1,
-              f"door_noticed = {traits(page).get('door_noticed')}")
+    # ⚠️ PARKED 2026-09-19: the full-house half of this route. It shut the door with
+    # @nate home at four and asserted `door_noticed` went up and stayed up. Both the
+    # afternoon rows that put him home and the tally itself were parked
+    # (games/the_balance/parked/README.md); the checks are at ff91336 in this file.
 
     rep.check("shut, the door offers the way back open",
               any("Open it again" in x for x in links(page)), str(links(page))[:110])
     click(page, "Open it again")
     rep.check("opening it clears the flag", not flags(page).get("door_locked"),
               f"door_locked = {flags(page).get('door_locked')}")
-    rep.check("the tally does NOT come back down",
-              (traits(page).get("door_noticed") or 0) == 1,
-              f"door_noticed = {traits(page).get('door_noticed')}")
 
     # THE GATE ITSELF, asked of the engine rather than of a label.
     stream_ok = ("SugarCube.setup.triggerConditionsSatisfied((SugarCube.setup.help_data.locationCanvases"
@@ -959,14 +943,10 @@ def walk_kitchen(page, rep):
 
 ROUTES = {
     "opening": walk_opening,
-    "kitchen": walk_kitchen,
     "shift": walk_shift,
     "friday": walk_friday,
     "stream": walk_stream,
     "lock": walk_lock,
-    "afternoon": walk_afternoon,
-    "bathroom": walk_bathroom,
-    "ambients": walk_ambients,
     "doors": walk_doors,
     "class": walk_class,
     "crowd": walk_crowd,
@@ -975,14 +955,32 @@ ROUTES = {
     "travel": walk_travel,
 }
 
+# ⚠️ PARKED 2026-09-19 WITH THE CONTENT THEY WALK. Each route below asserts on scenes
+# and schedule rows that were taken out of the build (games/the_balance/parked/), so
+# run against it they fail or, worse, pass on checks that never reach the scene. They
+# are NOT run by default and are kept, not deleted, so a round in sheets/BASE.md that
+# brings their content back gets its route back with it. Name one to run it anyway.
+#   kitchen    19fee19 · the kitchen's three meals and her mum's week
+#   afternoon  6801814 · @nate's afternoon, the garage
+#   bathroom   972a27b · the bathroom door, the knock and the lock
+#   ambients   2591a11 · the house happening to her
+PARKED_ROUTES = {
+    "kitchen": walk_kitchen,
+    "afternoon": walk_afternoon,
+    "bathroom": walk_bathroom,
+    "ambients": walk_ambients,
+}
+
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     headed = "--headed" in sys.argv
     wanted = args or list(ROUTES)
-    unknown = [w for w in wanted if w not in ROUTES]
+    runnable = {**ROUTES, **PARKED_ROUTES}
+    unknown = [w for w in wanted if w not in runnable]
     if unknown:
-        sys.exit(f"unknown route(s) {unknown}. known: {', '.join(ROUTES)}")
+        sys.exit(f"unknown route(s) {unknown}. known: {', '.join(ROUTES)}"
+                 f" · parked: {', '.join(PARKED_ROUTES)}")
     if not pathlib.Path(BUILD).exists():
         sys.exit(f"no build at {BUILD} — run package_from_toml first")
 
@@ -992,7 +990,7 @@ def main():
             rep.note(f"── {name}")
             start(page, "Monday", 12, "her_room")
             try:
-                ROUTES[name](page, rep)
+                runnable[name](page, rep)
             except Exception as exc:                      # a broken route is a red
                 rep.check(f"{name} ran to the end", False, f"{type(exc).__name__}: {exc}")
         rep.check("no uncaught page errors", not errors, "; ".join(errors[:2]))
