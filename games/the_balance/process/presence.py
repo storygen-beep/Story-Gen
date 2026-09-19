@@ -84,10 +84,20 @@ must report, at that commit:
     1 stranded    — office_closer
     6 on a ladder — the arc steps and friday_payment, which are correct
 
-At HEAD it must report **0 DEAD** and **0 day-capped**. `office_closer` stays
-stranded and the two DEFERRED rows stay printed; both are named to LO and left by
-his call, and they are reprinted every run so that deferring stays a decision
-somebody made rather than something the instrument quietly stopped mentioning.
+⚠️ SINCE THE TWO PARKS OF 2026-09-19 THE BASELINE IS NOT ZERO, AND THAT IS
+EXPECTED. The undesigned content went first and the climbs went after it
+(games/the_balance/parked/README.md), and every card either park took leaves its
+row with nothing on it. After both, HEAD reports:
+
+    13 DEAD       — Gil kitchen 18:00 and master bedroom · Owen's office · Nate's
+                    kitchen, front room ×2 and room · Tasha ×3 · Lynn's master
+                    bedroom · Jules on the quad and at the union
+    0 day-capped · 0 stranded · 1 DEFERRED (Cara's bench)
+
+Those rows are sheets/BASE.md's to decide: a row's card is block 2. Until then
+they are listed every run, so that a dead row stays something LO can see rather
+than something the instrument quietly stopped mentioning. The DEFERRED row is
+LO's call from 2026-09-16 and is reprinted for the same reason.
 """
 
 import pathlib
@@ -124,9 +134,9 @@ OCCUPANCY_ROWS = {
         "the shower in the opening. This row is what makes the bathroom taken — it "
         "blocks the door and shows him on the card, and there is nothing to click. "
         "v2.py:5270-5281 names exactly this case as intentional.",
-    ("npc_gil", "the_master_bedroom", "21:00"):
-        "the other half of the same door. The surface is `master_bedroom`, which is "
-        "solo by design: she is looking, not talking to anybody.",
+    # ⚠️ PARKED 2026-09-19 (the climbs): ("npc_gil", "the_master_bedroom", "21:00"),
+    # "the other half of the same door". Its surface, `master_bedroom`, went with the
+    # house doors (games/the_balance/parked/climbs/), so the row is DEAD and says so.
     ("npc_lynn", "the_kitchen", "19:00"):
         "she is the CONDITION for dinner, not a guest at it — `dinner`'s trigger is "
         "`npc_at_location npc_lynn is_present`, so this row is what makes that scene "

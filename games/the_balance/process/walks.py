@@ -93,6 +93,23 @@ def start(page, day="Monday", hour=12, where="her_room"):
     stand_at(page, where)
 
 
+def dice_off(page):
+    """Pin Math.random high, so no roll in the engine ever lands.
+
+    Every chance in v2 is `Math.random() < chance` — the random ambients' listing
+    (v2.py:5291), their auto-fire on arrival (:5761) and substitutions (:5871) — and
+    this build seeds no PRNG, so the page's own Math.random is the one they read.
+    ⚠️ EVERY ROUTE SHARES ONE PAGE. Always pair it with dice_on, in a `finally`.
+    """
+    page.evaluate("() => { if (!window.__realRandom) window.__realRandom = Math.random;"
+                  " Math.random = () => 0.999999; }")
+
+
+def dice_on(page):
+    page.evaluate("() => { if (window.__realRandom) { Math.random = window.__realRandom;"
+                  " delete window.__realRandom; } }")
+
+
 # ── the routes ───────────────────────────────────────────────────────────────
 
 def walk_opening(page, rep):
@@ -121,6 +138,18 @@ def walk_opening(page, rep):
 
 def walk_shift(page, rep):
     """Slice 2 — the cafe is the first repeatable surface, and it pays."""
+    start(page, "Tuesday", 18, "the_cafe")
+    before = cash(page)
+    rep.check("the floor shift opens", play(page, "shift_floor") is True)
+    click(page, "Clock off")
+    rep.check("the shift pays", cash(page) > before, f"cash {before} -> {cash(page)}")
+    # ⚠️ PARKED 2026-09-19 (the climbs): "the shift is counted" and "the counter is its
+    # own surface". `shifts_worked` and `shift_counter` went with the cafe climb; both
+    # checks are in walk_cafe_climb under PARKED_ROUTES.
+
+
+def walk_cafe_climb(page, rep):
+    """PARKED 2026-09-19 — slice 2 as it stood with the cafe climb in the build."""
     start(page, "Tuesday", 18, "the_cafe")
     before, worked = cash(page), traits(page).get("shifts_worked") or 0
     rep.check("the floor shift opens", play(page, "shift_floor") is True)
@@ -156,6 +185,40 @@ def walk_friday(page, rep):
 
 def walk_stream(page, rep):
     """Slice 4 — clean is spendable and repairable, and going live pays."""
+    start(page, "Tuesday", 13, "the_bathroom")
+    apply_effect(page, "clean", "set", 20, clamp=False)
+    play(page, "wash")
+    click(page, "Dry off")
+    rep.check("the shower repairs clean", (traits(page).get("clean") or 0) > 20,
+              f"clean 20 -> {traits(page).get('clean')}")
+
+    # ⚠️ PARKED 2026-09-19 (the climbs): the rungs, the followers they moved and the
+    # landing week are out, so the session is the one a fresh save gets — sit and talk,
+    # and the first pay band. The old walk is walk_stream_climb under PARKED_ROUTES.
+    start(page, "Tuesday", 13, "her_room")
+    apply_effect(page, "clean", "set", 90, clamp=False)
+    apply_flag(page, "streamed_today", "unset")
+    before = cash(page)
+    play(page, "stream")
+    rep.check("the stream opens when nothing blocks it",
+              "stream" in passage(page), passage(page))
+    click(page, "Set the phone up")
+    click(page, "Sit and talk to them")
+    click(page, "Count it")
+    rep.check("going live pays", cash(page) > before, f"cash {before} -> {cash(page)}")
+    rep.check("going live sets the day flag",
+              flags(page).get("streamed_today") is True,
+              f"streamed_today = {flags(page).get('streamed_today')}")
+
+    start(page, "Tuesday", 13, "her_room")
+    apply_effect(page, "clean", "set", 10, clamp=False)
+    play(page, "stream")
+    rep.check("too dirty to go live shuts the door",
+              not any("phone up" in x for x in links(page)), body(page).strip()[:70])
+
+
+def walk_stream_climb(page, rep):
+    """PARKED 2026-09-19 — slice 4 as it stood with the stream's rungs in the build."""
     start(page, "Tuesday", 13, "the_bathroom")
     apply_effect(page, "clean", "set", 20, clamp=False)
     play(page, "wash")
@@ -243,7 +306,28 @@ def walk_class(page, rep):
 
 
 def walk_crowd(page, rep):
-    """Slice 7 — the dares are a chain, and two is shut until one is done."""
+    """Slice 7 — the picking-on fires, and nobody talks about a dare.
+
+    ⚠️ PARKED 2026-09-19 (the climbs): the dares are out of the build, so the half of
+    this route that did them is walk_dares under PARKED_ROUTES. What is left guards the
+    other direction: no line about a dare leaks back into the crowd while there are none.
+    """
+    start(page, "Monday", 12, "the_quad")
+    rep.check("the picking-on can fire", play(page, "picked_quad") is True)
+    crowd_talk = set()
+    for _ in range(16):
+        play(page, "bree_takes_it_home")
+        crowd_talk.add(body(page))
+        play(page, "paige_is_nice")
+        crowd_talk.add(body(page))
+    rep.check("nobody refers to a dare",
+              not any("knows, by the way" in b or "about the dare" in b for b in crowd_talk),
+              f"{len(crowd_talk)} screens sampled")
+
+
+def walk_dares(page, rep):
+    """PARKED 2026-09-19 — slice 7 as it stood: the dares are a chain, and two is shut
+    until one is done."""
     start(page, "Monday", 12, "the_quad")
     rep.check("the picking-on can fire", play(page, "picked_quad") is True)
 
@@ -312,7 +396,22 @@ def walk_house(page, rep):
 
 
 def walk_phone(page, rep):
-    """Slice 9 — Cara's thread gets shorter, and that is the mechanic."""
+    """Slice 9 — the phone arrives with the game.
+
+    ⚠️ PARKED 2026-09-19 (the climbs): Cara's thread getting shorter ran on her relation,
+    and the messages that read it are parked. Those checks are walk_cara_thread under
+    PARKED_ROUTES.
+    """
+    start(page, "Monday", 12, "her_room")
+    # It is game_state.phone — there is no top-level `phone_state`.
+    phone = (sv(page).get("game_state") or {}).get("phone")
+    rep.check("the phone is bought by finishing the opening", phone is not None,
+              f"game_state.phone keys: {list(phone)[:5] if isinstance(phone, dict) else phone}")
+
+
+def walk_cara_thread(page, rep):
+    """PARKED 2026-09-19 — slice 9 as it stood: Cara's thread gets shorter, and that is
+    the mechanic."""
     start(page, "Monday", 12, "her_room")
     # It is game_state.phone — there is no top-level `phone_state`.
     phone = (sv(page).get("game_state") or {}).get("phone")
@@ -330,7 +429,7 @@ def walk_phone(page, rep):
               warm > rel and cold == 0, f"{rel} -> {warm} -> {cold}")
 
 
-def walk_travel(page, rep):
+def _travel(page, rep):
     """Slice 10 — the map itself. Every room can be left, and being broke never
     seals her into one.
 
@@ -348,15 +447,16 @@ def walk_travel(page, rep):
     fired, the queued Engine.play("TravelBlock") won and the only link on it went
     back where she came from. Verified on the pre-fix build, both branches.
 
-    ⚠️ quiet_week SILENCES THE AMBIENTS ON PURPOSE. A random canvas taking the
+    ⚠️ THE DICE ARE OFF FOR THIS WHOLE ROUTE, ON PURPOSE. A random canvas taking the
     screen on arrival is the documented cause of three false failures in this
     file (see the module docstring), so this route removes the dice and asks
-    `current_location` — state — whether she moved.
+    `current_location` — state — whether she moved. It used to do that by setting
+    `quiet_week`, which the ambients read; that counter went with the dares on
+    2026-09-19, so walk_travel below pins Math.random instead (dice_off).
     """
     # --- broke, in the deepest room on campus --------------------------------
     start(page, "Monday", 11, "the_lecture_hall")
     apply_effect(page, "cash", "set", 0, clamp=False)
-    apply_effect(page, "quiet_week", "set", 7, clamp=False)
     goto(page, "Location_the_lecture_hall")
     before = sv(page)["game_state"]["time_state"]
     click(page, "Leave The Lecture Hall")
@@ -392,7 +492,6 @@ def walk_travel(page, rep):
     # --- and the fare still bites when she has it ----------------------------
     start(page, "Monday", 9, "the_bus_stop")
     apply_effect(page, "cash", "set", 10, clamp=False)
-    apply_effect(page, "quiet_week", "set", 7, clamp=False)
     goto(page, "Location_the_bus_stop")
     offered = links(page)
     rep.check("both ways out are their own link at the stop",
@@ -423,6 +522,15 @@ def walk_travel(page, rep):
     rep.check("broke, the walk is untouched on its own screen",
               not locked(page) and len(links(page)) == 3,
               f"{len(locked(page))} locked, {len(links(page))} live: {str(links(page))[:90]}")
+
+
+def walk_travel(page, rep):
+    """Slice 10 — the map itself, walked with the dice off. See _travel."""
+    dice_off(page)
+    try:
+        _travel(page, rep)
+    finally:
+        dice_on(page)
 
 
 def walk_lock(page, rep):
@@ -947,7 +1055,6 @@ ROUTES = {
     "friday": walk_friday,
     "stream": walk_stream,
     "lock": walk_lock,
-    "doors": walk_doors,
     "class": walk_class,
     "crowd": walk_crowd,
     "house": walk_house,
@@ -964,11 +1071,24 @@ ROUTES = {
 #   afternoon  6801814 · @nate's afternoon, the garage
 #   bathroom   972a27b · the bathroom door, the knock and the lock
 #   ambients   2591a11 · the house happening to her
+#
+# The climbs, parked the same day (games/the_balance/parked/climbs/). These walked
+# DESIGNED content, block 5 of sheets/BASE.md, and come back with their ladders.
+#   cafe_climb    the shift counted, and the counter as its own surface
+#   stream_climb  the top-off rung, followers moving, and the landing week's lock
+#   doors         @nate's door and the master bedroom
+#   dares         the chain, the quiet week, and the dare reaching Nate's year
+#   cara_thread   Cara's relation moving both ways
 PARKED_ROUTES = {
     "kitchen": walk_kitchen,
     "afternoon": walk_afternoon,
     "bathroom": walk_bathroom,
     "ambients": walk_ambients,
+    "cafe_climb": walk_cafe_climb,
+    "stream_climb": walk_stream_climb,
+    "doors": walk_doors,
+    "dares": walk_dares,
+    "cara_thread": walk_cara_thread,
 }
 
 

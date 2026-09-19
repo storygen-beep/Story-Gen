@@ -224,6 +224,14 @@ parked 9-19    THE HOUSE PASSES ARE OUT OF THE GAME. 24 commits after 273f5ec bu
                launcher for her room, her door). 50 canvases, 24 rows. The 35 scenes
                are in parked/, verbatim — read parked/README.md before bringing any
                back. Nothing returns except through its block's round in BASE.md
+parked 9-19    THE CLIMBS ARE OUT TOO, THE SAME DAY. LO: "So they shouldn't climb. We are
+  (the climbs) talking about base here." — then "Go ahead park all the climb." This one
+               was DESIGNED work (RELEASE.md and its system pages), parked because it is
+               block 5, the ladders. Out: the cafe climb, Jules's dares, the two house
+               doors, the stream's rungs, Cara's later messages, and every read or write
+               of a progress meter or an NPC relation. 39 canvases, 2 phone messages, 24
+               rows; the game has no ending and one explicit beat, on purpose. The line
+               and the files are in parked/README.md, "The climbs"
 written        WANT.md · v2_state.json · DECISIONS.md · sheets/RELEASE.md
                sheets/OPENING.md · sheets/SYSTEMS.md
                systems: money · the_week · the_phone · her_meters · college

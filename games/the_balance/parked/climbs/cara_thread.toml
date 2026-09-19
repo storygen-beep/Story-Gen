@@ -1,0 +1,114 @@
+# PARKED 2026-09-19 (the climbs) — 4 phone messages: Cara's thread after the first two — gated on her relation or on exposure.
+# Copied verbatim from ccf4541, design comments included. NOT merged: parked/ is outside
+# toml_phases/. This was DESIGNED work — sheets/people/the_cast.md and sheets/systems/talk.md — and it is the ladder
+# layer, block 5 of sheets/BASE.md. It comes back when that ladder has its page.
+
+# ── from toml_phases/8_phone.toml
+
+# --- 3 · she repeats what the crowd says and never knows it is true ----------
+# the_cast.md, in those words. It arrives once her exposure is up enough that
+# there is something going round, and she has no idea she is telling her about
+# herself.
+
+[[phone.conversations]]
+id     = "cara_rumour"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exposure", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 8 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok don't be weird but there's a thing going round about a girl in our year doing stuff online. like properly"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "and everyone's being SO horrible about it and I keep thinking, she's just broke isn't she. that's all it is"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Yeah. She's probably just broke.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
+  { text = "Who's saying it?", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 1 }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "everyone. that's the thing. nobody's even started it, it's just there"
+
+# --- 4a · WARM · the coffee that actually gets arranged ---------------------
+
+[[phone.conversations]]
+id     = "cara_coffee"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 4 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "gte", value = 14 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "right. I'm booking you. an actual hour where you're not going anywhere after"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you've been on that bus more than you've been anywhere else and I'm the only one who's noticed, which is a bit grim when you say it out loud"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Book me then.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = 3 }] },
+  { text = "I've got a shift. I've always got a shift.", effects = [{ targetType = "npc", npcId = "npc_cara", trait = "relation", op = "add", value = -2 }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "I know. that's sort of what I'm saying"
+
+# --- 4b · COOL · two lines, and no reply offered ----------------------------
+# She never confronts and never judges. She just gets harder to reach.
+
+[[phone.conversations]]
+id     = "cara_cool"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 6 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 6 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "saw you go past the union today"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "anyway. hope work's ok"
+
+# --- 5 · the last one ------------------------------------------------------
+
+[[phone.conversations]]
+id     = "cara_last"
+app    = "messages"
+npc    = "npc_cara"
+notify = "Cara texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "opening_done", operator = "gte", value = 10 },
+  { type = "trait", subject = "npc", npc_id = "npc_cara", trait_key = "relation", operator = "lte", value = 2 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "happy Thursday"
