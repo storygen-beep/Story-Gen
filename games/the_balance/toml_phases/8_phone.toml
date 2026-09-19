@@ -76,11 +76,9 @@ canvas = "stream"
 show_when_locked = true
 locked_text = "Not with the door open. It is four inches of his house and anybody on that landing has it."
 
-[[phone.apps.options]]
-text   = "The one at work, with the lock."
-canvas = "stream_toilet"
-show_when_locked = true
-locked_text = "Not that. Not somewhere anybody could put a hand on the door."
+# The second option — going live in the toilet at work, `stream_toilet` — was PARKED on
+# 2026-09-19 with the rest of the undesigned content. It is in parked/stream_at_work.toml
+# and comes back only when its block in sheets/BASE.md decides it.
 
 # --- 1 · she is still talking to you like September -------------------------
 

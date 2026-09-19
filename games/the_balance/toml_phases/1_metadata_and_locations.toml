@@ -45,197 +45,10 @@ image       = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
 entry_from  = "the_hall"
 
-# The room's own line stops being true the day she breaks the lock.
-[[locations.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-text = "The shower, the mirror, and a lock that turns without catching on anything. It was the only room in this house that was ever properly yours. You are the one who changed that, and you did it on purpose."
-
-# =============================================================================
-# THE DOOR · a threshold instead of the room. engine.md §44, the-map.md R6.
-#
-# ⚠️ R6c SAYS A SHARED ROOM GETS NO DOOR, AND THIS IS A DELIBERATE OVERRULE.
-# "A bathroom, a kitchen, a front room — she walks in. Occupancy is a row INSIDE
-# the room, not a threshold in front of it… a locked bathroom is a sentence, not a
-# screen." Measured across 27 shipped sandboxes. LO was shown it and chose the
-# screen, because in THIS house the lock is a thing she can act on and a sentence
-# cannot be acted on. `gates.py lint_doors` prints the objection on every run —
-# "the_bathroom is scheduled for 4 characters" — and that finding is EXPECTED, is
-# advisory, and must not be silenced.
-#
-# ⚠️ THE TWO-CLICK TAX IS REAL AND IT IS THE PRICE. This is the room she visits
-# most, and an empty bathroom is now one extra click, every time, all game.
-#
-# ⚠️ EVERY `canvas_id` BELOW MUST EXIST AND CARRY A TRIGGER LOCATION. A canvas with
-# no trigger is pruned before the door is built and the option is DROPPED with only
-# a log warning (v2.py:12766-12781). All four targets live at `the_bathroom` with
-# `hidden_from_location = true`, which is the engine's own "door-only" mechanism —
-# five render selectors skip them and nothing else does (v2.py:4793 and four twins).
-#
-# ⚠️ EVERY `conditions` BLOCK CARRIES version = "1.0". Without it the engine fails
-# OPEN and the option is never gated at all.
-[locations.door]
-description = "The door at the top of the stairs. Nobody is behind it and the light is off."
-# R6: the field's refusal runs a median of eight words and is allowed to be the
-# same line every time. The value of the screen is its structure.
-no_answer   = "You stand outside it a minute. There is nothing to be done about a door."
-
-# FIRST MATCH WINS, and `description` above is the <<else>>. Broken-lock variants
-# come first so they beat the locked ones for the same person.
-[[locations.door.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-text = "The light is on and the fan is going, and the handle turns the whole way. It has turned the whole way since the afternoon you made sure it would. Whoever is in there does not know that yet, or has stopped minding."
-
-[[locations.door.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
-] }
-text = "The handle does not turn. The water is going hard enough to hear from the stairs and his boots are outside the door with the day still on them. He is in there twenty-five minutes and he locks it every single time."
-
-[[locations.door.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
-] }
-text = "The handle does not turn, and there is no noise behind it except the water. She has been on a ward for twelve hours and this is the half hour she gets before she sleeps through the middle of the day."
-
-[[locations.door.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
-] }
-text = "The handle does not turn. There is music coming through it and she is singing over the top of the music without getting any of it right. Tasha locks doors the way she does everything, loudly and without meaning much by it."
-
-[[locations.door.description_variants]]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
-] }
-text = "The handle does not turn. The fan is on and the water has been running long enough to have gone through the tank, and he is not hurrying, and there is a bus in twenty minutes that you are going to be on and he is not."
-
-# --- the ways through --------------------------------------------------------
-
-[[locations.door.options]]
-text       = "Go in."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
-] }
-goes_to    = { type = "enter" }
-
-# ⚠️ TASHA'S KNOCK IS THE ONLY ONE THAT OPENS, and it routes straight into her
-# existing hub rather than the shared knock canvas. She locks it against @nate and
-# @gil and lets Nell in, which is better characterisation than the line it
-# replaced — and it is also load-bearing: `hub_tasha_bath` is her entire three-rung
-# arc, it has no schedule of its own, and gating it behind a broken lock would have
-# put a finished, shipped ladder out of reach for the first stretch of the game.
-[[locations.door.options]]
-text       = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_false" },
-] }
-goes_to    = { type = "canvas", canvas_id = "hub_tasha_bath" }
-
-[[locations.door.options]]
-text       = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "tasha_open", operator = "is_true" },
-] }
-goes_to    = { type = "canvas", canvas_id = "loop_tasha_bath" }
-
-[[locations.door.options]]
-text       = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_knock" }
-
-[[locations.door.options]]
-text       = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_knock" }
-
-[[locations.door.options]]
-text       = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_knock" }
-
-# The whole point of the broken lock. FOUR ROWS, ONE PER PERSON, and exactly one
-# can ever be live at a time.
-#
-# ⚠️ THE REFUSAL IS IN THE PROSE, NOT ON A ROW, AND IT TOOK TWO LIVE RUNS TO GET
-# THERE. `show_when_locked` greys a row when its conditions FAIL — so the first
-# draft, which gated the greyed row on the lock being INTACT, PASSED those
-# conditions and rendered a live link instead of a refusal. Moving the flag onto the
-# four per-person rows fixed that and broke the other end: after the lock is broken,
-# the three rows for people who are NOT in the room fail their own presence clause
-# and grey, so one live "Open it anyway." came with three greyed twins.
-#
-# A shown-locked row always renders — live or greyed, never absent — so no set of
-# conditions gives "greyed while locked, gone once broken". The door's own
-# description_variants carry it instead, which is what the field does: a median
-# eight-word in-fiction refusal on the threshold, not a UI label.
-#
-# ⚠️ FOUR CANVASES AND NOT ONE, AND THE REASON IS A GATE. A single walk-in canvas
-# carrying all four ladders would author twelve choices on one screen against
-# `a place is not a catalogue`'s cap of eight — the same defect the television
-# pass shipped and had to unpick. Door options are invisible to that gate; a
-# canvas exit_block is not. Splitting by person puts four rows on each screen.
-[[locations.door.options]]
-text       = "Open it anyway."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_nate" }
-
-[[locations.door.options]]
-text       = "Open it anyway."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_tasha" }
-
-[[locations.door.options]]
-text       = "Open it anyway."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_gil" }
-
-[[locations.door.options]]
-text       = "Open it anyway."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_lynn" }
-
-# ⚠️ `knocked_once` IS THE GATE, AND THAT IS walking_in.md RULE 1 AS A MECHANIC:
-# "the first one is written for her… it teaches what this is, and it makes the
-# second one mean something." She cannot reach for the screwdriver until the house
-# has refused her at that door at least once.
-[[locations.door.options]]
-text       = "Have a proper look at that lock."
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", location_id = "the_bathroom", operator = "is_absent" },
-  { type = "flag", subject = "player", flag_key = "knocked_once", operator = "is_true" },
-  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_false" },
-] }
-goes_to    = { type = "canvas", canvas_id = "bath_break" }
-
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day. The kettle is always half full and there is always somebody in here at seven."
+description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
 image       = "locations/the_kitchen.jpg"
 image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
 entry_from  = "the_hall"
@@ -275,28 +88,10 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The van, the bins, the washing machine, and the light @gil leaves on. His tools are on the wall in the order he wants them and half the list on the fridge lives out here."
+description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
 image       = "locations/the_garage.jpg"
-image_search_queries = ["cluttered home garage workbench tools van night", "garage interior washing machine bins strip light"]
+image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
-
-# --- WHERE HE IS WHEN HE IS NOT HERE ------------------------------------------
-# ⚠️ offscreen = true IS A BARE TOP-LEVEL KEY on the location, not a sub-table
-# (template_import.py:1944). It renders no nav card and never appears in any exit
-# list (v2.py:20653-20659), and `world reachable` exempts it (gates.py:5485). The
-# only thing it is for is letting a schedule row say where somebody actually went.
-#
-# ⚠️ IT IS ALSO INVISIBLE TO presence.py, which has no idea the property exists —
-# @nate's 18:00 row here needs a hand-written OCCUPANCY_ROWS entry or the run
-# reports a DEAD row and exits 1.
-#
-# ⚠️ A [locations.door] on one of these is a validation error, and so is a `costs`
-# block that nobody can ever pay. Keep it bare.
-[[locations]]
-id          = "the_gym"
-name        = "The Gym"
-description = "Not a place you have ever been. It is where @nate is between six and seven, and the only thing in his week he does not make a joke out of."
-offscreen   = true
 
 # --- getting anywhere --------------------------------------------------------
 
@@ -415,104 +210,34 @@ entry_from  = "the_cafe"
 [[npcs]]
 id          = "npc_gil"
 name        = "Gil"
-description = "Your mum's husband of three years, and the reason you are at college at all. He works for himself, out of the van, and the garage is where the job lives when he is not on it. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
+description = "Your mum's husband of three years, and the reason you are at college at all. He paid the semester up front and has never once mentioned it. Strict about the house, and he does not drink."
 portrait    = "gil.jpg"
 role        = "step dad"
 relationship = "step dad"
 relationship_options = ["step dad", "mum's husband", "dad", "uncle"]
 customizable = true
-# ⚠️ EXACTLY FOUR — the importer hard-fails at five. "up before everyone" came out
-# to make room for the trade, and it is the only one of the five the game already
-# says elsewhere: his sleep row's activity is literally "asleep, and up before
-# anybody". The other four are load-bearing — DECISIONS.md:93 says a drunk step dad
-# would hand her an excuse for everything.
-tags        = ["works for himself, out of the van", "runs the house his way", "never mentions what he paid", "does not drink"]
+tags        = ["runs the house his way", "never mentions what he paid", "up before everyone", "does not drink"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 
 # ⚠️ customizable = true means the player can rename him, so every authored line
 # says @gil and never "Gil".
 
-# --- BREAKFAST IS HIS, AND IT RUNS SEVEN DAYS -------------------------------
-# ⚠️ WEEKDAYS-ONLY UNTIL 2026-09-17, WHICH CONTRADICTED THE ROW BELOW IT. His van
-# row is [0..6] — he is out on the job on a Saturday and a Sunday like every other
-# day — so a Monday-to-Friday breakfast had him leaving for work at the weekend
-# without eating. The kitchen held nobody at all on a weekend morning.
-#
-# ⚠️ IT ENDS AT 08:15 NOW, NOT 08:00. @nate's new 07:45-08:15 row is what makes
-# breakfast a table with people at it rather than one man and a radio, and a
-# fifteen-minute overlap was not an hour anybody could be in. Half an hour is.
-# On @lynn's ward days she is in here from 06:30 too, so Monday, Wednesday and
-# Friday breakfast holds three of them and she has twenty minutes to the bus.
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
+weekdays   = [0, 1, 2, 3, 4]
 start_time = "06:30"
-end_time   = "08:15"
+end_time   = "08:00"
 activity   = "at the table with the radio on"
-
-# --- HE WORKS FOR HIMSELF, AND THE GARAGE IS THE WORKSHOP ---------------------
-# The cast sheet has said "in the garage late" since the first draft and no row in
-# this game has ever put him out there. This is that row.
-#
-# ⚠️ IT IS THE HOUR BEFORE THE KITCHEN, NOT AFTER IT. Everything from 18:00 on is
-# load-bearing — the kitchen holds `friday_payment` and `dinner`, 20:30 is the
-# television stagger, and 21:00-23:30 upstairs IS one of the two doors. An hour
-# taken from any of those would cost a working surface. 17:00-18:00 was empty.
-#
-# It is also what makes the money make sense. A man who counts five dollars a chore
-# handed over two thousand four hundred in cash without mentioning it, and nothing
-# in the game has ever said how. He is self-employed, he has had good years, and
-# the list on the fridge is in his handwriting because writing jobs down is what he
-# does all day.
-[[npcs.schedules]]
-location   = "the_garage"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "17:00"
-end_time   = "18:00"
-activity   = "unloading the van, still in his work clothes"
 
 # the_week.md: "@gil is there because he's always there at six." Friday evening is
 # when the $150 is handed over, so he has to actually BE in the room.
-#
-# ⚠️ ENDS AT 20:30, NOT 21:00, since the television. He clears the table and comes
-# through for the last half hour of the news. `friday_payment` was shortened to
-# match in the same pass — its own comment says a Friday window that outran his
-# kitchen hours renders a link to a man who is not in the room.
-# --- HE COMES IN OFF THE VAN FILTHY AND HE IS NOT SITTING DOWN LIKE THAT -------
-# ⚠️ HALF AN HOUR TAKEN OFF THE FRONT OF THE KITCHEN, and it is the only half hour
-# in his day that could be taken. 08:00-17:00 he is at work; 17:00 is the garage;
-# 19:00 is dinner; 20:30 is the television stagger; 21:00-23:30 upstairs IS one of
-# the two doors. The kitchen was the only row with slack at either end.
-#
-# ⚠️ `friday_payment` MOVED WITH IT — 17:00-20:30 became 18:30-20:30. Its own
-# comment has warned since the first build that a window outrunning his kitchen
-# hours renders a link to a man who is not in the room. It already carried a dead
-# hour before this; leaving it would have made the dead stretch ninety minutes.
-[[npcs.schedules]]
-location   = "the_bathroom"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "18:00"
-end_time   = "18:30"
-activity   = "in the shower with the door locked, getting the day off him"
-
 [[npcs.schedules]]
 location   = "the_kitchen"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "18:30"
-end_time   = "20:30"
-activity   = "at the table with the radio on low"
-
-# ⚠️ HALF AN HOUR, AND THE STAGGER IS THE POINT. Her mum is on that sofa from
-# 20:00 and he arrives at half past, so 20:00-20:30 is the only window in the game
-# where one parent is in a room without the other. What the late channel costs is
-# different in those two halves, and that is the whole television.
-[[npcs.schedules]]
-location   = "the_front_room"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "20:30"
+start_time = "18:00"
 end_time   = "21:00"
-activity   = "in the chair by the window, watching the news"
+activity   = "at the table with the radio on low"
 
 [[npcs.schedules]]
 location   = "the_master_bedroom"
@@ -520,22 +245,6 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "21:00"
 end_time   = "23:30"
 activity   = "upstairs, door pushed to"
-
-# ⚠️ ASLEEP IS ITS OWN ROW, NEVER AN EXTENSION OF THE ONE ABOVE. That 21:00-23:30
-# row is the master-bedroom door — "door pushed to" is the whole invitation, and
-# `master_bedroom` is scheduled 21:00-22:00 inside it. Widening it to cover the
-# night would have deleted the door and left a man asleep in its place.
-#
-# All seven days, so the midnight wrap resolves in ONE row: the time check
-# (v2.py:3784) handles endTotal < startTotal, and the weekday check (v2.py:3446)
-# runs against TODAY, which only breaks a row whose weekday list is partial. Hands
-# over to his 06:30 kitchen row with no gap.
-[[npcs.schedules]]
-location   = "the_master_bedroom"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "23:30"
-end_time   = "06:30"
-activity   = "asleep, and up before anybody"
 
 [[npcs]]
 id          = "npc_owen"
@@ -601,7 +310,7 @@ role        = "step brother"
 relationship = "step brother"
 relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
-tags        = ["wants you gone", "can't stop looking", "tells the house things", "does his dad's work for nothing"]
+tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
 core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
@@ -617,110 +326,26 @@ start_time = "07:00"
 end_time   = "07:45"
 activity   = "in the shower, taking his time about it"
 
-# --- BREAKFAST, AND IT IS WHAT MAKES BREAKFAST A TABLE -----------------------
-# LO's call, 2026-09-17: the house has three meals and only one of them had more
-# than one person at it. @gil ate on his own every morning of the game.
-#
-# He comes straight out of the shower into this row, eats standing up with one arm
-# in his coat, and is gone before the bus. That is the character, not a
-# convenience: `kitchen_nate`'s midday prose already has him "eating something
-# straight out of the packet, still in his coat".
-#
-# ⚠️ COLLEGE MORNINGS ONLY, matching the shower row above it. At the weekend he
-# sleeps and breakfast is @gil on his own again, which is the point of having
-# different tables rather than one table seven times.
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "07:45"
-end_time   = "08:15"
-activity   = "eating standing up with one arm already in his coat"
-
-# --- HIS AFTERNOON, AND IT IS THE BIGGEST EMPTY BLOCK IN THE GAME -------------
-# He is a year ahead of her at the same college and the timetable ends at noon —
-# class_2 and class_4 both run to 12:00, Monday to Thursday. Until now he vanished
-# from 07:45 to 19:00 and so did everybody else, which is why the house held nobody
-# at all between eight in the morning and four in the afternoon, seven days a week.
-#
-# ⚠️ EVERY ONE OF THESE FOUR ROWS HAS A CANVAS BEHIND IT, and that is not optional.
-# presence.py backs a row four ways — portrait, covered, substitution, occupancy —
-# and a row with none of them is DEAD. `kitchen_nate_lunch`, `garage_nate` and
-# `hub_nate_room` exist for these three; the gym is an OCCUPANCY_ROWS entry because
-# she cannot follow him there.
-[[npcs.schedules]]
-location   = "the_kitchen"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "12:00"
-end_time   = "13:00"
-activity   = "standing at the counter eating something out of the packet"
-
-# ⚠️ THE GARAGE'S FIRST OCCUPANT. It has been a declared room with no people and no
-# canvases since the game was built, and the house sheet has always promised half
-# the chore list lives out there. He does his dad's work because he is asked to and
-# because saying no costs more than doing it, which is the same arithmetic she is
-# on with the $150.
-[[npcs.schedules]]
-location   = "the_garage"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "13:00"
-end_time   = "15:00"
-activity   = "sorting his dad's work out, because he was asked to"
-
-# ⚠️ THIS ROW OVERLAPS HER STREAM HOURS ON PURPOSE. Going live used to be gated on
-# a clock that assumed an empty house; from this pass it is gated on her door being
-# shut. Him being down the landing at three in the afternoon is exactly what the
-# lock is for, and it is the first time in the game the two facts meet.
-[[npcs.schedules]]
-location   = "nate_room"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "15:00"
-end_time   = "18:00"
-activity   = "in his room with the door shut and something on"
-
-# ⚠️ AN OFFSCREEN LOCATION, AND THE FIRST ONE IN THIS REPO. `the_gym` renders no
-# nav card and she can never travel to it (v2.py:20653-20659) — it exists so that
-# "he is out" is a place rather than a hole in the table. College is still a hole,
-# by LO's call: the gym is the hour worth naming.
-[[npcs.schedules]]
-location   = "the_gym"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "18:00"
-end_time   = "19:00"
-activity   = "at the gym, which is the one thing he is not sarcastic about"
-
-# ⚠️ ALL SEVEN NIGHTS NOW, NOT FOUR. He used to eat in the front room on the nights
-# her mum was on the ward; LO's call, 2026-09-17, is that dinner is the kitchen for
-# everyone who is home. The front-room row that held those three nights is gone.
-[[npcs.schedules]]
-location   = "the_kitchen"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
+weekdays   = [1, 3, 5, 6]
 start_time = "19:00"
 end_time   = "20:00"
 activity   = "at the table, eating fast so he can get up"
 
-# ⚠️ HE DOES NOT WATCH TELEVISION. LO's call, 2026-09-17: "I say he doesnt watches
-# tv. That only parents together." So he is off the sofa for the whole of the
-# parents' hour and comes back down the moment they go up. He is not in a room at
-# all 20:00-21:00 — offscreen on purpose, because a bedroom row with nothing
-# behind it is a presence.py DEAD row and his door is fixed at 22:00.
-#
-# ⚠️ THE 21:00 ROW BELOW SURVIVED A DELETION, AND HERE IS WHY IT HAD TO. LO asked
-# for him off the sofa entirely. Three surfaces hang off these front-room hours and
-# NOT ONE of them carries a schedule of its own: `hub_nate_sofa` (a portrait hub on
-# `requires_npc`), `nate_sits_down` (a substitution on `sofa_hour`), and
-# `sofa_hour`'s own prose bands on whether he is on it. Deleting the row would have
-# darkened all three in silence — no build error, no gate, nothing. He is off the
-# sofa for the television hour, which is what the change was actually for.
-#
-# The late hour, every night. the_house_day.md calls this one "the house at its
-# most open" — parents upstairs, Tasha out, doors shut. Sitting with him here is
-# the sit-down; the set is off and what was on it is not his business.
 [[npcs.schedules]]
 location   = "the_front_room"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "21:00"
+weekdays   = [0, 2, 4]
+start_time = "19:00"
 end_time   = "22:00"
-activity   = "on the sofa with his phone, the room to himself"
+activity   = "on the sofa with the TV on"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5, 6]
+start_time = "20:00"
+end_time   = "22:00"
+activity   = "on the sofa with the TV on"
 
 # His door, and the hours it is not always shut. This row IS the invitation —
 # the_two_doors.md: nothing announces it.
@@ -730,21 +355,6 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "22:00"
 end_time   = "23:59"
 activity   = "in his room with the door not quite shut"
-
-# ⚠️ SEPARATE FROM THE ROW ABOVE, for the same reason as @gil's. `nate_door` is the
-# first walk-in in the game and it hangs off "the door not quite shut" — prose that
-# has the lamp on and him looking back at her. Folding asleep into that row would
-# have let the one-time walk-in fire at six in the morning against it. `nate_door`
-# now carries its own 22:00-23:59 schedule so it stays exactly where it was.
-#
-# Starts at 00:00, so it never crosses midnight and the weekday list is never the
-# problem. Hands over to his 07:00 bathroom row.
-[[npcs.schedules]]
-location   = "nate_room"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "00:00"
-end_time   = "07:00"
-activity   = "asleep with the lamp still on"
 
 [[npcs]]
 id          = "npc_tasha"
@@ -767,31 +377,12 @@ activity   = "home, lights on, door open"
 
 # Her hour in the bathroom before she goes out — which is exactly the hour Nell
 # would want it. This row is why `clean` is tight.
-#
-# ⚠️ ONE ROW SPLIT IN TWO, AND THE TOTAL WINDOW IS UNCHANGED ON PURPOSE.
-# `hub_tasha_bath` and `loop_tasha_bath` carry NO schedule of their own — her
-# bathroom row IS their hours, by design, so that the two can never drift. Adding a
-# new hour anywhere in this room would have handed her whole three-rung arc a
-# second daily slot without a line being written. 17:00-17:30 and 17:30-18:00 add
-# up to exactly what was here before, so neither hub moved.
-#
-# ⚠️ "with the door unlocked" IS GONE, and that cost something. LO's call
-# 2026-09-17: everybody locks it now. Not locking it used to be her in two places —
-# this row and the hub's opening line — and both were rewritten. `tasha_walks_in`
-# is untouched: "The lock you didn't turn" is about NELL's lock, not hers.
 [[npcs.schedules]]
 location   = "the_bathroom"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "17:00"
-end_time   = "17:30"
-activity   = "in the shower with the door locked, singing badly"
-
-[[npcs.schedules]]
-location   = "the_bathroom"
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "17:30"
 end_time   = "18:00"
-activity   = "doing her face, and she will open it for you"
+activity   = "doing her face with the door unlocked"
 
 # She is at the table on the nights she is in — which is not Friday or Saturday.
 [[npcs.schedules]]
@@ -807,31 +398,6 @@ weekdays   = [0, 1, 2, 3, 6]
 start_time = "18:00"
 end_time   = "23:59"
 activity   = "in, with music on"
-
-# ⚠️ TWO SLEEP ROWS, AND THE WEEKDAY LIST IS THE MORNING SHE WAKES UP ON — never
-# the night she went to bed. Both start at 00:00 or later so neither crosses
-# midnight, which is the only shape that is safe for a partial weekday list:
-# presence checks the weekday FIRST, against today (v2.py:3446), so a Monday-only
-# row running 23:00-07:00 deletes her the moment the clock passes twelve.
-#
-# Weekday: she is in from 18:00 on Mon/Tue/Wed/Thu/Sun, so the mornings after are
-# Tue/Wed/Thu/Fri/Mon. Out at 10:00 — the_cast.md:36 has her "out until four".
-[[npcs.schedules]]
-location   = "tasha_room"
-weekdays   = [0, 1, 2, 3, 4]
-start_time = "00:00"
-end_time   = "10:00"
-activity   = "asleep, music still going"
-
-# Weekend: "gone Friday and Saturday nights" and "out until four" — so Friday night
-# lands on Saturday morning and Saturday night on Sunday morning. She comes in at
-# four and sleeps through the morning the house is fullest.
-[[npcs.schedules]]
-location   = "tasha_room"
-weekdays   = [5, 6]
-start_time = "04:00"
-end_time   = "12:00"
-activity   = "asleep in what she went out in"
 
 [[npcs]]
 id          = "npc_lynn"
@@ -856,229 +422,14 @@ location   = "the_kitchen"
 weekdays   = [1, 3, 5, 6]
 start_time = "19:00"
 end_time   = "20:00"
-activity   = "at the table she has just cooked at, sitting down for the first time"
+activity   = "at the table, still in the coat she travels in"
 
-# ⚠️ THE HOUR SHE HAS NEVER HAD. Straight from the table to the sofa, and for the
-# first half of it she is the only one in the room — @gil is still clearing the
-# kitchen until half past. This is where her first clickable row in the whole game
-# lives, and it is where the late channel costs least, because she does not look
-# at it. the_cast.md: "she wants her daughter to be fine and she is too tired to
-# check." That line is a mechanic now.
-[[npcs.schedules]]
-location   = "the_front_room"
-weekdays   = [1, 3, 5, 6]
-start_time = "20:00"
-end_time   = "21:00"
-activity   = "on the sofa with her shoes off and a mug going cold"
-
-# ⚠️ STARTS AT 21:00 NOW, NOT 20:00 — she watches an hour first. `master_bedroom`
-# is scheduled 21:00-22:00 and is gated on her being in this room, so the two
-# doors are untouched: she is back upstairs the minute that scene opens.
 [[npcs.schedules]]
 location   = "the_master_bedroom"
 weekdays   = [1, 3, 5, 6]
-start_time = "21:00"
+start_time = "20:00"
 end_time   = "23:59"
 activity   = "in bed with the lamp on, off the ward"
-
-# The other half of her four nights at home. Weekday list is the morning she wakes
-# up on: Tue night runs into Wed, Thu into Fri, Sat into Sun, Sun into Mon. Starts
-# at 00:00 so it never crosses midnight, which is what makes a partial weekday list
-# safe here.
-#
-# ⚠️ This does NOT open `master_bedroom`. That canvas carries its own 21:00-22:00
-# schedule, so her being in the room at three in the morning changes nothing a
-# player can reach. Checked every npc_at_location in the game before adding it.
-[[npcs.schedules]]
-location   = "the_master_bedroom"
-weekdays   = [0, 2, 4, 6]
-start_time = "00:00"
-end_time   = "06:30"
-activity   = "asleep, the alarm set for a shift she is not on"
-
-# ⚠️ THE ROW the_house_day.md HAS BEEN ASKING FOR SINCE IT WAS WRITTEN. Its own
-# hand-off list says "her mum asleep down the hall on a weekday morning is the
-# quietest room in the game and nothing happens in it yet", and its weekday table
-# says "eight to twelve — nobody, except on ward mornings, when her mum is asleep
-# down the hall."
-#
-# She works the ward Monday, Wednesday and Friday nights, so she comes home and
-# sleeps it off on Tuesday, Thursday and Saturday mornings. Those are the only
-# hours between 08:00 and 16:00 when anybody at all is in this house — every other
-# hour of that window was empty in all nine rooms, seven days a week.
-#
-# She is still NEVER TOUCHED. What this buys is a person in the house who is not
-# watching.
-#
-# --- AND SHE WASHES THE WARD OFF BEFORE SHE GETS INTO THAT BED -----------------
-# ⚠️ 07:45 IS CHOSEN SO IT CANNOT TOUCH @nate's ROW. He has the bathroom 07:00-07:45
-# on weekdays, which includes the Tuesday and Thursday she comes home on. Starting
-# at 07:30 would have put two people in one room and left the door screen unable to
-# say which. Her sleep row moved 08:00 -> 08:15 for the same reason in the other
-# direction — nobody is ever in two places.
-#
-# ⚠️ AND IT IS EXACTLY THE TWENTY MINUTES NELL HAS. The game starts at 07:00 and
-# puts her in the kitchen at 07:30 with the bus twenty minutes off. This row is the
-# only content in the house that costs her a class to reach.
-#
-# ⚠️ WHAT SHE IS DOING IN THERE IS A CROSSING AND IT IS LOGGED. DECISIONS.md said
-# "never in a scene as a body" and LO crossed it on 2026-09-17, a second time and
-# under the same heading. She climbs TWO rungs, never the third — she is never seen
-# seeing, at any corruption, and there is no fourth step.
-[[npcs.schedules]]
-location   = "the_bathroom"
-weekdays   = [1, 3, 5]
-start_time = "07:45"
-end_time   = "08:15"
-activity   = "washing the ward off, with the door locked"
-
-[[npcs.schedules]]
-location   = "the_master_bedroom"
-weekdays   = [1, 3, 5]
-start_time = "08:15"
-end_time   = "14:00"
-activity   = "asleep with the curtains shut, straight off the ward"
-
-# =============================================================================
-# HER WEEK, REWRITTEN — LO's call, 2026-09-17
-# =============================================================================
-# She had six rows and about sixty hours a week where she was awake, at home, and
-# the game said she was not in the house. Measured before anything was changed:
-# seventeen empty hours a day on Monday, Wednesday and Friday, thirteen on the
-# mornings after, and twelve on Sunday, her only proper day off. @gil's gap is
-# nine hours and it is 08:00-17:00 — he is on the job. Hers was not a job. It was
-# an unwritten row.
-#
-# ⚠️ THIS BENDS HER OWN SHEET AND THE CROSSING IS LOGGED. the_cast.md:53 reads
-# "Gives the hours. Everything in this game happens while she's out or asleep."
-# She is designed as an absence, and filling her day carelessly would close the
-# windows the stream, the landing and the master bedroom all depend on. So the
-# week below is a NIGHT NURSE'S week, which keeps her out of the way on its own:
-# she is asleep for the afternoon before a shift, asleep for the morning after
-# one, and at the ward for three whole nights. She is still NEVER TOUCHED. This
-# is hours, not a rung.
-#
-# ⚠️ EVERY ROW HERE IS EITHER A SCENE OR A WRITTEN EXCUSE. presence.py backs a row
-# four ways and a row with none of them is DEAD. Breakfast is `hub_lynn_kitchen`,
-# the long middle is `chores_with_mum`, the evening is `cook_with_mum`, the
-# afternoon on the sofa widened `hub_lynn_sofa`'s fence, and the nap is an
-# OCCUPANCY_ROWS entry because a woman asleep is not a thing to click.
-
-# --- ward days: breakfast ------------------------------------------------------
-# Monday, Wednesday and Friday she works that night, so the day is hers and she
-# has slept the night before. This is the only hour in the week she is awake, at
-# home, and NOT wrecked — and her sheet's whole line is "too tired to check". This
-# is the hour she could check.
-#
-# ⚠️ IT OVERLAPS @gil AND @nate ON PURPOSE. His row runs 06:30-08:15 and @nate's
-# new one 07:45-08:15, so on these three mornings the table holds three of them
-# and Nell has twenty minutes before the bus. Tuesday and Thursday it is the two
-# men. At the weekend it is @gil on his own. Three different tables, which is the
-# point of the rows rather than one row seven times.
-[[npcs.schedules]]
-location   = "the_kitchen"
-weekdays   = [0, 2, 4]
-start_time = "06:30"
-end_time   = "09:00"
-activity   = "clearing the table and getting a wash on before anybody asks"
-
-# --- ward days and Sunday: doing the house ------------------------------------
-# LO's question was "07:30-14:00 where out?" and the honest answer is that she is
-# not out. She is doing the house. Nowhere is a hole, not an answer.
-#
-# ⚠️ THESE ARE NOT THE CHORES ON THE FRIDGE. That list is bins, laundry, dishes
-# and the car, it is in @gil's handwriting, it pays five dollars and it is NELL'S
-# JOB. What her mum does is the running of the house and nobody pays her for any
-# of it. `chores_with_mum` is helping; `chore` is working.
-#
-# ⚠️ AND IT IS THE ONLY LONG STRETCH IN THE GAME WHERE THE TWO OF THEM ARE ALONE
-# IN THE HOUSE. Everywhere else her mum is asleep, at the ward, or at a table with
-# three other people. It costs less than it reads: Nell is at college 09:00-12:00
-# Monday to Thursday, so the real overlap is Friday, which has no classes and is
-# also the day the $150 is handed over.
-#
-# ⚠️ SUNDAY IS IN THIS ROW AND THAT IS WHAT FIXES SUNDAY. Her one full day off was
-# twelve empty hours. Her morning is still unnamed — she has a lie-in and nobody
-# wakes her — and she picks the house up from nine like every other free day.
-#
-# ⚠️ IT ALSO HANDS LUNCH A SECOND PERSON FOR FREE. @nate is at that counter
-# 12:00-13:00 every day of the week and had it to himself; four days a week his
-# mother is now in the room. No canvas was needed for it.
-# ⚠️ IT ENDS AT 13:00 AND SHE GOES OUT, AND THAT HOLE IS LOAD-BEARING. The first
-# draft of this row ran to 14:00 and, with the nap starting there, it left the
-# house OCCUPIED EVERY MINUTE OF EVERY DAY — measured: 17 empty hours a week went
-# to zero. `house_empty` is read by `her_door`, so the branch where shutting her
-# own door costs her NOTHING became unreachable for the whole game and every
-# stream would have gone on @gil's count forever. Nothing in the build said a
-# word; walks.py caught it on four assertions at once.
-#
-# She does the house in the morning and goes out for the shop after lunch, which
-# is what the hours were always going to be. The windows that survive are
-# 13:00-15:00 on her ward days and Sunday, and 14:00-15:00 on the mornings after.
-[[npcs.schedules]]
-location   = "the_kitchen"
-weekdays   = [0, 2, 4, 6]
-start_time = "09:00"
-end_time   = "13:00"
-activity   = "working through the house, ironing in front of nothing"
-
-# --- ward days: the nap before the shift --------------------------------------
-# She is on the ward from half six and a night shift is twelve hours. Sleeping the
-# afternoon before one is what people who do this actually do.
-#
-# ⚠️ WHAT IT BUYS IS @nate's DOOR. He is in his room 15:00-18:00 with it not quite
-# shut, and from this pass her mother is asleep behind the next one for the whole
-# of it. Nothing blocks — `nate_door` is gated on `opening_done` and rolls the
-# same either way. The cost lands on `house_empty`, which goes false, so shutting
-# her own door to go live goes on @gil's count more often. That counter exists for
-# exactly this.
-#
-# ⚠️ OCCUPANCY ONLY. There is nothing to click and there must not be. presence.py
-# carries the written excuse; see its OCCUPANCY_ROWS entry keyed 14:00.
-[[npcs.schedules]]
-location   = "the_master_bedroom"
-weekdays   = [0, 2, 4]
-start_time = "15:00"
-end_time   = "18:30"
-activity   = "asleep with the curtains shut, the alarm set for half six"
-
-# --- the nights she is home: up off the ward ----------------------------------
-# She wakes at two having slept since quarter past eight and she is good for
-# nothing. This block was the other hole — five hours a day, three days a week,
-# awake at home and nowhere in the game.
-#
-# ⚠️ NO NEW CANVAS. `hub_lynn_sofa`'s fence widened to cover both her front-room
-# windows, and `sofa_today` caps the room, so sitting with her at three costs the
-# eight o'clock. Choosing which is the decision.
-# ⚠️ FIFTEEN, NOT FOURTEEN. She wakes at two and takes an hour to be a person,
-# which is true of anybody off a night shift and is also what keeps 14:00-15:00
-# the one empty hour on these three days. See the shop hole above.
-[[npcs.schedules]]
-location   = "the_front_room"
-weekdays   = [1, 3, 5, 6]
-start_time = "15:00"
-end_time   = "18:00"
-activity   = "on the sofa with the afternoon on, not watching it"
-
-# --- the nights she is home: cooking ------------------------------------------
-# ⚠️ NOBODY IN THIS GAME HAS EVER COOKED. The word appears three times in the whole
-# corpus and all three are scenery, and @nate's own ward-night line says it out
-# loud: "Nobody has cooked." The chore list is bins, laundry, dishes, the car.
-#
-# LO's split, 2026-09-17: when her mum is on the ward Nell cooks; when her mum is
-# home Nell helps her. Two surfaces, one flag — `cooked_today` — and the table
-# reads it either way.
-#
-# ⚠️ IT STARTS AT 18:00, WHICH PUTS BOTH PARENTS IN THIS ROOM FOR THE FIRST TIME.
-# @gil is out of the shower and in here from 18:30. Nothing depends on him being
-# alone in it, and half an hour of the two of them in one kitchen is the thing the
-# house has never shown.
-[[npcs.schedules]]
-location   = "the_kitchen"
-weekdays   = [1, 3, 5, 6]
-start_time = "18:00"
-end_time   = "19:00"
-activity   = "cooking, with the radio on somebody else's station"
 
 # --- the two on campus who want nothing from her -----------------------------
 # The crowd — Jules, Bree and Paige — is the NEXT piece. These two are the friend

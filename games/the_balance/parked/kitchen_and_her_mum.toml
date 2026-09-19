@@ -1,0 +1,797 @@
+# PARKED 2026-09-19 — 6 scene(s) from 19fee19 "the kitchen has three meals and her mum has a week".
+# Copied verbatim from ff91336, design comments included. NOT merged: parked/ is outside
+# toml_phases/. To bring one back, its block's round in sheets/BASE.md decides it first.
+
+# ── from toml_phases/5_scenes.toml
+# -----------------------------------------------------------------------------
+# DOING THE HOUSE WITH HER · LO's ask, and the best hour in this pass
+# -----------------------------------------------------------------------------
+# ⚠️ THESE ARE NOT THE CHORES ON THE FRIDGE. That list is bins, laundry, dishes
+# and the car, it is in @gil's handwriting, it pays five dollars and it is HER
+# JOB. `chore` is working. This is helping, and nobody is paid for any of it.
+#
+# ⚠️ IT PAYS NO CASH AND THAT IS A GATE, NOT A PREFERENCE. gates.py reports
+# 5 sinks : 9 sources against a field median of 2.2 : 1 — the game already prints
+# more money than it takes, and a second earner in the kitchen makes it worse.
+#
+# ⚠️ AND IT IS THE ONLY LONG STRETCH IN THE GAME WHERE THE TWO OF THEM ARE ALONE
+# IN THIS HOUSE. Everywhere else her mum is asleep, at the ward, or at a table
+# with three other people. It costs less than it reads: she is at college 09:00 to
+# 12:00 Monday to Thursday, so the real overlap is FRIDAY — which has no classes,
+# and is the day the $150 is handed over.
+
+[[canvases]]
+id   = "chores_with_mum"
+name = "Your mum"
+description = "Portrait hub @ the_kitchen, 09:00-14:00 on her ward days and Sunday. The only long stretch where the two of them are alone in the house. Shares `lynn_today`. No cash. Never touched."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_lynn"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4, 6]
+start_time = "09:00"
+end_time   = "14:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Working through it"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The ironing board is up in the middle of the kitchen and there is a pile on the table that has been sorted into piles nobody else can see the logic of. She is halfway through and she is not hurrying." },
+  { type = "paragraph", content = "The machine is on its second load and the back door is open for the smell of it. Your mum has a tea towel over one shoulder and the radio is on the station she never changes." },
+  { type = "paragraph", content = "She is on her knees at the bottom cupboard taking everything out of it. People do that on a day off when they have decided not to sit down and think." },
+]
+
+# ⚠️ @nate IS IN THIS ROOM 12:00-13:00 EVERY DAY OF THE WEEK. Her mum's block runs
+# 09:00-14:00, so four days a week lunch has two people in it and neither of them
+# needed a canvas of their own to be there.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Eat that at the table like a person. I'm not asking you to enjoy it, I'm asking you to sit." },
+  { type = "paragraph", content = "@nate eats it standing up. She lets him, the way she lets @gil not sit down, and there is a whole marriage in how little she pushes any of it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "There is nobody else in this house. @gil is out on the job until five and @nate is wherever @nate is, and the two of you have the whole of it for once." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Give her a hand."
+targetType = "node"
+nodeId     = "chores_with_mum.helped"
+show_when_locked = true
+locked_text = "You have had your go at your mum today, and there is only one of those."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lynn_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "lynn_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "helped"
+name = "An hour of it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take the other end of a sheet and the two of you fold it the way she taught you when you were small. She notices you remembering, but she does not say so. She hands you the next one."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_lynn", trait_key = "relation", operator = "gte", value = 10 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Are you short? You can say if you're short. He does the list because he likes a list, it isn't a test." },
+  { type = "paragraph", content = "It is the one question in this house with money in it that nobody has asked you, and it comes from the person who does not know what the semester cost." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Leave the shirts. He does his own and he'd only do them again, and then I'd have to watch him do it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Tasha's are the ones with everything inside out. Twenty-two years old. I've stopped saying it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You don't have to do this. I'd rather you did, but you don't have to, and those are different." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "An hour goes and neither of you has said anything that would survive being repeated. She is easier to be near than anybody else in this house, and it is the only hour of the week she is in it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave her the last of it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_lynn"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# ── from toml_phases/5_scenes.toml
+# -----------------------------------------------------------------------------
+# COOKING IT HERSELF · the three nights her mum is on the ward
+# -----------------------------------------------------------------------------
+# ⚠️ A SOLO SURFACE IN A ROOM THAT ONLY HAD ONE. `chore` was the whole of it and
+# `chore` is capped at one a day. This is the second thing she can do in here
+# alone, and it is the first thing in the game she does for the house instead of
+# for five dollars.
+#
+# ⚠️ IT DOES NOT PAY CASH. See `chores_with_mum` above — the money gate is already
+# failing at 5 sinks : 9 sources. It pays in @gil, which is where everything else
+# about how she lives in this house gets read.
+#
+# ⚠️ AND SHE CAN SAY NO. `cook` is not obligatory and `dinner`'s else band is the
+# consequence: "Nobody cooked. There is bread, and there is whatever was in the
+# fridge." That line has been in the game since the television pass as the DEFAULT.
+# From today it is something she let happen.
+
+[[canvases]]
+id   = "cook"
+name = "Make something for the house"
+description = "Solo @ the_kitchen, 17:00-19:00 on the three ward nights. Sets `cooked_today`, which `dinner` reads. Pays @gil, never cash."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "cooked_today", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "17:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Nobody else is going to"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The fridge has four things in it that would make one thing. Your mum went at half six and nobody has been in here since, and the table is still wearing this morning." },
+  { type = "paragraph", content = "There is a pan on the drainer that somebody meant to put away. Two men are coming in hungry in an hour and neither of them has ever once thought about that in advance." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You could do nothing. Nothing is what happens most ward nights. Everybody eats standing up out of whatever they find, but nobody in this house has ever called that a problem."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make something proper."
+targetType = "node"
+nodeId     = "cook.made"
+flagEffects = [{ targetType = "player", flag = "cooked_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it. Somebody else can."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "made"
+name = "An hour of it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "It takes longer than it should because you keep checking the one thing that does not need checking. The window steams up. The kitchen smells like somebody lives here."
+
+# ⚠️ HE IS IN THIS ROOM FROM 18:30 AND THE WINDOW RUNS TO 19:00, so whether he
+# walks in on it is decided by when she started. Starting at five buys her the
+# room to herself; starting at six means he watches the end of it.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil comes in on the end of it and stops in the doorway for about a second longer than he needs to, then sits down and puts the radio on low." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You didn't have to do that." },
+  { type = "paragraph", content = "He says it like a correction and eats two plates of it, and that second plate is the only thing in this house that has ever been an apology." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "You get it on the table and go before anybody comes down, because being in here when they find it would be asking, and asking would spoil what it is." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Nobody is going to mention it. You knew that at five o'clock, but you did it anyway. Everything else you have ever done in this house was for five dollars."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get out of the kitchen."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# ── from toml_phases/5_scenes.toml
+# -----------------------------------------------------------------------------
+# COOKING · one flag, two surfaces, and the table reads it either way
+# -----------------------------------------------------------------------------
+# LO's split, 2026-09-17: her mum on the ward means she cooks; her mum home means
+# she helps. `cooked_today` is set by both and read by `dinner`, which does not
+# care which of them it was, only that the food came off her. It clears overnight.
+
+[[canvases]]
+id   = "cook_with_mum"
+name = "Your mum"
+description = "Portrait hub @ the_kitchen, 18:00-19:00 on the four nights she is home. Sets `cooked_today`. Shares `lynn_today`. Never touched."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_lynn"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Six o'clock"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Everything is out on the counter at once and none of it is in an order. Your mum cooks the way she does a shift, four things going and her hands ahead of her eyes, and the radio is on somebody else's station." },
+  { type = "paragraph", content = "She is at the hob with a wooden spoon in one hand and the lid of something in the other, and she has been in this kitchen eleven minutes and remade the whole room." },
+]
+
+# ⚠️ @gil COMES DOWN AT HALF SIX AND THIS IS THE FIRST TIME IN THE GAME THE TWO OF
+# THEM ARE IN ONE ROOM. His shower is 18:00-18:30, hers is the hob, and nothing
+# before this pass ever put the marriage on screen.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil comes down washed and sits where he sits, and she puts a hand flat on his shoulder on her way past the table without either of them saying a word about it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Smells like the good one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "It is just the two of you in here and it will be for half an hour yet. She is already doing more than one person needs to and she has not asked anybody." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Help her with it."
+targetType = "node"
+nodeId     = "cook_with_mum.helped"
+show_when_locked = true
+locked_text = "You have had your go at your mum today, and there is only one of those."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lynn_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "lynn_today",   op = "set" },
+  { targetType = "player", flag = "cooked_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her get on."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "helped"
+name = "Two of you at it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She hands you a knife and a board and tells you what to do with them. She could check on you, but she never once does, and from her that is the entire compliment. The window goes to steam."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_lynn", trait_key = "relation", operator = "gte", value = 10 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "I like this. Don't make a thing of me liking it, I'll stop doing it. But I like this." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Taste that. Not with the spoon you've had in your mouth. Honestly, you're worse than the pair of them." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Four of us and I still cook for six. I've never worked out how to stop doing that." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Your dad couldn't do this either. That's the only nice thing I've got left about him, so I keep it." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The two of you get it on the table by seven and she sits down for the first time since two o'clock. Nobody at that table will say who did what, and she was never going to tell them."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get it on the table."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_lynn"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+# ── from toml_phases/5_scenes.toml
+# =============================================================================
+# THE KITCHEN · LO's pass, 2026-09-17
+# =============================================================================
+# Measured before a line of this was written. The kitchen held ONE card for most
+# of the day — `chore`, and `chore` is capped at one a day, so from the moment she
+# did it the anchor room of the house was EMPTY every hour nobody happened to be
+# standing in it. The room's own description is the list on the fridge and what he
+# pays for it: a payroll noticeboard with a cooker in it.
+#
+# gates.py, same run: rooms carry a median of ONE thing to do, against a field
+# median of three. The kitchen is not unusual. It is where it shows worst.
+#
+# ⚠️ THE SHAPE COPIED HERE IS THE FRONT ROOM'S, because the front room works. It
+# has something to do alone (`sofa_hour`), something with an object (`watch_tv`),
+# a card for each person in it, and ONE room flag so the hour is one hour whoever
+# she spends it with. The kitchen had the work and two of the four people.
+#
+# ⚠️ NOBODY IN THIS GAME HAD EVER COOKED. The word appears three times in the whole
+# corpus and all three are scenery. @nate's own ward-night line said it out loud.
+# LO's split: her mum on the ward means she cooks, her mum home means she helps.
+
+# -----------------------------------------------------------------------------
+# HER MUM AT BREAKFAST · the one hour she is awake and not wrecked
+# -----------------------------------------------------------------------------
+# ⚠️ [0, 2, 4] ONLY. She works Monday, Wednesday and Friday NIGHTS, so on those
+# mornings she has slept the night before and the day is hers. Tuesday, Thursday
+# and Saturday she is coming off a ward at quarter to eight and goes straight to
+# bed, and Sunday she has a lie-in nobody wakes her from.
+#
+# ⚠️ AND IT IS THE TWENTY MINUTES SHE HAS. The game starts at 07:00 and puts her
+# in this kitchen at 07:30 with the bus twenty minutes off. Sitting down here is
+# the same trade the bathroom row is — an hour of the house against a class.
+#
+# ⚠️ SHE IS NEVER TOUCHED. Standing call, DECISIONS.md. This is a woman at a table
+# with a cup, and `relation` is the only meter on her.
+
+[[canvases]]
+id   = "hub_lynn_kitchen"
+name = "Your mum"
+description = "Portrait hub @ the_kitchen, 06:30-09:00 on her ward days. The only hour in the week she is awake, at home and not exhausted. Shares `lynn_today`. Never touched."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_lynn"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "06:30"
+end_time   = "09:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Before the ward"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is up before she has to be, in the cardigan she wears in the house and not the one she travels in. She has a cup she is not drinking and the washing is already going." },
+  { type = "paragraph", content = "She is at the sink with her back to the room, doing something that does not need doing yet. Tonight is a ward night and she has the whole day first, so she is spending it on the house." },
+]
+
+# ⚠️ WHO ELSE IS IN THE ROOM, AND ALL THREE OF THEM CAN BE. @gil sits here 06:30
+# to 08:15 and @nate comes out of the shower into it at 07:45, so a Monday at ten
+# to eight is the only minute of the week the table holds three of them.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil",  location_id = "the_kitchen", operator = "is_present" },
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "All three of them are in here and the room is not built for it. @gil has the table and @nate has the sink. Your mum works around both of them, but she never appears to move." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Sit down, both of you. It's not a queue." },
+  { type = "paragraph", content = "@gil does not sit down and does not look up. She says it to him every morning she is here and she has never once expected it to work." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "She has the room to herself and she has not put the light on, because the window does enough at this hour and she is careful about things nobody would notice." },
+]
+
+# ⚠️ A READ ON HER OWN METER, AND THE FIRST ONE IN THE GAME. Before this pass
+# `npc_lynn.relation` was moved in three places and read in NONE — a dead number.
+# Fifteen is roughly five hours given to her, which is a lot in a game this short.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_lynn", trait_key = "relation", operator = "gte", value = 15 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You've been about a lot. I'm not complaining, I'm noticing. I don't do much noticing these days." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down with her."
+targetType = "node"
+nodeId     = "hub_lynn_kitchen.sat"
+show_when_locked = true
+locked_text = "You have had your go at your mum today, and there is only one of those."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lynn_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "lynn_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get the bus."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "sat"
+name = "Twenty minutes"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You sit down and she puts a second cup in front of you without being asked. She does not sit down herself, but she stops moving, and she leans on the counter the way she leans on things at work."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rest", operator = "lt", value = 40 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You've got my face on. The one I have at four in the morning. What have you been doing that for?" },
+  { type = "paragraph", content = "It is the closest anybody in this house has come to asking. She waits about two seconds for an answer, but not three, and then puts the kettle back on to let you off it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "I've got twelve hours tonight and I'm already tired. Don't grow up into a job like this one." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Your gran used to do this. Stand about in the kitchen at seven with nothing to say and not want you to leave." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Is it alright here? You'd say. You wouldn't, but I'd like to think you'd say." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Then the clock does the thing clocks do in this house and you are twenty minutes down. She tells you to go, and she is still standing there when you look back from the hall."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go, before the bus does."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_lynn"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+# ── from toml_phases/5_scenes.toml
+# -----------------------------------------------------------------------------
+# TASHA AT THE TABLE
+# -----------------------------------------------------------------------------
+# ⚠️ SHE HAD NO KITCHEN CARD AT ALL, EVER. She sits at that table [1, 3, 6] and
+# the only thing there was `dinner`, which is the room's hour and gives her three
+# rotating lines she cannot be answered on.
+#
+# ⚠️ IT IS NOT A SECOND DINNER. It shares `tasha_today`, which is the flag that
+# already means one go at Tasha a day wherever it happens — so taking her side at
+# the table SPENDS her bedroom hour. That is the decision, and it is the same
+# shape @nate's `nate_today` has had since the afternoon pass.
+
+[[canvases]]
+id   = "hub_tasha_kitchen"
+name = "Tasha"
+description = "Portrait hub @ the_kitchen, 19:00-20:00 on the three nights she eats with them. Shares `tasha_today` with her room and the bathroom, so the table costs the bedroom."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_tasha"
+npc           = "npc_tasha"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 6]
+start_time = "19:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Across the table"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Tasha has the seat she always has and she is holding the room the way she holds every room, which works on nobody here and has never once stopped her doing it." },
+  { type = "paragraph", content = "She is eating with one elbow on the table and telling a story to three people who are not listening, and she keeps checking whether you are." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The story has got to the part where somebody was supposed to laugh. Her mum is looking at her plate. @gil is looking at the radio. She keeps going and her voice gets a bit smaller."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back her up."
+targetType = "node"
+nodeId     = "hub_tasha_kitchen.backed"
+show_when_locked = true
+locked_text = "You have had your hour with Tasha today, wherever you spent it."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tasha_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "tasha_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it go quiet."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "backed"
+name = "Somebody laughed"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You give her the line she was waiting for and she takes it and runs about a mile with it, and for the rest of that plate there are two people at this table having a dinner."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_tasha", trait_key = "relation", operator = "gte", value = 10 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "See, you get it. Nobody in this house gets it. You're the only one who was ever going to." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Thank you. That's all I wanted. One person. It's not a lot to want off four of you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Come up after. I've got the thing I was telling you about and I'm not showing it down here." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She kicks you under the table on her way up and does not look back, and the hour you have just spent on her is the hour you were going to spend in her room."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish your plate."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+# ── from toml_phases/3_activities.toml
+# --- THE KETTLE · the light thing the kitchen never had ---------------------
+# ⚠️ THE ROOM HAD ONE CARD. `chore` was it, and `chore` is capped at one a day, so
+# from the moment she did it the anchor room of the house rendered EMPTY every
+# hour nobody happened to be standing in it. Measured across a full week before
+# this: the kitchen showed one card at half four in the afternoon and one at ten
+# at night, seven days out of seven.
+#
+# ⚠️ THIS IS `sofa_hour` FOR THE KITCHEN AND IT IS COPIED ON PURPOSE. The front
+# room works because it holds something to do alone, something with an object, and
+# a card per person. That is `the-surfaces.md` R2 — a room's list is needs, work
+# and people — and the kitchen had the work and half the people.
+#
+# ⚠️ FIFTEEN MINUTES AND +10 `rest`, ONCE A DAY. `rest` falls 20 a day, `sleep`
+# sets it to 100 and the sofa gives 15 to 20, so this cannot be farmed into a
+# replacement for either. The flag is on the CHOICE, not the trigger, so the room
+# keeps its card after she has had it — a door, in the sense `a spent day still
+# has a door` means.
+#
+# ⚠️ NO HUNGER METER, AND THAT WAS THE CALL. A third need that falls every day
+# would make the kitchen compulsory rather than worth going to, which is a chore
+# and not content. It moves the meter the game already has.
+
+[[canvases]]
+id   = "kettle"
+name = "Put the kettle on"
+description = "Solo @ the_kitchen, any hour. Fifteen minutes and a little rest, once a day. Bands on who is in the room, which is the point of it — it is an excuse to be in the kitchen when somebody else is."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The kettle"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The kettle is where it always is and there is always about an inch in it. You put more in. It takes two minutes and there is nothing to do with those two minutes." },
+  { type = "paragraph", content = "There is a mug on the drainer that is nearly yours. The list on the fridge is in @gil's handwriting. You have read it four hundred times, but you read it again anyway." },
+  { type = "paragraph", content = "The bread is out. There is enough of it for one round of something and nobody will notice it has gone, and that is most of what this kitchen is for." },
+]
+
+# --- WHO IS STANDING IN IT ----------------------------------------------------
+# ⚠️ THESE BANDS ARE THE WHOLE VALUE OF THE CANVAS. A kettle is not content. An
+# excuse to be in a room with somebody at half seven in the morning IS, and this
+# is the only surface in the kitchen with no clock and no person on its trigger,
+# so it is the one that can catch whoever happens to be in here.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@gil is at the table behind you with the radio going. He does not offer and you do not ask, and the second mug you get down is not a question either." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Make me one while you're stood there. I'll drink half of it and leave the rest, we both know that." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "@nate is in the way of the drawer and he knows he is in the way of the drawer. He moves when you are close enough that moving is the smaller thing to do." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Do mine. Not that mug, the good one. You know the one, don't pretend you don't know the one." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "There is nobody in here. The house does the noises it does with nothing in it, and the kettle getting loud is the loudest thing that has happened all afternoon." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand and drink it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 15
+show_when_locked = true
+locked_text = "You have already stood in this kitchen doing nothing today."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "kettle_today", operator = "is_false" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "add", value = 10, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "kettle_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it with you."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5

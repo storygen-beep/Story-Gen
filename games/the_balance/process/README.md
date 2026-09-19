@@ -209,6 +209,12 @@ built          SLICE 8, 9-15  games/the_balance/output/index.html · 19 location
                               saying how they related. `but` ran at 0.14 per 1,000 words
                               against a field MINIMUM of 2.46, and zero in narration. Now
                               2.79. See §5b — the rule and the numbers live there
+parked 9-19    THE HOUSE PASSES ARE OUT OF THE GAME. 24 commits after 273f5ec built 42
+               scenes and 22 schedule rows with no design round. toml_phases/ is back
+               at 63df046 plus four keepers (role labels, Owen's office row, the Go Live
+               launcher for her room, her door). 50 canvases, 24 rows. The 35 scenes
+               are in parked/, verbatim — read parked/README.md before bringing any
+               back. Nothing returns except through its block's round in BASE.md
 written        WANT.md · v2_state.json · DECISIONS.md · sheets/RELEASE.md
                sheets/OPENING.md · sheets/SYSTEMS.md
                systems: money · the_week · the_phone · her_meters · college
@@ -217,11 +223,9 @@ written        WANT.md · v2_state.json · DECISIONS.md · sheets/RELEASE.md
                RELEASE.md is [READY] — LO ticked the first build on 9-15. No more design pages
                places:  the_house · the_cafe · the_campus
                people:  the_cast
-next           NOT another content slice. The question is now shipping, and the three
-               things between here and it: MEDIA (no image on disk, 19 locations and
-               10 people declare slots), `every hub is met first` 0/10 (every portrait
-               is live on turn one — a real pre-ship pass), and a version + portal
-               entry. LO has asked for a straight account of that, with real numbers
+next           sheets/BASE.md, round 1: her mum's week. The base layer is decided one
+               round at a time in the order that page gives, and §0a's gate runs before
+               any TOML is touched. Shipping waits behind it.
 not started    campus entirely · the phone and the stream · the dares · the two house doors ·
                Cara, Sam, Jules, Tasha, Nate, Hale, Reyes — nine of the eleven cast
 ```

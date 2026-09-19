@@ -1,0 +1,1254 @@
+# AS BUILT — the founding scenes as the house passes left them, copied from ff91336.
+# The build now carries these at 63df046 plus the fixes; these versions keep the written
+# bands and hours the passes added, for salvage only. NOT merged.
+
+# ── from toml_phases/5_scenes.toml
+# \u26a0\ufe0f NO fridays_missed. That is the whole point of the spend \u2014 the week does
+# not go on the count, the list on the fridge does not grow, and she never said a
+# word about why.
+
+# =============================================================================
+# THE TWO DOORS AT HOME
+#
+# ⚠️ These two have NAMES, so each one needs an AFTER. A door with nothing behind
+# it the next morning is a campus door standing in a house. @nate's after is the
+# week he spends on the landing; @gil's is the Friday table.
+#
+# ⚠️ BEING CAUGHT AT HOME DOES NOT MOVE EXPOSURE. Exposure is strangers knowing
+# things. At home it is one person with a name, and what moves is where she
+# stands with him — which is the harder currency, because he is at breakfast.
+# =============================================================================
+
+# --- @NATE'S DOOR · the cost comes first ------------------------------------
+# the_two_doors.md: the first walk-in in the whole game, and it is WRITTEN FOR
+# HER. She opens the door, she sees, she leaves, and NO CHOICE IS OFFERED. It
+# teaches what this is so the second one means something.
+
+[[canvases]]
+id   = "nate_door"
+name = "His door isn't shut"
+description = "RANDOM AMBIENT on @nate's room, rolled on arrival whenever he is in it and awake. The first one is written for her and costs a week; every one after is a ladder crossed with HIS arousal."
+
+# ⚠️ trigger_mode = "random" SINCE 2026-09-17, AND IT USED TO FIRE ONCE IN THE WHOLE
+# GAME. It was gated `nate_seen is_false`, so the biggest climb in this house had
+# exactly one screen. LO: "Wtf, why once a game. It should be dice roll."
+#
+# ⚠️ `requires_npc` IS WHAT MAKES THE HOURS HIS. The random path reads `requiresNpc`
+# and nothing else (v2.py:5637-5648) — it resolves through getNpcLocation at the
+# moment she walks in, so this canvas's hours ARE his schedule and the two cannot
+# drift. `npc` is kept for presence.py, which does not read the random path.
+#
+# ⚠️ AND THE FENCE IS STILL NEEDED, BECAUSE HE SLEEPS IN HERE. `requires_npc` alone
+# is true 00:00-07:00 as well. These two windows are his two AWAKE nate_room rows
+# and nothing else.
+#
+# ⚠️ NO max_triggers_per_day. The brake is the engine's own: a hit sets a 3-visit
+# cooldown on the room (v2.py:5667), so she cannot walk in and out at it.
+[canvases.trigger]
+location      = "nate_room"
+npc           = "npc_nate"
+requires_npc  = "npc_nate"
+is_repeatable = true
+trigger_mode  = "random"
+chance        = 0.35
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "15:00"
+end_time   = "18:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Four inches"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His door is open four inches and the lamp is on. @nate is on the bed with his laptop turned away and his cock in his hand. He is working at it in long slow pulls, balls tight up against the base of it. Not hurrying."
+
+# ⚠️ ONE IF/ELSEIF CHAIN — WHAT HE DOES, AND IT IS HIS METER THAT DECIDES IT.
+# LO's ask: "climb should depends on the player and nate traits." Her corruption is
+# on the CHOICES below and decides what she can make herself do; his arousal is
+# here and decides what happens when he looks up. Same act, different scene.
+#
+# ⚠️ BANDED TO WHAT HE ACTUALLY REACHES. He starts at 0 and the first walk-in pays
+# +3, so the bottom band is 3-5 and not 0 — a band under 3 would be unreachable the
+# moment this scene has run once. Above that: `bath_nate` pays +4, this canvas's
+# top rung +4, and `nate_walks_in` +2 a day.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+] } }
+blocks = [
+  { type = "paragraph", content = "He turns his head and sees you. He does not stop. He does not cover himself. His fist keeps going on his cock and he holds your eye while it does, jaw set, like he is daring you to be the one who looks away." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nate", trait_key = "arousal", operator = "gte", value = 10 },
+] } }
+blocks = [
+  { type = "paragraph", content = "He is not surprised. He does not turn his head, and he does not change what his hand is doing. After a second he angles his hips off the bed so you can see it properly. He left that door like that." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "You are early. Come in or stand there, I do not care which, but pick one and stop doing that thing with the handle." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_nate", trait_key = "arousal", operator = "gte", value = 6 },
+] } }
+blocks = [
+  { type = "paragraph", content = "He knows it is you and he does not stop, but he does not look over either. His jaw goes tight. His hand keeps its rhythm, and the whole performance is aimed at the wall. Neither of you has ever said one word about this." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "He hears the board. His hand stops dead, and the duvet comes over him in one movement. He lies there looking at the ceiling until you go. It will not have happened, but he will be worse with you about the bins for a week." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "Do you want something, or is this a hobby now." },
+]
+
+# WALL. Without a non-group block here the band below would merge into the chain
+# above as one more elseif, and it is a different question entirely.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The landing is cold and the board under your left foot is the loud one."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Standing here and watching him finish is not a thing you can make yourself do. You know it is available. That is a different sentence than it used to be and you are aware of that as well." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ THE FIRST ONE IS WRITTEN FOR HER AND NO CHOICE IS OFFERED — walking_in.md's
+# first rule, and it survives the conversion intact. The week only exists on this
+# row, because exit-block effects CANNOT carry conditions (v2.py:14544 iterates
+# them unconditionally) and a repeatable seven-day landing would turn her stream
+# off for the rest of the game.
+[[canvases.nodes.exit_block.choices]]
+text       = "Get off the landing."
+targetType = "node"
+nodeId     = "nate_door.after"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get off the landing."
+targetType = "location"
+locationId = "the_hall"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay in the doorway."
+targetType = "node"
+nodeId     = "nate_door.watched"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "flag", subject = "player", flag_key = "nate_watched", operator = "is_false" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him see you looking."
+targetType = "node"
+nodeId     = "nate_door.caught"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_watched", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "flag", subject = "player", flag_key = "nate_caught", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "after"
+name = "Breakfast is in nine hours"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He didn't stop. That is the part you carry down to breakfast, and he will be at breakfast, and he will be there every morning after that one."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_seen"
+op         = "set"
+
+# THE WORSE WEEK. Seven days of him on the landing at odd hours, so her own door
+# cannot stay shut and going live is off. The biggest climb in the house COSTS
+# BEFORE IT PAYS — if it paid first, nothing here would be worth the risk.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "nate_landing"
+op         = "set"
+value      = 7
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 2
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 3
+
+[[canvases.nodes]]
+id   = "watched"
+name = "Until he is finished"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stay in the gap with your hand still on the frame. His fist goes on his cock in the same slow pulls. His breathing changes about a minute before the rest of him does, but you are four feet away and you do not miss any of it."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He finishes into his own hand with his head back and his eyes shut. Your door is shut before he has moved. You stand behind it with your heart going like you ran up the stairs."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_watched"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 2
+
+[[canvases.nodes]]
+id   = "caught"
+name = "The door the rest of the way"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You push it and let it go wide, and you stand in the middle of it where there is nothing to be mistaken about. He looks straight at you. His hand does not stop, but this time you are the one who does not look away."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+props = { speaker = "npc", npcId = "npc_nate" }
+content = "Go on then. You have been doing this for weeks and neither of us has said it, so you can stand there and say nothing at me properly for once."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He finishes with you in the doorway watching him do it, and he holds your eye the whole way through, and when it is over he wipes his hand on the duvet and picks his phone up like the two of you agreed something."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down the landing."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 20
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "nate_caught"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 5
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "relation"
+op         = "add"
+value      = 3
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_nate"
+trait      = "arousal"
+op         = "add"
+value      = 4
+
+# ── from toml_phases/5_scenes.toml
+# --- THE MASTER BEDROOM · she saw, and he doesn't know ----------------------
+# Live only on the nights her mum is HOME off the ward, before ten. Her shift
+# times are on the wall in that room and she has read them a hundred times for
+# ordinary reasons — now they are a timetable for something else.
+#
+# ⚠️ Her mum is in the room and is NEVER TOUCHED, at any height. That is the whole
+# weight of this door: the one person she can't have, can't tell, and can't stop
+# taking from. How far it goes in the end is @gil, and only @gil.
+
+[[canvases]]
+id   = "master_bedroom"
+name = "The door is pushed to"
+description = "The first door she gets a CHOICE in, and the choice is back out or stand there. Watching properly is not on the menu — she can't make herself. Standing there sets saw_them, which she spends on a Friday."
+
+# ⚠️ trigger_mode = "random" SINCE 2026-09-17. It was a link she clicked, once a
+# day. LO: "Not once a day should be same dice roll." The condition below is what
+# makes the hours right — her mum has to be in that room, which is 21:00-22:00 on
+# the four nights she is off the ward and never otherwise.
+#
+# ⚠️ NO max_triggers_per_day ANY MORE. The brake is the engine's 3-visit room
+# cooldown (v2.py:5667). A day cap would also have been the wrong shape for a roll.
+#
+# ⚠️ THE SUBSTITUTION SURVIVES THE CONVERSION AND THIS WAS CHECKED. The 25% roll to
+# `master_caught` is emitted into this canvas's OWN first node (v2.py:13523), not
+# into whatever selected it, so it fires however she arrives — clicked, rolled or
+# routed. Nothing about that scene changed.
+[canvases.trigger]
+location      = "the_master_bedroom"
+is_repeatable = true
+trigger_mode  = "random"
+chance        = 0.4
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_master_bedroom", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5, 6]
+start_time = "21:00"
+end_time   = "22:00"
+
+# Sometimes she doesn't get the chance. A quarter of the time the landing board
+# goes under her or the lamp swings — she is off the landing before she sees
+# anything, and nothing is set.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "master_caught"
+chance = 0.25
+
+[[canvases.nodes]]
+id   = "base"
+name = "Not shut"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The door is pushed to but not shut, and the lamp is on inside. You can hear the bed. Not much of it. Enough to know what you are hearing, and how long it has been going on."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Her shift times are on the wall on the other side of that door, in her own handwriting. You have read them a hundred times for ordinary reasons."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "node"
+nodeId     = "master_bedroom.backed_out"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand there."
+targetType = "node"
+nodeId     = "master_bedroom.stood"
+
+[[canvases.nodes]]
+id   = "stood"
+name = "The gap in the door"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@gil has your mum on her front, her shirt shoved up round her waist. He is fucking her slowly. One hand flat between her shoulders, holding her down into the mattress. Her face is turned into the pillow. She is not making a sound. The bed stays quiet because he is going slow enough to keep it that way. You can see his cock going into her cunt every time he draws back."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go."
+targetType = "node"
+nodeId     = "master_bedroom.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "Yours"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He has no idea you were on the other side of that door. He is going to sit at the table on Friday and take a hundred and fifty off you, and he still will not know."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "saw_them"
+op         = "set"
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "corruption"
+op         = "add"
+value      = 3
+
+[[canvases.nodes]]
+id   = "backed_out"
+name = "Back out"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You take your hand off the frame and go back along the landing on the outside edges of your feet, the way you already knew how to without ever having decided to learn it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Your room."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_hall"
+time_progression_minutes = 5
+
+# ── from toml_phases/3_activities.toml
+# --- THE SHOWER · the only tap `clean` has ----------------------------------
+# ⚠️ BEFORE THIS CANVAS `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a
+# shift and nothing raised it, so about a week in she dropped under 40, the tips
+# ladder shut, and it never reopened. No gate caught that — it is a hole, not a
+# score.
+#
+# the_house_day.md: one bathroom, shared with Nate and Tasha. Taken 7 to 8 in the
+# morning — that is the running shower in the opening — and taken 5 to 10 in the
+# evening, which is Tasha before she goes out. So it is free in the middle of the
+# day, when class and the middle shift run, and free after ten, when she is only
+# home because something ran over. BEING CLEAN IS NEVER FREE.
+
+[[canvases]]
+id   = "wash"
+name = "Get in the shower"
+description = "Restores clean. Only available in the hours the bathroom is actually free, which are the hours she is meant to be somewhere else."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 4
+is_active     = true
+show_when_blocked = true
+cooldown_message = "Somebody is in there."
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "17:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+
+# The lock works. It does not always get used, and Tasha does not always knock.
+#
+# ⚠️ THE time_of_day ITEM ARRIVED WITH HER SLEEP ROWS AND CHANGES NOTHING. This
+# rule fires where `wash`'s hours (08:00-17:00, 22:00-23:59) overlap Tasha being in
+# her room, which used to be 16:00-17:00 and 22:00-23:59 and nothing else. She now
+# also occupies that room 00:00-10:00 on weekdays and 04:00-12:00 at weekends,
+# ASLEEP — which would have put her through this door at nine in the morning.
+# 16:00-23:59 reproduces the old overlap exactly.
+#
+# `time_of_day` delegates to setup.isCurrentTimeSlot (v2.py:4366), the same
+# function the schedules use, so there is no second implementation of the wrap.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "tasha_walks_in"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "tasha_room", operator = "is_present" },
+  { type = "time_of_day", start_time = "16:00", end_time = "23:59" },
+] }
+
+# ⚠️ THIS IS WHAT THE BROKEN LOCK COSTS HER, AND IT BELONGS IN THE SAME PASS AS
+# THE BREAKING. @tasha has always come through that door because Nell forgets to
+# turn the button; @nate comes through it because the button stopped working and he
+# is the one person in this house who would notice that and use it.
+#
+# No time_of_day needed — his `nate_room` rows are 15:00-18:00 and 22:00-23:59, and
+# where those overlap `wash`'s own hours IS the window. One less thing to drift.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "nate_walks_in"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_true" },
+  { type = "npc_at_location", npc_id = "npc_nate", location_id = "nate_room", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shower"
+
+# ⚠️ TWO POOLS BEHIND A GATE, BECAUSE A block_pool CANNOT BE GATED ITSELF
+# (README §6 item 4). Two of the three original lines are about locking the door,
+# and the day she turns that barrel round they stop being true. Adjacent groups
+# merge into one if/elseif chain, which is exactly what two exclusive states want.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "lock_broken", operator = "is_false" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The water takes a minute to decide. You lock the door anyway, which is the part that matters, and stand under it until your shoulders come down off your ears." },
+    { type = "paragraph", content = "Twenty minutes with the lock on. The mirror goes white and you write nothing on it. You stand there longer than washing takes." },
+    { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back exactly where it was, at the angle it was, because that is the kind of thing that gets mentioned." },
+  ] },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You push the button in out of habit and it goes in and holds nothing. Twenty minutes under the water, but with your ear on the landing the whole of it. That is not the same twenty minutes it used to be." },
+    { type = "paragraph", content = "The mirror goes white. You put the towel over the handle, but a towel over a handle is the whole of what you have now, and you are the one who arranged that with a screwdriver." },
+    { type = "paragraph", content = "Somebody's shampoo, not yours. You use it. The bottle goes back at the angle it was, and you keep looking at the door while you do it, and nothing comes through it." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "set"
+value      = 100
+
+# ── from toml_phases/5_scenes.toml
+# --- DINNER · the one hour nothing can be avoided ---------------------------
+# the_house_day.md. Everyone at one table on the nights her mum is off the ward.
+# @gil notices things there — the chores, the hours she keeps, whether Friday got
+# paid. @nate can needle her in front of people and it costs him nothing, which
+# is the same move Bree makes on the quad. Tasha performs. Her mum is too tired
+# to hear any of it.
+#
+# =============================================================================
+# REWRITTEN 2026-09-17 — SEVEN NIGHTS, AND HER MUM SPEAKS
+# =============================================================================
+# ⚠️ IT USED TO FIRE FOUR NIGHTS OUT OF SEVEN. Its trigger carried
+# `npc_at_location npc_lynn is_present`, so on Monday, Wednesday and Friday —
+# her mum's ward nights — @gil and @nate sat at that table and NOTHING HAPPENED.
+# Three of seven evenings in the anchor room of the house had no scene at all.
+# LO's call: dinner is the kitchen for whoever is home, and who is home is prose.
+#
+# ⚠️ TWO REAL DEFECTS WENT OUT WITH IT, AND NEITHER WOULD EVER HAVE FAILED A
+# BUILD:
+#   · Tasha's `block_pool` was UNGATED. Her kitchen row is [1, 3, 6] and this
+#     canvas fired [1, 3, 5, 6], so on a SATURDAY she talked at a table she was
+#     not sitting at. Widening to seven nights would have made that four nights
+#     out of seven instead of one.
+#   · Her mum's closing line was ungated for the same reason and would have had
+#     her saying "that is lovely" from the ward.
+# Both now sit inside a chain that reads the room.
+#
+# ⚠️ @nate WAS INSIDE @gil's IF/ELSEIF CHAIN. Four `[group]` blocks ran adjacent,
+# and adjacent groups MERGE into one chain (process/README.md §6 item 4), so his
+# needling was silenced on any night @gil had a chore, a door or an hour to
+# mention — which is every night the game is working. He has his own chain now,
+# with a wall paragraph holding the two apart.
+#
+# ⚠️ HER MUM HAD ZERO LINES IN THE ONE SCENE SHE IS IN. Measured before this
+# pass: @gil spoke three times, Tasha three, @nate once, and the woman the whole
+# scene was gated on spoke never. the_house_day.md's own hand-off list has said
+# "dinner is an hour with four people in it and no lines written for any of them"
+# since it was written.
+
+[[canvases]]
+id   = "dinner"
+name = "Dinner"
+description = "Seven, every night. Bands read who is actually at the table, whether she cooked, the chores, Friday, the hours she keeps and the door she opened. Leaving early is noticed."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Seven o'clock"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The radio is on in the corner for the same reason it is always on. Plates go down. The chair you end up in faces the door, and nobody wants that chair and nobody has ever said why." },
+  { type = "paragraph", content = "Seven o'clock. Whoever is in this house is in this room, and the ones who are not are not coming. The window has gone black and nobody has drawn the curtain." },
+  { type = "paragraph", content = "The table is laid the way it is laid every night. There is a place set that stays empty some nights, because taking it away would mean somebody deciding to." },
+]
+
+# --- WHO IS ACTUALLY AT IT -----------------------------------------------------
+# ⚠️ ONE CHAIN, THREE EXCLUSIVE BANDS, AND IT IS THE FIRST THING THE SCENE SAYS.
+# Tasha is at the table [1, 3, 6] and her mum [1, 3, 5, 6], so the room holds five
+# on Tuesday, Thursday and Sunday, four on Saturday, and three on a ward night.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn",  location_id = "the_kitchen", operator = "is_present" },
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "All of them. Your mum on one side with her cardigan still on, Tasha across from her and already talking, @gil at the end, @nate eating like the room is a queue he is in." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Four of you. Tasha is out, and the gap she leaves is loud in a way she would be pleased about. Your mum eats with one hand and holds her phone face down with the other." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Three of you. Your mum is on the ward, so the radio has to do all the talking. @gil eats facing the window. @nate eats facing nothing at all." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Nobody says anything for the first two minutes. It is not a bad two minutes. It is the only part of the hour that wants nothing off anybody."
+
+# --- WHETHER SHE COOKED --------------------------------------------------------
+# ⚠️ `cooked_today` IS SET BY BOTH SURFACES AND READ HERE. `cook` on a ward night
+# and `cook_with_mum` on the other four both set it, so the table does not care
+# which it was — only that the food came off her. It clears in the daily tick.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cooked_today", operator = "is_true" },
+] } }
+blocks = [
+  { type = "paragraph", content = "What is on the plates went through your hands. Nobody says so. @gil has a second helping and does not remark on that either, and in this house a second helping is the remark." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Nobody cooked. There is bread, and there is whatever was in the fridge that did not need doing to it, and everybody works around that without naming it." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@nate eats fast. Eating fast is how he gets to leave early without anybody being able to say he left early."
+
+# ⚠️ ONE IF/ELSEIF CHAIN, ordered by what is most pressing. He says one thing, the
+# way he always does, and he never says the whole of it.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "There's more on that list this week. I'd get it done." },
+]
+
+# ⚠️ THE DOOR, AND HE COUNTED IT BEFORE HE MENTIONED IT. `door_noticed` goes up
+# every time she shuts her door on a house with somebody in it, and it does not
+# clear overnight. Three is where he says something, which is how he says
+# everything — late, once, and without finishing it.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "door_noticed", operator = "gte", value = 3 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "That door of yours is shut a lot in the afternoons. There's a reason it stays open and I've never had to explain it to anybody else in this house." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were coming in at half past eleven. I'm not asking where from. I'm saying I was up." },
+]
+
+# ⚠️ THE WALL. Without a non-group block here, @nate's band below joins @gil's
+# chain and goes dark on every night @gil has a line — see the header.
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Then he goes back to his plate. He has said his one thing and there is never a second one, and everybody at this table has learned that about him."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "nate_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_nate" }, content = "She's been going round the landing at all hours. Hasn't she. Opening doors." },
+  { type = "paragraph", content = "He says it to the table, not to you, and then eats. Nobody asks him what he means. He knew nobody would, which is the whole reason he said it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "@nate has not said a word. He is looking at his plate with the particular effort of somebody who has decided not to, and the deciding is visible from here." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The radio does the weather for a coast none of you has been to. Somebody turns it up. Nobody turns it back down."
+
+# --- TASHA AND HER MUM ---------------------------------------------------------
+# ⚠️ FOUR BANDS IN ONE CHAIN, AND IT IS ONE CHAIN ON PURPOSE. Two adjacent chains
+# would merge anyway (README §6 item 4), so the combinations are written out
+# rather than fought. It also stops a wall paragraph being needed between them.
+#
+# ⚠️ HER MUM'S FIRST LINES IN THE GAME. She is never touched and there is no
+# ladder here. What she says is the sheet's one line made audible — the_cast.md:51,
+# "wants her daughter to be fine, and she is too tired to check." Every one of
+# these is a question she starts and does not finish.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_kitchen", operator = "is_present" },
+  { type = "npc_at_location", npc_id = "npc_lynn",  location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "So I said to her, if you're going to do that with your hair you have to commit. And she did not commit." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Right, nobody react, but I think I'm getting the shifts at the bar. Nobody react. Mum. Nobody react." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "@player, tell them what I said about the coat. Tell them. She was there, she'll tell you." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "That's lovely, love." },
+  { type = "paragraph", content = "She says it twice, about two different things, and neither time did she hear which thing it was. Tasha does not mind. Being heard was never the point of it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_tasha", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "Nobody in this house asks me anything. I could have been abroad. I could have been married." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_tasha" }, content = "@player, back me up. Tell them what she was wearing. You saw it." },
+  ] },
+  { type = "paragraph", content = "She performs it at the two of them and the two of them eat. She could stop, but stopping would mean admitting she had noticed, so she keeps going." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Eat something proper. I'm not asking, I'm saying it out loud so I've said it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Are you sleeping? Don't answer if it's no. I haven't got it in me tonight." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "I was going to ask you something. It's gone. It'll come back at four in the morning and you'll be asleep." },
+  ] },
+  { type = "paragraph", content = "She asks it the way you ask a thing you have already decided not to hear the answer to. Then she puts her fork down and holds the edge of the table for a second." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "Nobody fills it. Three people eat in a room built for five, and the two empty chairs are further away than the ward is." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Then it is over. Plates go in the sink in the order they always go in, and the radio keeps talking to a room that is emptying out from the far end."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ TWO "Sit it out." ROWS, EXCLUSIVE ON WHETHER HER MUM IS AT THE TABLE. An exit
+# effect cannot be conditional (v2.py:14544 iterates unconditionally), so a single
+# row would have credited her mum's relation on the three nights she is at work.
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit it out."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 45
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_gil",  trait = "relation", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_lynn", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit it out."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 45
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_gil", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take your plate upstairs."
+targetType = "node"
+nodeId     = "dinner.left"
+
+[[canvases.nodes]]
+id   = "left"
+name = "Upstairs with it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You go up with the plate and nobody stops you, and the talking carries on underneath you at exactly the volume it was at before."
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Your mum is home four nights a week and you have just spent one of them on the stairs. She will not say anything about it. She will think about it at four in the morning." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "paragraph", content = "There were three of you and now there are two, and two men at a table with a radio is not a dinner. @gil will have noticed which of you got up." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "It is the one hour of the week nobody can get out of, so getting out of it gets counted, and it gets counted by everybody at that table and not only by him."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut your door."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_gil",  trait = "relation", op = "add", value = -2 },
+  { targetType = "npc", npcId = "npc_lynn", trait = "relation", op = "add", value = -1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut your door."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_gil", trait = "relation", op = "add", value = -2 },
+]
+
+# ── from toml_phases/5_scenes.toml
+# --- FRIDAY · the payment ----------------------------------------------------
+# money.md: $2,400 for the semester, $150 every Friday, sixteen weeks and it is
+# clear. the_week.md: handed over in the kitchen on Friday evening, and @gil is
+# there because he is always there at six.
+#
+# ⚠️ [settings.rent] IS STILL DELIBERATELY ABSENT and this is why. The engine's
+# rent only ARMS a flag on the due weekday (rent_state.is_due, set inside
+# advanceDay) — it deducts nothing and it narrates nothing. The payment in this
+# game is a scene with a man in it, and two systems both claiming to collect the
+# same $150 is how a game ends up telling the player twice.
+#
+# ⚠️ ALL EVENING, not six o'clock sharp. LO's call. She can only miss it by
+# staying out, which is a choice — and putting things off is allowed everywhere
+# else in this game.
+
+[[canvases]]
+id   = "friday_payment"
+name = "Friday"
+description = "The $150. Fires in the kitchen any Friday evening. Paying takes it off the debt; not having it puts a Friday on the count, and the chore list on the fridge reads that count. He never explains either."
+
+[canvases.trigger]
+location      = "the_kitchen"
+npc           = "npc_gil"
+is_repeatable = true
+max_triggers_per_day = 1
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [4]
+start_time = "18:30"
+end_time   = "20:30"
+# ⚠️ STARTS AND ENDS WITH HIS KITCHEN HOURS, AND BOTH ENDS HAVE MOVED NOW. The row
+# was 18:00-21:00; the television took the last half hour and put him on the sofa,
+# and the bathroom took the first half hour and put him in the shower. The window
+# here has to follow both. It carried a dead 17:00-18:00 hour before this pass —
+# that was a real defect, quiet because the portrait lane fails CLOSED. The portrait lane checks presence — a Friday window that
+# outran his kitchen hours would render a link to a man who is not in the room,
+# which is the bug this comment has existed to prevent since the window was first
+# written. Still "all evening" in the sense LO chose: three and a half hours, and
+# she can only miss it by staying out.
+
+[[canvases.nodes]]
+id   = "base"
+name = "Friday"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "@gil is at the table with the radio on low and nothing in front of him. He is not waiting for you in any way you could point at. He is just there, on a Friday, the way he is there on a Friday."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "A hundred and fifty. He has never once said the number out loud, because he has never once had to."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Count it out on the table."
+targetType = "node"
+nodeId     = "friday_payment.paid"
+show_when_locked = true
+locked_text = "You haven't got a hundred and fifty."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 150 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him for a bit more time."
+targetType = "node"
+nodeId     = "friday_payment.less"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "saw_them", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 75 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him you haven't got it."
+targetType = "node"
+nodeId     = "friday_payment.missed"
+
+[[canvases.nodes]]
+id   = "paid"
+name = "Counted out"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You put it down in front of him and he counts it, because he counts everything. Then it goes in his back pocket and he turns the radio up a notch."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "Right."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "That is the whole of it. Your mum is on the ward and does not know there is a number, let alone that it just got smaller."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = -150
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "debt_left"
+op         = "add"
+value      = -150
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "missed"
+name = "Not this week"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You say it and he nods, once, but does not ask what happened to it. He does not ask when, either. The radio stays where it is and he lets the quiet go on a beat longer than it needs to."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "All right."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "In the morning there are two more lines on the list on the fridge. Neither of them has a date against it."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "fridays_missed"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "less"
+name = "A bit more time"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You put seventy-five on the table and say you will make the rest up. You do not explain and he does not ask you to. In week one he asked."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "Next week, then."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He counts the seventy-five anyway. Neither of you says anything about where the rest of it is coming from, because he does not know there is anything to ask."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "cash"
+op         = "add"
+value      = -75
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "debt_left"
+op         = "add"
+value      = -75
+
+# ── from toml_phases/5_scenes.toml
+# --- THE SCHEDULE ON THE WALL · where nothing happening is visible -----------
+# the_move_up.md: his only punishment is holding her where she is, and he never
+# announces it. THE SCHEDULE IS HOW HE TALKS. This is also the locked door the
+# release ends on.
+
+[[canvases]]
+id   = "the_schedule"
+name = "The schedule on the wall"
+description = "Repeatable read of the board. Shows where she stands without anybody saying it, and carries the closing shift as a visible locked door."
+
+[canvases.trigger]
+location      = "the_back_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+] }
+
+# ⚠️ THE OFFICE OWED A WALK-IN THE MOMENT @owen STOOD IN IT. Giving him a 21:00
+# row made `the_back_room` a room where she does a solo thing with somebody
+# scheduled there, and `gates.py` "the walk-in floor" dropped to 8/9. the-surfaces.md
+# R3: one canvas, substitution_only, bands on the axis the odds ride. The rule goes
+# on the HOST, and `chance` is a float in [0.0, 1.0].
+[[canvases.trigger.substitutions]]
+target_canvas_id = "owen_at_the_board"
+chance           = 0.4
+
+[[canvases.nodes]]
+id   = "base"
+name = "The board"
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "lt", value = 2 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Six names down the side and the week across the top. Yours has two marks against it, Tuesday and Sunday, in the same pen as everyone else's. The board is the same board it was last week." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 2 },
+] } }
+blocks = [
+  { type = "paragraph", content = "Four marks against your name now, and one of them is a Thursday. People want Thursdays. Nobody wrote anything about it and nobody is going to." },
+]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The bottom line of the board is the five-to-ten, one name a night, and it is the only line with a single name on it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put your name down for a closing shift."
+targetType = "node"
+nodeId     = "the_schedule.base"
+show_when_locked = true
+locked_text = "Your name is not on that line and he has not offered."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "move_up", operator = "gte", value = 3 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_back_room"
+
+# ── from toml_phases/5_scenes.toml
+# --- TASHA, WITHOUT WARNING -------------------------------------------------
+# the_house_day.md names her exactly like this. She cannot out her, she does not
+# know anything, and she is an example rather than a threat — so what this costs
+# is nothing, and what it does is make "shared" mean something.
+
+[[canvases]]
+id   = "tasha_walks_in"
+name = "The lock you didn't turn"
+description = "Substitution on the shower. Tasha comes in while she is in there. Restores clean like any wash; costs nothing but the fact of it."
+
+[canvases.trigger]
+location          = "the_bathroom"
+npc               = "npc_tasha"
+is_repeatable     = true
+max_triggers_per_day = 1
+substitution_only = true
+priority          = 5
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Without knocking"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The door goes and Tasha is at the mirror with her bag open before the steam has even moved. She does not look over and she does not apologise. You are behind a shower screen that is clear from the hip up."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_tasha" }
+content = "You've got about four minutes and then I need this light. You can borrow the green top if you're going anywhere in it."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She does her eyes in the mirror and talks at your reflection the whole time. It does not occur to her once that any of this is a thing you might mind."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Four minutes, then."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_bathroom"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait      = "clean"
+op         = "set"
+value      = 100
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_tasha"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+# ⚠️ STEP ZERO OF HER ARC, AND IT USED TO SET NOTHING. This is the one time the
+# walk-in runs the other way — she comes in on Nell. the_two_doors.md:10-12: a
+# door with a NAMED person behind it needs an after, or it is a campus door
+# standing in a house. `tasha_seen` is that after's first gate.
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag       = "tasha_seen"
+op         = "set"

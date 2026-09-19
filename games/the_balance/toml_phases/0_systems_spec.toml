@@ -121,54 +121,10 @@ nate_landing   = 0     # days left of @nate being on the landing. Set to 7 when 
                        # stream is off. ⚠️ NOT days_since_flag: that condition FAILS
                        # when the flag has never been set, which would shut the
                        # stream from the first minute of the game.
-# --- the television in the front room ----------------------------------------
-# ⚠️ THREE POSITIONS, NOT THREE TALLIES — same shape as `dare_chain` above, and
-# the same reason. None of them counts anything; each one says where a thing has
-# got to. Nothing decays them and nothing clears them overnight: the set
-# remembers what it was left on, and the two counters are an arc.
-#
-# ⚠️ `gil_tv` AND `lynn_tv` ARE NOT CORRUPTION METERS, AND THAT WAS LO'S CALL ON
-# 2026-09-17. her_meters.md's one call is "everything lives on her, not on each
-# person — give each person their own and the game becomes eight separate climbs
-# that never touch". These two are read by the television and by nothing else, so
-# there is no second climb. The `corruption` field declared on @gil, @nate, Tasha
-# and @owen stays dead. If either parent ever earns a real arc, a position can be
-# promoted into a meter; a meter cannot be walked back once things read it.
-tv_channel     = 1     # 1 the news · 2 the soap · 3 sport · 4 music · 5 the late one
-gil_tv         = 0     # 0 he puts the news back on · 1 he leaves it and does not
-                       # look at it · 2 he stays in the room and watches it
-lynn_tv        = 0     # 0 she does not notice · 1 she notices and says nothing ·
-                       # 2 she knows, and stays. ⚠️ SHE IS STILL NEVER TOUCHED —
-                       # DECISIONS.md carries the crossing and what it does not
-                       # cover.
 followers      = 380   # ⚠️ NOT zero. the_phone.md: she has been doing this since
                        # the summer, quietly, to a few hundred people who have
                        # never seen her face. That is why one of them already
                        # knows her name.
-# --- the bathroom lock --------------------------------------------------------
-# ⚠️ NOT TRAITS. `knocked_once` and `lock_broken` are FLAGS and live in the flag
-# store, not here — this comment sits in the trait block only because that is where
-# a reader looks for the bathroom and there is nothing to find. Both are permanent
-# and NEITHER is in [engine.daily_tick]: a broken lock does not mend overnight, and
-# the game must not forget she has already been refused at that door.
-#
-# ⚠️ THE ROOM HAS TWO ERAS AND ONE ACT BETWEEN THEM. Before: everybody locks it and
-# all she can do is knock. After: nobody can, and the price is that `wash` stops
-# being private — the substitution rules on it read `lock_broken` too. She breaks
-# it to get at them; it means they can get at her.
-
-# --- her own door ------------------------------------------------------------
-# ⚠️ A TALLY, AND IT NEVER GOES DOWN. Every other counter in this block is either
-# a position in a chain or a countdown; this one is the number of times she has
-# shut her door on a house with somebody in it. the_house.md has always said the
-# rule — "her door stays open when someone's on the landing" — and until now
-# nothing in the game enforced it or noticed it being broken.
-#
-# ⚠️ NOT IN [engine.daily_tick]. The flag `door_locked` clears overnight because
-# the decision is a daily one; this does not, because @gil keeps count. It is read
-# in exactly one place — the dinner table, beside the chores and the hours she
-# keeps, which is where he reads everything else about how she is living.
-door_noticed   = 0
 
 # ⚠️ cash = 10 IS A GUESS AND HAS TO GO TO LO. No sheet says what she starts with,
 # and SYSTEMS.md's own tail flags it: "nothing yet says what her cash is for beyond
@@ -357,17 +313,8 @@ flagEffects = [
   # the rule is @gil's and the house resets to it. Shutting it is a decision she
   # makes fresh every day, which is the only thing that stops one five-minute
   # click buying every hour of the rest of the game.
-  #
-  # ⚠️ ITS TALLY, `door_noticed`, IS DELIBERATELY NOT HERE — same split as
-  # `toilet_far` above and its permanent twin. The flag is today; the tally is what
-  # @gil has seen, and that does not go back to nothing overnight.
   { targetType = "player", flag = "door_locked", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
-  # Which band the toilet payout screen shows. Set on the way in, read once on the
-  # way out, cleared here. `toilet_far_done` is the PERMANENT twin and must never
-  # appear in this block — it is what makes the first time in that room worth three
-  # points of exposure and every time after worth one.
-  { targetType = "player", flag = "toilet_far", op = "unset" },
   # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
   # max_triggers_per_day on a canvas that carries an `npc` does not spend the act,
   # it deletes the person: Cara sits at that table until half two and Sam until
@@ -377,58 +324,11 @@ flagEffects = [
   # objects, so these two lines and the setters have to stay in step.
   { targetType = "player", flag = "cara_today", op = "unset" },
   { targetType = "player", flag = "sam_today", op = "unset" },
-  # The two rooms that used to hold nobody. `sofa_today` is shared by ALL FIVE
-  # front room canvases — the solo hour, @nate's hub, the television, and both
-  # parents' hubs — so it is one hour in that room a day whichever way she spends
-  # it, and choosing who to spend it with is the decision.
-  #
-  # ⚠️ IT IS ALSO WHAT PACES THE TELEVISION'S TWO LADDERS. "Leave it on." carries
-  # `sofa_today is_false` and sets it, so `gil_tv` and `lynn_tv` move at most once
-  # a day each and the climb cannot be ground out in one evening. It is also what
-  # makes those rungs COST something: `gates.py` "the climb is paid for" flagged
-  # the first draft, where the corruption came off a five-minute choice with no
-  # hour attached.
-  #
-  # ⚠️ `tv_channel`, `gil_tv`, `lynn_tv` AND `tv_on` ARE DELIBERATELY ABSENT FROM
-  # THIS BLOCK. The set remembers what it was left on and the counters are an arc —
-  # same rule as `toilet_far_done` above. Clearing any of them overnight would
-  # reset the climb every morning and nothing in the toolchain would say a word.
-  { targetType = "player", flag = "tasha_today", op = "unset" },
-  { targetType = "player", flag = "sofa_today", op = "unset" },
   # The quad pair. Their caps came OFF the trigger and back on as choice flags —
   # taking them off outright made gates.py "the climb is paid for" fail, because
   # `crowd_standing` gates content at 10 and became free to reach.
   { targetType = "player", flag = "paige_today", op = "unset" },
   { targetType = "player", flag = "bree_today", op = "unset" },
-  # Tasha's converted surface. Her hour is one hour; the cap is on the choice so
-  # she stays in the room she is standing in.
-  { targetType = "player", flag = "tasha_bath_today", op = "unset" },
-  # @gil at the table. One sit-down a day; the question he will not answer is
-  # one-time and is NOT cleared here.
-  { targetType = "player", flag = "gil_today", op = "unset" },
-  # @nate, and the same rule as @gil — one go at being in a room with him a day,
-  # wherever it happens. Shared by his three new surfaces: the kitchen at noon, the
-  # garage at one, his shut door at three. NOT shared with `hub_nate_sofa`, which
-  # is on `sofa_today` with everything else in the front room, because that hour is
-  # capped by the room rather than by him.
-  { targetType = "player", flag = "nate_today", op = "unset" },
-  # Her mum, and the same rule as the other two. One go at being in a room with
-  # her a day, wherever it happens — breakfast on a ward morning, the house at ten,
-  # or the hob at six. She is home so few hours that without this the three of them
-  # could all be spent in one day and she would be back to being furniture.
-  #
-  # ⚠️ NOT SHARED WITH `hub_lynn_sofa`. That surface is on `sofa_today` with
-  # everything else in the front room, because that hour is capped by the ROOM
-  # rather than by her, and it has been since the television. So a day can hold one
-  # hour of her mum plus one hour on that sofa, and they can be the same woman.
-  { targetType = "player", flag = "lynn_today", op = "unset" },
-  # ⚠️ THE FOOD, AND BOTH SURFACES SET IT. `cook` on a ward night, `cook_with_mum`
-  # on the other four. `dinner` reads it and does not care which it was. It clears
-  # here because a meal is a day: tomorrow nobody has cooked again.
-  { targetType = "player", flag = "cooked_today", op = "unset" },
-  # Fifteen minutes of standing in the kitchen doing nothing. On the CHOICE rather
-  # than the trigger, so the room keeps its card once it is spent.
-  { targetType = "player", flag = "kettle_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "nate_landing", op = "add", value = -1 },
@@ -450,9 +350,10 @@ traitEffects = [
 #   · `the_hall` holds ZERO schedule rows, so a gate on it is true forever. A dead
 #     clause in a six-clause AND is invisible — nothing in the toolchain objects —
 #     which is exactly the defect class presence.py exists to catch.
-#   · `the_garage` is left out on purpose. @nate is out there 13:00-15:00 and @gil
-#     17:00-18:00, and neither of them can be heard from her room. Including it
-#     would quietly cost her the whole afternoon she just got.
+#   · `the_garage` is left out on purpose: nobody in it can be heard from her room.
+#
+# ⚠️ KEPT THROUGH THE 2026-09-19 PARK for one reader: `her_door`'s prose. The six
+# rooms get rechecked when sheets/BASE.md round 3 decides who is in the house.
 #
 # ⚠️ npc_id IS OMITTED ON PURPOSE. With no `npc_id` the condition asks whether the
 # room holds ANYBODY (v2.py:4477-4483, setup.getNpcsAtLocation at :3788) rather

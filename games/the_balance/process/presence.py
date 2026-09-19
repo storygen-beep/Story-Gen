@@ -115,22 +115,15 @@ DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 # would be a real fix and it would also be a second place the rule lives; one
 # written exemption, with the reason on it, is the same answer for less.
 OCCUPANCY_ROWS = {
-    ("npc_nate", "the_gym", "18:00"):
-        "he is out. `the_gym` is an offscreen location — no nav card, no exits into "
-        "it, and she can never follow him there (v2.py:20653-20659). The row exists "
-        "so that the hour has a name instead of being a hole in the table, which is "
-        "what 08:00-15:00 still is. There is nothing to click BY DESIGN.",
+    # ⚠️ NINE ENTRIES LEFT ON 2026-09-19 WITH THE ROWS THEY EXCUSED. The sleep rows,
+    # @nate at the gym, and five of her mum's rows all came from house passes that
+    # were parked (games/the_balance/parked/README.md). Their written reasons are at
+    # ff91336:games/the_balance/process/presence.py for when sheets/BASE.md puts
+    # those hours back — a reason is worth reusing, a key for a row that is gone is not.
     ("npc_nate", "the_bathroom", "07:00"):
         "the shower in the opening. This row is what makes the bathroom taken — it "
         "blocks the door and shows him on the card, and there is nothing to click. "
         "v2.py:5270-5281 names exactly this case as intentional.",
-    # ⚠️ THIS KEY SAID "20:00" UNTIL 2026-09-17 AND HAD MATCHED NOTHING SINCE THE
-    # TELEVISION PASS MOVED HER ROW TO 21:00. It cost nothing only because the row
-    # was being backed another way; it is the same orphan class as the 08:00 -> 08:15
-    # one, and the third time this happens the key shape is the thing to argue with.
-    ("npc_lynn", "the_master_bedroom", "21:00"):
-        "she is the second body behind that door, which is the entire weight of it. "
-        "NEVER TOUCHED at any height — standing call, DECISIONS.md:97-100.",
     ("npc_gil", "the_master_bedroom", "21:00"):
         "the other half of the same door. The surface is `master_bedroom`, which is "
         "solo by design: she is looking, not talking to anybody.",
@@ -139,56 +132,6 @@ OCCUPANCY_ROWS = {
         "`npc_at_location npc_lynn is_present`, so this row is what makes that scene "
         "exist on the four nights she is off the ward. She does not speak in it and "
         "she is never touched.",
-
-    # --- the sleep rows, added 2026-09-17 ------------------------------------
-    # A sleep row is an occupancy row by definition: it exists to put a body in a
-    # room, and a body asleep is never a thing to click. What each one buys is
-    # written out here, because a row nobody can justify should be deleted, not
-    # exempted.
-    ("npc_gil", "the_master_bedroom", "23:30"):
-        "asleep. The awake half of his night — 21:00-23:30, 'door pushed to' — is "
-        "the master-bedroom door and is NOT exempt; it is backed by `master_bedroom`. "
-        "This row is what makes the house occupied after half eleven, and on ward "
-        "nights it is what leaves him in there on his own until half six.",
-    ("npc_nate", "nate_room", "00:00"):
-        "asleep. His 22:00-23:59 row is the invitation and carries `nate_door`, which "
-        "now holds its own 22:00-23:59 schedule so it cannot reach into these hours. "
-        "This row exists so the landing is not empty at three in the morning.",
-    ("npc_tasha", "tasha_room", "00:00"):
-        "asleep, weeknights. Her 16:00-17:00 and 18:00-23:59 rows carry "
-        "`hub_tasha_room`, which is now fenced to 16:00-23:59 so it cannot reach in "
-        "here. Nothing is clickable while she is asleep and nothing should be.",
-    ("npc_tasha", "tasha_room", "04:00"):
-        "asleep, after Friday and Saturday nights out. the_cast.md:36 — 'out until "
-        "four … gone Friday and Saturday nights'. Same fence as the weeknight row.",
-    ("npc_lynn", "the_master_bedroom", "00:00"):
-        "asleep, the other half of her four nights at home. `master_bedroom` carries "
-        "its own 21:00-22:00 schedule, so these hours open nothing. NEVER TOUCHED.",
-    # ⚠️ THE HOUR IN THIS KEY MOVED 08:00 -> 08:15 ON 2026-09-17 AND THE ROW WENT
-    # DEAD UNTIL IT WAS CHANGED HERE TOO. That is the cost of keying by the row
-    # rather than by the room, and it is the right cost — a room-level key would
-    # have gone on quietly excusing whatever replaced this. Her bathroom row starts
-    # at 07:45 and she cannot be in two places, so the sleep moved to let her wash.
-    ("npc_lynn", "the_master_bedroom", "08:15"):
-        "asleep after a ward night, Tue/Thu/Sat mornings. THE ROW the_house_day.md "
-        "has been asking for since it was written — 'her mum asleep down the hall on "
-        "a weekday morning is the quietest room in the game and nothing happens in it "
-        "yet'. 08:00-16:00 was empty in all nine rooms every day of the week before "
-        "this; these are the only hours of it that now hold anybody. The scene that "
-        "belongs in it is still unwritten, and that stays the next piece of work — "
-        "but the row is doing a job today whether or not that scene ever lands: it "
-        "puts somebody in the house who is not watching.",
-
-    # --- her mum's week, rewritten 2026-09-17 --------------------------------
-    ("npc_lynn", "the_master_bedroom", "15:00"):
-        "asleep before a night shift, Mon/Wed/Fri afternoons. She works the ward "
-        "those nights and sleeping the afternoon before one is what people who do "
-        "this actually do. There is nothing to click and there must not be. What "
-        "the row BUYS is @nate's door: he is in his room 15:00-18:00 with it not "
-        "quite shut, and from this pass her mother is asleep behind the next one "
-        "for the whole of it. It also turns `house_empty` false for those hours, "
-        "so shutting her own door to go live goes on @gil's count more often — "
-        "which is the only thing `door_noticed` exists for. NEVER TOUCHED.",
 }
 
 # Real holes, named to LO and deferred by him on 2026-09-16. They are printed every

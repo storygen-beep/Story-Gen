@@ -1,0 +1,249 @@
+# PARKED 2026-09-19 — 1 scene(s) from cd677e8 "@gil at the kitchen table".
+# Copied verbatim from ff91336, design comments included. NOT merged: parked/ is outside
+# toml_phases/. To bring one back, its block's round in sheets/BASE.md decides it first.
+
+# ── from toml_phases/5_scenes.toml
+# =============================================================================
+# @GIL AT THE KITCHEN TABLE
+#
+# LO played the build: "Gil shows in the kitchen but on entering kitchen nothing
+# is there." Twelve samples, and his portrait rendered on exactly one day — the
+# only thing bound to him in that room was `friday_payment`, which carries a
+# Friday schedule. Six nights in seven it cannot fire, so there was no clickable
+# @gil. His weekday-morning row, 06:30-08:00, had nothing at all.
+#
+# ⚠️ A HUB IS THE RIGHT SHAPE FOR HIM SPECIFICALLY, and the cast page says why:
+# "He never opens a step. Every step with him is one she opens. There is no move
+# he can make on his own, WHICH IS THE WHOLE REASON THE GAME CAN HAVE HIM AT THE
+# KITCHEN TABLE." He sits there; she opens everything or nothing happens.
+#
+# ⚠️ PRIORITY 5 AGAINST friday_payment's 11. The portrait selector takes the
+# highest-priority canvas per NPC, so a Friday evening still opens on the money.
+# Once that is spent for the day the hub takes the portrait back, which is right:
+# she pays him, and he is still sitting there.
+#
+# ⚠️ THIS IS NOT HIS CRUDE SURFACE AND MUST NOT BECOME ONE. CARRIED.md:203 puts
+# his register in THE GARAGE, late. The kitchen is the list, the money, the rules
+# and being noticed — same split as Tasha's room against her bathroom.
+#
+# ⚠️ No max_triggers_per_day and no trigger schedule: `requires_npc` resolves
+# through getNpcLocation, so his two rows ARE this canvas's hours and one canvas
+# covers the morning table and the evening table without them drifting apart.
+
+[[canvases]]
+id   = "hub_gil_kitchen"
+name = "Gil"
+description = "Portrait hub @ the_kitchen, both his rows. Reads her own state back at her — the list, the count of missed Fridays, the hours she keeps. Talk and state only; the money is friday_payment and the register is the garage."
+
+[canvases.trigger]
+location      = "the_kitchen"
+requires_npc  = "npc_gil"
+npc           = "npc_gil"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The table"
+
+# ⚠️ ONE IF/ELSEIF CHAIN, ON PURPOSE. Adjacent [group] blocks merge, and the two
+# time bands are exclusive by construction. `time_of_day` is NEW TO THIS GAME —
+# v2.py:4272-4277, delegating to setup.isCurrentTimeSlot so the wrap behaves
+# exactly as an NPC schedule does. It is a window, re-read every time, not a latch.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "06:30", end_time = "08:00" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@gil is at the end of the table with the radio on and the paper folded to the part he wants. He has been up for an hour. He does not ask whether you slept." },
+    { type = "paragraph", content = "The kettle has already gone. There is a cup out for you that you did not ask for, and @gil is reading the list on the fridge from where he is sitting, without getting up." },
+  ] },
+  { type = "paragraph", content = "Twenty minutes until the bus, and he knows that better than you do." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The radio is on low and @gil has the table to himself, with his hands flat on it either side of the mug. He is not waiting for anything, but he is not finished either. He is just where he sits." },
+    { type = "paragraph", content = "He is at the table with the light off over the cooker, going through a folder of something that is not interesting. The back door is open a crack for the cold." },
+    { type = "paragraph", content = "@gil looks up when you come in and then back down. That is the whole greeting and it always has been. The radio says something about the weather on the coast." },
+  ] },
+]
+
+# ⚠️ THESE TWO MERGE INTO ONE IF/ELSEIF AND THAT IS DELIBERATE. Adjacent [group]
+# blocks merge, so only the first matching band renders — and that is what @gil
+# does. He notices the chores, the hours and whether Friday got paid, and he says
+# ONE of them. The order is the priority: the money first, then the hours. Same
+# call `union_cara` makes and for the same reason ("a friend says the most
+# pressing thing, not three things in a row").
+# ⚠️ The live walk caught this as a failure before it was understood as a choice.
+# If a future pass wants both to show, they need a non-group block between them.
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "paragraph", content = "The list on the fridge is longer than it was. Nobody has said anything about it being longer. It went up the week you did not have the money, and it has stayed up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "home_after_ten", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "You were late in. I am not asking. I am telling you I know what time the door goes." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ⚠️ The cap is on the CHOICE — engine.md §28.1. A choice runs flagEffects before
+# advanceTime; a node exit runs it after, and advanceTime rolls the day inside
+# itself, so a cap on an exit that crossed midnight would lock the rung out of the
+# FOLLOWING day, silently.
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down for a bit."
+targetType = "node"
+nodeId     = "hub_gil_kitchen.sat"
+show_when_locked = true
+locked_text = "You have sat with him once today. Twice would be a thing, and he would notice it was a thing."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "gil_today", operator = "is_false" },
+] }
+flagEffects = [{ targetType = "player", flag = "gil_today", op = "set" }]
+
+# ⚠️ THE DOOR HIS METER OPENS, AND THE REASON HE HAS ONE. `npc_gil.relation` was
+# written three times and read by NOTHING — a meter climbing into a void, the same
+# shape as Sam's. This is the only condition in the game that reads it.
+# It is written as his refusal because that is his character: the cast page says he
+# "says no by saying nothing and tightening the rules", and that he wants to never
+# be thanked for the tuition. So asking COSTS her relation and does not answer the
+# question — which also stops him being a meter that only ever rises.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask what the semester actually cost."
+targetType = "node"
+nodeId     = "hub_gil_kitchen.asked"
+show_when_locked = true
+locked_text = "Not from where you stand with him. You would get the long silence and nothing else."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "gil_asked",  operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_gil", trait_key = "relation", operator = "gte", value = 10 },
+] }
+flagEffects = [{ targetType = "player", flag = "gil_asked", op = "set" }]
+
+# Unconditional — the free door, and the only live one on the first morning.
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "node"
+nodeId     = "hub_gil_kitchen.done"
+
+[[canvases.nodes]]
+id   = "sat"
+name = "The other end of it"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You take the chair at the other end and he does not move the folder. After a while he turns the radio down two notches. It is the most he will ever do about somebody else being in a room." },
+  { type = "paragraph", content = "He pushes the plate of whatever it is across without looking up. You eat some of it. Neither of you says anything for a long time, but somewhere in it the quiet stops being awkward and starts being the kitchen." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] } }
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "There is more on that list than there was. You will have noticed. That is all I am going to say about it." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "Your mother is on nights again Wednesday. Eat something before you go out, because she will ask me and I would rather say yes." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_gil" }, content = "If you need a lift Thursday, say so Wednesday. Not Thursday morning. I am not being awkward, it is just how a car works." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = 1
+
+[[canvases.nodes]]
+id   = "asked"
+name = "The number"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You ask him what the semester cost. @gil finishes the line he is reading before he looks up, and then he looks at you for a second longer than the question needed."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "It is paid. That is the part that concerns you. A hundred and fifty a week and we are square, and I am not doing the other conversation."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He turns the radio back up one notch and goes back to the folder. The number is on a piece of paper somewhere in this house and he is never going to be the one who says it out loud."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He did not tell you and he is not angry either. You just spent something to find that out, and the only place it shows is in how the room feels for the rest of the week."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_kitchen"
+time_progression_minutes = 10
+
+# It costs her. He says no by saying nothing, and pushing him is the one thing
+# that moves this meter DOWN — which is also what stops it being a meter that
+# only ever rises.
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "npc"
+npcId      = "npc_gil"
+trait      = "relation"
+op         = "add"
+value      = -4
+
+[[canvases.nodes]]
+id   = "done"
+name = "Out"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You go through. @gil turns the radio back up when he thinks you are out of the room. He had it down for you, but he is not going to mention that either."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "On."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_kitchen"
