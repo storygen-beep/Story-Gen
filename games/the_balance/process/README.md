@@ -173,6 +173,10 @@ for him.
 ⚠️ **`DECISIONS.md` is unresolved** — it mirrors to Notion alongside the sheets (§2, *Where the
 pages live*) and LO has not said which side of the line it sits on. Ask before writing it.
 
+**One exception, 2026-09-19:** `sheets/BASE.md` was created by the agent because LO approved a plan
+that named that one file. Once created it is his like every other page. Approval for one named file
+is never approval for another.
+
 ---
 
 ## 1 · Where the game is
