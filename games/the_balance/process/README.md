@@ -95,7 +95,9 @@ the inside. A rule applied by feel produces the same file again.
 ⚠️ **A back-written line is not a citation.** The 328 lines added under `sheets/` after `273f5ec`
 were written by the agent, not by LO. Citing one closes the loop this rule exists to break — write
 it into the sheet, then cite it next pass as proof it was discussed. **Citable = what LO wrote, plus
-what he has approved since.** Until he rules on those 328 lines they are not citable. See §7.
+what he has approved since.** Those 328 lines were taken back out on 2026-09-19, at LO's yes: the
+six pages are his 2026-09-15 text again, and the removed versions sit in `parked/sheets_as_built/`.
+Nothing in that folder is citable either.
 
 ### "Big" is measured by kind, not by size
 
@@ -170,12 +172,19 @@ This is what §2 step 2, *"write The Balance's version of it"*, now means: write
 for him.
 
 `v2_state.json` and everything under `process/` are the agent's files and stay writable.
-⚠️ **`DECISIONS.md` is unresolved** — it mirrors to Notion alongside the sheets (§2, *Where the
-pages live*) and LO has not said which side of the line it sits on. Ask before writing it.
+⚠️ **`DECISIONS.md` sits on LO's side of the line.** It mirrors to Notion alongside the sheets
+(§2, *Where the pages live*), and the one time the agent changed it since 2026-09-15 was to take the
+house passes' 117 lines back out, at his yes. Treat it like a sheet: ask before writing it.
 
 **One exception, 2026-09-19:** `sheets/BASE.md` was created by the agent because LO approved a plan
 that named that one file. Once created it is his like every other page. Approval for one named file
 is never approval for another.
+
+**Second exception, 2026-09-19:** LO: *"Go ahead takes the yes one out."* The six pages the house
+passes had back-written (`the_cast.md`, `the_house.md`, `the_house_day.md`, `the_phone.md`,
+`the_week.md`, `walking_in.md`) and `DECISIONS.md` were put back to their `273f5ec` text. Every
+line removed was the agent's — all nine commits carry the co-author line — and the removed versions
+are whole-file copies in `parked/sheets_as_built/` and `parked/DECISIONS_as_built.md`.
 
 ---
 
@@ -1312,9 +1321,7 @@ person, not by a gate** on 2026-09-11, before LO said not to touch the skill, wi
 the same turn. §5 above is that rule's content, held per-game. **S11 is still live in the skill and
 LO has not said whether to revert it.** Do not act on this without asking him.
 
-⚠️ **Outstanding item 2 — the 328 back-written sheet lines.** Between `273f5ec` and 2026-09-18 the
-agent added 328 lines to six pages under `sheets/`, in eight commits, every one of them in the same
-commit as the code it describes. LO has two options on the table and has not picked one: **revert
-them** to what he wrote on 2026-09-15, or **leave them and mark the added sections**. Until he picks,
-§0a's citation rule holds and **none of those lines can be quoted as proof that something was
-discussed.** Do not act on this without asking him.
+✅ **Resolved 2026-09-19 — the 328 back-written sheet lines.** Between `273f5ec` and 2026-09-18 the
+agent added 328 lines to six pages under `sheets/`, every one in the same commit as the code it
+describes. LO first kept them, then, once the content they described had been parked, said to take
+them out. The pages are his 2026-09-15 text again; the old versions are in `parked/sheets_as_built/`.

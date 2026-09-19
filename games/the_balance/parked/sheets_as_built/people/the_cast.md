@@ -13,13 +13,19 @@
 
 - **Wants** his house run his way, and to never be thanked for the tuition. He's strict, he doesn't
   drink, and he has never once mentioned what he paid.
-- **Found** in the kitchen until eight, back by six, in the garage late.
+- **Works for himself, out of the van.** A trade, and the garage is the workshop — the tools are on
+  the wall in the order they're drawn on it, and the list on the fridge is in the same handwriting
+  as the ones he writes for himself. **This is the answer to the one odd thing about him:** a man who
+  counts five dollars a chore handed over $2,400 in cash without mentioning it. He's had good years.
+  He's also never had anybody to send an invoice to about a bad day.
+- **Found** in the garage at five with the van open, the kitchen until eight and back in it by six,
+  and upstairs by nine.
 - **Gives** chore money, lifts, and the debt itself.
 - **Says no by** saying nothing and tightening the rules.
 - **He never opens a step.** Every step with him is one she opens. There is no move he can make on
   his own, which is the whole reason the game can have him at the kitchen table.
 
-## Nate — her step brother, 20, a senior at her college
+## Nate — her step brother, 20, the year above her at the same college
 
 - **Wants** her out of his way. He was fine before she moved in and he's never pretended otherwise.
 - **Underneath, he wants her, and hiding it is the only thing he's good at.** Her climb with him is
@@ -37,13 +43,24 @@
 - **Gives** clothes, parties, and advice that isn't wrong.
 - **Says no by** laughing at her. **She cannot out her** — she doesn't know, and she's an example,
   not a threat.
+- **She locks the bathroom door and opens it for Nell anyway.** Everybody in this house locks that
+  door; she is the only one who lets somebody in. Knocking on her is not a refusal, it is the way in.
 
 ## Lynn — her mum
 
 - **Wants** her daughter to be fine, and she is too tired to check.
-- **Found** on the ward three nights a week, asleep by ten on the others.
-- **Gives** the hours. Everything in this game happens while she's out or asleep.
-- **Never touched.** She's the price, not a person to be won.
+- **Found** on the ward Monday, Wednesday and Friday nights — and **in the house the rest of the
+  time, doing it.** Breakfast and the whole morning on her ward days, the sofa on the afternoons
+  after one, the hob at six on the four nights she's home.
+- **Gives** the hours — but she is no longer only an absence. She had about **sixty hours a week
+  where she was awake, at home, and the game said she wasn't there.** Now she has a week, and it is
+  a night nurse's week, which keeps her out of the way on its own: asleep before a shift, asleep
+  after one, gone for three whole nights.
+- **The only hour she is awake and not wrecked** is breakfast on a ward morning. That is the hour
+  she could check on her daughter, and she still doesn't.
+- **Helping her is the warmest thing in the game** and the only long stretch where the two of them
+  are alone in the house. It pays nothing and it costs an hour.
+- **Never touched.** She's the price, not a person to be won. The hours changed; that has not.
 
 ## Owen — the cafe owner
 

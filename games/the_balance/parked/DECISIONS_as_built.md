@@ -94,10 +94,127 @@ nothing there to break.
 so it lives in his description rather than here. A drunk step dad hands her an excuse for
 everything.
 
+**He works for himself, out of the van — added 2026-09-17, and it is load-bearing now.** The first
+build never said what he did for a living, which left four things in the game with no cause: the van
+and the lifts, **$2,400 handed over in cash** by a man who pays **$5 a chore**, the list on the
+fridge in his own handwriting, and the cast sheet's promise that he is "in the garage late."
+
+⚠️ **He is comfortable, and that is the part that cannot change.** The alternative on the table was a
+business going under, which would have made the $150 something he *needs*. That contradicts decision
+3 below: the debt is about **control**, and the economy, the house story and three meters hang off
+it being about control. LO was shown the failing version and did not take it.
+
 ### One thing that stays off-limits
 
 **Lynn — the mother — is never touched.** She's seen through a door and that's all.
 Written down here so a later release doesn't quietly read it as an oversight.
+
+#### Amended 2026-09-17 — the television, and only the television
+
+**She is still never touched, and nothing below changes that.** What changed is that she is no
+longer only seen through a door.
+
+LO was shown the paragraph above, verbatim, and chose to cross part of it. The crossing is written
+out here rather than left in a commit message, because the value of this section is that somebody
+can find it.
+
+**What she now does:** she sits on the sofa 20:00–21:00 on the four nights she's off the ward, and
+she is in the room when the fifth channel is on. She moves three steps and stops:
+
+| | |
+|---|---|
+| **at the start** | she doesn't notice. Eyes shut, mug going cold |
+| **after once** | she notices, and says nothing |
+| **after twice** | she knows what's on and stays where she is |
+
+**What is still off-limits, and is not up for reinterpretation:**
+
+- **She is never touched, at any height, by anybody.** No contact, ever.
+- **She is never in a scene as a body.** She is a person in a room.
+- **The three steps above are the whole of it.** There is no fourth, and `lynn_tv` is read by the
+  television and by nothing else in the game.
+- **She still has no sexual content of her own** and is not a climb anybody is working towards.
+
+**Why it was allowed:** the reason she exists is that everything in this house happens while she's
+out or asleep — she's the price, not a person to be won. Sitting through something she won't look at
+is that idea, not an exception to it. If a later release wants more than this, it is a new decision
+and it belongs under this heading too.
+
+#### Amended again 2026-09-17 — the bathroom, and it is the last one
+
+**This is the "new decision" the paragraph above asks for**, written where it said to write it. The
+line it crosses is its own: *"She is never in a scene as a body."* LO was shown that sentence, and
+the sentence saying any extension had to be logged here first, and chose to cross it.
+
+**What she now does:** she has the bathroom **07:45–08:15 on Tuesday, Thursday and Saturday**,
+coming off a ward. Nell can walk in on her once the lock is broken, and there is a written scene
+behind it.
+
+**Two rungs, and the third does not exist:**
+
+| | |
+|---|---|
+| **back out** | always |
+| **stay in the gap and watch** | corruption 15 |
+| ~~let herself be seen~~ | **never, at any corruption, for her and only for her** |
+
+Nate, Tasha and Gil all carry a third rung where Nell lets herself be caught looking. **Lynn's is
+not gated high — it is not authored.** There is nothing in the file to raise a number into.
+
+**What is still off-limits, and is not up for reinterpretation:**
+
+- **She is never touched, at any height, by anybody.** Unchanged, and this pass adds no contact.
+- **She never gets a move.** No relation, no arousal, no arc, nothing that climbs towards her. The
+  scene pays corruption to Nell and nothing to anybody else.
+- **She is never seen seeing.** The two rungs above are the whole of it.
+- **What the scene is about is the trespass, not the body.** She is forty-one, she has been on her
+  feet for twelve hours, and what is unbearable in that room is that Nell is standing in the door.
+
+**Why it was allowed:** the same reason as the television. She is the price, and this is the clearest
+statement of it the game has — the one person in the house with nothing to take, being taken from
+anyway. **Two crossings is where this stops.** A third goes under this heading or it does not happen.
+
+#### Amended a third time 2026-09-17 — her week, and NOT her body
+
+**This is not the third crossing the paragraph above forbids, and the distinction is the whole
+entry.** The two amendments above are about what may be done *to* her. This one is about **where she
+is at four in the afternoon**, and it takes nothing off the list. Logged here anyway, because the
+sentence it bends is in her cast entry and somebody will read the two pages together.
+
+**The line it bends:** `the_cast.md` — *"Gives the hours. Everything in this game happens while
+she's out or asleep."*
+
+**What was actually true before it:** she had six schedule rows and **about sixty hours a week where
+she was awake, at home, and the game said she was not in the house.** Seventeen empty hours a day on
+Monday, Wednesday and Friday; thirteen on the mornings after; twelve on Sunday, her only day off.
+Gil's gap is nine hours and it is 08:00–17:00, because he is on a job. Hers was not a job. It was an
+unwritten row.
+
+**What she now has:** breakfast and the morning on her ward days, the sofa on the afternoons after
+one, the hob at six on the four nights she is home. It is a **night nurse's** week, which keeps her
+out of the way on its own — asleep before a shift, asleep after one, gone for three whole nights.
+
+**What is still off-limits, and this pass adds nothing to any of it:**
+
+- **Never touched.** Unchanged.
+- **Never in a scene as a body** beyond the two bathroom rungs already logged. Nothing here is a
+  body. She is at a sink, at an ironing board, at a hob.
+- **No new rung, no arousal, no arc.** She carries `relation` and nothing else, and the two bands
+  written for it are a question about money and a sentence about liking the company.
+- **Two crossings is still where it stops.** This is not a third one.
+
+**Why it was allowed:** LO asked where she was, having read the schedule himself, and the honest
+answer was nowhere. An absence is a design; a hole is not. **She is still the price** — the hours
+she gives are the ward and the sleep, and those are untouched. What she got back is the hours she
+was already spending in this house with nobody writing them down.
+
+⚠️ **AND THE HOURS SHE IS *NOT* IN THE HOUSE ARE LOAD-BEARING.** The first draft of this week ran
+her chores to 14:00 and her nap from 14:00, and between them those two rows left the house occupied
+every minute of every day: **17 empty hours a week went to zero.** `house_empty` is read by
+`her_door`, so the branch where shutting her own door costs nothing became unreachable and every
+stream in the game would have gone on Gil's count forever. The build was green, presence.py was
+green, gates.py was green. Only the live walk caught it. **Any future change to her hours has to
+re-measure the empty window**, and there is a route in `walks.py` that does.
 
 ---
 

@@ -27,9 +27,26 @@ people who have never seen her face. That's why one of them already knows her by
 
 She needs three things: to be **clean**, to be **alone**, and about **an hour**.
 
-At the first build there's one place she can do it — **her own room, with the door shut.** That's
-the same door Gil's rule says stays open when anyone's on the landing, so the stream sits on top of
-a house rule from the very first session. Later releases open other places.
+**She starts it from the phone, wherever she's standing** — but the app only offers her the places
+the scene can actually happen. Somewhere else and it names the room she'd have to be in.
+
+**Her own room, with the door shut**, is the one she has from the start. That's the same door Gil's
+rule says stays open when anyone's on the landing, so the stream sits on top of a house rule from
+the very first session.
+
+⚠️ **The door is the gate, and the clock is not.** The first build allowed this between twelve and
+four on weekdays and after ten at night, and those hours were chosen only because the house happened
+to be empty in them. It isn't any more — her stepbrother is home from three — so the schedule came
+off and the shut door replaced it. **She can go live any hour she is willing to shut that door**,
+including a Saturday morning with the whole family in. What it costs is that shutting it on a full
+house goes on a count, and @gil reads that count at the dinner table.
+
+**The toilet at work is the second, and exposure is what opens it.** One room, a lock that works,
+and the person who opens it next could be anybody. It matters because it's the only place she can
+go live **while she's on a shift** — which is the collision at the bottom of this page, answered.
+It's shorter than a session at home, pays the same, and costs more of her.
+
+Later releases open the rest.
 
 **What it pays is never the same twice.** Every session pays somewhere inside a range, so she can
 have a good night and a night that wasn't worth getting undressed for.
