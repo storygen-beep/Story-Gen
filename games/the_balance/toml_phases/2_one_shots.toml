@@ -225,7 +225,7 @@ op         = "set"
 [[canvases]]
 id   = "canvas_ask_owen"
 name = "Ask about the job"
-description = "Her first meeting with Owen. He never turns her down — the no is in the hours. Taking it sets has_job and move_up = 1: two shifts, the worst two, $110 against a $150 Friday."
+description = "Her first meeting with Owen. He never turns her down and he never rations her either — all five shifts are hers from day one. Taking it sets has_job. $3 a shift against a $150 Friday."
 
 [canvases.trigger]
 location      = "the_cafe"
@@ -280,7 +280,7 @@ name = "The hours"
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Nine an hour, tips are yours, five hours a shift. Two to start. Tuesday and Sunday, the two nobody wants."
+content = "Three dollars a shift, three hours a shift. There are five of them a day and I don't much care which. Turn up at the top of one and you're on it."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -297,20 +297,20 @@ time_progression_minutes = 10
 
 [[canvases.nodes]]
 id   = "the_number"
-name = "Two lines at the bottom"
+name = "No lines at the bottom"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He writes your name at the bottom of the schedule in the office, under four people who were already on it."
+content = "He does not write your name down anywhere. There is a board in the office with six names on it and yours is not going on it, because you are not on a rota — you turn up or you don't."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Tuesday half past six, Sunday seven. Don't be late on the first one."
+content = "Seven, ten, one, four, seven. Be here when one of them starts, not after. And not two in a day."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Two shifts is a hundred and ten on a good week, with tips. Friday is a hundred and fifty."
+content = "Three dollars a shift. Friday is a hundred and fifty."
 
 [canvases.nodes.exit_block]
 type = "location"

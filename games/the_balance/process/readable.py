@@ -692,10 +692,11 @@ def main():
             print(f"    … and {len(rest) - 12} more")
         print()
 
-    print("  A LIST, NEVER A SCORE. Fragments are legitimate writing, and so is a weekday")
-    print("  the game actually declares — her shifts really are Tuesday and Sunday. What is")
-    print("  not legitimate is a sentence the reader cannot resolve, or an event they were")
-    print("  never given. See process/README.md §5a for the three forces that produce these,")
+    print("  A LIST, NEVER A SCORE. Fragments are legitimate writing, and so is an hour")
+    print("  the game actually declares — a shift really does start at seven, ten, one,")
+    print("  four and seven. What is not legitimate is a sentence the reader cannot")
+    print("  resolve, or an event they were never given.")
+    print("  See process/README.md §5a for the three forces that produce these,")
     print("  and §5b for the ladder that fixes them.\n")
     return 1 if (hits or loc_hits or bad_events) else 0
 

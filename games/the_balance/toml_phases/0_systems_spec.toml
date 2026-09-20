@@ -345,8 +345,8 @@ when  = [
 [[quest_cards]]
 id    = "card_on_the_floor"
 group = "the_cafe"
-text  = "Two shifts, Tuesday and Sunday. About $110 on a good week, against a $150 Friday."
-tip   = "The hours are Owen's to give. Working them is the only thing that has ever moved him."
+text  = "Five shifts a day, three hours each, and every one of them is yours. Three dollars a shift, against a $150 Friday."
+tip   = "Seven, ten, one, four and seven. Be at the cafe when one of them starts — he will not take you late."
 when  = [
   { flag = "has_job", op = "is_true" },
 ]

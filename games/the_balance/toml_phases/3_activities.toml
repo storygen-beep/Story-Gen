@@ -8,18 +8,19 @@
 # reads as depth on visit one is furniture by visit nineteen, and our games run
 # to 12.1% history against a field maximum of 5.41%.
 #
-# ⚠️ TWO canvases, not one. A condition cannot read the weekday, so a single
-# canvas covering both rosters would let her work four days while she is still on
-# the floor — and two shifts against a $150 Friday IS the squeeze the first build
-# runs on. The roster has to bite.
+# ⚠️ THERE IS NO ROSTER ANY MORE. her_week.md, 2026-09-20: the cafe is open seven
+# to ten every day, in five shifts of three hours, and every one of them is hers
+# from day one. Nothing counts how many she works — "the pay is the only limit
+# there is." So one canvas, five schedule windows, and the squeeze moved off the
+# roster and onto the wage.
 # =============================================================================
 
-# --- THE FLOOR · two shifts, the worst two -----------------------------------
+# --- THE FLOOR · five shifts a day, three hours each -------------------------
 
 [[canvases]]
 id   = "shift_floor"
 name = "Work the shift"
-description = "The ordinary shift at the floor. Tuesday and Sunday, twelve to five, $55 with tips. Body varies on every entry. Sometimes a customer asks instead — that is the substitution rules below."
+description = "The ordinary shift at the floor. Five of them a day, three hours each, every day of the week, $3. She clocks on at the top or it is gone. Body varies on every entry."
 
 [canvases.trigger]
 location      = "the_cafe"
@@ -29,7 +30,7 @@ priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 20 }]
 show_when_blocked = true
-cooldown_message = "You are not on the schedule today."
+cooldown_message = "Nothing starts now. He takes you at the top of a shift or not at all."
 # PARKED 2026-09-19 (the climbs) — `move_up lt 2` came off this trigger (it handed the
 # roster over to shift_counter), and both customer substitutions below it went:
 # cust_hand and cust_showing are the customers' ladder. Whole scene in
@@ -38,11 +39,41 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
 ] }
 
-# Tuesday and Sunday. 0 = Monday, so 1 and 6 — the two nobody wants.
+# Five shifts, every day of the week: 07-10 · 10-13 · 13-16 · 16-19 · 19-22.
+#
+# ⚠️ THESE WINDOWS ARE THE CLOCK-ON, NOT THE SHIFT. her_week.md: "She clocks on at
+# the top of the shift or it's gone. Owen is exact about the work; he doesn't take
+# her at half two." Twenty minutes wide, because isCurrentTimeSlot is end-EXCLUSIVE
+# (v2.py:4100) and the sidebar's wait buttons move in tens (v2.py:17420), so a
+# narrower window is unhittable. The shift itself is the 180 on the exit.
+#
+# ⚠️ AND TWENTY IS WHAT KEEPS THE PAGE TRUE. Out of the twelve o'clock class, the
+# quad and both bus legs put her on the strip at about 13:25, so 13:00-13:20 has
+# already closed and 16:00 is the only one a class day can reach.
 [[canvases.trigger.schedules]]
-weekdays   = [1, 6]
-start_time = "12:00"
-end_time   = "17:00"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "07:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "10:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "13:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "16:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "19:20"
 
 [[canvases.nodes]]
 id   = "base"
@@ -51,11 +82,11 @@ name = "The shift"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Five hours of carrying plates to people who are mid-sentence. The window table turns over four times. Your feet go at about hour three and the last two are hour three continuing." },
+  { type = "paragraph", content = "Three hours of carrying plates to people who are mid-sentence. The window table turns over twice, and your feet go somewhere in the middle of it, so the last hour is the first hour with worse feet." },
   { type = "paragraph", content = "The machine wants its tray emptied twice, but nobody else empties it. Owen watches you do it the first time and not the second. That is how he says a thing is yours now." },
   { type = "paragraph", content = "A slow one. You wipe tables that are already clean, because standing still where he can see you is worse work than working." },
   { type = "paragraph", content = "The lunch lot arrive together and leave together and the floor between the counter and the window ends up with all of it on. You get most of it up before he is out of the office." },
-  { type = "paragraph", content = "Two hours of nobody, then a coach party, then nobody again. The tips are a handful of coins and one note left flat under a saucer, which is the only part worth counting." },
+  { type = "paragraph", content = "An hour of nobody, then a coach party, then nobody again. You are still wiping down when the next three hours' worth of people start coming in, but those three hours are not yours." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -64,7 +95,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Table six has been waiting. I'm not telling you again, I'm telling you now." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "That one's done properly. Do the next one the same." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're quick. Quick isn't tidy. I want both and I'm not choosing." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Go home. You're on again Sunday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Go home. There's another one starts in an hour. Not you — nobody does two." },
 ]
 
 [canvases.nodes.exit_block]
@@ -74,13 +105,18 @@ text = "Clock off."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_cafe"
-time_progression_minutes = 300
+time_progression_minutes = 180
 
+# ⚠️ $3, AND THE GAME IS UNPAYABLE UNTIL THE TIPS TALK. her_week.md: "A shift pays
+# $3. That is the wage, and it is all this page says about money." What a shift
+# earns on top of the wage is a conversation LO parked — "keep the tips off, we
+# will discuss it separately" — and Friday still wants $150. Do not rebalance this
+# number on its own; it is half a design.
 [[canvases.nodes.exit_block.config.effects]]
 targetType = "player"
 trait      = "cash"
 op         = "add"
-value      = 55
+value      = 3
 
 # PARKED 2026-09-19 (the climbs) — `shifts_worked +1`. The count only fed the office and
 # the move up.
@@ -88,22 +124,38 @@ value      = 55
 # PARKED 2026-09-19 (the climbs) — shift_counter, the four-shift roster after the move up.
 # Verbatim in parked/climbs/cafe.toml.
 
-# --- SLEEP · the only thing that turns the week -----------------------------
+# --- SLEEP · the alarm she sets, and what the hours are worth ----------------
 # ⚠️ WITHOUT THIS FRIDAY IS UNREACHABLE. advanceDay() is what rolls the day name,
 # the day counter, the week on a Monday, [player.trait_decay] and the
 # [engine.daily_tick] clears — and the only thing that calls it is the clock
 # crossing midnight. Before this canvas the sidebar's wait buttons were the sole
 # way to get there, and rest decayed with nothing to refill it.
 #
-# ⚠️ FIXED +540, NOT "until morning". There is no sleep-until-hour key, and the
-# fixed number is the design anyway: the_week.md says she can stay up as late as
-# she likes and it costs her the next morning. Bed at ten is up at seven. Bed at
-# one is up at ten, and the nine o'clock is gone.
+# her_week.md: "She goes to bed when she likes and sets the alarm herself." There
+# is no sleep-until-hour key, so the alarm is built out of the two primitives that
+# do exist — a `time_of_day` condition for when she got in, and a fixed
+# time_progression_minutes on each choice. One choice per (band, wake hour). Only
+# one band's worth ever renders, so she sees four buttons and a fifth for no alarm.
+#
+# ⚠️ REST IS THE HOURS SLEPT, NOT THE ALARM. Eight hours is 100 and it is about
+# 12.5 an hour below that, which is the table on her_week.md. Nothing under four
+# hours is offered. Over eight gives nothing.
+#
+# ⚠️ AND THE +20 ON EVERY PRE-MIDNIGHT BAND IS NOT A TYPO. A choice's effects are
+# emitted BEFORE advanceTime (v2.py:13923), so a sleep that crosses midnight has
+# its `set` immediately decayed by [player.trait_decay] rest = 20. The bands that
+# cross compensate; the bands after midnight do not, because their decay already
+# fired while she was awake. ⚠️ CHANGE trait_decay.rest AND EVERY NUMBER BELOW IS
+# WRONG BY THE DIFFERENCE. Generated by scratchpad/gen_sleep.py.
+#
+# ⚠️ ONE SLEEP A CALENDAR DAY, which is max_triggers_per_day and not a flag. Bed at
+# one in the morning spends that day's sleep, so she cannot sleep again until the
+# next midnight. That is her_week.md working — staying up is allowed and it costs.
 
 [[canvases]]
 id   = "sleep"
 name = "Sleep"
-description = "Nine hours from whenever she lies down. Fills rest. The clock crossing midnight is what fires advanceDay, so this is the week's only engine."
+description = "She sets the alarm herself and the rest she gets is the hours she slept. Eight hours is full. The clock crossing midnight is what fires advanceDay, so this is still the week's only engine."
 
 [canvases.trigger]
 location      = "her_room"
@@ -120,25 +172,341 @@ name = "Bed"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, but neither of those things is going to keep you awake." },
-  { type = "paragraph", content = "Nine hours if nothing wakes you. The house does its noises — the heating, a door, a car on the street — and you sleep through all of it the way you have learned to." },
+  { type = "paragraph", content = "The alarm is the last thing you touch, and whatever you set it for is what you get. The house does its noises — the heating, a door, a car outside — but you sleep through all of it." },
   { type = "paragraph", content = "You are asleep before you have finished deciding what tomorrow costs. That is the one thing this room is reliably good for." },
   { type = "paragraph", content = "Shoes off, jeans on the chair, door pushed to. It is not shut, because his rule about the door is one you keep without thinking about it now." },
 ]
 
 [canvases.nodes.exit_block]
-type = "location"
-text = "Sleep."
+type = "choices"
 
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "her_room"
-time_progression_minutes = 540
+# In at about 20:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "rest"
-op         = "set"
-value      = 100
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — eleven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — twelve and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 750
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 21:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — eleven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 22:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 114 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 23:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 101 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 114 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 00:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 94 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 100 }]
+
+
+# In at about 01:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 94 }]
+
+
+# In at about 02:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+
+# In at about 03:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "04:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "04:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+
+# No alarm — ten hours, whatever time she lies down. The two windows are one
+# button to the player; they differ only by whether the sleep crosses midnight.
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't set one. Sleep until you wake."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 600
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "14:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't set one. Sleep until you wake."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 600
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "14:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 100 }]
 
 # --- THE CHORE LIST · the rule that can be tightened -------------------------
 # the_house.md: bins, laundry, dishes, the car. $5 each, ONE PAID A DAY, and he

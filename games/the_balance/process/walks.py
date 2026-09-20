@@ -136,16 +136,163 @@ def walk_opening(page, rep):
               f"has_job = {flags(page).get('has_job')}")
 
 
-def walk_shift(page, rep):
-    """Slice 2 — the cafe is the first repeatable surface, and it pays."""
-    start(page, "Tuesday", 18, "the_cafe")
-    before = cash(page)
+def clock(page):
+    """The clock as minutes past midnight, and the day name with it."""
+    ts = sv(page)["game_state"]["time_state"]
+    return ts["current_day"], ts["current_hour"] * 60 + ts["current_minute"]
+
+
+def walk_week(page, rep):
+    """sheets/systems/her_week.md — five shifts a day, and which of them a class day can reach.
+
+    ⚠️ REPLACED walk_shift ON 2026-09-20. The old route asserted with play(), which
+    jumps to the passage and walks straight past the trigger schedule — it started
+    at 18:00 and passed against a roster that ran 12:00-17:00. The roster was never
+    under test. Everything here asks `offered()` instead.
+
+    ⚠️ DICE OFF FOR THE WHOLE ROUTE. `picked_quad` and `picked_stop` auto-fire on
+    arrival and REPLACE the location screen, so an undiced run clicks "The bus home"
+    into a canvas that does not have it and the clock silently never moves. Caught
+    live on 2026-09-20; the same trap walk_travel already carries.
+    """
+    dice_off(page)
+    try:
+        _week(page, rep)
+    finally:
+        dice_on(page)
+
+
+def _week(page, rep):
+    apply_flag(page, "has_job", "set")
+
+    # ── the five clock-on windows, every day of the week
+    for day in ("Monday", "Saturday"):
+        for hour in (7, 10, 13, 16, 19):
+            start(page, day, hour, "the_cafe")
+            rep.check(f"{day[:3]} {hour:02d}:00 is a shift",
+                      offered(page, "the_cafe", "shift_floor") is True)
+
+    start(page, "Monday", 7, "the_cafe")
+    set_time(page, "Monday", 7, 19)
+    rep.check("07:19 still clocks on", offered(page, "the_cafe", "shift_floor") is True)
+    set_time(page, "Monday", 7, 20)
+    rep.check("07:20 does not — the window is end-exclusive",
+              offered(page, "the_cafe", "shift_floor") is False)
+    set_time(page, "Monday", 14, 30)
+    rep.check("he does not take her at half two",
+              offered(page, "the_cafe", "shift_floor") is False)
+
+    # ── three hours, three dollars, one a day
+    start(page, "Monday", 16, "the_cafe")
+    before, (_, t0) = cash(page), clock(page)
     rep.check("the floor shift opens", play(page, "shift_floor") is True)
     click(page, "Clock off")
-    rep.check("the shift pays", cash(page) > before, f"cash {before} -> {cash(page)}")
-    # ⚠️ PARKED 2026-09-19 (the climbs): "the shift is counted" and "the counter is its
-    # own surface". `shifts_worked` and `shift_counter` went with the cafe climb; both
-    # checks are in walk_cafe_climb under PARKED_ROUTES.
+    _, t1 = clock(page)
+    rep.check("a shift pays three dollars", cash(page) - before == 3,
+              f"cash {before} -> {cash(page)}")
+    rep.check("a shift is three hours", t1 - t0 == 180, f"{t0} -> {t1} minutes")
+    set_time(page, "Monday", 19, 0)
+    rep.check("and it is one a day", offered(page, "the_cafe", "shift_floor") is False)
+
+    # ── the class day. her_week.md: "On a class day the 16-19 shift is the only one
+    # that fits." Walked at the EARLIEST possible arrival — stand_at skips the bus
+    # stop's five-minute entry cost and every three-minute nav hop, so real play is
+    # later than this and the case only gets stronger.
+    start(page, "Tuesday", 10, "the_classroom")
+    set_time(page, "Tuesday", 10, 30)
+    play(page, "class_4")
+    click(page, "Sit through it")
+    _, out = clock(page)
+    rep.check("the ten thirty class puts her out at twelve", out == 12 * 60,
+              f"{out // 60:02d}:{out % 60:02d}")
+
+    # ⚠️ stand_at only writes current_location (playtest.py:330) — the passage has to
+    # be rendered too, or click() finds no links and the clock never moves.
+    stand_at(page, "the_quad")
+    goto(page, "Location_the_quad")
+    click(page, "The bus home")       # opens bus_back_quad — the fare is the CHOICE
+    click(page, "Home. $2")
+    stand_at(page, "the_bus_stop")
+    goto(page, "Location_the_bus_stop")
+    click(page, "Get the bus")
+    click(page, "Into town")
+    _, arrive = clock(page)
+    rep.check("campus to the cafe is eighty minutes at best",
+              arrive >= 13 * 60 + 20, f"{arrive // 60:02d}:{arrive % 60:02d}")
+    stand_at(page, "the_cafe")
+    rep.check("so the one o'clock is gone",
+              offered(page, "the_cafe", "shift_floor") is False)
+    set_time(page, "Tuesday", 16, 0)
+    rep.check("and the four o'clock is the one that fits",
+              offered(page, "the_cafe", "shift_floor") is True)
+
+    # ── the late one puts her on the street after his rule. 19:00 + 180 = 22:00,
+    # plus the walk home; `in_after_ten` watches the street from 22:15.
+    rep.check("the last shift ends at ten", 19 * 60 + 180 == 22 * 60)
+
+
+def walk_alarm(page, rep):
+    """sheets/systems/her_week.md — she sets the alarm, and rest is the hours she slept."""
+    # ⚠️ REST IS READ AFTER THE MIDNIGHT DECAY, which is the whole point. The choice
+    # sets rest BEFORE advanceTime (v2.py:13923), so a sleep that crosses midnight is
+    # decayed by [player.trait_decay] straight afterwards and the pre-midnight bands
+    # set twenty over. What the player sees is what her_week.md's table says.
+    start(page, "Thursday", 22, "her_room")
+    set_time(page, "Thursday", 22, 30)
+    play(page, "sleep")
+    offers = links(page)
+    rep.check("in at half ten, four alarms and no alarm",
+              len([x for x in offers if "Set it for" in x]) == 4, str(offers))
+    # "twelve and a half hours" exists only in the eight o'clock band, so its absence
+    # is proof the bands do not leak into each other.
+    rep.check("and no other band's is on the screen",
+              not any("twelve and a half" in x for x in offers), str(offers))
+
+    click(page, "Set it for seven")
+    day, now = clock(page)
+    rep.check("seven is seven", now == 7 * 60, f"{now // 60:02d}:{now % 60:02d}")
+    rep.check("and the day rolled", day == "Friday", day)
+    rep.check("eight and a half hours is a hundred",
+              traits(page).get("rest") == 100, f"rest = {traits(page).get('rest')}")
+
+    # Half eleven to six is six and a half hours: 81 on the page's table.
+    start(page, "Thursday", 23, "her_room")
+    set_time(page, "Thursday", 23, 30)
+    apply_effect(page, "rest", "set", 40, clamp=False)
+    play(page, "sleep")
+    click(page, "Set it for six")
+    _, now = clock(page)
+    rep.check("six is six", now == 6 * 60, f"{now // 60:02d}:{now % 60:02d}")
+    rep.check("six and a half hours is eighty-one",
+              traits(page).get("rest") == 81, f"rest = {traits(page).get('rest')}")
+
+    # After midnight the decay has already fired, so the band sets the plain number —
+    # and the sleep does not cross midnight, so the day is not spent by rolling over.
+    # That is the one case where "one a day" is observable.
+    start(page, "Friday", 1, "her_room")
+    set_time(page, "Friday", 1, 30)
+    play(page, "sleep")
+    click(page, "Set it for six")
+    day, now = clock(page)
+    rep.check("bed at half one, up at six, same day", day == "Friday", day)
+    rep.check("four and a half hours is fifty-six",
+              traits(page).get("rest") == 56, f"rest = {traits(page).get('rest')}")
+
+    # ⚠️ THE CAP IS PER CALENDAR DAY, NOT PER NIGHT. Sleeping at half one spends
+    # Friday's, so Friday evening has none left and she has to wait out the midnight.
+    # her_week.md: staying up is allowed and it costs.
+    set_time(page, "Friday", 22, 0)
+    goto(page, "Location_her_room")
+    rep.check("bed at half one spends that whole day's sleep",
+              not any(x.strip() == "Sleep" for x in links(page)), str(links(page))[:120])
+
+    # Nothing under four hours is on the screen at all.
+    start(page, "Friday", 3, "her_room")
+    set_time(page, "Friday", 3, 30)
+    play(page, "sleep")
+    offers = links(page)
+    rep.check("at half three only the two that clear four hours are offered",
+              len([x for x in offers if "Set it for" in x]) == 2, str(offers))
 
 
 def walk_cafe_climb(page, rep):
@@ -1051,7 +1198,8 @@ def walk_kitchen(page, rep):
 
 ROUTES = {
     "opening": walk_opening,
-    "shift": walk_shift,
+    "week": walk_week,
+    "alarm": walk_alarm,
     "friday": walk_friday,
     "stream": walk_stream,
     "lock": walk_lock,
