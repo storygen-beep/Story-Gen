@@ -456,6 +456,13 @@ day** after the news (`days_since_flag` on `bastien_alive_known`), and the cover
 instead of a second auto-fire straight after it. `cap_back_into_cover` is retired (`is_active = false`), not
 deleted, so a save parked inside it still loads.
 
+## The cot ladder ships in this release (2026-09-19)
+
+The open question in *Scope of THIS build* — whether 0.2.2 ships at the rescue or after the ladder — is
+answered. LO: *"this isnt 0.2.3 release, it is in the 0.2.2 just the build order."* The ladder was built as
+**THE COUNT** (`design_the_count.md`, beats 0194–0203, rev 230) and is the second half of 0.2.2. "No sex at the
+cot" below was this build's stopping point, not the release's.
+
 ## Outstanding — the one thing not done
 **The media harvest. 7 slots, authored and empty:** `portraits/loder.jpg`, `scenes/the_plant_room.jpg`, and
 `sex/bunker_g1_crate_t5` / `g2_water_t5` / `g3_table_t5` / `g4_bench_t5` / `g5_desk_t5` (`pool = 4` each).
