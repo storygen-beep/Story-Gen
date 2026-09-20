@@ -250,6 +250,22 @@ hidden = true
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
+  # chores.md: "Done today, one per chore… Both reset overnight. Nothing here
+  # climbs." Nine chores, nine flags, and they are what stop a chore being done
+  # twice in a day — the room canvases carry no max_triggers_per_day, because one
+  # would shut the whole kitchen after the first of its six.
+  # ⚠️ Her mum's schedule rows READ these (chores.md: if the laundry is done, or
+  # the player said "I'll do it", her hour on it drops and she sits down instead),
+  # so a flag removed here silently pins her to a chore she has already finished.
+  { targetType = "player", flag = "chore_done_breakfast", op = "unset" },
+  { targetType = "player", flag = "chore_done_breakfast_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_lunch", op = "unset" },
+  { targetType = "player", flag = "chore_done_lunch_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_dinner", op = "unset" },
+  { targetType = "player", flag = "chore_done_dinner_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_laundry", op = "unset" },
+  { targetType = "player", flag = "chore_done_dusting", op = "unset" },
+  { targetType = "player", flag = "chore_done_bins", op = "unset" },
   # PARKED 2026-09-19 (the climbs) — the jacket_off reset went with dare two.
   # Her door is open again by morning, for the same reason the jacket is back on:
   # the rule is @gil's and the house resets to it. Shutting it is a decision she
@@ -345,8 +361,8 @@ when  = [
 [[quest_cards]]
 id    = "card_on_the_floor"
 group = "the_cafe"
-text  = "Two shifts, Tuesday and Sunday. About $110 on a good week, against a $150 Friday."
-tip   = "The hours are Owen's to give. Working them is the only thing that has ever moved him."
+text  = "Five shifts a day, three hours each, and every one of them is yours. Three dollars a shift, against a $150 Friday."
+tip   = "Seven, ten, one, four and seven. Be at the cafe when one of them starts — he will not take you late."
 when  = [
   { flag = "has_job", op = "is_true" },
 ]

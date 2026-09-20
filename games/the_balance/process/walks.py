@@ -136,16 +136,163 @@ def walk_opening(page, rep):
               f"has_job = {flags(page).get('has_job')}")
 
 
-def walk_shift(page, rep):
-    """Slice 2 — the cafe is the first repeatable surface, and it pays."""
-    start(page, "Tuesday", 18, "the_cafe")
-    before = cash(page)
+def clock(page):
+    """The clock as minutes past midnight, and the day name with it."""
+    ts = sv(page)["game_state"]["time_state"]
+    return ts["current_day"], ts["current_hour"] * 60 + ts["current_minute"]
+
+
+def walk_week(page, rep):
+    """sheets/systems/her_week.md — five shifts a day, and which of them a class day can reach.
+
+    ⚠️ REPLACED walk_shift ON 2026-09-20. The old route asserted with play(), which
+    jumps to the passage and walks straight past the trigger schedule — it started
+    at 18:00 and passed against a roster that ran 12:00-17:00. The roster was never
+    under test. Everything here asks `offered()` instead.
+
+    ⚠️ DICE OFF FOR THE WHOLE ROUTE. `picked_quad` and `picked_stop` auto-fire on
+    arrival and REPLACE the location screen, so an undiced run clicks "The bus home"
+    into a canvas that does not have it and the clock silently never moves. Caught
+    live on 2026-09-20; the same trap walk_travel already carries.
+    """
+    dice_off(page)
+    try:
+        _week(page, rep)
+    finally:
+        dice_on(page)
+
+
+def _week(page, rep):
+    apply_flag(page, "has_job", "set")
+
+    # ── the five clock-on windows, every day of the week
+    for day in ("Monday", "Saturday"):
+        for hour in (7, 10, 13, 16, 19):
+            start(page, day, hour, "the_cafe")
+            rep.check(f"{day[:3]} {hour:02d}:00 is a shift",
+                      offered(page, "the_cafe", "shift_floor") is True)
+
+    start(page, "Monday", 7, "the_cafe")
+    set_time(page, "Monday", 7, 19)
+    rep.check("07:19 still clocks on", offered(page, "the_cafe", "shift_floor") is True)
+    set_time(page, "Monday", 7, 20)
+    rep.check("07:20 does not — the window is end-exclusive",
+              offered(page, "the_cafe", "shift_floor") is False)
+    set_time(page, "Monday", 14, 30)
+    rep.check("he does not take her at half two",
+              offered(page, "the_cafe", "shift_floor") is False)
+
+    # ── three hours, three dollars, one a day
+    start(page, "Monday", 16, "the_cafe")
+    before, (_, t0) = cash(page), clock(page)
     rep.check("the floor shift opens", play(page, "shift_floor") is True)
     click(page, "Clock off")
-    rep.check("the shift pays", cash(page) > before, f"cash {before} -> {cash(page)}")
-    # ⚠️ PARKED 2026-09-19 (the climbs): "the shift is counted" and "the counter is its
-    # own surface". `shifts_worked` and `shift_counter` went with the cafe climb; both
-    # checks are in walk_cafe_climb under PARKED_ROUTES.
+    _, t1 = clock(page)
+    rep.check("a shift pays three dollars", cash(page) - before == 3,
+              f"cash {before} -> {cash(page)}")
+    rep.check("a shift is three hours", t1 - t0 == 180, f"{t0} -> {t1} minutes")
+    set_time(page, "Monday", 19, 0)
+    rep.check("and it is one a day", offered(page, "the_cafe", "shift_floor") is False)
+
+    # ── the class day. her_week.md: "On a class day the 16-19 shift is the only one
+    # that fits." Walked at the EARLIEST possible arrival — stand_at skips the bus
+    # stop's five-minute entry cost and every three-minute nav hop, so real play is
+    # later than this and the case only gets stronger.
+    start(page, "Tuesday", 10, "the_classroom")
+    set_time(page, "Tuesday", 10, 30)
+    play(page, "class_4")
+    click(page, "Sit through it")
+    _, out = clock(page)
+    rep.check("the ten thirty class puts her out at twelve", out == 12 * 60,
+              f"{out // 60:02d}:{out % 60:02d}")
+
+    # ⚠️ stand_at only writes current_location (playtest.py:330) — the passage has to
+    # be rendered too, or click() finds no links and the clock never moves.
+    stand_at(page, "the_quad")
+    goto(page, "Location_the_quad")
+    click(page, "The bus home")       # opens bus_back_quad — the fare is the CHOICE
+    click(page, "Home. $2")
+    stand_at(page, "the_bus_stop")
+    goto(page, "Location_the_bus_stop")
+    click(page, "Get the bus")
+    click(page, "Into town")
+    _, arrive = clock(page)
+    rep.check("campus to the cafe is eighty minutes at best",
+              arrive >= 13 * 60 + 20, f"{arrive // 60:02d}:{arrive % 60:02d}")
+    stand_at(page, "the_cafe")
+    rep.check("so the one o'clock is gone",
+              offered(page, "the_cafe", "shift_floor") is False)
+    set_time(page, "Tuesday", 16, 0)
+    rep.check("and the four o'clock is the one that fits",
+              offered(page, "the_cafe", "shift_floor") is True)
+
+    # ── the late one puts her on the street after his rule. 19:00 + 180 = 22:00,
+    # plus the walk home; `in_after_ten` watches the street from 22:15.
+    rep.check("the last shift ends at ten", 19 * 60 + 180 == 22 * 60)
+
+
+def walk_alarm(page, rep):
+    """sheets/systems/her_week.md — she sets the alarm, and rest is the hours she slept."""
+    # ⚠️ REST IS READ AFTER THE MIDNIGHT DECAY, which is the whole point. The choice
+    # sets rest BEFORE advanceTime (v2.py:13923), so a sleep that crosses midnight is
+    # decayed by [player.trait_decay] straight afterwards and the pre-midnight bands
+    # set twenty over. What the player sees is what her_week.md's table says.
+    start(page, "Thursday", 22, "her_room")
+    set_time(page, "Thursday", 22, 30)
+    play(page, "sleep")
+    offers = links(page)
+    rep.check("in at half ten, four alarms and no alarm",
+              len([x for x in offers if "Set it for" in x]) == 4, str(offers))
+    # "twelve and a half hours" exists only in the eight o'clock band, so its absence
+    # is proof the bands do not leak into each other.
+    rep.check("and no other band's is on the screen",
+              not any("twelve and a half" in x for x in offers), str(offers))
+
+    click(page, "Set it for seven")
+    day, now = clock(page)
+    rep.check("seven is seven", now == 7 * 60, f"{now // 60:02d}:{now % 60:02d}")
+    rep.check("and the day rolled", day == "Friday", day)
+    rep.check("eight and a half hours is a hundred",
+              traits(page).get("rest") == 100, f"rest = {traits(page).get('rest')}")
+
+    # Half eleven to six is six and a half hours: 81 on the page's table.
+    start(page, "Thursday", 23, "her_room")
+    set_time(page, "Thursday", 23, 30)
+    apply_effect(page, "rest", "set", 40, clamp=False)
+    play(page, "sleep")
+    click(page, "Set it for six")
+    _, now = clock(page)
+    rep.check("six is six", now == 6 * 60, f"{now // 60:02d}:{now % 60:02d}")
+    rep.check("six and a half hours is eighty-one",
+              traits(page).get("rest") == 81, f"rest = {traits(page).get('rest')}")
+
+    # After midnight the decay has already fired, so the band sets the plain number —
+    # and the sleep does not cross midnight, so the day is not spent by rolling over.
+    # That is the one case where "one a day" is observable.
+    start(page, "Friday", 1, "her_room")
+    set_time(page, "Friday", 1, 30)
+    play(page, "sleep")
+    click(page, "Set it for six")
+    day, now = clock(page)
+    rep.check("bed at half one, up at six, same day", day == "Friday", day)
+    rep.check("four and a half hours is fifty-six",
+              traits(page).get("rest") == 56, f"rest = {traits(page).get('rest')}")
+
+    # ⚠️ THE CAP IS PER CALENDAR DAY, NOT PER NIGHT. Sleeping at half one spends
+    # Friday's, so Friday evening has none left and she has to wait out the midnight.
+    # her_week.md: staying up is allowed and it costs.
+    set_time(page, "Friday", 22, 0)
+    goto(page, "Location_her_room")
+    rep.check("bed at half one spends that whole day's sleep",
+              not any(x.strip() == "Sleep" for x in links(page)), str(links(page))[:120])
+
+    # Nothing under four hours is on the screen at all.
+    start(page, "Friday", 3, "her_room")
+    set_time(page, "Friday", 3, 30)
+    play(page, "sleep")
+    offers = links(page)
+    rep.check("at half three only the two that clear four hours are offered",
+              len([x for x in offers if "Set it for" in x]) == 2, str(offers))
 
 
 def walk_cafe_climb(page, rep):
@@ -159,6 +306,229 @@ def walk_cafe_climb(page, rep):
               (traits(page).get("shifts_worked") or 0) > worked,
               f"shifts_worked {worked} -> {traits(page).get('shifts_worked')}")
     rep.check("the counter is its own surface", play(page, "shift_counter") is True)
+
+
+# key, canvas, room, the label, a day and hour inside its window, and one outside
+#
+# ⚠️ EVERY TIME HERE IS ONE HER MUM IS NOT IN THAT ROOM, and that is not fussiness.
+# The solo chore choices are gated on `npc_lynn is_absent` — chores.md: "When her
+# mum isn't on a chore, she can do it on her own" — so once her week went in, three
+# of these probes started reading an empty screen and blaming the chore. Monday
+# lunchtime belongs to her: she is in that kitchen 11:15 to 13:30.
+CHORE_ROWS = [
+    ("breakfast",        "chores_kitchen",     "the_kitchen",    "Cook breakfast",          "Monday",  (8, 45),  (10, 30)),
+    ("breakfast_dishes", "chores_kitchen",     "the_kitchen",    "Do the breakfast dishes", "Monday",  (9, 30),  (11, 0)),
+    ("lunch",            "chores_kitchen",     "the_kitchen",    "Cook lunch",              "Tuesday", (12, 0),  (15, 0)),
+    ("lunch_dishes",     "chores_kitchen",     "the_kitchen",    "Do the lunch dishes",     "Tuesday", (14, 0),  (16, 0)),
+    ("dinner",           "chores_kitchen",     "the_kitchen",    "Cook dinner",             "Monday",  (18, 0),  (21, 0)),
+    ("dinner_dishes",    "chores_kitchen",     "the_kitchen",    "Do the dinner dishes",    "Monday",  (20, 30), (23, 0)),
+    ("laundry",          "chores_bathroom",    "the_bathroom",   "Put the laundry on",      "Monday",  (10, 0),  (23, 0)),
+    ("dusting",          "chores_front_room",  "the_front_room", "Do the dusting",          "Monday",  (10, 0),  (23, 0)),
+    ("bins",             "chores_garage",      "the_garage",     "Take the bins out",       "Monday",  (7, 0),   (11, 0)),
+]
+
+
+def clear_chores(page):
+    apply_flag(page, "chore_paid_today", "unset")
+    for key, *_ in CHORE_ROWS:
+        apply_flag(page, f"chore_done_{key}", "unset")
+
+
+def walk_chores(page, rep):
+    """sheets/systems/chores.md — nine chores, each in its room at its hour.
+
+    ⚠️ offered() CANNOT TEST THESE. The room canvases carry no trigger schedule on
+    purpose, so the room always offers the card; the hour lives on each CHOICE. The
+    thing under test is therefore what is in links() once the card is open.
+    """
+    dice_off(page)
+    try:
+        _chores(page, rep)
+    finally:
+        dice_on(page)
+
+
+def _chores(page, rep):
+    # ── each one is on the screen in its window and gone outside it
+    for key, cid, room, label, day, inside, outside in CHORE_ROWS:
+        clear_chores(page)
+        start(page, day, inside[0], room)
+        set_time(page, day, *inside)
+        play(page, cid)
+        rep.check(f"{key} is on the screen {day[:3]} {inside[0]:02d}:{inside[1]:02d}",
+                  any(label in x for x in links(page)), str(links(page))[:150])
+
+        set_time(page, day, *outside)
+        play(page, cid)
+        rep.check(f"{key} is gone by {outside[0]:02d}:{outside[1]:02d}",
+                  not any(label in x for x in links(page)), str(links(page))[:150])
+
+    # ── and when her mum IS on it, the chore is hers to help with, not to do alone
+    clear_chores(page)
+    start(page, "Monday", 7, "the_kitchen")
+    set_time(page, "Monday", 7, 10)
+    play(page, "chores_kitchen")
+    rep.check("her mum on the breakfast takes it off the solo list",
+              not any("Cook breakfast" in x for x in links(page)), str(links(page))[:150])
+    rep.check("and puts it on her own card instead",
+              offered(page, "the_kitchen", "mum_breakfast") is True)
+
+    # ── the first one of the day pays, the second does not, and both take half an hour
+    clear_chores(page)
+    start(page, "Monday", 8, "the_kitchen")
+    set_time(page, "Monday", 8, 30)
+    before, (_, t0) = cash(page), clock(page)
+    play(page, "chores_kitchen")
+    click(page, "Cook breakfast")
+    _, t1 = clock(page)
+    rep.check("the first chore of the day pays five", cash(page) - before == 5,
+              f"cash {before} -> {cash(page)}")
+    rep.check("and it costs half an hour", t1 - t0 == 30, f"{t0} -> {t1}")
+    rep.check("and it is done for the day",
+              flags(page).get("chore_done_breakfast") is True,
+              f"chore_done_breakfast = {flags(page).get('chore_done_breakfast')}")
+
+    play(page, "chores_kitchen")
+    rep.check("done means gone from the room",
+              not any("Cook breakfast" in x for x in links(page)), str(links(page))[:150])
+
+    before = cash(page)
+    rep.check("the next one is still there",
+              any("Do the breakfast dishes" in x for x in links(page)), str(links(page))[:150])
+    click(page, "Do the breakfast dishes")
+    rep.check("but the second one of the day pays nothing", cash(page) == before,
+              f"cash {before} -> {cash(page)}")
+
+    # ── the tightening. the_house.md via the first build: after a missed Friday the
+    # same five dollars costs an hour.
+    clear_chores(page)
+    start(page, "Monday", 8, "the_kitchen")
+    set_time(page, "Monday", 8, 30)
+    apply_effect(page, "fridays_missed", "set", 1, clamp=False)
+    _, t0 = clock(page)
+    play(page, "chores_kitchen")
+    click(page, "Cook breakfast")
+    _, t1 = clock(page)
+    rep.check("after a missed Friday the same five dollars costs an hour",
+              t1 - t0 == 60, f"{t0} -> {t1}")
+    apply_effect(page, "fridays_missed", "set", 0, clamp=False)
+
+    # ── overnight, everything opens again
+    clear_chores(page)
+    start(page, "Monday", 8, "the_kitchen")
+    set_time(page, "Monday", 8, 30)
+    play(page, "chores_kitchen")
+    click(page, "Cook breakfast")
+    rep.check("the flags are set before midnight",
+              flags(page).get("chore_done_breakfast") is True
+              and flags(page).get("chore_paid_today") is True)
+    advance_time(page, 20 * 60)
+    rep.check("and both reset overnight",
+              flags(page).get("chore_done_breakfast") is not True
+              and flags(page).get("chore_paid_today") is not True,
+              f"done={flags(page).get('chore_done_breakfast')} "
+              f"paid={flags(page).get('chore_paid_today')}")
+
+    # ⚠️ THE HELP / TAKE-OVER PAIR IS NOT CHECKED HERE. Both are gated on her mum
+    # standing in the room, and until her week is built she is only ever in the
+    # kitchen 19:00-20:00, which no chore window covers. walk_mum picks them up.
+
+
+def walk_mum(page, rep):
+    """sheets/people/her_mum.md — three kinds of day, and the chores she is on."""
+    dice_off(page)
+    try:
+        _mum(page, rep)
+    finally:
+        dice_on(page)
+
+
+# day, hour, minute, where she should be (None = out of the house)
+MUM_HOURS = [
+    ("Monday",    7, 10, "the_kitchen"),        # doing breakfast before a ward night
+    ("Monday",    9, 30, "the_strip"),          # out shopping — new, and reachable
+    ("Monday",   16,  0, "the_master_bedroom"), # asleep, getting ahead of the night
+    ("Monday",   20,  0, None),                 # on the ward
+    ("Tuesday",   3,  0, None),                 # still on it
+    ("Tuesday",  11,  0, "the_master_bedroom"), # asleep the morning off it
+    ("Tuesday",  19, 30, "the_kitchen"),        # dinner, everybody in one room
+    ("Sunday",   14,  0, "the_front_room"),     # the one afternoon she gets
+    ("Sunday",    6,  0, "the_master_bedroom"), # Saturday night runs to quarter to eight
+]
+
+
+def _mum(page, rep):
+    start(page, "Monday", 12, "her_room")
+
+    for day, hour, minute, where in MUM_HOURS:
+        set_time(page, day, hour, minute)
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — "
+                  + (where or "out of the house"),
+                  npc_at(page, "npc_lynn") == where, str(npc_at(page, "npc_lynn")))
+
+    # ── the night that crosses midnight is two rows, and both of them hold
+    set_time(page, "Tuesday", 23, 50)
+    rep.check("ten to midnight on a Tuesday she is in bed",
+              npc_at(page, "npc_lynn") == "the_master_bedroom", str(npc_at(page, "npc_lynn")))
+    set_time(page, "Wednesday", 0, 10)
+    rep.check("and ten past, on the Wednesday, she still is",
+              npc_at(page, "npc_lynn") == "the_master_bedroom", str(npc_at(page, "npc_lynn")))
+    set_time(page, "Tuesday", 0, 10)
+    rep.check("but ten past midnight on the TUESDAY she is on the ward — the weekday "
+              "list is what a single wrapped row gets wrong",
+              npc_at(page, "npc_lynn") is None, str(npc_at(page, "npc_lynn")))
+
+    # ── her hour on a chore drops when the chore is already done
+    apply_flag(page, "chore_done_laundry", "unset")
+    set_time(page, "Monday", 13, 45)
+    rep.check("half one on a Monday she is on the bathroom floor with the washing",
+              npc_at(page, "npc_lynn") == "the_bathroom", str(npc_at(page, "npc_lynn")))
+    apply_flag(page, "chore_done_laundry", "set")
+    rep.check("do it yourself and she is sat down in the front room instead",
+              npc_at(page, "npc_lynn") == "the_front_room", str(npc_at(page, "npc_lynn")))
+
+    # ── and the offer to help is fenced to HER hours, not the chore's window
+    # ⚠️ THIS IS THE CHECK THE FIRST BUILD OF THE CHORES FAILED. The help / take-over
+    # pair started life on the room canvas behind `npc_lynn is_present` plus the
+    # laundry's own 08:00-22:00 window, which offered to take the washing off her
+    # while she was in the bath at six.
+    apply_flag(page, "chore_done_laundry", "unset")
+    set_time(page, "Monday", 13, 45)
+    stand_at(page, "the_bathroom")
+    rep.check("at her laundry hour the offer is there",
+              offered(page, "the_bathroom", "mum_laundry") is True)
+    set_time(page, "Monday", 18, 10)
+    rep.check("in the bath, she is in the same room and the offer is NOT",
+              npc_at(page, "npc_lynn") == "the_bathroom"
+              and offered(page, "the_bathroom", "mum_laundry") is False,
+              f"at {npc_at(page, 'npc_lynn')}, "
+              f"offered={offered(page, 'the_bathroom', 'mum_laundry')}")
+
+    # ── taking it over pays, closes the chore, and moves her
+    set_time(page, "Monday", 13, 45)
+    apply_flag(page, "chore_paid_today", "unset")
+    before = cash(page)
+    play(page, "mum_laundry")
+    rep.check("help her, take it over, or leave her to it",
+              len([x for x in links(page) if "Leave her" not in x]) == 2, str(links(page))[:160])
+    click(page, "Tell her you'll do it")
+    rep.check("taking it over pays the five", cash(page) - before == 5,
+              f"cash {before} -> {cash(page)}")
+    rep.check("and closes the chore", flags(page).get("chore_done_laundry") is True)
+    rep.check("and moves her out of it",
+              npc_at(page, "npc_lynn") == "the_front_room", str(npc_at(page, "npc_lynn")))
+
+    # ── helping does not pay, because it was never her job
+    apply_flag(page, "chore_done_dusting", "unset")
+    apply_flag(page, "chore_paid_today", "unset")
+    set_time(page, "Monday", 14, 40)
+    stand_at(page, "the_front_room")
+    before = cash(page)
+    play(page, "mum_dusting")
+    click(page, "Do it with her")
+    rep.check("doing it with her pays nothing", cash(page) == before,
+              f"cash {before} -> {cash(page)}")
+    rep.check("but it is still done", flags(page).get("chore_done_dusting") is True)
 
 
 def walk_friday(page, rep):
@@ -542,9 +912,14 @@ def walk_lock(page, rep):
     says nothing at all about whether the door is shut. From 2026-09-17 the door IS
     the gate, so the gate needs a route that goes the way a player goes.
     """
-    # 14:00 Monday — inside the window the stream used to be scheduled for, and the
-    # house is empty. If the schedules were still there this would pass on the clock.
-    start(page, "Monday", 14, "her_room")
+    # ⚠️ THIS WAS 14:00 UNTIL HER MUM'S WEEK WENT IN ON 2026-09-20, and the move is
+    # the finding, not the fix: two o'clock on a Monday is no longer an empty house.
+    # She is on the bathroom floor with the washing from half one to half two, and
+    # the_house_day.md called that whole afternoon "her window". 10:00 is what is
+    # left of it on a Monday — the two hours her mum is out on the strip.
+    # `house_empty` feeds `her_door`'s prose only, not a gate, so nothing shut; the
+    # hours it describes just got smaller, which is her week doing its job.
+    start(page, "Monday", 10, "her_room")
     apply_flag(page, "door_locked", "unset")
     rep.check("the house is empty at two on a Monday",
               sv(page, "SugarCube.setup.triggerConditionsSatisfied("
@@ -1051,7 +1426,10 @@ def walk_kitchen(page, rep):
 
 ROUTES = {
     "opening": walk_opening,
-    "shift": walk_shift,
+    "week": walk_week,
+    "chores": walk_chores,
+    "mum": walk_mum,
+    "alarm": walk_alarm,
     "friday": walk_friday,
     "stream": walk_stream,
     "lock": walk_lock,

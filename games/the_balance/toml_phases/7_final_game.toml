@@ -258,6 +258,22 @@ hidden = true
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "chore_paid_today", op = "unset" },
+  # chores.md: "Done today, one per chore… Both reset overnight. Nothing here
+  # climbs." Nine chores, nine flags, and they are what stop a chore being done
+  # twice in a day — the room canvases carry no max_triggers_per_day, because one
+  # would shut the whole kitchen after the first of its six.
+  # ⚠️ Her mum's schedule rows READ these (chores.md: if the laundry is done, or
+  # the player said "I'll do it", her hour on it drops and she sits down instead),
+  # so a flag removed here silently pins her to a chore she has already finished.
+  { targetType = "player", flag = "chore_done_breakfast", op = "unset" },
+  { targetType = "player", flag = "chore_done_breakfast_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_lunch", op = "unset" },
+  { targetType = "player", flag = "chore_done_lunch_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_dinner", op = "unset" },
+  { targetType = "player", flag = "chore_done_dinner_dishes", op = "unset" },
+  { targetType = "player", flag = "chore_done_laundry", op = "unset" },
+  { targetType = "player", flag = "chore_done_dusting", op = "unset" },
+  { targetType = "player", flag = "chore_done_bins", op = "unset" },
   # PARKED 2026-09-19 (the climbs) — the jacket_off reset went with dare two.
   # Her door is open again by morning, for the same reason the jacket is back on:
   # the rule is @gil's and the house resets to it. Shutting it is a decision she
@@ -353,8 +369,8 @@ when  = [
 [[quest_cards]]
 id    = "card_on_the_floor"
 group = "the_cafe"
-text  = "Two shifts, Tuesday and Sunday. About $110 on a good week, against a $150 Friday."
-tip   = "The hours are Owen's to give. Working them is the only thing that has ever moved him."
+text  = "Five shifts a day, three hours each, and every one of them is yours. Three dollars a shift, against a $150 Friday."
+tip   = "Seven, ten, one, four and seven. Be at the cafe when one of them starts — he will not take you late."
 when  = [
   { flag = "has_job", op = "is_true" },
 ]
@@ -462,7 +478,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_bathroom"
 name        = "The Bathroom"
-description = "The shower, the mirror, and a lock that works. It is the only room in this house that is ever properly yours, and it is yours for about as long as nobody else wants it."
+description = "The shower, the tub, the mirror, and a lock that works. The washing machine is under the window because there is nowhere else for it. It is the only room that is ever properly yours, and it is yours for as long as nobody else wants it."
 image       = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
 entry_from  = "the_hall"
@@ -470,7 +486,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in @gil's handwriting. Bins, laundry, dishes, the car. Five dollars each and he pays for one a day, and he only pays for what's on the list that day."
+description = "The chore list is on the fridge in @gil's handwriting. Three meals, the dishes after each of them, and then the laundry, the bins and the dusting. Five dollars, one a day, and only for the one with today's date against it."
 image       = "locations/the_kitchen.jpg"
 image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
 entry_from  = "the_hall"
@@ -510,7 +526,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, the washing machine, and the light @gil leaves on. Half the list on the fridge lives out here."
+description = "The car, the bins, and the light @gil leaves on. The bins are the only thing on the fridge list that happens out here, and they are the only one that has never been anybody else's."
 image       = "locations/the_garage.jpg"
 image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
@@ -824,7 +840,7 @@ activity   = "in, with music on"
 [[npcs]]
 id          = "npc_lynn"
 name        = "Lynn"
-description = "Your mum. She wants you to be fine and she is too tired to check. She does not know who paid for any of it, and everything in this house happens while she is out or asleep."
+description = "Your mum. She wants you to be fine and she is too tired to check. She does not know who paid for any of it. Three nights on the ward, and the rest of the week is this house and everything in it that nobody else does."
 portrait    = "lynn.jpg"
 role        = "mum"
 customizable = false
@@ -833,25 +849,556 @@ tags        = ["three nights on the ward", "asleep by ten", "too tired to check"
 core_traits = { relation = 0 }
 flag_keys   = []
 
-# ⚠️ NEVER TOUCHED. She is the price, not a person to be won — standing call,
-# re-confirmed by LO. She is here to put a second person in that bedroom, which
-# is the entire weight of the door, and for no other reason.
+# ⚠️ HER WEEK IS sheets/people/her_mum.md, 2026-09-20. Fifty-odd rows where there
+# were two. Three kinds of day — the ward day on Monday, Wednesday and Friday, the
+# morning after on Tuesday, Thursday and Saturday, and Sunday. She is on the ward
+# from 18:45 to 08:00 on ward nights, which is simply NO ROW: the ward is not a
+# location in this game and a gap already reads as absent (v2.py:3737).
 #
-# Ward nights are Monday, Wednesday and Friday, so she is HOME Tuesday, Thursday,
-# Saturday and Sunday. Those are the nights the master bedroom has two people in it.
+# ⚠️ HER CLOTHES LIVE IN THE ACTIVITY STRING. Home clothes, nightwear, the ward
+# uniform and the coat she goes out in, changed in the master bedroom every time
+# the next place needs a different set. Her PICTURE does not change with them — a
+# row has no image of its own, and the page parks that as engine work.
+#
+# ⚠️ EVERY NIGHT IS TWO ROWS. isCurrentTimeSlot wraps past midnight correctly
+# (v2.py:4097) but the weekday list is read against the day the clock is on, so a
+# single 22:00-06:45 row on [1,3,5] would put her in bed at two in the MORNING on
+# Tuesday instead of on Wednesday.
+#
+# ⚠️ A CHORE ROW IS FOLLOWED BY ITS TWIN. chores.md: do the laundry, or say "I'll
+# do it", and "her mum's hour on it drops and she sits in the front room instead."
+# The chore row carries `when` on that chore's flag; the row straight after it is
+# the same window in the front room with no `when`, and the first match wins
+# (v2.py:3661-3669). Delete a twin and she stands in a finished chore forever.
+#
+# ⚠️ npc_at_location IS REJECTED inside a `when` (template_import.py:3616) — it
+# would recurse through getNpcLocation. Flags only, and `version = "1.0"` or the
+# gate fails OPEN and the row is never really gated at all.
+#
+# Generated by games/the_balance/process/gen_week.py. Edit the table there.
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "06:45"
+end_time   = "07:00"
+activity   = "up, getting into the clothes she does the house in"
+
 [[npcs.schedules]]
 location   = "the_kitchen"
-weekdays   = [1, 3, 5, 6]
+weekdays   = [0, 2, 4]
+start_time = "07:00"
+end_time   = "07:30"
+activity   = "in home clothes, doing breakfast with the radio on"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "07:00"
+end_time   = "07:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "07:30"
+end_time   = "08:00"
+activity   = "eating standing up, one eye on the clock"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "at the sink with the breakfast things"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "08:30"
+end_time   = "08:45"
+activity   = "changing into the coat and the shoes she goes out in"
+
+[[npcs.schedules]]
+location   = "the_strip"
+weekdays   = [0, 2, 4]
+start_time = "09:00"
+end_time   = "11:00"
+activity   = "out on the strip with a list, in her going-out coat"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "11:00"
+end_time   = "11:15"
+activity   = "back into home clothes with the shopping still in the hall"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "11:15"
+end_time   = "12:00"
+activity   = "putting the shopping away, tins first"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "12:00"
+end_time   = "12:30"
+activity   = "doing lunch for whoever is in"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "12:00"
+end_time   = "12:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "12:30"
+end_time   = "13:00"
+activity   = "sat down to eat for half an hour"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 2, 4]
+start_time = "13:00"
+end_time   = "13:30"
+activity   = "at the sink again"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "13:00"
+end_time   = "13:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 2, 4]
+start_time = "13:30"
+end_time   = "14:30"
+activity   = "sorting the washing out on the bathroom floor"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "13:30"
+end_time   = "14:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "14:30"
+end_time   = "15:00"
+activity   = "going along the shelf with a cloth"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 2, 4]
+start_time = "14:30"
+end_time   = "15:00"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "15:00"
+end_time   = "18:00"
+activity   = "asleep with the curtains shut, getting ahead of the night"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 2, 4]
+start_time = "18:00"
+end_time   = "18:30"
+activity   = "in the bath with the door shut, the half hour that is hers"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "18:30"
+end_time   = "18:45"
+activity   = "getting into the ward uniform"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "in off the ward, still in uniform, eating without tasting it"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [1, 3, 5]
+start_time = "08:30"
+end_time   = "09:00"
+activity   = "in the bath, washing the shift off"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "09:00"
+end_time   = "09:15"
+activity   = "changing into nightwear with the light still on"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "09:15"
+end_time   = "15:00"
+activity   = "asleep, curtains shut against the morning"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "15:00"
+end_time   = "15:15"
+activity   = "up, into home clothes"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5]
+start_time = "15:15"
+end_time   = "15:45"
+activity   = "eating a late lunch on her own"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [1, 3, 5]
+start_time = "15:45"
+end_time   = "16:45"
+activity   = "sorting the washing out on the bathroom floor"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "15:45"
+end_time   = "16:45"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "16:45"
+end_time   = "17:15"
+activity   = "going along the shelf with a cloth"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "16:45"
+end_time   = "17:15"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "17:15"
+end_time   = "18:00"
+activity   = "sat down with the TV on, her one hour off"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "doing dinner for four"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5]
 start_time = "19:00"
 end_time   = "20:00"
-activity   = "at the table, still in the coat she travels in"
+activity   = "at the table, everybody in one room"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [1, 3, 5]
+start_time = "20:00"
+end_time   = "20:30"
+activity   = "at the sink with the dinner things"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [1, 3, 5]
+start_time = "20:00"
+end_time   = "20:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "20:30"
+end_time   = "20:45"
+activity   = "into nightwear"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [1, 3, 5]
+start_time = "20:45"
+end_time   = "22:00"
+activity   = "in bed with the lamp on and the door not quite shut"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [6]
+start_time = "07:45"
+end_time   = "08:00"
+activity   = "up, into home clothes"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "doing a proper breakfast for once"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "08:00"
+end_time   = "08:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "08:30"
+end_time   = "09:00"
+activity   = "at the table with whoever got up"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "09:00"
+end_time   = "09:30"
+activity   = "at the sink"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "09:00"
+end_time   = "09:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [6]
+start_time = "09:30"
+end_time   = "11:30"
+activity   = "the big wash, with the machine going twice"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "09:30"
+end_time   = "11:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "11:30"
+end_time   = "12:00"
+activity   = "going along the shelf with a cloth"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "11:30"
+end_time   = "12:00"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "12:00"
+end_time   = "12:30"
+activity   = "doing lunch"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "12:00"
+end_time   = "12:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "12:30"
+end_time   = "13:00"
+activity   = "sat down to eat"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "13:00"
+end_time   = "13:30"
+activity   = "at the sink"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "13:00"
+end_time   = "13:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "13:30"
+end_time   = "18:00"
+activity   = "in the chair with the TV on, the one afternoon she gets"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "doing dinner for four"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "19:00"
+end_time   = "20:00"
+activity   = "at the table, everybody in one room"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "20:30"
+activity   = "at the sink with the dinner things"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+] }
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "20:30"
+activity   = "sat down in the front room, because it is already done"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [6]
+start_time = "20:30"
+end_time   = "21:30"
+activity   = "in the bath with the door shut"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [6]
+start_time = "21:30"
+end_time   = "21:45"
+activity   = "changing into nightwear"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [6]
+start_time = "21:45"
+end_time   = "22:00"
+activity   = "in bed, not asleep yet"
 
 [[npcs.schedules]]
 location   = "the_master_bedroom"
 weekdays   = [1, 3, 5, 6]
-start_time = "20:00"
-end_time   = "23:59"
-activity   = "in bed with the lamp on, off the ward"
+start_time = "22:00"
+end_time   = "00:00"
+activity   = "asleep, with the landing light off"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 2, 4]
+start_time = "00:00"
+end_time   = "06:45"
+activity   = "asleep, with the landing light off"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [6]
+start_time = "00:00"
+end_time   = "07:45"
+activity   = "asleep — Saturday night is the one she gets an hour back on"
 
 # --- the two on campus who want nothing from her -----------------------------
 # The crowd — Jules, Bree and Paige — is the NEXT piece. These two are the friend
@@ -1118,7 +1665,7 @@ content = "The bins are round the side and the truck comes at eight. So it is yo
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Ten minutes, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
+content = "Half an hour, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -1219,7 +1766,7 @@ op         = "set"
 [[canvases]]
 id   = "canvas_ask_owen"
 name = "Ask about the job"
-description = "Her first meeting with Owen. He never turns her down — the no is in the hours. Taking it sets has_job and move_up = 1: two shifts, the worst two, $110 against a $150 Friday."
+description = "Her first meeting with Owen. He never turns her down and he never rations her either — all five shifts are hers from day one. Taking it sets has_job. $3 a shift against a $150 Friday."
 
 [canvases.trigger]
 location      = "the_cafe"
@@ -1274,7 +1821,7 @@ name = "The hours"
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Nine an hour, tips are yours, five hours a shift. Two to start. Tuesday and Sunday, the two nobody wants."
+content = "Three dollars a shift, three hours a shift. There are five of them a day and I don't much care which. Turn up at the top of one and you're on it."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -1291,20 +1838,20 @@ time_progression_minutes = 10
 
 [[canvases.nodes]]
 id   = "the_number"
-name = "Two lines at the bottom"
+name = "No lines at the bottom"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He writes your name at the bottom of the schedule in the office, under four people who were already on it."
+content = "He does not write your name down anywhere. There is a board in the office with six names on it and yours is not going on it, because you are not on a rota — you turn up or you don't."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Tuesday half past six, Sunday seven. Don't be late on the first one."
+content = "Seven, ten, one, four, seven. Be here when one of them starts, not after. And not two in a day."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Two shifts is a hundred and ten on a good week, with tips. Friday is a hundred and fifty."
+content = "Three dollars a shift. Friday is a hundred and fifty."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -1366,18 +1913,19 @@ value      = -2
 # reads as depth on visit one is furniture by visit nineteen, and our games run
 # to 12.1% history against a field maximum of 5.41%.
 #
-# ⚠️ TWO canvases, not one. A condition cannot read the weekday, so a single
-# canvas covering both rosters would let her work four days while she is still on
-# the floor — and two shifts against a $150 Friday IS the squeeze the first build
-# runs on. The roster has to bite.
+# ⚠️ THERE IS NO ROSTER ANY MORE. her_week.md, 2026-09-20: the cafe is open seven
+# to ten every day, in five shifts of three hours, and every one of them is hers
+# from day one. Nothing counts how many she works — "the pay is the only limit
+# there is." So one canvas, five schedule windows, and the squeeze moved off the
+# roster and onto the wage.
 # =============================================================================
 
-# --- THE FLOOR · two shifts, the worst two -----------------------------------
+# --- THE FLOOR · five shifts a day, three hours each -------------------------
 
 [[canvases]]
 id   = "shift_floor"
 name = "Work the shift"
-description = "The ordinary shift at the floor. Tuesday and Sunday, twelve to five, $55 with tips. Body varies on every entry. Sometimes a customer asks instead — that is the substitution rules below."
+description = "The ordinary shift at the floor. Five of them a day, three hours each, every day of the week, $3. She clocks on at the top or it is gone. Body varies on every entry."
 
 [canvases.trigger]
 location      = "the_cafe"
@@ -1387,7 +1935,7 @@ priority      = 5
 is_active     = true
 costs         = [{ trait = "clean", value = 20 }]
 show_when_blocked = true
-cooldown_message = "You are not on the schedule today."
+cooldown_message = "Nothing starts now. He takes you at the top of a shift or not at all."
 # PARKED 2026-09-19 (the climbs) — `move_up lt 2` came off this trigger (it handed the
 # roster over to shift_counter), and both customer substitutions below it went:
 # cust_hand and cust_showing are the customers' ladder. Whole scene in
@@ -1396,11 +1944,41 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
 ] }
 
-# Tuesday and Sunday. 0 = Monday, so 1 and 6 — the two nobody wants.
+# Five shifts, every day of the week: 07-10 · 10-13 · 13-16 · 16-19 · 19-22.
+#
+# ⚠️ THESE WINDOWS ARE THE CLOCK-ON, NOT THE SHIFT. her_week.md: "She clocks on at
+# the top of the shift or it's gone. Owen is exact about the work; he doesn't take
+# her at half two." Twenty minutes wide, because isCurrentTimeSlot is end-EXCLUSIVE
+# (v2.py:4100) and the sidebar's wait buttons move in tens (v2.py:17420), so a
+# narrower window is unhittable. The shift itself is the 180 on the exit.
+#
+# ⚠️ AND TWENTY IS WHAT KEEPS THE PAGE TRUE. Out of the twelve o'clock class, the
+# quad and both bus legs put her on the strip at about 13:25, so 13:00-13:20 has
+# already closed and 16:00 is the only one a class day can reach.
 [[canvases.trigger.schedules]]
-weekdays   = [1, 6]
-start_time = "12:00"
-end_time   = "17:00"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "07:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "10:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "13:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "16:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "19:20"
 
 [[canvases.nodes]]
 id   = "base"
@@ -1409,11 +1987,11 @@ name = "The shift"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Five hours of carrying plates to people who are mid-sentence. The window table turns over four times. Your feet go at about hour three and the last two are hour three continuing." },
+  { type = "paragraph", content = "Three hours of carrying plates to people who are mid-sentence. The window table turns over twice, and your feet go somewhere in the middle of it, so the last hour is the first hour with worse feet." },
   { type = "paragraph", content = "The machine wants its tray emptied twice, but nobody else empties it. Owen watches you do it the first time and not the second. That is how he says a thing is yours now." },
   { type = "paragraph", content = "A slow one. You wipe tables that are already clean, because standing still where he can see you is worse work than working." },
   { type = "paragraph", content = "The lunch lot arrive together and leave together and the floor between the counter and the window ends up with all of it on. You get most of it up before he is out of the office." },
-  { type = "paragraph", content = "Two hours of nobody, then a coach party, then nobody again. The tips are a handful of coins and one note left flat under a saucer, which is the only part worth counting." },
+  { type = "paragraph", content = "An hour of nobody, then a coach party, then nobody again. You are still wiping down when the next three hours' worth of people start coming in, but those three hours are not yours." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -1422,7 +2000,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Table six has been waiting. I'm not telling you again, I'm telling you now." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "That one's done properly. Do the next one the same." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "You're quick. Quick isn't tidy. I want both and I'm not choosing." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Go home. You're on again Sunday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_owen" }, content = "Go home. There's another one starts in an hour. Not you — nobody does two." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1432,13 +2010,18 @@ text = "Clock off."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_cafe"
-time_progression_minutes = 300
+time_progression_minutes = 180
 
+# ⚠️ $3, AND THE GAME IS UNPAYABLE UNTIL THE TIPS TALK. her_week.md: "A shift pays
+# $3. That is the wage, and it is all this page says about money." What a shift
+# earns on top of the wage is a conversation LO parked — "keep the tips off, we
+# will discuss it separately" — and Friday still wants $150. Do not rebalance this
+# number on its own; it is half a design.
 [[canvases.nodes.exit_block.config.effects]]
 targetType = "player"
 trait      = "cash"
 op         = "add"
-value      = 55
+value      = 3
 
 # PARKED 2026-09-19 (the climbs) — `shifts_worked +1`. The count only fed the office and
 # the move up.
@@ -1446,22 +2029,40 @@ value      = 55
 # PARKED 2026-09-19 (the climbs) — shift_counter, the four-shift roster after the move up.
 # Verbatim in parked/climbs/cafe.toml.
 
-# --- SLEEP · the only thing that turns the week -----------------------------
+# --- SLEEP · the alarm she sets, and what the hours are worth ----------------
 # ⚠️ WITHOUT THIS FRIDAY IS UNREACHABLE. advanceDay() is what rolls the day name,
 # the day counter, the week on a Monday, [player.trait_decay] and the
 # [engine.daily_tick] clears — and the only thing that calls it is the clock
 # crossing midnight. Before this canvas the sidebar's wait buttons were the sole
 # way to get there, and rest decayed with nothing to refill it.
 #
-# ⚠️ FIXED +540, NOT "until morning". There is no sleep-until-hour key, and the
-# fixed number is the design anyway: the_week.md says she can stay up as late as
-# she likes and it costs her the next morning. Bed at ten is up at seven. Bed at
-# one is up at ten, and the nine o'clock is gone.
+# her_week.md: "She goes to bed when she likes and sets the alarm herself." There
+# is no sleep-until-hour key, so the alarm is built out of the two primitives that
+# do exist — a `time_of_day` condition for when she got in, and a fixed
+# time_progression_minutes on each choice. One choice per (band, wake hour). Only
+# one band's worth ever renders, so she sees four buttons and a fifth for no alarm.
+#
+# ⚠️ REST IS THE HOURS SLEPT, NOT THE ALARM. Eight hours is 100 and it is about
+# 12.5 an hour below that, which is the table on her_week.md. Nothing under four
+# hours is offered. Over eight gives nothing.
+#
+# ⚠️ AND THE +20 ON EVERY PRE-MIDNIGHT BAND IS NOT A TYPO. A choice's effects are
+# emitted BEFORE advanceTime (v2.py:13923), so a sleep that crosses midnight has
+# its `set` immediately decayed by [player.trait_decay] rest = 20. The bands that
+# cross compensate; the bands after midnight do not, because their decay already
+# fired while she was awake. ⚠️ CHANGE trait_decay.rest AND EVERY NUMBER BELOW IS
+# WRONG BY THE DIFFERENCE.
+#
+# ⚠️ ONE SLEEP A CALENDAR DAY, which is max_triggers_per_day and not a flag. Bed at
+# one in the morning spends that day's sleep, so she cannot sleep again until the
+# next midnight. That is her_week.md working — staying up is allowed and it costs.
+#
+# Generated by games/the_balance/process/gen_week.py. Edit the table there.
 
 [[canvases]]
 id   = "sleep"
 name = "Sleep"
-description = "Nine hours from whenever she lies down. Fills rest. The clock crossing midnight is what fires advanceDay, so this is the week's only engine."
+description = "She sets the alarm herself and the rest she gets is the hours she slept. Eight hours is full. The clock crossing midnight is what fires advanceDay, so this is still the week's only engine."
 
 [canvases.trigger]
 location      = "her_room"
@@ -1478,50 +2079,385 @@ name = "Bed"
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "You put the phone face down on the books and get in. The landing light is still on under the door and somebody is still up, but neither of those things is going to keep you awake." },
-  { type = "paragraph", content = "Nine hours if nothing wakes you. The house does its noises — the heating, a door, a car on the street — and you sleep through all of it the way you have learned to." },
+  { type = "paragraph", content = "The alarm is the last thing you touch, and whatever you set it for is what you get. The house does its noises — the heating, a door, a car outside — but you sleep through all of it." },
   { type = "paragraph", content = "You are asleep before you have finished deciding what tomorrow costs. That is the one thing this room is reliably good for." },
   { type = "paragraph", content = "Shoes off, jeans on the chair, door pushed to. It is not shut, because his rule about the door is one you keep without thinking about it now." },
 ]
 
 [canvases.nodes.exit_block]
-type = "location"
-text = "Sleep."
+type = "choices"
 
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "her_room"
-time_progression_minutes = 540
+# In at about 20:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
 
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "rest"
-op         = "set"
-value      = 100
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
 
-# --- THE CHORE LIST · the rule that can be tightened -------------------------
-# the_house.md: bins, laundry, dishes, the car. $5 each, ONE PAID A DAY, and he
-# only pays for what is on the list that day. Half an hour — so the paid one is
-# $10 an hour against the cafe's $9. The money was never why chores are bad.
-# THE TIME IS.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — eleven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — twelve and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 750
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "20:00", end_time = "21:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 21:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — eleven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 22:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 114 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — ten and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "22:00", end_time = "23:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 23:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 101 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 114 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — nine and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "23:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+
+# In at about 00:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 94 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — eight and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "01:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 100 }]
+
+
+# In at about 01:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for six — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — seven and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "01:00", end_time = "02:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 94 }]
+
+
+# In at about 02:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for seven — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — six and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "02:00", end_time = "03:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 81 }]
+
+
+# In at about 03:30.
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for eight — four and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "04:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 56 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Set it for nine — five and a half hours."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "03:00", end_time = "04:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 69 }]
+
+
+# No alarm — ten hours, whatever time she lies down. The two windows are one
+# button to the player; they differ only by whether the sleep crosses midnight,
+# and together they cover all twenty-four hours exactly once.
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't set one. Sleep until you wake."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 600
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "14:00", end_time = "00:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 120 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't set one. Sleep until you wake."
+targetType = "location"
+locationId = "her_room"
+time_progression_minutes = 600
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "14:00" },
+] }
+effects     = [{ targetType = "player", trait = "rest", op = "set", value = 100 }]
+
+# --- THE CHORES · nine of them, each in its own room at its own hour ---------
+# sheets/systems/chores.md, 2026-09-20. The one button on the fridge became four
+# room canvases. "She doesn't do chores from the list; she does each one in its
+# own room." Half an hour each, one paid a day, five dollars.
+#
+# ⚠️ WHICH ONE PAYS IS PROSE, NOT MACHINERY, AND THAT IS DELIBERATE. The page has
+# Gil dating one line on the list. A condition cannot read the weekday and there is
+# no day counter, so a rotating pointer would take seven canvases to express — and
+# it would buy nothing, because EVERY CHORE COSTS THE SAME HALF HOUR. There is no
+# choice to exploit by picking. So the list says what the page says it says, and
+# the mechanic is the one that was already here: the first chore she does each day
+# is the one that pays, `chore_paid_today` closes it, and [engine.daily_tick]
+# opens it again.
+#
+# ⚠️ NO max_triggers_per_day AND NO chore_paid_today ON THESE TRIGGERS. Either one
+# shuts the whole room after the first chore of the day, and the kitchen has six.
+# The per-chore `chore_done_*` flags are what stop a chore being done twice.
+#
+# ⚠️ HELPING HER IS A SEPARATE CANVAS, AND THAT IS THE WHOLE POINT OF IT. The first
+# build of this put "Do it with her." on the room canvas behind
+# `npc_at_location npc_lynn is_present` plus the chore's own window — which offered
+# to help her with the laundry WHILE SHE WAS IN THE BATH, because the bathroom
+# window is 08:00-22:00 and she is in that room for both. Her hours are per
+# weekday, a choice cannot read the weekday, and a trigger schedule can: so each
+# `mum_*` canvas below carries HER rows, copied off MUM_ROWS in gen_week.py so the
+# two cannot drift.
+#
+# Generated by games/the_balance/process/gen_week.py. Edit the tables there.
 
 [[canvases]]
-id   = "chore"
-name = "The list on the fridge"
-description = "One paid chore a day, $5, half an hour. After a missed Friday the list is longer and the same $5 costs an hour — that is the rule tightening, and he never says why."
+id   = "chores_kitchen"
+name = "The kitchen list"
+description = "The six that happen in here, and the list on the fridge saying which one pays. One paid a day, five dollars, half an hour each."
 
 [canvases.trigger]
 location      = "the_kitchen"
 is_repeatable = true
-max_triggers_per_day = 1
 priority      = 4
 is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
-] }
 
-# the_house_day.md: "@gil notices things there — the chores, the hours she keeps,
-# whether Friday got paid." He is in that room morning and evening and until now
-# he never once came through the door while she was working.
+# the_house_day.md: "@gil notices things there — the chores, the hours she
+# keeps, whether Friday got paid." He is in that room morning and evening.
 [[canvases.trigger.substitutions]]
 target_canvas_id = "gil_notices"
 chance = 0.3
@@ -1532,53 +2468,1169 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[canvases.nodes]]
 id   = "base"
 name = "The fridge"
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "paragraph", content = "Bins, laundry, dishes, the car. One of them has today's date against it in @gil's handwriting and the other three do not. That is the whole system." },
-  { type = "paragraph", content = "The list is where it always is, held on with the magnet from a tire place. Today it says the car. The car takes the longest and he knows that." },
-  { type = "paragraph", content = "Dishes today. There are enough of them in the sink to be somebody else's, and the somebody else is not going to be named." },
-]
-
 [[canvases.nodes.blocks]]
 type = "group"
 props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
 ] } }
 blocks = [
-  { type = "paragraph", content = "There are two more lines on the list than there were. Neither of the new ones has a date against it, so neither of them pays. They still have to be done." },
+  { type = "paragraph", content = "Two more lines on the list than there were, and neither of the new ones has a date against it. Neither of them pays, but they are on there, so they get done." },
 ]
-
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Nine lines in @gil's handwriting and a date against one of them. The dated one is worth five dollars and the other eight still have to happen, which is the whole system." },
+  { type = "paragraph", content = "The list is where it always is, held on with the magnet from a tire place. The date is in a different pen from the rest of it, so it is the only thing on there he has looked at twice." },
+  { type = "paragraph", content = "Breakfast, dishes, lunch, dishes, dinner, dishes, then laundry and bins and dusting. One of them pays, and the sink does not care which one it is." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
 
+# breakfast — 07:00 to 09:00
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the one with today's date on it."
+text       = "Cook breakfast."
 targetType = "location"
 locationId = "the_kitchen"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+  { type = "time_of_day", start_time = "07:00", end_time = "09:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
 ] }
 effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
-flagEffects = [{ targetType = "player", flag = "chore_paid_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the whole list. Only one of them pays."
+text       = "Cook breakfast."
 targetType = "location"
 locationId = "the_kitchen"
 time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+  { type = "time_of_day", start_time = "07:00", end_time = "09:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
 ] }
 effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
-flagEffects = [{ targetType = "player", flag = "chore_paid_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook breakfast."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+  { type = "time_of_day", start_time = "07:00", end_time = "09:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }]
+
+# breakfast_dishes — 08:00 to 10:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the breakfast dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "10:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the breakfast dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "10:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the breakfast dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "10:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }]
+
+# lunch — 11:30 to 13:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook lunch."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+  { type = "time_of_day", start_time = "11:30", end_time = "13:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook lunch."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+  { type = "time_of_day", start_time = "11:30", end_time = "13:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook lunch."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+  { type = "time_of_day", start_time = "11:30", end_time = "13:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }]
+
+# lunch_dishes — 13:00 to 14:30
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the lunch dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "13:00", end_time = "14:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the lunch dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "13:00", end_time = "14:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the lunch dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "13:00", end_time = "14:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }]
+
+# dinner — 17:30 to 19:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook dinner."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+  { type = "time_of_day", start_time = "17:30", end_time = "19:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook dinner."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+  { type = "time_of_day", start_time = "17:30", end_time = "19:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Cook dinner."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+  { type = "time_of_day", start_time = "17:30", end_time = "19:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }]
+
+# dinner_dishes — 20:00 to 21:30
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dinner dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "20:00", end_time = "21:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dinner dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "20:00", end_time = "21:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dinner dishes."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+  { type = "time_of_day", start_time = "20:00", end_time = "21:30" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
 locationId = "the_kitchen"
+
+[[canvases]]
+id   = "chores_bathroom"
+name = "The washing"
+description = "The laundry, in the room the machine is actually in. Half an hour, and it pays if nothing else has today."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The machine"
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The basket by the bath is everybody's and gets emptied by whoever looks at it long enough. The machine is under the window and it takes forty minutes to do its thirty." },
+  { type = "paragraph", content = "Four people's washing goes into one drum and comes back out needing sorting, and the sorting is the part nobody counts as the chore." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+# laundry — 08:00 to 22:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the laundry on."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the laundry on."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the laundry on."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_bathroom"
+
+[[canvases]]
+id   = "chores_front_room"
+name = "The dusting"
+description = "The dusting, in the room it happens in. Half an hour, and it pays if nothing else has today."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The shelf"
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The TV is off, so the room is at its most obvious — the shelf, the sill, the tops of the frames nobody looks at until somebody does." },
+  { type = "paragraph", content = "Half an hour of moving things and setting them back exactly where they were. @gil notices when it has not been done, but he has never once said anything when it has." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+# dusting — 08:00 to 22:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dusting."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dusting."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Do the dusting."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_absent" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_front_room"
+
+[[canvases]]
+id   = "chores_garage"
+name = "The bins"
+description = "The bins. Hers and nobody else's, in the morning, half an hour — and it pays if nothing else has today."
+
+[canvases.trigger]
+location      = "the_garage"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Round the side"
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The bins are round the side and the truck comes at eight, so it is you dragging them to the front in whatever you already have on." },
+  { type = "paragraph", content = "Two of them, and the second one has a wheel that goes its own way. You do it anyway, because the alternative is a week of it getting mentioned." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+# bins — 06:00 to 10:00
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the bins out."
+targetType = "location"
+locationId = "the_garage"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_bins", operator = "is_false" },
+  { type = "time_of_day", start_time = "06:00", end_time = "10:00" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_bins", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the bins out."
+targetType = "location"
+locationId = "the_garage"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_bins", operator = "is_false" },
+  { type = "time_of_day", start_time = "06:00", end_time = "10:00" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_bins", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the bins out."
+targetType = "location"
+locationId = "the_garage"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_done_bins", operator = "is_false" },
+  { type = "time_of_day", start_time = "06:00", end_time = "10:00" },
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_bins", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_garage"
+
+# --- HER MUM, ON ONE OF THEM ------------------------------------------------
+# chores.md: help her (no five dollars, because it is her job), say you'll do it
+# (it pays if nothing else has today), or leave her to it. Taking it over sets
+# the same flag the chore itself sets, which is what drops her row and puts her
+# in the front room — the `when` on her schedule reads it.
+
+[[canvases]]
+id   = "mum_breakfast"
+name = "Your mum, on the breakfast"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "07:00"
+end_time   = "07:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is at the hob in her home clothes with two pans going, doing it at the speed of somebody who has done it every morning for years."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_breakfast_dishes"
+name = "Your mum, on the breakfast dishes"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_breakfast_dishes", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:00"
+end_time   = "09:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She is at the sink with her sleeves pushed up and the breakfast things stacked beside her, and she has not sat down once since she got up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_breakfast_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_lunch"
+name = "Your mum, on the lunch"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "12:00"
+end_time   = "12:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "12:00"
+end_time   = "12:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is doing lunch for whoever is in the house, which today is you, and she has not asked whether you wanted any."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_lunch_dishes"
+name = "Your mum, on the lunch dishes"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_lunch_dishes", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:00"
+end_time   = "13:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "13:00"
+end_time   = "13:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She is at the sink again. It is the third time she has stood at it today and it is not two o'clock yet."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_lunch_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_dinner"
+name = "Your mum, on the dinner"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is doing dinner for four with a shift already behind her, and she will be stood at this for an hour."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_dinner_dishes"
+name = "Your mum, on the dinner dishes"
+description = "She is on it, in the_kitchen, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_dinner_dishes", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "20:00"
+end_time   = "20:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "20:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The table is cleared and she is at the sink with all of it, and everybody else has gone through to the other room."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dinner_dishes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_laundry"
+name = "Your mum, on the laundry"
+description = "She is on it, in the_bathroom, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_bathroom"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_laundry", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:30"
+end_time   = "14:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "15:45"
+end_time   = "16:45"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:30"
+end_time   = "11:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is down on the bathroom floor with the pile, pulling darks off the top of it and not looking up at you."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_bathroom"
+
+[[canvases]]
+id   = "mum_dusting"
+name = "Your mum, on the dusting"
+description = "She is on it, in the_front_room, in the hours her own week puts her there. Help, take it over, or leave her to it."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+  { type = "flag", subject = "player", flag_key = "chore_done_dusting", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "14:30"
+end_time   = "15:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "16:45"
+end_time   = "17:15"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "11:30"
+end_time   = "12:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She is on it"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is going along the shelf with a cloth, moving each thing and putting it back down on the same ring it left."
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Do it with her."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "lt", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "fridays_missed", operator = "gte", value = 1 },
+] }
+effects     = [{ targetType = "player", trait = "cash", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }, { targetType = "player", flag = "chore_paid_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you'll do it."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_true" },
+] }
+flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_front_room"
 
 # --- THE SHOWER · the only tap `clean` has ----------------------------------
 # ⚠️ BEFORE THIS CANVAS `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a
@@ -3055,15 +5107,19 @@ locationId = "the_strip"
 # cust_showing), the office (office_closer) and the move up (move_up_counter). Designed work,
 # block 5 of sheets/BASE.md. Verbatim in parked/climbs/cafe.toml.
 
-# --- THE SCHEDULE ON THE WALL · where nothing happening is visible -----------
-# the_move_up.md: his only punishment is holding her where she is, and he never
-# announces it. THE SCHEDULE IS HOW HE TALKS. This is also the locked door the
-# release ends on.
+# --- THE SCHEDULE ON THE WALL · the board she is not on ----------------------
+# her_week.md, 2026-09-20: "nobody writes her name on it now." The rota was how
+# Owen held her where she was, and the roster is gone, so the board stopped being
+# a door and became the thing it always looked like — six other people's week.
+#
+# ⚠️ THE CLOSING SHIFT IS HERS FROM DAY ONE, which takes the top step off
+# the_move_up.md ("The building is him and her."). Owen's ladder needs a different
+# one. That is block 5 of sheets/BASE.md and it is NOT decided here.
 
 [[canvases]]
 id   = "the_schedule"
 name = "The schedule on the wall"
-description = "Repeatable read of the board. Shows where she stands without anybody saying it, and carries the closing shift as a visible locked door."
+description = "Repeatable read of the board. Six other people's week, and her name on none of it, which is what being on no rota looks like from the inside."
 
 [canvases.trigger]
 location      = "the_back_room"
@@ -3083,11 +5139,11 @@ name = "The board"
 # What a fresh save sees stays, unconditioned. Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Six names down the side and the week across the top. Yours has two marks against it, Tuesday and Sunday, in the same pen as everyone else's. The board is the same board it was last week."
+content = "Six names down the side and the week across the top, and not one of the marks on it is yours. You are not on this board at all. You turn up at the top of a shift and he puts you on the floor."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The bottom line of the board is the five-to-ten, one name a night, and it is the only line with a single name on it."
+content = "The seven-to-ten at the bottom carries one name most nights, in a different pen. It is the only line here anybody treats as a position, but nothing stops you standing it anyway."
 
 [canvases.nodes.exit_block]
 type = "choices"

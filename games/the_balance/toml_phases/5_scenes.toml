@@ -16,15 +16,19 @@
 # cust_showing), the office (office_closer) and the move up (move_up_counter). Designed work,
 # block 5 of sheets/BASE.md. Verbatim in parked/climbs/cafe.toml.
 
-# --- THE SCHEDULE ON THE WALL · where nothing happening is visible -----------
-# the_move_up.md: his only punishment is holding her where she is, and he never
-# announces it. THE SCHEDULE IS HOW HE TALKS. This is also the locked door the
-# release ends on.
+# --- THE SCHEDULE ON THE WALL · the board she is not on ----------------------
+# her_week.md, 2026-09-20: "nobody writes her name on it now." The rota was how
+# Owen held her where she was, and the roster is gone, so the board stopped being
+# a door and became the thing it always looked like — six other people's week.
+#
+# ⚠️ THE CLOSING SHIFT IS HERS FROM DAY ONE, which takes the top step off
+# the_move_up.md ("The building is him and her."). Owen's ladder needs a different
+# one. That is block 5 of sheets/BASE.md and it is NOT decided here.
 
 [[canvases]]
 id   = "the_schedule"
 name = "The schedule on the wall"
-description = "Repeatable read of the board. Shows where she stands without anybody saying it, and carries the closing shift as a visible locked door."
+description = "Repeatable read of the board. Six other people's week, and her name on none of it, which is what being on no rota looks like from the inside."
 
 [canvases.trigger]
 location      = "the_back_room"
@@ -44,11 +48,11 @@ name = "The board"
 # What a fresh save sees stays, unconditioned. Whole scene in parked/climbs/before_the_strip.toml.
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Six names down the side and the week across the top. Yours has two marks against it, Tuesday and Sunday, in the same pen as everyone else's. The board is the same board it was last week."
+content = "Six names down the side and the week across the top, and not one of the marks on it is yours. You are not on this board at all. You turn up at the top of a shift and he puts you on the floor."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The bottom line of the board is the five-to-ten, one name a night, and it is the only line with a single name on it."
+content = "The seven-to-ten at the bottom carries one name most nights, in a different pen. It is the only line here anybody treats as a position, but nothing stops you standing it anyway."
 
 [canvases.nodes.exit_block]
 type = "choices"
