@@ -140,8 +140,66 @@ OCCUPANCY_ROWS = {
     ("npc_lynn", "the_kitchen", "19:00"):
         "she is the CONDITION for dinner, not a guest at it — `dinner`'s trigger is "
         "`npc_at_location npc_lynn is_present`, so this row is what makes that scene "
-        "exist on the four nights she is off the ward. She does not speak in it and "
-        "she is never touched.",
+        "exist on the four nights she is off the ward. She does not speak in it.",
+
+    # --- her week, 2026-09-20 -------------------------------------------------
+    # sheets/people/her_mum.md put fifty-odd rows where there were two. Most of them
+    # are backed: every chore she does has a `mum_*` canvas carrying her own hours,
+    # and every chore row has a twin that twin_rows() exempts structurally.
+    #
+    # What is below is the other kind — the rows whose whole job is to put her body
+    # in a room. Asleep, changing, in the bath. A body asleep is never a thing to
+    # click, and the two hours she has the bathroom door shut are block 4 of
+    # sheets/BASE.md, not a gap somebody forgot.
+    #
+    # ⚠️ THE OLD REASONS AT ff91336 SAID "NEVER TOUCHED" AND THAT IS OVERRULED.
+    # LO, 2026-09-19: "She is an npc that can be conquired too… Dont restrict it."
+    # Her ladder is block 5. What these rows buy is written below; what they forbid
+    # is nothing.
+    ("npc_lynn", "the_master_bedroom", "00:00"):
+        "asleep, the small hours of every night she is not on the ward.",
+    ("npc_lynn", "the_master_bedroom", "06:45"):
+        "up and dressing, the fifteen minutes before a ward day starts. Her clothes "
+        "change in this room five times a day and each change is its own short row.",
+    ("npc_lynn", "the_master_bedroom", "07:45"):
+        "up and dressing on a Sunday, the one morning she gets an hour back.",
+    ("npc_lynn", "the_master_bedroom", "08:30"):
+        "changing into the coat she goes out in, before the strip.",
+    ("npc_lynn", "the_master_bedroom", "09:00"):
+        "changing into nightwear at nine in the morning, off a ward night.",
+    ("npc_lynn", "the_master_bedroom", "09:15"):
+        "asleep after a ward night, Tue/Thu/Sat, right through to three. THE ROW "
+        "the_house_day.md has been asking for since it was written — her mum asleep "
+        "down the hall on a weekday morning. What it buys is the quiet house her own "
+        "page counts on; the scene that belongs in it is still unwritten.",
+    ("npc_lynn", "the_master_bedroom", "11:00"):
+        "back into home clothes with the shopping still in the hall.",
+    ("npc_lynn", "the_master_bedroom", "15:00"):
+        "asleep before a night shift on Mon/Wed/Fri, and up and dressing on "
+        "Tue/Thu/Sat — two rows, one key, both of them a body and neither of them a "
+        "surface. The afternoon sleep is what people who work nights actually do.",
+    ("npc_lynn", "the_master_bedroom", "18:30"):
+        "getting into the ward uniform. Fifteen minutes, three nights a week.",
+    ("npc_lynn", "the_master_bedroom", "20:30"):
+        "into nightwear, off a day at home.",
+    ("npc_lynn", "the_master_bedroom", "20:45"):
+        "in bed with the lamp on and the door not quite shut. The hour before she is "
+        "asleep, and the second body behind that door.",
+    ("npc_lynn", "the_master_bedroom", "21:30"):
+        "changing into nightwear on a Sunday.",
+    ("npc_lynn", "the_master_bedroom", "21:45"):
+        "in bed on a Sunday, not asleep yet.",
+    ("npc_lynn", "the_master_bedroom", "22:00"):
+        "asleep, every night she is in this house. What it buys is the house her own "
+        "page describes as asleep after ten.",
+    ("npc_lynn", "the_bathroom", "08:30"):
+        "in the bath, washing a ward night off. Same job as @nate's 07:00 shower row "
+        "— it is what makes the bathroom taken. Walking in on it is block 4.",
+    ("npc_lynn", "the_bathroom", "18:00"):
+        "in the bath before a ward night, the half hour her own page calls the one "
+        "that is hers. Walking in on it is block 4.",
+    ("npc_lynn", "the_bathroom", "20:30"):
+        "in the bath on a Sunday. Walking in on it is block 4.",
 }
 
 # Real holes, named to LO and deferred by him on 2026-09-16. They are printed every
@@ -196,6 +254,7 @@ def canvas_facts(canvas):
         "gated": bool(t.get("conditions") or canvas.get("conditions")),
         "schedules": scheds,
         "speakers": speakers_of(canvas),
+        "addressed": addressed_of(canvas),
     }
 
 
@@ -228,6 +287,71 @@ def speakers_of(canvas):
     return found
 
 
+def addressed_of(canvas):
+    """Every NPC this canvas asks the engine about being HERE, anywhere in it.
+
+    ⚠️ THE THIRD WAY A ROW CAN BE BACKED, ADDED 2026-09-20 WITH HER MUM'S WEEK.
+    A row is backed when standing in that room while she is in it gives the player
+    something that knows she is there. Two ways were already understood: the canvas
+    is bound to her (`npc`), or she speaks on it (speakers_of). This is the third —
+    a canvas that gates a choice or a prose band on
+    `npc_at_location <her> is_present`.
+
+    chores.md is what made it necessary. Her mum's fifty rows are backed by the four
+    room chore canvases, whose help / take-it-over choices and prose bands appear
+    only when she is standing at the chore. Nothing on those canvases carries an
+    `npc` key and she does not speak on them, so without this every one of those
+    rows reported dead and the instrument would have been describing its own model
+    rather than the game.
+
+    ⚠️ is_present ONLY. `is_absent` is the opposite claim — a screen that exists
+    BECAUSE she is not there backs nothing about her being there.
+    """
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            if (node.get("type") == "npc_at_location"
+                    and node.get("operator") == "is_present"
+                    and node.get("npc_id")):
+                found.add(node["npc_id"])
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(canvas)
+    return found
+
+
+def twin_rows(scheds):
+    """{index of a fallback row: what it falls back from}, for one NPC's rows.
+
+    A row is a TWIN when an earlier row covers exactly the same weekdays and window,
+    carries a `when`, and this one does not. The engine walks rows in order and takes
+    the first match (v2.py:3661-3669), so the ungated one is precisely what happens
+    when the gated one's condition fails — a fallback position, not a surface.
+
+    ⚠️ STRUCTURAL, so it cannot be gamed by naming. The moment a twin stops matching
+    its gated row's window it stops being a twin and goes back to being judged.
+    """
+    out = {}
+    for i, s in enumerate(scheds):
+        if s.get("when"):
+            continue
+        window = (tuple(s.get("weekdays", [])), s.get("start_time"), s.get("end_time"))
+        for earlier in scheds[:i]:
+            if not earlier.get("when"):
+                continue
+            if (tuple(earlier.get("weekdays", [])), earlier.get("start_time"),
+                    earlier.get("end_time")) == window:
+                out[i] = (f"{earlier.get('location')} {earlier.get('start_time')}"
+                          f"-{earlier.get('end_time')}")
+                break
+    return out
+
+
 def classify(row, npc, here, hosts_of):
     """(verdict, detail, dead_days) for one schedule row.
 
@@ -248,8 +372,21 @@ def classify(row, npc, here, hosts_of):
     if key in OCCUPANCY_ROWS:
         return "occupancy", OCCUPANCY_ROWS[key], set()
 
+    if row.get("_twin_of"):
+        # ⚠️ A TWIN IS AN OCCUPANCY ROW BY CONSTRUCTION, AND IT IS EXEMPT AS A CLASS
+        # RATHER THAN AS FORTY-ODD IDENTICAL SENTENCES. chores.md: do the laundry
+        # yourself and "her mum's hour on it drops and she sits in the front room
+        # instead." The twin is that row — same window, no `when`, so it catches her
+        # the moment the chore row's gate fails. Its whole job is to put her body
+        # somewhere; there is nothing to do at it and there was never meant to be.
+        # ⚠️ The exemption is STRUCTURAL, not a name: twin_rows() below only marks a
+        # row that really does sit behind a gated row on the same window. A twin that
+        # stops matching its chore row stops being excused.
+        return "occupancy", f"the row {row['_twin_of']} falls back to when it is done", set()
+
     want = set(row["weekdays"])
     backed, why, subs = set(), [], []
+    portrait = False
 
     for c in here:
         if not c["active"]:
@@ -260,18 +397,23 @@ def classify(row, npc, here, hosts_of):
             continue
         if not c["repeatable"] or c["random"]:
             continue
-        # A portrait needs the canvas bound to HER. Coverage only needs her to
-        # speak on a screen that exists in this room — see speakers_of().
-        if not (mine or npc["id"] in c["speakers"]):
+        # A portrait needs the canvas bound to HER. Coverage only needs her to speak
+        # on a screen that exists in this room (speakers_of), or the screen to ask
+        # whether she is standing here (addressed_of).
+        speaks = npc["id"] in c["speakers"]
+        asks = npc["id"] in c["addressed"]
+        if not (mine or speaks or asks):
             continue
         days = live_days(row, c)
         if days:
             backed |= days
-            why.append(f"{c['id']}{'' if mine else ' (speaks)'}")
+            label = "" if mine else (" (speaks)" if speaks else " (asks for her)")
+            why.append(f"{c['id']}{label}")
+            if mine:
+                portrait = True
 
     if not want - backed:
-        return ("portrait" if any(" (speaks)" not in w for w in why) else "covered",
-                ", ".join(why), set())
+        return ("portrait" if portrait else "covered", ", ".join(why), set())
 
     if subs and not backed:
         live_subs = []
@@ -322,12 +464,14 @@ def main():
 
     rows, dead, deferred, capped, ladder, stranded = [], [], [], [], [], []
     for npc in game.get("npcs", []):
-        for sched in npc.get("schedules", []) or []:
+        twins = twin_rows(npc.get("schedules", []) or [])
+        for i, sched in enumerate(npc.get("schedules", []) or []):
             row = {
                 "location": sched.get("location"),
                 "weekdays": sched.get("weekdays", list(range(7))),
                 "start_time": sched.get("start_time", "00:00"),
                 "end_time": sched.get("end_time", "23:59"),
+                "_twin_of": twins.get(i),
             }
             verdict, detail, dead_days = classify(
                 row, npc, by_location.get(row["location"], []), hosts_of)
