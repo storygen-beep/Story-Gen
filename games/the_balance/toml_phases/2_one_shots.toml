@@ -124,7 +124,7 @@ content = "The bins are round the side and the truck comes at eight. So it is yo
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Ten minutes, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
+content = "Half an hour, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
 
 [canvases.nodes.exit_block]
 type = "location"
