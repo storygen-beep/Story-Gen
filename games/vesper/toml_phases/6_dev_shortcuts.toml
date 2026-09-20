@@ -1559,7 +1559,7 @@ flagEffects = [
 # live_the_count.py [9], which now clears storage before jump 2).
 [[canvases]]
 id          = "dev_jump_count_start"
-name        = "\u25b6 0.2.3: Bastien on the bunk"
+name        = "\u25b6 0.2.2: Bastien on the bunk"
 description = "DEV JUMP (THE COUNT, beat_0194). Seeds the END of 0.2.2 — dev_jump_way_down_start's full end-of-0.2.1 state, carried through a finished rescue: all eight flags a 0.2.2 run sets on its mandatory path (bastien_alive_known, rescue_agreed, route_learned, yard_part_found, link_built, bastien_found_alive, bastien_rescued, bastien_at_cot), yard_depth 4 and drains_done 2 — and explicitly clears every THE COUNT flag and bastien_mend. Drops at the_cot the night he was carried in: bastien_at_cot is set by this click, so its set_day is TODAY and cap_bastien_drinks waits for tomorrow, exactly as it does in play."
 [canvases.trigger]
 location      = "the_waterfront"
@@ -1570,7 +1570,7 @@ conditions = { version = "1.0", items = [
 ] }
 [[canvases.nodes]]
 id   = "seed"
-name = "0.2.3 start (dev)"
+name = "0.2.2 the count (dev)"
 blocks = [
   { type = "paragraph", content = "Dev jump: the end of The Way Down. Bastien is on the bunk and will not drink, and nothing of The Count has happened yet. Sleep, then come back to the cot tomorrow: the first step waits a calendar day." },
 ]
@@ -1811,7 +1811,7 @@ flagEffects = [
 # live_the_count.py [9], which now clears storage before jump 2).
 [[canvases]]
 id          = "dev_jump_count_one_short"
-name        = "\u25b6 0.2.3: one night short"
+name        = "\u25b6 0.2.2: one night short"
 description = "DEV JUMP 2 (THE COUNT, beat_0203). dev_jump_count_start's seed carried through the first night: bastien_drank, bastien_washed, brace_built, bastien_stood, bastien_bedded and bastien_slept SET (the brace's 40 coin spent), bastien_mend = 2, face off, and everything after the first night UNSET. bastien_slept is set by this click, so its set_day is today: tonight's 'Go to him.' is the free one, tomorrow's makes 3, and the morning after that he stops counting. Lands at the cot."
 [canvases.trigger]
 location      = "the_waterfront"
@@ -1822,7 +1822,7 @@ conditions = { version = "1.0", items = [
 ] }
 [[canvases.nodes]]
 id   = "seed"
-name = "0.2.3 one night short (dev)"
+name = "0.2.2 one night short (dev)"
 blocks = [
   { type = "paragraph", content = "Dev jump: The Count through the first night. Two nights on the meter. Go to him tonight (it will not count), again tomorrow (it will make three), and the morning after that he stops counting." },
 ]

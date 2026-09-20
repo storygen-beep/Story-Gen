@@ -1,6 +1,7 @@
 # Vesper — THE COUNT (Bastien at the cot, from the bunk back to himself)
 
-> Design record for the chunk after *The Way Down* (0.2.2). Every engine claim below was read out of the
+> Design record for the second half of **0.2.2**, after the rescue in *The Way Down*. **Same release, not 0.2.3**
+> — LO, 2026-09-19: *"this isnt 0.2.3 release, it is in the 0.2.2 just the build order."* Every engine claim below was read out of the
 > code or the shipped TOML in the design session, and carries its file and line.
 >
 > **Status:** design locked with LO in conversation, 2026-09-18 → 2026-09-19, and **BUILT 2026-09-19, rev 230,
@@ -332,7 +333,7 @@ Numbering continues from `beat_0193`. Every beat ends on a green build. Nothing 
 
 | # | beat | writes |
 |---|---|---|
-| 1 | `beat_0194` — systems + the seam: the `bastien_mend` trait · quest cards A–H and the old end card's seam · dev jump "0.2.3: Bastien on the bunk" · guard skeleton `tests/check_the_count.py`, written red first | `1_metadata` · `5_scenes` · `6_dev_shortcuts` · tests |
+| 1 | `beat_0194` — systems + the seam: the `bastien_mend` trait · quest cards A–H and the old end card's seam · dev jump "0.2.2: Bastien on the bunk" · guard skeleton `tests/check_the_count.py`, written red first | `1_metadata` · `5_scenes` · `6_dev_shortcuts` · tests |
 | 2 | `beat_0195` — step 1, the water | `5_scenes` |
 | 3 | `beat_0196` — the hub rewrite (bands + the choice frame) · step 2, the washing | `5_scenes` |
 | 4 | `beat_0197` — step 3: Kess's brace at the berth · he stands | `3_activities` · `5_scenes` |
@@ -344,7 +345,7 @@ Numbering continues from `beat_0193`. Every beat ends on a green build. Nothing 
 | 10 | `beat_0203` — dev jump "one night short" · `tests/live_the_count.py` · `gates.py` · reconcile | `6_dev_shortcuts` · tests |
 | 11 | `beat_0204` — the media pass, seven pools | media |
 
-The version number follows LO's ship call on 0.2.2 (ship at the rescue, or hold for this chunk).
+**It ships in 0.2.2** — LO's call, 2026-09-19. The rescue and the cot ladder are one release; this is its second half.
 
 ## Verification
 

@@ -3115,10 +3115,11 @@ bunk at the cot, refusing water, not knowing who she is — and no sex at the co
 
 ---
 
-## THE COUNT (Bastien at the cot) — pointer only
+## THE COUNT (Bastien at the cot, 0.2.2 second half) — pointer only
 
 **Not folded into this book.** Its full design record is `games/vesper/design_the_count.md` (locked with LO
-2026-09-19, rev 229; BUILT the same day, rev 230, beats 0194–0203 — media harvest pending). Bastien comes back to himself over about a week of game days, in seven
+2026-09-19, rev 229; BUILT the same day, rev 230, beats 0194–0203 — media harvest pending). **Part of 0.2.2**,
+not a new release: LO, "it is in the 0.2.2 just the build order." Bastien comes back to himself over about a week of game days, in seven
 one-time steps — water, washing, a brace Kess builds for coin, the first night, then he stops counting — and
 one meter, `bastien_mend`, that counts the nights she comes to him. His tally of the days a man did not come
 is replaced by it. The chunk ends with a note carried to Rue at the House, an envelope carried back, and him

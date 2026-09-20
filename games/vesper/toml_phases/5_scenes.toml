@@ -20803,7 +20803,10 @@ when = [
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
-# ═══ THE COUNT (0.2.3) — BASTIEN AT THE COT, FROM THE BUNK BACK TO HIMSELF. design_the_count.md ═══════
+# ═══ THE COUNT (0.2.2, second half) — BASTIEN AT THE COT, BACK TO HIMSELF. design_the_count.md ═══════
+# ⚠️ SAME RELEASE AS THE WAY DOWN. LO: "this isnt 0.2.3 release, it is in the 0.2.2 just the build order."
+# The rescue and the cot ladder were always one stream (design_the_way_down.md: "build order, not a release
+# cut"); THE COUNT is its second half, not a new version.
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
 # LO: "we have brought back bastien but now we have to make him normal" — then "Go ahead with your picks,
 # write the full design" and "start implementing each beats one by one". The spine, in one line: he counted

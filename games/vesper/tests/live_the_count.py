@@ -6,7 +6,7 @@ THE COUNT (Bastien at the cot) — LIVE guard, in the built game.
 before it, the meter's two hub choices are complementary, the loop never touches the drain. It cannot prove
 the WAITS, because a wait is arithmetic done in JavaScript that only exists once the game is built:
 setup.triggerConditionsSatisfied reads $flags_meta[flag].set_day, which only applyFlagEffect writes, against
-$game_state.time_state.day. So this gets there the way a tester does — the real "0.2.3: Bastien on the bunk"
+$game_state.time_state.day. So this gets there the way a tester does — the real "0.2.2: Bastien on the bunk"
 dev jump, whose click writes set_day through the engine — and then walks the chunk a calendar day at a time,
 advancing the day counter the way advanceDay does and clicking only what a player can see.
 
@@ -143,7 +143,7 @@ def main():
         # ── [0] beat_0194 — the jump lands at the end of 0.2.2, nothing of THE COUNT, card A live ──────────
         print("[0] the jump: the end of The Way Down, at the cot")
         go("Canvas_dev_jump_count_start_Node_seed")
-        check(click("^To the cot\\.$"), "took the 0.2.3 dev jump to the cot")
+        check(click("^To the cot\\.$"), "took the 0.2.2 Bastien-on-the-bunk dev jump to the cot")
         page.wait_for_timeout(400)
         check(passage() == "Location_the_cot", f"landed on the cot and nothing fired (on {passage()})")
         check(flag("bastien_at_cot") and flag("bastien_rescued"), "the end of 0.2.2 is seeded")
