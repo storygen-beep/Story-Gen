@@ -4383,10 +4383,14 @@ targetType = "location"
 locationId = "kess_berth"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] }
 effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 1 }]
+# ⚠️ RETURNS TO THE BERTH, NOT THE COT — CORRECTED beat_0207 (rev 233). This is the cancel on a swap she
+# is standing at Kess's bench to make, and it used to walk her one room deeper into the cot without being
+# asked. Its two siblings above both return to kess_berth; this one is now the same. A cancel that moves the
+# player is a cancel that lies, which is the same defect class as the extraction exit corrected in 5_scenes.
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "the_cot"
+locationId = "kess_berth"
 
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon
@@ -19185,7 +19189,10 @@ when = [
   { flag = "raid_done", op = "is_false" },
 ]
 
-# ── B4 — terminal. He is gone, and she does not know where. ──
+# ── B4 — he is gone, and she does not know where. NOT terminal past the night he is carried in. ──
+# ⚠️ UPPER-GATED bastien_at_cot is_false AT beat_0205 (rev 231). Left on raid_done alone it kept rendering
+# "✓ Arc complete — There is nothing left to work here" through the whole cot ladder, while the story card two
+# inches above it said to go and wash him. His section now follows him to the bunk (B5-B8 below).
 [[quest_cards]]
 priority   = 14
 npc_id     = "npc_bastien"
@@ -19193,7 +19200,64 @@ text       = "You put him on the floor of his own back room with thirty coin of 
 tip        = "There is nothing left to work here. The Undertow does not open in the evenings now and what is in the back room is ash."
 terminal   = true
 when = [
-  { flag = "raid_done", op = "is_true" },
+  { flag = "raid_done",      op = "is_true"  },
+  { flag = "bastien_at_cot", op = "is_false" },
+]
+
+# ── B5-B8 — THE COT (beat_0205, rev 231). His section follows the ladder the story cards run. ──
+# ⚠️ PROSE ONLY, NO GOAL BULLETS. The machinery — the face, the day, the nights — lives on the story card, where
+# the player is already looking. Repeating it here would double every bullet on one page. These say who he is
+# this week; the spine says what to do. Priorities 15-18 sit above B1-B4 so the pick is unambiguous, though the
+# gates are already exclusive.
+[[quest_cards]]
+priority   = 15
+npc_id     = "npc_bastien"
+text       = "He is on your bunk because there is nowhere else in the city he can be. He will not drink, he will not turn over, and he does not know who you are. The man who kept you in a room is four feet from where you sleep and cannot stand up."
+tip        = "He is at the cot every hour of the day. There is nothing to do for him yet but leave the water where he can reach it."
+when = [
+  { flag = "bastien_at_cot", op = "is_true"  },
+  { flag = "bastien_drank",  op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 16
+npc_id     = "npc_bastien"
+text       = "He is coming back by inches, and every inch of it is yours. Water first. Then the rag and the basin. Then something to stand up in. He is keeping a count on the bunk frame and he has not told you what it counts."
+tip        = "One step a day, at the cot, out of the bought face. The story card names the next one."
+when = [
+  { flag = "bastien_drank",  op = "is_true"  },
+  { flag = "bastien_bedded", op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 17
+npc_id     = "npc_bastien"
+text       = "He cannot hold your weight, so you do all of it, and he lets you. He watches you the way he used to watch a readout. The scratches on the frame are the days since Cain put him down here and went away, and they are still going up."
+tip        = "Go to him at the cot once a day, out of the bought face. Only the first visit of a day counts."
+when = [
+  { flag = "bastien_bedded",  op = "is_true"  },
+  { flag = "bastien_himself", op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 18
+npc_id     = "npc_bastien"
+text       = "He has stopped counting days and started counting money. He sits at your bench in the brace and works, and the underworld he never stood in front of is answering him again from a ship-breaker's yard."
+tip        = "Take his note to Rue at the House, eight in the morning until three the next morning. Bring the envelope back to your cot."
+when = [
+  { flag = "bastien_himself", op = "is_true"  },
+  { flag = "bastien_back",    op = "is_false" },
+]
+
+[[quest_cards]]
+priority   = 19
+npc_id     = "npc_bastien"
+text       = "Four months on a wall and a week on your bunk, and what is left of him is the man who owned half the Reach without ever standing in front of it. He does his books on your blanket. He still does not know who you are, and he never will."
+tip        = "He is at the cot, any hour. Go to him when you want him. He will know if you miss a night."
+terminal      = true
+terminal_text = "He is himself. The nights stay open."
+when = [
+  { flag = "bastien_back", op = "is_true" },
 ]
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
@@ -21857,9 +21921,12 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You got them into one room and it cost Grier the only sentence he had been saving for nine years, which he spent on what you do on his bench twice a week, and he watched Cain's face the whole way through it. Then he gave you the answer anyway, because he was a good man once. The third tray was FILLED LAST. They finished the other two, shut them, and went back into you for it, and it took another hour. Cain asked whether it was filled last, and nobody asks that unless they already know what went in. There was somebody in your life. They took him out of you and they kept him, and he is in a box at the top of that tower, and a stranger has had him for nine years and has not sold him and has not burned him."
-tip        = "That is where this build ends. Cain would not say who, and you have watched something go out of his face twice in a week now and you cannot name it either time. There is nothing to go and get: you can stand at the foot of that tower now and every door in it above the lobby is shut to you, and the store under his lab is shut behind you. What is still standing is everything you built to get here. GRIER is in his room off the lane from ten in the morning and not one thing about that has closed. SABIN is on the floor at eight and up in his lab from eleven, the reading still pays fifteen a shift, and he still clears the bench for you. The strip, the market, The House and the pit are where you left them, and so is everybody who was already yours. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
-terminal      = true
-terminal_text = "Chapter complete. The story continues in the next release"
+tip        = "Cain would not say who, and you have watched something go out of his face twice in a week now. There is nothing to go and get up that tower. Go home and sleep. He knows where your cot is, and he has never once come to it for nothing. Everything you built is still standing. Grier is in his room off the lane from ten. Sabin is on the floor at eight and in his lab from eleven. The strip, the market, The House and the pit are where you left them."
+# ⚠️ RE-OPENED AT beat_0205 (rev 231). It was still TERMINAL and its tip still opened "That is where this build
+# ends", which is what a returning player read the moment 0.2.2 shipped: the release's own first beat is one cot
+# visit away, and the page told them the story had stopped. The upper gate below was the right half of the fix at
+# rev 222; the card itself had to stop being an ending. It now hands over — go home and sleep, he knows where your
+# cot is — the way the rescue card hands over to the cot ladder. Same lesson as beat_0165, third time paid.
 # ⚠️ CLOSED AT beat_0187 (rev 222), THE WAY DOWN — and this is the §19 boundary check done from BOTH sides.
 # This card carries terminal = true and a tip whose first words are "That is where this build ends." Left
 # on two_men_done alone it keeps saying that while 0.2.2's content is live, so a returning player opens the
@@ -23009,7 +23076,6 @@ effects = [
 id   = "knees"
 name = "On her knees"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/grier_room_oral_t4", pool = 4, description = "A woman kneeling on bare boards in a filthy room giving slow head to a heavy older man sitting in an armchair, him holding a glass in one hand and her hair in the other. Must show: her kneeling, him seated and clothed above her, slow oral. Avoid: him standing, a bright or clean room, her looking like she is enjoying it, a young man.", search_queries = ["kneeling slow blowjob older man in armchair amateur gif", "woman on knees head older man sitting chair homemade gif", "slow deep blowjob seated man dim room gif"] } },
   { type = "paragraph", content = "He does not ask and she does not make him ask. She puts her coat over the arm of the chair, kneels down on the boards in front of him, and gets his belt open while he is still holding the glass." },
   { type = "cascade", props = { beats = [
     { advance_text = "Take him out.", blocks = [
@@ -23017,6 +23083,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Do not look up at me like that. It has been a long time since that did anything on request and it is not going to start because you are pretty." },
     ] },
     { advance_text = "Put your mouth on it.", blocks = [
+        { type = "video", props = { pool_dir = "sex/grier_room_oral_t4", pool = 4, description = "A woman kneeling on bare boards in a filthy room giving slow head to a heavy older man sitting in an armchair, him holding a glass in one hand and her hair in the other. Must show: her kneeling, him seated and clothed above her, slow oral. Avoid: him standing, a bright or clean room, her looking like she is enjoying it, a young man.", search_queries = ["kneeling slow blowjob older man in armchair amateur gif", "woman on knees head older man sitting chair homemade gif", "slow deep blowjob seated man dim room gif"] } },
         { type = "paragraph", content = "She takes him into her mouth soft and works him that way, tongue flat under the head, her fist moving at the base to give him something to push into. He fills out a little and then stops." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Slower. Slower. You are working it like a pump handle. Whoever taught you that taught you to get a man out of a room, not to get him off." },
     ] },
@@ -24542,7 +24609,6 @@ effects = [
 id   = "bench"
 name = "Over the bench"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/sabin_bench_t5", pool = 4, description = "A woman bent face down over a long bench in a bright room being fucked from behind by a clothed man with his hand on the back of her neck. Must show: her bent over a hard surface, him standing behind her fully dressed, a hand holding her down. Avoid: a bed, avoid: dim or coloured lighting, avoid: her making noise or looking at the camera.", search_queries = ["bent over desk fucked from behind office clothed man gif", "woman face down on table taken from behind bright room gif", "hand on back of neck bent over bench doggy gif"] } },
   { type = "paragraph", content = "He clears the last two stacks off the end of the bench with his forearm and does not put them anywhere. She is out of the skirt before he has turned round, and puts herself face down on the steel because it is quicker than being asked." },
   { type = "cascade", props = { beats = [
     { advance_text = "Let him.", blocks = [
@@ -24554,6 +24620,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "There. God. Do not move for a second." },
     ] },
     { advance_text = "Let him move.", blocks = [
+        { type = "video", props = { pool_dir = "sex/sabin_bench_t5", pool = 4, description = "A woman bent face down over a long bench in a bright room being fucked from behind by a clothed man with his hand on the back of her neck. Must show: her bent over a hard surface, him standing behind her fully dressed, a hand holding her down. Avoid: a bed, avoid: dim or coloured lighting, avoid: her making noise or looking at the camera.", search_queries = ["bent over desk fucked from behind office clothed man gif", "woman face down on table taken from behind bright room gif", "hand on back of neck bent over bench doggy gif"] } },
         { type = "paragraph", content = "Then he fucks her properly, one hand on the back of her neck holding her down on the bench, and every stroke of it goes through the steel and up into her arms. Her teeth stay shut on nothing at all." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Do not brace against it. Let it move you. There is nobody on this floor to see you do it." },
     ] },
@@ -24950,7 +25017,6 @@ description = "beat_0131 (rev 181). Triggerless Sabin payloads @sabin_lab, reach
 id   = "d0"
 name = "What he carries"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/sabin_finish_anal_t5", pool = 4, description = "A man finishing in the ass of a woman bent over a bench in a bright room and sinking forward onto her back, both of them going still. Must show: anal finish from behind, her face down, him going still on her back. Avoid: pulling out to finish on her, avoid: a bed, avoid: dim light.", search_queries = ["anal creampie bent over a table he collapses onto her back gif", "anal creampie from behind holding her hips bright room gif"] } },
   { type = "paragraph", content = "What comes down her arm out of a man four months into a job is not nine years of anything. It is a filing system with a person operating it, and every single item in it is exactly where he put it." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -24975,6 +25041,7 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "It is a recording of her being made. It has been in a cabinet two floors under that bench the whole time she has been at a desk one floor below it, reading his filing for fifteen coin a day." },
     ] },
     { advance_text = "Come out of it.", blocks = [
+        { type = "video", props = { pool_dir = "sex/sabin_finish_anal_t5", pool = 4, description = "A man finishing in the ass of a woman bent over a bench in a bright room and sinking forward onto her back, both of them going still. Must show: anal finish from behind, her face down, him going still on her back. Avoid: pulling out to finish on her, avoid: a bed, avoid: dim light.", search_queries = ["anal creampie bent over a table he collapses onto her back gif", "anal creampie from behind holding her hips bright room gif"] } },
         { type = "paragraph", content = "It lets go all at once and she is on the bench with her mouth still open against his hand and his weight coming down slow onto her back. He takes the hand away and apologises for it, which he does every time." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Sorry. Was that too. No. All right. Good." },
     ] },
@@ -26642,7 +26709,6 @@ time_progression_minutes = 60
 id   = "g1_taken"
 name = "On the crate"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_g1_crate_t5", pool = 4, description = "A woman straddling and riding a seated man on a crate in a dim concrete receiving bay, her overalls pulled down off her shoulders, his hands on her hips. Must show: her on top, riding, him seated and slack. Avoid: standing positions, a bed, bright light.", search_queries = ["woman riding seated man on crate warehouse", "girl on top fucking man sitting industrial dim"] } },
   { type = "paragraph", content = "She thumbs the emitter and the field rolls flat across the bay. The flask goes over. The man on the crate moans and grabs his own cock through his trousers and is erect in his own fist before he has understood he is being touched." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -26652,6 +26718,7 @@ blocks = [
         { type = "paragraph", content = "She strips the coveralls off both shoulders. He gets his mouth on a nipple and sucks at her tits like he is starving, moaning into her, both hands full of her ass and pulling her in." },
     ] },
     { advance_text = "Sit down on him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_g1_crate_t5", pool = 4, description = "A woman straddling and riding a seated man on a crate in a dim concrete receiving bay, her overalls pulled down off her shoulders, his hands on her hips. Must show: her on top, riding, him seated and slack. Avoid: standing positions, a bed, bright light.", search_queries = ["woman riding seated man on crate warehouse", "girl on top fucking man sitting industrial dim"] } },
         { type = "paragraph", content = "She straddles him and takes his cock into her cunt in one long sit, down to his balls, and starts to fuck him on the crate at her own pace with her tits in his face and her eyes on the ramp." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -26674,7 +26741,6 @@ time_progression_minutes = 60
 id   = "g2_taken"
 name = "In the standing water"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_g2_water_t5", pool = 4, description = "A woman fucking a shirtless man standing against a wet concrete wall in a dim flooded corridor, water underfoot, both of them soaked. Must show: standing, against a wall, both wet. Avoid: a shower cubicle, a bathroom, a bed.", search_queries = ["standing sex against wet concrete wall dim", "couple fucking standing soaked industrial corridor"] } },
   { type = "paragraph", content = "The brush goes into the water. He is stripped to the waist already, so she gets to watch the whole of it land — the flush up his chest, the moan, his cock going erect and obvious inside soaked trousers." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -26684,6 +26750,7 @@ blocks = [
         { type = "paragraph", content = "She hitches the coveralls open and he goes straight for her tits, sucking, biting at a nipple, one hand shoved down between her legs to grope at her cunt with no idea at all what he is doing." },
     ] },
     { advance_text = "Take him standing.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_g2_water_t5", pool = 4, description = "A woman fucking a shirtless man standing against a wet concrete wall in a dim flooded corridor, water underfoot, both of them soaked. Must show: standing, against a wall, both wet. Avoid: a shower cubicle, a bathroom, a bed.", search_queries = ["standing sex against wet concrete wall dim", "couple fucking standing soaked industrial corridor"] } },
         { type = "paragraph", content = "She takes his cock into her cunt standing, up on her toes in an inch of water, forearm across his throat to hold him on the brick, and fucks him hard and fast because this corridor carries sound." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -26706,7 +26773,6 @@ time_progression_minutes = 60
 id   = "g3_taken"
 name = "Across the mess table"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_g3_table_t5", pool = 4, description = "A woman riding a man laid back on a canteen table in a strip-lit mess room, plates and mugs pushed off, his boots off. Must show: him on his back on a table, her astride. Avoid: a kitchen counter, a bed, a desk.", search_queries = ["woman riding man on table canteen dim", "girl on top man lying on table industrial"] } },
   { type = "paragraph", content = "The field goes through the mess and takes the urn with it. The man against the door slides down it moaning, boots off, belt already loose from eating, his cock erect and tenting the front of him before he is sitting." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -26716,6 +26782,7 @@ blocks = [
         { type = "paragraph", content = "She drags his trousers off his hips. His cock lies flat and hard against his stomach and his balls are tight up under it, and he thrusts into the air when she puts a hand anywhere near." },
     ] },
     { advance_text = "Get on him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_g3_table_t5", pool = 4, description = "A woman riding a man laid back on a canteen table in a strip-lit mess room, plates and mugs pushed off, his boots off. Must show: him on his back on a table, her astride. Avoid: a kitchen counter, a bed, a desk.", search_queries = ["woman riding man on table canteen dim", "girl on top man lying on table industrial"] } },
         { type = "paragraph", content = "She opens the coveralls, climbs up over him, and takes his cock into her cunt. She fucks him with both palms flat on his chest and her tits swinging over his face and the table legs walking on the lino." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -26741,7 +26808,6 @@ time_progression_minutes = 60
 id   = "g4_taken"
 name = "Over his own bench"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_g4_bench_t5", pool = 4, description = "A woman astride a man pushed back onto a cluttered workbench under a low lamp, tools and parts scattered, his jaw set. Must show: him on his back on a workbench, her over him, harsh lamp light. Avoid: a table, a bed, soft lighting.", search_queries = ["woman on top man workbench workshop lamp", "couple fucking on cluttered work bench dim"] } },
   { type = "paragraph", content = "He gets a fist in her hair before the field lands, and then it lands, and he does not let go. His cock goes erect against her hip through both their clothes and he holds the moan behind his teeth and will not give it up." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -26751,6 +26817,7 @@ blocks = [
         { type = "paragraph", content = "She walks him back, sits him on the bench, gets his belt open. His cock comes up out of it erect and already wet at the head. She lays him flat across his tray of parts and strips the coveralls down off her tits." },
     ] },
     { advance_text = "Take him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_g4_bench_t5", pool = 4, description = "A woman astride a man pushed back onto a cluttered workbench under a low lamp, tools and parts scattered, his jaw set. Must show: him on his back on a workbench, her over him, harsh lamp light. Avoid: a table, a bed, soft lighting.", search_queries = ["woman on top man workbench workshop lamp", "couple fucking on cluttered work bench dim"] } },
         { type = "paragraph", content = "She gets over him and takes his cock into her cunt slowly, all the way to the balls, watching his jaw the whole time to see when it goes. It goes about nine thrusts in, and he grabs her ass with both hands and pulls." },
     ] },
     { advance_text = "Fuck it out of him.", blocks = [
@@ -26776,7 +26843,6 @@ time_progression_minutes = 60
 id   = "g5_taken"
 name = "In his own chair"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_g5_desk_t5", pool = 4, description = "A woman straddling a man seated in an office chair behind a cluttered desk in a small windowless office, papers pushed aside, a desk lamp on. Must show: him seated in an office chair, her astride him, office setting. Avoid: a workshop, a bed, a bench.", search_queries = ["woman riding man in office chair desk lamp", "girl straddling seated man small office dim"] } },
   { type = "paragraph", content = "The field crosses the desk and the clipboards come off their nails one after another down the wall. Loder sits back hard with both hands flat on the arms of the chair and his cock going erect inside his slacks, and moans, and apologises." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -26787,6 +26853,7 @@ blocks = [
         { type = "paragraph", content = "She puts the rota and the kettle and a mug of cold tea off the desk with her forearm and gets his trousers open. His cock and balls come out into her hand, erect and leaking. He apologises again and lifts his hips." },
     ] },
     { advance_text = "Get on him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_g5_desk_t5", pool = 4, description = "A woman straddling a man seated in an office chair behind a cluttered desk in a small windowless office, papers pushed aside, a desk lamp on. Must show: him seated in an office chair, her astride him, office setting. Avoid: a workshop, a bed, a bench.", search_queries = ["woman riding man in office chair desk lamp", "girl straddling seated man small office dim"] } },
         { type = "paragraph", content = "She strips the coveralls to her waist, gets up over him in the chair, and sits down on his cock. The castors go back an inch and hold, and she fucks him in it with her tits in his face and her hands on the chair back." },
     ] },
     { advance_text = "He does not stop talking.", blocks = [
@@ -27297,7 +27364,6 @@ time_progression_minutes = 15
 id   = "door_taken"
 name = "Against the door"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bunker_door_t5", pool = 4, description = "A woman straddling and riding a man slumped back in a chair in a narrow dim concrete corridor, her overalls open to the waist, his weapon on the floor beside them. Must show: him seated in a chair, her astride him, corridor setting, low light. Avoid: an office, a bed, a desk, bright light.", search_queries = ["woman riding seated man chair dim corridor", "girl on top fucking man sitting hallway industrial"] } },
   { type = "paragraph", content = "She thumbs the emitter at four feet and the field goes through him and through the door behind him. His chin comes up. He is erect in his trousers before his hand has finished coming off the weapon, and his cock jumps against the cloth when he moans, once, low, and the chair legs come down." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -27307,6 +27373,7 @@ blocks = [
         { type = "paragraph", content = "She strips the zip down to her waist and puts her tits in his face. He takes a nipple in his mouth and sucks like a man drinking, moaning into it, both hands full of her ass." },
     ] },
     { advance_text = "Get on him. Quietly.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bunker_door_t5", pool = 4, description = "A woman straddling and riding a man slumped back in a chair in a narrow dim concrete corridor, her overalls open to the waist, his weapon on the floor beside them. Must show: him seated in a chair, her astride him, corridor setting, low light. Avoid: an office, a bed, a desk, bright light.", search_queries = ["woman riding seated man chair dim corridor", "girl on top fucking man sitting hallway industrial"] } },
         { type = "paragraph", content = "She straddles the chair and takes his cock into her cunt in one slow sit, and fucks him with her knees taking her weight, because a chair on this floor knocks, and her forearm is across his mouth to hold the moaning in." },
     ] },
     { advance_text = "Finish him against the door.", blocks = [
@@ -27733,12 +27800,31 @@ blocks = [
     ] },
   ] } },
 ]
+# ⚠️ THE EXIT LANDS AT THE COT, NOT THE WATERFRONT — CORRECTED beat_0207 (rev 233). LO played it and
+# caught the button lying: it says "Take him home" and it used to drop the player on the docks, six clicks
+# and a gate toll short of home, with Bastien over Cain's shoulder the whole way.
+# ⚠️ THE 120 MINUTES IS THE JOURNEY AND IT ALWAYS WAS. The bunker run is fifty one minutes; this exit adds
+# two hours; the arrival scene below opens "about two in the morning". The clock already modelled the trip
+# home, so the old routing made the player pay for it and then walk it as well.
+# ⚠️ AND CAIN IS AT THE COT IN THE NEXT SCENE, still carrying him ("Kess watches them come down the boards
+# with a man between them"). There is no beat anywhere in which he sets Bastien down on a dock street.
+# ⚠️ THE WALK WAS THE ORDINARY COMMUTE AT THE WORST MOMENT. the_cot sits under kess_berth under
+# underworld_strip, and the strip is a root reached only through underworld_gate_check — so the route ran
+# car, descent, gate, and then the doorman with his hand out. His three doors are coin, fighting >= 15, or
+# the emitter scene in which she rides him unconscious. All three are wrong with a rescued man in the party,
+# and the route passes the Undertow, the bar this scene just said he cannot go near because they know it is his.
+# ⚠️ SHIPPED PRECEDENT, SAME RELEASE: cap_rue_reads_it exits the brothel with `text = "Take it home."` and
+# `locationId = "the_cot"`, crossing the same three hops in one click. This is that shape.
+# ⚠️ SAFE BY TWO CHECKED FACTS: the_cot's entry_conditions need `berth_home`, set at the Kess handoff far
+# upstream, so the passage guard passes; and `bastien_rescued` is applied on THIS passage's entry (the
+# flagEffects below run at render, not on the click), so cap_bastien_at_the_cot's gate is already true when
+# the location passage calls getStoryCanvasRedirect.
 [canvases.nodes.exit_block]
 type = "location"
 text = "Take him home."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_waterfront"
+locationId               = "the_cot"
 time_progression_minutes = 120
 flagEffects = [
   { targetType = "player", flag = "bastien_rescued", op = "set" },
@@ -28068,7 +28154,6 @@ time_progression_minutes = 15
 id   = "washing"
 name = "Wash him"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bastien_cot_wash_t5", pool = 4, description = "A thin naked man lying on his back on a narrow bunk in a small bare room while a woman sitting beside him washes him with a rag, then takes his cock in her wet hand and strokes him until he comes on his stomach. Must show: him flat and passive on a narrow bed, her hand doing the work, a rag or basin. Avoid: him standing, avoid: a shower or bathtub, avoid: a big bright bedroom, avoid: him touching her.", search_queries = ["woman gives slow handjob to man lying on narrow bed amateur gif", "sponge bath turns into handjob homemade gif", "handjob man lying still on small bed cumshot on stomach gif"] } },
   { type = "paragraph", content = "She heats water in the pan she cooks in, because there is nothing else, and brings it to the bunk with a rag and the sliver of soap off the shelf. He watches her set it down." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -28086,6 +28171,7 @@ blocks = [
         { type = "paragraph", content = "His cock stands fully erect and jerks when the rag comes near. The rest of him lies naked and still, eyes on the ceiling." },
     ] },
     { advance_text = "Take him in your hand.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bastien_cot_wash_t5", pool = 4, description = "A thin naked man lying on his back on a narrow bunk in a small bare room while a woman sitting beside him washes him with a rag, then takes his cock in her wet hand and strokes him until he comes on his stomach. Must show: him flat and passive on a narrow bed, her hand doing the work, a rag or basin. Avoid: him standing, avoid: a shower or bathtub, avoid: a big bright bedroom, avoid: him touching her.", search_queries = ["woman gives slow handjob to man lying on narrow bed amateur gif", "sponge bath turns into handjob homemade gif", "handjob man lying still on small bed cumshot on stomach gif"] } },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "My pulse is up. You will have noticed. I would have written it down." },
         { type = "paragraph", content = "She drops the rag and takes his cock in her wet hand, stroking slowly, root to tip. His balls draw up tight and he moans through his teeth." },
     ] },
@@ -28200,7 +28286,6 @@ time_progression_minutes = 30
 id   = "first_night"
 name = "Go to him properly"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bastien_cot_first_night_t5", pool = 4, description = "A naked woman on top of a thin naked man who lies flat on his back on a narrow bunk in a small dim room, riding him slowly and doing all the work while he lies still, two of her fingers resting at the side of his neck, not gripping. Must show: her on top, him flat and passive, a narrow bed. Avoid: him on top, avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: rough or violent sex.", search_queries = ["woman riding man lying still on narrow bed amateur gif", "slow cowgirl on skinny man small dark room homemade gif", "girl on top doing all the work man lying flat gif"] } },
   { type = "paragraph", content = "She waits until the berth goes quiet and the torch is off at Kess's bench. Then she gets up off the floor. He is awake, because he is always awake, and he watches her cross the boards." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -28231,6 +28316,7 @@ blocks = [
         { type = "paragraph", content = "She reaches back, holds his cock steady and sinks down onto it until her cunt has all of him. Then she stays there, not moving, so he can feel it, before she starts to fuck him." },
     ] },
     { advance_text = "Ride him.", blocks = [
+        { type = "video", props = { pool_dir = "sex/bastien_cot_first_night_t5", pool = 4, description = "A naked woman on top of a thin naked man who lies flat on his back on a narrow bunk in a small dim room, riding him slowly and doing all the work while he lies still, two of her fingers resting at the side of his neck, not gripping. Must show: her on top, him flat and passive, a narrow bed. Avoid: him on top, avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: rough or violent sex.", search_queries = ["woman riding man lying still on narrow bed amateur gif", "slow cowgirl on skinny man small dark room homemade gif", "girl on top doing all the work man lying flat gif"] } },
         { type = "paragraph", content = "She rides him, rising almost off his cock and sinking back down, her hands flat either side of his head. The bunk creaks. He cannot thrust up to fuck her back, so every stroke is hers." },
     ] },
     { advance_text = "Go on.", blocks = [
@@ -28347,13 +28433,22 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Fifty one minutes, and a room built over four months to catch one man was walked into and out of on an ordinary night. Cain carried him up five turns of his own supplier's corridor. The plate is back down and the tar is heeled over the lip of it and it looks the way it looked. Nobody down there knows yet. Somebody goes in on a rota, finds a frame with nothing in it, and has to tell somebody a long way above them, and that is not tonight."
-tip        = "Get him home. Your cot at the Berth, tonight. There is nowhere else in the city he can go."
+tip        = "He goes on your bunk at the cot, tonight. Water first. Then sit with it until morning."
 # ⚠️ THE SEAM (beat_0194, rev 230) — THIS WAS 0.2.2's TERMINAL CARD AND IT IS NOT ANY MORE. THE COUNT picks up at
 # the arrival, so the card hands over there: upper-gated `bastien_at_cot is_false`, `terminal` and
-# `terminal_text` removed, and the tip that said "That is where this build ends" rewritten to point at the cot.
-# It is now live only between the extraction (whose exit is the_waterfront) and the arrival scene at the cot,
-# which is exactly the stretch where "get him home" is the next thing to do. The beat_0165 lesson: the last
-# release's end card was steering the next release's opening. Checked from both sides by check_the_count.py §1.
+# `terminal_text` removed, and the tip that said "That is where this build ends" rewritten. The beat_0165
+# lesson: the last release's end card was steering the next release's opening. Checked from both sides by
+# check_the_count.py §1.
+# ⚠️ THE TIP STOPPED SAYING "GET HIM HOME" AT beat_0207 (rev 233), BECAUSE THE WALK IT NAMED IS GONE.
+# This card used to cover the stretch between the extraction and the cot, back when the extraction exited to
+# the_waterfront and the player had six clicks and a gate toll to make on foot. That exit now lands at the
+# cot directly, so the card is live only for the length of the arrival cascade, and a tip telling the player
+# to get him home would be giving an instruction he has already carried out on screen. It says where he is
+# going and what she tries first instead, and it hands to card A, which is the cup and the day turning.
+# ⚠️ IT CANNOT BE DELETED, AND THAT IS ENFORCED. check_the_count.py §1 requires exactly one card gated
+# `bastien_rescued is_true` + `bastien_at_cot is_false`, and its state walk demands exactly one card live at
+# the rescue. Removing this card fails the guard twice over; the fix for a zero-length window is the wording,
+# not the card.
 when = [
   { flag = "bastien_rescued", op = "is_true"  },
   { flag = "bastien_at_cot",  op = "is_false" },
@@ -28370,17 +28465,25 @@ when = [
 # live: card G closed on house_answered and H opened on bastien_back. G2 closes the gap and keeps the daisy.
 # ⚠️ WRITTEN TO THE LEGIBILITY BAR (check_quest_cards.py): short sentences, no dashes, no glosses, few
 # negations. Every tip names a PLACE and a TIME, because the mopoga read is that lostness is the disease.
-# ⚠️ THE DAY WAITS ARE ON THE CARDS. Every step waits a calendar day on the one before it, and a player who is
-# told "go to the cot" and finds nothing new there will think the game is broken. So the cards say "tomorrow".
+# ⚠️ THE WAITS ARE BULLETS, NOT JUST WORDS (beat_0205, rev 231). A player sat on "◯ Wait for him to drink" and
+# reported the game stuck; it was counting a calendar day and waiting for the bought face to come off, and the
+# page said neither. Every cot card now SHOWS its wait: the face as a flag goal (◯ becomes ✓ when she takes it
+# off), the day as a days_since_flag goal rendering "— 0 / 1" against the sidebar's day counter, and the nights
+# as the meter itself, "Nights with him — 1 / 3". The bullets read the same flags the scenes are gated on, so the
+# page cannot drift from the game; check_the_count.py §11 pins each one to its gate.
+# ⚠️ AND THE TIPS STILL SAY IT IN WORDS, in one shape: the step, the place, the hour if it has one, the day, and
+# out of the bought face. A bullet tells you what is missing; the tip tells you what to do about it.
 # ⚠️ NO npc_id ON ANY OF THEM — these are the spine.
 
 # ── A · he is on the bunk (step 1, the water, is his move: nothing to click) ──
 [[quest_cards]]
 priority   = 10
 text       = "He is on your bunk and the cup on the bench is full. He faces the wall all day and lies awake all night. Cain said he would come when he could. That will be a while. For now it is you, him and a tin cup."
-tip        = "Leave the cup where he can reach it. Sleep. Come home to the cot tomorrow."
+tip        = "Leave the cup where he can reach it. Sleep, and let the day turn. The sidebar counts the days. Then come home to the cot, out of the bought face."
 goals = [
   { flag = "bastien_drank", op = "is_true", label = "Wait for him to drink" },
+  { days_since_flag = "bastien_at_cot", op = "gte", value = 1, label = "A day since they carried him in" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "bastien_at_cot", op = "is_true"  },
@@ -28391,9 +28494,11 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "He drank. He held the cup out without looking at you, and you filled it, and he drank that too. It is the first thing he has asked you for. The last person who washed him did it on a rota, in the frame, on Tuesdays."
-tip        = "He cannot get to the tap. Go to him at the cot tomorrow and wash him."
+tip        = "He cannot get to the tap. Go to him at the cot a day after he drank, out of the bought face, and wash him."
 goals = [
   { flag = "bastien_washed", op = "is_true", label = "Wash him" },
+  { days_since_flag = "bastien_drank", op = "gte", value = 1, label = "A day since he drank" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "bastien_drank",  op = "is_true"  },
@@ -28417,9 +28522,11 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Kess built it out of hull strapping and two hinges off a hatch, for forty coin and no questions. It is in a bag under your bench. It will fit him. Whether he lets you put it on him is another question."
-tip        = "Take it home to the cot and put it on him. Any hour, a day after you washed him."
+tip        = "Take it home to the cot and put it on him. Any hour, a day after you washed him, out of the bought face."
 goals = [
   { flag = "bastien_stood", op = "is_true", label = "Put the brace on him" },
+  { days_since_flag = "bastien_washed", op = "gte", value = 1, label = "A day since you washed him" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "brace_built",   op = "is_true"  },
@@ -28430,9 +28537,11 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "He stood for about a minute. Then he sat down harder than he meant to, and laughed at himself. The last time you heard him laugh, it was at you, in the cell. He watches you now, all the time, and does not pretend otherwise."
-tip        = "Go to him at the cot tomorrow night, after ten. Go to him properly."
+tip        = "Go to him at the cot a day after he stood. After ten at night, out of the bought face."
 goals = [
   { flag = "bastien_bedded", op = "is_true", label = "Go to him properly" },
+  { days_since_flag = "bastien_stood", op = "gte", value = 1, label = "A day since he stood" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "bastien_stood",  op = "is_true"  },
@@ -28443,9 +28552,11 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You slept with him. He could not hold your weight, so you did all of it, and he let you. The tally on the bunk frame still grows, one scratch every morning. It is the days since Cain put him down and left."
-tip        = "Go to him at the cot once a day. The first night counted. Two more days of it. Then come home the morning after."
+tip        = "Go to him at the cot once a day, out of the bought face. Only the first visit of a day counts. After the third, come home the next morning."
 goals = [
-  { flag = "bastien_himself", op = "is_true", label = "Three nights with him" },
+  { trait = "bastien_mend", subject = "player", op = "gte", value = 3, label = "Nights with him" },
+  { days_since_flag = "bastien_slept", op = "gte", value = 1, label = "A day since the last night" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "bastien_bedded",  op = "is_true"  },
@@ -28469,9 +28580,10 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Rue read it twice and then got up out of her chair, which she never does. She gave you a sealed envelope for him, and it is heavier than a letter."
-tip        = "Take it home to your cot. If you are wearing the face, take it off first. He is at your bench."
+tip        = "Take it home to your cot, out of the bought face. He is at your bench."
 goals = [
   { flag = "bastien_back", op = "is_true", label = "Take the envelope home" },
+  { flag = "face_worn", op = "is_false", label = "Out of the bought face" },
 ]
 when = [
   { flag = "house_answered", op = "is_true"  },

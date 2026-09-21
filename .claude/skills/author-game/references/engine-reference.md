@@ -210,6 +210,17 @@ link). Fold a mid-scene bridge or a closing beat *into* the cascade — as its o
 no-`advance_text` **terminal** beat (renders after the last click). Builds green, renders wrong — grep guard in
 `references/toml-gotchas.md`. (Live-caught in Vesper's blackmail + 1a-close capstones, rev 86.)
 
+**The `cascade`-appends contract (why a clip at the node's lead is a clip for beat 0).** A cascade is a nested
+`<<linkreplace>>` chain — `_render_cascade` builds it, `_render_cascade_tail` recurses
+(`v2.py:15020` / `:15106`), and each beat's own blocks become that linkreplace's **body**
+(`body_html = self._convert_blocks_to_game_html(beat_blocks)`, `:15166`). A click therefore **appends** the next
+beat below the last and **removes nothing**: everything already on screen stays exactly where it was. The
+consequence authors keep hitting is about media. A `video` at the node's lead renders once, above beat 0, and
+stays pinned there while the prose walks down the screen — so it illustrates the *opening* and nothing after
+it, and by the beat that is the act the player is reading the payoff under a picture of the setup. **An
+escalating beat carries its own clip, inside that beat's `blocks`; the node's lead is for an establishing
+still.** The placement rule, the worked in-beat TOML and the gate that measures it: `references/media.md` §6a.
+
 `exit_block` (`TemplateExitBlock` at `:662`): `type` = `"location"` or `"choices"`.
 - `type="location"` → single return button;
   `config = {destinationType, locationId, time_progression_minutes, effects, flagEffects}`.
@@ -458,14 +469,30 @@ item is `false` (`v2.py:3866-3867`). *(Line numbers drift as the generator grows
 ### §4.4 — Quest-card conditions are a DIFFERENT, flat shape
 
 `[[quest_cards]]` `when` / `goals` use `QuestsCondition` (`template_import.py:848`) — **flat, no `type`
-discriminator**: `{ flag, op }` or `{ trait, subject, npc_id?, op, value, label }`. Do NOT use the typed
-`{type, …}` shape inside a quest card, and don't use the flat shape anywhere else. (`references/systems.md`
-for the quest-card design model.)
+discriminator**. **THREE shapes, exactly one per item**: `{ flag, op }`, `{ trait, subject, npc_id?, op, value,
+label }`, or `{ days_since_flag, op, value, label }`. Do NOT use the typed `{type, …}` shape inside a quest
+card, and don't use the flat shape anywhere else. (`references/systems.md` for the quest-card design model.)
 
 ```toml
 { flag = "frank_caught", op = "is_true" }
 { trait = "corruption", subject = "player", op = "gte", value = 25, label = "Maya's corruption" }
+{ days_since_flag = "frank_caught", op = "gte", value = 1, label = "A day since he caught you" }
 ```
+
+**A COUNTED goal renders its number.** Trait and `days_since_flag` goals both print `— X / Y` beside the ◯
+bullet, live, so the page shows "Nights with him — 1 / 3" or "A day since he drank — 0 / 1". A flag goal is a
+plain ◯ that becomes ✓. `days_since_flag` measures days since the flag was SET (`flags_meta[…].set_day`) and
+**fails closed** when the flag is unset or has no meta — the same rule as the canvas predicate of the same name
+(§4.3), because a flag set outside `applyFlagEffect` carries no `set_day`. Numeric ops only
+(`gte/gt/lte/lt/eq`), and a `label` is required on any counted goal: it is what renders.
+
+> **⚠️ A WAIT THE PLAYER CANNOT SEE IS A WAIT THEY READ AS A BUG.** If a step is gated on a calendar day, a
+> disguise, a clock window or a meter, the card that points at that step must SHOW it — as a bullet, not only
+> as a sentence in the tip. Measured: vesper 0.2.2 shipped a cot ladder whose every step waited a day and a
+> worn disguise, said both in prose, and a player sat on "◯ Wait for him to drink" and reported the game
+> stuck. Write one bullet per thing the game is waiting for, reading the SAME flag the scene is gated on, and
+> keep the tip for what to do about it. Goals are display only — routing stays in `when`, so a card's place in
+> the chain never depends on a clock.
 
 ---
 

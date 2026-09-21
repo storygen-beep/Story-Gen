@@ -205,9 +205,10 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   to arouse**: player-as-erotic-subject, camera on the body, show the act, hot ≠ purple), the three density
   tiers, choice-label discipline, the `thought_bubble` primitive. Read before writing any scene body.
 - `references/media.md` — the image-first layer: the three media block types (`image`/`video`/`clip`), the
-  extension-agnostic resolve law, the silent-skip-when-missing model, and **how to write `search_queries`**
-  (the acquisition layer). Read before authoring any beat that carries a visual, and when naming a scene's
-  media at Step 5.
+  extension-agnostic resolve law, the silent-skip-when-missing model, **where a clip goes in a cascade** (§6a
+  — the beat's `blocks`, never the node's lead, because a cascade appends and a lead clip illustrates beat 0
+  only), and **how to write `search_queries`** (the acquisition layer). Read before authoring any beat that
+  carries a visual, and when naming a scene's media at Step 5.
 - `references/sex-loop.md` — the repeatable-explicit menu (triggerless node-routed canvas).
 - `references/quests.md` — the **Quests page as a designed surface**: the two-tier layout (Story-Goals spine +
   per-NPC sections), the two ladder shapes (flag-milestone chain vs stepped trait-band ladder), the three render

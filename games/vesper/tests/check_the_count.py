@@ -24,6 +24,10 @@ try:
 except ModuleNotFoundError:                      # py<3.11
     import tomli as tomllib                      # type: ignore
 
+# The repo root, so the shared media walker is importable when this runs from anywhere.
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+from apps.common.media_blocks import iter_media_blocks  # noqa: E402
+
 GAME = os.path.join(os.path.dirname(__file__), "..", "toml_phases", "7_final_game.toml")
 # An optional path argument points the guard at a mutated copy — which is how it is negative-tested.
 if len(sys.argv) > 1:
@@ -312,16 +316,25 @@ def main() -> int:
     check(wn is not None, "3: the hub has no washing node")
 
     def videos(node):
-        out = []
+        """Every video block in the node, INCLUDING the ones inside cascade beats.
 
-        def walk(bl):
-            for b in bl:
-                if b.get("type") == "video":
-                    out.append(b.get("props") or {})
-                elif b.get("type") == "group":
-                    walk(b.get("blocks", []))
-        walk((node or {}).get("blocks", []))
-        return out
+        This used to walk `group` children only. That was survivable while every clip
+        hung off a node's lead, and stopped being survivable the moment clips moved to
+        the beat they depict — a clip at the top of a canvas is a clip for beat 0
+        (author-game-v2 register.md S1), so `sex/bastien_cot_wash_t5` now lives in the
+        "Take him in your hand." beat and a group-only walk reports the washing node as
+        having no video at all. `pool_ok` would then fail a node that is correct.
+
+        Uses the shared walker instead of a fourth hand-copied one: apps/common/
+        media_blocks.py descends group, block_pool AND props.beats[*].blocks, and its
+        docstring records this same drift already happening twice ("Import it; do not
+        re-write it"). It imports clean — no Django settings, no side effects.
+        """
+        return [
+            b.get("props") or {}
+            for b in iter_media_blocks((node or {}).get("blocks", []))
+            if (b.get("type") or "").strip() == "video"
+        ]
 
     def node_text(node):
         out = []
@@ -643,6 +656,109 @@ def main() -> int:
               f"10: jump 2's landing state must not fire anything but (on a later day) stopping counting — got {live}")
         live = cot_oneshots_live(st2, dict(te2), day_waits_met=False)
         check(live == [], f"10: on jump 2's own day nothing may fire at the cot (got {live})")
+
+    # ── 11 · beat_0205 — THE QUESTS PAGE SHOWS THE WAIT ────────────────────────────────────────────────
+    # ⚠️ WHY. A player sat on "◯ Wait for him to drink" and reported the game stuck. It was not: it was
+    # counting a calendar day and waiting for the bought face to come off, and the page said neither. A wait
+    # the player cannot see is a wait they read as a bug. So every cot card now carries its wait as BULLETS:
+    # the face as a flag goal (◯ → ✓), the day as a days_since_flag goal (— 0 / 1), the nights as the meter
+    # (— 1 / 3). The bullets must match the gates on the scenes exactly, or the page lies in a new way.
+    def card_for(opener, closer):
+        hits = [c for c in ours
+                if any(cl.get("flag") == opener and cl.get("op") == "is_true" for cl in c.get("when", []))
+                and any(cl.get("flag") == closer and cl.get("op") == "is_false" for cl in c.get("when", []))]
+        return hits[0] if len(hits) == 1 else None
+
+    def goals_of(card):
+        return (card or {}).get("goals") or []
+
+    def has_face_bullet(card):
+        return any(g.get("flag") == "face_worn" and g.get("op") == "is_false" and g.get("label")
+                   for g in goals_of(card))
+
+    def has_day_bullet(card, flag):
+        return any(g.get("days_since_flag") == flag and g.get("op") == "gte" and g.get("value") == 1
+                   and g.get("label") for g in goals_of(card))
+
+    # Card → (the flag its step waits a day on, does its step need the face off)
+    COT_CARDS = {
+        "bastien_at_cot":  ("bastien_at_cot", True),    # the water
+        "bastien_drank":   ("bastien_drank", True),     # the washing
+        "brace_built":     ("bastien_washed", True),    # putting the brace on him
+        "bastien_stood":   ("bastien_stood", True),     # the first night
+        "bastien_bedded":  ("bastien_slept", True),     # the nights, then the morning after
+    }
+    chain_next = dict(zip(CHAIN, CHAIN[1:]))
+    for opener, (day_flag, needs_face) in COT_CARDS.items():
+        card = card_for(opener, chain_next[opener])
+        check(card is not None, f"11: no single card opening on {opener}")
+        if not card:
+            continue
+        if needs_face:
+            check(has_face_bullet(card),
+                  f"11: the card on {opener} does not show the face as a bullet — its step is gated "
+                  f"face_worn is_false and the player cannot see it")
+        check(has_day_bullet(card, day_flag),
+              f"11: the card on {opener} does not show its day wait as a bullet "
+              f"(days_since_flag {day_flag} gte 1)")
+    # The nights card carries the meter itself, live.
+    nights = card_for("bastien_bedded", "bastien_himself")
+    check(nights is not None and any(
+        g.get("trait") == "bastien_mend" and g.get("subject") == "player"
+        and g.get("op") == "gte" and g.get("value") == 3 and g.get("label") for g in goals_of(nights)),
+        "11: the nights card must carry bastien_mend gte 3 so the page counts them (— 1 / 3)")
+    # And the two cards whose next step has NO face gate must not claim one.
+    for opener, closer in (("bastien_washed", "brace_built"), ("bastien_himself", "house_answered")):
+        card = card_for(opener, closer)
+        check(card is not None and not has_face_bullet(card),
+              f"11: the card on {opener} shows a face bullet, but its step (Kess / Rue) has no face gate")
+    # The envelope card: step 7 IS face-gated.
+    check(has_face_bullet(card_for("house_answered", "bastien_back")),
+          "11: the envelope card does not show the face bullet, though counting again waits for it")
+
+    # ── 11b — the two seams of the page ───────────────────────────────────────────────────────────────
+    # The release's OPENING seam: 0.2.1's end card sits on two_men_done + bastien_alive_known is_false,
+    # which is every returning player until they walk into the cot. It must not say the game is over.
+    opener_card = [c for c in cards if not c.get("npc_id")
+                   and any(cl.get("flag") == "two_men_done" and cl.get("op") == "is_true" for cl in c.get("when", []))
+                   and any(cl.get("flag") == "bastien_alive_known" and cl.get("op") == "is_false"
+                           for cl in c.get("when", []))]
+    check(len(opener_card) == 1, f"11b: expected one card at the release's opening seam, found {len(opener_card)}")
+    if opener_card:
+        o = opener_card[0]
+        check(not o.get("terminal") and not o.get("terminal_text"),
+              "11b: 0.2.1's end card is still terminal — the release opens behind 'Chapter complete'")
+        check("this build ends" not in (o.get("tip") or "").lower(),
+              "11b: 0.2.1's end card still tells the player the build ends here")
+        check("cot" in (o.get("tip") or "").lower(),
+              "11b: 0.2.1's end card must hand over — its tip has to point at the cot")
+
+    # HIS OWN SECTION. It said "✓ Arc complete — there is nothing left to work here" while the ladder ran.
+    his = [c for c in cards if c.get("npc_id") == "npc_bastien"]
+    raid = [c for c in his if any(cl.get("flag") == "raid_done" and cl.get("op") == "is_true"
+                                 for cl in c.get("when", []))]
+    check(len(raid) == 1, f"11b: expected one post-raid Bastien card, found {len(raid)}")
+    if raid:
+        check(any(cl.get("flag") == "bastien_at_cot" and cl.get("op") == "is_false"
+                  for cl in raid[0].get("when", [])),
+              "11b: his post-raid card is not upper-gated bastien_at_cot is_false — it keeps saying his arc "
+              "is over while he is on the bunk")
+    cot_cards = [c for c in his if any(cl.get("flag") in CHAIN[1:] or cl.get("flag") == "bastien_at_cot"
+                                       for cl in c.get("when", []))]
+    check(len(cot_cards) >= 4, f"11b: his section needs cards for the cot ladder, found {len(cot_cards)}")
+    # One card of his per state, and no "Arc complete" until he is back.
+    for label, fls, trs in chain_states:
+        live = [c for c in his if holds({"version": "1.0", "logic": "AND", "items": [
+            {"type": "flag", "subject": "player", "flag_key": cl.get("flag"),
+             "operator": cl.get("op")} if cl.get("flag") else
+            {"type": "trait", "subject": cl.get("subject", "player"), "trait_key": cl.get("trait"),
+             "operator": cl.get("op"), "value": cl.get("value"), "npc_id": cl.get("npc_id")}
+            for cl in c.get("when", [])]}, fls, trs)]
+        live.sort(key=lambda c: -(c.get("priority") or 0))
+        check(bool(live), f"11b: his section has no card at all after '{label}'")
+        if live and label != "back":
+            check(not live[0].get("terminal"),
+                  f"11b: his section says the arc is complete after '{label}', mid-ladder")
 
     # ── 7a · beat_0200 — THE FACE AT THE COT. He looked at her bought face across his own floor for four months
     # and the last time he saw it, it had a taser in its hand. face_worn is a toggle she works at the cot

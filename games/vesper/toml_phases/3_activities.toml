@@ -1388,10 +1388,14 @@ targetType = "location"
 locationId = "kess_berth"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] }
 effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 1 }]
+# ⚠️ RETURNS TO THE BERTH, NOT THE COT — CORRECTED beat_0207 (rev 233). This is the cancel on a swap she
+# is standing at Kess's bench to make, and it used to walk her one room deeper into the cot without being
+# asked. Its two siblings above both return to kess_berth; this one is now the same. A cancel that moves the
+# player is a cancel that lies, which is the same defect class as the extraction exit corrected in 5_scenes.
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
 targetType = "location"
-locationId = "the_cot"
+locationId = "kess_berth"
 
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon
