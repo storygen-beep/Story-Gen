@@ -9,6 +9,18 @@ how it was verified if relevant (grep / build / live-play).
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
 ## 2026-09-21
+- **`references/ship-gate.md` §3 — a cheat row's `cap` comes from the game's gates, not the sidebar's
+  bands.** The skill taught "give each banded meter the `cap` its top band expects", which is a rule about
+  keeping the HUD honest, and there was no rule at all about the number the player is actually buying. So a
+  cap is hand-derived once and nothing re-derives it when a ladder grows: vesper sold `fighting` at a cap of
+  40 for three releases after its top gate had moved to 70, and LO hit the wall in play — *"from cheat panel
+  fighting isnt going up more then 40 and it requires 50"*. Root cause is a skill gap, not an author slip:
+  the page's own comment already said the cap "must be re-derived every time the ladder grows; nothing checks
+  it for us", and nothing did. Fixed in both layers — this bullet, and a build-time check that walks the raw
+  TOML for every gate on the trait and hard-fails a cap below the top one, waivable with a declared
+  `cap_note` that the build then watches for staleness. Verified: 12 new cases in
+  `apps/game_generation/tests/test_cheat_page.py` (54 pass), vesper builds green unchanged, and the stale-40
+  cap reproduced through the real `package_from_toml` — CommandError, no output written.
 - **`references/engine-reference.md` §4.4 — a THIRD quest-card condition shape (`days_since_flag`), the
   counted-goal rule, and "a wait the player cannot see is a wait they read as a bug".** vesper 0.2.2's cot
   ladder gates every step on a calendar day and on the bought face being off, and said both only in the tip.

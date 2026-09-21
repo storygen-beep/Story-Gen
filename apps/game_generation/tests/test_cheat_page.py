@@ -473,3 +473,115 @@ def test_cheat_page_requires_time_enabled():
     d = _authored()
     d.setdefault("time", {})["enabled"] = False
     assert any("requires [time] enabled" in e for e in _errors(d))
+
+
+# ── the cap against the GAME's gates, not the sidebar's bands ────────────────
+# The checks above ask whether a cap keeps the HUD honest. These ask the question
+# the player asks: can the button reach the wall it was sold for? Vesper shipped
+# `fighting` capped at 40 for three releases after its top gate moved to 70; the
+# wall was found by playing, not by building.
+
+def _with_gate(d, trait, value, op="gte", owner=None):
+    """Gate a location's entry on a trait.
+
+    `entry_conditions` on purpose: it is a real gate and it sits nowhere near the
+    canvas/choice walk validate() already does, so these tests also prove the
+    harvest finds gates by SHAPE rather than by a list of known locations.
+    """
+    item = {"type": "trait", "trait_key": trait, "operator": op, "value": value}
+    item["subject"] = "npc" if owner else "player"
+    if owner:
+        item["npc_id"] = owner
+    d["locations"][0]["entry_conditions"] = {
+        "version": "1.0", "logic": "AND", "items": [item]
+    }
+    return d
+
+
+def _cap_errors(d):
+    return [e for e in _errors(d) if "below the highest gate" in e]
+
+
+def test_cap_below_the_games_highest_gate_is_rejected():
+    d = _with_gate(_authored(), "awareness", 40)      # cap 40 == gate 40: fine
+    assert _cap_errors(d) == []
+    d = _with_gate(_authored(), "awareness", 55)      # the ladder grew; the cap did not
+    assert len(_cap_errors(d)) == 1
+    assert "cap = 55" in _cap_errors(d)[0]            # names the number to write
+
+
+def test_the_highest_gate_wins_not_the_nearest_one():
+    """Several gates on one trait: only the top of the ladder decides the cap."""
+    d = _authored()
+    d["locations"][0]["entry_conditions"] = {"version": "1.0", "logic": "AND", "items": [
+        {"type": "trait", "subject": "player", "trait_key": "awareness",
+         "operator": "gte", "value": 10},
+        {"type": "trait", "subject": "player", "trait_key": "awareness",
+         "operator": "gte", "value": 75},
+    ]}
+    err = _cap_errors(d)
+    assert len(err) == 1 and "cap = 75" in err[0]
+    assert "Gates on this trait: 10, 75" in err[0]    # prints the whole ladder
+
+
+def test_gt_asks_for_one_more_than_it_says():
+    """`gt 40` needs 41. A cap of exactly 40 never clears it."""
+    assert len(_cap_errors(_with_gate(_authored(), "awareness", 40, op="gt"))) == 1
+    assert "cap = 41" in _cap_errors(_with_gate(_authored(), "awareness", 40, op="gt"))[0]
+
+
+def test_an_npc_rows_cap_is_checked_against_that_npcs_gates():
+    d = _with_gate(_authored(), "trust", 80, owner="npc_frank")
+    err = _cap_errors(d)
+    assert len(err) == 1 and "'trust'" in err[0] and "cap = 80" in err[0]
+
+
+def test_a_gate_on_another_npc_does_not_touch_this_row():
+    """Two NPCs can carry the same trait name; a cap answers only to its own owner."""
+    d = _with_gate(_authored(), "trust", 80, owner="npc_someone_else")
+    assert _cap_errors(d) == []
+
+
+def test_a_ceiling_gate_is_not_a_requirement():
+    """`lt` is content closing, not a wall to climb — it must never raise a cap."""
+    assert _cap_errors(_with_gate(_authored(), "awareness", 90, op="lt")) == []
+
+
+def test_an_uncapped_row_is_not_second_guessed():
+    """money is an unbounded resource with no cap at all — nothing to check."""
+    d = _with_gate(_authored(), "money", 9999)
+    assert _cap_errors(d) == []
+
+
+def test_cap_note_waives_the_check_and_says_why():
+    """A cap deliberately under a gate is a real design (vesper held stealth at 9 to
+    keep the yard routes alive). The note is how that survives the next ladder change."""
+    grants = copy.deepcopy(GRANTS)
+    grants[1]["cap_note"] = "held low on purpose while the yard routes matter"
+    d = _with_gate(_authored(grants=grants), "awareness", 55)
+    assert _cap_errors(d) == []
+
+
+def test_an_empty_cap_note_waives_nothing():
+    grants = copy.deepcopy(GRANTS)
+    grants[1]["cap_note"] = "   "
+    d = _with_gate(_authored(grants=grants), "awareness", 55)
+    assert any("must be a non-empty string" in e for e in _errors(d))
+    assert len(_cap_errors(d)) == 1
+
+
+def test_a_cap_note_that_outlived_its_reason_warns():
+    """Worse than no note: it waives the check forever on a row nobody watches."""
+    import warnings
+    grants = copy.deepcopy(GRANTS)
+    grants[1]["cap_note"] = "held at 9 to protect the yard"
+    d = _with_gate(_authored(grants=grants), "awareness", 40)   # cap 40 now covers it
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        validate(normalize(d))
+    assert any("the note is stale" in str(w.message) for w in caught)
+
+
+def test_a_game_with_no_gate_on_the_trait_is_left_alone():
+    """No gate reads vesper's `energy`; a Charge row must not be asked to justify itself."""
+    assert _cap_errors(_authored()) == []

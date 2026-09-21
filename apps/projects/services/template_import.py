@@ -503,6 +503,12 @@ class GameTemplate:
     # can run the shared effect validators against the ORIGINAL keys — the
     # normalized dataclass has already discarded a misspelled field name.
     _cheat_raw_rows: List[Dict[str, Any]] = field(default_factory=list)
+    # Every numeric gate the game puts on a trait, harvested from the raw TOML by
+    # _harvest_trait_gates(). validate() reads it to answer "is this cheat row's cap
+    # high enough to reach the content the code is sold for?". Harvested only for a
+    # game that authors a cheat page; empty for every other build, and empty on a
+    # template built directly in a test, in which case the cap check simply does not run.
+    _trait_gates: Dict[tuple, Dict[str, Any]] = field(default_factory=dict)
 
 
 @dataclass
@@ -1743,6 +1749,96 @@ def _validate_trait_declaration_items_block(
         errors.extend(item_errs)
         warnings_out.extend(item_warns)
     return errors, warnings_out
+
+
+# Operators a PREDICATE uses to compare. `add` / `set` are EFFECT ops — filtering on
+# this set is the whole reason a grant can never be misread as a gate.
+_GATE_COMPARISONS = {"gte", "gt", "lte", "lt", "eq", "neq"}
+# ...of those, the ones that say "the player must get this number UP TO here".
+_GATE_REACH_OPS = {"gte", "gt", "eq"}
+
+
+def _harvest_trait_gates(data: Dict[str, Any]) -> Dict[tuple, Dict[str, Any]]:
+    """Answer one question for validate(): how high does this game ever ask a trait to go?
+
+    A cheat-page row carries a `cap`, and that cap is hand-derived from the game's own
+    gates. Nothing re-derives it when the ladder grows. Vesper shipped three releases
+    with `fighting` capped at 40 while the top gate had moved to 70 -- a button sold as
+    the way past a wall that could not reach the wall. It was found by playing, not by
+    building (see "CAP RAISED 40 -> 70" in vesper's 0_systems_spec.toml). This walk is
+    what lets validate() catch the next one at build time.
+
+    Walks the RAW TOML rather than the parsed template on purpose. Gates live in choice
+    conditions, location entry_conditions, activity gates, media-variant props, quest
+    `when` blocks and schedule rows; a walk over the dataclass tree would have to know
+    every one of those and would silently miss the next one added. A missed gate means a
+    too-low cap passes -- which is precisely the bug being checked, so the walk that
+    cannot miss is the only honest one.
+
+    Returns {(owner, trait): {...}}, owner being "player" or an npc id:
+      required   highest value the player must REACH (gte / gt / eq), or None
+      bands      every such value, for the error message
+
+    Deliberately does NOT report the `lt` gates -- the content that closes as a number
+    climbs. That was tried and cut: vesper's `stealth lt 10` is a lost scene and its
+    `fighting lt 30` is just the bottom rung of a drill, and the two are the same shape
+    in the data. Every rule separating them was wrong on one of the pair, so the build
+    says nothing rather than crying wolf. A row that closes content says so in its
+    `hint`, where the player reads it.
+    """
+    out: Dict[tuple, Dict[str, Any]] = {}
+
+    def _row(key: tuple) -> Dict[str, Any]:
+        return out.setdefault(key, {"required": None, "bands": set()})
+
+    def _num(v: Any) -> Optional[float]:
+        if isinstance(v, bool) or not isinstance(v, (int, float)):
+            return None
+        return float(v)
+
+    def _predicate_key(c: Dict[str, Any]) -> Optional[tuple]:
+        """(owner, trait) a clause compares, or None when it is not a trait comparison."""
+        if c.get("type") not in (None, "trait"):
+            return None
+        trait = c.get("trait_key") or c.get("trait")
+        if not isinstance(trait, str) or not trait:
+            return None
+        npc = c.get("npc_id") or c.get("npcId")
+        if isinstance(npc, str) and npc:
+            return (npc, trait)
+        # An NPC-subject clause naming no NPC belongs to nobody a cap could be checked
+        # against; counting it as the player's would invent a gate.
+        if c.get("subject") == "npc" or c.get("targetType") == "npc":
+            return None
+        return ("player", trait)
+
+    def _read_clause(c: Dict[str, Any]) -> None:
+        op = c.get("operator") or c.get("op")
+        if op not in _GATE_REACH_OPS:
+            return
+        key, val = _predicate_key(c), _num(c.get("value"))
+        if key is None or val is None:
+            return
+        row = _row(key)
+        row["bands"].add(val)
+        # `gt 70` asks for 71 on an integer meter; a cap of exactly 70 never clears it.
+        need = val + 1 if (op == "gt" and val.is_integer()) else val
+        row["required"] = need if row["required"] is None else max(row["required"], need)
+
+    def _walk(node: Any) -> None:
+        if isinstance(node, dict):
+            # A predicate is recognised by its comparison operator, never by where it
+            # sits -- which is what lets this find gates in places added after today.
+            if (node.get("operator") or node.get("op")) in _GATE_COMPARISONS:
+                _read_clause(node)
+            for v in node.values():
+                _walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                _walk(v)
+
+    _walk(data)
+    return out
 
 
 def normalize(data: Dict[str, Any]) -> GameTemplate:
@@ -3085,6 +3181,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 grants=grants,
             )
 
+    # The cap on every row above is a number an author derived BY HAND from this game's
+    # own gates, and nothing re-derives it when a ladder grows. Harvest the gates now so
+    # validate() can check each cap against them. Only walked for a game that actually
+    # has a cheat page -- no other build pays for it.
+    _trait_gates: Dict[tuple, Dict[str, Any]] = (
+        _harvest_trait_gates(data) if cheat_page_obj is not None else {}
+    )
+
     # [builds] is retired. One build ships everywhere now — which cheat rows are live
     # is a runtime property of the code the player entered, not a property of the file.
     # A leftover block is a parse error rather than a silent no-op, so a game carrying
@@ -3185,6 +3289,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         # by the effect-context validators at the 5 effect parse sites.
         _parse_errors=_parse_errors,
         _cheat_raw_rows=_cheat_raw_rows,
+        _trait_gates=_trait_gates,
     )
 
 
@@ -4007,6 +4112,10 @@ def validate(template: GameTemplate) -> List[str]:
             _banded[(_key, _bt)] = _top if prev is None else max(prev, _top)
 
         _hidden_traits = {tl.key for tl in template.trait_labels if tl.hidden}
+        # Harvested by normalize() from the raw TOML. Absent on a template built
+        # directly (tests), in which case the cap-vs-gate check below simply does not
+        # run rather than inventing a verdict from no data.
+        _trait_gates: Dict[tuple, Dict[str, Any]] = getattr(template, "_trait_gates", None) or {}
 
         if not cp.grants:
             errors.append(
@@ -4184,6 +4293,57 @@ def validate(template: GameTemplate) -> List[str]:
                         f"0-100 BEFORE applying the cap, so the cap is unreachable "
                         f"(set clamp = false for an unbounded resource)"
                     )
+
+                # ── the cap against the GAME, not against the sidebar ──────────────
+                # Everything above asks "does this cap keep the HUD honest?". This asks
+                # the question the player asks: can the button actually reach the wall
+                # it was sold for? The cap is hand-derived from the game's gates and
+                # nothing re-derives it when a ladder grows, so it goes stale silently —
+                # vesper shipped `fighting` capped at 40 for three releases after its top
+                # gate moved to 70, and a player found it, not a build.
+                _gate = _trait_gates.get((_owner_key, g.trait))
+                _required = (_gate or {}).get("required")
+                _cap_note = raw.get("cap_note")
+                if _cap_note is not None and not (
+                    isinstance(_cap_note, str) and _cap_note.strip()
+                ):
+                    errors.append(
+                        f"{ctx}: 'cap_note' must be a non-empty string — it is the reason "
+                        f"this row's cap is allowed to sit below the game's gates, and an "
+                        f"empty one waives the check while explaining nothing"
+                    )
+                    _cap_note = None
+
+                if g.cap is not None and _required is not None:
+                    _bands = ", ".join(f"{b:g}" for b in sorted((_gate or {}).get("bands") or ()))
+                    if g.cap < _required and not _cap_note:
+                        errors.append(
+                            f"{ctx}: cap {g.cap:g} is below the highest gate this game puts on "
+                            f"'{g.trait}' ({_required:g}) — the code cannot reach the content it "
+                            f"is sold for, and the player finds that out at the wall. Gates on "
+                            f"this trait: {_bands}. Either raise it to cap = {_required:g}, or "
+                            f"say why it stays low with cap_note = \"...\" (a cap deliberately "
+                            f"under a gate is a real design — vesper capped stealth at 9 on "
+                            f"purpose — and the note is how that survives the next ladder change)"
+                        )
+                    elif g.cap >= _required and _cap_note:
+                        # A note that outlives its reason is worse than none: it waives this
+                        # check forever on a row nobody is watching any more.
+                        #
+                        # Warned at the point of detection rather than appended to
+                        # _validate_warnings: that list is flushed to the warnings module
+                        # ~500 lines above, so anything added down here would reach the
+                        # template's introspection list and NEVER reach the build log.
+                        # Appended too, so tests can still read it off the template.
+                        _stale_msg = (
+                            f"{ctx}: cap_note explains a cap held below the game's gates, but "
+                            f"cap {g.cap:g} now covers the highest gate on '{g.trait}' "
+                            f"({_required:g}) — the note is stale, delete it so the cap is "
+                            f"checked again"
+                        )
+                        _validate_warnings.append(_stale_msg)
+                        import warnings as _w
+                        _w.warn(_stale_msg, UserWarning, stacklevel=2)
 
     # locations
     loc_ids = [l.id for l in template.locations]
