@@ -143,6 +143,14 @@ flip. Entry strips whitespace and case, so `alphaword`, `ALPHAWORD` and `alpha w
       their kin). Give each banded meter the `cap` its top band expects; **money takes no cap** — it's the
       one unbounded countable (`trait-catalog.md` §4) and needs `clamp = false`, or the engine's hardcoded
       0-100 clamp silently caps a wallet at 100.
+- ⚠️ **the cap is derived from the GAME's gates, not from the sidebar's bands.** Those are two different
+      numbers and only one of them is what the player is buying. A row's `cap` must reach the highest `gte`
+      any condition in the build puts on that trait, or the code cannot reach the content it was sold for.
+      Vesper shipped `fighting` capped at **40** for three releases after its top gate moved to **70** — the
+      wall was found by playing, not by building. **The build checks this now** and hard-fails, naming the
+      number to write (`template_import.py`, "below the highest gate"). A cap held low ON PURPOSE — the way
+      the Stealth row below is — declares `cap_note = "..."` and passes. The note is checked too: once the
+      cap covers every gate, the build says the note is stale, so a waiver cannot outlive its reason.
 - ✅ **step in band-sized increments.** Exclusive bands (`gte X` + `lt Y`) are the real stranders: a meter
       SET to max skips every band-entry canvas. Vesper's Renner row moves 10 at a time because his gates sit
       at 10/20/30/40/50.
