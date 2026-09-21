@@ -476,6 +476,32 @@ under its 5:1 ceiling. Recorded, not hidden: if LO wants him louder in bed, that
   that skipped any label containing "back" (fixed in `live_cot_decision.py` too), and a reload that kept a fired
   one-shot armed-off (a dev jump does not re-arm one-shots; take the jumps on a fresh save).
 
+## The Quests page (beat_0205, rev 231)
+
+LO, playing the shipped chunk: *"It says this but feels like stuck here what is going on."* He was on
+"◯ Wait for him to drink" while the game counted a calendar day and waited for the bought face to come off.
+Nothing was broken; the page simply never said what it was waiting for. An audit of the page found four things:
+
+1. **His own section said his arc was over** — "✓ Arc complete — There is nothing left to work here… the back
+   room is ash" — live through the whole ladder, because his NPC cards stopped at the raid.
+2. **The release opened behind 0.2.1's ending card.** Every returning player, until they walked into the cot,
+   read "✓ Chapter complete. That is where this build ends. There is nothing to go and get."
+3. **The face appeared on one card of nine**, the last one, when it no longer mattered.
+4. **The waits were prose only.** The chunk's cards used flag goals alone, while the rest of the game uses 29
+   trait goals that render live progress.
+
+What shipped: his section now follows him to the cot (five cards, prose only — the machinery stays on the
+story card); 0.2.1's end card hands over instead of ending; every cot card carries its wait as BULLETS — the
+face as a flag goal, the day as a `days_since_flag` goal rendering "— 0 / 1", the nights as the meter itself,
+"Nights with him — 1 / 3"; and every cot tip says the same shape in words (the step, the place, the hour, the
+day, out of the bought face).
+
+**The day bullet needed an engine addition**, because a quest-card condition could only be a flag or a trait:
+`days_since_flag` is now a third shape (parse, validate, serialize, evaluate, render), fails closed like the
+canvas predicate it mirrors, and is covered by `tests/test_quests_days_goal.py` (15 cases, red first). The
+counted-goal suffix was gated on `trait` alone, so the day count was computed and thrown away — caught on the
+built page, not in review.
+
 ## Not done
 
 - **The media harvest** — seven pools, 28 clips, on top of the eight slots 0.2.2 still owes.
@@ -483,3 +509,94 @@ under its 5:1 ceiling. Recorded, not hidden: if LO wants him louder in bed, that
 - **Flagged, not fixed — a 0.2.2 hole the same face check exposed:** nothing in the bunker or the arrival gates
   on `face_worn`, so a player who wears the bought face into the rescue is carried home by a man who has seen
   that face. THE COUNT is safe from it (every surface of his waits for the face to be off); the rescue is not.
+
+## Where the clips sit (rev 232)
+
+Both of the cot's sex nodes shipped with their clip hung off the node's lead. LO caught it playing:
+the washing scene opened on a video of the handjob and the finish, then the text started her at his
+beard.
+
+That is a real defect rather than a preference. A cascade renders as nested `<<linkreplace>>`
+(`v2.py:14572`), so **every beat appends and nothing is removed** — the lead clip never scrolls away,
+and the player reads the payoff under a picture of the setup. `author-game-v2` already says so
+(`references/register.md:364`: *"A clip at the top of a canvas is a clip for beat 0"*). Vesper is
+authored under the v1 `author-game` skill, whose `media.md` carries no placement rule and whose one
+worked exemplar is the node-top shape — so the defect is a doctrine gap, and the v1 skill still has it.
+
+The rule applied, here and across the game: **a clip goes on the first beat where its own `Must show:`
+line is true.** Every description in this game ends in that clause, so the target beat is readable off
+the clip's brief instead of being argued about.
+
+- **`washing`** — `sex/bastien_cot_wash_t5` now opens beat 4, «Take him in your hand.» She still has the
+  rag in that beat (she drops it mid-beat), so the clip's *"her hand doing the work, a rag or basin"*
+  holds. The pan of water, his face, the blanket down and him going hard under the rag all play as text
+  first. One asset covers wash → stroke → finish and **one asset, one block** holds, so it sits at beat 4
+  or beat 5, not both; beat 4 costs nothing and covers the stroke running into the finish. Splitting it
+  into a stroke pool and a finish pool would need a fresh harvest.
+- **`first_night`** — `sex/bastien_cot_first_night_t5` now opens beat 8, «Ride him.» It was ten beats
+  ahead of itself, and worse than early: the clip shows her two fingers resting at his neck, which is the
+  night's own reveal at beat 10, and it was playing before she had undressed.
+
+Nine more moved the same way outside the cot (sabin's drain, both hubs, the six bunker takes).
+`cap_renner_blowjob` was left at the node lead because its beat 0 *is* the oral, and the 42 nodes topped
+by an establishing still were left alone — a picture of a room gives nothing away, and it is the house
+shape (`cap_owner_print` keeps its still *and* puts seven clips in beats).
+
+Measured: media refs unchanged at 725 across 117 pool dirs, zero missing; `gates.py` G31 *"an explicit
+beat carries a clip"* 55/102 → 57/102. A browser probe confirms every changed node shows no video on its
+opening screen and the clip arriving on its intended beat.
+
+⚠️ **`check_the_count.py`'s `videos()` walker had to be repaired first.** It recursed into `group` only,
+so a clip moved into a beat went invisible and `pool_ok` failed a node that was correct. It now imports
+the shared `iter_media_blocks` (`apps/common/media_blocks.py`), which already descends
+`props.beats[*].blocks`; that module's own docstring records this drift happening twice before, and this
+guard was the third hand-copied walk. **Any future guard that looks for media must use it.**
+
+## Where the button puts you (rev 233)
+
+THE WAY DOWN's capstone ends on *"Which leaves one room in this city with a bed in it that nobody signed
+for"* and an exit reading **"Take him home."** That exit used to land the player on **the Waterfront**.
+
+Home is not on the Waterfront. `the_cot` sits under `kess_berth` under `underworld_strip`, and the strip
+is a root location reached only through `underworld_gate_check` — so "home" was six clicks and a gate
+away: call the car, ride down under the boards, reach the freight door, clear the doorman, cross the
+strip, into the Berth, into the Cot. All of it with Bastien over Cain's shoulder.
+
+**The exit now lands at `the_cot`.** Three things settled it:
+
+- **The 120 minutes on that exit is the journey, and always was.** The bunker run is fifty one minutes,
+  the exit adds two hours, and the arrival scene opens *"about two in the morning"*. The clock had
+  already modelled the trip home, so the old routing charged for it and then made the player walk it.
+- **Cain is at the cot in the very next scene, still carrying him** — *"Kess watches them come down the
+  boards with a man between them"*. There is no beat anywhere in which he sets Bastien down on a dock
+  street.
+- **The shape already ships in this release.** `cap_rue_reads_it` exits the brothel with
+  `text = "Take it home."` and `locationId = "the_cot"`, crossing the same three hops in one click.
+
+**The gate's three doors do not rescue the walk; they are the argument against it.** It can be cleared
+with 5 coin, with `fighting >= 15`, or with `underworld_gate_check.weapon_scene` — a Tier-5 clip in which
+she rides the doorman unconscious. Each of those is wrong with a rescued man in the party, and the route
+runs past the Undertow, a nav child of the strip, which is the bar this scene has just said he cannot go
+near because they know it is his.
+
+**Safe by two facts, both read in code rather than remembered.** `the_cot`'s `entry_conditions` need
+`berth_home`, set at the Kess handoff far upstream, so the location passage's guard passes. And the
+exit's `flagEffects` are emitted at the end of the node body, so `bastien_rescued` is applied when that
+passage *renders*, not when the link is clicked — it is already true when the cot's passage calls
+`getStoryCanvasRedirect` and `cap_bastien_at_the_cot`'s gate is read.
+
+⚠️ **The seam quest card changed with it, and it cannot be deleted.** The card gated
+`bastien_rescued is_true` + `bastien_at_cot is_false` existed to cover the walk, and its tip said *"Get
+him home. Your cot at the Berth, tonight."* With the direct exit it is live only for the length of the
+arrival cascade, where that tip would be telling the player to do something he has already done on
+screen. `check_the_count.py` §1 requires **exactly one** card in that slot and its state walk requires
+exactly one card live at the rescue, so removing it fails the guard twice. The fix is the wording: it now
+says where he is going and what she tries first, and hands to card A, the cup and the day turning.
+
+Measured: media identical before and after at 728 refs across 135 pool dirs (an A/B built from the
+pre-change TOMLs), exactly two content passages changed, every guard green, `pytest` at its 6F/501P
+baseline.
+
+**One more of the same class, fixed in the same pass:** `activity_swap_weapon_berth` sits at `kess_berth`
+and its two other choices return there, but its **"Leave it."** cancel pointed at `the_cot` — a cancel
+that moved the player one room deeper without being asked. It returns to the Berth now.

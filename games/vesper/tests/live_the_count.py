@@ -403,6 +403,58 @@ def main():
         check(passage() == "Canvas_cap_bastien_stops_counting_Node_base",
               f"the morning after, he has stopped counting (on {passage()})")
 
+        # ── [10] beat_0205 — THE QUESTS PAGE SHOWS THE WAIT ───────────────────────────────────────────────
+        # A player sat on "◯ Wait for him to drink" and reported the game stuck. It was counting a day and
+        # waiting for the bought face. These read the page the way he did.
+        print("\n[10] the Quests page")
+
+        def quests():
+            go("QuestsPage")
+            return page.inner_text("#passages")
+
+        page.evaluate("() => { try { sessionStorage.clear(); localStorage.clear(); } catch (e) {} }")
+        page.goto(GAME.as_uri())
+        page.wait_for_function("typeof SugarCube !== 'undefined' && SugarCube.State.variables.player", timeout=30000)
+        go("Canvas_dev_jump_count_start_Node_seed")
+        click("^To the cot\\.$")
+        page.wait_for_timeout(400)
+        q = quests()
+        check("A day since they carried him in — 0 / 1" in q,
+              "the water card counts the day out loud (0 / 1) instead of leaving it in the tip")
+        check("✓ Out of the bought face" in q, "and shows the face as met, because the jump lands with it off")
+        check("There is nothing left to work here" not in q,
+              "his section no longer says his arc is over while he is on the bunk")
+        check("He is on your bunk because there is nowhere else" in q, "his section follows him to the cot")
+        # With the face ON, the same bullet must go hollow.
+        go("Canvas_activity_the_face_Node_base")
+        click("^Put it on\\.$")
+        click("^Go to work\\.$")
+        q = quests()
+        check("◯ Out of the bought face" in q,
+              "in the bought face the bullet is hollow — the thing that blocked a real player is now on the page")
+        go("Canvas_activity_the_face_Node_base")
+        click("^Take it off\\.$")
+        click("^Sit with it a while\\.$")
+        next_day()
+        q = quests()
+        check("A day since they carried him in — 1 / 1" in q, "the next day the same bullet reads 1 / 1")
+        # The nights, counted live, from jump 2 (two already on the meter).
+        page.evaluate("() => { try { sessionStorage.clear(); localStorage.clear(); } catch (e) {} }")
+        page.goto(GAME.as_uri())
+        page.wait_for_function("typeof SugarCube !== 'undefined' && SugarCube.State.variables.player", timeout=30000)
+        go("Canvas_dev_jump_count_one_short_Node_seed")
+        click("^To the cot\\.$")
+        q = quests()
+        check("Nights with him — 2 / 3" in q, "the nights card counts the nights (2 / 3)")
+        check("He watches you the way he used to watch a readout" in q, "his section is on the nights card")
+        # And his section ends as his own ending, not a generic one. Flags only — quest cards read flags, and
+        # this renders a page rather than opening a gate, so setting one by hand proves what it claims.
+        page.evaluate("""() => { const f = SugarCube.State.variables.flags;
+            f.bastien_himself = true; f.house_answered = true; f.bastien_back = true; }""")
+        q = quests()
+        check("He is himself. The nights stay open." in q,
+              "his section closes on his own words, not a bare 'Arc complete'")
+
         b.close()
     print("\n" + ("LIVE THE COUNT: OK" if not fails else f"LIVE THE COUNT: {len(fails)} FAILED"))
     for f in fails:
