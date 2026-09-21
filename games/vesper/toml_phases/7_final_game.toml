@@ -19189,10 +19189,15 @@ when = [
   { flag = "raid_done", op = "is_false" },
 ]
 
-# ── B4 — he is gone, and she does not know where. NOT terminal past the night he is carried in. ──
+# ── B4 — he is gone, and she does not know where. The ONLY window where that sentence is true. ──
 # ⚠️ UPPER-GATED bastien_at_cot is_false AT beat_0205 (rev 231). Left on raid_done alone it kept rendering
 # "✓ Arc complete — There is nothing left to work here" through the whole cot ladder, while the story card two
 # inches above it said to go and wash him. His section now follows him to the bunk (B5-B8 below).
+# ⚠️ AND UPPER-GATED bastien_alive_known is_false AT beat_0208 (rev 234), because rev 231 only fixed the half
+# of the problem it could see. The card still stood through the WHOLE of 0.2.2's first half: the news at the
+# cot, the decision, the route out of Renner, the bunker, the rings, the carry home. "He is gone and there is
+# nothing left to work" over a story card reading "Bastien is alive, in a room under the Vance facility."
+# It is now exactly what it says: the stretch between the raid and the night Cain tells her. B4b takes over.
 [[quest_cards]]
 priority   = 14
 npc_id     = "npc_bastien"
@@ -19200,8 +19205,29 @@ text       = "You put him on the floor of his own back room with thirty coin of 
 tip        = "There is nothing left to work here. The Undertow does not open in the evenings now and what is in the back room is ash."
 terminal   = true
 when = [
-  { flag = "raid_done",      op = "is_true"  },
-  { flag = "bastien_at_cot", op = "is_false" },
+  { flag = "raid_done",           op = "is_true"  },
+  { flag = "bastien_alive_known", op = "is_false" },
+  { flag = "bastien_at_cot",      op = "is_false" },
+]
+
+# ── B4b — HE IS ALIVE AND HE IS NOT HOME YET (beat_0208, rev 234). The rescue had no card of his. ──
+# ⚠️ NOT TERMINAL. This is the card that was missing, and its absence is why B4's "Arc complete" stood over
+# the release's entire first half. Found by reading the quests page live on a carried 0.2.1 save.
+# ⚠️ WRITTEN IN THE PAST TENSE ON PURPOSE. It has to stay true from the news through the arrival scene, and
+# he stops being held somewhere partway through. A second card split on bastien_rescued would cover only the
+# arrival and would put a second card on that flag, which check_the_count.py §1 counts (story cards only, so
+# it would pass — but the split buys nothing a tense change does not).
+# ⚠️ NO GOAL BULLETS, same as B5-B8: the machinery is on the story card, where the player is already looking.
+# ⚠️ SHARES B4's PRIORITY. The two are exclusive on bastien_alive_known, the shape Renner's banded rungs use
+# at 12 and 13.
+[[quest_cards]]
+priority   = 14
+npc_id     = "npc_bastien"
+text       = "The man who kept you in a room spent four months in one himself, under the waterfront, below the part of that building that burned. Nobody asked him a question after the second month. He was never down there for what he knows. He was down there in case somebody came for him, and the somebody they had in mind is Cain."
+tip        = "There is nothing of his to work. No floor, no back room, no door he decides about. The story card carries the next step."
+when = [
+  { flag = "bastien_alive_known", op = "is_true"  },
+  { flag = "bastien_at_cot",      op = "is_false" },
 ]
 
 # ── B5-B8 — THE COT (beat_0205, rev 231). His section follows the ladder the story cards run. ──
