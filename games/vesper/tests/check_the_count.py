@@ -743,6 +743,33 @@ def main() -> int:
                   for cl in raid[0].get("when", [])),
               "11b: his post-raid card is not upper-gated bastien_at_cot is_false — it keeps saying his arc "
               "is over while he is on the bunk")
+        check(any(cl.get("flag") == "bastien_alive_known" and cl.get("op") == "is_false"
+                  for cl in raid[0].get("when", [])),
+              "11b: his post-raid card is not upper-gated bastien_alive_known is_false — it goes on saying "
+              "his arc is over through the whole rescue, under a story card that says he is alive")
+    # THE RESCUE WINDOW (added rev 234). chain_states below starts at the bunk, so nothing ever looked
+    # between the news at the cot and the carry in, and that is exactly where "✓ Arc complete — there is
+    # nothing left to work here" stood for the whole first half of 0.2.2. Found by reading the page live on
+    # a carried 0.2.1 save. She has drained him and taken the bar to rung 4 long before any of this.
+    rescue_traits = {"bar_rung": 4, "bastien_drains_done": 1}
+    for label, fls in (
+        ("the news at the cot", {"raid_done": True, "bastien_alive_known": True}),
+        ("the way down",        {"raid_done": True, "bastien_alive_known": True, "rescue_agreed": True,
+                                 "route_learned": True, "link_built": True}),
+        ("the carry home",      {"raid_done": True, "bastien_alive_known": True, "rescue_agreed": True,
+                                 "route_learned": True, "link_built": True, "bastien_rescued": True}),
+    ):
+        live = [c for c in his if holds({"version": "1.0", "logic": "AND", "items": [
+            {"type": "flag", "subject": "player", "flag_key": cl.get("flag"),
+             "operator": cl.get("op")} if cl.get("flag") else
+            {"type": "trait", "subject": cl.get("subject", "player"), "trait_key": cl.get("trait"),
+             "operator": cl.get("op"), "value": cl.get("value"), "npc_id": cl.get("npc_id")}
+            for cl in c.get("when", [])]}, fls, rescue_traits)]
+        check(len(live) == 1,
+              f"11b: {len(live)} Bastien cards live at once during '{label}' (want exactly 1)")
+        if live:
+            check(not live[0].get("terminal"),
+                  f"11b: his section reads 'Arc complete' during '{label}' — he is alive and not home yet")
     cot_cards = [c for c in his if any(cl.get("flag") in CHAIN[1:] or cl.get("flag") == "bastien_at_cot"
                                        for cl in c.get("when", []))]
     check(len(cot_cards) >= 4, f"11b: his section needs cards for the cot ladder, found {len(cot_cards)}")
