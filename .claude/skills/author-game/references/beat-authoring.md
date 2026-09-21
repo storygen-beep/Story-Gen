@@ -188,6 +188,10 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    visual (most scene beats should — these games are image-first), author the `image`/`video` block per
    `references/media.md` — in the text-media-text rhythm, with a `description` + 2 `search_queries` (a missing
    media block with no queries renders nothing AND leaves no acquisition trail).
+   **In a cascade the block goes inside THAT BEAT's own `blocks = [`, not the node's.** A cascade appends and
+   removes nothing, so a clip hung on the node's lead illustrates beat 0 and has scrolled away by the beat that
+   is the act. The node's lead is for an establishing STILL. Rule, engine reason and the worked in-beat TOML:
+   `media.md` §6a; the gate that measures it is G31.
    **Is the beat NSFW *and* on a repeatable canvas?** Then it wants a POOL — `pool_dir = "<folder>"` +
    `pool = 4` instead of `file` — so the player sees a different clip each visit instead of the same one
    forever. Costs one search either way. Gates + the escalate-vs-rotate trap: `media.md` §7.

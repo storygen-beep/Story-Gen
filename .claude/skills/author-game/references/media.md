@@ -23,6 +23,7 @@ called out — the corpus is recovered for its craft, not trusted for its engine
 4. Writing `search_queries` — the craft
 5. Image vs video — the tier contract (authoring, not engine)
 6. Placing media — the text-media-text rhythm + the 6 dimensions
+6a. In a cascade, the BEAT is the unit — not the node
 7. Folder + naming convention (+ variant chains & cycling media pools)
 7b. Media insurance — the corpus is the content plan, so protect it
 8. Where media lives in the pipeline
@@ -199,6 +200,13 @@ and `search_queries` so the missing-media page is a usable list, and check cover
   cannot practically open — a paying supporter playing on mopoga or gamcore had no route to what they bought.
   8 of the 26 top mopoga games carry a live code box inside the free web build; only 3 ship a separate paid
   file. See `.claude/skills/author-game/CHANGELOG.md` (2026-08-23) for the measurement.
+---
+
+## 4. Writing `search_queries` — the craft
+
+Two `search_queries` per media block are what find-media actually runs. They are a **physical** description of
+what is on screen, never a description of the story around it.
+
 - **Two queries per block: a primary + one fallback.** Length is not the constraint — *content* is. A
   descriptive query is fine; a story-flavoured one is not.
 - **Lead with the ACT and the POSITION, and say who does what to whom.** That is what the searcher must match
@@ -299,6 +307,77 @@ flirt = 1; kiss = 1 clip; oral = 1-2 clips; full sex = 2-3 clips marking the ene
 Place the media block at the **action moment** (the pose, the act) or the **mood peak**, not over a line of
 dialogue. (This is the same beat shape as a cascade: the establishing image opens the node, the act media lands
 on the reveal.)
+
+### 6a. In a cascade, the BEAT is the unit — not the node
+
+> **A clip at the top of a node is a clip for beat 0. Every beat that escalates carries its own.**
+
+The rhythm above is right. What it does not say is **which `blocks` array the media block goes in** — and in
+a cascade that is **the beat's own**, not the node's.
+
+**This is an engine fact before it is a rule.** A cascade renders as a nested `<<linkreplace>>` chain
+(`_render_cascade` → `_render_cascade_tail`, `v2.py:15020` / `:15106`), and each beat's blocks become that
+linkreplace's **body** (`body_html = self._convert_blocks_to_game_html(beat_blocks)`, `:15166`). Clicking a
+beat **appends** it below the last one and **removes nothing**. So a clip mounted on the node's lead does not
+travel with the scene: it stays pinned at the top while the prose walks away from it, and by the beat that is
+the act, the player is reading the payoff under a picture of the setup. `rts-flat-prose.md` already states the
+invariant this produces — *"every cascade beat carries its own `webp`/video"* — and this is the TOML for it.
+
+**The operational form, so a placement is decidable instead of a taste argument:**
+
+> **A clip goes on the first beat where its `description` is physically true.**
+> If that is beat 0, the node's lead is already correct and nothing moves.
+
+That works because the `description` is a checklist, not a caption (§4): *"on her knees on dirty concrete, a
+slumped man above her"* either is or is not true of the beat in front of you. Ask it beat by beat and two
+authors get the same answer.
+
+**The sandwich still holds — it just spans beats.** In a cascade the *text before* is usually the previous
+beat and the *text after* is the next one, so a media block often opens its own beat. Both shapes ship
+(vesper: 29 in-beat clips lead their beat, 4 follow a line of prose). Put it where the moment is.
+
+**One beat out of a cascade, shown alone.** Beat 0 carries no `advance_text` — it merges into the node's lead
+(`engine-reference.md`, the beat-0 contract) — and neither does a terminal beat; the `advance_text` is what
+makes a beat a click.
+
+⚠️ **The `props = { … }` inline table must stay on ONE line.** TOML forbids an inline table spanning lines, so
+a media block is one long line however wide it looks here. Break it and the merge fails to parse.
+
+One-shot scene, a fixed `file`:
+
+```toml
+{ type = "cascade", props = { beats = [
+    { advance_text = "<the click that reveals this beat>", blocks = [
+        { type = "video", props = { file = "<folder>/<clip>.webm", description = "<who is where, in what position, who is visible, what act>", search_queries = ["<a query that would find it>", "<a fallback>"] } },
+        { type = "paragraph", content = "<the beat's 35-40 words>" },
+    ] },
+] } },
+```
+
+Repeatable surface, a `pool_dir` (NSFW on a repeatable canvas wants a pool — §7):
+
+```toml
+{ type = "cascade", props = { beats = [
+    { advance_text = "<the click>", blocks = [
+        { type = "paragraph", content = "<the beat's 35-40 words>" },
+        { type = "video", props = { pool_dir = "<folder>/<beat_name>_t5", pool = 4, description = "<who is where, in what position, who is visible, what act>", search_queries = ["<a query>", "<a fallback>"] } },
+    ] },
+] } },
+```
+
+**What correctly stays at the node's lead is an establishing STILL.** A picture of the room gives nothing
+away, it is what the opening prose is about, and it is the house shape: a node can open on a location image
+*and* put a clip in every beat that escalates.
+
+> ⚠️ **ONE ASSET, ONE BLOCK.** Never reuse a `file` or a `pool_dir` across two blocks. The media review
+> dedupes by file, so two beats sharing an asset collect **one** verdict between them and the second beat is
+> reviewed by nobody. The practical bite on placement: a single clip covering wash → stroke → finish sits on
+> **one** of those beats, not two. Splitting it needs a fresh harvest, not a second block.
+
+> ⚠️ **THIS IS MEASURED, AND THE NUMBER NAMES NAMES.** `gates.py` G31 — *"an explicit beat carries a clip"*,
+> floor 50%, against a field of 91% of explicit screens — credits a node-lead clip to **beat 0 only**. So a
+> clip sitting above explicit beats 2-5 scores those as uncovered, and the gate prints the canvases it
+> happened in. Run it (`SKILL.md` §7 check 8) and read the list; do not eyeball this.
 
 When you (or find-media) judge whether a found asset fits, the **6 dimensions, in priority order**, are:
 

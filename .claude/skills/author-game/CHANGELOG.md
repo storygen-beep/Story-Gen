@@ -8,6 +8,62 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-21
+- **`references/engine-reference.md` §4.4 — a THIRD quest-card condition shape (`days_since_flag`), the
+  counted-goal rule, and "a wait the player cannot see is a wait they read as a bug".** vesper 0.2.2's cot
+  ladder gates every step on a calendar day and on the bought face being off, and said both only in the tip.
+  LO played it, sat on "◯ Wait for him to drink", and reported the game stuck — it was working, and counting.
+  The page could not have said it: quest-card conditions were flag-or-trait only, so there was no way to show
+  a day wait at all. Engine fixed alongside the doctrine (additive, opt-in): `days_since_flag` parses,
+  validates as its own shape, serializes, evaluates off `flags_meta[…].set_day` with the canvas predicate's
+  fail-closed rule, and renders `— 0 / 1` through the existing counted-goal suffix, which now covers days as
+  well as traits (it was gated on `trait` alone and threw the day count away — found on the built page, not in
+  review). Verified: `tests/test_quests_days_goal.py` (15 cases, red first) and vesper's live suite reading the
+  real Quests page at four states.
+- **`references/media.md` §6a (new), `references/beat-authoring.md`, `references/engine-reference.md`,
+  `SKILL.md` — "in a cascade the BEAT is the unit, not the node", with the worked in-beat TOML the skill had
+  never shown.** LO, playing vesper's cot: the wash-him canvas opened on a video of the handjob and the
+  finish, above prose that starts her at his beard. A read-only sweep of all 97 cascade nodes found ten more,
+  all the same shape — the right clip, mounted at the node's lead instead of on the beat it depicts. Fixed in
+  the game (rev 232, eleven clips moved); this is the half that stops it recurring.
+  **Root cause is a skill gap, not a slip, and a specific one: the rule was already here three times and
+  contradicted by the only artifact that showed code.** `rts-flat-prose.md` states the invariant outright
+  ("every cascade beat carries its own `webp`/video"), `beat-authoring.md`'s Step-7 loop says "if the **beat**
+  carries a visual … author the block per `references/media.md`", and `media.md` §6 is titled "Placing media"
+  and closes on "the act media lands on the reveal". But `media.md`'s one structural sentence says media is "a
+  content block inside a canvas **node's** `blocks`", its only full worked example is introduced as the rhythm
+  "in one node" and labelled **"Copy this"** — three flat siblings, no cascade — and a count across the whole
+  skill found **zero** worked examples putting a media block inside a cascade beat's own `blocks`. An author
+  who follows the pointer copies the model, not the prose. The nearest per-beat media anywhere was
+  `rts-flat-prose.md` §8.2's `[image: …]` markers, in a shorthand that two files explicitly declare fake.
+  **What shipped:** §6a states the rule (a clip at the top is a clip for beat 0), gives the engine reason by
+  symbol (`_render_cascade` → `_render_cascade_tail`, each beat's blocks becoming the linkreplace body, so a
+  click appends and removes nothing), states the decidable form — **a clip goes on the first beat where its
+  `description` is physically true** — which works because the description is already required to be a
+  physically checkable checklist, shows **two** in-beat TOML blocks (a one-shot `file` and a repeatable
+  `pool_dir`), keeps the establishing still at the node's lead, and carries the one-asset-one-block bound plus
+  a pointer to the gate. `beat-authoring.md` gains the clause at the decision point; `engine-reference.md`
+  gains a third cascade contract (the append fact) beside the beat-0 and cascade-last ones; `SKILL.md`'s
+  `media.md` blurb names placement.
+  **No script added — the instrument exists and already runs on v1 games.** `gates.py` G31 ("an explicit beat
+  carries a clip", floor 50%) credits a node-lead clip to beat 0 only and prints the offending canvases, and
+  `SKILL.md` §7 check 8 already shells out to it; what was missing was any doctrine in *this* skill explaining
+  the number. Verified: both new TOML blocks parsed under `tomllib` — the first draft FAILED, it split the
+  `props` inline table across lines, which TOML forbids, so §6a now warns about exactly that; every symbol
+  re-grepped against the current `v2.py` rather than copied from v2's doctrine, whose cascade cites
+  (`:14572` / `:14426` / `:14512`) are stale by ~600 lines; and `gates.py vesper` byte-identical before and
+  after (78,236 bytes, G31 57/102), which it must be, since `gates.py` reads nothing under `references/`.
+- **`references/media.md` — the missing `## 4.` heading, restored.** Found while adding §6a. The Contents
+  list promised *"4. Writing `search_queries` — the craft"* and no such heading existed: the whole of §4's
+  body (the two-queries rule, act-and-position first, the setting-only-when-it-means-something measurement,
+  the never-put-story-words-in-a-query measurement, the good/bad examples, and the `description`-is-a-checklist
+  subsection) was orphaned inside §3's `### QA build vs publish build` bullet list, so the craft an author is
+  sent to read looked like a footnote to the build flags. **Four internal cross-references pointed at a §4
+  that had no heading to land on** (`:47`, `:331`, `:506`, `:558`), which is how a reader would have noticed.
+  Heading inserted at the real boundary — after the `--codes` bullet, before *"Two queries per block"* — with
+  a one-line opener saying what the two queries are for. Verified: every Contents entry now resolves to a
+  heading and every heading is listed, checked programmatically, and all code fences still balance.
+
 ## 2026-09-19
 - **`references/media.md` — "Name a new pool after the SCENE, not only the character — and grep before you
   declare it."** THE COUNT's first cut named three cot-loop pools `sex/bastien_loop_oral_t5`,
