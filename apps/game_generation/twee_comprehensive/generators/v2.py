@@ -16054,7 +16054,21 @@ function _whenMatches(items) {
 // _readCurrentValue — for trait/counter goals, the live numeric value (used
 // for the bullet's "X / Y" suffix). Returns null for flag-only goals.
 function _readCurrentValue(item) {
-    if (!item || !item.trait) return null;
+    if (!item) return null;
+    // A DAY GATE reports days elapsed since the flag was set, so the bullet reads
+    // "— 0 / 1" and then "— 1 / 1". Unset flag, or a flag with no set_day, reads 0:
+    // the wait has not started, which is the honest number to show.
+    if (item.days_since_flag) {
+        var _sv = State.variables;
+        var _meta = (_sv.flags_meta || {})[String(item.days_since_flag)];
+        var _set = (_sv.flags || {})[String(item.days_since_flag)];
+        if (!_set || !_meta || typeof _meta.set_day !== "number") return 0;
+        var _today = (_sv.game_state && _sv.game_state.time_state)
+            ? _sv.game_state.time_state.day : 1;
+        var _elapsed = _today - _meta.set_day;
+        return _elapsed > 0 ? _elapsed : 0;
+    }
+    if (!item.trait) return null;
     if (item.subject === "player") {
         var pt = State.variables.player && State.variables.player.core_traits;
         return (pt && typeof pt[item.trait] === "number") ? pt[item.trait] : 0;
@@ -16140,6 +16154,31 @@ setup.pickQuestsCards = function(scope) {
 // by `evaluateGoals` (bullet progress).
 setup.checkQuestsCondition = function(item) {
     if (!item || typeof item !== "object") return false;
+    // ── Day gate ────────────────────────────────────────────────────────────
+    // The same predicate canvases use (days_since_flag): days elapsed since the
+    // flag was SET, measured off $flags_meta[flag].set_day against the calendar
+    // day. It FAILS CLOSED when the flag is unset or carries no meta, because a
+    // flag set outside applyFlagEffect has no set_day and a wait that silently
+    // passes is worse than one that never opens. Goals only — `when` routing
+    // stays flag/trait, so a card's place in the chain never depends on a clock.
+    if (item.days_since_flag) {
+        var dsKey = String(item.days_since_flag);
+        var dsSet = (State.variables.flags || {})[dsKey] === true;
+        var dsMeta = (State.variables.flags_meta || {})[dsKey];
+        if (!dsSet || !dsMeta || typeof dsMeta.set_day !== "number") return false;
+        var dsToday = (State.variables.game_state && State.variables.game_state.time_state)
+            ? State.variables.game_state.time_state.day : 1;
+        var dsElapsed = dsToday - dsMeta.set_day;
+        var dsTarget = item.value;
+        switch (item.op) {
+            case "gte": return dsElapsed >= dsTarget;
+            case "lte": return dsElapsed <= dsTarget;
+            case "gt":  return dsElapsed > dsTarget;
+            case "lt":  return dsElapsed < dsTarget;
+            case "eq":  return dsElapsed === dsTarget;
+        }
+        return false;
+    }
     if (item.flag) {
         var v = State.variables.flags && State.variables.flags[item.flag] === true;
         if (item.op === "is_true") return !!v;
@@ -16265,8 +16304,13 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
             var marker = it.met ? '✓' : '◯';
             var label = (it.goal && it.goal.label) ||
                         (it.goal && it.goal.trait) ||
+                        (it.goal && it.goal.days_since_flag) ||
                         (it.goal && it.goal.flag) || "";
-            if (it.goal.trait && typeof it.currentValue === "number") {
+            // The "X / Y" suffix belongs to every COUNTED goal — a trait and a day
+            // wait both have a number the player is waiting on. Gating it on `trait`
+            // alone computed the day count and threw it away, which is the whole
+            // reason the days shape exists (found on the built page, beat_0205).
+            if ((it.goal.trait || it.goal.days_since_flag) && typeof it.currentValue === "number") {
                 label += ' — ' + it.currentValue + ' / ' + it.goal.value;
             }
             html2 += '<li>' + marker + ' ' + label + '</li>';

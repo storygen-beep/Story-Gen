@@ -1131,6 +1131,11 @@ class QuestsCondition:
     # ("gte" | "lte" | "gt" | "lt" | "eq"), `value`, and `label`.
     # When subject == "npc", `npc_id` is required.
     trait: Optional[str] = None
+    # Day gate (goals only): set `days_since_flag`, a numeric `op`, `value` and
+    # `label`. Reads the day the flag was SET (flags_meta) against the calendar,
+    # the same predicate canvases use, so a card can show "◯ Let a day pass — 0 / 1"
+    # instead of leaving the wait in the tip where the player reads it as a bug.
+    days_since_flag: Optional[str] = None
     subject: Optional[str] = None
     npc_id: Optional[str] = None
     op: str = ""
@@ -1188,11 +1193,14 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
     """Parse a single condition item from a card's `when` or `goals` list."""
     flag = d.get("flag")
     trait = d.get("trait")
+    days_since_flag = d.get("days_since_flag")
     # Coerce stray empty strings to None so the validator sees a clean shape.
     if not flag:
         flag = None
     if not trait:
         trait = None
+    if not days_since_flag:
+        days_since_flag = None
     subject = d.get("subject") or None
     npc_id = d.get("npc_id") or None
     op = str(d.get("op", "") or "")
@@ -1208,6 +1216,7 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
     return QuestsCondition(
         flag=flag,
         trait=trait,
+        days_since_flag=days_since_flag,
         subject=subject,
         npc_id=npc_id,
         op=op,
@@ -5756,8 +5765,8 @@ def _validate_quests_cards(
       - condition item uses old V1 fields (`type`, `flag_key`, `trait_key`,
         `operator`) — explicit reject to catch migration mistakes
       - priority not an integer
-      - condition item has neither `flag` nor `trait` set
-      - condition item has both `flag` and `trait` set
+      - condition item sets none of `flag` / `trait` / `days_since_flag`
+      - condition item sets more than one of them
     """
     canvas_slugs = {c.id for c in canvases}
 
@@ -5769,18 +5778,44 @@ def _validate_quests_cards(
         # validate time by looking for both flag and trait being None).
         has_flag = item.flag is not None
         has_trait = item.trait is not None
-        if not has_flag and not has_trait:
+        has_days = item.days_since_flag is not None
+        shapes = [n for n, on in (("flag", has_flag), ("trait", has_trait),
+                                  ("days_since_flag", has_days)) if on]
+        if not shapes:
             errors.append(
-                f"{ctx}: condition item must set either `flag` or `trait`"
+                f"{ctx}: condition item must set one of `flag`, `trait` or "
+                f"`days_since_flag`"
             )
             return
-        if has_flag and has_trait:
+        if len(shapes) > 1:
             errors.append(
-                f"{ctx}: condition item must set ONLY ONE of `flag` or "
-                f"`trait`, not both"
+                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait` or "
+                f"`days_since_flag`, not {' + '.join(shapes)}"
             )
             return
-        if has_flag:
+        if has_days:
+            # A DAY GATE. Same predicate the canvas side has had since 0.2.2: days
+            # elapsed since the flag was SET, read off flags_meta. It exists so a
+            # card can SHOW the wait ("◯ Let a day pass — 0 / 1") instead of leaving
+            # it in the tip, where a player reads a working wait as a stuck game.
+            # Numeric ops only — "a day has passed" is a count, never a boolean —
+            # and the same `ne`-free whitelist as traits, for the same reason.
+            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+                errors.append(
+                    f"{ctx}: days_since_flag condition op must be gte/lte/gt/lt/eq, "
+                    f"got {item.op!r}"
+                )
+            if item.value is None:
+                errors.append(
+                    f"{ctx}: days_since_flag condition requires numeric value "
+                    f"(the number of days to wait)"
+                )
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: days_since_flag goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
+        elif has_flag:
             if item.op not in ("is_true", "is_false"):
                 errors.append(
                     f"{ctx}: flag condition op must be is_true/is_false, "
@@ -6375,6 +6410,8 @@ def _serialize_quests_condition(c: QuestsCondition) -> Dict[str, Any]:
         out["flag"] = c.flag
     if c.trait is not None:
         out["trait"] = c.trait
+    if c.days_since_flag is not None:
+        out["days_since_flag"] = c.days_since_flag
     if c.subject is not None:
         out["subject"] = c.subject
     if c.npc_id is not None:
