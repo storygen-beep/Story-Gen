@@ -3003,13 +3003,16 @@ end_time   = "08:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Your mum is at the hob in her home clothes with two pans going, doing it at the speed of somebody who has done it every morning for years."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is at the hob in her home clothes with two pans going, doing it at the speed of somebody who has done it every morning for years." },
+  { type = "paragraph", content = "Two pans, the kettle and the radio on low. She has the timing of all three in her head and has never once written any of it down." },
+  { type = "paragraph", content = "She is cooking for four at seven in the morning with a shift waiting at the end of the day, and her back is to you the whole time you stand there." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3085,13 +3088,16 @@ end_time   = "09:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "She is at the sink with her sleeves pushed up and the breakfast things stacked beside her, and she has not sat down once since she got up."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "She is at the sink with her sleeves pushed up and the breakfast things stacked beside her, and she has not sat down once since she got up." },
+  { type = "paragraph", content = "Everything off the table is on the drainer in the order it came off it. She works down the stack without once looking at how much of it is left." },
+  { type = "paragraph", content = "The water has gone grey and she has not changed it. Four people ate and three of them are already in another room." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3167,13 +3173,16 @@ end_time   = "12:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Your mum is doing lunch for whoever is in the house, which today is you, and she has not asked whether you wanted any."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is doing lunch for whoever is in the house, which today is you, and she has not asked whether you wanted any." },
+  { type = "paragraph", content = "She is making enough for two and putting the rest in a box for later, which is how half of what happens in this kitchen gets done twice." },
+  { type = "paragraph", content = "Lunch is whatever is nearest going off. She works that out standing at the open fridge and then just gets on with it." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3249,13 +3258,16 @@ end_time   = "13:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "She is at the sink again. It is the third time she has stood at it today and it is not two o'clock yet."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "She is at the sink again. It is the third time she has stood at it today and it is not two o'clock yet." },
+  { type = "paragraph", content = "Two plates and a pan, which is no time at all, and she does it now because leaving it means doing it later on top of something else." },
+  { type = "paragraph", content = "Her hands are in the water before the table is properly cleared. Nobody carried anything through on their way out." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3331,13 +3343,16 @@ end_time   = "19:00"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Your mum is doing dinner for four with a shift already behind her, and she will be stood at this for an hour."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is doing dinner for four with a shift already behind her, and she will be stood at this for an hour." },
+  { type = "paragraph", content = "Four of everything, and one of the four has not said what time he is in. She cooks as though he has." },
+  { type = "paragraph", content = "She came in off a night, slept the day, and is now making a meal she will eat last and clear up after on her own." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3413,13 +3428,16 @@ end_time   = "20:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "The table is cleared and she is at the sink with all of it, and everybody else has gone through to the other room."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The table is cleared and she is at the sink with all of it, and everybody else has gone through to the other room." },
+  { type = "paragraph", content = "The TV is on next door and she is out here with four plates and the pan it was all cooked in. Nobody offered on the way past." },
+  { type = "paragraph", content = "She stacks it, washes it, dries it and puts it away, and the whole thing takes half an hour that nothing else in this house notices." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3500,13 +3518,16 @@ end_time   = "11:30"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Your mum is down on the bathroom floor with the pile, pulling darks off the top of it and not looking up at you."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is down on the bathroom floor with the pile, pulling darks off the top of it and not looking up at you." },
+  { type = "paragraph", content = "Four people's washing in one heap by the bath, and she is going through it by hand into three piles on the tiles." },
+  { type = "paragraph", content = "She has the machine open and is loading it a handful at a time, checking pockets, because somebody in this house never does." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3587,13 +3608,16 @@ end_time   = "12:00"
 [[canvases.nodes]]
 id   = "base"
 name = "She is on it"
-
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Your mum is going along the shelf with a cloth, moving each thing and putting it back down on the same ring it left."
-
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is going along the shelf with a cloth, moving each thing and putting it back down on the same ring it left." },
+  { type = "paragraph", content = "She works the sill, then the shelf, then the tops of the frames — the places nobody looks at until they have not been done." },
+  { type = "paragraph", content = "Half an hour of lifting things and setting them back exactly where they were, in a room that will look identical when she finishes." },
+]
 [canvases.nodes.exit_block]
 type = "choices"
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Do it with her."
 targetType = "location"
@@ -3639,6 +3663,482 @@ flagEffects = [{ targetType = "player", flag = "chore_done_dusting", op = "set" 
 text       = "Leave her to it."
 targetType = "location"
 locationId = "the_front_room"
+
+
+# --- HER MUM, ON HER OWN HOURS ----------------------------------------------
+# her_mum_cards.md, 2026-09-22. BASE.md rule 1: every row has a card. Twenty of
+# her sixty-seven rows had one. These four carry twenty-eight more — eating, sat
+# down once the player has done her chore for her, her Sunday afternoon, and her
+# two hours in town. They pay nothing: chores.md, "what she gets is time with her
+# mum." The nineteen behind a shut door are her ladder and wait for block 5.
+#
+# Generated by games/the_balance/process/gen_week.py. Edit the tables there.
+
+[[canvases]]
+id   = "mum_eating"
+name = "Your mum, eating"
+description = "Her six meals, each at its own hour — and the shopping, which is the one hour of hers in this kitchen that is not one. Sit down with her or don't."
+
+[canvases.trigger]
+location      = "the_kitchen"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_kitchen", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "07:30"
+end_time   = "08:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "11:15"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "12:30"
+end_time   = "13:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "15:15"
+end_time   = "15:45"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "08:30"
+end_time   = "09:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "12:30"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "At the table"
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "07:30", end_time = "08:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She is eating standing up at the counter with one eye on the clock, next to @gil who is sat down with the paper. In half an hour she will be at the sink with both their plates." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:00", end_time = "08:30" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She has come in off the ward and has not changed out of the uniform yet. She is eating at the table without tasting any of it, the way you eat when your day is already over." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:30", end_time = "09:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "Sunday, so she is sat down with whoever got up, and everything is on the table at once instead of going through one plate at a time." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "11:15", end_time = "12:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "The shopping is half on the floor and half on the counter and she is putting it away tins first, which is the order she has always done it in and has never explained." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:30", end_time = "13:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She has sat down to eat and she has half an hour. It is the longest she sits down between getting up and the middle of the afternoon." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "15:15", end_time = "15:45" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She is eating a late lunch on her own at the table, hours after everybody else did. The house is quiet, she has it to herself, and she does not look like somebody who wanted it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "07:30", end_time = "08:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take yours and go."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "07:30", end_time = "08:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:00", end_time = "08:30" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take yours and go."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:00", end_time = "08:30" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:30", end_time = "09:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take yours and go."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "08:30", end_time = "09:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put it away with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "11:15", end_time = "12:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:30", end_time = "13:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take yours and go."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:30", end_time = "13:00" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down and eat with her."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "15:15", end_time = "15:45" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take yours and go."
+targetType = "location"
+locationId = "the_kitchen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "15:15", end_time = "15:45" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_kitchen"
+
+[[canvases]]
+id   = "mum_sat_down"
+name = "Your mum, sat down"
+description = "Nineteen rows, and every one of them exists because the player took a chore off her. Four bands by the hour. Priority 4 — see the note above."
+
+[canvases.trigger]
+location      = "the_front_room"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "07:00"
+end_time   = "07:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "12:00"
+end_time   = "12:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:00"
+end_time   = "13:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:30"
+end_time   = "14:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "14:30"
+end_time   = "15:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "15:45"
+end_time   = "16:45"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "16:45"
+end_time   = "17:15"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "17:15"
+end_time   = "18:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3, 5]
+start_time = "20:00"
+end_time   = "20:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:00"
+end_time   = "09:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:30"
+end_time   = "11:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "11:30"
+end_time   = "12:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "12:00"
+end_time   = "12:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "13:00"
+end_time   = "13:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "20:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "In the chair"
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "00:00", end_time = "12:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She is sat down in the front room before nine, which she never is, because the thing she would have been stood at is already done." },
+  { type = "paragraph", content = "The TV is not on. She is in the chair with a cup, in the part of the morning that is usually the sink." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:00", end_time = "17:15" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She is in the chair in the middle of the afternoon with nothing in front of her. The room is done and she is not the one who did it." },
+  { type = "paragraph", content = "The cup is on the arm of the chair and the remote is next to it and she has not picked up either." },
+  { type = "paragraph", content = "She has the afternoon and no idea what to do with it, which is what an afternoon looks like when somebody hands you one." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "17:15", end_time = "18:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "This is the hour her own week gives her, five until six, and it is the only one on it that is hers. She is sat down with the TV on low." },
+  { type = "paragraph", content = "Her one hour off, and she is in the chair for all of it. Tonight she is home, so there is nothing at the end of it to get ready for." },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "18:00", end_time = "00:00" },
+] } }
+blocks = [
+  { type = "paragraph", content = "She is sat down while the house is still going — the kettle through the wall, somebody on the stairs — and for once none of it is waiting on her." },
+  { type = "paragraph", content = "The evening is happening in the other rooms and she is in this one, in the chair, with her shoes off." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down with her."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_front_room"
+
+[[canvases]]
+id   = "mum_sunday"
+name = "Your mum, her Sunday afternoon"
+description = "Half one to six on a Sunday. Four and a half hours, the longest single window in her week, and no class and five open shifts against it."
+
+[canvases.trigger]
+location      = "the_front_room"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "13:30"
+end_time   = "18:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The one afternoon she gets"
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Sunday afternoon, and she is in the chair with the TV on and four and a half hours in front of her. It is the only stretch in her week that is not before or after something else." },
+  { type = "paragraph", content = "She has the room, the chair and the afternoon, and she is using all three on a programme she is not really watching." },
+  { type = "paragraph", content = "Nobody in this house needs anything from her until six. She has sat down as though she does not entirely trust that." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down with her."
+targetType = "location"
+locationId = "the_front_room"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_front_room"
+
+[[canvases]]
+id   = "mum_strip"
+name = "Your mum, on the strip"
+description = "Nine to eleven, Monday Wednesday Friday. The only place in the game the player meets her outside that house, and the cafe is on the same street."
+
+[canvases.trigger]
+location      = "the_strip"
+npc           = "npc_lynn"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_strip", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "09:00"
+end_time   = "11:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "In town"
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Your mum is on the strip in the coat and shoes she only wears out of the house, going down the row with a list, at the speed of somebody working to a bus." },
+  { type = "paragraph", content = "She is outside the chemist with two bags already, checking the list against what is in them. She has two hours and the bus back is forty minutes of it." },
+  { type = "paragraph", content = "You see her before she sees you — your mum, in town, in her going-out coat, doing the week's shopping on the same street you work on." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk round the shops with her."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say hello and let her get on."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "the_strip"
 
 # --- THE SHOWER · the only tap `clean` has ----------------------------------
 # ⚠️ BEFORE THIS CANVAS `clean` COULD ONLY GO DOWN. It falls 10 a day and 20 a

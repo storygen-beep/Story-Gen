@@ -1,13 +1,13 @@
-# The Balance — HER MUM'S CARDS  `[REVIEW]`
+# The Balance — HER MUM'S CARDS  `[READY]`
 
-> Change `[REVIEW]` to `[READY]` when you're happy with this page.
+> **Signed and built, 2026-09-22.** The four are in the game.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
 > **The rule this page is checked against:** every card is a room, an hour, and something the player
 > can do standing in it.
 >
-> Agreed in chat, 2026-09-22. Nothing here is in the game yet.
+> Agreed in chat, 2026-09-22. The four behind a shut door are still block 5.
 
 ---
 
@@ -17,15 +17,20 @@
 card for that hour."* `BASE.md:117` hands the cards themselves to block 2 — *"one per row, and
 what each one offers at the start."* This page is that, for her mum.
 
-**Her week is 67 rows. 23 have a card. 44 don't.**
+**Her week is 67 rows. Twenty had a card. Forty-seven did not.**
 
-The 44 are eight cards. Four of them are ordinary — she's up, dressed, and you can walk over and
+⚠️ **Counted twice.** The first count said 23 and 44, because it matched windows and ignored
+conditions. The dusting card is gated on the dusting *not* being done, so in its own three
+windows it cannot be the card for the row that only exists once it *is* — she sits in the front
+room and nothing is there. Three more rows than it looked.
+
+The 47 are eight cards. Four of them are ordinary — she's up, dressed, and you can walk over and
 talk to her. **This page is those four.** The other four are behind a shut door — asleep, changing,
 in the bath — and every one of them is her ladder, which is block 5. They wait.
 
 | | cards | rows |
 |---|---|---|
-| **On this page** | 4 | **25** |
+| **On this page** | 4 | **28** |
 | Behind a shut door — block 5 | 4 | 19 |
 
 ## The four
@@ -33,7 +38,7 @@ in the bath — and every one of them is her ladder, which is block 5. They wait
 | card | where | rows | when |
 |---|---|---|---|
 | **Eating** | kitchen | 7 | six different meals, each at its own hour |
-| **Sat down** | front room | 16 | whenever the player has done the chore she'd have been on |
+| **Sat down** | front room | 19 | whenever the player has done the chore she'd have been on |
 | **Sunday afternoon** | front room | 1 | Sunday, half one to six |
 | **Out on the strip** | the strip | 1 | Monday, Wednesday, Friday, nine to eleven |
 
@@ -70,7 +75,7 @@ everyone else. Those are the two worth writing properly.
 
 ## Sat down
 
-Sixteen rows, and **every one of them exists because the player took a chore off her.**
+Nineteen rows, and **every one of them exists because the player took a chore off her.**
 
 Say *"I'll do it"* on the laundry and she goes and sits in the front room. The game already moves
 her. Until now there was nothing there when she arrived. This is the card that makes taking the work
@@ -80,8 +85,8 @@ Four scenes, by the hour:
 
 | band | rows | her |
 |---|---|---|
-| **Morning**, seven to half eleven | 5 | sat down early, which she never is |
-| **Afternoon**, twelve to quarter past five | 6 | the middle of the day with nothing in it |
+| **Morning**, seven to twelve | 6 | sat down early, which she never is |
+| **Afternoon**, twelve to quarter past five | 8 | the middle of the day with nothing in it |
 | **Her hour off**, quarter past five to six, Tue Thu Sat | 1 | the one hour her own week gives her |
 | **Evening**, six to half eight | 4 | sat down while the house is still going |
 
@@ -180,16 +185,21 @@ of anything on this one:
 | `her_mum.md:3` · `her_week.md:3` · `chores.md:3` | *"Change `[REVIEW]` to `[READY]`"* | signed and built, with the date |
 | `her_mum.md:10` · `her_week.md:10` · `chores.md:10` | *"Nothing here is in the game yet."* | all three are in the game |
 
-**When this page is built:**
+**Built 2026-09-22:**
 
-| where | the line now | what it becomes |
+| where | what | what happened |
 |---|---|---|
-| `BASE.md:106` | *"Asleep. Rule 1 says a sleeping person's room still has their card. What's on it is block 2."* | still open — it is the four this page holds back, and the only rule-1 gap of hers left |
+| `toml_phases/3_activities.toml` | her eight chore cards, one paragraph each | three each, pooled |
+| `toml_phases/3_activities.toml` | nothing at her other twenty-eight hours | `mum_eating` · `mum_sat_down` · `mum_sunday` · `mum_strip`, all four her portrait |
+| `process/gen_week.py` | `build_chores` wrote her cards off one table of hours | the four go in beside them, off the same table, through `mum_rows_expanded()` |
+| `process/walks.py` | nothing checked the front room | the four cards, plus the dusting collision in both states |
 
-**In the game:**
+**Still open:**
 
-| where | what | what happens |
+| where | the line | what it is |
 |---|---|---|
-| `toml_phases/3_activities.toml` | her eight chore cards, one paragraph each | two more each |
-| `toml_phases/3_activities.toml` | nothing at her other hours | four new cards |
-| `process/gen_week.py` | `build_chores` writes her cards off one table of hours | the four go in beside them, off the same table |
+| `BASE.md:106` | *"Asleep. Rule 1 says a sleeping person's room still has their card. What's on it is block 2."* | the four behind a shut door — nineteen rows, and the only rule-1 gap of hers left |
+
+⚠️ **`presence.py` reads clean for her now and that does not mean rule 1 is met.** It excuses her
+sleeping, changing and bathing rows as occupancy — a call made while building her week, not something
+this page or `BASE.md` ever agreed. The nineteen are still uncovered.
