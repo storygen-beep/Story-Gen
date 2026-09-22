@@ -66,6 +66,9 @@ _CASCADE_EXIT_INJECT_SAFE_SENTINEL = "<!--__CASCADE_EXIT_INJECT_SAFE__-->"
 # byte-identical (html.escape is a no-op on both — no &, <, >, " or ').
 DEFAULT_SUPPORT_URL = "https://www.patreon.com/cw/nutgames844"
 DEFAULT_STUDIO_NAME = "NutGames"
+# Community link, shown beside every funding link (sidebar + both intro sites).
+# Authored as `[project] community_url`; same generator-side fallback rule as above.
+DEFAULT_COMMUNITY_URL = "https://discord.gg/MJXBxEqsa"
 
 
 class TweeComprehensiveGeneratorV2:
@@ -768,6 +771,15 @@ class TweeComprehensiveGeneratorV2:
         url = str(self._project_metadata().get("support_url", "") or "").strip()
         return html.escape(url or DEFAULT_SUPPORT_URL)
 
+    def _resolve_community_url(self) -> str:
+        """HTML-escaped community (Discord) URL, emitted beside each funding link.
+
+        Authored as `[project] community_url`; falls back to DEFAULT_COMMUNITY_URL.
+        Same escaping contract as _resolve_support_url.
+        """
+        url = str(self._project_metadata().get("community_url", "") or "").strip()
+        return html.escape(url or DEFAULT_COMMUNITY_URL)
+
     def _resolve_studio_name(self) -> str:
         """HTML-escaped studio credit for the age-gate footer ("Developed by X")."""
         name = str(self._project_metadata().get("studio_name", "") or "").strip()
@@ -778,6 +790,7 @@ class TweeComprehensiveGeneratorV2:
         project_name = self.game_config.get('project_name', 'Interactive Game')
         project_description = getattr(self.project, 'description', '') or 'An interactive story experience'
         support_url = self._resolve_support_url()
+        community_url = self._resolve_community_url()
         studio_name = self._resolve_studio_name()
 
         # Get time settings from project
@@ -8675,6 +8688,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="developer-intro">
 <p class="developer-about">We're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!</p>
 <p class="support-link">👉 <a href="{support_url}" target="_blank" rel="noopener">Support us on Patreon</a></p>
+<p class="support-link">💬 <a href="{community_url}" target="_blank" rel="noopener">Join our Discord</a></p>
 </div>
 <div class="age-gate">
 <p class="age-warning">⚠️ This game contains adult content intended for players 18 years of age or older.</p>
@@ -8686,6 +8700,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="developer-footer">
 <p class="developer-credit">Developed by <strong>{studio_name}</strong></p>
 <p class="support-link">👉 <a href="{support_url}" target="_blank" rel="noopener">Support us on Patreon</a></p>
+<p class="support-link">💬 <a href="{community_url}" target="_blank" rel="noopener">Join our Discord</a></p>
 </div>
 </div>
 <</nobr>>"""
@@ -17860,6 +17875,12 @@ if (clothingMsg) {
     </svg>
     Support Us
   </a>
+  <a href="{self._resolve_community_url()}" target="_blank" rel="noopener" class="discord-link">
+    <svg class="discord-icon" viewBox="0 0 24 24" width="16" height="16">
+      <path fill="currentColor" d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+    </svg>
+    Discord
+  </a>
 </div>
 <</widget>>"""
 
@@ -18201,6 +18222,29 @@ if (clothingMsg) {
 }
 
 .patreon-icon {
+    flex-shrink: 0;
+}
+
+.discord-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #5865f2;
+    color: #fff !important;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.discord-link:hover {
+    background: #4752c4;
+    text-decoration: none !important;
+}
+
+.discord-icon {
     flex-shrink: 0;
 }
 
