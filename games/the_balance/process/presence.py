@@ -200,6 +200,16 @@ OCCUPANCY_ROWS = {
         "that is hers. Walking in on it is block 4.",
     ("npc_lynn", "the_bathroom", "20:30"):
         "in the bath on a Sunday. Walking in on it is block 4.",
+    # @gil's, added 2026-09-23 with gil_cards.md. Identical mechanism to her mum's
+    # three above and to @nate's 07:00 shower, and the page says so in as many
+    # words: "In the bath — the door is locked, and that is the card." The lock is
+    # real and it is his — 0_systems_spec.toml declares `gil_bathing` and the
+    # bathroom's entry_conditions reads it — so this row IS covered, by a door
+    # rather than by a canvas, and presence.py cannot see a door.
+    ("npc_gil", "the_bathroom", "23:00"):
+        "in the bathroom at eleven, washing the day off, with the door locked "
+        "against her. The `gil_bathing` stage helper is what makes the bathroom "
+        "taken. Walking in on it is block 4, the same as everybody else's.",
 }
 
 # Real holes, named to LO and deferred by him on 2026-09-16. They are printed every
@@ -217,6 +227,20 @@ def _mins(hhmm):
     return int(h or 0) * 60 + int(m or 0)
 
 
+def _end_mins(hhmm):
+    """An END time of "00:00" is MIDNIGHT, which is 1440 and not 0.
+
+    ⚠️ FOUND 2026-09-23 BY A ROW THAT COULD NOT BE BACKED BY ANYTHING. @gil's
+    23:45-00:00 row read DEAD while a canvas carrying exactly that schedule sat in
+    the same room, because `_mins("00:00")` is 0, so `start < end` was `1425 < 0`
+    and the overlap test could never be true. Every row and every canvas schedule
+    ending at midnight had the same hole — and the house rule is to write "00:00"
+    and never "23:59" (the weekday list is read against the day the clock is on),
+    so the convention this instrument is checking was the one it could not read.
+    """
+    return 1440 if str(hhmm).strip() in ("00:00", "24:00") else _mins(hhmm)
+
+
 def live_days(row, canvas):
     """Which weekdays OF THIS ROW can this canvas actually appear on?
 
@@ -232,8 +256,8 @@ def live_days(row, canvas):
         return days
     live = set()
     for s in canvas["schedules"]:
-        if (_mins(s.get("start_time", "00:00")) < _mins(row["end_time"])
-                and _mins(row["start_time"]) < _mins(s.get("end_time", "23:59"))):
+        if (_mins(s.get("start_time", "00:00")) < _end_mins(row["end_time"])
+                and _mins(row["start_time"]) < _end_mins(s.get("end_time", "23:59"))):
             live |= days & set(s.get("weekdays") or range(7))
     return live
 

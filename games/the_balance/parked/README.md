@@ -24,7 +24,7 @@ and was checked equal to the built canvas before removal.
 |---|---|---|---|---|
 | `cards_front_room_and_tasha_room.toml` | `hub_nate_sofa`, `hub_tasha_room` · `sofa_hour` · `nate_sits_down` | `63df046` | 102 | 2 cards · *her alone* · 4 walking in |
 | `tasha_ladder.toml` | `arc_tasha_01..03`, `loop_tasha_bath`, `hub_tasha_bath` · `owen_at_the_board` | `86cc9f1` | 103 | 5 Tasha's ladder · 4 walking in |
-| `gil_kitchen_card.toml` | `hub_gil_kitchen` | `cd677e8` | 105 | 2 cards |
+| ~~`gil_kitchen_card.toml`~~ | `hub_gil_kitchen` | `cd677e8` | 105 | **CONSUMED 2026-09-23 → `sheets/people/gil_cards.md`** |
 | `stream_at_work.toml` | `stream_toilet` | `3233846` | 106 | 5 a going-live ladder |
 | `television.toml` | `watch_tv` · `hub_gil_sofa`, `hub_lynn_sofa` | `0e829a1` | 108 | *her alone* · 2 cards |
 | `garage_and_nate.toml` | `garage_gil`, `garage_nate`, `hub_nate_room`, `kitchen_nate` | `6801814` | 109 | 2 cards |
@@ -79,6 +79,25 @@ description in the build reads *"a year ahead of you at the same college"* while
 page reads *"a senior at her college"*. Round 3 of `sheets/BASE.md` (the household) settles which.
 
 **Nothing in this folder is citable** under `process/README.md` §0a. It is what was built, not what LO decided.
+
+---
+
+## What block 2 took back for @gil — 2026-09-23
+
+`sheets/people/gil_cards.md` is the round this folder's rule was waiting for: *"taken from here if
+it fits, rewritten if it half-fits, and left here if it doesn't."* All five of his canvases were
+read; three came back rewritten and two stayed.
+
+| canvas | file | what happened |
+|---|---|---|
+| `hub_gil_kitchen` | `gil_kitchen_card.toml` | **back, rewritten.** The `requires_npc` shape, the two time bands and the `gil_today` cap all carried. Cut: every line naming the fridge list (gone since 2026-09-23) and the `relation >= 10` choice *"Ask what the semester actually cost"*, which is a climb. Retimed — the front room has his 06:45 hour now. |
+| `garage_gil` | `garage_and_nate.toml` | **back, rewritten.** Its 17:00-18:00 window was from a week he no longer has; it now covers all four garage rows on `requires_npc` alone, and it is where the lift is bought. |
+| `hub_gil_bed` | `house_happens_to_her.toml` | **back, rewritten.** Its ward-night 21:00-23:30 hours are dead — he is in the garage then. It is the *asleep* card now, on three schedules. |
+| `hub_gil_sofa` | `television.toml` | **stays.** Evening front room. The page rules he does not sit there in the evening: he sits there at quarter to seven in the morning, and that is a different card. |
+| `bath_gil` | `bathroom_door.toml` | **stays.** Three rungs on a walk-in. He has a bathroom row now, at 23:00, and the door is **locked** — the ladder behind it is block 5. |
+
+⚠️ **His schedule rows did NOT come from here.** They are generated from `GIL_ROWS` in
+`process/gen_week.py`, which is where round 3 put them and where block 2 changed them.
 
 ## What stayed, and why
 

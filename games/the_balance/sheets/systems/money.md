@@ -30,10 +30,12 @@ Nothing else may quietly flip it.
 |---|---|---|
 | **The cafe** | **a three hour shift, $3** | nothing rations the shifts — the wage is the whole limit |
 | **Going live** | the phone, paid per session | she has to be clean, and every session puts more of her in the open |
-| **Chores** | small, at home, always there | capped per day, and Gil decides what counts |
+| ~~Chores~~ | **removed 2026-09-23.** Chores exist, they cost half an hour, they pay nothing | — |
 
-Chores are the floor. They're small on purpose — they're what make the phone a **choice** instead
-of a wall she gets forced through.
+⚠️ **There is no floor under her any more.** Chores used to be it — small on purpose, there to make
+the phone a **choice** instead of a wall she got forced through. With chores paying nothing, week
+one is **$10 and no way to earn until she has the cafe job**, and the first Friday cannot be paid.
+That is a real consequence of removing the chore money and it is not solved on this page.
 
 **Held for later releases:** reading for Hale · Tasha's parties and the bar · the till and the
 pawn shop. All three are real, none of them exists at the first build.

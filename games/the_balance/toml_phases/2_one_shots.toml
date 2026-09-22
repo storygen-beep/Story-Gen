@@ -97,12 +97,9 @@ content = "He says it to the paper and not to you. He doesn't mention Friday, be
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the bins first. He pays for one a day."
+text       = "Do the bins first. Half an hour."
 targetType = "node"
 nodeId     = "canvas_opening.chore"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "chore_paid_today", operator = "is_false" },
-] }
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit down and eat."
@@ -124,7 +121,7 @@ content = "The bins are round the side and the truck comes at eight. So it is yo
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Half an hour, and your hands smell like the bin. He puts five dollars on the table for it without looking up."
+content = "Half an hour, and your hands smell like the bin. He does not say anything about it, and he would have said something if you had left them."
 
 [canvases.nodes.exit_block]
 type = "location"
@@ -139,17 +136,6 @@ time_progression_minutes = 30
 targetType = "player"
 flag       = "opening_done"
 op         = "set"
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "chore_paid_today"
-op         = "set"
-
-[[canvases.nodes.exit_block.config.effects]]
-targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = 5
 
 [[canvases.nodes]]
 id   = "eat"

@@ -1,6 +1,7 @@
 # The Balance — THE CHORES  `[READY]`
 
-> **Signed and built, 2026-09-20.** All nine are in the game, in their rooms.
+> **Signed and built, 2026-09-20. The money and the list came off 2026-09-23.**
+> All nine are in the game, in their rooms, and none of them pays anything.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
@@ -11,10 +12,14 @@
 
 ---
 
-## The list on the fridge
+## There is no list, and there is no money
 
-Gil's list says **which chore pays today.** That's all it does. She doesn't do chores from the list;
-she does each one in its own room.
+**Standing rule, LO, 2026-09-23: *"Remove the Chores and payment / And fridge list. Chores are
+simply available as it is."***
+
+The chores are just there. She does each one in the room it happens in, in the hours it makes sense
+in, and it costs her half an hour. Nobody dates one, nobody pays for one, and nothing counts how
+many she has done.
 
 ## The nine chores
 
@@ -32,20 +37,20 @@ she does each one in its own room.
 
 The meal times are her mum's, from `people/her_mum.md`.
 
-## What a chore pays
+## What a chore costs
 
-- **One paid chore a day** — whichever one is dated on Gil's list. **$5.** The house page already says
-  it: *"$5 each, one paid a day."*
-- **Every chore takes half an hour.** *"A chore takes half an hour."*
-- **The other eight pay nothing.**
+- **Half an hour.** That is the whole of it.
+- **It pays nothing.** Not one of the nine, not the first one of the day, not ever.
 
-Nine chores at $5 each would be more than the $150 on Friday, and the squeeze would be gone. One a
-day is about $35 a week, which is what the house page counts on.
+**What that changes about the game:** chores used to be the floor under her money — about $35 a
+week, small on purpose, there to stop the phone being a wall she got forced through. That floor is
+gone. Until she has the cafe job she has **$10 and no way to earn**, and the first $150 Friday is
+unpayable. Flagged, not fixed — it is the kind of thing the tips conversation settles.
 
 ## Who does them
 
 - **Her mum** does whatever is left. Her hours are built around it.
-- **Gil** writes the list and never does any of it.
+- **Gil** does none of it, and never has.
 - **Nate and Tasha** never do any.
 - **The bins are only ever hers.**
 
@@ -53,10 +58,9 @@ day is about $35 a week, which is what the house page counts on.
 
 Whatever her mum is working on, the player can:
 
-1. **Help her.** They do it together. **No $5**, because it's her mum's job. What she gets is time
-   with her mum.
-2. **Say "I'll do it."** She takes it over and her mum goes to sit down in the front room. **It pays
-   the $5** if it's today's dated chore.
+1. **Help her.** They do it together. What she gets is time with her mum.
+2. **Say "I'll do it."** She takes it over and her mum goes to sit down in the front room. That hour
+   her mum spends sat down is the whole payment.
 3. **Leave her to it.**
 
 ## When she does one alone
@@ -82,8 +86,9 @@ people at the table.
 ## What it keeps track of
 
 - **Done today**, one per chore. So a chore done once isn't there to do again that day.
-- **Paid today** — the game already keeps this (`chore_paid_today`).
-- **Both reset overnight.** Nothing here climbs.
+- **It resets overnight.** Nothing here climbs, and nothing here counts.
+- **`chore_paid_today` is gone**, along with the hour-instead-of-half-an-hour penalty a missed
+  Friday used to put on every chore.
 
 **Her mum's hours read it.** If the laundry is already done, or the player said *"I'll do it"*, her
 mum's hour on it drops and she sits in the front room instead. The engine lets a schedule row depend
