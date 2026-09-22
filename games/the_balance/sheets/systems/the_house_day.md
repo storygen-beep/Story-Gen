@@ -22,7 +22,7 @@
 | **four** | Tasha home, her lights on, her door open | clothes, advice she didn't ask for, and somebody who notices what she's wearing |
 | **six** | Gil back, in the kitchen, then the garage | the ten o'clock starts existing again |
 | **about seven** | **everyone at the table**, on the nights her mum is home | the one hour she can't avoid anybody |
-| **seven to ten** | Nate on the sofa with the TV. Tasha upstairs. Gil in the garage | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
+| **seven to ten** | Nate on the sofa with the TV. Tasha upstairs. **Gil in the garage on ward nights; at the table until eight on the others, then out to it** | the cheap hour that costs nothing but time — and the only one where Nate is somewhere she can sit down |
 | **after ten** | Gil still in the garage. Her mum asleep. Tasha out on Friday and Saturday. **Nate's door** | the house at its most open, and the hour she is only in if she broke the rule to get here |
 
 ## The bathroom is the tightest room in the house

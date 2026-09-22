@@ -766,6 +766,100 @@ def build_chores():
     return "".join(out).rstrip() + "\n"
 
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 5 · THE OTHER THREE — sheets/people/the_other_three.md, round 3 of BASE.md
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Gil had three rows, Nate five, Tasha four, against her mum's sixty-seven. Five
+# lines across four sheets put Gil in the garage and he had no garage row; the cast
+# page puts Nate on campus and gave him no campus row; and all three of them
+# vanished at midnight, so between midnight and half six there was nobody in that
+# house but her mum.
+#
+# ⚠️ EVERY NIGHT THAT CROSSES MIDNIGHT IS TWO ROWS, split at midnight, and an end
+# of "00:00" and never "23:59" — the weekday list is read against the day the clock
+# is on, and an end time is exclusive. Both lessons come off her mum's week.
+
+Q, U, NR, TR = "the_quad", "the_union", "nate_room", "tasha_room"
+WD, WKND, ALL = [0, 1, 2, 3, 4], [5, 6], [0, 1, 2, 3, 4, 5, 6]
+HOME, SAT, SUN_ = [1, 3, 5, 6], [5], [6]
+DINNER_T = [1, 3, 6]     # Tasha at the table — not Saturday, she is out
+
+GIL_ROWS = [
+    (WD,   "00:00", "06:30", M, "asleep, with the door pushed to"),
+    (WKND, "00:00", "07:30", M, "asleep — the one hour a week he gives himself"),
+    (WD,   "06:30", "08:00", K, "at the table with the radio on and the paper folded to the part he wants"),
+    (WKND, "07:30", "09:00", K, "at the table with the radio on, in no hurry about it"),
+    (WKND, "09:00", "18:00", G, "out in the garage with the car, most of the day"),
+    (ALL,  "18:00", "19:00", K, "back, still in what he went out in"),
+    (HOME, "19:00", "20:00", K, "at the table, with everybody"),
+    (HOME, "20:00", "20:45", G, "out at the car, or the look of being out at the car"),
+    (HOME, "20:45", "22:00", M, "up with her mum, door pushed to"),
+    (HOME, "22:00", "23:30", G, "back down, in the garage with the light on"),
+    (WARD, "19:00", "23:30", G, "in the garage on his own, four and a half hours of it"),
+    (ALL,  "23:30", "00:00", M, "in, and that is the house shut"),
+]
+
+NATE_ROWS = [
+    (WD,    "00:00", "07:00", NR, "asleep, door shut for once"),
+    (SAT,   "00:00", "11:00", NR, "asleep, and he will not be up before eleven"),
+    (SUN_,  "02:00", "11:00", NR, "in late and asleep — Saturday is the one night he goes out"),
+    (WD,    "07:00", "07:45", B,  "in the shower, taking his time about it"),
+    (WD,    "07:45", "08:30", K,  "in and out, eating standing up"),
+    (WD,    "12:00", "13:30", Q,  "on the wall by the doors with whoever is out there"),
+    (WD,    "13:30", "15:30", U,  "at a table with people, in no hurry to be anywhere"),
+    (WKND,  "11:00", "19:00", F,  "on the sofa, and he has been there since he got up"),
+    (DINNER_T, "19:00", "20:00", K, "at the table, eating fast so he can get up"),
+    (SAT,   "19:00", "20:00", K,  "at the table, already dressed to go out"),
+    (DINNER_T, "20:00", "22:00", F, "on the sofa with the TV on"),
+    (WARD,  "19:00", "22:00", F,  "on the sofa with the TV on"),
+    ([0, 1, 2, 3, 4, 6], "22:00", "00:00", NR, "in his room with the door not quite shut"),
+]
+
+TASHA_ROWS = [
+    (WD,       "00:00", "09:00", TR, "asleep, and she sleeps later than anyone in this house"),
+    (WKND,     "02:00", "09:00", TR, "in at two and asleep, with her shoes where she stepped out of them"),
+    (ALL,      "16:00", "17:00", TR, "home, lights on, door open"),
+    (ALL,      "17:00", "18:00", B,  "doing her face with the door unlocked"),
+    (DINNER_T, "18:00", "19:00", TR, "getting ready, whether or not she is going anywhere"),
+    (DINNER_T, "19:00", "20:00", K,  "at the table with a story she is halfway through"),
+    (DINNER_T, "20:00", "00:00", TR, "in, with music on"),
+    ([0, 2],   "18:00", "00:00", TR, "in, with music on, and nobody to perform it at"),
+]
+
+THREE = [
+    ("npc_gil", GIL_ROWS,
+     "# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Three rows became\n"
+     "# twelve. THE GARAGE IS THE POINT: five lines across four sheets put him out there\n"
+     "# late and he had no garage row at all. He goes UP at quarter to nine on the nights\n"
+     "# her mum is home, which is what the_two_doors.md needs, and comes BACK DOWN at ten,\n"
+     "# which is what her_week.md and the_house_day.md need. Both pages were true and the\n"
+     "# build served neither.\n"),
+    ("npc_nate", NATE_ROWS,
+     "# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Five rows became\n"
+     "# thirteen. THE CAMPUS ROWS ARE THE POINT: the_cast.md:29 gives him a move that only\n"
+     "# works on campus and he was never on it. Her class ends at twelve and he is on the\n"
+     "# quad from twelve, so the ninety minutes she can stand there cost her the early bus.\n"),
+    ("npc_tasha", TASHA_ROWS,
+     "# ⚠️ HER WEEK IS sheets/people/the_other_three.md, 2026-09-22. Four rows became\n"
+     "# eight. She is out until four and that stays NO ROW (BASE.md:97). What she gained is\n"
+     "# a night: she used to end at 23:59 and vanish, and Friday and Saturday she is out\n"
+     "# from six and back in her own bed at two.\n"),
+]
+
+
+def build_person(rows, head):
+    out = [head + "#\n# Generated by games/the_balance/process/gen_week.py. Edit the table there.\n\n"]
+    for weekdays, start, end, loc, activity in rows:
+        out.append("\n".join([
+            "[[npcs.schedules]]", f'location   = "{loc}"',
+            "weekdays   = [" + ", ".join(str(d) for d in weekdays) + "]",
+            f'start_time = "{start}"', f'end_time   = "{end}"',
+            f'activity   = "{activity}"']) + "\n\n")
+    return "".join(out).rstrip() + "\n"
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 
 JOBS = {
@@ -784,6 +878,19 @@ JOBS = {
         ["# ⚠️ HER WEEK IS sheets/people/her_mum.md", "# ⚠️ NEVER TOUCHED. She is the price"],
         ["# --- the two on campus who want nothing from her"],
         build_mum()),
+    # ⚠️ ONE SPLICE PER PERSON, EACH ENDING ON THE NEXT [[npcs]] HEADER. A
+    # [[npcs.schedules]] table attaches to whichever [[npcs]] it follows, so a block
+    # that overshoots its own person's end silently re-parents every row after it.
+    "three": lambda: [splice(
+        PEOPLE,
+        [head.split("\n")[0], first],
+        [f'[[npcs]]\nid          = "{nxt}"'],
+        build_person(rows, head)) for (npc, rows, head), first, nxt in zip(
+            THREE,
+            ['[[npcs.schedules]]\nlocation   = "the_kitchen"\nweekdays   = [0, 1, 2, 3, 4]\nstart_time = "06:30"',
+             '[[npcs.schedules]]\nlocation   = "the_bathroom"\nweekdays   = [0, 1, 2, 3, 4]\nstart_time = "07:00"',
+             '[[npcs.schedules]]\nlocation   = "tasha_room"\nweekdays   = [0, 1, 2, 3, 4, 5, 6]\nstart_time = "16:00"'],
+            ["npc_owen", "npc_tasha", "npc_lynn"])],
 }
 
 if __name__ == "__main__":

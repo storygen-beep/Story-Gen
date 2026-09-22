@@ -1,14 +1,15 @@
-# The Balance — THE OTHER THREE  `[REVIEW]`
+# The Balance — THE OTHER THREE  `[READY]`
 
-> Change `[REVIEW]` to `[READY]` when you're happy with this page.
+> **Signed and built, 2026-09-22.** Three rows became twelve, five became thirteen, four
+> became eight.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
 > **The rule this page is checked against:** every row puts one of them in a room at an hour, and no
 > two of them are in the one bathroom at the same time.
 >
-> Round 3 of `BASE.md`. **Everything below is a proposal** — the spine comes off `people/the_cast.md`
-> and `systems/the_house_day.md`, the hours are mine until you say otherwise.
+> Round 3 of `BASE.md`, agreed in chat. The spine comes off `people/the_cast.md` and
+> `systems/the_house_day.md`. **What is on their cards is block 2 and is not built.**
 
 ---
 
@@ -157,22 +158,21 @@ what any of them does while they are out, which stays *no row* · Nate's ladder 
 bedroom, which are `systems/the_two_doors.md` and not hours · Jules, Bree, Paige, Sam, Cara and
 Owen, who are round 4 · what changes when she is in a room they are in, which is round 5.
 
-## The lines this page changes when it's built
-
-Nothing below has been changed yet.
+## The lines this page changed
 
 **On your pages:**
 
 | where | the line now | what happens |
 |---|---|---|
-| `the_house_day.md:25` | *"seven to ten — Gil in the garage"* | true on ward nights; on the other four he is at the table until eight |
+| `the_house_day.md:25` | *"seven to ten — Gil in the garage"* | rewritten — true on ward nights, and on the other four he is at the table until eight |
 | `her_week.md:109` | *"after ten, every night, Gil still in the garage"* | stays true — that is why he comes back down |
-| `BASE.md:67-69` | Gil, Nate, Tasha — *"to decide"* | decided once this page is `[READY]` |
+| `BASE.md:67-69` | Gil, Nate, Tasha — *"to decide"* | **done** |
 
 **In the game:**
 
-| where | what | what happens |
+| where | what | what happened |
 |---|---|---|
-| `toml_phases/1_metadata_and_locations.toml` | Gil's 3 rows, Nate's 5, Tasha's 4 | replaced by the weeks above |
-| Nate's `22:00-23:59` · Tasha's `18:00-23:59` | end at 23:59 | **`00:00`** — an end time is exclusive, so 23:59 leaves them out of their own beds for a minute |
-| `process/gen_week.py` | one table for her mum's week | a table each for these three, off the same machinery |
+| `toml_phases/1_metadata_and_locations.toml` | Gil's 3 rows, Nate's 5, Tasha's 4 | **12, 13 and 8** |
+| Nate's `22:00-23:59` · Tasha's `18:00-23:59` | ended at 23:59 | **`00:00`**, and the nights that cross midnight are two rows |
+| `process/gen_week.py` | one table for her mum's week | `GIL_ROWS`, `NATE_ROWS`, `TASHA_ROWS` and a `three` job, one splice per person |
+| `process/walks.py` | nothing walked their hours | `walk_three` — 18 checks, including both halves of the @gil contradiction |
