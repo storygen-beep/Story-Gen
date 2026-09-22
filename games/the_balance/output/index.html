@@ -7572,6 +7572,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;div class=&quot;developer-intro&quot;&gt;
 &lt;p class=&quot;developer-about&quot;&gt;We&#39;re a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!&lt;/p&gt;
 &lt;p class=&quot;support-link&quot;&gt;👉 &lt;a href=&quot;https://www.patreon.com/cw/nutgames844&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Support us on Patreon&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;support-link&quot;&gt;💬 &lt;a href=&quot;https://discord.gg/MJXBxEqsa&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Join our Discord&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;age-gate&quot;&gt;
 &lt;p class=&quot;age-warning&quot;&gt;⚠️ This game contains adult content intended for players 18 years of age or older.&lt;/p&gt;
@@ -7583,6 +7584,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;div class=&quot;developer-footer&quot;&gt;
 &lt;p class=&quot;developer-credit&quot;&gt;Developed by &lt;strong&gt;NutGames&lt;/strong&gt;&lt;/p&gt;
 &lt;p class=&quot;support-link&quot;&gt;👉 &lt;a href=&quot;https://www.patreon.com/cw/nutgames844&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Support us on Patreon&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;support-link&quot;&gt;💬 &lt;a href=&quot;https://discord.gg/MJXBxEqsa&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Join our Discord&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="CustomizeCharacters" tags="" position="350,100" size="100,100">&lt;&lt;nobr&gt;&gt;
@@ -8349,6 +8351,12 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     &lt;/svg&gt;
     Support Us
   &lt;/a&gt;
+  &lt;a href=&quot;https://discord.gg/MJXBxEqsa&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; class=&quot;discord-link&quot;&gt;
+    &lt;svg class=&quot;discord-icon&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;16&quot; height=&quot;16&quot;&gt;
+      &lt;path fill=&quot;currentColor&quot; d=&quot;M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z&quot;/&gt;
+    &lt;/svg&gt;
+    Discord
+  &lt;/a&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -8639,6 +8647,29 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 }
 
 .patreon-icon {
+    flex-shrink: 0;
+}
+
+.discord-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #5865f2;
+    color: #fff !important;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.discord-link:hover {
+    background: #4752c4;
+    text-decoration: none !important;
+}
+
+.discord-icon {
     flex-shrink: 0;
 }
 
