@@ -64,9 +64,9 @@ Decided in this order, one round each:
 |---|---|---|---|
 | 1 | **Her mum** — the week the house runs on | *"nights on the ward three times a week. Home the other nights, asleep by ten"* | **done — `people/her_mum.md`** |
 | 2 | **Her own week** | she sets her own alarm · class nine to twelve, Monday to Thursday · five three-hour shifts a day, all of them hers · the $150 on Friday evening · home by Gil's ten | **done — `systems/her_week.md`** |
-| 3 | **Gil** | *"kitchen until eight, back by six, and in the garage late"* | to decide |
-| 3 | **Nate** | *"a senior at her college — out most weekdays, home evenings and odd hours"* | to decide |
-| 3 | **Tasha** | *"out until four most days, then in. Out again on Friday and Saturday nights"* | to decide |
+| 3 | **Gil** | *"kitchen until eight, back by six, and in the garage late"* | **done — `people/the_other_three.md`** |
+| 3 | **Nate** | *"a senior at her college — out most weekdays, home evenings and odd hours"* | **done — `people/the_other_three.md`** |
+| 3 | **Tasha** | *"out until four most days, then in. Out again on Friday and Saturday nights"* | **done — `people/the_other_three.md`** |
 | 4 | **Campus** — Jules, Bree, Paige, Sam, Cara, Hale | Jules *"on the quad between classes, at the union, and at the row on Friday and Saturday"* · Sam *"in the classroom in the mornings, and at the union after"* | to decide |
 | 4 | **The cafe** — Owen | — | to decide |
 | 5 | **Being there** | asleep, busy, out — what each one means | to decide |

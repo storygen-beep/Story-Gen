@@ -534,6 +534,14 @@
     {
       "at": "build",
       "note": "THE ONE COLLISION, AND WHY PRIORITY SOLVES IT, 2026-09-22. mum_dusting and mum_sat_down are both Lynn's, both in the front room, and share three windows — 14:30 Mon/Wed/Fri, 16:45 Tue/Thu/Sat, 11:30 Sunday. She is in that room either way: on the dusting if it is not done, sat down if it is. The portrait path keeps ONE canvas per NPC per location and takes the highest priority among the SELECTABLE ones (v2.py:4928-4932), so mum_dusting stays 5 and mum_sat_down is 4. Dusting undone, mum_dusting wins; dusting done, its `chore_done_dusting is_false` fails and mum_sat_down is the only candidate. Equal priorities would have dropped one with no error anywhere. Checked live in both states and the check is in walks.py. COUNTING NOTE: the first count of her uncarded rows said 44 and was wrong by three, because it matched windows and ignored conditions — a canvas gated on a chore being undone cannot cover the row that exists only once it is done. The real number was 47."
+    },
+    {
+      "at": "build",
+      "note": "ROUND 3 IS IN THE GAME, 2026-09-22. sheets/people/the_other_three.md, signed in chat and marked [READY]. Gil went from 3 rows to 12, Nate from 5 to 13, Tasha from 4 to 8. THREE THINGS THE BUILD HAD WRONG: five lines across four sheets put Gil in the garage late and he had no garage row at all; the_cast.md:29 gives Nate a move that only works on campus and he was never on campus, while the quad, the union, the lecture hall and the classroom all existed; and all three of them ended at 23:59 or earlier and vanished, so between midnight and half six there was nobody in that house but her mum, against BASE.md:106. Nate's quad hours are 12:00-13:30, which is the ninety minutes after her class ends and the only window she can reach him in without skipping. Nobody's job is invented: Gil is out 08:00-18:00 and Tasha until four, and BASE.md:97 already answered that away means no row."
+    },
+    {
+      "at": "build",
+      "note": "THE GIL CONTRADICTION, RESOLVED IN THE OPEN, 2026-09-22. the_two_doors.md:18 wants Gil AND her mum behind the master bedroom door before ten on the nights she is home; her_week.md:109 and the_house_day.md:26 want him STILL IN THE GARAGE after ten. Both are LO's own pages and the build served neither. He goes up at 20:45, she is asleep at 22:00, he comes back down and is in the garage until 23:30. Both lines hold. The page states the conflict rather than quietly picking a side, and walks.py checks both halves. METHOD NOTE: the page's first draft had three coverage holes and two ambiguities, all found by tiling each person's clock minute by minute and asking whether every empty minute was a DECLARED 'out'. That check is worth running on any week before it is built."
     }
   ],
   "board": {

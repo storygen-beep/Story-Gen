@@ -1479,11 +1479,82 @@ def walk_kitchen(page, rep):
               offered(page, "the_kitchen", "kettle"), "kettle still offered")
 
 
+def walk_three(page, rep):
+    """sheets/people/the_other_three.md — Gil, Nate and Tasha's hours, round 3.
+
+    ⚠️ THREE THINGS THE BUILD GOT WRONG UNTIL 2026-09-22, and each has a check below.
+    Five lines across four sheets put @gil in the garage late and he had no garage row.
+    the_cast.md:29 gives @nate a move that only works on campus and he was never on it.
+    And all three of them ended at 23:59 or earlier and vanished, so the house between
+    midnight and half six held nobody but her mum.
+    """
+    start(page, "Monday", 12, "her_room")
+
+    # ⚠️ THE THREE, AND NOT HER MUM. She is on the ward from 18:45 on Monday, Wednesday
+    # and Friday, so at four on a Thursday morning she is CORRECTLY nowhere — that is a
+    # gap reading as absent, not a missing row. These three had no reason to be missing
+    # and were, every night, from midnight.
+    for day, hour in (("Monday", 3), ("Thursday", 4), ("Sunday", 5)):
+        set_time(page, day, hour, 0)
+        where = {n: npc_at(page, n) for n in ("npc_gil", "npc_nate", "npc_tasha")}
+        rep.check(f"{day[:3]} {hour:02d}:00 — all three of them are in their own beds",
+                  all(where.values()), str(where))
+
+    for day, hour, minute in (("Monday", 23, 0), ("Tuesday", 22, 30), ("Friday", 20, 0)):
+        set_time(page, day, hour, minute)
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — @gil is in the garage",
+                  npc_at(page, "npc_gil") == "the_garage", str(npc_at(page, "npc_gil")))
+
+    # ⚠️ THE CONTRADICTION THE PAGE RESOLVED. the_two_doors.md:18 needs @gil and her mum
+    # behind one door before ten; her_week.md:109 and the_house_day.md:26 need him still
+    # in the garage after it. He goes up at quarter to nine and comes back down at ten.
+    set_time(page, "Tuesday", 21, 0)
+    rep.check("nine on a Tuesday — @gil and her mum are behind the same door",
+              npc_at(page, "npc_gil") == "the_master_bedroom"
+              and npc_at(page, "npc_lynn") == "the_master_bedroom",
+              f"gil {npc_at(page, 'npc_gil')}, lynn {npc_at(page, 'npc_lynn')}")
+    set_time(page, "Tuesday", 22, 30)
+    rep.check("and by half ten he is back down in the garage",
+              npc_at(page, "npc_gil") == "the_garage", str(npc_at(page, "npc_gil")))
+
+    set_time(page, "Monday", 12, 30)
+    rep.check("half twelve on a Monday — @nate is on the quad, straight after her class",
+              npc_at(page, "npc_nate") == "the_quad", str(npc_at(page, "npc_nate")))
+    set_time(page, "Monday", 14, 0)
+    rep.check("two o'clock — he has moved to the union",
+              npc_at(page, "npc_nate") == "the_union", str(npc_at(page, "npc_nate")))
+    set_time(page, "Monday", 10, 0)
+    rep.check("but at ten, while she is in a lecture, he is nowhere she can go",
+              npc_at(page, "npc_nate") is None, str(npc_at(page, "npc_nate")))
+
+    set_time(page, "Friday", 20, 0)
+    rep.check("Friday at eight, Tasha is out", npc_at(page, "npc_tasha") is None,
+              str(npc_at(page, "npc_tasha")))
+    set_time(page, "Saturday", 22, 0)
+    rep.check("Saturday at ten, both of them are out",
+              npc_at(page, "npc_nate") is None and npc_at(page, "npc_tasha") is None,
+              f"nate {npc_at(page, 'npc_nate')}, tasha {npc_at(page, 'npc_tasha')}")
+    set_time(page, "Sunday", 5, 0)
+    rep.check("and by five on the Sunday they are both back in their own beds",
+              npc_at(page, "npc_nate") == "nate_room" and npc_at(page, "npc_tasha") == "tasha_room",
+              f"nate {npc_at(page, 'npc_nate')}, tasha {npc_at(page, 'npc_tasha')}")
+
+    for day, hour, minute, who in (("Monday", 7, 30, "npc_nate"),
+                                   ("Monday", 17, 30, "npc_tasha"),
+                                   ("Monday", 18, 15, "npc_lynn")):
+        set_time(page, day, hour, minute)
+        inside = [n for n in ("npc_gil", "npc_nate", "npc_tasha", "npc_lynn")
+                  if npc_at(page, n) == "the_bathroom"]
+        rep.check(f"{hour:02d}:{minute:02d} — the bathroom holds exactly one person",
+                  inside == [who], str(inside))
+
+
 ROUTES = {
     "opening": walk_opening,
     "week": walk_week,
     "chores": walk_chores,
     "mum": walk_mum,
+    "three": walk_three,
     "alarm": walk_alarm,
     "friday": walk_friday,
     "stream": walk_stream,
