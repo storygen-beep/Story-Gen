@@ -10,6 +10,10 @@
 >
 > Amounts are a **plan**. The words any of it is written in belong to the scenes step.
 
+> ⚠️ **The money below is the old five-hour shift and hasn't been redone.** A shift is three hours
+> and pays $3, and all five a day are hers from the first one. What each step of the counter pays
+> is the tips conversation — nothing here is right until that's had.
+
 ---
 
 ## She does not start with the job
@@ -71,10 +75,9 @@ doesn't argue, and he doesn't explain. The schedule is how he talks.
 is a promotion in a job and not a step in this game. The cafe opens and shuts on its own hours like
 every other room.
 
-**What waits above closing instead: she writes her own schedule.** She stops being given shifts and
-starts choosing them. In a game where the squeeze is hours — nine o'clock class, Friday's payment,
-home by ten — **letting her pick her own hours is the most valuable thing the cafe can ever hand
-her.** A later build. Named here so it isn't invented twice.
+**What waited above closing was her writing her own schedule — and she already does that.** She was
+never given shifts: five a day, every day, and she picks. Whatever sits above closing has to be
+something else, and it isn't decided.
 
 ## Where the first build ends
 

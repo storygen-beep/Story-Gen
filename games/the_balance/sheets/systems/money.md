@@ -7,6 +7,10 @@
 > Every amount here is a **plan**, not a measurement. They get re-checked the first time a real
 > cafe shift is written.
 
+> ⚠️ **The money below is the old five-hour shift and hasn't been redone.** A shift is three hours
+> and pays $3. What a week adds up to, and what each step of the counter pays, is the tips
+> conversation — nothing here is right until that's had.
+
 ---
 
 ## What she owes
@@ -24,7 +28,7 @@ Nothing else may quietly flip it.
 
 | | what it is | what holds it back |
 |---|---|---|
-| **The cafe** | **a five hour shift at $9 an hour, about $10 in tips — $55** | Owen decides how many shifts she gets |
+| **The cafe** | **a three hour shift, $3** | nothing rations the shifts — the wage is the whole limit |
 | **Going live** | the phone, paid per session | she has to be clean, and every session puts more of her in the open |
 | **Chores** | small, at home, always there | capped per day, and Gil decides what counts |
 
@@ -36,10 +40,10 @@ pawn shop. All three are real, none of them exists at the first build.
 
 ## Why it's tight at the start and not forever
 
-**Week one she isn't on the schedule at all** — she doesn't have the job yet, and she has to go
-and ask for it. Once she does it's two short shifts, which is under the $150. So the first Fridays
-genuinely hurt, and that's what gets her moving. **Putting off the cafe is allowed, and it costs
-her the first Friday.**
+**Week one she doesn't have the job** — she has to go and ask for it. Once she does, every shift in
+the week is open to her and one of them still only pays $3, so the first Fridays genuinely hurt,
+and that's what gets her moving. **Putting off the cafe is allowed, and it costs her the first
+Friday.**
 
 By about week four the shifts are regular. **Four shifts at $55 is $220**, which covers the payment
 with **$70** left. Money stops being the squeeze, and what she wants takes over as the reason.

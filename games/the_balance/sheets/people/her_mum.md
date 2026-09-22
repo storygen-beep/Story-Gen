@@ -1,13 +1,14 @@
-# The Balance — HER MUM  `[REVIEW]`
+# The Balance — HER MUM  `[READY]`
 
-> Change `[REVIEW]` to `[READY]` when you're happy with this page.
+> **Signed and built, 2026-09-20.** Her week is in the game — sixty-seven rows where there were
+> two.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
 > **The rule this page is checked against:** every row puts her mum in a room at an hour, in the
 > clothes that room needs.
 >
-> Agreed in chat, 2026-09-19 and 20. Nothing here is in the game yet.
+> Agreed in chat, 2026-09-19 and 20. What is *on* her rows is `people/her_mum_cards.md`.
 
 ---
 
@@ -169,3 +170,14 @@ Nothing below has been changed yet. They come out when this page goes into the g
 | `toml_phases/1_metadata_and_locations.toml:405` | her description: *"…everything in this house happens while she is out or asleep."* | rewritten |
 | `toml_phases/1_metadata_and_locations.toml:414-416` | the *"NEVER TOUCHED"* comment | out |
 | her two schedule rows | kitchen at dinner, bed from eight | replaced by the week on this page |
+
+## What block 2 owes this page
+
+**Forty-four of her sixty-seven rows have no card.** Counted 2026-09-22, against every canvas in
+the game that is hers or needs her in the room. They are eight cards, not forty-four: eating ·
+sat down when the player has done her chore · her Sunday afternoon · her two hours on the strip ·
+and four more behind a shut door — asleep, changing, in the bath — which are her ladder and wait
+for block 5.
+
+**The four ordinary ones are on `people/her_mum_cards.md`.** Rule 1 says every row has a card;
+`BASE.md:117` defers what is *on* it to block 2, and that page is block 2 for her.

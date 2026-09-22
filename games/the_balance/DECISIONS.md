@@ -94,11 +94,6 @@ nothing there to break.
 so it lives in his description rather than here. A drunk step dad hands her an excuse for
 everything.
 
-### One thing that stays off-limits
-
-**Lynn — the mother — is never touched.** She's seen through a door and that's all.
-Written down here so a later release doesn't quietly read it as an oversight.
-
 ---
 
 # 3. Changeable, but expensive

@@ -67,8 +67,9 @@ from the same place as the risk of being known.
 
 ## When she can actually do it
 
-The house is quietest on **weekday afternoons** and after everyone's asleep. Nate is almost always
-in, and Tasha comes back at four. So the good hours are exactly the hours the cafe wants too.
+The house is quietest **Tuesday and Thursday afternoons**, when her mum is asleep off the ward, and
+after everyone's asleep. Nate is almost always in, and Tasha comes back at four. So the good hours
+are exactly the hours the cafe wants too.
 
 ## Who's watching
 

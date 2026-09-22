@@ -62,8 +62,8 @@ Decided in this order, one round each:
 
 | round | who | what your pages already say | |
 |---|---|---|---|
-| 1 | **Her mum** — the week the house runs on | *"nights on the ward three times a week. Home the other nights, asleep by ten"* | to decide |
-| 2 | **Her own week** | wakes at seven · class nine to twelve · early, middle and closing shifts · the $150 on Friday evening · home by Gil's ten | to decide |
+| 1 | **Her mum** — the week the house runs on | *"nights on the ward three times a week. Home the other nights, asleep by ten"* | **done — `people/her_mum.md`** |
+| 2 | **Her own week** | she sets her own alarm · class nine to twelve, Monday to Thursday · five three-hour shifts a day, all of them hers · the $150 on Friday evening · home by Gil's ten | **done — `systems/her_week.md`** |
 | 3 | **Gil** | *"kitchen until eight, back by six, and in the garage late"* | to decide |
 | 3 | **Nate** | *"a senior at her college — out most weekdays, home evenings and odd hours"* | to decide |
 | 3 | **Tasha** | *"out until four most days, then in. Out again on Friday and Saturday nights"* | to decide |
@@ -88,19 +88,21 @@ What the week makes. The blocks after this one spend them; this page only lists 
 - **When she's alone with each person** — one line per person.
 - **When the house is empty.**
 
-Your pages already name two: *twelve to four* — *"nobody at all… her window"* — and *eight to twelve
-on ward mornings, "when her mum is asleep down the hall."*
+Her week names four: **Mon/Wed/Fri nine to eleven**, her mum out on the strip · **Tue/Thu from
+twenty past twelve until three**, her mum asleep off the ward · **after ten**, every night ·
+**Friday from quarter to seven**, her mum gone to work and Gil on his own.
 
 ## Open questions
 
 - **What "away" means.** Proposed: no row. If a place has nothing in it yet, nobody has a row there.
+  **Answered by the build:** the ward is no row, and she reads as out of the house.
 - **The locked bathroom.** Someone in the shower with the door locked — does the door count as their
   card?
 - **Walking in from next door.** Nate or Tasha walking in on her in the bathroom come from their own
   rooms. Does that count as being there?
-- **Which three nights** her mum works.
-- **The weekend.** Your week page: *"still thin — no classes, a full house, and nothing in it but
-  hours."*
+- **Which three nights** her mum works. **Answered: Monday, Wednesday and Friday.**
+- **The weekend.** **Answered on `systems/her_week.md`:** no class, all five shifts open, and the
+  house full all day.
 - **Asleep.** Rule 1 says a sleeping person's room still has their card. What's on it is block 2.
 - **The gym and the hall** are on the map with nothing in them. **The cafe** can't be reached on foot.
 - **Hale and Reyes** are on the cast page and not in the game.

@@ -1,13 +1,13 @@
-# The Balance — THE CHORES  `[REVIEW]`
+# The Balance — THE CHORES  `[READY]`
 
-> Change `[REVIEW]` to `[READY]` when you're happy with this page.
+> **Signed and built, 2026-09-20.** All nine are in the game, in their rooms.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
 > **The rule this page is checked against:** every chore is in a room, at an hour, and costs her half
 > an hour.
 >
-> Agreed in chat, 2026-09-19 and 20. Nothing here is in the game yet.
+> Agreed in chat, 2026-09-19 and 20. What her mum's own hours offer is `people/her_mum_cards.md`.
 
 ---
 

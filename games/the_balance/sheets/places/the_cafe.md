@@ -22,12 +22,12 @@
 Waitress — **and she doesn't have the job when the game starts.** There's an opening, Gil names it
 at the kitchen table, and she has to go and ask for it. Applying is her first meeting with Owen.
 
-A shift is about five hours, and **Owen decides how many she gets.** He's a strict boss: exact about
-the work, quick to notice when it's sloppy, and he hands out nothing for nothing.
+A shift is **three hours**, there are **five of them a day**, and **every one is hers from day one.**
+He's a strict boss: exact about the work, quick to notice when it's sloppy, and he hands out nothing
+for nothing. What he's exact about is the clock — she's on at the top of a shift, or she isn't on.
 
-Her first week is two shifts, the worst two — around **$110** with tips, which doesn't cover the
-$150. By about week four she's on four or five, and a clean week is the **$220** the money page
-promised.
+**She isn't given shifts at all.** Seven, ten, one, four and seven, every day of the week, one a
+day, and nobody counts how many she works. What holds her back is the wage, not the roster.
 
 Her classes decide which shifts she can take, so the cafe and college are always pulling at each
 other.

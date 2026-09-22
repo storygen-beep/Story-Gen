@@ -42,8 +42,9 @@
 
 - **Wants** her daughter to be fine, and she is too tired to check.
 - **Found** on the ward three nights a week, asleep by ten on the others.
-- **Gives** the hours. Everything in this game happens while she's out or asleep.
-- **Never touched.** She's the price, not a person to be won.
+- **Gives** the week the house runs on — three nights on the ward, and the other four she's here
+  doing everything nobody else does.
+- **Can be gone after like anyone else.** Her ladder is block 5 and nothing on it is decided.
 
 ## Owen — the cafe owner
 
