@@ -31,6 +31,7 @@ take the screen on arrival — three false failures during the build came from e
 that.
 """
 
+import re
 import sys
 import pathlib
 
@@ -552,6 +553,37 @@ def _mum(page, rep):
               drawn["portraits"][:120] or "(nothing drawn)")
     rep.check("and it is not a solo link reading the canvas name",
               "Your mum" not in drawn["solo"], drawn["solo"][:120] or "(no solo links)")
+
+    # ── her ordinary hours have cards too, and the front room is the hard one
+    # her_mum_cards.md, 2026-09-22. Twenty of her sixty-seven rows had a card; these
+    # four carry twenty-eight more.
+    for day, hour, minute, loc, cid in (
+            ("Tuesday",  8,  5, "the_kitchen",    "mum_eating"),
+            ("Tuesday", 17, 20, "the_front_room", "mum_sat_down"),
+            ("Sunday",  13, 35, "the_front_room", "mum_sunday"),
+            ("Monday",   9,  5, "the_strip",      "mum_strip")):
+        clear_chores(page)
+        set_time(page, day, hour, minute)
+        stand_at(page, loc)
+        rep.check(f"{cid} is offered at {day[:3]} {hour:02d}:{minute:02d}",
+                  offered(page, loc, cid) is True, f"lynn at {npc_at(page, 'npc_lynn')}")
+
+    # ⚠️ THE ONE COLLISION, AND IT IS SILENT WHEN IT BREAKS. She is in the front room
+    # at half two on a Monday either way — on the dusting if it is not done, sat down
+    # if it is — and both canvases cover that window. The portrait path keeps ONE
+    # canvas per NPC per location and takes the highest priority among the SELECTABLE
+    # ones (v2.py:4928), so mum_dusting is 5 and mum_sat_down is 4. Equal priorities
+    # would drop one of them with no error anywhere.
+    for done in (False, True):
+        apply_flag(page, "chore_done_dusting", "set" if done else "unset")
+        set_time(page, "Monday", 14, 35)
+        stand_at(page, "the_front_room")
+        want = "mum_sat_down" if done else "mum_dusting"
+        html = page.evaluate("() => SugarCube.setup.renderNpcPortraits('the_front_room') || ''")
+        got = re.search(r'data-passage="Canvas_([a-z_]+)_Node', html)
+        got = got.group(1) if got else None
+        rep.check(f"dusting {'done' if done else 'not done'}, the front room draws {want}",
+                  got == want, str(got))
 
 
 def walk_friday(page, rep):

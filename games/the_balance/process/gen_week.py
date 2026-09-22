@@ -324,9 +324,25 @@ MUM_HEAD = '''# ⚠️ HER WEEK IS sheets/people/her_mum.md, 2026-09-20. Fifty-o
 '''
 
 
+TWIN_ACTIVITY = "sat down in the front room, because it is already done"
+
+
+def mum_rows_expanded():
+    """Every row her schedule really gets, the twins included.
+
+    ⚠️ THE CARDS READ THIS AND NOT MUM_ROWS. A twin is not in the table — it is made
+    here — so a card list built straight off MUM_ROWS would miss nineteen rows, and
+    the front room would be empty every single time the player did a chore for her.
+    """
+    for weekdays, start, end, loc, activity, chore in MUM_ROWS:
+        yield weekdays, start, end, loc, activity, chore
+        if chore:
+            yield weekdays, start, end, F, TWIN_ACTIVITY, None
+
+
 def build_mum():
     out = [MUM_HEAD]
-    for weekdays, start, end, loc, activity, chore in MUM_ROWS:
+    for weekdays, start, end, loc, activity, chore in mum_rows_expanded():
         days = ", ".join(str(d) for d in weekdays)
         row = ["[[npcs.schedules]]", f'location   = "{loc}"',
                f"weekdays   = [{days}]", f'start_time = "{start}"',
@@ -334,12 +350,6 @@ def build_mum():
         if chore:
             row.append(conditions([c_flag(f"chore_done_{chore}", "is_false")], key="when").rstrip())
         out.append("\n".join(row) + "\n\n")
-        if chore:
-            twin = ["[[npcs.schedules]]", f'location   = "{F}"',
-                    f"weekdays   = [{days}]", f'start_time = "{start}"',
-                    f'end_time   = "{end}"',
-                    'activity   = "sat down in the front room, because it is already done"']
-            out.append("\n".join(twin) + "\n\n")
     return "".join(out).rstrip() + "\n"
 
 
@@ -365,15 +375,52 @@ NO_MUM = {G}
 PAY, HALF, HOUR = 5, 30, 60
 
 # What she is doing, on the canvas that offers to take it off her.
+#
+# ⚠️ THREE EACH, NOT ONE. Each of these cards comes up two or three times a week and
+# the laundry comes up seven, and until 2026-09-22 every one of them carried a single
+# paragraph — the same sentence every time. A pool is the only variety available here,
+# because block_pool renders as `<<set _bp to random(0,N)>>` and cannot be gated.
 MUM_AT = {
-    "breakfast": "Your mum is at the hob in her home clothes with two pans going, doing it at the speed of somebody who has done it every morning for years.",
-    "breakfast_dishes": "She is at the sink with her sleeves pushed up and the breakfast things stacked beside her, and she has not sat down once since she got up.",
-    "lunch": "Your mum is doing lunch for whoever is in the house, which today is you, and she has not asked whether you wanted any.",
-    "lunch_dishes": "She is at the sink again. It is the third time she has stood at it today and it is not two o'clock yet.",
-    "dinner": "Your mum is doing dinner for four with a shift already behind her, and she will be stood at this for an hour.",
-    "dinner_dishes": "The table is cleared and she is at the sink with all of it, and everybody else has gone through to the other room.",
-    "laundry": "Your mum is down on the bathroom floor with the pile, pulling darks off the top of it and not looking up at you.",
-    "dusting": "Your mum is going along the shelf with a cloth, moving each thing and putting it back down on the same ring it left.",
+    "breakfast": [
+        "Your mum is at the hob in her home clothes with two pans going, doing it at the speed of somebody who has done it every morning for years.",
+        "Two pans, the kettle and the radio on low. She has the timing of all three in her head and has never once written any of it down.",
+        "She is cooking for four at seven in the morning with a shift waiting at the end of the day, and her back is to you the whole time you stand there.",
+    ],
+    "breakfast_dishes": [
+        "She is at the sink with her sleeves pushed up and the breakfast things stacked beside her, and she has not sat down once since she got up.",
+        "Everything off the table is on the drainer in the order it came off it. She works down the stack without once looking at how much of it is left.",
+        "The water has gone grey and she has not changed it. Four people ate and three of them are already in another room.",
+    ],
+    "lunch": [
+        "Your mum is doing lunch for whoever is in the house, which today is you, and she has not asked whether you wanted any.",
+        "She is making enough for two and putting the rest in a box for later, which is how half of what happens in this kitchen gets done twice.",
+        "Lunch is whatever is nearest going off. She works that out standing at the open fridge and then just gets on with it.",
+    ],
+    "lunch_dishes": [
+        "She is at the sink again. It is the third time she has stood at it today and it is not two o'clock yet.",
+        "Two plates and a pan, which is no time at all, and she does it now because leaving it means doing it later on top of something else.",
+        "Her hands are in the water before the table is properly cleared. Nobody carried anything through on their way out.",
+    ],
+    "dinner": [
+        "Your mum is doing dinner for four with a shift already behind her, and she will be stood at this for an hour.",
+        "Four of everything, and one of the four has not said what time he is in. She cooks as though he has.",
+        "She came in off a night, slept the day, and is now making a meal she will eat last and clear up after on her own.",
+    ],
+    "dinner_dishes": [
+        "The table is cleared and she is at the sink with all of it, and everybody else has gone through to the other room.",
+        "The TV is on next door and she is out here with four plates and the pan it was all cooked in. Nobody offered on the way past.",
+        "She stacks it, washes it, dries it and puts it away, and the whole thing takes half an hour that nothing else in this house notices.",
+    ],
+    "laundry": [
+        "Your mum is down on the bathroom floor with the pile, pulling darks off the top of it and not looking up at you.",
+        "Four people's washing in one heap by the bath, and she is going through it by hand into three piles on the tiles.",
+        "She has the machine open and is loading it a handful at a time, checking pockets, because somebody in this house never does.",
+    ],
+    "dusting": [
+        "Your mum is going along the shelf with a cloth, moving each thing and putting it back down on the same ring it left.",
+        "She works the sill, then the shelf, then the tops of the frames — the places nobody looks at until they have not been done.",
+        "Half an hour of lifting things and setting them back exactly where they were, in a room that will look identical when she finishes.",
+    ],
 }
 
 ROOMS = {
@@ -458,6 +505,176 @@ def solo_variants(key, room, verb, start, end):
     ]
 
 
+# ── her mum, on the hours no chore covers — sheets/people/her_mum_cards.md ────
+#
+# ⚠️ WINDOWS COME OFF mum_rows_expanded(), NEVER OFF A SECOND TABLE. Same reason
+# the chore cards read MUM_ROWS: an hour written down twice drifts, and the failure
+# is silent — the card is simply not there in the room she is standing in.
+#
+# ⚠️ mum_sat_down IS priority 4 AND EVERYTHING ELSE OF HERS IS 5, and that is the
+# whole of how the one real collision is handled. She is in the front room at 14:30
+# on a Monday either way: on the dusting if it is not done, sat down if it is. Both
+# canvases cover that window, and the portrait path keeps ONE canvas per NPC per
+# location, highest priority among the SELECTABLE ones (v2.py:4928-4932). Dusting
+# undone, mum_dusting is selectable and wins. Dusting done, its `chore_done_dusting
+# is_false` fails and it is not a candidate at all, so mum_sat_down is. Correct both
+# ways, and no condition is written twice.
+
+SHOPPING = ("11:15", "12:00")     # the one hour of hers in the kitchen that is not a meal
+
+EATING_AT = {
+    "07:30": "She is eating standing up at the counter with one eye on the clock, next to @gil who is sat down with the paper. In half an hour she will be at the sink with both their plates.",
+    "08:00": "She has come in off the ward and has not changed out of the uniform yet. She is eating at the table without tasting any of it, the way you eat when your day is already over.",
+    "08:30": "Sunday, so she is sat down with whoever got up, and everything is on the table at once instead of going through one plate at a time.",
+    "11:15": "The shopping is half on the floor and half on the counter and she is putting it away tins first, which is the order she has always done it in and has never explained.",
+    "12:30": "She has sat down to eat and she has half an hour. It is the longest she sits down between getting up and the middle of the afternoon.",
+    "15:15": "She is eating a late lunch on her own at the table, hours after everybody else did. The house is quiet, she has it to herself, and she does not look like somebody who wanted it.",
+}
+
+# (window, paragraphs). The four tile the whole day, so exactly one always renders —
+# and ⚠️ adjacent [group] blocks MERGE into one if/elseif chain (v2.py:14971), which
+# is the shape this wants: the bands are exclusive and only the live one prints.
+SAT_BANDS = [
+    (("00:00", "12:00"), [
+        "She is sat down in the front room before nine, which she never is, because the thing she would have been stood at is already done.",
+        "The TV is not on. She is in the chair with a cup, in the part of the morning that is usually the sink.",
+    ]),
+    (("12:00", "17:15"), [
+        "She is in the chair in the middle of the afternoon with nothing in front of her. The room is done and she is not the one who did it.",
+        "The cup is on the arm of the chair and the remote is next to it and she has not picked up either.",
+        "She has the afternoon and no idea what to do with it, which is what an afternoon looks like when somebody hands you one.",
+    ]),
+    (("17:15", "18:00"), [
+        "This is the hour her own week gives her, five until six, and it is the only one on it that is hers. She is sat down with the TV on low.",
+        "Her one hour off, and she is in the chair for all of it. Tonight she is home, so there is nothing at the end of it to get ready for.",
+    ]),
+    (("18:00", "00:00"), [
+        "She is sat down while the house is still going — the kettle through the wall, somebody on the stairs — and for once none of it is waiting on her.",
+        "The evening is happening in the other rooms and she is in this one, in the chair, with her shoes off.",
+    ]),
+]
+
+MUM_CARDS = {
+    "eating": dict(
+        cid="mum_eating", room=K, name="Your mum, eating",
+        description=("Her six meals, each at its own hour — and the shopping, which is the one "
+                     "hour of hers in this kitchen that is not one. Sit down with her or don't."),
+        node="At the table"),
+    "sat_down": dict(
+        cid="mum_sat_down", room=F, name="Your mum, sat down",
+        description=("Nineteen rows, and every one of them exists because the player took a chore "
+                     "off her. Four bands by the hour. Priority 4 — see the note above."),
+        node="In the chair", priority=4),
+    "sunday": dict(
+        cid="mum_sunday", room=F, name="Your mum, her Sunday afternoon",
+        description=("Half one to six on a Sunday. Four and a half hours, the longest single "
+                     "window in her week, and no class and five open shifts against it."),
+        node="The one afternoon she gets", minutes=HOUR),
+    "strip": dict(
+        cid="mum_strip", room=S, name="Your mum, on the strip",
+        description=("Nine to eleven, Monday Wednesday Friday. The only place in the game the "
+                     "player meets her outside that house, and the cafe is on the same street."),
+        node="In town", minutes=HOUR),
+}
+
+SUNDAY_POOL = [
+    "Sunday afternoon, and she is in the chair with the TV on and four and a half hours in front of her. It is the only stretch in her week that is not before or after something else.",
+    "She has the room, the chair and the afternoon, and she is using all three on a programme she is not really watching.",
+    "Nobody in this house needs anything from her until six. She has sat down as though she does not entirely trust that.",
+]
+
+STRIP_POOL = [
+    "Your mum is on the strip in the coat and shoes she only wears out of the house, going down the row with a list, at the speed of somebody working to a bus.",
+    "She is outside the chemist with two bags already, checking the list against what is in them. She has two hours and the bus back is forty minutes of it.",
+    "You see her before she sees you — your mum, in town, in her going-out coat, doing the week's shopping on the same street you work on.",
+]
+
+
+def card_of(loc, activity):
+    """Which card covers a row of hers that no chore card does. None = not yet."""
+    if loc == M or "in the bath" in activity:
+        return None            # behind a shut door. Her ladder, block 5.
+    if loc == S:
+        return "strip"
+    if loc == K:
+        # Seven o'clock is the `dinner` canvas, which is the room's event and not
+        # hers, and already requires her in the room.
+        return None if "everybody in one room" in activity else "eating"
+    if "one afternoon she gets" in activity:
+        return "sunday"
+    return "sat_down"
+
+
+def card_windows():
+    """{card: [(weekdays, start, end)]}, straight off her own rows."""
+    out = {}
+    for weekdays, start, end, loc, activity, chore in mum_rows_expanded():
+        if chore:
+            continue
+        key = card_of(loc, activity)
+        if key:
+            out.setdefault(key, []).append((tuple(weekdays), start, end))
+    return {k: sorted(set(v)) for k, v in out.items()}
+
+
+def build_mum_cards():
+    out = [
+        "# --- HER MUM, ON HER OWN HOURS ----------------------------------------------\n"
+        "# her_mum_cards.md, 2026-09-22. BASE.md rule 1: every row has a card. Twenty of\n"
+        "# her sixty-seven rows had one. These four carry twenty-eight more — eating, sat\n"
+        "# down once the player has done her chore for her, her Sunday afternoon, and her\n"
+        "# two hours in town. They pay nothing: chores.md, \"what she gets is time with her\n"
+        "# mum.\" The nineteen behind a shut door are her ladder and wait for block 5.\n"
+        "#\n"
+        "# Generated by games/the_balance/process/gen_week.py. Edit the tables there.\n\n"
+    ]
+    wins = card_windows()
+    for key, spec in MUM_CARDS.items():
+        room = spec["room"]
+        parts = ["[[canvases]]", f'id   = "{spec["cid"]}"', f'name = "{spec["name"]}"',
+                 f'description = "{spec["description"]}"', "",
+                 "[canvases.trigger]", f'location      = "{room}"',
+                 'npc           = "npc_lynn"',
+                 "is_repeatable = true",
+                 f'priority      = {spec.get("priority", 5)}', "is_active     = true",
+                 conditions([c_lynn(room, "is_present")]).rstrip(), ""]
+        for weekdays, start, end in wins[key]:
+            parts += ["[[canvases.trigger.schedules]]",
+                      "weekdays   = [" + ", ".join(str(d) for d in weekdays) + "]",
+                      f'start_time = "{start}"', f'end_time   = "{end}"', ""]
+        parts += ["[[canvases.nodes]]", 'id   = "base"', f'name = "{spec["node"]}"', ""]
+        body = "\n".join(parts)
+
+        if key == "eating":
+            for start, _e in sorted({(s, e) for _w, s, e in wins[key]}):
+                end = next(e for _w, s, e in wins[key] if s == start)
+                body += group([c_window(start, end)], [EATING_AT[start]])
+        elif key == "sat_down":
+            for (bs, be), paras in SAT_BANDS:
+                body += group([c_window(bs, be)], paras)
+        else:
+            body += pool(SUNDAY_POOL if key == "sunday" else STRIP_POOL)
+
+        body += '[canvases.nodes.exit_block]\ntype = "choices"\n\n'
+        minutes = spec.get("minutes", HALF)
+        if key == "eating":
+            for start, end in sorted({(s, e) for _w, s, e in wins[key]}):
+                w = [c_window(start, end)]
+                if (start, end) == SHOPPING:
+                    body += choice("Put it away with her.", room, HALF, w)
+                else:
+                    body += choice("Sit down and eat with her.", room, HALF, w)
+                    body += choice("Take yours and go.", room, 5, w)
+        elif key == "strip":
+            body += choice("Walk round the shops with her.", room, minutes)
+            body += choice("Say hello and let her get on.", room, 5)
+        else:
+            body += choice("Sit down with her.", room, minutes)
+        body += choice("Leave her to it.", room)
+        out.append(body)
+    return "".join(out).rstrip() + "\n"
+
+
 def build_chores():
     out = [CHORES_HEAD]
 
@@ -525,11 +742,10 @@ def build_chores():
             parts += ["[[canvases.trigger.schedules]]",
                       "weekdays   = [" + ", ".join(str(d) for d in weekdays) + "]",
                       f'start_time = "{s}"', f'end_time   = "{e}"', ""]
-        parts += ["[[canvases.nodes]]", 'id   = "base"', 'name = "She is on it"', "",
-                  "[[canvases.nodes.blocks]]", 'type    = "paragraph"',
-                  f'content = "{MUM_AT[key]}"', "",
-                  "[canvases.nodes.exit_block]", 'type = "choices"', ""]
-        body = "\n".join(parts)
+        parts += ["[[canvases.nodes]]", 'id   = "base"', 'name = "She is on it"', ""]
+        body = "\n".join(parts) + pool(MUM_AT[key])
+        body += '[canvases.nodes.exit_block]\ntype = "choices"\n\n'
+
 
         set_done = f'{{ targetType = "player", flag = "chore_done_{key}", op = "set" }}'
         set_paid = '{ targetType = "player", flag = "chore_paid_today", op = "set" }'
@@ -546,6 +762,7 @@ def build_chores():
         body += choice("Leave her to it.", room)
         out.append(body)
 
+    out.append("\n" + build_mum_cards())
     return "".join(out).rstrip() + "\n"
 
 

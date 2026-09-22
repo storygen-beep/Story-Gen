@@ -173,11 +173,11 @@ Nothing below has been changed yet. They come out when this page goes into the g
 
 ## What block 2 owes this page
 
-**Forty-four of her sixty-seven rows have no card.** Counted 2026-09-22, against every canvas in
-the game that is hers or needs her in the room. They are eight cards, not forty-four: eating ·
+**Forty-seven of her sixty-seven rows had no card.** Counted 2026-09-22 against every canvas in
+the game that is hers or needs her in the room, conditions included and not just windows. They are eight cards, not forty-four: eating ·
 sat down when the player has done her chore · her Sunday afternoon · her two hours on the strip ·
 and four more behind a shut door — asleep, changing, in the bath — which are her ladder and wait
 for block 5.
 
-**The four ordinary ones are on `people/her_mum_cards.md`.** Rule 1 says every row has a card;
+**The four ordinary ones are built — `people/her_mum_cards.md`, twenty-eight rows.** Rule 1 says every row has a card;
 `BASE.md:117` defers what is *on* it to block 2, and that page is block 2 for her.
