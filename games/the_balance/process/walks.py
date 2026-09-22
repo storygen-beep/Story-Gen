@@ -121,11 +121,14 @@ def walk_opening(page, rep):
     rep.check("the opening canvas is reachable",
               "canvas_opening" in passage(page), passage(page))
 
-    # Read the purse BEFORE entering: the chore pays on node ENTRY, so a probe that
-    # reads it after landing sees the payment already made and calls it a no-op.
+    # ⚠️ THE CHORE PAYS NOTHING, 2026-09-23. LO removed the chore money and the
+    # fridge list, so this probe is inverted: it used to assert the purse GREW on
+    # this node and now asserts it does not move. The purse is read before entering
+    # because the old payment landed on node ENTRY.
     before = cash(page)
     goto(page, "StartingCanvas_canvas_opening_Node_chore")
-    rep.check("the chore pays", cash(page) > before, f"cash {before} -> {cash(page)}")
+    rep.check("the opening chore pays nothing", cash(page) == before,
+              f"cash {before} -> {cash(page)}")
 
     # has_job is set by a flagEffect on the LAST exit of the chain, not by landing
     # on the `hired` node. Walk it.
@@ -330,7 +333,6 @@ CHORE_ROWS = [
 
 
 def clear_chores(page):
-    apply_flag(page, "chore_paid_today", "unset")
     for key, *_ in CHORE_ROWS:
         apply_flag(page, f"chore_done_{key}", "unset")
 
@@ -374,7 +376,9 @@ def _chores(page, rep):
     rep.check("and puts it on her own card instead",
               offered(page, "the_kitchen", "mum_breakfast") is True)
 
-    # ── the first one of the day pays, the second does not, and both take half an hour
+    # ── no chore pays anything, and every one of them costs half an hour
+    # ⚠️ INVERTED 2026-09-23. LO removed the chore money and the fridge list, so the
+    # three probes that asserted a payment now assert the purse does not move.
     clear_chores(page)
     start(page, "Monday", 8, "the_kitchen")
     set_time(page, "Monday", 8, 30)
@@ -382,7 +386,7 @@ def _chores(page, rep):
     play(page, "chores_kitchen")
     click(page, "Cook breakfast")
     _, t1 = clock(page)
-    rep.check("the first chore of the day pays five", cash(page) - before == 5,
+    rep.check("the first chore of the day pays nothing", cash(page) == before,
               f"cash {before} -> {cash(page)}")
     rep.check("and it costs half an hour", t1 - t0 == 30, f"{t0} -> {t1}")
     rep.check("and it is done for the day",
@@ -397,11 +401,11 @@ def _chores(page, rep):
     rep.check("the next one is still there",
               any("Do the breakfast dishes" in x for x in links(page)), str(links(page))[:150])
     click(page, "Do the breakfast dishes")
-    rep.check("but the second one of the day pays nothing", cash(page) == before,
+    rep.check("and neither does the second one", cash(page) == before,
               f"cash {before} -> {cash(page)}")
 
-    # ── the tightening. the_house.md via the first build: after a missed Friday the
-    # same five dollars costs an hour.
+    # ── a missed Friday no longer reaches the chores at all. It used to make every
+    # one of them take an hour instead of half; that went with the money.
     clear_chores(page)
     start(page, "Monday", 8, "the_kitchen")
     set_time(page, "Monday", 8, 30)
@@ -410,8 +414,8 @@ def _chores(page, rep):
     play(page, "chores_kitchen")
     click(page, "Cook breakfast")
     _, t1 = clock(page)
-    rep.check("after a missed Friday the same five dollars costs an hour",
-              t1 - t0 == 60, f"{t0} -> {t1}")
+    rep.check("a missed Friday does not lengthen a chore any more",
+              t1 - t0 == 30, f"{t0} -> {t1}")
     apply_effect(page, "fridays_missed", "set", 0, clamp=False)
 
     # ── overnight, everything opens again
@@ -420,15 +424,12 @@ def _chores(page, rep):
     set_time(page, "Monday", 8, 30)
     play(page, "chores_kitchen")
     click(page, "Cook breakfast")
-    rep.check("the flags are set before midnight",
-              flags(page).get("chore_done_breakfast") is True
-              and flags(page).get("chore_paid_today") is True)
+    rep.check("the flag is set before midnight",
+              flags(page).get("chore_done_breakfast") is True)
     advance_time(page, 20 * 60)
-    rep.check("and both reset overnight",
-              flags(page).get("chore_done_breakfast") is not True
-              and flags(page).get("chore_paid_today") is not True,
-              f"done={flags(page).get('chore_done_breakfast')} "
-              f"paid={flags(page).get('chore_paid_today')}")
+    rep.check("and it resets overnight",
+              flags(page).get("chore_done_breakfast") is not True,
+              f"done={flags(page).get('chore_done_breakfast')}")
 
     # ⚠️ THE HELP / TAKE-OVER PAIR IS NOT CHECKED HERE. Both are gated on her mum
     # standing in the room, and until her week is built she is only ever in the
@@ -505,23 +506,21 @@ def _mum(page, rep):
               f"at {npc_at(page, 'npc_lynn')}, "
               f"offered={offered(page, 'the_bathroom', 'mum_laundry')}")
 
-    # ── taking it over pays, closes the chore, and moves her
+    # ── taking it over closes the chore and moves her, and pays nothing
     set_time(page, "Monday", 13, 45)
-    apply_flag(page, "chore_paid_today", "unset")
     before = cash(page)
     play(page, "mum_laundry")
     rep.check("help her, take it over, or leave her to it",
               len([x for x in links(page) if "Leave her" not in x]) == 2, str(links(page))[:160])
     click(page, "Tell her you'll do it")
-    rep.check("taking it over pays the five", cash(page) - before == 5,
+    rep.check("taking it over pays nothing", cash(page) == before,
               f"cash {before} -> {cash(page)}")
     rep.check("and closes the chore", flags(page).get("chore_done_laundry") is True)
     rep.check("and moves her out of it",
               npc_at(page, "npc_lynn") == "the_front_room", str(npc_at(page, "npc_lynn")))
 
-    # ── helping does not pay, because it was never her job
+    # ── helping does not pay either. Nothing does.
     apply_flag(page, "chore_done_dusting", "unset")
-    apply_flag(page, "chore_paid_today", "unset")
     set_time(page, "Monday", 14, 40)
     stand_at(page, "the_front_room")
     before = cash(page)
@@ -558,9 +557,13 @@ def _mum(page, rep):
         set_time(page, day, hour, minute)
         stand_at(page, "the_master_bedroom")
         html = page.evaluate("() => SugarCube.setup.renderNpcPortraits('the_master_bedroom') || ''")
-        got = re.search(r'data-passage="Canvas_([a-z_]+)_Node', html)
-        got = got.group(1) if got else None
-        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — her room draws {cid}", got == cid, str(got))
+        # ⚠️ `in`, NOT `==`, SINCE 2026-09-23. The picks are PER NPC (v2.py:4943), and
+        # @gil now has three cards of his own in this room — so at 20:50 on a Tuesday
+        # this wall draws TWO portraits, hers and his, and a re.search for the first
+        # one was asserting which of two correct answers came back first.
+        got = re.findall(r'data-passage="Canvas_([a-z_]+)_Node', html)
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — her room draws {cid}",
+                  cid in got, str(got))
 
     # the wall is the only second node in her whole set, and it has to print something
     play(page, "mum_asleep")
@@ -1538,7 +1541,10 @@ def walk_three(page, rep):
         rep.check(f"{day[:3]} {hour:02d}:00 — all three of them are in their own beds",
                   all(where.values()), str(where))
 
-    for day, hour, minute in (("Monday", 23, 0), ("Tuesday", 22, 30), ("Friday", 20, 0)):
+    # ⚠️ 22:45 AND NOT 23:00 SINCE 2026-09-23. His garage rows now end at eleven so
+    # the bathroom can have him, and an end time is EXCLUSIVE — at 23:00 sharp he is
+    # already through the door with the tap running. gil_cards.md.
+    for day, hour, minute in (("Monday", 22, 45), ("Tuesday", 22, 30), ("Friday", 20, 0)):
         set_time(page, day, hour, minute)
         rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — @gil is in the garage",
                   npc_at(page, "npc_gil") == "the_garage", str(npc_at(page, "npc_gil")))
@@ -1587,12 +1593,260 @@ def walk_three(page, rep):
                   inside == [who], str(inside))
 
 
+
+# ── @gil's base — sheets/people/gil_cards.md ────────────────────────────────
+# day, hour, minute, where he should be. Every one of his nineteen rows is
+# represented by one probe inside it; rows that differ only by weekday share a
+# probe on each of their day shapes.
+GIL_HOURS = [
+    ("Monday",    3,  0, "the_master_bedroom"),  # asleep, weekday
+    ("Sunday",    6, 30, "the_master_bedroom"),  # asleep, the weekend lie-in
+    ("Monday",    6, 35, "the_master_bedroom"),  # changing, weekday
+    ("Saturday",  7, 35, "the_master_bedroom"),  # changing, weekend
+    ("Monday",    7,  0, "the_front_room"),      # the paper, weekday
+    ("Saturday",  8,  0, "the_front_room"),      # the paper, weekend
+    ("Monday",    7, 45, "the_kitchen"),         # breakfast, weekday
+    ("Sunday",    8, 45, "the_kitchen"),         # breakfast, weekend
+    ("Monday",   11,  0, "the_shop"),            # at work
+    ("Friday",   16,  0, "the_shop"),            # at work, and the ride home hour
+    ("Saturday", 12,  0, "the_garage"),          # the project, all weekend day
+    ("Monday",   18, 30, "the_kitchen"),         # back at six
+    ("Tuesday",  19, 30, "the_kitchen"),         # dinner, a home night
+    ("Tuesday",  20, 15, "the_garage"),          # out at the car before he goes up
+    ("Tuesday",  21, 30, "the_master_bedroom"),  # their door
+    ("Tuesday",  22, 30, "the_garage"),          # back down
+    ("Monday",   21,  0, "the_garage"),          # the long ward-night one
+    ("Monday",   23, 15, "the_bathroom"),        # washing the day off
+    ("Monday",   23, 35, "the_master_bedroom"),  # changing, last thing
+    ("Monday",   23, 50, "the_master_bedroom"),  # the house shut
+]
+
+# canvas, room, a day and time inside its hours
+GIL_CARDS = [
+    ("hub_gil_paper",   "the_front_room",     "Monday",    7,  0),
+    ("hub_gil_kitchen", "the_kitchen",        "Monday",    7, 45),
+    ("hub_gil_kitchen", "the_kitchen",        "Monday",   18, 30),
+    ("garage_gil",      "the_garage",         "Monday",   21,  0),
+    ("hub_gil_shop",    "the_shop",           "Monday",   11,  0),
+    ("hub_gil_bed",     "the_master_bedroom", "Monday",    3,  0),
+    ("gil_changing",    "the_master_bedroom", "Monday",    6, 35),
+    ("gil_their_door",  "the_master_bedroom", "Tuesday",  21, 30),
+]
+
+
+def walk_gil(page, rep):
+    """sheets/people/gil_cards.md — @gil's nineteen rows and his eight cards.
+
+    ⚠️ HE HAD A FACE FOR FOUR HOURS A WEEK. `friday_payment`, Friday 17:00-21:00,
+    was the only canvas in this game carrying `npc = "npc_gil"` that was not a
+    substitution, and eight of his twelve rows were dead — every garage hour and
+    every bedroom hour. This route is the check that the eight cards actually
+    render, which `presence.py` reads off the TOML and cannot prove.
+    """
+    start(page, "Monday", 12, "her_room")
+
+    # ── his week, row by row
+    for day, hour, minute, where in GIL_HOURS:
+        set_time(page, day, hour, minute)
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — @gil is at {where}",
+                  npc_at(page, "npc_gil") == where, str(npc_at(page, "npc_gil")))
+
+    # ── the ten hours he is out are now nine and a half AT A PLACE, and the shop
+    # is shut at the weekend because his own week shuts it, not because a rule does
+    set_time(page, "Saturday", 11, 0)
+    rep.check("Saturday at eleven — the shop is not somewhere he is",
+              npc_at(page, "npc_gil") == "the_garage", str(npc_at(page, "npc_gil")))
+    set_time(page, "Monday", 17, 45)
+    rep.check("half five on a Monday — he has left the shop and is not home yet",
+              npc_at(page, "npc_gil") is None, str(npc_at(page, "npc_gil")))
+
+    # ── every card is offered in its own hours
+    for cid, room, day, hour, minute in GIL_CARDS:
+        set_time(page, day, hour, minute)
+        stand_at(page, room)
+        rep.check(f"{cid} is offered at {day[:3]} {hour:02d}:{minute:02d}",
+                  offered(page, room, cid) is True,
+                  f"gil at {npc_at(page, 'npc_gil')}")
+
+    # ── ⚠️ THE ONE THE SELECTOR DECIDES. Three of his cards share the master
+    # bedroom and only ONE canvas per NPC per location is ever drawn (v2.py:4943).
+    # Their schedules are disjoint, so each of these three hours must draw its own.
+    for day, hour, minute, cid in (("Monday",   3,  0, "hub_gil_bed"),
+                                   ("Monday",   6, 35, "gil_changing"),
+                                   ("Tuesday", 21, 30, "gil_their_door")):
+        set_time(page, day, hour, minute)
+        stand_at(page, "the_master_bedroom")
+        html = page.evaluate(
+            "() => SugarCube.setup.renderNpcPortraits('the_master_bedroom') || ''")
+        got = re.findall(r'data-passage="Canvas_([a-z_]+)_Node', html)
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — their room draws {cid}",
+                  cid in got, str(got))
+
+    # ── ⚠️ A FACE, NOT A LINK. All eight of her mum's canvases once shipped without
+    # `npc` on the trigger and printed the canvas NAME as a solo link instead of a
+    # portrait. Every one of @gil's carries it; this is the check that says so.
+    for room, day, hour, minute in (("the_garage",         "Monday",   21,  0),
+                                    ("the_front_room",     "Monday",    7,  0),
+                                    ("the_kitchen",        "Monday",   18, 30),
+                                    ("the_shop",           "Monday",   11,  0),
+                                    ("the_master_bedroom", "Monday",    3,  0)):
+        set_time(page, day, hour, minute)
+        stand_at(page, room)
+        drawn = page.evaluate("""(loc) => {
+            var s = SugarCube.setup;
+            return { portraits: s.renderNpcPortraits(loc) || '',
+                     solo: s.renderSoloActivities(loc) || '' };
+        }""", room)
+        rep.check(f"{room} draws his portrait, with his name on it",
+                  "npc-portrait-card" in drawn["portraits"] and "Gil" in drawn["portraits"],
+                  drawn["portraits"][:110] or "(nothing drawn)")
+        rep.check(f"and {room} does not print him as a solo link",
+                  "Gil" not in drawn["solo"], drawn["solo"][:110] or "(no solo links)")
+
+    # ── the bathroom at eleven holds exactly one person, and it is him
+    set_time(page, "Monday", 23, 15)
+    inside = [n for n in ("npc_gil", "npc_nate", "npc_tasha", "npc_lynn")
+              if npc_at(page, n) == "the_bathroom"]
+    rep.check("23:15 — the bathroom holds exactly @gil", inside == ["npc_gil"], str(inside))
+
+    # ── ⚠️ AND THE DOOR IS SHUT ON HER. The gate is four stage helpers AND-ed as
+    # negations (0_systems_spec.toml); the runtime would have nested them and the
+    # IMPORTER refuses to, so this proves the four-helper shape actually locks.
+    rep.check("and the door is shut against her",
+              sv(page, "SugarCube.setup.navDestUnlocked('the_bathroom')") is False,
+              str(sv(page, "SugarCube.setup.navDestUnlocked('the_bathroom')")))
+    set_time(page, "Monday", 13, 45)
+    rep.check("but her mum's laundry hour still lets her in",
+              sv(page, "SugarCube.setup.navDestUnlocked('the_bathroom')") is True,
+              f"lynn at {npc_at(page, 'npc_lynn')}")
+    set_time(page, "Monday", 18, 15)
+    rep.check("and her mum's bath still shuts it",
+              sv(page, "SugarCube.setup.navDestUnlocked('the_bathroom')") is False,
+              f"lynn at {npc_at(page, 'npc_lynn')}")
+
+    # ── THE LIFT. ⚠️ THE WHOLE POINT OF THESE THREE CHECKS IS `cash`. Decision 105
+    # (2026-09-16) fenced the travel system off — "no lift, nothing touches the bus
+    # fare" — and LO lifted it on 2026-09-23 only for a lift that costs time alone.
+    apply_flag(page, "lift_tomorrow", "unset")
+    apply_flag(page, "gil_garage_today", "unset")
+    set_time(page, "Monday", 21, 0)
+    stand_at(page, "the_garage")
+    play(page, "garage_gil")
+    before = cash(page)
+    rep.check("an hour in the garage is on the card",
+              any("Hand him things" in x for x in links(page)), str(links(page))[:160])
+    click(page, "Hand him things")
+    rep.check("and it sets tomorrow's lift",
+              flags(page).get("lift_tomorrow") is True,
+              f"lift_tomorrow = {flags(page).get('lift_tomorrow')}")
+    rep.check("and it costs her nothing but the hour", cash(page) == before,
+              f"cash {before} -> {cash(page)}")
+
+    # ⚠️ NOT CLEARED OVERNIGHT, AND THAT IS DELIBERATE. It is bought one evening and
+    # spent the next morning, so a daily_tick reset would make it unspendable.
+    advance_time(page, 10 * 60)
+    rep.check("the lift survives the night",
+              flags(page).get("lift_tomorrow") is True,
+              f"lift_tomorrow = {flags(page).get('lift_tomorrow')}")
+
+    set_time(page, "Tuesday", 7, 45)
+    stand_at(page, "the_kitchen")
+    play(page, "hub_gil_kitchen")
+    before = cash(page)
+    rep.check("and it is on the table in the morning",
+              any("Get in with him" in x for x in links(page)), str(links(page))[:200])
+    click(page, "Get in with him. He goes past the campus")
+    # ⚠️ ON `current_location`, NOT ON THE PASSAGE. The lift lands her on the quad and
+    # a random ambient can take the screen on arrival — `picked_quad` did, on the run
+    # that caught this. The passage is a rendered result; where she IS is state, and
+    # the rule at the top of this file is that only state answers whether a mechanic
+    # fired.
+    rep.check("it puts her on the quad",
+              sv(page, "SugarCube.State.variables.player.current_location") == "the_quad",
+              str(sv(page, "SugarCube.State.variables.player.current_location")))
+    rep.check("for nothing — the fare is untouched", cash(page) == before,
+              f"cash {before} -> {cash(page)}")
+    rep.check("and it is spent", flags(page).get("lift_tomorrow") is not True,
+              f"lift_tomorrow = {flags(page).get('lift_tomorrow')}")
+
+    # ── the ride home, which costs nothing and is never offered
+    set_time(page, "Monday", 17, 15)
+    stand_at(page, "the_shop")
+    play(page, "hub_gil_shop")
+    before = cash(page)
+    rep.check("at a quarter past five the ride home is there",
+              any("Ride home" in x for x in links(page)), str(links(page))[:160])
+    click(page, "Ride home with him")
+    rep.check("and it puts her on her own street",
+              sv(page, "SugarCube.State.variables.player.current_location") == "the_street",
+              str(sv(page, "SugarCube.State.variables.player.current_location")))
+    rep.check("also for nothing", cash(page) == before, f"cash {before} -> {cash(page)}")
+
+    set_time(page, "Monday", 16, 0)
+    stand_at(page, "the_shop")
+    play(page, "hub_gil_shop")
+    rep.check("at four it is not — he has an hour and a half left",
+              not any("Ride home" in x for x in links(page)), str(links(page))[:160])
+
+    # ── FRIDAY IN TWO ROOMS. ⚠️ His own week broke LO's "ALL EVENING" call: he is
+    # in that kitchen for ONE hour on a Friday. The garage carries the other four.
+    apply_flag(page, "friday_settled", "unset")
+    apply_effect(page, "cash", "set", 300, clamp=False)
+    set_time(page, "Friday", 18, 30)
+    stand_at(page, "the_kitchen")
+    rep.check("Friday at half six — the kitchen wants the money",
+              offered(page, "the_kitchen", "friday_payment") is True,
+              f"gil at {npc_at(page, 'npc_gil')}")
+    set_time(page, "Friday", 20, 0)
+    stand_at(page, "the_garage")
+    rep.check("Friday at eight — so does the garage",
+              offered(page, "the_garage", "friday_payment_garage") is True,
+              f"gil at {npc_at(page, 'npc_gil')}")
+
+    # ⚠️ AND SHE CANNOT PAY BOTH. Two canvases collecting the same $150 and a purse
+    # with $300 in it is exactly how a debt gets paid twice.
+    before = cash(page)
+    play(page, "friday_payment_garage")
+    click(page, "Count it out on the bench")
+    click(page, "Go in")
+    rep.check("paying in the garage takes the hundred and fifty once",
+              before - cash(page) == 150, f"cash {before} -> {cash(page)}")
+    rep.check("and it settles Friday", flags(page).get("friday_settled") is True,
+              f"friday_settled = {flags(page).get('friday_settled')}")
+    set_time(page, "Friday", 18, 30)
+    stand_at(page, "the_kitchen")
+    rep.check("so the kitchen will not collect it again",
+              offered(page, "the_kitchen", "friday_payment") is False,
+              f"gil at {npc_at(page, 'npc_gil')}")
+    apply_flag(page, "friday_settled", "unset")
+
+    # ── THE DINNER CALL. The only surface in this game that moves him.
+    clear_chores(page)
+    set_time(page, "Monday", 19, 30)
+    stand_at(page, "the_kitchen")
+    rep.check("a ward night with no dinner cooked offers nothing",
+              offered(page, "the_kitchen", "ward_dinner") is False,
+              f"chore_done_dinner = {flags(page).get('chore_done_dinner')}")
+    apply_flag(page, "chore_done_dinner", "set")
+    rep.check("cook it and there is a table to call people to",
+              offered(page, "the_kitchen", "ward_dinner") is True)
+    rep.check("and on a night her mum IS home it is the other card",
+              offered(page, "the_kitchen", "ward_dinner") is True
+              and npc_at(page, "npc_lynn") is None,
+              f"lynn at {npc_at(page, 'npc_lynn')}")
+    set_time(page, "Tuesday", 19, 30)
+    rep.check("Tuesday is `dinner`, not the call",
+              offered(page, "the_kitchen", "ward_dinner") is False
+              and offered(page, "the_kitchen", "dinner") is True)
+    clear_chores(page)
+
 ROUTES = {
     "opening": walk_opening,
     "week": walk_week,
     "chores": walk_chores,
     "mum": walk_mum,
     "three": walk_three,
+    "gil": walk_gil,
     "alarm": walk_alarm,
     "friday": walk_friday,
     "stream": walk_stream,

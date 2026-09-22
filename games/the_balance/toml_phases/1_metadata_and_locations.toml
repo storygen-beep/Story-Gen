@@ -32,7 +32,7 @@ navigation_order = ["her_room", "the_kitchen", "the_bathroom", "the_front_room",
 [[locations]]
 id          = "her_room"
 name        = "Your Room"
-description = "Bed against one wall, desk against the other, and the door that's meant to stay open when anyone's on the landing. Your phone is on the books where you left it."
+description = "Bed against one wall, desk against the other, and a door with a little button on the handle. Your phone is on the books where you left it."
 image       = "locations/her_room.jpg"
 image_search_queries = ["small teenage girl bedroom desk bed daylight", "cramped bedroom single bed study desk phone"]
 entry_from  = "the_hall"
@@ -45,40 +45,50 @@ image       = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
 entry_from  = "the_hall"
 
-# ⚠️ THE LOCK ACTUALLY WORKS NOW, 2026-09-22. The description has always said so and
-# canvas_opening promises it on the first screen of the game — "the bathroom is gone
-# until whoever is in there comes out" — and until today the player could walk in on
-# her mum in the bath and be offered "Get in the shower".
+# ⚠️ THE LOCK ACTUALLY WORKS, 2026-09-22 — AND IT HOLDS TWO PEOPLE NOW, 2026-09-23.
+# The description has always said the lock works and canvas_opening promises it on the
+# first screen — "the bathroom is gone until whoever is in there comes out" — and until
+# 2026-09-22 the player could walk in on her mum in the bath and be offered "Get in the
+# shower."
 #
-# ⚠️ READ THE LOGIC. It is OR, and it is the OPEN condition, not the locked one: the
-# door opens if she is not in there, OR if the clock is outside all three of her bath
-# windows. Only when BOTH fail — she is in that room AND it is a bath hour — is it
-# shut. That shape is forced: conditions are ONE FLAT LEVEL, so `present AND (w1 OR w2
-# OR w3)` cannot be written, and its complement can.
+# ⚠️ THIS USED TO BE A FLAT `logic = "OR"` STATING WHEN THE DOOR WAS OPEN, and the
+# comment here said the shape was forced: `present AND (w1 OR w2 OR w3)` cannot be
+# written in one flat items list, but its complement can. That was true and it stopped
+# being enough the day @gil got a bath row (gil_cards.md, 2026-09-23). A second person
+# needs a second `is_absent`, and under OR a second absence OPENS the door for the
+# first — at 23:15 her mum is absent, so the OR was satisfied and @gil's door swung.
 #
-# ⚠️ AND IT IS WHY THE WINDOWS ARE HERE AT ALL. `npc_lynn is_absent` on its own would
-# lock the door through her LAUNDRY hours too — 13:30, 15:45 and 09:30 Sunday — and
-# mum_laundry is a card inside this room. The three complement windows below let her
-# washing hours through and shut only on the bath.
-entry_conditions = { version = "1.0", logic = "OR", items = [
-  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_absent" },
-  { type = "time_of_day", start_time = "00:00", end_time = "08:30" },
-  { type = "time_of_day", start_time = "09:00", end_time = "18:00" },
-  { type = "time_of_day", start_time = "18:30", end_time = "20:30" },
-  { type = "time_of_day", start_time = "21:30", end_time = "00:00" },
+# ⚠️ WHAT FIXED IT: FOUR NAMED GATES AND AN `AND` OF FOUR NEGATIONS. The door is open
+# unless somebody is ACTUALLY bathing. Each helper is one person paired with one window
+# — NOT one helper per person, because template_import.py:5643 hard-fails `logic = "OR"`
+# inside a stage helper and :5634 hard-fails a nested `type = "stage"`, so a helper is
+# AND-of-primitives and a disjunction has to be split into one helper per arm. The
+# runtime would have nested; the validator is the thing that refuses. Both checked in
+# the importer first. The helpers are in 0_systems_spec.toml with the full reasoning.
+#
+# ⚠️ THE COMPLEMENT WINDOWS ARE GONE, and with them the class of bug where an "open"
+# window silently drifts from the bath row it was the inverse of.
+#
+# ⚠️ HER LAUNDRY HOURS STILL COME THROUGH, for the reason they always did and by a
+# better route: `mum_laundry` is a card INSIDE this room, and `lynn_bathing` now asks
+# whether she is in a BATH window rather than whether she is in the room at all.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "stage", helper = "lynn_bath_morning", operator = "is_false" },
+  { type = "stage", helper = "lynn_bath_ward",    operator = "is_false" },
+  { type = "stage", helper = "lynn_bath_sunday",  operator = "is_false" },
+  { type = "stage", helper = "gil_bathing",       operator = "is_false" },
 ] }
-# ⚠️ IT NAMES HER. This is read on the landing with nothing in front of it, so a bare
-# "hers" has no owner — readable.py caught it the day it was written. The message is
-# safe to name her only because the gate above is hers alone; the day Nate or Tasha
-# lock this door too, it goes back to saying nothing.
-blocked_message = "The door is shut and the tap is running. Your mum is in there, and it is the half hour of the day that is hers."
+# ⚠️ IT NO LONGER NAMES ANYBODY, and the old comment here predicted exactly this: the
+# message was "safe to name her only because the gate above is hers alone; the day Nate
+# or Tasha lock this door too, it goes back to saying nothing." @gil locks it now.
+blocked_message = "The door is shut and the tap is running. Somebody is in there, and the bathroom is gone until they come out."
 
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"
-description = "The chore list is on the fridge in @gil's handwriting. Three meals, the dishes after each of them, and then the laundry, the bins and the dusting. Five dollars, one a day, and only for the one with today's date against it."
+description = "The table, the hob, the sink, and whatever the last meal left on the side. Three meals a day happen in here and the dishes after each of them, and none of it is written down anywhere."
 image       = "locations/the_kitchen.jpg"
-image_search_queries = ["ordinary family kitchen table morning light", "kitchen fridge notes table chairs"]
+image_search_queries = ["ordinary family kitchen table morning light", "small worn family kitchen sink counter"]
 entry_from  = "the_hall"
 
 [[locations]]
@@ -116,7 +126,7 @@ entry_from  = "the_hall"
 [[locations]]
 id          = "the_garage"
 name        = "The Garage"
-description = "The car, the bins, and the light @gil leaves on. The bins are the only thing on the fridge list that happens out here, and they are the only one that has never been anybody else's."
+description = "The car, the bins, and the light @gil leaves on. The bins are the only bit of the house that happens out here, and they have never once been anybody else's."
 image       = "locations/the_garage.jpg"
 image_search_queries = ["cluttered home garage workbench car night", "garage interior washing machine bins strip light"]
 entry_from  = "the_street"
@@ -142,7 +152,7 @@ name        = "The Strip"
 description = "Downtown, such as it is. A run of shops, half of them open, and the cafe about midway along with its lights on. Forty minutes of your morning to stand here."
 image       = "locations/the_strip.jpg"
 image_search_queries = ["small town main street shopfronts daytime", "downtown strip shops sidewalk morning"]
-navigation_order = ["the_cafe"]
+navigation_order = ["the_cafe", "the_shop"]
 auto_exit   = false
 # ⚠️ NO entry_from, AND auto_exit = false. BOTH HALVES OR NEITHER.
 #
@@ -223,6 +233,30 @@ image       = "locations/the_cafe_toilet.jpg"
 image_search_queries = ["small single cafe restroom mirror sink", "public toilet single room mirror door"]
 entry_from  = "the_cafe"
 
+# --- @gil's shop -------------------------------------------------------------
+# sheets/people/gil_cards.md, 2026-09-23. LO put his work ON THE MAP, over my
+# recommendation to keep it a word. His ten blank weekday hours are now a row here.
+#
+# ⚠️ IT HANGS OFF THE STRIP, AND THAT IS THE WHOLE DESIGN. The cafe is midway along
+# the same run of shops, so ONE bus fare reaches both and no new route, cost or
+# travel canvas exists. Her step dad works two hundred yards from her job, and he
+# was at that bench for twenty years before she walked down that street.
+#
+# ⚠️ NO `costs` BLOCK. README §6.6 — a location's costs is a toll on the ROOM, not
+# the road, and the engine charges it on ANY move in, including back out of a child.
+# The fare lives on the six travel canvases, which is where board.map always put it.
+#
+# ⚠️ HE IS GONE BY HALF FIVE AND NEVER HERE AT A WEEKEND. That is not a rule anybody
+# wrote — it is his own week, and it is what makes the windows narrow.
+
+[[locations]]
+id          = "the_shop"
+name        = "The Shop"
+description = "Two bays, a roller door that is up whatever the weather, and a radio going somewhere behind the noise. Somebody else's car is on the lift and somebody else's is waiting. @gil has worked here longer than you have been alive."
+image       = "locations/the_shop.jpg"
+image_search_queries = ["small two bay auto repair shop interior car lift", "independent garage workshop tools bench daytime"]
+entry_from  = "the_strip"
+
 [[locations]]
 id          = "the_back_room"
 name        = "The Office"
@@ -251,12 +285,16 @@ flag_keys   = []
 # ⚠️ customizable = true means the player can rename him, so every authored line
 # says @gil and never "Gil".
 
-# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Three rows became
-# twelve. THE GARAGE IS THE POINT: five lines across four sheets put him out there
-# late and he had no garage row at all. He goes UP at quarter to nine on the nights
-# her mum is home, which is what the_two_doors.md needs, and comes BACK DOWN at ten,
-# which is what her_week.md and the_house_day.md need. Both pages were true and the
-# build served neither.
+# ⚠️ HIS WEEK IS sheets/people/gil_cards.md, 2026-09-23. Twelve rows became nineteen,
+# and round 3's twelve are still underneath: the garage late, up with her mum at
+# quarter to nine, back down at ten. What block 2 added is the rest of a man — he
+# CHANGES, he WASHES, he reads the paper in the front room before the house is up,
+# and the ten blank hours are now THE SHOP, because LO put his work on the map.
+#
+# ⚠️ FOUR ROWS SHAVED, NOT MOVED. The two kitchen mornings gave their first hour to
+# the front room; both late garage rows end at 23:00 so the bathroom can have him;
+# and the house-shut row starts at 23:45 so the changing row can. Every one of those
+# four is a card's hours, so shortening one silently empties a card.
 #
 # Generated by games/the_balance/process/gen_week.py. Edit the table there.
 
@@ -275,25 +313,60 @@ end_time   = "07:30"
 activity   = "asleep — the one hour a week he gives himself"
 
 [[npcs.schedules]]
-location   = "the_kitchen"
+location   = "the_master_bedroom"
 weekdays   = [0, 1, 2, 3, 4]
 start_time = "06:30"
+end_time   = "06:45"
+activity   = "dressing, out of what he slept in and into what he works in"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:45"
+end_time   = "07:30"
+activity   = "in the chair with the paper and the radio down low, before anybody else is up"
+
+[[npcs.schedules]]
+location   = "the_kitchen"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "07:30"
 end_time   = "08:00"
-activity   = "at the table with the radio on and the paper folded to the part he wants"
+activity   = "at the table, eating, with twenty minutes left of it"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [5, 6]
+start_time = "07:30"
+end_time   = "07:45"
+activity   = "dressing, and for once there is nowhere he has to be"
+
+[[npcs.schedules]]
+location   = "the_front_room"
+weekdays   = [5, 6]
+start_time = "07:45"
+end_time   = "08:30"
+activity   = "in the chair with the paper, in no hurry about any of it"
 
 [[npcs.schedules]]
 location   = "the_kitchen"
 weekdays   = [5, 6]
-start_time = "07:30"
+start_time = "08:30"
 end_time   = "09:00"
-activity   = "at the table with the radio on, in no hurry about it"
+activity   = "at the table with whoever else got up"
+
+[[npcs.schedules]]
+location   = "the_shop"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "17:30"
+activity   = "at the shop, under somebody else's car"
 
 [[npcs.schedules]]
 location   = "the_garage"
 weekdays   = [5, 6]
 start_time = "09:00"
 end_time   = "18:00"
-activity   = "out in the garage with the car, most of the day"
+activity   = "out in the garage with his own car, most of the day"
 
 [[npcs.schedules]]
 location   = "the_kitchen"
@@ -314,7 +387,7 @@ location   = "the_garage"
 weekdays   = [1, 3, 5, 6]
 start_time = "20:00"
 end_time   = "20:45"
-activity   = "out at the car, or the look of being out at the car"
+activity   = "out at the car, which is the part of the day he has been waiting for"
 
 [[npcs.schedules]]
 location   = "the_master_bedroom"
@@ -327,20 +400,34 @@ activity   = "up with her mum, door pushed to"
 location   = "the_garage"
 weekdays   = [1, 3, 5, 6]
 start_time = "22:00"
-end_time   = "23:30"
-activity   = "back down, in the garage with the light on"
+end_time   = "23:00"
+activity   = "back down to it, with the light on over the bench"
 
 [[npcs.schedules]]
 location   = "the_garage"
 weekdays   = [0, 2, 4]
 start_time = "19:00"
+end_time   = "23:00"
+activity   = "in the garage on his own, four hours of it"
+
+[[npcs.schedules]]
+location   = "the_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
 end_time   = "23:30"
-activity   = "in the garage on his own, four and a half hours of it"
+activity   = "in the bathroom with the door locked, washing the day off"
 
 [[npcs.schedules]]
 location   = "the_master_bedroom"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "23:30"
+end_time   = "23:45"
+activity   = "changing, into what he sleeps in"
+
+[[npcs.schedules]]
+location   = "the_master_bedroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:45"
 end_time   = "00:00"
 activity   = "in, and that is the house shut"
 

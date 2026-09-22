@@ -35,6 +35,7 @@ actually build it. If it lands nowhere, we did not simplify the Want — we dele
 | 12 | the three arcs, step by step | block 5 |
 | 13 | the deleted start choice — recorded so it is not re-invented | nobody. Dead |
 | 14 | engine traps | stays in `README.md` |
+| 15 | **@gil reading her attendance** — parked by LO 2026-09-23 | the people step, after his base |
 
 ---
 
@@ -263,3 +264,27 @@ format says is not a pass. Correct — a declared absence, not an oversight.
 - `v2.py:9294` emits a name textbox for every customizable NPC unconditionally. Gil and Nate are
   player-renameable, so **every line of prose about them uses `@gil` / `@nate`, never a typed name.**
   Lynn, Tasha, Owen, Hale and Reyes stay fixed.
+
+## 15 · @gil reading her attendance — PARKED BY LO, 2026-09-23
+
+**LO's words: *"3 dont add it now. Note it down somewhere for later."*** Proposed during the Gil
+base round and deliberately not built. Recorded so it is not re-proposed as if it were new, and not
+quietly built as if it were agreed.
+
+**The gap it closes.** `sheets/systems/college.md:32` is LO's own line — *"if she fails, Gil's money
+was wasted. Nobody has to threaten."* Attendance is a falling meter (`attend_1`, `attend_3`,
+`attend_4`). **Nothing at home reads any of them.** The only three conditions in the game that check
+attendance are campus canvases — `toml_phases/3_activities.toml:2435`, `:2498`, `:2589`. He paid
+$2,400 for those classes and the build never lets him notice she stopped going.
+
+**The shape, when it comes back.** One `[group]` band on whichever Gil card exists by then — the
+morning, or the garage — gated on an attendance trait below 40. **He does not threaten and he does
+not mention the money.** `sheets/people/the_cast.md:13` has him wanting *never to be thanked for the
+tuition*, so the band is him asking something ordinary about the course and letting the quiet sit.
+That is the tuition biting without a word, which is what the college page asked for.
+
+**Cost when built:** no new counter, no new flag, no engine work. One condition and one line.
+
+⚠️ **Adjacent `[group]` blocks merge into one if/elseif chain** — see item 14. If this lands on a
+card that already carries the `fridays_missed` / `home_after_ten` bands, it joins that chain and the
+order decides which one he says.

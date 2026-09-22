@@ -27,9 +27,9 @@ people who have never seen her face. That's why one of them already knows her by
 
 She needs three things: to be **clean**, to be **alone**, and about **an hour**.
 
-At the first build there's one place she can do it — **her own room, with the door shut.** That's
-the same door Gil's rule says stays open when anyone's on the landing, so the stream sits on top of
-a house rule from the very first session. Later releases open other places.
+At the first build there's one place she can do it — **her own room, with the door shut.** The
+door is hers to shut and nobody has told her not to; what makes it a decision is who is downstairs
+while it is shut, not a rule she is breaking. Later releases open other places.
 
 **What it pays is never the same twice.** Every session pays somewhere inside a range, so she can
 have a good night and a night that wasn't worth getting undressed for.

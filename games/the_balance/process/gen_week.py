@@ -372,7 +372,12 @@ CHORES = [
 
 # chores.md: "The bins are only ever hers." Her mum is never on that one.
 NO_MUM = {G}
-PAY, HALF, HOUR = 5, 30, 60
+HALF, HOUR = 30, 60    # HOUR is still the hour she spends sitting with her mum
+
+# ⚠️ NO PAY AND NO LIST, 2026-09-23. LO: "Remove the Chores and payment / And
+# fridge list. Chores are simply available as it is." PAY, HOUR, `chore_paid_today`
+# and the fridays_missed time penalty all came off in the same pass. A chore is now
+# half an hour of her time and nothing else — one variant per chore, not three.
 
 # What she is doing, on the canvas that offers to take it off her.
 #
@@ -424,31 +429,28 @@ MUM_AT = {
 }
 
 ROOMS = {
-    K: dict(cid="chores_kitchen", name="The kitchen list", node="The fridge",
-            description=("The six that happen in here, and the list on the fridge saying which "
-                         "one pays. One paid a day, five dollars, half an hour each."),
+    K: dict(cid="chores_kitchen", name="The kitchen", node="What needs doing",
+            description=("The six that happen in here. Half an hour each, and they are there "
+                         "whether or not anybody has said anything about them."),
             pool=[
-                "Nine lines in @gil's handwriting and a date against one of them. The dated one is worth five dollars and the other eight still have to happen, which is the whole system.",
-                "The list is where it always is, held on with the magnet from a tire place. The date is in a different pen from the rest of it, so it is the only thing on there he has looked at twice.",
-                "Breakfast, dishes, lunch, dishes, dinner, dishes, then laundry and bins and dusting. One of them pays, and the sink does not care which one it is.",
+                "Three meals and the dishes after each of them, and none of it is anybody's job in the sense of being written down. It is just what the room is like when you walk into it.",
+                "The pans from the last thing are still on the side and the next thing is due in an hour. That is the kitchen most of the time, and it is the same kitchen whoever is in it.",
+                "Somebody has to, and there is nobody else in here. Half an hour of it and the room looks like a room again until the next meal.",
             ]),
     B: dict(cid="chores_bathroom", name="The washing", node="The machine",
-            description=("The laundry, in the room the machine is actually in. Half an hour, and "
-                         "it pays if nothing else has today."),
+            description=("The laundry, in the room the machine is actually in. Half an hour."),
             pool=[
                 "The basket by the bath is everybody's and gets emptied by whoever looks at it long enough. The machine is under the window and it takes forty minutes to do its thirty.",
                 "Four people's washing goes into one drum and comes back out needing sorting, and the sorting is the part nobody counts as the chore.",
             ]),
     F: dict(cid="chores_front_room", name="The dusting", node="The shelf",
-            description=("The dusting, in the room it happens in. Half an hour, and it pays if "
-                         "nothing else has today."),
+            description=("The dusting, in the room it happens in. Half an hour."),
             pool=[
                 "The TV is off, so the room is at its most obvious — the shelf, the sill, the tops of the frames nobody looks at until somebody does.",
                 "Half an hour of moving things and setting them back exactly where they were. @gil notices when it has not been done, but he has never once said anything when it has.",
             ]),
     G: dict(cid="chores_garage", name="The bins", node="Round the side",
-            description=("The bins. Hers and nobody else's, in the morning, half an hour — and it "
-                         "pays if nothing else has today."),
+            description=("The bins. Hers and nobody else's, in the morning, half an hour."),
             pool=[
                 "The bins are round the side and the truck comes at eight, so it is you dragging them to the front in whatever you already have on.",
                 "Two of them, and the second one has a wheel that goes its own way. You do it anyway, because the alternative is a week of it getting mentioned.",
@@ -456,22 +458,22 @@ ROOMS = {
 }
 
 CHORES_HEAD = '''# --- THE CHORES · nine of them, each in its own room at its own hour ---------
-# sheets/systems/chores.md, 2026-09-20. The one button on the fridge became four
-# room canvases. "She doesn't do chores from the list; she does each one in its
-# own room." Half an hour each, one paid a day, five dollars.
+# sheets/systems/chores.md. Each chore is done in the room it happens in, in the
+# hours it makes sense in, and it takes half an hour.
 #
-# ⚠️ WHICH ONE PAYS IS PROSE, NOT MACHINERY, AND THAT IS DELIBERATE. The page has
-# Gil dating one line on the list. A condition cannot read the weekday and there is
-# no day counter, so a rotating pointer would take seven canvases to express — and
-# it would buy nothing, because EVERY CHORE COSTS THE SAME HALF HOUR. There is no
-# choice to exploit by picking. So the list says what the page says it says, and
-# the mechanic is the one that was already here: the first chore she does each day
-# is the one that pays, `chore_paid_today` closes it, and [engine.daily_tick]
-# opens it again.
+# ⚠️ THEY PAY NOTHING AND THERE IS NO LIST, 2026-09-23. LO: "Remove the Chores and
+# payment / And fridge list. Chores are simply available as it is." What went: the
+# five dollars, `chore_paid_today`, the dated line on the fridge, the whole
+# first-one-a-day pointer, and the hour-instead-of-half-an-hour penalty that a
+# missed Friday used to put on every chore. What stayed: the chores themselves,
+# their rooms, their windows, and the half hour they cost her.
 #
-# ⚠️ NO max_triggers_per_day AND NO chore_paid_today ON THESE TRIGGERS. Either one
-# shuts the whole room after the first chore of the day, and the kitchen has six.
-# The per-chore `chore_done_*` flags are what stop a chore being done twice.
+# ⚠️ A CHORE IS NOW ONE CHOICE, NOT THREE. The three variants existed only to
+# express paid / paid-while-behind / already-paid. With no money there is one.
+#
+# ⚠️ NO max_triggers_per_day ON THESE TRIGGERS — it shuts the whole room after the
+# first chore of the day, and the kitchen has six. The per-chore `chore_done_*`
+# flags are what stop a chore being done twice.
 #
 # ⚠️ HELPING HER IS A SEPARATE CANVAS, AND THAT IS THE WHOLE POINT OF IT. The first
 # build of this put "Do it with her." on the room canvas behind
@@ -493,16 +495,8 @@ def solo_variants(key, room, verb, start, end):
     base = [done, c_window(start, end)]
     if room not in NO_MUM:
         base.append(c_lynn(room, "is_absent"))
-    unpaid = c_flag("chore_paid_today", "is_false")
-    paid = c_flag("chore_paid_today", "is_true")
-    cash = [f'{{ targetType = "player", trait = "cash", op = "add", value = {PAY} }}']
     set_done = f'{{ targetType = "player", flag = "chore_done_{key}", op = "set" }}'
-    set_paid = '{ targetType = "player", flag = "chore_paid_today", op = "set" }'
-    return [
-        choice(verb, room, HALF, base + [unpaid, c_tight("lt", 1)], cash, [set_done, set_paid]),
-        choice(verb, room, HOUR, base + [unpaid, c_tight("gte", 1)], cash, [set_done, set_paid]),
-        choice(verb, room, HALF, base + [paid], None, [set_done]),
-    ]
+    return [choice(verb, room, HALF, base, None, [set_done])]
 
 
 # ── her mum, on the hours no chore covers — sheets/people/her_mum_cards.md ────
@@ -793,11 +787,6 @@ def build_chores():
                       conditions([c_npc_at("npc_gil", K, "is_present")]).rstrip(), ""]
         parts += ["[[canvases.nodes]]", 'id   = "base"', f'name = "{spec["node"]}"', ""]
         body = "\n".join(parts)
-        if room == K:
-            body += group([c_tight("gte", 1)],
-                          ["Two more lines on the list than there were, and neither of the new "
-                           "ones has a date against it. Neither of them pays, but they are on "
-                           "there, so they get done."])
         body += pool(spec["pool"])
         body += "[canvases.nodes.exit_block]\ntype = \"choices\"\n\n"
         for key, r, verb, start, end in CHORES:
@@ -811,8 +800,8 @@ def build_chores():
     # ── one canvas per chore her mum does, carrying HER hours
     out.append(
         "# --- HER MUM, ON ONE OF THEM ------------------------------------------------\n"
-        "# chores.md: help her (no five dollars, because it is her job), say you'll do it\n"
-        "# (it pays if nothing else has today), or leave her to it. Taking it over sets\n"
+        "# chores.md: help her, say you'll do it, or leave her to it. None of the three\n"
+        "# pays anything — what taking it over buys is her hour. Taking it over sets\n"
         "# the same flag the chore itself sets, which is what drops her row and puts her\n"
         "# in the front room — the `when` on her schedule reads it.\n\n")
 
@@ -849,17 +838,9 @@ def build_chores():
 
 
         set_done = f'{{ targetType = "player", flag = "chore_done_{key}", op = "set" }}'
-        set_paid = '{ targetType = "player", flag = "chore_paid_today", op = "set" }'
-        cash = [f'{{ targetType = "player", trait = "cash", op = "add", value = {PAY} }}']
-        unpaid = c_flag("chore_paid_today", "is_false")
-        paid = c_flag("chore_paid_today", "is_true")
 
         body += choice("Do it with her.", room, HALF, None, None, [set_done])
-        body += choice("Tell her you'll do it.", room, HALF,
-                       [unpaid, c_tight("lt", 1)], cash, [set_done, set_paid])
-        body += choice("Tell her you'll do it.", room, HOUR,
-                       [unpaid, c_tight("gte", 1)], cash, [set_done, set_paid])
-        body += choice("Tell her you'll do it.", room, HALF, [paid], None, [set_done])
+        body += choice("Tell her you'll do it.", room, HALF, None, None, [set_done])
         body += choice("Leave her to it.", room)
         out.append(body)
 
@@ -883,23 +864,31 @@ def build_chores():
 # is on, and an end time is exclusive. Both lessons come off her mum's week.
 
 Q, U, NR, TR = "the_quad", "the_union", "nate_room", "tasha_room"
+SH = "the_shop"          # @gil's work, on the strip — sheets/people/gil_cards.md
 WD, WKND, ALL = [0, 1, 2, 3, 4], [5, 6], [0, 1, 2, 3, 4, 5, 6]
 HOME, SAT, SUN_ = [1, 3, 5, 6], [5], [6]
 DINNER_T = [1, 3, 6]     # Tasha at the table — not Saturday, she is out
 
 GIL_ROWS = [
-    (WD,   "00:00", "06:30", M, "asleep, with the door pushed to"),
-    (WKND, "00:00", "07:30", M, "asleep — the one hour a week he gives himself"),
-    (WD,   "06:30", "08:00", K, "at the table with the radio on and the paper folded to the part he wants"),
-    (WKND, "07:30", "09:00", K, "at the table with the radio on, in no hurry about it"),
-    (WKND, "09:00", "18:00", G, "out in the garage with the car, most of the day"),
-    (ALL,  "18:00", "19:00", K, "back, still in what he went out in"),
-    (HOME, "19:00", "20:00", K, "at the table, with everybody"),
-    (HOME, "20:00", "20:45", G, "out at the car, or the look of being out at the car"),
-    (HOME, "20:45", "22:00", M, "up with her mum, door pushed to"),
-    (HOME, "22:00", "23:30", G, "back down, in the garage with the light on"),
-    (WARD, "19:00", "23:30", G, "in the garage on his own, four and a half hours of it"),
-    (ALL,  "23:30", "00:00", M, "in, and that is the house shut"),
+    (WD,   "00:00", "06:30", M,  "asleep, with the door pushed to"),
+    (WKND, "00:00", "07:30", M,  "asleep — the one hour a week he gives himself"),
+    (WD,   "06:30", "06:45", M,  "dressing, out of what he slept in and into what he works in"),
+    (WD,   "06:45", "07:30", F,  "in the chair with the paper and the radio down low, before anybody else is up"),
+    (WD,   "07:30", "08:00", K,  "at the table, eating, with twenty minutes left of it"),
+    (WKND, "07:30", "07:45", M,  "dressing, and for once there is nowhere he has to be"),
+    (WKND, "07:45", "08:30", F,  "in the chair with the paper, in no hurry about any of it"),
+    (WKND, "08:30", "09:00", K,  "at the table with whoever else got up"),
+    (WD,   "08:00", "17:30", SH, "at the shop, under somebody else's car"),
+    (WKND, "09:00", "18:00", G,  "out in the garage with his own car, most of the day"),
+    (ALL,  "18:00", "19:00", K,  "back, still in what he went out in"),
+    (HOME, "19:00", "20:00", K,  "at the table, with everybody"),
+    (HOME, "20:00", "20:45", G,  "out at the car, which is the part of the day he has been waiting for"),
+    (HOME, "20:45", "22:00", M,  "up with her mum, door pushed to"),
+    (HOME, "22:00", "23:00", G,  "back down to it, with the light on over the bench"),
+    (WARD, "19:00", "23:00", G,  "in the garage on his own, four hours of it"),
+    (ALL,  "23:00", "23:30", B,  "in the bathroom with the door locked, washing the day off"),
+    (ALL,  "23:30", "23:45", M,  "changing, into what he sleeps in"),
+    (ALL,  "23:45", "00:00", M,  "in, and that is the house shut"),
 ]
 
 NATE_ROWS = [
@@ -931,12 +920,16 @@ TASHA_ROWS = [
 
 THREE = [
     ("npc_gil", GIL_ROWS,
-     "# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Three rows became\n"
-     "# twelve. THE GARAGE IS THE POINT: five lines across four sheets put him out there\n"
-     "# late and he had no garage row at all. He goes UP at quarter to nine on the nights\n"
-     "# her mum is home, which is what the_two_doors.md needs, and comes BACK DOWN at ten,\n"
-     "# which is what her_week.md and the_house_day.md need. Both pages were true and the\n"
-     "# build served neither.\n"),
+     "# ⚠️ HIS WEEK IS sheets/people/gil_cards.md, 2026-09-23. Twelve rows became nineteen,\n"
+     "# and round 3's twelve are still underneath: the garage late, up with her mum at\n"
+     "# quarter to nine, back down at ten. What block 2 added is the rest of a man — he\n"
+     "# CHANGES, he WASHES, he reads the paper in the front room before the house is up,\n"
+     "# and the ten blank hours are now THE SHOP, because LO put his work on the map.\n"
+     "#\n"
+     "# ⚠️ FOUR ROWS SHAVED, NOT MOVED. The two kitchen mornings gave their first hour to\n"
+     "# the front room; both late garage rows end at 23:00 so the bathroom can have him;\n"
+     "# and the house-shut row starts at 23:45 so the changing row can. Every one of those\n"
+     "# four is a card's hours, so shortening one silently empties a card.\n"),
     ("npc_nate", NATE_ROWS,
      "# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Five rows became\n"
      "# thirteen. THE CAMPUS ROWS ARE THE POINT: the_cast.md:29 gives him a move that only\n"
@@ -988,7 +981,7 @@ JOBS = {
         [f'[[npcs]]\nid          = "{nxt}"'],
         build_person(rows, head)) for (npc, rows, head), first, nxt in zip(
             THREE,
-            ['[[npcs.schedules]]\nlocation   = "the_kitchen"\nweekdays   = [0, 1, 2, 3, 4]\nstart_time = "06:30"',
+            ['# ⚠️ HIS WEEK IS sheets/people/the_other_three.md, 2026-09-22. Three rows became',
              '[[npcs.schedules]]\nlocation   = "the_bathroom"\nweekdays   = [0, 1, 2, 3, 4]\nstart_time = "07:00"',
              '[[npcs.schedules]]\nlocation   = "tasha_room"\nweekdays   = [0, 1, 2, 3, 4, 5, 6]\nstart_time = "16:00"'],
             ["npc_owen", "npc_tasha", "npc_lynn"])],

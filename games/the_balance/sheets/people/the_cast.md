@@ -13,8 +13,11 @@
 
 - **Wants** his house run his way, and to never be thanked for the tuition. He's strict, he doesn't
   drink, and he has never once mentioned what he paid.
-- **Found** in the kitchen until eight, back by six, in the garage late.
-- **Gives** chore money, lifts, and the debt itself.
+- **Works** as a mechanic, at a two-bay shop on the strip. Eight until half five, never a weekend.
+  The car in the garage at home is his own, and it is a project he will never finish.
+- **Found** in the front room with the paper before the house is up, the kitchen at half seven and
+  again at six, the shop all day, and the garage every evening and all weekend.
+- **Gives** lifts, and the debt itself. **Chores pay nothing now** — `systems/chores.md`.
 - **Says no by** saying nothing and tightening the rules.
 - **He never opens a step.** Every step with him is one she opens. There is no move he can make on
   his own, which is the whole reason the game can have him at the kitchen table.

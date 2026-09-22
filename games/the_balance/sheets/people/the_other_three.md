@@ -33,6 +33,11 @@ behind them. `BASE.md:106`: a sleeping person's room still has their card.
 
 Their row counts: **Gil 3, Nate 5, Tasha 4.** Her mum has sixty-seven.
 
+> ⚠️ **Gil's twelve became nineteen on 2026-09-23** — `people/gil_cards.md`, block 2. This page's
+> twelve are still underneath it; what was added is changing, washing, the front room before the
+> house is up, and the shop. **Nate's thirteen and Tasha's eight are unchanged and both still have
+> dead rows.**
+
 ---
 
 ## Gil
@@ -46,7 +51,7 @@ Their row counts: **Gil 3, Nate 5, Tasha 4.** Her mum has sixty-seven.
 | 08:00–18:00 | — | **out. No row** |
 | 18:00–19:00 | kitchen | back, still in what he went out in |
 | 19:00–20:00 | kitchen | at the table, on the nights her mum is home |
-| 20:00–20:45 | the garage | the car, or the look of doing the car |
+| 20:00–20:45 | the garage | the car, which is the part of the day he has been waiting for |
 | 20:45–22:00 | master bedroom | **the nights her mum is home** — up with her, door pushed to |
 | 22:00–23:30 | the garage | back down. This is the hour your pages mean by *late* |
 | 23:30–00:00 | master bedroom | in, and that is the house shut |

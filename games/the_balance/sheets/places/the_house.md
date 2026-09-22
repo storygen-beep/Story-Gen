@@ -26,25 +26,33 @@
 **The way out** is the front door onto her street, and the bus stop on it. The bus costs money and
 forty minutes. A lift from Gil is a favour.
 
-## The chore list on the fridge
+## What he does all day
+
+**He is a mechanic**, at a two-bay shop on the strip — the same run of shops the cafe is on. Eight
+until half five, Monday to Friday, never a weekend. *(LO, 2026-09-23.)*
+
+**The garage here is not the shop.** It holds one old car he has been rebuilding for years, and that
+is why he is out there every evening and all weekend and it is still not done.
+
+A mechanic's wage and three nights a week on a ward is not a comfortable house — **and he still
+found the $2,400 and has never mentioned it.**
+
+## The chores
 
 Breakfast · the breakfast dishes · lunch · the lunch dishes · dinner · the dinner dishes ·
 laundry · bins · dusting.
 
-**$5 each, one paid a day**, and Gil only pays for what's on the list that day. About $35 a week if
-she never misses — real money in week one, pocket change by week four. That's the point of it.
+**None of them pays anything**, and there is no list on the fridge. *LO, 2026-09-23: "Chores are
+simply available as it is."* They are there because the house is there.
 
-**A chore takes half an hour.** So the paid one is $10 an hour, against the cafe's $9 — the money
-is not why chores are bad. **The time is.** Half an hour in the morning is the bus she doesn't make,
-and *chores first* means the unpaid ones still have to be done or he notices. **She can do four and
-be paid for one.**
+**A chore takes half an hour**, and the half hour is the entire cost. Half an hour in the morning is
+the bus she doesn't make. *Chores first* means they get done before she goes anywhere, or he
+notices — and he notices without ever having written any of it down.
 
 ## His rules, as things in the house, not sentences
 
 - **In by ten.** After that the front door is a thing she has to come through, and he's up.
-- **Her door stays open when someone's on the landing.** So closing it is already a small decision,
-  and it's the same door the stream needs shut.
-- **Chores first.** The list gets done before she goes anywhere, or he notices.
+- **Chores first.** They get done before she goes anywhere, or he notices.
 
 ## What the house is like in the morning
 

@@ -249,7 +249,6 @@ hidden = true
 
 [engine.daily_tick]
 flagEffects = [
-  { targetType = "player", flag = "chore_paid_today", op = "unset" },
   # chores.md: "Done today, one per chore… Both reset overnight. Nothing here
   # climbs." Nine chores, nine flags, and they are what stop a chore being done
   # twice in a day — the room canvases carry no max_triggers_per_day, because one
@@ -268,9 +267,9 @@ flagEffects = [
   { targetType = "player", flag = "chore_done_bins", op = "unset" },
   # PARKED 2026-09-19 (the climbs) — the jacket_off reset went with dare two.
   # Her door is open again by morning, for the same reason the jacket is back on:
-  # the rule is @gil's and the house resets to it. Shutting it is a decision she
-  # makes fresh every day, which is the only thing that stops one five-minute
-  # click buying every hour of the rest of the game.
+  # a house wakes up in its ordinary state. Shutting it is a decision she makes
+  # fresh every day, which is the only thing that stops one five-minute click
+  # buying every hour of the rest of the game.
   { targetType = "player", flag = "door_locked", op = "unset" },
   { targetType = "player", flag = "streamed_today", op = "unset" },
   # ⚠️ THE HOUR WITH A FRIEND IS CAPPED HERE, NOT ON THE TRIGGER. A
@@ -286,6 +285,20 @@ flagEffects = [
   # taking them off outright made gates.py "the climb is paid for" fail, because
   # `crowd_standing` gates content at 10 and became free to reach.
   { targetType = "player", flag = "paige_today", op = "unset" },
+  # @gil's three, sheets/people/gil_cards.md 2026-09-23. Same rule as Cara and Sam:
+  # the cap is a flag on the CHOICE, never max_triggers_per_day on a trigger that
+  # carries an `npc` — that removes the person from a room his own timetable still
+  # has him in. `gil_today` is sitting down with him (one act a day across the front
+  # room AND the kitchen, because two in one morning is a thing and he would notice
+  # it was a thing); `gil_garage_today` is the hour out at the car; `friday_settled`
+  # is what stops the kitchen and the garage collecting the same $150 twice.
+  { targetType = "player", flag = "gil_today", op = "unset" },
+  { targetType = "player", flag = "gil_garage_today", op = "unset" },
+  { targetType = "player", flag = "friday_settled", op = "unset" },
+  # ⚠️ `lift_tomorrow` IS DELIBERATELY NOT HERE. It is set in the garage one evening
+  # and spent in the kitchen the NEXT morning, so an overnight clear would make it
+  # unspendable. The two morning-lift choices unset it when they fire. An unclaimed
+  # lift banks until she takes it — declared, not an oversight.
   # PARKED 2026-09-19 (the climbs) — the bree_today reset: both of its setters were climb
   # choices, and a cap cleared but never set is the defect engine.md §28.2 names.
 ]
@@ -324,6 +337,68 @@ conditions  = { version = "1.0", logic = "AND", items = [
   { type = "npc_at_location", location_id = "the_bathroom",       operator = "is_absent" },
   { type = "npc_at_location", location_id = "nate_room",          operator = "is_absent" },
   { type = "npc_at_location", location_id = "tasha_room",         operator = "is_absent" },
+] }
+
+# --- who is in the bath, as four named gates ---------------------------------
+# sheets/people/gil_cards.md, 2026-09-23. The bathroom's entry_conditions used to be a
+# flat `logic = "OR"` stating when the door was OPEN, because `present AND (w1 OR w2 OR
+# w3)` cannot be written in one items list and its complement can. That held for one
+# person and broke the day @gil got a bath row: a second person needs a second
+# `is_absent`, and under OR a second absence OPENS the door for the first. At 23:15 her
+# mum is absent, the OR was satisfied, and his door swung.
+#
+# ⚠️ THE FIX IS FOUR HELPERS AND AN `AND` OF FOUR NEGATIONS — NOT nesting. The RUNTIME
+# would nest: v2.py:4540-4554 calls triggerConditionsSatisfied on the helper's own
+# conditions, which dispatches `type = "stage"` again. THE VALIDATOR REFUSES BOTH.
+# template_import.py:5634-5641 hard-fails a helper containing a `type = "stage"` item
+# ("cycle-free"), and :5643-5655 hard-fails `logic = "OR"` in a helper at all. So a
+# helper is AND-of-primitives, always, and a disjunction is expressed by SPLITTING IT
+# INTO ONE HELPER PER ARM and negating each at the reader. Checked in the importer
+# before it was written, not after the build failed.
+#
+# ⚠️ WHY HER THREE ARE SEPARATE AND HIS IS ONE. Her bath windows differ by day and
+# `time_of_day` cannot read a weekday, so each window is paired with her presence and
+# the presence does the day-picking. His is one window, every night, so one helper.
+#
+# ⚠️ HER WINDOWS, NOT HER PRESENCE. `mum_laundry` is a card inside that room and she is
+# in there at 13:30, 15:45 and 09:30 on Sunday. A bare `npc_lynn is_present` would lock
+# the door on her own card. These three are her BATHS and nothing else — they come off
+# MUM_ROWS in process/gen_week.py and drift from it if that table moves.
+#
+# ⚠️ A RENAME IS SILENT. v2.py:4544 pushes FALSE for a helper it cannot find and warns
+# only in dev mode — so a mistyped name here reads as "nobody is bathing" and the lock
+# quietly stops existing.
+
+[[engine.stage_helpers]]
+name        = "lynn_bath_morning"
+description = "Her mum is in the bath at half eight, washing a ward night off. Tue, Thu, Sat."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+  { type = "time_of_day", start_time = "08:30", end_time = "09:00" },
+] }
+
+[[engine.stage_helpers]]
+name        = "lynn_bath_ward"
+description = "Her mum is in the bath at six, before a ward night. Mon, Wed, Fri."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+  { type = "time_of_day", start_time = "18:00", end_time = "18:30" },
+] }
+
+[[engine.stage_helpers]]
+name        = "lynn_bath_sunday"
+description = "Her mum is in the bath on a Sunday night, the long one."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_present" },
+  { type = "time_of_day", start_time = "20:30", end_time = "21:30" },
+] }
+
+[[engine.stage_helpers]]
+name        = "gil_bathing"
+description = "Her step dad is in the bathroom at eleven, washing the day off. Every night of the week."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_gil", location_id = "the_bathroom", operator = "is_present" },
+  { type = "time_of_day", start_time = "23:00", end_time = "23:30" },
 ] }
 
 # --- guidance ----------------------------------------------------------------
