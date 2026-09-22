@@ -45,6 +45,34 @@ image       = "locations/the_bathroom.jpg"
 image_search_queries = ["small family bathroom shower mirror sink", "ordinary bathroom interior tiled shower"]
 entry_from  = "the_hall"
 
+# ⚠️ THE LOCK ACTUALLY WORKS NOW, 2026-09-22. The description has always said so and
+# canvas_opening promises it on the first screen of the game — "the bathroom is gone
+# until whoever is in there comes out" — and until today the player could walk in on
+# her mum in the bath and be offered "Get in the shower".
+#
+# ⚠️ READ THE LOGIC. It is OR, and it is the OPEN condition, not the locked one: the
+# door opens if she is not in there, OR if the clock is outside all three of her bath
+# windows. Only when BOTH fail — she is in that room AND it is a bath hour — is it
+# shut. That shape is forced: conditions are ONE FLAT LEVEL, so `present AND (w1 OR w2
+# OR w3)` cannot be written, and its complement can.
+#
+# ⚠️ AND IT IS WHY THE WINDOWS ARE HERE AT ALL. `npc_lynn is_absent` on its own would
+# lock the door through her LAUNDRY hours too — 13:30, 15:45 and 09:30 Sunday — and
+# mum_laundry is a card inside this room. The three complement windows below let her
+# washing hours through and shut only on the bath.
+entry_conditions = { version = "1.0", logic = "OR", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_bathroom", operator = "is_absent" },
+  { type = "time_of_day", start_time = "00:00", end_time = "08:30" },
+  { type = "time_of_day", start_time = "09:00", end_time = "18:00" },
+  { type = "time_of_day", start_time = "18:30", end_time = "20:30" },
+  { type = "time_of_day", start_time = "21:30", end_time = "00:00" },
+] }
+# ⚠️ IT NAMES HER. This is read on the landing with nothing in front of it, so a bare
+# "hers" has no owner — readable.py caught it the day it was written. The message is
+# safe to name her only because the gate above is hers alone; the day Nate or Tasha
+# lock this door too, it goes back to saying nothing.
+blocked_message = "The door is shut and the tap is running. Your mum is in there, and it is the half hour of the day that is hers."
+
 [[locations]]
 id          = "the_kitchen"
 name        = "The Kitchen"

@@ -592,8 +592,19 @@ STRIP_POOL = [
 
 def card_of(loc, activity):
     """Which card covers a row of hers that no chore card does. None = not yet."""
-    if loc == M or "in the bath" in activity:
-        return None            # behind a shut door. Her ladder, block 5.
+    if "in the bath" in activity:
+        # NOT A CARD — a LOCKED DOOR. the_house.md:20 and the bathroom's own
+        # description both say the lock works, and canvas_opening already promises it:
+        # "the bathroom is gone until whoever is in there comes out". See BATH_LOCK.
+        return None
+    if loc == M:
+        # ⚠️ "in bed" IS TESTED FIRST. Her Sunday row reads "in bed, not asleep yet",
+        # which contains the word asleep and was filed as sleeping until it was counted.
+        if "in bed" in activity:
+            return "in_bed"
+        if "asleep" in activity:
+            return "asleep"
+        return "changing"
     if loc == S:
         return "strip"
     if loc == K:
@@ -603,6 +614,65 @@ def card_of(loc, activity):
     if "one afternoon she gets" in activity:
         return "sunday"
     return "sat_down"
+
+
+# ── the master bedroom, BASE ONLY — sheets/people/her_mum_cards.md, 2026-09-22 ──
+#
+# ⚠️ THE CLIMB IS NOT HERE AND THAT IS DELIBERATE. LO: "thats the climb. But we can
+# build the base." Walking in on your mum asleep, changing, or in bed is a room you
+# can already reach — no lock, no entry gate, the door on the landing at every one of
+# these hours and the nav card printing her name. Until 2026-09-22 you walked in and
+# got NOTHING. These three give the room a floor. What a rung on it looks like is
+# block 5 and none of it is decided.
+
+ASLEEP_POOL = [
+    "She is asleep on her side with the curtains shut and the landing light off, and she does not move when the door goes. She sleeps like somebody who has learned to take it wherever it is.",
+    "The room is dark and warm and she is under the covers with one arm out. Whatever woke you did not wake her.",
+    "Asleep, and the alarm on her side is set for a time that is not morning. You have seen it go off from your own room.",
+]
+
+# the_two_doors.md: "Her mum's shift times are on the wall in that bedroom. She has
+# read them a hundred times for ordinary reasons. Now they are a timetable for
+# something else." The location description already puts them by the door.
+WALL = [
+    "Her shifts are on the wall by the door in her own handwriting, Mondays and Wednesdays and Fridays ringed, and the same four words under each one. You have read it a hundred times without reading it.",
+    "The card by the door has her nights on it. It has been there since before you moved in and nobody has ever needed to change it.",
+]
+
+CHANGING_AT = {
+    "06:45": "She is half into the clothes she does the house in, back to the door, and she does not stop when you come in. Neither of you says anything about it.",
+    "07:45": "Sunday, so she is dressing slowly for once, and the door was not properly shut because on a Sunday nobody is going anywhere.",
+    "08:30": "The coat and the shoes she only wears out of the house. She is doing the buttons in front of the mirror and checking the list in her other hand at the same time.",
+    "09:00": "She is coming out of the uniform and into nightwear at nine in the morning with the light still on, which is what a night shift does to a day.",
+    "11:00": "Back out of the coat and into home clothes, with the shopping still in the hall where she put it down.",
+    "15:00": "Three in the afternoon and she is getting up, into home clothes, with the rest of the day to do in what is left of it.",
+    "18:30": "She is getting into the ward uniform in front of the wardrobe, and the whole thing takes her four minutes because she has done it a thousand times.",
+    "20:30": "Nightwear, the lamp already on, the door pushed to but not shut. She goes to bed while the house is still awake because she has to.",
+    "21:30": "Sunday night. She is changing for bed with the TV still going downstairs, an hour before anybody else will think about it.",
+}
+
+IN_BED_POOL = [
+    "She is in bed with the lamp on and the door not quite shut, not asleep yet, with the book she has been on for a month face down beside her.",
+    "The lamp is on and she is propped up against the headboard with her eyes shut, which is not the same as asleep and she would tell you so.",
+]
+
+MUM_CARDS.update({
+    "asleep": dict(
+        cid="mum_asleep", room=M, name="Your mum, asleep",
+        description=("Six rows. She is asleep and the room is reachable — it always was. The "
+                     "base: the room, her in it, and the shifts on the wall by the door."),
+        node="The room, dark"),
+    "changing": dict(
+        cid="mum_changing", room=M, name="Your mum, changing",
+        description=("Nine rows and nine different moments — into house clothes, into the coat "
+                     "she goes out in, into the ward uniform, into nightwear. Base only."),
+        node="The wrong moment"),
+    "in_bed": dict(
+        cid="mum_in_bed", room=M, name="Your mum, in bed",
+        description=("Two rows. The lamp is on and the door is not quite shut and she is not "
+                     "asleep yet. The one hour in that room she can actually talk."),
+        node="The lamp on"),
+})
 
 
 def card_windows():
@@ -645,13 +715,18 @@ def build_mum_cards():
         parts += ["[[canvases.nodes]]", 'id   = "base"', f'name = "{spec["node"]}"', ""]
         body = "\n".join(parts)
 
-        if key == "eating":
+        if key in ("eating", "changing"):
+            table = EATING_AT if key == "eating" else CHANGING_AT
             for start, _e in sorted({(s, e) for _w, s, e in wins[key]}):
                 end = next(e for _w, s, e in wins[key] if s == start)
-                body += group([c_window(start, end)], [EATING_AT[start]])
+                body += group([c_window(start, end)], [table[start]])
         elif key == "sat_down":
             for (bs, be), paras in SAT_BANDS:
                 body += group([c_window(bs, be)], paras)
+        elif key == "asleep":
+            body += pool(ASLEEP_POOL)
+        elif key == "in_bed":
+            body += pool(IN_BED_POOL)
         else:
             body += pool(SUNDAY_POOL if key == "sunday" else STRIP_POOL)
 
@@ -668,9 +743,35 @@ def build_mum_cards():
         elif key == "strip":
             body += choice("Walk round the shops with her.", room, minutes)
             body += choice("Say hello and let her get on.", room, 5)
+        elif key == "asleep":
+            # ⚠️ THE ONE SECOND NODE IN HER WHOLE SET, and it is here because the choice
+            # would otherwise show nothing. the_two_doors.md: "Her mum's shift times are on
+            # the wall in that bedroom. She has read them a hundred times for ordinary
+            # reasons. Now they are a timetable for something else." A card that offers to
+            # read the wall and then does not print it is a dead button.
+            body += ("[[canvases.nodes.exit_block.choices]]\n"
+                     'text       = "Read the shifts on the wall."\n'
+                     'targetType = "node"\n'
+                     f'nodeId     = "{spec["cid"]}.wall"\n'
+                     "time_progression_minutes = 5\n\n")
+            body += choice("Stand there a minute.", room, 5)
+        elif key == "changing":
+            body += choice("Say sorry and go.", room, 2)
+            body += choice("Wait for her to finish.", room, HALF)
+        elif key == "in_bed":
+            body += choice("Say goodnight.", room, 5)
         else:
             body += choice("Sit down with her.", room, minutes)
         body += choice("Leave her to it.", room)
+        if key == "asleep":
+            body += ("[[canvases.nodes]]\n" 'id   = "wall"\n' 'name = "Her shifts"\n\n')
+            body += pool(WALL)
+            body += ('[canvases.nodes.exit_block]\n' 'type = "location"\n'
+                     'text = "Go back out."\n\n'
+                     "[canvases.nodes.exit_block.config]\n"
+                     'destinationType          = "specific"\n'
+                     f'locationId               = "{room}"\n'
+                     "time_progression_minutes = 2\n\n")
         out.append(body)
     return "".join(out).rstrip() + "\n"
 

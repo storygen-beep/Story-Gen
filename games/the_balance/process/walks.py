@@ -531,6 +531,44 @@ def _mum(page, rep):
               f"cash {before} -> {cash(page)}")
     rep.check("but it is still done", flags(page).get("chore_done_dusting") is True)
 
+    # ── the bathroom lock. canvas_opening promises it on the first screen of the game —
+    # "the bathroom is gone until whoever is in there comes out" — and for eight slices
+    # the player could walk in on her in the bath and be offered "Get in the shower".
+    # ⚠️ THE LAUNDRY HOURS MUST STAY OPEN. mum_laundry is a card inside that room, so a
+    # plain `npc_lynn is_absent` gate would have killed it. Both halves are checked.
+    for day, hour, minute, shut, why in (
+            ("Tuesday",  8, 45, True,  "she is in the bath off the ward"),
+            ("Monday",  18, 15, True,  "her half hour"),
+            ("Sunday",  20, 45, True,  "Sunday night"),
+            ("Monday",  13, 45, False, "her LAUNDRY hour — mum_laundry lives in there"),
+            ("Sunday",  10,  0, False, "the big wash"),
+            ("Monday",   8, 45, False, "a bath hour on the clock, but she is out on the strip")):
+        set_time(page, day, hour, minute)
+        stand_at(page, "the_hall")
+        locked = not page.evaluate("() => SugarCube.setup.navDestUnlocked('the_bathroom')")
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — the bathroom is "
+                  + ("SHUT" if shut else "open") + f" ({why})",
+                  locked is shut, f"locked={locked}")
+
+    # ── the master bedroom is reachable at every hour and now has a floor
+    clear_chores(page)
+    for day, hour, minute, cid in (("Tuesday", 12,  0, "mum_asleep"),
+                                   ("Monday",  18, 35, "mum_changing"),
+                                   ("Tuesday", 20, 50, "mum_in_bed")):
+        set_time(page, day, hour, minute)
+        stand_at(page, "the_master_bedroom")
+        html = page.evaluate("() => SugarCube.setup.renderNpcPortraits('the_master_bedroom') || ''")
+        got = re.search(r'data-passage="Canvas_([a-z_]+)_Node', html)
+        got = got.group(1) if got else None
+        rep.check(f"{day[:3]} {hour:02d}:{minute:02d} — her room draws {cid}", got == cid, str(got))
+
+    # the wall is the only second node in her whole set, and it has to print something
+    play(page, "mum_asleep")
+    set_time(page, "Tuesday", 12, 0)
+    click(page, "Read the shifts on the wall")
+    rep.check("reading the wall prints her shifts", "shift" in body(page).lower()
+              or "nights" in body(page).lower(), body(page)[:120])
+
     # ── and every one of her hours is HER, not a line of text
     # ⚠️ THE SECOND THING THIS BUILD SHIPPED WRONG. All eight of her canvases went in
     # without `npc` on the trigger, so v2.py:4953 dropped them out of the portrait

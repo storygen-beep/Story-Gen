@@ -24,16 +24,21 @@ conditions. The dusting card is gated on the dusting *not* being done, so in its
 windows it cannot be the card for the row that only exists once it *is* — she sits in the front
 room and nothing is there. Three more rows than it looked.
 
-The 47 are eight cards. Four of them are ordinary — she's up, dressed, and you can walk over and
-talk to her. **This page is those four.** The other four are behind a shut door — asleep, changing,
-in the bath — and every one of them is her ladder, which is block 5. They wait.
+The 47 are eight cards. **Seven are built and the bath is a locked door instead.**
+
+Four are ordinary — she's up, dressed, and you walk over and talk to her. Three more are the room
+you were already able to walk into: **asleep · changing · in bed with the lamp on.** Those three
+are **base only** — you are in the room, something happens, you leave. **No rung.** What a rung on
+them looks like is the climb, and that is still block 5.
 
 | | cards | rows |
 |---|---|---|
-| **On this page** | 4 | **28** |
-| Behind a shut door — block 5 | 4 | 19 |
+| **Ordinary — she is up and about** | 4 | **28** |
+| **Her room, base only** | 3 | **16** |
+| **The bath — a locked door, not a card** | — | 3 |
+| | **7 + a lock** | **47** |
 
-## The four
+## The seven
 
 | card | where | rows | when |
 |---|---|---|---|
@@ -41,6 +46,10 @@ in the bath — and every one of them is her ladder, which is block 5. They wait
 | **Sat down** | front room | 19 | whenever the player has done the chore she'd have been on |
 | **Sunday afternoon** | front room | 1 | Sunday, half one to six |
 | **Out on the strip** | the strip | 1 | Monday, Wednesday, Friday, nine to eleven |
+| **Asleep** | master bedroom | 5 | overnight, the morning off the ward, the nap before a ward night |
+| **Changing** | master bedroom | 9 | nine different moments, each at its own hour |
+| **In bed, lamp on** | master bedroom | 2 | Tue/Thu/Sat from quarter to nine, Sunday from quarter to ten |
+| **In the bath** | bathroom | 3 | **the door is locked. That is the card** |
 
 ---
 
@@ -140,6 +149,31 @@ Two things make it worth a card:
 
 ---
 
+## Her room, and the bath
+
+**The player could always walk in.** No lock, no entry condition, the door on the landing at every
+one of those hours and the nav card printing her name — and until now you walked in and got
+**nothing at all**. Worse, at quarter to nine on a Tuesday the bathroom offered you *"Get in the
+shower"* while she was in the bath.
+
+**Asleep** — five rows. The room, her in it, and **the shifts on the wall by the door**, which
+`the_two_doors.md` already calls *"a timetable for something else."* Reading them is the one thing
+in that room she has given her daughter a reason to look at. *Read the shifts · stand there a minute
+· leave.*
+
+**Changing** — nine rows and nine different moments, each at its own hour: into the clothes she does
+the house in, into the coat she goes out in, back into home clothes, into the ward uniform, into
+nightwear. *Say sorry and go · wait for her to finish · leave.*
+
+**In bed, lamp on** — two rows. Door not quite shut, not asleep yet. **The one hour in that room she
+can actually talk.** *Say goodnight · leave.*
+
+**In the bath — the door is locked, and that is the answer.** `the_house.md:20` and the room's own
+description both say the lock works, and the opening screen of the game already promises it: *"the
+bathroom is gone until whoever is in there comes out."* Her three baths shut it. **Her three laundry
+hours do not** — `mum_laundry` is a card inside that room and a plain "she's in there" gate would
+have killed it.
+
 ## What they pay
 
 **Nothing.**
@@ -167,8 +201,8 @@ words on the third Tuesday.
 
 ## What this page does not decide
 
-Her four cards behind a shut door — asleep, changing, in the bath. Nineteen rows, and all of them
-are her ladder, which is block 5 · whether sitting with her counts toward anything. Her mum has a
+**Any rung on any of this.** The three room cards are a floor — you are there, and that is all.
+How far the room goes is the climb and none of it is decided · whether sitting with her counts toward anything. Her mum has a
 number in the game that has never moved, and my lean is to leave it alone until block 5 needs it ·
 the dinner card, which already covers her seven o'clock hour and belongs to the whole house rather
 than to her · what any of this says word for word, which is written when it's built · the same rule
@@ -192,7 +226,8 @@ of anything on this one:
 | `toml_phases/3_activities.toml` | her eight chore cards, one paragraph each | three each, pooled |
 | `toml_phases/3_activities.toml` | nothing at her other twenty-eight hours | `mum_eating` · `mum_sat_down` · `mum_sunday` · `mum_strip`, all four her portrait |
 | `process/gen_week.py` | `build_chores` wrote her cards off one table of hours | the four go in beside them, off the same table, through `mum_rows_expanded()` |
-| `process/walks.py` | nothing checked the front room | the four cards, plus the dusting collision in both states |
+| `process/walks.py` | nothing checked the front room | the seven cards, the dusting collision in both states, and the bathroom lock on the bath and off it on the laundry |
+| `toml_phases/1_metadata_and_locations.toml` | the bathroom had no lock | `entry_conditions` + `blocked_message` — **OR logic, because it states when the door is OPEN** |
 
 **Still open:**
 
