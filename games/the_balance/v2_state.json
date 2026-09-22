@@ -554,6 +554,10 @@
     {
       "at": "build",
       "note": "STANDING RULE — THE AGENT NEVER RUNS A MEDIA HARVEST, 2026-09-22. LO: \"ignore media harvest completely make it a rule. Reason is until we define media blocks properly media harvest run when i want and that can fill it up.\" No find-media, no clips, no images, no adding or pruning a media file on the agent's own initiative — not as part of a build and not as a finishing touch. A harvest before the blocks are defined fills the game with files chosen against a spec that does not exist. The agent names the gap and moves on. lynn.jpg is declared and has never been copied and this game has no media folder at all: that is the CURRENT STATE and it is correct, not a defect. Written into process/README.md §0c. A direct request from LO overrides it; the rule governs initiative. PARKED WITH IT, at LO's word: a second beat on her thirteen one-screen cards (noted, not worked on) and a random event in her long hours (later)."
+    },
+    {
+      "at": "build",
+      "note": "THE BALANCE SHIPS THE DEV BUILD, 2026-09-22. LO: \"this is used only by me for testing only nothing else. So deploy the dev and debug in the same one.\" games/the_balance/output/index.html is now built with --dev --debug and committed, so the GitHub Pages copy carries CanvasReviewList, the 56 CanvasReview_* passages and the devJumps sidebar panel. THIS OVERRIDES efad410, the repo-wide rule that a --dev --debug build never goes in output/ because output/ is what the public site serves — the waiver was given in the open, after LO was told the review list and the jump panel would be readable by anyone with the URL, and it covers THIS GAME ONLY. The portal already files The Balance under \"Dev / test builds\" in games-data.js, so there is no player to protect from the debug furniture. A fresh session must not rebuild output/ clean as a cleanup: that is a regression and it shows as a 131 KB shrink and 58 missing passages. Written into process/README.md §0d, which also carries the build line. It reverses the day this game has a player who is not LO."
     }
   ],
   "board": {

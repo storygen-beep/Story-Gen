@@ -209,6 +209,40 @@ fix.
 **The one thing that is not covered:** if LO asks for media directly, that is an instruction and it
 overrides this. The rule is about the agent deciding on its own.
 
+## 0d · THIS GAME SHIPS THE DEV BUILD. That is deliberate.
+
+**Standing rule, LO, 2026-09-22: *"this is used only by me for testing only nothing else. So deploy
+the dev and debug in the same one."***
+
+`games/the_balance/output/index.html` is built with **`--dev --debug`** and always has been since
+this line was written. It carries the 56 `CanvasReview_*` passages, `CanvasReviewList`, and the
+`devJumps` panel in the sidebar. That build is committed and served from GitHub Pages at
+`https://storygen-beep.github.io/Story-Gen/games/the_balance/output/index.html`.
+
+**The build line for this game:**
+
+```
+venv/bin/python scripts/merge_toml_phases.py games/the_balance
+venv/bin/python manage.py package_from_toml \
+  --file games/the_balance/toml_phases/7_final_game.toml \
+  --output games/the_balance/output --gen-version v2 --dev --debug
+```
+
+**Why this is not the accident it looks like.** Commit `efad410` added `games/*/output_dev/` to
+`.gitignore` and set the repo-wide rule that a `--dev --debug` build never goes in `output/`, because
+`output/` is what the public Pages site serves. That rule stands for every other game. LO waived it
+here, in the open, after being told the canvas-review list and the jump panel would be readable by
+anyone with the URL. The Balance is his own test build — the portal already files it under **Dev /
+test builds** in `games-data.js` — so there is no player to protect from the debug furniture.
+
+**What a fresh session must not do.** Do not "fix" this by rebuilding `output/` clean. A build here
+that drops `--dev --debug` is a regression, not a cleanup, and it will show up as a 131 KB shrink and
+58 vanished passages. `games/the_balance/output_dev/` is now redundant for this game; it is still
+gitignored and still the right destination for any *other* game's dev build.
+
+**When this reverses.** The day The Balance has a player who is not LO. At that point the dev build
+moves back to `output_dev/`, `output/` is rebuilt clean, and this section comes out.
+
 ## 1 · Where the game is
 
 ```
