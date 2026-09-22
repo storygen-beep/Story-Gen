@@ -48,11 +48,11 @@ game.
   one. This is it.
 - **She watched her step dad, and he has no idea.** It is the first thing in the game she holds over
   anybody, and holding it is a move in itself. She can sit at the kitchen table on Friday with it.
-- **Her mum is in the room and she is never touched.** That is the whole weight of the door: the one
-  person she can't have, can't tell, and can't stop taking from.
+- **Her mum is in the room.** That is the whole weight of the door: the one person she can't tell,
+  and can't stop taking from.
 
-**How far this door goes in the end is Gil, and only Gil.** The top of it is her in that room with
-him. It is never her mum, at any height.
+**How far this door goes is Gil.** The top of it is her in that room with him. Where her mum goes
+is her own ladder, block 5, and it isn't decided here.
 
 **Does he ever find out she watched?** My lean, and it is only a lean: **not in this build** — and
 when he does, **she tells him.** He is the man who never makes the first move, so him catching her

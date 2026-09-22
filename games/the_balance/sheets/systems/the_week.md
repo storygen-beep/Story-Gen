@@ -1,4 +1,8 @@
-# The Balance — THE WEEK  `[REVIEW]`
+# The Balance — THE WEEK  `[SUPERSEDED]`
+
+> ⚠️ **SUPERSEDED, 2026-09-20.** Her week is on `systems/her_week.md`, her mum's is on
+> `people/her_mum.md`, the chores are on `systems/chores.md`, and all three are in the game.
+> This page is kept only because `BASE.md` still quotes it. Nothing below is true any more.
 
 > Change `[REVIEW]` to `[READY]` when you're happy with this page.
 >

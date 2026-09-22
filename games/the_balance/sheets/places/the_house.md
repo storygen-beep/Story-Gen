@@ -17,18 +17,19 @@
 | **The landing** | the middle of the house — four doors and the bathroom open off it | whoever is moving between rooms |
 | **The kitchen** | food, the chore list on the fridge, and Friday's $150 handed over | Gil in the mornings |
 | **The living room** | the sofa and the TV. Rest, and an hour that costs nothing | Nate, once he's back |
-| **The bathroom** | the shower, and being clean enough to go live. It has a lock | shared with Nate and Tasha |
+| **The bathroom** | the shower, the tub, the washing machine, and being clean enough to go live. It has a lock | shared with Nate, Tasha and her mum |
 | **Nate's room** | his door, and it isn't always shut | Nate, evenings and odd hours |
 | **Tasha's room** | her wardrobe, her lights, her advice whether it was asked for or not | Tasha, when she's home |
 | **The master bedroom** | her mum and Gil's room. Her mum's shift times are on the wall | only with the door open |
-| **The garage** | the car, the bins, the laundry — where half the chores are | Gil, late |
+| **The garage** | the car and the bins. The bins are the only chore out here, and they have never been anybody else's | Gil, late |
 
 **The way out** is the front door onto her street, and the bus stop on it. The bus costs money and
 forty minutes. A lift from Gil is a favour.
 
 ## The chore list on the fridge
 
-Bins · laundry · dishes · the car.
+Breakfast · the breakfast dishes · lunch · the lunch dishes · dinner · the dinner dishes ·
+laundry · bins · dusting.
 
 **$5 each, one paid a day**, and Gil only pays for what's on the list that day. About $35 a week if
 she never misses — real money in week one, pocket change by week four. That's the point of it.

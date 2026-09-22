@@ -16,9 +16,9 @@
 
 | when | where they are | what it means for her |
 |---|---|---|
-| **seven to eight** | Gil at the kitchen table. The shower is running and it's Nate or Tasha. Her mum gone, or coming in off the ward | the chore list and Friday are both in the kitchen, and so is he. **Twenty minutes to the bus** |
-| **eight to twelve** | nobody — except on ward mornings, when **her mum is asleep down the hall** | the house is only empty four days in seven, and she has to learn which |
-| **twelve to four** | nobody at all | **her window.** The door shut, the phone up, the bathroom free. It is also exactly when the middle shift runs |
+| **seven to eight** | Gil at the kitchen table. The shower is running and it's Nate or Tasha. **Her mum cooking breakfast on ward days, coming in off the ward on the others** | the chore list and Friday are both in the kitchen, and so is he. **Twenty minutes to the bus** |
+| **eight to twelve** | **on ward days her mum is home until quarter to nine and back from eleven. On the mornings after she's asleep down the hall from quarter past nine** | the mornings are almost never empty — the two hours that are, are the two she's out on the strip |
+| **twelve to four** | **her mum, most of it** — lunch, the dishes, the washing, the dusting, then asleep from three on ward days | **what's left of her window:** Mon/Wed/Fri nine to eleven while her mum's in town, and Tue/Thu from twenty past twelve while she sleeps. It is also exactly when the one o'clock shift runs |
 | **four** | Tasha home, her lights on, her door open | clothes, advice she didn't ask for, and somebody who notices what she's wearing |
 | **six** | Gil back, in the kitchen, then the garage | the ten o'clock starts existing again |
 | **about seven** | **everyone at the table**, on the nights her mum is home | the one hour she can't avoid anybody |
@@ -56,7 +56,7 @@ Everyone at one table, on the nights her mum is off the ward.
 
 | | what changes |
 |---|---|
-| **ward nights** | no dinner, an empty evening, and **the master bedroom door is shut on a man on his own** |
+| **ward nights** | **no dinner unless she cooks it, and nobody says a word if she doesn't**, an empty evening, and **the master bedroom door is shut on a man on his own** |
 | **the mornings after** | her mum asleep down the hall while the house is otherwise empty. The one room she has to be quiet for |
 | **the other four** | dinner happens, her mum is home and asleep by ten, and **the master bedroom door is the other door** |
 

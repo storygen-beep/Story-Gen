@@ -16,7 +16,7 @@
 | **Exposure** | streaming · being seen watching · the toilet at work · dares | what she's offered everywhere, and who recognizes her |
 | **Corruption** | taking the furthest thing on offer, anywhere | what's on the menu at every door |
 | **Reputation** | the quad · parties · dares · the art class | invitations, how people treat her, Nate's year |
-| **Rest** | her bed fills it; late nights and closing shifts spend it | the nine o'clock class |
+| **Rest** | the hours she slept fill it — eight is full, and the alarm she sets decides how many | the nine o'clock class |
 | **Clean** | showers fill it; shifts, the gym and sex spend it | going live, and being looked at at all |
 
 ## Money
@@ -31,10 +31,11 @@
 
 | | where it moves | where it's checked |
 |---|---|---|
-| **Whether she has the job** | asking Owen for it, once | everything else in this table |
-| **Shifts worked** | the cafe, and nowhere else | how far up she is |
-| **How far up she is** | the cafe | which hours she can work, her rate, and the closing shift |
-| **Where she stands with Owen** | the cafe and the office | how far up she can go, and what he asks for |
+| **Whether she has the job** | asking Owen for it, once | every shift |
+
+The other three rows were **shifts worked**, **how far up she is**, and **where she stands with
+Owen**. All three went with the climbs, and all five shifts are hers from day one, so there are no
+hours left to unlock.
 
 ## The phone
 
@@ -64,7 +65,7 @@
 
 | | where it moves | where it's checked |
 |---|---|---|
-| **Chores done today** | the house | cash, and whether Gil has anything to say |
+| **What's been done today** | each of the nine chores, and which one paid | cash, whether it's still there to do, and what her mum does instead |
 | **Home after ten** | the front door | the rules, and what's still open to her that week |
 | **Whether her mum knows** | four things only, and nothing else | the whole house |
 | **Which doors she's opened** | Nate's room, the master bedroom | how far each of those two goes |

@@ -1,14 +1,14 @@
-# The Balance — HER WEEK  `[REVIEW]`
+# The Balance — HER WEEK  `[READY]`
 
-> Change `[REVIEW]` to `[READY]` when you're happy with this page.
+> **Signed and built, 2026-09-20.** Her alarm, her classes and all five shifts are in the game.
 >
 > **Two boxes are yours:** *Do I want this?* · *Does everyone belong?*
 >
 > **The rule this page is checked against:** every hour on this page is a door that is open or a
 > door that is shut, and she is the one who picks which she walks through.
 >
-> Agreed in chat, 2026-09-20. Nothing here is in the game yet. **This page replaces
-> `systems/the_week.md` when it's built** — the lines are at the bottom.
+> Agreed in chat, 2026-09-20. **This page has replaced `systems/the_week.md`**, which is kept on
+> disk only because `BASE.md` still quotes it.
 
 ---
 
