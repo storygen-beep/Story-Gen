@@ -2981,6 +2981,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3062,6 +3063,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3143,6 +3145,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3224,6 +3227,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3305,6 +3309,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3386,6 +3391,7 @@ description = "She is on it, in the_kitchen, in the hours her own week puts her 
 
 [canvases.trigger]
 location      = "the_kitchen"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3467,6 +3473,7 @@ description = "She is on it, in the_bathroom, in the hours her own week puts her
 
 [canvases.trigger]
 location      = "the_bathroom"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true
@@ -3553,6 +3560,7 @@ description = "She is on it, in the_front_room, in the hours her own week puts h
 
 [canvases.trigger]
 location      = "the_front_room"
+npc           = "npc_lynn"
 is_repeatable = true
 priority      = 5
 is_active     = true

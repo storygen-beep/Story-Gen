@@ -530,6 +530,29 @@ def _mum(page, rep):
               f"cash {before} -> {cash(page)}")
     rep.check("but it is still done", flags(page).get("chore_done_dusting") is True)
 
+    # ── and every one of her hours is HER, not a line of text
+    # ⚠️ THE SECOND THING THIS BUILD SHIPPED WRONG. All eight of her canvases went in
+    # without `npc` on the trigger, so v2.py:4953 dropped them out of the portrait
+    # path and v2.py:5595 printed the canvas NAME as a solo link — the player read
+    # "Your mum, on the breakfast dishes" in a room she was standing in, and Lynn was
+    # the only named person in the game whose face never appeared anywhere. The
+    # docstring at the top of this file already said which way round it works.
+    # Asserts on the rendered BUCKET, not on a label: which of the two renderers
+    # claims the canvas is the whole question, so it is the thing to read.
+    apply_flag(page, "chore_done_breakfast", "unset")
+    set_time(page, "Monday", 7, 10)
+    stand_at(page, "the_kitchen")
+    drawn = page.evaluate("""(loc) => {
+        var s = SugarCube.setup;
+        return { portraits: s.renderNpcPortraits(loc) || '',
+                 solo: s.renderSoloActivities(loc) || '' };
+    }""", "the_kitchen")
+    rep.check("her chore hour draws her portrait, with her name on it",
+              "npc-portrait-card" in drawn["portraits"] and "Lynn" in drawn["portraits"],
+              drawn["portraits"][:120] or "(nothing drawn)")
+    rep.check("and it is not a solo link reading the canvas name",
+              "Your mum" not in drawn["solo"], drawn["solo"][:120] or "(no solo links)")
+
 
 def walk_friday(page, rep):
     """Slice 3 — sleep rolls the day, and Friday charges the hundred and fifty."""

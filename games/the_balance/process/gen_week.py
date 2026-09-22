@@ -508,6 +508,16 @@ def build_chores():
                  f'description = "She is on it, in {room}, in the hours her own week puts her '
                  f'there. Help, take it over, or leave her to it."', "",
                  "[canvases.trigger]", f'location      = "{room}"',
+                 # ⚠️ `npc` is the whole difference between her FACE and a line of text.
+                 # A canvas carrying an npcId is dropped from the solo-link bucket
+                 # (v2.py:4953) and picked up by the portrait selector instead
+                 # (v2.py:5436), which renders her portrait card with her name on it.
+                 # Without it these eight were links reading "Your mum, on the dishes"
+                 # in a room she was standing in — she was the only named person in the
+                 # game with no portrait anywhere. Safe because the portrait path keeps
+                 # exactly ONE canvas per NPC per location (v2.py:4928) and these eight
+                 # windows never overlap in any of the three rooms.
+                 'npc           = "npc_lynn"',
                  "is_repeatable = true", "priority      = 5", "is_active     = true",
                  conditions([c_lynn(room, "is_present"),
                              c_flag(f"chore_done_{key}", "is_false")]).rstrip(), ""]
