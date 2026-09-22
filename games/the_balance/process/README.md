@@ -188,6 +188,27 @@ are whole-file copies in `parked/sheets_as_built/` and `parked/DECISIONS_as_buil
 
 ---
 
+## 0c · The agent never runs a media harvest
+
+**Standing rule, LO, 2026-09-22: *"ignore media harvest completely make it a rule."***
+
+The agent does not run `find-media`, does not harvest clips or images, and does not add, resolve or
+prune a media file for this game. Not as part of a build, not as a finishing touch, not because a
+card would obviously be better with a picture.
+
+**Why.** The media blocks are not defined yet — where a clip sits inside a beat, what a pool is
+allowed to hold, which surfaces get one at all. Until that is settled, a harvest fills the game with
+files chosen against a spec that does not exist, and unpicking that is far more work than doing it
+once properly. LO runs it himself, when he decides to, after the blocks are defined.
+
+**What the agent still does:** name the gap. If a card would carry a clip, say so in the ledger or
+in chat and move on. `lynn.jpg` is declared on her NPC record and has never been copied, and this
+game has no media folder at all — that is the current state and it is **correct**, not a defect to
+fix.
+
+**The one thing that is not covered:** if LO asks for media directly, that is an instruction and it
+overrides this. The rule is about the agent deciding on its own.
+
 ## 1 · Where the game is
 
 ```
