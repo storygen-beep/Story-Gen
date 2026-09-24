@@ -1023,6 +1023,38 @@ and go."* answers him and *"Leave"* does not.
 > such nodes and needs no door in any of them. The rule here is for **independent budgets that
 > deplete together**, which is what a day cap and a price both are.
 
+**R7b · Two shapes, and a game needs both: a POOL at a place, a CHAIN on a person.** Added
+2026-09-03, read in source.
+
+`zaras-school-life` runs both at once, and neither substitutes for the other.
+
+**The POOL.** `detention1` … `detention15` look like a fifteen-step ladder and are not: **all
+fifteen carry the identical gate** (`_eventCh == 1` off the `School Detention` screen). They are
+fifteen *different situations at one place*, rolled — alone with a male teacher who lets her off ·
+nobody turns up and she is caught sneaking out · a jock takes the seat beside her · an overworked
+teacher · the hot married teacher · a sullen girl · the P.E. coach she dislikes · a handsome boy
+the teacher then leaves her alone with. The same game runs 16 at the gym, 14 on the street, 10 at
+the park, 9 in the canteen, 8 at PE.
+
+Inside each setup a band on her meter decides how she plays it, so twenty visits to detention is
+*fifteen situations × two or three bearings*. **No rung has to follow any other rung, which is why
+a pool cannot flow stupidly** — there is no staircase to fall off. This is A9 of `the-arc.md`
+seen from the surface side.
+
+**The CHAIN.** The same game runs eight of them — `ben` 50 passages, `dick` 72, `lisa` 28,
+`mom` 26, `bro` 24, `dad` 24, `jason` 25, `daniel` 16; **274 quest passages** in a 785-passage
+game. A chain is A1's numbered ladder, ending by converting into a repeatable surface.
+
+> **A chain alone is a questline: finish it and the person is dead content. A pool alone is a slot
+> machine: nothing builds. Both together, and the place keeps producing situations while the
+> people keep advancing.**
+
+⚠️ **We only ever build chains, and we author them in their converted state on day one**
+(`the-arc.md`: 1,396 canvases, zero arcs). The pool is the cheaper half and the one nothing here
+has ever asked for — its unit is a *setup*, not an act, and A9 already says the setups span the
+whole meter range. When a place is worth returning to and you cannot say why, it is usually
+missing its pool.
+
 **R8 · A person owns a corner of the world — and the schedule has to agree.** Added 2026-08-24 from
 Section G, after `the_season` shipped and the one defect a player reported was *"I don't know who is
 who."*

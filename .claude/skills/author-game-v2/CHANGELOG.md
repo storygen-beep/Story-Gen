@@ -5,6 +5,336 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-25 — the score is hidden, the reaction is shown, the requirement is told
+
+- **`references/the-meters.md`, "What the player is shown".** Replaced the 2026-09-24 paragraph
+  that left printed stats open ("reaction lines only… written so a game that declares per-person
+  stats can print them"). LO decided on 2026-09-25: per-person scores are allowed and hidden;
+  after a choice the player sees a reaction or a real consequence, never a number or a stat label;
+  the requirement for a locked step is told, on the guidance card as a trait goal (R3b); a person's
+  standing is said in words. Evidence: `SCENE_CONTENT_REVIEW.md` C7 (21/26 keep per-person state,
+  8/26 never print it, 4 of 22,252 comments ask to see a stat).
+- **An engine gap is recorded, not fixed:** `[ui.cast_page]` (`engine.md` §34) has no line that
+  reads a per-person score, so "standing in words" has no dedicated surface yet.
+- **Not changed:** W1's fork (`who_climbs`) stays as it is. The lint `a printed stat is real`
+  still only lists labels naming an *undeclared* stat. Under this decision a label naming a
+  declared stat is also wrong, and the lint does not catch that yet.
+- **`references/register.md`, the truth rule's rule 4** now says a printed consequence is a real
+  flag, and scores are never printed (it read "a real flag or stat").
+- **`references/the-first-hour.md` F1b step 3** now says "never a score or a stat label" (it read
+  "never a made-up stat").
+- **Verified:** read back the edited section; `grep -n "Show the reaction" references/the-meters.md`
+  still resolves for the SKILL.md pointer (`SKILL.md:329`).
+
+## 2026-09-24 — the loud voice, the staged opening, and the truth rule
+
+Carries out `~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/PRD_SKILL_STYLE_AND_OPENING.md`.
+Sources: `THE_BALANCE_WRITING_STYLE.md` (style, truth rule, checking method),
+`THE_BALANCE_NEW_OPENING.md` (opening), `SCENE_CONTENT_REVIEW.md` (evidence). **Complete shift:**
+where an old rule conflicted, it was replaced, not kept beside the new one. LO's calls on the PRD's
+§8: printed stats = (b) reaction lines only · L2 dropped · CLAUDE.md held for a later pass ·
+worked opening = staged only.
+
+**Baseline and result, every run the same command** (`python3 scripts/gates.py <slug>`):
+
+```
+                 judged gates before   after    new lints (after)
+the_balance      27/40 (10 n/a)        27/40    past 15 · stat 0 · one-time mute 0/1 · thought>speech 1/20 · opening card NO (0/3)
+orientation      48/49 (1 n/a)         48/49    past 5  · stat 0 · one-time mute 0/11 · thought>speech 0/23 · opening card yes (6/6)
+vesper_two       45/46 (4 n/a)         45/46    past 28 · stat 0 · one-time mute 0/28 · thought>speech 0/72 · opening card NO (0/12)
+probation        n/a — games/probation has no toml_phases/7_final_game.toml; gates.py exits 2 "not found"
+```
+
+Every other line of output is identical before and after except `sinks >= sources`' location name
+and the order of `also ranked:` rows, which differ between two runs of the unchanged script (set
+ordering). `--selfcheck` "the index is current" before and after. `scripts/cite_check.py`: 737
+citations, 77 DRIFTED, 7 MISSING before and after — no new breakage.
+
+- **`references/register.md`** — header line *"Nothing here is taste"* replaced: the voice is LO's
+  choice, dated and quoted, with the sources named. **NEW "The voice — say it loud"** (the ten style
+  rules from WRITING_STYLE §3, thoughts beside dialogue never instead, measured targets from
+  SCENE_CONTENT_REVIEW C2/C8 on the random sample). **NEW "The truth rule"** (allowed/not table §4,
+  the four rules, the seven-step check §5, one wrong/right line). **L2 retired in place** (heading
+  kept so pointers resolve; the field figures and the instrument history stay; `lint_negation` keeps
+  printing a measurement). **L3 rewritten**: no *unflagged* history on a repeatable, the truth rule's
+  flag-gated exception, and the one-time step vs daily repeatable split with SCENE_CONTENT_REVIEW C1's
+  figures (random sample 0% of repeatables; the 70% for quest beats is curated-library and labelled
+  as direction). **`## The model beats` rewritten** in the loud voice, roles not names, plus a new
+  one-time step and its daily repeatable; S1's two TOML blocks updated to the new prose. Verified:
+  every beat scored with `gates.py --beat` and with `GLOSS_RE`/`NEGATION_RE`/`HISTORY_RE` on narration
+  — room 36w med 7; reveal 40w med 6; talk 52w 65% spoken; explicit 50w **5 explicit words**, body
+  word in the last sentence, med 9; interiority beat 18w 0 explicit; one-time 76w 49% spoken;
+  daily 23w one spoken line. Gloss 0 and history 0 on all. The old talk screen's *"twice this week"*
+  is the truth rule's defect and is named as the reason it went.
+- **`references/the-first-hour.md`** — F1 "Pick one" now defaults to **staged**; cold open only with
+  no person on screen. **NEW F1b** (setup → problem → person → conflict → choice → temptation →
+  objective → play; first screen said plainly; first choice in the first person's scene with a
+  reaction line; temptation early, M12 15/26; quest card with `goals`, M1 21/26; plain tutorial lines
+  on the last screen; ends on a hook; a walk-out is not a refusal). The cold "furnished room" example
+  is **deleted** — it also broke L1 (`, which means`) and its note defended the gloss — and replaced by
+  a four-screen staged example with a choice table and a card, each screen `--beat`-scored (40/45/57/34
+  words, medians 5–9, gloss 0, history 0). **F2b's "developer talking" warning narrowed** to screen one
+  and patch notes — the PRD's reconcile list missed that it contradicted the tutorial lines. F4b gains
+  one line (a walk-out is not a refusal). Contents, "What the scoreboard checks" and the cheat sheet
+  updated.
+- **`references/the-voice.md`** — the loud voice stops at the edge of the story; the opening's last
+  screen may carry plain tutorial sentences (the-first-hour F1b).
+- **`references/the-meters.md`** — "What the player is shown" gains **show the reaction, not the
+  number**: reaction line or a real flag; numbers only for declared per-person stats; evidence ~12/26
+  after the click, 1 at scale + 2 marginal on the button, 4 of 22,252 comments (SCENE_CONTENT_REVIEW
+  C7). Scoped to choice outcomes so `the-voice.md` R3b's goal numbers are untouched.
+- **`references/the-arc.md`** — A1 gains a pointer: the full loud version lives on the one-time step
+  (`register.md` L3).
+- **`SKILL.md`** — Operating rules open with a pointer to the loud voice, F1b and the truth rule; the
+  lint index names the five new lints and marks `what did not happen` as a measurement since L2's
+  retirement. `register.md:332` re-anchored to `:491` (it pointed at the line saying the field runs 37
+  words per reveal beat; the new sections moved it).
+- **`scripts/gates.py`** — five **lints, not gates** (PRD §5.5; the blocking overhaul is out of
+  scope, and P0 rules out gating a voice no game is written in yet): `a repeatable claims a past`
+  (a new `PAST_CLAIM_RE`, NOT a widened `HISTORY_RE`, because that regex is the basis of L3's field
+  comparison — a deliberate deviation from the PRD's "extend L3's lint"; "every time" was cut the same
+  day as habitual present on all three games), `a printed stat is real`, `a one-time step speaks`,
+  `thoughts outweigh speech`, `the opening arms a card with goals`. Speakers read from `npcId` (the
+  house `speaker = "npc"` shape, engine.md's dialog block). Added to `--json`. Verified on hand-built
+  fixtures: `+Mum Trust`-style, `−X Relationship`, `(Relationship +4 …)` and `(+Suspicion)` fire,
+  `+X Respect` with `respect` declared does not, *"twenty-five - no"* does not; *"late again"* fires
+  bare and is skipped inside a conditioned group. `register.md:332` in the `--beat` print and its
+  comment re-anchored to `:491`.
+
+**Not done here, on purpose:** `lint_negation`'s print text still calls L2 a rule (code left as-is
+under "additions only"); PRD §7 fresh-session rewrite test.
+
+- **Project `CLAUDE.md` (PRD §5.8), same day, after LO's go — option (b), loud for every game.**
+  Not a skill file; logged here to close the "held" line above. Lines 12, 21, 30 and 37 lost
+  "RTS-flat" / "flat and crude"; the "Writing register" section now names this skill's
+  `register.md` as the register for all game content, summarises the voice, the truth rule, the
+  staged opening and the unchanged ~35–40 words per beat, and states that where v1's
+  `rts-flat-prose.md` conflicts, v2's `register.md` wins even for a v1-authored game. Line 146's ban
+  on a mandatory italic thought per NPC gained a note that her own thoughts are part of the voice.
+  Crude-by-default, anatomical specificity, the pivot section, caveman and content-freedom are
+  unchanged. Verified: `grep -nE "RTS-flat|flat and crude|terse" CLAUDE.md` leaves only the
+  precedence sentence. ⚠️ The v1 skill still teaches RTS-flat at source; CLAUDE.md overrides it, and
+  editing v1 would remove the contradiction there.
+
+## 2026-09-11 — a sheet is read by a person, and ten rules never said so
+
+**SKILL** — `references/the-sheets.md` (**NEW** `## S11 · A SHEET IS READ BY A PERSON, NOT BY A
+GATE`, placed after S10 and before the opening-sheet section).
+
+**Why.** `the_balance`'s decision sheet was written at the want phase, mirrored to Notion, and LO's
+first response was *"hard to understand, I mean really hard."* S1–S10 all govern what a sheet must
+**contain**; the file opens by calling sheets *"documents LO reads, argues with and signs"* and then
+never governs the reading. That is not a neutral omission — an author who satisfies all ten produces
+a document in the ledger's voice, because that is the only voice the rules describe. Same class as
+SKILL.md's "two voices, and they are different jobs": `register.md` owns the prose after a click,
+`the-voice.md` owns labels and cards, and **nothing owned the document a human signs.**
+
+**How verified.** Measured, not eyeballed — a one-off script over all four `games/*/DECISIONS.md`
+counting words, doctrine citations, statistics and the longest table cell:
+
+```
+orientation  2627w  cites=16  stats=12  longest cell=32w
+probation    1414w  cites= 8  stats= 1  longest cell=37w
+vesper_two   3180w  cites=13  stats=10  longest cell=39w
+the_balance  1727w  cites=13  stats= 6  longest cell=70w   <- the one LO read
+```
+
+Systematic across all four; the one he was asked to sign was roughly twice the worst on cell
+length. `the_balance/DECISIONS.md` was rewritten the same turn and re-measured at **1,195w · 0
+citations · 1 statistic · longest cell 18w**, with no decision removed — only the evidence behind
+them, which already lives in `WANT.md` and `v2_state.json` `decisions[]`. Re-pushed to Notion;
+`notion_sheets_sync.py status` reads 142 on disk / 142 in Notion across four games.
+`gates.py --selfcheck` run after the edit.
+
+**Not fixed here, and named so it is not mistaken for done:** the other three decision sheets still
+carry the disease. S11 is written so a rewrite of each is a mechanical pass, but none has been done.
+
+**TOOLING** — `scripts/notion_sheets_sync.py:440` (`write_review_order` now creates
+`games/<slug>/sheets/` before writing `REVIEW_ORDER.md`). `discover()` collects the root-level
+`DECISIONS.md` explicitly, so a game whose *only* sheet is the decision sheet is a supported state —
+but every prior game already had a `sheets/` directory, so the push crashed with `FileNotFoundError`
+**after** the Notion writes had all succeeded. Verified by re-running `push --game the_balance`
+clean.
+
+---
+
+## 2026-09-05 — the sheets got a tracker, and the line forbidding one had to go
+
+**SKILL** — `references/the-sheets.md` (**the workflow paragraph rewritten** — it used to end *"not
+in a separate tracker"*; **NEW** `### Review order is a property of the KIND`; the folder listing
+gains `REVIEW_ORDER.md`, `systems/`, and a warning that `DECISIONS.md` is a sheet living outside
+`sheets/`). **REPO** — `scripts/notion_sheets_sync.py`, `scripts/hooks/post-commit`,
+`prd_notion_sheet_review.md`, `.gitignore`.
+
+LO asked whether the sheets could be reviewed in Notion, with a Jira-shaped status board and changed
+sheets re-opening themselves. They can. Sign-off is the one step in this pipeline that is pure
+judgement and needs no terminal, and it was chained to the machine the repo is on.
+
+**Three things the API cannot do, and what replaced each.** Notion has **no page-diff API** — its
+version compare is UI-only. Its database automations trigger on *property* edits and their webhook
+action ships **properties only, never page content**, so a body edit is invisible to them. And its
+hosted MCP server is **OAuth-browser-login only**, so a git hook cannot use it. All three are
+answered by the same fact: `sheets/` is git-tracked. Git detects the change, a REST script renders
+the diff, and the diff is anchored to **the commit the sheet was signed at** — which is better than
+what Notion offers, because a timestamp does not know when you approved something.
+
+**A body change voids the verdict.** The four rubric boxes were ticked against the old body; an edit
+un-ticks them and the page reopens with the diff on top. Stricter than the paper workflow, and
+deliberate.
+
+**A commit is the trigger, not a file save.** LO asked for a background watcher. There is a `watch`
+subcommand and it is opt-in on purpose: a save is not a sign-off, and a watcher left running during
+authoring clears a verdict while LO is in the middle of giving it. `scripts/hooks/post-commit` is
+the default path.
+
+**Two defects found by building it, both in this skill's own territory.** `DECISIONS.md` is one of
+the six sheet types, carries a status marker, and lives at the game root — so the first mirror walked
+`sheets/**` and never saw it. And asking *"what is order 1"* is what surfaced it. Review order is now
+derived from the sheet's **kind**, which SY1–SY3 and S5 already fixed; numbering the filenames was
+rejected because 43 of 138 already carry a **rung** number and 80 cross-references are by filename.
+
+**Verified:** 138 sheets + 3 `DECISIONS.md` mirrored across three per-game boards, disk and Notion
+agreeing on every row (`status` prints no divergence). Round-trip fidelity measured at 92.6% on
+`probation/sheets/people/rae.md`, zero unknown blocks. The re-open loop was proven on
+`orientation/sheets/places/the_quad.md` by stamping a real historical commit as its approval and
+re-pushing — status flipped, four boxes cleared, real 30-line diff rendered — with **no sheet edited
+to produce it**. Full write-up and the six undocumented API behaviours: `prd_notion_sheet_review.md`.
+
+## 2026-09-04 — the hold was learned from male-lead games, and the collector became the target
+
+**SKILL** — `templates/want.md` (§1b's blank rewritten; §2's "the bill" generalised) ·
+`references/the-want.md` (**§1b** rewritten, **NEW §4a** *the person who holds the obligation is not
+automatically the person she fucks*, §2's division block) · `references/the-economy.md` (**R3**
+gains a corpus footnote) · `references/state.md` (`want.obligation` reframed, **NEW**
+`want.hold_kind` and `want.hold_collector`, `board.economy` marked money-case-only) ·
+`scripts/gates.py` (**NEW lint** `the collector is also the target`) · `SKILL.md` (the lint's row).
+**GAMES** — `games/orientation/v2_state.json`, `games/vesper_two/v2_state.json` (the two new fields).
+**STUDY** — `~/Documents/Female_Hold_Study_20260904/`.
+
+LO, on being handed ten female-lead concepts: *"it always suggest idea where male npc in the game
+offer sex for money, WTF, why??"* All ten were the same machine — she owes money, a man collects it,
+and the sex is how the money gets settled.
+
+**Nothing in this skill teaches that.** Grepping `references/`, `SKILL.md` and `templates/` for
+`prostitut|sex work|escort|paid sex|sex for money|instead of money` returns **zero hits**. It is
+emergent from four rules that are each defensible alone: `templates/want.md:59` asked *"What she
+owes, who collects it, and when"* with the worked example *"Friday, $260, and **he** counts it at the
+desk"*; `the-economy.md` R3 offered only money options; §4's first charge is *"someone with power
+over her"*, which the collector already is; and `the-surfaces.md` requires the repeatable surface be
+explicit. Plus `[settings.rent]` with `collector_npc` (`engine.md:1101`) is the only hold the engine
+ships support for, so it is also the cheapest one to build.
+
+**The provenance defect.** R3's *"14 of 19 games carry a recurring obligation"* comes from
+`Economy_Pressure_Study_20260827`, whose table holds **17 games, two of them female-led**. The one
+real female-lead study — 23 games, `Female_Yes_Study_20260903` — mentions rent, debt, money and
+obligation **zero times** in 203 lines, and the pass that landed it updated `the-meters` W1b,
+`the-surfaces` R7b, `register`, `the-arc` A11b and `the-want` §4b while never touching §1b or R3.
+The hold layer had never been measured against the field it is applied to.
+
+**So it was measured.** `Female_Hold_Study_20260904`, 23 female-lead sandboxes read in source plus
+`degrees-of-lewdity` as a control, three probes that regenerate every figure.
+
+- **A mechanically-real recurring obligation is 6 of 23 (26%)**, using R3's own regexes, against 74%
+  on the male-heavy corpus. One of the six is `shady-deals`, where reading it settles that **she is
+  the creditor** — a money system is not a money hold, and the variables look identical from outside.
+- **Hand-read, the bill is the FOURTH most common hold of nine**, behind `ambition` (5) — she picked
+  the thing herself and the world charges for it. `verdicts.md` carries the settling line for each,
+  and rows the opening did not settle say so instead of guessing.
+- **THE HEADLINE.** Across every field game with a bill and a named collector, his share of the
+  game's explicit passages runs **0.4–3.8%**, and he is never the top figure: DoL's Bailey carries
+  **6 of 415 (1.4%)** against Whitney's **61 (14.7%)**, and Whitney charges her nothing. In
+  `life-at-university` the uncle and the Professor both outrank the landlady. **The field builds the
+  hold and the porn as two separate systems; the ten pitches fused them.**
+
+The Want no longer asks for a bill. §1b asks *what holds her here* and prints the nine shapes with
+their counts; the money mechanism stays exactly where it was, in R3–R3d, for games that pick `bill`.
+R3 keeps its 14-of-19 figure and gains a footnote naming its corpus, because the figure is right
+about the games it was measured on.
+
+⚠️ **A false friend inside the inherited instrument, found on the first run.** `\w*rent\w*` matches
+*cu-RRENT* and *pa-RENT*; `\w*bill\w*` matches *BILL-iards*. The first pass reported nine MECHANICAL
+games, five carried entirely by `$currentpassage`, `$currenttime`, `$currentword`, `$tcurrent` and
+`$billiards_bet_active`. Fixed by reading every matched name — `A_varnames.txt` keeps kept and
+rejected — rather than guessing an exclusion. **The same defect is in
+`Economy_Pressure_Study_20260827/obligation.py`**, so that study's per-game `vars:` column is
+contaminated; its headline, the ratchet read out of DoL's `rentpay` widget by hand, does not depend
+on the regex and stands.
+
+**NEW LINT — `the collector is also the target`.** Resolves the collector from
+`want.hold_collector`, then `[settings.rent] collector_npc`, then a cast name appearing in the
+declared hold, and reports his rank among the characters owning explicit repeatable surfaces. **A
+LINT, never a gate**, for the reason §4a states in the open: DoL makes Bailey both deliberately and
+it works, so a threshold here would fail a game for a legitimate design — the error that took R4,
+study 6's anchoring check and P0 back out. An unresolvable collector reports `NOT DECLARED, which is
+not a pass`, the wording the climb, start-choice and week-income checks already use.
+
+⚠️ **Its first selection was wrong and the wrongness was invisible.** It reused `lint_act_nodes`'
+filter, which also requires an act-menu self-loop — right for *"how crude is the beat the player is
+standing in"*, wrong for *"who owns the returnable porn"*. On `vesper_two` that selected **zero**
+canvases in a game with twenty-one explicit repeatable surfaces, so the lint returned empty and read
+exactly like a pass. Caught by running it rather than by reading it.
+
+Verified: `--selfcheck` green at **50/50 gates · 40/40 lints · 5/5 modes** (39 lints before).
+Gate verdicts on `orientation` and `vesper_two` diffed line-for-line before and after and are
+**identical** — the new check adds no `gate()` call. Both games now declare `hold_kind = "bill"`
+and their collector, and both report **rank 2**, which is the field-healthy shape:
+`orientation` — Simone 1 against Ray 2; `vesper_two` — Kess 2 of 13 attributed across seven
+characters.
+
+## 2026-09-03 — the guidance card was never read, and a meter gates nerve rather than permission
+
+**SKILL** — `scripts/gates.py` (**NEW gate** `a goal says what it wants` · **NEW lint**
+`the guidance page says nothing` · the G15 preamble's false claim corrected) · `SKILL.md` (a
+scoreboard row and a lint entry) · `references/engine.md` (**NEW §47**, the quest-card goal
+bullet) · `references/the-voice.md` (**R3b**, print the number; R4's warning corrected) ·
+`references/the-meters.md` (**W1b** + **W1b-i**, nerve not permission, the +1 unit, the named
+widget) · `references/the-surfaces.md` (**R7b**, pools and chains) · `references/register.md`
+(the reason axis measured field-wide; composure is subtraction) · `references/the-arc.md`
+(**A11b**, 183 stopping passages against 74 finishes) · `references/the-want.md` (**§4b**, the
+direct route is the default and deniability is late).
+
+Two things, and the first was a hole this file's own comment pointed at without noticing. The
+withdrawn "walls state their key" gate was justified in `gates.py` and again in `the-voice.md` R4
+with the sentence *"that is the guidance card's job, already enforced by 'guidance exists'."*
+It is not. `guidance exists` checks that a card EXISTS per ascent tier and per character and never
+reads what the card says, so the ROUTE was unchecked on the door and on the card at once. Verified
+by reading the check at gates.py:5441-5453, and the renderer it should have been checking at
+v2.py:15921-15977, now written up as `engine.md` §47.
+
+The two replacements split along whether the engine calls the shape intentional. A goal item with
+no `label` prints its RAW KEY to the player — the renderer falls back `label -> trait -> flag`
+(v2.py:15962-15964) and the importer requires `label` on trait and counter goals only
+(template_import.py:5669-5673) — so that is a **gate**, no author ever meant it. A card with no
+`goals`, no `ready_canvas` and not `terminal` renders its flavour text and then nothing
+(v2.py:15974-15976), but the engine's own comment calls that deliberate for transitional cards, so
+that is a **lint**: failing it would repeat the exact error that took the door gate out, one
+surface over. First run: `orientation` passes 11/11 goal bullets and the lint is silent;
+`vesper_two` reports n/a on the gate and **11 of 12 cards mute, with all seven characters'
+sections silent** — in a game that was passing 46 gates. `--selfcheck` green.
+
+The second thing is a corpus study, `~/Documents/Female_Yes_Study_20260903/`. The mopoga
+female-protagonist tag holds 155 games against our previous set of three; fetching the sandbox and
+40+-comment slice and reading each opening by hand gives **23 female-PC games**, 12 stated outright
+by the game and 7 of the tagged ones not female-led at all. Against 5,663 player comments on them,
+measured beside the 20,020 we already held on the mostly-male-lead set: 2x the update-hunger, 3x
+the abandonment fear, 2x the praise — and **0.7x the save-file begging and 0.6x the cheat-code
+like-share.** These players ask to skip the game LESS.
+
+What went into the references came from reading source, and two of them reverse what this skill
+assumed. `zaras-school-life` runs direct-desire scenes 36 to 5 over justified ones, with the direct
+ones gated from corruption 5 and the justified ones at 45-80 and all of them family: the meter
+gates **nerve, not permission**, and deniability is a late tool for the unapproachable target
+rather than a beginner's frame. And the same game runs POOLS beside its chains — `detention1`
+through `detention15` share one identical gate and are fifteen setups at one place, not a ladder,
+which is A9 seen from the surface side and the half we have never built.
+
+⚠️ Three probes in that study failed and are recorded as failures, not quietly dropped: a lexical
+hunt for the boundary conversation (it matched *"this UI is not yet implemented"*), a name-based
+aftermath count (never validated by reading), and an attempt to correlate route quality with player
+reception (max |rho| 0.19, and the four candidate outcome variables do not correlate with each
+other, so the target does not exist). The route work that survives is a hand-read of ~20 routes,
+in `ROUTES_READ.md`.
+
 ## 2026-09-03 — one missing settings line, and the arc behind it
 
 **SKILL** — `scripts/gates.py` (G45's self-gate carve-out · `_CLOTHING_PREDICATES` gains

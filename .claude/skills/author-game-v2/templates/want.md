@@ -56,8 +56,34 @@ missing, which is not a pass.
 
 **What she has to lose:** <the thing that makes the first transgression cost something>
 
-**What she owes, who collects it, and when:** <a recurring demand with a face and a date — not a
-mood. "Friday, $260, and he counts it at the desk." `the-economy.md` R3 owns the mechanism.>
+**What holds her here:** <the thing that keeps her in the situation the game is about. Whatever
+shape you pick, give it a FACE and a DATE — a hold with neither is a mood. Record the shape in
+`v2_state.json` as `want.hold_kind`.>
+
+⚠️ **Do not default to the bill.** Measured across 23 female-lead sandboxes
+(`~/Documents/Female_Hold_Study_20260904/`), a recurring money demand is **4 of 23** and is the
+field's *fourth* most common hold. Pick from what the field actually uses — the count is how
+often, never how good:
+
+- [ ] `ambition` — **5 of 23, the largest.** She picked the thing herself and the world charges
+      for it. *"become the Prom Queen… no matter what the cost"*
+- [ ] `bill` — **4 of 23.** A recurring money demand with a collector and a date.
+      `the-economy.md` R3 owns the mechanism, and §4's collector rule applies
+- [ ] `order` — **3 of 23.** An institution, a sentence or a mission. Somebody with authority
+      decides what she may do next
+- [ ] `body` — **3 of 23.** What she is turning into, and cannot stop
+- [ ] `subsistence` — **3 of 23.** The place will not feed her. Not a debt: a need
+- [ ] `appetite` — **2 of 23.** No hold at all, on purpose. One of the two says so in its own
+      opening
+- [ ] `job` · `erosion` · `displacement` — **1 each.** A workplace and the man in it · she starts
+      with everything and it goes · she is a stranger here
+
+⚠️ **These are LEDGER KEYS, not player words.** `subsistence`, `erosion` and `displacement` are
+three of the words `gates.py --words` flags as absent from all 27 field games. They belong in
+`want.hold_kind` and nowhere else — never in a room name, a button label or a line of prose.
+`register.md`: the examples are the register.
+
+<Then write it in her nouns, one line.>
 
 ## 2. The appetite — where she lands, not where she starts
 
@@ -65,14 +91,16 @@ mood. "Friday, $260, and he counts it at the desk." `the-economy.md` R3 owns the
 
 ⚠️ **Do not copy the line below. It is a SHAPE, not an answer** — four games in this repo shipped
 one sentence because this slot used to hold a filled-in example. Write hers, in her nouns, from
-§1b's obligation.
+§1b's hold.
 
 - ✅ shape: an appetite the world can always supply one more of, stated in the vocabulary of the
   place she is actually standing in
 - ❌ "get revenge on X" — that completes, and then there is nothing left to want
 
-**Where the bill stops being the reason:** <the point where she is still paying it and it is no
-longer why — §4's Transformation charge, stated as a moment>
+**Where the hold stops being the reason:** <the point where it is still there and it is no longer
+why — §4's Transformation charge, stated as a moment. For a `bill` that is the week she still
+pays and no longer cares; for an `ambition` it is the week she stops pretending the goal is the
+point.>
 
 ## 3. What she is becoming — as ACCESS
 

@@ -1536,6 +1536,272 @@ def lint_history_repeatable(game):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# The loud voice's lints — added 2026-09-24 with `register.md` "The voice — say it
+# loud" and "The truth rule", `the-first-hour.md` F1b and `the-meters.md` "show the
+# reaction, not the number". Source: PRD_SKILL_STYLE_AND_OPENING.md §5.5.
+#
+# ⚠️ ALL FIVE ARE LINTS, NOT GATES, on purpose. The PRD scoped the blocking overhaul
+# out, and P0 applies: the day these landed, no game in the repo was written in the
+# voice they check, so a gate would measure the doctrine's age and not the games.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# A claim about a past the player may not have had. Deliberately NOT folded into
+# HISTORY_RE: that regex is the basis of L3's field comparison (p50 1.64%, max 5.41%),
+# and widening it would silently re-base a figure measured on the old marker set.
+PAST_CLAIM_RE = re.compile(
+    r"\b(last night|last time|yesterday|this week|again|the other day|as usual|"
+    r"like always)\b", re.I)
+# ⚠️ "every time" was in the first cut and came out the same day: on all three games it
+# was habitual present tense ("every time he draws back"), never a claim about a past.
+
+# `+Ray Respect`, `-2 Trust`, `−Relationship`, `(Trust +4)`: a sign, an optional number,
+# then a Capitalised name — or a Capitalised name, then a signed number. The capital is
+# what keeps "twenty-five" and "a - b" out; a dash between words has spaces round it.
+PRINTED_STAT_RE = re.compile(
+    r"(?:(?<![\w-])[+\-−]\s?\d*\s?([A-Z][a-z]+(?:\s[A-Z][a-z]+){0,2}))"
+    r"|(?:\b([A-Z][a-z]+(?:\s[A-Z][a-z]+){0,2})\s[+\-−]\d+\b)")
+
+
+def _canvas_npcs(c, npc_ids):
+    """The people a canvas is bound to: `trigger.npc`, `requires_npc`, or a dialog speaker."""
+    trig = c.get("trigger") or {}
+    out = {v for v in (trig.get("npc"), trig.get("requires_npc"), c.get("requires_npc")) if v}
+    for n in c.get("nodes") or []:
+        for b in _flat_blocks(n.get("blocks")):
+            if b.get("type") == "dialog":
+                # `speaker = "npc"` + `npcId` is the house shape (engine.md, dialog block);
+                # a bare npc id in `speaker` also renders; "unknown" is a stranger talking.
+                props = b.get("props") or {}
+                sp = props.get("npcId") or props.get("speaker")
+                if sp in npc_ids:
+                    out.add(sp)
+                elif sp == "unknown":
+                    out.add("a stranger")
+    return out
+
+
+def _speech_by_canvas(c):
+    """(dialog words, thought_bubble words) on one canvas."""
+    said = thought = 0
+    for n in c.get("nodes") or []:
+        for b in _flat_blocks(n.get("blocks")):
+            if not b.get("content"):
+                continue
+            w = len(str(b["content"]).split())
+            if b.get("type") == "dialog":
+                said += w
+            elif b.get("type") == "thought_bubble":
+                thought += w
+    return said, thought
+
+
+def lint_one_time_speaks(game):
+    """A one-time step bound to a person, with nobody saying anything.
+
+    `register.md` "The voice — say it loud" rule 5 and L3: the one-time step is where
+    the full loud version lives — the reveal, the CONVERSATION, the hook. A one-time
+    canvas with a person on it and no `dialog` block has skipped the conversation.
+    The PRD asked for this per one-time step because G32 `somebody speaks` is a
+    whole-game ratio and cannot see one silent scene inside a talkative game.
+    """
+    npc_ids = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    scope, mute = 0, []
+    for c in game.get("canvases") or []:
+        if (c.get("trigger") or {}).get("is_repeatable"):
+            continue
+        who = _canvas_npcs(c, npc_ids)
+        if not who:
+            continue
+        scope += 1
+        said, _ = _speech_by_canvas(c)
+        if not said:
+            mute.append(f"{c.get('id')} ({', '.join(sorted(who))}) — no dialog block")
+    if not scope:
+        return "", []
+    return f"{len(mute)} of {scope} one-time canvases bound to a person have nobody speaking", mute
+
+
+def lint_thoughts_over_speech(game):
+    """A person is on the canvas, and she thinks more words than anyone says aloud.
+
+    `register.md` rule 3: her thoughts go BESIDE the dialogue, never instead of it —
+    S3 measured seventh_day at 4.6 thought words per spoken word. G32 counts
+    `thought_bubble` as narration game-wide (`_speech_split`); this is the per-canvas
+    view of the same inversion, scoped to canvases where somebody could have talked.
+    """
+    npc_ids = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    scope, over = 0, []
+    for c in game.get("canvases") or []:
+        if not _canvas_npcs(c, npc_ids):
+            continue
+        said, thought = _speech_by_canvas(c)
+        if not (said or thought):
+            continue
+        scope += 1
+        if thought > said:
+            over.append(f"{c.get('id')}: {thought} thought words against {said} spoken")
+    if not scope:
+        return "", []
+    return (f"{len(over)} of {scope} canvases with a person and any speech or thought think more "
+            f"than they say"), over
+
+
+def _declared_stat_names(game):
+    """Every name a printed stat could honestly refer to, lower-cased: trait keys and
+    labels, player and NPC core_traits, NPC flag_keys, and every flag any effect sets."""
+    names = set()
+    for lab in ((game.get("traits") or {}).get("labels") or []):
+        for k in ("key", "label"):
+            if lab.get(k):
+                names.add(str(lab[k]).lower())
+    for owner in [game.get("player") or {}] + list(game.get("npcs") or []):
+        names.update(str(k).lower() for k in (owner.get("core_traits") or {}))
+        names.update(str(k).lower() for k in (owner.get("flag_keys") or []))
+    for _path, d in _walk_paths(game):
+        for k in ("flag", "flag_key", "trait", "trait_key"):
+            if isinstance(d.get(k), str):
+                names.add(d[k].lower())
+    return {n.replace("_", " ") for n in names} | names
+
+
+def lint_printed_stat(game):
+    """`+Ray Respect` on a button, or in the prose after it, for a stat nobody declared.
+
+    `the-meters.md` "What the player is shown": show the reaction, not the number, and
+    `register.md` truth rule 4 — a consequence printed on a button is a real flag or
+    stat. The first loud rewrite this came from printed a trust stat for the
+    protagonist's mother, and no such stat existed. Matches by the LAST words of the printed name, so "+Ray Respect" is real
+    if `respect` or `ray respect` is declared. A list, never a score.
+    """
+    declared = _declared_stat_names(game)
+    hits = []
+
+    def check(cid, text):
+        for m in PRINTED_STAT_RE.finditer(text or ""):
+            name = (m.group(1) or m.group(2) or "").strip()
+            words = name.lower().split()
+            if not words:
+                continue
+            tails = {" ".join(words[i:]) for i in range(len(words))}
+            if not (tails & declared or {t.replace(" ", "_") for t in tails} & declared):
+                hits.append(f"{cid}: \"{m.group(0).strip()}\" names no declared trait or flag")
+
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            for b in _flat_blocks(n.get("blocks")):
+                if b.get("content"):
+                    check(c.get("id"), str(b["content"]))
+            for ch in _node_choices(n):
+                check(c.get("id"), str(ch.get("text") or ""))
+    return f"{len(hits)} printed stat change(s) with nothing behind them", hits
+
+
+def lint_past_claim(game):
+    """A repeatable screen claims a past the player may not have had.
+
+    `register.md` truth rule 2 and L3: *last night*, *this week*, *again* on a canvas
+    that also renders on the first visit is a lie on the first visit. Legal inside a
+    `group` whose conditions read the flag or counter that records it, so any sentence
+    under a conditioned group is skipped — which is LENIENT: it cannot tell whether the
+    condition is the right one. Narration and speech both, because the rewrite this came
+    from put the false past in a character's mouth ("Did you eat last night? You didn't").
+    """
+    hits, scope = [], 0
+
+    def walk(cid, blocks, gated):
+        nonlocal scope
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            here = gated or (b.get("type") == "group" and bool(
+                (props.get("conditions") or {}).get("items") or b.get("conditions")))
+            if b.get("content") and b.get("type") in PROSE_BLOCKS:
+                for s in _beat_sentences(str(b["content"])):
+                    scope += 1
+                    m = PAST_CLAIM_RE.search(s)
+                    if m and not here:
+                        hits.append(f"{cid} [{m.group(0)}]: {s.strip()[:100]}")
+            walk(cid, props.get("blocks") or b.get("blocks"), here)
+            for beat in props.get("beats") or []:
+                walk(cid, beat.get("blocks"), here)
+
+    for c in game.get("canvases") or []:
+        if not (c.get("trigger") or {}).get("is_repeatable"):
+            continue
+        for n in c.get("nodes") or []:
+            walk(c.get("id"), n.get("blocks"), False)
+    if not scope:
+        return "", []
+    return (f"{len(hits)} ungated sentence(s) on repeatable canvases claim a past "
+            f"(of {scope} sentences)"), hits
+
+
+def _opening_flags(game):
+    """Every flag the starting canvas sets, on any branch — the state at the handover."""
+    start = (game.get("project") or {}).get("starting_canvas")
+    op = next((c for c in game.get("canvases") or [] if c.get("id") == start), None)
+    if not op:
+        return None
+    out = set()
+    for path, d in _walk_paths(op):
+        if "flagEffects" in path and isinstance(d.get("flag"), str) and d.get("op", "set") == "set":
+            out.add(d["flag"])
+    return out
+
+
+def _card_visible(card, flags, start_traits):
+    """Does this card show right after the opening? Unknown conditions count as NOT shown,
+    so the lint can only under-report a card, never invent one."""
+    for w in card.get("when") or []:
+        if not isinstance(w, dict):
+            return False
+        opn = w.get("op") or w.get("operator")
+        if w.get("flag"):
+            on = w["flag"] in flags
+            if (opn == "is_true" and not on) or (opn == "is_false" and on):
+                return False
+            if opn not in ("is_true", "is_false"):
+                return False
+        elif w.get("trait") and (w.get("subject") in (None, "player")):
+            cur = start_traits.get(w["trait"], 0)
+            val = w.get("value", 0)
+            ok = {"lt": cur < val, "lte": cur <= val, "gt": cur > val, "gte": cur >= val,
+                  "eq": cur == val, "ne": cur != val}.get(opn)
+            if not ok:
+                return False
+        else:
+            return False
+    return True
+
+
+def lint_opening_card(game):
+    """The opening ends on a quest card with goal steps.
+
+    `the-first-hour.md` F1b step 5: the first objective is a card with `goals`, so the
+    guidance page prints what is done and what is next — 21 of 26 top games give "what
+    next" text and it is the players' number-one comment topic (SCENE_CONTENT_REVIEW M1).
+    Visible = no `when`, or a `when` satisfied by the flags the starting canvas sets and
+    the player's starting traits.
+    """
+    flags = _opening_flags(game)
+    if flags is None:
+        return "", []
+    start_traits = dict(((game.get("player") or {}).get("core_traits")) or {})
+    cards = game.get("quest_cards") or []
+    shown = [c for c in cards if _card_visible(c, flags, start_traits)]
+    with_goals = [c for c in shown if c.get("goals")]
+    rows = [f"{c.get('id') or str(c.get('text') or '')[:40]}: "
+            f"{'goals ' + str(len(c['goals'])) if c.get('goals') else 'NO goals'}"
+            for c in shown]
+    if not shown:
+        rows = ["no quest card is visible once the opening hands over"]
+    verdict = "arms a card with goals" if with_goals else "arms NO card with goals"
+    return (f"the opening {verdict} — {len(with_goals)} of {len(shown)} visible card(s) "
+            f"carry goals"), rows
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Gates
 # ─────────────────────────────────────────────────────────────────────────────
 _OBJ_STOP = set("""
@@ -1804,6 +2070,54 @@ def lint_labels_and_systems(model, game, state):
                f"{len(declared_labels)} distinct labels over {len(room_labels)} rooms · "
                f"{len(findings)} to eyeball")
     return summary, findings
+
+
+def lint_mute_cards(game):
+    """Which guidance cards tell the player nothing, and whose page is silent entirely.
+
+    `renderQuestsGoalBlock` has four frames and falls off the end: a card with no
+    `goals` and no `ready_canvas`, not `terminal`, renders its flavour text and then
+    RETURNS "" (v2.py:15974-15976). `evaluateGoals` reports `allMet` vacuously for an
+    empty list (v2.py:15875-15877), so such a card can never show a 🎯 block at all.
+
+    ⚠️ A LINT AND NOT A GATE, and the engine's own comment is why: that `return ""`
+    is annotated "happens for transitional cards between capstones" — a legitimate
+    authored shape. The withdrawn "walls state their key" gate fired on 7 of 8 doors in
+    a game that was obeying the doctrine; failing every mute card would be the same
+    error one surface over.
+
+    What the list is for is the shape the corpus punishes hardest. `in-her-own-hands`
+    ships 136 passages for one character and an 881-word hint page whose locked state
+    reads "This hint is locked until you have completed another task", and its players
+    quote it back — "What task do i do to unlock shauns third task" (13 likes), against
+    a top-comment complaint of "Does corruption have to be at a certain level? What's
+    needed?" (52). A character EVERY one of whose cards is mute has a section on the
+    guidance page that never says anything, which is that failure exactly.
+    """
+    cards = game.get("quest_cards") or []
+    if not cards:
+        return "", []
+    mute, by_owner = [], collections.defaultdict(list)
+    for c in cards:
+        owner = c.get("npc_id") or "story"
+        silent = (not (c.get("goals") or [])
+                  and not c.get("ready_canvas")
+                  and not c.get("terminal"))
+        by_owner[owner].append(silent)
+        if silent:
+            mute.append((owner, str(c.get("text") or "")[:60]))
+    rows = []
+    for owner in sorted(by_owner):
+        flags = by_owner[owner]
+        if flags and all(flags):
+            rows.append(f"{owner}: ALL {len(flags)} cards render no requirement — "
+                        f"their section of the page never says what to do")
+    for owner, txt in mute[:10]:
+        rows.append(f"{owner}: mute card — \"{txt}…\"")
+    if not rows:
+        return "", []
+    return (f"{len(mute)}/{len(cards)} cards render flavour text and no requirement",
+            rows)
 
 
 def lint_doors(model, game):
@@ -4689,6 +5003,129 @@ def lint_obligation_vs_week(model, game, state):
     return summary, rows
 
 
+def lint_collector_is_target(model, game, state):
+    """Is the person who enforces the hold also the person the porn is attached to?
+
+    ⚠️ THE DEFECT THIS EXISTS FOR WAS NEVER WRITTEN IN ANY FILE. Asked for ten
+    female-lead concepts, this skill produced ten where a man collects money and the
+    sex is how the money gets settled. Grepping `references/`, `SKILL.md` and
+    `templates/` for `prostitut|sex work|escort|paid sex|sex for money|instead of
+    money` returns ZERO. It is emergent: `the-want.md` §1b used to ask for a
+    collector, §4's first charge is "someone with power over her" - which the
+    collector already is - and `the-surfaces.md` requires the repeatable surface be
+    explicit. Three defensible rules compose into one architecture nobody chose.
+
+    Measured, `~/Documents/Female_Hold_Study_20260904/probe_c.py`: across every field
+    game with a bill and a named collector, the collector's share of the game's
+    EXPLICIT passages is 0.4-3.8%, and he is never the top figure. `degrees-of-lewdity`
+    is the case that settles it - Bailey, the landlord that game is half built around,
+    carries 6 of 415 explicit passages (1.4%) against Whitney's 61 (14.7%), and Whitney
+    charges her nothing. The field builds the hold and the porn as two systems.
+
+    ⚠️ A LINT, NEVER A GATE, and the reason is in that same sentence: DoL ships
+    collector-as-target deliberately and it works. A gate here would fail a game for a
+    legitimate design - the error that took R4, study 6's anchoring check and P0 back
+    out (see `lint_obligation_vs_week`). So this prints a RANK and a count and invents
+    no threshold.
+
+    ⚠️ The unit here is SURFACES, not passages, so the percentage is not directly
+    comparable to the field's 0.4-3.8%. The rank is: the field's collector is never #1.
+    """
+    want = (state or {}).get("want") or {}
+    board_econ = ((state or {}).get("board") or {}).get("economy") or {}
+    npcs = {n.get("id"): (n.get("name") or n.get("id"))
+            for n in (game.get("npcs") or []) if n.get("id")}
+
+    # ── who collects, in declaration order: the ledger, then the engine, then the prose
+    collector, source, rows = want.get("hold_collector"), "want.hold_collector", []
+    if not collector:
+        rent = (game.get("settings") or {}).get("rent") or {}
+        if rent.get("collector_npc"):
+            collector, source = rent["collector_npc"], "[settings.rent] collector_npc"
+    if not collector:
+        # Last resort: a proper noun from the cast appearing in the declared hold.
+        # Both live games name theirs there ("Simone counts", "paid to Kess"). An
+        # ambiguous match is reported as ambiguous rather than resolved by guessing.
+        prose = " ".join(str(x) for x in (want.get("obligation"),
+                                          board_econ.get("obligation")) if x)
+        named = [nid for nid, nm in npcs.items()
+                 if nm and re.search(r"\b" + re.escape(nm) + r"\b", prose, re.I)]
+        if len(named) == 1:
+            collector, source = named[0], "named in the declared hold"
+        elif len(named) > 1:
+            rows.append(f"the declared hold names {len(named)} characters "
+                        f"({', '.join(npcs[n] for n in named)}) — declare "
+                        f"want.hold_collector to say which one enforces it")
+
+    # ── what carries the crude writing: every REPEATABLE canvas that is explicit at
+    # all, on the same >= 3 floor `explicit floor` and `lint_act_nodes` use.
+    #
+    # ⚠️ Deliberately NOT lint_act_nodes' selection, which also requires an act-menu
+    # self-loop. That extra clause is right for asking "how crude is the beat the
+    # player is standing in", and wrong here: measured on both live games it selected
+    # ZERO canvases in vesper_two while the game has twenty-one explicit repeatable
+    # surfaces, so the lint returned empty and looked like a pass. The question here
+    # is which character the returnable porn is attached to, and a portrait hub with
+    # no self-loop is exactly that.
+    per_npc, total = collections.Counter(), 0
+    for c in model:
+        if not c["rep"] or len(EXPLICIT.findall(_canvas_text(c))) < 3:
+            continue
+        total += 1
+        who = c.get("npc") or c.get("requires_npc")
+        if not who:
+            # Fall back to whoever is on screen: a portrait block's npcId.
+            for n in (c.get("nodes") or []):
+                blocks = []
+                _dialog_blocks(n.get("blocks"), blocks)
+                for b in blocks:
+                    nid = ((b.get("props") or {}).get("npcId") or "").strip()
+                    if nid:
+                        who = who or nid
+        if who:
+            per_npc[who] += 1
+
+    if not total:
+        return "", []
+
+    ranked = per_npc.most_common()
+    top = ", ".join(f"{npcs.get(n, n)} {k}" for n, k in ranked[:4]) or "nobody"
+    # Two denominators, and printing one of them alone reads as a much smaller share
+    # than it is: many explicit repeatables (walk-ins, ambients) name no character at
+    # all, so a rank is out of the ATTRIBUTED set and a share is out of the whole.
+    attributed = sum(per_npc.values())
+    basis = (f"{total} explicit repeatable surface(s), {attributed} attributed to a "
+             f"character")
+
+    if not collector:
+        rows.append("the-want.md §4a — the field's collector carries 0.4–3.8% of the "
+                    "explicit passages and is never the top figure. Nothing here can "
+                    "check that until the collector is named.")
+        return (f"collector NOT DECLARED, which is not a pass · {basis} · {top}", rows)
+
+    mine = per_npc.get(collector, 0)
+    rank = next((i + 1 for i, (n, _) in enumerate(ranked) if n == collector), None)
+    who = npcs.get(collector, collector)
+    summary = (f"collector {who} ({source}) holds {mine} of {attributed} attributed"
+               + (f", rank {rank} of {len(ranked)}" if rank else ", carrying none")
+               + f" · {basis} · {top}")
+
+    rows.append("field reference: the collector's share of a game's explicit passages "
+                "runs 0.4–3.8% and he is NEVER the top figure — degrees-of-lewdity's "
+                "Bailey 6 of 415 (1.4%) against Whitney's 61 (14.7%), and Whitney "
+                "charges her nothing")
+    if rank == 1:
+        rows.append("⚠ the collector is the game's LARGEST explicit surface owner. Not a "
+                    "failure — DoL makes Bailey both on purpose — but the-want.md §4a: if "
+                    "settling the hold IS the repeatable surface, the game has one idea, "
+                    "and its ceiling is however many ways she can pay. Check that somebody "
+                    "who charges her nothing carries more of it than he does.")
+    elif mine == 0:
+        rows.append("the collector owns no explicit surface at all. Also a shape — but §4a "
+                    "asks for a real character who CAN want her, not an absent one.")
+    return summary, rows
+
+
 def lint_paid_repeatable_deposits(model, game, state):
     """What a PAID repeatable leaves behind — a RATE, never a score.
 
@@ -5455,6 +5892,37 @@ def run_gates(model, game, state=None):
              f"{len(cast)} characters in the game",
              gaps)
 
+    # G13b — a goal bullet says what it wants, in words.
+    # The goal renderer falls back `label -> trait -> flag -> ""` (v2.py:15962-15964),
+    # so a goals item carrying no `label` prints its RAW KEY to the player: a bullet
+    # reading "◯ simone_05_done" under the 🎯 To advance header. The importer requires
+    # `label` on trait and counter goals ONLY (template_import.py:5669-5673; the
+    # dataclass says so itself at :1092-1095) — flag-shaped goals fall straight through.
+    #
+    # Trait goals are already safe and already print the number: the renderer appends
+    # " — <current> / <target>" for them (v2.py:15966-15968). The engine does its half
+    # correctly; the whole leak is flag goals.
+    #
+    # A GATE and not a lint, on two grounds. There is no legitimate version of showing
+    # a player a snake_case flag key — unlike the mute-card shape below, which the
+    # engine's own comment calls intentional. And it invents no threshold: it compares
+    # a card against its own declared goals, so it cannot fail a game for obeying the
+    # doctrine. n/a when no card declares a goal, because an absence is not a pass.
+    unlabelled, goal_items = [], 0
+    for c in cards:
+        for g in (c.get("goals") or []):
+            goal_items += 1
+            if not str(g.get("label") or "").strip():
+                key = g.get("flag") or g.get("trait") or "?"
+                who = c.get("npc_id") or "story"
+                unlabelled.append(
+                    f"{who}: goal '{key}' has no label — the player reads the raw key")
+    gate("a goal says what it wants",
+         None if not goal_items else not unlabelled,
+         f"{goal_items - len(unlabelled)}/{goal_items} goal bullets render words "
+         f"rather than a raw key",
+         unlabelled)
+
     # ⚠️ THERE IS NO "walls state their key" GATE, AND THE ABSENCE IS DELIBERATE.
     # It was written, it fired on 7 of 8 doors in a real game, and it was WRONG:
     # `references/engine.md` §15 already rules on this and rules the other way —
@@ -5463,9 +5931,14 @@ def run_gates(model, game, state=None):
     # it replaces the want with a reason and is "weaker as a door". Preferring the want
     # is the documented default, verified live.
     # A locked choice showing its own action text is therefore NOT silent — it states
-    # the want. What it does not state is the ROUTE, and that is `the-voice.md` R3's
-    # job on the guidance card, already enforced by "guidance exists" below. A gate
-    # here would fail a game for obeying the skill, and would duplicate that one.
+    # the want. What it does not state is the ROUTE.
+    # ⚠️ CORRECTED 2026-09-03. This comment used to end "and that is `the-voice.md`
+    # R3's job on the guidance card, ALREADY ENFORCED BY 'guidance exists' below."
+    # It is not. "guidance exists" checks that a card EXISTS per ascent tier and per
+    # character and never reads what the card says. The route was therefore unchecked
+    # on both surfaces at once. The two checks that now cover it are G13b above (a goal
+    # renders words, not a raw key) and `lint · the guidance page says nothing` below
+    # (a card that renders no requirement at all).
 
     # G15 — no character's ladder ends in silence.
     # pickQuestsCard returns the single highest-priority match; when an arc's last
@@ -7749,7 +8222,7 @@ def beat_mode(path):
         print()
         print(f"  BEAT {i}")
         # ⚠️ NO VERDICT ON LENGTH, and the reason is a unit mismatch that would have
-        # made this line lie. `register.md:332` gives 37 words per reveal beat, where
+        # made this line lie. `register.md:491` gives 37 words per reveal beat, where
         # a beat is ONE SCREEN. A canvas node that is not a cascade is a single `Beat`
         # to this script and can hold several screens' worth of prose: two real
         # mrs_vance beats sampled while building this mode ran 100 and 152 words, and
@@ -7757,7 +8230,7 @@ def beat_mode(path):
         # unit does not support. `forty_miles` ships 938 beats against 259 nodes — the
         # two counts are not the same thing. So: the number, the reference, and the
         # caveat, and the reader matches unit to unit.
-        print(f"    words                {len(words):>4}   register.md:332 \u2014 the field runs "
+        print(f"    words                {len(words):>4}   register.md:491 \u2014 the field runs "
               f"37 words per")
         print(f"{'':>32}reveal beat, where a beat is ONE SCREEN. Compare only")
         print(f"{'':>32}if this text is one screen.")
@@ -8781,6 +9254,7 @@ def main():
     label_summary, label_lints = lint_labels(model, game)
     sys_summary, sys_lints = lint_labels_and_systems(model, game, state)
     door_summary, door_lints = lint_doors(model, game)
+    mute_summary, mute_lints = lint_mute_cards(game)
     unwritten_summary, unwritten_lints = lint_unwritten_act(model, game)
     browse_summary, browse_lints = lint_browse_share(model, game)
     disp_summary, disp_lints = lint_dispatch_depth(game)
@@ -8795,6 +9269,11 @@ def main():
     gloss_rate, gloss_lints = lint_gloss(game)
     neg_share, neg_total, neg_lints = lint_negation(game)
     hist_share, hist_total, hist_lints = lint_history_repeatable(game)
+    past_summary, past_lints = lint_past_claim(game)
+    stat_summary, stat_lints = lint_printed_stat(game)
+    speaks_summary, speaks_lints = lint_one_time_speaks(game)
+    thought_summary, thought_lints = lint_thoughts_over_speech(game)
+    opcard_summary, opcard_lints = lint_opening_card(game)
     fh_summary, fh_lints = lint_named_before_met(model, game)
     place_summary, place_lints = lint_place_function(model, game)
     role_summary, role_lints = lint_role_stays_attached(model, game)
@@ -8805,6 +9284,7 @@ def main():
     price_summary, price_lints = lint_price_spelled_out(model, game, state)
     chan_summary, chan_lints = lint_money_channel(model, game, state)
     oblig_summary, oblig_lints = lint_obligation_vs_week(model, game, state)
+    coll_summary, coll_lints = lint_collector_is_target(model, game, state)
     dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
@@ -8824,6 +9304,8 @@ def main():
                                                            "findings": sys_lints},
                                     "doors": {"summary": door_summary,
                                               "findings": door_lints},
+                                    "mute_cards": {"summary": mute_summary,
+                                                   "findings": mute_lints},
                                     "unwritten_act": {"summary": unwritten_summary,
                                                       "findings": unwritten_lints},
                                     "browse_share": {"summary": browse_summary,
@@ -8871,7 +9353,19 @@ def main():
                                     "paid_repeatable_deposits": {"summary": dep_summary,
                                                                 "findings": dep_lints},
                                     "obligation_vs_week": {"summary": oblig_summary,
-                                                           "findings": oblig_lints}}},
+                                                           "findings": oblig_lints},
+                                    "collector_is_target": {"summary": coll_summary,
+                                                            "findings": coll_lints},
+                                    "past_claim": {"summary": past_summary,
+                                                   "findings": past_lints},
+                                    "printed_stat": {"summary": stat_summary,
+                                                     "findings": stat_lints},
+                                    "one_time_speaks": {"summary": speaks_summary,
+                                                        "findings": speaks_lints},
+                                    "thoughts_over_speech": {"summary": thought_summary,
+                                                             "findings": thought_lints},
+                                    "opening_card": {"summary": opcard_summary,
+                                                     "findings": opcard_lints}}},
                          indent=1, default=str))
         return
 
@@ -8968,6 +9462,26 @@ def main():
               " banded `shift` node. ⚠️ Field range is 0-68%, so there is no threshold")
         print("           to set here that would not fail a game for obeying the"
               " doctrine — which is why this cannot fail anything)")
+
+    if mute_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the guidance page says nothing — {mute_summary}")
+        for h in mute_lints[:12]:
+            print(f"          · {h}")
+        if len(mute_lints) > 12:
+            print(f"          · … and {len(mute_lints)-12} more")
+        print("          (the-voice.md R3 — a LIST, never a score. A card with no"
+              " `goals`, no `ready_canvas` and not `terminal` renders its flavour text")
+        print("           and then nothing at all (v2.py:15974-15976), because"
+              " evaluateGoals reports allMet vacuously for an empty list. The engine's")
+        print("           own comment calls that shape intentional for transitional"
+              " cards between capstones, so ONE mute card is fine and cannot be failed.")
+        print("           The row worth reading is a character ALL of whose cards are"
+              " mute: their section of the page never says what to do. That is the")
+        print("           corpus's most-punished defect — in-her-own-hands ships 136"
+              " passages for one character behind hints reading \"complete another")
+        print("           task\", and its players quote it back. Trait goals already"
+              " print the number themselves — label — current / target)")
 
     if door_summary:
         print(f"  {'─'*72}")
@@ -9229,6 +9743,55 @@ def main():
               " number. Clock time is a different rule and belongs to")
         print("           the-clock.md C2; this one is elapsed time)")
 
+    if past_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a repeatable claims a past — {past_summary}")
+        for h in past_lints[:10]:
+            print(f"          · {h}")
+        if len(past_lints) > 10:
+            print(f"          · … and {len(past_lints)-10} more")
+        print("          (register.md 'The truth rule' rule 2 and L3 — a LIST, never a score."
+              " Legal inside a group gated on the flag that records the past;")
+        print("           any conditioned group is skipped, so this under-reports. Speech"
+              " counts too: a character can lie about a past the player never had)")
+
+    if stat_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a printed stat is real — {stat_summary}")
+        for h in stat_lints[:10]:
+            print(f"          · {h}")
+        print("          (the-meters.md 'What the player is shown' — show the reaction, not the"
+              " number. Print a reaction line or a real flag; a")
+        print("           number only for a stat the game declares. A LIST, never a score)")
+
+    if speaks_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a one-time step speaks — {speaks_summary}")
+        for h in speaks_lints[:10]:
+            print(f"          · {h}")
+        if len(speaks_lints) > 10:
+            print(f"          · … and {len(speaks_lints)-10} more")
+        print("          (register.md 'The voice — say it loud' rule 5 and L3 — the one-time"
+              " step carries the conversation. A LIST, never a score)")
+
+    if thought_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · thoughts outweigh speech — {thought_summary}")
+        for h in thought_lints[:10]:
+            print(f"          · {h}")
+        if len(thought_lints) > 10:
+            print(f"          · … and {len(thought_lints)-10} more")
+        print("          (register.md rule 3 and S3 — her thoughts go beside the dialogue,"
+              " never instead of it. A LIST, never a score)")
+
+    if opcard_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the opening arms a card with goals — {opcard_summary}")
+        for h in opcard_lints[:10]:
+            print(f"          · {h}")
+        print("          (the-first-hour.md F1b step 5 — the first objective is a quest card"
+              " with goal steps. A LIST, never a score)")
+
     if fh_summary:
         print(f"  {'─'*72}")
         print(f"  lint · named before met — {fh_summary}")
@@ -9357,6 +9920,15 @@ def main():
         print("          (the-economy.md R3 — a FIGURE, never a score. `forty_miles` runs 70% and"
               " `back_home` 25%, so any threshold between them fails a game for obeying the"
               " doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
+
+    if coll_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the collector is also the target — {coll_summary}")
+        for h in coll_lints[:6]:
+            print(f"          · {h}")
+        print("          (the-want.md §4a — a RANK, never a score. The field's collector is"
+              " never the top explicit figure, but DoL makes Bailey both deliberately, so a"
+              " threshold here would fail a game for a legitimate design)")
 
     if dep_summary:
         print(f"  {'─'*72}")

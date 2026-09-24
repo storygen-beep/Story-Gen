@@ -55,7 +55,23 @@ belong here; only decisions, debts, and promises do.
     },
 
     "who_she_is":      "…",
-    "obligation":      "…",   // what she owes, who collects, when — the-economy.md R3-R3d
+    // WHAT HOLDS HER HERE. The key kept its name; its meaning widened 2026-09-04.
+    // It used to read "what she owes, who collects, when", and that framing is why
+    // eight v2 games shipped one premise: a bill is 4 of 23 in the female-lead field
+    // and the FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
+    "obligation":      "…",   // the hold, in her nouns, with a face and a date
+    "hold_kind":       "ambition" | "bill" | "order" | "body" | "subsistence"
+                     | "appetite" | "job" | "erosion" | "displacement",
+                              // the-want.md §1b carries the count and an example each.
+                              // `bill` hands the mechanism to the-economy.md R3-R3d.
+    "hold_collector":  "npc_id",  // WHO enforces it, when a person does. Omit when
+                              // nothing does — `in-her-own-hands` charges rent with no
+                              // collector at all, and that is a shape, not an omission.
+                              // Read by the lint `the collector is also the target`,
+                              // which prints his share of the game's explicit surfaces.
+                              // the-want.md §4a: the person who holds the obligation is
+                              // not automatically the person she fucks — measured at
+                              // 0.4-3.8% of explicit passages across the whole field.
     "appetite":        "…",   // must not be completable. A DESTINATION, not the opening
                               // position and not the content schedule — the tiers are that
                               // (the-want.md §2)
@@ -150,6 +166,10 @@ belong here; only decisions, debts, and promises do.
       //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1190) while the
       //    buttons print whatever each was typed with. the-economy.md R7.
       "symbol":     "$",
+      // ⚠️ THE MONEY CASE ONLY — this block and gate 24 exist for `want.hold_kind = "bill"`.
+      //    A game held by an ambition, an order, a body or a place declares its hold in
+      //    `want` and leaves these three keys out; gate 24 then reports n/a, which the-want.md
+      //    §1b says is a choice and not an omission.
       "obligation": "rent — Monday, from the landlord, in person",
       // ⚠️ The PRICE, as a number. Prose alone cannot be checked, and a game shipped with its
       //    central charge missing because only the prose existed. Gate 24.

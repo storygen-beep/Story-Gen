@@ -292,6 +292,26 @@ already make and this one was built without it: **presence is not placement.**
 **Field: 14 of 19 games carry a recurring obligation** — rent, debt, a loan, bills, tuition. The
 reference game says *rent* 130 times.
 
+> ⚠️ **NAME THE CORPUS, because it is not the one this skill writes for.** That 14 of 19 was
+> measured on `~/Documents/Economy_Pressure_Study_20260827/`, whose table holds **17 games, of
+> which two are female-led** (`course-of-temptation`, `zaras-school-life`). The 27-game field
+> behind most of this skill is **20 male · 6 picked · 4 female** (`the-want.md:48`). So R3
+> describes the **male-lead** economy accurately and says nothing about the default protagonist.
+>
+> Re-measured on the female-lead field 2026-09-04 with these same regexes
+> (`~/Documents/Female_Hold_Study_20260904/probe_a.py`): a mechanically-real recurring obligation
+> is **6 of 23 — 26%**, against 74% here. And a hand-read of all 23 puts the bill **fourth** among
+> nine hold shapes, behind an ambition she picked herself.
+>
+> **R3–R3d are not wrong and nothing below changes.** They are the mechanism for a game that picks
+> `bill`, and they are the best-evidenced pages in this file. What moved is upstream: `the-want.md`
+> §1b no longer tells every author to pick one. If yours does, everything from here down applies.
+>
+> ⚠️ That study's own `obligation.py` carries a false friend this one found and fixed:
+> `\w*rent\w*` matches *cu-RRENT* and *pa-RENT*, `\w*bill\w*` matches *BILL-iards*. Its per-game
+> `vars:` column is contaminated; its headline — the ratchet, read out of DoL's `rentpay` widget by
+> hand — does not depend on the regex and stands.
+
 Three things make it work, and they are cheap:
 
 - **A date.** It converts *"you could work"* into *"Monday, $120, or else."*

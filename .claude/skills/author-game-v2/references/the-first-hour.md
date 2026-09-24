@@ -27,6 +27,7 @@ Engine claims here carry a `file:line` into
 
 ## Contents
 1. F1 · The opening picks one shape and commits
+1b. F1b · The opening's shape (setup → … → gameplay)
 2. F2 · Boot and capstone are two canvases
 3. F3 · The opening hands over into an open door
 4. F4 · Every live system gets one beat
@@ -111,12 +112,16 @@ cannot picture, at a density the prose cannot support. Our own measured failure 
 two of whom are not in the game at all**, and put none of them on screen — that count comes from
 reading our own TOML, not from the field walk, and it stands.
 
-**Pick one:**
-- **Cold open** — name the player's situation and the pressure. Name **nobody**. The cast arrives
-  later as content, each through F5's meeting. Around 150 words is a sensible target; it is an
-  authoring figure, not a field measurement.
-- **Staged open** — spend the words. One person enters at a time, is described, **speaks**, and
-  states what they want. F6's craft bar applies to each entrance.
+**Pick one — and the default is staged.** Since 2026-09-24 the skill writes in the loud voice
+(`register.md`, "The voice — say it loud"), and that voice needs people on screen talking. The
+opening is a **staged open** unless there is genuinely no person to put on screen.
+- **Staged open (default)** — spend the words. One person enters at a time, is described,
+  **speaks**, and states what they want. F6's craft bar applies to each entrance. The shape is F1b
+  below.
+- **Cold open** — only where no person is on screen: name the player's situation and the pressure,
+  name **nobody**, and let the cast arrive later through F5's meeting. Around 150 words is a
+  sensible target; it is an authoring figure, not a field measurement. The loud voice still
+  applies — her situation said plainly, her feeling about it said out loud.
 
 ⚠️ **This is not a word-count rule, and after 2026-08-24 it does not carry a word count at all.** It
 is a *consistency* rule: the cast load and the word budget have to agree. A 200-word opening that
@@ -129,18 +134,121 @@ whether the name is doing work, or delete it.
 
 ---
 
-### The worked opening — cold open, naming nobody
+### F1b · The opening's shape — setup, problem, person, conflict, choice, temptation, objective, play
 
-The shape above, written out. Thirty-eight words: the situation, the pressure, and the thing to do
-about it. No name, because nothing has earned one yet, and the cast arrives later through F5.
+Added 2026-09-24, from LO's opening plan (`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`
+§2 and §4). The old opening shape was *wake up → routine → leave → the job*, and it ended on a quiet
+literary line. The new one:
 
-> The room came furnished, which means somebody else chose the curtains and then left in a hurry.
-> Rent is due in nine days. There is a card on the fridge for a bar that is hiring, and the
-> handwriting on it is not yours.
+```
+setup → problem → character interaction → conflict → choice → temptation → first objective → gameplay
+```
 
-The last sentence is the hand-over: it is a door, and the player can walk at it on the next click.
-Note what the beat spends its softeners on — *which means*, *in a hurry*, *not yours* — and see
-`register.md` **How far is far enough** for why stripping them flattens the screen.
+**What each piece has to do:**
+
+1. **The first screen states it plainly:** who she is, the problem, what she wants, and her voice.
+   Said, not implied (`register.md`, the voice, rule 1). F2b's field figures still hold for its
+   length: median 144 words.
+2. **The first person on screen talks, pushes, and wants something from her.** Someone speaks →
+   she answers → they push → she thinks. Who they are, what they want and how they feel about her
+   in the first lines.
+3. **A first choice inside that first character scene**, not after the opening. Its consequence
+   is **visible as a reaction line**, or as a real flag named on the button — never a score or a stat label
+   (`the-meters.md`, "What the player is shown").
+4. **An early temptation** in the first few scenes: attraction, tension, a look, a suggestive
+   choice. The player should know within minutes that sex is what this game is about. 15 of 26 top
+   games put something tempting in the opening and 3 put explicit sex there; 8 put nothing
+   (`SCENE_CONTENT_REVIEW.md` M12).
+5. **The first objective is a quest card with goal steps.** Not a tip alone: `goals`, so the page
+   prints what is done and what is next (`the-voice.md` R3b). 21 of 26 top games give "what next"
+   text, and progression questions are the players' number-one comment topic (M1). Lint `the
+   opening arms a card with goals`.
+6. **Plain tutorial lines on the last screen**, in the game's own plain voice (`the-voice.md`):
+   money, work, exploring, people, choices. *"You need money. Take shifts at the bar, or find
+   another way."* This is the one place the story text may explain a system directly. F2b's warning
+   about the developer talking is about screen one and patch notes, not this.
+7. **It ends on a hook:** a money problem + the objective + a mystery + a person + a choice. Not a
+   quiet last line.
+
+⚠️ **A walk-out is not a refusal.** F4b still holds: nothing in the opening says no to her. A
+button that lets her leave the job offer is her choice, and the offer stays open.
+
+### The worked opening — staged open
+
+The shape above, as screens. Every person is a role, every number is filler, and none of it is a
+world to copy (`register.md`, "Show the mechanism. Never show the world."). Each screen was scored
+with `gates.py --beat`; the numbers are under it.
+
+**Screen 1 — setup, problem, her voice.**
+
+> You're nineteen, you just moved to a city where you know nobody, and rent is due on Friday. You
+> have a tenth of it. You're broke, and everybody in this building can tell.
+>
+> *This is fine. This is totally fine.*
+
+*40 words · median sentence 6 · gloss 0 · history 0.*
+
+**Screen 2 — the first person, the conflict, the first choice.**
+
+> The landlord is waiting on the stairs like he's been counting the minutes.
+>
+> "Friday. All of it. I don't do sob stories."
+>
+> "You'll get it."
+>
+> "With what?" He looks you up and down, slow. "You've got a job I don't know about?"
+>
+> *Here we go.*
+
+| button | what is printed after the click |
+|---|---|
+| **Tell him you'll find work today** | *He grunts. It's almost approval.* |
+| **Tell him it's none of his business** | *His face goes hard. He writes something on the back of an envelope.* · sets `<landlord_crossed>` |
+| **Say nothing and go past him** | *He watches you all the way down the stairs.* |
+
+*45 words · 49% spoken · median sentence 5. The reactions are lines, not stats. The one that
+matters later sets a real flag, and only that one.*
+
+**Screen 3 — the temptation.**
+
+> The guy from across the hall comes out in a towel and nothing else. He sees you and stops dead.
+>
+> "Oh. You're the new one."
+>
+> He takes a long look at your legs before he remembers where your face is. You caught it. He knows
+> you caught it.
+>
+> *He's a mess. So why is your face hot?*
+
+*57 words · median sentence 6. The tension is named (rule 8), and the question she asks herself is
+the hook for that person.*
+
+**Screen 4 — objective, tutorial, hook.**
+
+> You need the rent by Friday. The bar downstairs is hiring.
+>
+> And the manager just offered you double for a shift in the back room. He wouldn't say what
+> happens in the back room.
+
+The card it arms, with goal steps:
+
+```toml
+[[quest_cards]]
+id = "card_rent"
+text = "Make the rent by Friday."
+when = [ { flag = "opening_done", op = "is_true" } ]
+goals = [
+  { type = "flag", subject = "player", flag = "<took_first_shift>", op = "is_true", label = "Take a shift at the bar" },
+  { type = "flag", subject = "player", flag = "<asked_about_back_room>", op = "is_true", label = "Find out what the back room is" },
+]
+tip = "The bar opens at six. The manager is behind the counter."
+```
+
+And the plain lines on the same screen: *You need money. Take shifts at the bar, or find another way.
+People are in different places at different hours. What you say changes how they treat you.*
+
+*34 words of story · median sentence 9. Money problem, objective, mystery, person and a choice in
+two sentences each side of the card.*
 
 ## F2 · Boot and capstone are two canvases
 
@@ -275,9 +383,16 @@ London. Both are inside the median. Neither explains a system.
 `apocalyptic-world` (#1, 7,861 comments) opens on a version number, a request for forum feedback, and a
 systems lecture — *"Reputation… People… you can acquire people in several ways"*. `become-someone`
 opens on patch notes; `family-business` and `sluttown-usa` on changelogs. **This is prevalent and it
-is still wrong** — F4 asks you to ARM a system with a beat, never to describe one. Being common in
-the field is not an argument; `the-clock.md` C2 and `the-economy.md` R3 both already refuse a field
-majority where the reasoning is against it.
+is still wrong** — on the FIRST screen, before any fiction, in the developer's voice. Being common
+in the field is not an argument; `the-clock.md` C2 and `the-economy.md` R3 both already refuse a
+field majority where the reasoning is against it.
+
+⚠️ **Narrowed 2026-09-24.** This warning used to be read as "never explain a system anywhere in the
+opening". It does not cover F1b's plain tutorial lines on the opening's **last** screen — short,
+in the game's own plain voice, after the player has met the people and the problem. What stays
+wrong is the version number, the forum request, the patch notes and the systems lecture standing
+where the story should start. F4 still asks for a beat that arms each system; the tutorial line
+says what the beat just showed.
 
 ⚠️ **But the long backstory prologue is a genuine shipped shape, and the #2 game is one.**
 `destroyer` (7,686) opens on **ten screens, ~2,900 words, one link each** — *"You remember it all
@@ -443,7 +558,8 @@ in the first minutes, as a scene, not as a rule.* This rule is the constraint th
 What this does **not** say: that the opening should be short, or that nothing in it may be
 conditional. F1's two shapes still stand, and a conditional that picks which version of a beat to
 show is not a refusal — see `the-surfaces.md` R5c, where 35% of the field's action-conditionals turn
-out to be variant selectors.
+out to be variant selectors. Nor is a button that lets **her** walk out (F1b): the choice is hers,
+and the door stays open behind her.
 
 ---
 
@@ -1112,7 +1228,7 @@ has to remember who "Stepsister" is.
 
 ## What the scoreboard checks
 
-Two gates and two lints. `python3 scripts/gates.py <slug>`.
+Two gates and three lints. `python3 scripts/gates.py <slug>`.
 
 | | |
 |---|---|
@@ -1120,6 +1236,7 @@ Two gates and two lints. `python3 scripts/gates.py <slug>`.
 | gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, **no** hub left with zero conditions, and no such flag opening a second character's door. |
 | lint · **the place says what it is** | F9. Lists every location by how much prose happens there, against how long its own description is. **Whether a description names the function is a reading, not a measurement**, so this is a list to read and never a score. It replaced a gate that required a first-visit canvas at the anchor — a device eighteen of twenty-six top games do not use. |
 | lint · **named before met** | F7. Lists every character named in prose the player can reach before that character's meeting can fire. A list to read, never a score. |
+| lint · **the opening arms a card with goals** | F1b step 5. The quest cards visible once the starting canvas's handover flags are set, and whether any of them carries `goals`. A list, never a score (added 2026-09-24). |
 
 ⚠️ **Nothing checks the guidance surface.** The `named before met` lint reads *prose canvases* and
 does not look at `[[quest_cards]]`, so a game can pass every gate above with its Quests page still
@@ -1162,9 +1279,13 @@ the bar is one shipped work has cleared rather than an invented number. The six 
 ## Cheat sheet
 
 - **The game does not use a name until it has earned it.** People, places, things.
-- **Pick one opening shape** — cold open names nobody; staged open puts each person on screen and
-  lets them speak. The middle is the defect. (The word ranges this line used to carry were deleted
-  2026-08-24 — F1.)
+- **Pick one opening shape, and staged is the default** — staged open puts each person on screen
+  and lets them speak; cold open names nobody and is only for an opening with no person in it. The
+  middle is the defect. (The word ranges this line used to carry were deleted 2026-08-24 — F1.)
+- **The staged open runs setup → problem → person → conflict → choice → temptation → objective →
+  play** (F1b): first screen says who she is, the problem, the want; a choice inside the first
+  person's scene with a reaction line; something tempting early; a quest card with goal steps;
+  plain tutorial lines on the last screen; a hook, not a quiet last line.
 - **Boot and capstone are two canvases.** The boot starts the chain; the capstone spends the prose.
 - **Hand over into an open door.** A random ambient is not a door. A `substitution_only` walk-in is
   not a door.

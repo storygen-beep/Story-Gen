@@ -13,7 +13,112 @@ the six kinds of screen and the four rules that hang off it: where the clip goes
 climbs, who speaks, and the content kind we do not build. Read it before you write anything at all,
 because the kind decides the shape.
 
-Everything in both halves came from a measured failure or a measured corpus. Nothing here is taste.
+**The voice is a choice, and it is LO's.** On 2026-09-23, shown three ways to write one line —
+quiet, direct and exaggerated — LO picked the top games' loud version over ours: *"I dont like ours,
+I want it to be same as top games exactly,"* then *"we want to completely align the plan to
+chatgpt's new plan,"* and on 2026-09-24, of the style guide, *"I like it."* So **"The voice — say it
+loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
+it. Sources: `~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_WRITING_STYLE.md`
+§2–§5 and `SCENE_CONTENT_REVIEW.md`. The rules that are measured keep their measurements, and where
+a measured rule and the voice disagree, the voice wins and the old rule is retired in place (L2).
+
+---
+
+## The voice — say it loud
+
+The old voice was quiet: the story left between the lines for the player to infer. That is what
+was rejected. The new voice tells the player what is happening, what the protagonist feels, and
+why. **Loud is not long.** It keeps "Sentences run short" below and the 35–40 word beat.
+
+1. **Say it, don't hint it.** Tell the player what is happening and what it means.
+2. **Spell out the feelings.** Angry, scared, turned on, embarrassed: say so.
+3. **Her thoughts on screen, beside the dialogue, never instead of it.** She has opinions, in
+   italics (`thought_bubble`). S3 below measured our games thinking *instead* of talking; the new
+   voice adds speech first, then her reaction to it.
+4. **Push the drama.** Make the situation obvious and felt. Not every line has to be loud.
+5. **More dialogue than narration.** The shape of a scene with a person in it: **someone speaks →
+   she answers → they push → she thinks → a choice.**
+6. **Every character sounds like themselves.** Short and blunt, strict, worried and distracted,
+   teasing: pick one per person and hold it. Nobody sounds like the narrator. S3's "one term of
+   address per person" is the cheapest way to do it.
+7. **Obvious on arrival.** Within the first lines the player knows who a person is, what they want,
+   and how they feel about her.
+8. **Name the sexual tension.** Don't bury it.
+9. **End on a hook**, something that points at what happens next.
+10. **Keep the concrete detail:** places, objects, money, schedules, work. Loud is about what the
+    prose *claims*, not about swapping specifics for adjectives. That is why the truth rule below
+    ships with it.
+
+The game's own voice — labels, buttons, guidance cards — stays plain. The loud voice is for the
+story text only (`the-voice.md`).
+
+**Measured targets** (`SCENE_CONTENT_REVIEW.md` C2 and C8; the field column is its random sample,
+because the curated scene library overstates every property):
+
+| | the top games | target |
+|---|---|---|
+| narration to dialogue | 2.93 : 1 across 27 games (S3) | under 5 : 1, gate `somebody speaks` |
+| dialogue in a scene | 83% of scenes, median 3 NPC lines | every standing scene with a person has a spoken line |
+| a person shows what they want | 54% of scenes | most scenes with a named person |
+
+The one-time steps carry the full loud version; the screens the player re-enters are short and
+still speak. That split is L3 below.
+
+---
+
+## The truth rule
+
+**Loud writing makes claims.** *"She hasn't slept." "You didn't eat last night." "Nobody ever
+thanks her."* The quiet voice made few claims, so it rarely went wrong. The loud voice makes many,
+and every one has to be true on every playthrough that can reach the screen.
+
+Measured on the first loud rewrite of a real scene (`THE_BALANCE_WRITING_STYLE.md` §4): five lines,
+five defects — one contradicted the design (the wrong clothes for that hour), two claimed a past the
+player may not have had (*"last night"*, *"for the first time in a week"* on what could be day one),
+one was out of character, and one printed a stat that does not exist.
+
+| allowed | not allowed |
+|---|---|
+| texture that cannot clash with anything: the kettle, a pet name, the oil in the tray | anything that contradicts the design: clothes, times, who is where |
+| her opinions in her thoughts | claims about the past that no flag tracks: *last night*, *this week*, *again* |
+| dialogue that fits the person's cast entry | behaviour the cast entry rules out |
+| a consequence printed on a button when a real flag or stat sits behind it | made-up stats (`the-meters.md`, "What the player is shown") |
+
+**The four rules.**
+
+1. **Every fact line is checked** against the sheets and the built schedules: who is there, what
+   they are wearing, what time it is, what day.
+2. **A line about the past shows only behind the flag or counter that records it** — a `group`
+   whose `conditions` read it. *"You're late again"* is legal inside `late_count gte 1` and a lie
+   outside it.
+3. **A big moment is a one-time step, not a repeatable.** A repeatable plays every visit, so it
+   cannot carry a revelation. L3.
+4. **A consequence printed on a button is a real flag**, or it is added to the design first. Scores,
+   including a person's own, are never printed (`the-meters.md`, "What the player is shown").
+
+**How to check a scene — seven steps.**
+
+1. List every time the canvas can fire: its trigger, plus the NPC's schedule rows on every
+   weekday. A scene that can fire at 09:00 on a Saturday cannot say *"tonight"* (`the-clock.md` C2).
+2. List every factual claim in the draft: times, clothes, who is where, what the past was, what
+   someone knows.
+3. Check each claim against a source: the cast pages, the systems pages, and the built schedules
+   in `7_final_game.toml`.
+4. A claim true only sometimes gets a gate or a variant. With no gate for it, cut it.
+5. Check each character's lines against their cast entry, including how they say no and what they
+   never do.
+6. Check each printed consequence against the button's real effects.
+7. Write the facts list at the top of the draft, so the next reader can check it too.
+
+**One line, wrong and right.** On a repeatable canvas:
+
+> ❌ *"Late again. Third time this week."* — true on the third visit, a lie on the first.
+>
+> ✅ the same line inside a `group` on `<late_count> gte 3`, with a present-tense line
+> (*"You're late. Apron's on the hook."*) as the fallback.
+
+Lints: `a repeatable claims a past` (rule 2) and `a printed stat is real` (rule 4). Both are lists
+to read; neither can check a claim against a sheet, which is why step 3 is yours.
 
 ---
 
@@ -209,6 +314,61 @@ opened it. The hub opener stays constant, exactly as Course of Temptation's does
 beat is a `group` chain reading it. Adjacent `group` blocks merge into one if/elseif chain and first
 match wins (`engine.md` §35, `v2.py:14561-14568`), so the branches must be mutually exclusive.
 
+### It is field-wide, and we do it zero times
+
+Measured 2026-09-03 across 23 female-lead games. Act screens — 3+ body words on the field's own
+frozen list, chrome and UI panels excluded — whose **entry region carries a conditional before the
+first body word**: **2,283 of 4,836, or 47.2%.** Of those, the ones that write two *full* openings
+of ten words or more, both prose, in genuinely different states: **436, across 18 of the 23
+games.**
+
+⚠️ The first count was 575 and was inflated three ways, each found by reading rather than trusting:
+a localization branch (`family-ties` on `$setting.lang`), a quest-hint panel that cleared the
+body-word bar without being a scene, and mechanical who-does-what-to-whom role swaps
+(`course-of-temptation`'s `EncounterPositions` on `_role is "top"`). Cleaned: 436 state-driven, 10
+mechanical, 2 localization.
+
+**Ours: zero.** `block_pool` — the primitive for exactly this — is used by no v2 game
+(`engine.md` §35).
+
+⚠️ And what those conditions read is **not** mostly her willingness. Of 7,042 state reads before an
+act screen's prose starts: game-specific plot flags 36.4% · what has already happened 14.1% ·
+the clock and where she is 12.9% · **willingness 12.2%** · her body and clothes 8.6% · skill 6.1% ·
+**a die 6.0%** · upkeep 3.2%. Willingness is fourth, about level with a dice roll. **Reach for the
+clock, the place, and what she is wearing before you reach for the meter.**
+
+### Composure is subtraction
+
+When the branch *is* on a willingness meter with a high and a low side (53 pairs, 4 games), the two
+branches are the **same act at a different composure** — not two reasons. Scored on a nerve/poise
+lexicon fixed before the run: of the 39 pairs where the lexicon fires at all, **84.6% put the
+composure on the high branch.**
+
+⚠️ **48 of the 53 pairs are one game.** By this skill's own bar that makes it a shape to choose,
+never a threshold — it is offered exactly as `the-meters.md`'s `<<katetrust>>` observation is.
+
+The mechanism is worth more than the ratio, and it is not "add nervous adverbs":
+
+> **low** — *"I'm here, Coach. Just like you asked. **Ready for my tryout.**"*
+> **high** — *"I'm ready, Coach. Just like you asked."*
+> — `road-to-success`, one surface, branching on `corruption >= 45 || clothing == 'cheerleader2'`
+
+**The uncertain version explains itself. The confident one does not need to.** Composure is words
+removed, not words added. The cheapest instance in the corpus is one word — *"Without a warning,
+Zara leans forward and kisses the boy"* against *"Nervously, Zara leans forward and kisses the
+boy."*
+
+**And the arc position is a second axis, free of the meter.** The same surface at three visit
+counts, `road-to-success`:
+
+> 3 — *"You might not finish everything today. You know that now."*
+> 4 — *"You're back. The coach locks the door behind him with a smirk."*
+> 5+ — *"One more round in his office. After this, you're on the squad. **You keep telling yourself
+> that.**"*
+
+By the third she is lying to herself and the game does not comment on it. `the-meters.md` W1b
+carries why this works: the meter is nerve, so the prose that reads off it is bearing, not motive.
+
 ---
 
 ## The two-halves sentence — one sentence, two people's meters
@@ -352,7 +512,7 @@ makes a beat a click. `v2.py:14426`.
 ```toml
 { type = "cascade", props = { beats = [
   { advance_text = "<the click that reveals this beat>", blocks = [
-    { type = "paragraph", content = "She pulls the shirt over her head slowly, so you know it is for you. Underneath she is better than you guessed. She puts her arms at her sides and lets you look." },
+    { type = "paragraph", content = "She pulls the shirt over her head slowly, so you know it's for you. Underneath she's better than you guessed. A lot better. She drops her arms to her sides and lets you look. She's enjoying every second of it." },
     { type = "video", props = { file = "<dir>/<clip>.webm", description = "<what is on screen, for the harvest pass>", search_queries = [ "<a query that would find it>", "<another>" ] } },
   ] },
 ] } },
@@ -363,7 +523,7 @@ makes a beat a click. `v2.py:14426`.
 ```toml
 { type = "cascade", props = { beats = [
   { advance_text = "<the click>", blocks = [
-    { type = "paragraph", content = "He bends you over the arm of the couch. One hand goes flat between your shoulder blades and he fucks your cunt from behind. Your tits drag on the cushion each time he goes in. You hear the noise you make and you keep making it." },
+    { type = "paragraph", content = "He bends you over the arm of the couch. He fucks your cunt from behind, hard. One hand pins you flat between your shoulder blades. Your tits drag on the cushion every time he slams in. Your cunt clenches on his cock and you let the whole building hear it." },
     { type = "video", props = { pool_dir = "<dir>/<beat_name>", description = "<what is on screen>", search_queries = [ "<a query>", "<another>" ] } },
   ] },
 ] } },
@@ -673,63 +833,108 @@ across 185,575 words of instruction — 0.23% — so an author had almost nothin
 the explanation instead. That is the fourth instance of `SKILL.md`'s *"an example outranks every
 rule beside it"*, and the first where the failure was an **absence**.
 
-One per kind in the table above. Second person, the genre standard. Each was scored on every rule
-this file states before it was written down — the numbers are under each one, and they are the
-point: **a worked example that has not been measured is a rule you cannot see.**
+One per kind in the table above, plus the one-time step and its daily repeatable. Second person,
+the genre standard, and the loud voice ("The voice — say it loud"). Each was scored before it was
+written down — the numbers are under each one, and they are the point: **a worked example that has
+not been measured is a rule you cannot see.** Every person is a role, never a name, and no number
+means anything: *"Show the mechanism. Never show the world."*
 
-**Room / hub card** — the field writes 30 words, nobody speaking, fewer than half carrying a picture:
+**Room / hub card** — the field writes 30 words, nobody speaking, fewer than half carrying a
+picture. Nobody is there, so the voice is hers:
 
-> The laundry runs hot all year and smells of other people's sheets. Two machines take coins. The
-> third has a paper sign on it, OUT in marker.
+> The laundry is hot, loud, and smells like other people's sheets. Two machines take coins. The
+> third says OUT in black marker. You hate this room. You come here anyway, because it's this or
+> the sink.
 
-*27 words · 3 sentences, median 11 · gloss 0 · negation 0 · history 0 — L3 applies here, because a
-room card is re-entered on every visit.*
+*36 words · 5 sentences, median 7 · gloss 0 · negation 0 · history 0 — L3 applies, because a room
+card is re-entered on every visit. "You hate this room" is rule 2: the feeling, said.*
 
 **Reveal beat** — 37 words in the field, and 58% carry a clip:
 
-> She pulls the shirt over her head slowly, so you know it is for you. Underneath she is better than
-> you guessed. She puts her arms at her sides and lets you look.
+> She pulls the shirt over her head slowly, so you know it's for you. Underneath she's better than
+> you guessed. A lot better. She drops her arms to her sides and lets you look. She's enjoying
+> every second of it.
 
-*33 words · 3 sentences, longest 15 · gloss 0 · negation 0. "Better than you guessed" states the
-fact. The version this replaced made the reader supply it.*
+*40 words · 5 sentences, median 6 · gloss 0 · negation 0 · history 0. "A lot better" is rule 4 in
+three words, and the last sentence names what SHE wants out of the moment (rule 7).*
 
-**Talk screen** — the genre's second largest content kind, 55 words and 65% of it spoken:
+**Talk screen** — the genre's second largest content kind, 55 words and 65% of it spoken. The
+shape is rule 5: she speaks, the protagonist answers, she pushes, the protagonist thinks.
 
-> "You're early." She keeps her eyes on the register. "That's twice this week."
+> "You're early," the woman at the register says. "Couldn't sleep?"
 >
-> "The apartment gets bad before dark."
+> "The apartment's too quiet."
 >
-> "Bad how?"
+> "Quiet's good. Quiet's cheap."
 >
-> "Quiet. Just quiet."
+> *Easy for her to say. She gets to go home to somebody.*
 >
-> She looks up at that. "You can sit. I am here till nine and I don't mind the company, but you are
-> buying something eventually."
+> "Sit if you want. I'm here till nine and I like the company. But you're buying something,
+> sweetheart. This isn't a library."
 
-*49 words · **76% spoken** · gloss 0 · median sentence 6. She has her own want and says it. A talk
-screen that is 13% spoken is a narration beat with quotes in it.*
+*52 words · **65% spoken** · gloss 0 · negation 0 · history 0 · median sentence 4. One thought, in
+italics, between two spoken lines, never in place of them. She has her own want and says it, and
+"sweetheart" is her term of address and nobody else's. The version this replaced said "That's twice
+this week" on a screen that can be the first visit, which the truth rule now forbids.*
 
-**Explicit beat, repeatable surface** — crude is the default here, and the beat stays on the body
-for its whole length:
+**Explicit beat, repeatable surface** — crude is the default, and the beat stays on the body for
+its whole length. The thought gets its own beat, after:
 
-> He bends you over the arm of the couch. One hand goes flat between your shoulder blades and he
-> fucks your cunt from behind. Your tits drag on the cushion each time he goes in. You hear the noise
-> you make and you keep making it.
+> He bends you over the arm of the couch. He fucks your cunt from behind, hard. One hand pins you
+> flat between your shoulder blades. Your tits drag on the cushion every time he slams in. Your
+> cunt clenches on his cock and you let the whole building hear it.
 
-*46 words · **3 explicit words** — `fuck`, `cunt`, `tits` — so it registers against the 3+ the
-`explicit floor` gate uses · names the `vaginal` rung · longest sentence 15. The last sentence is an
-event, not a verdict on the event: that is the pivot diagnostic passing.*
+> *You should hate how much you like this. You don't. Tomorrow you'll be right back on this couch.*
 
-Read the four together and the point is in what they are not: not one dash between them, and the
-plain modifiers are load-bearing. *slowly · better · flat · each time.* Take those out and every
-sentence flattens to the same volume, which is the defect this section exists to stop.
+*Beat 1: 50 words · **5 explicit words** — `fuck`, `cunt` ×2, `tits`, `cock` — against the 3+ the
+`explicit floor` gate uses · names the `vaginal` rung · median sentence 9 · body words in 3 of 5
+sentences, including the last, so the pivot diagnostic passes. Beat 2: 18 words, 0 explicit, by
+design: that is the interiority beat "Sweeping backwards" says not to fix.*
 
-⚠️ **A soft word is not the same thing as a hedge, and this paragraph used to say it was.** It
-listed *never quite · somehow · without much ceremony* beside *slowly · clearly · exactly* and
-called all six load-bearing. The first three are the L2 shape — a negation or a hedge standing where
-a fact goes — and defending them by name in the file that bans them is how the first set of these
-beats came to break L1 and L2. **Modifiers are cleared** (the padding study: we write 4.22 `-ly` per
-1,000 against a field floor of 8.87, so there is nothing to cut). Hedges are not.
+**One-time step, then its daily repeatable** — L3 below. The step
+carries the reveal, the conversation and the hook, and plays once:
+
+> The owner is counting the till when you walk in. He doesn't stop.
+>
+> "You're the new girl. You're late."
+>
+> "The bus was late."
+>
+> "Everybody's bus is late." He shuts the drawer. "Four hours, cash, and you smile at the regulars.
+> That's the job."
+>
+> *Smile at the regulars. Sure. That's definitely all it is.*
+>
+> He looks you over, slowly, and he takes his time about it.
+>
+> "Friday I need a girl upstairs. Pays triple. Think about it."
+
+*76 words · 49% spoken · median sentence 4 · gloss 0 · history 0. Who he is, what he wants and how
+he sees her, in the first three lines (rule 7); the tension named (rule 8); a hook with a day on it
+(rule 9).*
+
+The repeatable the player gets every shift after it:
+
+> "Apron's on the hook," the owner says, without looking up. "Smile."
+>
+> *He wants you smiling. The regulars want a lot more than that.*
+
+*23 words · one spoken line · one visible want · no claim about any earlier shift, so it is true on
+visit two and visit fifty.*
+
+Read the set together: not one dash, the plain modifiers carry weight (*slowly · a lot · hard ·
+every second*), and every screen with a person on it has that person talking.
+
+**Re-scored 2026-09-24** when the loud voice replaced the quiet one. The previous four were correct
+for the quiet register and wrong for this one — their talk screen claimed a past (*"twice this
+week"*), and none of them let the protagonist think or say what she felt. Measured with
+`gates.py --beat` (explicit words, median sentence, body words by sentence) and the load regexes
+`GLOSS_RE`, `NEGATION_RE` and `HISTORY_RE` on narration only.
+
+⚠️ **A soft word is not the same thing as a hedge.** *Slowly, a lot, hard* are modifiers and they
+are load-bearing (the padding study: we write 4.22 `-ly` per 1,000 against a field floor of 8.87,
+so there is nothing to cut). *Somehow, sort of, almost* are hedges, and the loud voice has even
+less use for them than the quiet one did.
 
 ⚠️ **The first version of these four was wrong, and how it got here is the lesson.** Shipped
 2026-08-28 labelled *"correct as written: no before, no diagnosis, nothing to un-learn"*, and it was
@@ -849,7 +1054,9 @@ and the two ranges sit on top of each other. **Whatever drives the negation habi
 skill and is not in this file.** A doctrine fix cannot reach it, and the story that it could was an
 artifact of a regex that could not see `doesn't`.
 
-The three rules are one idea at three grammatical addresses.
+The three rules are one idea at three grammatical addresses. **L2 was retired on 2026-09-24** when
+the loud voice replaced the quiet one; L1 and L3 stand, and L3 now carries the truth rule's
+exception.
 
 ### L1 · No `, which is` · no `, which means`
 
@@ -881,57 +1088,23 @@ the fact was already doing the work and the gloss is the writer not trusting it.
 ⚠️ **The fix is not a dash or a bracket.** Same error as the comma swap above: the joint survives the
 swap and the reader still holds the sentence open. Cut it or split it.
 
-### L2 · Say what happened, not what didn't
+### L2 · Negation — RETIRED 2026-09-24
 
-Field max 25.76% of sentences, p50 12.06%; our sixteen run 19.0–42.1%, fourteen of them over that
-max. To read a negative the reader builds the positive first and then cancels it. Once is an effect.
-Every third sentence is arithmetic.
+This was *"Say what happened, not what didn't."* It is retired, not because its measurement was
+wrong, but because the voice LO chose breaks it on purpose. The field figures stand: narration
+negates in **12.06%** of sentences at the median and **25.76%** at the max (`become-taxi-driver`),
+over 25 games and 784,591 sentences, and our sixteen games ran 19.0–42.1%. The target line of the
+new voice is three negations in four sentences — *"He doesn't ask about college. He never does. He
+doesn't care what you want, what you're doing, or where your life is going. And you don't bother
+telling him anymore."* (`THE_BALANCE_WRITING_STYLE.md` §2). Under L2 that line fails; under the
+voice it is the model. LO's call on the PRD's open decision 2: drop it.
 
-> ❌ "He has **never once** said a word about it."
-> ❌ "You have **never once** done it in forty-five minutes."
-> ❌ "the door that **does not** close"
-> ❌ "It is a small room and there is **nowhere** to stand that is **not** close."
-
-**Rule.** Behind almost every negation is a positive fact that is shorter and more specific. Write
-that one.
-
-| ❌ | ✅ |
-|---|---|
-| "The card says forty-five minutes. You have never once done it in forty-five minutes." | "Forty-five minutes on Cheryl's card. It takes you ninety." |
-| "…painted a grey that does not match anything else on the house. He has never once said a word about it." | "The county painted it grey. Everything else on the house is white. Roy has opinions about that rail. He keeps them." |
-| "It is a small room and there is nowhere to stand that is not close." | "The room is small. You stand close. There is one place to stand and that is it." |
-| "he does not put anything on before you come" | "he waits on the edge of the bed with the sheet across his lap and nothing else" |
-
-**The negation is usually hiding a number or an image**, and both are more specific than the
-negative was. *"Never once done it in forty-five"* is vaguer than *"it takes you ninety"* **and
-longer**. This rule costs nothing and is the one place in this file where obeying a subtraction
-makes the prose more specific rather than less.
-
-⚠️ **THE INSTRUMENT WAS BROKEN UNTIL 2026-09-01, AND THE BASELINE ABOVE IS THE REPAIRED ONE.**
-`NEGATION_RE` was `\b(not|never|no|…|n't|without)\b`, and `\bn't\b` cannot match inside a word — the
-`n` of `doesn't` is preceded by `e`, so there is no boundary in front of it. **`doesn't`, `don't`,
-`won't`, `isn't`, `can't` and `cannot` were all invisible.** Fixed at `gates.py`'s `NEGATION_RE`,
-which now carries the contraction as its own branch, and the field baseline re-measured with it.
-
-⚠️ **A SECOND MISMATCH RODE ON TOP OF IT, AND IT IS THE ONE WORTH REMEMBERING.** The old field
-figure was **all-text with speech inline**; `lint_negation` reads **narration only**
-(`_narration_by_canvas` drops `dialog`). Contracted negatives live in speech, so the two errors
-compounded: the regex hid the field's speech negations, and the basis then counted that same speech
-in the field's denominator while excluding ours. The repaired baseline reduces the field to
-narration the same way — macro speech and quoted spans stripped, split with `_beat_sentences` — so
-the regex, the splitter and the register now match on both sides.
-
-**The finding survived the repair and got bigger.** Field p50 12.06%, max 25.76%; ours 19.0–42.1%,
-with fourteen of sixteen over the field maximum and **sixteen of sixteen over its p90**.
-
-> ⚠️ **An intermediate reading said the opposite, and it is recorded so it is not repeated.**
-> Measured on our **built HTML** against the field's built HTML, our games came out at 0 of 31 above
-> the field maximum, and the rule was briefly called dead. That comparison is wrong for this
-> quantity: a build carries thousands of words of engine-generated labels, room lists and sidebar
-> text with almost no negation in them, which dilutes the exact thing being measured. **A rate over
-> word count survives that seam; a share of sentences does not.** Authored narration is the register
-> an author controls and the one this lint reads. Do not re-run the HTML comparison and re-retire
-> the rule.
+**What survives.** `lint_negation` still prints the share against the field, as a measurement and
+not a verdict. Two things it taught are still true and still useful: a negation is often hiding a
+number (*"It takes you ninety"* is shorter than *"you have never once done it in forty-five"*), and
+the instrument history — `NEGATION_RE` could not see `doesn't` until 2026-09-01, and the field
+baseline is narration-only, not all-text — is in `gates.py`'s `lint_negation` docstring. Use the
+number when it says the same thing louder. Do not rewrite a loud negation to satisfy the lint.
 
 ### L3 · A repeatable screen carries no history
 
@@ -947,8 +1120,26 @@ prior state of the world before the present one means anything.
 
 Three inferences before anyone in the room does anything.
 
-**Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence is something happening now.
-No *used to*, no *since*, no *eight months*, no *they moved*, no *the county put in*.
+**Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence nobody has gated is
+something happening now. No *used to*, no *since*, no *eight months*, no *they moved*, no *the county
+put in* — and, since the loud voice makes these claims constantly, no *last night*, *this week*,
+*again*, *every time* on a line the player can read on their first visit.
+
+**The one exception is the truth rule's rule 2:** a line about the past may show on a repeatable
+when it sits inside a `group` whose `conditions` read the flag or counter that records that past.
+*"You still owe me for last week"* belongs on the daily screen only once a payment has actually
+been missed. That
+line is then true on every visit it can render on, which is the whole test.
+
+**And the big version is a one-time step** (added 2026-09-24, `THE_BALANCE_WRITING_STYLE.md` rule
+12). A moment with a reveal, a real conversation and a hook plays **once**, as a non-repeatable
+canvas. The daily repeatable of the same scene stays short, but it is not mute: **one spoken line
+and one visible want**, true on every visit. `## The model beats` above shows the pair. The field
+does the same: of the scenes that carry the full *reason + want + change + pointer* shape,
+repeatable screens run **0%** in a random sample of 52 and 5% in the curated library, against 70%
+of quest and story beats — a curated-library figure, so read it as direction, not a rate
+(`SCENE_CONTENT_REVIEW.md` C1). `the-arc.md` A1 is the same idea one level up: the numbered steps
+are one-time, and the repeatable is what they convert into.
 
 **The facts are not deleted — they move.** Backstory belongs on a one-time canvas, where it lands
 once, properly, and then stays out of the way:

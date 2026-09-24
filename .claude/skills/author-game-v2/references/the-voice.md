@@ -9,6 +9,16 @@ unambiguous on a first read, by someone who has never seen the game.
 
 > **The game's own voice is plain. It names a thing or an action, and it never performs.**
 
+**The loud voice stops at the edge of the story.** Since 2026-09-24 the story text is written loud
+(`register.md`, "The voice — say it loud"): feelings said, drama pushed, her thoughts on screen.
+None of that crosses into labels, buttons, room names or guidance cards. A button reads
+*Take a shift*, never *Drag yourself to another miserable shift*.
+
+**One exception, and it runs the other way:** the opening's last screen may carry plain tutorial
+sentences in this file's voice — *"You need money. Take shifts at the bar, or find another way."* —
+as part of the story text (`the-first-hour.md` F1b). Plain, short, and after the player has met the
+people and the problem, never as a lecture on the first screen.
+
 > Measured failure this exists to prevent: a shipped game whose most-clicked link — the pass-time
 > action, ninety minutes, the click that makes every schedule reachable — was labelled **"Sit with
 > it"**. The author found out it was unreadable when the player asked what it did. In the same game
@@ -241,6 +251,36 @@ schedule-gated the window rides along: *"Catch him in the garage — weekday eve
 
 Atmosphere belongs in the card's narrative line. The goal label is load-bearing navigation.
 
+#### R3b · And print the number — this is the defect the genre dies of
+
+Measured 2026-09-03 across 23 female-lead games and 5,663 player comments: **being stuck is the
+killer, and it is not grind.** The shape is always the same — content she can see, a requirement
+she cannot. The corpus's single most-liked complaint of this kind:
+
+> *"Stuck at home still, in endless loop of fucking everyone, but not being confident enough to do
+> anything in the living room. **Does corruption have to be at a certain level? What's needed?**"*
+> — `den-of-infamy`, 52 likes
+
+⚠️ **Content and effort do not save you.** `in-her-own-hands` ships **136 passages for one
+character** and an **881-word hint page** for him, whose locked state reads *"This hint is locked
+until you have completed another task"* — while the condition sitting beside that line names three
+exact requirements (a specific conversation, a flag, and exhibitionism ≥ 20). Its players quote the
+text back: *"What task do i do to unlock shauns third task"* (13 likes). **A hint system whose
+failure state is a shrug is worse than none**, because the player now knows the content is there.
+
+Three attested ways to say it, all from the field:
+
+| | |
+|---|---|
+| **in fiction** | *"You could ask him about his headquarters if you had a way to approach… **If only you've worked here, hm…**"* — `shady-deals`. Names the want, refuses her, and prints the key, in her own voice |
+| **raw** | `Required Corruption: 20   Required Energy: 10` — `zaras-school-life`, printed inside the written refusal |
+| **term by term** | `become-taxi-driver` names **every** unmet term with directions — *"You need more friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the car' and then 'Street Race'…)"* |
+
+**Reach for a trait goal whenever a card gates on a number**, because the engine then prints
+`label — 14 / 20` for you with no author involvement (`engine.md` §47.1). A flag goal prints
+nothing but its label, and with no label it prints its raw key — which gate
+**`a goal says what it wants`** now fails.
+
 ### R4 · A wall shows the want; the card shows the route
 
 A locked choice renders greyed. By default **leave `locked_text` off** — the row then shows the
@@ -256,7 +296,16 @@ the card directs.
 ⚠️ *This rule is written the way it is because the opposite was drafted first, made into a gate, and
 fired on seven of eight doors in a real game — every one of which was following `engine.md` §15
 correctly. A rule that fails a game for obeying the skill is a bug in the rule. There is
-deliberately no gate here; "guidance exists" already covers the real gap.*
+deliberately no gate here.*
+
+⚠️ **CORRECTED 2026-09-03.** That warning used to end *"'guidance exists' already covers the real
+gap."* **It did not.** `guidance exists` checks only that a card EXISTS per ascent tier and per
+character; it never reads what the card says. So the route was unchecked on the door AND on the
+card at once, and `gates.py` carried the identical false sentence in its own comment. Two checks
+now cover it: gate **`a goal says what it wants`** (a bullet renders words, not a raw key) and
+lint **`the guidance page says nothing`** (a card that renders no requirement at all). The first
+run of that lint found **11 of 12 cards mute in `vesper_two`, with all seven characters' sections
+silent** — in a game that was passing 46 gates.
 
 ### R5 · Nothing retires into silence
 

@@ -2708,3 +2708,56 @@ while rendering as a standalone row in 0 of 28 slots.
 **`substitution_only = true` is the field for "dispatcher only, not a button."** Three of the four
 `is_active = false` declarations in this repo look like an author reaching for it and finding the
 wrong switch. Both fields now work; they mean different things.
+
+---
+
+## 47. The quest-card goal bullet — what the player actually reads under 🎯
+
+Read 2026-09-03, and it is the engine half of `the-voice.md` R3.
+
+`setup.renderQuestsGoalBlock` (`v2.py:15921-15977`) has four frames, tried in order: terminal →
+ready → goal bullets → **nothing**. The bullet frame builds each row like this
+(`v2.py:15960-15969`):
+
+```js
+var marker = it.met ? '✓' : '◯';
+var label = (it.goal && it.goal.label) ||
+            (it.goal && it.goal.trait) ||
+            (it.goal && it.goal.flag) || "";
+if (it.goal.trait && typeof it.currentValue === "number") {
+    label += ' — ' + it.currentValue + ' / ' + it.goal.value;
+}
+```
+
+Two engine facts fall out, and they pull in opposite directions.
+
+**47.1 · A trait goal already prints the number.** `label — 14 / 20`, appended by the engine, with
+no author involvement. The importer also *requires* `label` on any trait or counter goal —
+`apps/projects/services/template_import.py:5669-5673`, whose own error text says *"it renders next
+to the ◯ bullet"*. So trait goals are safe by construction and are the shape to reach for whenever
+a card is gated on a number.
+
+**47.2 · A flag goal with no `label` prints its RAW KEY.** The fallback chain ends at
+`it.goal.flag`, and `QuestsCondition`'s docstring is explicit that for a flag gate *"`label`
+optional"* (`template_import.py:1092-1095`). Nothing in the importer catches it. The player reads
+a bullet saying `◯ simone_05_done`.
+
+⚠️ **Gate `a goal says what it wants` fails on this**, because there is no version of it an author
+intended.
+
+**47.3 · A card can render no requirement at all.** `evaluateGoals` reports `allMet: true`
+vacuously for an empty goals list (`v2.py:15875-15877`), so the bullet frame is skipped, and with
+no `ready_canvas` and no `terminal` the function falls through to `return "";`
+(`v2.py:15974-15976`). Its own comment calls this deliberate — *"happens for transitional cards
+between capstones."*
+
+So a mute card is legal and sometimes right, which is why this half is a **lint**
+(`the guidance page says nothing`) and not a gate. What the lint is hunting is a character
+*every* one of whose cards is mute: their section of the guidance page then exists and never says
+anything, which is the failure the corpus punishes hardest.
+
+⚠️ **There is no `locked_text`, `requirement` or `hint` field on a quest card.** The full field
+list is `text · ready_text · tip · npc_id · priority · group · when · goals · ready_canvas ·
+terminal · terminal_text` (`template_import.py:1108-1151`). The only player-facing place a
+requirement can live is a goal item's `label` — or, in prose, in `text` / `ready_text` / `tip`.
+Do not reach for a field that is not there.

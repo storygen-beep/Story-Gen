@@ -67,6 +67,10 @@ turns the act into something she can simply do · doing *that* repeatedly opens 
 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
 
+The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
+reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
+into stays short but still speaks. `register.md` L3.
+
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (rank 24) ships its own quest log for the
 > husband's-brother arc. Nine steps, and steps 7 and 8 are the conversion:
 >
@@ -536,6 +540,26 @@ pivot defect (`register.md`, "Where the interiority goes instead").
 > (median 23 words) and **5 `*Chicken`** passages, the latter reached only from a dare already
 > accepted — `UltimatumChicken`, `UltimatumDefyChicken`, `ChattingDebateChicken`,
 > `ChattingTNTLChicken`.
+
+### A11b · And this is where the field spends its words — 2.5× more than on finishing
+
+Counted 2026-09-03 in the same game, by passage-name suffix:
+
+```
+she did NOT go through with it   183   (113 Abort + 65 Refuse + 5 Chicken)
+she did                           74   (Post)
+```
+
+**Course of Temptation writes two and a half times more prose about stopping, refusing and backing
+out than about the act completing.** Whatever the intuition says about where authoring effort goes
+in this genre, that is the measurement.
+
+⚠️ **Ours is zero on the numerator** — 23 of 23 `finish`/`climax`/`cum`/`end` nodes ship an empty
+`exit_block` (A10), and every `Stop.` outside `commuter` routes at a reset node and prints nothing.
+So the ratio is not "we are a bit light here." There is no half of it built at all.
+
+This is also the cheapest content in the file. An abort beat's median is **23 words**; A10's
+aftermath median is 32. The unit of work is a sentence and a half.
 
 ⚠️ **We already do this in one game, and nothing taught it.** `commuter` writes a stop beat on
 all seven of its loops, at 27-59 words (median 29). The longest:

@@ -270,6 +270,7 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
 | **a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs` — a spent cap renders nothing at all, not a greyed line | `the-surfaces.md` R7 · `engine.md` §28.3 |
 | **a locked door says why** | every `show_when_locked` choice carries the reason — a `locked_text`, a threshold or a rejection node. The field hides a refusal or explains it; 2% ship a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
+| **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `simone_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
 | **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase, or `wardrobeEffects`. 3 of 15 wardrobe games ship one that has none. `orientation`'s two were the only `going_out` garments in the game and `simone_05` gates on wearing one, so the anchor's arc died at step 5 and two quest cards kept pointing at it | `the-meters.md` W3 · `engine.md` §17 |
@@ -293,6 +294,14 @@ says or is read nowhere else. ⚠️ Declaring more labels makes it worse, not b
 reason it is checked; a count that can be optimised upward is the `objects`/gate-22 failure) ·
 room-list labels ·
 the browse share · screen shape · the prose names places the map does not have ·
+**the guidance page says nothing** (`the-voice.md` R3 — every quest card that renders its
+flavour text and then nothing at all: no `goals`, no `ready_canvas`, not `terminal`, which makes
+the goal renderer return an empty string. ⚠️ A LINT because the engine's own comment calls that
+shape intentional for transitional cards between capstones, so one mute card cannot be a defect;
+the row worth reading is a character **all** of whose cards are mute, whose section of the page
+therefore never says what to do. That is the corpus's most-punished failure — `in-her-own-hands`
+ships 136 passages for one character behind hints reading *"complete another task"*, and its
+players quote the text back at it) ·
 **a door opens onto something** (`the-map.md` R6–R6c — every `[locations.door]`: one no option
 can ever open, one whose only option is `enter` (a room with an extra click), a knock gated on
 somebody no schedule puts there, and a door on a room the whole cast passes through. ⚠️ Silent
@@ -310,9 +319,18 @@ things one activity can turn into, and how often the activity itself still rende
 words over 27 games, our nine run 1.34–2.76, the two distributions do not touch) · **what did not
 happen** (the share of sentences whose claim is a negation, and every canvas over the field's
 maximum of 25.76% — narration-only baseline, re-measured 2026-09-01 after `NEGATION_RE` was found
-blind to every contraction) · **history on a repeatable screen** (backstory on a canvas the player
+blind to every contraction. ⚠️ A measurement only since 2026-09-24: `register.md` L2 is retired,
+because the loud voice negates on purpose) · **history on a repeatable screen** (backstory on a canvas the player
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
-elapsed time, NOT clock time, which is `the-clock.md` C2) · **named before met** (every character
+elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
+(*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
+gated on the flag that records it — the truth rule's rule 2, `register.md`) · **a printed stat is
+real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
+`the-meters.md`, show the reaction, not the number) · **a one-time step speaks** (every one-time
+canvas bound to a person with no `dialog` block in it) · **thoughts outweigh speech** (every canvas
+bound to a person where `thought_bubble` words outnumber spoken ones — the voice's rule 3, thoughts
+beside dialogue, never instead) · **the opening arms a card with goals** (`the-first-hour.md` F1b —
+the cards visible once the opening hands over, and whether any carries `goals`) · **named before met** (every character
 named before the game has introduced them) · **she permits or she acts** (the share of
 choices that open `let` — the act on the button against the act in the prose; `the-voice.md` R6) · **the place says what it is** (every location by how
 much prose happens there against how long its own description is — read whether each one names the
@@ -324,7 +342,10 @@ own, and whether the rent pages agree with it) · **the price is spelled out** (
 priced label against the field's 94% symbol) · **money gates content, or only prices it** (a
 CONDITION on the currency means content money opens; a `costs` block only means a thing can be
 bought, and gate 16 passes on either) · **the obligation against the week** (`obligation_amount`
-over the declared `week_income` — a figure, never a score) · **what a paid repeatable leaves
+over the declared `week_income` — a figure, never a score) · **the collector is also the target**
+(who enforces the hold, against who owns the explicit repeatable surfaces — a RANK, never a score.
+The field's collector carries 0.4–3.8% of a game's explicit passages and is never the top figure;
+`the-want.md` §4a) · **what a paid repeatable leaves
 behind** (how many surfaces she pays for deposit anything; a pure sink is not a defect, a game made
 only of pure sinks is) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
@@ -347,6 +368,14 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
 
 ## Operating rules
 
+- **The register is the loud voice, the opening is the staged shape, and the truth rule covers
+  every screen.** Since 2026-09-24: story text says it, spells out the feeling, puts people talking
+  on screen and her thoughts beside them (`references/register.md`, "The voice — say it loud");
+  the opening runs setup → problem → person → conflict → choice → temptation → objective → play
+  (`references/the-first-hour.md` F1b); and every claim a screen makes is true on every visit it can
+  render on (`references/register.md`, "The truth rule"). Labels and guidance stay plain
+  (`references/the-voice.md`).
+
 - **A number is a promise until an instrument produces it.** `the-sheets.md` S1. The one that cost
   most: a design's sheets counted paragraphs, `gates.py` counts nodes, and the same game read 6
   explicit beats by the sheet and 3 by the script on the same afternoon — both reported as
@@ -365,7 +394,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   | | |
   |---|---|
   | `gates.py --words <path>` | the vocabulary lint on any text file — run it on the WANT and the BOARD, while the nouns are still being *chosen*. Run on a built game it is one phase too late: every noun is already a room name and a button. Always exits 0; it is a list, never a score. |
-  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md:332`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several (`forty_miles`: 938 beats, 259 nodes). Always exits 0 — a paragraph outside its canvas cannot be failed. |
+  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md:491`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several (`forty_miles`: 938 beats, 259 nodes). Always exits 0 — a paragraph outside its canvas cannot be failed. |
   | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build, which is why a game shipped to the published grid as a `--dev --debug` artefact with 115 missing files and nothing said so. Seven checks, off for every ordinary run, **exits non-zero**. One of them, `every canvas is a passage`, is the only thing in the skill that can see a canvas the generator DROPPED: two consecutive games shipped their act loops written and absent, with 46 green gates over them, because gates parse the source and reachability is decided at build time (`defects/001`). `the-release.md` § Shipping the build. |
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, and does every rule the references POINT AT actually exist? Needs no game. The index went stale twice — the 2026-08-16 audit closed it and it reopened in twelve days — because nothing compared the script to the file that documents it. The rule half was added after `the-voice.md` R6 was recorded as shipped in two ledgers, cited by this script, listed in its own file's checks table, and never written: a qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |

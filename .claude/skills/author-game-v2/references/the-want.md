@@ -197,10 +197,45 @@ would have been the P0 error: a check built for a state nothing is in.
 Her situation at minute zero, and what she has to lose. Concrete: a job, a debt, a room, a
 reputation. The thing that makes the first transgression cost something.
 
-> **Prefer a recurring demand with a collector and a date over a situation.** *"She has no money"*
-> is a mood; *"Friday, $260, and Cade counts it at the desk"* is a machine. The mechanism, the three
-> shapes it can take and the trap of a flat number all live in `the-economy.md` **R3–R3d**, which
-> owns them — this line only says to reach for one.
+> **Prefer a hold with a face and a date over a situation.** *"She has no money"* is a mood;
+> *"Friday, $260, and Cade counts it at the desk"* is a machine. That half is right and it is the
+> half worth keeping — a hold of any kind needs somebody who notices and a moment when it comes due.
+
+⚠️ **This section used to say "a recurring DEMAND with a COLLECTOR", and it is the reason eight v2
+games shipped the same premise.** The half above generalises; the nouns did not. A bill is one hold
+of at least nine, and the field this skill is written for does not reach for it first.
+
+**Measured 2026-09-04, `~/Documents/Female_Hold_Study_20260904/`** — 23 female-lead sandboxes read
+in source, the hold hand-read out of each opening with the settling line recorded in `verdicts.md`:
+
+```
+ambition      5    she picked the thing herself and the world charges for it
+bill          4    a recurring money demand                (+1 with DoL as control = 5 of 24)
+order         3    an institution, a sentence or a mission
+body          3    what she is turning into
+subsistence   3    the place will not feed her
+appetite      2    no hold at all, and one of the two says so on purpose
+job · erosion · displacement    1 each
+```
+
+**The bill is fourth by frequency in the field and was first by position in this file.** Independently,
+`probe_a.py` looks for the MECHANISM rather than the vocabulary — an obligation variable written and
+read in three or more conditions — and finds it in **6 of 23 (26%)**, against R3's **14 of 19 (74%)**
+on the male-heavy corpus, using the same regexes. One of the six is `shady-deals`, where reading it
+settles that **she is the creditor**: a money system is not a money hold.
+
+> **And the obligation is not what carries the game anyway.** `the-economy.md` R3d measured DoL's
+> `$rent*` at **57 of 91,814** condition sites against **1,336** on the tier rungs, and both top games
+> cap the ratchet by hand. Whatever hold you pick, §3's meters are what still gate content at
+> release 41. Pick the hold that starts her; do not expect it to carry her.
+
+**Declare the shape** as `want.hold_kind` in `v2_state.json` (`references/state.md`), and if a person
+enforces it, `want.hold_collector`. The lint **`the collector is also the target`** reads both.
+
+⚠️ **Then read §4b before you write the hold.** It says, measured 36 scenes to 5, that she wants it
+and goes and gets it — so **design what stops her, not a reason for every act.** A hold chosen as a
+justification machine contradicts §4b, and §4b is the one with the numbers. `the-economy.md` **R3–R3d**
+still own the money mechanism for the games that pick `bill`.
 
 ### 2. The appetite — where she lands, not where she starts
 What she wants, phrased so it can never be finished. "Get revenge on X" finishes. "Be wanted
@@ -217,10 +252,10 @@ whether release 41 has anything in it is the **meters** — §3 — and the gap 
 
 So the three parts of this page divide the game between them, and each does one job:
 
-- **§1b — the obligation starts her.** It has to be there in week one, when nothing else is.
+- **§1b — the hold starts her.** It has to be there in week one, when nothing else is.
 - **§3 — the meters carry her.** They are what still gates content at release 41.
-- **§2 — the appetite is what she arrives at.** The bill goes quiet (`the-economy.md` R3d) and the
-  act does not change; the *reason* does.
+- **§2 — the appetite is what she arrives at.** The hold goes quiet (`the-economy.md` R3d for the
+  `bill` case) and the act does not change; the *reason* does.
 
 That last sentence is **§4's Transformation charge stated mechanically** — see it, and write the two
 to agree.
@@ -273,6 +308,84 @@ One of — or a deliberate combination of:
 - **Transformation** — she becomes something she would not have recognised
 
 Name which. "It's hot" is not a charge; it is the absence of one.
+
+#### 4a. The person who holds the obligation is not automatically the person she fucks
+
+Added 2026-09-04. It had never been written down anywhere in this skill, and its absence is what
+produced ten pitches in a row where a man collects money and the sex is how the money gets settled.
+
+**Nothing here teaches that.** Grepping `references/`, `SKILL.md` and `templates/` for
+`prostitut|sex work|escort|paid sex|sex for money|instead of money` returns **zero hits**. It is
+emergent: §1b used to ask for a collector, §4's first charge is *"someone with power over her"* — the
+collector already is that — and `the-surfaces.md` requires the repeatable surface be explicit. Three
+defensible rules compose into one architecture, and nobody chose it.
+
+**Measured, `probe_c.py`.** In every field game with a bill and a named collector, the share of the
+game's explicit passages that name him:
+
+```
+life-at-university   2.1%      course-of-temptation   0.4%
+life-choices         3.8%      degrees-of-lewdity     1.4%
+in-her-own-hands     —  no person collects it; the rent is a system
+```
+
+And the scale check is the finding:
+
+```
+degrees-of-lewdity, 415 explicit passages     life-at-university, 238 explicit passages
+   Whitney   61  14.7%                           uncle       14   5.9%
+   Robin     29   7.0%                           Professor   12   5.0%
+   Bailey     6   1.4%   <- the collector        Mrs. Love    5   2.1%   <- the collector
+```
+
+**Bailey is the archetype — the landlord the genre's biggest female-lead game is half built around —
+and he carries a tenth of the explicit passages Whitney does.** Whitney charges her nothing. In
+`life-at-university` the uncle and the Professor both outrank the landlady.
+
+> **The field builds the hold and the porn as two separate systems.** Write the collector as a real
+> character who can want her — Bailey does, and it works — but the obligation is not the pipe the
+> porn comes down. If settling the hold *is* the repeatable surface, the game has one idea, and the
+> ceiling on it is however many ways she can pay.
+
+⚠️ **This is a default, not a ban.** Collector-as-target is a legitimate design and one of the
+biggest games in the field ships it deliberately. The defect is doing it *without noticing*, in
+every game, because the fields were laid out in that order. The check is a **lint** for exactly that
+reason — `the collector is also the target` prints his share and never fails a build.
+
+#### 4b. The default is that she wants it and goes and gets it
+
+Added 2026-09-03, because the opposite was assumed and it is measurably wrong. Classifying every
+act scene in `zaras-school-life` by whether she states a plain want or gives herself a practical
+reason:
+
+```
+DIRECT — "she just wants him"      36 scenes    median gate corruption 25    lowest 5
+EXCUSE — a practical reason         5 scenes    median gate corruption 60    highest 80
+```
+
+**Seven to one in favour of direct, and direct starts at 5.** She propositions a stranger in the
+men's locker room at 20 — *"Zara got her mark… 'What do you say, big boy, we just find a nice
+little area for ourselves and I show you the time of your life?'"* No problem to solve, no
+appointment, no justification.
+
+So do not design a reason for every act. **Design what stops her**, and let the meter be how far
+she will go (`the-meters.md` W1b).
+
+⚠️ **Deniability is a late tool for the target she cannot face.** The five excuse-shaped scenes —
+*"she did not realize it yet, but her top had slipped"*, *"the door was left ajar (or did someone
+open it?)"*, *"causing her top to slip down"* — gate at **45–80** and **every one is family**,
+behind that game's `$famSexUnlocked`. She notices half a second too late, every time, which lets
+her escalate without deciding to and lets the player enjoy it without her becoming a cartoon.
+
+**Use it for the one or two people the charge makes unapproachable — under Reversal, the person
+with power over her — and use it late.** Spending it on the ordinary cast inverts the ladder: it
+makes the easy targets read as harder than the forbidden one.
+
+⚠️ **The elaborate route is one shape among several, not the house style.** Problem → practical
+offer → her own justification → appointment → preparation → the preparation is seen — that is
+`ben quest1`, and it is how you build the *hard* approach. Reaching for it by default is what the
+author of this section did first, and the game it was read from does the opposite 36 times out
+of 41.
 
 ### 5. Why *this* person
 One line per character. Not their role in a plot — **why she wants them, or why being wanted

@@ -103,6 +103,64 @@ the game against **its own declaration**, never against a number this file picke
 
 ---
 
+## W1b · What the meter gates is NERVE, not permission
+
+Read in source 2026-09-03, `zaras-school-life`. Classify every act scene by whether she states a
+plain want or gives herself a practical reason, then read the corruption threshold on each:
+
+```
+DIRECT — "she just wants him"      36 scenes    median gate 25    lowest 5
+EXCUSE — a practical reason         5 scenes    median gate 60    highest 80
+```
+
+**The direct route outnumbers the justified one seven to one, and it is available from corruption
+5.** At 5 she is already scheming at the boy beside her in detention — *"He was a teenage boy,
+driven by hormones and impulse. How hard could it possibly be to get him worked up?"* At 20 she
+walks into the men's locker room and propositions a stranger. She wants him at every level.
+
+> **So the number is not "is she willing yet". It is HOW FAR SHE WILL GO TO ACT ON IT** — which
+> room she will walk into, who she will approach, and how brazen she is when she does.
+
+Three things follow, and the third is the one that changes what you author.
+
+- **Never write a rung as permission unlocking.** Write it as nerve: the same appetite, in a
+  riskier place, in front of more people.
+- **This is the mechanical twin of `register.md`'s composure finding.** The high branch reads
+  composed and the low branch reads nervous *because the meter is nerve*. They are one system
+  described from two ends, not two systems.
+- ⚠️ **Deniability is NOT a beginner's frame.** The five excuse-shaped scenes — *"she did not
+  realize it yet, but her top had slipped"*, *"the door was left ajar (or did someone open it?)"* —
+  gate at **45–80** and every one is family, behind `$famSexUnlocked`. The excuse is the tool for
+  the target she cannot look at directly, and it is LATE content. Reaching for it early inverts
+  the ladder. `the-want.md` §4 carries the design half.
+
+### W1b-i · The unit is +1, and the raise goes through a named widget
+
+Same game, every call that raises a *character's* corruption — **107 of them, dad 43, bro 38, mom
+26 — and every single one is `+1`.** Section E of the 8-23 study found the same unit on the player
+side across the field: `+1` is the median raise in five of eleven games.
+
+The raise itself is a widget, one per character, so no author ever touches the arithmetic:
+
+```
+<<widget "addcorruptionbro">>
+    <<set $bro.corruption to Math.clamp($bro.corruption + $args[0], 0, 100)>>
+<</widget>>
+```
+
+**And what calls it is ordinary domestic activity, not seduction.** The brother's number rises
+from chores, from her showering, from watching TV in the same room, from sitting in his bedroom.
+There is no *tease him* button. Each of those events checks three things and nothing else:
+
+```
+$PlayerClothes == "Slutty"     ← the one lever she pulls
+$KylePresent == true           ← he has to actually be there
+_chance >= 50                  ← and half the time nothing happens
+```
+
+That is the whole mechanism for "she corrupts him": **one number, one widget, +1s, a clothing
+check, a presence check, and a die.** The content is the domestic loop the game already has.
+
 ## W2 · A throttle's job, stated positively
 
 > **An ODOMETER is permanent and gates progression. A THROTTLE resets and gates the REPEATABLE ACT
@@ -765,6 +823,39 @@ the model's mouth to a frown at `exposed === 2`.
 
 **That is the shape to copy: one derived number, cheap enough to test that the whole world tests
 it.** W3's gate is what makes sure somebody reads it.
+
+**Show the reaction, not the number** (added 2026-09-24, `THE_BALANCE_WRITING_STYLE.md` rule 13).
+The same holds after a choice. What the player sees when a click moves something is **a reaction
+line** — *"He nods. Once."*, *"Her face goes hard."* — or **a real consequence named after a real
+flag**, like a lift offered for tomorrow that the flag actually delivers. Never `+Respect` or
+`−Relationship` for a stat that does not exist; lint `a printed stat is real` lists them.
+
+| where the field prints the change | games |
+|---|---|
+| after the click, e.g. corpo-life's *"(Relationship +4 from interaction)"* | ~12 of 26 |
+| on the button before the click | 1 at scale (degrees-of-lewdity, a coloured marker, no number), 2 marginal |
+| players asking to see a stat | 4 of 22,252 comments |
+
+Source: `SCENE_CONTENT_REVIEW.md` C7.
+
+**LO's decision, 2026-09-25: the score is hidden, the reaction is shown, the requirement is told.**
+Four parts, and they apply to every game this skill authors:
+
+1. **A person can keep their own score, and the player never sees it.** Where W1 puts weight on
+   the cast (`who_climbs = "cast"` or `"both"`), each person's number is internal. It picks which
+   reaction, which line and which step comes next. This is what the field does: 21 of 26 games keep
+   per-person state (`SCENE_CONTENT_REVIEW.md` C7), and 8 of 26 never print a change to it.
+2. **After a choice, the player sees a reaction or a real consequence.** Never a number, and never
+   a `+Respect` or `−Relationship` label, whether or not the stat is declared. A number invites
+   farming: the player repeats a choice to watch it climb.
+3. **When something is out of reach, the player is told what it needs.** That is the question
+   players actually ask: of 22,252 comments, 4 ask to *see* a stat, and the recurring ask is *"how
+   do I raise X / it's stuck at N"*. The requirement goes on the guidance card, as a trait goal that
+   prints *"14 / 20"* (`the-voice.md` R3b). On a locked button, R4 still governs.
+4. **Where a person stands is said in words, not a score.** For example, *"warming to you"*. ⚠️ **The
+   engine has no per-person word band yet.** `[ui.cast_page]` (`engine.md` §34) shows name,
+   relationship, tags, location and the next step; none of those reads a per-person score. Until
+   that exists, the words live in the reaction lines and on that person's quest card.
 
 ⚠️ **This paragraph named the wrong equivalent until 2026-08-28, and the reason is worth keeping.**
 It pointed at `worn_corruption` and `worn_beauty` — and neither can do what `$exposed` does, because

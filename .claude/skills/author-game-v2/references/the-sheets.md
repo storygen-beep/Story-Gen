@@ -26,10 +26,26 @@ then does anything become a game.
 [REVIEW]  →  LO reads and edits  →  [READY]  →  built  →  [GAME-READY]
 ```
 
-Status lives **in the document title**, not in a separate tracker. Taken from the reference game's
-own Writer's Workflow: the document is argued over first, and whoever implements it is not whoever
-wrote it. That separation is the point — an author who implements their own sheet fills its gaps
-from memory without noticing there was a gap.
+Status lives **in the document title**. Taken from the reference game's own Writer's Workflow: the
+document is argued over first, and whoever implements it is not whoever wrote it. That separation is
+the point — an author who implements their own sheet fills its gaps from memory without noticing
+there was a gap.
+
+⚠️ **This line used to end "not in a separate tracker." A tracker was built on 2026-09-05 and the
+line had to change.** `scripts/notion_sheets_sync.py` mirrors every sheet to a Notion board so one
+can be read and signed away from the repo — sign-off is the only step in the pipeline that is pure
+judgement and needs no terminal, and it was chained to the machine the repo is on. The rules that
+keep the mirror from becoming a second source of truth:
+
+- **The H1 on disk is authoritative.** The mirror pushes content one way and reads back only
+  `Status`, the four-part verdict and comments. It never writes a sheet body.
+- **A body change re-opens the row and voids the verdict**, because the verdict was given on the old
+  body. Git detects it — the diff is anchored to the commit the sheet was signed at, not to a
+  timestamp — and the page opens with that diff on top.
+- **A commit is the trigger, never a file save.** A save is not a sign-off, and a watcher left
+  running would clear a verdict while it is being given.
+
+It makes drift **visible**; it does not detect it. S1's finding is untouched.
 
 **The verdict has four parts**, from the same game's submission rubric:
 **Character · Coherence · Correctness · Convenience.**
@@ -226,6 +242,53 @@ One quest-card row per ascent tier on the decision sheet, one per character on t
 
 ---
 
+## S11 · A SHEET IS READ BY A PERSON, NOT BY A GATE
+
+**The reader is LO, on a phone, deciding.** Every rule above says what a sheet must *contain*.
+None of them said whether the person signing it can get through it, and the omission is not
+neutral — an author satisfying S1–S10 produces a document written in the ledger's voice, because
+that is the only voice the rules describe.
+
+> **The incident, 2026-09-11.** `the_balance`'s decision sheet was written at the want phase,
+> pushed to Notion, and LO's first words on it were *"hard to understand, I mean really hard."*
+> Measured across all four decision sheets on disk:
+>
+> ```
+> orientation  2627w  cites=16  stats=12  longest table cell=32w
+> probation    1414w  cites= 8  stats= 1  longest table cell=37w
+> vesper_two   3180w  cites=13  stats=10  longest table cell=39w
+> the_balance  1727w  cites=13  stats= 6  longest table cell=70w   <- the one he read
+> ```
+>
+> All four carry the disease; the one he was asked to sign was twice the worst on cell length.
+> Rewritten the same turn to **1,195w · 0 citations · longest cell 18w**, with nothing removed
+> from the decisions themselves.
+
+**This is SKILL.md's "two voices" rule finding its third voice.** `register.md` owns what the
+player reads after a click. `the-voice.md` owns labels, room names and guidance cards. **Neither
+owns the document a human signs**, and until now nothing did.
+
+Four things, and they cost nothing:
+
+- **No `file.md` §-citations, no `v2.py:` line numbers, no rule ids.** The evidence belongs in
+  `WANT.md` and `v2_state.json` `decisions[]`, which is where it already is. Duplicating it into
+  the review surface is what makes the review surface unreadable. One pointer at the bottom.
+- **A statistic only appears when the number IS the decision.** *"$150 a week against $220 earned"*
+  stays. *"19 blank to 10 written, 80.4% of top-30 engagement"* goes — it justifies a call that has
+  already been made, and LO is not re-deriving it.
+- **Table cells under ~15 words.** A 70-word cell is a paragraph wearing a table's clothes and it
+  is unreadable on a phone. If the reason needs 40 words, it is a section, not a cell.
+- **Plain words for internal vocabulary.** *"trait keys are save join-keys; a rename strands every
+  save"* becomes *"every saved game breaks."* Same fact, no glossary.
+
+⚠️ **Lead with what needs him.** A decision sheet's open questions are the only part that cannot be
+read later, so they go **first** — question, your recommendation, one line on why it matters — above
+the settled blocks. The sheet that caused this put its four open questions in the middle, under a
+heading that named a doctrine file.
+
+**The test:** hand it to somebody who has not read this skill. If they cannot say what they are
+being asked to decide, the sheet is not done, however complete it is.
+
 ## The opening sheet is a SCREEN WALK
 
 One row per screen, in order, with the button quoted. It is the only view a design cannot satisfy by
@@ -253,17 +316,40 @@ it.
 
 ```
 games/<slug>/
-  DECISIONS.md          [READY] once signed — blocked A/B/C by reversibility
+  DECISIONS.md          [READY] once signed — blocked A/B/C by reversibility.
+                        MIRRORED, and it is order 1 — see below
   FORMAT.md             optional, per-game notes on the shape
   sheets/               LIVING — always current, overwritten each release
     OPENING.md
-    places/  people/  scenes/
+    REVIEW_ORDER.md     GENERATED by the mirror on every push. Never authored,
+                        never mirrored back, never hand-edited
+    places/  people/  scenes/  systems/
   iterations/00N/       FROZEN — SHORT · LONG · CHANGES, and after a build
                         BUILD_LOG · BUILD_VS_SHEET
 ```
 
 `sheets/` is the design as it stands. `iterations/` is what each release did, and never changes
 again.
+
+⚠️ **`DECISIONS.md` is a sheet and sits outside `sheets/`.** It is one of the six types and carries a
+status marker like the rest, and because of where it lives the first version of the mirror could not
+see it. Anything walking the sheets collects it explicitly.
+
+### Review order is a property of the KIND
+
+**Do not number the filenames.** 43 of 138 sheets already carry a two-digit number and it means the
+**rung** — `ray_03_the_offer` — so a review-order prefix puts two numbers meaning two things in one
+name. 80 cross-references between sheets are by filename and a rename breaks them.
+
+The order is already fixed by the rules above, so it is derived instead:
+
+**1** `decision` — everything reconciles against it (S6) · **2** `system` — written first, and the
+place sheets are written against them (SY1–SY3) · **3** `place` · **4** `person` — a place × hours
+grid, so its places must exist (S5) · **5** `scene` — one rung of a person · **6–9** `opening`,
+`guidance`, `index`, `format`.
+
+A gap in the numbering is a finding: a game with places and no system sheets built its rooms against
+nothing, which is the SY1–SY3 defect.
 
 ## What is deliberately not in a sheet
 
