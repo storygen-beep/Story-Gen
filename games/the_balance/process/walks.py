@@ -679,6 +679,47 @@ def _mum(page, rep):
         got = got.group(1) if got else None
         rep.check(f"dusting {'done' if done else 'not done'}, the front room draws {want}",
                   got == want, str(got))
+    apply_flag(page, "chore_done_dusting", "unset")
+
+    # ── the first time she is sat down, 2026-09-25 (STYLE_REWRITE_MUM_SAT_DOWN.md) ──
+    # ONLY where the two of them are alone and a chore sat her down: the scene talks about
+    # @gil. gen_week.py check_first_sat_windows() guards the windows at generation; this
+    # guards them in the running game, against the real schedules.
+    def first_offered(day, hour, minute, chore):
+        clear_chores(page)
+        if chore:
+            apply_flag(page, chore, "set")
+        set_time(page, day, hour, minute)
+        stand_at(page, "the_front_room")
+        return offered(page, "the_front_room", "mum_first_sat_down")
+
+    rep.check("the first step is offered alone with her: Mon 12:05, lunch done",
+              first_offered("Monday", 12, 5, "chore_done_lunch") is True,
+              f"lynn at {npc_at(page, 'npc_lynn')}")
+    for day, hour, minute, chore, why in (
+            ("Monday", 7, 10, "chore_done_breakfast", "Gil is in his chair"),
+            ("Saturday", 16, 0, "chore_done_laundry", "Nate is on the sofa"),
+            ("Tuesday", 17, 20, None, "it is her hour off, not bought")):
+        rep.check(f"and NOT {day[:3]} {hour:02d}:{minute:02d} — {why}",
+                  first_offered(day, hour, minute, chore) is False, "")
+
+    first_offered("Monday", 12, 5, "chore_done_lunch")
+    play(page, "mum_first_sat_down")
+    click(page, "Sit down.")
+    click(page, "Say nothing. Let her rest.")
+    rep.check("playing it through sets the memory flag",
+              flags(page).get("mum_first_sat_down_seen") is True,
+              f"mum_first_sat_down_seen = {flags(page).get('mum_first_sat_down_seen')}")
+
+    # The daily card's "Sit down with her." now shows her reaction first: 2 + 28 minutes.
+    first_offered("Monday", 12, 5, "chore_done_lunch")
+    before = clock(page)[1]
+    play(page, "mum_sat_down")
+    click(page, "Sit down with her.")
+    click(page, "Get up.")
+    rep.check("sitting with her still costs half an hour", clock(page)[1] - before == 30,
+              f"{clock(page)[1] - before} minutes")
+    clear_chores(page)
 
 
 def walk_friday(page, rep):

@@ -1476,10 +1476,237 @@ text       = "Leave her to it."
 targetType = "location"
 locationId = "the_kitchen"
 
+# ⚠️ ONE-TIME, AND ONLY WHERE THEY ARE ALONE — see FIRST_SAT_WINDOWS and
+# check_first_sat_windows() in gen_week.py. Sets mum_first_sat_down_seen, a MEMORY
+# (not a count — her_mum_cards.md:189 still holds) that one afternoon variant of
+# mum_sat_down reads.
+[[canvases]]
+id   = "mum_first_sat_down"
+name = "Your mum, sat down"
+description = "One-time. The first time her mum is sat down in an hour Nell bought her: the conversation, Gil praised to the daughter who owes him, the secret one sentence away. Sets mum_first_sat_down_seen."
+
+[canvases.trigger]
+location      = "the_front_room"
+requires_npc  = "npc_lynn"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", npc_id = "npc_lynn", location_id = "the_front_room", operator = "is_present" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "08:00"
+end_time   = "08:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "12:00"
+end_time   = "12:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:00"
+end_time   = "13:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 2, 4]
+start_time = "13:30"
+end_time   = "14:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3]
+start_time = "15:45"
+end_time   = "16:45"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 3]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.trigger.schedules]]
+weekdays   = [5]
+start_time = "20:00"
+end_time   = "20:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:00"
+end_time   = "09:30"
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "09:30"
+end_time   = "11:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sat down"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is in the chair in her home clothes, with her hands in her lap and nothing in them. She's sitting down. At an hour she is always on her feet, she is actually sitting down, and she looks like she doesn't know how."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Don't look at me like that, love. You did my job for me. I'm allowed."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "player" }
+content = "I didn't say anything."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "You didn't have to. Sit down, you're making me tired."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit down."
+targetType = "node"
+nodeId     = "talk"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "talk"
+name = "Sat with her"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You sit. She lets her head go back against the chair and shuts her eyes, and for a second she looks older than she is. Three nights a week on a ward, and a house full of people who eat, every other hour of it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "You're a good girl. You know that? I don't say it enough."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "A good girl who owes her husband a hundred and fifty dollars every Friday. Great."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "And @gil. I know he's hard work. But he'd do anything for this family. Anything. You'll see that one day."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your stomach drops. She has no idea. She has no idea what he already did, or what it's costing you, and she's smiling about it with her eyes shut."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Yeah, Mum. I know.\""
+targetType = "node"
+nodeId     = "know"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "mum_first_sat_down_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Has he ever told you what he pays for?\""
+targetType = "node"
+nodeId     = "nearly"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "mum_first_sat_down_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing. Let her rest."
+targetType = "node"
+nodeId     = "quiet"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "mum_first_sat_down_seen", op = "set" }]
+
+[[canvases.nodes]]
+id   = "know"
+name = "I know"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Good. Good girl."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She pats your hand without opening her eyes. The lie sits in your mouth like a stone. She believes it, because she's too tired not to."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay with her."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 26
+
+[[canvases.nodes]]
+id   = "nearly"
+name = "Nearly"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Her eyes open. For one second she's properly looking at you, and your heart is going so hard you can hear it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "The bills, love. The house. What do you mean?"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "One more sentence. That's all it would take. One more sentence and this house explodes."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "player" }
+content = "Nothing. Forget it."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She shuts her eyes again. She doesn't ask twice. She never does."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay with her."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 26
+
+[[canvases.nodes]]
+id   = "quiet"
+name = "Quiet"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You don't answer. After a minute her breathing goes slow. She's asleep in the chair with her mouth a little open, and she looks ten years younger."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Half an hour of her life back. That's all it cost you. Why does it feel like so much?"
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let her sleep."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 26
+
 [[canvases]]
 id   = "mum_sat_down"
 name = "Your mum, sat down"
-description = "Nineteen rows, and every one of them exists because the player took a chore off her. Four bands by the hour. Priority 4 — see the note above."
+description = "Nineteen rows: she is sat down because the player took a chore off her, or it is her hour off. Loud voice, 2026-09-25: one spoken line and one visible want per band, pooled; one afternoon variant remembers mum_first_sat_down. Priority 4 — see the note above."
 
 [canvases.trigger]
 location      = "the_front_room"
@@ -1595,8 +1822,38 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "time_of_day", start_time = "00:00", end_time = "12:00" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "She is sat down in the front room before nine, which she never is, because the thing she would have been stood at is already done." },
-  { type = "paragraph", content = "The TV is not on. She is in the chair with a cup, in the part of the morning that is usually the sink." },
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "Your mum is in the chair with a cup going cold on the arm. It's the morning and she's sitting down. She never gets to do that." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Three nights a week on my feet on that ward, love. And now I don't know how to sit down." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "She's sat down with her hands empty, and she keeps looking at the door like the next job is going to walk in." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Somebody else did my job this morning. My feet don't know what to do with themselves." },
+    ] },
+  ] },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "12:00", end_time = "17:15" },
+  { type = "flag", subject = "player", flag_key = "mum_first_sat_down_seen", operator = "is_true" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "Your mum is in the chair in the middle of the afternoon with nothing to do. She looks lost. She has no idea what to do with an hour nobody needs from her." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "I'd be stood up doing that right now, love. You did it. So I'm sat here like I've been told off." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "The remote is right there and she hasn't touched it. She's just sitting with her feet up, and that's the whole treat." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You did that for me? Come here. Sit. My feet do three nights a week on that ward." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "She doesn't say a word about @gil this time. Neither do you. She just moves her feet so there's room on the end of the chair." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Come on, love. Just us. No chores, no husbands. Just sit." },
+    ] },
+  ] },
 ]
 [[canvases.nodes.blocks]]
 type = "group"
@@ -1604,9 +1861,16 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "time_of_day", start_time = "12:00", end_time = "17:15" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "She is in the chair in the middle of the afternoon with nothing in front of her. The room is done and she is not the one who did it." },
-  { type = "paragraph", content = "The cup is on the arm of the chair and the remote is next to it and she has not picked up either." },
-  { type = "paragraph", content = "She has the afternoon and no idea what to do with it, which is what an afternoon looks like when somebody hands you one." },
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "Your mum is in the chair in the middle of the afternoon with nothing to do. She looks lost. She has no idea what to do with an hour nobody needs from her." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "I'd be stood up doing that right now, love. You did it. So I'm sat here like I've been told off." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "The remote is right there and she hasn't touched it. She's just sitting with her feet up, and that's the whole treat." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You did that for me? Come here. Sit. My feet do three nights a week on that ward." },
+    ] },
+  ] },
 ]
 [[canvases.nodes.blocks]]
 type = "group"
@@ -1614,31 +1878,102 @@ props = { conditions = { version = "1.0", logic = "AND", items = [
   { type = "time_of_day", start_time = "17:15", end_time = "18:00" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "This is the hour her own week gives her, five until six, and it is the only one on it that is hers. She is sat down with the TV on low." },
-  { type = "paragraph", content = "Her one hour off, and she is in the chair for all of it. Tonight she is home, so there is nothing at the end of it to get ready for." },
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "Her hour off. The one hour in her whole week that's hers. She's in the chair with the TV on low, and she is not moving for anyone." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "This is my hour, love. At six I'm cooking dinner for four. Until then, I'm not here." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "She came off the ward this morning and she's due in the kitchen at six. This hour in between is hers, and she's got her feet up and her eyes half shut." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Shh. My feet have been on that ward all night. Let them have this." },
+    ] },
+  ] },
 ]
 [[canvases.nodes.blocks]]
 type = "group"
 props = { conditions = { version = "1.0", logic = "AND", items = [
-  { type = "time_of_day", start_time = "18:00", end_time = "00:00" },
+  { type = "time_of_day", start_time = "18:00", end_time = "19:30" },
 ] } }
 blocks = [
-  { type = "paragraph", content = "She is sat down while the house is still going — the kettle through the wall, somebody on the stairs — and for once none of it is waiting on her." },
-  { type = "paragraph", content = "The evening is happening in the other rooms and she is in this one, in the chair, with her shoes off." },
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "It's evening, and your mum is in the chair with her shoes off, and dinner is made without her. She can't quite believe it." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "You cooked. Dinner at seven, and I didn't lift a finger. @gil's never cooked a thing in his life." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "She's in the chair with her feet tucked under her, and for once she isn't the one at the stove. She's home tonight, and she's letting herself enjoy it." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Somebody else is feeding this house tonight. My feet are in heaven, love." },
+    ] },
+  ] },
+]
+[[canvases.nodes.blocks]]
+type = "group"
+props = { conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "19:30", end_time = "23:59" },
+] } }
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "group", blocks = [
+      { type = "paragraph", content = "The dishes are done and she didn't touch them. She's in the chair with her feet up, half an hour off before bed." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Every night I'm home, I'm stood at that sink, love. Not tonight. Tonight my feet get the night off." },
+    ] },
+    { type = "group", blocks = [
+      { type = "paragraph", content = "She's got her shoes off and her head back, and the kitchen through there is clean without her." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_lynn" }, content = "Clean kitchen and I never went in it. Don't tell @nate, he'll expect it." },
+    ] },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit down with her."
-targetType = "location"
-locationId = "the_front_room"
-time_progression_minutes = 30
+targetType = "node"
+nodeId     = "sat"
+time_progression_minutes = 2
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave her to it."
-targetType = "location"
-locationId = "the_front_room"
+targetType = "node"
+nodeId     = "left"
+time_progression_minutes = 1
+
+[[canvases.nodes]]
+id   = "sat"
+name = "Sat with her"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You sit. She tells you about nothing much, and you let her. For half an hour, this house is easy." },
+  { type = "paragraph", content = "You sit on the arm of the chair. She leans on you, just a little, and doesn't say anything. She doesn't have to." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 28
+
+[[canvases.nodes]]
+id   = "left"
+name = "Left her to it"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Go on, love. I'm fine. I'm better than fine."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_front_room"
+time_progression_minutes = 1
 
 [[canvases]]
 id   = "mum_sunday"

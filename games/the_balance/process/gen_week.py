@@ -26,6 +26,7 @@ The three blocks:
           does, the second gated to the hours she is actually on it.
   mum     her_mum.md's week. Fifty-odd [[npcs.schedules]] rows where there were two.
 """
+import json
 import pathlib
 import sys
 
@@ -525,28 +526,246 @@ EATING_AT = {
     "15:15": "She is eating a late lunch on her own at the table, hours after everybody else did. The house is quiet, she has it to herself, and she does not look like somebody who wanted it.",
 }
 
-# (window, paragraphs). The four tile the whole day, so exactly one always renders —
-# and ⚠️ adjacent [group] blocks MERGE into one if/elseif chain (v2.py:14971), which
-# is the shape this wants: the bands are exclusive and only the live one prints.
-SAT_BANDS = [
-    (("00:00", "12:00"), [
-        "She is sat down in the front room before nine, which she never is, because the thing she would have been stood at is already done.",
-        "The TV is not on. She is in the chair with a cup, in the part of the morning that is usually the sink.",
-    ]),
-    (("12:00", "17:15"), [
-        "She is in the chair in the middle of the afternoon with nothing in front of her. The room is done and she is not the one who did it.",
-        "The cup is on the arm of the chair and the remote is next to it and she has not picked up either.",
-        "She has the afternoon and no idea what to do with it, which is what an afternoon looks like when somebody hands you one.",
-    ]),
-    (("17:15", "18:00"), [
-        "This is the hour her own week gives her, five until six, and it is the only one on it that is hers. She is sat down with the TV on low.",
-        "Her one hour off, and she is in the chair for all of it. Tonight she is home, so there is nothing at the end of it to get ready for.",
-    ]),
-    (("18:00", "00:00"), [
-        "She is sat down while the house is still going — the kettle through the wall, somebody on the stairs — and for once none of it is waiting on her.",
-        "The evening is happening in the other rooms and she is in this one, in the chair, with her shoes off.",
-    ]),
+# ── mum_sat_down in the loud voice — 2026-09-25 ─────────────────────────────────
+# Source: ~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/
+# STYLE_REWRITE_MUM_SAT_DOWN.md (revision 2, approved by LO), which carries the facts
+# list: every line below was checked against EVERY window its band covers.
+#
+# (conditions, [(paragraph, her spoken line), ...]). ⚠️ Adjacent [group] blocks MERGE
+# into one if/elseif chain (v2.py:14561-14568) and the FIRST match wins — so the
+# afternoon is written twice, the flagged version FIRST, carrying a third variant
+# that remembers the first step. Nothing else in the chain reads the flag.
+#
+# What each band has to survive (no weekday condition exists):
+#   morning     Mon/Wed/Fri 07:00-07:30 (Gil in his chair) + 08:00-08:30 · Sun 08:00-12:00
+#               (Gil to 08:30, Nate from 11:00) — never "alone", never "before nine"
+#   afternoon   Mon/Wed/Fri 12:00-15:00 · Tue/Thu/Sat 15:45-17:15 · Sun 12:00-13:30 —
+#               Gil is never in this room, so it is the band that may mention him
+#   hour off    Tue/Thu/Sat only, HERS and not bought — no "you did it"
+#   dinner      Tue/Thu/Sat/Sun 18:00-19:00, dinner made by Nell — "tonight" is safe
+#   dishes      Tue/Thu/Sat/Sun 20:00-20:30 — "every night I'm home", never "every night"
+MUM_SEEN = "mum_first_sat_down_seen"
+
+SAT_MORNING = [
+    ("Your mum is in the chair with a cup going cold on the arm. It's the morning and she's sitting down. She never gets to do that.",
+     "Three nights a week on my feet on that ward, love. And now I don't know how to sit down."),
+    ("She's sat down with her hands empty, and she keeps looking at the door like the next job is going to walk in.",
+     "Somebody else did my job this morning. My feet don't know what to do with themselves."),
 ]
+SAT_AFTERNOON = [
+    ("Your mum is in the chair in the middle of the afternoon with nothing to do. She looks lost. She has no idea what to do with an hour nobody needs from her.",
+     "I'd be stood up doing that right now, love. You did it. So I'm sat here like I've been told off."),
+    ("The remote is right there and she hasn't touched it. She's just sitting with her feet up, and that's the whole treat.",
+     "You did that for me? Come here. Sit. My feet do three nights a week on that ward."),
+]
+SAT_REMEMBERS = (
+    "She doesn't say a word about @gil this time. Neither do you. She just moves her feet so there's room on the end of the chair.",
+    "Come on, love. Just us. No chores, no husbands. Just sit.")
+SAT_HOUR_OFF = [
+    ("Her hour off. The one hour in her whole week that's hers. She's in the chair with the TV on low, and she is not moving for anyone.",
+     "This is my hour, love. At six I'm cooking dinner for four. Until then, I'm not here."),
+    ("She came off the ward this morning and she's due in the kitchen at six. This hour in between is hers, and she's got her feet up and her eyes half shut.",
+     "Shh. My feet have been on that ward all night. Let them have this."),
+]
+SAT_DINNER = [
+    ("It's evening, and your mum is in the chair with her shoes off, and dinner is made without her. She can't quite believe it.",
+     "You cooked. Dinner at seven, and I didn't lift a finger. @gil's never cooked a thing in his life."),
+    ("She's in the chair with her feet tucked under her, and for once she isn't the one at the stove. She's home tonight, and she's letting herself enjoy it.",
+     "Somebody else is feeding this house tonight. My feet are in heaven, love."),
+]
+SAT_DISHES = [
+    ("The dishes are done and she didn't touch them. She's in the chair with her feet up, half an hour off before bed.",
+     "Every night I'm home, I'm stood at that sink, love. Not tonight. Tonight my feet get the night off."),
+    ("She's got her shoes off and her head back, and the kitchen through there is clean without her.",
+     "Clean kitchen and I never went in it. Don't tell @nate, he'll expect it."),
+]
+
+SAT_VOICED = [
+    ([c_window("00:00", "12:00")], SAT_MORNING),
+    ([c_window("12:00", "17:15"), c_flag(MUM_SEEN, "is_true")], SAT_AFTERNOON + [SAT_REMEMBERS]),
+    ([c_window("12:00", "17:15")], SAT_AFTERNOON),
+    ([c_window("17:15", "18:00")], SAT_HOUR_OFF),
+    ([c_window("18:00", "19:30")], SAT_DINNER),
+    ([c_window("19:30", "23:59")], SAT_DISHES),
+]
+
+SAT_REACTIONS = [
+    "You sit. She tells you about nothing much, and you let her. For half an hour, this house is easy.",
+    "You sit on the arm of the chair. She leans on you, just a little, and doesn't say anything. She doesn't have to.",
+]
+SAT_LEFT = "Go on, love. I'm fine. I'm better than fine."
+
+
+def q(s):
+    """A TOML basic string. The older helpers interpolate raw, which is fine for their
+    prose; the loud voice quotes people, so these go through json."""
+    return json.dumps(s, ensure_ascii=False)
+
+
+def lynn_says(text):
+    return f'{{ type = "dialog", props = {{ speaker = "npc", npcId = "npc_lynn" }}, content = {q(text)} }}'
+
+
+def voiced_band(items, variants):
+    """A time band whose pool picks one (paragraph + her spoken line). Nesting depth 3:
+    group > block_pool > group — under the engine's cap of 4 (engine.md §35)."""
+    body = ",\n  ".join(items)
+    out = ["[[canvases.nodes.blocks]]", 'type = "group"',
+           f'props = {{ conditions = {{ version = "1.0", logic = "AND", items = [\n  {body},\n] }} }}',
+           "blocks = [", '  { type = "block_pool", blocks = [']
+    for para, line in variants:
+        out += ['    { type = "group", blocks = [',
+                f'      {{ type = "paragraph", content = {q(para)} }},',
+                f"      {lynn_says(line)},",
+                "    ] },"]
+    return "\n".join(out + ["  ] },", "]", ""])
+
+
+def node_choice(text, node, minutes, flags=()):
+    body = ("[[canvases.nodes.exit_block.choices]]\n"
+            f"text       = {q(text)}\n"
+            'targetType = "node"\n'
+            f"nodeId     = {q(node)}\n"
+            f"time_progression_minutes = {minutes}\n")
+    if flags:
+        body += ("flagEffects = [" + ", ".join(
+            f'{{ targetType = "player", flag = "{f}", op = "set" }}' for f in flags) + "]\n")
+    return body + "\n"
+
+
+def back_to_room(room, text, minutes):
+    return ('[canvases.nodes.exit_block]\ntype = "location"\n'
+            f"text = {q(text)}\n\n"
+            "[canvases.nodes.exit_block.config]\n"
+            'destinationType          = "specific"\n'
+            f'locationId               = "{room}"\n'
+            f"time_progression_minutes = {minutes}\n\n")
+
+
+# ── mum_first_sat_down — the one-time step ────────────────────────────────────
+# The first time Nell finds her mum sat down in an hour she bought her. It talks about
+# @gil and nearly says what he paid, so it may ONLY fire where the two of them are
+# alone, and only where her being there proves a chore was done.
+FIRST_SAT_WINDOWS = [          # each one EXACTLY a sat_down window, or inside one
+    (WARD, "08:00", "08:30"),     # breakfast dishes; Gil gone to the shop, Nate in the kitchen
+    (WARD, "12:00", "12:30"),     # lunch                  (12:30-13:00 she is eating in the kitchen)
+    (WARD, "13:00", "13:30"),     # lunch dishes
+    (WARD, "13:30", "14:30"),     # laundry                (14:30 is the dusting: out)
+    ([1, 3], "15:45", "16:45"),   # laundry                (Saturday: Nate on the sofa)
+    ([1, 3], "18:00", "19:00"),   # dinner                 (Saturday: Nate on the sofa)
+    ([5], "20:00", "20:30"),      # dinner dishes          (Tue/Thu: Nate on the sofa)
+    (SUN, "09:00", "09:30"),      # breakfast dishes       (08:00-08:30: Gil's weekend paper)
+    (SUN, "09:30", "11:00"),      # the big wash, until Nate gets up at 11
+]
+
+
+def _mins(t):
+    h, m = t.split(":")
+    return int(h) * 60 + int(m)
+
+
+def _overlaps(a0, a1, b0, b1):
+    return _mins(a0) < _mins(b1 if b1 != "00:00" else "24:00") and _mins(b0) < _mins(a1)
+
+
+def check_first_sat_windows():
+    """Hard-fail the generator if a first-step window stops being safe.
+
+    ⚠️ This is the guard that keeps the scene TRUE. If anybody's schedule moves and a
+    window starts to overlap Gil or Nate in the front room, her hour off, or a dusting
+    window (where she is in the room either way), the generator stops instead of
+    writing a scene that talks about Gil with Gil in the chair."""
+    sat = card_windows()["sat_down"]
+    for days, start, end in FIRST_SAT_WINDOWS:
+        for d in days:
+            inside = any(d in wd and _mins(s) <= _mins(start) and _mins(end) <= _mins(e)
+                         for wd, s, e in sat)
+            assert inside, f"first step {d} {start}-{end} is not a sat_down window"
+            for rows, who in ((GIL_ROWS, "Gil"), (NATE_ROWS, "Nate")):
+                for wd, s, e, loc, _a in rows:
+                    assert not (loc == F and d in wd and _overlaps(start, end, s, e)), \
+                        f"first step {d} {start}-{end} overlaps {who} in the front room {s}-{e}"
+            for wd, s, e, loc, activity, _chore in mum_rows_expanded():
+                if loc == F and d in wd and _overlaps(start, end, s, e) and (
+                        "one hour off" in activity or "shelf with a cloth" in activity):
+                    raise AssertionError(f"first step {d} {start}-{end} overlaps her {activity!r}")
+
+
+def build_first_sat_down():
+    check_first_sat_windows()
+    L = "npc_lynn"
+    parts = ["# ⚠️ ONE-TIME, AND ONLY WHERE THEY ARE ALONE — see FIRST_SAT_WINDOWS and",
+             "# check_first_sat_windows() in gen_week.py. Sets mum_first_sat_down_seen, a MEMORY",
+             "# (not a count — her_mum_cards.md:189 still holds) that one afternoon variant of",
+             "# mum_sat_down reads.",
+             "[[canvases]]", 'id   = "mum_first_sat_down"', 'name = "Your mum, sat down"',
+             'description = "One-time. The first time her mum is sat down in an hour Nell bought her: the '
+             'conversation, Gil praised to the daughter who owes him, the secret one sentence away. '
+             'Sets mum_first_sat_down_seen."', "",
+             "[canvases.trigger]", f'location      = "{F}"', 'requires_npc  = "npc_lynn"',
+             "is_repeatable = false", "priority      = 9", "is_active     = true",
+             conditions([c_lynn(F, "is_present")]).rstrip(), ""]
+    for days, start, end in FIRST_SAT_WINDOWS:
+        parts += ["[[canvases.trigger.schedules]]",
+                  "weekdays   = [" + ", ".join(str(d) for d in days) + "]",
+                  f'start_time = "{start}"', f'end_time   = "{end}"', ""]
+    body = "\n".join(parts) + "\n"
+
+    def blocks(*bs):
+        out = ""
+        for kind, text in bs:
+            if kind == "p":
+                out += f'[[canvases.nodes.blocks]]\ntype    = "paragraph"\ncontent = {q(text)}\n\n'
+            elif kind == "t":
+                out += ('[[canvases.nodes.blocks]]\ntype    = "thought_bubble"\n'
+                        f'props   = {{ speaker = "player" }}\ncontent = {q(text)}\n\n')
+            else:
+                sp = ('{ speaker = "player" }' if kind == "you"
+                      else f'{{ speaker = "npc", npcId = "{L}" }}')
+                out += f'[[canvases.nodes.blocks]]\ntype    = "dialog"\nprops   = {sp}\ncontent = {q(text)}\n\n'
+        return out
+
+    body += '[[canvases.nodes]]\nid   = "base"\nname = "Sat down"\n\n'
+    body += blocks(
+        ("p", "Your mum is in the chair in her home clothes, with her hands in her lap and nothing in them. She's sitting down. At an hour she is always on her feet, she is actually sitting down, and she looks like she doesn't know how."),
+        ("mum", "Don't look at me like that, love. You did my job for me. I'm allowed."),
+        ("you", "I didn't say anything."),
+        ("mum", "You didn't have to. Sit down, you're making me tired."))
+    body += '[canvases.nodes.exit_block]\ntype = "choices"\n\n' + node_choice("Sit down.", "talk", 2)
+
+    body += '[[canvases.nodes]]\nid   = "talk"\nname = "Sat with her"\n\n'
+    body += blocks(
+        ("p", "You sit. She lets her head go back against the chair and shuts her eyes, and for a second she looks older than she is. Three nights a week on a ward, and a house full of people who eat, every other hour of it."),
+        ("mum", "You're a good girl. You know that? I don't say it enough."),
+        ("t", "A good girl who owes her husband a hundred and fifty dollars every Friday. Great."),
+        ("mum", "And @gil. I know he's hard work. But he'd do anything for this family. Anything. You'll see that one day."),
+        ("p", "Your stomach drops. She has no idea. She has no idea what he already did, or what it's costing you, and she's smiling about it with her eyes shut."))
+    body += '[canvases.nodes.exit_block]\ntype = "choices"\n\n'
+    body += node_choice('"Yeah, Mum. I know."', "know", 2, [MUM_SEEN])
+    body += node_choice('"Has he ever told you what he pays for?"', "nearly", 2, [MUM_SEEN])
+    body += node_choice("Say nothing. Let her rest.", "quiet", 2, [MUM_SEEN])
+
+    body += '[[canvases.nodes]]\nid   = "know"\nname = "I know"\n\n'
+    body += blocks(
+        ("mum", "Good. Good girl."),
+        ("p", "She pats your hand without opening her eyes. The lie sits in your mouth like a stone. She believes it, because she's too tired not to."))
+    body += back_to_room(F, "Stay with her.", 26)
+
+    body += '[[canvases.nodes]]\nid   = "nearly"\nname = "Nearly"\n\n'
+    body += blocks(
+        ("p", "Her eyes open. For one second she's properly looking at you, and your heart is going so hard you can hear it."),
+        ("mum", "The bills, love. The house. What do you mean?"),
+        ("t", "One more sentence. That's all it would take. One more sentence and this house explodes."),
+        ("you", "Nothing. Forget it."),
+        ("p", "She shuts her eyes again. She doesn't ask twice. She never does."))
+    body += back_to_room(F, "Stay with her.", 26)
+
+    body += '[[canvases.nodes]]\nid   = "quiet"\nname = "Quiet"\n\n'
+    body += blocks(
+        ("p", "You don't answer. After a minute her breathing goes slow. She's asleep in the chair with her mouth a little open, and she looks ten years younger."),
+        ("t", "Half an hour of her life back. That's all it cost you. Why does it feel like so much?"))
+    body += back_to_room(F, "Let her sleep.", 26)
+    return body
 
 MUM_CARDS = {
     "eating": dict(
@@ -556,8 +775,10 @@ MUM_CARDS = {
         node="At the table"),
     "sat_down": dict(
         cid="mum_sat_down", room=F, name="Your mum, sat down",
-        description=("Nineteen rows, and every one of them exists because the player took a chore "
-                     "off her. Four bands by the hour. Priority 4 — see the note above."),
+        description=("Nineteen rows: she is sat down because the player took a chore off her, or it "
+                     "is her hour off. Loud voice, 2026-09-25: one spoken line and one visible want "
+                     "per band, pooled; one afternoon variant remembers mum_first_sat_down. "
+                     "Priority 4 — see the note above."),
         node="In the chair", priority=4),
     "sunday": dict(
         cid="mum_sunday", room=F, name="Your mum, her Sunday afternoon",
@@ -695,6 +916,8 @@ def build_mum_cards():
     wins = card_windows()
     for key, spec in MUM_CARDS.items():
         room = spec["room"]
+        if key == "sat_down":
+            out.append(build_first_sat_down())
         parts = ["[[canvases]]", f'id   = "{spec["cid"]}"', f'name = "{spec["name"]}"',
                  f'description = "{spec["description"]}"', "",
                  "[canvases.trigger]", f'location      = "{room}"',
@@ -715,8 +938,8 @@ def build_mum_cards():
                 end = next(e for _w, s, e in wins[key] if s == start)
                 body += group([c_window(start, end)], [table[start]])
         elif key == "sat_down":
-            for (bs, be), paras in SAT_BANDS:
-                body += group([c_window(bs, be)], paras)
+            for items, variants in SAT_VOICED:
+                body += voiced_band(items, variants)
         elif key == "asleep":
             body += pool(ASLEEP_POOL)
         elif key == "in_bed":
@@ -754,9 +977,24 @@ def build_mum_cards():
             body += choice("Wait for her to finish.", room, HALF)
         elif key == "in_bed":
             body += choice("Say goodnight.", room, 5)
+        elif key == "sat_down":
+            # The loud voice shows a reaction after a choice (the-meters.md, "What the
+            # player is shown"), so both choices go to a node. 2 + 28 keeps the half hour.
+            body += node_choice("Sit down with her.", "sat", 2)
+            body += node_choice("Leave her to it.", "left", 1)
         else:
             body += choice("Sit down with her.", room, minutes)
-        body += choice("Leave her to it.", room)
+        if key != "sat_down":
+            body += choice("Leave her to it.", room)
+        if key == "sat_down":
+            body += '[[canvases.nodes]]\nid   = "sat"\nname = "Sat with her"\n\n'
+            body += pool(SAT_REACTIONS)
+            body += back_to_room(room, "Get up.", 28)
+            body += '[[canvases.nodes]]\nid   = "left"\nname = "Left her to it"\n\n'
+            body += ('[[canvases.nodes.blocks]]\ntype    = "dialog"\n'
+                     'props   = { speaker = "npc", npcId = "npc_lynn" }\n'
+                     f"content = {q(SAT_LEFT)}\n\n")
+            body += back_to_room(room, "Go.", 1)
         if key == "asleep":
             body += ("[[canvases.nodes]]\n" 'id   = "wall"\n' 'name = "Her shifts"\n\n')
             body += pool(WALL)
