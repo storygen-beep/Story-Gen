@@ -1,0 +1,117 @@
+# ════════════════════════════════════════════════════════════════════════════
+# 6_dev_shortcuts.toml — DEV JUMPS (testing only)
+#
+# Every canvas here is gated on flag `dev_mode_enabled is_true`. That flag is set
+# at StoryInit ONLY in `--dev` builds (package_from_toml --dev), so these canvases
+# are inert in any build made without it. The v2 engine treats a canvas with that
+# trigger flag as a "dev shortcut": the flag-chain validator, hint index and
+# flag-setter index all SKIP it, and the sidebar `<<devJumps>>` widget renders a
+# link to its entry node (reached by direct Engine.play — the trigger is a marker,
+# not a real gate). Same shape as games/vesper/toml_phases/6_dev_shortcuts.toml.
+#
+# ⚠️ THIS GAME SHIPS THE DEV BUILD (process/README.md §0d), so these jumps are on the
+# published page too. That is LO's call for this game.
+#
+# ⚠️ merge_toml_phases.py --no-dev DROPS this file by name. Nothing a player needs may
+# live here.
+#
+# ⚠️ A JUMP CANNOT SET THE CLOCK. mum_sat_down picks its band off time_of_day, so the
+# jump shows whichever band the current hour falls in. To see a particular band, wait
+# or use the sidebar's time buttons first, then jump.
+#
+# To add a jump: copy a block, point the exit at the node you want, and list the
+# flag/trait sets that make that spot coherent. Rebuild with --dev.
+# ════════════════════════════════════════════════════════════════════════════
+
+# ─── ▶ Mum, sat down — the daily card ─────────────────────────────────────────
+[[canvases]]
+id          = "dev_jump_mum_sat_down"
+name        = "▶ Mum sat down (daily)"
+description = "DEV JUMP. Straight to mum_sat_down.base, the daily card. Seeds opening_done. The band shown follows the current clock. Gated dev_mode_enabled."
+
+# Anchored to a real location so the canvas emits its passages (an unanchored canvas is
+# pruned and the sidebar link 404s). Repeatable, so it never auto-fires on entry.
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Mum sat down (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the daily card, at whatever hour the clock says." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Jump to her, sat down"
+targetType = "node"
+nodeId     = "mum_sat_down.base"
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+]
+
+# ─── ▶ Mum, sat down — the first time (one-time step) ─────────────────────────
+[[canvases]]
+id          = "dev_jump_mum_first_sat_down"
+name        = "▶ Mum sat down (first time)"
+description = "DEV JUMP. Straight to mum_first_sat_down.base, the one-time conversation. Seeds opening_done. Replayable from here even after it has played, because the link bypasses the trigger. Gated dev_mode_enabled."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Mum first sat down (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the first time she is sat down because of you." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Jump to the first time"
+targetType = "node"
+nodeId     = "mum_first_sat_down.base"
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+]
+
+# ─── ▶ Mum, sat down — the daily card, after the first time ───────────────────
+[[canvases]]
+id          = "dev_jump_mum_sat_down_after"
+name        = "▶ Mum sat down (after first time)"
+description = "DEV JUMP. The daily card with mum_first_sat_down_seen already set, so the afternoon band can pick the variant that remembers the first time (12:00-17:15 only). Gated dev_mode_enabled."
+
+[canvases.trigger]
+location      = "the_front_room"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Mum sat down, after (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: the daily card, remembering the first time. The remembering line is one of three afternoon variants, so it shows between 12:00 and 17:15, about one visit in three." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Jump to her, after the first time"
+targetType = "node"
+nodeId     = "mum_sat_down.base"
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+  { targetType = "player", flag = "mum_first_sat_down_seen", op = "set" },
+]
