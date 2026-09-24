@@ -1514,3 +1514,161 @@ viewer or a CFNM/JOI frame. Stop testing it; a human pick has to accept solo com
 **The room is unbuyable at both ends, restated with new evidence.** `cleaner` bought the
 chore posture for Grier's dim filthy workshop and returned bright domestic interiors anyway.
 Occupation tokens buy geometry, never grime and never light.
+
+## 0.2.2 THE WAY DOWN, 2026-09-18 — eight bunker slots, one agent each
+
+Six `_t5` riding pools (g1 crate, g2 water, g3 table, g4 bench, g5 desk, door) plus two SFW
+stills (the plant room, Loder's portrait). 1,588 options stocked across 38 labelled searches,
+9 condemned. Everything below was measured on a live grid this run.
+
+### The room is unbuyable again — four more setting tokens that vanish without a warning
+
+| token | what happened | verdict |
+|---|---|---|
+| `crate` | `riding fuck man sitting on crate amateur gif` — act landed, zero crates on the grid, no "Did you mean" | SILENTLY DROPPED. Harmless in an act query (not the shopping trap it is on stills), buys nothing |
+| `hallway` | `cowgirl fuck chair dim hallway amateur gif` — chair riding in ordinary rooms, no hallway | SILENTLY DROPPED |
+| `corridor` | `cowgirl fuck chair dark corridor amateur gif` — same; `dark` did pull dimmer and b/w tiles | SILENTLY DROPPED. `dark`/`dim` are the only lighting levers that registered |
+| `break room` | `cowgirl fuck on break room table amateur gif` — no break room; drifted to him standing | INERT, condemned at the grid |
+| `overalls` | `overalls riding fuck on his lap amateur gif` — one overalls tile, and it was a blowjob | Barely registers. The coveralls detail is not searchable |
+
+### Surfaces — which furniture actually binds
+
+| token | result | verdict |
+|---|---|---|
+| `massage table` | nearly every first-screen tile was him on his back on a table with her astride | **The strongest supine-on-table token found.** Cost: studio spa rooms, glossy footage; `amateur` beside it is ignored |
+| `dining table` | bound to the KITCHEN aisle — him standing, her bent over counters; slugs "sex-in-the-kitchen" ×5 | POISON for a woman-on-top beat |
+| `work bench` (two words) | park benches, gym benches, office chairs | Behaves like bare `bench` — wrong aisle. One-word `workbench` held the act but no workbench was ever visible; Google only named it in labels |
+| `garage` + riding | first screen = riding in real garages, him on the floor or a mechanic's creeper | HOLDS for riding. Tail slides to garage sex generally; ~¼ drifts to cars with `dim garage` |
+| `on his lap` / `sitting` / `seated man` | all three put him seated on the first screen | CONFIRMED again, beds and couches still leak in |
+| `office chair` + `secretary` + `boss` | `secretary riding boss fuck office chair gif` — the most office-specific grid of the run | `secretary` works for RIDING, not only oral. Its top host, cumception.com, serves caption-overlay gifs (a soft warning, like hotwifecaps) |
+
+### Wet bodies
+
+- `rain` + `fuck against wall` **binds** — "Fucked Against Wall In Rain", wet bodies on concrete
+  and brick. The only token that bought the water. `fucked against wall in rain amateur gif`
+  was mined off Google's own result label and deepened the same cluster.
+- `wet` and `soaked` are near no-ops beside `against wall` (0 wet slugs on the `wet` query; `wet`
+  drags a fingering tail after "More results").
+- Shower share on the stocked shelf was only ~2.5% — the avoid-a-shower worry did not
+  materialise.
+
+### New aisle-shifters on riding beats
+
+- `straddling` — first screen on the act, but the tail is facesitting/femdom, Tenor movie kisses,
+  a scat site and cuckold humiliation. Condemned. Use `riding … sitting in chair` instead
+  (one-token swap, ~99% porn hosts, clean seated riding).
+- `lying on table` — the tail surfaced a "teen"-titled tile and a schoolgirl-skirt tile.
+  Condemned under the adults-only rule.
+
+### ⚠️ Adults-only — `myteenwebcam.com` rides every chair and riding query
+
+The driver added an adults-only rule this run: no `girl`/`teen`/`young`-class tokens, and a
+url whose host or path matches `teen|young|school|lolita|jailbait|underage|preteen|child|kid`
+is dropped before stocking. `myteenwebcam.com` was the dominant hit on every riding slot —
+70 urls on g1, 119 on the door slot, 62% of one hallway query. It is NOT confined to
+age-word queries; plain `cowgirl fuck on chair` pulls it. Google TITLES can say "teen" while
+the host and path are clean — five such options were found on g3 by a title check and removed
+by the driver. Other shelves were not title-checked.
+
+### SFW stills
+
+- **Plant room:** `rig` → oil rigs plus "Did you mean: ring"; `held captive` → true-crime news;
+  `dystopian experiment` → novel covers and library catalogues; `frame` reads as prison BARS
+  (`prisoner held in steel frame…` = solitary-cell aisle). Closest subject:
+  `captive man hooked up to machine wires dark room sci fi` (film stills, "Infinity Chamber").
+  `man trapped connected to cables dark industrial room cinematic` bought the right PLACE.
+  The exact subject — a man upright in a steel frame — appeared on no grid.
+- **Loder portrait:** `cardigan` is POISON on a low-key portrait — twice it swapped the moody
+  light for bright menswear and lifestyle stock. Without it: `tired middle aged man portrait
+  moody dim light`, `anxious middle aged man portrait low key dark background` and
+  `environmental portrait worried middle aged man dim basement` all landed.
+- Watermark share: plant room 44.8% from the watermarking five, 4.8% clean; Loder 79.3% / 6.8%.
+
+### Extraction facts, four agents independently
+
+- **"More results" adds TILES, not URLS.** Every agent, animated and still: 231→431 and
+  606→1006 tiles with the url count flat (~70–100 a query). Tiles past the first ~100 carry a
+  docid and a page link but no original media url in the markup.
+- In a background tab the button measures `width = 0`, so a `width > 0` lookup never finds it;
+  clicking the `<a>` found by its text works.
+- In-page `setTimeout` waits inside one `javascript_tool` call hit the 45 s `Runtime.evaluate`
+  ceiling (three agents). Wait with a separate call or `browser_batch`'s wait step instead.
+- The docid-triple join recovers ~6 extra animated urls a query that the plain regex misses
+  (phncdn urls with `=` escapes).
+
+## THE COUNT, 2026-09-19 — seven `bastien_cot_*` pools, one agent each
+
+1,522 options stocked across 38 labelled searches, 17 condemned. Every row below was measured on a
+live grid this run.
+
+### ⚠️⚠️ `skinny` / `thin man` — UNUSABLE, and a SAFETY finding, not just a relevance one
+
+Tried on five slots (handjob, blowjob, riding, missionary ×2, facial). **Every time the word bound
+to the WOMAN, not the man** — "Skinny cowgirl", "Skinny girl take Facial", "Tiny skinny missionary"
+— and the grid tail went youth-coded: "Petite Teen Cowgirl", "skinny innocent blonde", pigtails.
+On `blowjob` it also pulled a gay/twink aisle. All five condemned, zero stocked. **A thin male
+partner is not retrievable by any body-type word. Never try again; the human picks build by eye.**
+
+### Other youth-coded aisles (condemned under the adults-only rule)
+
+| token | slot | what the grid showed |
+|---|---|---|
+| `sloppy` on a bed query | oral | pigtails, a "class" tile, "Tiny Teen" titles — unlike its clean widener behaviour beside `bj chair` |
+| `single bed` | under | real amateur rooms, but pastel childish bedding and knee socks on the first screen |
+| `kneeling missionary` | under | posture right (him upright over her) but a "Petite Missionary" pigtails tile |
+| `she does all the work` | first night | porn-native phrase (100% porn hosts, unlike `doing nothing`/`lazy sex`) but a young-looking close-up |
+
+### What landed
+
+| query | slot | notes |
+|---|---|---|
+| `oil handjob lying on bed cumshot amateur gif` | wash | best posture binder — him flat, her beside him, wet hand |
+| `handjob he cums on himself amateur gif` | wash | holds the direction the beat needs |
+| `slow cowgirl fuck on bed amateur gif` | first night | `slow cowgirl` is a real tag (Google titles echo it) |
+| `slow riding fuck dark room amateur gif` | first night | `dark room` registers as lighting — the dim bucket |
+| `riding him slow fuck amateur gif` | first night | `riding him` holds his underneath posture |
+| `blowjob man lying on bed amateur gif` | oral | nearly every first-screen tile is the beat's shape |
+| `bj edge of bed hand on head amateur gif` | oral | `hand on head` is a Pornhub tag; ~10% editorial tail |
+| `blowjob on his back hand in hair amateur gif` | oral | hand-in-hair fills the grid, but he is often standing/POV |
+| `riding fuck grabbing her ass amateur gif` | ride | his hands on her, him on his back |
+| `slow deep missionary fuck amateur gif` | under | the most on-beat missionary bucket |
+| `missionary fuck eye contact amateur gif` | under | NO editorial — returns the POV aisle (her looking up = his eyeline) |
+| `pull out cum on her face amateur gif` | facial | missionary pull-outs on a bed ending on her face — matches the TOML text |
+| `facial cumshot on bed amateur gif` | facial | `cumshot` kept `facial` out of skincare, tail checked |
+| `balls deep cum inside amateur gif` | finish inside | cowgirl-from-behind, his hands pinning her hips — this beat exactly |
+| `throbbing creampie on bed amateur gif` | finish inside | finish-moment family holds again |
+
+### Direction reversals and wrong aisles (invisible to the host histogram)
+
+- `handjob cum on stomach` / `cum on belly` → SHE lies down and he finishes on HER. Adding `his`
+  does not flip it back.
+- `edge of bed blowjob` → HER head hanging off the edge, him standing (the upside-down deepthroat
+  genre) — the opposite of a man lying on the bed.
+- `hair pulling` beside `bj` → the rough/doggy hair-pulling aisle; beside `cumshot on her face` it
+  holds on the first screen with a rough tail.
+- `sponge bath` → bathtub / shower / "soapy handjob" aisle.
+- `bed banging wall` → a standing wall-sex tail; no bed visibly hitting a wall anywhere.
+- `grabbing her thighs` → first screen fine, tail drifts to clothed thigh-riding and grinding.
+
+### Unsearchable in this beat family
+
+The narrow bunk, the bare room, the thin man, the rag and basin, and the bed knocking the wall.
+The human picks for all of them on the shelf.
+
+### Adults-only machinery that worked (add to the agent brief permanently)
+
+- **Title check via Google's metadata record** — `"2003":[null,docid,pageUrl,title,…]` follows each
+  docid triple; it is the same data behind the visible tile label. Four agents independently got
+  100% title coverage this way. Caught 4–15 "Teen …" titles per slot that the url filter passed.
+- **Source-page slug check** — `gifsfor.com` titles every tile with its own site name, so the title
+  check is blind there; its source pages read `/amateur-teen-girl-…`. Checking `pageUrl` against the
+  same regex caught 10 on one slot.
+- `myteenwebcam.com` appears on every handjob / riding / missionary / creampie / facial query, not
+  only on chair queries.
+- The regex now includes `petite|innocent` (added mid-run after the `skinny` finding).
+
+### Extraction
+
+- Concurrent bulk writes took 15–25 s each with seven agents in flight; two agents hit the 45 s
+  ceiling on a combined stock call (both writes still landed). Send `add_bulk` and `queries/add` as
+  SEPARATE calls, and re-read `options/list` before any retry.

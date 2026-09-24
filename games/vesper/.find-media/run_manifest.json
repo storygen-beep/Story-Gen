@@ -50,7 +50,7 @@
     "synced_to_output": true
   },
   {
-    "run": "act2-underworld-hunt media (batch 2, 2026-07-09) — Undertow bar, Rue, Marsh Sunday",
+    "run": "act2-underworld-hunt media (batch 2, 2026-07-09) \u2014 Undertow bar, Rue, Marsh Sunday",
     "result": "7/7 found, 0 missing (game-review API), 87 found total",
     "items": [
       {
@@ -129,13 +129,13 @@
     ],
     "synced_to_output": false,
     "flags": [
-      "Videos saved at bare stems (sex/marsh_*.webm) matching current TOML; all 26 other Vesper sex videos carry a _t5 suffix — naming inconsistency flagged to LO (TOML fix, NOT applied).",
-      "Media written to games/vesper/videos/ (source) only; NOT yet baked into output/videos/ — requires a re-package to appear in the playable/committable output.",
+      "Videos saved at bare stems (sex/marsh_*.webm) matching current TOML; all 26 other Vesper sex videos carry a _t5 suffix \u2014 naming inconsistency flagged to LO (TOML fix, NOT applied).",
+      "Media written to games/vesper/videos/ (source) only; NOT yet baked into output/videos/ \u2014 requires a re-package to appear in the playable/committable output.",
       "ride+anal needed one critique cycle: first-pass 'brothel+...' queries returned bright daylight clips; recalibrated to Vesper's dim/warm brothel set and re-queried 'amateur+...'."
     ]
   },
   {
-    "run": "captivity arc — The Room (batch 3, 2026-07-10)",
+    "run": "captivity arc \u2014 The Room (batch 3, 2026-07-10)",
     "result": "11/11 found, 0 missing (API + static audit agree); repackaged --dev --debug, 0 failed",
     "items": [
       {
@@ -167,7 +167,7 @@
         "gate": "PASS",
         "score": 78,
         "cycle": 2,
-        "note": "WEAKEST SFW — dark parked sedan, not a van on a wet dock; no such stock image exists"
+        "note": "WEAKEST SFW \u2014 dark parked sedan, not a van on a wet dock; no such stock image exists"
       },
       {
         "file": "sex/cell_inventory.webm",
@@ -187,7 +187,7 @@
         "status": "PACKAGED",
         "gate": "PASS",
         "score": 82,
-        "note": "loop is mostly her face — matches 'watching her face rather than her body'"
+        "note": "loop is mostly her face \u2014 matches 'watching her face rather than her body'"
       },
       {
         "file": "sex/cell_first_three.webm",
@@ -237,7 +237,7 @@
         "status": "PACKAGED",
         "gate": "PASS",
         "score": 77,
-        "note": "WEAKEST NSFW — ADJUSTED QUERY (see flags)"
+        "note": "WEAKEST NSFW \u2014 ADJUSTED QUERY (see flags)"
       },
       {
         "file": "sex/cell_overflow.webm",
@@ -257,11 +257,11 @@
       "STRIP-VERIFY CAUGHT 3 OF 8 BAD PICKS (inventory/overflow/stutter). Thumbnails are a single frame; two winners' loops cut to a different scene or lost a person. Never package an NSFW pick on the thumbnail alone.",
       "SKILL DEFECT: scoring_rubric.md NSFW hard-rejects list '3+ people' ('two-person story') and 'BDSM gear' as blanket filters. Applied literally they reject every valid candidate for 4 of these 8 scenes. The kink line hedges 'unless explicitly in narrative'; the people-count line does not. Overridden here.",
       "8 cell_* clips declared at bare stems; all 26 other Vesper sex videos carry _t5. validate_queries.py auto-retag proposes _t5 for cell_charge_test only. TOML rename NOT applied (LO's phase files are uncommitted WIP).",
-      "CLIP unavailable (no torch) — used skill's documented exit-3 fallback: PIL contact sheets + direct viewing."
+      "CLIP unavailable (no torch) \u2014 used skill's documented exit-3 fallback: PIL contact sheets + direct viewing."
     ]
   },
   {
-    "run": "captivity arc 'The Room' — deep beats (batch 4, 2026-07-11)",
+    "run": "captivity arc 'The Room' \u2014 deep beats (batch 4, 2026-07-11)",
     "result": "39/39 found & packaged; source+output 144 refs / 0 missing; 0 debug placeholders; repackaged --dev --debug (46 copied, 0 failed)",
     "counts": {
       "sci_fi_readout_stills": 5,
@@ -276,9 +276,9 @@
       "cell_he_does_not_stop_a_crew_man_balks: dressed man stands apart watching (proxy for 'one steps back')",
       "cell_overflow_it_hurts_the_overflow: pinned/folded taken hard, 3 critique cycles; painful-forced-orgasm beat scarce in corpus",
       "cell_sleep_hot: dark night bedroom, single-partner (multiple-men carried by sleep-set escalation)",
-      "5 sci-fi *_the_read_out stills: atmospheric stand-ins (red-tech abstract / dim body-glow); NO stock match for 'glowing gauge on a sternum' — image-gen would serve better",
+      "5 sci-fi *_the_read_out stills: atmospheric stand-ins (red-tech abstract / dim body-glow); NO stock match for 'glowing gauge on a sternum' \u2014 image-gen would serve better",
       "cell_charge_test_the_notebook / cell_inventory_the_order / bastien_orders_them_on: approximate observer tableaus (clothed-man+exposed-woman frames)",
-      "cell_stutter_bastien_leans_in: pivoted to SFW noir portrait (suited man in shadow) — fits Bastien; NSFW corpus had no 'man watching intently' frame"
+      "cell_stutter_bastien_leans_in: pivoted to SFW noir portrait (suited man in shadow) \u2014 fits Bastien; NSFW corpus had no 'man watching intently' frame"
     ],
     "critique_cycles": {
       "cell_charge_test_she_comes_degraded_for_it": 1,
@@ -291,15 +291,15 @@
     "synced_to_output": true
   },
   {
-    "run": "captivity format-fix — stills that should be clips (batch 5, 2026-07-12)",
+    "run": "captivity format-fix \u2014 stills that should be clips (batch 5, 2026-07-12)",
     "result": "4/4 sourced & packaged as .webm; build GREEN, all flag chains valid, 4/4 render as <video>, 0 stale .jpg refs for the converted stems",
     "trigger": "LO audit: 'the intense ones should be gif/clip/video not image.' Format audit of the 12 captivity stills against beat PROSE (not filename) found 7 defective; LO greenlit removing all 7 and re-sourcing the 4 that sit on a LIVE act as clips.",
     "removed_stills": [
-      "cell_stutter_bastien_leans_in.jpg (was SFW noir portrait mid-gangbang — worst)",
+      "cell_stutter_bastien_leans_in.jpg (was SFW noir portrait mid-gangbang \u2014 worst)",
       "cell_he_does_not_stop_the_read_out_the_break.jpg (capstone; stock stand-in)",
       "cell_stutter_the_read_out.jpg (act live: 'every stroke into her')",
       "cell_turns_the_queue.jpg (gangbang queue, threshold-of-act)",
-      "cell_first_three_the_read_out.jpg / cell_frame_the_read_out.jpg / cell_overflow_the_read_out.jpg (3 sci-fi readouts — GENUINE aftermath, static is correct; quarantined pending LO: image-gen vs cut. NOT re-sourced.)"
+      "cell_first_three_the_read_out.jpg / cell_frame_the_read_out.jpg / cell_overflow_the_read_out.jpg (3 sci-fi readouts \u2014 GENUINE aftermath, static is correct; quarantined pending LO: image-gen vs cut. NOT re-sourced.)"
     ],
     "quarantine": "games/vesper/.find-media/_removed_2026-07-12/ (7 stills; reversible)",
     "items": [
@@ -341,11 +341,11 @@
         "status": "PACKAGED",
         "gate": "PASS",
         "score": 65,
-        "note": "COMPROMISE: clothed observer watching while she's used (Bastien's role) — dynamic right, staging off (bright room, seated-far observer, interracial). The 'crouched-close touching while another fucks' frame does not exist in the gif corpus."
+        "note": "COMPROMISE: clothed observer watching while she's used (Bastien's role) \u2014 dynamic right, staging off (bright room, seated-far observer, interracial). The 'crouched-close touching while another fucks' frame does not exist in the gif corpus."
       }
     ],
     "toml_cleanup": "5_scenes.toml: the 4 blocks flipped type=image->video + .jpg->.webm + descriptions/queries rewritten to match the clip (were describing the removed stills). Engine renders image-block-with-webm as <video> too (v2.py:13816), so this is honesty cleanup, not a render fix.",
-    "strip_verify_catches": "leans_in candidate L (spitroast, both men active) rejected — failed the 'one observes/doesn't fuck' requirement; read_out candidate K (bright outdoor doorway) + M (POV blowjob) rejected on setting/act.",
+    "strip_verify_catches": "leans_in candidate L (spitroast, both men active) rejected \u2014 failed the 'one observes/doesn't fuck' requirement; read_out candidate K (bright outdoor doorway) + M (POV blowjob) rejected on setting/act.",
     "open": "3 sci-fi read-out stills show [IMAGE MISSING] under --debug (files removed, TOML blocks still type=image .jpg). Awaiting LO: image-gen the glowing-sternum readout (would be consistent) or cut the media block and let prose carry the number.",
     "infra": "Tor needed ~13min to bootstrap (consensus/microdescriptor lag, not dead). Exit hit PornHub's JS bot-challenge; Chromium solves it, harvest reads DOM directly so unaffected. curl-200 is NOT a health check for this (curl can't run the challenge JS).",
     "synced_to_output": true,
@@ -383,7 +383,7 @@
       ]
     },
     "not_fixed": "3 sci-fi *_the_read_out stills (glowing sternum gauge): no PornHub/Pexels stock; LO ruled out image-gen -> remain [IMAGE MISSING].",
-    "flagged_concerns": "adversarial-verify 'concern' (single-frame ambiguity on clips already loop-verified; bright register on some gangbang/inspection beats — corpus has no dark-cell footage): charge_test, charge_test_comes, overflow, overflow_keep, inventory_order, inventory_the_inspection, sleep_nominal.",
+    "flagged_concerns": "adversarial-verify 'concern' (single-frame ambiguity on clips already loop-verified; bright register on some gangbang/inspection beats \u2014 corpus has no dark-cell footage): charge_test, charge_test_comes, overflow, overflow_keep, inventory_order, inventory_the_inspection, sleep_nominal.",
     "commits": [
       "79e7b32 (6 clips)",
       "82a3726 (14 media)"
@@ -450,7 +450,7 @@
     ]
   },
   {
-    "run": "pool refill — sex/colm_loop_vaginal_t5 (2026-08-03)",
+    "run": "pool refill \u2014 sex/colm_loop_vaginal_t5 (2026-08-03)",
     "slot_key": "sex/colm_loop_vaginal_t5",
     "pool_target": 4,
     "pool_before": 1,
@@ -499,17 +499,17 @@
       {
         "n": "03",
         "url": "sexxxgif/125979-shove-me-against-the-wall",
-        "reason": "affect_no_face — extreme hip/ass crop"
+        "reason": "affect_no_face \u2014 extreme hip/ass crop"
       },
       {
         "n": "04",
         "url": "hardcoregify/66659-teen-fucked-against-a-wall",
-        "reason": "direction_from_behind, no leg hooked — reads as colm_loop_anal footage"
+        "reason": "direction_from_behind, no leg hooked \u2014 reads as colm_loop_anal footage"
       },
       {
         "n": "05",
         "url": "bestsexgif/Crazy-standing-fuck-with-one-leg-up-pussy-close-up",
-        "reason": "MARGINAL — position ok, but extreme genital crop duplicates the incumbent's composition"
+        "reason": "MARGINAL \u2014 position ok, but extreme genital crop duplicates the incumbent's composition"
       },
       {
         "n": "06",
@@ -519,17 +519,17 @@
       {
         "n": "07",
         "url": "porngif.co/219954-stand-and-deliver-fucking",
-        "reason": "position_full_carry — both legs wrapped, feet off floor; RealityKings studio polish; faces obscured"
+        "reason": "position_full_carry \u2014 both legs wrapped, feet off floor; RealityKings studio polish; faces obscured"
       },
       {
         "n": "08",
         "url": "porngif.co/214450-huge-tits-stand-and-deliver",
-        "reason": "position — she is SUPINE ON A BED. SLUG LIE: 'stand and deliver' with zero standing"
+        "reason": "position \u2014 she is SUPINE ON A BED. SLUG LIE: 'stand and deliver' with zero standing"
       },
       {
         "n": "09",
         "url": "xxxpicss/stand-and-deliver",
-        "reason": "cast_inconsistent_with_pool (BLACKONBLACK) + position_full_carry — pool cycles inside ONE visit so the couple must not change"
+        "reason": "cast_inconsistent_with_pool (BLACKONBLACK) + position_full_carry \u2014 pool cycles inside ONE visit so the couple must not change"
       },
       {
         "n": "10",
@@ -539,7 +539,7 @@
       {
         "n": "11",
         "url": "porngif.co/200125-pussy-stand-and-deliver",
-        "reason": "affect_no_face — gonzo genital crop, no bodies"
+        "reason": "affect_no_face \u2014 gonzo genital crop, no bodies"
       },
       {
         "n": "13",
@@ -549,7 +549,7 @@
       {
         "n": "14",
         "url": "bestsexgif/Whitney-Westgate-missionary-with-one-leg-up",
-        "reason": "position_supine_on_bed — collides with brothel_vaginal_t5"
+        "reason": "position_supine_on_bed \u2014 collides with brothel_vaginal_t5"
       },
       {
         "n": "15",
@@ -574,32 +574,32 @@
       {
         "n": "22",
         "url": "sexxxgif/167777-quickie-sex-no-time-to-undress",
-        "reason": "direction_from_behind, bent over — reads as the anal pool"
+        "reason": "direction_from_behind, bent over \u2014 reads as the anal pool"
       },
       {
         "n": "23",
         "url": "cumception/upskirt_quic-422",
-        "reason": "affect_no_face — clothed crotch crop"
+        "reason": "affect_no_face \u2014 clothed crotch crop"
       },
       {
         "n": "24",
         "url": "sexxxgif/234891-quickie-sex-with-your-secretary",
-        "reason": "position — she is reclining on a desk, not standing"
+        "reason": "position \u2014 she is reclining on a desk, not standing"
       },
       {
         "n": "25",
         "url": "sexxxgif/301604-quickie-sex",
-        "reason": "position_riding + affect_no_face — collides with brothel_vaginal_t5 and marsh_ride_t5"
+        "reason": "position_riding + affect_no_face \u2014 collides with brothel_vaginal_t5 and marsh_ride_t5"
       }
     ],
     "near_misses_left_on_shelf": [
       {
         "url": "https://cdn.hardcoregify.com/60934/horny-teen-ivana-is-fucked-standing-against-a-wall.gif",
-        "note": "PASSES all gates (standing, wall, leg hooked, 2 faces). Lost on CRAFT only — very soft/low-res, blank white wall."
+        "note": "PASSES all gates (standing, wall, leg hooked, 2 faces). Lost on CRAFT only \u2014 very soft/low-res, blank white wall."
       },
       {
         "url": "https://cdn.nsfwgify.com/41757/went-away-to-college-came-back-all-sophisticated.gif",
-        "note": "PASSES all gates, clearest penetration of the harvest, very expressive face. Lost on register — beret + thigh-highs read costume-y/studio."
+        "note": "PASSES all gates, clearest penetration of the harvest, very expressive face. Lost on register \u2014 beret + thigh-highs read costume-y/studio."
       }
     ]
   },
@@ -706,7 +706,7 @@
     ]
   },
   {
-    "run": "pool-expansion Part 2 (batches 3-6, parallel workflow wf_70c9a1b2-ced — partial: 9 of 20 slots)",
+    "run": "pool-expansion Part 2 (batches 3-6, parallel workflow wf_70c9a1b2-ced \u2014 partial: 9 of 20 slots)",
     "items": [
       {
         "file": "sex/mercer_finish_facial_t5",
@@ -722,7 +722,7 @@
         ],
         "rejected_count": 5,
         "collisions_caught": [],
-        "notes": "Incumbent.webm was never touched. Sourced from Google Images (SafeSearch confirmed Off on every query). Query 1 and 2 (the brief's two pre-validated queries) together only yielded 9 stocked options — mostly preview.mp4 thumbnails that didn't visually match well on inspection (many were creampie/anal-themed image-search noise, not facial-specific). Ran a third supplemental query 'cumshot jaw grip f"
+        "notes": "Incumbent.webm was never touched. Sourced from Google Images (SafeSearch confirmed Off on every query). Query 1 and 2 (the brief's two pre-validated queries) together only yielded 9 stocked options \u2014 mostly preview.mp4 thumbnails that didn't visually match well on inspection (many were creampie/anal-themed image-search noise, not facial-specific). Ran a third supplemental query 'cumshot jaw grip f"
       },
       {
         "file": "sex/colm_finish_facial_t5",
@@ -773,7 +773,7 @@
           "https://cdn.nsfwgify.com/61596/pressed-against-the-wall.gif",
           "https://cdn.sexxxgif.com/214675/fuck-her-against-the-wall.gif"
         ],
-        "notes": "Pool was seeded with exactly 1 incumbent (incumbent.webm) as stated — confirmed on disk before touching anything and left untouched. Stocked 120 total candidate URLs (0 fail) across the brief's 2 queries via my own fresh Chrome tab; SafeSearch confirmed Off before each extraction. fetch_candidates.py needed two waves (wave 1 top-8, then --more wave-2 top-8) to surface enough clean 'standing agains"
+        "notes": "Pool was seeded with exactly 1 incumbent (incumbent.webm) as stated \u2014 confirmed on disk before touching anything and left untouched. Stocked 120 total candidate URLs (0 fail) across the brief's 2 queries via my own fresh Chrome tab; SafeSearch confirmed Off before each extraction. fetch_candidates.py needed two waves (wave 1 top-8, then --more wave-2 top-8) to surface enough clean 'standing agains"
       },
       {
         "file": "sex/mercer_finish_ass_t5",
@@ -789,7 +789,7 @@
         ],
         "rejected_count": 5,
         "collisions_caught": [],
-        "notes": "Incumbent (incumbent.webm) confirmed untouched throughout. Pool now holds exactly 4 files: incumbent.webm + cd77073e3ef.gif (was 00.gif) + c50988b4f9c.gif (was 02.gif) + c02b94ecfbd.gif (was 04.gif). All 3 new installs are .gif — tier_format_check --tier t5 PASSed on all three (gif magic bytes confirmed). Both scoped queries had to share the browser's tab group with other in-flight slot searches ("
+        "notes": "Incumbent (incumbent.webm) confirmed untouched throughout. Pool now holds exactly 4 files: incumbent.webm + cd77073e3ef.gif (was 00.gif) + c50988b4f9c.gif (was 02.gif) + c02b94ecfbd.gif (was 04.gif). All 3 new installs are .gif \u2014 tier_format_check --tier t5 PASSed on all three (gif magic bytes confirmed). Both scoped queries had to share the browser's tab group with other in-flight slot searches ("
       },
       {
         "file": "sex/brothel_finish_inside_t5",
@@ -805,9 +805,9 @@
         ],
         "rejected_count": 17,
         "collisions_caught": [
-          "https://porngipfy.com/wp-content/uploads/2017/12/quickly-pulling-out-gif-creampie-gifs.gif — already recorded against vesper/videos/sex/mercer_finish_inside_t5/c306a472344.gif"
+          "https://porngipfy.com/wp-content/uploads/2017/12/quickly-pulling-out-gif-creampie-gifs.gif \u2014 already recorded against vesper/videos/sex/mercer_finish_inside_t5/c306a472344.gif"
         ],
-        "notes": "Preflight: list_connected_browsers showed one browser (\"Browser 1\"); tabs_context_mcp found other processes' tabs already open on unrelated queries (facial/cumshot/glass/red-room slots) — left those untouched and created my own fresh tab via tabs_create_mcp, closed it after search per hygiene rule. Both brief queries were highly on-topic (SafeSearch confirmed Off both times); 80 total URLs stocked"
+        "notes": "Preflight: list_connected_browsers showed one browser (\"Browser 1\"); tabs_context_mcp found other processes' tabs already open on unrelated queries (facial/cumshot/glass/red-room slots) \u2014 left those untouched and created my own fresh tab via tabs_create_mcp, closed it after search per hygiene rule. Both brief queries were highly on-topic (SafeSearch confirmed Off both times); 80 total URLs stocked"
       },
       {
         "file": "sex/brothel_finish_ass_t5",
@@ -823,7 +823,7 @@
         ],
         "rejected_count": 5,
         "collisions_caught": [],
-        "notes": "Started with 1 incumbent clip already in games/vesper/videos/sex/brothel_finish_ass_t5/ (incumbent.webm, untouched — verified same size/timestamp after install). Used my own fresh Chrome tab (tabId 2130533766) rather than the 3 pre-existing tabs in the group, which were clearly mid-use by parallel sibling subagents working other slots (different query topics visible in their titles) — closed my ta"
+        "notes": "Started with 1 incumbent clip already in games/vesper/videos/sex/brothel_finish_ass_t5/ (incumbent.webm, untouched \u2014 verified same size/timestamp after install). Used my own fresh Chrome tab (tabId 2130533766) rather than the 3 pre-existing tabs in the group, which were clearly mid-use by parallel sibling subagents working other slots (different query topics visible in their titles) \u2014 closed my ta"
       },
       {
         "file": "sex/colm_finish_anal_t5",
@@ -841,7 +841,7 @@
         "collisions_caught": [
           "https://cumception.com/wp-content/upload/2018/08/bent_over_forced-9143.gif"
         ],
-        "notes": "Slot was NOT at the state the scope brief claimed. The brief said OPTIONS_STOCKED: 0, but games/vesper/.find-media/media_options.json already held 117 pre-stocked options for this exact slot (110 gif + 7 mp4) with timestamps from earlier today (~09:57 UTC) — an earlier, incomplete pass on this same slot. My tab 2130533750 confirmed this: both of the brief's 2 validated queries came back 100% dupli"
+        "notes": "Slot was NOT at the state the scope brief claimed. The brief said OPTIONS_STOCKED: 0, but games/vesper/.find-media/media_options.json already held 117 pre-stocked options for this exact slot (110 gif + 7 mp4) with timestamps from earlier today (~09:57 UTC) \u2014 an earlier, incomplete pass on this same slot. My tab 2130533750 confirmed this: both of the brief's 2 validated queries came back 100% dupli"
       },
       {
         "file": "scenes/rung_calloway_contact_t4",
@@ -855,7 +855,7 @@
     ]
   },
   {
-    "run": "pool-expansion Part 2 (run 3, workflow wf_7268b8bb-85a — 6 of 12 slots landed)",
+    "run": "pool-expansion Part 2 (run 3, workflow wf_7268b8bb-85a \u2014 6 of 12 slots landed)",
     "items": [
       {
         "file": "scenes/rung_renner_flash_t3",
@@ -870,7 +870,7 @@
         ],
         "rejected_count": 11,
         "collisions_caught": [],
-        "notes": "FILLED TO TARGET — 2 new clips installed, pool now 4 on disk. Both pre-existing files (incumbent.webm, c777a0c66e0.gif) untouched.\n\nINSTALLED:\n- c74742e15db.gif <- nsfwgify blonde-unzipping-her-top (2.0MB). Best act+affect match in the round: a deliberate, unhurried garment-opening reveal — she works the black top down and off — in a dim warm interior, with her eyeline held off-frame to one side as if someone is watching her do it. That off-camera eyeline is what sold it against the beat's \"seated man watching.\" Carries a small semi-transparent 4GIFS.com corner tag at bottom-left; it is not ov"
+        "notes": "FILLED TO TARGET \u2014 2 new clips installed, pool now 4 on disk. Both pre-existing files (incumbent.webm, c777a0c66e0.gif) untouched.\n\nINSTALLED:\n- c74742e15db.gif <- nsfwgify blonde-unzipping-her-top (2.0MB). Best act+affect match in the round: a deliberate, unhurried garment-opening reveal \u2014 she works the black top down and off \u2014 in a dim warm interior, with her eyeline held off-frame to one side as if someone is watching her do it. That off-camera eyeline is what sold it against the beat's \"seated man watching.\" Carries a small semi-transparent 4GIFS.com corner tag at bottom-left; it is not ov"
       },
       {
         "file": "sex/brothel_finish_facial_t5",
@@ -887,10 +887,10 @@
         "rejected_count": 6,
         "collisions_caught": [
           "Zero URL-level collisions: all 3 installs returned [FREE] from dedup_tracker --check before install, and all 3 were recorded to the ledger after install.",
-          "CROSS-AGENT TAB HIJACK (not a URL collision, but the same failure class): my preflight tab 2130533997 was silently re-navigated by sibling agents to 'flashing tits bending over gif', then 'topless girl flashing seated man gif', etc. Sibling agents are calling navigate WITHOUT an explicit tabId, which grabs the FIRST tab in the shared MCP group. I caught it on the post-scroll screenshot and did NOT extract — extracting there would have stocked a sibling slot's shelf into mine, violating one-asset-one-block. Recovered by creating my own tab (2130534009, last in group) and pinning every navigate/scroll/screenshot/javascript call to it explicitly.",
-          "Adjacent-vocabulary sibling noted live: tab 2130534001 was running 'kneeling blowjob seated man in suit office chair gif' / 'sucking cock man sitting in chair desk pov gif' — heavy overlap with generic kneeling-blowjob tiles. I steered to explicit mouth-finish/swallow frames rather than generic kneeling-blowjob candidates to keep my picks distinctive from that slot."
+          "CROSS-AGENT TAB HIJACK (not a URL collision, but the same failure class): my preflight tab 2130533997 was silently re-navigated by sibling agents to 'flashing tits bending over gif', then 'topless girl flashing seated man gif', etc. Sibling agents are calling navigate WITHOUT an explicit tabId, which grabs the FIRST tab in the shared MCP group. I caught it on the post-scroll screenshot and did NOT extract \u2014 extracting there would have stocked a sibling slot's shelf into mine, violating one-asset-one-block. Recovered by creating my own tab (2130534009, last in group) and pinning every navigate/scroll/screenshot/javascript call to it explicitly.",
+          "Adjacent-vocabulary sibling noted live: tab 2130534001 was running 'kneeling blowjob seated man in suit office chair gif' / 'sucking cock man sitting in chair desk pov gif' \u2014 heavy overlap with generic kneeling-blowjob tiles. I steered to explicit mouth-finish/swallow frames rather than generic kneeling-blowjob candidates to keep my picks distinctive from that slot."
         ],
-        "notes": "RESULT: 3/3 requested clips installed; pool now 4/4 on disk (incumbent.webm untouched, plus c1682c23fb4.gif, cb109a2a785.gif, cfcd9c5c28e.gif). All 3 PASS tier_format_check --tier t5 (valid gif magic) and all 3 are recorded in the dedup ledger.\n\n⚠️ SLOT NAME vs BEAT NOTE — the judgment that drove every call: the slot is named \"...finish_FACIAL_t5\", but the authoritative beat note says he finishes IN HER MOUTH and she SWALLOWS. Those are different acts and this corpus is full of both. I hunted mouth-finish/swallow and rejected three otherwise-clean candidates (00, 06, 07) purely because they we"
+        "notes": "RESULT: 3/3 requested clips installed; pool now 4/4 on disk (incumbent.webm untouched, plus c1682c23fb4.gif, cb109a2a785.gif, cfcd9c5c28e.gif). All 3 PASS tier_format_check --tier t5 (valid gif magic) and all 3 are recorded in the dedup ledger.\n\n\u26a0\ufe0f SLOT NAME vs BEAT NOTE \u2014 the judgment that drove every call: the slot is named \"...finish_FACIAL_t5\", but the authoritative beat note says he finishes IN HER MOUTH and she SWALLOWS. Those are different acts and this corpus is full of both. I hunted mouth-finish/swallow and rejected three otherwise-clean candidates (00, 06, 07) purely because they we"
       },
       {
         "file": "scenes/rung_calloway_oral_t5",
@@ -928,7 +928,7 @@
           "https://cdn.hardcoregify.com/87648/desk-work.gif",
           "https://cdn.nsfwgify.com/42839/21naturals-alexis-crystal-gets-cum-all-over-her-pussy-while-anal-fucking.gif"
         ],
-        "notes": "POOL COMPLETE 4/4. Both pre-existing files untouched (timestamps unchanged: c9af0409bfc.gif Aug-4 16:15, incumbent.webm Jul-23 13:26). Installed c6605878fff.gif + c85b2739a92.gif, both [PASS] tier_format_check t5, both recorded in dedup_tracker.\n\nTAB HIJACK — worth flagging to the orchestrator: tabs_context_mcp{createIfEmpty:true} handed me an EXISTING tab (2130533997) that another agent was actively driving. My navigate succeeded, but the screenshot came back showing a sibling's query (\"woman lifting skirt flashing panties seated man gif\"). I abandoned it and used tabs_create_mcp to get my ow"
+        "notes": "POOL COMPLETE 4/4. Both pre-existing files untouched (timestamps unchanged: c9af0409bfc.gif Aug-4 16:15, incumbent.webm Jul-23 13:26). Installed c6605878fff.gif + c85b2739a92.gif, both [PASS] tier_format_check t5, both recorded in dedup_tracker.\n\nTAB HIJACK \u2014 worth flagging to the orchestrator: tabs_context_mcp{createIfEmpty:true} handed me an EXISTING tab (2130533997) that another agent was actively driving. My navigate succeeded, but the screenshot came back showing a sibling's query (\"woman lifting skirt flashing panties seated man gif\"). I abandoned it and used tabs_create_mcp to get my ow"
       },
       {
         "file": "scenes/rung_renner_grope_t4",
@@ -949,7 +949,7 @@
         "notes": "Agent completed its installs (verified 4/4 on disk) but an ENOTFOUND API outage killed it before it could return a structured result. Recorded from disk state, not an agent report."
       }
     ],
-    "run_notes": "ENOTFOUND API outage killed 8 of 12 agents mid-flight; 4 returned structured results and 2 more completed installs on disk without reporting. ⚠️ CONCURRENCY DEFECT FOUND: multiple agents reported tabs_context_mcp{createIfEmpty:true} handing them the SAME Chrome tab, so agents silently hijacked each other mid-search. No asset corruption resulted (dedup_tracker held and the cross-slot duplicate sweep stayed at zero), but the next parallel run should give each agent an explicitly created tab via tabs_create_mcp rather than relying on createIfEmpty. ⚠️ STALE BRIEFS FOUND: scope briefs for rung_renner_tease_t2 / flash_t3 / grope_t4 still declared type=image, format=.jpg, and (for tease+flash) rating=SFW with \"reject nudity/explicit\" — contradicting both the TOML (video pools) and LO's ruling that a tease is never SFW. All three corrected on disk 2026-08-04."
+    "run_notes": "ENOTFOUND API outage killed 8 of 12 agents mid-flight; 4 returned structured results and 2 more completed installs on disk without reporting. \u26a0\ufe0f CONCURRENCY DEFECT FOUND: multiple agents reported tabs_context_mcp{createIfEmpty:true} handing them the SAME Chrome tab, so agents silently hijacked each other mid-search. No asset corruption resulted (dedup_tracker held and the cross-slot duplicate sweep stayed at zero), but the next parallel run should give each agent an explicitly created tab via tabs_create_mcp rather than relying on createIfEmpty. \u26a0\ufe0f STALE BRIEFS FOUND: scope briefs for rung_renner_tease_t2 / flash_t3 / grope_t4 still declared type=image, format=.jpg, and (for tease+flash) rating=SFW with \"reject nudity/explicit\" \u2014 contradicting both the TOML (video pools) and LO's ruling that a tease is never SFW. All three corrected on disk 2026-08-04."
   },
   {
     "run": "v3-shelf-20",
@@ -1822,7 +1822,7 @@
   {
     "slot": "sex/marsh_anal_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 358,
     "options_before": 200,
@@ -1841,7 +1841,7 @@
   {
     "slot": "sex/mercer_serve_desk_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 359,
     "options_before": 193,
@@ -1860,7 +1860,7 @@
   {
     "slot": "sex/mercer_serve_glass_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 319,
     "options_before": 144,
@@ -1879,7 +1879,7 @@
   {
     "slot": "sex/renner_cheerup_alley_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 422,
     "options_before": 299,
@@ -1888,9 +1888,9 @@
     "queries_stocked": 3,
     "queries_condemned": 3,
     "condemned_detail": [
-      "back alley bj outdoor gif — wrong_crowd: `bj`+`outdoor` read as a journal abbreviation, ~13/49 urls to pubs.acs.org/science.org/pnas.org/cell.com",
-      "public blowjob behind the bar amateur gif — wrong_aisle: 100% porn hosts but the camera went INSIDE the bar (pub, pool table, bar bathroom). Zero alley.",
-      "public blowjob parking lot amateur gif — wrong_aisle: 100% porn hosts, grid is CAR INTERIORS. `parking lot` indexes the car, not the pavement."
+      "back alley bj outdoor gif \u2014 wrong_crowd: `bj`+`outdoor` read as a journal abbreviation, ~13/49 urls to pubs.acs.org/science.org/pnas.org/cell.com",
+      "public blowjob behind the bar amateur gif \u2014 wrong_aisle: 100% porn hosts but the camera went INSIDE the bar (pub, pool table, bar bathroom). Zero alley.",
+      "public blowjob parking lot amateur gif \u2014 wrong_aisle: 100% porn hosts, grid is CAR INTERIORS. `parking lot` indexes the car, not the pavement."
     ],
     "format_axis": "animated",
     "content_axis": "act",
@@ -1902,7 +1902,7 @@
   {
     "slot": "sex/renner_cheerup_oral_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 523,
     "options_before": 430,
@@ -1911,7 +1911,7 @@
     "queries_stocked": 3,
     "queries_condemned": 1,
     "condemned_detail": [
-      "bj chair bar amateur gif — wrong_crowd: `bar` (the room word, not just `bar stool`) pulled 8 Tenor + 3 Giphy + 2 reddit of 71 urls."
+      "bj chair bar amateur gif \u2014 wrong_crowd: `bar` (the room word, not just `bar stool`) pulled 8 Tenor + 3 Giphy + 2 reddit of 71 urls."
     ],
     "format_axis": "animated",
     "content_axis": "act",
@@ -1923,7 +1923,7 @@
   {
     "slot": "sex/renner_loop_doggy_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 300,
     "options_before": 177,
@@ -1942,7 +1942,7 @@
   {
     "slot": "sex/renner_loop_oral_t5",
     "generator": "v3",
-    "run": "7 needs-review pool slots — v3 chip-and-label 2026-08-09",
+    "run": "7 needs-review pool slots \u2014 v3 chip-and-label 2026-08-09",
     "status": "shelf_ready",
     "options": 531,
     "options_before": 426,
@@ -1961,7 +1961,7 @@
   {
     "slot": "scenes/cell_inventory_the_order_t4.webm",
     "generator": "v3",
-    "run": "3 format-converted slots — v3 animated harvest 2026-08-09",
+    "run": "3 format-converted slots \u2014 v3 animated harvest 2026-08-09",
     "status": "shelf_ready",
     "options": 181,
     "options_before": 0,
@@ -1978,12 +1978,12 @@
       {
         "q": "enf nude woman bare room man in chair voyeur gif",
         "verdict": "wrong_aisle",
-        "why": "16/16 porn but the ENF public-flashing/sharking aisle — solo nude women on streets, a pool party, towel-drops. `voyeur`+`chair` did NOT hold `enf` up, contradicting the prior STILL-slot measurement. Google also offered 'Did you mean: ... bathroom ...' for `bare room`."
+        "why": "16/16 porn but the ENF public-flashing/sharking aisle \u2014 solo nude women on streets, a pool party, towel-drops. `voyeur`+`chair` did NOT hold `enf` up, contradicting the prior STILL-slot measurement. Google also offered 'Did you mean: ... bathroom ...' for `bare room`."
       },
       {
         "q": "bdsm naked slave inspection clothed master gif",
         "verdict": "wrong_aisle",
-        "why": "Probe at the ownership register. Grid was rope/bondage/flogging/gags + 3D-render hentai; the beat has no restraints. Histogram fragmented to 25 hosts / 70 urls — fragmentation was the tell before the screenshot."
+        "why": "Probe at the ownership register. Grid was rope/bondage/flogging/gags + 3D-render hentai; the beat has no restraints. Histogram fragmented to 25 hosts / 70 urls \u2014 fragmentation was the tell before the screenshot."
       }
     ],
     "format_axis": "animated",
@@ -1996,7 +1996,7 @@
   {
     "slot": "scenes/cell_turns_the_read_out_t5.webm",
     "generator": "v3",
-    "run": "3 format-converted slots — v3 animated harvest 2026-08-09",
+    "run": "3 format-converted slots \u2014 v3 animated harvest 2026-08-09",
     "status": "shelf_ready",
     "options": 305,
     "options_before": 0,
@@ -2010,12 +2010,12 @@
     "tier": "t5",
     "installed": 0,
     "pruned": 0,
-    "note": "EMPTY shelf. Old .jpg key keeps 264 options (0 animated) unreferenced. All 4 landed. AFFECT READ ~60/40 performative over spent — LO's standing reject ('she is happy smiling') is live on the two face-framed buckets; the torso-framed `cumshot on tits` bucket is the quietest and is where the sternum-plate framing actually lives. Start the pick there."
+    "note": "EMPTY shelf. Old .jpg key keeps 264 options (0 animated) unreferenced. All 4 landed. AFFECT READ ~60/40 performative over spent \u2014 LO's standing reject ('she is happy smiling') is live on the two face-framed buckets; the torso-framed `cumshot on tits` bucket is the quietest and is where the sternum-plate framing actually lives. Start the pick there."
   },
   {
     "slot": "sex/colm_backroom_t4",
     "generator": "v3",
-    "run": "3 format-converted slots — v3 animated harvest 2026-08-09",
+    "run": "3 format-converted slots \u2014 v3 animated harvest 2026-08-09",
     "status": "shelf_ready",
     "options": 248,
     "options_before": 0,
@@ -2040,7 +2040,7 @@
     "tier": "t4",
     "installed": 0,
     "pruned": 0,
-    "note": "EMPTY shelf, POOL wanting 4. Old `sex/colm_backroom` key keeps 624 options (0 animated) unreferenced. MY SEED 3 WAS NOT RUN — it contained `dim`, which the same brief lists as poison twice; the agent substituted `clothes on quickie storeroom amateur gif` (100% porn, cleanest histogram of the run). validate_queries.py passed all 3 of my seeds clean — the validator does NOT enforce the measured poison lexicon."
+    "note": "EMPTY shelf, POOL wanting 4. Old `sex/colm_backroom` key keeps 624 options (0 animated) unreferenced. MY SEED 3 WAS NOT RUN \u2014 it contained `dim`, which the same brief lists as poison twice; the agent substituted `clothes on quickie storeroom amateur gif` (100% porn, cleanest histogram of the run). validate_queries.py passed all 3 of my seeds clean \u2014 the validator does NOT enforce the measured poison lexicon."
   },
   {
     "run": "v3_23slot_mercer_kess",
@@ -2314,7 +2314,7 @@
     "run": "v3_reharvest_mercer_hands_on",
     "date": "2026-08-14",
     "generator": "v3",
-    "reason": "human disapproved scenes/mercer_hands_on.jpg — 'Should be a gif'",
+    "reason": "human disapproved scenes/mercer_hands_on.jpg \u2014 'Should be a gif'",
     "slots": [
       {
         "slot": "scenes/mercer_hands_on_t4.gif",
@@ -2342,7 +2342,7 @@
     "run": "v3_reharvest_kess_install",
     "date": "2026-08-14",
     "generator": "v3",
-    "reason": "human disapproved scenes/kess_install.jpg — 'should be gif'",
+    "reason": "human disapproved scenes/kess_install.jpg \u2014 'should be gif'",
     "slots": [
       {
         "slot": "scenes/kess_install.gif",
@@ -2352,7 +2352,7 @@
         "format": "animated",
         "content": "place",
         "band": "clean",
-        "retag": "NONE — canvas says explicitly not sexual",
+        "retag": "NONE \u2014 canvas says explicitly not sexual",
         "orphaned_shelf": {
           "slot": "scenes/kess_install.jpg",
           "options": 70,
@@ -2625,10 +2625,10 @@
       "installed": 0
     },
     "not_harvested": {
-      "sex/bar_floor_handled_t4b.webm": "served by the _t4a shelf (204 options) — same 3-file cycle, no search needed",
-      "sex/bar_floor_handled_t4c.webm": "served by the _t4a shelf — same 3-file cycle, no search needed",
-      "cain.jpg": "SFW portrait — LO generating from a prompt, not harvested",
-      "portraits/wren_cover_stranger.jpg": "SFW portrait — LO generating from a prompt, not harvested"
+      "sex/bar_floor_handled_t4b.webm": "served by the _t4a shelf (204 options) \u2014 same 3-file cycle, no search needed",
+      "sex/bar_floor_handled_t4c.webm": "served by the _t4a shelf \u2014 same 3-file cycle, no search needed",
+      "cain.jpg": "SFW portrait \u2014 LO generating from a prompt, not harvested",
+      "portraits/wren_cover_stranger.jpg": "SFW portrait \u2014 LO generating from a prompt, not harvested"
     },
     "slots": [
       {
@@ -3276,5 +3276,170 @@
     "wave": "5_flash_topup",
     "at": "2026-09-09T15:30:27",
     "note": "re-keyed from scenes/rung_sabin_flash_t5, then topped up +95 via stewardess/standing-over-table"
+  },
+  {
+    "slot": "sex/bunker_g1_crate_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 214,
+    "queries": 4,
+    "rejected_queries": 0,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "crate silently dropped; sitting/lap carried his posture. 70 myteenwebcam urls cut by the adults-only filter"
+  },
+  {
+    "slot": "sex/bunker_g2_water_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 162,
+    "queries": 4,
+    "rejected_queries": 0,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "rain binds (wet wall sex); wet/soaked near no-ops; shower share ~2.5%"
+  },
+  {
+    "slot": "sex/bunker_g3_table_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 133,
+    "queries": 6,
+    "rejected_queries": 3,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "5 options titled 'teen' by Google removed by the driver (adults-only); massage table = best supine-on-table token (studio spa); dining table = kitchen aisle"
+  },
+  {
+    "slot": "sex/bunker_g4_bench_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 152,
+    "queries": 4,
+    "rejected_queries": 1,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "no actual workbench on any grid; garage queries closest; 'work bench' = park/gym bench aisle"
+  },
+  {
+    "slot": "sex/bunker_g5_desk_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 158,
+    "queries": 3,
+    "rejected_queries": 0,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "secretary+boss works for riding; cumception = caption-overlay gifs"
+  },
+  {
+    "slot": "sex/bunker_door_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 188,
+    "queries": 6,
+    "rejected_queries": 1,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "hallway and corridor both silently dropped; straddling tail = facesitting/femdom"
+  },
+  {
+    "slot": "scenes/the_plant_room.jpg",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 315,
+    "queries": 6,
+    "rejected_queries": 2,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "exact subject (man upright in steel frame) absent from every grid; watermarking hosts 44.8%, clean 4.8%"
+  },
+  {
+    "slot": "loder.jpg",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 266,
+    "queries": 5,
+    "rejected_queries": 2,
+    "wave": "0.2.2_way_down",
+    "at": "2026-09-18T22:59:22",
+    "note": "cardigan pulls menswear/lifestyle aisle; watermarking hosts 79.3%, clean 6.8%"
+  },
+  {
+    "slot": "sex/bastien_cot_wash_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 218,
+    "queries": 7,
+    "rejected_queries": 4,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "oil handjob lying on bed = most on-beat; cum on stomach flips direction to her; sponge bath = bathtub aisle; rag/basin unsearchable. skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_first_night_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 215,
+    "queries": 5,
+    "rejected_queries": 2,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "slow cowgirl is a real tag; dark room bucket = dim; she does all the work condemned (youth-coded tile). skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_oral_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 216,
+    "queries": 7,
+    "rejected_queries": 4,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "blowjob man lying on bed = beat shape; edge of bed blowjob = head-hanging reversal; 1 option with unverifiable age-word title removed by driver. skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_ride_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 196,
+    "queries": 4,
+    "rejected_queries": 1,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "grabbing her ass lands; bed banging wall = wall-sex tail; no bed knocking a wall found. skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_under_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 196,
+    "queries": 7,
+    "rejected_queries": 4,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "slow deep missionary = most on-beat; eye contact = POV aisle, no editorial; single bed / kneeling missionary condemned (youth-coded); 1 petite-path url removed by driver. skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_finish_facial_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 248,
+    "queries": 5,
+    "rejected_queries": 1,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "pull out cum on her face = closest to the TOML text; hair pulling bucket has a rough tail. skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
+  },
+  {
+    "slot": "sex/bastien_cot_finish_inside_t5",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 233,
+    "queries": 3,
+    "rejected_queries": 0,
+    "wave": "the_count",
+    "at": "2026-09-19T02:45:32",
+    "note": "balls deep cum inside = most on-beat (her on top, hips pinned). skinny/thin/slim condemned wherever tried (binds to her, youth-coded)."
   }
 ]
