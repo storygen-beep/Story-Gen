@@ -1,33 +1,34 @@
 # =============================================================================
 # The Balance — 2 · the one-shots
 #
-# SLICE 1. Two canvases: the opening, and asking for the job.
+# The opening (boot + opening_house), asking for the job, and the first shift.
+# Rewritten 2026-09-25 from LO's chosen plan: ~/Documents/Scene_Content_Study_20260923/
+# the_balance_rewrite/THE_BALANCE_NEW_OPENING.md, fitted in OPENING_DRAFT.md (draft 2),
+# which carries the facts list every line was checked against.
 #
-# ⚠️ A CHOICE cannot be a location exit — an exit_block is EITHER `choices` OR
-# `location` (validator: "choices[0].targetType invalid"). So the three answers in
-# the kitchen route to three nodes, and THOSE nodes carry the way out of the house.
+# A choice CAN carry targetType = "location" (catch_the_bus, her_door do); what an
+# exit_block cannot be is both `choices` and `location` at once.
 #
 # ⚠️ Every line about Gil reads @gil. He is player-renameable (v2.py:9294).
 # =============================================================================
 
 # --- A1 · THE OPENING --------------------------------------------------------
-# sheets/OPENING.md. Three screens, and the first two name nobody at all.
+# F2: a small boot in her room, then the capstone in the front room. Gil is there
+# ALONE 06:45-07:30, which is the only place he can say Friday: her mum is in the
+# kitchen 07:00-08:00 on a Monday and does not know he paid (money.md).
+# Hidden per-person scores move on the choices and are never printed
+# (the-meters.md, "What the player is shown"). See process/NPC_SCORE_FLOOR.md.
 
 [[canvases]]
 id   = "canvas_opening"
 name = "Opening"
-# ⚠️ NO ANGLE BRACKETS. The skill's template writes placeholders as <Opening>,
-# and this one was copied and never filled in. SugarCube reads <Opening> as an
-# HTML tag, hunts for a closing </Opening> and prints an error on every screen of
-# this canvas — but ONLY in a --debug build, which is where the canvas name gets
-# rendered. It sat here through eight slices because no ordinary build shows it.
-description = "Boot. Her room, the landing, the kitchen at seven thirty. Three facts, then @gil's one line about the cafe, then the first free choice — money against time. Sets opening_done."
+description = "Boot. Her room at seven: who she is, the debt, the ten dollars, the secret, what she wants. Hands over to the front room at ten past and sets came_down."
 
 [canvases.trigger]
-location      = "her_room"
+location = "her_room"
 is_repeatable = false
-priority      = 12
-is_active     = true
+priority = 12
+is_active = true
 
 [[canvases.nodes]]
 id   = "wake"
@@ -35,168 +36,536 @@ name = "Monday"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You turned eighteen last month. College starts today, across town, in a room you have never stood in."
+content = "Your alarm goes off at seven, and you already hate today."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Your @gil.rel paid the semester up front, not you. A hundred and fifty goes back to him on Friday, and on every Friday after that."
+content = "You're eighteen. College starts in two hours. And you owe your @gil.rel a hundred and fifty dollars. This Friday, and every Friday after that, until the whole semester is paid back."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He paid my tuition. That doesn't make him generous. It makes me his."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Your mum doesn't know he paid."
+content = "You check your purse. Ten dollars. You're broke."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "And your mum has no idea he paid. If she ever finds out, this house explodes."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "What you actually want is simple. Money of your own. And for somebody in this house to finally look at you like a grown woman instead of the kid who moved in."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "I need money. Fast."
 
 [canvases.nodes.exit_block]
-type = "choices"
+type = "location"
+text = "Get dressed and go down."
 
-[[canvases.nodes.exit_block.choices]]
-text       = "Get up."
-targetType = "node"
-nodeId     = "canvas_opening.landing"
-time_progression_minutes = 3
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "the_front_room"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.config.flagEffects]]
+targetType = "player"
+flag = "came_down"
+op = "set"
+
+[[canvases]]
+id   = "opening_house"
+name = "Monday morning"
+description = "Capstone of the opening, one-time. Gil alone in the front room at ten past seven (the money, the job, the first choice), her mum at the stove, Nate out of the shower at quarter to eight, and the front door. Sets opening_done and the three meeting flags on the way to the door."
+
+[canvases.trigger]
+location = "the_front_room"
+is_repeatable = false
+priority = 12
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "came_down", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "07:00"
+end_time   = "07:30"
 
 [[canvases.nodes]]
-id   = "landing"
-name = "The landing"
+id   = "gil"
+name = "Ten past seven"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The shower is running, so the bathroom is gone until whoever is in there comes out. Of the two doors on the landing, one is shut and one stands open. Your mum's bag is gone from the hook, so she came off the ward and went straight back out."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Downstairs somebody has the radio on low. You could not say which of them it is."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Go down."
-targetType = "node"
-nodeId     = "canvas_opening.kitchen"
-time_progression_minutes = 27
-# 07:00 + 3 + 27 = 07:30 in the kitchen, which is the hour OPENING.md names.
-
-[[canvases.nodes]]
-id   = "kitchen"
-name = "Half seven"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "@gil is at the table with the paper folded to the part he wants. He doesn't look up when you come in."
+content = "Your @gil.rel, @gil, is in his chair in the front room with the paper and the radio on low. He looks you up and down over the top of the page."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_gil" }
-content = "Job going at the cafe on the strip. Card in the window."
+content = "You're up early. Dressed like that for college?"
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Here we go."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "player" }
+content = "It's my first day."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "There's a job going at the cafe on the strip. Card in the window. You're going to need it."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "Friday. A hundred and fifty. I'm not running a charity."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He says it to the paper and not to you. He doesn't mention Friday, because he has already said it once."
+content = "He says it low. Your mum is in the kitchen, right through the wall, and he knows exactly how far his voice carries."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He'd never say it in front of her. Not once."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Is that you up, love? Come and eat something before you go!"
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Do the bins first. Half an hour."
+text = "\"I'll go and ask today.\""
 targetType = "node"
-nodeId     = "canvas_opening.chore"
+nodeId = "gil_yes"
+time_progression_minutes = 2
+effects = [
+  { targetType = "npc", npcId = "npc_gil", trait = "relation", op = "add", value = 1 },
+]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Sit down and eat."
+text = "\"You'll get your money. Every cent.\""
 targetType = "node"
-nodeId     = "canvas_opening.eat"
+nodeId = "gil_money"
+time_progression_minutes = 2
+effects = [
+  { targetType = "npc", npcId = "npc_gil", trait = "doubt", op = "add", value = 1 },
+]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Go now. The bus is in twenty minutes."
+text = "\"It's my business, not yours.\""
 targetType = "node"
-nodeId     = "canvas_opening.leave"
+nodeId = "gil_mind"
+time_progression_minutes = 2
+effects = [
+  { targetType = "npc", npcId = "npc_gil", trait = "relation", op = "add", value = -1 },
+]
 
 [[canvases.nodes]]
-id   = "chore"
-name = "The bins"
+id   = "gil_yes"
+name = "Today"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "The bins are round the side and the truck comes at eight. So it is you dragging them to the front, in your college clothes."
+content = "He nods. Once. Then he's back behind the paper."
 
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Half an hour, and your hands smell like the bin. He does not say anything about it, and he would have said something if you had left them."
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "@gil? Is she eating or not?"
 
 [canvases.nodes.exit_block]
-type = "location"
-text = "Take it and go."
+type = "choices"
 
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_street"
-time_progression_minutes = 30
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "opening_done"
-op         = "set"
-
-[[canvases.nodes]]
-id   = "eat"
-name = "Breakfast"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You sit down and he pushes the box across without a word. You eat half a bowl while the radio does the weather."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He doesn't ask about college and you don't tell him. That is the nearest thing to a conversation this house does before eight."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Get your bag."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_street"
-time_progression_minutes = 20
-
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "opening_done"
-op         = "set"
-
-# PARKED 2026-09-19 (the climbs) — @gil's relation +1 came off this exit. The note that went
-# with it, kept for when it comes back:
-# ⚠️ effects say `npcId`; a CONDITION on the same character says `npc_id`.
-#
-# This was `rest +5` and it pushed rest to 105 — nothing clamps a trait to its
-# starting ceiling, caught on a live walk. Eating is not rest anyway. What sitting
-# down actually buys is the only thing it can: the_cast.md says @gil never opens a
-# step and every one of them is hers to open, and this is the smallest one there is.
-
-[[canvases.nodes]]
-id   = "leave"
-name = "Out"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You take your bag and pull the door until it catches, because it doesn't unless you do."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "Four doors down to the stop, and you get there early for nothing in particular. Early is still better than late."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "The street."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_street"
+[[canvases.nodes.exit_block.choices]]
+text = "Go and eat."
+targetType = "node"
+nodeId = "breakfast"
 time_progression_minutes = 3
 
-[[canvases.nodes.exit_block.config.flagEffects]]
-targetType = "player"
-flag       = "opening_done"
-op         = "set"
+[[canvases.nodes]]
+id   = "gil_money"
+name = "Every cent"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He almost smiles. He doesn't believe you."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_gil" }
+content = "We'll see."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Great. Now I have to prove it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go and eat."
+targetType = "node"
+nodeId = "breakfast"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "gil_mind"
+name = "Not his business"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His face goes hard. He turns the page like you've already left the room."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go and eat."
+targetType = "node"
+nodeId = "breakfast"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "breakfast"
+name = "Your mum"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mum is at the stove in her home clothes with two pans going and the radio on. She's been up since quarter to seven."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Four people eat this. One person makes it. Every single day."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Morning, love. Pass me the plates, would you?"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You pass them. She takes them without looking."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "And you're alright for money? You'd tell me."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "No, I wouldn't. Because he paid, and you don't know, and I owe him a hundred and fifty dollars on Friday."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Through the wall, @gil turns a page of his paper."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "player" }
+content = "I'm fine, Mum."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_lynn" }
+content = "Good girl."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She believes you, because she's too tired not to."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Do it with her."
+targetType = "node"
+nodeId = "bf_with"
+time_progression_minutes = 2
+flagEffects = [
+  { targetType = "player", flag = "chore_done_breakfast", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Tell her you'll do it."
+targetType = "node"
+nodeId = "bf_do"
+time_progression_minutes = 2
+flagEffects = [
+  { targetType = "player", flag = "chore_done_breakfast", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to it."
+targetType = "node"
+nodeId = "bf_leave"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "bf_with"
+name = "Together"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She shifts over and hands you a pan without a word. That's as close to thank you as this kitchen gets."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go and get your bag."
+targetType = "node"
+nodeId = "nate"
+time_progression_minutes = 28
+
+[[canvases.nodes]]
+id   = "bf_do"
+name = "Sit down, Mum"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "player" }
+content = "Sit down, Mum."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She stares at you for a second. Then she actually goes and sits."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go and get your bag."
+targetType = "node"
+nodeId = "nate"
+time_progression_minutes = 28
+
+[[canvases.nodes]]
+id   = "bf_leave"
+name = "Her kitchen"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She doesn't turn round. She didn't expect anything else."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go and get your bag."
+targetType = "node"
+nodeId = "nate"
+time_progression_minutes = 28
+
+[[canvases.nodes]]
+id   = "nate"
+name = "Quarter to eight"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "In the hall the bathroom door opens, and your @nate.rel, @nate, walks out with his hair still wet and a towel around his neck. He sees you and stops dead."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_nate" }
+content = "Oh, great. You're still here."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He's twenty, a senior at your college, and he has hated having you in this house since the day you moved in."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His eyes drop to your legs, then snap back up to your face. Too late. You saw it. He knows you saw it."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "He hates me. So why does he keep looking?"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_nate" }
+content = "Don't talk to me at college. We're not related."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your face is hot. And the worst part is, for a second there, you liked it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Smile at him."
+targetType = "node"
+nodeId = "nate_smile"
+time_progression_minutes = 2
+effects = [
+  { targetType = "npc", npcId = "npc_nate", trait = "arousal", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ignore him."
+targetType = "node"
+nodeId = "nate_ignore"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Stop staring, then.\""
+targetType = "node"
+nodeId = "nate_stare"
+time_progression_minutes = 2
+effects = [
+  { targetType = "npc", npcId = "npc_nate", trait = "arousal", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_nate", trait = "relation", op = "add", value = -1 },
+]
+
+[[canvases.nodes]]
+id   = "nate_smile"
+name = "Smile"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He goes red to the ears and walks off to the kitchen without a word."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get your bag."
+targetType = "node"
+nodeId = "door"
+time_progression_minutes = 5
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+  { targetType = "player", flag = "met_gil", op = "set" },
+  { targetType = "player", flag = "met_lynn", op = "set" },
+  { targetType = "player", flag = "met_nate", op = "set" },
+]
+
+[[canvases.nodes]]
+id   = "nate_ignore"
+name = "Nothing"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He shoves past you and stomps off to the kitchen like you aren't there."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get your bag."
+targetType = "node"
+nodeId = "door"
+time_progression_minutes = 5
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+  { targetType = "player", flag = "met_gil", op = "set" },
+  { targetType = "player", flag = "met_lynn", op = "set" },
+  { targetType = "player", flag = "met_nate", op = "set" },
+]
+
+[[canvases.nodes]]
+id   = "nate_stare"
+name = "Staring"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_nate" }
+content = "I wasn't..."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He doesn't finish. He's gone into the kitchen before you can answer."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "You were, though."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get your bag."
+targetType = "node"
+nodeId = "door"
+time_progression_minutes = 5
+flagEffects = [
+  { targetType = "player", flag = "opening_done", op = "set" },
+  { targetType = "player", flag = "met_gil", op = "set" },
+  { targetType = "player", flag = "met_lynn", op = "set" },
+  { targetType = "player", flag = "met_nate", op = "set" },
+]
+
+[[canvases.nodes]]
+id   = "door"
+name = "The front door"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "At the front door you check your purse again, like the number might have changed. Ten dollars."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You need a hundred and fifty by Friday. You have no job, no plan, and about an hour before your first class."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Then your phone buzzes. A message on your stream account, from one of your three hundred and eighty followers. Not one of them has ever seen your face."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "\"Good luck on your first day, Nell.\""
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "How do they know my name? How do they know it's today?"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You need money. Get the job at the cafe on the strip, or go live from your room with the door locked. Class is nine to twelve, Monday to Thursday, and a missed class goes on the sheet. People are in different places at different hours, and what you say changes how they treat you. Rest and Clean drop every day. Sleep fills Rest, and a shower fills Clean."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Skip class. Bus into town for the job. $2, forty minutes."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 40
+costs = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bus to campus. $2, forty minutes."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 40
+costs = [{ trait = "cash", value = 2 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk to campus and keep the $2. An hour."
+targetType = "location"
+locationId = "the_quad"
+time_progression_minutes = 60
 
 # --- A2 · ASKING FOR THE JOB -------------------------------------------------
 # sheets/systems/the_move_up.md. Step ZERO of the cafe arc — not the cafe.
@@ -211,14 +580,14 @@ op         = "set"
 [[canvases]]
 id   = "canvas_ask_owen"
 name = "Ask about the job"
-description = "Her first meeting with Owen. He never turns her down and he never rations her either — all five shifts are hers from day one. Taking it sets has_job. $3 a shift against a $150 Friday."
+description = "Meeting Owen and taking the job. Repeatable until has_job, because walking out is allowed and the card stays in the window. Sets has_job and met_owen."
 
 [canvases.trigger]
-location      = "the_cafe"
-npc           = "npc_owen"
+location = "the_cafe"
+npc = "npc_owen"
 is_repeatable = true
-priority      = 8
-is_active     = true
+priority = 8
+is_active = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
   { type = "flag", subject = "player", flag_key = "has_job", operator = "is_false" },
@@ -230,116 +599,286 @@ name = "The counter"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He is behind the counter with a cloth in his hand and he watches you the whole way across the floor."
+content = "The cafe smells like burnt coffee. The man behind the counter watches you all the way across the floor, and he doesn't smile. He owns the place, and he looks like he's already decided what you're worth."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "You're not a customer."
+content = "You're not a customer. So you're here about the card."
 
 [[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He says it flat. Not rude. Exact."
+type    = "dialog"
+props   = { speaker = "player" }
+content = "I need the job."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Everybody needs the job. Owen. I own it. Three dollars a shift. Three hours. Five shifts a day. You show up late, you don't work. You screw up, you're gone."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Three dollars? That's insane."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Take it or leave it. There's a queue of girls who'll take it."
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Ask about the card in the window."
+text = "Take the job."
 targetType = "node"
-nodeId     = "canvas_ask_owen.hired"
+nodeId = "hired"
+time_progression_minutes = 2
+flagEffects = [
+  { targetType = "player", flag = "has_job", op = "set" },
+  { targetType = "player", flag = "met_owen", op = "set" },
+]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Buy a coffee and go."
+text = "Ask for more money."
 targetType = "node"
-nodeId     = "canvas_ask_owen.walked_out"
+nodeId = "more"
+time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "cash", operator = "gte", value = 2 },
+  { type = "flag", subject = "player", flag_key = "asked_owen_more", operator = "is_false" },
 ] }
-# The one thing money opens in this slice. Walking out is only an option if she can
-# afford the coffee she is hiding behind — broke, the only way out is to ask.
+effects = [
+  { targetType = "npc", npcId = "npc_owen", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "asked_owen_more", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk out."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "more"
+name = "More"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Ask me again in a month."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "For a second he almost looks impressed. Then it's gone."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Well?"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the job."
+targetType = "node"
+nodeId = "hired"
+time_progression_minutes = 2
+flagEffects = [
+  { targetType = "player", flag = "has_job", op = "set" },
+  { targetType = "player", flag = "met_owen", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk out."
+targetType = "location"
+locationId = "the_strip"
+time_progression_minutes = 5
 
 [[canvases.nodes]]
 id   = "hired"
-name = "The hours"
+name = "The apron"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He points at an apron on the hook."
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
 props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Three dollars a shift, three hours a shift. There are five of them a day and I don't much care which. Turn up at the top of one and you're on it."
+content = "Seven, ten, one, four, seven. Be here when one starts, not after. One a day."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "And smile at the customers. They tip the ones who smile."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "Tips. Now we're talking."
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tie the apron on."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "the_cafe"
+time_progression_minutes = 5
+
+# --- A3 · THE FIRST SHIFT ---------------------------------------------------
+# One-time, above shift_floor (p5), in the first 20 minutes of any shift. The plan's
+# scene 5 and 6: the shift shown, Dani, and the message under her last stream.
+
+[[canvases]]
+id   = "first_shift"
+name = "Your first shift"
+description = "One-time. The first shift, shown: trays, a table, Owen watching. A girl in the same apron already knows her name. Ends on the message under her last stream. Pays the $3 and sets first_shift_done and met_cafe_girl."
+
+[canvases.trigger]
+location = "the_cafe"
+is_repeatable = false
+priority = 9
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "has_job", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_shift_done", operator = "is_false" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "07:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "10:00"
+end_time   = "10:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "13:00"
+end_time   = "13:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "16:00"
+end_time   = "16:20"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "19:20"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The floor"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He says it like a man who has said it before and has never once been argued out of the number."
+content = "Your first shift, and it's chaos from the first minute. Trays, tables, a man who sends his eggs back twice. Owen watches every mistake and says nothing. It's worse than yelling."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Then a girl in the same apron grabs your arm by the coffee machine. She's pretty, a little older than you, and she's looking at you like she already knows everything about you."
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "unknown" }
+content = "Nell, right?"
+
+[[canvases.nodes.blocks]]
+type    = "dialog"
+props   = { speaker = "npc", npcId = "npc_owen" }
+content = "Table six. Now."
+
+[[canvases.nodes.blocks]]
+type    = "thought_bubble"
+props   = { speaker = "player" }
+content = "I never told anyone in here my name."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "She winks, looks you up and down, slow, and goes back to her tables before you can ask."
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Take it."
+text = "Go after her."
 targetType = "node"
-nodeId     = "canvas_ask_owen.the_number"
-time_progression_minutes = 10
+nodeId = "after"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get back to work."
+targetType = "node"
+nodeId = "end"
+time_progression_minutes = 175
 
 [[canvases.nodes]]
-id   = "the_number"
-name = "No lines at the bottom"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He does not write your name down anywhere. There is a board in the office with six names on it and yours is not going on it, because you are not on a rota — you turn up or you don't."
+id   = "after"
+name = "Later"
 
 [[canvases.nodes.blocks]]
 type    = "dialog"
-props   = { speaker = "npc", npcId = "npc_owen" }
-content = "Seven, ten, one, four, seven. Be here when one of them starts, not after. And not two in a day."
+props   = { speaker = "unknown" }
+content = "Later, Nell. Table four's waiting, and he's watching you."
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Three dollars a shift. Friday is a hundred and fifty."
+content = "She's right. Owen is watching you."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get back to work."
+targetType = "node"
+nodeId = "end"
+time_progression_minutes = 173
+
+[[canvases.nodes]]
+id   = "end"
+name = "Three dollars"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Three hours later you walk out with three dollars in your pocket and your feet killing you."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You need a hundred and fifty by Friday. The cafe pays three dollars a shift. And a girl you've never met knows your name."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your phone buzzes. A message under your last stream."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "\"See you at work tomorrow, Nell.\""
 
 [canvases.nodes.exit_block]
 type = "location"
-text = "Back out to the floor."
+text = "Go."
 
 [canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
+destinationType = "specific"
+locationId = "the_strip"
 time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "cash", op = "add", value = 3 },
+]
 
 [[canvases.nodes.exit_block.config.flagEffects]]
 targetType = "player"
-flag       = "has_job"
-op         = "set"
+flag = "first_shift_done"
+op = "set"
 
-# PARKED 2026-09-19 (the climbs) — `move_up set 1`. move_up is the cafe ladder's position;
-# `has_job` above is the job itself.
-
-[[canvases.nodes]]
-id   = "walked_out"
-name = "The card is still there"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "You buy a coffee you don't want and drink half of it by the window."
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "The card is still in the glass when you go. It will still be there tomorrow. Probably."
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_cafe"
-time_progression_minutes = 15
-
-[[canvases.nodes.exit_block.config.effects]]
+[[canvases.nodes.exit_block.config.flagEffects]]
 targetType = "player"
-trait      = "cash"
-op         = "add"
-value      = -2
-# ⚠️ op = "subtract" IS NOT AN ENGINE OP. It parses, validates, builds green
-# and does nothing at all (engine.md §21b). A negative `add` is the only way down.
+flag = "met_cafe_girl"
+op = "set"

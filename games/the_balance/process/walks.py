@@ -114,30 +114,84 @@ def dice_on(page):
 # ── the routes ───────────────────────────────────────────────────────────────
 
 def walk_opening(page, rep):
-    """Slice 1 — the three opening screens, the chore, and the job."""
+    """The opening (boot + opening_house), taking the job, and the first shift."""
     # ⚠️ The opening canvas is emitted with the StartingCanvas prefix (v2.py:700),
     # which play() cannot build — it hardcodes "Canvas_" (playtest.py:265).
+    # ⚠️ main() runs start() before every route: Monday 12:00 with opening_done SET.
+    # The opening is the one route that needs the real first minute, so undo both —
+    # opening_house only fires Monday 07:00-07:30 and only while opening_done is unset.
+    apply_flag(page, "opening_done", "unset")
+    set_time(page, "Monday", 7)
     goto(page, "StartingCanvas_canvas_opening_Node_wake")
     rep.check("the opening canvas is reachable",
               "canvas_opening" in passage(page), passage(page))
 
-    # ⚠️ THE CHORE PAYS NOTHING, 2026-09-23. LO removed the chore money and the
-    # fridge list, so this probe is inverted: it used to assert the purse GREW on
-    # this node and now asserts it does not move. The purse is read before entering
-    # because the old payment landed on node ENTRY.
-    before = cash(page)
-    goto(page, "StartingCanvas_canvas_opening_Node_chore")
-    rep.check("the opening chore pays nothing", cash(page) == before,
-              f"cash {before} -> {cash(page)}")
+    # ⚠️ REWRITTEN 2026-09-25 with the new opening (OPENING_DRAFT.md, draft 2): a
+    # one-screen boot, then opening_house in the front room. The old chore probe went
+    # with the chore node. Gil and Nate start at relation 50 (process/NPC_SCORE_FLOOR.md),
+    # so every score check below compares before and after, never against zero.
+    click(page, "Get dressed and go down.")
+    rep.check("the boot hands over to Gil in the front room",
+              "opening_house" in passage(page), passage(page))
+    rep.check("the boot sets came_down", flags(page).get("came_down") is True,
+              f"came_down = {flags(page).get('came_down')}")
 
-    # has_job is set by a flagEffect on the LAST exit of the chain, not by landing
-    # on the `hired` node. Walk it.
+    gil_before = snapshot(page).get(("npc_gil", "relation"))
+    click(page, "\"It's my business, not yours.\"")
+    gil_after = snapshot(page).get(("npc_gil", "relation"))
+    rep.check("answering Gil back lowers his hidden score, from 50",
+              gil_before == 50 and gil_after == 49, f"relation {gil_before} -> {gil_after}")
+    rep.check("and no number is printed for it",
+              not re.search(r"[+−-]\s?\d|relation|respect", body(page), re.I),
+              body(page)[:90])
+
+    click(page, "Go and eat.")
+    cash_before = cash(page)
+    click(page, "Leave her to it.")
+    click(page, "Go and get your bag.")
+    rep.check("Nate is at quarter to eight, when his shower ends",
+              "opening_house" in passage(page) and clock(page) == ("Monday", 7 * 60 + 45),
+              f"{passage(page)} at {clock(page)}")
+    nate_before = snapshot(page).get(("npc_nate", "arousal"))
+    click(page, "Smile at him.")
+    rep.check("smiling at Nate moves his hidden tension",
+              (snapshot(page).get(("npc_nate", "arousal")) or 0) > (nate_before or 0),
+              f"arousal {nate_before} -> {snapshot(page).get(('npc_nate', 'arousal'))}")
+    click(page, "Get your bag.")
+    f = flags(page)
+    rep.check("getting the bag finishes the opening and meets all three",
+              all(f.get(k) is True for k in ("opening_done", "met_gil", "met_lynn", "met_nate")),
+              str({k: f.get(k) for k in ("opening_done", "met_gil", "met_lynn", "met_nate")}))
+    rep.check("the opening costs nothing before the door", cash(page) == cash_before,
+              f"cash {cash_before} -> {cash(page)}")
+
+    click(page, "Skip class. Bus into town for the job. $2, forty minutes.")
+    rep.check("skipping class lands her on the strip, $2 down",
+              traits(page).get("cash") == cash_before - 2 and "the_strip" in passage(page),
+              f"{passage(page)} · cash {cash(page)}")
+
+    # has_job is set on the "Take the job." choice itself now, not on a later exit.
     play(page, "canvas_ask_owen")
-    click(page, "Ask about the card in the window")
-    click(page, "Take it")
-    click(page, "Back out to the floor")
-    rep.check("finishing the ask sets has_job", flags(page).get("has_job") is True,
-              f"has_job = {flags(page).get('has_job')}")
+    click(page, "Take the job.")
+    rep.check("taking the job sets has_job and met_owen",
+              flags(page).get("has_job") is True and flags(page).get("met_owen") is True,
+              f"has_job = {flags(page).get('has_job')} · met_owen = {flags(page).get('met_owen')}")
+
+    # The first shift: one-time, first 20 minutes of a shift. Standing in the cafe at
+    # 10:00 with the job, the room must offer it — that is the fence, not play().
+    set_time(page, "Monday", 10)
+    stand_at(page, "the_cafe")
+    rep.check("at ten, with the job, the cafe offers the first shift",
+              offered(page, "the_cafe", "first_shift"), "")
+    before = cash(page)
+    play(page, "first_shift")
+    click(page, "Get back to work.")
+    click(page, "Go.")
+    f = flags(page)
+    rep.check("the first shift pays $3 and meets Dani",
+              cash(page) == before + 3 and f.get("first_shift_done") is True
+              and f.get("met_cafe_girl") is True,
+              f"cash {before} -> {cash(page)} · {f.get('first_shift_done')} {f.get('met_cafe_girl')}")
 
 
 def clock(page):
@@ -1082,6 +1136,8 @@ def walk_afternoon(page, rep):
               npc_at(page, "npc_nate") == "the_garage", str(npc_at(page, "npc_nate")))
     play(page, "garage_nate")
     click(page, "Give him a hand")
+    # ⚠️ PARKED, AND VACUOUS IF REVIVED: npc_nate.relation starts at 50 since 2026-09-25
+    # (process/NPC_SCORE_FLOOR.md), so `> 0` passes without the scene. Compare before/after.
     rep.check("helping him moves him", (snapshot(page).get(("npc_nate", "relation")) or 0) > 0,
               f"relation = {snapshot(page).get(('npc_nate', 'relation'))}")
     rep.check("and it costs her clean", (traits(page).get("clean") or 0) < 100,
