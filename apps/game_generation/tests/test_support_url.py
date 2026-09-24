@@ -15,6 +15,7 @@ not collected by a bare `pytest`:
 import pytest
 
 from apps.game_generation.twee_comprehensive.generators.v2 import (
+    DEFAULT_COMMUNITY_URL,
     DEFAULT_STUDIO_NAME,
     DEFAULT_SUPPORT_URL,
     TweeComprehensiveGeneratorV2,
@@ -187,3 +188,39 @@ def test_non_http_scheme_is_rejected(bad):
 )
 def test_http_schemes_and_absence_are_accepted(ok):
     assert not _support_errors(_authored(url=ok))
+
+
+# ── community (Discord) link ─────────────────────────────────────────────────
+
+def _with_community(url):
+    d = _raw()
+    d["project"]["community_url"] = url
+    return d
+
+
+def test_community_url_reaches_metadata():
+    graph = build_game_graph(normalize(_with_community("https://discord.gg/probe")))
+    assert graph.project.metadata["community_url"] == "https://discord.gg/probe"
+
+
+def test_default_community_link_sits_beside_every_funding_link():
+    """Same three sites as the funding link: sidebar widget + both intro links."""
+    twee = _build(_raw())
+    assert twee.count(DEFAULT_COMMUNITY_URL) == EXPECTED_SITES
+    assert twee.count(DEFAULT_SUPPORT_URL) == EXPECTED_SITES
+
+
+def test_authored_community_url_replaces_the_default_everywhere():
+    twee = _build(_with_community("https://discord.gg/probe"))
+    assert twee.count("https://discord.gg/probe") == EXPECTED_SITES
+    assert DEFAULT_COMMUNITY_URL not in twee
+
+
+def test_community_resolver_survives_no_project():
+    assert TweeComprehensiveGeneratorV2()._resolve_community_url() == DEFAULT_COMMUNITY_URL
+
+
+@pytest.mark.parametrize("bad", ["javascript:alert(1)", "discord.gg/no-scheme"])
+def test_community_url_non_http_scheme_is_rejected(bad):
+    errors = [e for e in validate(normalize(_with_community(bad))) if "community_url" in e]
+    assert errors

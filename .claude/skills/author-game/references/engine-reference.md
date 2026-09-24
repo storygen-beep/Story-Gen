@@ -602,7 +602,7 @@ enabled = true
 
 - **`[project]`** (`TemplateProject` `:43`): TOML key is **`id`** (stored internally as `slug`, read
   `:1473`) — not `slug`. `title`, `description`, `quests_engine` (`"v2"` enables `[[quest_cards]]`).
-  **The complete recognised set is nine keys, read at two sites** — the constructor (`:1597`) takes eight,
+  **The complete recognised set is ten keys, read at two sites** — the constructor (`:1597`) takes nine,
   and `starting_canvas` is read separately (`:1773`). Nothing rejects an unknown `[project]` key: merge,
   `--validate` and `package` all pass and the key is silently dropped, so a typo here fails *silently*.
   - `starting_canvas` — the canvas the game opens on (`:1773`).
@@ -611,6 +611,8 @@ enabled = true
     intro/age-gate links. Unset ⇒ `v2.DEFAULT_SUPPORT_URL`. Must start `http://` or `https://` —
     `validate()` hard-fails otherwise, because the value lands in an `href` on every passage.
   - `studio_name` — the "Developed by **X**" credit under the age gate. Unset ⇒ `v2.DEFAULT_STUDIO_NAME`.
+  - `community_url` — the Discord link, emitted beside the funding link at the same **three** sites
+    (sidebar button + both intro links). Unset ⇒ `v2.DEFAULT_COMMUNITY_URL`. Same `http(s)://` gate.
   Both identity keys fall back **independently**, and the fallback lives generator-side on purpose:
   `build_guide.py` reads `[project]` straight from the TOML, so an importer-side default would let the
   guide PDF and the sidebar disagree.

@@ -60,6 +60,9 @@ class TemplateProject:
     # cannot resolve a different value than the sidebar does.
     support_url: str = ""
     studio_name: str = ""
+    # Community (Discord) link shown beside each funding link; generator fallback
+    # is v2.DEFAULT_COMMUNITY_URL, for the same reason as support_url.
+    community_url: str = ""
 
 
 @dataclass
@@ -1869,6 +1872,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         release_date=_require_str(p, "release_date", ""),
         support_url=_require_str(p, "support_url", ""),
         studio_name=_require_str(p, "studio_name", ""),
+        community_url=_require_str(p, "community_url", ""),
     )
 
     # Optional: [time] section (has sensible defaults)
@@ -3619,6 +3623,11 @@ def validate(template: GameTemplate) -> List[str]:
         ("http://", "https://")
     ):
         errors.append("project.support_url must start with http:// or https://")
+    # Same href exposure, same gate.
+    if template.project.community_url and not template.project.community_url.startswith(
+        ("http://", "https://")
+    ):
+        errors.append("project.community_url must start with http:// or https://")
 
     # time
     if template.time.starting_day not in VALID_DAYS:
@@ -6899,6 +6908,7 @@ def _assemble_project_metadata(project, template):
     # these are "" (see v2.DEFAULT_SUPPORT_URL / DEFAULT_STUDIO_NAME).
     project.metadata["support_url"] = template.project.support_url
     project.metadata["studio_name"] = template.project.studio_name
+    project.metadata["community_url"] = template.project.community_url
     # PRD 48 — serialize V2 cards onto project.metadata. Empty list for v1
     # games (their hints stay in project.metadata["story_arc"]["hints"]).
     if template.project.quests_engine == "v2":

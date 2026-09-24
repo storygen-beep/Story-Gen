@@ -8,6 +8,14 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-09-22
+- **`references/engine-reference.md` §8 — new `[project] community_url` key.** Built games linked
+  Patreon but had no Discord link; LO asked for one. Engine now emits a Discord link beside every
+  funding link (sidebar `<<patreonButton>>` widget + both intro links), defaulting to
+  `v2.DEFAULT_COMMUNITY_URL` so every game gets it with no TOML change. Documented the key and bumped
+  the recognised-key count nine→ten. Verified: `test_support_url.py` green (new community tests) and
+  a rebuilt the_balance.
+
 ## 2026-09-21
 - **`references/ship-gate.md` §3 — a cheat row's `cap` comes from the game's gates, not the sidebar's
   bands.** The skill taught "give each banded meter the `cap` its top band expects", which is a rule about
