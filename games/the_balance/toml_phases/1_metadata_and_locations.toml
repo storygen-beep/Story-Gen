@@ -279,7 +279,10 @@ relationship = "step dad"
 relationship_options = ["step dad", "mum's husband", "dad", "uncle"]
 customizable = true
 tags        = ["runs the house his way", "never mentions what he paid", "up before everyone", "does not drink"]
-core_traits = { relation = 0, corruption = 0, arousal = 0 }
+# relation starts at 50, not 0: the opening's minus choices need room below them, and the
+# engine clamps every trait at 0-100 with no floor option (engine.md §21). LO wants 0 with
+# a lower cap; process/NPC_SCORE_FLOOR.md says how, and what to change back.
+core_traits = { relation = 50, corruption = 0, arousal = 0, doubt = 0 }
 flag_keys   = []
 
 # ⚠️ customizable = true means the player can rename him, so every authored line
@@ -496,7 +499,10 @@ relationship = "step brother"
 relationship_options = ["step brother", "stepbrother", "housemate", "no relation"]
 customizable = true
 tags        = ["wants you gone", "can't stop looking", "tells the house things", "on the sofa by seven"]
-core_traits = { relation = 0, corruption = 0, arousal = 0 }
+# relation starts at 50, not 0: the opening's minus choices need room below them, and the
+# engine clamps every trait at 0-100 with no floor option (engine.md §21). LO wants 0 with
+# a lower cap; process/NPC_SCORE_FLOOR.md says how, and what to change back.
+core_traits = { relation = 50, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
   "Can't stand you",   # 0
@@ -1374,3 +1380,26 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "10:00"
 end_time   = "14:00"
 activity   = "laughing a beat after Bree"
+
+# --- the cafe ----------------------------------------------------------------
+# Dani: the plan's new person (THE_BALANCE_NEW_OPENING.md scene 5). Name is LO's call
+# (2026-09-25); age, hours and how she knows Nell's name are placeholders.
+
+[[npcs]]
+id           = "npc_cafe_girl"
+name         = "Dani"
+role         = "works the floor"
+relationship = "the girl at the cafe who already knew your name"
+description  = "PLACEHOLDER — name, age, what she wants and how she knows Nell's name are LO's to decide. She works the cafe floor and is a little older than Nell."
+portrait     = "cafe_girl.jpg"
+customizable = false
+tags         = ["knows your name", "teasing", "works the floor"]
+core_traits  = { relation = 0 }
+flag_keys    = []
+
+[[npcs.schedules]]
+location   = "the_cafe"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "19:00"
+activity   = "working the floor"

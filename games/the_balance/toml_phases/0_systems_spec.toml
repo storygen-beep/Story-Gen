@@ -405,14 +405,31 @@ conditions  = { version = "1.0", logic = "AND", items = [
 # quests_engine = "v2" turns the sidebar entry and the page ON, so the cards are
 # not optional decoration — with none authored it is a nav link to an empty page.
 
+# card_friday and card_the_job RETIRED 2026-09-25 (LO): card_first_friday covers week one
+# with goal steps (F1b step 5), and card_debt_running takes over after the first payment.
+
 [[quest_cards]]
-id    = "card_friday"
-group = "the_debt"
-text = "A hundred and fifty goes back every Friday. The semester was paid up front and your mum doesn't know who paid it."
-tip  = "Friday evening, in the kitchen. He's always there at six."
-when = [
+id       = "card_first_friday"
+group    = "the_debt"
+priority = 90
+text     = "A hundred and fifty goes back on Friday evening. You started the week with ten dollars and no job."
+tip      = "The cafe is on the strip, forty minutes by bus from the stop on your street. Shifts start at seven, ten, one, four and seven."
+when     = [
   { flag = "opening_done", op = "is_true" },
+  { trait = "debt_left", subject = "player", op = "gte", value = 2400 },
 ]
+goals    = [
+  { type = "flag", subject = "player", flag = "has_job", op = "is_true", label = "Get the job at the cafe on the strip" },
+  { type = "flag", subject = "player", flag = "first_shift_done", op = "is_true", label = "Work your first shift" },
+  { type = "trait", subject = "player", trait = "cash", op = "gte", value = 150, label = "Have $150 by Friday evening" },
+]
+
+[[quest_cards]]
+id     = "card_who_is_she"
+npc_id = "npc_cafe_girl"
+text   = "A girl at the cafe called you Nell before you ever told her your name. Nobody on your stream has ever seen your face."
+tip    = "She works the cafe floor, seven in the morning until seven at night."
+when   = [ { flag = "met_cafe_girl", op = "is_true" } ]
 
 # \u26a0\ufe0f A card condition is `{ flag, op }` or `{ trait, subject, op, value }` and the
 # key is `when`, NOT `conditions` — a CANVAS condition uses trait_key + operator.
@@ -420,18 +437,7 @@ when = [
 # does not scope itself to a state window, which is how a guidance page stops being
 # a wall of every hint at once.
 
-# The job, as a two-card group: only the winner in a group renders, so these are one
-# line on the page that changes when she gets the job.
-
-[[quest_cards]]
-id    = "card_the_job"
-group = "the_cafe"
-text  = "There's a job going at the cafe. He said it once and he won't say it again."
-tip   = "The cafe is downtown, off the strip. The bus is $2 and forty minutes."
-when  = [
-  { flag = "opening_done", op = "is_true" },
-  { flag = "has_job", op = "is_false" },
-]
+# The job once she has it. Asking for it is now a goal on card_first_friday.
 
 [[quest_cards]]
 id    = "card_on_the_floor"
