@@ -2683,21 +2683,76 @@ blocks = [
 ]
 
 # The one cosmetic flavor choice (design Beat-1) — three responses, one outcome (the cage).
+# rev 237 (loud voice, F1b step 3): each answer gets its own reaction node — Mercer answers it and
+# she misnames what she feels in her own thought (LO's option B) — then all three rejoin at
+# punishment, whose first line ("Words, silence, the truth…") already covers every branch.
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Beg him to keep you."
 targetType = "node"
-nodeId     = "canvas_opening_office.punishment"
+nodeId     = "canvas_opening_office.beg"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Say nothing."
 targetType = "node"
-nodeId     = "canvas_opening_office.punishment"
+nodeId     = "canvas_opening_office.silent"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell him, flatly, that you froze."
+targetType = "node"
+nodeId     = "canvas_opening_office.froze"
+
+# ── Nodes: beg / silent / froze — the reaction to her answer (rev 237) ────────
+[[canvases.nodes]]
+id   = "beg"
+name = "She begs"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Please, sir. Keep me. I'll fire next time. I'll do anything you want." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Begging. The units don't beg. Listen to yourself." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "My voice is shaking. A calibration fault. Log it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take what's coming."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes]]
+id   = "silent"
+name = "She says nothing"
+blocks = [
+  { type = "paragraph", content = "She says nothing. She stands in the line with her hands at her sides, exactly as she was built to stand." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Nothing. Good. The silence, at least, still works." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Hold still. Stillness is protocol. That's all this is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take what's coming."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes]]
+id   = "froze"
+name = "She tells him"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "I froze, sir. My hand wouldn't close. The diagnostic comes back clean." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Clean. My most expensive asset won't fire, and nothing is wrong with it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Something is wrong with it. A fault. It has to be a fault." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take what's coming."
 targetType = "node"
 nodeId     = "canvas_opening_office.punishment"
 
@@ -2741,7 +2796,9 @@ blocks = [
     ] },
     { advance_text = "Dismissed.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Now get out of my sight." },
-        { type = "paragraph", content = "She does as she's told. The door closes on the three of them still standing in their line. In the corridor, under the quiet, something she has no name for is leaking. A pressure behind the eyes. A wrongness with no readout. She logs it as fatigue and walks toward the cradle." },
+        { type = "paragraph", content = "She does as she's told. The door closes on the three of them still standing in their line. In the corridor her hands are shaking and her face is hot. She stops, and for a second her legs won't go." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fatigue. It's only fatigue. The cradle will fix it." },
+        { type = "paragraph", content = "She walks toward the cradle." },
     ] },
   ] } },
 ]
@@ -2793,7 +2850,11 @@ blocks = [
     ] },
     { advance_text = "...", blocks = [
         { type = "image", props = { file = "scenes/cradle_fragment.jpg", description = "A woman's face in near-darkness inside a charging pod, eyes wet, a faint warm glow on one cheek as if from a memory.", search_queries = ["dark face woman pod light", "woman crying dark room glow"] } },
-        { type = "paragraph", content = "And under the water, for less than a second, something else. Not a thought. Every thought she has is a task. A fragment, then: warmth on the side of her face that isn't the cradle's, a low sound that might be a voice with her name folded somewhere inside it, a sense of being looked at by someone who was glad to be looking. Then the charge swallows it and it's gone, and the place where it was aches like a socket with the tooth pulled, and she has no word for the ache, so she has no word for the loss." },
+        { type = "paragraph", content = "And under the water, for less than a second, something else. Warmth on the side of her face. A low voice with her name in it. Someone looking at her, glad to be looking." },
+    ] },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "Then the charge swallows it and it's gone. Where it was, something hurts. It hurts badly, and she has no word for it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Corrupted memory sector. Purge it. There was nothing there." },
     ] },
     { advance_text = "Recite it.", blocks = [
         { type = "paragraph", content = "She does what she does when the quiet gets loud. She recites." },
@@ -2865,7 +2926,18 @@ blocks = [
     ] },
     { advance_text = "Out the door.", blocks = [
         { type = "image", props = { file = "scenes/spire_plaza_reveal.jpg", description = "A vast wet neon city plaza at the foot of a corporate tower, a lone woman stepping out into it for the first time.", search_queries = ["neon city plaza night wet", "woman tower street city lights"] } },
-        { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her. For one second, with no cover on her yet and nothing between her and it, something that isn't in any of her files stands very still in her chest and looks at all of it." },
+        { type = "paragraph", content = "She rides down through the Tower, and the atrium doors read her face and open. Spire Plaza. The city, wet and enormous, and nobody holding her leash. She stands very still and can't stop looking." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Elevated readings. Environmental. It means nothing." },
+    ] },
+    { advance_text = "What now.", blocks = [
+        # rev 237 (F1b step 6): the one place the story text states the systems plainly, in the game's
+        # own voice (the quest tips' "you"). Every fact is data: Anchor 19-23 + depot 09-18 (Renner's
+        # schedule rows, 1_metadata), the change at wren_room (activity_wren_change), the cover gate on
+        # the hire, work_depot_haul's coin + Charge cost, the cradle's +100 on sleep.
+        { type = "paragraph", content = "Renner drinks at the Anchor, 19:00 to 23:00. Put the coveralls on in your room first. Out of cover he sends you away. Once he hires you, his depot pays Coin, 09:00 to 18:00. Work costs Charge, and the cradle fills it when you sleep. Your next step is always on the Quests page." },
+    ] },
+    { advance_text = "The trail.", blocks = [
+        { type = "paragraph", content = "Somewhere down in the docks, Renner knows where the trail starts. And nobody, not even her, knows why her hand wouldn't close." },
     ] },
   ] } },
 ]
@@ -9285,8 +9357,10 @@ locationId      = "the_anchor"
 # as a one-card-at-a-time chain on his own meters/flags. The Renner sidebar npc_panel
 # 'next' row mirrors whichever Renner card is live (pickQuestsCard, v2.py:15138).
 
-# Tier 1 spine — Mission 1 orientation. No goals/ready_text: the granular relation/corruption
-# steps live under Renner now. Shows while mission_1_active && !renner_drained.
+# Tier 1 spine — Mission 1 orientation. Shows while mission_1_active && !renner_drained.
+# rev 237 (the-first-hour F1b step 5: the first objective is a card with goal steps): three
+# milestone goals on flags that already exist, so the page prints what is done and what is next.
+# The granular relation/corruption steps still live under Renner's own cards, below.
 [[quest_cards]]
 priority   = 10
 text       = "Mission 1: Renner. The quartermaster who outfitted the facility Cain burned. Get inside his life and drain him for what he knows: what the gear built, where the trail goes. The company wants the rogue dead. She wants the way in. (His seduction tracks under Renner, below.)"
@@ -9294,6 +9368,11 @@ tip        = "Wear the dock-work coveralls from your room before you go near him
 when = [
   { flag = "mission_1_active", op = "is_true"  },
   { flag = "renner_drained",   op = "is_false" },
+]
+goals = [
+  { flag = "renner_hired",       op = "is_true", label = "Get Renner to hire you (the Anchor, evenings)" },
+  { flag = "renner_office_open", op = "is_true", label = "Earn his back office (work his depot)" },
+  { flag = "renner_drained",     op = "is_true", label = "Drain him for the trail" },
 ]
 
 # Tier 2 — Renner's chain (one card live at a time, gated on his own flags; no new flags).
