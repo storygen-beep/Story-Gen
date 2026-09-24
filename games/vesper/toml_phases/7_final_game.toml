@@ -7339,7 +7339,8 @@ blocks = [
   { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
   { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
+  { type = "dialog", props = { speaker = "player" }, content = "I couldn't find you. So I stopped." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She reads men for a living. He reads her for free." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -8179,7 +8180,39 @@ id   = "base"
 name = "Renner's Depot"
 blocks = [
   { type = "image", props = { file = "scenes/renner_depot_floor.jpg", description = "A half-empty warehouse depot, sparse racks and an idle forklift under work light.", search_queries = ["empty warehouse depot interior", "warehouse racks forklift day"] } },
-  { type = "paragraph", content = "Renner's depot. Half-empty racks, a forklift left broken, crates Cain's people left behind. He works the floor in a temper, and when he notices her at all it's to find fault. The work is the work." },
+  { type = "paragraph", content = "Renner's depot. Half-empty racks, a forklift left broken, crates Cain's people left behind." },
+  # rev 238 (register.md "The voice — say it loud", L3): the standing screen speaks. One line and one
+  # visible want per stage, as one if/elseif chain, so each is true on every visit it renders on.
+  # First match wins: fucked > corruption 10+ > office open > not yet.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_fucked_once", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He sees her and puts the manifest down." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Office. Now. Lock it behind you." },
+    { type = "paragraph", content = "No more pretending. He wants her over his desk again, and she lets him think it's his idea." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_fucked_once", operator = "is_false" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He looks up the second she walks in. Then down, too late." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Zip those coveralls. All the way. I mean it." },
+    { type = "paragraph", content = "He wants her and he's furious about it. She wants him to keep losing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_office_open", operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Office. Bring the ledger. Shut the door." },
+    { type = "paragraph", content = "Then his eyes go back to the numbers like she isn't in the room. He wants his business saved. She wants him to look up." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_office_open", operator = "is_false" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Don't stand there. Those pallets won't move themselves." },
+    { type = "paragraph", content = "He's angry at the whole depot and he takes it out on her. He wants this place alive again, and he'd rather die than say he needs the help." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -8387,7 +8420,37 @@ id   = "base"
 name = "The Anchor"
 blocks = [
   { type = "image", props = { file = "scenes/renner_anchor_evening.jpg", description = "A dim run-down dive bar at night, a heavyset tired man slumped at the far end of the counter over a glass, the room near-empty.", search_queries = ["dim dive bar night man", "tired man drinking bar counter"] } },
-  { type = "paragraph", content = "Renner's at his end of the bar, working on the evening's ruin. Off the clock he's quieter and worse. Less temper, more rot. He tolerates her sitting near him now. That is its own kind of progress." },
+  { type = "paragraph", content = "The Anchor, and Renner at his end of the bar with a glass. Off the clock he's quieter and worse." },
+  # rev 238 (register.md "The voice — say it loud", L3): the standing screen speaks. One line and one
+  # visible want per stage, as one if/elseif chain, so each is true on every visit it renders on.
+  # First match wins: fucked > corruption 10+ > office open > not yet.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_fucked_once", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Not here. Everybody in this bar knows me." },
+    { type = "paragraph", content = "His hand is on her thigh under the counter while he says it. He wants her again, and he wants nobody watching when he gets it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_fucked_once", operator = "is_false" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Don't sit that close. People talk." },
+    { type = "paragraph", content = "He doesn't move away. He wants her closer and hates himself for it, and he orders another drink to give his hands something to do." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_office_open", operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You haul my crates all day and sit next to me all night. What do you want?" },
+    { type = "paragraph", content = "He means it. He wants an answer he can trust. She gives him a smile instead, and he hates how well it works." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_office_open", operator = "is_false" },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Sit if you're sitting. Don't talk." },
+    { type = "paragraph", content = "He wants the company and would die before admitting it. She sits and says nothing, and that silence is the crack she's here to widen." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -9886,7 +9949,25 @@ id   = "base"
 name = "Marsh"
 blocks = [
   { type = "image", props = { file = "scenes/marsh_booking.jpg", description = "A small, neat, careful man stepping into a dim red-lit brothel room, checking the exits before he looks at the woman waiting.", search_queries = ["small neat man entering brothel room dim", "careful client doorway red light room"] } },
-  { type = "paragraph", content = "Marsh comes in on the hour, exact. A small neat man who checks the room's exits before he checks the girl, and takes the one the madam pointed him to in silence. Her, tonight, in Rue's place. He misses the swap, or lets it go; he wants the hour he paid for. Whatever a careful man keeps behind his face, she'll have to work him loose for it. She knows the one act that opens him." },
+  # rev 238 (register.md "The voice — say it loud", L3): Marsh speaks, and the swap text shows only on the
+  # schemed Sunday (crew_known is_false) — after the drain he is her Sunday regular and the swap is a lie.
+  # The ungrouped "Lock it." below SEPARATES this chain from the two gear-warning groups: adjacent groups
+  # merge into one if/elseif chain, and without it a warning could never render beside the chain.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Marsh comes in on the hour, exact. A small neat man who checks the room's exits before he checks the girl. Her, tonight, in Rue's place. He stops in the doorway." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "You're not Rue." },
+    { type = "paragraph", content = "He looks at her a long second, then hangs his coat on the hook. He wants the hour he paid for more than the right girl. Whatever he keeps behind his face, she knows the one act that opens him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Marsh comes in on the hour, exact, and checks the exits before he checks her. He doesn't ask for Rue anymore." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Same room. Same hour." },
+    { type = "paragraph", content = "It's the one thing he lets himself want all week, and now it's her." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marsh" }, content = "Lock it." },
   # Drain-cold warning (crew_known false + drain worn but spent) — telegraph BEFORE the loop so an
   # unprepared player doesn't silently waste Marsh's once-a-week window (rev 59 review, the drain trap).
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -17137,11 +17218,13 @@ name = "Every dead end"
 blocks = [
   { type = "paragraph", content = "She stops chasing the leaks and starts reading the hunt itself. His two years of dead ends. And the dead ends have a pattern he's too close to see." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "The vendors, the couriers, the temp staff. I ran all of it. Ran my own people first, God help me, and they came back solid. Every thread just goes cold on me." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "Every thread goes cold because the same hand keeps it cold. One of the few he trusts has been steering him off it for two years. Vetting the lead that mattered, losing the record that pointed home. It's someone on his own team. She doesn't say it. The day she says it he's finished, and so is her way in." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then it isn't your people. It's somebody else in this building." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "Forty floors of somebody else." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "It is his people. The same trusted hand has been keeping every thread cold for two years. The day she says it, he's finished, and so is her way in." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Say nothing. Keep going."
+text = "Keep it to yourself. Keep going."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "vance_securities"
@@ -17169,9 +17252,10 @@ id   = "base"
 name = "Where it goes"
 blocks = [
   { type = "paragraph", content = "With the sealed side of the hunt open to her now, she can finally see the far end. The far end is a place Calloway has never once been." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "The pulls don't get sold up here. They go DOWN. Into the Reach, through the kind of courier who never touches a ledger and never shows on a manifest. A company man could audit this room ten more years and never find him, because he isn't in any record there is. But she knows that world. She knows who to ask. Down at the Undertow, Sol has poured for every carrier who ever worked the Reach; he'll know the man who runs this." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The pulls go DOWN, into the Reach, through a courier who never touches a ledger. No audit finds him. Sol will know him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_calloway" }, content = "I'll re-run the logistics side tomorrow. There's something in the courier contracts I keep missing. I can feel it." },
-  { type = "paragraph", content = "She tells him that sounds right, and lets him keep chasing the ghost through paper. She already knows where she's going tonight: the Undertow, to put Sol's word to the man who carries it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Sounds right. Sleep on it." },
+  { type = "paragraph", content = "She lets him keep chasing the ghost through paper. She already knows where she's going tonight: the Undertow, to put Sol's word to the man who carries it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -26532,6 +26616,7 @@ name = "The ramp head"
 blocks = [
   { type = "paragraph", content = "The ramp and the trench both come out in the same low space, a receiving bay with the roller door bricked up, and there is a man sitting on a crate in the middle of it with a flask between his boots." },
   { type = "paragraph", content = "He is not on watch. He is on his break, in the one warm corner of his shift, and he looks up because somebody came down the ramp and nobody comes down the ramp. He looks at her for about a second and a half and then he puts the flask down very carefully on the floor." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "You're not on the rota." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -26591,6 +26676,7 @@ name = "The wet corridor"
 blocks = [
   { type = "paragraph", content = "The wet corridor is wet because the standpipe halfway along it has no tap on it any more, and there is a man stripped to the waist under it with his head down, washing something off his forearms with a brush." },
   { type = "paragraph", content = "He hears her before he sees her, because the floor is an inch deep and she is standing in it. He straightens up with the brush still in his hand and the water running off his elbows and does not shout, which is the part she does not like." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Stay there. Right there. Don't make me shout." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -26645,6 +26731,7 @@ name = "The mess"
 blocks = [
   { type = "paragraph", content = "Both the wrong arms of the ring feed into the mess, which is four tables, a urn, a board with a shift rota on it and a smell of fried onions that has got into the paint." },
   { type = "paragraph", content = "There is one man in it at this hour, eating, with his coat over the back of the chair and his boots off. He gets to the door before she does, which she would not have bet on, and puts his back against it without hurrying." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Kitchen's shut, love. So's this door." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -26698,7 +26785,9 @@ id   = "g4"
 name = "Behind the near gate"
 blocks = [
   { type = "paragraph", content = "The near gate stands open because the man whose job it is to shut it works on the other side of it, at a bench, with a tray of parts and a lamp pulled down low over his hands." },
-  { type = "paragraph", content = "He does not look up when she comes through. He says her step is wrong, out loud, to himself, the way a man says a thing he has been waiting four months to be right about. Then he looks up." },
+  { type = "paragraph", content = "He does not look up when she comes through." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "Wrong step. Four months I've listened to that floor, and that's a wrong step." },
+  { type = "paragraph", content = "He says it to himself, like a man who has waited four months to be right. Then he looks up." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"

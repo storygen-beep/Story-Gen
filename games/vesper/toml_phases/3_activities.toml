@@ -4267,7 +4267,8 @@ blocks = [
   { type = "paragraph", content = "There is no way to reach him. There has never been a way to reach him, in eleven years, and she sits on the bunk for a while working the problem the way she works every problem and gets nowhere at all with it." },
   { type = "paragraph", content = "So she does the only thing she has. She does not take a shift. She does not take the road to the Reach or the lift up the tower or the lane down to the lockup. She stays in, and the second day is worse than the first, and on the second night he is standing at the feed line with his coat on." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two days. I gave it three before I came and looked." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "He has never once had to be told a thing about her. She has spent this whole chapter learning to read men and he has been doing it to her the entire time for free." },
+  { type = "dialog", props = { speaker = "player" }, content = "I couldn't find you. So I stopped." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She reads men for a living. He reads her for free." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
