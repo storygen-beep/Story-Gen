@@ -4,30 +4,41 @@ The game is never the unit. The **release** is, and it repeats forever.
 
 ---
 
-## What a release actually is
+## Where a release happens
 
-Measured, from one full six-week cycle of the reference game (274 commits, 153 non-merge):
+Measured on one six-week cycle of a mature game (DoL): +196 scene units, **zero new locations**, and
+every content commit an event at an existing place. That is a **maintenance-cycle observation**, and it
+stays the default for WHERE a release happens: zero new places. It does not say what a release is
+ABOUT. The next section does.
 
-| | |
-|---|---|
-| new scene units | **+196** |
-| new words | **+24,388** |
-| **new locations** | **0** |
-| new files | 2 (one of them a job at an *existing* location) |
-| commits that were fixes | **55.6%** |
-| commits that added content | **6.5%** — ten of them |
+---
 
-And here is every one of those ten content commits, in the developer's own words:
+## Her moment — the eight lines
 
-> peek on Bailey with a date at the flat, weekends · skin tone characteristic · expanded
-> Bailey's combat speech · Whitney and friends visit you at the Hookah Parlor · exposed player
-> meets an opportunistic bondage photographer on the town street · cliff street event at high
-> stress · Kylar kidnap trigger · sprites · small additions
+A release is about **her moment**, and a pitch is written as eight lines, one sentence each, before
+it says anything about where or who. Taken from what the top female-lead games do and what their
+players quote (Great Games Study, 2026-09-27):
 
-**Every single one is an event at an existing place with an existing character.** No new
-location. No new character. No plot advancement. Three of the ten are keyed to player state.
+1. **The fantasy.** The game's own shape, from the Want §0. Keep it; a pitch serves the fantasy the
+   game already promised.
+2. **The temptation.** What is offered, by whom, and why she wants or needs it.
+3. **Her answers.** Three to five, graded. The **no** is written too, and it has a price, is
+   **parked** (it comes back), or is **counted** (someone remembers).
+4. **Her voice at her level.** A low line and a high line for the same moment, so the player hears
+   how far she has come.
+5. **Who notices.** Somebody sees or hears of it, and does something differently afterwards.
+6. **What sticks.** A flag, a meter, a line that changes. Never silent.
+7. **The moment to remember.** Which of the five kinds — her firsts · being seen · her body as the
+   price for something she needs · taboo at home · a consequence she lives with — and the line a
+   player would quote.
+8. **The door it opens, and the clip we can get.** The live goal, mystery or rival beat it moves,
+   and a clip that exists or can be found for it. A moment with no clip is a moment the game cannot
+   show.
 
-That is the template. Copy its shape, not its subject.
+Then, and only then, Where / Who / Keys to / Opens / Cost / Not.
+
+The field's moments, ten per kind, are in `references/moment-library.md`. Take the **kind** from it,
+never an entry.
 
 ---
 
@@ -36,16 +47,16 @@ That is the template. Copy its shape, not its subject.
 **1. Read the Want.** Not optional, not skimmable. Name the line this release serves. If you
 cannot, the release is unfocused — pick again.
 
-**2. Pitch — three, independent.** Three Pitcher agents, no shared context, three takes on the
-subject. LO picks one. Independence is the point: shared context produces three shades of one
-idea. See `references/agents.md`.
+**2. Pitch — three, independent.** Three Pitcher agents, no shared context, each given a different
+moment kind: the three least used, from the pack. LO picks one. Independence is the point: shared
+context produces three shades of one idea. See `references/agents.md`.
 
 **3. Attack, before writing.** The panel runs on the *design*, not the build. Every cheap
 catch in our history happened here; every expensive one happened after shipping. Same agents,
 different timing, an order of magnitude in value.
 
-**4. Write.** Events on existing surfaces. Default to **zero new locations** — if this release
-opens one, it arrives filled, not as a promise.
+**4. Write.** Events on existing surfaces. Default to **zero new locations** (*Where a release
+happens*, above) — if this release opens one, it arrives filled, not as a promise.
 
 > ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
 > window, a parent location, a label — it is an amendment, not an addition.** See *The prose

@@ -5,6 +5,335 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — IC2 (part 2): the moment library, adults only, and the orientation dry run
+
+**Why.** This part delivers IC2's 50-moment library and runs the acceptance dry run. LO reviewed
+the draft and required that the library never pull ideas toward school-age settings. Any entry
+from a game that does not clearly state its characters are adults was to be swapped, and the
+header had to say so.
+
+**What changed.**
+- **New `references/moment-library.md`.**
+  - 50 field moments, 10 per kind:
+    - `firsts`
+    - `being_seen`
+    - `body_as_payment`
+    - `taboo_at_home`
+    - `consequence`
+  - Each entry has the game's own quote (15 words or fewer), the passage name, and one line on why
+    players remember it.
+  - The header says "⚠️ EVIDENCE — NOT A TEMPLATE", and "take the kind, never an entry".
+  - It also says "⚠️ **Adults only.** Every moment here involves adults, from games that state their
+    characters are adults. Never set an idea in a school, or with anyone under 18."
+- **20 entries swapped from the first draft.** None of these games clearly sets its story among
+  adults, so they were replaced with entries from games that do:
+  - every entry from Zara's School Life, Becoming Prom Queen and Secret Taboo (school-set, or no
+    age stated);
+  - What Is Real's two entries (no age stated anywhere in its text);
+  - Life Choices' three entries (the passages call her "teen" and "young girl");
+  - Life at University `[Stripscene]` (the passage raises an underage character);
+  - Family Ties `[uniEvent3]` (the passage says "you work with teens").
+- **Where the entries come from now.** Ten games, each of which states adult characters (college,
+  university, married, or an 18+ statement): Course of Temptation, Cupid's Way, Life at University,
+  Family Ties, In Her Own Hands, Project Reeducation (ages 18–30 at creation, "Everyone is 18 years
+  old"), Shady Deals, New Life Project, Shadows Over Solomon Falls and I'll Never Leave This Town.
+  No game has more than 3 entries per kind.
+
+**Verified.**
+- **Quotes:** every quote is verbatim in its named passage after markup is stripped, and every
+  quote is 15 words or fewer. Log: 50 of 50 OK
+  (`~/Documents/Great_Games_Study_20260926/round5/moment-library-verify-log.txt`).
+- **Youth wording:** every passage was scanned for teen / high school / freshman / young girl /
+  underage / an age under 18. There is one reviewed exception: In Her Own Hands `[JobCelebrate1A]`,
+  where "high school and college" is an adult's past.
+- **Player quotes in the "why" lines:** each one was checked against the study's game files, with
+  0 misses.
+- **Build checks:**
+  - pytest: 75 passed.
+  - `--selfcheck`: clean, and unchanged.
+  - cite_check: 84.
+  - Gate tables for the three games: identical.
+  - `git status games/`: unchanged.
+  - `pitch_pack.py orientation --kind <kind>` prints exactly 10 entries.
+- **Dry run.** Three `v2-pitcher` agents ran on orientation in one message, read-only, each given
+  one of the three least-used kinds: firsts, being_seen and body_as_payment. All three returned
+  the eight lines, their kinds were three different ones, and none touched `games/`.
+  - The being_seen pitcher dropped its first idea because it copied a library entry, which is the
+    "take the kind, never an entry" rule working.
+  - The pitches are in the session report to LO. Their claims about the game (for example, that
+    `followers` is read and never written, or that `ray_refused` is never read) are the pitchers'
+    own and were not re-checked here.
+
+**Words:** 145,948 → 148,299 (Δ +2,351) · running total 148,299 / 149,283.
+
+---
+
+## 2026-09-27 — IC2 (part 1): her moment in eight lines, the new pitch pack, the pitcher (PRD_IDEAS_AND_CRAFT IC2)
+
+**Why.** Pitches were timid because the pitcher was asked for a slot, "an event at an existing
+place with an existing character". That came from ten maintenance commits of a mature game, and the
+return form was bookkeeping. The Great Games Study found that a pitch should be about **her
+moment**. LO approved the plan. Part 2, the 50-moment library and the three-pitcher dry run on
+orientation, waits for LO's review of the library draft.
+
+**What changed.**
+- **`references/the-release.md`:**
+  - "What a release actually is" (the DoL table and the ten commits) is cut to "Where a release
+    happens": 4 lines, labelled a maintenance-cycle observation, which keeps zero new places as the
+    default for WHERE.
+  - New section **"Her moment — the eight lines"**: the fantasy · the temptation · her answers
+    (graded, with the no priced, parked or counted) · her voice low/high · who notices · what
+    sticks · the moment to remember (the five kinds) · the door it opens and the clip we can get.
+    Where / Who / Keys come after it.
+  - Loop step 2: each of the three Pitchers is given a different moment kind, the three least used.
+  - Step 4 points at the provenance lines.
+- **`scripts/pitch_pack.py`** still scores nothing and always exits 0.
+  - New `--kind <moment_kind>`.
+  - New sections print first, in the PRD's order:
+    - THE PROMISE: `want.fantasy_shape`, `model_to_beat`, `promise`, `moment_kinds`. Any missing key
+      prints "not declared".
+    - LAST LISTEN: the newest `listen[]` entry, or "no listen yet".
+    - MOMENT KINDS ALREADY SHIPPED: counts from `releases[].moment_kind`, plus the three least used.
+      A release with no kind counts as "unrecorded" and is not guessed.
+    - THE MOMENT LIBRARY: the given kind's section only, parsed by heading.
+    - CLIPS ON THE SHELF: files on disk for each `pool_dir`/`file` the TOML names, per person, under
+      any folder the build copied into `output/` or `output_dev/`.
+  - The header claim "A pitch is an event at a place and a person BELOW" is replaced.
+  - `--json` gains `promise`, `moment_kinds_shipped` and `clips`.
+  - The docstring's line citations become section names.
+- **`.claude/agents/v2-pitcher.md`:**
+  - The description, the pack command (`--kind`) and the reading list are updated.
+  - The rules: keep the game's fantasy; write the given kind; take the kind, never an entry; zero
+    new places; **a new person only as a hand-off from an existing arc** (`the-arc.md` A4's
+    example). The PRD's "A12" citation was wrong, because A12 is "the reason she is there is a
+    SYSTEM". The clip is part of the pitch.
+  - The return form is the eight lines first, then Serves / Where / Who / Keys to / Opens / Cost /
+    Not.
+- **`.claude/agents/v2-attack.md`:** `the-release.md:43` → "loop step 3".
+- **`references/state.md`:** `releases[]` gains optional `moment_kind` and `her_moment{…}`.
+- **`references/agents.md`:** "Open: whether to give each Pitcher a distinct lens" is replaced by
+  the decision: a moment kind each, the three least used (LO, 2026-09-27).
+- **`SKILL.md`:** the pitch_pack operating-rule line names `--kind` and the new sections.
+  `the-release.md:39` → loop step 2.
+- **`references/engine.md`:** `the-release.md:107-110` (already drifted) → "Every release ends on an
+  opening".
+- **New `scripts/tests/test_pitch_pack_ic2.py`, 7 tests:**
+  - section order;
+  - "not declared" ×4;
+  - declared fields print verbatim;
+  - the kinds count and the three least used;
+  - `--kind` prints only its slice;
+  - no kind, and an unknown kind;
+  - clips count 0 with no media, then 3 with a fixture folder.
+
+**Verified.**
+- pytest: 75 passed (68 + 7).
+- `--selfcheck`: exit 0, with identical output.
+- cite_check: 84.
+- Gate tables for the three games: byte-identical to IC0b's.
+- `git status games/`: unchanged.
+- No `the-release.md:NN` line citation is left anywhere.
+- `pitch_pack.py` on the_balance, orientation (`--kind firsts`) and vesper_two: exit 0, new sections
+  in order, fantasy fields "not declared" (none of the three declares them yet), orientation's
+  clips 0 (no media on disk).
+
+**Words:** 145,691 → 145,948 (Δ +257) · running total 145,948 / 149,283. The library (about +2,273)
+lands in part 2.
+
+---
+
+## 2026-09-27 — IC0b: second prune slice, history out, citations re-anchored (PRD_IDEAS_AND_CRAFT IC0)
+
+**Why.** IC0b pays for IC2's 50-moment library (the PRD asks for at least −2,000 before IC2). Same
+rule as IC0a: cut only text whose job is history. Where a rule sat inside it, the rule stays as one
+line. Where a "don't re-propose this" record sat inside it, a one-line guard stays. LO approved the
+plan item by item. `the-economy.md` and every protected rule are untouched.
+
+**Step 1 — citations re-anchored first (text only).** These cite section names now, not line
+numbers. Most had already drifted:
+- `gates.py:79` and `:7309`: `SKILL.md:107` → SKILL.md's operating rule "the BOARD DECLARES IT".
+- `gates.py:398`, `:482` and `:6203`: `the-board.md:92` → `the-board.md` §1.
+- `gates.py:7988` and `references/the-arc.md:638`: `engine.md:532` → `engine.md` §17.
+- `gates.py:9027`: `the-clock.md:403` → `the-clock.md` "What the scoreboard checks".
+
+**Step 2 — moved from.** Line numbers are before this edit. The full old text is in git history.
+
+`engine.md`:
+- `:357-381` (§15): the "said the opposite until 2026-08-24" heading, the old quote, the "our games
+  followed it" history and the R5b.2 conflict note. The field-evidence bullets stay, and line 389's
+  "The reversal above" becomes "The rule above".
+- `:1378-1383` (§30): "This section taught the bug it now warns about".
+- `:1479-1487`: "`template_import.py` said the opposite". Kept as one line, "`requires_npc` does
+  not replace a meeting's place and time", plus the G38 name.
+- `:2127-2132`: "The count was THREE here until 2026-08-29". Kept: the fourth evaluator, and the
+  stale `v2.py:7686` comment.
+
+`the-board.md`, `SKILL.md`, `register.md`:
+- `the-board.md:48-52`: "There used to be a '6–8' here".
+- `SKILL.md:53-57`: the reputation row's history. The rule and the 41% median stay.
+- `register.md:821-826`: the withdrawn article-density finding, cut to a guard: "There is no
+  article-density finding: 65.0 against a field median of 58.3."
+- `register.md:940-949`: "The first version of these four was wrong". Its lesson is already at the
+  "fifth instance" paragraph and the blockquote that follows it.
+- `register.md:1225-1232`: the `tea` false-friend correction. Kept: "a judgement about a
+  sentence, never about a word".
+- `register.md:1348-1352`: the `rota` ×44 count. Kept: "count with word boundaries".
+- `register.md:1390-1395`: "The count that produced this was wrong twice".
+
+`the-voice.md`:
+- `:47-60` (R1): Lodger's → Tenant's → Back Room. Kept: "run a cure through the instrument that
+  caught the disease".
+- `:81-93`: the `back_home` leak story. The scoping rule above it stays.
+- `:303-310` (R4): "CORRECTED 2026-09-03". Kept: `guidance exists` never reads the card, plus the
+  two check names.
+
+`the-surfaces.md`, `the-sheets.md`:
+- `the-surfaces.md:726-743` (R5d): the "ours is 0.7%" correction. Kept: "we build few stage
+  counters (7 of 21)".
+- `the-surfaces.md:1264-1277` (R8): the gate 22 story, already told in SKILL.md's operating rules.
+  Kept as a pointer to that rule.
+- `the-sheets.md:34-35`: "This line used to end 'not in a separate tracker'". Now "Sheets are
+  mirrored to Notion."
+- `the-sheets.md:98-126` (S1): the sheet-versus-build diff survey, costed and dropped on
+  2026-09-03. Kept as a 3-line guard.
+
+`the-meters.md`, `the-first-hour.md`, `the-clock.md`:
+- `the-meters.md:846-851`: "named the wrong equivalent until 2026-08-28". Kept: `getWornStatMax`
+  skips empty slots.
+- `the-first-hour.md:1250-1258` (F5): "The first version of the meeting gate was wrong". Kept:
+  one hub, and no cold spawn.
+- `the-clock.md:377-405`: "THE GATE READ 62% OF THE BUTTONS", with the before/after table. Kept:
+  "eight of thirteen pass, including all four v1 games".
+
+**Verified.**
+- pytest: 68 passed.
+- `--selfcheck`: exit 0, with identical output.
+- cite_check: 84 (unchanged).
+- Gate tables for the_balance, orientation and vesper_two: byte-identical to IC1's.
+- `git status games/`: unchanged.
+- The four gate/lint names in the kept lines still resolve, and the L2 heading is present.
+- No stale `:532`, `:92`, `:107` or `:403` anchors remain.
+
+**Words:** 148,182 → 145,691 (Δ −2,491) · running total 145,691 / 149,283. `templates/` is
+unchanged at 7,568.
+
+---
+
+## 2026-09-27 — IC1: the Want says the premise matters, and the goal stays alive (PRD_IDEAS_AND_CRAFT IC1)
+
+**Why.** The Want taught a male-heavy finding as law: *"Not one game in thirty is loved for its
+premise… the setup does not [matter]."* For female leads, players name the premise: the Prom Queen
+letter, the missing girl in Solomon Falls, the note in Secret Taboo, the brother in the next room
+(Great Games Study, `round3/ROUND3_REPORT.md:75`). The template also asked for "the week she stops
+pretending the goal is the point", while Zara's forgotten Prom Queen is a named player complaint.
+And there was no slot for a fantasy shape, a model to beat, a mystery, a rival, a companion, her
+face, or the moment kinds. LO approved the diff plan.
+
+**What changed.**
+- **`templates/want.md`:**
+  - New **§0 "The fantasy"**: pick a shape (fall by need · rise by want · taboo at home ·
+    mystery), say in one sentence what the player comes to feel, name the model to beat and what
+    ours does better, and tick the moment kinds the game promises.
+  - §1's history blockquote is cut to one doctrine pointer.
+  - The premise claim is replaced with "Choosing matters, and so does the premise", with its
+    male-heavy source named.
+  - §2's goal-fading slot is replaced by **"The promise"**: a goal with a date, a mystery with a
+    payout, and a rival. The rule: the goal or the mystery stays alive, and the guidance page
+    carries it. "Where the hold stops being the reason" is kept, shortened.
+  - §6 gains **the companion** and **her face**.
+  - "The four checks" becomes "The checks": check 1 loses its history clause, and there is a new
+    check 6 on the promise and the moment kinds.
+- **`references/the-want.md`:**
+  - New **§0**, the doctrine: the four shapes table, the model to beat (Round 4b developer
+    statements), keep the promise alive (player quotes), and the five moment kinds. Every key is
+    optional.
+  - §1's history (the 21-vs-0 pronoun table and the v1 story) is cut to one line.
+  - The `freedom … premise 0.0%` block is replaced by one paragraph that keeps 25.9% and labels
+    it male-heavy.
+  - §2/§3 history is cut: "used to claim", "has moved to §3", "sat in §2 until 2026-09-01".
+  - §2's job list gains "§0 — the promise pulls the player".
+  - The test gains question 5, on the promise and the moment kinds.
+- **`references/state.md`:**
+  - New optional `want` keys: `fantasy_shape`, `model_to_beat{game, better}`, `moment_kinds[]`,
+    `promise{goal, date, mystery, payout, rival}`, `companion`, `face`. No gate reads them yet.
+  - The `want.player` start-choice comment is reworded (no "premise is 0 of 30").
+  - Two history comments are cut.
+- **`scripts/gates.py`:** G44 ("the start choice is read") has its comment and its n/a detail
+  line reworded. The source is named as the male-heavy top 30, and the line points at
+  the-want.md §0. **Text only; the logic is unchanged.**
+- **`references/the-economy.md` R3:** `the-want.md:48` is re-anchored to `the-want.md` §1, because
+  §0 shifted the line.
+
+**Verified.**
+- pytest: 68 passed.
+- `--selfcheck`: exit 0, with identical output.
+- cite_check: 84 (unchanged).
+- Gate tables: orientation and vesper_two are byte-identical. the_balance differs in exactly one
+  line, G44's n/a detail text (as planned). The verdict is unchanged.
+- `git status games/`: unchanged.
+- A grep for a premise-doesn't-matter claim over the skill, templates, gates.py and v2 agents:
+  none left.
+- `--words templates/want.md` flags four more words than before: `premise` (×3 → ×5), `firsts`,
+  `investigates`, `zara`. They are author-facing template words, not player text.
+
+**Words:** 147,977 → 148,182 (Δ +205) · running total 148,182 / 149,283. `templates/`: 7,316 →
+7,568 (Δ +252). IC1 on its own is net positive: the §0 evidence is ~410 words, against the PRD's
+estimate of −100. The running total stays under the baseline because IC0a banked −1,306.
+
+---
+
+## 2026-09-27 — IC0a: first prune slice, "this used to say" history out (PRD_IDEAS_AND_CRAFT IC0)
+
+**Why.** The Great Games Study PRD (`~/Documents/Great_Games_Study_20260926/round5/PRD_IDEAS_AND_CRAFT.md`)
+sets a word budget: the running total of `cat SKILL.md references/*.md | wc -w` never goes above
+the 149,283 baseline. IC0 prunes first, so IC1–IC3 have room. This slice cuts only text that says
+how the skill *used to* read, or measurement history for a retired rule. Where a rule sat inside
+the history, the rule stays. LO approved the diff plan item by item.
+
+**Moved from (line numbers at `6adb305`; the full old text is in `git show 6adb305:<path>`):**
+- `references/the-first-hour.md:56-101` (F1): the "This table published word counts until
+  2026-08-24" blockquote, with the old figures, the re-walk tables and Section K's rebuild
+  attempts. The rule's closing paragraph is kept as 3 lines ("a consistency rule, not a word
+  count"; `findings_K_mirror.md` §4). −422.
+- `references/the-meters.md:641-656` (W6): "This section said the opposite until 2026-08-24", the
+  old per-person meter reading and the `off_season`/`the_season` story. −188.
+- `references/engine.md:1234-1240` (§28.1): "This paragraph said the opposite until 2026-08-22"
+  (the `off_season` sleep rung). The table above it states the correct order. −87.
+- `references/the-voice.md:116-120` (R1): "The long share read 10% until 2026-08-24". −71.
+- `references/the-board.md:321-324` (3b): the "used to end '15/35/55/75 — copy that shape'"
+  history. The rule line and the field figure stay. −38.
+- `references/the-board.md:393-396` (§4): "Until 2026-08-18 this section was the four lines
+  above". The rule and its kitchen example stay. −31.
+- `SKILL.md:145-147`: "This used to say 'declare the objects in the room…'" (gate 22's deletion). −36.
+- `references/register.md:1031-1043`: the negation column's 2026-09-01 re-measurement story. The
+  same history is in `gates.py` above `FIELD_NEGATION_P50` and in the `lint_negation` docstring,
+  and the table's current figures stay. −172.
+- `references/register.md:1051-1057`: "That diagnosis holds for L1 and L3 and NOT for L2" (moot
+  now that L2 is retired). −98.
+- `references/register.md:1094-1108`: the retired L2 write-up, shortened to a 5-line stub. The
+  heading `### L2 · Negation — RETIRED 2026-09-24` stays, because `gates.py` prints
+  "register.md L2". −156.
+
+**Held back to IC0b.** These three cuts would shift lines that live files cite by number:
+- `engine.md:357-381`, which shifts `engine.md:532` (cited by `gates.py:7988` and `the-arc.md:638`);
+- `the-board.md:48-51`, which shifts `the-board.md:92` (cited by `gates.py:398`, `:482`, `:6203`);
+- `SKILL.md:53-57`, which shifts `SKILL.md:107` and `:111` (cited by `gates.py:79`, `:7309` and
+  the repo `CLAUDE.md:17`).
+
+IC0b re-anchors those citations first.
+
+**Verified.**
+- pytest `scripts/tests`: 68 passed.
+- `--selfcheck`: exit 0, and its output is byte-identical to before.
+- `cite_check`: 84 (77 drifted, 7 missing), the same as the baseline.
+- `gates.py` tables for the_balance, orientation and vesper_two: byte-identical before and after.
+- `git status --short games/`: identical.
+- The kept headings (L2, F1, W6, §28.1) are all present.
+
+**Words:** 149,283 → 147,977 (Δ −1,306) · running total 147,977 / 149,283. `templates/` is untouched.
+
+---
+
 ## 2026-09-26 — ladders: each step fires when unlocked, and each unlock is earnable (PRD WS4)
 
 **Why.** No check knew what a person's steps were. The Balance added 39 repeatables and no new

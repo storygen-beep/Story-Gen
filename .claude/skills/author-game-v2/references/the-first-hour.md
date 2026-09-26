@@ -53,52 +53,9 @@ they run.
 | **cold open** | **nobody** — her situation and the pressure, and no people at all | corpo-life · the-company · degrees-of-lewdity |
 | **staged open** | one person at a time, each on screen and **speaking** | friends-of-mine · new-life-project · patriarch · destroyer |
 
-> ### ⚠️ This table published word counts until 2026-08-24. Section K deleted them.
->
-> It read *"cold open 60–300 words · staged open 700–2,600"*, with the empty band between them
-> offered as a finding, and it carried two more figures from the same source — *"ten of twenty
-> openings name nobody"* and *"~229 words per named character."* **None of them is re-derivable, and
-> now none of them ever will be.**
->
-> What happened, in order. The 2026-08-24 recheck found that the extractor behind the original walk
-> could not see setter links `[[label|Target][$x += 1]]` or raw `<a data-passage>` anchors, so
-> **eight of the twenty-five opening walks move** once it can:
->
-> ```
-> growup                26w  ->  8,132w        realm-of-corruption    7w -> 2,099w
-> amore                  6w  ->    709w        wasteland-lewdness  1,004w -> 6,516w
-> destroyer            531w  ->  3,272w        the-hellfire-club     681w -> 1,728w
-> inseminator          305w  ->    582w        zaras-school-life   1,173w -> 1,482w
-> ```
->
-> `destroyer` was listed here as a **285-word cold open**. Those 285 words are its legal
-> disclaimer — *"I am not the owner of any of the media or pictures used in this game…"* — and the
-> walk stopped there because that passage leaves through `<a data-passage="intro1">`. Walked
-> properly it is **eleven passages and roughly 3,300 words**, naming the father, the grandfather
-> (who speaks, at length), the stepmother and the school bullies. A staged open by this table's own
-> definition — and it moves the *cast* count as well as the *word* count, which is why the cast
-> figure goes with them.
->
-> Section K then tried to rebuild the walk three ways — stop at the first branch, greedy first link,
-> and breadth-first to depth three — against the six openings this table used to name:
->
-> ```
-> game                        published  branch-stop   greedy    bfs-3
-> corpo-life                         64           26     1586     9992
-> the-company                       126          145     1056      985
-> degrees-of-lewdity                193          197      197      197
-> friends-of-mine                  1377          351     6677     2649
-> new-life-project                 1558          202     2763     1551
-> patriarch                        2619         2720     4409      704
-> ```
->
-> **Each lands on two or three of the six and misses the rest by four to seven times, and they do
-> not agree with each other either.** The original walker is not on disk. A number no instrument can
-> reproduce is not a measurement, and this skill has demoted five thresholds for less.
->
-> **The rule loses nothing, because it never rested on the numbers.** It is a *consistency* rule —
-> the cast load and the word budget have to agree — and the axis that separates the two shapes is
-> the cast, which is checkable by opening the first passage and reading it. `findings_K_mirror.md` §4.
+**This is a consistency rule, not a word count.** The cast load and the word budget have to agree,
+and the axis that separates the two shapes is the cast, which is checkable by opening the first
+passage and reading it. `findings_K_mirror.md` §4.
 
 corpo-life's whole cold open, in full — who, job, place, why poor, what is at stake, zero characters:
 
@@ -1290,15 +1247,9 @@ late_shifts     (v1)   PASS        0/5      n/a
 the bar is one shipped work has cleared rather than an invented number. The six v2 games sit at
 0–1 of their cast, which is the same v1/v2 fingerprint the first-contact count shows.
 
-> ⚠️ **The first version of the meeting gate was wrong, and the correction is worth keeping.** It
-> demanded that *every* hub of a character carry the meeting flag, and read `the_inheritance` as
-> 3/5 — failing it for `aud_sexloop`, gated on `audrey_stage gte 3`, and `last_call` for
-> `canvas_marcus_arrangement`, gated on `marcus_drinks_done`. Both are **later rungs**, gated on
-> something downstream of the meeting, and both are correct work. That is `SKILL.md`'s *"a check
-> that fails a game for obeying the doctrine is a bug in the check"*, caught by running it before
-> writing it up. The shipped rule asks for a meeting on **one** hub and bans the **cold spawn** —
-> a hub with no conditions at all — on every hub, which is what `the_inheritance/hub_richard` and
-> `vesper/hub_sol_undertow` are.
+> ⚠️ **The gate asks for a meeting on ONE hub, not every hub** — later rungs are gated downstream of
+> the meeting, and that is correct work. It bans the **cold spawn** (a hub with no conditions at
+> all) on every hub.
 
 ---
 

@@ -6,29 +6,33 @@ Usage:
     python3 scripts/pitch_pack.py <game-slug>        # the pack, as text
     python3 scripts/pitch_pack.py <path/to/game.toml>
     python3 scripts/pitch_pack.py <slug> --json      # machine-readable
+    python3 scripts/pitch_pack.py <slug> --kind being_seen   # + that kind's library slice
 
 WHY THIS EXISTS, and why it is a script and not a paragraph in the agent's prompt.
 
-`the-release.md:39` tells the author to run three Pitcher agents with NO SHARED
-CONTEXT — independence is the whole point, because common context yields three
-shades of one idea. That design has a cost nobody had paid: a Pitcher with no
-context does not know what the game already contains. It will pitch a location
+`the-release.md` loop step 2 tells the author to run three Pitcher agents with NO
+SHARED CONTEXT — independence is the whole point, because common context yields
+three shades of one idea. That design has a cost nobody had paid: a Pitcher with
+no context does not know what the game already contains. It will pitch a location
 that exists, a character who does not, or a mechanic the engine cannot run.
 
 So the pack IS the Pitcher's world. Everything it may name is in here and
 nothing else is.
 
-And the shape it must feed is not general. `the-release.md:20-28` walks ten real
-content commits from a shipped game and finds:
+A pitch is HER MOMENT, in eight lines (`the-release.md`, "Her moment"), and each
+of the three Pitchers is given a different moment kind. So the pack opens with
+what a moment needs, in this order (PRD_IDEAS_AND_CRAFT IC2):
 
-    Every single one is an event at an existing place with an existing
-    character. No new location. No new character. No plot advancement.
-    Three of the ten are keyed to player state.
+    THE PROMISE                   the fantasy, the model to beat, the live goal /
+                                  mystery / rival, the moment kinds promised
+    LAST LISTEN                   what players said after the last release
+    MOMENT KINDS ALREADY SHIPPED  counted from releases[].moment_kind
+    THE MOMENT LIBRARY            the one kind this Pitcher was given (--kind)
+    CLIPS ON THE SHELF            media files on disk, per person and pool
 
-That sentence is the whole specification for this file. It needs to make three
-things complete and concrete — PLACES, PEOPLE, and the STATE a pitch can key
-to — plus what the release owes (the Want, the open promises) and what a pitch
-may cost (the economy).
+and then WHERE and WHO: PLACES, PEOPLE and the STATE a pitch can key to (by
+default zero new places — `the-release.md`, "Where a release happens"), plus what
+the release owes (the Want, the open promises) and what it may cost (the economy).
 
 ⚠️ IT SCORES NOTHING AND ALWAYS EXITS 0.
 
@@ -320,6 +324,124 @@ def _movers(game):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Her moment — the promise, the kinds shipped, the library, the clips
+# ─────────────────────────────────────────────────────────────────────────────
+# Every reader below prints what is DECLARED and says "not declared" otherwise.
+# The fields are new (the-want.md §0, IC1), so for every game written before them
+# the honest answer is "not declared" — never a guess from the prose.
+
+MOMENT_KINDS = [
+    ("firsts", "her firsts"),
+    ("being_seen", "being seen"),
+    ("body_as_payment", "her body as the price for something she needs"),
+    ("taboo_at_home", "taboo at home"),
+    ("consequence", "a consequence she lives with"),
+]
+KIND_KEYS = [k for k, _ in MOMENT_KINDS]
+
+LIBRARY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
+                            "references", "moment-library.md")
+
+
+def _kinds_shipped(releases):
+    """({kind: count}, unrecorded, [three least used]) from releases[].moment_kind.
+
+    A release with no `moment_kind` is UNRECORDED, not guessed — the field is new,
+    and inferring a kind from a subject line is an opinion the pack may not hold.
+    Ties among the least used keep MOMENT_KINDS order, so the pick is stable.
+    """
+    counts = {k: 0 for k in KIND_KEYS}
+    unrecorded = 0
+    for r in releases or []:
+        k = (r or {}).get("moment_kind")
+        if k in counts:
+            counts[k] += 1
+        else:
+            unrecorded += 1
+    least = sorted(KIND_KEYS, key=lambda k: (counts[k], KIND_KEYS.index(k)))[:3]
+    return counts, unrecorded, least
+
+
+def _library_slice(kind, path=None):
+    """The entries under `## <kind> · …` in the moment library, or None if absent.
+
+    Parsed by heading, so the pack prints ten moments and not fifty — the Pitcher
+    is given one kind, and the other forty are other Pitchers' business.
+    """
+    path = path or LIBRARY_PATH
+    if not os.path.exists(path):
+        return None
+    out, inside = [], False
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            if line.startswith("## "):
+                inside = line[3:].strip().split(" ")[0] == kind
+                continue
+            if inside and line.strip():
+                out.append(line.rstrip("\n"))
+    return out
+
+
+def _media_refs(game, model):
+    """{person: [(pool_or_file, is_pool)]} for every media block the TOML names.
+
+    Walks every dict in each canvas for `pool_dir` / `file`, because media sits
+    in node blocks, in group children and in cascade beats alike. The person is
+    the canvas's bound npc, or `(no one)`.
+    """
+    who = {c["id"]: (c["npc"] or c["requires_npc"] or "(no one)") for c in model}
+    refs = collections.defaultdict(list)
+
+    def walk(obj, cid):
+        if isinstance(obj, dict):
+            props = obj.get("props") if isinstance(obj.get("props"), dict) else {}
+            for holder in (obj, props):
+                if isinstance(holder.get("pool_dir"), str):
+                    refs[who.get(cid, "(no one)")].append((holder["pool_dir"], True))
+                elif (isinstance(holder.get("file"), str)
+                      and obj.get("type") in ("video", "image")):
+                    refs[who.get(cid, "(no one)")].append((holder["file"], False))
+            for v in obj.values():
+                walk(v, cid)
+        elif isinstance(obj, list):
+            for v in obj:
+                walk(v, cid)
+
+    for c in game.get("canvases") or []:
+        walk(c.get("nodes") or [], c.get("id"))
+    return refs
+
+
+def _media_roots(slug):
+    """Every folder a build copied media into.
+
+    `package_from_toml --video-folder <dir>` copies the folder into the output
+    under its own basename (`video_path = "./" + name`), so the name varies by
+    game — `media` for vesper, something else elsewhere. Every sub-folder of
+    `output/` and `output_dev/` is a candidate root; a pool that is not under
+    any of them counts 0.
+    """
+    roots = []
+    for base in (f"games/{slug}/output", f"games/{slug}/output_dev"):
+        if os.path.isdir(base):
+            roots += sorted(os.path.join(base, d) for d in os.listdir(base)
+                            if os.path.isdir(os.path.join(base, d)))
+    return roots
+
+
+def _count_on_disk(roots, ref, is_pool):
+    """Files under the first root that has them. A count, never a judgement."""
+    for root in roots:
+        target = os.path.join(root, ref)
+        if is_pool and os.path.isdir(target):
+            return sum(1 for _, _, files in os.walk(target)
+                       for f in files if not f.startswith("."))
+        if not is_pool and os.path.isfile(target):
+            return 1
+    return 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Rendering
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -388,12 +510,15 @@ def _days(idx):
         return str(idx)
 
 
-def pack(slug, toml_path, state_path, as_json=False):
+def pack(slug, toml_path, state_path, as_json=False, kind=None):
     game = gates._load(toml_path)
     model, _ = gates.build(game)
     st = _state(state_path) or {}
     board = st.get("board") or {}
     want = st.get("want") or {}
+    kinds_count, kinds_unrec, kinds_least = _kinds_shipped(st.get("releases"))
+    media = _media_refs(game, model)
+    roots = _media_roots(slug)
 
     at_loc, by_npc = _schedule_index(game)
     lad, kinds = _ladders(model)
@@ -454,6 +579,12 @@ def pack(slug, toml_path, state_path, as_json=False):
             movers={f"{o}.{t}": [c for c, _, _ in v] for (o, t), v in mv.items()},
             promises=[p for p in (st.get("promises") or []) if not p.get("paid_in")],
             releases=st.get("releases") or [],
+            promise={k: want.get(k) for k in
+                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
+            moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec,
+                                      least_used=kinds_least),
+            clips={who: {ref: _count_on_disk(roots, ref, pool) for ref, pool in rs}
+                   for who, rs in media.items()},
         ), indent=2))
         return 0
 
@@ -466,8 +597,69 @@ def pack(slug, toml_path, state_path, as_json=False):
     print(f"  narration        {(game.get('settings') or {}).get('narration_person') or '?'} person")
     print(f"  built            {len(model)} canvases · {len(locs)} places · {len(npcs)} people")
     print()
-    print("  A pitch is an event at a place and a person BELOW. Nothing here is a score;")
-    print("  every figure is a count, or the author's own declared number. Judge nothing.")
+    print("  A pitch is her moment (the-release.md, \"Her moment\"). Where and who come from")
+    print("  the lists below. Nothing here is a score; every figure is a count, or the")
+    print("  author's own declared number. Judge nothing.")
+
+    # ── her moment: the promise ─────────────────────────────────────────────
+    _rule("THE PROMISE — the fantasy this game already made (want, the-want.md §0)")
+    for key, label in (("fantasy_shape", "fantasy shape"), ("model_to_beat", "model to beat"),
+                       ("promise", "the promise"), ("moment_kinds", "moment kinds promised")):
+        val = want.get(key)
+        if val in (None, "", [], {}):
+            print(f"  {label:<22}not declared")
+        else:
+            print(f"  {label}:")
+            _want_value(val, indent="      ")
+
+    # ── what players said last time ─────────────────────────────────────────
+    _rule("LAST LISTEN — what players said after the last release, verbatim")
+    listens = [x for x in (st.get("listen") or []) if isinstance(x, dict)]
+    if listens:
+        for k, v in listens[-1].items():
+            print(f"  {k}:")
+            _want_value(v, indent="      ")
+    else:
+        print("  no listen yet — nothing recorded in v2_state.json `listen[]`.")
+
+    # ── moment kinds shipped ────────────────────────────────────────────────
+    _rule("MOMENT KINDS ALREADY SHIPPED — from releases[].moment_kind")
+    for k, label in MOMENT_KINDS:
+        print(f"  {k:<18}{kinds_count[k]:>3}   {label}")
+    if kinds_unrec:
+        print(f"  {'unrecorded':<18}{kinds_unrec:>3}   releases with no moment_kind (not guessed)")
+    print(f"  three least used: {', '.join(kinds_least)}  — one per Pitcher")
+
+    # ── the moment library, one kind ────────────────────────────────────────
+    _rule("THE MOMENT LIBRARY — EVIDENCE, NOT A TEMPLATE. Take the kind, never an entry.")
+    if not kind:
+        print("  no kind given. Run with --kind <" + "|".join(KIND_KEYS) + ">")
+    elif kind not in KIND_KEYS:
+        print(f"  unknown kind `{kind}`. Kinds: {', '.join(KIND_KEYS)}")
+    else:
+        entries = _library_slice(kind)
+        if entries is None:
+            print("  references/moment-library.md not found.")
+        elif not entries:
+            print(f"  the library has no `## {kind}` section.")
+        else:
+            print(f"  kind: {kind}")
+            for line in entries:
+                print(f"  {line}")
+
+    # ── clips on the shelf ──────────────────────────────────────────────────
+    _rule("CLIPS ON THE SHELF — media files on disk, per person and pool (a count)")
+    if not media:
+        print("  the built game names no media.")
+    else:
+        if not roots:
+            print(f"  no media on disk (no folder under games/{slug}/output or output_dev)")
+        for who in sorted(media):
+            seen = collections.OrderedDict()
+            for ref, pool in media[who]:
+                seen.setdefault(ref, pool)
+            parts = [f"{ref} {_count_on_disk(roots, ref, pool)}" for ref, pool in seen.items()]
+            _wrap(" · ".join(parts), first=f"  {who}: ", indent="      ")
 
     # ── the Want ────────────────────────────────────────────────────────────
     if want:
@@ -478,7 +670,7 @@ def pack(slug, toml_path, state_path, as_json=False):
     else:
         _rule("THE WANT")
         print("  no v2_state.json — the Want is not on disk for this game, and a pitch")
-        print("  that cannot name the line it serves is unfocused by `the-release.md:36`.")
+        print("  that cannot name the line it serves is unfocused (`the-release.md` loop step 1).")
 
     # ── releases and promises ───────────────────────────────────────────────
     rels = st.get("releases") or []
@@ -652,14 +844,20 @@ def pack(slug, toml_path, state_path, as_json=False):
 
     print()
     print("─" * 72)
-    print("  Pitch an event at one of these places with one of these people, keyed to")
-    print("  state that already exists. `the-release.md:47` — default to zero new")
-    print("  locations. Nothing above is a verdict; LO judges the pitch.")
+    print("  Pitch her moment in eight lines, at one of these places with one of these")
+    print("  people, keyed to state that already exists. Default to zero new places")
+    print("  (`the-release.md`, \"Where a release happens\"). LO judges the pitch.")
     return 0
 
 
 def main():
-    argv = [a for a in sys.argv[1:] if a != "--json"]
+    args = sys.argv[1:]
+    kind = None
+    if "--kind" in args:
+        i = args.index("--kind")
+        kind = args[i + 1] if i + 1 < len(args) else ""
+        del args[i:i + 2]
+    argv = [a for a in args if a != "--json"]
     if not argv:
         print(__doc__)
         return 2
@@ -667,7 +865,7 @@ def main():
     if not os.path.exists(toml_path):
         print(f"not found: {toml_path}")
         return 2
-    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv)
+    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind)
 
 
 if __name__ == "__main__":

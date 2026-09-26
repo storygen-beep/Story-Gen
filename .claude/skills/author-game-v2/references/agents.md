@@ -89,9 +89,10 @@ Two readings, and **both are honest**: convergence is a failure of the design's 
 convergence is a signal — three independent readers agreeing on what the game most needs next.
 One run cannot tell them apart.
 
-**Open: whether to give each Pitcher a distinct lens** — a different Want line, a different
-character, one that must pay an open promise and one that must not. That is a change to this
-section's design and it is LO's call, so it is recorded and not done.
+**Each Pitcher is given a distinct lens: a moment kind** (LO, 2026-09-27). The caller gives each
+of the three one of the three least-used kinds from the pack's MOMENT KINDS ALREADY SHIPPED. All
+three keep the game's fantasy, so they differ by the moment, not by the game
+(`the-release.md`, "Her moment").
 
 > This is the capability the incumbent system most visibly lacks. It is a correctness
 > pipeline — engine tables, traps, gates — which is a different muscle from "here are three

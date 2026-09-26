@@ -374,35 +374,8 @@ One gate and two lints. `python3 scripts/gates.py <slug>`.
 | lint · **the clock in the prose** | C2. Every clock reference in a beat with its canvas's window width beside it, plus the game's rate against the field distribution. A list to read, never a score. |
 | lint · **the time cost is not on the button** | C4. Every click that moves the clock 60 minutes or more without a duration on its label. |
 
-⚠️ **THE GATE READ 62% OF THE BUTTONS UNTIL 2026-08-25, AND THE TABLE BELOW USED TO SAY SO
-WITHOUT KNOWING IT.** A node's exit is either a `choices` array **or** a single `exit_block` that is
-itself the button (`{type: "location", text: "…", config: {…}}`); `_clk_choices` read only the first.
-That is **1,225 of the 3,214 labels in this repo**, and **22 labels naming a clock time were sitting
-in the unread half** across four games — using `at` and `before`, prepositions the instrument has
-always known. They were invisible because nothing looked, not because the pattern was narrow.
-
-Re-read off the shipped gate, 2026-08-25, after the reader was widened:
-
-```
-                    label keeps its time      was (2026-08-22)
-steam                   FAIL  16 labels           FAIL   9
-seventh_day             FAIL   8                  FAIL   2
-the_allowance           FAIL   6                  PASS      <- a false pass
-back_home               FAIL   3                  PASS      <- a false pass
-forty_miles             FAIL   1                  FAIL   1
-mrs_vance               PASS                      PASS      (repaired the same day)
-off_season              PASS                      FAIL   2  (repaired since)
-the_season              PASS                      —
-mothers_place           PASS                      —
-vesper          (v1)    PASS                      PASS
-last_call       (v1)    PASS                      PASS
-late_shifts     (v1)    PASS                      PASS
-the_inheritance (v1)    PASS                      PASS
-```
-
-**Eight of thirteen pass, and that includes all four v1 games**, so the bar is still one shipped work
-has cleared. What moved is the instrument, not the prose: two games that were passing had never been
-measured on 38% of their own buttons.
+**Eight of thirteen games pass, including all four v1 games**, so the bar is one shipped work has
+cleared.
 
 ⚠️ **And `_CLK_PREP` gained `to`, but only in a narrow form** — `to` + a spelled-out hour that is not
 `one`. Measured across 81,264 corpus labels: `to` in the shared alternation adds **8 hits, all

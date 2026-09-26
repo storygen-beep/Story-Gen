@@ -6,12 +6,32 @@
 
 ---
 
+## 0. The fantasy — what the player comes here to feel
+
+**Which shape?** Pick one, or name a mix. Each has its own engine:
+
+- [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
+- [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, a clock)*
+- [ ] **Taboo at home** — the house, and who is in the next room
+- [ ] **Mystery** — she investigates, and something works on her while she does *(secrets she buys)*
+
+**In one sentence, what does the player come here to feel?** <…>
+
+**The model to beat:** <one named game> — **what ours does better:** <one line>
+
+**Which moments does this game promise?** Tick the kinds it will keep delivering:
+
+- [ ] her firsts
+- [ ] being seen
+- [ ] her body as the price for something she needs
+- [ ] taboo at home
+- [ ] a consequence she has to live with
+
+Record these as `want.fantasy_shape`, `want.model_to_beat` and `want.moment_kinds`. Doctrine:
+`references/the-want.md` §0.
+
 ## 1. Who the player is — answered BEFORE she is described
 
-> ⚠️ **This block did not exist until 2026-08-27, and its absence is why eight v2 games shipped the
-> same protagonist.** Nobody chose a woman eight times: this file wrote `she/her` twenty-one times and
-> `he/him` zero, so the grammar answered before the author arrived. v1 asked this first of anything
-> (`author-game/references/step-0-1-seed.md:17`) and v2 dropped the question.
 > Doctrine and the measurements: `references/the-want.md` §1.
 
 **Who is the player?** `female` · `male` · `picked at start`
@@ -30,9 +50,9 @@
 
 **What does the player choose about her at minute zero?** <the start choice, or `none`>
 
-> **`freedom` is the largest single thing the field is loved for — 25.9%**, ahead of performers,
-> systems and volume. **Not one game in thirty is loved for its premise.** So the choosing matters
-> and the setup does not.
+> **Choosing matters, and so does the premise.** `freedom` (25.9%) is the largest thing the male-heavy
+> top 30 is loved for. For a female lead, players name the premise too: the Prom Queen letter, the
+> missing girl, the brother in the next room. Give her both: a premise in §0, and a choice here.
 >
 > **A memory, not a slider.** Do not build a stat screen. Ask her something the scene is already
 > asking — the answer reveals what she did before — and set a flag from it. See §3: what the flag
@@ -97,10 +117,17 @@ one sentence because this slot used to hold a filled-in example. Write hers, in 
   place she is actually standing in
 - ❌ "get revenge on X" — that completes, and then there is nothing left to want
 
-**Where the hold stops being the reason:** <the point where it is still there and it is no longer
-why — §4's Transformation charge, stated as a moment. For a `bill` that is the week she still
-pays and no longer cares; for an `ambition` it is the week she stops pretending the goal is the
-point.>
+**The promise — what keeps pulling the player forward:**
+
+- **The goal:** <a named goal> **by** <a date or a moment>
+- **The mystery:** <what she does not know yet> — **it pays out** <roughly when>
+- **The rival:** <who wants the same thing, or stands in her way>
+
+The hold may go quiet; **the goal or the mystery stays alive**, and the guidance page carries it. A goal
+announced and then forgotten is a named player complaint (Zara's Prom Queen). Record it as `want.promise`.
+
+**Where the hold stops being the reason:** <the moment she still does it and the reason has changed —
+§4's Transformation charge, stated as a moment>
 
 ## 3. What she is becoming — as ACCESS
 
@@ -175,6 +202,12 @@ A character with no line here has no reason to exist: cut them, or write it.
 | `npc_<id>` | |
 | `npc_<id>` | |
 
+**The companion:** <who leads her, or whom she leads — the friend one step ahead, or one step behind>
+
+**Her face:** <one performer or one look, kept across the game — players notice when it changes>
+
+Record both as `want.companion` and `want.face`.
+
 ## 7. Register
 
 - **`narration_person`** = `second` — declared once, **immutable** after the first release.
@@ -193,10 +226,10 @@ A character with no line here has no reason to exist: cut them, or write it.
 
 ---
 
-## The four checks — answer out loud before leaving this file
+## The checks — answer out loud before leaving this file
 
 1. **What does release 41 add?** (ask it of a named §3 tier. If no tier can answer, the tier is
-   decorative — and note this used to be asked of §2, which cannot schedule content)
+   decorative)
 2. **What can she reach at the top that she cannot at the bottom?** (the ascent, §3)
 3. **Which character would a player miss if deleted, and why?** (the product, §6)
 4. **Which repeatable surface carries the crudest writing in the game?** (§7 — and if the
@@ -212,6 +245,9 @@ A character with no line here has no reason to exist: cut them, or write it.
    its objects, its meters — so it is the cheapest place to catch a word the player does not
    already own. Catching one after the prose exists means renaming things.
    `references/the-want.md`, "The test before you leave this file".
+
+6. **What is the promise, and which release pays the mystery's next clue?** And which moment kinds
+   does this game keep delivering? (§0, §2)
 
 ---
 

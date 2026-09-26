@@ -638,22 +638,6 @@ Her meter says whether this person is available; **the player's says how far the
 that is the one W4 measures at 8–17 rungs. Two meters, two jobs, two depths, and both correct at once
 (`findings_F_further.md` §4).
 
-> #### ⚠️ This section said the opposite until 2026-08-24
->
-> It read: *"For a **roster** game it is the engine, and an identical pair on everyone is the engine
-> missing. Pick each character's gating meter from what the relationship is."*
->
-> The table below is kept — it is good at what it is actually for — but its job has changed. It
-> picks **the game's one word**, not a different word per person. The old reading produced
-> `off_season`: four characters, four vocabularies (`hold` · `ease+want` · `bond` · `trust+want`),
-> nothing shared. And it made W6 contradict itself two paragraphs later, where it correctly says to
-> reserve the rich model for the one or two arcs that carry the game. `vesper` is the shape that was
-> always right — `relation` on eleven, the rich triple on four.
->
-> It also made this file criticise `the_season` for the wrong thing: Wade and Prine **sharing**
-> `{ease, want}` is the field's own practice. `the_season`'s real defect is the rule below that
-> stands — **Rae carries no meter at all.**
-
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
 Measured, all five v2 games: **one distinct meter shape across the whole cast, every time** — which,
 read against the numbers above, is the right instinct arrived at by accident.
@@ -859,12 +843,9 @@ Four parts, and they apply to every game this skill authors:
    relationship, tags, location and the next step; none of those reads a per-person score. Until
    that exists, the words live in the reaction lines and on that person's quest card.
 
-⚠️ **This paragraph named the wrong equivalent until 2026-08-28, and the reason is worth keeping.**
-It pointed at `worn_corruption` and `worn_beauty` — and neither can do what `$exposed` does, because
-both are backed by `getWornStatMax`, **which skips a slot with nothing in it** and starts at zero
-(`v2.py:1578-1579`). A naked player and one in a plain bra and cotton briefs returned the same
-number. The shape this file told authors to copy was not buildable with the parts it named, which is
-why five years of our wardrobes are read for display and almost never for consequence.
+⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
+`getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
+reads the same as one in plain underwear.
 
 **`worn_exposure` is the real equivalent, and it exists as of 2026-08-28.** A derived 0/1/2 — 0
 covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1608`), the one

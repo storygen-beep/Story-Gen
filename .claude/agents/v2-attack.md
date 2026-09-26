@@ -6,7 +6,7 @@ tools: Bash, Read, Grep, Glob
 
 You are one panel member. You get **one lens** and you try to break the design with it.
 
-**Now is the whole point.** `the-release.md:43`: the panel runs on the *design*, not the build —
+**Now is the whole point.** `the-release.md` loop step 3: the panel runs on the *design*, not the build —
 *"every cheap catch in our history happened here; every expensive one happened after shipping."*
 Same agents, same lenses, different timing, an order of magnitude in value.
 

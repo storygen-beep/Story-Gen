@@ -38,16 +38,21 @@ belong here; only decisions, debts, and promises do.
                                             //   own name tops her own vocabulary report.
 
   "want": {
+    // THE FANTASY AND THE PROMISE — the-want.md §0. All optional; no gate reads them yet.
+    "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
+    "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
+    "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
+    "promise":       { "goal": "…", "date": "…", "mystery": "…", "payout": "…", "rival": "npc_id" },
+    "companion":     "npc_id",   // who leads her, or whom she leads
+    "face":          "…",        // one performer or one look, kept across the game
+
     // WHO THE PLAYER IS — declared BEFORE she is described. the-want.md §1.
-    // Added 2026-08-27. Its absence is why eight v2 games shipped one protagonist:
-    // templates/want.md wrote she/her 21 times and he/him zero, so the grammar
-    // answered before the author arrived. The default `female` is EVIDENCED
-    // (49 comments for a female lead, 11 against) — what was missing was the question.
+    // The default `female` is EVIDENCED (49 comments for a female lead, 11 against).
     "player": {
       "who":        "female" | "male" | "picked",   // field: 20 male · 6 picked · 4 female (SUPPLY, not a verdict)
       "definition": "written" | "blank",            // field: 19 blank · 10 written; blank holds 80.4% of engagement
-      // The start choice. `freedom` is the field's largest bucket (25.9%) and
-      // premise is 0 of 30 — the choosing is the product. A MEMORY, NOT A SLIDER:
+      // The start choice. `freedom` is the male-heavy top 30's largest bucket (25.9%);
+      // for a female lead the premise matters too (the-want.md §0). A MEMORY, NOT A SLIDER:
       // ask what the scene already asks, set a flag, never show a stat screen.
       // Omit the key entirely for a game with no start choice; gate
       // `the start choice is read` then reports n/a, which is NOT a pass.
@@ -55,10 +60,8 @@ belong here; only decisions, debts, and promises do.
     },
 
     "who_she_is":      "…",
-    // WHAT HOLDS HER HERE. The key kept its name; its meaning widened 2026-09-04.
-    // It used to read "what she owes, who collects, when", and that framing is why
-    // eight v2 games shipped one premise: a bill is 4 of 23 in the female-lead field
-    // and the FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
+    // WHAT HOLDS HER HERE. A bill is 4 of 23 in the female-lead field and only the
+    // FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
     "obligation":      "…",   // the hold, in her nouns, with a face and a date
     "hold_kind":       "ambition" | "bill" | "order" | "body" | "subsistence"
                      | "appetite" | "job" | "erosion" | "displacement",
@@ -198,6 +201,12 @@ belong here; only decisions, debts, and promises do.
       "version": "0.3",
       "subject": "…",                        // ONE named subject
       "want_line": "…",                      // which line of the Want this served
+      "moment_kind": "firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence",
+      "her_moment": { "fantasy": "…", "temptation": "…", "answers": ["…"], "voice": { "low": "…",
+                      "high": "…" }, "noticed": "…", "sticks": "…", "remember": "…", "door": "…" },
+                                             // the eight lines as shipped (the-release.md,
+                                             //   "Her moment"). Both optional; the pitch pack
+                                             //   counts moment_kind to pick the least used.
       "added":   { "units": 0, "words": 0, "locations": 0, "characters": 0 },
       "opened":  ["the thing now visible and locked"],
       "gates":   { "passed": 10, "of": 10 },

@@ -354,16 +354,7 @@ carries the reason, and argue it when you do.
 Verified live: at `nerve` 60 against a 75 gate, the row rendered as
 `SPAN.locked-choice :: Not yet — he still thinks he's getting away with it.`
 
-### ⚠️ This section said the opposite until 2026-08-24, and that is why our games score the way they do
-
-It read:
-
-> *"omit `locked_text` and the greyed row shows the action ("Stop pretending it's a secret") — a
-> want the player can name, which is what sells the next release […] **Prefer the want unless the
-> gate is genuinely obscure.**"*
-
-The mechanic in that paragraph was right and is kept above. The recommendation did not survive
-contact with the field. Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
+Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
 
 - A refusal is **either invisible or it speaks**. Of 16,167 refusing conditionals, **71% render
   nothing at all** and **28% put a short line where the action was** — median **9 words**, and
@@ -372,21 +363,13 @@ contact with the field. Measured across 26 shipped sandboxes (`findings_B_refusa
   settings and pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits`
   "Previous"/"Next" greyed at the ends — rather than gated content.
 
-So the shape this section used to recommend is the one shape the field does not ship. Our games
-followed the instruction faithfully: **13 of 176 shown-locked choices across every merged game carry
-a reason — 7%.** That is doctrine, not author sloppiness, which is why the advice is reversed here
-rather than the games being blamed.
-
-It also put this file in direct conflict with `the-surfaces.md` **R5b.2** — *"State the bar with
-`locked_text_threshold`; never fail silently"* — written the same day. The two now agree.
-
 Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It accepts `locked_text`,
 `locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:13210-13217`) or
 `rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
 ### ⚠️ That is what a shown row must SAY. It is not how many rows to show.
 
-The reversal above answered half a question and the first game authored after it went to **22 of 22
+The rule above answered half a question and the first game authored after it went to **22 of 22
 shown-locked choices carrying a reason**, against 13 of 171 across every game before. The
 instruction was followed exactly; nothing told it when to stop.
 
@@ -816,7 +799,7 @@ would be noise.
 **It is the wrong rule for a v0.1, and following it there produces the worse outcome.** In a first
 release nothing is closed — every track stops at a build boundary — so the cap forces every arc but
 one into `"Arc complete"`, **a stronger and falser claim than the string it was rationing**.
-`the-release.md:107-110` already rules the other way for that case:
+`the-release.md`, "Every release ends on an opening", already rules the other way for that case:
 
 > state the current ceiling honestly. The reference game prints a plain marker at the top of **each
 > track** so the player knows where the wall is. […] An honest wall is a promise; a silent one is a
@@ -1231,13 +1214,6 @@ So on a rung whose `time_progression_minutes` crosses midnight:
 | **the choice** | set on the old day, then cleared by the tick → the new day is open. **Correct.** |
 | **the rung's exit** | tick clears first, flag is written second → **the new day starts already capped.** |
 
-> ⚠️ **This paragraph said the opposite until 2026-08-22.** It warned that a midnight-crossing rung
-> gets its cap *cleared* and becomes re-clickable. The emit order makes that impossible, and the
-> real failure is the reverse: the rung is **locked out of the following day**, silently. Measured
-> in `off_season`, whose sleep rung ran 21:00→06:00 and set `slept_today` on the exit — after night
-> one, Sleep was never offered before midnight again. The build, the flag-chain validator and the
-> scoreboard were all green throughout.
-
 ⚠️ **A LOCATED canvas does not need the flag at all.** `max_triggers_per_day` is read off the
 trigger (`v2.py:11017`) and `markCanvasTriggered` stamps its day key **before** `advanceTime` runs
 (`v2.py:4290`), so it has none of this problem. The flag pattern exists for *triggerless* rungs.
@@ -1382,13 +1358,6 @@ type and hard-fails the build on the other two. Give the top band a `max` at or 
 ceiling, or `cap` the terminal add (§29). `commuter` runs `max = 100` against declared ceilings of
 88 / 86 / 80, which is the safe direction.
 
-⚠️ **This section taught the bug it now warns about.** Its only worked example used to be
-`trait_status_text` with an open top band — correct for that type — and the sentence under it said
-*"leave the top band's `max` off"* with no type attached, two lines after the sentence that drew the
-distinction. A board copied the shape onto `trait_words` and the build refused to compile.
-`SKILL.md`'s own operating rule is the diagnosis: **an example outranks every rule beside it.**
-`defects/002-sidebar-band-example-wrong-type.md`.
-
 ### 30.1 A hygiene system is a deliberate non-feature — do not build one
 
 This engine has no hygiene, hunger or thirst primitive, and that is a decision rather than an
@@ -1483,15 +1452,8 @@ them matters, because they are exactly the three trigger shapes a check must exc
 `trigger_mode = "random"`, `substitution_only = true`, and `is_repeatable = true`. Everything else
 that names a character is on the auto-fire path and is not gated by this field at all.
 
-⚠️ **`template_import.py` said the opposite, and that is what actually caused the failure.** The
-comment on `TemplateTrigger.requires_npc` described it as something that *"lets authors drop
-per-canvas location+time gates in favor of consulting the NPC's single source of truth"* — an
-unscoped claim, true only for the two functions above. `the_season` was authored twelve hours after
-`the-first-hour.md` F5 and its worked template landed, with the correct rule available, and shipped
-five meetings with no window; its introductions played to empty rooms, one of them at 06:10 on a
-Saturday saying *"it's Monday"*. **Doctrine loses to the schema comment, because the schema is what
-is open while you type.** Corrected 2026-08-23, and gated as `a meeting fires where they are`
-(G38) so the next one is caught by the build rather than by a player.
+⚠️ **`requires_npc` does not replace a meeting's place and time** — it is true only for the two
+functions above. Gated as `a meeting fires where they are` (G38).
 
 `references/the-first-hour.md` F5.
 
@@ -2131,12 +2093,9 @@ not part of this comparison.) Recorded so the next person adding an operator rea
 the code, and so a game that reaches for `contains` is recognised as the first real demand rather
 than as a mystery.
 
-⚠️ **The count was THREE here until 2026-08-29, and the fourth was found by counting rather than by
-a bug.** `setup.describeUnmetConditions` carries its own inline operator chain and its own phrase
-table — it neither calls `compare()` nor `checkSingleCondition` — and it happens to handle `ne`
-already, so nothing was broken. **The in-code comment beside `checkSingleCondition`'s `ne` line
-(`v2.py:7686`) still calls itself "THE SECOND EVALUATOR" and names one other.** The code is correct;
-the count in the comment is not. Read this table, not that comment, before adding an operator.
+⚠️ **`setup.describeUnmetConditions` is the fourth evaluator**, with its own operator chain and
+phrase table. The comment beside `checkSingleCondition`'s `ne` line (`v2.py:7686`) still says "THE
+SECOND EVALUATOR": read this table, not that comment, before adding an operator.
 
 ### What was actually broken, and what was not
 

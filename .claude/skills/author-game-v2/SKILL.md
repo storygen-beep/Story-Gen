@@ -50,9 +50,7 @@ refusals that render nothing      71%  of 16,167                          the-su
 conditionals around an action     35%  select a variant · 23% refuse      the-surfaces.md R5
 ```
 
-⚠️ **Colours-more-than-it-locks is not decides-nothing.** The reputation row was `2% of 644 read
-sites` until 2026-08-27; that figure was three games with 95% of it in one, and it taught
-`mrs_vance` to build a meter written 25 times and read 4. Re-measured over 13 games, a **median
+⚠️ **Colours-more-than-it-locks is not decides-nothing.** Measured over 13 games, a **median
 41% of reputation reads change something mechanical** — by delivering a person, modifying a roll
 or scaling a rate, none of which prints a refusal. Read `the-meters.md` W5b before using this row.
 
@@ -141,9 +139,6 @@ his** (Dr. Angela has the clinic; Dean Mea has the school; Romi has the shop and
 by **a place and an hour where he is the only one there**. Write five good voices and then schedule
 all five into the same room every evening and the player still cannot tell them apart — which is
 exactly what `the_season` did (`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
-
-⚠️ **This used to say "declare the objects in the room and hang every choice on one" and it was
-wrong** — deleted 2026-08-18 along with gate 22. See the operating rule about tired authors below.
 
 **A canvas advances in one of two ways, and the content kind picks which** (`the-surfaces.md` R3b):
 a **cascade** appends below what is on screen, so it suits a one-time scene whose text should build;
@@ -428,7 +423,9 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   build and every gate were green the whole way down. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own
   first four reds were the harness, not the game. `references/agents.md`, The Player.
-- **`scripts/pitch_pack.py <slug>` is the world a Pitcher may pitch into.** `the-release.md:39`
+- **`scripts/pitch_pack.py <slug> --kind <moment_kind>` is the world a Pitcher may pitch into.**
+  It opens with the promise, the moment kinds already shipped, that kind's slice of
+  `references/moment-library.md` and the clips on disk. The loop (`the-release.md` step 2)
   runs three Pitchers with **no shared context** — that is the design, and its unpaid cost is that
   a Pitcher with no context does not know what the game already contains and will name a location
   that exists or a character who does not. The pack is that context, generated instead of
