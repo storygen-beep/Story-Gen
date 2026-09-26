@@ -438,6 +438,172 @@ def apply_effect(page, trait, op, value,
         }""", [target, npc_id, trait, op, value, clamp, cap])
 
 
+def apply_flag(page, flag, op="set", target="player", npc_id=None):
+    """Set a flag through the engine, so `flags_meta.set_day` gets written.
+
+    POSITIONAL — `applyFlagEffect(targetType, npcId, flag, op)` (v2.py:6069).
+    Copied 2026-09-26 from `games/the_balance/process/walks.py`, which found the trap:
+    ⚠️ never poke `State.variables.flags.x = true` instead. Only the engine's own path
+    writes `flags_meta`, and `days_since_flag` fails CLOSED when `set_day` is missing
+    (v2.py:3979), so a hand-set flag makes every day-counting condition read false.
+    """
+    return page.evaluate(
+        """(a) => { window.applyFlagEffect(a[0], a[1], a[2], a[3]);
+                    return SugarCube.State.variables.flags[a[2]]; }""",
+        [target, npc_id, flag, op])
+
+
+def offered(page, location_slug, canvas_id):
+    """Would this room offer this canvas, standing here right now?
+
+    ⚠️ NOT `play()`. play() jumps straight to the passage and proves only that the
+    passage exists — it walks past the trigger schedule, the conditions and the
+    `requires_npc` resolution. This asks the engine the same question the room asks
+    when it draws its card list (`setup.isCanvasSelectable`). From `walks.py`.
+    """
+    return bool(page.evaluate(
+        """(a) => {
+            var L = SugarCube.setup.help_data.locationCanvases[a[0]] || [];
+            for (var i = 0; i < L.length; i++) {
+                if (L[i].id !== a[1]) continue;
+                return !!SugarCube.setup.isCanvasSelectable(L[i]);
+            }
+            return false;
+        }""", [location_slug, canvas_id]))
+
+
+def dice_off(page):
+    """Pin Math.random high, so no roll in the engine ever lands (no substitution, no
+    random ambient). Every chance in v2 is `Math.random() < chance` and the build seeds
+    no PRNG. ⚠️ Always pair with dice_on, in a `finally`. From `walks.py`."""
+    page.evaluate("() => { if (!window.__realRandom) window.__realRandom = Math.random;"
+                  " Math.random = () => 0.999999; }")
+
+
+def dice_on(page):
+    page.evaluate("() => { if (window.__realRandom) { Math.random = window.__realRandom;"
+                  " delete window.__realRandom; } }")
+
+
+def _save_vars(page):
+    return page.evaluate("() => JSON.stringify(SugarCube.State.variables)")
+
+
+def _load_vars(page, blob):
+    page.evaluate("""(s) => {
+        const S = SugarCube.State.variables, v = JSON.parse(s);
+        for (const k of Object.keys(S)) delete S[k];
+        Object.assign(S, v);
+    }""", blob)
+
+
+def _click_nth(page, i, settle=200):
+    ok = page.evaluate(
+        """(a) => { const els = document.querySelectorAll(a[0]);
+                    if (a[1] >= els.length) return false; els[a[1]].click(); return true; }""",
+        [LINKS, i])
+    page.wait_for_timeout(settle)
+    return ok
+
+
+def _gate_value(op, value):
+    """A value that satisfies `op value` — the smallest one, so nothing is overshot."""
+    return {"gt": value + 1, "lt": value - 1}.get(op, value)
+
+
+def reach_step(page, game, ladder, upto, budget=40, settle=200):
+    """Play a declared ladder's steps 1..`upto` IN ORDER, and report each one.
+
+    What this does, plainly (LO, 2026-09-26, PRD WS4):
+      · per step it SETS the clock to the start of the step's declared window and puts
+        the player at the declared place — travel and waiting are not played;
+      · it APPLIES the step's declared gate items through the engine (flags via
+        applyFlagEffect, meters via applyTraitEffect) — `gates.py` proves separately,
+        and statically, that each of those can be earned before the step;
+      · it NEVER sets the step counter. The counter is carried forward from the step
+        before, so step 3 is reached only if steps 1 and 2 really moved it.
+    Then it asks the engine whether the room offers the canvas (`offered`), enters it,
+    and searches its choice paths — restoring the step-start state between tries — until
+    the counter reads N. `budget` is clicks per step. Dice are pinned for the whole run.
+
+    Asserts on state only. Returns [{n, canvas, offered, reached, clicks, path, why}].
+    """
+    canvases = {c.get("id"): c for c in game.get("canvases") or []}
+    counter = ladder["counter"]
+    steps = sorted(ladder.get("steps") or [], key=lambda s: s["n"])
+    out = []
+    dice_off(page)
+    try:
+        for st in steps:
+            if st["n"] > upto:
+                break
+            n, cid = st["n"], st["canvas"]
+            res = dict(n=n, canvas=cid, offered=False, reached=False, clicks=0, path=[], why="")
+            out.append(res)
+            have = traits(page).get(counter, 0)
+            if have != n - 1:
+                res["why"] = f"{counter} is {have} before step {n}, not {n-1}"
+                break
+            when = st.get("when") or {}
+            day = when.get("days", [None])[0]
+            if isinstance(day, int):
+                day = DAYS[day]
+            elif isinstance(day, str):
+                day = next((d for d in DAYS if d.lower().startswith(day[:3].lower())), day)
+            hh, _, mm = str(when.get("from", "00:00")).partition(":")
+            set_time(page, day, int(hh), int(mm or 0))
+            stand_at(page, st["where"])
+            for it in st.get("gate") or []:
+                if it.get("flag"):
+                    op = it.get("op", "is_true")
+                    apply_flag(page, it["flag"], "unset" if op in ("is_false", "is_not_true") else "set")
+                elif it.get("trait"):
+                    npc = it.get("npc")
+                    apply_effect(page, it["trait"], "set", _gate_value(it.get("op"), it["value"]),
+                                 target="npc" if npc else "player", npc_id=npc, clamp=False)
+            if not offered(page, st["where"], cid):
+                res["why"] = (f"the room {st['where']} does not offer {cid} on {day} at "
+                              f"{when.get('from')} with the declared gate applied")
+                break
+            res["offered"] = True
+            entry = ((canvases.get(cid) or {}).get("nodes") or [{}])[0].get("id", "base")
+            start_blob = _save_vars(page)
+            prefix_in = f"Canvas_{cid}_Node_"
+            if play(page, cid, entry, settle=settle) is True and traits(page).get(counter, 0) == n:
+                res.update(reached=True)          # the step's entry screen itself moved it
+                continue
+            stack, clicks = [[]], 0
+            while stack and clicks < budget and not res["reached"]:
+                path = stack.pop()
+                _load_vars(page, start_blob)
+                if play(page, cid, entry, settle=settle) is not True:
+                    res["why"] = f"could not enter {cid} at node {entry}"
+                    break
+                alive = True
+                for i in path:
+                    _click_nth(page, i, settle)
+                    clicks += 1
+                    if traits(page).get(counter, 0) == n:
+                        res.update(reached=True, clicks=clicks, path=path)
+                        break
+                    if not str(passage(page)).startswith(prefix_in):
+                        alive = False
+                        break
+                if res["reached"] or not alive:
+                    continue
+                labels = links(page)
+                for i in reversed(range(len(labels))):
+                    stack.append(path + [i])
+            if not res["reached"]:
+                res["clicks"] = clicks
+                res["why"] = res["why"] or (f"no choice path in {cid} set {counter} to {n} "
+                                            f"within {budget} clicks")
+                break
+    finally:
+        dice_on(page)
+    return out
+
+
 def sample_ambients(page, location_slug, rolls=400):
     """Roll the random-event table `rolls` times and return {canvas_id: hits}.
 

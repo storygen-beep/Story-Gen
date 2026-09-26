@@ -107,7 +107,7 @@ builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the 
 ## P3 · A message is fifteen words — the phone is its own register
 
 This is the highest-confidence measurement in the study and the one most likely to be got wrong,
-because every other surface in this skill says 35–40.
+because every other surface in this skill is longer (the model beats in `register.md`).
 
 Measured on the three corpus games whose markup marks an individual bubble, in two languages:
 

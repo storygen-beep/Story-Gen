@@ -332,6 +332,16 @@ signature of doctrine living in the wrong place:
    the field, the sidebar footer it renders and its four `file:line`s are `engine.md` §38.
 5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
 6. **`v2_state.json` promises reconciled** — paid or cut, per *Named but never paid* above.
+7. **`gates.py --ship <slug>` exits 0** — run by `scripts/release_upload.py` before it packages
+   anything, and by `scripts/hooks/pre-commit` when this commit stages the build or the portal
+   entry without `dev: true`. The release page (`release_page` in `v2_state.json`) is signed by LO
+   first; the check reads it. Every person it names needs a declared ladder
+   (`board.characters[].ladder`, `state.md`): `--ship` checks each step against its canvas, checks
+   each unlock can be earned, then plays the build with `playtest.reach_step` — which sets the
+   clock and the place for each step and applies its declared gate, but never the step counter,
+   so step 3 is reached only if steps 1 and 2 really moved it.
+8. **`releases[]` gets `repeatables` and `ladder_steps`** — the lint *repeatables without a step*
+   compares the next release against them.
 
 **`dev: true` and `version` are mutually exclusive.** One says not published; the other says this is
 what is live. The schema never stated the relationship, which is why nothing could adjudicate
@@ -394,8 +404,9 @@ v0.1 builds the Board instead of adding to it.
   months after launch. This bullet used to carry "6–8" with exactly that caveat attached, and all
   three v2 games shipped 8. A caveat in prose does not survive next to a number, so the number is
   gone. Study 6.)*
-- **Every gate green on the day it ships.** v0.1 is not a slice with debt attached; the debt
-  model starts *after* it.
+- **`gates.py --ship <slug>` exits 0 on the day it ships** *(since 2026-09-26, PRD WS6; it replaced
+  "every gate green")*. The BLOCK list is green; the REPORT list is printed and LO judges it when he
+  plays. A red REPORT row is not a reason to hold the release, and not a reason to ignore it either.
 - **The explicit floor is met from minute one**, including the traversal layer.
 - **First explicit beat early.** The strongest-retained game in the comparison set is explicit
   on night one, two clicks from free roam.

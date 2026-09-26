@@ -669,8 +669,49 @@ def build(game):
                         reads.add(it["trait_key"])
                         traits.append((it["trait_key"], it.get("operator"), it.get("value")))
 
+        # Reads INSIDE the story text: a `group` / `block_pool` gated on a flag. This is
+        # how `register.md`'s truth rule gates a line about the past, and how a daily card
+        # remembers a one-time step. Kept apart from `reads` on purpose: the economy gates
+        # read `reads` as "this surface is gated on it", and a colouring read is not a gate.
+        # G7 (milestones) is the one check that asks "does anything read what this set?",
+        # and for that question a callback line is a real read. Added 2026-09-25, after the
+        # `mum_sat_down` rewrite's correct first-time step failed G7 for a read it could not
+        # see (`STYLE_REWRITE_MUM_SAT_DOWN.md`).
+        text_reads = set()
+
+        def _block_reads(blocks):
+            for b in blocks or []:
+                if not isinstance(b, dict):
+                    continue
+                props = b.get("props") or {}
+                for holder in (b, props):
+                    for it in _conditions_of(holder):
+                        for k in ("flag_key", "trait_key"):
+                            if it.get(k):
+                                text_reads.add(it[k])
+                _block_reads(b.get("blocks") or props.get("blocks"))
+                for sub in props.get("beats") or []:
+                    _block_reads(sub.get("blocks"))
+
+        for n in c.get("nodes") or []:
+            _block_reads(n.get("blocks"))
+
+        # Keys this canvas reads ONLY as "not yet" (`is_false`). G7 asks whether anything
+        # reads what a milestone set, and a read that shows content only while the flag
+        # is OFF is not content the milestone opened — it is content the milestone shuts.
+        # LO, 2026-09-26 (PRD WS4). Every other consumer keeps the plain `reads`.
+        pos_keys, neg_keys = set(), set()
+        for it in _pr_collect(c, lambda d: (d.get("flag_key"), d.get("operator"))
+                              if isinstance(d.get("flag_key"), str) else None, set()):
+            (neg_keys if it[1] in ("is_false", "is_not_true") else pos_keys).add(it[0])
+        for it in _pr_collect(c, lambda d: d.get("trait_key")
+                              if isinstance(d.get("trait_key"), str) else None, set()):
+            pos_keys.add(it)
+        neg_only = neg_keys - pos_keys
+
         model.append(dict(id=cid, loc=loc, rep=rep, beats=beats,
-                          sets=sets, reads=reads, traits=traits,
+                          sets=sets, reads=reads, traits=traits, text_reads=text_reads,
+                          neg_only_reads=neg_only,
                           random=trig.get("trigger_mode") == "random",
                           npc=trig.get("npc"), requires_npc=trig.get("requires_npc"),
                           # The economy gates need to know whether a surface is
@@ -1222,7 +1263,7 @@ def lint_faceless_surfaces(game):
     rows = []
     for c in (game.get("canvases") or []):
         t = c.get("trigger") or {}
-        if not t.get("is_repeatable") or _is_dev(c):
+        if not _rep_of(t) or _is_dev(c):
             continue
         if t.get("npc"):
             continue
@@ -1428,7 +1469,7 @@ def _narration_by_canvas(game):
         for nd in c.get("nodes") or []:
             walk(nd.get("blocks"))
         if buf:
-            rep = bool((c.get("trigger") or {}).get("is_repeatable"))
+            rep = _rep_of(c.get("trigger"))
             out.append((c.get("id", "—"), rep, buf))
     return out
 
@@ -1607,7 +1648,7 @@ def lint_one_time_speaks(game):
     npc_ids = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
     scope, mute = 0, []
     for c in game.get("canvases") or []:
-        if (c.get("trigger") or {}).get("is_repeatable"):
+        if _rep_of(c.get("trigger")):
             continue
         who = _canvas_npcs(c, npc_ids)
         if not who:
@@ -1665,13 +1706,14 @@ def _declared_stat_names(game):
 
 
 def lint_printed_stat(game):
-    """`+Ray Respect` on a button, or in the prose after it, for a stat nobody declared.
+    """`+Ray Respect` on a button, or in the prose after it: a score printed on screen.
 
     `the-meters.md` "What the player is shown": show the reaction, not the number, and
-    `register.md` truth rule 4 — a consequence printed on a button is a real flag or
-    stat. The first loud rewrite this came from printed a trust stat for the
-    protagonist's mother, and no such stat existed. Matches by the LAST words of the printed name, so "+Ray Respect" is real
-    if `respect` or `ray respect` is declared. A list, never a score.
+    `register.md` truth rule 4, a consequence printed on a button is a real flag. The first
+    loud rewrite this came from printed a trust stat for the protagonist's mother, and no
+    such stat existed. Since 2026-09-25 a declared stat is listed too: scores stay hidden.
+    Matches by the LAST words of the printed name, so "+Ray Respect" counts as declared if
+    `respect` or `ray respect` is. A list, never a score.
     """
     declared = _declared_stat_names(game)
     hits = []
@@ -1683,7 +1725,13 @@ def lint_printed_stat(game):
             if not words:
                 continue
             tails = {" ".join(words[i:]) for i in range(len(words))}
-            if not (tails & declared or {t.replace(" ", "_") for t in tails} & declared):
+            # Since LO's decision of 2026-09-25 (`the-meters.md` "What the player is shown"),
+            # a score is never printed: a person's own score is hidden, and the player sees the
+            # reaction. So every printed stat label is listed; the note only says which kind.
+            if tails & declared or {t.replace(" ", "_") for t in tails} & declared:
+                hits.append(f"{cid}: \"{m.group(0).strip()}\" prints a real score. Keep the "
+                            f"score hidden and show the reaction")
+            else:
                 hits.append(f"{cid}: \"{m.group(0).strip()}\" names no declared trait or flag")
 
     for c in game.get("canvases") or []:
@@ -1693,7 +1741,7 @@ def lint_printed_stat(game):
                     check(c.get("id"), str(b["content"]))
             for ch in _node_choices(n):
                 check(c.get("id"), str(ch.get("text") or ""))
-    return f"{len(hits)} printed stat change(s) with nothing behind them", hits
+    return f"{len(hits)} printed stat label(s) on screen", hits
 
 
 def lint_past_claim(game):
@@ -1727,7 +1775,7 @@ def lint_past_claim(game):
                 walk(cid, beat.get("blocks"), here)
 
     for c in game.get("canvases") or []:
-        if not (c.get("trigger") or {}).get("is_repeatable"):
+        if not _rep_of(c.get("trigger")):
             continue
         for n in c.get("nodes") or []:
             walk(c.get("id"), n.get("blocks"), False)
@@ -1738,7 +1786,12 @@ def lint_past_claim(game):
 
 
 def _opening_flags(game):
-    """Every flag the starting canvas sets, on any branch — the state at the handover."""
+    """Every flag the opening sets, on any branch — the state at the handover.
+
+    Reads the starting canvas and, since 2026-09-25, any capstone the funnel walks into
+    (F2). Reading the starting canvas alone made `lint_opening_card` report "no quest
+    card is visible" on a boot → capstone opening whose capstone set the flag.
+    """
     start = (game.get("project") or {}).get("starting_canvas")
     op = next((c for c in game.get("canvases") or [] if c.get("id") == start), None)
     if not op:
@@ -1747,7 +1800,8 @@ def _opening_flags(game):
     for path, d in _walk_paths(op):
         if "flagEffects" in path and isinstance(d.get("flag"), str) and d.get("op", "set") == "set":
             out.add(d["flag"])
-    return out
+    _h, walked, _r = _funnel_walk(game)
+    return out | (walked or set())
 
 
 def _card_visible(card, flags, start_traits):
@@ -1780,7 +1834,7 @@ def lint_opening_card(game):
 
     `the-first-hour.md` F1b step 5: the first objective is a card with `goals`, so the
     guidance page prints what is done and what is next — 21 of 26 top games give "what
-    next" text and it is the players' number-one comment topic (SCENE_CONTENT_REVIEW M1).
+    next" text and it is the players' number-one comment topic (8.4% of all comments, 30 of 30 games).
     Visible = no `when`, or a `when` satisfied by the flags the starting canvas sets and
     the player's starting traits.
     """
@@ -1950,7 +2004,7 @@ def _room_list_labels(model, game):
     out = []
     for c in model:
         t = (c.get("raw") or {}).get("trigger") or {}
-        if not t.get("location") or not t.get("is_repeatable"):
+        if not t.get("location") or not _rep_of(t):
             continue
         if t.get("trigger_mode") == "random" or t.get("substitution_only"):
             continue
@@ -3539,7 +3593,7 @@ def _walkin_join(model, game):
     for c in model:
         t = (c.get("raw") or {}).get("trigger") or {}
         loc = t.get("location")
-        if not loc or not t.get("is_repeatable"):
+        if not loc or not _rep_of(t):
             continue
         if (t.get("trigger_mode") == "random" or t.get("npc")
                 or t.get("requires_npc") or t.get("substitution_only")):
@@ -3701,6 +3755,726 @@ def _farmable(canvas):
     if _is_dev(canvas):
         return False
     return bool(trig.get("is_repeatable", IS_REPEATABLE_DEFAULT)) if trig else IS_REPEATABLE_DEFAULT
+
+
+def _rep_of(trigger):
+    """Is a canvas with this trigger repeatable, read the way the ENGINE reads it?
+
+    ⚠️ ONE READING FOR THE WHOLE FILE (2026-09-26, PRD WS5). An absent `is_repeatable`
+    means REPEATABLE (`IS_REPEATABLE_DEFAULT`, and `build()` already said so). Eleven
+    helpers used to read it as `t.get("is_repeatable")`, which turns an absent key into
+    one-time, so a lint and a gate could disagree about the same canvas. Every one of
+    them now calls this.
+    """
+    return bool((trigger or {}).get("is_repeatable", IS_REPEATABLE_DEFAULT))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Presence: is anything in the room when the schedule puts somebody there?
+#
+# Ported 2026-09-26 (PRD WS5) from `games/the_balance/process/presence.py`, which was
+# written because `standing surface` read 10/10 PASS on a game where a character's face
+# was on a bedroom door and the room behind it was empty. The logic is that file's; the
+# only change is where the exemptions live. The game's hand-kept table becomes a
+# DECLARED ledger field, `board.characters[].occupancy_rows`, each row with its reason,
+# so no game's data sits in this script.
+# ─────────────────────────────────────────────────────────────────────────────
+_PR_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def _pr_mins(hhmm):
+    h, _, m = str(hhmm).partition(":")
+    try:
+        return int(h or 0) * 60 + int(m or 0)
+    except ValueError:
+        return 0
+
+
+def _pr_end_mins(hhmm):
+    """An END time of "00:00" is midnight, 1440, not 0 (presence.py `_end_mins`)."""
+    return 1440 if str(hhmm).strip() in ("00:00", "24:00") else _pr_mins(hhmm)
+
+
+def _pr_live_days(row, canvas):
+    """Which of the row's weekdays this canvas can appear on (day-precise on purpose:
+    one Friday scene must not score a seven-evening row as backed)."""
+    days = set(row["weekdays"])
+    if not canvas["schedules"]:
+        return days
+
+    def spans(start, end):
+        # A window that runs past midnight (23:00-08:00) is two spans on the clock. The
+        # ported file never met one; vesper_two's overnight rows are written that way.
+        a, b = _pr_mins(start), _pr_end_mins(end)
+        return [(a, b)] if a < b else [(a, 1440), (0, b)]
+
+    row_spans = spans(row["start_time"], row["end_time"])
+    live = set()
+    for s in canvas["schedules"]:
+        c_spans = spans(s.get("start_time", "00:00"), s.get("end_time", "23:59"))
+        if any(ca < rb and ra < cb for ca, cb in c_spans for ra, rb in row_spans):
+            live |= days & set(s.get("weekdays") or range(7))
+    return live
+
+
+def _pr_collect(node, test, found):
+    if isinstance(node, dict):
+        hit = test(node)
+        if hit:
+            found.add(hit)
+        for v in node.values():
+            _pr_collect(v, test, found)
+    elif isinstance(node, list):
+        for v in node:
+            _pr_collect(v, test, found)
+    return found
+
+
+def _pr_canvas_facts(canvas):
+    t = canvas.get("trigger") or {}
+    scheds = t.get("schedules") or ([t["schedule"]] if t.get("schedule") else [])
+    speakers = _pr_collect(canvas.get("nodes") or [],
+                           lambda d: (d.get("props") or {}).get("npcId"), set())
+    addressed = _pr_collect(canvas, lambda d: d.get("npc_id")
+                            if (d.get("type") == "npc_at_location"
+                                and d.get("operator") == "is_present") else None, set())
+    return {
+        "id": canvas.get("id"),
+        "location": t.get("location") or canvas.get("location"),
+        "npc": t.get("npc") or canvas.get("npc"),
+        "repeatable": _rep_of(t),
+        "random": (t.get("trigger_mode") or "manual") == "random",
+        "sub": bool(t.get("substitution_only")),
+        "active": t.get("is_active", True) is not False,
+        "max_per_day": t.get("max_triggers_per_day"),
+        "gated": bool(t.get("conditions")),
+        "dev": _is_dev(canvas),
+        "schedules": scheds,
+        "speakers": speakers,
+        "addressed": addressed,
+    }
+
+
+def _pr_twin_rows(scheds):
+    """{index of an ungated fallback row: what it falls back from} — structural, so it
+    cannot be gamed by naming (presence.py `twin_rows`)."""
+    out = {}
+    for i, s in enumerate(scheds):
+        if s.get("when"):
+            continue
+        window = (tuple(s.get("weekdays", [])), s.get("start_time"), s.get("end_time"))
+        for earlier in scheds[:i]:
+            if earlier.get("when") and (tuple(earlier.get("weekdays", [])),
+                                        earlier.get("start_time"),
+                                        earlier.get("end_time")) == window:
+                out[i] = f"{earlier.get('location')} {earlier.get('start_time')}-{earlier.get('end_time')}"
+                break
+    return out
+
+
+def _declared_occupancy(state):
+    """{(npc_id, location, start_time): reason} from board.characters[].occupancy_rows.
+
+    A row whose job is to put a body in a room (asleep, in the bath, blocking a door)
+    is backed by that job, not by a canvas. It has to be DECLARED with its reason; an
+    exemption the script worked out for itself would grow quietly.
+    """
+    out = {}
+    for ch in (((state or {}).get("board") or {}).get("characters") or []):
+        for r in (ch.get("occupancy_rows") or []):
+            if ch.get("id") and r.get("location") and r.get("start_time"):
+                out[(ch["id"], r["location"], r["start_time"])] = r.get("reason") or "(no reason given)"
+    return out
+
+
+def _schedule_rows_backed(game, state=None):
+    """Every [[npcs.schedules]] row, classified per weekday, plus the portrait canvases
+    that can never render. Returns a dict of lists: rows, dead, stranded, capped, ladder.
+
+    A row is backed when, on each of its weekdays, standing in that room at those hours
+    gives the player something that knows the person is there:
+      portrait      a repeatable, non-random, non-substitution canvas bound to her here
+      covered       she speaks on such a canvas here, or it asks `npc_at_location is_present`
+      substitution  a substitution canvas bound to her here whose HOST is live in these hours
+      occupancy     declared in the ledger with its reason, or a structural fallback twin
+      DEAD          none of the above, on the weekdays named
+    """
+    raw = [c for c in (game.get("canvases") or [])]
+    facts = [_pr_canvas_facts(c) for c in raw]
+    facts = [f for f in facts if not f["dev"]]
+    by_loc = collections.defaultdict(list)
+    for f in facts:
+        by_loc[f["location"]].append(f)
+    hosts_of = collections.defaultdict(list)
+    for c in raw:
+        if _is_dev(c):
+            continue
+        host = _pr_canvas_facts(c)
+        for rule in ((c.get("trigger") or {}).get("substitutions") or []):
+            if rule.get("target_canvas_id"):
+                hosts_of[rule["target_canvas_id"]].append(host)
+    occupancy = _declared_occupancy(state)
+
+    out = dict(rows=[], dead=[], stranded=[], capped=[], ladder=[])
+    stands_at = {}
+    for npc in game.get("npcs") or []:
+        nid = npc.get("id")
+        scheds = npc.get("schedules") or []
+        stands_at[nid] = {s.get("location") for s in scheds}
+        twins = _pr_twin_rows(scheds)
+        for i, s in enumerate(scheds):
+            row = {"location": s.get("location"),
+                   "weekdays": s.get("weekdays", list(range(7))),
+                   "start_time": s.get("start_time", "00:00"),
+                   "end_time": s.get("end_time", "23:59")}
+            key = (nid, row["location"], row["start_time"])
+            if key in occupancy:
+                verdict, detail, dead_days = "occupancy", occupancy[key], set()
+            elif i in twins:
+                verdict, detail, dead_days = "occupancy", f"falls back from {twins[i]}", set()
+            else:
+                want, backed, why, subs, portrait = set(row["weekdays"]), set(), [], [], False
+                here = by_loc.get(row["location"], [])
+                for c in here:
+                    if not c["active"]:
+                        continue
+                    mine = c["npc"] == nid
+                    if mine and c["sub"]:
+                        subs.append(c)
+                        continue
+                    if not c["repeatable"] or c["random"]:
+                        continue
+                    speaks, asks = nid in c["speakers"], nid in c["addressed"]
+                    if not (mine or speaks or asks):
+                        continue
+                    days = _pr_live_days(row, c)
+                    if days:
+                        backed |= days
+                        why.append(c["id"] + ("" if mine else (" (speaks)" if speaks else " (asks for her)")))
+                        portrait = portrait or mine
+                if not want - backed:
+                    verdict, detail, dead_days = ("portrait" if portrait else "covered"), ", ".join(why), set()
+                elif subs and not backed:
+                    live = [f"{c['id']} on {h['id']}" for c in subs
+                            for h in hosts_of.get(c["id"], []) if _pr_live_days(row, h)]
+                    if live:
+                        verdict, detail, dead_days = "substitution", ", ".join(live[:3]), set()
+                    else:
+                        verdict, dead_days = "DEAD", want
+                        detail = (f"{', '.join(c['id'] for c in subs)} is bound here but only runs "
+                                  f"as a substitution on a host that is not live in these hours")
+                else:
+                    verdict, dead_days = "DEAD", want - backed
+                    detail = (f"{len(here)} canvas(es) at {row['location']}"
+                              + (f"; backed only by {', '.join(why)}" if why else ", none of them hers"))
+            entry = dict(npc=nid, row=row, verdict=verdict, detail=detail, dead_days=dead_days)
+            out["rows"].append(entry)
+            if verdict == "DEAD":
+                out["dead"].append(entry)
+
+    for f in facts:
+        if not (f["npc"] and f["repeatable"] and not f["sub"] and not f["random"]):
+            continue
+        if f["max_per_day"]:
+            (out["ladder"] if (f["gated"] or f["schedules"]) else out["capped"]).append(f)
+        if f["location"] not in stands_at.get(f["npc"], set()):
+            out["stranded"].append(f)
+    return out
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Money a week can actually bring in (PRD WS5, `the obligation is charged`).
+# ─────────────────────────────────────────────────────────────────────────────
+def _value_mean_max(val):
+    """(mean, max) of an effect value that may be a number or {type="random", min, max}."""
+    if isinstance(val, bool):
+        return 0.0, 0.0
+    if isinstance(val, (int, float)):
+        return float(val), float(val)
+    if isinstance(val, dict) and val.get("type") == "random":
+        lo, hi = val.get("min"), val.get("max", val.get("min"))
+        if isinstance(lo, (int, float)) and isinstance(hi, (int, float)):
+            return (lo + hi) / 2.0, float(hi)
+    return 0.0, 0.0
+
+
+def _week_income(game, currency):
+    """What one week can bring in, per source: (mean_total, max_total, rows, uncapped).
+
+    An income source is a positive `add` to the currency on a canvas exit. How often it
+    can fire in a week:
+      one-time canvas                  once
+      capped to once a day             7 × the cap. A cap is `max_triggers_per_day` on the
+                                       trigger, or a choice that day-caps itself
+                                       (`_holder_day_capped`), or a trigger condition on a
+                                       flag the canvas sets and `[engine.daily_tick]` clears.
+                                       A trigger schedule narrows it to its weekdays.
+      repeatable with no cap           UNCAPPED. Listed, and left out of the totals:
+                                       `no free uncapped income` is the gate that owns it.
+    MEAN is the verdict because a random pay of 8–25 is not 25 every day. MAX is printed
+    beside it. Neither is a promise the player can reach it — only that she cannot beat it.
+    """
+    cleared = _tick_cleared(game)
+    mean_total = max_total = 0.0
+    rows, uncapped = [], []
+    for c in game.get("canvases") or []:
+        if _is_dev(c):
+            continue
+        t = c.get("trigger") or {}
+        sets_on_canvas = {fe.get("flag") for n in c.get("nodes") or []
+                          for h in _exit_holders([n]) for fe in (h.get("flagEffects") or [])
+                          if fe.get("op", "set") == "set" and fe.get("flag")}
+        # A daily flag anywhere on the canvas caps it: the entry choice reads
+        # `streamed_today is_false`, the pay sits on a later node's exit, and that exit sets
+        # the flag the day tick clears (the_balance `stream`). Reading only the holder that
+        # carries the pay called that stream uncapped. Canvas-wide on purpose: it can only
+        # LOWER the ceiling, and a canvas mixing a capped branch with a free one is what
+        # `no free uncapped income` is for.
+        canvas_reads_false = {it.get("flag_key") for h in [t] + _exit_holders(c.get("nodes") or [])
+                              for it in _conditions_of(h)
+                              if it.get("operator") in ("is_false", "is_not_true")}
+        trig_daily = bool(canvas_reads_false & sets_on_canvas & cleared)
+        weekdays = set()
+        for s in (t.get("schedules") or ([t["schedule"]] if t.get("schedule") else [])):
+            weekdays |= set(s.get("weekdays") or range(7))
+        days_per_week = len(weekdays) if weekdays else 7
+        # One visit pays through ONE exit, so a capped or one-time canvas contributes its
+        # best-paying exit per visit, not the sum of its alternatives (four `act_bar_work`
+        # tip choices are four ways to end one shift, not four shifts).
+        best_mean = best_max = 0.0
+        free = False
+        for h in _exit_holders(c.get("nodes") or []):
+            pay_mean = pay_max = 0.0
+            for ef in (h.get("effects") or []):
+                if (ef.get("trait") or ef.get("trait_key")) != currency or ef.get("op") != "add":
+                    continue
+                mean, mx = _value_mean_max(ef.get("value"))
+                if mx > 0:
+                    pay_mean += mean
+                    pay_max += mx
+            if pay_max <= 0:
+                continue
+            capped = (not _rep_of(t) or t.get("max_triggers_per_day")
+                      or _holder_day_capped(h, cleared) or trig_daily)
+            if not capped:
+                free = True
+                uncapped.append(f"{c.get('id')}: +{pay_max:g} with no daily cap")
+                continue
+            best_mean, best_max = max(best_mean, pay_mean), max(best_max, pay_max)
+        if best_max <= 0:
+            continue
+        if not _rep_of(t):
+            times, how = 1, "once"
+        else:
+            cap = t.get("max_triggers_per_day") or 1
+            times, how = days_per_week * cap, f"{cap}/day × {days_per_week} days"
+        mean_total += best_mean * times
+        max_total += best_max * times
+        rows.append(f"{c.get('id')}: +{best_mean:g} (max {best_max:g}) × {times} ({how})"
+                    + (" · also has an uncapped exit" if free else ""))
+    return mean_total, max_total, rows, uncapped
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Can a condition ever come true? (PRD WS5: the door, and the guidance cards)
+# ─────────────────────────────────────────────────────────────────────────────
+def _flags_ever_set(game):
+    """Every flag some effect sets (op `set`), anywhere in the game."""
+    out = set()
+    for path, d in _walk_paths(game):
+        if "flagEffects" in path and isinstance(d.get("flag"), str) and d.get("op", "set") == "set":
+            out.add(d["flag"])
+    return out
+
+
+def _cond_parts(item):
+    """(kind, key, op, value) for a condition item in either spelling (canvas or card)."""
+    op = item.get("operator") or item.get("op")
+    if item.get("flag_key") or item.get("flag"):
+        return "flag", item.get("flag_key") or item.get("flag"), op, None
+    if item.get("trait_key") or item.get("trait"):
+        return "trait", item.get("trait_key") or item.get("trait"), op, item.get("value")
+    return None, None, op, None
+
+
+def _cmp(cur, op, val):
+    if not isinstance(val, (int, float)):
+        return None
+    return {"lt": cur < val, "lte": cur <= val, "gt": cur > val, "gte": cur >= val,
+            "eq": cur == val, "ne": cur != val}.get(op)
+
+
+def _cond_state(item, start_flags, start_traits, ever_set, written):
+    """('open'|'closed'|'never'|'unknown') for one condition item.
+
+    open     true at the start state
+    closed   false at the start, and something in the game can make it true
+    never    false at the start, and nothing in the game can ever make it true
+    unknown  a condition shape this check does not read (counts as satisfiable)
+    """
+    kind, key, op, val = _cond_parts(item)
+    if kind == "flag":
+        on = key in start_flags
+        if op in ("is_true",):
+            return "open" if on else ("closed" if key in ever_set else "never")
+        if op in ("is_false", "is_not_true"):
+            return "closed" if on else "open"
+        return "unknown"
+    if kind == "trait" and (item.get("subject") in (None, "player")):
+        cur = start_traits.get(key, 0)
+        ok = _cmp(cur, op, val)
+        if ok is None:
+            return "unknown"
+        if ok:
+            return "open"
+        return "closed" if key in written else "never"
+    return "unknown"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ladders: does each declared step fire when it is unlocked, and can it be unlocked?
+#
+# Added 2026-09-26 (PRD WS4, `~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md`).
+# The Balance added 39 repeatables and no new step, and no check saw it: nothing here
+# knew what a person's steps were. A ladder is now DECLARED in the ledger
+# (`board.characters[].ladder`, `references/state.md`), and this compares every declared
+# step with the canvas that is supposed to be it. The declaration is not trusted; the
+# canvas is read, and any difference between the two is a failure (LO, 2026-09-26).
+#
+# Two halves, both static:
+#   1. the step matches its canvas — place, hours, trigger conditions, the counter it
+#      reads (true at N-1, false at N) and the counter it sets (N).
+#   2. every unlock is earnable — for each gate item, some scene the player can reach
+#      sets that flag or moves that meter, can get it to the value, and is open before
+#      the step (its own counter conditions allow a value below N).
+# The third half, "the step really fires in a built game", is `playtest.reach_step`,
+# run by `--ship`.
+# ─────────────────────────────────────────────────────────────────────────────
+_LADDER_DAY_NAMES = {d.lower(): i for i, d in enumerate(_PR_DAYS)}
+
+
+def _ladder_day(d):
+    """0-6 (0 = Monday, as the engine and `_PR_DAYS` read it) from an int or a day name."""
+    if isinstance(d, int) and not isinstance(d, bool) and 0 <= d <= 6:
+        return d
+    if isinstance(d, str) and d[:3].lower() in _LADDER_DAY_NAMES:
+        return _LADDER_DAY_NAMES[d[:3].lower()]
+    return None
+
+
+def _declared_ladders(state):
+    """[(who, ladder)] for every board.characters[] entry that declares a ladder."""
+    out = []
+    for ch in (((state or {}).get("board") or {}).get("characters") or []):
+        lad = ch.get("ladder")
+        if isinstance(lad, dict):
+            out.append((ch.get("id") or ch.get("name") or "?", lad))
+    return out
+
+
+def _ladder_cond_key(item):
+    """A comparable key for a condition, in either the canvas spelling or the declared one."""
+    kind, key, op, val = _cond_parts(item)
+    if kind == "flag":
+        return ("flag", key, op or "is_true")
+    if kind == "trait":
+        npc = item.get("npc_id") or item.get("npc")
+        subject = "npc" if (npc or item.get("subject") == "npc") else "player"
+        return ("trait", key, op, val, subject, npc)
+    return ("other", json.dumps(item, sort_keys=True, default=str))
+
+
+def _ladder_key_text(k):
+    if k[0] == "flag":
+        return f"flag {k[1]} {k[2]}"
+    if k[0] == "trait":
+        who = f"{k[5]}." if k[5] else ""
+        return f"{who}{k[1]} {k[2]} {k[3]}"
+    return f"condition {k[1]}"
+
+
+def _ladder_spans(day, a, b):
+    """[(day, start, end)] minutes; a window that runs past midnight is two spans."""
+    return [(day, a, b)] if a < b else [(day, a, 1440), ((day + 1) % 7, 0, b)]
+
+
+def _ladder_holders(canvas):
+    """Every choice-like holder on a canvas: exit_block.config and each exit choice."""
+    for n in canvas.get("nodes") or []:
+        eb = n.get("exit_block") or {}
+        for h in [eb.get("config") or {}] + list(eb.get("choices") or []):
+            if isinstance(h, dict):
+                yield h
+
+
+def _ladder_counter_ok(conds, counter, n):
+    """Do this trigger's counter conditions hold at N-1 and shut at N?"""
+    cc = [it for it in conds if _ladder_cond_key(it)[:2] == ("trait", counter)
+          and _ladder_cond_key(it)[4] == "player"]
+    if not cc:
+        return f"the trigger does not read the counter {counter} — nothing stops it firing out of order"
+    at = lambda v: all(_cmp(v, it.get("operator"), it.get("value")) for it in cc)
+    if not at(n - 1):
+        return f"its counter conditions are not true at {counter} = {n-1}"
+    if at(n):
+        return f"its counter conditions are still true at {counter} = {n} — it does not shut after it fires"
+    return None
+
+
+def _ladder_open_below(canvas, counter, n, ever_set, start_flags, start_traits, written):
+    """Is this canvas open at some counter value below N, and not shut forever?"""
+    trig = canvas.get("trigger") or {}
+    conds = list(_conditions_of(trig))
+    cc = [it for it in conds if _ladder_cond_key(it)[:2] == ("trait", counter)
+          and _ladder_cond_key(it)[4] == "player"]
+    if cc and not any(all(_cmp(v, it.get("operator"), it.get("value")) for it in cc)
+                      for v in range(0, n)):
+        return False
+    rest = [it for it in conds if it not in cc]
+    return all(_cond_state(it, start_flags, start_traits, ever_set, written) != "never"
+               for it in rest)
+
+
+def _ladder_reachable(canvas):
+    """Can the player walk into this canvas at all: not dev, active, and placed."""
+    trig = canvas.get("trigger") or {}
+    return (not _is_dev(canvas) and trig.get("is_active", True) is not False
+            and bool(trig.get("location") or trig.get("npc")))
+
+
+def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx):
+    """None if this gate item can be earned before step N, else why not."""
+    kind, key, op, val = _cond_parts(item)
+    npc = item.get("npc_id") or item.get("npc")
+    start_flags, start_traits, ever_set, written = ctx
+    open_setters = [c for c in game.get("canvases") or []
+                    if c.get("id") != step_canvas_id and _ladder_reachable(c)
+                    and _ladder_open_below(c, counter, n, ever_set, start_flags,
+                                           start_traits, written)]
+
+    def holders_ok(h):
+        return all(_cond_state(it, start_flags, start_traits, ever_set, written) != "never"
+                   for it in _conditions_of(h))
+
+    if kind == "flag":
+        op = op or "is_true"
+        want_on = op not in ("is_false", "is_not_true")
+        if (key in start_flags) == want_on:
+            return None
+        verb = "set" if want_on else "unset"
+        for c in open_setters:
+            for h in _ladder_holders(c):
+                if not holders_ok(h):
+                    continue
+                for fe in h.get("flagEffects") or []:
+                    if fe.get("flag") == key and (fe.get("op") or "set") == verb:
+                        return None
+        return (f"flag {key} {op}: no scene the player can reach before step {n} "
+                f"{'sets' if want_on else 'clears'} it")
+
+    if kind == "trait":
+        if npc:
+            start = (next((x for x in game.get("npcs") or [] if x.get("id") == npc), {})
+                     .get("core_traits") or {}).get(key, 0)
+        else:
+            start = start_traits.get(key, 0)
+        if not isinstance(val, (int, float)) or not isinstance(start, (int, float)):
+            return f"{key} {op} {val}: not a number this check can read"
+        if _cmp(start, op, val):
+            return None
+        rising = op in ("gte", "gt", "eq")
+        once_total, farm, sets_ok = 0, False, False
+        for c in open_setters:
+            best = 0
+            for h in _ladder_holders(c):
+                if not holders_ok(h):
+                    continue
+                for ef in h.get("effects") or []:
+                    if (ef.get("trait") or ef.get("trait_key")) != key:
+                        continue
+                    tgt = ef.get("targetType", "player")
+                    if (npc and (tgt != "npc" or ef.get("npcId") != npc)) or (not npc and tgt != "player"):
+                        continue
+                    v = ef.get("value")
+                    if isinstance(v, dict) and v.get("type") == "random":
+                        v = v.get("max", v.get("min"))
+                    if not isinstance(v, (int, float)) or isinstance(v, bool):
+                        continue
+                    eop = ef.get("op") or "add"
+                    if eop == "set":
+                        sets_ok = sets_ok or bool(_cmp(v, op, val))
+                    elif eop == "add" and ((v > 0) == rising) and v != 0:
+                        cap = ef.get("cap")
+                        if _farmable(c):
+                            if cap is None or _cmp(cap, op, val):
+                                farm = True
+                        else:
+                            best = max(best, abs(v))
+            once_total += best
+        if sets_ok or farm:
+            return None
+        reach = start + once_total if rising else start - once_total
+        if _cmp(reach, op, val):
+            return None
+        return (f"{'npc ' + npc + ' ' if npc else ''}{key} {op} {val}: it starts at {start}, "
+                f"and every scene open before step {n} together moves it only to {reach}")
+    return f"a gate this check cannot read: {item}"
+
+
+def ladder_problems(game, state):
+    """(ladders, steps_checked, problems). ladders == 0 means no ladder is declared."""
+    ladders = _declared_ladders(state)
+    if not ladders:
+        return 0, 0, []
+    canvases = {c.get("id"): c for c in game.get("canvases") or []}
+    npcs = {n.get("id"): n for n in game.get("npcs") or []}
+    ctx = (_opening_flags(game) or set(),
+           dict(((game.get("player") or {}).get("core_traits")) or {}),
+           _flags_ever_set(game), set(_player_trait_raises(game)))
+    problems, checked = [], 0
+    for who, lad in ladders:
+        counter = lad.get("counter")
+        steps = sorted(lad.get("steps") or [], key=lambda s: s.get("n", 0))
+        if not counter:
+            problems.append(f"{who}: the ladder names no counter")
+            continue
+        if not steps:
+            problems.append(f"{who}: the ladder declares no steps")
+            continue
+        if [s.get("n") for s in steps] != list(range(1, len(steps) + 1)):
+            problems.append(f"{who}: steps must be numbered 1..{len(steps)} with no gap, "
+                            f"got {[s.get('n') for s in steps]}")
+            continue
+        start = ctx[1].get(counter, 0)
+        if start != 0:
+            problems.append(f"{who}: {counter} starts at {start}, not 0")
+        for st in steps:
+            checked += 1
+            n, cid = st["n"], st.get("canvas")
+            tag = f"{who} step {n} ({cid})"
+            c = canvases.get(cid)
+            if c is None:
+                problems.append(f"{tag}: no canvas with that id")
+                continue
+            trig = c.get("trigger") or {}
+            if _is_dev(c):
+                problems.append(f"{tag}: it is a dev canvas — a shipped build strips it")
+            if trig.get("is_active", True) is False:
+                problems.append(f"{tag}: the trigger is not active")
+            if trig.get("location") != st.get("where"):
+                problems.append(f"{tag}: declared at {st.get('where')}, the canvas fires at "
+                                f"{trig.get('location')}")
+            # ── hours ──
+            when = st.get("when") or {}
+            days = [_ladder_day(d) for d in when.get("days") or []]
+            frm, to = when.get("from"), when.get("to")
+            scheds = trig.get("schedules") or ([trig["schedule"]] if trig.get("schedule") else [])
+            if not days or None in days or not frm or not to:
+                problems.append(f"{tag}: `when` must be a window — days, from, to — got {when}")
+            elif not scheds:
+                problems.append(f"{tag}: declared {when}, but the canvas has no hours of its own — "
+                                f"it fires at any time")
+            else:
+                c_days = set()
+                bad = []
+                for s in scheds:
+                    c_days |= set(s.get("weekdays") or range(7))
+                    if (s.get("start_time"), s.get("end_time")) != (frm, to):
+                        bad.append(f"{s.get('start_time')}-{s.get('end_time')}")
+                if bad:
+                    problems.append(f"{tag}: declared {frm}-{to}, the canvas's hours are "
+                                    f"{', '.join(bad)}")
+                if c_days != set(days):
+                    problems.append(f"{tag}: declared days {sorted(set(days))}, the canvas fires "
+                                    f"on {sorted(c_days)} (0 = Monday)")
+            # ── conditions ──
+            conds_obj = trig.get("conditions")
+            conds = list(_conditions_of(trig))
+            if isinstance(conds_obj, dict):
+                if str(conds_obj.get("version")) != "1.0":
+                    problems.append(f"{tag}: trigger conditions have no version = \"1.0\" — "
+                                    f"the engine lets them all through")
+                if (conds_obj.get("logic") or "and").lower() not in ("and", "all"):
+                    problems.append(f"{tag}: trigger conditions are joined by "
+                                    f"{conds_obj.get('logic')}, a step's gate is AND")
+            why = _ladder_counter_ok(conds, counter, n)
+            if why:
+                problems.append(f"{tag}: {why}")
+            actual = {_ladder_cond_key(it) for it in conds
+                      if _ladder_cond_key(it)[:2] != ("trait", counter)
+                      and not (it.get("flag_key") == "dev_mode_enabled")}
+            declared_items = st.get("gate") or []
+            declared = {_ladder_cond_key(it) for it in declared_items}
+            for k in sorted(actual - declared, key=str):
+                problems.append(f"{tag}: the canvas also needs {_ladder_key_text(k)}, "
+                                f"which the ladder does not declare")
+            for k in sorted(declared - actual, key=str):
+                problems.append(f"{tag}: the ladder declares {_ladder_key_text(k)}, "
+                                f"which the canvas does not check")
+            # ── the counter moves ──
+            moves = False
+            for h in _ladder_holders(c):
+                for ef in h.get("effects") or []:
+                    if (ef.get("trait") == counter and ef.get("targetType", "player") == "player"
+                            and ((ef.get("op") == "set" and ef.get("value") == n)
+                                 or (ef.get("op", "add") == "add" and ef.get("value") == 1))):
+                        moves = True
+            if not moves:
+                problems.append(f"{tag}: no exit sets {counter} to {n} — the ladder stops here")
+            # ── the person is there ──
+            npc_id = trig.get("npc") if isinstance(trig.get("npc"), str) else None
+            if npc_id and days and None not in days and frm and to:
+                rows = [r for r in (npcs.get(npc_id) or {}).get("schedules") or []
+                        if r.get("location") == st.get("where")]
+                a, b = _pr_mins(frm), _pr_end_mins(to)
+                absent = []
+                for d in sorted(set(days)):
+                    win = _ladder_spans(d, a, b)
+                    hit = False
+                    for r in rows:
+                        ra, rb = _pr_mins(r.get("start_time", "00:00")), _pr_end_mins(r.get("end_time", "23:59"))
+                        for rd in r.get("weekdays") or range(7):
+                            for sd, sa, sb in _ladder_spans(rd, ra, rb):
+                                if any(sd == wd and sa < wb and wa < sb for wd, wa, wb in win):
+                                    hit = True
+                    if not hit:
+                        absent.append(_PR_DAYS[d])
+                if absent:
+                    problems.append(f"{tag}: bound to {npc_id}, whose schedule does not put them at "
+                                    f"{st.get('where')} in {frm}-{to} on {', '.join(absent)}")
+            # ── every unlock is earnable ──
+            for it in declared_items:
+                why = _ladder_earnable(it, cid, counter, n, game, ctx)
+                if why:
+                    problems.append(f"{tag}: {why}")
+    return len(ladders), checked, problems
+
+
+def lint_repeatables_without_step(model, state):
+    """Repeatables added since the last release with no declared step added. Reported.
+
+    Reads `releases[-1].repeatables` (canvas ids) and `releases[-1].ladder_steps` (a
+    count), which a release writes when it ships. With no earlier release it prints the
+    baseline, so the next release has something to compare against.
+    """
+    reps = sorted(c["id"] for c in model if c["rep"] and not c.get("random") and c["beats"])
+    steps = sum(len(l.get("steps") or []) for _, l in _declared_ladders(state))
+    rels = [r for r in ((state or {}).get("releases") or []) if isinstance(r, dict)]
+    last = rels[-1] if rels else None
+    if state is None:
+        return "", []
+    if not last or "repeatables" not in last:
+        return (f"first release: {len(reps)} repeatables, {steps} declared steps — "
+                f"nothing to compare", [])
+    added = [r for r in reps if r not in set(last.get("repeatables") or [])]
+    new_steps = steps - int(last.get("ladder_steps") or 0)
+    if not added:
+        return f"no repeatable added since {last.get('version', 'the last release')}", []
+    if new_steps > 0:
+        return (f"{len(added)} repeatables and {new_steps} steps added since "
+                f"{last.get('version', 'the last release')}", [])
+    return (f"{len(added)} repeatables added since {last.get('version', 'the last release')} "
+            f"and no declared step", added)
 
 
 def _routes(model, game):
@@ -3885,48 +4659,130 @@ def _fh_in_window(minute, start, end):
     return (s <= m < e) if s <= e else (m >= s or m < e)
 
 
-def _fh_handovers(game):
-    """Every (clock_minute, location_id) at which the opening can hand over.
+def _capstone_at(game, loc, minute, flags):
+    """The one-time canvas the funnel lands in, if any: F2's boot → capstone.
 
-    A BRANCHING walk, not a single spine: an opening with two exits passes if EITHER
-    lands somewhere open. Returns ([], reason) when the chain cannot be walked, and the
-    gate then reports n/a — an unresolvable walk is an instrument failure, not a defect.
+    `the-first-hour.md` F2 splits the opening into a boot at the start location and a
+    capstone at the next one, gated on a flag the boot sets. A walk that stops at the
+    boot's location exit judges the boot's hop, not the real handover. So: a canvas at
+    `loc` that is non-repeatable, not random, not substitution-only, whose trigger
+    conditions are all flag tests the funnel's flags satisfy, and whose schedule window
+    (if any) covers `minute`, is the capstone. The weekday is not checked: the opening is
+    day one by construction.
+    """
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") or {}
+        if t.get("location") != loc or t.get("is_repeatable", True) is not False:
+            continue
+        if t.get("trigger_mode") == "random" or t.get("substitution_only"):
+            continue
+        items = list(_conditions_of(t))
+        ok = bool(items)
+        for it in items:
+            fk, opn = it.get("flag_key"), it.get("operator")
+            if not fk or opn not in ("is_true", "is_false"):
+                ok = False
+                break
+            if (opn == "is_true") != (fk in flags):
+                ok = False
+                break
+        if not ok:
+            continue
+        wins = t.get("schedules") or []
+        if wins:
+            def _m(hhmm):
+                h, m = str(hhmm).split(":")
+                return int(h) * 60 + int(m)
+            if not any(_m(w.get("start_time", "00:00")) <= minute % 1440 < _m(w.get("end_time", "24:00"))
+                       for w in wins if isinstance(w, dict)):
+                continue
+        return c
+    return None
+
+
+def _funnel_walk(game):
+    """Walk the opening: the starting canvas, and on through any capstone it lands in.
+
+    Returns (handovers, flags, reason). `handovers` is every (clock_minute, location_id)
+    at which the funnel really lets go; `flags` is every flag set on any branch of it.
+    A BRANCHING walk: an opening with two exits passes if EITHER lands somewhere open.
+
+    Node ids may be bare (`"hall"`) or qualified (`"canvas_opening.hall"`); the engine
+    keeps the last segment (`v2.py:13716`) and so does this walk. Before 2026-09-25 a
+    qualified id was looked up as-is, found nothing, and the gate read "the funnel never
+    exits to a location" on an opening that plainly did (`OPENING_DRAFT.md` §5).
     """
     start = (game.get("project") or {}).get("starting_canvas")
     base = int((game.get("time") or {}).get("starting_hour") or 8) * 60
     op = next((c for c in (game.get("canvases") or [])
                if c.get("id") == start or c.get("name") == start), None)
     if not op:
-        return [], "no starting canvas is declared"
-    nodes = {n.get("id"): n for n in (op.get("nodes") or []) if n.get("id")}
-    first = ((op.get("nodes") or [None]) or [None])[0]
-    if first is None:
-        return [], "the opening canvas has no nodes"
-    out, seen, stack = [], set(), [(first, base, 0)]
-    while stack:
-        node, clock, depth = stack.pop()
-        key = (node.get("id"), clock)
-        if key in seen or depth > 60:
-            continue
-        seen.add(key)
-        eb = node.get("exit_block") or {}
-        holders = list(eb.get("choices") or []) or [eb.get("config") or {}]
-        for h in holders:
-            if not isinstance(h, dict):
+        return [], None, "no starting canvas is declared"
+    if not (op.get("nodes") or []):
+        return [], None, "the opening canvas has no nodes"
+
+    out, all_flags = [], set()
+
+    def _set_flags(holder, cfg):
+        got = set()
+        for h in (holder, cfg):
+            for fe in (h.get("flagEffects") or []):
+                if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set":
+                    got.add(fe["flag"])
+        return got
+
+    def walk_canvas(canvas, clock0, flags0, visited):
+        nodes = {n.get("id"): n for n in (canvas.get("nodes") or []) if n.get("id")}
+        first = (canvas.get("nodes") or [None])[0]
+        if first is None:
+            return
+        seen, stack = set(), [(first, clock0, frozenset(flags0), 0)]
+        while stack:
+            node, clock, flags, depth = stack.pop()
+            key = (node.get("id"), clock, flags)
+            if key in seen or depth > 60:
                 continue
-            cfg = h.get("config") or h
-            step = cfg.get("time_progression_minutes")
-            nxt = clock + (int(step) if isinstance(step, (int, float))
-                           else FUNNEL_DEFAULT_STEP)
-            nid = h.get("nodeId") or cfg.get("nodeId")
-            if nid:
-                if nid in nodes:
-                    stack.append((nodes[nid], nxt, depth + 1))
-                continue
-            loc = cfg.get("locationId") or h.get("locationId")
-            if loc:
-                out.append((nxt, loc))
-    return out, ("ok" if out else "the funnel never exits to a location")
+            seen.add(key)
+            eb = node.get("exit_block") or {}
+            holders = list(eb.get("choices") or []) or [eb.get("config") or {}]
+            for h in holders:
+                if not isinstance(h, dict):
+                    continue
+                cfg = h.get("config") or h
+                step = cfg.get("time_progression_minutes")
+                if not isinstance(step, (int, float)):
+                    step = h.get("time_progression_minutes")
+                nxt = clock + (int(step) if isinstance(step, (int, float))
+                               else FUNNEL_DEFAULT_STEP)
+                now = set(flags) | _set_flags(h, cfg)
+                all_flags.update(now)
+                nid = str(h.get("nodeId") or cfg.get("nodeId") or "")
+                if nid:
+                    nid = nid.split(".")[-1]
+                    if nid in nodes:
+                        stack.append((nodes[nid], nxt, frozenset(now), depth + 1))
+                    continue
+                loc = cfg.get("locationId") or h.get("locationId")
+                if loc:
+                    cap = _capstone_at(game, loc, nxt, now)
+                    if cap is not None and cap.get("id") not in visited and len(visited) < 6:
+                        walk_canvas(cap, nxt, now, visited | {cap.get("id")})
+                    else:
+                        out.append((nxt, loc))
+
+    walk_canvas(op, base, set(), {op.get("id")})
+    return out, all_flags, ("ok" if out else "the funnel never exits to a location")
+
+
+def _fh_handovers(game):
+    """Every (clock_minute, location_id) at which the opening can hand over.
+
+    Follows the boot into its capstone (F2), so the handover judged is the real one.
+    Returns ([], reason) when the chain cannot be walked, and the gate then reports n/a:
+    an unresolvable walk is an instrument failure, not a defect.
+    """
+    out, _flags, reason = _funnel_walk(game)
+    return out, reason
 
 
 def _fh_live_at(game, loc, minute):
@@ -3969,7 +4825,7 @@ def _fh_meeting_setters(game):
     out = collections.defaultdict(set)
     for c in (game.get("canvases") or []):
         t = c.get("trigger") or {}
-        if t.get("is_repeatable"):
+        if _rep_of(t):
             continue
         npcs = {t[k] for k in ("requires_npc", "npc") if t.get(k)}
         for n in (c.get("nodes") or []):
@@ -4036,7 +4892,7 @@ def _fh_cast_met(game):
     setters = _fh_meeting_setters(game)
     hubs = [c for c in (game.get("canvases") or [])
             if (c.get("trigger") or {}).get("npc")
-            and (c.get("trigger") or {}).get("is_repeatable")
+            and _rep_of(c.get("trigger"))
             and not _is_dev(c)]
     per_char = collections.defaultdict(list)
     flag_owners = collections.defaultdict(set)
@@ -4085,7 +4941,7 @@ def _fh_first_visits(game):
     for c in (game.get("canvases") or []):
         t = c.get("trigger") or {}
         loc = t.get("location")
-        if not loc or t.get("is_repeatable"):
+        if not loc or _rep_of(t):
             continue
         if c.get("id") == start or c.get("name") == start:
             continue
@@ -5157,7 +6013,7 @@ def lint_paid_repeatable_deposits(model, game, state):
                 choices_of(v, out)
 
     for c in (game.get("canvases") or []):
-        if not ((c.get("trigger") or {}).get("is_repeatable")):
+        if not _rep_of(c.get("trigger")):
             continue
         found = []
         choices_of(c, found)
@@ -5536,21 +6392,45 @@ def run_gates(model, game, state=None):
          f"(floor {LOCATIONS_WITH_HEAT:.0f}%)",
          [", ".join(cold[:30])] if cold else [])
 
-    # G6 — every character findable somewhere, at some hour
+    # G6 — every character is findable where and when the schedule puts her.
+    #
+    # ⚠️ REWRITTEN 2026-09-26 (PRD WS5). The old check asked two questions per character —
+    # is ANY canvas bound to her anywhere, and does she have ANY schedule row — and never
+    # asked whether the two are in the same room at the same time. It read 10/10 PASS on a
+    # game where her face was on the bedroom door and the room behind it was empty
+    # (the_balance, 2026-09-16), passing her on a substitution-only canvas that can never
+    # render a portrait. The rule below is `games/the_balance/process/presence.py`'s,
+    # ported: every schedule row is judged per weekday, and a portrait canvas bound to a
+    # room its person never stands in, or capped per day on its trigger, is listed too.
+    # Rows whose job is only to put a body in a room are declared, with the reason, in
+    # board.characters[].occupancy_rows. See `_schedule_rows_backed`.
     npcs = game.get("npcs") or []
-    bound = collections.Counter()
-    for c in model:
-        for key in (c.get("npc"), c.get("requires_npc")):
-            if isinstance(key, str):
-                bound[key] += 1
-    missing = []
-    for n in npcs:
-        nid = n.get("id")
-        sched = len(n.get("schedules") or [])
-        if not bound.get(nid) or not sched:
-            missing.append(f"{nid}: {bound.get(nid,0)} bound canvases, {sched} schedule rows")
-    gate("standing surface", not missing,
-         f"{len(npcs)-len(missing)}/{len(npcs)} characters are findable and scheduled", missing)
+    if not npcs:
+        gate("standing surface", None, "no [[npcs]] — nobody to find")
+    else:
+        pres = _schedule_rows_backed(game, state)
+        bad = []
+        for e in pres["dead"]:
+            r = e["row"]
+            bad.append(f"DEAD {e['npc']} @{r['location']} {r['start_time']}-{r['end_time']} "
+                       f"on {' '.join(_PR_DAYS[d] for d in sorted(e['dead_days']) if 0 <= d < 7)}"
+                       f" — {e['detail']}")
+        for f in pres["stranded"]:
+            bad.append(f"STRANDED {f['id']} @{f['location']}: {f['npc']} is never scheduled "
+                       f"there, so this portrait cannot render")
+        for f in pres["capped"]:
+            bad.append(f"DAY-CAPPED {f['id']} @{f['location']}: max_triggers_per_day on the "
+                       f"trigger deletes the person after one click — cap the choice instead "
+                       f"(engine.md §28)")
+        unsched = [n.get("id") for n in npcs if not (n.get("schedules") or [])]
+        for nid in unsched:
+            bad.append(f"{nid}: no schedule rows — she stands nowhere")
+        n_rows = len(pres["rows"])
+        gate("standing surface", not bad,
+             f"{n_rows - len(pres['dead'])}/{n_rows} schedule rows have something in the room "
+             f"on every weekday · {len(pres['stranded'])} stranded · "
+             f"{len(pres['capped'])} day-capped portraits",
+             bad)
 
     # G7 — every milestone must open something standing, directly OR down a chain.
     # Transitive on purpose: an opening funnel legitimately runs one-shot -> one-shot,
@@ -5558,7 +6438,12 @@ def run_gates(model, game, state=None):
     # link would punish a shape the genre uses everywhere.
     # Random ambients are excluded — a one-shot random scene is texture, not a milestone,
     # and is not supposed to open anything.
-    reads_of = {c["id"]: c["reads"] for c in model}
+    # A read inside the story text counts here (a callback line on the daily card is the
+    # skill's own shape for a first-time step: `the-arc.md` A1, `register.md` L3).
+    # A read that is only `is_false` does not count (LO, 2026-09-26, PRD WS4): a line that
+    # shows while the flag is still off is not something the milestone opened.
+    reads_of = {c["id"]: (c["reads"] | c.get("text_reads", set()))
+                - c.get("neg_only_reads", set()) for c in model}
     opens = {c["id"] for c in model if c["rep"]}          # standing content: the goal state
     changed = True
     while changed:                                        # closure: X opens if it feeds anything that opens
@@ -5584,10 +6469,21 @@ def run_gates(model, game, state=None):
         if c["sets"]:
             dead.append(f"{c['id']} sets {sorted(c['sets'])[:3]} — chain never reaches standing content")
         else:
-            dead.append(f"{c['id']} sets no flag — opens nothing")
+            dead.append(f"{c['id']} sets no flag — opens nothing. A first time on a card "
+                        f"that already exists passes by setting a flag its daily card reads, "
+                        f"e.g. a callback group")
     gate("milestones open something", None if not milestones else not dead,
          f"{len(milestones)-len(dead)} of {len(milestones)} milestones open standing content",
          dead[:25])
+
+    # G7b — every declared step matches its canvas, and every unlock can be earned.
+    # n/a until a ladder is declared; `--ship` is where an undeclared ladder is red.
+    # See `ladder_problems` (PRD WS4, 2026-09-26).
+    n_lad, n_steps, lad_probs = ladder_problems(game, state)
+    gate("ladders move forward", None if not n_lad else not lad_probs,
+         (f"{n_steps} declared steps across {n_lad} ladder(s), {len(lad_probs)} problem(s)"
+          if n_lad else "no ladder declared in board.characters[].ladder"),
+         lad_probs[:25])
 
     # G8 — no meter may rise past the content it can buy.
     # A meter's PROMISED ceiling is the top band the player can see on the sidebar
@@ -5627,15 +6523,72 @@ def run_gates(model, game, state=None):
     # bare count: a game showing 18 locked doors passed this while running 78% of its
     # choices open on turn one, and the headline gave no way to see that. The verdict is
     # unchanged; the denominator now prints beside it.
+    #
+    # ⚠️ REWRITTEN 2026-09-26 (PRD WS5). "Any locked choice anywhere" passed a game whose
+    # ending had been removed, on fourteen unrelated locked rows (the_balance after the
+    # 2026-09-19 park). The release names ITS door in the ledger — board.door =
+    # {canvas, choice} (choice = the choice's text; optional `node`) — and the gate checks
+    # that door: it exists outside dev, it renders locked, it is shut at the start, and
+    # every condition on it can come true later. The declared-state rule applies: no
+    # ledger -> n/a; a ledger with no board.door -> FAIL (LO, 2026-09-26: an undeclared
+    # door is not a pass). `release_page.door` (PRD WS8) supersedes board.door later.
     all_choices = [ch for c in model for n in c["nodes"]
                    for ch in ((n.get("exit_block") or {}).get("choices") or [])]
     locked = sum(1 for ch in all_choices if ch.get("show_when_locked"))
     gated = sum(1 for ch in all_choices if (ch.get("conditions") or {}).get("items"))
     n_ch = len(all_choices) or 1
-    gate("ends on an opening", locked > 0,
-         f"{locked} choices render visible-but-locked · "
-         f"{gated}/{len(all_choices)} choices carry any gate at all "
-         f"({100 * (len(all_choices) - gated) // n_ch}% open on turn one)")
+    census = (f"{locked} choices render visible-but-locked · "
+              f"{gated}/{len(all_choices)} choices carry any gate at all "
+              f"({100 * (len(all_choices) - gated) // n_ch}% open on turn one)")
+    door = (((state or {}).get("board") or {}).get("door")) if state is not None else None
+    if state is None:
+        gate("ends on an opening", None, "no v2_state.json — no declared door to check · " + census)
+    elif not isinstance(door, dict) or not door.get("canvas") or not door.get("choice"):
+        gate("ends on an opening", False,
+             "board.door is not declared — name the door this release ends on · " + census,
+             ["declare board.door = {canvas = <canvas id>, choice = <the choice's text>} in "
+              "v2_state.json; `the-release.md`: every release ends on a visible locked door, "
+              "and a count of locked choices cannot tell which one that is"])
+    else:
+        problems = []
+        canvas = next((c for c in (game.get("canvases") or []) if c.get("id") == door["canvas"]), None)
+        choice = None
+        if canvas is None:
+            problems.append(f"board.door.canvas '{door['canvas']}' is not a canvas in the game")
+        else:
+            if _is_dev(canvas):
+                problems.append(f"'{door['canvas']}' is a dev canvas — a shipped build strips it")
+            for n in canvas.get("nodes") or []:
+                if door.get("node") and n.get("id") != door["node"]:
+                    continue
+                for ch in _node_choices(n):
+                    if str(ch.get("text") or "").strip() == str(door["choice"]).strip():
+                        choice = ch
+            if choice is None:
+                problems.append(f"no choice with text '{door['choice']}' on '{door['canvas']}'")
+        if choice is not None:
+            if not choice.get("show_when_locked"):
+                problems.append("the door does not render locked (no show_when_locked) — the "
+                                "player never sees it")
+            items = list(_conditions_of(choice))
+            if not items:
+                problems.append("the door has no conditions — it is open, not a door")
+            start_flags = _opening_flags(game) or set()
+            start_traits = dict(((game.get("player") or {}).get("core_traits")) or {})
+            ever_set = _flags_ever_set(game)
+            written = set(_player_trait_raises(game))
+            states = [(it, _cond_state(it, start_flags, start_traits, ever_set, written))
+                      for it in items]
+            if items and all(s == "open" for _, s in states):
+                problems.append("every condition on the door is already true at the start — "
+                                "it opens on turn one")
+            for it, s in states:
+                if s == "never":
+                    kind, key, op, val = _cond_parts(it)
+                    problems.append(f"condition {key} {op} {val if val is not None else ''} can "
+                                    f"never come true — nothing in the game sets or raises it")
+        gate("ends on an opening", not problems,
+             f"declared door: {door['canvas']} · \"{door['choice']}\" · " + census, problems)
 
     # G10 — the ASCENT meter must expand the world, never contract it.
     # Judged on the single most-gated meter only. A female-protagonist game runs one
@@ -5648,7 +6601,7 @@ def run_gates(model, game, state=None):
                 expand[k] += 1
             elif op in ("lt", "lte"):
                 contract[k] += 1
-    ranked = sorted(set(expand) | set(contract), key=lambda k: -(expand[k] + contract[k]))[:6]
+    ranked = sorted(set(expand) | set(contract), key=lambda k: (-(expand[k] + contract[k]), k))[:6]  # name breaks ties: stable output
     # Judge what the author DECLARED as ascent, not what a heuristic guesses. Skills and
     # resources legitimately gate downward and are not the spine; only a declaration can
     # tell them apart. Falls back to the top-N heuristic when no ledger exists, and says so.
@@ -5854,12 +6807,26 @@ def run_gates(model, game, state=None):
     # player complaint at a 4.7% median share of comments, against grind's 0.9%.
     cards = game.get("quest_cards") or []
     tiers_owed = board.get("ascent_tiers") or []
-    engine_on = ((game.get("project") or {}).get("quests_engine") == "v2"
-                 or (game.get("settings") or {}).get("quests_engine") == "v2")
+    # ⚠️ CORRECTED 2026-09-26 (PRD WS5). This used to accept `quests_engine` from
+    # [settings] too. The engine reads it ONLY from [project] (`template_import.py:1870`;
+    # the [[quest_cards]] block is parsed only when that value is "v2", `:2767`), so a game
+    # with it under [settings] ships with every card dropped — vesper_two's guidance page
+    # has zero cards (`setup.quests_cards = [];`) while this gate passed. It now reads
+    # [project] only, and a [settings] placement FAILS by name. It also lists cards that
+    # render no words and cards whose `when` can never come true.
+    engine_on = (game.get("project") or {}).get("quests_engine") == "v2"
+    misplaced = (not engine_on
+                 and (game.get("settings") or {}).get("quests_engine") == "v2")
     def _card_mentions(card, key):
         blob = json.dumps(card)
         return f'"{key}"' in blob
-    if not engine_on and not cards:
+    if misplaced:
+        gate("guidance exists", False,
+             f"quests_engine is under [settings] — the engine reads it only from [project], "
+             f"so none of the {len(cards)} quest cards render",
+             ["move `quests_engine = \"v2\"` from [settings] to [project] "
+              "(template_import.py:1870, :2767)"])
+    elif not engine_on and not cards:
         gate("guidance exists", None, "quests engine not enabled — no guidance surface to author")
     elif not tiers_owed and not chars:
         # Cards exist but the ledger names no tiers and no characters, so there is
@@ -5887,6 +6854,23 @@ def run_gates(model, game, state=None):
             for cid in sorted(cast):
                 if cid not in carded:
                     gaps.append(f"{cid} has no quest card — their sidebar next-row renders blank")
+            # A card that exists but can never help: no words, or a `when` that can never
+            # come true. Start state = the flags the opening leaves set, and starting traits.
+            g_start_flags = _opening_flags(game) or set()
+            g_start_traits = dict(((game.get("player") or {}).get("core_traits")) or {})
+            g_ever_set = _flags_ever_set(game)
+            g_written = set(_player_trait_raises(game))
+            for c in cards:
+                name = c.get("id") or c.get("npc_id") or "a card"
+                if not str(c.get("text") or "").strip() and not str(c.get("title") or "").strip():
+                    gaps.append(f"{name}: renders no words — text and title are empty")
+                for w in c.get("when") or []:
+                    if isinstance(w, dict) and _cond_state(w, g_start_flags, g_start_traits,
+                                                           g_ever_set, g_written) == "never":
+                        kind, key, op, val = _cond_parts(w)
+                        gaps.append(f"{name}: its `when` reads {key} {op}"
+                                    f"{' ' + str(val) if val is not None else ''}, which nothing "
+                                    f"in the game can make true — the card never shows")
         gate("guidance exists", not gaps,
              f"{len(cards)} quest cards for {len(tiers_owed)} ascent tiers and "
              f"{len(cast)} characters in the game",
@@ -6041,7 +7025,8 @@ def run_gates(model, game, state=None):
         loc_of = {c["id"]: c["loc"] for c in model}
         sink_locs = collections.Counter(loc_of.get(s, "(engine)") for s in sinks
                                         if s != "[settings.rent]")
-        top_loc, top_n = (sink_locs.most_common(1) or [("—", 0)])[0]
+        # Ties broken by name, so two runs print the same location (was set-order dependent).
+        top_loc, top_n = (sorted(sink_locs.items(), key=lambda kv: (-kv[1], kv[0]))[:1] or [("—", 0)])[0]
         concentrated = len(sinks) >= 5 and top_n > len(sinks) / 2
 
         fails = []
@@ -6370,13 +7355,32 @@ def run_gates(model, game, state=None):
                 for v in o:
                     _outflows(v)
 
-        _outflows(game.get("canvases") or [])
+        # ⚠️ CORRECTED 2026-09-26 (PRD WS5). Two holes closed.
+        # (a) A charge only counts where the player meets it again: on a canvas that is NOT
+        #     dev and IS recurring (repeatable), or through [settings.rent]. A one-time or
+        #     dev-only charge anywhere used to satisfy it. If the ledger names the settle-up
+        #     canvas (board.economy.settle_canvas), the charge must sit on that canvas.
+        # (b) The week has to be able to pay it. `_week_income` measures what a week can
+        #     bring in; the verdict uses its MEAN (a random 8–25 is not 25 every day) and
+        #     prints the MAX and the declared week_income beside it. the_balance declared
+        #     week_income 220 while its build paid $3 a shift: the declared number had gone
+        #     stale and nothing compared it with the build.
+        settle = econ.get("settle_canvas")
+        for c in game.get("canvases") or []:
+            if _is_dev(c) or not _rep_of(c.get("trigger") or {}):
+                continue
+            if settle and c.get("id") != settle:
+                continue
+            _outflows(c)
         biggest = max(outflows) if outflows else 0
         charged_by = None
         if rent_charges and rent_amt >= (ob_amt if isinstance(ob_amt, (int, float)) else 0):
             charged_by = f"[settings.rent] {rent_amt:g} every {rent_cfg.get('due_day', '?')}"
         elif isinstance(ob_amt, (int, float)) and biggest >= ob_amt:
-            charged_by = f"an authored charge of {biggest:g}"
+            charged_by = (f"a recurring charge of {biggest:g}"
+                          + (f" on {settle}" if settle else ""))
+        wk_mean, wk_max, wk_rows, wk_uncapped = _week_income(game, currency)
+        declared_week = econ.get("week_income")
 
         gaps = []
         if not isinstance(ob_amt, (int, float)) or ob_amt <= 0:
@@ -6389,11 +7393,23 @@ def run_gates(model, game, state=None):
                         + (f" and [settings.rent] charges {rent_amt:g}" if rent_charges
                            else " and [settings.rent] is not enabled")
                         + " — the price is written in the ledger and the prose but never taken")
+        if isinstance(ob_amt, (int, float)) and ob_amt > 0 and not wk_uncapped:
+            moves = econ.get("obligation_moves")
+            if wk_mean < ob_amt and not (isinstance(moves, str) and moves.strip()):
+                gaps.append(f"a week can bring in about {wk_mean:g} {currency} on average "
+                            f"(at most {wk_max:g}) against an obligation of {ob_amt:g} — "
+                            f"the player cannot pay it, and board.economy.obligation_moves "
+                            f"does not signpost when that changes")
+        if isinstance(declared_week, (int, float)) and declared_week > wk_max and not wk_uncapped:
+            gaps.append(f"board.economy.week_income says {declared_week:g}, but the build can "
+                        f"bring in at most {wk_max:g} a week — the ledger is stale")
         gate("the obligation is charged", not gaps,
              f"[declared] {ob_amt if isinstance(ob_amt, (int, float)) else '?'} {currency}"
              + (f" · charged by {charged_by}" if charged_by else "")
-             + f" · largest authored outflow {biggest:g} across {len(outflows)} charges",
-             gaps)
+             + f" · week income ~{wk_mean:g} (max {wk_max:g}"
+             + (f", declared {declared_week:g}" if isinstance(declared_week, (int, float)) else "")
+             + (f", {len(wk_uncapped)} uncapped sources" if wk_uncapped else "") + ")",
+             gaps + [f"income: {r}" for r in wk_rows[:8]] + [f"uncapped: {u}" for u in wk_uncapped[:5]])
 
     # G25 — every effect uses an op the engine actually runs.
     #
@@ -6529,7 +7545,7 @@ def run_gates(model, game, state=None):
          detail)
 
     # ─────────────────────────────────────────────────────────────────────────
-    # G37 — A SPENT DAY STILL HAS A DOOR.  the-surfaces.md R6 · the-meters.md M5.
+    # G37b — A SPENT DAY STILL HAS A DOOR.  the-surfaces.md R6 · the-meters.md M5.
     #
     # The other half of the gate above. `a day-cap closes` asks whether the cap has a
     # SETTER. This one asks what the screen looks like once the cap is SPENT — and a
@@ -7788,7 +8804,7 @@ def run_gates(model, game, state=None):
     # existing 32 looked at the opening, the introductions, or the first visit.
     # ─────────────────────────────────────────────────────────────────────────
 
-    # G33 — the opening hands over into an open door (the-first-hour.md F3)
+    # G33b — the opening hands over into an open door (the-first-hour.md F3)
     # A funnel that ends at a clock time when nothing at the landing location is open
     # makes the player's first free act pressing a wait button. v1 named this the
     # dead-window bug and v2 shipped it into the one place it costs most.
@@ -7833,7 +8849,7 @@ def run_gates(model, game, state=None):
                  else "every handover lands on a closed room")),
              detail)
 
-    # G34 — every hub is met first (the-first-hour.md F5 + F8)
+    # G34b — every hub is met first (the-first-hour.md F5 + F8)
     # The forbidden shape is a repeatable `npc=` hub whose base node IS the introduction.
     # All six v2 games shipped it for their whole cast; two v1 games are already at 100%,
     # so the bar is one shipped work has cleared rather than an invented number.
@@ -7899,7 +8915,7 @@ def run_gates(model, game, state=None):
         t = c.get("trigger") or {}
         # the three shapes that DO gate on requiresNpc, and a repeatable hub, which
         # is G34's business and not this gate's
-        if t.get("is_repeatable") or t.get("substitution_only"):
+        if _rep_of(t) or t.get("substitution_only"):
             continue
         if t.get("trigger_mode") == "random" or _is_dev(c):
             continue
@@ -7922,7 +8938,7 @@ def run_gates(model, game, state=None):
          f"can only fire in that character's own hours",
          windowless)
 
-    # G47 — no canvas key is discarded (the-first-hour.md F5b, engine.md §42)
+    # G47b — no canvas key is discarded (the-first-hour.md F5b, engine.md §42)
     #
     # `TemplateCanvas` has seven fields — id, name, description, trigger, nodes, connections,
     # loop (template_import.py:906-913) — and it is built with named arguments only
@@ -8157,7 +9173,7 @@ def words_mode(path):
 #                        "3 is not an invented threshold".
 #   SENTENCE_CEILING 14  measured over 18 shipped sandboxes, field median 10.
 #   DASH_CEILING 35.0    per 10,000 words, measured over the 25-game mopoga corpus.
-#   35-40 words a beat   `register.md` — the field runs 37 words per reveal beat.
+#   model beats          `register.md` ## The model beats — the field runs 37 words per reveal beat (reference, not a rule).
 #
 # AND IT REPORTS, IT DOES NOT GRADE. Exit is always 0, like `--words`. A beat is
 # not a game and a single paragraph outside its canvas cannot be failed: the same
@@ -8222,7 +9238,7 @@ def beat_mode(path):
         print()
         print(f"  BEAT {i}")
         # ⚠️ NO VERDICT ON LENGTH, and the reason is a unit mismatch that would have
-        # made this line lie. `register.md:491` gives 37 words per reveal beat, where
+        # made this line lie. `register.md 'S1 · The clip rides the beat'` gives 37 words per reveal beat, where
         # a beat is ONE SCREEN. A canvas node that is not a cascade is a single `Beat`
         # to this script and can hold several screens' worth of prose: two real
         # mrs_vance beats sampled while building this mode ran 100 and 152 words, and
@@ -8230,7 +9246,7 @@ def beat_mode(path):
         # unit does not support. `forty_miles` ships 938 beats against 259 nodes — the
         # two counts are not the same thing. So: the number, the reference, and the
         # caveat, and the reader matches unit to unit.
-        print(f"    words                {len(words):>4}   register.md:491 \u2014 the field runs "
+        print(f"    words                {len(words):>4}   register.md 'S1 · The clip rides the beat' \u2014 the field runs "
               f"37 words per")
         print(f"{'':>32}reveal beat, where a beat is ONE SCREEN. Compare only")
         print(f"{'':>32}if this text is one screen.")
@@ -8303,14 +9319,14 @@ def beat_mode(path):
 _PORTAL_FILE = "games-data.js"
 
 
-def _portal_entries(root):
+def _portal_entries(root, path=None):
     """Every entry in games-data.js as {slug: {...}}, or None if the file is absent.
 
     Not a JS parser. Entries are brace-blocks at two-space indent and the fields
     wanted here (`slug`, `dev`, `version`) are one-line literals; the only long
     field is `summary`, a template literal that never opens a two-space brace.
     """
-    path = os.path.join(root, _PORTAL_FILE)
+    path = path or os.path.join(root, _PORTAL_FILE)
     if not os.path.exists(path):
         return None
     try:
@@ -9121,7 +10137,7 @@ def selfcheck_mode():
     flat = re.sub(r"\s+", " ", skill)
 
     gates, lints = _emitted_names(src)
-    modes = ["--words", "--beat", "--release", "--saves", "--selfcheck"]
+    modes = ["--words", "--beat", "--release", "--saves", "--selfcheck", "--ship"]
     documented = _documented_gate_names(skill)
 
     missing_g = [g for g in gates if g not in flat]
@@ -9202,6 +10218,266 @@ def selfcheck_mode():
     return 1 if total else 0
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# --ship — the one check that is allowed to stop a publish
+# ─────────────────────────────────────────────────────────────────────────────
+# Added 2026-09-26 (PRD WS6, `~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md`).
+# Until now nothing read this script's verdict: no hook, no release script. The Process
+# Review found the finish line moved every few days because nothing held it.
+#
+# It BLOCKS only what makes a build broken, unfinishable or untrue (LO, 2026-09-26), and
+# REPORTS everything else for LO to judge when he plays. The two lists are fixed here and
+# in `the-release.md`; a row moves between them only at a release boundary.
+#
+# `--release` and `--saves` are CALLED, not re-implemented, and their own output is left
+# exactly as it was: their exit codes are read, and their [FAIL] lines are quoted.
+
+SHIP_REPORT_GATES = [
+    "somebody speaks", "every hub is met first", "an explicit beat carries a clip",
+    "explicit floor", "location fill", "the walk-in floor", "traversal heat",
+    "sentence length",
+]
+SHIP_BLOCK_GATES = {
+    "ends on an opening": "the declared door works",
+    "the obligation is charged": "the pressure can be paid or is signposted",
+    "standing surface": "no empty rooms",
+}
+
+
+# Named for what it proves, not more (LO, 2026-09-26): the static half proves each step
+# matches its canvas and each unlock can be earned; the played half sets the place and
+# the clock per step and applies the declared gate, but never the counter. That is not
+# "plays end to end", and the row does not say so.
+SHIP_LADDER_ROW = "each step fires when unlocked, and each unlock is earnable"
+
+
+def _ship_ladders(root, slug, game, state, people, player=None):
+    """(ok, headline, detail) for the ladder row. `player(build, game, ladder)` returns
+    reach_step's list; it is `playtest.reach_step` in a fresh browser unless a test
+    hands in another."""
+    ladders = dict(_declared_ladders(state))
+    missing = [p for p in people if p not in ladders]
+    if missing:
+        return False, f"{len(missing)} of {len(people)} people on the release page have no ladder", \
+            [f"{p}: no board.characters[].ladder — nothing says what their steps are"
+             for p in missing]
+    sub = {"board": {"characters": [
+        ch for ch in (((state or {}).get("board") or {}).get("characters") or [])
+        if ch.get("id") in people]}}
+    _, checked, probs = ladder_problems(game, sub)
+    if probs:
+        return False, f"{len(probs)} static problem(s) in {checked} steps — not played yet", probs[:10]
+    build_path = os.path.join(root, "games", slug, "output", "index.html")
+    if not os.path.exists(build_path):
+        return False, "no build to play", [os.path.relpath(build_path, root)]
+    if player is None:
+        def player(build, g, lad):
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            import playtest
+            with playtest.open_game(build) as (page, errors):
+                res = playtest.reach_step(page, g, lad, len(lad.get("steps") or []))
+                if errors:
+                    res.append(dict(n="-", canvas="-", reached=False,
+                                    why=f"page error: {errors[0]}"))
+                return res
+    bad = []
+    for p in people:
+        lad = ladders[p]
+        try:
+            res = player(build_path, game, lad)
+        except Exception as e:                      # a harness that cannot run is not a pass
+            bad.append(f"{p}: could not be played — {type(e).__name__}: {e}")
+            continue
+        want = len(lad.get("steps") or [])
+        got = sum(1 for r in res if r.get("reached"))
+        if got < want or any(not r.get("reached") for r in res):
+            miss = next((r for r in res if not r.get("reached")), {})
+            bad.append(f"{p}: reached {got} of {want} steps — step {miss.get('n')} "
+                       f"({miss.get('canvas')}): {miss.get('why')}")
+    if bad:
+        return False, f"{len(bad)} of {len(people)} ladders stop before the top", bad
+    return True, (f"{checked} steps across {len(people)} people: each matches its canvas, "
+                  f"each unlock is earnable, and each fired in the build"), []
+
+
+def _capture(fn, *args):
+    """(return code, printed lines) of a mode function, without letting it print."""
+    import contextlib
+    import io
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = fn(*args)
+    return rc, buf.getvalue().splitlines()
+
+
+def _fail_lines(lines):
+    return [l.strip() for l in lines if l.strip().startswith("[FAIL]")]
+
+
+def ship_rows(slug, root=None):
+    """(block_rows, report_rows) for a game, each row (name, ok, headline, detail).
+
+    ok is True / False / None; None means n/a (for a BLOCK row only where the thing
+    genuinely does not apply yet, such as saves before a first release).
+    """
+    root = root or os.getcwd()
+    path = os.path.join(root, "games", slug, "toml_phases", "7_final_game.toml")
+    block, report = [], []
+
+    def B(name, ok, headline, detail=None):
+        block.append((name, ok, headline, detail or []))
+
+    if not os.path.exists(path):
+        B("the game builds from source", False, f"no {os.path.relpath(path, root)}")
+        return block, report
+
+    model, game = build(_load(path))
+    state_path = os.path.join(root, "games", slug, "v2_state.json")
+    state = json.load(open(state_path)) if os.path.exists(state_path) else None
+    results = {r["gate"]: r for r in run_gates(model, game, state)}
+    rp = (state or {}).get("release_page") or {}
+
+    # ── the four untrue or silent screens (lints promoted for shipping) ──────
+    s, hits = lint_past_claim(game)
+    B("no past claim on a repeatable", not hits,
+      s or "no repeatable screen to check", hits[:10])
+    s, hits = lint_printed_stat(game)
+    B("no printed stat labels", not hits, s, hits[:10])
+    s, mute = lint_one_time_speaks(game)
+    B("a one-time step with a person speaks", not mute,
+      s or "no one-time step bound to a person", mute[:10])
+    s, rows = lint_opening_card(game)
+    B("the opening's card has goals", bool(s) and "arms NO card" not in s,
+      s or "the opening could not be read — no starting canvas", rows[:10])
+
+    # ── unfinishable ────────────────────────────────────────────────────────
+    people = rp.get("people") or []
+    if not people:
+        B(SHIP_LADDER_ROW, None,
+          "the release page names nobody — 'the build matches the release page' is red for that")
+    else:
+        ok, head, detail = _ship_ladders(root, slug, game, state, people)
+        B(SHIP_LADDER_ROW, ok, head, detail)
+    signed = rp.get("signed_by_lo") is True and bool(rp.get("signed_at"))
+    B("LO signed the playtest", signed,
+      f"signed {rp.get('signed_at')}" if signed else
+      "release_page.signed_by_lo / signed_at not set — LO plays every person on the "
+      "release page from a new game to the door, then signs")
+
+    # ── broken ──────────────────────────────────────────────────────────────
+    rc, lines = _capture(release_mode, slug)
+    B("the build exists and is a release build", rc == 0,
+      "every --release check passes" if rc == 0 else
+      f"gates.py --release {slug} fails", _fail_lines(lines))
+    rc, lines = _capture(saves_mode, slug)
+    if rc == 2:
+        B("last release's saves still load", None,
+          "no archived release to compare against — a first release has no saves to break")
+    else:
+        B("last release's saves still load", rc == 0,
+          "every --saves check passes" if rc == 0 else f"gates.py --saves {slug} fails",
+          _fail_lines(lines))
+    for gname, label in SHIP_BLOCK_GATES.items():
+        r = results.get(gname)
+        if r is None:
+            B(label, False, f"gate '{gname}' did not run")
+        elif r["na"] and gname != "the obligation is charged":
+            B(label, False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)",
+              r["detail"][:10])
+        else:
+            B(label, None if r["na"] else r["pass_"], f"{gname}: {r['headline']}",
+              r["detail"][:10])
+
+    # ── untrue: the build against the page it claims to be ───────────────────
+    if not rp:
+        B("the build matches the release page", False,
+          "no release_page in v2_state.json — nothing says what this release is")
+    else:
+        npc_ids = {n.get("id") for n in game.get("npcs") or []}
+        missing = [p for p in (rp.get("people") or []) if p not in npc_ids]
+        door_rp, door_b = rp.get("door"), ((state or {}).get("board") or {}).get("door")
+        probs = [f"release_page names {p}, who is not in the build" for p in missing]
+        if not rp.get("people"):
+            probs.append("release_page.people is empty — the page names nobody")
+        if door_rp and door_b and door_rp != door_b:
+            probs.append(f"release_page.door {door_rp} is not board.door {door_b}")
+        B("the build matches the release page", not probs,
+          f"{len(rp.get('people') or [])} people on the page"
+          + (f", door {door_rp.get('canvas')}" if isinstance(door_rp, dict) else ""), probs)
+
+    # ── REPORT: printed for LO, never blocking ─────────────────────────────────
+    for gname in SHIP_REPORT_GATES:
+        r = results.get(gname)
+        if r is None:
+            continue
+        head = r["headline"]
+        if gname == "explicit floor":
+            head += (" · field: per paragraph the median game is 4.4% and 8 of 26 meet 7.5%; "
+                     "per passage the median is 28–33% and DoL, the source of 7.5%, is lowest")
+        report.append((gname, None if r["na"] else r["pass_"], head, []))
+    report.append(("a hint line with place and time per step", None,
+                   "not measured yet — PRD WS10", []))
+    shown = set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
+    others = [r for g, r in results.items() if g not in shown]
+    red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
+    report.append(("every other gate", not red,
+                   f"{sum(1 for r in others if r['pass_'])}/"
+                   f"{sum(1 for r in others if not r['na'])} pass",
+                   [f"FAIL {g}" for g in red]))
+    return block, report
+
+
+def ship_mode(slug):
+    """May this build reach a player? Exits NON-ZERO on any red BLOCK row."""
+    block, report = ship_rows(slug)
+    print(f"\n  author-game-v2 ship check — {slug}")
+    print(f"  {'─'*72}")
+    print("  BLOCK — broken, unfinishable or untrue. Any red row stops the publish.")
+    for name, ok, head, detail in block:
+        tag = "n/a " if ok is None else ("PASS" if ok else "FAIL")
+        print(f"  [{tag}]  {name:42s} {head}")
+        for d in detail:
+            print(f"          · {d}")
+    print(f"  {'─'*72}")
+    print("  REPORT — for LO to judge when he plays. Never blocks.")
+    for name, ok, head, detail in report:
+        tag = "n/a " if ok is None else ("ok  " if ok else "red ")
+        print(f"  [{tag}]  {name:42s} {head}")
+        for d in detail:
+            print(f"          · {d}")
+    red = [b for b in block if b[1] is False]
+    print(f"  {'─'*72}")
+    print(f"  {'SHIP: yes' if not red else f'SHIP: NO — {len(red)} BLOCK row(s) red'}\n")
+    return 1 if red else 0
+
+
+def ship_targets(paths, root=None, portal=None):
+    """Which slugs must pass --ship for a commit touching these paths.
+
+    Used by scripts/hooks/pre-commit. A slug is checked when its build or the portal
+    changes, it is a v2 game (it has v2_state.json — v1 games such as vesper are never
+    caught), and its portal entry is NOT `dev: true` (a test build passes through).
+    """
+    root = root or os.getcwd()
+    entries = _portal_entries(root, portal) or {}
+    slugs = set()
+    for p in paths:
+        m = re.match(r"games/([^/]+)/output/index\.html$", p)
+        if m:
+            slugs.add(m.group(1))
+        elif p == _PORTAL_FILE:
+            slugs |= {s for s, e in entries.items() if not e.get("dev")}
+    out = []
+    for s in sorted(slugs):
+        if not os.path.exists(os.path.join(root, "games", s, "v2_state.json")):
+            continue
+        e = entries.get(s)
+        if e is None or e.get("dev"):
+            continue
+        out.append(s)
+    return out
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -9231,6 +10507,18 @@ def main():
                             sys.argv[4] if len(sys.argv) > 4 else None))
     if sys.argv[1] == "--selfcheck":
         sys.exit(selfcheck_mode())
+    if sys.argv[1] == "--ship":
+        if len(sys.argv) < 3:
+            print("usage: python3 gates.py --ship <game-slug>")
+            sys.exit(2)
+        sys.exit(ship_mode(sys.argv[2]))
+    if sys.argv[1] == "--ship-targets":
+        # Internal, for scripts/hooks/pre-commit: staged paths in, slugs to check out.
+        args, portal = sys.argv[2:], None
+        if args[:1] == ["--portal"] and len(args) > 1:
+            portal, args = args[1], args[2:]
+        print("\n".join(ship_targets(args, portal=portal)))
+        sys.exit(0)
     arg = sys.argv[1]
     path = arg if arg.endswith(".toml") else f"games/{arg}/toml_phases/7_final_game.toml"
     if not os.path.exists(path):
@@ -9286,6 +10574,7 @@ def main():
     oblig_summary, oblig_lints = lint_obligation_vs_week(model, game, state)
     coll_summary, coll_lints = lint_collector_is_target(model, game, state)
     dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
+    grow_summary, grow_lints = lint_repeatables_without_step(model, state)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
     _slug = (os.path.basename(os.path.dirname(os.path.dirname(path)))
@@ -9352,6 +10641,8 @@ def main():
                                                       "findings": chan_lints},
                                     "paid_repeatable_deposits": {"summary": dep_summary,
                                                                 "findings": dep_lints},
+                                    "repeatables_without_step": {"summary": grow_summary,
+                                                                 "findings": grow_lints},
                                     "obligation_vs_week": {"summary": oblig_summary,
                                                            "findings": oblig_lints},
                                     "collector_is_target": {"summary": coll_summary,
@@ -9367,7 +10658,11 @@ def main():
                                     "opening_card": {"summary": opcard_summary,
                                                      "findings": opcard_lints}}},
                          indent=1, default=str))
-        return
+        # ⚠️ 2026-09-26 (PRD WS5): this used to `return` and exit 0 whatever the gates said,
+        # so a caller reading --json could never see a failure. Same code as the text mode.
+        j_judged = sum(1 for r in results if not r.get("na"))
+        j_pass = sum(1 for r in results if r.get("pass_"))
+        sys.exit(0 if j_judged and j_pass == j_judged else 1)
 
     name = (game.get("project") or {}).get("name") or os.path.basename(path)
     npass = sum(1 for r in results if r["pass_"])
@@ -9713,7 +11008,8 @@ def main():
             print(f"          · {h['canvas']}: {h['share']:.0f}% ({h['n']}/{h['of']}) — {h['line']}")
         if len(neg_lints) > 8:
             print(f"          · … and {len(neg_lints)-8} more canvases over the field max")
-        print("          (register.md 'The load rules' L2 — a FIGURE and a LIST, never a score."
+        print("          (register.md L2, RETIRED 2026-09-24 for the loud voice. Printed for"
+              " reference only: a FIGURE and a LIST, never a score, and not a rule."
               f" Field, NARRATION ONLY, 25 games: p50 {FIELD_NEGATION_P50}%,")
         print(f"           p90 {FIELD_NEGATION_P90}%, MAX {FIELD_NEGATION_MAX}%"
               " (become-taxi-driver). Ours run 19.0-42.1%, 14 of 16 over that max. Behind almost"
@@ -9761,8 +11057,9 @@ def main():
         for h in stat_lints[:10]:
             print(f"          · {h}")
         print("          (the-meters.md 'What the player is shown' — show the reaction, not the"
-              " number. Print a reaction line or a real flag; a")
-        print("           number only for a stat the game declares. A LIST, never a score)")
+              " number. Print a reaction line or a real flag.")
+        print("           Scores stay hidden, a person's own included (LO, 2026-09-25). A LIST,"
+              " never a score)")
 
     if speaks_summary:
         print(f"  {'─'*72}")
@@ -9940,6 +11237,17 @@ def main():
         print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
               " defect; a game made only of pure sinks is. mrs_vance deposits on 46 of 47"
               " and forty_miles on 0 of 10, so any threshold between them is invented)")
+
+    if grow_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · repeatables without a step — {grow_summary}")
+        for h in grow_lints[:10]:
+            print(f"          · {h}")
+        if len(grow_lints) > 10:
+            print(f"          · … and {len(grow_lints)-10} more")
+        print("          (PRD WS4 — a LIST, never a score. More to do at the same step is"
+              " fine; a release that only adds repeatables is the shape The Balance grew in:"
+              " 39 new, no new step, and nothing saw it)")
 
     if vol_summary:
         print(f"  {'─'*72}")

@@ -247,10 +247,11 @@ documented nowhere but in the script's own comments, so an author who hit one ha
 | explicit in repeatable | the heat is where the player returns, not sealed away | `gates.py` THRESHOLDS |
 | repeatable explicit media cycles | re-entered surfaces cycle their clips instead of repeating one | `gates.py` THRESHOLDS |
 | traversal heat | most locations carry something, not just the one hot room | `the-board.md` §1 |
-| standing surface | every character is findable and scheduled | `the-board.md` §2 |
-| milestones open something | a milestone that turns nothing on is a dead end | this file, "three kinds of content" |
+| standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger (since 2026-09-26) | `the-board.md` §2 |
+| milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening (since 2026-09-26) | this file, "three kinds of content" |
+| ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step. n/a until a ladder is declared (since 2026-09-26, PRD WS4) | `references/state.md` |
 | meter ceiling | the top of a bar buys something | `the-board.md` §3 · `state.md` |
-| ends on an opening | the release closes on a visible locked door | `the-release.md` |
+| ends on an opening | the release closes on the door declared in `board.door`: locked at the start, openable later (since 2026-09-26) | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
 | **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open. 288 words of `orientation` were dead this way and it passed 45 of 46 gates | `the-surfaces.md` R9 |
@@ -347,7 +348,9 @@ over the declared `week_income` — a figure, never a score) · **the collector 
 The field's collector carries 0.4–3.8% of a game's explicit passages and is never the top figure;
 `the-want.md` §4a) · **what a paid repeatable leaves
 behind** (how many surfaces she pays for deposit anything; a pure sink is not a defect, a game made
-only of pure sinks is) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+only of pure sinks is) · **repeatables without a step** (repeatables added since the last
+`releases[]` entry when no declared ladder step was added — a LIST, never a score; a first release
+prints its baseline) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator, which is how `the_route` is 46/46 green with 11 explicit screens; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
@@ -376,6 +379,12 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   render on (`references/register.md`, "The truth rule"). Labels and guidance stay plain
   (`references/the-voice.md`).
 
+- **When this skill and a game's sheets disagree, stop and ask.** A fact on a sheet holds; a design
+  choice on a sheet that clashes with a rule here is a question for the owner, asked before building,
+  never settled quietly and never only noted afterwards (`the-sheets.md` S12). **And an approved plan
+  goes onto the game's pages before it is built** (S13): a plan kept outside `games/<slug>/` is one
+  the next session will not read.
+
 - **A number is a promise until an instrument produces it.** `the-sheets.md` S1. The one that cost
   most: a design's sheets counted paragraphs, `gates.py` counts nodes, and the same game read 6
   explicit beats by the sheet and 3 by the script on the same afternoon — both reported as
@@ -387,16 +396,31 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
 - **Every engine claim carries a `file:line`.** If `references/engine.md` doesn't have it,
   go read `apps/game_generation/twee_comprehensive/generators/v2.py` and add it with its
   citation. Never assert engine behaviour from memory.
-- **Gates before ship.** `python3 scripts/gates.py <slug>` must be green. A gate that fails
-  is either a real defect or a wrong threshold — fix one or the other, never skip.
+- **Ship on `--ship`.** `python3 scripts/gates.py --ship <slug>` decides whether a build may reach a
+  player, and it is the one mode wired to stop a publish: `scripts/release_upload.py` refuses to
+  package on a red, and `scripts/hooks/pre-commit` refuses to commit a non-dev portal build of a
+  v2 game (since 2026-09-26, PRD WS6). It **BLOCKS** only what makes a build broken, unfinishable
+  or untrue — no past claim on a repeatable · no printed stat · a one-time step with a person
+  speaks · the opening's card has goals · each step fires when unlocked, and each unlock is
+  earnable (every person on the release page has a declared ladder, it passes *ladders move
+  forward*, and `playtest.reach_step` climbs it in the build — the clock and place are set per
+  step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
+  exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
+  declared door works · the pressure can be paid or is signposted · no empty rooms · the build
+  matches the release page. **Everything else is REPORTED** for LO to judge when he plays —
+  dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
+  the walk-in floor, traversal heat, sentence length, and every other gate. `gates.py <slug>` still
+  prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
+  the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
 
   | | |
   |---|---|
   | `gates.py --words <path>` | the vocabulary lint on any text file — run it on the WANT and the BOARD, while the nouns are still being *chosen*. Run on a built game it is one phase too late: every noun is already a room name and a button. Always exits 0; it is a list, never a score. |
-  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md:491`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several (`forty_miles`: 938 beats, 259 nodes). Always exits 0 — a paragraph outside its canvas cannot be failed. |
+  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md "S1 · The clip rides the beat"`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several (`forty_miles`: 938 beats, 259 nodes). Always exits 0 — a paragraph outside its canvas cannot be failed. |
   | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build, which is why a game shipped to the published grid as a `--dev --debug` artefact with 115 missing files and nothing said so. Seven checks, off for every ordinary run, **exits non-zero**. One of them, `every canvas is a passage`, is the only thing in the skill that can see a canvas the generator DROPPED: two consecutive games shipped their act loops written and absent, with 46 green gates over them, because gates parse the source and reachability is decided at build time (`defects/001`). `the-release.md` § Shipping the build. |
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
+  | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, and does every rule the references POINT AT actually exist? Needs no game. The index went stale twice — the 2026-08-16 audit closed it and it reopened in twelve days — because nothing compared the script to the file that documents it. The rule half was added after `the-voice.md` R6 was recorded as shipped in two ledgers, cited by this script, listed in its own file's checks table, and never written: a qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
 - **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
   the running game in a browser and is the only place some defects exist at all — `forty_miles` 0.1

@@ -289,6 +289,52 @@ heading that named a doctrine file.
 **The test:** hand it to somebody who has not read this skill. If they cannot say what they are
 being asked to decide, the sheet is not done, however complete it is.
 
+## S12 · WHEN THE SKILL AND A SHEET DISAGREE, STOP AND ASK
+
+**The rule:** when a rule in this skill and a line on the game's sheets point different ways, the
+author does not pick one. Stop, quote both lines, and ask the owner which wins. Until the owner
+answers, neither is built.
+
+**Two kinds of sheet line, and only one of them is asked about:**
+
+| kind | examples | when it clashes with a skill rule |
+|---|---|---|
+| **a fact about the world** | who is in which room at what hour, the money, what someone knows, a person's age | the fact holds. The truth rule (`register.md`) is built on it. A clash here is the skill rule being applied wrong |
+| **a design choice** | how the opening runs, how much a person says, when a character first shows what he wants | ask. The skill may have changed since the sheet was written, or the owner may have chosen against the skill for this game |
+
+**Asking is not the same as recording.** Writing the conflict into a draft's notes and building the
+cautious side is the failure this rule exists for. Ask first, then write.
+
+> **The incident, 2026-09-25.** `the_balance`'s opening was redrafted after the skill gained the
+> loud voice and the staged opening (F1b). `OPENING.md` still described the old opening: the step
+> dad says one line and never pushes, the game opens in the kitchen, the step brother gives nothing
+> away. The skill said the opposite. The author followed the sheet, listed the ten conflicts at the
+> end, and produced a correct, quiet opening. It knew from memory that LO had chosen the new plan
+> over the sheet. One question at the start would have saved the draft.
+
+## S13 · AN APPROVED PLAN LIVES IN THE GAME'S OWN PAGES
+
+**The rule:** when the owner approves a plan for a game (a new opening, a changed character, a new
+system), the plan goes into that game's sheets before anything is built from it. A plan that lives
+only in a chat, a research folder or a document outside `games/<slug>/` is invisible to the next
+session, because the next session reads the game.
+
+- **The sheets are the owner's.** Where the owner has said the agent does not write them, the agent
+  hands over the paragraph and the owner places it, or the owner names the file and says to write it.
+  Either way, the plan ends up on the page.
+- **A sheet that an approved plan has replaced is marked**, so nobody builds from the old version
+  while the new one is on its way. One line under the title is enough: *"Replaced by the plan approved
+  on <date>. Do not build from this page."*
+- **The skill holds no game's plan.** It holds the rules for every game, with placeholders instead of
+  names (`register.md`, "Show the mechanism. Never show the world."). The game-specific version, with
+  its people and its facts, only exists on the game's pages.
+
+> **The incident, 2026-09-25.** The approved new opening for `the_balance` (seven scenes, the job,
+> the first shift, a cafe girl who knows her name) lived only in
+> `~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`. The
+> session asked to redraft the opening was told to work from the skill and the game. It read the
+> game's `OPENING.md`, which still held the old opening, and built that.
+
 ## The opening sheet is a SCREEN WALK
 
 One row per screen, in order, with the button quoted. It is the only view a design cannot satisfy by

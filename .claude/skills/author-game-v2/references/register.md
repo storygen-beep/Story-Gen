@@ -18,8 +18,9 @@ quiet, direct and exaggerated — LO picked the top games' loud version over our
 I want it to be same as top games exactly,"* then *"we want to completely align the plan to
 chatgpt's new plan,"* and on 2026-09-24, of the style guide, *"I like it."* So **"The voice — say it
 loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
-it. Sources: `~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_WRITING_STYLE.md`
-§2–§5 and `SCENE_CONTENT_REVIEW.md`. The rules that are measured keep their measurements, and where
+it. Everything the rules need is written here; the documents they came from
+(`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/`, the style guide and the scene-content
+review) are pointers, not sources an author has to open. The rules that are measured keep their measurements, and where
 a measured rule and the voice disagree, the voice wins and the old rule is retired in place (L2).
 
 ---
@@ -28,7 +29,7 @@ a measured rule and the voice disagree, the voice wins and the old rule is retir
 
 The old voice was quiet: the story left between the lines for the player to infer. That is what
 was rejected. The new voice tells the player what is happening, what the protagonist feels, and
-why. **Loud is not long.** It keeps "Sentences run short" below and the 35–40 word beat.
+why. **Loud is not long.** It keeps "Sentences run short" below. Length is set by the scored model beats (`## The model beats`), not by a number.
 
 1. **Say it, don't hint it.** Tell the player what is happening and what it means.
 2. **Spell out the feelings.** Angry, scared, turned on, embarrassed: say so.
@@ -52,8 +53,8 @@ why. **Loud is not long.** It keeps "Sentences run short" below and the 35–40 
 The game's own voice — labels, buttons, guidance cards — stays plain. The loud voice is for the
 story text only (`the-voice.md`).
 
-**Measured targets** (`SCENE_CONTENT_REVIEW.md` C2 and C8; the field column is its random sample,
-because the curated scene library overstates every property):
+**Measured targets** (the 2026-09-24 scene-content review, which read the 26 games' own source; the field column is its random sample of passages, because a
+curated library of best scenes overstates every property):
 
 | | the top games | target |
 |---|---|---|
@@ -72,7 +73,7 @@ still speak. That split is L3 below.
 thanks her."* The quiet voice made few claims, so it rarely went wrong. The loud voice makes many,
 and every one has to be true on every playthrough that can reach the screen.
 
-Measured on the first loud rewrite of a real scene (`THE_BALANCE_WRITING_STYLE.md` §4): five lines,
+Measured on the first loud rewrite of a real scene (a breakfast scene, 2026-09-24): five lines,
 five defects — one contradicted the design (the wrong clothes for that hour), two claimed a past the
 player may not have had (*"last night"*, *"for the first time in a week"* on what could be day one),
 one was out of character, and one printed a stat that does not exist.
@@ -489,8 +490,8 @@ and v2 games moved nearly all their content *into* beats. `forty_miles` ships 93
 The field's density inside sexual content: **one clip every 58 prose words** (IQR 25–104, n =
 25,502 gaps). Ours run one every 178–435.
 
-Note the field's 37 words per reveal beat. That is v1's 35–40 rule landing dead on — **the beat
-length was never the problem; the picture on the beat was.**
+The field runs a median of 37 words per reveal beat, for reference only; the model beats set the length.
+**The beat length was never the problem; the picture on the beat was.**
 
 **Gate 31 · an explicit beat carries a clip.** ≥50% of beats with 3+ frozen-list words carry a
 media block of their own. Half the field's per-screen figure, below its per-reveal figure.
@@ -1081,9 +1082,9 @@ the fact was already doing the work and the gloss is the writer not trusting it.
 | ❌ | ✅ |
 |---|---|
 | "She turns it face down when you come in, which is a different thing entirely." | "She turns it face down when you come in." |
-| "…one sock on, which is as far as he got, and he has been sitting like that long enough that…" | "Roy sits on the edge of the bed with one sock on. He got that far and stopped." |
+| "…one sock on, which is as far as he got, and he has been sitting like that long enough that…" | "<name> sits on the edge of the bed with one sock on. He got that far and stopped." |
 | "…the orange sticker, which is the county's way of saying skilled tasks approved." | "Two of your cards have an orange sticker. Orange means the county approved skilled tasks." |
-| "…never once seen him take a chair, which is either respect or its exact opposite." | "Eleven weeks. Ward has never sat down in this room. You have not worked out why." |
+| "…never once seen him take a chair, which is either respect or its exact opposite." | "Eleven weeks. <his son> has never sat down in this room. You have not worked out why." |
 
 ⚠️ **The fix is not a dash or a bracket.** Same error as the comma swap above: the joint survives the
 swap and the reader still holds the sentence open. Cut it or split it.
@@ -1096,7 +1097,7 @@ negates in **12.06%** of sentences at the median and **25.76%** at the max (`bec
 over 25 games and 784,591 sentences, and our sixteen games ran 19.0–42.1%. The target line of the
 new voice is three negations in four sentences — *"He doesn't ask about college. He never does. He
 doesn't care what you want, what you're doing, or where your life is going. And you don't bother
-telling him anymore."* (`THE_BALANCE_WRITING_STYLE.md` §2). Under L2 that line fails; under the
+telling him anymore."* (the model line LO chose on 2026-09-23). Under L2 that line fails; under the
 voice it is the model. LO's call on the PRD's open decision 2: drop it.
 
 **What survives.** `lint_negation` still prints the share against the field, as a measurement and
@@ -1131,29 +1132,28 @@ when it sits inside a `group` whose `conditions` read the flag or counter that r
 been missed. That
 line is then true on every visit it can render on, which is the whole test.
 
-**And the big version is a one-time step** (added 2026-09-24, `THE_BALANCE_WRITING_STYLE.md` rule
-12). A moment with a reveal, a real conversation and a hook plays **once**, as a non-repeatable
+**And the big version is a one-time step** (added 2026-09-24). A moment with a reveal, a real conversation and a hook plays **once**, as a non-repeatable
 canvas. The daily repeatable of the same scene stays short, but it is not mute: **one spoken line
 and one visible want**, true on every visit. `## The model beats` above shows the pair. The field
 does the same: of the scenes that carry the full *reason + want + change + pointer* shape,
 repeatable screens run **0%** in a random sample of 52 and 5% in the curated library, against 70%
 of quest and story beats — a curated-library figure, so read it as direction, not a rate
-(`SCENE_CONTENT_REVIEW.md` C1). `the-arc.md` A1 is the same idea one level up: the numbered steps
+(the 2026-09-24 scene-content review, which read the 26 games' own source). `the-arc.md` A1 is the same idea one level up: the numbered steps
 are one-time, and the repeatable is what they convert into.
 
 **The facts are not deleted — they move.** Backstory belongs on a one-time canvas, where it lands
 once, properly, and then stays out of the way:
 
-> **Repeatable screen:** "You unlock Roy's door and go in. His bed stands against the front-room
+> **Repeatable screen:** "You unlock <name>'s door and go in. His bed stands against the front-room
 > wall, under the window that faces the road. He watches it. Always. He hears you in the hall and
 > turns his head."
 >
-> **One-time canvas, same facts:** "Ward and two neighbours carried Roy's bed down out of the
+> **One-time canvas, same facts:** "<his son> and two neighbours carried <name>'s bed down out of the
 > upstairs room in March. The couch went out to the barn to make space. He has slept in the front
 > room ever since."
 
 ⚠️ **`the-clock.md` C2 already owns the neighbouring rule** — a beat may not say what *time* it is —
-and it is complete, including the exemptions for a recurring hour (*"Ward comes by at ten"*) and a
+and it is complete, including the exemptions for a recurring hour (*"<his son> comes by at ten"*) and a
 past one. **L3 is about elapsed time, not clock time.** Do not read one as the other.
 
 ### What one pass looks like
@@ -1319,7 +1319,7 @@ Three facts folded into an idiom — she has a key, she does not knock, nobody g
 of the three is recoverable by a reader who does not already own the phrase. The plain version is
 one word longer and carries all three:
 
-> ✅ "You **unlock Roy's door** and go in."
+> ✅ "You **unlock <name>'s door** and go in."
 
 Same family, same games: *"the cushion has **given up** on the left side"*, *"neither of you is
 going to **call it** a surprise"*, *"you both **let that stand**"*. Each one is a plain event
