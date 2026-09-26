@@ -1,0 +1,50 @@
+#!/bin/sh
+# Refuse a commit that would publish a v2 game build that fails the ship check.
+#
+# Added 2026-09-26 (PRD WS6, ~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md).
+# Committing games/<slug>/output/index.html or games-data.js IS publishing: the portal is
+# served straight from the committed tree. So this is the one place a build can be held.
+#
+# It checks a slug only when all of these hold (the parsing lives in gates.py
+# --ship-targets, so the portal is read one way, and the STAGED portal is the one read):
+#   · its build, or games-data.js, is staged
+#   · it is a v2 game (games/<slug>/v2_state.json exists) — v1 games such as vesper are
+#     never caught
+#   · its portal entry is NOT `dev: true` — a test build passes straight through
+#
+# Install:  ln -s ../../scripts/hooks/pre-commit .git/hooks/pre-commit
+# Bypass, for an emergency only:  git commit --no-verify
+
+root=$(git rev-parse --show-toplevel) || exit 0
+cd "$root" || exit 0
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR \
+           -- 'games/*/output/index.html' 'games-data.js')
+[ -z "$staged" ] && exit 0
+
+py="$root/venv/bin/python"
+[ -x "$py" ] || py=python3
+gates="$root/.claude/skills/author-game-v2/scripts/gates.py"
+
+tmp=$(mktemp) || exit 1
+trap 'rm -f "$tmp"' EXIT
+if git cat-file -e :games-data.js 2>/dev/null; then
+  git show :games-data.js > "$tmp"
+  targets=$("$py" "$gates" --ship-targets --portal "$tmp" $staged)
+else
+  targets=$("$py" "$gates" --ship-targets $staged)
+fi
+[ -z "$targets" ] && exit 0
+
+failed=0
+for slug in $targets; do
+  "$py" "$gates" --ship "$slug" || failed=1
+done
+
+if [ "$failed" -ne 0 ]; then
+  echo "pre-commit: the ship check failed — this commit would publish a build that is"
+  echo "broken, unfinishable or untrue. Fix the BLOCK rows above, or keep the portal"
+  echo "entry at dev: true until it passes."
+  exit 1
+fi
+exit 0

@@ -357,7 +357,7 @@ down, which is the objects mistake in a new coat.
 
 **The branch is thin, and the size is stated because it will not hold otherwise.** Vesper's is
 **2.3 KB**; DoL's are **458–473 bytes**. Target: **a tier band is one or two paragraphs plus a media
-pool** — the same ~35–40 words per beat as everything else, not a scene. The temptation is to write a
+pool** — beats the length of the model beats in `register.md`, not a scene. The temptation is to write a
 full encounter every time because that feels like more care; it is how this rule dies.
 
 > ⚠️ **Do NOT try to build DoL's engine.** Its 683 KB of shared machinery — 229 KB of prose bank,

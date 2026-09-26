@@ -251,6 +251,13 @@ schedule-gated the window rides along: *"Catch him in the garage — weekday eve
 
 Atmosphere belongs in the card's narrative line. The goal label is load-bearing navigation.
 
+**A card cannot name a person the player can rename.** `@` tokens resolve in block content, a
+location's description and blocked message, choice text and an NPC's role, and nowhere else
+(`engine.md` §43); a quest card's `text`, `tip` and goal `label` print the token raw. So on a card,
+name a renameable person by role (*"your step dad"*) or by pronoun (*"he's in the kitchen at
+six"*). The fixed name is fine for a person the player cannot rename. This is an engine gap, not a
+style: cards resolving tokens would remove the rule.
+
 #### R3b · And print the number — this is the defect the genre dies of
 
 Measured 2026-09-03 across 23 female-lead games and 5,663 player comments: **being stuck is the

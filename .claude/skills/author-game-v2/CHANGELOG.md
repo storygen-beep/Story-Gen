@@ -5,6 +5,422 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-26 — ladders: each step fires when unlocked, and each unlock is earnable (PRD WS4)
+
+**Why.** No check knew what a person's steps were. The Balance added 39 repeatables and no new
+step, and nothing saw it. G7 passed a milestone on an `is_false` read. And `--ship` had a
+placeholder row, "every person's ladder plays end to end", that was always red.
+
+**What changed.**
+- **`references/state.md`: new declared field `board.characters[].ladder`.**
+  - Shape: `{counter, steps:[{n, canvas, where, when:{days, from, to}, gate:[…]}]}`.
+  - `when` is ONE window, and it must equal the canvas's trigger schedule (LO's call).
+  - Also new: `releases[].repeatables` and `releases[].ladder_steps`.
+- **`scripts/gates.py`: new gate `ladders move forward`, via `ladder_problems`.**
+  - For every declared step it reads the real canvas and FAILs on any difference (LO's call):
+    - the canvas exists, is not dev, and is active;
+    - `trigger.location` equals `where`;
+    - the trigger schedules equal `when` (days, from, to);
+    - trigger conditions are version 1.0 and AND;
+    - the non-counter conditions equal the declared `gate`, both ways;
+    - the counter conditions are true at N−1 and false at N;
+    - some exit sets the counter to N (`set N` or `add 1`);
+    - a bound NPC is scheduled at `where` in the window on every declared day.
+  - Then earnability, for each gate item: some reachable non-dev scene that is open at a counter
+    value below N (and is not the step itself) sets that flag or moves that meter far enough:
+    - a repeatable raise counts, unless its `cap` falls short;
+    - one-time raises are summed (the best exit per canvas);
+    - a `set` counts if its value satisfies the gate.
+  - n/a until a ladder is declared.
+- **G7 `milestones open something`: a read that is ONLY `is_false` no longer counts as opening**
+  (LO's call).
+  - A key is still credited if the same canvas also reads it positively.
+  - Callback lines (`text_reads`) and trait writes are still credited.
+  - Implemented as `neg_only_reads` in `build()`.
+- **New lint `repeatables without a step`.** Reported only.
+  - It compares against the last `releases[]` entry.
+  - A first release prints its baseline.
+- **`scripts/playtest.py`: new `reach_step(page, game, ladder, upto, budget=40)`.** Also
+  `apply_flag`, `offered`, `dice_off` and `dice_on`, copied from
+  `games/the_balance/process/walks.py` (that file is not touched).
+  - Per step it SETS the clock to the window start and the place, and applies the declared gate
+    through the engine.
+  - It never sets the counter: the counter is carried forward, and it must read N−1 before step
+    N starts.
+  - It asserts that the room offers the canvas (`isCanvasSelectable`), then searches choice paths,
+    restoring the step-start state between tries, until the counter reads N.
+  - Dice are pinned. It asserts on state only.
+- **`--ship`: the placeholder row is replaced by "each step fires when unlocked, and each unlock
+  is earnable"** (`SHIP_LADDER_ROW`, `_ship_ladders`). The name is LO's; it does not claim
+  "plays end to end".
+  - Red for a person on the release page with no ladder.
+  - Red on any static problem, and then the build is not played.
+  - Red if `reach_step` stops short, or the harness cannot run.
+  - n/a when the page names nobody; the "matches the release page" row is red for that.
+- **Docs.**
+  - `SKILL.md`: the gate row, the lint, and the `--ship` BLOCK list.
+  - `the-release.md`: shipping step 7 explains the row; new step 8 records `releases[]` fields.
+
+**Verified.**
+- **`scripts/tests/test_gates_ws4.py`: 25 tests.** They include:
+  - the 3-step ladder passes;
+  - removing step 2's counter set fails;
+  - a schedule mismatch (hours, days) fails;
+  - a place mismatch, a gate mismatch both ways, a counter that doesn't shut, an absent person,
+    an unearnable meter, one-time sums, an unlock open only after the step, and a dev canvas all
+    fail;
+  - G7 is_false and callback cases;
+  - growth lint ×3;
+  - ship row n/a, red ×3, and green.
+- **The fixture TOML is BUILT in a temp dir with `package_from_toml --gen-version v2`** (about
+  20s). `reach_step` reaches step 3 on it (choosing "Stay" over "Go back"), and stops at step 2
+  when step 2 can't be offered, with the counter left at 1.
+- **`test_gates_ws6.py`** stubs the ladder row, so its green fixture now ships (0 red rows).
+- **All 68 tests pass.**
+- **Before → after on the three games.**
+  - the_balance: new gate n/a; 29/44 unchanged.
+  - orientation: new gate n/a; 46/49 unchanged.
+  - vesper_two: new gate n/a; 44/47 unchanged.
+  - G7 is unchanged on all three: none of them has a milestone opened only by an `is_false` read.
+  - The lint prints each game's baseline: 64, 35 and 45 repeatables, 0 steps.
+  - The `--ship` ladder row goes from FAIL to n/a on all three, because none has a
+    `release_page`. They still fail `--ship` on "the build matches the release page" and their
+    other rows: 7, 6 and 6 red, down from 8, 7 and 7.
+- `--selfcheck` is clean (51/51 gates, 46/46 lints). cite_check is 84, the same as baseline.
+  `git status games/` is unchanged.
+
+**Open, for LO.** Not crediting trait writes in G7 (PRD WS4 item 4, third part) is NOT done. Measured:
+it would fail the_balance `first_shift` and orientation `ray_01`, `ray_02`. Those raise a meter
+that a repeatable reads, which is a real opening.
+
+---
+
+## 2026-09-26 — `--ship`: the one check that can stop a publish
+
+**Why.** Nothing read this script's verdict. No hook or script called it, `release_upload.py`
+never called it, and publishing is a manual commit of `games/<slug>/output/` plus
+`games-data.js`. The Process Review (Round 3 §5) found the finish line moved because nothing held
+it. This is work item WS6 of `~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md`.
+
+**LO's decisions, 2026-09-26:**
+- Block only what makes a build broken, unfinishable or untrue, and report everything else.
+- The ladder row fails as "not measured yet" until PRD WS4.
+- The block sits in both `release_upload.py` and a pre-commit hook, and a `dev: true` build passes
+  through.
+
+**`scripts/gates.py`:**
+- **New mode `--ship <slug>`** (`ship_mode` / `ship_rows`). Run it from the repo root. It prints a
+  **BLOCK** list and a **REPORT** list, and **exits 1 on any red BLOCK row**.
+- **BLOCK rows:**
+  - no past claim on a repeatable · no printed stat labels · a one-time step with a person speaks ·
+    the opening's card has goals. These are the four lints, called as they are, with n/a read
+    from an empty return;
+  - every person's ladder plays end to end: always red, "not measured yet — PRD WS4";
+  - LO signed the playtest (`release_page.signed_by_lo` + `signed_at`);
+  - the build exists and is a release build (`--release`);
+  - the last release's saves still load (`--saves`; n/a when there is no archive yet);
+  - the declared door works (`ends on an opening`);
+  - the pressure can be paid or is signposted (`the obligation is charged`; n/a when no obligation
+    is declared);
+  - no empty rooms (`standing surface`);
+  - the build matches the release page (every `release_page.people` id is an `[[npcs]]` id, and
+    `release_page.door` equals `board.door`; no `release_page` FAILS).
+- **REPORT rows:**
+  - dialogue share, every hub met first, clips on explicit beats;
+  - the explicit floor, with both field measures in the line: per paragraph 4.4% median and 8 of
+    26 meet 7.5%; per passage 28–33% median, with DoL, the source of 7.5%, lowest;
+  - location fill, the walk-in floor, traversal heat, sentence length;
+  - "a hint line with place and time per step" (not measured yet, PRD WS10);
+  - "every other gate", with its reds listed.
+- **`--ship-targets [--portal FILE] <paths…>`** (internal, for the hook) prints the slugs a commit
+  must pass. A slug counts only if it is a v2 game (it has `v2_state.json`, so v1 `vesper` is never
+  caught), its build or the portal is staged, and its portal entry is not `dev: true`.
+- **`_portal_entries(root, path=None)`** can read a given portal file (the staged one). Its default
+  behaviour is unchanged.
+- **`--selfcheck`**'s mode list includes `--ship`.
+- **A deviation from the approved plan, recorded.** The plan said to refactor `release_mode` and
+  `saves_mode` into row-returning helpers. Instead `--ship` **calls them unchanged**, capturing
+  their output: it reads their exit codes and quotes their `[FAIL]` lines. Their own output is
+  byte-identical by construction, which the plan required anyway, with no refactor risk.
+
+**Publishing:**
+- **`scripts/release_upload.py`: new `check_ship(slug)`**, called right after
+  `check_media_present`. It runs `gates.py --ship` from the repo root and raises `ReleaseError` on
+  a red. A game without `v2_state.json` is skipped with a note. `--check` (re-testing links) is
+  unaffected.
+- **New `scripts/hooks/pre-commit`.** It reads the **staged** `games-data.js` (`git show
+  :games-data.js`), asks `--ship-targets` which slugs to check, and runs `--ship` on each. It
+  blocks the commit on a red. It is installed as a symlink, `.git/hooks/pre-commit ->
+  ../../scripts/hooks/pre-commit`, the same method as the existing `post-commit`.
+  - ⚠️ `--ship` itself reads the working-tree portal for `--release`'s "filed as published" check.
+    At commit time the two are normally the same.
+
+**Doctrine:**
+- **`references/the-release.md`.** The first-release bar "Every gate green on the day it ships"
+  is replaced by "`gates.py --ship <slug>` exits 0 … the REPORT list is printed and LO judges it".
+  Shipping steps gain step 7 (`--ship`, run by the upload script and the hook).
+- **`SKILL.md`:**
+  - the operating rule "Gates before ship" becomes "Ship on `--ship`", with the BLOCK and REPORT
+    lists;
+  - the modes table gains `--ship`.
+- **`references/state.md`** documents the minimal `release_page` (`{version, people[], door,
+  signed_by_lo, signed_at}`). The full page is PRD WS8.
+
+**Tests.** New `scripts/tests/test_gates_ws6.py`, 20 tests (43 in all with WS5's):
+- **The base fixture.** A small v0.1 fails **only** the ladder row, which proves every other BLOCK
+  row can pass.
+- **One fixture per BLOCK row turns that row red:** past claim, printed stat, mute one-time step,
+  no goal card, unsigned, bad build, broken saves, undeclared door, unpayable pressure, dead row,
+  a page naming a missing person, no release page.
+- **REPORT rows never change the verdict.**
+- **`--ship-targets`:**
+  - skips dev entries and v1 games;
+  - checks every published v2 game on a portal change;
+  - reads a staged portal.
+- **The real hook in two throwaway git repos:** it blocks a published v2 build and lets a
+  `dev: true` build through.
+- **`release_upload.check_ship`:** it raises on a red, and skips a v1 game.
+
+**Verified:**
+- `pytest`: 43 passed.
+- `gates.py <slug>`, `--release <slug>` and `--saves <slug>` output on the_balance, orientation and
+  vesper_two is **byte-identical** to before (`cmp`).
+- **`--ship` exits 1 on all three:**
+  - **the_balance**, 8 BLOCK rows red:
+    - past claim (16);
+    - ladder not measured;
+    - not signed;
+    - not a release build (dev and debug, 20 missing media, `dev: true`, no version);
+    - no door;
+    - stale week income;
+    - 29 dead rows;
+    - no release page.
+  - **orientation**, 7 red: past claim (5), ladder, unsigned, not a release build, no door, one
+    dead row (Wes), no release page.
+  - **vesper_two**, 7 red: past claim (28), the opening arms no card with goals, ladder, unsigned,
+    not a release build, no door, no release page.
+- `release_upload.py the_balance --no-upload` refuses at its own dev-build check, before any zip
+  or upload. No `dist/` was created.
+- The hook, run against the current index with nothing staged, exits 0.
+- `--selfcheck`: the index is current.
+- `cite_check.py`: 84 drifted, the same as the baseline.
+- `git status games/` is unchanged.
+- Nothing is committed.
+
+**Worth knowing.** `no past claim on a repeatable` is now a blocker, and its regex
+(`PAST_CLAIM_RE`) reads "again" as a claim about the past. Some of the_balance's 16 hits read as
+habit rather than history ("She is at the sink again"). If that proves wrong in play, the fix is
+the regex (a layer fix, per Step 5b), not the list.
+
+## 2026-09-26 — four gates that passed the wrong thing now check the thing
+
+**Why.** The Process Review (`~/Documents/Process_Review_20260925/`, Round 3, and
+`round3_evidence/r3_correction_passes.md` §2.4) found four gates green while the thing they
+guard was broken. Work item WS5 of `PRD_SKILL_CHANGES.md` fixes them before WS6 makes any gate
+block a publish. LO approved the plan, and chose on 2026-09-26 that an undeclared door FAILS.
+
+**`scripts/gates.py`: the four gates** (names unchanged):
+- **`standing surface`.** It used to ask two things: is any canvas bound to her anywhere, and does
+  she have any schedule row. It now judges **every schedule row, per weekday**:
+  - Is there something in that room at those hours? A portrait canvas bound to her, a canvas she
+    speaks on or that asks `npc_at_location is_present`, or a substitution whose host is live.
+  - It also lists portrait canvases that are **stranded** (bound to a room she is never in) or
+    **day-capped on the trigger**.
+  - The rule is ported from `games/the_balance/process/presence.py`, which was read, not edited, via
+    the new `_schedule_rows_backed`.
+  - A row whose job is only to put a body in a room is declared in the ledger with its reason
+    (`board.characters[].occupancy_rows`), never hard-coded.
+  - Windows that run past midnight (23:00–08:00) are read as two spans. The ported file could not
+    read them.
+- **`ends on an opening`.** It used to accept any locked choice anywhere. It now checks the door
+  named in **`board.door = {canvas, choice}`**: the canvas is not dev, the choice renders locked, it
+  is shut at the start, and every condition on it can come true later. With no ledger the gate is
+  n/a; with a ledger but no `board.door` it FAILS.
+- **`guidance exists`.**
+  - It read `quests_engine` from `[settings]` as well as `[project]`, but the engine reads only
+    `[project]` (`template_import.py:1870`, `:2767`). A `[settings]` placement now FAILS by name.
+    That is vesper_two's zero-card guidance page.
+  - Cards with no words, and cards whose `when` nothing in the game can ever make true, are listed
+    as gaps.
+- **`the obligation is charged`.**
+  - The charge must sit on a **recurring, non-dev** canvas, or on `board.economy.settle_canvas` if
+    declared, or come from `[settings.rent]`.
+  - New `_week_income` measures what a week can bring in. It takes the best exit per capped canvas
+    per visit, times the days it can run; a daily flag anywhere on the canvas counts as a cap;
+    uncapped sources are left to `no free uncapped income`.
+  - The gate FAILS if the **average** week can't pay the obligation, unless `obligation_moves`
+    signposts when it will. It also FAILS if a declared `week_income` is above what the build can
+    pay at most (a stale ledger).
+  - The figure is an upper bound: it does not model whether one day has time for every job.
+
+**`scripts/gates.py`: other fixes found while exploring:**
+- **One reading of `is_repeatable`.** A new `_rep_of(trigger)` uses the engine's default (absent
+  means repeatable). It replaces 11 sites that read an absent key as one-time, including the
+  one-time-speaks and past-claim lints and the walk-in and hub gates. No canvas in the three games
+  omits the key, so no verdict there moved; the fixture proves it.
+- **`--json` now exits with the verdict**, as the text mode does. It used to return 0 always.
+- **Duplicate gate numbers.** The second G33/G34/G37/G47 comments were renamed G33b/G34b/G37b/G47b.
+  These are comments only.
+
+**Doctrine:**
+- `references/state.md` documents `board.door`, `board.characters[].occupancy_rows` and
+  `board.economy.settle_canvas` in the table of keys the gates read.
+- `references/the-economy.md` gate 24 row updated.
+- `SKILL.md` gate-table descriptions updated for `standing surface` and `ends on an opening`.
+
+**Tests.** New `scripts/tests/test_gates_ws5.py`: 23 fixtures, each a minimal game dict built in
+the test. For every gate there is a FAIL fixture and a PASS fixture. There are also fixtures for the
+repeatability default and the `--json` exit code.
+
+**Verified:**
+- `pytest`: 23 passed.
+- **The port is faithful.** On the_balance at `6e0bd9d`, with presence.py's own exemptions (at its
+  first commit, `63df046`) supplied as ledger rows, `_schedule_rows_backed` reproduces presence.py's
+  output exactly: 4 DEAD plus its 2 hand-deferred rows, 1 stranded (`office_closer`), 4 day-capped,
+  6 on a ladder.
+- **Before → after on the three games** (`diff` of verdicts). Only these moved:
+  - **the_balance 31/44 → 29/44:**
+    - `ends on an opening` FAIL (no `board.door`);
+    - `the obligation is charged` FAIL (declared `week_income` 220 against a build that can pay at
+      most 199: $3 shifts, a daily stream of 8–25). The average week is 139.5 against 150; that is
+      signposted by `obligation_moves`, so the only failure is the stale ledger;
+    - `standing surface` was already FAIL and now lists 29 rows instead of 3 names. Many are rows
+      presence.py excused in its own table (sleep, the bath, the shower) and must now be declared
+      as `occupancy_rows`.
+  - **orientation 48/49 → 46/49:**
+    - `ends on an opening` FAIL (no `board.door`);
+    - `standing surface` FAIL: Wes is scheduled on the avenue 07:15–07:50 on weekdays, and nothing
+      there is his.
+  - **vesper_two 46/47 → 44/47:**
+    - `ends on an opening` FAIL (no `board.door`);
+    - `guidance exists` FAIL (`quests_engine` under `[settings]`).
+    - Its `standing surface` still passes. Mercer's overnight stall row is backed, and it would
+      have read DEAD without the midnight fix.
+- `--json` exits 1 on all three (it was 0).
+- `--selfcheck`: the index is current.
+- `cite_check.py`: 84 drifted, the same as the baseline.
+- `git status games/` is unchanged. No game file was touched.
+
+## 2026-09-26 — the 35–40 number leaves the skill
+
+**Why.** LO dropped the 35–40 words-per-beat number on purpose: "Loud is not long", and the scored
+model beats set the length. The number had already left the project `CLAUDE.md` (`ffd8908`), but
+survived in five places in this skill.
+
+This is work item WS1 of `~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md` (Process
+Review, Round 4 §3). LO approved the exact wording before the edit.
+
+**Changed:**
+- **`references/register.md` "The voice"** (line 32): "It keeps 'Sentences run short' below and the
+  35–40 word beat" now reads "…below. Length is set by the scored model beats (`## The model beats`),
+  not by a number."
+- **`references/register.md`** (line 493): "That is v1's 35–40 rule landing dead on" now reads "The
+  field runs a median of 37 words per reveal beat, for reference only; the model beats set the
+  length." The line "the picture on the beat" is kept.
+- **`references/the-surfaces.md`** (line 360): a tier band's beats are now "the length of the model
+  beats in `register.md`". It no longer says "~35–40 words per beat".
+- **`references/the-phone.md`** (line 110): the comparison now reads "every other surface in this
+  skill is longer (the model beats in `register.md`)". P3's 15-word message is unchanged.
+- **`scripts/gates.py`**: a comment in the `--beat` header only. It now points at the model beats; the
+  37-word field figure is kept as a reference, not a rule. No code changed.
+- **`DOCTRINE_GAPS.md`**: four history entries (the RTS-flat quote, point c, the passage-length note,
+  the 2026-08-29 phone-study row) kept as written, each marked "superseded 2026-09-26".
+
+**Verified:**
+- `grep -rnE '35.?40' SKILL.md references/ scripts/ templates/` leaves only rung thresholds in
+  `the-meters.md:313/318`, which are not the beat rule.
+- `gates.py` output on the_balance, orientation and vesper_two is byte-identical before and after
+  (`diff`), with exit 1 on all three as before.
+- `--selfcheck` exits 0.
+- `cite_check.py` is at its baseline: 84 citations point at the wrong line, before and after.
+- `git status games/` is unchanged. No game was touched.
+
+
+
+Two sessions used the updated skill on `the_balance`: the opening draft
+(`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/OPENING_DRAFT.md` §5–6) and the
+`mum_sat_down` style rewrite (`STYLE_REWRITE_MUM_SAT_DOWN.md`). Both listed what they had to guess.
+
+**`scripts/gates.py`**
+- **Reads inside story text** (`build`): a flag read by a `group` / `block_pool` condition is kept
+  as `text_reads`, apart from `reads`, and G7 `milestones open something` counts it. A callback
+  line on the daily card is the skill's own shape for a first-time step, and the truth rule gates a
+  past line exactly this way. The economy gates still see only `reads`.
+- **G7's failure text** now says how a first-time step passes: set a flag the daily card reads.
+- **The opening walk** (`_funnel_walk`, `_capstone_at`, used by `_fh_handovers` and
+  `_opening_flags`): follows the boot's location exit into a capstone (a one-time canvas at that
+  location whose trigger flags the funnel has set, and whose window covers the minute) and judges
+  the real handover. Node ids are normalised to their last segment, as the engine does
+  (`v2.py:13716`).
+- **`lint_printed_stat`** lists every printed stat label, declared or not, since LO's decision that
+  scores stay hidden.
+- **`lint_negation`** says L2 is retired and the figure is for reference.
+- **Stable output:** ties in the tier ranking and the sink location are broken by name. Three runs
+  are now byte-identical.
+
+**Doctrine**
+- **`references/the-first-hour.md` F1b:**
+  - the goal shape has no `type` key (the importer never reads it, `template_import.py:1200-1233`);
+  - how a reaction line is built (one short node per choice);
+  - screen length (split a many-job screen rather than write a 190-word wall);
+  - the tutorial lines are the game's voice, so rule 5 does not apply to them;
+  - several people met in one opening (one meeting flag each, `requires_npc` off, schedule window on);
+  - the evidence written inline instead of cited by number.
+- **`references/the-first-hour.md` F2:** the checker follows the boot into the capstone, and node
+  ids may be bare or qualified.
+- **`references/the-meters.md`:** the reaction-line shape pointer, and outside citations ("rule 13",
+  "C7") replaced by the evidence itself.
+- **`references/the-voice.md` R3:** a card cannot name a renameable person, because tokens do not
+  resolve on cards (`engine.md` §43). Name them by role or pronoun. Recorded as an engine gap.
+- **`references/register.md`:**
+  - outside citations (style guide §, "rule 12", C1, C2, C8) replaced by the evidence and one
+    pointer;
+  - the L3 and "words the player owns" examples use `<name>` / `<his son>` instead of Roy and Ward
+    ("Show the mechanism. Never show the world.").
+- **`SKILL.md` and `gates.py`:** the drifting pointer `register.md:491` is now the section name
+  (`"S1 · The clip rides the beat"`).
+
+**Verified**
+- `gates.py` before and after on the_balance, orientation and vesper_two. Only the intended rows
+  moved:
+  - the_balance's opening is now judged at its real handovers (08:32 quad and strip, 08:52 quad),
+    not the 07:10 hop to the front room;
+  - its opening card lint now sees `card_first_friday`;
+  - vesper_two's opening, n/a before because of qualified ids, now walks and passes (46/47, from
+    45/46).
+- The `mum_sat_down` draft's Appendix A spliced into a scratch copy: G7 goes from 3/4 (old script)
+  to 4/4 (new), with no trigger change.
+- `--selfcheck` passes. `cite_check.py` is at its baseline. `grep` finds no "rule 13", "C7" or
+  `SCENE_CONTENT_REVIEW` citation, no Roy or Ward, and no `type = "flag"` goal left in the reference
+  files.
+
+**Not in this round:**
+- `gates.py` blocking builds;
+- existence gates that pass the wrong thing;
+- parked content turning gates n/a;
+- the founding numbers;
+- the 84 broken citations;
+- missing features;
+- an arc-length rule.
+
+## 2026-09-25 — when the skill and a sheet disagree, and where an approved plan lives
+
+- **`references/the-sheets.md` S12 (new):** when a skill rule and a sheet line disagree, stop and
+  ask the owner. A fact on a sheet holds, and a design choice on a sheet is asked about. Recording
+  the conflict and building the cautious side is the named failure.
+- **`references/the-sheets.md` S13 (new):** an approved plan goes into the game's own pages before
+  it is built. A replaced sheet carries a one-line "do not build from this page" marker. The skill
+  holds no game's plan.
+- **`SKILL.md`, operating rules:** one bullet pointing at S12 and S13.
+- **Why:** the 2026-09-25 redraft of `the_balance`'s opening. The skill had the new voice and F1b,
+  `OPENING.md` still had the old opening, and the approved plan lived outside the game folder. The
+  author followed the sheet, listed ten conflicts at the end, and wrote a quiet opening. It
+  diagnosed this itself afterwards.
+- **Same turn, in the game:** LO asked for `games/the_balance/sheets/OPENING.md` to be rewritten to
+  the approved plan. That is his page, written on his explicit instruction for that one file.
+- **Verified:** read back both new sections; `grep -n "S12\|S13" SKILL.md references/the-sheets.md`
+  resolves.
+
 ## 2026-09-25 — the score is hidden, the reaction is shown, the requirement is told
 
 - **`references/the-meters.md`, "What the player is shown".** Replaced the 2026-09-24 paragraph

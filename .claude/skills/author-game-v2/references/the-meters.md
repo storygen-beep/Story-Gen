@@ -824,7 +824,7 @@ the model's mouth to a frown at `exposed === 2`.
 **That is the shape to copy: one derived number, cheap enough to test that the whole world tests
 it.** W3's gate is what makes sure somebody reads it.
 
-**Show the reaction, not the number** (added 2026-09-24, `THE_BALANCE_WRITING_STYLE.md` rule 13).
+**Show the reaction, not the number** (added 2026-09-24).
 The same holds after a choice. What the player sees when a click moves something is **a reaction
 line** — *"He nods. Once."*, *"Her face goes hard."* — or **a real consequence named after a real
 flag**, like a lift offered for tomorrow that the flag actually delivers. Never `+Respect` or
@@ -836,7 +836,7 @@ flag**, like a lift offered for tomorrow that the flag actually delivers. Never 
 | on the button before the click | 1 at scale (degrees-of-lewdity, a coloured marker, no number), 2 marginal |
 | players asking to see a stat | 4 of 22,252 comments |
 
-Source: `SCENE_CONTENT_REVIEW.md` C7.
+Source: the 2026-09-24 scene-content review, which read the 26 games' own source.
 
 **LO's decision, 2026-09-25: the score is hidden, the reaction is shown, the requirement is told.**
 Four parts, and they apply to every game this skill authors:
@@ -844,9 +844,11 @@ Four parts, and they apply to every game this skill authors:
 1. **A person can keep their own score, and the player never sees it.** Where W1 puts weight on
    the cast (`who_climbs = "cast"` or `"both"`), each person's number is internal. It picks which
    reaction, which line and which step comes next. This is what the field does: 21 of 26 games keep
-   per-person state (`SCENE_CONTENT_REVIEW.md` C7), and 8 of 26 never print a change to it.
+   per-person state, and 8 of 26 never print a change to it.
 2. **After a choice, the player sees a reaction or a real consequence.** Never a number, and never
-   a `+Respect` or `−Relationship` label, whether or not the stat is declared. A number invites
+   a `+Respect` or `−Relationship` label, whether or not the stat is declared. The reaction is the first
+   line of the node the choice leads to; when reactions differ, one short node per choice
+   (`the-first-hour.md` F1b step 3). A number invites
    farming: the player repeats a choice to watch it climb.
 3. **When something is out of reach, the player is told what it needs.** That is the question
    players actually ask: of 22,252 comments, 4 ask to *see* a stat, and the recurring ask is *"how

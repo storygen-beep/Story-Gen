@@ -136,8 +136,11 @@ whether the name is doing work, or delete it.
 
 ### F1b · The opening's shape — setup, problem, person, conflict, choice, temptation, objective, play
 
-Added 2026-09-24, from LO's opening plan (`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`
-§2 and §4). The old opening shape was *wake up → routine → leave → the job*, and it ended on a quiet
+Added 2026-09-24. LO chose it on 2026-09-23 over the old shape, after reading a comparison of 26
+top games' openings: the top games tell the player who she is, what the problem is and what to do,
+put people on screen who want things, and end on a question. (The plan it came from is
+`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`, a
+pointer only; everything the rule needs is here.) The old opening shape was *wake up → routine → leave → the job*, and it ended on a quiet
 literary line. The new one:
 
 ```
@@ -148,27 +151,43 @@ setup → problem → character interaction → conflict → choice → temptati
 
 1. **The first screen states it plainly:** who she is, the problem, what she wants, and her voice.
    Said, not implied (`register.md`, the voice, rule 1). F2b's field figures still hold for its
-   length: median 144 words.
+   length: median 144 words. **"Loud is not long" applies to every other screen:** when a screen
+   has to carry several jobs, split it into two screens rather than write one wall. The first
+   opening drafted under this rule put the objective, the mystery, the person and the tutorial on
+   one 190-word screen with almost no speech; that is the shape to avoid.
 2. **The first person on screen talks, pushes, and wants something from her.** Someone speaks →
    she answers → they push → she thinks. Who they are, what they want and how they feel about her
    in the first lines.
 3. **A first choice inside that first character scene**, not after the opening. Its consequence
    is **visible as a reaction line**, or as a real flag named on the button — never a score or a stat label
-   (`the-meters.md`, "What the player is shown").
+   (`the-meters.md`, "What the player is shown"). **How it is built:** the reaction is the first
+   line of the node the choice leads to. When the reactions differ, each choice gets its own short
+   node that opens on its reaction and then rejoins the scene. That costs the player one click per
+   choice, and it is the shape: the engine has no other place to print a line after a click.
 4. **An early temptation** in the first few scenes: attraction, tension, a look, a suggestive
    choice. The player should know within minutes that sex is what this game is about. 15 of 26 top
    games put something tempting in the opening and 3 put explicit sex there; 8 put nothing
-   (`SCENE_CONTENT_REVIEW.md` M12).
+   (measured 2026-09-24 in the 26 games' own source).
 5. **The first objective is a quest card with goal steps.** Not a tip alone: `goals`, so the page
    prints what is done and what is next (`the-voice.md` R3b). 21 of 26 top games give "what next"
-   text, and progression questions are the players' number-one comment topic (M1). Lint `the
-   opening arms a card with goals`.
+   text, and progression questions are the players' number-one comment topic: 8.4% of all comments,
+   in 30 of 30 games (measured 2026-09-24). Lint `the opening arms a card with goals`. The goal
+   shape is `engine.md` §47's: `flag` or `trait`, with `subject`, `op`, `value` and `label`. A
+   `type` key is ignored by the importer (`template_import.py:1200-1233` never reads it).
 6. **Plain tutorial lines on the last screen**, in the game's own plain voice (`the-voice.md`):
    money, work, exploring, people, choices. *"You need money. Take shifts at the bar, or find
    another way."* This is the one place the story text may explain a system directly. F2b's warning
-   about the developer talking is about screen one and patch notes, not this.
+   about the developer talking is about screen one and patch notes, not this. **These lines are the
+   game's voice, not a scene**, so the voice's rule 5 (more dialogue than narration) does not apply
+   to them. Give them their own screen, or put them under the card, rather than inside a scene that
+   has to talk.
 7. **It ends on a hook:** a money problem + the objective + a mystery + a person + a choice. Not a
    quiet last line.
+
+**Meeting several people in one opening.** A staged opening often meets two or three people in
+one scene. Set one meeting flag per person staged (F8 still holds: one flag, one person).
+`requires_npc` takes one person, so a meeting with several people leaves it off, and uses the
+trigger's schedule window to put the scene where they all are.
 
 ⚠️ **A walk-out is not a refusal.** F4b still holds: nothing in the opening says no to her. A
 button that lets her leave the job offer is her choice, and the offer stays open.
@@ -238,8 +257,8 @@ id = "card_rent"
 text = "Make the rent by Friday."
 when = [ { flag = "opening_done", op = "is_true" } ]
 goals = [
-  { type = "flag", subject = "player", flag = "<took_first_shift>", op = "is_true", label = "Take a shift at the bar" },
-  { type = "flag", subject = "player", flag = "<asked_about_back_room>", op = "is_true", label = "Find out what the back room is" },
+  { flag = "<took_first_shift>", subject = "player", op = "is_true", label = "Take a shift at the bar" },
+  { flag = "<asked_about_back_room>", subject = "player", op = "is_true", label = "Find out what the back room is" },
 ]
 tip = "The bar opens at six. The manager is behind the counter."
 ```
@@ -274,6 +293,13 @@ The shape:
 Both auto-fire on entry through `selectAutoFireCanvasForLocation`, which picks the highest-priority
 valid **non-repeatable** canvas and skips every repeatable (`v2.py:4453-4471`). The flag gate is
 what guarantees order — no schedule is needed.
+
+**The checker follows the boot into the capstone.** Since 2026-09-25, `gates.py` walks the
+funnel from the starting canvas, through its location exit, into a one-time canvas at that location
+whose trigger flags the funnel has set, and judges the handover at the end of *that*. Before, it
+stopped at the boot's exit and judged the hop to the capstone as if it were the handover. Node ids in
+the funnel may be bare (`"hall"`) or qualified (`"canvas_opening.hall"`); the engine keeps the last
+segment (`v2.py:13716`), and so does the walk.
 
 ⚠️ **This is not a size cut.** Build the opening at full designed size; the engine plays a node
 chain back one screen at a time. "Two canvases" is about *what each one is for*, not about brevity.
