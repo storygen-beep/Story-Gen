@@ -5,6 +5,104 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — moment library: Family Ties out, the rule applied with no exceptions
+
+**Why.** LO applied the header's rule as written, with no exceptions. Family Ties fails: a
+university passage (`uniEvent3`) says "you work with teens", so its text describes characters as
+teens, whatever else the game states. That supersedes the "flagged for LO" note in the entry below.
+
+**Changed.**
+- Removed Family Ties' 10 entries:
+  - firsts: `[husbEvent4]`, `[husbAmateurPornEvent1]`;
+  - being seen: `[eventButtSlap]`, `[eventWindySkirt]`;
+  - body as payment: `[prePublicStrangerFuck]`;
+  - taboo at home: `[prolog]`, `[husbEvent2]`, `[hisBroEvent3]`;
+  - consequence: `[husbNtrEvent2]`, `[eventFameGraffiti]`.
+- Added 10 from the four games that pass:
+  - firsts: Cupid's Way `[glory4]`, Shady Deals `[Striptease NC]`;
+  - being seen: In Her Own Hands `[AbbyDare12B]`, Shady Deals `[Nightclub Quickie Info]`;
+  - body as payment: Shady Deals `[Brothel Event 1 Sex]`;
+  - taboo at home: Cupid's Way `[aaron76]` and `[ma8]`, Shady Deals `[Gang GH Yap Event]`;
+  - consequence: Cupid's Way `[Follow Marcus inside]`, In Her Own Hands `[BobbyBRTalk3A]`.
+- The library now draws on Course of Temptation 14, In Her Own Hands 13, Cupid's Way 13 and Shady
+  Deals 10, with at most 3 per kind per game.
+- Also skipped:
+  - Cupid's Way `[Get on the couch]`, because an earlier reader tied that game's porn-shoot job to
+    a teacher "afterschool" comment;
+  - Shady Deals `[Custody]`, because it is not a sexual first.
+
+**Verified.**
+- 50 of 50 quotes are verbatim in their named passages, 15 words or fewer.
+- The per-passage youth scan is clean. The two reviewed exceptions from before are unchanged: In
+  Her Own Hands `[JobCelebrate1A]` (her past) and `[JamesCall2B]` (a figure of speech).
+- All player quotes in the "why" lines were found in the study files.
+- `pitch_pack.py --kind` prints 10 for each of the five kinds.
+- pytest: 75 passed.
+- `--selfcheck`: identical output.
+- cite_check: 84.
+- Gate tables for the three games: identical.
+- `games/`: unchanged.
+
+**Words:** 148,269 → 148,286 (Δ +17) · running total 148,286 / 149,283.
+
+---
+
+## 2026-09-27 — moment library: the stricter adults-only test, 22 entries swapped
+
+**Why.** Round 6 found library entries that failed LO's adults-only rule. LO set a stricter test,
+which is now in the library header. A game qualifies only if:
+- its own text states its characters are adults (an 18+ statement, a college or university
+  setting, or an 18+ age list); **and**
+- nothing in it describes any character as under 18, or as a school pupil now.
+
+Every game's full text was scanned for teen / high school / schoolgirl / young girl / underage /
+ages under 18, and each hit was read in context.
+
+**Games that fail, and why:**
+- Shadows Over Solomon Falls: no age statement, and a missing high-school girl at the centre.
+- I'll Never Leave This Town: no age statement, and the brother "grows older".
+- Life at University: a character stated to be 16; "I am just a schoolgirl".
+- Project Reeducation: DLC text calls the heroine "teen".
+- New Life Project: a start option in "one year left of highschool".
+
+**Games that pass (hits read in context and passed):**
+- Course of Temptation: a "schoolgirl" role-play costume at an adult shoot.
+- Cupid's Way: "young girl" said of adults.
+- In Her Own Hands: "like a gushing schoolgirl" as a figure of speech; "since high school" as her
+  past.
+- Shady Deals: "minor" used as an adjective.
+- Family Ties, **flagged for LO:** it has an 18+ statement, but one university passage says "you
+  work with teens" beside "all my students are over the age of consent". Its university/student
+  passages are excluded from the library.
+
+**Changed.**
+- Removed **22 entries**, all 21 from the five failing games plus Cupid's Way `[bro6211]`: the
+  step-brother Jack's age is never stated, and one line calls him "my little step bro".
+- Added 22 replacements from the five passing games. `references/moment-library.md` now draws on
+  Course of Temptation 14, In Her Own Hands 11, Family Ties 10, Cupid's Way 9 and Shady Deals 6,
+  with at most 3 per kind per game.
+- Also skipped:
+  - Shady Deals `[Distributor First Quickie]`, which is framed like a punishment;
+  - every Cupid's Way scene with Jack;
+  - Family Ties university passages.
+
+**Verified.**
+- 50 of 50 quotes are verbatim in their named passages, 15 words or fewer.
+- The per-passage youth scan is clean, with two reviewed exceptions: In Her Own Hands
+  `[JobCelebrate1A]` (her past) and `[JamesCall2B]` (a figure of speech).
+- All player quotes in the "why" lines were found in the study files.
+- pytest: 75 passed.
+- `--selfcheck`: clean, with identical output.
+- cite_check: 84.
+- Gate tables for the three games: identical.
+- `games/`: unchanged.
+- `pitch_pack.py --kind` prints 10.
+- Log: `~/Documents/Great_Games_Study_20260926/round5/moment-library-verify-log.txt`.
+
+**Words:** 148,299 → 148,269 (Δ −30) · running total 148,269 / 149,283.
+
+---
+
 ## 2026-09-27 — IC2 (part 2): the moment library, adults only, and the orientation dry run
 
 **Why.** This part delivers IC2's 50-moment library and runs the acceptance dry run. LO reviewed
