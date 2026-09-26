@@ -635,7 +635,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
   decision, not a thing this file may assume.
 - **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:4633-4634`).
 - **A6 is available** — `worn_exposure`, `worn_type`, `worn_corruption` and `worn_beauty` are
-  condition predicates (`engine.md:532`; `worn_exposure` is the only one that reads an empty
+  condition predicates (`engine.md` §17; `worn_exposure` is the only one that reads an empty
   slot).
 - **A4's grant-while-under-threshold** is an ordinary `[group]` band on the meter plus an
   `add` effect. ⚠️ Adjacent `[group]` blocks merge into one if/elseif chain and first match

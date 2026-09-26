@@ -44,20 +44,8 @@ Same game, same author. The left column loses nothing.
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
 anyone. *The Box Room* becomes *The Back Room* and says where it is in two words anybody owns.
 
-> ⚠️ **This example has now been wrong twice, in opposite directions, and both are worth keeping.**
-> It read *The Lodger's Room* until 2026-08-22 — `lodger` is used by **zero** of the 27 field
-> games, and `steam` and `off_season` both shipped a location copied from this line. The cure
-> written that day was *The Tenant's Room*, and **`tenant` is under the corpus bar too.**
->
-> It is not a second `lodger` — the plural `tenants` **is** in-corpus, so `tenant` is standard
-> English that happens to fall under a frequency threshold, and it stays everywhere this skill
-> uses it to describe a *role* to an author (`the-board.md`, `the-map.md`, `state.md`). But a room
-> name is a **button**, and on a button the in-corpus word wins outright. Off Season had already
-> got there on its own: it shipped **The Back Room**, and `back` and `room` are both in-corpus.
->
-> The lesson is not about these two words. **When you write a cure, run it through the same
-> instrument that caught the disease** — `scripts/genre_words.txt`, one grep. Neither replacement
-> here was ever checked, and the file taught a defect it had just finished diagnosing.
+> ⚠️ **When you write a cure, run it through the same instrument that caught the disease** —
+> `scripts/genre_words.txt`, one grep. On a button the in-corpus word wins outright.
 
 **The word on a label is `register.md`'s, and it has no gloss.** A button cannot explain itself:
 there is no sentence on it to carry one, and the player reads it *before* the prose behind it. So
@@ -78,19 +66,6 @@ a conversation, and evocative is correct there. Changing them is a regression.
 > ⚠️ **The exemption is scoped to a choice's `text`. It has never covered a canvas `name`.** A canvas
 > `name` is what renders in the room's activity list — it is a *button on a menu*, judged by the
 > table above, not by this paragraph.
->
-> **This distinction leaked, and it is why LO found the defect.** The three examples printed here
-> until 2026-08-18 were *Stop pretending it's a favour*, *Make him wait* and *Come down in what you
-> slept in* — and **every one of them exists in `back_home` twice**:
->
-> ```
-> back_home/5_scenes.toml:983    text = "Come down in what you slept in."   ← a choice. exempt. correct.
-> back_home/5_scenes.toml:1093   name = "Come down in what you slept in"    ← a CANVAS NAME = a button
-> ```
->
-> The exemption was written off the choice and read off the button, and the pattern was copied into
-> `the_allowance` as a top-level room-list entry. An example outranks the rule beside it
-> (`SKILL.md`), so the three above were replaced with strings that can only ever be choices.
 
 **Inside a loop, the label NAMES THE ACT.** The act-menu exits are not navigation and not
 atmosphere — they are the ladder, and they are the only thing on the screen that tells the player
@@ -112,11 +87,6 @@ scene the player already chose to be in. `the-surfaces.md` R3b.
 ```
 FIELD           median 3 words          21% are 6 words or longer
 ```
-
-> ⚠️ **The long share read 10% until 2026-08-24 and was never reproducible.** Rebuilt on the
-> original 25 games the label count reproduces to 0.29% and the median reproduces exactly at 3, but
-> the share at six-plus words is **16%** — and no filter yields 10% at a median of 3. The median is
-> the number this rule actually leans on, and it has not moved. `findings_RECHECK.md` §1.
 
 Ours, and the drift tracks build date:
 
@@ -305,14 +275,9 @@ fired on seven of eight doors in a real game — every one of which was followin
 correctly. A rule that fails a game for obeying the skill is a bug in the rule. There is
 deliberately no gate here.*
 
-⚠️ **CORRECTED 2026-09-03.** That warning used to end *"'guidance exists' already covers the real
-gap."* **It did not.** `guidance exists` checks only that a card EXISTS per ascent tier and per
-character; it never reads what the card says. So the route was unchecked on the door AND on the
-card at once, and `gates.py` carried the identical false sentence in its own comment. Two checks
-now cover it: gate **`a goal says what it wants`** (a bullet renders words, not a raw key) and
-lint **`the guidance page says nothing`** (a card that renders no requirement at all). The first
-run of that lint found **11 of 12 cards mute in `vesper_two`, with all seven characters' sections
-silent** — in a game that was passing 46 gates.
+⚠️ **`guidance exists` checks only that a card exists; it never reads what the card says.** Two
+checks cover the route: gate **`a goal says what it wants`** (a bullet renders words, not a raw key)
+and lint **`the guidance page says nothing`** (a card that renders no requirement at all).
 
 ### R5 · Nothing retires into silence
 

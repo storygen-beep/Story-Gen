@@ -723,24 +723,8 @@ on**, not on a pile of switches that each remember one thing. The field's equali
 **stage counter** — one variable that counts — and it is 24.8% of all its conditions, present in
 **26 of 26 games**.
 
-> ### ⚠️ This paragraph said "ours is 0.7%, used once each" until 2026-08-24. That was measured by the wrong thing.
->
-> 0.7% counts **`eq` operator occurrences**, which is what the shape census above measures and is
-> the right unit for it. It is the wrong unit for *"do we build stage counters"*, and read as that
-> it says we barely do — which is false.
->
-> Measured by **behaviour** instead — a trait `set` to two or more distinct integers, whatever it is
-> called and whatever operator reads it:
->
-> ```
-> 7 of 21 scorable games carry at least one
-> how those counters are READ  (n = 416)   gte 48%   eq 32%   lt 20%
-> ```
->
-> **Where we build a counter, we read it much closer to the field's way than the census suggests.**
-> The corpus-wide 4.5% equality figure is not walked back — it stands, and it is dominated by meter
-> thresholds, which is a real difference. But the gap is narrower and more specific than the census
-> alone implies: **it is not that we read counters wrong, it is that we build few of them.**
+**Where we build a stage counter we read it the field's way; we just build few of them** (7 of 21
+games carry one).
 
 **The worked example already exists.** `the_season`'s `wade_loop_stage` and `prine_loop_stage` are
 set to `0 / 1 / 2 / 3` and read three ways — `gte 3`, `eq 2`, `lt 2` — as the exclusive three-band
@@ -1261,17 +1245,5 @@ characters be differentiated *as people* would fail the seventh-ranked game in t
 schedule-collision half of R8 is trivially checkable and a lint for it was considered and
 declined** — half a rule enforced is worse than a whole rule taught.
 
-> ⚠️ **What a checked-and-wrong rule costs, kept as the standing warning.** `objects` / gate 22 was
-> the previous occupant of this section and it was **green on all five games** while forcing nine
-> duplicate screens into existence. The mechanism: `_room_objects` computed affordances from
-> `exit_block.choices` and **never read a canvas name**, so *"Get the washing in off the airer"* —
-> an entire canvas about the airer — counted as **zero**. Strip the nine `room_*` screens from
-> `the_allowance` and the gate reported **34 of 39 declared objects unusable**, naming objects that
-> had a dedicated canvas standing in the same room.
->
-> A check that cannot see the shape of the thing it is judging does not measure quality — it
-> **manufactures** whatever it can see. That is worse than no check, because it ships green.
->
-> Two rules in this file were demoted for having invented thresholds; this one was deleted for
-> measuring the wrong object. Before adding a gate here, ask what an author would build to satisfy
-> it if they were tired, and check that the answer is the thing you actually want.
+> ⚠️ **Before adding a gate here, apply `SKILL.md`'s operating rule:** ask what a tired author would
+> build to satisfy it, and check that the answer is the thing you actually want.

@@ -818,12 +818,8 @@ were untouched. Unbounded, across six games, the same measurement moves **0.68x 
 over word count really does survive this seam, which is what gate 43 has always claimed. **A number
 that indicts an existing check deserves the same scepticism as one that flatters you.**
 
-⚠️ **One finding was withdrawn on this same test and is recorded so it is not re-proposed.** Article
-density (*the / a / an*) was measured, reported as our largest and most invisible habit at 101 per
-1,000 against a field maximum of 86, and **it was an artifact of the seam**. Read on one basis we
-sit at **65.0 against a field median of 58.3**, inside the field's 33.3–86.0 with **3 of 28 builds
-above the maximum and 5 below the minimum**. Modestly above the middle of the genre, nowhere near
-outside it. There is no article finding.
+⚠️ **There is no article-density finding.** Read on one basis we sit at **65.0 per 1,000 against a
+field median of 58.3**, inside the field's 33.3–86.0.
 
 ---
 
@@ -937,17 +933,6 @@ are load-bearing (the padding study: we write 4.22 `-ly` per 1,000 against a fie
 so there is nothing to cut). *Somehow, sort of, almost* are hedges, and the loud voice has even
 less use for them than the quiet one did.
 
-⚠️ **The first version of these four was wrong, and how it got here is the lesson.** Shipped
-2026-08-28 labelled *"correct as written: no before, no diagnosis, nothing to un-learn"*, and it was
-measured before commit — on dashes, `-ly` adverbs and hedges, which were the markers that existed
-that day. **The load rules landed two days later, ninety lines below, and nobody re-scored the
-examples against them.** Measured 2026-09-01 the original four ran **gloss 11.49/1,000 words against
-a field maximum of 0.24 — 48x the worst game in 27** — with two `, which is` clauses in one 46-word
-talk screen, 50% of sentences carrying a negation, an explicit beat that scored **2** explicit words
-where 3 are needed to register, and single sentences of 33 and 38 words. **This is the fifth instance
-of "an example outranks every rule beside it", and the first where the example broke a rule in its
-own file.** When you add a rule here, re-score every example above it the same day.
-
 ## Dashes stay rare
 
 **Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
@@ -1028,32 +1013,12 @@ skill authored it:**
 | games the v1 skill authored (6) | 0.00 – 0.66 | **24.0 – 39.6** | 1.3 – 6.6 |
 | above the field MAXIMUM | v2 **9/9** · v1 3/6 | **14 of 16, under BOTH skills** | v2 **8/9** · v1 2/6 |
 
-⚠️ **The negation column was re-measured 2026-09-01 and every figure in it moved.** The old
-row (p50 7.59, max 20.22, v2 22.5–38.0, v1 9.8–27.3) carried two mismatches at once:
-`NEGATION_RE` could not match a contraction — `\bn't\b` never fires inside `doesn't` — and the
-field baseline was **all-text with speech inline** while this lint has always read **narration
-only**. Contractions live in speech, so the hole hid more of the field than of us; excluding
-speech from our side raised ours. Re-measured with the regex fixed and the field reduced to
-narration the same way, 25 games and 784,591 sentences: the field's own rate nearly doubles, and
-so does ours. **The finding survived and got bigger — and it stopped being a v2 finding.** The old
-regex was flattering v1, which contracts more in narration: `the_inheritance` 18.8 → 35.1,
-`last_call` 20.1 → 33.5, `the_long_summer_test` 12.0 → 28.1, `late_shifts` 10.8 → 24.0. **All
-sixteen games under both skills are above the field p90.** Gloss and history are unaffected and
-keep their 08-30 figures.
-
 **Nine of nine games this skill authored sit above the entire field's maximum on the gloss and the
 history**, and the lowest of them runs 5.6x the field's worst game on the gloss. The games written
 before this doctrine mostly do not. **This file taught it**, and "Sweeping backwards" above is the
 mechanism: *replace the hedged clause with the specific one* tells an author to attach a specifying
 clause, and `, which is the county's way of saying skilled tasks approved` **is** a specifying
 clause. The rule is obeyed and the defect is the obedience.
-
-⚠️ **That diagnosis holds for L1 and L3 and NOT for L2, and the difference is the point.** The
-gloss and the history split cleanly by skill, which is what makes "this file taught it" a claim
-evidence can carry. The negation does not: re-measured, v1 runs 24.0–39.6% against v2's 19.0–40.5%
-and the two ranges sit on top of each other. **Whatever drives the negation habit predates this
-skill and is not in this file.** A doctrine fix cannot reach it, and the story that it could was an
-artifact of a regex that could not see `doesn't`.
 
 The three rules are one idea at three grammatical addresses. **L2 was retired on 2026-09-24** when
 the loud voice replaced the quiet one; L1 and L3 stand, and L3 now carries the truth rule's
@@ -1091,21 +1056,11 @@ swap and the reader still holds the sentence open. Cut it or split it.
 
 ### L2 · Negation — RETIRED 2026-09-24
 
-This was *"Say what happened, not what didn't."* It is retired, not because its measurement was
-wrong, but because the voice LO chose breaks it on purpose. The field figures stand: narration
-negates in **12.06%** of sentences at the median and **25.76%** at the max (`become-taxi-driver`),
-over 25 games and 784,591 sentences, and our sixteen games ran 19.0–42.1%. The target line of the
-new voice is three negations in four sentences — *"He doesn't ask about college. He never does. He
-doesn't care what you want, what you're doing, or where your life is going. And you don't bother
-telling him anymore."* (the model line LO chose on 2026-09-23). Under L2 that line fails; under the
-voice it is the model. LO's call on the PRD's open decision 2: drop it.
-
-**What survives.** `lint_negation` still prints the share against the field, as a measurement and
-not a verdict. Two things it taught are still true and still useful: a negation is often hiding a
-number (*"It takes you ninety"* is shorter than *"you have never once done it in forty-five"*), and
-the instrument history — `NEGATION_RE` could not see `doesn't` until 2026-09-01, and the field
-baseline is narration-only, not all-text — is in `gates.py`'s `lint_negation` docstring. Use the
-number when it says the same thing louder. Do not rewrite a loud negation to satisfy the lint.
+Retired, because the voice LO chose negates on purpose: its model line (2026-09-23) is *"He doesn't
+ask about college. He never does."* The field figures and the instrument history are in `gates.py`,
+at `FIELD_NEGATION_P50` and the `lint_negation` docstring. `lint_negation` still prints the share,
+as a measurement and not a verdict. Use a number when it says the same thing louder; do not rewrite
+a loud negation to satisfy the lint.
 
 ### L3 · A repeatable screen carries no history
 
@@ -1252,14 +1207,8 @@ first one; the measurements found the other three:
 | **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | `forty_miles`: *"You get the vest up over your tits"* — an undershirt here, a waistcoat to most readers, **inside an explicit beat**. `back_home`: *"He is going to be different at tea"* — the evening meal. `seventh_day`: *"under the bonnet"* — a car hood, not a hat. |
 | **collides with our own UI** — *meter* | a wrong picture again, but the competing meaning is **ours**, so no dialect check can ever find it. | `off_season` renders **four meters in its sidebar** — arousal, warmth, energy, money — and puts `Feed the meter ($3)` on a room button, where it reads as *top up a stat bar*. Same exposure, unmeasured: **board, card, flag, state, tier, rung.** |
 
-> ⚠️ **One of these examples was wrong, and it was ours.** This row cited `off_season`'s *"Stay
-> past the tea"* as the meal sense on a quest card. It is not: the scene it labels is *"You make
-> two teas in the two mugs he owns and you do not leave when yours is finished"* — **the drink**,
-> and correct in every English there is. All nine `tea` uses in that game are the drink, including
-> the hunger band *"Running on tea."* The word was read off the lint's output and never checked
-> against the line it came from, which is the exact failure this whole section exists to name.
-> **A false friend is a judgement about a sentence, never about a word.** The row stays and the
-> game keeps its nine — the same call `torch` gets in vesper.
+> ⚠️ **A false friend is a judgement about a sentence, never about a word.** Check the line it came
+> from, not the lint's output.
 
 An unknown word costs the reader a beat. **An ambiguous or false-friend word costs them the scene,
 and they never find out they lost it** — which is why *half past seven*, *undershirt* and *dinner*
@@ -1375,11 +1324,7 @@ the skill carried **27 locale-locked terms across 11 files** — `airer` ×9, `l
 dialect. The v1 games, built from a skill that happened not to use those examples, sit at the
 field's rate.
 
-> ⚠️ **The first count of this was wrong and is worth keeping.** It was taken with a substring
-> grep and reported `rota` ×44 — because *p·rota·gonist*, *rota·ting* and *rota·tion* all contain
-> it. The real figure is three. A measurement that inflates a defect fourteen-fold is the same
-> class of error as one that hides it: **count with word boundaries, and check a surprising number
-> before you act on it.**
+> ⚠️ **Count with word boundaries, and check a surprising number before you act on it.**
 
 **This is `SKILL.md`'s "an example outranks every rule beside it", third instance** — after
 `the-map.md`'s worked map skeleton (inherited by three games) and `templates/board.toml`'s
@@ -1416,13 +1361,6 @@ in the file that bans it, in the block an author copies. Rewritten and re-measur
 > shipped, wrong by the next rule, and silent about the difference. When you add a rule here,
 > re-score every worked example in the file before you commit — the examples are the register, so a
 > rule the examples break is a rule that has already lost.
-
-> ⚠️ **The count that produced this was wrong twice before it was right, and the failures are the
-> lesson.** A line-level pass over blockquotes reported 4,104 words of "example" across 11 files,
-> every one off-field — because a wrapped continuation line of an explanation does not begin with a
-> warning marker and reads as narrative. A whole **paragraph** is the unit, and it counts only if
-> all of it reads as narrative. The wrong count had a fix attached to it (*rewrite the examples*)
-> that would have edited prose which was never the problem.
 
 ### Show the mechanism. Never show the world.
 

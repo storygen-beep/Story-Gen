@@ -19,26 +19,44 @@ amendment — never let it quietly stop being true.
 
 Keep it to one page. Longer means vaguer.
 
+### 0. The fantasy, the model to beat, and the promise — settled first
+
+**For a female lead, the premise matters.** In the fifteen core female-lead games of the Great Games
+Study (`~/Documents/Great_Games_Study_20260926/`), players name the premise when they say why they stay:
+the Prom Queen letter, the missing girl in Solomon Falls, the note in Secret Taboo, the brother in the
+next room. Each game sits in one of four shapes, and each shape has its own engine:
+
+| shape | what she feels | what drives each step |
+|---|---|---|
+| **fall by need** | alone, broke, and the world prices her body | rent, and a price list for acts |
+| **rise by want** | she chose it, for status, freedom or power | her own goal, a rival, a clock |
+| **taboo at home** | the house, and who is in the next room | the chance of being walked in on |
+| **mystery** | she investigates while something works on her | secrets she buys, clues that pay out |
+
+Pick one, or name the mix, and write in one sentence what the player comes to feel.
+
+**Name the model to beat.** The developers in the study took the premise from their own taste plus one
+game, show or film to copy or beat. Zara's: *"Young Maria was a huge inspiration… mine will have actual
+story with an end in sight."* No premise came from players or a poll; players chose the order of ideas
+the developer already owned (`round4b/ROUND4B_REPORT.md` §1–2).
+
+**Keep the promise alive.** Players praise a game with a goal (*"There is a plot (unlike many other
+sandboxes)"*, Becoming Prom Queen) and punish one that drops it (*"the game completely forgets about the
+whole prom queen thing"*, Zara's School Life). §1b's hold starts her and §3's meters carry her; **the
+goal or the mystery is what pulls the player.** It stays alive after the hold goes quiet, and the
+guidance page (`engine.md` §23) carries it. Declare the goal with a date, the mystery with a rough
+payout, and the rival.
+
+**Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
+seen · her body as the price for something she needs · taboo at home · a consequence she lives with.
+
+All of it goes under `want` in `v2_state.json` (`references/state.md`). Every key is optional, so a game
+written before this section scores exactly as it did.
+
 ### 1. Who the player is — settled before she is described
 
-**Added 2026-08-27. Its absence is the single largest measured defect in this skill.**
-
-Eight v2 games shipped one protagonist: a woman 19–39, held in place by money she cannot reach, in
-second person, in a small town. Asked whether that was deliberate, LO said **"just happened."** It
-did, and this file is why:
-
-| | |
-|---|---|
-| `templates/want.md` — `she/her/hers` vs `he/him/his` | **21 vs 0** |
-| this file — same count | **16 vs 0** |
-| whole v2 skill — `male pc` · `blank.slate` · `self.insert` · `character creation` | **0 hits** |
-
-**The grammar answered before the author arrived.** v1 asked the question first of anything —
-`author-game/references/step-0-1-seed.md:17`, *"Pick the PROTAGONIST POV first — it decides which
-fantasies even work"*, with female-PC and male-PC as named forks — and v2 deleted it. `vesper` is the
-control: authored before this file existed, `narration_person = "third"`, none of the shape.
-
-So three things are **declared** here, into `v2_state.json` → `want.player`, before §1b writes a
+Eight v2 games shipped one protagonist because the template's grammar answered this before the author
+did. So three things are **declared** here, into `v2_state.json` → `want.player`, before §1b writes a
 single line about her.
 
 #### Who is the player? — `female` · `male` · `picked`
@@ -61,19 +79,9 @@ what real-porn media and a named cast pull toward — but an undeclared default 
 
 #### What does the player choose about her at minute zero?
 
-**`freedom` is the largest single thing this field is loved for.** Classifying reason (1) of every
-top-30 game's *"why players love it"*, weighted by comment count:
-
-```
-freedom 25.9% · performers 22.0% · systems 15.8% · volume 15.6%
-story 7.3% · characters 7.0% · cadence 5.4% · kink 0.8%
-
-premise 0.0%   <- not one game in thirty is loved for its setup
-```
-
-The #1 game's #1 reason is *"farmer, slave merchant, bounty hunter, cage fighter, Cannibal? You can
-be whatever you want."* **The choosing is the product; the premise is not.** That is also why the
-first fix proposed for this — a step checking a new premise against the repo — was dropped.
+**The choosing matters, and so does the premise.** On the male-heavy top 30, `freedom` is the largest
+single thing a game is loved for (25.9% of reason (1), weighted by comment count); its #1 game's #1
+reason is *"You can be whatever you want."* For a female lead, §0 holds as well. Give her both.
 
 **The rule: a memory, not a slider** (`~/Documents/Female_PC_Craft_Study_20260823/findings_A_want.md:93`).
 Course of Temptation never shows a stat screen; it asks what kind of teenager she was and initialises
@@ -241,17 +249,17 @@ still own the money mechanism for the games that pick `bill`.
 What she wants, phrased so it can never be finished. "Get revenge on X" finishes. "Be wanted
 by people who shouldn't want her" does not.
 
-⚠️ **This section used to claim it was "the line that decides whether the game can run forty
-updates". That was measured and it is false.** The appetite is not a content schedule. What decides
-whether release 41 has anything in it is the **meters** — §3 — and the gap is not close:
+**The appetite is not a content schedule.** What decides whether release 41 has anything in it is the
+**meters** — §3 — and the gap is not close:
 
 | in `degrees-of-lewdity` | condition sites |
 |---|---|
 | the rent — the obligation the whole opening runs on | **57** of 91,814, and they are *is it due* / *can she pay* |
 | the tier rungs — `<<promiscuity3>>`, `<<exhibitionism5>>` | **1,336** |
 
-So the three parts of this page divide the game between them, and each does one job:
+So the four parts of this page divide the game between them, and each does one job:
 
+- **§0 — the promise pulls the player.** The goal or the mystery stays alive after the hold goes quiet.
 - **§1b — the hold starts her.** It has to be there in week one, when nothing else is.
 - **§3 — the meters carry her.** They are what still gates content at release 41.
 - **§2 — the appetite is what she arrives at.** The hold goes quiet (`the-economy.md` R3d for the
@@ -265,8 +273,6 @@ copied the weakest example in the corpus.** Of the four female-lead games read i
 on a bill, a threat or an erosion. The one that opens on her own appetite is the one measured as
 *"an appetite with no obstacle at all — the weakest want of the four"*
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_A_want.md`).
-
-**The release-41 test has moved to §3**, where the meters are.
 
 ### 3. What she is becoming — stated as ACCESS
 The ascent. For the `female` protagonist declared in §1 — the default, and the case this was
@@ -296,9 +302,6 @@ world contracts to a sealed room. Rising must widen.
 > of the appetite, because the tiers are what still gate content that far out — 1,336 rung-gated
 > sites in the reference game against 57 conditions that read its rent (§2). If you cannot answer
 > it against a named tier, the tier is decorative and release 41 has nothing to hang on.
->
-> *(This test sat in §2 until 2026-09-01, attached to the appetite. It was measured there and the
-> attachment was wrong; an appetite is a destination and cannot schedule content.)*
 
 ### 4. The charge
 One of — or a deliberate combination of:
@@ -413,7 +416,7 @@ Three declarations, made once:
 
 ## The test before you leave this file
 
-Answer these four out loud. If any answer is soft, the Want is not done.
+Answer these five out loud. If any answer is soft, the Want is not done.
 
 1. What does release 41 add? *(ask it of a named §3 tier. If no tier can answer it, the tier is
    decorative — the appetite was never what scheduled content)*
@@ -421,8 +424,10 @@ Answer these four out loud. If any answer is soft, the Want is not done.
 3. Which character would a player miss if you deleted them, and why? *(the product)*
 4. Which repeatable surface carries the crudest writing in the game? *(the register, in the
    right place)*
+5. What is the promise, and which release pays the mystery's next clue? Which moment kinds does this
+   game keep delivering? *(§0)*
 
-Then run the fifth, which is not a judgement call:
+Then run the last, which is not a judgement call:
 
 ```
 python3 scripts/gates.py --words games/<slug>/WANT.md

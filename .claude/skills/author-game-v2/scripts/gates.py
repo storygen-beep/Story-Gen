@@ -76,7 +76,8 @@ except ImportError:
 # all three shipped exactly 8 locations against a "6-8" range the doctrine had already
 # flagged, in prose, as a judgement rather than evidence. A global constant can be
 # satisfied by generating N things; a number checked against the author's own declaration
-# cannot, because moving it means changing the design. See SKILL.md:107.
+# cannot, because moving it means changing the design. See SKILL.md's operating rule
+# "the BOARD DECLARES IT and the gate checks the game against its own declaration".
 ANCHOR_SHARE_PCT      = 25.0    # DoL seed: school = 35,218 / 116,540 = 30.2%
 MEDIAN_LOCATION_WORDS = 3_000   # DoL seed median 3,154
 MEAN_LOCATION_WORDS   = 4_500   # DoL seed mean 4,661
@@ -395,7 +396,7 @@ class Beat:
         split                   12,509          14/14   <- folding is not what sets it
         one variant              8,706           4/14   <- P0
 
-    `the-board.md:92` decides it: fill is "its word budget — in round numbers, written
+    `the-board.md` §1 (`fill`) decides it: fill is "its word budget — in round numbers, written
     now, BEFORE THE PROSE." It is a plan for what the author will WRITE. Three pooled
     variants of 400 words ARE 1,200 words written. P0 would score an author 4/14 for
     doing exactly what the doctrine asked — which is the Study 2 R4 failure the
@@ -479,7 +480,7 @@ def _pool_pass_words(game):
 
     A `block_pool` renders one of N (`v2.py:14572`), so a game's counted words and the
     words a single playthrough shows are two different quantities. Gate 1 judges the
-    first, because `fill` is a budget for prose WRITTEN (`the-board.md:92`) — see the
+    first, because `fill` is a budget for prose WRITTEN (`the-board.md` §1) — see the
     refusal recorded on `Beat`. It prints the second so the gap is visible rather than
     argued about, the way gates 19/20 print their distribution and G43 prints its split.
 
@@ -6200,7 +6201,7 @@ def run_gates(model, game, state=None):
 
     # ⚠️ REPORTING ONLY — appended to every branch's headline, and judged by NOTHING.
     # A pool renders one of N, so `total` above is words WRITTEN and this is words one
-    # pass shows. Gate 1 judges the first on purpose (`the-board.md:92`); the refusal of
+    # pass shows. Gate 1 judges the first on purpose (`the-board.md` §1); the refusal of
     # the proposal to judge the second is recorded on `Beat`. Printed because two numbers
     # that differ by 30% should not be invisible behind a single PASS.
     n_pools, pool_gap = _pool_pass_words(game)
@@ -7306,7 +7307,7 @@ def run_gates(model, game, state=None):
     #
     # Gate 16 passed it, because nine OTHER canvases gate on money. That is the presence-gate
     # failure mode: "at least one exists" cannot see that the important one does not. This is
-    # SKILL.md:107 applied to the field the economy is built on — the board declares a price,
+    # SKILL.md's "the BOARD DECLARES IT" rule applied to the field the economy is built on — the board declares a price,
     # so the gate checks the price is taken.
     ob = econ.get("obligation")
     ob_amt = econ.get("obligation_amount")
@@ -7985,7 +7986,7 @@ def run_gates(model, game, state=None):
     #    summary prints garments-against-reads, so a thin pass is visible on the
     #    report the way the meter-ladder lint makes a one-rung ladder visible.
     # ═════════════════════════════════════════════════════════════════════════
-    # ⚠️ `worn_exposure` was missing here until 2026-09-03 while `engine.md:532` listed it
+    # ⚠️ `worn_exposure` was missing here until 2026-09-03 while `engine.md` §17 listed it
     #    in the same reader family and the engine implemented it (v2.py:4255, :8117). It is
     #    the newest of the predicates and the only one that reads an EMPTY slot, so a game
     #    reading its wardrobe exclusively that way was reported as reading it not at all:
@@ -8268,9 +8269,9 @@ def run_gates(model, game, state=None):
     # SHIPPED asking four questions whose choices shared one target, carried no effects
     # and differed in no way, and nothing in 41 gates could see it.
     #
-    # WHY IT IS WORTH GATING: `freedom` is the largest single thing the field is loved
-    # for (25.9% of top-30 engagement, reason (1) weighted by comment count), while
-    # `premise` is 0 of 30. The choosing is the product.
+    # WHY IT IS WORTH GATING: `freedom` is the largest single thing the male-heavy top 30
+    # is loved for (25.9% of top-30 engagement, reason (1) weighted by comment count). For
+    # a female lead the premise matters too (the-want.md §0); the choosing still does.
     #
     # ⚠️ IT FAILS ONLY ON ZERO, AND THAT RESTRAINT IS THE POINT. A floor ("read at least
     # N times") cannot be defended from the one game that has a start choice, and this
@@ -8292,8 +8293,9 @@ def run_gates(model, game, state=None):
         gate("the start choice is read", None,
              "no want.player.start_choice declared — the player chooses nothing about her",
              ["declare it: want.player.start_choice = { asked_at, flags } — the-want.md §1",
-              "measured: `freedom` is 25.9% of top-30 engagement and the largest single "
-              "bucket; `premise` is 0 of 30. All eight v2 games let the player choose nothing",
+              "measured on the male-heavy top 30: `freedom` is 25.9% of engagement and the "
+              "largest single bucket; for a female lead the premise matters too (the-want.md "
+              "§0). All eight v2 games let the player choose nothing",
               "a memory, not a slider — ask what the scene already asks and set a flag; do "
               "not build a stat screen",
               "this reports n/a, which is NOT a pass — an absence is not evidence"])
@@ -9023,7 +9025,7 @@ def run_gates(model, game, state=None):
     # recheck re-measured it into `the-clock.md` C2 and did not update this comment, so
     # the skill carried two numbers for one measurement for a day. Section K found it.
     # The load-bearing zero — no label promises a clock time as the OUTCOME of a
-    # repeatable action — survived the re-measurement unchanged. `the-clock.md:403`.
+    # repeatable action — survived the re-measurement unchanged. `the-clock.md`, "What the scoreboard checks".
     # All four v1 games here already pass, so this is a bar shipped work has cleared.
     _idx = _clk_node_index(game)
     lab_n, clk_bad, dur_n, dur_bad = 0, [], 0, []

@@ -45,11 +45,6 @@ Write the list of places that answer at least one of those, and count it. That i
 > The Door. The incumbent skill's version of this rule (*"this place exists so the player can ___"*)
 > was a question in a review document rather than a check, and it never fired.
 
-> ⚠️ **There used to be a "6–8" here, with a note saying it was a judgement rather than evidence.
-> All three v2 games shipped exactly 8 anyway.** A prose caveat does not survive next to a number.
-> Derived instead, `forty_miles` comes to 8 on its own — so the count was right and only its
-> provenance was wrong, which is the whole problem: nobody had to think to arrive at it. Study 6.
-
 Budget the set as a *shape*, not a flat quota:
 
 - **one anchor** carrying **≥25%** of all your location prose — the place the game is actually
@@ -318,10 +313,7 @@ and gives every player the same ladder.
 its 2026 build returns different figures because most of that game's logic now lives in JavaScript —
 the two are not comparable and neither supersedes the other.)*
 
-⚠️ **Rung spacing is NOT declared here and there is no shape to copy.** This section used to end
-*"their rungs sit at 15/35/55/75 — copy that shape"*, and every tier of every game built afterwards
-did exactly that: **all 16 declared tiers across five games put their lowest rung at 15.** The
-field's live meters run **8–17 rungs with the lowest at ~5** (`the-meters.md` W4).
+⚠️ **Rung spacing is NOT declared here and there is no shape to copy.** The field's live meters run **8–17 rungs with the lowest at ~5** (`the-meters.md` W4).
 
 **Layer 2 — volatile state.** Arousal, stress, energy. These move both ways and are managed minute
 to minute; they are *not* ascent. **But volatile is not the same as unread** — a throttle gates the
@@ -390,10 +382,8 @@ An ordinary day when no story is happening: sleep, eat, wash, earn, spend. This 
 of this shape regardless of who is in the cast, and it is what the TRIGGERED layer hangs off —
 *"during the weekends"*, *"when exposed"*, *"at high stress"* are all readings of an ordinary day.
 
-**It is a declaration, not a note to self.** Until 2026-08-18 this section was the four lines above
-and nothing else: no field, no gate, no checklist — against `objects`, which had a field, a hard gate
-and a lint. Authors build toward what is measured, and the result was a game whose anchor room is a
-kitchen and which contains no food and no bed.
+**It is a declaration, not a note to self.** Authors build toward what is measured: a need with no
+field shipped a game whose anchor room is a kitchen with no food and no bed.
 
 Declare each need with the four fields from `the-meters.md` M8:
 

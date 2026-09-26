@@ -295,7 +295,7 @@ reference game says *rent* 130 times.
 > ⚠️ **NAME THE CORPUS, because it is not the one this skill writes for.** That 14 of 19 was
 > measured on `~/Documents/Economy_Pressure_Study_20260827/`, whose table holds **17 games, of
 > which two are female-led** (`course-of-temptation`, `zaras-school-life`). The 27-game field
-> behind most of this skill is **20 male · 6 picked · 4 female** (`the-want.md:48`). So R3
+> behind most of this skill is **20 male · 6 picked · 4 female** (`the-want.md` §1). So R3
 > describes the **male-lead** economy accurately and says nothing about the default protagonist.
 >
 > Re-measured on the female-lead field 2026-09-04 with these same regexes
