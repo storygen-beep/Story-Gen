@@ -340,26 +340,27 @@ clock, the place, and what she is wearing before you reach for the meter.**
 
 ### Composure is subtraction
 
-When the branch *is* on a willingness meter with a high and a low side (53 pairs, 4 games), the two
-branches are the **same act at a different composure** — not two reasons. Scored on a nerve/poise
-lexicon fixed before the run: of the 39 pairs where the lexicon fires at all, **84.6% put the
-composure on the high branch.**
+The uncertain version explains itself; the confident one does not need to (`road-to-success`,
+numbers only: 84.6% of 39 willingness pairs put the composure on the high branch).
 
-⚠️ **48 of the 53 pairs are one game** (`road-to-success`, school-set: its numbers are kept, its
-lines are not). By this skill's own bar that makes it a shape to choose,
-never a threshold — it is offered exactly as `the-meters.md`'s `<<katetrust>>` observation is.
+## One event, several levels
 
-The mechanism is worth more than the ratio, and it is not "add nervous adverbs". **The uncertain
-version explains itself; the confident one does not need to.** On the low branch she says why she is
-there; on the high branch the same line loses its reason. Composure is words removed, not words
-added — the cheapest instance in the corpus is a single adverb of nerves, present on one branch and
-gone on the other.
+**Write the same event once per band of her meter, and let each band be her voice at that level.**
+The low band keeps the pushback; the high band has lost it (`the-meters.md` W1b). Build it as a
+`group` chain on her meter with mutually exclusive bands (`engine.md` §35).
 
-**And the arc position is a second axis, free of the meter.** The same surface, read by visit count:
-on the third visit she is unsure she will finish; on the fourth he is waiting for her; from the
-fifth she is telling herself a story about why she keeps coming back, and the game does not comment
-on it. `the-meters.md` W1b
-carries why this works: the meter is nerve, so the prose that reads off it is bearing, not motive.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `shady-deals`' kiss, three tiers on `$p_depravity`
+> (<15 / 15–34 / 35+): *"You lean in cautiously, pressing your lips to his with a soft
+> hesitation."* · *"You kiss him eagerly, letting the heat linger between your mouths."* · *"You
+> crash your lips against his, pushing your tongue in."*
+>
+> `in-her-own-hands` `[BR_MasturbateFA]`, three bands on one of her tastes: *"Hmmmm . . . should I?
+> I haven't tried this before…"* · *"More, was the only thought I could form in my head."* ·
+> *"Feeling particularly naughty today…"*
+>
+> One game (`zaras-school-life`, numbers only) writes a re-entered dinner at six rungs.
+
+Same event, same length, same click. What changes is who she is when she does it.
 
 ---
 

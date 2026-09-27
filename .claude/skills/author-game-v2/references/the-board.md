@@ -5,7 +5,7 @@ The world comes before the first story, and it comes **wide but paid for**.
 > Measured, and it killed the obvious rule: the earliest retrievable build of the reference
 > game already had **25 locations** — the same width as a game of ours that reads as empty.
 > Width was never the difference. **Fill** was — and fill is a *distribution*, not a floor:
-> 116,540 words over 25 locations, **mean 4,661, median 3,154**, one anchor (`school`) holding
+> 116,540 words over 25 locations, **mean 4,661, median 3,154**, one anchor location holding
 > **30%** of all location prose, tailing down to a 302-word bus station. By 2026 the mean had
 > reached 24,564 while locations only went 25 → 61.
 
@@ -48,8 +48,8 @@ Write the list of places that answer at least one of those, and count it. That i
 Budget the set as a *shape*, not a flat quota:
 
 - **one anchor** carrying **≥25%** of all your location prose — the place the game is actually
-  about, where she spends her hours. At seed the reference game's anchor was the school, at
-  35,218 words against a 116,540-word total.
+  about, where she spends her hours. At seed the reference game's anchor held 35,218 words
+  against a 116,540-word total.
 - satellites may be genuinely small. A 300-word bus station is not a defect; it is a corridor —
   **provided you declared it as one** (see `fill`, below).
 
@@ -261,8 +261,8 @@ whole game, which is a floor, not a matrix.
 
 **4 · Character bibles are ONE LINE.**
 
-> *"Bailey: The caretaker. Rules the orphanage with an iron fist. Extorts the orphans for what
-> they're worth. Confident and pragmatic."*
+> *"Mrs. Hale: The landlady. Collects on Friday and remembers every late week. Tired, fair, never
+> charming."* — ours, in the one-line shape the reference game's writer guide asks for
 
 Ours run pages. A page is where an author hides the fact that they have not decided anything.
 

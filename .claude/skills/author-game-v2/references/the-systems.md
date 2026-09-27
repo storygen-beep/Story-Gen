@@ -148,7 +148,7 @@ shape — and this is the complete list:**
 
 **The field's set, same filter, is the opposite.** `zaras-school-life` carries 9 and six of them
 describe her — `PlayerCorruption` **376 read / 3 writ**, `PlayerClothes` 188/6, `PlayerEnergy`
-185/11, `PlayerFitness` 33/3, plus `fitGirl` and `studiousGirl`, each written **once at character
+185/11, `PlayerFitness` 33/3, plus two set-once traits, each written **once at character
 creation and read forever**. `new-life-project` carries 8 and six describe her — `period` 195/15,
 `corrupt` 164/2, `inhib` 75/2, `makeupAmount` 28/1, `allure` 24/2, `gender` 30/0.
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
@@ -165,8 +165,8 @@ engine predicate (`v2.py:4186`), a derived aggregate, its own lock text, and a s
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. **Reads of `worn_exposure` across all 26 built games: three.** `commuter` 1,
-`orientation` 2. DoL reads its equivalent 586 times in 119 places, most of them in the street and
-the canteen rather than in sex scenes.
+`orientation` 2. DoL reads its equivalent 586 times in 119 places, most of them in the street
+rather than in sex scenes.
 
 ### What to actually do about it — and it is never a new mechanic
 
@@ -254,7 +254,7 @@ the field's own vocabulary written plain. A game takes the handful its systems a
 
 **The other shape, and it is a real option rather than a rival.** `degrees-of-lewdity` does not
 keep a list per room. It stamps **one coarse kind** on each screen — 2,760 room screens across
-**69 place types** (`home`, `school`, `cafe`, `park`, `pub`, `pool`, `arcade`, `brothel`…) — and
+**69 place types** (`home`, `cafe`, `park`, `pub`, `pool`, `arcade`, `brothel`…) — and
 **616 passage sites** key off that one value. A list is more expressive; a single kind is cheaper
 to keep true. Pick one and say which in the ledger.
 
@@ -282,7 +282,7 @@ In the field a system is written once and turns up wherever its label is.
 > inject a row into **50**, a planned date into **22**, the restroom shelf into **12**, the three
 > skill widgets into **10 / 9 / 7**, attend-class **9**, the dressing room **9**, and toys · drying
 > wet clothes · a pregnancy test into **5** each. `new-life-project`, 59 hubs: trauma **8**, the
-> pet **6**, quest letters **6**, work counters **5**, masturbation **5**, classes **4**.
+> pet **6**, quest letters **6**, work counters **5**, masturbation **5**.
 >
 > And the injection carries per-room settings: `<<exhibitionism "park">>`; `<<pregnancyTest
 > "Bedroom">>` — where to return to; a kitchen naming its own allowed ingredients; a gym naming its
@@ -314,10 +314,9 @@ Every game in the set writes the refusal rather than hiding the row.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.**
 > *"You don't really need the bathroom at the moment."* — `course-of-temptation`
-> *"Bailey cuts the power at night. You can't cook in the dark."* — `degrees-of-lewdity`, Kitchen
 > *"You can't sleep yet, it's only \<evening\>!"* — `new-life-project`
-> A named gym staffer, rather than a greyed label: *"Sorry, miss, but you can't work out without
-> proper clothing."* — `new-life-project`
+> A named staffer who refuses her in person, rather than a greyed label — `new-life-project`
+> (structure only)
 
 **This rule is a cross-reference, not new doctrine.** `the-surfaces.md` R5c owns the locked door
 that says why, R7 owns the screen that keeps one door when the day's caps are spent, and
@@ -340,9 +339,9 @@ Whichever system has something pending prints one short line into whatever room 
 standing in.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** Its body is JavaScript rather than a passage —
-> `function effects()` in the corpus HTML — and it appends exactly these: *you're very cold and
-> about to get hypothermia · the science fair is being held in the town hall today · the maths
-> competition is today · the school plays are tonight · your rented book is due.*
+> `function effects()` in the corpus HTML — and it appends lines of this kind: *you're very cold and
+> about to get hypothermia · your rented book is due* — one line per live condition, and the rest of
+> its list is the town's calendar for the day.
 
 **Why this one and not SY4's machinery.** It does not scale with room count. It works the same in
 a ten-room game as in a three-thousand-room one, and it answers lostness — the genre's dominant
