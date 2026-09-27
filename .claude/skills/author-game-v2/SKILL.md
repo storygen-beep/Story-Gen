@@ -9,7 +9,9 @@ description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run
 
 That is the whole change, and it came out of measurement, not taste. Ten snapshots of
 Degrees of Lewdity's own source (2018-11 → 2026-07, 25 → 61 locations, 254k → 2.24M words)
-measured against our own shipped game on one frozen instrument.
+measured against our own shipped game on one frozen instrument. **Degrees of Lewdity is "the
+reference game" wherever this skill says so. It fails the adults-only rule, so the skill uses
+its structure and numbers, never its scenes.**
 
 ## The four commitments
 
@@ -21,7 +23,7 @@ Every one is a measured number, not an opinion. The evidence lives inline in
    is an integral over months, and nothing anywhere pays for a finished browser sandbox.
 
 2. **Fill before you widen — as a distribution, not a floor.** DoL's seed put 116,540 words
-   across 25 locations: **mean 4,661, median 3,154**, and **one anchor** (`school`) holding
+   across 25 locations: **mean 4,661, median 3,154**, and **one anchor location** holding
    **30% of all location prose**, with a long tail down to a 302-word bus station. Thin
    satellites are fine; a world with no centre is not. By 2026 the mean had risen to 24,564
    while locations only went 25 → 61 — depth outpaces breadth, every year.

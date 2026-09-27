@@ -238,8 +238,9 @@ anyone designs and the field does not do it: `become-someone` ships **54 door sc
 occupancy, 46 on occupancy AND time of day, median 14 words, 53 of 54 carrying a way back** — and
 not one of them is skipped.
 
-What the field makes conditional is the **door's existence**. `degrees-of-lewdity` puts Whitney's
-flat on the street only once `$whitney_home_stage gte 3`; from then on the screen always renders.
+What the field makes conditional is the **door's existence**. The reference game (numbers only) puts
+one character's flat on the street only once that character's stage reaches 3; from then on the
+screen always renders.
 
 **So rarity is the answer to the two-click tax, not skipping.** A door on eight rooms is a speed
 bump on every one of them. A door on one room is the room.
@@ -265,9 +266,9 @@ card on the map. A locked bathroom is a sentence, not a screen.
 Room shipped one row of 31 words against a declared 3,000.
 
 **And the empty room is content.** Where the field has a door it usually also has *going through
-their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` shows
-the best shape of it: the row is there, and the game says **"Tyson is in there."** in red beside
-*"Search anyways"*. Occupancy as a stated risk, not a lock.
+their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
+the best shape of it: the row is there, and the game names who is inside, in red, beside the
+option to search anyway. Occupancy as a stated risk, not a lock.
 
 ---
 

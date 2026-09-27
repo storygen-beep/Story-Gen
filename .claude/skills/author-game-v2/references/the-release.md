@@ -198,8 +198,8 @@ Two measured failure modes to avoid:
 
 - **Version-keyed stubs.** One game named its quests `intro / release2 / release3`; players
   reported finishing it in a minute. It is abandoned.
-- **Named but never paid.** Another dangled a character for years — *"Are we EVER going to
-  talk to the university president?"* Log every promise in the state file, and pay or cut it.
+- **Named but never paid.** Another dangled a character for years, and players
+  still ask when they will meet him (`sluttown-usa`, paraphrased). Log every promise in the state file, and pay or cut it.
 
 And state the current ceiling honestly. The reference game prints a plain marker at the top of
 each track so the player knows where the wall is. An honest wall is a promise; a silent one is

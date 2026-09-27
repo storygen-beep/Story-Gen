@@ -322,13 +322,9 @@ The two loudest phone threads in 22,622 harvested comments are the same question
 
 > how to unlock one locked adult app on the phone — `family-ties`, **50 net**, and again at **31 net** (paraphrased)
 
-And the worst case in the corpus is a phone locked behind a puzzle. `new-life-project` puts a PIN
-on its phone and **seven separate high-scoring comments ask for it** — *"How do you get the code
-for the old phone?"* (40), *"Old phone pin?"* (38), *"What's the password to the old phone?"* (36),
-*"New Phone code?"* (32), *"What's the phones Pin?"* (30), *"Phone code and cheats?"* (27), *"phone
-pin code?"* (21). Plus:
-
-> *"I'm stuck in Silvergate, any way to get out? Haven't bought a phone yet"* — 13 net
+And the worst case in the corpus is a phone locked behind a puzzle. `new-life-project` (numbers only) puts a PIN
+on its phone and **seven separate high-scoring comments ask for it** (40, 38, 36, 32, 30, 27 and 21
+likes), plus one player stuck in a town with no phone yet to get out (13 net).
 
 **Showing a locked app is good. Showing it without saying what opens it is a support ticket.**
 `family-ties` renders a locked app as a dead grey tile beside the live ones, which is the right
@@ -482,14 +478,10 @@ hand.**
 
 Seventeen of 27 corpus games mention a phone battery. The players are not divided about it. This is
 the cleanest single verdict in the 622 phone comments and the highest ratio in the set:
-
-> *"Can you just get rid of the charging the app thing altogether? It adds nothing to the game;
-> just a repetitive process that everyone hates."* — `sluttown-usa`, **24 likes, 0 dislikes**
-
-And on the loop it creates:
-
-> *"The grind is unreal. It's just a time waster, use the app, wait, use the app, wait, use the
-> app, wait."* — `sluttown-usa` (ten uses buy one small reward)
+a player asks for the app-charging to be removed altogether, because it adds nothing and everyone
+hates it (`sluttown-usa`, **24 likes, 0 dislikes**; paraphrased, it fails the adults-only rule).
+And on the loop it creates: use the app, wait, use it again, ten times for one small reward
+(`sluttown-usa`, paraphrased).
 
 **Upkeep is not pressure.** P5's costs are pressure because they trade the phone against something
 else she could be doing with that minute. A battery is a second clock that governs only the phone,

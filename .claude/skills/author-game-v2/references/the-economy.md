@@ -391,28 +391,20 @@ and does not change the shape. Every field game whose economy stays live moves t
 | **cost follows holdings** | she bought something; it costs to keep | `sluttown-usa`, `the-hellfire-club`, `inseminator` |
 | **the tier you chose** | the number is a function of what she is living in | `corpo-life` |
 
-**1 · The imposed ratchet, and the thing that makes it work.** `degrees-of-lewdity`, `Widgets_Rent`:
-
-```
-<<widget "rentpay">>
-  <<money `-($rentmoney + ($babyRent or 0))` "baileyRent">>
-  <<set $rentmoney to [10000,30000,50000,70000,100000,150000,200000][Math.clamp($rentstage,1,6)]>>
-  <<rentmod>>
-  Bailey … "Good … Next week I want <<printmoney $rentmoney>>… You didn't think it would get any
-  easier, did you?"
-  <<set $rentstage += 1>>
-<</widget>>
-```
+**1 · The imposed ratchet, and the thing that makes it work.** `degrees-of-lewdity` (numbers
+only), `Widgets_Rent`: one widget takes the payment, sets the next week's figure from a fixed ladder
+— `[10000,30000,50000,70000,100000,150000,200000][Math.clamp($rentstage,1,6)]` — has the collector
+say the new number out loud, and advances the stage.
 
 Money is in pennies (the widget says so: *`<!-- (amount in pennies…) -->`*, cross-checked against a
 link reading `£15` that charges `<<money -1500>>`), so that is **£100 → £2,000 over seven
-payments.** `rentmod` multiplies it by a **player-facing 10–300% slider** and doubles it if she took
-Robin's debt; `$babyRent` adds a per-child surcharge she can avoid by looking after them.
+payments.** `rentmod` multiplies it by a **player-facing 10–300% slider** and doubles it if she took on a
+second debt.
 
 ⚠️ **`$rentstage` is read in exactly five places and NOTHING in that game is gated on it. She gets
 nothing for the rise.** It works because the rise is **delivered in the collector's mouth at the
 moment of payment** — the same widget that advances the stage prints the next number, so the player
-is never surprised, and Bailey is a believed predator. `course-of-temptation` does the identical
+is never surprised, and the collector is a believable threat. `course-of-temptation` does the identical
 thing through her mother (*"the interest is killing us… next week we're going to need $X"*).
 
 **So: a bare ratchet needs a person whose motive the player already accepts.** If the money is

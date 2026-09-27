@@ -5,6 +5,161 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — IC8: her voice is a slope, and the inner conflict stays
+
+**Why.** W1b rested on one game (Zara), said "she wants him at every level", and called reluctance
+late content — which teaches the switch-flip players complain about. There was no rule for writing
+one event at several levels of her. The PRD's named evidence (Family Ties' street slap, Zara's
+dinner, Sophia Parker) is from failing games, so the evidence moved to passing games. Sophia Parker
+is judged FAIL (a high-school teacher extorted by students; no game text stating adults), is added
+to the audit and memory, and is left out (LO).
+
+**What changed.**
+- `references/the-meters.md` W1b is rewritten as one short rule: don't invent an excuse for every
+  act; design what stops her; the inner conflict stays, pushing back at low levels and turning to
+  appetite at high ones, and the slope is what the player plays.
+  - Evidence: Shady Deals' three-level reaction; the In Her Own Hands walk-in, inhibited vs past it;
+    players praising the slope (IHOH, the quote ends before "coming of age", per LO) and punishing
+    the flip (Cupid's Way); Zara's 36/5 kept as numbers only.
+  - Cut: "deniability is LATE content" and the "mechanical twin of composure" bullet.
+  - W1b-i is condensed to one paragraph, numbers only; the code blocks are gone.
+- `references/register.md` gets a new section, "One event, several levels": a `group` chain on her
+  meter, each band her voice at that level. Evidence: Shady Deals' kiss (three `$p_depravity`
+  tiers), In Her Own Hands `[BR_MasturbateFA]` (three bands), and Zara's six-rung dinner as numbers
+  only. Family Ties' street slap is dropped.
+- `references/register.md` "Composure is subtraction" is cut to one line (road-to-success, numbers
+  only), and the visit-count paragraph and the W1b pointer go with it.
+- Every quote was re-checked in `round2/passages`.
+
+**Verified.** pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 147,782 → 147,534 (−248) · running total 147,534 / 149,283
+
+---
+
+## 2026-09-27 — adults-only step 2: failing games kept as structure and numbers, labelled; no school or child framing; the-arc re-anchored
+
+**Why.** LO: DoL, Zara, Family Ties and the other failing games may stay as STRUCTURAL and NUMBER
+evidence, labelled with their game, but with no sexual quotes (done in step 1) and no school-age or
+child framing anywhere. The arc rules are re-anchored on the passing games. Plan:
+`~/Documents/Great_Games_Study_20260926/round5/ADULTS_ONLY_STEP2_PLAN.md`. LO's answers: one naming
+sentence covers the unnamed "reference game"; the four arc items with no passing example stay,
+labelled, in our own words; Life at University stays as numbers only; W1b-i loses only its family
+roles (the rewrite is IC8's); the Zara developer's reply is paraphrased; pure UI lines stay labelled
+and lines carrying story or people are replaced; `_school_split`, "LADDER SCHOOL" and the DoL
+struggle counts stay.
+
+One item per change. After every item: pytest, `--selfcheck` exit 0, cite_check 84, tallies
+unchanged (29/47, 46/50, 44/48), `git status games/` unchanged.
+
+- **S2-0:** `scripts/gates.py` `lint_loop_shape` docstring. The `destroyer` act-menu labels that
+  step 1 missed are cut; the shape stays (one clip from a pool of 8, four words, five exits),
+  labelled. Words 147,756 → 147,756 (code only).
+- **S2-1:** `references/the-arc.md` re-anchored on the passing games; the rules A1–A14 are unchanged.
+  - **Intro:** four arcs in two games — Course of Temptation (the harasser, the best friend, the
+    roommate's partner) and In Her Own Hands (Shaun).
+  - **A1:** IHOH Shaun, 14 steps, with *"Take it up a notch"* at step 13. Step counts are 10 / 9 / 12 / 14.
+  - **A2:** CoT and IHOH quest-log hours replace the Family Ties quest log.
+  - **A3:** CoT `$rmpbully.resisted` and the plain-words buttons; the IHOH caution line.
+  - **A3b:** the CoT best friend's "try again another night".
+  - **A4:** the CoT overheard-night ladder (five pages, skill-gated) and Cupid's Way's
+    `$corruption/20`.
+  - **A4b:** CoT Exhibitionism practised elsewhere; the Shady Deals taser.
+  - **A4c:** a Shady Deals `$p_depravity` row is added.
+  - **A5:** hers is the CoT roommate's partner, theirs is IHOH Shaun; the stamped template is IHOH
+    Bobby and Shaun.
+  - **A6:** the CoT crossing breeze and IHOH's dress gate.
+  - **A7:** IHOH TV with Shaun and the CoT dog.
+  - **A8:** IHOH's kitchen SPECIAL EVENTS chain.
+  - **A9:** the CoT campus walk gates.
+  - **A13/A14:** "three" loved arcs, not four; the lostness figure is 79 of 162.
+  - **Kept, per LO, labelled "one game … numbers only" and in our own words:** Zara's refusal that
+    routes to a new character, the Family Ties scaled and capped grant, the Family Ties endured
+    preparation, and Zara's density and quiet-share numbers.
+  - Every new quote was re-checked in `round2/passages`.
+  - Words 147,756 → 148,083 (+327). The plan estimated −150; keeping the four arc items as
+    mechanisms (LO's call) and quoting passing evidence cost more than the cut blocks saved.
+- **S2-2:** the reference game and its "school" anchor.
+  - `SKILL.md` names Degrees of Lewdity once as "the reference game", used for structure and
+    numbers only; this covers the ~45 unnamed mentions (LO).
+  - "one anchor (`school`)" becomes "one anchor location" in `SKILL.md` and `the-board.md` (twice),
+    and in the `gates.py` constant comments.
+  - `the-systems.md` drops `school` from DoL's list of place types.
+  - Words 148,083 → 148,107 (+24).
+- **S2-3:** DoL's child characters and the orphanage are gone.
+  - `the-want.md`: the Whitney/Robin/Bailey table is cut; Life at University stays as numbers only,
+    and DoL's collector share stays as a number.
+  - `the-surfaces.md`: the Robin debt row, snippet and quote become the mechanism, labelled;
+    `$robinromance` becomes `$romance`.
+  - `the-economy.md`: the `rentpay` widget becomes a described mechanism with its number ladder;
+    Bailey, the per-child surcharge and "predator" are cut.
+  - `the-board.md`: the Bailey bible becomes our own one-line example.
+  - `the-first-hour.md`: Bailey's opening becomes numbers; the Kylar line is cut (Wren kept).
+  - `the-voice.md`: our own role examples.
+  - `the-map.md`: Whitney's flat becomes "one character's flat".
+  - `the-systems.md`: the Bailey kitchen line and the school items in `effects()` are cut; "the
+    canteen" is cut.
+  - `engine.md`: the spot-check passage names (Hallways, Orphanage) are cut.
+  - `the-meters.md`: the canteen and `schoolpoolexposed` are cut.
+  - `gates.py`: the Bailey/Whitney names in the collector lint and a comment become "its collector"
+    and "another character".
+  - Words 148,107 → 147,962 (−145).
+- **S2-4:** Zara's family and school framing. W1b-i loses its family roles only (LO; the rewrite
+  is IC8's): "dad 43, bro 38, mom 26" becomes three characters (43/38/26); the widget and presence
+  variable become `<name>`; the showering and bedroom examples are cut. Also: "school-set" becomes
+  "fails the adults-only rule" (`the-meters.md`, `register.md`); the "scheming / propositions a
+  stranger" descriptions are cut, with the 36/5 counts kept (`the-meters.md`, `the-want.md`);
+  `ben quest1` becomes "one quest"; the class and school-reputation gates become a routine count
+  and a reputation (`the-first-hour.md`); `studiousGirl`, "classes 4" and `teacherJob` are dropped.
+  Words 147,962 → 147,947 (−15).
+- **S2-5:** the premises in `the-want.md` §0.
+  - The Prom Queen, Solomon Falls, Secret Taboo and "brother in the next room" become premises from
+    the passing games (CoT, IHOH, Shady Deals, Cupid's Way, from the Round 2 game notes).
+  - Zara's "Young Maria" developer quote is paraphrased and labelled.
+  - The Becoming Prom Queen and Zara player quotes become Shady Deals and CoT player quotes (a goal
+    praised; a missing spine punished).
+  - Words 147,947 → 147,975 (+28).
+- **S2-6:** player comments quoted from failing games are paraphrased and labelled.
+  - `engine.md` and `the-surfaces.md`: Zara's "same gifs", the Family Ties / DoL repeat complaints
+    (the DoL "school day" wording cut), and the Zara developer's reply, paraphrased per LO.
+  - `the-phone.md`: the seven NLP PIN comments become their like counts; the "Silvergate" comment is
+    paraphrased; the two sluttown battery comments are paraphrased.
+  - `the-voice.md`: den-of-infamy; `the-release.md`: sluttown's "university president".
+  - The two "resist" comments in `the-surfaces.md` turned out to be Course of Temptation (checked in
+    `findings_J_players.md`), so they stay, now labelled.
+  - `the-economy.md`'s "time-cost-without-content" is a study label, not a player quote, so it stays.
+  - Words 147,975 → 147,865 (−110).
+- **S2-7:** non-sexual in-game lines from failing games. Lines that carry story or people are
+  replaced (LO):
+  - corpo-life's cold open becomes a described structure;
+  - destroyer's "distant fog" is dropped;
+  - the friends-of-mine Felix childhood-friend line is cut, so F7 keeps the-company's line;
+  - NLP's "Tyson is in there." and the gym staffer's "Sorry, miss" become descriptions.
+
+  Pure UI lines stay, named by game: patriarch "too tired to text", NLP "too late to watch memes"
+  and "can't sleep yet", Family Ties "at home to take selfies", Zara `Required Corruption`. DoL's
+  creature line stays as labelled code.
+  Words 147,865 → 147,785 (−80).
+- **Sweep after S2-7:** one wording in `the-want.md` — Course of Temptation "asks what kind of
+  teenager she was" becomes "asks about her past". The rest of the school/family grep hits are our
+  own games, the approved moment library (Cupid's Way, Damien), or failing-game names beside
+  numbers.
+- **S2-8:** kept per LO — gates.py `_school_split` ("school of thought"), the board template's
+  "LADDER SCHOOL'S ANSWER", DoL's struggle-machine counts, and "Gates 1-10 were derived from Degrees
+  of Lewdity" (named, so labelled). No edit.
+
+**Verified after every item:** pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · tallies
+29/47, 46/50, 44/48 unchanged · `git status games/` unchanged. The final sweep for school and child
+framing words shows only labelled failing-game names beside numbers, our own games, and the
+approved library.
+
+words: 147,756 → 147,782 (+26) · running total 147,782 / 149,283. The plan's −900 estimate was
+wrong: LO kept the four arc mechanisms, and the passing-game evidence runs longer than the
+blocks it replaced.
+
+---
+
 ## 2026-09-27 — IC7: her-side examples, and the adults-only rule across the whole skill (step 1)
 
 **Why.** IC7 asked for the male-player examples to be replaced from her side: the reveal beat

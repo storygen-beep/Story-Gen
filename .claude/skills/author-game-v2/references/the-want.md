@@ -23,8 +23,9 @@ Keep it to one page. Longer means vaguer.
 
 **For a female lead, the premise matters.** In the fifteen core female-lead games of the Great Games
 Study (`~/Documents/Great_Games_Study_20260926/`), players name the premise when they say why they stay:
-the Prom Queen letter, the missing girl in Solomon Falls, the note in Secret Taboo, the brother in the
-next room. Each game sits in one of four shapes, and each shape has its own engine:
+her first year away from her parents, with a bill to send home (Course of Temptation); a girl
+embracing new freedom, slowly (In Her Own Hands); *"become rich… Create an Empire of Sin"* (Shady
+Deals); a sheltered girl's slow corruption (Cupid's Way). Each game sits in one of four shapes, and each shape has its own engine:
 
 | shape | what she feels | what drives each step |
 |---|---|---|
@@ -36,13 +37,14 @@ next room. Each game sits in one of four shapes, and each shape has its own engi
 Pick one, or name the mix, and write in one sentence what the player comes to feel.
 
 **Name the model to beat.** The developers in the study took the premise from their own taste plus one
-game, show or film to copy or beat. Zara's: *"Young Maria was a huge inspiration… mine will have actual
-story with an end in sight."* No premise came from players or a poll; players chose the order of ideas
+game, show or film to copy or beat — one wanted another game done better, with a real story and an
+end in sight (`zaras-school-life`, paraphrased). No premise came from players or a poll; players chose the order of ideas
 the developer already owned (`round4b/ROUND4B_REPORT.md` §1–2).
 
-**Keep the promise alive.** Players praise a game with a goal (*"There is a plot (unlike many other
-sandboxes)"*, Becoming Prom Queen) and punish one that drops it (*"the game completely forgets about the
-whole prom queen thing"*, Zara's School Life). §1b's hold starts her and §3's meters carry her; **the
+**Keep the promise alive.** Players praise a game with a goal (*"The goal is to become rich"*, Shady
+Deals) and punish one without a spine: *"no driving plot or even a MacGuffin"* (Course of
+Temptation), updates that add *"unnecessary sounds"* instead of *"continuing the story"* (Shady
+Deals). §1b's hold starts her and §3's meters carry her; **the
 goal or the mystery is what pulls the player.** It stays alive after the hold goes quiet, and the
 guidance page (`engine.md` §23) carries it. Declare the goal with a date, the mystery with a rough
 payout, and the rival.
@@ -84,7 +86,7 @@ single thing a game is loved for (25.9% of reason (1), weighted by comment count
 reason is *"You can be whatever you want."* For a female lead, §0 holds as well. Give her both.
 
 **The rule: a memory, not a slider** (`~/Documents/Female_PC_Craft_Study_20260823/findings_A_want.md:93`).
-Course of Temptation never shows a stat screen; it asks what kind of teenager she was and initialises
+Course of Temptation never shows a stat screen; it asks about her past and initialises
 thirteen skills the player never sees. Ask something the scene is **already asking**, and set a flag
 from the answer.
 
@@ -317,27 +319,27 @@ game's explicit passages that name him:
 
 ```
 life-at-university   2.1%      course-of-temptation   0.4%
-life-choices         3.8%      degrees-of-lewdity     1.4%
+life-choices         3.8%      degrees-of-lewdity     1.4%     (the first and last: numbers only)
 in-her-own-hands     —  no person collects it; the rent is a system
 ```
 
-And the scale check is the finding:
+And the scale check is the finding (`life-at-university`, numbers only; it fails the adults-only
+rule):
 
 ```
-degrees-of-lewdity, 415 explicit passages     life-at-university, 238 explicit passages
-   Whitney   61  14.7%                           uncle       14   5.9%
-   Robin     29   7.0%                           Professor   12   5.0%
-   Bailey     6   1.4%   <- the collector        Mrs. Love    5   2.1%   <- the collector
+life-at-university, 238 explicit passages
+   uncle       14   5.9%
+   Professor   12   5.0%
+   Mrs. Love    5   2.1%   <- the collector
 ```
 
-**Bailey is the archetype — the landlord the genre's biggest female-lead game is half built around —
-and he carries a tenth of the explicit passages Whitney does.** Whitney charges her nothing. In
-`life-at-university` the uncle and the Professor both outrank the landlady.
+**The collector carries fewer explicit passages than two other people**, and the reference game
+shows the same split (its collector 1.4%, numbers only).
 
 > **The field builds the hold and the porn as two separate systems.** Write the collector as a real
-> character who can want her — Bailey does, and it works — but the obligation is not the pipe the
-> porn comes down. If settling the hold *is* the repeatable surface, the game has one idea, and the
-> ceiling on it is however many ways she can pay.
+> character who can want her, but the obligation is not the pipe the porn comes down. If settling
+> the hold *is* the repeatable surface, the game has one idea, and the ceiling on it is however many
+> ways she can pay.
 
 ⚠️ **This is a default, not a ban.** Collector-as-target is a legitimate design and one of the
 biggest games in the field ships it deliberately. The defect is doing it *without noticing*, in
@@ -355,8 +357,8 @@ DIRECT — "she just wants him"      36 scenes    median gate corruption 25    l
 EXCUSE — a practical reason         5 scenes    median gate corruption 60    highest 80
 ```
 
-**Seven to one in favour of direct, and direct starts at 5.** A little higher she propositions a
-stranger — no problem to solve, no appointment, no justification. The passing games say it the
+**Seven to one in favour of direct, and direct starts at 5** — no problem to solve, no
+appointment, no justification. The passing games say it the
 same way: *"I really want this, Bobby. Please don't stop"* (In Her Own Hands).
 
 So do not design a reason for every act. **Design what stops her**, and let the meter be how far
@@ -372,7 +374,7 @@ makes the easy targets read as harder than the forbidden one.
 
 ⚠️ **The elaborate route is one shape among several, not the house style.** Problem → practical
 offer → her own justification → appointment → preparation → the preparation is seen — that is
-`ben quest1`, and it is how you build the *hard* approach. Reaching for it by default is what the
+one quest in that game, and it is how you build the *hard* approach. Reaching for it by default is what the
 author of this section did first, and the game it was read from does the opposite 36 times out
 of 41.
 

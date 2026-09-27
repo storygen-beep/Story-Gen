@@ -1855,8 +1855,7 @@ ten named location passages: 9,886 words · unconditional 234 · IN A BRANCH 9,6
 ```
 
 ⚠️ **Read that as ten passages, not as the whole game.** It is a spot check of
-`Hallways`, `Farm Work`, `Forest`, `Orphanage`, `Domus Street`, `Bedroom`, `Beach`, `Park`,
-`Museum` and `Temple` — not a per-location total of the kind `location fill` computes. It is
+ten named locations — not a per-location total of the kind `location fill` computes. It is
 lopsided enough (234 words out of 9,886) to settle the question it was asked, and it is **not** a
 figure to quote as "DoL is 98% conditional".
 
@@ -1878,8 +1877,8 @@ A pool varies how a beat is phrased. It must never decide **whether the player c
 something**. The distinction is not ours — it is what the field's players draw themselves. Course of
 Temptation's players resent the dice (*"the rng aspects of this game should be seriously toned
 down"*, 11 likes) while nobody anywhere complains about varied phrasing; the complaint that keeps
-recurring is the opposite one, *"same gifs every time you do same things every single time"*
-(`zaras-school-life`, its top-liked criticism). Measured 2026-08-23 across 3,479 comments —
+recurring is the opposite one: the same pictures every time you do the same thing
+(`zaras-school-life`'s top-liked criticism, paraphrased). Measured 2026-08-23 across 3,479 comments —
 `~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §7.
 
 A `block_pool` whose branches carry different `flagEffects`, different `traitEffects`, or different

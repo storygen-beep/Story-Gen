@@ -54,8 +54,8 @@ paragraph downstream glosses it. `references/register.md`, "The words the player
 own" — the label sub-rule.
 
 **A character's name is navigation too, and it is not a label until the player owns it.** Before a
-character has been met, name them by their **role** and where they are — *"your closest friend,
-Felix Morin"*, *"a student at your school"*, *"can be found at the docks at night"*. After, the name
+character has been met, name them by their **role** and where they are — *"your landlady"*,
+*"the bartender at the Anchor"*, *"can be found at the docks at night"*. After, the name
 alone is enough. `references/the-first-hour.md` F7 owns this and the `named before met` lint lists
 the misses.
 
@@ -226,10 +226,9 @@ style: cards resolving tokens would remove the rule.
 
 Measured 2026-09-03 across 23 female-lead games and 5,663 player comments: **being stuck is the
 killer, and it is not grind.** The shape is always the same — content she can see, a requirement
-she cannot. The corpus's single most-liked complaint of this kind:
-
-> *"…not being confident enough to do anything in the living room. **Does corruption have to be at a
-> certain level? What's needed?**"* — `den-of-infamy`, 52 likes (the sexual half of the line cut)
+she cannot. The corpus's single most-liked complaint of this kind asks which
+level a locked room needs and what is needed to reach it (`den-of-infamy`, 52 likes; paraphrased,
+it fails the adults-only rule).
 
 ⚠️ **Content and effort do not save you.** `in-her-own-hands` ships **136 passages for one
 character** and an **881-word hint page** for him, whose locked state reads *"This hint is locked

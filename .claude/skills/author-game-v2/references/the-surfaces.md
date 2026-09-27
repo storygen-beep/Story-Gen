@@ -603,7 +603,8 @@ Both ends of the range are defects, and players name both:
   step all she could do was resist and hope (`degrees-of-lewdity`, 5 likes; paraphrased).
 - **A refusal that always works** is why they get bored — three separate comments mourn a *removed*
   failure case: *"did they remove npc's not listening when you resist? ... i really enjoyed that"*
-  (8 likes), *"they'd usually ignore your resistance, but now they just relent"* (6 likes).
+  (8 likes), *"they'd usually ignore your resistance, but now they just relent"* (6 likes) —
+  `course-of-temptation`.
 
 ⚠️ **This is not a licence to hide a dice roll.** The same players resent RNG (*"the rng aspects of
 this game should be seriously toned down"*), and the field's answer is that the odds are **printed
@@ -708,7 +709,7 @@ three separate games**, and gate 33 already fails all three for it.
 thresholds and be correct. See "What is checked".
 
 ⚠️ **The negated form is legal on a canvas gate** — `operator = "ne"`, *"she is NOT at stage 3"*,
-the shape the field writes as `$robinromance isnot 1`. It reads correctly in every evaluator as of
+the shape the field writes as `$romance isnot 1`. It reads correctly in every evaluator as of
 2026-08-24; before that it was true on the canvas and silently false in every hint that touched it.
 **It is still rejected on a `[[quest_cards]]` condition, deliberately.** `engine.md` §37.
 
@@ -730,23 +731,15 @@ of them gates it on scarcity**:
 
 | game | the offer | what it is gated on |
 |---|---|---|
-| `degrees-of-lewdity` | *"Take on Robin's debt"* — **doubles the weekly rent, permanently** | `$robinpaid isnot 1 and $robindebtknown is 1` — that she **knows**, never that she is short |
+| `degrees-of-lewdity` (numbers only) | take on a second person's debt — **doubles the weekly rent, permanently** | that she **knows** of the debt, never that she is short |
 | `course-of-temptation` | join a Greek house — dues **plus** housing on the weekly bill, forever | `!$firsttime.greekduespaid` — that she has not yet |
 | `corpo-life` | move up an apartment tier — rent 200 → 800 → 10,000 → 30,000 | that she does not own it yet |
 
-DoL's is worth reading in full, because every part of it is doing a job:
-
-```
-<<if $robinpaid isnot 1 and $robindebtknown is 1>>
-  <<link [[Take on Robin's debt|Bailey's Office Robin]]>><<note "Doubles weekly payment" "red">>
-```
-> *"You want to take on that worthless waif's debt? Why?" Bailey says. "Don't answer. I don't care."*
-> *Taking on Robin's debt is irreversible.*  →  `<<set $rentpaid…>> <<set $rentmoney *= 2>>`
-
-**The price is on the button, in red** — R5c's rule, applied to a door she is walking through rather
-than one she is refused. The irreversibility is stated before she commits, which is Study 8's *close
-doors out loud*. And what the debt buys is **the person**: `$robinpaid` gates his weekly gift, his
-free drink and the romance chain.
+The reference game's version (structure only) has every part doing a job. **The price is on the
+button, in red** (*Doubles weekly payment*) — R5c's rule, applied to a door she is walking through
+rather than one she is refused. The irreversibility is stated before she commits, which is Study
+8's *close doors out loud*. And what the debt buys is **a person**: paying it opens that person's
+own chain.
 
 > **The test: can she take this when she doesn't need to?**
 > If not, it is not an offer. It is a consolation prize, and she will only ever see it after she has
@@ -809,22 +802,16 @@ screen; a variant pool changes a sentence inside it.** The first is how a room s
 room; the second is how a scene survives its tenth read. A surface the player enters fifty times
 needs the second, and no amount of the first substitutes for it.
 
-**Confirmed from the player side 2026-08-24, and this one is unusually direct.** The complaint is
-the top-liked criticism of `zaras-school-life`:
+**Confirmed from the player side, and unusually direct.** The top-liked criticism of
+`zaras-school-life` is **the same pictures and the same scenes every day** (13 likes; paraphrased,
+it fails the adults-only rule), and two other failing games draw the same complaint: the same
+scenes for every character (`family-ties`, 6 likes), and a day made mostly of repeated dialogue
+(`degrees-of-lewdity`, 6 likes).
 
-> *"The biggest problem with this game its so boring doing the same thing every day too much loop no
-> nothing new — **same gifs every time you do same things every single time**"* (13 likes)
-
-and it is named precisely in two other games — *"the game is pointless if you just use the **same
-scenes for every character**"* (`family-ties`, 6 likes), *"a school day can be 50 inputs with **~48
-of those being repeat dialogue**"* (`degrees-of-lewdity`, 6 likes).
-
-**Zara's developer answers it in the thread**, which is as close to a controlled result as this
-study gets. A player asks for *"originally written encounters instead of ones based on a format with
-names changed"*; the reply:
-
-> *"whenever you see 'improvement' in the changelog, assume i have done what you suggested above,
-> **trying to give every single scene a different text**."*
+**That game's developer answers it in the thread** (`zaras-school-life`, paraphrased), which is as
+close to a controlled result as this study gets: a player asks for encounters written for each
+person rather than one template with the names changed, and the developer replies that every
+"improvement" in the changelog is exactly that — **giving every single scene its own text**.
 
 ⚠️ **The distinction that keeps this rule from being misread: repeating the LOOP is the genre,
 repeating the WORDS is the defect.** Players defend the structure in the same breath as they attack

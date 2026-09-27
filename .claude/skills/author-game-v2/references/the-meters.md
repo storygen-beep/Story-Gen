@@ -103,63 +103,33 @@ the game against **its own declaration**, never against a number this file picke
 
 ---
 
-## W1b · What the meter gates is NERVE, not permission
+## W1b · The meter gates how far she goes — and the inner conflict stays
 
-Counted in source on `zaras-school-life`, a school-set game, so its numbers are kept and none of
-its scenes are. Classify every act scene by whether she states a plain want or gives herself a
-practical reason, then read the corruption threshold on each:
+**Don't invent an excuse for every act. Design what stops her. And keep the conflict: at low levels
+her own thought pushes back while she acts; at high levels the same moment is appetite. The slope is
+what the player plays** — not a switch that flips at a threshold.
 
-```
-DIRECT — "she just wants him"      36 scenes    median gate 25    lowest 5
-EXCUSE — a practical reason         5 scenes    median gate 60    highest 80
-```
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `shady-deals` writes one moment at three levels of her meter
+> (`[Sex Pose Widgets]`): *"You stiffen immediately, heat rushing to your face…"* ·
+> *"…embarrassment mixing with a reluctant thrill."* · *"…fully aware of how exposed you are and
+> enjoying the attention."* `in-her-own-hands`, walked in on while changing: inhibited, *"Shit! I
+> must have forgotten to lock the door!"*; past it, *"Well, fuck it, I might as well go with it."*
+>
+> Players praise the slope — *"This isn't a story of some girl that becomes a mega slut overnight"*
+> (`in-her-own-hands`) — and punish the flip: *"goes from teasing to full on sex after that
+> corruption event"* (`cupids-way`). And the direct want is the default, not the excuse: one game
+> (`zaras-school-life`, numbers only) has 36 act scenes where she simply wants him against 5 where
+> she gives herself a reason.
 
-**The direct route outnumbers the justified one seven to one, and it is available from corruption
-5.** At the lowest levels she is already scheming to get a man worked up; a little higher, she
-propositions a stranger. She wants him at every level — the plain want, said, as in Shady Deals:
-*"you're already sinking to your knees, back straight, lips parted."*
-
-> **So the number is not "is she willing yet". It is HOW FAR SHE WILL GO TO ACT ON IT** — which
-> room she will walk into, who she will approach, and how brazen she is when she does.
-
-Three things follow, and the third is the one that changes what you author.
-
-- **Never write a rung as permission unlocking.** Write it as nerve: the same appetite, in a
-  riskier place, in front of more people.
-- **This is the mechanical twin of `register.md`'s composure finding.** The high branch reads
-  composed and the low branch reads nervous *because the meter is nerve*. They are one system
-  described from two ends, not two systems.
-- ⚠️ **Deniability is NOT a beginner's frame.** The five excuse-shaped scenes — an accident of
-  clothing, a door left open — gate at **45–80**, every one behind the game's hardest unlock. The excuse is the tool for
-  the target she cannot look at directly, and it is LATE content. Reaching for it early inverts
-  the ladder. `the-want.md` §4 carries the design half.
+How to write one event at several levels: `register.md`, "One event, several levels".
 
 ### W1b-i · The unit is +1, and the raise goes through a named widget
 
-Same game, every call that raises a *character's* corruption — **107 of them, dad 43, bro 38, mom
-26 — and every single one is `+1`.** Section E of the 8-23 study found the same unit on the player
-side across the field: `+1` is the median raise in five of eleven games.
-
-The raise itself is a widget, one per character, so no author ever touches the arithmetic:
-
-```
-<<widget "addcorruptionbro">>
-    <<set $bro.corruption to Math.clamp($bro.corruption + $args[0], 0, 100)>>
-<</widget>>
-```
-
-**And what calls it is ordinary domestic activity, not seduction.** The brother's number rises
-from chores, from her showering, from watching TV in the same room, from sitting in his bedroom.
-There is no *tease him* button. Each of those events checks three things and nothing else:
-
-```
-$PlayerClothes == "Slutty"     ← the one lever she pulls
-$KylePresent == true           ← he has to actually be there
-_chance >= 50                  ← and half the time nothing happens
-```
-
-That is the whole mechanism for "she corrupts him": **one number, one widget, +1s, a clothing
-check, a presence check, and a die.** The content is the domestic loop the game already has.
+One game (`zaras-school-life`, numbers only) raises a character's meter 107 times and every raise is
+`+1`, through one named widget per character, called from the ordinary loop — chores, the same room,
+time in his space — and each call checks three things: what she is wearing, that he is there, and a
+die. One number, one widget, +1s, three checks. `+1` is also the median raise in five of eleven
+field games.
 
 ## W2 · A throttle's job, stated positively
 
@@ -456,7 +426,7 @@ give the meter consequence without ever printing a refusal, which is what the 2%
 
 **Where the reads live.** Not on the always-on surface — surface reads are 0–16 per game against
 7–934 in ordinary passages. They live in the **repeatable** ones: `family-ties` reads fame in
-`southCafeJob`, `teacherJob`, `uni*`, `inst`, `onlyfans`; `destroyer` writes the same encounter
+`southCafeJob`, `inst`, `onlyfans` and other jobs; `destroyer` writes the same encounter
 per location (`beachgirl`, `downtowngirl`, `downtownrandom`), each rolling `$Respect`; `patriarch`
 reads it in `Apartment` and in `Finances`, the weekly cycle.
 
@@ -819,10 +789,10 @@ any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:
 with the rest.
 
 ⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
-gate on clothing most are Cliff Street, the Arcade, the Moor, the Canteen, Connudatus Street, the
-Park, the Dance Studio — the walk to work, not the sex scenes. It carries roughly twenty
-per-district reactions (`cliffexposed`, `parkexposed`, `commercialexposed`, `schoolpoolexposed`…),
-so walking out underdressed means something different on the cliff than in the canteen. **One
+gate on clothing most are Cliff Street, the Arcade, the Moor, Connudatus Street and the Park — the
+walk to work, not the sex scenes. It carries roughly twenty per-district reactions
+(`cliffexposed`, `parkexposed`, `commercialexposed`…), so walking out underdressed means something
+different on the cliff than in the park. **One
 ambient at one location, gated on exposure AND on somebody being there to see it, is the whole
 starting move**; add the second when the first earns it. A derived number that only the wardrobe
 screen reads is the same defect in a new place.

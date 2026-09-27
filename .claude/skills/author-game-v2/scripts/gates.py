@@ -61,10 +61,10 @@ except ImportError:
 # from a "10,187 words per location" figure. That figure was wrong: the numerator
 # included base-combat and base-system — engine code, not location prose. Measured
 # on location prose only, DoL's seed is 116,540 words over 25 locations:
-#   mean 4,661 · median 3,154 · min 302 (bus station) · max 35,218 (school)
+#   mean 4,661 · median 3,154 · min 302 (bus station) · max 35,218 (the anchor)
 #   -> 24 of its 25 locations are UNDER 10,000. The exemplar failed its own gate.
 # The real shape is one or two deep ANCHORS plus many legitimately thin satellites:
-# `school` alone held 30.2% of all location prose at seed.
+# the anchor alone held 30.2% of all location prose at seed.
 #
 # ⚠️ THESE THREE ARE A BACKSTOP, NOT THE CHECK — corrected 2026-08-15, study 6.
 # When `v2_state.json` declares `board.locations[].fill`, gate 1 checks each location
@@ -78,7 +78,7 @@ except ImportError:
 # satisfied by generating N things; a number checked against the author's own declaration
 # cannot, because moving it means changing the design. See SKILL.md's operating rule
 # "the BOARD DECLARES IT and the gate checks the game against its own declaration".
-ANCHOR_SHARE_PCT      = 25.0    # DoL seed: school = 35,218 / 116,540 = 30.2%
+ANCHOR_SHARE_PCT      = 25.0    # DoL seed: anchor = 35,218 / 116,540 = 30.2%
 MEDIAN_LOCATION_WORDS = 3_000   # DoL seed median 3,154
 MEAN_LOCATION_WORDS   = 4_500   # DoL seed mean 4,661
 
@@ -2731,9 +2731,9 @@ def _self_loop_nodes(canvas):
 def lint_loop_shape(model, game):
     """Repeatable explicit surfaces: act-menu loop, or one-shot cascade?
 
-    The loop is the field's own repeatable shape — destroyer's `ginablow` is one
-    clip from a pool of eight, four words of text, and five exits (Keep blowing ·
-    Pound her ass · Pound her pussy · Cum · Go back). Our engine builds it already:
+    The loop is the field's own repeatable shape — one `destroyer` act screen (structure
+    only; it fails the adults-only rule) is one clip from a pool of eight, four words of
+    text, and five exits. Our engine builds it already:
     a triggerless canvas, one act node per rung, a self-loop that raises a hidden
     meter, switch links, and a finish gated on the meter (the-surfaces.md).
 
@@ -6175,9 +6175,9 @@ def lint_collector_is_target(model, game, state):
     Measured, `~/Documents/Female_Hold_Study_20260904/probe_c.py`: across every field
     game with a bill and a named collector, the collector's share of the game's
     EXPLICIT passages is 0.4-3.8%, and he is never the top figure. `degrees-of-lewdity`
-    is the case that settles it - Bailey, the landlord that game is half built around,
-    carries 6 of 415 explicit passages (1.4%) against Whitney's 61 (14.7%), and Whitney
-    charges her nothing. The field builds the hold and the porn as two systems.
+    (numbers only) is the case that settles it - its collector, the character that game is
+    half built around, carries 6 of 415 explicit passages (1.4%) against another
+    character's 61 (14.7%), who charges her nothing. The field builds the hold and the porn as two systems.
 
     ⚠️ A LINT, NEVER A GATE, and the reason is in that same sentence: DoL ships
     collector-as-target deliberately and it works. A gate here would fail a game for a
@@ -6269,11 +6269,11 @@ def lint_collector_is_target(model, game, state):
 
     rows.append("field reference: the collector's share of a game's explicit passages "
                 "runs 0.4–3.8% and he is NEVER the top figure — degrees-of-lewdity's "
-                "Bailey 6 of 415 (1.4%) against Whitney's 61 (14.7%), and Whitney "
+                "collector 6 of 415 (1.4%) against another character's 61 (14.7%), who "
                 "charges her nothing")
     if rank == 1:
         rows.append("⚠ the collector is the game's LARGEST explicit surface owner. Not a "
-                    "failure — DoL makes Bailey both on purpose — but the-want.md §4a: if "
+                    "failure — DoL makes its collector both on purpose — but the-want.md §4a: if "
                     "settling the hold IS the repeatable surface, the game has one idea, "
                     "and its ceiling is however many ways she can pay. Check that somebody "
                     "who charges her nothing carries more of it than he does.")
@@ -7518,7 +7518,7 @@ def run_gates(model, game, state=None):
         # Measured by PLAYING (DOCTRINE_GAPS study 5, R3): every field game that
         # charges money names the amount on the label itself — "Buy coffee (0:02
         # £2)", "Paper - 80$ for a piece". The player is budgeting against a stated
-        # obligation (DoL: "Bailey wants £100 on Sunday"), so a hidden price is a
+        # obligation ("the rent is £100 on Sunday"), so a hidden price is a
         # plan they cannot make.
         #
         # This is money ONLY, deliberately. The field is split on stamina-type
@@ -11723,7 +11723,7 @@ def main():
         for h in coll_lints[:6]:
             print(f"          · {h}")
         print("          (the-want.md §4a — a RANK, never a score. The field's collector is"
-              " never the top explicit figure, but DoL makes Bailey both deliberately, so a"
+              " never the top explicit figure, but DoL makes its collector both deliberately, so a"
               " threshold here would fail a game for a legitimate design)")
 
     if dep_summary:

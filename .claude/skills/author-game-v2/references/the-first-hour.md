@@ -57,12 +57,8 @@ they run.
 and the axis that separates the two shapes is the cast, which is checkable by opening the first
 passage and reading it. `findings_K_mirror.md` §4.
 
-corpo-life's whole cold open, in full — who, job, place, why poor, what is at stake, zero characters:
-
-> *"My name is [X]. I just got accepted into Chase-Bank, one of the most prestigious banks in New
-> York city. After graduating from Stanford, I applied into the Management Trainee program and
-> rented a small apartment near my office and am living frugally in order to live in this concrete
-> jungle."*
+corpo-life's whole cold open (structure only; it fails the adults-only rule) is one paragraph: who
+she is, the job, the city, why money is tight, what is at stake — and zero characters.
 
 **The defect is the middle.** A cold open carrying a staged open's payload names people the player
 cannot picture, at a density the prose cannot support. Our own measured failure named **six people,
@@ -356,9 +352,9 @@ Walked all 25 parseable games from their declared `startnode`; the scaffolding/f
 > 144 words** (range 29–8,404) · **median 2 links** · **11 of 19 end on a real choice**, 8 on a
 > single Continue.
 
-**Two openings worth copying.** `degrees-of-lewdity` spends **141 words** putting an obligation and a
-deadline on the player — Bailey names the debt, the term and the threat, then *"You return to your
-tiny bedroom and wonder what to do."* `the-hellfire-club` spends **144** on year, city, why she is
+**Two openings worth copying.** The reference game (numbers only) spends **141 words** putting an
+obligation and a deadline on the player: the debt, the term and the threat, then a free first
+choice. `the-hellfire-club` spends **144** on year, city, why she is
 there, who she is meeting, *ten shillings in your pocket* — and ends on **three** ways to cross
 London. Both are inside the median. Neither explains a system.
 
@@ -378,8 +374,8 @@ where the story should start. F4 still asks for a beat that arms each system; th
 says what the beat just showed.
 
 ⚠️ **But the long backstory prologue is a genuine shipped shape, and the #2 game is one.**
-`destroyer` (7,686) opens on **ten screens, ~2,900 words, one link each** — *"You remember it all
-like a distant fog…"* — before the world opens. `patriarch` runs four; `family-ties` opens on an
+`destroyer` (7,686; numbers only) opens on **ten screens, ~2,900 words, one link each** before the
+world opens. `patriarch` runs four; `family-ties` opens on an
 8,404-word prologue. So F1's short cold open is a *default*, not a law. What no game does is **both**
 a prologue and a systems explainer. Study:
 `~/Documents/Opening_And_Introduction_Study_20260902/`.
@@ -591,9 +587,9 @@ questions:
 `renderNpcPortraits` (`engine.md` §42) does the **located** half and nothing else. `met AND located`
 is the shape; the meeting flag on the hub's `trigger.conditions` is how you write the other half here.
 
-`zaras-school-life` stages the meetings rather than opening them all at once, and the trigger is a
-counter rather than a door: `$ben.metFlag eq false and $classAttended eq 4`, and Jessica needs
-`$dayCount gte 5` **and** `$PlayerSchoolRep gte 10`.
+`zaras-school-life` (numbers only) stages the meetings rather than opening them all at once, and
+the trigger is a counter rather than a door: one meeting waits for the fourth time she has done a
+routine, another for day 5 **and** a reputation of 10.
 
 **The shape to build:**
 
@@ -835,10 +831,7 @@ S3 applied at the one moment it matters most.
 
 ## F7 · Role before name
 
-The field's ordering, in the two clearest cases:
-
-> *"This is your closest friend, **Felix Morin**; a rather shy young man who you've known almost
-> since the day you've moved here… including his older sister, **Chloe**."* — friends-of-mine
+The field's ordering, in the clearest case:
 
 > *"Your new employer stands and leans forward to shake your hand."* — the-company
 
@@ -855,8 +848,6 @@ name the player has not earned:
 ```
 deliver a letter to <<if $wren_intro is undefined>>a <gender> named Wren.  <He> can be found at
   Remy's estate in the moor, or at the docks at night<<else>>Wren<</if>>.
-
-Kylar<<if C.npc.Kylar.init isnot 1>>, a student at your school<</if>>.
 ```
 
 Ours has the same primitive: a `[group]` block with `conditions` on the meeting flag, or a
