@@ -192,7 +192,7 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 > **seven hand-written play-tests** were already running in `games/` — five in `mrs_vance`,
 > one each in `steam` and `forty_miles`, 1,000+ lines — sharing a `check()` collector and
 > four helpers almost verbatim, and cited exactly once in this whole library
-> (`the-meters.md:445`). They found what no source gate could: an effect op the runtime does
+> (`the-meters.md`, "How 'it delivers people' is built on this engine"). They found what no source gate could: an effect op the runtime does
 > not implement, an obligation that was checked as payable and never as taken, a character
 > deleted at midnight by a day-specific overnight row.
 >

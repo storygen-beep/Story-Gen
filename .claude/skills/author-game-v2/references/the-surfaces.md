@@ -11,19 +11,9 @@ this skill and still be unplayable:
 > buttons, at every location, with 109 of its 216 doors open on day one. It scored **18/18**.
 > Nothing in the skill said a location page had a shape, so the author invented one.
 >
-> ⚠️ **The first fix for that was wrong, and this file is its second draft.** The answer written in
-> 2026-08-10 was *declare the objects in the room and hang a choice off each one.* That produced
-> `the_allowance`, whose kitchen offers **Look round the kitchen · Sit out on the back step · Come
-> down in what you slept in · Get the washing in off the airer · Ask for more than you need** — five
-> buttons, three of which have a free duplicate inside the first, in a game that scored 26/27. LO
-> read that list cold and said *"objects in a room, and then things can be done in that room, will
-> always end up with a mess like this, which means nothing."* He was right. The rest of this file is
-> the correction, and it is measured against 25 shipped sandboxes rather than reasoned from first
-> principles.
->
-> *(An **airer** is a folding clothes-drying rack. That gloss is here because this file quotes the
-> label four more times and `register.md` now requires a word like it to be taught on first use —
-> including by the skill itself. The button text is left verbatim: it is what the game shipped.)*
+> *(An **airer** is a folding clothes-drying rack. This file quotes `the_allowance`'s button *Get the
+> washing in off the airer* four more times, and `register.md` requires a word like it to be taught on
+> first use.)*
 
 ---
 

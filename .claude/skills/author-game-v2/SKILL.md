@@ -232,8 +232,7 @@ The state schema is in
 
 ## The scoreboard — what fails, and where to read about it
 
-`python3 scripts/gates.py <slug>`. **When a gate fails, look it up here.** Nine of these used to be
-documented nowhere but in the script's own comments, so an author who hit one had nothing to read.
+`python3 scripts/gates.py <slug>`. **When a gate fails, look it up here.**
 
 | gate | what it means | where it is argued |
 |---|---|---|

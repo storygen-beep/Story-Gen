@@ -5,6 +5,77 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — IC0c: third prune slice, history out (PRD_IDEAS_AND_CRAFT IC0)
+
+**Why.** IC0c makes room for IC3 and LO's "their side" fix, together about +1,100. Same rule as
+IC0a and IC0b: cut only text whose job is history. Where a rule sat inside it, the rule stays as a
+line. Nothing on LO's protected list was touched:
+- A1–A12;
+- the loud voice and the truth rule;
+- F1b;
+- "what the player is shown";
+- S12/S13;
+- doors, W7, SY2b;
+- the money file;
+- one-table schedules and meter-stop;
+- gate-pointed rules.
+
+Item 7 sits inside §1b (the hold kinds) and cuts history only; LO approved it. The full diff plan is
+at `~/Documents/Great_Games_Study_20260926/round5/IC0C_DIFF_PLAN.md`.
+
+**Moved from** (line numbers are before this edit; the full old text is in git at `5645503`):
+- **`the-meters.md`:**
+  - `:330-333` (W4): "Until 2026-08-24 it printed 8–17 on both". −41.
+  - `:399-425` (W5b): the "CORRECTED 2026-08-27" box (the three-game sample, the 2% figure, the
+    `mrs_vance` story). Kept: the 13-game measurement. −189.
+  - `:429-437` (W5b): "The example was wrong and is replaced" (family-ties). Kept: the place-scoped
+    example, and "The rule holds on ten examples." −67.
+- **`the-first-hour.md:729-734`** (F5b): "Until that change it was inert on the manual lane…".
+  Both rule paragraphs around it stay. −83.
+- **`the-want.md`:**
+  - `:195-203`: the customization lint "built here and taken back out the same day". −119.
+  - `:212-214` (§1b): "This section used to say a recurring DEMAND with a COLLECTOR". Kept: "A
+    bill is one hold of at least nine…". −31.
+- **`the-voice.md:395-404`**: R6's two refused tests and two withdrawn findings. Kept: why R6 has
+  no gate, and a one-line guard against re-proposing them. −90.
+- **`engine.md`:**
+  - `:665-668` (§21b): "This section used to say…". −39.
+  - `:883-886` (§23): the "(This paragraph originally described…)" aside. Kept: "Read the whole
+    function". −13.
+  - `:1970-1976`: "This paragraph used to add 'the same shape as block_pool'… Corrected". Kept:
+    69 authorings in four v1-era games, none in v2. −61.
+  - `:2053-2056` (§37): "Added… Rewritten the same day, because the first version was wrong". −49.
+  - `:2464-2470` (§43): "`npcs[].role` was static until 2026-09-02…". Kept: the rule. −44.
+- **`the-surfaces.md:13-26`** (intro): the "first fix was wrong" story (the objects rule,
+  `the_allowance`, LO's verdict). SKILL.md's tired-author rule tells the same story. The airer gloss
+  is kept, rewritten to stand alone, because the file still quotes that button. −177.
+- **`the-returning-player.md:10-14`**: "v1 carried this as save-safety.md… Restored 2026-08-29". −62.
+- **The `dwelling` rename history:**
+  - `the-map.md:325-329`: cut. −55.
+  - `state.md:309-312`: kept as "Older ledgers may carry the retired key `dwelling`; nothing reads
+    it." −37.
+- **`SKILL.md:235-236`**: "Nine of these used to be documented nowhere…". −24.
+
+**Re-anchored.** `references/agents.md` cited `the-meters.md:445`, which had drifted. It now cites
+`the-meters.md`, "How 'it delivers people' is built on this engine", where the playtest harnesses
+are actually cited.
+
+**Verified.**
+- pytest: 75 passed.
+- `--selfcheck`: exit 0, all five rows PASS. The only output change is a printed line number in
+  its informational list: `the-surfaces.md:129 says R2b` → `:119`, the same item, moved up by the
+  cut.
+- cite_check: 84.
+- Gate tables for the_balance, orientation and vesper_two: identical.
+- `git status games/`: unchanged.
+- The kept headings and rule lines all still exist: W5b, F5b, R6, §21b, §23, §37, §43, §1b, "A bill
+  is one hold", and the G38 name.
+- No stale `the-meters.md:445` or `dwelling until` text is left.
+
+**Words:** 148,286 → 147,098 (Δ −1,188) · running total 147,098 / 149,283.
+
+---
+
 ## 2026-09-27 — moment library: Family Ties out, the rule applied with no exceptions
 
 **Why.** LO applied the header's rule as written, with no exceptions. Family Ties fails: a

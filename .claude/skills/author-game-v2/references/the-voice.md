@@ -392,16 +392,11 @@ Field reference and citations: `references/engine.md`.
 
 **R4 has no gate on purpose** — see the warning under it.
 
-**R6 has no gate either, and two things were tested and refused before it was written.** A rate
-floor on act-words cannot be defended: the field runs 9.2% and a third of its own explicit-surface
-buttons are `continue` or `leave`, so any threshold between those fails games that are doing it
-right. And the SHAPE of the surface — menu against single-exit chain — was correlated with
-engagement across 16 games and predicts nothing (−0.13 and +0.09). Two further findings from the
-same study were withdrawn rather than shipped: that loops folding back on themselves do better
-(+0.52, still +0.34 controlling for size — but **only two games in the corpus loop at all**, and the
-two most-engaged loop 7% and 3%, so a rank correlation was being carried by two points), and that
-more explicit content does better (+0.61, but **+0.18** once total game size is held constant, which
-means it was mostly "bigger games collect more comments"). Recorded so neither is re-proposed.
+**R6 has no gate either.** A rate floor on act-words fails games doing it right: the field runs 9.2%,
+and a third of its explicit-surface buttons are `continue` or `leave`. The SHAPE of the surface predicts
+nothing (−0.13, +0.09 across 16 games). Two further findings were tested and withdrawn, and are not to
+be re-proposed: "loops do better" (only two games loop) and "more explicit does better" (+0.18 once
+game size is held constant).
 
 **R1 is deliberately not a gate, and the numbers say why.** *The bench* is a plain noun and clear in
 context; *Sit with it* is a plain phrase and is not. No rule separates them mechanically. Measured,
