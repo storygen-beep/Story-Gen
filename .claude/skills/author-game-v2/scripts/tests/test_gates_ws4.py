@@ -278,7 +278,10 @@ def problems(g, st=None):
 def verdict(g, st, name):
     model, g2 = gates.build(copy.deepcopy(g))
     r = next(r for r in gates.run_gates(model, g2, st) if r["gate"] == name)
-    return None if r["na"] else r["pass_"], r
+    # These fixtures test the gate's LOGIC on a handful of cases. "too few to judge"
+    # (PRD IC21) means the logic passed on a sample under 5, so it reads as True here;
+    # the sample-size rule itself is tested in test_gates_ic21.py.
+    return None if r["na"] else (r["pass_"] or r.get("few", False)), r
 
 
 # ── the static gate ──────────────────────────────────────────────────────────

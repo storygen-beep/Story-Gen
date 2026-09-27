@@ -7,6 +7,7 @@ Usage:
     python3 scripts/pitch_pack.py <path/to/game.toml>
     python3 scripts/pitch_pack.py <slug> --json      # machine-readable
     python3 scripts/pitch_pack.py <slug> --kind being_seen   # + that kind's library slice
+    python3 scripts/pitch_pack.py <slug> --person npc_ray    # RELATIONSHIPS: one person only
 
 WHY THIS EXISTS, and why it is a script and not a paragraph in the agent's prompt.
 
@@ -442,6 +443,230 @@ def _count_on_disk(roots, ref, is_pool):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Relationships — each person's steps so far, so a pitch can be the NEXT one
+# ─────────────────────────────────────────────────────────────────────────────
+# A pitch is the next step on a named relationship (`the-release.md`, "The next
+# step"; `the-arc.md` A13-A14): it pays something already shipped and opens the
+# step after. So the Pitcher needs, per person, what has shipped, in order, and
+# which set-ups nothing has paid yet.
+#
+# ⚠️ ATTRIBUTION IS DECLARED, NOT GUESSED FROM PROSE. Orientation's arc canvases
+# (`ray_01`..`ray_09`) bind no `npc` at all — binding alone finds 4 of Ray's
+# canvases and none of his steps. So a one-time canvas belongs to a person if the
+# board's declared ladder lists it, or it binds them, or its id starts with the
+# person's short name (`npc_ray` -> `ray_`). The rule used is printed per step.
+
+def _short(npc_id):
+    return npc_id[4:] if str(npc_id).startswith("npc_") else str(npc_id)
+
+
+def _chain_order(steps):
+    """Order steps so one that reads a flag another sets comes after it.
+
+    Kahn's sort, ties broken by id so the output is stable. Returns (ordered,
+    unclear) — `unclear` is True when a cycle left steps unplaced; they are
+    appended in id order and the caller says the order is unclear.
+    """
+    ids = sorted(c["id"] for c in steps)
+    by = {c["id"]: c for c in steps}
+    after = {i: set() for i in ids}                      # i must come after these
+    for a in ids:
+        for b in ids:
+            if a != b and (by[a]["flags_set"] & by[b]["reads"]):
+                after[b].add(a)
+    done, out = set(), []
+    while len(out) < len(ids):
+        ready = [i for i in ids if i not in done and after[i] <= done]
+        if not ready:
+            rest = [i for i in ids if i not in done]
+            return [by[i] for i in out + rest], True
+        out.append(ready[0]); done.add(ready[0])
+    return [by[i] for i in out], False
+
+
+def _closing_line(canvas):
+    """The last sentence on the last beat — SCREEN TEXT, not a quote of the person's."""
+    beats = canvas.get("beats") or []
+    if not beats:
+        return ""
+    text = beats[-1].text
+    if isinstance(text, list):
+        text = text[-1] if text else ""
+    parts = [p.strip() for p in str(text).replace("\n", " ").split(". ") if p.strip()]
+    line = parts[-1] if parts else ""
+    return (line[:117] + "…") if len(line) > 118 else line
+
+
+def _scene_line(c):
+    """What a shipped scene IS, in the author's own words: its name and description."""
+    raw = c.get("raw") or {}
+    name = str(raw.get("name") or "").strip()
+    desc = " ".join(str(raw.get("description") or "").split())
+    if len(desc) > 110:
+        desc = desc[:109] + "…"
+    return " — ".join(x for x in (f"“{name}”" if name else "", desc) if x)
+
+
+def _relationships(game, model, st):
+    """[{id, name, steps[], surfaces[], unread, promises[], since_last, order_unclear}]."""
+    _, flags_set = _movers(game)
+    sets_of = collections.defaultdict(set)
+    for flag, rows in flags_set.items():
+        for cid, _op in rows:
+            sets_of[cid].add(flag)
+    readers = collections.defaultdict(set)                # flag -> canvases reading it
+    for c in model:
+        for f in c["reads"]:
+            readers[f].add(c["id"])
+    board = st.get("board") or {}
+    declared = {d.get("id"): d for d in (board.get("characters") or []) if isinstance(d, dict)}
+    promises = [p for p in (st.get("promises") or []) if isinstance(p, dict) and not p.get("paid_in")]
+    releases = st.get("releases") or []
+    out = []
+    for npc in game.get("npcs") or []:
+        nid = npc.get("id")
+        name = npc.get("name") or nid
+        ladder = (declared.get(nid) or {}).get("ladder") or {}
+        on_ladder = {s.get("canvas") for s in (ladder.get("steps") or []) if isinstance(s, dict)}
+        steps, surfaces = [], []
+        for c in model:
+            if c["id"] in on_ladder:
+                how = "declared ladder"
+            elif nid in (c["npc"], c["requires_npc"]):
+                how = "binds " + nid
+            elif c["id"].startswith(_short(nid) + "_"):
+                how = "id prefix"
+            else:
+                continue
+            if c["rep"]:
+                surfaces.append(c)
+            else:
+                steps.append(dict(c, flags_set=sets_of.get(c["id"], set()), how=how))
+        ordered, unclear = _chain_order(steps)
+        rows, unread = [], 0
+        for c in ordered:
+            fl = []
+            for f in sorted(c["flags_set"]):
+                read = bool(readers.get(f, set()) - {c["id"]})
+                unread += 0 if read else 1
+                fl.append((f, read))
+            rows.append(dict(id=c["id"], how=c["how"], flags=fl, scene=_scene_line(c)))
+        named = [p for p in promises
+                 if nid in str(p.get("text", "")) or str(name).lower() in str(p.get("text", "")).lower()]
+        last = max((i for i, r in enumerate(releases)
+                    if ((r or {}).get("her_moment") or {}).get("person") == nid), default=None)
+        since = (len(releases) - 1 - last) if last is not None else None
+        out.append(dict(id=nid, name=name, steps=rows, unread=unread,
+                        surfaces=[dict(id=c["id"], scene=_scene_line(c))
+                                  for c in sorted(surfaces, key=lambda x: x["id"])],
+                        promises=[p.get("text") for p in named], since_last=since,
+                        order_unclear=unclear,
+                        closing=_closing_line(ordered[-1]) if ordered else "",
+                        address=(declared.get(nid) or {}).get("address"),
+                        renameable=bool(npc.get("customizable"))))
+    # MOST OWED is a sort, not a score: open promises naming them, then set-ups
+    # nothing pays, then releases since their last step (never recorded counts as
+    # most), then fewest steps shipped.
+    out.sort(key=lambda r: (-len(r["promises"]), -r["unread"],
+                            -(r["since_last"] if r["since_last"] is not None else 10 ** 6),
+                            len(r["steps"]), r["id"]))
+    return out
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Naming — the game's own names and words, so a pitch gets them right first time
+# ─────────────────────────────────────────────────────────────────────────────
+# The first IC3 dry run's pitches were caught by the excitement lens for three
+# things the pack could have told them: re-staging a shipped scene, "Mum" in a game
+# that says "your mother" 34 times and "Mum" 0, and a person who calls her by a
+# name when the cast rule is that he uses nothing at all. Scenes are now listed
+# per person with their own descriptions; the rest is here.
+
+KIN_FORMS = [
+    ("mother", ["your mother", "your mum", "your mom", "mum", "mom", "mam", "mommy", "mummy"]),
+    ("father", ["your father", "your dad", "dad", "daddy", "pop"]),
+    ("stepfather", ["stepfather", "stepdad", "step-dad"]),
+    ("stepbrother", ["stepbrother", "step-brother", "stepbro"]),
+]
+
+
+def _prose(model):
+    """All player-facing beat text in the build, as one lowercase string."""
+    out = []
+    for c in model:
+        for b in c["beats"]:
+            t = b.text
+            out.extend(t if isinstance(t, list) else [str(t)])
+    return " \n".join(str(x) for x in out).lower()
+
+
+def _kin_counts(model):
+    """[(group, [(form, n)])] for every kin group the prose uses at all."""
+    import re as _re
+    text = _prose(model)
+    rows = []
+    for group, forms in KIN_FORMS:
+        counts = [(f, len(_re.findall(r"(?<![\w-])" + _re.escape(f) + r"(?![\w-])", text))) for f in forms]
+        # "your mother" also matches inside nothing else; bare "mother" is not listed on purpose,
+        # because it is the word the longer forms share.
+        if any(n for _, n in counts):
+            rows.append((group, counts))
+    return rows
+
+
+def _address_comment(toml_path):
+    """A 'term of address' note in the TOML's own comments, verbatim — or ''."""
+    try:
+        lines = open(toml_path, encoding="utf-8").read().split("\n")
+    except OSError:
+        return ""
+    def is_text(ln):                               # a comment line with words on it
+        s = ln.strip()
+        return s.startswith("#") and s.lstrip("#").strip() != "" and set(s) - set("#=-─ ")
+
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("#") and "term of address" in ln.lower():
+            a = i
+            while a > 0 and is_text(lines[a - 1]):
+                a -= 1
+            b = i
+            while b + 1 < len(lines) and is_text(lines[b + 1]):
+                b += 1
+            return " ".join(x.strip().lstrip("#").strip() for x in lines[a:b + 1])
+    return ""
+
+
+def _print_relationship(r, full=True):
+    since = ("not recorded" if r["since_last"] is None
+             else f"{r['since_last']} release(s) since the last step")
+    print(f"  {r['id']}  ·  {r['name']}  ·  {len(r['steps'])} step(s) shipped · "
+          f"{r['unread']} set-up(s) nothing reads · {len(r['promises'])} open promise(s) · {since}")
+    if not full:
+        return
+    addr = r.get("address") or "not declared (board.characters[].address) — see NAMING below"
+    _wrap(f"calls her: {addr}", first="      ", indent="        ")
+    if r.get("renameable"):
+        _wrap(f"the player can rename them — prose writes @{_short(r['id'])}, never a typed name",
+              first="      ", indent="        ")
+    if r["order_unclear"]:
+        print("      order unclear — the steps' flags form a cycle; listed by id after the break")
+    print("      SCENES ALREADY SHIPPED — do not restage one; a pitch is the step after them:")
+    for i, s in enumerate(r["steps"], 1):
+        flags = ", ".join(f"{f}{'' if read else ' (NOT READ)'}" for f, read in s["flags"]) or "sets no flag"
+        _wrap(f"{i}. {s['id']}  [{s['how']}]  {s.get('scene') or ''}", first="      ", indent="         ")
+        _wrap(f"sets: {flags}", first="         ", indent="           ")
+    if not r["steps"]:
+        print("      (no one-time steps yet)")
+    if r["closing"]:
+        _wrap(f"last step ends on (screen text, not a quote of theirs): \"{r['closing']}\"",
+              first="      ", indent="        ")
+    for p in r["promises"]:
+        _wrap(f"open promise: {p}", first="      ", indent="        ")
+    for s in r["surfaces"]:
+        _wrap(f"surface (repeatable): {s['id']}  {s['scene']}", first="      ", indent="        ")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Rendering
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -510,7 +735,7 @@ def _days(idx):
         return str(idx)
 
 
-def pack(slug, toml_path, state_path, as_json=False, kind=None):
+def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     game = gates._load(toml_path)
     model, _ = gates.build(game)
     st = _state(state_path) or {}
@@ -519,6 +744,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None):
     kinds_count, kinds_unrec, kinds_least = _kinds_shipped(st.get("releases"))
     media = _media_refs(game, model)
     roots = _media_roots(slug)
+    rels = _relationships(game, model, st)
 
     at_loc, by_npc = _schedule_index(game)
     lad, kinds = _ladders(model)
@@ -585,7 +811,8 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None):
                                       least_used=kinds_least),
             clips={who: {ref: _count_on_disk(roots, ref, pool) for ref, pool in rs}
                    for who, rs in media.items()},
-        ), indent=2))
+            relationships=[{k: v for k, v in r.items()} for r in rels],
+        ), indent=2, default=list))
         return 0
 
     proj = game.get("project") or {}
@@ -660,6 +887,44 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None):
                 seen.setdefault(ref, pool)
             parts = [f"{ref} {_count_on_disk(roots, ref, pool)}" for ref, pool in seen.items()]
             _wrap(" · ".join(parts), first=f"  {who}: ", indent="      ")
+
+    # ── relationships ───────────────────────────────────────────────────────
+    _rule("RELATIONSHIPS — a pitch is the NEXT step on one of these (the-release.md, \"The next step\")")
+    print("  Most owed first. The order is a sort, not a score: open promises naming them, then")
+    print("  set-ups their steps made that nothing reads, then releases since their last step, then")
+    print("  fewest steps. The caller gives the top three to the three Pitchers.")
+    print()
+    shown = [r for r in rels if not person or r["id"] == person]
+    if person and not shown:
+        print(f"  unknown person `{person}`. People: {', '.join(r['id'] for r in rels)}")
+    for r in shown:
+        _print_relationship(r, full=True)
+        print()
+
+    # ── naming ──────────────────────────────────────────────────────────────
+    _rule("NAMING — the game's own names and words. Write these, not your own.")
+    declared_addr = [r for r in rels if r.get("address")]
+    comment = _address_comment(toml_path)
+    if declared_addr:
+        for r in declared_addr:
+            print(f"  {r['id']:<18} calls her: {r['address']}")
+    elif comment:
+        _wrap(f"terms of address — from a COMMENT in the game's TOML (not a declaration): {comment}",
+              first="  ", indent="    ")
+    else:
+        print("  terms of address: not declared (board.characters[].address) and no comment found.")
+    ren = [r for r in rels if r.get("renameable")]
+    if ren:
+        _wrap("renameable by the player — prose uses the token, never a typed name: "
+              + ", ".join(f"{r['id']} → @{_short(r['id'])}" for r in ren), first="  ", indent="    ")
+    kin = _kin_counts(model)
+    if kin:
+        print("  kin words the prose already uses (a count; the zero forms are not this game's):")
+        for group, counts in kin:
+            used = [f"\"{f}\" ×{n}" for f, n in counts if n]
+            unused = [f"\"{f}\"" for f, n in counts if not n]
+            _wrap(f"{group}: {' · '.join(used)}" + (f"   never: {', '.join(unused)}" if unused else ""),
+                  first="    ", indent="      ")
 
     # ── the Want ────────────────────────────────────────────────────────────
     if want:
@@ -852,11 +1117,13 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None):
 
 def main():
     args = sys.argv[1:]
-    kind = None
-    if "--kind" in args:
-        i = args.index("--kind")
-        kind = args[i + 1] if i + 1 < len(args) else ""
-        del args[i:i + 2]
+    opts = {}
+    for flag in ("--kind", "--person"):
+        if flag in args:
+            i = args.index(flag)
+            opts[flag] = args[i + 1] if i + 1 < len(args) else ""
+            del args[i:i + 2]
+    kind, person = opts.get("--kind"), opts.get("--person")
     argv = [a for a in args if a != "--json"]
     if not argv:
         print(__doc__)
@@ -865,7 +1132,7 @@ def main():
     if not os.path.exists(toml_path):
         print(f"not found: {toml_path}")
         return 2
-    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind)
+    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind, person=person)
 
 
 if __name__ == "__main__":

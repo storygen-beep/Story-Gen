@@ -163,6 +163,10 @@ Place × hours × days. Not a list of places.
 The person sheet is the one artifact that can see across rooms. Its header was a list of four places
 and no hours.
 
+**Each step row also carries two cells:** the **leak** — the small line or look that shows his want
+before this step happens (`the-arc.md` A13) — and the **promise**, the line this step ends on, which
+the next step pays (A14). A step row with neither is a step with nothing before it and nothing after.
+
 ## S6 · NOTHING A GATE REQUIRES MAY BE DEFERRED BY A SHEET
 
 > **The incident.** A bathroom sheet said of its walk-in: *"Not authored this release. Named here so

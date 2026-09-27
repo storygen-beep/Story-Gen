@@ -5,6 +5,218 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — IC21: an honest scoreboard (too few to judge, parked content measured)
+
+**Why.** The tally could look better than the game. A share gate passed on one case, parked
+content turned gates into n/a (which left the denominator), and the denominator was never printed.
+LO approved IC21 with two changes: parked and too-few both count in the denominator as not passing
+(29/49, not 29/47), and the `parked/` folder is read automatically, with the ledger's
+`parked.files` only adding paths, so a game that forgets to declare its parked folder is still
+caught. A FAIL on fewer than 5 cases stays a FAIL.
+
+**What changed.**
+- **`scripts/gates.py`:**
+  - `FEW_CASES = 5`. The 27 share gates record their n; every headline prints it. A PASS on
+    n < 5 becomes "too few to judge (n of 5)" and counts as not passing.
+  - New `score()`: runs the gates on the live game, then on a copy with
+    `games/<slug>/parked/**/*.toml` plus `parked.files` merged in (an id match replaces, anything
+    else is appended). A gate n/a live that the merged copy judges is marked "parked, not judged"
+    and counts as not passing. A fragment that will not parse is printed, never skipped.
+  - New `tally_counts()`; the tally line prints pass/denominator, fail, parked, too few and n/a.
+    Only n/a leaves the denominator. The exit code is 0 only when every judged gate passes.
+  - `--ship`: a BLOCK row that is parked or too few is red and says why. JSON gains `tally`.
+- **`SKILL.md`:** one paragraph under "The scoreboard" on the tally, too few, and parked.
+  Paid for by cutting history: the dates on the fifth commitment and the SHEETS rule, the
+  `--release` 115-files story, the `--selfcheck` stale-index story, the pitch pack's withdrawn
+  checks, and six "since/changed/re-measured <date>" clauses. No rule text was cut.
+- **`references/state.md`:** a `parked.files` row.
+- **Tests:** new `tests/test_gates_ic21.py` (10). Old fixtures updated where a one-case PASS now
+  reads too few: the ws4/ws5 verdict helpers accept too few as a logic pass, and ws6's green game
+  has five schedule rows.
+
+**Verified.** pytest 105 passed · `--selfcheck` exit 0 · cite_check 84 (unchanged) ·
+`git status games/` unchanged. Tallies: the_balance 20/46 (15 fail, 2 parked, 9 too few, 5 n/a),
+orientation 44/49 (3 fail, 2 too few), vesper_two 42/47 (3 fail, 2 too few). Acceptance on
+`ed2704c` (the_balance's parking commit): before 24/43 with 1 parked row, after 20/43 with 2
+parked rows, so parking no longer raises the score. The PRD expected three parked rows; the third
+is not found because `parked/climbs/systems.toml` is not valid TOML on its own (bare
+`[engine.daily_tick]` entries without their table header), and the tool reports it as
+"could not be merged".
+
+words: 148,504 → 148,488 (−16) · running total 148,488 / 149,283
+
+---
+
+## 2026-09-27 — the pack names the game's own words; lint `a flag that never resets`
+
+**Why.** In the IC3 dry run, the excitement lens had to catch mistakes the pack could have
+prevented:
+- re-pitching a shipped scene (Simone's stairs, `simone_04`);
+- "Mum" in a game whose prose says "your mother";
+- a line that broke the cast's term-of-address rule (@wes "uses nothing at all").
+
+LO asked that pitchers get these right first time. The same dry run found orientation's
+`dues_paid_week`, which is set and never cleared, so LO also asked for a check.
+
+**What changed.**
+- **`scripts/pitch_pack.py`:**
+  - Each person's RELATIONSHIPS block now lists **SCENES ALREADY SHIPPED**, each with the
+    author's own canvas name and description, and every repeatable surface the same way.
+  - Each block also prints **"calls her:"** (new optional `board.characters[].address`) and, for
+    player-renameable people, the `@token` rule.
+  - New **NAMING** section:
+    - declared terms of address; otherwise the TOML's own "term of address" comment paragraph,
+      quoted and labelled as a comment, not a declaration;
+    - the renameable people and their tokens;
+    - the kin words the prose already uses, with counts, and the forms it never uses. Measured:
+      orientation says "your mother" ×15 and "mum" ×0; the_balance says "your mum" ×25 and
+      "mum" ×28, and "your mother" ×0.
+- **`scripts/gates.py`: new lint `a flag that never resets`.** It is reported, never a gate.
+  - It lists any flag named `*_today`, `*_tonight`, `*_week`, `*_weekly` or `*_daily`, or listed
+    in the new optional `board.resetting_flags`, that some effect sets and no effect anywhere
+    unsets, including `[engine.daily_tick]`. A walk over every `flagEffects` in the game.
+  - orientation: 1 of 16 (`dues_paid_week`). the_balance: all 6 unset. vesper_two: all 12 unset.
+  - `games/` is untouched.
+- **`.claude/agents/v2-pitcher.md`:** read NAMING and the shipped scene list; write the game's
+  words; never restage a shipped scene.
+- **`SKILL.md`:** the lint is listed (`--selfcheck` requires it).
+- **`references/state.md`:** one table row for `address` and `resetting_flags`.
+
+**Paid for.** `references/the-release.md` step 6 lost its history. Two pieces were cut:
+- "until 2026-08-28 no instrument in this project could see a build";
+- "this step exists because the loop used to stop at 'ship'… `the_inheritance`…".
+
+LO's rule stays: dev mode and missing media block release, not testing.
+
+**Verified.**
+- pytest: **95 passed**, 85 plus 10 new:
+  - `test_pitch_pack_naming.py`, 5 tests: kin counts and the never-used forms; the renameable
+    token rule; a declared address wins over the comment; the whole comment paragraph is quoted
+    and nothing around it; shipped scenes are listed in the author's own words.
+  - `test_gates_flag_reset.py`, 5 tests: a week flag never unset is listed; clearing it in the
+    tick passes; clearing it in any choice passes; declared flags count; no candidates prints
+    nothing.
+  - The IC3 tests were updated for the new format (prose fixtures now use the engine's
+    `paragraph` block).
+- `--selfcheck`: exit 0, 47/47 lints documented.
+- cite_check: 84.
+- Gate tables for the three games: the only change is the new lint line.
+- `git status games/`: unchanged.
+
+**Words:** 148,510 → 148,504 (Δ −6) · running total 148,504 / 149,283.
+
+---
+
+## 2026-09-27 — IC3: a pitch is the next step on a relationship, the excitement read, the listen step (PRD_IDEAS_AND_CRAFT IC3 + the "their side" fix)
+
+**Why.**
+- Nothing between a pitch and LO said whether it was exciting.
+- The loop never listened to players after a release.
+- Pitches were moments standing on nothing.
+
+Great Games Study round 6 read four whole relationships in order: Course of Temptation's best
+friend and roommate's partner, Family Ties' James, and In Her Own Hands' Shaun. Every loved step
+pays one before it and opens one after. His want is shown before he acts. He remembers what she
+did. A "no" parks rather than locks. And being lost is the top complaint: 87 of 182 comments.
+
+LO's calls (2026-09-27):
+- a pitch is the next step on a named relationship;
+- his side goes into the eight lines;
+- A13 and A14;
+- a Relationships section in the pack;
+- three pitchers on three different most-owed relationships.
+
+LO approved the diff plan.
+
+**What changed: doctrine.**
+- **`references/the-release.md`:**
+  - "Her moment — the eight lines" becomes **"The next step — before, her moment, leads to"**.
+    Line 2 gains his want before, plus the leak. Line 3 gains his "no" branch (pressure vs nice;
+    an opt-out; a no parks, never locks). Line 6 gains "he remembers", and his move never fires
+    on a dice roll alone. Leads to names the next step, the promise line and the guidance line.
+  - Loop step 2: three Pitchers, **three different relationships** (the most owed), each naming
+    its kind.
+  - New **step 3b, the excitement read**, and new **step 8, Listen**.
+  - The instrument table (renamed from "four instruments") gains `listen_mopoga.py`.
+- **`references/the-arc.md`:**
+  - New **A13** (their wanting is shown before it is acted on) and **A14** (a relationship is a
+    chain of steps).
+  - Quotes come only from games that pass the library's adults-only rule. They are In Her Own
+    Hands and Course of Temptation, and each passage was youth-scanned clean.
+  - Candidate lint 4 `a step with nothing before it` is added, not built.
+  - The log line now reads "A1–A14". A1–A12 are untouched.
+- **`references/the-sheets.md` S5:** a person sheet's step rows carry **leak** and **promise**
+  cells.
+- **`references/state.md`:**
+  - `releases[].her_moment` gains `person`, `step_n`, `pays` and `opens`.
+  - New `listen_sources{mopoga, f95, gamcore}` and `listen[]`, each item a quote and a count.
+- **`references/agents.md`:**
+  - Pitchers now take a different relationship each.
+  - The Attack Panel gains the **`excitement`** lens: it scores nothing, and the two instant fails
+    are the only rejections.
+  - New section **The Listener**.
+- **`SKILL.md`:** the agent roster adds `v2-listener`; the pitch_pack line names `--person` and
+  RELATIONSHIPS.
+
+**What changed: code and agents.**
+- **`scripts/pitch_pack.py`:** new **RELATIONSHIPS** section and `--person <npc>`. It still scores
+  nothing and always exits 0.
+  - **Attribution:** a declared ladder, binding (`npc` / `requires_npc`), or id prefix
+    (`npc_ray` → `ray_`). The rule used is printed per step. Orientation's arc canvases bind no
+    npc, so binding alone found none of Ray's steps.
+  - **Order:** by the flag chain.
+  - **Per step:** the flags it sets, each marked NOT READ when no other canvas reads it.
+  - **Per person:** the last step's closing line (labelled as screen text), the open promises that
+    name the person, and releases since their last step.
+  - **Order of people:** a "most owed" sort, with its keys printed: promises, then unread set-ups,
+    then releases since, then fewest steps.
+  - `--json` gains `relationships`.
+- **New `scripts/listen_mopoga.py <slug> --since <date> [--out]`.** It reads only and always
+  exits 0.
+  - It reads `listen_sources.mopoga`, or prints "no mopoga page declared".
+  - It fetches the Isso feed, filters by date, and sorts by likes.
+  - It counts four keyword buckets, never scored.
+  - It writes only to `--out` (default: the temp dir) and refuses any path under `games/`.
+  - A network error prints "fetch failed" and exits 0.
+- **New `.claude/agents/v2-listener.md`:** read-only; never posts, likes, replies or downloads;
+  never judges or proposes ideas.
+- **`.claude/agents/v2-pitcher.md`:**
+  - It is given a person and names its kind, and runs `--person`.
+  - Return form: Before → eight lines (his halves in 2, 3 and 6) → Leads to → Serves / Where / Who
+    / Keys to / Opens / Cost / Not.
+  - Adults only.
+- **`.claude/agents/v2-attack.md`:** the `excitement` lens row and section.
+
+**Verified.**
+- pytest: **85 passed**, 75 existing plus 10 new:
+  - `test_pitch_pack_ic3.py`, 6 tests: attribution three ways; chain order against file order;
+    NOT READ; a promise sorts first; the section and sort keys; `--person` and an unknown person.
+  - `test_listen_mopoga.py`, 4 tests: no page declared; `--since`, likes order and buckets with
+    the fetch mocked, and nothing in `games/`; refusing `games/` output; a network error reported.
+- `--selfcheck`: exit 0. Rule pointers went 145 → 147 rules (A13, A14), with 0 pointing at nothing.
+- cite_check: 84.
+- Gate tables for the three games: identical.
+- `git status games/`: unchanged.
+- `pitch_pack.py` on orientation: Ray has 9 steps, with `ray_02`, `ray_refused` and `ray_09` NOT
+  READ. Simone has 5 steps. Dee, Halloran and Wes have 0 steps. It also runs on the_balance and
+  vesper_two.
+- `listen_mopoga.py orientation --since 2026-01-01`: "no mopoga page declared", exit 0.
+- **Acceptance:** the excitement lens was run on three fixtures in
+  `~/Documents/Great_Games_Study_20260926/round5/ic3_fixtures/`:
+  - (a) forced turn: **instant fail 1, quoting the line**;
+  - (b) complete: **no fail and no score**, a note per line (it also caught the fixture's own
+    truth-rule slip, "I've got eighty", on a range key);
+  - (c) library copy: **flagged In Her Own Hands `[RentConvince1]` and `[RentConvince2]` by
+    name**.
+- **Dry run:** three pitchers on orientation's three most-owed relationships (Ray, Simone and
+  Dee), each returning Before / eight lines / Leads to. Their pitches and the lens reads on them
+  are reported to LO.
+
+**Words:** 147,098 → 148,510 (Δ +1,412) · running total 148,510 / 149,283. That is over the
+plan's +1,035 estimate but under the baseline, with 773 words of room left.
+
+---
+
 ## 2026-09-27 — IC0c: third prune slice, history out (PRD_IDEAS_AND_CRAFT IC0)
 
 **Why.** IC0c makes room for IC3 and LO's "their side" fix, together about +1,100. Same rule as

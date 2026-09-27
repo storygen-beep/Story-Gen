@@ -618,6 +618,49 @@ which is commitment 4 (*a release adds events, not places*) with a mechanism und
 
 ---
 
+## A13 · Their wanting is shown before it is acted on
+
+**The shape:** before he acts, the player has already seen that he wants her — a small line or
+look on his hub, tied to his number, repeated on every visit. Then 3–5 small steps on separate
+days, each ending on a promise. And when she teases him, **it comes back in his mouth** later.
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** Four loved arcs read in order (Great Games Study, round 6):
+>
+> - **the leak** — the best friend in `course-of-temptation`: *"I kinda... try not to stare."*
+>   [EventBFFDormSexChatBreasts]. Shaun in `in-her-own-hands` sits a little closer each visit
+>   [ShaunBRFlirt1].
+> - **the tease that returns** — the roommate's partner, one step later: *"I know you were watching
+>   us."* [EventShowerRMPBarge2].
+
+**The failure it names:** a tease that only fills a hidden meter, which later fires as his move on
+a dice roll with no line linking it to anything she did. Players call that "random" and "out of
+nowhere". Nobody in the four arcs complained that a man was too eager; they complained when his
+move came from nowhere.
+
+A pressure type moves first and names the act; a nice type waits, so she moves. Both show the want
+first.
+
+## A14 · A relationship is a chain of steps
+
+**The shape:** every step pays one before it and opens one after it, and the text says so. The
+loved arcs run 9–14 steps over weeks of play, and all four remember:
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** *"All the flirting, the furtive glances, stolen kisses, and
+> sucked dick had led to this."* — `in-her-own-hands` [ShaunKitchenLateSexStart_Club].
+
+Four rules follow:
+
+- **A step with nothing before it is step 1, and says so** — and shows his want first (A13).
+- **The next step is findable.** The guidance card names it. Being lost is the top complaint about
+  the field's best relationships: 87 of 182 player comments on the four arcs are "how do I / I'm
+  stuck", and 0 are about his character.
+- **A "no" parks the step; it never locks the relationship for good.** The two permanent lockouts
+  in the four arcs — one push-away in `course-of-temptation`, one refused invitation in
+  `in-her-own-hands` that nothing clears — are the worst-remembered moments.
+- **A pitch is a step on a named relationship** (`the-release.md`, "The next step").
+
+---
+
 ## The engine, verified
 
 Every line here was read on 2026-09-01. `engine.md` remains the only file that may carry engine
@@ -670,6 +713,8 @@ it first) rather than the order that produced P0.
 3. **`an act ends on something`** — every `finish`-class node whose `exit_block` carries no
    choices. **23 of 23 today**, so it is a list of the whole repo and therefore useless as a
    verdict; it becomes worth building the moment one game writes an aftermath.
+4. **`a step with nothing before it`** — one-time canvases on a person whose trigger reads no flag
+   that person's earlier steps set (A14). A list, never a score; not built yet.
 
 ⚠️ **A11 is the first rule here with a precedent game, and that changes the build order.**
 `commuter` already writes a stop beat on all seven of its loops. Every other rule in this file
@@ -681,5 +726,5 @@ Build order is therefore A11's lint first, then whichever of the three above a r
 the register pivot defect was authored three increments running, each time by someone who had
 just re-read the rule against it, and only the per-beat scorer ever caught it. Until the lints
 exist, an arc is authored on discipline alone, and the honest place to record that is
-`the-release.md`'s log step — name in `v2_state.json` which of A1–A12 the release built and
+`the-release.md`'s log step — name in `v2_state.json` which of A1–A14 the release built and
 which it skipped, with the reason.

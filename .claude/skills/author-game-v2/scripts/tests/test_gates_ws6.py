@@ -30,9 +30,12 @@ def green_game():
                     "quests_engine": "v2"},
         "player": {"core_traits": {"money": 10}},
         "locations": [{"id": "room_a"}, {"id": "work"}],
+        # Five rows, not one: a share on fewer than 5 cases is "too few to judge" and a
+        # too-few BLOCK row is red (PRD IC21), so a green fixture needs a real sample.
         "npcs": [{"id": "npc_a", "name": "A",
-                  "schedules": [{"location": "room_a", "weekdays": [0, 1, 2, 3, 4, 5, 6],
-                                 "start_time": "18:00", "end_time": "20:00"}]}],
+                  "schedules": [{"location": "room_a", "weekdays": days,
+                                 "start_time": "18:00", "end_time": "20:00"}
+                                for days in ([0], [1], [2], [3], [4, 5, 6])]}],
         "canvases": [
             {"id": "opening", "trigger": {"location": "room_a", "is_repeatable": False},
              "nodes": [{"id": "n", "blocks": [], "exit_block": {"config": {
