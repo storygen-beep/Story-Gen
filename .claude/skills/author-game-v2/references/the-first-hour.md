@@ -727,12 +727,6 @@ build**. The field the engine reads is `TemplateTrigger.npc` (`:642`), carried t
 > carrying it renders only while that character is standing where the player is. It still does
 > **not** gate the auto-fire path (`engine.md` §31), and it still draws no portrait.
 >
-> **Until that change it was inert on the manual lane, and the inertness was the whole problem.**
-> Writing it and omitting it played identically, so authors omitted it: of **61** solo-lane canvases
-> bound to a person corpus-wide, **7** declared it — and the lint that hunts this defect keys on the
-> field, so it was seeing 11% of its own subject. A field nobody is punished for leaving out is not
-> a field, it is a comment.
->
 > A hub carrying `requires_npc` and no `npc` still has no face and no portrait window. Where a
 > person-bound surface genuinely should not be a portrait — an activity that happens in a place
 > while somebody is around, rather than a surface on that person — `requires_npc` now does the

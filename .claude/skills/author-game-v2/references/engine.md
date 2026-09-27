@@ -662,10 +662,6 @@ on the scoreboard. Only the live number shows it.
 
 ### ⚠️ 21b. `op = "subtract"` IS NOT AN ENGINE OP. It does nothing at all.
 
-This section used to say *"an authored `op = "subtract"` on an unclamped trait"*, as though that
-were a thing the engine ran. It is not, and the sentence taught two games to write 105 effects that
-do nothing.
-
 ```js
 // window.applyTraitEffect — v2.py:5749-5756
 if (op === 'add')      { next = current + value; }
@@ -881,9 +877,7 @@ v2.py:15496       if (scope !== "story_goals") return [];
 ```
 
 A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
-guidance page** and no clue why. *(This paragraph originally described the function without
-mentioning the guard — written from source, and it still missed the function's first line. Read the
-whole function, not the part that answers your question.)*
+guidance page** and no clue why. Read the whole function, not the part that answers your question.
 
 **Selection.** `pickQuestsCards(scope)` (`v2.py:15495`) returns every matching top-tier card;
 `pickQuestsCard(slug)` (`v2.py:15470`) returns the **single highest-`priority`** match for a
@@ -1967,12 +1961,8 @@ rejection_effects         0 uses ·  0 games
 `locked_text_threshold` was already documented (§23). **`rejection_node` was not documented
 anywhere in this skill** — a working primitive that nothing taught, so nothing used.
 
-⚠️ **This paragraph used to add "the same shape as `block_pool` (§35)", and it overstated §35.**
-Corrected 2026-08-24 (section E). §35's claim is *"no **v2** game has ever used it"*, and that is
-true — but dropping the qualifier makes a broader claim that is not. **`block_pool` is authored 69
-times across four games**: `the_long_summer` 49, `vesper` 12, `under_one_roof` 7,
-`the_long_summer_test` 1. None of the four carries a `v2_state.json`, so all four are v1-era, which
-is exactly why §35 phrases it the way it does.
+**`block_pool` is authored 69 times across four v1-era games** (`the_long_summer` 49, `vesper` 12,
+`under_one_roof` 7, `the_long_summer_test` 1). No **v2** game has used it (§35).
 
 `rejection_node` is at **zero across every game in the repo**, v1 and v2 alike. That is a stronger
 statement than §35's and the analogy blurred it. Counted with `grep -c block_pool` over every merged
@@ -2050,10 +2040,7 @@ Four rules the field follows, all of them cheap:
 
 ## 37. FOUR condition evaluators, and they do not agree by default
 
-Added 2026-08-24 from section K. **Rewritten the same day, because the first version of this
-section was wrong** — it said the fix was *"three whitelist entries and no runtime work"*, and it
-named the quest-card validator as the thing blocking `ne` on a canvas condition. It is not. The
-real architecture is below, and it is the load-bearing fact:
+The real architecture is below, and it is the load-bearing fact:
 
 | evaluator | backs | `ne` |
 |---|---|---|
@@ -2461,13 +2448,10 @@ Every other author string is emitted verbatim. The ones that reach a player:
 | `quest_cards[].tip` · `.ready_text` · `.terminal_text` | the guidance page |
 | `canvases[].description` | dev surfaces only (`CanvasReview_*`, the `--debug` canvas banner) |
 
-⚠️ **`npcs[].role` was static until 2026-09-02 and that was wrong for the case it matters most in.**
-A `customizable` NPC with `relationship_options` is one the PLAYER decides the relation for, so the
-label under their name has to be theirs: `role = "@<npc>.rel"` prints the option they picked and
-follows a change. It shipped static, and the game with two renameable characters consequently
-labelled a stepfather *"owns the house"*. Escape first, then resolve — `html.escape` touches no
-character the token regex reads, so author markup is still neutralised and the macro comes through
-live. `the-first-hour.md` F10.
+⚠️ **`npcs[].role` resolves `@` tokens.** A `customizable` NPC with `relationship_options` is one the
+PLAYER decides the relation for, so its label has to be theirs: `role = "@<npc>.rel"` prints the option
+they picked and follows a change. Escape first, then resolve — `html.escape` touches no character the
+token regex reads. `the-first-hour.md` F10.
 
 **The rule: a token belongs in prose. Anywhere else, write the role.** `"His son"` and
 `"Sit with him"` survive a rename; `"@ray's son"` and `"Sit with @ray"` print the token.

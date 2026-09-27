@@ -192,15 +192,6 @@ customization reports `n/a`, which is not a pass. ⚠️ **`sets_portrait = true
 an `image_select` field writes `$player.portrait`, which the stats page renders, so a gate without
 that exemption fails every game using the feature correctly.
 
-⚠️ **A second check — a lint for "fields declared while the screen is off" — was built here and
-taken back out the same day.** It has no subject. Parsed across every built game, **five declare
-customization fields and all five have it switched on**: zero dead declarations. The four games
-that appeared to have one carry a TOML *comment* —
-`customizable = false  # deferred: needs [[player.customization_fields]]` — which is an author
-recording the decision, and is correct practice rather than a defect. They were counted as
-declarations by grepping the phase files instead of parsing the built game. Shipping it anyway
-would have been the P0 error: a check built for a state nothing is in.
-
 ### 1b. Who she is
 Her situation at minute zero, and what she has to lose. Concrete: a job, a debt, a room, a
 reputation. The thing that makes the first transgression cost something.
@@ -209,9 +200,8 @@ reputation. The thing that makes the first transgression cost something.
 > *"Friday, $260, and Cade counts it at the desk"* is a machine. That half is right and it is the
 > half worth keeping — a hold of any kind needs somebody who notices and a moment when it comes due.
 
-⚠️ **This section used to say "a recurring DEMAND with a COLLECTOR", and it is the reason eight v2
-games shipped the same premise.** The half above generalises; the nouns did not. A bill is one hold
-of at least nine, and the field this skill is written for does not reach for it first.
+⚠️ **A bill is one hold of at least nine,** and the field this skill is written for does not reach for it
+first.
 
 **Measured 2026-09-04, `~/Documents/Female_Hold_Study_20260904/`** — 23 female-lead sandboxes read
 in source, the hold hand-read out of each opening with the settling line recorded in `verdicts.md`:

@@ -7,11 +7,6 @@ gates go green, a fresh start plays perfectly. The damage only exists for the pl
 **This file owns what may not CHANGE between releases.** What a release has to *clear* before it
 ships is `the-release.md` § Shipping the build. Both, every time.
 
-> v1 carried this as `save-safety.md`. v2 shipped without it for its whole life, which is why
-> nothing in this skill could tell an author that renaming an id strands a save. Restored
-> 2026-08-29, corrected against the engine as it stands today — five of v1's `file:line`s had
-> drifted and one of its central claims had stopped being true.
-
 ---
 
 ## The model — why a save can break at all

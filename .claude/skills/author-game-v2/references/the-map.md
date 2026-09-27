@@ -322,11 +322,6 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
 Declared once, before content. The gates then check the built game against **its own declaration**
 rather than against a guess.
 
-**`home_base` was called `dwelling` until 2026-08-18.** The word presumed a house before any
-decision had been made, and it was already wrong for two shipped games — a truck stop and a
-bathhouse. The five existing ledgers still carry the old key; nothing reads it (`gates.py` reads
-only `board.map.homes`), so they are stale, not broken.
-
 ---
 
 ## What is checked, and what is not

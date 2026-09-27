@@ -327,10 +327,6 @@ per person (p25 2, p75 6)**, with the lowest rung at a median of 5, the same as 
 (`findings_E_yes.md` §1). become-someone gives each of 62 people 5 rungs of `trust` while its player
 meter `mc.dom` carries 9; both are correct, because they are not the same kind of ladder.
 
-The lint below prints whichever comparator matches the branch it is on. Until 2026-08-24 it printed
-8–17 on both, which told the repo's one roster game its five-rung cast meters were short of eight
-when the field's per-character median is three.
-
 Ours: 3–4 rungs, and **all 16 declared tiers across five games put their lowest rung at exactly
 15.** Read that next to M1's measured failure — a rung is free and 12 clicks moved `cover` 4→16 —
 and the opening of a v2 game is fifteen clicks in which nothing the player does changes anything.
@@ -396,45 +392,18 @@ entry because `the_season` shipped one, asserted its own doctrine at
 `0_systems_spec.toml:100` — *"known RISES AND WIDENS ... content, not punishment"* — and had no rule
 to check it against.
 
-> ### ⚠️ CORRECTED 2026-08-27 — read this before the numbers below
->
-> W5b was written from **three games**: degrees-of-lewdity (610 read sites), zaras-school-life
-> (23) and course-of-temptation (11) — and `findings_H_known.md` §1 flags the third as
-> instrument-blind, not low. **610 of 644 sites, 95%, are one game.** The study was honest about
-> its sample. This entry was not: it wrote "the field" and `SKILL.md`'s commitment table hardened
-> the number into a one-line law, which then shipped into `mrs_vance`'s systems spec and produced
-> a meter written 25 times and read 4.
->
-> **Re-measured 2026-08-27** across all 13 corpus games that carry a reputation meter
-> (`~/Documents/Player_Legibility_Study_20260825` §44, `measure_rep_*.py`):
->
-> ```
-> 1,944 references · 13 of 25 measured field games
-> link-bearing branch arms   ~10%   (not 2%)
-> reads that change something mechanical   MEDIAN 41%
-> passages carrying a read   median 31        rungs   median 9
-> ```
->
-> **What survives:** it rises, it rarely locks a door, and its commonest single use is a line
-> swap. **What does not:** *"therefore it only swaps a line."* That was DoL's house style read as
-> the field's law — see the three mechanisms below, none of which is a lock and all of which the
-> three-game sample was too narrow to contain.
->
-> **Two numbers in this entry were wrong in opposite directions, so check both:** the 2% was too
-> low, and the claim that `family-ties` carries no reputation at all was flatly false. Corrected
-> in place below.
+> **Measured across all 13 corpus games that carry a reputation meter**
+> (`~/Documents/Player_Legibility_Study_20260825` §44): 1,944 references, **~10% link-bearing branch
+> arms**, and a **median 41% of reads change something mechanical**; median 31 passages carry a read,
+> median 9 rungs. It rises, it rarely locks a door, and its commonest single use is a line swap — but
+> not *only* a line swap: see the three mechanisms below.
 
 ### It is optional. Take it only if being found out is the fantasy
 
-**The rule holds. The example was wrong and is replaced.** This paragraph used to say
-`family-ties` carries no reputation variable. It carries **six** — `you_init` declares
-`uni`, `southCafe`, `onlyfans`, `inst`, `model` and `pornhub`, each with its own `fame`, read
-257 times. It is not the field's example of a game without the meter; it is the field's best
-example of a **place-scoped** one. The original error came from withdrawing `$sexPose` as a false
-positive (it is the current sex *position*) and concluding the game had nothing, rather than
-looking again.
+`family-ties` is the field's best example of a **place-scoped** reputation meter: six `fame`
+variables (`uni`, `southCafe`, `onlyfans`, `inst`, `model`, `pornhub`), read 257 times.
 
-The rule is still right, on ten better examples. Games with real size and **zero** reputation
+The rule holds on ten examples. Games with real size and **zero** reputation
 references:
 
 ```

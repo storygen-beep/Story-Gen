@@ -306,10 +306,8 @@ interior, so it is also the only renewable source of new characters.
 exterior hung off the kitchen, so stepping outside meant stepping from one interior into a row of
 shops. Gate 28 reads `entry_from` and fails a leaf. `the-map.md` R3.
 
-**`board.map.home_base`** — where she sleeps. Called `dwelling` until 2026-08-18; the word presumed
-a house before any decision was made and was already wrong for a truck stop and a bathhouse. The
-five ledgers written before that date still carry the old key — nothing reads it, so they are stale
-rather than broken.
+**`board.map.home_base`** — where she sleeps. Older ledgers may carry the retired key `dwelling`;
+nothing reads it.
 
 **`board.map.r1_signoff`** — **who** signed the map off and **when**. A sign-off written by the
 author of the map is not a sign-off; the game that shipped seven rooms of a house at 26/26 recorded
