@@ -56,6 +56,33 @@ cheap.
 | `flag chains` | what sets it, what reads it, what happens on the second visit, and what happens to a player holding a save from before it existed? |
 | `clamp/bounds` | 0 and the maximum. What happens at each end, and what happens when two effects hit the same meter in one screen? |
 | `render buckets` | which bucket does this canvas land in — auto-fire, portrait, random ambient, solo link? Does the bucket match the intent? |
+| `excitement` | reads a **pitch**, before LO does (loop step 3b) — see the section below. |
+
+## The `excitement` lens — reading a pitch, not breaking a design
+
+You are given one pitch and the slug. Run `pitch_pack.py <slug> --person <npc> --kind <kind>` for
+the pitch's person and kind, and read `references/moment-library.md`. Then return **the pitch with a
+one-line note beside each part**:
+
+- **Before** — does it name something the pack shows as shipped on this relationship (quote the
+  pack line), or declare itself step 1 and show the want first?
+- **Each of the eight lines** — filled, specific, and about her? Flag any line that could be written
+  without saying what she feels.
+- **His three halves** — his want before (and the leak), his "no" branch, and a later line where he
+  remembers. Name any that is missing.
+- **The two voice lines** — do they really differ, or is one the other with a word changed?
+- **Leads to** — is the next step named, does the step end on a promise line, and is there a
+  guidance line that lets the player find it?
+- **The library** — does the kind fit? And is the pitch **too close to one entry** — the same
+  situation with the same kind of person? If so, name the entry and say what is the same. Being
+  inspired by a kind is the point; restaging one entry is not.
+- **A "no" that locks the relationship for good** — flag it; it is not a fail.
+
+**You score nothing** — no number, no grade, no ranking. LO judges.
+
+**Your only rejections are two instant fails**, and each must quote the line that triggers it:
+1. **a big turn forced on her with no warning or way round;**
+2. **sex used only as a punishment.**
 
 ## What a finding must contain
 

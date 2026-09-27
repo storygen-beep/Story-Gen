@@ -13,27 +13,47 @@ ABOUT. The next section does.
 
 ---
 
-## Her moment — the eight lines
+## The next step — before, her moment, leads to
 
-A release is about **her moment**, and a pitch is written as eight lines, one sentence each, before
-it says anything about where or who. Taken from what the top female-lead games do and what their
-players quote (Great Games Study, 2026-09-27):
+A pitch is **the next step on a named relationship**, never a moment on its own. The loved arcs in
+the field run 9–14 steps over weeks, and every step pays one before it and opens one after
+(Great Games Study, round 6; `the-arc.md` A13–A14). A pitch has three parts.
+
+**Before — what it pays.** A scene, a flag or a line already shipped on this relationship, named
+from the pack's RELATIONSHIPS. If nothing comes before it, the pitch says it is **step 1** and
+shows his want first.
+
+**Her moment — eight lines, one sentence each.** Taken from what the top female-lead games do and
+what their players quote:
 
 1. **The fantasy.** The game's own shape, from the Want §0. Keep it; a pitch serves the fantasy the
    game already promised.
-2. **The temptation.** What is offered, by whom, and why she wants or needs it.
-3. **Her answers.** Three to five, graded. The **no** is written too, and it has a price, is
-   **parked** (it comes back), or is **counted** (someone remembers).
+2. **The temptation, and his want before it.** What is offered, by whom, and why she wants or needs
+   it. Who moves first and why: a pressure type moves first and names the act; a nice type waits,
+   so she moves; or he wants her from scene one. And **the leak** — one small, repeatable line or
+   look on his hub that shows his want, tied to his number.
+3. **Her answers, and his "no" branch.** Three to five, graded. The **no** is written too, and it
+   has a price, is **parked** (it comes back), or is **counted** (someone remembers). Pressure: the
+   no has a stated price, he asks again, and the button says Submit, not Agree — and every pressure
+   arc offers an opt-out somewhere. Nice: the no costs nothing, and he may be the one who says no.
+   **A no parks the step; it never locks the relationship for good.**
 4. **Her voice at her level.** A low line and a high line for the same moment, so the player hears
    how far she has come.
 5. **Who notices.** Somebody sees or hears of it, and does something differently afterwards.
-6. **What sticks.** A flag, a meter, a line that changes. Never silent.
+6. **What sticks, and he remembers.** A flag, a meter, a line that changes — never silent. A later
+   line of his names what she did. **His move never fires on a dice roll alone**: the scene that
+   triggers it says why now.
 7. **The moment to remember.** Which of the five kinds — her firsts · being seen · her body as the
    price for something she needs · taboo at home · a consequence she lives with — and the line a
    player would quote.
 8. **The door it opens, and the clip we can get.** The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it. A moment with no clip is a moment the game cannot
    show.
+
+**Leads to — what it opens.** The next step, named; the promise line this step ends on; and **how
+the player finds the next step** — the guidance card line. Being lost is the field's top complaint
+about its best relationships: 87 of 182 player comments on four loved arcs are "how do I / I'm
+stuck".
 
 Then, and only then, Where / Who / Keys to / Opens / Cost / Not.
 
@@ -48,12 +68,18 @@ never an entry.
 cannot, the release is unfocused — pick again.
 
 **2. Pitch — three, independent.** Three Pitcher agents, no shared context, each given a different
-moment kind: the three least used, from the pack. LO picks one. Independence is the point: shared
-context produces three shades of one idea. See `references/agents.md`.
+relationship — the three most owed, from the pack's RELATIONSHIPS — and each naming its moment
+kind. LO picks one. Independence is the point: shared context produces three shades of one idea.
+See `references/agents.md`.
 
 **3. Attack, before writing.** The panel runs on the *design*, not the build. Every cheap
 catch in our history happened here; every expensive one happened after shipping. Same agents,
 different timing, an order of magnitude in value.
+
+**3b. The excitement read.** Before LO reads the three pitches, one `v2-attack` instance with the
+`excitement` lens reads each. It scores nothing: it returns the pitch with a one-line note beside
+each line. Its only rejections are the two instant fails — a big turn forced on her with no warning
+or way round, and sex used only as a punishment — each quoting the line. LO judges.
 
 **4. Write.** Events on existing surfaces. Default to **zero new locations** (*Where a release
 happens*, above) — if this release opens one, it arrives filled, not as a promise.
@@ -92,8 +118,7 @@ a checklist, and §3a already ruled on those. It needs the archive step 3 keeps 
 and it exits 2 rather than pretending.
 
 **6. Build, and cross the boundary.** Everything above judges the SOURCE. A release is the one
-moment the **artefact** is what is judged, and until 2026-08-28 no instrument in this project could
-see a build at all. The six steps — media harvested, rebuilt without `--dev` or `--debug`, archived,
+moment the **artefact** is what is judged. The six steps — media harvested, rebuilt without `--dev` or `--debug`, archived,
 `version` set in both places, `dev: true` dropped in the same commit, ledger promises reconciled —
 are in **§ Shipping the build** below, and they end on one command:
 
@@ -101,12 +126,8 @@ are in **§ Shipping the build** below, and they end on one command:
 python3 scripts/gates.py --release <slug>
 ```
 
-> ⚠️ **This step exists because the loop used to stop at "ship" and the procedure lived two hundred
-> lines further down.** An author walking the loop reached the end and was never sent to the check
-> named after the release boundary. That is how `the_inheritance` reached the published grid
-> carrying a full `--dev --debug` build with 115 missing files. **The rule is LO's and it is not the
-> obvious one: dev mode and missing media block RELEASE, not testing** — a test build with labelled
-> placeholders and a jump list is a *good* test build.
+> ⚠️ **The rule is LO's and it is not the obvious one: dev mode and missing media block RELEASE, not
+> testing** — a test build with labelled placeholders and a jump list is a *good* test build.
 
 **7. Log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
@@ -115,15 +136,24 @@ down next time; a number only in a terminal is one nobody is holding. This is th
 the anchor share already runs on, and the reason the anchor gets budgeted and the word list does
 not is only that one of them was written down.
 
+**8. Listen.** About two weeks after a build is public, and before the next release's step 1, the
+`v2-listener` agent reads the new comments since the release date: mopoga (`scripts/listen_mopoga.py
+<slug> --since <date>`), F95 (thread and reviews, read-only in LO's Chrome), gamcore (by hand, or
+recorded as "not read"). It writes `listen[]` in `v2_state.json` — what players praised, asked for,
+complained about and got stuck on, each with a quote and a count. Then re-read the Want against it:
+anything that would change the promise goes to LO as a question, never silently. **Players choose
+the order and supply small ideas; they do not set the premise** (Great Games Study, round 4b).
+
 ---
 
-### The loop's four instruments, in the order they run
+### The loop's instruments, in the order they run
 
 | step | command | what it can see |
 |---|---|---|
 | 5 | `gates.py <slug>` | the source — 46 gates, 28 lints |
 | 5b | `gates.py --saves <slug>` | the difference between **two** releases — what a rename stranded |
 | 6 | `gates.py --release <slug>` | the **built artefact** — dev mode, missing media, three version numbers |
+| 8 | `listen_mopoga.py <slug> --since <date>` | what players said on mopoga since the release — sorted by likes, never scored |
 | — | `gates.py --selfcheck` | this skill against its own scoreboard; needs no game |
 
 ⚠️ **Nothing checks that you ran them, and nothing can.** `DOCTRINE_GAPS.md` §3a rules out the

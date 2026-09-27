@@ -202,11 +202,13 @@ belong here; only decisions, debts, and promises do.
       "subject": "…",                        // ONE named subject
       "want_line": "…",                      // which line of the Want this served
       "moment_kind": "firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence",
-      "her_moment": { "fantasy": "…", "temptation": "…", "answers": ["…"], "voice": { "low": "…",
-                      "high": "…" }, "noticed": "…", "sticks": "…", "remember": "…", "door": "…" },
-                                             // the eight lines as shipped (the-release.md,
-                                             //   "Her moment"). Both optional; the pitch pack
-                                             //   counts moment_kind to pick the least used.
+      "her_moment": { "person": "npc_id", "step_n": 4, "pays": "flag or canvas it pays",
+                      "fantasy": "…", "temptation": "…", "answers": ["…"], "voice": { "low": "…",
+                      "high": "…" }, "noticed": "…", "sticks": "…", "remember": "…", "door": "…",
+                      "opens": "the next step, named" },
+                                             // the step as shipped (the-release.md, "The next
+                                             //   step"). Optional; the pitch pack reads person to
+                                             //   count releases since each person's last step.
       "added":   { "units": 0, "words": 0, "locations": 0, "characters": 0 },
       "opened":  ["the thing now visible and locked"],
       "gates":   { "passed": 10, "of": 10 },
@@ -216,6 +218,15 @@ belong here; only decisions, debts, and promises do.
 
   "promises": [
     { "text": "…", "made_in": "0.2", "paid_in": null }   // null = still owed
+  ],
+
+  // WHAT PLAYERS SAID — the-release.md loop step 8, written by the v2-listener agent.
+  "listen_sources": { "mopoga": "page-slug", "f95": "thread url", "gamcore": "url" },  // optional
+  "listen": [
+    { "release": "0.3", "read_on": "2026-10-12",
+      "sources": { "mopoga": 41, "f95": 12, "not read": ["gamcore"] },
+      "praised": [{ "quote": "…", "count": 3 }], "asked_for": [{ "quote": "…", "count": 5 }],
+      "complained": [{ "quote": "…", "count": 2 }], "stuck": [{ "quote": "…", "count": 7 }] }
   ],
 
   "decisions": [
@@ -364,10 +375,12 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
 | `board.needs[]` | *a need shuts a door* | `[{ key, decay_per_day, shuts }]` — and every key must be READ by a condition somewhere in the game |
 | `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it FAILS the gate** (LO, 2026-09-26). Superseded by `release_page.door` when that ships (PRD WS8) |
+| `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
 | `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
 | `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at }` — minimal since 2026-09-26 (PRD WS6); the full release page is PRD WS8. Absent means `--ship` FAILS: nothing says what the release is |
+| `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of

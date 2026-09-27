@@ -89,10 +89,10 @@ Two readings, and **both are honest**: convergence is a failure of the design's 
 convergence is a signal — three independent readers agreeing on what the game most needs next.
 One run cannot tell them apart.
 
-**Each Pitcher is given a distinct lens: a moment kind** (LO, 2026-09-27). The caller gives each
-of the three one of the three least-used kinds from the pack's MOMENT KINDS ALREADY SHIPPED. All
-three keep the game's fantasy, so they differ by the moment, not by the game
-(`the-release.md`, "Her moment").
+**Each Pitcher is given a different relationship** (LO, 2026-09-27): the three most owed, from the
+pack's RELATIONSHIPS (`pitch_pack.py <slug> --person <npc>`), and each names the moment kind its
+step serves. All three keep the game's fantasy. A pitch is the next step on that relationship —
+what it pays, her moment, what it opens (`the-release.md`, "The next step").
 
 > This is the capability the incumbent system most visibly lacks. It is a correctness
 > pipeline — engine tables, traps, gates — which is a different muscle from "here are three
@@ -133,7 +133,17 @@ three keep the game's fantasy, so they differ by the moment, not by the game
 Lenses, each drawn from a run that caught something real:
 
 `soft-lock` · `grind` · `gate-parity` · `numbers` · `timing` · `prose-vs-mechanic` · `canon` ·
-`flag chains` · `clamp/bounds` · `render buckets`
+`flag chains` · `clamp/bounds` · `render buckets` · `excitement`
+
+**`excitement` reads a pitch, not a design** (loop step 3b, before LO reads the three). It checks
+that each of the eight lines is filled, specific and about her; that his three halves are there
+(his want before, his "no" branch, he remembers); that *Before* names something the pack shows as
+shipped and *Leads to* names a findable next step; that the two voice lines really differ; and
+whether the pitch is **too close to a moment-library entry** — the same situation with the same kind
+of person — naming the entry. **It scores nothing**: it returns the pitch with a one-line note beside
+each line, and LO judges. Its only rejections are two instant fails, each quoting the line: a big
+turn forced on her with no warning or way round, and sex used only as a punishment. A "no" that
+locks the relationship for good is flagged, not failed.
 
 **Every finding gets an adversarial verify.** Measured survival rates from our own runs: one
 audit returned 4 confirmed against 6 refuted; another 17 survived against 2 refuted. Roughly
@@ -242,6 +252,23 @@ enforces exactly that split — it ships `sv()` and `body()` and deliberately no
 `file:line`.** This is the Player's version of the Attack Panel's verify pass, and it is not
 optional: of the four raw reds this harness has produced across nine games, **three were the
 harness** and one was real.
+
+---
+
+## The Listener — what players said after a release
+
+> ✅ **BUILT 2026-09-27.** The agent is `.claude/agents/v2-listener.md`, callable as
+> `subagent_type: "v2-listener"`. Its instrument is `scripts/listen_mopoga.py`.
+
+**Job:** loop step 8, about two weeks after a build is public. It reads the new comments since the
+release date — mopoga through the script, F95 read-only in LO's Chrome, gamcore by hand or recorded
+as "not read" — and returns a `listen[]` draft for `v2_state.json`: what players praised, asked
+for, complained about and got stuck on, each with a quote and a count. If anything would change
+the Want's promise, it returns that as one question for LO.
+
+**It reads and nothing else.** It never posts, likes, replies or downloads, never clicks anything
+that changes state, and never judges or proposes ideas: players choose the order and supply small
+ideas; they do not set the premise (Great Games Study, round 4b).
 
 ---
 

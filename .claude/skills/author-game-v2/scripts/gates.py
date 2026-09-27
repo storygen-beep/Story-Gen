@@ -96,6 +96,11 @@ DECLARED_FILL_TOLERANCE = 0.25
 # If it ever starts failing games that look right, it is wrong and should be widened, not
 # defended.
 
+# A share gate judged on fewer cases than this reports "too few to judge", not PASS
+# (PRD IC21, LO 2026-09-27). Five, not a derived number: it is the smallest sample the
+# two failures that prompted it (1 of 1, 100% of 1) could not have passed on.
+FEW_CASES = 5
+
 EXPLICIT_BEAT_FLOOR = 7.5
 # Share of beats carrying 3+ explicit words. DoL held 7.5%-9.3% across eight
 # years and 12x growth. Unlike raw sex-word share (which fell 3.00% -> 0.96% as
@@ -4451,6 +4456,49 @@ def ladder_problems(game, state):
     return len(ladders), checked, problems
 
 
+RESETTING_NAME = re.compile(r"_(today|tonight|week|weekly|daily)$")
+
+
+def lint_flag_never_resets(game, state):
+    """A flag meant to reset — named `*_today` / `*_week` (or `_tonight`, `_daily`,
+    `_weekly`), or listed in `board.resetting_flags` — that something sets and nothing
+    anywhere unsets, including `[engine.daily_tick]`. Reported, never a gate.
+
+    WHY. `orientation`'s `dues_paid_week` is set when she pays Simone and read `is_false`
+    to offer the payment — and nothing ever clears it (grep: 0 unsets). So the dues are
+    paid once per SAVE, not once per week, and every screen that says "Friday, the dues"
+    is false from the second week on. The name promised a reset the game never runs.
+
+    Walks every dict in the game for `flagEffects`, so a set or unset in a node exit, a
+    choice, a cascade beat, a quest effect or the daily tick all count.
+    """
+    ops = collections.defaultdict(set)
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for fe in obj.get("flagEffects") or []:
+                if isinstance(fe, dict) and fe.get("flag"):
+                    ops[fe["flag"]].add(str(fe.get("op") or "set"))
+            for v in obj.values():
+                walk(v)
+        elif isinstance(obj, list):
+            for v in obj:
+                walk(v)
+
+    walk(game)
+    declared = {str(f) for f in (((state or {}).get("board") or {}).get("resetting_flags") or [])}
+    stuck = sorted(f for f, o in ops.items()
+                   if (RESETTING_NAME.search(f) or f in declared)
+                   and o & {"set", "toggle"} and not o & {"unset", "clear", "remove"})
+    candidates = sorted(f for f in ops if RESETTING_NAME.search(f) or f in declared)
+    if not candidates:
+        return "", []
+    if not stuck:
+        return f"all {len(candidates)} resetting flag(s) are unset somewhere", []
+    return (f"{len(stuck)} of {len(candidates)} resetting flag(s) are set and never unset — "
+            f"not in any effect, not in [engine.daily_tick]", stuck)
+
+
 def lint_repeatables_without_step(model, state):
     """Repeatables added since the last release with no declared step added. Reported.
 
@@ -6082,15 +6130,120 @@ def lint_price_spelled_out(model, game, state):
     return summary, sorted(rows)[:40]
 
 
+def _parked_files(game_dir, state):
+    """Every parked TOML fragment for a game: `<game>/parked/**/*.toml` automatically,
+    plus any paths or globs the ledger lists in `parked.files` (relative to the game).
+
+    ⚠️ THE FOLDER IS READ WHETHER OR NOT THE LEDGER DECLARES IT (LO, 2026-09-27): a game
+    that forgets to declare its parked folder must still be caught.
+    """
+    import glob as _glob
+    if not game_dir:
+        return []
+    found = set(_glob.glob(os.path.join(game_dir, "parked", "**", "*.toml"), recursive=True))
+    for pat in (((state or {}).get("parked") or {}).get("files") or []):
+        found.update(_glob.glob(os.path.join(game_dir, str(pat)), recursive=True))
+    return sorted(p for p in found if os.path.isfile(p))
+
+
+def _merge_parked(game, files):
+    """A COPY of the game with every parked fragment merged back in: list tables are
+    appended, and an entry whose `id` matches a live one replaces it (a parked file may
+    hold the fuller version of a live scene). Returns (merged, [(file, error)])."""
+    import copy as _copy
+    merged, errors = _copy.deepcopy(game), []
+    for f in files:
+        try:
+            frag = _load(f)
+        except Exception as exc:                  # a fragment that does not parse is reported
+            errors.append((f, str(exc)[:120]))
+            continue
+        for key, val in frag.items():
+            if not isinstance(val, list):
+                continue
+            live = merged.setdefault(key, [])
+            if not isinstance(live, list):
+                continue
+            ids = {x.get("id"): i for i, x in enumerate(live) if isinstance(x, dict) and x.get("id")}
+            for item in val:
+                if isinstance(item, dict) and item.get("id") in ids:
+                    live[ids[item["id"]]] = item
+                else:
+                    live.append(item)
+    return merged, errors
+
+
+def score(model, game, state=None, game_dir=None):
+    """run_gates, plus PARKED, NOT JUDGED (PRD IC21).
+
+    Parking content turned gates n/a, and an n/a leaves the denominator, so taking
+    content out RAISED the score — the_balance's park took three gates to n/a. So the
+    gates run twice: on the live game, and on a copy with the parked content merged
+    back in. A gate that is n/a live and JUDGED with the parked content is marked
+    parked: never a pass, counted in the denominator, printed with the files.
+    Measured, never declared: a gate is only marked parked if the content actually
+    judges it. Returns (results, parked_info).
+    """
+    results = run_gates(model, game, state)
+    files = _parked_files(game_dir, state)
+    info = dict(files=files, errors=[], marked=0)
+    if not files:
+        return results, info
+    merged, info["errors"] = _merge_parked(game, files)
+    try:
+        m_model, m_game = build(merged)
+        with_parked = {r["gate"]: r for r in run_gates(m_model, m_game, state)}
+    except Exception as exc:
+        info["errors"].append(("(merged game)", f"could not be built — {str(exc)[:120]}"))
+        return results, info
+    rel = [os.path.relpath(f, game_dir) for f in files]
+    for r in results:
+        p = with_parked.get(r["gate"])
+        if r["na"] and p is not None and not p["na"]:
+            r.update(na=False, pass_=False, parked=True,
+                     headline=(f"parked, not judged — with the parked content: "
+                               f"{'PASS' if p['pass_'] else 'FAIL'} · {p['headline']}"),
+                     detail=[f"parked content: {', '.join(rel[:6])}"
+                             + (f" and {len(rel) - 6} more" if len(rel) > 6 else "")])
+            info["marked"] += 1
+    return results, info
+
+
+def tally_counts(results):
+    """(passed, failed, parked, few, na, denominator). Parked and too-few count in the
+    denominator as NOT passing (LO, 2026-09-27), so neither can ever raise the score.
+    n/a stays out: nothing was ever authored to judge."""
+    npass = sum(1 for r in results if r["pass_"])
+    npark = sum(1 for r in results if r.get("parked"))
+    nfew = sum(1 for r in results if r.get("few"))
+    nna = sum(1 for r in results if r.get("na"))
+    nfail = len(results) - npass - npark - nfew - nna
+    return npass, nfail, npark, nfew, nna, len(results) - nna
+
+
 def run_gates(model, game, state=None):
     R = []
+
+    _N = {}                                        # gate name -> its share's denominator
 
     def gate(name, ok, headline, detail=None):
         # ok is True / False / None. None means THERE WAS NOTHING TO JUDGE — reported
         # as n/a and excluded from the tally. A gate that "passes" on an empty game
         # flatters it: an absence is not a pass.
-        R.append(dict(gate=name, pass_=(ok is True), na=(ok is None),
-                      headline=headline, detail=detail or []))
+        #
+        # TOO FEW TO JUDGE (PRD IC21, LO 2026-09-27). A share gate records its
+        # denominator in _N just before it is called. A PASS on fewer than FEW_CASES
+        # cases is not a pass — `explicit in repeatable` passed "100% of 1" and
+        # `milestones open something` 1 of 1. It reports "too few to judge" and counts
+        # in the tally as not passing. A FAIL on few cases stays a FAIL: a miss is a miss.
+        n = _N.get(name)
+        few = ok is True and isinstance(n, int) and n < FEW_CASES
+        if isinstance(n, int) and f" of {n}" not in headline and f"/{n}" not in headline:
+            headline = f"{headline} (n = {n})"
+        if few:
+            headline = f"too few to judge ({n} of {FEW_CASES}) — {headline}"
+        R.append(dict(gate=name, pass_=(ok is True) and not few, na=(ok is None),
+                      few=few, n=n, parked=False, headline=headline, detail=detail or []))
 
     all_beats = [b for c in model for b in c["beats"]]
     expl = [b for b in all_beats if b.explicit >= 3]
@@ -6208,6 +6361,7 @@ def run_gates(model, game, state=None):
     if n_pools:
         head += f" · {n_pools} pools, {total - pool_gap:,} words per pass"
 
+    _N["location fill"] = len(declared)
     gate("location fill", not fails, head, fails)
 
     # G2 — explicit floor.
@@ -6264,6 +6418,7 @@ def run_gates(model, game, state=None):
     pct = 100 * len(rep_expl) / max(len(rep_beats), 1)
     all_pct = 100 * len(expl) / max(len(all_beats), 1)
     marginal = EXPLICIT_BEAT_FLOOR <= pct < 12.0
+    _N["explicit floor"] = len(rep_beats)
     gate("explicit floor", None if not rep_beats else pct >= EXPLICIT_BEAT_FLOOR,
          f"{pct:.1f}% of {len(rep_beats):,} REPEATABLE beats carry 3+ explicit words "
          f"(floor {EXPLICIT_BEAT_FLOOR}%)"
@@ -6282,6 +6437,7 @@ def run_gates(model, game, state=None):
     for c in model:
         if not c["rep"]:
             worst[c["loc"]] += sum(1 for b in c["beats"] if b.explicit >= 3)
+    _N["explicit in repeatable"] = len(expl)
     gate("explicit in repeatable", None if not expl else share >= EXPLICIT_IN_REPEATABLE,
          f"{share:.1f}% of {len(expl)} explicit beats are re-enterable (floor {EXPLICIT_IN_REPEATABLE}%)",
          [f"once-only explicit at {l}: {n}" for l, n in worst.most_common(6) if n])
@@ -6300,6 +6456,7 @@ def run_gates(model, game, state=None):
                     pooled += 1
                 else:
                     fixed.append(f"{c['id']}: {path}")
+    _N["repeatable explicit media cycles"] = pooled + len(fixed)
     gate("repeatable explicit media cycles", None if (pooled + len(fixed)) == 0 else not fixed,
          f"{pooled} pooled, {len(fixed)} fixed single-clip in repeatable content",
          fixed[:25])
@@ -6325,6 +6482,7 @@ def run_gates(model, game, state=None):
     for b in expl_beats:
         if not b.media:
             dry[b.canvas] += 1
+    _N["an explicit beat carries a clip"] = len(expl_beats)
     gate("an explicit beat carries a clip",
          None if not expl_beats else clip_pct >= EXPLICIT_BEAT_MEDIA_FLOOR,
          (f"{len(clipped)}/{len(expl_beats)} explicit beats carry a clip of their own "
@@ -6388,6 +6546,7 @@ def run_gates(model, game, state=None):
                     hot_locs.add(c["loc"])
     cold = sorted(declared - hot_locs)
     heat_pct = 100 * len(hot_locs) / max(len(declared), 1)
+    _N["traversal heat"] = len(declared)
     gate("traversal heat", heat_pct >= LOCATIONS_WITH_HEAT,
          f"{len(hot_locs)}/{len(declared)} locations ({heat_pct:.0f}%) carry a cycling explicit pool "
          f"(floor {LOCATIONS_WITH_HEAT:.0f}%)",
@@ -6427,6 +6586,7 @@ def run_gates(model, game, state=None):
         for nid in unsched:
             bad.append(f"{nid}: no schedule rows — she stands nowhere")
         n_rows = len(pres["rows"])
+        _N["standing surface"] = n_rows
         gate("standing surface", not bad,
              f"{n_rows - len(pres['dead'])}/{n_rows} schedule rows have something in the room "
              f"on every weekday · {len(pres['stranded'])} stranded · "
@@ -6473,6 +6633,7 @@ def run_gates(model, game, state=None):
             dead.append(f"{c['id']} sets no flag — opens nothing. A first time on a card "
                         f"that already exists passes by setting a flag its daily card reads, "
                         f"e.g. a callback group")
+    _N["milestones open something"] = len(milestones)
     gate("milestones open something", None if not milestones else not dead,
          f"{len(milestones)-len(dead)} of {len(milestones)} milestones open standing content",
          dead[:25])
@@ -6481,6 +6642,7 @@ def run_gates(model, game, state=None):
     # n/a until a ladder is declared; `--ship` is where an undeclared ladder is red.
     # See `ladder_problems` (PRD WS4, 2026-09-26).
     n_lad, n_steps, lad_probs = ladder_problems(game, state)
+    _N["ladders move forward"] = n_steps
     gate("ladders move forward", None if not n_lad else not lad_probs,
          (f"{n_steps} declared steps across {n_lad} ladder(s), {len(lad_probs)} problem(s)"
           if n_lad else "no ladder declared in board.characters[].ladder"),
@@ -6513,6 +6675,7 @@ def run_gates(model, game, state=None):
                      if isinstance(b.get("min"), (int, float)) and b["min"] > tops[key]]
             over.append(f"{key}: bands promise something at {'/'.join(str(int(e)) for e in empty)}, "
                         f"but the highest authored gate is {tops[key]}")
+    _N["meter ceiling"] = len(tops)
     gate("meter ceiling", None if not tops else not over,
          f"{len(over)} visible meters rise past their content" if tops
          else "no authored trait gates yet — nothing to promise", over)
@@ -6706,6 +6869,7 @@ def run_gates(model, game, state=None):
     # deliberately sealed room entered only by a canvas exit. Neither is stranded.
     exempt = {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False}
     stranded = sorted(loc_ids - seen_locs - exempt)
+    _N["world reachable"] = len(loc_ids)
     gate("world reachable", None if not loc_ids else not stranded,
          f"{len(seen_locs & loc_ids)}/{len(loc_ids)} locations reachable on foot from "
          f"{start_loc or '(no start)'}",
@@ -6770,6 +6934,7 @@ def run_gates(model, game, state=None):
             if key not in node_targets:
                 w = sum(len(b.split()) for b in _band_texts(n)) if _band_texts(n) else 0
                 orphans.append(f"{key} — {w} words, and nothing in the game links to it")
+    _N["every authored node is reachable"] = node_total
     gate("every authored node is reachable", None if not node_total else not orphans,
          f"{node_total - len(orphans)}/{node_total} authored nodes can be opened",
          orphans[:12] + ([f"… and {len(orphans) - 12} more"] if len(orphans) > 12 else [])
@@ -6799,6 +6964,7 @@ def run_gates(model, game, state=None):
                 homeless.append(f"{cid2}: no home declared in board.map.homes")
             elif where not in loc_ids and where != "offscreen":
                 homeless.append(f"{cid2}: home '{where}' is not a declared location")
+        _N["residents have homes"] = len(chars)
         gate("residents have homes", None if not chars else not homeless,
              f"{len(chars)-len(homeless)}/{len(chars)} characters have a home that exists", homeless)
 
@@ -6872,6 +7038,7 @@ def run_gates(model, game, state=None):
                         gaps.append(f"{name}: its `when` reads {key} {op}"
                                     f"{' ' + str(val) if val is not None else ''}, which nothing "
                                     f"in the game can make true — the card never shows")
+        _N["guidance exists"] = len(tiers_owed) + len(cast)
         gate("guidance exists", not gaps,
              f"{len(cards)} quest cards for {len(tiers_owed)} ascent tiers and "
              f"{len(cast)} characters in the game",
@@ -6902,6 +7069,7 @@ def run_gates(model, game, state=None):
                 who = c.get("npc_id") or "story"
                 unlabelled.append(
                     f"{who}: goal '{key}' has no label — the player reads the raw key")
+    _N["a goal says what it wants"] = goal_items
     gate("a goal says what it wants",
          None if not goal_items else not unlabelled,
          f"{goal_items - len(unlabelled)}/{goal_items} goal bullets render words "
@@ -6940,6 +7108,7 @@ def run_gates(model, game, state=None):
         if not forever:
             silent_chains.append(f"{npc_id}: {len(cs)} cards, none terminal or end-of-content — "
                                  f"section vanishes when the arc closes")
+    _N["no chain ends in silence"] = len(by_npc)
     gate("no chain ends in silence", None if not by_npc else not silent_chains,
          f"{len(by_npc)-len(silent_chains)}/{len(by_npc)} character ladders keep a card after the last rung",
          silent_chains)
@@ -7121,6 +7290,7 @@ def run_gates(model, game, state=None):
                         silent.append(f"{c['id']} @{c['loc']}: \"{(ch.get('text') or '')[:58]}\""
                                       f" costs {amt} {currency}, label does not say so")
         if priced:
+            _N["a price is on its label"] = priced
             gate("a price is on its label", not silent,
                  f"{len(silent)} of {priced} choices spend `{currency}` without naming the amount"
                  + (f" · {other_cost} non-currency costs not judged" if other_cost else ""),
@@ -7709,6 +7879,7 @@ def run_gates(model, game, state=None):
                 f"{cid} +{amt:g} / {mins or 0} min")
 
     n_gated = len([k for k in thresholds if grantors.get(k)])
+    _N["the climb is paid for"] = n_gated
     gate("the climb is paid for", None if not n_gated else not unpaid,
          (f"{len(unpaid)} of {n_gated} gated meters can be raised for free"
           if unpaid else
@@ -7750,6 +7921,7 @@ def run_gates(model, game, state=None):
                 + " — the band and the raw number both render")
     n_banded = sum(1 for i in (game.get("sidebar_items") or [])
                    if isinstance(i, dict) and i.get("bands") and i.get("trait_owner") != "npc")
+    _N["a banded meter is not also a number"] = n_banded
     gate("a banded meter is not also a number", None if not n_banded else not doubled,
          f"{len(doubled)} of {n_banded} banded sidebar meters also print as a raw number"
          if n_banded else "no banded sidebar meters — nothing to judge",
@@ -7852,6 +8024,7 @@ def run_gates(model, game, state=None):
     else:
         read = _traits_read_by_conditions(game)
         dead = [n for n in needs if str(n.get("key")) not in read]
+        _N["a need shuts a door"] = len(needs)
         gate("a need shuts a door", not dead,
              f"{len(needs) - len(dead)}/{len(needs)} declared needs are read by a condition "
              f"somewhere in the game",
@@ -7878,6 +8051,7 @@ def run_gates(model, game, state=None):
     # ═════════════════════════════════════════════════════════════════════════
     qualifying, covered, (solo, sched, subs) = _walkin_join(model, game)
     missing = sorted(set(qualifying) - set(covered))
+    _N["the walk-in floor"] = len(qualifying)
     gate("the walk-in floor", None if not qualifying else not missing,
          (f"{len(covered)}/{len(qualifying)} rooms where she works alone with someone "
           f"scheduled carry a walk-in"
@@ -7941,6 +8115,7 @@ def run_gates(model, game, state=None):
     if inert:
         detail.append(f"declared but never touched at all: {', '.join(inert[:10])}"
                       + (" …" if len(inert) > 10 else ""))
+    _N["a meter is read"] = len(raises)
     gate("a meter is read", None if not raises else not dead,
          f"{len(raises) - len(dead)}/{len(raises)} raised player meters are read by a condition, "
          f"a cost or a quest goal"
@@ -8116,6 +8291,7 @@ def run_gates(model, game, state=None):
                       "`exit_block.config` — `engine.md` §17")
         detail.append("a condition naming a garment nothing can grant is a door with no key. "
                       "Open a route or cut the garment (`the-meters.md` W3)")
+    _N["a declared garment can be got"] = len(garments)
     gate("a declared garment can be got",
          None if not garments else not _ungrantable,
          (f"{len(garments) - len(_ungrantable)}/{len(garments)} declared garment(s) have a "
@@ -8198,6 +8374,7 @@ def run_gates(model, game, state=None):
                       "(the bar, on click), or a `rejection_node` (a real failure node). "
                       "The field hides a refusal or explains it — 2.26% show a dead label "
                       "(the-surfaces.md R5c, engine.md §15/§36)")
+    _N["a locked door says why"] = len(shown_locked)
     gate("a locked door says why",
          None if not shown_locked else not mute,
          (f"{len(shown_locked)} shown-locked · {len(shown_locked) - len(mute)} with a reason"
@@ -8657,6 +8834,7 @@ def run_gates(model, game, state=None):
                 if not (b.get("props") or {}).get("speaker"):
                     voiceless[f"{c.get('id')}#{b.get('type')}"] += 1
     n_bad = sum(voiceless.values())
+    _N["speakers are named"] = n_speaking
     gate("speakers are named", None if not n_speaking else not n_bad,
          f"{n_speaking - n_bad}/{n_speaking} dialog and thought_bubble blocks name their speaker"
          if n_speaking else "no dialog or thought_bubble blocks authored",
@@ -8872,6 +9050,7 @@ def run_gates(model, game, state=None):
             det.append("a meeting is a NON-repeatable canvas that names that character "
                        "and sets one flag the hub reads — the_inheritance/canvas_meet_audrey, "
                        "125 words and 4 dialog blocks, is the worked shape")
+        _N["every hub is met first"] = len(cast)
         gate("every hub is met first", len(met) == len(cast),
              f"{len(met)}/{len(cast)} characters are introduced before their hub opens",
              det)
@@ -8934,6 +9113,7 @@ def run_gates(model, game, state=None):
         windowless.append(f"{c.get('id')} @{t.get('location')}: no trigger.schedules, but "
                           f"{who} is only there {hours} — `requires_npc` alone does not "
                           f"gate this path (v2.py:4559)")
+    _N["a meeting fires where they are"] = in_scope
     gate("a meeting fires where they are",
          None if not in_scope else not windowless,
          f"{in_scope - len(windowless)}/{in_scope} one-shot canvases naming a character "
@@ -10336,7 +10516,8 @@ def ship_rows(slug, root=None):
     model, game = build(_load(path))
     state_path = os.path.join(root, "games", slug, "v2_state.json")
     state = json.load(open(state_path)) if os.path.exists(state_path) else None
-    results = {r["gate"]: r for r in run_gates(model, game, state)}
+    scored, _ = score(model, game, state, os.path.join(root, "games", slug))
+    results = {r["gate"]: r for r in scored}
     rp = (state or {}).get("release_page") or {}
 
     # ── the four untrue or silent screens (lints promoted for shipping) ──────
@@ -10383,6 +10564,11 @@ def ship_rows(slug, root=None):
         r = results.get(gname)
         if r is None:
             B(label, False, f"gate '{gname}' did not run")
+        elif r.get("parked"):
+            # PRD IC21: a parked block is never read as green, and says why it is red.
+            B(label, False, f"{gname}: {r['headline']}", r["detail"][:10])
+        elif r.get("few"):
+            B(label, False, f"{gname}: {r['headline']}", r["detail"][:10])
         elif r["na"] and gname != "the obligation is charged":
             B(label, False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)",
               r["detail"][:10])
@@ -10529,9 +10715,10 @@ def main():
 
     model, game = build(_load(path))
     # The ledger, when it exists, tells the gates what the author DECLARED.
-    state_path = os.path.join(os.path.dirname(os.path.dirname(path)), 'v2_state.json')
+    game_dir = os.path.dirname(os.path.dirname(path))
+    state_path = os.path.join(game_dir, 'v2_state.json')
     state = json.load(open(state_path)) if os.path.exists(state_path) else None
-    results = run_gates(model, game, state)
+    results, parked_info = score(model, game, state, game_dir)
 
     lints = lint_dialogue_attribution(model)
     amb_summary, amb_lints = lint_ambient_presence(model, game)
@@ -10577,6 +10764,7 @@ def main():
     coll_summary, coll_lints = lint_collector_is_target(model, game, state)
     dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
     grow_summary, grow_lints = lint_repeatables_without_step(model, state)
+    reset_summary, reset_lints = lint_flag_never_resets(game, state)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
     _slug = (os.path.basename(os.path.dirname(os.path.dirname(path)))
@@ -10584,7 +10772,12 @@ def main():
     vol_summary, vol_lints = lint_explicit_volume(_slug)
 
     if "--json" in sys.argv:
+        _tp, _tf, _tk, _tw, _tn, _td = tally_counts(results)
         print(json.dumps({"gates": [dict(r) for r in results],
+                          "tally": {"pass": _tp, "fail": _tf, "parked": _tk, "few": _tw,
+                                    "na": _tn, "denominator": _td,
+                                    "parked_files": parked_info["files"],
+                                    "parked_errors": parked_info["errors"]},
                           "lints": {"dialogue_attribution": lints,
                                     "world_prose": world_lints,
                                     "screen_shape": {"summary": shape_summary,
@@ -10645,6 +10838,8 @@ def main():
                                                                 "findings": dep_lints},
                                     "repeatables_without_step": {"summary": grow_summary,
                                                                  "findings": grow_lints},
+                                    "flag_never_resets": {"summary": reset_summary,
+                                                          "findings": reset_lints},
                                     "obligation_vs_week": {"summary": oblig_summary,
                                                            "findings": oblig_lints},
                                     "collector_is_target": {"summary": coll_summary,
@@ -10667,22 +10862,26 @@ def main():
         sys.exit(0 if j_judged and j_pass == j_judged else 1)
 
     name = (game.get("project") or {}).get("name") or os.path.basename(path)
-    npass = sum(1 for r in results if r["pass_"])
-    nna   = sum(1 for r in results if r.get("na"))
-    judged = len(results) - nna
+    npass, nfail, npark, nfew, nna, denom = tally_counts(results)
     print(f"\n  author-game-v2 gates — {name}")
     print(f"  {path}")
     print(f"  {'─'*72}")
     for r in results:
-        tag = "n/a " if r.get("na") else ("PASS" if r["pass_"] else "FAIL")
+        tag = ("park" if r.get("parked") else "few " if r.get("few") else
+               "n/a " if r.get("na") else ("PASS" if r["pass_"] else "FAIL"))
         print(f"  [{tag}]  {r['gate']:32s} {r['headline']}")
         for d in r["detail"][:12]:
             print(f"          · {d}")
         if len(r["detail"]) > 12:
             print(f"          · … and {len(r['detail'])-12} more")
     print(f"  {'─'*72}")
-    na_note = f"  ({nna} n/a — nothing authored yet to judge)" if nna else ""
-    print(f"  {npass}/{judged} judged gates pass{na_note}")
+    for f, err in parked_info["errors"]:
+        print(f"  parked: {os.path.relpath(f, game_dir) if os.path.isabs(f) or os.sep in f else f}"
+              f" could not be merged — {err}")
+    # PRD IC21 (LO, 2026-09-27): parked and too-few count in the denominator as NOT
+    # passing, so neither can raise the score; n/a stays out.
+    print(f"  {npass}/{denom} gates pass  ·  {nfail} fail  ·  {npark} parked, not judged  ·  "
+          f"{nfew} too few to judge  ·  {nna} n/a (nothing authored)")
 
     # Lints sit BELOW the tally and never touch it. A warning that can change a
     # score is a gate, and a gate has to be re-derivable from a measurement.
@@ -11251,6 +11450,16 @@ def main():
               " fine; a release that only adds repeatables is the shape The Balance grew in:"
               " 39 new, no new step, and nothing saw it)")
 
+    if reset_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a flag that never resets — {reset_summary}")
+        for h in reset_lints[:10]:
+            print(f"          · {h}")
+        if reset_lints:
+            print("          (a LIST, never a score. The name promises a reset the game never runs:"
+                  " once set, it holds for the whole save. Clear it in [engine.daily_tick], or"
+                  " rename it if it really is once-per-save — engine.md §28)")
+
     if vol_summary:
         print(f"  {'─'*72}")
         print(f"  lint · how much explicit content is in here — {vol_summary}")
@@ -11305,7 +11514,8 @@ def main():
               " the ROLE in these fields — \"his son\", \"Sit with him\" — and keep the token for"
               " prose)")
     print()
-    sys.exit(0 if judged and npass == judged else 1)
+    # Parked and too-few are in `denom` and never passes, so either keeps this non-zero.
+    sys.exit(0 if denom and npass == denom else 1)
 
 
 if __name__ == "__main__":
