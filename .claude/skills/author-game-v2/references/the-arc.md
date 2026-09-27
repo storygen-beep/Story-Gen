@@ -27,8 +27,8 @@ and both were wrong.**
   screens because it has no arcs, and adding screens without arcs is the failure the lint was
   built as a lint to avoid.
 - **It is not a claim that the field keeps sex rare inside an arc.** Course of Temptation's
-  harasser runs 111 passages with 20 explicit; Zara's five detentions are 15 passages and all
-  15 are explicit. Same shape, opposite density. **The shape is the finding; the density is a
+  harasser runs 111 passages with 20 explicit; another game's five incidents at one place are 15
+  passages and all 15 are explicit. Same shape, opposite density. **The shape is the finding; the density is a
   house decision.**
 
 ## What this file owns, and what it does not
@@ -71,12 +71,9 @@ The same split governs the prose (added 2026-09-24): the full loud version of a 
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
 into stays short but still speaks. `register.md` L3.
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (rank 24) ships its own quest log for the
-> husband's-brother arc. Nine steps, and steps 7 and 8 are the conversion:
->
-> - 7 — *"Now you can wank to \[him] just by approaching him and chatting. Jerk him off again
->   if your corruption is above 60."*
-> - 8 — *"Now you can give \[him] a blowjob. Keep sucking on him to move on."*
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (rank 24; numbers only, it fails the
+> adults-only rule) runs one arc as nine steps, and its last two convert into standing acts she
+> can start by walking up to him.
 >
 > `course-of-temptation` (rank 5) closes the same way — *"after you follow one of these paths
 > to its conclusion, The Classroom Harasser will become like any other character and your
@@ -123,29 +120,21 @@ That is `the-clock.md` and `the-map.md` doing arc work. An arc opening needs no 
 will close · the last refusal opens something else. Three parts, and the third is the one
 nobody builds.
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` step 4 is a refusal the game *authors for
-> her*, not one it offers:
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` records a refusal as a step of the
+> arc, in the quest log — *"\[He] snuck into your shower, but you made your feelings clear."*
 >
-> *"\[He] caught you caressing your pussy while watching him and invited you to join in. **You
-> refused and left**, but you understand that he will continue to do so in the hope that next
-> time you will not refuse…"*
->
-> `zaras-school-life`, `bench event5`. Declining costs nothing and sets `$cooldownDick`,
-> `$dick.rejectDay = $dayCount`, `$dick.rejectTimes += 1`. On the third:
->
-> *"Warning: This is the last time you can reject this NPC, after this, they will be locked
-> forever. Things you will miss: Park bench events, FFM events with cucking, money making
-> system and several quests."*
->
-> And the fourth sets `$lisaDaysLeftForIntro = 3` — **refusing him starts a different
-> character's introduction three days later.**
+> The counted form is measured on `zaras-school-life` (numbers only; it fails the adults-only
+> rule). Declining one man costs nothing and writes a cooldown, the day, and a refusal count. On
+> the third refusal the game warns in plain words that the next one locks him forever, and lists
+> the four systems she will lose. The fourth starts **a different character's introduction three
+> days later.**
 
 Three rules fall out, and the first two already exist elsewhere in weaker form:
 
 - **The refusal is free and in character.** `the-surfaces.md` R5b already says it is written at
   full length. This adds: it is also *remembered*.
 - **A door may close, but out loud.** `the-want.md` §1 already carries this from
-  `the-company`'s *"If a choice locks you into a sub route, tell me that."* Zara's warning is
+  `the-company`'s *"If a choice locks you into a sub route, tell me that."* That warning is
   the strongest version in the corpus — it **names the four systems being forfeited**, not the
   fact that something is.
 - **A refusal routes.** This one is new to the skill. Saying no is not a dead end and not a
@@ -161,20 +150,20 @@ Added after a second reading round. A3 above was built on the one case in the co
 refusal is permanent, and read as a whole rule it is too harsh. **The field's ordinary refusal
 costs nothing, changes nothing, and tells the player the address at which it can be reversed.**
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (rank 24), two separate arcs, from its own
-> quest log:
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** Two passing games, the same shape:
 >
-> - *"You said no to shooting amateur porn, but **if you change your mind later, just talk to
->   your husband in the bedroom when he's there**."*
-> - *"Your husband caught you two having some fun and offered a threesome, but you said no.
->   **If you change your mind, just talk to him any time when they are both at home**."*
+> - `course-of-temptation`: *"That could be the end of everything. Of course, they'll probably
+>   be at it every weekend **if you ever change your mind**."*
+> - `cupids-way`: *"Alright, I won't push. **If you change your mind just message me.**"*
+>
+> `family-ties` (numbers only) does it on two arcs, each naming the room and the hour.
 
 So the two shapes sit at opposite ends and an arc picks one deliberately:
 
 | | the refusal | when to use it |
 |---|---|---|
 | **parked** | free, reversible, and the game prints the place and the hour | the default. Most offers |
-| **counted** | tracked, warned with the content named, and finally closed | when the closing is itself content — A3's Zara case |
+| **counted** | tracked, warned with the content named, and finally closed | when the closing is itself content — A3's counted case |
 
 Writing every refusal as permanent makes a game a minefield. Writing every one as parked makes
 nothing matter. **The one thing neither shape does is stay silent about which it is.**
@@ -191,7 +180,7 @@ opens, not only bought elsewhere.
 the rungs that raise it. **This is the same seam from the other side, and the two must be read
 together or the result is either a free elevator or a wall.**
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties`, `hisBroFapEvent1` — one scene, eleven pages.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (numbers only) — one scene, eleven pages.
 > Each page:
 >
 > - scales its arousal grant by where she already is — `if corr < 30: arousal += 5, else += 10`
@@ -199,9 +188,8 @@ together or the result is either a free elevator or a wall.**
 > - prints the number on the one she cannot take — `Req for corruption: 15`
 > - and grants `corr += 1` **only while she is below the next threshold**
 >
-> Watching him is what makes her able to do more than watch. `zaras-school-life` states the
-> locked door the same way: *"Zara does not have enough corruption to fuck him or is too
-> tired… Required Corruption: 30. Required Energy: 20."*
+> Watching him is what makes her able to do more than watch. `shady-deals` states a locked door
+> the same way: *"You can't launch an orgy, you need more girls working in here."*
 
 Two exits per page is the whole navigation of an eleven-page scene. Compare the act-menu figures
 in `the-surfaces.md` R3b — field median 2 options, span 1. **The same narrowness, applied down
@@ -220,28 +208,22 @@ than one:
 | kind | what the player does to get it | example gate |
 |---|---|---|
 | **a meter the scene feeds** | repeat the scene at the bottom of it | A4 above |
-| **a skill practised elsewhere** | go and do the act somewhere it is already allowed | *blowjob skill 20* |
-| **a preparation bought and endured** | buy the object, then spend days using it | *three nights with the plug in* |
+| **a skill practised elsewhere** | go and do the act somewhere it is already allowed | *an oral skill of 20* |
+| **a preparation bought and endured** | buy the object, then spend days using it | *three nights of a bought preparation* |
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (rank 24) gates its arc steps on
-> `blowjob skill 20` and `40`, and `deepthroat 35`, `50` and `60`. **The deepthroat number has
-> its own whole ladder whose only purpose is to feed three other arcs:** read tips on the
-> internet → buy a dildo at the sex shop → practise in the bedroom while he is out → reach 35 →
-> go to the bar toilets in the South District → look up better technique on a computer → at
-> corruption 50, the last booth — *"Now you can practise your deepthroat skills in the bar's WC."*
->
-> And its anal step is not a scene at all until the preparation is done: *"You need to go to the
-> pharmacy to buy an enema and to the sex shop to buy lubricant and pick up an anal plug"* →
-> *"use an enema and try on a butt plug. The bathroom should be free"* → *"Three days using an
-> anal plug will be enough. **Go to sleep with the butt plug in, so the counter will be
-> activated**"* → then talk to him between 21:00 and 23:00.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties` (numbers only; it fails the adults-only rule)
+> gates its arc steps on two practised skills at 20/40 and 35/50/60. **One skill has a
+> seven-step ladder of its own whose only purpose is to feed three other arcs:** read about it,
+> buy a toy, practise at home while he is out, then practise somewhere riskier. And one step is
+> not a scene at all until a bought preparation has been used for three nights — then she talks
+> to him in a two-hour window.
 
 Note what that second one does to the economy: **money buys the key to a rung, not a stat.**
 That is `the-economy.md` R1b — what money buys has to stay bought and be read — arriving from
 the arc side rather than the ledger side. A shop that sells an arc's prerequisite is doing more
 work than a shop that sells a meter point.
 
-⚠️ **A skill ladder that feeds nothing is a chore.** The deepthroat line is only worth its seven
+⚠️ **A skill ladder that feeds nothing is a chore.** The skill ladder above is only worth its seven
 steps because three other arcs read the number. Build the reader first.
 
 ### A4c · The field's meters are READ, ours are WRITTEN — and the gate cannot see the difference
@@ -324,11 +306,11 @@ That is one of three shapes in the corpus, and the other two are more common:
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** All three, one line each:
 >
-> - **hers** — `family-ties` (rank 24): she watches, is caught, refuses, joins, and only then
->   does the act become available.
-> - **theirs** — `zaras-school-life` (rank 22), and its quest journal says it in the same words
->   nine times: *"Zara attempts to unlock Kyle's mind to accept blowjobs from her."* She is the
->   aggressor throughout; what is gated is **his** consent, not hers.
+> - **hers** — `family-ties` (rank 24; structure only): the act becomes available only after a
+>   run of her own steps, one of them a refusal.
+> - **theirs** — `zaras-school-life` (rank 22; numbers only): its quest journal states the goal
+>   nine times as unlocking **his** consent. She is the aggressor throughout; what is gated is
+>   his willingness, not hers.
 > - **a contest** — `course-of-temptation` (rank 5): *"pursuing either path will make the other
 >   more difficult as it's a question of control."*
 
@@ -337,10 +319,9 @@ refusals belong to. A3's counted refusal is hers in one direction and *his* in a
 `night_desk` already ships refusals that are his, and until now nothing in this skill said that
 was a legitimate shape rather than a slip.
 
-⚠️ **One template, stamped per person, is a normal way to build a cast.** Zara runs
-brother / father / mother × quest 1 · 2 · 3, with the act list swapped for the pairing (the
-mother's three are fingering, oral and a strap-on) and an item requirement on the last —
-*"Zara has to travel to Cox and Co. in the mall to buy a strap-on."* Nine arcs from one shape.
+⚠️ **One template, stamped per person, is a normal way to build a cast.** One field game runs
+three people × quest 1 · 2 · 3, with the act list swapped for each pairing and a bought item
+required on the last. Nine arcs from one shape.
 **The saving is real and so is the risk**: the three read as one character three times unless
 each pairing's acts, refusals and aftermaths differ. See `the-surfaces.md` R8 — a person owns a
 corner of the world.
@@ -358,8 +339,8 @@ changing what it does.
 > checkmark each: *"Try wearing a skirt that can flip up."* · *"…a top that might expose your
 > nipples."* · *"…a top that shows cleavage."* · *"…a top that shows off your muscles."*
 >
-> `zaras-school-life`, the park-bench dispatcher — clothing moves the floor of the roll, not
-> the outcome:
+> `zaras-school-life` (numbers only), an outdoor dispatcher — clothing moves the floor of the
+> roll, not the outcome:
 >
 > ```
 > if wearing Slutty:  chance = random(50,100)
@@ -426,16 +407,9 @@ happens has no tension in the click.
 **The shape:** before rolling for a random incident, check whether an arc is waiting for its
 next step. If it is, and its conditions hold, it fires. Arc content does not queue behind chance.
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `zaras-school-life`, the same dispatcher, first lines,
-> above the roll:
->
-> ```
-> if $dick.metFlag == false and $dick.rejectTimes <= 3
->    and $PlayerCorruption >= 10 and $cooldownDick == false
->        → goto "bench event5"
-> ```
->
-> Four terms: not yet met · has not run out of refusals · corrupt enough · off cooldown.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `zaras-school-life` (numbers only), the same dispatcher:
+> above the roll, one arc's next step is checked on four terms — not yet met · has not run out
+> of refusals · the meter at 10 or more · off cooldown — and fires first if all four hold.
 
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
 location screen renders (`getStoryCanvasRedirect`, `v2.py:4921`), and among the candidates
@@ -446,7 +420,7 @@ an arc beat is a one-shot at the location, priced above the other one-shots that
 ⚠️ **It is the auto-fire queue it wins, not the dice.** That selector skips
 `triggerMode == "random"` and `substitutionOnly` canvases outright (`v2.py:4630-4631`); random
 ambients and substitutions are a separate selector on the location screen. The redirect happening
-first is what gives the same effect as Zara's pre-empt — the player never reaches the roll — but
+first is what gives the same effect as that pre-empt — the player never reaches the roll — but
 the two are different mechanisms and the caveats do not carry across.
 
 ---
@@ -458,7 +432,7 @@ them is **not which act is on offer**. It is the setup — who holds power, who 
 what the pretext is. And their gates spread wide enough that the same place still has something
 to give at the top of the game.
 
-**The menu to choose from** — every one of these is attested in the two games below, and the
+**The menu to choose from** — every one of these is attested in the games below, and the
 list is a set to pick from, never a set to complete:
 
 | setup | who moves first |
@@ -471,19 +445,18 @@ list is a set to pick from, never a set to complete:
 | she watches two other people, and one of them sees her | the third party |
 | a stranger prices her out loud — a toll, a demand, a deal | him |
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `zaras-school-life` runs seven incidents on one park bench
-> and five in one detention room. The detentions are five *power* situations, not five acts:
-> she catches a teacher · the coach catches her leaving · a peer arrives · an exhausted teacher
-> needs help · she is caught staring at a married one. The benches include a man crying over a
-> break-up, a man who scans her body from the feet up, and a couple she interrupts where **the
-> woman locks eyes with her**.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` runs **151** `EventCampusWalk*`
+> passages on one walk between buildings, and they are setups, not acts: a stranger demands a
+> toll (`TollDemanded`, with pay, refuse, flash and escape branches) · she is caught showing
+> (`CatchExhib`) · she spots two people having sex (`SpotSex`) · a friend-with-benefits wants a
+> quickie (`FBQuickie`) · a partner who owns her inspects her (`DomInspect`) · someone breaks up
+> with her (`Breakup`).
 >
-> Their gates spread from **corruption 5** on the solo bench to **80** on the couple. One bench
+> `zaras-school-life` (numbers only) spreads one place's gates from **5** to **80**: one place
 > serves a first-day player and an end-game player with completely different content.
 
-⚠️ **A cheap in-fiction cause can buy an early rung.** Zara's toll scene happens at corruption
-10 because the boy sprays himself with something that makes her wet before she has decided
-anything. That is `register.md`'s reason axis — *she decided* against *her body decided* —
+⚠️ **A cheap in-fiction cause can buy an early rung:** a plot object that arouses her before she
+has decided anything lets a scene sit low on the meter. That is `register.md`'s reason axis — *she decided* against *her body decided* —
 built as a **plot object** rather than a paragraph of interiority. Used once it is a gift; used
 on every rung it is the game apologising for its own content.
 

@@ -139,3 +139,22 @@ def test_ship_parked_block_row_is_red_and_says_why(tmp_path, monkeypatch):
     block, _ = gates.ship_rows("fx", root=str(tmp_path))
     row = next(b for b in block if b[0] == "no empty rooms")
     assert row[1] is False and "parked, not judged" in row[2]
+
+
+# ── share gates only (LO 2026-09-27) ─────────────────────────────────────────
+def test_an_all_or_nothing_gate_passes_on_one_case():
+    g = game(5)
+    g["canvases"][0]["trigger"]["npc"] = "npc_a"                   # her row now has a surface
+    r, _, _ = result(g, "standing surface")                         # 1/1 rows, every item right
+    assert r["n"] == 1 and r["pass_"] and not r["few"]
+
+
+def test_too_few_is_only_ever_a_share_gate():
+    _, results, _ = result(game(1, with_npc=True), "explicit in repeatable")
+    assert all(r["gate"] in gates.SHARE_GATES for r in results if r.get("few"))
+
+
+def test_every_share_gate_is_a_real_gate():
+    src = open(gates.__file__).read()
+    for name in gates.SHARE_GATES:
+        assert f'gate("{name}"' in src, name

@@ -100,6 +100,11 @@ DECLARED_FILL_TOLERANCE = 0.25
 # (PRD IC21, LO 2026-09-27). Five, not a derived number: it is the smallest sample the
 # two failures that prompted it (1 of 1, 100% of 1) could not have passed on.
 FEW_CASES = 5
+# Only a SHARE gate — a percentage that must reach a floor below 100% — can be "too few to
+# judge": 100% of 1 says nothing about a 50% floor. An all-or-nothing gate (every item must
+# be right) is judged on any n: 3/3 correct is a real PASS (LO, 2026-09-27).
+SHARE_GATES = {"location fill", "explicit floor", "explicit in repeatable",
+               "an explicit beat carries a clip", "traversal heat"}
 
 EXPLICIT_BEAT_FLOOR = 7.5
 # Share of beats carrying 3+ explicit words. DoL held 7.5%-9.3% across eight
@@ -150,6 +155,31 @@ SENTENCE_CEILING = 14
 # therefore APPROXIMATE — it will catch prose drifting denser, but do not read a
 # pass as "matches the field". Tightening it needs the field re-measured on TOML,
 # which is not obtainable: we do not have anyone else's source.
+
+# ── The field's joints, and the floor under the prose (PRD IC6, LO 2026-09-27) ────
+# Every prose threshold above is a MAXIMUM, so compressed prose passed all of them —
+# the_balance's 09-15 build (273f5ec) cut `but` to 0.14 per 1,000 words and still ran a
+# median sentence of 11. What separated it from the field was its JOINTS, not its
+# sentence length, so the floor is on the joints. Measured 2026-09-27 over the 25 games of
+# ~/Documents/Prose_Machine_Sound_Study_20260828/results.json ["field"], built HTML,
+# `field_prose()` + `profile()` from games/the_balance/process/joints.py (copied from
+# measure.py:38): `but` per 1k min 2.46 · p10 2.88 · p25 3.76 · median 4.68 · max 8.44;
+# `and` per 1k min 9.26 · p25 19.14 · median 22.77 · max 41.11; coordination ratio
+# (and/then/or over because/so/since/though/…) p25 1.81 · median 2.08 · max 3.89.
+# LO chose p10 for `but`, not p25: at p25 the model beats in register.md (3.39, one `but`
+# in 295 words) and the_balance HEAD (3.00) would fail.
+FIELD_BUT_P10 = 2.88
+FIELD_AND_MAX = 41.11
+FIELD_JOINT_RATIO = (1.81, 2.08, 3.89)      # p25, median, max — printed, not judged
+JOINTS_MIN_WORDS = 500                      # the field study's own inclusion filter
+# Sentence length and verbless fragments, measured the same day over the 26 Round 1
+# games (~/Documents/Process_Review_20260925/round1_evidence/dump.py, built HTML,
+# G19's split, 2-120 words; fragments = 1-8-word sentences with no finite verb by
+# scripts/readable.py's rule). PRINTED, NOT JUDGED: the loud voice runs short on purpose
+# — the model beats' median is 7, under the field's p25 — so a sentence floor at p25
+# would fail the register LO chose and pass the build it was meant to catch.
+FIELD_SENTENCE_MEDIAN = (8.25, 10.5, 13.0)  # p25, median, p75 of per-game medians
+FIELD_FRAGMENT_SHARE = (11.36, 15.16, 27.61)  # p25, median, p75, % of sentences
 
 DASH_CEILING = 35.0
 # Em and en dashes per 10,000 prose words. The SECOND threshold here that measures
@@ -1291,37 +1321,60 @@ def lint_faceless_surfaces(game):
     return (f"{len(rows)} repeatable canvas(es) name a character and render no portrait"), sorted(rows)
 
 
-# Fields the engine emits VERBATIM. `_resolve_at_references` (v2.py:14646) and its link-text
-# twin (v2.py:14693) are called on block content (v2.py:15193), a location's `description`
-# (v2.py:9864) and `blocked_message` (v2.py:9793), and choice `text` (v2.py:13256) — and on
-# nothing else. Everything below reaches a player with the token still in it. Listed as an
-# explicit whitelist of BAD sites rather than inferred by excluding the good ones: the
-# inverse needs a correct path classifier for every nested block shape, and a wrong one
-# would either miss leaks or convict resolved prose. engine.md §43.
-_TOKEN_SITES_PLAYER = [
-    ("canvases", "name", "the link label, the quest card's canvas_name, the canvas heading"),
-    ("npcs", "description", "the CustomizeCharacters screen — the game's FIRST screen"),
-    ("npcs", "name", "the character's name itself"),
-    ("locations", "name", "the location heading and every nav card"),
-    ("quest_cards", "text", "the quest card"),
-    ("quest_cards", "tip", "the quest card"),
-    ("quest_cards", "ready_text", "the quest card, once ready"),
-    ("quest_cards", "terminal_text", "the quest card, at the end of the ladder"),
-]
-_TOKEN_SITES_DEV = [
-    ("canvases", "description", "dev surfaces only — CanvasReview_*, the --debug banner"),
-]
+# Where the engine resolves an `@token` — every other string reaches the player raw.
+# Taken from the generator's call sites (v2.py), re-read 2026-09-27; engine.md §43 carries
+# the same table. Paths are normalised: every list index becomes "[]".
+#   block content               _resolve_at_references at v2.py:15897 (def :15350)
+#   choice / exit text          _resolve_at_references_expr at v2.py:13937
+#   locations[].description     v2.py:10252 · description_variants[].text v2.py:10276
+#   locations[].blocked_message v2.py:10127 — ⚠️ HALF: the copy in setup.locations
+#                               (v2.py:1039) is raw and navDestBlockedReason prints it
+#                               (v2.py:5241), so a token there leaks onto the nav card
+#   door description / option text / locked_text   v2.py:10209, :12961, :12963
+#   npcs[].role                 v2.py:15985
+#   phone surfaces              setup.resolveAtRefs at runtime, v2.py:2239-2670
+#   story_arc emotion ranges    v2.py:6826, :6838
+_TOKEN_RESOLVED_EXACT = {"locations[].description", "locations[].description_variants[].text",
+                         "npcs[].role"}
+
+
+def _token_resolved(path):
+    if path in _TOKEN_RESOLVED_EXACT:
+        return True
+    if path.startswith("canvases[].nodes[]"):
+        if path.endswith(".content"):
+            return True
+        if path.endswith(".text") and ("choices[]" in path or "exit_block" in path):
+            return True
+    if path.startswith("locations[].properties.door"):
+        return path.endswith((".description", ".text", ".locked_text"))
+    if path.startswith("phone."):
+        return path.endswith((".content", ".text", ".notify", ".player_message",
+                              ".npc_response"))
+    return path.startswith("story_arc.") and path.endswith(".description")
+
+
+def _token_never_rendered(path, owner):
+    """A key the generator never emits: a token there is untrue source, not a leak."""
+    if path == "canvases[].description":
+        return "dev surfaces only — CanvasReview_*, the --debug banner"
+    # npcs[].description reaches only the CustomizeCharacters screen, and only for an
+    # NPC with customizable = true; for everyone else it renders nowhere.
+    if path == "npcs[].description" and not owner.get("customizable"):
+        return f"{owner.get('id')} is not customizable, so its description never renders"
+    return None
 
 
 def lint_unresolved_tokens(game):
-    """`@player` / `@npc` sitting in a field the engine never resolves. A LIST, never a score.
+    """`@player` / `@npc` in a field the engine never resolves. Returns (summary,
+    player_facing_rows, dev_rows); a player-facing row is the `--ship` BLOCK row
+    "no raw token on screen".
 
-    Returns (summary, player_facing_rows, dev_rows) — the two are reported separately
-    because a token on a CanvasReview page is a cosmetic dev artefact and one on the
-    character-creation screen is the first thing anybody sees.
-
-    Scoped to references the engine WOULD have resolved in prose — a declared npc slug or
-    `player` — so an email address or a decorative `@` in a title is not a finding.
+    Walks the WHOLE game, every nested list included — the list this replaced checked
+    eight top-level fields and skipped lists, which is where three of the_balance's nine
+    leaks were (`npcs[].tags`, `relationship_options`). Scoped to references the engine
+    WOULD resolve in prose — a declared npc slug or `player` — so an email address or a
+    decorative `@` is not a finding. engine.md §43.
     """
     known = {"player"}
     for n in (game.get("npcs") or []):
@@ -1329,27 +1382,34 @@ def lint_unresolved_tokens(game):
         known.add(nid)
         if nid.startswith("npc_"):
             known.add(nid[4:])
-    pat = re.compile(r"@(\w+)")
+    pat = re.compile(r"@(\w+(?:\.\w+)?)")
+    player, dev = [], []
 
-    def scan(sites):
-        out = []
-        for section, field, shows in sites:
-            for item in (game.get(section) or []):
-                val = item.get(field)
-                if not isinstance(val, str):
-                    continue
-                hits = sorted({m.group(0) for m in pat.finditer(val)
-                               if m.group(1).split(".")[0] in known})
-                if hits:
-                    # quest_cards carry no `id` — name them by whatever they DO have, or the
-                    # first words of the card, so a finding is findable in the TOML.
-                    who = (item.get("id") or item.get("group") or item.get("ready_canvas")
-                           or item.get("npc_id") or (str(item.get("text", ""))[:28] or "?"))
-                    out.append(f"{section}[{who}].{field}: "
-                               f"{' '.join(hits)} — prints raw on {shows}")
-        return sorted(out)
+    def walk(node, path, owner):
+        if isinstance(node, dict):
+            if "customizable" in node or ("id" in node and "relationship_options" in node):
+                owner = {"id": node.get("id"), "customizable": node.get("customizable")}
+            where = (node.get("id") or node.get("key") or node.get("group")
+                     or node.get("ready_canvas"))
+            for key, value in node.items():
+                walk(value, f"{path}.{key}" if path else key,
+                     dict(owner, at=where or owner.get("at")))
+        elif isinstance(node, list):
+            for item in node:
+                walk(item, f"{path}[]", owner)
+        elif isinstance(node, str):
+            hits = sorted({m.group(0) for m in pat.finditer(node)
+                           if m.group(1).split(".")[0] in known})
+            if not hits or _token_resolved(path):
+                return
+            row = f"{path} [{owner.get('at') or '?'}]: {' '.join(hits)}"
+            why = _token_never_rendered(path, owner)
+            if why:
+                dev.append(f"{row} — {why}")
+            else:
+                player.append(f"{row} — prints raw")
 
-    player, dev = scan(_TOKEN_SITES_PLAYER), scan(_TOKEN_SITES_DEV)
+    walk(game, "", {})
     if not player and not dev:
         return "", [], []
     bits = []
@@ -1357,7 +1417,7 @@ def lint_unresolved_tokens(game):
         bits.append(f"{len(player)} player-facing")
     if dev:
         bits.append(f"{len(dev)} dev-only")
-    return " · ".join(bits), player, dev
+    return " · ".join(bits), sorted(player), sorted(dev)
 
 
 def lint_world_prose(model, game):
@@ -4178,6 +4238,77 @@ def _declared_ladders(state):
     return out
 
 
+_DAY_WORDS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+              "mon", "tue", "tues", "wed", "thu", "thurs", "fri", "sat", "sun")
+_TIME_WORDS = ("weekday", "weekend", "every day", "daily", "each day", "morning",
+               "afternoon", "evening", "night", "tonight", "lunch")
+
+
+def _counter_values(when, counter, top):
+    """The counter values 0..top at which a card's `when` can match, reading only the
+    items on that counter (the other items are the step's own gate, judged elsewhere)."""
+    ops = {"eq": lambda v, x: v == x, "gte": lambda v, x: v >= x, "gt": lambda v, x: v > x,
+           "lte": lambda v, x: v <= x, "lt": lambda v, x: v < x}
+    items = [w for w in when or [] if isinstance(w, dict) and w.get("trait") == counter
+             and (w.get("subject") or "player") == "player"]
+    if not items:
+        return set()
+    vals = set(range(top + 1))
+    for w in items:
+        f = ops.get(w.get("op"))
+        try:
+            x = float(w.get("value"))
+        except (TypeError, ValueError):
+            return set()
+        vals = {v for v in vals if f and f(v, x)}
+    return vals
+
+
+def step_hint_problems(game, state):
+    """(steps checked, problems) — does every declared ladder step have a quest card that
+    is shown exactly while it is the next step, and does that card say where and when?
+    None when no ladder is declared. `--ship` REPORT row; `the-voice.md` R2.
+
+    A card matches step n when its counter items admit exactly {n-1} — `eq n-1`, or
+    `gte n-1` + `lt n`. Place = the location's name or id in the tip or a goal label;
+    time = a day word, a part of the day, or the window's from/to.
+    """
+    ladders = _declared_ladders(state)
+    if not ladders:
+        return None
+    locs = {l.get("id"): str(l.get("name") or l.get("id")) for l in game.get("locations") or []}
+    cards = [c for c in game.get("quest_cards") or [] if isinstance(c, dict)]
+    checked, probs = 0, []
+    for who, lad in ladders:
+        counter = lad.get("counter")
+        steps = sorted(lad.get("steps") or [], key=lambda st: st.get("n", 0))
+        top = max([st.get("n", 0) for st in steps] + [0])
+        for st in steps:
+            n, checked = st.get("n"), checked + 1
+            mine = [c for c in cards if c.get("npc_id") == who
+                    and _counter_values(c.get("when"), counter, top) == {n - 1}]
+            if not mine:
+                probs.append(f"{who} step {n} ({st.get('canvas')}): no card is shown while it "
+                             f"is the next step — generate one with guidance_from_ladder.py")
+                continue
+            blob = " ".join([str(c.get("tip") or "") for c in mine]
+                            + [str(g.get("label") or "") for c in mine
+                               for g in c.get("goals") or [] if isinstance(g, dict)]).lower()
+            where = st.get("where") or ""
+            when = st.get("when") or {}
+            place_ok = bool(where) and (where.lower() in blob
+                                        or locs.get(where, "\0").lower() in blob)
+            # whole words, so "money" is not Monday and "sunset" is not Sunday
+            time_ok = (bool(re.search(r"\b(" + "|".join(_TIME_WORDS + _DAY_WORDS) + r")s?\b",
+                                      blob))
+                       or any(str(when.get(k) or "\0") in blob for k in ("from", "to")))
+            missing = [x for x, ok in (("the place", place_ok), ("the time", time_ok)) if not ok]
+            if missing:
+                probs.append(f"{who} step {n} ({st.get('canvas')}): its card does not name "
+                             f"{' or '.join(missing)} (`{where}`, {when.get('from')}–{when.get('to')})")
+    return checked, probs
+
+
 def _ladder_cond_key(item):
     """A comparable key for a condition, in either the canvas spelling or the declared one."""
     kind, key, op, val = _cond_parts(item)
@@ -4497,6 +4628,127 @@ def lint_flag_never_resets(game, state):
         return f"all {len(candidates)} resetting flag(s) are unset somewhere", []
     return (f"{len(stuck)} of {len(candidates)} resetting flag(s) are set and never unset — "
             f"not in any effect, not in [engine.daily_tick]", stuck)
+
+
+_JOINT_COORD = ("and", "then", "or")
+_JOINT_SUBORD = ("because", "so", "since", "though", "although", "while", "whereas",
+                 "after", "before", "until", "when", "once")
+_GLOSS = re.compile(r", (which (is|was|means)|and that is the|that is the)\b", re.I)
+
+
+def _joint_prose(game, types=("paragraph", "dialog", "thought_bubble"), locations=True):
+    """The prose the joint rates are counted over — `our_prose()` in
+    games/the_balance/process/joints.py, on a game dict instead of a path."""
+    out = []
+
+    def walk(blocks):
+        for block in blocks or []:
+            if not isinstance(block, dict):
+                continue
+            if block.get("type") in types and isinstance(block.get("content"), str):
+                out.append(block["content"])
+            props = block.get("props") or {}
+            for beat in props.get("beats") or []:
+                walk(beat.get("blocks"))
+            walk(props.get("blocks") or block.get("blocks"))
+
+    for canvas in game.get("canvases") or []:
+        for node in canvas.get("nodes") or []:
+            walk(node.get("blocks"))
+    if locations:
+        for loc in game.get("locations") or []:
+            if isinstance(loc.get("description"), str):
+                out.append(loc["description"])
+    return " ".join(out)
+
+
+def _joint_count(text, word):
+    return len(re.findall(r"(?<![\w])" + word + r"(?![\w])", text, re.I))
+
+
+def _joint_profile(text):
+    words = len(text.split())
+    w = words or 1
+    coord = sum(_joint_count(text, x) for x in _JOINT_COORD)
+    sub = sum(_joint_count(text, x) for x in _JOINT_SUBORD)
+    return {"words": words, "and_1k": _joint_count(text, "and") * 1000 / w,
+            "but_1k": _joint_count(text, "but") * 1000 / w,
+            "ratio": coord / max(sub, 1), "gloss": len(_GLOSS.findall(text))}
+
+
+def lint_joints(game):
+    """The joints beside the field, and the screens whose sentences run shortest.
+    A LIST: `prose has room` judges `but` and `and`; this prints the rest."""
+    jp = _joint_profile(_joint_prose(game))
+    if jp["words"] < JOINTS_MIN_WORDS:
+        return "", []
+    lo, med, hi = FIELD_JOINT_RATIO
+    summary = (f"coordination ratio {jp['ratio']:.2f} (field p25 {lo} · median {med} · max {hi})"
+               f" · {jp['gloss']} `, which is` gloss(es)")
+    rows = []
+    for canvas in game.get("canvases") or []:
+        text = _joint_prose({"canvases": [canvas]}, ("paragraph", "thought_bubble"), False)
+        lens = [len(x.split()) for x in re.split(r"(?<=[.!?])\s+", text) if x.strip()]
+        if len(lens) >= 3:
+            rows.append((_median(lens), f"{canvas.get('id')}: median sentence {_median(lens)}"))
+    return summary, [r for _, r in sorted(rows)[:5]]
+
+
+def lint_readable(game):
+    """The three checks in scripts/readable.py: (pronoun rows, note), event rows,
+    (verbless rows, sentences seen)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import readable
+    universal = (_opening_flags(game) or set()) - {
+        f for f, ops in _flag_ops(game).items() if ops & {"unset", "clear", "remove"}}
+    return readable.dangling(game), readable.unearned_events(game, universal), \
+        readable.verbless(game)
+
+
+def _flag_ops(game):
+    ops = collections.defaultdict(set)
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for fe in obj.get("flagEffects") or []:
+                if isinstance(fe, dict) and fe.get("flag"):
+                    ops[fe["flag"]].add(str(fe.get("op") or "set"))
+            for v in obj.values():
+                walk(v)
+        elif isinstance(obj, list):
+            for v in obj:
+                walk(v)
+
+    walk(game)
+    return ops
+
+
+CHEAT_BASICS = (("money", "trait"), ("skip to morning", "next_day"),
+                ("the next step now", "play"), ("ask again", "reopen"))
+
+
+def lint_cheat_page(game):
+    """`[ui.cheat_page]` — is there one, and are the four time-savers free? Reported,
+    never a gate (`the-systems.md` SY7).
+
+    WHY. The most-liked comment on 8 of the study's 13 core mopoga pages asks for a cheat
+    or a code, and a phone player cannot open a console. A basic sold behind a code is
+    listed because it is the one thing SY7 says to give away; a missing basic is listed
+    because the author may have cut it on purpose ("ask again" in a game whose every "no"
+    parks), so it is a list to read, not a failure.
+    """
+    page = (game.get("ui") or {}).get("cheat_page")
+    if not isinstance(page, dict):
+        return "none — the most-asked-for feature in the field (the-systems.md SY7)", []
+    rows = [g for g in page.get("grants") or [] if isinstance(g, dict)]
+    free = [g for g in rows if g.get("free") is True]
+    coded = [g for g in rows if g.get("free") is not True]
+    have = {g.get("kind") or "trait" for g in free}
+    findings = [f"no free '{name}' row" for name, kind in CHEAT_BASICS if kind not in have]
+    findings += [f"'{g.get('id')}' ({g.get('kind')}) is a time-saver sold behind a code"
+                 for g in coded if (g.get("kind") or "trait") != "trait"]
+    return (f"{len(free)} free row(s), {len(coded)} behind a code · "
+            f"{4 - sum(1 for _, k in CHEAT_BASICS if k not in have)} of 4 basics free"), findings
 
 
 def lint_repeatables_without_step(model, state):
@@ -6202,7 +6454,8 @@ def score(model, game, state=None, game_dir=None):
         if r["na"] and p is not None and not p["na"]:
             r.update(na=False, pass_=False, parked=True,
                      headline=(f"parked, not judged — with the parked content: "
-                               f"{'PASS' if p['pass_'] else 'FAIL'} · {p['headline']}"),
+                               f"{'PASS' if p['pass_'] else 'TOO FEW' if p.get('few') else 'FAIL'} · "
+                               f"{p['headline']}"),
                      detail=[f"parked content: {', '.join(rel[:6])}"
                              + (f" and {len(rel) - 6} more" if len(rel) > 6 else "")])
             info["marked"] += 1
@@ -6237,7 +6490,7 @@ def run_gates(model, game, state=None):
         # `milestones open something` 1 of 1. It reports "too few to judge" and counts
         # in the tally as not passing. A FAIL on few cases stays a FAIL: a miss is a miss.
         n = _N.get(name)
-        few = ok is True and isinstance(n, int) and n < FEW_CASES
+        few = name in SHARE_GATES and ok is True and isinstance(n, int) and n < FEW_CASES
         if isinstance(n, int) and f" of {n}" not in headline and f"/{n}" not in headline:
             headline = f"{headline} (n = {n})"
         if few:
@@ -8851,13 +9104,35 @@ def run_gates(model, game, state=None):
     margin = SENTENCE_CEILING - med_sent
     gate("sentence length", None if not sent_words else med_sent <= SENTENCE_CEILING,
          f"median sentence {med_sent} words across {len(sent_words):,} sentences "
-         f"(ceiling {SENTENCE_CEILING}, margin {margin:+d}) · field median 10",
+         f"(ceiling {SENTENCE_CEILING}, margin {margin:+d}) · field median 10, p25 "
+         f"{FIELD_SENTENCE_MEDIAN[0]} — the floor is printed, not judged (prose has room)",
          ([] if med_sent <= SENTENCE_CEILING else
           ["field median is 10 words; the reference game is 9",
            "escalate by adding beats, not by lengthening sentences"])
          + ([f"⚠️ sitting ON the ceiling. {SENTENCE_CEILING} is a backstop calibrated across "
              f"two extraction bases, not a target — the field runs 10 and the reference game 9."]
             if sent_words and margin <= 0 else []))
+
+    # prose has room — the first FLOOR under the writing (PRD IC6). Every other prose
+    # check is a ceiling; this one fails prose that has dropped its joints: too few `but`
+    # (nothing is set against anything) or more `and` than any game in the field (a list
+    # where there should be a relationship). Same base as the field figures: paragraph,
+    # dialog and thought text, plus each location's description.
+    jp = _joint_profile(_joint_prose(game))
+    if jp["words"] < JOINTS_MIN_WORDS:
+        gate("prose has room", None,
+             f"{jp['words']} prose words — under {JOINTS_MIN_WORDS}, too little to judge a rate")
+    else:
+        low_but = jp["but_1k"] < FIELD_BUT_P10
+        high_and = jp["and_1k"] > FIELD_AND_MAX
+        gate("prose has room", not (low_but or high_and),
+             f"`but` {jp['but_1k']:.2f}/1k (floor {FIELD_BUT_P10}, field p10) · `and` "
+             f"{jp['and_1k']:.1f}/1k (field max {FIELD_AND_MAX}) · over {jp['words']:,} words",
+             ([f"`but` is under the field's p10: the prose sets nothing against anything. "
+               f"Name the relationship — but, because, so, until — or split (register.md, "
+               f"\"Joints\")"] if low_but else [])
+             + ([f"`and` is over every game in the field: a list where a relationship "
+                 f"belongs"] if high_and else []))
 
     # G43 — prose texture. The SECOND gate here that measures writing.
     #
@@ -10415,7 +10690,7 @@ def selfcheck_mode():
 # exactly as it was: their exit codes are read, and their [FAIL] lines are quoted.
 
 SHIP_REPORT_GATES = [
-    "somebody speaks", "every hub is met first", "an explicit beat carries a clip",
+    "prose has room", "somebody speaks", "every hub is met first", "an explicit beat carries a clip",
     "explicit floor", "location fill", "the walk-in floor", "traversal heat",
     "sentence length",
 ]
@@ -10521,6 +10796,10 @@ def ship_rows(slug, root=None):
     rp = (state or {}).get("release_page") or {}
 
     # ── the four untrue or silent screens (lints promoted for shipping) ──────
+    _tok_s, _tok_player, _tok_dev = lint_unresolved_tokens(game)
+    B("no raw token on screen", not _tok_player,
+      f"{len(_tok_player)} @token(s) on a surface the engine never resolves"
+      if _tok_player else "every @token sits where the engine resolves it", _tok_player[:10])
     s, hits = lint_past_claim(game)
     B("no past claim on a repeatable", not hits,
       s or "no repeatable screen to check", hits[:10])
@@ -10603,8 +10882,15 @@ def ship_rows(slug, root=None):
             head += (" · field: per paragraph the median game is 4.4% and 8 of 26 meet 7.5%; "
                      "per passage the median is 28–33% and DoL, the source of 7.5%, is lowest")
         report.append((gname, None if r["na"] else r["pass_"], head, []))
-    report.append(("a hint line with place and time per step", None,
-                   "not measured yet — PRD WS10", []))
+    hints = step_hint_problems(game, state)
+    if hints is None:
+        report.append(("a hint line with place and time per step", None,
+                       "n/a — no ladder declared", []))
+    else:
+        h_checked, h_probs = hints
+        report.append(("a hint line with place and time per step", not h_probs,
+                       f"{h_checked - len(h_probs)}/{h_checked} steps have a card that says "
+                       f"where and when", h_probs[:10]))
     shown = set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
@@ -10765,6 +11051,9 @@ def main():
     dep_summary, dep_lints = lint_paid_repeatable_deposits(model, game, state)
     grow_summary, grow_lints = lint_repeatables_without_step(model, state)
     reset_summary, reset_lints = lint_flag_never_resets(game, state)
+    cheat_summary, cheat_lints = lint_cheat_page(game)
+    joint_summary, joint_lints = lint_joints(game)
+    (pron_rows, pron_note), event_rows, (vl_rows, vl_seen) = lint_readable(game)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
     _slug = (os.path.basename(os.path.dirname(os.path.dirname(path)))
@@ -10840,6 +11129,15 @@ def main():
                                                                  "findings": grow_lints},
                                     "flag_never_resets": {"summary": reset_summary,
                                                           "findings": reset_lints},
+                                    "cheat_page": {"summary": cheat_summary,
+                                                   "findings": cheat_lints},
+                                    "joints": {"summary": joint_summary,
+                                               "findings": joint_lints},
+                                    "pronoun_nobody": {"note": pron_note,
+                                                       "findings": pron_rows},
+                                    "past_event_not_given": {"findings": event_rows},
+                                    "short_lines_no_verb": {"sentences": vl_seen,
+                                                            "findings": vl_rows},
                                     "obligation_vs_week": {"summary": oblig_summary,
                                                            "findings": oblig_lints},
                                     "collector_is_target": {"summary": coll_summary,
@@ -11459,6 +11757,50 @@ def main():
             print("          (a LIST, never a score. The name promises a reset the game never runs:"
                   " once set, it holds for the whole save. Clear it in [engine.daily_tick], or"
                   " rename it if it really is once-per-save — engine.md §28)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · a cheat page exists — {cheat_summary}")
+    for h in cheat_lints[:10]:
+        print(f"          · {h}")
+    if cheat_lints:
+        print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
+              " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
+
+    if joint_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the joints — {joint_summary}")
+        for h in joint_lints:
+            print(f"          · {h}")
+        print("          (a LIST, never a score. `prose has room` judges `but` and `and`; the"
+              " ratio and the glosses are for reading — register.md, \"Joints\" and L1)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · a pronoun with nobody to point at — "
+          f"{pron_note or f'{len(pron_rows)} screen(s) or place(s)'}")
+    for h in pron_rows[:10]:
+        print(f"          · {h}")
+    if pron_rows:
+        print("          (a LIST, never a score. Put the person on screen before the pronoun:"
+              " a role, a name, or a token — register.md, \"A pronoun needs someone\")")
+
+    if event_rows:
+        print(f"  {'─'*72}")
+        print(f"  lint · a past event the player was never given — {len(event_rows)} line(s)")
+        for h in event_rows[:10]:
+            print(f"          · {h}")
+        print("          (a LIST, never a score. Gate the line on the flag that records it,"
+              " or cut it — register.md, \"The truth rule\")")
+
+    vl_share = 100 * len(vl_rows) / vl_seen if vl_seen else 0.0
+    print(f"  {'─'*72}")
+    print(f"  lint · short lines with no verb — {len(vl_rows)} of {vl_seen:,} sentences "
+          f"({vl_share:.1f}%; field p25 {FIELD_FRAGMENT_SHARE[0]} · median "
+          f"{FIELD_FRAGMENT_SHARE[1]} · p75 {FIELD_FRAGMENT_SHARE[2]})")
+    for h in vl_rows[:8]:
+        print(f"          · {h}")
+    if vl_rows:
+        print("          (a LIST, never a score, and approximate: a curated verb list, no tagger."
+              " A fragment is a choice, not a defect — read them)")
 
     if vol_summary:
         print(f"  {'─'*72}")

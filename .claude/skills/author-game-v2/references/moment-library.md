@@ -107,10 +107,10 @@ The house, and who is in the next room. The relationship is the transgression.
   Remembered because: "I'd really love the chance for something romantic happening between Bobby and MC"
 - **Cupid's Way — her mother walks in** (`[damien23]`) · "Damien pulls his hands out of your pants but from your mom's expression"
   Remembered because: "The mother walking in on her in her bedroom with damien was hot"
-- **Cupid's Way — mom home, the boyfriend hides** (`[aaron76]`) · "Aaron hides in the closet, while you got meet your mom"
-  Remembered because: The same shape players praised: "The mother walking in on her in her bedroom with damien was hot".
-- **Cupid's Way — watching her mom with her boyfriend** (`[ma8]`) · "You only watch as your mom takes Aaron's cock out and starts sucking it."
-  Remembered because: Players asked about it: "What’s the new event with the mom". She set it up herself.
+- **In Her Own Hands — the shower at the sleepover** (`[Abby_Bath_Shower1a]`) · "'And watch?' she teased, already peeling layers off her body."
+  Remembered because: [my reading] the shared bathroom at night; after two visits the menu offers the shower together.
+- **Shady Deals — the crew at her pool** (`[Pool Event Quickie]`) · "When you step back out, all conversation dies."
+  Remembered because: [my reading] her own house, her own crew watching, and she picks one of them.
 - **Shady Deals — a crewman in her bedroom** (`[Gang GH Yap Event]`) · "Your bedroom door clicks shut behind him, and you’re already sinking to your knees"
   Remembered because: Players want this: "Is there no way to interact with already recruited gang members?" She invites him in.
 

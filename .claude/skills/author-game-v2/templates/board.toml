@@ -59,6 +59,49 @@ starting_day  = "Monday"
 starting_week = 1
 
 
+# ── the cheat page — FREE where it saves time (references/the-systems.md SY7) ─
+#   A MENU TO CUT DOWN, not a set: uncomment the rows this game can use and delete
+#   the rest. `free = true` makes a row a plain button for everyone — no code, works
+#   on a phone. A row without it is sold behind a code, and then join_note, a
+#   join_url (or [project] support_url) and `package_from_toml --codes` are required.
+#   The engine guide and every rule on these rows: references/engine.md §48.
+#
+# [ui.cheat_page]
+# title = "Shortcuts"
+# intro = "<one line — what these buttons are for>"
+#
+# [[ui.cheat_page.grants]]              # money
+# id = "money"
+# label = "Money"
+# trait = "money"
+# value = 100
+# clamp = false                         # a wallet is unbounded; the 0-100 clamp would cap it
+# free = true
+#
+# [[ui.cheat_page.grants]]              # skip to morning — the real day rollover
+# id = "skip_day"
+# label = "Skip to morning"
+# kind = "next_day"
+# wake = "06:00"
+# free = true
+#
+# [[ui.cheat_page.grants]]              # the next step now — plays the scene, one row per step
+# id = "<step>_now"
+# label = "<her words for the step>"
+# kind = "play"
+# canvas = "<one-time step canvas id>"
+# at_cap_text = "Not open yet."
+# free = true
+#
+# [[ui.cheat_page.grants]]              # ask again — only a flag a trigger reads is_false
+# id = "<door>_again"
+# label = "Ask <name> again"
+# kind = "reopen"
+# flag = "<refusal flag>"
+# hint = "<one line — what reopens>"
+# free = true
+
+
 # ── meters ───────────────────────────────────────────────────────────────────
 #   ⚠️ ANSWER W1 BEFORE YOU NAME A SINGLE METER: does the PLAYER climb, or does
 #      the CAST? references/the-meters.md W1. Declare it as `who_climbs` in

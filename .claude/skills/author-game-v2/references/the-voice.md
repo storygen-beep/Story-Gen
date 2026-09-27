@@ -9,7 +9,7 @@ unambiguous on a first read, by someone who has never seen the game.
 
 > **The game's own voice is plain. It names a thing or an action, and it never performs.**
 
-**The loud voice stops at the edge of the story.** Since 2026-09-24 the story text is written loud
+**The loud voice stops at the edge of the story.** The story text is written loud
 (`register.md`, "The voice — say it loud"): feelings said, drama pushed, her thoughts on screen.
 None of that crosses into labels, buttons, room names or guidance cards. A button reads
 *Take a shift*, never *Drag yourself to another miserable shift*.
@@ -72,9 +72,9 @@ atmosphere — they are the ladder, and they are the only thing on the screen th
 what the next click does to her. The field ships them bare and crude at the character's ceiling:
 
 ```
-destroyer   Keep blowing · Pound her ass · Pound her pussy · Cum · Go back
-vesper      Keep him in your mouth · Turn over — give him your ass · Let him finish inside you
-corpo-life  Kiss Her · Handjob · Cum in mouth · Fuck Her
+in-her-own-hands  Let James finger you · Give James a blowjob · Let James eat you out · Have sex
+vesper            Keep him in your mouth · Turn over — give him your ass · Let him finish inside you
+shady-deals       Tease him · Grope him · Ride him
 ```
 
 A loop whose exits say *Continue* or *Go on* has thrown away the only readable thing about it. This
@@ -146,33 +146,28 @@ clock should state the *duration*, in one form held across the game, and that du
 the real spend. `references/the-clock.md` C3 and C4 own both, and C4 carries the reason the
 duration half is a lint rather than a gate.
 
-### R2 · Every ascent tier carries a visible ladder
+### R2 · Every step carries a card line; every ascent tier keeps its card
 
-A v2 game has **no mission and no ending**, so the top of the guidance page is not a story spine —
-it is the **tiers themselves**. One card per band of each ascent meter, so the page always answers
-*what is the next rung, and what raises it.*
+**A person's cards come from their ladder, one per step, and each says where and when.** The
+field's best guidance is one line per character step naming the place and the time; a card keyed to
+a meter band tells the player a number, not a place (Round 3 §2.5; being lost is the top complaint,
+15.5% of Round 1 comments). Each declared ladder step (`board.characters[].ladder`) names its place
+and window, so `scripts/guidance_from_ladder.py <slug>` writes the cards; the author writes the lines.
+The tip may be in her voice (*"I wonder what he's into…"*, In Her Own Hands) if the place and time
+stay in it. `--ship` reports any step without such a card.
 
-Use a stepped trait-band shape: gate each card `gte X` + `lt Y` so exactly one matches, and the
-picker swaps it as the meter crosses.
+A v2 game has **no mission and no ending**, so Story Goals is the **ascent tiers**: each
+keeps one card (the `guidance exists` gate), gated `gte X` + `lt Y` so exactly one matches.
 
-```
-nerve  < 15            "Stop covering up around them"      goal -> 15
-nerve  >= 15  < 35     "Let it happen and don't move away"  goal -> 35
-nerve  >= 35  < 55     "Start it yourself"                  goal -> 55
-nerve  >= 55  < 75     "Make it routine"                    goal -> 75
-nerve  >= 75           flag rung, or terminal               (see R5)
-```
-
-**That ladder as TOML, which this file has never shown.** `[[quest_cards]]` is flat and top-level —
+**A card as TOML.** `[[quest_cards]]` is flat and top-level —
 **not** `[[quests]]`, which is an unrelated table (`engine.md` §23):
 
 ```toml
-# One rung of an ascent ladder. A card with npc_id renders in that character's
-# section; a card without one renders under "Story Goals".
+# An ascent-tier card: no npc_id, so it renders under "Story Goals". A person's
+# cards carry npc_id and come from guidance_from_ladder.py.
 [[quest_cards]]
 priority = 90
-npc_id   = "<npc_id>"
-text     = "<where she is on this ladder, in the fiction — two or three sentences>"
+text     = "<where she is on this tier, in the fiction — two or three sentences>"
 tip      = "<the route: a PLACE, a PERSON where there is one, and a VERB. R3.>"
 when     = [ { trait = "<meter>", subject = "player", op = "gte", value = 15 },
              { trait = "<meter>", subject = "player", op = "lt",  value = 35 } ]
@@ -206,9 +201,8 @@ without `ne` — whose switch has **no `ne` case and falls through to `return fa
 always false, and a card that never matches leaves a blank row rather than an error. Canvas
 conditions are a different path and do support it. `engine.md` §37.
 
-⚠️ **`gte X` + `lt Y` on every rung, so exactly one matches.** An `lt`-only gate is a *window*: the
-card vanishes the moment the meter passes it and the character's row goes blank. A `gte`-only
-ladder matches every rung at once and the picker's priority order silently decides the game.
+⚠️ **An `lt`-only gate is a *window*:** the card vanishes the moment the meter passes it and the row
+goes blank. A `gte`-only set matches every card at once and priority silently decides.
 
 ### R3 · Name the feeder, not the number
 
@@ -234,9 +228,8 @@ Measured 2026-09-03 across 23 female-lead games and 5,663 player comments: **bei
 killer, and it is not grind.** The shape is always the same — content she can see, a requirement
 she cannot. The corpus's single most-liked complaint of this kind:
 
-> *"Stuck at home still, in endless loop of fucking everyone, but not being confident enough to do
-> anything in the living room. **Does corruption have to be at a certain level? What's needed?**"*
-> — `den-of-infamy`, 52 likes
+> *"…not being confident enough to do anything in the living room. **Does corruption have to be at a
+> certain level? What's needed?**"* — `den-of-infamy`, 52 likes (the sexual half of the line cut)
 
 ⚠️ **Content and effort do not save you.** `in-her-own-hands` ships **136 passages for one
 character** and an **881-word hint page** for him, whose locked state reads *"This hint is locked

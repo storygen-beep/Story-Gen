@@ -51,8 +51,8 @@ Record these as `want.fantasy_shape`, `want.model_to_beat` and `want.moment_kind
 **What does the player choose about her at minute zero?** <the start choice, or `none`>
 
 > **Choosing matters, and so does the premise.** `freedom` (25.9%) is the largest thing the male-heavy
-> top 30 is loved for. For a female lead, players name the premise too: the Prom Queen letter, the
-> missing girl, the brother in the next room. Give her both: a premise in §0, and a choice here.
+> top 30 is loved for. For a female lead, players name the premise too: her first year away from
+> home, a crew she has to run, a life she has to pay for on her own. Give her both: a premise in §0, and a choice here.
 >
 > **A memory, not a slider.** Do not build a stat screen. Ask her something the scene is already
 > asking — the answer reveals what she did before — and set a flag from it. See §3: what the flag
@@ -86,7 +86,7 @@ field's *fourth* most common hold. Pick from what the field actually uses — th
 often, never how good:
 
 - [ ] `ambition` — **5 of 23, the largest.** She picked the thing herself and the world charges
-      for it. *"become the Prom Queen… no matter what the cost"*
+      for it: the job, the name, the house she wants, and a price the world names
 - [ ] `bill` — **4 of 23.** A recurring money demand with a collector and a date.
       `the-economy.md` R3 owns the mechanism, and §4's collector rule applies
 - [ ] `order` — **3 of 23.** An institution, a sentence or a mission. Somebody with authority
@@ -124,7 +124,7 @@ one sentence because this slot used to hold a filled-in example. Write hers, in 
 - **The rival:** <who wants the same thing, or stands in her way>
 
 The hold may go quiet; **the goal or the mystery stays alive**, and the guidance page carries it. A goal
-announced and then forgotten is a named player complaint (Zara's Prom Queen). Record it as `want.promise`.
+announced and then forgotten is a named player complaint. Record it as `want.promise`.
 
 **Where the hold stops being the reason:** <the moment she still does it and the reason has changed —
 §4's Transformation charge, stated as a moment>
