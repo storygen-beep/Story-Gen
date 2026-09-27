@@ -163,8 +163,7 @@ it is the only one anyone asked to skip, at one comment and one like. That is n 
 read off it would be invented, per the P0 refusal.
 
 **W4 · The distinctive axis is the cast, not the player — and it is already built.** The field's
-creation screens ask *"Veronika is my ___"*, *"Amy is my little ___"*, *"What is her relationship
-to you and $karlee:"*. The player names the household and the kinship inside it, which in this
+creation screens ask the player to fill in each person's relation to her. The player names the household and the kinship inside it, which in this
 genre is the setting. We ship this already: `npcs[].relationship_options` renders a picker on the
 same screen, the pick lands on the NPC, the cast page prints it, and prose has a token for it —
 **`@<npc>.rel`**. It is written **11 times in the whole repo**. See `engine.md` for the field
@@ -348,26 +347,23 @@ reason — `the collector is also the target` prints his share and never fails a
 #### 4b. The default is that she wants it and goes and gets it
 
 Added 2026-09-03, because the opposite was assumed and it is measurably wrong. Classifying every
-act scene in `zaras-school-life` by whether she states a plain want or gives herself a practical
-reason:
+act scene in `zaras-school-life` (numbers only; it fails the adults-only rule) by whether she
+states a plain want or gives herself a practical reason:
 
 ```
 DIRECT — "she just wants him"      36 scenes    median gate corruption 25    lowest 5
 EXCUSE — a practical reason         5 scenes    median gate corruption 60    highest 80
 ```
 
-**Seven to one in favour of direct, and direct starts at 5.** She propositions a stranger in the
-men's locker room at 20 — *"Zara got her mark… 'What do you say, big boy, we just find a nice
-little area for ourselves and I show you the time of your life?'"* No problem to solve, no
-appointment, no justification.
+**Seven to one in favour of direct, and direct starts at 5.** A little higher she propositions a
+stranger — no problem to solve, no appointment, no justification. The passing games say it the
+same way: *"I really want this, Bobby. Please don't stop"* (In Her Own Hands).
 
 So do not design a reason for every act. **Design what stops her**, and let the meter be how far
 she will go (`the-meters.md` W1b).
 
 ⚠️ **Deniability is a late tool for the target she cannot face.** The five excuse-shaped scenes —
-*"she did not realize it yet, but her top had slipped"*, *"the door was left ajar (or did someone
-open it?)"*, *"causing her top to slip down"* — gate at **45–80** and **every one is family**,
-behind that game's `$famSexUnlocked`. She notices half a second too late, every time, which lets
+a slipped top, a door left open — gate at **45–80**, every one behind that game's hardest unlock. She notices half a second too late, every time, which lets
 her escalate without deciding to and lets the player enjoy it without her becoming a cartoon.
 
 **Use it for the one or two people the charge makes unapproachable — under Reversal, the person

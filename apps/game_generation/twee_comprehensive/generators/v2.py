@@ -10624,6 +10624,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         )
 
         rows = [self._cheat_row_markup(g) for g in grants]
+        # Free rows (IC4) are plain buttons. The code box, the join line and the
+        # restore call exist only for rows that are sold, so an all-free page carries
+        # none of them — and a page with no free rows is byte-identical to before.
+        has_coded = any(not g.get("free") for g in grants)
 
         # Failure copy names the build. We cannot tell a wrong code from a right code
         # for another release (the hash is salted with the version, so both simply
@@ -10666,17 +10670,41 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             f"<h2>{title}{badge}</h2>",
             '<div class="npc-section">',
         ]
+        if not has_coded:
+            body.remove("<<run setup.cheatRestore()>>")
         if intro:
             body.append(f'<div class="cheat-intro">{html.escape(intro)}</div>')
-        body.extend(entry)
-        if join_block:
-            body.append(join_block)
+        if has_coded:
+            body.extend(entry)
+            if join_block:
+                body.append(join_block)
         body.extend(rows)
         body.append("</div>")
         body.append("<</nobr>>")
         body.append('<<link "← Back">><<run setup.smartBack()>><</link>>')
 
-        return widget + "\n" + self._generate_cheat_code_script() + "\n" + "\n".join(body) + "\n"
+        script = self._generate_cheat_code_script() if has_coded else ""
+        if any(g.get("kind") == "play" for g in grants):
+            script += self._cheat_play_script()
+        return widget + "\n" + script + "\n" + "\n".join(body) + "\n"
+
+    @staticmethod
+    def _cheat_play_script() -> str:
+        """`setup.cheatCanPlay` — may this one-time canvas be played from the cheat page?
+
+        Exactly the checks the canvas makes when it is offered in its room, minus the
+        two the row exists to skip: the place and the hours. Its trigger conditions and
+        its fired-once record still decide, so a step that is not open yet stays shut.
+        """
+        return (
+            ":: CheatPlayScript [script]\n"
+            "setup.cheatCanPlay = function (id) {\n"
+            "    var c = setup.getCanvasById(id);\n"
+            "    if (!c || c.isActive === false) { return false; }\n"
+            "    if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) { return false; }\n"
+            "    return setup.canTriggerCanvas(c.id, c.isRepeatable, c.maxPerDay);\n"
+            "};\n"
+        )
 
     # FNV-1a 32-bit. Chosen because it is four lines in both Python and JavaScript and
     # needs no library on either side; `crypto.subtle` is async and would turn every
@@ -10813,6 +10841,75 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         no code for emits nothing at all. A padlocked placeholder would tell a free
         player exactly what is on sale and how many there are; nothing is the point.
         """
+        kind = g.get("kind") or "trait"
+        if kind != "trait":
+            row = self._cheat_action_row_markup(g, kind)
+        else:
+            row = self._cheat_trait_row_markup(g)
+        if g.get("free"):
+            return row
+        unlock = f'$flags["cheat_{g.get("id")}"]'
+        return f'  <<if {unlock}>>\n{row}\n  <</if>>'
+
+    def _cheat_action_row_markup(self, g: dict, kind: str) -> str:
+        """The three time-saving rows (IC4). None of them can skip content — see
+        template_import._validate_cheat_action_row for why each is shaped as it is."""
+        label = str(g.get("label") or "")
+        hint = g.get("hint") or ""
+        hint_div = f'<div class="cheat-hint">{html.escape(hint)}</div>' if hint else ""
+
+        def shut(btn, why):
+            return (f'<span class="cheat-row-maxed">{btn}</span>'
+                    f'<div class="cheat-at-cap">{html.escape(why)}</div>')
+
+        if kind == "next_day":
+            btn = html.escape(str(g.get("button_text") or label or "Skip to morning"))
+            hh, mm = (g.get("wake") or "06:00").split(":")
+            ts = "State.variables.game_state.time_state"
+            return (
+                f'  <div class="cheat-row"><<link "{btn}" "CheatPage">><<script>>'
+                f'window.advanceDay();{ts}.current_hour = {int(hh)};'
+                f'{ts}.current_minute = {int(mm)};<</script>><</link>>{hint_div}</div>'
+            )
+        if kind == "reopen":
+            btn = html.escape(str(g.get("button_text") or label or "Ask again"))
+            flag = json.dumps(str(g.get("flag")))
+            return (
+                f'  <div class="cheat-row">\n'
+                f'    <<if $flags[{flag}]>><<link "{btn}" "CheatPage">>'
+                f'<<run window.applyFlagEffect("player", null, {flag}, "unset")>>'
+                f'<</link>>{hint_div}\n'
+                f'    <<else>>{shut(btn, "Nothing to ask again.")}\n'
+                f'    <</if>>\n'
+                f'  </div>'
+            )
+        # kind == "play": resolve the TOML canvas id to the built canvas.
+        btn = html.escape(str(g.get("button_text") or label or "Next step now"))
+        canvas = next((c for c in (self.story_canvases or [])
+                       if (c.metadata or {}).get("slug") == g.get("canvas")), None)
+        nodes = list(self._get_canvas_nodes_ordered(canvas)) if canvas is not None else []
+        if canvas is None or not nodes:
+            raise ValueError(
+                f"cheat page: row '{g.get('id')}' plays canvas '{g.get('canvas')}', "
+                f"which was not built — the button would lead nowhere"
+            )
+        passage = self._node_passage_name(
+            "Canvas", self._sanitize_canvas_name(self._get_canvas_slug(canvas)), nodes[0])
+        cid = json.dumps(str(canvas.id))
+        at = g.get("at_cap_text") or "Not open yet — the story has not reached it."
+        return (
+            f'  <div class="cheat-row">\n'
+            # No markCanvasTriggered here: the first node marks itself on entry
+            # (the `mark_trigger` script), so marking twice would count it fired twice.
+            f'    <<if setup.cheatCanPlay({cid})>><<link "{btn}" "{passage}">>'
+            f'<</link>>{hint_div}\n'
+            f'    <<else>>{shut(btn, at)}\n'
+            f'    <</if>>\n'
+            f'  </div>'
+        )
+
+    def _cheat_trait_row_markup(self, g: dict) -> str:
+        """The original row: one trait write, with its at-cap guard."""
         target = "npc" if g.get("targetType") == "npc" else "player"
         npc_js = f'"{g.get("npcId")}"' if target == "npc" else "null"
         trait = g.get("trait")
@@ -10863,9 +10960,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 f'    <</if>>\n'
                 f'  </div>'
             )
-
-        unlock = f'$flags["cheat_{g.get("id")}"]'
-        return f'  <<if {unlock}>>\n{row}\n  <</if>>'
+        return row
 
     @staticmethod
     def _fmt_num(n) -> str:

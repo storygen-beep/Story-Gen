@@ -13,11 +13,8 @@ the six kinds of screen and the four rules that hang off it: where the clip goes
 climbs, who speaks, and the content kind we do not build. Read it before you write anything at all,
 because the kind decides the shape.
 
-**The voice is a choice, and it is LO's.** On 2026-09-23, shown three ways to write one line —
-quiet, direct and exaggerated — LO picked the top games' loud version over ours: *"I dont like ours,
-I want it to be same as top games exactly,"* then *"we want to completely align the plan to
-chatgpt's new plan,"* and on 2026-09-24, of the style guide, *"I like it."* So **"The voice — say it
-loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
+**The voice is a choice, and it is LO's** (2026-09-23/24): shown three ways to write one line, LO
+picked the top games' loud version over ours. So **"The voice — say it loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
 it. Everything the rules need is written here; the documents they came from
 (`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/`, the style guide and the scene-content
 review) are pointers, not sources an author has to open. The rules that are measured keep their measurements, and where
@@ -29,7 +26,8 @@ a measured rule and the voice disagree, the voice wins and the old rule is retir
 
 The old voice was quiet: the story left between the lines for the player to infer. That is what
 was rejected. The new voice tells the player what is happening, what the protagonist feels, and
-why. **Loud is not long.** It keeps "Sentences run short" below. Length is set by the scored model beats (`## The model beats`), not by a number.
+why. **Loud is not long, and short is not compressed:** loud prose keeps its joints (below).
+It keeps "Sentences run short" below. Length is set by the scored model beats (`## The model beats`), not by a number.
 
 1. **Say it, don't hint it.** Tell the player what is happening and what it means.
 2. **Spell out the feelings.** Angry, scared, turned on, embarrassed: say so.
@@ -61,6 +59,19 @@ curated library of best scenes overstates every property):
 | narration to dialogue | 2.93 : 1 across 27 games (S3) | under 5 : 1, gate `somebody speaks` |
 | dialogue in a scene | 83% of scenes, median 3 NPC lines | every standing scene with a person has a spoken line |
 | a person shows what they want | 54% of scenes | most scenes with a named person |
+| `but` / `and` per 1,000 words | `but` 2.46–8.44, `and` 9.3–41.1 (25 games) | `but` ≥ 2.88 (p10), `and` ≤ 41.1 — gate `prose has room` |
+| median sentence | p25 8.25 · median 10.5 (26 games) | printed only: the model beats run 7, on purpose |
+
+**Joints.** A sentence is joined to the next by what it has to do with it. Compressed prose drops
+the joints: the_balance's 09-15 build had `but` at 0.14 per 1,000 words, under every game in the
+field, and more `and`s than any of them. The fix is one of three: **cut** the clause, **split** the
+sentence, or **name the relationship** — *but, because, so, until, when*. A sentence of `and`s is a
+list; name what holds its parts together, or break it.
+
+**A pronoun needs someone on screen first.** Screen one read *"Your mum doesn't know he paid"*: `mum`
+is who `he` is not, and nobody else was there. Put the person on screen — a role, a name, a
+speaker, a token — before *he* or *she*. A place's text starts with nobody. Listed by `lint · a
+pronoun with nobody to point at`.
 
 The one-time steps carry the full loud version; the screens the player re-enters are short and
 still speak. That split is L3 below.
@@ -262,11 +273,10 @@ single most reliable way to produce a game that is explicit and cold at the same
 It reasserts itself the moment it is not being actively fought. Assume you are doing it, and
 check the gate.
 
-**Tested against the field 2026-08-23 and CONFIRMED, not loosened.** Zara's School Life folds heavy
-interiority straight into its acts — and it never leaves the body: *"Her mind was a dark, focused
-hum of power and arousal. The feel of his hard cock in her hand, the slick pre-cum on her thumb…
-She wasn't just getting wet; her pussy was clenching with need, dripping for him."* That is not a
-pivot by this rule's own definition, which is about what the sentence is *describing*, not whether
+**Tested against the field and CONFIRMED, not loosened.** In Her Own Hands folds her thought
+straight into the act — and never leaves the body: *"//Holy shit.// … I bucked my hips against his,
+my wet pussy opening wider with each time he brought his cock deeper inside me."*
+(`JamesDate1SexA`). That is not a pivot by this rule's own definition, which is about what the sentence is *describing*, not whether
 a thought is present. **The rule survived. Nothing about it changes.**
 
 ---
@@ -295,16 +305,6 @@ different gates, and each writes its own intro text:
 
 Same room, same act, same fifteen minutes. One is a decision; the other is a need. Neither is
 hotter than the other.
-
-Zara's School Life does it *inside* one act, with two interiority paragraphs for the same hand under
-the same table:
-
-> *owning it* — "Her mind was a dark, focused hum of power and arousal… to prove **she owned this
-> moment** and his pleasure."
-> *owned by it* — "The reality of what she was doing was almost too much to process. **Her own body
-> responded traitorously**… shocking, thrilling, and **deeply wrong**."
-
-**Two different women doing the same thing.**
 
 ⚠️ **This is not R6's banned move.** `the-surfaces.md` R6 forbids rewriting a **hub's** first
 sentence per stat band, and it is right — an arc whose base node rewrites itself per tier reads as N
@@ -345,51 +345,48 @@ branches are the **same act at a different composure** — not two reasons. Scor
 lexicon fixed before the run: of the 39 pairs where the lexicon fires at all, **84.6% put the
 composure on the high branch.**
 
-⚠️ **48 of the 53 pairs are one game.** By this skill's own bar that makes it a shape to choose,
+⚠️ **48 of the 53 pairs are one game** (`road-to-success`, school-set: its numbers are kept, its
+lines are not). By this skill's own bar that makes it a shape to choose,
 never a threshold — it is offered exactly as `the-meters.md`'s `<<katetrust>>` observation is.
 
-The mechanism is worth more than the ratio, and it is not "add nervous adverbs":
+The mechanism is worth more than the ratio, and it is not "add nervous adverbs". **The uncertain
+version explains itself; the confident one does not need to.** On the low branch she says why she is
+there; on the high branch the same line loses its reason. Composure is words removed, not words
+added — the cheapest instance in the corpus is a single adverb of nerves, present on one branch and
+gone on the other.
 
-> **low** — *"I'm here, Coach. Just like you asked. **Ready for my tryout.**"*
-> **high** — *"I'm ready, Coach. Just like you asked."*
-> — `road-to-success`, one surface, branching on `corruption >= 45 || clothing == 'cheerleader2'`
-
-**The uncertain version explains itself. The confident one does not need to.** Composure is words
-removed, not words added. The cheapest instance in the corpus is one word — *"Without a warning,
-Zara leans forward and kisses the boy"* against *"Nervously, Zara leans forward and kisses the
-boy."*
-
-**And the arc position is a second axis, free of the meter.** The same surface at three visit
-counts, `road-to-success`:
-
-> 3 — *"You might not finish everything today. You know that now."*
-> 4 — *"You're back. The coach locks the door behind him with a smirk."*
-> 5+ — *"One more round in his office. After this, you're on the squad. **You keep telling yourself
-> that.**"*
-
-By the third she is lying to herself and the game does not comment on it. `the-meters.md` W1b
+**And the arc position is a second axis, free of the meter.** The same surface, read by visit count:
+on the third visit she is unsure she will finish; on the fourth he is waiting for her; from the
+fifth she is telling herself a story about why she keeps coming back, and the game does not comment
+on it. `the-meters.md` W1b
 carries why this works: the meter is nerve, so the prose that reads off it is bearing, not motive.
 
 ---
 
 ## The two-halves sentence — one sentence, two people's meters
 
-The most reusable sentence-level pattern in the field study, and it is **not random**.
-
-Degrees of Lewdity's `actionsothermouthpenisthrust` (`Widgets Actions Text`, 1,777 chars) is a
-**3×3 grid**. His arousal writes the first clause; hers writes the second:
+The most reusable sentence-level pattern in the field study, and it is **not random**. One explicit
+sentence is built from two halves, each read off a different meter: **his arousal writes the first
+clause, hers writes the second**, three bands each. Our own grid, from her side:
 
 ```
-HIS arousal — the first clause          HER arousal — the second
-  high  "ruthlessly fucked"               high  "Driven by instinct, you push back as you approach your peak."
-  mid   "hungrily enveloped"              mid   "You push back against the movements."
-  low   "rhythmically engulfed and…"      low   "You push back, trying to reduce your discomfort."
+HIS arousal — the first half                         HER arousal — the second
+  high  "He fucks your cunt hard, his cock           high  "You grind your clit on him and moan
+         slamming in balls deep."                           through your orgasm."
+  mid   "He fucks your cunt in slow, deep strokes,   mid   "You push your ass back to meet each
+         his cock dragging all the way out."                thrust."
+  low   "He fucks your cunt lazily, his cock half    low   "You bite your lip. You're not there yet,
+         hard and slipping out."                            but you don't want him to stop."
 ```
 
-> *"Your cock is ruthlessly fucked by their mouth. Driven by instinct, you push back as you approach
-> your peak."*
-> *"Your cock is rhythmically engulfed and regurgitated by their mouth. You push back, trying to
-> reduce your discomfort."*
+> *"He fucks your cunt hard, his cock slamming in balls deep. You grind your clit on him and moan
+> through your orgasm."* — 22 words, 7 explicit, median sentence 11.
+> *"He fucks your cunt lazily, his cock half hard and slipping out. You bite your lip. You're not
+> there yet, but you don't want him to stop."* — 27 words, 3 explicit, median 11.
+
+Her low band is **reluctance that could turn**, never sex she endures (`the-release.md`, the
+excitement read's instant fails). Written as one sentence each pair runs past the ceiling, so split
+at the join.
 
 **Nine outcomes from six written clauses**, and nothing is left to chance — read it twice at the
 same arousal and it is the same sentence; read it as the meters move and it changes under you.
@@ -424,7 +421,7 @@ the original run. Two corrections had to be made
 before any number meant anything, and both are recorded because they are why earlier studies of
 this same corpus got it wrong:
 
-- **Count one rendered path, not every branch.** `destroyer:ginablow` is eight `<<if>>` branches
+- **Count one rendered path, not every branch.** One `destroyer` act screen is eight `<<if>>` branches
   printing the same four words over a different image. Counting the source counts all eight.
 - **Speech is a UI component, not punctuation.** 20 of the 27 render dialogue through
   `<<speech>>`, `<<say>>`, `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`,
@@ -513,7 +510,7 @@ makes a beat a click. `v2.py:14426`.
 ```toml
 { type = "cascade", props = { beats = [
   { advance_text = "<the click that reveals this beat>", blocks = [
-    { type = "paragraph", content = "She pulls the shirt over her head slowly, so you know it's for you. Underneath she's better than you guessed. A lot better. She drops her arms to her sides and lets you look. She's enjoying every second of it." },
+    { type = "paragraph", content = "You pull your top off slowly, so your neighbour knows it's for him. Your tits spill out and your nipples go hard. His mouth falls open. His cock strains against his jeans. You love it. You want him to beg." },
     { type = "video", props = { file = "<dir>/<clip>.webm", description = "<what is on screen, for the harvest pass>", search_queries = [ "<a query that would find it>", "<another>" ] } },
   ] },
 ] } },
@@ -646,25 +643,26 @@ being true the moment the walk-in fires.
 ### Write the lines by PERSONALITY, not by person
 
 The field's answer to "how do I get speech into a scene that six different people can walk into"
-is not six sets of lines. Course of Temptation's `dirtytalkcuminside` picks by that NPC's
-**inclinations**, crossed with what they want:
+is not six sets of lines. Course of Temptation picks what a man says to her by his
+**inclinations** — `dirtytalkidea` ("fuck pussy") and `dirtytalkcockenterspussy`:
 
-| | wants it | does not |
+| | what he wants | as he enters her |
 |---|---|---|
-| **shy** | *"Please... cum inside me..."* | *She opens her mouth as if to say something, then closes it again.* |
-| **crude** | *"Fill me up with your fucking cum."* | *"Not fucking inside."* |
-| **crude + dominant** | — | *"Don't cum inside me or I'll rip your balls off."* |
-| **neutral** | *"Cum in my pussy!"* | *"Pull out, please."* |
+| **forceful** | *"I'm going to ruin your pussy."* | |
+| **crude** | | *"Oh yeah, take my cock."* |
+| **passive** | *"I... I want to be inside you."* | |
+| **neutral** | *"I want to fuck you."* | *"You're so tight."* |
 
-Thirteen such widgets exist in that game — `dirtytalkidea`, `dirtytalktits`, `dirtytalkgonnacum`,
+**Shy** gets no lines of its own: it sets how *often* he speaks — 0.25 against crude's 0.8 and
+neutral's 0.5. Thirteen such widgets exist in that game — `dirtytalkidea`, `dirtytalktits`, `dirtytalkgonnacum`,
 `dirtytalkcumfacial`, `spitorswallow` and more. **Speech inside a generated scene is its own
 subsystem**, and it is authored once for the whole cast.
 
 Two things to carry out of that table:
 
-- **The best line in the set has no words in it** — *"She opens her mouth as if to say something,
-  then closes it again."* A non-verbal beat is a legitimate answer to S3, and it came out of a
-  lookup table rather than a moment of inspiration.
+- **The quietest setting is silence, rolled.** A shy man speaks a quarter of the time; the other
+  three screens carry his breathing and his hands. A non-verbal beat is a legitimate answer to S3,
+  and it came out of a lookup table rather than a moment of inspiration.
 - **The axis is what KIND of person they are, not which person.** Write the shy line and the crude
   line once and assign them by an NPC trait. Ours would be a `group` chain on that trait, or a
   `block_pool` inside each branch (`engine.md` §35).
@@ -681,24 +679,16 @@ has to be held or the two rules read as contradictions:**
 > generated scene affordable. **The name he calls her is not.** It is his, it is fixed, and no other
 > character in the game uses it.
 
-Measured across every captured line in two field games:
-
-| game | person | lines | their term | rate |
-|---|---|---|---|---|
-| `sluttown-usa` | India | 2,809 | **"pet"** ×262 | 9% |
-| `sluttown-usa` | Alex | 633 | **"sir"** ×47 | 7% |
-| `sluttown-usa` | AJ | 714 | **"daddy"** ×34 | 5% |
-| `destroyer` | Stepsister | 449 | **"bro"** ×58 | 13% |
-| `destroyer` | Granny | 413 | **"darling"** ×37, "dear" ×23, "sweetheart" ×15 | 18% |
-| `destroyer` | Aunt | 516 | **"baby"** ×32, "sweetie" ×11 | 8% |
+Measured across every captured line in two field games (`sluttown-usa` and `destroyer`; both fail
+the adults-only rule, so the numbers are kept and the lines are not): six characters, each with one
+term of address used on **5–18%** of their lines, 34 to 262 times.
 
 **Roughly every sixth to twentieth line**, and the terms do not overlap anywhere in either cast.
 It is the cheapest device in the whole study: one word, no system, no engine support, and it works
 on the first line the player ever reads from that person.
 
-`destroyer`'s Granny is the one character differentiated by **register** rather than by the term
-alone — beside "darling" and "dear", her distinctive vocabulary is *"perhaps"*, *"suppose"*,
-*"quite"*. An author writing an older woman's speech on purpose. That is the upper end of this rule,
+One of the six is differentiated by **register** rather than by the term alone — an older woman
+whose distinctive words are *perhaps*, *suppose*, *quite*. An author writing her speech on purpose. That is the upper end of this rule,
 not its floor.
 
 **Ours:** `the_season` ships 56 NPC lines and **only Rae ever addresses Cass at all** — *"girl"*
@@ -706,9 +696,8 @@ twice, *"Renfro"* once. Boyd, Wade, Prine and Emmett never call her anything. He
 lines, never once says his daughter's name.
 
 > ⚠️ **Do not over-read the measurement that found this.** The same instrument surfaces
-> per-character moan spellings — Stepmom "ahhh/gulp", Stepsister "mhnmhnm/fuuck", Cousin
-> "aaah/woof" — which are almost certainly accidents of typing rather than craft. **The address
-> term is the reliable half; the noises are not a rule.**
+> per-character spellings of noises, which are almost certainly accidents of typing rather than
+> craft. **The address term is the reliable half; the noises are not a rule.**
 
 ---
 
@@ -848,12 +837,13 @@ card is re-entered on every visit. "You hate this room" is rule 2: the feeling, 
 
 **Reveal beat** — 37 words in the field, and 58% carry a clip:
 
-> She pulls the shirt over her head slowly, so you know it's for you. Underneath she's better than
-> you guessed. A lot better. She drops her arms to her sides and lets you look. She's enjoying
-> every second of it.
+> You pull your top off slowly, so your neighbour knows it's for him. Your tits spill out and your
+> nipples go hard. His mouth falls open. His cock strains against his jeans. You love it. You want
+> him to beg.
 
-*40 words · 5 sentences, median 6 · gloss 0 · negation 0 · history 0. "A lot better" is rule 4 in
-three words, and the last sentence names what SHE wants out of the moment (rule 7).*
+*40 words · 6 sentences, median 6 · 3 explicit words · gloss 0 · negation 0 · history 0. Her body,
+then his reaction shown, then "You love it" — rule 2, the feeling said — and the last sentence names
+what SHE wants next (rule 7). A reveal, not the act, so its last line may leave the body.*
 
 **Talk screen** — the genre's second largest content kind, 55 words and 65% of it spoken. The
 shape is rule 5: she speaks, the protagonist answers, she pushes, the protagonist thinks.
@@ -922,9 +912,7 @@ visit two and visit fifty.*
 Read the set together: not one dash, the plain modifiers carry weight (*slowly · a lot · hard ·
 every second*), and every screen with a person on it has that person talking.
 
-**Re-scored 2026-09-24** when the loud voice replaced the quiet one. The previous four were correct
-for the quiet register and wrong for this one — their talk screen claimed a past (*"twice this
-week"*), and none of them let the protagonist think or say what she felt. Measured with
+Measured with
 `gates.py --beat` (explicit words, median sentence, body words by sentence) and the load regexes
 `GLOSS_RE`, `NEGATION_RE` and `HISTORY_RE` on narration only.
 
@@ -1056,11 +1044,8 @@ swap and the reader still holds the sentence open. Cut it or split it.
 
 ### L2 · Negation — RETIRED 2026-09-24
 
-Retired, because the voice LO chose negates on purpose: its model line (2026-09-23) is *"He doesn't
-ask about college. He never does."* The field figures and the instrument history are in `gates.py`,
-at `FIELD_NEGATION_P50` and the `lint_negation` docstring. `lint_negation` still prints the share,
-as a measurement and not a verdict. Use a number when it says the same thing louder; do not rewrite
-a loud negation to satisfy the lint.
+The loud voice negates on purpose. `lint_negation` prints the share as a measurement, not a
+verdict; do not rewrite a loud negation to satisfy it. History: CHANGELOG.
 
 ### L3 · A repeatable screen carries no history
 
@@ -1336,25 +1321,14 @@ been applied to **shapes** — a floor plan, a set of thresholds — and nobody 
 > reference file that gets copied verbatim into a game. Anything you would not want in every game
 > this skill ever produces does not belong in one.
 
-**The fourth instance is an ABSENCE, and it is the one that got a game read on a forum.** The first
-three were things this skill *showed*: a locale-locked vocabulary, a map skeleton, a set of
-thresholds. Counted 2026-08-28, the whole of `author-game-v2` held **419 words of worked prose
-example, in 13 blocks, across 185,575 words** — 0.23%. The examples were not teaching a bad habit;
-measured, they sit inside the field on every marker. **There were almost none of them.** So an
-author reads a hundred and eighty-five thousand words of explanation and models *that*, and with no
-worked beat anchoring anyone the games scatter: our dash rates run **1.6 to 137 across builds from
-one skill**. An example outranks every rule beside it — and **nothing outranks an example that was
-never written.** `## The model beats` above is the answer, and it is the first thing to check when
-a habit shows up in every game and no rule anywhere asked for it.
+**The fourth instance is an ABSENCE.** The skill once held 419 words of worked prose across 185,575
+words of instruction (0.23%), so authors modelled the explanation, and dash rates ran 1.6 to 137
+across builds from one skill. **Nothing outranks an example that was never written.** `## The model
+beats` above is the answer, and the first thing to check when a habit shows up in every game and no
+rule asked for it.
 
-**The fifth instance is the answer to the fourth breaking a rule in its own file.** *"The examples
-were not teaching a bad habit; measured, they sit inside the field on every marker"* was true of the
-markers that existed when it was written — dashes, `-ly` adverbs, hedges — and it stopped being true
-two days later without anyone touching a word of it. The **load rules landed on 2026-08-30, ninety
-lines below the model beats, and the beats were never re-scored against them.** Measured 2026-09-01
-the original four ran **gloss 11.49 per 1,000 words against a field maximum of 0.24**, with two
-`, which is` clauses inside a 46-word talk screen — the one construction L1 bans outright, sitting
-in the file that bans it, in the block an author copies. Rewritten and re-measured the same day.
+**The fifth instance:** the model beats were never re-scored against load rules added ninety lines
+below them, and ran gloss 11.49 per 1,000 words against a field maximum of 0.24 until re-measured.
 
 > **A rule added to this file dates every example above it.** The first four instances were about
 > what an example *teaches*. This one is about what an example *stops being*: correct on the day it
@@ -1399,7 +1373,7 @@ stays **immutable once a release ships** — a person swap invalidates every lin
 Whether the writing is any good, and whether it arouses. Neither is countable, both are the job.
 `gates.py` measures shape. It cannot tell you the scene works.
 
-Since 2026-08-27 it also measures **texture, on exactly one marker**: the dash rate, gate 43. That
+It also measures **texture, on exactly one marker**: the dash rate, gate 43. That
 is one countable habit and not a verdict on voice. Gate 43 prints three further numbers (joints per
 sentence, the share of `you`, pronouns per name) which carry **no field figure and no threshold**,
 because the corpus exists only as built HTML and none of the three survives the change of basis.

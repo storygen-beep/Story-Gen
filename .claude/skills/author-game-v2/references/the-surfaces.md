@@ -52,35 +52,25 @@ Four kitchens read in full, because the kitchen is the room this skill got wrong
   family` (evening, once a day) · `Wash the dishes` (once a day) · a portrait row of whoever is in
   the kitchen. When all three are spent: *"You don't feel hungry right now."*
 - **Corpo Life** — the whole kitchen is one `if/elseif` on (who you are partnered with × time of
-  day), and each branch offers two or three links: `Have Breakfast` · `Fuck Karen` · `Back`.
+  day), and each branch offers two or three links: breakfast, an act with that partner, and back.
 - **Degrees of Lewdity** — its farm kitchen is **341 bytes**: a line saying what is in stock,
   `<<kitchenDisplay>>` (a 40 KB cooking system shared by every kitchen in the game), `Leave`.
 
 **Not one of them browses an object.** A kitchen in the field is a **hunger station**, a **person
 magnet**, and an **event stage**.
 
-### The worked example this file used to print, read correctly
+### A bedroom, read correctly
 
-This file previously showed DoL's bedroom as *"what correct looks like"* and read it as *choices hang
-off objects in the prose*:
-
-```
-Your bed takes up most of the room.
-   Strip and get in bed
-Your clothes are kept in the creaky wardrobe.
-   Wardrobe
-   Mirror
-```
-
-Read the actual passage and the standing links are:
+Course of Temptation's dorm room (`YourDorm`) reads like a list of objects. Read the links and
+each is the door to a system:
 
 | link | what it really is |
 |---|---|
-| `Strip and get in bed` | **the sleep machine** — how the day advances |
+| `Sleep` | **the sleep machine** — how the day advances |
 | `Masturbate in bed` | **the solo feeder** |
-| `Wardrobe` | **the clothing system** |
-| `Sex toys` | **a system** |
-| `Mirror` | **the body / appearance system** |
+| `Clothes` | **the clothing system** |
+| `Food stash` | **hunger** |
+| `Quickly cross hall to showers` | **hygiene, and exposure on the way** |
 
 **The bed is not an object affording a choice. It is the door to the machine that runs the game.**
 The old rule copied the shape of the sentence and threw away what was behind it. Every "object" in
@@ -193,26 +183,16 @@ Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, work and pe
 set, so a room cannot sprawl. What it does not say is what an individual row IS, and read alone it
 answers *"what would she do in this room"* — which returns a job description.
 
-**Read four anchor rooms in four shipped games and every row is a different system of the game,
+**Read an anchor room in a shipped game and every row is a different system of the game,
 appearing where that system lives:**
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.**
 >
-> | `degrees-of-lewdity` · Bedroom | | `family-ties` (rank 24) · bedroom | |
-> |---|---|---|---|
-> | Strip and get in bed | sleep | Bed | sleep |
-> | Masturbate in bed | arousal | PC | the OnlyFans line |
-> | Wardrobe | clothing | Wardrobe | clothing |
-> | Sex toys | toys | Mirror | body |
-> | Mirror | body | Try out a dildo | toys |
-> | | | Improve your deepthroat skills | skills |
->
-> `zaras-school-life` · library — *Read a book on science* · *Practice Coding and Hacking* (two
-> skills) · *Read an adult book* (arousal). Its **gym** is two rows: *Workout* (fitness) and
-> *Peek into the men's locker room* (voyeurism).
+> `course-of-temptation` · her dorm room — *Sleep* (sleep) · *Masturbate in bed* (arousal) ·
+> *Clothes* (clothing) · *Exercise* (fitness) · *Study* (grades) · *Internet* (online) · *Food
+> stash* (hunger) · *Quickly cross hall to showers* (hygiene) · *Sneak out into hall* (exposure).
 
-Five rows in DoL's bedroom because five systems live in a bedroom. Two in Zara's gym because two
-live in a gym. **The count is not chosen; it falls out of the systems list, which is R2's closed-set
+Nine rows because nine systems live in her room. **The count is not chosen; it falls out of the systems list, which is R2's closed-set
 logic one level up.**
 
 ⚠️ **The consequence, and it is measured.** `night_desk` was built to R2 and its rooms came out as
@@ -275,20 +255,13 @@ This is the largest content bucket in the field and the one v2 shipped without. 
 rules across 791 canvases in five games**, against `author-game/references/lanes.md`, which sizes the
 same mechanism at ~47% of its densest arc shape.
 
-What it looks like in the field — DoL's `Bath` is **one** activity with twelve outcome passages,
-dispatched on entry:
+What it looks like in the field — one game's bath (`degrees-of-lewdity`, structure only; it fails
+the adults-only rule) is **one** activity with twelve outcome passages, dispatched on entry: a
+person's branch when that person is there, a rare strange branch on a meter and a die, a group
+barging in by day on a die, and otherwise she just washes.
 
-```
-if   Robin is here and not traumatised   → the Robin branch (forks on romance / dom / YOUR stats)
-elif hallucinations >= 2 and dice        → the slime
-elif daytime and dice                    → a group barges in
-else                                     → you wash
-```
-
-And the branches are **cheap**. `Bath Molestation` is **458 bytes with zero prose** — six
-configuration lines handing off to `<<actionsman>>`, the shared engine that **1,742 other passages
-also call**. `Bath Robin Tease` is **473 bytes and three sentences**. The richness is combinatorial,
-not authored.
+And the branches are **cheap**: two of them are under 500 bytes and hand off to one shared act
+engine that **1,742 other passages also call**. The richness is combinatorial, not authored.
 
 **The same pattern already ships in our engine**, in `games/vesper`:
 
@@ -410,9 +383,10 @@ The measured failure is what happens when the second is used for the first: a ca
 off its node lead, the player clicks down three beats to reach the act, and the clip they are looking
 at is the one for the setup. `register.md` S1 has the numbers; this rule is the fix.
 
-**The loop is a state machine, and it is the field's own repeatable shape.** `destroyer:ginablow` is
-one clip from a pool of eight, four words of text, and five exits — *Keep blowing · Pound her ass ·
-Pound her pussy · Cum · Go back*. The player drives the escalation. Six parts:
+**The loop is a state machine, and it is the field's own repeatable shape.** In Her Own Hands'
+`JamesDate1FPOptions` is a menu she drives — *Let James finger you · Give James a blowjob · Let
+James eat you out · Have sex* — each act raises her meter by `random(1,5)` and shows the menu again,
+and whichever meter, hers or his, reaches 100 first routes to its finish. Six parts:
 
 ```
 an ACT NODE per rung          its own media pool; the passage swap is what refreshes it
@@ -503,47 +477,52 @@ routing, the 3–5 act-node pose ladder, what the player is looking at while one
 the ladder **across** visits: the same screen, re-entered for days, its menu getting longer as one
 per-person meter climbs. Different axis, adjacent rule.
 
-The corpus's clearest example is `friends-of-mine`'s Gabby arc — **one screen**
-(`Old Gabby's Place`), **one meter** (`$gabbyrelation`), 0 → 24, forty-nine gated actions:
+The shape is measured on `friends-of-mine`'s best arc (a male-lead game, so its numbers are kept
+and its lines are not): **one screen, one per-person meter from 0 to 24, forty-nine gated actions**.
+The same ladder from her side, on one man's screen — rung numbers the game's, labels ours:
 
 ```
- 0  Chat Up Gabby                    12  Let Gabby Toy with You / Toy Gabby
- 2  Let Gabby Tease You              14    → conversation
- 4    → conversation                 15  Blow Gabby / Get a Blowjob / Let Her Eat Your Pussy
- 5  Watch Gabby Masturbate           17  Fuck Her / Have Sex
- 7  Have Gabby Show Off for You      20  Have Rough Sex
- 9    → conversation                 22  Join Gabby and Her Friends
-10  Touch Each Other
+ 0  Flirt with him                    10  Strip for him / Watch him jerk off
+ 2  Ask about his hours               12  Hand him your vibrator / Use it on his cock
+ 4    → conversation                  14    → conversation
+ 5  Ask about his divorce             15  Suck his cock / Sit on his face
+ 7  Visit when he's alone             17  Ride him / Bend over for him
+ 9    → conversation                  20  Put your wrists in his hand
+                                      22  Say yes to his friend
 ```
+
+The first third has no sex in it (`the-arc.md` A2): rung 2 learns when he is alone, rung 5 what he
+is touchy about, and rung 7 spends what rung 2 found.
 
 **1 · Each act is written twice, then becomes furniture.** Every rung is gated `== N`, then `== N+1`,
-then survives on `>= N+2`. It is fresh for exactly two visits and standing content afterwards — new-content
-highlighting with no flag to maintain. One 6,202-character passage holds both variants of
-`Let Gabby Tease You`. **This is what `block_pool` is for** (`engine.md` §35).
+then survives on `>= N+2`. It is fresh for exactly two visits and standing content afterwards —
+new-content highlighting with no flag to maintain. **This is what `block_pool` is for** (`engine.md`
+§35).
 
-**2 · Doing the act is what raises the meter.** That same passage writes `$gabbyrelation to 3` on the
-first visit and `to 4` on the second, and `to 4` is what opens the next act. Nothing else advances
-her. The player is not persuading her; he is doing the thing she already says yes to, twice.
+**2 · Doing the act is what raises the meter.** The first visit writes N+1 and the second N+2, which
+opens the next act. Nothing else advances him. She is not being persuaded; she does the thing she
+already said yes to, twice.
 
-**3 · Give and take arrive on one rung.** All three oral variants at 15, both toy variants at 12. The
+**3 · Give and take arrive on one rung.** Both oral variants at 15, both toy variants at 12. The
 reciprocal pair is one step, not two.
 
-**4 · Three rungs are not acts. They are her explaining the pause.** The indented rungs — 4, 9, 14 —
-raise nothing and unlock nothing. Each is a conversation sitting immediately *below* the next
-escalation, placed exactly where a player would be asking why she has not moved:
+**4 · Three rungs are not acts. They are the pause, said out loud.** The indented rungs — 4, 9, 14 —
+raise nothing and unlock nothing. Each sits immediately *below* the next escalation, exactly where
+the player would ask why it has not happened yet:
 
-> "You tell Gabby that you thought she'd be interested in having sex by now and are surprised that
-> she's held back. *'Well what kind of trollup do you take me for, exactly? I may be promiscuous…'*"
-> — `Ask Gabby About Doing More`, rung 14, sitting under the jump to oral at 15
+> The neighbour leans on the doorframe and looks you up and down. "So why won't you go further with
+> me?" You laugh, and your face goes hot. "Because I want it too much. I'm not going to be that easy
+> for you. Not yet." *Soon, if he keeps looking at me like that.*
+> — rung 14, under the jump to oral at 15
 
-**That is the whole answer to "how does she get from no to yes".** She never refuses out loud — the
-act simply is not on the menu yet, which is section B's silent 71% — and three times on the climb the
-game spends an entire scene letting her say *why not yet*, in her own voice. Nothing else in this
-skill has a name for that scene.
+**That is the whole answer to "how does she get from no to yes".** The act simply is not on the menu
+yet, which is section B's silent 71%, and three times on the climb the game spends a scene letting
+her say *why not yet*, in her own voice. A no parks; it never locks (`the-arc.md` A14). In a
+female-lead game, In Her Own Hands' `BRLaptopPorn` grows the same way on her own history: two
+categories at first, the rest opened by her dates and by how often she has watched (5, 10, 30).
 
-The rung carries a **cost** too, checked before anything else: `<<if $energy < 10>>You are just too
-exhausted for this sort of thing at the moment.` Her willingness gates it; the player's day throttles
-it (`the-clock.md`, `engine.md` §27).
+The rung carries a **cost** too, checked before anything else: an energy floor with a refusal line.
+His willingness gates it; her day throttles it (`the-clock.md`, `engine.md` §27).
 
 ⚠️ **One game, one character — and the shape is the minority.** Of the corpus's 61 arc hubs,
 **14 reach five or more intensities and 47 do not** (R3b above). `friends-of-mine` is rank 25 and
@@ -573,14 +552,9 @@ measured on the body (median 10%).
 not a field — but it is unanimous across the four, and our games do the opposite: a refusal that
 exists at all is usually a bare link back to the menu.
 
-Zara's School Life writes a family dinner the player re-enters (`meal event1`, 78,621 chars) with
-six corruption rungs inside it. The branch where she declines is a full paragraph and **grants
-`+60 Energy`**:
-
-> "Zara gave a small, almost imperceptible shake of her head, as if to physically dislodge the
-> intrusive fantasy. She took a slow, deliberate sip of water… The dangerous thoughts were sealed
-> behind a mental door, leaving only the taste of food and the sound of ordinary laughter around
-> the table. **For now, the fantasy remained just that.**"
+One field game (`zaras-school-life`, numbers only) writes a dinner the player re-enters, 78,621
+characters with six rungs inside it. The branch where she declines is a full paragraph of her
+putting the thought away, and it **grants `+60 Energy`**: saying no is paid.
 
 Course of Temptation charges in the other direction. Walking into an occupied shower uninvited and
 being refused costs `friendship -50 -60` and `Arousal -100`, and the scene has to be walked out of:
@@ -625,9 +599,8 @@ Not a special case: **464** skillcheck branch calls and **41** `*Resist*` passag
 
 Both ends of the range are defects, and players name both:
 
-- **No refusal at all** is why they leave — *"I lost interest in playing it after only 2 hours
-  because at almost every step there is a man who wants to use my body, and all I can do is try to
-  hit him or cover my holes and hope"* (`degrees-of-lewdity`, 5 likes).
+- **No refusal at all** is why they leave: a player quit a game after two hours because at every
+  step all she could do was resist and hope (`degrees-of-lewdity`, 5 likes; paraphrased).
 - **A refusal that always works** is why they get bored — three separate comments mourn a *removed*
   failure case: *"did they remove npc's not listening when you resist? ... i really enjoyed that"*
   (8 likes), *"they'd usually ignore your resistance, but now they just relent"* (6 likes).
@@ -664,19 +637,11 @@ The field's refusal has exactly two shapes and we ship a third that it does not
 decision — patriarch italicises 86% of its refusals, zaras-school-life colours 89%,
 the-hellfire-club marks none of its 631. Nobody marks a third of them.
 
-patriarch's `schoolgirls` roster does all four at once, and it is a **cast page** — the surface F9
-and `engine.md` §34 give us:
-
-```
-<<if $lolasecret is true>>//(You should find Lola at her house!)//<<else>>[[Lola]]<</if>>
-<<if $briready is true>>//(You should find Bri at her house!)//<<else>>[[Bri]]<</if>>
-<<if $sukilike gt 399>>[[Suki|Suki service]]<<elseif $sukilike gt 29>>//(You should find Suki at her house!)//<<else>>[[Suki]]<</if>>
-```
-
-The refusal occupies the row the link would have used, so the roster never reflows and the eye
-learns one shape. It says where to go instead. It is parenthesised italics — the game talking about
-itself rather than narrating. And Suki's row shows the ladder: under 30 an ordinary link, from 30 a
-direction, at 400 a *different* link. Three states, one row, no dead end at any of them.
+One field game's cast page does all four at once (`patriarch`; it fails the adults-only rule, so the
+shape is described and the page is not quoted). Each person is one row. While she is not available
+the row holds an italic, parenthesised line saying where to find her instead; past a higher bar the
+same row becomes a *different* link. The refusal occupies the row the link would have used, so the
+roster never reflows and the eye learns one shape. Three states, one row, no dead end at any of them.
 
 **Ours:** `locked_text` (the reason), `locked_text_threshold` (the bar, delivered on click —
 `engine.md` §23), or `rejection_node` (a live link to a real failure node — §36, still used by zero
@@ -1000,24 +965,22 @@ and go."* answers him and *"Leave"* does not.
 **R7b · Two shapes, and a game needs both: a POOL at a place, a CHAIN on a person.** Added
 2026-09-03, read in source.
 
-`zaras-school-life` runs both at once, and neither substitutes for the other.
+`zaras-school-life` runs both at once (numbers only; it fails the adults-only rule), and neither
+substitutes for the other.
 
-**The POOL.** `detention1` … `detention15` look like a fifteen-step ladder and are not: **all
-fifteen carry the identical gate** (`_eventCh == 1` off the `School Detention` screen). They are
-fifteen *different situations at one place*, rolled — alone with a male teacher who lets her off ·
-nobody turns up and she is caught sneaking out · a jock takes the seat beside her · an overworked
-teacher · the hot married teacher · a sullen girl · the P.E. coach she dislikes · a handsome boy
-the teacher then leaves her alone with. The same game runs 16 at the gym, 14 on the street, 10 at
-the park, 9 in the canteen, 8 at PE.
+**The POOL.** Fifteen incidents at one place look like a fifteen-step ladder and are not: **all
+fifteen carry the identical gate**. They are fifteen *different situations at one place*, rolled;
+the same game runs 16, 14, 10, 9 and 8 at five other places. Course of Temptation's walk between
+buildings is the passing game's version: 151 `EventCampusWalk*` passages, setups rather than acts
+(`the-arc.md` A9).
 
-Inside each setup a band on her meter decides how she plays it, so twenty visits to detention is
-*fifteen situations × two or three bearings*. **No rung has to follow any other rung, which is why
+Inside each setup a band on her meter decides how she plays it, so twenty visits is *fifteen
+situations × two or three bearings*. **No rung has to follow any other rung, which is why
 a pool cannot flow stupidly** — there is no staircase to fall off. This is A9 of `the-arc.md`
 seen from the surface side.
 
-**The CHAIN.** The same game runs eight of them — `ben` 50 passages, `dick` 72, `lisa` 28,
-`mom` 26, `bro` 24, `dad` 24, `jason` 25, `daniel` 16; **274 quest passages** in a 785-passage
-game. A chain is A1's numbered ladder, ending by converting into a repeatable surface.
+**The CHAIN.** The same game runs eight of them, 16 to 72 passages each; **274 quest passages** in
+a 785-passage game. A chain is A1's numbered ladder, ending by converting into a repeatable surface.
 
 > **A chain alone is a questline: finish it and the person is dead content. A pool alone is a slot
 > machine: nothing builds. Both together, and the place keeps producing situations while the
@@ -1036,17 +999,11 @@ who."*
 Twenty-five field games were read in source to find what actually separates one character from
 another. A log-odds pass over each speaker's dialogue answers it, and the answer is **not diction**:
 
-| `destroyer` — the words that are theirs and nobody else's | |
-|---|---|
-| **Dr. Angela** | donate · patient · donor · treatments · sample · semen · recovery |
-| **Dean Mea** | vote · levy · detention · discipline · students · punishment · class |
-| **Stepmom** | ranch · house · dinner · hire |
-| **Aunt** | thousand · investment · shopping |
-
-`sluttown-usa` splits the same way, and it splits **twice** — each person has their own subject
-*and their own supporting cast*: Romi has Ell, Gigi and Elliot and talks about fashion, the store,
-jeans and stock; Leah has Eve, Nina and Joss and talks about classes, the pole, dancing and the
-club; AJ has Brad and talks about the professor, tutoring and the test.
+In `destroyer` (numbers only) each character's most distinctive words are the words of their
+corner of the world: a doctor's are the clinic's, an administrator's are votes and levies, one
+relative's are the house and dinner, another's are money and shopping. `sluttown-usa` (numbers
+only) splits the same way and **twice** — each person has their own subject *and their own
+supporting cast* of two or three people.
 
 **A character is not a temperament with a name on it. He is a different part of the world, and he
 talks about the part he is in.** A trait system cannot buy this; only the design can.

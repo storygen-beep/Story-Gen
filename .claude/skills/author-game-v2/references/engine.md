@@ -174,8 +174,7 @@ the mechanism behind "every release ends on a visible locked door."
 
 ### A node link SWAPS the screen. A cascade beat APPENDS to it.
 
-The single most load-bearing fact about how content is composed, and neither half was written
-down anywhere before 2026-08-18.
+The single most load-bearing fact about how content is composed.
 
 ```python
 v2.py:13258   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
@@ -346,7 +345,7 @@ sees what the action was called.
 **Omit it and the row is not blank — it is the action label, greyed, with nothing beside it.**
 `escaped_locked = (locked_text or choice_text)` at `v2.py:13372`, and the same string is repeated
 into the `title` tooltip at `:13219-13220`, so the tooltip adds nothing either. The player sees
-"Kiss her" struck out and learns neither why nor when.
+"Kiss him" struck out and learns neither why nor when.
 
 **Set `locked_text` by default.** Reach for the bare label only when the action's own name already
 carries the reason, and argue it when you do.
@@ -504,8 +503,7 @@ Zero hits means the key does not exist, however plausible it looks.
 **`worn_corruption` is a MAX aggregate, not a sum.** Verified live: with `sleep_vest` (2) worn,
 equipping `mothers_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
 its own, so a catalog does not need to be large to reach a tier — it needs one item per tier.
-**`worn_beauty` is the same fold over `beauty`** (`template_import.py:239`, `v2.py:4044`) — it was
-missing from this list until 2026-08-24 and two games use it.
+**`worn_beauty` is the same fold over `beauty`** (`template_import.py:239`, `v2.py:4044`).
 
 ### The three ways a wardrobe gets read
 
@@ -703,8 +701,7 @@ build: `applyAndNotifyTrait('player',null,'count','subtract',4,true,null)` left 
 
 ## 22. Locations do more than `entry_from` — four fields nobody used
 
-All verified 2026-08-12. A game shipped without any of these because the skill never said they
-existed; the first is the mechanical answer to a premise that says *"ten minutes' walk away"*.
+The first is the mechanical answer to a premise that says *"ten minutes' walk away"*.
 
 **Travel friction — a per-entry cost on a location.**
 
@@ -895,9 +892,7 @@ card renders a blank next-row.
 
 **A quest card has no `title` field** (`template_import.py:997-1039`) — `text` is the narrative body,
 `tip` is the 💡 line, and the only short imperative string on a card is `goals[].label`. So there is
-nothing on a card that a sidebar could show as a headline, and until 2026-08-16 there was no sidebar
-item type for guidance at all: the only always-visible strings a game could put in the rail were
-`trait_status_text` bands, which name a **state**, not a step.
+nothing on a card that a sidebar could show as a headline.
 
 > Measured: a game shipped with four band strings — *"Counter only, hatch down at midnight"*,
 > *"Fleece zipped, back to the window"* — and an excellent Quests page. A player who never opened
@@ -926,9 +921,7 @@ one ladder simply missed it. Nothing in `gates.py` catches this; read each card 
 the choice it names.
 
 **`locked_text_threshold`** (`v2.py:13185-13186`) prints an explicit *"Requires …"* hint on a
-locked choice, distinct from `locked_text`, which replaces the label (§15). ⚠️ This citation read
-`v2.py:12786` until 2026-08-24 and was **stale** — corrected when §36 was written and every cited
-line re-read.
+locked choice, distinct from `locked_text`, which replaces the label (§15).
 
 ---
 
@@ -1001,16 +994,7 @@ Read and cite before using; delete from this list once promoted above.
 
 - The exact cooldown count for random events.
 
-*(`speaker = "unknown"` was on this list. It has been read and promoted — see §25.)*
-
-*(**Save-safety specifics — which identifiers orphan a live save when renamed** — was on this list.
-**Read and promoted 2026-08-29:** `references/the-returning-player.md` §2–§5 names them — the
-canvas/node slug, a flag or trait key, a stat's scale, and the game title — and §40 below carries
-the engine half. Struck here 2026-08-29, having outlived the answer by a day.)*
-
-*(Adjacent `[group]` blocks merging into a single if/elseif chain was on this list, while
-`the-surfaces.md` R6 stated it as fact — the skill contradicted itself. **Read and promoted
-2026-08-23:** `_render_group_chain` collects consecutive `group` blocks into one variant chain at
+*(`_render_group_chain` collects consecutive `group` blocks into one variant chain at
 `v2.py:14561-14568`, so a second ladder on the same node IS dead and first match wins.)*
 
 ---
@@ -1080,7 +1064,7 @@ grace_periods    = 1
 start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"        # or "game_end" (the default, and a product that ends)
 eviction_flag    = "terms_changed"
-currency_symbol  = "$"               # added 2026-08-16; defaults to "$". It covers the
+currency_symbol  = "$"               # defaults to "$". It covers the
                                      # RENT PAGES ONLY — ten other money prints are
                                      # hardcoded "$" regardless. §33.
 
@@ -1372,9 +1356,9 @@ The field's verdict, from section I's read of all 27 parseable corpus games:
   <<set $hygieneenabled to 0>> /* unused */
   ```
 
-- **`free-cities`, the corpus's deepest body simulator, never modelled it.** Its slave objects carry
-  `vagina`, `dick`, `boobs`, `anus`, `balls`, `butt`, `health` and `preg` as numeric properties, and
-  no hygiene or arousal property at all. Its two most-read properties are `devotion` (1,019) and
+- **`free-cities`, the corpus's deepest body simulator, never modelled it** (structure only; it
+  fails the adults-only rule). Its character objects carry eight numeric body properties and no
+  hygiene or arousal property at all. Its two most-read properties are `devotion` (1,019) and
   `trust` (667) — above every body part.
 
 - **Corpus-wide, hygiene is the rarest of the four body subsystems**: 234 read sites against
@@ -1394,7 +1378,7 @@ unbuilt on purpose.
 
 ## 31. `requires_npc` does NOT gate an auto-firing canvas
 
-> ⚠️ **Scoped 2026-09-03.** The heading is still true and the rest of this section still holds
+> ⚠️ **Scoped.** The heading is still true and the rest of this section still holds
 > for the auto-fire path. What changed is the count: `requires_npc` is now read on **three**
 > paths, not two — random ambients, substitution targets, and **the solo lane**, through
 > `setup._npcPresentForCanvas`. See §46. The auto-fire path was left alone on purpose: its
@@ -1525,8 +1509,7 @@ message (`v2.py:5309`). The same path also catches `max_triggers_per_day` exhaus
 ⚠️ **One game in this repo sets it** — `off_season`, six times, writing the hours out in its own
 words (*"mornings, eight till one"*, *"after nine at night"*, *"the last two hours, before the
 shutter"*). Everywhere else windowed work simply vanishes and the player has no surface that says
-when to come back. (This paragraph read *"Zero of the ten games"* until 2026-08-24; it was written
-before `off_season` adopted it and nothing re-counted.) The `SchedulePage` (`v2.py:18964`) publishes hours for
+when to come back. The `SchedulePage` (`v2.py:18964`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
 
@@ -1621,7 +1604,7 @@ shipped sandboxes carry a page like this and **7 of the 8** parsed top-ten do �
 degrees-of-lewdity, carries the same load inside its prose by swapping description for name on the
 meeting flag in 64 places. **None of the 27 uses a narrator to tell the player who somebody is.**
 
-> Re-checked 2026-08-24. `college-daze`'s is a **phone contact list** — `Check Contacts`, one row
+> `college-daze`'s is a **phone contact list** — `Check Contacts`, one row
 > per person, each row a link to that person's own status page, and a `(*NEW!*)` badge on the row
 > when there is something new behind it. Rows appear as people are met, gated on 43 distinct
 > `$met_*` flags. `free-cities` has no cast page: its `Starting Girls` is a purchase screen.
@@ -1676,7 +1659,7 @@ non-dev one and the page ships dev-only, which no gate would catch.
 
 ### `[[npcs]] tags` — the four-word line under the name
 
-Shipped 2026-08-24 from Section G. Optional, capped at **four** (`NPC_TAGS_MAX`), and inert in every
+Optional, capped at **four** (`NPC_TAGS_MAX`), and inert in every
 game that does not use it.
 
 ```toml
@@ -1695,16 +1678,10 @@ tags         = ["The book", "The scale", "Saturday", "Black coffee"]
         💡 …
 ```
 
-**Why four, and which four.** The field's best cast page is `friends-of-mine`'s **Characterpedia**:
-fifteen people, each with a portrait, a counter (*"Had sex N times"*), a 27–83-word biography, and
-**exactly four interests** — all fifteen, no exceptions.
-
-```
-Chloe     Manipulation | Attention | Writing | Oriental Food
-Winter    Watching People | Domination | Money | Expensive food
-Sofia     Working | Silence | Reptiles | Rough Sex
-MrsMorin  Secrets | Manipulation | Relaxing | Spanish Food
-```
+**Why four, and which four.** The field's best cast page is `friends-of-mine`'s **Characterpedia**
+(structure only; it fails the adults-only rule): fifteen people, each with a portrait, an encounter
+counter, a 27–83-word biography, and **exactly four interests** — all fifteen, no exceptions, e.g.
+*Manipulation · Attention · Writing · Oriental Food*.
 
 The four slots are consistent: **how they operate · what they want · an aesthetic · something they
 consume.** Thirteen of the fifteen end on a food or a drink, and **that trivial fourth slot is the
@@ -1734,7 +1711,7 @@ the character already owns (`the-surfaces.md` R8). It cannot give one to a chara
 
 ### One thing the field does on every line that we do not: colour
 
-Recorded 2026-08-24 as a **known difference. Nothing is built for it.**
+A **known difference. Nothing is built for it.**
 
 In seven of twenty-seven field games the single most-used macro in the entire game is a
 speaker-attribution component — `become-taxi-driver`'s `<<chat>>` **59,751** times,
@@ -1803,10 +1780,7 @@ same ones `group` follows — with one exception that is not.
 | **mixed child types only WARN** | `:6235` — `logger.warning("block_pool has mixed types …")`. It builds. Same-type children are the intent, and the warning is in the build log, not the game |
 | nesting depth is capped at **4** | `:6143` — a `group` wrapping a pool wrapping a group is depth 3, so 4 is a ceiling rather than a limit you will meet |
 
-⚠️ **A pool is an exclusive axis and the scoreboard now reads it as one.** `gates.py`'s
-`_band_texts` knew `group` and not `block_pool` until 2026-08-24, so a three-variant pool had its
-variants concatenated and reported as text that always renders — `lint · the act nodes` would have
-called three one-word variants a three-word band. Fixed before the first pool shipped. The **beat**
+⚠️ **A pool is an exclusive axis and the scoreboard now reads it as one.** The **beat**
 collector still folds every variant together on purpose, and that is correct: see the folding
 argument below.
 
@@ -1840,8 +1814,7 @@ v1's corpus carried a whole numbered rule for it — `prompts/game_design_rules.
 > […] The group block system handles phase changes (post-first-kiss vs default), but **WITHIN each
 > phase, the text is frozen.** Block pools add variety within phases."
 
-That last sentence is the same distinction the 2026-08-23 field study arrived at independently, and
-it is now R6's mechanism 4 vs mechanism 5 in `the-surfaces.md`.
+That distinction is R6's mechanism 4 vs mechanism 5 in `the-surfaces.md`.
 
 **How it was lost:** v2's skill was deliberately divorced from `prompts_v2/` because that corpus
 taught false engine facts. In cutting away the false ones, this true one went with them — and the
@@ -2046,7 +2019,7 @@ The real architecture is below, and it is the load-bearing fact:
 |---|---|---|
 | `compare()` — `v2.py:3988` | canvas / node / choice `conditions` | **yes**, since v2 shipped |
 | `setup.describeUnmetConditions` — `v2.py:2004`, trait switch `:2027`, phrases `:2037` | the *why is this locked* text on a blocked choice | **yes** |
-| `setup.checkSingleCondition` — `v2.py:7658`, trait branch `:7670`, `ne` at `:7692` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes, since 2026-08-24** |
+| `setup.checkSingleCondition` — `v2.py:7658`, trait branch `:7670`, `ne` at `:7692` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes** |
 | `setup.checkQuestsCondition` — `v2.py:15536` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
 
 `compare()` is reached first from the trait branch at `v2.py:3988`.
@@ -2139,9 +2112,7 @@ it is rollback-only and slated for deletion.
 
 ## 38. `[project] version` / `release_date` — the sidebar footer, and the only number the player can quote
 
-Added 2026-08-28, because `the-release.md` § Shipping the build began requiring this field and a grep
-of the whole skill — references, templates, scripts — found **zero** mentions of it outside that one
-new section. The doctrine was asking for something the skill had never taught.
+`the-release.md` § Shipping the build requires this field.
 
 Both keys are **optional** and live in `[project]`, alongside `id` / `title` / `starting_canvas`:
 
@@ -2198,7 +2169,7 @@ one game reading `0.1` on the portal while printing **`0.1.2`** to the player.
 { type = "time_of_day", start_time = "18:00" }                        # no end ⇒ exactly one hour
 ```
 
-Shipped 2026-08-29. The runtime branch is at `v2.py:4128`; its lock text at `:7915`. `HH:MM`,
+The runtime branch is at `v2.py:4128`; its lock text at `:7915`. `HH:MM`,
 24-hour, **end exclusive** — `11:00`–`20:00` is false at 20:00 exactly.
 
 **It delegates.** The branch is four lines and calls `setup.isCurrentTimeSlot`
@@ -2428,24 +2399,29 @@ dispatcher-only target.
 ## 43. Where `@` tokens resolve, and where they do not
 
 `@player`, `@player.<field>`, `@<npc>` and `@<npc>.rel` are resolved by
-`_resolve_at_references` (`v2.py:14646`) and, for link text, `_resolve_at_references_expr`
-(`v2.py:14693`). **Both are called on four things and nothing else:**
+`_resolve_at_references` (`v2.py:15350`), its link-text twin `_resolve_at_references_expr`
+(`v2.py:13937`), and `setup.resolveAtRefs` at runtime. **These surfaces, and nothing else:**
 
 | resolved | site |
 |---|---|
-| block `content` — paragraph, heading, dialog, thought_bubble | `v2.py:15193` |
-| `locations[].description` | `v2.py:9864` |
-| a location's `blocked_message` | `v2.py:9793` |
-| choice `text` | `v2.py:13256` |
-| `npcs[].role` — the label under the name | `v2.py:15272` (added 2026-09-02) |
+| block `content` — paragraph, heading, dialog, thought_bubble | `v2.py:15897` |
+| choice `text` | `v2.py:13937` |
+| `locations[].description` · `description_variants[].text` | `v2.py:10252` · `:10276` |
+| a door's `description`, option `text` and `locked_text` | `v2.py:10209`, `:12961`, `:12963` |
+| `npcs[].role` — the label under the name | `v2.py:15985` |
+| every phone surface; `story_arc` emotion ranges | runtime, `v2.py:2239-2670`; `:6826`, `:6838` |
+| ⚠️ `locations[].blocked_message` — **half** | resolved in the room (`v2.py:10127`), raw in `setup.locations` (`:1039`), which the nav card prints (`:5241`) |
 
 Every other author string is emitted verbatim. The ones that reach a player:
 
 | NOT resolved | where it shows up |
 |---|---|
-| `canvases[].name` | the solo-activity link label (`v2.py:5290`), the quest card's `canvas_name`, the canvas `<h2>` |
-| `npcs[].description` | the CustomizeCharacters screen — `html.escape` only, `v2.py:9312`. This is the game's **first** screen |
-| `quest_cards[].tip` · `.ready_text` · `.terminal_text` | the guidance page |
+| `locations[].name` | the room heading and every nav card |
+| `canvases[].name` | the solo-activity link label, the quest card's `canvas_name`, the canvas `<h2>` |
+| `npcs[].description` | the CustomizeCharacters screen — the game's **first** screen (customizable NPCs only; for others it renders nowhere) |
+| `npcs[].tags[]` · `.relationship_options[]` | the cast page (`v2.py:3464`) · the relation picker (`:924`) |
+| `quest_cards[].text` · `.tip` · `.ready_text` · `.terminal_text` | the guidance page |
+| `traits.labels[].label` · choice `locked_text` | the sidebar (`v2.py:3414`) · a locked choice (`:14053`) |
 | `canvases[].description` | dev surfaces only (`CanvasReview_*`, the `--debug` canvas banner) |
 
 ⚠️ **`npcs[].role` resolves `@` tokens.** A `customizable` NPC with `relationship_options` is one the
@@ -2460,21 +2436,15 @@ token regex reads. `the-first-hour.md` F10.
 every customizable NPC unconditionally, so those characters *must* be referred to by token in prose —
 which trains the author to reach for `@ray` everywhere, including the four fields above.
 
-**Measured across all 26 games: 9 player-facing leaks in 2 games, 24 clean.** `orientation` 7 — four
-canvas names, Wes's `description` on the character-creation screen, and two quest cards. `commuter`
-2 — `hub_cole_room` and `hub_ray_garage`, both shipped, both printing the token as the room's link
-label. Two customization games, both leaking, and nothing in the toolchain said so until this lint
-existed.
-
-> **Linted as `a token the engine never resolves`** — a LIST, never a score. It walks the merged TOML
-> and reports any `@` reference sitting outside the resolved set, dev-only fields reported separately
-> from player-facing ones.
+> **Linted as `a token the engine never resolves`**, walking every field and nested list, dev-only
+> fields apart. A player-facing one is the `--ship` BLOCK row **no raw token on screen**: the_balance
+> shipped nine (`b1f4af9^`), three of them in list fields the old field list could not see.
 
 ---
 
 ## 44. The door — `[locations.door]`, a threshold she lands on instead of the room
 
-Shipped 2026-09-02. Opt-in and **inert when unauthored**: a game that declares no door builds
+Opt-in and **inert when unauthored**: a game that declares no door builds
 byte-identical output, verified over 27 builds. `the-map.md` R6–R6c owns *when* to use one; this
 section is the mechanism.
 
@@ -2546,9 +2516,6 @@ option, the location and the canvas. The author fix is one line: give that canva
 
 ## 45. The effect toast — what a choice's `effects` actually show the player
 
-Added 2026-09-02. **Nothing in this skill had ever written this down**, which is how doctrine came to
-teach a shape without knowing what it rendered as.
-
 Every `effects` / `flagEffects` / `costs` entry on a choice runs through
 `setup.applyAndNotifyTrait` / `applyAndNotifyFlag` (`v2.py:6090`, `:6126`), which pushes a line onto
 `setup.pendingEffects`. `setup.showEffectNotification()` (`v2.py:6204`) then renders **one green toast
@@ -2577,9 +2544,6 @@ Three consequences, and the first is the one that matters:
 ---
 
 ## 46. The two switches on a location screen, and what each one now does
-
-Shipped 2026-09-03. Both fields existed, both were author-facing, and neither did anything on the
-lane an author actually watches.
 
 ### 46.1 `requires_npc` gates the SOLO lane
 
@@ -2656,7 +2620,7 @@ wrong switch. Both fields now work; they mean different things.
 
 ## 47. The quest-card goal bullet — what the player actually reads under 🎯
 
-Read 2026-09-03, and it is the engine half of `the-voice.md` R3.
+The engine half of `the-voice.md` R3.
 
 `setup.renderQuestsGoalBlock` (`v2.py:15921-15977`) has four frames, tried in order: terminal →
 ready → goal bullets → **nothing**. The bullet frame builds each row like this
@@ -2704,3 +2668,29 @@ list is `text · ready_text · tip · npc_id · priority · group · when · goa
 terminal · terminal_text` (`template_import.py:1108-1151`). The only player-facing place a
 requirement can live is a goal item's `label` — or, in prose, in `text` / `ready_text` / `tip`.
 Do not reach for a field that is not there.
+
+## 48. `[ui.cheat_page]` — free rows and the three time-savers
+
+One page (`v2.py:10572`); each `[[ui.cheat_page.grants]]` row is a button.
+A row with `free = true` is a plain button for everyone. Any other row is hidden until its code is
+typed. A page with a coded row needs `join_note`, a `join_url` (or `[project] support_url`) and
+`package_from_toml --codes`; an all-free page needs none. `[time]` must be enabled.
+
+```toml
+[[ui.cheat_page.grants]]
+id = "skip_day"
+label = "Skip to morning"
+kind = "next_day"
+wake = "06:00"
+free = true
+```
+
+| `kind` | does | the validator refuses (`template_import.py:3486`) |
+|---|---|---|
+| `trait` (default) | one trait write: `trait`, `value`, `op`, `cap`, `clamp` | stage counters, hidden traits, flags, uncapped banded meters |
+| `next_day` | `advanceDay()`, then the clock to `wake` | any trait or flag field |
+| `play` | goes to `canvas`'s first node when its trigger conditions hold and it has not fired | a repeatable, unplaced or dev canvas |
+| `reopen` | unsets `flag` while it is set | a flag no trigger reads `is_false` |
+
+`play` skips only the place and the hours; the scene's own effects move the counter. It skips the
+canvas's costs too.

@@ -1761,7 +1761,8 @@ cannot.
 ⚠️ **The failure mode is fake freedom, and it is the field's own #1 disease.** Study 5 and F1/F3 of
 the 7-24 report both land on it: numeric gates with no content behind them generate nothing but
 cheat-code demand. **A creation screen whose answers nothing reads is worse than no screen** — it
-promises reach and delivers a label. Hence §5.
+promises reach and delivers a label. Hence §5. *(2026-09-27: cheat demand is also met directly now —
+free time-saving rows, `references/the-systems.md` SY7. Fake freedom is still the cause to fix.)*
 
 **P4 · Do not change the gender.** Recorded as doctrine, with the count, so it is not relitigated by
 a later reader who sees `female 4 of 30` and draws the obvious wrong conclusion. It is a **supply**

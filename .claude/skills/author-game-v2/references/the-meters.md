@@ -105,8 +105,9 @@ the game against **its own declaration**, never against a number this file picke
 
 ## W1b · What the meter gates is NERVE, not permission
 
-Read in source 2026-09-03, `zaras-school-life`. Classify every act scene by whether she states a
-plain want or gives herself a practical reason, then read the corruption threshold on each:
+Counted in source on `zaras-school-life`, a school-set game, so its numbers are kept and none of
+its scenes are. Classify every act scene by whether she states a plain want or gives herself a
+practical reason, then read the corruption threshold on each:
 
 ```
 DIRECT — "she just wants him"      36 scenes    median gate 25    lowest 5
@@ -114,9 +115,9 @@ EXCUSE — a practical reason         5 scenes    median gate 60    highest 80
 ```
 
 **The direct route outnumbers the justified one seven to one, and it is available from corruption
-5.** At 5 she is already scheming at the boy beside her in detention — *"He was a teenage boy,
-driven by hormones and impulse. How hard could it possibly be to get him worked up?"* At 20 she
-walks into the men's locker room and propositions a stranger. She wants him at every level.
+5.** At the lowest levels she is already scheming to get a man worked up; a little higher, she
+propositions a stranger. She wants him at every level — the plain want, said, as in Shady Deals:
+*"you're already sinking to your knees, back straight, lips parted."*
 
 > **So the number is not "is she willing yet". It is HOW FAR SHE WILL GO TO ACT ON IT** — which
 > room she will walk into, who she will approach, and how brazen she is when she does.
@@ -128,9 +129,8 @@ Three things follow, and the third is the one that changes what you author.
 - **This is the mechanical twin of `register.md`'s composure finding.** The high branch reads
   composed and the low branch reads nervous *because the meter is nerve*. They are one system
   described from two ends, not two systems.
-- ⚠️ **Deniability is NOT a beginner's frame.** The five excuse-shaped scenes — *"she did not
-  realize it yet, but her top had slipped"*, *"the door was left ajar (or did someone open it?)"* —
-  gate at **45–80** and every one is family, behind `$famSexUnlocked`. The excuse is the tool for
+- ⚠️ **Deniability is NOT a beginner's frame.** The five excuse-shaped scenes — an accident of
+  clothing, a door left open — gate at **45–80**, every one behind the game's hardest unlock. The excuse is the tool for
   the target she cannot look at directly, and it is LATE content. Reaching for it early inverts
   the ladder. `the-want.md` §4 carries the design half.
 
@@ -528,23 +528,16 @@ none in a one-shot. The field treats it as a reason to swap one line of dialogue
 six hundred.
 
 A player states the failure from the other side, about a game whose corruption meter moved in
-silence (`findings_J_players.md` §6):
-
-> *"add some sort of questline, or **even just a few lines of dialogue**, for the family members when
-> you reach certain corruption thresholds. Right now it just feels like **a switch was just turned on
-> somewhere** and suddenly everyone's okay with it."*
+silence: they asked for *even just a few lines of dialogue* at the thresholds, because the change
+felt like **a switch turned on somewhere** (`findings_J_players.md` §6).
 
 > **A meter that rises without anyone in the world saying so reads as a switch being flipped.**
 
 ### Split it — one global number is the degenerate case
 
-Degrees of Lewdity splits on two axes at once:
-
-```
-WHAT she is known for   $fame.<kind>, 14 kinds — model · exhibitionism · sex · scrap · prostitution
-                        bestiality · social · rape · pimp · business · pregnancy · good · impreg · dance
-WHERE it is known       $pubfame (the town) · $schoolrep (the school)
-```
+Degrees of Lewdity (structure only; the game fails the adults-only rule) splits on two axes at
+once: **what** she is known for — fourteen kinds of fame — and **where** it is known, the town
+against one institution.
 
 At minimum split by *what*. Better, and closer to the strongest architecture in the field, split by
 *who*: Course of Temptation holds reputation **per person** (`pinfo.rumors[type]`), so one character
@@ -645,7 +638,8 @@ Added 2026-08-24 from Section G. Above, W6 says an identical meter pair across t
 engine missing*. This is the half that was missing from W6 itself: **picking a different meter is
 not enough if every meter only ever opens things.**
 
-`inseminator` ships its own design spec as a player-facing help page. Six relationship traits, each
+`inseminator` (numbers only: its text never states its cast are adults) ships its own design spec
+as a player-facing help page. Six relationship traits, each
 a one-line character summary plus three to five numeric modifiers — and **five of the six make one
 route cheaper and another route more expensive**:
 
@@ -655,7 +649,7 @@ route cheaper and another route more expensive**:
 | **Clingy** | "Needs constant attention" | +20% girlfriend, +2/mo if dated | **−30% polyamory, −3/mo if ignored** |
 | **Independent** | "Values her freedom" | +20% polyamory | **−10% girlfriend, −15% estate, decay doubled** |
 | **Jealous** | "Possessive and suspicious" | +5/mo if dated | **+20% jealousy event, +10% breakup** |
-| **Precious** | "Innocent and harder to seduce" | +20 Matron | **−5/−10/−15% flirt/kiss/sex** |
+| **Precious** | the hard one to win | +20 Matron | **−5/−10/−15% on the three intimacy steps** |
 | Loyal | "Devoted and faithful" | never breaks up | — |
 
 > **A meter that only opens things is a stat wearing a personality's name.**
@@ -676,8 +670,8 @@ sixty-two people, and nobody feels the same to play.
 
 Two mechanics from the same page worth having:
 
-- **A trait can be spent.** `Precious` carries a loss condition — *"Lost when: Affinity drops below
-  20 OR has 3+ children."* The personality is consumed by the thing it was gating.
+- **A trait can be spent.** `Precious` carries a loss condition: it is lost when affinity falls
+  below 20. The personality is consumed by the thing it was gating.
 - **A trait can be inherited** — each carries a 30–60% chance of passing to children. Not something
   we need, but it is the proof the author treated these as properties of a *person*, not of a slot.
 
@@ -761,8 +755,8 @@ string per band. What separates a good implementation from a bad one is **where 
 `corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
 set a descriptor string, copy-pasted through the game instead of factored into one place.
 
-Note what the bands say. Not `45/100`. **"Soft boner."** The number is internal; what the player
-meets is a body state in words. Our surface for this is `trait_status_text` (`engine.md` §30) — one
+Note what the bands say. Not `45/100`: **a body state in words**. The number is internal; what the
+player meets is how she is. Our surface for this is `trait_status_text` (`engine.md` §30) — one
 authored ladder, rendered wherever the trait sits.
 
 ### What the player is shown

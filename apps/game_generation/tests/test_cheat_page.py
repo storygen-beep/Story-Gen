@@ -585,3 +585,129 @@ def test_a_cap_note_that_outlived_its_reason_warns():
 def test_a_game_with_no_gate_on_the_trait_is_left_alone():
     """No gate reads vesper's `energy`; a Charge row must not be asked to justify itself."""
     assert _cap_errors(_authored()) == []
+
+
+# ── free rows and the three time-saving kinds (IC4, LO 2026-09-27) ──────────
+# The four basics a player should never have to buy are FREE buttons; anything else
+# stays behind a code. "next step" plays the step's own scene — never a counter jump —
+# and "ask again" only unsets a flag some trigger reads as is_false.
+FREE_ROWS = [
+    {"id": "free_money", "label": "Money", "trait": "money", "value": 50,
+     "clamp": False, "free": True},
+    {"id": "skip_day", "label": "Skip to morning", "kind": "next_day", "free": True},
+    {"id": "next_step", "label": "Next step now", "kind": "play",
+     "canvas": "step_one", "free": True},
+    {"id": "ask_again", "label": "Ask again", "kind": "reopen",
+     "flag": "refused_frank", "free": True},
+]
+
+
+def _with_step(d):
+    """A one-time step at the kitchen that a refusal flag closes."""
+    src = next(c for c in d["canvases"] if c["id"] == "scene_advance_frank_to_1")
+    step = copy.deepcopy(src)
+    step["id"] = "step_one"
+    step["name"] = "Step one"
+    step["trigger"]["is_repeatable"] = False
+    step["trigger"]["conditions"]["items"].append(
+        {"type": "flag", "subject": "player", "flag_key": "refused_frank",
+         "operator": "is_false"})
+    d["canvases"].append(step)
+    return d
+
+
+def _free_page(rows=None, join=False):
+    extra = {} if join else {"join_note": "", "join_url": ""}
+    d = _authored(grants=FREE_ROWS if rows is None else rows, page_extra=extra)
+    for k in ("join_note", "join_url"):
+        if not d["ui"]["cheat_page"][k]:
+            del d["ui"]["cheat_page"][k]
+    return _with_step(d)
+
+
+def test_an_all_free_page_validates_with_no_codes_and_no_join_line():
+    assert _errors(_free_page()) == []
+
+
+def test_a_free_row_is_a_plain_button_with_no_unlock_check():
+    page = _section(_build(_free_page()))
+    assert "$flags[\"cheat_free_money\"]" not in page
+    assert 'setup.applyAndNotifyTrait("player", null, "money", "add", 50, false, null)' in page
+
+
+def test_an_all_free_page_has_no_code_box_join_line_or_code_table():
+    twee = _build(_free_page())
+    page = _section(twee)
+    assert "cheatTry" not in page and "cheat-join" not in page
+    assert "cheatRestore" not in page
+    assert "setup.cheatCodes" not in twee
+
+
+def test_a_mixed_page_keeps_the_code_box_for_its_sold_rows():
+    rows = FREE_ROWS + [GRANTS[1]]
+    d = _free_page(rows=rows, join=True)
+    twee = _build(d, codes={"awareness": "BETAWORD"})
+    page = _section(twee)
+    assert "setup.cheatTry" in page and '$flags["cheat_awareness"]' in page
+    assert '$flags["cheat_free_money"]' not in page
+
+
+def test_a_mixed_page_still_needs_its_join_line():
+    rows = FREE_ROWS + [GRANTS[1]]
+    d = _free_page(rows=rows)
+    assert any("join_note" in e for e in _errors(d))
+
+
+def test_next_day_runs_the_real_rollover_and_wakes_at_six():
+    page = _section(_build(_free_page()))
+    assert "window.advanceDay();" in page
+    assert "time_state.current_hour = 6;" in page and "time_state.current_minute = 0;" in page
+
+
+def test_next_day_honours_wake_and_rejects_a_bad_one():
+    rows = [dict(FREE_ROWS[1], wake="07:30")]
+    assert "time_state.current_hour = 7;" in _section(_build(_free_page(rows=rows)))
+    bad = [dict(FREE_ROWS[1], wake="7am")]
+    assert any("'wake'" in e for e in _errors(_free_page(rows=bad)))
+
+
+def test_play_goes_to_the_steps_first_node_through_its_own_conditions():
+    twee = _build(_free_page())
+    page = _section(twee)
+    assert "setup.cheatCanPlay(" in page
+    # the first node marks the canvas fired on entry; the row must not mark it again
+    assert "setup.markCanvasTriggered(" not in page
+    assert "Canvas_" in page.split("setup.cheatCanPlay(")[1]
+    assert "setup.cheatCanPlay = function" in twee
+    assert "triggerConditionsSatisfied(c.conditions)" in twee
+
+
+def test_play_rejects_a_missing_or_repeatable_canvas():
+    missing = [dict(FREE_ROWS[2], canvas="nope")]
+    assert any("not found" in e for e in _errors(_free_page(rows=missing)))
+    repeatable = [dict(FREE_ROWS[2], canvas="scene_advance_frank_to_1")]
+    assert any("repeatable" in e for e in _errors(_free_page(rows=repeatable)))
+
+
+def test_reopen_only_clears_a_flag_that_closes_a_door():
+    page = _section(_build(_free_page()))
+    assert 'window.applyFlagEffect("player", null, "refused_frank", "unset")' in page
+    stray = [dict(FREE_ROWS[3], flag="met_frank")]
+    assert any("is_false" in e for e in _errors(_free_page(rows=stray)))
+
+
+def test_action_rows_refuse_trait_fields_and_effects():
+    rows = [dict(FREE_ROWS[3], op="set"), dict(FREE_ROWS[1], id="skip2", flagEffects=[])]
+    errs = _errors(_free_page(rows=rows))
+    assert any("'op' does not apply" in e for e in errs)
+    assert any("flagEffects" in e for e in errs)
+
+
+def test_an_unknown_kind_is_rejected():
+    rows = [dict(FREE_ROWS[1], kind="teleport")]
+    assert any("'kind' must be one of" in e for e in _errors(_free_page(rows=rows)))
+
+
+def test_page_level_free_is_still_rejected():
+    d = _authored(page_extra={"free": True})
+    assert any("must not declare 'free'" in e for e in _errors(d))

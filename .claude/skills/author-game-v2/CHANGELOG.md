@@ -5,6 +5,250 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — IC7: her-side examples, and the adults-only rule across the whole skill (step 1)
+
+**Why.** IC7 asked for the male-player examples to be replaced from her side: the reveal beat
+where she strips for "you", the two-halves sentence ("Your cock…"), and the act menu ("Pound her
+pussy"). LO then applied the adults-only rule (a game counts only if its own text states adults,
+and nothing frames a partner as a teen) to every sexual quote in the skill, not just the moment
+library. On that rule, DoL, Zara's School Life, Family Ties, road-to-success, patriarch,
+sluttown-usa, free-cities, becoming-prom-queen, destroyer, den-of-infamy, corpo-life,
+friends-of-mine and inseminator all fail for sexual quotes. Their structural numbers may stay,
+labelled.
+
+**What changed — IC7 (written by `v2-prose`, measured with `--beat`, shown to LO first).**
+- `register.md`, model **reveal beat** and its TOML twin: *"You pull your top off slowly, so your
+  neighbour knows it's for him…"*. It is 40 words, median 6, 3 explicit words.
+- `register.md`, **two-halves sentence**: the mechanism is now in our own words, with our own 3×3
+  grid from her side, split at the join. Her low band is reluctance that could turn (LO), not sex
+  she endures. Measured at 22 and 27 words, median 11, 7 and 3 explicit words. No DoL quote is left.
+- `register.md`, **lines by personality**: Course of Temptation's lines to her (`dirtytalkidea`,
+  `dirtytalkcockenterspussy`). The rule was corrected to match the source: shy sets how often he
+  speaks, and has no lines of its own.
+- `the-voice.md` / `the-surfaces.md`, **act menus**: In Her Own Hands `JamesDate1FPOptions` and
+  Shady Deals replace destroyer and corpo-life. The loop anatomy was re-read against IHOH: each act
+  raises her meter by `random(1,5)`, and the first meter to reach 100 wins the finish.
+- `the-surfaces.md` R3c, **the ladder across visits**: her side, rung numbers kept from the
+  source. Rungs 0–8 have no sex (A2). R6 labels are used ("Put your wrists in his hand", "Say yes to
+  his friend"). The rung-14 conversation is ours. friends-of-mine is kept as numbers only, and IHOH
+  `BRLaptopPorn` is added as the female-lead instance.
+- `engine.md`: "Kiss her" is now "Kiss him".
+
+**What changed — adults-only step 1** (audit at
+`~/Documents/Great_Games_Study_20260926/round5/ADULTS_ONLY_AUDIT.md`). Every sexual quote from a
+failing game was replaced by a verified quote from a passing game (Course of Temptation, In Her
+Own Hands, Shady Deals, Cupid's Way excluding Jack and Aaron), or by the mechanism in our own words.
+The Zara "teenage boy" line was fixed first. Files: `the-meters.md` W1b (plus the player comment,
+the DoL fame kinds, inseminator's Precious row, "Soft boner"), `register.md` (the Zara act quote
+became IHOH `JamesDate1SexA`; road-to-success composure; the Zara owning/owned pair; sluttown and
+destroyer address terms and moans; `ginablow`), `the-arc.md` (A1, A3, A3b, A4, A4b, A5, A8, A9, the
+toll scene), `the-surfaces.md` (the DoL, Family Ties and Zara bedroom and gym menus became CoT
+`YourDorm`; the DoL bath with Robin; the Zara dinner and detention pool; the patriarch roster;
+destroyer and sluttown word lists; corpo-life's kitchen; a DoL comment), `the-phone.md` (Family
+Ties' selfie/OnlyFans ladder became IHOH `CameraMain`; the "pornhub tab" comment; patriarch; a
+sluttown comment), `the-want.md` (kinship pickers, W4b), `the-first-hour.md`, `the-systems.md`,
+`the-board.md`, `engine.md` (free-cities body properties, the friends-of-mine cast page),
+`the-voice.md`, `SKILL.md`. The moment library swaps Aaron's two Cupid's Way `[Afterschool]`
+entries for IHOH `[Abby_Bath_Shower1a]` and Shady Deals `[Pool Event Quickie]`. `templates/want.md`
+drops the Prom Queen examples. Every replacement quote was grepped in the Round 2 passages before
+use.
+
+**Left for step 2 (LO: its own item).** DoL, Zara and Family Ties as structural and number evidence,
+with no school-age examples: the reference game's `school` anchor, DoL's Robin/Bailey/orphanage and
+school details, the-arc's founding on Zara and Family Ties (A2's quest log), "dad 43, bro 38, mom
+26", the-want's Prom Queen and Solomon Falls premises, `schoolpoolexposed`, and player comments from
+failing games.
+
+**Verified.** The IC7 grep (`Your cock|Pound her|lets you look`) plus `rip your balls|Fuck
+Her|Gabby|teenage boy|big boy|famSexUnlocked` returns nothing over `references/`, `templates/` and
+`SKILL.md`. pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 148,470 → 147,756 (−714) · running total 147,756 / 149,283
+
+---
+
+## 2026-09-27 — IC6: the first floor under the writing, and the_balance's three checks made general
+
+**Why.** Every prose check was a ceiling, so compressed prose passed them all (the_balance's 09-15
+root cause, `7eba332`). The_balance's `process/` scripts found what the skill could not see: `but`
+under the field, pronouns pointing at nobody, `@gil` printed raw on nine surfaces.
+
+**Measured first, and the PRD's floor was wrong.** Round 1 field, 26 games (dump.py → scratchpad),
+G19's sentence split. Per-game median sentence: p10 7.0 · p25 8.25 · median 10.5 · p75 13 · max 18.
+Verbless fragments: p25 11.4% · median 15.2% · p75 27.6%. A sentence floor at p25 (WS2 as written)
+would FAIL the model beats (pooled median 7) and PASS the compressed 09-15 build (median 11). What
+separated that build was its joints: `but` 0.14 per 1k (field min 2.46, p10 2.88, p25 3.76) and
+`and` 41.7 (field max 41.11). LO chose: judge the joints at field p10; print sentence length and
+fragments, do not judge them.
+
+**What changed.**
+- **`scripts/gates.py`:** new gate `prose has room`: `but` ≥ 2.88 per 1k (field p10) and `and` ≤
+  41.11 (field max), n/a under 500 words. It is on `SHIP_REPORT_GATES`, never BLOCK. Constants have
+  provenance comments. `sentence length` prints the p25 floor it does not judge. New lints: `the
+  joints` (ratio, glosses, the five shortest-sentence screens); `a pronoun with nobody to point at`;
+  `a past event the player was never given`; `short lines with no verb` (with the field's share).
+  `lint_unresolved_tokens` now walks every field and nested list against the resolved-surface table
+  from `tokens.py` (line numbers re-read in v2.py). A player-facing hit is the new `--ship` BLOCK row
+  **no raw token on screen**.
+- **New `scripts/readable.py`:** a generalised copy of the_balance's `readable.py` (checks A, B, C).
+  The pronoun set follows `narration_person` (third person: not run, and it says so). The universal
+  flags are the opening's flags that nothing unsets. US and UK role words are both included. B
+  accepts -ed words, the same rule the field was measured with. The_balance's scripts are untouched.
+- **`references/register.md`:** the targets table gains the joints row and a printed-only sentence
+  row. There are new rules **Joints** and **A pronoun needs someone on screen first**. "Loud is not
+  long" now adds "and short is not compressed". The L2 body is cut; its heading stays, because
+  `gates.py` prints it. Paid for by cutting history: the fourth/fifth-instance narratives condensed,
+  the model-beat re-score story, LO's quoted messages on the voice (the decision stays), and one
+  date.
+- **`references/engine.md` §43:** the token table is complete and current: `description_variants`,
+  door fields, phone, story_arc, and half-resolved `blocked_message`. The not-resolved side adds
+  `locations[].name`, `tags`, `relationship_options`, trait labels, choice `locked_text` and quest
+  card `text`, each with `v2.py:line` checked. The old per-game measurement paragraph is shortened.
+- **`SKILL.md`:** the gate row, four lint names, the token lint's scope, and the BLOCK row.
+- **Tests:** new `tests/test_gates_ic6.py` (16).
+
+**Removed from `register.md` L2, kept here:** "Retired, because the voice LO chose negates on
+purpose: its model line (2026-09-23) is *"He doesn't ask about college. He never does."* The field
+figures and the instrument history are in `gates.py`, at `FIELD_NEGATION_P50` and the
+`lint_negation` docstring."
+
+**Not built, and why.** A words-per-screen floor: the field's unit is a passage (branches and reveals
+in one), ours is a beat, and 25 of 26 field games carry no tags that say what kind of screen a
+passage is. A fragment-share ceiling: nothing separates by it (the lint reads 2.2–5.9% on our three games; field p75 27.6%).
+
+**Verified.**
+- pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · `git status games/` unchanged.
+- Tallies: the_balance 28/46 → 29/47 (the new gate passes, `but` 3.00); orientation 46/49 → 46/50
+  and vesper_two 44/47 → 44/48 (the new gate fails: `but` 0.47 and 0.28, `and` 54.1 and 43.5).
+- Acceptance:
+  - (1) the field table above;
+  - (2) the_balance at `273f5ec` FAILS `prose has room` (`but` 0.14);
+  - (3) the model beats clear both thresholds (`but` 3.39, `and` 20.3; 295 words, so the gate
+    itself would read n/a);
+  - (4) the token walk finds exactly nine player-facing leaks at `b1f4af9^` and none at HEAD;
+  - (5) `--ship` on a fixture with `@gil` in a location `name` exits 1 with the new row red.
+- The_balance's pronoun count (5) matches its own script's.
+
+words: 148,480 → 148,470 (−10) · running total 148,470 / 149,283
+
+---
+
+## 2026-09-27 — IC5: guidance generated from the ladder
+
+**Why.** Round 3 §2.5: the skill keyed guidance to meter bands, while the field's best shape is
+one line per character step naming place and time — and being lost is the top complaint. IC5 is
+PRD_SKILL_CHANGES WS10's guidance bullet plus an optional hint in her voice (In Her Own Hands).
+The rest of WS10 is not IC5: `readable.py`/`tokens.py` are IC6; `presence.py` and checkpoints B/C
+belong to the spine work.
+
+**What changed.**
+- **New `scripts/guidance_from_ladder.py <slug> [--out PATH]`:** from `board.characters[].ladder`,
+  one `[[quest_cards]]` per step (`npc_id`, `when` = counter `eq n-1`, a goal of counter `gte n`,
+  a `tip` naming the place and window, `ready_canvas` = the step, placeholder `text`, a
+  commented her-voice tip) plus a terminal card. TOML to stdout or `--out`; refuses any path
+  inside `games/`; writes no prose.
+- **`scripts/gates.py`:** new `step_hint_problems(game, state)`. The `--ship` REPORT row "a hint
+  line with place and time per step" (a stub until now) lists steps with no card shown exactly
+  while they are next, and cards that do not name the place or a time. Day words match whole
+  words only, so "money" is not Monday. n/a when no ladder is declared.
+- **`references/the-voice.md` R2**, now "every step carries a card line; every ascent tier keeps
+  its card". The meter-band keying is gone: the five-rung `nerve` table, "use a stepped
+  trait-band shape", and the long `gte`/`lt` paragraph (now one sentence). Kept, because a gate
+  and other files point at them: the ascent-tier card rule (`guidance exists`), the TOML example
+  (now a tier card), and the inline-table, `group`/`npc_id`, condition-form and `ne` warnings.
+  The pattern lives in R2, not `the-surfaces.md` as WS10 said, so there is one copy.
+- **`SKILL.md`:** the generator is named; the `--ship` report list names the new row. Paid for
+  by cutting the `forty_miles` story from the playtest line.
+- **Tests:** new `tests/test_guidance_from_ladder.py` (9), on the ws4 three-step ladder.
+
+**Verified.** pytest 121 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (28/46,
+46/49, 44/47) · `--ship` prints the new row as n/a on all three (no ladders declared) ·
+`git status games/` unchanged. Acceptance: on the fixture ladder, the generated cards pass
+`guidance exists` for `npc_jo` and the hint check (3/3). Merged into the fixture TOML, the engine's
+own importer parses all 4 cards and `validate()` returns no errors.
+
+words: 148,480 → 148,480 (0) · running total 148,480 / 149,283
+
+---
+
+## 2026-09-27 — IC4: a free, phone-usable cheat page (engine + skill)
+
+**Why.** The most-liked comment on 8 of the study's 13 core mopoga pages asks for a cheat or a
+code; phone players cannot open a console; the skill taught no cheat page. LO's calls: the four
+basics are free buttons and anything else stays behind a code ("both"), and the engine work is
+part of IC4.
+
+**What changed — engine (`apps/`).** The engine's cheat page sold every row behind a code and
+allowed trait writes only; flags, scene jumps and stage counters were banned on purpose. Two of
+the PRD's four basics, worded as written ("jump a ladder step", "reset a refused door"), would
+have broken that for a reason, so they were built in forms that cannot skip content.
+- `template_import.py`: rows gain `free`, `kind` (`trait` default · `next_day` · `play` ·
+  `reopen`), `canvas`, `flag`, `wake`. New `_validate_cheat_action_row`: `play` needs a placed,
+  one-time, non-dev canvas; `reopen` only unsets a flag some trigger reads `is_false`; trait
+  fields and effects are refused on the three new kinds. The join line is required only while a
+  row is coded. Page-level `free` is still an error.
+- `v2.py`: a free row has no unlock wrapper. An all-free page emits no code box, join line,
+  restore call or code table. `next_day` calls `advanceDay()` and sets the wake time. `play`
+  shows only while `setup.cheatCanPlay` (the canvas's own conditions and fired-once record) is
+  true, then goes to the first node; the node marks itself fired, so the row does not.
+  `reopen` unsets the flag through `applyFlagEffect`.
+- `package_from_toml.py`: an all-free page needs no `--codes`; a codes file may only name coded
+  rows.
+- `test_cheat_page.py`: 13 new tests (67 total).
+
+**What changed — skill.**
+- `references/the-systems.md`: new SY7, "the cheat page is free where it saves time".
+- `references/engine.md`: new §48, the authoring guide and the kinds table. Paid for by cutting
+  dated history across engine.md (about −390 words: "until <date>", "added/shipped <date>", and
+  the struck "was on this list" notes), keeping every rule sentence.
+- `templates/board.toml`: a commented `[ui.cheat_page]` slot with the four free rows, as a menu
+  to cut down.
+- `scripts/gates.py`: `lint · a cheat page exists`, reported, never scored (also in the JSON).
+  `SKILL.md` names it. New `tests/test_gates_ic4.py` (4).
+- `DOCTRINE_GAPS.md`: a pointer from the cheat-demand-as-symptom line to SY7.
+
+**Verified.**
+- Engine: `test_cheat_page.py` 67 passed; `apps/game_generation/tests` 410 passed. The 6
+  failures in `apps/projects` fail identically on HEAD without these changes.
+- Generated twee for media_lab, orientation, the_balance, vesper (a coded page) and vesper_two is
+  byte-identical before and after.
+- Acceptance: a fixture built from the template slot validates, needs no codes, and compiles.
+  Headless at phone width (390 px), no page errors: Money 40 → 140; Skip to morning goes Monday
+  07:00 → Tuesday 06:00; "next step" lands on the step's first node, fires once, the counter goes
+  0 → 1 on its first choice, then the row greys to "Not open yet."; "ask again" clears
+  `refused_frank`; no code box.
+- Skill: pytest 112 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (28/46,
+  46/49, 44/47; all three print "a cheat page exists — none") · `git status games/` unchanged.
+
+words: 148,483 → 148,480 (−3) · running total 148,480 / 149,283
+
+---
+
+## 2026-09-27 — IC21 follow-up: "too few to judge" is for share gates only
+
+**Why.** LO: "too few" makes sense only where a percentage must reach a floor below 100%. Where
+every item must be right, 3/3 correct is a real PASS. IC21 had applied the n < 5 rule to all 27
+gates that record an n.
+
+**What changed.**
+- **`scripts/gates.py`:** new `SHARE_GATES` next to `FEW_CASES`: location fill, explicit floor,
+  explicit in repeatable, an explicit beat carries a clip, traversal heat. `gate()` marks too few
+  only for those. The other 22 (all-or-nothing: `not <bad list>`) are judged on any n and still
+  print their n. Fixed the parked label, which said "FAIL" when the merged run was really too
+  few; it now says PASS / TOO FEW / FAIL.
+- **`SKILL.md`:** the tally paragraph says share vs all-or-nothing, tightened to pay for itself.
+- **Tests:** three added to `tests/test_gates_ic21.py`: an all-or-nothing gate passes on 1/1;
+  too few only ever lands on a share gate; every `SHARE_GATES` name is a real gate.
+
+**Verified.** pytest 108 passed · `--selfcheck` exit 0 · cite_check 84 · `git status games/`
+unchanged. Tallies: the_balance 20/46 → 28/46 (15 fail, 2 parked, 1 too few, 5 n/a) ·
+orientation 44/49 → 46/49 (3 fail) · vesper_two 42/47 → 44/47 (3 fail).
+
+words: 148,488 → 148,483 (−5) · running total 148,483 / 149,283
+
+---
+
 ## 2026-09-27 — IC21: an honest scoreboard (too few to judge, parked content measured)
 
 **Why.** The tally could look better than the game. A share gate passed on one case, parked

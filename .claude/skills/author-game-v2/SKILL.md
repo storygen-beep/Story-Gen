@@ -134,7 +134,8 @@ That is what separates a room from a button list.
 
 ⚠️ **And "people" is not one bucket — each of them has to own a different part of the world.**
 A character is separated from the others by the **subject he talks about and the people who are
-his** (Dr. Angela has the clinic; Dean Mea has the school; Romi has the shop and Ell and Gigi), and
+his** (the doctor has the clinic; the administrator has the votes and the levy; one woman has the
+shop and her two friends), and
 by **a place and an hour where he is the only one there**. Write five good voices and then schedule
 all five into the same room every evening and the player still cannot tell them apart — which is
 exactly what `the_season` did (`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
@@ -233,11 +234,11 @@ The state schema is in
 `python3 scripts/gates.py <slug>`. **When a gate fails, look it up here.**
 
 **The tally counts every gate that judged something**: `29/49 gates pass · 15 fail · 3 parked,
-not judged · 2 too few to judge · 4 n/a` — only n/a (nothing authored) leaves the denominator. A
-share passing on fewer than 5 cases is **too few to judge**, never a pass; a FAIL stays a FAIL.
-**Parked**: `games/<slug>/parked/**/*.toml`, always read, plus the ledger's `parked.files`, is
-merged into a copy and re-gated; a gate that content would judge counts as not passing, so parking
-never raises the score. A fragment that will not parse is printed. Under `--ship` both are red.
+not judged · 2 too few to judge · 4 n/a`; only n/a leaves the denominator. A share (floor below
+100%) passing on under 5 cases is **too few to judge**; an all-or-nothing gate passes on 3/3; a
+FAIL stays a FAIL. **Parked**: `games/<slug>/parked/**/*.toml`, always read, plus the ledger's
+`parked.files`, is merged into a copy and re-gated; a gate it would judge counts as not passing.
+A fragment that will not parse is printed. Under `--ship` both are red.
 
 | gate | what it means | where it is argued |
 |---|---|---|
@@ -285,6 +286,7 @@ never raises the score. A fragment that will not parse is printed. Under `--ship
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
+| prose has room | the first floor under the writing: `but` ≥ 2.88 per 1,000 words (field p10) and `and` ≤ 41.1 (field max) — compressed prose drops its joints | `register.md` — "Joints" |
 | prose texture | the dash rate against the field — p50 0.99, p90 17.5, ceiling 35.0/10k. The other three texture figures print and are **not** judged | `register.md` — "Dashes stay rare" |
 
 Lints sit below the tally and never move it: dialogue attribution · **the labels and the systems
@@ -349,7 +351,7 @@ behind** (how many surfaces she pays for deposit anything; a pure sink is not a 
 only of pure sinks is) · **repeatables without a step** (repeatables added since the last
 `releases[]` entry when no declared ladder step was added — a LIST, never a score; a first release
 prints its baseline) · **a flag that never resets** (a `*_today`/`*_week` flag, or one in
-`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator, which is how `the_route` is 46/46 green with 11 explicit screens; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
@@ -360,9 +362,11 @@ rather than declined — 6 of 88 characters in 17 games, all six in one game) ·
 character via `requires_npc` and carries no `trigger.npc` — it renders as a link, not a portrait,
 and has no presence check at all. A list because an activity that happens in a place while somebody
 is around is a legitimate shape; the hard version of the failure is the gate above) ·
-**a token the engine never resolves** (`@player` / `@npc` sitting in a field the engine emits
-verbatim — a canvas `name`, an npc `description`, a quest card. Player-facing and dev-only counted
-separately; `engine.md` §43 has the four fields that DO resolve) · **the badge arrives before the
+**a token the engine never resolves** (`@player` / `@npc` in any field the engine emits verbatim,
+nested lists included; `engine.md` §43 has the table. A player-facing one is the `--ship` BLOCK row
+*no raw token on screen*) · **the joints** (the coordination ratio, `, which is` glosses, the
+shortest-sentence screens) · **a pronoun with nobody to point at** · **a past event the player
+was never given** · **short lines with no verb** (the last three from `scripts/readable.py`) · **the badge arrives before the
 content** · **the role stays attached** · **which refusals are
 shown at all** · **the act between the click and the number** (`the-surfaces.md` R9 — location
 exits that fire effects and show no screen, with the game-time they burn. A LIST: the field runs
@@ -399,7 +403,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   player, and it is the one mode wired to stop a publish: `scripts/release_upload.py` refuses to
   package on a red, and `scripts/hooks/pre-commit` refuses to commit a non-dev portal build of a
   v2 game. It **BLOCKS** only what makes a build broken, unfinishable
-  or untrue — no past claim on a repeatable · no printed stat · a one-time step with a person
+  or untrue — no past claim on a repeatable · no printed stat · no raw token on screen · a one-time step with a person
   speaks · the opening's card has goals · each step fires when unlocked, and each unlock is
   earnable (every person on the release page has a declared ladder, it passes *ladders move
   forward*, and `playtest.reach_step` climbs it in the build — the clock and place are set per
@@ -408,7 +412,8 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   declared door works · the pressure can be paid or is signposted · no empty rooms · the build
   matches the release page. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
-  the walk-in floor, traversal heat, sentence length, and every other gate. `gates.py <slug>` still
+  the walk-in floor, traversal heat, sentence length, a card per ladder step that says where and
+  when, and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
@@ -422,11 +427,11 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, and does every rule the references POINT AT actually exist? Needs no game. A qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
 - **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
-  the running game in a browser and is the only place some defects exist at all — `forty_miles` 0.1
-  shipped 35 effects using an op the runtime does not implement, and the TOML, the validator, the
-  build and every gate were green the whole way down. It is also what the `v2-player` agent runs.
+  the running game in a browser and is the only place some defects exist at all. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own
   first four reds were the harness, not the game. `references/agents.md`, The Player.
+- **`scripts/guidance_from_ladder.py <slug> --out <scratch>` writes a person's quest cards from
+  their ladder**, one per step with place and window, for the author to fill in (`the-voice.md` R2). It never writes into `games/`.
 - **`scripts/pitch_pack.py <slug> --person <npc> --kind <moment_kind>` is the world a Pitcher may
   pitch into.** It opens with the promise, the moment kinds already shipped, that kind's slice of
   `references/moment-library.md`, the clips on disk, and RELATIONSHIPS — each person's steps so far,

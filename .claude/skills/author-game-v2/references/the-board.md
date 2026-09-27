@@ -248,15 +248,15 @@ a game with no personality meter, so all of them rotate at random and read as va
 identity. `the-sheets.md` S8: a named system points at its mechanism, or says in the open that it is
 rotation.
 
-**2 · Per-character mood axes are enumerated and REQUIRED.** Robin cheerful↔traumatised, Kylar
-shy↔obsessive, Sydney pure↔corrupt — and:
+**2 · Per-character mood axes are enumerated and REQUIRED.** Each character has named axes —
+cheerful↔traumatised, shy↔obsessive, pure↔corrupt — and:
 
 > *"Scenes that can trigger at any level of trauma need variants to cover both."*
 
 We have per-NPC meters and no rule that a scene must cover their range.
 
-**3 · A required exit matrix on every encounter** — fights him off / makes him finish / asks him to
-stop, **the first two required for all encounters**. Our `she can say no` fails only on zero across a
+**3 · A required exit matrix on every encounter** — she resists, she ends it herself, she asks to
+stop — **the first two required for all encounters**. Our `she can say no` fails only on zero across a
 whole game, which is a floor, not a matrix.
 
 **4 · Character bibles are ONE LINE.**

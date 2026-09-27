@@ -528,11 +528,8 @@ Walking outward from each game's `startnode`, the first spoken refusal appears a
 where it is reachable at all. The funnel is unconditional; refusals begin where it ends.
 
 **What the opening does instead is hand over a bill.** Course of Temptation's mother attaches
-$100/week in a conversation at the family dinner table, and degrees-of-lewdity's entire opening is a
-rules briefing that locks nothing:
-
-> "If you want to avoid trouble, keep your allure low by dressing modestly and sticking to safe,
-> well-lit areas. Nights are particularly dangerous." — `Start2`
+$100/week in a conversation at the family dinner table, and degrees-of-lewdity's entire opening
+(structure only) is a rules briefing that locks nothing.
 
 Section A found the same thing from the other side and it is stated there once: *state the pressure
 in the first minutes, as a scene, not as a rule.* This rule is the constraint that follows —
@@ -843,7 +840,7 @@ The field's ordering, in the two clearest cases:
 > *"This is your closest friend, **Felix Morin**; a rather shy young man who you've known almost
 > since the day you've moved here… including his older sister, **Chloe**."* — friends-of-mine
 
-> *"one of your father's favourite girls, Ana"* — patriarch
+> *"Your new employer stands and leans forward to shake your hand."* — the-company
 
 **Relationship label first, then the name.** The label is what the player can hold; the name is
 what they will need later.

@@ -260,11 +260,16 @@ complaint, quoted in P11.
 **This is the field's single most common phone porn mechanic and we have never once built it.**
 `post_actions` appears in zero of the thirty games in `games/`.
 
-`family-ties` runs Instagram and OnlyFans as **one system at two ceilings**:
+In Her Own Hands' camera (`CameraMain`) runs selfies as a ladder — dressed → underwear → topless —
+each rung gated on the room she is in, what she is wearing, and her inhibition, and a rung she is
+not ready for refuses in her own voice: *"I can't take a selfie in just my bra and panties!"*
 
-| | Instagram | OnlyFans |
+`family-ties` (structure only; it fails the adults-only rule) runs two apps as **one system at two
+ceilings**:
+
+| | the free app | the paid app |
 |---|---|---|
-| rungs | plain selfie → underwear → topless | topless → naked → pussy → plug, then video |
+| rungs | three, the top one topless | four more, then video |
 | counters | one per rung, kept separately | one per rung, kept separately |
 | subscribers | `$you.inst.sub` | `$you.onlyfans.sub` |
 | income | monthly, recurring | monthly, recurring |
@@ -315,7 +320,7 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 
 The two loudest phone threads in 22,622 harvested comments are the same question:
 
-> *"How do you unlock the pornhub tab on the phone"* — `family-ties`, **50 net**, and again at **31 net**
+> how to unlock one locked adult app on the phone — `family-ties`, **50 net**, and again at **31 net** (paraphrased)
 
 And the worst case in the corpus is a phone locked behind a puzzle. `new-life-project` puts a PIN
 on its phone and **seven separate high-scoring comments ask for it** — *"How do you get the code
@@ -360,11 +365,9 @@ players say so themselves, twice, unprompted:
 > *"Check the phone in the game. It tells you who's playing who."* — `college-daze`, 20 net
 > *"Check the in-game phone, it will tell you who plays who."* — `college-daze`, 14 net
 
-`patriarch` does the same job in a different register — its `Make plans` screen names the **world**
-blocker when the phone cannot help:
-
-> *"Monique is ready for the procedure, but you still need to renovate the East Wing before you can
-> move in your new breeder!"*
+`patriarch` (structure only) does the same job in a different register — its plans screen names
+the **world** blocker when the phone cannot help: a person is ready, but a room has to be renovated
+before she can move in.
 
 ⚠️ **n = 1 for the latch specifically.** It is offered as a shape, not a rate, and nothing gates
 it. What is measured is the disease it treats, not the frequency of this cure.
@@ -486,7 +489,7 @@ the cleanest single verdict in the 622 phone comments and the highest ratio in t
 And on the loop it creates:
 
 > *"The grind is unreal. It's just a time waster, use the app, wait, use the app, wait, use the
-> app, wait. […] You use the app 10 times on a character and you get a kiss"* — `sluttown-usa`
+> app, wait."* — `sluttown-usa` (ten uses buy one small reward)
 
 **Upkeep is not pressure.** P5's costs are pressure because they trade the phone against something
 else she could be doing with that minute. A battery is a second clock that governs only the phone,

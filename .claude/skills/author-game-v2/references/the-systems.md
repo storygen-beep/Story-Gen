@@ -284,9 +284,9 @@ In the field a system is written once and turns up wherever its label is.
 > wet clothes · a pregnancy test into **5** each. `new-life-project`, 59 hubs: trauma **8**, the
 > pet **6**, quest letters **6**, work counters **5**, masturbation **5**, classes **4**.
 >
-> And the injection carries per-room settings: `<<masturbate 10 249 149 -25 roomJerk>>` — this
-> room's numbers; `<<exhibitionism "park">>`; `<<pregnancyTest "Bedroom">>` — where to return to;
-> an orphanage kitchen naming its own allowed ingredients; a gym naming its own practisable sports.
+> And the injection carries per-room settings: `<<exhibitionism "park">>`; `<<pregnancyTest
+> "Bedroom">>` — where to return to; a kitchen naming its own allowed ingredients; a gym naming its
+> own practisable sports.
 
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
 a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:1939` —
@@ -377,6 +377,21 @@ path, superseded by `[[quests.cards]]` for `quests_engine = "v2"` (`template_imp
 which every game here uses. It cannot be repurposed without changing what it is.
 
 ---
+
+## SY7 · The cheat page is free where it saves time
+
+The most-liked comment on 8 of the study's 13 core mopoga pages asks for a cheat or a code, and a
+phone player cannot open a console (*I'll Never Leave This Town*). So every game ships
+`[ui.cheat_page]`, and four rows are **free** (`free = true`, plain buttons, no code):
+
+- **money** — a trait row, `clamp = false`;
+- **skip to morning** — `kind = "next_day"`, the real rollover, so the daily tick runs;
+- **the next step now** — `kind = "play"`: it **plays** the step's own one-time scene, through
+  its own conditions. It never sets the counter, because a jumped counter skips the scene forever;
+- **ask again** — `kind = "reopen"`: unsets a refusal flag a trigger reads `is_false`. A game
+  whose every "no" parks (the-arc A14) may need none.
+
+Cut what the game cannot use; anything sold stays behind a code. Rows and rules: `engine.md` §48.
 
 ## What the board phase records
 

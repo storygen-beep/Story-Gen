@@ -607,6 +607,24 @@ class TemplateCheatGrant:
     hint: str = ""
     button_text: str = ""     # default composed from label + op + value
     at_cap_text: str = ""
+    # Free rows (IC4, LO 2026-09-27): the four basics a player should never have to buy
+    # — money, skip to morning, the next step now, ask again. A free row is emitted
+    # WITHOUT the unlock check, so it is a plain button for everyone; every other row
+    # stays behind its code. Only a row can be free; a page-level switch stays banned.
+    free: bool = False
+    # What the row does. "trait" (the default) is the original single trait write. The
+    # other three exist because the trait-only rule, right as it is for trait rows,
+    # made the three time-savers impossible — and each is built so it cannot skip
+    # content: "next_day" runs the real day rollover, "play" plays a one-time scene
+    # through its own conditions and effects (never a counter jump), and "reopen"
+    # only ever UNSETS a flag some trigger reads as is_false.
+    kind: str = "trait"
+    canvas: str = ""          # kind = "play": the one-time canvas to play now
+    flag: str = ""            # kind = "reopen": the refusal flag to clear
+    wake: str = ""            # kind = "next_day": "HH:MM" to wake at (default 06:00)
+
+
+CHEAT_ROW_KINDS = ("trait", "next_day", "play", "reopen")
 
 
 @dataclass
@@ -3171,6 +3189,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         hint=_require_str(g_raw, "hint", ""),
                         button_text=_require_str(g_raw, "button_text", ""),
                         at_cap_text=_require_str(g_raw, "at_cap_text", ""),
+                        free=_require_bool(g_raw, "free", False),
+                        kind=_require_str(g_raw, "kind", "trait") or "trait",
+                        canvas=_require_str(g_raw, "canvas", ""),
+                        flag=_require_str(g_raw, "flag", ""),
+                        wake=_require_str(g_raw, "wake", ""),
                     )
                 )
                 # Keep the raw dict for the shared effect validators in validate().
@@ -3443,6 +3466,83 @@ def _validate_content_block_types(blocks: Any, ctx: str) -> List[str]:
                         beat.get("blocks") or [], f"{ctx}.blocks[{bi}].beats[{ti}]"
                     ))
     return errs
+
+
+_CHEAT_TRAIT_FIELDS = ("trait", "value", "op", "cap", "clamp", "targetType", "npcId",
+                       "cap_note")
+
+
+def _cheat_trigger_reads_false(conditions: Any, flag: str) -> bool:
+    """True if a trigger's conditions (any nesting) read `flag` with is_false."""
+    if isinstance(conditions, dict):
+        if conditions.get("flag_key") == flag and conditions.get("operator") == "is_false":
+            return True
+        return any(_cheat_trigger_reads_false(v, flag) for v in conditions.values())
+    if isinstance(conditions, list):
+        return any(_cheat_trigger_reads_false(v, flag) for v in conditions)
+    return False
+
+
+def _validate_cheat_action_row(template: "GameTemplate", g: "TemplateCheatGrant",
+                               raw: Dict[str, Any], ctx: str) -> List[str]:
+    """The three non-trait cheat rows (IC4). Each is checked so it cannot skip content.
+
+    next_day — the real day rollover, so [engine.daily_tick], rent and modifiers run
+               exactly as they do overnight. Only `wake` may shape it.
+    play     — plays a ONE-TIME canvas through its own trigger conditions and its own
+               effects. A counter jump would skip the scene forever (the reason stage
+               traits are banned on trait rows); playing the scene cannot.
+    reopen   — UNSETS one flag, and only a flag some trigger reads as is_false, i.e. a
+               door a refusal closed. It can never set a flag or push the plot forward.
+    """
+    errs: List[str] = []
+    for key in _CHEAT_TRAIT_FIELDS:
+        if key in raw:
+            errs.append(f"{ctx}: '{key}' does not apply to a kind = \"{g.kind}\" row")
+    for key, own in (("canvas", "play"), ("flag", "reopen"), ("wake", "next_day")):
+        if key in raw and g.kind != own:
+            errs.append(f"{ctx}: '{key}' belongs to kind = \"{own}\" rows only")
+    for _bad in ("flagEffects", "flag_effects", "effects", "costs", "questEffects",
+                 "itemEffects", "targetPassage", "nodeId"):
+        if _bad in raw:
+            errs.append(f"{ctx}: field '{_bad}' is not allowed on a cheat-page row")
+
+    if g.kind == "next_day":
+        if g.wake and not _re_for_stage_pattern.fullmatch(r"([01]\d|2[0-3]):[0-5]\d", g.wake):
+            errs.append(f"{ctx}: 'wake' must be \"HH:MM\" (24-hour), got '{g.wake}'")
+    elif g.kind == "play":
+        canvas = next((c for c in template.canvases or [] if c.id == g.canvas), None)
+        if not g.canvas:
+            errs.append(f"{ctx}: kind = \"play\" needs 'canvas' — the one-time scene to play")
+        elif canvas is None:
+            errs.append(f"{ctx}: canvas '{g.canvas}' not found")
+        elif canvas.trigger is None or not canvas.trigger.location:
+            errs.append(f"{ctx}: canvas '{g.canvas}' has no trigger location — it is never "
+                        f"offered anywhere, so there is no wait to skip")
+        elif canvas.trigger.is_repeatable:
+            errs.append(f"{ctx}: canvas '{g.canvas}' is repeatable — \"play\" is for the next "
+                        f"one-time step; a repeatable surface is not something a player waits for")
+        elif _cheat_trigger_reads_true(canvas.trigger.conditions, "dev_mode_enabled"):
+            errs.append(f"{ctx}: canvas '{g.canvas}' is a dev shortcut, not a step")
+    elif g.kind == "reopen":
+        if not g.flag:
+            errs.append(f"{ctx}: kind = \"reopen\" needs 'flag' — the refusal flag to clear")
+        elif not any(c.trigger is not None
+                     and _cheat_trigger_reads_false(c.trigger.conditions, g.flag)
+                     for c in template.canvases or []):
+            errs.append(f"{ctx}: no canvas trigger reads flag '{g.flag}' as is_false — "
+                        f"\"reopen\" may only clear a flag that closed a door")
+    return errs
+
+
+def _cheat_trigger_reads_true(conditions: Any, flag: str) -> bool:
+    if isinstance(conditions, dict):
+        if conditions.get("flag_key") == flag and conditions.get("operator") == "is_true":
+            return True
+        return any(_cheat_trigger_reads_true(v, flag) for v in conditions.values())
+    if isinstance(conditions, list):
+        return any(_cheat_trigger_reads_true(v, flag) for v in conditions)
+    return False
 
 
 def validate(template: GameTemplate) -> List[str]:
@@ -4134,13 +4234,16 @@ def validate(template: GameTemplate) -> List[str]:
         # The join block is this page's only advertising. Without it a player who has
         # no code sees a bare box and cannot tell what it is for or where to get one —
         # the commonest complaint in the 26 shipped cheat surfaces that were studied.
-        if not cp.join_note:
+        # An all-free page has no code box, so it has nothing to advertise: the join
+        # line is required only while at least one row is sold behind a code.
+        _has_coded = any(not g.free for g in cp.grants)
+        if _has_coded and not cp.join_note:
             errors.append(
                 "[ui.cheat_page] is authored but 'join_note' is missing — a player without a "
                 "code sees only an empty box, so the page must say in one line what the box is "
                 "for (the url comes from 'join_url', or falls back to [project] support_url)"
             )
-        if not cp.join_url and not template.project.support_url:
+        if _has_coded and not cp.join_url and not template.project.support_url:
             errors.append(
                 "[ui.cheat_page] is authored but neither 'join_url' nor [project] support_url is "
                 "set — the join line would have nowhere to point"
@@ -4194,6 +4297,14 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"{ctx}: 'label' is required (non-empty string) — it is the row's button text"
                 )
+            if g.kind not in CHEAT_ROW_KINDS:
+                errors.append(
+                    f"{ctx}: 'kind' must be one of {', '.join(CHEAT_ROW_KINDS)}, got '{g.kind}'"
+                )
+                continue
+            if g.kind != "trait":
+                errors.extend(_validate_cheat_action_row(template, g, raw, ctx))
+                continue
             if not g.trait:
                 errors.append(f"{ctx}: 'trait' is required (string)")
             if g.targetType not in ("player", "npc"):
@@ -7105,6 +7216,11 @@ def _assemble_project_metadata(project, template):
                     "hint": g.hint,
                     "button_text": g.button_text,
                     "at_cap_text": g.at_cap_text,
+                    "free": g.free,
+                    "kind": g.kind,
+                    "canvas": g.canvas,
+                    "flag": g.flag,
+                    "wake": g.wake,
                 }
                 for g in cp.grants
             ],
