@@ -344,6 +344,17 @@ class Command(BaseCommand):
                 )
             return {}
 
+        # An all-free page (IC4) sells nothing, so there is no code to ship: the
+        # codes file is required only while at least one row is behind a code.
+        if all(g.free for g in (template.cheat_page.grants or [])):
+            if codes_path:
+                self.stdout.write(
+                    self.style.WARNING(
+                        "   ⚠️  --codes given but every cheat row is free; ignoring."
+                    )
+                )
+            return {}
+
         if no_codes:
             self.stdout.write(
                 self.style.WARNING(
@@ -390,13 +401,13 @@ class Command(BaseCommand):
                 f"the guide, or build the matching version."
             )
 
-        authored_ids = [g.id for g in (template.cheat_page.grants or [])]
+        authored_ids = [g.id for g in (template.cheat_page.grants or []) if not g.free]
         codes = {}
         for row_id, word in codes_raw.items():
             if row_id not in authored_ids:
                 raise CommandError(
                     f"{path}: [codes] declares '{row_id}', which is not a "
-                    f"[[ui.cheat_page.grants]] id. Known ids: {', '.join(authored_ids)}"
+                    f"[[ui.cheat_page.grants]] id behind a code (free rows take none). Coded ids: {', '.join(authored_ids)}"
                 )
             if not isinstance(word, str) or len(word.strip()) < 3:
                 raise CommandError(
