@@ -289,7 +289,7 @@ standing in.
 
 **Why this one and not SY4's machinery.** It does not scale with room count. It works the same in
 a ten-room game as in a three-thousand-room one, and it answers lostness — the genre's dominant
-complaint at a 4.7% median share of player comments against grind's 0.9%.
+complaint at 15.5% of player comments against grind's 0.9% (Process Review, Round 1).
 
 **The proposed shape.** Game-level, not per-room, so one declaration reaches every room it matches
 — which is also how it steps around SY4 rather than needing it:

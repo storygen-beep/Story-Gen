@@ -250,7 +250,7 @@ card retires with nothing behind it, that character's whole section **disappears
 at the exact moment the arc closes and they become permanent sandbox content the player can still go
 and use.
 
-**v2 owns this harder than a finite game does, because a v2 product never ends.** Every character
+**v2 owns this harder than a finite game does, because the game never stalls: when a goal ends, a new one opens.** Every character
 tops out eventually. Every arc therefore needs one card that still matches afterwards: a terminal
 card, or a goal-less end-of-content card that reads forward (*"his trail is logged; the hunt picks up
 in a future update"*).
