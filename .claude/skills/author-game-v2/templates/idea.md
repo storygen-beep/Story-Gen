@@ -60,4 +60,4 @@ Record them as the first release's `her_moment` (`references/state.md`).
 ---
 
 **Then:** when LO has picked it, set `phase = "idea"` in `v2_state.json` and move to
-`references/the-systems.md`, then `templates/board.toml`.
+`references/the-spine.md`: the seven decision pages, `templates/spine/`.

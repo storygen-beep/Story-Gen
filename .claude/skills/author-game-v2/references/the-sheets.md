@@ -1,6 +1,7 @@
 # The Sheets — reviewing a game before it exists
 
-Read this in the **board** phase, after the world files and **before a line of TOML**. The board
+Read this in the **board** phase, after the world files and **before a line of TOML**. The game's
+decisions are on the spine (`the-spine.md`); the sheets carry place, person and scene for the build. The board
 phase used to end in TOML. It ends here now: in documents LO reads, argues with and signs, and only
 then does anything become a game.
 

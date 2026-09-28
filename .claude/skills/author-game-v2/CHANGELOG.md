@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC15: the spine — seven decision pages that point, never copy
+
+**Why.** PRD IC15 (the old WS8). The game's decisions had no single place of their own, and WS8's fourteen
+pages would have restated doctrine the references already carry. LO: each page is a short decision
+record pointing at where the rule lives. Plan: `round5/IC15_DIFF_PLAN.md`; LO's decisions 2026-09-28.
+
+**What changed.**
+- **New `references/the-spine.md`** (817 words): the page rules (≤400 words, [REVIEW] → [READY], signed
+  by LO no earlier than the day after drafting, one home per decision) and **SP1–SP7** — time, the
+  ladders, dependencies, loop and pressure, the cast, media and platform, the release page. Places,
+  saves and cheats are named as not being spine pages, with where each already lives. The `SP` ids
+  avoid both existing `S` families (`the-sheets.md` S1–S13, cited 7 times outside it; `register.md`
+  S1–S4, about 15) — LO.
+- **Merged, not dropped:** progress storage and guidance lines into SP2; the promise kept alive into SP7.
+  **Replay-ready scenes** stay as one SP7 row, "yes / no", decided early (LO; Process Review,
+  `ROUND2_HOW_GAMES_GROW.md` §5).
+- **New `templates/spine/SP1_time.md` … `SP7_release.md`**, tables first.
+- **SP2's optional step fields** (`state.md`): `hint`, `her_line_low`, `her_line_high`, `who_notices`,
+  `refusal: parked | counted`. The ladder check reads only `n`, `canvas`, `where`, `when`, `gate`, so they
+  change nothing it judges.
+- **Ledger** (`state.md`): `phase` gains `spine`; `spine.pages[]` holds status and sign-off only (LO);
+  new `dependencies[]`, `board.cast`, `board.media`; `release_page` gains optional `steps`, `places`,
+  `weeks`, `promise_alive`, `replay_ready`, `block`, `report` — `--ship` still reads only `door`,
+  `people`, `signed_by_lo`, `signed_at`. The two "PRD WS8" forward pointers now point at SP7. The
+  ledger example's `obligation_amount: 245` and "the caravan's upkeep" came from one of our games and
+  are now a neutral 200 and a placeholder.
+- **Phases:** `want → idea → spine → board → sheets → release` (the names stay; LO). The dispatcher
+  gains the `spine` row and names the board as the base and the sheets + v0.1 as the build. The idea
+  page's "Then" points at the spine; the spine's "Then" sets `spine` and points at the systems.
+- **`the-arc.md`** — how a step is recorded, not the rules: "A1 is authored with flags today" becomes
+  "A step is recorded on a counter" (`<npc>_stage eq n-1`, set to `n`), matching the ledger. A1–A14
+  are unchanged (LO).
+- **`the-sheets.md`** opens with one pointer: decisions on the spine, place / person / scene here.
+- New `tests/test_gates_ic15.py` (2): the step fields leave the ladder check clean; SP1–SP7 resolve under
+  `--selfcheck`'s rule pointers.
+
+**Verified.** pytest 166 passed · `--selfcheck` exit 0 — 158 rules across 14 files, 0 pointing at
+nothing; 0 hand-written counts; "the index is current" · cite_check 78 · tallies unchanged (29/47,
+46/50, 41/48 with 3 [off]) · `git status games/` unchanged.
+
+words: 133,830 → 134,891 (+1,061) · templates 7,617 → 8,297 (+680) · running total 134,891 / 149,283
+
+---
+
 ## 2026-09-28 — IC14: the idea phase, a dispatcher that says when to move on, and no hand-written counts
 
 **Why.** PRD IC14 (the old WS7). Only `want` and `release` were ever set as a phase, the board sent the
