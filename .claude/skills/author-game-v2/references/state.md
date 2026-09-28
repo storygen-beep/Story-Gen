@@ -25,7 +25,7 @@ belong here; only decisions, debts, and promises do.
 ```jsonc
 {
   "slug": "…",
-  "phase": "want" | "board" | "sheets" | "release",  // the dispatcher reads THIS.
+  "phase": "want" | "idea" | "board" | "sheets" | "release",  // the dispatcher reads THIS.
                                             //   `sheets` was added 2026-08-31: the board
                                             //   phase ends in a signed design, not in TOML.
                                             //   the-sheets.md.
@@ -36,7 +36,8 @@ belong here; only decisions, debts, and promises do.
                                             //   own name tops her own vocabulary report.
 
   "want": {
-    // THE FANTASY AND THE PROMISE — the-want.md §0. All optional; no gate reads them yet.
+    // THE FANTASY AND THE PROMISE — written on the idea page (templates/idea.md), the-want.md §0.
+    // All optional; no gate reads them yet.
     "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],

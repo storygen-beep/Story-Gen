@@ -71,7 +71,7 @@ def test_new_sections_print_first_and_in_order(tmp_path, monkeypatch, capsys):
 def test_undeclared_fantasy_prints_not_declared(tmp_path, monkeypatch, capsys):
     _, out = run(tmp_path, monkeypatch, capsys, {"want": {}})
     block = out[out.index("THE PROMISE"):out.index("LAST LISTEN")]
-    assert block.count("not declared") == 4
+    assert block.count("not declared") == 7          # IC14: + face, companion, pressure
 
 
 def test_declared_fantasy_prints_verbatim(tmp_path, monkeypatch, capsys):
@@ -80,7 +80,7 @@ def test_declared_fantasy_prints_verbatim(tmp_path, monkeypatch, capsys):
     _, out = run(tmp_path, monkeypatch, capsys, st)
     block = out[out.index("THE PROMISE"):out.index("LAST LISTEN")]
     assert "mystery" in block and "goal: find her sister" in block
-    assert block.count("not declared") == 2
+    assert block.count("not declared") == 5          # IC14: + face, companion, pressure
 
 
 def test_kinds_shipped_counts_and_three_least_used(tmp_path, monkeypatch, capsys):

@@ -154,22 +154,23 @@ one sentence whose first clause is his arousal and whose second is hers. `engine
 
 Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 
-| `phase` | do this | reference |
-|---|---|---|
-| *(no state file)* | write the Want, create the state file | `references/the-want.md` |
-| `want` | lay down the world — **`the-systems.md` FIRST** | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` |
-| `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` |
-| `sheets` | build v0.1 from the signed sheets | `references/the-release.md` (§ first release) + `the-voice.md` |
-| `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` |
+| `phase` | do this | reference | the next phase is set when |
+|---|---|---|---|
+| *(no state file)* | write the Want, create the state file | `references/the-want.md` | the Want is recorded → `want` |
+| `want` | **write the idea page** — the game's Her moment: fantasy, promise, the people who carry it, the first step's eight lines | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks it → `idea` |
+| `idea` | lay down the world — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
+| `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` | every sheet is [READY] and signed → `sheets` |
+| `sheets` | build v0.1 from the signed sheets | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
+| `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
 
 **The board phase ends in SHEETS, not in TOML.** A sandbox in this engine cannot be reviewed by playing it (Ashwell 2015, on the two
 patterns our games are built from: *"Reviewers may miss narrative content if exploration becomes
 tedious"* and *"Reviewers struggle to assess completeness"*), so the review surface has to be
-generated. `references/the-sheets.md` carries the five sheet types, the `[REVIEW] → [READY] →
-[GAME-READY]` workflow, and ten rules — **every one of them one LO decided, or one the field
+generated. `references/the-sheets.md` carries the sheet types, the `[REVIEW] → [READY] →
+[GAME-READY]` workflow, and the rules — **every one of them one LO decided, or one the field
 shows**.
 
-⚠️ **Its first rule is the one the other nine are special cases of: a number on a sheet is a PROMISE
+⚠️ **Its first rule is the one the others are special cases of: a number on a sheet is a PROMISE
 until an instrument produces it.** A sheet that counts paragraphs and `gates.py`, which counts
 nodes, report different numbers for the same design. There is no `--sheets` mode yet, which means
 every count on a sheet sits on the intent side of the measured/intent split.
@@ -202,8 +203,8 @@ governs content the player meets in a fixed order, and it is the one v2 shipped 
 `templates/first-hour.toml` carries the shapes — and it is a **menu**, so delete the opening you
 are not using.
 
-**The first question of the board phase is `the-meters.md` W1 — does the PLAYER climb or does the
-CAST?** The field splits 8 roster / 9 ladder with nothing between them. Declare `board.who_climbs` before naming a meter.
+**The first question about the meters — after the systems — is `the-meters.md` W1: does the PLAYER
+climb or does the CAST?** The field splits 8 roster / 9 ladder with nothing between them. Declare `board.who_climbs` before naming a meter.
 
 **The agent roster is in `references/agents.md`, and all six are BUILT** —
 `v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
@@ -414,7 +415,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build. Seven checks, off for every ordinary run, **exits non-zero**. One of them, `every canvas is a passage`, is the only thing in the skill that can see a canvas the generator DROPPED: two consecutive games shipped their act loops written and absent, with 46 green gates over them, because gates parse the source and reachability is decided at build time (`defects/001`). `the-release.md` § Shipping the build. |
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
-  | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, and does every rule the references POINT AT actually exist? Needs no game. A qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
+  | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, does every rule the references POINT AT actually exist, and does any doc hand-write a gate or lint count that has gone stale? Needs no game. Docs point here for the counts rather than writing them. A qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
 - **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
   the running game in a browser and is the only place some defects exist at all. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own

@@ -10508,6 +10508,40 @@ def _template_field_gap(skill_dir):
             if taught[t] - shown[t]}
 
 
+_HAND_COUNT = re.compile(r"(?<![/\d,])(\d+)\s+(gates|lints)\b")
+
+
+def _hand_counts(skill_dir, n_gates, n_lints):
+    """Hand-written scoreboard counts that disagree with the script (IC14, LO 2026-09-28).
+
+    "46 gates, 28 lints" was written into three files and went stale in all three. A doc
+    should point at `--selfcheck` instead of writing the number; this row catches one that
+    does and is wrong. Only a line about THE SCOREBOARD is read — one naming both gates and
+    lints, or `gates.py`, or the scoreboard — because "2,235 gates" in a field table counts
+    conditions in other games, not ours. A tally such as `29/49 gates pass` is a format and
+    is skipped by the `/` before it. Returns [(file, line, "46 gates")].
+    """
+    import glob
+    paths = [os.path.join(skill_dir, "SKILL.md")]
+    paths += sorted(glob.glob(os.path.join(skill_dir, "references", "*.md")))
+    paths += sorted(glob.glob(os.path.join(os.path.dirname(os.path.dirname(skill_dir)),
+                                           "agents", "v2-*.md")))
+    out = []
+    for path in paths:
+        try:
+            lines = open(path, encoding="utf-8").read().splitlines()
+        except OSError:
+            continue
+        for i, line in enumerate(lines, 1):
+            low = line.lower()
+            if not (("gate" in low and "lint" in low) or "gates.py" in low or "scoreboard" in low):
+                continue
+            for num, kind in _HAND_COUNT.findall(line):
+                if int(num) != (n_gates if kind == "gates" else n_lints):
+                    out.append((os.path.relpath(path, skill_dir), i, f"{num} {kind}"))
+    return out
+
+
 def selfcheck_mode():
     """Does SKILL.md still describe the checks this script actually runs?
 
@@ -10579,6 +10613,12 @@ def selfcheck_mode():
           f"{len(broken)} pointing at nothing")
     for rel, n, what in broken:
         print(f"          · {rel}:{n} points at {what} — no section defines it")
+    stale_counts = _hand_counts(skill_dir, len(gates), len(lints))
+    tag = "PASS" if not stale_counts else "FAIL"
+    print(f"  [{tag}]  {'hand-written counts':32s} "
+          f"{len(stale_counts)} disagree with the script ({len(gates)} gates · {len(lints)} lints)")
+    for rel, n, what in stale_counts:
+        print(f"          · {rel}:{n} says {what} — point at `gates.py --selfcheck` instead")
     print(f"  {'─'*72}")
 
     if unwritten:
@@ -10605,7 +10645,8 @@ def selfcheck_mode():
         print("           advanced field, and this cannot tell an omission from a decision)")
         print(f"  {'─'*72}")
 
-    total = len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g) + len(broken)
+    total = (len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g) + len(broken)
+             + len(stale_counts))
     if total:
         if missing_g or missing_l or missing_m:
             print(f"  {len(missing_g)+len(missing_l)+len(missing_m)} name(s) the script emits "

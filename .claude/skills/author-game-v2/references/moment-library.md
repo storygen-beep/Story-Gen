@@ -11,7 +11,7 @@
 > idea in a school, or with anyone under 18.
 
 The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); each Pitcher is given a
-different kind (`the-release.md`, "Her moment"). A `why` marked **[my reading]** has no player
+different kind (`the-release.md`, "Her moment — eight lines"). A `why` marked **[my reading]** has no player
 comment behind it; the rest cite the player evidence in the study's game files.
 
 ## firsts · her firsts

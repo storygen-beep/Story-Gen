@@ -242,7 +242,7 @@ A page is where an author hides the fact that they have not decided anything.
 goes and what a throttle is for all live in `references/the-meters.md` W1–W6. This section is the
 declaration and the two rules the gates read off it.
 
-### 3a. Declare who climbs — FIRST
+### 3a. Declare who climbs — first of the meters, after the systems
 
 ```jsonc
 "who_climbs": "player" | "cast" | "both"
@@ -423,4 +423,5 @@ python3 .claude/skills/author-game-v2/scripts/gates.py <slug>
 Gates 1, 5, 6, 8 and 10 are all decidable from the Board alone. Fix them here, where it is
 cheap, rather than after content is hung on a broken frame.
 
-Then move to `references/the-release.md` and build v0.1.
+Then set `phase = "board"` and move to `references/the-sheets.md`: write the sheets LO reads and
+signs, before any TOML.

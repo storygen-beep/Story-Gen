@@ -44,7 +44,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
 ```
 .claude/skills/author-game-v2/
   SKILL.md                             entry point, EXPLICIT-INVOKE ONLY
-  scripts/gates.py                     the scoreboard — 46 gates + 31 lints, and --beat,
+  scripts/gates.py                     the scoreboard (counts: gates.py --selfcheck), and --beat,
                                        which measures loose prose with no game at all;
                                        --release now carries 7 artefact checks, one of
                                        which is the only thing here that can see a canvas
@@ -64,7 +64,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   references/the-map.md                the world as a place someone could draw
   references/state.md                  v2_state.json schema
   references/the-release.md            the unit of work
-  references/agents.md                 the roster — ALL FOUR BUILT. Agent files live in
+  references/agents.md                 the roster — ALL BUILT. Agent files live in
                                        .claude/agents/v2-{player,pitcher,prose,attack}.md
   references/the-want.md               the spec re-read every release
   templates/board.toml                 fillable. ⚠️ does NOT parse as-is — `<tier_1> = 0` is a
@@ -81,7 +81,7 @@ session is wrong by the end of that session. Run `wc -l` if you need one.
   STATUS.md                       —    this file
 ```
 
-## The scoreboard — 46 gates, 31 lints
+## The scoreboard (counts: `gates.py --selfcheck`)
 
 **A gate scores. A lint prints a list and refuses to score.** The split is the discipline: if a
 threshold cannot be defended against a measurement, it does not get to fail a game.
@@ -272,7 +272,7 @@ merged `7_final_game.toml`, and `gates.py` needs that file. The other seven (`ja
 
 | | |
 |---|---|
-| **The agents** | **ALL FOUR SHIPPED 2026-08-29** — the Player (`scripts/playtest.py` + `v2-player`), the Pitchers (`scripts/pitch_pack.py` + `v2-pitcher`), the Prose Maker (`gates.py --beat` + `v2-prose`), the Attack Panel (`v2-attack`, one lens per instance, same file does the verify pass). This row read *"all still prose… still the biggest architectural hole"* for weeks. ⚠️ **Three of the four took the same shape and the fourth deliberately did not.** Three got a deterministic instrument the agent must not re-derive; the Panel got none, because three candidate checks were prototyped against every v2 game and all three came back empty (0 circular soft-locks in 8 games · 0 read-never-written meters in 9 · one ceiling hit that was the probe's own bug). `gates.py` already holds that ground with 46 gates and 28 lints (31 from 2026-08-30). What every one of the four does share is the second half: **a rule that keeps its output from being noise** — *a red is a hypothesis until its cause is `file:line`* · *everything you may name is in the pack* · *measure with the build's own instrument before you return* · *every finding gets an adversarial verify whose job is to refute it*. |
+| **The agents** | **SHIPPED 2026-08-29** — the Player (`scripts/playtest.py` + `v2-player`), the Pitchers (`scripts/pitch_pack.py` + `v2-pitcher`), the Prose Maker (`gates.py --beat` + `v2-prose`), the Attack Panel (`v2-attack`, one lens per instance, same file does the verify pass). This row read *"all still prose… still the biggest architectural hole"* for weeks. ⚠️ **Three of the four took the same shape and the fourth deliberately did not.** Three got a deterministic instrument the agent must not re-derive; the Panel got none, because three candidate checks were prototyped against every v2 game and all three came back empty (0 circular soft-locks in 8 games · 0 read-never-written meters in 9 · one ceiling hit that was the probe's own bug). `gates.py` already holds that ground (counts: `gates.py --selfcheck`). What every one of the four does share is the second half: **a rule that keeps its output from being noise** — *a red is a hypothesis until its cause is `file:line`* · *everything you may name is in the pack* · *measure with the build's own instrument before you return* · *every finding gets an adversarial verify whose job is to refute it*. |
 | **Evals** | None. "v2 beats v1" cannot be scored. |
 | **A cold reader** | Only one person has ever run the skill. |
 | **`the_season`'s fill** | 4,412 words against 15,500 declared. Its one red gate, and the real problem with the game. |
@@ -438,7 +438,7 @@ predates the recheck entirely. Corrected above.
 
 ## The operating rule that outranks all of the above
 
-| **Reachability — FIXED 2026-08-30, and it took two games to see** | `commuter` shipped **six of its seven sex loops written, at their ceilings, and absent from the built game** — deleted, not locked — with all 46 gates green over them. `the_route` did the same the day before from a different cause. Every gate parses `7_final_game.toml`; reachability is decided later by the generator, so **no gate could ever have seen it**, and the failure mode is always "the game shipped without its porn in it" and always scores green. Fixed as a seventh `--release` check, `every canvas is a passage`, reading the built HTML. ⚠️ **The defect file's proposed `grep -c` was wrong three ways** — a bare substring PASSES on a dangling link (17 of `loop_ray`'s 23 matches are link references, not declarations), the opening canvas emits as `StartingCanvas_…` and its absence false-fails every game, and node ids are not portable across generator eras. ⚠️ **Two exemptions were tested and refused**: dev canvases need none (`vesper` has 11 in a non-dev build at zero missing) and mtime discriminates nothing (11 of 13 games look "stale"). Measured over **1,895 canvases in 23 builds: one red**, `mrs_vance`, a genuine stale build. |
+| **Reachability — FIXED 2026-08-30, and it took two games to see** | `commuter` shipped **six of its seven sex loops written, at their ceilings, and absent from the built game** — deleted, not locked — with every gate green over them. `the_route` did the same the day before from a different cause. Every gate parses `7_final_game.toml`; reachability is decided later by the generator, so **no gate could ever have seen it**, and the failure mode is always "the game shipped without its porn in it" and always scores green. Fixed as a seventh `--release` check, `every canvas is a passage`, reading the built HTML. ⚠️ **The defect file's proposed `grep -c` was wrong three ways** — a bare substring PASSES on a dangling link (17 of `loop_ray`'s 23 matches are link references, not declarations), the opening canvas emits as `StartingCanvas_…` and its absence false-fails every game, and node ids are not portable across generator eras. ⚠️ **Two exemptions were tested and refused**: dev canvases need none (`vesper` has 11 in a non-dev build at zero missing) and mtime discriminates nothing (11 of 13 games look "stale"). Measured over **1,895 canvases in 23 builds: one red**, `mrs_vance`, a genuine stale build. |
 | **`engine.md` §30 taught a compile error — FIXED 2026-08-30** | Its only worked example was `trait_status_text` with an open top band, which is legal there and **rejected by the other two types**; a board copied the shape onto `trait_words` and the build refused to compile. ⚠️ **The defect file's diagnosis was wrong and correcting it shrank the fix**: it claimed nothing said the shape does not carry, but §30 drew the distinction two lines under the example — the cause was the *next clause*, a type-blind *"leave the top band's `max` off"*. The imperative beat the distinction. Example swapped to `trait_words` with both bounds closed, per-type table added. Third instance of `SKILL.md:307` — **an example outranks every rule beside it** — after the British-noun leak and the 15/35/55/75 rung table. |
 | **Defect files are not exempt from the citation rule** | Fixing the two above meant re-reading every `file:line` in them. **Five were wrong** — 001 named the primary closure implementation and its no-DB twin *backwards* and missed a second seed site; 002's validator table was wrong in two of three rows. **Four more stale citations turned up in §30 itself**, all off by ~682 lines, plus `engine.md:188` off by 140. Corrections are marked inline in each defect file rather than overwritten, because the next author reads them. A wrong `file:line` in a defect report is the same failure the report is about. |
 

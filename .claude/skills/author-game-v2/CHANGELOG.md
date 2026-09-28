@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC14: the idea phase, a dispatcher that says when to move on, and no hand-written counts
+
+**Why.** PRD IC14 (the old WS7). Only `want` and `release` were ever set as a phase, the board sent the
+author straight to v0.1 past the sheets, the idea fields were spread over three sections of the Want,
+"systems first" and "who climbs FIRST" both claimed the board's first step, and three files carried
+stale gate and lint counts. Plan: `round5/IC14_DIFF_PLAN.md`; LO's decisions 2026-09-28.
+
+**What changed.**
+- **Phases `want → idea → board → sheets → release`** (`references/state.md`). The `SKILL.md` dispatcher
+  gains the `idea` row and a column saying what sets the next phase; the release row names its
+  checkpoint, `gates.py --ship`. Setters written where each step ends: `the-want.md` → the idea page;
+  `templates/idea.md` → `idea`; `the-board.md` → `board` and on to the sheets (the v0.1 skip is gone);
+  `the-sheets.md` → `sheets` when every sheet is signed. `spine / base / build / ship` wait for IC15 (LO).
+- **New `templates/idea.md`** — the game's Her moment on one page: fantasy shape, the model to beat, the
+  promise, moment kinds, her face, the companion, the pressure-man, and the first step's eight lines.
+  The slots moved out of `templates/want.md` (§0 is now a pointer, the promise block and the three §6
+  slots are gone); the ledger keys are unchanged, so `pitch_pack.py` reads them as before (LO).
+- **One board order (LO):** the systems first, then who climbs as the first meters question —
+  `SKILL.md` and `the-board.md` §3a reworded.
+- **Counts:** "five sheet types · ten rules · the other nine" become "the sheet types … the rules … the
+  others" (`SKILL.md`, `the-sheets.md`); the numbers are gone from `the-release.md`, `v2-attack.md` and
+  `STATUS.md` (LO), which point at `--selfcheck`.
+- **New `--selfcheck` row "hand-written counts"** (`_hand_counts`): fails on any `<n> gates` / `<n>
+  lints` in `SKILL.md`, `references/` or the v2 agents that disagrees with the script, reading only
+  lines about the scoreboard (field tables such as "2,235 gates" are not counts of ours; a tally such as
+  `29/49 gates pass` is a format). It found the five stale counts before they were fixed. `SKILL.md`'s
+  `--selfcheck` row says so. New `tests/test_gates_ic14.py` (2).
+- **Stale pointers:** `moment-library.md` and `pitch_pack.py` now name "Her moment — eight lines";
+  `pitch_pack.py` also prints her face, the companion and the pressure-man, and
+  `tests/test_pitch_pack_ic2.py`'s "not declared" counts rise by those three.
+- Our games' `phase` values are untouched (`games/` is LO's).
+
+**Verified.** pytest 164 passed · `--selfcheck` exit 0, "hand-written counts 0 disagree", "the index is
+current" · cite_check 78 · tallies unchanged (29/47, 46/50, 41/48 with 3 [off]) · `git status games/`
+unchanged.
+
+words: 133,652 → 133,830 (+178) · templates 7,433 → 7,617 (+184, most of `idea.md` moved from
+`want.md`) · running total 133,830 / 149,283
+
+---
+
 ## 2026-09-28 — IC13: scene kinds, toggles, the cast page on, her face, companion and pressure-man
 
 **Why.** PRD IC13. The field keeps dates, teases that pay off, gifts and danger; lets players switch

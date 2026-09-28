@@ -15,7 +15,7 @@ amendment — never let it quietly stop being true.
 
 Keep it to one page. Longer means vaguer.
 
-### 0. The fantasy, the model to beat, and the promise — settled first
+### 0. The fantasy, the model to beat, and the promise — the idea page
 
 **For a female lead, the premise matters.** In the fifteen core female-lead games of the Great Games
 Study (`~/Documents/Great_Games_Study_20260926/`), players name the premise when they say why they stay:
@@ -428,4 +428,5 @@ cannot decode is undecodable on a button.
 ## Then
 
 Create `games/<slug>/v2_state.json` with `phase = "want"` and the Want recorded, per
-`references/state.md`. Move to `references/the-board.md`.
+`references/state.md`. Move to the idea page, `templates/idea.md`: §0 and §6's companion,
+pressure-man and face are written there.
