@@ -17,6 +17,8 @@ is repeating a reference — cut it and point.
 - **One home per decision.** A page records the answer and names the ledger key that holds it
   (`references/state.md`); the ledger does not copy the page. `spine.pages[]` holds only each page's
   status and sign-off.
+- **The spine changes only between releases**, as a reach-back change that lists every page and
+  reader it touches.
 - The `SP` ids are the spine's own. `the-sheets.md` S1–S13 and `register.md` S1–S4 are other rules.
 
 ## SP1 · Time

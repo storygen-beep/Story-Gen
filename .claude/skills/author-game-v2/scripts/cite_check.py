@@ -324,6 +324,12 @@ def _verdict(c: Citation) -> None:
         c.verdict = "AMBIGUOUS"
 
 
+def in_scope(c) -> bool:
+    """SKILL.md or a file under references/ — the text an author reads to build."""
+    rel = os.path.relpath(c.md, SKILL)
+    return rel == "SKILL.md" or rel.startswith("references" + os.sep)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--fix", action="store_true",
@@ -377,8 +383,11 @@ def main() -> int:
     #      parser line 6,000 lines away. Ranges are reported and never rewritten.
     #   2. Two citations on ONE markdown line resolving to the SAME target were
     #      distinguishing two lines; collapsing them destroys what the sentence said.
+    # THE BASELINE COVERS SKILL.md AND references/ ONLY (LO, 2026-09-28). CHANGELOG.md,
+    # DOCTRINE_GAPS.md and STATUS.md are history: a line number there records what was true
+    # when it was written, so --fix never rewrites them and --strict never fails on them.
     fixable = [c for c in cites
-               if c.verdict == "DRIFTED" and c.proposal and c.end is None]
+               if c.verdict == "DRIFTED" and c.proposal and c.end is None and in_scope(c)]
     seen = Counter((c.md, c.mdline, c.proposal) for c in fixable)
     collapsed = {k for k, n in seen.items() if n > 1}
     if collapsed:
@@ -438,13 +447,14 @@ def main() -> int:
         print(f"\n  rewrote {changed} citation(s) that resolved to exactly one line.")
         print("  AMBIGUOUS and UNVERIFIABLE ones were not touched — they need a human.")
 
+    scoped = sum(1 for c in cites if in_scope(c) and c.verdict in ("DRIFTED", "MISSING"))
     if tally["DRIFTED"] or tally["MISSING"]:
-        print(f"\n  {tally['DRIFTED'] + tally['MISSING']} citation(s) point at the wrong "
-              f"line. Run with --fix to re-anchor the unambiguous ones.")
-        if args.strict:
-            return 1
-    elif not tally["AMBIGUOUS"]:
-        print("\n  every checkable citation is anchored.")
+        print(f"\n  {tally['DRIFTED'] + tally['MISSING']} citation(s) point at the wrong line "
+              f"across the skill, history included.")
+    print(f"  SKILL.md + references/: {scoped} citation(s) point at the wrong line (baseline 0)"
+          + (" — run with --fix, then fix the rest by hand" if scoped else ""))
+    if scoped and args.strict:
+        return 1
     return 0
 
 

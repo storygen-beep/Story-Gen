@@ -149,8 +149,8 @@ fails otherwise.
 the weekday are two separate checks, and the weekday one runs first against **today**:
 
 ```
-v2.py:3596   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:3597   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:3742   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3743   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
