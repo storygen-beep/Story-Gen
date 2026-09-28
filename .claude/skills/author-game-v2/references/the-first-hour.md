@@ -26,7 +26,7 @@ Engine claims here carry a `file:line` into
 5. F5 · Every character's hub sits behind a meeting
 6. F6 · A meeting is small, and somebody speaks
 7. F7 · Role before name
-8. F8 · One flag per character
+8. F8 · The flag belongs to a scene that meets them
 9. F9 · A place says what it is, in its own description
 10. F10 · The role stays attached after the introduction
 11. What the scoreboard checks
@@ -118,7 +118,7 @@ setup → problem → character interaction → conflict → choice → temptati
    quiet last line.
 
 **Meeting several people in one opening.** A staged opening often meets two or three people in
-one scene. Set one meeting flag per person staged (F8 still holds: one flag, one person).
+one scene. One flag for the group is enough when the scene names each of them (F8).
 `requires_npc` takes one person, so a meeting with several people leaves it off, and uses the
 trigger's schedule window to put the scene where they all are.
 
@@ -784,14 +784,22 @@ going to be there, and on mid-arc canvases that are not introductions. Most of i
 
 ---
 
-## F8 · One flag per character
+## F8 · The flag belongs to a scene that meets them
 
-The dodge this rule exists to kill: gate the whole cast on **one** flag the opening sets, and every
-hub is technically "behind a meeting" while the cast still arrives as a block.
+The dodge this rule exists to kill: gate the whole cast on one flag set by a scene that meets
+**none** of them (`doors_open`), and every hub is technically "behind a meeting" while the cast
+still arrives cold.
 
-**A meeting flag opens hubs for one character and no other.** One flag opening a single character's
-talk hub *and* their sex hub is fine — that is one character. One flag opening four people's doors
-is the cold-spawn hub with a coat on.
+**A meeting flag counts for a character only if the one-time scene that sets it names them** —
+binds them, or gives them a line. A group scene that meets three people and sets one flag meets all
+three. A flag set by a scene that names nobody meets nobody. A character named in the **forced**
+opening — bound to the starting canvas or a capstone it reaches, or speaking on its first screen —
+is met by playing the game, and their hub needs no gate.
+
+*(LO decided, 2026-09-28.)* Three of the four passing games meet every character before their hub
+is reachable: Shady Deals (a trio met in one scene, on one flag), Cupid's Way (the office tour) and
+In Her Own Hands. Course of Temptation does it differently: its generic "Talk to" works on
+strangers. So this rule is a choice backed by field evidence, not a universal law.
 
 ⚠️ **Sequence the cast in waves.** Not everyone is reachable on day one. Stage the entrances so each
 arrival is a punctuation mark. For a character who arrives mid-game, **withhold their schedule until
@@ -1024,8 +1032,8 @@ no kin word at all      the canteen · the night shift
 > A label that names the hour he lectures at is not an answer to anything.
 >
 > **The test:** read the label alone, with no name and no scene, and ask *"is this a person?"*
-> `mother` · `professor` · `stepfather` · `runs the pledge house` · `housemate, top floor` pass.
-> `the eight o'clock` · `owns the house` · `the back room` do not — they name a time, a fact and
+> `mother` · `professor` · `stepfather` · `runs the corner bar` · `housemate, top floor` pass.
+> `the nine-thirty` · `pays the rent` · `the back room` do not — they name a time, a fact and
 > a place. The label is the answer to *"who is this"*, which is the standing question this whole
 > rule exists to keep answered.
 
@@ -1062,7 +1070,7 @@ Two gates and three lints. `python3 scripts/gates.py <slug>`.
 | | |
 |---|---|
 | gate · **the opening hands over into an open door** | F3. Walks the funnel's clock and asks whether anything at the landing location is open at that minute. **n/a** when the landing location cannot be resolved. |
-| gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, **no** hub left with zero conditions, and no such flag opening a second character's door. |
+| gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, and **no** hub left with zero conditions — or a line in the forced opening. A group scene naming several people meets them all. |
 | lint · **the place says what it is** | F9. Lists every location by how much prose happens there, against how long its own description is. **Whether a description names the function is a reading, not a measurement**, so this is a list to read and never a score. It replaced a gate that required a first-visit canvas at the anchor — a device eighteen of twenty-six top games do not use. |
 | lint · **named before met** | F7. Lists every character named in the opening, a quest card or a room description who has no meeting anywhere in the game. A list to read, never a score. |
 | lint · **the opening arms a card with goals** | F1b step 5. The quest cards visible once the starting canvas's handover flags are set, and whether any of them carries `goals`. A list, never a score (added 2026-09-24). |
@@ -1103,7 +1111,7 @@ first-contact flag per character (F5, "Re-measured 2026-09-02").
   (`v2.py:5057`).
 - **A meeting is ~100–170 words and somebody speaks.**
 - **Role before name.** Swap description for name on the meeting flag where the reference matters.
-- **One flag per character.** `doors_open` for the whole cast is the cold-spawn hub in a coat.
+- **The flag belongs to a scene that meets them.** `doors_open`, set by a scene that names nobody, is the cold-spawn hub in a coat.
 - **A place says what it is in its own `description`**, which the player reads on every visit — the
   function first, then the flavour. A first-visit canvas is a minority device: take one only for
   something true once.

@@ -7,7 +7,7 @@ Usage:
     python3 scripts/pitch_pack.py <path/to/game.toml>
     python3 scripts/pitch_pack.py <slug> --json      # machine-readable
     python3 scripts/pitch_pack.py <slug> --kind being_seen   # + that kind's library slice
-    python3 scripts/pitch_pack.py <slug> --person npc_ray    # RELATIONSHIPS: one person only
+    python3 scripts/pitch_pack.py <slug> --person <npc_id>   # RELATIONSHIPS: one person only
 
 WHY THIS EXISTS, and why it is a script and not a paragraph in the agent's prompt.
 
@@ -78,8 +78,8 @@ import gates                                                    # noqa: E402
 # The TOML is what was BUILT. `v2_state.json` is what was DECLARED — the Want,
 # the board, the promises, the releases. A pitch has to serve the second and
 # land on the first, so the pack carries both and marks which side each fact
-# came from. The state file is missing for 22 of 30 games in `games/`, so its
-# absence is normal and never an error.
+# came from. The state file is often missing, so its absence is normal and
+# never an error.
 
 def _paths(arg):
     if arg.endswith(".toml"):
@@ -104,14 +104,12 @@ def _state(path):
 # ─────────────────────────────────────────────────────────────────────────────
 # The board's shape is NOT uniform, and pretending otherwise loses games
 # ─────────────────────────────────────────────────────────────────────────────
-# Measured across the eight games that carry a `v2_state.json`: only four keys
-# are universal on `board` — `ascent_tiers`, `ceilings`, `characters`,
-# `locations`. `economy` is in seven, `map` in six, and the declared meter ladder
-# appears under THREE different keys in three shapes:
+# Not every key is present on every `board`, and the declared meter ladder
+# appears under THREE keys in three shapes:
 #
-#   forty_miles / the_allowance / seventh_day   board.rungs        [15, 35, 55]
-#   the_season                                  board.tier_rungs   {trait: [...]}
-#   mrs_vance                                   board.cast_meters.rungs {npc: [...]}
+#   board.rungs              [15, 35, 55]
+#   board.tier_rungs         {trait: [...]}
+#   board.cast_meters.rungs  {npc: [...]}
 #
 # So every reader below is tolerant by construction. A key that is not there is
 # reported as not declared — never defaulted, never inferred, and never a defect.
@@ -121,9 +119,8 @@ def _declared_rungs(board):
 
     ⚠️ RETURNS THE OWNER AND THE TRAIT SEPARATELY, deliberately. The first cut of
     this function returned a formatted label and the caller matched the built
-    ladder against it with `owner in label or trait in label`. On mrs_vance that
-    starred `npc_cade · want` rung 5 — a number no canvas gates cade's `want` at.
-    It came from npc_tobin, because the substring `want` is in every cast label.
+    ladder against it with `owner in label or trait in label`. Substring matching
+    starred a rung from the wrong character, because `want` is in every cast label.
     The pack printed a fact that was not true of the game, which is the one thing
     it may never do.
 
@@ -192,9 +189,8 @@ def _condition_sites(canvas):
 
     ⚠️ THE FIRST CUT READ TWO SITES AND MISSED FOUR FIFTHS OF THE GAME. It walked
     the canvas trigger and the exit block's config and choices, which is what
-    `gates.build()` flattens, and reported that mrs_vance gates NOTHING on
-    `player.standing`. A full walk of the same file finds 22 `standing` condition
-    sites. They are in `trigger.substitutions[].conditions` and in
+    `gates.build()` flattens, and reported a colour meter gated nowhere that a full
+    walk finds gated in over twenty places. They are in `trigger.substitutions[].conditions` and in
     `nodes[].blocks[].conditions` — Lane 3 dispatch, and the prose bands, which is
     where a colour meter does all of its work.
 
@@ -277,12 +273,10 @@ def _flag_reads(model):
 def _sign(val):
     """+1 / -1 / 0 for an effect value, INCLUDING the random shape.
 
-    ⚠️ An effect value is not always a number. `vesper` writes 32 of them as
+    ⚠️ An effect value is not always a number. It can be
     `{ type = "random", min = 8, max = 14 }`, and an `isinstance(val, (int, float))`
-    filter drops every one of them silently. That exact filter, in a throwaway probe,
-    reported `player.loop_npc_pleasure` as "gated at 50 but only ever set, max 0" —
-    a meter the game climbs 8-14 at a time, and the only "finding" a nine-game sweep
-    produced. It was the probe, not the game.
+    filter drops every one of them silently — a meter climbed by random ranges then
+    reads as never raised.
 
     Today no game randomises money, so nothing downstream changes; this is here so
     that the first one that does is not silently uncounted.
@@ -418,7 +412,7 @@ def _media_roots(slug):
 
     `package_from_toml --video-folder <dir>` copies the folder into the output
     under its own basename (`video_path = "./" + name`), so the name varies by
-    game — `media` for vesper, something else elsewhere. Every sub-folder of
+    game. Every sub-folder of
     `output/` and `output_dev/` is a candidate root; a pool that is not under
     any of them counts 0.
     """
@@ -450,11 +444,10 @@ def _count_on_disk(roots, ref, is_pool):
 # step after. So the Pitcher needs, per person, what has shipped, in order, and
 # which set-ups nothing has paid yet.
 #
-# ⚠️ ATTRIBUTION IS DECLARED, NOT GUESSED FROM PROSE. Orientation's arc canvases
-# (`ray_01`..`ray_09`) bind no `npc` at all — binding alone finds 4 of Ray's
-# canvases and none of his steps. So a one-time canvas belongs to a person if the
-# board's declared ladder lists it, or it binds them, or its id starts with the
-# person's short name (`npc_ray` -> `ray_`). The rule used is printed per step.
+# ⚠️ ATTRIBUTION IS DECLARED, NOT GUESSED FROM PROSE. Arc canvases often bind no
+# `npc` at all, so binding alone finds a person's hubs and none of their steps. So a
+# one-time canvas belongs to a person if the board's declared ladder lists it, or it
+# binds them, or its id starts with the person's short name (`npc_jo` -> `jo_`). The rule used is printed per step.
 
 def _short(npc_id):
     return npc_id[4:] if str(npc_id).startswith("npc_") else str(npc_id)
@@ -699,9 +692,9 @@ def _want_value(v, indent="      "):
     """One Want field, whatever shape the author wrote it in.
 
     ⚠️ NOT string-only. The first cut printed `isinstance(v, str)` fields and
-    silently dropped everything else, which on mrs_vance meant `crude_ceiling`
-    — the field that says how far this game's prose may go — rendered as a bare
-    heading with nothing under it. A Pitcher reading that pack would have had
+    silently dropped everything else, which dropped a non-string `crude_ceiling`
+    — the field that says how far a game's prose may go — to a bare heading with
+    nothing under it. A Pitcher reading that pack would have had
     the ceiling withheld from it.
     """
     if isinstance(v, str):
@@ -970,10 +963,9 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     # budget for now) and `fill_finished` (the budget for the finished world). This
     # printed `fill` alone until 2026-08-29, when the Attack Panel's first run found
     # that `fill_finished` is read by NOTHING — grep returns 0 in `gates.py` and, at
-    # that point, here. Unread for long enough, it rotted: `mrs_vance`'s
-    # `kerr_crossing` declares `fill = 620` and `fill_finished = 300`, a finished
-    # budget BELOW its working one with 588 words already written. A Pitcher choosing
-    # what to build next was seeing "588 / 620 — nearly full" and half the plan.
+    # that point, here. Unread for long enough, it rots: a location can declare a
+    # finished budget BELOW its working one, and a Pitcher choosing what to build
+    # next sees "nearly full" and half the plan.
     #
     # The `!` is a FACT, not a threshold: finished below working is incoherent on the
     # author's own terms, whatever the numbers are. Nothing here is scored.

@@ -1,20 +1,19 @@
 """readable.py — three checks for prose a player cannot follow. Imported by gates.py.
 
-Generalised from `games/the_balance/process/readable.py` (PRD_IDEAS_AND_CRAFT IC6), which
-stays where it is and is not edited. Three findings from that game, each a line LO
-could not follow on first play:
+PRD_IDEAS_AND_CRAFT IC6. Three checks, each for a line a player cannot follow on first
+play:
 
-  A · a pronoun with nobody on screen to point at — screen one said "Your mum doesn't
-      know he paid", and "mum" is who "he" is NOT;
-  B · short lines with no verb — the shape compressed prose takes ("Ten dollars.
-      Fast.");
-  C · a past event the player was never given — "What happened on Tuesday?", on the
+  A · a pronoun with nobody on screen to point at — "Your aunt doesn't know he paid",
+      where "aunt" is who "he" is NOT;
+  B · short lines with no verb — the shape compressed prose takes ("Five bucks.
+      Quick.");
+  C · a past event the player was never given — "What happened on Friday?", on the
       first morning, when nothing had.
 
-What changed in the copy: the pronoun set follows `[settings] narration_person`; the
-"universal" flags (a gate that proves nothing) are passed in by the caller instead of
-being one game's `opening_done`; the role list carries US and UK words; and B also
-accepts a word ending in -ed as a verb, the same rule the field was measured with.
+The pronoun set follows `[settings] narration_person`; the "universal" flags (a gate
+that proves nothing) are passed in by the caller instead of hard-coded; the role list
+carries US and UK words; and B accepts a word ending in -ed as a verb, the same rule the
+field was measured with.
 
 Every result is a LIST for a human to read. None of these is a verdict: A and C have
 no field figure at all, and B's share is only printed beside the field's.
@@ -23,8 +22,8 @@ import re
 
 PROSE_TYPES = ("paragraph", "thought_bubble")
 
-# Third person SINGULAR only. they/them are left out on purpose: over the_balance they
-# produced 12 hits and every one was a plural common noun ("bins … one of them").
+# Third person SINGULAR only. they/them are left out on purpose: they hit plural common
+# nouns ("bins … one of them").
 PRONOUN = re.compile(r"\b(he|him|his|she|her|hers)\b", re.I)
 MALE, FEMALE, UNKNOWN = "m", "f", "?"
 PRONOUN_GENDER = {"he": MALE, "him": MALE, "his": MALE,

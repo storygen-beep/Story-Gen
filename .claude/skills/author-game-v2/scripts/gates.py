@@ -12,9 +12,9 @@ Two measurement bases, and they are NOT interchangeable:
      254k -> 2.24M words).
   2. Gates 11-19 (2026-08-12) were derived from a FIELD of 18 shipped browser
      sandboxes, ~62,000 passages, because a doctrine measured from one game
-     cannot contain anything that game lacks. The game this skill built with
-     basis (1) shipped 10/10 with no street, no guidance page, and an economy
-     where money was unbounded — every one of those invisible to gates 1-10.
+     cannot contain anything that game lacks. A game can score 10/10 on basis
+     (1) with no street, no guidance page and unbounded money — every one of
+     those invisible to gates 1-10.
 
 Usage:
     python3 gates.py <game-slug>            # resolves games/<slug>/toml_phases/7_final_game.toml
@@ -33,9 +33,8 @@ Usage:
     python3 gates.py --selfcheck            # does SKILL.md still document every gate and
                                             #   lint this script emits? No game needed.
 
-Why a real TOML parser and not grep: an earlier grep-based pass on this same file
-silently missed 24 `is_repeatable` lines (whitespace-aligned and unspaced variants)
-and produced a 33%-repeatable figure when the truth is the majority. Parse, never grep.
+Why a real TOML parser and not grep: grep misses whitespace-aligned and unspaced
+`is_repeatable` variants and badly under-counts repeatables. Parse, never grep.
 """
 
 import sys
@@ -72,10 +71,7 @@ except ImportError:
 # against ITS OWN declared budget and these constants are not consulted. They run only
 # for a game with no ledger.
 #
-# Why: measured across all three v2 games, they were being treated as targets. Two of
-# the three landed within FOUR WORDS of MEAN_LOCATION_WORDS (4,504 / 4,502 / 4,681), and
-# all three shipped exactly 8 locations against a "6-8" range the doctrine had already
-# flagged, in prose, as a judgement rather than evidence. A global constant can be
+# Why: a global constant can be
 # satisfied by generating N things; a number checked against the author's own declaration
 # cannot, because moving it means changing the design. See SKILL.md's operating rule
 # "the BOARD DECLARES IT and the gate checks the game against its own declaration".
@@ -98,8 +94,8 @@ DECLARED_FILL_TOLERANCE = 0.25
 # defended.
 
 # A share gate judged on fewer cases than this reports "too few to judge", not PASS
-# (PRD IC21, LO 2026-09-27). Five, not a derived number: it is the smallest sample the
-# two failures that prompted it (1 of 1, 100% of 1) could not have passed on.
+# (PRD IC21, LO 2026-09-27). LO decided. Five, not a derived number: the smallest sample
+# on which 1 of 1 or 100% of 1 cannot pass.
 FEW_CASES = 5
 # Only a SHARE gate — a percentage that must reach a floor below 100% — can be "too few to
 # judge": 100% of 1 says nothing about a 50% floor. An all-or-nothing gate (every item must
@@ -112,11 +108,10 @@ EXPLICIT_BEAT_FLOOR = 7.5
 # years and 12x growth. Unlike raw sex-word share (which fell 3.00% -> 0.96% as
 # systems and UI outgrew prose), this ratio is stable, so it is the usable floor.
 # It is also robust to word-list choice: two different lists both put DoL at
-# 8-10% and Vesper at ~2%.
+# 8-10%.
 #
 # ⚠️ THIS IS A FLOOR. ITS UPPER COMPARISON IS MEANINGLESS. Do not read a game
-# scoring far above it as "too hot" — that reading has now been wrong twice, and
-# cost one game a dilution pass it never needed. Two independent reasons:
+# scoring far above it as "too hot". Two independent reasons:
 #
 #   1. DIFFERENT DENOMINATORS. The 7.5-9.3% band is per DoL *unit* = a passage in
 #      the whole source, combat/systems/UI included: its file carries 15,587
@@ -127,7 +122,7 @@ EXPLICIT_BEAT_FLOOR = 7.5
 #      prose passages carry 3+, and DoL is LAST at 7.5%. The floor is a property
 #      of DoL, not of the genre.
 #
-# Valid as a floor and still discriminating (the measured-cold game scores 4.7%).
+# Valid as a floor.
 # Invalid as anything resembling a target.
 
 MENU_CEILING = 8
@@ -138,37 +133,32 @@ MENU_CEILING = 8
 #
 # Big screens DO exist in real games — the reference game runs 2.9% of its screens
 # above 20 links — but they are CATALOGUES: shops, wardrobes, character creation.
-# A place the player returns to daily is not a catalogue. The game that prompted
-# this put 23 choices on its front desk, 11 of them purchases, next to "Look up at
-# the board", and scored 18/18 while doing it. references/the-surfaces.md.
+# A place the player returns to daily is not a catalogue. references/the-surfaces.md.
 
 SENTENCE_CEILING = 14
 # Median sentence length, in words, across all authored beats. The first threshold
 # here that measures WRITING rather than structure. Measured 2026-08-12 over 18
-# shipped sandboxes: field median 10 words, DoL 9, and the game that prompted this
-# ran 16 — third longest of the eighteen.
+# shipped sandboxes: field median 10 words, DoL 9.
 #
 # ⚠️ TWO INSTRUMENTS, AND THE THRESHOLD SPANS THEM. The field figures come from
 # parsing BUILT HTML (the only form a shipped game is available in). This gate reads
 # AUTHORED BEAT TEXT from the TOML, which excludes the UI and system strings that
-# survive HTML extraction. The same game measures 16 on the first instrument and 13
-# on this one, so 14 is calibrated across a seam, not within one basis. It is
+# survive HTML extraction. The same game measures shorter on the second instrument,
+# so 14 is calibrated across a seam, not within one basis. It is
 # therefore APPROXIMATE — it will catch prose drifting denser, but do not read a
 # pass as "matches the field". Tightening it needs the field re-measured on TOML,
 # which is not obtainable: we do not have anyone else's source.
 
 # ── The field's joints, and the floor under the prose (PRD IC6, LO 2026-09-27) ────
-# Every prose threshold above is a MAXIMUM, so compressed prose passed all of them —
-# the_balance's 09-15 build (273f5ec) cut `but` to 0.14 per 1,000 words and still ran a
-# median sentence of 11. What separated it from the field was its JOINTS, not its
-# sentence length, so the floor is on the joints. Measured 2026-09-27 over the 25 games of
+# Every prose threshold above is a MAXIMUM, so compressed prose passes all of them.
+# What separates it from the field is its JOINTS, not its sentence length, so the
+# floor is on the joints. Measured 2026-09-27 over the 25 games of
 # ~/Documents/Prose_Machine_Sound_Study_20260828/results.json ["field"], built HTML,
-# `field_prose()` + `profile()` from games/the_balance/process/joints.py (copied from
-# measure.py:38): `but` per 1k min 2.46 · p10 2.88 · p25 3.76 · median 4.68 · max 8.44;
+# `field_prose()` + `profile()` (after the prose study's measure.py:38): `but` per 1k min 2.46 · p10 2.88 · p25 3.76 · median 4.68 · max 8.44;
 # `and` per 1k min 9.26 · p25 19.14 · median 22.77 · max 41.11; coordination ratio
 # (and/then/or over because/so/since/though/…) p25 1.81 · median 2.08 · max 3.89.
-# LO chose p10 for `but`, not p25: at p25 the model beats in register.md (3.39, one `but`
-# in 295 words) and the_balance HEAD (3.00) would fail.
+# LO decided. p10 for `but`, not p25: at p25 the model beats in register.md (3.39, one
+# `but` in 295 words) would fail.
 FIELD_BUT_P10 = 2.88
 FIELD_AND_MAX = 41.11
 FIELD_JOINT_RATIO = (1.81, 2.08, 3.89)      # p25, median, max — printed, not judged
@@ -184,9 +174,8 @@ FIELD_FRAGMENT_SHARE = (11.36, 15.16, 27.61)  # p25, median, p75, % of sentences
 
 DASH_CEILING = 35.0
 # Em and en dashes per 10,000 prose words. The SECOND threshold here that measures
-# writing, and it exists because two players read a shipped game of ours and said
-# the prose "smacks of an underpowered AI". Dash density is the marker readers most
-# often name when they say that, and nothing in this file looked at it.
+# writing. Dash density is the marker readers most often name when they call prose
+# machine-written, and nothing in this file looked at it.
 #
 # Measured 2026-08-27 over the 25-game mopoga corpus:
 #   p50 0.99 · p75 4.21 · p90 17.46 · p95 25.72 · max 35.41 (apocalyptic-world)
@@ -194,13 +183,12 @@ DASH_CEILING = 35.0
 # The ceiling is the corpus MAXIMUM on purpose. A shipped, heavily-commented game
 # writes at 35, so a game at or under it cannot be called wrong without contradicting
 # the field. This catches an author who has left the distribution, not one working at
-# its edge: mrs_vance passes at 25.4 (p95); the game that prompted this runs 96.4,
-# which is 2.7x the corpus maximum.
+# its edge.
 #
 # ⚠️ IT COUNTS SPEECH TOO, ON PURPOSE, AND THAT IS A KNOWN COST. An em-dash inside
-# dialogue is how English writes an interruption — "Mrs. Vance — Mrs. — I can't, if you
+# dialogue is how English writes an interruption — "Wait — no — I can't, if you
 # keep —" is correct as written — so a game with a lot of broken speech scores worse
-# without being worse: 24 of the prompting game's 32 dashes were speech. Narrowing the
+# without being worse. Narrowing the
 # verdict to narration was investigated and REFUSED, because it needs a narration-only
 # field baseline that cannot be built: 14 of the 25 corpus games put under 2% of their
 # words inside quote marks (corpus median 1.3%), marking speech with italics, speaker
@@ -209,15 +197,20 @@ DASH_CEILING = 35.0
 #
 # ⚠️ THIS CONSTANT DOES NOT SPAN THE SEAM THAT SENTENCE_CEILING DOES. The field
 # figures come from built HTML and this gate reads authored TOML — the same two bases
-# — but the metric was checked on BOTH for the same game and moved 7% (mrs_vance 27.2
-# HTML, 25.4 TOML). A rate over word count is insensitive to how text is segmented,
+# — but the metric was checked on BOTH for the same game and moved 7% between the
+# two bases. A rate over word count is insensitive to how text is segmented,
 # which is exactly what the seam distorts. Do not weaken this constant believing it
 # inherits G19's approximation; it does not.
 
-EXPLICIT_IN_REPEATABLE = 50.0
-# Explicit prose must live where the player returns. Measured failure case:
-# 95% of Vesper's explicit beats sit in a sealed room with no exits, while all
-# nine of its repeatable sex loops score zero.
+EXPLICIT_IN_REPEATABLE = 40.0
+# Explicit prose must live where the player returns. Re-derived from the field
+# 2026-09-28 (LO): 30 random explicit passages per passing game, each traced by hand to
+# whether it can play again — Shady Deals 93%, Course of Temptation 76%, Cupid's Way 50%,
+# In Her Own Hands 40%; pooled 65% (75/116). Each figure is roughly ±17 points at n = 30.
+# The floor is the lowest passing game, so none of the four fails it. Field games carry no
+# `is_repeatable`, so "can play again" is the closest faithful reading of this metric. An
+# automatic proxy over 59 mopoga games (median 68.7%, p25 40%) misses the hand labels by up
+# to 28 points and is not used. Plan: round5/SETTINGS_REDERIVE_PLAN.md.
 
 EXPLICIT_BEAT_MEDIA_FLOOR = 50.0
 # Share of EXPLICIT beats (3+ frozen-list words) that carry a media block OF THEIR
@@ -239,11 +232,6 @@ EXPLICIT_BEAT_MEDIA_FLOOR = 50.0
 # has scrolled away. Node routing is the opposite — it resolves to a real passage
 # at BUILD time (v2.py:13258) and SWAPS the screen, which is why the field's
 # act-menu loops never go stale.
-#
-# Measured on our own games: media sits on NODES (20-54% of them) and essentially
-# never on beats — vesper 16 of 389, and 0 of 169/623/938/516/39 in the five v2
-# games — while v2 games moved nearly all content INTO beats (forty_miles: 938
-# beats against 259 nodes).
 #
 # 50% is half the field's per-screen figure and below its per-reveal figure, so it
 # is generous on both instruments. references/register.md.
@@ -329,12 +317,11 @@ EXPLICIT = re.compile(
 # ── The field's OWN word list, and why this is not `EXPLICIT` above ───────────
 # `EXPLICIT` is deliberately broad — it counts kiss, naked, arous, lust, breast —
 # and that is correct for every gate that uses it, because those measure a share of
-# our beats against our beats: one list, one substrate.
+# a game's beats against its own beats: one list, one substrate.
 #
-# ⚠️ THIS LINT COMPARES US AGAINST THE FIELD, so it must run the FIELD's list or the
-# comparison is invalid by construction. That error has been made on this corpus
-# before and cost a whole analysis: `dol_seed_vs_vesper` records three corpora
-# measured with three different word lists and every cross-comparison thrown away.
+# ⚠️ THIS LINT COMPARES A GAME AGAINST THE FIELD, so it must run the FIELD's list or the
+# comparison is invalid by construction: mixing word lists across corpora voids every
+# cross-comparison.
 # This is verbatim `~/Documents/Sex_Loop_Study_20260829/shape.py:12`, which is where
 # the field figures below come from.
 FIELD_BODY = re.compile(r"\b(cock|dick|cunt|pussy|clit|tits|nipples?|balls|ass|arse|thrust|"
@@ -350,11 +337,8 @@ _CANVAS_NAME = re.compile(r'^(?:Starting)?Canvas_[A-Za-z0-9_]+?_Node_')
 # The ladder a sexual scene climbs, lowest rung first. Used by a LINT ONLY, and
 # deliberately: naming an act is not the same as depicting it, and no threshold on
 # word-presence would survive contact. It exists to print WHERE a game's scenes sit,
-# because both failure directions are real and they look nothing alike —
-#   vesper       opens at vaginal-or-finish in 68% of its explicit canvases, median
-#                4 rungs in ONE canvas: the whole ladder with no stairs to it
-#   forty_miles  76% of 49 explicit canvases never pass hands or stripping: all
-#                stairs and no ceiling
+# because both failure directions are real and they look nothing alike — a game can
+# open at the top with no stairs to it, or climb forever with no ceiling.
 # Field, per screen: touch 13 · strip 15 · hands 11 · oral 14 · vaginal 28 · anal 5
 # · finish 13 — spread evenly, because a field scene is ONE rung and the ladder is
 # climbed across 3-4 chained screens. references/register.md.
@@ -374,8 +358,7 @@ RUNGS = (
 )
 # ⚠️ THE RUNG IS AN ACT, NOT A BODY PART. `cunt` / `puss` / `tits` name anatomy and
 # say nothing about what is happening to it — a first draft of this list had them in
-# the `vaginal` rung and reported forty_miles as 71% opening at penetration when the
-# measured figure is 9%. Every entry above is a verb or a verb phrase, and the field
+# the `vaginal` rung and over-counted penetration openings roughly eightfold. Every entry above is a verb or a verb phrase, and the field
 # distribution quoted in the lint was produced by exactly this list.
 RUNG_ORDER = [k for k, _ in RUNGS]
 
@@ -388,8 +371,7 @@ EXPLICIT_MEDIA = re.compile(r"_t[45]\b|/sex/|^sex/", re.I)
 # wrong — both cheap to fix on the day, expensive twenty thousand words later.
 # A LINT, never a gate: "he came through the hall" in a game that deliberately has
 # no hall location is a judgement call, and a check that fires on correct work gets
-# ignored. Measured trigger: one game referred to a hall six times, a front door
-# twice, and the street once, with none of them in the map.
+# ignored.
 BUILDING_PARTS = ("hall", "hallway", "stairs", "staircase", "landing", "street",
                   "front door", "back door", "garden", "yard", "attic", "cellar",
                   "basement", "porch", "driveway", "corridor")
@@ -398,8 +380,8 @@ BUILDING_PARTS = ("hall", "hallway", "stairs", "staircase", "landing", "street",
 # fallback so the economy gates still bite on a game authored before board.economy
 # existed; a declaration always wins and the headline says which was used.
 CURRENCY_HINT = re.compile(r"money|cash|funds?|wallet|credits?|coins?|gold", re.I)
-# `coin` was missing until 2026-08-14, which made a whole currency invisible: vesper
-# spends `coin` 18 times and `money` once, and every economy gate was judging `money`.
+# `coin` was missing until 2026-08-14, which made a coin-denominated currency invisible
+# to every economy gate.
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -410,45 +392,32 @@ class Beat:
 
     Group variants (blocks[].blocks[]) fold INTO their parent beat rather than
     splitting it, because a Twine passage likewise carries all its <<if>>
-    branches inline — folding keeps our numbers comparable to the DoL baseline
+    branches inline — folding keeps a game's numbers comparable to the DoL baseline
     the thresholds came from. Cascade beats DO split, because each one is a
     separate screen the player advances through.
 
-    ⚠️ UNFOLDING `block_pool` WAS PROPOSED AND IS REFUSED. MEASURED 2026-08-27.
+    ⚠️ UNFOLDING `block_pool` WAS PROPOSED AND IS REFUSED (2026-08-27).
     ═══════════════════════════════════════════════════════════════════════════
     `~/Documents/Female_PC_Craft_Study_20260823/proposal_for_skill.md` opens with a
     **P0**, to ship "first, alone": count a pool as ONE representative variant for
     word-count purposes, because otherwise "the scoreboard will punish authors for
     using it." The observation underneath is TRUE — a pool renders one of N, so a
-    game's counted words exceed what any single pass shows (mrs_vance: 12,509 counted,
-    8,706 per pass, a 30% gap).
+    game's counted words exceed what any single pass shows.
 
-    THE CONCLUSION DOES NOT FOLLOW, and the fix would break a correct game. The
-    proposal was written when NO v2 game used a pool. mrs_vance now ships 69 pools /
-    221 variants, so it is finally testable. Scored three ways, `_collect` patched:
-
-        model            location fill words   locations on their own budget
-        fold (this file)        12,509          14/14
-        split                   12,509          14/14   <- folding is not what sets it
-        one variant              8,706           4/14   <- P0
-
+    THE CONCLUSION DOES NOT FOLLOW, and the fix would break a correct game.
     `the-board.md` §1 (`fill`) decides it: fill is "its word budget — in round numbers, written
     now, BEFORE THE PROSE." It is a plan for what the author will WRITE. Three pooled
-    variants of 400 words ARE 1,200 words written. P0 would score an author 4/14 for
-    doing exactly what the doctrine asked — which is the Study 2 R4 failure the
-    proposal itself cites two sections earlier: a check that fails a game for obeying
-    the doctrine is a bug in the check.
+    variants of 400 words ARE 1,200 words written. A one-variant count would fail an
+    author for doing exactly what the doctrine asked — which is the Study 2 R4 failure
+    the proposal itself cites two sections earlier: a check that fails a game for
+    obeying the doctrine is a bug in the check.
 
     The field-baselined gates barely move either, because they are RATES and both
-    halves move together: explicit floor 13.9%/108 -> 14.1%/326, sentence length
-    median 9 -> 9, G43 19.2/10k -> 19.2/10k.
+    halves move together.
 
-    ⚠️ AND THE ONE GATE THAT LOOKED LIKE THE REAL DEFECT WAS AN ARTIFACT OF THE PROBE.
-    `an explicit beat carries a clip` read 15/15 (100%) folded and 4/46 (9%) split — a
-    91-point swing — because the split model made each pool child its own beat and
-    ORPHANED IT FROM THE NODE'S SIBLING MEDIA. Counted against the source instead:
-    of 32 explicit(3+) pool variants in mrs_vance, **0 carry their own clip, 32 sit
-    under a clip on the shared node, and 0 render dry.** The 100% is honest.
+    ⚠️ AND A SPLIT MODEL (each pool child its own beat) ORPHANS POOL CHILDREN FROM
+    THE NODE'S SIBLING MEDIA, so `an explicit beat carries a clip` would read pooled
+    explicit variants as dry when they sit under a clip on the shared node.
 
     So: no change. Gate 1 REPORTS the per-pass figure (see G1) and judges the budget.
     ═══════════════════════════════════════════════════════════════════════════
@@ -588,9 +557,8 @@ def _currency_ops(obj, cur, out):
     `applyTraitEffect` runs `add` and `set` and silently returns on anything else
     (v2.py:5742-5751), so the only way to take currency away in an effect is
     `op = "add"` with a NEGATIVE value. This function used to append the op string,
-    which meant a real deduction written the only way that works counted as INCOME —
-    measured on a game whose sink/source line flipped from 11:11 to 10:12 the moment
-    its dead `subtract` effects were rewritten correctly. A `subtract` effect is
+    which meant a real deduction written the only way that works counted as INCOME.
+    A `subtract` effect is
     counted as neither: it moves nothing, and gate 25 is what reports it.
     """
     if isinstance(obj, dict):
@@ -786,17 +754,16 @@ def _dialog_blocks(blocks, out):
 def lint_dialogue_attribution(model):
     """Dialogue attributed to a character the canvas neither BINDS nor NAMES.
 
-    The bug this catches shipped once: a walk-on character with no NPC record was
+    The bug this catches: a walk-on character with no NPC record was
     written as a dialog block borrowing a declared NPC's id, which would have
     rendered the wrong name over her line. Declaring her instead is not the fix —
     that breaks the standing-surface gate, which wants every declared character
     findable and scheduled. One-scene characters are narrated, never declared.
 
     Deliberately narrow. The naive version of this check — flag dialogue on any
-    canvas without an `npc` binding — returns 30 hits on a game with 2 real ones,
-    because every triggerless rung is unbound by design and correctly carries its
-    own character's voice. Naming the character in the canvas id is what tells
-    them apart, and it is a convention the games already follow.
+    canvas without an `npc` binding — returns many false hits, because every
+    triggerless rung is unbound by design and correctly carries its own character's
+    voice. Naming the character in the canvas id is what tells them apart.
     """
     seen, hits = set(), []
     for c in model:
@@ -808,7 +775,7 @@ def lint_dialogue_attribution(model):
                 npc_id = ((b.get("props") or {}).get("npcId") or "").strip()
                 if not npc_id or npc_id in bound:
                     continue
-                # `npc_ray` is named by a canvas called `rung_ray_sit`.
+                # `npc_jo` is named by a canvas called `rung_jo_sit`.
                 short = re.sub(r"^npc[_-]", "", npc_id)
                 if short and short.lower() in c["id"].lower():
                     continue
@@ -841,11 +808,10 @@ def lint_ambient_presence(model, game):
     Nothing was checking it, and the miss is the exact shape SKILL.md warns about — the
     doctrine was right, the instrument was aimed at the wrong path.
 
-    The failure this was written from, caught by a player and not by a build: fifteen
-    ambients in a green 41/41 game put a man in a room, speaking, with no gate of any
-    kind. The navigation panel reads presence from the schedule and correctly showed him
-    absent; the ambient then fired anyway and he shut the roller door in front of the
-    player. Once the panel is wrong once it stops being read, and the panel is how a
+    The failure it catches passes a green build: an ambient puts a man in a room,
+    speaking, with no gate of any kind. The navigation panel reads presence from the
+    schedule and correctly shows him absent; the ambient then fires anyway and he is
+    there. Once the panel is wrong once it stops being read, and the panel is how a
     sandbox is navigated.
 
     THREE OUTCOMES, and they are different jobs — the split is the point of the lint:
@@ -854,8 +820,8 @@ def lint_ambient_presence(model, game):
                          exists and one line of `requires_npc` is the whole fix.
       · `or narrate`   — the speaker has NO row here, so a gate would strand the canvas
                          forever. The fix is prose: narrate the arrival, the way a
-                         correct one already does ("Sherrod comes down off his stairs
-                         and in through the back door"). Do NOT gate these.
+                         correct one already does ("He comes in through the back
+                         door"). Do NOT gate these.
       · not reported   — already carries `requires_npc`, an `npc_at_location` condition,
                          or its own `trigger.schedules`.
 
@@ -931,14 +897,10 @@ def lint_badge_before_content(model, game):
     What no check asked is **climb to WHAT** — whether the threshold the badge sits on
     is above the last threshold any content reads.
 
-    The failure this was written from, in a game that passed all 41 gates: five of six
-    characters printed ✓ Arc complete at or before the click that opened their content.
-    Two landed exactly ON the door. Three landed BEFORE it — one of them forty points
-    of climbing early, and two of them gated on a DIFFERENT METER from the one the door
-    reads, so the badge could arrive at want 0. The same game asked the player to climb
-    to three thresholds (`isaac.want 66`, `sherrod.want 62`, `tobin.want 30`) that no
-    condition anywhere in it reads; they were invisible only because the terminal frame
-    outranked the bullets that would have shown them.
+    A terminal card can print ✓ at or before the click that opens its content, or ride
+    a different meter from the one the door reads, so the badge can arrive at 0. A card
+    can also ask the player to climb to a threshold no condition anywhere reads, hidden
+    only because the terminal frame outranks the bullets that would have shown it.
 
     THE FIX THE FINDING POINTS AT is not a bigger number. A meter is the wrong thing to
     gate a badge on at all: put the ✓ on a FLAG the content sets on its way out, so it
@@ -1046,9 +1008,7 @@ def lint_refusal_shape(model, game):
     `engine.md` §15 was reversed 2026-08-24 to *"set `locked_text` by default"*, and it is
     right — a visible mute row is 2.26% of the field and nearly all of that is settings
     chrome. But it answers only what a shown row must SAY. Nothing says how many rows to
-    show, and the first game authored after the reversal went to 22 of 22 against 13 of
-    171 across every game before it. The instruction was followed; the missing half is
-    this one.
+    show; the missing half is this one.
 
     THE FIELD'S DEFAULT IS SILENCE (`findings_B_refusal.md` §2, 16,167 refusing chains):
     **71% render nothing at all**, and the per-game silent share runs a median of **79%**
@@ -1064,12 +1024,10 @@ def lint_refusal_shape(model, game):
     2. **Self-moved.** Of those, the ones gated on a trait the same canvas's effects
        WRITE. That is the machinery narrating its own progress bar: the row opens by
        itself in a click or two, so the text hands the player nothing to act on. Contrast
-       vesper's in-scene *"Not like this — you're filthy"*, which names something the
-       player goes elsewhere and fixes — a real handle, correctly spoken.
+       a row naming something the player goes elsewhere and fixes — a real handle.
     3. **Length.** A DOOR and a REFUSAL are different objects and the numbers say so. The
        field's spoken refusals are a flat mechanical UI label — n=4,540, **median 9
-       words**, naming a price 37% of the time. `vesper`, the study's *"only game doing
-       this properly"*, writes its nine in-fiction at a **median of 22**. Nine words is
+       words**, naming a price 37% of the time. A DOOR is in-fiction; nine words is
        right for "already done" and wrong for the ceiling of a release.
     """
     def _walk(o, f):
@@ -1089,7 +1047,7 @@ def lint_refusal_shape(model, game):
         writes = set()
 
         def _w(o):
-            # ⚠️ `effects` is not always a list of dicts. the_inheritance carries string
+            # ⚠️ `effects` is not always a list of dicts. Some games carry string
             # entries and an unguarded .get() there took the WHOLE SCOREBOARD down for
             # that game — a lint must never be able to do that. Guard every element.
             for e in (o.get("effects") or []):
@@ -1145,7 +1103,7 @@ def lint_refusal_shape(model, game):
     if lens:
         lens.sort()
         med = lens[len(lens) // 2]
-        bits.append(f"reason length median {med}w (field refusal 9 · vesper door 22)")
+        bits.append(f"reason length median {med}w (field refusal median 9)")
     return (" · ".join(bits), findings)
 
 
@@ -1216,10 +1174,9 @@ def lint_screen_shape(model, game):
         n_open = sum(1 for ch in chs if not ((ch.get("conditions") or {}).get("items")))
         # ⚠️ ROWS ON SCREEN — the only number here the PLAYER can see, and the one that was
         # missing. A locked choice with `show_when_locked` still renders: greyed, but a line
-        # on the list. Measured failure: a pass gated 57 room choices, moved "open on turn
-        # one" from 126/166 to 70/166, and left show_when_locked on all of them — so 164 of
-        # 166 rows still rendered and the game played exactly as wide as before. The author
-        # optimised the number that was reported and never looked at the wall.
+        # on the list. Gating room choices while leaving show_when_locked on all of them
+        # moves "open on turn one" and leaves the game playing exactly as wide as before —
+        # the number that was reported moves and the wall does not.
         n_rows = n_open + sum(1 for ch in chs
                               if (ch.get("conditions") or {}).get("items")
                               and ch.get("show_when_locked"))
@@ -1278,24 +1235,11 @@ def lint_faceless_surfaces(game):
     ⚠️ A LIST AND NOT A GATE, on purpose. The hard version of this failure — `npc` written
     one level too high, where the key is discarded outright — is convicted by the gate
     `no canvas key is discarded`, which cannot produce a false positive. THIS is the
-    soft version, and the corpus says plainly that it has legitimate instances. Measured
-    across all 26 games the day it was written — 21 hits in 5 games, 21 games clean:
-
-        orientation   14   the whole cast, every one of them a hub or a talk screen
-        the_allowance  3   walkin_gareth_wash / joss / martin — three walk-ins
-        late_shifts    2   scene_ben_stage2_charged_moment, scene_pam_confrontation
-        the_route      1   house_the_evening
-        vesper         1   react_renner_threat
-
-    Everything outside `orientation` is a WALK-IN or a scene that happens in a place while
-    somebody is around, and four of the seven are already windowed by their own
+    soft version, and it has legitimate instances: walk-ins and scenes that happen in a
+    place while somebody is around, often already windowed by their own
     `trigger.schedules` — the correct alternative per the-first-hour.md F5b. A gate here
-    would fail four games for obeying the doctrine, which is the R4 error.
-
-    ⚠️ THE FIRST VERSION OF THIS DOCSTRING SAID "orientation 13, vesper 1, the_route 1,
-    every other game 0". That was an ELEVEN-game sample stated as the corpus, and running
-    the finished lint over all 26 found `the_allowance` and `late_shifts` immediately. The
-    numbers above are the full sweep. Measure the artefact the check reads.
+    would fail games for obeying the doctrine, which is the R4 error. Measure the
+    artefact the check reads.
     """
     rows = []
     for c in (game.get("canvases") or []):
@@ -1372,8 +1316,8 @@ def lint_unresolved_tokens(game):
     "no raw token on screen".
 
     Walks the WHOLE game, every nested list included — the list this replaced checked
-    eight top-level fields and skipped lists, which is where three of the_balance's nine
-    leaks were (`npcs[].tags`, `relationship_options`). Scoped to references the engine
+    eight top-level fields and skipped lists, which is where leaks hide (`npcs[].tags`,
+    `relationship_options`). Scoped to references the engine
     WOULD resolve in prose — a declared npc slug or `player` — so an email address or a
     decorative `@` is not a finding. engine.md §43.
     """
@@ -1447,11 +1391,9 @@ def lint_world_prose(model, game):
 # ─────────────────────────────────────────────────────────────────────────────
 # The load lints — register.md "The load rules"
 # ─────────────────────────────────────────────────────────────────────────────
-# Three LISTS, never scores. The separation from the field is total on two of the
-# three, so a threshold is defensible on the numbers and is still refused: it would
-# red every one of the nine games this skill has already authored on the day it
-# lands, which is the R4 / study-6 / P0 failure this file has turned down four
-# times. The fix is per-sentence, so the useful artefact is the sentences.
+# Three LISTS, never scores. A threshold is refused: it would red games for the age
+# of the doctrine, which is the R4 / study-6 / P0 failure this file has turned down
+# four times. The fix is per-sentence, so the useful artefact is the sentences.
 #
 # Field figures, 27 corpus games / 14.5M prose words, quoted at each print site.
 
@@ -1466,20 +1408,19 @@ NEGATION_RE = re.compile(
 # preceded by `e`, so there is no word boundary in front of it. `doesn't`, `don't`,
 # `won't`, `isn't`, `can't` and `cannot` were ALL invisible to this rule. Fixture:
 #   "She doesn't look up."  miss -> HIT      "She does not look up."   HIT (unchanged)
-# It is not a symmetric error. Contracted negatives live in SPEECH, the field writes
-# far more speech than we do, and so the hole hid more of the field than of us. The
+# It is not a symmetric error. Contracted negatives live in SPEECH, the field writes a
+# lot of speech, and so the hole hid much of the field. The
 # field's own rate roughly doubles once it is closed — see the re-based figures under
 # `lint_negation`. Anything measured with the old pattern is void.
 
 # The L2 field baseline, re-measured 2026-09-01 with the fixed regex above and with the
-# field reduced to NARRATION — the register `_narration_by_canvas` reads on our side —
+# field reduced to NARRATION — the register `_narration_by_canvas` reads on the game's side —
 # by stripping `<<...>>` macro speech (20 of 27 corpus games mark speech that way) and
 # quoted spans, then splitting with `_beat_sentences`. Same regex, same splitter, same
 # register, both sides. 25 games, 784,591 sentences.
 #
 # ⚠️ THESE ARE LINT BOUNDS, NOT A GATE. Nothing fails on them and nothing should:
-# fourteen of our sixteen games are over the max, which is a finding to read, not a
-# build to break. The old values (7.59 / 13.56 / 20.22) were measured with the broken
+# a game over the max is a finding to read, not a build to break. The old values (7.59 / 13.56 / 20.22) were measured with the broken
 # regex against an ALL-TEXT field and must not be restored.
 FIELD_NEGATION_P50 = 12.06
 FIELD_NEGATION_P90 = 16.38
@@ -1487,8 +1428,8 @@ FIELD_NEGATION_MAX = 25.76   # become-taxi-driver
 
 # ⚠️ TIGHTENED, and the loose version is why. `since|years|moved|carried` scored
 # "moved his hand" and "carried the tray" as history. This keeps TEMPORAL markers
-# only and was checked against a 14-case fixture (7 real history lines from a
-# shipped game, 7 action lines) at 0 errors before any figure was taken. It still
+# only and was checked against a 14-case fixture (7 real history lines, 7 action
+# lines) at 0 errors before any figure was taken. It still
 # over-counts a sentence that merely mentions a duration — read the list, not the
 # number.
 HISTORY_RE = re.compile(
@@ -1514,9 +1455,8 @@ def _narration_by_canvas(game):
     ⚠️ THE BASIS DIFFERS FROM THE FIELD FIGURE, deliberately, and in the field's
     favour. The corpus exists only as built HTML with speech inline, so the p50/p90/max
     quoted at each print site are ALL-TEXT and the field's narration-only rates would be
-    higher than printed. Excluding speech raises OUR numbers on every count and every
-    game (the_route 2.26 -> 2.74 gloss, 12.1 -> 16.0 history), so the gap this reports
-    is the conservative one. It can understate the drift; it cannot invent it.
+    higher than printed. Excluding speech raises a game's numbers, so the gap this
+    reports is the conservative one. It can understate the drift; it cannot invent it.
     """
     out = []
     for c in game.get("canvases") or []:
@@ -1544,9 +1484,8 @@ def _narration_by_canvas(game):
 def lint_gloss(game):
     """A fact, then an explanation of the fact, welded into the same sentence.
 
-    `register.md` "The load rules" L1. The cleanest separation measured anywhere in
-    this file: the field's worst game writes 0.24 per 1,000 words and our best writes
-    1.34, so the two distributions do not touch. A gloss is always more abstract than
+    `register.md` "The load rules" L1. The field's worst game writes 0.24 per 1,000
+    words. A gloss is always more abstract than
     the thing it glosses, which is why it costs the reader rather than helping them.
 
     Returns (rate per 1,000 words, hits) — one hit per sentence, worst canvas first.
@@ -1570,11 +1509,9 @@ def lint_negation(game):
     MORE specific.
 
     ⚠️ RE-BASED 2026-09-01, and BOTH the regex and the field figure moved. The old
-    numbers (field p50 7.59%, max 20.22%, "our nine run 22.5-38.0%") were taken with
-    the broken `\bn't\b` pattern above AND against an ALL-TEXT field baseline, while
-    this function has always read NARRATION ONLY (`_narration_by_canvas` drops
-    `dialog`). Two mismatches, and they pull in opposite directions, so neither the
-    old verdict nor its magnitude could be trusted.
+    field numbers (p50 7.59%, max 20.22%) were taken with the broken `\bn't\b` pattern
+    above AND against an ALL-TEXT field baseline, while this function has always read
+    NARRATION ONLY (`_narration_by_canvas` drops `dialog`).
 
     Re-measured with the fixed regex, the field reduced to narration the same way
     (macro speech and quoted spans stripped) and split with `_beat_sentences` — the
@@ -1582,22 +1519,11 @@ def lint_negation(game):
 
         field   p50 12.06%  ·  p90 16.38%  ·  p95 22.32%  ·  MAX 25.76%
                                                     (become-taxi-driver)
-        ours    p50 33.44%  ·  range 19.01-42.14%  ·  14 of 16 above the field MAX
-                                                       16 of 16 above the field p90
 
-    ⚠️ THE FINDING SURVIVED AND GOT BIGGER, and an intermediate reading said the
-    opposite. Measuring our BUILT HTML against the field's built HTML put us at 0 of
-    31 above the field max and briefly retired this rule — wrong, because our build
-    carries thousands of words of engine-generated labels, room lists and sidebar with
-    almost no negation in them, which dilutes exactly the quantity being measured. The
-    authored narration is the register an author controls and the one this lint reads.
-    Do not re-run that comparison and re-retire the rule.
-
-    ⚠️ THE OLD REGEX WAS FLATTERING v1, WHICH IS WHY THE "v2 HABIT" STORY IS WRONG.
-    Contracted narration moved `the_inheritance` 18.8 -> 35.1, `last_call` 20.1 -> 33.5,
-    `the_long_summer_test` 12.0 -> 28.1 and `late_shifts` 10.8 -> 24.0. All sixteen
-    games under BOTH skills now sit above the field p90. It is a house habit, not a
-    v2 one.
+    ⚠️ MEASURE NARRATION, NOT BUILT HTML. A game's build carries thousands of words of
+    engine-generated labels, room lists and sidebar with almost no negation in them,
+    which dilutes exactly the quantity being measured. The authored narration is the
+    register an author controls and the one this lint reads.
 
     Returns (share of sentences, total sentences, worst canvases) — a canvas is worth
     listing only once it is both above the field max and carrying real prose.
@@ -1619,7 +1545,7 @@ def lint_negation(game):
 def lint_history_repeatable(game):
     """Backstory on a screen the player re-enters dozens of times.
 
-    `register.md` "The load rules" L3. Field max 5.41%; eight of our nine are above it.
+    `register.md` "The load rules" L3. Field max 5.41%.
     A repeatable canvas is the expensive place for history — the reader reconstructs a
     prior state of the world before the present one means anything, every visit.
 
@@ -1649,8 +1575,8 @@ def lint_history_repeatable(game):
 # reaction, not the number". Source: PRD_SKILL_STYLE_AND_OPENING.md §5.5.
 #
 # ⚠️ ALL FIVE ARE LINTS, NOT GATES, on purpose. The PRD scoped the blocking overhaul
-# out, and P0 applies: the day these landed, no game in the repo was written in the
-# voice they check, so a gate would measure the doctrine's age and not the games.
+# out, and P0 applies: a gate on a brand-new doctrine measures the doctrine's age, not
+# the games.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # A claim about a past the player may not have had. Deliberately NOT folded into
@@ -1659,10 +1585,10 @@ def lint_history_repeatable(game):
 PAST_CLAIM_RE = re.compile(
     r"\b(last night|last time|yesterday|this week|again|the other day|as usual|"
     r"like always)\b", re.I)
-# ⚠️ "every time" was in the first cut and came out the same day: on all three games it
-# was habitual present tense ("every time he draws back"), never a claim about a past.
+# ⚠️ "every time" was in the first cut and came out the same day: "every time" is habitual
+# present tense ("every time he draws back"), not a claim about a past.
 
-# `+Ray Respect`, `-2 Trust`, `−Relationship`, `(Trust +4)`: a sign, an optional number,
+# `+Jo Respect`, `-2 Trust`, `−Relationship`, `(Trust +4)`: a sign, an optional number,
 # then a Capitalised name — or a Capitalised name, then a signed number. The capital is
 # what keeps "twenty-five" and "a - b" out; a dash between words has spaces round it.
 PRINTED_STAT_RE = re.compile(
@@ -1740,7 +1666,7 @@ def lint_arc_ladder(game, state=None):
     number the step before it sets. `the-arc.md` A1. A LIST, never a score.
 
     A step belongs to a person when it is bound to them (`trigger.npc` / `requires_npc`) or
-    its id carries their short name (`arc_kess_02` is Kess's). Declared ladders
+    its id carries their short name (`arc_jo_02` is Jo's). Declared ladders
     (`board.characters[].ladder`) print their own step count beside it.
     """
     npcs = [n.get("id") for n in game.get("npcs") or [] if n.get("id")]
@@ -1854,8 +1780,8 @@ def lint_person_never_speaks(game):
 def lint_thoughts_over_speech(game):
     """A person is on the canvas, and she thinks more words than anyone says aloud.
 
-    `register.md` rule 3: her thoughts go BESIDE the dialogue, never instead of it —
-    S3 measured seventh_day at 4.6 thought words per spoken word. G32 counts
+    `register.md` rule 3: her thoughts go BESIDE the dialogue, never instead of it.
+    G32 counts
     `thought_bubble` as narration game-wide (`_speech_split`); this is the per-canvas
     view of the same inversion, scoped to canvases where somebody could have talked.
     """
@@ -1895,14 +1821,12 @@ def _declared_stat_names(game):
 
 
 def lint_printed_stat(game):
-    """`+Ray Respect` on a button, or in the prose after it: a score printed on screen.
+    """`+Jo Respect` on a button, or in the prose after it: a score printed on screen.
 
     `the-meters.md` "What the player is shown": show the reaction, not the number, and
-    `register.md` truth rule 4, a consequence printed on a button is a real flag. The first
-    loud rewrite this came from printed a trust stat for the protagonist's mother, and no
-    such stat existed. Since 2026-09-25 a declared stat is listed too: scores stay hidden.
-    Matches by the LAST words of the printed name, so "+Ray Respect" counts as declared if
-    `respect` or `ray respect` is. A list, never a score.
+    `register.md` truth rule 4, a consequence printed on a button is a real flag. Since 2026-09-25 a declared stat is listed too: scores stay hidden.
+    Matches by the LAST words of the printed name, so "+Jo Respect" counts as declared if
+    `respect` or `jo respect` is. A list, never a score.
     """
     declared = _declared_stat_names(game)
     hits = []
@@ -2073,8 +1997,7 @@ shift start minute hour day week month year time moment thing way point reason v
 # An object is a thing a room HAS, and in English that is written with a determiner in front of
 # it. This is the cheapest available noun test and it exists because the under-declaration check
 # was reporting `sleep` (from the choice "Sleep.") as an object the board had failed to declare.
-# Measured on a real game: without it, 16 findings of which 6 were verbs or bare abstractions;
-# with it, 7 findings and every one a genuine thing in the room.
+# Without it, verbs and bare abstractions come through as findings.
 _NOUN_PHRASE = re.compile(
     r"\b(?:the|a|an|his|her|its|their|your|our|this|that|these|those|one|two|three|four|five|"
     r"six|seven|eight|nine|ten)\s+([a-z][a-z-]{2,})", re.I)
@@ -2156,16 +2079,14 @@ def _names_any(text, vocab):
 # affordances from `exit_block.choices` and could not see a canvas at all — so
 # "Get the washing in off the airer", an entire canvas about the airer, counted
 # as ZERO, and the only way to go green was a second screen re-listing what was
-# already there. It was green on all five games while manufacturing nine
-# duplicate room screens. A check that cannot see the shape of the thing it
+# already there. It went green only by manufacturing duplicate room screens. A check that cannot see the shape of the thing it
 # judges does not measure quality; it manufactures whatever it CAN see.
 # ═════════════════════════════════════════════════════════════════════════════
 
 # Room-list labels that open on a determiner and name no verb: "The bench",
 # "The counter, before midnight". A player cannot tell what clicking does.
-# `the-voice.md` R1 — reported, never gated: three shipped games sit at 0% so the
-# target is reachable, but any threshold in the 38%..84% gap would be invented,
-# and this skill has demoted two rules for exactly that.
+# `the-voice.md` R1 — reported, never gated: any threshold would be invented, and
+# this skill has demoted two rules for exactly that.
 _DETERMINER = re.compile(r"^(the|a|an|your|his|her|their|my|our|this|that)\b", re.I)
 
 # 84,009 action labels across the 27 parseable sandboxes, re-measured 2026-08-24:
@@ -2246,13 +2167,13 @@ def lint_labels_and_systems(model, game, state):
     ⚠️ A LINT AND NOT A GATE, and the direction is the whole reason it is safe to
     build. A count is satisfied by declaring more — that is why R2c shipped with no
     check at all, and why `objects` / gate 22 had to be deleted after it manufactured
-    nine duplicate room screens across five games. This one runs the other way:
+    duplicate room screens. This one runs the other way:
     declaring another label makes the output WORSE, because an unread label is what it
     prints. Nothing here can be optimised into a pass.
 
-    ⚠️ P0 — never build a check for a state nothing is in. Every game in the repo
-    declares zero systems and zero labels the day this lands, so a gate would fail
-    twelve games for the age of the doctrine rather than for anything in them. This
+    ⚠️ P0 — never build a check for a state nothing is in. A gate on a field nobody
+    declares yet fails every game for the age of the doctrine rather than for anything
+    in them. This
     reports "not declared" and moves on; it cannot fail anything.
     """
     if state is None:
@@ -2366,8 +2287,8 @@ def lint_mute_cards(game):
 def lint_doors(model, game):
     """`the-map.md` R6-R6c — every `[locations.door]`, and whether it opens onto anything.
 
-    A DOOR is the threshold screen the player lands on instead of the room: click Ray's
-    Room and get *knock* rather than walking straight in. Doc 73.
+    A DOOR is the threshold screen the player lands on instead of the room: click her
+    room and get *knock* rather than walking straight in. Doc 73.
 
     ⚠️ PRINTS NOTHING when a game declares no door, and that is deliberate. R6 says a
     door is a handful per game — DoL carries SIX named doors in a 15,626-passage game —
@@ -2406,8 +2327,7 @@ def lint_doors(model, game):
         options = [o for o in (door.get("options") or []) if isinstance(o, dict)]
         n_options += len(options)
 
-        # 1 · a door no option can ever open. The Ray bug generalised: `Knock.` sat
-        #     behind appetite 70 + ray_open and unlocked into nothing.
+        # 1 · a door no option can ever open, or whose only option opens onto nothing.
         live = []
         for oi, o in enumerate(options):
             keys = [it.get("flag_key") or it.get("trait_key")
@@ -2467,8 +2387,8 @@ def lint_unwritten_act(model, game):
     was never authored.
 
     ⚠️ THIS IS A LIST AND CANNOT FAIL ANYTHING — LO's call, 2026-09-02, and the reason
-    is measured: at zero tolerance it fails 16 of our 18 games at once, `vesper` (the
-    released one) included, and a scoreboard that reds everything stops telling a
+    is this: at zero tolerance it reds nearly every game at once, and a scoreboard that
+    reds everything stops telling a
     broken game from an unfinished one. The doctrine carries the absolute; this makes
     each game's debt visible.
 
@@ -2504,7 +2424,7 @@ def lint_unwritten_act(model, game):
                     v = e.get("value")
                     # ⚠️ `value` is not always a number. The engine also takes a random
                     # RANGE — `value = { type = "random", min = 2, max = 4 }` — which
-                    # `the_long_summer_test` uses 43 times. Formatting it as a scalar
+                    # games do use. Formatting it as a scalar
                     # raised TypeError and took the whole lint down with it.
                     if isinstance(v, dict):
                         what.append(f"+{v.get('min','?')}..{v.get('max','?')} {t}")
@@ -2553,7 +2473,7 @@ def lint_browse_share(model, game):
     """Room canvases whose entire click changes nothing but the clock.
 
     A NUMBER, not a bar. Known noisy — a travel bridge legitimately scores as a
-    browse (vesper's three "Take the car" rows), so read WHICH canvases it names
+    browse (a "Take the car" row), so read WHICH canvases it names
     rather than the percentage alone.
     """
     def changes(o):
@@ -2654,11 +2574,10 @@ def lint_dispatch_depth(game):
     R3's content IS the branching (*"the richness is combinatorial, not authored"*),
     and until 2026-08-23 nothing printed how deep a dispatch goes.
 
-    A NUMBER, never a gate. The field's unit is a passage and ours is a canvas, so no
-    threshold transfers. What reads is the shape: DoL's `Bath` dispatches TWELVE
-    outcomes from one activity; the deepest in this repo is vesper's `chat_the_floor`
-    at four; and three v2 games run every host at exactly one — which is a coin flip
-    between one branch and the base canvas, not a dispatch.
+    A NUMBER, never a gate. The field's unit is a passage and this engine's is a canvas,
+    so no threshold transfers. What reads is the shape: DoL's `Bath` dispatches TWELVE
+    outcomes from one activity. A host at exactly one is a coin flip between one branch
+    and the base canvas, not a dispatch.
 
     The second half is the ENGINE, and it is invisible in the TOML. Rules without
     `exclusive_group` each roll their OWN dice (`v2.py:5382-5391`), so stacking them
@@ -2680,11 +2599,10 @@ def lint_dispatch_depth(game):
         # the top once.
         #
         # ⚠️ "can be live together" is the whole difficulty and it is not decoration.
-        # back_home stacks four `exposure >= 35/45/55` rules that are ALL true at the
-        # top of its game — multiplying is right, and the activity renders 24% of the
-        # time. off_season bands one walk-in `lt 20` / `gte 20 and lt 22` / `gte 22`,
-        # where exactly one can ever pass — multiplying those would report 6% for a
-        # canvas that actually renders 70% of the time early on. Same TOML shape, two
+        # Four stacked `exposure >= 35/45/55` rules can ALL be true at once — multiplying
+        # is right. A walk-in banded `lt 20` / `gte 20 and lt 22` / `gte 22`, where
+        # exactly one can ever pass, must not be multiplied — that would report a tiny
+        # share for a canvas that renders most of the time. Same TOML shape, two
         # different mechanisms, so the contradictory pairs get found before anything
         # is multiplied.
         survives = 1.0
@@ -2734,9 +2652,7 @@ def _speech_split(game):
 
     Walks groups and cascade beats, because that is where v2 games keep their prose.
     `dialog` is the only block the engine renders as speech; `thought_bubble` is
-    interiority and counts with narration, which is the point of the gate — in every
-    v2 game the protagonist's inner monologue outweighs everything anyone says aloud
-    (seventh_day 4.6 thought words per spoken word, forty_miles 3.1).
+    interiority and counts with narration, which is the point of the gate.
     """
     spoken = other = 0
 
@@ -2784,7 +2700,7 @@ def lint_ladder(model, game):
     """Where each explicit canvas sits on the ladder, opening rung and ceiling.
 
     A NUMBER, never a bar. A canvas is not a field passage: the field's unit is one
-    rung of a chain, ours is a whole scene, so no single threshold is comparable.
+    rung of a chain, a canvas is a whole scene, so no single threshold is comparable.
     What IS readable is the shape of the distribution, and both failure directions
     show up in it plainly.
     """
@@ -2816,7 +2732,6 @@ def lint_talk_screens(model, game):
     """Screens whose job is a conversation. The genre's second largest content kind.
 
     Field: 15,774 of 54,630 screens (29%) are two-thirds spoken with one picture.
-    Ours: the_allowance ships 216 spoken words in the entire game, seventh_day 410.
     """
     talk = []
     for c in model:
@@ -2895,10 +2810,9 @@ def _act_nodes(canvas):
                 if tgt:
                     out.add(tgt)
 
-    # ⚠️ ONE HOP, when the act node is a pure menu. `the_long_summer_test` routes
-    # base_ontop / base_doggystyle / base_missionary to result_* nodes and carries no
-    # prose on the rungs themselves — measuring only the rungs read that game as
-    # having no act beats at all, which is the blind spot, not the answer.
+    # ⚠️ ONE HOP, when the act node is a pure menu. An act menu can route its rungs to
+    # result_* nodes with no prose on the rungs themselves — measuring only the rungs
+    # reads that as having no act beats at all, which is the blind spot, not the answer.
     byid = {str(n.get("id")): n for n in (canvas.get("nodes") or [])}
     for nid in list(out):
         node = byid.get(nid)
@@ -2963,9 +2877,9 @@ def _band_texts(node):
     was special-cased; a pool's variants fell through to the always-renders text and
     got concatenated, so a three-variant pool reported the SUM of all three as the
     thinnest thing the node can show. Nothing had used `block_pool` yet, so nothing had
-    been wrong yet — this landed with the first one (`the_season`'s act nodes). It is
-    the same failure the beat collector already carries a warning about at the top of
-    this file, where 158 groups across four games were invisible for the same reason:
+    been wrong yet — this landed with the first pooled act node. It is the same failure
+    the beat collector already carries a warning about at the top of this file, where
+    whole groups were invisible for the same reason:
     a walker that knows one container type and meets another.
 
     Adjacent `[group]` blocks merge into ONE if/elseif chain (`engine.md` §35), so all
@@ -3010,31 +2924,26 @@ def lint_explicit_volume(slug):
     """How much explicit content is actually IN this game, in absolute terms.
 
     Every other heat check here is a SHARE with a hand-picked denominator, so a game
-    can clear all of them while being nearly empty: `the_route` is 46/46 green with
-    **11** explicit screens, `night_desk` 39/40 with 6. Nothing could see that.
+    can clear all of them while being nearly empty. Nothing could see that.
 
-    Measured 2026-09-01: our median game ships 32 explicit screens against the field's
-    457, and 0.567 per 1,000 words against 1.24.
+    Field (2026-09-01): a median of 457 explicit screens, and 1.24 per 1,000 words.
 
     ⚠️ READS THE BUILT HTML, and that is deliberate here even though G43 forbids it for
-    prose texture. The reason is the same one G43 gives: our build carries UI blocks the
-    field's passages do not, so anything computed PER SENTENCE or PER PASSAGE is not
-    comparable across the two bases — but *a rate over word count is*. The field figures
-    come from `<tw-passagedata>` bodies (`shape.py`), so ours must too, or the bases
-    differ and the comparison is void.
+    prose texture. The reason is the same one G43 gives: the engine's build carries UI
+    blocks the field's passages do not, so anything computed PER SENTENCE or PER PASSAGE
+    is not comparable across the two bases — but *a rate over word count is*. The field
+    figures come from `<tw-passagedata>` bodies (`shape.py`), so the game's must too, or
+    the bases differ and the comparison is void.
 
     ⚠️ TWO BASES ARE PRINTED ON PURPOSE, and the difference is the honesty.
       · ALL passages      — matched to how the field number was produced. The primary.
-      · CANVAS passages   — ours only, excluding UI chrome. GENEROUS to us, unmatched,
-                            and therefore an upper bound rather than a fairer figure.
-    Measured both ways, the gap survives: on the matched basis our best game reaches
-    1.03 against a field median of 1.24 and most sit at half that. But on the generous
-    basis `the_season` reaches 1.78 and `commuter` 1.41, i.e. ABOVE the field median —
-    so the claim "every v2 game is below the field's p25" is true of the matched basis
-    ONLY, and stating it without the basis overstates it.
+      · CANVAS passages   — the game's canvases only, excluding UI chrome. GENEROUS,
+                            unmatched, and therefore an upper bound rather than a
+                            fairer figure. A claim about the gap to the field holds on
+                            the matched basis ONLY; stating it without the basis
+                            overstates it.
 
-    A LINT, never a gate. Every v2 game sits under the field median on the matched
-    basis; a gate here would fail all of them at once for obeying current doctrine —
+    A LINT, never a gate. A gate here would fail games for obeying current doctrine —
     the failure that withdrew R4, study 6's anchoring check and P0. It prints the
     numbers and judges nothing.
     """
@@ -3085,9 +2994,7 @@ def lint_act_nodes(model, game):
     """How crude is the beat the player is actually IN?
 
     `explicit floor` is a game-WIDE share, and a game can clear it while every act
-    node is warm — which is exactly what the measured failure looked like: 95% of one
-    game's crude prose sealed in a room with no exits, and all nine of its repeatable
-    sex loops scoring zero. A percentage cannot see that. This reads the act nodes of
+    node is warm. A percentage cannot see that. This reads the act nodes of
     every act-menu loop and its finisher, because that is the screen in front of the
     player while the thing is happening.
 
@@ -3250,8 +3157,8 @@ def _engine_read_stage_traits(game):
     exempts it.
 
     ⚠️ ONLY when the prefix is a real character. `sex_stage` is NOT exempt — no
-    character is called `sex` — and vesper writes it 81 times against 0 reads,
-    which is a genuine dead meter the carve-out must not hide.
+    character is called `sex` — so a `sex_stage` written and never read is a
+    genuine dead meter the carve-out must not hide.
     """
     ids = set()
     for n in (game.get("npcs") or []):
@@ -3375,21 +3282,18 @@ def lint_meter_ladder(game, state):
     Which meters those ARE follows `board.who_climbs`, because W1 makes that a
     declared fork: a ladder game's climb is the tiers it names, a roster game's
     is spread across the cast and leaves `ascent_tiers` empty. Reading only the
-    named tiers measured the ladder games and printed NOTHING for the one roster
-    game in the repo — half a fork is not an instrument.
+    named tiers measured the ladder games and printed NOTHING for a roster
+    game — half a fork is not an instrument.
 
     ⚠️ EACH BRANCH GETS ITS OWN FIELD NUMBER, since 2026-08-24. A declared tier is
     judged against player-ascent meters (8-17 rungs); a cast meter against the field's
     per-character willingness meters (2-6, median 3). Printing the ascent number beside
-    a roster game told `off_season` its 5-rung cast meters were short of 8 when the
+    a roster game told a roster game its 5-rung cast meters were short of 8 when the
     field's per-character median is 3 -- it was already above it.
 
     A NUMBER, never a bar. A rung count is only comparable between meters on the
     same 0-100 scale, and a game is free to run a two-rung meter on purpose.
-    What is worth seeing is that every meter in every v2 game so far reads
-    15/35/55/75 — the DoL seed's spacing, promoted to a copyable example in
-    `the-board.md` and reproduced across five games — all 16 declared tiers put
-    their lowest rung at exactly 15.
+    15/35/55/75 is the DoL seed's spacing, one game's, not a ladder to copy.
     """
     board = (state or {}).get("board") or {}
     tiers = board.get("ascent_tiers") or []
@@ -3454,8 +3358,6 @@ def lint_counterweight(game, state):
     """A player meter that runs DOWN: does it shut anything?
 
     One game in 25 ships a counterweight that gates (DoL `purity`, 84 gates).
-    Four of our five v2 games ship one, and three of those gate almost nothing:
-    `count` 0 reads, `standing` 2, `grace` 5.
 
     ⚠️ HEURISTIC, which is why this is a lint. Nothing in the TOML declares
     "counterweight", so it is inferred: a player trait starting at 50+ whose
@@ -3530,7 +3432,7 @@ _WORD_TOKEN = re.compile(r"[A-Za-z][A-Za-z'\-]*")
 # `tea`, `bonnet` are all used by 4+ field games, so `genre_words.txt` is structurally
 # blind to them. This is the half of the check that no corpus can supply, kept short on
 # purpose: a lint that cries wolf gets ignored (see `_OBJ_STOP` above, same lesson).
-# Only entries verified by reading real lines in our own games are listed.
+# Each entry is a common word that misreads badly for most readers.
 #
 # ⚠️ A WORD `register.md` NAMES AS A DEFECT BELONGS IN HERE. The four additions dated
 #    2026-08-23 were all sitting in that file already and in none of this dict:
@@ -3540,15 +3442,9 @@ _WORD_TOKEN = re.compile(r"[A-Za-z][A-Za-z'\-]*")
 #    dict does not carry it, nothing in the instrument does. Reconcile the two on every
 #    edit to either.
 #
-# ⚠️ MEASURED AND REJECTED — do not re-propose without new evidence. Counts are uses in
-#    player-visible text across the 20 built games (269,421 words), read line by line:
-#      front  ×334  "the front door", "in front of" — noise
-#      inside ×213  "inside the room" — noise
-#      tip     ×44  only back_home's 3 ("the desk went to the tip") are the dump sense
-#      boot     ×8  every use is footwear; not one car boot in the repo
-#      bill     ×7  invoice and banknote are both common; no defect present
-#      purse   ×10  a wrong picture, but it does not cost the scene; 5 of 10 correct
-#    The bar is not "could be misread" — it is "misreads badly enough to cost the
+# ⚠️ REJECTED — do not re-propose without new evidence: front, inside, tip, boot, bill,
+#    purse — each misreads rarely enough that the false positives cost more than the
+#    catch. The bar is not "could be misread" — it is "misreads badly enough to cost the
 #    reader the line, often enough to be worth the false positives."
 _FALSE_FRIENDS = {
     "vest":    "an undershirt here, a waistcoat to most readers",
@@ -3560,19 +3456,15 @@ _FALSE_FRIENDS = {
     "biscuit": "a cookie here, a soft savoury roll to most readers",
     "dummy":   "a pacifier here, a mannequin to most readers",
     "fringe":  "a haircut here, an edge to most readers",
-    # Added 2026-08-23. `meter` is the one that reached a player: LO hit the button
-    # `Feed the meter ($3)` in the built off_season and could not read it — and it is
-    # the first entry here whose clash is with OUR OWN UI rather than with a dialect.
-    # In this genre a meter is a stat bar, and that game renders four in its sidebar.
-    # Same exposure, unmeasured so far: board, card, flag, state, tier, rung.
+    # Added 2026-08-23. `meter` clashes with the genre's own UI rather than with a
+    # dialect: in this genre a meter is a stat bar. Same exposure, unmeasured so far: board, card, flag, state, tier, rung.
     "meter":   "a coin-fed prepayment box here, a stat bar to most players",
     "float":   "the till's starting cash here, something buoyant to most readers",
     "pitch":   "the rent on a trading spot here, a sound or a throw to most readers",
     "chemist": "a pharmacy here, a scientist to most readers",
 }
 # `half seven` is 7:30 in Britain, 6:30 across much of Europe, and not a construction
-# American English uses at all. Measured: 157 uses across six of our games against 4
-# uses of the unambiguous `half past`.
+# American English uses at all.
 _HALF_HOUR = re.compile(
     r"\bhalf\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b", re.I)
 
@@ -3645,14 +3537,14 @@ def _player_visible_text(model, game):
 def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
     """Words in a body of text that the genre does not use — a LIST, not a score.
 
-    Off Season scores 86.8 Flesch, easier than 26 of the 27 field games, and LO
-    could not read it. Sentence length and syllable count both pass a game whose
+    Readability scores pass text a reader cannot follow: sentence length and
+    syllable count both pass a game whose
     difficulty is REFERENTIAL: `immersion`, `airer`, `chandlery`, `forecourt` are
     short, common-looking words naming objects the reader must already own.
 
-    ⚠️ A LIST AND NEVER A GATE. The rate does not discriminate: with names, months
-    and number-words filtered out, `vesper` — which reads fine — runs 190 per 10k
-    and off_season runs 254. What separates them is what the words ARE. `emitter`
+    ⚠️ A LIST AND NEVER A GATE. The rate does not discriminate: a game that reads
+    fine and a game that does not can run at similar rates. What separates them is
+    what the words ARE. `emitter`
     and `sternum` are built by the fiction; `immersion` and `airer` cannot be,
     because a real object either lands with the reader or it does not. That is a
     judgement, so the check hands over the words and the author makes it.
@@ -3662,8 +3554,7 @@ def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
     WANT phase — before a location has been named or a button written. It used to
     be reachable only from a built game, which is one phase too late: by then the
     vocabulary is already set into room names and labels and fixing it means
-    renaming things. `the_season`'s Want shipped `rota` and `ledger` past a author
-    who had committed, one message earlier, to avoiding exactly that class.
+    renaming things. Run it at WANT/BOARD, before words set into room names.
 
     `declared_names` — names the fiction teaches (a game's cast and places), which
     are never words the player had to arrive holding.
@@ -3721,9 +3612,7 @@ def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
     ranked = sorted(rare.items(), key=lambda kv: (-kv[1], kv[0]))
     SHOWN = len(ranked) if shown is None else shown
     findings = [f"{w} ×{n}" for w, n in ranked[:SHOWN]]
-    # A list that hides two thirds of itself is not a list. off_season printed 20 rows
-    # under a summary that said 67, and the 47 it swallowed included words already in
-    # the player's face.
+    # A list that hides two thirds of itself is not a list.
     if len(ranked) > SHOWN:
         rest = sum(n for _w, n in ranked[SHOWN:])
         findings.append(f"… and {len(ranked) - SHOWN} more word(s), {rest} use(s), not "
@@ -3735,9 +3624,8 @@ def own_words_report(text, declared_names=(), suppress=frozenset(), shown=20):
         findings.append(f"[ambiguous] `half <hour>` ×{amb} — 7:30 here, 6:30 across much of "
                         f"Europe, and not used at all in American English. `half past` is the "
                         f"version that survives")
-    # ⚠️ COUNT THE PLURAL TOO. `uses` is a bag of singular tokens, so the first version
-    # of this read `vest` and never `vests` — and forty_miles carries both. Missed
-    # `vests` ×2, `torches` ×2 and `biscuits` ×1 across the repo before this was added.
+    # ⚠️ COUNT THE PLURAL TOO. `uses` is a bag of singular tokens, so read `vest` and
+    # `vests`.
     def _ff_uses(w):
         return uses.get(w, 0) + uses.get(w + "s", 0) + uses.get(w + "es", 0)
     ff = [(w, _ff_uses(w)) for w in _FALSE_FRIENDS if _ff_uses(w) and w not in suppress]
@@ -3810,8 +3698,7 @@ def _node_choices(node):
 
     `_exit_holders` does this for a whole canvas; this is the per-node form, needed
     wherever a count is per-screen rather than per-canvas. The `config.choices`
-    spelling is legal and currently used ZERO times across the 18 games, so reading
-    it changes nothing today — it just stops a per-node walker having a silent hole
+    spelling is legal and rare — reading it just stops a per-node walker having a silent hole
     the canvas-level one does not.
     """
     eb = node.get("exit_block") or {}
@@ -3854,8 +3741,8 @@ def _holder_day_capped(holder, cleared):
     routes into ANOTHER CANVAS — it keys on `nodeId`. A walk-in's own exit choice targets
     a LOCATION, so it produces no route at all, `_is_free` fell through to the trigger,
     and the climb gate reported rungs as farmable that the engine will not serve twice in
-    a day. Measured on `the_season`: `walkin_showers_wade` is guarded by
-    `wade_rung_today is_false` and sets it, and the gate said "9 clicks, no cap."
+    a day: a walk-in guarded by `x_rung_today is_false` that sets it is day-capped, and
+    the gate called it "9 clicks, no cap."
 
     That is the family `_farmable`'s docstring above already documents twice, and
     `SKILL.md`'s rule — *a check that fails a game for obeying the doctrine is a bug in
@@ -3961,12 +3848,10 @@ def _rep_of(trigger):
 # ─────────────────────────────────────────────────────────────────────────────
 # Presence: is anything in the room when the schedule puts somebody there?
 #
-# Ported 2026-09-26 (PRD WS5) from `games/the_balance/process/presence.py`, which was
-# written because `standing surface` read 10/10 PASS on a game where a character's face
-# was on a bedroom door and the room behind it was empty. The logic is that file's; the
-# only change is where the exemptions live. The game's hand-kept table becomes a
-# DECLARED ledger field, `board.characters[].occupancy_rows`, each row with its reason,
-# so no game's data sits in this script.
+# Ported 2026-09-26 (PRD WS5). `standing surface` can read PASS on a game where a face
+# is on a bedroom door and the room behind it is empty. The exemptions are not a
+# hand-kept table: they are a DECLARED ledger field, `board.characters[].occupancy_rows`,
+# each row with its reason, so no game's data sits in this script.
 # ─────────────────────────────────────────────────────────────────────────────
 _PR_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -3980,7 +3865,7 @@ def _pr_mins(hhmm):
 
 
 def _pr_end_mins(hhmm):
-    """An END time of "00:00" is midnight, 1440, not 0 (presence.py `_end_mins`)."""
+    """An END time of "00:00" is midnight, 1440, not 0."""
     return 1440 if str(hhmm).strip() in ("00:00", "24:00") else _pr_mins(hhmm)
 
 
@@ -3992,8 +3877,7 @@ def _pr_live_days(row, canvas):
         return days
 
     def spans(start, end):
-        # A window that runs past midnight (23:00-08:00) is two spans on the clock. The
-        # ported file never met one; vesper_two's overnight rows are written that way.
+        # A window that runs past midnight (23:00-08:00) is two spans on the clock.
         a, b = _pr_mins(start), _pr_end_mins(end)
         return [(a, b)] if a < b else [(a, 1440), (0, b)]
 
@@ -4046,7 +3930,7 @@ def _pr_canvas_facts(canvas):
 
 def _pr_twin_rows(scheds):
     """{index of an ungated fallback row: what it falls back from} — structural, so it
-    cannot be gamed by naming (presence.py `twin_rows`)."""
+    cannot be gamed by naming."""
     out = {}
     for i, s in enumerate(scheds):
         if s.get("when"):
@@ -4215,7 +4099,7 @@ def _week_income(game, currency):
                           if fe.get("op", "set") == "set" and fe.get("flag")}
         # A daily flag anywhere on the canvas caps it: the entry choice reads
         # `streamed_today is_false`, the pay sits on a later node's exit, and that exit sets
-        # the flag the day tick clears (the_balance `stream`). Reading only the holder that
+        # the flag the day tick clears. Reading only the holder that
         # carries the pay called that stream uncapped. Canvas-wide on purpose: it can only
         # LOWER the ceiling, and a canvas mixing a capped branch with a free one is what
         # `no free uncapped income` is for.
@@ -4324,7 +4208,7 @@ def _cond_state(item, start_flags, start_traits, ever_set, written):
 # Ladders: does each declared step fire when it is unlocked, and can it be unlocked?
 #
 # Added 2026-09-26 (PRD WS4, `~/Documents/Process_Review_20260925/PRD_SKILL_CHANGES.md`).
-# The Balance added 39 repeatables and no new step, and no check saw it: nothing here
+# A release can add repeatables and no new step, and no check saw it: nothing here
 # knew what a person's steps were. A ladder is now DECLARED in the ledger
 # (`board.characters[].ladder`, `references/state.md`), and this compares every declared
 # step with the canvas that is supposed to be it. The declaration is not trusted; the
@@ -4718,10 +4602,10 @@ def lint_flag_never_resets(game, state):
     `_weekly`), or listed in `board.resetting_flags` — that something sets and nothing
     anywhere unsets, including `[engine.daily_tick]`. Reported, never a gate.
 
-    WHY. `orientation`'s `dues_paid_week` is set when she pays Simone and read `is_false`
-    to offer the payment — and nothing ever clears it (grep: 0 unsets). So the dues are
-    paid once per SAVE, not once per week, and every screen that says "Friday, the dues"
-    is false from the second week on. The name promised a reset the game never runs.
+    WHY. A `*_week` flag set on payment, read `is_false` to offer the payment and never
+    cleared is paid once per SAVE, not once per week, and every screen that names the
+    weekly payment is false from the second week on. The name promised a reset the game
+    never runs.
 
     Walks every dict in the game for `flagEffects`, so a set or unset in a node exit, a
     choice, a cascade beat, a quest effect or the daily tick all count.
@@ -4760,8 +4644,7 @@ _GLOSS = re.compile(r", (which (is|was|means)|and that is the|that is the)\b", r
 
 
 def _joint_prose(game, types=("paragraph", "dialog", "thought_bubble"), locations=True):
-    """The prose the joint rates are counted over — `our_prose()` in
-    games/the_balance/process/joints.py, on a game dict instead of a path."""
+    """The prose the joint rates are counted over, on a game dict."""
     out = []
 
     def walk(blocks):
@@ -4947,7 +4830,7 @@ def _routes(model, game):
                 # tick. That is the shape §16 forces on a triggerless rung: the rung has
                 # no location, so the flag CANNOT live on its exit and has to sit on the
                 # hub choice instead. Without this the engine's own required pattern
-                # reads as an unbraked route into every act loop in the repo.
+                # reads as an unbraked route into every act loop.
                 selflimit = _holder_day_capped(ch, _tick_cleared(game))
                 for it in _conditions_of(ch):
                     fk, tk, op = it.get("flag_key"), it.get("trait_key"), it.get("operator")
@@ -5043,14 +4926,12 @@ def _hms(minutes):
 
 # ─────────────────────────────────────────────────────────────────────────────
 # The first hour — the opening, the meetings, and the first visit
-# Doctrine: references/the-first-hour.md.  Added 2026-08-22 after the first v2 game
-# a human read end to end scored 31/32 and was unplayable for its first ten minutes.
+# Doctrine: references/the-first-hour.md.  Added 2026-08-22.
 # ─────────────────────────────────────────────────────────────────────────────
 FUNNEL_DEFAULT_STEP = 3
 # v2.py:13200 — `config.get('default_time_progression', 3)`. A node exit that does not
 # declare `time_progression_minutes` still costs three minutes, so the handover clock is
-# NEVER the starting hour. The game that prompted this landed at 07:36 from a 07:00 start
-# without anyone computing it.
+# NEVER the starting hour.
 
 
 def _fh_blocks(blocks):
@@ -5124,7 +5005,7 @@ def _capstone_at(game, loc, minute, flags):
     return None
 
 
-def _funnel_walk(game):
+def _funnel_walk(game, walked=None):
     """Walk the opening: the starting canvas, and on through any capstone it lands in.
 
     Returns (handovers, flags, reason). `handovers` is every (clock_minute, location_id)
@@ -5156,6 +5037,8 @@ def _funnel_walk(game):
         return got
 
     def walk_canvas(canvas, clock0, flags0, visited):
+        if walked is not None:
+            walked.append(canvas)
         nodes = {n.get("id"): n for n in (canvas.get("nodes") or []) if n.get("id")}
         first = (canvas.get("nodes") or [None])[0]
         if first is None:
@@ -5275,10 +5158,8 @@ def _fh_meeting_setters(game):
 # separate-canvas shape, so a game using this one reads as cold-spawning when it is not.
 #
 # A detector for it WAS built and REVERTED the same hour. The rule it used — "the canvas
-# branches on a flag it also sets" — is satisfied by every DAY CAP in the repo: orientation's
-# hubs matched on `ray_rung_today`, `wes_rung_today`, `office_today`, `went_up_today`, and
-# vesper flipped FAIL -> PASS on `renner_flirts_back` and `grier_opened_up`, which are arc
-# rungs. Semantically the check has to answer "is this the FIRST contact or the third rung",
+# branches on a flag it also sets" — is satisfied by every day cap (`x_rung_today`) and by
+# arc rungs, so it moved verdicts both ways. Semantically the check has to answer "is this the FIRST contact or the third rung",
 # and nothing in the TOML distinguishes them: both read a flag `is_false`, both set it on the
 # way out. A lenient version silently passes games that ARE cold-spawning, which is worse
 # than under-reporting.
@@ -5288,30 +5169,54 @@ def _fh_meeting_setters(game):
 # Study: ~/Documents/Opening_And_Introduction_Study_20260902/.
 
 
+def _fh_opening_cast(game):
+    """Characters every player meets by playing the opening — its FORCED part.
+
+    The starting canvas and every capstone the funnel walks into (`_funnel_walk`). A
+    character counts when a walked canvas binds them (`npc` / `requires_npc`) or when they
+    speak on its FIRST node, the screen no branch can skip. A line on a later node is on
+    a branch, and a branch is not forced.
+    """
+    walked = []
+    _funnel_walk(game, walked)
+    out = set()
+    for c in walked:
+        t = c.get("trigger") or {}
+        out |= {t[k] for k in ("requires_npc", "npc") if t.get(k)}
+        first = (c.get("nodes") or [None])[0] or {}
+        for b in _fh_blocks(first.get("blocks")):
+            nid = (b.get("props") or {}).get("npcId")
+            if nid:
+                out.add(nid)
+    return out
+
+
 def _fh_cast_met(game):
     """(met, cast, flag_owners, cold) — who is introduced before their hub opens.
 
-    A character counts as MET when BOTH hold:
+    A character counts as MET when either holds:
 
       (a) at least ONE of their portrait hubs is gated on a flag set by a
-          non-repeatable canvas that names them, and that flag opens no other
-          character's hub;
-      (b) NONE of their portrait hubs is completely ungated.
+          non-repeatable canvas that names them, and NONE of their hubs is completely
+          ungated;
+      (c) they are named in the forced opening (`_fh_opening_cast`) — every player has
+          met them before any hub can open, so an ungated hub is not a cold spawn.
 
-    (a) is the introduction. (b) is the cold-spawn ban — a second hub for the same
-    character at another location, with no conditions at all, puts their portrait on a
-    screen before the meeting has fired, which is the defect however well the first hub
-    is gated (`the_inheritance/hub_richard`, `vesper/hub_sol_undertow`).
+    (a) is the introduction plus the cold-spawn ban — a second hub for the same character
+    at another location, with no conditions at all, puts their portrait on a screen
+    before the meeting has fired, which is the defect however well the first hub is gated
+    (`hub_x`).
+
+    A GROUP meeting counts (LO, 2026-09-28): one non-repeatable scene that names three
+    people and sets one flag meets all three. What stays out is a flag set by a scene that
+    names nobody (`doors_open`): no character is among that flag's setters, so it opens
+    hubs and meets no one. `flag_owners` still reports which flags open several hubs, as
+    information.
 
     ⚠️ (a) is deliberately ANY hub and not EVERY hub. A later rung — a sex loop gated on
-    `audrey_stage gte 3`, an arrangement gated on `marcus_drinks_done` — is gated on
-    something downstream of the meeting, and requiring the meeting flag on it too would
-    fail a game for obeying the doctrine. First implementation of this gate did exactly
-    that and read the_inheritance as 3/5 when it is 4/5.
-
-    The `flag_owners` half is the other whole rule: three v2 games gated their entire
-    cast on ONE flag — `rota_running`, `doors_open`, `arrival_done` — which passes a
-    casual look and is the cold-spawn hub wearing a coat.
+    `x_stage gte 3`, an arrangement gated on `y_drinks_done` — is gated on something
+    downstream of the meeting, and requiring the meeting flag on it too would fail a
+    game for obeying the doctrine.
     """
     setters = _fh_meeting_setters(game)
     hubs = [c for c in (game.get("canvases") or [])
@@ -5329,16 +5234,18 @@ def _fh_cast_met(game):
         per_char[npc].append((c.get("id"), hit, bool(items)))
         for f in hit:
             flag_owners[f].add(npc)
+    opened = _fh_opening_cast(game) if per_char else set()
     met, cold = [], []
     for npc in sorted(per_char):
+        if npc in opened:
+            met.append(npc)
+            continue
         rows = per_char[npc]
         bare = [cid for cid, _hit, gated in rows if not gated]
         if bare:
             cold.append((npc, bare))
             continue
-        flags = {f for _cid, hit, _g in rows for f in hit}
-        owned = {f for f in flags if len(flag_owners[f]) == 1}
-        if owned:
+        if any(hit for _cid, hit, _g in rows):
             met.append(npc)
     return met, sorted(per_char), flag_owners, cold
 
@@ -5382,9 +5289,7 @@ def lint_named_before_met(model, game):
     earned it):
 
     PEOPLE ONLY — a character named in the opening, or on a quest card, or in a
-    location description, who has no meeting anywhere. The measured failure named six
-    people in 278 words, put none of them on screen, and two of the six are not in the
-    game.
+    location description, who has no meeting anywhere.
 
     ⚠️ There was a PLACES half here and it moved out on 2026-08-26. It asked whether a
     location had a first-visit canvas, which was the wrong question — the answer lives in
@@ -5398,10 +5303,9 @@ def lint_named_before_met(model, game):
     npcs = [n for n in (game.get("npcs") or []) if n.get("id")]
     if not npcs:
         return "", []
-    # ONE definition of "met" in this file, and it is the gate's. Deriving a second,
-    # looser one here read off_season as 0 characters named before a meeting, because
-    # `canvas_first_borrow` names Ewan and sets a flag — a mid-arc milestone gated on
-    # `npc_ewan.hold gte 18`, which fires long after the player has been using the hub.
+    # ONE definition of "met" in this file, and it is the gate's. Deriving a looser
+    # second one misses a character named on a mid-arc milestone gated long after the
+    # hub is in use.
     met, _cast, _owners, _cold = _fh_cast_met(game)
     has_meeting = set(met)
 
@@ -5428,7 +5332,7 @@ def lint_named_before_met(model, game):
                            for l in (game.get("locations") or []))
 
     # The name the prose will actually use. Articles and titles are not it: "The
-    # Collector" searched as "The" matched every sentence in last_call, and
+    # Collector" searched as "The" matches every sentence, and
     # "Mr. Halloway" searched as "Mr." matched nothing.
     def _searchable(name):
         skip = {"the", "a", "an", "mr", "mrs", "ms", "miss", "dr", "sir", "lady"}
@@ -5476,10 +5380,8 @@ def lint_role_label(game):
     could carry zero labels and nothing said so.
 
     Absent is a legal choice (F10: empty renders no line), so this cannot fail anything. It
-    exists because the field was invisible rather than declined: measured 2026-09-02,
-    **6 of 88 characters across 17 games declare a role, and all six are `mrs_vance`** —
-    the one game F10 was written from. `templates/board.toml` carried neither `role` nor
-    `relationship` until the same day, so every author who filled in the template got every
+    exists because the field was invisible rather than declined: `templates/board.toml`
+    carried neither `role` nor `relationship` until 2026-09-02, so every author who filled in the template got every
     field it listed and never saw this one.
     """
     npcs = [n for n in (game.get("npcs") or []) if isinstance(n, dict)]
@@ -5496,8 +5398,7 @@ def lint_role_label(game):
     # ⚠️ A RENAMEABLE CHARACTER'S LABEL BELONGS TO THE PLAYER. `relationship_options`
     # renders a listbox: the player decides whether this man is her stepfather, her
     # father or her uncle. A hard-coded label there either contradicts the pick or has
-    # to dodge it — the first version of this game answered "owns the house" to avoid
-    # the problem, which is not what the box is for. `role = "@<npc>.rel"` prints the
+    # to dodge it, which is not what the box is for. `role = "@<npc>.rel"` prints the
     # pick and follows it when they change it (engine.md §43).
     for n in have:
         if n.get("customizable") and (n.get("relationship_options") or []):
@@ -5509,8 +5410,7 @@ def lint_role_label(game):
                             f"use `role = \"@{short}.rel\"` so the label says what they chose")
     # ⚠️ PRINT EVERY DECLARED LABEL, not just the missing ones. Whether a label answers
     # "who is this person" is a reading, not a measurement — no parser can tell `professor`
-    # from `the eight o'clock`, which is what this game shipped for an hour before a human
-    # read it back. Listing them is the only check available, and it costs one line.
+    # from `the nine-thirty`. Listing them is the only check available, and it costs one line.
     for n in have:
         rows.append(f"{n.get('id')}: \"{n['role'].strip()}\"")
     return f"{len(have)}/{len(npcs)} characters carry a label under the name", sorted(rows)
@@ -5525,10 +5425,9 @@ def lint_role_stays_attached(model, game):
     once before the player spends forty visits with a bare first name.
 
     ⚠️ THE INSTRUMENT IS THE POINT, because a version of this WAS TRIED AND REJECTED.
-    F7 records it: a fixed KIN-WORD list run over MEETINGS fired wrongly on ten of
-    last_call's meetings, eighteen of the_inheritance's and three of off_season's. The
-    cause was structural — last_call's cast is not family, so kin words were never going
-    to be there, and no amount of tuning a kin list fixes a game it does not describe.
+    F7 records it: a fixed KIN-WORD list run over MEETINGS fires wrongly on any cast that
+    is not family. The cause is structural — kin words are never going to be there, and
+    no amount of tuning a kin list fixes a game it does not describe.
 
     This one takes its vocabulary from the GAME: the anchors for each character are the
     content words of that character's own `npcs[].relationship` string. A cast of
@@ -5596,17 +5495,13 @@ def lint_place_function(model, game):
     """Does a location's own description say what kind of place it is? — a LIST.
 
     `the-first-hour.md` F9. The description is the ONLY surface a player sees on every
-    visit, so it is where a place has to say what it is and what happens in it. The
-    measured failure was an anchor budgeted at 27% of a whole game whose description ran
-    long, specific and well written and never once named the business it was — the first
-    thing the human reader asked was what the place is.
+    visit, so it is where a place has to say what it is and what happens in it.
 
     ⚠️ THIS REPLACED A GATE (2026-08-26). The gate required a non-repeatable canvas
     bound to the anchor — a first-visit scene. Counted across the 26-game corpus that
     device is ONE game: degrees-of-lewdity, 258 branches and 117 flags, against EIGHTEEN
     games with none at all, destroyer and become-someone and course-of-temptation among
-    them. A green board should not depend on the outlier, and while it did, one author
-    wrote nine arrivals that were reverted the next day.
+    them. A green board should not depend on the outlier.
 
     ⚠️ A LIST AND NEVER A SCORE. Whether a description names its function is a reading.
     A thin corridor owes nothing; a room carrying a third of the game does. The order
@@ -5642,9 +5537,8 @@ def lint_place_function(model, game):
 
 # ─────────────────────────────────────────────────────────────────────────────
 # The clock — the time the game promises and the time the engine keeps
-# Doctrine: references/the-clock.md.  Added 2026-08-22 after a shipped game offered
-# "Work the counter till one (2h 30m)." on a canvas open 08:00–13:00, in an engine
-# with no absolute-time advance at all.
+# Doctrine: references/the-clock.md.  Added 2026-08-22. The engine has no
+# absolute-time advance at all.
 # ─────────────────────────────────────────────────────────────────────────────
 # There is NO way to send the clock to a named hour:
 #   grep -E 'target_hour|advance_to|until_time|time_target' v2.py   ->   0 hits
@@ -5673,8 +5567,8 @@ _CLK_HALF = r"half(?:\s+past)?\s+(?:" + _CLK_WORDNUM + r"|\d{1,2})"
 #   `to` + a spelled-out hour, NOT `one` .... +0
 # `one` is the same idiom trap _CLK_BAD_NEXT was built for (312 corpus hits of "at one
 # point"), and excluding it here loses no reading: `at one` and `till one` are still
-# covered by the branch above. On our own prose the narrow form adds 21 hits across six
-# games and every one is a real "Twenty to eight" / "Ten to six" the lint was missing.
+# covered by the branch above. The narrow form catches real readings ("Twenty to eight",
+# "Ten to six") the lint was missing.
 _CLK_WORDNUM_NOT_ONE = "two|three|four|five|six|seven|eight|nine|ten|eleven|twelve"
 _CLK_PREP = re.compile(
     r"\b(?:"
@@ -5706,7 +5600,7 @@ _CLK_OK_NEXT = {"o", "oclock", "sharp", "am", "pm", "in", "on", "tonight", "tomo
                 "before", "after", "then", "she", "he", "they", "you", "i", "we",
                 # "the" was in the STOPLIST until 2026-08-22, to kill "at one point".
                 # It also killed every "by nine THE whole flat…" — the commonest shape
-                # a clock reading takes in our own prose. The unit nouns below already
+                # a clock reading takes. The unit nouns below already
                 # catch the idiom it was standing in for.
                 "the", ""}
 _CLK_BAD_NEXT = {"point", "of", "another", "one", "hand", "side", "end", "time",
@@ -5792,8 +5686,7 @@ def _clk_spent_minutes(idx, canvas_id, choice):
     """Minutes this click actually costs, or None when it cannot be resolved.
 
     The duration is stated where the player DECIDES and charged where they LEAVE:
-    off_season's "Work the counter (2h 30m)." targets `rung_arcade_take_am.base`, whose
-    exit carries `time_progression_minutes = 150`. Reading only the choice would score
+    a choice "Work the counter (2h 30m)." targets `rung_x.base`, whose exit carries `time_progression_minutes = 150`. Reading only the choice would score
     every honest tag as unverifiable.
     """
     cfg = choice.get("config") or {}
@@ -5820,11 +5713,8 @@ def _clk_choices(model):
     ⚠️ A NODE'S EXIT COMES IN TWO SHAPES AND THIS READ ONLY ONE OF THEM UNTIL
     2026-08-25. Either the exit_block carries a `choices` array, or it IS the button —
     `{type: "location", text: "...", config: {...}}` with no choices at all. Reading
-    only the first missed **1,225 of the 3,214 labels in this repo, 38% of every button
-    a player clicks**, and 23 labels naming a clock time were sitting in that half
-    across five games. Twenty-two of them use `at` or `before`, prepositions this
-    instrument has always known — they were invisible because nothing looked, not
-    because the pattern was narrow.
+    only the first misses every button that IS the exit_block — labels invisible because
+    nothing looked, not because the pattern was narrow.
 
     The single exit_block already carries `config.time_progression_minutes`, which is
     the first key `_clk_spent_minutes` reads, so yielding it makes C4's duration half
@@ -5867,15 +5757,13 @@ def lint_clock_in_prose(model, game):
     """Every hour a BEAT names, with the window it has to survive — a LIST.
 
     `the-clock.md` C2: a repeatable canvas fires at any minute of its window, and the
-    windows in this repo run 149–540 minutes wide (five in the whole repo are an hour or
-    less). So a sentence that reads as a clock is wrong for nearly the whole window it
+    windows typically run hours wide. So a sentence that reads as a clock is wrong for nearly the whole window it
     fires in — unless it is a RULE ("Nobody comes in before eleven in February"), which
     is true at every minute and is correct work.
 
     ⚠️ A LIST AND NEVER A GATE. Telling a rule from a reading is a reading, not a
     measurement, and a shift-driven world names hours as rules on purpose. A rate gate
-    would fail seventh_day's kitchen board and steam's shift board for obeying the
-    doctrine — SKILL.md's "a check that fails a game for obeying the doctrine is a bug
+    would fail a shift-driven world's rota for obeying the doctrine — SKILL.md's "a check that fails a game for obeying the doctrine is a bug
     in the check". The check hands over the lines and their windows; the author calls it.
 
     Field basis: median 0.8 clock references per 10,000 words across the 27 parseable
@@ -5885,18 +5773,13 @@ def lint_clock_in_prose(model, game):
     `college-daze` and `free-cities` ship the Twine 1 <div id="store-area"> container and
     parsed to ZERO passages until section B taught the parser to read it. Both are
     clock-quiet — 0.25 and 0.27 references per 10k — so the median falls. This is the ONE
-    field constant the recheck moved, and it moves AGAINST our games, not for them:
-    off_season at 26.4 was 24x the field median and is now 33x. The old figure reproduced
+    field constant the recheck moved. The old figure reproduced
     EXACTLY on the old 25 using this same `_clk_refs`, so the movement is the corpus and
     not the instrument (`findings_RECHECK.md` §2).
 
     Re-measured 2026-08-22 on the corrected `_clk_refs` (half-hours, part-of-day phrases,
     quarter-past, and `<hour> the`). The figure moved 1.0 -> 1.1 and p75 held at 2.1: ONE
-    field game gained ONE reference, a true positive. The same correction moves our own
-    games 25-50% -- off_season 20.1 -> 26.4 before repair, steam 29.2 -> 36.6, forty_miles
-    22.6 -> 34.4. The blind spots were hiding our defects and almost none of the field's,
-    because the constructions they missed are ones our authors reach for and the corpus
-    does not.
+    field game gained ONE reference, a true positive.
     """
     FIELD_MEDIAN, FIELD_P75 = 0.8, 1.8
     words = 0
@@ -5968,8 +5851,8 @@ def lint_time_cost_on_button(model, game):
 
 
 # ── The currency on the screen — the-economy.md R7 ───────────────────────────
-# A shipped game wrote one click's price six ways and THREE of them were the
-# engine's, not the author's (engine.md §33). The measurable part is the
+# One click's price can appear six ways and THREE of them are the engine's, not
+# the author's (engine.md §33). The measurable part is the
 # notation: a symbol, a currency code and a spelled-out unit all name a
 # currency, and a game that uses two of them has two currencies on screen.
 #
@@ -5984,14 +5867,14 @@ _CUR_UNIT = {
     "euro": "euro", "euros": "euro", "yen": "yen",
     # SUB-UNITS, added 2026-08-22. Without them a game that declared a neutral "$"
     # and then wrote "she is out by sixty pence" read as "no beat names a currency"
-    # -- a false green that let a real regression sit for two batches. A sub-unit
+    # -- a false green. A sub-unit
     # names its parent currency exactly as the major unit does.
     "pence": "pound", "penny": "pound", "pennies": "pound",
     "cent": "dollar", "cents": "dollar",
     "centime": "euro", "centimes": "euro", "sen": "yen",
 }
-# ⚠️ "forty per cent" is not money. Measured before the sub-units went in: without
-# this guard `steam`'s "the trade is down forty per cent" false-positives twice.
+# ⚠️ "forty per cent" is not money: "down forty per cent" false-positives without
+# this guard.
 _CUR_PERCENT = re.compile(r"\bper\s*cents?\b", re.I)
 _CUR_SYM = re.compile(r"([$£€¥])\s?\d")
 _CUR_CODE = re.compile(r"\b(USD|GBP|EUR|JPY)\b", re.I)
@@ -6004,7 +5887,7 @@ def _cur_extra(currency, declared):
     """Words that name THIS game's currency but no other game's.
 
     An invented unit is legitimate and the field ships it — `apocalyptic-world`
-    prices in caps, `vesper` in coin — but a fixed word list would guess. So the
+    prices in caps — but a fixed word list would guess. So the
     only invented words recognised are the ones the game itself declares: its
     currency trait name, and its declared symbol when that symbol is a word.
     """
@@ -6063,7 +5946,7 @@ def _cur_setup(model, game, state):
     """(currency trait, declared symbol, engine symbol, extra-word map).
 
     Inference is by USAGE, matching gate 16 — a game can carry two currencies
-    (`vesper` runs `money` alongside `coin`) and taking the first name match
+    and taking the first name match
     picks the wrong one, which would then not be recognised as a unit at all.
     """
     econ = (((state or {}).get("board") or {}).get("economy") or {})
@@ -6096,7 +5979,7 @@ def _cur_exact_share(texts, extra):
 
     Computed the same way the field figure was, so the two are comparable: a unit
     word counts as EXACT when a digit or a number word sits within two tokens
-    before it. Field: 20%. Ours across ten games: 51%.
+    before it. Field: 20%.
     """
     units = ({k for k in _CUR_UNIT if k.isalpha() and len(k) > 3}
              - {"usd", "gbp", "eur", "jpy"}) | set(extra)
@@ -6119,10 +6002,9 @@ def lint_currency_in_prose(model, game, state):
     (11.0M words of passage prose):
 
       · a game's dominant notation carries a median 92% of its money references
-        (minimum 56%); ours run at a median 82%
-      · a money WORD carries an exact amount 20% of the time in the field and
-        51% of the time in ours — we spell prices out, and a spelled-out price
-        is the copy that goes stale when the number moves
+        (minimum 56%)
+      · a money WORD carries an exact amount 20% of the time in the field — a
+        spelled-out price is the copy that goes stale when the number moves
         (v1 `author-game/references/prose-truth.md` §2)
 
     ⚠️ A LIST AND NEVER A GATE. `zaras-school-life` writes every price in words
@@ -6183,14 +6065,14 @@ def lint_money_channel(model, game, state):
       · a CONDITION on the currency means content exists that money OPENS
       · a `costs` block means a thing can be BOUGHT
 
-    Measured 2026-08-27 across our ten rent-enabled games: **seven have zero money
-    conditions** and pass gate 16 on the price channel alone. The field median is 67.3
+    A game can have zero money conditions and pass gate 16 on the price channel
+    alone. The field median is 67.3
     money conditions per 1,000 passages and every measured sandbox has some
     (`the-economy.md` R1). A game at zero is not wrong about prices — it has simply
     never put anything behind the money.
 
     ⚠️ NOT A GATE, for the same reason the ratio below is not one: a floor cannot be
-    defended from ten games, and inventing one at n=1 is exactly how the meter doctrine
+    defended from what has been measured, and inventing one at n=1 is exactly how the meter doctrine
     went wrong and had to be superseded on 2026-08-19. This prints, and the distribution
     accumulates until a floor can be read off it.
     """
@@ -6236,14 +6118,10 @@ def lint_obligation_vs_week(model, game, state):
     """The obligation against what a week actually earns — R3's arithmetic, printed.
 
     `the-economy.md` R3 has said *"price it against the income channels in both
-    directions"* since the file existed, and measured 2026-08-27, **nine of our ten
-    rent-enabled games had not done it**: eight clear the whole week's obligation in
-    under one day of the best-paying job, median 0.48 days. The tenth wrote the sum in
-    a prose comment in its spec, because the ledger gave it nowhere to live. It has a
-    field now — `board.economy.week_income` — and this prints the ratio.
+    directions"* since the file existed. The ledger now has a field for the week —
+    `board.economy.week_income` — and this prints the ratio.
 
-    ⚠️ NEVER A GATE. `forty_miles` sits at 70% and `back_home` at 25%, and a threshold
-    anywhere between them fails a game for obeying the doctrine — the error that got the
+    ⚠️ NEVER A GATE. Any threshold fails a game for obeying the doctrine — the error that got the
     anchoring check demoted (2026-08-15) and P0 refused (2026-08-27).
     ⚠️ An undeclared `week_income` reports as UNDECLARED, which is not a pass. An
     absence is not evidence — the same wording the climb and start-choice gates use.
@@ -6256,14 +6134,11 @@ def lint_obligation_vs_week(model, game, state):
         return (f"obligation {amount:g} · board.economy.week_income NOT DECLARED — "
                 "the ratio cannot be computed, which is not a pass",
                 ["the-economy.md R3 — count what a week actually earns and write it "
-                 "beside the amount. Nine of ten of our games skipped this step and "
-                 "eight of them clear the week in under a day of the best job."])
+                 "beside the amount."])
     share = amount / week
     summary = (f"obligation {amount:g} against a declared week of {week:g} — "
                f"{share*100:.0f}% of the week")
-    rows = ["field reference: forty_miles 70% (the only one of our ten in the field's "
-            "range) · our median before this was measured: the whole week clears in "
-            "0.48 days of the best-paying job"]
+    rows = []
     # R3b — a declared moving obligation answers the low-ratio note before it is made.
     # `week_income` is the BASELINE week by definition, so a game whose obligation grows
     # with what the player buys will always read low here, and nagging it would be the
@@ -6324,7 +6199,7 @@ def lint_collector_is_target(model, game, state):
             collector, source = rent["collector_npc"], "[settings.rent] collector_npc"
     if not collector:
         # Last resort: a proper noun from the cast appearing in the declared hold.
-        # Both live games name theirs there ("Simone counts", "paid to Kess"). An
+        # A game often names its collector there ("paid to Jo"). An
         # ambiguous match is reported as ambiguous rather than resolved by guessing.
         prose = " ".join(str(x) for x in (want.get("obligation"),
                                           board_econ.get("obligation")) if x)
@@ -6342,9 +6217,9 @@ def lint_collector_is_target(model, game, state):
     #
     # ⚠️ Deliberately NOT lint_act_nodes' selection, which also requires an act-menu
     # self-loop. That extra clause is right for asking "how crude is the beat the
-    # player is standing in", and wrong here: measured on both live games it selected
-    # ZERO canvases in vesper_two while the game has twenty-one explicit repeatable
-    # surfaces, so the lint returned empty and looked like a pass. The question here
+    # player is standing in", and wrong here: it can select zero canvases in a game
+    # full of explicit repeatable surfaces, so the lint returns empty and looks like a
+    # pass. The question here
     # is which character the returnable porn is attached to, and a portrait hub with
     # no self-loop is exactly that.
     per_npc, total = collections.Counter(), 0
@@ -6409,18 +6284,15 @@ def lint_collector_is_target(model, game, state):
 def lint_paid_repeatable_deposits(model, game, state):
     """What a PAID repeatable leaves behind — a RATE, never a score.
 
-    `the-economy.md` R1c. The 2026-07-24 field report's critique #4 of us said *"every
-    repeatable should deposit into something"*. Measured 2026-08-28, that phrasing is too
-    broad to ship: counting every repeatable surface gives 67% granting nothing, but it
-    sweeps in ambient prose that fires for free, and an ambient is SUPPOSED to grant
-    nothing. Narrowed to the choices the player actually pays for — money, energy, or half
-    an hour or more — the figure is 51.7% across our eight v2 games, and `forty_miles` runs
-    10 of 10.
+    `the-economy.md` R1c. The 2026-07-24 field report said *"every repeatable should
+    deposit into something"*. That phrasing is too broad to ship: counting every
+    repeatable surface sweeps in ambient prose that fires for free, and an ambient is
+    SUPPOSED to grant nothing. So this is narrowed to the choices the player actually
+    pays for — money, energy, or half an hour or more.
 
     ⚠️ A pure sink is not a defect (R2 wants sinks). A game made only of pure sinks is.
     ⚠️ NEVER A GATE, and this is the fourth time this file has printed a distribution
-    instead of inventing a floor: `mrs_vance` deposits on 46 of 47 and `forty_miles` on 0
-    of 10, and any threshold between them is a number nothing measured.
+    instead of inventing a floor: no threshold has been measured.
     """
     currency = _declared_currency(state)
     paid = deposits = 0
@@ -6480,8 +6352,8 @@ def lint_price_spelled_out(model, game, state):
     25-game corpus: 94.0% use a SYMBOL, 5.2% spell the unit out, 0.8% use a
     currency code (five labels, all one game).
 
-    ⚠️ A LIST AND NEVER A GATE. `vesper` prices ten labels `10 coin` and never
-    varies, which is the same shape as the field's `Add 1000 caps`. Consistency
+    ⚠️ A LIST AND NEVER A GATE. An invented unit used consistently — the field's
+    `Add 1000 caps` — is not a defect. Consistency
     is the gate's business; form is a house preference with a field behind it.
     """
     FIELD = (0.940, 0.052, 0.008)
@@ -6552,7 +6424,7 @@ def score(model, game, state=None, game_dir=None):
     """run_gates, plus PARKED, NOT JUDGED (PRD IC21).
 
     Parking content turned gates n/a, and an n/a leaves the denominator, so taking
-    content out RAISED the score — the_balance's park took three gates to n/a. So the
+    content out RAISED the score — parking can take gates to n/a. So the
     gates run twice: on the live game, and on a copy with the parked content merged
     back in. A gate that is n/a live and JUDGED with the parked content is marked
     parked: never a pass, counted in the denominator, printed with the files.
@@ -6645,8 +6517,7 @@ def run_gates(model, game, state=None):
 
     # DECLARE-THEN-CHECK (2026-08-15, study 6). If the ledger declares a per-location
     # budget, each location is judged against ITS OWN number and the global constants are
-    # not consulted. `fill` is canonical; `budget` is accepted because one shipped game
-    # wrote that key. A 300-word corridor is not a defect if you declared a corridor —
+    # not consulted. `fill` is canonical; `budget` is accepted as an alias. A 300-word corridor is not a defect if you declared a corridor —
     # which is what the-board.md has always said in prose and could not enforce.
     budgets = {}
     for l in ((state or {}).get("board") or {}).get("locations") or []:
@@ -6658,16 +6529,14 @@ def run_gates(model, game, state=None):
     if empty:
         fails.append(f"{len(empty)} declared locations with nothing placed: {', '.join(empty[:12])}")
 
-    # ⚠️ A BUDGET THAT CANNOT BE WRONG IS NOT A BUDGET. Measured on all three v2 games:
-    # every declared figure was an exact post-hoc word count — 9,607 / 4,936 / 10,295, not
-    # one of twenty-four round to the nearest hundred — so delivered-vs-declared matched
-    # 8/8 in all three and proved nothing. A plan is written in round numbers before the
+    # ⚠️ A BUDGET THAT CANNOT BE WRONG IS NOT A BUDGET. A declared figure that is an
+    # exact post-hoc word count cannot be wrong, so delivered-vs-declared proves nothing.
+    # A plan is written in round numbers before the
     # prose; a record is written in arbitrary ones after it. If the declaration is a
     # record, say so and judge on the backstop instead of crediting a tautology.
     # ⚠️ 50, not 100. At 100 a legitimate 250-granularity plan (9,750 · 5,250 · 4,250 …) was
     # flagged as post-hoc — a false positive on exactly the careful author this is meant to
-    # reward. 50 accepts every plan granularity anyone would actually use and still rejects
-    # the measured real case, which scores 0 of 8 either way.
+    # reward. 50 accepts every plan granularity anyone would actually use.
     planned = sum(1 for v in budgets.values() if v % 50 == 0)
     post_hoc = bool(budgets) and planned * 2 < len(budgets)
 
@@ -6745,8 +6614,7 @@ def run_gates(model, game, state=None):
     # This floor is derived from the reference game's own 7.5-9.3% band — and that
     # game is the COLDEST of 18 shipped sandboxes measured on this same word list
     # (field median 33.3%). A game landing on 7.6% is inside the reference's historical
-    # range and still four times colder than its genre. One did exactly that and the
-    # gate said PASS. Until a field-comparable threshold exists (see the constant),
+    # range and still four times colder than its genre. Until a field-comparable threshold exists (see the constant),
     # the honest thing is to print how marginal a marginal pass is.
     # ⚠️ THE DENOMINATOR IS REPEATABLE BEATS, NOT EVERY BEAT. Changed 2026-08-31.
     # This gate used to divide by every beat in the game, which answers "what share of
@@ -6755,40 +6623,22 @@ def run_gates(model, game, state=None):
     # legitimately cold content, because the cold content lands in the denominator.
     #
     # The opening funnel is the largest such block and it is one the author is supposed
-    # to build WELL. Measured on night_desk: a 25-beat opening moved the all-beats score
-    # from 12.0% to 8.0% on identical prose. That is a live incentive to shorten an
-    # opening to move a number, which is the worst available response, and the old
-    # denominator rewarded it.
-    #
-    # Re-run with this script across all 15 built games, 13 verdicts are unchanged and
-    # TWO FLIP PASS -> FAIL:
-    #
-    #     steam           7.6% all -> 7.2% repeatable      was a BARE PASS
-    #     the_allowance   8.1% all -> 7.3% repeatable      was a BARE PASS
-    #
-    # Both were already flagged BARE PASS, which this gate itself glosses as "evidence of
-    # not being empty" rather than evidence of heat. They are now red. That is a real
-    # consequence of the change and not a rounding artefact: their one-shots are hotter
-    # than their loops, which is the shape this gate exists to catch.
+    # to build WELL. An opening funnel dilutes an all-beats share on identical prose. That
+    # is a live incentive to shorten an opening to move a number, which is the worst
+    # available response, and the old denominator rewarded it.
     #
     # ⚠️ The DIRECTION of the gap is the diagnostic, and it is worth reading off the
     # headline. A repeatable share ABOVE the all-beats share means the cold content is
     # in one-shots, where it belongs. BELOW means the heat is in one-shots and the loops
-    # are cold. Measured: steam -0.4, the_allowance -0.8, forty_miles -0.2, vesper -0.6;
-    # every other game is positive, the_season most (+8.4).
-    #
-    # ⚠️ vesper does NOT flip — it failed on all-beats already (4.9%) and fails harder
-    # here (4.3%). An earlier draft of this comment claimed it flipped, from a throwaway
-    # probe whose beat model was not this script's. The numbers above come from running
-    # this file, before and after, on every game.
+    # are cold — the shape this gate exists to catch.
     #
     # ⚠️ EXPLICIT_BEAT_FLOOR HAS NOT BEEN RE-BASELINED ON THIS DENOMINATOR, and the
     # honest consequence is that the floor is now LENIENT, not strict. The 7.5-9.3% band
     # was measured on the reference game over all its beats; a repeatable-only share is
-    # >= an all-beats share for any game whose one-shots are colder than its loops, which
-    # is every game we have. Re-baselining needs the reference game segmented by
-    # repeatability and that has never been done. Until it is, treat a pass here as
-    # "not empty", never as "hot" — which is what the BARE PASS note already says.
+    # >= an all-beats share for any game whose one-shots are colder than its loops.
+    # Re-baselining needs the reference game segmented by repeatability and that has
+    # never been done. Until it is, treat a pass here as "not empty", never as "hot" —
+    # which is what the BARE PASS note already says.
     rep_beats = [b for c in model if c["rep"] for b in c["beats"]]
     rep_expl = [b for b in rep_beats if b.explicit >= 3]
     pct = 100 * len(rep_expl) / max(len(rep_beats), 1)
@@ -6870,8 +6720,7 @@ def run_gates(model, game, state=None):
          + ([f"… and {len(dry)-8} more canvases"] if len(dry) > 8 else [])
          + (["a cascade APPENDS (nested <<linkreplace>>, v2.py:13952) — the clip on the node "
              "lead is the clip for beat 0 only; by the beat that is the act it has scrolled off",
-             "the field puts one clip every ~58 words of explicit prose (IQR 25-104); ours run "
-             "one every 178-435",
+             "the field puts one clip every ~58 words of explicit prose (IQR 25-104)",
              "for a REPEATABLE act surface the fix is usually not more clips in the cascade but "
              "the other machine — node routing swaps the passage (v2.py:13258), so each act is "
              "its own screen with its own pool (the-surfaces.md)"]
@@ -6884,9 +6733,8 @@ def run_gates(model, game, state=None):
     # story is in the NARRATION_DIALOGUE_CEILING comment. The direction was right;
     # only the number (0.73:1, measured on one game) was too extreme.
     #
-    # `thought_bubble` counts as narration on purpose. Every v2 game inverted the
-    # two: seventh_day thinks 4.6 words for every word spoken aloud, forty_miles
-    # 3.1 — and the bubble was for the NPC's interior in the first place.
+    # `thought_bubble` counts as narration on purpose — the bubble was for the NPC's
+    # interior in the first place.
     # ═════════════════════════════════════════════════════════════════════════
     narr_w, spoken_w = _speech_split(game)
     ratio = (narr_w / spoken_w) if spoken_w else float("inf")
@@ -6932,11 +6780,10 @@ def run_gates(model, game, state=None):
     #
     # ⚠️ REWRITTEN 2026-09-26 (PRD WS5). The old check asked two questions per character —
     # is ANY canvas bound to her anywhere, and does she have ANY schedule row — and never
-    # asked whether the two are in the same room at the same time. It read 10/10 PASS on a
-    # game where her face was on the bedroom door and the room behind it was empty
-    # (the_balance, 2026-09-16), passing her on a substitution-only canvas that can never
-    # render a portrait. The rule below is `games/the_balance/process/presence.py`'s,
-    # ported: every schedule row is judged per weekday, and a portrait canvas bound to a
+    # asked whether the two are in the same room at the same time. It could read PASS on a
+    # game where her face was on the bedroom door and the room behind it was empty,
+    # passing her on a substitution-only canvas that can never render a portrait. The rule
+    # below is a ported presence check: every schedule row is judged per weekday, and a portrait canvas bound to a
     # room its person never stands in, or capped per day on its trigger, is listed too.
     # Rows whose job is only to put a body in a room are declared, with the reason, in
     # board.characters[].occupancy_rows. See `_schedule_rows_backed`.
@@ -7065,8 +6912,7 @@ def run_gates(model, game, state=None):
     # unchanged; the denominator now prints beside it.
     #
     # ⚠️ REWRITTEN 2026-09-26 (PRD WS5). "Any locked choice anywhere" passed a game whose
-    # ending had been removed, on fourteen unrelated locked rows (the_balance after the
-    # 2026-09-19 park). The release names ITS door in the ledger — board.door =
+    # ending had been removed, on unrelated locked rows. The release names ITS door in the ledger — board.door =
     # {canvas, choice} (choice = the choice's text; optional `node`) — and the gate checks
     # that door: it exists outside dev, it renders locked, it is shut at the start, and
     # every condition on it can come true later. The declared-state rule applies: no
@@ -7255,19 +7101,15 @@ def run_gates(model, game, state=None):
     # that gate asks whether a ROOM can be walked to, this asks whether a SCREEN can
     # be opened. Added 2026-09-02 (the-surfaces.md R9).
     #
-    # ⚠️ THE INCIDENT. `orientation`'s `hub_ray_bedroom` shipped three nodes — the bed,
-    # the sex, the morning after — and only the first was linked. `base` fell through
-    # to the engine's default `[[Continue->Location_…]]`, so 288 words including the
-    # game's entire explicit core were authored, built, and impossible to reach. It
-    # passed 45 of 46 gates. Nothing here could see it, because the only reachability
-    # check in the repo (`release_mode`'s `every canvas is a passage`) deliberately
+    # ⚠️ A canvas can ship nodes nothing links: `base` falls through to the engine's
+    # default `[[Continue->Location_…]]`, so authored nodes are built and unreachable.
+    # Nothing here could see it, because the only other reachability check
+    # (`release_mode`'s `every canvas is a passage`) deliberately
     # keys on the CANVAS and throws the node segment away — node ids are not portable
     # across generator eras, so it cannot look inside. This gate reads the SOURCE,
     # where node ids are exactly as authored, so that objection does not apply.
     #
-    # ⚠️ WHY A GATE AND NOT A LINT. The corpus is already at zero: 34 game files, and
-    # the only offenders were this one and a malformed dev block. There is no band to
-    # argue about — a node nothing points at is not a style, it is content the player
+    # ⚠️ WHY A GATE AND NOT A LINT. There is no band to argue about — a node nothing points at is not a style, it is content the player
     # can never open.
     #
     # ⚠️ QUALIFY BEFORE COMPARING. `nodeId` may be bare or `canvas.node`; `rejection_node`
@@ -7353,8 +7195,8 @@ def run_gates(model, game, state=None):
     # ⚠️ CORRECTED 2026-09-26 (PRD WS5). This used to accept `quests_engine` from
     # [settings] too. The engine reads it ONLY from [project] (`template_import.py:1870`;
     # the [[quest_cards]] block is parsed only when that value is "v2", `:2767`), so a game
-    # with it under [settings] ships with every card dropped — vesper_two's guidance page
-    # has zero cards (`setup.quests_cards = [];`) while this gate passed. It now reads
+    # with it under [settings] ships with every card dropped (`setup.quests_cards = [];`)
+    # while this gate passed. It now reads
     # [project] only, and a [settings] placement FAILS by name. It also lists cards that
     # render no words and cards whose `when` can never come true.
     engine_on = (game.get("project") or {}).get("quests_engine") == "v2"
@@ -7423,7 +7265,7 @@ def run_gates(model, game, state=None):
     # G13b — a goal bullet says what it wants, in words.
     # The goal renderer falls back `label -> trait -> flag -> ""` (v2.py:15962-15964),
     # so a goals item carrying no `label` prints its RAW KEY to the player: a bullet
-    # reading "◯ simone_05_done" under the 🎯 To advance header. The importer requires
+    # reading "◯ x_05_done" under the 🎯 To advance header. The importer requires
     # `label` on trait and counter goals ONLY (template_import.py:5669-5673; the
     # dataclass says so itself at :1092-1095) — flag-shaped goals fall straight through.
     #
@@ -7453,7 +7295,7 @@ def run_gates(model, game, state=None):
          unlabelled)
 
     # ⚠️ THERE IS NO "walls state their key" GATE, AND THE ABSENCE IS DELIBERATE.
-    # It was written, it fired on 7 of 8 doors in a real game, and it was WRONG:
+    # It was written, it fired on nearly every door, and it was WRONG:
     # `references/engine.md` §15 already rules on this and rules the other way —
     # omitting `locked_text` shows the greyed ACTION ("Ask him where the bench went"),
     # which is a want the player can name and is what sells the next release; setting
@@ -7500,9 +7342,8 @@ def run_gates(model, game, state=None):
     cur_src = "declared"
     if not currency:
         # Pick by USAGE, not by declaration order. A game can carry more than one
-        # real currency — vesper runs `money` (Credits, company-visible) alongside
-        # `coin` (hers, hidden) — and taking the first name match judged the wrong
-        # one. Same bug class already fixed once in the corpus extractor, where a
+        # real currency — a game can run a public currency alongside a hidden one —
+        # and taking the first name match judged the wrong one. Same bug class already fixed once in the corpus extractor, where a
         # decoy `randomMoney` beat the real currency on name alone.
         cands = [k for k in ((game.get("player") or {}).get("core_traits") or {})
                  if CURRENCY_HINT.search(k)]
@@ -7528,8 +7369,8 @@ def run_gates(model, game, state=None):
         # A `costs` block IS a gate: the engine refuses the choice when the player
         # cannot afford it (v2.py:12556). `reads` is built from conditions only
         # (see _conditions_of above), so a game that prices its choices instead of
-        # condition-gating them read as "nothing gates on money" — vesper spends
-        # `coin` on seven choices and scored zero here.
+        # condition-gating them read as "nothing gates on money" — a game that spends
+        # its currency on choices scored zero here.
         def _prices_currency(c):
             for n in c["nodes"]:
                 for ch in ((n.get("exit_block") or {}).get("choices") or []):
@@ -7680,11 +7521,10 @@ def run_gates(model, game, state=None):
 
     # G37 — one currency, or the player cannot read a price.
     #
-    # the-economy.md R7. Measured failure: a shipped game wrote the price of ONE
-    # click six ways — "Feed the meter (GBP 3)" on the button, "Three pounds" in
-    # the paragraph, "Requires 3 Money (you have 1)" when she was short (v2.py:4680),
-    # "money: 12 / 100" in the sidebar (v2.py:16241) and "$90" on the rent card
-    # (v2.py:1190, the default nobody declared). Three of the six were the engine's.
+    # the-economy.md R7. One click's price can render six ways: the button, the
+    # paragraph, the engine's refusal "Requires 3 Money (you have 1)" (v2.py:4680),
+    # "money: 12 / 100" in the sidebar (v2.py:16241) and the rent card's default "$90"
+    # (v2.py:1190). Three of the six are the engine's.
     #
     # Judged on UNIT, not on form: "$" and "dollars" are one currency written two
     # ways, and the field ships both in one game. Two units is two currencies.
@@ -7750,19 +7590,16 @@ def run_gates(model, game, state=None):
     #
     # ⚠️ THE HEADLINE REPORTS THE DISTRIBUTION, NOT THE VERDICT — added 2026-08-15, study 6.
     # "0 screens over 8" and "19 of 30 screens at exactly 8" are the same PASS and completely
-    # different games, and the scoreboard could not tell them apart: the game this cap was
-    # written to fail (23 on one desk, 214 choices over 22 screens) and the game that replaced
-    # it (max 8, 213 choices over 29 screens) both read as solved. A ceiling makes "pass" and
+    # different games, and the scoreboard could not tell them apart: a game with one desk far
+    # over the cap and a game with every screen AT the cap both read as solved. A ceiling makes "pass" and
     # "maximise" point the same way, so a ceiling gate that prints only a verdict teaches the
     # cap as the spec. Same discipline as G2's marginal-pass headline.
     #
     # ⚠️ ROOMS AND CHARACTER HUBS ARE COUNTED SEPARATELY, and the reason is the denominator
     # trap this project has now hit six times. R3 is about ROOMS. Character hubs are shaped by
-    # a different rule (R1/R2's object test) and measured well: on the game that prompted this
-    # they open a median of 3 choices, exactly the field figure. Averaging them together
-    # reported "19/29 screens at the cap" when the rooms alone were 18 of 22 — the good screens
-    # were diluting the bad ones in the number meant to expose them. The cap still applies to
-    # both; only the reporting is split.
+    # a different rule (R1/R2's object test). Averaging hubs with rooms dilutes the room
+    # count — the good screens dilute the bad ones in the number meant to expose them. The
+    # cap still applies to both; only the reporting is split.
     npc_bound = {x["id"] for x in (game.get("canvases") or [])
                  if (x.get("trigger") or {}).get("npc")
                  or (x.get("trigger") or {}).get("requires_npc")}
@@ -7779,13 +7616,9 @@ def run_gates(model, game, state=None):
             #
             # ⚠️ CORRECTED 2026-09-02 — THIS GATE HAD GONE BLIND, and the comment that
             # blinded it was the give-away. It read: "Today this excludes nothing —
-            # every choice we have ever authored is targetType 'node'" (2026-08-13,
-            # d1dc430). That stopped being true almost immediately. Excluding EVERY
-            # location target meant excluding the acts as well as the doors: in this
-            # gate's own scope `orientation` had 51 choice-nodes and it counted 9,
-            # `mothers_place` was invisible entirely (100%), `the_inheritance` 87%,
-            # `the_route` 78%. It was reporting "rooms median 2 · 0/2 at the cap" for
-            # a twelve-location game.
+            # every choice is targetType 'node'" (2026-08-13, d1dc430). That stopped
+            # being true almost immediately. Excluding EVERY location target excluded
+            # the acts as well as the doors, and the gate went blind.
             #
             # And this file already disagreed with itself: the `a spent day still has
             # a door` gate below PRESCRIBES a location-target leave-link as the fix it
@@ -7796,10 +7629,7 @@ def run_gates(model, game, state=None):
             # (`the-surfaces.md` R9). A location exit that fires nothing is R7's door
             # and stays uncounted; one that grants, flags or charges is an act that
             # happens to end in a room, and it is a decision.
-            #
-            # Re-measured across all 18 games when this changed: EVERY verdict
-            # identical — `steam` 9 screens over the cap, every other game 0. The gate
-            # sees the corpus now; it does not judge it differently.
+
             choices = _node_choices(n)
             decisions = [ch for ch in choices
                          if (ch.get("targetType") or "node") != "location"
@@ -7829,29 +7659,25 @@ def run_gates(model, game, state=None):
             if per_screen and at_cap * 2 > len(per_screen) else []))
 
     # ⚠️ THE TWO SCREEN-SHAPE RULES ARE LINTS, NOT GATES — see lint_screen_shape().
-    # `the-surfaces.md` R5 (ungated doors) and R6 (does the screen move) are real rules that a
-    # real game ignored, and both were built here as gates before the thresholds were
-    # checked. Neither survived the check:
-    #   R5: the ceiling had to be invented — one game sits at exactly 50% and passes
-    #       while another fails at 52%, which is noise, not a measurement.
+    # `the-surfaces.md` R5 (ungated doors) and R6 (does the screen move) are real rules, and
+    # both were built here as gates before the thresholds were checked. Neither survived the
+    # check:
+    #   R5: the ceiling had to be invented — a game at exactly 50% passes while another
+    #       fails at 52%, which is noise, not a measurement.
     #   R6: not field-comparable AT ALL. In a compiled Twine file `<<if>>` covers engine
     #       plumbing — gated choices, media, presence — not just authored prose banding,
     #       and the two cannot be separated in someone else's build. Measured that way
-    #       our games score 84% and 89% against a field median of 86%, which says
-    #       nothing about whether the PROSE moves.
+    #       the field median is 86%, which says nothing about whether the PROSE moves.
     # Whether a room's narrative actually changes on re-entry is a question only PLAY
     # answers. Reported as lints until the play study sets real numbers.
 
     # G24 — the declared obligation is actually charged.
     #
-    # ⚠️ MEASURED FAILURE. A game declared "GBP 200 a week back, plus GBP 45 for the caravan",
-    # printed "Have the two hundred and forty-five" on its quest card, and wrote the scene of
-    # handing the money through a car window — and the settle-up canvas carried NO cost and NO
-    # money effect. Played live with GBP 300: before 300, after 300, and repeatable without
-    # limit. The whole game's money outflow was 11 optional purchases totalling GBP 90 against
-    # GBP 70 a night of income.
+    # ⚠️ A game can declare an obligation, print it on a quest card and write the scene of
+    # paying it — while the settle-up canvas carries NO cost and NO money effect and is
+    # repeatable without limit.
     #
-    # Gate 16 passed it, because nine OTHER canvases gate on money. That is the presence-gate
+    # Gate 16 passes that when OTHER canvases gate on money. That is the presence-gate
     # failure mode: "at least one exists" cannot see that the important one does not. This is
     # SKILL.md's "the BOARD DECLARES IT" rule applied to the field the economy is built on — the board declares a price,
     # so the gate checks the price is taken.
@@ -7909,9 +7735,8 @@ def run_gates(model, game, state=None):
         #     canvas (board.economy.settle_canvas), the charge must sit on that canvas.
         # (b) The week has to be able to pay it. `_week_income` measures what a week can
         #     bring in; the verdict uses its MEAN (a random 8–25 is not 25 every day) and
-        #     prints the MAX and the declared week_income beside it. the_balance declared
-        #     week_income 220 while its build paid $3 a shift: the declared number had gone
-        #     stale and nothing compared it with the build.
+        #     prints the MAX and the declared week_income beside it. A declared week_income
+        #     can go stale while the build pays far less, and nothing compared them.
         settle = econ.get("settle_canvas")
         for c in game.get("canvases") or []:
             if _is_dev(c) or not _rep_of(c.get("trigger") or {}):
@@ -7932,8 +7757,7 @@ def run_gates(model, game, state=None):
         gaps = []
         if not isinstance(ob_amt, (int, float)) or ob_amt <= 0:
             gaps.append("board.economy.obligation is declared but board.economy.obligation_amount "
-                        "is not — an obligation with no price cannot be checked, and one that "
-                        "cannot be checked is how a game shipped with its central charge missing")
+                        "is not — an obligation with no price cannot be checked")
         elif not charged_by:
             gaps.append(f"nothing takes {ob_amt:g} `{currency}` from the player: the largest "
                         f"authored outflow is {biggest:g}"
@@ -7967,13 +7791,9 @@ def run_gates(model, game, state=None):
     # validates `op` for cheat-page grants (template_import.py:3755) and for nothing else,
     # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
     #
-    # Measured, on two v2 games authored from the same skill: 35 dead effects in one and
-    # 70 in the other. In the first, a whole declared meter never moved for the entire game
-    # — the counterweight that "only ever falls" was frozen at its starting value across 12
-    # dead decrements — twenty activities never charged the energy they said they cost, and
-    # the one NPC penalty in the game never applied. Every gate here passed it, and a live
-    # play-through passed it too, because the number simply does not change and nothing says
-    # why. `references/engine.md` §21 had discussed `op = "subtract"` as though it worked.
+    # A dead effect builds green and changes nothing: a meter never moves, a cost is never
+    # charged, and nothing says why — a live play-through passes it too, because the number
+    # simply does not change. `references/engine.md` §21 had discussed `op = "subtract"` as though it worked.
     #
     # SCOPED TO CANVASES AND THE ENGINE BLOCK on purpose: quest-card `goals`/`when` entries
     # legitimately carry `trait` + `op = "gte"|"lt"`, and they are comparisons, not effects.
@@ -8029,11 +7849,10 @@ def run_gates(model, game, state=None):
     # choice on it being false, clear it in [engine.daily_tick]. Two of three
     # validates and does nothing.
     #
-    # Measured failure: a shipped game read four `*_talk_today` flags as is_false on
-    # four hub choices and cleared all four in the tick, and NO canvas ever set them.
-    # A flag nothing sets is permanently false, so every one of those gates fails
-    # open and the four talk screens were re-clickable every twenty minutes — a
-    # faster route to the cast meters than the day-capped rung they sit below.
+    # A flag read `is_false` and cleared in the tick that no canvas sets is permanently
+    # false, so every gate on it fails open — a talk screen guarded that way is
+    # re-clickable without limit, a faster route to the cast meters than the day-capped
+    # rung it sits below.
     #
     # ⚠️ Nothing else in the toolchain can see it. The generator's flag-chain
     # validator checks `operator == "is_true"` only (`v2.py:11659`) — deliberately,
@@ -8098,16 +7917,13 @@ def run_gates(model, game, state=None):
     # SETTER. This one asks what the screen looks like once the cap is SPENT — and a
     # day cap is spent every single day, by design, so this is not an edge state.
     #
-    # Measured failure, 2026-08-23: the author of a shipped game walked into his own
-    # NPC's hub, on a day he had already used that character's one rung and one talk,
-    # and got a portrait, a paragraph, a line of dialogue and nothing to click. All TEN
-    # hubs in that game did it, and three activity screens did the money-shaped version
-    # of it. He could not tell whether the game was broken.
+    # A spent day cap can leave a hub with a portrait, a paragraph, a line of dialogue
+    # and nothing to click, and the player cannot tell whether the game is broken. An
+    # activity screen can do the money-shaped version of it.
     #
-    # ⚠️ THE CAP IS PER PERSON AND THE HUBS ARE PER ROOM. That game gave one character
-    # three hubs — a yard, a harbour, an arcade counter — all reading one shared
-    # `*_rung_today`. Spending it at the yard at 09:00 emptied the other two for the
-    # rest of the day, and their whole list was that one flag.
+    # ⚠️ THE CAP IS PER PERSON AND THE HUBS ARE PER ROOM. One shared `*_rung_today`
+    # spent at one hub empties the others for the rest of the day when their whole list
+    # is that one flag.
     #
     # ⚠️ MIRROR THE ENGINE, DO NOT RE-INVENT IT. A choice is a DOOR only when it carries
     # neither `conditions` nor `costs` — that is precisely `has_unconditional_choice`
@@ -8122,11 +7938,9 @@ def run_gates(model, game, state=None):
     # ⚠️ NOT EVERY ALL-CONDITIONAL NODE IS A DEAD END, and this gate must not say so.
     # Conditional ROUTING — `stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all —
     # is exhaustive by construction and cannot all-fail. Scoping to day caps and money
-    # is what keeps it sound: measured across the ten built games, it finds 13 of 13 in
-    # the game that shipped the defect and ZERO in the other nine, which between them
-    # carry 29 all-conditional routing nodes.
+    # keeps it from flagging exhaustive routing.
     #
-    # The fix is one choice, and every other game in the repo already ships it:
+    # The fix is one choice:
     # `{ text = "Leave him to it.", targetType = "location", locationId = <the hub's
     # own location> }` — no conditions, no costs, last in the list.
     # ─────────────────────────────────────────────────────────────────────────
@@ -8183,12 +7997,8 @@ def run_gates(model, game, state=None):
     # G26 — THE CLIMB IS PAID FOR.  the-meters.md M1.
     #
     # Every gate before this one asks whether a thing EXISTS. This one asks what it
-    # COSTS, which is the question three shipped games passed without ever being
-    # asked. Measured failure: a game with three correctly-declared ascent tiers,
-    # gates at 15/35/55, every penetrative scene properly behind one — and a rung
-    # granting +1 cover for 10 minutes, free, uncapped, repeatable forever. Live: 12
-    # clicks took cover 4 -> 16 at no cost. Cover 0->55 is 55 clicks, nine hours of one
-    # Monday. It scored 22/24.
+    # COSTS: a rung granting +1 for 10 minutes, free, uncapped and repeatable, makes a
+    # correctly gated tier farmable.
     #
     # ⚠️ It walks the GAME, not a declaration. Every trait ANY condition reads is in
     # scope — the three declared tiers, the counterweight, and per-NPC relation, which
@@ -8307,24 +8117,17 @@ def run_gates(model, game, state=None):
     # ─────────────────────────────────────────────────────────────────────────
     # G28 — THE MAP IS A PLACE.  the-map.md R0 + R3.
     #
-    # Measured failure, twice: a world that is one house with a token outside,
-    # shipped green. The second time it scored 26/26 and was spotted from the
-    # LOCATION LIST ALONE, by eye, as "the same mistake we made in back home."
-    # Of the five v2 games, the only two whose map starts indoors are those two.
-    #
-    # The cause was the-map.md's own worked example — the FIRST game's map, with
-    # its bugs patched out and its skeleton intact — which three games then
-    # copied. An example outranks every rule beside it, so the example is gone
-    # and the shape is now a declared choice with this check behind it.
+    # A world that is one house with a token outside passes a declaration alone.
+    # The shape is a declared choice with this check behind it; a worked example
+    # outranks every rule beside it, so none is given.
     #
     # TWO tests, because a declaration alone is satisfied by typing a word:
     #   1. did you CHOOSE a shape (declared)
     #   2. is the outside actually the outside (mechanical, off entry_from)
     #
-    # Test 2 is the half a parser can see, and it is the exact inversion that
-    # shipped: an exterior declared, priced at 25 minutes, hanging off the
-    # KITCHEN — so stepping outdoors meant stepping from one interior into a row
-    # of shops. It cannot be talked out of in the ledger.
+    # Test 2 is the half a parser can see: an exterior declared, priced at 25
+    # minutes, hanging off the KITCHEN — so stepping outdoors means stepping from
+    # one interior into a row of shops. It cannot be talked out of in the ledger.
     ARCHETYPES = {"nested_zones", "two_hub", "map_hotspots", "street_mesh", "time_slot"}
     map_fails = []
     if state is None:
@@ -8371,12 +8174,9 @@ def run_gates(model, game, state=None):
     # DECLARE-THEN-CHECK against `board.needs[]`. Deterministic, no threshold to
     # invent: either some condition somewhere reads the key or nothing does.
     #
-    # ⚠️ THE MEASURED FAILURE. the_allowance declares `[player.trait_decay]
-    # hygiene = 10`, ships FOUR ways to wash, and has ZERO conditions reading
-    # hygiene. A fully wired loop that costs the player time and buys nothing.
-    # It scored 26/27 with that in it. Contrast vesper: 11 things drop hygiene
-    # by 30, one restores it, `hygiene >= 40` gates "Take the car" — filthy means
-    # she cannot leave.
+    # ⚠️ A need that decays, is restored four ways and gates nothing costs the
+    # player time and buys nothing. The shape is a need that shuts a door
+    # (`hygiene >= 40` gates leaving — filthy means she cannot leave).
     #
     # Reads the WHOLE game, not just triggers: a need is just as validly gated
     # from a choice, a [group] band or a quest card.
@@ -8394,9 +8194,7 @@ def run_gates(model, game, state=None):
              ["declare the body's clock in v2_state.json: what falls, where it fills, "
               "what it costs, and WHAT IT SHUTS (references/the-meters.md M8)",
               "a room's list is needs + work + people (the-surfaces.md R2) — with no "
-              "declared needs, a third of every room's menu cannot exist",
-              "measured: a game whose anchor location is a kitchen shipped with zero "
-              "eat / cook / meal / food / sleep canvases because nothing ever asked"])
+              "declared needs, a third of every room's menu cannot exist"])
     else:
         read = _traits_read_by_conditions(game)
         dead = [n for n in needs if str(n.get("key")) not in read]
@@ -8416,14 +8214,10 @@ def run_gates(model, game, state=None):
     # The join is the author's OWN board: she works alone here, someone is
     # scheduled here, so someone can interrupt her. Nothing is invented.
     #
-    # ⚠️ FLOOR IS PER ROOM, NOT PER PAIR — deliberately. The raw cross-product is
-    # 40 pairs for the_allowance and 49 for seventh_day; demanding those would
+    # ⚠️ FLOOR IS PER ROOM, NOT PER PAIR — deliberately. The raw cross-product runs
+    # to dozens of pairs per game; demanding those would
     # rebuild the wall of buttons one layer down, which is the objects mistake in
     # a new coat. One walk-in per qualifying room; the rest is the author's call.
-    #
-    # Measured before this gate was written: 10 substitution rules across 791
-    # canvases in five v2 games, against the incumbent skill sizing the same
-    # mechanism at ~47% of its densest arc shape.
     # ═════════════════════════════════════════════════════════════════════════
     qualifying, covered, (solo, sched, subs) = _walkin_join(model, game)
     missing = sorted(set(qualifying) - set(covered))
@@ -8439,7 +8233,7 @@ def run_gates(model, game, state=None):
           for l in missing[:8]]
          + ([f"… and {len(missing)-8} more rooms"] if len(missing) > 8 else [])
          + (["the-surfaces.md R3 — ONE canvas, substitution_only = true, [group] bands on the "
-             "axis the odds ride. Vesper's is 2.3 KB; DoL's are 458-473 bytes. Not a scene.",
+             "axis the odds ride. DoL's are 458-473 bytes. Not a scene.",
              "⚠️ the target MUST declare a `location` — getCanvasById indexes only "
              "location-bound canvases (v2.py:3177), so a triggerless rung silently never fires",
              "one per ROOM, not one per pair — filling the cross-product is the wall of "
@@ -8453,18 +8247,14 @@ def run_gates(model, game, state=None):
     # a condition, a `costs` entry, or a quest goal. Deterministic: either a
     # reader exists or none does, and there is no threshold to invent.
     #
-    # ⚠️ THE MEASURED FAILURE, and it lands on the field's hottest gate.
-    #     arousal, across five v2 games:  232 raises  ·  4 reads
-    #     seventh_day per-NPC lust 34 · 0   ·   forty_miles energy 28 · 0
-    #     steam energy 50 · 0               ·   the_allowance hygiene 4 · 0
-    # In the field a sexual-state meter is a real gate in 13 of 27 games, and
+    # ⚠️ It lands on the field's hottest gate. In the field a sexual-state meter is a real gate in 13 of 27 games, and
     # where it exists it is the #1 or #2 most-gated thing in the whole game
     # (corpo-life `lust`, DoL `arousal`, family-ties `you.arousal`,
-    # friends-of-mine `excitement`). We raise it everywhere and read it nowhere.
+    # friends-of-mine `excitement`).
     #
     # CAUSE, one line of this skill's own template: the volatile layer in
     # `templates/board.toml` was labelled "NEVER gate an arc on these" — correct
-    # about the ODOMETER and silent about the THROTTLE, so five authors read it
+    # about the ODOMETER and silent about the THROTTLE, so an author reads it
     # as "never gate on it at all". The missing positive half is now W2: a
     # throttle gates the REPEATABLE act surface, and only that.
     #
@@ -8509,13 +8299,9 @@ def run_gates(model, game, state=None):
     # a MAX aggregate — engine.md §17), never raised by an effect, so a game can
     # ship a full catalog and the meter gate sees nothing at all.
     #
-    # MEASURED across the 21 games carrying a merged final, 2026-08-24:
-    #     102 garments in 10 games  ·  47 reads between them
-    #     mothers_place 6 garments / 0 reads      seventh_day   8 / 0
-    #     steam         8 garments / 0 reads      the_allowance 9 / 0
-    # The field reads its wardrobe an order of magnitude harder: degrees-of-lewdity
-    # reads its derived exposure ~900 times, the-hellfire-club its slot variables
-    # 484, zaras-school-life `$PlayerClothes` 415. Our best is vesper at 21.
+    # The field reads its wardrobe hard: degrees-of-lewdity reads its derived
+    # exposure ~900 times, the-hellfire-club its slot variables 484,
+    # zaras-school-life `$PlayerClothes` 415.
     #
     # ⚠️ THREE READER FAMILIES. Counting only the first is how this gate would fail
     #    a game for doing the most common thing in the field:
@@ -8527,9 +8313,8 @@ def run_gates(model, game, state=None):
     #                                              (template_import.py:4227-4241)
     #    The portrait override is a DISPLAY reaction rather than a gate, and W7 is
     #    what says that is the field's dominant mode — DoL swaps the model's mouth
-    #    on `V.exposed === 2`. vesper reads its wardrobe 19 times through
-    #    `clothing_item` and twice through a portrait override; a first-family-only
-    #    check would have failed the best reader we have.
+    #    on `V.exposed === 2`. A game can read its wardrobe mostly through
+    #    `clothing_item` plus a portrait override; a first-family-only check fails it.
     #
     # ⚠️ THE SAME FIG LEAF AS THE GATE ABOVE — one throwaway `worn_corruption gte 1`
     #    turns this green. No threshold is invented, because W7 measures the field's
@@ -8540,10 +8325,8 @@ def run_gates(model, game, state=None):
     # ⚠️ `worn_exposure` was missing here until 2026-09-03 while `engine.md` §17 listed it
     #    in the same reader family and the engine implemented it (v2.py:4255, :8117). It is
     #    the newest of the predicates and the only one that reads an EMPTY slot, so a game
-    #    reading its wardrobe exclusively that way was reported as reading it not at all:
-    #    orientation printed `1 read` against a true 3. No verdict moved — nothing passed or
-    #    failed on it — but the detail block would have told that author "NOTHING reads the
-    #    wardrobe" while three conditions did.
+    #    reading its wardrobe exclusively that way was reported as reading it not at all —
+    #    the detail block would say "NOTHING reads the wardrobe" while conditions did.
     _CLOTHING_PREDICATES = ("worn_corruption", "worn_beauty", "worn_type",
                             "worn_exposure", "clothing_slot", "clothing_item")
     garments = [c for c in (game.get("clothing") or []) if isinstance(c, dict)]
@@ -8590,32 +8373,15 @@ def run_gates(model, game, state=None):
     # into `sv.player.wardrobe` is a catalog entry, and every condition naming it is a door
     # with no key.
     #
-    # WHAT THIS CATCHES, and it is not wardrobe hygiene. `orientation` declared `row_dress`
-    # ($60) and `black_set` ($35), set no `shop_location`, and wrote no `wardrobeEffects`
-    # anywhere — so neither could be obtained. They were the only two garments in the game
-    # carrying `type = "going_out"` and `exposure = 1`, and `simone_05` — step 5 of the
-    # anchor character's six-step arc — triggers on `worn_exposure gte 1 AND worn_type eq
-    # "going_out"`. Verified live: `isCanvasValid(simone_05) === false` with every other
-    # prerequisite met. The arc died there, `simone_06` never set `simone_open`,
-    # `act_pledge_upstairs` — the anchor's repeatable act surface — was sealed for the whole
-    # release, and two quest cards went on pointing the player at it. 46 of 47 gates green.
+    # WHAT THIS CATCHES, and it is not wardrobe hygiene. A garment with no `shop_location`
+    # and no `wardrobeEffects` can never be obtained. An arc step that triggers on it
+    # (`worn_type eq "going_out"`) dies there — live: `isCanvasValid` false with every
+    # other prerequisite met — and everything downstream of the step is sealed.
     #
-    # THE CORPUS, measured 2026-09-03 over every game with a merged final — 7_ AND 6_, since
-    # five pre-v2 games merge to 6_ and this script only ever loads 7_, so they are outside
-    # every gate here and had to be measured by hand:
-    #   the_allowance   parade_dress, parade_tights             2   no shop_location
-    #   the_route       scrubs_dark, scrubs_light, own_clothes  3   no shop_location
-    #   under_one_roof  7 gift garments                         7   HAS a live shop   [pre-v2]
-    # 3 of 15 wardrobe games, 12 garments. Every clean game has a shop or wardrobeEffects.
-    # This gate prints the first two; `under_one_roof` has no v2 ledger and is field
-    # evidence for the CHECK's shape, not a row the scoreboard will ever show.
-    #
-    # ⚠️ `under_one_roof` IS WHY THE SHOP CLAUSE IS NOT "a shop exists". Its seven are
-    # non-initial at `price = 0` and named for the characters meant to give them
-    # (`jakes_flannel`, `frank_nice_dress`), and `renderShopPage` stocks only
-    # `!initial && price > 0` (v2.py:2105-2107) — they are invisible on the very page they
-    # sit beside. A check reading "there is a shop, therefore buyable" reports zero here and
-    # misses the sharpest case in the corpus.
+    # ⚠️ "A SHOP EXISTS" IS THE WRONG TEST. `renderShopPage` stocks only
+    # `!initial && price > 0` (v2.py:2105-2107), so non-initial garments at `price = 0` are
+    # invisible on the very page they sit beside. A check reading "there is a shop,
+    # therefore buyable" misses them.
     #
     # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:2536 takes the slug as a bare
     # string and v2.py:9935 compares it to each location's own slug; a typo is silent and the
@@ -8628,9 +8394,8 @@ def run_gates(model, game, state=None):
     # ⚠️ THIS DOES NOT ASK WHETHER A CONDITION IS SATISFIABLE. That needs the derived
     # worn_beauty / worn_corruption MAX aggregate modelled, and a check that cannot see the
     # shape of the thing it judges manufactures whatever it can see (the deleted gate 22,
-    # `the-surfaces.md`). Measured: orientation was the only game in the corpus with an
-    # unsatisfiable clothing condition, and its cause was an ungrantable garment — so the
-    # exact question reaches the same defect from the side that can be answered.
+    # `the-surfaces.md`). The exact question reaches the same defect from the side that can
+    # be answered.
     # ═════════════════════════════════════════════════════════════════════════
     _settings = game.get("settings") or {}
     _loc_ids = {l.get("id") for l in (game.get("locations") or []) if isinstance(l, dict)}
@@ -8694,15 +8459,13 @@ def run_gates(model, game, state=None):
     #   all of that is settings and pagination chrome (OptionsWidget, Widgets
     #   Outfits "Previous"/"Next") rather than gated content. The field hides a
     #   refusal or it explains one. It does not show a dead label and stop.
-    #   Ours, same day, by tomllib over every merged final: 144 of 176 shown-locked
-    #   choices are mute — 82%, against the field's 2.26%.
     #
     # ⚠️ THIS GATE REVERSES WHAT THIS SKILL USED TO TEACH. engine.md §15 read
     #    "Prefer the want unless the gate is genuinely obscure" until 2026-08-24,
-    #    so the 7% is doctrine, not sloppiness. §15 was rewritten in the same turn
+    #    so a mute locked row is doctrine, not sloppiness. §15 was rewritten in the same turn
     #    this gate landed; the two must not be allowed to drift apart again.
     #
-    # ⚠️ THREE THINGS COUNT AS A REASON, and the third is why late_shifts passes:
+    # ⚠️ THREE THINGS COUNT AS A REASON:
     #      · locked_text            the reason replaces the label   (engine.md §15)
     #      · locked_text_threshold  the label becomes a <<button>> that fires
     #        setup.queueGatedNotification(...) on click (v2.py:13210-13217) — the
@@ -8772,10 +8535,9 @@ def run_gates(model, game, state=None):
     #           DoL 10% · wasteland 5% · family-ties 0% · company 0% · slut 0%
     #                                                                       (9)
     #
-    # Ours: 20% · 22% · 19% · 29% · 28%. All five inside a band no shipped game
-    # occupies — not because the middle was chosen, but because the question was
-    # never asked. v1 asks it (`content-framework.md`, "Who climbs?"); v2 dropped
-    # it, and one template answered it five times by default.
+    # No field game sits between 15% and 65%. A game lands there not because the
+    # middle was chosen, but because the question was never asked. v1 asks it
+    # (`content-framework.md`, "Who climbs?"); v2 dropped it.
     #
     # The cut points sit INSIDE the measured empty band (15%-65%), so they are
     # read off the distribution rather than invented. What is judged is the game
@@ -8797,8 +8559,7 @@ def run_gates(model, game, state=None):
              f"board.who_climbs not declared — {shape}",
              ["declare it: \"player\" (one or two meters on her run everything), \"cast\" "
               "(the meters live on each character), or \"both\" — references/the-meters.md W1",
-              "measured: the field splits 9 ladder / 8 roster with NOTHING between 15% and 65%, "
-              "and all five v2 games sit at 19-29% without having chosen",
+              "measured: the field splits 9 ladder / 8 roster with NOTHING between 15% and 65%",
               "this reports n/a, which is NOT a pass — an absence is not evidence"])
     elif not tot:
         gate("the climb is where you said it is", None,
@@ -8813,21 +8574,20 @@ def run_gates(model, game, state=None):
              [] if ok else
              [f"the board says `{who}` and the game does not do it: {shape}",
               "either move the gating to where the declaration says it lives, or change the "
-              "declaration — but do not leave it in the middle, which is where every v2 game "
-              "so far has landed by default (the-meters.md W1)"])
+              "declaration — but do not leave it in the middle, where no field game sits "
+              "(the-meters.md W1)"])
     # G44 — the start choice is read. `the-want.md` §1.
     #
-    # WHAT THIS CATCHES: fake freedom. A game that asks the player who she is and then
-    # discards the answer. Measured, that is not hypothetical — mrs_vance's opening
-    # SHIPPED asking four questions whose choices shared one target, carried no effects
-    # and differed in no way, and nothing in 41 gates could see it.
+    # WHAT THIS CATCHES: fake freedom — a start question whose answers share one target,
+    # carry no effects and differ in no way. The game asks the player who she is and
+    # then discards the answer.
     #
     # WHY IT IS WORTH GATING: `freedom` is the largest single thing the male-heavy top 30
     # is loved for (25.9% of top-30 engagement, reason (1) weighted by comment count). For
     # a female lead the premise matters too (the-want.md §0); the choosing still does.
     #
     # ⚠️ IT FAILS ONLY ON ZERO, AND THAT RESTRAINT IS THE POINT. A floor ("read at least
-    # N times") cannot be defended from the one game that has a start choice, and this
+    # N times") cannot be defended with no distribution to read it off, and this
     # skill has already had to supersede a whole doctrine built at n = 1 (the-meters.md
     # W1, 2026-08-19). Declared-and-never-read needs no threshold — it is the defect by
     # definition. Everything else is REPORTED so a distribution accumulates and a future
@@ -8848,7 +8608,7 @@ def run_gates(model, game, state=None):
              ["declare it: want.player.start_choice = { asked_at, flags } — the-want.md §1",
               "measured on the male-heavy top 30: `freedom` is 25.9% of engagement and the "
               "largest single bucket; for a female lead the premise matters too (the-want.md "
-              "§0). All eight v2 games let the player choose nothing",
+              "§0)",
               "a memory, not a slider — ask what the scene already asks and set a flag; do "
               "not build a stat screen",
               "this reports n/a, which is NOT a pass — an absence is not evidence"])
@@ -8885,10 +8645,8 @@ def run_gates(model, game, state=None):
 
     # G45 — what money buys opens a door. `the-economy.md` R1b.
     #
-    # WHAT THIS CATCHES: a purchase the game forgets. `the_season` sells boots that fit
-    # for $20 (`has_boots`) and fuel for $5 (`truck_fuelled`), and BOTH flags are read
-    # zero times — the price, the flag and the shop were all built and the doors were
-    # never cut. Nothing in 44 gates could see it.
+    # WHAT THIS CATCHES: a purchase the game forgets — price, flag and shop built, and
+    # the flag read nowhere, so the doors were never cut.
     #
     # WHY IT IS WORTH GATING: it is Study 7's fake-freedom defect in its economic form.
     # There the player was asked who she is and the answer was discarded; here she is
@@ -8897,12 +8655,10 @@ def run_gates(model, game, state=None):
     # most-engaged sandboxes — become-someone's company gates 114 condition sites,
     # become-taxi-driver's car 46, destroyer's five rooms 21/20/16/16/16.
     #
-    # ⚠️ IT FAILS ONLY ON ZERO, for the reason G44 does. `mrs_vance`'s truck opens 5 doors
-    # and it is the ONLY owned asset in eight games, so there is no distribution to read a
+    # ⚠️ IT FAILS ONLY ON ZERO, for the reason G44 does: there is no distribution to read a
     # floor off. The counts print unjudged until there is.
     #
-    # ⚠️ A GAME THAT SELLS NOTHING REPORTS n/a, NOT PASS. Five of our eight sell nothing at
-    # all, and an absence is not evidence — the same wording the climb, start-choice and
+    # ⚠️ A GAME THAT SELLS NOTHING REPORTS n/a, NOT PASS. An absence is not evidence — the same wording the climb, start-choice and
     # obligation checks use.
     # ═════════════════════════════════════════════════════════════════════════
     _cur = _declared_currency(state)
@@ -8949,11 +8705,9 @@ def run_gates(model, game, state=None):
         #   · `<flag> is_false` on the TRIGGER of the canvas holding that choice — retires
         #     the whole row once it is owned.
         # Counting them handed every carefully-written purchase a free +1 and put this
-        # gate's zero test out of reach. Measured 2026-09-03 across the corpus: 6 of 10
-        # purchases carry the choice form, and `orientation/has_dress` ($60) and
-        # `the_season/has_fan` ($12) passed on nothing else — has_dress bought a garment
-        # the player never received and no condition anywhere ever named it again.
-        # The trigger form is 0 of 10 today and is excluded in advance: it is what
+        # gate's zero test out of reach: a purchase can pass on the choice form alone while
+        # the garment is never received and no condition anywhere names it again.
+        # The trigger form is excluded in advance: it is what
         # `<flag> is_false` on [canvases.trigger] produces, and an author writing it
         # would silently re-open the hole. Restricted to `is_false` — an `is_true` test on
         # the choice that SETS the flag can never fire, so it is dead either way.
@@ -8980,7 +8734,7 @@ def run_gates(model, game, state=None):
             _walk_buy_conds(c, c.get("id") or "?")
 
         # A flag the daily tick wipes overnight is a DAY CAP, not a possession, and a day
-        # cap priced in coins is a legitimate shape (off_season prices four of them). They
+        # cap priced in coins is a legitimate shape. They
         # are excluded here rather than failed — the same carve-out `_holder_day_capped`
         # makes for gate 18.
         _tick = ((game.get("engine") or {}).get("daily_tick") or {})
@@ -9021,11 +8775,8 @@ def run_gates(model, game, state=None):
     # this gates is strictly narrower and countable — is there a single choice in the whole
     # game that declines an offer — and it rests on the whole corpus, not on four games.
     #
-    # WHAT THIS CATCHES: a game the player cannot decline anything in. FOUR of our
-    # thirteen scorable games ship exactly that — `forty_miles` (218 choices), `steam`
-    # (216), `seventh_day` (114) and `the_allowance` (74). 622 authored choices between
-    # them and not one refusal anywhere. Nothing in 45 gates could see it, and an author
-    # can write two hundred choices without ever noticing they never wrote a no.
+    # WHAT THIS CATCHES: a game the player cannot decline anything in. An author can
+    # write two hundred choices without ever noticing they never wrote a no.
     #
     # THE FIELD: 1,763 of 84,458 clickable labels across the 25 corpus games are a real
     # refusal — 2.09%, roughly one click in fifty. And they are NOT theatre, which was
@@ -9035,19 +8786,17 @@ def run_gates(model, game, state=None):
     # content. Refusal is a content kind, not a courtesy.
     #
     # ⚠️ FAILS ONLY ON ZERO, on the precedent of G44 and G45. A rate floor cannot be
-    # defended from here: our own games run 0% to 6.5%, and the field's 2.09% is not the
-    # same measurement — their labels include navigation and ours are authored choice
-    # text. Zero needs no threshold. It is the defect by definition, and everything above
+    # defended from here: the field's 2.09% is not the same measurement — field labels
+    # include navigation, and this reads authored choice text. Zero needs no threshold. It is the defect by definition, and everything above
     # zero is reported so a distribution can accumulate and a future floor be READ off it
     # rather than invented. That restraint is what R4, study 6's anchoring check and P0
     # were withdrawn for missing.
     #
     # ⚠️ THE PATTERN IS NARROW ON PURPOSE, AND THE FIRST DRAFT WAS WRONG. A looser one
     # counted `leave` and `ignore`, which are navigation — "Leave the shop" declines
-    # nothing. It put `the_inheritance` at zero when the game has three real refusals, and
-    # `forty_miles` at two when it has none. A refusal DECLINES AN OFFER; anything that
-    # merely exits a room is not one. If this gate is ever loosened, re-check those two
-    # games first.
+    # nothing, so it reads navigation as refusal. A refusal DECLINES AN OFFER; anything
+    # that merely exits a room is not one. If this gate is ever loosened, re-check it
+    # against games with known refusals first.
     # ═════════════════════════════════════════════════════════════════════════
     _REFUSAL = re.compile(
         r"^\s*(no[,.!\s]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
@@ -9086,11 +8835,11 @@ def run_gates(model, game, state=None):
     #
     # WHY IT IS WORTH GATING: measured over the 13 top-30 games with a creation step,
     # the field reads each created field a median of FOUR times and the median game
-    # leaves NONE of them unread. Ours: 12 reads across 14 fields, 6 read nowhere.
+    # leaves NONE of them unread.
     #
     # ⚠️ FAILS ONLY ON ZERO, on the precedent of G44, G45 and G46. No rate floor: the
     # field's median of 4 is a different measurement (their reads run through name widgets
-    # and bare interpolation over whole games) and a threshold between it and ours would
+    # and bare interpolation over whole games) and a threshold taken from it would
     # fail a game for obeying the doctrine. Zero is the defect by definition.
     #
     # ⚠️ A GAME DECLARING NO CUSTOMIZATION REPORTS n/a, NOT PASS — same wording as the
@@ -9106,7 +8855,7 @@ def run_gates(model, game, state=None):
     #
     # ⚠️ `sets_portrait = true` COUNTS AS A READ. An image_select field writes
     # `$player.portrait`, which the stats page renders. Without this exemption every
-    # image_select field in all five games with customization fails — a gate that fails a
+    # image_select field fails — a gate that fails a
     # game for using a feature correctly, which is exactly what took R4 back out.
     # ═════════════════════════════════════════════════════════════════════════
     _pl = game.get("player") or {}
@@ -9259,20 +9008,14 @@ def run_gates(model, game, state=None):
 
     # G43 — prose texture. The SECOND gate here that measures writing.
     #
-    # Added 2026-08-27, after two players read a shipped game of ours and called the prose
-    # "an underpowered AI whose mother language isn't english" and said it made the story
-    # hard to follow. Of the 42 gates that existed, exactly one looked at the writing (G19),
-    # and that game PASSED it — median sentence 12 words against a field median of 12. The
-    # prose was field-normal on the only axis measured and 97x off-field on one that was not.
+    # Added 2026-08-27. Of the 42 gates that existed, exactly one looked at the writing
+    # (G19). Prose can be field-normal on the only axis measured and far off-field on one
+    # that is not.
     #
-    # ⚠️ THIS READS b.text AND MUST NEVER READ THE BUILT HTML. The first attempt at this
-    # gate measured our games from output/index.html and reported them at 4.75x the field on
-    # joints-per-sentence — a dramatic number, and an artifact. Our HTML carries UI list
-    # blocks that never reach a full stop, so the splitter read each as one enormous
-    # comma-filled "sentence": 10.6% of our HTML "sentences" are those blocks against the
-    # field's 1.5%. Re-measured on authored beat text the direction REVERSED — our prose is
-    # less packed than the field, 0.53 against 0.77 — and the finding was withdrawn. That is
-    # the same family of error the SENTENCE_CEILING seam documents, hit a second time.
+    # ⚠️ THIS READS b.text AND MUST NEVER READ THE BUILT HTML. Built HTML carries UI list
+    # blocks that never reach a full stop, so the splitter reads each as one enormous
+    # comma-filled "sentence", and joints-per-sentence taken off HTML is an artifact. Read
+    # authored beat text. That is the same family of error the SENTENCE_CEILING seam documents, hit a second time.
     # Anything computed PER SENTENCE is not comparable across the two bases. A rate over
     # word count, which is what this gate judges on, is.
     #
@@ -9305,9 +9048,7 @@ def run_gates(model, game, state=None):
 
     # Where the dashes actually live. An em-dash in narration is the appositive habit
     # register.md names; an em-dash in speech is how English writes an interruption, and
-    # "Mrs. Vance — Mrs. — I can't, if you keep —" is correct as written. Measured on the
-    # game that prompted this: 24 of its 32 dashes were speech breaking down, so 76% of
-    # its score was punctuation that is not a defect.
+    # "Wait — no — I can't, if you keep —" is correct as written.
     #
     # ⚠️ REPORTED, NEVER GATED, and the verdict above deliberately still counts BOTH.
     # Moving the verdict to narration-only needs a narration-only FIELD baseline, and that
@@ -9348,7 +9089,7 @@ def run_gates(model, game, state=None):
                                                  key=lambda kv: -kv[1][0])[:6]]
         tex_detail += [
             "⚠️ do NOT fix this by swapping the dash for a comma. The joint survives the swap "
-            "and nothing reads easier — measured, on two of our own games. Split the sentence, "
+            "and nothing reads easier. Split the sentence, "
             "or cut the clause it was holding on.",
             "field p50 is 0.99/10k — half the corpus writes under one dash per 10,000 words",
         ]
@@ -9363,11 +9104,10 @@ def run_gates(model, game, state=None):
         tex_detail += [
             f"reported, not gated, NO field figure — joints/sentence {tex_joints:.2f} · "
             f'"you" {tex_you:.1f}% of words · pronoun:name {tex_p2n:.2f}',
-            "⚠️ these three are comparable ACROSS OUR OWN GAMES and to nothing else. The corpus "
-            "exists only as built HTML, whose UI strings and list blocks move all three: this "
-            "same game reads pronoun:name 0.87 on that basis and 9.99 on this one. The dash rate "
-            "above is quoted against the field precisely because it is the one that survives the "
-            "change of basis (27.2 HTML, 25.4 here).",
+            "⚠️ these three compare a game with its own earlier builds and with nothing else. "
+            "The corpus exists only as built HTML, whose UI strings and list blocks move all "
+            "three. The dash rate above is quoted against the field because it is the one that "
+            "survives the change of basis.",
         ]
     gate("prose texture", None if not tex_words else dash_rate <= DASH_CEILING,
          f"{tex_dashes} dash{'' if tex_dashes == 1 else 'es'} in {tex_words:,} prose words = "
@@ -9377,15 +9117,14 @@ def run_gates(model, game, state=None):
 
     # ─────────────────────────────────────────────────────────────────────────
     # THE FIRST HOUR — references/the-first-hour.md
-    # Three gates added 2026-08-22, after the first v2 game a human read end to end
-    # scored 31/32 and was unreadable for its first ten minutes. Nothing in the
-    # existing 32 looked at the opening, the introductions, or the first visit.
+    # Three gates added 2026-08-22. Nothing in the existing 32 looked at the opening,
+    # the introductions, or the first visit.
     # ─────────────────────────────────────────────────────────────────────────
 
     # G33b — the opening hands over into an open door (the-first-hour.md F3)
     # A funnel that ends at a clock time when nothing at the landing location is open
     # makes the player's first free act pressing a wait button. v1 named this the
-    # dead-window bug and v2 shipped it into the one place it costs most.
+    # dead-window bug; the opening is the one place it costs most.
     hands, hand_why = _fh_handovers(game)
     if not hands:
         gate("the opening opens a door", None,
@@ -9429,10 +9168,16 @@ def run_gates(model, game, state=None):
 
     # G34b — every hub is met first (the-first-hour.md F5 + F8)
     # The forbidden shape is a repeatable `npc=` hub whose base node IS the introduction.
-    # All six v2 games shipped it for their whole cast; two v1 games are already at 100%,
-    # so the bar is one shipped work has cleared rather than an invented number.
+    # The bar is 100%, and it is a CHOICE backed by field evidence, not a universal law
+    # (LO decided, 2026-09-28). Hand-read across the four passing games, 7-27 characters
+    # each: three meet every character before their hub is reachable in spirit — Shady
+    # Deals, Cupid's Way and In Her Own Hands, 100% each — but only 57-81% under a strict
+    # one-flag-per-person reading, the gap being GROUP meetings on one shared flag (Shady
+    # Deals' trio, Cupid's Way's office tour) and characters met in the forced opening.
+    # So both count as met (`_fh_cast_met`). Course of Temptation does it differently: its
+    # generic "Talk to" works on strangers (30% in spirit). Plan and samples:
+    # round5/SETTINGS_REDERIVE_PLAN.md.
     met, cast, flag_owners, cold = _fh_cast_met(game)
-    shared = {f: sorted(o) for f, o in flag_owners.items() if len(o) > 1}
     if not cast:
         gate("every hub is met first", None, "no portrait hubs authored")
     else:
@@ -9442,12 +9187,10 @@ def run_gates(model, game, state=None):
         det += [f"{npc}: gated, but on no flag a meeting with {npc} sets"
                 for npc in cast
                 if npc not in met and npc not in {n for n, _c in cold}][:6]
-        det += [f"`{f}` opens hubs for {len(o)} characters ({', '.join(o)}) — "
-                f"one flag per character" for f, o in sorted(shared.items())]
         if len(met) < len(cast):
             det.append("a meeting is a NON-repeatable canvas that names that character "
-                       "and sets one flag the hub reads — the_inheritance/canvas_meet_audrey, "
-                       "125 words and 4 dialog blocks, is the worked shape")
+                       "and sets a flag the hub reads (a group scene naming several "
+                       "people meets them all), or a line in the forced opening")
         _N["every hub is met first"] = len(cast)
         gate("every hub is met first", len(met) == len(cast),
              f"{len(met)}/{len(cast)} characters are introduced before their hub opens",
@@ -9466,22 +9209,16 @@ def run_gates(model, game, state=None):
     #    checkAndSubstituteCanvas (v2.py:5318, substitution_only) — which is why
     #    those two shapes are excluded below rather than judged.
     #
-    # The failure this was written from: a game shipped five meetings with no window
-    # and its introductions played to empty rooms — one at 06:10 on a Saturday with
-    # the character out working, its prose saying "it's Monday". The skill had taught
-    # the rule and shipped a worked template twelve hours before that game was
-    # written; what it did not have was a check, and template_import.py's own comment
-    # on the field said the opposite (corrected in the same change as this gate).
+    # The failure: a meeting with no window plays its introduction to an empty room —
+    # at an hour the character is out, with prose naming the wrong day. A taught rule
+    # and a worked template do not stop it; a check does. template_import.py's own
+    # comment on the field said the opposite (corrected in the same change as this gate).
     #
     # SCOPED SO IT ONLY CONVICTS WHERE A WINDOW WAS AUTHORABLE. A canvas whose NPC
     # declares no rows at that location has nothing to copy, and saying so would be a
     # different, weaker finding wearing this one's clothes.
     #
-    # Measured across every game in the repo the day it was written — 69 canvases in
-    # scope, and ZERO carry a window that misses their character's own hours, so this
-    # never nags a game that did the work:
-    #   last_call 11/11 clean · off_season 8/8 · the_long_summer_test 1/1
-    #   the_season 0/5 · the_inheritance 0/24 · vesper 0/13 · late_shifts 6/7
+    # Scoped so a game that did the work is never nagged.
     npc_rows = collections.defaultdict(list)
     for _n in (game.get("npcs") or []):
         for _r in (_n.get("schedules") or []):
@@ -9534,18 +9271,13 @@ def run_gates(model, game, state=None):
     #    nothing at all, on any path, in any shape of game. Writing one is never correct, so
     #    there is no game this can fail for obeying the doctrine — R4 is unreachable here.
     #
-    # Measured across all 26 games the day it was written — 23 keys in 2 games, 24 clean:
+    # `npc` one level too high costs the whole cast its portraits and presence gate, and
+    # the canvas title renders as the link label. `substitution_only` one level too high
+    # turns every walk-in into a clickable activity instead of a dispatcher-only target.
     #
-    #   orientation  18   13 × `npc` (the whole cast: no portraits, no presence gate, and
-    #                     the canvas title rendered as the link label — the defect that
-    #                     started this) + 5 × `substitution_only`
-    #   night_desk    5   5 × `substitution_only` — every walk-in in the game renders as a
-    #                     clickable activity instead of a dispatcher-only target
-    #
-    # ⚠️ SCOPED TO `npc` UNTIL THE ORIENTATION REPAIR HIT `walkin_shower_simone`, which
-    #    carried `substitution_only` one level too high in the identical way. A gate named
-    #    for one key would have passed night_desk with all five of its walk-ins broken.
-    #    The class is the key PLACEMENT, not the key.
+    # ⚠️ THE CLASS IS THE KEY PLACEMENT, NOT THE KEY: `npc` and `substitution_only` both get
+    #    written one table too high in the same way, so a gate named for one key would pass
+    #    the other.
     CANVAS_FIELDS = {"id", "name", "description", "trigger", "nodes", "connections",
                      "loop", "slug"}
     TRIGGER_FIELDS = {"location", "is_active", "is_repeatable", "max_triggers_per_day",
@@ -9604,7 +9336,6 @@ def run_gates(model, game, state=None):
     # the skill carried two numbers for one measurement for a day. Section K found it.
     # The load-bearing zero — no label promises a clock time as the OUTCOME of a
     # repeatable action — survived the re-measurement unchanged. `the-clock.md`, "What the scoreboard checks".
-    # All four v1 games here already pass, so this is a bar shipped work has cleared.
     _idx = _clk_node_index(game)
     lab_n, clk_bad, dur_n, dur_bad = 0, [], 0, []
     _from_exit = 0
@@ -9634,7 +9365,7 @@ def run_gates(model, game, state=None):
                         "true at every entry minute; the hour is not")
             if _from_exit:
                 # Say where they came from. This check read only `exit_block.choices`
-                # until 2026-08-25, which is 62% of the buttons in this repo; a count
+                # until 2026-08-25, which is most buttons; a count
                 # that jumped without saying so would read as prose having changed.
                 _det.append(f"{_from_exit} of these sit on a SINGLE-EXIT node "
                             "(exit_block.text, no choices array) — a surface this check "
@@ -9690,7 +9421,7 @@ def _words_declared_names(path):
             if isinstance(entry, dict):
                 names += [entry.get("id"), entry.get("name")]
     names += list((board.get("map") or {}).get("homes") or {})
-    # `npc_boyd` -> the tokeniser sees `npc` and `boyd`; both are then names the
+    # `npc_jo` -> the tokeniser sees `npc` and `jo`; both are then names the
     # fiction teaches, which is correct — neither is a word the player arrived with.
     return [n for n in names if n], cand
 
@@ -9820,11 +9551,9 @@ def beat_mode(path):
         # ⚠️ NO VERDICT ON LENGTH, and the reason is a unit mismatch that would have
         # made this line lie. `register.md 'S1 · The clip rides the beat'` gives 37 words per reveal beat, where
         # a beat is ONE SCREEN. A canvas node that is not a cascade is a single `Beat`
-        # to this script and can hold several screens' worth of prose: two real
-        # mrs_vance beats sampled while building this mode ran 100 and 152 words, and
-        # calling them "over the band" would report a defect that the doctrine's own
-        # unit does not support. `forty_miles` ships 938 beats against 259 nodes — the
-        # two counts are not the same thing. So: the number, the reference, and the
+        # to this script and can hold several screens' worth of prose, and calling it
+        # "over the band" would report a defect that the doctrine's own unit does not
+        # support. A beat count and a node count are different things. So: the number, the reference, and the
         # caveat, and the reader matches unit to unit.
         print(f"    words                {len(words):>4}   register.md 'S1 · The clip rides the beat' \u2014 the field runs "
               f"37 words per")
@@ -9876,12 +9605,10 @@ def beat_mode(path):
 # literal (`games-data.js:44-49`), restated in nine of twenty-eight portal entries
 # in three wordings. Nine hand-copies in three wordings is doctrine in the wrong file.
 #
-# ⚠️ CORRECTION TO THE FIX AS IT WAS WRITTEN. `mrs_vance/REVIEW.md` B2 proposed
-# failing on an `[IMAGE MISSING]` / `[VIDEO POOL MISSING]` marker in the HTML.
+# ⚠️ FAILING ON A MARKER DOES NOT WORK. A review once proposed failing on an `[IMAGE MISSING]` / `[VIDEO POOL MISSING]` marker in the HTML.
 # Those markers are --debug ONLY — v2.py:12404 `if not self.debug: return ''`,
 # and again at :14753 and :14906 — so a CLEAN build renders silent gaps and a
-# marker grep passes it. Measured 2026-08-28: `under_one_roof` ships a clean build
-# with 183 missing files and ZERO markers. The grep measures the wrong thing.
+# marker grep passes it. The grep measures the wrong thing.
 #
 # Two instruments survive a clean build, and both are read here instead:
 #   1. the flags-init JSON the generator always writes — `debug_mode` from
@@ -9947,22 +9674,20 @@ def _built_flags(text):
     return ("true" in dbg), ("true" in dev), missing
 
 
-# A passage declaration, NOT a mention. Three things this regex has to get right,
-# each of them measured against every build in the repo (23 games, 1,895 canvases):
+# A passage declaration, NOT a mention. Three things this regex has to get right:
 #
 #  1. It anchors on `<tw-passagedata … name="`. A canvas that is LINKED TO but never
 #     emitted still has its name in the HTML, inside the link text of the passages
-#     pointing at it — on commuter's `loop_ray`, 17 of 23 raw matches are link
-#     references and only 6 are declarations. A bare substring search therefore
+#     pointing at it — most raw matches can be link references rather than
+#     declarations. A bare substring search therefore
 #     returns a false PASS on a dangling link, which is the other half of this very
 #     bug class.
 #  2. It accepts the `StartingCanvas_` prefix. The opening canvas emits as
-#     `StartingCanvas_<id>_Node_base`; without the prefix this false-fails EVERY
-#     game in the repo.
+#     `StartingCanvas_<id>_Node_base`; without the prefix this false-fails every
+#     game.
 #  3. It keys on the CANVAS, never the node. Node ids are not portable across
-#     generator eras — mothers_place (2026-06-20) emits `_Node_1`, current games
-#     emit `_Node_base` — so a node-level check raises 17 false alarms on that one
-#     game and finds nothing anywhere else.
+#     generator eras — older generator builds emit `_Node_1`, current ones
+#     `_Node_base` — so a node-level check raises false alarms on older builds.
 _PASSAGE_DECL = re.compile(
     r'<tw-passagedata\b[^>]*\bname="(?:Starting)?Canvas_([A-Za-z0-9_]+?)_Node_[^"]*"')
 
@@ -10044,11 +9769,10 @@ def release_mode(slug):
 
         # ── every canvas is a passage ───────────────────────────────────────
         # Reachability is not a property of the source, so no gate above can see
-        # it: it is what the generator DECIDED TO EMIT. commuter shipped six of
-        # its seven sex loops written, at their ceilings, and absent from the
-        # build — 46 green gates over prose the player could never reach, because
-        # they parse `7_final_game.toml` and count content. the_route did the same
-        # thing the day before from a different cause. defects/001.
+        # it: it is what the generator DECIDED TO EMIT. A canvas can be written,
+        # at its ceiling, and absent from the build while every source gate is
+        # green, because they parse `7_final_game.toml` and count content.
+        # defects/001.
         src_path = os.path.join(game_dir, "toml_phases", "7_final_game.toml")
         try:
             src_game = _load(src_path)
@@ -10073,11 +9797,10 @@ def release_mode(slug):
             #
             # ⚠️ Two discriminators were tested and are NOT used, because inventing
             # the wrong exemption is how R4, study 6 and P0 were all withdrawn:
-            #   · dev-gated canvases need no exemption — vesper carries 11 in a
-            #     NON-dev build and the_long_summer_test 9, both at zero missing.
-            #   · file mtime discriminates nothing — 11 of 13 games have a TOML
-            #     newer than their build, including every game at zero missing,
-            #     because merge_toml_phases rewrites 7_final_game.toml routinely.
+            #   · dev-gated canvases need no exemption — they are built in a
+            #     NON-dev build too.
+            #   · file mtime discriminates nothing — a TOML is routinely newer than
+            #     its build, because merge_toml_phases rewrites 7_final_game.toml.
             stale = [c["id"] for c in gone if (c.get("trigger") or {}).get("location")]
             pruned = [c["id"] for c in gone if not (c.get("trigger") or {}).get("location")]
 
@@ -10129,9 +9852,8 @@ def release_mode(slug):
     # ── the version triangle ────────────────────────────────────────────────
     # Three places say what shipped and nothing ever compared them: the portal
     # (what the storefronts are told), [project] version (what the sidebar prints
-    # to the player) and the archive (the build itself, kept). Measured 2026-08-28:
-    # `forty_miles` reads 0.1 / 0.1.2 / {0.1, 0.1.1, 0.1.2} — the portal two
-    # releases behind the number in the player's face.
+    # to the player) and the archive (the build itself, kept). The three drift: the
+    # portal can sit releases behind the number in the player's face.
     if entry is not None:
         portal_v = entry["version"]
         toml_path = os.path.join(game_dir, "toml_phases", "7_final_game.toml")
@@ -10178,10 +9900,9 @@ def release_mode(slug):
     print(f"  {npass}/{len(judged)} release checks pass")
 
     # ── printed, never judged ───────────────────────────────────────────────
-    # ⚠️ The archive is NOT required to be byte-identical to output/. Measured
-    # 2026-08-28: vesper's differ (bfd9f9bd… vs b038eb4c…) and vesper is the one
-    # game in the repo whose version triangle is whole. A check here would fail the
-    # only correct case, which is how R4, study 6's anchoring check and P0 each ended.
+    # ⚠️ The archive is NOT required to be byte-identical to output/. An archive and
+    # output/ legitimately differ after a rebuild; a check here would fail the correct
+    # case, which is how R4, study 6's anchoring check and P0 each ended.
     if entry is not None and entry.get("version") and text is not None:
         arch = os.path.join(game_dir, "releases", f"v{entry['version']}.html")
         if os.path.exists(arch):
@@ -10193,7 +9914,7 @@ def release_mode(slug):
             print(f"  note · output/ vs releases/v{entry['version']}.html — "
                   + ("identical" if a == b else f"differ ({a} vs {b})"))
             print("          (reported, never judged — output/ is legitimately rebuilt after "
-                  "archiving. A gate here would fail the one game whose versions agree)")
+                  "archiving, so a correct release can differ)")
     print()
     return 0 if judged and npass == len(judged) else 1
 
@@ -10322,17 +10043,15 @@ def saves_mode(slug, against=None, now_version=None):
     """Would this build break the saves of the last release?
 
     Exits NON-ZERO on any red, like `--release` — a save break reaches a player
-    who has already spent hours, which is the most expensive thing this repo can
-    ship. Additions are counted and never judged.
+    who has already spent hours, which is the most expensive thing a release can
+    break. Additions are counted and never judged.
 
         gates.py --saves <slug>                    output/ vs the newest archive
         gates.py --saves <slug> 0.1.3              output/ vs a chosen archive
         gates.py --saves <slug> 0.1.3 0.1.7        two archives, after the fact
 
-    The third form is not decoration. Run over this repo's own history it found
-    three passages dropped between vesper 0.1.3 and 0.1.7 and one between
-    forty_miles 0.1 and 0.1.2 — every save parked on those landed nowhere, and
-    nothing said so at the time.
+    The third form is not decoration: it reads history — two archives, after the
+    fact, show passages a save could be parked on that went missing.
     """
     import html as _html
 
@@ -10654,7 +10373,7 @@ def _template_field_gap(skill_dir):
     """{table -> fields} a reference TEACHES and no template SHOWS.
 
     ⚠️ THE ASYMMETRY IS DELIBERATE. A commented line in a REFERENCE is commentary — F5b's
-    own `# npc = "npc_ray"  ← WRONG` is an anti-example, and counting it reported the very
+    own `# npc = "npc_theo"  ← WRONG` is an anti-example, and counting it reported the very
     field the template had just been fixed to carry. A commented line in a TEMPLATE is
     still on the author's screen, so it counts as shown.
     """
@@ -10772,10 +10491,8 @@ def selfcheck_mode():
               f"{sum(len(v) for v in gap.values())} to eyeball")
         for tbl in sorted(gap):
             print(f"          · [{tbl}]  {', '.join(sorted(gap[tbl]))}")
-        print("          (THE CAUSE OF THREE BUGS IN ONE DAY, 2026-09-02: `npc` and")
-        print("           `substitution_only` written one table too high in two games, and")
-        print("           `role` declared by ONE game of 17. Each was documented correctly in")
-        print("           a reference and absent from the file an author actually fills in.")
+        print("          (a field a reference teaches and no template shows is a field")
+        print("           authors miss — the author fills in the template, not the reference.")
         print("           A LIST, never a score — a template is not meant to carry every")
         print("           advanced field, and this cannot tell an omission from a decision)")
         print(f"  {'─'*72}")
@@ -11052,7 +10769,7 @@ def ship_targets(paths, root=None, portal=None):
     """Which slugs must pass --ship for a commit touching these paths.
 
     Used by scripts/hooks/pre-commit. A slug is checked when its build or the portal
-    changes, it is a v2 game (it has v2_state.json — v1 games such as vesper are never
+    changes, it is a v2 game (it has v2_state.json — v1 games are never
     caught), and its portal entry is NOT `dev: true` (a test build passes through).
     """
     root = root or os.getcwd()
@@ -11338,7 +11055,7 @@ def main():
         print("           A row gated on a bar THIS SCENE moves is the machinery narrating its"
               " own progress bar; a row gated on something the player goes elsewhere and")
         print("           fixes is a real handle and worth speaking. Length: a refusal is a"
-              " 9-word UI label, a DOOR is in-fiction and vesper's run to 22)")
+              " 9-word UI label; a DOOR is in-fiction)")
 
     if badge_summary:
         print(f"  {'─'*72}")
@@ -11383,8 +11100,8 @@ def main():
               " rung may resolve to a toast — nobody needs a paragraph about stacking")
         print("           shelves. A rung aimed at a PERSON, or at her own body, may"
               " not. The repair is one follow-up node, and several gated choices can")
-        print("           share it: vesper's `activity_bar_work` routes four into one"
-              " banded `shift` node. ⚠️ Field range is 0-68%, so there is no threshold")
+        print("           share it — route them into one banded follow-up node."
+              " ⚠️ Field range is 0-68%, so there is no threshold")
         print("           to set here that would not fail a game for obeying the"
               " doctrine — which is why this cannot fail anything)")
 
@@ -11418,8 +11135,8 @@ def main():
         print("          (the-map.md R6-R6c — a LIST, never a score, and it cannot fail"
               " anything. A door is the threshold screen the player lands on INSTEAD of")
         print("           the room. It belongs to a PERSON'S HOME and it is rare: DoL"
-              " carries six named doors in a 15,626-passage game, while 63% of our own")
-        print("           rooms hold a scheduled person — presence is not the test. The"
+              " carries six named doors in a 15,626-passage game. Presence is not")
+        print("           the test. The"
               " field never SKIPS a threshold either (become-someone: 54 door screens,")
         print("           50 gating on occupancy, none skipped); what it makes"
               " conditional is whether the door exists at all. ⚠️ Declaring another door")
@@ -11438,8 +11155,8 @@ def main():
         print("           it is. An AMBIENT system is fed by nearly every room and so makes no"
               " room special; a SOURCED one is fed in one or two places and read all over —")
         print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
-              " 1 → 53. A game of only ambient systems ships a duty list, which is")
-        print("           night_desk. ⚠️ Declaring MORE labels makes this output worse, not"
+              " 1 → 53. A game of only ambient systems ships a duty list.")
+        print("           ⚠️ Declaring MORE labels makes this output worse, not"
               " better — that direction is the only reason it is checked at all)")
 
     if label_summary:
@@ -11448,9 +11165,8 @@ def main():
         for h in label_lints[:8]:
             print(f"          · {h}")
         if label_lints:
-            print("          (the-voice.md R1 — a NUMBER, not a bar. last_call, late_shifts and"
-                  " the_allowance sit at 0% noun-only, so it is reachable; any threshold in the"
-                  " 38%..84% gap would be invented. The register lives in the paragraph the click"
+            print("          (the-voice.md R1 — a NUMBER, not a bar; any threshold would be"
+                  " invented. The register lives in the paragraph the click"
                   " produces, never in the button)")
 
     if browse_summary:
@@ -11507,18 +11223,16 @@ def main():
     # `cum` 1,073, `blowjob` 492, `missionary` and `doggy` 778 between them. `let` is 779
     # — 0.69% of all labels.
     #
-    # Ours inverts it. `let` is the single commonest opening word in every choice this
-    # project has written, and it CONCENTRATES: 20% of the choices inside our sex loops
-    # begin `Let him…` against 5% everywhere else. Outside the bedroom she takes, asks,
-    # works and buys; inside it she almost only permits. The prose is explicit and the
-    # button is a permission, so the verb collapses at exactly the moment the content is
-    # supposed to be hottest.
+    # A game can invert it: when `Let him…` concentrates inside the sex loops, outside the
+    # bedroom she takes, asks, works and buys, and inside it she almost only permits. The
+    # prose is explicit and the button is a permission, so the verb collapses at exactly
+    # the moment the content is supposed to be hottest.
     #
     # ⚠️ REPORTED, NEVER JUDGED. `let` is a proxy for "this choice grants rather than does",
     # and a proxy is not a defect: a permission is the right button in a scene about being
-    # used, which several of these games are about. No threshold is defensible from one
-    # marker, and the field figure is a different measurement (their labels include
-    # navigation, ours are authored choice text). It prints the share and stops.
+    # used. No threshold is defensible from one marker, and the field figure is a
+    # different measurement (field labels include navigation; this reads authored choice
+    # text). It prints the share and stops.
     # computed here rather than reused from run_gates — different function, different scope
     _all_ch = [ch.get("text") for c in (game.get("canvases") or [])
                for n in (c.get("nodes") or [])
@@ -11527,7 +11241,7 @@ def main():
     permit = [t for t in _all_ch if re.match(r"^\s*let\b", t, re.I)]
     if _all_ch:
         loop_ids = {c.get("id") for c in (game.get("canvases") or [])
-                    if re.search(r"loop|sex|fuck|serve|climax|cell_use", str(c.get("id") or ""))}
+                    if re.search(r"loop|sex|fuck|serve|climax", str(c.get("id") or ""))}
         loop_ch = [ch.get("text") for c in (game.get("canvases") or []) if c.get("id") in loop_ids
                    for n in (c.get("nodes") or [])
                    for ch in ((n.get("exit_block") or {}).get("choices") or [])
@@ -11551,9 +11265,8 @@ def main():
         for h in act_lints[:10]:
             print(f"          · {h}")
         print("          (register.md — the beat the player is IN while it is happening. `explicit"
-              " floor` is a game-wide share and a game can clear it with every act node warm: the"
-              " measured failure sealed 95% of its crude prose in one room and scored ZERO on all"
-              " nine of its repeatable loops. 3 is the count `explicit floor` needs to call a beat"
+              " floor` is a game-wide share and a game can clear it with every act node warm."
+              " 3 is the count `explicit floor` needs to call a beat"
               " explicit at all, not a new threshold)")
 
     if rung_summary:
@@ -11562,8 +11275,7 @@ def main():
         for h in rung_lints[:8]:
             print(f"          · {h}")
         print("          (the-meters.md W4 — a NUMBER, never a bar. 15/35/55/75 is the DoL"
-              " seed's spacing, and ALL 16 declared tiers across five v2 games put their"
-              " lowest rung at exactly 15, because it shipped as a copyable example. The"
+              " seed's spacing, one game's, not a ladder to copy. The"
               " field runs 8-17 rungs, lowest at 5)")
 
     if cast_summary:
@@ -11582,7 +11294,7 @@ def main():
             print(f"          · {h}")
         print("          (the-meters.md W5 — HEURISTIC: a player trait starting at 50+ whose"
               " effects mostly fall, declared needs excluded. One field game in 25 ships one"
-              " that gates; four of our five ship one and three gate almost nothing)")
+              " that gates)")
 
     if shape_lints or shape_summary:
         print(f"  {'─'*72}")
@@ -11604,14 +11316,14 @@ def main():
             print(f"          · {h}")
         print("          (register.md — a LIST, never a score. Measured against the 25-game"
               " field's own vocabulary (scripts/genre_words.txt, words used by 4+ games).")
-        print("           The field runs locale-locked nouns at 0.8 per 10k words; our v2 games"
-              " run 9-96. Invented words are safe — the fiction builds them; real regional")
+        print("           The field runs locale-locked nouns at 0.8 per 10k words."
+              " Invented words are safe — the fiction builds them; real regional")
         print("           objects are the trap, because they look defined and are not. Gloss it"
               " in the sentence that first uses it, or use the plain word.")
         print("           [ambiguous] and [false friend] rows come from a CURATED list, not the"
               " corpus — a false friend is by definition a common word, so genre_words.txt")
         print("           is structurally blind to them. Expect false positives and read them:"
-              " vesper's `torch` is a CUTTING torch, which is correct everywhere)")
+              " a `torch` that is a cutting torch is correct everywhere)")
 
     if gloss_lints:
         print(f"  {'─'*72}")
@@ -11623,9 +11335,8 @@ def main():
             print(f"          · … and {len(gloss_lints)-10} more")
         print("          (register.md 'The load rules' L1 — a LIST, never a score. A fact followed"
               " by an explanation of the fact, welded into one sentence.")
-        print("           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer). The nine"
-              " games this skill authored run 1.34-2.71 — the two")
-        print("           distributions do not touch. Delete the clause or make it its own"
+        print("           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer).")
+        print("           Delete the clause or make it its own"
               " sentence; deletion is the default, because the fact was")
         print("           usually already doing the work. A dash or a bracket is NOT the fix —"
               " the joint survives the swap)")
@@ -11642,7 +11353,7 @@ def main():
               " reference only: a FIGURE and a LIST, never a score, and not a rule."
               f" Field, NARRATION ONLY, 25 games: p50 {FIELD_NEGATION_P50}%,")
         print(f"           p90 {FIELD_NEGATION_P90}%, MAX {FIELD_NEGATION_MAX}%"
-              " (become-taxi-driver). Ours run 19.0-42.1%, 14 of 16 over that max. Behind almost"
+              " (become-taxi-driver). Behind almost"
               " every negation is")
         print("           a positive fact that is shorter AND more specific — 'it takes you ninety'"
               " beats 'you have never once done it in forty-five'.")
@@ -11662,8 +11373,8 @@ def main():
         print("          (register.md 'The load rules' L3 — a LIST, never a score. REPEATABLE"
               " canvases only: the same sentence on a one-time canvas is")
         print("           where the doctrine says to PUT it. Field over 27 games: p50 1.64%,"
-              " p90 3.94%, MAX 5.41% (free-cities); eight of our nine are")
-        print("           above that max. The marker set is temporal (used to / ago / since /"
+              " p90 3.94%, MAX 5.41% (free-cities).")
+        print("           The marker set is temporal (used to / ago / since /"
               " has been / N days-weeks-months-years) and it OVER-COUNTS a")
         print("           sentence that merely mentions a duration — read the lines, not the"
               " number. Clock time is a different rule and belongs to")
@@ -11766,12 +11477,10 @@ def main():
         print("          (the-first-hour.md F10 — a LIST, never a score. `npcs[].role` is the"
               " 1-3 word label the engine prints under the name in EVERY dialogue box;"
               " `relationship` is the cast page's sentence and does NOT render there. Absent"
-              " is legal and renders no line. Measured 2026-09-02: 6 of 88 characters across"
-              " 17 games declare one, and all six are mrs_vance — the field was invisible,"
-              " not declined, because templates/board.toml did not carry it). READ THE"
+              " is legal and renders no line. READ THE"
               " LABELS: each must answer WHO THIS PERSON IS. `professor` and `mother`"
-              " pass; `the eight o'clock` names an hour and `owns the house` names a"
-              " fact, and this game shipped both before a human read them back)")
+              " pass; `the nine-thirty` names an hour and `pays the rent` names a"
+              " fact)")
 
     if role_summary:
         print(f"  {'─'*72}")
@@ -11781,8 +11490,8 @@ def main():
         print("          (the-first-hour.md F10 — a LIST, never a score. F7 puts the role on"
               " screen at the meeting; this asks whether it is still there on the fortieth")
         print("           visit. Anchors come from each character's OWN relationship line, not"
-              " from a kin list — a fixed list was tried and fired wrongly on ten of")
-        print("           last_call's meetings because that cast is not family. Do not swap the"
+              " from a kin list — a fixed kin list fires wrongly on any cast that")
+        print("           is not family. Do not swap the"
               " NAME out for the relation: destroyer is the only game of 26 that does, and it")
         print("           has one of each relation. Both, at the point of use)")
 
@@ -11795,9 +11504,8 @@ def main():
             print(f"          · … and {len(place_lints)-14} more")
         print("          (the-first-hour.md F9 — a LIST, never a score. The description is"
               " the only surface a player sees on EVERY visit, so it is where a place says")
-        print("           what it is. Read whether each one names the FUNCTION — the measured"
-              " failure ran long, specific and well written and never said what the business")
-        print("           was. This replaced a gate requiring a first-visit canvas: that"
+        print("           what it is. Read whether each one names the FUNCTION.")
+        print("           This replaced a gate requiring a first-visit canvas: that"
               " device is 1 of 26 games (DoL 258 branches; 18 games have none))")
 
     if clock_summary:
@@ -11809,10 +11517,10 @@ def main():
             print(f"          · … and {len(clock_lints)-16} more")
         print("          (the-clock.md C2 — a LIST, never a score. Read each line at the LAST"
               " minute of the window beside it: a RULE is still true there and is correct")
-        print("           work (\"Nobody comes in before eleven in February\"); a READING is"
-              " not (\"Shutter up at eight\", true for 1 minute of 300). The turn is")
+        print("           work (\"Nobody comes in before eleven on a Monday\"); a READING is"
+              " not (\"Doors open at nine\", true for 1 minute of 300). The turn is")
         print("           grammatical — the reading becomes a rule and the fact survives:"
-              " \"The shutter goes up at eight\")")
+              " \"The doors open at nine\")")
 
     if tcost_summary:
         print(f"  {'─'*72}")
@@ -11836,7 +11544,7 @@ def main():
         print("          (the-economy.md R7 — a LIST, never a score. The lines listed are the"
               " ones NOT in the game's main currency. Field: one notation carries a median 92%"
               " of a game's money references, and a money word carries an exact amount 20% of"
-              " the time against our 51%)")
+              " the time)")
 
     if price_summary:
         print(f"  {'─'*72}")
@@ -11859,18 +11567,16 @@ def main():
             print(f"          · … and {len(chan_lints)-10} more")
         print("          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency"
               " means content exists that money opens; a `costs` block means a thing can be"
-              " bought. Gate 16 passes on either, deliberately — but seven of our ten"
-              " rent-enabled games have ZERO money conditions and pass on prices alone, against"
-              " a field median of 67.3 per 1,000 passages where every sandbox has some)")
+              " bought. Gate 16 passes on either, deliberately — but the field runs a median"
+              " 67.3 money conditions per 1,000 passages and every sandbox has some)")
 
     if oblig_summary:
         print(f"  {'─'*72}")
         print(f"  lint · the obligation against the week — {oblig_summary}")
         for h in oblig_lints[:10]:
             print(f"          · {h}")
-        print("          (the-economy.md R3 — a FIGURE, never a score. `forty_miles` runs 70% and"
-              " `back_home` 25%, so any threshold between them fails a game for obeying the"
-              " doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
+        print("          (the-economy.md R3 — a FIGURE, never a score: any threshold would"
+              " fail a game for obeying the doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
 
     if coll_summary:
         print(f"  {'─'*72}")
@@ -11889,8 +11595,8 @@ def main():
         if len(dep_lints) > 10:
             print(f"          · … and {len(dep_lints)-10} more")
         print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
-              " defect; a game made only of pure sinks is. mrs_vance deposits on 46 of 47"
-              " and forty_miles on 0 of 10, so any threshold between them is invented)")
+              " defect; a game made only of pure sinks is. No threshold has been measured,"
+              " so none is set)")
 
     if grow_summary:
         print(f"  {'─'*72}")
@@ -11900,8 +11606,7 @@ def main():
         if len(grow_lints) > 10:
             print(f"          · … and {len(grow_lints)-10} more")
         print("          (PRD WS4 — a LIST, never a score. More to do at the same step is"
-              " fine; a release that only adds repeatables is the shape The Balance grew in:"
-              " 39 new, no new step, and nothing saw it)")
+              " fine; a release that only adds repeatables has moved nobody on)")
 
     if reset_summary:
         print(f"  {'─'*72}")
@@ -11963,8 +11668,8 @@ def main():
         for h in vol_lints[:10]:
             print(f"          · {h}")
         print("          (a NUMBER, never a score. Every other heat check here is a share with"
-              " a hand-picked denominator, which is how `the_route` is 46/46 green with 11"
-              " explicit screens. Reads the BUILT html on the field's own word list; a rate"
+              " a hand-picked denominator, so a game can pass every one of them nearly"
+              " empty. Reads the BUILT html on the field's own word list; a rate"
               " over word count is the only figure comparable across the two bases)")
 
     if world_lints:
@@ -11990,8 +11695,8 @@ def main():
               " is around is a legitimate shape. A surface ON that person wants the face, and when"
               " the face is already taken by a higher-priority canvas the surface is a NODE INSIDE"
               " that canvas, not a second one beside it — a node has no priority to lose (F5b)."
-              " Corpus: 21 hits in 5 of 26 games, and everything outside orientation is a walk-in"
-              " or a windowed scene, which is why this cannot fail anything)")
+              " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
+              " fail anything)")
 
     if tok_summary:
         print(f"  {'─'*72}")
