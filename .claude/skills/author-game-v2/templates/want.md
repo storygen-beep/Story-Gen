@@ -202,9 +202,11 @@ A character with no line here has no reason to exist: cut them, or write it.
 
 **The companion:** <who leads her, or whom she leads — the friend one step ahead, or one step behind>
 
+**The pressure-man:** <optional — the man whose demand drives her choices; the price of her no, and her way out>
+
 **Her face:** <one performer or one look, kept across the game — players notice when it changes>
 
-Record both as `want.companion` and `want.face`.
+Record them as `want.companion`, `want.pressure` and `want.face` (`the-want.md` §6).
 
 ## 7. Register
 

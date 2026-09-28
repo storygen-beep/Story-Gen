@@ -598,8 +598,22 @@ Players praise Course of Temptation as *"very consent base[d]"* and fault it bec
 really bad can ever happen"*, so hard content is wanted. What they punish is a way out that does not
 work: *"you're FORCED to be submissive regardless"*.
 
-**In this engine:** gate it on a setting or a start-choice flag (`the-want.md` §1), say what is
-coming in the choice text, and make the way out a real place with `rejection_node` (`engine.md` §36).
+**In this engine:** gate it on a start-choice flag (R5b.4, `the-want.md` §1), say what is coming in
+the choice text, and make the way out a real place with `rejection_node` (`engine.md` §36).
+
+**R5b.4 · A content toggle is a start choice, and one kink must not crowd out the rest.** Added
+2026-09-28 (IC13). The engine has no settings screen, so a toggle is a flag set on the start screen —
+one per theme or per character — and every canvas of that kind reads it (the pregnancy choice in
+`the-meters.md` W7b is one). Course of Temptation carries twelve kinds, each *No Warning · Aware ·
+Warning · Block · Boost*; In Her Own Hands asks for a Red / Yellow / Green list of fifteen. A
+passage-name recount finds a toggle in 15 of 26 top games (numbers only). Declare each in
+`want.toggles[]` and put its flag in `want.player.start_choice.flags`, so `the start choice is read`
+checks it; `lint · toggles declared` lists what reads each one.
+- **One kink must not crowd out the rest.** Player evidence, second-hand (Round 2 quit reasons, F95):
+  Cupid's Way is faulted because *"the corruption goes as far as 'white girl loves BBC' and that's
+  literally it"*, and two failing games draw the same complaint (numbers only). A toggle that turns
+  off the one kink a game rests on leaves nothing; spread the heat across kinds so each can be
+  switched off and the game still stands.
 
 **R5c · A locked door says why.** Added 2026-08-24. R5b.2 above reaches for
 `locked_text_threshold` and `rejection_node` and stops one step short of saying what the row itself
@@ -912,6 +926,22 @@ a 785-passage game. A chain is A1's numbered ladder, ending by converting into a
 the cheaper half — its unit is a *setup*, not an act, and A9 already says the setups span the
 whole meter range. When a place is worth returning to and you cannot say why, it is usually
 missing its pool.
+
+**R7c · Four scene kinds the field keeps.** Added 2026-09-28 (IC13). A menu to pick from, never a
+quota and never a gate. Field: a passage-name recount of 26 of the mopoga top 30 finds dates in 20,
+flirting in 12, gifts in 9 and danger in 12 (numbers only).
+- **A date.** He takes her somewhere, and the outing pays the relationship meter. Course of
+  Temptation [EventFirstDateMutuallyGood]: *"This was a great first date!"* In Her Own Hands
+  [JamesDate1] makes the getting-ready its own screen.
+- **A tease that pays off inside the arc** (`the-arc.md` A13). The tease is a step, and a later step
+  spends it. In Her Own Hands' Shaun: [LRSh_Sweatpants_Flirt1] *"You don't get to touch . . . yet."*
+  counts `$xr.sh.swt`, and at 6 the chain turns into the standing [LRSh_Sweatpants_Flirt5]. Cupid's
+  Way's Aiden: [aiden msg1] *"you here to tease me again?"*
+- **A gift.** An item given or received that moves a meter by whether he likes it. Course of
+  Temptation [GiveGiftResult]; In Her Own Hands [BobbyBRGift1]. Built with items and `itemEffects`.
+- **Danger.** A random-trigger canvas with a threat and a written way out, and R5b.3 applies: warned,
+  avoidable or opt-in. Shady Deals [Gangs Attack] (fight, seduce, or lose); Course of Temptation
+  [EventCampusSneakCaughtAssault] *"Run while you can"*.
 
 **R8 · A person owns a corner of the world.** Added 2026-08-24 from
 Section G.

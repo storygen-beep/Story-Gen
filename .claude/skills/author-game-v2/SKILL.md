@@ -223,7 +223,11 @@ not judged · 2 too few to judge · 4 n/a`; only n/a leaves the denominator. A s
 100%) passing on under 5 cases is **too few to judge**; an all-or-nothing gate passes on 3/3; a
 FAIL stays a FAIL. **Parked**: `games/<slug>/parked/**/*.toml`, always read, plus the ledger's
 `parked.files`, is merged into a copy and re-gated; a gate it would judge counts as not passing.
-A fragment that will not parse is printed. Under `--ship` both are red.
+A fragment that will not parse is printed. Under `--ship` both are red. **Switched off**
+(`is_active = false`, not a substitution target — `engine.md` §46.3) stays in the TOML, so the gates
+also run on what actually plays: a gate that passes only with those canvases counted is a FAIL marked
+**[off]**, a gate n/a only because they are off is *switched off, not judged*, and the tally line says
+how many fails are [off].
 
 | gate | what it means | where it is argued |
 |---|---|---|
@@ -339,7 +343,7 @@ behind** (how many surfaces she pays for deposit anything; a pure sink is not a 
 only of pure sinks is) · **repeatables without a step** (repeatables added since the last
 `releases[]` entry when no declared ladder step was added — a LIST, never a score; a first release
 prints its baseline) · **a flag that never resets** (a `*_today`/`*_week` flag, or one in
-`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **toggles declared** (each `want.toggles` flag and how many canvases read it; n/a when none is declared; a LIST — `the-surfaces.md` R5b.4) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient

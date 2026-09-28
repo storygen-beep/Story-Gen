@@ -1562,6 +1562,10 @@ pluralising a currency.
 
 ## 34. `[ui.cast_page]` — the who-is-who page, and it authors nothing
 
+**On by default in `templates/board.toml`** (IC13). All four passing games carry one — Course of
+Temptation [Social], In Her Own Hands [Characters], Shady Deals [Contacts], Cupid's Way
+[Relationships] — and it lists only people she has met, so it keeps F8.
+
 The player's place to look somebody up. Measured across the 27-game mopoga field: **18 of 27**
 shipped sandboxes carry a page like this and **7 of the 8** parsed top-ten do — the lone exception,
 degrees-of-lewdity, carries the same load inside its prose by swapping description for name on the
@@ -1696,6 +1700,19 @@ and the name above it. What we do not ship is the third: the renderer emits one 
 rediscover it as a gap; build it when a game asks for it.
 
 ---
+
+## 34b. `[player_portrait]` — her face in the sidebar
+
+A top-level table (`template_import.py:864-880`, parsed at `:2818`; `enabled` defaults to true when
+the block is present). Keys: `default_image`, the undress states `naked_image` / `topless_image` /
+`bottomless_image` / `underwear_image`, `pregnancy_trait` with `pregnancy_suffix` (default `Preg`), and
+`[[player_portrait.outfits]]` rules (`image`, `when` on worn type, corruption or a flag). It renders
+as the sidebar widget `<<playerPortrait>>` (`v2.py:17091`), resolved by `setup.getPlayerPortrait`
+(`v2.py:1767`).
+
+⚠️ **It renders only with `clothing_enabled = true`.** `getPlayerPortrait` is emitted inside the
+clothing block (`v2.py:1579`), an engine limit. `templates/board.toml` sets both. One performer or one
+look, kept across the game: `the-want.md` §6.
 
 ## 35. `block_pool` — the variant pool, and the field's main mechanism for a re-read surface
 
