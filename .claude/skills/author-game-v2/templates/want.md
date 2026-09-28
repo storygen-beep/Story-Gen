@@ -6,29 +6,10 @@
 
 ---
 
-## 0. The fantasy — what the player comes here to feel
+## 0. The fantasy — on the idea page
 
-**Which shape?** Pick one, or name a mix. Each has its own engine:
-
-- [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
-- [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, a clock)*
-- [ ] **Taboo at home** — the house, and who is in the next room
-- [ ] **Mystery** — she investigates, and something works on her while she does *(secrets she buys)*
-
-**In one sentence, what does the player come here to feel?** <…>
-
-**The model to beat:** <one named game> — **what ours does better:** <one line>
-
-**Which moments does this game promise?** Tick the kinds it will keep delivering:
-
-- [ ] her firsts
-- [ ] being seen
-- [ ] her body as the price for something she needs
-- [ ] taboo at home
-- [ ] a consequence she has to live with
-
-Record these as `want.fantasy_shape`, `want.model_to_beat` and `want.moment_kinds`. Doctrine:
-`references/the-want.md` §0.
+The fantasy, the model to beat, the promise and the moment kinds are written on the next page,
+`templates/idea.md`, once this one is done. Doctrine: `references/the-want.md` §0.
 
 ## 1. Who the player is — answered BEFORE she is described
 
@@ -116,15 +97,6 @@ three of the words `gates.py --words` flags as absent from all 27 field games. T
   place she is actually standing in
 - ❌ "get revenge on X" — that completes, and then there is nothing left to want
 
-**The promise — what keeps pulling the player forward:**
-
-- **The goal:** <a named goal> **by** <a date or a moment>
-- **The mystery:** <what she does not know yet> — **it pays out** <roughly when>
-- **The rival:** <who wants the same thing, or stands in her way>
-
-The hold may go quiet; **the goal or the mystery stays alive**, and the guidance page carries it. A goal
-announced and then forgotten is a named player complaint. Record it as `want.promise`.
-
 **Where the hold stops being the reason:** <the moment she still does it and the reason has changed —
 §4's Transformation charge, stated as a moment>
 
@@ -200,13 +172,7 @@ A character with no line here has no reason to exist: cut them, or write it.
 | `npc_<id>` | |
 | `npc_<id>` | |
 
-**The companion:** <who leads her, or whom she leads — the friend one step ahead, or one step behind>
-
-**The pressure-man:** <optional — the man whose demand drives her choices; the price of her no, and her way out>
-
-**Her face:** <one performer or one look, kept across the game — players notice when it changes>
-
-Record them as `want.companion`, `want.pressure` and `want.face` (`the-want.md` §6).
+The companion, the pressure-man and her face are on the idea page (`templates/idea.md`).
 
 ## 7. Register
 
@@ -246,10 +212,10 @@ Record them as `want.companion`, `want.pressure` and `want.face` (`the-want.md` 
    already own. Catching one after the prose exists means renaming things.
    `references/the-want.md`, "The test before you leave this file".
 
-6. **What is the promise, and which release pays the mystery's next clue?** And which moment kinds
-   does this game keep delivering? (§0, §2)
+6. **Is the idea page next?** The fantasy, the promise and the people who carry it are written
+   there (`templates/idea.md`), once this page is done.
 
 ---
 
 **Then:** create `games/<slug>/v2_state.json` with `phase = "want"` per `references/state.md`,
-and move to `templates/board.toml`.
+and move to `templates/idea.md`.

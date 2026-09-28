@@ -20,7 +20,7 @@ that exists, a character who does not, or a mechanic the engine cannot run.
 So the pack IS the Pitcher's world. Everything it may name is in here and
 nothing else is.
 
-A pitch is HER MOMENT, in eight lines (`the-release.md`, "Her moment"), and each
+A pitch is HER MOMENT, in eight lines (`the-release.md`, "Her moment — eight lines"), and each
 of the three Pitchers is given a different moment kind. So the pack opens with
 what a moment needs, in this order (PRD_IDEAS_AND_CRAFT IC2):
 
@@ -817,14 +817,16 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     print(f"  narration        {(game.get('settings') or {}).get('narration_person') or '?'} person")
     print(f"  built            {len(model)} canvases · {len(locs)} places · {len(npcs)} people")
     print()
-    print("  A pitch is her moment (the-release.md, \"Her moment\"). Where and who come from")
+    print("  A pitch is her moment (the-release.md, \"Her moment — eight lines\"). Where and who come from")
     print("  the lists below. Nothing here is a score; every figure is a count, or the")
     print("  author's own declared number. Judge nothing.")
 
     # ── her moment: the promise ─────────────────────────────────────────────
-    _rule("THE PROMISE — the fantasy this game already made (want, the-want.md §0)")
+    _rule("THE PROMISE — the fantasy this game already made (want; the idea page, the-want.md §0, §6)")
     for key, label in (("fantasy_shape", "fantasy shape"), ("model_to_beat", "model to beat"),
-                       ("promise", "the promise"), ("moment_kinds", "moment kinds promised")):
+                       ("promise", "the promise"), ("moment_kinds", "moment kinds promised"),
+                       ("face", "her face"), ("companion", "the companion"),
+                       ("pressure", "the pressure-man")):
         val = want.get(key)
         if val in (None, "", [], {}):
             print(f"  {label:<22}not declared")

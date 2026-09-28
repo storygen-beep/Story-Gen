@@ -85,7 +85,7 @@ report different numbers for the same scene.
 **A scene sheet with a named person carries three rows: want · next step · hook** (`register.md`,
 "What a scene contains").
 
-**This is the rule the other nine are special cases of.** A number written on a sheet is a
+**This is the rule the others are special cases of.** A number written on a sheet is a
 **promise**. It becomes a measurement when an instrument produces it and not before.
 
 ⚠️ **There is no `--sheets` mode.** `gates.py --beat <path>` will measure loose prose, and nothing
@@ -357,3 +357,8 @@ count, the counted words in it, and which ceiling it sits at.
 > gate's own word list. `hard` and `wet` are not on it — it is anatomy and acts, not states. Two of
 > them were also **coy**: one said *"what looking at you has done to him"*, which gestures at his
 > cock rather than saying it. The word list caught a craft failure, not an arithmetic one.
+
+---
+
+**Then:** when every sheet is [READY] and LO has signed it, set `phase = "sheets"` and move to
+`references/the-release.md`, § first release.

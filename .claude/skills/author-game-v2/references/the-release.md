@@ -150,7 +150,7 @@ the order and supply small ideas; they do not set the premise** (Great Games Stu
 
 | step | command | what it can see |
 |---|---|---|
-| 5 | `gates.py <slug>` | the source — the gates, then 55 lints |
+| 5 | `gates.py <slug>` | the source — the gates, then the lints (`--selfcheck` prints both counts) |
 | 5b | `gates.py --saves <slug>` | the difference between **two** releases — what a rename stranded |
 | 6 | `gates.py --release <slug>` | the **built artefact** — dev mode, missing media, three version numbers |
 | 8 | `listen_mopoga.py <slug> --since <date>` | what players said on mopoga since the release — sorted by likes, never scored |
