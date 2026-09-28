@@ -111,7 +111,7 @@ A map can be right room-by-room and wrong as a whole. Only the way *in* makes it
 each is gated on (`the-map.md` R6). It is a row rather than an afterthought because the answer is
 usually **no**: a door is a handful per game and it belongs to a person's home, while a shared room
 takes occupancy-gated rows instead (R6c). A sheet that never asks the question gets the default by
-accident, which is how Mark's Room shipped a threshold with nothing behind it.
+accident, which is how a person's room shipped a threshold with nothing behind it.
 
 **And every row says whether it lands on a SCREEN** — added 2026-09-02, `the-surfaces.md` R9. A row
 that changes her and shows nothing resolves the act into a 2-second toast; the sheet is where that is
@@ -148,8 +148,8 @@ that moving the number means changing the design. A budget written afterwards is
 
 Place × hours × days. Not a list of places.
 
-> **The incident, three parts.** Del was declared 22:00–02:00 at the desk on one sheet and
-> 22:00–02:00 in the office on another — he cannot be in both. Marek was declared in the corridor
+> **The incident, three parts.** One person was declared 22:00–02:00 at the desk on one sheet and
+> 22:00–02:00 in the office on another — he cannot be in both. Another was declared in the corridor
 > 00:20–01:30 and in the bathroom 00:00–01:00, forty minutes of overlap. Both are two sheets each
 > correct about one room, with **nothing in the format reading across them**.
 >

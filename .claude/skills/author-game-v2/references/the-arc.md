@@ -20,7 +20,7 @@ and both were wrong.**
 
 - **It is not about how much sex a game has.** Degrees of Lewdity (numbers only), the game every
   founding commitment was measured on, has the **lowest** explicit share in the 25-game field — 4.8% of
-  passages against our median 9.3%. The field's own spread is 5%–62%. There is no house ratio,
+  passages. The field's own spread is 5%–62%. There is no house ratio,
   and a volume target is exactly what SKILL.md's "ask what a tired author would build" rules out.
   ⚠️ **Volume has its own instrument and it is deliberately not a gate** — `lint_explicit_volume`
   prints the count and the rate against the field on two bases and judges neither. **This file is
@@ -54,9 +54,9 @@ downstream of that declaration — swap them if the game declared otherwise.**
 
 ⚠️ **How to read the evidence blocks.** Every rule states its **shape** first, as a set to
 choose from. The quotation under it is fenced as EVIDENCE and names the game it came from.
-This is not decoration: `templates/board.toml` shipped `airer` and `£5` and put five games in a
-dialect the genre does not use, and its example rung of 15 was copied by all sixteen declared
-tiers across five games. **Every word in an example is being taught too.** Take the mechanism.
+This is not decoration: `templates/board.toml` shipped `airer` and `£5` and put the games built
+from it in a dialect the genre does not use, and its example rung of 15 was copied into their
+declared tiers. **Every word in an example is being taught too.** Take the mechanism.
 Leave the furniture.
 
 ---
@@ -199,8 +199,7 @@ the page instead of across the menu.**
 
 ⚠️ **The locked-door text here is the `a locked door says why` gate's subject** (`engine.md`
 §15, §36 · `the-surfaces.md` R5c). Course of Temptation and Cupid's Way (*"Drive with him
-$corruption/20"*) print the bar and the number. Ours run 100%
-mute where they show a locked row at all.
+$corruption/20"*) print the bar and the number.
 
 ### A4b · "The number" is wider than a meter — a practised skill and a bought preparation both count
 
@@ -233,9 +232,9 @@ work than a shop that sells a meter point.
 ⚠️ **A skill ladder that feeds nothing is a chore.** A practised skill is only worth the time
 because other arcs read the number. Build the reader first.
 
-### A4c · The field's meters are READ, ours are WRITTEN — and the gate cannot see the difference
+### A4c · The field's meters are READ far more often than they are WRITTEN — and the gate cannot see the difference
 
-The same seam from the outside. Measured on each side's own instrument (the first three rows
+The same seam from the outside. Counted as textual occurrences in built HTML (the first three rows
 are failing games, numbers only; Shady Deals counted on its passage source):
 
 | | conditions reading it | sites writing it |
@@ -244,18 +243,6 @@ are failing games, numbers only; Shady Deals counted on its passage source):
 | `new-life-project` `$corrupt` | **247** | 2 |
 | `new-life-project` `$inhib` (inverted — LOW opens things) | **105** | 2 |
 | `shady-deals` `$p_depravity` | **244** | 2 |
-| `forty_miles` arousal | **0** | 52 |
-| `steam` arousal | 2 | 55 |
-| `back_home` arousal | 2 | 47 |
-| `mrs_vance` want | 10 | 65 |
-| `the_season` arousal | 6 | 24 |
-| best of ours — `off_season` ease | 27 | 11 |
-
-⚠️ **The two instruments are NOT the same and the magnitudes do not compare.** The field figures
-count textual occurrences in built HTML, where a single centralised setter widget called from
-everywhere reads as "4 writes"; ours count authored condition objects against authored effect
-objects in the TOML. **What survives the difference is the direction**, and one row survives it
-outright: `forty_miles` writes arousal 52 times and reads it zero.
 
 **Why the scoreboard is quiet about this.** Gate `a meter is read` asks, per meter, whether it is
 read *at all* — it fails only a meter that is read zero times. It finds **dead**
@@ -532,14 +519,12 @@ in this genre, that is the measurement.
 This is also the cheapest content in the file. An abort beat's median is **23 words**; A10's
 aftermath median is 32. The unit of work is a sentence and a half.
 
-⚠️ **We already do this in one game, and nothing taught it.** `commuter` writes a stop beat on
-all seven of its loops, at 27-59 words (median 29). The longest:
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` [EventWalkPartnerQuickieAbort], a
+> quickie she stops once it has started. The partner gets the lines: *"Not feeling it?"* … *asks,
+> looking confused. "What's wrong?"* — her answer is *"Just... maybe now isn't the time."* — and
+> the beat ends on him: *"I guess I'll see you later."*
 
-> *"You stop. He does not argue about it and he does not ask why, and he puts himself away and
-> sits back down in the chair like the rest of it did not happen."*
-
-That is the rule executed correctly — **the beat is about his reaction, not her exit.** One game
-of eleven. Every other v2 game routes its `Stop.` choice at a reset node and prints nothing.
+That is the rule executed correctly — **the beat is about his reaction, not her exit.**
 
 ---
 
@@ -657,8 +642,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 
 **Nothing ships with this file, and that is deliberate.**
 
-Two precedents rule it out. **P0** — never build a check for a state nothing is in: every existing
-game would fail almost every rule here on the day it landed, which measures the doctrine's age
+Two precedents rule it out. **P0** — never build a check for a state nothing is in: it would measure the doctrine's age
 and not the games. And **"a check that fails a game for obeying the doctrine is a bug in the
 check"** — until today nothing in this skill asked for any of this, so every red would be
 retrospective.

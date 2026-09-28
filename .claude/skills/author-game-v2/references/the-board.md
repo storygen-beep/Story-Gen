@@ -3,8 +3,7 @@
 The world comes before the first story, and it comes **wide but paid for**.
 
 > Measured, and it killed the obvious rule: the earliest retrievable build of the reference
-> game already had **25 locations** — the same width as a game of ours that reads as empty.
-> Width was never the difference. **Fill** was — and fill is a *distribution*, not a floor:
+> game already had **25 locations**. Width was never the difference. **Fill** was — and fill is a *distribution*, not a floor:
 > 116,540 words over 25 locations, **mean 4,661, median 3,154**, one anchor location holding
 > **30%** of all location prose, tailing down to a 302-word bus station. By 2026 the mean had
 > reached 24,564 while locations only went 25 → 61.
@@ -99,11 +98,10 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
 - **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
 - **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**
 
-> ⚠️ **`fill` must be a plan, and gate 1 can tell when it is not.** Measured across all three v2
-> games: every declared figure was an exact post-hoc word count — 9,607 / 4,936 / 10,295, not one
-> of twenty-four round to the nearest hundred — so delivered-vs-declared matched 8/8 in all three
-> and proved nothing. **A budget that cannot be wrong is not a budget.** Gate 1 now refuses to
-> credit a declaration that is mostly non-round and falls back to the global backstop instead.
+> ⚠️ **`fill` must be a plan, and gate 1 can tell when it is not.** A figure copied from the
+> delivered word count matches delivered-vs-declared by construction and proves nothing. **A budget
+> that cannot be wrong is not a budget.** Gate 1 refuses to credit a declaration that is mostly
+> non-round and falls back to the global backstop instead.
 
 **A declared location with nothing placed in it is debt, not a location.** Gate 1 checks each
 location against **its own declared `fill`**; the global mean/median floors are only a backstop for
@@ -117,11 +115,6 @@ reach is not a centre.
 
 The anchor rule is a **ratio**, so it tightens every time any other room grows. An anchor left
 alone while the world fills around it will fail *even though nothing about it got worse*.
-
-Measured on a real build: the front room sat at 4,020 words while six other rooms were written,
-and its share fell **53% → 46% → 40% → 39% → 35%** without a word being removed. Held there, it
-would have crossed below 25% within a single further increment — the game going 9/10 → 8/10
-while getting objectively better.
 
 **Budget the anchor against the FINISHED total, not the current one** — work out its share of the
 total you are planning for and put that share into every increment, rather than topping it up at
@@ -155,10 +148,6 @@ activity   = "working the presses"
 
 **Every character needs at least one standing surface and at least one schedule row.** Gate 6
 fails otherwise.
-
-> Measured anti-pattern: a character referenced 88 times in a game's source — more than any
-> other except the lead — carrying zero bound canvases and zero schedule rows. Heavily
-> written, reachable nowhere.
 
 **Overnight windows are supported — but ONLY on a row that covers every weekday.** The wrap and
 the weekday are two separate checks, and the weekday one runs first against **today**:
@@ -229,8 +218,7 @@ writers.** Four rules from its own Writer's Guide that this skill did not hold:
 > *"It is essential you include all three checks when the player speaks up."*
 
 Meek / bratty / neutral, every time she speaks. This is the mechanism behind the field's largest
-love-reason — **freedom, 25.9%, against premise at 0.0%** — and our games have no player-identity
-axis at all. Mechanically it is `block_pool`, which **zero v2 games use**.
+love-reason — **freedom, 25.9%, against premise at 0.0%**. Mechanically it is `block_pool`.
 
 ⚠️ **Writing the three lines is not the rule. Wiring them is.** A design shipped 33 of these against
 a game with no personality meter, so all of them rotate at random and read as variety rather than
@@ -253,7 +241,7 @@ whole game, which is a floor, not a matrix.
 > *"Mrs. Hale: The landlady. Collects on Friday and remembers every late week. Tired, fair, never
 > charming."* — ours, in the one-line shape the reference game's writer guide asks for
 
-Ours run pages. A page is where an author hides the fact that they have not decided anything.
+A page is where an author hides the fact that they have not decided anything.
 
 ---
 
@@ -270,8 +258,7 @@ declaration and the two rules the gates read off it.
 ```
 
 The field splits, cleanly, into two schools with nothing between them: **8 roster games** put 65%+
-of their character-gating on per-character meters, **9 ladder games** put 13% or less. All five v2
-games sit at 19–29% — inside a band no shipped game occupies, because the question was never asked.
+of their character-gating on per-character meters, **9 ladder games** put 13% or less.
 `the-meters.md` W1 carries the measurement and the table of what each answer looks like on a board.
 **Gate 34** checks the game against this declaration.
 
@@ -332,8 +319,7 @@ Three hard rules, all gated:
 
 - **Rising must expand.** For each ascent tier, `gte`/`gt` gates must outnumber `lt`/`lte`.
   Gate 10 checks the three most-gated meters. A meter whose rise mostly *closes* content is a
-  descent wearing an ascent's clothes — the measured failure case had exactly that as its
-  dominant meter, with the world contracting to a sealed room as it rose.
+  descent wearing an ascent's clothes.
 - **The ceiling must be bought.** The top band's `max` is a promise to the player. If the
   highest authored gate on that trait is below it, the remaining points buy nothing. Gate 8.
   *(A top band with no `max` is unbounded on purpose and promises nothing.)*
@@ -349,8 +335,7 @@ eq   ne   gt   gte   lt   lte
 ```
 
 ⚠️ **`ne` is legal and this skill never said so.** It has worked on a canvas, node or choice
-condition since v2 shipped, and across all thirty games it has been used **zero times** — because
-until 2026-08-29 the only two places it appeared in this skill were an engine architecture section
+condition since v2 shipped, and until 2026-08-29 the only two places it appeared in this skill were an engine architecture section
 and a warning telling you not to use it on a quest card. *"She is not at stage 3"* is the negated
 form of the field's commonest gate shape (`the-surfaces.md` R5d) and it is one word.
 

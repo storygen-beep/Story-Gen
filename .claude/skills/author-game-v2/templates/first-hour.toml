@@ -8,8 +8,8 @@
 #               People, places, things.
 #
 # ⚠️ THIS FILE IS A MENU. Section A offers TWO opening shapes and you DELETE ONE.
-#    Keeping both, or blending them, is the measured defect (F1) — a cold open
-#    carrying a staged open's cast, which is where every v2 game landed.
+#    Keeping both, or blending them, is the defect (F1) — a cold open
+#    carrying a staged open's cast.
 #
 # ⚠️ EVERY WORD IN A TEMPLATE IS BEING TAUGHT. Nothing below is real prose; all
 #    of it is <placeholder>. The last time this skill shipped a filled-in example
@@ -73,8 +73,7 @@ locationId      = "<landing_location>"
 #    starting_hour + 3 min per undeclared node exit + this number = the clock the
 #    player lands on. Check that something at <landing_location> is OPEN at that
 #    minute. A `trigger_mode = "random"` ambient does not count; neither does a
-#    `substitution_only` walk-in. A game shipped landing at 07:36 in a room whose
-#    only content opened at 08:00.
+#    `substitution_only` walk-in.
 time_progression_minutes = 30
 
 [[canvases.nodes.exit_block.config.flagEffects]]
@@ -185,18 +184,18 @@ op         = "set"
 # ── the hub — separate canvas, gated on the flag above ───────────────────────
 #
 # ⚠️ F8 — ONE FLAG PER CHARACTER. A single `doors_open` / `arrival_done` that
-#    opens four people's hubs is the cold-spawn hub wearing a coat, and three v2
-#    games shipped exactly that. One flag may open the same character's talk hub
+#    opens four people's hubs is the cold-spawn hub wearing a coat. One flag may
+#    open the same character's talk hub
 #    AND their sex hub; it may never open a second character's door.
 #
 # ⚠️ F5b — `npc` GOES INSIDE `[canvases.trigger]`, AND IT IS NOT `requires_npc`.
 #    This block used to be COMMENTED OUT, which made `requires_npc` — live in the
-#    two blocks above — the only NPC key an author could copy. A game was then
-#    authored with `npc` on `[[canvases]]` instead, one level too high, on all
-#    thirteen of its character surfaces. `TemplateCanvas` has no `npc` field
-#    (template_import.py:906-913): the key was dropped with no error and no warning,
-#    the game shipped with ZERO portraits, and every character surface rendered as a
-#    text link labelled with the canvas's own title. See references/the-first-hour.md F5b.
+#    two blocks above — the only NPC key an author could copy. Written on
+#    `[[canvases]]` instead, one level too high, `npc` does nothing: `TemplateCanvas`
+#    has no `npc` field (template_import.py:990-997), so the key is dropped with no
+#    error and no warning, the game ships with ZERO portraits, and every character
+#    surface renders as a text link labelled with the canvas's own title.
+#    See references/the-first-hour.md F5b.
 
 [[canvases]]
 id   = "<hub_npcid_place>"
@@ -247,16 +246,14 @@ operator = "is_true"
 #   ⚠️ THE FIRST-VISIT CANVAS IS A MINORITY DEVICE. DO NOT REACH FOR IT FIRST.
 #      Across the 26-game corpus it is ONE game (degrees-of-lewdity: 258 branches,
 #      117 flags); EIGHTEEN games have none at all. A gate here used to require
-#      one and was DELETED 2026-08-26, after it sent an author to write nine
-#      arrivals that were reverted the next day. What checks F9 now is
+#      one and was DELETED 2026-08-26. What checks F9 now is
 #      `lint · the place says what it is`, which reads descriptions and never
 #      asks for a canvas.
 #
-#   ⚠️ THE MEASURED FAILURE WAS A DESCRIPTION, NOT AN ABSENT SCENE. A game
-#      declared its anchor at 27% of the whole word budget and described it as
-#      "…and under them forty machines" — forty machines of WHAT. Long, specific,
-#      well written, and it never named the business. Adding an arrival scene
-#      would not have fixed it; naming the function in the description does.
+#   ⚠️ THE FUNCTION GOES IN THE DESCRIPTION, NOT IN AN ARRIVAL SCENE. Shady
+#      Deals' [Pawnshop] says it on every visit: "Pawnshop might buy various
+#      electronics and jewelry." An arrival scene plays once; the description
+#      is read every time.
 #
 #   TAKE ONE ONLY when a place has a genuinely ONE-TIME thing to say: a door that
 #   was locked and now is not, an arrival that changes her standing. Then a

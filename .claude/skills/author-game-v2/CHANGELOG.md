@@ -5,6 +5,49 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — Our-games sweep, batch 3 (applied part): the hard rows and the unnamed measurements
+
+**Why.** Batch 3 of the sweep: the rows whose example carried the point, plus about 45 measurements
+of our own games that named no game ("Ours run 22", "all five v2 games", "our own 18 games"). LO's
+rule for this batch: no rule is restated as a principle to avoid needing evidence. Engine facts keep
+their rule and lose our numbers; craft rules get passing-game evidence or go on LO's cut list.
+
+**What changed (applied).**
+- **Engine facts:** our numbers, stories and counts cut across every reference; the fact and its
+  citation stay (citations re-read where touched, e.g. `advanceTime` day roll `v2.py:5906-5909`,
+  `max_triggers_per_day` `:12126`, `applyTraitEffect` `:6245-6251`, thought_bubble `:16004-16030`,
+  `scheduleEffects` `:6446`, stamina refusal `gates.py:7647`).
+- **Engine-usage TOML rewritten with invented ids:** the clock walk (the_diner), the talk node
+  (hub_theo_garage), the relation TOML (npc_wes), the walk-in chance bands (walkin_storeroom), the tags
+  TOML (npc_hal), the loop-stage counter, the obligation JSON, the occupancy pair (activity_bathe),
+  the label-to-exit spend (rung_shift_morning), the hygiene example in `templates/board.toml`.
+- **Passing-game lines swapped in**, each checked inside its named passage in `round2/passages`:
+  Shady Deals [FemNPC Call NC] (the dash example), [Pawnshop] (a place says what it is); Course of
+  Temptation [EventWalkPartnerQuickieAbort] (the abort beat), [Prologue6c] (the opening wardrobe),
+  [EventCampusWalkBreezeStrong] (a scene written twice against a system); In Her Own Hands
+  [JamesDate1SexOptions], [JamesDate1FPOptions] (labels that name her act); Cupid's Way
+  [Message from Damien] (the phone worked example).
+- **Unnamed "ours" measurements cut** wherever the rule beside them stood on field data or an engine
+  fact. SKILL.md's Ashwell table loses its "our matching defect" column; its "sheets" and "a number is
+  a promise" lines now match `the-sheets.md`.
+
+**Not applied — on LO's list** (`round5/OUR_GAMES_SWEEP_BATCH3_CUTS.md`): about 40 craft rules or
+stated reasons whose only evidence was ours (including the lint-not-gate reason restated in batch 2),
+and 12 prose examples that need `v2-prose` drafts shown to LO before they go in. Until then a few
+blocks still quote our prose (the relation before/after in `the-first-hour.md` F10 now sits beside a
+Wes/stepbrother TOML).
+
+**Found, not fixed.** `engine.md` §25 says `dialog` and `thought_bubble` resolve a speaker the same
+way; the dialog branch now reads only `npcId` (`v2.py:15943`), so "Verified" there is wrong for dialog.
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 80 → 78 · tallies unchanged
+(29/47, 46/50, 44/48) · `git status games/` unchanged · `templates/first-hour.toml` parses ·
+`templates/board.toml` non-comment lines unchanged · our-game name hits 50 → 10, every one on LO's list.
+
+words: 140,379 → 135,169 (−5,210) · running total 135,169 / 149,283
+
+---
+
 ## 2026-09-28 — Our-games sweep, batch 2: rules that came from our bugs
 
 **Why.** Batch 2 of the sweep (`round5/OUR_GAMES_SWEEP_PLAN.md`). LO split the 104 rules that came

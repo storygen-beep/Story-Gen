@@ -16,9 +16,7 @@ This file owns **one rule**, and every section below is that rule applied:
 customization"*. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
 all incidental: the gap row itself, one economy example listing "her phone" as a bill, and two
 `engine.md` table rows. The engine has shipped eight phone app types since doc 45 and the skill
-never said a word about any of them. Consequence, measured across all thirty games in `games/`:
-**`post_actions` has been authored zero times and `scheduleEffects` zero times**, and three of the
-five games that have a phone at all give it a single app.
+never said a word about any of them.
 
 Evidence: `~/Documents/Phone_System_Study_20260829/` — 27 shipped sandbox games (22.5M words of
 extracted passage text) and 22,622 player comments, of which 622 mention the phone.
@@ -125,27 +123,22 @@ read against our own TOML directly.
 message is correct; `the-company` ships *"Love you Diana!"* Length varies with what is being said,
 the way it does in a real thread.
 
-**The worked example.** This is `under_one_roof`, which already writes at the right length — the
-only thing about our phones that is not a defect:
+**The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
+you up to?"*, and the thread goes on in the same hand:
 
 ```toml
 [[phone.conversations.blocks]]
 type = "message"
-sender = "npc"
-content = "hey"
+sender = "player"
+content = "nothing much really, u?"
 
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "sorry about this morning"
-
-[[phone.conversations.blocks]]
-type = "message"
-sender = "npc"
-content = "the lock is broken I keep telling dad"
+content = "send me something"
 ```
 
-Three bubbles, 2 / 4 / 8 words. Note what it does not do: no capital letters, no full stops, no
+Three bubbles counting the opener, 6 / 4 / 3 words. Note what it does not do: no capital letters, no full stops, no
 paragraph. **A message is typed by a person on a phone, and it looks like it.**
 
 Two more, written to the same rule, for the two registers a thread runs in:
@@ -256,8 +249,7 @@ complaint, quoted in P11.
 
 ## P6 · If she can be looked at, she has to be able to post
 
-**This is the field's single most common phone porn mechanic and we have never once built it.**
-`post_actions` appears in zero of the thirty games in `games/`.
+**This is the field's single most common phone porn mechanic.**
 
 In Her Own Hands' camera (`CameraMain`) runs selfies as a ladder — dressed → underwear → topless —
 each rung gated on the room she is in, what she is wearing, and her inhibition, and a rung she is
@@ -436,12 +428,12 @@ and a cleanup that expires dates she did not attend.
 **The phone does not own the date. The world owns a calendar and the phone is one door into it.**
 That is P1's rule stated as architecture, and it is why that system does not read as bolted on.
 
-**We have the primitive and have never used it.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2401`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6119`) pushes
+**The engine has the primitive.** A chat reply choice carries `effects`,
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2383`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6446`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:5687–5698`), where `setup.fireScheduledEvent` (`v2.py:6056`) can set a flag, start a quest,
-or deliver a conversation. Usage across all thirty games: **zero**.
+(`v2.py:6091–6099`), where `setup.fireScheduledEvent` (`v2.py:6460`) can set a flag, start a quest,
+or deliver a conversation.
 
 ```toml
 [[phone.conversations.blocks]]

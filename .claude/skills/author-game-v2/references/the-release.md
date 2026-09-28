@@ -87,7 +87,7 @@ happens*, above) — if this release opens one, it arrives filled, not as a prom
 > ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
 > window, a parent location, a label — it is an amendment, not an addition.** See *The prose
 > quotes the fields* below, and grep the prose for the OLD value **spelled out**, not only as
-> a digit. Ten of eleven rent-enabled games hand-write their own rent amount.
+> a digit.
 
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `scripts/gates.py` defines fifty-five, by its own
@@ -168,8 +168,7 @@ should not be written up as one.
 
 **STANDING** — she can go there and act, repeatedly.
 Carries the explicit floor. This is where the crude register lives — not in the one-time
-scenes. The measured failure inverted exactly this, sealing 95% of its explicit prose in a
-room with no exits while its nine replayable loops scored zero.
+scenes.
 
 **TRIGGERED** — fires when her state matches.
 *"during the weekends"*, *"when exposed"*, *"at high stress"*. For the `female` protagonist
@@ -294,10 +293,9 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 ⚠️ **EVERY NUMBER ABOVE DESCRIBES A GAME THAT ALREADY EXISTS.** `[added 2026-08-31]` The ~31-day
 figure, the +196-units-and-zero-new-locations shape, the whole ship-smaller-on-time argument — all of
 it was measured off **mature** products, including a reference game of 2.24M words. It is a
-maintenance rhythm, and we adopted it as a **construction** method.
+maintenance rhythm, not a **construction** method.
 
-The result is on the shelf: **ten v2 games, median lifespan two days, nine of them with zero archived
-releases.** A cadence rule cannot be followed by a game that has not been born yet, and "ship
+A cadence rule cannot be followed by a game that has not been born yet, and "ship
 smaller" applied to release one produces a thing too small to be a sandbox at all.
 
 **Read this section only from v0.2 onward.** v0.1 is governed by the seed size below.
@@ -314,13 +312,6 @@ independent lines say so:
 | the reference game's own seed | **116,540 words across 25 locations** — mean 4,661 per location |
 | Ashwell, on Floating Modules | *"requires substantial content; **collapses into linearity otherwise**"* |
 | Failbetter's StoryNexus retrospective | *"time-to-bootstrap… making a minimally playable experience took ages because one had to create quite a number of storylets"* |
-
-Ours open 8–14 locations at roughly 1,000 words each.
-
-⚠️ **The measured consequence, and the reason this section exists.** A game built end-to-end from a
-signed design in 2026-08 landed **4,590 words, mean 656 per location**, cleared **39 of 40 gates**,
-and failed the fortieth — `location fill` — for being **seven times too small**. Nothing about it was
-badly made. There was simply not enough of it for the structure to hold anything up.
 
 **Gate 1's backstop constants are the floor**: `MEDIAN_LOCATION_WORDS = 3000`,
 `MEAN_LOCATION_WORDS = 4500`. A v0.1 that declares its own budgets is judged against those instead —
@@ -405,15 +396,14 @@ skill.
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
 `[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12549`, `:14753`,
 `:14906`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
-game with 183 missing files. The check reads the build's own flags-init map (`debug_mode`,
+game with missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 
 ⚠️ **The media count is a build-time snapshot.** Files added to disk *after* a build are not in it.
 That is correct for a release gate — it judges what ships — and it means the fix for a red is a
 **rebuild**, never a file copy.
 
-⚠️ **The archive is reported, never judged.** `output/` is legitimately rebuilt after archiving, and
-a byte-equality gate would have failed the one game whose versions agreed.
+⚠️ **The archive is reported, never judged.** `output/` is legitimately rebuilt after archiving.
 
 ---
 
@@ -428,9 +418,7 @@ v0.1 builds the Board instead of adding to it.
   prose; gate 1 checks the game against that rather than against a global figure. `the-board.md` §1.
   *(The fill SHAPE is measured from the reference seed. A location COUNT is not measurable from it:
   that build already had 25 locations and the true v0.1 is unavailable — its repository begins five
-  months after launch. This bullet used to carry "6–8" with exactly that caveat attached, and all
-  three v2 games shipped 8. A caveat in prose does not survive next to a number, so the number is
-  gone. Study 6.)*
+  months after launch. Study 6.)*
 - **`gates.py --ship <slug>` exits 0 on the day it ships** *(since 2026-09-26, PRD WS6; it replaced
   "every gate green")*. The BLOCK list is green; the REPORT list is printed and LO judges it when he
   plays. A red REPORT row is not a reason to hold the release, and not a reason to ignore it either.
@@ -440,8 +428,7 @@ v0.1 builds the Board instead of adding to it.
 - **The first hour is authored, not assumed** — `references/the-first-hour.md`. One opening shape,
   not both; the funnel hands over into something that is open at the minute it lands; every
   character is met before their portrait goes live; the anchor says what kind of place it is the
-  first time she walks in. This is the half v2 shipped without, and it cost the first v2 game a
-  human read end to end its whole first ten minutes.
+  first time she walks in.
 - **It ends on a door**, like every release after it.
 
 Then set `phase = "release"` in `v2_state.json` and never build a "chapter" again.

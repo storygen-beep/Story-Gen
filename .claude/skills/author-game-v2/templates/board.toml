@@ -26,10 +26,9 @@ starting_canvas = "<canvas_id>"
 
 # ⚠️ THE ONLY RELEASE NUMBER A PLAYER CAN READ WITHOUT LEAVING THE GAME. Both
 # optional; together they render "v0.1 · 2026-08-23" in the sidebar footer
-# (v2.py:16131-16141 — the widget is always defined and renders nothing when
+# (v2.py:17095-17107 — the widget is always defined and renders nothing when
 # both are empty). Set `version` in the SAME commit that rebuilds output/, and
-# make it match the portal entry in games-data.js: one shipped game read 0.1 on
-# the portal while printing 0.1.2 to the player. references/the-release.md
+# make it match the portal entry in games-data.js. references/the-release.md
 # § Shipping the build · references/engine.md §38.
 version      = "0.1"
 release_date = "<YYYY-MM-DD>"
@@ -43,8 +42,8 @@ quests_engine   = "v2"
 # ⚠️ THE CURRENCY IS ONE NOTATION, AND IT IS DECLARED. Write it into the ledger
 # as board.economy.symbol, and set [settings.rent] currency_symbol (in
 # 0_systems_spec.toml) to the same string. Left undeclared the rent pages print
-# "$" (v2.py:1190) while every button prints whatever it was typed with — one
-# shipped game wrote a single click's price six ways. references/the-economy.md R7.
+# "$" (v2.py:1181) while every button prints whatever it was typed with.
+# references/the-economy.md R7.
 # House default "$": it is the only symbol the engine renders consistently, and
 # name no real-world currency in the prose.
 
@@ -109,8 +108,7 @@ starting_week = 1
 #
 #      The field SPLITS and does not converge — 8 roster games put 65%+ of their
 #      character-gating on per-character meters, 9 ladder games put 13% or less,
-#      and NOTHING sits between. All five v2 games landed at 19-29%, in the gap,
-#      because the question was never asked and this file answered it for them.
+#      and NOTHING sits between.
 #
 #      who_climbs = "player"  →  1-2 deep player tiers · the cast runs light
 #      who_climbs = "cast"    →  little/no player tier · TWO meters per character
@@ -138,8 +136,7 @@ name = "<Name>"
 <tier_2> = 0
 
 # ── a counterweight — RARE, and it must shut doors ────────────────────────────
-#    1 field game in 25 ships one that gates anything. FOUR of our five shipped
-#    one and three gate almost nothing (`count` 0 reads · `standing` 2 · `grace` 5).
+#    1 field game in 25 ships one that gates anything.
 #    Uncomment only if you can name the door it closes. the-meters.md W5.
 # purity = 100
 
@@ -164,9 +161,8 @@ money  = 20
 #    Omit `max` on the top band only if the meter is genuinely unbounded.
 # ⚠️ BANDS ARE THE SIDEBAR'S BUSINESS — how the player READS the meter. They are NOT
 #    the rung ladder and you do not derive one from the other. The gates go where the
-#    content goes: the field's live meters carry 8-17 rungs with the LOWEST AT ~5,
-#    and every tier of every v2 game so far starts at 15, which is fifteen clicks of
-#    nothing at the opening of the game. the-meters.md W4.
+#    content goes: the field's live meters carry 8-17 rungs with the LOWEST AT ~5.
+#    the-meters.md W4.
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "<tier_1>"
@@ -188,8 +184,9 @@ bands = [
 #   ⚠️ `shuts` IS THE POINT. Gate 29 fails any need whose key no condition
 #      anywhere in the game reads — a decay, a way to refill it and no reader is
 #      a fully wired loop that means nothing.
-#      Working example, vesper: 11 things drop hygiene by 30, one restores it,
-#      and hygiene >= 40 gates "Take the car". Filthy means she cannot leave.
+#      Working example: the gym and the night shift each drop hygiene by 30, the
+#      shower restores it, and hygiene >= 40 gates "Go out". Filthy means she
+#      cannot leave.
 #
 #   ⚠️ Every need must be fillable somewhere on a room's `serves.needs`. A need
 #      with nowhere to fill it is a countdown to a wall.
@@ -241,9 +238,7 @@ shuts = "<what she CANNOT do while this is empty>"
 #     not a judgement — gate 30 computes it. One per qualifying room, never one
 #     per pair. references/the-surfaces.md R3.
 #   · `fill` — the word budget, in ROUND numbers, written NOW, before the prose.
-#     Gate 1 refuses to credit a budget that is mostly non-round: measured, all
-#     three v2 games declared exact post-hoc word counts (9,607 / 4,936 / 10,295)
-#     and so matched their own plan 8/8 while proving nothing. A budget that
+#     Gate 1 refuses to credit a budget that is mostly non-round. A budget that
 #     cannot be wrong is not a budget.
 #
 # Cold rooms are allowed: the reference game had no sexual content in 8 of its
@@ -317,18 +312,12 @@ navigation_order     = ["<neighbour_id>"]
 #   people = ["npc_<id>"]                           # one hub per schedule row
 #   fill    = 4000        # ⚠️ YOUR BUDGET, in round numbers, written NOW — a PLAN.
 #
-# ⚠️ THIS LINE USED TO READ `fill = 0  # recomputed by gates.py — do not hand-maintain`,
-#    AND THAT IS WHY ALL THREE v2 GAMES SHIPPED A FAKE BUDGET. Told the field was
-#    computed, three authors filled it in afterwards from the delivered word count —
-#    9,607 / 4,936 / 10,295, not one of twenty-four round to the nearest hundred — so
-#    gate 1 compared each game to a record of itself and passed 8/8 every time.
-#    A budget that cannot be wrong is not a budget. Write it before the prose.
+# ⚠️ A budget that cannot be wrong is not a budget. Write it before the prose.
 
 
 # ── characters ───────────────────────────────────────────────────────────────
 # Every character needs AT LEAST ONE standing surface and AT LEAST ONE schedule
-# row, or gate 6 fails. Measured anti-pattern: a character referenced 88 times in
-# a game's source, reachable nowhere.
+# row, or gate 6 fails.
 
 [[npcs]]
 id          = "npc_<id>"
@@ -340,8 +329,7 @@ portrait    = "<id>.jpg"
 #    name in EVERY dialogue box — 1-3 words, no "Your", and validate() refuses two
 #    characters with the same one, which is the whole reason the field earns its place.
 #    Absent = no line at all, so a game that skips it just never shows the label.
-#    Author it, never derive it: five of one game's six `relationship` strings contain
-#    "husband", so a derived default would have labelled five people identically.
+#    Author it, never derive it.
 #    ⚠️ IF THIS CHARACTER IS `customizable` WITH `relationship_options`, THE LABEL IS
 #    THE PLAYER'S, NOT YOURS: write `role = "@<npc>.rel"` and the box prints the option
 #    they picked — stepfather / father / uncle — and follows it if they change it.
