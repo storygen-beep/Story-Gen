@@ -47,8 +47,8 @@ that declaration — swap them if the game declared otherwise.**
 
 ⚠️ **How to read the evidence blocks.** Every rule states its shape first, as a set to choose from.
 The quotation under it is fenced as EVIDENCE and names the game it came from. This is not
-decoration: `templates/board.toml` put five games into a dialect the genre does not use, and its
-example rung of 15 was copied by all sixteen declared tiers across five games. **Every word in an
+decoration: `templates/board.toml` put the games built from it into a dialect the genre does not use, and its
+example rung of 15 was copied into their declared tiers. **Every word in an
 example is being taught too.** Take the mechanism. Leave the furniture.
 
 ---
@@ -99,9 +99,8 @@ a chore"* (`the-arc.md` A4b). Build what checks the number, then build the place
 
 ## SY2b · The shape is not enough — a system describes her, it does not bookmark the plot
 
-⚠️ **This rule exists because SY2 above is satisfied perfectly by a bookmark, and every one of ours
-is.** Written 2026-09-02 from `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run
-independently of SY1–SY2 and finished a few hours before them. Reproduced here before it was
+⚠️ **This rule exists because SY2 above is satisfied perfectly by a bookmark.** Written 2026-09-02
+from `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run independently of SY1–SY2 and finished a few hours before them. Reproduced here before it was
 believed: its field tables, its `worn_exposure` count and its DoL passage count were re-run and
 match row for row.
 
@@ -109,27 +108,8 @@ match row for row.
 > Build the value that keeps moving — her body, what she is wearing, her disposition, the other
 > person mid-act — and then write the ordinary scenes twice against it.**
 
-**Take every system in this repo that is written in one place and read in many — SY2's exact
-shape — and this is the complete list:**
-
-> ⚠️ **EVIDENCE.** Filter: read in ≥5 units, ≥10:1 read-to-write, ≥80% of readers do not write it.
-> Eleven games, v1 and v2 both.
->
-> ```
-> the_inheritance   margaret_broken     21 read /  1 writ    21:1     9 places
-> the_inheritance   grayson_flipped     20 /  1              20:1     9 places
-> forty_miles       first_shift_done    24 /  1              24:1     8 places
-> back_home         first_night_done    20 /  1              20:1     7 places
-> back_home         arrival_done        11 /  1              11:1     5 places
-> the_route         met_roy             12 /  1              12:1     2 places
-> late_shifts       hired_at_diner      12 /  1              12:1     2 places
-> vesper            dev_mode_enabled    11 /  0              11:1     7 places
-> ```
->
-> **Seven plot flags and a dev toggle. All eight pass SY2 cleanly** — verified by running SY2's own
-> test over them. Not one describes her.
-
-**The field's set, same filter, is the opposite.** `zaras-school-life` carries 9 and six of them
+**The field's set** — filter: read in ≥5 units, ≥10:1 read-to-write, ≥80% of readers do not
+write it. `zaras-school-life` carries 9 and six of them
 describe her — `PlayerCorruption` **376 read / 3 writ**, `PlayerClothes` 188/6, `PlayerEnergy`
 185/11, `PlayerFitness` 33/3, plus two set-once traits, each written **once at character
 creation and read forever**. `new-life-project` carries 8 and six describe her — `period` 195/15,
@@ -137,13 +117,7 @@ creation and read forever**. `new-life-project` carries 8 and six describe her �
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
 **586 reads across 119 places**.
 
-⚠️ **We are not short of descriptive systems. We run them backwards.** Measured across the twelve
-v2 games: **50 body-and-disposition systems** — arousal, hygiene, exposure, nerve, energy, warmth,
-propriety — and their median read-to-write is **0.40**. We write them two and a half times for every
-time we consult one. **Zero of the fifty clear the 10:1 bar.** The mirror of the table above: our
-read-heavy systems are bookmarks, and our descriptive systems are scoreboards.
-
-`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4186`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4459`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
@@ -172,7 +146,13 @@ and makes the ratio worse.
 > ```
 >
 > No new mechanic, no new number, no new location. **The corridor got written three times, and the
-> clothing system is now in the corridor.** The engine primitive for this is stacked `[group]`
+> clothing system is now in the corridor.**
+>
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` does exactly this on a campus walk,
+> [EventCampusWalkBreezeStrong]: the same breeze is written *"whipping at your clothes"* or
+> *"cutting at your bare skin"*, on `$pc.is_part_covered`. That check sits in **104** of its
+> 5,294 passages.
+> The engine primitive for this is stacked `[group]`
 > bands on one key — `engine.md` §35, `the-surfaces.md` R6 — which is the same machinery the
 > register file calls directed variety.
 
@@ -182,7 +162,7 @@ here unchanged: **a system that describes her and is read in one place is worse 
 read in nine, because it cost a meter and bought nothing.** The instruction above is to write
 content against what is already declared, not to declare more.
 
-⚠️ **Bookmarks are not banned and this rule does not say to delete one.** `met_roy` gating an
+⚠️ **Bookmarks are not banned and this rule does not say to delete one.** `met_<npc>` gating an
 introduction is correct and `the-first-hour.md` F5 requires it. What is wrong is a game whose
 *only* well-read values are bookmarks.
 
@@ -264,10 +244,10 @@ In the field a system is written once and turns up wherever its label is.
 > own practisable sports.
 
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
-a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:1939` —
+a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2137` —
 and there is no plural form. A row wanted in three rooms is authored three times.
 
-**Priced honestly: at our size, that is fine.** They have 126 rooms, or 2,760. Ours open 8–14.
+**Priced honestly: at our size, that is fine.** They have 126 rooms, or 2,760.
 Copying a row into the three rooms that carry a label costs less than the machinery would.
 **Revisit past roughly thirty locations**, where the copies start outnumbering the declaration.
 
@@ -409,9 +389,8 @@ screens. This one runs the other way — **declaring more labels makes the outpu
 — which is what makes it safe to build at all. It still gets no threshold, because no defensible
 ratio was measured and inventing one is how four checks in this project were withdrawn.
 
-⚠️ **P0 applies and is respected: never build a check for a state nothing is in.** Every game in
-the repo declares zero systems and zero labels today. A gate here would fail all twelve on the day
-it landed and would be measuring the doctrine's age rather than the games. The lint is safe under
+⚠️ **P0 applies and is respected: never build a check for a state nothing is in.** A gate here
+would be measuring the doctrine's age rather than the games. The lint is safe under
 that rule precisely because it cannot fail anything — it reports *"no `board.systems[]` declared"*
 and moves on.
 

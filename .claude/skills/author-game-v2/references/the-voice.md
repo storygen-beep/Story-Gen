@@ -19,12 +19,6 @@ sentences in this file's voice — *"You need money. Take shifts at the bar, or 
 as part of the story text (`the-first-hour.md` F1b). Plain, short, and after the player has met the
 people and the problem, never as a lecture on the first screen.
 
-> Measured failure this exists to prevent: a shipped game whose most-clicked link — the pass-time
-> action, ninety minutes, the click that makes every schedule reachable — was labelled **"Sit with
-> it"**. The author found out it was unreadable when the player asked what it did. In the same game
-> the upstairs hallway was called *The Landing*, the guidance page was empty behind a sidebar entry,
-> and seven of eight locked doors gave no reason.
-
 ---
 
 ## The six rules
@@ -300,18 +294,16 @@ following it produces the worse outcome.
 
 ### R6 · Inside an explicit surface, the button names what she does
 
-R1 governs the buttons in a room. This is R1 inside a scene, split out because the defect it names
-is ours alone. It is not a register rule — `register.md` still owns every word that appears *after*
+R1 governs the buttons in a room. This is R1 inside a scene. It is not a register rule — `register.md` still owns every word that appears *after*
 the click; this governs the word on the button.
 
 **The field puts the act on the button.** Across **38,039 clickable labels on explicit screens** in
-the corpus, **9.2% name an act** and **1.01% open with `let`**. Ours: **0.1% name an act** — one
-`fuck` in 2,114 authored choices — and **inside a sex loop 20% of our labels open `Let him…`**
-against 5% everywhere else.
+the corpus, **9.2% name an act** and **1.01% open with `let`**. In Her Own Hands
+[JamesDate1SexOptions] puts the act on the button: *"Ride James's dick"*.
 
-⚠️ **The field is not tidier than we are — it is more specific.** **32%** of its explicit-surface
-labels are transport (`continue`, `leave`, `next`). Everyone writes filler. The difference is what
-sits on the buttons that are *not* filler: theirs name an act, ours ask his permission.
+⚠️ **The field writes filler too.** **32%** of its explicit-surface
+labels are transport (`continue`, `leave`, `next`). Everyone writes filler; this rule is about
+the buttons that are *not* filler.
 
 **The rewrite is already written, and it is in the beat.** A permitting label is almost always a
 beat whose own prose names the action, with the action then left off the button:
@@ -324,10 +316,10 @@ beat whose own prose names the action, with the action then left off the button:
 | `vesper` *"Let him turn you round."* | he turns her by the hip and takes her ass in both hands | **"Turn round for him."** |
 
 ⚠️ **Permitting is a legitimate button and the field writes it too** — 1.01%, about one label in a
-hundred. Keep it where **her not moving is the decision**: she holds still, she does not cover up,
+hundred. In Her Own Hands [JamesDate1FPOptions] sets *"Let James finger you"* beside *"Give James a
+blowjob"*. Keep it where **her not moving is the decision**: she holds still, she does not cover up,
 she lets it happen and that is the choice. Even there the button names *her* — *"Don't reach for the
-vest"*, not *"Let him look."* What the rule refuses is the permitting frame as the house default,
-which is what 20% is.
+vest"*, not *"Let him look."* What the rule refuses is the permitting frame as the house default.
 
 ⚠️ **The SHAPE of the surface is not part of this rule and must not become one.** Menu against
 single-exit chain was tested against engagement and predicts nothing; both machines ship. The

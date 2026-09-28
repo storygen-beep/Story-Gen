@@ -14,7 +14,7 @@ climbs, who speaks, and the content kind we do not build. Read it before you wri
 because the kind decides the shape.
 
 **The voice is a choice, and it is LO's** (2026-09-23/24): shown three ways to write one line, LO
-picked the top games' loud version over ours. So **"The voice — say it loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
+picked the top games' loud version over the quiet one. So **"The voice — say it loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
 it. The rules that are measured keep their measurements, and where
 a measured rule and the voice disagree, the voice wins and the old rule is retired in place (L2).
 
@@ -312,7 +312,7 @@ opened it. The hub opener stays constant, exactly as Course of Temptation's does
 beat is a `group` chain reading it. Adjacent `group` blocks merge into one if/elseif chain and first
 match wins (`engine.md` §35, `v2.py:14561-14568`), so the branches must be mutually exclusive.
 
-### It is field-wide, and we do it zero times
+### It is field-wide
 
 Measured 2026-09-03 across 23 female-lead games. Act screens — 3+ body words on the field's own
 frozen list, chrome and UI panels excluded — whose **entry region carries a conditional before the
@@ -326,8 +326,7 @@ body-word bar without being a scene, and mechanical who-does-what-to-whom role s
 (`course-of-temptation`'s `EncounterPositions` on `_role is "top"`). Cleaned: 436 state-driven, 10
 mechanical, 2 localization.
 
-**Ours: zero.** `block_pool` — the primitive for exactly this — is used by no v2 game
-(`engine.md` §35).
+`block_pool` is the primitive for exactly this (`engine.md` §35).
 
 ⚠️ And what those conditions read is **not** mostly her willingness. Of 7,042 state reads before an
 act screen's prose starts: game-specific plot flags 36.4% · what has already happened 14.1% ·
@@ -414,8 +413,7 @@ Build it as nested `group` chains — one on his meter, one on hers — with mut
 **Its sibling is the random pool.** Where the two halves are *deterministic* variety driven by
 state, `block_pool` is *undirected* variety driven by a die (`engine.md` §35). Course of Temptation
 and Family Ties use the die; DoL uses the state. Use the die when nothing in the fiction should
-decide, and the state when something should. Our v2 games use **neither** — every repeatable act
-surface in this repo says the same words on visit one and visit fifty.
+decide, and the state when something should.
 
 ---
 ---
@@ -470,8 +468,8 @@ with itself.
 **The two sexual shapes are different builds.** The **act menu** is short (107 words), quiet (8%
 spoken), carries **one** clip, and its real content is the five exits — the player picks the next
 rung. The **one-way scene** is twice as long, carries **three** clips, and is **28% spoken**. Same
-subject matter, opposite construction. Writing both as short silent prose with one clip on top,
-which is what every v2 game does, gets neither.
+subject matter, opposite construction. Writing both as short silent prose with one clip on top
+gets neither.
 
 **The talk screen is the genre's second largest content kind** — 15,774 of 54,630 screens. See S4.
 
@@ -564,26 +562,15 @@ screen's text opens on:
 FIELD                  13%    15%    11%   14%     28%     5%    13%
 ```
 
-Evenly spread, because no single screen is the whole climb. We get this wrong in **both**
-directions, and the two look nothing alike:
-
-```
-vesper       77% of its explicit canvases OPEN at vaginal-or-above; median 4 rungs in ONE canvas
-             — the whole ladder with no stairs leading to it
-forty_miles  69% never reach oral at all — all stairs, no ceiling
-```
-
-*This is not a general fault in our writing.* Our run-up is **longer** than the field's — 59–207
-words before the first explicit word against the field's 30, and 0% of our canvases open explicit
-against the field's 22–28%. The defect is where a canvas **starts and stops on the ladder**, not
-that we rush into it.
+Evenly spread, because no single screen is the whole climb.
 
 A canvas that carries four rungs has no room to arrive; a canvas that carries one has nowhere to
 go. Split them, and let the surface the player returns to carry the choice of which rung is next —
 which is S1's other half and the act menu in `the-surfaces.md`.
 
 **Lint · the ladder.** Prints the opening rung and the ceiling per game. A number, never a bar: a
-field screen is one rung and ours is a scene, so no threshold across the two would be honest.
+field screen is one rung and a canvas is a whole scene (`gates.py` `lint_ladder`), so no threshold
+across the two would be honest.
 
 ---
 
@@ -723,7 +710,6 @@ the porn itself (`SKILL.md`, "the person is the product").
 |---|---|
 | field, 17 games | **10 words** |
 | the reference game | **9 words** |
-| a game of ours, measured | **16 words** — third longest of eighteen |
 
 **Escalate by adding beats, never by lengthening sentences.** Same rule as S2 one level down: a
 longer sentence buys density, and density is what rots on the third re-read of a surface the
@@ -736,26 +722,17 @@ carries the full caveat.
 ## How far is far enough
 
 `Sweeping backwards` above tells an author to replace the hedged clause with the specific one, and
-it is right. **It has never said where to stop, and the measurement says nobody stops.**
+it is right. **It has never said where to stop.**
 
-Measured 2026-08-28, our built games against the field's built games, read identically — 28 of ours
-against 25 of theirs. Both sides from `output/index.html`, because the two do not compare on any
-other basis (see the ⚠️ below):
+Measured 2026-08-28 on 25 of the field's built games, read from `output/index.html` (see the ⚠️
+below):
 
-| per 1,000 words | field | ours |
-|---|---|---|
-| `-ly` adverbs | 8.9 – 22.6 (p50 13.5) | **1.3 – 8.6 (p50 3.2)** |
-| hedge words — *just, almost, somewhat, seems, sort of* | 5.4 – 22.4 (p50 12.0) | **0.5 – 7.1 (p50 1.6)** |
+| per 1,000 words | field |
+|---|---|
+| `-ly` adverbs | 8.9 – 22.6 (p50 13.5) |
+| hedge words — *just, almost, somewhat, seems, sort of* | 5.4 – 22.4 (p50 12.0) |
 
-**Twenty-eight of twenty-eight of our builds sit below the field's floor on adverbs, and
-twenty-seven of twenty-eight on hedges.** Not most. Every
-game this project has ever produced, under either skill. There is no game in the genre that writes
-as bare as our barest, and no game of ours that reaches the genre's leanest.
-
-**What that costs, in a reader's words.** From the thread that prompted this study: the prose *"puts
-emphasis in the wrong places, needless details that are never mentioned again"*, so that it becomes
-*"impossible for the author to foreshadow or draw attention."* That is what the numbers are
-describing. Modifiers and hedges are the machinery English uses to say **this one matters and that
+**What that costs.** Modifiers and hedges are the machinery English uses to say **this one matters and that
 one does not**. Strip them everywhere and every noun on the screen arrives at the same weight — the
 plot-critical object and the set dressing look identical, and the reader cannot sort them. A screen
 where nothing is unimportant has nothing important on it either.
@@ -778,9 +755,7 @@ will matter tomorrow.
 > lift every single time. The book goes on the desk, which barely matters. The drawer under the
 > till side is the one he mentioned twice.
 
-⚠️ **This is not permission to pad.** Padding was tested on the same corpus and refused: we run
-roughly half the field's typo rate, a quarter of its duplicated-word rate, and we repeat phrasing
-*less* than the field does. The instruction is to restore contrast, not volume. A beat that gains
+⚠️ **This is not permission to pad.** The instruction is to restore contrast, not volume. A beat that gains
 words and keeps every sentence at the same weight has got worse, not better.
 
 ⚠️ **Why both sides are read from built HTML, and what it costs.** Our authored TOML holds only beat
@@ -792,16 +767,13 @@ to write down — which is exactly why the stopping point is a test and the mode
 doctrine.
 
 ⚠️ **The first version of this warning carried a wrong number and the mistake is worth keeping.** It
-claimed our TOML runs **1.1x to 2.4x** hot against our own build. That was an artifact of the
+claimed authored TOML runs hot against its own build. That was an artifact of the
 measuring script, not of the seam: its tag-stripping pattern was bounded at 200 characters, and this
 engine emits inline-styled `<img>` tags longer than that, so `object-fit`, `border-radius`, `lazy`
 and `async` were counted as WORDS on our side only — field games write short `[img[...]]` markup and
-were untouched. Unbounded, across six games, the same measurement moves **0.68x to 1.27x**. A rate
+were untouched. A rate
 over word count really does survive this seam, which is what gate 43 has always claimed. **A number
 that indicts an existing check deserves the same scepticism as one that flatters you.**
-
-⚠️ **There is no article-density finding.** Read on one basis we sit at **65.0 per 1,000 against a
-field median of 58.3**, inside the field's 33.3–86.0.
 
 ---
 
@@ -910,17 +882,15 @@ Measured with
 `GLOSS_RE`, `NEGATION_RE` and `HISTORY_RE` on narration only.
 
 ⚠️ **A soft word is not the same thing as a hedge.** *Slowly, a lot, hard* are modifiers and they
-are load-bearing (the padding study: we write 4.22 `-ly` per 1,000 against a field floor of 8.87,
-so there is nothing to cut). *Somehow, sort of, almost* are hedges, and the loud voice has even
+are load-bearing. *Somehow, sort of, almost* are hedges, and the loud voice has even
 less use for them than the quiet one did.
 
 ## Dashes stay rare
 
 **Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
 
-**Why this rule exists.** Two players read a shipped game of ours and said the writing "smacks of
-an underpowered AI." Dash density is the marker readers reach for most often when they say that.
-Measured over the 25 game corpus:
+**Why this rule exists.** Dash density is the marker readers reach for most often when they call
+prose AI-written. Measured over the 25 game corpus:
 
 | | dashes per 10,000 prose words |
 |---|---|
@@ -928,7 +898,6 @@ Measured over the 25 game corpus:
 | field p90 | 17.5 |
 | field p95 | 25.7 |
 | field max (`apocalyptic-world`) | 35.4 |
-| a game of ours, measured | **123.0**, which is 3.5x the corpus maximum |
 
 Half the corpus writes fewer than one dash per ten thousand words. Gate 43 puts the ceiling at the
 corpus **maximum**, so a game is only failed once it has left the distribution entirely. Treat a
@@ -939,25 +908,21 @@ not a choice. When you find a pair holding an aside, the aside is usually a sent
 
 **⚠️ The fix is never a comma.** This is the one wrong turn already taken here, and it is also what
 the `humanizer` skill prescribes, so it will be suggested again. Swapping the mark leaves the joint
-in place, the reader still holds the sentence open, and nothing reads easier. Measured across two of
-our own games: dash rate fell 3.5x and comma joints per sentence went **up**. Split the sentence, or
+in place, the reader still holds the sentence open, and nothing reads easier. Split the sentence, or
 cut the clause it was carrying.
 
-**Before** (real, `mrs_vance`, two dashes in 43 words):
+**Before** (Shady Deals [FemNPC Call NC], two dashes in nine words):
 
-> Cade — your husband's eldest, and the only one of them with a reason to be in this kitchen —
-> comes up for ten minutes on a Friday and stands rather than sits.
+> Curiosity - or maybe boredom - got the better of you.
 
-**The comma swap, which is not the fix.** Three commas now, and fourteen words sit between the
+**The comma swap, which is not the fix.** Two commas now, and the aside still sits between the
 subject and its verb:
 
-> Cade, your husband's eldest, and the only one of them with a reason to be in this kitchen, comes
-> up for ten minutes on a Friday and stands rather than sits.
+> Curiosity, or maybe boredom, got the better of you.
 
 **After.** The aside was a sentence, so it became one:
 
-> Cade comes up for ten minutes on a Friday and stands rather than sits. He is your husband's
-> eldest, and the only one of them with a reason to be in this kitchen.
+> Curiosity got the better of you. Or maybe boredom did.
 
 **This is the first rule in this file shaped as a subtraction,** and that is worth saying out loud.
 Counted across the register doctrine, rules that tell an author to add something outnumber rules
@@ -966,23 +931,10 @@ direction, and the author cannot feel it happening from inside the prose.
 
 ## The load rules — hand the reader a fact, not a thing to work out
 
-Subtractions two, three and four, and they came from the drift the section above predicted.
+Subtractions two, three and four. The defect they catch is **load**, not volume: how much a reader
+has to hold, infer, or already know to get to the end of a sentence.
 
-**Why these rules exist.** A reader put a shipped game of ours beside `new-life-project` — one of
-the corpus's most-read female-PC games — and said ours was harder to follow. Every readability
-instrument in this skill disagreed. The game passes gate 19 at a median sentence of **9 words**,
-writes fewer `-ly` adverbs than the field's leanest game, and sits inside the field on every texture
-marker gate 43 prints.
-
-The reader was right and the instruments were pointed at the wrong quantity. **The prose is not fat.
-It is loaded.** "What is not measured here" at the end of this file records a padding study across
-five markers — `-ly` adverbs, hedge words, commas, repeated trigrams, vocabulary variety — that found
-nothing to catch. That conclusion is correct for those five markers and covers none of the three
-below, because the study measured **volume** and the defect is **load**: how much a reader has to
-hold, infer, or already know to get to the end of a sentence.
-
-**Measured over 27 corpus games (14.5M prose words) against every game in this repo, split by which
-skill authored it:**
+**Measured over 27 corpus games (14.5M prose words):**
 
 | | gloss / 1,000 words | negation, % of sentences | history, % of sentences |
 |---|---|---|---|
@@ -990,14 +942,8 @@ skill authored it:**
 | field p90 | 0.19 | **16.38** | 3.94 |
 | field p95 | 0.20 | **22.32** | 4.47 |
 | field max | **0.24** `destroyer` | **25.76** `become-taxi-driver` | **5.41** `free-cities` |
-| **games THIS skill authored (9)** | **1.34 – 2.71** | **19.0 – 40.5** | **4.8 – 12.1** |
-| games the v1 skill authored (6) | 0.00 – 0.66 | **24.0 – 39.6** | 1.3 – 6.6 |
-| above the field MAXIMUM | v2 **9/9** · v1 3/6 | **14 of 16, under BOTH skills** | v2 **8/9** · v1 2/6 |
 
-**Nine of nine games this skill authored sit above the entire field's maximum on the gloss and the
-history**, and the lowest of them runs 5.6x the field's worst game on the gloss. The games written
-before this doctrine mostly do not. **This file taught it**, and "Sweeping backwards" above is the
-mechanism: *replace the hedged clause with the specific one* tells an author to attach a specifying
+"Sweeping backwards" above is the mechanism that invites it: *replace the hedged clause with the specific one* tells an author to attach a specifying
 clause, and `, which is the county's way of saying skilled tasks approved` **is** a specifying
 clause. The rule is obeyed and the defect is the obedience.
 
@@ -1007,8 +953,7 @@ exception.
 
 ### L1 · No `, which is` · no `, which means`
 
-The sharpest of the three and the cleanest measurement in this file: **zero overlap.** The field's
-worst game writes 0.24 per thousand words; our best writes 1.34.
+The sharpest of the three: the field's worst game writes 0.24 per thousand words.
 
 The shape is a fact followed immediately by an explanation of the fact, welded into the same
 sentence. It reads as craft while writing and as fog on arrival, because **a gloss is always more
@@ -1042,7 +987,7 @@ verdict; do not rewrite a loud negation to satisfy it. History: CHANGELOG.
 
 ### L3 · A repeatable screen carries no history
 
-Field max 5.41%; eight of our nine are above it, the worst at 12.1%.
+Field max 5.41%.
 
 A repeatable canvas is re-entered dozens of times. Backstory read on visit one is furniture by visit
 nineteen, and it is the most expensive kind of sentence there — the reader has to reconstruct a
@@ -1108,7 +1053,7 @@ correct pass: the sentence count roughly doubles, the word count falls, and noth
 Recorded here for the same reason the others are — so they are not proposed again.
 
 - **Fragments (sentences under five words) — REFUSED.** The field runs 5.3% (`the-company`) to 58.6%
-  (`family-ties`). No threshold survives that range, and our games sit inside it. This is the fifth
+  (`family-ties`). No threshold survives that range. This is the fifth
   check this skill has measured and turned down.
 - **Stative `is` as the main verb — DEFERRED, not refused.** The field floor is 10.0%. It is
   downstream of L1 — a gloss is usually "which **is**" — so re-measure it after
@@ -1232,7 +1177,7 @@ to a phrase instead of a word: *does this sentence hand the meaning over, or doe
 meaning to arrive with the reader?*
 
 ⚠️ **No instrument, and deliberately.** Idiom rate was probed against a hand-built pattern list
-(ours 0.79 per 1,000 words, `new-life-project` 0.26) and that list is far too weak to carry a number
+and that list is far too weak to carry a number
 — it would score idiomatic dialogue, which is exempt, and miss most of the prose cases. **Speech is
 exempt in full**: a character may talk however that person talks. This is a rule for narration only,
 and it has no lint.
@@ -1248,21 +1193,17 @@ that somebody wrote it here and stopped.
 > opened on *"**meter** (a coin-fed prepayment meter), **jumper**, **eiderdown**"* and listed
 > *pitch → rent* and *float → the till money* among its required swaps. `jumper` went into the
 > checker on 2026-08-22. **`meter`, `pitch` and `float` did not** — so the word this whole section
-> leads with was invisible to every instrument in the skill for a day, and reached a player on a
-> button. **A word named here as a defect belongs in that dict in the same edit.**
+> leads with was invisible to every instrument in the skill for a day. **A word named here as a defect belongs in that dict in the same edit.**
 
-Added 2026-08-23 after reading every hit in all 20 built games — `meter` (32 uses; the defect in
-three games, metaphor in one), `float` (24; the till sense in six
-games), `pitch` (10; the rent sense), `chemist` (3; all real).
+Added 2026-08-23 after reading every hit: `meter`, `float`, `pitch`, `chemist`.
 
-**Measured and rejected, so the work is not redone:** `front` ×334 and `inside` ×213 are noise
-(*"the front door"*, *"inside the room"*); `tip` ×44 carries only three real uses — a
-7% signal rate would train the reader to skim the section; `boot` ×8 is footwear every single time,
-with not one car boot in the repo; `bill` ×7 and `purse` ×10 give a slightly wrong picture that
-does not cost the line. **The bar is not "could be misread." It is "misreads badly enough to lose
+**Measured and rejected, so the work is not redone:** `front` and `inside` are noise
+(*"the front door"*, *"inside the room"*); `tip` carries too few real uses — a low signal rate
+would train the reader to skim the section; `boot` is footwear every single time; `bill` and
+`purse` give a slightly wrong picture that does not cost the line. **The bar is not "could be misread." It is "misreads badly enough to lose
 the reader the line, often enough to be worth its false positives."** `torch` is the reference
-point: six of its eight hits are a *cutting* torch, and it stays, because the two it catches
-are worth reading past six that announce themselves.
+point: most of its hits are a *cutting* torch, and it stays, because the ones it catches
+are worth reading past the ones that announce themselves.
 
 ## The examples are the register
 
@@ -1273,15 +1214,13 @@ No line in `author-game-v2` has ever said "write British." But `templates/board.
 `costs = "£5 for the immersion"` — a foreign currency symbol and a locale-locked noun in six words,
 in the file authors copy hardest. Counted with word boundaries across the live reference files,
 the skill carried **27 locale-locked terms across 11 files** — `airer` ×9, `lodger` ×8,
-`immersion` ×3, `rota`/`rotas` ×3 — and glossed none of them. Five games came out written in that
-dialect. The v1 games, built from a skill that happened not to use those examples, sit at the
-field's rate.
+`immersion` ×3, `rota`/`rotas` ×3 — and glossed none of them.
 
 > ⚠️ **Count with word boundaries, and check a surprising number before you act on it.**
 
 **This is `SKILL.md`'s "an example outranks every rule beside it", third instance** — after
-`the-map.md`'s worked map skeleton (inherited by three games) and `templates/board.toml`'s
-`15/35/55/75` (inherited by all sixteen declared tiers). The rule already existed. It had only ever
+`the-map.md`'s worked map skeleton and `templates/board.toml`'s
+`15/35/55/75`. The rule already existed. It had only ever
 been applied to **shapes** — a floor plan, a set of thresholds — and nobody thought to apply it to
 **words**.
 
@@ -1290,8 +1229,7 @@ been applied to **shapes** — a floor plan, a set of thresholds — and nobody 
 > this skill ever produces does not belong in one.
 
 **The fourth instance is an ABSENCE.** The skill once held 419 words of worked prose across 185,575
-words of instruction (0.23%), so authors modelled the explanation, and dash rates ran 1.6 to 137
-across builds from one skill. **Nothing outranks an example that was never written.** `## The model
+words of instruction (0.23%), so authors modelled the explanation. **Nothing outranks an example that was never written.** `## The model
 beats` above is the answer, and the first thing to check when a habit shows up in every game and no
 rule asked for it.
 
@@ -1310,8 +1248,8 @@ The four instances pull in opposite directions and nothing reconciled them, so t
 choosing between two failures — instances 1–3 say an example is dangerous, instance 4 says an
 absence is worse. Both are true, and the line between them is not how *big* the example is:
 
-> **A mechanism copied verbatim produces a correct game. A world copied verbatim produces five
-> games with the same box room.**
+> **A mechanism copied verbatim produces a correct game. A world copied verbatim produces the same
+> box room in every game that copies it.**
 
 Every one of the first three failures was a **world**: a locale-locked vocabulary, one game's floor
 plan, one game's tier numbers. All three are things an author should be *deciding*, and an example
@@ -1331,7 +1269,6 @@ file gained instead is the *mechanism* — one key, `entry_from`, present or abs
 ## Second person is the genre standard
 
 **13 of 17 games are second-person dominant.** Third person is a minority position held by three.
-Our own most-second-person game runs 94% *you / your*.
 
 `[settings] narration_person = "second"` is the default for a reason, and the field confirms it. It
 stays **immutable once a release ships** — a person swap invalidates every line already written.
@@ -1345,7 +1282,7 @@ It also measures **texture, on exactly one marker**: the dash rate, gate 43. Tha
 is one countable habit and not a verdict on voice. Gate 43 prints three further numbers (joints per
 sentence, the share of `you`, pronouns per name) which carry **no field figure and no threshold**,
 because the corpus exists only as built HTML and none of the three survives the change of basis.
-They are a trend line across our own games. Reading them as a score is the error the gate's own
+They are a trend line across builds. Reading them as a score is the error the gate's own
 header warns about, and it has already been made once.
 
 **Padding is not measured, because it was measured and there is nothing to catch.** 2026-08-28,

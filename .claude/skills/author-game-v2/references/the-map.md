@@ -4,11 +4,6 @@ Read this in the **board** phase, before a character is placed and before a word
 written. The map is the only system the player touches on **every single turn**, and the engine
 validates almost none of it.
 
-> Measured failure this exists to prevent: a game shipped with every gate green and a world where
-> the corner shop was one step from the sofa, three of its four men had no bedroom, and the prose
-> named a hall six times that the map did not contain. Every location in it individually had a
-> stated job, a scheduled body, and something repeatable to do. **The set still wasn't a place.**
-
 > ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
 > [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,
 > City Center), and Course of Temptation's [Maps] splits into `<<tab Campus>>` and `<<tab Town>>`.
@@ -25,8 +20,7 @@ validates almost none of it.
 shape from the premise. **Do not default to a house.**
 
 That sentence is carried over from `author-game/references/location-design.md` §2, where it was
-measured against five named shipped games. v2 was built without it and produced two house-shaped
-worlds in five attempts.
+measured against five named shipped games.
 
 | `archetype` | the shape | fits |
 |---|---|---|
@@ -110,12 +104,7 @@ location. This is not decoration:
                  └── the shops
 ```
 
-The measured failure: a game declared an exterior, put a 25-minute travel cost on it, passed every
-gate — and its exterior was **a leaf hanging off the kitchen**. You stepped out of a kitchen straight
-into a row of shops. No front door, no street, no ground. The world did not contain the house; the
-house contained a scrap of world, and it read as a floor plan for exactly that reason.
-
-So: **the declared `exterior` must be a root** — no `entry_from` — with the home base among the
+**The declared `exterior` must be a root** — no `entry_from` — with the home base among the
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
 genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other.
 
@@ -136,7 +125,7 @@ id = "<exterior_location_id>"
 
 > ⚠️ **No example world here, and there still will not be one** — see the note under *What the
 > board phase records*. A mechanism is safe to show and a floor plan is not: a mechanism copied
-> verbatim produces a correct game, and a world copied verbatim produced three games with the same
+> verbatim produces a correct game, and a world copied verbatim produced games with the same
 > box room. That is why this shows one key and no rooms.
 
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
@@ -177,13 +166,10 @@ it is a bad button no matter whose house style it matches.
 the place is FOR, the **location's own `description`** has to — it is the only surface the player
 sees on every visit, so it says what kind of place this is and what happens here before it says
 what it smells of. `references/the-first-hour.md` F9 owns that rule; `lint · the place says what it
-is` reads it. Measured failure: a game declared its anchor at 27% of the whole word budget and its
-description opened *"…and under them forty machines"* — forty machines of what — and the first thing
-the human reader asked was what the place is. It was long, specific and well written.
+is` reads it.
 
 ⚠️ **The fix is not a first-visit scene.** That device is one game in twenty-six, and the gate that
-required it was deleted 2026-08-26 after it sent an author to write nine arrivals that were reverted
-the next day. Take one only when a place has a genuinely one-time thing to say. F9 carries the count.
+required it was deleted 2026-08-26. Take one only when a place has a genuinely one-time thing to say. F9 carries the count.
 
 ### R5 · The graph owes the prose
 
@@ -202,14 +188,13 @@ named doors** (47 `<<dooricon>>` sites over 30 passages) in a **15,626-passage**
 `become-someone` has 54, and every one of them is a *person's house*. Measured 2026-09-02 across 27
 shipped sandboxes; every figure here is reproducible from `~/Documents/Door_Study_20260902/`.
 
-⚠️ **Presence is NOT the test.** **151 of 239 rooms across our own 18 games — 63% — ever hold a
-scheduled person.** If "someone is sometimes in there" earned a door, two rooms in three would have
-one and the game would be a knocking simulator. What earns a door is that the room **belongs to
+⚠️ **Presence is NOT the test.** If "someone is sometimes in there" earned a door, the game would be
+a knocking simulator. What earns a door is that the room **belongs to
 somebody** and she is the visitor.
 
 **The refusal is one short line, and it is allowed to be the same line every time.** The field runs
 a **median 8 words**, and it is the *same sentence 44 times* — *"You knock on the door, but nobody
-came."* Ours run 22 and are bespoke. The value of the screen is its **structure**, not its prose;
+came."* The value of the screen is its **structure**, not its prose;
 spend the words on the far side of the door.
 
 > **One authored departure, recorded as a departure.** The field never offers *knock* and *go in*
@@ -246,10 +231,9 @@ character at one hour, on another at another, and *"the door is locked… you he
 leave, needing to wait your turn"* written as prose **inside the room** rather than as a blocked
 card on the map. A locked bathroom is a sentence, not a screen.
 
-**We already do this correctly and did not notice.** `back_home` ships **13 occupancy-gated rows** —
-`activity_wash` gated `is_absent` beside `bath_occupied` gated `is_present`, and
-`activity_his_room` gated on the lodger being out. The engine has had the primitive all along
-(`npc_at_location`, per-NPC or any-NPC).
+**The engine has the primitive** (`npc_at_location`, per-NPC or any-NPC, operator `is_present` or
+`is_absent`). The shape is a pair of rows in the one room — `activity_bathe` gated `is_absent` beside
+`bathroom_occupied` gated `is_present` — and a row in someone's room gated on that person being out.
 
 **And the empty room is content.** Where the field has a door it usually also has *going through
 their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
@@ -299,7 +283,7 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
 
 > ⚠️ **There is no example world here and there will not be one.** This block used to carry a filled-in
 > map, and that map was the first game's own — its `npc_` ids, its box room — with its two known bugs
-> patched out. Three games copied its shape. **An example outranks every rule beside it**, so the
+> patched out. Games copied its shape. **An example outranks every rule beside it**, so the
 > shape is taught as R0's menu, which you must choose from, and the schema is shown as fields, which
 > you cannot copy a world out of.
 >

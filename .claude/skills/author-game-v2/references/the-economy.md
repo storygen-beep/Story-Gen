@@ -8,11 +8,6 @@ money never says no, every arc gated behind it becomes optional scenery.
 > The reference game this skill was originally derived from carries **738 money movements and 372
 > money gates** — and none of that was ever measured, which is why this file exists.
 
-> Measured failure it prevents: a shipped game with **zero** conditions reading money, zero items,
-> one sink, and an uncapped free income loop. Its own spec said *"one bad week forces the ask."* No
-> week forced the ask, so the whole ladder of its most important character was content the player
-> was never pushed toward.
-
 ---
 
 ## The four measured rules
@@ -28,8 +23,7 @@ A currency nothing reads is a number that goes up. Gate 16 checks for at least o
 **And here is one, because until 2026-08-29 there was not one anywhere in this skill.** Counted
 across every reference file: **zero worked blocks contained a condition on a currency.** The only
 money example the skill has ever shown is `engine.md` §27's `costs` block — which is the *other*
-channel, the one the lint below this section says everyone over-uses (*seven of our ten
-rent-enabled games have ZERO money conditions and pass on prices alone*). **The skill showed the
+channel, the one the lint below this section says everyone over-uses. **The skill showed the
 habit it complains about and never showed the alternative.** That is `register.md`'s *"nothing
 outranks an example that was never written"* — the failure is an absence, not a bad example, and
 `## Show the mechanism. Never show the world.` there is the rule this block is written under.
@@ -189,11 +183,7 @@ gate `a declared garment can be got`.
 `<flag> is_false` on `[canvases.trigger]` produces, and an author writing it would silently re-open the hole. The exclusion is restricted to `is_false` — an
 `is_true` test on the choice that sets the flag can never fire, so it is dead code either way.
 
-⚠️ **No game lost a pass it deserved.** Every purchase with a real reader keeps at least one, and
-the only shape that could false-positive — a purchase whose sole legitimate read is on its own buy
-row — was checked: two buy choices in the corpus carry `show_when_locked`, and neither depends on
-the self-gate for its verdict. **`the start choice is read` was measured for the same blindness and
-is clean: 12 start-choice flags across 4 games, self-gate count 0 on every one.** A start choice is
+**`the start choice is read` does not need the exclusion.** A start choice is
 set once in the funnel and has no "don't ask twice" pressure to make its setter gate on it.
 
 ### R1c · A repeatable she PAYS for deposits something
@@ -279,8 +269,8 @@ Three things make it work, and they are cheap:
 >
 > ```json
 > "economy": { "currency": "money",
->              "obligation": "The Friday settle-up with Nunn out by the pumps…",
->              "obligation_amount": 245 }
+>              "obligation": "Friday rent, paid to the landlord at the door…",
+>              "obligation_amount": 200 }
 > ```
 >
 > *(That example said **forecourt** until 2026-08-23 — one of the eleven words used by zero of the
@@ -289,37 +279,21 @@ Three things make it work, and they are cheap:
 > false-friend list: after editing the skill, re-sweep the skill. `register.md`, "The examples are
 > the register".)*
 >
-> **Measured failure, and it is the worst kind — the mechanic the game is named after.** A shipped
-> game declared *"£200 a week back, plus £45 for the caravan"*, printed *"Have the two hundred and
-> forty-five"* on its quest card, and wrote the scene of handing money through a car window. The
-> settle-up canvas carried **no cost and no money effect.** Played live with £300: before £300,
-> after £300 — and repeatable without limit, in both directions, making it a free relation faucet.
-> The game's entire money outflow was 11 optional purchases totalling £90 against £70 a night of
-> income, so nothing in it ever squeezed.
->
-> Gate 16 passed it, because nine *other* canvases gate on money. That is the presence-gate failure
-> mode: *"at least one exists"* cannot see that the important one does not. **Gate 24** closes it —
-> declare the obligation and its amount, and something must charge at least that much.
-> An obligation declared with no `obligation_amount` fails: a price nobody can check is how this
-> shipped.
+> Gate 16 is a presence gate: *"at least one exists"* cannot see that the important one does not.
+> **Gate 24** closes it — declare the obligation and its amount, and something must charge at least
+> that much. An obligation declared with no `obligation_amount` fails.
 
-> ⚠️ **AND THE OTHER HALF OF THAT STORY, WHICH TOOK A SECOND LOOK TO FIND.** The same game had
-> `[settings.rent]` enabled at `amount = 245`, and it **worked** — verified live, 300 → 55 on the
-> Friday rollover. So the obligation *was* charged, by the engine, and the authored canvas was a
-> **duplicate** of it: a second settle-up, free, repeatable, and the one with the writing in it.
-> Two consequences, and both are now doctrine:
+> ⚠️ **`[settings.rent]` is itself a charge.** The engine takes the amount on its own, so a canvas
+> that also narrates the payment is a **duplicate** of it: with no cost it is a second settle-up,
+> free and repeatable; with one, she pays twice.
 >
 > - **If `[settings.rent]` is doing the charging, do not also author a canvas that narrates the
 >   payment.** Write the scene beside it instead — the evening after, the ask before. `engine.md` §26
 >   has the full mechanism, including the fact that it arms at MIDNIGHT on `due_day`, not at the
 >   hour the collector's schedule row puts him in front of the player.
-> - **Gate 24 reads `[settings.rent]` as a charge channel.** It used to walk canvases only, so it
->   failed a game whose obligation was charged correctly. A check that fails a game for obeying the
->   doctrine is a bug in the check.
->
-> It also used to count `op = "subtract"` as an outflow. That op does nothing (`engine.md` §21b), so
-> the gate was crediting a charge that never happens — the exact failure it exists to catch,
-> rebuilt inside the gate. It now counts `costs` entries and `op = "add"` with a negative value.
+> - **Gate 24 reads `[settings.rent]` as a charge channel**, beside `costs` entries and
+>   `op = "add"` with a negative value. It does not count `op = "subtract"`: that op does nothing
+>   (`engine.md` §21b).
 
 ⚠️ **And the half that gets forgotten.** An obligation that cannot be paid is a scripted loss — but
 an obligation that is *trivially* paid is not pressure either, and only the first failure is
@@ -398,9 +372,9 @@ clicking.
 
 **Our engine has no computed effect values**, so do it with a band: gate a better-paying variant of
 an existing rung on the same flag that turned the obligation up, and keep the original behind the
-flag's `is_false`. Worked example, `mrs_vance` 2026-08-27: buying the truck adds `-22/day` on the
-day hook (`+154`/week of obligation) and turns a $34 parts errand into a $125 haul (`+455`/week).
-The week's demand went 260 → 414, she is 301 better off, and **both of those are her doing.**
+flag's `is_false`. Worked example, invented numbers: buying a van adds `-20/day` on the
+day hook (`+140`/week of obligation) and turns a $30 errand into a $120 haul (`+450`/week over five
+runs). The week's demand goes 260 → 400, she is 310 better off, and **both of those are her doing.**
 
 ⚠️ **No engine change was needed for any of this and none should be reached for first.**
 `[engine.daily_tick]` already takes `traitEffects` with a per-effect condition gate
@@ -475,10 +449,7 @@ by design.
 > ⚠️ **This rule used to carry an exemption and the exemption swallowed the whole architecture.**
 > It read: *"a triggerless rung reached through a gated hub choice is held to a weaker standard — it
 > is not free, only farmable."* **Every rung in a v2 game is a triggerless rung behind a hub
-> choice.** Measured: a game shipped a rung paying £2 per 25 minutes, uncapped and repeatable,
-> behind `standing >= 35` — against a £20 weekly obligation. Gate 18 saw it, printed
-> `4 gated rungs are uncapped too`, and passed, exactly as instructed. Once the tier landed the
-> economy was off. **A gate in front of a printer delays the printer.** Struck 2026-08-16; gate 18
+> choice.** **A gate in front of a printer delays the printer.** Struck 2026-08-16; gate 18
 > now fails on any uncapped income rung, gated or not.
 
 **The tools, and which ones actually work here.** `max_triggers_per_day` is read off the *trigger*
@@ -523,11 +494,9 @@ flagEffects = [
 ⚠️ **This template is for WORK, and 2026-09-02 is when that stopped being implicit.** It resolves the
 act into a 2-second numeric toast and returns the player to the room, which is right for a shift —
 nobody needs a paragraph about stacking shelves. It is **not** right for a rung aimed at a person, or
-at her own body: `the-surfaces.md` R9 owns that split, and nothing in this file drew it. The word
-*person* does not appear here, and so this template got applied to people — 53 choices in one game,
-34 hours of game time, the act missing every time.
+at her own body: `the-surfaces.md` R9 owns that split, and nothing in this file drew it.
 
-Six rules are carried by that one choice, and each of them has cost a shipped game:
+Six rules are carried by that one choice:
 
 1. **`costs` is the brake the engine enforces for you.** An unaffordable choice is not offered, and
    the engine appends the requirement to the greyed row *with no authoring* — `Requires 15 Energy
@@ -552,11 +521,11 @@ Six rules are carried by that one choice, and each of them has cost a shipped ga
 ⚠️ **Every flag cleared in `[engine.daily_tick]` must be SET somewhere.** Two of the three parts
 validates nothing on its own: a `_today` flag that is cleared and never set throttles nothing, and
 one that is set and never cleared closes the rung permanently on day two. Gate `a day-cap closes`
-exists because a shipped game did the first.
+checks the first.
 
 ### R6 · The same test applies to any trait a condition reads
 
-This file protects the currency. In most v2 games **the currency is not what buys the content** —
+This file protects the currency. In this architecture **the currency is not what buys the content** —
 the ascent tiers are, and per-NPC relation is. A game can obey every rule above and still hand its
 entire ladder away, because nothing here ever priced a meter.
 
@@ -627,7 +596,7 @@ guess.
 
 **2 · Set the engine to it.** If `[settings.rent]` is on, `currency_symbol` must equal the declared
 symbol. Left out, it defaults to `"$"` (`v2.py:1190`) and the rent card contradicts every button in
-the game. Eight of our ten built games enable rent; two declare a symbol.
+the game.
 
 **3 · A price on a button is a figure in that notation.**
 
@@ -704,8 +673,7 @@ the rule. Both rate checks print and never move the tally.
 **`week_income` is R3's arithmetic, given somewhere to live.** What a full week of the income rungs
 actually pays, written down where the obligation is — not an estimate of what a player will earn,
 the honest maximum, with the working. Declare it and the lint prints the ratio beside the two
-numbers; leave it out and the lint says so, because *"price it against the income channels in both
-directions"* has been in this file for a fortnight and nine of ten authors did not.
+numbers; leave it out and the lint says so.
 
 ⚠️ **This is a LINT and never a gate**, and the reason is in the data: `forty_miles` sits at 70% and
 `back_home` at 25%, and a threshold anywhere between them fails a game for obeying the doctrine.
@@ -752,13 +720,11 @@ establishes that it happens.
 **A `costs` block is a gate.** The engine refuses a choice the player cannot afford
 (`v2.py:4496` filters it out, `:4625` is the check — `engine.md` §27), but gate 16 was built from
 *conditions* only. A game that prices its choices
-instead of condition-gating them therefore read as **"nothing in the game reads the currency"** —
-which is how a game with seven priced choices scored zero. Gate 16 now counts either channel.
+instead of condition-gating them therefore read as **"nothing in the game reads the currency"**. Gate 16 now counts either channel.
 
 **Declare your currency, or the inference will pick one.** With `board.economy.currency` unset the
-gates guess from trait names, and until 2026-08-14 they took the *first* name match. A game running
-**two real currencies** — one company-visible, one hidden and hers — had every economy gate judging
-the wrong one, the one used once instead of the one used eighteen times. The hint list also had no
+gates guess from trait names, and until 2026-08-14 they took the *first* name match, so a game
+running **two real currencies** could have every economy gate judging the wrong one. The hint list also had no
 entry for `coin`, so a currency by that name was invisible outright.
 
 Selection is now by **usage**, and the chosen currency plus the runners-up are printed on gate 16's

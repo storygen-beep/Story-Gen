@@ -8,14 +8,6 @@ This file owns **one rule**, and every section below is that rule applied:
 > **Name a time only where the engine pins it. The engine pins exactly one moment in a whole
 > game: the first screen.**
 
-> Measured failure this exists to prevent: a shipped game offering **"Work the counter till one
-> (2h 30m)."** on a canvas open 08:00–13:00, in an engine with **no absolute-time advance at all**.
-> Enter at 08:00 and the click lands at 10:30. Enter at 12:55 and it lands at 15:25, inside the
-> afternoon band. The label is right for **one minute** of a five-hour window. Two paragraphs
-> above it, the same canvas opens **"Shutter up at eight"** — true for 1 minute of 300 — while the
-> paragraph beside it, *"Nobody comes in before eleven in February,"* is true at every minute of
-> every day. Same screen, same author, one line a fact and one a guess.
-
 **Why this file exists at all.** v1 carried **Rule 10 — "Never assert elapsed time the player's
 pace controls"** (`author-game/references/rts-flat-prose.md:360`), with an exemption list, a
 replacement table, and the note that where precision *is* the character you keep the precision and
@@ -118,15 +110,12 @@ day is a reading with a six-in-seven chance of being wrong:
 | *"Forty-one sixty. The pitch is ninety. It is Thursday."* — an all-days canvas | *"…it is not ninety. It has not been ninety since the clocks went back."* |
 | *"It's not Monday. What's gone wrong?"* — said by a character whose rota includes Monday | *"You don't come down here. What's gone wrong?"* |
 
-Both of those shipped. The second is worse than it looks: it is the **first line the player reads**
-on that character's hub, and it was wrong once a week from the day it was written.
-
 **A figure the state already holds.** Money, energy, a relation — if the sidebar is printing it,
 the prose may not also assert it. *"Forty-one pounds sixty"* is a number the player can see is
 wrong, in a game whose entire pressure is counting toward the rent.
 
 > **The general form: a beat may not state anything the engine is already tracking.** The hour, the
-> day and the money are the three this repo has been caught on; the rule covers whatever is next.
+> day and the money are three cases of it; the rule covers whatever is next.
 
 ⚠️ **`the clock in the prose` cannot see either of these.** It scans hours. The day axis and the
 state-held figure are **read by a human or not at all** — check them when you check the list.
@@ -149,7 +138,7 @@ FIELD median 1.1 clock references per 10,000 words          p75 2.1
 > which is noise being scored. The instrument deliberately under-counts rather than over-counts —
 > the safe direction for a list nobody scores.
 
-> ⚠️ **Two explanations for that gap were tested and both failed. Do not repeat them.**
+> ⚠️ **One explanation for that rate was tested and failed. Do not repeat it.**
 >
 > **"The field keeps hours out of prose because its clocks are coarse."** False. Classifying every
 > field game by what its state actually mutates: minute-clock games median **2.4** per 10k,
@@ -157,10 +146,6 @@ FIELD median 1.1 clock references per 10,000 words          p75 2.1
 > `degrees-of-lewdity` tracks minutes across 2.1M words and names an hour **0.4** times per 10k.
 > Resolution does not predict it, so **do not coarsen the clock** — a fine clock is fine, and it
 > belongs in the interface, which is where ours already is.
->
-> **"The field puts hours in timetables; we put them in beats."** Also false. A sentence-level
-> instruction-versus-narration split came back **33.0% field / 33.5% ours** — no separation at all.
-> The difference is **volume**, not placement.
 
 ---
 
@@ -230,7 +215,7 @@ from in the first place.
 
 ```
 Work the counter (2h 30m).
-Do the float and the change bags (40m).
+Mop the floor (40m).
 Buy coffee (0:02 £2)                    the field's own form — the-voice.md R1
 ```
 
@@ -238,17 +223,16 @@ Buy coffee (0:02 £2)                    the field's own form — the-voice.md R
 player states the charge on the button, before the click"* — but only the **money** half is gated
 (`gates.py` gate `a price is on its label`). This rule is the time half of the same sentence.
 
-**A stated duration must be the truth.** `off_season` gets this right and it is worth copying: the
-label states the duration on the **choice**, and the engine charges it on the **target node's
-exit** — `Work the counter (2h 30m).` targets `rung_arcade_take_am.base`, whose exit carries
-`time_progression_minutes = 150`. All eight of that game's duration tags match their real spend.
-The gate walks that same path, so a tag that drifts from its spend fails.
+**A stated duration must be the truth.** The label states the duration on the **choice**, and the
+engine charges it on the **target node's exit** — `Work the counter (2h 30m).` targets
+`rung_shift_morning.base`, whose exit carries `time_progression_minutes = 150`. The gate walks that
+same path, so a tag that drifts from its spend fails.
 
 > **Honest limit.** Duration-tagging is **one game's convention**, not a field norm: 4,219 of the
 > corpus's 4,260 duration tags are `degrees-of-lewdity`'s, and among the five field games with a
 > minute-resolution clock only that one does it. It is the corpus's largest and most-played
 > sandbox, which is a reason to follow it — but it is a **recommendation with a lint**, not a gate,
-> and `gates.py:2825` already refuses to invent exactly this kind of threshold for stamina costs.
+> and `gates.py:7647` already refuses to invent exactly this kind of threshold for stamina costs.
 
 ---
 
@@ -341,21 +325,17 @@ One gate and two lints. `python3 scripts/gates.py <slug>`.
 | lint · **the clock in the prose** | C2. Every clock reference in a beat with its canvas's window width beside it, plus the game's rate against the field distribution. A list to read, never a score. |
 | lint · **the time cost is not on the button** | C4. Every click that moves the clock 60 minutes or more without a duration on its label. |
 
-**Eight of thirteen games pass, including all four v1 games**, so the bar is one shipped work has
-cleared.
-
 ⚠️ **And `_CLK_PREP` gained `to`, but only in a narrow form** — `to` + a spelled-out hour that is not
 `one`. Measured across 81,264 corpus labels: `to` in the shared alternation adds **8 hits, all
 false** (`Change to 0`, `Update to 0.3`); restricting to a word-hour leaves **1** (*"restrict myself
-to one?"*); excluding `one` leaves **0**. On our own prose the narrow form adds 21 hits across six
-games and every one is a real *"Twenty to eight"* the lint had been missing.
+to one?"*); excluding `one` leaves **0**.
 
 > **Why C2 and C4 are lints and not gates.** A shift-driven world names hours as *rules* and should
 > (Course of Temptation [Library]: *"open between 7am and midnight"*; In Her Own Hands [Map]:
 > *"Diner (Open 9 AM to 10 PM)"*), and a rate gate would fail that correct work. That is `SKILL.md`'s *"a check that fails a game for obeying the doctrine is a bug in the
 > check"* — the trap that killed the proposed `locked_text` gate. And duration-tagging is one
 > game's convention (see C4's honest limit), so gating it would be the invented threshold
-> `gates.py:2825` already refuses. Both print their findings and neither moves the tally.
+> `gates.py:7647` already refuses. Both print their findings and neither moves the tally.
 
 ---
 
@@ -378,6 +358,6 @@ games and every one is a real *"Twenty to eight"* the lint had been missing.
   is tagged for you (`v2.py:4893`); activity time is not (`v2.py:12733`).
 - **A stated duration must equal the real spend** — the gate walks choice → target node → exit.
 - **If a thing has hours, publish them** — `show_when_blocked` + `cooldown_message`
-  (`v2.py:12164`), the one surface where an hour belongs. Zero games have used it.
+  (`v2.py:12164`), the one surface where an hour belongs.
 - **Never assert elapsed time the player's pace controls** — and where the precision is the
   character, keep the precision and drop the claim.

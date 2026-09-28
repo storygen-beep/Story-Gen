@@ -62,7 +62,7 @@ stripped of. Same for `equipped`.
 - a key you **renamed** — the old one is orphaned data, the new one is just another addition
 - a key you **removed** — the save keeps it forever, and any gate still reading it is now lying
 - a key whose **meaning** you changed — the number is present, so fill-if-absent leaves it alone
-- **anything the save already consumed** — see §6, which is the one that has actually bitten us
+- **anything the save already consumed** — see §6
 
 ---
 
@@ -132,8 +132,7 @@ the portal entry and in `[project] version` (`engine.md` §38), never in the sto
 
 ## §6 — A gate-item's grant must be re-assertable, not a one-shot the save already burned
 
-This is the one that has actually shipped and stranded real players, and §1's improvements do **not**
-fix it. The backfill fills `$player.wardrobe` only when the map is absent entirely, and it fills it
+§1's improvements do **not** fix this. The backfill fills `$player.wardrobe` only when the map is absent entirely, and it fills it
 with the game's *starting* garments. An item granted by a beat is not in that skeleton and never
 will be.
 

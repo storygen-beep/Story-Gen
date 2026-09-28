@@ -19,8 +19,7 @@ apps/stories/models.py:355   is_repeatable = models.BooleanField(default=True, .
 ```
 
 **Why it matters for design:** a canvas with no `is_repeatable` key is standing content, not a
-one-shot. Assuming otherwise inverts your read of what the game actually is. A grep-based pass
-that assumed `false` reported one game as 33% repeatable when the majority was repeatable.
+one-shot. Assuming otherwise inverts your read of what the game actually is.
 
 ---
 
@@ -286,7 +285,7 @@ the embedded `<tw-passagedata>` source and will resolve to an invisible element.
 ## 13. Exit blocks use SECTION syntax, not nested inline tables
 
 A multi-line inline table is a TOML parse error, and an `exit_block` with conditional choices
-is unavoidably multi-line. Write it as sections — the shipped game does this 199 times:
+is unavoidably multi-line. Write it as sections:
 
 ```toml
 [[canvases.nodes]]
@@ -472,7 +471,7 @@ canvas, is the only arrangement that passes.
 destinationType = "specific"
 locationId      = "her_room"
 wardrobeEffects = [
-  { action = "add", item_id = "mothers_slip" },
+  { action = "add", item_id = "silk_slip" },
 ]
 ```
 
@@ -498,7 +497,7 @@ Zero hits means the key does not exist, however plausible it looks.
 `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes`.
 
 **`worn_corruption` is a MAX aggregate, not a sum.** Verified live: with `sleep_vest` (2) worn,
-equipping `mothers_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
+equipping `silk_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
 its own, so a catalog does not need to be large to reach a tier — it needs one item per tier.
 **`worn_beauty` is the same fold over `beauty`** (`template_import.py:239`, `v2.py:4044`).
 
@@ -632,12 +631,10 @@ Two facts, and the second one is the dangerous one:
 1. **Omitting `clamp` means `clamp = true`.** The default is not "leave it alone".
 2. **The clamp is a hard 0–100 on every trait, including one you are using as money.**
 
-Found in a shipped game, by a live effect diff: a scene declared `money +120` and the state went
-**0 → 100**. Every money grant in that game carried `clamp = true`, the weekly rent was **120**, and
-the shop paid 30 a shift — so the player could work four shifts, hit the ceiling at 100, and **never
-once be able to pay the rent.** The eviction branch was the only reachable outcome, and nothing
-anywhere reported it: the TOML is valid, the build is green, all ten gates pass, and the sidebar
-shows a plausible number.
+A live effect diff shows it: a scene declaring `money +120` under `clamp = true` moves the state
+**0 → 100**. With every money grant clamped, a rent above 100 can **never be paid**, the eviction
+branch is the only reachable outcome, and nothing anywhere reports it: the TOML is valid, the build
+is green, and the sidebar shows a plausible number.
 
 **Rule: any trait that is a QUANTITY rather than a 0–100 meter must carry `clamp = false` on every
 effect that writes it.** Money, counts, inventory-ish integers. Meters — nerve, exposure, corruption,
@@ -679,14 +676,8 @@ runtime drops it on the floor.
 build: `applyAndNotifyTrait('player',null,'count','subtract',4,true,null)` left `count` at 100;
 `applyAndNotifyTrait('player',null,'stress','add',-5,false,null)` moved stress 20 → 15.
 
-> **Measured cost. 35 dead effects in one v2 game, 70 in another, both authored from this file.**
-> In the first, the counterweight meter its own spec called *"only ever falls"* never moved off its
-> starting value for the entire game — twelve dead decrements against a clamp — twenty activities
-> never charged the energy they said they cost, and the one NPC penalty in the game never applied.
-> The TOML was valid, the build was green, all the ship gates passed, and a full live play-through
-> passed too: **a number that never changes looks exactly like a number the player has not moved
-> yet.** Two gates were reading it wrong as well — the sink/source counter classified by op NAME,
-> so rewriting a deduction correctly flipped the line from 11:11 to 10:12.
+> **A dead op is silent.** The TOML is valid and the build is green, and **a number that never
+> changes looks exactly like a number the player has not moved yet.**
 >
 > Now checked twice: `gates.py` **gate 25** fails any game using a dead op, and
 > `template_import.py` refuses to build one.
@@ -759,7 +750,7 @@ v2.py:15316                    the V2 QuestsPage overlay is emitted only when
                                project.metadata["quests_engine"] == "v2"
 ```
 
-⚠️ **The trap that shipped a game with an empty guidance page:** `quests_engine = "v2"` turns the
+⚠️ **The trap — an empty guidance page:** `quests_engine = "v2"` turns the
 sidebar entry and the page **on**. Authoring no cards leaves a nav link to a heading with nothing
 under it. Switching the engine on is not authoring guidance.
 
@@ -878,10 +869,6 @@ card renders a blank next-row.
 `tip` is the 💡 line, and the only short imperative string on a card is `goals[].label`. So there is
 nothing on a card that a sidebar could show as a headline.
 
-> Measured: a game shipped with four band strings — *"Counter only, hatch down at midnight"*,
-> *"Fleece zipped, back to the window"* — and an excellent Quests page. A player who never opened
-> that page had **no place, no verb and no person** anywhere in the persistent chrome.
-
 ```toml
 [[sidebar_items]]
 type   = "quest_next"
@@ -897,11 +884,9 @@ the three surfaces cannot drift. Terminal cards are skipped (no goals to show). 
 **The label is the whole UI.** `goals[].label` is what appears in the rail on every screen, so it
 carries `the-voice.md` R3 in full: a place, a verb, and a window if the thing is schedule-gated.
 
-⚠️ **Check the label is not circular.** Measured on a shipped game: all three cards of one ascent
-tier named a choice gated at the exact value the card was trying to reach — *"Sell a token off the
-book"* for `trade ≥ 15`, where the choice itself required `trade ≥ 15`. The two tiers beside it were
-correct (each card named a choice gated **one tier below** its own goal), so the shape was known and
-one ladder simply missed it. Nothing in `gates.py` catches this; read each card against the gate on
+⚠️ **Check the label is not circular.** A card must not name a choice gated at the exact value the
+card is trying to reach — a card for `trade ≥ 15` naming a choice that itself requires
+`trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Nothing in `gates.py` catches this; read each card against the gate on
 the choice it names.
 
 **`locked_text_threshold`** (`v2.py:13185-13186`) prints an explicit *"Requires …"* hint on a
@@ -959,12 +944,10 @@ correctly-scheduled character reads as absent.
 
 ### 24.4 The built page is ENTITY-ENCODED — macros are not stored literally
 
-Measured on a real build: **663 occurrences of `&lt;&lt;set` against 3 literal `<<set`**, and 462
-encoded `<<linkreplace>>`.
+A built page stores its macros encoded — `&lt;&lt;set`, not a literal `<<set`.
 
 **The false alarm:** grep the page for `<<set` and find nothing, and conclude the game has no state
-writes. This trap has now cost this project twice — once reading a built game, and once reading a
-corpus of 18 shipped games, where it produced a confident and completely wrong measurement table.
+writes.
 
 **Always `html.unescape()` before matching macro syntax in built output.** Note this applies to the
 *page*; the authored TOML is not encoded.
@@ -985,24 +968,20 @@ Read and cite before using; delete from this list once promoted above.
 
 ## 25. A speaking block with no `speaker` renders as a character called "Npc"
 
-**Verified, and it is the largest defect ever found in a v2 game.** `dialog` and `thought_bubble`
+**Verified.** `dialog` and `thought_bubble`
 both resolve their speaker the same way, and the field is **not optional**:
 
 ```python
-speaker = props.get("speaker", "npc")        # v2.py:15003 — the default is a STRING, not a person
+speaker = props.get("speaker", "npc")        # v2.py:16004 — the default is a STRING, not a person
 ```
 
 `"npc"` satisfies `speaker.startswith(("npc_", "npc"))`, so the unknown branch is skipped and the
-NPC branch runs with `npc_id = "npc"` (`v2.py:14651`). Nothing matches, so the fallback title-cases
-the id (`v2.py:14657`):
+NPC branch runs with `npc_id = "npc"` (`v2.py:16024`). Nothing matches, so the fallback title-cases
+the id (`v2.py:16030`):
 
 ```python
 npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"   # "npc".title() -> "Npc"
 ```
-
-A portal-listed build rendered **`💭 Npc is thinking:` on 147 passages** — every thought bubble it
-had. Measured afterwards across all three v2 games: **147, 145 and 79** blocks with no speaker.
-Three for three, because this skill mentioned `thought_bubble` once and never showed its shape.
 
 ### The three forms, all required to carry `props`
 
@@ -1035,13 +1014,12 @@ different question and stays a lint (`lint_dialogue_attribution`).
 ## 26. `[settings.rent]` — the engine charges the money, so do not author a canvas that does
 
 The recurring-demand system is real, it is wired end to end, and it **takes the money**. Read this
-before writing a settle-up scene, because a game shipped one that narrated the handover and charged
-nothing while this system was quietly doing the actual work three passages away.
+before writing a settle-up scene.
 
 ```toml
 [settings.rent]
 enabled          = true
-amount           = 245
+amount           = 200
 due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:4786
 collector_npc    = "npc_collector"   # must exist in [[npcs]]
 grace_periods    = 1
@@ -1067,21 +1045,18 @@ eviction_closing_soft = "…"
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
    into `RentDay` (`v2.py:15253-15262`). Never mid-canvas.
 3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:15931`). Verified
-   live: 300 → 55 on a 245 demand.
+   live.
 4. Short pays route to `RentDay_Short`, which spends a grace period, and after that to the eviction
    branch — which under `eviction_mode = "flag_set"` sets a flag instead of ending the game.
 
 **`start_after_flag` is what stops it being a scripted loss.** Until that flag is set the demand
 never arms, so the flag belongs on the canvas that first gives her a way to earn.
 
-> ⚠️ **DO NOT ALSO WRITE THE PAYMENT AS A CANVAS.** Measured failure: a game declared the settle-up
-> as its central mechanic, ran `[settings.rent]` correctly, **and** authored a hub rung that
-> narrated counting the money through a car window — with no cost, no money effect, no day gate and
-> a relation grant, repeatable without limit. Played live it moved nothing and printed relation. The
-> player meets two settle-ups, one of which is free, and the free one is the one with the writing in
-> it. If the engine takes the money, the authored scene beside it must be about something else.
+> ⚠️ **DO NOT ALSO WRITE THE PAYMENT AS A CANVAS.** A hub rung that narrates the payment beside a
+> working `[settings.rent]` gives the player two settle-ups; with no cost on the rung, one of them is
+> free, and the free one is the one with the writing in it. If the engine takes the money, the authored scene beside it must be about something else.
 
-**Money must be unclamped for this to work at all.** A 245 demand against `clamp = true` money
+**Money must be unclamped for this to work at all.** A demand above 100 against `clamp = true` money
 (caps at 100) is unpayable and the only reachable outcome is eviction — see §21.
 
 ---
@@ -1297,8 +1272,7 @@ hidden = true
 ```
 
 ⚠️ **A trait absent from `[[traits.labels]]` entirely is NOT hidden** — it still appears in the
-dump. Measured: a shipped game banded all four of its meters in `[[sidebar_items]]`, declared none
-of them in `[[traits.labels]]`, and printed every one twice.
+dump. A meter banded in `[[sidebar_items]]` and absent from `[[traits.labels]]` prints twice.
 
 ⚠️ **The other half: a banded value that lands outside every band renders NOTHING** — the whole card
 disappears, which reads as a missing HUD element rather than a wrong number, so a quick playtest
@@ -1475,7 +1449,7 @@ a surprise (`~/Documents/Female_PC_Craft_Study_20260823/findings_C_loop.md`). No
 C4 already owns this as a lint, and the corpus evidence behind it is thin — 4,219 of the corpus's
 4,260 duration tags belong to one game.
 
-### 32.3 `show_when_blocked` — the only out-of-hours surface, and one game uses it
+### 32.3 `show_when_blocked` — the only out-of-hours surface
 
 A solo activity whose schedule window has closed is dropped from the location list entirely, unless
 the author opts in:
@@ -1493,7 +1467,7 @@ miss** before anything else (`v2.py:4573-4580`) — and, when the flag is set, p
 message (`v2.py:5309`). The same path also catches `max_triggers_per_day` exhaustion
 (`v2.py:5263`).
 
-⚠️ **Almost no game sets it.** Everywhere it is unset, windowed work simply vanishes and the player has no surface that says
+⚠️ **Everywhere it is unset,** windowed work simply vanishes and the player has no surface that says
 when to come back. The `SchedulePage` (`v2.py:18964`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
@@ -1649,17 +1623,17 @@ game that does not use it.
 
 ```toml
 [[npcs]]
-id           = "npc_boyd"
-name         = "Boyd"
-relationship = "Your father, 47. His name is the one on the contract."
-tags         = ["The book", "The scale", "Saturday", "Black coffee"]
+id           = "npc_hal"
+name         = "Hal"
+relationship = "Your landlord, 52. His name is the one on the lease."
+tags         = ["The rent book", "The garden", "Sunday", "Strong tea"]
 ```
 
 ```
-[face]  Boyd
-        Your father, 47. His name is the one on the contract.
-        The book · The scale · Saturday · Black coffee
-        📍 The packing shed
+[face]  Hal
+        Your landlord, 52. His name is the one on the lease.
+        The rent book · The garden · Sunday · Strong tea
+        📍 The back garden
         💡 …
 ```
 
@@ -1721,7 +1695,7 @@ rediscover it as a gap; build it when a game asks for it.
 
 ## 35. `block_pool` — the variant pool, and the field's main mechanism for a re-read surface
 
-**The engine has had this since v2 shipped. No v2 game has ever used it.**
+**The engine has had this since v2 shipped.**
 
 ```python
 v2.py:14798   if block_type == "block_pool":
@@ -1740,8 +1714,7 @@ every time the passage draws. Re-enter the surface and the sentence is different
 | variants may be **any block type** — the pool nests `_convert_blocks_to_game_html` | `v2.py:14578`, `:14587` |
 
 ```toml
-# BOTH SHAPES PARSE. This is the one every group in our games already uses —
-# children at the block's own `blocks` key — so it is the one to copy.
+# BOTH SHAPES PARSE. Children at the block's own `blocks` key:
 { type = "block_pool", blocks = [
     { type = "paragraph", content = "…first variant…" },
     { type = "paragraph", content = "…second variant…" },
@@ -1759,7 +1732,7 @@ same ones `group` follows — with one exception that is not.
 
 | | |
 |---|---|
-| children may sit at **`blocks`** OR **`props.blocks`** | `:6225` — `b.get("blocks") or props.get("blocks")`, the same both-shapes read `group` gets at `:6214`. This section showed only the `props` form until 2026-08-24, which is the minority shape in our own games |
+| children may sit at **`blocks`** OR **`props.blocks`** | `:6225` — `b.get("blocks") or props.get("blocks")`, the same both-shapes read `group` gets at `:6214` |
 | **a `block_pool` directly inside a `block_pool` is silently dropped** | `:6230` — `inner_safe = [ib for ib in inner_safe if ib.get("type") != "block_pool"]`. A random pick of a random pick is ambiguous and the restriction is deliberate. **Unlike `group`, which MAY nest in `group`** (`:6218-6222`, the same-type-skip rule was removed 2026-05-17) |
 | **mixed child types only WARN** | `:6235` — `logger.warning("block_pool has mixed types …")`. It builds. Same-type children are the intent, and the warning is in the build log, not the game |
 | nesting depth is capped at **4** | `:6143` — a `group` wrapping a pool wrapping a group is depth 3, so 4 is a ceiling rather than a limit you will meet |
@@ -1997,12 +1970,9 @@ falls through to `return false`. The same condition item is therefore true on th
 the *why is this locked* line, in every hint, and in `_findFlagSetterCanvas`. This is the exact
 shape `ne` had before 2026-08-24, still live, times six.
 
-**Not fixed here, and not a bug report against a game: no authored condition uses any of the six.**
-Measured 2026-08-29 over every predicate item carrying a `trait_key`, phase files only, across the
-twenty games that have trait conditions: **`gte` 2,287 · `lt` 527 · `eq` 191 · `lte` 31 · `gt` 1 ·
-`ne` 0**, and none of the other six anywhere. (Type-specific operators — `is_true`, `is_false`,
+**Not fixed here.** (Type-specific operators — `is_true`, `is_false`,
 `is_present`, `equipped`, `owned`, `is_active` and their negations — are their own branches and are
-not part of this comparison.) Recorded so the next person adding an operator reads the count before
+not part of this comparison.) Recorded so the next person adding an operator counts real usage before
 the code, and so a game that reaches for `contains` is recognised as the first real demand rather
 than as a mystery.
 
@@ -2028,7 +1998,7 @@ The second half was cosmetic and worse than it sounds. The requirement-label for
 # Legal today. "She is not at stage 3" — the negated form of the field's
 # commonest gate shape (the-surfaces.md R5d).
 conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "wade_loop_stage", operator = "ne", value = 3 },
+  { type = "trait", subject = "player", trait_key = "loop_stage", operator = "ne", value = 3 },
 ] }
 ```
 
@@ -2104,8 +2074,7 @@ Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the 
 
 This is the **only** release identifier a player can read without leaving the game, so it is one of
 the three places that claim to say what shipped — with the portal's `version` and the archive under
-`games/<slug>/releases/`. `gates.py --release` checks that all three agree, and the first run found
-one game reading `0.1` on the portal while printing **`0.1.2`** to the player.
+`games/<slug>/releases/`. `gates.py --release` checks that all three agree.
 
 ### Where the rule lives
 
@@ -2510,9 +2479,8 @@ cooldown, and `cooldownMessage` defaults to `"Available again later"` — surfac
 lie. Hide the row; do not explain it.
 
 > **Why it was worth an engine change rather than a rule.** The field was inert on this lane, so
-> writing it and omitting it played identically — and authors omitted it. Of **61** solo-lane
-> canvases bound to a person corpus-wide, **7** declared it, and the lint that hunts this defect
-> (`bound to a person, no face`) keys on the field, so it saw 11% of its own subject. A field
+> writing it and omitting it played identically, and the lint that hunts this defect
+> (`bound to a person, no face`) keys on the field, so it cannot see a canvas that left it out. A field
 > nobody is punished for leaving out is a comment.
 
 ### 46.2 `is_active = false` means "never surfaces on its own"
@@ -2524,17 +2492,16 @@ both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAv
 
 Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
 written identically by both build paths (`template_import.py:7210`, `game_graph.py:308`), and read
-by **nothing** in the generator. Four canvases in two games shipped switched on after their authors
-switched them off.
+by **nothing** in the generator.
 
-> **What that cost.** An author switches off the canvas that sets a door's key flag so the door
+> **What that meant.** An author switches off the canvas that sets a door's key flag so the door
 > stays locked for the release. With `is_active` ignored, the canvas auto-fired on entry, set the
 > flag, and the declared locked door opened.
 
 ### 46.3 ⚠️ The trap: `isCanvasValid` must stay clean, and so must `locationCanvases`
 
 **`is_active = false` does not mean unaddressable.** An inactive canvas can be a **substitution
-target** of a dispatcher such as `activity_wash`. `_tryRule` resolves them through `setup.getCanvasById`, which builds its map from
+target** of a dispatcher such as `activity_rest`. `_tryRule` resolves them through `setup.getCanvasById`, which builds its map from
 `help_data.locationCanvases`.
 
 So two things must NOT happen, and both look like the obvious implementation:
@@ -2548,12 +2515,9 @@ So two things must NOT happen, and both look like the obvious implementation:
 An inactive canvas therefore **stays in the index and keeps its passages**, and `_tryRule` keeps
 calling the bare `isCanvasValid`. That asymmetry is the design, and it carries a comment at the
 call site saying so. Verified live: after the change an inactive walk-in still fires as a
-substitution on `activity_wash` (26 of 60 rolls at Monday 06:45, when its NPC is in the bathroom)
-while rendering as a standalone row in 0 of 28 slots.
+substitution on its dispatcher while never rendering as a standalone row.
 
-**`substitution_only = true` is the field for "dispatcher only, not a button."** Three of the four
-`is_active = false` declarations in this repo look like an author reaching for it and finding the
-wrong switch. Both fields now work; they mean different things.
+**`substitution_only = true` is the field for "dispatcher only, not a button."** Both fields now work; they mean different things.
 
 ---
 

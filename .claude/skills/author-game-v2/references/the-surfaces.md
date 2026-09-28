@@ -168,8 +168,7 @@ inside one of them, or it belongs on a different surface entirely.
 the systems list is.**
 
 Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, work and people is a closed
-set, so a room cannot sprawl. What it does not say is what an individual row IS, and read alone it
-answers *"what would she do in this room"* — which returns a job description.
+set, so a room cannot sprawl. What it does not say is what an individual row IS.
 
 **Read an anchor room in a shipped game and every row is a different system of the game,
 appearing where that system lives:**
@@ -187,8 +186,7 @@ logic one level up.**
 `has_inclination` in 218 of its 5,294 passages, so what she has become changes what a room
 offers — [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`.
 
-⚠️ **The brake, and it is not optional.** R2 exists because gate 22 manufactured nine duplicate room
-screens across five games before it was deleted. Read carelessly, R2c invites the mirror-image
+⚠️ **The brake, and it is not optional.** Read carelessly, R2c invites the mirror-image
 failure: declare twenty systems, get twenty rows, ship twenty dead meters —
 which is `the-meters.md` W3's defect at scale, and exactly what SKILL.md's *"ask what a tired author
 would build"* rules out. So:
@@ -215,13 +213,9 @@ cites it.
 > **1 → 19**, while time is written by **49 of 50** rooms and the body's needs by 14.
 > `the-systems.md` **SY1** names the two kinds and **SY2** carries the write side.
 >
-> **2 · The matched instrument this note asked for was built, and it retires the comparison
-> above.** *"DoL 693 · night_desk 6"* compares a `$var` census against our declared traits — two
-> different things, and it overstates by an order of magnitude. Run on the same footing
+> **2 · The matched instrument this note asked for was built**
 > (`~/Documents/Systems_Study_20260902/matched2.py`): field median **82** distinct leaf names at
-> ≥25 references, ours median **37.5** counting every declared name. **A factor of about two, not a
-> hundred** — and composition, not count, is the real gap: 62% of our flag vocabulary across twelve
-> games is throttle and introduction bookkeeping.
+> ≥25 references.
 >
 > ⚠️ **Still no gate**, and this note does not change that. What shipped is one **lint** —
 > `the labels and the systems agree` — which reports and never scores, and which is safe only
@@ -229,9 +223,8 @@ cites it.
 
 **R3 · The walk-in — one activity deepens, the room does not widen.**
 
-This is the largest content bucket in the field and the one v2 shipped without. **10 substitution
-rules across 791 canvases in five games**, against `author-game/references/lanes.md`, which sizes the
-same mechanism at ~47% of its densest arc shape.
+This is the largest content bucket in the field and the one v2 shipped without.
+`author-game/references/lanes.md` sizes the same mechanism at ~47% of its densest arc shape.
 
 What it looks like in the field — one game's bath (`degrees-of-lewdity`, structure only; it fails
 the adults-only rule) is **one** activity with twelve outcome passages, dispatched on entry: a
@@ -241,26 +234,26 @@ barging in by day on a die, and otherwise she just washes.
 And the branches are **cheap**: two of them are under 500 bytes and hand off to one shared act
 engine that **1,742 other passages also call**. The richness is combinatorial, not authored.
 
-**The same pattern already ships in our engine**, in `games/vesper`:
+**The same pattern is authorable in our engine** with the keys the importer already reads
+(`template_import.py:2175-2195`):
 
 ```toml
-# "Work the floor" @ renner_depot — the odds ride the same trait as the content
+# "Stock the shelves" @ the_storeroom — the odds ride the same trait as the content
 substitutions = [
-  { target_canvas_id = "walkin_renner_depot", chance = 0.10, conditions = { … corruption lt 20 } },
-  { target_canvas_id = "walkin_renner_depot", chance = 0.35, conditions = { … corruption gte 20, lt 40 } },
-  { target_canvas_id = "walkin_renner_depot", chance = 0.70, conditions = { … corruption gte 40 } },
+  { target_canvas_id = "walkin_storeroom", chance = 0.10, conditions = { … corruption lt 20 } },
+  { target_canvas_id = "walkin_storeroom", chance = 0.35, conditions = { … corruption gte 20, lt 40 } },
+  { target_canvas_id = "walkin_storeroom", chance = 0.70, conditions = { … corruption gte 40 } },
 ]
-# target: ONE canvas, 2.3 KB, three [group] bands on the same trait —
-#   watches from the bottom of the ladder → finds reasons to touch her → backs her into the shelving
+# target: ONE canvas, three [group] bands on the same trait —
+#   the lowest band watches, the middle band touches, the top band acts
 ```
 
-Same button. The world leans harder on it as he rots. **Nothing new was needed to build that.**
+Same button. The world leans harder on it as the trait climbs. **Nothing new was needed to build that.**
 
-> This is a **validated** example and it is deliberately a *mechanism*, not a world: what an author
-> copies from it is three chance bands riding the same trait as the content, which is the thing to
-> copy. It encodes no map, no cast and no room. `SKILL.md`'s rule — an example outranks every rule
-> beside it, so it goes in last, after it is validated, or not at all — is satisfied on both counts:
-> it shipped and it was measured, and there is nothing in it to inherit a shape from.
+> This example is deliberately a *mechanism*, not a world: what an author copies from it is three
+> chance bands riding the same trait as the content, which is the thing to copy. Its ids are
+> invented; it encodes no map, no cast and no room, and there is nothing in it to inherit a shape
+> from.
 
 **Three parts:**
 
@@ -308,10 +301,9 @@ full encounter every time because that feels like more care; it is how this rule
 **The floor is ONE branch. The rule is many.** `the walk-in floor` is an existence gate — one
 substitution rule in a room and the room is covered — and that is deliberate: which pairs get built
 is the author's call. But the floor is not the rule. **`Bath` is one activity with twelve outcomes**,
-and that is where the "combinatorial, not authored" richness actually comes from. Measured across
-this repo on 2026-08-23, every host in three of the seven dispatching games could produce exactly
-**one** outcome, so the roll only ever decided whether the branch or the host rendered. `lint ·
-dispatch depth` prints it. **Three to five outcomes per host is the shape to build; one is a coin
+and that is where the "combinatorial, not authored" richness actually comes from. A host that can
+produce exactly **one** outcome makes the roll decide only whether the branch or the host renders.
+`lint · dispatch depth` prints it. **Three to five outcomes per host is the shape to build; one is a coin
 flip.**
 
 **⚠️ Which dice, and it is invisible in the TOML.** Two rules on one activity behave completely
@@ -355,7 +347,7 @@ preference — it changes what the player is looking at.
 
 > **A repeatable explicit surface is a node-routed loop. A one-time scene is a cascade.**
 
-The measured failure is what happens when the second is used for the first: a canvas hangs one clip
+The failure is what happens when the second is used for the first: a canvas hangs one clip
 off its node lead, the player clicks down three beats to reach the act, and the clip they are looking
 at is the one for the setup. `register.md` S1 has the numbers; this rule is the fix.
 
@@ -611,8 +603,7 @@ coming in the choice text, and make the way out a real place with `rejection_nod
 
 **R5c · A locked door says why.** Added 2026-08-24. R5b.2 above reaches for
 `locked_text_threshold` and `rejection_node` and stops one step short of saying what the row itself
-should look like. This is that step, and it is the only rule in this file with a gate behind it that
-**fails twelve of our fourteen games**.
+should look like. This is that step, and it is the only rule in this file with a gate behind it.
 
 The field's refusal has exactly two shapes and we ship a third that it does not
 (`findings_B_refusal.md` §2–§4). Of 16,167 refusing conditionals:
@@ -623,8 +614,7 @@ The field's refusal has exactly two shapes and we ship a third that it does not
   *already done* (18%), a time (5%), a place (2%). Price is the field's answer; wayfinding is not.
 - **2.26% show a dead label with nothing beside it**, and nearly all of that is settings and
   pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits` "Previous"/"Next" greyed at
-  the ends. **That third shape is the one our engine renders by default** (`engine.md` §15), and
-  **144 of our 176 shown-locked choices are it.**
+  the ends. **That third shape is the one our engine renders by default** (`engine.md` §15).
 
 **The shape, measured:** a refusal stands **where the action stood**, runs about **nine words**,
 **names a handle**, and is **marked as the game's own voice**. Typography is a binary house
@@ -672,13 +662,9 @@ on**, not on a pile of switches that each remember one thing. The field's equali
 **stage counter** — one variable that counts — and it is 24.8% of all its conditions, present in
 **26 of 26 games**.
 
-**Where we build a stage counter we read it the field's way; we just build few of them** (7 of 21
-games carry one).
-
-**The worked example already exists.** `the_season`'s `wade_loop_stage` and `prine_loop_stage` are
-set to `0 / 1 / 2 / 3` and read three ways — `gte 3`, `eq 2`, `lt 2` — as the exclusive three-band
-chain that decides which ending a loop renders. That is the field's shape, built correctly, in a v2
-game. Copy it.
+**The worked shape.** A `<npc>_loop_stage` key is set to `0 / 1 / 2 / 3` and read three ways —
+`gte 3`, `eq 2`, `lt 2` — as the exclusive three-band chain that decides which ending a loop
+renders. That is the field's shape. Copy it.
 
 The cost of the flag pile is not that it breaks. Adjacent `[group]` blocks merge into one
 `if/elseif` chain (`engine.md` §35), so exclusivity is enforced by the render. The cost is that
@@ -846,8 +832,7 @@ in a scene rather than which options appear in it.
 
 That is worth naming separately because it costs no new prose at all. The same hub, the same list,
 a different person leaning on the doorframe, and one of them knows. Ours can express it with a
-per-NPC condition (`engine.md` §8, `subject = "npc"`) — every game in this repo already uses per-NPC
-conditions, and none uses one this way.
+per-NPC condition (`engine.md` §8, `subject = "npc"`).
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_H_known.md` §3)
 
 **The one permitted exception, and it is narrow** (`lanes.md:154-160`): banding a base node on a

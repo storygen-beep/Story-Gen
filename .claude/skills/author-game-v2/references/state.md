@@ -14,11 +14,9 @@ belong here; only decisions, debts, and promises do.
 > ⚠️ **"Recomputed" means *derived*, not *measured after the fact*. The difference is the whole
 > point of a declaration.** `fill` and `objects` look recomputable — you *can* count words and read
 > nouns out of a finished game — but writing them that way turns declare-then-check into
-> check-nothing. Measured: all three v2 games filled `board.locations[].fill` from the delivered
-> word count (9,607 · 4,936 · 10,295 — 0 of 24 round to the nearest hundred), so gate 1 compared
-> each game against a record of itself and passed 8/8 every time. **A declaration only works if it
-> can be wrong.** Write these before the prose; gate 1 now refuses to credit a budget that looks
-> back-filled.
+> check-nothing: a `fill` copied from the delivered word count makes gate 1 compare the game against
+> a record of itself. **A declaration only works if it can be wrong.** Write these before the
+> prose; gate 1 now refuses to credit a budget that looks back-filled.
 
 ---
 
@@ -107,8 +105,7 @@ belong here; only decisions, debts, and promises do.
     ],
 
     // WHO CLIMBS — answered BEFORE any meter is named. the-meters.md W1, gate 34.
-    // The field splits 8 roster / 9 ladder with nothing between 15% and 65%; all
-    // five v2 games landed at 19-29% because the question was never asked.
+    // The field splits 8 roster / 9 ladder with nothing between 15% and 65%.
     "who_climbs": "player" | "cast" | "both",
 
     // gate 10 judges THESE by name instead of guessing the top-gated traits
@@ -174,8 +171,7 @@ belong here; only decisions, debts, and promises do.
       //    `want` and leaves these three keys out; gate 24 then reports n/a, which the-want.md
       //    §1b says is a choice and not an omission.
       "obligation": "rent — Monday, from the landlord, in person",
-      // ⚠️ The PRICE, as a number. Prose alone cannot be checked, and a game shipped with its
-      //    central charge missing because only the prose existed. Gate 24.
+      // ⚠️ The PRICE, as a number. Prose alone cannot be checked. Gate 24.
       "obligation_amount": 245,
       // ⚠️ THE OTHER HALF OF THAT NUMBER. What a full week of the income rungs actually pays —
       //    the honest maximum with its working, not a guess at what a player will earn.
@@ -246,9 +242,8 @@ release is not ready.
 
 **`board.locations[].fill`** — the word budget you are writing TO, in round numbers, set at board
 phase before the prose exists. ⚠️ This entry used to read *"words currently placed there, recompute
-from gates.py"*, and that instruction is why all three v2 games back-filled it from the delivered
-count and gate 1 passed 8/8 against a record of itself. Gate 1 now refuses to credit a budget that
-is mostly non-round. Hand-maintain the *job*, the *anchor* flag and `serves` too. Exactly one location should carry
+from gates.py"*, which turns the budget into a record of the delivered count. Gate 1 now
+refuses to credit a budget that is mostly non-round. Hand-maintain the *job*, the *anchor* flag and `serves` too. Exactly one location should carry
 `anchor: true`, and it must be one the player can reach and re-enter.
 
 **`board.who_climbs`** — the fork that comes before every other meter decision: does the PLAYER
@@ -286,9 +281,7 @@ gamed upward, which is the only reason it is checked at all.
 **`board.map.homes`** — where every declared character sleeps, or the literal `"offscreen"`.
 **This cannot be inferred and must not be guessed.** A tenant working nights legitimately has no
 night schedule row; a shopkeeper legitimately has no bed in the player's house. Only a declaration
-separates *lives elsewhere* from *was never given a room* — and the measured failure was a game
-whose landing description counted "four doors" while three of its four men slept nowhere at all.
-Gate 12.
+separates *lives elsewhere* from *was never given a room*. Gate 12.
 
 **`board.needs[]`** — the body's clock, declared at board phase. Five fields per need: `key`,
 `falls`, `fills`, `costs`, **`shuts`**. Gate 29 reads `key` and fails any need that no condition
@@ -296,8 +289,8 @@ anywhere in the game reads — a restore that gates nothing is a chore, not a ne
 never a fixed list. `the-meters.md` M8–M10.
 
 **`board.locations[].serves`** — which needs / work / people this room's list holds.
-`the-surfaces.md` R2. Replaced `objects` on 2026-08-18; the old key remains readable in the five
-shipped ledgers and **nothing reads it**, the same treatment `dwelling` got in the map pass.
+`the-surfaces.md` R2. Replaced `objects` on 2026-08-18; the old key remains readable in older
+ledgers and **nothing reads it**, the same treatment `dwelling` got in the map pass.
 
 **`board.map.archetype`** — which of the five map shapes this world is, picked from the premise
 before the cast exists. Deriving the location count from where the cast goes is circular on its own:
@@ -310,9 +303,7 @@ home, this is what the player crosses to reach it, and it is where the ascent ti
 consequence surface beyond the household. A premise with no exterior can only recycle its own
 interior, so it is also the only renewable source of new characters.
 
-⚠️ **It must be a ROOT.** A game declared one, priced it at 25 minutes, passed every gate — and its
-exterior hung off the kitchen, so stepping outside meant stepping from one interior into a row of
-shops. Gate 28 reads `entry_from` and fails a leaf. `the-map.md` R3.
+⚠️ **It must be a ROOT.** Gate 28 reads `entry_from` and fails a leaf. `the-map.md` R3.
 
 **`board.map.home_base`** — where she sleeps. Older ledgers may carry the retired key `dwelling`;
 nothing reads it.
@@ -324,9 +315,8 @@ author of the map is not a sign-off; the game that shipped seven rooms of a hous
 **`board.economy.currency`** — declaring it is strictly better than letting the gates infer one
 from `player.core_traits`; the headline says which was used, and inference picks wrong on a game
 with two currencies. **`board.economy.symbol`** is the notation that currency is written in, and it
-is what `[settings.rent] currency_symbol` must be set to — a shipped game wrote one click's price
-six different ways and three of them were the engine's (`the-economy.md` R7). **`board.economy.sinks`** is the useful half: listing what money is actually
-*for* is the question that, left unasked, produced a game with twelve ways to earn and one to spend.
+is what `[settings.rent] currency_symbol` must be set to (`the-economy.md` R7). **`board.economy.sinks`** is the useful half: it lists what money is actually
+*for*.
 
 **`releases[].opened`** — never empty. A release that opened nothing had no reason to ship.
 

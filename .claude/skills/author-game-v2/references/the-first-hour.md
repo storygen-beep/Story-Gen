@@ -8,13 +8,6 @@ This file owns **one rule** with three faces, and every section below is that ru
 > **The game does not use a name until it has earned it.** People, places, things. Before the
 > player has met it, the game says what it *is* and where. After, it says the name.
 
-> Measured failure this exists to prevent: a shipped game whose opening spent **278 words naming
-> six people, none of them on screen and none of them speaking**, then handed the player an open
-> world at **07:36** where the only place they could go opened at **08:00**. Every one of its four
-> characters was standing in a room from turn one with no meeting, and the location the design had
-> declared at **27% of the whole game** was never once described as the kind of place it is. The
-> game scored **31 of 32** on the scoreboard while doing all of it.
-
 **Why this file exists at all.** v1 carried two files that did most of this job —
 `author-game/references/onboarding.md` (269 lines) and `npc-intro.md` (146 lines). v2 shipped
 without either, and this file puts that job back. This is `DOCTRINE_GAPS.md` Tier 2 row 6, and it
@@ -94,9 +87,7 @@ setup → problem → character interaction → conflict → choice → temptati
 1. **The first screen states it plainly:** who she is, the problem, what she wants, and her voice.
    Said, not implied (`register.md`, the voice, rule 1). F2b's field figures still hold for its
    length: median 144 words. **"Loud is not long" applies to every other screen:** when a screen
-   has to carry several jobs, split it into two screens rather than write one wall. The first
-   opening drafted under this rule put the objective, the mystery, the person and the tutorial on
-   one 190-word screen with almost no speech; that is the shape to avoid.
+   has to carry several jobs, split it into two screens rather than write one wall.
 2. **The first person on screen talks, pushes, and wants something from her.** Someone speaks →
    she answers → they push → she thinks. Who they are, what they want and how they feel about her
    in the first lines.
@@ -243,9 +234,8 @@ chain back one screen at a time. "Two canvases" is about *what each one is for*,
 ## F2b · The opening is SCREENS, and two of them are not ours
 
 `[new] 2026-08-31.` **F1 through F10 are all about what the opening SAYS. Not one is about what the
-player does with their hands.** That hole shipped straight into the first design built with
-`the-sheets.md`: three beats were specified, and nothing said whether they were one screen or three,
-what was written on the button between them, or what the player saw before any of it.
+player does with their hands** — whether three beats are one screen or three, what is written on
+the button between them, or what the player sees before any of it.
 
 **Four facts settle it, and all four belong on the opening sheet.**
 
@@ -253,13 +243,13 @@ what was written on the button between them, or what the player saw before any o
 title screen; the starting canvas is reached only through
 `[[✓ I am 18 or older - Enter Game->StartingCanvas_<canvas>_Node_<node>]]` (`engine.md` §12). **The
 player's first screen is never beat 1.** A sheet whose timeline opens on the first prose beat is
-describing the second screen and calling it the first — which is exactly what the first draft did.
+describing the second screen and calling it the first.
 
 **2 · There may be a character screen in front of the game, and its words are not ours.**
 `[player] customizable = true` with one `[[player.customization_fields]]` builds a
 `CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1065`, `v2.py:9251`). Its
 headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
-story"*, *"Continue to Game"*. **Seven of fifteen built games ship that screen.** The only authored
+story"*, *"Continue to Game"*. The only authored
 text on it is `player_description` (`v2.py:9509`); an author who does not know that ships the
 default, in a product voice, as the second thing a player reads.
 
@@ -357,24 +347,24 @@ a prologue and a systems explainer. Study:
 The last click of the funnel puts the player somewhere, at a clock time, and that place has to have
 something live in it **at that minute**.
 
-The measured failure, computed exactly the way the gate computes it:
+The failure, computed exactly the way the gate computes it:
 
 ```
 [time] starting_hour = 7                                  07:00
-node -> node, no time declared -> default 3 min           07:03      v2.py:13200
+node -> node, no time declared -> default 3 min           07:03      v2.py:14697
 node -> node, no time declared -> default 3 min           07:06
-exit: time_progression_minutes = 30, to the_arcade        07:36
+exit: time_progression_minutes = 30, to the_diner         07:36
 
-at the_arcade, 07:36:
-  work_arcade_morning      schedule 08:00-13:00     CLOSED
-  work_arcade_afternoon    schedule 13:00-19:00     CLOSED
-  work_arcade_after_close  schedule 21:00-01:00     CLOSED
-  walkin_arcade_counter    substitution_only        never renders on its own
-  amb_arcade_damp          trigger_mode = random    not guaranteed
-  amb_arcade_denny         trigger_mode = random    not guaranteed
+at the_diner, 07:36:
+  work_diner_breakfast     schedule 08:00-13:00     CLOSED
+  work_diner_afternoon     schedule 13:00-19:00     CLOSED
+  work_diner_late          schedule 21:00-01:00     CLOSED
+  walkin_diner_counter     substitution_only        never renders on its own
+  amb_diner_rain           trigger_mode = random    not guaranteed
+  amb_diner_regular        trigger_mode = random    not guaranteed
 ```
 
-**The player's first free act in that game is pressing a wait button.** This is v1's §2.7
+**The player's first free act in that walk is pressing a wait button.** This is v1's §2.7
 dead-window bug — its own words, *"a needed NPC is only present at a time the player can't reach"*
 (`author-game/references/onboarding.md:119`) — widened from a character to a whole room, and landing
 in the one place it does the most damage.
@@ -405,9 +395,9 @@ For every system switched ON in `0_systems_spec.toml`, either a named beat in th
 it, or it sits on the sidebar at value-zero where the player can read it. One row per system, none
 cold.
 
-Measured failure: a game shipped `clothing_enabled = true` and `wardrobe_location = "the_flat"`, and
-across the whole merged TOML the strings `wardrobe` and `clothing` appear **once each**, while
-`get changed` and `change into` appear **zero** times. The system is live, costed, and invisible.
+The field arms its wardrobe inside the opening. Course of Temptation's [Prologue6c] has her *"look
+over your wardrobe, picking out something in your usual style."* and puts the outfit picker on
+that same screen.
 
 The sidebar is the other half and it is permanent: a banded stat reading near-empty against its
 ceiling **is** the "there is a climb ahead" read, on frame one, with no teach screen. See
@@ -626,13 +616,13 @@ nesting is the whole rule.**
 
 ```toml
 [[canvases]]
-id   = "hub_ray_kitchen"
+id   = "hub_theo_garage"
 name = "Sit with him"
-# npc = "npc_ray"        ← WRONG. Silently discarded.
+# npc = "npc_theo"        ← WRONG. Silently discarded.
 
 [canvases.trigger]
-location = "the_kitchen"
-npc      = "npc_ray"     # ← RIGHT.
+location = "the_garage"
+npc      = "npc_theo"     # ← RIGHT.
 ```
 
 `TemplateCanvas` has four content fields and `npc` is not one of them
@@ -707,16 +697,16 @@ canvases competing for one face. A node is reached by a choice.
 ```toml
 # on the hub's base exit_block — no effects, no clock. It is a door, not an act (the-surfaces.md R7)
 [[canvases.nodes.exit_block.choices]]
-text       = "Ask him about the campus."
+text       = "Ask him about the car."
 targetType = "node"
 nodeId     = "talk"
 ```
 
 ⚠️ **And when a HIGHER-priority canvas for the same character owns that room, the branch retires
-with the hub unless something links to it.** `act_kitchen_late` (p7) replaces `hub_ray_kitchen` (p6)
+with the hub unless something links to it.** `act_garage_late` (p7) replaces `hub_theo_garage` (p6)
 the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
 most reason to want it. A **qualified** nodeId reaches across canvases —
-`nodeId = "hub_ray_kitchen.talk"` — resolved globally at import (`template_import.py:7414-7420`,
+`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:7414-7420`,
 validated at `:4498-4518`). One line on the escalation's base, and the two surfaces share the pool
 instead of duplicating forty lines of dialogue.
 
@@ -857,16 +847,9 @@ always-live "Story Goals" section, and a guidance page whose every card is gated
 scene that plays once. The description is the only surface the player sees on *every* visit,
 including the twentieth, and "what is this place" is a standing question, not a first-entry one.
 
-**The measured failure, which is a DESCRIPTION failure.** One game's anchor — the room its ledger
-budgeted at **9,000 words, 27% of the whole game** — reads:
-
-> *"KESH AMUSEMENTS in eight-foot letters over the door, and under them forty machines, half of them
-> off at the wall to save the electric…"*
-
-Forty machines of **what**. It never says slot machines, never says amusement arcade, never says
-people put money in them — and the player is put behind its counter on turn one and asked to work
-it. *"What is arcade??"* was the first thing the human reader asked. That description is long,
-specific and well written. Length was never the problem. **It never names the function.**
+**The field names the function on the room screen itself.** Shady Deals' [Pawnshop] renders, on
+every visit, *"Pawnshop might buy various electronics and jewelry."* — what the place is, and what
+the player does there, in one line.
 
 ⚠️ **This is `register.md`'s "words the player has to already own", one level up.** There the unit
 was a word; here it is a whole place. A location whose *function* is only implied is an unglossed
@@ -903,8 +886,7 @@ EIGHTEEN OF TWENTY-SIX GAMES     zero
 
 It is a legitimate device and DoL builds a great deal on it. **It is not the default and it does not
 substitute for a description that names the function**, because it plays once and the confusion it
-is aimed at is permanent. A game shipped nine of them, went green, and had them reverted the next
-day on exactly that ground:
+is aimed at is permanent. LO ruled on exactly that ground:
 
 > LO: *"I think the place name is description and what was going in that place should be able to
 > tell the whole story."*
@@ -1013,17 +995,17 @@ into nagging.
 Prose anchors recur every few visits. The **dialogue box** carries it every time somebody speaks:
 
 ```
-[face]  Cade
-        husband's eldest          <- npcs[].role
-        "Slower. You're not doing the books now."
+[face]  Wes
+        stepbrother               <- npcs[].role
+        "<his line>"
 ```
 
 ```toml
 [[npcs]]
-id           = "npc_cade"
-name         = "Cade"
-relationship = "Your husband's eldest, 29. He runs the yard…"   # the cast page's sentence
-role         = "husband's eldest"                                # the label under the name
+id           = "npc_wes"
+name         = "Wes"
+relationship = "Your stepbrother, 26. He works nights at the depot…"   # the cast page's sentence
+role         = "stepbrother"                                          # the label under the name
 ```
 
 **Three rules, and the third is the only one a gate can hold:**
@@ -1108,26 +1090,9 @@ descriptions (`gates.py:5424-5426`) — but it skips any character who has a mee
 (`gates.py:5453`). So a game can pass every gate above with its Quests page still naming the whole
 cast on turn one. Read the page yourself at turn one. A gate here needs a second game before its shape is honest.
 
-Where each stood when the checks landed, 2026-08-22 — read off the shipped gates, not a
-prediction:
-
-```
-                    open door   hubs met   anchor
-off_season             FAIL        0/4      FAIL
-the_allowance          PASS        1/5      FAIL
-seventh_day            PASS        0/6      PASS
-forty_miles            PASS        0/6      PASS
-steam                  PASS        1/6      PASS
-back_home              PASS        0/4      FAIL
-the_inheritance (v1)   PASS        4/5      n/a
-last_call       (v1)   PASS        4/4      n/a
-vesper          (v1)   n/a         6/9      n/a
-late_shifts     (v1)   PASS        0/5      n/a
-```
-
-**One v1 game already passes the meeting gate at 100%**, and a second misses by a single hub, so
-the bar is one shipped work has cleared rather than an invented number. The six v2 games sit at
-0–1 of their cast, which is the same v1/v2 fingerprint the first-contact count shows.
+**The bar is the field's, not an invented number.** Shady Deals' [Car Mechanic] opens on
+`<<if $met_mechanic == 0>>`, so the first visit is the meeting (F5), and 14 field games keep a named
+first-contact flag per character (F5, "Re-measured 2026-09-02").
 
 > ⚠️ **The gate asks for a meeting on ONE hub, not every hub** — later rungs are gated downstream of
 > the meeting, and that is correct work. It bans the **cold spawn** (a hub with no conditions at

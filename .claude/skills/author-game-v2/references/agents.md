@@ -90,8 +90,7 @@ what it pays, her moment, what it opens (`the-release.md`, "The next step").
 
 > The agent is `.claude/agents/v2-attack.md` (`subagent_type: "v2-attack"`). Give each instance
 > **one lens** and run them in one message; hand an instance somebody else's finding and its job
-> flips to refuting it. It has **no instrument of its own** — three candidate checks were
-> prototyped against every v2 game and came back empty — so its first instruction is to run
+> flips to refuting it. It has **no instrument of its own**, so its first instruction is to run
 > `gates.py` and `pitch_pack.py` and **report nothing they already report.**
 
 **Job:** try to break the *design*, while changing it is still cheap.
@@ -200,7 +199,7 @@ appeal.
 
 **Assert on `SugarCube.State.variables`. Never on rendered page text.**
 
-Text assertions have a measured record here: **four false alarms and zero real findings.** The
+The
 rendered label is not the string that was authored — icons, spacing, cost suffixes and state
 decoration are added at render — so a selector matching author-side text fails on a working build
 and the Player reports a defect that does not exist.
@@ -208,8 +207,7 @@ and the Player reports a defect that does not exist.
 The same applies to finding things to click: locate by passage and canvas id, not by visible label.
 
 **Before it can assert at all it needs `engine.md` §24** — four facts about reading a built game,
-each of which otherwise produces a false alarm indistinguishable from a real defect. Two of the four
-have already cost this project a session apiece.
+each of which otherwise produces a false alarm indistinguishable from a real defect.
 
 ⚠️ **The ban is on LABELS, and the line matters** — stated absolutely above, and one shipped script
 sits the other side of it. `playtest_standing.py` asserts on **body prose** to decide which ladder
@@ -221,8 +219,7 @@ enforces exactly that split — it ships `sv()` and `body()` and deliberately no
 
 **Every red is a hypothesis until its cause is found in `v2.py` or the game's TOML, quoted as
 `file:line`.** This is the Player's version of the Attack Panel's verify pass, and it is not
-optional: of the four raw reds this harness has produced across nine games, **three were the
-harness** and one was real.
+optional.
 
 ---
 

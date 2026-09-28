@@ -57,8 +57,7 @@ written before this section scores exactly as it did.
 
 ### 1. Who the player is — settled before she is described
 
-Eight v2 games shipped one protagonist because the template's grammar answered this before the author
-did. So three things are **declared** here, into `v2_state.json` → `want.player`, before §1b writes a
+Three things are **declared** here, into `v2_state.json` → `want.player`, before §1b writes a
 single line about her.
 
 #### Who is the player? — `female` · `male` · `picked`
@@ -71,12 +70,9 @@ Protagonist tag and 100 with the Male Protagonist tag."* Do not read `4 of 30` a
 sharpest practical argument is also a player's: *"as a guy I like to play female mc since we can get
 to the spicy part quicker and not grind around like in male mc games."*
 
-What this section is fixing is not the answer. **It is that the answer was never a question.**
-
 #### Written character, or blank slate? — `written` · `blank`
 
-Field: **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement. All eight
-v2 games are `written`, and no ledger records the choice being made. `written` is defensible — it is
+Field: **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement. `written` is defensible — it is
 what real-porn media and a named cast pull toward — but an undeclared default is not a decision.
 
 #### What does the player choose about her at minute zero?
@@ -124,8 +120,7 @@ on. Measured in `~/Documents/Accumulation_Study_20260828/` §4.
 ⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
 chain (`v2.py:14637`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
 **that ladder becomes unreachable for every player carrying a past** — no error, no build warning, the
-prose simply stops appearing. Both surfaces this was first built on already had one: `work_books` a
-Cade-trust band, `work_counter` a four-band `standing` ladder. Separate the two chains with any
+prose simply stops appearing. Separate the two chains with any
 non-`group` block.
 
 **The check.** Gate **"the start choice is read"** walks the game for reads of the declared flags. It
@@ -146,8 +141,7 @@ Measured against the field (13 top-30 games with a creation step, 22,614 comment
 `~/Documents/Customization_Study_20260829/`):
 
 **W1 · If you ask, print it back.** The field reads every created field a median of **four** times
-after creation, and the median game leaves **none** of them unread. We read **12 times across 14
-fields**, with **6 read nowhere at all**. That is the whole rule; there is nothing subtler under it.
+after creation, and the median game leaves **none** of them unread. That is the whole rule; there is nothing subtler under it.
 
 **W2 · The payload is a word, not a gate.** Only **1.8%** of the field's reads of a created value
 are conditions. **82%** of its creation controls are free text and **0%** are numeric — and a typed
@@ -159,8 +153,7 @@ not learn to** — the gap is worth 1.8% of what the mechanism is for.
 screens carry **zero** stat fields. Nobody out there builds the stat screen this section already
 tells you not to build.
 
-**W3 · Three fields, not thirty.** Field median is **3**; ours is 3 in four of six games — the same
-screen. **No threshold, deliberately.** The largest creation screen in the corpus is 59 fields and
+**W3 · Three fields, not thirty.** Field median is **3**. **No threshold, deliberately.** The largest creation screen in the corpus is 59 fields and
 it is the only one anyone asked to skip, at one comment and one like. That is n = 1 and a ceiling
 read off it would be invented, per the P0 refusal.
 
@@ -168,7 +161,7 @@ read off it would be invented, per the P0 refusal.
 creation screens ask the player to fill in each person's relation to her. The player names the household and the kinship inside it, which in this
 genre is the setting. We ship this already: `npcs[].relationship_options` renders a picker on the
 same screen, the pick lands on the NPC, the cast page prints it, and prose has a token for it —
-**`@<npc>.rel`**. It is written **11 times in the whole repo**. See `engine.md` for the field
+**`@<npc>.rel`**. See `engine.md` for the field
 reference.
 
 **W5 · Refusing costs nothing.** Half the corpus ships no creation step at all, including the
@@ -397,10 +390,7 @@ Three declarations, made once:
   protagonist is second person.)
 - **Crude-vocabulary ceiling** — the actual words that may appear, per character and per tier.
   Write the words down. A ceiling described abstractly gets written around.
-- **Where the crude register lives** — and the answer is **the repeatable surfaces**. This is
-  the correction the whole system exists for: the measured failure wrote its explicit register
-  only into content the player sees once, and wrote its fifty-times-replayed loops as literary
-  character study.
+- **Where the crude register lives** — and the answer is **the repeatable surfaces**.
 
 ## The test before you leave this file
 
@@ -427,9 +417,7 @@ the question is only whether a player arrives already holding it.
 **Why here and not at the end.** The same check runs against a built game, and that is one phase
 too late: by then every noun is set into a room name, a button label and the prose behind it, and
 changing one means renaming things. **The Want is where a game's nouns get chosen** — its rooms,
-its work, its objects and its meters all come out of this page. Measured: a Want written by an
-author who had committed, one message earlier, to avoiding exactly this class of word still
-shipped two of them, and only a hand-rolled check caught it.
+its work, its objects and its meters all come out of this page.
 
 Run it again on the board's location names before leaving that phase too. A word the player
 cannot decode is undecodable on a button.

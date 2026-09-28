@@ -9,7 +9,7 @@ description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run
 
 That is the whole change, and it came out of measurement, not taste. Ten snapshots of
 Degrees of Lewdity's own source (2018-11 → 2026-07, 25 → 61 locations, 254k → 2.24M words)
-measured against our own shipped game on one frozen instrument. **Degrees of Lewdity is "the
+measured on one frozen instrument. **Degrees of Lewdity is "the
 reference game" wherever this skill says so. It fails the adults-only rule, so the skill uses
 its structure and numbers, never its scenes.**
 
@@ -30,9 +30,7 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 
 3. **Heat lives where the player returns.** 7.5–9.3% of beats carry three or more explicit
    words — a ratio DoL held across eight years and twelve-fold growth — and the majority of
-   them sit in re-enterable content. The measured failure case is the opposite: 95% of one
-   game's explicit prose sealed inside a room with no exits, while every one of its nine
-   repeatable sex loops scored zero.
+   them sit in re-enterable content.
 
 4. **A release adds events, not places.** One full six-week DoL cycle: +196 units,
    +24,388 words, **zero** new locations, and all ten of its content commits were events at
@@ -61,19 +59,17 @@ changes the sentence. The lock is the exception, and it is the *cheap* half: it 
 and buys one refusal, where the same meter read as a colour buys a different line on every visit
 forever.
 
-⚠️ **Ours have been built the other way round, and it is measurable.** Every condition in our
-21 scorable games, against every condition in the 26-game field, on one instrument
-(`findings_K_mirror.md` §2):
+⚠️ **The field's conditions mostly ask which step, not whether a number is big enough.** Every
+condition in the 26-game field, on one instrument (`findings_K_mirror.md` §2):
 
-| | field | ours |
-|---|---|---|
-| **equality** — which step are you on | **53%** | **4.5%** |
-| **threshold** — is your number big enough | 31% | **56%** |
-| boolean — is this switch on | 9% | **37%** |
+| | field |
+|---|---|
+| **equality** — which step are you on | **53%** |
+| **threshold** — is your number big enough | 31% |
+| boolean — is this switch on | 9% |
 
-Threshold and boolean are both locks. Two things already known separately fall straight out of it:
-**gate 42 exists** because our locked doors are mute, and **`block_pool` — the primitive for writing
-many versions of one line — is documented in four places and used by zero v2 games.**
+Threshold and boolean are both locks. **`block_pool` is the primitive for writing many versions of
+one line.**
 
 **What to do with it.** Before adding a condition, ask which of the two it is. If the answer is
 *"it stops her"*, ask what the other branch says, because the field would usually have written one
@@ -89,14 +85,14 @@ this skill: `storylet` 0 · `quality-based` 0 · `QBN` 0 · `salience` 0 · `Fai
 `Emily Short` 0, in 21,831 lines. **We had been inventing the vocabulary of a solved problem.**
 
 By Ashwell's taxonomy ours are **Loop and Grow + Open Map + Floating Modules at once**, and each of
-those carries published weaknesses that match defects we have already shipped:
+those carries published weaknesses:
 
-| the pattern | its documented weakness | our matching defect |
-|---|---|---|
-| Open Map | *"Reviewers may miss narrative content if exploration becomes tedious"* | lostness is the genre's dominant complaint, 4.7% median share against grind's 0.9% |
-| Floating Modules | *"Reviewers struggle to assess completeness"* | two games shipped act loops written and absent, 46 green gates over them |
-| Floating Modules | *"requires substantial content; collapses into linearity otherwise"* | ten v2 games, median lifespan two days, nine with zero archived releases |
-| all three | *"writers tend to rebound quickly to a more unified structure"* | the arc pull — **a known property of the structure, not indiscipline** |
+| the pattern | its documented weakness |
+|---|---|
+| Open Map | *"Reviewers may miss narrative content if exploration becomes tedious"* — and lostness is the genre's dominant complaint, 4.7% median share against grind's 0.9% |
+| Floating Modules | *"Reviewers struggle to assess completeness"* |
+| Floating Modules | *"requires substantial content; collapses into linearity otherwise"* |
+| all three | *"writers tend to rebound quickly to a more unified structure"* — the arc pull, **a known property of the structure, not indiscipline** |
 
 That last row is worth the whole table. The urge to make a sandbox into a story is documented
 behaviour, not a failure of will, and a method that does not push back on it will lose to it.
@@ -172,13 +168,12 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 patterns our games are built from: *"Reviewers may miss narrative content if exploration becomes
 tedious"* and *"Reviewers struggle to assess completeness"*), so the review surface has to be
 generated. `references/the-sheets.md` carries the five sheet types, the `[REVIEW] → [READY] →
-[GAME-READY]` workflow, and ten rules — **every one of them an incident from the one game built this
-way**, not a preference.
+[GAME-READY]` workflow, and ten rules — **every one of them one LO decided, or one the field
+shows**.
 
 ⚠️ **Its first rule is the one the other nine are special cases of: a number on a sheet is a PROMISE
-until an instrument produces it.** The experiment's sheets counted paragraphs and `gates.py` counts
-nodes; the design reported 75 beats against a build of 52, and the same game read 6 explicit by the
-sheet and 3 by the instrument on the same afternoon. There is no `--sheets` mode yet, which means
+until an instrument produces it.** A sheet that counts paragraphs and `gates.py`, which counts
+nodes, report different numbers for the same design. There is no `--sheets` mode yet, which means
 every count on a sheet sits on the intent side of the measured/intent split.
 
 **The world files, all read in the board phase — `the-systems.md` before any of them:**
@@ -205,14 +200,12 @@ most games should not have one**, and a thinly-filled phone is worse than none. 
 writing `[phone]`, not after.
 
 **Read `the-first-hour.md` before you author a single canvas.** It is the only one of these that
-governs content the player meets in a fixed order, and it is the one v2 shipped without: all six v2
-games put their entire cast in a room with no introduction, against four v1 games that did not.
+governs content the player meets in a fixed order, and it is the one v2 shipped without.
 `templates/first-hour.toml` carries the shapes — and it is a **menu**, so delete the opening you
 are not using.
 
 **The first question of the board phase is `the-meters.md` W1 — does the PLAYER climb or does the
-CAST?** The field splits 8 roster / 9 ladder with nothing between them, and all five v2 games landed
-in the empty middle because nobody asked. Declare `board.who_climbs` before naming a meter.
+CAST?** The field splits 8 roster / 9 ladder with nothing between them. Declare `board.who_climbs` before naming a meter.
 
 **The agent roster is in `references/agents.md`, and all six are BUILT** —
 `v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
@@ -385,10 +378,8 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   goes onto the game's pages before it is built** (S13): a plan kept outside `games/<slug>/` is one
   the next session will not read.
 
-- **A number is a promise until an instrument produces it.** `the-sheets.md` S1. The one that cost
-  most: a design's sheets counted paragraphs, `gates.py` counts nodes, and the same game read 6
-  explicit beats by the sheet and 3 by the script on the same afternoon — both reported as
-  measurements. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
+- **A number is a promise until an instrument produces it.** `the-sheets.md` S1. A sheet that
+  counts paragraphs and `gates.py`, which counts nodes, disagree about the same design. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
   side of a summary, however carefully it was counted.
 - **Parse, never grep.** Game state is TOML; read it with a parser. A grep-based pass on one
   game silently missed 24 `is_repeatable` lines and reported the opposite of the truth. The
@@ -468,9 +459,9 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   *placeholder list* is an example. Ship a menu the author must cut down, never a set they can keep.
 - **Ask what a tired author would build to satisfy a check, and make sure that is the thing you
   want.** A check does not measure quality; it **manufactures** whatever it can see. `objects` /
-  gate 22 was green on all five games while forcing nine duplicate room screens into existence,
-  because it computed affordances from `exit_block.choices` and could not see a canvas at all — so
-  an entire canvas about the airer counted as zero, and the only way to pass was a second screen
+  gate 22 forced duplicate room screens into existence, because it computed affordances from
+  `exit_block.choices` and could not see a canvas at all — so an entire canvas about one object
+  counted as zero, and the only way to pass was a second screen
   re-listing what was already there. That is worse than no check, because it ships green. It was
   replaced by `the-surfaces.md` R2: a room's list is **needs + work +
   people**, a CLOSED set that sizes itself, instead of objects, an OPEN one that never can.
@@ -485,8 +476,8 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   not see a canvas; here, a study could not see a sentence.
 - **A check that measures EXISTENCE has not measured anything.** Every defect found on
   2026-08-16 had passed a gate that asked whether a thing was present, when the question was
-  *how much of it there was* or *what it cost*. `ends on an opening` was `locked > 0` and passed a
-  game running 78% of its choices open on turn one. `ascent tiers expand the world` tests
+  *how much of it there was* or *what it cost*. `ends on an opening` was `locked > 0`, so a single
+  locked choice passed it. `ascent tiers expand the world` tests
   direction only, so a tier gating 4 choices scores like a tier gating 40. The media gates report
   100% coverage against pools with zero files behind them. **Every check either carries a
   denominator or prints its magnitude beside the verdict** — and where a threshold cannot be
@@ -517,21 +508,19 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   reference section written that same day from the same function. Trusting the handback would have
   put both into doctrine.
 - **When a gate you just wrote fails a game, check the skill before blaming the game.** A gate
-  built for locked doors fired on seven of eight and every one was following `engine.md` §15
-  correctly. A check that fails a game for obeying the doctrine is a bug in the check. Measured
+  built for locked doors fired on games that were following `engine.md` §15 correctly. A check that fails a game for obeying the doctrine is a bug in the check. Measured
   again 2026-08-16: gate 24 failed a game whose obligation *was* charged, because the gate walked
   canvases and the charge lived in `[settings.rent]`.
 - **A vocabulary the engine does not recognise fails SILENTLY, and nothing else in this system
   does.** `op = "subtract"` is not an engine op — `applyTraitEffect` runs `add` and `set` and
-  returns on anything else (`v2.py:5742-5751`). Two v2 games shipped 105 effects that do nothing,
-  because this skill's own `engine.md` discussed the op as though it worked. Valid TOML, green
+  returns on anything else (`v2.py:6245-6251`). This skill's own `engine.md` once discussed the op
+  as though it worked. Valid TOML, green
   build, green gates, and a clean play-through, because **a number that never changes looks exactly
   like a number the player has not moved yet.** When you write an unfamiliar key or value, find the
   line that consumes it before you write a hundred of them. Gate 25 and the importer now both
   refuse it; the next one of these has no gate yet.
 - **Twice now, the missing feature was already built.** `block_pool` (§35) and `rejection_node`
-  (§36) are both fully wired in the engine, both solve a defect this skill kept finding in its own
-  games, and both were used by **zero** v2 games because nothing here wrote them down. The tell is
+  (§36) are both fully wired in the engine, and nothing here wrote them down. The tell is
   identical each time: a rule that says *"our games do the opposite"* and offers no mechanism.
   **When you catch yourself about to say the engine cannot do something, grep
   `template_import.py`'s dataclasses first** — the field's mechanism is often already sitting there
@@ -562,8 +551,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   (`engine.md` §34).
 - **An explicit beat stays on the body for its whole length** — `references/register.md`. If the
   beat's last sentence is about what it *means* rather than what is *happening*, it has pivoted
-  and will fail the floor. This defect recurred three times in three increments, authored each
-  time by someone who had just written the doctrine against it. Assume you are doing it.
+  and will fail the floor. Assume you are doing it.
 
 ## Build
 

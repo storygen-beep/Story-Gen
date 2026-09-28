@@ -80,10 +80,8 @@ LADDER — the player is what changes
 **Nothing sits between 15% and 65%.** And the field's raw weight is on the cast: **285 per-character
 meters against 101 player-owned ones**, 2.8 : 1, with the biggest games carrying 46–91 of them.
 
-Ours, measured the same way: **20% · 22% · 19% · 29% · 29%.** All five v2 games sit inside a band no
-shipped game in the corpus occupies — not because the middle was chosen, but because **the question
-was never asked.** v1 asks it (`author-game/references/content-framework.md`, *"Who climbs?"*); v2
-dropped it, and one template answered it five times by default.
+v1 asks the question (`author-game/references/content-framework.md`, *"Who climbs?"*); v2
+dropped it.
 
 | `who_climbs` | what it means | what the board looks like |
 |---|---|---|
@@ -458,8 +456,6 @@ that is the one W4 measures at 8–17 rungs. Two meters, two jobs, two depths, a
 (`findings_F_further.md` §4).
 
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
-Measured, all five v2 games: **one distinct meter shape across the whole cast, every time** — which,
-read against the numbers above, is the right instinct arrived at by accident.
 
 For a **ladder** game that is correct and deliberate — the tiers do the gating and a bond meter
 colours the arc. Say so and move on.
@@ -692,12 +688,11 @@ is the event; a swimsuit is exposure on the high street and unremarkable at the 
 DoL centralises the judgement in one function that knows which locations are safe. We distribute it:
 a canvas is bound to a location, so an exposure ambient only fires where an author put it, and her
 bedroom is safe by simply having none. The audience half is `npc_at_location` with no `npc_id` —
-the any-NPC "room occupied" form (`v2.py:4216`). **Gate on both.** An ambient that fires in an empty
+the any-NPC "room occupied" form (`v2.py:4579`). **Gate on both.** An ambient that fires in an empty
 room is the game talking to itself.
 
 **The starting move, written out.** A random ambient at one location that can only fire when she is
-underdressed. The trigger shape is lifted from `forty_miles/event_forecourt_lights_off`, which
-ships — copy it, change the place and the words:
+underdressed — copy it, change the place and the words:
 
 ```toml
 [[canvases]]
@@ -820,8 +815,7 @@ judging a tier, always compute the same two numbers:
 clicks to the top band  ·  in-game minutes to the top band
 ```
 
-A first release should be measured in in-game **days** on its fastest route. v1's fully-throttled
-reference climb was live-verified at **7–10 in-game days**.
+A first release should be measured in in-game **days** on its fastest route.
 
 ### M3 · The throttle menu — four levers, and none of them works alone
 
@@ -829,7 +823,7 @@ reference climb was live-verified at **7–10 in-game days**.
 |---|---|---|
 | **1 · Threshold spacing** *(always on)* | widen the gap between rungs while keeping the per-beat increment fixed, so the climb takes days | does nothing on its own — 55 free clicks is still 55 free clicks. And **don't over-space a thin repeated beat**: if the rung is one recycled paragraph, a huge bar is just tedium |
 | **2 · A window-sized time cost** | `time_progression_minutes` on the rung's exit. The best-*reading* throttle: it is fiction, not a mechanic, and no single deleted line removes it | **only bites when sized against the window.** A 10-minute rung against an all-day hub is farmable ~144× per day. A 180-minute rung against a 09:00–18:00 NPC window is ~3/day. Advancing past an NPC's schedule window makes them absent, which is what actually stops the rung |
-| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:11634`) — a triggerless rung has none.** And a single removable flag is brittle as the *only* brake: v1 records a whole seduction climb collapsing on first play the moment its one daily-cap flag was deleted |
+| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12126`) — a triggerless rung has none.** And a single removable flag is brittle as the *only* brake: v1 records a whole seduction climb collapsing on first play the moment its one daily-cap flag was deleted |
 | **4 · A resource cost per rung** | `costs` (§27). Gate-enforced — the engine does not offer a rung the player cannot afford | energy is the wrong *primary* lock for a relationship ("too tired to seduce him" is bad fiction). It is a legitimate *throttle* when the fiction supports it, and it is the strongest tool available to a triggerless rung |
 
 ### M4 · The recipe — layer all three
@@ -842,16 +836,13 @@ reference climb was live-verified at **7–10 in-game days**.
   the player wanted, you have built a chore. The payoff is content, not a number: a new line, a
   clip they have not seen, a door that opens.
 
-v1's reference climb stacked all four levers and measured out at a 7–10 in-game-day campaign. That
-is the shape to aim at.
-
 ### M5 · How to throttle a TRIGGERLESS rung — the gap that caused the failure
 
-Nearly every rung in a v2 game is **triggerless**: a canvas with no `[canvases.trigger]` block,
-reached by a hub choice. That single structural fact voids the first tool everyone reaches for.
+A rung reached by a hub choice is **triggerless**: a canvas with no `[canvases.trigger]` block.
+That single structural fact voids the first tool everyone reaches for.
 
 ```
-max_triggers_per_day  →  read off the trigger (v2.py:11017)  →  DOES NOT APPLY
+max_triggers_per_day  →  read off the trigger (v2.py:12126)  →  DOES NOT APPLY
 ```
 
 The two that do:
@@ -893,8 +884,8 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:14364-14373
 > ```
 >
-> `advanceTime` rolls the day inside itself (`v2.py:5411-5414`) and that is where the tick clears
-> every `_today` flag (`v2.py:5552`). So an **exit**-set cap on a rung that crosses midnight is
+> `advanceTime` rolls the day inside itself (`v2.py:5906-5909`) and that is where the tick clears
+> every `_today` flag (`v2.py:6046-6048`). So an **exit**-set cap on a rung that crosses midnight is
 > written *after* the clear, and the new day starts already capped.
 >
 > A sleep rung that runs from evening to morning with its cap on the exit is never offered before
@@ -902,7 +893,7 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > says a word.
 >
 > ⚠️ **A LOCATED canvas does not need a flag at all.** `max_triggers_per_day` is read off the
-> trigger (`v2.py:11017`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
+> trigger (`v2.py:12126`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
 > (`v2.py:4290`), so it is immune to this. Reach for the flag only when the rung is triggerless.
 
 ⚠️ **Do not do this with a hidden counter trait and an `lt` condition.** It works, and it is what
@@ -1014,22 +1005,5 @@ A need can use both. What it cannot do is neither, which is a trait that only ev
 
 ---
 
-## The field, measured 2026-08-16
-
-Every v2 game plus the v1 reference game, parsed from merged TOML:
-
-| | vesper (v1) | back_home | steam | forty_miles | seventh_day |
-|---|---|---|---|---|---|
-| priced choices (`costs`) | **32** | 0 | 0 | 10 | 7 |
-| `max_triggers_per_day` | **11** | 17 | 0 | 9 | **0** |
-| `trigger_mode = "random"` | **14** | 0 | 0 | 8 | **0** |
-| conditional (`group`) blocks | **138** | 102 | 91 | 0 | **0** |
-| choices open on turn one | 64% | 26% | 50% | 45% | **78%** |
-| nodes per canvas | **1.9** | 1.0 | 1.0 | 1.0 | 1.0 |
-
-Read the last row before the others. The v1 game averages nearly two nodes per canvas; every v2 game
-averages one. A one-node canvas is a single screen with a single exit — which is a fine shape for a
+A one-node canvas is a single screen with a single exit — which is a fine shape for a
 rung, and a warning when it is the shape of the *entire game*.
-
-And read `seventh_day`'s column as a whole: **zero of every throttle the engine offers.** It is not
-that its author chose badly between them. Nothing in this skill told them the choice existed.
