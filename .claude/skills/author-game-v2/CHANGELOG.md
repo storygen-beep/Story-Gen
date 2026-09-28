@@ -5,6 +5,80 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC13: scene kinds, toggles, the cast page on, her face, companion and pressure-man
+
+**Why.** PRD IC13. The field keeps dates, teases that pay off, gifts and danger; lets players switch
+content off; shows a cast page; keeps one face for her; and leans on a companion and a pressure-man.
+None had a place in the skill. Plan: `round5/IC13_DIFF_PLAN.md`; LO's decisions 2026-09-28.
+
+**What changed.**
+- `references/the-surfaces.md` **R7c · Four scene kinds the field keeps** — date, a tease that pays off
+  inside the arc (A13), gift, danger (R5b.3 applies). A menu, never a gate. Field: a passage-name
+  recount of 26 of the mopoga top 30 — dates 20, flirting 12, gifts 9, danger 12 (LO: the recount, not
+  the review's unreproducible 20/20). Examples from Course of Temptation, In Her Own Hands, Shady Deals
+  and Cupid's Way, each quote checked inside its named passage.
+- `the-surfaces.md` **R5b.4 · A content toggle is a start choice, and one kink must not crowd out the
+  rest** — a toggle is a start-choice flag per theme or character (the engine has no settings screen);
+  Course of Temptation's twelve kinds × five levels, In Her Own Hands' red/yellow/green list; 15/26
+  (numbers only). The crowding rule is labelled second-hand player evidence (Round 2 quit reasons, F95;
+  LO). R5b.3's "gate it on a setting" now says a start-choice flag.
+- **New `lint · toggles declared`** (`scripts/gates.py` `lint_toggles_declared`): each `want.toggles`
+  flag and how many canvases read it; "switches nothing" when none; n/a when none is declared. Gate
+  tables unchanged. `SKILL.md` lint list names it. New `tests/test_gates_ic13.py` (3).
+- `references/the-want.md`: new **§5 The world** (a pointer to `the-map.md` R0 with the taboo-at-home
+  exception), so the reference numbers match the template (§6 Why this person, §7 Register); §6 gains
+  **the companion**, **the pressure-man** and **her face**, each with passing-game evidence.
+- `references/the-map.md`: the house warning gains "unless the fantasy is taboo at home", *(LO decided.)*
+- `references/state.md`: `want.pressure` and `want.toggles[]` (optional).
+- `references/engine.md`: §34 opens with "on by default in the template" and the four passing games'
+  cast pages; new **§34b `[player_portrait]`** (keys, the sidebar widget, and the engine limit that it
+  renders only with `clothing_enabled = true`, `v2.py:1579`).
+- `templates/board.toml`: an uncommented `[ui.cast_page]` and a `[player_portrait]` slot.
+  `templates/want.md`: the pressure-man slot.
+- Already done before IC13: the PRD's anti-tease line was cut in IC8; the companion and face slots
+  came with IC1.
+
+**Verified.** pytest 162 passed · `--selfcheck` exit 0, "the index is current" · cite_check 78 ·
+tallies unchanged (29/47, 46/50, 41/48 with 3 [off]) · `git status games/` unchanged ·
+`templates/board.toml` fails to parse only at its old placeholder line, shifted by the 16 new lines.
+
+words: 132,827 → 133,652 (+825) · running total 133,652 / 149,283
+
+---
+
+## 2026-09-28 — Switched-off canvases in the tally: a pass that needs them is a FAIL [off]
+
+**Why.** LO: switched-off canvases should not flatter the scoreboard the way parked content once did.
+Measured first (`round5/SWITCHED_OFF_PLAN.md`): the defect is the mirror of parked. Parked content is
+taken out of the TOML; an `is_active = false` canvas stays in, and most gates read it as if it plays.
+
+**What changed.**
+- `scripts/gates.py`: new `_switched_off` (inactive, not dev, and not the target of any substitution
+  rule — a dispatcher still plays those, `engine.md` §46.3) and `_mark_switched_off`, called from
+  `score()` after the parked pass. Two extra runs when a game has any:
+  - **as played** (those canvases taken out): a gate that passes with them counted and does not pass as
+    played is a **FAIL**, headline `[off] passes only if switched-off canvases are counted — as played:
+    …` (LO);
+  - **all on** (turned on): a gate n/a only because they are off is *switched off, not judged*, tag
+    `[off ]`, not passing.
+  - The tally line prints `N fail (K [off] — switched-off canvases counted)`; JSON tally gains
+    `switched_off` and `switched_off_canvases`; a parked row is never marked again.
+- `SKILL.md` tally paragraph: one sentence.
+- New `tests/test_gates_switched_off.py` (5): a pass propped by switched-off content fails [off]; a game
+  with none is unchanged; a substitution target is left alone; n/a only because they are off is not
+  judged; the tally counts [off] rows as not passing.
+
+**Effect on our three games (testing).** the_balance 29/47 and orientation 46/50 unchanged. vesper_two
+**44/48 → 41/48 · 3 [off]**: `every authored node is reachable` (as played 171/173), `a day-cap closes`
+(as played one flag read and cleared but never set), `a declared garment can be got` (as played 7/8).
+No other row moved.
+
+**Verified.** pytest 159 passed · `--selfcheck` exit 0 · cite_check 78 · `git status games/` unchanged.
+
+words: 132,765 → 132,827 (+62) · running total 132,827 / 149,283
+
+---
+
 ## 2026-09-28 — Two settings re-derived from the field: explicit in repeatable 40%, group and opening meetings count
 
 **Why.** Two scoreboard settings were calibrated only on our own games (LO: re-derive each from field

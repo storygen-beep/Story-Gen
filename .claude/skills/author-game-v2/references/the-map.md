@@ -7,7 +7,9 @@ validates almost none of it.
 > ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
 > [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,
 > City Center), and Course of Temptation's [Maps] splits into `<<tab Campus>>` and `<<tab Town>>`.
-> A world of one house plus a row of shops is not that shape, however many gates it passes.
+> A world of one house plus a row of shops is not that shape, however many gates it passes —
+> unless the fantasy is taboo at home (`want.fantasy_shape = "taboo_at_home"`), where the house is
+> the point. *(LO decided.)*
 > **An example outranks every rule beside it: a rule is read, an example is copied.** So this file
 > teaches a *menu* you must choose from and carries no picture you can copy. See `SKILL.md`,
 > operating rules.

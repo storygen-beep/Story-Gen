@@ -4757,6 +4757,43 @@ def lint_cheat_page(game):
             f"{4 - sum(1 for _, k in CHEAT_BASICS if k not in have)} of 4 basics free"), findings
 
 
+def lint_toggles_declared(game, state):
+    """`want.toggles` — the content toggles the author declared, and whether anything reads
+    them (`the-surfaces.md` R5b.4). Reported, never a gate.
+
+    A toggle is a start-choice flag: the engine has no settings screen, so a flag every
+    canvas of that kind reads is the only route. A declared toggle that no canvas reads
+    switches nothing, so it is listed. n/a when none is declared — a game may have none.
+    """
+    toggles = [t for t in ((((state or {}).get("want") or {}).get("toggles")) or [])
+               if isinstance(t, dict) and t.get("flag")]
+    if not toggles:
+        return "n/a — none declared in want.toggles (the-surfaces.md R5b.4)", []
+    wanted = {t["flag"] for t in toggles}
+    readers = collections.defaultdict(set)
+
+    def walk(obj, cid):
+        if isinstance(obj, dict):
+            for it in _conditions_of(obj):
+                if it.get("flag_key") in wanted:
+                    readers[it["flag_key"]].add(cid)
+            for v in obj.values():
+                walk(v, cid)
+        elif isinstance(obj, list):
+            for v in obj:
+                walk(v, cid)
+
+    for c in (game.get("canvases") or []):
+        walk(c, c.get("id") or "?")
+    rows = []
+    for t in toggles:
+        n = len(readers[t["flag"]])
+        rows.append(f"{t.get('id') or t['flag']} (`{t['flag']}`): read by {n} canvas(es)"
+                    + (" — switches nothing" if not n else ""))
+    live = sum(1 for t in toggles if readers[t["flag"]])
+    return f"{len(toggles)} declared · {live} read by at least one canvas", rows
+
+
 def lint_repeatables_without_step(model, state):
     """Repeatables added since the last release with no declared step added. Reported.
 
@@ -6420,6 +6457,74 @@ def _merge_parked(game, files):
     return merged, errors
 
 
+def _switched_off(game):
+    """Ids of the canvases that never play on their own: `is_active = false`, not a dev
+    shortcut, and NOT the target of any substitution rule.
+
+    ⚠️ `is_active = false` is not "unaddressable" (`engine.md` §46.3): a dispatcher still
+    substitutes an inactive canvas in, so a substitution target is live content and is
+    left alone.
+    """
+    canvases = game.get("canvases") or []
+    targets = {sub.get("target_canvas_id") for c in canvases
+               for sub in ((c.get("trigger") or {}).get("substitutions") or [])
+               if isinstance(sub, dict)}
+    return [c.get("id") for c in canvases
+            if (c.get("trigger") or {}).get("is_active") is False
+            and c.get("id") not in targets and not _is_dev(c)]
+
+
+def _mark_switched_off(results, model, game, state, info):
+    """Switched-off canvases in the tally (LO, 2026-09-28).
+
+    Parked content is taken OUT of the TOML, so a gate cannot see it. A switched-off canvas
+    stays IN, and most gates read it as if it plays. So the gates run twice more:
+      · AS PLAYED — the switched-off canvases taken out. A gate that PASSES with them
+        counted and does not pass as played is a FAIL, noted "passes only if switched-off
+        canvases are counted" (`switched_off = "fail"`).
+      · ALL ON — the switched-off canvases turned on, for the few gates that skip them. A
+        gate that is n/a live and judged with them on is "switched off, not judged"
+        (`switched_off = "na"`), counted as not passing, like parked.
+    Both land in the tally's fail count, and the tally line prints how many are [off].
+    """
+    ids = _switched_off(game)
+    info["switched_off"] = ids
+    if not ids:
+        return
+    off = set(ids)
+    played = copy.deepcopy(game)
+    played["canvases"] = [c for c in (played.get("canvases") or []) if c.get("id") not in off]
+    on = copy.deepcopy(game)
+    for c in (on.get("canvases") or []):
+        if c.get("id") in off:
+            c.setdefault("trigger", {})["is_active"] = True
+    try:
+        as_played = {r["gate"]: r for r in run_gates(*build(played), state)}
+        all_on = {r["gate"]: r for r in run_gates(*build(on), state)}
+    except Exception as exc:
+        info["errors"].append(("(switched-off canvases)", f"could not be re-gated — {str(exc)[:120]}"))
+        return
+    shown = ", ".join(ids[:6]) + (f" and {len(ids) - 6} more" if len(ids) > 6 else "")
+    for r in results:
+        if r.get("parked"):
+            continue
+        p, o = as_played.get(r["gate"]), all_on.get(r["gate"])
+        if r["pass_"] and p is not None and not p["pass_"]:
+            verdict = "n/a" if p["na"] else "too few" if p.get("few") else "FAIL"
+            r.update(pass_=False, switched_off="fail",
+                     headline=(f"[off] passes only if switched-off canvases are counted — "
+                               f"as played: {verdict} · {p['headline']}"),
+                     detail=[f"switched off: {shown}"] + list(p.get("detail") or [])[:8])
+            info["marked_off"] += 1
+        elif r["na"] and o is not None and not o["na"]:
+            r.update(na=False, pass_=False, switched_off="na",
+                     headline=(f"switched off, not judged — with them on: "
+                               f"{'PASS' if o['pass_'] else 'TOO FEW' if o.get('few') else 'FAIL'} · "
+                               f"{o['headline']}"),
+                     detail=[f"switched off: {shown}"])
+            info["marked_off"] += 1
+
+
 def score(model, game, state=None, game_dir=None):
     """run_gates, plus PARKED, NOT JUDGED (PRD IC21).
 
@@ -6433,8 +6538,9 @@ def score(model, game, state=None, game_dir=None):
     """
     results = run_gates(model, game, state)
     files = _parked_files(game_dir, state)
-    info = dict(files=files, errors=[], marked=0)
+    info = dict(files=files, errors=[], marked=0, switched_off=[], marked_off=0)
     if not files:
+        _mark_switched_off(results, model, game, state, info)
         return results, info
     merged, info["errors"] = _merge_parked(game, files)
     try:
@@ -6442,6 +6548,7 @@ def score(model, game, state=None, game_dir=None):
         with_parked = {r["gate"]: r for r in run_gates(m_model, m_game, state)}
     except Exception as exc:
         info["errors"].append(("(merged game)", f"could not be built — {str(exc)[:120]}"))
+        _mark_switched_off(results, model, game, state, info)
         return results, info
     rel = [os.path.relpath(f, game_dir) for f in files]
     for r in results:
@@ -6454,6 +6561,7 @@ def score(model, game, state=None, game_dir=None):
                      detail=[f"parked content: {', '.join(rel[:6])}"
                              + (f" and {len(rel) - 6} more" if len(rel) > 6 else "")])
             info["marked"] += 1
+    _mark_switched_off(results, model, game, state, info)
     return results, info
 
 
@@ -10895,6 +11003,7 @@ def main():
     grow_summary, grow_lints = lint_repeatables_without_step(model, state)
     reset_summary, reset_lints = lint_flag_never_resets(game, state)
     cheat_summary, cheat_lints = lint_cheat_page(game)
+    tog_summary, tog_lints = lint_toggles_declared(game, state)
     joint_summary, joint_lints = lint_joints(game)
     (pron_rows, pron_note), event_rows, (vl_rows, vl_seen) = lint_readable(game)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
@@ -10909,7 +11018,9 @@ def main():
                           "tally": {"pass": _tp, "fail": _tf, "parked": _tk, "few": _tw,
                                     "na": _tn, "denominator": _td,
                                     "parked_files": parked_info["files"],
-                                    "parked_errors": parked_info["errors"]},
+                                    "parked_errors": parked_info["errors"],
+                                    "switched_off": sum(1 for r in results if r.get("switched_off")),
+                                    "switched_off_canvases": parked_info["switched_off"]},
                           "lints": {"dialogue_attribution": lints,
                                     "world_prose": world_lints,
                                     "screen_shape": {"summary": shape_summary,
@@ -10974,6 +11085,8 @@ def main():
                                                           "findings": reset_lints},
                                     "cheat_page": {"summary": cheat_summary,
                                                    "findings": cheat_lints},
+                                    "toggles_declared": {"summary": tog_summary,
+                                                         "findings": tog_lints},
                                     "joints": {"summary": joint_summary,
                                                "findings": joint_lints},
                                     "pronoun_nobody": {"note": pron_note,
@@ -11014,6 +11127,7 @@ def main():
     print(f"  {'─'*72}")
     for r in results:
         tag = ("park" if r.get("parked") else "few " if r.get("few") else
+               "off " if r.get("switched_off") == "na" else
                "n/a " if r.get("na") else ("PASS" if r["pass_"] else "FAIL"))
         print(f"  [{tag}]  {r['gate']:32s} {r['headline']}")
         for d in r["detail"][:12]:
@@ -11026,7 +11140,11 @@ def main():
               f" could not be merged — {err}")
     # PRD IC21 (LO, 2026-09-27): parked and too-few count in the denominator as NOT
     # passing, so neither can raise the score; n/a stays out.
-    print(f"  {npass}/{denom} gates pass  ·  {nfail} fail  ·  {npark} parked, not judged  ·  "
+    # Switched-off canvases (LO, 2026-09-28): a gate that passes only with them counted
+    # is a FAIL, and the line says how many fails are [off] so the reason is visible.
+    noff = sum(1 for r in results if r.get("switched_off"))
+    off_note = (f" ({noff} [off] — switched-off canvases counted)" if noff else "")
+    print(f"  {npass}/{denom} gates pass  ·  {nfail} fail{off_note}  ·  {npark} parked, not judged  ·  "
           f"{nfew} too few to judge  ·  {nna} n/a (nothing authored)")
 
     # Lints sit BELOW the tally and never touch it. A warning that can change a
@@ -11625,6 +11743,14 @@ def main():
     if cheat_lints:
         print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
               " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · toggles declared — {tog_summary}")
+    for h in tog_lints[:12]:
+        print(f"          · {h}")
+    if tog_lints:
+        print("          (a LIST, never a score. A toggle is a start-choice flag every canvas of its"
+              " kind reads; one no canvas reads switches nothing — the-surfaces.md R5b.4)")
 
     if joint_summary:
         print(f"  {'─'*72}")

@@ -100,6 +100,22 @@ starting_week = 1
 # hint = "<one line — what reopens>"
 # free = true
 
+# ── the cast page — ON by default (references/engine.md §34) ─────────────────
+#   Lists only the people she has met (their quest cards decide), so it keeps F8.
+#   Every field is optional; the block being here is what switches it on.
+[ui.cast_page]
+title = "The Cast"
+intro = "<one line — who these people are to her>"
+
+# ── her face (references/engine.md §34b · the-want.md §6) ─────────────────────
+#   One performer or one look, kept across the game. Renders only with
+#   clothing_enabled = true (set above) — an engine limit.
+[player_portrait]
+enabled = true
+default_image = "<images/her_default.jpg>"
+# underwear_image = "<images/her_underwear.jpg>"
+# naked_image = "<images/her_naked.jpg>"
+
 
 # ── meters ───────────────────────────────────────────────────────────────────
 #   ⚠️ ANSWER W1 BEFORE YOU NAME A SINGLE METER: does the PLAYER climb, or does

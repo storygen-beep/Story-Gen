@@ -42,7 +42,10 @@ belong here; only decisions, debts, and promises do.
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
     "promise":       { "goal": "…", "date": "…", "mystery": "…", "payout": "…", "rival": "npc_id" },
     "companion":     "npc_id",   // who leads her, or whom she leads
+    "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
     "face":          "…",        // one performer or one look, kept across the game
+    "toggles":       [ { "id": "…", "flag": "…", "turns_off": "…" } ],
+                                 // content toggles — the-surfaces.md R5b.4; lint · toggles declared
 
     // WHO THE PLAYER IS — declared BEFORE she is described. the-want.md §1.
     // The default `female` is EVIDENCED (49 comments for a female lead, 11 against).

@@ -356,7 +356,11 @@ one quest in that game, and it is how you build the *hard* approach. Reaching fo
 author of this section did first, and the game it was read from does the opposite 36 times out
 of 41.
 
-### 5. Why *this* person
+### 5. The world
+Root it outdoors, in more than one zone — `the-map.md` R0 — unless the fantasy is taboo at home,
+where the house is the point.
+
+### 6. Why *this* person
 One line per character. Not their role in a plot — **why she wants them, or why being wanted
 by them lands.**
 
@@ -367,7 +371,21 @@ by them lands.**
 
 A character with no line here is a character with no reason to exist. Cut them or write it.
 
-### 6. Register
+**The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
+Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
+Way's Jasmin sets up her dating app [Download Finder]. Record as `want.companion`.
+
+**The pressure-man** — one man whose demand drives her choices release after release. The no has a
+stated price and there is an opt-out somewhere (`the-release.md`, the pressure type). Cupid's Way's
+Mr. Brown: *"Send it and I'll remove the penalty."* Shady Deals' Romano, over a casino debt:
+*"you'll have to pay me back... one way or another."* Record as `want.pressure`.
+
+**Her face** — one performer or one look, kept across the game. In Her Own Hands keeps one woman
+through four profile images that change with her inhibition [Statistics]; a Shady Deals player
+faults its *"ZERO actress consistency"* (F95, second-hand). Record as `want.face`; build it with
+`[player_portrait]` (`engine.md` §34b).
+
+### 7. Register
 Three declarations, made once:
 
 - **`narration_person`** — recommend `second`. It is per-game and immutable after the first
