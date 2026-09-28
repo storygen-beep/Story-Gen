@@ -10880,6 +10880,16 @@ def ship_rows(slug, root=None):
         report.append(("a hint line with place and time per step", not h_probs,
                        f"{h_checked - len(h_probs)}/{h_checked} steps have a card that says "
                        f"where and when", h_probs[:10]))
+    # Checkpoint A (IC16): the spine's decisions, from the ledger alone — `scripts/shape.py`.
+    # REPORT, not BLOCK: the BLOCK list moves only at a release boundary (the-release.md).
+    import shape as _shape
+    _srows, _sflags = _shape.check(state, _shape.is_strict(state))
+    _sbad = [f"{n}: {h}" for n, ok, h, _d in _srows if ok is False]
+    _sjudged = [r for r in _srows if r[1] is not None]
+    report.append(("the spine holds together", None if not _sjudged else not _sbad,
+                   f"{len(_sjudged) - len(_sbad)}/{len(_sjudged)} spine checks pass "
+                   f"(scripts/shape.py)" if _sjudged else "n/a — nothing on the spine yet",
+                   _sbad[:10]))
     shown = set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]

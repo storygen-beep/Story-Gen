@@ -90,7 +90,8 @@ belong here; only decisions, debts, and promises do.
   // THE SPINE — the-spine.md. Page status and sign-off ONLY; each decision lives in the key
   // its page names (board.*, dependencies, release_page), never copied here.
   "spine": {
-    "pages": [ { "id": "SP1", "status": "REVIEW" | "READY", "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]
+    "pages": [ { "id": "SP1", "status": "REVIEW" | "READY", "drafted_at": "YYYY-MM-DD",
+                 "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]   // shape.py: signed_at after drafted_at
   },
 
   // SP3 — a step that needs another person's step, a window, or a place.
@@ -204,6 +205,10 @@ belong here; only decisions, debts, and promises do.
       //    also tells the obligation-against-the-week lint that a low baseline ratio is
       //    by construction rather than an oversight.
       "obligation_moves": "<the mechanism, in one line — what raises it and when>",
+      // SP4, read by shape.py: how often the obligation falls due (default every week), and — only
+      //    when the week's income is MEANT not to cover it — why, in one line.
+      "obligation_every_weeks": 1,
+      "shortfall": "<optional — why the pressure is meant not to be met>",
       "sinks":      ["rent", "the boiler", "the bus fare"]
     }
   },
