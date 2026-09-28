@@ -231,25 +231,10 @@ nothing; every repeatable should deposit into something"* — was written thirty
 was measured, and measuring it narrowed it.
 
 A **paid repeatable** is a choice on a repeatable canvas costing money or energy, or 30 minutes or
-more. Across the eight v2 games:
-
-```
-                paid actions   deposit something   DEPOSIT NOTHING
-forty_miles          10               0                 10
-seventh_day         102              11                 91
-the_allowance        14               2                 12
-off_season           41              36                  5
-the_season           18              17                  1
-mrs_vance            47              46                  1
-ALL EIGHT           232             112                120   = 51.7%
-```
-
-`forty_miles` charges for diesel (£20), bleach (£6), the dryer (£1) and coffee (£1) and **grants
-nothing on any of its ten.** Its own TOML calls the diesel rung `SINK, £20` — it is obeying R2
-exactly.
+more.
 
 > ⚠️ **A pure sink is not a defect. A game made only of pure sinks is.** Nothing in this file
-> distinguished them, which is why ten of ten went out that way. R2 asks whether money leaves; R1c
+> distinguished them. R2 asks whether money leaves; R1c
 > asks whether anything remembers that it left.
 
 ⚠️ **The broader phrasing is wrong and was rejected.** Counting *every* repeatable surface rather than
@@ -494,11 +479,6 @@ which leaves a gap where nothing is pulling. Ratchet it through the ignition, th
 opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
 be open, obvious and well paid on day one, or the ratchet is a wall instead of a door.
 
-⚠️ **Ours are all ignition and no spark.** Eight of ten games clear the whole week's obligation in
-under one day of the best job, median **0.48** (`Economy_Pressure_Study_20260827/FINDINGS.md:289`).
-`mrs_vance` earns $208 in a full day against a $260 *week* — so the debt-to-the-collector branch its
-author built is reachable, in practice, almost never.
-
 **Not a gate.** Four corpus games carry a recurring obligation; a threshold read off four games
 would be invented.
 
@@ -649,23 +629,22 @@ new-life-project     StoryCaption prints  £$money
 ```
 
 Three unrelated economies, one architecture. The symbol is applied at a single site, so it cannot
-drift. That is why the field's consistency is high and ours is not:
+drift. That is why the field's consistency is high:
 
 ```
-                                        FIELD            OURS
-one notation, share of money refs        92% median       82% median   (field min 56%)
-priced link labels using the SYMBOL      94.0%            see below
+                                        FIELD
+one notation, share of money refs        92% median   (field min 56%)
+priced link labels using the SYMBOL      94.0%
        …using a spelled-out unit          5.2%
        …using a currency CODE             0.8%   (5 labels, all corpo-life)
-a money WORD carrying an EXACT amount     20%             51%
+a money WORD carrying an EXACT amount     20%
 ```
 
 **We have no printer**, so every price is retyped by hand and the engine adds notations of its own.
 `[settings.rent] currency_symbol` is the closest thing to one, and of the sixteen sites where the
 generator prints a money figure it governs **four — all on the rent-day screen**. Nine hardcode `$`
-and three print no notation at all (`engine.md` §33 carries the full census). A shipped game proves it: `forty_miles` declares
-`currency_symbol = "£"` with the author's own comment *"the pages hardcoded `$` before this key
-existed"* — and its released build still ships
+and three print no notation at all (`engine.md` §33 carries the full census). A game that declares
+`currency_symbol = "£"` still ships
 `You have: <strong>$<<print $player.core_traits.money>></strong>` on `RentDay_Short`
 (`v2.py:16000`), the screen the player sees **when she cannot pay**.
 
@@ -730,8 +709,8 @@ game is not failed for using both forms of one currency; fail on two units. Pure
 judgement.
 
 **Not gated:** *is a price spelled out rather than figured?* `zaras-school-life` writes every price
-in words across 905k words and is perfectly consistent; `apocalyptic-world` ships `Add 1000 caps`;
-`vesper` prices ten labels `10 coin` and never varies. A rate gate would fail all three for obeying
+in words across 905k words and is perfectly consistent; `apocalyptic-world` ships `Add 1000 caps`.
+A rate gate would fail both for obeying
 the rule. Both rate checks print and never move the tally.
 
 ---
@@ -787,7 +766,7 @@ for in this game* asked at the point where it is still cheap to answer.
 | **Gate · the price is in one currency** | R7 — every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency. A symbol and its spelled-out unit count as the same one |
 | **Gate · what money buys opens a door** | R1b — a flag set by a choice that costs the currency, surviving the night, must be READ somewhere. **Fails only on ZERO**; a game that sells nothing reports `n/a`, which is not a pass. Day-capped flags are carved out, as gate 18 does |
 | **Lint · money gates content, or only prices it** | R1 — gate 16 passes on either channel and cannot tell them apart. A CONDITION on the currency means content money OPENS; a `costs` block only means a thing can be bought |
-| **Lint · what a paid repeatable leaves behind** | R1c — the share of paid repeatable choices that deposit anything. A pure sink is not a defect; a game made only of pure sinks is. A rate, never a score — ours run 10-of-10 pure at one end and 98% depositing at the other |
+| **Lint · what a paid repeatable leaves behind** | R1c — the share of paid repeatable choices that deposit anything. A pure sink is not a defect; a game made only of pure sinks is. A rate, never a score |
 | **Lint · the currency in the prose** | the game's dominant-notation share against the field's 92% median, and its exact-amount-in-words rate against the field's 20% |
 | **Lint · the price is spelled out** | the form of every priced label — symbol / word / code — against the field's 94 / 5 / 1 |
 | **Lint · the obligation against the week** | R3 — `obligation_amount` over `week_income`, printed, never judged. Says so when `week_income` is not declared |

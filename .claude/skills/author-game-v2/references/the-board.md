@@ -397,8 +397,7 @@ Declare each need with the four fields from `the-meters.md` M8:
 ]
 ```
 
-- **Needs are per game, not a fixed list.** A truck stop's body is not a household's; `vesper`'s is
-  `Power down` / `Charge up`.
+- **Needs are per game, not a fixed list.** A truck stop's body is not a household's.
 - **`shuts` is the load-bearing field.** A need that shuts nothing is a chore (M9, gate 29).
 - Each need must appear on some room's list (`the-surfaces.md` R2) — a need with nowhere to fill it
   is a countdown to a wall.

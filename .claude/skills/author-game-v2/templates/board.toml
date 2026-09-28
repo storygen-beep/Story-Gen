@@ -183,8 +183,8 @@ bands = [
 #   on its own, she refills it, and while it is empty something is SHUT.
 #   references/the-meters.md M8-M10.
 #
-#   Per game, NEVER a fixed list — vesper's body is "Power down"/"Charge up", a
-#   truck stop's is not a household's. What is fixed is the FORM: five fields.
+#   Per game, NEVER a fixed list — a truck stop's body is not a household's.
+#   What is fixed is the FORM: five fields.
 #
 #   ⚠️ `shuts` IS THE POINT. Gate 29 fails any need whose key no condition
 #      anywhere in the game reads. Measured failure: the_allowance declares

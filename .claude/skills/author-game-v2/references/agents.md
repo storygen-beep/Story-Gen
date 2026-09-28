@@ -102,31 +102,11 @@ what it pays, her moment, what it opens (`the-release.md`, "The next step").
 
 ## The Attack Panel — before the build, never after
 
-> ✅ **BUILT 2026-08-29.** The agent is `.claude/agents/v2-attack.md`, callable as
-> `subagent_type: "v2-attack"`. Give each instance **one lens** and run them in one message.
-> The same file does the verify pass: hand an instance somebody else's finding instead of a
-> lens, and its job flips to refuting it.
->
-> ⚠️ **It is the one agent with NO instrument of its own, and that is measured rather than
-> assumed.** The Player got `playtest.py`, the Pitchers got `pitch_pack.py`, the Prose Maker got
-> `--beat`. Three candidate checks were prototyped for this one against every v2 game and all
-> three came back empty:
->
-> | candidate | result |
-> |---|---|
-> | a meter whose every mover is itself gated at or above the rung it feeds — the circular soft-lock | **0 across 8 games** |
-> | a meter read by a condition and written by nothing | **0 across 9 games** |
-> | a gate above the meter's reachable ceiling | **1 hit, and it was the probe's own bug** — `vesper`'s `loop_npc_pleasure` climbs 8–14 at a time through a `{type="random"}` value the filter dropped, and the probe called it "only ever set, max 0" |
->
-> **The tooling is not missing.** `gates.py` already occupies the space of "broken in a way we
-> have seen before" with 46 gates and 28 lints, and the Panel's whole value is the other half —
-> a design that has not been built, where nothing can be parsed because nothing exists yet. So
-> the agent's first instruction is to run `gates.py` and `pitch_pack.py` and then **report
-> nothing they already report.**
->
-> The third probe's failure is kept above on purpose: it is the only "finding" a nine-game sweep
-> produced, and it was noise. That is the panel's own hit rate in miniature, which is why the
-> verify pass below is not optional.
+> The agent is `.claude/agents/v2-attack.md` (`subagent_type: "v2-attack"`). Give each instance
+> **one lens** and run them in one message; hand an instance somebody else's finding and its job
+> flips to refuting it. It has **no instrument of its own** — three candidate checks were
+> prototyped against every v2 game and came back empty — so its first instruction is to run
+> `gates.py` and `pitch_pack.py` and **report nothing they already report.**
 
 **Job:** try to break the *design*, while changing it is still cheap.
 
@@ -142,7 +122,8 @@ shipped and *Leads to* names a findable next step; that the two voice lines real
 whether the pitch is **too close to a moment-library entry** — the same situation with the same kind
 of person — naming the entry. **It scores nothing**: it returns the pitch with a one-line note beside
 each line, and LO judges. Its only rejections are two instant fails, each quoting the line: a big
-turn forced on her with no warning or way round, and sex used only as a punishment. A "no" that
+turn forced on her with no warning or way round, and sex used only as a punishment
+(`the-surfaces.md` R5b.3). A "no" that
 locks the relationship for good is flagged, not failed.
 
 **Every finding gets an adversarial verify.** Measured survival rates from our own runs: one
@@ -152,6 +133,17 @@ review recorded "no false-gap spam" as a quality marker — that is the bar.
 
 Give each verifier a **distinct lens** rather than running N identical skeptics. Diversity
 catches failure modes that redundancy cannot.
+
+---
+
+## The Reader — the scenes, read as scenes
+
+The agent is `.claude/agents/v2-reader.md`. Give it a slug or a list of canvases, after a build. It
+reads every scene with a named person and every explicit beat against the seven tests in
+`register.md` "What a scene contains", and returns a table — scene · test · PASS/FAIL/N/A · the
+line judged · why. **It fixes nothing and scores nothing**; LO reads the table. On test 1 it names
+the earlier canvases it checked for his wanting (A13). The excitement lens is not here — it reads
+pitches, on `v2-attack`.
 
 ---
 
@@ -176,8 +168,7 @@ catches failure modes that redundancy cannot.
 > **The pivot is reported as a SHAPE and never as a verdict.** The rule is a reading test —
 > *is the last sentence about what it MEANS or what is HAPPENING* — and no regex decides what a
 > sentence is about. What is observable is where the body words fall, so `--beat` prints the
-> distribution across sentences and quotes the last sentence back. Two real `mrs_vance` beats
-> sampled while building it both end on a sentence carrying no body word. Whether either
+> distribution across sentences and quotes the last sentence back. Whether a beat
 > pivoted is a reader's call, and automating that call is how a check starts failing correct
 > work.
 
@@ -242,7 +233,7 @@ have already cost this project a session apiece.
 
 ⚠️ **The ban is on LABELS, and the line matters** — stated absolutely above, and one shipped script
 sits the other side of it. `playtest_standing.py` asserts on **body prose** to decide which ladder
-rung rendered, and it proved six rebuilt ladders live (`mrs_vance/REVIEW.md:721`). The distinction
+rung rendered, and it proved six rebuilt ladders live. The distinction
 the record actually supports: a *label* is decorated at render — icons, spacing, cost suffixes — so
 matching author-side text against it fails on a working build; a *beat's prose* is not. So: prose may
 answer **which variant rendered**; only state may answer **whether the mechanic fired**. The harness

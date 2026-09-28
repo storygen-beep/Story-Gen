@@ -80,14 +80,11 @@ into stays short but still speaks. `register.md` L3.
 > to its conclusion, The Classroom Harasser will become like any other character and your
 > relationship can evolve in whatever direction you'd like."*
 
-**Ours, measured 2026-09-01 across twelve built games and 1,396 canvases: zero arcs.** No
-character has a second thing that happens, a third, or a fourth. Every hub and every act loop
-in this repo is authored in its converted state on day one.
-
-**Length.** Course of Temptation runs 10 steps (the harasser), 9 (the best friend) and 12 (the
-roommate's partner); In Her Own Hands runs 14 (Shaun). Each is one character. **This
-is a shape, not a quota** — nothing in the field supports a required number and no gate reads
-it. What is not defensible is zero.
+**Length: one or two long chains, 8–15 steps, for the game's central people; shorter chains for
+the rest.** The field's figure is the **longest** chain per game: a median of about 15, and 12 of
+26 corpus games have one of 15+ steps (numbers only; the corpus includes failing games). Course of
+Temptation runs 10, 9 and 12 steps for three people; In Her Own Hands runs 14 for Shaun. **This is a
+shape, not a quota** — no gate reads it. Run `lint · the arc ladder` to see each person's chain.
 
 ---
 
@@ -145,10 +142,6 @@ Three rules fall out, and the first two already exist elsewhere in weaker form:
   something is.
 - **A refusal routes.** This one is new to the skill. Saying no is not a dead end and not a
   punishment; it is a fork that hands the player a different person.
-
-**Ours:** across every v2 game, no refusal is counted, nothing warns that a door is closing,
-and no refusal opens anything. `night_desk` is the closest — it authors refusal nodes and an
-NPC whose mood colours his rungs — and its refusals are **his**, not hers.
 
 ### A3b · And the default refusal is PARKED, not closed — the game names where to go back
 
@@ -408,11 +401,8 @@ real action that *might* turn into something.
 > One game (`zaras-school-life`, numbers only) measures it: **64%** of ordinary visits to one
 > place come up quiet, drawn from five written versions, each paying 30 minutes and +15 energy.
 
-**Ours** (`gates.py` lint · dispatch depth, 2026-09-01): the deepest dispatching activity in
-the repo turns into **5** different things (`off_season`, `work_arcade_morning`); most turn into
-1–3; and in `night_desk` and `the_route` **every** dispatching activity has exactly one
-outcome, so the roll decides only whether the branch fires, never which branch it is. The
-field's own reference figure in that lint is DoL's Bath at 12 (numbers only).
+The field's reference figure for dispatch depth (`gates.py` lint) is DoL's Bath at 12
+(numbers only).
 
 A quiet outcome is what makes the loud one worth waiting for. A place where something always
 happens has no tension in the click.
@@ -432,7 +422,7 @@ next step. If it is, and its conditions hold, it fires. Arc content does not que
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
 location screen renders (`getStoryCanvasRedirect`, `v2.py:4921`), and among the candidates
 `selectAutoFireCanvasForLocation` (`v2.py:4622`) takes the **highest `priority`**
-(`v2.py:4633-4634`) — already how `off_season`'s `canvas_meet_tam` beats `canvas_tam_saw_you`. So
+(`v2.py:4633-4634`). So
 an arc beat is a one-shot at the location, priced above the other one-shots that could fire there.
 
 ⚠️ **It is the auto-fire queue it wins, not the dice.** That selector skips
@@ -502,13 +492,7 @@ Read what those sixty words do: **he is rude, she notices being left, and the lo
 she is staying.** Three moves, one of them a small sting that belongs to that partner and no
 other. Swap him for the one labelled `Service` and all three change.
 
-⚠️ **This is the clearest gap in the repo and it is not a matter of degree.** Measured
-2026-09-01 across six v2 games: **23 of 23 `finish` / `climax` / `cum` / `end` nodes have an
-empty `exit_block`.** The act completes and the canvas stops. `commuter`'s finish beat is
-seventeen words — *"The machine finishes its cycle and goes quiet, and the garage is only the
-one light again"* — and nothing follows it anywhere.
-
-**It is also the cheapest thing in this file to build.** Thirty-two words and one choice, on a
+**It is the cheapest thing in this file to build.** Thirty-two words and one choice, on a
 node that already exists.
 
 ⚠️ **The aftermath is not the climax.** A finish beat is the last beat *of* the act and is
@@ -546,10 +530,6 @@ she did                           74   (Post)
 out than about the act completing.** Whatever the intuition says about where authoring effort goes
 in this genre, that is the measurement.
 
-⚠️ **Ours is zero on the numerator** — 23 of 23 `finish`/`climax`/`cum`/`end` nodes ship an empty
-`exit_block` (A10), and every `Stop.` outside `commuter` routes at a reset node and prints nothing.
-So the ratio is not "we are a bit light here." There is no half of it built at all.
-
 This is also the cheapest content in the file. An abort beat's median is **23 words**; A10's
 aftermath median is 32. The unit of work is a sentence and a half.
 
@@ -561,11 +541,6 @@ all seven of its loops, at 27-59 words (median 29). The longest:
 
 That is the rule executed correctly — **the beat is about his reaction, not her exit.** One game
 of eleven. Every other v2 game routes its `Stop.` choice at a reset node and prints nothing.
-
-⚠️ **An earlier draft of this reading reported we had none of this. That was wrong**, and it is
-recorded because the error has a shape: the instrument was a name search, `commuter` was found
-only on a second pass, and a rule written from the first pass would have told an author to build
-something they had already built.
 
 ---
 
@@ -663,7 +638,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 - ⚠️ **The native primitive exists and is not wired.** `setup.selectCanvasByPriority`
   (`v2.py:4980`) implements A1 exactly — canvases sharing a `name` form a group, unvisited tiers
   play in ascending `priority`, and once all are seen it returns the highest-priority one
-  forever. **Nothing calls it.** In `games/the_season/output/index.html` the symbol appears
+  forever. **Nothing calls it.** In a built game's `output/index.html` the symbol appears
   three times and is invoked zero times. The live path is `renderSoloActivities`
   (`v2.py:5242`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
   does no progression at all. **Do not point an author at it.** Wiring it is an open engine
@@ -676,8 +651,6 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
   `add` effect. ⚠️ Adjacent `[group]` blocks merge into one if/elseif chain and first match
   wins (`engine.md` §35) — separate the grant band from any other ladder on the same node with
   a non-`group` block, or the ladder below it goes silently unreachable.
-- **Measured, ours:** zero tier groups across twelve games and 1,396 canvases — no two canvases
-  anywhere in this repo share a `name` with different priorities.
 
 ---
 
@@ -685,26 +658,25 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 
 **Nothing ships with this file, and that is deliberate.**
 
-Two precedents rule it out. **P0** — never build a check for a state nothing is in: all twelve
-games would fail almost every rule here on the day it landed, which measures the doctrine's age
+Two precedents rule it out. **P0** — never build a check for a state nothing is in: every existing
+game would fail almost every rule here on the day it landed, which measures the doctrine's age
 and not the games. And **"a check that fails a game for obeying the doctrine is a bug in the
 check"** — until today nothing in this skill asked for any of this, so every red would be
 retrospective.
 
 The candidates below are **lints**, not gates, and each is built only once one game has built
-the thing — the order that produced `the start choice is read` (shipped after `mrs_vance` built
+the thing — the order that produced `the start choice is read` (shipped after a game built
 it first) rather than the order that produced P0.
 
 1. **`a refusal is remembered`** — for every declining choice (the `she can say no` gate already
    locates them), whether its effects write a key that is read anywhere else. A list, never a
-   score. Zero across the repo today, which is the finding, not a failure.
-2. **`the arc ladder`** — the longest chain of one-time canvases per character where each is
-   gated on a flag the previous one sets, printed beside the field's figures (`course-of-temptation` 9, 10 and 12,
-   `in-her-own-hands` 14). A number, never a bar — four arcs in two games, and no threshold is
-   defensible from them.
+   score.
+2. **`the arc ladder`** — BUILT. Per person: the one-time steps written, how many are switched
+   off, and the longest chain where each step's trigger reads what the one before sets; the
+   game's longest beside the field's (median ~15). A list, never a bar.
 3. **`an act ends on something`** — every `finish`-class node whose `exit_block` carries no
-   choices. **23 of 23 today**, so it is a list of the whole repo and therefore useless as a
-   verdict; it becomes worth building the moment one game writes an aftermath.
+   choices. Until a game writes an aftermath it lists every finish node and is useless as a
+   verdict; it becomes worth building the moment one game writes one.
 4. **`a step with nothing before it`** — one-time canvases on a person whose trigger reads no flag
    that person's earlier steps set (A14). A list, never a score; not built yet.
 

@@ -44,6 +44,7 @@ import re
 import json
 import math
 import collections
+import copy
 
 try:
     import tomllib as _toml          # py3.11+
@@ -1726,6 +1727,128 @@ def lint_one_time_speaks(game):
     if not scope:
         return "", []
     return f"{len(mute)} of {scope} one-time canvases bound to a person have nobody speaking", mute
+
+
+FIELD_LONGEST_CHAIN_MEDIAN = 15   # median of each game's longest step chain, 26 corpus games;
+                                  # 12 of 26 have one of 15+ (numbers only — the corpus includes
+                                  # failing games). SKILL_REVIEW, 2026-09-26.
+
+
+def lint_arc_ladder(game, state=None):
+    """Each person's arc as a chain: the one-time steps written, how many are switched off
+    (`is_active = false`), and the longest run where each step's trigger reads a flag or a
+    number the step before it sets. `the-arc.md` A1. A LIST, never a score.
+
+    A step belongs to a person when it is bound to them (`trigger.npc` / `requires_npc`) or
+    its id carries their short name (`arc_kess_02` is Kess's). Declared ladders
+    (`board.characters[].ladder`) print their own step count beside it.
+    """
+    npcs = [n.get("id") for n in game.get("npcs") or [] if n.get("id")]
+    model, _ = build(copy.deepcopy(game))
+    sets = {c["id"]: {str(x) for x in (c.get("sets") or [])} for c in model}
+
+    def reads(c):
+        out = {str(x) for x in (next((m for m in model if m["id"] == c.get("id")), {}).get("reads") or [])}
+        for it in _conditions_of(c.get("trigger") or {}):
+            k = it.get("flag_key") or it.get("trait_key") or it.get("flag") or it.get("trait")
+            if k:
+                out.add(str(k))
+        return out
+
+    declared = {who: len(lad.get("steps") or []) for who, lad in _declared_ladders(state)}
+    rows, best_all = [], (0, "")
+    for npc in npcs:
+        short = npc[4:] if npc.startswith("npc_") else npc
+        pat = re.compile(rf"(^|_){re.escape(short)}(_|$)")
+        steps = [c for c in game.get("canvases") or [] if not _rep_of(c.get("trigger"))
+                 and (npc in ((c.get("trigger") or {}).get("npc"), (c.get("trigger") or {}).get("requires_npc"))
+                      or pat.search(str(c.get("id") or "")))]
+        if not steps:
+            continue
+        ids = [c.get("id") for c in steps]
+        rd = {c.get("id"): reads(c) for c in steps}
+        off = sum(1 for c in steps if (c.get("trigger") or {}).get("is_active") is False)
+
+        def longest(s, seen):
+            best = [s]
+            for t in ids:
+                if t not in seen and sets.get(s, set()) & rd[t]:
+                    p = [s] + longest(t, seen | {t})
+                    if len(p) > len(best):
+                        best = p
+            return best
+
+        chain = max((longest(i, {i}) for i in ids), key=len)
+        if len(chain) > best_all[0]:
+            best_all = (len(chain), npc)
+        row = (f"{npc}: {len(ids)} one-time step(s)"
+               + (f", {off} switched off" if off else "")
+               + f" · longest gated chain {len(chain)}"
+               + (f" ({chain[0]} → {chain[-1]})" if len(chain) > 1 else ""))
+        if npc in declared:
+            row += f" · declared ladder {declared[npc]} step(s)"
+        rows.append(row)
+    if not rows:
+        return "", []
+    return (f"longest chain {best_all[0]} step(s) ({best_all[1]}) · field median of the longest "
+            f"~{FIELD_LONGEST_CHAIN_MEDIAN}"), rows
+
+
+def lint_scene_ends_on_nothing(game):
+    """A one-time scene with a named person that hands the player straight back.
+
+    `register.md` "What a scene contains", test 3 (hook). The scene's last node offers no
+    choice — a bare exit — so the only place a hook can live is its last line, and nothing
+    here can read a line. A LIST for `v2-reader`, never a verdict: a bare exit whose last
+    line points forward is fine.
+    """
+    npc_ids = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    scope, bare = 0, []
+    for c in game.get("canvases") or []:
+        if _rep_of(c.get("trigger")) or not _canvas_npcs(c, npc_ids):
+            continue
+        nodes = c.get("nodes") or []
+        if not nodes:
+            continue
+        scope += 1
+        if not any((n.get("exit_block") or {}).get("choices") for n in nodes):
+            bare.append(f"{c.get('id')}: no node offers a choice; the hook has to be the last line")
+    if not scope:
+        return "", []
+    return f"{len(bare)} of {scope} one-time scenes with a person offer no choice at all", bare
+
+
+def lint_person_never_speaks(game):
+    """A repeatable scene bound to a person — by `trigger.npc` or `requires_npc` — where that
+    person never has a line.
+
+    Not `lint_one_time_speaks` (one-time scenes, anyone speaking) and not `no chain ends in
+    silence` (quest cards): this is the surface the player returns to, and the person on it
+    stays mute. `register.md` "What a scene contains", test 1 (want).
+    """
+    npc_ids = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    scope, mute = 0, []
+    for c in game.get("canvases") or []:
+        if not _rep_of(c.get("trigger")):
+            continue
+        trig = c.get("trigger") or {}
+        bound = {v for v in (trig.get("npc"), trig.get("requires_npc"), c.get("requires_npc"))
+                 if v in npc_ids}
+        if not bound:
+            continue
+        scope += 1
+        spoke = set()
+        for n in c.get("nodes") or []:
+            for b in _flat_blocks(n.get("blocks")):
+                if b.get("type") == "dialog":
+                    props = b.get("props") or {}
+                    spoke.add(props.get("npcId") or props.get("speaker"))
+        silent = sorted(bound - spoke)
+        if silent:
+            mute.append(f"{c.get('id')}: {', '.join(silent)} never speaks")
+    if not scope:
+        return "", []
+    return f"{len(mute)} of {scope} repeatable scenes bound to a person where that person never speaks", mute
 
 
 def lint_thoughts_over_speech(game):
@@ -11035,6 +11158,9 @@ def main():
     past_summary, past_lints = lint_past_claim(game)
     stat_summary, stat_lints = lint_printed_stat(game)
     speaks_summary, speaks_lints = lint_one_time_speaks(game)
+    ends_summary, ends_lints = lint_scene_ends_on_nothing(game)
+    arc_summary, arc_lints = lint_arc_ladder(game, state)
+    silent_summary, silent_lints = lint_person_never_speaks(game)
     thought_summary, thought_lints = lint_thoughts_over_speech(game)
     opcard_summary, opcard_lints = lint_opening_card(game)
     fh_summary, fh_lints = lint_named_before_met(model, game)
@@ -11146,6 +11272,11 @@ def main():
                                                    "findings": past_lints},
                                     "printed_stat": {"summary": stat_summary,
                                                      "findings": stat_lints},
+                                    "arc_ladder": {"summary": arc_summary, "findings": arc_lints},
+                                    "scene_ends_on_nothing": {"summary": ends_summary,
+                                                              "findings": ends_lints},
+                                    "person_never_speaks": {"summary": silent_summary,
+                                                            "findings": silent_lints},
                                     "one_time_speaks": {"summary": speaks_summary,
                                                         "findings": speaks_lints},
                                     "thoughts_over_speech": {"summary": thought_summary,
@@ -11569,6 +11700,30 @@ def main():
             print(f"          · … and {len(speaks_lints)-10} more")
         print("          (register.md 'The voice — say it loud' rule 5 and L3 — the one-time"
               " step carries the conversation. A LIST, never a score)")
+
+    if arc_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the arc ladder — {arc_summary}")
+        for h in arc_lints[:10]:
+            print(f"          · {h}")
+        print("          (the-arc.md A1 — one or two long chains for the central people. A LIST,"
+              " never a score)")
+
+    if ends_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a scene ends on nothing — {ends_summary}")
+        for h in ends_lints[:8]:
+            print(f"          · {h}")
+        print("          (register.md 'What a scene contains', test 3 — the hook. A LIST for"
+              " v2-reader, never a score: a last line that points forward is fine)")
+
+    if silent_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a person who never speaks — {silent_summary}")
+        for h in silent_lints[:8]:
+            print(f"          · {h}")
+        print("          (register.md 'What a scene contains', test 1 — the want. A LIST,"
+              " never a score)")
 
     if thought_summary:
         print(f"  {'─'*72}")

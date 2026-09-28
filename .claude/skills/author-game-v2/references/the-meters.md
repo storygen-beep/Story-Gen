@@ -146,25 +146,12 @@ field games.
 > ### ⚠️ This skill shipped the negative half of this rule and not the positive half
 >
 > `templates/board.toml` labelled the volatile layer *"NEVER gate an arc on these."* Correct about
-> the odometer — a throttle is not a spine — and **silent about what a throttle IS for.** Five
-> authors read it as "never gate on it at all". Measured:
->
-> ```
->                 arousal raises   arousal reads
-> the_allowance         25              0
-> seventh_day           53              0
-> forty_miles           52              0
-> steam                 55              2
-> back_home             47              2
->                      232              4
-> ```
->
-> Plus `seventh_day`'s per-character `lust` at **34 raises / 0 reads**.
+> the odometer — a throttle is not a spine — and **silent about what a throttle IS for.**
 >
 > In the field a sexual-state meter is a real gate in **13 of 27 games**, and where it exists it is
 > the **#1 or #2 most-gated thing in the whole game** — `corpo-life` `lust` (346 content gates,
 > the top meter in that game), DoL `arousal`, `family-ties` `you.arousal`, `friends-of-mine`
-> `excitement`. It is the genre's hottest gate and our deadest number.
+> `excitement`. It is the genre's hottest gate.
 
 **The cause is structural, and it is the same one `the-surfaces.md` R3b fixed.** A throttle gates a
 repeatable act surface. Until 2026-08-18 v2 taught no such surface — every explicit scene was a
@@ -180,23 +167,6 @@ loop and the throttle has one; build no loop and do not declare the meter.**
 
 The player cannot tell the difference between a meter that gates content later and a meter that
 gates nothing ever. Both look like progress. That is what makes this defect ship green.
-
-Measured across all nine of our games, on the day this rule was written:
-
-```
-the_allowance    arousal · hygiene
-seventh_day      arousal · stress
-forty_miles      arousal · count · energy · stress
-steam            energy
-back_home        hygiene · money
-vesper (v1)      sex_stage · sex_entry_origin · money · core_sealed · mercer_drains_done
-last_call (v1)   sex_stage · sex_reactions · hygiene · loop_player_pleasure · sex_entry_origin
-late_shifts (v1) arousal · energy · hygiene · money
-the_inheritance  — none
-```
-
-`forty_miles` raises `energy` 28 times and never reads it. `steam` raises it 50 times and never
-reads it. `vesper` writes `sex_stage` **81 times** across 26 canvases and nothing anywhere checks it.
 
 **Gate 33 · a meter is read.** Any player trait an `effects` entry raises must be read by a
 condition, a `costs` entry, or a quest goal. Deterministic — either a reader exists or none does.
@@ -214,11 +184,8 @@ lint prints the rung count beside it so a one-rung fig leaf is visible.
 **⚠️ THE CASE THIS GATE CANNOT SEE: the wardrobe.** `worn_beauty` and `worn_corruption` are
 **derived** — the engine folds them out of each garment's own `beauty` / `corruption` declaration as
 a MAX aggregate (`engine.md` §17). Nothing raises them with an `effects` entry, so gate 33 looks
-straight past a full catalog and reports nothing wrong.
-
-Measured across our 21 games on 2026-08-24: **102 garments in 10 games, 47 reads between them.**
-`mothers_place` (6 garments), `seventh_day` (8), `steam` (8) and `the_allowance` (9) read theirs
-**zero** times. The player can dress and the world does not look.
+straight past a full catalog and reports nothing wrong. The player can dress and the world does
+not look.
 
 **Gate · the wardrobe is read.** A game declaring `[[clothing]]` must read it somewhere. Three
 reader families count, and all three are legitimate: a **condition predicate** (`worn_corruption`,
@@ -226,8 +193,7 @@ reader families count, and all three are legitimate: a **condition predicate** (
 **`player_portrait` outfit override** (`when = { worn_type = … }`), or a **location dress code**
 (`clothing_rules`). The
 portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
-field's normal case** — `vesper` reads its wardrobe 21 times and 21 of those are display, which is
-the correct shape, not a shortfall. Same fig-leaf risk as above, answered the same way: the summary
+field's normal case**. Same fig-leaf risk as above, answered the same way: the summary
 prints garments against reads, so a thin pass is visible.
 
 **⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
@@ -297,10 +263,6 @@ per person (p25 2, p75 6)**, with the lowest rung at a median of 5, the same as 
 (`findings_E_yes.md` §1). become-someone gives each of 62 people 5 rungs of `trust` while its player
 meter `mc.dom` carries 9; both are correct, because they are not the same kind of ladder.
 
-Ours: 3–4 rungs, and **all 16 declared tiers across five games put their lowest rung at exactly
-15.** Read that next to M1's measured failure — a rung is free and 12 clicks moved `cover` 4→16 —
-and the opening of a v2 game is fifteen clicks in which nothing the player does changes anything.
-
 > ### ⚠️ Where 15/35/55/75 came from, and why it spread
 >
 > It is the DoL **seed's** spacing, measured off its 2018 twee source and written into
@@ -332,10 +294,6 @@ A meter that runs the other way — `standing`, `pride`, `grace`, `propriety`, `
 **One game in 25 has one that gates anything** (DoL `purity`, 84 gate sites). `reputation` in
 `patriarch` and `apocalyptic-world` climbs +28 / −3 — that is an ascent wearing the other name.
 
-Ours: **four of five shipped one, and three of those gate almost nothing** — `count` 0 reads,
-`standing` 2, `grace` 5. `propriety` reads 25 times and every one is a `[group]` prose band, which
-colours a paragraph and opens no door.
-
 > A falling meter costs the player something on every rung that drops it. If nothing shuts when it
 > is low, you have charged them for nothing and told them it mattered.
 
@@ -357,66 +315,45 @@ whose effects mostly fall, declared needs excluded. It prints how many times the
 ## W5b · The audience meter — it rises, it rarely refuses, and it still decides things
 
 W5 is about a meter that runs **down** and shuts doors. A *"who knows about her"* meter runs the
-other way, and measuring the field on 2026-08-23 showed it obeys none of W5's rules. It got its own
-entry because `the_season` shipped one, asserted its own doctrine at
-`0_systems_spec.toml:100` — *"known RISES AND WIDENS ... content, not punishment"* — and had no rule
-to check it against.
+other way and obeys none of W5's rules.
 
-> **Measured across all 13 corpus games that carry a reputation meter**
-> (`~/Documents/Player_Legibility_Study_20260825` §44): 1,944 references, **~10% link-bearing branch
-> arms**, and a **median 41% of reads change something mechanical**; median 31 passages carry a read,
-> median 9 rungs. It rises, it rarely locks a door, and its commonest single use is a line swap — but
-> not *only* a line swap: see the three mechanisms below.
+### For a female lead, being known is core — declare who notices, even without a meter
 
-### It is optional. Take it only if being found out is the fantasy
+Twelve of twenty-five male-heavy corpus games carry no reputation meter. For a female lead, being
+known is the fantasy and its absence is the complaint: **declare who notices what she does, even
+with no meter at all.**
 
-`family-ties` is the field's best example of a **place-scoped** reputation meter: six `fame`
-variables (`uni`, `southCafe`, `onlyfans`, `inst`, `model`, `pornhub`), read 257 times.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps rumours per person and passes them
+> from one to the next; a man who assumed reads them back — *"Maybe the rumors are wrong."*
+> `shady-deals` lets reputation change who dares: at 4,000 the man who caught her backs off —
+> *"Sorry, I didn't mean to bother you. I'm not going to stand in your way..."* — and her crew talks
+> about what she is known for. `cupids-way` marks her publicly and for good, and her boyfriend uses
+> the name: *"Hi, how's my BBC queen doing?"*
+>
+> Where nobody notices, players say so: *"They don't notice - dont take a hint - NADA"*
+> (`in-her-own-hands`), *"it doesn't affect anyone"* (`cupids-way`).
 
-The rule holds on ten examples. Games with real size and **zero** reputation
-references:
-
-```
-friends-of-mine 2,707 passages · family-business 2,318 · the-company 2,078
-wasteland-lewdness 2,056 · the-hellfire-club 1,216 · sluttown-usa 759
-lust-for-life 707 · inseminator 513 · adam-and-gaia 210 · love-and-vice 192
-```
-
-**Twelve of twenty-five measured field games carry no such meter at all.** There is no obligation
-to have one, and a game that would rather spend the effort elsewhere is following the field, not
-defying it.
+`family-ties` (numbers only) is the field's clearest **place-scoped** meter: six kinds of fame, read
+257 times.
 
 ### If you take one, its job is that people already know — not that a door is closed
 
-Every `<<if>>` in three field games whose condition names a reputation variable, classified by what
-its branch actually contains (`findings_H_known.md` §1) — **three games, and 610 of the 644 sites
-are degrees-of-lewdity**:
+Every `<<if>>` naming a reputation variable, classified by what its branch contains: of 644 sites in
+three games (610 of them the reference game's, numbers only), **17% open a link, 81% colour prose
+and 2% refuse**; across thirteen games, ~10% carry a link and a median 41% change something
+mechanical.
 
-```
-644 read sites          opens a link  17%     colours prose  81%     REFUSES  2%   (14 sites)
-   3 games: DoL 610 · zaras-school-life 23 · course-of-temptation 11 (instrument-blind)
-
-re-measured 2026-08-27, 13 games      link-bearing ~10%      mechanical (median) 41%
-```
-
-Fourteen, in that sample. **A reputation meter is not a lock.** What it buys is a stranger who already knows:
-
-```
-$fame.prostitution gte 400   ->  "Hope you don't mind that I'm not paying for it."
-$fame.rape gte 400           ->  "You like it rough, right? That's what I've heard."
-$fame.exhibitionism gte 500  ->  "I think the town's pervs have missed you."
-$fame.scrap gte 400          ->  "Very scary. But there's scarier behind us."
-```
+Fourteen, in that sample. **A reputation meter is not a lock.** What it buys is a stranger who
+already knows — `shady-deals`' crew: *"Word is, you don't even need to speak - just, you know, and
+things get 'handled'."*
 
 ### Rarely a lock is not the same as never mechanical
 
-The three-game sample saw one shape because DoL only does one. Across thirteen it does three more,
-and **none of them refuses the player anything** — which is why "it does not refuse" was mistaken
-for "it does not decide":
+Across thirteen games it does four things, and **none of them refuses the player anything**:
 
 | game | what the meter does | shape |
 |---|---|---|
-| `patriarch` | `$Reputation gt 5` → Marlene knocks · `gt 9` → Luna · `gt 14` → Ana | **it delivers people** |
+| `patriarch` (numbers only) | `$Reputation gt 5 / 9 / 14` → a new person arrives at each band | **it delivers people** |
 | `destroyer` | `_roll1 to _roll + $Respect` in every pickup and every fight; `Math.clamp(5, 95, ($Muscularity * 0.8) + ($Respect * 1.6))` | **it modifies a roll** |
 | `corpo-life` | an 8-rung `$prestige_level` derived in `StoryCaption`, then read at **308 sites**, many of them `(Relationship +1 from prestige)` | **it scales a rate** |
 | `patriarch` | weekly income by band: `lt 300 → +2000`, `lt 400 → +3000`, … | **it prices the world** |
@@ -424,17 +361,11 @@ for "it does not decide":
 A door that opens on its own is not a door the player found locked. **Prefer these to a gate**: they
 give the meter consequence without ever printing a refusal, which is what the 2% was really saying.
 
-**Where the reads live.** Not on the always-on surface — surface reads are 0–16 per game against
-7–934 in ordinary passages. They live in the **repeatable** ones: `family-ties` reads fame in
-`southCafeJob`, `inst`, `onlyfans` and other jobs; `destroyer` writes the same encounter
-per location (`beachgirl`, `downtowngirl`, `downtownrandom`), each rolling `$Respect`; `patriarch`
-reads it in `Apartment` and in `Finances`, the weekly cycle.
+**Where the reads live:** in the repeatable passages — jobs, pickups, the weekly cycle — not on the
+always-on surface (0–16 surface reads per game against 7–934 elsewhere; failing games, numbers only).
 
-⚠️ **W5's test does not apply here.** W5 says a counterweight earns its place by shutting a door —
-*"if nothing shuts when it is low, you have charged them for nothing."* That is correct for a
-falling counterweight and wrong for this. **W5 owns the meter that closes; W5b owns the meter that
-talks.** If you find yourself gating content behind a rising audience meter, you have built W5's
-thing and should read W5's test instead.
+⚠️ **W5 owns the meter that closes; W5b owns the meter that talks.** Gating content behind a rising
+audience meter is W5's thing, and W5's test applies to it, not this one's.
 
 #### How "it delivers people" is built on this engine
 
@@ -474,28 +405,15 @@ the outside.
 it is backwards, and the meter should buy standing in one room while costing traffic in another.
 Either is a trade the player can run; what fails is not choosing.
 
-**Prove it with a distribution, not a playthrough.** Call `setup.checkAndSubstituteCanvas` in a
-loop and count what comes back — it is the function that owns the dice, so a few thousand calls
-measure the shape instead of sampling one draw of it. Assert **both** halves: the rate moves
-inside the band, and every other outcome the host produces is **flat**. Two traps make the second
-half read PASS while proving nothing — measuring at an hour where no named walk-in could fire (so
-"flat" compares 0.000 to 0.000), and leaving `player.current_location` unset, because
-`requires_npc` is checked as *is that NPC where the **player** is* (`v2.py:5340`) and every named
-walk-in returns null regardless of the clock. `games/mrs_vance/playtest_walkins.py` is the worked
-harness.
+**Prove it with a distribution, not a playthrough:** call `setup.checkAndSubstituteCanvas` a few
+thousand times, with `player.current_location` set and at an hour a named walk-in can fire, and
+check both that the rate moves inside the band and that every other outcome stays flat.
 
 ### Its reads are one-line swaps, and that is why there are hundreds of them
 
-```
-degrees-of-lewdity   610 read sites   median branch  139 chars   (~25 words)
-zaras-school-life     23 read sites   median branch   84 chars
-the_season             7 read sites   median branch  570 chars
-```
-
-**The branch size is the cause and the count is the symptom.** `the_season` treats a `known` check
-as a reason to write an alternate *block*, so it can only afford seven — none of them in a location,
-none in a one-shot. The field treats it as a reason to swap one line of dialogue, so it can afford
-six hundred.
+The reference game's 610 read sites have a median branch of 139 characters (numbers only).
+**The branch size is the cause and the count is the
+symptom**: swap one line of dialogue, not a block.
 
 A player states the failure from the other side, about a game whose corruption meter moved in
 silence: they asked for *even just a few lines of dialogue* at the thresholds, because the change
@@ -505,13 +423,9 @@ felt like **a switch turned on somewhere** (`findings_J_players.md` §6).
 
 ### Split it — one global number is the degenerate case
 
-Degrees of Lewdity (structure only; the game fails the adults-only rule) splits on two axes at
-once: **what** she is known for — fourteen kinds of fame — and **where** it is known, the town
-against one institution.
-
-At minimum split by *what*. Better, and closer to the strongest architecture in the field, split by
-*who*: Course of Temptation holds reputation **per person** (`pinfo.rumors[type]`), so one character
-knowing is not the room knowing. Expressible here with per-NPC traits and flags (`engine.md` §8).
+Split at least by **what** she is known for (the reference game, numbers only, keeps fourteen kinds
+and two places). Better, split by **who**: Course of Temptation keeps rumours per person, so one
+character knowing is not the room knowing — per-NPC traits and flags here (`engine.md` §8).
 
 **Two mechanisms worth stealing if you split by person:**
 
@@ -523,15 +437,13 @@ knowing is not the room knowing. Expressible here with per-NPC traits and flags 
 
 ### Positive bands are not decoration
 
-`.good` and `.social` are tracked in the same structure as the lewd kinds and do real work: being
-known as decent is what lets someone find her passed out in the cold and help
-(`Widgets Temperature Passout`). `.scrap` — known as someone who fights — re-colours a threat scene.
-**A reputation system that only counts what she is ashamed of is half a system.**
+In the reference game (numbers only), being known as decent is what gets her helped, and being known
+as someone who fights re-colours a threat. **A reputation system that only counts what she is
+ashamed of is half a system.**
 
 ### Not a gate
 
-Three games is not a field. There is no threshold here and `gates.py` is unchanged.
-(`~/Documents/Female_PC_Craft_Study_20260823/findings_H_known.md`)
+No threshold here; `gates.py` is unchanged (`findings_H_known.md`).
 
 ---
 
@@ -657,11 +569,6 @@ same tag moves a number **and** writes a line:
 
 **A tag that only moves the stat is invisible. A tag that only writes the line is decoration.**
 
-**Ours:** `the_season` fails both halves. Wade and Prine run the **identical** pair —
-`{ ease = 0, want = 0 }` on each — so two of the four men are mechanically the same person. Boyd
-runs `{ owed = 0 }`, Emmett `{ seen = 0 }`, and Rae runs nothing at all. None of the four is a
-trade; every one of them only rises and only opens.
-
 **Lint · the cast's meters.** Per character: which meters they own and how many gate sites each
 carries, plus how many distinct shapes exist across the cast.
 
@@ -669,12 +576,11 @@ carries, plus how many distinct shapes exist across the cast.
 
 ## W7 · The body's meters are read to colour, not to refuse
 
-> **A body value — clothes, arousal, hygiene, pregnancy — earns its place by changing the words in
+> **A body value — clothes, arousal, hygiene — earns its place by changing the words in
 > a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. If you
 > find yourself writing gates on it, you are building the wrong kind of meter.**
 
-Added 2026-08-24 from section I, which read all 27 parseable games in the mopoga corpus. W5 is the
-counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
+W5 is the counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
 gating meters. **The body is a fourth shape and it behaves like none of them.**
 
 Twenty-five (subsystem × game) pairs clear 20 read sites. Their gate share — the fraction of reads
@@ -692,11 +598,8 @@ whose consequent contains a link, a `goto` or a button, rather than prose:
 98, 100 per cent.
 
 Section H measured reputation at **2% gating, 98% colouring** and called it an audience meter.
-⚠️ Corrected 2026-08-27: that split is three games and 95% of it is degrees-of-lewdity. Over 13
-games it is ~10% link-bearing and a **median 41% of reads change something mechanical**. See the
-correction box at the head of W5b.
-Section G measured differentiation and found it is many small swaps rather than a few large
-branches. This is the same law arriving a third time, from a third instrument.
+Over 13 games it is ~10% link-bearing and a **median 41% of reads change something mechanical**
+(W5b). The same law, many small swaps over a few large branches, from a third instrument.
 
 **The exceptions are real and they are all small.** `new-life-project` gates 91% of its arousal
 reads — of **43**. `wasteland-lewdness` gates 63% of its clothing reads — of **35**. `patriarch`
@@ -869,6 +772,47 @@ for a public street — save `gte 2` for the places where being bare is the even
 ---
 
 # The ascent's price
+
+## W7b · Pregnancy is a story option behind a start choice
+
+**Pregnancy is not colour; when a game takes it, it is a story the player opted into.** Course of
+Temptation puts it behind a content toggle, with tunable fertility and duration, a father record, and
+people who react once she shows; other games' players ask for it (*"Can i get pregnant?"*). Players
+want *"Realistic pregnancy that has consequences"* and punish a roll that never lands (*"I had 98
+loads"*): state the odds, and let them be tuned.
+
+Five parts, all existing engine pieces, proved in one fixture (`round5/ic10_pregnancy_fixture/`):
+
+1. **The toggle is a start choice, and it says what it turns on** (R5b.3 — warned, opt-in):
+   *"Turn pregnancy on: sex without protection can get her pregnant, and it changes her story."*
+2. **The risk lives on the choice** (*"Let him finish inside you"* sets `risk_tonight`; the daily
+   tick clears it).
+3. **The roll is a `trigger_mode = "random"` canvas** on the toggle, the risk and stage 0; `chance`
+   is the odds.
+4. **A stage trait advances once a day** (a `_today` flag). **The duration is the author's** — no
+   default here; the fixture's three days are test speed only.
+5. **A father flag per partner**; the portrait's `pregnancy_trait` swaps the image.
+
+**Decide the last stage before the first** — a birth, the story moving on, or another ending of the
+author's — and write it in the board. The fixture ends in a birth that resets the stage.
+
+⚠️ **Engine limit:** the portrait code, and its pregnancy swap, ships only when `[settings]
+clothing_enabled = true` (`v2.py:1579`). A small engine fix — the portrait swap independent of the
+wardrobe — is listed, not built.
+
+## W8 · What sticks — and every door it closes is warned
+
+**Her reputation, her body, a relationship, the story: each can stick, each is visible, and each is
+warned before it closes anything** (`the-arc.md` A3).
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` labels a closing choice:
+> *"(Permanently removes this character)"*. `shady-deals` prices reputation on the button (−500).
+> `cupids-way`'s tattoo is announced — *"You are now permanently marked"* — and temporary ones come
+> first. `in-her-own-hands` puts rent due on the screen and a date in her father's mouth: *"You will
+> owe $1,500 as of three months from when we first spoke."*
+>
+> The failure is a consequence never read: `cupids-way` writes *"Let's hope he doesn't find out"* and
+> nothing checks. Players notice — *"there is No risk in the game"* (`course-of-temptation`).
 
 ## The measured rules
 
@@ -1043,26 +987,8 @@ M1–M7 govern the **ascent**: a meter that climbs and buys access. A need is th
 and it runs the opposite way — it **falls on its own**, she refills it, and while it is empty
 something is shut.
 
-> **Measured failure this exists to prevent.** `the_allowance` is a game whose anchor location is a
-> kitchen and whose title is about money at a table. Grep it:
->
-> ```
-> eat · cook · meal · breakfast · dinner · food · fridge · sleep   →   ZERO canvases
-> nine declared traits, none of them hunger
-> [player.trait_decay] hygiene = 10          she gets dirty every day
-> four ways to wash                          she can always get clean
-> conditions anywhere reading `hygiene`:  0  nothing has ever cared
-> ```
->
-> The loop is fully wired and means nothing. LO named it before it was measured: *"we can add
-> meaning technically like gaining or losing energy but logically things mean very less."*
->
-> Contrast `games/vesper`, built on the incumbent skill, which got this right: **11 things drop
-> hygiene by 30** (sex acts, the burned yard, the depot), **one restores it**, and `hygiene >= 40`
-> gates *"Take the car."* Filthy means **she cannot leave**. That is the shape the field uses.
-
-**Needs are declared per game, never a fixed list.** Vesper's body is `Power down` / `Charge up`; a
-truck stop's is not a household's. What is fixed is the *form*.
+**Needs are declared per game, never a fixed list.** A truck stop's body is not a
+household's. What is fixed is the *form*.
 
 ### M8 · A need declares four things
 
@@ -1083,7 +1009,6 @@ The field, on the fourth field:
 | Apocalyptic World | hunger | `Eat` needs food **in the pack** — no food, no meal |
 | Become Someone | hunger | breakfast / dinner / dishes are **once each per day**, in their own windows |
 | Degrees of Lewdity | ingredients | a recipe you lack the stock for **cannot be cooked** |
-| vesper | hygiene | under 40, **`Take the car` is gone** |
 
 ### M9 · A need that shuts nothing is a chore
 
@@ -1107,14 +1032,14 @@ hygiene = 10
 energy  = 8
 ```
 
-Shipped and working in `late_shifts` and `vesper`. It is the cheapest half of a need — the half most
+It is the cheapest half of a need — the half most
 games do write. **The half they drop is `shuts`.**
 
 Two shapes, and pick on purpose:
 
 - **decay** — falls every day whether or not she does anything. Right for hygiene, energy, hunger.
 - **spent** — falls only when something takes it, via `costs` on a trigger (§27). Right for a
-  resource, and the one `the_allowance` uses correctly for energy (11 priced canvases).
+  resource.
 
 A need can use both. What it cannot do is neither, which is a trait that only ever goes up.
 

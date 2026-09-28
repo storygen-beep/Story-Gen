@@ -393,8 +393,7 @@ a few messages"* — instead of inventing a topic. A daily thread with no null b
 one line forever or lies about a day that had nothing in it.
 
 **Budget, measured: ~1,300 words per NPC** to run a daily thread at production scale. Know that
-number before agreeing to build one. Our own best is `under_one_roof` at 28 daily topics across its
-cast; `the_inheritance` declares a chat app and zero daily topics, which is the thin end.
+number before agreeing to build one.
 
 ```toml
 [[phone.daily_topics]]
@@ -470,7 +469,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:950`, `v2.py:7403`). One game uses it: `under_one_roof`, on five nodes.
+(`template_import.py:950`, `v2.py:7403`).
 
 ---
 
@@ -501,10 +500,9 @@ Nothing in this file is checked by `gates.py` yet. Two candidates exist and both
 zero, in the G44 / G45 / G46 line:
 
 - **the phone is not a decoration** — a declared phone whose apps hold no content, or a
-  `social_feed` with empty `post_actions` in a game that has a corruption meter. `under_one_roof`
-  is red on this today.
+  `social_feed` with empty `post_actions` in a game that has a corruption meter.
 - **a specced system exists** — a system named ON in `0_systems_spec.toml` with no corresponding
-  block in the built TOML. `mothers_place` is red on this today. Not phone-specific; it would catch
+  block in the built TOML. Not phone-specific; it would catch
   any dropped system.
 
 ⚠️ **P3's fifteen words must not become a gate.** It is a shape, measured over 369 bubbles, and a

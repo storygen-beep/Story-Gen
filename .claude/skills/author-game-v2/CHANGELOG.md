@@ -5,6 +5,233 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-27 — Our-games sweep, batch 1: examples, numbers and names from our own games cut
+
+**Why.** LO's standing rule (this day): the skill does not learn from or reference our own games —
+LO's eight plus every other game this repo built (forty_miles, the_allowance, back_home, off_season,
+steam, seventh_day, the_season, night_desk, commuter, mrs_vance, the_route, under_one_roof,
+the_long_summer, mothers_place). The read-only sweep (`round5/OUR_GAMES_SWEEP_PLAN.md`) classified
+about 310 mentions. Batch 1 is the plain rows: examples, quotes, "ours measured" numbers and tables
+(kind A), and engine facts that only named our game (kind D). Rules that came from our bugs (B) and
+load-bearing examples with no field replacement yet (UNSURE) wait for batches 2 and 3.
+
+**What changed.**
+- Cut every non-UNSURE A row across `SKILL.md`, 17 references and two templates: the OURS rows of
+  measurement tables (FIELD rows kept), "Ours:" paragraphs, per-game tallies and censuses, and
+  example cells quoting our games.
+- D rows keep the engine fact and drop the name ("a built game", "the rent sense").
+- Our character names and canvas ids in kept examples are renamed to invented ones (Ray → Mark,
+  Dean → Tom, Martin → Hal, audrey/marcus ids → nora/paul, `@ray` → `@npc`).
+- Placeholders replace our values where a worked example needed a value (`the-clock.md` cooldown
+  TOML, `the-release.md` rent copy: "Rent. A hundred.").
+- Cleanup of unnamed ours-numbers the plan had not listed: `register.md` (one-row table folded into a
+  sentence; "157 uses across six games"), `the-arc.md` ("Measured, ours: zero tier groups", "23 of 23
+  today", "zero across the repo"), `the-surfaces.md` (nine counters; 23 of 23 finish nodes),
+  `engine.md` (the `rejection_node` usage census), `templates/first-hour.toml` ("all six v2 games").
+- Queued, not done: craft rules whose only evidence is our game (list goes to LO before batch 2);
+  gates.py / pitch_pack / playtest messages and comments as the next item.
+
+**Found, not fixed (outside this item).** `the-surfaces.md` says *"`text_variants` does not exist in
+any game"*. The importer does parse a choice-level `text_variants` (`template_import.py:2407`), so the
+sentence is right that node prose has no such key and wrong if read as an engine claim.
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged · our-game name hits in SKILL/references/templates
+~380 lines → 185, every remaining hit a batch 2 or 3 row.
+
+words: 147,724 → 143,924 (−3,800) · running total 143,924 / 149,283
+
+---
+
+## 2026-09-27 — IC12: arcs are one or two long chains, and the arc ladder lint
+
+**Why.** A1 quoted 9–10 steps, below the field's median longest chain (~15), and two stale "ours:
+zero arcs… 1,396 canvases" claims stood in SKILL.md and the references. LO's new standing rule (this
+day): the skill does not learn from or reference our own games, so the rule and the lint go in, and
+no numbers about our games.
+
+**What changed.**
+- `references/the-arc.md` A1 "Length": one or two long chains (8–15 steps) for the central people,
+  shorter for the rest. The field figure is named correctly (median longest chain per game ~15; 12
+  of 26 corpus games have one of 15+; numbers only). The passing examples are Course of Temptation
+  10/9/12 and In Her Own Hands 14. It ends: run `lint · the arc ladder`.
+- The "zero arcs" claims are replaced in `SKILL.md`, `the-arc.md` and `the-surfaces.md`: rule plus
+  lint, no measurement of ours. The check list marks the lint built.
+- `scripts/gates.py`: new reported lint `the arc ladder`.
+  - Per person: one-time steps written, how many are switched off, and the longest chain where each
+    step's trigger reads what the step before sets.
+  - A declared ladder's length prints beside it; the game's longest prints beside the field's.
+  - Ownership is by binding or by the person's short name in the id.
+  - `FIELD_LONGEST_CHAIN_MEDIAN = 15`, labelled.
+  - New `tests/test_gates_ic12.py` (5). SKILL.md names the lint.
+
+**Findings on our games — here only, not doctrine (LO):**
+- orientation: Ray chains 7 of 9 steps; Simone 6 of 6.
+- vesper_two: every person has 4–8 one-time steps written, but all except the meeting are
+  `is_active = false` with no conditions linking them, so no chain is longer than 1.
+- the_balance: 1.
+
+The PRD's "vesper_two 5–7 steps" counted steps by name, not chains.
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 147,752 → 147,724 (−28) · running total 147,724 / 149,283
+
+---
+
+## 2026-09-27 — IC11: what a scene contains, and the scene reader
+
+**Why.** "A person shows what they want" was a target with no instrument; there was no per-scene
+content rule, and the pivot had no verdict. IC11 is WS3 (want · next step · hook, plus a reader)
+with three her-side tests (IC8, IC10, IC9), for seven in all.
+
+**What changed.**
+- `references/register.md`: new section "What a scene contains" — seven tests, one line each:
+  - want, including A13 per LO: on a sexual step, an earlier scene already showed his wanting it,
+    inside the want test rather than as an eighth;
+  - next step;
+  - hook;
+  - her voice at her level;
+  - who notices;
+  - the written no;
+  - the body.
+
+  The "Measured targets" row points at it.
+- `references/the-sheets.md` S1: a scene sheet with a named person carries want / next step / hook
+  (LO: only these three).
+- New `.claude/agents/v2-reader.md`: read-only, judges the seven tests, returns a table
+  (scene · test · PASS/FAIL/N/A · line · why). No fixes and no score; names the earlier canvases it
+  checked for A13; never writes `games/`. `references/agents.md` gains "The Reader", and SKILL.md's
+  roster goes from five to six.
+- `scripts/gates.py`, two reported lints (LO renamed the second):
+  - `a scene ends on nothing`: a one-time scene with a person and no choice anywhere.
+  - `a person who never speaks`: a repeatable scene bound to a person who has no line.
+    - Checked against `lint_one_time_speaks` (one-time scenes, anyone speaking) and `no chain ends
+      in silence` (quest cards): no overlap.
+  - New `tests/test_gates_ic11.py` (6).
+- Paid for by cutting:
+  - the Attack Panel's history box in `agents.md`, down to three lines;
+  - dated history in `register.md` and `the-sheets.md` S1.
+
+**Acceptance** (`~/Documents/Great_Games_Study_20260926/round5/ic11_reader_fixture/`).
+- **Fixture** (`fixture.toml`, `EXPECTED.md`, `READER_RESULT.md`): the reader, blind to the expected
+  file, matched all six expected verdicts.
+  - the model beat passes the body test, and want after his want was shown;
+  - the pivoted beat (register.md's own "deciding not to have noticed") fails the body test;
+  - a sexual step with no earlier want fails A13;
+  - the public flash with nobody reacting and no refusal fails both tests.
+- **orientation** (read-only, `ORIENTATION_RESULT.md`): 17 FAILs.
+  - 10 are the written no: refusals that set nothing, or offers with no refusal.
+  - 5 are hooks on the Ray steps.
+  - 1 is A13 on `ray_04`: no earlier scene shows him wanting her.
+  - 1 is a pivot, on `hub_ray_bedroom`.
+- **Lints** on the three games:
+  - `a scene ends on nothing`: the_balance 0/3, orientation 10/11, vesper_two 16/28.
+  - `a person who never speaks`: the_balance 19/34, orientation 2/12, vesper_two 0/16.
+
+**Verified.** pytest 143 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 147,750 → 147,752 (+2) · running total 147,752 / 149,283
+
+---
+
+## 2026-09-27 — IC10: being known is core, what sticks, and pregnancy as a story option
+
+**Why.** W5b called an audience meter optional, which is true of the male-heavy corpus and wrong for a
+female lead. Nothing said what should stick or how a closing is warned. W7 folded pregnancy into
+"colour, not refuse". LO asked for the pregnancy wiring to be proved before the doctrine was written.
+
+**The fixture, first** — `~/Documents/Great_Games_Study_20260926/round5/ic10_pregnancy_fixture/`
+(`pregnancy_fixture.toml`, `play_fixture.py`, `RESULTS.md`).
+- Built from existing engine parts: a start-choice toggle that says what it turns on, a
+  `risk_tonight` flag on the choice, a random-trigger roll, a once-a-day stage (`_today` + daily
+  tick), a father flag, the portrait `pregnancy_trait`, and a birth at the last stage.
+- `validate()` found 0 errors, and a headless play showed no page errors.
+- **Toggle on:**
+  - no pregnancy when he pulls out;
+  - pregnant with the father recorded when he finishes inside;
+  - the stage goes up once a day, and not twice on the same day;
+  - the birth fires on day 3, the stage resets and `had_child` is set;
+  - the portrait swaps to `…Preg` and back.
+- **Toggle off:** nothing happens.
+- Engine finding: the portrait code ships only with `clothing_enabled = true` (`v2.py:1579`).
+
+**What changed** (`references/the-meters.md`).
+- **W5b:** "It is optional" becomes "For a female lead, being known is core — declare who notices,
+  even without a meter".
+  - Evidence: CoT's rumours read back, the Shady Deals reputation back-off and crew talk, Cupid's
+    Way's public mark.
+  - Players where nobody notices: IHOH, Cupid's Way.
+  - **A step-1 miss is fixed here:** the DoL `$fame` lines ("paying for it", `$fame.rape` → "You
+    like it rough") were sexual quotes from a failing game, and are now a Shady Deals crew line.
+  - patriarch's named women become "a new person at each band".
+  - W5b's history is trimmed to pay for the item: the_season's origin, the duplicate measurement
+    box, the 3-game table, the one-line-swap table, the "where the reads live" list, the DoL
+    `.good`/`.social` detail, and the "prove it" paragraph, whose harness (`games/mrs_vance`) no
+    longer exists.
+- **New W7b, "Pregnancy is a story option behind a start choice":**
+  - the five parts as the fixture proved them;
+  - the toggle's wording follows R5b.3;
+  - the last stage is decided up front and written in the board (LO);
+  - the duration is the author's, with no default, and the fixture's three days are test speed
+    only (LO);
+  - the clothing requirement is stated as an engine limit, with a small fix (the portrait swap
+    independent of the wardrobe) listed and not built (LO);
+  - evidence: Course of Temptation's toggle, tunable fertility and duration, father record and
+    reactions; players asking for it, and punishing a roll that never lands.
+  - W7's header no longer lists pregnancy as colour.
+- **New W8, "What sticks — and every door it closes is warned"**, pointing at A3: reputation, body,
+  a relationship, the story. Evidence: CoT's *"(Permanently removes this character)"*, the Shady
+  Deals −500 on the button, Cupid's Way's announced tattoo, IHOH's rent and dated loan. The failure
+  is Cupid's Way's cheating that nothing ever checks, and "No risk in the game".
+- W7 loses two dated history sentences.
+
+**Verified.** pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged. The sweep for quoted sexual lines near failing games is clean.
+
+words: 147,748 → 147,750 (+2) · running total 147,750 / 149,283
+
+---
+
+## 2026-09-27 — IC9: graded answers, a priced no that parks, and unchosen scenes warned, avoidable or opt-in
+
+**Why.** R5b said "decline at full length, and it pays" on failing-game evidence, there was no rule
+for scenes that happen to her unchosen, and `DOCTRINE_GAPS.md` praised DoL's unrequested assault on
+leaving the orphanage.
+
+**What changed.**
+- `references/the-surfaces.md` R5b is now **graded answers**: three to five, eager to refusing, each
+  written and each moving something.
+  - Evidence: Course of Temptation `[BusGrope]` (five answers, with what each pays) and Shady Deals
+    `[Nightclub Quickie Caught]`. The PRD's "bus" is BusGrope, not the prologue tour.
+  - **The main priced no is PARKED (LO):** Course of Temptation's best friend, *"try again another
+    night"*, with a live day count, plus In Her Own Hands' *"think more about it and say you'll be
+    in touch"*.
+  - **A counted no only when warned (LO):** In Her Own Hands labels its closing answer *"(ends
+    path)"* before she clicks it, and Shady Deals' custody price rises.
+  - Zara's dinner numbers are cut. The gate note is shortened (it already prints its rate, so no
+    code change).
+- New `the-surfaces.md` **R5b.3 · An unchosen scene is warned, avoidable or opt-in**, placed beside
+  the refusal rules (LO); sex is never only a punishment.
+  - Evidence: Course of Temptation's per-kind content levels and its Proceed/Abort prompt; the
+    consent check inside its punishment arc; Shady Deals' blackmail with four exits and its opt-in
+    morning visit.
+  - Players both want hard content and punish a way out that doesn't work.
+  - The engine route is a setting or start-choice flag, the choice text, and `rejection_node`.
+- `references/agents.md`: the two instant fails point at R5b.3.
+- `DOCTRINE_GAPS.md` (not counted): the DoL assault/orphanage praise becomes a labelled count with a
+  pointer to R5b.3, and the M1 table row is relabelled.
+- Every quote was re-checked in `round2/passages` and `round2/games`.
+
+**Verified.** pytest 137 passed · `--selfcheck` exit 0 · cite_check 84 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 147,534 → 147,748 (+214) · running total 147,748 / 149,283
+
+---
+
 ## 2026-09-27 — IC8: her voice is a slope, and the inner conflict stays
 
 **Why.** W1b rested on one game (Zara), said "she wants him at every level", and called reluctance

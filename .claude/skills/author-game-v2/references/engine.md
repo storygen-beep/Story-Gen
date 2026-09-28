@@ -392,11 +392,9 @@ release, which `the-release.md` makes the thing that sells the next one.
 **2 · Never inside a scene when the scene moves the bar.** A greyed rung mid-beat, gated on a meter
 the canvas's own `effects` raise, is the machinery narrating its own progress bar: the row opens by
 itself in a click or two, so the text hands the player nothing to act on, and it puts a UI label in
-the one place the register says the body is the only thing on screen. Contrast vesper's in-scene
-*"Not like this — you're filthy, and the cover won't hold"* — gated on something the player goes
-**elsewhere** and fixes. That is a handle and it is correctly spoken. Measured: vesper has 8 in-scene
-shown-locked choices and **zero** on a self-moved bar; the game that prompted this had 11 and **all
-11** were `arousal` or `loop_stage`.
+the one place the register says the body is the only thing on screen. Contrast an in-scene locked
+choice gated on something the player goes **elsewhere** and fixes. That is a handle and it is
+correctly spoken.
 
 **3 · A blocked WINDOW is a different surface and it is not this one.** An activity out of hours
 belongs in `show_when_blocked` + `cooldown_message` on the canvas trigger — `the-clock.md` C5, where
@@ -414,8 +412,8 @@ The flag-chain validator **hard-fails the build** otherwise:
 
 ```
 ❌ Flag Chain Validation Failed:
-   ✗ dean_open
-     Required by: Dean (late)
+   ✗ tom_open
+     Required by: Tom (late)
      Issue: MISSING HINT - set by 'Come down in what you slept in' but no location/schedule
 ```
 
@@ -430,16 +428,16 @@ doing the scene), and the chain resolves.
 [[canvases.nodes.exit_block.choices]]
 text       = "Come down in what you slept in."
 targetType = "node"
-nodeId     = "rung_dean_morning.base"
-flagEffects = [ { targetType = "player", flag = "dean_open", op = "set" } ]   # ← here
+nodeId     = "rung_tom_morning.base"
+flagEffects = [ { targetType = "player", flag = "tom_open", op = "set" } ]   # ← here
 ```
 
 **It applies to choice conditions too, not only triggers.** Hit twice:
 
 ```
-✗ dean_open          Required by: Dean (late)
+✗ tom_open           Required by: Tom (late)
                      set by 'Come down in what you slept in' but no location/schedule
-✗ ray_arrangement    Required by: Ray
+✗ mark_arrangement   Required by: Mark
                      required by choice 'Sit with him after.',
                      set by 'Stop pretending it's a favour' but no location/schedule
 ```
@@ -527,7 +525,7 @@ enforces it. All three of these families satisfy it, and the second is the one a
 **2 · A `player_portrait` outfit override.** `when = { worn_type?, corruption?, flag? }`, first match
 wins (`template_import.py:743-745`). Only `worn_type` and `corruption` are wardrobe reads; a `flag`
 override is not. **This is a display reader, not a gate, and `the-meters.md` W7 is what says that is
-the field's normal case** — `vesper` reads its wardrobe 21 times and every one of them is display.
+the field's normal case**.
 
 **3 · A location dress code.** `clothing_rules.slots_required` on a location
 (`template_import.py:4227-4241`), optionally with its own `conditions` and a refusal `message`.
@@ -574,8 +572,8 @@ Two repeatable canvases that bind the same NPC at the same location with overlap
 are a build-time warning, and only one of them will ever render:
 
 ```
-⚠️  Repeatable canvases 'hub_dean_late' and 'shift_change_frontroom' both trigger for NPC
-    'npc_dean' at location 'the_front_room' with overlapping schedules. Only one repeatable
+⚠️  Repeatable canvases 'hub_tom_late' and 'shift_change_frontroom' both trigger for NPC
+    'npc_tom' at location 'the_front_room' with overlapping schedules. Only one repeatable
     canvas is allowed per location + NPC + time window. Put multiple interactions inside a
     single canvas as choices instead.
 ```
@@ -606,18 +604,17 @@ that closed set (R2), and **8 is a backstop, not a size** (gate 20 — never tre
 ## 20. `npc_at_location` — cross-room occupancy, and the any-NPC form
 
 ```toml
-{ type = "npc_at_location", location_id = "the_front_room", npc_id = "npc_ray", operator = "is_present" }
+{ type = "npc_at_location", location_id = "the_front_room", npc_id = "npc_mark", operator = "is_present" }
 { type = "npc_at_location", location_id = "the_front_room", operator = "is_present" }   # ← any NPC
 ```
 
 `generators/v2.py:4131-4145` (the runtime branch) and `:7791` (the human-readable dispatcher).
 `operator` is `is_present` | `is_absent`; `location_id` accepts a slug or a UUID. **`npc_id` is
-optional — omit it and the test becomes "is this room occupied by anybody".** 38 uses in
-`games/vesper`.
+optional — omit it and the test becomes "is this room occupied by anybody".**
 
 Verified live in a built game, not just read: a choice carrying
-`npc_at_location(the_front_room, npc_ray, is_present)` rendered at 23:10, when Ray's
-20:00–23:30 row and Dean's 23:00–01:30 row overlap, and was gone at 23:45 with the same state
+`npc_at_location(the_front_room, npc_mark, is_present)` rendered at 23:10, when Mark's
+20:00–23:30 row and Tom's 23:00–01:30 row overlap, and was gone at 23:45 with the same state
 and the same player. This is the primitive that makes two-NPC scenes possible at all, since
 `requires_npc` binds exactly one.
 
@@ -825,19 +822,9 @@ open lower band, and a terminal upper one gated `gte` at a threshold real conten
 marked terminal is not a ladder with a top; it is a badge with no ladder.
 
 ⚠️ **AND A METER IS THE WRONG THING TO GATE IT ON AT ALL.** The rule above says climb to a
-threshold; it never says *climb to what*, and five v2 games answered it the same wrong way — they put
-the badge on the threshold that **opens** the content instead of one above it, so the ✓ arrives on the
-click that unlocks the scene. Measured across the repo the day this was written:
-
-```
-mrs_vance     5 of 6 characters - 2 landing ON the door, 3 landing BEFORE it
-                                  (one 40 points early; two on a DIFFERENT meter
-                                  from the one the door reads, so the tick at want 0)
-forty_miles   6 of 6 - every badge at exactly the door value
-seventh_day   1 badge on the door + 5 goals 25 points past anything the game reads
-the_season    4 of 5
-vesper        0 of 5   <- the v1 game this section was written from is clean
-```
+threshold; it never says *climb to what*, and the wrong answer is to put the badge on the threshold
+that **opens** the content instead of one above it, so the ✓ arrives on the click that unlocks the
+scene.
 
 **The fix is not a bigger number — it is a different kind of gate.** Put the ✓ on a **flag the content
 sets on its way out**, so it means *you have played this* rather than *you have ground past it*. The
@@ -1333,8 +1320,7 @@ it blindly cannot break a build.
 
 So the fix for a value off the top of the ladder is **not** to drop the `max` — that compiles on one
 type and hard-fails the build on the other two. Give the top band a `max` at or above the trait's
-ceiling, or `cap` the terminal add (§29). `commuter` runs `max = 100` against declared ceilings of
-88 / 86 / 80, which is the safe direction.
+ceiling, or `cap` the terminal add (§29).
 
 ### 30.1 A hygiene system is a deliberate non-feature — do not build one
 
@@ -1364,10 +1350,6 @@ The field's verdict, from section I's read of all 27 parseable corpus games:
 - **Corpus-wide, hygiene is the rarest of the four body subsystems**: 234 read sites against
   arousal's 8,183 and clothes' 6,821. Two of 27 games clear 20 read sites, and one of those two is
   a single 22-read variable that is 86% colour.
-
-Our own games agree from the other side: `the_allowance`, `back_home`, `last_call` and
-`late_shifts` all raise a `hygiene` trait that nothing reads — they are in gate 33's own list of
-dead meters (`the-meters.md` W3).
 
 **If a need must exist, make it a `costs` entry on the acts that need it** (§27) — a price the
 engine already enforces — rather than a meter with a ladder and a decay hook. Recorded in the same
@@ -1506,9 +1488,7 @@ miss** before anything else (`v2.py:4573-4580`) — and, when the flag is set, p
 message (`v2.py:5309`). The same path also catches `max_triggers_per_day` exhaustion
 (`v2.py:5263`).
 
-⚠️ **One game in this repo sets it** — `off_season`, six times, writing the hours out in its own
-words (*"mornings, eight till one"*, *"after nine at night"*, *"the last two hours, before the
-shutter"*). Everywhere else windowed work simply vanishes and the player has no surface that says
+⚠️ **Almost no game sets it.** Everywhere it is unset, windowed work simply vanishes and the player has no surface that says
 when to come back. The `SchedulePage` (`v2.py:18964`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
@@ -1546,9 +1526,9 @@ Emitted to the runtime only when rent is enabled (`v2.py:3123`), so a game witho
 
 ⚠️ **`RentDay_Short` is the one every rent game reaches.** It is the branch taken when the player
 cannot pay — the screen where the number matters most — and it does not even set `_cur`.
-`games/forty_miles` declares `currency_symbol = "£"`, and its released build ships
-`You have: <strong>$<<print $player.core_traits.money>></strong>`. The author's own comment on that
-line reads *"the pages hardcoded `$` before this key existed"*; the key did not finish the job.
+A game that declares `currency_symbol = "£"` still ships
+`You have: <strong>$<<print $player.core_traits.money>></strong>` on this screen; the key did not
+finish the job.
 
 ### 33.2 The symbol is a prefix
 
@@ -1727,8 +1707,7 @@ speaker-attribution component — `become-taxi-driver`'s `<<chat>>` **59,751** t
   and three separate name forms.
 
 **We already ship two of the three.** `v2.py:15035` puts the portrait on every NPC dialogue block
-and the name above it — 54 of `the_season`'s 59 rendered blocks carry both. What we do not ship is
-the third: the renderer emits one `dialog-npc` class for the whole cast (`v2.py:15042`).
+and the name above it. What we do not ship is the third: the renderer emits one `dialog-npc` class for the whole cast (`v2.py:15042`).
 
 **Do not build this on the strength of the count alone.** It is recorded so the next person does not
 rediscover it as a gap; build it when a game asks for it.
@@ -1798,15 +1777,6 @@ way, and none of them writes such a scene as a paragraph
 
 ### ⚠️ We did not fail to discover this. We KNEW IT AND LOST IT.
 
-Counted across every `toml_phases/*.toml` in this repo:
-
-```
-the_long_summer   (v1)   46
-under_one_roof    (v1)   14
-vesper            (v1)    6
-EVERY v2 GAME             0
-```
-
 v1's corpus carried a whole numbered rule for it — `prompts/game_design_rules.md:1330`,
 **Rule 17: Block Pools for Repeatable Activities** — and it named the failure precisely:
 
@@ -1821,11 +1791,6 @@ taught false engine facts. In cutting away the false ones, this true one went wi
 v2 skill mentioned `block_pool` exactly once, inside a list of valid block types, for its whole
 life. **The lesson is about the divorce, not about the primitive:** a wholesale cut loses the good
 with the bad, and nothing checked what was in the discarded half.
-
-⚠️ One local exception is on record and should not be mistaken for a ban:
-`games/the_long_summer_test/toml_phases/3_activities.toml:7-9` says *"block_pool prose rotation is
-in the schema but forbidden by the doctrine; doctrine wins for slice authoring."* That was a
-**test-slice** decision — the same repo's full game uses it 46 times.
 
 ### Two authoring constraints, from v1's schema doc
 
@@ -1919,26 +1884,10 @@ typo fails the build with a message naming the canvas and the choice index. The 
 described below is the generator's later slug→passage resolution, which only sees ids the importer
 has already accepted.
 
-### The census — this is a recovery, not a discovery
-
-Counted across every `toml_phases/*.toml` in the repo, 2026-08-24:
-
-```
-show_when_locked        176 uses · 12 games      the wall is well used
-locked_text_threshold    21 uses ·  1 game       late_shifts only (v1-era)
-rejection_node            0 uses ·  0 games      ← and undocumented until now
-rejection_effects         0 uses ·  0 games
-```
+### A recovery, not a discovery
 
 `locked_text_threshold` was already documented (§23). **`rejection_node` was not documented
 anywhere in this skill** — a working primitive that nothing taught, so nothing used.
-
-**`block_pool` is authored 69 times across four v1-era games** (`the_long_summer` 49, `vesper` 12,
-`under_one_roof` 7, `the_long_summer_test` 1). No **v2** game has used it (§35).
-
-`rejection_node` is at **zero across every game in the repo**, v1 and v2 alike. That is a stronger
-statement than §35's and the analogy blurred it. Counted with `grep -c block_pool` over every merged
-final.
 
 ### What it is for — the field's refusal
 
@@ -2202,7 +2151,7 @@ clock is initialised in every build (`time_state` in `$game_state`), including b
 schedules, no phone and no clothing.
 
 **Verified live in a built game, not just read.** Ten cases through a real browser against
-`late_shifts` rebuilt with an overnight condition on a phone conversation: 23:00 and 02:00 inside
+a built game rebuilt with an overnight condition on a phone conversation: 23:00 and 02:00 inside
 `22:00`–`06:00` both true; 21:59, 06:00 and 12:00 false; an ordinary `11:00`–`20:00` window true at
 13:00 and false at 20:00 and 10:59; a bare `18:00` true at 18:30 and false at 19:30. Lock text
 rendered as `Required: Only between 22:00 and 06:00`. Tests:
@@ -2284,7 +2233,7 @@ migration in node against synthetic old saves rather than grepping for it.
 
 ## 41. Five facts a build cost one round each, 2026-08-31
 
-All five surfaced translating a signed design into TOML for `night_desk` 0.0.1. Each cost exactly one
+All five surfaced translating a signed design into TOML. Each cost exactly one
 build or one gate run, and none of them is guessable from the schema.
 
 ### 41a. `op = "sub"` parses, imports, builds — and does nothing
@@ -2375,7 +2324,7 @@ exactly two paths, `v2.py:5343` and `v2.py:5486`.
 
 ⚠️ **One location shows ONE canvas per character.** The renderer gathers every valid repeatable
 canvas per NPC and keeps the highest `priority`, preferring affordable over cost-blocked
-(`v2.py:5125-5158`). Three Ray surfaces in one kitchen render as one Ray, not three rows. Set the
+(`v2.py:5125-5158`). Three Mark surfaces in one kitchen render as one Mark, not three rows. Set the
 priorities deliberately: an escalation at 7 above a hub at 6 replaces the hub whenever its conditions
 hold, which is usually what you want and is never what you get by accident.
 
@@ -2429,11 +2378,11 @@ they picked and follows a change. Escape first, then resolve — `html.escape` t
 token regex reads. `the-first-hour.md` F10.
 
 **The rule: a token belongs in prose. Anywhere else, write the role.** `"His son"` and
-`"Sit with him"` survive a rename; `"@ray's son"` and `"Sit with @ray"` print the token.
+`"Sit with him"` survive a rename; `"@npc's son"` and `"Sit with @npc"` print the token.
 
 ⚠️ **This bites hardest exactly where customization is on.** `v2.py:9294` emits a name textbox for
 every customizable NPC unconditionally, so those characters *must* be referred to by token in prose —
-which trains the author to reach for `@ray` everywhere, including the four fields above.
+which trains the author to reach for `@npc` everywhere, including the four fields above.
 
 > **Linted as `a token the engine never resolves`**, walking every field and nested list, dev-only
 > fields apart. A player-facing one is the `--ship` BLOCK row **no raw token on screen**: the_balance
@@ -2450,7 +2399,7 @@ section is the mechanism.
 ```toml
 [[locations]]
 id   = "the_back_bedroom"
-name = "Ray's Room"
+name = "Mark's Room"
 
 [locations.door]
 description = "The door at the back of the house."
@@ -2461,10 +2410,10 @@ description_variants = [ { conditions = { version = "1.0", ... }, text = "..." }
 [[locations.door.options]]
 text       = "Knock."
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_ray",
+  { type = "npc_at_location", location_id = "the_back_bedroom", npc_id = "npc_mark",
     operator = "is_present" },
 ] }
-goes_to    = { type = "canvas", canvas_id = "ray_knock" }
+goes_to    = { type = "canvas", canvas_id = "mark_knock" }
 
 [[locations.door.options]]
 text             = "Go in."
@@ -2521,7 +2470,7 @@ Every `effects` / `flagEffects` / `costs` entry on a choice runs through
 at the bottom of the screen** and removes it after **2000 ms** (`v2.py:6239`):
 
 ```
-+6 Ray's Relation • +3 Ray's Lust • +120 Money • -4 Home_face • 🔓 Ray owed
++6 Mark's Relation • +3 Mark's Lust • +120 Money • -4 Home_face • 🔓 Mark owed
 ```
 
 Three consequences, and the first is the one that matters:
@@ -2562,16 +2511,6 @@ lie. Hide the row; do not explain it.
 > (`bound to a person, no face`) keys on the field, so it saw 11% of its own subject. A field
 > nobody is punished for leaving out is a comment.
 
-**Measured**, live, before and after, over a 7-day × 4-hour grid at each surface:
-
-```
-the_allowance  walkin_joss_wash     28/28 slots → 0/28
-the_allowance  walkin_martin_wash   28/28 slots → 0/28
-the_allowance  walkin_gareth_wash   28/28 slots → 0/28
-vesper         react_renner_threat  28/28 slots → 7/28   ← only while Renner is at the Anchor
-the_route      house_the_evening     7/28 slots → 7/28   ← unchanged; Roy is there in all seven
-```
-
 ### 46.2 `is_active = false` means "never surfaces on its own"
 
 `setup.isCanvasSelectable(c)` (`v2.py:4835`) = `c.isActive !== false && setup.isCanvasValid(c)`,
@@ -2592,23 +2531,22 @@ switched them off.
 
 ### 46.3 ⚠️ The trap: `isCanvasValid` must stay clean, and so must `locationCanvases`
 
-**`is_active = false` does not mean unaddressable.** Three of the four canvases that declare it —
-`the_allowance`'s bathroom walk-ins — are **substitution targets** of `activity_wash` at
-0.32/0.30/0.28. `_tryRule` resolves them through `setup.getCanvasById`, which builds its map from
+**`is_active = false` does not mean unaddressable.** An inactive canvas can be a **substitution
+target** of a dispatcher such as `activity_wash`. `_tryRule` resolves them through `setup.getCanvasById`, which builds its map from
 `help_data.locationCanvases`.
 
 So two things must NOT happen, and both look like the obvious implementation:
 
 | tempting | what it costs |
 |---|---|
-| fold the check into `setup.isCanvasValid` | `_tryRule` calls it on the target — the three walk-ins stop firing, silently |
+| fold the check into `setup.isCanvasValid` | `_tryRule` calls it on the target — the inactive targets stop firing, silently |
 | drop the canvas from `help_data.locationCanvases` | `getCanvasById` cannot resolve it — same outcome, same silence |
-| add it to `_build_flag_unlock_map` | `forty_miles` hard-fails with `✗ back_room_key — NEVER SET` |
+| add it to `_build_flag_unlock_map` | a flag set only by an inactive canvas hard-fails `NEVER SET` |
 
 An inactive canvas therefore **stays in the index and keeps its passages**, and `_tryRule` keeps
 calling the bare `isCanvasValid`. That asymmetry is the design, and it carries a comment at the
-call site saying so. Verified live: after the change `walkin_joss_wash` still fires as a
-substitution on `activity_wash` (26 of 60 rolls at Monday 06:45, when Joss is in the bathroom)
+call site saying so. Verified live: after the change an inactive walk-in still fires as a
+substitution on `activity_wash` (26 of 60 rolls at Monday 06:45, when its NPC is in the bathroom)
 while rendering as a standalone row in 0 of 28 slots.
 
 **`substitution_only = true` is the field for "dispatcher only, not a button."** Three of the four

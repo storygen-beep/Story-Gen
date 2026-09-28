@@ -91,9 +91,7 @@ whether the name is doing work, or delete it.
 
 Added 2026-09-24. LO chose it on 2026-09-23 over the old shape, after reading a comparison of 26
 top games' openings: the top games tell the player who she is, what the problem is and what to do,
-put people on screen who want things, and end on a question. (The plan it came from is
-`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`, a
-pointer only; everything the rule needs is here.) The old opening shape was *wake up → routine → leave → the job*, and it ended on a quiet
+put people on screen who want things, and end on a question. The old opening shape was *wake up → routine → leave → the job*, and it ended on a quiet
 literary line. The new one:
 
 ```
@@ -224,15 +222,7 @@ two sentences each side of the card.*
 
 ## F2 · Boot and capstone are two canvases
 
-Our own `starting_canvas` sizes, measured across ten built games:
-
-```
-v1   the_inheritance 144 · late_shifts 155 · last_call 214 · vesper 687      median 184
-v2   off_season 278 · steam 285 · forty_miles 339 · back_home 465
-     the_allowance 534 · seventh_day 726                                     median 402
-```
-
-v2's openings are **more than double** v1's, and the reason is structural, not stylistic: v1 split
+An opening that swells does so for a structural reason, not a stylistic one: v1 split
 the opening into a small **boot** and a separate **capstone**, and v2 collapsed both into one
 canvas that then had to carry everything.
 
@@ -288,7 +278,7 @@ three screens. Those are different things to sit through and the sheet has to sa
 
 **4 · The break between screens is a written button.** A mid-funnel node exits through
 `exit_block.type = "choices"` carrying a single choice, and that choice's `text` is the button — a
-line in the game's voice, not "Continue". `seventh_day`'s reads *"Get up before the others."* The
+line in the game's voice, not "Continue". The
 last node exits `type = "location"`, whose `config` carries `locationId`,
 `time_progression_minutes`, `flagEffects` and `effects` — so **the handover is also where the opening
 sets its flags and pays its first money.**
@@ -319,25 +309,14 @@ describing an opening the player never has.
 ⚠️ **Every button is quoted, not summarised.** "the player continues" is not a row. If the line has
 not been written, the screen is not finished.
 
-### Measured: every opening we have built
+### How long the opening is
 
-```
-seventh_day      5 screens  420 w        commuter         1    93
-the_allowance    5          535          last_call        1    60
-back_home        4          468          late_shifts      1    45
-forty_miles      3          339          mothers_place    1   101
-steam            3          285          mrs_vance        1   100
-off_season       2          160          the_inheritance  1    31
-vesper           2           89          the_route        1   136
-                                         the_season       1   119
-```
-
-**Eight of fifteen open on a single screen**, then the sandbox. The largest true opening in the field
+The largest true opening in the field
 corpus is Course of Temptation's at **78 passages and 8,057 words** (F4b below). Length is the
 author's decision; what the format requires is that the decision be **visible** rather than arrived
 at by default.
 
-⚠️ **The funnel should contain the job, done once.** Ours have been narration plus a name box; the
+⚠️ **The funnel should contain the job, done once.** The
 field's largest openings are funnels the player *acts* inside — Course of Temptation's carries seven
 conditionals and not one refusal. A choice that colours and gates nothing is legal here and is the
 only thing that teaches by doing.
@@ -621,11 +600,10 @@ routine, another for day 5 **and** a reputation of 10.
 > move on.** Field study: `~/Documents/Opening_And_Introduction_Study_20260902/`.
 
 **Where a character has several hubs**, the meeting flag belongs on the **first** one — the hub
-the player reaches first. A later rung can be gated on something downstream instead (`aud_sexloop`
-on `audrey_stage gte 3`, `canvas_marcus_arrangement` on `marcus_drinks_done`) and that is correct
+the player reaches first. A later rung can be gated on something downstream instead (`nora_loop`
+on `nora_stage gte 3`, `canvas_paul_arrangement` on `paul_drinks_done`) and that is correct
 work. What is never correct is a hub with **no conditions at all**: it puts that character's
-portrait on a location screen from turn one, however well the first hub is gated. Two shipped games
-carry exactly one of those each — `the_inheritance/hub_richard` and `vesper/hub_sol_undertow`.
+portrait on a location screen from turn one, however well the first hub is gated.
 
 A non-repeatable canvas renders **no portrait** — `selectNpcPortraitCanvasesForLocation` skips
 `if (!c.isRepeatable) continue` (`v2.py:4482-4487`) — so the meeting cannot leak onto the location
@@ -655,14 +633,7 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > flag the player can only hold by having been there.** Keep `requires_npc` as well — it is free,
 > it is correct on the paths that read it, and it documents intent — but never rely on it alone.
 
-> **Gated as `a meeting fires where they are` (G38).** Measured across every game in the repo,
-> 2026-08-23 — 69 canvases in scope, and **zero carry a window that misses their character's own
-> hours**, so the check never nags a game that did the work:
->
-> ```
-> last_call 11/11 clean · off_season 8/8 · the_long_summer_test 1/1
-> the_season 0/5      · the_inheritance 0/24 · vesper 0/13 · late_shifts 6/7
-> ```
+> **Gated as `a meeting fires where they are` (G38).**
 >
 > ⚠️ **The rule above was correct and present, and a game still shipped 0/5 — because a second
 > document said the opposite.** `template_import.py`, the file an author reads to learn the TOML
@@ -816,9 +787,6 @@ the-company's entire first meeting with the player's employer is **80 words**:
 
 Role, then the look, then a beat. That is the whole thing.
 
-**Our own worked example is already correct.** `the_inheritance/canvas_meet_audrey` — 125 words,
-4 `dialog` blocks, one node, priority 10, location-bound, conditions gated. Mirror its shape.
-
 **Where the player cannot yet know the name**, set `speaker = "unknown"` on the `dialog` block and
 the engine prints **"Stranger:"** (`v2.py:14600-14606`); switch to the NPC speaker once names have
 been exchanged.
@@ -837,9 +805,6 @@ The field's ordering, in the clearest case:
 
 **Relationship label first, then the name.** The label is what the player can hold; the name is
 what they will need later.
-
-The measured failure inverts it: *"It goes to Ewan"* — the name arrives with no role attached, and
-that sentence never says who Ewan is.
 
 **The strongest form of this rule is mechanical, and it is worth stealing.** degrees-of-lewdity
 swaps the description for the name once the meeting flag is set, so the game literally cannot use a
@@ -865,10 +830,6 @@ or a room description *before* they have a meeting — and it skips anyone who h
 (`gates.py`, `if n["id"] in has_meeting: continue`). It never reads the meeting's own text. So a
 meeting that opens on a bare name passes every check in this skill.
 
-`the_season/meet_emmett` opened *"Emmett is on the belt…"* and no line in that canvas ever said he
-was her brother — the one character in that cast who is hardest to read, arriving unlabelled, while
-Wade, Boyd and Prine all opened on the role.
-
 **And a check for it was tried and rejected**, which is worth recording so it is not re-attempted
 blind: a kinship-word detector run over every game fires on ten of `last_call`'s meetings (its cast
 is not family, so the word was never going to be there), eighteen of `the_inheritance`'s, and three
@@ -881,14 +842,6 @@ of `off_season`'s that are mid-arc canvases rather than introductions. Most of i
 
 The dodge this rule exists to kill: gate the whole cast on **one** flag the opening sets, and every
 hub is technically "behind a meeting" while the cast still arrives as a block.
-
-Three of the six v2 games shipped exactly this:
-
-```
-seventh_day   rota_running   opens 2 hubs
-steam         doors_open     opens 2 hubs
-back_home     arrival_done   opens 4 hubs
-```
 
 **A meeting flag opens hubs for one character and no other.** One flag opening a single character's
 talk hub *and* their sex hub is fine — that is one character. One flag opening four people's doors
@@ -967,12 +920,12 @@ noun the size of a room.
 Measured across the 26-game corpus:
 
 ```
-                                    field median   the game that prompted this
-room prose the player sees per visit   82 words              68
-variant branches per room screen           10                 2
-rooms that rotate their text              22%                0%
-rooms that vary by hour                   17%                0%
-an event renders ON the room screen       yes      no — ours <<goto>>s away from it
+                                    field median
+room prose the player sees per visit   82 words
+variant branches per room screen           10
+rooms that rotate their text              22%
+rooms that vary by hour                   17%
+an event renders ON the room screen       yes
 ```
 
 The place tells its own story every time you walk in, and it is not the same story twice.
@@ -1064,9 +1017,6 @@ canvases   words   times his own surfaces say who he is
       14   2,594                 2          <- the spine of the game
       14   1,736                 2
 ```
-
-Its author — who wrote every line of it — asked *"Who is Sherrod?"* off a location button. The other
-game that drew *"I don't know who is who"* from the same reader had the same shape.
 
 **Where it goes: the surfaces the player RE-ENTERS.** A hub, an ambient, a walk-in. Not the one-shot
 that introduced him — that one is already doing its job.

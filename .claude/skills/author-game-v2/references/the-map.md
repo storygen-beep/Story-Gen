@@ -172,11 +172,7 @@ field's strongest games:**
 **Consistency beats flattening.** An articled house style is a legitimate register, not a bug — the
 only real defect is being inconsistent, some children prefixed and some bare.
 
-> **The five games shipped before 2026-08-18 are grandfathered.** back_home, steam, forty_miles,
-> seventh_day and the_allowance all run the articled style throughout and it is applied evenly. Do
-> not rename them. This contract governs games authored from here.
-
-⚠️ **But the readability test is not grandfathered, and it is the one that failed.** Two names
+⚠️ **The readability test applies to every game, and it is the one that failed.** Two names
 shipped that a player cannot resolve: **`The Parade`** — British, dated, and read by most people as
 a procession rather than a row of shops — and **`The Box Room`**, which is
 `the-voice.md` R1's own worked example of a bad name, *"The Box Room becomes The Tenant's Room and
@@ -262,8 +258,7 @@ card on the map. A locked bathroom is a sentence, not a screen.
 **We already do this correctly and did not notice.** `back_home` ships **13 occupancy-gated rows** —
 `activity_wash` gated `is_absent` beside `bath_occupied` gated `is_present`, and
 `activity_his_room` gated on the lodger being out. The engine has had the primitive all along
-(`npc_at_location`, per-NPC or any-NPC). `orientation` simply did not use it, which is how Ray's
-Room shipped one row of 31 words against a declared 3,000.
+(`npc_at_location`, per-NPC or any-NPC).
 
 **And the empty room is content.** Where the field has a door it usually also has *going through
 their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows

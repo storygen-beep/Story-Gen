@@ -73,7 +73,6 @@ what the next click does to her. The field ships them bare and crude at the char
 
 ```
 in-her-own-hands  Let James finger you · Give James a blowjob · Let James eat you out · Have sex
-vesper            Keep him in your mouth · Turn over — give him your ass · Let him finish inside you
 shady-deals       Tease him · Grope him · Ride him
 ```
 
@@ -88,18 +87,7 @@ scene the player already chose to be in. `the-surfaces.md` R3b.
 FIELD           median 3 words          21% are 6 words or longer
 ```
 
-Ours, and the drift tracks build date:
-
-```
-late_shifts   v1   3w /  7%        back_home      v2   4.5w / 35%
-the_inherit.  v1   3w / 10%        the_allowance  v2   5w   / 36%
-last_call     v1   4w / 15%        steam          v2   5w   / 47%
-vesper        v1   4w / 17%        forty_miles    v2   6w   / 50%
-                                   seventh_day    v2   6w   / 57%
-```
-
-**Long labels are mostly a symptom, not the disease.** Our own need-shaped canvases are already short
-in the same files — `Wash up` · `Power down` · `Charge up` · `Drill` · `Change` · `Wash`. A need
+**Long labels are mostly a symptom, not the disease.** A need
 names itself in one or two words; a described fiddle with a noun needs seven (*"Get the washing in
 off the airer"*). Fix the room's list per `the-surfaces.md` R2 and most of this corrects itself.
 
@@ -334,11 +322,6 @@ beat whose own prose names the action, with the action then left off the button:
 | `forty_miles` *"Let him get the vest off."* | it comes off over her head in a cab too small for it | **"Get the vest over your head."** |
 | `forty_miles` *"Let him get you flat."* | on her back on the bunk, knees up against the locker | **"Go flat on the bunk."** |
 | `vesper` *"Let him turn you round."* | he turns her by the hip and takes her ass in both hands | **"Turn round for him."** |
-
-Measured on our own source: **31 distinct permitting labels sit on explicit beats across five
-games** — `back_home`, `forty_miles`, `seventh_day`, `steam`, `vesper` — counting cascade
-`advance_text` on beats carrying three or more body words, phase files only, with the merged
-`7_final_game.toml` excluded so nothing is counted twice.
 
 ⚠️ **Permitting is a legitimate button and the field writes it too** — 1.01%, about one label in a
 hundred. Keep it where **her not moving is the decision**: she holds still, she does not cover up,

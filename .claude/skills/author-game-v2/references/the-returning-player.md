@@ -221,7 +221,7 @@ Two archived versions can be compared after the fact, which is how this check ea
 before it had ever run on an unshipped build:
 
 ```bash
-python3 scripts/gates.py --saves vesper 0.1.3 0.1.7
+python3 scripts/gates.py --saves <slug> <old> <new>
 ```
 
 > Run over this repo's own history it found **three passages dropped between vesper 0.1.3 and 0.1.7**

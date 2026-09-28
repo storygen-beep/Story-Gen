@@ -65,8 +65,7 @@ day (`v2.py:16115-16135`, `waitTime` at `v2.py:5442`). The player can always see
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting
-hour. `off_season` declares `starting_hour = 7` and opens *"You wake at seven with your breath
-going up in front of you"* — correct, and the only correct instance of its kind in that game.
+hour.
 
 ---
 
@@ -140,35 +139,16 @@ state-held figure are **read by a human or not at all** — check them when you 
 ### How often the field names an hour at all
 
 One instrument over 25 shipped sandboxes, 11.0M words
-(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/`), and our ten:
+(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/`):
 
 ```
 FIELD median 1.1 clock references per 10,000 words          p75 2.1
-─────────────────────────────────────────────────────────────────────────────────────
-last_call        v1    0.0        the_inheritance v2    9.4
-mothers_place    v2    0.0        late_shifts     v1   13.9
-vesper           v1    2.9        back_home       v2   17.9
-                                  seventh_day     v2   19.4
-                                  the_allowance   v2   27.1
-                                  forty_miles     v2   34.4
-                                  steam           v2   36.7
 ```
 
-Only three field games sit as high as ours. **Our own largest game already sits inside the field's
-band**, so this is a bar shipped work has cleared.
-
-> ⚠️ **These numbers were re-measured 2026-08-22 and they went UP for us and not for the field.**
-> The instrument had three blind spots — `half nine`, `<hour> in the morning` with no preposition,
-> and an hour followed by `the` (*"by nine **the** whole flat…"*, killed by the stoplist entry that
-> was there to catch *"at one point"*). Closing them moved the **field** from 1.0 to 1.1 on a single
-> true positive, and moved **ours by a quarter to a half**: off_season 20.1 → 26.4, steam 29.2 →
-> 36.6, forty_miles 22.6 → 34.4.
->
-> **The blind spots were hiding our defects and almost none of the field's**, because the
-> constructions they missed are ones our authors reach for and the corpus does not. Two of the four
-> readings it newly caught in off_season were **one-shots that open a milestone** — *"Half nine and
-> the flat is at twenty-four degrees"*, *"Half eleven and the telly has been on mute"* — which no
-> earlier pass had ever listed.
+> ⚠️ **The instrument had three blind spots, closed 2026-08-22** — `half nine`, `<hour> in the
+> morning` with no preposition, and an hour followed by `the` (killed by the stoplist entry that
+> was there to catch *"at one point"*). Closing them moved the **field** from 1.0 to 1.1 on a
+> single true positive.
 >
 > Dropping the stoplist altogether was tested and **rejected**: it inflates the field to 1.2 / 2.6,
 > which is noise being scored. The instrument deliberately under-counts rather than over-counts —
@@ -224,8 +204,7 @@ hundreds of buttons — that is the minute COST, which is C1 done right, and cou
 reference is what a naive scan does (it returns 4,282 instead of 24).
 
 The wait-action survivors are buttons whose entire purpose *is* to reach that hour, which the player
-is choosing to spend. Ours: **13 clock-time labels across four v2 games** (steam 8, off_season 2,
-seventh_day 2, forty_miles 1) and **zero across all four v1 games**.
+is choosing to spend.
 
 Even a game that *can* do it does not. `lust-for-life` ships an absolute-time primitive
 (`$time.setTime(23, 55)`) and calls it **270 times** — and the labels sitting next to those calls
@@ -284,16 +263,14 @@ An activity whose window has closed **vanishes**. No greyed line, no reason, no 
 who worked the counter yesterday morning arrives at two in the afternoon and the button is simply
 gone — which reads as a broken game, not a schedule.
 
-The engine has the surface for this and **exactly one game uses it** — `off_season`, six times,
-with the hours written out (*"mornings, eight till one"*, *"the last two hours, before the
-shutter"*). Every other game drops the entry silently:
+The engine has the surface for this — keep the row on screen and write the hours out:
 
 ```toml
 [canvases.trigger]
-location          = "the_arcade"
+location          = "<location_id>"
 is_repeatable     = true
 show_when_blocked = true
-cooldown_message  = "mornings, eight till one"
+cooldown_message  = "<the hours, as a bare phrase>"
 ```
 
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
@@ -311,8 +288,8 @@ and why the doctrine could be written from it while the example was wrong.
 
 **The message is a bare phrase, not a sentence.** The engine renders it as `<row name> — <message>`,
 so restating the row's own name doubles it: *"Work the counter — The counter — mornings, seven till
-one"*. `off_season`'s shape is the house one — lowercase, no restatement, no full stop:
-*"mornings, eight till one"*, *"after nine at night"*, *"the agency's key, nine till five"*.
+one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
+*"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
 `show_when_blocked` and `cooldown_message` are read at `v2.py:11055-11059` and emitted as
 `showWhenBlocked` / `cooldownMessage` (`v2.py:11100-11101`). When `isCanvasValid` returns false —

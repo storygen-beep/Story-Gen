@@ -1206,11 +1206,10 @@ shady_deals          62%            median  2                   max 10
 course_of_temptation 60%            median  1                   max  7
 ```
 
-The raw percentage is a poor discriminator — the **magnitude** is the signal. DoL moves an order of
-magnitude more state per turn than anything else in the corpus, and it is felt: in 74 turns it fired
-**four unrequested events** (an assault on leaving the orphanage at 07:02, a street-seduction prompt
-in transit, a friendly-stranger encounter on Loiter, and a soaking that forced an exposure chain
-through the orphanage).
+The raw percentage is a poor discriminator — the **magnitude** is the signal. DoL (numbers only) moves an order
+of magnitude more state per turn than anything else in the corpus: in 74 turns it fired **four
+unrequested events**. *(2026-09-27: an unrequested scene is allowed only warned, avoidable or opt-in —
+`references/the-surfaces.md` R5b.3. This line is kept as a count, not as praise.)*
 
 The contrast is the finding. **GPG: six consecutive identical loiters at the mall, zero state
 movement, zero events, byte-identical prose.**
@@ -1219,7 +1218,7 @@ movement, zero events, byte-identical prose.**
 
 | game | first screen at 3+ explicit words | reached by |
 |---|---|---|
-| `degrees_of_lewdity` | **turn 9 · 07:02, two in-game minutes** | walking out the front door |
+| `degrees_of_lewdity` (numbers only) | **turn 9 · 07:02, two in-game minutes** | an unrequested event on leaving (see R5b.3) |
 | `course_of_temptation` | turn 11 (backstory picker), turn 16 first playable | prologue |
 | `generic_porn_game` | **none in 29 turns / 4 in-game hours** | — |
 | `shady_deals` | none in 17 turns | — |
