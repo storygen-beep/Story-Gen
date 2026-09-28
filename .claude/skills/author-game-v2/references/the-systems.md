@@ -47,9 +47,8 @@ that declaration — swap them if the game declared otherwise.**
 
 ⚠️ **How to read the evidence blocks.** Every rule states its shape first, as a set to choose from.
 The quotation under it is fenced as EVIDENCE and names the game it came from. This is not
-decoration: `templates/board.toml` put the games built from it into a dialect the genre does not use, and its
-example rung of 15 was copied into their declared tiers. **Every word in an
-example is being taught too.** Take the mechanism. Leave the furniture.
+decoration: an example is copied, words and numbers included. **Every word in an
+example is being taught too.** *(LO decided.)* Take the mechanism. Leave the furniture.
 
 ---
 
@@ -97,15 +96,14 @@ a chore"* (`the-arc.md` A4b). Build what checks the number, then build the place
 
 ---
 
-## SY2b · The shape is not enough — a system describes her, it does not bookmark the plot
+## SY2b · The shape is not enough — a system describes her
 
-⚠️ **This rule exists because SY2 above is satisfied perfectly by a bookmark.** Written 2026-09-02
-from `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run independently of SY1–SY2 and finished a few hours before them. Reproduced here before it was
+Written 2026-09-02 from `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run
+independently of SY1–SY2 and finished a few hours before them. Reproduced here before it was
 believed: its field tables, its `worn_exposure` count and its DoL passage count were re-run and
 match row for row.
 
-> **A value that flips once and then means the same thing forever is a bookmark, not a system.
-> Build the value that keeps moving — her body, what she is wearing, her disposition, the other
+> **Build the value that keeps moving — her body, what she is wearing, her disposition, the other
 > person mid-act — and then write the ordinary scenes twice against it.**
 
 **The field's set** — filter: read in ≥5 units, ≥10:1 read-to-write, ≥80% of readers do not
@@ -162,10 +160,6 @@ here unchanged: **a system that describes her and is read in one place is worse 
 read in nine, because it cost a meter and bought nothing.** The instruction above is to write
 content against what is already declared, not to declare more.
 
-⚠️ **Bookmarks are not banned and this rule does not say to delete one.** `met_<npc>` gating an
-introduction is correct and `the-first-hour.md` F5 requires it. What is wrong is a game whose
-*only* well-read values are bookmarks.
-
 ⚠️ **Instrument limits, to be restated wherever these numbers are cited.** The ≥10:1 / ≥80% / ≥5
 bar is **invented** — it exists to sort systems into two piles so the sides can be compared, and
 the field's own spread (3 to 121 systems clearing it) means no threshold drawn from it is
@@ -176,9 +170,7 @@ everything through page variables, so its top-by-reads is plumbing rather than s
 reads are counted structurally, never evaluated: a condition that can never be true still counts.
 
 **No gate and no lint.** The bar is invented, which rules out a gate on the precedent that retired
-four checks in this project. And a lint could only report *"this value is a flag written once"* —
-which is true of correct introduction bookmarks too, so it would fail things for obeying
-`the-first-hour.md`. **What a parser cannot decide is whether a value describes her**, and building
+four checks in this project. **What a parser cannot decide is whether a value describes her**, and building
 a check that pretends otherwise is the `objects` / gate-22 failure in a new suit.
 
 ---
@@ -246,10 +238,6 @@ In the field a system is written once and turns up wherever its label is.
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
 a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2137` —
 and there is no plural form. A row wanted in three rooms is authored three times.
-
-**Priced honestly: at our size, that is fine.** They have 126 rooms, or 2,760.
-Copying a row into the three rooms that carry a label costs less than the machinery would.
-**Revisit past roughly thirty locations**, where the copies start outnumbering the declaration.
 
 **So the labels are a design tool here, not a wiring mechanism.** That is not a lesser thing. The
 room that declares *public · no bed · open all night · she cannot undress here* has told the author

@@ -2,8 +2,8 @@
 
 Two halves, and they are read at different moments.
 
-**Part one — the explicit beat.** How to write the thing the game is for, and the one defect that
-recurred three increments running. Read it when you are writing heat. It also carries the two rules
+**Part one — the explicit beat.** How to write the thing the game is for, and the one defect to watch
+for. Read it when you are writing heat. It also carries the two rules
 that came out of reading four top female-PC games in source (2026-08-23): **the reason axis** — the
 same act reached two ways is written two ways — and **the two-halves sentence**, which is how a
 repeatable act surface survives its fiftieth visit.
@@ -215,27 +215,17 @@ The band is the reference game's, held across eight years and twelve-fold growth
 ### And a game-wide share cannot see the screen the player is on
 
 **Every act node of every act loop carries 3+, or the loop is not a sex surface.** The whole-game
-percentage is an average, and an average clears while the act itself stays warm — which is exactly
-what the measured failure looked like, 95% of one game's crude prose sealed in a room with no exits
-and all nine of its repeatable loops scoring zero.
-
-Measured 2026-08-23, on the game authored under this doctrine: **10 of its 21 act and finish beats
-were under 3** while the game-wide floor read a comfortable pass. The two SOLO loops carried 5–7 body
-words per act node; the four CHARACTER loops — the headline content, the ones `the_want.md` names as
-carrying the crudest writing in the game — ran 1–2, and one finisher scored **zero on 127 words**:
-three paragraphs of a man coming, and not one named a body part.
+percentage is an average, and an average clears while the act itself stays warm.
 
 `lint · the act nodes` prints it per node.
 
 > ⚠️ **Count the BAND, not the node.** A finisher is banded by definition — it elects on `loop_stage`
-> — and a player sees exactly one band. Folded together, one game's finisher scored 6; every band it
-> could render put **two** body words on the screen. The lint reports the thinnest band a node can
+> — and a player sees exactly one band. The lint reports the thinnest band a node can
 > render for this reason, and the live probe reads what is actually on the page.
 
-**The rewrite is in place, not additive.** These beats were already the right length; they were
-warm. Replacing the hedged clause with the specific one moves the count and leaves the word budget,
-the sentence length and the narration-to-dialogue ratio where they were — a batch that did exactly
-this moved `somebody speaks` by 0.1 and `own_words` by nothing.
+**The rewrite is in place, not additive.** A warm beat is usually already the right length.
+Replacing the hedged clause with the specific one moves the count and leaves the word budget, the
+sentence length and the narration-to-dialogue ratio where they were.
 
 ---
 
@@ -564,10 +554,6 @@ FIELD                  13%    15%    11%   14%     28%     5%    13%
 
 Evenly spread, because no single screen is the whole climb.
 
-A canvas that carries four rungs has no room to arrive; a canvas that carries one has nowhere to
-go. Split them, and let the surface the player returns to carry the choice of which rung is next —
-which is S1's other half and the act menu in `the-surfaces.md`.
-
 **Lint · the ladder.** Prints the opening rung and the ceiling per game. A number, never a bar: a
 field screen is one rung and a canvas is a whole scene (`gates.py` `lint_ladder`), so no threshold
 across the two would be honest.
@@ -741,19 +727,22 @@ where nothing is unimportant has nothing important on it either.
 supposed to carry out of it. If every sentence is equally loaded, you have swept past the rule
 rather than applied it.
 
-**Over-stripped**, real shape, from one of our own games:
+**Over-stripped** (37 words, 3 sentences):
 
-> The counter is at the front and the desk is at the back and there is a gate in the counter you
-> have to lift to get between them. The book goes on the desk. The drawer is under the till side.
+> The stove is on the left and the sink is under the window, with a cabinet in the corner by the
+> back door. You hang the keys on the hook. You put the ledger on the shelf.
 
 Three sentences, three objects, identical weight. Nothing tells the player that only one of them
 will matter tomorrow.
 
-**Weighted.** Same facts, same length, one thing marked down so another can carry:
+**Weighted** (41 words, +4). Same facts, same length, one thing marked down so another can carry:
 
-> The counter is at the front and the desk is at the back, with a gate between them you have to
-> lift every single time. The book goes on the desk, which barely matters. The drawer under the
-> till side is the one he mentioned twice.
+> The stove is on the left and the sink is under the window, with a cabinet in the corner by the
+> back door. You can hang the keys roughly anywhere. You put the ledger back on that shelf,
+> carefully, every night.
+
+Marked down: the keys ("roughly anywhere"). Marked up: the ledger ("that shelf", "carefully", "every
+night").
 
 ⚠️ **This is not permission to pad.** The instruction is to restore contrast, not volume. A beat that gains
 words and keeps every sentence at the same weight has got worse, not better.
@@ -766,14 +755,10 @@ only as built pages. So the figures above are honest for whole games and there i
 to write down — which is exactly why the stopping point is a test and the model beats below are the
 doctrine.
 
-⚠️ **The first version of this warning carried a wrong number and the mistake is worth keeping.** It
-claimed authored TOML runs hot against its own build. That was an artifact of the
-measuring script, not of the seam: its tag-stripping pattern was bounded at 200 characters, and this
-engine emits inline-styled `<img>` tags longer than that, so `object-fit`, `border-radius`, `lazy`
-and `async` were counted as WORDS on our side only — field games write short `[img[...]]` markup and
-were untouched. A rate
-over word count really does survive this seam, which is what gate 43 has always claimed. **A number
-that indicts an existing check deserves the same scepticism as one that flatters you.**
+⚠️ **A rate survives the seam; a per-sentence figure does not.** Gate `prose texture` reads
+authored beat text and never the built HTML (gates.py:9268). Our build adds UI blocks and markup the
+field's pages don't carry, so a per-sentence figure does not compare across TOML and HTML. A rate
+over word count does, and that is the only thing the gate judges.
 
 ---
 
@@ -906,10 +891,9 @@ pass as "still inside the field," never as a target.
 **Rule.** A beat gets a dash when no other mark will do the job. Two dashes in one beat is a habit,
 not a choice. When you find a pair holding an aside, the aside is usually a sentence.
 
-**⚠️ The fix is never a comma.** This is the one wrong turn already taken here, and it is also what
-the `humanizer` skill prescribes, so it will be suggested again. Swapping the mark leaves the joint
-in place, the reader still holds the sentence open, and nothing reads easier. Split the sentence, or
-cut the clause it was carrying.
+**⚠️ The fix is never a comma.** Gate `prose texture` counts dashes only (gates.py:9372), so a dash
+swapped for a comma passes it and leaves the joint in place. Its failure hint says so
+(gates.py:9350). Split the sentence or cut the clause.
 
 **Before** (Shady Deals [FemNPC Call NC], two dashes in nine words):
 
@@ -943,9 +927,10 @@ has to hold, infer, or already know to get to the end of a sentence.
 | field p95 | 0.20 | **22.32** | 4.47 |
 | field max | **0.24** `destroyer` | **25.76** `become-taxi-driver` | **5.41** `free-cities` |
 
-"Sweeping backwards" above is the mechanism that invites it: *replace the hedged clause with the specific one* tells an author to attach a specifying
-clause, and `, which is the county's way of saying skilled tasks approved` **is** a specifying
-clause. The rule is obeyed and the defect is the obedience.
+"Sweeping backwards" above is the mechanism that invites it: *replace the hedged clause with the
+specific one* tells an author to attach a specifying clause, and the gloss in *"You clip on the blue
+lanyard, which is the agency's way of saying on call and unpaid"* **is** a specifying clause. The
+rule is obeyed and the defect is the obedience. *(LO decided.)*
 
 The three rules are one idea at three grammatical addresses. **L2 was retired on 2026-09-24** when
 the loud voice replaced the quiet one; L1 and L3 stand, and L3 now carries the truth rule's
@@ -960,22 +945,20 @@ sentence. It reads as craft while writing and as fog on arrival, because **a glo
 abstract than the thing it glosses** — the reader is handed a concrete detail and then made to hold
 it while a vaguer sentence lands on top.
 
-Real, all from one 8,836-word game, which shipped twenty of them:
-
-> ❌ "…never once seen him take a chair in here, **which is either respect or its exact opposite**."
-> ❌ "…the orange sticker in the corner, **which is the county's way of saying skilled tasks approved**."
-> ❌ "She turns it face down when you come in, **which is a different thing entirely**."
-> ❌ "…the cushion has given up on the left side, **which is the side that works**."
+> ❌ "The receptionist slides your badge across without looking up, **which is how this building tells you that you belong to it already**."
+> ❌ "Your landlord has left the spare key under the mat again, **which is a kind of trust you never asked for**."
+> ❌ "In the break room the coffee pot is always half full by nine, **which is the whole office's idea of a morning**."
+> ❌ "You find three unopened letters from the bank in the glove box, **which is more than an oversight and less than a lie**."
 
 **Rule.** Delete the clause, or make it its own sentence. **Deletion is the default** — in most cases
 the fact was already doing the work and the gloss is the writer not trusting it.
 
 | ❌ | ✅ |
 |---|---|
-| "She turns it face down when you come in, which is a different thing entirely." | "She turns it face down when you come in." |
-| "…one sock on, which is as far as he got, and he has been sitting like that long enough that…" | "<name> sits on the edge of the bed with one sock on. He got that far and stopped." |
-| "…the orange sticker, which is the county's way of saying skilled tasks approved." | "Two of your cards have an orange sticker. Orange means the county approved skilled tasks." |
-| "…never once seen him take a chair, which is either respect or its exact opposite." | "Eleven weeks. <his son> has never sat down in this room. You have not worked out why." |
+| "The receptionist slides your badge across without looking up, which is how this building tells you that you belong to it already." | *Delete:* "The receptionist slides your badge across without looking up." |
+| "Your landlord has left the spare key under the mat again, which is a kind of trust you never asked for." | *Split:* "Your landlord has left the spare key under the mat again. You never asked him to trust you." |
+| "In the break room the coffee pot is always half full by nine, which is the whole office's idea of a morning." | *Delete:* "In the break room the coffee pot is always half full by nine." |
+| "You find three unopened letters from the bank in the glove box, which is more than an oversight and less than a lie." | *Split:* "Three unopened letters from the bank sit in the glove box. Nobody opened them." |
 
 ⚠️ **The fix is not a dash or a bracket.** Same error as the comma swap above: the joint survives the
 swap and the reader still holds the sentence open. Cut it or split it.
@@ -993,15 +976,14 @@ A repeatable canvas is re-entered dozens of times. Backstory read on visit one i
 nineteen, and it is the most expensive kind of sentence there — the reader has to reconstruct a
 prior state of the world before the present one means anything.
 
-> ❌ "The bed **they moved down** is against the wall where the couch **used to be**, and the couch is in the barn."
-> ❌ "**Eight months** of the same man in the same chair and the cushion has given up on the left side."
-> ❌ "There is a rail on the porch steps the county **put in**…"
+> ❌ "The chain **bought <name> out two years ago**, and the sign over the door still has her name on it."
+> ❌ "She **used to** work the till herself. Now <her son> takes the money and she wipes the tables."
+> ❌ "**Since they moved** into the rooms upstairs, she comes down at eight and not a minute before."
 
 Three inferences before anyone in the room does anything.
 
 **Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence nobody has gated is
-something happening now. No *used to*, no *since*, no *eight months*, no *they moved*, no *the county
-put in* — and, since the loud voice makes these claims constantly, no *last night*, *this week*,
+something happening now. No *used to*, no *since*, no *two years ago*, no *they moved* — and, since the loud voice makes these claims constantly, no *last night*, *this week*,
 *again*, *every time* on a line the player can read on their first visit.
 
 **The one exception is the truth rule's rule 2:** a line about the past may show on a repeatable
@@ -1022,31 +1004,17 @@ are one-time, and the repeatable is what they convert into.
 **The facts are not deleted — they move.** Backstory belongs on a one-time canvas, where it lands
 once, properly, and then stays out of the way:
 
-> **Repeatable screen:** "You unlock <name>'s door and go in. His bed stands against the front-room
-> wall, under the window that faces the road. He watches it. Always. He hears you in the hall and
-> turns his head."
+> **Repeatable screen:** "<name> is behind the counter, wiping it down. "Coffee, love? Sit where I
+> can see you." She pours before you answer and pushes the stool beside the till toward you with
+> her foot. *She wants company, and she is not hiding it.*"
 >
-> **One-time canvas, same facts:** "<his son> and two neighbours carried <name>'s bed down out of the
-> upstairs room in March. The couch went out to the barn to make space. He has slept in the front
-> room ever since."
+> **One-time canvas, same facts:** ""I ran this place for eleven years," <name> says. "Sold it to
+> the chain two years back. <her son> has the till now. Since we moved upstairs, I just do the
+> tables." *She hates saying it out loud.*"
 
 ⚠️ **`the-clock.md` C2 already owns the neighbouring rule** — a beat may not say what *time* it is —
 and it is complete, including the exemptions for a recurring hour (*"<his son> comes by at ten"*) and a
 past one. **L3 is about elapsed time, not clock time.** Do not read one as the other.
-
-### What one pass looks like
-
-The anchor activity of a shipped game, every rule applied, nothing cut but load:
-
-```
-                   words  sentences  median  >20w   negation  history
-before               319      17       20w   52.9%    41.2%    29.4%
-after                254      36        8w    0.0%     2.8%     0.0%
-field reference                         7w    7.7%     8.3%     3.1%
-```
-
-**Sixty-five words shorter, with every fact intact and the voice unchanged.** That is the shape of a
-correct pass: the sentence count roughly doubles, the word count falls, and nothing is lost.
 
 ### Two checks measured and NOT built
 
@@ -1071,12 +1039,13 @@ Every readability instrument in this skill measures **syntax**. A text can score
 them and still be hard, because the difficulty is **reference** — the reader has to already know
 what the nouns point at:
 
-> *"Nothing in the meter. You go to bed in a jumper and your socks and the coat over the top of
-> the eiderdown."*
+> *"The meter runs out and the lights die. You find the torch in the kitchen drawer. You go to bed
+> in your vest."*
 
-Three of those words — **meter** (a coin-fed prepayment meter), **jumper** (a sweater),
-**eiderdown** (a quilt) — are short, ordinary-looking, and name objects the reader has to arrive
-already holding. Short sentences do not help a reader who does not know what the nouns are.
+Three of those words — **meter** (a coin-fed prepayment box, and in this genre the stat bar in the
+sidebar), **torch** (a flashlight), **vest** (an undershirt) — are short, ordinary-looking, and hand
+a US reader a confident wrong picture: a stat bar emptying, a burning brand, a waistcoat worn to bed.
+Short sentences do not help a reader who does not know what the nouns are.
 
 **Measured — locale-locked common nouns, uses per 10,000 words.** The instrument is a **curated
 list** of about forty regional terms, so it is a judgement, and it is named as one. The field, 27
@@ -1158,19 +1127,15 @@ Everything above is scoped to **nouns** — *airer*, *eiderdown*, *chippy* — a
 arrive already holding. **A phrasal idiom does the same damage and slips straight through**, because
 every word in it is common and none of it is regional.
 
-The measured case came out of the load-rules pass. A rewrite drafted *to be the easy version* opened:
+> ❌ "You **settle up** with <name>."
 
-> ❌ "You **let yourself in** at seven."
+The idiom folds its facts into a phrase, and none of them is recoverable by a reader who does not
+already own it. The plain version is one word longer and carries them:
 
-Three facts folded into an idiom — she has a key, she does not knock, nobody greets her — and none
-of the three is recoverable by a reader who does not already own the phrase. The plain version is
-one word longer and carries all three:
+> ✅ "You **pay <name> everything you owe**."
 
-> ✅ "You **unlock <name>'s door** and go in."
-
-Same family, same games: *"the cushion has **given up** on the left side"*, *"neither of you is
-going to **call it** a surprise"*, *"you both **let that stand**"*. Each one is a plain event
-wearing a phrase.
+Same family: *"she **waves it off**"*, *"you **call it a night**"*, *"you **hold your tongue**"*.
+Each one is a plain event wearing a phrase.
 
 **Rule. Where a plain verb exists, use it.** The test is the one this section already runs, applied
 to a phrase instead of a word: *does this sentence hand the meaning over, or does it require the
@@ -1210,13 +1175,9 @@ are worth reading past the ones that announce themselves.
 The rule above was never broken by anything anyone wrote in this skill. It was broken by what the
 skill **showed**.
 
-No line in `author-game-v2` has ever said "write British." But `templates/board.toml` shipped
-`costs = "£5 for the immersion"` — a foreign currency symbol and a locale-locked noun in six words,
-in the file authors copy hardest. Counted with word boundaries across the live reference files,
-the skill carried **27 locale-locked terms across 11 files** — `airer` ×9, `lodger` ×8,
-`immersion` ×3, `rota`/`rotas` ×3 — and glossed none of them.
-
-> ⚠️ **Count with word boundaries, and check a surprising number before you act on it.**
+No line in `author-game-v2` has ever said "write British." A locale-locked noun or a foreign
+currency symbol in a worked example teaches it anyway, and a template is the file authors copy
+hardest.
 
 **This is `SKILL.md`'s "an example outranks every rule beside it", third instance** — after
 `the-map.md`'s worked map skeleton and `templates/board.toml`'s
@@ -1249,10 +1210,10 @@ choosing between two failures — instances 1–3 say an example is dangerous, i
 absence is worse. Both are true, and the line between them is not how *big* the example is:
 
 > **A mechanism copied verbatim produces a correct game. A world copied verbatim produces the same
-> box room in every game that copies it.**
+> room in every game that copies it.**
 
-Every one of the first three failures was a **world**: a locale-locked vocabulary, one game's floor
-plan, one game's tier numbers. All three are things an author should be *deciding*, and an example
+Every one of the first three failures was a **world**: a locale-locked vocabulary, a floor plan, a
+set of tier numbers. All three are things an author should be *deciding*, and an example
 decides them by default. The absence was a **mechanism** — where the clip goes, how a ladder is
 gated, which key day-caps a rung. Those have one correct answer that does not vary by game, and an
 author who has to derive them derives them differently every time.
@@ -1284,25 +1245,6 @@ sentence, the share of `you`, pronouns per name) which carry **no field figure a
 because the corpus exists only as built HTML and none of the three survives the change of basis.
 They are a trend line across builds. Reading them as a score is the error the gate's own
 header warns about, and it has already been made once.
-
-**Padding is not measured, because it was measured and there is nothing to catch.** 2026-08-28,
-prompted by readers of a shipped game saying the prose is long but says little: five markers —
-`-ly` adverbs, hedge words, commas, repeated trigrams, vocabulary variety — each a rate per 1,000
-words, over 25 field games and our 14. Our prose is not fat. It is **stripped**, and outside the
-field's own range on the lean side: **13 of 14 games write fewer `-ly` adverbs than the field's
-leanest game** (ours 4.22 per 1,000, field floor 8.87, field median 13.43), 10 of 14 the same for
-hedges, and none of our games is above the field maximum on any of the five. The game the readers
-were reading writes 3.01 and 4.00 and repeats phrasing *less* than the field. A ceiling set
-anywhere in that range passes every game we own forever, so none was built — the fourth check this
-skill has measured and turned down. Full method and data:
-`~/Documents/Prose_Padding_Study_20260828/`.
-
-⚠️ **That is a measurement, not a new rule.** Nothing here names a floor for a modifier, and no
-reader asked for one. The direction is consistent with what this file already prescribes at
-line 122 — *replacing the hedged clause with the specific one* — and whether it should run this
-far past the field is an open question, not a defect to fix. What the same study DOES point at is
-gate 43 above: set beside it, the shape is a **texture** — dash-joined, modifier-light, sentences
-at the field median — and not a volume.
 
 *(This file governs what the player reads **after** a click. Room names, button labels, guidance
 cards and locked-door text are a different job with a different rule — `references/the-voice.md`.

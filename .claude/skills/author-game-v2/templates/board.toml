@@ -116,9 +116,7 @@ starting_week = 1
 #
 #   ⚠️ THE LIST BELOW IS A MENU, NOT A SET. Same rule `needs` already carries on
 #      this page: per game, never a fixed list. Delete every line whose job you
-#      cannot name. A trait that is raised and never read fails gate 33 — measured,
-#      five games shipped 232 arousal raises against 4 reads because this file
-#      handed the key over and said only what NOT to do with it.
+#      cannot name. A trait that is raised and never read fails gate 33.
 [player]
 id   = "player"
 name = "<Name>"
@@ -275,20 +273,17 @@ shuts = "<what she CANNOT do while this is empty>"
 #      the naming rule's own example of a bad name.
 #
 #   5. WHO signs the map off, and WHEN? Put both in board.map.r1_signoff. The
-#      author signing off their own map is not a sign-off — and that is exactly
-#      what the 26/26 house-shaped game recorded.
+#      author signing off their own map is not a sign-off (LO decided).
 
 [[locations]]
 id                   = "<location_id>"
 name                 = "<Name>"
 # ⚠️ NAME THE FUNCTION FIRST, THEN THE FLAVOUR. This is the only surface the
 # player sees on EVERY visit, so it is where the place says what it IS — the
-# kind of business, what people do here, where the money comes from. The
-# measured failure ran long, specific and well written and never said: a game
-# described its anchor, budgeted at 27% of the whole game, as "…and under them
-# forty machines" — forty machines of WHAT. The first thing the human reader
-# asked was what the place is. Length was never the problem.
-# references/the-first-hour.md F9 · lint `the place says what it is`.
+# kind of business, what people do here, where the money comes from.
+# references/the-first-hour.md F9 · lint `the place says what it is`
+# (gates.py:5595) lists every location by words written there, beside its
+# description length.
 description          = "<What kind of place this is and what happens here — then what she sees, what it smells of, who is usually here>"
 image                = "locations/<location_id>.jpg"
 image_search_queries = ["<query>", "<query>"]     # find-media fills the file

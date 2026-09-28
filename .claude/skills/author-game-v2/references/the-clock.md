@@ -71,13 +71,11 @@ it's open between 7am and midnight."*
 
 **The move is grammatical, not editorial.** A reading becomes a rule and the fact survives intact:
 
-| ❌ a reading — false for most of the window | ✅ a rule — true at every minute |
+| ❌ a reading, false for most of the window | ✅ a rule, true at every minute |
 |---|---|
-| "Shutter up at eight and the light comes in about four feet and stops." | "The shutter goes up at eight and the light comes in four feet and stops." |
-| "You wake at ten to seven and you do not have to be downstairs until eight." | "You wake before the house does. Nobody wants you downstairs until eight." |
-| "Twenty past nine and the front door goes." | "The front door goes. That is the bus, and that is your mother." |
-| "It is twenty past six." | "Three pegs still have clothes on them. Three people are still in the water." |
-| "You count them at one o'clock out of habit." | "You count them every time you pass, out of habit." |
+| "It's seven, and the bakery still hasn't turned its sign. You knock anyway." | "The bakery turns its sign at seven. Until it does, you knock, and Soren lets you in." |
+| "It's Friday, so Mireille is already behind the bar, grinning at you." | "Mireille works the bar Fridays. When she's on, she grins at you first." |
+| "Eleven-thirty. \"Last orders,\" Halvard shouts, and nobody in the room moves." | "Halvard shouts it every night. \"Last orders at eleven-thirty, and I mean it.\" Nobody moves." |
 
 The right-hand column is not a compromise. Every one of them is **more specific**, because the hour
 was doing the work a detail should have been doing.
@@ -103,16 +101,11 @@ window, is it still true?* Rule → yes. Reading → no.
 C2 is written about the **hour** because that is where it was found. The test is not about hours.
 
 **The day of the week.** A repeatable canvas fires on every weekday its schedule allows, so a named
-day is a reading with a six-in-seven chance of being wrong:
-
-| ❌ a reading | ✅ a rule |
-|---|---|
-| *"Forty-one sixty. The pitch is ninety. It is Thursday."* — an all-days canvas | *"…it is not ninety. It has not been ninety since the clocks went back."* |
-| *"It's not Monday. What's gone wrong?"* — said by a character whose rota includes Monday | *"You don't come down here. What's gone wrong?"* |
+day is a reading with a six-in-seven chance of being wrong. The Mireille row in the table above is
+this case.
 
 **A figure the state already holds.** Money, energy, a relation — if the sidebar is printing it,
-the prose may not also assert it. *"Forty-one pounds sixty"* is a number the player can see is
-wrong, in a game whose entire pressure is counting toward the rent.
+the prose may not also assert it.
 
 > **The general form: a beat may not state anything the engine is already tracking.** The hour, the
 > day and the money are three cases of it; the rule covers whatever is next.
@@ -296,10 +289,8 @@ number that is right for all three.
 
 | ❌ asserts what the engine cannot keep | ✅ true at any pace |
 |---|---|
-| "Four weeks on my floor and not one glass" | "All this time on my floor and not one glass" |
-| "You've had three weeks and you've turned up every one" | "You've had every night since, and you've turned up for every one" |
-| "quiet for eleven days" | "quiet since she closed it up" |
-| "Fourth shift." | "Another shift." |
+| "\"Three months you've sat at my counter,\" Ivo says, \"and not one tip.\"" | "\"All this time at my counter,\" Ivo says, \"and not one tip.\"" |
+| "Your sixth lesson. \"Hands where I can see them,\" she says, and waits." | "\"Hands where I can see them,\" she says, same as every lesson, and waits." |
 
 **Exempt:** backward canon fixed by a prior chapter · in-scene time ("a minute later", "all night",
 "tomorrow night") · shift patterns and job descriptions ("six nights a week") · forward consequences ("that mark
@@ -307,7 +298,7 @@ will still be on the wall next week").
 
 ⚠️ **Where the precision IS the character, keep the precision and drop the claim.** A man who
 counts is frightening because he counted — *"You looked at this door exactly once, and I know which
-night it was"* keeps everything *"Your fourth shift"* was doing and claims nothing the engine has
+night it was"* keeps everything *"Your sixth lesson"* was doing and claims nothing the engine has
 to honour.
 
 ⚠️ **The same check catches invented economy figures.** A number the player can compare against

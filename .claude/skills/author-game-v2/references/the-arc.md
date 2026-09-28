@@ -2,12 +2,8 @@
 
 ## Why this file exists
 
-Every v2 game builds the same thing for every character: a meeting, a hub to talk at, one
-repeatable sex surface, and a few walk-ins. Nothing sits between the meeting and the surface.
-
-The field builds a **numbered arc of one-time steps that ends by turning into that surface**,
-and the first third of the arc has no sex in it at all. We author the last step and skip the
-six that earn it.
+The field builds a **numbered arc of one-time steps that ends by turning into a repeatable sex
+surface**, and the first third of the arc has no sex in it at all.
 
 This was read, not counted. Four arcs end to end in two passing female-lead games —
 `course-of-temptation` (the harasser, the best friend, the roommate's partner) and
@@ -54,10 +50,8 @@ downstream of that declaration — swap them if the game declared otherwise.**
 
 ⚠️ **How to read the evidence blocks.** Every rule states its **shape** first, as a set to
 choose from. The quotation under it is fenced as EVIDENCE and names the game it came from.
-This is not decoration: `templates/board.toml` shipped `airer` and `£5` and put the games built
-from it in a dialect the genre does not use, and its example rung of 15 was copied into their
-declared tiers. **Every word in an example is being taught too.** Take the mechanism.
-Leave the furniture.
+This is not decoration: an example is copied, words and numbers included. **Every word in an
+example is being taught too.** *(LO decided.)* Take the mechanism. Leave the furniture.
 
 ---
 
@@ -663,15 +657,7 @@ it first) rather than the order that produced P0.
 4. **`a step with nothing before it`** — one-time canvases on a person whose trigger reads no flag
    that person's earlier steps set (A14). A list, never a score; not built yet.
 
-⚠️ **A11 is the first rule here with a precedent game, and that changes the build order.**
-`commuter` already writes a stop beat on all seven of its loops. Every other rule in this file
-has zero examples in the repo, so **A11's check is the first that can honestly ship** — it would
-read "1 of 11 games" rather than "0 of 11", which is a distribution rather than an indictment.
-Build order is therefore A11's lint first, then whichever of the three above a release earns.
-
-⚠️ **This file will be skipped.** That is not pessimism, it is this project's measured history:
-the register pivot defect was authored three increments running, each time by someone who had
-just re-read the rule against it, and only the per-beat scorer ever caught it. Until the lints
+⚠️ **Log which rules a release skipped.** *(LO decided.)* Until the lints
 exist, an arc is authored on discipline alone, and the honest place to record that is
 `the-release.md`'s log step — name in `v2_state.json` which of A1–A14 the release built and
 which it skipped, with the reason.

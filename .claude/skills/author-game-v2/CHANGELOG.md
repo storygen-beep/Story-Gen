@@ -5,6 +5,86 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — Our-games sweep, batch 3 (finish): craft rules kept only where code depends on them; new examples
+
+**Why.** LO's last calls on batch 3: a craft rule whose only evidence was our game is cut, unless a gate,
+lint, script or template depends on it — then it stays as an engine fact, citing the code. The ten
+v2-prose drafts go in as written (LO: "meter", "settle up", "you").
+
+**What changed.**
+- **Kept as engine facts (six), our evidence removed:** an ascent needs a brake → gate `the climb is paid
+  for` (`gates.py:8183`); the rate half of M2 → the same gate's clicks · minutes printout (`:8249`); the
+  boot/capstone opening → gate `the opening opens a door` (`:9424`), `_capstone_at` (`:5086`) and
+  `templates/first-hour.toml`; the relation stays attached → lint `the role stays attached` (`:5519`,
+  every canvas bound to him, one-shots included); a place says what it is → lint `the place says what it
+  is` (`:5595`); a rate survives the TOML/HTML seam → gate `prose texture` (`:9268`).
+- **Kept as instrument facts (two):** the dash gate is blind to a comma swap (`:9372`, hint `:9350`);
+  `which refusals are shown at all` compares against the field's 9-word refusal median (`:1148`).
+- **Cut (no code depends on them):** M3 lever 3, the one-node warning, the anchor must be reachable, wire
+  the three lines, a start choice buys reach, plot flags are bookmarks, priced under ~30 locations, the
+  explicit ladder's two failure shapes, one pass doubles sentences, read the whole line, the-arc's
+  premise, the schedule half of "his own subject" (and its echoes in `SKILL.md` and `the-surfaces.md`).
+  "The doctrine caused the glosses" stays as group 1 (LO decided), with the new lanyard example.
+- **New examples (v2-prose, LO approved):** `register.md` over-stripped/weighted pair, L1 glosses and fix
+  table, L3 history and repeatable/one-time pair, the meter/torch/vest lead quote, the settle-up idiom;
+  `the-voice.md` R6 permitting-label table (in "you") and R1 works/fails labels (The Undercroft → The
+  Basement); `the-clock.md` C2 and C6 tables; `the-surfaces.md` four-man cast (Teodor, Otis, Ruben,
+  Casimir).
+- **Last unnamed story lines cleared:** `register.md` opening and regional-word / box-room history;
+  `agents.md` previous-game ledger; `templates/want.md` (three), `templates/board.toml` (two),
+  `the-meters.md` intro, `engine.md` "22 of 22".
+
+**Result.** Our game names in `SKILL.md`, `references/` and `templates/`: 0 (from ~380 at the start of
+the sweep). Remaining "our games" phrases mean the engine's architecture or field counts.
+
+**Still in code, next item (LO).** `gates.py` carries the same stories in printed hints and comments
+("vesper door 22", "two of our own games", "Shutter up at eight", the G26 header, the role and place
+lint docstrings).
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 78 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged · template non-comment lines unchanged.
+
+words: 134,231 → 132,622 (−1,609) · running total 132,622 / 149,283
+
+---
+
+## 2026-09-28 — Our-games sweep, batch 3 (LO's calls): skill-writing and process rules kept as LO's, lint reasons cut, §25 corrected
+
+**Why.** LO's calls on the batch-3 list: rules about writing the skill (how an AI follows it) and
+process rules are LO's own decisions, not game craft, so they stay, marked; the reasons a check is a
+lint rather than a gate that rested on our numbers are cut, with every check's status left as it is in
+code; `engine.md` §25 is fixed now.
+
+**What changed.**
+- **Rules about writing the skill, kept and marked *(LO decided.)*,** our stories removed: "an example
+  outranks every rule beside it" and "a template slot is copied harder" (`SKILL.md`); "every word in an
+  example is taught" (`SKILL.md`, `the-arc.md`, `the-systems.md`, `templates/first-hour.toml` comment);
+  "no example world" (`the-map.md`); the sweeping-backwards point (`register.md`); the Prose agent exists
+  for attention (`agents.md`).
+- **Process rules, kept and marked *(LO decided.)*:** parse game TOML, never grep (`SKILL.md`); every raw
+  finding gets an adversarial verify (`agents.md`); log which A-rules a release skipped (`the-arc.md`);
+  `r1_signoff` records who and when (`the-map.md`, `state.md`); the Want is read every release
+  (`the-want.md`, `state.md`); a heat removal is logged with what replaces it (`state.md`).
+- **Lint-not-gate reasons cut** (the checks unchanged): week-income ratio (`the-economy.md`), R5/R6 at
+  50% (`the-surfaces.md`), padding is not measured (`register.md`), R3 threshold (`state.md`, the
+  principle restated in batch 2 is gone), A11 build order (`the-arc.md`), mechanism 5 (`the-surfaces.md`).
+- **`engine.md` §25 corrected against `v2.py`:** `dialog` reads only `npcId` (`:15943`), so a speaker
+  string with no `npcId` renders "NPC" (`:15950`); `thought_bubble` takes `npcId`, else the speaker string
+  (`:16024`), and a missing speaker title-cases to "Npc" (`:16030`). The heading no longer claims both
+  say "Npc".
+
+**Waiting on LO.** Group 4 (craft rules): the dependency list and the ten v2-prose drafts are in
+`round5/OUR_GAMES_SWEEP_BATCH3_REVIEW.md`. A few unnamed story lines outside the list remain
+(`register.md` top "recurred three increments running", the locale/box-room history block; `agents.md`
+"previous game's ledger").
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 78 · tallies unchanged (29/47,
+46/50, 44/48) · `git status games/` unchanged.
+
+words: 135,169 → 134,231 (−938) · running total 134,231 / 149,283
+
+---
+
 ## 2026-09-28 — Our-games sweep, batch 3 (applied part): the hard rows and the unnamed measurements
 
 **Why.** Batch 3 of the sweep: the rows whose example carried the point, plus about 45 measurements

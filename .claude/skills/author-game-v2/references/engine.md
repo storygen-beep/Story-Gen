@@ -366,41 +366,29 @@ Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It accep
 
 ### ⚠️ That is what a shown row must SAY. It is not how many rows to show.
 
-The rule above answered half a question and the first game authored after it went to **22 of 22
-shown-locked choices carrying a reason**, against 13 of 171 across every game before. The
-instruction was followed exactly; nothing told it when to stop.
+The rule above answers half a question: what a shown row says, not when to show one.
 
 **The field's default is silence** (`findings_B_refusal.md` §2, 16,167 refusing chains): **71%
 render nothing at all**, and the per-game silent share runs a **median of 79%** across a **22–100%**
 range. The study's own reading: *"The spread is a house decision, not a genre norm"* —
 zaras-school-life speaks 78% of its refusals, corpo-life speaks two of 574, and both shipped. So
-there is no number to hit. There are three calls to make:
+there is no number to hit. There are two calls to make:
 
-**1 · A DOOR is not a REFUSAL, and their registers differ by measurement.**
-
-```
-field spoken refusals   n=4,540   median  9 words   flat, mechanical, names a price 37%
-vesper's nine doors               median 22 words   in-fiction, and the study calls it
-                                                    "the only game doing this properly"
-```
-
-Nine words is right for *"already done"* and *"wrong hour"*. It is wrong for the ceiling of a
-release, which `the-release.md` makes the thing that sells the next one.
-
-**2 · Never inside a scene when the scene moves the bar.** A greyed rung mid-beat, gated on a meter
+**1 · Never inside a scene when the scene moves the bar.** A greyed rung mid-beat, gated on a meter
 the canvas's own `effects` raise, is the machinery narrating its own progress bar: the row opens by
 itself in a click or two, so the text hands the player nothing to act on, and it puts a UI label in
 the one place the register says the body is the only thing on screen. Contrast an in-scene locked
 choice gated on something the player goes **elsewhere** and fixes. That is a handle and it is
 correctly spoken.
 
-**3 · A blocked WINDOW is a different surface and it is not this one.** An activity out of hours
+**2 · A blocked WINDOW is a different surface and it is not this one.** An activity out of hours
 belongs in `show_when_blocked` + `cooldown_message` on the canvas trigger — `the-clock.md` C5, where
 the hours are the point and hiding them is *"lostness with a clock on it"*. Do not answer a noisy
 guidance screen by deleting those.
 
-`scripts/gates.py`'s **`lint · which refusals are shown at all`** reports all three: the in-scene
-count, the self-moved subset, and the reason-length median against 9 and 22.
+`scripts/gates.py`'s **`lint · which refusals are shown at all`** reports three numbers: the
+in-scene count, the self-moved subset, and the shown-locked reasons' median length against the
+field's spoken-refusal median of 9 words (gates.py:1148).
 
 ---
 
@@ -966,22 +954,38 @@ Read and cite before using; delete from this list once promoted above.
 
 ---
 
-## 25. A speaking block with no `speaker` renders as a character called "Npc"
+## 25. A speaking block with no `speaker` renders under a placeholder name, not a person
 
-**Verified.** `dialog` and `thought_bubble`
-both resolve their speaker the same way, and the field is **not optional**:
+**Verified against `v2.py` on 2026-09-28.** `dialog` and `thought_bubble` both default a missing
+`speaker` to the string `"npc"` (`v2.py:15908`, `v2.py:16004`), but they resolve the speaker
+**differently** after that, and the field is **not optional** for either:
 
-```python
-speaker = props.get("speaker", "npc")        # v2.py:16004 — the default is a STRING, not a person
-```
+- **`dialog`** — `"player"` renders the player label; `"unknown"` renders **"Stranger"**
+  (`v2.py:15930-15939`). **Any other value, including a missing speaker, takes the NPC branch, and
+  that branch reads only `npcId`** — the `speaker` string is never used as the id
+  (`v2.py:15943`). With no `npcId` the id is `""`, and the fallback prints **"NPC"**
+  (`v2.py:15950`):
 
-`"npc"` satisfies `speaker.startswith(("npc_", "npc"))`, so the unknown branch is skipped and the
-NPC branch runs with `npc_id = "npc"` (`v2.py:16024`). Nothing matches, so the fallback title-cases
-the id (`v2.py:16030`):
+  ```python
+  npc_id = props.get("npcId", "")                                                     # v2.py:15943
+  npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"            # v2.py:15950
+  ```
 
-```python
-npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"   # "npc".title() -> "Npc"
-```
+  So `speaker = "npc_bev"` with no `npcId` renders "NPC", not Bev.
+
+- **`thought_bubble`** — `"player"` renders the player's thought label. `"unknown"`, **or any
+  speaker that does not start with `npc_` or `npc`**, renders **"💭 Someone is thinking:"**
+  (`v2.py:16016-16021`). Otherwise the id is **`npcId` if present, else the `speaker` string
+  itself** (`v2.py:16024`), so `speaker = "npc_bev"` alone does find Bev. A missing speaker gives
+  the id `"npc"`, which matches nobody, and the same title-case fallback turns it into **"Npc"**
+  (`v2.py:16030`) — *"💭 Npc is thinking:"*.
+
+  ```python
+  npc_id = props.get("npcId") or speaker                                              # v2.py:16024
+  ```
+
+Either way, a speaking block with no `speaker` shows a placeholder where a person should be. Write
+`speaker` and, for an NPC, `npcId` on every block, as below.
 
 ### The three forms, all required to carry `props`
 
@@ -994,7 +998,7 @@ npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"   # "np
 ```
 
 `speaker = "unknown"` is the deliberate pre-introduction form: it renders **"Someone is thinking:"**
-for a thought bubble (`v2.py:14647`) and the equivalent stranger label for dialogue. Use it while
+for a thought bubble (`v2.py:16020`) and **"Stranger"** for dialogue (`v2.py:15937`). Use it while
 the player cannot yet know the name — never as a shrug.
 
 ⚠️ **`dialog` is the correct type; `dialogue` is not.** The recognised list is `heading, paragraph,
