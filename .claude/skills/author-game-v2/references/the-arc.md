@@ -611,8 +611,9 @@ Four rules follow:
 Every line here was read on 2026-09-01. `engine.md` remains the only file that may carry engine
 facts; these are the ones this doctrine leans on, and they are repeated here only as pointers.
 
-- **A1 is authored with flags today.** Each step is a one-shot canvas gated on the flag the
-  previous step set, and the final step sets the flag that opens the repeatable surface.
+- **A step is recorded on a counter.** Each step is a one-shot canvas gated on the person's
+  counter (`<npc>_stage eq n-1`) that sets it to `n`, and the final step opens the repeatable surface —
+  the `counter` of `board.characters[].ladder` (`state.md`; `the-spine.md` SP2).
 - ⚠️ **The native primitive exists and is not wired.** `setup.selectCanvasByPriority`
   (`v2.py:4980`) implements A1 exactly — canvases sharing a `name` form a group, unvisited tiers
   play in ascending `priority`, and once all are seen it returns the highest-priority one

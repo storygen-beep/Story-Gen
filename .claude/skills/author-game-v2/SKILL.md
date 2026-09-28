@@ -158,9 +158,10 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 |---|---|---|---|
 | *(no state file)* | write the Want, create the state file | `references/the-want.md` | the Want is recorded → `want` |
 | `want` | **write the idea page** — the game's Her moment: fantasy, promise, the people who carry it, the first step's eight lines | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks it → `idea` |
-| `idea` | lay down the world — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
+| `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, no earlier than the day after drafting → `spine` |
+| `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` | every sheet is [READY] and signed → `sheets` |
-| `sheets` | build v0.1 from the signed sheets | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
+| `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
 | `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
 
 **The board phase ends in SHEETS, not in TOML.** A sandbox in this engine cannot be reviewed by playing it (Ashwell 2015, on the two
