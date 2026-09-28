@@ -73,10 +73,8 @@ blocks = [
 
 ⚠️ **The numbers are the one thing not to copy.** `400` and `200` are filler and their only
 doctrine is the *relationship* — a full price and its half. What the price should actually be
-against a week's income is **R3c**, below, and it is derived per game. A set of thresholds shipped
-in an example is the third recorded instance of *an example outranks every rule beside it*
-(`the-meters.md`: `15/35/55/75` reached every tier of every game built afterwards). Do not make
-this the fourth.
+against a week's income is **R3c**, below, and it is derived per game. *An example outranks every rule
+beside it* — do not copy these.
 
 ⚠️ **Conditions need `version = "1.0"` or they FAIL OPEN** — the engine returns true for any
 `conditions{}` without it, with no build error, so a ladder missing it renders every rung at once.
@@ -155,21 +153,12 @@ of the nine assets carry upkeep at all (the other is `sluttown-usa`'s `$serverRe
 so **upkeep is optional** — but where it exists it is the same object delivering the pressure, not a
 second system bolted on.
 
-#### ⚠️ The failure this rule exists to prevent, and it is ours
+#### ⚠️ The failure this rule exists to prevent
 
-```
-the_season   $20  work_store_run  sets has_boots      read 0 times
-             $5   work_store_run  sets truck_fuelled  read 0 times
-```
-
-**The player buys boots that fit for twenty dollars and the game never mentions them again.** The
-purchase, the flag and the price were all built; the doors were never cut. This is Study 7's
-fake-freedom defect in its economic form — *asked to choose, answer discarded* becomes *asked to pay,
-purchase discarded* — and the same zero-based test catches both.
-
-Across all eight v2 games at the time of measurement, **money bought exactly one thing that opened
-anything**: `mrs_vance`'s truck, `truck_bought`, 5 doors, shipped 2026-08-27 out of the economy pass
-as a sink with no doctrine behind it. Five of the eight games sell nothing at all.
+**The player buys something and the game never mentions it again.** The purchase, the flag and the
+price are all built; the doors are never cut. This is Study 7's fake-freedom defect in its economic
+form — *asked to choose, answer discarded* becomes *asked to pay, purchase discarded* — and the same
+zero-based test catches both.
 
 **The check.** Gate **`what money buys opens a door`** — a flag set by a choice that costs the
 currency, read zero times, is a FAIL. It fails only on zero, for the same reason
@@ -186,35 +175,18 @@ purchase always gates **itself**, in one of two places, and neither is content t
 <flag> is_false  on that canvas's TRIGGER        retires the row once it is owned
 ```
 
-Every carefully-written purchase therefore collected a free `+1` and could never reach zero.
-Measured 2026-09-03 across the corpus — 10 purchases in 6 games, **6 of them carrying the choice
-form**:
+Every carefully-written purchase therefore collected a free `+1` and could never reach zero, so a
+purchase that opened nothing passed.
 
-```
-                                     counted   self-gate   real
-commuter      has_pass       $30         2          1        1
-mrs_vance     truck_bought   $2600       5          1        4
-off_season    meter_fed_once $3          1          0        1
-orientation   has_lab_kit    $28         2          1        1
-orientation   has_dress      $60         1          1        0   ← passed on nothing
-orientation   dues_paid_week $120        2          1        1
-the_route     third_scrubs   $28         2          1        1
-the_season    truck_fuelled  $5          0          0        0   caught already
-the_season    has_boots      $20         0          0        0   caught already
-the_season    has_fan        $12         1          1        0   ← passed on nothing
-```
+**A second failure R1b does not name: she pays and never receives the thing at all.** R1b's shape is
+*she pays and the game forgets*. This one is worse: the money leaves the wallet, a flag is set, and
+the wardrobe is untouched — because a choice's `flagEffects` cannot put a garment in a wardrobe.
+Only the engine's shop (`shop_location`) or a `wardrobeEffects` grant can. So the price buys a flag,
+the flag gates nothing, and the garment it names is unobtainable. See `the-meters.md` W3 and the
+gate `a declared garment can be got`.
 
-**`orientation/has_dress` is why this matters, and it is the second failure R1b did not name.**
-R1b's shape is *she pays and the game forgets*. The dress was worse: **she paid and never received
-the thing at all.** $60 left the wallet, `has_dress` was set, and the wardrobe was untouched —
-because a choice's `flagEffects` cannot put a garment in a wardrobe. Only the engine's shop
-(`shop_location`) or a `wardrobeEffects` grant can. So the price bought a flag, the flag gated
-nothing, and the garment it named was unobtainable — which killed the anchor character's arc at step
-5. See `the-meters.md` W3 and the gate `a declared garment can be got`.
-
-**Both self-gate forms are excluded now.** The trigger form was 0 of 10 at the time of the fix and
-is excluded in advance: it is exactly what `<flag> is_false` on `[canvases.trigger]` produces, and
-an author writing it would silently re-open the hole. The exclusion is restricted to `is_false` — an
+**Both self-gate forms are excluded.** The trigger form is excluded in advance: it is exactly what
+`<flag> is_false` on `[canvases.trigger]` produces, and an author writing it would silently re-open the hole. The exclusion is restricted to `is_false` — an
 `is_true` test on the choice that sets the flag can never fire, so it is dead code either way.
 
 ⚠️ **No game lost a pass it deserved.** Every purchase with a real reader keeps at least one, and
@@ -226,9 +198,9 @@ set once in the funnel and has no "don't ask twice" pressure to make its setter 
 
 ### R1c · A repeatable she PAYS for deposits something
 
-The 2026-07-24 field report's critique #4 of us — *"our ambients re-roll but a repeated visit mints
-nothing; every repeatable should deposit into something"* — was written thirty-five days before it
-was measured, and measuring it narrowed it.
+A repeatable she pays for with time, energy or money should deposit something. Course of
+Temptation's [GymCardio] costs her the session and pays it back every visit: `<<raiseskill
+Physical 4>>`, then *"Your workout goes well and you make good progress."*
 
 A **paid repeatable** is a choice on a repeatable canvas costing money or energy, or 30 minutes or
 more.
@@ -237,9 +209,8 @@ more.
 > distinguished them. R2 asks whether money leaves; R1c
 > asks whether anything remembers that it left.
 
-⚠️ **The broader phrasing is wrong and was rejected.** Counting *every* repeatable surface rather than
-paid ones gives 67% granting nothing — but that sweeps in ambient prose that fires for free, and an
-ambient is supposed to grant nothing. Shipping critique #4 as written would have failed correct work,
+⚠️ **The rule is about PAID repeatables, not every repeatable.** Ambient prose fires for free, and an
+ambient is supposed to grant nothing; a rule over every repeatable surface would fail correct work,
 which is the error that withdrew R4 and demoted study 6's anchoring check. **This is a lint —
 `what a paid repeatable leaves behind`. It prints the rate and does not judge it.**
 
@@ -353,14 +324,14 @@ Three things make it work, and they are cheap:
 ⚠️ **And the half that gets forgotten.** An obligation that cannot be paid is a scripted loss — but
 an obligation that is *trivially* paid is not pressure either, and only the first failure is
 usually guarded against. **Price it against the income channels in both directions.** Count what a
-week actually earns before setting the amount, then check that a bad week hurts.
+week actually earns before setting the amount, then check that a bad week hurts. Course of
+Temptation does the sum in both directions: [WeeklyDebtPayment] caps the debt at 200 with the
+comment *"must be removed someday once money is easier"*, and [EventCampusHomeworkBuyOffer] prices
+a side job off the debt itself, `<<set _cash to Math.floor($weeklydebt * 0.15)>>`.
 
-> **This paragraph existed, in this file, with that emoji on it, and NINE OF TEN AUTHORS DID NOT DO
-> IT.** Measured 2026-08-27 across every game we have built: eight of ten clear the whole week's
-> obligation in under one day of the best job, median 0.48 days. The tenth — `forty_miles`, 245
-> against ~350 earned, the only one in the field's range — did the sum **in a prose comment in its
-> spec**, because this file asked for arithmetic and gave it nowhere to live. That is fixed below:
-> **declare `week_income` beside `obligation_amount`.** An instruction with no field is a wish.
+> **Declare `week_income` beside `obligation_amount`.** This file asked for arithmetic, and an
+> author with nowhere to put the sum does it in a prose comment or not at all. An instruction with
+> no field is a wish.
 
 ### R3b · An obligation that does not MOVE is soft at any value
 
@@ -564,8 +535,8 @@ Six rules are carried by that one choice, and each of them has cost a shipped ga
 2. **The day flag is set in `flagEffects` on the CHOICE, never on a node exit.** A choice runs
    `flagEffects` *before* `advanceTime`; a node exit runs `advanceTime` first, which is where the
    day rolls and this hook clears. A rung that crosses midnight with an exit-set cap starts the new
-   day **already capped** — `off_season`'s sleep rung ran 21:00→06:00 and was never offered before
-   midnight again from night two. `engine.md` §28.
+   day **already capped**, and a sleep rung that runs overnight is never offered before midnight
+   again from the second night. `engine.md` §28.
 3. **A flag, not a counter trait.** A hidden counter with an `lt` condition works and reads to
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
 4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
@@ -601,22 +572,21 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 
 ### R7 · One currency, declared once, and the engine set to it
 
-> **Measured failure, and it is not a typo.** A shipped game wrote the price of a single click
-> **six different ways**, and half of them the author never typed
-> (`games/off_season/toml_phases/3_activities.toml:83-108`):
+> **It is not a typo.** Without one printer, the price of a single click reaches the player in as
+> many as six notations, and half of them the author never types:
 >
 > ```
-> room-list button   Feed the meter (GBP 3)                       author
-> the choice         Put three pounds in (GBP 3, 5 min).          author
-> the paragraph      Six fifties … Three pounds gets you …        author
-> when she is short  Requires 3 Money (you have 1)                engine  v2.py:4680
-> the sidebar        money: 12 / 100                              engine  v2.py:16215 · :16241
-> rent day           $90                                          engine  v2.py:1190
+> room-list button   Buy a coffee (GBP 3)                         author
+> the choice         Pay three pounds (GBP 3, 5 min).             author
+> the paragraph      … three pounds gets you …                    author
+> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5164
+> the sidebar        money: 12 / 100                              engine  v2.py:17694
+> rent day, short    $90                                          engine  v2.py:17453
 > ```
 >
-> The author had declared `[[traits.labels]] key = "money", label = "Change bag"` and expected the
-> sidebar to use it. It does not: `trait_bar` reads `_item.label || trait_key` and never consults
-> the trait labels at all (`engine.md` §33.3).
+> A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads
+> `_item.label || trait_key` (`v2.py:17668`) and never consults the trait labels at all
+> (`engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
 economy do not type a symbol next to a number. They store one integer and render it in one place:
@@ -646,7 +616,7 @@ generator prints a money figure it governs **four — all on the rent-day screen
 and three print no notation at all (`engine.md` §33 carries the full census). A game that declares
 `currency_symbol = "£"` still ships
 `You have: <strong>$<<print $player.core_traits.money>></strong>` on `RentDay_Short`
-(`v2.py:16000`), the screen the player sees **when she cannot pay**.
+(`v2.py:17453`), the screen the player sees **when she cannot pay**.
 
 #### The rule, in four parts
 
@@ -696,10 +666,10 @@ price and a wage; it does not need the word *pounds* to have them.
 > suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
 > `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
 
-> ⚠️ **The ledger is player-invisible and it drifts anyway.** `off_season`'s `board.economy` records
-> `GBP 90`, `GBP 3`, `GBP 25`; `forty_miles`' records `GBP 200` while its settings declare `£`. A
-> design record that disagrees with the game is how a re-price goes wrong later. Write the declared
-> symbol there too.
+> ⚠️ **The ledger is player-invisible and it drifts anyway.** A `board.economy` that records
+> `GBP 200` while the settings declare `£` is a design record that disagrees with the game, and that
+> is how a re-price goes wrong later. Write the declared symbol there too: the money lint compares
+> `board.economy.symbol` with the prose's unit (`scripts/gates.py:6162-6166`).
 
 #### Why one is a gate and two are lints
 

@@ -179,12 +179,10 @@ belong here; only decisions, debts, and promises do.
       "obligation_amount": 245,
       // ⚠️ THE OTHER HALF OF THAT NUMBER. What a full week of the income rungs actually pays —
       //    the honest maximum with its working, not a guess at what a player will earn.
-      //    the-economy.md R3 has said "price it against the income channels in both directions"
-      //    since the file existed, and NINE OF TEN of our games did not: eight clear the whole
-      //    week in under one day of the best job. The one that did it wrote the sum in a prose
-      //    comment, because there was no field for it. This is the field. Printed by the
-      //    obligation-against-the-week LINT, never judged — forty_miles sits at 70% and
-      //    back_home at 25%, so any threshold between them fails a game for obeying the rule.
+      //    the-economy.md R3 says "price it against the income channels in both directions";
+      //    this is the field that makes the sum checkable instead of a prose comment. Printed
+      //    by the obligation-against-the-week LINT, never judged: a threshold here would fail
+      //    a game for obeying the rule, so the lint prints the ratio and leaves it to you.
       "week_income": 350,
       // ⚠️ R3b. Present ONLY if the obligation moves, and it names the mechanism in one
       //    line. A constant obligation against a rising income is soft at whatever value
@@ -273,11 +271,10 @@ its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is be
 
 **`board.systems[]`** — what the game keeps track of about her, declared before the locations are
 written. `the-systems.md` SY1–SY3. The load-bearing field is **`kind`**: an `ambient` system is fed
-by nearly every room and therefore cannot make any room special, and a game of only ambient systems
-produces a duty list — which is the measured diagnosis of `night_desk`, six declared meters, three
-of them hunger, hygiene and energy, and six rooms with nothing of their own to show. A `sourced`
-system is fed in one or two places and read all over: measured in `family-ties`, piercings are fed
-in **2** rooms and read in **117** passages, clothes 1 → 53, the skill ladder 1 → 19.
+by nearly every room and therefore cannot make any room special; a room needs a system about who
+she is. A `sourced` system is fed in one or two places and read all over: Course of Temptation
+reads her inclinations (`has_inclination`) in **218** of its 5,294 passages, e.g. [ClassroomMenu]
+`<<if $pc.has_inclination("Knowledge from the Deep")`.
 ⚠️ **`fed_at` on a `sourced` system should usually name ONE location** — if it names five, the
 thing is ambient and the ledger is the cheapest place to find that out.
 

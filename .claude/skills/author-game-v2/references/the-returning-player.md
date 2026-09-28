@@ -72,8 +72,8 @@ Every passage is named from slugs: `Canvas_<canvasSlug>_Node_<nodeSlug>`
 (`v2.py:12376`) and `Location_<locSlug>` (`v2.py:12389`). `$npcs` is keyed by the NPC's TOML `id`
 (`game_graph.py:144`), locations by theirs (`:190`), nodes by `"<canvas>.<node>"` (`:376`).
 
-A save stores the passage it is parked on — `Location_wren_room`,
-`Canvas_loop_renner_office_Node_base_r` — and its NPC, wardrobe and quest state under those slugs.
+A save stores the passage it is parked on — `Location_home_room`,
+`Canvas_loop_boss_office_Node_base_r` — and its NPC, wardrobe and quest state under those slugs.
 
 **So:** rename the `id` of a `[[canvases]]`, `[[canvases.nodes]]`, `[[locations]]`, `[[npcs]]`,
 `[[clothing_items]]`, `[[quests]]` or `[[fast_jobs]]` on a shipped game, and the save points at a
@@ -90,7 +90,7 @@ positional. Only a rename breaks.
 ## §3 — Never rename or repurpose a live flag or trait key
 
 `$flags` is keyed by flag name, traits by their key. That string **is** the runtime join between the
-scene that SET it and the gate that READS it. Rename `met_renner` → `knows_renner` on a shipped game
+scene that SET it and the gate that READS it. Rename `met_boss` → `knows_boss` on a shipped game
 and the earned `true` reads as `undefined`: the prerequisite re-locks, and a one-way arc looks to the
 player like it reset. **Repurposing** a live key to a new meaning is worse — it corrupts gate state
 without leaving a mark.
@@ -148,18 +148,16 @@ If the item flavours a scene, the returning player loses a costume. If it **gate
 cover, a key, a tool the next beat needs owned or equipped — the save is **soft-locked**: every
 forward canvas stays shut, and the "go and get it" reaction points at something not in the wardrobe.
 
-> **Shipped example.** Vesper's `cover_analyst` was granted only on the one-shot `salvage_relaunch`
-> dispatch, which also sets `salvage_relaunched`. The item and its grant landed a release *after*
-> that dispatch shipped. Every 0.1.4 → 0.1.5 carry-over had the flag set, never received the kit, and
-> jammed on that floor forever — `react_calloway_precover` fires on `cover_analyst unequipped` with
-> **no ownership check**, so never-granted and took-it-off look identical, and there was no path to
-> the missing kit. Fixed in 0.1.6.
+> **Why no load-time fix covers it.** The state backfill fills `$player` at the top level only and
+> never fills into `wardrobe` (`v2.py:16775-16778`), because filling into it would hand back a garment
+> the player sold or discarded. A reaction that fires on the item *unequipped* with no ownership
+> check cannot tell never-granted from took-it-off, so the stranded save has no path to the item.
 
 **The rule: any item that gates progression carries its grant on the repeatable point-of-need
 reaction, never on a lone burn-once grant.** Put an idempotent
 `wardrobeEffects = [ { action = "add", item_id = "…" } ]` on the canvas that already reacts to *you
 don't have it / it isn't on* — the out-of-cover reaction, the locked-door bounce, the wardrobe room.
-`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1555`), so a normal player
+`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1587`), so a normal player
 who merely took it off is untouched and sees no notification. Only the stranded save is healed, the
 instant it lands on that screen.
 
@@ -217,19 +215,11 @@ names, `$npcs` keys, flag keys, player and NPC meter keys, the story title — a
 a removal**. Additions are counted and never judged, because §1 covers them. A rename reads as a
 removal plus an addition, correctly: that is what it is to a save.
 
-Two archived versions can be compared after the fact, which is how this check earned its place
-before it had ever run on an unshipped build:
+Two archived versions can be compared after the fact:
 
 ```bash
 python3 scripts/gates.py --saves <slug> <old> <new>
 ```
-
-> Run over this repo's own history it found **three passages dropped between vesper 0.1.3 and 0.1.7**
-> (`Canvas_hunt_sol_lead_Node_ask`, `…_Node_base`, `Canvas_underworld_strip_hub_Node_to_spire`) and
-> **one between forty_miles 0.1 and 0.1.2** (`Canvas_rung_nunn_settle_Node_base`). Every save parked
-> on one of those landed nowhere, it shipped, and nothing said so at the time. It also surfaces the
-> known one-time break: vesper's two pre-slug NPC keys are UUIDs, and the first slug-id build reset
-> those players once — unavoidable, and the reason that reset is worth doing exactly once.
 
 ⚠️ **It cannot see §4 or §6.** A rescaled stat keeps its key, and a burned one-shot grant is not a
 name at all. Those stay human, and the check says so in its own output rather than letting a green

@@ -158,16 +158,15 @@ inherits its context from whatever links into it. Substitutions use
 ⚠️ **A triggerless canvas that nothing links to is DELETED from the build, silently.** The seed set
 is canvases carrying `trigger.location_id` (`v2.py:420-424`, the no-DB graph path; `:447-451`, the
 ORM path). Everything else has to be pulled into the closure by a `targetType = "node"` choice or a
-substitution target — `_compute_included_canvases` (`v2.py:564-640`, the primary and sole entry
-point) and its no-DB twin `_compute_included_canvases_graph` (`:642-691`). A canvas in neither set
+substitution target — `_compute_included_canvases` (`v2.py:567`, the primary and sole entry
+point) and its no-DB twin `_compute_included_canvases_graph` (`:645`). A canvas in neither set
 never becomes a passage: it costs nothing at compile time, the validator is silent, and every gate
 in `gates.py` stays green over it, because gates parse the source and reachability is decided by the
 generator. **Write the link in the same edit as the canvas.**
 
-Measured twice in two days: `the_route` shipped both act loops unreachable through a mistyped
-`targetType`, and `commuter` shipped six of seven — fully written, at their ceilings — through a
-missing link, both with 46 green gates. `gates.py --release` now checks every canvas against the
-built HTML for exactly this. `defects/001-no-reachability-gate.md`.
+A mistyped `targetType` or a missing link drops a fully written canvas this way with every gate
+green. `gates.py --release` checks every canvas against the built HTML for exactly this.
+`defects/001-no-reachability-gate.md`.
 
 `show_when_locked = true` on a choice renders it greyed and visible instead of hidden. This is
 the mechanism behind "every release ends on a visible locked door."
@@ -587,11 +586,9 @@ hub as a CHOICE. Conditions on a choice are evaluated live at render, so a rung 
 time-limited and state-limited without owning a schedule of its own — see §20 for the predicate
 that makes this worth doing.
 
-⚠️ **THAT ADVICE IS SCOPED TO THIS COLLISION. IT IS NOT A GENERAL DESIGN PREFERENCE.** This
-paragraph previously read *"and it is also the better design"* with no scope on it, and a game was
-authored that took it as one: **23 choices on its front desk, 19 on its street**, one paragraph and
-a wall of buttons at every location. The hubs in question **bound no NPC at all**, so §19 never
-applied to them.
+⚠️ **THAT ADVICE IS SCOPED TO THIS COLLISION. IT IS NOT A GENERAL DESIGN PREFERENCE.** Read as
+one, it turns every location into one paragraph and a wall of buttons, and a hub that binds no NPC
+is not covered by §19 at all.
 
 The rule is: *same NPC, same location, overlapping windows.* Two repeatable canvases at one
 location that bind **different** NPCs, or **no** NPC, do not collide and **should be separate
@@ -781,10 +778,9 @@ template_import.py:1127        terminal_text on QuestsCard
 v2.py:15630                    var _tlabel = card.terminal_text || "Arc complete";
 ```
 
-⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** It was
-written from `vesper` 0.1.8, a finished build where four arcs genuinely had ended and the default
-`"Arc complete"` was **true** of them; there, one card marking the build boundary is right and six
-would be noise.
+⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** In a build
+where the arcs have genuinely ended, the default `"Arc complete"` is **true** of them; there, one
+card marking the build boundary is right and six would be noise.
 
 **It is the wrong rule for a v0.1, and following it there produces the worse outcome.** In a first
 release nothing is closed — every track stops at a build boundary — so the cap forces every arc but
@@ -797,7 +793,10 @@ one into `"Arc complete"`, **a stronger and falser claim than the string it was 
 
 **Each track.** So: `"Arc complete"` belongs to an arc that has genuinely **ended**. An arc that
 stops because the build stops carries its own marker, and the same plain string on every such track
-is what "a plain marker at the top of each track" means. Cap the *claim*, not the field.
+is what "a plain marker at the top of each track" means. Cap the *claim*, not the field. The field
+does both: Cupid's Way, [xavier45], prints *"END OF CONTENT FOR NOW"* where the build stops; In Her
+Own Hands, [Progress_Hints_Base], prints *"Your choices have closed this path. No further progress
+possible."* where a path has truly closed.
 
 ⚠️ **`ready_canvas` MUST name a canvas that HAS A LOCATION, or Frame 2 renders NOTHING.**
 `lookupCanvasBySlug` (`v2.py:15371`) walks `help_data.locationCanvases`, keyed by location UUID, so a
@@ -809,13 +808,12 @@ and the schedule, which is what the 📍 and 🕒 lines are read from.
 
 ⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS AS
 FINISHED FROM VALUE ZERO.** Frame 1 fires on `card.terminal === true` alone, ahead of every other
-frame (`v2.py:15199`) — nothing checks that anything was achieved. So a single card gated
+frame (`v2.py:16383`) — nothing checks that anything was achieved. So a single card gated
 `{ trait = "owed", op = "lt", value = 40 }` and marked terminal matches at `owed = 0` and prints
 **✓ Arc complete on turn one**, before the player has met the character.
 
-`the_season` shipped exactly this for two of its five: Boyd and Emmett each had one terminal card
-on a `lt` band, while Wade, Prine and Rae had proper two-card ladders and were correct. The rule
-above — *set `terminal` on the last card of every arc* — is right, and it is not sufficient:
+The rule above — *set `terminal` on the last card of every arc* — is right, and it is not
+sufficient:
 
 **`terminal` belongs on a card the player has to CLIMB TO.** An arc needs at least two cards: an
 open lower band, and a terminal upper one gated `gte` at a threshold real content sits on. One card
@@ -847,8 +845,7 @@ terminal = true
 ```
 
 ⚠️ **A goal threshold no condition anywhere reads is a number the player climbs to for nothing.**
-Same measurement: `mrs_vance` shipped three (`isaac.want 66`, `sherrod.want 62`, `tobin.want 30`) and
-`seventh_day` five. They stay invisible while the terminal frame outranks the bullets, and the moment
+Such thresholds stay invisible while the terminal frame outranks the bullets, and the moment
 the badge is fixed they become live instructions to grind for nothing — so fix the numbers in the
 same pass, never one without the other. `scripts/gates.py`'s **`lint · the badge arrives before the
 content`** reports both.
@@ -1046,7 +1043,7 @@ nothing while this system was quietly doing the actual work three passages away.
 enabled          = true
 amount           = 245
 due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:4786
-collector_npc    = "npc_nunn"        # must exist in [[npcs]]
+collector_npc    = "npc_collector"   # must exist in [[npcs]]
 grace_periods    = 1
 start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"        # or "game_end" (the default, and a product that ends)
@@ -1190,9 +1187,8 @@ closes. Nothing in the toolchain objects: the generator's flag-chain validator o
 never-set flag when a condition requires it `is_true` (`v2.py:12312`) — deliberately, since an
 `is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
 
-Measured: `off_season` shipped four `*_talk_today` caps with the read and the clear and no set, and
-its four talk screens were re-clickable every twenty minutes, out-earning the day-capped rungs they
-sat below. `scripts/gates.py` gate **`a day-cap closes`** exists for exactly this.
+A talk screen capped this way stays clickable all day and out-earns the day-capped
+rungs it sits below. `scripts/gates.py` gate **`a day-cap closes`** exists for exactly this.
 
 ### 28.3 What the screen looks like once the cap IS spent
 
@@ -1361,40 +1357,47 @@ unbuilt on purpose.
 ## 31. `requires_npc` does NOT gate an auto-firing canvas
 
 > ⚠️ **Scoped.** The heading is still true and the rest of this section still holds
-> for the auto-fire path. What changed is the count: `requires_npc` is now read on **three**
-> paths, not two — random ambients, substitution targets, and **the solo lane**, through
-> `setup._npcPresentForCanvas`. See §46. The auto-fire path was left alone on purpose: its
-> validator `isCanvasValid` is shared with `_tryRule`, and 78 one-shot meetings across 8 games
-> hang off it.
+> for the auto-fire path. What changed is the count: `requires_npc` is now read on **four**
+> paths — random ambients, substitution targets, **the solo lane** and **the phone launcher**, the
+> last two through `setup._npcPresentForCanvas`. See §46. The auto-fire path was left alone on
+> purpose: its validator `isCanvasValid` is shared with `_tryRule`, and every one-shot meeting
+> hangs off it.
 
 **The field is real and it works — on the paths that read it.** A canvas that AUTO-FIRES on
 entry never consults it, so a one-shot written as "fires where the character is" fires whether
 they are there or not.
 
 ```
-setup.getStoryCanvasRedirect            v2.py:4921   ← entry-time auto-fire
-  -> setup.selectAutoFireCanvasForLocation   v2.py:4453
-       filters: isRepeatable · triggerMode=="random" · substitutionOnly · isCanvasValid · priority
-  -> setup.isCanvasValid                     v2.py:4573
+setup.getStoryCanvasRedirect            v2.py:5406   ← entry-time auto-fire
+  -> setup.selectAutoFireCanvasForLocation   v2.py:4893
+       filters: isRepeatable · triggerMode=="random" · substitutionOnly · hiddenFromLocation
+                · isCanvasSelectable · priority
+  -> setup.isCanvasSelectable                v2.py:5047   (isActive, then isCanvasValid)
+  -> setup.isCanvasValid                     v2.py:5057
        checks: hasSchedules/scheduleParams · conditions · canTriggerCanvas
        requiresNpc is NOT among them.
 ```
 
-`requiresNpc` is emitted into `help_data.locationCanvases` at `v2.py:11721` and consumed in
-exactly two places:
+`requiresNpc` is emitted into `help_data.locationCanvases` at `v2.py:12231` and read at five sites
+on four paths:
 
 ```
-v2.py:5432   var npcLoc = setup.getNpcLocation(canvNpc.requiresNpc);
-             the RANDOM-ENCOUNTER selector's presence gate   ← works as documented
-v2.py:5502   var subNpcLoc = setup.getNpcLocation(target.requiresNpc);
-             substitution rules — the same check on the substitution TARGET
+v2.py:5753   var npcLoc = setup.getNpcLocation(canvNpc.requiresNpc);
+             checkRandomEncounters — the RANDOM-ENCOUNTER presence gate
+v2.py:5829   var subNpcLoc = setup.getNpcLocation(target.requiresNpc);
+             checkAndSubstituteCanvas's _tryRule — the same check on the substitution TARGET
+v2.py:4968   if (!setup._npcPresentForCanvas(c, locationId)) continue;
+             selectSoloActivityCanvasesForLocation — the solo lane (§46.1)
+v2.py:5580   if (!setup._npcPresentForCanvas(c, locationId)) continue;
+             renderSoloActivities — the solo lane's inline blocked/cooldown loop
+v2.py:3110   if (!setup._npcPresentForCanvas(c, o.locationId)) continue;
+             _renderLauncher — a phone launcher option whose canvas is in this room
 ```
 
-Neither is the auto-fire path. **Consequence in a shipped game:** `vesper/cap_renner_hired` is
-bound to `the_anchor` with `requires_npc = "npc_renner"`, and Renner's schedule puts him there
-19:00–23:00. With `opening_done`, `renner_hired is_false` and the cover equipped, the canvas
-auto-fires the moment the player walks in — so a scene that introduces him can play in an empty
-bar at ten in the morning.
+None is the auto-fire path. **Consequence:** a one-shot meeting bound to a bar with
+`requires_npc` set, whose character's schedule puts them there only in the evening, auto-fires the
+moment the player walks in once its flags are met — so a scene that introduces them can play in an
+empty bar at ten in the morning.
 
 **What to do instead:** put a `[[canvases.trigger.schedules]]` row on the meeting that matches the
 character's own schedule row, or gate it on a flag the player can only hold by having been where
@@ -1402,17 +1405,19 @@ they are. Keep `requires_npc` as well — it is free, correct on the paths that 
 documents intent — but it is not the thing stopping the canvas.
 
 Portrait rendering is the mirror image and behaves as documented: `selectNpcPortraitCanvasesForLocation`
-skips every non-repeatable canvas outright (`v2.py:4482-4487`, `if (!c.isRepeatable) continue`), so a
+skips every non-repeatable canvas outright (`v2.py:4931`, `if (!c.isRepeatable) continue`), so a
 first-contact one-shot can never leak onto a location screen as a face.
 
-### 31.1 The two functions, by name — and the comment that says otherwise
+### 31.1 The consumers, by name — and the comment that says otherwise
 
-The two consumers are `setup.checkRandomEncounters` and `setup.checkAndSubstituteCanvas`. Naming
-them matters, because they are exactly the three trigger shapes a check must exclude:
-`trigger_mode = "random"`, `substitution_only = true`, and `is_repeatable = true`. Everything else
-that names a character is on the auto-fire path and is not gated by this field at all.
+The consumers are `setup.checkRandomEncounters`, `setup.checkAndSubstituteCanvas`, the solo lane
+(`selectSoloActivityCanvasesForLocation` and `renderSoloActivities`) and the phone's
+`setup._renderLauncher`. Naming them matters, because the first three are exactly the three
+trigger shapes a check must exclude: `trigger_mode = "random"`, `substitution_only = true`, and
+`is_repeatable = true`. Everything else that names a character and fires on entering a room is on
+the auto-fire path and is not gated by this field at all.
 
-⚠️ **`requires_npc` does not replace a meeting's place and time** — it is true only for the two
+⚠️ **`requires_npc` does not replace a meeting's place and time** — it is true only for the
 functions above. Gated as `a meeting fires where they are` (G38).
 
 `references/the-first-hour.md` F5.
@@ -2319,8 +2324,8 @@ where the player is standing right now (`v2.py:5176-5179`). It draws the portrai
 **Without it** — `renderSoloActivities` does not skip the canvas (`v2.py:5259` skips only canvases
 that *have* an `npcId`), so it renders as an ordinary activity button carrying the canvas's own
 `displayName` (`v2.py:5290`). No face, **no presence check at all**, and the author-facing title
-becomes player-facing text. `requires_npc` does not cover the gap — §31 above, and it is read on
-exactly two paths, `v2.py:5343` and `v2.py:5486`.
+becomes player-facing text. `requires_npc` does not cover the gap unless it is set — §31 above lists
+every site that reads it.
 
 ⚠️ **One location shows ONE canvas per character.** The renderer gathers every valid repeatable
 canvas per NPC and keeps the highest `priority`, preferring affordable over cost-blocked
@@ -2332,15 +2337,13 @@ hold, which is usually what you want and is never what you get by accident.
 `!c.isRepeatable`), which is what keeps a meeting from leaking onto the screen as a face — see
 `the-first-hour.md` F5b.
 
-**Measured:** `orientation` wrote `npc` one level too high on all thirteen character surfaces. Every
-entry in its built `help_data.locationCanvases` carried `npcId: null` and `canvasIdToNpcUuid` was
-`{}` — zero portraits in the whole game, thirteen ungated surfaces, and `Sit with @ray` as a link
-label. The build was green and the scoreboard read 43/44, because the gate that checks hubs
-(`every hub is met first`) starts by counting portrait hubs, found none, and reported **n/a**. The
-gate `no canvas key is discarded` exists so that cannot recur — widened from `npc` alone within
-the hour, when the same misplacement turned up as `substitution_only` on `orientation`'s walk-in and
-on **all five** of `night_desk`'s, each of them rendering as a clickable activity instead of a
-dispatcher-only target.
+**What the misplacement costs.** `npc` written on `[[canvases]]` instead of `[canvases.trigger]`
+is discarded: every such entry in the built `help_data.locationCanvases` carries `npcId: null` and
+`canvasIdToNpcUuid` is `{}` — no portraits, ungated surfaces, and `Sit with @npc` as a link label.
+The build stays green, and the gate that checks hubs (`every hub is met first`) starts by counting
+portrait hubs, finds none, and reports **n/a**. The gate `no canvas key is discarded` exists so
+that cannot recur. It covers every canvas key, not `npc` alone: `substitution_only` written one
+level too high renders a walk-in as a clickable activity instead of a dispatcher-only target.
 
 ---
 
@@ -2385,8 +2388,8 @@ every customizable NPC unconditionally, so those characters *must* be referred t
 which trains the author to reach for `@npc` everywhere, including the four fields above.
 
 > **Linted as `a token the engine never resolves`**, walking every field and nested list, dev-only
-> fields apart. A player-facing one is the `--ship` BLOCK row **no raw token on screen**: the_balance
-> shipped nine (`b1f4af9^`), three of them in list fields the old field list could not see.
+> fields apart, list fields included. A player-facing one is the `--ship` BLOCK row **no raw token
+> on screen**.
 
 ---
 
@@ -2495,11 +2498,12 @@ Three consequences, and the first is the one that matters:
 
 ### 46.1 `requires_npc` gates the SOLO lane
 
-`setup._npcPresentForCanvas(c, locationId)` (`v2.py:4815`) — same shape as the two paths that
+`setup._npcPresentForCanvas(c, locationId)` (`v2.py:5027`) — same shape as the two paths that
 already read the field: `getNpcLocation` only, no declared-schedule requirement, fail closed when
 the NPC resolves nowhere. Called from `selectSoloActivityCanvasesForLocation` and from the inline
-blocked/cooldown loop in `renderSoloActivities`, in both cases **after** the `npcId` split, so it
-only ever runs on solo-lane rows.
+blocked/cooldown loop in `renderSoloActivities`, in both cases **after** the `npcId` split, so on
+a location screen it only ever runs on solo-lane rows. The phone's `_renderLauncher` calls it too
+(`v2.py:3110`), for a launcher option whose canvas is in the player's room.
 
 The guard sits **above** both `showWhenBlocked` branches on purpose. *"He is not here"* is not a
 cooldown, and `cooldownMessage` defaults to `"Available again later"` — surfacing that would be a
@@ -2513,7 +2517,7 @@ lie. Hide the row; do not explain it.
 
 ### 46.2 `is_active = false` means "never surfaces on its own"
 
-`setup.isCanvasSelectable(c)` (`v2.py:4835`) = `c.isActive !== false && setup.isCanvasValid(c)`,
+`setup.isCanvasSelectable(c)` (`v2.py:5047`) = `c.isActive !== false && setup.isCanvasValid(c)`,
 swapped in at the **six** selection sites: auto-fire, the portrait selector, the solo selector,
 both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAvailable`
 (`v2.py:3566`), which covers the four schedule/planner consumers at once.
@@ -2523,11 +2527,9 @@ written identically by both build paths (`template_import.py:7210`, `game_graph.
 by **nothing** in the generator. Four canvases in two games shipped switched on after their authors
 switched them off.
 
-> **`forty_miles` is the one that cost content.** `canvas_back_room_key` ships inactive so v0.1's
-> back-room door stays locked — its own TOML says *"`is_active = false` means it never fires in
-> play, so the door stays locked for the whole of v0.1 and gate 9 still counts the choice as
-> visible-locked."* Measured before the fix: entering the stock room at `nights = 60` auto-fired
-> it and set the flag. The declared locked door opened in v0.1.
+> **What that cost.** An author switches off the canvas that sets a door's key flag so the door
+> stays locked for the release. With `is_active` ignored, the canvas auto-fired on entry, set the
+> flag, and the declared locked door opened.
 
 ### 46.3 ⚠️ The trap: `isCanvasValid` must stay clean, and so must `locationCanvases`
 
@@ -2584,7 +2586,7 @@ a card is gated on a number.
 **47.2 · A flag goal with no `label` prints its RAW KEY.** The fallback chain ends at
 `it.goal.flag`, and `QuestsCondition`'s docstring is explicit that for a flag gate *"`label`
 optional"* (`template_import.py:1092-1095`). Nothing in the importer catches it. The player reads
-a bullet saying `◯ simone_05_done`.
+a bullet saying `◯ npc_x_step_05_done`.
 
 ⚠️ **Gate `a goal says what it wants` fails on this**, because there is no version of it an author
 intended.

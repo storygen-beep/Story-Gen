@@ -17,10 +17,8 @@ This file owns **one rule** with three faces, and every section below is that ru
 
 **Why this file exists at all.** v1 carried two files that did most of this job —
 `author-game/references/onboarding.md` (269 lines) and `npc-intro.md` (146 lines). v2 shipped
-without either, and the loss is legible in the output: counting non-repeatable canvases that fire
-at a character's location, the four v1 games run **24 · 13 · 7 · 0** and all six v2 games run
-**zero**. This is `DOCTRINE_GAPS.md` Tier 2 row 6, and it was the last row in that table with an
-empty status column.
+without either, and this file puts that job back. This is `DOCTRINE_GAPS.md` Tier 2 row 6, and it
+was the last row in that table with an empty status column.
 
 Engine claims here carry a `file:line` into
 `apps/game_generation/twee_comprehensive/generators/v2.py`, per `SKILL.md` operating rules.
@@ -61,9 +59,7 @@ corpo-life's whole cold open (structure only; it fails the adults-only rule) is 
 she is, the job, the city, why money is tight, what is at stake — and zero characters.
 
 **The defect is the middle.** A cold open carrying a staged open's payload names people the player
-cannot picture, at a density the prose cannot support. Our own measured failure named **six people,
-two of whom are not in the game at all**, and put none of them on screen — that count comes from
-reading our own TOML, not from the field walk, and it stands.
+cannot picture, at a density the prose cannot support, and puts none of them on screen.
 
 **Pick one — and the default is staged.** Since 2026-09-24 the skill writes in the loud voice
 (`register.md`, "The voice — say it loud"), and that voice needs people on screen talking. The
@@ -79,11 +75,6 @@ opening is a **staged open** unless there is genuinely no person to put on scree
 ⚠️ **This is not a word-count rule, and after 2026-08-24 it does not carry a word count at all.** It
 is a *consistency* rule: the cast load and the word budget have to agree. A 200-word opening that
 names four people fails it; a 200-word opening that names none passes.
-
-⚠️ **Named in passing is not met.** An offstage boss, a dead parent, a landlord who never appears —
-these are world-building and they cost the reader a name to hold. Two of the six people named in
-the measured failure **are not in the game at all**. If the player can never go and meet them, ask
-whether the name is doing work, or delete it.
 
 ---
 
@@ -425,15 +416,13 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Arming a system is not the same as putting a door to it on the screen — and for the wardrobe the engine already put one there.
 >
 > Declaring `wardrobe_location` renders `[[Change Clothes->WardrobePage]]` on that location's screen
-> unconditionally (`v2.py:9814`, and `:9766` for the entry-gated variant); `shop_location` does the
-> same with `Browse Clothes`. It is above the portrait row and above the activity list, on every
-> visit, needing nothing from you.
+> unconditionally (`v2.py:10148`, and `:10100` for the entry-gated variant); `shop_location` does
+> the same with `Browse Clothes` (`:10153`, `:10105`). It is above the portrait row and above the
+> activity list, on every visit, needing nothing from you.
 >
 > So an authored canvas called *"The wardrobe"* at that same location is a **second door beside the
-> engine's**, and it will be the one that does not work: `orientation` shipped one whose exit routed
-> back to the room it was already in, ten minutes spent, `WardrobePage` never reached, sitting
-> directly under the real link. The author was obeying this rule — the rule just never said the
-> door existed.
+> engine's**, and it will be the one that does not work: its exit has to route somewhere, and
+> nothing you write reaches `WardrobePage` the way the engine's own link does. Do not author one.
 >
 > **What F4 actually asks for here is a READ, not a door.** The clothing system is armed when
 > something in the world asks what she is wearing — one `worn_type`, `worn_exposure`,
@@ -441,22 +430,17 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > `the-meters.md` W7, which carries the field evidence that the reads belong in ordinary places
 > rather than in sex scenes. The gate that measures it is `the wardrobe is read`.
 >
-> ### ⚠️ And a read is only armed if something she can GET satisfies it. This paragraph, as it stood, produced a dead arc.
+> ### ⚠️ And a read is only armed if something she can GET satisfies it.
 >
-> `orientation` obeyed the instruction above exactly and wrote four clothing conditions — two
-> `worn_exposure gte 1`, one `worn_type eq "going_out"`, and the `simone_05` trigger carrying both.
-> Every one of them named a property that only `row_dress` and `black_set` carried, and those two
-> were `initial = false` in a game with **no `shop_location`** and no `wardrobeEffects`. Nothing
-> could put either in the wardrobe. So all four reads were dead, and `simone_05` — step 5 of the
-> anchor's six-step arc — could not be entered; `simone_06` never set `simone_open`;
-> `act_pledge_upstairs`, the anchor's repeatable act surface, was sealed for the whole release.
-> The scoreboard said 46 of 47 green.
+> A clothing condition that names a property only unobtainable garments carry is dead, and so is
+> everything gated behind it — an arc step that can never be entered, and every step after it.
+> The shop only lists a garment that is not `initial` and has `price > 0` (`v2.py:2077`).
 >
-> **So the check is two-part, and F4 only ever stated the first half:**
+> **So the check is two-part:**
 >
 > ```
-> 1. something in the world reads the wardrobe          ← what this box said
-> 2. something she can OBTAIN satisfies that read       ← what it did not
+> 1. something in the world reads the wardrobe
+> 2. something she can OBTAIN satisfies that read
 > ```
 >
 > Part 2 means one of: the property lives on an `initial = true` garment; or `[settings]
@@ -522,16 +506,8 @@ and the door stays open behind her.
 
 **The forbidden shape:** a repeatable canvas with `npc =` set whose base node *is* the
 introduction. The player walks into a room and the character is simply there, the hub's first
-paragraph standing in for a meeting.
-
-All six v2 games ship this for their entire cast. Checked directly:
-
-```
-hub_ewan_yard        conditions: NONE
-hub_tam_flat         conditions: NONE
-hub_roan_house       conditions: NONE
-hub_nessa_back_room  conditions: NONE
-```
+paragraph standing in for a meeting. The field does the opposite: Shady Deals' [Car Mechanic]
+opens on `<<if $met_mechanic == 0>>`, so the first visit is the meeting.
 
 **The field's answer.** 17 of 27 shipped games carry per-character meeting state, and the strongest
 one carries it on effectively its whole navigable cast — degrees-of-lewdity keeps a first-time flag
@@ -591,10 +567,9 @@ routine, another for day 5 **and** a reputation of 10.
 >
 > ⚠️ **The gate cannot see the second shape, and this is the honest statement of that.** A detector
 > was built and reverted the same hour: the only rule available to it — *"the canvas branches on a
-> flag it also sets"* — is satisfied by **every day cap in the repo**. It matched `orientation` on
-> `ray_rung_today` / `office_today` / `went_up_today` and flipped `vesper` to green on
-> `grier_opened_up`, an arc rung. Nothing in the TOML distinguishes *first contact* from *third
-> rung*: both read a flag `is_false` and set it on the way out. A lenient check would silently pass
+> flag it also sets"* — is satisfied by **every day cap** and every arc rung as well. Nothing in
+> the TOML distinguishes *first contact* from *third rung*: both read a flag `is_false` and set it
+> on the way out. A lenient check would silently pass
 > games that really are cold-spawning, which is worse than under-reporting. **So if you build the
 > one-canvas shape, `every hub is met first` will under-count you — record it in the ledger and
 > move on.** Field study: `~/Documents/Opening_And_Introduction_Study_20260902/`.
@@ -615,19 +590,20 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > in the engine, that is **false** for a canvas that auto-fires:
 >
 > ```
-> getStoryCanvasRedirect              v2.py:4921
->   -> selectAutoFireCanvasForLocation    v2.py:4453
->     -> isCanvasValid                    v2.py:4573
+> getStoryCanvasRedirect              v2.py:5406
+>   -> selectAutoFireCanvasForLocation    v2.py:4893
+>     -> isCanvasValid                    v2.py:5057
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:11104` and consumed in exactly two places — `v2.py:5259`
-> (the random-encounter selector) and `v2.py:5332` (substitution rules). **Neither is auto-fire.**
+> `requiresNpc` is emitted at `v2.py:12231` and read on the random-encounter selector
+> (`v2.py:5749`), the substitution rules (`v2.py:5828`), and — through `setup._npcPresentForCanvas`
+> (`v2.py:5027`) — the solo lane (`v2.py:4968`, `:5580`) and the launcher (`v2.py:3110`).
+> **None of them is auto-fire.**
 >
-> Consequence, in a shipped game: `vesper/cap_renner_hired` is bound to `the_anchor` with
-> `requires_npc = "npc_renner"`, and Renner's schedule puts him there 19:00-23:00. The canvas
-> auto-fires whenever the player walks in with the other conditions met — so the prose can
-> introduce him in an empty bar at ten in the morning.
+> Consequence: a meeting bound to a bar with `requires_npc`, whose character's schedule puts him
+> there only in the evening, auto-fires whenever the player walks in with the other conditions
+> met — so the prose can introduce him in an empty bar at ten in the morning.
 >
 > **Gate the meeting on a `schedules` window that matches where the character actually is, or on a
 > flag the player can only hold by having been there.** Keep `requires_npc` as well — it is free,
@@ -635,14 +611,11 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 
 > **Gated as `a meeting fires where they are` (G38).**
 >
-> ⚠️ **The rule above was correct and present, and a game still shipped 0/5 — because a second
-> document said the opposite.** `template_import.py`, the file an author reads to learn the TOML
-> schema, described `requires_npc` as something that *"lets authors drop per-canvas location+time
-> gates"*, with no scope on the claim. True for the two Lane 2/3 functions; false for every meeting
-> canvas. `the_season` was written twelve hours after this reference and its template landed, with
-> both open, and its five introductions played to empty rooms. **When doctrine and the schema
-> disagree, the schema wins, because the schema is what is open while you type.** The comment is
-> corrected; the gate is why it cannot come back.
+> ⚠️ **When doctrine and the schema comment disagree, the schema wins, because the schema is what
+> is open while you type.** `template_import.py` once described `requires_npc` as something that
+> *"lets authors drop per-canvas location+time gates"*, with no scope on the claim — false for
+> every meeting canvas. The comment is corrected (`template_import.py:769`); the gate is why it
+> cannot come back.
 
 ---
 
@@ -655,7 +628,7 @@ nesting is the whole rule.**
 [[canvases]]
 id   = "hub_ray_kitchen"
 name = "Sit with him"
-# npc = "npc_ray"        ← WRONG. Silently discarded. This is the measured failure.
+# npc = "npc_ray"        ← WRONG. Silently discarded.
 
 [canvases.trigger]
 location = "the_kitchen"
@@ -696,36 +669,25 @@ build**. The field the engine reads is `TemplateTrigger.npc` (`:642`), carried t
 > while somebody is around, rather than a surface on that person — `requires_npc` now does the
 > presence half on its own, and `trigger.schedules` remains what narrows it to a *time*.
 
-**Measured failure, and it is why this section exists.** `orientation` put `npc` on `[[canvases]]`
-on all thirteen of its character surfaces and shipped with zero portraits, every character rendered
-as a text link reading `Sit with @ray`, and its entire clock — *"your mother is in it until nine and
-Ray is in it from ten, and those two facts do not overlap"* — enforced nowhere. Thirteen of its
-fourteen `requires_npc` canvases carried neither a schedule nor a condition.
-
-The author was following the skill. `templates/first-hour.toml` had the correct block **commented
-out**, while the two live copyable trigger blocks beside it carried `requires_npc` and never `npc`;
-the only other `npc =` example in the whole skill is `[[phone.daily_topics]]`, where it genuinely is
-a top-level key. Sampled corpus at the time: `vesper` 14, `the_inheritance` 10, `back_home` 9,
-`commuter` 6, `night_desk` 4 — every one trigger-level, none canvas-level. The template is live TOML
-now, and the gate below is why it cannot come back.
+A game with `npc` on `[[canvases]]` for every character surface ships with zero portraits: every
+character renders as a text link carrying the canvas's own name, and every character's hours are
+enforced nowhere. The copyable block in `templates/first-hour.toml` carries `npc` under
+`[canvases.trigger]`; the only other `npc =` example in the skill is `[[phone.daily_topics]]`,
+where it genuinely is a top-level key.
 
 > **Gated as `no canvas key is discarded`.** Fails on any key sitting on `[[canvases]]` that is not
-> one of the seven `TemplateCanvas` fields. It invents no threshold and cannot produce a false
-> positive: such a key does nothing at all, so writing one is never correct.
+> one of the seven `TemplateCanvas` fields (`template_import.py:991-997`). It invents no threshold
+> and cannot produce a false positive: such a key does nothing at all, so writing one is never
+> correct.
 >
-> ⚠️ **The gate was scoped to `npc` alone for about an hour, and that was too narrow.** Repairing
-> `orientation` turned up `walkin_shower_simone` carrying **`substitution_only`** one level too high
-> in the identical way, and the corpus sweep then found `night_desk` doing it on **all five** of its
-> walk-ins — every one of them rendering as a clickable activity instead of a dispatcher-only
-> target. Corpus: 23 discarded keys in 2 games, 24 clean — `orientation` 18 (13 `npc` + 5
-> `substitution_only`), `night_desk` 5. **The class is the placement, not the key.**
+> ⚠️ **The class is the placement, not the key.** `substitution_only` one level too high fails the
+> same way: the walk-in renders as a clickable activity instead of a dispatcher-only target. So the
+> gate checks every key, not `npc` alone.
 >
 > The companion lint **`bound to a person, no face`** carries the softer case — a repeatable
-> `requires_npc` canvas with no `trigger.npc` — as a **list, never a score**. 21 hits in 5 games,
-> 21 games clean: `orientation` 14, `the_allowance` 3, `late_shifts` 2, `the_route` 1, `vesper` 1.
-> Everything outside `orientation` is a walk-in or a scene that happens in a place while somebody
-> is around, and four of the seven are already windowed by their own `trigger.schedules`. A gate
-> here would fail four games for obeying the doctrine.
+> `requires_npc` canvas with no `trigger.npc` — as a **list, never a score**. A walk-in, or a scene
+> that happens in a place while somebody is around, legitimately has this shape, often already
+> windowed by its own `trigger.schedules`; a gate here would fail games for obeying the doctrine.
 
 ⚠️ **One location shows one canvas per character.** The renderer collects every valid repeatable
 canvas for an NPC and keeps the highest `priority`, preferring affordable over cost-blocked
@@ -736,14 +698,11 @@ the escalation replaces it whenever its conditions hold.
 
 ### So a second surface for the same person in the same room is a NODE INSIDE THE FIRST.
 
-That is the half this section was missing, and its absence has a measured cost. `orientation` wrote
-five talk screens as their own canvases, could not give them `npc` without the hubs swallowing them,
-and left all five in the solo lane — the one that holds Sleep and Shower and attaches no name to
-anything. The button text was then the only identity the row had, and two of the five read
-*"Ask him about the campus"* with the man's own portrait rendered directly above. The reason
-recorded in that game's ledger for not folding them was *"it would have buried them under the
-higher-priority hub"* — **which is wrong, and wrong in a way worth naming: a node has no priority.**
-Priority ranks canvases competing for one face. A node is reached by a choice.
+Written as its own canvas, a talk screen cannot take `npc` without the hub swallowing it (the
+selector keeps one canvas per character, `v2.py:4942-4946`), so it lands in the solo lane — the one
+that holds Sleep and Shower and attaches no name to anything — with its button text as its only
+identity. Folding it into the hub does not bury it: **a node has no priority.** Priority ranks
+canvases competing for one face. A node is reached by a choice.
 
 ```toml
 # on the hub's base exit_block — no effects, no clock. It is a door, not an act (the-surfaces.md R7)
@@ -763,9 +722,7 @@ instead of duplicating forty lines of dialogue.
 
 ⚠️ **Check which phase file the surface lives in before you decide it is safe.**
 `merge_toml_phases.py` drops `6_dev_shortcuts.toml` **by name** on `--no-dev` (`:62`), which is the
-release setting. `orientation`'s five talk screens sat in it — forty exchanges, the whole of that
-game's answer to a 10.7:1 narration ratio, in the one phase a release merge throws away, gating on
-nothing and warning about nothing.
+release setting (`:80`). Anything authored there is gone from the released game.
 
 ---
 
@@ -831,9 +788,8 @@ or a room description *before* they have a meeting — and it skips anyone who h
 meeting that opens on a bare name passes every check in this skill.
 
 **And a check for it was tried and rejected**, which is worth recording so it is not re-attempted
-blind: a kinship-word detector run over every game fires on ten of `last_call`'s meetings (its cast
-is not family, so the word was never going to be there), eighteen of `the_inheritance`'s, and three
-of `off_season`'s that are mid-arc canvases rather than introductions. Most of its hits are wrong.
+blind: a kinship-word detector fires on every cast that is not family, where the word was never
+going to be there, and on mid-arc canvases that are not introductions. Most of its hits are wrong.
 **Read the first line of every meeting yourself.** It is five lines of reading per game.
 
 ---
@@ -854,10 +810,11 @@ Schedule page from day one regardless of any gate, so a schedule given early spo
 
 ### The same flag belongs on that character's quest cards
 
-F5 through F8 gate the **canvases**. They say nothing about the **guidance surface**, and that gap
-shipped: `the_season` gated every hub correctly and its Quests page still introduced all five
-people on click one — names, the room each stands in, and the hour they are there — before the
-player had met anybody. Every meeting in the game was spoiled by the page that exists to help.
+F5 through F8 gate the **canvases**. They say nothing about the **guidance surface**: a Quests page
+that lists every character on click one — names, the room each stands in, the hour they are there —
+spoils every meeting in the game. The field keeps the name back until the meeting: In Her Own
+Hands' [Progress_Hints_Base], behind `<<if not $xr.ab.m>>`, gives only *"I should check out some of
+the local shops . . ."*
 
 **A character's `[[quest_cards]]` carry that character's meeting flag in `when`.**
 
@@ -867,8 +824,8 @@ when = [ { flag = "met_wade", subject = "player", op = "is_true" },
 ```
 
 The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
-(`v2.py:15371`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
-(`v2.py:15050`), so an unmet character renders **no heading and no section** — the roster fills in
+(`v2.py:16442`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
+(`v2.py:16209`), so an unmet character renders **no heading and no section** — the roster fills in
 as the player meets people, which is what the field ships (the-company's cast table is
 `<<if $player.met[_char.id]>>` per row).
 
@@ -1097,10 +1054,9 @@ no kin word at all      the canteen · the night shift
 > has already made that shift into somebody's whole identity — as a general pattern they are a
 > trap.
 >
-> **Measured, within an hour of the field shipping:** `orientation` labelled its professor
-> **`the eight o'clock`** — the hour he lectures at. Under his name, to a player who has met him
-> once, that is not an answer to anything. LO: *"Halloran who is he. It says 8 o clock WTF???"*
-> It is now `professor`.
+> The field names the person: Course of Temptation's [Prologue10] has *"your roommate is somebody
+> named"*, and Shady Deals' [Car Mechanic] has *"I'm Brody, your car mechanic, nice to meet you."*
+> A label that names the hour he lectures at is not an answer to anything.
 >
 > **The test:** read the label alone, with no name and no scene, and ask *"is this a person?"*
 > `mother` · `professor` · `stepfather` · `runs the pledge house` · `housemate, top floor` pass.
@@ -1108,12 +1064,8 @@ no kin word at all      the canteen · the night shift
 > a place. The label is the answer to *"who is this"*, which is the standing question this whole
 > rule exists to keep answered.
 
-⚠️ **Author it. Never derive it, not even as a default.** Deriving from `relationship`'s first
-clause is the obvious idea and it collapses real casts: **five of one game's six relationship
-strings contain "husband"** (the husband, his three sons, his brother), and another game has two
-characters whose strings both begin *"Your brother"* — and that is the game whose reader said
-*"I don't know who is who."* A silent wrong default is worse than a missing one, because nobody
-would notice five people labelled `husband`. Empty renders no line at all, which is the safe default.
+⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:15986-15988`), which is the safe
+default.
 
 ⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
 (`<<speech "teagan" "Stepsister">>`) and is the only game of 26 that does — it survives on having
@@ -1127,15 +1079,12 @@ has to remember who "Stepsister" is.
 > resolves to `<<print $npcs["…"].relationship>>` (`engine.md` §43), so the box prints the option
 > they picked and follows it if they change it.
 >
-> **Measured failure, and it was this file's own advice.** `role` shipped 2026-08-27 as static text.
-> `orientation` has two renameable characters, and the guidance written for it said to *"name what
-> does not change"* — so the label under Ray read **`owns the house`** where the player had chosen
-> *stepfather*. LO's words: *"It should show like stepfather stepbro."* Correct. The label exists to
-> say what he is to her, and that is the one thing the picker already knows. The generator now
-> resolves tokens in this field (escape first, then resolve), and the lint
-> `the label under the name` flags a hard-coded label on any character the player can rename.
+> A hard-coded label contradicts the player's pick or has to dodge it. The label exists to say what
+> he is to her, and that is the one thing the picker already knows. The generator resolves tokens
+> in this field (escape first, then resolve, `v2.py:15985`; `.rel` at `v2.py:15360`), and the
+> lint `the label under the name` flags a hard-coded label on any character the player can rename.
 >
-> A **fixed** character still takes a plain string — `mother`, `the eight o'clock` — and a
+> A **fixed** character still takes a plain string — `mother`, `professor` — and a
 > `relationship` written as a sentence (*"Your mother."*) must not be tokenised into the label,
 > because the label carries a colon in CSS and a full stop lands in front of it. Both, at the point of use.
 
@@ -1150,13 +1099,14 @@ Two gates and three lints. `python3 scripts/gates.py <slug>`.
 | gate · **the opening hands over into an open door** | F3. Walks the funnel's clock and asks whether anything at the landing location is open at that minute. **n/a** when the landing location cannot be resolved. |
 | gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, **no** hub left with zero conditions, and no such flag opening a second character's door. |
 | lint · **the place says what it is** | F9. Lists every location by how much prose happens there, against how long its own description is. **Whether a description names the function is a reading, not a measurement**, so this is a list to read and never a score. It replaced a gate that required a first-visit canvas at the anchor — a device eighteen of twenty-six top games do not use. |
-| lint · **named before met** | F7. Lists every character named in prose the player can reach before that character's meeting can fire. A list to read, never a score. |
+| lint · **named before met** | F7. Lists every character named in the opening, a quest card or a room description who has no meeting anywhere in the game. A list to read, never a score. |
 | lint · **the opening arms a card with goals** | F1b step 5. The quest cards visible once the starting canvas's handover flags are set, and whether any of them carries `goals`. A list, never a score (added 2026-09-24). |
 
-⚠️ **Nothing checks the guidance surface.** The `named before met` lint reads *prose canvases* and
-does not look at `[[quest_cards]]`, so a game can pass every gate above with its Quests page still
-naming the whole cast on turn one — which is exactly what `the_season` did. Read the page yourself
-at turn one. A gate here needs a second game before its shape is honest.
+⚠️ **Nothing checks that the guidance surface waits for the meeting.** The `named before met` lint
+does read `[[quest_cards]]` — every string field on every card, beside the opening and the room
+descriptions (`gates.py:5424-5426`) — but it skips any character who has a meeting anywhere
+(`gates.py:5453`). So a game can pass every gate above with its Quests page still naming the whole
+cast on turn one. Read the page yourself at turn one. A gate here needs a second game before its shape is honest.
 
 Where each stood when the checks landed, 2026-08-22 — read off the shipped gates, not a
 prediction:
@@ -1202,7 +1152,7 @@ the bar is one shipped work has cleared rather than an invented number. The six 
 - **Every `npc=` hub sits behind a non-repeatable meeting** that names that character —
   the flag on the first hub, and **no** hub anywhere left with zero conditions.
 - **Gate the meeting on a schedule or a flag — `requires_npc` does not gate auto-fire**
-  (`v2.py:4573`).
+  (`v2.py:5057`).
 - **A meeting is ~100–170 words and somebody speaks.**
 - **Role before name.** Swap description for name on the meeting flag where the reference matters.
 - **One flag per character.** `doors_open` for the whole cast is the cold-spawn hub in a coat.

@@ -6,10 +6,8 @@ this skill and still be unplayable:
 
 > **Which screen does this live on, and what is it FOR?**
 
-> Measured failure this exists to prevent. A game authored entirely to v2 doctrine put **23 choices
-> on its front desk, 19 on its street, 19 in its changing room** — one paragraph and then a wall of
-> buttons, at every location, with 109 of its 216 doors open on day one. It scored **18/18**.
-> Nothing in the skill said a location page had a shape, so the author invented one.
+> A location page has a shape. It is not one paragraph and then a wall of buttons, and the field
+> below is what the shape is.
 
 ---
 
@@ -96,13 +94,9 @@ That is the whole difference between a tight menu and a wall of buttons. Needs a
 objects are an **open** one. The count falls out of a set that cannot grow, so there is nothing left
 to cap.
 
-Both previous attempts to control size failed for the same reason — they capped an open list instead
-of closing it:
+The earlier attempt to control size failed because it capped an open list instead of closing it:
 
 - **Gate 20's ceiling of 8** (study 6): it redistributed the menu instead of shrinking it.
-- **R2b's "derive the count from the objects"**: `the_allowance` declared six objects in its kitchen
-  and got a six-choice browse screen **on top of** four activities that already covered the same
-  things. Nine near-verbatim duplicate pairs across five rooms.
 
 Gate 20 stays as a backstop against the pathological case. It is no longer the sizing rule.
 
@@ -189,19 +183,9 @@ appearing where that system lives:**
 Nine rows because nine systems live in her room. **The count is not chosen; it falls out of the systems list, which is R2's closed-set
 logic one level up.**
 
-⚠️ **The consequence, and it is measured.** `night_desk` was built to R2 and its rooms came out as
-*walk the property · fix the sign · hit the ice machine · start a load* — a night porter's duties,
-correctly derived, with nothing to want in them. The cause is not the writing. Counting variables
-used 25+ times in each game's own source: **DoL 693 · zaras-school-life 76 · new-life-project 61 ·
-family-ties 52.** `night_desk` declares **six meters**, three of which are hunger, hygiene and
-energy, and no clothing catalog, no phone and no items. **There were not enough systems to give six
-rooms a list**, so the rows had to be invented from the fiction instead.
-
-⚠️ **The comparison above is one crude instrument and is NOT a target.** It counts `$vars` in the
-field's built HTML; our engine keeps meters in `player.core_traits`, so the two sides are not
-measured the same way and the figures are indicative only. The field's own 13× spread (52 → 693)
-means there is no defensible number here, and none is gated. What survives the mismatch is the
-order of magnitude, and the rule above, which was read rather than counted.
+**The rows come from systems that describe her.** Course of Temptation reads
+`has_inclination` in 218 of its 5,294 passages, so what she has become changes what a room
+offers — [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`.
 
 ⚠️ **The brake, and it is not optional.** R2 exists because gate 22 manufactured nine duplicate room
 screens across five games before it was deleted. Read carelessly, R2c invites the mirror-image
@@ -214,9 +198,9 @@ would build"* rules out. So:
 One system that surfaces in three rooms beats three that surface in one each. **The test is not how
 many systems the game has; it is whether a room has anything of its own to show.**
 
-**No gate and no lint.** A count is satisfied by declaring traits, and the instrument above is not
-matched across the two sides. If a check is ever built here it is the matched instrument first, on
-its own, verified against three games before any doctrine cites it.
+**No gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
+it is a matched instrument first, on its own, verified against three games before any doctrine
+cites it.
 
 > ### ✅ COMPLETED 2026-09-02 — where a system is FED, and where the list itself lives
 >
@@ -716,15 +700,13 @@ the shape the field writes as `$romance isnot 1`. It reads correctly in every ev
 
 **R5e · A gate opens when she has earned it. An OFFER is there before she needs it.** Added
 2026-09-01. R5b–R5d cover the choice she is refused and the choice she declines. This is the third
-kind, the field leans on it hard, and **this skill had no word for it** — which is exactly why we
-shipped it wired backwards, twice.
+kind, the field leans on it hard, and **this skill had no word for it**.
 
-**The defect, in our own games.** `mrs_vance` ships the best choice in its opening — she tells Cade
-she will be short, he covers the rent, and *owing him* is what opens his ladder. It is gated on
-`money lt 260`. She earns $208 in a day against a $260 **week**, so she is essentially never short
-and the choice is close to unreachable. `commuter` does the same shape with `prep lt 30` → `prep +45`.
-Two authors, no shared context, both obedient to a doctrine whose only vocabulary is *content
-appears when a condition is met*.
+**The defect is the offer gated on scarcity.** When taking on a burden is what opens a person, and
+the choice is gated on her being short, a player who is doing fine never sees it. The field gates
+the bigger burden on the opposite. Course of Temptation [WeeklyDebtPayment]: *"Then there are your
+Greek house dues. You don't owe anything this week"* — shown under `!$firsttime.greekduespaid`,
+never under being short.
 
 **The field, measured 2026-09-01** (`~/Documents/Ignition_Study_20260901/`). Three of the four
 corpus games that carry an obligation let the player **volunteer for a bigger one**, and **not one
@@ -898,17 +880,16 @@ R5 says most doors are gated. This is the floor under it: **one** choice on ever
 neither `conditions` nor `costs`, so the screen still works on the day everything else is shut.
 
 Not a defensive habit — a consequence of how the engine renders. A choice whose conditions fail is
-wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:12806`) and renders **nothing**: no
+wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:13885`) and renders **nothing**: no
 greyed line, no reason, no hours. And a **cost-bearing** choice counts as conditional too
 (`v2.py:12827-12836`), so a screen whose only affordance costs $3 is equally empty to a player at
 $0. When nothing is left the engine emits a bare `[[Continue->…]]` that fires no effects, and the
 player cannot tell a spent day from a broken build.
 
 > ⚠️ **THE CAP IS PER PERSON. THE HUBS ARE PER ROOM.** This is what makes it certain rather than
-> unlucky. `off_season` gave Ewan three hubs — the yard, the harbour, the arcade counter — all
-> reading one shared `ewan_rung_today`. Spending it at the yard at 09:00 emptied the other two for
-> the rest of the day, and their entire list was that one flag. Ten of its ten hubs did this, and
-> its author walked into one and could not tell whether his own game was broken (2026-08-23).
+> unlucky. A character with a hub in three rooms, all reading one shared `<npc>_rung_today`, is
+> spent in the first room the player visits — and a hub whose entire list is gated on that flag
+> renders nothing in the other two for the rest of the day.
 
 The fix is one line:
 
@@ -960,8 +941,7 @@ whole meter range. When a place is worth returning to and you cannot say why, it
 missing its pool.
 
 **R8 · A person owns a corner of the world — and the schedule has to agree.** Added 2026-08-24 from
-Section G, after `the_season` shipped and the one defect a player reported was *"I don't know who is
-who."*
+Section G.
 
 Twenty-five field games were read in source to find what actually separates one character from
 another. A log-odds pass over each speaker's dialogue answers it, and the answer is **not diction**:
@@ -1079,28 +1059,29 @@ Route the choice at a node with `targetType = "node"`, write what happened, and 
   choice, never inside the triggerless canvas, which has no located setter and hard-fails the build.
 - **Staying fresh**, because most of these sit on repeatable surfaces: `group` bands keyed on the
   meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
-  ⚠️ **`text_variants` does not exist** in any game; do not write it.
+  ⚠️ **Node prose has no `text_variants`.** The key exists only on a **choice**, where it swaps the
+  button label: a list of `{ text, conditions }`, first match wins, the base `text` otherwise
+  (`template_import.py:2405-2443`; rendered as a `<<set _cv>>` chain at `v2.py:13920-13934`).
+  Variant labels are static strings — an `@npc` token inside one does not resolve.
 - **Video on outcome nodes, images on hubs.**
 
 ### The extreme case, which is a gate
 
-⚠️ **`orientation`'s `hub_ray_bedroom` authored three nodes and linked one.** `base` fell through to
-the engine's default `[[Continue->Location_…]]`, so the sex and the morning-after — **288 words,
-including the game's entire explicit core** — were built into the HTML and impossible to reach. It
-passed 45 of 46 gates. Every other game in the repo links every node it writes: **426/426, 154/154
-and 84/84 nodes carry an authored `exit_block`.**
+⚠️ **A node nothing points at is built and cannot be reached.** A canvas that authors three nodes
+and links one falls through to the engine's default `[[Continue->Location_…]]` from `base`, and the
+other two are in the HTML with no way in.
 
 **Every node you write gets an inbound edge in the same edit.** A node is reached by a
 `targetType = "node"` choice, a `rejection_node`, or an `exit_block.config.destinationId` — and
 **not** by `[[canvases.connections]]`, which parses, persists and is never read by the generator
-(`game_graph.py:390`).
+(`game_graph.py:397`).
 
 ### What this costs
 
 The field range is **0% to 68%** of choices, so there is no threshold here that would not fail a game
 for obeying the doctrine. The general case
 is therefore a **lint that cannot fail anything**; only the extreme case — a node nothing points at —
-is a gate, and it is safe as one because the corpus is already at zero.
+is a gate (`every authored node is reachable`).
 
 ## What is checked
 

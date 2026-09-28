@@ -198,7 +198,7 @@ Her situation at minute zero, and what she has to lose. Concrete: a job, a debt,
 reputation. The thing that makes the first transgression cost something.
 
 > **Prefer a hold with a face and a date over a situation.** *"She has no money"* is a mood;
-> *"Friday, $260, and Cade counts it at the desk"* is a machine. That half is right and it is the
+> *"Friday, $260, and the landlord counts it at the desk"* is a machine. That half is right and it is the
 > half worth keeping — a hold of any kind needs somebody who notices and a moment when it comes due.
 
 ⚠️ **A bill is one hold of at least nine,** and the field this skill is written for does not reach for it

@@ -20,11 +20,9 @@ key, it does not belong on the board.
 ## 1. Locations — `[[locations]]`
 
 ⚠️ **Read `references/the-systems.md` before this section, and declare `board.systems[]` first.**
-The derivation below is circular without it: ask *"what would she do in this room"* with nothing
-declared and the answer is a job description. `night_desk` was built to R2 correctly and its rooms
-came out as *walk the property · fix the sign · hit the ice machine · start a load* — because it
-had six systems, all of them the kind that every room feeds, and so no room had anything of its own
-to show (`the-systems.md` SY1).
+The derivation below needs them: a room's rows come from the systems that describe her, not from
+the room. Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, so what
+she has become changes what a room offers (`the-systems.md` SY1).
 
 **How many locations is not a number you pick. Derive it from what a place is FOR** — the three
 things a room's list can hold (`the-surfaces.md` R2):
@@ -40,9 +38,8 @@ Write the list of places that answer at least one of those, and count it. That i
 > every time. Pick the archetype (`the-map.md` R0) before this step; the count is derived *within*
 > that shape.
 >
-> ⚠️ **A room that answers none of the three is not a location yet.** Measured: `games/vesper` shipped
-> **12 of 30 locations thin or dead**, six of them completely empty — The Vault, The Atrium, The Site,
-> The Door. The incumbent skill's version of this rule (*"this place exists so the player can ___"*)
+> ⚠️ **A room that answers none of the three is not a location yet** (the field's rooms:
+> `the-surfaces.md`, *"What a room is for, measured"*). The incumbent skill's version of this rule (*"this place exists so the player can ___"*)
 > was a question in a review document rather than a check, and it never fired.
 
 Budget the set as a *shape*, not a flat quota:
@@ -82,14 +79,12 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   ```
 
   ⚠️ **This replaced an `objects` list on 2026-08-18 and the reason is worth carrying.** The old
-  rule declared the things in the room and derived the choice count from them. It shipped
-  `the_allowance`, whose kitchen got a six-choice browse screen **on top of** four activities
-  already covering the same things — nine near-verbatim duplicate pairs across five rooms — because
-  gate 22 computed affordances from `exit_block.choices` and **could not see a canvas at all**. A
-  body needs about five things; a room contains fifty nouns. Needs are a closed list; objects are an
-  open one. `the-surfaces.md`, *"Why this sizes itself"*.
+  rule declared the things in the room and derived the choice count from them, and gate 22 computed
+  affordances from `exit_block.choices` and **could not see a canvas at all**; the gate is deleted
+  (`gates.py:2248`). A body needs about five things; a room contains fifty nouns. Needs are a closed
+  list; objects are an open one. `the-surfaces.md`, *"Why this sizes itself"*.
 
-  The `objects` key is left readable in the five existing ledgers. **Nothing reads it any more.**
+  The `objects` key is left readable in old ledgers. **Nothing reads it any more.**
 - **What KIND of place it is** (`labels`) — `the-systems.md` SY3. Not the same question as `serves`:
   `serves` is what happens here, `labels` is what would let anything happen here. *Private · has a
   mirror · open all night · she cannot undress here.* Cut the menu in SY3 down to the labels this
@@ -99,8 +94,7 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   { "id": "the_kitchen", "labels": ["private", "sells_food", "has_washer"] }
   ```
 
-  ⚠️ **A room carrying no `sourced` system is the `night_desk` defect** (`the-systems.md` SY2). It
-  is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
+  ⚠️ **Does the room carry a `sourced` system?** (`the-systems.md` SY2) It is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
   of every room on this list before the prose exists.
 - **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
 - **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**
@@ -132,11 +126,6 @@ while getting objectively better.
 **Budget the anchor against the FINISHED total, not the current one** — work out its share of the
 total you are planning for and put that share into every increment, rather than topping it up at
 the end. A ratio gate cannot be satisfied by working elsewhere; the target moves with you.
-
-> ⚠️ **This paragraph used to carry a worked example with a number in it, and the number has been
-> removed because three games shipped to it.** back_home 36,035 · steam 36,019 · forty_miles
-> 37,450 — against a figure that appeared once, as arithmetic, and was a spec nowhere. Illustrative
-> numbers in a file that also contains thresholds get read as thresholds. Study 6.
 
 **Cold rooms are allowed.** Not every place is erotic — the reference game had no sexual
 content in 8 of its 25 locations (a police station, a museum). The floor is **60% of

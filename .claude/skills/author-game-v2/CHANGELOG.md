@@ -5,6 +5,59 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — Our-games sweep, batch 2: rules that came from our bugs
+
+**Why.** Batch 2 of the sweep (`round5/OUR_GAMES_SWEEP_PLAN.md`). LO split the 104 rules that came
+from bugs in our games (`round5/OUR_GAMES_SWEEP_BATCH2_SPLIT.md`): an engine fact keeps its rule and
+loses the game and the story; a craft rule whose only evidence was our game needs a passing top game
+behind it, or it is cut. Keeping it with the name removed would still be learning from our game.
+
+**What changed.**
+- **Engine facts (46):** rule kept, story and game name cut, citations re-read against the code and
+  re-anchored where they had drifted (e.g. `isCanvasValid` `v2.py:5057`, `template_import.py:2160`,
+  `:7705`, `addToWardrobe` `v2.py:1587`, `pickQuestsCard` `:16209`).
+- **LO's decisions (4):** `the-sheets.md` S11/S12/S13 and the three-Pitchers rule in `agents.md` keep
+  their rules; the incidents, tables and paths are cut.
+- **Craft rules with evidence (35):** our stories replaced by passing-game quotes or by a pointer to
+  field evidence already in the skill. New quotes, each checked in its named passage in
+  `round2/passages`: Course of Temptation [GymCardio], [WeeklyDebtPayment], [EventCampusHomeworkBuyOffer],
+  [ElkbookWidgets], [SummitMarket], [Prologue10], [Wardrobe], [Library], [CampusClinicPregnancyCheckup],
+  [ClassroomMenu], [Maps]; In Her Own Hands [BobbyAwakeBase], [K_LateShaun1A], [Progress_Hints_Base],
+  [Map]; Shady Deals [Car Mechanic], [City Map]; Cupid's Way [xavier45], [Sister's place].
+- **Craft rules cut (5, LO):** "named in passing is not met" (`the-first-hour.md`); the 15/35/55/75
+  box (`the-meters.md`, one labelled DoL line kept) and its pointer in `the-economy.md`; "derive the
+  count from the objects" and the night_desk consequence plus its hedge (`the-surfaces.md`);
+  "illustrative numbers get read as thresholds" (`the-board.md`, already SKILL.md's "an example
+  outranks every rule beside it").
+- **Mixed rows (14):** the evidenced half kept; five unsupported claims cut — "never derive the
+  relationship label", "the target is reachable", "the commoner failure is no map", "the bubble was
+  for an NPC's interior" (the engine says otherwise), and state.md's threshold reason, restated as a
+  principle (LO).
+- **The duty list (LO):** the positive rule stays — a room's rows come from systems that describe
+  her — on Course of Temptation reading `has_inclination` in 218 of its 5,294 passages (183 read it
+  as `$pc.has_inclination`). The negative half ("only ambient systems produce a duty list") and its
+  family-ties/Zara evidence are cut in `the-systems.md`, `the-board.md`, `the-sheets.md`, `state.md`
+  and `the-surfaces.md`.
+- **`the-sheets.md` admission rule (LO):** "Every rule here is one LO decided, or one the field shows."
+- **Stale facts, each checked against the code:** `requiresNpc` is read at five sites on four paths,
+  not two (`v2.py:5753`, `:5829`, `:4968`, `:5580`, `:3110`; auto-fire never reads it); `named before
+  met` does read `[[quest_cards]]` but skips anyone with a meeting (`gates.py:5424-5426`, `:5453`);
+  "the eight o'clock" removed as a good label; a Beat is one screen, not one node (`gates.py:408`,
+  `:479`); "nineteen lints" → fifty-five (`_emitted_names`, `gates.py:10492-10503`); `text_variants`
+  exists on choices, not node prose (`template_import.py:2405-2443`, `v2.py:13920-13934`).
+- Character names inside kept examples renamed (Renner, Cade, Nunn, Simone ids → invented).
+
+**Left for batch 3.** The UNSURE rows, plus about 45 unnamed "ours" measurements the plan's name grep
+could not see ("Ours run 22", "all five v2 games", "our own 18 games"…), listed in the split file.
+
+**Verified.** pytest 148 passed · `--selfcheck` exit 0 · cite_check 84 → 80 · tallies unchanged
+(29/47, 46/50, 44/48) · `git status games/` unchanged · our-game name hits 185 → 50, every one a
+batch-3 row.
+
+words: 143,924 → 140,379 (−3,545) · running total 140,379 / 149,283
+
+---
+
 ## 2026-09-27 — Our-games sweep, batch 1: examples, numbers and names from our own games cut
 
 **Why.** LO's standing rule (this day): the skill does not learn from or reference our own games —

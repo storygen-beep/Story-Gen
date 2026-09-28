@@ -153,11 +153,8 @@ undirected variety** (a die), **stacked `group` bands for directed variety** (st
 one sentence whose first clause is his arousal and whose second is hers. `engine.md` §35 ·
 `the-surfaces.md` R6 mechanism 5 · `register.md` "the two-halves sentence".
 
-⚠️ **There is also a cap of 8 (gate 20), and it is a backstop, not a size.** Two games prove why it
-must be read that way: one shipped 23 choices on a front desk and scored 18/18 because nothing said a
-location page had a shape — and the game built *after* the cap existed put 19 of its 30 screens at
-exactly 8, shipping the same 213 total choices as the first. A ceiling makes "pass" and "maximise"
-point the same way. The field median for things-to-do-at-a-place is **3**.
+⚠️ **There is also a cap of 8 (gate 20), and it is a backstop, not a size.** A ceiling makes
+"pass" and "maximise" point the same way. The field median for things-to-do-at-a-place is **3**.
 
 ## Dispatch
 
@@ -251,7 +248,7 @@ A fragment that will not parse is printed. Under `--ship` both are red.
 | ends on an opening | the release closes on the door declared in `board.door`: locked at the start, openable later | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
-| **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open. 288 words of `orientation` were dead this way and it passed 45 of 46 gates | `the-surfaces.md` R9 |
+| **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open | `the-surfaces.md` R9 |
 | **the map is a place** | a shape was CHOSEN, and the exterior is the ground rather than a room off the kitchen | `the-map.md` R0 · R3 |
 | guidance exists · no chain ends in silence | the player is told where to go next | `the-voice.md` R2 |
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
@@ -268,10 +265,10 @@ A fragment that will not parse is printed. Under `--ship` both are red.
 | **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
 | **a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs` — a spent cap renders nothing at all, not a greyed line | `the-surfaces.md` R7 · `engine.md` §28.3 |
 | **a locked door says why** | every `show_when_locked` choice carries the reason — a `locked_text`, a threshold or a rejection node. The field hides a refusal or explains it; 2% ship a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
-| **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `simone_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
+| **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `step_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
-| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase, or `wardrobeEffects`. 3 of 15 wardrobe games ship one that has none. `orientation`'s two were the only `going_out` garments in the game and `simone_05` gates on wearing one, so the anchor's arc died at step 5 and two quest cards kept pointing at it | `the-meters.md` W3 · `engine.md` §17 |
+| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2077` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
@@ -353,7 +350,7 @@ only of pure sinks is) · **repeatables without a step** (repeatables added sinc
 prints its baseline) · **a flag that never resets** (a `*_today`/`*_week` flag, or one in
 `board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
-denominator, which is how `the_route` is 46/46 green with 11 explicit screens; reads the built HTML
+denominator; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
 puts him in the room** · **the label under the name** (`npcs[].role` — the 1-3 word label the engine
 prints under the name in EVERY dialogue box, against `relationship`, which is the cast page's

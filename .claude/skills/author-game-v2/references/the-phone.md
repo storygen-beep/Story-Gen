@@ -8,10 +8,9 @@ This file owns **one rule**, and every section below is that rule applied:
 > **The phone is a door into the world, not a room of its own. It reads state the world already
 > keeps, and everything it offers costs the world something.**
 
-> Measured failure this exists to prevent: **`under_one_roof` ships a social feed with 34 posts on
-> it that she cannot post to** — `post_actions` is empty, so the app is a wall she reads. And
-> **`mothers_place` declared `phone ON (8_phone.toml)` in `0_systems_spec.toml:7`, and shipped with
-> no `8_phone.toml` and no `[phone]` block at all.** Neither was noticed by anything.
+> The failure this exists to prevent: **a social feed she cannot post to.** With `post_actions`
+> empty, the app is a wall she reads. The phone offers her actions — Course of Temptation's
+> [ElkbookWidgets]: *"You can post a selfie."*
 
 **Why this file exists.** `DOCTRINE_GAPS.md` Tier 3 row 12 — *"Optional systems — phone,
 customization"*. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
@@ -63,10 +62,10 @@ If the answer to all three is no, do not declare a phone. Declaring one and fill
 strictly worse than not having one: an app with a single item in it reads as a broken feature,
 and 18% of the field's phone comments are players asking how to make an empty-looking phone work.
 
-⚠️ **A declared system must exist in the built game.** `mothers_place` wrote *"Systems: clothing
-ON, customization ON, phone ON (8_phone.toml)"* into its systems spec and shipped `7_final_game.toml`
-with no `[phone]` block. If the spec says a system is on, the built TOML has to carry it or the spec
-has to change.
+⚠️ **A declared system must exist in the built game.** If `0_systems_spec.toml` says a system is
+ON, the built `7_final_game.toml` has to carry its block — `[phone]` for the phone — or the spec has
+to change. Nothing checks this: no script in `scripts/` compares the spec with the build (see
+"What is not gated here", below).
 
 ---
 

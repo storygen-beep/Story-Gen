@@ -197,33 +197,18 @@ field's normal case**. Same fig-leaf risk as above, answered the same way: the s
 prints garments against reads, so a thin pass is visible.
 
 **⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
-the wardrobe is read. It cannot ask whether the read can ever be **true**, and for a whole release
-that difference was the game.
-
-```
-orientation 0.1      row_dress   initial=false  exposure=1  type=going_out  $60
-                     black_set   initial=false  exposure=1  type=going_out  $35
-                     5 starting garments        exposure=0  type=none
-```
-
-`[settings]` carried `clothing_enabled = true` and `wardrobe_location` and **no
-`shop_location`**, and the game wrote no `wardrobeEffects` anywhere — so neither garment could be
-obtained. All four clothing conditions in the game read `worn_exposure gte 1` or `worn_type eq
-"going_out"`, properties **only those two carry**. `simone_05` — step 5 of the anchor character's
-six-step arc — triggers on both. Verified live: `isCanvasValid(simone_05) === false` with every
-other prerequisite met, the right day and hour, and $500 in hand. `simone_06` never set
-`simone_open`; `act_pledge_upstairs`, the anchor's repeatable act surface, was sealed for the whole
-release; two quest cards went on pointing the player at it. The scoreboard read **46 of 47 green**.
+the wardrobe is read. It cannot ask whether the read can ever be **true**. A clothing condition that
+only an unobtainable garment satisfies seals every canvas behind it, and the scoreboard stays green
+while it does.
 
 **Gate · a declared garment can be got.** A `[[clothing]]` entry with `initial = false` needs one of
 the only two routes the engine has: a shop purchase — `[settings] shop_location` naming a **declared
 location** plus `price > 0`, because `renderShopPage` stocks only `!initial && price > 0` — or a
 `wardrobeEffects = [{ item_id = "…", action = "add" }]` on a choice or an `exit_block.config`.
-Zero-based; no threshold to invent. Measured 2026-09-03: **3 of 15 wardrobe games ship 12 garments
-with neither.** `under_one_roof` is the case that fixes the shape of the check — it has a working
-shop and seven non-initial garments at `price = 0`, named for the characters meant to give them
-(`jakes_flannel`, `frank_nice_dress`), invisible on the very page they sit beside. A check reading
-"a shop exists, therefore buyable" reports zero there.
+Zero-based; no threshold to invent. **A shop existing does not make a garment buyable:** a
+non-initial garment at `price = 0` is invisible on the very shop page it sits beside
+(`v2.py:2077` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
+buyable" would pass a garment nobody can get.
 
 ⚠️ **`shop_location` is never validated** (`template_import.py:2536` takes it as a bare string,
 `v2.py:9935` compares it to each location's slug). A typo produces no error, no warning and no shop
@@ -233,9 +218,8 @@ must be 1.
 ⚠️ **The stronger check — "is this clothing condition satisfiable at all" — was measured and
 declined.** It needs the derived `worn_beauty` / `worn_corruption` MAX aggregate modelled, and a
 check that cannot see the shape of the thing it judges manufactures whatever it can see (the deleted
-gate 22, `the-surfaces.md`). Orientation was the only game in the corpus carrying an unsatisfiable
-one, and its cause was an ungrantable garment — so the exact question reaches the same defect from
-the side that can be answered.
+gate 22, `the-surfaces.md`). An unsatisfiable clothing read is caused by an ungrantable garment,
+so the obtainability check reaches the same defect from the side that can be answered.
 
 ---
 
@@ -263,16 +247,7 @@ per person (p25 2, p75 6)**, with the lowest rung at a median of 5, the same as 
 (`findings_E_yes.md` §1). become-someone gives each of 62 people 5 rungs of `trust` while its player
 meter `mc.dom` carries 9; both are correct, because they are not the same kind of ladder.
 
-> ### ⚠️ Where 15/35/55/75 came from, and why it spread
->
-> It is the DoL **seed's** spacing, measured off its 2018 twee source and written into
-> `the-board.md` as *"their rungs sit at 15/35/55/75… **copy that shape.**"* It then reached every
-> tier of every game built afterwards.
->
-> `SKILL.md`: *an example outranks every rule beside it.* This is the third recurrence and the
-> first one **inside a template** — which is worse than a reference file, because a template is not
-> read, it is filled in. **A shape that ships in `templates/` is copied harder than one that ships
-> in `references/`.**
+`15/35/55/75` is the DoL seed's spacing, measured off its 2018 twee source (numbers only).
 
 **Lint · the meter ladder.** Prints rungs and lowest rung per meter that carries the game. A
 number, never a bar: a two-rung meter can be right on purpose, and rung counts are only comparable
@@ -280,9 +255,9 @@ on the same scale.
 
 ⚠️ **It follows W1's fork.** A ladder game is measured on the tiers `board.ascent_tiers` names; a
 roster game (`who_climbs = "cast"`, which leaves that list empty by definition) is measured on its
-per-character meters instead. The lint read only the first of those until 2026-08-23, so the one
-roster game in the repo was the one game it printed nothing for — and it was running six meters
-whose lowest rungs all sat at 12–22. **Half a fork is not an instrument.** A gate above the meter's
+per-character meters instead. A lint that read only the first of those would print nothing
+for a roster game (`gates.py:3402` takes the `who_climbs == "cast"` branch). **Half a fork is not
+an instrument.** A gate above the meter's
 ceiling is skipped on both sides: that is a locked door (`the-release.md` G9), not a rung.
 
 ---
@@ -511,8 +486,8 @@ Two more rules that survive from v1 and are worth restating:
 - **Reserve the rich two-meter model for the one or two arcs that carry the game.** The reference
   game gives it to three housemates and runs its other fourteen characters light. Gold-plating
   every character dilutes the core and triples the authoring.
-- **A character who gates nothing is not in the game yet.** `the_allowance` ships two of five
-  characters with a full meter pair and **zero** gate sites on either.
+- **A character who gates nothing is not in the game yet.** A full meter pair with zero gate
+  sites on either meter is a character the player can raise and nothing ever answers.
 
 ### The meter is a trade, not a bonus
 
@@ -914,22 +889,17 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > 2026-08-22.** The generator emits the two in opposite orders:
 >
 > ```
-> choice     flagEffects -> costs -> … -> advanceTime      v2.py:12648-12733
-> node exit  advanceTime -> traitEffects -> flagEffects    v2.py:13085-13088 · :13049-13050
+> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:13955-13957 · :14033
+> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:14364-14373
 > ```
 >
 > `advanceTime` rolls the day inside itself (`v2.py:5411-5414`) and that is where the tick clears
 > every `_today` flag (`v2.py:5552`). So an **exit**-set cap on a rung that crosses midnight is
 > written *after* the clear, and the new day starts already capped.
 >
-> Measured, in the game this example authored: `act_flat_sleep` ran 21:00→06:00, so from the second
-> night onward Sleep was never offered before midnight again — the player was pushed into a
-> permanent post-midnight bedtime and nothing in the build, the validator or the scoreboard said a
-> word. Four more rungs sat in the same trap on late hub windows.
->
-> Across the repo, **78 day caps already sit on the choice and 40 on an exit** — and the two games
-> holding 35 of those 40 are `off_season` and `the_allowance`, the two written under this example.
-> Third recurrence of `SKILL.md`'s "an example outranks every rule beside it".
+> A sleep rung that runs from evening to morning with its cap on the exit is never offered before
+> midnight again after the first night, and nothing in the build, the validator or the scoreboard
+> says a word.
 >
 > ⚠️ **A LOCATED canvas does not need a flag at all.** `max_triggers_per_day` is read off the
 > trigger (`v2.py:11017`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
@@ -1016,8 +986,7 @@ The field, on the fourth field:
 game. Deterministic, no threshold to invent: either something gates on it or nothing does.
 
 A restore with no gate behind it is a button that maintains a number. It costs the player time and
-buys them nothing, and it is the exact defect that shipped in `the_allowance` with a green
-scoreboard.
+buys them nothing.
 
 **This is also what makes a room worth entering.** `the-surfaces.md` R2 says a room's list is needs,
 work and people — a *need* on that list has to be a real one, or R2 degrades into the object rule

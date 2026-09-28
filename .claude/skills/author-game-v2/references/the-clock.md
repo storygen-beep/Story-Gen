@@ -71,16 +71,11 @@ hour.
 
 ## C2 · A beat may not say what time it is — turn the reading into a rule
 
-A repeatable canvas fires at any minute of its window. Measured across all ten games in this repo:
-
-```
-canvas schedule windows          median width 149–540 minutes per game
-windows 60 minutes or narrower   5, in the entire repo
-                                 (forty_miles 1 · back_home 1 · last_call 3)
-```
-
-At those widths **no beat in any game shipped here can honestly state the current hour.** A
-sentence that reads as a clock is wrong for almost the whole window it fires in.
+A repeatable canvas fires at any minute of its window: `isCanvasValid` checks only that the
+schedule is active (`v2.py:5057-5063`), never which minute it is. So a beat cannot honestly state
+the current hour — a sentence that reads as a clock is wrong for almost the whole window it fires
+in. The field states hours as rules instead: Course of Temptation's [Library] says *"A sign says
+it's open between 7am and midnight."*
 
 **The move is grammatical, not editorial.** A reading becomes a rule and the fact survives intact:
 
@@ -276,26 +271,21 @@ cooldown_message  = "<the hours, as a bare phrase>"
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
 `[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
 `trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
-`template_import.py:1929-1930`, the trigger table itself — and then writes them **into** metadata at
-`:6980-6981` for the generator to read back at `v2.py:11484`. Authoring them in `metadata` directly
+`template_import.py:2160-2161`, the trigger table itself — and then writes them **into** metadata at
+`:7705-7706` for the generator to read back at `v2.py:12167-12168`. Authoring them in `metadata` directly
 skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
 `showWhenBlocked` reaches the built HTML **zero** times.
-
-Caught by a game that copied this example verbatim: ten authored schedule lines, none of them ever
-on screen, and the activity vanishing exactly as the paragraph above warns. `off_season` — written
-before this section existed — has always declared them at the top level, which is why its six work
-and why the doctrine could be written from it while the example was wrong.
 
 **The message is a bare phrase, not a sentence.** The engine renders it as `<row name> — <message>`,
 so restating the row's own name doubles it: *"Work the counter — The counter — mornings, seven till
 one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
-`show_when_blocked` and `cooldown_message` are read at `v2.py:11055-11059` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:11100-11101`). When `isCanvasValid` returns false —
-and it returns false on a **schedule miss** first of all (`v2.py:4573-4580`) — the renderer keeps
+`show_when_blocked` and `cooldown_message` are read at `v2.py:12164-12168` and emitted as
+`showWhenBlocked` / `cooldownMessage` (`v2.py:12227-12228`). When `isCanvasValid` returns false —
+and it returns false on a **schedule miss** first of all (`v2.py:5057-5063`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
-(`v2.py:5093`, `:5099`, `:5143`).
+(`v2.py:5583`, `:5589`, `:5628-5635`).
 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
@@ -360,9 +350,9 @@ false** (`Change to 0`, `Update to 0.3`); restricting to a word-hour leaves **1*
 to one?"*); excluding `one` leaves **0**. On our own prose the narrow form adds 21 hits across six
 games and every one is a real *"Twenty to eight"* the lint had been missing.
 
-> **Why C2 and C4 are lints and not gates.** A shift-driven world names hours as *rules* and should:
-> `seventh_day`'s `rung_kitchen_rota` and `steam`'s shift board are correct work that a rate gate would
-> fail. That is `SKILL.md`'s *"a check that fails a game for obeying the doctrine is a bug in the
+> **Why C2 and C4 are lints and not gates.** A shift-driven world names hours as *rules* and should
+> (Course of Temptation [Library]: *"open between 7am and midnight"*; In Her Own Hands [Map]:
+> *"Diner (Open 9 AM to 10 PM)"*), and a rate gate would fail that correct work. That is `SKILL.md`'s *"a check that fails a game for obeying the doctrine is a bug in the
 > check"* — the trap that killed the proposed `locked_text` gate. And duration-tagging is one
 > game's convention (see C4's honest limit), so gating it would be the invented threshold
 > `gates.py:2825` already refuses. Both print their findings and neither moves the tally.
@@ -374,8 +364,7 @@ games and every one is a real *"Twenty to eight"* the lint had been missing.
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
 - **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:5569`),
   and there is no `@time` token to print the clock either (`v2.py:14027`).
-- **A beat may not say what time it is.** Windows here run 149–540 minutes wide; five in the whole
-  repo are an hour or less.
+- **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Shutter up at eight"* → *"The shutter goes up at eight."*
   Same fact, no claim about now.
 - **Exempt:** world rules and shift patterns · backward canon · in-scene relative time · forward
@@ -389,6 +378,6 @@ games and every one is a real *"Twenty to eight"* the lint had been missing.
   is tagged for you (`v2.py:4893`); activity time is not (`v2.py:12733`).
 - **A stated duration must equal the real spend** — the gate walks choice → target node → exit.
 - **If a thing has hours, publish them** — `show_when_blocked` + `cooldown_message`
-  (`v2.py:11055`), the one surface where an hour belongs. Zero games have used it.
+  (`v2.py:12164`), the one surface where an hour belongs. Zero games have used it.
 - **Never assert elapsed time the player's pace controls** — and where the precision is the
   character, keep the precision and drop the claim.

@@ -198,7 +198,7 @@ The sidebar already prints `exposure 22`. **What the player cannot see is which 
 moves it** — and in a game where every gate is a meter, that is the whole of navigation.
 
 Every guidance line names a **place, a person where there is one, and a verb**. *"Flash him at the
-depot"* works. *"Prove yourself to Renner"* fails — no place, no clickable action. If the step is
+depot"* works. *"Prove yourself to Tom"* fails — no place, no clickable action. If the step is
 schedule-gated the window rides along: *"Catch him in the garage — weekday evenings."*
 
 Atmosphere belongs in the card's narrative line. The goal label is load-bearing navigation.
@@ -373,17 +373,8 @@ nothing (−0.13, +0.09 across 16 games). Two further findings were tested and w
 be re-proposed: "loops do better" (only two games loop) and "more explicit does better" (+0.18 once
 game size is held constant).
 
-**R1 is deliberately not a gate, and the numbers say why.** *The bench* is a plain noun and clear in
-context; *Sit with it* is a plain phrase and is not. No rule separates them mechanically. Measured,
-the noun-only share of room-list buttons is:
-
-```
-last_call 0%  ·  late_shifts 0%  ·  the_allowance 0%
-vesper 24%  ·  back_home 32%  ·  the_inheritance 38%
-seventh_day 84%  ·  forty_miles 87%  ·  steam 92%
-```
-
-**Three shipped games sit at 0%, so the target is reachable** — but any threshold in the gap between
-38% and 84% would be invented, and this skill has demoted two rules for exactly that. The lint prints
-the percentage and names the offending labels. Read it; it stays a human sign-off — read the location
+**R1 is deliberately not a gate.** *The bench* is a plain noun and clear in context; *Sit with it*
+is a plain phrase and is not. No rule separates them mechanically, so any threshold on the
+noun-only share would be invented, and this skill has demoted two rules for exactly that. The lint
+prints the noun-only share of room-list buttons and names the offending labels. Read it; it stays a human sign-off — read the location
 page as a stranger would, before shipping.

@@ -258,8 +258,7 @@ objects in the TOML. **What survives the difference is the direction**, and one 
 outright: `forty_miles` writes arousal 52 times and reads it zero.
 
 **Why the scoreboard is quiet about this.** Gate `a meter is read` asks, per meter, whether it is
-read *at all* — so it correctly fails `forty_miles` (4/8) and `steam` (6/7), and it passes
-`the_season` 9/9 while that game's arousal sits at 6 reads against 24 writes. It finds **dead**
+read *at all* — it fails only a meter that is read zero times. It finds **dead**
 meters. It cannot see a **starved** one. `the-meters.md` W3 owns the gate; this is the note that
 the gate's silence is not a pass.
 
@@ -324,9 +323,9 @@ That is one of three shapes in the corpus, and the other two are more common:
 >   more difficult as it's a question of control."*
 
 **Declare which one an arc is before writing its first step**, because it decides who the
-refusals belong to. A3's counted refusal is hers in one direction and *his* in another —
-`night_desk` already ships refusals that are his, and until now nothing in this skill said that
-was a legitimate shape rather than a slip.
+refusals belong to. A3's counted refusal is hers in one direction and *his* in another — a
+refusal that is his is a legitimate shape, not a slip (the **theirs** line above: In Her Own Hands
+[K_LateShaun1A] opens on `$xr.sh.rel.at gte 10`, his number).
 
 ⚠️ **One template, stamped per person, is a normal way to build a cast.** In Her Own Hands stamps
 Bobby and Shaun from one template (chat, flirt, four talks, each with branches). They differ at the
