@@ -3,9 +3,9 @@
 playtest.py — the Player harness. Drives a BUILT game and reports numbers.
 
 `gates.py` reads the source. This reads the running game, which is the only place
-some defects exist at all: `forty_miles` 0.1 shipped 35 effects using `op = "subtract"`
-— an op the runtime does not implement — and the TOML, the validator, the build and
-every gate were green the whole way down. A live money diff was what found it.
+some defects exist at all: an effect written `op = "subtract"` — an op the runtime
+does not implement — passes the TOML, the validator, the build and every gate; only
+a live money diff finds it.
 
 Usage:
     python3 scripts/playtest.py <game-slug>          # the universal checks
@@ -20,9 +20,8 @@ Layer A is the library — the helpers below. Layer B is the universal checks in
 
 WHY THIS EXISTS AS SHARED CODE
 ──────────────────────────────
-Seven hand-written play-tests already live in `games/` (mrs_vance ×5, steam, forty_miles),
-each re-deriving the engine's call signatures from scratch. Run 2026-08-29, `steam`
-reported 2 failures and BOTH were the harness, not the game:
+A hand-written per-game play-test re-derives the engine's call signatures and gets
+them wrong. Two classic harness errors:
 
   · it called `applyTraitEffect` with one object; the engine takes seven positional
     args (v2.py:5883), so the call did nothing and money read 95 instead of 135
@@ -49,8 +48,8 @@ THE TWO RULES, ENFORCED HERE IN CODE
        EVERY location reports nobody present (v2.py:3422)
      · presence is asked of `setup.getNpcsPresentAtLocation`, never recomputed —
        a hand-rolled `start <= now <= end` drops every overnight window
-     · the built page is entity-encoded: 663 `&lt;&lt;set` against 3 literal ones,
-       so `html.unescape()` before matching macro syntax in page source
+     · the built page is entity-encoded, so `html.unescape()` before matching
+       macro syntax in page source
      · a walk-in naming `requires_npc` asks whether that NPC is where the PLAYER is
        (v2.py:5432) — leave `player.current_location` at its initial "" and every
        named walk-in returns null and you measure a world with nobody in it
@@ -247,12 +246,10 @@ def play(page, canvas, node="base", settle=250, tries=12):
 
     ⚠️ **`Engine.play` is a request, not a guarantee.** A Lane 3 dispatcher host
     substitutes another canvas on entry (`setup.checkAndSubstituteCanvas`), so the
-    screen you get is often not the screen you named. Measured on `mrs_vance`:
-    twelve entries to `act_wash_bay` at Monday 11:00 rendered `walkin_bay_isaac`
-    seven times, `walkin_bay_seen` three times, and the canvas actually requested
-    **twice**. A probe that assumes otherwise reads the wrong screen's choices and
-    reports the surface as broken — which is how three reds in this file's first
-    money probe turned out to be the probe.
+    screen you get is often not the screen you named: a dispatcher host can render a
+    substitute most of the time and the requested canvas rarely. A probe that
+    assumes otherwise reads the wrong screen's choices and reports the surface as
+    broken.
 
     So this retries until the requested passage is the one rendered. Returns True
     when it lands, the error string if `Engine.play` threw, or the last passage
@@ -371,14 +368,14 @@ def quest_cards(page):
       · `setup.pickQuestsCard(npcSlug)` — v2.py:15470 — returns the one card for
         that character.
 
-    `off_season` declares 14 cards, every one of them `npc_id`-bearing, so the
-    story scope alone reports an empty guidance page on a game that has a full one.
+    A game whose cards all carry `npc_id` shows an empty guidance page from the story
+    scope alone, on a game that has a full one.
 
     ⚠️ The per-character ids come from `setup.quests_cards[].npc_id`, which is exactly
     where the engine's own guidance page gets them (v2.py:15795). NOT from the keys of
     `State.variables.npcs`: in a `--use-db` build that map is keyed by UUID while the
     cards still say `npc_hank`, and the npc objects carry no id field to bridge it, so
-    a runtime-keyed loop reports 0 cards on `late_shifts`, which has 22.
+    a runtime-keyed loop reports 0 cards on a game that has them.
     """
     return page.evaluate(
         """() => { try {
@@ -442,7 +439,7 @@ def apply_flag(page, flag, op="set", target="player", npc_id=None):
     """Set a flag through the engine, so `flags_meta.set_day` gets written.
 
     POSITIONAL — `applyFlagEffect(targetType, npcId, flag, op)` (v2.py:6069).
-    Copied 2026-09-26 from `games/the_balance/process/walks.py`, which found the trap:
+    The trap:
     ⚠️ never poke `State.variables.flags.x = true` instead. Only the engine's own path
     writes `flags_meta`, and `days_since_flag` fails CLOSED when `set_day` is missing
     (v2.py:3979), so a hand-set flag makes every day-counting condition read false.
@@ -795,8 +792,8 @@ def universal(page, errors, game=None, rep=None):
                   f"({', '.join(c['id'] for c in dead[:3])}"
                   f"{' …' if len(dead) > 3 else ''})")
         # Sweep the clock. One hardcoded hour reads a night game as a dead world:
-        # `late_shifts` has 18 rollable ambients and `isCanvasValid` rejects every
-        # one of them at Mon 12:00 because the whole game is scheduled after dark.
+        # a night game's ambients are all rejected by `isCanvasValid` at noon
+        # because the whole game is scheduled after dark.
         rollable = sorted({c["location"] for c in rc if c.get("chance")})
         if rollable:
             fired, hours = set(), [2, 8, 12, 16, 20, 23]
@@ -822,8 +819,8 @@ def _resolve(arg, build_override=None):
     """slug -> games/<slug>/output/index.html + its source, or an explicit path.
 
     `--build` keeps the slug's TOML while pointing at a different artefact, which is
-    the normal case for anything mid-release: `games/mrs_vance/output/` is deliberately
-    not refreshed until ship, so it is played from a scratch build. Without the source
+    the normal case for anything mid-release: a game's output/ is often not refreshed
+    until ship, so it is played from a scratch build. Without the source
     the meter and canvas checks have nothing to compare against and silently drop out.
     """
     if arg.endswith(".html"):

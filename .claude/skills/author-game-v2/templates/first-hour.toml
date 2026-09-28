@@ -183,10 +183,9 @@ op         = "set"
 
 # ── the hub — separate canvas, gated on the flag above ───────────────────────
 #
-# ⚠️ F8 — ONE FLAG PER CHARACTER. A single `doors_open` / `arrival_done` that
-#    opens four people's hubs is the cold-spawn hub wearing a coat. One flag may
-#    open the same character's talk hub
-#    AND their sex hub; it may never open a second character's door.
+# ⚠️ F8 — THE FLAG BELONGS TO A SCENE THAT MEETS THEM. A `doors_open` set by a
+#    scene that names nobody is the cold-spawn hub wearing a coat. A group scene
+#    that names three people may set one flag for all three (LO decided).
 #
 # ⚠️ F5b — `npc` GOES INSIDE `[canvases.trigger]`, AND IT IS NOT `requires_npc`.
 #    This block used to be COMMENTED OUT, which made `requires_npc` — live in the

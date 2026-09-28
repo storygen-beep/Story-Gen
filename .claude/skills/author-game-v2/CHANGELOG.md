@@ -5,6 +5,100 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — Two settings re-derived from the field: explicit in repeatable 40%, group and opening meetings count
+
+**Why.** Two scoreboard settings were calibrated only on our own games (LO: re-derive each from field
+data, show old vs new; `round5/SETTINGS_REDERIVE_PLAN.md`).
+
+**What changed.**
+- **`EXPLICIT_IN_REPEATABLE` 50 → 40** (`scripts/gates.py`). Hand-traced 30 random explicit passages
+  per passing game to whether they can play again: Shady Deals 93%, Course of Temptation 76%, Cupid's
+  Way 50%, In Her Own Hands 40% (roughly ±17 points each at n = 30). The floor is the lowest passing
+  game (LO). The comment carries the sample and the margin; the Vesper line is gone.
+- **G34b `every hub is met first`: bar stays 100%, the rule changes (LO, option A).** A group scene that
+  names several people and sets one flag meets them all, and a character named in the forced opening
+  — bound to the starting canvas or a capstone the funnel walks into, or speaking on its first screen —
+  is met even with an ungated hub. A flag set by a scene that names nobody still meets nobody. New
+  `_fh_opening_cast`; `_funnel_walk` takes an optional list of the canvases it walks (no behaviour
+  change otherwise). The comment says three of the four passing games meet their cast first in spirit
+  and Course of Temptation does it differently, so the rule is a choice backed by field evidence.
+- **F8 rewritten to match:** "The flag belongs to a scene that meets them", marked LO decided, in
+  `references/the-first-hour.md` (heading, index, the several-people note, the gate row, the checklist),
+  `SKILL.md`'s gate row and `templates/first-hour.toml`'s comment. The last G34b detail line no longer
+  demands "one flag per character".
+- **New `tests/test_gates_g34b.py` (6):** group meeting met; a flag from a scene naming nobody meets
+  nobody; a group flag does not meet someone the scene leaves out; a line on the forced opening meets
+  them; a line on a branch of the opening does not; an ungated hub for someone the opening never names
+  stays cold. The two new-rule tests fail against the previous `gates.py` and pass now.
+
+**Effect on our three games (testing, not doctrine).** No gate changes status. the_balance G34b 1/8 →
+2/8 (its opening names Gil; still FAIL); orientation 5/5 and vesper_two 7/7 unchanged; explicit in
+repeatable unchanged in verdict on all three.
+
+**Verified.** pytest 154 passed · `--selfcheck` exit 0 · cite_check 78 · every one of 52 gates keeps
+its status on the_balance, orientation and vesper_two against the pre-sweep baseline · `git status
+games/` unchanged.
+
+words: 132,620 → 132,765 (+145) · running total 132,765 / 149,283
+
+---
+
+## 2026-09-28 — Scripts sweep, batch B: comments no longer learn from our games
+
+**Why.** Second half of the scripts sweep (LO): code comments and unprinted docstrings still told our
+games' stories and carried their numbers.
+
+**What changed.**
+- `scripts/gates.py`: every comment row in `round5/SCRIPTS_SWEEP_PLAN.md` except two, plus about 25
+  unnamed story comments the plan missed. Engine and instrument facts kept with their code cites; our
+  names, numbers and stories dropped; example ids are placeholders (`npc_jo`, `hub_x`, `rung_x.base`).
+- `pitch_pack.py` (9 rows), `playtest.py` (6), `readable.py` (3; the module doc no longer points into
+  one of our games).
+- **LO decided, reasons from our games cut:** `FEW_CASES = 5` ("the smallest sample on which 1 of 1 or
+  100% of 1 cannot pass") and the joints floor `FIELD_BUT_P10` (the model-beats reason stays).
+- **Word lists unchanged** (`_FALSE_FRIENDS`, `_HALF_HOUR`, `CURRENCY_HINT`, `PAST_CLAIM_RE`); only
+  their provenance comments lost our games (LO: language facts).
+- **Our role labels replaced** in the printed role-label hint, `the-first-hour.md`'s label test and
+  `templates/board.toml`: `the eight o'clock` / `owns the house` / `runs the pledge house` are now
+  `the nine-thirty` / `pays the rent` / `runs the corner bar`.
+- **Left for the next item (LO):** the comments on `EXPLICIT_IN_REPEATABLE = 50.0` and the G34b 100%
+  bar keep their provenance until they are re-derived from field data.
+
+**Verified.** Code unchanged: each file's AST, docstrings stripped, equals the after-batch-A snapshot.
+Scoreboard text and JSON byte-identical to after batch A; against the pre-sweep baseline every one of
+52 gates keeps the same result on the_balance, orientation and vesper_two · pytest 148 passed ·
+`--selfcheck` exit 0 · `git status games/` unchanged.
+
+words: 132,621 → 132,620 (−1) · running total 132,620 / 149,283
+
+---
+
+## 2026-09-28 — Scripts sweep, batch A: printed messages no longer name our games
+
+**Why.** The doc sweep left our games in what the scripts print: gate details, lint footers, hints and
+module docstrings ("vesper door 22", "two of our own games", "Shutter up at eight"). LO's order for the
+scripts: printed messages first, then comments (`round5/SCRIPTS_SWEEP_PLAN.md`).
+
+**What changed.**
+- `scripts/gates.py`: 40 printed strings reworded — the module docstring, 13 gate-detail and lint
+  lines, the `--release` and `--selfcheck` notes, and 23 lint footers. Engine and instrument facts
+  kept; our names, numbers and stories dropped; field figures kept where a line compared them with
+  ours. The clock lint's example ("Shutter up at eight") is now a generic "Doors open at nine", and
+  `references/the-clock.md`'s cheat-sheet line matches it.
+- `gates.py` loop-id pattern: `cell_use` (one of our games' canvas prefixes) removed (LO).
+- `scripts/pitch_pack.py` usage: `--person <npc_id>`. `scripts/playtest.py`: three docstring passages.
+- Test fixtures keep their names (verification, not learning; LO).
+
+**Verified against a baseline taken before any edit.** Every gate keeps the same pass / fail / parked /
+too-few / n/a value on the_balance, orientation and vesper_two (JSON compared gate by gate); tallies
+identical (29/47, 46/50, 44/48); only reworded lines differ in the text output; `cell_use` changed no
+line on the three games · pytest 148 passed · `--selfcheck` exit 0, "the index is current" ·
+`py_compile` clean · `git status games/` unchanged.
+
+words: 132,622 → 132,621 (-1) · running total 132,621 / 149,283
+
+---
+
 ## 2026-09-28 — Our-games sweep, batch 3 (finish): craft rules kept only where code depends on them; new examples
 
 **Why.** LO's last calls on batch 3: a craft rule whose only evidence was our game is cut, unless a gate,

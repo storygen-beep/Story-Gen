@@ -336,7 +336,7 @@ to one?"*); excluding `one` leaves **0**.
 - **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:5569`),
   and there is no `@time` token to print the clock either (`v2.py:14027`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
-- **Turn the reading into a rule.** *"Shutter up at eight"* → *"The shutter goes up at eight."*
+- **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*
   Same fact, no claim about now.
 - **Exempt:** world rules and shift patterns · backward canon · in-scene relative time · forward
   consequences. Most of what looks like a violation is one of these.
