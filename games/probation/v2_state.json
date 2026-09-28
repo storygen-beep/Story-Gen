@@ -1,0 +1,778 @@
+{
+  "slug": "probation",
+  "phase": "board",
+  "narration_person": "second",
+  "protagonist": "Cass Ridley",
+  "title_note": "OPEN \u2014 the title is immutable after release 0.1 ships (the-returning-player.md). `Probation` is the working title and is the one word that says what the game is; `gates.py --words` reports it in 0 of 27 field games, which is a supply artifact of a fantasy-heavy corpus rather than a verdict. LO's call before 0.1.",
+  "want": {
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "definition_note": "DECLARED, not defaulted. Field runs 19 blank / 10 written and blank holds 80.4% of top-30 engagement, so `written` is the minority answer and carries its reason: the hold is a criminal record, the record is read aloud to her in the first scene, and a blank slate would have to keep it vague \u2014 the one thing this premise cannot afford.",
+      "start_choice": {
+        "asked_at": "canvas_intake.the_file \u2014 the first Delgado meeting, where he already has the folder open. Exact node id assigned in the first-hour funnel (the-first-hour.md).",
+        "flags": [
+          "past_wheel",
+          "past_paper",
+          "past_hands"
+        ],
+        "buys": {
+          "past_wheel": "she can drive \u2014 Marty's van on deliveries, the only legitimate way to touch the edge of the zone in week one",
+          "past_paper": "she can keep books \u2014 Marty's ledger by week three, and the hours sheet becomes a document she knows how to alter",
+          "past_hands": "nobody in the block leans on her twice \u2014 opens the refusal side, rungs where she is the one who is not afraid"
+        },
+        "read_at": "5 sites each: the three daily work surfaces at Marty's, plus a paired privilege rung on two of them. ADDITIVE ONLY \u2014 each original rung keeps its numbers and gains `<flag> is_false`.",
+        "placement_trap": "Adjacent [group] blocks merge into ONE if/elseif chain and first match wins (v2.py:14637). Separate each past-band from the surface's existing ladder with a non-`group` block or that ladder goes silently unreachable."
+      }
+    },
+    "who_she_is": "Cass Ridley, 24. Eighteen months of it belonging to somebody else, four weeks served. A rented room over a laundry on the east side, a monitor on her left ankle, and a job at a hardware and pawn shop because the shop is one of two places in the zone that will sign an hours sheet. What she has to lose: the fourteen months she is not doing \u2014 a violation is custody, and the game says so in plain words on the first screen.",
+    "obligation": "Delgado, Tuesdays at two, at the county office, with the sheet due Friday and her signature under his. And a second enforcer that is not a person: the box \u2014 a radius drawn around her room, home by eight, and a battery that holds eighteen hours.",
+    "hold_kind": "order",
+    "hold_collector": "npc_delgado",
+    "collector_note": "\u00a74a \u2014 he holds the obligation and is NOT the pipe the porn comes down. Field collectors carry 0.4-3.8% of a game's explicit passages and are never the top figure. Delgado has ONE surface, at `vouch 60`, and arrives late. The lint `the collector is also the target` reads this.",
+    "appetite": "To be in a room nobody can place her in, and to be wanted while she is in it. It cannot be finished for a structural reason rather than a poetic one: every room she gets into becomes a room she is known in. The box logs a point every sixty seconds, Marty knows her hours, Rae knows when she comes down the stairs, and Delgado has all of it on one page every Tuesday. The appetite renews out of its own successes. WHERE THE HOLD STOPS BEING THE REASON: the week the box comes off, nobody is owed anything by anyone, and at 19:45 she walks the same route to the same back room.",
+    "ascent": "BOTTOM: six streets \u2014 her room, the laundry under it, Marty's shop, the county office, the lot behind the shop, the bus stop where the line runs. Home by eight, and every door she walks through is a row in a log somebody else reads on Tuesday. TOP: the far side of the river after midnight, in rooms that are not in any zone, with people who sign her sheet without reading it, and the box on the desk at home saying she is asleep.",
+    "charge": "reversal (primary) + transformation (late, secondary) \u2014 every adult in her life holds a signature over her, and the ascent is her collecting those signatures one at a time; each one collected is a person who now has something to lose. The transformation is \u00a72's last line stated as a moment.",
+    "why_this_person": {
+      "npc_marty": "50s, owns the shop, wife works nights. The first person since the sentence who treats her as an employee instead of a case number \u2014 and she can feel exactly what it costs him to keep doing it. Being wanted by him is being wanted by the one man who has read the file and hires her anyway.",
+      "npc_tobin": "26, services the boxes out of the county office, bored out of his skull. He holds the only thing she actually wants and treats it as nothing. The cheapest transaction in the game, and she knows it while it is happening.",
+      "npc_rae": "Runs the laundry, owns the building, up at four. The only person who has never once asked what Cass did \u2014 and therefore the only person whose good opinion Cass could still lose.",
+      "npc_delgado": "The officer. Knows every true thing about her and is scrupulously correct about all of it, which is what makes any slip the loudest event in the game."
+    },
+    "crude_ceiling": {
+      "npc_marty": [
+        "t1: tits \u00b7 ass \u00b7 hard \u00b7 his cock through his work trousers",
+        "t2: cock \u00b7 cunt \u00b7 wet \u00b7 suck \u00b7 fuck",
+        "t3: full \u2014 cunt, cock, cum, throat, fuck, come in her"
+      ],
+      "npc_tobin": [
+        "t1: tits \u00b7 dick \u00b7 hard \u00b7 his hand on her ankle",
+        "t2: cock \u00b7 cunt \u00b7 fingers in her \u00b7 fuck",
+        "t3: full \u2014 cum, throat, ass"
+      ],
+      "npc_rae": [
+        "t1: tits \u00b7 ass \u00b7 wet \u00b7 what Rae calls her when nobody is in the laundry",
+        "t2: cunt \u00b7 fingers in her \u00b7 mouth on her",
+        "t3: full \u2014 cunt, cum, fuck"
+      ],
+      "npc_delgado": [
+        "t1: nothing \u2014 the whole point of him is that he does not",
+        "t2: nothing",
+        "t3: one surface only, at `vouch 60`: cock, cunt, cum"
+      ]
+    },
+    "crude_lives_on": [
+      "the back room at Marty's, 19:45-20:30, while the box is under 15%",
+      "the laundry after two, with the machines running",
+      "the lot behind the shop",
+      "Tobin's bench at the county office, Tuesdays, before the two o'clock"
+    ],
+    "last_read_at_release": "0.1-want"
+  },
+  "board_intent": {
+    "note": "NOT the board. These are the \u00a73 declarations the Want fixed, carried forward so the board phase checks itself against them rather than re-deriving. the-systems.md is read FIRST in that phase.",
+    "who_climbs": "player",
+    "ascent_tiers": [
+      "radius",
+      "hours",
+      "vouch"
+    ],
+    "counterweight": "clean \u2014 the fourteen months. A brake, never the dominant meter; the world does not contract as it falls, it only gets louder about the price. At zero: the hearing, a terminal state shipped on purpose.",
+    "rung_note": "RUNGS DELIBERATELY DO NOT START AT 15. All 16 declared tiers across five v2 games sit at exactly 15 because templates/board.toml shipped that table. Field runs 8-17 rungs starting near 5. radius 5/12/20/30/45/60/80 \u00b7 hours 5/15/25/40/55/70/85 \u00b7 vouch 5/15/30/45/60/80.",
+    "map_archetype": "nested_zones \u2014 chosen over map_hotspots, which the radius argues for: hotspots wants 10+ drawn districts and this game opens with six streets, so it would ship a map that is mostly locked pictures. The radius is expressed as the GATE on the zone, not as a drawing. Re-check against the-map.md R0.",
+    "needs": [
+      "sleep",
+      "food",
+      "wash",
+      "battery"
+    ],
+    "economy_note": "hold_kind = order, so want.economy's obligation/obligation_amount/week_income are deliberately ABSENT and gate 24 reports n/a \u2014 which the-want.md \u00a71b calls a choice, not an omission. Money still has to gate something (gate 16) and what it buys still has to open a door (R1b); that is the board phase's problem, not the hold's.",
+    "release_41": "Asked of `hours`: a night band on a room that already exists. The laundry at 02:00 is not the laundry. Eleven locations x the hours ladder is the content schedule, and it needs no new ground.",
+    "battery_need": "THE PREMISE AS A METER. The box holds 18 hours; the dock is 90 minutes and it is in her room. Under 20% she cannot leave the zone at all; under 5% the alarm goes to Delgado's desk. This is why 19:45 in somebody else's back room is a scene and not a decision. \u26a0\ufe0f The trait was called `charge` until 2026-09-05; renamed because in a sidebar row beside food/rest/wash it read as HER battery. She is a human woman with a court order. The sidebar label is `The box`."
+  },
+  "releases": [],
+  "promises": [],
+  "decisions": [
+    {
+      "at": "0.1-want",
+      "note": "hold_kind = order, not bill. Both live v2 games and all eight retired ones are `bill`; the field runs bill 4 of 23, fourth by frequency (~/Documents/Female_Hold_Study_20260904/). The hold is the box and the signature, and nobody in the game wants money from her."
+    },
+    {
+      "at": "0.1-want",
+      "note": "Rungs start near 5, not 15 \u2014 breaking templates/board.toml's example table, which all 16 prior declared tiers copied verbatim."
+    },
+    {
+      "at": "0.1-want",
+      "note": "gates.py --words run on the WANT before any prose. Four player-facing fixes: `cheques`->`checks` (the British-dialect failure the lint exists for), `laundromat`->`laundry` (0 of 27 field games; `laundry` is on the field's own label list), and `curfew`/`supervised release`/`technician` demoted to ledger keys with plain wording in her face. Remainder of the list is author-facing doctrine vocabulary."
+    },
+    {
+      "at": "0.1-board",
+      "note": "who_climbs = player (LADDER). All five prior v2 games sat at 19-29%, inside a band no shipped game occupies, because W1's fork was never asked. The cast runs light on ONE word, `trust`, on all four."
+    },
+    {
+      "at": "0.1-board",
+      "note": "`charge` (renamed `battery` 2026-09-05) is the SPENT shape, not decay. Verified: player_trait_decay fires only inside advanceDay() (v2.py:5733/:5826), so an 18-hour battery cannot be a daily decay. It is priced with `costs` on every time-advancing choice outside her room, and the engine filters the choice when she cannot pay (v2.py:4902)."
+    },
+    {
+      "at": "0.1-board",
+      "note": "The wardrobe is `worn_type neq covers_ankle` \u2014 does the box show. One derived read the whole world tests, which is DoL's $exposed shape (~900 reads, 82% colour). Our repo reads worn_exposure 3 times across 26 games."
+    },
+    {
+      "at": "0.1-board",
+      "note": "Money buys a DOCK, on a level ladder with COMPOUND gates (money AND trust, money AND vouch AND ankle). R1b: money alone never buys the next tier in the field, and what it buys is read forever after."
+    },
+    {
+      "at": "0.1-board",
+      "note": "r1_signoff left explicitly NOT SIGNED. The map has not been walked by anyone but its author, and the file is clear that a self-signed map is how a seven-rooms-of-a-house world shipped at 26/26."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "Opening is a STAGED open with cast load ONE \u2014 Delgado enters, is described, speaks, states what he wants, and nobody else is named. F1 is a consistency rule (cast load vs word budget), not a word count; our measured failure named six people, two not in the game."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "Creation screen: 2 fields (name, look), each read 4+ times. W3 sets no threshold deliberately. player_description is written \u2014 it is the only text we own on that engine screen (v2.py:9509)."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "Delgado's Thursday summons is a CANVAS gated on `clean < 40`, not a conditional schedule row. His 14:00-16:00 Thu row always exists. Nothing in this design assumes the engine can gate a schedule."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "Tobin's late diner window is authored as TWO rows ([4,5] 23:00-23:59 and [5,6] 00:00-01:00) because a day-specific overnight window deletes the character at midnight (v2.py:3596-3597). Rae's 22:00-04:00 is ONE row because it covers all seven weekdays."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "Wrote scratchpad/check_schedules.py \u2014 reads across all four person sheets for double-booking and for a rung whose hour no schedule covers. S5's incident as an instrument; the format could not see it. Result CLEAN: 4 people, 10 rows, 15 rungs including the opening funnel. NOT part of the skill; promoting it is LO's call."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "LO rejected the map at review: her_room and the_laundry were separate leaves off bowen_street and are physically one building. Added `the_stairwell` as a real location (NOT is_container \u2014 it swallows canvases and auto-enters default_entry, removing the very choice it exists to give). Both now hang off it. It answers R2 via a new Rae row at 04:00-05:00, filling the gap between her laundry night and her diner hour. 11 locations, 51,500 words, anchor 27.2%, heat 7/11 = 63.6%. The r1 sign-off found this, which is what it is for."
+    },
+    {
+      "at": "0.1-board",
+      "note": "Naming drift caught by LO 2026-09-05: the economy's sources line said shifts were 'energy-priced' while the declared need key is `rest`. There is no `energy` meter in this game. Renamed the prose; the key was always `rest`. `charge` (renamed `battery` 2026-09-05) is the ankle monitor's battery and is a SEPARATE meter from her tiredness \u2014 the two pull in opposite directions on purpose, and both are refilled in the same room."
+    },
+    {
+      "at": "0.1-board",
+      "note": "LO read the sidebar as a player and asked whether the lead is a humanoid. The trait `charge` is RENAMED `battery`. Cause named: the only other game in this repo with a `Charge up` / `Power down` body is vesper, whose lead IS company-owned property (the-meters.md M8), and that vocabulary was carried into a game about a human on a court order. Worse than a stray word because of placement \u2014 in a sidebar row beside food/rest/wash, a fourth bar reads as her body. Sidebar now renders it as `The box` with word bands, so it names the DEVICE. 25 sites across 6 files; free today, frozen after 0.1 because a trait key is a save join-key. `want.charge` is UNTOUCHED \u2014 that is the dramatic charge (reversal/taboo/transformation), a different word."
+    }
+  ],
+  "board": {
+    "_note": "Laid down 2026-09-04 in the board phase. the-systems.md read FIRST, then the-board.md, the-map.md, the-meters.md, the-economy.md. Engine facts leaned on here are cited file:line in `engine_verified` below.",
+    "systems": [
+      {
+        "id": "battery",
+        "kind": "sourced",
+        "key": "battery",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "has_dock",
+          "home_base"
+        ],
+        "read_by": "Every choice that leaves the zone or runs past eight is PRICED in it (`costs`, so the engine filters the choice when she cannot pay). Under 20 the bridge and the stop stop offering their exits; under 15 the back room at Marty's is the only outlet she can reach before the alarm. This is the premise as a meter \u2014 and it belongs to the DEVICE, not to her body.",
+        "shape": "SPENT, not decayed \u2014 `trait_decay` fires only in advanceDay() (v2.py:5733), so an 18-hour battery cannot be a daily decay. M10's second shape."
+      },
+      {
+        "id": "box_shows",
+        "kind": "sourced",
+        "key": "worn_type:covers_ankle",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "she_can_undress",
+          "public",
+          "private"
+        ],
+        "read_by": "The ordinary prose of every public room is written TWICE \u2014 one version with the box under the hem, one without. Not a gate: DoL runs the same shape at ~900 reads, 82% of them colour only. Our whole repo reads worn_exposure three times (SY2b).",
+        "shape": "DERIVED, never stored. `worn_type` eq/neq over the type strings of every equipped item (v2.py:4294, setup.getWornTypes v2.py:1700). Garments that cover the ankle carry type = \"covers_ankle\"."
+      },
+      {
+        "id": "sheet",
+        "kind": "sourced",
+        "key": "sheet",
+        "fed_at": [
+          "martys"
+        ],
+        "labels": [
+          "private"
+        ],
+        "read_by": "The Tuesday check-in reads it, Marty's own rungs read it, and it is the thing `clean` falls on when Delgado reads a line twice. 0 blank / 1 honest / 2 padded / 3 forged.",
+        "shape": "A trait 0-3, written only in Marty's back office, read at the county office and on every vouch rung."
+      },
+      {
+        "id": "ankle",
+        "kind": "sourced",
+        "key": "ankle",
+        "fed_at": [
+          "the_county_office"
+        ],
+        "labels": [
+          "in_zone",
+          "over_line"
+        ],
+        "read_by": "Every radius rung above 45, whether crossing the bridge costs `clean` at all, and what the log says on Tuesday. 0 sealed / 1 loose / 2 off.",
+        "shape": "Fed at exactly one bench, by exactly one person. Tobin IS this system."
+      },
+      {
+        "id": "time",
+        "kind": "ambient",
+        "key": "clock",
+        "fed_at": [],
+        "labels": [
+          "open_all_night"
+        ],
+        "read_by": "Schedules, the eight o'clock line, and the hours tier."
+      },
+      {
+        "id": "money",
+        "kind": "ambient",
+        "key": "money",
+        "fed_at": [
+          "martys",
+          "the_laundry"
+        ],
+        "labels": [],
+        "read_by": "The dock ladder, the wardrobe on the pawn side, food, fare, and what Tobin takes."
+      },
+      {
+        "id": "sleep",
+        "kind": "ambient",
+        "key": "rest",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "home_base"
+        ],
+        "read_by": "Evening shifts and the night surfaces."
+      },
+      {
+        "id": "food",
+        "kind": "ambient",
+        "key": "food",
+        "fed_at": [
+          "the_diner",
+          "martys"
+        ],
+        "labels": [
+          "sells_food"
+        ],
+        "read_by": "The work surfaces at Marty's."
+      },
+      {
+        "id": "wash",
+        "kind": "ambient",
+        "key": "wash",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "has_shower"
+        ],
+        "read_by": "The county office \u2014 and missing Tuesday is a violation, so this one is not cosmetic."
+      }
+    ],
+    "who_climbs": "player",
+    "_who_climbs_note": "LADDER game. Field splits 8 roster / 9 ladder with nothing between 15% and 65%; all five prior v2 games sat at 19-29% because nobody asked. Declared `player`: her three tiers do the gating, the cast runs LIGHT \u2014 one word, `trust`, on all four, same scale, per W6 (nine of thirteen field games give every person exactly one meter and it is the same word every time). Gate 34 wants >=60% of meter-gating on her tiers.",
+    "ascent_tiers": [
+      "radius",
+      "hours",
+      "vouch"
+    ],
+    "ceilings": {
+      "radius": 100,
+      "hours": 100,
+      "vouch": 100
+    },
+    "rungs": {
+      "radius": [
+        5,
+        12,
+        20,
+        30,
+        45,
+        60,
+        80
+      ],
+      "hours": [
+        5,
+        15,
+        25,
+        40,
+        55,
+        70,
+        85
+      ],
+      "vouch": [
+        5,
+        15,
+        30,
+        45,
+        60,
+        80
+      ],
+      "_note": "7/7/6 rungs, lowest at 5. W4: the field runs 8-17 rungs with the lowest at a median of 5; all 16 declared tiers across five v2 games sat at exactly 15 because templates/board.toml shipped that table."
+    },
+    "counterweight": {
+      "key": "clean",
+      "starts": 100,
+      "shuts": "under 40 Delgado adds a Thursday check-in, which costs a whole evening slot; under 20 the county office row is daily and every `hours` surface above 40 is unavailable on those nights; at 0 the hearing, a terminal state shipped on purpose.",
+      "_note": "W5: one game in 25 has a counterweight that gates anything, and four of our five shipped one that gates almost nothing (count 0 reads, standing 2, grace 5). These three gates are written before the prose so it cannot happen again."
+    },
+    "throttle": {
+      "key": "arousal",
+      "gates": "the act menu on the two node-routed loops (martys_back, the_laundry after two) and nothing else",
+      "_note": "W2: our five games raised arousal 232 times and read it 4. It is the genre's #1 or #2 most-gated meter in 13 of 27 field games. Build the loop and the throttle has a job."
+    },
+    "cast_meter": {
+      "word": "trust",
+      "scale": "0-100",
+      "rungs_per_person": "3 for Rae, Tobin and Delgado; 6 for Marty (the one arc that carries the game)",
+      "_note": "W6: field median is 3 rungs per person (p25 2, p75 6) and 88% of threshold values are shared by two or more people. Reserve the rich model for one or two arcs."
+    },
+    "needs": [
+      {
+        "key": "battery",
+        "falls": "SPENT \u2014 6 per hour away from the dock, charged as `costs` on every choice that advances time outside her room",
+        "fills": "her_room \u00b7 dock the box \u00b7 90 min",
+        "costs": "nothing, but the 90 minutes are the price",
+        "shuts": "under 20 the zone exits are filtered out by the engine (checkCostsAffordable, v2.py:4902); under 5 the alarm goes to Delgado's desk and `clean` falls 15"
+      },
+      {
+        "key": "rest",
+        "falls": "20 a day",
+        "fills": "her_room \u00b7 sleep \u00b7 to 06:00",
+        "costs": "nothing",
+        "shuts": "under 25 she will not take an evening shift and the Tuesday check-in is missable"
+      },
+      {
+        "key": "food",
+        "falls": "25 a day, faster on work days",
+        "fills": "the_diner \u00b7 eat \u00b7 30 min \u00b7 $6 \u2014 or martys \u00b7 the back shelf \u00b7 free once a day",
+        "costs": "$6 at the diner",
+        "shuts": "under 30 no work surface at Marty's renders"
+      },
+      {
+        "key": "wash",
+        "falls": "15 a day",
+        "fills": "her_room \u00b7 shower \u00b7 20 min",
+        "costs": "nothing",
+        "shuts": "under 40 she will not go to the county office, and missing Tuesday is a violation"
+      }
+    ],
+    "locations": [
+      {
+        "id": "bowen_street",
+        "job": "The ground. Everything hangs off it, and it is where the world puts a stranger in front of her without her travelling.",
+        "anchor": false,
+        "fill": 3500,
+        "labels": [
+          "public",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "_note": "EXTERIOR ROOT \u2014 no entry_from. R3: the world contains the home, never the reverse. Serves none of the three on purpose; it is the ground, and its fill is traversal ambients."
+      },
+      {
+        "id": "the_stairwell",
+        "job": "The ground floor of her building. One street door, and inside it the stairs go up and the laundry is through the other. Everyone who uses the machines at three in the morning passes her stairs.",
+        "anchor": false,
+        "fill": 3500,
+        "labels": [
+          "public",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_rae"
+          ]
+        },
+        "_note": "LO's call, board review 2026-09-04. her_room and the_laundry were two leaves off the street and are physically one building. NOT is_container \u2014 a container swallows any canvas attached to it (template_import.py:153) and auto-enters default_entry, which removes the choice this room exists to give."
+      },
+      {
+        "id": "her_room",
+        "job": "Where the dock is, where the wardrobe is, and the only room in the game that is hers.",
+        "anchor": false,
+        "fill": 5000,
+        "labels": [
+          "private",
+          "home_base",
+          "has_dock",
+          "has_shower",
+          "she_can_undress",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [
+            "rest",
+            "wash",
+            "battery"
+          ],
+          "work": [],
+          "people": []
+        },
+        "_entry": "the_stairwell"
+      },
+      {
+        "id": "the_laundry",
+        "job": "Open all night, directly under her floor, and Rae pays cash to have somebody in it after two. The renewable stranger source.",
+        "anchor": false,
+        "fill": 7000,
+        "labels": [
+          "public",
+          "open_all_night",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "the night sit"
+          ],
+          "people": [
+            "npc_rae"
+          ]
+        },
+        "_entry": "the_stairwell"
+      },
+      {
+        "id": "martys",
+        "job": "THE ANCHOR. Three work surfaces, the sheet, and Marty. Where her hours come from and where they get written down.",
+        "anchor": true,
+        "fill": 14000,
+        "labels": [
+          "public",
+          "sells_food",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [
+            "food"
+          ],
+          "work": [
+            "the counter",
+            "the books",
+            "the van"
+          ],
+          "people": [
+            "npc_marty"
+          ]
+        }
+      },
+      {
+        "id": "martys_back",
+        "job": "The room with the outlet. Private, and the only place inside the zone where nobody can see the door.",
+        "anchor": false,
+        "fill": 5000,
+        "labels": [
+          "private",
+          "she_can_undress",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [
+            "battery"
+          ],
+          "work": [],
+          "people": [
+            "npc_marty"
+          ]
+        }
+      },
+      {
+        "id": "the_county_office",
+        "job": "Where the log is read out loud. Delgado on Tuesdays, Tobin's bench on the way in.",
+        "anchor": false,
+        "fill": 4500,
+        "labels": [
+          "public",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_delgado",
+            "npc_tobin"
+          ]
+        }
+      },
+      {
+        "id": "the_diner",
+        "job": "The only lit thing on this side after midnight. Food, and a counter seat that different people occupy.",
+        "anchor": false,
+        "fill": 4000,
+        "labels": [
+          "public",
+          "sells_food",
+          "open_all_night",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [
+            "food"
+          ],
+          "work": [],
+          "people": [
+            "npc_rae",
+            "npc_tobin"
+          ]
+        },
+        "_note": "The counter seat is the ROTATING SLOT (the-board.md \u00a72) \u2014 room-scoped content names the occupant by role, never by name, so a rotation costs one [[npcs]] block."
+      },
+      {
+        "id": "the_stop",
+        "job": "The last address the box is comfortable with. A corridor, declared as one.",
+        "anchor": false,
+        "fill": 2000,
+        "labels": [
+          "public",
+          "in_zone"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_bridge",
+        "job": "The line is painted down the middle of it. Standing on it is legal; the next step is not.",
+        "anchor": false,
+        "fill": 2000,
+        "labels": [
+          "public",
+          "in_zone",
+          "over_line"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        }
+      },
+      {
+        "id": "the_far_side",
+        "job": "THE DOOR THIS RELEASE ENDS ON. Visible from the bridge, entry-blocked, and what 0.2 fills.",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "public",
+          "over_line"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "_note": "SECOND ROOT (no entry_from), reached by the bridge travel canvas. entry_conditions radius gte 45 + blocked_message. Declared thin ON PURPOSE \u2014 it is the promise, not the content."
+      }
+    ],
+    "fill_plan": {
+      "v01_total": 51500,
+      "locations": 11,
+      "mean": 4682,
+      "median": 4000,
+      "anchor_share_v01": "14000 / 51500 = 27.2%",
+      "finished_total_plan": 95000,
+      "anchor_at_finished": "25000 = 26.3%",
+      "_note": "Re-budgeted 2026-09-04 when the_stairwell was added. Round numbers, declared before the prose. Gate 1's backstop is MEDIAN 3000 / MEAN 4500 and a v0.1 built from a signed design shipped 4,590 words and failed for being seven times too small."
+    },
+    "heat_plan": {
+      "locations_with_heat": [
+        "martys",
+        "martys_back",
+        "the_laundry",
+        "her_room",
+        "the_diner",
+        "the_county_office",
+        "the_stairwell"
+      ],
+      "share": "7 of 11 = 63.6%",
+      "_note": "Floor is 60% carrying heat. The stairwell's is a walk-in \u2014 the shape the field builds and the reason it is not a dead corridor."
+    },
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "A street on the east side of a river. One door on it opens on a stairwell with the laundry through it and her room at the top of the stairs; the shop and the county office are further along; the street runs down to the bus stop and then to the bridge, and the far side of the bridge is a second ground she cannot reach yet.",
+      "home_base": "her_room",
+      "exterior": "bowen_street",
+      "second_root": "the_far_side",
+      "homes": {
+        "npc_rae": "the_laundry",
+        "npc_marty": "offscreen",
+        "npc_tobin": "offscreen",
+        "npc_delgado": "offscreen"
+      },
+      "_homes_note": "Rae sleeps in the back flat behind the machines \u2014 same location, declared. The other three live across town and are never there; `offscreen` is the declaration, not an omission (R2).",
+      "bridges": [
+        {
+          "from": "bowen_street",
+          "to": "the_stop",
+          "costs": {
+            "time": 5
+          }
+        },
+        {
+          "from": "the_stop",
+          "to": "the_bridge",
+          "costs": {
+            "time": 10
+          }
+        },
+        {
+          "from": "the_bridge",
+          "to": "the_far_side",
+          "costs": {
+            "time": 5
+          },
+          "gated": "radius gte 45"
+        }
+      ],
+      "r1_signoff": "PARTIAL \u2014 LO walked it 2026-09-04 and rejected the topology: her_room and the_laundry were two leaves off the street and are one building. Fixed by the_stairwell. NOT yet signed as a whole."
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "_hold_note": "hold_kind = order, so `obligation` / `obligation_amount` / `week_income` are deliberately ABSENT and gate 24 reports n/a. Nobody in this game wants money from her. Money still has to gate content (gate 16) and what it buys still has to open a door (R1b).",
+      "the_thing_money_buys": {
+        "id": "the second dock",
+        "shape": "level ladder (R1b shape 1)",
+        "rungs": [
+          {
+            "tier": 1,
+            "where": "her_room",
+            "price": 0,
+            "note": "issued with the box"
+          },
+          {
+            "tier": 2,
+            "where": "martys_back",
+            "price": 180,
+            "gate": "money 180 AND trust(marty) 30",
+            "opens": "the 19:45-20:30 window becomes a place she can BE rather than a place she has to leave"
+          },
+          {
+            "tier": 3,
+            "where": "the_far_side",
+            "price": 600,
+            "gate": "money 600 AND vouch 45 AND ankle 1",
+            "opens": "staying over the line \u2014 the whole hours ladder above 55"
+          }
+        ],
+        "_note": "COMPOUND gates, which is the field shape we do not build: money alone never buys the next tier (become-someone 50k AND two employees hired). And it stays bought \u2014 it is read forever after."
+      },
+      "sinks": [
+        "the dock ladder (her_room / martys_back / the_far_side)",
+        "clothes on the pawn side (martys)",
+        "the machines (the_laundry)",
+        "food (the_diner)",
+        "the fare (the_stop)",
+        "what Tobin takes (the_county_office)"
+      ],
+      "sources": [
+        "shifts at Marty's \u2014 day-capped, and each one costs `rest`",
+        "the night sit at the laundry \u2014 Rae pays cash, gated on hours 25"
+      ],
+      "_spread_note": "6 sinks across 6 different locations, 2 sources. Gate 17 fails when more than half the sinks resolve to one location \u2014 a game passed at 21:20 with twelve of its sinks on a single front desk."
+    },
+    "characters": [
+      {
+        "id": "npc_marty",
+        "surfaces": 4,
+        "schedule_rows": 3,
+        "home": "offscreen",
+        "why_wanted": "The first person since the sentence who treats her as an employee instead of a case number, and she can feel what it costs him.",
+        "meters": {
+          "trust": "6 rungs \u2014 5/15/30/45/60/80. The one arc that carries the game."
+        },
+        "role": "shop owner",
+        "bible": "Owns the hardware and pawn shop. Signs her hours. Wife works nights and he does not go home. Careful, and getting less so."
+      },
+      {
+        "id": "npc_rae",
+        "surfaces": 3,
+        "schedule_rows": 4,
+        "home": "the_laundry",
+        "why_wanted": "The only person who has never asked what Cass did, and therefore the only one whose good opinion she could still lose.",
+        "meters": {
+          "trust": "3 rungs \u2014 5/30/60"
+        },
+        "role": "owns the building",
+        "bible": "Runs the laundry, owns the building, up at four. Notices everything and says almost none of it."
+      },
+      {
+        "id": "npc_tobin",
+        "surfaces": 3,
+        "schedule_rows": 2,
+        "home": "offscreen",
+        "why_wanted": "He holds the only thing she actually wants and treats it as nothing. The cheapest transaction in the game and she knows it while it is happening.",
+        "meters": {
+          "trust": "3 rungs \u2014 5/30/60"
+        },
+        "role": "services the boxes",
+        "bible": "26, contractor at the county office, bored. Can make the box say anything and is not interested in why."
+      },
+      {
+        "id": "npc_delgado",
+        "surfaces": 2,
+        "schedule_rows": 2,
+        "home": "offscreen",
+        "why_wanted": "Knows every true thing about her and is scrupulously correct about all of it, which is what makes any slip the loudest event in the game.",
+        "meters": {
+          "trust": "3 rungs \u2014 5/30/60"
+        },
+        "role": "her officer",
+        "bible": "Reads the log out loud on Tuesdays. Correct, unhurried, and never once unkind. Arrives late (want \u00a74a)."
+      }
+    ],
+    "engine_verified": {
+      "trait_decay is per-day only": "advanceDay() v2.py:5733, decay applied v2.py:5826 \u2014 so `battery` is M10's SPENT shape, not decay",
+      "costs reads any core_traits key and filters the choice": "setup.checkCostsAffordable v2.py:4902; filtered at v2.py:4732 and :4764",
+      "daily_tick runs traitEffects, not just flagEffects": "v2.py:5861-5880 via setup.applyAndNotifyTrait, with clamp/cap",
+      "worn_type is set membership, eq/neq only": "predicate v2.py:4294-4308; aggregator setup.getWornTypes v2.py:1700",
+      "wardrobeEffects path and field names": "canvases[].nodes[].exit_block.config.wardrobeEffects, keys `action` and `item_id` \u2014 engine.md \u00a717",
+      "clothing slots": "bra, underwear, top, bottom, dress, legwear, shoes (template_import.py:208-221); `exposure` per garment at template_import.py:2525"
+    },
+    "sidebar": {
+      "battery": {
+        "label": "The box",
+        "type": "trait_status_text",
+        "bands": [
+          "full",
+          "fine",
+          "getting low",
+          "it will start beeping tonight",
+          "it is beeping"
+        ],
+        "hidden_in_traits_labels": true,
+        "_note": "M7 \u2014 a banded sidebar item needs `hidden = true` in [[traits.labels]] or the number prints twice (gate 27). Word bands, not a percentage: the player meets a state, never a figure. The label names the OBJECT so no row in the sidebar can be read as an appetite."
+      }
+    }
+  },
+  "sheets": {
+    "status": "REVIEW",
+    "written": [
+      "DECISIONS.md",
+      "sheets/OPENING.md",
+      "sheets/people/marty.md",
+      "sheets/people/rae.md",
+      "sheets/people/tobin.md",
+      "sheets/people/delgado.md"
+    ],
+    "owed": [
+      "sheets/systems/ (4 sourced + 1 ambient)",
+      "sheets/places/ x10",
+      "sheets/scenes/ \u2014 one per rung, every explicit beat written out in full"
+    ],
+    "_note": "S1: every count in these sheets is a PROMISE. There is no --sheets mode and nothing reads a sheets folder, so all of it sits on the INTENT side until v0.1 builds. The one exception is the schedule cross-check, which an instrument produced."
+  }
+}
