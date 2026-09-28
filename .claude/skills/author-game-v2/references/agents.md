@@ -55,8 +55,8 @@ in this subject alone, a condition names its trait `trait_key` while an effect n
 `trait`, a condition names its owner `subject`/`npc_id` while an effect uses
 `targetType`/`npcId`, and a triggerless canvas inherits its location from whatever links to
 it. **The pack's own first run got one of these wrong** — it matched the declared ladder to
-the built one by substring and starred a rung on `npc_cade · want` that belonged to
-`npc_tobin`, because `want` is a substring of every cast label. It printed a fact that was not
+the built one by substring and starred a rung on one character's `want` that belonged to
+another's, because `want` is a substring of every cast label. It printed a fact that was not
 true of the game, which is the one thing a fact pack may never do.
 
 **And it scores nothing.** Every figure is a count or the author's own declared number; where
@@ -69,25 +69,11 @@ it touches, what it opens, and roughly what it costs.
 
 LO picks one. The Owner develops it.
 
-### ⚠️ The first measured run did NOT produce three different ideas
-
-Three Pitchers, one message, no shared context, `mrs_vance` 0.1. **All three came back with the
-same subject** — Friday night at `the_bar`, with `npc_cade`, the title giving way to her name —
-and all three quoted the same clause of the appetite.
+### ⚠️ Three Pitchers with the same facts pitch the same thing
 
 Removing the *conversation* removes conversational correlation. It does nothing about
 **informational** correlation, and three agents given identical facts and an identical prompt
-converge. The pack may make this worse by being good: it prints the Want verbatim, and its most
-actionable line is the one all three took.
-
-**What did differ was the mechanism**, substantially — 16 beats keyed to `npc_cade.want` 42 and
-the debt flag · 23 beats keyed to `player.standing` 40 routing through an existing `$16` cost · 14
-beats keyed to the unbuilt rung 60 and `cade_loop_played`, spanning two rooms. Same subject, three
-different builds of it. So the run is not worthless; it is just not what this section promised.
-
-Two readings, and **both are honest**: convergence is a failure of the design's stated goal, or
-convergence is a signal — three independent readers agreeing on what the game most needs next.
-One run cannot tell them apart.
+converge.
 
 **Each Pitcher is given a different relationship** (LO, 2026-09-27): the three most owed, from the
 pack's RELATIONSHIPS (`pitch_pack.py <slug> --person <npc>`), and each names the moment kind its
@@ -187,22 +173,16 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 
 ## The Player — measures heat, does not judge it
 
-> ✅ **BUILT 2026-08-29 — and it was mostly already written.** The harness is
-> `scripts/playtest.py`; the agent is `.claude/agents/v2-player.md`, callable as
-> `subagent_type: "v2-player"`. This section described a job still to be designed while
-> **seven hand-written play-tests** were already running in `games/` — five in `mrs_vance`,
-> one each in `steam` and `forty_miles`, 1,000+ lines — sharing a `check()` collector and
-> four helpers almost verbatim, and cited exactly once in this whole library
-> (`the-meters.md`, "How 'it delivers people' is built on this engine"). They found what no source gate could: an effect op the runtime does
-> not implement, an obligation that was checked as payable and never as taken, a character
-> deleted at midnight by a day-specific overnight row.
+> ✅ **BUILT 2026-08-29.** The harness is `scripts/playtest.py`; the agent is
+> `.claude/agents/v2-player.md`, callable as `subagent_type: "v2-player"`. A live play finds what
+> no source gate can — for one, an effect op the runtime does not implement (`applyTraitEffect`
+> handles only `add` and `set`, `v2.py:6210`).
 >
-> ⚠️ **The case for making it shared code is measured, not aesthetic.** Run on 2026-08-29,
-> `steam`'s script reported two failures and **both were the harness** — it called
-> `applyTraitEffect` with one options object where the engine takes seven positional
-> arguments, and asked `pickQuestsCards` for a scope that returns `[]` by construction.
-> Two of two raw reds were noise, in a corpus of scripts written by people who knew the
-> engine. Every signature the harness wraps is one nobody re-derives.
+> ⚠️ **Why it is shared code.** The engine's signatures are easy to get wrong by hand:
+> `applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap)` takes seven positional
+> arguments, not one options object (`v2.py:6210`, `:20814`), and `pickQuestsCards` returns `[]`
+> for any scope but `"story_goals"` (`v2.py:16224-16225`). Every signature the harness wraps is one
+> nobody has to re-derive.
 
 **Job:** play the build and report numbers.
 

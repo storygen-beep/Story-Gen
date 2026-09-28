@@ -9,14 +9,8 @@ then does anything become a game.
 > becomes tedious"* (Open Map) and *"Reviewers struggle to assess completeness"* (Floating Modules).
 > The review surface has to be **generated, not experienced**.
 
-> ⚠️ **This file is the output of one experiment, and every rule below is an incident.** `night_desk`
-> 0.0.1 was designed in 29 sheets, signed off, and only then built. The sheets caught ten design
-> defects before a line of TOML existed — an introduction two players in three would never have seen,
-> a corruption on-ramp behind a door locked two nights in three, a room in two places at once.
->
-> **And ten more defects were invisible from inside the format**, found only when the thing ran. The
-> full comparison is `games/night_desk/iterations/001/BUILD_VS_SHEET.md`; the numbered rules here are
-> its second half. **A rule with no incident behind it does not go in this file.**
+> ⚠️ **What goes in this file.** Every rule here is one LO decided, or one the field shows. A rule
+> with neither behind it does not go in.
 
 ---
 
@@ -63,8 +57,9 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 | **opening** | the funnel, screen by screen, from the age gate to the first open door | game |
 
 ⚠️ **The system sheets are written FIRST and the place sheets are written against them**
-(`the-systems.md` SY1–SY3). Written the other way round, a place sheet answers *"what would she do
-here"* and returns a job description — the measured `night_desk` defect. A place sheet whose rows
+(`the-systems.md` SY1–SY3). A room's rows come from the systems that describe her — Course of Temptation reads
+`has_inclination` in 218 of its 5,294 passages, e.g. [ClassroomMenu]
+`<<if $pc.has_inclination("Knowledge from the Deep")`. A place sheet whose rows
 name no system is the finding, and the labels line is where it shows.
 
 **They never merge**, and the reason is an incident: a person's ladder was written into a place's
@@ -76,16 +71,16 @@ documents because the engine renders them differently.
 
 ## The rules
 
-## S1 · A BEAT IS A NODE
+## S1 · A BEAT IS A SCREEN
 
 **The unit on every sheet is the unit `gates.py` uses, or the sheet says which unit it is using and
 prints both.**
 
-> **The incident.** Every `night_desk` scene sheet said things like *"5 beats · 1 explicit"*, and
-> those beats were **paragraphs**. `gates.py`'s `Beat` is one **node** — 52 nodes, 52 beats, exactly.
-> A node holding three explicit paragraphs is ONE explicit beat, not three. The design reported 75
-> beats; the build had 52. Mid-session the same game read **6 explicit** by the sheet and **3** by
-> the instrument, and both numbers were given to LO in chat as if they measured the same thing.
+`gates.py`'s `Beat` is **one screen**: a node, plus one more for each beat of a cascade in it. Group
+variants and paragraphs fold into the screen they sit on (`scripts/gates.py:408`, `class Beat`, and
+`:479`, *"cascade: each beat is its own screen"*). A node holding three explicit paragraphs is ONE
+explicit beat, not three. A sheet that counts paragraphs as beats and a build that counts screens
+report different numbers for the same scene.
 
 **A scene sheet with a named person carries three rows: want · next step · hook** (`register.md`,
 "What a scene contains").
@@ -116,7 +111,7 @@ A map can be right room-by-room and wrong as a whole. Only the way *in* makes it
 each is gated on (`the-map.md` R6). It is a row rather than an afterthought because the answer is
 usually **no**: a door is a handful per game and it belongs to a person's home, while a shared room
 takes occupancy-gated rows instead (R6c). A sheet that never asks the question gets the default by
-accident, which is how Ray's Room shipped a threshold with nothing behind it.
+accident, which is how Mark's Room shipped a threshold with nothing behind it.
 
 **And every row says whether it lands on a SCREEN** — added 2026-09-02, `the-surfaces.md` R9. A row
 that changes her and shows nothing resolves the act into a 2-second toast; the sheet is where that is
@@ -126,8 +121,8 @@ cheap to catch, because the answer is one column and the alternative is finding 
 **It also carries a `LABELS` row** — what kind of place this is, from the menu in `the-systems.md`
 SY3, and **every row on the sheet names the system it belongs to.** Added 2026-09-02. A sheet whose
 rows name no system is the thing to catch here, and it is catchable at design time for the price of
-one column: `night_desk`'s rooms passed review as four correctly-derived duties because nothing on
-the sheet asked what system each one was.
+one column. Course of Temptation keys a room's options off its labels —
+[Wardrobe] `<<set _stripallowed to $lastloctags.includes("stripallowed")>>`.
 
 ## S3 · A PLACE SHEET DECLARES ITS WORD BUDGET, AT DESIGN TIME
 
@@ -228,21 +223,6 @@ None of them said whether the person signing it can get through it, and the omis
 neutral — an author satisfying S1–S10 produces a document written in the ledger's voice, because
 that is the only voice the rules describe.
 
-> **The incident, 2026-09-11.** `the_balance`'s decision sheet was written at the want phase,
-> pushed to Notion, and LO's first words on it were *"hard to understand, I mean really hard."*
-> Measured across all four decision sheets on disk:
->
-> ```
-> orientation  2627w  cites=16  stats=12  longest table cell=32w
-> probation    1414w  cites= 8  stats= 1  longest table cell=37w
-> vesper_two   3180w  cites=13  stats=10  longest table cell=39w
-> the_balance  1727w  cites=13  stats= 6  longest table cell=70w   <- the one he read
-> ```
->
-> All four carry the disease; the one he was asked to sign was twice the worst on cell length.
-> Rewritten the same turn to **1,195w · 0 citations · longest cell 18w**, with nothing removed
-> from the decisions themselves.
-
 **This is SKILL.md's "two voices" rule finding its third voice.** `register.md` owns what the
 player reads after a click. `the-voice.md` owns labels, room names and guidance cards. **Neither
 owns the document a human signs**, and until now nothing did.
@@ -262,8 +242,7 @@ Four things, and they cost nothing:
 
 ⚠️ **Lead with what needs him.** A decision sheet's open questions are the only part that cannot be
 read later, so they go **first** — question, your recommendation, one line on why it matters — above
-the settled blocks. The sheet that caused this put its four open questions in the middle, under a
-heading that named a doctrine file.
+the settled blocks.
 
 **The test:** hand it to somebody who has not read this skill. If they cannot say what they are
 being asked to decide, the sheet is not done, however complete it is.
@@ -284,13 +263,6 @@ answers, neither is built.
 **Asking is not the same as recording.** Writing the conflict into a draft's notes and building the
 cautious side is the failure this rule exists for. Ask first, then write.
 
-> **The incident, 2026-09-25.** `the_balance`'s opening was redrafted after the skill gained the
-> loud voice and the staged opening (F1b). `OPENING.md` still described the old opening: the step
-> dad says one line and never pushes, the game opens in the kitchen, the step brother gives nothing
-> away. The skill said the opposite. The author followed the sheet, listed the ten conflicts at the
-> end, and produced a correct, quiet opening. It knew from memory that LO had chosen the new plan
-> over the sheet. One question at the start would have saved the draft.
-
 ## S13 · AN APPROVED PLAN LIVES IN THE GAME'S OWN PAGES
 
 **The rule:** when the owner approves a plan for a game (a new opening, a changed character, a new
@@ -307,12 +279,6 @@ session, because the next session reads the game.
 - **The skill holds no game's plan.** It holds the rules for every game, with placeholders instead of
   names (`register.md`, "Show the mechanism. Never show the world."). The game-specific version, with
   its people and its facts, only exists on the game's pages.
-
-> **The incident, 2026-09-25.** The approved new opening for `the_balance` (seven scenes, the job,
-> the first shift, a cafe girl who knows her name) lived only in
-> `~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`. The
-> session asked to redraft the opening was told to work from the skill and the game. It read the
-> game's `OPENING.md`, which still held the old opening, and built that.
 
 ## The opening sheet is a SCREEN WALK
 

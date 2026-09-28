@@ -9,10 +9,8 @@ nowhere — no field in `v2_state.json`, no sheet, no board step, no check. And 
 never uses the word *system* at all: a release adds events to surfaces that already exist, so a
 system can only be born in the board phase, which had no place to be born in.
 
-The consequence is on disk. `night_desk` was built to R2 correctly and its rooms came out as
-*walk the property · fix the sign · hit the ice machine · start a load* — a night porter's duty
-list. Not a writing failure. It declared six meters, three of them hunger, hygiene and energy,
-and **there was nothing else for a room to be about.**
+A room needs a system that describes her, or it has nothing to be about. Course of Temptation reads what she is like
+(`has_inclination`) in **218** of its 5,294 passages; SY1 carries the evidence.
 
 Read out of the female-lead set — `family-ties` (rank 24), `zaras-school-life` (22),
 `course-of-temptation` (5), `new-life-project` (16), with `degrees-of-lewdity` as reference —
@@ -63,34 +61,19 @@ are the texture of an ordinary day.
 **Sourced** — fed in one or two places, read all over the game. What she looks like, what she can
 do, what she owns, what she has already done.
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `family-ties`, all 50 room passages parsed, 161 rows.
-> Left column counts the rooms whose rows WRITE it; right counts passages anywhere that READ it.
->
-> | | rooms that feed it | places that read it |
-> |---|---|---|
-> | the body's needs | 14 | 165 |
-> | **piercings** | **2** | **117** |
-> | money | 13 | 71 |
-> | **clothes** | **1** | **53** |
-> | **the tally of what she has done** | **1** | **38** |
-> | **her deepthroat skill** | **1** | **19** |
-> | **fitness** | **1** | **10** |
->
-> `zaras-school-life`, a different codebase, same shape — passages that set against passages that
-> test: corruption **18 → 376** · clothes **6 → 188** · tiredness **11 → 185** · fitness **5 → 33**.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` reads `has_inclination` in **218**
+> of its 5,294 passages — [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`
+> is one. What she is like is checked all over the game.
 
-**A game of only ambient systems produces a duty list.** An ambient system is fed by every room, so
-it cannot make any room special — which is exactly what it is for, and exactly why it is not
-enough. `night_desk` declared energy, hunger, hygiene, money and two ascent tiers, and nothing else.
-Six systems, all ambient, and six rooms with nothing of their own to show.
+**A room needs a system about who she is.** An ambient system is fed by every room, so it cannot
+make any room special — which is exactly what it is for, and exactly why it is not enough.
 
-⚠️ **The split is not universal and the exception tells you why it holds.** `zaras`' money runs
-**27 write / 13 read**; so do its computing skill (11/9) and its drug status (11/10). An earned
-resource legitimately runs write-heavy. **The read-heavy ones are the systems about who she is** —
-and those are the ones a room can be built around.
+⚠️ **The split is not universal.** An earned resource such as money legitimately runs
+write-heavy. **The read-heavy ones are the systems about who she is** — and those are the ones a
+room can be built around.
 
 ⚠️ **Both kinds are required.** This is not an argument against ambient systems: the body's needs
-are the most-read thing in `family-ties`, and `the-meters.md` M8–M10 owns them. The rule is that
+are ambient, and `the-meters.md` M8–M10 owns them. The rule is that
 ambient systems alone cannot furnish a world.
 
 ---
@@ -101,8 +84,8 @@ R2c says a system earns its place *"by being read in more than one room, by more
 content."* That is right, and it is only half the shape: **it says nothing about where a system is
 FED,** and the natural reading of it — build the thing in three rooms — describes an ambient system.
 
-The field's answer is the opposite on the write side. The salon is **two rooms** and 117 places
-downstream check what happened there. The wardrobe is one. The skill ladder is one.
+The field's answer is the opposite on the write side: one place feeds the system, and the rest of
+the game checks it.
 
 **So the payoff of a thin room is not thinness. It is being the only source of something.** A room
 with two rows that feeds a system read in fifty places is doing more work than a room with eight
@@ -290,8 +273,9 @@ Copying a row into the three rooms that carry a label costs less than the machin
 
 **So the labels are a design tool here, not a wiring mechanism.** That is not a lesser thing. The
 room that declares *public · no bed · open all night · she cannot undress here* has told the author
-what belongs in it before a line is written, and it is the step whose absence produced
-`night_desk`'s duty list. **Nothing in this file asks you to design against machinery we do not
+what belongs in it before a line is written. Course of Temptation's rooms carry such labels and
+its systems read them — [Wardrobe] `<<set _stripallowed to $lastloctags.includes("stripallowed")>>`.
+**Nothing in this file asks you to design against machinery we do not
 have.**
 
 ⚠️ **One precedent exists and is worth knowing.** `clothing_rules` already sits on a location and
@@ -437,6 +421,6 @@ and moves on.
    field's own figures (1–2). Needs a game that has declared one; a distribution over zero games is
    not a distribution.
 2. **`the room has something of its own`** — locations carrying no sourced system at all. This is
-   the `night_desk` defect stated as a number, and it is the most useful check in this file. It is
+   the missing system about who she is, stated as a number, and it is the most useful check in this file. It is
    not built because it needs the declaration to exist first, and because "how many is enough" has
    no measured answer.

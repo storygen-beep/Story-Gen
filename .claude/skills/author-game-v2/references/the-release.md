@@ -90,10 +90,10 @@ happens*, above) — if this release opens one, it arrives filled, not as a prom
 > a digit. Ten of eleven rent-enabled games hand-write their own rent amount.
 
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
-command prints **nineteen lints below the tally**, and they are the half of the instrument that
-judges nothing: a game can be green on every gate with the lints full. Off Season shipped **37/38
-with 67 flagged words in the player's face**, and the two the author never looked at reached LO on
-a button.
+command prints **its lints below the tally** — `scripts/gates.py` defines fifty-five, by its own
+registry of printed `lint ·` labels (`_emitted_names`, `gates.py:10492-10503`) — and they are the
+half of the instrument that judges nothing. Lints never touch the tally (`gates.py:11315`), so a game
+can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
 > `DOCTRINE_GAPS.md` §3a: *"It is a checklist, and checklists do not hold… v2 must not inherit the
@@ -150,7 +150,7 @@ the order and supply small ideas; they do not set the premise** (Great Games Stu
 
 | step | command | what it can see |
 |---|---|---|
-| 5 | `gates.py <slug>` | the source — 46 gates, 28 lints |
+| 5 | `gates.py <slug>` | the source — the gates, then 55 lints |
 | 5b | `gates.py --saves <slug>` | the difference between **two** releases — what a rename stranded |
 | 6 | `gates.py --release <slug>` | the **built artefact** — dev mode, missing media, three version numbers |
 | 8 | `listen_mopoga.py <slug> --since <date>` | what players said on mopoga since the release — sorted by likes, never scored |
@@ -259,11 +259,11 @@ git diff -U0 -- games/<slug>/toml_phases/ | grep -E '^-.*(amount|costs|entry_fro
 # then search the prose for the value that just left
 ```
 
-⚠️ **Grep the WORDS, not just the digits — this is the step that gets skipped.** `125` never
-appears as a digit in `late_shifts`; it is written *"Hundred and twenty-five"*, in voice, as it
-should be. A sweep of this repo for numerals found **zero** copies of any rent amount; the same
-sweep including spelled-out forms found **122 candidate strings across ten games**. The digit
-search is the one that feels thorough and is not.
+⚠️ **Grep the WORDS, not just the digits — this is the step that gets skipped.** Prose spells
+amounts out, in voice, as it should: a rent of `100` is written *"A hundred"*, and Course of
+Temptation's [CampusClinicPregnancyCheckup] says *"the appointment will cost two hundred dollars"*
+beside `<<spend 200>>`. A search for `100` finds neither. The digit search is the one that feels
+thorough and is not.
 
 ### What already catches part of this, and what does not
 
@@ -374,8 +374,7 @@ signature of doctrine living in the wrong place:
    compares the next release against them.
 
 **`dev: true` and `version` are mutually exclusive.** One says not published; the other says this is
-what is live. The schema never stated the relationship, which is why nothing could adjudicate
-`forty_miles` carrying both.
+what is live. `--release` fails an entry that carries both (`gates.py` ~10147-10150).
 
 ### The three places that say what shipped
 
@@ -387,8 +386,6 @@ They drift, and nothing compared them until the check existed:
 | `[project] version` | the sidebar footer (`engine.md` §38) | **the player, in the game** |
 | `releases/v<n>.html` | the build that shipped | you, when a bug report names a version |
 
-Measured 2026-08-28: `forty_miles` read `0.1` / `0.1.2` / `{0.1, 0.1.1, 0.1.2}` — the portal two
-releases behind the number in the player's face. `vesper` was the only game where all three agreed.
 
 ### The check
 

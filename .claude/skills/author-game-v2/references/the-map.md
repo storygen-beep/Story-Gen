@@ -9,18 +9,13 @@ validates almost none of it.
 > named a hall six times that the map did not contain. Every location in it individually had a
 > stated job, a scheduled body, and something repeatable to do. **The set still wasn't a place.**
 
-> ⚠️ **AND THEN IT HAPPENED AGAIN, BECAUSE OF THIS FILE.** Two games later a second world shipped
-> at **26/26 gates** that was seven rooms of one house plus a row of shops — and it was recognised
-> from the location list alone, by eye, as *"the same mistake we made in back home."* It was. Of the
-> five v2 games, **the only two whose map starts indoors are those two.** The three that read as
-> places all root the world outdoors.
->
-> The cause was on this page. The one worked example this file used to carry was **the first
-> game's own map** — its character ids, its box room — reconstructed with its two known bugs
-> patched out and its **skeleton left intact**. Every map since inherited that skeleton.
+> ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
+> [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,
+> City Center), and Course of Temptation's [Maps] splits into `<<tab Campus>>` and `<<tab Town>>`.
+> A world of one house plus a row of shops is not that shape, however many gates it passes.
 > **An example outranks every rule beside it: a rule is read, an example is copied.** So this file
-> now teaches a *menu* you must choose from and carries no picture you can copy. See
-> `SKILL.md`, operating rules.
+> teaches a *menu* you must choose from and carries no picture you can copy. See `SKILL.md`,
+> operating rules.
 
 ---
 
@@ -147,11 +142,9 @@ id = "<exterior_location_id>"
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
 see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
 
-⚠️ **The commoner failure is not an inverted map — it is no map at all.** Measured 2026-08-29,
-`back_home` fails both `the map is a place` and `residents have homes` for one reason: it declared
-no `board.map` block, with the full schema sitting in this file. **No example would have prevented
-that.** An undeclared board is undone work, and the gates report it as red rather than `n/a`
-precisely so it cannot pass as an absence.
+⚠️ **A missing map fails too.** A game that declares no `board.map` block fails both `the map is a
+place` and `residents have homes`. An undeclared board is undone work, and the gates report it as
+red rather than `n/a` precisely so it cannot pass as an absence.
 
 ### R4 · Names are navigation, and a name is not house style's business
 
@@ -172,13 +165,11 @@ field's strongest games:**
 **Consistency beats flattening.** An articled house style is a legitimate register, not a bug — the
 only real defect is being inconsistent, some children prefixed and some bare.
 
-⚠️ **The readability test applies to every game, and it is the one that failed.** Two names
-shipped that a player cannot resolve: **`The Parade`** — British, dated, and read by most people as
-a procession rather than a row of shops — and **`The Box Room`**, which is
-`the-voice.md` R1's own worked example of a bad name, *"The Box Room becomes The Tenant's Room and
-says who and why in two words."* The game used the rule's own counter-example as a location name.
-*(That example said **Lodger's** until 2026-08-22 — a word no field game uses, so the prescribed
-cure carried the same defect as the disease. Two games copied it.)*
+⚠️ **The readability test applies to every game.** A name has to resolve for a stranger: Shady
+Deals' [City Map] names its districts *Downtown*, *Harbor*, *Suburbs*, and Course of Temptation's
+[SummitMarket] opens *"a building which contains the eponymous market"*. A dated or regional word
+(*The Parade*, read by most people as a procession) fails it, and so does `the-voice.md` R1's own
+counter-example, *The Box Room*.
 Say it out loud to someone who has not played: if they cannot tell you what is through the door,
 it is a bad button no matter whose house style it matches.
 
@@ -203,7 +194,7 @@ deliberately has no hall is a judgement call — but three uses of the same word
 
 ### R6 · A door belongs to a PERSON, not to a room
 
-A **door** is a threshold screen the player lands on *instead of* the room: click Ray's Room and get
+A **door** is a threshold screen the player lands on *instead of* the room: click someone's bedroom and get
 **knock** rather than walking straight in. `[locations.door]`, `engine.md` §44.
 
 **It is rare, and rarity is not a style note — it is the rule.** `degrees-of-lewdity` carries **six

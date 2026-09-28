@@ -30,7 +30,7 @@ It keeps "Sentences run short" below. Length is set by the scored model beats (`
 1. **Say it, don't hint it.** Tell the player what is happening and what it means.
 2. **Spell out the feelings.** Angry, scared, turned on, embarrassed: say so.
 3. **Her thoughts on screen, beside the dialogue, never instead of it.** She has opinions, in
-   italics (`thought_bubble`). S3 below measured our games thinking *instead* of talking; the new
+   italics (`thought_bubble`). S3 below names thinking *instead* of talking as the defect; the
    voice adds speech first, then her reaction to it.
 4. **Push the drama.** Make the situation obvious and felt. Not every line has to be loud.
 5. **More dialogue than narration.** The shape of a scene with a person in it: **someone speaks →
@@ -61,8 +61,7 @@ curated library of best scenes overstates every property):
 | median sentence | p25 8.25 · median 10.5 (26 games) | printed only: the model beats run 7, on purpose |
 
 **Joints.** A sentence is joined to the next by what it has to do with it. Compressed prose drops
-the joints: the_balance's 09-15 build had `but` at 0.14 per 1,000 words, under every game in the
-field, and more `and`s than any of them. The fix is one of three: **cut** the clause, **split** the
+the joints — too few `but`s, too many `and`s, against the field range in the table above. The fix is one of three: **cut** the clause, **split** the
 sentence, or **name the relationship** — *but, because, so, until, when*. A sentence of `and`s is a
 list; name what holds its parts together, or break it.
 
@@ -597,10 +596,10 @@ field screen is one rung and ours is a scene, so no threshold across the two wou
 FIELD   median 2.93 : 1 narration to dialogue        10 of 27 games at or under 2 : 1
 ```
 
-**And the protagonist thinks instead.** Thought-bubble words divided by spoken words: seventh_day
-**4.6**, forty_miles 3.1, the_allowance 2.0, steam 1.5, back_home 1.4 — against vesper 0.14 and
-the_inheritance 0.00. The bubble was for an **NPC's** interior in the first place; used as a
-substitute for a conversation it is the defect, not the style.
+**And the protagonist thinks instead.** When a person is present, she says it out loud — Cupid's
+Way [Sister's place] puts the question in her mouth: *"What is so special about your lifestyle
+that mom didn't like?"* A thought bubble used as a substitute for a conversation is the defect,
+not the style.
 
 > ### ⚠️ This rule was once deleted by a broken instrument
 >
@@ -1111,9 +1110,8 @@ Recorded here for the same reason the others are — so they are not proposed ag
 - **Fragments (sentences under five words) — REFUSED.** The field runs 5.3% (`the-company`) to 58.6%
   (`family-ties`). No threshold survives that range, and our games sit inside it. This is the fifth
   check this skill has measured and turned down.
-- **Stative `is` as the main verb — DEFERRED, not refused.** Our games straddle the field on *both*
-  sides: `late_shifts` at 7.7% is below the field floor of 10.0%, `back_home` at 45.1% is double its
-  ceiling. It is also downstream of L1 — a gloss is usually "which **is**" — so re-measure it after
+- **Stative `is` as the main verb — DEFERRED, not refused.** The field floor is 10.0%. It is
+  downstream of L1 — a gloss is usually "which **is**" — so re-measure it after
   L1 has been applied to a game and see whether it moves on its own before inventing a number.
 
 ⚠️ **The history count is a proxy and the softest of the three.** It matches temporal markers
@@ -1124,11 +1122,9 @@ over-count. Read the lint's list, not its number.
 
 ## The words the player has to already own
 
-Off Season scored **86.8 Flesch Reading Ease, grade 5.0 — easier than 26 of the 27 field games**
-(field median 78.0), and passed gate 19 at a median sentence of 10 words. It was then read by a
-human who could not follow it.
-
-Every readability instrument in this skill measures **syntax**. The difficulty was **reference**:
+Every readability instrument in this skill measures **syntax**. A text can score easy on all of
+them and still be hard, because the difficulty is **reference** — the reader has to already know
+what the nouns point at:
 
 > *"Nothing in the meter. You go to bed in a jumper and your socks and the coat over the top of
 > the eiderdown."*
@@ -1155,19 +1151,16 @@ regional name it has.
 > would have explained it. So a canvas `name`, a location `name` and a choice's `text` on a
 > room list get the plain word every time, however well the paragraph behind them glosses it.
 >
-> **This seam is how the defect shipped.** Off Season's meter is glossed properly — *"the slot is
-> at shoulder height beside the water heater… a card taped under it saying what three buys"* — and
-> the player reaches that sentence only by clicking **`Feed the meter ($3)`**, the words they could
-> not read. The gloss was downstream of the button the whole time. `the-voice.md` R1 owns label
-> shape; this rule owns the word in it.
+> A paragraph that glosses the word properly does not rescue the button that leads to it — the
+> gloss is downstream of the label. In Her Own Hands [BobbyAwakeBase] puts the plain word on the
+> button: *"Pay your rent"*. `the-voice.md` R1 owns label shape; this rule owns the word in it.
 
-**Name a place for what it is, the first time you name it.** Off Season's anchor is an amusement
-arcade. Across the whole game the prose says *"forty machines"* and never once says *slot
-machines*, so the building the plan gave **27% of the game's words** to is an unglossed noun.
-(As built it holds 13% — a separate defect, on the `location fill` gate.) The words
-`amusement arcade` and `slot machine` existed only in `image_search_queries` and in an image
-`description`, which the engine renders as `alt` text (`v2.py:13750`) — invisible. A location's
-kind belongs in the first sentence that names it, not in its metadata. (The map is
+**Name a place for what it is, the first time you name it.** Course of Temptation [SummitMarket]
+does it in the first sentence: *"You are outside the Summit Market, a building which contains the
+eponymous market"*. Descriptive metadata never reaches the player: `image_search_queries` are
+search terms, and a video block's `description` becomes only the `alt` text when its file is an
+image (`v2.py:15835`) — an image block's `alt` comes from its own `alt` prop. Neither is on screen.
+A location's kind belongs in the first sentence that names it, not in its metadata. (The map is
 `the-map.md`'s; what the prose calls it is this file's.)
 
 **Four ways a word fails, and only the first one is about dialect.** The rule was written for the
@@ -1175,7 +1168,7 @@ first one; the measurements found the other three:
 
 | | what the reader gets | note |
 |---|---|---|
-| **unknown** — *airer, chandlery, forecourt* | a blank. They stall, or skim past it. | the class the skill's own examples taught — see below |
+| **unknown** — *airer, chandlery, forecourt* | a blank. They stall, or skim past it. | — |
 | **ambiguous** — *half seven* | **a confident wrong answer.** It is 7:30 in Britain and 6:30 across much of Europe, and American English does not use the construction at all. | write the unambiguous *half past seven* |
 | **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | — |
 | **collides with our own UI** — *meter* | a wrong picture again, but the competing meaning is **ours**, so no dialect check can ever find it. | Same exposure, unmeasured: **board, card, flag, state, tier, rung.** |
@@ -1207,24 +1200,12 @@ borrowed one cannot.**
 word in the player's face that fewer than four of the 27 field games use, ranked by how often you
 used it, measured against `scripts/genre_words.txt` — 20,555 words of the field's own vocabulary,
 data rather than taste. (18,043 on 25 games until the 2026-08-24 recheck; rebuilding on 27 added
-2,512 words, 1,976 of them from the two games that had been parsing to zero.) **It is deliberately not a gate**, and the reason is worth stating because
-it looks like a contradiction.
+2,512 words, 1,976 of them from the two games that had been parsing to zero.) **It is deliberately not a gate.**
 
-The curated list at the top of this section separates our games from the field cleanly — 0.8
-against 9.4–95.6. **The shippable, data-driven instrument does not separate them at all.** Its rate
-across our ten built games:
-
-```
-seventh_day 91 · the_inheritance 94 · steam 107 · back_home 114 · vesper 114
-late_shifts 118 · the_allowance 139 · last_call 139 · forty_miles 190 · off_season 205
-```
-
-v1 and v2 interleave completely, and the lowest and highest are both v2 games. `vesper` at 114
-reads fine; off_season at 205 does not; `seventh_day` at 91 is the cleanest number here and is not
-the cleanest game. **What separates them is what the words ARE, and no count can see that.** So the
-measurement that discriminates cannot be shipped — it is a hand-built list — and the measurement
-that can be shipped does not discriminate. That is exactly the condition under which a check must
-be a list and not a threshold. The lint hands over the words; you make the call.
+**What separates a readable text from an unreadable one is what the words ARE, and no count can
+see that.** A rate of unfamiliar words does not tell you which of them the reader will stall on.
+That is exactly the condition under which a check must be a list and not a threshold. The lint
+hands over the words; you make the call.
 
 ### The same rule for a phrase, not just a word
 
