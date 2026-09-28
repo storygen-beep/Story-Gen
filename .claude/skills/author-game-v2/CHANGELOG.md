@@ -5,6 +5,127 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC20: keep and protect — one "do not regress" list in SKILL.md
+
+**Why.** PRD IC20 (the old WS15): the rules much of the skill leans on had no marker saying so, so an
+unrelated edit could quietly weaken one.
+
+**What changed.** New `SKILL.md` section **"Protected — do not regress"**, *(LO decided.)*: change one
+only as its own item, with LO's yes. One line and a pointer each, no doctrine restated — the arc
+(`the-arc.md` A1–A14); the world reacts (`the-meters.md` W5b, W8; `register.md` "What a scene contains"
+test 5); doors close out loud (`the-want.md` §1, `the-arc.md` A3, W8); the hold kinds (`the-want.md`
+§1b); the meter stops at each step (`the-meters.md` M1–M5, gate `the climb is paid for` — WS15's
+"meter-stop doctrine", per the Process Review, Round 1); the money file (`the-economy.md`); one-table
+schedules (`the-sheets.md` S5); the staged opening (`the-first-hour.md` F1b); the loud voice and the
+truth rule (`register.md`); stop and ask, and an approved plan lives in the game's pages
+(`the-sheets.md` S12, S13); and the tools in `scripts/`. WS15's "base tools" (`gen_week.py`,
+`presence.py`, `walks.py`) do not exist in this skill, so the line names the scripts that do.
+
+**Verified.** pytest 175 passed · `--selfcheck` exit 0, 158 rules resolving · cite_check in scope 0 ·
+tallies unchanged · `git status games/` unchanged.
+
+words: 135,404 → 135,587 (+183) · running total 135,587 / 149,283
+
+---
+
+## 2026-09-28 — IC17: release rules — one thing per release, a problem goes to its layer, 0.1 never 1.0
+
+**Why.** PRD IC17 (the old WS11). Most of it was already in `the-release.md` — the listen step (step 8),
+one `subject` per release in the ledger, the Cadence section, and `shape.py` before a money, ending or
+release-page change (IC16). Four gaps remained, and one stale count.
+
+**What changed.**
+- **Step 5a:** after the `shape.py` run, LO re-signs SP7 before the change is accepted (`the-release.md`
+  § Shipping).
+- **A quality problem goes to its layer** (`the-release.md`, "Maintenance is the job"): skill, game
+  process, CLAUDE.md or a one-off — pointing at CLAUDE.md's triage, not restating it — fixed at that
+  layer, with one planned rebuild at the next release boundary, listed as `release_page.rebuild`
+  (`state.md`, optional).
+- **One thing per release** — one character, place or theme — on a fixed rhythm, in Cadence, with the
+  field's evidence: In Her Own Hands' developer, *"it was all about Abby!"* (Great Games Study, round 4b).
+- **The spine changes only between releases**, as a reach-back change listing every page and reader it
+  touches (`the-spine.md` page rules).
+- **The first version is "0.1", never "1.0"** (`the-release.md` § first release), *(LO decided.)*
+- **Stale count:** step 5 said the scoreboard "defines fifty-five" lints (it is 56); the number is gone
+  and `--selfcheck` gives it. The hand-written-count row now reads spelled-out numbers from ten up
+  (`_HAND_WORD`), so this cannot recur; a new case in `tests/test_gates_ic14.py`.
+
+**Verified.** pytest 175 passed · `--selfcheck` exit 0 (0 hand-written counts, 158 rules resolving,
+running total 135,404) · cite_check in scope 0 · tallies unchanged · `git status games/` unchanged.
+
+words: 135,249 → 135,404 (+155) · running total 135,404 / 149,283
+
+---
+
+## 2026-09-28 — IC19: stop the churn — the running total on every self-check, and what may enter the skill
+
+**Why.** PRD IC19 (the old WS14). Growth was measured after the fact, one leftover of the IC0 prune
+remained, and WS14's rule ("a game defect becomes a skill rule only on its second occurrence") conflicts
+with LO's own — LO gave a replacement.
+
+**What changed.**
+- `gates.py --selfcheck` prints **"running total — N / 149,283 words (SKILL.md + references/, wc -w)"**
+  on every run; `WORD_REFERENCE = 149_283` is the size when the programme began, not a cap (LO). It
+  counts with `wc -w` itself, because Python's `split()` differs by ~440 words here — macOS `wc` counts
+  the ⚠️ sign as a word in some positions — and a total that disagrees with the ledger is worse than
+  none. New `tests/test_gates_ic19.py`.
+- **`SKILL.md` operating rules, *(LO decided.)*:** "An engine fact revealed by a game bug may enter the
+  skill; a craft rule needs field evidence or LO's decision. Skill changes land between releases, not
+  in the middle of one."
+- **The IC0 leftover:** `register.md` L2 was a retired rule kept under a "RETIRED 2026-09-24" heading
+  with "retired in place" wording; it is now "L2 · Negation — a measurement, not a rule" (kept, because
+  `lint_negation` and a `SKILL.md` pointer explain its readout through it), and the history is gone.
+- **One more of our numbers the sweep missed:** `SKILL.md`'s lint list said "our nine run 1.34–2.76,
+  the two distributions do not touch" beside the field's figure — cut; the field figure stays.
+
+**Verified.** pytest 174 passed · `--selfcheck` exit 0, printing 135,249 · cite_check in scope 0 ·
+tallies unchanged · `git status games/` unchanged.
+
+words: 135,245 → 135,249 (+4) · running total 135,249 / 149,283
+
+---
+
+## 2026-09-28 — IC22: citations — SKILL.md and references/ at zero wrong lines; history left as written
+
+**Why.** PRD IC22. 78 `file:line` citations pointed at the wrong line. LO: leave history as written; the
+baseline covers `SKILL.md` and `references/` only, and it goes to 0.
+
+**What changed.**
+- `cite_check.py --fix` re-anchored 60 citations that resolve to one line; `CHANGELOG.md` and
+  `DOCTRINE_GAPS.md` were restored from git afterwards, so no history entry changed.
+- By hand in `references/engine.md`: the five MISSING citations quoted a description of the code, which
+  the checker can never find — each now cites the real line with the real code (§22 `entry_conditions` /
+  `blocked_message` at `template_import.py:186-187`; §23 `quest_cards` at `:2786`,
+  `_parse_quests_card` at `:1255`, `terminal_text` at `:1216`; §42 the help-data `"npcId"` at
+  `v2.py:12223`). Two sentences carrying two citations on one line were rewrapped so each citation sits
+  beside its own code (`v2.py:17382`, `:17379`; `:14055`, `:14054`).
+- `scripts/cite_check.py`: new `in_scope()`. `--fix` rewrites only `SKILL.md` and `references/`; the
+  report ends on "SKILL.md + references/: N citation(s) point at the wrong line (baseline 0)", and
+  `--strict` fails only on that number. The 26 left in history are reported, never rewritten.
+
+**Verified.** In scope: 0 wrong lines, `--strict` exit 0 · pytest 173 passed · `--selfcheck` exit 0 ·
+tallies unchanged (29/47, 46/50, 41/48 with 3 [off]) · `git status games/` unchanged.
+
+words: 135,234 → 135,245 (+11, the quoted code) · running total 135,245 / 149,283
+
+---
+
+## 2026-09-28 — `templates/board.toml` loads as TOML
+
+**Why.** LO: the board template never parsed — five placeholder lines were bare (`<tier_1> = 0`,
+`max = <band_1_top>`), so the file an author copies was invalid from the first save.
+
+**What changed.** The placeholders are quoted (`"<tier_1>" = 0`, `max = "<band_1_top>"`), with one
+comment saying why. The fill-me signal stays, and a placeholder left in by mistake is a string where
+the importer wants a number, so it fails loudly instead of shipping a copied number. New
+`tests/test_templates_parse.py`: every `templates/*.toml` loads.
+
+**Verified.** Every template parses · pytest 173 passed · `--selfcheck` exit 0 · tallies unchanged.
+
+words: templates +15 (the one comment line) · running total unchanged (templates are outside it)
+
+---
+
 ## 2026-09-28 — IC16: `shape.py`, checkpoint A — the spine holds together, and an empty one never finishes
 
 **Why.** PRD IC16 (the old WS9): nothing checked that the spine's decisions fit together before a line

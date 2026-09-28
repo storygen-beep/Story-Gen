@@ -309,9 +309,9 @@ things one activity can turn into, and how often the activity itself still rende
 **the act nodes** (body words on the thinnest band each act and finish node can render) ·
 **the sentence explains itself** (every
 `, which is` / `, which means` — a fact welded to a gloss of the fact; field MAX 0.24 per 1,000
-words over 27 games, our nine run 1.34–2.76, the two distributions do not touch) · **what did not
+words over 27 games) · **what did not
 happen** (the share of sentences whose claim is a negation, and every canvas over the field's
-maximum of 25.76% — narration-only baseline. ⚠️ A measurement only: `register.md` L2 is retired,
+maximum of 25.76% — narration-only baseline. ⚠️ A measurement only (`register.md` L2),
 because the loud voice negates on purpose) · **history on a repeatable screen** (backstory on a canvas the player
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
@@ -366,7 +366,29 @@ shown at all** · **the act between the click and the number** (`the-surfaces.md
 exits that fire effects and show no screen, with the game-time they burn. A LIST: the field runs
 0-68%, so any threshold would fail a game for obeying the doctrine).
 
+## Protected — do not regress
+
+Each of these is taught in one place and holds up much of the rest. Change one only as its own item,
+with LO's yes — never as a side effect of another edit. *(LO decided.)*
+
+- **The arc** — `references/the-arc.md` A1–A14: numbered one-time steps that convert into a loop.
+- **The world reacts** — `the-meters.md` W5b (who knows about her) and W8 (what sticks);
+  `register.md`, "What a scene contains", test 5 (who notices).
+- **Doors close out loud** — `the-want.md` §1, `the-arc.md` A3, `the-meters.md` W8.
+- **The hold kinds** — `the-want.md` §1b.
+- **The meter stops at each step** — `the-meters.md` M1–M5; gate `the climb is paid for`.
+- **The money file** — `references/the-economy.md`.
+- **One-table schedules** — `the-sheets.md` S5.
+- **The staged opening** — `the-first-hour.md` F1b.
+- **The loud voice and the truth rule** — `register.md`, "The voice — say it loud" and "The truth rule".
+- **Stop and ask; an approved plan lives in the game's pages** — `the-sheets.md` S12, S13.
+- **The tools** — the scripts in `scripts/`, above all `gates.py` and `shape.py`.
+
 ## Operating rules
+
+- **What may enter this skill.** *(LO decided.)* An engine fact revealed by a game bug may enter the
+  skill; a craft rule needs field evidence or LO's decision. Skill changes land between releases, not
+  in the middle of one.
 
 - **The register is the loud voice, the opening is the staged shape, and the truth rule covers
   every screen.** Since 2026-09-24: story text says it, spells out the feeling, puts people talking

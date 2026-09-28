@@ -16,7 +16,7 @@ because the kind decides the shape.
 **The voice is a choice, and it is LO's** (2026-09-23/24): shown three ways to write one line, LO
 picked the top games' loud version over the quiet one. So **"The voice — say it loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
 it. The rules that are measured keep their measurements, and where
-a measured rule and the voice disagree, the voice wins and the old rule is retired in place (L2).
+a measured rule and the voice disagree, the voice wins.
 
 ---
 
@@ -932,9 +932,8 @@ specific one* tells an author to attach a specifying clause, and the gloss in *"
 lanyard, which is the agency's way of saying on call and unpaid"* **is** a specifying clause. The
 rule is obeyed and the defect is the obedience. *(LO decided.)*
 
-The three rules are one idea at three grammatical addresses. **L2 was retired on 2026-09-24** when
-the loud voice replaced the quiet one; L1 and L3 stand, and L3 now carries the truth rule's
-exception.
+L1 and L3 are the rules; L3 carries the truth rule's exception. L2 is a measurement the voice
+overrides.
 
 ### L1 · No `, which is` · no `, which means`
 
@@ -963,10 +962,10 @@ the fact was already doing the work and the gloss is the writer not trusting it.
 ⚠️ **The fix is not a dash or a bracket.** Same error as the comma swap above: the joint survives the
 swap and the reader still holds the sentence open. Cut it or split it.
 
-### L2 · Negation — RETIRED 2026-09-24
+### L2 · Negation — a measurement, not a rule
 
 The loud voice negates on purpose. `lint_negation` prints the share as a measurement, not a
-verdict; do not rewrite a loud negation to satisfy it. History: CHANGELOG.
+verdict; do not rewrite a loud negation to satisfy it.
 
 ### L3 · A repeatable screen carries no history
 

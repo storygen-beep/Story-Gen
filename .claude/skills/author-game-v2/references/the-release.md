@@ -90,9 +90,9 @@ happens*, above) — if this release opens one, it arrives filled, not as a prom
 > a digit.
 
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
-command prints **its lints below the tally** — `scripts/gates.py` defines fifty-five, by its own
-registry of printed `lint ·` labels (`_emitted_names`, `gates.py:10492-10503`) — and they are the
-half of the instrument that judges nothing. Lints never touch the tally (`gates.py:11315`), so a game
+command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
+script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
+instrument that judges nothing. Lints never touch the tally (`gates.py:11315`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -214,6 +214,11 @@ run roughly 87% non-new content.
 So a release that is half repair is *normal*. Budget it. Do not treat a high rework rate as a
 defect to apologise for — under-shooting it is the more likely error.
 
+**A quality problem goes to its layer.** Place it first — the skill, the game's process, CLAUDE.md,
+or a one-off in this game (CLAUDE.md, "When a built game misbehaves") — and fix it at that layer. A fix
+that needs a rebuild waits for the next release boundary and is listed on that release page
+(`release_page.rebuild`): one planned rebuild, not one per fix.
+
 ---
 
 ## The prose quotes the fields, and a field that moves makes the prose lie
@@ -232,8 +237,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:16604   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:16608   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:17375   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:17379   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -288,6 +293,10 @@ Posting volume predicts revenue (ρ = +0.58). Release *speed* does not (ρ = −
 
 **Visible motion matters more than shipped volume.** Ship smaller, on time.
 
+**One thing per release** — one character, one place or one theme — on a fixed rhythm. The field's
+developers plan it that way: In Her Own Hands' *"it was all about Abby!"* (Great Games Study, round 4b).
+The ledger's `releases[].subject` is that one thing.
+
 ---
 
 ⚠️ **EVERY NUMBER ABOVE DESCRIBES A GAME THAT ALREADY EXISTS.** `[added 2026-08-31]` The ~31-day
@@ -325,8 +334,8 @@ which is correct, and is not permission to declare small ones.
 ## § Shipping the build — the boundary nothing was holding
 
 **Before accepting any change to money, the ending or the release page, run
-`scripts/shape.py <slug>`** (checkpoint A, `the-spine.md`): a spine that no longer holds together is
-cheaper to fix in the ledger than in the build.
+`scripts/shape.py <slug>`** (checkpoint A, `the-spine.md`), and have LO re-sign SP7: a spine that no
+longer holds together is cheaper to fix in the ledger than in the build.
 
 Everything above is about what a release **adds**. This is about the **artefact** — and its
 companion is `references/the-returning-player.md`, which is about what a release must not **move**.
@@ -413,7 +422,8 @@ That is correct for a release gate — it judges what ships — and it means the
 
 ## § The first release (v0.1) — the one exception
 
-v0.1 builds the Board instead of adding to it.
+v0.1 builds the Board instead of adding to it. **The first version is "0.1", never "1.0"** — the game
+is never finished. *(LO decided.)*
 
 - **As many locations as your cast and your loop require, shaped like the reference seed.**
   Derive the count — the places your declared rosters visit, plus what the daily loop needs (sleep,

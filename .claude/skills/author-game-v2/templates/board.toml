@@ -146,8 +146,9 @@ name = "<Name>"
 #    at all; three-or-four is one game's shape, not the genre's (the-meters.md W1).
 #    (Read "14 of 25" until 2026-08-24 — the recheck moved the-board.md and missed
 #    this copy of the same number. Section K.)
-<tier_1> = 0
-<tier_2> = 0
+#    Placeholders are QUOTED so this file loads as TOML; write your trait keys bare.
+"<tier_1>" = 0
+"<tier_2>" = 0
 
 # ── a counterweight — RARE, and it must shut doors ────────────────────────────
 #    1 field game in 25 ships one that gates anything.
@@ -181,9 +182,9 @@ money  = 20
 type  = "trait_status_text"
 trait = "<tier_1>"
 bands = [
-  { min = 0,             max = <band_1_top>, text = "<…>" },
-  { min = <band_2_floor>, max = <band_2_top>, text = "<…>" },
-  { min = <band_3_floor>,                     text = "<…>" },   # open top
+  { min = 0,                max = "<band_1_top>", text = "<…>" },
+  { min = "<band_2_floor>", max = "<band_2_top>", text = "<…>" },
+  { min = "<band_3_floor>",                       text = "<…>" },   # open top
 ]
 
 

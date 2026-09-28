@@ -250,7 +250,7 @@ describing the second screen and calling it the first.
 `CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1065`, `v2.py:9251`). Its
 headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
 story"*, *"Continue to Game"*. The only authored
-text on it is `player_description` (`v2.py:9509`); an author who does not know that ships the
+text on it is `player_description` (`v2.py:849`); an author who does not know that ships the
 default, in a product voice, as the second thing a player reads.
 
 **3 · One node is one screen.** The engine plays a node chain back one screen at a time (F2 above,

@@ -10508,7 +10508,19 @@ def _template_field_gap(skill_dir):
             if taught[t] - shown[t]}
 
 
+WORD_REFERENCE = 149_283   # SKILL.md + references/ when the IC programme began; not a cap (LO)
 _HAND_COUNT = re.compile(r"(?<![/\d,])(\d+)\s+(gates|lints)\b")
+# Spelled out too (IC17): "fifty-five lints" went stale the same way. Ten and up only —
+# "two gates" is usually a subset, not a claim about the scoreboard.
+_TENS = {"twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60, "seventy": 70,
+         "eighty": 80, "ninety": 90}
+_TEENS = {"ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
+          "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19}
+_ONES = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
+         "nine": 9}
+_HAND_WORD = re.compile(
+    r"\b(" + "|".join(_TENS) + r")(?:-(" + "|".join(_ONES) + r"))?\b\s+(gates|lints)\b"
+    r"|\b(" + "|".join(_TEENS) + r")\b\s+(gates|lints)\b", re.I)
 
 
 def _hand_counts(skill_dir, n_gates, n_lints):
@@ -10539,6 +10551,14 @@ def _hand_counts(skill_dir, n_gates, n_lints):
             for num, kind in _HAND_COUNT.findall(line):
                 if int(num) != (n_gates if kind == "gates" else n_lints):
                     out.append((os.path.relpath(path, skill_dir), i, f"{num} {kind}"))
+            for m in _HAND_WORD.finditer(line):
+                tens, ones, k1, teen, k2 = m.groups()
+                if tens:
+                    val, kind = _TENS[tens.lower()] + (_ONES[ones.lower()] if ones else 0), k1
+                else:
+                    val, kind = _TEENS[teen.lower()], k2
+                if val != (n_gates if kind.lower() == "gates" else n_lints):
+                    out.append((os.path.relpath(path, skill_dir), i, m.group(0)))
     return out
 
 
@@ -10644,6 +10664,24 @@ def selfcheck_mode():
         print("           A LIST, never a score — a template is not meant to carry every")
         print("           advanced field, and this cannot tell an omission from a decision)")
         print(f"  {'─'*72}")
+
+    # The running total (IC19, LO 2026-09-28): SKILL.md + references/*.md, against the
+    # programme's starting size. Printed on every run, never judged — LO set no hard cap; the
+    # number is here so growth is seen the day it happens, not measured after the fact.
+    # ⚠️ Counted by `wc -w`, the command every CHANGELOG running total has used. Python's
+    # split() differs by ~440 words here (macOS wc treats the ⚠️ sign as a word of its own in
+    # some positions), and a total that disagrees with the ledger is worse than none.
+    import glob
+    import subprocess
+    paths = [skill_path] + sorted(glob.glob(os.path.join(skill_dir, "references", "*.md")))
+    try:
+        blob = b"".join(open(p, "rb").read() for p in paths)
+        words = int(subprocess.run(["wc", "-w"], input=blob, capture_output=True,
+                                   check=True).stdout.split()[0])
+        print(f"  running total — {words:,} / {WORD_REFERENCE:,} words (SKILL.md + references/, wc -w)")
+    except (OSError, subprocess.CalledProcessError, ValueError, IndexError):
+        print("  running total — wc -w unavailable here; count SKILL.md + references/ by hand")
+    print(f"  {'─'*72}")
 
     total = (len(missing_g) + len(missing_l) + len(missing_m) + len(stale_g) + len(broken)
              + len(stale_counts))

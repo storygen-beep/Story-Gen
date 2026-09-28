@@ -26,3 +26,10 @@ def test_a_right_count_a_tally_and_a_field_table_are_not(tmp_path):
                         "`29/49 gates pass` is the tally line of gates.py.\n"
                         "the field reads 2,235 gates across 27 games\n")
     assert gates._hand_counts(d, 52, 56) == []
+
+
+def test_a_spelled_out_count_is_read_too(tmp_path):
+    d = skill(tmp_path, "`scripts/gates.py` defines fifty-five lints and forty gates.\n"
+                        "gates.py prints fifty-six lints.\n")
+    assert gates._hand_counts(d, 52, 56) == [
+        ("references/x.md", 1, "fifty-five lints"), ("references/x.md", 1, "forty gates")]
