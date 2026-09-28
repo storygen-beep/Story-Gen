@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC16: `shape.py`, checkpoint A — the spine holds together, and an empty one never finishes
+
+**Why.** PRD IC16 (the old WS9): nothing checked that the spine's decisions fit together before a line
+of TOML existed. LO's fix to the plan: on an empty ledger every check is n/a, so "the spine is finished
+when shape.py passes" would let a game finish the spine with nothing in it. Plan:
+`round5/IC16_DIFF_PLAN.md`; LO's decisions 2026-09-28.
+
+**What changed.**
+- **New `scripts/shape.py <slug>`** (reads `v2_state.json` only; `--finish`, `--json`; exit 1 on a FAIL).
+  Ten checks: a step's place is declared (n/a until the board declares places — LO), a step's hours are
+  a window, a step's traits are declared (flags are listed, not judged — LO), dependencies resolve (no
+  missing step, no cycle), the pressure can be met over the release's weeks unless
+  `board.economy.shortfall` says it is on purpose, everyone on the release page has a ladder, every step
+  has a `hint`, the door is a declared step, the promise has a beat this release (IC16), and every spine
+  page is signed no earlier than the day after `drafted_at` (LO).
+- **Lenient before, strict after (LO).** While the spine is written (phase `idea`) a missing piece is
+  n/a. With `--finish`, or once the phase is `spine` or later, the required pieces must exist — every SP
+  page READY, signed and dated, the release page, a ladder per release person, the promise and its beat
+  — and a missing one FAILS. An empty ledger finishing the spine fails.
+- **Where it runs:** the dispatcher's `idea` row sets `spine` only when `shape.py <slug> --finish`
+  passes; `the-release.md` § Shipping says to run it before accepting a change to money, the ending or
+  the release page; `gates.py --ship` prints **"the spine holds together"** as a REPORT row (LO).
+- `references/the-spine.md` gains "Checkpoint A"; `state.md` gains optional `drafted_at` on spine pages
+  and `obligation_every_weeks`, `shortfall` on `board.economy`; `SKILL.md`'s tooling table names
+  `shape.py`.
+- New `tests/test_shape.py` (6): a full spine passes all ten; each check fails on its own defect and no
+  other; an empty ledger finishing the spine fails; the same ledger in the idea phase is n/a; every phase
+  past the spine is strict; a declared shortfall passes.
+
+**Effect on our games (testing only).** All four are past the spine phase with no spine written, so
+strict `shape.py` fails each — the_balance, orientation, vesper_two 6 fail · 4 n/a; probation 5 · 5 —
+and `--ship`'s new REPORT row reads red for them. It is a report line and blocks nothing; the scoreboard
+tallies do not move.
+
+**Verified.** pytest 172 passed · `--selfcheck` exit 0 · cite_check 78 · tallies unchanged (29/47,
+46/50, 41/48 with 3 [off]) · `git status games/` unchanged.
+
+words: 134,891 → 135,234 (+343) · running total 135,234 / 149,283
+
+---
+
 ## 2026-09-28 — IC15: the spine — seven decision pages that point, never copy
 
 **Why.** PRD IC15 (the old WS8). The game's decisions had no single place of their own, and WS8's fourteen

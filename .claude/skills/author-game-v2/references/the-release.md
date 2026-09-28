@@ -324,6 +324,10 @@ which is correct, and is not permission to declare small ones.
 
 ## § Shipping the build — the boundary nothing was holding
 
+**Before accepting any change to money, the ending or the release page, run
+`scripts/shape.py <slug>`** (checkpoint A, `the-spine.md`): a spine that no longer holds together is
+cheaper to fix in the ledger than in the build.
+
 Everything above is about what a release **adds**. This is about the **artefact** — and its
 companion is `references/the-returning-player.md`, which is about what a release must not **move**.
 Until 2026-08-28 no instrument in this project could see a build: the whole scoreboard is aimed at
