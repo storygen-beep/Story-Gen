@@ -819,10 +819,8 @@ Three things about that line carry the rule:
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
 wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14378`.
-This is
-recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**:
-nothing of ours has built it yet, and a check written before its doctrine has a game to run against
-is what withdrew R4 and refused P0. `the-economy.md` R1b owns the asset half.
+This is recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**.
+`the-economy.md` R1b owns the asset half.
 
 **Mechanism 6 — who is standing there.** Added 2026-08-24. The five above change what the screen
 *says* or *offers*. Course of Temptation has one that changes **who the player finds**: whether an
@@ -846,18 +844,8 @@ wins.
 the four to author, it is the only one that can replace the whole screen, and it is engine-cooled per
 location so it cannot spam (`references/engine.md` §7).
 
-> ⚠️ **R5 and R6 are reported as LINTS, not gates, and the reason is worth keeping.** Both were
-> built as gates first. Neither threshold survived being checked:
->
-> - **R5's ceiling had to be invented.** At 50% one game passes at exactly 50.0% while another
->   fails at 52% — that is noise being scored, not a measurement.
-> - **R6 was measuring a practice nobody follows.** The original rule said *"band the opener on
->   whichever tier the location serves"*, and our TOML test asked whether the opener carries a
->   conditional block — but the reference game's openers are *never* conditional. The 86% field figure from built HTML was `<<if>>` counting
->   engine plumbing, so neither number measured what the rule claimed.
->
-> The four mechanisms above are what to look for instead. Still a lint, still no threshold —
-> what changed is that we now know **what** to count.
+> ⚠️ **R5 and R6 are reported as LINTS, not gates, with no threshold.** The four mechanisms above
+> are what to look for.
 
 **R7 · Every screen keeps one door. A day cap is spent every day — that is the point of it.**
 
@@ -925,7 +913,7 @@ the cheaper half — its unit is a *setup*, not an act, and A9 already says the 
 whole meter range. When a place is worth returning to and you cannot say why, it is usually
 missing its pool.
 
-**R8 · A person owns a corner of the world — and the schedule has to agree.** Added 2026-08-24 from
+**R8 · A person owns a corner of the world.** Added 2026-08-24 from
 Section G.
 
 Twenty-five field games were read in source to find what actually separates one character from
@@ -940,34 +928,24 @@ supporting cast* of two or three people.
 **A character is not a temperament with a name on it. He is a different part of the world, and he
 talks about the part he is in.** A trait system cannot buy this; only the design can.
 
-> ### ⚠️ The prose half is the easy half. The schedule is where it gets taken back.
+> ### What owning a subject sounds like — a boxing gym, four men
 >
-> `the_season` **passes** the writing test. Every man genuinely owns a subject — Boyd speaks in
-> numbers (*"Forty-one."* · *"The number is not an opinion."* · *"I have weighed eleven years of
-> it."*), Prine in water and distance (*"You had water today? Not coffee. Water."* · *"Nobody comes
-> down this far."*), Emmett in binary rules (*"You're on the rows or you're on the belt. Not
-> both."*), Wade to an audience (*"Watch the top of the tree, boys."*).
->
-> And its sixteen schedule rows collapse the whole cast into two places:
->
-> ```
-> the_camp   19:00–00:30   Wade, Prine, Emmett, Boyd    <- all four men, every night
-> the_rows   05:30–12:00   Prine, Boyd, Wade            <- three of four, every morning
-> ```
->
-> **He is never the only man in the room, so he never gets to be a particular man.** Only Emmett
-> (the shed) and Rae (the yard, the window) have somewhere that is theirs.
+> Teodor speaks in numbers (*"Sixty-one point four, kid. You ate three hundred grams you didn't tell
+> me about."* · *"Nine rounds on the pads, not eight. I counted. I always count."* · *"Every number on
+> this wall belongs to somebody who lied to me once."*), Otis in water and distance (*"Bottle. Drink
+> all of it before you tell me you're fine."* · *"Six miles to the harbor light and six back. Don't
+> walk any of it."* · *"You sweated a litre in there. Where do you think it comes back from?"*), Ruben
+> in binary rules (*"You're in the ring or you're off my floor. Nobody leans on my ropes."* · *"Gloves
+> on, you listen. Gloves off, you go home."* · *"Either you want the fight or you want to be seen
+> wanting it. Pick."*), Casimir to an audience (*"Everybody watching? Good. Watch her drop that right
+> hand again."* · *"Half this room is here to watch you sweat, love. Give them the good side."* ·
+> *"Louder! The back row paid to hear you hit something."*).
 
-So the rule has two halves and **both are required**:
-
-1. **His own subject and his own people** — a domain he talks about that nobody else talks about,
-   and at least one named person offscreen who belongs to him and not to the crew.
-2. **A place and an hour where he is the only one there.** Check it the way the defect was found —
-   bucket every `[[npcs.schedules]]` row by `(location, start_time, end_time)` and read the rows
-   with more than one name in them.
+So the rule is **his own subject and his own people** — a domain he talks about that nobody else
+talks about, and at least one named person offscreen who belongs to him and not to the crew.
 
 **Where the tag line fits.** `[ui.cast_page]`'s `tags` field (`engine.md` §34) is the four-word
-compression of half of this — *"Manipulation | Attention | Writing | Oriental Food"* tells you what
+compression of this — *"Manipulation | Attention | Writing | Oriental Food"* tells you what
 Chloe is about before you have met her. It is a **summary of a corner she already owns**, not a
 substitute for owning one. Four words on a card cannot rescue a man who has no domain.
 
@@ -1114,9 +1092,7 @@ itself.** `degrees-of-lewdity` is rank 7 with 15,626 passages, and its NPC recor
 2,198 times against `name_known` **27** — `lefthand`, `righthand`, `stance` and `distance` are a
 limb-by-limb struggle machine. Its people are not characters at all; they are bodies in a physical
 simulation, and that is a second working answer to the same problem. A gate mandating that
-characters be differentiated *as people* would fail the seventh-ranked game in the corpus. **The
-schedule-collision half of R8 is trivially checkable and a lint for it was considered and
-declined** — half a rule enforced is worse than a whole rule taught.
+characters be differentiated *as people* would fail the seventh-ranked game in the corpus.
 
 > ⚠️ **Before adding a gate here, apply `SKILL.md`'s operating rule:** ask what a tired author would
 > build to satisfy it, and check that the answer is the thing you actually want.

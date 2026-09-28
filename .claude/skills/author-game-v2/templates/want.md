@@ -45,7 +45,7 @@ Record these as `want.fantasy_shape`, `want.model_to_beat` and `want.moment_kind
 **Written character, or blank slate?** `written` · `blank`
 
 > The field runs **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement.
-> ⚠️ **All eight v2 games are `written` and not one ledger records that anybody picked it.** `written`
+> ⚠️ `written`
 > is a legitimate answer — it is what real-porn media and a named cast want — but write it down.
 
 **What does the player choose about her at minute zero?** <the start choice, or `none`>
@@ -109,8 +109,7 @@ three of the words `gates.py --words` flags as absent from all 27 field games. T
 
 <What she wants, phrased so it can never be finished.>
 
-⚠️ **Do not copy the line below. It is a SHAPE, not an answer** — four games in this repo shipped
-one sentence because this slot used to hold a filled-in example. Write hers, in her nouns, from
+⚠️ **Do not copy the line below. It is a SHAPE, not an answer.** Write hers, in her nouns, from
 §1b's hold.
 
 - ✅ shape: an appetite the world can always supply one more of, stated in the vocabulary of the
@@ -164,8 +163,7 @@ Pick and name it. "It's hot" is the absence of a charge, not one.
 
 Answered **here**, before a single character exists — because the cast is derived from the world and
 not the other way round. Deriving the map from the cast is circular: the premise fixes the cast, the
-cast fixes the map, and a household returns a house every time. Two of the first five v2 games
-shipped seven-rooms-of-one-house worlds because nothing ever asked this. `references/the-map.md` R0.
+cast fixes the map, and a household returns a house every time. `references/the-map.md` R0.
 
 **Where does this happen?** <the ground the whole game sits on — a town, a site, a street, a compound>
 

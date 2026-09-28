@@ -5,13 +5,6 @@ The split is not by task. It is by **what has to be remembered**.
 > Test: can you write this job's complete input on one page?
 > **Yes** → an agent. **No** → the Owner keeps it.
 
-The evidence for this shape is our own history. Fifteen-plus agent runs are recorded in a
-previous game's ledger, some as large as 25 and 27 agents. **Every one was read-only** — audit,
-verify, diagnose, grade — and they repeatedly caught real defects, including a chunk-fatal
-blocker found before a line of code existed. There was exactly one attempt to fan out
-*authoring*; that build had the doctrine and still went naive, invented a framing the doctrine
-had explicitly abolished, and was deleted in full.
-
 **Agents look. The Owner decides.** The two exceptions below are deliberate and narrow.
 
 ---
@@ -111,10 +104,8 @@ turn forced on her with no warning or way round, and sex used only as a punishme
 (`the-surfaces.md` R5b.3). A "no" that
 locks the relationship for good is flagged, not failed.
 
-**Every finding gets an adversarial verify.** Measured survival rates from our own runs: one
-audit returned 4 confirmed against 6 refuted; another 17 survived against 2 refuted. Roughly
-half of raw findings are noise, and the verify pass is what makes the rest usable. A previous
-review recorded "no false-gap spam" as a quality marker — that is the bar.
+**Every finding gets an adversarial verify.** *(LO decided.)* A raw finding is a hypothesis, and
+the verify pass is what makes the survivors usable.
 
 Give each verifier a **distinct lens** rather than running N identical skeptics. Diversity
 catches failure modes that redundancy cannot.
@@ -159,10 +150,8 @@ pitches, on `v2-attack`.
 
 **Job:** one beat, from a spec it cannot argue with, hitting one measurable target.
 
-This exists because of a specific, documented pattern: the register rule was the most
-carefully written rule in the previous system and was broken in **every** game it shipped.
-That is not a knowledge failure — the rule was right there. It is an **attention** failure.
-When one agent is simultaneously holding flags, placement, media, tiers and save-safety,
+This agent exists for **attention**, not knowledge. *(LO decided.)* A rule can be right there
+and still be broken, because when one agent is simultaneously holding flags, placement, media, tiers and save-safety,
 prose is what slips.
 
 Its spec: the beat, the character, the tier, the explicit ceiling from the Want, and the

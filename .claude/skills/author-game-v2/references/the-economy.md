@@ -675,10 +675,7 @@ actually pays, written down where the obligation is — not an estimate of what 
 the honest maximum, with the working. Declare it and the lint prints the ratio beside the two
 numbers; leave it out and the lint says so.
 
-⚠️ **This is a LINT and never a gate**, and the reason is in the data: `forty_miles` sits at 70% and
-`back_home` at 25%, and a threshold anywhere between them fails a game for obeying the doctrine.
-That is the error that demoted the anchoring check on 2026-08-15 and got P0 refused on 2026-08-27.
-The distribution accumulates until a floor can be read off it rather than invented.
+⚠️ **This is a LINT and never a gate.**
 
 `symbol` is the notation every button, every paragraph and `[settings.rent] currency_symbol` must
 agree with (R7). Declaring the currency is strictly better than letting the gates infer it from

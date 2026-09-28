@@ -125,8 +125,8 @@ id = "<exterior_location_id>"
 
 > ⚠️ **No example world here, and there still will not be one** — see the note under *What the
 > board phase records*. A mechanism is safe to show and a floor plan is not: a mechanism copied
-> verbatim produces a correct game, and a world copied verbatim produced games with the same
-> box room. That is why this shows one key and no rooms.
+> verbatim produces a correct game, and a world copied verbatim produces the same world again.
+> *(LO decided.)* That is why this shows one key and no rooms.
 
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
 see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
@@ -158,7 +158,7 @@ only real defect is being inconsistent, some children prefixed and some bare.
 Deals' [City Map] names its districts *Downtown*, *Harbor*, *Suburbs*, and Course of Temptation's
 [SummitMarket] opens *"a building which contains the eponymous market"*. A dated or regional word
 (*The Parade*, read by most people as a procession) fails it, and so does `the-voice.md` R1's own
-counter-example, *The Box Room*.
+counter-example, *The Undercroft*.
 Say it out loud to someone who has not played: if they cannot tell you what is through the door,
 it is a bad button no matter whose house style it matches.
 
@@ -281,14 +281,13 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
 }
 ```
 
-> ⚠️ **There is no example world here and there will not be one.** This block used to carry a filled-in
-> map, and that map was the first game's own — its `npc_` ids, its box room — with its two known bugs
-> patched out. Games copied its shape. **An example outranks every rule beside it**, so the
+> ⚠️ **There is no example world here and there will not be one.** *(LO decided.)* **An example
+> outranks every rule beside it**, so the
 > shape is taught as R0's menu, which you must choose from, and the schema is shown as fields, which
 > you cannot copy a world out of.
 >
 > If a validated map is ever promoted to an example here, it is **one per archetype or none** — a
-> single good example recreates the same failure with a nicer floor plan.
+> single good example is still one world, copied just the same.
 
 Declared once, before content. The gates then check the built game against **its own declaration**
 rather than against a guess.
@@ -314,11 +313,7 @@ gate 28 takes both: *did you choose a shape* (a declaration), and *is the outsid
 outside* (`entry_from`, which no ledger can talk its way out of). What is left for the human is the
 part that genuinely needs eyes.
 
-> ⚠️ **And the human sign-off failed the first time it mattered.** One game's ledger reads
-> *"SIGNED OFF by LO in chat, board phase, 2026-08-16"* — a person, a place, a date. The next reads
-> *"Signed off in the board phase."* No name. No date. **The map signed off its own map**, and that
-> is the game that shipped seven rooms of a house at 26/26.
->
-> So `r1_signoff` records **who** and **when**. A sign-off by the author of the thing being signed
+> ⚠️ **`r1_signoff` records who and when.** *(LO decided.)* A sign-off with no name and no date
+> cannot be checked. A sign-off by the author of the thing being signed
 > off is not a sign-off, and a gate cannot tell the difference — which is exactly why it is written
 > down here instead.

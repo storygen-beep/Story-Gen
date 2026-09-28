@@ -107,10 +107,6 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
 location against **its own declared `fill`**; the global mean/median floors are only a backstop for
 a game with no ledger.
 
-⚠️ Measured failure worth naming: one of our games *does* have an anchor at 29% — and it is a
-sealed room with no exits that the player can never return to. An anchor the world cannot
-reach is not a centre.
-
 ### ⚠️ Fill the anchor IN STEP with the rest
 
 The anchor rule is a **ratio**, so it tightens every time any other room grows. An anchor left
@@ -219,11 +215,6 @@ writers.** Four rules from its own Writer's Guide that this skill did not hold:
 
 Meek / bratty / neutral, every time she speaks. This is the mechanism behind the field's largest
 love-reason — **freedom, 25.9%, against premise at 0.0%**. Mechanically it is `block_pool`.
-
-⚠️ **Writing the three lines is not the rule. Wiring them is.** A design shipped 33 of these against
-a game with no personality meter, so all of them rotate at random and read as variety rather than
-identity. `the-sheets.md` S8: a named system points at its mechanism, or says in the open that it is
-rotation.
 
 **2 · Per-character mood axes are enumerated and REQUIRED.** Each character has named axes —
 cheerful↔traumatised, shy↔obsessive, pure↔corrupt — and:

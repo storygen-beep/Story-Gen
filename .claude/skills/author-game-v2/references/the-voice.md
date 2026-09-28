@@ -30,13 +30,14 @@ produces, never in the button.
 
 | works | does not |
 |---|---|
-| *Sleep* · *Wash* · *Take a shift* · *Listen through the wall* · *Stand on the landing* | *Sit with it* · *See to it yourself* · *The bench* · *The regulars* · *Someone's in there* |
+| *Do the laundry* · *Eat breakfast* · *Call your sister* · *Knock on his door* · *Walk to the bus stop* | *Make peace with it* · *Let the evening settle* · *The window seat* · *The usual crowd* · *Something left unsaid* |
 
-Same game, same author. The left column loses nothing.
+Failure kinds: *Make peace with it* = abstract phrase · *The window seat*, *The usual crowd* = bare
+noun · *Let the evening settle*, *Something left unsaid* = register-flavoured / literary.
 
 **Location names are UI too.** A name a player cannot resolve is a navigation bug wearing register's
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
-anyone. *The Box Room* becomes *The Back Room* and says where it is in two words anybody owns.
+anyone. *The Undercroft* becomes *The Basement* and says what the place is in one word anybody owns.
 
 > ⚠️ **When you write a cure, run it through the same instrument that caught the disease** —
 > `scripts/genre_words.txt`, one grep. On a button the in-corpus word wins outright.
@@ -104,22 +105,11 @@ paid £8.50 — the cost is information, not a wall.
 make, and they are budgeting against a stated deadline. **And the notation is gated too** — the
 amount on the button has to be written in the game's one currency, the same one
 `[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
-A shipped game put `Feed the meter (GBP 3)` on a button, *"Three pounds"* in the paragraph behind
-it and `$90` on the rent card, because nothing had been declared. `references/the-economy.md` R7
-owns this; `engine.md` §33 lists every place the engine prints money and the four the setting
-reaches.
+`references/the-economy.md` R7 owns this; `engine.md` §33 lists every place the engine prints money
+and the four the setting reaches.
 
-> ⚠️ **That button carried TWO defects and this line only ever saw one.** `meter` is a false
-> friend — a coin-fed prepayment box here, a stat bar to most players, and the game renders four
-> stat bars in its own sidebar. The currency pass quoted the button *in order to fix it*, fixed the
-> notation, and left the unreadable word sitting in the quote, where it stayed until LO clicked it
-> in the built game and asked what it meant.
->
-> `SKILL.md`'s **"an example outranks every rule beside it"**, in its sharpest form yet: not an
-> example that taught a defect by accident, but one held up *as* a defect, with a second defect
-> inside it that survived the edit. **When you quote a broken line, read the whole line.** Stamina-type costs are *not* gated: two
-corpus games label them and the reference game does not, so a rule there would be invented rather
-than measured.
+Stamina-type costs are *not* gated: two corpus games label them and the reference game does not, so
+a rule there would be invented rather than measured.
 
 **Time is the other half of that sentence, and it has its own file.** A label may never promise a
 *clock time* — the engine has no absolute-time advance at all, so `Work the counter till one
@@ -308,18 +298,18 @@ the buttons that are *not* filler.
 **The rewrite is already written, and it is in the beat.** A permitting label is almost always a
 beat whose own prose names the action, with the action then left off the button:
 
-| shipped label | what its beat already says | the button |
+| permitting label | what its beat already says | the button |
 |---|---|---|
-| `back_home` *"Let him look."* | she is naked, the vest is eighteen inches from her hand, and she does not reach for it | **"Don't reach for the vest."** |
-| `forty_miles` *"Let him get the vest off."* | it comes off over her head in a cab too small for it | **"Get the vest over your head."** |
-| `forty_miles` *"Let him get you flat."* | on her back on the bunk, knees up against the locker | **"Go flat on the bunk."** |
-| `vesper` *"Let him turn you round."* | he turns her by the hip and takes her ass in both hands | **"Turn round for him."** |
+| *"Let him look at you."* | you stand naked on the bathroom tiles with the towel at your feet and your tits dripping, and he rubs his cock through his trousers and stares at your cunt | **"Don't pick up the towel."** |
+| *"Let him take your top off."* | you pull your top off, he squeezes a tit in each hand and sucks a nipple into his mouth | **"Pull your top over your head."** |
+| *"Let him bend you over."* | you are bent over the kitchen table, ass up, panties at your knees, and he fucks your cunt with his whole cock | **"Bend over the table."** |
+| *"Let him finish in your mouth."* | you kneel with his cock in your mouth, suck until he comes, and swallow every drop of his cum | **"Swallow his cum."** |
 
 ⚠️ **Permitting is a legitimate button and the field writes it too** — 1.01%, about one label in a
 hundred. In Her Own Hands [JamesDate1FPOptions] sets *"Let James finger you"* beside *"Give James a
 blowjob"*. Keep it where **her not moving is the decision**: she holds still, she does not cover up,
-she lets it happen and that is the choice. Even there the button names *her* — *"Don't reach for the
-vest"*, not *"Let him look."* What the rule refuses is the permitting frame as the house default.
+she lets it happen and that is the choice. Even there the button names *her* — *"Don't pick up the
+towel"*, not *"Let him see."* What the rule refuses is the permitting frame as the house default.
 
 ⚠️ **The SHAPE of the surface is not part of this rule and must not become one.** Menu against
 single-exit chain was tested against engagement and predicts nothing; both machines ship. The
@@ -340,8 +330,8 @@ Source: `~/Documents/Sex_Loop_Study_20260829/shape.py`, and the label counts in 
   a blank next-row.
 
 **R1's cost clause is gated as gate 21** (`a price is on its label`) — a choice that spends the
-currency must name the amount. The rest of R1 is not gateable: whether *The bench* is resolvable is a
-judgement a parser cannot make.
+currency must name the amount. The rest of R1 is not gateable: whether *The window seat* is resolvable is
+a judgement a parser cannot make.
 
 Field reference and citations: `references/engine.md`.
 
@@ -365,8 +355,8 @@ nothing (−0.13, +0.09 across 16 games). Two further findings were tested and w
 be re-proposed: "loops do better" (only two games loop) and "more explicit does better" (+0.18 once
 game size is held constant).
 
-**R1 is deliberately not a gate.** *The bench* is a plain noun and clear in context; *Sit with it*
-is a plain phrase and is not. No rule separates them mechanically, so any threshold on the
+**R1 is deliberately not a gate.** *The window seat* is a plain noun and clear in context; *Make
+peace with it* is a plain phrase and is not. No rule separates them mechanically, so any threshold on the
 noun-only share would be invented, and this skill has demoted two rules for exactly that. The lint
 prints the noun-only share of room-list buttons and names the offending labels. Read it; it stays a human sign-off — read the location
 page as a stranger would, before shipping.

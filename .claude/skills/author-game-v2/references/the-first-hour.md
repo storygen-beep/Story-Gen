@@ -204,9 +204,9 @@ two sentences each side of the card.*
 
 ## F2 · Boot and capstone are two canvases
 
-An opening that swells does so for a structural reason, not a stylistic one: v1 split
-the opening into a small **boot** and a separate **capstone**, and v2 collapsed both into one
-canvas that then had to carry everything.
+The checker and the template both assume this shape. Gate `the opening opens a door`
+(gates.py:9424) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
+gates.py:5086), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
 
 The shape:
 
@@ -947,15 +947,10 @@ visit. This is the same rule for people, and it is the one that was missing.**
 "Who is this" is a **standing** question. A meeting answers it once, and the player then spends forty
 visits in a hub where the man is a bare first name.
 
-**The measured failure.** A game with six men: `npcs[].relationship` written well and landing each of
-them in six words — *"Your husband's eldest, 29"*, *"Your husband's brother, 51"* — and **those
-strings render on the cast page and nowhere else.** In the prose the player actually reads:
-
-```
-canvases   words   times his own surfaces say who he is
-      14   2,594                 2          <- the spine of the game
-      14   1,736                 2
-```
+**Lint `the role stays attached`** (gates.py:5519) takes each character's anchor words from his own
+`npcs[].relationship` line and counts how often his own canvases use them, per 10k words. It prints a
+list, thinnest first, with no bar. It counts every canvas bound to him, so a re-entered surface and a
+one-shot count the same. Reading which is which is yours.
 
 **Where it goes: the surfaces the player RE-ENTERS.** A hub, an ambient, a walk-in. Not the one-shot
 that introduced him — that one is already doing its job.
@@ -967,24 +962,12 @@ that introduced him — that one is already doing its job.
 
 ⚠️ **Do not swap the name out for the relation on the speaker line.** `destroyer` does
 (`<<speech "teagan" "Stepsister">>`) and it is the only game in the 26-game corpus that does — it
-survives it by having **exactly one of each relation**, where the failure above has three men inside
-one. Relation words on buttons run at **field median 0.4%, max 2.0%**. `sluttown-usa` is a family
-premise with 37,408 speaker labels and uses **names only**. Swapping does not remove the memory tax,
+survives it by having **exactly one of each relation**. Relation words on buttons run at **field
+median 0.4%, max 2.0%**. `sluttown-usa` is a family premise with 37,408 speaker labels and uses **names only**. Swapping does not remove the memory tax,
 it moves it: the player now has to remember who "Stepsister" is.
 
-The cheap form is three words riding in prose that was going to be there anyway:
-
-```
-before   He has taken his jacket off and hung it on the back of the chair, which is as close as
-         THIS MAN comes to being off duty.
-after    …which is as close as YOUR HUSBAND'S ELDEST comes to being off duty.
-
-before   CADE comes up for ten minutes on a Friday and stands rather than sits.
-after    CADE — YOUR HUSBAND'S ELDEST, and the only one of them with a reason to be in this
-         kitchen — comes up for ten minutes on a Friday…
-```
-
-Name and relation on the same line, at the point of use, and the register does not move.
+The cheap form is three words riding in prose that was going to be there anyway: name and relation on
+the same line, at the point of use, and the register does not move.
 
 **Put it in a `block_pool` variant rather than in the always-renders text.** A hub pool cycles, so
 the anchor recurs periodically instead of arriving every single visit, which is how a reminder turns

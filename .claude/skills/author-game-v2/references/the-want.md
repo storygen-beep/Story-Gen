@@ -2,15 +2,11 @@
 
 ## Why this exists
 
-A previous game had a fantasy specification written on its first turn. It was good. It named
-its charge in three parts. It was then never opened again, and the game shipped reading as a
-crime thriller with sex in it.
-
-The defect was not the absence of a spec. It was that nothing in the process ever read it
-back. So the rule here is mechanical, not aspirational:
+A fantasy specification written once and never read back does nothing. So the rule here is
+mechanical, not aspirational:
 
 > **The Want is an input to every release. A release that cannot name which line of the Want
-> it serves does not ship.**
+> it serves does not ship.** *(LO decided.)*
 
 Write it before the world. Re-read it before every release. Amend it deliberately and log the
 amendment — never let it quietly stop being true.
@@ -86,20 +82,9 @@ Course of Temptation never shows a stat screen; it asks about her past and initi
 thirteen skills the player never sees. Ask something the scene is **already asking**, and set a flag
 from the answer.
 
-> **Worked example — `mrs_vance`, the only one that exists.** Its opening already asked the player
-> four questions and **discarded every answer**: both choices on `open_dorn_leaves.base` and both on
-> `.the_book` shared one target, carried no effects, and differed in no way. Nothing had to be
-> invented — the ledger scene already implies *have you done this before?*, so `the_book`'s two inert
-> choices became three, setting `past_books` / `past_road` / `past_counter`. Read at **5 sites each**:
-> a three-band ladder on the three daily work surfaces, plus a paired privilege rung on each.
->
-> The `past_road` rung is the one that shows what a start choice is *for*: she takes the truck key off
-> the board herself, which is the bottom rung of this game's own declared ascent — *"she asks Cade for
-> the truck to leave the property at all."* **A start choice buys reach, not flavour** (§3).
-
 ⚠️ **ADDITIVE ONLY WHEN RETROFITTING.** Each original rung keeps every number it had and gains
-`<flag> is_false`, so the pair is mutually exclusive, no door closes, and a save made before the
-choice shipped carries no flag and reads exactly what it read yesterday. **A start choice that takes
+`<flag> is_false`, so it and the rung the start choice adds are mutually exclusive, no door closes,
+and a save made before the choice shipped carries no flag and reads exactly what it read yesterday. **A start choice that takes
 content away from an existing save is the version players punish.**
 
 ⚠️ **THAT IS A SAVE-SAFETY RULE, NOT A DESIGN RULE, AND THE SCOPE WAS ADDED 2026-08-28.** Read as

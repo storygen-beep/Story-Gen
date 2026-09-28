@@ -7,8 +7,7 @@ is about *what* the meter unlocks. This one is about the meters themselves.
 
 **W1–W6 — which meters exist and who owns them.** The decision that comes before every other one on
 this page: does the PLAYER climb or does the CAST, what a throttle is actually for, how deep a
-ladder goes, and whether a number anything reads. Missing entirely until 2026-08-19, which is why
-five games shipped the same meters without anyone choosing them. **W5b** (2026-08-24) covers the
+ladder goes, and whether a number anything reads. Missing entirely until 2026-08-19. **W5b** (2026-08-24) covers the
 one meter that breaks W5's rules on purpose — a *"who knows about her"* meter, which rises and
 almost never refuses.
 
@@ -18,20 +17,11 @@ between an ascent and a button.
 **M8–M10 — the body.** A need falls on its own, she refills it, and while it is empty something is
 shut. Missing until 2026-08-18.
 
-> **Measured failure it prevents.** A game shipped with three correctly-declared ascent tiers, gates
-> at 15/35/55 on all three, every penetrative scene properly behind one, and **not a single brake on
-> any of them.** Live, in the built game:
->
-> ```
-> 12 clicks of one choice — "Read the fourth rule again."
-> cover  4 → 16     (crossed the cover-15 band)
-> energy 100 → 100      money 2 → 2
-> clock  Monday 05:57 → Monday 08:33
-> ```
->
-> `+1 cover · 10 minutes · no cost · no cap · no daily limit · repeatable forever.` Cover 0→55 is
-> 55 clicks, about nine hours of one Monday. All three tiers top out inside two in-game days. The
-> game scored **22/24** and no gate asked the question.
+> **Gate `the climb is paid for`** (gates.py:8183) walks every trait any condition reads, not just
+> the declared tiers. It fails when any route into a rung that raises a gated meter carries no
+> `costs`, no `max_triggers_per_day` on the target's trigger, and no day-cap flag cleared in
+> `[engine.daily_tick]`. One free route is enough to fail. It prints clicks and in-game time to the
+> top gate either way.
 
 > **This file adapts material from the incumbent `author-game` skill**, which had solved most of
 > this and which v2 never carried over — `author-game/references/trait-design.md` ("The throttle
@@ -807,15 +797,14 @@ P8, measured off the reference game: raises are small and uniform, each scene is
 day, and deeper content is gated by **higher thresholds — that is, more days — not by bigger
 per-act jumps.**
 
-The tell that this has gone wrong is not the threshold; it is the **rate**. `cover 55` is a
-perfectly good top band. `cover 55` reachable in nine hours of one Monday is the defect. When
-judging a tier, always compute the same two numbers:
+The tell that this has gone wrong is not the threshold; it is the **rate**. When judging a tier,
+always compute the same two numbers:
 
 ```
 clicks to the top band  ·  in-game minutes to the top band
 ```
 
-A first release should be measured in in-game **days** on its fastest route.
+`the climb is paid for` prints both numbers for every free route (gates.py:8249).
 
 ### M3 · The throttle menu — four levers, and none of them works alone
 
@@ -823,7 +812,7 @@ A first release should be measured in in-game **days** on its fastest route.
 |---|---|---|
 | **1 · Threshold spacing** *(always on)* | widen the gap between rungs while keeping the per-beat increment fixed, so the climb takes days | does nothing on its own — 55 free clicks is still 55 free clicks. And **don't over-space a thin repeated beat**: if the rung is one recycled paragraph, a huge bar is just tedium |
 | **2 · A window-sized time cost** | `time_progression_minutes` on the rung's exit. The best-*reading* throttle: it is fiction, not a mechanic, and no single deleted line removes it | **only bites when sized against the window.** A 10-minute rung against an all-day hub is farmable ~144× per day. A 180-minute rung against a 09:00–18:00 NPC window is ~3/day. Advancing past an NPC's schedule window makes them absent, which is what actually stops the rung |
-| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12126`) — a triggerless rung has none.** And a single removable flag is brittle as the *only* brake: v1 records a whole seduction climb collapsing on first play the moment its one daily-cap flag was deleted |
+| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12126`) — a triggerless rung has none.** |
 | **4 · A resource cost per rung** | `costs` (§27). Gate-enforced — the engine does not offer a rung the player cannot afford | energy is the wrong *primary* lock for a relationship ("too tired to seduce him" is bad fiction). It is a legitimate *throttle* when the fiction supports it, and it is the strongest tool available to a triggerless rung |
 
 ### M4 · The recipe — layer all three
@@ -836,7 +825,7 @@ A first release should be measured in in-game **days** on its fastest route.
   the player wanted, you have built a chore. The payoff is content, not a number: a new line, a
   clip they have not seen, a door that opens.
 
-### M5 · How to throttle a TRIGGERLESS rung — the gap that caused the failure
+### M5 · How to throttle a TRIGGERLESS rung
 
 A rung reached by a hub choice is **triggerless**: a canvas with no `[canvases.trigger]` block.
 That single structural fact voids the first tool everyone reaches for.
@@ -1002,8 +991,3 @@ Two shapes, and pick on purpose:
   resource.
 
 A need can use both. What it cannot do is neither, which is a trait that only ever goes up.
-
----
-
-A one-node canvas is a single screen with a single exit — which is a fine shape for a
-rung, and a warning when it is the shape of the *entire game*.

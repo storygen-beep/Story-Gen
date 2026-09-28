@@ -177,8 +177,8 @@ belong here; only decisions, debts, and promises do.
       //    the honest maximum with its working, not a guess at what a player will earn.
       //    the-economy.md R3 says "price it against the income channels in both directions";
       //    this is the field that makes the sum checkable instead of a prose comment. Printed
-      //    by the obligation-against-the-week LINT, never judged: a threshold here would fail
-      //    a game for obeying the rule, so the lint prints the ratio and leaves it to you.
+      //    by the obligation-against-the-week LINT, never judged: the lint prints the ratio
+      //    and leaves it to you.
       "week_income": 350,
       // ⚠️ R3b. Present ONLY if the obligation moves, and it names the mechanism in one
       //    line. A constant obligation against a rising income is soft at whatever value
@@ -236,7 +236,7 @@ belong here; only decisions, debts, and promises do.
 **`phase`** — the only thing the dispatcher reads. Advance it deliberately.
 
 **`want.last_read_at_release`** — the anti-drift mechanism, and the reason this file exists in
-this shape. The documented failure was a fantasy spec written once and never opened again. If
+this shape: the Want is read every release. *(LO decided.)* If
 this field is behind the current version, the Want has not been read this cycle and the
 release is not ready.
 
@@ -309,8 +309,8 @@ interior, so it is also the only renewable source of new characters.
 nothing reads it.
 
 **`board.map.r1_signoff`** — **who** signed the map off and **when**. A sign-off written by the
-author of the map is not a sign-off; the game that shipped seven rooms of a house at 26/26 recorded
-*"Signed off in the board phase"* with no name and no date. `the-map.md`, "What is checked".
+author of the map is not a sign-off, and one with no name and no date cannot be checked.
+*(LO decided.)* `the-map.md`, "What is checked".
 
 **`board.economy.currency`** — declaring it is strictly better than letting the gates infer one
 from `player.core_traits`; the headline says which was used, and inference picks wrong on a game
@@ -331,10 +331,7 @@ the university president?"*). Each promise is eventually **paid or cut**, and cu
 logged like any other decision.
 
 **`decisions`** — the trail. Especially: anything that removes or inverts a source of heat
-must be logged **with what replaces it**. A measured pattern in a previous game was a series
-of individually reasonable calls — removing an arousal stat, re-reading a beat as something
-other than desire, making exhibition instrumental — that were jointly fatal, and no single one
-was ever written down as a cost.
+must be logged **with what replaces it**. *(LO decided.)*
 
 ---
 

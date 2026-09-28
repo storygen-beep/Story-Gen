@@ -131,9 +131,7 @@ That is what separates a room from a button list.
 ⚠️ **And "people" is not one bucket — each of them has to own a different part of the world.**
 A character is separated from the others by the **subject he talks about and the people who are
 his** (the doctor has the clinic; the administrator has the votes and the levy; one woman has the
-shop and her two friends), and
-by **a place and an hour where he is the only one there**. Write five good voices and then schedule
-all five into the same room every evening and the player still cannot tell them apart
+shop and her two friends)
 (`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
 
 **A canvas advances in one of two ways, and the content kind picks which** (`the-surfaces.md` R3b):
@@ -381,8 +379,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
 - **A number is a promise until an instrument produces it.** `the-sheets.md` S1. A sheet that
   counts paragraphs and `gates.py`, which counts nodes, disagree about the same design. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
   side of a summary, however carefully it was counted.
-- **Parse, never grep.** Game state is TOML; read it with a parser. A grep-based pass on one
-  game silently missed 24 `is_repeatable` lines and reported the opposite of the truth. The
+- **Parse, never grep.** Game state is TOML; read it with a parser, never grep. *(LO decided.)* The
   same discipline applies to every claim: measure it, don't eyeball it.
 - **Every engine claim carries a `file:line`.** If `references/engine.md` doesn't have it,
   go read `apps/game_generation/twee_comprehensive/generators/v2.py` and add it with its
@@ -432,31 +429,22 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   agent reads first. **It scores nothing and always exits 0** — same rule as `--words`, and for a
   harder reason: *"this location is too thin"* is an opinion.
 - **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
-  at all.** A rule is read; an example is copied. `the-map.md` shipped a worked example on day one
-  that was the first game's own map — its character ids, its box room — with its two known bugs
-  patched out and its skeleton intact. Three games inherited that skeleton, and the second
-  house-shaped world scored **26/26** before anyone noticed. Where a shape has to be taught, teach a
+  at all.** *(LO decided.)* A rule is read; an example is copied. Where a shape has to be taught, teach a
   **menu the author must choose from**, never one picture they can copy. If a validated example is
-  ever promoted, it is **one per option or none** — a single good example reproduces the failure
-  with a nicer floor plan. *(Every other reference file carrying a worked example has the same
+  ever promoted, it is **one per option or none** — a single good example is still one picture,
+  copied just the same. *(Every other reference file carrying a worked example has the same
   exposure; that audit is open.)*
-- **The examples are also the REGISTER, not just the shape.** Same rule, third instance, and the
-  one nobody saw coming: no line in this skill ever said "write British", but its worked examples
-  used `airer` ×9, `lodger` ×8, `immersion` ×3 and shipped `costs = "£5 for the immersion"` in
-  `templates/board.toml`. Five games came out written in a dialect the genre does not use — the
-  field runs locale-locked nouns at **0.8 per 10,000 words**, our v2 games at **9.4–95.6**, and the
-  v1 games, whose skill happened not to carry those examples, sit at the field's rate. **Every word
-  in an example is being taught too.** `references/register.md`, "The words the player has to
-  already own".
+- **The examples are also the REGISTER, not just the shape.** Same rule, applied to words: an
+  example's vocabulary is copied along with its shape, so an example written in a dialect teaches
+  that dialect. **Every word in an example is being taught too.** *(LO decided.)* The field runs
+  locale-locked nouns at **0.8 per 10,000 words**; `references/register.md`, "The words the player
+  has to already own".
 - **A shape that ships in `templates/` is copied harder than one that ships in `references/`.** A
   reference file is read; a template is *filled in*, so whatever is already sitting in the slot is
-  the answer unless the author actively fights it. `the-board.md` said *"their rungs sit at
-  15/35/55/75 — copy that shape"* and `templates/board.toml` carried the matching band table:
-  **all 16 declared tiers across five games put their lowest rung at exactly 15**, against a field
-  that runs 8–17 rungs starting at ~5. The same file's volatile block said *"NEVER gate an arc on
-  these"* and omitted what a throttle IS for, and five games shipped **232 arousal raises against 4
-  reads**. This is the "an example outranks every rule" rule one level worse: in a template, even a
-  *placeholder list* is an example. Ship a menu the author must cut down, never a set they can keep.
+  the answer unless the author actively fights it. A band table in a template becomes the declared
+  tiers, whatever the field runs (8–17 rungs starting at ~5). This is the "an example outranks every
+  rule" rule one level worse: in a template, even a *placeholder list* is an example. Ship a menu the
+  author must cut down, never a set they can keep. *(LO decided.)*
 - **Ask what a tired author would build to satisfy a check, and make sure that is the thing you
   want.** A check does not measure quality; it **manufactures** whatever it can see. `objects` /
   gate 22 forced duplicate room screens into existence, because it computed affordances from
