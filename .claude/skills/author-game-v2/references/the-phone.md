@@ -345,8 +345,8 @@ silently is not there is not.
 The first eligible event claims the slot and nothing below it renders. **The phone never shows the
 player more than one thing to do.**
 
-The mopoga field study named **lostness, not grind, as this genre's disease** — 4.7% of complaints
-against 0.9%. The phone is the best place in a sandbox to answer *what now*, and the corpus's
+The mopoga field study named **lostness, not grind, as this genre's disease** — 15.5% of player
+comments against grind's 0.9% (Process Review, Round 1). The phone is the best place in a sandbox to answer *what now*, and the corpus's
 players say so themselves, twice, unprompted:
 
 > *"Check the phone in the game. It tells you who's playing who."* — `college-daze`, 20 net
@@ -482,6 +482,18 @@ directions**, and the verdict wins. Prevalence measures what authors built, not 
 battery, no charging, no data plan, no phone bill as a repeating upkeep. (A one-off *price* to buy
 the phone is a different thing and is fine — `destroyer` sells one for $500 — that is
 `the-economy.md` R1b's territory, a thing that stays bought.)
+
+## P12 · The phone brings someone to her
+
+In at least 10 of the 17 top games with a phone, a call or a text starts a scene without travelling
+(Process Review, Round 1, numbers only). Course of Temptation's [PhoneText] texts a contact for a
+booty call and offers *"Tonight"* or *"Tomorrow night"*. The failure is a phone that only holds
+Patreon, Discord and credits links.
+
+**In this engine** the phone's `launcher` app is a door, not a button (`setup._renderLauncher`): an
+option plays only when she is already in that canvas's room, and a canvas that requires him present
+needs him there. So a summon is a launcher option pointing at a canvas in **her** room, with no
+presence requirement on him — he arrives in the scene.
 
 ---
 

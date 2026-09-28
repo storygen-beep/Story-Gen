@@ -1,11 +1,11 @@
 ---
 name: author-game-v2
-description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a never-ending release stream rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible locked door. Ships a runnable scoreboard (scripts/gates.py) whose thresholds came from measuring a top game's own source and, for the world/guidance/economy/prose gates, a field of 18 shipped sandboxes. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
+description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a release stream that never stalls — a goal can end and a new one opens — rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible locked door. Ships a runnable scoreboard (scripts/gates.py) whose thresholds came from measuring a top game's own source and, for the world/guidance/economy/prose gates, a field of 18 shipped sandboxes. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
 ---
 
 # author-game v2 — the release stream
 
-**v1 designs a story and then builds it. v2 designs a world and then feeds it forever.**
+**v1 designs a story and then builds it. v2 designs a world and keeps it moving: when a goal ends, a new one opens.**
 
 That is the whole change, and it came out of measurement, not taste. Ten snapshots of
 Degrees of Lewdity's own source (2018-11 → 2026-07, 25 → 61 locations, 254k → 2.24M words)
@@ -18,19 +18,29 @@ its structure and numbers, never its scenes.**
 Every one is a measured number, not an opinion. The evidence lives inline in
 `scripts/gates.py`; the short version:
 
-1. **The product never ends.** Endings *inside* the game are normal — DoL ships seven
-   terminal fail-states — but the game itself does not close. On a subscription the revenue
-   is an integral over months, and nothing anywhere pays for a finished browser sandbox.
+1. **The game never stalls; a goal can end and a new one opens.** Endings are normal — at least 9
+   of the top 26 games have real ones, and two finished games still rank in the top 26. What loses
+   players is a game with nothing next: when a goal ends, the next one opens in the same release.
 
 2. **Fill before you widen — as a distribution, not a floor.** DoL's seed put 116,540 words
    across 25 locations: **mean 4,661, median 3,154**, and **one anchor location** holding
-   **30% of all location prose**, with a long tail down to a 302-word bus station. Thin
-   satellites are fine; a world with no centre is not. By 2026 the mean had risen to 24,564
+   **30% of all location prose**, with a long tail down to a 302-word bus station — *the reference
+   game's 2018 seed, labelled*. The field has the shape at **district** scale (the top district holds a
+   median 49.4% of prose; 22 of 26 games reach 25%) and **not at room** scale (the top room, a median
+   13.1%; 6 of 26). Thin satellites are fine; a world with no centre is not. By 2026 the mean had risen to 24,564
    while locations only went 25 → 61 — depth outpaces breadth, every year.
 
-3. **Heat lives where the player returns.** 7.5–9.3% of beats carry three or more explicit
-   words — a ratio DoL held across eight years and twelve-fold growth — and the majority of
-   them sit in re-enterable content.
+3. **Heat lives where the player returns** — most explicit content sits where the player can go
+   back. The gate counts **beats** (a beat is one screen): `explicit floor` wants **7.5% of repeatable
+   beats** to carry three or more explicit words. The 7.5% is the reference game's band (7.5–9.3%,
+   held eight years), not the genre's rate, and the field reads differently by unit:
+
+   | unit | field median | the reference game's 7.5% |
+   |---|---|---|
+   | per passage — 18 shipped sandboxes | 33.3% | the lowest of the 18 |
+   | per paragraph — 26 top games | 4.4% | reached by 8 of 26 |
+
+   No field figure per beat exists yet, so a pass reads "not empty", never "hot" (`register.md`).
 
 4. **A release adds events, not places.** One full six-week DoL cycle: +196 units,
    +24,388 words, **zero** new locations, and all ten of its content commits were events at
@@ -89,7 +99,7 @@ those carries published weaknesses:
 
 | the pattern | its documented weakness |
 |---|---|
-| Open Map | *"Reviewers may miss narrative content if exploration becomes tedious"* — and lostness is the genre's dominant complaint, 4.7% median share against grind's 0.9% |
+| Open Map | *"Reviewers may miss narrative content if exploration becomes tedious"* — and lostness is the genre's dominant complaint, 15.5% of player comments (per-game median 14.4%) against grind's 0.9% (Process Review, Round 1) |
 | Floating Modules | *"Reviewers struggle to assess completeness"* |
 | Floating Modules | *"requires substantial content; collapses into linearity otherwise"* |
 | all three | *"writers tend to rebound quickly to a more unified structure"* — the arc pull, **a known property of the structure, not indiscipline** |

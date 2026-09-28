@@ -151,7 +151,7 @@ reference.
 
 **W5 · Refusing costs nothing.** Half the corpus ships no creation step at all, including the
 second-ranked game. Across 22,614 comments the entire subject runs at **0.12%** — against lostness
-at 4.7% and grind at 0.9%. Six comments ask for more customization; two ask for a skip button.
+at 15.5% and grind at 0.9% (Process Review, Round 1). Six comments ask for more customization; two ask for a skip button.
 
 ⚠️ **This is NOT `the-phone.md` P1's refusal rule, and must not be written as one.** P1 could say
 *"most games should not have a phone"* because the corpus returned a verdict — 24 likes to 0.

@@ -19,6 +19,7 @@ Engine claims here carry a `file:line` into
 ## Contents
 1. F1 · The opening picks one shape and commits
 1b. F1b · The opening's shape (setup → … → gameplay)
+1c. F1c · A returning player can skip the opening
 2. F2 · Boot and capstone are two canvases
 3. F3 · The opening hands over into an open door
 4. F4 · Every live system gets one beat
@@ -201,6 +202,14 @@ People are in different places at different hours. What you say changes how they
 
 *34 words of story · median sentence 9. Money problem, objective, mystery, person and a choice in
 two sentences each side of the card.*
+
+## F1c · A returning player can skip the opening
+
+Put one choice on the opening's first screen — *read it* or *skip it*. Fifteen of 26 top games offer a
+skip (Process Review, Round 1, numbers only), and all four passing games do: In Her Own Hands
+[SkipPreface] (*"No, skip the Preface"*), Course of Temptation [QuickstartMenu], Shady Deals' "Custom
+Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening sets and lands where the
+opening hands over, so nothing downstream — `the opening opens a door` included — can tell the difference.
 
 ## F2 · Boot and capstone are two canvases
 

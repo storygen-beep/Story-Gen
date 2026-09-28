@@ -212,8 +212,8 @@ One quest-card row per ascent tier on the decision sheet, one per character on t
 
 > **The incident.** `quests_engine = "v2"` lights a sidebar entry and a page, and with no cards
 > renders a heading and nothing. **No sheet in the format mentioned a quest card.** Nine were written
-> from scratch after the first gate run. Lostness is the genre's dominant complaint — a 4.7% median
-> share of player comments against grind's 0.9%.
+> from scratch after the first gate run. Lostness is the genre's dominant complaint — 15.5% of player
+> comments against grind's 0.9% (Process Review, Round 1).
 
 ---
 

@@ -5,6 +5,71 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-28 — IC18 follow-up: the description and the opening line match "the game never stalls"
+
+**Why.** LO: two lines still contradicted commitment 1 after IC18 — the frontmatter description ("a
+never-ending release stream") and `SKILL.md:8` ("feeds it forever").
+
+**What changed.**
+- `SKILL.md` frontmatter `description`: "a never-ending release stream" → "a release stream that never
+  stalls — a goal can end and a new one opens". The trigger words ("/author-game-v2", "author-game v2",
+  "v2 on <slug>", "start a v2 game") and every other word are unchanged, since the description decides
+  when the skill is invoked (LO).
+- `SKILL.md:8`: "v2 designs a world and then feeds it forever" → "v2 designs a world and keeps it moving:
+  when a goal ends, a new one opens."
+- `the-release.md:3`: "The **release** is, and it repeats forever" → "…and it repeats, release after
+  release" (LO). The other "forever"s in the skill describe engine behaviour — a flag held, a line on
+  every visit — and stay.
+
+**Verified.** pytest 175 passed · `--selfcheck` exit 0 · cite_check in scope 0 · tallies unchanged.
+
+words: 136,058 → 136,080 (+22) · running total 136,080 / 149,283
+
+---
+
+## 2026-09-28 — IC18: numbers that disagree with the field — relabelled, with their units
+
+**Why.** PRD IC18 (the old WS13). Three founding numbers read as the genre's when they were the reference
+game's, and the lostness figure came from a too-narrow search. Wording reviewed by LO first
+(`round5/IC18_REVIEW.md`); LO's changes 2026-09-28.
+
+**What changed.**
+- **"The product never ends" → "The game never stalls; a goal can end and a new one opens"** (`SKILL.md`
+  commitment 1, `the-voice.md`). Evidence: at least 9 of the top 26 games have real endings and two
+  finished games still rank in the top 26 (`SKILL_REVIEW.md` §2.1).
+- **The 7.5% band, with its unit (LO):** `SKILL.md` commitment 3 now says the gate counts **beats** —
+  `explicit floor` wants 7.5% of repeatable beats with three or more explicit words — that 7.5% is the
+  reference game's band, and the field side by side by unit: per passage (18 sandboxes) median 33.3%,
+  where the reference is the lowest; per paragraph (26 games) median 4.4%, where 8 of 26 reach 7.5%. No
+  field figure per beat exists yet, so a pass reads "not empty", never "hot".
+- **The anchor share, relabelled only (LO, option a):** `SKILL.md` commitment 2, `the-board.md` §1 and
+  `the-release.md` § first release label the 30% / ≥25% as the reference game's 2018 seed figure and put
+  the field beside it — the top district holds a median 49.4% (22 of 26 games reach 25%), the top room a
+  median 13.1% (6 of 26) (`SKILL_REVIEW.md` §2.2). The gate `location fill` is unchanged; a
+  district-level gate can be its own item.
+- **Lostness 15.5%, not 4.7%**, at six sites (`SKILL.md`, `the-phone.md`, `the-systems.md`,
+  `the-want.md`, `the-sheets.md`, `the-clock.md`): 15.5% of player comments, per-game median 14.4%
+  (Process Review, Round 1; the old 4.7% came from a narrower search). Grind stays 0.9% — Round 1
+  re-measured it.
+- **New `the-phone.md` P12 · The phone brings someone to her:** at least 10 of the 17 top games with a
+  phone use it to summon (Round 1, numbers only); Course of Temptation [PhoneText] ("Tonight" /
+  "Tomorrow night"). Engine route checked in `setup._renderLauncher`: the launcher is a door, so a summon
+  is an option whose canvas sits in her room with no presence requirement on him.
+- **New `the-first-hour.md` F1c · A returning player can skip the opening:** 15 of 26 top games offer a
+  skip (Round 1, numbers only), and all four passing games do — In Her Own Hands [SkipPreface] ("No,
+  skip the Preface"), Course of Temptation [QuickstartMenu], Shady Deals' "Custom Start", Cupid's Way's
+  "Skip Prologue". The skip sets every flag the opening sets and lands where it hands over.
+- Already done elsewhere: guidance keyed to steps (IC5), gate counts generated (IC14).
+
+**Verified.** pytest 175 passed · `--selfcheck` exit 0, 160 rules resolving, 0 hand-written counts ·
+cite_check in scope 0 · tallies unchanged (29/47, 46/50, 41/48 with 3 [off]) · `git status games/`
+unchanged.
+
+words: 135,587 → 136,058 (+471; the plan estimated +150 — the two-unit table and the anchor labels
+are longer than drafted) · running total 136,058 / 149,283
+
+---
+
 ## 2026-09-28 — IC20: keep and protect — one "do not regress" list in SKILL.md
 
 **Why.** PRD IC20 (the old WS15): the rules much of the skill leans on had no marker saying so, so an

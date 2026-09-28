@@ -1,6 +1,6 @@
 # The Release — the unit of work
 
-The game is never the unit. The **release** is, and it repeats forever.
+The game is never the unit. The **release** is, and it repeats, release after release.
 
 ---
 
@@ -427,7 +427,8 @@ is never finished. *(LO decided.)*
 
 - **As many locations as your cast and your loop require, shaped like the reference seed.**
   Derive the count — the places your declared rosters visit, plus what the daily loop needs (sleep,
-  earn, wash, cross) — then shape the set: one anchor holding **≥25%** of the prose, satellites
+  earn, wash, cross) — then shape the set: one anchor holding **≥25%** of the prose (the reference game's seed figure; the
+  field reaches it by district, `the-board.md` §1), satellites
   free to be small. Each location declares its own word budget, in round numbers, before the
   prose; gate 1 checks the game against that rather than against a global figure. `the-board.md` §1.
   *(The fill SHAPE is measured from the reference seed. A location COUNT is not measurable from it:

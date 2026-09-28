@@ -44,7 +44,9 @@ Write the list of places that answer at least one of those, and count it. That i
 Budget the set as a *shape*, not a flat quota:
 
 - **one anchor** carrying **≥25%** of all your location prose — the place the game is actually
-  about, where she spends her hours. At seed the reference game's anchor held 35,218 words
+  about, where she spends her hours. *The 25% is the reference game's seed figure, labelled;* the
+  field reaches it at district scale (top district median 49.4%, 22 of 26 games) and rarely in a single
+  room (top room median 13.1%, 6 of 26), so an anchor may be a set of rooms. At seed the reference game's anchor held 35,218 words
   against a 116,540-word total.
 - satellites may be genuinely small. A 300-word bus station is not a defect; it is a corridor —
   **provided you declared it as one** (see `fill`, below).
