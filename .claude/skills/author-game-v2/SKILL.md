@@ -118,11 +118,9 @@ anything earlier:
 is a dead end, and `gates.py` will say so.
 
 ⚠️ **A milestone is rarely alone — in the field it is the LAST step of a numbered arc, and the
-standing surface is what finishing that arc buys.** `family-ties` runs nine steps before the act
-becomes something she can simply do; `course-of-temptation` runs ten. Ours run one: measured
-2026-09-01 across twelve built games and 1,396 canvases, **no character anywhere in this repo has
-a second thing that happens.** Every hub and act loop here is authored in its converted state on
-day one. `references/the-arc.md`.
+standing surface is what finishing that arc buys.** `course-of-temptation` runs ten steps before
+the act becomes something she can simply do. Write one or two long chains for the central people
+and run `lint · the arc ladder`. `references/the-arc.md`.
 
 ⚠️ **Those three answer WHEN content fires. They do not answer WHICH SCREEN IT LIVES ON, and that
 is a separate question with its own file — `references/the-surfaces.md`.** Ask *who is this aimed
@@ -139,19 +137,16 @@ A character is separated from the others by the **subject he talks about and the
 his** (the doctor has the clinic; the administrator has the votes and the levy; one woman has the
 shop and her two friends), and
 by **a place and an hour where he is the only one there**. Write five good voices and then schedule
-all five into the same room every evening and the player still cannot tell them apart — which is
-exactly what `the_season` did (`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
+all five into the same room every evening and the player still cannot tell them apart
+(`the-surfaces.md` R8, `register.md` S3, `the-meters.md` W6).
 
 **A canvas advances in one of two ways, and the content kind picks which** (`the-surfaces.md` R3b):
 a **cascade** appends below what is on screen, so it suits a one-time scene whose text should build;
 **node routing** swaps the passage, so it suits a repeatable act surface where the picture has to
 change with the act.
 
-⚠️ **A surface the player re-enters needs its text to VARY, and no v2 game has ever made it.**
-Counted across every `toml_phases/*.toml` here: `block_pool` — which picks a different one of N
-blocks on every render — runs **46 times in the_long_summer, 14 in under_one_roof, 6 in vesper, and
-0 times in every v2 game.** v1 had a numbered rule for it; v2 lost it in the divorce from the old
-corpus (`engine.md` §35). Three of the four top
+⚠️ **A surface the player re-enters needs its text to VARY.**
+Three of the four top
 female-PC games in the corpus build every repeatable sexual surface out of such pools, and none of
 them writes one as a paragraph. Two ways to do it, and they are siblings: **`block_pool` for
 undirected variety** (a die), **stacked `group` bands for directed variety** (state) — DoL writes
@@ -222,12 +217,12 @@ are not using.
 CAST?** The field splits 8 roster / 9 ladder with nothing between them, and all five v2 games landed
 in the empty middle because nobody asked. Declare `board.who_climbs` before naming a meter.
 
-**The agent roster is in `references/agents.md`, and all five are BUILT** —
+**The agent roster is in `references/agents.md`, and all six are BUILT** —
 `v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
 relationship each), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
 instance, before the build; the `excitement` lens reads each pitch), `v2-listener` (loop step 8,
-what players said, via `scripts/listen_mopoga.py`). Four carry a deterministic instrument; the Panel carries none, and `agents.md` records
-the three checks that were prototyped for it and came back empty, so nobody builds them twice.
+what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the seven scene tests in
+`register.md`, "What a scene contains"). The Panel has no instrument of its own (`agents.md`).
 The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
 
@@ -330,7 +325,10 @@ elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable clai
 gated on the flag that records it — the truth rule's rule 2, `register.md`) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
 `the-meters.md`, show the reaction, not the number) · **a one-time step speaks** (every one-time
-canvas bound to a person with no `dialog` block in it) · **thoughts outweigh speech** (every canvas
+canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest
+chain where each step reads what the one before sets; `the-arc.md` A1) · **a scene ends on nothing** (a one-time
+scene with a person and no choice anywhere, so its hook must be its last line) · **a person who never
+speaks** (a repeatable scene bound to a person who has no line in it) · **thoughts outweigh speech** (every canvas
 bound to a person where `thought_bubble` words outnumber spoken ones — the voice's rule 3, thoughts
 beside dialogue, never instead) · **the opening arms a card with goals** (`the-first-hour.md` F1b —
 the cards visible once the opening hands over, and whether any carries `goals`) · **named before met** (every character
@@ -423,7 +421,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   | | |
   |---|---|
   | `gates.py --words <path>` | the vocabulary lint on any text file — run it on the WANT and the BOARD, while the nouns are still being *chosen*. Run on a built game it is one phase too late: every noun is already a room name and a button. Always exits 0; it is a list, never a score. |
-  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md "S1 · The clip rides the beat"`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several (`forty_miles`: 938 beats, 259 nodes). Always exits 0 — a paragraph outside its canvas cannot be failed. |
+  | `gates.py --beat <path>` | **the only mode that measures prose not yet in a game.** Blank-line separated blocks are beats. Reports the explicit count against the 3+ the `explicit floor` gate uses, median sentence against the 14 ceiling, dash rate, which act rungs the text names, and **where the body words fall across the sentences** — the pivot as a shape, because `register.md`'s rule is a reading test and no regex decides what a sentence is *about*. Every threshold is one this script already used; none is new, so the Prose Maker cannot optimise for a private scale the build never checks. ⚠️ **No verdict on length**: `register.md "S1 · The clip rides the beat"`'s 37 words is per *screen*, and a non-cascade node is one `Beat` here that can hold several. Always exits 0 — a paragraph outside its canvas cannot be failed. |
   | `gates.py --release <slug>` | the **artefact**, not the source. Every gate above reads `7_final_game.toml` and none of them can see a build. Seven checks, off for every ordinary run, **exits non-zero**. One of them, `every canvas is a passage`, is the only thing in the skill that can see a canvas the generator DROPPED: two consecutive games shipped their act loops written and absent, with 46 green gates over them, because gates parse the source and reachability is decided at build time (`defects/001`). `the-release.md` § Shipping the build. |
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
@@ -547,8 +545,7 @@ exits that fire effects and show no screen, with the game-time they burn. A LIST
   personality is read the same way — **896** `if` branches gated on an inclination in
   course-of-temptation, median **114** characters, deciles 30/37/50/72/**114**/153/204/284/448.
   Roughly twenty words. One sentence, swapped. **When a system feels like it needs a big branch per
-  state, the field's answer is almost always a small branch per site instead** — and ours default to
-  the opposite: `the_season`'s seven `known` read sites have a median of 570 characters.
+  state, the field's answer is almost always a small branch per site instead.**
 - **A system is read to change the words, not to refuse the action.** The same law, arriving a fourth
   time from a fourth instrument. Section H: reputation gates **2%** of its 644 read sites and colours
   the other 98% — ⚠️ *corrected 2026-08-27: that is three games, 95% of it degrees-of-lewdity. Over

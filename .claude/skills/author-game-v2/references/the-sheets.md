@@ -87,6 +87,9 @@ prints both.**
 > beats; the build had 52. Mid-session the same game read **6 explicit** by the sheet and **3** by
 > the instrument, and both numbers were given to LO in chat as if they measured the same thing.
 
+**A scene sheet with a named person carries three rows: want · next step · hook** (`register.md`,
+"What a scene contains").
+
 **This is the rule the other nine are special cases of.** A number written on a sheet is a
 **promise**. It becomes a measurement when an instrument produces it and not before.
 
@@ -94,9 +97,8 @@ prints both.**
 reads a sheets folder. Until something does, every count on a sheet belongs on the **intent** side of
 the measured/intent split, however carefully it was counted.
 
-> ⚠️ **A sheet-versus-build diff was costed on 2026-09-03 and dropped.** 2 of 33 games had sheets,
-> in two incompatible formats, and no row names its canvas. It becomes an instrument when sheets are
-> corpus-wide and each row names its canvas.
+> ⚠️ **A sheet-versus-build diff is not built:** it needs sheets in one format, each row naming its
+> canvas.
 
 ## S2 · A PLACE SHEET SAYS WHAT IT HANGS OFF
 

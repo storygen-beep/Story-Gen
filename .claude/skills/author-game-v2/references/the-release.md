@@ -223,8 +223,8 @@ defect to apologise for — under-shooting it is the more likely error.
 or a display label on content that already ships prose.**
 
 **The model.** An authored line that states a fact a field encodes is a **copy of that field** — a
-literal duplicate with no link back. `amount = 125` and Vince saying *"Rent. Hundred and
-twenty-five."* are two independent strings that happen to agree today. Everything here **passes
+literal duplicate with no link back. `amount = 100` and the collector saying *"Rent. A
+hundred."* are two independent strings that happen to agree today. Everything here **passes
 the build**: the flag chain validates, no warning fires, nothing crashes. The damage is that the
 game tells the player something untrue, and the player cannot grep, cannot diff, and has no way
 to know.
@@ -237,21 +237,10 @@ v2.py:16604   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how 
 v2.py:16608   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
-Four lines apart. Re-price to 150 and the collector says *"Hundred and twenty-five"* directly
+Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
 above *"Rent is $150."* **The NPC contradicts the UI in a single screenshot.**
 
-**The exposure, measured 2026-08-29.** **Ten of eleven rent-enabled games hand-write their own
-rent amount**, and the most fragile copies sit *inside the rent block, beside `amount`*:
-
-| game | `amount` | authored copies |
-|---|---|---|
-| `off_season` | 90 | `greeting` *"Right. Ninety."* · `cant_pay` *"You haven't got the ninety."* · `eviction_response_soft` *"We're past the ninety."* |
-| `late_shifts` | 125 | `greeting` *"Rent. Hundred and twenty-five."* · a beat *"Rent's a hundred and twenty-five. Every Friday."* |
-| `back_home` | 120 | *"the rent is a hundred and twenty"* · *"a hundred and twenty a week for a room half the size of his"* |
-| `the_allowance` | 50 | `paid_response` *"Fifty. Ta, love."* · *"Fifty a week, Sunday, at the table."* |
-
-⚠️ **Nothing in the repo is currently WRONG.** This is not a bug list — it is a debt list. Every
-one of those pairs agrees today, and every one of them breaks the moment somebody re-prices.
+The most fragile copies sit *inside the rent block, beside `amount`*.
 
 **Keep writing the copy.** It is load-bearing: the player budgets against a stated number, and a
 price only the UI knows is a plan they cannot make. What writing it creates is an obligation —

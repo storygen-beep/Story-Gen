@@ -10,10 +10,6 @@ this skill and still be unplayable:
 > on its front desk, 19 on its street, 19 in its changing room** — one paragraph and then a wall of
 > buttons, at every location, with 109 of its 216 doors open on day one. It scored **18/18**.
 > Nothing in the skill said a location page had a shape, so the author invented one.
->
-> *(An **airer** is a folding clothes-drying rack. This file quotes `the_allowance`'s button *Get the
-> washing in off the airer* four more times, and `register.md` requires a word like it to be taught on
-> first use.)*
 
 ---
 
@@ -89,7 +85,7 @@ A room's menu is **exactly three kinds of thing, and nothing else.**
 | **a person** | that character's hub | one per schedule row — location × window |
 
 Anything that is none of the three does not belong on the room's list. It belongs **inside a beat**,
-which is where the airer and the burn on the table and his chair at the end were always meant to
+which is where the drying rack and the burn on the table and his chair at the end were always meant to
 live — read in context, not scanned in a menu.
 
 ### Why this sizes itself, and why the cap stopped being the control
@@ -103,9 +99,7 @@ to cap.
 Both previous attempts to control size failed for the same reason — they capped an open list instead
 of closing it:
 
-- **Gate 20's ceiling of 8** (study 6): a game built after the cap existed put **19 of its 30 screens
-  at exactly 8** and shipped the *same 213 choices* as the 23-choices-on-one-desk game the cap was
-  written to fail. It redistributed the menu and pushed the median *up* from 7 to 8.
+- **Gate 20's ceiling of 8** (study 6): it redistributed the menu instead of shrinking it.
 - **R2b's "derive the count from the objects"**: `the_allowance` declared six objects in its kitchen
   and got a six-choice browse screen **on top of** four activities that already covered the same
   things. Nine near-verbatim duplicate pairs across five rooms.
@@ -173,7 +167,7 @@ inside one of them, or it belongs on a different surface entirely.
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
   game rather than a timetable. `show_when_blocked = true` plus a `cooldown_message` keeps the entry
   as a dimmed line carrying the author's own words (`v2.py:11055`, rendered at `v2.py:5143`).
-  **One game uses it** — `off_season`, six times. Every other game drops the entry silently. `references/the-clock.md` C5 owns the rule; this is the
+  `references/the-clock.md` C5 owns the rule; this is the
   surface it lands on.
 
 **R2c · Each row is a SYSTEM surfacing in this room — so the room list cannot be written before
@@ -311,15 +305,13 @@ That canvas is then reachable **both** as a substitution target **and** from a h
 
 **Where walk-ins come from is a JOIN, not a judgement.** Cross the solo activities at a location
 against the `[[npcs.schedules]]` rows at that same location. She irons in the kitchen 07:00–09:00 and
-Martin is in the kitchen 07:00–09:00 — *someone can walk in on her*. Nobody decides that; it is
+Hal is in the kitchen 07:00–09:00 — *someone can walk in on her*. Nobody decides that; it is
 already true in the board. The skill prints the list; the author picks from it.
 
-**Floor: one per qualifying ROOM, not one per pair.** The raw cross-product is 40 pairs for
-`the_allowance` and 49 for `seventh_day`. Filling it would rebuild the wall of buttons one layer
+**Floor: one per qualifying ROOM, not one per pair.** Filling the raw cross-product would rebuild the wall of buttons one layer
 down, which is the objects mistake in a new coat.
 
-**The branch is thin, and the size is stated because it will not hold otherwise.** Vesper's is
-**2.3 KB**; DoL's are **458–473 bytes**. Target: **a tier band is one or two paragraphs plus a media
+**The branch is thin, and the size is stated because it will not hold otherwise.** DoL's are **458–473 bytes**. Target: **a tier band is one or two paragraphs plus a media
 pool** — beats the length of the model beats in `register.md`, not a scene. The temptation is to write a
 full encounter every time because that feels like more care; it is how this rule dies.
 
@@ -548,38 +540,34 @@ where every branch offers something** and only **23% refuse anything at all** (`
 often than it removes one. This is the same law H measured on reputation (2% of reads refuse) and I
 measured on the body (median 10%).
 
-**R5b · The choice to decline is written at full length, and it pays.** Not a gate — four games is
-not a field — but it is unanimous across the four, and our games do the opposite: a refusal that
-exists at all is usually a bare link back to the menu.
+**R5b · An offer has graded answers, and the no is written and priced.** Give an offer three to five
+answers running from eager to refusing; write every one, and let every one move something. Our
+games do the opposite: a refusal that exists at all is usually a bare link back to the menu.
 
-One field game (`zaras-school-life`, numbers only) writes a dinner the player re-enters, 78,621
-characters with six rungs inside it. The branch where she declines is a full paragraph of her
-putting the thought away, and it **grants `+60 Energy`**: saying no is paid.
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` `[BusGrope]`, a hand on her on the bus,
+> five answers: *Encourage it* (arousal, and her Disinhibition rises) · *Ignore it* · *Push their
+> hand away* · *Smack that hand* (Composure +25, his control −25) · *Yell for help* (Humiliation
+> +100, the scene ends). `shady-deals` `[Nightclub Quickie Caught]`, caught dealing and offered a
+> deal: go with him · pay him off in stock · use the taser · push him off (only if she is fit enough)
+> · *"No way."*, which means a night in custody.
 
-Course of Temptation charges in the other direction. Walking into an occupied shower uninvited and
-being refused costs `friendship -50 -60` and `Arousal -100`, and the scene has to be walked out of:
+**The default no is PARKED, and the game prints where to come back** (`the-arc.md` A3b). The price is
+real, and the door stays open: `course-of-temptation`'s best friend — *"You don't have to go any
+further, but if you want to then you can try again another night."* — with a live count of the days
+until she can (*"you need to wait N more days"*, the number filled in). In Her Own Hands offers the same: *"Excuse yourself
+to think more about it and say you'll be in touch."*
 
-> "'What the hell are you doing in here?! Get out!' […] It seems prudent to beat a hasty retreat.
-> 'Um, sorry!' you say, backing out into the dressing area. You hastily put your clothes back on and
-> duck out of the stall. **That certainly backfired.**"
+**A counted no closes, and only when the closing is itself content and she is warned** (A3). In Her
+Own Hands labels that answer before she clicks it — *"Say 'fuck you' and leave (ends path)"* — and
+the route closes. Shady Deals' custody is counted too: the price rises every time (*"Next time,
+prepare for penalty."*).
 
-**Read together: saying no is content, and pushing and being refused is content.** A "no" that
-returns the player to an unchanged menu is a door that was never really open.
-(`~/Documents/Female_PC_Craft_Study_20260823/findings_D_writing.md`)
+Being refused is content too (`course-of-temptation`: friendship −50, arousal −100, *"That
+certainly backfired."*). **A "no" that returns the player to an unchanged menu was never a door.**
 
-> ⚠️ **R5b's EXISTENCE half is gated as of 2026-08-28; its QUALITY half is still not, and the split
-> is the point.** This rule was left ungated because it rested on *"four games read in source, which
-> is an observation, not a field"* — and whether a decline is written at full length and paid is a
-> judgement no parser makes. Both of those still hold. What changed is that the narrower question
-> was measured across the whole corpus: **1,763 of 84,458 clickable labels in 25 games are a real
-> refusal, 2.09%** — and they are not theatre, because of 4,973 refusals sitting beside another
-> option **79% go somewhere the accepting link does not**, the median destination carries **262
-> words**, and only 3% lead to a stub under 20. So the gate asks the one thing a count can answer —
-> *is there a single choice in this whole game that declines an offer* — and **fails only on zero**.
-> It was written because four of our own games answer no: `forty_miles` (218 choices), `steam`
-> (216), `seventh_day` (114) and `the_allowance` (74). 622 authored choices and not one refusal.
-> Gate `she can say no`. **Nothing about how good the refusal is has been gated, and R5b's own
-> reasoning is why.**
+> ⚠️ **Gate `she can say no` checks only that one exists** — it fails on zero and prints the rate
+> beside the verdict (field: 2.09% of labels, 79% going somewhere the yes does not, median 262 words
+> behind them). Whether a refusal is graded, written and priced is not gated.
 
 **R5b.2 · A refusal that can never fail is a menu item.** Added 2026-08-24 after the field was
 re-read on exactly this question. R5b above says the decline branch is written and paid; the field
@@ -615,6 +603,27 @@ games today). **State the bar with `locked_text_threshold`; never fail silently.
 
 Still **not a gate** — three games is not a field, the same bar that stopped a gate last cycle.
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §4)
+
+**R5b.3 · An unchosen scene is warned, avoidable or opt-in.** Something may happen to her unchosen,
+never silently: before it starts the game **warns** her in plain words, gives her **a way not to be
+there**, or lets the player **switch it off**. Sex is never only a punishment. This is the rule behind
+the excitement read's two instant fails (`agents.md`).
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` tags its events by kind and gives the
+> player five levels per kind; at *Warning* she is *"explicitly warned before heading into a
+> particular type of content, with the option to break the event sequence"*, and the prompt reads
+> *"The following passage(s) may have content falling under this tag… Do you wish to continue?"*
+> (Proceed / Abort). Inside its dare-and-punish arc the man stops and asks: *"are you into doing
+> these challenges, at all, on any level?"* `shady-deals`' blackmail has four other ways out, and its
+> unchosen morning visit is opt-in twice over — a boss type chosen at character creation, and her
+> own "with benefits" when she recruits him.
+
+Players praise Course of Temptation as *"very consent base[d]"* and fault it because *"nothing
+really bad can ever happen"*, so hard content is wanted. What they punish is a way out that does not
+work: *"you're FORCED to be submissive regardless"*.
+
+**In this engine:** gate it on a setting or a start-choice flag (`the-want.md` §1), say what is
+coming in the choice text, and make the way out a real place with `rejection_node` (`engine.md` §36).
 
 **R5c · A locked door says why.** Added 2026-08-24. R5b.2 above reaches for
 `locked_text_threshold` and `rejection_node` and stops one step short of saying what the row itself
@@ -692,18 +701,10 @@ The cost of the flag pile is not that it breaks. Adjacent `[group]` blocks merge
 **the arc is not a thing you can read** — there is no single value to print on a card, hand to a
 quest goal, or gate a later scene on. The set of flags is the only place its shape is written down.
 
-⚠️ **Our v1 games lean on the counter harder than our v2 games do** — `vesper` 10% equality,
-`the_long_summer_test` 11%, `last_call` 7%, against `back_home` 0%, `off_season` 1%, `the_season` 2%.
-The TLS notes carry the rule in one line: *"sex-loop = numeric-enum state NOT flags."* Read with the
-behavioural figures above, the honest version is that **the pattern survived the v1 → v2 divorce in
-weakened form** — present in `off_season` and `the_season`, absent from the other five v2 games —
-rather than being lost outright the way `block_pool` was.
-
-⚠️ **And a counter nobody reads is worse than no counter.** Nine behavioural counters across four
-games are written and never read by any condition. Most are legitimate — a `<npc>_stage` key whose
-prefix names a declared character is read by the engine's own stage-label system, and gate 33 carves
-those out on purpose (`v2.py:5549-5554`). The rest are not: **`sex_stage` is set and never read in
-three separate games**, and gate 33 already fails all three for it.
+⚠️ **And a counter nobody reads is worse than no counter.** A `<npc>_stage` key whose prefix names a
+declared character is read by the engine's own stage-label system, and gate 33 carves those out on
+purpose (`v2.py:5549-5554`). Any other counter written and never read by a condition — a bare
+`sex_stage`, say — fails gate 33.
 
 ⚠️ **Not a gate, and not a quota.** No threshold here is defensible — a game can be built entirely on
 thresholds and be correct. See "What is checked".
@@ -746,23 +747,14 @@ own chain.
 > already lost.
 
 ⚠️ **The obvious phrasing of this rule is wrong, so do not use it.** *"Never gate a grant on a lack"*
-is false — a rescue **should** require needing rescue, and 50 sites across our games gate a grant on
-a lack correctly. The narrow claim is the one that holds: **if taking on a burden is what opens a
+is false — a rescue **should** require needing rescue. The narrow claim is the one that holds: **if taking on a burden is what opens a
 person, it has to be reachable while she is fine.**
 
 **Not gated, and the measurement is why.** The mechanical signature is real —
 *a choice gated on lacking X whose grant CLEARS the very lack that gated it* — but it needs two
-exclusions before it discriminates at all, and then it has almost no subject:
-
-```
-gated on lacking X, grants X                                    50   ← fires on correct work
-  minus the CEILING pattern      (corruption +1 under corruption lt 40)
-  minus ONCE-ONLY counters       (X lt 1 → X +1, eight of them in vesper)
-grant clears the lack, threshold > 1                             2   ← mrs_vance, commuter
-```
-
-Two games is under this file's own bar, and the unfiltered version fires on **49 correct
-implementations** — the R4 failure exactly. The signature is recorded here so it can be built the
+exclusions before it discriminates at all — the ceiling pattern (`corruption +1` under
+`corruption lt 40`) and once-only counters (`X lt 1 → X +1`) — and then it has almost no subject.
+Unfiltered, it fires on correct work — the R4 failure exactly. The signature is recorded here so it can be built the
 day it has a subject. It is not built now.
 
 **R6 · The screen moves on re-entry — but the opener does not.** A location the player returns to
@@ -792,8 +784,7 @@ sexual surface this way and none of them writes such a scene as a paragraph:
 | Course of Temptation (rank 5) | `<<switch setup.rir(0, 3)>>` | 164 named acts × 3 phrasings |
 | Family Ties (rank 24) | `either("…", "…", …)` | 12 poses × ~10 lines, plus ~10 of his dialogue |
 
-Counted across every `toml_phases/*.toml` here: **the_long_summer 46 · under_one_roof 14 ·
-vesper 6 · every v2 game 0.** The primitive shipped with the engine, v1's corpus carried a numbered
+The primitive shipped with the engine, v1's corpus carried a numbered
 rule for it that named this exact failure — *"the same text every morning problem"* — and v2 lost it
 (`engine.md` §35).
 
@@ -858,10 +849,9 @@ Three things about that line carry the rule:
   sexual and not required (`findings_C_loop.md:75`).
 - **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
 
-⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` and
-wrapping a `block_pool` is live in `mrs_vance` at `loop_cade.finish` and `loop_sherrod.finish`
-(5 instances), and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14378`.
-**No v2 game gates a pool on an owned thing** — the five that exist ride a sex-act counter. This is
+⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
+wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14378`.
+This is
 recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**:
 nothing of ours has built it yet, and a check written before its doctrine has a game to run against
 is what withdrew R4 and refused P0. `the-economy.md` R1b owns the asset half.
@@ -885,13 +875,6 @@ arc progress, and it is the standard place to put the reason a hidden rung is mi
 bands mutually exclusive: adjacent `[group]` blocks merge into ONE `if/elseif` chain and first match
 wins.
 
-**Mechanism 4 is the one games actually drop.** Measured across the field 2026-08-16:
-
-| | vesper (v1) | back_home | steam | forty_miles | seventh_day |
-|---|---|---|---|---|---|
-| `trigger_mode = "random"` canvases | **14** | 0 | 0 | 8 | **0** |
-| conditional (`group`) blocks | 138 | 102 | 91 | 0 | **0** |
-
 **Floor: every location carries at least one `trigger_mode = "random"` event.** It is the cheapest of
 the four to author, it is the only one that can replace the whole screen, and it is engine-cooled per
 location so it cannot spam (`references/engine.md` §7).
@@ -903,8 +886,7 @@ location so it cannot spam (`references/engine.md` §7).
 >   fails at 52% — that is noise being scored, not a measurement.
 > - **R6 was measuring a practice nobody follows.** The original rule said *"band the opener on
 >   whichever tier the location serves"*, and our TOML test asked whether the opener carries a
->   conditional block. Our games scored **0/22, 2/12, 11/29** — against a reference game whose
->   openers are *never* conditional. The 86% field figure from built HTML was `<<if>>` counting
+>   conditional block — but the reference game's openers are *never* conditional. The 86% field figure from built HTML was `<<if>>` counting
 >   engine plumbing, so neither number measured what the rule claimed.
 >
 > The four mechanisms above are what to look for instead. Still a lint, still no threshold —
@@ -928,14 +910,13 @@ player cannot tell a spent day from a broken build.
 > the rest of the day, and their entire list was that one flag. Ten of its ten hubs did this, and
 > its author walked into one and could not tell whether his own game was broken (2026-08-23).
 
-The fix is one line, and every other game in this repo already ships it — eleven day-capped hubs
-across `last_call` and `mothers_place`, eleven leave-links:
+The fix is one line:
 
 ```toml
 [[canvases.nodes.exit_block.choices]]
 text                     = "Leave him to it."
 targetType               = "location"
-locationId               = "the_chip_shop_flat"   # the node's own location
+locationId               = "the_kitchen"   # the node's own location
 time_progression_minutes = 5
 ```
 
@@ -945,9 +926,9 @@ and go."* answers him and *"Leave"* does not.
 > ⚠️ **NOT every all-conditional screen is a dead end**, and `author-game/references/engine-reference.md:297`
 > is right that you should not add a fallback "just in case" — it would double-render. That advice is
 > scoped to conditional **routing**, where the branches are exhaustive by construction
-> (`stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all) and one always passes. Vesper ships 11
-> such nodes and needs no door in any of them. The rule here is for **independent budgets that
-> deplete together**, which is what a day cap and a price both are.
+> (`stealth gte 10` / `lt 10 + fighting` / `lt 10` catch-all) and one always passes.
+> The rule here is for **independent budgets that deplete together**, which is what a day cap and a
+> price both are.
 
 **R7b · Two shapes, and a game needs both: a POOL at a place, a CHAIN on a person.** Added
 2026-09-03, read in source.
@@ -973,9 +954,8 @@ a 785-passage game. A chain is A1's numbered ladder, ending by converting into a
 > machine: nothing builds. Both together, and the place keeps producing situations while the
 > people keep advancing.**
 
-⚠️ **We only ever build chains, and we author them in their converted state on day one**
-(`the-arc.md`: 1,396 canvases, zero arcs). The pool is the cheaper half and the one nothing here
-has ever asked for — its unit is a *setup*, not an act, and A9 already says the setups span the
+⚠️ **A chain alone is half the answer** (`lint · the arc ladder` prints the chains). The pool is
+the cheaper half — its unit is a *setup*, not an act, and A9 already says the setups span the
 whole meter range. When a place is worth returning to and you cannot say why, it is usually
 missing its pool.
 
@@ -1035,16 +1015,13 @@ six screens instead of one. What changes is that each screen can then have its o
 banding, and its own gate, which is the whole reason the engine has located canvases at all.
 
 And it fixes a problem that looks unrelated. A location that must fill 19 buttons gets 19 *small*
-things, because nobody can write nineteen substantial scenes at a front desk. The failure case
-ended up with roughly 200 three-beat texture rungs and 29 surfaces carrying any heat at all — a
-**7.6% explicit floor against a 27.8% sibling game** built by the same author under the same
-doctrine. The menu shape set that ratio before a word was written.
+things, because nobody can write nineteen substantial scenes at a front desk.
 
 **Wide and thin is a structural choice, not a writing outcome.** This file is where it gets made.
 
 **The needs layer buys something the object layer never could: a reason to be in the room.** A player
-walks into a kitchen because they are hungry, not because there is an airer in it. And a need that
-shuts a door — *filthy means she cannot take the car* — turns a chore into a plan.
+walks into a kitchen because they are hungry, not because there is a drying rack in it. And a need that
+shuts a door — *filthy means she cannot leave the house* — turns a chore into a plan.
 
 
 ---
@@ -1061,7 +1038,7 @@ and the middle one is missing:
 |---|---|
 | before the click | written — he is at the counter, the radio is low, two mugs are out |
 | **the act itself** | **nothing** |
-| after the click | `+6 Ray's Relation · +120 Money`, for two seconds |
+| after the click | `+6 Dale's Relation · +120 Money`, for two seconds |
 
 *"Ask him for the dues before you're short."* — she asks a man for money, he gives her £120, he wants
 her more for it, and the game shows her a receipt.
@@ -1074,8 +1051,8 @@ is one line: *does this choice change her?*
 
 **This is the general case of two rules already written.** R5b says it about refusals — *"a 'no' that
 returns the player to an unchanged menu is a door that was never really open"* — and `the-arc.md`
-A10/A11 say it about the end of an act, where **23 of 23 finish nodes shipped an empty `exit_block`**
-and every `Stop.` choice *"routes at a reset node and prints nothing."* R9 is the same sentence with
+A10/A11 say it about the end of an act — a finish node with an empty `exit_block`, or a `Stop.`
+choice that routes at a reset node and prints nothing. R9 is the same sentence with
 *act* in place of *no*, and it is what those three were each seeing one corner of.
 
 ⚠️ **Nothing here owned it, which is why it shipped.** `the-arc.md`'s ownership table routes *which
@@ -1092,21 +1069,18 @@ bath are content in themselves."* The bath, the bed and alone-with-the-door-shut
 ### The repair is one node, and it is cheaper than it sounds
 
 Route the choice at a node with `targetType = "node"`, write what happened, and exit from there.
-Measured across `vesper`, `off_season` and `commuter` (534 node-choices):
 
-- **Several gated choices can share ONE banded outcome node.** `vesper`'s `activity_bar_work` routes
-  **four** rung-gated choices into a single `shift` node whose `group` bands render what the night
-  was actually like. Its own comment says why: *"Choice effects fire on CLICK and exit effects fire
-  on RENDER, and per-rung pay/relation cannot live on a single shared exit at all."*
-- **Where each thing sits.** `costs` → **the choice, always** (zero instances on a target exit in any
-  of the three games; it is a gate as much as a price). Per-branch effects → the choice. Uniform
+- **Several gated choices can share ONE banded outcome node.** A work activity can route **four**
+  rung-gated choices into a single `shift` node whose `group` bands render what the night was
+  actually like. The reason is the engine's: *"Choice effects fire on CLICK and exit effects fire on
+  RENDER, and per-rung pay/relation cannot live on a single shared exit at all."*
+- **Where each thing sits.** `costs` → **the choice, always** (it is a gate as much as a price). Per-branch effects → the choice. Uniform
   payload and the clock → the target node's `exit_block.config`. A day-cap flag → the **located**
   choice, never inside the triggerless canvas, which has no located setter and hard-fails the build.
 - **Staying fresh**, because most of these sit on repeatable surfaces: `group` bands keyed on the
-  meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` is `commuter`'s
-  answer, on 17 of its 20 targets. ⚠️ **`text_variants` does not exist** in any game; do not write it.
-- **Video on outcome nodes, images on hubs.** No follow-up node in the three games carries an
-  `image`, and 59 of 60 videos on them are pools rather than single files.
+  meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
+  ⚠️ **`text_variants` does not exist** in any game; do not write it.
+- **Video on outcome nodes, images on hubs.**
 
 ### The extreme case, which is a gate
 
@@ -1124,7 +1098,7 @@ and 84/84 nodes carry an authored `exit_block`.**
 ### What this costs
 
 The field range is **0% to 68%** of choices, so there is no threshold here that would not fail a game
-for obeying the doctrine — `steam` and `back_home` ship zero, `the_inheritance` 74. The general case
+for obeying the doctrine. The general case
 is therefore a **lint that cannot fail anything**; only the extreme case — a node nothing points at —
 is a gate, and it is safe as one because the corpus is already at zero.
 
@@ -1157,8 +1131,7 @@ runs from 2 to 54 and hub depth splits 47/14 across the field; both are design c
 games on either side. Section F recorded them and proposed no check.
 
 **R5d joins the not-gated list too, and for the cleanest reason of the set: there is nothing to
-fail.** A game built entirely on thresholds is not broken — `steam` is 90% threshold and its problems
-lie elsewhere. The field's 53/31 split is a description of how the genre encodes state, not a target
+fail.** A game built entirely on thresholds is not broken. The field's 53/31 split is a description of how the genre encodes state, not a target
 share, and the moment it became a percentage to hit it would be an invented threshold. Section K
 measured it and proposed no check.
 

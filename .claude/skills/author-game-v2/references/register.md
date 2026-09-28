@@ -15,9 +15,7 @@ because the kind decides the shape.
 
 **The voice is a choice, and it is LO's** (2026-09-23/24): shown three ways to write one line, LO
 picked the top games' loud version over ours. So **"The voice — say it loud"** and **"The truth rule"** below are a decision made against the field, not a measurement of
-it. Everything the rules need is written here; the documents they came from
-(`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/`, the style guide and the scene-content
-review) are pointers, not sources an author has to open. The rules that are measured keep their measurements, and where
+it. The rules that are measured keep their measurements, and where
 a measured rule and the voice disagree, the voice wins and the old rule is retired in place (L2).
 
 ---
@@ -58,7 +56,7 @@ curated library of best scenes overstates every property):
 |---|---|---|
 | narration to dialogue | 2.93 : 1 across 27 games (S3) | under 5 : 1, gate `somebody speaks` |
 | dialogue in a scene | 83% of scenes, median 3 NPC lines | every standing scene with a person has a spoken line |
-| a person shows what they want | 54% of scenes | most scenes with a named person |
+| a person shows what they want | 54% of scenes | most scenes with a named person — "What a scene contains" |
 | `but` / `and` per 1,000 words | `but` 2.46–8.44, `and` 9.3–41.1 (25 games) | `but` ≥ 2.88 (p10), `and` ≤ 41.1 — gate `prose has room` |
 | median sentence | p25 8.25 · median 10.5 (26 games) | printed only: the model beats run 7, on purpose |
 
@@ -343,6 +341,23 @@ clock, the place, and what she is wearing before you reach for the meter.**
 The uncertain version explains itself; the confident one does not need to (`road-to-success`,
 numbers only: 84.6% of 39 willingness pairs put the composure on the high branch).
 
+## What a scene contains
+
+**Every scene with a named person answers seven tests, one line each.** The first three go on its
+scene sheet (`the-sheets.md` S1); `v2-reader` judges all seven (`agents.md`, The Reader).
+
+1. **Want** — what this person visibly wants here. On a sexual step, an **earlier** scene has already
+   shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on.
+2. **Next step** — what goes one step further than last time.
+3. **Hook** — what the scene points at next.
+4. **Her voice at her level** — at a low level her own thought pushes back; at a high one it is
+   appetite (`the-meters.md` W1b, "One event, several levels" below).
+5. **Who notices** — someone in the world reacts to what she does, or the game has declared that
+   nobody does (`the-meters.md` W5b).
+6. **The written no** — where there is an offer, a refusal exists, is written and is priced
+   (`the-surfaces.md` R5b).
+7. **The body** — an explicit beat stays on the body to its last sentence (the pivot, above).
+
 ## One event, several levels
 
 **Write the same event once per band of her meter, and let each band be her voice at that level.**
@@ -477,16 +492,10 @@ setup.
 the same unit — a click that reveals more content inside one screen
 FIELD   apocalyptic-world 64% · become-taxi-driver 71% · destroyer 79% · new-lust 66%
         POOLED 3,005 reveal beats — 58% carry their own clip, median 37 words each
-OURS    vesper 16 of 389 (4%) · back_home 0/169 · steam 0/623 · forty_miles 0/938
-        · seventh_day 0/516 · the_allowance 0/39
 ```
 
-Media in our games lives on **nodes** (20–54% of them carry one) and essentially never on beats —
-and v2 games moved nearly all their content *into* beats. `forty_miles` ships 938 beats against
-259 nodes.
-
 The field's density inside sexual content: **one clip every 58 prose words** (IQR 25–104, n =
-25,502 gaps). Ours run one every 178–435.
+25,502 gaps).
 
 The field runs a median of 37 words per reveal beat, for reference only; the model beats set the length.
 **The beat length was never the problem; the picture on the beat was.**
@@ -497,10 +506,7 @@ media block of their own. Half the field's per-screen figure, below its per-reve
 ### And here is the shape, because it was never written down
 
 `engine.md` §5 says outright that a clip nested in a cascade beat "is the shape `register.md` S1
-requires" — and then shows a node-level block, which is the thing this rule exists to stop. Counted
-2026-08-29: **no worked example anywhere in this skill put a media block inside a beat.** Stated
-here, stated there, modelled in neither — and the games read exactly like that
-(`back_home` 0/169, `steam` 0/623, `forty_miles` 0/938).
+requires" — and then shows a node-level block, which is the thing this rule exists to stop.
 
 Both blocks below are **one beat out of a cascade**, shown alone. In a real cascade **beat 0 carries
 no `advance_text`** — it renders on entry — and so does a terminal beat; the `advance_text` is what
@@ -589,12 +595,7 @@ field screen is one rung and ours is a scene, so no threshold across the two wou
 
 ```
 FIELD   median 2.93 : 1 narration to dialogue        10 of 27 games at or under 2 : 1
-OURS    the_inheritance 1.5 · vesper 2.8 · last_call 6.6 · late_shifts 15.3
-        steam 18.7 · back_home 24.1 · forty_miles 31.1 · the_allowance 50.4 · seventh_day 62.0
 ```
-
-`the_allowance` ships **216 spoken words in the entire game**. `seventh_day` 410. Every v2 game
-sits beyond the worst dialogue-bearing game in the corpus.
 
 **And the protagonist thinks instead.** Thought-bubble words divided by spoken words: seventh_day
 **4.6**, forty_miles 3.1, the_allowance 2.0, steam 1.5, back_home 1.4 — against vesper 0.14 and
@@ -673,7 +674,7 @@ This scales the way our cast does: five characters × one shy/crude split costs 
 
 ### One term of address per person, and nobody else uses it
 
-Added 2026-08-24 from Section G. **This is the exception to the paragraph above, and the boundary
+**This is the exception to the paragraph above, and the boundary
 has to be held or the two rules read as contradictions:**
 
 > The shy line and the crude line are written once and assigned **by trait** — that is what makes a
@@ -692,10 +693,6 @@ One of the six is differentiated by **register** rather than by the term alone �
 whose distinctive words are *perhaps*, *suppose*, *quite*. An author writing her speech on purpose. That is the upper end of this rule,
 not its floor.
 
-**Ours:** `the_season` ships 56 NPC lines and **only Rae ever addresses Cass at all** — *"girl"*
-twice, *"Renfro"* once. Boyd, Wade, Prine and Emmett never call her anything. Her father, in nine
-lines, never once says his daughter's name.
-
 > ⚠️ **Do not over-read the measurement that found this.** The same instrument surfaces
 > per-character spellings of noises, which are almost certainly accidents of typing rather than
 > craft. **The address term is the reliable half; the noises are not a rule.**
@@ -710,12 +707,8 @@ hunt, no ladder, no state.
 
 ```
 talk screens as a share of all canvases
-vesper 26%  ·  steam 5%  ·  forty_miles 1%  ·  back_home 0%  ·  seventh_day 0%  ·  the_allowance 0%
 FIELD 29%
 ```
-
-Vesper is already at the field standard. Every v2 game is at nothing. We have had the `dialog`
-block the whole time.
 
 **What it is for:** the person, not the plot. It is where a character becomes someone the player is
 attached to — and across ~11,000 player comments, attachment to a character outscored praise for
@@ -927,8 +920,8 @@ less use for them than the quiet one did.
 **Words to watch:** `—` and `–`, and the spaced `--` that becomes one.
 
 **Why this rule exists.** Two players read a shipped game of ours and said the writing "smacks of
-an underpowered AI." Dash density is the marker readers reach for most often when they say that,
-and until 2026-08-27 nothing in this skill mentioned it. Measured over the 25 game corpus:
+an underpowered AI." Dash density is the marker readers reach for most often when they say that.
+Measured over the 25 game corpus:
 
 | | dashes per 10,000 prose words |
 |---|---|
@@ -1145,17 +1138,11 @@ Three of those words — **meter** (a coin-fed prepayment meter), **jumper** (a 
 already holding. Short sentences do not help a reader who does not know what the nouns are.
 
 **Measured — locale-locked common nouns, uses per 10,000 words.** The instrument is a **curated
-list** of about forty regional terms, so it is a judgement, and it is named as one:
+list** of about forty regional terms, so it is a judgement, and it is named as one. The field, 27
+games, reads **0.8**.
 
-| | |
-|---|---|
-| the field, 27 games | **0.8** |
-| our v1 games | 1.3 – 7.3 |
-| our v2 games | **9.4 – 95.6** (off_season 95.6) |
-
-Eleven words this skill's games lean on appear in **zero of 27 games across 14.7M words**: *airer,
-anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.* Re-checked
-2026-08-24 directly against both newly-readable games' prose: still zero, every one of them.
+Eleven common regional words appear in **zero of 27 games across 14.7M words**: *airer,
+anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.* 
 
 **Gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
 pitch → rent · chandlery → hardware shop · the front → the seafront · float → the till money · went
@@ -1172,7 +1159,7 @@ regional name it has.
 > at shoulder height beside the water heater… a card taped under it saying what three buys"* — and
 > the player reaches that sentence only by clicking **`Feed the meter ($3)`**, the words they could
 > not read. The gloss was downstream of the button the whole time. `the-voice.md` R1 owns label
-> shape; this rule owns the word in it, and neither file said so until 2026-08-23.
+> shape; this rule owns the word in it.
 
 **Name a place for what it is, the first time you name it.** Off Season's anchor is an amusement
 arcade. Across the whole game the prose says *"forty machines"* and never once says *slot
@@ -1186,12 +1173,12 @@ kind belongs in the first sentence that names it, not in its metadata. (The map 
 **Four ways a word fails, and only the first one is about dialect.** The rule was written for the
 first one; the measurements found the other three:
 
-| | what the reader gets | measured in our games |
+| | what the reader gets | note |
 |---|---|---|
 | **unknown** — *airer, chandlery, forecourt* | a blank. They stall, or skim past it. | the class the skill's own examples taught — see below |
-| **ambiguous** — *half seven* | **a confident wrong answer.** It is 7:30 in Britain and 6:30 across much of Europe, and American English does not use the construction at all. | **157 uses across six games**, against **4** uses of the unambiguous *half past* |
-| **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | `forty_miles`: *"You get the vest up over your tits"* — an undershirt here, a waistcoat to most readers, **inside an explicit beat**. `back_home`: *"He is going to be different at tea"* — the evening meal. `seventh_day`: *"under the bonnet"* — a car hood, not a hat. |
-| **collides with our own UI** — *meter* | a wrong picture again, but the competing meaning is **ours**, so no dialect check can ever find it. | `off_season` renders **four meters in its sidebar** — arousal, warmth, energy, money — and puts `Feed the meter ($3)` on a room button, where it reads as *top up a stat bar*. Same exposure, unmeasured: **board, card, flag, state, tier, rung.** |
+| **ambiguous** — *half seven* | **a confident wrong answer.** It is 7:30 in Britain and 6:30 across much of Europe, and American English does not use the construction at all. | write the unambiguous *half past seven* |
+| **false friend** — *vest, tea, bonnet, jumper* | **a confident wrong picture**, with nothing to signal it. | — |
+| **collides with our own UI** — *meter* | a wrong picture again, but the competing meaning is **ours**, so no dialect check can ever find it. | Same exposure, unmeasured: **board, card, flag, state, tier, rung.** |
 
 > ⚠️ **A false friend is a judgement about a sentence, never about a word.** Check the line it came
 > from, not the lint's output.
@@ -1206,9 +1193,8 @@ here.
 > that change the word rather than its dress: **tyre/tire** and **kerb/curb**. Comprehension is the
 > test, never nationality.
 
-**Invented words are safe. Real regional ones are the trap.** `vesper` writes *emitter*, *sternum*,
-*coveralls*, *readout* and reads fine, because the fiction builds each of them on contact. A real
-object cannot be built that way — it either lands with the reader or it does not, and the prose
+**Invented words are safe. Real regional ones are the trap.** The fiction builds an invented word
+on contact. A real object cannot be built that way — it either lands with the reader or it does not, and the prose
 gets no signal either way. That asymmetry is the whole rule: **a made-up noun teaches itself, a
 borrowed one cannot.**
 
@@ -1285,16 +1271,16 @@ that somebody wrote it here and stopped.
 > button. **A word named here as a defect belongs in that dict in the same edit.**
 
 Added 2026-08-23 after reading every hit in all 20 built games — `meter` (32 uses; the defect in
-off_season, the_allowance and forty_miles, metaphor in vesper), `float` (24; the till sense in six
-games), `pitch` (10; off_season's rent), `chemist` (3; all real).
+three games, metaphor in one), `float` (24; the till sense in six
+games), `pitch` (10; the rent sense), `chemist` (3; all real).
 
 **Measured and rejected, so the work is not redone:** `front` ×334 and `inside` ×213 are noise
-(*"the front door"*, *"inside the room"*); `tip` ×44 carries only back_home's three real uses — a
+(*"the front door"*, *"inside the room"*); `tip` ×44 carries only three real uses — a
 7% signal rate would train the reader to skim the section; `boot` ×8 is footwear every single time,
 with not one car boot in the repo; `bill` ×7 and `purse` ×10 give a slightly wrong picture that
 does not cost the line. **The bar is not "could be misread." It is "misreads badly enough to lose
 the reader the line, often enough to be worth its false positives."** `torch` is the reference
-point: six of its eight hits are vesper's *cutting* torch, and it stays, because the two it catches
+point: six of its eight hits are a *cutting* torch, and it stays, because the two it catches
 are worth reading past six that announce themselves.
 
 ## The examples are the register

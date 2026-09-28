@@ -111,10 +111,9 @@ op         = "set"
 # ─────────────────────────────────────────────────────────────────────────────
 #
 #   F5. A repeatable `npc =` hub with no gate IS the introduction, and that is
-#   the forbidden shape. All six v2 games shipped it for their whole cast.
+#   the forbidden shape.
 #
 #   Field size: median 101 words, 66% under 150, 64% with somebody speaking.
-#   Ours, already correct: the_inheritance/canvas_meet_audrey — 125 w, 4 dialog.
 
 [[canvases]]
 id   = "<canvas_meet_npcid>"

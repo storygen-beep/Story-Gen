@@ -160,12 +160,10 @@ propriety — and their median read-to-write is **0.40**. We write them two and 
 time we consult one. **Zero of the fifty clear the 10:1 bar.** The mirror of the table above: our
 read-heavy systems are bookmarks, and our descriptive systems are scoreboards.
 
-**The sharpest instance, because it cost real engineering.** `worn_exposure` shipped 2026-08-28 — an
-engine predicate (`v2.py:4186`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4186`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
-plainly dressed. **Reads of `worn_exposure` across all 26 built games: three.** `commuter` 1,
-`orientation` 2. DoL reads its equivalent 586 times in 119 places, most of them in the street
+plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
 rather than in sex scenes.
 
 ### What to actually do about it — and it is never a new mechanic
@@ -204,12 +202,6 @@ content against what is already declared, not to declare more.
 ⚠️ **Bookmarks are not banned and this rule does not say to delete one.** `met_roy` gating an
 introduction is correct and `the-first-hour.md` F5 requires it. What is wrong is a game whose
 *only* well-read values are bookmarks.
-
-⚠️ **What is NOT claimed, because the study refuted it mid-run and recorded the refutation.**
-*"Our systems don't read each other"* — false: reads per screen run field 0–3 against ours 0–2, and
-the coupling shape is the same on both sides. *"No game we have built has a load-bearing system"* —
-false: `the_inheritance` has two, at a higher density (1.9%) than `degrees-of-lewdity` (0.77%).
-**The count is not the finding and must not be quoted as one.** The kind is the finding.
 
 ⚠️ **Instrument limits, to be restated wherever these numbers are cited.** The ≥10:1 / ≥80% / ≥5
 bar is **invented** — it exists to sort systems into two piles so the sides can be compared, and
