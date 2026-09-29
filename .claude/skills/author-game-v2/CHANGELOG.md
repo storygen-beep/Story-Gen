@@ -5,6 +5,37 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN2c: the short-pay line prints the rent currency symbol (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2c (I5 follow-up). RentDay_Short's "You have: … You need: …"
+typed `$`. It was the one rent screen that ignored `[settings.rent] currency_symbol`, so a game in
+pounds showed dollars on the screen she sees when she cannot pay.
+
+**What changed (engine).**
+- `v2.py` RentDay_Short's grace branch sets `_cur` from `setup.rent_currency_symbol`, like the other
+  rent pages, and prints it on both amounts.
+- This is a global change to every rent game's passage text. With the default `$` the render is
+  unchanged: members_only's RentDay_Short renders the same text on the old and new builds, headless.
+  the_balance and vesper have 0 changed passages. No new state, so saves mean what they did.
+
+**What changed (skill).**
+- `references/engine.md` §33 was rewritten so it stays true:
+  - `currency_symbol` governs **five** money sites, every one on the rent pages;
+  - eight sites hardcode `$`;
+  - the RentDay_Short row moves to "honours";
+  - the ⚠️ paragraph now says the key covers every rent screen and nothing else;
+  - the `[settings.rent]` example comment says "eight other money prints".
+- `references/the-economy.md`: the same count, and the stale `RentDay_Short` example is gone.
+- Words: +5 (136,085). No citations moved.
+
+**Verified.**
+- `apps/game_generation/tests/test_rent_currency.py`: 4 passed. It covers no typed `$` on the
+  screen, "£20 / £100" in a pounds build, "$20 / $100" by default, and the pre-change save in a
+  pounds build.
+- The EN2a/EN2b golden tests apply exactly this one edit to their goldens (`after_en2c`).
+- Engine suite 477 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
 ## 2026-09-30 — EN2b: a short rent week is carried, never the end of the game (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2b (D8d). A short week gave one grace warning, and the next ended

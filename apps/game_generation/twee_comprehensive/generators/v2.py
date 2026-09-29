@@ -17800,7 +17800,8 @@ if (clothingMsg) {
   <<set $game_state.rent_state.warnings += 1>>
   <<set $game_state.rent_state.is_due to false>>
 
-  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>></strong>. You need: <strong>$<<print """ + rent_expr + """>></strong>.</p>
+  <<set _cur to setup.rent_currency_symbol || "$">>
+  <p class="rent-balance">You have: <strong><<print _cur>><<print $player.core_traits.money>></strong>. You need: <strong><<print _cur>><<print """ + rent_expr + """>></strong>.</p>
 
   <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
   <<link "Continue your day" _returnTo>><</link>>

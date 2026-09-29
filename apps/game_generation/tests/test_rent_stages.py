@@ -136,11 +136,26 @@ def test_misuse_is_an_error(mutation, fragment):
 # ── 2. emitted only when used ────────────────────────────────────────────────
 
 
+# EN2c — the one line of RentDay_Short that printed a typed "$" now prints the rent
+# currency symbol. The goldens stay as the older engines wrote them; this applies exactly
+# that edit, and asserts it lands once.
+_EN2C_OLD = ('  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>>'
+             '</strong>. You need: <strong>$<<print ')
+_EN2C_NEW = ('  <<set _cur to setup.rent_currency_symbol || "$">>\n'
+             '  <p class="rent-balance">You have: <strong><<print _cur>><<print '
+             '$player.core_traits.money>></strong>. You need: <strong><<print _cur>><<print ')
+
+
+def after_en2c(golden):
+    assert golden.count(_EN2C_OLD) == 1
+    return golden.replace(_EN2C_OLD, _EN2C_NEW)
+
+
 def test_an_unstaged_game_has_the_rent_passages_it_had_before():
     """§0 rule 7. The golden is the three RentDay passages the engine BEFORE EN2a
     generated for this fixture with stages/stage_lines removed (`git archive HEAD` of
-    419d7ec, run from scratch)."""
-    golden = read_data("en2a_rentday_unstaged_golden.txt")
+    419d7ec, run from scratch), plus EN2c's one line."""
+    golden = after_en2c(read_data("en2a_rentday_unstaged_golden.txt"))
     assert _rent_passages(_twee(_unstaged())).strip() == golden
 
 

@@ -1032,7 +1032,7 @@ start_after_flag = "first_shift_done"
 eviction_mode    = "flag_set"        # or "game_end" (the default, and a product that ends)
 eviction_flag    = "terms_changed"
 currency_symbol  = "$"               # defaults to "$". It covers the
-                                     # RENT PAGES ONLY — ten other money prints are
+                                     # RENT PAGES ONLY — eight other money prints are
                                      # hardcoded "$" regardless. §33.
 
 [settings.rent.text]                  # every beat of all three pages is authored here
@@ -1482,7 +1482,7 @@ and there is no equivalent for places or activities. `references/the-clock.md` C
 ## 33. Money on the screen — where the engine prints it, and in what notation
 
 The generator prints a money figure at **sixteen sites**. `[settings.rent] currency_symbol`
-governs **four**. Nine hardcode `$`; three print no notation at all. This is why a game that never
+governs **five**, every one on the rent pages. Eight hardcode `$`; three print no notation at all. This is why a game that never
 declares a symbol still ends up with more than one, and why declaring a symbol other than `$` does
 not give you one either.
 
@@ -1494,8 +1494,8 @@ not give you one either.
 | | `RentDay` — *"You have X. Rent is Y."* (2 prints) | `:15926` |
 | | `RentDay` — the `Pay $N rent` button | `:15929` |
 | | `RentDay_Paid` — remaining money | `:15968` |
-| **hardcodes `"$"`** | `RentDay_Short` — *"You have: … You need: …"* (2 prints) | `:16000` |
-| | the clothing shop — balance | `:2018` |
+| | `RentDay_Short` — *"You have: … You need: …"* (2 prints) | `:17804` |
+| **hardcodes `"$"`** | the clothing shop — balance | `:2018` |
 | | the clothing shop — item prices (3 prints) | `:2075` `:2078` `:2081` |
 | | the phone job board — a job's income | `:2926` |
 | | the phone bank — balance, and cash | `:2960` `:2961` |
@@ -1508,11 +1508,10 @@ not give you one either.
 Emitted to the runtime only when rent is enabled (`v2.py:3123`), so a game without
 `[settings.rent]` has no symbol setting at all.
 
-⚠️ **`RentDay_Short` is the one every rent game reaches.** It is the branch taken when the player
-cannot pay — the screen where the number matters most — and it does not even set `_cur`.
-A game that declares `currency_symbol = "£"` still ships
-`You have: <strong>$<<print $player.core_traits.money>></strong>` on this screen; the key did not
-finish the job.
+`RentDay_Short` is the one every rent game reaches: the branch taken when the player cannot pay,
+the screen where the number matters most. Until 2026-09-30 (EN2c) it typed `$` whatever the game
+declared; it now sets `_cur` like the other rent pages, so `currency_symbol` covers every rent
+screen. It covers nothing else — the eight sites above still print `$`.
 
 ### 33.2 The symbol is a prefix
 

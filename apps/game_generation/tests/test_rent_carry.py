@@ -42,7 +42,14 @@ from apps.projects.services.template_import import (
 )
 
 from .headless import build, needs_browser, open_game, read_data
-from .test_rent_stages import FIXTURE, LINE_1, _rent_day, _rent_passages, _text
+from .test_rent_stages import (
+    FIXTURE,
+    LINE_1,
+    _rent_day,
+    _rent_passages,
+    _text,
+    after_en2c,
+)
 
 CARRY_LINE = 'on_short         = "carry"\n'
 
@@ -98,8 +105,8 @@ def test_without_carry_nothing_new_is_written():
 
 def test_without_carry_the_rent_passages_are_unchanged():
     """§0 rule 7: the fixture's three RentDay passages, as the engine before EN2b (EN2a,
-    uncommitted at the time) generated them, are the golden."""
-    golden = read_data("en2b_rentday_nocarry_golden.txt")
+    uncommitted at the time) generated them, are the golden, plus EN2c's one line."""
+    golden = after_en2c(read_data("en2b_rentday_nocarry_golden.txt"))
     assert _rent_passages(_twee(_raw(carry=False))).strip() == golden
 
 

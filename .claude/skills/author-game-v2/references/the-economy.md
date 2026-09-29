@@ -581,11 +581,9 @@ a money WORD carrying an EXACT amount     20%
 
 **We have no printer**, so every price is retyped by hand and the engine adds notations of its own.
 `[settings.rent] currency_symbol` is the closest thing to one, and of the sixteen sites where the
-generator prints a money figure it governs **four — all on the rent-day screen**. Nine hardcode `$`
+generator prints a money figure it governs **five — all on the rent pages**. Eight hardcode `$`
 and three print no notation at all (`engine.md` §33 carries the full census). A game that declares
-`currency_symbol = "£"` still ships
-`You have: <strong>$<<print $player.core_traits.money>></strong>` on `RentDay_Short`
-(`v2.py:17453`), the screen the player sees **when she cannot pay**.
+`currency_symbol = "£"` gets `£` on every rent screen and `$` on its shop, phone bank and job board.
 
 #### The rule, in four parts
 
