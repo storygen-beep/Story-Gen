@@ -139,6 +139,12 @@ class TemplateNPC:
     # Trait decay: {trait_name: decay_per_day}. Traits decay by this amount each day
     # the player doesn't interact with this NPC. Keys must exist in core_traits.
     trait_decay: Dict[str, float] = field(default_factory=dict)
+    # EN8 — where decay stops: {trait: value}, default 0. Decay moves a trait toward its
+    # rest point from either side and never crosses it. Kept raw; validate() checks it.
+    trait_rest: Any = field(default_factory=dict)
+    # EN8 — decay starts only after this many days without contact (0 = every day she
+    # does not see him, as before). Kept raw; validate() checks it.
+    decay_after_days: Any = 0
     # UI visibility: when True, the NPC is omitted from the Guide Page, Stats Page,
     # and sidebar NPC-traits widget. Runtime $npcs dict still contains the NPC so
     # prologue/narrative dialog speaker lookups by UUID keep working.
@@ -156,6 +162,10 @@ class TemplateNPC:
     # `relationship`. Ships to runtime via the slug-keyed `setup.npc_tags`
     # registry, NOT via $npcs — see v2.py's npc_tags_map for why.
     tags: List[str] = field(default_factory=list)
+    # EN7 — traits shown on THIS character's cast card, on top of [ui.cast_page]
+    # show_traits (e.g. a Power only the boss has). Kept raw; validate() checks it.
+    # Ships slug-keyed as setup.npc_show_traits, like `tags`.
+    show_traits: Any = field(default_factory=list)
     # F10 · the short label under this character's NAME in every dialogue box.
     # NOT `relationship`, which is a cast-page sentence and — measured across the
     # repo — repeats: five of one game's six relationship strings contain
@@ -599,6 +609,11 @@ class TemplateCastPage:
     intro: str = ""
     button_label: str = ""    # defaults to title
     button_icon: str = ""
+    # EN7 — the traits every card shows (name from [[traits.labels]], the number, and a
+    # word when a band in trait_bands = {trait: [{min, max, text}]} matches). Kept raw;
+    # validate() checks them. Empty = the card shows no numbers, exactly as before.
+    show_traits: Any = field(default_factory=list)
+    trait_bands: Any = field(default_factory=dict)
 
 
 @dataclass
@@ -2097,9 +2112,12 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 relationship=_require_str(n, "relationship", "") or None,
                 relationship_options=_require_list(n, "relationship_options"),
                 trait_decay=trait_decay,
+                trait_rest=n.get("trait_rest") or {},
+                decay_after_days=n.get("decay_after_days", 0),
                 hidden_from_ui=bool(n.get("hidden_from_ui", False)),
                 arc_stages=arc_stages,
                 tags=npc_tags,
+                show_traits=n.get("show_traits") or [],
                 role=_require_str(n, "role", ""),
             )
         )
@@ -3186,6 +3204,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 intro=_require_str(castp_raw, "intro", ""),
                 button_label=_require_str(castp_raw, "button_label", "") or castp_title,
                 button_icon=_require_str(castp_raw, "button_icon", ""),
+                show_traits=castp_raw.get("show_traits") or [],
+                trait_bands=castp_raw.get("trait_bands") or {},
             )
 
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
@@ -6099,6 +6119,12 @@ def validate(template: GameTemplate) -> List[str]:
     # EN4 — places hidden until found.
     errors.extend(_validate_hidden_places(template))
 
+    # EN7 — the men's numbers on the cast page.
+    errors.extend(_validate_cast_traits(template))
+
+    # EN8 — decay toward a rest point; wait after contact.
+    errors.extend(_validate_decay_rest(template))
+
     return errors
 
 
@@ -6385,6 +6411,129 @@ def _validate_hidden_places(template) -> List[str]:
                     UserWarning,
                     stacklevel=2,
                 )
+    return errors
+
+
+def _validate_show_traits(value: Any, ctx: str, errors: List[str]) -> List[str]:
+    if not isinstance(value, list) or not all(isinstance(k, str) and k.strip() for k in value):
+        errors.append(f"{ctx} must be a list of trait keys, got {value!r}")
+        return []
+    return list(value)
+
+
+def _validate_cast_traits(template) -> List[str]:
+    """EN7 — `[ui.cast_page] show_traits / trait_bands` and `[[npcs]] show_traits`.
+
+    A key no character carries renders nothing and says nothing, so it is an error. A
+    band on a trait no list shows, a hidden trait in a list, and a per-NPC list with no
+    cast page are all legal and all do nothing: warnings.
+    """
+    import warnings
+
+    errors: List[str] = []
+    cp = template.cast_page
+    hidden = {tl.key for tl in (template.trait_labels or []) if tl.hidden}
+    npc_traits = {n.id: set((n.core_traits or {}).keys()) for n in template.npcs or []}
+    any_npc_traits = set().union(*npc_traits.values()) if npc_traits else set()
+    shown: Set[str] = set()
+
+    if cp is not None:
+        page = _validate_show_traits(cp.show_traits, "[ui.cast_page] show_traits", errors)
+        for k in page:
+            if k not in any_npc_traits:
+                errors.append(f"[ui.cast_page] show_traits: no character has a core trait '{k}'")
+        shown.update(page)
+        bands = cp.trait_bands
+        if not isinstance(bands, dict):
+            errors.append(f"[ui.cast_page] trait_bands must be a table {{trait = [bands]}}, got {bands!r}")
+            bands = {}
+        for key, rows in bands.items():
+            bctx = f"[ui.cast_page] trait_bands.{key}"
+            if not isinstance(rows, list):
+                errors.append(f"{bctx} must be a list of {{min, max, text}} tables")
+                continue
+            for bi, b in enumerate(rows):
+                if not isinstance(b, dict):
+                    errors.append(f"{bctx}[{bi}] must be a table {{min, max, text}}")
+                    continue
+                unknown = sorted(set(b) - {"min", "max", "text"})
+                if unknown:
+                    errors.append(f"{bctx}[{bi}] has unknown key(s) {unknown}; only min, max, text")
+                if not isinstance(b.get("text"), str) or not b.get("text").strip():
+                    errors.append(f"{bctx}[{bi}].text is required: the word shown beside the number")
+                lo, hi = b.get("min"), b.get("max")
+                for name, v in (("min", lo), ("max", hi)):
+                    if v is not None and (isinstance(v, bool) or not isinstance(v, (int, float))):
+                        errors.append(f"{bctx}[{bi}].{name} must be a number, got {v!r}")
+                if (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+                        and not isinstance(lo, bool) and not isinstance(hi, bool) and lo > hi):
+                    errors.append(f"{bctx}[{bi}]: min {lo} is above max {hi}")
+
+    for n in template.npcs or []:
+        if not n.show_traits:
+            continue
+        own = _validate_show_traits(n.show_traits, f"npcs['{n.id}'].show_traits", errors)
+        for k in own:
+            if k not in npc_traits.get(n.id, set()):
+                errors.append(f"npcs['{n.id}'].show_traits: '{n.id}' has no core trait '{k}'")
+        shown.update(own)
+        if cp is None:
+            warnings.warn(
+                f"npcs['{n.id}'].show_traits does nothing: there is no [ui.cast_page]",
+                UserWarning, stacklevel=2,
+            )
+
+    if cp is not None and isinstance(cp.trait_bands, dict):
+        for key in cp.trait_bands:
+            if key not in shown:
+                warnings.warn(
+                    f"[ui.cast_page] trait_bands.{key}: no show_traits list names '{key}', "
+                    f"so the band never shows", UserWarning, stacklevel=2,
+                )
+    for key in sorted(shown & hidden):
+        warnings.warn(
+            f"show_traits names '{key}', which [[traits.labels]] marks hidden = true; "
+            f"a hidden trait never shows on the cast page", UserWarning, stacklevel=2,
+        )
+    return errors
+
+
+def _validate_decay_rest(template) -> List[str]:
+    """EN8 — `[[npcs]] trait_rest` and `decay_after_days`.
+
+    A rest point on a trait he does not have, or a wait that is not a whole number of
+    days, would silently do nothing or the wrong thing: errors. A rest point or a wait
+    with no trait_decay to act on is legal and inert: a warning.
+    """
+    import warnings
+
+    errors: List[str] = []
+    for n in template.npcs or []:
+        ctx = f"npcs['{n.id}']"
+        rest = n.trait_rest
+        if rest:
+            if not isinstance(rest, dict):
+                errors.append(f"{ctx}.trait_rest must be a table {{trait = value}}, got {rest!r}")
+            else:
+                for k, v in rest.items():
+                    if isinstance(v, bool) or not isinstance(v, (int, float)):
+                        errors.append(f"{ctx}.trait_rest.{k} must be a number, got {v!r}")
+                    if k not in (n.core_traits or {}):
+                        errors.append(f"{ctx}.trait_rest.{k}: '{n.id}' has no core trait '{k}'")
+                    elif k not in (n.trait_decay or {}):
+                        warnings.warn(
+                            f"{ctx}.trait_rest.{k} does nothing: '{k}' has no trait_decay, "
+                            f"so nothing moves it toward its rest point",
+                            UserWarning, stacklevel=2,
+                        )
+        wait = n.decay_after_days
+        if isinstance(wait, bool) or not isinstance(wait, int) or wait < 0:
+            errors.append(f"{ctx}.decay_after_days must be a whole number of days >= 0, got {wait!r}")
+        elif wait and not n.trait_decay:
+            warnings.warn(
+                f"{ctx}.decay_after_days does nothing: '{n.id}' has no trait_decay",
+                UserWarning, stacklevel=2,
+            )
     return errors
 
 
@@ -7630,6 +7779,11 @@ def _assemble_project_metadata(project, template):
             "button_label": template.cast_page.button_label,
             "button_icon": template.cast_page.button_icon,
         }
+        # EN7 — only when set, so an existing cast page's metadata is unchanged.
+        if template.cast_page.show_traits:
+            project.metadata["cast_page"]["show_traits"] = list(template.cast_page.show_traits)
+        if template.cast_page.trait_bands:
+            project.metadata["cast_page"]["trait_bands"] = dict(template.cast_page.trait_bands)
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.
@@ -8010,12 +8164,18 @@ def create_project_from_template(
             npc.ai_behavior_config["relationship_options"] = n.relationship_options
         if n.trait_decay:
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
+        if n.trait_rest:  # EN8 — MIRRORED in game_graph.py
+            npc.ai_behavior_config["trait_rest"] = dict(n.trait_rest)
+        if n.decay_after_days:
+            npc.ai_behavior_config["decay_after_days"] = n.decay_after_days
         # E9/E10/E11: per-NPC arc_stages list (display names per stage value).
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
         # G: per-NPC cast-card tag line.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.show_traits:  # EN7 — MIRRORED in game_graph.py
+            npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
         npc.save()

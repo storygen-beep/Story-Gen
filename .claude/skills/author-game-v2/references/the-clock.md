@@ -40,7 +40,7 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:6076`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:6097`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:14027`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
@@ -194,7 +194,7 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:5388`) renders `20m` on the
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:5409`) renders `20m` on the
   navigation card from `[[locations.costs]] time`, used at `v2.py:19353` and `:19370`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:12733`) with
@@ -333,7 +333,7 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6076`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6097`),
   and there is no `@time` token to print the clock either (`v2.py:14027`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*

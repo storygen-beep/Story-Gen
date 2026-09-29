@@ -635,10 +635,9 @@ Four parts, and they apply to every game this skill authors:
    players actually ask: of 22,252 comments, 4 ask to *see* a stat, and the recurring ask is *"how
    do I raise X / it's stuck at N"*. The requirement goes on the guidance card, as a trait goal that
    prints *"14 / 20"* (`the-voice.md` R3b). On a locked button, R4 still governs.
-4. **Where a person stands is said in words, not a score.** For example, *"warming to you"*. ⚠️ **The
-   engine has no per-person word band yet.** `[ui.cast_page]` (`engine.md` §34) shows name,
-   relationship, tags, location and the next step; none of those reads a per-person score. Until
-   that exists, the words live in the reaction lines and on that person's quest card.
+4. **Where a person stands is said in words, not a score.** For example, *"warming to you"*. The
+   cast page (`engine.md` §34) can show a man's trait with a word beside it: `show_traits` plus
+   `trait_bands`. Without them the words live in the reaction lines and on that person's quest card.
 
 ⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
 `getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
@@ -993,3 +992,17 @@ Two shapes, and pick on purpose:
   resource.
 
 A need can use both. What it cannot do is neither, which is a trait that only ever goes up.
+
+**Decay stops at a rest point and never crosses it.** Each night a decaying trait moves by its amount
+toward its rest point, from either side. The rest point is 0 unless you set one, so a value below 0
+climbs back up to 0. A man can have his own settings:
+
+```toml
+[[npcs]]
+id               = "vic"
+trait_decay      = { trust = 10 }
+trait_rest       = { trust = 20 }   # his trust cools to 20 and stops there
+decay_after_days = 2                # he starts cooling only after two days apart
+```
+
+Seeing him resets the wait, and a man she saw that day never decays that night.

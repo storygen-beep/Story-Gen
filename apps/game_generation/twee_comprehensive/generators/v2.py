@@ -879,6 +879,8 @@ class TweeComprehensiveGeneratorV2:
         # rather than a field on $npcs, deliberately: $npcs is snapshotted into every
         # history moment, which is the same reason `description` is popped below.
         npc_tags_map = {}
+        # EN7: slug → [trait keys] this character's cast card shows on top of the page's.
+        npc_show_traits_map = {}
         # Phase A (2026-05-14): slug-keyed NPC schedule registry. Engine
         # consults this first in setup.getNpcLocation(); falls back to
         # canvas-derived presence when an NPC has no declared schedule.
@@ -923,6 +925,9 @@ class TweeComprehensiveGeneratorV2:
                     "customizable": ai_config.get("customizable", False),
                     "relationship_options": ai_config.get("relationship_options", []),
                     "trait_decay": ai_config.get("trait_decay", {}),
+                    # EN8 — config, popped into setup below like trait_decay.
+                    "trait_rest": ai_config.get("trait_rest", {}),
+                    "decay_after_days": ai_config.get("decay_after_days", 0),
                 }
                 # Track NPC portrait for file copying
                 npc_portrait = ai_config.get("portrait", "")
@@ -950,6 +955,10 @@ class TweeComprehensiveGeneratorV2:
                 tags_for_npc = ai_config.get("tags") or []
                 if tags_for_npc and slug:
                     npc_tags_map[slug] = list(tags_for_npc)
+                # EN7: his own cast-card traits, slug-keyed like tags.
+                show_for_npc = ai_config.get("show_traits") or []
+                if show_for_npc and slug:
+                    npc_show_traits_map[slug] = list(show_for_npc)
                 # Phase A (2026-05-14): per-NPC schedule registry, slug-keyed.
                 # Consumed by setup.getNpcLocation() at runtime. Schedules with no
                 # entries leave the NPC un-keyed → getNpcLocation falls back to
@@ -1004,6 +1013,7 @@ class TweeComprehensiveGeneratorV2:
             hidden_npcs_map = {}
             npc_arc_stages_map = {}
             npc_tags_map = {}
+            npc_show_traits_map = {}
             npc_schedules_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
@@ -1016,6 +1026,7 @@ class TweeComprehensiveGeneratorV2:
         # G: slug-keyed cast-card tag registry. Empty when no NPC declares `tags`
         # — the cast card checks length before rendering the line.
         self.npc_tags_map = npc_tags_map
+        self.npc_show_traits_map = npc_show_traits_map
         # Phase A (2026-05-14): slug-keyed schedule registry. Empty when no
         # NPC has declared schedules — engine.getNpcLocation falls back to
         # canvas-derived presence for those NPCs.
@@ -1075,6 +1086,8 @@ class TweeComprehensiveGeneratorV2:
         # dead key in every save of every game — including the games that never set one.
         npc_map_for_json = {}
         npc_trait_decay_config = {}  # {npc_uuid: {trait: decay_per_day}}
+        npc_trait_rest_config = {}  # EN8 — {npc_uuid: {trait: rest}}
+        npc_decay_after_days_config = {}  # EN8 — {npc_uuid: days}
         for uuid, data in npc_map.items():
             entry = dict(data)
             entry.pop("customizable", None)
@@ -1085,9 +1098,17 @@ class TweeComprehensiveGeneratorV2:
             td = entry.pop("trait_decay", None)
             if td:
                 npc_trait_decay_config[uuid] = td
+            tr = entry.pop("trait_rest", None)
+            if tr:
+                npc_trait_rest_config[uuid] = tr
+            wait = entry.pop("decay_after_days", None)
+            if wait:
+                npc_decay_after_days_config[uuid] = wait
             npc_map_for_json[uuid] = entry
         npc_map_json = json.dumps(npc_map_for_json)
         self.npc_trait_decay_config = npc_trait_decay_config
+        self.npc_trait_rest_config = npc_trait_rest_config
+        self.npc_decay_after_days_config = npc_decay_after_days_config
         npc_slug_map_json = json.dumps(npc_slug_map)
         hidden_npcs_json = json.dumps(hidden_npcs_map)
 
@@ -3433,7 +3454,7 @@ for (var _ii = 0; _ii < setup.items.length; _ii++) {{
     setup.items_map[setup.items[_ii].id] = setup.items[_ii];
 }}
 setup.npc_trait_decay = {json.dumps(self.npc_trait_decay_config)};
-setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};
+setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};{self._decay_rest_js()}
 setup.daily_tick = {json.dumps(self.daily_tick)};
 setup.quests_data = {json.dumps(self.quests)};
 setup.corruption_tiers = {json.dumps(self.corruption_tiers)};
@@ -3497,7 +3518,7 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 // G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
 // `tags` and the cast card renders no tag row (existing TOMLs unaffected).
-setup.npc_tags = {json.dumps(self.npc_tags_map)};
+setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_traits_js()}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -4934,7 +4955,7 @@ setup.markCanvasTriggered = function(canvasId) {{
         var npcUuid = npcUuidMap[key];
         if (npcUuid) {{
             sv.npc_interacted_today = sv.npc_interacted_today || {{}};
-            sv.npc_interacted_today[npcUuid] = true;
+            sv.npc_interacted_today[npcUuid] = true;{self._decay_contact_js()}
         }}
     }} catch (e) {{
         // ignore
@@ -6199,14 +6220,16 @@ window.advanceDay = function() {{
     if (setup.npc_trait_decay && Object.keys(setup.npc_trait_decay).length > 0) {{
         var interacted = State.variables.npc_interacted_today || {{}};
         for (var npcId in setup.npc_trait_decay) {{
-            if (interacted[npcId]) continue; // Player interacted, skip decay
+            if (interacted[npcId]) continue; // Player interacted, skip decay{self._decay_wait_js()}
             var decayConfig = setup.npc_trait_decay[npcId];
             var npcData = State.variables.npcs[npcId];
             if (!npcData || !npcData.core_traits) continue;
             for (var traitName in decayConfig) {{
                 var decayAmount = decayConfig[traitName];
                 if (typeof npcData.core_traits[traitName] === 'number' && decayAmount > 0) {{
-                    npcData.core_traits[traitName] = Math.max(0, npcData.core_traits[traitName] - decayAmount);
+                    // EN8 — toward his rest point (default 0), from either side.
+                    var _rest = ((setup.npc_trait_rest || {{}})[npcId] || {{}})[traitName] || 0;
+                    npcData.core_traits[traitName] = setup.decayToward(npcData.core_traits[traitName], _rest, decayAmount);
                 }}
             }}
         }}
@@ -6218,7 +6241,7 @@ window.advanceDay = function() {{
             for (var _ptKey in setup.player_trait_decay) {{
                 var _ptDecay = setup.player_trait_decay[_ptKey];
                 if (typeof _pt[_ptKey] === 'number' && _ptDecay > 0) {{
-                    _pt[_ptKey] = Math.max(0, _pt[_ptKey] - _ptDecay);
+                    _pt[_ptKey] = setup.decayToward(_pt[_ptKey], 0, _ptDecay);  // EN8 — toward 0 from either side
                 }}
             }}
         }}
@@ -7215,28 +7238,46 @@ setup.getDecayWarnings = function(thresholds) {{
         }} else {{
             continue;
         }}
-        // Need a snapshot AND current must be < snapshot (decreased today)
+        // Need a snapshot AND a move since it. EN8: decay is two-sided, so a value can
+        // DROP toward its rest (the gte/gt gates above it are at risk) or RISE toward it
+        // (the lt/lte gates it still meets are at risk).
         if (!(snapKey in snap)) continue;
         var snapVal = snap[snapKey];
-        if (currentVal >= snapVal) continue;  // Did not decrease
-        // Find next gate above current (lowest threshold > currentVal)
-        var nextGate = null;
-        for (var ei = 0; ei < entries.length; ei++) {{
-            var v = entries[ei].value;
-            if (v > currentVal && (nextGate === null || v < nextGate)) {{
-                nextGate = v;
+        if (currentVal === snapVal) continue;
+        var traitName = setup.traitLabel ? setup.traitLabel(traitKey) : traitKey;
+        if (currentVal < snapVal) {{
+            // Find next gate above current (lowest gte/gt threshold > currentVal)
+            var nextGate = null;
+            for (var ei = 0; ei < entries.length; ei++) {{
+                if (entries[ei].op === "lt" || entries[ei].op === "lte") continue;
+                var v = entries[ei].value;
+                if (v > currentVal && (nextGate === null || v < nextGate)) {{
+                    nextGate = v;
+                }}
             }}
+            if (nextGate === null) continue;  // Already past all gates
+            // Only warn if within 2.0 of the next gate
+            if (nextGate - currentVal > 2.0) continue;
+            warnings.push({{
+                text: entityLabel + " " + traitName + " dropping (" + currentVal.toFixed(1) +
+                      " today, was " + snapVal.toFixed(1) + " yesterday). " +
+                      "Next gate at " + nextGate + " — interact today or lose more."
+            }});
+        }} else {{
+            // The lowest lt/lte gate she still meets (current <= v for lte, < v for lt).
+            var heldGate = null;
+            for (var ej = 0; ej < entries.length; ej++) {{
+                var eop = entries[ej].op, ev = entries[ej].value;
+                var held = (eop === "lte") ? currentVal <= ev : (eop === "lt") ? currentVal < ev : false;
+                if (held && (heldGate === null || ev < heldGate)) heldGate = ev;
+            }}
+            if (heldGate === null || heldGate - currentVal > 2.0) continue;
+            warnings.push({{
+                text: entityLabel + " " + traitName + " rising (" + currentVal.toFixed(1) +
+                      " today, was " + snapVal.toFixed(1) + " yesterday). " +
+                      "Gate at " + heldGate + " — interact today or lose it."
+            }});
         }}
-        if (nextGate === null) continue;  // Already past all gates
-        // Only warn if within 2.0 of the next gate
-        if (nextGate - currentVal > 2.0) continue;
-        // Build human-readable warning
-        var dropAmount = (snapVal - currentVal).toFixed(1);
-        warnings.push({{
-            text: entityLabel + " " + traitKey + " dropping (" + currentVal.toFixed(1) +
-                  " today, was " + snapVal.toFixed(1) + " yesterday). " +
-                  "Next gate at " + nextGate + " — interact today or lose more."
-        }});
     }}
     return warnings;
 }};
@@ -9030,19 +9071,23 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     continue
                 op = it.get("operator", "")
                 val = it.get("value")
-                if op not in ("gte", "gt") or not isinstance(val, (int, float)):
+                # EN8 — lt/lte gates too: two-sided decay can carry a value UP out of one.
+                if op not in ("gte", "gt", "lt", "lte") or not isinstance(val, (int, float)):
                     continue
                 # Build a synthetic key: subject:[npc_id:]trait_key
                 subj = it.get("subject", "")
                 key = it.get("trait_key", "")
                 npc_id = it.get("npc_id", "")
                 synth = f"{subj}:{npc_id}:{key}" if subj == "npc" else f"player::{key}"
-                trait_thresholds.setdefault(synth, []).append({
+                entry = {
                     "value": int(val),
                     "subject": subj,
                     "npc_id": npc_id,
                     "trait_key": key,
-                })
+                }
+                if op in ("lt", "lte"):
+                    entry["op"] = op  # absent on gte/gt, so those entries are unchanged
+                trait_thresholds.setdefault(synth, []).append(entry)
         self.sidebar_items.append({
             "type": "trait_decay_warning",
             "thresholds": trait_thresholds,
@@ -10667,6 +10712,89 @@ setup.locClosedReason = function (slug) {
 
         return content
 
+    def _decay_rest_js(self) -> str:
+        """EN8 — the decay step (always: it is the deliberate global change) and the
+        per-NPC rest points and waits (only when some NPC declares them)."""
+        out = """
+// EN8 — one decay step toward a rest point, from either side, never crossing it. A
+// value above its rest falls by d; one below rises by d (it used to snap to 0).
+setup.decayToward = function (v, rest, d) {
+    if (v > rest) return Math.max(rest, v - d);
+    if (v < rest) return Math.min(rest, v + d);
+    return v;
+};"""
+        if self.npc_trait_rest_config:
+            out += "\nsetup.npc_trait_rest = " + json.dumps(self.npc_trait_rest_config) + ";"
+        if self.npc_decay_after_days_config:
+            out += "\nsetup.npc_decay_after_days = " + json.dumps(self.npc_decay_after_days_config) + ";"
+        return out
+
+    def _decay_contact_js(self) -> str:
+        """EN8 — record the day of contact, only when some NPC waits before decaying."""
+        if not self.npc_decay_after_days_config:
+            return ""
+        return """
+            // EN8 — the day she last saw him, for decay_after_days.
+            if (sv.npcs && sv.npcs[npcUuid]) {
+                sv.npcs[npcUuid].last_contact_day = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 0;
+            }"""
+
+    def _decay_wait_js(self) -> str:
+        """EN8 — skip a man still inside his wait. An old save (or a man never met) has no
+        last_contact_day: that counts as contact today, so the wait starts now."""
+        if not self.npc_decay_after_days_config:
+            return ""
+        return """
+            var _wait = (setup.npc_decay_after_days || {})[npcId];
+            if (_wait) {
+                var _npcW = State.variables.npcs[npcId];
+                var _ended = State.variables.game_state.time_state.day - 1;  // the day that just ended
+                if (_npcW && _npcW.last_contact_day === undefined) { _npcW.last_contact_day = _ended; continue; }
+                if (_npcW && (_ended - _npcW.last_contact_day) < _wait) continue;
+            }"""
+
+    def _cast_shows_traits(self) -> bool:
+        """EN7 — does the cast page show any numbers? Only then is anything below emitted."""
+        return bool(self.cast_page and (self.cast_page.get("show_traits") or self.npc_show_traits_map))
+
+    def _cast_traits_js(self) -> str:
+        """EN7 — the cast card's trait data and the band lookup. Empty unless used."""
+        if not self._cast_shows_traits():
+            return ""
+        return """
+// EN7 — the men's numbers on the cast page. A card shows the page's traits plus the
+// character's own, skipping any hidden trait or one he does not have; each row is the
+// trait's one name (setup.traitLabel), the number, and a word when a band matches.
+setup.cast_show_traits = """ + json.dumps(self.cast_page.get("show_traits") or []) + """;
+setup.cast_trait_bands = """ + json.dumps(self.cast_page.get("trait_bands") or {}) + """;
+setup.npc_show_traits = """ + json.dumps(self.npc_show_traits_map) + """;
+// The first band whose min/max (either may be left off) holds the value; "" when none.
+setup.traitBand = function (key, value) {
+    var bands = (setup.cast_trait_bands || {})[key] || [];
+    var v = Number(value);
+    for (var i = 0; i < bands.length; i++) {
+        var b = bands[i] || {};
+        if (b.min !== undefined && v < b.min) continue;
+        if (b.max !== undefined && v > b.max) continue;
+        return b.text || "";
+    }
+    return "";
+};
+// The rows for one card: [{label, value, band}], page traits first, then his own.
+setup.castTraitRows = function (slug, npc) {
+    var keys = (setup.cast_show_traits || []).concat((setup.npc_show_traits || {})[slug] || []);
+    var traits = (npc && npc.core_traits) || {};
+    var hidden = setup.hiddenTraits || [];
+    var rows = [], seen = {};
+    for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        if (seen[k] || hidden.indexOf(k) !== -1 || traits[k] === undefined) continue;
+        seen[k] = true;
+        rows.push({ label: setup.traitLabel(k), value: traits[k], band: setup.traitBand(k, traits[k]) });
+    }
+    return rows;
+};"""
+
     def _cast_page_css(self) -> str:
         """Cast-page styling, emitted ONLY for games that author a cast page.
 
@@ -10714,7 +10842,15 @@ setup.locClosedReason = function (slug) {
 .cast-card .quests-tip {
     margin-top: 6px;
 }
-"""
+""" + ("""/* EN7: his numbers — the trait's name, the number, and the word beside it. */
+.cast-card .cast-traits {
+    font-size: 13px;
+    margin: 0 0 6px;
+}
+.cast-card .cast-trait-band {
+    color: var(--theme-text-muted, #8a8a8a);
+}
+""" if self._cast_shows_traits() else "")
 
     def _cheat_page_css(self) -> str:
         """Cheat-page styling, emitted ONLY for games that author a cheat page.
@@ -10858,6 +10994,16 @@ setup.locClosedReason = function (slug) {
         escaped_svg = html.escape(placeholder_svg).replace("'", "\\'")
 
         intro_line = f'<div class="cast-intro">{html.escape(intro)}</div>\n' if intro else ""
+        # EN7 — his numbers, only when the page shows any (else the card is as before).
+        traits_block = (
+            '          <<set _traitRows to setup.castTraitRows(_slug, _npc)>>\n'
+            '          <<if _traitRows.length>><div class="cast-traits"><<for _tr range _traitRows>>'
+            '<div class="cast-trait"><span class="cast-trait-name"><<print _tr.label>></span> '
+            '<span class="cast-trait-value"><<print _tr.value>></span>'
+            '<<if _tr.band>> <span class="cast-trait-band">· <<print _tr.band>></span><</if>>'
+            '</div><</for>></div><</if>>\n'
+            if self._cast_shows_traits() else ""
+        )
 
         page = f""":: CastPage
 <<nobr>>
@@ -10902,7 +11048,7 @@ setup.locClosedReason = function (slug) {
           <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
           <<set _tags to setup.npc_tags[_slug]>>
           <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
-          <<if _locName>>
+{traits_block}          <<if _locName>>
             <div class="cast-where">📍 <<print _locName>></div>
           <<else>>
             <div class="cast-where cast-away">📍 Not about right now</div>

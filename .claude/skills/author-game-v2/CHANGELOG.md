@@ -5,6 +5,104 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN8: decay settles at a rest point; a man can wait before he cools (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN8 (D5 · Power). Nightly decay was one rule, `Math.max(0, v − d)`,
+for NPCs and the player alike. A trait couldn't settle anywhere but 0, a value below 0 snapped straight
+to 0, and a man cooled from the first night apart.
+
+**What changed (engine).**
+- `setup.decayToward(v, rest, d)` moves a trait toward its rest point from either side and never crosses
+  it. Both nightly loops use it.
+  - **Deliberate global change (LO A):** a value below 0 now climbs by its amount toward 0 instead of
+    snapping. Positive values behave as before.
+  - The player's rest point is always 0.
+- `[[npcs]] trait_rest = {trait: value}` sets his rest point (default 0).
+- `[[npcs]] decay_after_days = N` makes him decay only after N days without contact.
+  - Contact (a canvas of his firing) records `$npcs[id].last_contact_day`.
+  - An old save lacks it (rule 8). Undefined means contact today: the first night records it and
+    does not decay him.
+  - `N = 0` is today's rule, and a man she saw that day still never decays that night.
+  - The contact write and the wait are emitted only when some NPC sets `decay_after_days`. The rest
+    and wait maps (`setup.npc_trait_rest`, `setup.npc_decay_after_days`) are emitted only when used
+    and never ship in `$npcs`.
+- **E20 is two-sided.**
+  - The auto warning item also collects `lt`/`lte` gates, with `op` on those entries only, so
+    existing entries are unchanged.
+  - `getDecayWarnings` warns "rising" when a value climbs toward an `lt`/`lte` gate it still meets.
+  - Both warnings name the trait with `setup.traitLabel` (EN5).
+- Both writers (T and G) carry the fields.
+- `validate()` errors on:
+  - a `trait_rest` that isn't a table of numbers, or names a trait he doesn't have;
+  - a `decay_after_days` that isn't a whole number ≥ 0.
+
+  It warns on a rest point or a wait with no `trait_decay` to act on.
+- **Passage diff** against the pre-change engine: 0 changed passages in members_only, the_balance and
+  vesper. The decay code is engine script; their auto-warning thresholds are empty and unchanged.
+
+**What changed (skill).**
+- `references/the-meters.md` after M10: "Decay stops at a rest point and never crosses it", with
+  `trait_rest` and `decay_after_days`.
+- Words +109 (136,908). `cite_check.py --fix` moved 62 citations. Each was compared with the pre-change
+  code: 49 in v2.py and 13 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_decay_rest.py`: 16 passed. It covers:
+  - `decayToward` from +30 and −30, and at rest points from above and below;
+  - Vic's trust 70 settling at 20, and his grudge −30 rising to 0;
+  - Sal's two-day wait after contact, and the reset on seeing him;
+  - "never met" starting the wait;
+  - the player rising from −12;
+  - the two-sided warnings, the old save, and the validator.
+- The fixture gained Vic's decay and a third man, Sal, with `sal_chat`. All EN1–EN7 tests still pass.
+- Engine suite 581 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN7: the men's numbers on the cast page (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN7 (D1 · D5 · J6). The cast page showed a man's name, relationship,
+tags, where he is and his next step, but never a number. D1 says numbers are shown.
+
+**What changed (engine).**
+- Opt-in `[ui.cast_page] show_traits = [...]` covers every card. `[[npcs]] show_traits = [...]` is
+  added for that man only, after the page's list.
+- Optional `[ui.cast_page] trait_bands = {trait = [{min, max, text}]}` puts a word beside the number,
+  through a new `setup.traitBand` (min and max may each be left off).
+- A row reads "Trust 40 · Warming": the trait's one name (EN5 `setup.traitLabel`), his value, and the
+  band word. A `hidden` trait never shows, and neither does one he doesn't have.
+- The Stats page already used labels and honoured `hidden` since EN5, so it needed nothing.
+- Shipped as `setup.cast_show_traits`, `setup.cast_trait_bands` and `setup.npc_show_traits` (the last
+  slug-keyed, like `npc_tags`), all only when used.
+- The per-NPC field is written by both writers (T and G).
+- `validate()` errors on:
+  - a key no character carries, or a man's own key he doesn't have;
+  - a malformed `show_traits` list;
+  - a malformed band table.
+
+  It warns on a band no list shows, a `hidden` trait in a list, and an NPC list with no cast page.
+- Emitted only when used. members_only's cast page, which has no `show_traits`, builds
+  byte-identical, as do the_balance and vesper. The fixture's CastPage without the keys matches a golden
+  from the pre-change engine.
+- **Old saves:** no new state. A save the pre-change build wrote shows both men's numbers.
+
+**What changed (skill).**
+- `references/engine.md` §34: a "his numbers" row and block.
+- `references/the-meters.md` (the "where a person stands" rule): the stale "the engine has no
+  per-person word band yet" now points at §34. The words-not-scores doctrine itself is left for D1's
+  doc item.
+- Words +142 (136,799). `cite_check.py --fix` moved 62 citations. Each was compared with the
+  pre-change code: 49 in v2.py and 13 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_cast_traits.py`: 23 passed. It covers:
+  - two men, one with an extra Power: Tobin "Trust 10 · Wary"; Vic "Trust 70 · Yours" and "Power 30";
+  - the band moving with the number, a hidden trait (cast page and Stats page), and a label;
+  - `traitBand` edges, the golden, the old save, and every validator error and warning.
+- The fixture gained `quests_engine = "v2"`, a `[ui.cast_page]`, a second man `vic`, and two quest
+  cards. All EN1–EN6 tests still pass on it.
+- Engine suite 565 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
 ## 2026-09-30 — EN5+EN6: one name per trait; a locked button names his feeling (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN5 + EN6 (D3a · D5).

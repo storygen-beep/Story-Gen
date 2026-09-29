@@ -237,8 +237,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:17939   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:17943   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:18085   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:18089   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly

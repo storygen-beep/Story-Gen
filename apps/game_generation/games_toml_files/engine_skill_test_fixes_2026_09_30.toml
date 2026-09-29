@@ -38,6 +38,15 @@
 #    quests_engine = "v2" and a [ui.cast_page] (it lists only people with a quest
 #                 card) showing trust on every card, with word bands; vic also shows
 #                 power (his own show_traits). Both cards open once `started` is set.
+#
+#  EN8 — "decay toward a rest point; wait after contact":
+#    vic          trust 70 decays by 10 toward trait_rest 20; grudge -30 rises by 10
+#                 toward 0 (the default rest) and never crosses it.
+#    sal          trust decays by 10 only after decay_after_days = 2 without contact;
+#                 sal_chat (loc_club, npc = "sal") is how contact is made.
+#
+#  EN9 — "sidebar Label: N · word":
+#    a trait_words sidebar item on corr with show_value = true: "Corruption: 5 · Clean".
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -68,6 +77,12 @@ show_traits = ["trust"]
 trait_bands = { trust = [ { max = 19, text = "Wary" },
                           { min = 20, max = 59, text = "Warming" },
                           { min = 60, text = "Yours" } ] }
+
+[[sidebar_items]]
+type       = "trait_words"
+trait      = "corr"
+show_value = true
+bands      = [ { min = 0, max = 9, text = "Clean" }, { min = 10, max = 19, text = "Curious" } ]
 
 [traits]
 [[traits.labels]]
@@ -107,9 +122,20 @@ id           = "vic"
 name         = "Vic"
 description  = "Fixture boss."
 relationship = "Tobin's boss"
-core_traits  = { trust = 70, power = 30 }
+core_traits  = { trust = 70, power = 30, grudge = -30 }
 flag_keys    = []
 show_traits  = ["power"]
+trait_decay  = { trust = 10, grudge = 10 }
+trait_rest   = { trust = 20 }
+
+[[npcs]]
+id               = "sal"
+name             = "Sal"
+description      = "Fixture regular."
+core_traits      = { trust = 50 }
+flag_keys        = []
+trait_decay      = { trust = 10 }
+decay_after_days = 2
 
 [[locations]]
 id               = "loc_home"
@@ -298,6 +324,24 @@ text       = "Dance."
 targetType = "location"
 locationId = "loc_home"
 effects    = [ { targetType = "player", trait = "corr", op = "add", value = 2 }, { targetType = "player", trait = "stamina", op = "add", value = 3 } ]
+
+# ── EN8: contact with Sal ─────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "sal_chat"
+name = "A word with Sal"
+
+[canvases.trigger]
+location      = "loc_club"
+npc           = "sal"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "Sal nods." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
 
 # ── EN7: quest cards, so the cast page lists both men ────────────────────────
 

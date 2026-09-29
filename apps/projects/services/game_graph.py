@@ -177,6 +177,10 @@ def build_game_graph(
             npc.ai_behavior_config["relationship_options"] = n.relationship_options
         if n.trait_decay:
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
+        if n.trait_rest:  # EN8 — MIRRORED in template_import.create_project_from_template
+            npc.ai_behavior_config["trait_rest"] = dict(n.trait_rest)
+        if n.decay_after_days:
+            npc.ai_behavior_config["decay_after_days"] = n.decay_after_days
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
         # G: per-NPC cast-card tag line. Mirrors the same write in
@@ -185,6 +189,8 @@ def build_game_graph(
         # reaches the database and never reaches a packaged game.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.show_traits:  # EN7 — MIRRORED in template_import.create_project_from_template
+            npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
         graph.npcs.append(npc)
