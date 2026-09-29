@@ -450,6 +450,19 @@ class GameTemplate:
     # that is what those pages hardcoded before this field existed — a game shipped
     # with every price in the prose written "£3" and its rent page saying "$245".
     rent_currency_symbol: str = "$"
+    # EN2a — the bill rises in stages. Each stage is {amount, after_total_paid}: once the
+    # player has paid that much in total, the stage's amount is the rent. stage_lines[i]
+    # is what the collector says on the pay screen when stages[i] takes over. Empty = the
+    # fixed `rent_amount`, exactly as before.
+    rent_stages: List[Dict[str, Any]] = field(default_factory=list)
+    rent_stage_lines: List[Any] = field(default_factory=list)
+    # EN2b — what a short week does. "" = today's grace warning, then eviction_mode.
+    # "carry" = she pays what she can, the rest is owed on top of next week, and the
+    # game never ends over rent (grace_periods and eviction_mode are ignored).
+    rent_on_short: str = ""
+    # Which of grace_periods / eviction_mode the TOML wrote itself. Both have defaults,
+    # so only this tells validate() that a carry game set one it will ignore.
+    rent_explicit_keys: List[str] = field(default_factory=list)
     # Sidebar items (custom display elements)
     sidebar_items: List[Dict[str, Any]] = field(default_factory=list)
     # Phone system
@@ -2918,6 +2931,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     rent_eviction_mode = _require_str(rent_raw, "eviction_mode", "game_end")
     rent_eviction_flag = _require_str(rent_raw, "eviction_flag", "rent_evicted")
     rent_currency_symbol = _require_str(rent_raw, "currency_symbol", "$") or "$"
+    # Kept raw; validate() reports every malformed stage instead of the parser dropping it.
+    rent_stages = rent_raw.get("stages") or []
+    rent_stage_lines = rent_raw.get("stage_lines") or []
+    rent_on_short = _require_str(rent_raw, "on_short", "")
+    rent_explicit_keys = [k for k in ("grace_periods", "eviction_mode") if k in rent_raw]
 
     # ── Phone system ──
     phone_raw = data.get("phone")
@@ -3313,6 +3331,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         rent_eviction_mode=rent_eviction_mode,
         rent_eviction_flag=rent_eviction_flag,
         rent_currency_symbol=rent_currency_symbol,
+        rent_stages=rent_stages,
+        rent_stage_lines=rent_stage_lines,
+        rent_on_short=rent_on_short,
+        rent_explicit_keys=rent_explicit_keys,
         sidebar_items=sidebar_items,
         phone_enabled=phone_enabled,
         phone=phone_obj,
@@ -5724,7 +5746,9 @@ def validate(template: GameTemplate) -> List[str]:
 
     # ===== Rent validation (optional) =====
     if template.rent_enabled:
-        if template.rent_amount <= 0:
+        # EN2b — with stages the bill can come from them alone, so `amount` may be
+        # absent (0); _validate_rent_on_short then demands a stage from total 0.
+        if template.rent_amount < 0 or (template.rent_amount == 0 and not template.rent_stages):
             errors.append("rent amount must be a positive integer")
         if template.rent_due_day not in VALID_DAYS:
             errors.append(
@@ -5743,6 +5767,8 @@ def validate(template: GameTemplate) -> List[str]:
                 f"rent eviction_mode must be 'game_end' or 'flag_set', "
                 f"got '{template.rent_eviction_mode}'"
             )
+        errors.extend(_validate_rent_stages(template))
+        errors.extend(_validate_rent_on_short(template))
         if template.rent_eviction_mode == "flag_set":
             if not _is_valid_slug(template.rent_eviction_flag):
                 errors.append(
@@ -6045,6 +6071,94 @@ def validate(template: GameTemplate) -> List[str]:
     # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
     errors.extend(_validate_step_consumption(template))
 
+    return errors
+
+
+def _is_plain_int(v) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _validate_rent_stages(template) -> List[str]:
+    """EN2a — [settings.rent] stages / stage_lines.
+
+    A stage the engine cannot order or price would silently charge the wrong bill, so
+    every malformed one is an error, not a skip.
+    """
+    errors: List[str] = []
+    stages = template.rent_stages
+    lines = template.rent_stage_lines
+    if not isinstance(stages, list):
+        return ["rent stages must be a list of {amount, after_total_paid} tables"]
+    if not isinstance(lines, list):
+        return ["rent stage_lines must be a list of strings"]
+    last_after = None
+    for i, st in enumerate(stages):
+        ctx = f"rent stages[{i}]"
+        if not isinstance(st, dict):
+            errors.append(f"{ctx} must be a table {{amount, after_total_paid}}")
+            continue
+        unknown = sorted(set(st) - {"amount", "after_total_paid"})
+        if unknown:
+            errors.append(f"{ctx} has unknown key(s) {unknown}; only amount and after_total_paid")
+        amount, after = st.get("amount"), st.get("after_total_paid")
+        if not _is_plain_int(amount) or amount <= 0:
+            errors.append(f"{ctx}.amount must be a positive integer, got {amount!r}")
+        if not _is_plain_int(after) or after < 0:
+            errors.append(f"{ctx}.after_total_paid must be an integer >= 0, got {after!r}")
+            continue
+        if last_after is not None and after <= last_after:
+            errors.append(
+                f"{ctx}.after_total_paid ({after}) must be greater than the stage before "
+                f"it ({last_after}); stages are listed in the order she reaches them"
+            )
+        last_after = after
+    if lines and not stages:
+        errors.append("rent stage_lines is set but stages is not; a line belongs to a stage")
+    if len(lines) > len(stages):
+        errors.append(
+            f"rent stage_lines has {len(lines)} lines for {len(stages)} stages; "
+            f"stage_lines[i] is spoken when stages[i] takes over"
+        )
+    for i, ln in enumerate(lines):
+        if not isinstance(ln, str):
+            errors.append(f"rent stage_lines[{i}] must be a string, got {ln!r}")
+    return errors
+
+
+def _validate_rent_on_short(template) -> List[str]:
+    """EN2b — `on_short`, and a staged bill with no `amount`.
+
+    Carry replaces the grace warning and the eviction, so a grace_periods or eviction_mode
+    the author wrote does nothing: a warning, not an error, because eviction_mode has a
+    default and the pair is harmless.
+    """
+    errors: List[str] = []
+    if template.rent_on_short not in ("", "carry"):
+        errors.append(
+            f"rent on_short must be 'carry' (or absent), got '{template.rent_on_short}'"
+        )
+    if template.rent_on_short == "carry":
+        import warnings
+
+        for key in template.rent_explicit_keys:
+            warnings.warn(
+                f"[settings.rent] {key} is ignored when on_short = \"carry\": a short "
+                f"week is carried to the next one, never warned or evicted",
+                UserWarning,
+                stacklevel=2,
+            )
+    stages = template.rent_stages
+    if (
+        template.rent_amount == 0
+        and isinstance(stages, list)
+        and stages
+        and isinstance(stages[0], dict)
+        and stages[0].get("after_total_paid") != 0
+    ):
+        errors.append(
+            "rent has no amount, so stages[0].after_total_paid must be 0; otherwise the "
+            "rent is 0 until a stage is reached, and paying 0 never reaches one"
+        )
     return errors
 
 
@@ -7363,6 +7477,16 @@ def _assemble_project_metadata(project, template):
             "eviction_flag": template.rent_eviction_flag,
             "currency_symbol": template.rent_currency_symbol,
         }
+        # EN2a — emitted only when used, so an unstaged game's metadata is unchanged.
+        if template.rent_stages:
+            project.metadata["rent_settings"]["stages"] = [
+                {"amount": st["amount"], "after_total_paid": st["after_total_paid"]}
+                for st in template.rent_stages
+            ]
+        if template.rent_stage_lines:
+            project.metadata["rent_settings"]["stage_lines"] = list(template.rent_stage_lines)
+        if template.rent_on_short:  # EN2b — only when set
+            project.metadata["rent_settings"]["on_short"] = template.rent_on_short
     # Store story_arc if defined (for narrative journal and help page)
     if template.story_arc:
         project.metadata["story_arc"] = {
@@ -7577,6 +7701,8 @@ def create_project_from_template(
     if template.rent_enabled and template.rent_eviction_mode == "flag_set":
         if template.rent_eviction_flag and template.rent_eviction_flag not in _player_flag_keys:
             _player_flag_keys.append(template.rent_eviction_flag)
+    if rent_carries(template) and RENT_CARRIED_FLAG not in _player_flag_keys:  # EN2b
+        _player_flag_keys.append(RENT_CARRIED_FLAG)
     for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
         if _cf not in _player_flag_keys:
             _player_flag_keys.append(_cf)
@@ -8085,6 +8211,16 @@ def closed_step_flags(template: "GameTemplate") -> List[str]:
         if any(ch.final for n in c.nodes for ch in (n.exit_block.choices or [])):
             out.append(f"{c.id}_closed")
     return out
+
+
+# EN2b — the flag a carried rent week sets. Fixed, like EN1's `<canvas>_closed`.
+RENT_CARRIED_FLAG = "rent_carried"
+
+
+def rent_carries(template: "GameTemplate") -> bool:
+    """EN2b — does a short rent week carry? Both writers register RENT_CARRIED_FLAG
+    on the player when it does, the way they register the eviction flag."""
+    return bool(template.rent_enabled and template.rent_on_short == "carry")
 
 
 def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:

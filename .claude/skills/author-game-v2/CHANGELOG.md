@@ -5,6 +5,83 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN2b: a short rent week is carried, never the end of the game (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2b (D8d). A short week gave one grace warning, and the next ended
+the game (`eviction_mode = "game_end"`) or set the eviction flag. There was no way to build rent that
+piles up as debt instead.
+
+**What changed (engine).**
+- Opt-in `[settings.rent] on_short = "carry"`:
+  - RentDay asks for this week's rent plus `$game_state.rent_state.owed`, and says "Owed from last
+    week: N" when there is any.
+  - She can pay what she has ("Pay the $N you have"; override the label with `text.partial_pay`) or
+    nothing. `setup.carryRent` takes the money in the link, writes the rest to `owed`, and sets the
+    player flag `rent_carried`.
+  - RentDay_Short only reports it: no warning count, no eviction, no GAME OVER. A reload charges
+    nothing. `text.carry_scene`, `carry_response` and `carry_closing` override its words.
+  - A full payment clears `owed`. A partial one counts toward EN2a's `total_paid`.
+- `rent_carried` is registered on the player by both writers (T and G, through `rent_carries()`) and
+  in the flag-chain map, the way the eviction flag is. It is set on the first carried week and never
+  cleared: it records that she came up short.
+- **Precedence:** carry ignores `grace_periods` and `eviction_mode`. `validate()` warns when the TOML
+  sets either one, and errors on any `on_short` other than "carry".
+- **`amount` is relaxed when `stages` is given:** it may be absent. In that case `stages[0]` must start
+  at `after_total_paid = 0`, or the rent would be 0 until a stage no payment can reach. A negative
+  amount is still an error.
+- Emitted only when `on_short = "carry"`. members_only, the_balance and vesper build a byte-identical
+  index.html. The fixture without carry builds its RentDay passages identical to a golden from the
+  pre-change engine.
+- **Old saves start with `owed = 0`** (backfill), and an old warning count is ignored. Proven by loading
+  a save the pre-change build wrote right after a grace warning (`tests/data/en2b_pre_change_save.txt`).
+  Under the old rules its next short week was the eviction; under carry it is carried.
+
+**What changed (skill).**
+- `scripts/gates.py`, "the obligation is charged": a staged rent with no `amount` is read from its
+  first stage. Before, such a game was told its rent charges nothing. Test:
+  `scripts/tests/test_gates_en2b_rent.py`. It fails on the old gates.py and passes now.
+- 52 citations were re-anchored by `cite_check.py --fix` (engine.md, the-board.md, the-clock.md,
+  the-phone.md, the-release.md, the-returning-player.md). Each was compared with the pre-change code,
+  and all 52 point at the same line of code. Words are unchanged (136,080).
+
+**Verified.**
+- `apps/game_generation/tests/test_rent_carry.py`: 16 passed. It covers a short pay then a full pay,
+  three empty weeks piling up with no game over, the reload, the old save, and every validator rule.
+- EN2a's `test_rent_stages.py` is still green. Engine suite 473 passed; skill tests 179 passed.
+- `gates.py --selfcheck` OK; `--saves vesper` all PASS; cite_check 0.
+
+## 2026-09-30 — EN2a: the bill rises in stages, and the collector says so (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2a (D8c · I5). Rent was one number for the whole game
+(`setup.rent_amount`), so a bill that climbs as she pays could not be built.
+
+**What changed (engine).**
+- Opt-in `[settings.rent] stages = [{amount, after_total_paid}]` and `stage_lines = ["…"]`. The rent is
+  the amount of the last stage whose `after_total_paid` has been reached, or `amount` before the first.
+  `stage_lines[i]` is what the collector says on the pay screen (RentDay_Paid) when `stages[i]` takes
+  over. A reload of that screen shows the same line; one payment that crosses two stages shows the
+  newer line.
+- Runtime `setup.currentRent()` replaces the constant at every read (RentDay's greeting, "Rent is", the
+  affordability check and the deduction; RentDay_Short's "You need"). `$game_state.rent_state` gains
+  `total_paid`, `stage` and `stage_changed`.
+- The keys are parsed in T and written by `_assemble_project_metadata`, which the no-DB path (G) calls
+  too. `validate()` errors on a malformed stage, stages out of order, lines without stages, more lines
+  than stages, and a non-string line. `amount` is still required (EN2b relaxes it).
+- Emitted only when `stages` is set. Without it, members_only, the_balance and vesper build a
+  byte-identical index.html; the three RentDay passages match a golden written by the pre-EN2a engine.
+- **Old saves restart at stage 1:** the backfill gives them `total_paid = 0`. Proven by loading a save
+  the pre-change build wrote (`tests/data/en2a_pre_change_save.txt`).
+- **Not done here:** the ledger mirror `board.pressure.stages`. DC3 adds that key and its doc; CK5's
+  `shape.py` reads it.
+
+**What changed (skill).** 52 citations re-anchored by `cite_check.py --fix` (engine.md, the-board.md,
+the-clock.md, the-phone.md, the-release.md, the-returning-player.md). Each was checked against the
+pre-change code: all 52 point at the same line of code. Words unchanged (136,080).
+
+**Verified.** `apps/game_generation/tests/test_rent_stages.py` 21 passed (100 → 150 → 200, the lines,
+the reload, the short screen, no-stages unchanged, the old save, every validator error). Engine suite
+457 passed; skill tests 177 passed; `gates.py --selfcheck` OK; `--saves vesper` all PASS; cite_check 0.
+
 ## 2026-09-30 — EN1: a step is used only on "yes"; a no is parked or final (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN1 (D6 · I4 · Dr1). Node 0 of a one-time canvas marked it fired and

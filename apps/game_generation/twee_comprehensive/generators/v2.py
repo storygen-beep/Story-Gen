@@ -1179,6 +1179,13 @@ class TweeComprehensiveGeneratorV2:
         # dollars — and it was the screen the whole economy hangs off. Default stays "$"
         # so no existing build moves.
         self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"
+        # EN2a — staged rent. Absent in every game that does not declare `stages`, and
+        # then nothing below changes: the fixed setup.rent_amount is read as before.
+        self.rent_stages = rent_settings.get("stages") or []
+        self.rent_stage_lines = rent_settings.get("stage_lines") or []
+        # EN2b — a short week carried to the next instead of warned and evicted. Absent
+        # (every game before EN2b) = the grace warning, then eviction_mode, as before.
+        self.rent_carries = rent_settings.get("on_short") == "carry"
 
         # Passes (recurring time-limited purchases)
         self.passes = (self.project.metadata or {}).get("passes", [])
@@ -1490,6 +1497,17 @@ class TweeComprehensiveGeneratorV2:
                 "warnings": 0,
                 "is_due": False,
             }
+            if self.rent_stages:
+                # EN2a — what she has paid in all, and the stage it bought. An old save
+                # gets these from the :passagestart backfill as 0, so it restarts at the
+                # first stage.
+                game_state_init["rent_state"].update(
+                    {"total_paid": 0, "stage": 0, "stage_changed": False}
+                )
+            if self.rent_carries:
+                # EN2b — what is owed on top of next week's rent, and what she paid the
+                # week she came up short. An old save backfills both as 0.
+                game_state_init["rent_state"].update({"owed": 0, "short_paid": 0})
         if self.passes:
             game_state_init["passes"] = {}
         if self.items:
@@ -3386,7 +3404,7 @@ setup.rent_enabled = {"true" if self.rent_enabled else "false"};
 {f'setup.rent_text = {json.dumps(self.rent_text)};' if self.rent_enabled else ''}
 {f'setup.rent_eviction_mode = "{self.rent_eviction_mode}";' if self.rent_enabled else ''}
 {f'setup.rent_eviction_flag = "{self.rent_eviction_flag}";' if self.rent_enabled else ''}
-{f'setup.rent_currency_symbol = {json.dumps(self.rent_currency_symbol)};' if self.rent_enabled else ''}
+{f'setup.rent_currency_symbol = {json.dumps(self.rent_currency_symbol)};' if self.rent_enabled else ''}{self._rent_stages_js()}{self._rent_carry_js()}
 setup.sidebar_items = {sidebar_items_json};
 setup.player_portrait_enabled = {"true" if self.player_portrait_enabled else "false"};
 setup.player_portrait = {player_portrait_json};
@@ -12791,6 +12809,18 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "npc_name": _rent.get("collector_npc", "") or "player",
                     "is_engine": True,
                 }
+        # EN2b — the carried-debt flag, set by the rent pages when a week is short.
+        if _rent.get("enabled") and _rent.get("on_short") == "carry":
+            if "rent_carried" not in flag_unlock_map:
+                flag_unlock_map["rent_carried"] = {
+                    "canvas_name": "the weekly payment (rent system)",
+                    "canvas_id": None,
+                    "location": None,
+                    "schedule": "when a rent payment is short",
+                    "canvas_conditions": None,
+                    "npc_name": _rent.get("collector_npc", "") or "player",
+                    "is_engine": True,
+                }
         for fe in ((_engine_meta.get("daily_tick", {}) or {}).get("flagEffects", []) or []):
             if fe.get("op") == "set":
                 fk = fe.get("flag")
@@ -13058,6 +13088,89 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """
         return any((getattr(loc, 'properties', None) or {}).get('door')
                    for loc in self.locations)
+
+    def _rent_stages_js(self) -> str:
+        """EN2a — the staged-rent runtime. Empty unless the game declares `stages`."""
+        if not (self.rent_enabled and self.rent_stages):
+            return ""
+        return """
+// EN2a — the bill rises in stages. A stage takes over once the player has paid its
+// after_total_paid in all; before the first one is reached the rent is setup.rent_amount.
+setup.rent_stages = """ + json.dumps(self.rent_stages) + """;
+setup.rent_stage_lines = """ + json.dumps(self.rent_stage_lines) + """;
+setup.rentStageIndex = function (totalPaid) {
+    var reached = 0;
+    for (var i = 0; i < setup.rent_stages.length; i++) {
+        if (totalPaid >= setup.rent_stages[i].after_total_paid) reached = i + 1;
+    }
+    return reached;
+};
+setup._rentState = function () {
+    var gs = State.variables.game_state;
+    return (gs && gs.rent_state) || {};
+};
+setup.currentRent = function () {
+    var stage = setup.rentStageIndex(setup._rentState().total_paid || 0);
+    return stage ? setup.rent_stages[stage - 1].amount : setup.rent_amount;
+};
+// Runs inside the pay link. The pay screen only reads what this stores, so a reload of
+// that screen shows the same line; the next payment overwrites it.
+setup.recordRentPayment = function (amount) {
+    var rs = setup._rentState();
+    var before = setup.rentStageIndex(rs.total_paid || 0);
+    rs.total_paid = (rs.total_paid || 0) + amount;
+    rs.stage = setup.rentStageIndex(rs.total_paid);
+    rs.stage_changed = rs.stage !== before;
+};
+// The collector's line for the stage this payment reached, or "" when it reached none.
+setup.rentStageLine = function () {
+    var rs = setup._rentState();
+    if (!rs.stage_changed || !rs.stage) return "";
+    return setup.rent_stage_lines[rs.stage - 1] || "";
+};"""
+
+    @staticmethod
+    def _rent_carry_short_body(stage_line_block: str) -> str:
+        """EN2b — RentDay_Short in a carry game. It only reads: setup.carryRent already
+        took the money and wrote the debt in the link that led here."""
+        return """<<set _cur to setup.rent_currency_symbol || "$">>
+<<set _rs to $game_state.rent_state>>
+<p><<print _rt.carry_scene || "You tell " + _collectorName + " you're short this week. " + _collectorName + " writes the number down.">></p>
+
+<div class="dialog-block dialog-npc">
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.carry_response || "Then it goes on top of next week's. All of it.">>
+  </div>
+</div>
+
+""" + stage_line_block + """<p><<print _rt.carry_closing || "The debt doesn't go anywhere. It waits for next week.">></p>
+
+<p class="rent-balance">You paid: <strong><<print _cur>><<print _rs.short_paid || 0>></strong>. Carried to next week: <strong><<print _cur>><<print _rs.owed || 0>></strong>.</p>
+
+<<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+<<link "Continue your day" _returnTo>><</link>>
+"""
+
+    def _rent_carry_js(self) -> str:
+        """EN2b — the carried-debt runtime. Empty unless `on_short = "carry"`."""
+        if not (self.rent_enabled and self.rent_carries):
+            return ""
+        return """
+// EN2b — a short week never ends the game. She pays what she can (maybe nothing); the
+// rest is owed on top of next week's rent. Runs inside the RentDay links, so the short
+// screen only reads what this stores and a reload of it charges nothing.
+setup.RENT_CARRIED_FLAG = "rent_carried";
+setup.carryRent = function (due, paid) {
+    var rs = State.variables.game_state.rent_state;
+    State.variables.player.core_traits.money -= paid;
+    if (setup.recordRentPayment) setup.recordRentPayment(paid);
+    rs.owed = due - paid;
+    rs.short_paid = paid;
+    rs.is_due = false;
+    if (!(State.variables.flags || {})[setup.RENT_CARRIED_FLAG]) {
+        setup.applyAndNotifyFlag('player', null, setup.RENT_CARRIED_FLAG, 'set');
+    }
+};"""
 
     def _has_consume_on(self) -> bool:
         """EN1 — does any included one-time canvas opt in to `consume_on = "exit"`?
@@ -17538,11 +17651,58 @@ if (clothingMsg) {
         # Rent day page (only if rent enabled)
         rent_page = ""
         if self.rent_enabled:
+            # EN2a — a staged game reads the rent from setup.currentRent(), records each
+            # payment, and lets the collector announce a new stage. An unstaged game's
+            # three passages are byte-identical to before.
+            rent_expr = "setup.currentRent()" if self.rent_stages else "setup.rent_amount"
+            rent_pay_record = (
+                "      <<run setup.recordRentPayment(_rent)>>\n" if self.rent_stages else ""
+            )
+            rent_stage_line_block = (
+                "<<set _stageLine to setup.rentStageLine()>>\n"
+                "<<if _stageLine>>\n"
+                '<div class="dialog-block dialog-npc">\n'
+                '  <div class="dialog-content">\n'
+                '    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _stageLine>>\n'
+                "  </div>\n"
+                "</div>\n"
+                "<</if>>\n\n"
+                if self.rent_stages else ""
+            )
+            # EN2b — carry: the rent due includes what was owed, a partial payment is
+            # allowed, and the short screen reports the carry instead of warning or
+            # evicting. Every piece is "" without carry.
+            carry = self.rent_carries
+            rent_due_expr = (
+                "(" + rent_expr + ") + ($game_state.rent_state.owed || 0)" if carry else rent_expr
+            )
+            rent_owed_line = (
+                "<<if $game_state.rent_state.owed gt 0>>\n"
+                '<p class="rent-owed">Owed from last week: <<print _cur>><<print $game_state.rent_state.owed>>.</p>\n'
+                "<</if>>\n"
+                if carry else ""
+            )
+            rent_paid_clears_owed = (
+                "      <<set $game_state.rent_state.owed to 0>>\n" if carry else ""
+            )
+            rent_partial_link = (
+                "  <<if _money gt 0 and _money lt _rent>>\n"
+                '    <<set _partText to (_rt.partial_pay || "Pay the " + _cur + _money + " you have")>>\n'
+                "    <<link _partText>>\n"
+                "      <<run setup.carryRent(_rent, _money)>>\n"
+                '      <<goto "RentDay_Short">>\n'
+                "    <</link>>\n"
+                "  <</if>>\n"
+                if carry else ""
+            )
+            rent_cant_pay_carry = (
+                "    <<run setup.carryRent(_rent, 0)>>\n" if carry else ""
+            )
             rent_page = """
 :: RentDay
 <<nobr>>
 <<set _money to $player.core_traits.money || 0>>
-<<set _rent to setup.rent_amount>>
+<<set _rent to """ + rent_due_expr + """>>
 <<set _cur to setup.rent_currency_symbol || "$">>
 <<set _rt to setup.rent_text || {}>>
 <<set _collectorName to "the landlord">>
@@ -17567,20 +17727,20 @@ if (clothingMsg) {
 </div>
 
 <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
-<div class="rent-choices">
+""" + rent_owed_line + """<div class="rent-choices">
   <<if _money gte _rent>>
     <<set _payText to "Pay " + _cur + _rent + " rent">>
     <<link _payText>>
       <<set $player.core_traits.money -= _rent>>
-      <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
+""" + rent_pay_record + rent_paid_clears_owed + """      <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
       <<set $game_state.rent_state.is_due to false>>
       <<set $game_state.rent_state.warnings to 0>>
       <<goto "RentDay_Paid">>
     <</link>>
   <</if>>
-  <<set _cantPayText to (_rt.cant_pay || "Tell them you can't pay")>>
+""" + rent_partial_link + """  <<set _cantPayText to (_rt.cant_pay || "Tell them you can't pay")>>
   <<link _cantPayText>>
-    <<goto "RentDay_Short">>
+""" + rent_cant_pay_carry + """    <<goto "RentDay_Short">>
   <</link>>
 </div>
 <</nobr>>
@@ -17605,7 +17765,7 @@ if (clothingMsg) {
   </div>
 </div>
 
-<p><<print _rt.paid_closing || "Another week secured.">></p>
+""" + rent_stage_line_block + """<p><<print _rt.paid_closing || "Another week secured.">></p>
 
 <<set _cur to setup.rent_currency_symbol || "$">>
 <p class="rent-balance">Remaining money: <strong><<print _cur>><<print $player.core_traits.money>></strong></p>
@@ -17626,7 +17786,7 @@ if (clothingMsg) {
   <</if>>
 <</if>>
 
-<<if $game_state.rent_state.warnings lt setup.rent_grace_periods>>
+""" + (self._rent_carry_short_body(rent_stage_line_block) if carry else """<<if $game_state.rent_state.warnings lt setup.rent_grace_periods>>
   <p><<print _rt.warning_scene || "You explain that you're short this week. " + _collectorName + "'s expression doesn't change.">></p>
 
   <div class="dialog-block dialog-npc">
@@ -17640,7 +17800,7 @@ if (clothingMsg) {
   <<set $game_state.rent_state.warnings += 1>>
   <<set $game_state.rent_state.is_due to false>>
 
-  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>></strong>. You need: <strong>$<<print setup.rent_amount>></strong>.</p>
+  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>></strong>. You need: <strong>$<<print """ + rent_expr + """>></strong>.</p>
 
   <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
   <<link "Continue your day" _returnTo>><</link>>
@@ -17678,7 +17838,7 @@ if (clothingMsg) {
     <<link "Start Over">><<run Engine.restart()>><</link>>
   <</if>>
 <</if>>
-<</nobr>>"""
+""") + """<</nobr>>"""
 
         # Build the time widgets content using string concatenation to avoid f-string escaping issues
         time_widgets_start = """:: TimeWidgets [widget nobr]

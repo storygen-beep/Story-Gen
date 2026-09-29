@@ -1,0 +1,150 @@
+:: RentDay
+<<nobr>>
+<<set _money to $player.core_traits.money || 0>>
+<<set _rent to setup.currentRent()>>
+<<set _cur to setup.rent_currency_symbol || "$">>
+<<set _rt to setup.rent_text || {}>>
+<<set _collectorName to "the landlord">>
+<<set _npcPortrait to "">>
+<<if setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcId to setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcData to $npcs[_npcId]>>
+  <<if _npcData && _npcData.name>>
+    <<set _collectorName to _npcData.name>>
+    <<set _npcPortrait to _npcData.portrait || "">>
+  <</if>>
+<</if>>
+
+<h2 class="rent-title"><<print _rt.title || "Monday Morning">> — Rent Day</h2>
+
+<p><<print _rt.scene || "A heavy knock on the door. You open it to find " + _collectorName + " standing there, hand already extended.">></p>
+
+<div class="dialog-block dialog-npc">
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+  </div>
+</div>
+
+<p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+<div class="rent-choices">
+  <<if _money gte _rent>>
+    <<set _payText to "Pay " + _cur + _rent + " rent">>
+    <<link _payText>>
+      <<set $player.core_traits.money -= _rent>>
+      <<run setup.recordRentPayment(_rent)>>
+      <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
+      <<set $game_state.rent_state.is_due to false>>
+      <<set $game_state.rent_state.warnings to 0>>
+      <<goto "RentDay_Paid">>
+    <</link>>
+  <</if>>
+  <<set _cantPayText to (_rt.cant_pay || "Tell them you can't pay")>>
+  <<link _cantPayText>>
+    <<goto "RentDay_Short">>
+  <</link>>
+</div>
+<</nobr>>
+
+:: RentDay_Paid
+<<nobr>>
+<<set _rt to setup.rent_text || {}>>
+<<set _collectorName to "the landlord">>
+<<if setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcId to setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcData to $npcs[_npcId]>>
+  <<if _npcData && _npcData.name>>
+    <<set _collectorName to _npcData.name>>
+  <</if>>
+<</if>>
+
+<p><<print _rt.paid_scene || "You hand over the cash. " + _collectorName + " counts it, nods once, and turns to leave.">></p>
+
+<div class="dialog-block dialog-npc">
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.paid_response || "Same time next week.">>
+  </div>
+</div>
+
+<<set _stageLine to setup.rentStageLine()>>
+<<if _stageLine>>
+<div class="dialog-block dialog-npc">
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _stageLine>>
+  </div>
+</div>
+<</if>>
+
+<p><<print _rt.paid_closing || "Another week secured.">></p>
+
+<<set _cur to setup.rent_currency_symbol || "$">>
+<p class="rent-balance">Remaining money: <strong><<print _cur>><<print $player.core_traits.money>></strong></p>
+
+<<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+<<link "Continue your day" _returnTo>><</link>>
+<</nobr>>
+
+:: RentDay_Short
+<<nobr>>
+<<set _rt to setup.rent_text || {}>>
+<<set _collectorName to "the landlord">>
+<<if setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcId to setup.npc_slug_map[setup.rent_collector_npc]>>
+  <<set _npcData to $npcs[_npcId]>>
+  <<if _npcData && _npcData.name>>
+    <<set _collectorName to _npcData.name>>
+  <</if>>
+<</if>>
+
+<<if $game_state.rent_state.warnings lt setup.rent_grace_periods>>
+  <p><<print _rt.warning_scene || "You explain that you're short this week. " + _collectorName + "'s expression doesn't change.">></p>
+
+  <div class="dialog-block dialog-npc">
+    <div class="dialog-content">
+      <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.warning_response || "Next Monday. Don't make me ask twice.">>
+    </div>
+  </div>
+
+  <p><<print _rt.warning_closing || "You have one week to find the money.">></p>
+
+  <<set $game_state.rent_state.warnings += 1>>
+  <<set $game_state.rent_state.is_due to false>>
+
+  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>></strong>. You need: <strong>$<<print setup.currentRent()>></strong>.</p>
+
+  <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+  <<link "Continue your day" _returnTo>><</link>>
+<<else>>
+  <<if setup.rent_eviction_mode is "flag_set">>
+    <<run setup.applyAndNotifyFlag('player', null, setup.rent_eviction_flag, 'set')>>
+    <<set $game_state.rent_state.warnings to 0>>
+    <<set $game_state.rent_state.is_due to false>>
+
+    <p><<print _rt.eviction_scene_soft || _rt.eviction_scene || _collectorName + " stops waiting for the money. Something shifts in the way " + _collectorName + " looks at you now.">></p>
+
+    <div class="dialog-block dialog-npc">
+      <div class="dialog-content">
+        <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">>
+      </div>
+    </div>
+
+    <p><<print _rt.eviction_closing_soft || _rt.eviction_closing || "You're still here. But the terms have changed.">></p>
+
+    <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+    <<link "Continue" _returnTo>><</link>>
+  <<else>>
+    <p><<print _rt.eviction_scene || _collectorName + " doesn't wait for excuses this time.">></p>
+
+    <div class="dialog-block dialog-npc">
+      <div class="dialog-content">
+        <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">>
+      </div>
+    </div>
+
+    <p><<print _rt.eviction_closing || "No negotiation. No extension. You had your chance.">></p>
+
+    <p class="game-over-text">GAME OVER</p>
+
+    <<link "Start Over">><<run Engine.restart()>><</link>>
+  <</if>>
+<</if>>
+<</nobr>>

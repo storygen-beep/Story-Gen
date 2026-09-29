@@ -7817,6 +7817,11 @@ def run_gates(model, game, state=None):
         outflows = []
         rent_cfg = (game.get("settings") or {}).get("rent") or {}
         rent_amt = rent_cfg.get("amount") if rent_cfg.get("enabled") else None
+        # EN2b — a staged bill may omit `amount`; the importer then requires a stage from
+        # total 0, and that stage is what the rent charges from the first week.
+        _stages = rent_cfg.get("stages") if rent_cfg.get("enabled") else None
+        if not rent_amt and isinstance(_stages, list) and _stages and isinstance(_stages[0], dict):
+            rent_amt = _stages[0].get("amount")
         rent_charges = isinstance(rent_amt, (int, float)) and rent_amt > 0
 
         def _outflows(o):

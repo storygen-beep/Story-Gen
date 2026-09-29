@@ -11,6 +11,11 @@
 #                 undecided walk-out (no key — leaving counts as a parked no).
 #    step_plain   one-time, NOT opted in: the control. Used up on entry, as ever.
 #    after_closed repeatable, gated on the step_offer_closed flag the final no sets.
+#
+#  EN2a — "the bill rises in stages":
+#    [settings.rent] 100, then 150 once 100 is paid in all, then 200 once 250 is paid.
+#                 Tobin collects and says each new stage. start_after_flag = "rent_on",
+#                 which only the rent tests set, so no other item's test meets a RentDay.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -32,7 +37,17 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40 }
-flag_keys   = ["started"]
+flag_keys   = ["started", "rent_on"]
+
+[settings.rent]
+enabled          = true
+amount           = 100
+collector_npc    = "tobin"
+start_after_flag = "rent_on"
+stages           = [ { amount = 150, after_total_paid = 100 },
+                     { amount = 200, after_total_paid = 250 } ]
+stage_lines      = [ "It's one-fifty from now on. The place costs more than you do.",
+                     "Two hundred. Don't look at me like that, you knew it would climb." ]
 
 [[npcs]]
 id          = "tobin"
