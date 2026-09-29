@@ -67,7 +67,27 @@
       "the lot behind the shop",
       "Tobin's bench at the county office, Tuesdays, before the two o'clock"
     ],
-    "last_read_at_release": "0.1-want"
+    "last_read_at_release": "0.1-want",
+    "fantasy_shape": "mix: rise_by_want, run on an order hold",
+    "model_to_beat": {
+      "game": "shady-deals",
+      "better": "a goal with a date the player counts down to, a mystery that pays out on a schedule, and one face for the whole game"
+    },
+    "moment_kinds": [
+      "being_seen",
+      "body_as_payment",
+      "consequence",
+      "firsts"
+    ],
+    "promise": {
+      "goal": "the box comes off \u2014 monthly reviews loosen one rule each: day 30 the zone reaches the bridge, day 60 no curfew, day 90 the box comes off",
+      "date": "reviews on the first Tuesday on or after day 30, 60 and 90 (review_days, +1 a night)",
+      "mystery": "a dot on her log at the yards across the river, 02:10 Saturday, while she was asleep \u2014 the box can lie, and somebody already made it lie",
+      "payout": "0.1 Tobin step 2: boxes 'get helped' \u00b7 ~0.3 whose dot it was \u00b7 ~0.5 who does the helping and what they charge",
+      "rival": "npc_delgado"
+    },
+    "pressure": "npc_tobin",
+    "face": "one performer: dark hair grown out from a short cut, thin build, a small tattoo inside one wrist; the black band on her left ankle in every still we can get"
   },
   "board_intent": {
     "note": "NOT the board. These are the \u00a73 declarations the Want fixed, carried forward so the board phase checks itself against them rather than re-deriving. the-systems.md is read FIRST in that phase.",
@@ -156,6 +176,42 @@
     {
       "at": "0.1-board",
       "note": "LO read the sidebar as a player and asked whether the lead is a humanoid. The trait `charge` is RENAMED `battery`. Cause named: the only other game in this repo with a `Charge up` / `Power down` body is vesper, whose lead IS company-owned property (the-meters.md M8), and that vocabulary was carried into a game about a human on a court order. Worse than a stray word because of placement \u2014 in a sidebar row beside food/rest/wash, a fourth bar reads as her body. Sidebar now renders it as `The box` with word bands, so it names the DEVICE. 25 sites across 6 files; free today, frozen after 0.1 because a trait key is a save join-key. `want.charge` is UNTOUCHED \u2014 that is the dramatic charge (reversal/taboo/transformation), a different word."
+    },
+    {
+      "at": "0.1-idea",
+      "note": "LO picked 2026-09-29: first step A (Tobin, 'Fault'), monthly reviews at days 30/60/90 instead of one day-90 review, no Nell (no companion). board.cast_meter (per-NPC `trust`) dropped: SP2 ladders gate on a stage counter plus her tiers, and each character's meters now name those."
+    },
+    {
+      "at": "0.1-spine",
+      "note": "LO approved SP1-SP7 on 2026-09-29, the day they were drafted, and waived the day-after signing rule because this build is a skill test. shape.py --finish fails that one row on purpose; the phase was advanced to `spine` on LO's word, not on a green checkpoint A."
+    },
+    {
+      "at": "0.1-board",
+      "note": "Board laid down 2026-09-29 against the 0.1 spine: systems +past +the_log; 0.1 places are 7 with the_bridge in and the_stop out (SP7 amended, back to REVIEW); fill re-budgeted to 30,000, martys anchor at 26.7%; Marty gets a Thu 19-21 row; dock tier 2 moves to martys at $120 so money gates something in 0.1; battery reads become conditions; every tier gets a gte read in 0.1; tiers and counters hidden on the sidebar."
+    },
+    {
+      "at": "0.1-testbuild",
+      "note": "TEST BUILD from unplaced proposals, 2026-09-29, on LO's 'continue'. board.door copied from release_page.door because gate 'ends on an opening' reads only board.door (skill finding). Phase stays `board`."
+    },
+    {
+      "at": "0.1-sheets",
+      "note": "LO ruled 2026-09-29: (1) the new design wins on all 10 rows of proposals/CONFLICTS.md; old person sheets and the old opening are to be marked replaced (LO writes that line). (2) Rae is 58, Delgado 44. (3) The game starts Tuesday 12:00 with Tobin fitting the band in the opening (SP1 amended; the engine starts on the hour, so 12:40 becomes 12:00). (4) LO places the sheets into sheets/ himself."
+    },
+    {
+      "at": "0.1-build",
+      "note": "LO 2026-09-29: 'approved \u2014 ignore the media harvest \u2014 go ahead'. Read as sign-off on proposals/ and on SP1/SP7. sheets/ left untouched (LO's rule); the real 0.1 is built from proposals/, the approved plan inside the game folder (the-sheets.md S13). Media harvest skipped on LO's word."
+    },
+    {
+      "at": "0.1-build",
+      "note": "fill for the four places not in 0.1 (martys_back, the_diner, the_stop, the_far_side) parked as `later_fill`: gate 1 sums every board.locations fill into the plan total (finding #45). 0.1 plan = 30,000, martys 26.7%."
+    },
+    {
+      "at": "0.1-build",
+      "note": "0.1 built 2026-09-29 from proposals/: 29,725 words over 7 places (6/7 on budget, anchor martys 27%), 38 canvases, 12 ladder steps, 8 repeatable explicit surfaces. gates.py 47/49 \u2014 the two reds are skill false alarms (ladders: nightly tick unseen, opening step, the door step; meter ceiling on meters that start full). --ship NO on: the step row (same false alarm), LO's playtest signature, and --release (no media, on LO's word; no portal entry). playtest.py 10/10; live climb reaches every step except the door (by design) and the opening (skill). Prose: 5 parallel writers from one brief, injected into # POOL slots; 0 past claims in 3,242 sentences."
+    },
+    {
+      "at": "0.1-deploy",
+      "note": "LO 2026-09-29 chose to publish the --dev --debug build of 0.1 to games/probation/output/ on the public portal, overriding the .gitignore rule that dev builds stay in output_dev/. Portal entry is `dev: true`. Media not harvested (LO)."
     }
   ],
   "board": {
@@ -172,7 +228,7 @@
           "has_dock",
           "home_base"
         ],
-        "read_by": "Every choice that leaves the zone or runs past eight is PRICED in it (`costs`, so the engine filters the choice when she cannot pay). Under 20 the bridge and the stop stop offering their exits; under 15 the back room at Marty's is the only outlet she can reach before the alarm. This is the premise as a meter \u2014 and it belongs to the DEVICE, not to her body.",
+        "read_by": "Every exit that leaves the zone carries a `battery gte 20` CONDITION (a cost alone never shuts a door: gate 29), and every choice that spends time away from her room is priced in it. Under 5 the alarm goes to Delgado's desk and `clean` falls 15. It is NOT the reason for any sex act (WANT \u00a74b finding): no explicit surface is gated on a low battery.",
         "shape": "SPENT, not decayed \u2014 `trait_decay` fires only in advanceDay() (v2.py:5733), so an 18-hour battery cannot be a daily decay. M10's second shape."
       },
       {
@@ -214,7 +270,7 @@
           "in_zone",
           "over_line"
         ],
-        "read_by": "Every radius rung above 45, whether crossing the bridge costs `clean` at all, and what the log says on Tuesday. 0 sealed / 1 loose / 2 off.",
+        "read_by": "Whether the bridge costs `clean`, what the log says on Tuesday, and every radius rung above 30. 0 sealed / 1 loose / 2 off. 0.1 reads only 0.",
         "shape": "Fed at exactly one bench, by exactly one person. Tobin IS this system."
       },
       {
@@ -274,10 +330,34 @@
           "has_shower"
         ],
         "read_by": "The county office \u2014 and missing Tuesday is a violation, so this one is not cosmetic."
+      },
+      {
+        "id": "past",
+        "kind": "sourced",
+        "key": "past_wheel | past_paper | past_hands",
+        "fed_at": [
+          "the_county_office"
+        ],
+        "labels": [
+          "public"
+        ],
+        "read_by": "Set once at intake (the start choice) and read forever: the three work surfaces at Marty's, one line per past; Delgado's Tuesday lines; Tobin's first look at her file. SY2b: set once, read forever."
+      },
+      {
+        "id": "the_log",
+        "kind": "sourced",
+        "key": "yards_on_file | tobin_fault_1 | tobin_fault_2",
+        "fed_at": [
+          "the_county_office"
+        ],
+        "labels": [
+          "public"
+        ],
+        "read_by": "Tobin files or buries each dot at his bench; Delgado reads it at two, review 1 reads it (-20 `clean` per dot on file), and Marty's Friday line changes once the Thursday letter is on file."
       }
     ],
     "who_climbs": "player",
-    "_who_climbs_note": "LADDER game. Field splits 8 roster / 9 ladder with nothing between 15% and 65%; all five prior v2 games sat at 19-29% because nobody asked. Declared `player`: her three tiers do the gating, the cast runs LIGHT \u2014 one word, `trust`, on all four, same scale, per W6 (nine of thirteen field games give every person exactly one meter and it is the same word every time). Gate 34 wants >=60% of meter-gating on her tiers.",
+    "_who_climbs_note": "LADDER game. Field splits 8 roster / 9 ladder with nothing between 15% and 65%; all five prior v2 games sat at 19-29% because nobody asked. Declared `player`: her three tiers do the gating, the cast runs LIGHT \u2014 one word, `trust`, on all four, same scale, per W6 (nine of thirteen field games give every person exactly one meter and it is the same word every time). Gate 34 wants >=60% of meter-gating on her tiers. | 2026-09-29: the per-person `trust` meter is dropped (spine SP2); the cast runs on stage counters.",
     "ascent_tiers": [
       "radius",
       "hours",
@@ -325,14 +405,7 @@
     },
     "throttle": {
       "key": "arousal",
-      "gates": "the act menu on the two node-routed loops (martys_back, the_laundry after two) and nothing else",
-      "_note": "W2: our five games raised arousal 232 times and read it 4. It is the genre's #1 or #2 most-gated meter in 13 of 27 field games. Build the loop and the throttle has a job."
-    },
-    "cast_meter": {
-      "word": "trust",
-      "scale": "0-100",
-      "rungs_per_person": "3 for Rae, Tobin and Delgado; 6 for Marty (the one arc that carries the game)",
-      "_note": "W6: field median is 3 rungs per person (p25 2, p75 6) and 88% of threshold values are shared by two or more people. Reserve the rich model for one or two arcs."
+      "gates": "the act menu on Tobin's Tuesday bench loop (after tobin_03_bench) and the night-laundry being-seen loop, both in 0.1"
     },
     "needs": [
       {
@@ -340,7 +413,7 @@
         "falls": "SPENT \u2014 6 per hour away from the dock, charged as `costs` on every choice that advances time outside her room",
         "fills": "her_room \u00b7 dock the box \u00b7 90 min",
         "costs": "nothing, but the 90 minutes are the price",
-        "shuts": "under 20 the zone exits are filtered out by the engine (checkCostsAffordable, v2.py:4902); under 5 the alarm goes to Delgado's desk and `clean` falls 15"
+        "shuts": "under 20 every zone-leaving exit is hidden by a `battery gte 20` CONDITION (a cost only filters when current < cost, so a cost alone does not shut it); under 5 the alarm goes to Delgado's desk and `clean` falls 15"
       },
       {
         "key": "rest",
@@ -369,7 +442,7 @@
         "id": "bowen_street",
         "job": "The ground. Everything hangs off it, and it is where the world puts a stranger in front of her without her travelling.",
         "anchor": false,
-        "fill": 3500,
+        "fill": 3000,
         "labels": [
           "public",
           "in_zone"
@@ -379,13 +452,13 @@
           "work": [],
           "people": []
         },
-        "_note": "EXTERIOR ROOT \u2014 no entry_from. R3: the world contains the home, never the reverse. Serves none of the three on purpose; it is the ground, and its fill is traversal ambients."
+        "_note": "EXTERIOR ROOT \u2014 no entry_from. R3: the world contains the home, never the reverse. Serves none of the three on purpose; it is the ground, and its fill is traversal ambients. | BOARD 2026-09-29: the exterior root. Answers none of R2's three and is kept because the-map.md R3 requires an exterior; the skill has no exemption or corridor field for it (finding)."
       },
       {
         "id": "the_stairwell",
         "job": "The ground floor of her building. One street door, and inside it the stairs go up and the laundry is through the other. Everyone who uses the machines at three in the morning passes her stairs.",
         "anchor": false,
-        "fill": 3500,
+        "fill": 2000,
         "labels": [
           "public",
           "in_zone"
@@ -403,7 +476,7 @@
         "id": "her_room",
         "job": "Where the dock is, where the wardrobe is, and the only room in the game that is hers.",
         "anchor": false,
-        "fill": 5000,
+        "fill": 4500,
         "labels": [
           "private",
           "home_base",
@@ -427,7 +500,7 @@
         "id": "the_laundry",
         "job": "Open all night, directly under her floor, and Rae pays cash to have somebody in it after two. The renewable stranger source.",
         "anchor": false,
-        "fill": 7000,
+        "fill": 6000,
         "labels": [
           "public",
           "open_all_night",
@@ -436,7 +509,7 @@
         "serves": {
           "needs": [],
           "work": [
-            "the night sit"
+            "the night sit (Rae pays cash; hours gte 10; once a night)"
           ],
           "people": [
             "npc_rae"
@@ -448,7 +521,7 @@
         "id": "martys",
         "job": "THE ANCHOR. Three work surfaces, the sheet, and Marty. Where her hours come from and where they get written down.",
         "anchor": true,
-        "fill": 14000,
+        "fill": 8000,
         "labels": [
           "public",
           "sells_food",
@@ -472,7 +545,6 @@
         "id": "martys_back",
         "job": "The room with the outlet. Private, and the only place inside the zone where nobody can see the door.",
         "anchor": false,
-        "fill": 5000,
         "labels": [
           "private",
           "she_can_undress",
@@ -486,13 +558,15 @@
           "people": [
             "npc_marty"
           ]
-        }
+        },
+        "later_fill": 5000,
+        "_fill_note": "Not in 0.1. Budget parked as later_fill so gate 1 judges the release's own plan (finding #45)."
       },
       {
         "id": "the_county_office",
         "job": "Where the log is read out loud. Delgado on Tuesdays, Tobin's bench on the way in.",
         "anchor": false,
-        "fill": 4500,
+        "fill": 5000,
         "labels": [
           "public",
           "in_zone"
@@ -510,7 +584,6 @@
         "id": "the_diner",
         "job": "The only lit thing on this side after midnight. Food, and a counter seat that different people occupy.",
         "anchor": false,
-        "fill": 4000,
         "labels": [
           "public",
           "sells_food",
@@ -527,13 +600,14 @@
             "npc_tobin"
           ]
         },
-        "_note": "The counter seat is the ROTATING SLOT (the-board.md \u00a72) \u2014 room-scoped content names the occupant by role, never by name, so a rotation costs one [[npcs]] block."
+        "_note": "The counter seat is the ROTATING SLOT (the-board.md \u00a72) \u2014 room-scoped content names the occupant by role, never by name, so a rotation costs one [[npcs]] block.",
+        "later_fill": 4000,
+        "_fill_note": "Not in 0.1. Budget parked as later_fill so gate 1 judges the release's own plan (finding #45)."
       },
       {
         "id": "the_stop",
         "job": "The last address the box is comfortable with. A corridor, declared as one.",
         "anchor": false,
-        "fill": 2000,
         "labels": [
           "public",
           "in_zone"
@@ -542,13 +616,15 @@
           "needs": [],
           "work": [],
           "people": []
-        }
+        },
+        "later_fill": 2000,
+        "_fill_note": "Not in 0.1. Budget parked as later_fill so gate 1 judges the release's own plan (finding #45)."
       },
       {
         "id": "the_bridge",
-        "job": "The line is painted down the middle of it. Standing on it is legal; the next step is not.",
+        "job": "The line painted down the middle. Opens at review 1 (radius 30). In 0.1 she can stand on it and look across; the far half is locked.",
         "anchor": false,
-        "fill": 2000,
+        "fill": 1500,
         "labels": [
           "public",
           "in_zone",
@@ -558,13 +634,13 @@
           "needs": [],
           "work": [],
           "people": []
-        }
+        },
+        "_note": "0.1: entry_conditions radius gte 30 AND battery gte 20; locked text names the review. Answers none of R2's three in 0.1: the release's walk-to place, a corridor in intent (no field for it)."
       },
       {
         "id": "the_far_side",
         "job": "THE DOOR THIS RELEASE ENDS ON. Visible from the bridge, entry-blocked, and what 0.2 fills.",
         "anchor": false,
-        "fill": 1000,
         "labels": [
           "public",
           "over_line"
@@ -574,38 +650,35 @@
           "work": [],
           "people": []
         },
-        "_note": "SECOND ROOT (no entry_from), reached by the bridge travel canvas. entry_conditions radius gte 45 + blocked_message. Declared thin ON PURPOSE \u2014 it is the promise, not the content."
+        "_note": "SECOND ROOT (no entry_from), reached by the bridge travel canvas. entry_conditions radius gte 45 + blocked_message. Declared thin ON PURPOSE \u2014 it is the promise, not the content.",
+        "later_fill": 1000,
+        "_fill_note": "Not in 0.1. Budget parked as later_fill so gate 1 judges the release's own plan (finding #45)."
       }
     ],
     "fill_plan": {
-      "v01_total": 51500,
-      "locations": 11,
-      "mean": 4682,
-      "median": 4000,
-      "anchor_share_v01": "14000 / 51500 = 27.2%",
+      "v01_total": 30000,
+      "locations": 7,
+      "anchor": "martys",
+      "anchor_share_v01": "8000 / 30000 = 26.7%",
       "finished_total_plan": 95000,
-      "anchor_at_finished": "25000 = 26.3%",
-      "_note": "Re-budgeted 2026-09-04 when the_stairwell was added. Round numbers, declared before the prose. Gate 1's backstop is MEDIAN 3000 / MEAN 4500 and a v0.1 built from a signed design shipped 4,590 words and failed for being seven times too small."
+      "_note": "Re-budgeted 2026-09-29 for the spine's 0.1 (7 places). Out of 0.1 and kept for later releases: martys_back, the_diner, the_stop, the_far_side. Round numbers, declared before the prose."
     },
     "heat_plan": {
       "locations_with_heat": [
-        "martys",
-        "martys_back",
+        "the_county_office",
         "the_laundry",
         "her_room",
-        "the_diner",
-        "the_county_office",
-        "the_stairwell"
+        "the_stairwell",
+        "bowen_street"
       ],
-      "share": "7 of 11 = 63.6%",
-      "_note": "Floor is 60% carrying heat. The stairwell's is a walk-in \u2014 the shape the field builds and the reason it is not a dead corridor."
+      "share": "5 of 7 = 71%",
+      "_note": "The anchor (martys) is COLD in 0.1 apart from being-seen texture (customers see the box). Commitment 3 says heat lives where she returns; this is the riskiest call on the board and follows from SP2 (no Marty sex in 0.1)."
     },
     "map": {
       "archetype": "nested_zones",
-      "shape": "A street on the east side of a river. One door on it opens on a stairwell with the laundry through it and her room at the top of the stairs; the shop and the county office are further along; the street runs down to the bus stop and then to the bridge, and the far side of the bridge is a second ground she cannot reach yet.",
+      "shape": "A street on the east side of a river. One door on it opens on a stairwell with the laundry through it and her room at the top; the shop and the county office are further along; the street runs down to the bridge, with a painted line across the middle and the far side behind it.",
       "home_base": "her_room",
       "exterior": "bowen_street",
-      "second_root": "the_far_side",
       "homes": {
         "npc_rae": "the_laundry",
         "npc_marty": "offscreen",
@@ -616,28 +689,14 @@
       "bridges": [
         {
           "from": "bowen_street",
-          "to": "the_stop",
-          "costs": {
-            "time": 5
-          }
-        },
-        {
-          "from": "the_stop",
           "to": "the_bridge",
           "costs": {
             "time": 10
-          }
-        },
-        {
-          "from": "the_bridge",
-          "to": "the_far_side",
-          "costs": {
-            "time": 5
           },
-          "gated": "radius gte 45"
+          "gated": "radius gte 30 AND battery gte 20"
         }
       ],
-      "r1_signoff": "PARTIAL \u2014 LO walked it 2026-09-04 and rejected the topology: her_room and the_laundry were two leaves off the street and are one building. Fixed by the_stairwell. NOT yet signed as a whole."
+      "r1_signoff": "OPEN: the 0.1 map (7 places, the_stop cut, the_bridge off bowen_street) needs LO's walk. The 2026-09-04 partial signoff was for 11 places."
     },
     "economy": {
       "currency": "money",
@@ -655,10 +714,11 @@
           },
           {
             "tier": 2,
-            "where": "martys_back",
-            "price": 180,
-            "gate": "money 180 AND trust(marty) 30",
-            "opens": "the 19:45-20:30 window becomes a place she can BE rather than a place she has to leave"
+            "where": "martys",
+            "price": 120,
+            "gate": "money gte 120 AND marty_stage gte 2",
+            "sets": "dock_behind_counter",
+            "opens": "read by the Thursday stocktake: 'Stay till close' (21:00) needs it, because the box would not last otherwise. Durable, a flag, read by a door that is not its own till."
           },
           {
             "tier": 3,
@@ -668,21 +728,30 @@
             "opens": "staying over the line \u2014 the whole hours ladder above 55"
           }
         ],
-        "_note": "COMPOUND gates, which is the field shape we do not build: money alone never buys the next tier (become-someone 50k AND two employees hired). And it stays bought \u2014 it is read forever after."
+        "_note": "COMPOUND gates, which is the field shape we do not build: money alone never buys the next tier (become-someone 50k AND two employees hired). And it stays bought \u2014 it is read forever after.",
+        "_v01": "0.1 sells tier 2 only. Tier 3 (the_far_side) waits for a later release."
       },
       "sinks": [
-        "the dock ladder (her_room / martys_back / the_far_side)",
+        "the dock behind the counter (martys)",
         "clothes on the pawn side (martys)",
         "the machines (the_laundry)",
-        "food (the_diner)",
-        "the fare (the_stop)",
-        "what Tobin takes (the_county_office)"
+        "what Tobin takes for a fault after conversion (the_county_office)"
       ],
       "sources": [
-        "shifts at Marty's \u2014 day-capped, and each one costs `rest`",
-        "the night sit at the laundry \u2014 Rae pays cash, gated on hours 25"
+        "shifts at Marty's, day-capped by shift_today, each costs rest",
+        "the night sit at the laundry, hours gte 10, capped by sit_today"
       ],
-      "_spread_note": "6 sinks across 6 different locations, 2 sources. Gate 17 fails when more than half the sinks resolve to one location \u2014 a game passed at 21:20 with twelve of its sinks on a single front desk."
+      "_spread_note": "4 sinks over 3 places, 2 sources, both day-capped (R5: a gate is not a cap).",
+      "hold": {
+        "kind": "order",
+        "collector": "npc_delgado",
+        "weekly": "Tuesday 14:00-16:00 check-in; Friday sheet signed by Marty",
+        "daily": "the box: 18 hours of battery, 90 minutes on the dock, home by eight",
+        "monthly": "review on the first Tuesday on/after review_days 30: pass on clean >= 60 sets review_1_passed and opens the zone to the bridge; fail sets review_days 0 (another month) and the Thursday check-in",
+        "moves": "yes \u2014 clean < 40 adds a Thursday check-in; a failed review pushes a month; each passed review removes one rule",
+        "_note": "SP4 says record the hold in board.economy; state.md says a non-bill hold leaves obligation/obligation_amount/week_income out. Recorded under `hold` so neither shape.py nor gate 24 reads it as money."
+      },
+      "week_income_note": "intent: 6 shifts at Marty's x $45 = $270 a week, before the day-cap and rest cost"
     },
     "characters": [
       {
@@ -692,10 +761,77 @@
         "home": "offscreen",
         "why_wanted": "The first person since the sentence who treats her as an employee instead of a case number, and she can feel what it costs him.",
         "meters": {
-          "trust": "6 rungs \u2014 5/15/30/45/60/80. The one arc that carries the game."
+          "hours": "stocktake past eight",
+          "vouch": "the letter is the first signature"
         },
         "role": "shop owner",
-        "bible": "Owns the hardware and pawn shop. Signs her hours. Wife works nights and he does not go home. Careful, and getting less so."
+        "bible": "Owns the hardware and pawn shop. Signs her hours. Wife works nights and he does not go home. Careful, and getting less so.",
+        "ladder": {
+          "counter": "marty_stage",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "marty_01_first_shift",
+              "where": "martys",
+              "when": {
+                "days": [
+                  "Wed"
+                ],
+                "from": "09:00",
+                "to": "12:00"
+              },
+              "gate": [
+                {
+                  "flag": "met_delgado"
+                }
+              ],
+              "hint": "Your first shift at Marty's: Wednesday, from nine.",
+              "her_line_low": "Ankle, legs, sheet. He looks in that order and thinks you don't notice.",
+              "her_line_high": "You stand where the ankle's the last thing he looks at.",
+              "who_notices": "nobody yet"
+            },
+            {
+              "n": 2,
+              "canvas": "marty_02_the_sheet",
+              "where": "martys",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "18:00",
+                "to": "19:00"
+              },
+              "gate": [],
+              "hint": "The sheet is due Friday. Marty signs it at close, 6 to 7.",
+              "her_line_low": "He's married. He's fifty-something. He's looking at your legs and you're letting him.",
+              "her_line_high": "'Write the letter first, Marty.'",
+              "who_notices": "Delgado, the next Tuesday \u2014 reads the letter out loud",
+              "refusal": "parked"
+            },
+            {
+              "n": 3,
+              "canvas": "marty_03_stocktake",
+              "where": "martys",
+              "when": {
+                "days": [
+                  "Thu"
+                ],
+                "from": "19:00",
+                "to": "21:00"
+              },
+              "gate": [
+                {
+                  "flag": "marty_letter"
+                }
+              ],
+              "hint": "Stocktake at Marty's, Thursday 7 to 9. The letter covers you.",
+              "her_line_low": "Eight o'clock comes and goes, and the box doesn't make a sound.",
+              "her_line_high": "'Pull the shutter, Marty. The box thinks I'm counting screws.'",
+              "who_notices": "Delgado, the next Tuesday: 'Employment, nineteen hundred to twenty-one hundred. Thursdays now?'",
+              "refusal": "parked"
+            }
+          ]
+        }
       },
       {
         "id": "npc_rae",
@@ -704,10 +840,68 @@
         "home": "the_laundry",
         "why_wanted": "The only person who has never asked what Cass did, and therefore the only one whose good opinion she could still lose.",
         "meters": {
-          "trust": "3 rungs \u2014 5/30/60"
+          "hours": "the laundry after two",
+          "radius": "rung 12 \u2014 downstairs, still home on the log"
         },
         "role": "owns the building",
-        "bible": "Runs the laundry, owns the building, up at four. Notices everything and says almost none of it."
+        "bible": "Runs the laundry, owns the building, up at four. Notices everything and says almost none of it.",
+        "ladder": {
+          "counter": "rae_stage",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "rae_01_wash_day",
+              "where": "the_laundry",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat",
+                  "Sun"
+                ],
+                "from": "02:00",
+                "to": "04:00"
+              },
+              "gate": [],
+              "hint": "The laundry under your room runs all night. Rae's there till four.",
+              "her_line_low": "The towel is thin, he's looking, and your whole body wants to go upstairs.",
+              "her_line_high": "You let the towel slip to your waist and ask him if the end dryer's free.",
+              "who_notices": "the night man \u2014 back the same hour next week: 'Wash day?'",
+              "refusal": "parked"
+            },
+            {
+              "n": 2,
+              "canvas": "rae_02_folding",
+              "where": "the_laundry",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat",
+                  "Sun"
+                ],
+                "from": "02:00",
+                "to": "04:00"
+              },
+              "gate": [
+                {
+                  "flag": "rae_towel_night"
+                }
+              ],
+              "hint": "Rae folds till four. She asked you to help.",
+              "her_line_low": "She hasn't once asked what you did. You don't want her to start now.",
+              "her_line_high": "You fold her sheets in your towel and let her watch you do it.",
+              "who_notices": "Rae \u2014 she stops leaving the towel on the dryer and hands it to you",
+              "refusal": "parked"
+            }
+          ]
+        }
       },
       {
         "id": "npc_tobin",
@@ -716,10 +910,112 @@
         "home": "offscreen",
         "why_wanted": "He holds the only thing she actually wants and treats it as nothing. The cheapest transaction in the game and she knows it while it is happening.",
         "meters": {
-          "trust": "3 rungs \u2014 5/30/60"
+          "vouch": "what each fault costs is a lie told for her",
+          "clean": "a fault he won't file spends it"
         },
         "role": "services the boxes",
-        "bible": "26, contractor at the county office, bored. Can make the box say anything and is not interested in why."
+        "bible": "26, contractor at the county office, bored. Can make the box say anything and is not interested in why.",
+        "ladder": {
+          "counter": "tobin_stage",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "tobin_01_fault",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "12:00",
+                "to": "13:00"
+              },
+              "gate": [
+                {
+                  "trait": "review_days",
+                  "op": "gte",
+                  "value": 7
+                }
+              ],
+              "hint": "Tobin checks the box on Tuesdays, 12 to 1, at the county office.",
+              "her_line_low": "It's a foot. It's just your foot. Why is your face hot?",
+              "her_line_high": "You slide down the chair so your heel sits right on his cock, and you watch him miss the keys.",
+              "who_notices": "Delgado at two \u2014 reads 'sensor fault', or asks about the yards",
+              "refusal": "parked"
+            },
+            {
+              "n": 2,
+              "canvas": "tobin_02_drift",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "12:00",
+                "to": "13:00"
+              },
+              "gate": [
+                {
+                  "trait": "review_days",
+                  "op": "gte",
+                  "value": 14
+                }
+              ],
+              "hint": "Tobin checks the box on Tuesdays, 12 to 1, at the county office.",
+              "her_line_low": "He wants to look. Only look. You tell yourself that twice.",
+              "her_line_high": "You pull your top up before he asks and hold it there until he's done typing.",
+              "who_notices": "Delgado \u2014 'Two faults in two weeks. I'll have the unit swapped.'",
+              "refusal": "parked"
+            },
+            {
+              "n": 3,
+              "canvas": "tobin_03_bench",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "12:00",
+                "to": "13:00"
+              },
+              "gate": [
+                {
+                  "trait": "vouch",
+                  "op": "gte",
+                  "value": 15
+                }
+              ],
+              "hint": "Tobin checks the box on Tuesdays, 12 to 1, at the county office.",
+              "her_line_low": "Your hand is on his cock before you've decided, in the ugliest office in the county.",
+              "her_line_high": "'Same price as last week?' You're already unbuckling him.",
+              "who_notices": "the front desk clerk hears the chair, and calls her 'Tobin's Tuesday' after",
+              "refusal": "parked"
+            },
+            {
+              "n": 4,
+              "canvas": "tobin_04_home",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "12:00",
+                "to": "13:00"
+              },
+              "gate": [
+                {
+                  "trait": "vouch",
+                  "op": "gte",
+                  "value": 45
+                },
+                {
+                  "flag": "review_1_passed"
+                }
+              ],
+              "hint": "Tobin can make the box say you're home. He wants to see a passed review first.",
+              "refusal": "parked"
+            }
+          ]
+        }
       },
       {
         "id": "npc_delgado",
@@ -728,10 +1024,76 @@
         "home": "offscreen",
         "why_wanted": "Knows every true thing about her and is scrupulously correct about all of it, which is what makes any slip the loudest event in the game.",
         "meters": {
-          "trust": "3 rungs \u2014 5/30/60"
+          "clean": "read at every review",
+          "review_days": "days since the last review; +1 a night, the reviews read it"
         },
         "role": "her officer",
-        "bible": "Reads the log out loud on Tuesdays. Correct, unhurried, and never once unkind. Arrives late (want \u00a74a)."
+        "bible": "Reads the log out loud on Tuesdays. Correct, unhurried, and never once unkind. Arrives late (want \u00a74a).",
+        "ladder": {
+          "counter": "delgado_stage",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "delgado_01_intake",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "14:00",
+                "to": "16:00"
+              },
+              "gate": [],
+              "hint": "Tuesday, 2 o'clock, county office. Every week."
+            },
+            {
+              "n": 2,
+              "canvas": "delgado_02_the_dot",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "14:00",
+                "to": "16:00"
+              },
+              "gate": [
+                {
+                  "trait": "review_days",
+                  "op": "gte",
+                  "value": 7
+                }
+              ],
+              "hint": "Tuesday, 2 o'clock, county office. He reads the log out loud.",
+              "her_line_low": "You weren't there. You were asleep. Why does it feel like a lie?",
+              "her_line_high": "'Signal fault,' you say, before he can.",
+              "who_notices": "Delgado himself \u2014 the dot goes in the file either way"
+            },
+            {
+              "n": 3,
+              "canvas": "delgado_03_review_1",
+              "where": "the_county_office",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "14:00",
+                "to": "16:00"
+              },
+              "gate": [
+                {
+                  "trait": "review_days",
+                  "op": "gte",
+                  "value": 30
+                }
+              ],
+              "hint": "Your first review: the first Tuesday after day 30.",
+              "her_line_low": "Thirty days of dots on one page, and he's reading every one.",
+              "her_line_high": "Every dot on that page is a lie somebody told for you, and he's signing it.",
+              "who_notices": "everyone who lied for her \u2014 Tobin and Marty both ask how it went"
+            }
+          ]
+        }
       }
     ],
     "engine_verified": {
@@ -755,7 +1117,130 @@
         ],
         "hidden_in_traits_labels": true,
         "_note": "M7 \u2014 a banded sidebar item needs `hidden = true` in [[traits.labels]] or the number prints twice (gate 27). Word bands, not a percentage: the player meets a state, never a figure. The label names the OBJECT so no row in the sidebar can be read as an appetite."
+      },
+      "shown": [
+        "battery as 'The box' (word bands)",
+        "clean as 'Your record' (word bands)",
+        "rest, food, wash (word bands)"
+      ],
+      "hidden": [
+        "radius",
+        "hours",
+        "vouch",
+        "review_days",
+        "tobin_stage",
+        "delgado_stage",
+        "marty_stage",
+        "rae_stage",
+        "arousal"
+      ],
+      "_m7": "Every banded key gets hidden = true in [[traits.labels]] or its number prints twice (M7, gate 27). Hidden also keeps gate 10 from reading clean's lt reads as a descent (gates.py:7140-7145)."
+    },
+    "cast": {
+      "width": 4,
+      "adding_rule": "a new person brings a place already on the map, a ladder of 3+ steps each with a hint, why she wants them AND his visible want (A13), and a stated adult age",
+      "_note": "0.1: Delgado, Tobin, Marty, Rae. Nell (companion) pitched and declined by LO 2026-09-29; want.companion is left out."
+    },
+    "media": {
+      "platform": "OPEN \u2014 LO: where 0.1 is published, and phone-first or not",
+      "clips": "every explicit beat carries its clip (register.md S1); a repeatable explicit surface cycles a pool, never one file; one-time non-explicit steps carry a still. No harvest until LO runs one."
+    },
+    "systems_shape": "list (the-systems.md SY3): a short label list per room, not one coarse kind",
+    "release_places": [
+      "bowen_street",
+      "the_stairwell",
+      "her_room",
+      "the_laundry",
+      "martys",
+      "the_county_office",
+      "the_bridge"
+    ],
+    "schedule_changes": [
+      {
+        "npc": "npc_marty",
+        "add": {
+          "location": "martys",
+          "weekdays": [
+            3
+          ],
+          "start_time": "19:00",
+          "end_time": "21:00",
+          "activity": "stocktake, shutter down"
+        },
+        "why": "Marty step 3 (Thu 19-21) had no row: martys ends 19:00 and martys_back is not in 0.1"
+      },
+      {
+        "npc": "npc_marty",
+        "drop": "martys_back 19:00-20:30 Mon-Sat",
+        "why": "martys_back is not in 0.1"
+      },
+      {
+        "npc": "npc_rae",
+        "drop": "the_diner 05:00-06:00",
+        "why": "the_diner is not in 0.1"
+      },
+      {
+        "npc": "npc_tobin",
+        "drop": "the_diner Fri/Sat nights",
+        "why": "the_diner is not in 0.1"
       }
+    ],
+    "walk_ins": [
+      {
+        "location": "the_laundry",
+        "while": "the night sit, 22:00-04:00",
+        "who": "the night man (a role, unnamed)",
+        "outcomes": "3-5, per R3"
+      },
+      {
+        "location": "martys",
+        "while": "any shift",
+        "who": "a customer who sees the band on her ankle",
+        "outcomes": "3-5, per R3"
+      }
+    ],
+    "random_events": {
+      "bowen_street": "someone clocks the band on her ankle",
+      "the_stairwell": "a tenant coming down at 3 a.m.",
+      "her_room": "the dock beeps at 04:00",
+      "the_laundry": "a machine eats her last quarters",
+      "martys": "a pawn customer who knows what the band means",
+      "the_county_office": "another probationer on the bench",
+      "the_bridge": "a car slows on the far half"
+    },
+    "meter_reads_v01": {
+      "radius": "the_bridge entry radius gte 30 (raised +30 by a passed review 1)",
+      "hours": "the laundry night sit, hours gte 10 (raised +10 by marty_03_stocktake)",
+      "vouch": "tobin_03 gte 15, tobin_04 gte 45",
+      "clean": "review 1 gte 60; the Thursday check-in at lt 40",
+      "_note": "Gate 10 fails a declared tier with zero reads (gates.py:7105, expand <= contract). Every tier needs at least one gte read in the release."
+    },
+    "step_brakes": "Every ladder step canvas is is_repeatable = false. A Tuesday window alone is not a brake to gates.py (M1-M5).",
+    "cheat_page": {
+      "free": [
+        "skip to morning (next_day)",
+        "the next step now (play), one row per ladder step",
+        "money"
+      ],
+      "cut": [
+        "ask again: every refusal parks and sets no is_false flag a trigger reads"
+      ]
+    },
+    "offscreen_people": {
+      "npc_marty": "his wife, Donna, nights at the hospital",
+      "npc_delgado": "Judge Hollis, who signed the order and hears a violation",
+      "npc_tobin": "Pruitt, the contractor he answers to",
+      "npc_rae": "the tenants above Cass, whom she has never once described"
+    },
+    "door": {
+      "canvas": "tobin_04_home",
+      "choice": "Make it say I'm home"
+    },
+    "ages": {
+      "npc_rae": 58,
+      "npc_delgado": 44,
+      "npc_tobin": 26,
+      "npc_marty": "50s"
     }
   },
   "sheets": {
@@ -774,5 +1259,182 @@
       "sheets/scenes/ \u2014 one per rung, every explicit beat written out in full"
     ],
     "_note": "S1: every count in these sheets is a PROMISE. There is no --sheets mode and nothing reads a sheets folder, so all of it sits on the INTENT side until v0.1 builds. The one exception is the schedule cross-check, which an instrument produced."
+  },
+  "dependencies": [
+    {
+      "from": {
+        "npc": "npc_tobin",
+        "step": 1
+      },
+      "needs": {
+        "npc": "npc_delgado",
+        "step": 1
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_marty",
+        "step": 1
+      },
+      "needs": {
+        "npc": "npc_delgado",
+        "step": 1
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_marty",
+        "step": 3
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Thu"
+          ],
+          "from": "19:00",
+          "to": "21:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_rae",
+        "step": 1
+      },
+      "needs": {
+        "place": "the_laundry"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tobin",
+        "step": 4
+      },
+      "needs": {
+        "npc": "npc_delgado",
+        "step": 3
+      }
+    }
+  ],
+  "release_page": {
+    "version": "0.1",
+    "people": [
+      "npc_delgado",
+      "npc_tobin",
+      "npc_marty",
+      "npc_rae"
+    ],
+    "steps": {
+      "npc_delgado": 3,
+      "npc_tobin": 4,
+      "npc_marty": 3,
+      "npc_rae": 2
+    },
+    "places": [
+      "bowen_street",
+      "the_stairwell",
+      "her_room",
+      "the_laundry",
+      "martys",
+      "the_county_office",
+      "the_bridge"
+    ],
+    "door": {
+      "canvas": "tobin_04_home",
+      "choice": "Make it say I'm home"
+    },
+    "weeks": 6,
+    "promise_alive": "tobin_02_drift pays the mystery's first clue ('Boxes drift. Or they get helped.'); delgado_03_review_1 is the goal's first review",
+    "replay_ready": "yes (proposed \u2014 LO's call)",
+    "block": [
+      "the --ship BLOCK list as SKILL.md prints it, unchanged"
+    ],
+    "report": [
+      "everything else --ship prints"
+    ],
+    "her_moment": {
+      "person": "npc_tobin",
+      "step_n": 1,
+      "pays": "nothing \u2014 step 1",
+      "fantasy": "the man who holds her leash is bored of every ankle in the county except hers",
+      "temptation": "her foot on his knee for the check; his thumb stays on her ankle; he offers to file the yards dot as a sensor fault if she leaves her foot there while he types",
+      "answers": [
+        "Leave it there (Submit)",
+        "Put it in his lap yourself",
+        "'What else do you type for people?'",
+        "no: take your foot back \u2014 he types it straight, Delgado reads it at two; parked"
+      ],
+      "voice": {
+        "low": "It's a foot. It's just your foot. Why is your face hot?",
+        "high": "You slide down the chair so your heel sits right on his cock, and you watch him miss the keys."
+      },
+      "noticed": "Delgado at two",
+      "sticks": "tobin_fault_1 or yards_on_file; clean moves; next Tuesday 'Same foot?'",
+      "remember": "He types it one letter at a time. F. A. U. L. T. His thumb is on the inside of your ankle for every one of them.",
+      "door": "the mystery's first clue \u2014 the box can lie",
+      "opens": "tobin_02_drift"
+    },
+    "signed_by_lo": false,
+    "signed_at": null,
+    "_note": "her_moment sits here because releases[] is for SHIPPED releases and an unshipped entry would read as the last release's baseline."
+  },
+  "spine": {
+    "pages": [
+      {
+        "id": "SP1",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "amended_at": "2026-09-29",
+        "amendment": "start moved from Tuesday 15:00 to Tuesday 12:00, Tobin fits the band in the opening (LO's ruling). Needs LO's re-sign.",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29",
+        "signed_note": "LO: 'approved, go ahead' in chat, 2026-09-29"
+      },
+      {
+        "id": "SP2",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29"
+      },
+      {
+        "id": "SP3",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29"
+      },
+      {
+        "id": "SP4",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29"
+      },
+      {
+        "id": "SP5",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29"
+      },
+      {
+        "id": "SP6",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29"
+      },
+      {
+        "id": "SP7",
+        "status": "READY",
+        "drafted_at": "2026-09-29",
+        "amended_at": "2026-09-29",
+        "amendment": "places: +the_bridge (review 1 opens it; SP7 said so and cut the place), -the_stop (answers none of R2's three). Needs LO's re-sign.",
+        "signed_by": "LO",
+        "signed_at": "2026-09-29",
+        "signed_note": "LO: 'approved, go ahead' in chat, 2026-09-29"
+      }
+    ]
   }
 }

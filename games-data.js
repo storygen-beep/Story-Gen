@@ -15,6 +15,17 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-09-29. Authored with author-game-v2 as its skill test (games/probation/
+    // SKILL_TEST_FINDINGS.md, 57 findings). 7 locations, 38 canvases, 4 characters, 12 ladder
+    // steps, 29,725 words, 47/49 gates (the 2 reds are skill false alarms). DEV + DEBUG build,
+    // published on LO's call: the jump list and stat controls are live. No media harvested yet.
+    slug: "probation",
+    title: "Probation",
+    badge: "v2",
+    dev: true,
+    summary: `Cass Ridley is twenty-four, four weeks out, with a box strapped to her ankle that logs where she is every sixty seconds. Home by eight. Tuesdays at two with an officer who reads the log out loud. Thirty days clean and the zone reaches the bridge. But the man who charges the boxes can make one say anything, the man who signs her hours can't stop looking, the woman downstairs leaves a towel on the dryer every night, and somebody has already made her box lie.`,
+  },
+  {
     // Listed 2026-09-15. Authored with author-game-v2, under the per-game process in
     // games/the_balance/process/README.md. 19 locations, 43 canvases, 10 characters,
     // 12 guidance cards, 7 walk-ins, 24 block_pools, 6,300 words, 31/40 gates.

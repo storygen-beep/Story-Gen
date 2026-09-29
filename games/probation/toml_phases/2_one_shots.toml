@@ -1,0 +1,844 @@
+# =============================================================================
+# Probation — 2_one_shots   (TEST BUILD — see 0_systems_spec)
+# The opening and every ladder step. Each step reads its counter at N-1 and
+# sets N, so it fires once and shuts. Every refusal parks: the counter stays.
+# =============================================================================
+
+# ── THE OPENING · delgado step 1 ────────────────────────────────────────────
+[[canvases]]
+id          = "delgado_01_intake"
+name        = "Intake"
+description = "The opening. Tobin fits the band; Delgado reads the file, asks the start choice, states the terms and the reviews. Hands over to her room."
+
+[canvases.trigger]
+location      = "the_county_office"
+is_repeatable = false
+priority      = 100
+is_active     = true
+
+[[canvases.nodes]]
+id   = "the_chair"
+name = "The chair"
+blocks = [
+  { type = "image", props = { file = "scenes/intake_chair.jpg", description = "a plastic chair in a government office, a woman's bare ankle", search_queries = ["probation office chair waiting", "woman sitting government office bare ankle"] } },
+  { type = "paragraph", content = "Tuesday, the county office. You're @player Ridley, you're twenty-four, and you're out. Break the terms and you go straight back inside. Today the band goes on your ankle, and from today a box logs where you are every sixty seconds." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Out. Say it again. Out." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Put your foot up on the stool."
+targetType = "node"
+nodeId     = "the_band"
+
+[[canvases.nodes]]
+id   = "the_band"
+name = "The band"
+blocks = [
+  { type = "paragraph", content = "The man who fits it is young and bored, and he kneels to do it. He straps the band tight above your left ankle bone. Then his thumb stays on the inside of your ankle after the strap is done, a second too long." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Hold still, Ridley. Tobin. I charge these. You'll see me Tuesdays." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "His thumb is still there. You don't move your foot." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Hold still."
+targetType = "node"
+nodeId     = "the_wait"
+[[canvases.nodes.exit_block.choices]]
+text       = "\"You done?\""
+targetType = "node"
+nodeId     = "the_wait"
+
+[[canvases.nodes]]
+id   = "the_wait"
+name = "Two o'clock"
+blocks = [
+  { type = "paragraph", content = "The box blinks green. Tobin packs his case and says see you next Tuesday like it's a joke only he gets. You want to go home, but you wait on the plastic chairs until two." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go in to Delgado. (2 hours)"
+targetType               = "node"
+nodeId                   = "the_file"
+time_progression_minutes = 120
+
+[[canvases.nodes]]
+id   = "the_file"
+name = "The file"
+blocks = [
+  { type = "paragraph", content = "Delgado has your folder open before you sit down. He is calm and exact, but he is never going to be your friend." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Ms. Ridley. I read the top sheet out loud to everyone. You can let me, or you can say it first." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "Let him read it."
+targetType  = "node"
+nodeId      = "react_paper"
+flagEffects = [ { targetType = "player", flag = "past_paper", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Say it before he does."
+targetType  = "node"
+nodeId      = "react_hands"
+flagEffects = [ { targetType = "player", flag = "past_hands", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Ask what it says."
+targetType  = "node"
+nodeId      = "react_wheel"
+flagEffects = [ { targetType = "player", flag = "past_wheel", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "react_paper"
+name = "Checks"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Checks that were not yours. Eleven of them. You have neat handwriting, Ms. Ridley." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You do. That was the problem." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go on."
+targetType = "node"
+nodeId     = "the_terms"
+
+[[canvases.nodes]]
+id   = "react_hands"
+name = "Hands"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "I hit a man and he didn't get up for a while." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "He didn't. Thank you for saying it yourself." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go on."
+targetType = "node"
+nodeId     = "the_terms"
+
+[[canvases.nodes]]
+id   = "react_wheel"
+name = "The wheel"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "It says you drove. It says you were very good at it, and that the car was not yours." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You were very good at it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go on."
+targetType = "node"
+nodeId     = "the_terms"
+
+[[canvases.nodes]]
+id   = "the_terms"
+name = "The terms"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "The box stays on. Home by eight. Tuesdays at two, here. Marty signs your hours sheet every Friday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Thirty days clean and the zone reaches the bridge. Sixty, no curfew. Ninety, and I take it off your leg myself." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Thirty days. You can do thirty days." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sign it."
+targetType = "node"
+nodeId     = "how_it_works"
+
+[[canvases.nodes]]
+id   = "how_it_works"
+name = "How it works"
+blocks = [
+  { type = "paragraph", content = "Dock the box in your room every day; under twenty you cannot leave the zone. Work at Marty's from Wednesday for money. Be here Tuesdays at two. Home by eight. The Quests page says what is next." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+config = { locationId = "her_room", time_progression_minutes = 100, flagEffects = [
+  { targetType = "player", flag = "met_delgado", op = "set" },
+  { targetType = "player", flag = "met_tobin", op = "set" },
+], effects = [
+  { targetType = "player", trait = "delgado_stage", op = "set", value = 1 },
+  { targetType = "player", trait = "battery", op = "set", value = 100 },
+] }
+
+# ── TOBIN 1 · Fault ─────────────────────────────────────────────────────────
+[[canvases]]
+id          = "tobin_01_fault"
+name        = "Tobin: the check"
+description = "Step 1. Her foot in his lap while he types the yards dot as a sensor fault."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_tobin"
+requires_npc  = "npc_tobin"
+is_repeatable = false
+priority      = 60
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tobin_stage", operator = "eq", value = 0 },
+  { type = "trait", subject = "player", trait_key = "review_days", operator = "gte", value = 7 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "12:00"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The check"
+blocks = [
+  { type = "image", props = { file = "scenes/tobin_fault.jpg", description = "a woman's bare foot resting in a man's lap at an office desk", search_queries = ["foot in lap office desk", "woman foot on man knee office"] } },
+  { type = "paragraph", content = "Your foot goes up on his knee for the check. He reads the box, and his thumb stays on the inside of your ankle." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Your log's got you at the yards. Across the river. Ten past two, Saturday. I can write that up as a sensor fault. Or I can not." },
+  { type = "dialog", props = { speaker = "player" }, content = "I was asleep." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Sure. Leave your foot where it is while I type." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "Leave it there. (Submit)"
+targetType  = "node"
+nodeId      = "typed"
+flagEffects = [ { targetType = "player", flag = "tobin_fault_1", op = "set" } ]
+effects     = [ { targetType = "player", trait = "vouch", op = "add", value = 5 },
+                { targetType = "player", trait = "tobin_stage", op = "set", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Put your foot in his lap yourself."
+targetType  = "node"
+nodeId      = "typed"
+flagEffects = [ { targetType = "player", flag = "tobin_fault_1", op = "set" } ]
+effects     = [ { targetType = "player", trait = "vouch", op = "add", value = 5 },
+                { targetType = "player", trait = "tobin_stage", op = "set", value = 1 },
+                { targetType = "player", trait = "arousal", op = "add", value = 5 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Take your foot back."
+targetType  = "node"
+nodeId      = "straight"
+flagEffects = [ { targetType = "player", flag = "yards_on_file", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "typed"
+name = "F. A. U. L. T."
+blocks = [
+  { type = "paragraph", content = "He types it one letter at a time. F. A. U. L. T. His thumb is on the inside of your ankle for every one of them." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Boxes drift, Ridley. Or they get helped." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "the_county_office"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "straight"
+name = "Straight"
+blocks = [
+  { type = "paragraph", content = "You pull your foot back. He shrugs, but he types it straight, every word, and doesn't look at you again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Your call. There'll be another one. There always is." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "the_county_office"
+time_progression_minutes = 30
+
+# ── TOBIN 2 · Drift ─────────────────────────────────────────────────────────
+[[canvases]]
+id          = "tobin_02_drift"
+name        = "Tobin: a second dot"
+description = "Step 2. Her top up while he buries the second dot; the mystery's first clue."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_tobin"
+requires_npc  = "npc_tobin"
+is_repeatable = false
+priority      = 61
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tobin_stage", operator = "eq", value = 1 },
+  { type = "trait", subject = "player", trait_key = "review_days", operator = "gte", value = 14 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "12:00"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Another one"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Same foot? No. This one costs more. Another dot, same yards, same time of night." },
+  { type = "dialog", props = { speaker = "player" }, content = "Who's doing this?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Pull your top up and I'll tell you what I know while I type." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull your top up. (Submit)"
+targetType = "node"
+nodeId     = "top_up"
+[[canvases.nodes.exit_block.choices]]
+text        = "No."
+targetType  = "location"
+locationId  = "the_county_office"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "yards_on_file", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "top_up"
+name = "Top up"
+blocks = [
+  { type = "image", props = { file = "scenes/tobin_drift_t4.jpg", description = "a woman holding her top up at an office desk", search_queries = ["woman lifting top office flash", "girl flashing tits office chair"] } },
+  { type = "paragraph", content = "You pull your top up to your collarbone and hold it there. No bra. Your tits are out under the office lights, and your nipples go hard. Tobin looks. He takes his time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Keep it up, Ridley. I type slow." },
+  { type = "paragraph", content = "The keys click. His eyes stay on your tits. His free hand finds your ankle, right over the band, like last Tuesday. His dick is hard in his jeans. Your nipples ache and you keep the top up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Who helps them?\""
+targetType  = "node"
+nodeId      = "clue"
+flagEffects = [ { targetType = "player", flag = "tobin_fault_2", op = "set" },
+                { targetType = "player", flag = "boxes_get_helped", op = "set" } ]
+effects     = [ { targetType = "player", trait = "vouch", op = "add", value = 5 },
+                { targetType = "player", trait = "tobin_stage", op = "set", value = 2 },
+                { targetType = "player", trait = "arousal", op = "add", value = 10 } ]
+
+[[canvases.nodes]]
+id   = "clue"
+name = "People who pay"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "People who pay. Your dot's got a twin, Ridley. Somebody else was wearing a number close to yours that night." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Somebody out there was you, at the yards, at two in the morning." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Pull your top down and go."
+targetType               = "location"
+locationId               = "the_county_office"
+time_progression_minutes = 30
+
+# ── TOBIN 3 · The bench ─────────────────────────────────────────────────────
+[[canvases]]
+id          = "tobin_03_bench"
+name        = "Tobin: the bench"
+description = "Step 3. Her hand on his cock for this week's fault. Converts into the Tuesday bench."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_tobin"
+requires_npc  = "npc_tobin"
+is_repeatable = false
+priority      = 62
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tobin_stage", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "vouch", operator = "gte", value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "12:00"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "This week's price"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Three in a month, Ridley. Delgado's going to start asking me why your box hates you." },
+  { type = "paragraph", content = "You haven't decided, but he unbuckles anyway, and he watches your face while he does it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Your hand. Then I type." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your hand. (Submit)"
+targetType = "node"
+nodeId     = "act"
+[[canvases.nodes.exit_block.choices]]
+text        = "Not today."
+targetType  = "location"
+locationId  = "the_county_office"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "yards_on_file", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "act"
+name = "The bench"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tobin_bench_t5", pool = 4, description = "handjob at an office desk, the man half dressed", search_queries = ["amateur handjob office desk", "handjob under desk office jeans"] } },
+  { type = "paragraph", content = "Tobin's cock is out of his jeans and hard in your fist. You stroke him slow, root to tip, because the frosted window is right there. He keeps typing with one hand. The keys stutter every time your thumb rubs over the head." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Faster, Ridley. I've got a report due." },
+  { type = "paragraph", content = "You go faster. His cock jerks in your grip. Your nipples go hard under your shirt. You're turned on, and your cunt is wet and aching. You twist your wrist up his cock, and his typing stops dead." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Faster."
+targetType = "node"
+nodeId     = "finish"
+
+[[canvases.nodes]]
+id   = "finish"
+name = "He comes"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tobin_bench_t5", pool = 4, description = "man coming in her hand at a desk", search_queries = ["amateur handjob cumshot desk", "handjob finish office chair"] } },
+  { type = "paragraph", content = "His cock jumps in your fist." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Ridley." },
+  { type = "paragraph", content = "He bites down on the rest. His hips jerk off the chair. He comes hard and fast, hot over your fingers, and his whole body locks. You keep stroking him through it, slow, until his dick twitches and softens in your hand. He yanks open his desk drawer and shoves a tissue at you. You wipe the sticky mess off your fingers, then off his cock." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Wipe your hand."
+targetType = "node"
+nodeId     = "after"
+effects    = [ { targetType = "player", trait = "vouch", op = "add", value = 5 },
+               { targetType = "player", trait = "clean", op = "add", value = -5 },
+               { targetType = "player", trait = "tobin_stage", op = "set", value = 3 },
+               { targetType = "player", trait = "arousal", op = "set", value = 0 } ]
+
+[[canvases.nodes]]
+id   = "after"
+name = "Same price"
+blocks = [
+  { type = "paragraph", content = "He types FAULT without looking at the keys." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Same price next Tuesday?" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Your hand still smells like him, and you're already counting to Tuesday." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "the_county_office"
+time_progression_minutes = 30
+
+# ── TOBIN 4 · Home — the door, locked in 0.1 ────────────────────────────────
+[[canvases]]
+id          = "tobin_04_home"
+name        = "Tobin: a whole night"
+description = "Step 4. The box says she is home for a whole night. The door 0.1 ends on: reached from Tobin's hub, locked, with its reason."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_tobin"
+requires_npc  = "npc_tobin"
+is_repeatable = false
+priority      = 63
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tobin_stage", operator = "eq", value = 3 },
+  { type = "trait", subject = "player", trait_key = "vouch", operator = "gte", value = 45 },
+  { type = "flag", subject = "player", flag_key = "review_1_passed", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "12:00"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "A whole night"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_tobin" }, content = "Whole night on the dock while you're across the river. That's a different price, Ridley." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Make it say I'm home"
+targetType       = "location"
+locationId       = "the_county_office"
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "radius", operator = "gte", value = 45 },
+] }
+show_when_locked = true
+locked_text      = "Not yet. The far side is the next release."
+effects          = [ { targetType = "player", trait = "tobin_stage", op = "set", value = 4 } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "the_county_office"
+
+# ── DELGADO 2 · The dot ─────────────────────────────────────────────────────
+[[canvases]]
+id          = "delgado_02_the_dot"
+name        = "Delgado: the log"
+description = "Step 2. He reads the log aloud: the yards dot, or 'sensor fault'."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_delgado"
+requires_npc  = "npc_delgado"
+is_repeatable = false
+priority      = 70
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "delgado_stage", operator = "eq", value = 1 },
+  { type = "trait", subject = "player", trait_key = "review_days", operator = "gte", value = 7 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "14:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The log"
+blocks = [
+  { type = "paragraph", content = "Delgado reads your week out loud, line by line. Home, Marty's, home, home." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "yards_on_file", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Saturday, ten past two. The yards, across the river. Tell me about the yards, Ms. Ridley." },
+  ] },
+  { type = "group", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Saturday, ten past two. Tobin has it as a sensor fault. Signal fault. Probably." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I was asleep.\""
+targetType  = "location"
+locationId  = "the_county_office"
+time_progression_minutes = 40
+flagEffects = [ { targetType = "player", flag = "dot_read", op = "set" } ]
+effects     = [ { targetType = "player", trait = "delgado_stage", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Say nothing."
+targetType  = "location"
+locationId  = "the_county_office"
+time_progression_minutes = 40
+flagEffects = [ { targetType = "player", flag = "dot_read", op = "set" } ]
+effects     = [ { targetType = "player", trait = "delgado_stage", op = "set", value = 2 } ]
+
+# ── DELGADO 3 · Review 1 ────────────────────────────────────────────────────
+[[canvases]]
+id          = "delgado_03_review_1"
+name        = "Delgado: the first review"
+description = "Step 3. Pass on clean >= 60 opens the bridge; fail resets the month."
+[canvases.trigger]
+location      = "the_county_office"
+npc           = "npc_delgado"
+requires_npc  = "npc_delgado"
+is_repeatable = false
+priority      = 71
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "delgado_stage", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "review_days", operator = "gte", value = 30 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1]
+start_time = "14:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Thirty days"
+blocks = [
+  { type = "paragraph", content = "Thirty days of dots on one page, but Delgado reads every one anyway." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "First review, Ms. Ridley. Sit down." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "Sign it."
+targetType  = "node"
+nodeId      = "pass"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "gte", value = 60 },
+] }
+flagEffects = [ { targetType = "player", flag = "review_1_passed", op = "set" } ]
+effects     = [ { targetType = "player", trait = "radius", op = "add", value = 30 },
+                { targetType = "player", trait = "review_days", op = "set", value = 0 },
+                { targetType = "player", trait = "delgado_stage", op = "set", value = 3 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Hear it."
+targetType  = "node"
+nodeId      = "fail"
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "clean", operator = "lt", value = 60 },
+] }
+flagEffects = [ { targetType = "player", flag = "thursday_checkin", op = "set" } ]
+effects     = [ { targetType = "player", trait = "review_days", op = "set", value = 0 } ]
+
+[[canvases.nodes]]
+id   = "pass"
+name = "The bridge"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "The zone reaches the bridge. The bridge, Ms. Ridley. Not past the line." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every dot on that page is a lie somebody told for you, and he just signed it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "bowen_street"
+time_progression_minutes = 40
+
+[[canvases.nodes]]
+id   = "fail"
+name = "Thirty more"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_delgado" }, content = "Thirty more days. And Thursdays too, until your record looks like a record." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Thirty more. You count them on your fingers and run out of fingers." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Go."
+targetType               = "location"
+locationId               = "bowen_street"
+time_progression_minutes = 40
+
+# ── MARTY 1 · First shift ───────────────────────────────────────────────────
+[[canvases]]
+id          = "marty_01_first_shift"
+name        = "Marty: first shift"
+description = "Step 1. He shows her the counter; the order he looks in."
+[canvases.trigger]
+location      = "martys"
+npc           = "npc_marty"
+requires_npc  = "npc_marty"
+is_repeatable = false
+priority      = 60
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "marty_stage", operator = "eq", value = 0 },
+  { type = "flag", subject = "player", flag_key = "met_delgado", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [2]
+start_time = "09:00"
+end_time   = "12:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The counter"
+blocks = [
+  { type = "paragraph", content = "Marty is big, grey at the temples, and careful with his hands. He looks at the band first, then your legs, then the sheet. He thinks you don't notice the order, but you do." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marty" }, content = "I read the file, kid. I hire you anyway. Counter's yours till seven." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "past_paper", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marty" }, content = "And you can keep a ledger. I read that part twice." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "past_wheel", operator = "is_true" },
+  ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_marty" }, content = "And you can drive. The van needs a driver." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"Where do you want me?\""
+targetType               = "location"
+locationId               = "martys"
+time_progression_minutes = 30
+flagEffects = [ { targetType = "player", flag = "met_marty", op = "set" } ]
+effects     = [ { targetType = "player", trait = "marty_stage", op = "set", value = 1 } ]
+
+# ── MARTY 2 · The sheet ─────────────────────────────────────────────────────
+[[canvases]]
+id          = "marty_02_the_sheet"
+name        = "Marty: the sheet"
+description = "Step 2. Signed unread; the stocktake offer and the letter."
+[canvases.trigger]
+location      = "martys"
+npc           = "npc_marty"
+requires_npc  = "npc_marty"
+is_repeatable = false
+priority      = 61
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "marty_stage", operator = "eq", value = 1 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [4]
+start_time = "18:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The sheet"
+blocks = [
+  { type = "paragraph", content = "He signs your sheet without reading it. He's still looking at your legs while he does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marty" }, content = "Stocktake. Thursdays, seven to nine, cash. I'll write Delgado a letter so the box counts it as work. Because it will be work. You don't have to." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He's married. He's fifty-something. He's looking at your legs and you're letting him." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I'll be here.\""
+targetType  = "location"
+locationId  = "martys"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "marty_letter", op = "set" } ]
+effects     = [ { targetType = "player", trait = "sheet", op = "set", value = 1 },
+                { targetType = "player", trait = "vouch", op = "add", value = 5 },
+                { targetType = "player", trait = "marty_stage", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Write the letter first.\""
+targetType  = "location"
+locationId  = "martys"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "marty_letter", op = "set" } ]
+effects     = [ { targetType = "player", trait = "sheet", op = "set", value = 1 },
+                { targetType = "player", trait = "vouch", op = "add", value = 5 },
+                { targetType = "player", trait = "marty_stage", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"Not Thursdays. I've got a curfew.\""
+targetType               = "location"
+locationId               = "martys"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "sheet", op = "set", value = 1 } ]
+
+# ── MARTY 3 · Stocktake ─────────────────────────────────────────────────────
+[[canvases]]
+id          = "marty_03_stocktake"
+name        = "Marty: stocktake"
+description = "Step 3. Past eight, the shutter down, his wife at work. He does not touch her."
+[canvases.trigger]
+location      = "martys"
+npc           = "npc_marty"
+requires_npc  = "npc_marty"
+is_repeatable = false
+priority      = 62
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "marty_stage", operator = "eq", value = 2 },
+  { type = "flag", subject = "player", flag_key = "marty_letter", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [3]
+start_time = "19:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eight o'clock"
+blocks = [
+  { type = "paragraph", content = "He pulls the shutter halfway, then all the way. Eight o'clock comes and goes, and the box on your ankle doesn't make a sound." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marty" }, content = "She's at the hospital till six. I'm here till I'm not." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He said it so you'd know. He wants you to know exactly how alone you both are." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Keep counting."
+targetType               = "location"
+locationId               = "martys"
+time_progression_minutes = 90
+effects = [ { targetType = "player", trait = "hours", op = "add", value = 10 },
+            { targetType = "player", trait = "marty_stage", op = "set", value = 3 },
+            { targetType = "player", trait = "money", op = "add", value = 30, clamp = false } ]
+
+# ── RAE 1 · Wash day ────────────────────────────────────────────────────────
+[[canvases]]
+id          = "rae_01_wash_day"
+name        = "Rae: wash day"
+description = "Step 1. Everything she owns in one machine; a towel; the night man; 'sit where you are'."
+[canvases.trigger]
+location      = "the_laundry"
+npc           = "npc_rae"
+requires_npc  = "npc_rae"
+is_repeatable = false
+priority      = 60
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rae_stage", operator = "eq", value = 0 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "One machine"
+blocks = [
+  { type = "paragraph", content = "Everything you own fits in one machine, so everything you own is in it. There's a clean towel on the dryer by the stairs. There always is." },
+  { type = "paragraph", content = "A man comes in off the street with a bag of work clothes and sits on the bench across from you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rae" }, content = "You can sit in the back, sweetheart. Or you can sit where you are." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "Stay where you are."
+targetType  = "node"
+nodeId      = "stayed"
+flagEffects = [ { targetType = "player", flag = "rae_towel_night", op = "set" },
+                { targetType = "player", flag = "met_rae", op = "set" } ]
+effects     = [ { targetType = "player", trait = "rae_stage", op = "set", value = 1 },
+                { targetType = "player", trait = "arousal", op = "add", value = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text        = "Go in the back."
+targetType  = "location"
+locationId  = "the_laundry"
+time_progression_minutes = 60
+flagEffects = [ { targetType = "player", flag = "met_rae", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "stayed"
+name = "In the light"
+blocks = [
+  { type = "paragraph", content = "You stay on the dryer in the towel, under the brightest light on the street. He looks, but he doesn't pretend not to. Rae folds and watches you watch him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rae" }, content = "You can come down any night. I'm always up." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The box blinks green. Home. You're sitting in a towel in front of a stranger, and the box calls it home." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "Take your clothes up."
+targetType               = "location"
+locationId               = "the_laundry"
+time_progression_minutes = 60
+
+# ── RAE 2 · Folding ─────────────────────────────────────────────────────────
+[[canvases]]
+id          = "rae_02_folding"
+name        = "Rae: folding"
+description = "Step 2. Rae hands her the towel instead of leaving it."
+[canvases.trigger]
+location      = "the_laundry"
+npc           = "npc_rae"
+requires_npc  = "npc_rae"
+is_repeatable = false
+priority      = 61
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "rae_stage", operator = "eq", value = 1 },
+  { type = "flag", subject = "player", flag_key = "rae_towel_night", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two pairs of hands"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rae" }, content = "Take the other end of this, sweetheart." },
+  { type = "paragraph", content = "You fold her sheets in your towel and she lets you. When you're done she doesn't put the towel back on the dryer. She hands it to you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rae" }, content = "Same time?" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text                     = "\"Same time.\""
+targetType               = "location"
+locationId               = "the_laundry"
+time_progression_minutes = 45
+effects = [ { targetType = "player", trait = "rae_stage", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text                     = "Leave the towel on the dryer."
+targetType               = "location"
+locationId               = "the_laundry"
+time_progression_minutes = 20
