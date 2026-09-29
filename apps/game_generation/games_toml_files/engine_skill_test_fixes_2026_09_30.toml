@@ -1,0 +1,162 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — skill-test fixes, phase 1 (PRD_SKILL_TEST_FIXES_v2 §2)
+#  Date: 2026-09-30
+#
+#  Media-free. Each engine item (EN1…EN11) adds only what its own tests need.
+#
+#  EN1 — "a step is used only on yes":
+#    step_offer   one-time, consume_on = "exit", retry_after_days = 2 (the leave
+#                 default). Its choices cover every decision: the yes (consumes),
+#                 a parked no (retry_after_days = 3), the final no (final), and an
+#                 undecided walk-out (no key — leaving counts as a parked no).
+#    step_plain   one-time, NOT opted in: the control. Used up on entry, as ever.
+#    after_closed repeatable, gated on the step_offer_closed flag the final no sets.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_skill_test_fixes"
+title       = "Engine Skill-Test Fixes"
+description = "Engine fixture for PRD_SKILL_TEST_FIXES_v2 phase 1."
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40 }
+flag_keys   = ["started"]
+
+[[npcs]]
+id          = "tobin"
+name        = "Tobin"
+description = "Fixture man."
+core_traits = { trust = 10 }
+flag_keys   = []
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_bar"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "The bar."
+entry_from  = "loc_home"
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── EN1: the opted-in step ───────────────────────────────────────────────────
+
+[[canvases]]
+id   = "step_offer"
+name = "Tobin's offer"
+
+[canvases.trigger]
+location         = "loc_bar"
+is_repeatable    = false
+is_active        = true
+consume_on       = "exit"
+retry_after_days = 2
+
+[[canvases.nodes]]
+id     = "ask"
+name   = "The ask"
+blocks = [ { type = "paragraph", content = "Tobin asks." } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Yes."
+targetType = "node"
+nodeId     = "step_offer.after"
+consumes   = true
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Not tonight."
+targetType       = "location"
+locationId       = "loc_home"
+retry_after_days = 3
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Never. (ends his path)"
+targetType = "location"
+locationId = "loc_home"
+final      = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Think about it"
+targetType = "node"
+nodeId     = "step_offer.think"
+
+[[canvases.nodes]]
+id     = "after"
+name   = "After yes"
+blocks = [ { type = "paragraph", content = "He smiles." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases.nodes]]
+id     = "think"
+name   = "Thinking"
+blocks = [ { type = "paragraph", content = "You think." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN1: the control (not opted in) ──────────────────────────────────────────
+
+[[canvases]]
+id   = "step_plain"
+name = "A plain one-time scene"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = false
+is_active     = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [ { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ]
+
+[[canvases.nodes]]
+id     = "only"
+name   = "Only"
+blocks = [ { type = "paragraph", content = "Once." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN1: a reader of the closed flag ─────────────────────────────────────────
+
+[[canvases]]
+id   = "after_closed"
+name = "After the final no"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [ { type = "flag", subject = "player", flag_key = "step_offer_closed", operator = "is_true" } ]
+
+[[canvases.nodes]]
+id     = "only"
+name   = "Only"
+blocks = [ { type = "paragraph", content = "His path is closed." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }

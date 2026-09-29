@@ -9392,7 +9392,8 @@ def run_gates(model, game, state=None):
                       "priority", "conditions", "schedules", "npc", "trigger_mode",
                       "chance", "costs", "show_when_blocked", "cooldown_message",
                       "entry_only_from", "substitutions", "substitution_only",
-                      "requires_npc", "pre_substitution_effects"}
+                      "requires_npc", "pre_substitution_effects",
+                      "consume_on", "retry_after_days"}  # EN1, 2026-09-30
     misplaced = []
     for c in (game.get("canvases") or []):
         t = c.get("trigger") or {}

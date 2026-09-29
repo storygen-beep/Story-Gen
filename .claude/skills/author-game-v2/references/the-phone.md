@@ -429,8 +429,8 @@ and a cleanup that expires dates she did not attend.
 That is P1's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2383`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6446`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2386`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6561`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
 (`v2.py:6091–6099`), where `setup.fireScheduledEvent` (`v2.py:6460`) can set a flag, start a quest,
 or deliver a conversation.

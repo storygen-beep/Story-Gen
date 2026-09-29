@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN1: a step is used only on "yes"; a no is parked or final (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN1 (D6 · I4 · Dr1). Node 0 of a one-time canvas marked it fired and
+`canTriggerCanvas` refused it for ever at `total >= 1`, so a "no" that parks a step could not exist.
+
+**What changed (engine).**
+- Opt-in trigger key `consume_on = "exit"` (+ canvas default `retry_after_days`, 1 when absent) on a
+  non-repeatable canvas. Choice keys `consumes` (the yes), `final` (used up + flag `<canvas>_closed`),
+  `retry_after_days = N` (parked). Leaving mid-scene undecided parks for the canvas default; an info
+  page is not a leave.
+- Node 0's fired mark is unchanged; the decision lives in `$game_state.canvas_state[id]`. Every "done"
+  reader (`canTriggerCanvas`, `_isCanvasAvailable`, `isCanvasValidForSelection`, `isCanvasNew`,
+  `getNextActivity`, the trait-hint list, `cheatCanPlay` via `canTriggerCanvas`) goes through
+  `canvasConsumed` / `canvasStepBlocked`, which return the old `total >= 1` for any canvas that did not
+  opt in. `max_triggers_per_day` is unchanged.
+- The keys are copied in T and G (trigger metadata, all three choice writers); `<canvas>_closed` is
+  declared on the player in both and registered as a located setter for the flag-chain validator.
+  `validate()` errors on every misuse and warns when an opted-in step has nothing that uses it up.
+- **Old saves:** an opted-in step that a pre-EN1 build fired (trigger_history total ≥ 1, no record)
+  reads as used up — that build's meaning.
+
+**What changed (skill).** `gates.py` "no canvas key is discarded" knows `consume_on` and
+`retry_after_days` as trigger keys (test: `tests/test_gates_en1_keys.py`). 52 citations re-anchored by
+`cite_check.py --fix`; each checked by hand against the code it named before the move (all identical).
+`playtest.py reach_step` needs no change: it restores the full `State.variables` between tries.
+
+**Verified.** `apps/game_generation/tests/test_step_consume_on_exit.py` 26 passed (12 headless, built
+through `package_from_toml --output <tmp> --no-prune`; old save written by the pre-change engine) ·
+engine suite 436 passed · passage diff old vs new engine, `[script]` excluded: members_only,
+the_balance, vesper 0 changed · `--saves vesper` all PASS · skill pytest 177 passed · `--selfcheck`
+exit 0 · cite_check in scope 0.
+
+words: 136,080 → 136,080 (0) · running total 136,080 / 149,283
+
+---
+
 ## 2026-09-28 — IC18 follow-up: the description and the opening line match "the game never stalls"
 
 **Why.** LO: two lines still contradicted commitment 1 after IC18 — the frontmatter description ("a

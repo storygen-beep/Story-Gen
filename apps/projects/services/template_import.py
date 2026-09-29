@@ -784,6 +784,15 @@ class TemplateTrigger:
     # (targetType / npcId / trait / op / value / clamp / cap). Empty list =
     # current behavior unchanged (Pattern A semantics). See Doc 69 §4 + §5.2.
     pre_substitution_effects: List[Dict[str, Any]] = field(default_factory=list)
+    # EN1 (2026-09-30) — a one-time step is used up on its "yes", not on entry.
+    # Opt-in: `consume_on = "exit"` on a non-repeatable canvas. The engine keeps
+    # node 0's fired mark (trigger_history) as it is, and adds a separate record in
+    # $game_state.canvas_state: a choice with `consumes` uses the step up, one with
+    # `final` uses it up and sets `<canvas>_closed`, one with `retry_after_days`
+    # parks it. Leaving mid-scene with none of those parks it for
+    # `retry_after_days` days (1 when absent), so a no cannot be farmed.
+    consume_on: Optional[str] = None
+    retry_after_days: Optional[int] = None
 
 
 @dataclass
@@ -957,6 +966,12 @@ class TemplateChoice:
     # click, and shown as a greyed getCostBlockedMessage rung when unaffordable. Mirrors the
     # canvas-level `costs` semantic (TemplateTrigger.costs) at the choice level.
     costs: List[Dict[str, Any]] = field(default_factory=list)
+    # EN1 — the step decision, read only on a canvas whose trigger has
+    # `consume_on = "exit"`. At most one per choice: `consumes` (the yes),
+    # `final` (the warned no that closes his path), `retry_after_days` (a parked no).
+    consumes: bool = False
+    final: bool = False
+    retry_after_days: Optional[int] = None
 
 
 @dataclass
@@ -2207,6 +2222,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         for eff in (trig_def.get("pre_substitution_effects") or [])
                         if isinstance(eff, dict)
                     ],
+                    # EN1 — kept raw; validate() owns the type and value checks.
+                    consume_on=trig_def.get("consume_on"),
+                    retry_after_days=trig_def.get("retry_after_days"),
                 )
                 # Doc 69 Item 2 — validate pre_substitution_effects field names
                 # + trait declarations (reuses Phase 1 + Phase 2 validators).
@@ -2446,6 +2464,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                 for ci in (ch.get("costs") or [])
                                 if isinstance(ci, dict) and "trait" in ci and "value" in ci
                             ],
+                            # EN1 — the step decision; validate() owns the checks.
+                            consumes=bool(ch.get("consumes", False)),
+                            final=bool(ch.get("final", False)),
+                            retry_after_days=ch.get("retry_after_days"),
                         )
                     )
                 # Validate exit_block type
@@ -6019,6 +6041,86 @@ def validate(template: GameTemplate) -> List[str]:
             errors,
         )
 
+    # EN1 — opt-in step consumption (`consume_on` / `consumes` / `final` /
+    # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
+    errors.extend(_validate_step_consumption(template))
+
+    return errors
+
+
+def _is_whole_days(v: Any) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool) and v >= 1
+
+
+def _validate_step_consumption(template: GameTemplate) -> List[str]:
+    """EN1 — the checks for a step that is used only on its "yes".
+
+    Errors, not warnings: nothing in the importer rejects an unknown or misplaced
+    key, so a `consumes` on a canvas that did not opt in would build clean and do
+    nothing. One warning: an opted-in step with no choice that uses it up comes back
+    after every visit, which is legal but almost never meant.
+    """
+    errors: List[str] = []
+    for ci, c in enumerate(template.canvases or []):
+        trig = c.trigger
+        opted_in = bool(trig and trig.consume_on == "exit")
+        where = f"canvases[{ci}] '{c.id}'"
+        if trig and trig.consume_on is not None and trig.consume_on != "exit":
+            errors.append(
+                f"{where}: trigger.consume_on must be \"exit\" (got {trig.consume_on!r})"
+            )
+        if opted_in and trig.is_repeatable:
+            errors.append(
+                f"{where}: consume_on = \"exit\" needs is_repeatable = false — it "
+                f"changes when a ONE-TIME step is used up; a repeatable canvas is never used up"
+            )
+        if trig and trig.retry_after_days is not None:
+            if not opted_in:
+                errors.append(
+                    f"{where}: trigger.retry_after_days is read only with consume_on = \"exit\""
+                )
+            elif not _is_whole_days(trig.retry_after_days):
+                errors.append(
+                    f"{where}: trigger.retry_after_days must be a whole number of days >= 1 "
+                    f"(got {trig.retry_after_days!r})"
+                )
+        uses_up = False
+        for n in c.nodes or []:
+            for chi, ch in enumerate(n.exit_block.choices or []):
+                cwhere = f"{where} node '{n.id}' choice {chi} ({ch.text!r})"
+                marks = [k for k, on in (
+                    ("consumes", ch.consumes),
+                    ("final", ch.final),
+                    ("retry_after_days", ch.retry_after_days is not None),
+                ) if on]
+                if not marks:
+                    continue
+                if not opted_in:
+                    errors.append(
+                        f"{cwhere}: `{marks[0]}` is read only on a canvas whose trigger has "
+                        f"consume_on = \"exit\""
+                    )
+                    continue
+                if len(marks) > 1:
+                    errors.append(
+                        f"{cwhere}: set only one of consumes / final / retry_after_days "
+                        f"(got {', '.join(marks)})"
+                    )
+                if ch.retry_after_days is not None and not _is_whole_days(ch.retry_after_days):
+                    errors.append(
+                        f"{cwhere}: retry_after_days must be a whole number of days >= 1 "
+                        f"(got {ch.retry_after_days!r})"
+                    )
+                if ch.consumes or ch.final:
+                    uses_up = True
+        if opted_in and not uses_up:
+            import warnings as _w
+            _w.warn(
+                f"{where} has consume_on = \"exit\" but no choice with consumes or final — "
+                f"the step comes back after every visit and is never used up.",
+                UserWarning,
+                stacklevel=2,
+            )
     return errors
 
 
@@ -7475,6 +7577,9 @@ def create_project_from_template(
     if template.rent_enabled and template.rent_eviction_mode == "flag_set":
         if template.rent_eviction_flag and template.rent_eviction_flag not in _player_flag_keys:
             _player_flag_keys.append(template.rent_eviction_flag)
+    for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
+        if _cf not in _player_flag_keys:
+            _player_flag_keys.append(_cf)
 
     player = Character(
         project=project,
@@ -7714,6 +7819,9 @@ def create_project_from_template(
                             # Engine reads requiresNpc from canvas metadata at
                             # runtime and AND-gates with all other conditions.
                             "requires_npc": c.trigger.requires_npc or None,
+                            # EN1 — opt-in step consumption (absent unless authored)
+                            "consume_on": c.trigger.consume_on or None,
+                            "retry_after_days": c.trigger.retry_after_days,
                             # Doc 69 Item 2 — Pattern C pre-substitution effects.
                             # Engine reads from canvas metadata + emits
                             # <<script>>setup.applyAndNotifyTrait(...)<</script>>
@@ -7847,6 +7955,13 @@ def create_project_from_template(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        # EN1 — the step decision (absent unless authored)
+                        if ch.consumes:
+                            ch_d["consumes"] = True
+                        if ch.final:
+                            ch_d["final"] = True
+                        if ch.retry_after_days is not None:
+                            ch_d["retry_after_days"] = ch.retry_after_days
                         if ch.rejection_node:
                             # Resolve rejection_node slug → UUID (same as nodeId)
                             rej_key = (
@@ -7955,6 +8070,23 @@ def create_project_from_template(
     }
 
 
+
+def closed_step_flags(template: "GameTemplate") -> List[str]:
+    """EN1 — the `<canvas>_closed` flag of every opt-in step that has a final no.
+
+    Declared on the player like the rent eviction flag, so a condition on it reads
+    false (not undefined) until the final no is clicked. Both writers call this —
+    create_project_from_template and game_graph.build_game_graph.
+    """
+    out: List[str] = []
+    for c in template.canvases or []:
+        if not (c.trigger and c.trigger.consume_on == "exit"):
+            continue
+        if any(ch.final for n in c.nodes for ch in (n.exit_block.choices or [])):
+            out.append(f"{c.id}_closed")
+    return out
+
+
 def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
     d: Dict[str, Any] = {
         "type": eb.type or "location",
@@ -8012,6 +8144,9 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 **({"show_when_locked": True} if ch.show_when_locked else {}),
                 **({"locked_text": ch.locked_text} if ch.locked_text else {}),
                 **({"locked_text_threshold": ch.locked_text_threshold} if ch.locked_text_threshold else {}),
+                **({"consumes": True} if ch.consumes else {}),  # EN1
+                **({"final": True} if ch.final else {}),  # EN1
+                **({"retry_after_days": ch.retry_after_days} if ch.retry_after_days is not None else {}),  # EN1
                 **({"rejection_node": ch.rejection_node} if ch.rejection_node else {}),
                 **(
                     {

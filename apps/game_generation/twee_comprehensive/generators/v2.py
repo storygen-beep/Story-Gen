@@ -1481,6 +1481,9 @@ class TweeComprehensiveGeneratorV2:
         }
         # Optional systems. Each one is the case the backfill exists for: a game
         # that ships without it and turns it on later.
+        if self._has_consume_on():
+            # EN1 — per-step records; an absent entry for a fired step reads as used up.
+            game_state_init["canvas_state"] = {}
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -3633,10 +3636,8 @@ setup._isCanvasAvailable = function(c) {{
         if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
             return false;
         }}
-        // Check repeatability (non-repeatable and already triggered ever)
-        var hist = State.variables.game_state.trigger_history || {{}};
-        var rec = hist[String(c.id)];
-        if (!c.isRepeatable && rec && (rec.total || 0) >= 1) {{
+        // Check repeatability (non-repeatable and already used up — EN1: or parked)
+        if (!c.isRepeatable && setup.canvasStepBlocked(c)) {{
             return false;
         }}
         return true;
@@ -4625,6 +4626,109 @@ setup.getCurrentDayKey = function() {{
     }}
 }};
 
+// ===== EN1: a one-time step is used only on its "yes" =====
+// Opt-in per canvas: trigger `consume_on = "exit"` (payload `consumeOn`). Node 0's
+// fired mark in trigger_history is UNCHANGED — it still drives the per-day and
+// activity limits and decay contact. This is a separate record,
+// $game_state.canvas_state[id] = {{consumed, retryDay, closed, open}}:
+//   a `consumes` choice (the yes)        -> consumed
+//   a `final` choice (the warned no)     -> consumed + closed + flag <canvas>_closed
+//   a `retry_after_days` choice (a no)   -> retryDay = today + N
+//   leaving mid-scene with none of those -> retryDay = today + the canvas default (1)
+// Every "done" reader goes through canvasConsumed / canvasStepBlocked. For a canvas
+// that did not opt in they return exactly the inline `total >= 1` they replaced.
+setup.canvasOptedIn = function(c) {{
+    return !!(c && c.consumeOn === "exit");
+}};
+setup._canvasToday = function() {{
+    try {{ return Number(State.variables.game_state.time_state.day) || 0; }} catch (e) {{ return 0; }}
+}};
+// Used up for good: said yes to, or closed by a final no.
+setup.canvasConsumed = function(c) {{
+    var gs = State.variables.game_state || {{}};
+    var id = String(c.id);
+    var fired = (gs.trigger_history || {{}})[id];
+    var firedOnce = !!(fired && (fired.total || 0) >= 1);
+    if (!setup.canvasOptedIn(c)) return firedOnce;
+    var rec = (gs.canvas_state || {{}})[id];
+    // A save from before EN1 fired the step but holds no record. It keeps that
+    // build's meaning: a one-time canvas was used up the moment it fired.
+    if (!rec) return firedOnce;
+    return !!(rec.consumed || rec.closed);
+}};
+// By id, for readers that hold only an id. An id with no canvas object (no trigger
+// location) cannot have opted in, so it falls back to the fired mark.
+setup.canvasConsumedById = function(canvasId) {{
+    var c = setup.getCanvasById(canvasId);
+    if (c) return setup.canvasConsumed(c);
+    var fired = ((State.variables.game_state || {{}}).trigger_history || {{}})[String(canvasId)];
+    return !!(fired && (fired.total || 0) >= 1);
+}};
+// Not offerable right now: used up, or parked after a no and still waiting.
+setup.canvasStepBlocked = function(c) {{
+    if (setup.canvasConsumed(c)) return true;
+    if (!setup.canvasOptedIn(c)) return false;
+    var rec = ((State.variables.game_state || {{}}).canvas_state || {{}})[String(c.id)];
+    return !!(rec && rec.retryDay !== null && rec.retryDay !== undefined
+              && setup._canvasToday() < rec.retryDay);
+}};
+setup._canvasStepRecord = function(canvasId) {{
+    var sv = State.variables;
+    sv.game_state = sv.game_state || {{}};
+    var cs = sv.game_state.canvas_state = sv.game_state.canvas_state || {{}};
+    var id = String(canvasId);
+    if (!cs[id]) cs[id] = {{ consumed: false, retryDay: null, closed: false, open: false }};
+    return cs[id];
+}};
+// Entry. Called from markCanvasTriggered, so every path that fires a canvas opens it.
+setup.openCanvasStep = function(canvasId) {{
+    if (!setup.canvasOptedIn(setup.getCanvasById(canvasId))) return;
+    setup._canvasStepRecord(canvasId).open = true;
+}};
+// A choice's decision. Emitted inside the link body, so it runs BEFORE navigation
+// and the leave check below finds the step already decided.
+setup.decideCanvasStep = function(canvasId, op, days, closedFlag) {{
+    try {{
+        var rec = setup._canvasStepRecord(canvasId);
+        rec.open = false;
+        if (op === "consumes") {{
+            rec.consumed = true;
+        }} else if (op === "final") {{
+            rec.consumed = true;
+            rec.closed = true;
+            if (closedFlag) {{
+                State.variables.flags = State.variables.flags || {{}};
+                State.variables.flags[closedFlag] = true;
+            }}
+        }} else if (op === "retry") {{
+            rec.retryDay = setup._canvasToday() + Math.max(1, Number(days) || 1);
+        }}
+    }} catch (e) {{
+        // ignore
+    }}
+}};
+// Leaving mid-scene. Run on :passagestart for every non-info passage: a step still
+// open whose own passages are not the new one was left undecided, which is a parked
+// no — otherwise walking out would re-offer it at once and a no could be farmed.
+setup.parkLeftCanvasSteps = function(title) {{
+    try {{
+        var cs = ((State.variables.game_state || {{}}).canvas_state) || {{}};
+        for (var id in cs) {{
+            var rec = cs[id];
+            if (!rec || !rec.open) continue;
+            var c = setup.getCanvasById(id);
+            if (c && title && (title.indexOf("Canvas_" + c.canvasSlug + "_Node_") === 0 ||
+                               title.indexOf("StartingCanvas_" + c.canvasSlug + "_Node_") === 0)) {{
+                continue;
+            }}
+            rec.open = false;
+            rec.retryDay = setup._canvasToday() + Math.max(1, Number(c && c.retryAfterDays) || 1);
+        }}
+    }} catch (e) {{
+        // ignore
+    }}
+}};
+
 // Check if a canvas can trigger based on repeatability and per-day limit
 setup.canTriggerCanvas = function(canvasId, isRepeatable, maxPerDay) {{
     try {{
@@ -4633,13 +4737,21 @@ setup.canTriggerCanvas = function(canvasId, isRepeatable, maxPerDay) {{
         var hist = sv.game_state.trigger_history = sv.game_state.trigger_history || {{}};
         var rec = hist[String(canvasId)] || null;
 
+        // EN1 — an opted-in one-time step is refused while used up or parked,
+        // and NOT merely because it has fired.
+        var stepCanvas = isRepeatable ? null : setup.getCanvasById(canvasId);
+        var optedIn = setup.canvasOptedIn(stepCanvas);
+        if (optedIn && setup.canvasStepBlocked(stepCanvas)) {{
+            return false;
+        }}
+
         if (!rec) {{
             // Never triggered before; allowed
             return true;
         }}
 
         // Not repeatable and already triggered once
-        if (!isRepeatable && (rec.total || 0) >= 1) {{
+        if (!isRepeatable && !optedIn && (rec.total || 0) >= 1) {{
             return false;
         }}
 
@@ -4742,6 +4854,7 @@ setup.markCanvasTriggered = function(canvasId) {{
         rec.total = (rec.total || 0) + 1;
         rec.dayCount = (rec.dayCount || 0) + 1;
         hist[key] = rec;
+        setup.openCanvasStep(key);  // EN1 — no-op unless the canvas opted in
 
         // Also track at activity level (all tiers share same daily limit)
         var helpData = setup.help_data || {{}};
@@ -4869,6 +4982,10 @@ setup.isCanvasNew = function(canvasId) {{
     try {{
         var sv = State.variables;
         sv.game_state = sv.game_state || {{}};
+        // EN1 — an opted-in step stays new until it is used up (a parked no
+        // comes back as the same unanswered step).
+        var stepCanvas = setup.getCanvasById(canvasId);
+        if (setup.canvasOptedIn(stepCanvas)) return !setup.canvasConsumed(stepCanvas);
         var hist = sv.game_state.trigger_history || {{}};
         var record = hist[String(canvasId)];
         return !record || (record.total || 0) === 0;
@@ -5091,10 +5208,8 @@ setup.isCanvasValidForSelection = function(c) {{
         if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
             return false;
         }}
-        // Check repeatability (non-repeatable and already triggered ever)
-        var hist = State.variables.game_state.trigger_history || {{}};
-        var rec = hist[String(c.id)];
-        if (!c.isRepeatable && rec && (rec.total || 0) >= 1) {{
+        // Check repeatability (non-repeatable and already used up — EN1: or parked)
+        if (!c.isRepeatable && setup.canvasStepBlocked(c)) {{
             return false;
         }}
         return true;
@@ -7789,6 +7904,12 @@ setup.getNextActivity = function(npcId) {{
                 isCompleted = visitedNodes.some(function(vn) {{
                     return vn.indexOf(canvasPrefix) === 0;
                 }});
+                // EN1 — an opted-in step is done only when used up: a parked no
+                // has visited its nodes and must still read as the next step.
+                var stepCanvas = activity.canvas_id ? setup.getCanvasById(activity.canvas_id) : null;
+                if (setup.canvasOptedIn(stepCanvas)) {{
+                    isCompleted = setup.canvasConsumed(stepCanvas);
+                }}
             }}
         }}
 
@@ -8478,7 +8599,7 @@ setup.showTraitActivitiesModal = function(npcId, traitKey, requiredValue) {{
             var flags = State.variables.flags || {{}};
             var hist = (State.variables.game_state && State.variables.game_state.trigger_history) || {{}};
             var isCompleted = (act.linked_flag && flags[act.linked_flag]) ||
-                              (act.canvas_id && hist[act.canvas_id] && hist[act.canvas_id].total > 0);
+                              (act.canvas_id && setup.canvasConsumedById(act.canvas_id));  // EN1
             if (isCompleted) continue;
         }}
 
@@ -12237,6 +12358,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 # falsy exactly as it must for a save written before this shipped.
                 if hidden_from_location:
                     location_canvas_list[-1]["hiddenFromLocation"] = True
+                # EN1 — a one-time step used up on its "yes". Added ONLY when set, for
+                # the same reason as hiddenFromLocation: a game that authors none emits
+                # a byte-identical payload, and a missing key reads as "not opted in".
+                _consume_on = (trigger.metadata or {}).get("consume_on") if trigger else None
+                if _consume_on == "exit" and not is_repeatable:
+                    location_canvas_list[-1]["consumeOn"] = "exit"
+                    location_canvas_list[-1]["retryAfterDays"] = int(
+                        (trigger.metadata or {}).get("retry_after_days") or 1
+                    )
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -12535,6 +12665,20 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         for fe in flag_effects:
                             flag_key = fe.get("flag")
                             if flag_key and flag_key not in flag_unlock_map:
+                                flag_unlock_map[flag_key] = {
+                                    "canvas_name": canvas.name,
+                                    "canvas_id": str(canvas.id),
+                                    "location": location_name,
+                                    "schedule": schedule_text,
+                                    "canvas_conditions": canvas_conditions,
+                                    "npc_name": canvas_npc_map.get(str(canvas.id)) or "player"
+                                }
+
+                        # EN1 — a final no sets `<canvas>_closed` (setup.decideCanvasStep),
+                        # so this canvas is its located setter, as for a flagEffect.
+                        if choice.get("final"):
+                            flag_key = f"{self._get_canvas_slug(canvas)}_closed"
+                            if flag_key not in flag_unlock_map:
                                 flag_unlock_map[flag_key] = {
                                     "canvas_name": canvas.name,
                                     "canvas_id": str(canvas.id),
@@ -12914,6 +13058,21 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """
         return any((getattr(loc, 'properties', None) or {}).get('door')
                    for loc in self.locations)
+
+    def _has_consume_on(self) -> bool:
+        """EN1 — does any included one-time canvas opt in to `consume_on = "exit"`?
+
+        Gates the per-game pieces: the `canvas_state` default and the :passagestart
+        leave check. The helpers they call are always emitted, because every "done"
+        reader routes through them and returns the old answer for a canvas that did
+        not opt in.
+        """
+        for canvas in (self.story_canvases or []):
+            trig = getattr(canvas, "trigger", None)
+            meta = (getattr(trig, "metadata", None) or {}) if trig else {}
+            if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
+                return True
+        return False
 
     def _canvas_entry_passages(self) -> dict:
         """slug -> the passage a canvas is ENTERED at (its first ordered node).
@@ -13848,6 +14007,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         quest_effects_list = choice_tuple[16] if len(choice_tuple) > 16 else []
                         schedule_effects_list = choice_tuple[17] if len(choice_tuple) > 17 else []
                         choice_costs_list = choice_tuple[18] if len(choice_tuple) > 18 else []
+                        step_decision = choice_tuple[19] if len(choice_tuple) > 19 else None
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -14020,6 +14180,20 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # Mark conditional choice as visited when clicked
                         if choice_key:
                             passage_body += f'<<script>>setup.markChoiceVisited("{choice_key}");<</script>>'
+                        # EN1 — record the step decision. Runs inside the link body, i.e.
+                        # BEFORE the navigation, so the :passagestart leave-check sees a
+                        # decided step and does not also park it.
+                        if step_decision:
+                            _sd_id = json.dumps(str(canvas.id))
+                            if step_decision["op"] == "retry":
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "retry", {int(step_decision["days"])});<</script>>'
+                            elif step_decision["op"] == "final":
+                                # The flag name is the TOML canvas id, as template_import's
+                                # closed_step_flags declares it — never the runtime id.
+                                _sd_flag = json.dumps(f"{self._get_canvas_slug(canvas)}_closed")
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "final", null, {_sd_flag});<</script>>'
+                            else:
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "consumes", null);<</script>>'
 
                         # ── Loop: inject loop state changes inside the link ──
                         if is_loop_base and role == 'non_terminal' and choice_node_slug:
@@ -14603,6 +14777,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             logger.warning(f"Choice in node {node.id} references unknown rejection_node {rejection_node_id}")
 
                     text_variants = choice.get('text_variants', []) or []
+                    # EN1 — the step decision on an opted-in canvas (validated to at
+                    # most one per choice). None on every choice of every other game.
+                    step_decision = None
+                    if choice.get('final'):
+                        step_decision = {"op": "final"}
+                    elif choice.get('consumes'):
+                        step_decision = {"op": "consumes"}
+                    elif choice.get('retry_after_days') is not None:
+                        step_decision = {"op": "retry", "days": int(choice.get('retry_after_days'))}
                     processed_choices.append((
                         target_passage, choice_text, time_minutes, effects, flag_effects,
                         conditions_obj, wardrobe_effects,
@@ -14615,6 +14798,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         quest_effects,           # doc 45 G4 — position 16
                         schedule_effects,        # doc 45 G5 — position 17
                         choice_costs,            # per-choice costs — position 18
+                        step_decision,           # EN1 step decision — position 19
                     ))
 
                 return processed_choices
@@ -16660,6 +16844,12 @@ window.devGoBack = function() {
 
         # Info page back-navigation: track last game passage via [script] tag
         # so the handler survives save/load (runs on every story initialization)
+        # EN1 — a step left undecided is a parked no. Info pages (stats, schedules…)
+        # are a look aside, not a leave: the player comes back to the same node.
+        consume_leave_block = ""
+        if self._has_consume_on():
+            consume_leave_block = """    if (infoPages.indexOf(psg) === -1) { setup.parkLeftCanvasSteps(psg); }
+"""
         rent_redirect_block = ""
         if self.rent_enabled:
             rent_redirect_block = """
@@ -16942,7 +17132,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations

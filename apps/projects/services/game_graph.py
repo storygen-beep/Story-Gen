@@ -31,6 +31,7 @@ from .template_import import (
     _assemble_project_metadata,
     _normalize_block_list,
     _serialize_exit_block,
+    closed_step_flags,
 )
 
 # Coerce "HH:MM" schedule strings to datetime.time exactly as a DB save would
@@ -91,6 +92,9 @@ def build_game_graph(
             and template.rent_eviction_flag not in _player_flag_keys
         ):
             _player_flag_keys.append(template.rent_eviction_flag)
+    for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
+        if _cf not in _player_flag_keys:
+            _player_flag_keys.append(_cf)
 
     player = Character(
         project=project,
@@ -338,6 +342,9 @@ def build_game_graph(
                             if c.trigger.entry_only_from
                             else None,
                             "requires_npc": c.trigger.requires_npc or None,
+                            # EN1 — opt-in step consumption (absent unless authored)
+                            "consume_on": c.trigger.consume_on or None,
+                            "retry_after_days": c.trigger.retry_after_days,
                             "pre_substitution_effects": (
                                 c.trigger.pre_substitution_effects
                                 if c.trigger.pre_substitution_effects
@@ -452,6 +459,13 @@ def build_game_graph(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        # EN1 — the step decision (absent unless authored)
+                        if ch.consumes:
+                            ch_d["consumes"] = True
+                        if ch.final:
+                            ch_d["final"] = True
+                        if ch.retry_after_days is not None:
+                            ch_d["retry_after_days"] = ch.retry_after_days
                         if ch.rejection_node:
                             # Resolve rejection_node slug → UUID (same as nodeId)
                             rej_key = (
