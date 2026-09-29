@@ -487,7 +487,7 @@ Zero hits means the key does not exist, however plausible it looks.
 **`worn_corruption` is a MAX aggregate, not a sum.** Verified live: with `sleep_vest` (2) worn,
 equipping `silk_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
 its own, so a catalog does not need to be large to reach a tier — it needs one item per tier.
-**`worn_beauty` is the same fold over `beauty`** (`template_import.py:281`, `v2.py:4044`).
+**`worn_beauty` is the same fold over `beauty`** (`template_import.py:286`, `v2.py:4044`).
 
 ### The three ways a wardrobe gets read
 
@@ -685,8 +685,8 @@ costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any ot
 ```
 
 ```
-template_import.py:216    costs: Dict[str, int] = field(default_factory=dict)
-template_import.py:2158   costs=_require_dict(l, "costs"),
+template_import.py:221    costs: Dict[str, int] = field(default_factory=dict)
+template_import.py:2164   costs=_require_dict(l, "costs"),
 v2.py:4687                // A location's per-entry cost lives in setup.locations[slug].entry_costs
 v2.py:15885               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
@@ -707,7 +707,7 @@ blocked_message  = "The dining room's been dark since the staff went."
 template_import.py:196      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:197      blocked_message: str = ""
 template_import.py:1898-1899 parsed
-template_import.py:8202      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:8233      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
@@ -733,7 +733,7 @@ closed_text = "The shutter's down. A paper sign: back at nine."    # optional
 
 ```
 template_import.py:202      hours: List[Dict[str, Any]] = field(default_factory=list)
-template_import.py:6282     def _validate_location_hours(template) -> List[str]:
+template_import.py:6295     def _validate_location_hours(template) -> List[str]:
 v2.py:10587                 setup.locOpenNow = function (slug) {
 ```
 
@@ -755,9 +755,15 @@ hidden_until = { flag = "found_attic" }     # a declared player flag
 
 ```
 template_import.py:206      hidden_until: Dict[str, Any] = field(default_factory=dict)
-template_import.py:6362     def _validate_hidden_places(template) -> List[str]:
+template_import.py:6375     def _validate_hidden_places(template) -> List[str]:
 v2.py:10524                 setup.locFound = function (slugOrUuid) {
 ```
+
+**`kind = "thoroughfare"` or `"destination"`** — what the place is for. A thoroughfare is somewhere
+she passes through (a corridor, a lobby); a destination is somewhere she goes to do something, and it
+is the default. Only those two exact words are accepted. Don't write "hub": that word means a
+character's hub canvas. The engine builds both kinds the same way; the release checks read the
+word.
 
 **`offscreen = true`** — a non-navigable "away" label. No nav card, no hub, and it is exempt from the
 presence floor and reachability. Use it for a character who is genuinely elsewhere rather than
@@ -778,9 +784,9 @@ The table is **`quest_cards`**, flat and top-level — **not** `[[quests]]`, whi
 table.
 
 ```
-template_import.py:2857        for qc_raw in (data.get("quest_cards", []) or []):
+template_import.py:2863        for qc_raw in (data.get("quest_cards", []) or []):
 template_import.py:1085         class QuestsCard
-template_import.py:1311        def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
+template_import.py:1316        def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
 v2.py:15316                    the V2 QuestsPage overlay is emitted only when
                                project.metadata["quests_engine"] == "v2"
 ```
@@ -800,7 +806,7 @@ overrides the ✓ label (default `Arc complete`) and exists because a finished a
 BUILD are different endings; it needs `terminal` set or the string is dead, and the validator warns.
 
 ```
-template_import.py:1272        terminal_text: Optional[str] = None
+template_import.py:1277        terminal_text: Optional[str] = None
 v2.py:17041                    var _tlabel = card.terminal_text || "Arc complete";
 ```
 
@@ -1316,6 +1322,11 @@ so hiding the player's banded `corruption` with it hides every man's `corruption
 suffix, the toast, the Stats page, the dump, guidance, a `trait_bar` with no `label`, and the cost
 tags. A locked button gated on a man's trait names him and his value:
 *"Ask him to stay. (Tobin's Trust 50+ (has 10))"*. A condition already met is not listed.
+
+**A number beside the word.** `show_value = true` on a `trait_words` item prints one line: its
+`label` (or the trait's name), the number, and the band word, as in *"Corruption: 12 · Curious"*.
+When no band matches it prints *"Corruption: 50"*. Keep `in_dump = false` on the key, or the
+dump prints the number a second time.
 
 ```toml
 [[sidebar_items]]

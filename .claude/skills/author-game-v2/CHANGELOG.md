@@ -5,6 +5,39 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN9: a sidebar line can read "Corruption: 12 · Curious" (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN9 (D4). No sidebar type printed a trait's name, number and word on
+one line: `trait_bar` always draws the bar, and `trait_words` prints the band word only.
+
+**What changed (engine).**
+- `[[sidebar_items]] type = "trait_words"` gains `show_value = true`. The item then always renders
+  one line:
+  - "Label: N · <band word>" when a band matches;
+  - "Label: N" when none does.
+- The label is the item's `label`, else the trait's one name (EN5 `setup.traitLabel`).
+- `validate()` errors when `show_value` isn't a real bool.
+- Spliced into the `sidebarItems` widget only when some item sets it. members_only, the_balance and
+  vesper build a byte-identical index.html, and the fixture's widget without it matches a golden
+  from the pre-change engine.
+- **Old saves:** no new state. A save the pre-change build wrote shows the line.
+
+**What changed (skill).**
+- `references/engine.md` §30: "A number beside the word", with the reminder to keep
+  `in_dump = false`, or the dump prints the number a second time.
+- Words +57 (136,965). `cite_check.py --fix` moved 3 citations in template_import.py, each compared
+  with the pre-change code, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_sidebar_value.py`: 7 passed. It covers:
+  - "Corruption: 5 · Clean", "Corruption: 12 · Curious" (the PRD's case), and "Corruption: 50"
+    with no band;
+  - an authored label ("Heat: 12 · Curious") and an NPC-owned item ("Trust: 70");
+  - the golden, the bool check, and the old save.
+- The fixture gained the `trait_words` item on `corr`. All EN1–EN8 tests still pass.
+- Engine suite 588 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
 ## 2026-09-30 — EN8: decay settles at a rest point; a man can wait before he cools (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN8 (D5 · Power). Nightly decay was one rule, `Math.max(0, v − d)`,

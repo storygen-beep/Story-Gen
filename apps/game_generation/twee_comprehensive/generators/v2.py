@@ -18309,6 +18309,21 @@ if (clothingMsg) {
 
 """
 
+        # EN9 — `trait_words` with show_value = true prints "Label: N · word" (or "Label: N"
+        # when no band matches). Spliced in only when some item asks, so every other game's
+        # sidebarItems widget is byte-identical.
+        if any(isinstance(si, dict) and si.get("show_value") for si in (self.sidebar_items or [])):
+            tw_show_value = (
+                '    <<if _item.show_value>>\n'
+                '      <<set _twLabel to _item.label || setup.traitLabel(_twKey)>>\n'
+                '      <div class="sidebar-item trait-words-item trait-words-value" id="sidebar-trait-words-<<print _si>>">\n'
+                '        <span class="band-value"><<print _twLabel + ": " + _twVal + (_twMatched isnot "" ? " · " + _twMatched : "")>></span>\n'
+                '      </div>\n'
+                '    <<elseif _twMatched isnot "">>'
+            )
+        else:
+            tw_show_value = '    <<if _twMatched isnot "">>'
+
         # Sidebar items widget (configurable via TOML [[sidebar_items]])
         sidebar_items_widget = """
 <<widget "sidebarItems">>
@@ -18512,7 +18527,7 @@ if (clothingMsg) {
         <</if>>
       <</for>>
     <</if>>
-    <<if _twMatched isnot "">>
+""" + tw_show_value + """
       <div class="sidebar-item trait-words-item" id="sidebar-trait-words-<<print _si>>">
         <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
         <span class="band-value"><<print _twMatched>></span>

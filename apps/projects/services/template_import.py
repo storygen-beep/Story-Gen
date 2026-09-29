@@ -4018,6 +4018,10 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"{ctx}: trait '{trait}' not found in player.core_traits (widget will render empty)"
                 )
+            # EN9 — show_value prints "Label: N · word"; a string "true" would be truthy
+            # and render it by accident, so only a real bool is accepted.
+            if "show_value" in item and not isinstance(item.get("show_value"), bool):
+                errors.append(f"{ctx}: 'show_value' must be true or false, got {item.get('show_value')!r}")
             if not isinstance(bands, list) or not bands:
                 errors.append(f"{ctx}: 'bands' must be a non-empty list")
             else:
