@@ -1038,6 +1038,10 @@ class TweeComprehensiveGeneratorV2:
                 "entry_conditions": loc_props.get("entry_conditions", {}),
                 "blocked_message": loc_props.get("blocked_message", ""),
             }
+            # EN3 — opening hours, read by setup.locOpenNow. Absent, not empty, when
+            # unauthored, so a game without hours has the payload it had before.
+            if loc_props.get("hours"):
+                locations_map[loc_slug]["hours"] = loc_props["hours"]
             # THE DOOR — the threshold screen's own data, with every option's target
             # resolved to a passage name HERE (see _door_for_payload). Fed by BOTH
             # importer write-outs (create_project_from_template and
@@ -5378,7 +5382,7 @@ setup.navDestBlockedReason = function(slug) {{
     }}
     return 'Locked for now.';
 }};
-
+{self._location_hours_js()}
 // Get NPCs whose declared [[npcs.schedules]] places them at this location right
 // now AND who have a reachable affordable+valid canvas here. Schedule-only —
 // no canvas-derived fallback (2026-05-25 doctrine tightening).
@@ -10224,8 +10228,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             else:
                 # Regular location: Normal passage generation
                 entry_conditions = (location.properties or {}).get('entry_conditions') if hasattr(location, 'properties') else None
-                if entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'):
-                    entry_cond_json = json.dumps(entry_conditions)
+                has_entry_conditions = bool(entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'))
+                # EN3 — a place with opening hours gets the guard too, even with no
+                # entry_conditions. Without hours this branch is emitted exactly as before.
+                loc_hours = (location.properties or {}).get('hours') if hasattr(location, 'properties') else None
+                if has_entry_conditions or loc_hours:
+                    entry_cond_json = json.dumps(entry_conditions) if has_entry_conditions else ""
+                    hours_slug = self._location_nav_slug(location)
+                    guard_parts = []
+                    if has_entry_conditions:
+                        guard_parts.append(f"setup.triggerConditionsSatisfied({entry_cond_json})")
+                    if loc_hours:
+                        guard_parts.append(f'setup.locOpenNow("{hours_slug}")')
+                    entry_guard = " && ".join(guard_parts)
                     blocked_message = (location.properties or {}).get('blocked_message', '')
                     # Find parent location for "go back" link
                     parent_name = None
@@ -10244,7 +10259,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
 
                     content += f""":: {self._location_passage_name(location)}
-<<if setup.triggerConditionsSatisfied({entry_cond_json})>>\
+<<if {entry_guard}>>\
 <<nobr>>
 <<set $player.current_location = "{location_id}">>
 <<if not $game_state.visited_locations.includes("{location_id}")>>
@@ -10269,6 +10284,17 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         blocked_html = (
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
+                        )
+                    if loc_hours:
+                        closed_text = (location.properties or {}).get('closed_text', '')
+                        closed_html = (
+                            (f'<p class="entry-blocked-narrative">{self._resolve_at_references(closed_text)}</p>\n'
+                             if closed_text else '')
+                            + f'<p class="entry-closed"><<= setup.locClosedReason("{hours_slug}")>></p>'
+                        )
+                        blocked_html = (
+                            f'<<if !setup.locOpenNow("{hours_slug}")>>\n{closed_html}\n<<else>>\n{blocked_html}\n<</if>>'
+                            if has_entry_conditions else closed_html
                         )
                     content += f"""</div>
 <</if>>\
@@ -10370,6 +10396,86 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 [[Leave->{back}]]
 </div>
 
+"""
+
+    def _has_location_hours(self) -> bool:
+        return any((getattr(loc, 'properties', None) or {}).get('hours')
+                   for loc in self.locations)
+
+    def _location_hours_js(self) -> str:
+        """EN3 — opening hours. Empty unless some location declares `hours`."""
+        if not self._has_location_hours():
+            return ""
+        return """
+// ===== EN3 — opening hours =====
+// A window {weekdays, open, close} is open on each listed weekday (empty = every day) from
+// open to close; a close that is not after the open runs past midnight into the next
+// weekday, so a Friday 22:00-04:00 place is open at 02:00 on Saturday. A place with no
+// hours is always open. Nothing moves her out when a place closes around her: the room's
+// passage guard only runs when the room is (re)entered.
+setup._LOC_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+setup._locHours = function (slug) {
+    var loc = (setup.locations || {})[String(slug)];
+    return (loc && loc.hours) || [];
+};
+setup._hhmm = function (s) {
+    var p = String(s).split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+};
+setup._locWindowDays = function (w) {
+    return (w.weekdays && w.weekdays.length) ? w.weekdays : [0, 1, 2, 3, 4, 5, 6];
+};
+setup._locNow = function () {
+    var ts = State.variables.game_state.time_state;
+    return { day: setup._LOC_DAYS.indexOf(ts.current_day),
+             min: ts.current_hour * 60 + (ts.current_minute || 0) };
+};
+setup.locOpenNow = function (slug) {
+    var hours = setup._locHours(slug);
+    if (!hours.length) return true;
+    var now = setup._locNow();
+    var yesterday = (now.day + 6) % 7;
+    for (var i = 0; i < hours.length; i++) {
+        var w = hours[i], days = setup._locWindowDays(w);
+        var o = setup._hhmm(w.open), c = setup._hhmm(w.close);
+        if (o < c) {
+            if (days.indexOf(now.day) !== -1 && now.min >= o && now.min < c) return true;
+        } else {
+            if (days.indexOf(now.day) !== -1 && now.min >= o) return true;
+            if (days.indexOf(yesterday) !== -1 && now.min < c) return true;
+        }
+    }
+    return false;
+};
+// The travel card and the text link ask this; the Schedules page does not (it keeps
+// navDestUnlocked), so a closed place is not muted there.
+setup.navDestOpenNow = function (slug) {
+    return setup.locOpenNow(slug);
+};
+// The next window start after now, searched a week ahead: {days, min} or null.
+setup.locNextOpen = function (slug) {
+    var hours = setup._locHours(slug), now = setup._locNow(), best = null;
+    for (var k = 0; k <= 7; k++) {
+        var d = (now.day + k) % 7;
+        for (var i = 0; i < hours.length; i++) {
+            var w = hours[i];
+            if (setup._locWindowDays(w).indexOf(d) === -1) continue;
+            var o = setup._hhmm(w.open);
+            if (k === 0 && o <= now.min) continue;
+            var at = k * 1440 + o;
+            if (best === null || at < best) best = at;
+        }
+    }
+    return best === null ? null : { days: Math.floor(best / 1440), min: best % 1440 };
+};
+setup.locClosedReason = function (slug) {
+    var n = setup.locNextOpen(slug);
+    if (!n) return 'Closed.';
+    var t = setup.formatTime(Math.floor(n.min / 60), n.min % 60);
+    if (n.days === 0) return 'Closed. Opens at ' + t + '.';
+    if (n.days === 1) return 'Closed. Opens tomorrow at ' + t + '.';
+    return 'Closed. Opens ' + setup._LOC_DAYS[(setup._locNow().day + n.days) % 7] + ' at ' + t + '.';
+};
 """
 
     def _render_location_description(self, location) -> str:
@@ -21265,6 +21371,15 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         if (getattr(loc, 'properties', None) or {}).get('door'):
             return open_card.replace(f'data-passage="{passage_name}"',
                                      f'data-passage="{self._location_entry_passage(loc)}"')
+        if (getattr(loc, 'properties', None) or {}).get('hours'):
+            # EN3 — closed comes first: a shut place is greyed with when it opens.
+            closed_card = (
+                f'<div class="location-card location-card-locked location-card-closed">{img_html}'
+                f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>'
+                f'<span class="nav-locked-reason"><<= setup.locClosedReason("{slug}")>></span></div></div>'
+            )
+            return (f'<<if !setup.navDestOpenNow("{slug}")>>{closed_card}'
+                    f'<<elseif setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>'
 
     def _render_location_nav_link(self, loc, video_path):
@@ -21285,6 +21400,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             return open_link.replace(
                 f'[[{loc.name}->{link_name}]]',
                 f'[[{loc.name}->{self._location_entry_passage(loc)}]]')
+        if (getattr(loc, 'properties', None) or {}).get('hours'):
+            # EN3 — text-mode sibling of the closed card.
+            closed_link = f'<span class="nav-link-locked nav-link-closed">{html.escape(loc.name)} — <<= setup.locClosedReason("{slug}")>></span>'
+            return (f'<<if !setup.navDestOpenNow("{slug}")>>{closed_link}'
+                    f'<<elseif setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>'
 
     def _generate_hierarchical_navigation(self, location) -> str:

@@ -5,6 +5,56 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN3: a place can have opening hours (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN3 (D9b · I2). A place was always open, or locked by
+`entry_conditions`. Nothing could say "the shop opens 09:00–17:00 on weekdays".
+
+**What changed (engine).**
+- Opt-in `[[locations]] hours = [{weekdays, open, close}]` and `closed_text`.
+  - `weekdays` counts from 0 = Monday; empty means every day.
+  - A `close` that is not after `open` runs past midnight into the next weekday, so a Friday
+    22:00–04:00 place is open at 02:00 on Saturday. `close = "24:00"` means midnight.
+- Runtime `setup.locOpenNow`, `navDestOpenNow`, `locNextOpen` and `locClosedReason` (in the game's clock
+  format: "Closed. Opens tomorrow at 9:00 AM."; it names the day when the next opening isn't today or
+  tomorrow).
+- The room's passage is guarded even with no `entry_conditions`. Closed, it shows `closed_text` and the
+  reason, with a way back, and she does not enter. The travel card and the text link grey out first.
+  The Schedules page keeps `navDestUnlocked`, so it is not muted. A door place keeps its clickable
+  card; the room inside is guarded.
+- **Not done, and documented:** she is not moved out when a place closes around her. The guard runs
+  when the room's passage is shown again.
+- Fields are parsed in T and written by both writers (T and G). `validate()` errors on:
+  - a malformed window, unknown keys, or a weekday outside 0–6;
+  - a time that isn't HH:MM, or `open == close`;
+  - `closed_text` without `hours`;
+  - `hours` on a container or offscreen place.
+- `validate()` warns when an NPC schedule row or a canvas schedule at the place never overlaps an open
+  minute. Each side is read over the week's 10,080 minutes the way its runtime reads it; an NPC row's
+  overnight tail stays on its own weekday.
+- Emitted only when some place has `hours`. members_only, the_balance and vesper build a
+  byte-identical index.html. The fixture's hour-less `loc_bar` room and link match a golden from the
+  pre-change engine.
+- **Old saves:** no new state. A save parked in a place that is now closed shows the closed screen on
+  load. Proven with a save the pre-change build wrote in the shop at 20:00.
+
+**What changed (skill).**
+- `references/engine.md` §22: an "Opening hours" block beside "Locked location", with the
+  not-moved-out note. Words +207 (136,292).
+- `cite_check.py --fix` moved 54 citations. Each was compared with the pre-change code: 47 in v2.py
+  and 7 in template_import.py, all identical.
+- `DOCTRINE_GAPS.md`: two citations that were already wrong before this item (`v2.py:13372`,
+  `:15495`/`:14065`) now point at the code they quote (`:14446`; `:16627`/`:16602`).
+
+**Verified.**
+- `apps/game_generation/tests/test_location_hours.py`: 30 passed. It covers:
+  - an open hour, a closed hour, a weekday and an overnight window;
+  - the text link and the card (rendered by SugarCube's wikifier);
+  - the closed-room guard, not being moved out, and the old save;
+  - every validator error and the warnings, including the club read across midnight.
+- Engine suite 507 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
 ## 2026-09-30 — EN2c: the short-pay line prints the rent currency symbol (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2c (I5 follow-up). RentDay_Short's "You have: … You need: …"

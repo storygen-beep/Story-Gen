@@ -1,0 +1,18 @@
+:: Location_loc_bar
+<<nobr>>
+<<set $player.current_location = "loc_bar">>
+<<if not $game_state.visited_locations.includes("loc_bar")>>
+<<set $game_state.visited_locations.push("loc_bar")>>
+<</if>>
+<</nobr>><<set _autoFire = setup.getStoryCanvasRedirect("loc_bar")>><<if _autoFire>><<goto _autoFire>><<else>><h2>Bar</h2>
+<p>The bar.</p>
+<<= setup.renderNpcPortraits("loc_bar")>>
+<<= setup.renderSoloActivities("loc_bar")>>
+<div class="location-navigation">
+    <div class="location-nav-exits">
+    [[Leave Bar->Location_loc_home]]<br>
+    </div>
+</div>
+<</if>>
+=====
+<<if setup.navDestUnlocked("loc_bar")>>[[Bar->Location_loc_bar]]<<if setup.locationHasNewCanvases("loc_bar")>> <span class="nav-new">!</span><</if>><<for _npc range setup.getNpcsPresentAtLocation("loc_bar")>><<if _npc.portrait>> <img @src="'./media/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><<if setup.getLocationCostTag("loc_bar")>> <span class="nav-cost-tag"><<= setup.getLocationCostTag("loc_bar")>></span><</if>><<else>><span class="nav-link-locked">Bar — <<= setup.navDestBlockedReason("loc_bar")>></span><</if>><br>

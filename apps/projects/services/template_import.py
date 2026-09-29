@@ -185,6 +185,12 @@ class TemplateLocation:
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
     blocked_message: str = ""
+    # EN3 — opening hours. Each window is {weekdays, open, close} ("HH:MM"; weekdays 0=Monday,
+    # empty = every day). close <= open runs overnight into the next day; close may be
+    # "24:00". Empty = always open, exactly as before. closed_text is what the room says
+    # when she arrives while it is closed.
+    hours: List[Dict[str, Any]] = field(default_factory=list)
+    closed_text: str = ""
     # A TRANSIT STOP opts out of engine-built navigation: no auto "Leave <name>" link, and an
     # empty nav list is treated as intentional rather than as a stranded location (so the
     # list-every-location fallback stays quiet). For a location the player arrives at and leaves
@@ -2118,6 +2124,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
                 blocked_message=_require_str(l, "blocked_message", ""),
+                # Kept raw; validate() reports every malformed window.
+                hours=l.get("hours") or [],
+                closed_text=_require_str(l, "closed_text", ""),
                 auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
@@ -6071,6 +6080,9 @@ def validate(template: GameTemplate) -> List[str]:
     # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
     errors.extend(_validate_step_consumption(template))
 
+    # EN3 — location opening hours.
+    errors.extend(_validate_location_hours(template))
+
     return errors
 
 
@@ -6159,6 +6171,149 @@ def _validate_rent_on_short(template) -> List[str]:
             "rent has no amount, so stages[0].after_total_paid must be 0; otherwise the "
             "rent is 0 until a stage is reached, and paying 0 never reaches one"
         )
+    return errors
+
+
+_WEEK_MINUTES = 7 * 1440
+
+
+def _hhmm_minutes(v: Any, allow_24: bool = False) -> Optional[int]:
+    """"HH:MM" -> minutes after midnight, or None when it is not a real clock time."""
+    import re
+
+    if not isinstance(v, str):
+        return None
+    m = re.fullmatch(r"(\d{1,2}):(\d{2})", v.strip())
+    if not m:
+        return None
+    h, mi = int(m.group(1)), int(m.group(2))
+    if allow_24 and h == 24 and mi == 0:
+        return 1440
+    if h > 23 or mi > 59:
+        return None
+    return h * 60 + mi
+
+
+def _days(weekdays: Any) -> List[int]:
+    return list(weekdays) if weekdays else list(range(7))
+
+
+def _open_minutes_of_week(hours: List[Dict[str, Any]]) -> Set[int]:
+    """EN3 — the minutes of a week a place is open, read exactly as setup.locOpenNow reads
+    `hours`: a window whose close is not after its open runs past midnight into the next
+    weekday."""
+    out: Set[int] = set()
+    for w in hours:
+        o, c = _hhmm_minutes(w.get("open")), _hhmm_minutes(w.get("close"), allow_24=True)
+        if o is None or c is None or o == c:
+            continue
+        for d in _days(w.get("weekdays")):
+            base = d * 1440
+            if o < c:
+                out.update(range(base + o, base + c))
+            else:
+                out.update(range(base + o, base + 1440))
+                nxt = ((d + 1) % 7) * 1440
+                out.update(range(nxt, nxt + c))
+    return out
+
+
+def _row_minutes_of_week(weekdays: Any, start: Any, end: Any) -> Set[int]:
+    """The minutes of a week a schedule row is live, read as the runtime reads it
+    (setup.isCurrentTimeSlot + that day's weekday): no end = one hour; an end before the
+    start wraps inside the SAME weekday (the row's 02:00 belongs to its own day)."""
+    s = _hhmm_minutes(start)
+    e = _hhmm_minutes(end) if end else (s + 60 if s is not None else None)
+    if s is None or e is None:
+        return set()
+    out: Set[int] = set()
+    for d in _days(weekdays):
+        base = d * 1440
+        if e < s:
+            out.update(range(base + s, base + 1440))
+            out.update(range(base, base + e))
+        else:
+            out.update(range(base + s, base + min(e, 1440)))
+    return out
+
+
+def _validate_location_hours(template) -> List[str]:
+    """EN3 — `hours` / `closed_text` on a location.
+
+    A window the engine cannot read would leave a place open or shut at the wrong time
+    with no sign anywhere, so every malformed one is an error. A schedule row that only
+    ever puts someone (or a canvas) in a place while it is shut is legal but almost never
+    meant: a warning.
+    """
+    import warnings
+
+    errors: List[str] = []
+    open_sets: Dict[str, Set[int]] = {}
+    for li, l in enumerate(template.locations or []):
+        ctx = f"locations[{li}] '{l.id}'"
+        if l.closed_text and not l.hours:
+            errors.append(f"{ctx}: closed_text is set but hours is not")
+        if not l.hours:
+            continue
+        if not isinstance(l.hours, list):
+            errors.append(f"{ctx}: hours must be a list of {{weekdays, open, close}} tables")
+            continue
+        if l.is_container or l.offscreen:
+            errors.append(
+                f"{ctx}: hours on {'a container' if l.is_container else 'an offscreen'} "
+                f"location does nothing; there is no room passage to close"
+            )
+        bad = False
+        for wi, w in enumerate(l.hours):
+            wctx = f"{ctx}.hours[{wi}]"
+            if not isinstance(w, dict):
+                errors.append(f"{wctx} must be a table {{weekdays, open, close}}")
+                bad = True
+                continue
+            unknown = sorted(set(w) - {"weekdays", "open", "close"})
+            if unknown:
+                errors.append(f"{wctx} has unknown key(s) {unknown}; only weekdays, open, close")
+            wd = w.get("weekdays", [])
+            if not isinstance(wd, list) or any(
+                not isinstance(x, int) or isinstance(x, bool) or not 0 <= x <= 6 for x in wd
+            ):
+                errors.append(f"{wctx}.weekdays must be integers 0..6 (0 = Monday), got {wd!r}")
+                bad = True
+            o = _hhmm_minutes(w.get("open"))
+            c = _hhmm_minutes(w.get("close"), allow_24=True)
+            if o is None:
+                errors.append(f"{wctx}.open must be \"HH:MM\", got {w.get('open')!r}")
+            if c is None:
+                errors.append(
+                    f"{wctx}.close must be \"HH:MM\" (or \"24:00\"), got {w.get('close')!r}"
+                )
+            if o is not None and c is not None and o == c:
+                errors.append(f"{wctx}: open and close are both {w.get('open')}; the window is empty")
+            bad = bad or o is None or c is None
+        if not bad:
+            open_sets[l.id] = _open_minutes_of_week(l.hours)
+
+    def _warn_if_shut(where: str, loc: str, weekdays, start, end) -> None:
+        live = _row_minutes_of_week(weekdays, start, end)
+        if loc in open_sets and live and not (live & open_sets[loc]):
+            warnings.warn(
+                f"{where} puts it at '{loc}' only while '{loc}' is closed (its hours never "
+                f"overlap this row), so it can never be met there",
+                UserWarning,
+                stacklevel=3,
+            )
+
+    for ni, n in enumerate(template.npcs or []):
+        for si, sch in enumerate(getattr(n, "schedules", None) or []):
+            _warn_if_shut(f"npcs[{ni}] '{n.id}'.schedules[{si}]", sch.location,
+                          sch.weekdays, sch.start_time, sch.end_time)
+    for ci, c in enumerate(template.canvases or []):
+        trig = c.trigger
+        if not trig:
+            continue
+        for si, sch in enumerate(trig.schedules or []):
+            _warn_if_shut(f"canvases[{ci}] '{c.id}'.trigger.schedules[{si}]", trig.location,
+                          sch.weekdays, sch.start_time, sch.end_time)
     return errors
 
 
@@ -7814,6 +7969,10 @@ def create_project_from_template(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.hours:  # EN3 — MIRRORED in game_graph.py's location loop
+            loc.properties["hours"] = l.hours
+        if l.closed_text:
+            loc.properties["closed_text"] = l.closed_text
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False

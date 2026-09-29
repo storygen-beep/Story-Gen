@@ -16,6 +16,11 @@
 #    [settings.rent] 100, then 150 once 100 is paid in all, then 200 once 250 is paid.
 #                 Tobin collects and says each new stage. start_after_flag = "rent_on",
 #                 which only the rent tests set, so no other item's test meets a RentDay.
+#
+#  EN3 — "location opening hours":
+#    loc_shop     open Monday-Friday 09:00-17:00, with closed_text.
+#    loc_club     open Friday 22:00-04:00 (overnight: open at 02:00 on Saturday).
+#                 Both are reached from loc_home; no other item's test goes there.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -60,13 +65,28 @@ flag_keys   = []
 id               = "loc_home"
 name             = "Home"
 description      = "Her room."
-navigation_order = ["loc_bar"]
+navigation_order = ["loc_bar", "loc_shop", "loc_club"]
 
 [[locations]]
 id          = "loc_bar"
 name        = "Bar"
 description = "The bar."
 entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_shop"
+name        = "Shop"
+description = "The corner shop."
+entry_from  = "loc_home"
+hours       = [ { weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "17:00" } ]
+closed_text = "The shutter's down. A paper sign: back at nine."
+
+[[locations]]
+id          = "loc_club"
+name        = "Club"
+description = "The club."
+entry_from  = "loc_home"
+hours       = [ { weekdays = [4], open = "22:00", close = "04:00" } ]
 
 # ── start ────────────────────────────────────────────────────────────────────
 

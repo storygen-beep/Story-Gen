@@ -212,6 +212,10 @@ def build_game_graph(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.hours:  # EN3 — MIRRORED in template_import.create_project_from_template
+            loc.properties["hours"] = l.hours
+        if l.closed_text:
+            loc.properties["closed_text"] = l.closed_text
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False

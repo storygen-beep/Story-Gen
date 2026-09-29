@@ -414,7 +414,7 @@ all five phase files; the built game carries `setup.quests_cards = []`. So the s
 **Quests 📋**, and behind it a page headed *"What's Next"* with nothing under it.
 
 **G2 — seven of eight locked doors say nothing.** Only `hub_cal_frontroom` carries `locked_text`.
-`v2.py:13372` falls back to the choice text (`locked_text or choice_text`), so the other seven render
+`v2.py:14446` falls back to the choice text (`locked_text or choice_text`), so the other seven render
 as a greyed copy of themselves. `locked_text_threshold` (`v2.py:13185-13186`), which prints an explicit
 *"Requires …"*, is used **zero** times.
 
@@ -538,7 +538,7 @@ None of this is in v2's engine reference. Verified this turn.
 | the table is **`[[quest_cards]]`**, flat, not nested under `quests` | `template_import.py:2456-2462`; `class QuestsCard` `:997`, parser `:1068` |
 | requires `quests_engine = "v2"` in project metadata or the overlay is not emitted | `v2.py:14711` |
 | three render frames, exactly one per card: ✓ terminal / 🔓 `ready_canvas` / 🎯 unmet goals | `v2.py:14964` `renderQuestsGoalBlock` |
-| card selection: `pickQuestsCards(scope)` for the top tier, `pickQuestsCard(slug)` returns the single highest-`priority` match per character | `v2.py:15495`, `:14065` |
+| card selection: `pickQuestsCards(scope)` for the top tier, `pickQuestsCard(slug)` returns the single highest-`priority` match per character | `v2.py:16627`, `:16602` |
 | **quest conditions use a different evaluator and do NOT fail open** — never paste `version = "1.0"` onto a card | `v2.py:14878` `checkQuestsCondition` |
 | the sidebar next row calls the identical functions — there is no separate "sidebar quest" | `v2.py:15454-15456` |
 | a locked choice with no `locked_text` falls back to the choice text | `v2.py:13146` |
