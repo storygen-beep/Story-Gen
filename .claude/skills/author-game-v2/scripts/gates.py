@@ -8212,11 +8212,16 @@ def run_gates(model, game, state=None):
         k = item.get("trait") or item.get("trait_key")
         if not k:
             continue
-        if not (labels.get(k) or {}).get("hidden"):
+        # EN5 (2026-09-30): `in_dump = false` is the switch for this — it keeps the key out
+        # of the dump only. `hidden = true` still passes (it removes the key everywhere),
+        # but it is the secret-trait switch, and name-keyed: hiding the player's banded
+        # `corruption` with it also hid every man's `corruption`.
+        _lab = labels.get(k) or {}
+        if not (_lab.get("in_dump") is False or _lab.get("hidden")):
             doubled.append(
                 f"`{k}` is banded as {item.get('type', 'a sidebar item')} but "
                 + ("is not declared in [[traits.labels]] at all"
-                   if k not in labels else "is declared without hidden = true")
+                   if k not in labels else "is declared without in_dump = false")
                 + " — the band and the raw number both render")
     n_banded = sum(1 for i in (game.get("sidebar_items") or [])
                    if isinstance(i, dict) and i.get("bands") and i.get("trait_owner") != "npc")
@@ -8224,7 +8229,7 @@ def run_gates(model, game, state=None):
     gate("a banded meter is not also a number", None if not n_banded else not doubled,
          f"{len(doubled)} of {n_banded} banded sidebar meters also print as a raw number"
          if n_banded else "no banded sidebar meters — nothing to judge",
-         doubled + (["set hidden = true on the same key in [[traits.labels]] (engine.md §30)"]
+         doubled + (["set in_dump = false on the same key in [[traits.labels]] (engine.md §30)"]
                     if doubled else []))
 
     # ─────────────────────────────────────────────────────────────────────────

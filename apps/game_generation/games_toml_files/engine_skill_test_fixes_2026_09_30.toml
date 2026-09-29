@@ -21,6 +21,23 @@
 #    loc_shop     open Monday-Friday 09:00-17:00, with closed_text.
 #    loc_club     open Friday 22:00-04:00 (overnight: open at 02:00 on Saturday).
 #                 Both are reached from loc_home; no other item's test goes there.
+#
+#  EN4 — "places hidden until found":
+#    loc_attic    reached from loc_home, hidden_until = {flag = "found_attic"}.
+#                 Tobin is scheduled there on Sundays only, so his location has a
+#                 name to withhold; the other items' tests run on Monday.
+#
+#  EN5+EN6 — "one name per trait; locked buttons read a man's feeling":
+#    corr         labelled "Corruption" — no screen may print "corr".
+#    stamina      in_dump = false, no label — off the sidebar dump, "Stamina" elsewhere.
+#    gate_board   a club canvas whose locked choices are gated on her corr, on Tobin's
+#                 trust, and on both (the met half is not listed); one open choice
+#                 moves corr and stamina for the toast.
+#
+#  EN7 — "the men's numbers on their page":
+#    quests_engine = "v2" and a [ui.cast_page] (it lists only people with a quest
+#                 card) showing trust on every card, with word bands; vic also shows
+#                 power (his own show_traits). Both cards open once `started` is set.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -30,6 +47,7 @@ starting_canvas = "scene_start"
 id          = "engine_skill_test_fixes"
 title       = "Engine Skill-Test Fixes"
 description = "Engine fixture for PRD_SKILL_TEST_FIXES_v2 phase 1."
+quests_engine = "v2"
 
 [time]
 enabled       = true
@@ -41,8 +59,24 @@ starting_week = 1
 id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
-core_traits = { energy = 100, money = 40 }
-flag_keys   = ["started", "rent_on"]
+core_traits = { energy = 100, money = 40, corr = 5, stamina = 50 }
+flag_keys   = ["started", "rent_on", "found_attic"]
+
+[ui.cast_page]
+title       = "The Cast"
+show_traits = ["trust"]
+trait_bands = { trust = [ { max = 19, text = "Wary" },
+                          { min = 20, max = 59, text = "Warming" },
+                          { min = 60, text = "Yours" } ] }
+
+[traits]
+[[traits.labels]]
+key   = "corr"
+label = "Corruption"
+
+[[traits.labels]]
+key     = "stamina"
+in_dump = false
 
 [settings.rent]
 enabled          = true
@@ -61,11 +95,27 @@ description = "Fixture man."
 core_traits = { trust = 10 }
 flag_keys   = []
 
+[[npcs.schedules]]
+location   = "loc_attic"
+weekdays   = [6]
+start_time = "10:00"
+end_time   = "12:00"
+activity   = "Sorting boxes."
+
+[[npcs]]
+id           = "vic"
+name         = "Vic"
+description  = "Fixture boss."
+relationship = "Tobin's boss"
+core_traits  = { trust = 70, power = 30 }
+flag_keys    = []
+show_traits  = ["power"]
+
 [[locations]]
 id               = "loc_home"
 name             = "Home"
 description      = "Her room."
-navigation_order = ["loc_bar", "loc_shop", "loc_club"]
+navigation_order = ["loc_bar", "loc_shop", "loc_club", "loc_attic"]
 
 [[locations]]
 id          = "loc_bar"
@@ -87,6 +137,13 @@ name        = "Club"
 description = "The club."
 entry_from  = "loc_home"
 hours       = [ { weekdays = [4], open = "22:00", close = "04:00" } ]
+
+[[locations]]
+id           = "loc_attic"
+name         = "Attic"
+description  = "Boxes under the eaves."
+entry_from   = "loc_home"
+hidden_until = { flag = "found_attic" }
 
 # ── start ────────────────────────────────────────────────────────────────────
 
@@ -195,3 +252,61 @@ id     = "only"
 name   = "Only"
 blocks = [ { type = "paragraph", content = "His path is closed." } ]
 exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN5+EN6: the gate board ──────────────────────────────────────────────────
+
+[[canvases]]
+id   = "gate_board"
+name = "The gate board"
+
+[canvases.trigger]
+location      = "loc_club"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "board"
+name   = "Board"
+blocks = [ { type = "paragraph", content = "Four ways to go." } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Kiss him."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Ask him to stay."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "tobin", trait_key = "trust", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Take him upstairs."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "tobin", trait_key = "trust", operator = "gte", value = 5 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Dance."
+targetType = "location"
+locationId = "loc_home"
+effects    = [ { targetType = "player", trait = "corr", op = "add", value = 2 }, { targetType = "player", trait = "stamina", op = "add", value = 3 } ]
+
+# ── EN7: quest cards, so the cast page lists both men ────────────────────────
+
+[[quest_cards]]
+npc_id = "tobin"
+text   = "Tobin runs the bar."
+when   = [ { flag = "started", op = "is_true" } ]
+
+[[quest_cards]]
+npc_id = "vic"
+text   = "Vic owns it."
+when   = [ { flag = "started", op = "is_true" } ]

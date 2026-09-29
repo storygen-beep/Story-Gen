@@ -216,6 +216,8 @@ def build_game_graph(
             loc.properties["hours"] = l.hours
         if l.closed_text:
             loc.properties["closed_text"] = l.closed_text
+        if l.hidden_until:  # EN4 — MIRRORED in template_import.create_project_from_template
+            loc.properties["hidden_until"] = l.hidden_until
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False

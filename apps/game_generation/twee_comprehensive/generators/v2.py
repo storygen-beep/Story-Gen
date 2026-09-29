@@ -1042,6 +1042,9 @@ class TweeComprehensiveGeneratorV2:
             # unauthored, so a game without hours has the payload it had before.
             if loc_props.get("hours"):
                 locations_map[loc_slug]["hours"] = loc_props["hours"]
+            # EN4 — read by setup.locFound. Absent when unauthored, like `hours`.
+            if loc_props.get("hidden_until"):
+                locations_map[loc_slug]["hidden_until"] = loc_props["hidden_until"]
             # THE DOOR — the threshold screen's own data, with every option's target
             # resolved to a passage name HERE (see _door_for_payload). Fed by BOTH
             # importer write-outs (create_project_from_template and
@@ -1228,6 +1231,13 @@ class TweeComprehensiveGeneratorV2:
         self.hidden_trait_keys = [
             k for k, v in self.trait_labels.items()
             if isinstance(v, dict) and v.get("hidden")
+        ]
+        # EN5 — what the sidebar's auto Traits dump skips: every hidden key plus every
+        # `in_dump = false` key. Only the dump reads it; the Stats page and npc_panel keep
+        # hiddenTraits, so a banded meter kept out of the dump is still named elsewhere.
+        self.dump_skip_keys = [
+            k for k, v in self.trait_labels.items()
+            if isinstance(v, dict) and (v.get("hidden") or v.get("in_dump") is False)
         ]
         # Pattern 2: stage_setter_canvases — runtime index mapping
         # (npc_slug, stage_value) → canvas_id for branch-inside-shell transitions
@@ -3442,6 +3452,7 @@ setup.flag_labels = {json.dumps(self.flag_labels)};
 // in [[traits.labels]]. Every player/NPC trait-dump loop skips these via
 // <<continue>>, so internal stage/pregnancy/awareness traits never surface.
 setup.hiddenTraits = {json.dumps(self.hidden_trait_keys)};
+setup.dumpSkipTraits = {json.dumps(self.dump_skip_keys)};
 setup.stage_setter_canvases = {json.dumps(self.stage_setter_canvases)};
 setup.flag_setter_canvases = {json.dumps(self.flag_setter_canvases)};
 // Sub-menu parent index (2026-05-09) — child_canvas_id → parent_menu_canvas_id
@@ -4149,6 +4160,34 @@ setup.formatTime = function(hour, minute) {{
 // renderer needs it and a game with locked choices need not have a shop. Phrasing mirrors
 // triggerConditionsSatisfied's operator vocabulary directly above, so the message can never
 // disagree with the gate that produced it.
+// ===== EN5 — one name per trait =====
+// Every screen that names a trait asks this: the [[traits.labels]] label when it is
+// non-empty, else the tidied key ("crowd_standing" -> "Crowd standing"). The lock suffix,
+// the toast, the Stats page, the dump, guidance, the sidebar and the cost tags all agree.
+setup.traitLabel = function(key) {{
+    var d = (setup.trait_labels || {{}})[key];
+    if (d && d.label) return d.label;
+    var s = String(key == null ? "" : key).replace(/_/g, " ");
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}};
+// EN6 — the NPC a trait condition item is about, or null for hers.
+setup.traitItemNpc = function(item) {{
+    if (!item) return null;
+    var raw = item.npc_id || item.character_id || "";
+    if (item.subject === "player" || !raw) return null;
+    var id = setup.resolveNpcId(raw);
+    var npc = id ? ((State.variables.npcs || {{}})[id] || null) : null;
+    return {{ raw: raw, npc: npc }};
+}};
+// "Tobin's Trust" for his trait, "Trust" for hers. Shared by the lock suffix and
+// formatCanvasConditions so both say whose number it is the same way.
+setup.traitSubjectLabel = function(item) {{
+    var label = setup.traitLabel(item.trait_key);
+    var who = setup.traitItemNpc(item);
+    if (!who) return label;
+    return ((who.npc && who.npc.name) || who.raw) + "'s " + label;
+}};
+
 // Human-readable summary of the conditions on an item that are NOT currently met.
 // Generic over any trait, using the same operator vocabulary as
 // triggerConditionsSatisfied so the message can never disagree with the gate.
@@ -4168,7 +4207,12 @@ setup.describeUnmetConditions = function(conditions) {{
             var key = it.trait_key;
             var op = it.operator;
             var want = it.value;
-            var cur = (it.subject === 'npc') ? null : num(traits[key]);
+            // EN6 — his value when the item is about an NPC; null (no value printed) when
+            // he cannot be resolved.
+            var who = setup.traitItemNpc(it);
+            var cur = who
+                ? ((who.npc && who.npc.core_traits) ? num(who.npc.core_traits[key]) : null)
+                : num(traits[key]);
             if (cur !== null) {{
                 var sat = false;
                 if (op === 'gte') sat = cur >= want;
@@ -4179,10 +4223,9 @@ setup.describeUnmetConditions = function(conditions) {{
                 else if (op === 'ne') sat = cur !== want;
                 if (sat) continue;
             }}
-            // Underscores out, same as the flag branch below has always done —
-            // "Crowd standing 30+", not "Crowd_standing 30+". These strings are read by
-            // the player now that locked CHOICES carry them, not only the shop.
-            var label = cap(String(key).replace(/_/g, ' '));
+            // EN5 — the trait's one name (its label, else the tidied key), and EN6 — whose:
+            // "Tobin's Trust 50+", "Corruption 20+".
+            var label = setup.traitSubjectLabel(it);
             var phrase;
             if (op === 'gte') phrase = label + ' ' + want + '+';
             else if (op === 'gt') phrase = label + ' above ' + want;
@@ -4191,7 +4234,7 @@ setup.describeUnmetConditions = function(conditions) {{
             else if (op === 'eq') phrase = label + ' exactly ' + want;
             else if (op === 'ne') phrase = label + ' not ' + want;
             else phrase = label + ' ' + op + ' ' + want;
-            if (cur !== null) phrase += ' (you have ' + cur + ')';
+            if (cur !== null) phrase += (who ? ' (has ' : ' (you have ') + cur + ')';
             parts.push(phrase);
         }} else if (it.type === 'flag') {{
             var fkey = String(it.flag_key || '');
@@ -4227,8 +4270,8 @@ setup.describeUnmetConditions = function(conditions) {{
 // ("Requires: Raid done"), and a locked choice is very often gated on a hidden plot
 // flag - printing those would spoil the story on a greyed tile. Trait gates are the
 // numbers the player is meant to chase, so they are the ones worth naming. NPC-subject
-// traits are dropped too: the helper renders them as a bare "Corruption 40+" with no
-// idea whose, and the player cannot see an NPC's stats anyway. Anything the helper has
+// traits are named too (EN6, 2026-09-30): "Tobin's Trust 50+ (has 10)" — a man's feeling
+// is the number the player is chasing on most locked tiles. Anything the helper has
 // no phrasing for (time_of_day, clothing, quest) contributes nothing, so a clock-gated
 // choice appends silence rather than half a sentence.
 setup.REQUIREMENT_OPS = ['gte', 'gt', 'lte', 'lt'];
@@ -4237,7 +4280,7 @@ setup.describeUnmetTraits = function(conditions) {{
     var items = [];
     for (var i = 0; i < conditions.items.length; i++) {{
         var it = conditions.items[i];
-        if (!it || it.type !== 'trait' || it.subject === 'npc') continue;
+        if (!it || it.type !== 'trait') continue;
         if (setup.REQUIREMENT_OPS.indexOf(it.operator) === -1) continue;
         if (!(Number(it.value) >= 2)) continue;
         items.push(it);
@@ -5296,7 +5339,7 @@ setup.getCostBlockedMessage = function(costs) {{
     for (var i = 0; i < costs.length; i++) {{
         var cost = costs[i];
         var current = Number(playerTraits[String(cost.trait)] || 0);
-        var traitDisplay = String(cost.trait).charAt(0).toUpperCase() + String(cost.trait).slice(1);
+        var traitDisplay = setup.traitLabel(cost.trait);
         if (current < Number(cost.value)) {{
             lines.push('Requires ' + cost.value + ' ' + traitDisplay + ' (you have ' + Math.floor(current) + ')');
         }}
@@ -5348,7 +5391,7 @@ setup.getLocationCostTag = function(slug) {{
     if (Number(ec.time || 0) > 0) parts.push(Number(ec.time) + 'm');
     Object.keys(ec).forEach(function(k) {{
         if (k === 'time') return;
-        var disp = String(k).charAt(0).toUpperCase() + String(k).slice(1);
+        var disp = setup.traitLabel(k);
         parts.push(Number(ec[k]) + ' ' + disp);
     }});
     return parts.join(' · ');
@@ -5757,7 +5800,7 @@ setup.renderSoloActivities = function(locationId) {{
             var costTag = '';
             if (blocked.costs && blocked.costs.length > 0) {{
                 var ct = blocked.costs[0];
-                var ctDisplay = String(ct.trait).charAt(0).toUpperCase() + String(ct.trait).slice(1);
+                var ctDisplay = setup.traitLabel(ct.trait);
                 costTag = ' <span class="solo-cost-tag">(' + ct.value + ' ' + ctDisplay + ')</span>';
             }}
             html += '<a class="link-internal solo-activity-btn solo-activity-blocked" data-passage="' + bPassageName + '">' + bDisplayName + costTag + '</a><br>';
@@ -6617,7 +6660,7 @@ setup.showEffectNotification = function() {{
     var eff = effects[i];
     if (eff.type === 'trait') {{
       var sign = eff.delta > 0 ? '+' : '';
-      var traitDisplay = eff.trait.charAt(0).toUpperCase() + eff.trait.slice(1);
+      var traitDisplay = setup.traitLabel(eff.trait);  // EN5; never filtered by hiddenTraits (D1b)
       var prefix = eff.name ? (eff.name + "'s ") : '';
       lines.push(sign + eff.delta + ' ' + prefix + traitDisplay);
     }} else if (eff.type === 'flag') {{
@@ -7411,8 +7454,7 @@ setup._currentTraitValue = function(item) {{
 // For NPC subjects, prepends NPC display name (e.g., "Frank trust").
 setup._labelForTrait = function(item) {{
     var key = item.trait_key;
-    var labelData = (setup.trait_labels || {{}})[key];
-    var labelText = labelData ? labelData.label : key;
+    var labelText = setup.traitLabel(key);  // EN5 — was `labelData ? labelData.label : key` ("" for a hide-only entry)
     if (item.subject === "npc" && item.npc_id) {{
         var slug = item.npc_id;
         var uuid = (setup.npc_slug_map || {{}})[slug] || slug;
@@ -7640,7 +7682,7 @@ setup._locNameFromUuid = function(locUuid) {{
     var locData = locs[slug];
     return (locData && locData.name) || slug || null;
 }};
-
+{self._hidden_places_js()}
 // Main entry — returns HTML for the structured goal block.
 //
 // THREE frames depending on gate state (helper path; canvas-trigger fallback
@@ -8343,7 +8385,7 @@ setup.formatTraitRequirements = function(missingTraits) {{
     if (!missingTraits || missingTraits.length === 0) return "";
 
     var parts = missingTraits.map(function(req) {{
-        var traitName = req.trait.charAt(0).toUpperCase() + req.trait.slice(1);
+        var traitName = setup.traitLabel(req.trait);
         return traitName + " " + (req.operator || ">") + " " + req.value;
     }});
 
@@ -8401,14 +8443,17 @@ setup.formatCanvasConditions = function(conditions) {{
                 var npcName = (uuid && npcsData[uuid]) ? (npcsData[uuid].name || npcId) : npcId;
                 displayNpc = npcName + "'s";
             }}
-            var displayTrait = trait.charAt(0).toUpperCase() + trait.slice(1);
+            // EN5/EN6 — the trait's one name, and his name the way the lock suffix says it.
+            var displayText = isPlayerTrait
+                ? displayNpc + ' ' + setup.traitLabel(trait)
+                : setup.traitSubjectLabel(item);
 
             // Wrap in clickable span with data attributes
             var link = '<span class="trait-requirement-link" ' +
                 'data-npc="' + npcId + '" ' +
                 'data-trait="' + trait + '" ' +
                 'data-value="' + value + '">' +
-                displayNpc + ' ' + displayTrait + ' ' + op + ' ' + value +
+                displayText + ' ' + op + ' ' + value +
                 '</span>';
             parts.push(link);
         }}
@@ -8703,7 +8748,7 @@ setup.showTraitActivitiesModal = function(npcId, traitKey, requiredValue) {{
     relevantActivities = Object.values(byName);
 
     // Build modal HTML (no inline onclick - use jQuery event delegation)
-    var traitDisplay = traitKey.charAt(0).toUpperCase() + traitKey.slice(1);
+    var traitDisplay = setup.traitLabel(traitKey);
     var html = '<div class="trait-modal-overlay">';
     html += '<div class="trait-modal">';
     html += '<div class="trait-modal-header">';
@@ -8930,6 +8975,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             # Build a human-readable label: frank_bookkeeping_count → "Frank bookkeeping"
             base = trait_key.replace("_count", "").replace("_done", "")
             label = base.replace("_", " ").strip().capitalize()
+            # EN5 — a [[traits.labels]] label wins over the derived one.
+            _tl = self.trait_labels.get(trait_key)
+            if isinstance(_tl, dict) and _tl.get("label"):
+                label = _tl["label"]
             self.sidebar_items.append({
                 "type": "trait_bar",
                 "trait": trait_key,
@@ -10113,7 +10162,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="location-list">
 """
             for location in self.locations:
-                content += f"""    [[{location.name}->{self._location_entry_passage(location)}]]<br>\n"""
+                entry = f"[[{location.name}->{self._location_entry_passage(location)}]]<br>"
+                if self._is_hidden_place(location):  # EN4
+                    entry = f'<<if setup.locFound("{self._location_nav_slug(location)}")>>{entry}<</if>>'
+                content += f"""    {entry}\n"""
             content += """</div>"""
             return content
 
@@ -10132,8 +10184,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         lines.append("<<if $player.current_location == \"\">>")
         lines.append("<div class=\"location-list\">")
         for location in self.locations:
-            lines.append(
-                f"    [[{location.name}->{self._location_entry_passage(location)}]]<br>")
+            entry = f"[[{location.name}->{self._location_entry_passage(location)}]]<br>"
+            if self._is_hidden_place(location):  # EN4
+                entry = f'<<if setup.locFound("{self._location_nav_slug(location)}")>>{entry}<</if>>'
+            lines.append(f"    {entry}")
         lines.append("</div>")
         lines.append("<</if>>")
         return "\n".join(lines)
@@ -10212,10 +10266,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if getattr(connected_loc, 'is_container', False) and getattr(connected_loc, 'default_entry_location', None):
                             # If destination is container with default_entry, go to default_entry directly
                             default_entry_name = connected_loc.default_entry_location.name.replace(' ', '_')
-                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
+                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>"
                         else:
                             # Regular location or container without default_entry
-                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>\n"
+                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>"
+                        if self._is_hidden_place(connected_loc):  # EN4
+                            child_link = f'<<if setup.locFound("{self._location_nav_slug(connected_loc)}")>>{child_link}<</if>>'
+                        content += child_link + "\n"
 
                     # Add normal hierarchical navigation for containers without default_entry
                     content += """<div class="location-navigation">
@@ -10396,6 +10453,58 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 [[Leave->{back}]]
 </div>
 
+"""
+
+    def _is_hidden_place(self, loc) -> bool:
+        return bool((getattr(loc, 'properties', None) or {}).get('hidden_until'))
+
+    def _has_hidden_places(self) -> bool:
+        return any(self._is_hidden_place(loc) for loc in self.locations)
+
+    def _loc_found_cond(self, locs) -> str:
+        """`setup.locFound("a") || setup.locFound("b")` for the given places."""
+        return " || ".join(f'setup.locFound("{self._location_nav_slug(l)}")' for l in locs)
+
+    def _hidden_places_js(self) -> str:
+        """EN4 — places hidden until found. Empty unless some location has `hidden_until`."""
+        if not self._has_hidden_places():
+            return ""
+        return """
+// ===== EN4 — places hidden until found =====
+// A place with hidden_until = {flag} is not listed, and its name is withheld, until that
+// player flag is true. Every "where is this" printer goes through _locNameFromUuid or
+// _findHelperTransitionLocation (guidance, the cast page, the quests page, npc_panel),
+// so both are wrapped here; the Schedules page and the nav lists ask locFound directly.
+setup.LOC_HIDDEN_NAME = "somewhere you haven't found yet";
+setup.locFound = function (slugOrUuid) {
+    var slug = setup._getLocUuidToSlug()[slugOrUuid] || slugOrUuid;
+    var loc = (setup.locations || {})[String(slug)];
+    var hu = loc && loc.hidden_until;
+    if (!hu || !hu.flag) return true;
+    return !!(State.variables.flags || {})[hu.flag];
+};
+setup.locShownName = function (slugOrUuid, name) {
+    return setup.locFound(slugOrUuid) ? name : setup.LOC_HIDDEN_NAME;
+};
+setup._locNameFromUuid = (function (orig) {
+    return function (locUuid) {
+        if (locUuid && !setup.locFound(locUuid)) return setup.LOC_HIDDEN_NAME;
+        return orig(locUuid);
+    };
+})(setup._locNameFromUuid);
+setup._findHelperTransitionLocation = (function (orig) {
+    return function (helperName) {
+        var name = orig(helperName);
+        if (!name) return name;
+        var locs = setup.locations || {};
+        for (var slug in locs) {
+            if (locs[slug] && locs[slug].name === name && !setup.locFound(slug)) {
+                return setup.LOC_HIDDEN_NAME;
+            }
+        }
+        return name;
+    };
+})(setup._findHelperTransitionLocation);
 """
 
     def _has_location_hours(self) -> bool:
@@ -14492,7 +14601,6 @@ setup.carryRent = function (due, paid) {
                                     # to what it was before.
                                     _wants_number = any(
                                         isinstance(it, dict) and it.get('type') == 'trait'
-                                        and it.get('subject') != 'npc'
                                         and it.get('operator') in ('gte', 'gt', 'lte', 'lt')
                                         and isinstance(it.get('value'), (int, float))
                                         and it.get('value') >= 2
@@ -17430,9 +17538,9 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
-        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
+        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
-          <span class="trait-name"><<print _k>></span>
+          <span class="trait-name"><<print setup.traitLabel(_k)>></span>
           <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="-1">-</button> <span @id="'sidebar-player-trait-' + _k" class="trait-value"><<print $player.core_traits[_k]>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="1">+</button></span>
         </li>
       <</for>>
@@ -17456,9 +17564,9 @@ $(document).on(':passagestart', function(ev) {
           <<set _npcKeys to Object.keys(_npc.core_traits).sort()>>
           <<for _j to 0; _j lt _npcKeys.length; _j++>>
             <<set _nk to _npcKeys[_j]>>
-            <<if setup.hiddenTraits && setup.hiddenTraits.includes(_nk)>><<continue>><</if>>
+            <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_nk)>><<continue>><</if>>
             <li class="trait-item">
-              <span class="trait-name"><<print _nk>></span>
+              <span class="trait-name"><<print setup.traitLabel(_nk)>></span>
               <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="-1">-</button> <span @id="'sidebar-npc-trait-' + _npcId + '-' + _nk" class="trait-value"><<print _npc.core_traits[_nk]>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="1">+</button></span>
             </li>
           <</for>>
@@ -17477,9 +17585,9 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
-        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
+        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
-          <span class="trait-name"><<print _k>></span>
+          <span class="trait-name"><<print setup.traitLabel(_k)>></span>
           <span class="trait-value"><<print $player.core_traits[_k]>></span>
         </li>
       <</for>>
@@ -17578,7 +17686,7 @@ $(document).on(':passagestart', function(ev) {
         <<for _tk, _tv range $player.core_traits>>
           <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
-            <span><<print _tk>></span>
+            <span><<print setup.traitLabel(_tk)>></span>
             <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="-1">-</button> <span @id="'stats-player-trait-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="1">+</button></span>
           </div>
         <</for>>
@@ -17608,7 +17716,7 @@ $(document).on(':passagestart', function(ev) {
             <<for _tk, _tv range _npc.core_traits>>
               <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
-                <span><<print _tk>></span>
+                <span><<print setup.traitLabel(_tk)>></span>
                 <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="-1">-</button> <span @id="'npc-trait-' + _npcId + '-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="1">+</button></span>
               </div>
             <</for>>
@@ -17645,7 +17753,7 @@ $(document).on(':passagestart', function(ev) {
         <<for _tk, _tv range $player.core_traits>>
           <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
-            <span><<print _tk>></span>
+            <span><<print setup.traitLabel(_tk)>></span>
             <span class="stats-trait-value"><<print _tv>></span>
           </div>
         <</for>>
@@ -17675,7 +17783,7 @@ $(document).on(':passagestart', function(ev) {
             <<for _tk, _tv range _npc.core_traits>>
               <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
-                <span><<print _tk>></span>
+                <span><<print setup.traitLabel(_tk)>></span>
                 <span class="stats-trait-value"><<print _tv>></span>
               </div>
             <</for>>
@@ -17947,6 +18055,13 @@ if (clothingMsg) {
 <</if>>
 """) + """<</nobr>>"""
 
+        # EN4 — the Schedules page withholds a hidden place's name. "" without hidden places,
+        # so the page is emitted exactly as before.
+        hidden = self._has_hidden_places()
+        sched_now_open = "setup.locShownName(_nowSlug, " if hidden else ""
+        sched_row_open = "setup.locShownName(_schSlug, " if hidden else ""
+        sched_close = ")" if hidden else ""
+
         # Build the time widgets content using string concatenation to avoid f-string escaping issues
         time_widgets_start = """:: TimeWidgets [widget nobr]
 <!-- Time Display Widgets -->
@@ -18122,7 +18237,7 @@ if (clothingMsg) {
       <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_tbKey] || 0) : 0>>
     <</if>>
     <<set _traitMax to _item.max || 100>>
-    <<set _traitLabel to _item.label || _tbKey>>
+    <<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>
     <<set _traitPct to Math.max(0, Math.min(100, (_traitVal / _traitMax) * 100))>>
     <<set _tbTier to "">>
     <<if _item.color_tiers>>
@@ -18305,7 +18420,7 @@ if (clothingMsg) {
                   <<set _npArText to _nb.text>>
                 <</if>>
               <</for>>
-              <div class="sidebar-row"><span class="sidebar-label">🔥 Arousal</span> <span class="sidebar-value"><<print _npArText>></span></div>
+              <div class="sidebar-row"><span class="sidebar-label">🔥 <<print setup.traitLabel("arousal")>></span> <span class="sidebar-value"><<print _npArText>></span></div>
             <</if>>
           <<elseif _npRow is "corruption">>
             <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>
@@ -18314,7 +18429,7 @@ if (clothingMsg) {
               <<if _item.corruption_max_value isnot undefined and _npCorr gte _item.corruption_max_value>>
                 <<set _npCorrOut to (_item.corruption_max_label || "MAX")>>
               <</if>>
-              <div class="sidebar-row"><span class="sidebar-label">🫦 Corruption</span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
+              <div class="sidebar-row"><span class="sidebar-label">🫦 <<print setup.traitLabel("corruption")>></span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
             <</if>>
           <<elseif _npRow is "location">>
             <<set _npLoc to setup.getNpcLocation(_npId)>>
@@ -20996,7 +21111,7 @@ if (clothingMsg) {
 <<set _nowSlug to _currentLoc ? (setup._getLocUuidToSlug()[_currentLoc.location] || _currentLoc.location) : "">>
 <<set _nowOpen to _currentLoc ? setup.navDestUnlocked(_nowSlug) : false>>
 <<if _currentLoc and _nowOpen>>
-<<set _locName to (setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location>>
+<<set _locName to """ + sched_now_open + """(setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location""" + sched_close + """>>
 <span class="now-badge">NOW: <<print _locName>></span>
 <</if>>
 </h3>
@@ -21014,7 +21129,7 @@ if (clothingMsg) {
 <<set _schOpen to setup.navDestUnlocked(_schSlug)>>
 <<set _isCurrent to _schOpen && setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)>>
 <<set _rowClass to _isCurrent ? "current-slot" : (_schOpen ? "" : "locked-slot")>>
-<<set _schLocName to (setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location>>
+<<set _schLocName to """ + sched_row_open + """(setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location""" + sched_close + """>>
 <!-- @class, NOT class="<<print>>". SugarCube does not evaluate macros inside a raw HTML attribute — it
      emits them verbatim, so the row shipped with the literal string as its class and `.current-slot`
      never matched anything. Found 2026-08-11 while adding `.locked-slot`; the attribute directive is the
@@ -21335,6 +21450,22 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         return (getattr(loc, 'properties', None) or {}).get('slug') or f"loc_{loc.id}"
 
     def _render_location_nav_card(self, loc, video_path):
+        """EN4 — the card, wrapped so a place hidden until found is not listed. The wrap sits
+        outside the door branch: a door place is hidden like any other."""
+        card = self._render_location_nav_card_body(loc, video_path)
+        if self._is_hidden_place(loc):
+            return f'<<if setup.locFound("{self._location_nav_slug(loc)}")>>{card}<</if>>'
+        return card
+
+    def _nav_link_line(self, loc, video_path):
+        """One text-mode destination line. A hidden place keeps its <br> inside the wrap,
+        so an unfound place leaves no blank line."""
+        link = self._render_location_nav_link(loc, video_path)
+        if self._is_hidden_place(loc):
+            return f'    <<if setup.locFound("{self._location_nav_slug(loc)}")>>{link}<br><</if>>\n'
+        return "    " + link + "<br>\n"
+
+    def _render_location_nav_card_body(self, loc, video_path):
         """A single nav-grid card for a destination, lock-as-prose aware: a normal
         clickable card when the door is open, else a greyed non-clickable card showing
         the in-world reason. A travel-cost tag rides along when the location has costs."""
@@ -21455,9 +21586,13 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 navigation_html += '</div><</nobr>>\n'
             else:
                 # TEXT-ONLY MODE (no images)
-                navigation_html += "    <strong>Available destinations:</strong><br>\n"
+                header = "<strong>Available destinations:</strong><br>"
+                if all(self._is_hidden_place(d) for d in ordered_destinations):
+                    # EN4 — every place here can be hidden: the header goes with them.
+                    header = f"<<if {self._loc_found_cond(ordered_destinations)}>>{header}<</if>>"
+                navigation_html += "    " + header + "\n"
                 for dest in ordered_destinations:
-                    navigation_html += "    " + self._render_location_nav_link(dest, video_path) + "<br>\n"
+                    navigation_html += self._nav_link_line(dest, video_path)
 
         # EXIT LINKS (always text-only, below the grid)
         exit_links = []
@@ -21510,8 +21645,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                     for loc in other_locations
                 )
 
+                all_header = "<p><strong>All locations:</strong></p>"
+                if all(self._is_hidden_place(l) for l in other_locations):
+                    all_header = f"<<if {self._loc_found_cond(other_locations)}>>{all_header}<</if>>"
                 if has_any_images:
-                    navigation_html += "    <p><strong>All locations:</strong></p>\n"
+                    navigation_html += "    " + all_header + "\n"
                     navigation_html += '<<nobr>><div class="location-nav-grid">'
 
                     for other_loc in other_locations:
@@ -21519,9 +21657,9 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 
                     navigation_html += '</div><</nobr>>\n'
                 else:
-                    navigation_html += "    <p><strong>All locations:</strong></p>\n"
+                    navigation_html += "    " + all_header + "\n"
                     for other_loc in other_locations:
-                        navigation_html += "    " + self._render_location_nav_link(other_loc, video_path) + "<br>\n"
+                        navigation_html += self._nav_link_line(other_loc, video_path)
 
         return navigation_html
 

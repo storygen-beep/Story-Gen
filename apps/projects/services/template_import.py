@@ -191,6 +191,9 @@ class TemplateLocation:
     # when she arrives while it is closed.
     hours: List[Dict[str, Any]] = field(default_factory=list)
     closed_text: str = ""
+    # EN4 — {flag = "<player flag>"}: the place is not listed, and its name is withheld,
+    # until that flag is true. Empty = always listed, exactly as before.
+    hidden_until: Dict[str, Any] = field(default_factory=dict)
     # A TRANSIT STOP opts out of engine-built navigation: no auto "Leave <name>" link, and an
     # empty nav list is treated as intentional rather than as a stranded location (so the
     # list-every-location fallback stays quiet). For a location the player arrives at and leaves
@@ -551,6 +554,10 @@ class TemplateTraitLabel:
                           # A label entry may exist SOLELY to hide (label may be empty).
                           # NOTE: name-keyed, not namespaced — hides for player + any NPC
                           # that has a core_trait of this name.
+    # EN5 — False keeps the trait out of the sidebar's auto Traits dump ONLY; it still
+    # shows on the Stats page and in every toast. For a banded meter whose words already
+    # sit in [[sidebar_items]]. `hidden` above keeps its meaning: a secret trait.
+    in_dump: Any = True
 
 
 @dataclass
@@ -2127,6 +2134,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 # Kept raw; validate() reports every malformed window.
                 hours=l.get("hours") or [],
                 closed_text=_require_str(l, "closed_text", ""),
+                # Kept raw (not _require_dict) so validate() can report a non-table.
+                hidden_until=l.get("hidden_until") or {},
                 auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
@@ -3291,6 +3300,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     verb=_require_str(tl_raw, "verb", "reach") or "reach",
                     unit=_require_str(tl_raw, "unit", ""),
                     hidden=bool(tl_raw.get("hidden", False)),
+                    in_dump=tl_raw.get("in_dump", True),
                 )
             )
 
@@ -6035,9 +6045,12 @@ def validate(template: GameTemplate) -> List[str]:
         if not tl.key:
             errors.append("traits.labels entry missing required `key` field")
             continue
-        # A hide-only entry (hidden=true) may omit `label` — its sole purpose is to
-        # suppress the trait from player-facing dumps, not to render a goal label.
-        if not tl.label and not tl.hidden:
+        # A hide-only entry (hidden=true, or EN5's in_dump=false) may omit `label` — its
+        # sole purpose is to keep the trait out of a dump; the name falls back to the
+        # tidied key ("crowd_standing" -> "Crowd standing").
+        if not isinstance(tl.in_dump, bool):
+            errors.append(f"traits.labels[{tl.key}] in_dump must be true or false, got {tl.in_dump!r}")
+        if not tl.label and not tl.hidden and tl.in_dump is not False:
             errors.append(f"traits.labels[{tl.key}] missing required `label` field")
         if tl.hidden and tl.key not in _all_core_trait_keys and warnings is not None:
             warnings.append(
@@ -6082,6 +6095,9 @@ def validate(template: GameTemplate) -> List[str]:
 
     # EN3 — location opening hours.
     errors.extend(_validate_location_hours(template))
+
+    # EN4 — places hidden until found.
+    errors.extend(_validate_hidden_places(template))
 
     return errors
 
@@ -6314,6 +6330,61 @@ def _validate_location_hours(template) -> List[str]:
         for si, sch in enumerate(trig.schedules or []):
             _warn_if_shut(f"canvases[{ci}] '{c.id}'.trigger.schedules[{si}]", trig.location,
                           sch.weekdays, sch.start_time, sch.end_time)
+    return errors
+
+
+def _validate_hidden_places(template) -> List[str]:
+    """EN4 — `hidden_until = {flag}` on a location.
+
+    A place hidden behind a flag nothing can ever set stays invisible with no error
+    anywhere, so the flag must be a declared player flag. A room whose every destination
+    can be hidden and which has no "Leave" exit of its own can leave her with no way out
+    (LO: the empty list only loses its header) — a warning, because a scene may carry the
+    exit.
+    """
+    import warnings
+
+    errors: List[str] = []
+    declared = set(template.player.flag_keys or [])
+    hideable: Set[str] = set()
+    for li, l in enumerate(template.locations or []):
+        hu = l.hidden_until
+        if not hu:
+            continue
+        ctx = f"locations[{li}] '{l.id}'.hidden_until"
+        if not isinstance(hu, dict):
+            errors.append(f"{ctx} must be a table {{flag = \"<player flag>\"}}, got {hu!r}")
+            continue
+        unknown = sorted(set(hu) - {"flag"})
+        if unknown:
+            errors.append(f"{ctx} has unknown key(s) {unknown}; only flag")
+        flag = hu.get("flag")
+        if not isinstance(flag, str) or not flag:
+            errors.append(f"{ctx}.flag is required: the player flag that reveals the place")
+        elif flag not in declared:
+            errors.append(
+                f"{ctx}.flag '{flag}' is not a declared player flag (player.flag_keys); "
+                f"nothing could reveal the place"
+            )
+        if l.offscreen:
+            errors.append(f"{ctx}: an offscreen location is never listed; hidden_until does nothing")
+        hideable.add(l.id)
+
+    if hideable:
+        for l in template.locations or []:
+            if l.is_container or l.offscreen:
+                continue
+            dests = {x.id for x in template.locations if x.entry_from == l.id and not x.offscreen}
+            dests.update(d for d in (l.navigation_order or []) if d != l.id)
+            has_exit = bool(l.entry_from) and l.auto_exit
+            if dests and dests <= hideable and not has_exit:
+                warnings.warn(
+                    f"location '{l.id}' has no Leave exit and every place it lists "
+                    f"({sorted(dests)}) is hidden_until a flag: until one is found, its "
+                    f"page has no way out unless a scene there carries one",
+                    UserWarning,
+                    stacklevel=2,
+                )
     return errors
 
 
@@ -7534,7 +7605,9 @@ def _assemble_project_metadata(project, template):
     # for the goal-block renderer (setup.computeHintGoal).
     if template.trait_labels:
         project.metadata["trait_labels"] = {
-            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden}
+            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden,
+                     # EN5 — written only when false, so an existing game's labels are unchanged.
+                     **({"in_dump": False} if tl.in_dump is False else {})}
             for tl in template.trait_labels
         }
     if template.flag_labels:
@@ -7973,6 +8046,8 @@ def create_project_from_template(
             loc.properties["hours"] = l.hours
         if l.closed_text:
             loc.properties["closed_text"] = l.closed_text
+        if l.hidden_until:  # EN4 — MIRRORED in game_graph.py's location loop
+            loc.properties["hidden_until"] = l.hidden_until
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False

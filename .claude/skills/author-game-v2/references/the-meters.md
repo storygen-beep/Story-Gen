@@ -910,8 +910,10 @@ It bounds **how high a trait can go**, not **how fast**:
 The sidebar prints a trait twice — once from the auto Traits dump, once from whatever
 `[[sidebar_items]]` you wrote — and the two do not know about each other (§30).
 
-**Every trait carrying `bands` in `[[sidebar_items]]` needs `hidden = true` in `[[traits.labels]]`.**
-A trait absent from `[[traits.labels]]` entirely is *not* hidden; it prints.
+**Every trait carrying `bands` in `[[sidebar_items]]` needs `in_dump = false` in `[[traits.labels]]`.**
+A trait absent from `[[traits.labels]]` entirely is *not* kept out; it prints. Don't use
+`hidden = true` for this: it is the secret-trait switch, it takes the trait off the Stats page too,
+and because it is keyed by name it hides every man's trait of the same name.
 
 Choose the primitive by what the number **means**:
 
@@ -922,7 +924,7 @@ Choose the primitive by what the number **means**:
 | body-need | energy, hygiene | `trait_status_text` + `bands` | passive banded body-state |
 | countable resource | money | `trait_bar`, `hide_value = false`, **no `bands`** | you want the exact figure; don't band a thing the player counts |
 
-**Gate 27** fails any banded item whose key is not hidden. It is deterministic — no threshold to
+**Gate 27** fails any banded item whose key is neither `in_dump = false` nor `hidden`. It is deterministic — no threshold to
 invent, no false positives.
 
 ⚠️ And the other half: a banded value that lands **outside every band renders nothing at all** — the

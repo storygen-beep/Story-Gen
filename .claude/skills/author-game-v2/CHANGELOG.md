@@ -5,6 +5,110 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN5+EN6: one name per trait; a locked button names his feeling (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN5 + EN6 (D3a · D5).
+- A trait's name came from a dozen places that disagreed:
+  - the lock suffix printed `cap(key)`, and so did the toast;
+  - the Stats page and the sidebar dump printed the raw key;
+  - guidance printed "" for a hide-only label.
+- `hidden = true` did two jobs, and because it is keyed by name, hiding the player's banded
+  `corruption` hid every man's.
+- Locked buttons dropped every NPC gate, so a tile locked on his feeling showed no reason.
+
+**What changed (engine).** This is a deliberate global change (PRD §0 rule 7).
+- `setup.traitLabel(key)` is every screen's name for a trait: the `[[traits.labels]]` label, else the
+  tidied key ("crowd_standing" becomes "Crowd standing", LO 2026-09-30). It is used by:
+  - the lock suffix and shop, `formatCanvasConditions`, the "+N" toast (still never filtered, D1b);
+  - the Stats page, the sidebar dump, `_labelForTrait` (the empty-label bug);
+  - the `npc_panel` rows, and `trait_bar` with no `label` (LO: only where a name already shows);
+  - the auto counter bars, the cost message, the location and solo cost tags,
+    `formatTraitRequirements`, and the trait modal.
+- A new `[[traits.labels]] in_dump = false` keeps a trait out of the sidebar's auto Traits dump only
+  (`setup.dumpSkipTraits`). The Stats page and `npc_panel` keep `hidden`, which still means a secret.
+  - An `in_dump = false` entry may leave out `label`.
+  - It is written to the metadata only when false.
+  - `validate()` errors on a non-bool.
+- **EN6:**
+  - `describeUnmetTraits` and the Python `_wants_number` no longer drop NPC subjects.
+  - `describeUnmetConditions` resolves him (`resolveNpcId`) and reads his value. A met item is not
+    listed; an unmet one prints "Tobin's Trust 50+ (has 10)".
+  - `setup.traitSubjectLabel` phrases whose trait it is for both the suffix and
+    `formatCanvasConditions`.
+- **Passage diff** against the pre-change engine, engine script excluded. Only these texts:
+  - StatsPage and TimeWidgets (the dump, `npc_panel`, `trait_bar`) in all three games;
+  - vesper: 4 locked-choice passages gain the NPC suffix (Calloway, Renner, Grier).
+- **Old saves:** no new state. A save the pre-change build wrote loads, and the NPC suffix renders.
+
+**What changed (skill).**
+- `scripts/gates.py` G27 "a banded meter is not also a number" passes `in_dump = false` (and still
+  `hidden`), and its fix line says `in_dump = false`. Test: `scripts/tests/test_gates_en5_in_dump.py`.
+- `references/engine.md` §30 teaches `in_dump = false`, with a paragraph on "one name per trait" and
+  the NPC suffix; §41d is updated too.
+- `references/the-meters.md` M7: `in_dump = false`, and why not `hidden`.
+- Words +186 (136,657). `cite_check.py --fix` moved 56 citations; each was compared with the
+  pre-change code (49 in v2.py, 7 in template_import.py), all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_trait_names.py`: 15 passed. It covers:
+  - `traitLabel`;
+  - the three locked buttons, including the met half not listed;
+  - `formatCanvasConditions`, the toast, the dump and the Stats page;
+  - the guidance label, `trait_bar`, and the cost message;
+  - the metadata, the validator, the Python suffix, and the old save.
+- The fixture gained `corr` ("Corruption"), `stamina` (`in_dump = false`), and the `gate_board` canvas.
+- Engine suite 542 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN4: a place can stay hidden until she finds it (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN4 (D10b). Every place was listed from the start. A locked one
+showed greyed with its reason, so the map gave away every room before she had heard of it.
+
+**What changed (engine).**
+- Opt-in `[[locations]] hidden_until = {flag = "<player flag>"}`. While that flag is false the place
+  is not listed: not on the travel card, not in the text link, not in a container's child list, and
+  not on the Navigation page.
+- A `door` place is hidden like any other; the wrap sits outside the door branch.
+- Its name is withheld as "somewhere you haven't found yet" on:
+  - the Schedules page;
+  - guidance 📍;
+  - the cast page 📍;
+  - the quests page 📍 (not in the PRD's list, but the same leak);
+  - `npc_panel`.
+
+  The runtime wraps `setup._locNameFromUuid` and `setup._findHelperTransitionLocation` once, emitted
+  right after their definitions, so the originals' text is unchanged.
+- **Empty list (LO, 2026-09-30):** when every place a room lists can be hidden, the header hides with
+  them. The room keeps whatever exits it already has; no "Leave" link is added.
+- There is no passage guard: a scene can still take her there, which is how she finds it.
+- `validate()` errors on:
+  - a non-table value, or an unknown key;
+  - a missing flag, or one that isn't a declared player flag;
+  - `hidden_until` on an offscreen place.
+
+  It warns when a room with no Leave exit lists only places that can be hidden.
+- Written by both writers (T and G). Emitted only when some place uses it: members_only, the_balance
+  and vesper build a byte-identical index.html.
+- **Old saves:** no new state; the flag is an ordinary player flag. A save the pre-change build wrote
+  shows the attic hidden, then listed once the flag is set.
+
+**What changed (skill).**
+- `references/engine.md` §22: a "Hidden until found" block. Words +179 (136,471).
+- `cite_check.py --fix` moved 56 citations. Each was compared with the pre-change code: 48 in v2.py
+  and 8 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_hidden_places.py`: 20 passed. It covers:
+  - before and after the flag: the link, the Schedules page, `_locNameFromUuid`, and where Tobin is;
+  - a door place; the header going when every place is hidden;
+  - the card wrap outside the door branch;
+  - the old save; every validator error; the no-way-out warning.
+- The fixture gained `loc_attic`, the flag `found_attic`, and a Sunday schedule row for Tobin. EN1–EN3
+  tests are unchanged and green.
+- Engine suite 527 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
 ## 2026-09-30 — EN3: a place can have opening hours (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN3 (D9b · I2). A place was always open, or locked by
