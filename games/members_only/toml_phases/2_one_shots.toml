@@ -1,0 +1,252 @@
+# Members Only — the opening. sheets/OPENING.md, screen by screen.
+# Boot at the Staff House (Tue 17:00) -> the Club capstone (17:34) -> the Bar at 18:01.
+
+[[canvases]]
+id          = "opening"
+name        = "The staff door"
+description = "Boot. Setup and problem in her voice; Noor at the staff door; the start question. Skip lands at the Bar."
+
+[canvases.trigger]
+location      = "staff_house"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "arrival"
+name = "The staff door"
+blocks = [
+  { type = "paragraph", content = "You're twenty-four, you're broke, and your sister Dana hasn't answered you in eight months. She worked at the Linden, the members' club on the cliff above this town. In May she stopped writing. Her last letter said four words: Don't come looking." },
+  { type = "paragraph", content = "So you came looking. You took her old job, because it was the only door into the club. Tonight is your first shift. You're scared of what you'll find up there. You're more scared of what you won't. The staff house is halfway up the cliff path, and the light is on." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Knock on the staff door"
+targetType = "node"
+nodeId     = "opening.noor"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Skip the opening"
+targetType = "location"
+locationId = "bar_floor"
+time_progression_minutes = 61
+effects         = [ { targetType = "player", trait = "shown", op = "add", value = 1 } ]
+flagEffects     = [ { targetType = "player", flag = "arrived", op = "set" },
+                    { targetType = "player", flag = "past_she_left", op = "set" },
+                    { targetType = "player", flag = "opening_done", op = "set" } ]
+wardrobeEffects = [ { action = "equip", item_id = "danas_black_dress" } ]
+
+[[canvases.nodes]]
+id   = "noor"
+name = "Noor"
+blocks = [
+  { type = "paragraph", content = "The door opens before your second knock. A woman in a silk robe, a cigarette between two fingers, looks you up and down. She's one of the club's hostesses, and she doesn't hide that she's measuring you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "You're the sister. God, you look like her. I'm Noor." },
+  { type = "dialog", props = { speaker = "player" }, content = "Is she here? Have you heard from her?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Julian said you'd come. So tell me, babe. Why'd you and your sister stop talking?" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Straight for the throat. Fine. You can do blunt too." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"We fought over a man.\""
+targetType  = "node"
+nodeId      = "opening.a_man"
+flagEffects = [ { targetType = "player", flag = "past_same_man", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"She walked out on me.\""
+targetType  = "node"
+nodeId      = "opening.she_left"
+flagEffects = [ { targetType = "player", flag = "past_she_left", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I walked out on her.\""
+targetType  = "node"
+nodeId      = "opening.you_left"
+flagEffects = [ { targetType = "player", flag = "past_you_left", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "a_man"
+name = "Noor laughs"
+blocks = [
+  { type = "paragraph", content = "Noor laughs, loud and delighted, and blows smoke over your head." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Course you did. Come on. Julian hates it when the new girl's late." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk up to the club with her"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "club"
+time_progression_minutes = 25
+flagEffects              = [ { targetType = "player", flag = "arrived", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "she_left"
+name = "Noor nods"
+blocks = [
+  { type = "paragraph", content = "Noor nods like it's the least surprising thing she's heard all week." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "She did that. To everybody. Come on. Julian hates it when the new girl's late." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk up to the club with her"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "club"
+time_progression_minutes = 25
+flagEffects              = [ { targetType = "player", flag = "arrived", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "you_left"
+name = "Noor goes quiet"
+blocks = [
+  { type = "paragraph", content = "Noor goes quiet. She taps her ash onto the step and studies you properly for the first time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Then why are you here? Never mind. Come on. Julian hates it when the new girl's late." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk up to the club with her"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "club"
+time_progression_minutes = 25
+flagEffects              = [ { targetType = "player", flag = "arrived", op = "set" } ]
+
+# ── the capstone at the Club ─────────────────────────────────────────────────
+[[canvases]]
+id          = "opening_club"
+name        = "Your first night"
+description = "Capstone. Julian, the tab, Dana's dress; Ade and Kessler met on the floor; the plain lines; hands over at the Bar 18:01."
+
+[canvases.trigger]
+location      = "club"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "arrived"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_false"
+
+[[canvases.nodes]]
+id   = "julian"
+name = "Julian"
+blocks = [
+  { type = "paragraph", content = "A man in a dark suit is waiting under the chandelier. He's the manager, Julian, and he looks at you the way a jeweller looks at a stone." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Evening, Dana." },
+  { type = "paragraph", content = "A pause. He doesn't blink." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Miss. Forgive me. Your sister left this club in debt. Three hundred dollars, every Sunday, to me. You'll work it off on my floor." },
+  { type = "dialog", props = { speaker = "player" }, content = "That's her debt, not mine." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Then go home. Nobody's stopping you." },
+  { type = "paragraph", content = "He lifts a black dress off a hanger. You know it before you touch it. Dana wore it in her last photo." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Hers fit. Let's see if yours does." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Here? In front of him? He's not even pretending to look away." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text            = "Change in front of him"
+targetType      = "node"
+nodeId          = "opening_club.watched"
+effects         = [ { targetType = "player", trait = "shown", op = "add", value = 1 } ]
+wardrobeEffects = [ { action = "equip", item_id = "danas_black_dress" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text            = "Tell him to turn around"
+targetType      = "node"
+nodeId          = "opening_club.mirror"
+wardrobeEffects = [ { action = "equip", item_id = "danas_black_dress" } ]
+
+[[canvases.nodes]]
+id   = "watched"
+name = "In front of him"
+blocks = [
+  { type = "paragraph", content = "You strip down to your underwear under the chandelier. Julian watches every inch of it, and he doesn't say a word. The dress slides over your hips and fits like it was cut for you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Better. Follow me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Follow him onto the floor"
+targetType = "node"
+nodeId     = "opening_club.floor"
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The mirror"
+blocks = [
+  { type = "paragraph", content = "He turns around, but not all the way. You change fast. When you look up, his eyes meet yours in the long mirror by the door. He watched the whole time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "It fits. Follow me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Follow him onto the floor"
+targetType = "node"
+nodeId     = "opening_club.floor"
+
+[[canvases.nodes]]
+id   = "floor"
+name = "The floor"
+blocks = [
+  { type = "paragraph", content = "He walks you through the bar. The bartender, a tall man with tired eyes, pours a drink and slides it to you before you ask." },
+  { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Welcome, new girl. I'm Ade. Drink that before Julian sees it." },
+  { type = "paragraph", content = "At a corner table an old man holds a sheet of paper an inch from his face. He lowers it to look at you, all of you, slowly." },
+  { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Dana's sister. I'm Kessler. Library. After close." },
+  { type = "paragraph", content = "Two members at the bar stop talking as you pass them. One of them says to Julian, loud enough for you to hear, \"Room four, later. If she's willing.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "That page in his hand. That was her handwriting." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take your tray"
+targetType = "node"
+nodeId     = "opening_club.how"
+
+[[canvases.nodes]]
+id   = "how"
+name = "How it works"
+blocks = [
+  { type = "paragraph", content = "Work shifts at the Bar for tips. Dana's tab is $300, every Sunday, to Julian. Kessler is in the Library after close, and he has something of Dana's. Your bed is in the Staff House, down the path." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Start your shift"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "bar_floor"
+time_progression_minutes = 18
+flagEffects              = [ { targetType = "player", flag = "opening_done", op = "set" } ]

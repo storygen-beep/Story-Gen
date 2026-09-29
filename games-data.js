@@ -15,6 +15,18 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-09-29. Authored with author-game-v2 as its second skill test, from zero
+    // (games/members_only/SKILL_TEST_FINDINGS.md, 55 findings). 11 locations, 42 canvases,
+    // 4 characters, 9 ladder steps, ~6,000 words, 45/47 gates (the 2 reds: location fill,
+    // and gate 34, a skill bug). DEV + DEBUG build on LO's call: the jump list and stat
+    // controls are live. No media harvested. --ship is NO until LO playtests and signs.
+    slug: "members_only",
+    title: "Members Only",
+    badge: "v2",
+    dev: true,
+    summary: `You're twenty-four, broke, and your sister Dana stopped answering eight months ago. She worked at the Linden, a members' club on a cliff above a harbor town, and her last letter said four words: Don't come looking. So you took her old job. The manager slips and calls you by her name, then hands you her dress. The bartender pours your drink before you ask and won't say why. An old member has her diary, one page at a time, and he wants each page read aloud to him, standing, in the light. Every page costs a little more. Dana's tab is three hundred dollars every Sunday, and the rooms upstairs pay better than the floor.`,
+  },
+  {
     // Listed 2026-09-29. Authored with author-game-v2 as its skill test (games/probation/
     // SKILL_TEST_FINDINGS.md, 57 findings). 7 locations, 38 canvases, 4 characters, 12 ladder
     // steps, 29,725 words, 47/49 gates (the 2 reds are skill false alarms). DEV + DEBUG build,

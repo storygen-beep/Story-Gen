@@ -1,0 +1,751 @@
+# Members Only — the hubs: one per person per schedule row. Each is a talk screen the steps
+# sit above (steps are priority 8, hubs 6; the portrait shows the higher one that holds).
+
+# ══ JULIAN ══════════════════════════════════════════════════════════════════
+[[canvases]]
+id   = "julian_club"
+name = "Julian at the door"
+
+[canvases.trigger]
+location      = "club"
+npc           = "julian"
+requires_npc  = "julian"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "17:30"
+end_time   = "18:30"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "check"
+name = "Julian checks you over"
+blocks = [
+  { type = "paragraph", content = "Julian looks you over from your hair to your shoes, the way he looks at every girl walking in." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "look", operator = "lt", value = 40 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Not like that, Miss. Dressing room. Now." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "clothing_item", item_id = "danas_red_dress", operator = "equipped" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Red. She wore it on Thursdays. Go on." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "clothing_item", item_id = "noors_short_dress", operator = "equipped" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Noor's work. The members will thank her. Go." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Good. Smile at the members, Miss. That's the job." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He never once looks at your face." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go past him"
+targetType = "location"
+locationId = "club"
+
+[[canvases]]
+id   = "julian_bar"
+name = "Julian"
+
+[canvases.trigger]
+location      = "bar_floor"
+npc           = "julian"
+requires_npc  = "julian"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:30"
+end_time   = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "talk"
+name = "Julian"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Table six is spending tonight, Miss. Be where they can see you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "You're doing well. She did well too, for a while." },
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "The members like a girl who laughs. Laugh more." },
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Table two wants the girl in the black dress. That's you, Miss, whether you like it or not." },
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Don't count your tips on the floor. Count them in the dressing room, where I can't see how little it is." },
+    { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Laurent is in tonight. Be charming. He was very fond of your sister, but he's fonder of new faces." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 3 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Kessler's table is yours from tonight, Miss. He asked. He doesn't usually ask." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "energy", operator = "lt", value = 20 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "You look dead on your feet, Miss. Go home. I won't have you yawning at a member." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "tab_missed", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "You owe me Sunday's money. Not tonight, Miss. Not until it's paid." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every word out of him is a bill. You just don't know yet what it's for." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the tables"
+targetType = "location"
+locationId = "bar_floor"
+
+[[canvases]]
+id   = "julian_office"
+name = "Julian's Sunday"
+
+[canvases.trigger]
+location      = "julians_office"
+npc           = "julian"
+requires_npc  = "julian"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "12:00"
+end_time   = "14:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "count"
+name = "The Sunday count"
+blocks = [
+  { type = "paragraph", content = "Julian has the account book open and a cup of black coffee going cold beside it. He doesn't offer you a chair, but he waits until you're standing where he wants you." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "tab_raised_2", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Kessler's been reading to you, I hear. Then you know about the others she owed. Another fifteen a day, Miss. That's the last of them. I think." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "tab_raised_1", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Laurent. She owed him too, and what she owed him, she owes me. Fifteen a day, Miss, on top of Sunday." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "julian" }, content = "Three hundred, every Sunday. You pay it the way she did, Miss: on time. That's all I ask of you. For now." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "The book on his desk isn't the members' book. That one's somewhere else in this room." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Pay what you owe from last week ($300)"
+targetType  = "location"
+locationId  = "julians_office"
+show_when_locked = true
+locked_text = "You need $300 to clear last week."
+conditions  = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tab_missed", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 300 } ] }
+effects     = [ { targetType = "player", trait = "money", op = "add", value = -300, clamp = false } ]
+flagEffects = [ { targetType = "player", flag = "tab_missed", op = "unset" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to his book"
+targetType = "location"
+locationId = "club"
+
+# ══ ADE ═════════════════════════════════════════════════════════════════════
+[[canvases]]
+id   = "ade_bar"
+name = "Ade"
+
+[canvases.trigger]
+location      = "bar_floor"
+npc           = "ade"
+requires_npc  = "ade"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "17:00"
+end_time   = "23:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "bar"
+name = "Ade"
+blocks = [
+  { type = "paragraph", content = "Ade slides a drink to you before you ask for it." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 15 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "I've stopped asking where you go after your shift. I don't want to hear it from you too." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 5 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Members at the end of the bar are saying your name. They're saying it the way they said hers." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "ade_stage", operator = "gte", value = 1 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Drink that, @player. You look like you need it." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Drink that, new girl. Julian's not looking." } ] },
+  { type = "paragraph", content = "He goes back to polishing glasses, but he keeps one eye on you." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "ade_refused_1", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "That drink you turned down is still on the shelf with your name on it. When you want it." } ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Laurent's at table two. Don't let him buy you anything you'd have to drink." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Julian waters the whisky for the members who've had enough. Don't tell him I told you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "You're good at this. I'm not sure that's a compliment." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "The man at table four tips well, but he tips better if you let him win at something. Let him win at cards." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Don't lean on the bar when Julian's watching. He counts that as resting, and he docks you for it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Laurent asked me your real name tonight. I told him I didn't know it. He didn't believe me, but he let it go." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 1 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Library, huh. Dana used to come down from there at one too." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the tables"
+targetType = "location"
+locationId = "bar_floor"
+
+[[canvases]]
+id   = "ade_docks"
+name = "Ade"
+
+[canvases.trigger]
+location      = "the_docks"
+npc           = "ade"
+requires_npc  = "ade"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "11:00"
+end_time   = "14:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "pier"
+name = "Ade"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "ade_refused_2", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "You walked off last time. I brought two coffees anyway." } ] },
+  { type = "paragraph", content = "Ade is on the end of the pier with his feet over the water. He's off the clock, but he still watches the boats like he's counting them." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Monday's the only day this town is quiet. Sit." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "You shouldn't be down here in that dress. Everyone on that cliff can see you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "I could leave this place any time. I tell myself that every Monday." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Come back next Monday. The coffee's on me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with him (30m)"
+targetType = "location"
+locationId = "the_docks"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to the water"
+targetType = "location"
+locationId = "the_docks"
+
+# ══ NOOR ════════════════════════════════════════════════════════════════════
+[[canvases]]
+id   = "noor_staff"
+name = "Noor"
+
+[canvases.trigger]
+location      = "staff_house"
+npc           = "noor"
+requires_npc  = "noor"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "17:15"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "home"
+name = "Noor"
+blocks = [
+  { type = "paragraph", content = "Noor is painting her toenails on the other bed. She doesn't look up, but she knows you're there." },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "The black one's hers, babe. Everyone here has seen it on her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Table six tips in fifties if you let him talk. Just let him talk." },
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "She used to sleep in that bed with the window open. Even in winter." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "past_she_left", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "She walked out on you, right? She did it here too. Every man upstairs thinks he's the one she'll come back for." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She's helping you. She's also watching how fast you learn." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Julian keeps asking for the new girl, babe. Don't make him ask twice." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it"
+targetType = "location"
+locationId = "staff_house"
+
+[[canvases]]
+id   = "noor_dressing"
+name = "Noor"
+
+[canvases.trigger]
+location      = "dressing_room"
+npc           = "noor"
+requires_npc  = "noor"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "17:15"
+end_time   = "18:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "Noor"
+blocks = [
+  { type = "paragraph", content = "Noor shares the long mirror with you, elbow to elbow, and times herself out loud." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "noor_refused_1", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Still saying no to my price, babe? The key's right here." } ] },
+  { type = "block_pool", blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Four minutes for the face, babe. You're at six." },
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Hands down when you walk. Nobody tips a girl who hides." },
+    { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Julian's in a mood. Stay out of his line of sight till eight." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "danas_red_dress", operator = "equipped" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Red suits you, babe. Suited her too. Table six asked for the girl in red tonight." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Table six asked for you, babe. I told him you were busy. Go prove me wrong." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Finish your face"
+targetType = "location"
+locationId = "dressing_room"
+
+[[canvases]]
+id   = "noor_bar"
+name = "Noor"
+
+[canvases.trigger]
+location      = "bar_floor"
+npc           = "noor"
+requires_npc  = "noor"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:00"
+end_time   = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "floor"
+name = "Noor"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "reputation", operator = "gte", value = 5 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Fine. You win the old man. Leave me table six, babe." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Watch me, babe. This is how you pour for a man who's paying." } ] },
+  { type = "paragraph", content = "She bumps you with her hip on the way past, hard enough to spill nothing, but hard enough to make the point." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "Noor leans over table four until the member there forgets his wife's name. She winks at you over his head." },
+    { type = "paragraph", content = "Noor laughs at a joke you know isn't funny. The member tips her double, and she tucks it into her garter where you can see it." },
+    { type = "paragraph", content = "Noor steals your table when you're at the bar, then gives it back an hour later with the bill already paid. She doesn't explain." },
+  ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "ade_stage", operator = "gte", value = 1 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Ade poured you a drink after close, I heard. Julian doesn't like staff with staff, babe." } ] },
+  { type = "paragraph", content = "She tops up a member's glass without looking at it." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 1 } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "So the old man chose you. Fine. Saturday, the pool, after close. Come and see how it's done." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "The pool's mine on Saturdays after close, babe. You can come and watch." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to your tables"
+targetType = "location"
+locationId = "bar_floor"
+
+[[canvases]]
+id   = "noor_pool"
+name = "Noor"
+
+[canvases.trigger]
+location      = "pool_terrace"
+npc           = "noor"
+requires_npc  = "noor"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [5]
+start_time = "22:00"
+end_time   = "00:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "water"
+name = "Noor"
+blocks = [
+  { type = "paragraph", content = "Noor floats on her back in the lit water, naked, and doesn't care who's at the rail." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "noor_refused_2", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Watching again, babe? The men at the rail don't pay to watch you watch." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Saturday's my night, babe. Get in or get out of my light." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Get in with her (30m)"
+targetType  = "node"
+nodeId      = "noor_pool.in"
+flagEffects = [ { targetType = "player", flag = "noor_refused_2", op = "unset" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Refuse: \"It's all yours.\""
+targetType  = "node"
+nodeId      = "noor_pool.no"
+flagEffects = [ { targetType = "player", flag = "noor_refused_2", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "in"
+name = "In the water"
+blocks = [
+  { type = "paragraph", content = "You slide in beside her. She splashes you, then floats close enough that your shoulders touch, and the men at the rail go quiet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Next Saturday, babe, we charge them for it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Climb out"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "pool_terrace"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "no"
+name = "All yours"
+blocks = [
+  { type = "paragraph", content = "Noor laughs and ducks under, and comes up on her back for the rail." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "It always was, babe. See you on the floor Tuesday." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave her the pool"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "pool_terrace"
+time_progression_minutes = 5
+
+# ══ KESSLER ═════════════════════════════════════════════════════════════════
+[[canvases]]
+id   = "kessler_bar"
+name = "Kessler"
+
+[canvases.trigger]
+location      = "bar_floor"
+npc           = "kessler"
+requires_npc  = "kessler"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "17:30"
+end_time   = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "table"
+name = "Kessler's table"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 1 } ] }, blocks = [ { type = "paragraph", content = "Kessler taps the page on his table with one finger when you pass. He doesn't need to say where." },
+               { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "After close, girl." } ] },
+  { type = "group", blocks = [ { type = "paragraph", content = "Kessler sits at his corner table with a page held too close to his face. When you come by, he stops pretending to read it and watches you instead." },
+                              { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Library. After close." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pour his whisky"
+targetType = "location"
+locationId = "bar_floor"
+
+[[canvases]]
+id   = "kessler_library"
+name = "Kessler"
+
+[canvases.trigger]
+location      = "library"
+npc           = "kessler"
+requires_npc  = "kessler"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "22:00"
+end_time   = "23:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "kessler_stage"
+operator  = "gte"
+value     = 1
+
+[[canvases.nodes]]
+id   = "chair"
+name = "Read to him"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "kessler_hand_refused", operator = "is_true" } ] }, blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "You pushed my hand away last time, girl. I'll ask first tonight. Stand in the light." } ] },
+  { type = "paragraph", content = "He settles back in the armchair and gives you the page." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 4 } ] }, blocks = [
+      { type = "video", props = { pool_dir = "sex/kessler_read_t5", pool = 3, description = "An old man in an armchair with his hand up a standing woman's dress while she reads from a page", search_queries = ["old man hand up dress woman reading", "armchair man fingering standing woman"] } },
+      { type = "paragraph", content = "You read standing beside his chair, the page shaking in your hand. Kessler's hand slides up the back of your thigh and under your dress. He cups your ass. Then his fingers slip between your legs and press your cunt through your panties. \"Keep reading.\" You read. He rubs you in slow circles until your nipples show through the dress and your cunt is soaking his fingers." } ] },
+  { type = "group", blocks = [
+      { type = "paragraph", content = "He hands you a page he's already heard, a letter from somebody else's sister, and settles back to listen." },
+      { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Not hers tonight, girl. Just read. I like your voice." } ] },
+  { type = "paragraph", content = "He turns his whisky glass once on the arm of the chair." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "swam_for_the_rail", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Noor tells me you swam for the rail on Saturday. I wasn't invited, girl. Next time I will be." } ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Tomorrow night, girl. Same chair, same light." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Read until he sends you away: \"Tomorrow, girl.\" (30m)"
+targetType  = "location"
+locationId  = "library"
+time_progression_minutes = 30
+flagEffects = [ { targetType = "player", flag = "kessler_hand_refused", op = "unset" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to the fire"
+targetType = "location"
+locationId = "club"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Push his hand away: \"Just the page tonight.\" (30m)"
+targetType  = "location"
+locationId  = "library"
+time_progression_minutes = 30
+flagEffects = [ { targetType = "player", flag = "kessler_hand_refused", op = "set" } ]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 4 } ] }
+
+[[canvases]]
+id   = "kessler_door_shut"
+name = "Kessler's door"
+
+[canvases.trigger]
+location      = "members_floor"
+npc           = "kessler"
+requires_npc  = "kessler"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "23:00"
+end_time   = "00:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "kessler_stage"
+operator  = "lt"
+value     = 5
+
+[[canvases.nodes]]
+id   = "shut"
+name = "Kessler's door"
+blocks = [
+  { type = "paragraph", content = "Kessler's door is at the end of the corridor, shut, but there's a line of lamplight under it. You can hear a page turn." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 4 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Page five is in there. So is he. You're not ready to open that door, but you're closer every night." } ] },
+  { type = "group", blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Not yet. He hasn't asked you up." } ] },
+  { type = "paragraph", content = "Somewhere behind the door a chair creaks." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "kessler_refused_5", operator = "is_true" } ] }, blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "You walked past once tonight, girl. The door's still yours. Knock when you mean it." } ] },
+  { type = "group", blocks = [ { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "I can hear you breathing out there, girl. Not yet." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                  = "Go into Kessler's room"
+targetType            = "node"
+nodeId                = "kessler_05_his_room.inside"
+show_when_locked      = true
+locked_text           = "Not yet. You'd need more nerve, and more of the members asking for you by name."
+locked_text_threshold = "Needs page four, 10 nerve and 15 favour."
+conditions            = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "eq", value = 4 },
+  { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 },
+  { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk past it"
+targetType = "location"
+locationId = "members_floor"
+
+[[canvases]]
+id   = "kessler_room_open"
+name = "Kessler's room"
+
+[canvases.trigger]
+location      = "members_floor"
+npc           = "kessler"
+requires_npc  = "kessler"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "23:00"
+end_time   = "00:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "kessler_stage"
+operator  = "gte"
+value     = 5
+
+[[canvases.nodes]]
+id   = "open"
+name = "Kessler's room"
+blocks = [
+  { type = "paragraph", content = "Kessler's door stands open for you now. He's by the window with page five on the table, and he doesn't turn round." },
+  { type = "dialog", props = { speaker = "npc", npcId = "kessler" }, content = "Page five is yours when the next release is, girl. Until then, come and stand in the light." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stand in his light (30m)"
+targetType = "location"
+locationId = "members_floor"
+time_progression_minutes = 30
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say goodnight"
+targetType = "location"
+locationId = "members_floor"
