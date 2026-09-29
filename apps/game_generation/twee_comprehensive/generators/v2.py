@@ -1053,6 +1053,9 @@ class TweeComprehensiveGeneratorV2:
             # unauthored, so a game without hours has the payload it had before.
             if loc_props.get("hours"):
                 locations_map[loc_slug]["hours"] = loc_props["hours"]
+            # EN11 — an area's toll, read by setup.crossingCostsFor. Absent when unauthored.
+            if loc_props.get("crossing_costs"):
+                locations_map[loc_slug]["crossing_costs"] = loc_props["crossing_costs"]
             # EN4 — read by setup.locFound. Absent when unauthored, like `hours`.
             if loc_props.get("hidden_until"):
                 locations_map[loc_slug]["hidden_until"] = loc_props["hidden_until"]
@@ -5422,7 +5425,7 @@ setup.getLocationCostTag = function(slug) {{
 setup.getLocationCostBlockedMessage = function(slug) {{
     return setup.getCostBlockedMessage(setup.locationCostTraitArray(slug));
 }};
-
+{self._crossing_costs_js()}
 // ===== Lock-as-prose on the nav surface =====
 // Is this destination's door open right now? Versionless/empty conditions fail OPEN
 // (matches the passage-entry guard + the global condition evaluator), so a location
@@ -10550,6 +10553,71 @@ setup._findHelperTransitionLocation = (function (orig) {
         return name;
     };
 })(setup._findHelperTransitionLocation);
+"""
+
+    def _has_crossing_costs(self) -> bool:
+        return any((getattr(loc, 'properties', None) or {}).get('crossing_costs')
+                   for loc in self.locations)
+
+    def _crossing_costs_js(self) -> str:
+        """EN11 — an area's toll. Empty unless some container declares crossing_costs."""
+        if not self._has_crossing_costs():
+            return ""
+        parents, redirects = {}, {}
+        for loc in self.locations:
+            slug = self._location_nav_slug(loc)
+            parent = getattr(loc, 'parent_location', None)
+            if parent is not None:
+                parents[slug] = self._location_nav_slug(parent)
+            if getattr(loc, 'is_container', False) and getattr(loc, 'default_entry_location', None):
+                redirects[slug] = True
+        return """
+// ===== EN11 — crossing costs =====
+// An AREA is a container and everything below it. Its crossing_costs are charged once,
+// when she moves to a place inside it from a place outside it — the container page or a
+// direct link to any inner room. Moves inside the area pay only each room's own costs;
+// leaving is free. A container with a default_entry only redirects, so the crossing is
+// charged on the room it lands on, once. No previous place (game start) = no crossing.
+setup.loc_parent = """ + json.dumps(parents) + """;
+setup.loc_redirect = """ + json.dumps(redirects) + """;
+setup._locAncestors = function (slug) {
+    var out = [], s = slug, guard = 0;
+    while (s && guard++ < 64) { out.push(s); s = setup.loc_parent[s]; }
+    return out;
+};
+setup.crossingCostsFor = function (destSlug, curId) {
+    if (!curId || setup.loc_redirect[destSlug]) return [];
+    var curSlug = (setup._getLocUuidToSlug() || {})[curId] || curId;
+    var inside = setup._locAncestors(curSlug), out = [];
+    setup._locAncestors(destSlug).forEach(function (a) {
+        var cc = ((setup.locations || {})[a] || {}).crossing_costs;
+        if (cc && inside.indexOf(a) === -1) out.push(cc);
+    });
+    return out;
+};
+setup.crossingTraitArray = function (list) {
+    var arr = [];
+    list.forEach(function (cc) {
+        Object.keys(cc).forEach(function (k) { if (k !== 'time') arr.push({ trait: k, value: Number(cc[k]) }); });
+    });
+    return arr;
+};
+// One entry per trait, summed — a room's cost and an area's toll on the same trait are one bill.
+setup.mergeCostArrays = function (arr) {
+    var by = {}, order = [];
+    arr.forEach(function (c) {
+        if (!(c.trait in by)) { by[c.trait] = 0; order.push(c.trait); }
+        by[c.trait] += Number(c.value);
+    });
+    return order.map(function (t) { return { trait: t, value: by[t] }; });
+};
+setup.deductCrossingCosts = function (list) {
+    list.forEach(function (cc) {
+        var mins = Number(cc.time || 0);
+        if (mins > 0 && typeof window.advanceTime === 'function') window.advanceTime(mins);
+    });
+    setup.deductCostArray(setup.crossingTraitArray(list));
+};
 """
 
     def _has_location_hours(self) -> bool:
@@ -17369,12 +17437,41 @@ window.devGoBack = function() {
         # move. Runs AFTER rent/clothing so a blocked entry never charges (no
         # double-charge on retry). Only emitted when some location declares costs;
         # otherwise movement stays free (backward-compatible).
+        has_crossing_costs = self._has_crossing_costs()  # EN11
         has_location_costs = any(
             (getattr(loc, 'properties', None) or {}).get('entry_costs')
             for loc in self.locations
-        )
+        ) or has_crossing_costs
         travel_cost_block = ""
-        if has_location_costs:
+        if has_crossing_costs:
+            # EN11 — the same intercept, plus the areas this move crosses into. One bill:
+            # the room's cost and every toll, checked together, charged together.
+            travel_cost_block = """
+    // Travel-friction intercept: charge entry cost (and any area crossing) on a genuine move.
+    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
+        var travelSlug = (setup.passage_to_location || {})[psg];
+        if (travelSlug) {
+            var destLoc = (setup.locations || {})[travelSlug] || {};
+            var curLoc = (sv.player && sv.player.current_location) || "";
+            // Only a real move (entering a DIFFERENT location) is charged — re-entry
+            // and back-from-a-menu are free.
+            if (String(destLoc.id) !== String(curLoc)) {
+                var crossCosts = setup.crossingCostsFor(travelSlug, curLoc);
+                var tripTraits = setup.mergeCostArrays(
+                    setup.locationCostTraitArray(travelSlug).concat(setup.crossingTraitArray(crossCosts)));
+                if (!setup.checkCostsAffordable(tripTraits)) {
+                    sv._travel_block_message = setup.getCostBlockedMessage(tripTraits);
+                    sv._travel_block_destination = psg;
+                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
+                    return;
+                }
+                setup.deductLocationCosts(travelSlug);
+                setup.deductCrossingCosts(crossCosts);
+            }
+        }
+    }
+"""
+        elif has_location_costs:
             travel_cost_block = """
     // Travel-friction intercept: charge entry cost on a genuine move.
     if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {

@@ -174,10 +174,10 @@ Ship the grant that way from the start and the version boundary can never strand
 | `last_version` / `last_schema` | the release **currently running**, restamped by `:passagestart` whenever it changes |
 
 `*_schema` is a fingerprint of the trait/flag key surface and the corruption tiers
-(`Config.saves.version`, `v2.py:3388`). Two builds with the same number are join-compatible on
+(`Config.saves.version`, `v2.py:3391`). Two builds with the same number are join-compatible on
 everything §3 and §4 govern; two different numbers mean something in that surface moved.
 
-**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3409`) logs the comparison
+**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3412`) logs the comparison
 and returns. Throwing from there would abort the load with a dialog — that *is* the reject-on-mismatch
 handler the stamp was minted for, and it stays unused on purpose: the backfill heals the mismatches a
 player can actually hit, and refusing a save costs somebody their whole run over a difference they

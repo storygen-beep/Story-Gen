@@ -204,6 +204,11 @@ class TemplateLocation:
     # EN4 — {flag = "<player flag>"}: the place is not listed, and its name is withheld,
     # until that flag is true. Empty = always listed, exactly as before.
     hidden_until: Dict[str, Any] = field(default_factory=dict)
+    # EN10 — "thoroughfare" (a place she passes through) or "destination" (a place she
+    # goes to do something). None = not written = a destination. Nothing in the engine
+    # reads it; the release checks do (DC7 / CK7). Never "hub": that word already means
+    # a character's hub canvas.
+    kind: Any = None
     # A TRANSIT STOP opts out of engine-built navigation: no auto "Leave <name>" link, and an
     # empty nav list is treated as intentional rather than as a stranded location (so the
     # list-every-location fallback stays quiet). For a location the player arrives at and leaves
@@ -214,6 +219,10 @@ class TemplateLocation:
     # `time` (minutes) advances the day-cycle clock; every other key deducts that
     # player trait (e.g. energy). Empty = a free move (today's behavior).
     costs: Dict[str, int] = field(default_factory=dict)
+    # EN11 — on an AREA (a container): charged once when she enters any place inside the
+    # area from a place outside it; moves inside the area pay only each room's `costs`.
+    # Same shape as `costs`. Kept raw; validate() checks it. Empty = no crossing charge.
+    crossing_costs: Any = field(default_factory=dict)
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
     # State-reactive room prose. `description` above is the ELSE branch and stays
     # required; each variant is {conditions, text} and the generator emits them as a
@@ -2154,8 +2163,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 closed_text=_require_str(l, "closed_text", ""),
                 # Kept raw (not _require_dict) so validate() can report a non-table.
                 hidden_until=l.get("hidden_until") or {},
+                kind=l.get("kind"),
                 auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
+                crossing_costs=l.get("crossing_costs") or {},
                 clothing_rules=l.get("clothing_rules", []) or [],
                 description_variants=l.get("description_variants", []) or [],
                 # ⚠️ Nothing in this file rejects an unknown key, so a [locations.door]
@@ -4832,6 +4843,26 @@ def validate(template: GameTemplate) -> List[str]:
             elif v < 0:
                 errors.append(f"location '{l.id}' costs['{k}'] must not be negative")
 
+    # EN11 — crossing costs: an AREA's toll, same shape and rules as `costs`.
+    for l in template.locations:
+        if not l.crossing_costs:
+            continue
+        if not isinstance(l.crossing_costs, dict):
+            errors.append(
+                f"location '{l.id}' crossing_costs must be a dict (e.g. {{ time = 20, energy = 5 }})"
+            )
+            continue
+        if not l.is_container:
+            errors.append(
+                f"location '{l.id}' crossing_costs needs is_container = true: it is charged on "
+                f"entering the AREA, and a plain room has no inside to cross into (use `costs`)"
+            )
+        for k, v in l.crossing_costs.items():
+            if not isinstance(v, (int, float)) or isinstance(v, bool):
+                errors.append(f"location '{l.id}' crossing_costs['{k}'] must be a number")
+            elif v < 0:
+                errors.append(f"location '{l.id}' crossing_costs['{k}'] must not be negative")
+
     # ===== Story validation (optional) =====
     canvas_ids = {c.id for c in getattr(template, "canvases", [])}
     # A canvas's trigger location is also the passage it returns the player to
@@ -6123,6 +6154,9 @@ def validate(template: GameTemplate) -> List[str]:
     # EN4 — places hidden until found.
     errors.extend(_validate_hidden_places(template))
 
+    # EN10 — thoroughfare or destination.
+    errors.extend(_validate_location_kind(template))
+
     # EN7 — the men's numbers on the cast page.
     errors.extend(_validate_cast_traits(template))
 
@@ -6538,6 +6572,24 @@ def _validate_decay_rest(template) -> List[str]:
                 f"{ctx}.decay_after_days does nothing: '{n.id}' has no trait_decay",
                 UserWarning, stacklevel=2,
             )
+    return errors
+
+
+LOCATION_KINDS = ("thoroughfare", "destination")
+
+
+def _validate_location_kind(template) -> List[str]:
+    """EN10 — `[[locations]] kind`. Exact words only: a checker that reads "Thoroughfare"
+    or "hub" as a destination would judge the room by the wrong rule and say nothing."""
+    errors: List[str] = []
+    for li, l in enumerate(template.locations or []):
+        if l.kind is None or l.kind in LOCATION_KINDS:
+            continue
+        errors.append(
+            f"locations[{li}] '{l.id}'.kind must be \"thoroughfare\" or \"destination\", "
+            f"got {l.kind!r}" + ("; \"hub\" names a character's hub canvas, not a place"
+                                 if str(l.kind).strip().lower() == "hub" else "")
+        )
     return errors
 
 
@@ -8212,12 +8264,16 @@ def create_project_from_template(
             loc.properties["closed_text"] = l.closed_text
         if l.hidden_until:  # EN4 — MIRRORED in game_graph.py's location loop
             loc.properties["hidden_until"] = l.hidden_until
+        if l.kind is not None:  # EN10 — only when written; MIRRORED in game_graph.py
+            loc.properties["kind"] = l.kind
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False
         if l.costs:
             # int-coerce (TOML may give floats); the generator reads entry_costs.
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
+        if l.crossing_costs:  # EN11 — MIRRORED in game_graph.py
+            loc.properties["crossing_costs"] = {k: int(v) for k, v in l.crossing_costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:

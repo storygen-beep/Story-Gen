@@ -47,6 +47,14 @@
 #
 #  EN9 — "sidebar Label: N · word":
 #    a trait_words sidebar item on corr with show_value = true: "Corruption: 5 · Clean".
+#
+#  EN10 — "thoroughfare vs destination":
+#    loc_bar      kind = "thoroughfare" (read by the release checks, not the engine).
+#
+#  EN11 — "crossing costs":
+#    loc_mall     an area (is_container, off loc_shop) with crossing_costs = { time = 20 }:
+#                 20 minutes on the way in, from outside; loc_mall_food and loc_mall_shop
+#                 inside it are free to move between.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -146,6 +154,7 @@ navigation_order = ["loc_bar", "loc_shop", "loc_club", "loc_attic"]
 [[locations]]
 id          = "loc_bar"
 name        = "Bar"
+kind        = "thoroughfare"
 description = "The bar."
 entry_from  = "loc_home"
 
@@ -170,6 +179,28 @@ name         = "Attic"
 description  = "Boxes under the eaves."
 entry_from   = "loc_home"
 hidden_until = { flag = "found_attic" }
+
+[[locations]]
+id             = "loc_mall"
+name           = "Mall"
+description    = "The mall."
+entry_from     = "loc_shop"
+is_container   = true
+crossing_costs = { time = 20 }
+
+[[locations]]
+id          = "loc_mall_food"
+name        = "Food Court"
+description = "The food court."
+parent      = "loc_mall"
+entry_from  = "loc_mall"
+
+[[locations]]
+id          = "loc_mall_shop"
+name        = "Boutique"
+description = "A boutique."
+parent      = "loc_mall"
+entry_from  = "loc_mall"
 
 # ── start ────────────────────────────────────────────────────────────────────
 

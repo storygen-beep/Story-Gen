@@ -5,6 +5,94 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — EN11: an area can charge a toll on the way in (engine; checked, then built)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN11 (D10a). "Charge travel only when crossing between areas" had
+no primitive.
+
+**The check (PRD: check first).** A parent container's `costs` alone can't do it.
+- The only charge is the travel intercept. On any move to a place other than her `current_location`,
+  it charges the destination's own `entry_costs` (`deductLocationCosts`). Areas are never looked at.
+- A link from outside straight to an inner room never charges the container.
+- A container page reached back from its own room charges it again.
+
+LO chose the PRD's fallback (2026-09-30).
+
+**What changed (engine).**
+- `[[locations]] crossing_costs = {time, <trait>…}` on an area (a container, which the validator
+  requires). It is charged once when she moves to any place inside the area from a place outside
+  it: the container page, or a direct link to any inner room, however deep. Nested areas crossed
+  together are each charged.
+- Moves inside the area pay only each room's own `costs`, and leaving is free.
+- A container with a `default_entry` only redirects, so the toll is charged on the room it lands on,
+  once.
+- No previous place (game start) means no toll.
+- The room's cost and the tolls are one bill: summed per trait, checked together, and charged
+  together. If she can't afford it she goes to `TravelBlock`, and nothing is charged.
+- Runtime: `setup.loc_parent`, `setup.loc_redirect`, `setup.crossingCostsFor` and friends, plus the
+  extended intercept. All are emitted only when some area declares `crossing_costs`.
+  - A game with room costs only keeps its intercept byte-identical: members_only and the_balance both
+    have one, and both build a byte-identical index.html. So does vesper.
+- Both writers (T and G) carry the field. `validate()` errors on a non-container, a non-table, a
+  non-number or a negative value (the same rules as `costs`).
+- **Old saves:** no new state; the toll reads `current_location`. A save the pre-change build wrote
+  pays the toll crossing into the mall.
+
+**What changed (skill).**
+- `references/engine.md` travel friction: "A bridge between zones is `crossing_costs` on the area",
+  with why a container's `costs` can't do it.
+- Words +140 (137,172). `cite_check.py --fix` moved 57 citations. Each was compared with the
+  pre-change code: 49 in v2.py and 8 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_crossing_costs.py`: 12 passed. The trips:
+
+  | trip | minutes |
+  |---|---|
+  | bar → mall | 20 |
+  | mall → food | 0 |
+  | food → shop | 0 |
+  | shop → mall | 0 |
+  | mall → bar | 0 |
+  | bar → food, direct | 20 |
+
+  It also covers no previous place (0), a `default_entry` area (20 once, landing on the food court),
+  an unaffordable toll (TravelBlock, nothing charged), the old save, and the validator.
+- The fixture gained the `loc_mall` area (off `loc_shop`, so no earlier golden moves) with two rooms.
+  All EN1–EN10 tests still pass.
+- Engine suite 608 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN10: a place says whether it is a thoroughfare or a destination (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN10 (D9a · H20 · CK7). A location couldn't say whether she passes
+through it or goes there to do something, and DC7 and CK7 need that word. It is "thoroughfare", never
+"hub", because "hub" already means a character's hub canvas.
+
+**What changed (engine).**
+- `[[locations]] kind = "thoroughfare" | "destination"`; absent means a destination.
+  - It is parsed, and written to the location's properties by both writers (T and G) only when the
+    TOML sets it.
+  - `validate()` errors on anything but the two exact words, and says what "hub" means when that is
+    the word used.
+- The generator doesn't read it, so every build is byte-identical: members_only, the_balance and
+  vesper, and the fixture with and without the key.
+- **Old saves:** no runtime state and no runtime reader, so nothing changes.
+
+**What changed (skill).**
+- `references/engine.md` §22: a "`kind`" line beside `offscreen`.
+- Words +67 (137,032). `cite_check.py --fix` moved 9 citations in template_import.py, each compared
+  with the pre-change code, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_location_kind.py`: 8 passed. It covers:
+  - the fixture being clean, and the property written only when set;
+  - "hub", 3, "Thoroughfare" and "" rejected, with the hub message;
+  - byte-identical twee with and without the key.
+- The fixture's `loc_bar` is `kind = "thoroughfare"`.
+- Engine suite 596 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
 ## 2026-09-30 — EN9: a sidebar line can read "Corruption: 12 · Curious" (engine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN9 (D4). No sidebar type printed a trait's name, number and word on

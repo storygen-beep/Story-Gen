@@ -224,11 +224,15 @@ def build_game_graph(
             loc.properties["closed_text"] = l.closed_text
         if l.hidden_until:  # EN4 — MIRRORED in template_import.create_project_from_template
             loc.properties["hidden_until"] = l.hidden_until
+        if l.kind is not None:  # EN10 — MIRRORED in template_import.create_project_from_template
+            loc.properties["kind"] = l.kind
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False
         if l.costs:
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
+        if l.crossing_costs:  # EN11 — MIRRORED in template_import.create_project_from_template
+            loc.properties["crossing_costs"] = {k: int(v) for k, v in l.crossing_costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:
