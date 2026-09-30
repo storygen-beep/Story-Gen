@@ -29,7 +29,9 @@ def green_game():
         "project": {"id": "fx", "name": "fx", "starting_canvas": "opening",
                     "quests_engine": "v2"},
         "player": {"core_traits": {"money": 10}},
-        "locations": [{"id": "room_a"}, {"id": "work"}],
+        # room_a holds only A's portrait, so it opens only while she is there (D9a, CK7).
+        "locations": [{"id": "room_a", "hours": [{"open": "18:00", "close": "20:00"}]},
+                      {"id": "work"}],
         # Five rows, not one: a share on fewer than 5 cases is "too few to judge" and a
         # too-few BLOCK row is red (PRD IC21), so a green fixture needs a real sample.
         "npcs": [{"id": "npc_a", "name": "A",

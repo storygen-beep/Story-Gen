@@ -249,7 +249,9 @@ how many fails are [off].
 | explicit floor | enough **repeatable** beats carry real heat — the denominator is re-enterable beats, not every beat, so a well-built opening cannot drag the score down. The all-beats figure prints beside it, unjudged. | `register.md` · `gates.py` THRESHOLDS |
 | explicit in repeatable | the heat is where the player returns, not sealed away | `gates.py` THRESHOLDS |
 | repeatable explicit media cycles | re-entered surfaces cycle their clips instead of repeating one | `gates.py` THRESHOLDS |
-| traversal heat | most locations carry something, not just the one hot room | `the-board.md` §1 |
+| traversal heat | ~60% of destinations hold a sex scene (3+ explicit words or `_t4`/`_t5` media) | `the-board.md` §1 |
+| explicit pools by place | the old heat count: cycling explicit pools | `the-board.md` §1 |
+| a destination is never open and exit-only | each open hour has something to do alone, from the room's first opening | `the-board.md` §1 |
 | standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger | `the-board.md` §2 |
 | milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening | this file, "three kinds of content" |
 | ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step (the day roll's `traitEffects` count). The door's step skips the earnable check; a `fires_from = "opening"` step skips place, hours, person and counter read. n/a until a ladder is declared | `references/state.md` |
@@ -436,10 +438,10 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   forward*, and `playtest.reach_step` climbs it in the build — the clock and place are set per
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
-  declared door works · the pressure can be paid or is signposted · no empty rooms · the build
+  declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
   matches the release page. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
-  the walk-in floor, traversal heat, sentence length, a card per ladder step that says where and
+  the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
   when, and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.

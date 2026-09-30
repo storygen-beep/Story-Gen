@@ -7192,22 +7192,22 @@ def run_gates(model, game, state=None):
              "in the room, they talk (register.md)"]
             if ratio > NARRATION_DIALOGUE_CEILING else []))
 
-    # G5 — traversal heat: the rooms players cross constantly must not be erotically blank
-    hot_locs = set()
-    for c in model:
-        if not c["rep"]:
-            continue
-        for b in c["beats"]:
-            for m in b.media:
-                if (m.get("pool_dir") or m.get("files")) and EXPLICIT_MEDIA.search(str(m.get("pool_dir") or "")):
-                    hot_locs.add(c["loc"])
-    cold = sorted(declared - hot_locs)
-    heat_pct = 100 * len(hot_locs) / max(len(declared), 1)
-    _N["traversal heat"] = len(declared)
-    gate("traversal heat", heat_pct >= LOCATIONS_WITH_HEAT,
-         f"{len(hot_locs)}/{len(declared)} locations ({heat_pct:.0f}%) carry a cycling explicit pool "
-         f"(floor {LOCATIONS_WITH_HEAT:.0f}%)",
-         [", ".join(cold[:30])] if cold else [])
+    # G5 — traversal heat, redefined by CK7 (PRD v2 phase 4 · D9c), with the old clip-pool
+    # count kept as `explicit pools by place` and D9a's exit-only hours beside them. The three
+    # rows are built in `_ck7_rows` (above main()); this block keeps the old one's line
+    # count so every gates.py citation below it still lands.
+    #   traversal heat                               a place holds a sex scene, about 60%
+    #   explicit pools by place                      the old count, a REPORT row on --ship
+    #   a destination is never open and exit-only    joins `standing surface` on --ship
+    _ck7 = _ck7_rows(model, game, state)
+    for _g, _row in _ck7.items():
+        _N[_g] = _row[3]
+    gate("traversal heat", *_ck7["traversal heat"][:3])
+    gate("explicit pools by place", *_ck7["explicit pools by place"][:3])
+    gate("a destination is never open and exit-only",
+         *_ck7["a destination is never open and exit-only"][:3])
+    # (`standing surface` below and the exit-only gate above make one --ship row together:
+    # "no empty rooms", SHIP_BLOCK_JOINS.)
 
     # G6 — every character is findable where and when the schedule puts her.
     #
@@ -11202,12 +11202,17 @@ def selfcheck_mode():
 SHIP_REPORT_GATES = [
     "prose has room", "somebody speaks", "every hub is met first", "an explicit beat carries a clip",
     "explicit floor", "location fill", "the walk-in floor", "traversal heat",
-    "sentence length",
+    "explicit pools by place", "sentence length",
 ]
 SHIP_BLOCK_GATES = {
     "ends on an opening": "the declared door works",
     "the obligation is charged": "the pressure can be paid or is signposted",
     "standing surface": "no empty rooms",
+}
+# A BLOCK row can be two gates: the row is red when either is. An n/a join is ignored,
+# so a game with no destinations is judged on the primary gate alone (CK7, 2026-09-30).
+SHIP_BLOCK_JOINS = {
+    "standing surface": ("a destination is never open and exit-only",),
 }
 
 
@@ -11232,6 +11237,8 @@ SHIP_SINCE = {
     "full_cover": ("2026-09-30", SHIP_LADDER_ROW),
     # CK8b · I9: a substitution_only canvas's pay is not income of its own.
     "sub_income": ("2026-09-30", SHIP_BLOCK_GATES["the obligation is charged"]),
+    # CK7 · D9a: a destination is never open and exit-only (joins `standing surface`).
+    "exit_only": ("2026-09-30", SHIP_BLOCK_GATES["standing surface"]),
 }
 # The rules running in their OLD form. Empty except while `ship_rows` re-runs one row to
 # ask whether a grandfathered game would have passed before the rule changed.
@@ -11395,7 +11402,7 @@ def ship_rows(slug, root=None):
           "every --saves check passes" if rc == 0 else f"gates.py --saves {slug} fails",
           _fail_lines(lines))
     for gname, label in SHIP_BLOCK_GATES.items():
-        B(label, *_block_gate_verdict(gname, results.get(gname)))
+        B(label, *_block_row_verdict(gname, results))
 
     # ── untrue: the build against the page it claims to be ───────────────────
     if not rp:
@@ -11443,7 +11450,8 @@ def ship_rows(slug, root=None):
                    f"{len(_sjudged) - len(_sbad)}/{len(_sjudged)} spine checks pass "
                    f"(scripts/shape.py)" if _sjudged else "n/a — nothing on the spine yet",
                    _sbad[:10]))
-    shown = set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
+    shown = (set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
+             | {j for js in SHIP_BLOCK_JOINS.values() for j in js})
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(("every other gate", not red,
@@ -11464,9 +11472,8 @@ def ship_rows(slug, root=None):
                 old_ok = _ship_ladders(root, slug, game, state, people)[0]
             else:
                 old_scored, _ = score(model, game, state, os.path.join(root, "games", slug))
-                gname = labels[label]
-                old_ok = _block_gate_verdict(
-                    gname, next((r for r in old_scored if r["gate"] == gname), None))[0]
+                old_ok = _block_row_verdict(labels[label],
+                                            {r["gate"]: r for r in old_scored})[0]
         finally:
             _LEGACY_RULES.discard(rule)
         if old_ok is not False:
@@ -11474,6 +11481,20 @@ def ship_rows(slug, root=None):
             block[i] = (name, "warn", f"{head} — new since {since} ({rule}); blocks from your "
                                       f"next release", detail)
     return block, report
+
+
+def _block_row_verdict(gname, results):
+    """(ok, headline, detail) for a BLOCK row: its gate plus any SHIP_BLOCK_JOINS gates."""
+    ok, head, detail = _block_gate_verdict(gname, results.get(gname))
+    for j in SHIP_BLOCK_JOINS.get(gname, ()):
+        r = results.get(j)
+        if r is None or r["na"]:
+            continue
+        jok, jhead, jdetail = _block_gate_verdict(j, r)
+        ok = False if (ok is False or jok is False) else ok
+        head = f"{head} · {jhead}"
+        detail = list(detail)[:8] + list(jdetail)[:6]
+    return ok, head, detail
 
 
 def _block_gate_verdict(gname, r):
@@ -11761,6 +11782,269 @@ def lint_adjacent_groups(game):
                     hits.append(f"{c.get('id')}.{n.get('id')}: group {i + 1} of a run of "
                                 f"{len(run)} never renders — {why}")
     return f"{len(hits)} dead group(s) in {nruns} group chain(s)", hits
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CK7 · rooms and heat (PRD v2 phase 4 · I2 · D9a · D9c · H25, 2026-09-30)
+#
+# D9a (LO decided): a DESTINATION always offers one thing she can do alone, or it is
+# closed then. A thoroughfare (EN10 `kind = "thoroughfare"`) only routes and is exempt.
+# The gate builds a 168-hour grid per destination:
+#   open       unless its EN3 `hours` say closed;
+#   live       a canvas placed there (not random, not substitution-only) whose schedule covers
+#              the hour and whose conditions are all TRUE at the room's first-reachable
+#              state — the start state plus the room's own locks (its `entry_conditions`,
+#              EN4 `hidden_until`, and the same on every container above it) — so a room
+#              locked at the start is not read exit-only for all 168 hours. A canvas bound
+#              to a person (`npc` / `requires_npc`) counts only in hours she is scheduled
+#              there: D9a asks for something she can do ALONE.
+#   exit-only  open and nothing live. FAIL lists those hours.
+# In Her Own Hands keeps its formal-wear shop open and empty 76 of 77 hours and says so on
+# screen (`the-board.md` §1); that exception is documented, not exempted.
+#
+# D9c (LO decided): a place is HOT when it holds a sex scene — a beat with 3+ explicit
+# words, or `_t4`/`_t5` media — counting a man's own rooms and a phone-started scene under
+# his home. The engine has no home field, so his home is the place his schedule puts him
+# for the most hours. Thoroughfares, containers and offscreen labels leave the
+# denominator (the engine renders no scene in the last two). The old count — a cycling
+# explicit pool per location — stays as its own row, `explicit pools by place`.
+# ─────────────────────────────────────────────────────────────────────────────
+def _ck7_places(game):
+    return {l.get("id"): l for l in (game.get("locations") or []) if l.get("id")}
+
+
+def _ck7_is_destination(loc):
+    return not (loc.get("offscreen") or loc.get("is_container")
+                or str(loc.get("kind") or "").strip() == "thoroughfare")
+
+
+def _ck7_reach_items(places, lid):
+    """The lock items a player satisfies to stand in `lid`: its own and every parent's."""
+    items, seen = [], set()
+    while lid and lid in places and lid not in seen:
+        seen.add(lid)
+        loc = places[lid]
+        items.extend(_conditions_of({"conditions": loc.get("entry_conditions")}))
+        hu = loc.get("hidden_until") or {}
+        if isinstance(hu, dict) and hu.get("flag"):
+            items.append({"type": "flag", "subject": "player", "flag_key": hu["flag"],
+                          "operator": "is_true"})
+        lid = loc.get("parent")
+    return items
+
+
+def _ck7_reach_state(game, places, lid, base):
+    """(flags, traits) at the room's first-reachable state: `base` with its locks met."""
+    flags, traits = set(base[0]), dict(base[1])
+    for it in _ck7_reach_items(places, lid):
+        kind, key, op, val = _cond_parts(it)
+        if it.get("subject") not in (None, "player") or not key:
+            continue
+        if kind == "flag":
+            (flags.add if op == "is_true" else flags.discard)(key)
+        elif kind == "trait" and isinstance(val, (int, float)) and not isinstance(val, bool):
+            cur = traits.get(key, 0)
+            if op in ("gte", "eq") and cur < val or op == "eq" and cur != val:
+                traits[key] = val
+            elif op == "gt" and cur <= val:
+                traits[key] = val + 1
+            elif op == "lte" and cur > val:
+                traits[key] = val
+            elif op == "lt" and cur >= val:
+                traits[key] = val - 1
+    return flags, traits
+
+
+def _ck7_live_slots(canvas, game, flags, traits, ever_set, written, lid):
+    """The hour slots in which this canvas is on offer at the given state (empty = never).
+
+    Clock and presence conditions narrow the hours: `time_of_day`, and `npc_at_location`
+    (is_present / is_absent, read against his schedule rows at the place). A shape this
+    check does not read (a clothing slot, an item) counts as satisfiable, the same
+    convention `_cond_state` keeps for "unknown"; everything it does read must be open.
+    """
+    t = canvas.get("trigger") or {}
+    slots = _trigger_slots(t)
+    npcs = {n.get("id"): n for n in (game.get("npcs") or [])}
+    for it in _conditions_of(t):
+        typ = it.get("type")
+        if typ == "time_of_day":
+            slots &= _hour_slots([(None, it.get("start_time", "00:00"),
+                                   it.get("end_time", "23:59"))])
+            continue
+        if typ == "npc_at_location":
+            # No npc_id means anybody (v2.py `npc_at_location`: the room is occupied).
+            where = it.get("location_id") or it.get("location") or lid
+            there = set().union(*[_ck7_npc_slots(game, n.get("id"), where, flags, traits,
+                                                 ever_set, written)
+                                  for n in (game.get("npcs") or [])
+                                  if n.get("id") == it.get("npc_id") or not it.get("npc_id")])
+            slots = slots - there if it.get("operator") == "is_absent" else slots & there
+            continue
+        kind, key, op, val = _cond_parts(it)
+        if kind == "trait" and it.get("subject") == "npc":
+            start = ((npcs.get(it.get("npc_id")) or {}).get("core_traits") or {}).get(key, 0)
+            if _cmp(start, op, val) is False:
+                return set()
+            continue
+        if _cond_state(it, flags, traits, ever_set, written) in ("closed", "never"):
+            return set()
+    return slots
+
+
+def _ck7_npc_slots(game, npc_id, lid, flags, traits, ever_set, written):
+    """Hours `npc_id` is scheduled at `lid`; a row gated by `when` counts only if it is open."""
+    npc = next((n for n in (game.get("npcs") or []) if n.get("id") == npc_id), None)
+    rows = []
+    for r in (npc or {}).get("schedules") or []:
+        if (r.get("location") or r.get("location_id")) != lid:
+            continue
+        when = r.get("when")
+        items = list(_conditions_of({"conditions": when})) if isinstance(when, dict) else []
+        if any(_cond_state(it, flags, traits, ever_set, written) != "open" for it in items):
+            continue
+        rows.append((r.get("weekdays"), r.get("start_time", "00:00"), r.get("end_time", "23:59")))
+    return _hour_slots(rows)
+
+
+def _ck7_hours_text(slots):
+    """{(day, hour)} -> "Mon 00-07, 22-24 · Tue …", runs of hours per weekday."""
+    out = []
+    for d in range(7):
+        hs = sorted(h for dd, h in slots if dd == d)
+        if not hs:
+            continue
+        runs, a = [], hs[0]
+        for p, q in zip(hs, hs[1:] + [None]):
+            if q != p + 1:
+                runs.append(f"{a:02d}-{p + 1:02d}")
+                a = q
+        out.append(f"{_PR_DAYS[d]} {', '.join(runs)}")
+    return " · ".join(out)
+
+
+def _ck7_exit_only(game):
+    """{location id: exit-only hour slots} for every destination (empty set = none)."""
+    places = _ck7_places(game)
+    base = (_opening_flags(game) or set(),
+            dict(((game.get("player") or {}).get("core_traits")) or {}))
+    ever_set, written = _flags_ever_set(game), set(_player_trait_raises(game))
+    all_slots = {(d, h) for d in range(7) for h in range(24)}
+    out = {}
+    for lid, loc in places.items():
+        if not _ck7_is_destination(loc):
+            continue
+        flags, traits = _ck7_reach_state(game, places, lid, base)
+        hours = loc.get("hours")
+        open_slots = (_hour_slots([(h.get("weekdays"), h.get("open", "00:00"),
+                                    h.get("close", "24:00")) for h in hours])
+                      if isinstance(hours, list) and hours else set(all_slots))
+        live = set()
+        start = (game.get("project") or {}).get("starting_canvas")
+        for c in game.get("canvases") or []:
+            t = c.get("trigger") or {}
+            if c.get("id") == start:
+                continue                    # the opening has already run at any first visit
+            # A random event is not something she chooses to do, and a substitution-only
+            # canvas renders no link of its own; a one-time step still counts while open.
+            if (t.get("location") != lid or _is_dev(c) or t.get("is_active", True) is False
+                    or t.get("trigger_mode") == "random" or t.get("substitution_only")):
+                continue
+            slots = _ck7_live_slots(c, game, flags, traits, ever_set, written, lid)
+            who = t.get("npc") or t.get("requires_npc")
+            if slots and who:
+                slots &= _ck7_npc_slots(game, who, lid, flags, traits, ever_set, written)
+            live |= slots
+        out[lid] = open_slots - live
+    return out
+
+
+def _ck7_home(game):
+    """{npc id: the place his schedule puts him for the most hours}."""
+    home = {}
+    for n in game.get("npcs") or []:
+        hours = collections.Counter()
+        for r in n.get("schedules") or []:
+            lid = r.get("location") or r.get("location_id")
+            if lid:
+                hours[lid] += len(_hour_slots([(r.get("weekdays"), r.get("start_time", "00:00"),
+                                                r.get("end_time", "23:59"))]))
+        if hours:
+            home[n.get("id")] = hours.most_common(1)[0][0]
+    return home
+
+
+def _ck7_rows(model, game, state):
+    """{gate name: (ok, headline, detail, n)} for the three place rows. See the block above."""
+    places = _ck7_places(game)
+    rows = {}
+
+    # traversal heat (redefined, D9c)
+    denom = sorted(lid for lid, loc in places.items() if _ck7_is_destination(loc))
+    home = _ck7_home(game)
+    phone_npc = {}
+    for conv in ((game.get("phone") or {}).get("conversations") or []):
+        for _path, d in _walk_paths(conv):
+            for v in d.values():
+                if isinstance(v, str) and conv.get("npc"):
+                    phone_npc.setdefault(v, conv["npc"])
+    hot = set()
+    for c in model:
+        loc = c["loc"]
+        if loc == "(unplaced)":
+            who = c.get("npc") or c.get("requires_npc") or phone_npc.get(c["id"])
+            loc = home.get(who)
+        if loc not in denom:
+            continue
+        if any(b.explicit >= 3 for b in c["beats"]) or any(
+                EXPLICIT_MEDIA.search(" ".join(str(m.get(k) or "") for k in ("file", "pool_dir", "files")))
+                for b in c["beats"] for m in b.media):
+            hot.add(loc)
+    pct = 100 * len(hot) / max(len(denom), 1)
+    cold = [l for l in denom if l not in hot]
+    rows["traversal heat"] = (
+        None if not denom else pct >= LOCATIONS_WITH_HEAT,
+        f"{len(hot)}/{len(denom)} destinations ({pct:.0f}%) hold a sex scene — a beat with 3+ "
+        f"explicit words or _t4/_t5 media (floor {LOCATIONS_WITH_HEAT:.0f}%, about 60% is the target)"
+        if denom else "no destinations — nothing to heat",
+        [f"cold: {', '.join(cold[:30])}"] if cold else [], len(denom))
+
+    # explicit pools by place (the old traversal heat, unchanged)
+    declared = set(places)
+    pooled = set()
+    for c in model:
+        if c["rep"] and any((m.get("pool_dir") or m.get("files"))
+                            and EXPLICIT_MEDIA.search(str(m.get("pool_dir") or ""))
+                            for b in c["beats"] for m in b.media):
+            pooled.add(c["loc"])
+    ppct = 100 * len(pooled & declared) / max(len(declared), 1)
+    rows["explicit pools by place"] = (
+        None if not declared else ppct >= LOCATIONS_WITH_HEAT,
+        f"{len(pooled & declared)}/{len(declared)} locations ({ppct:.0f}%) carry a cycling explicit "
+        f"pool on a repeatable (floor {LOCATIONS_WITH_HEAT:.0f}%)",
+        [", ".join(sorted(declared - pooled)[:30])] if declared - pooled else [], len(declared))
+
+    # a destination is never open and exit-only (D9a)
+    name = "a destination is never open and exit-only"
+    if _legacy("exit_only"):
+        rows[name] = (None, "not judged under the rule before 2026-09-30", [], 0)
+    elif not denom:
+        rows[name] = (None, "no destinations — every place is a thoroughfare, container or "
+                            "offscreen", [], 0)
+    else:
+        eo = _ck7_exit_only(game)
+        bad = sorted((lid, s) for lid, s in eo.items() if s)
+        rows[name] = (
+            not bad,
+            f"{len(denom) - len(bad)}/{len(denom)} destinations offer something she can do alone "
+            f"in every open hour, or are closed then",
+            [f"{lid}: open with nothing to do ({len(s)} h) — {_ck7_hours_text(s)}"
+             for lid, s in bad]
+            + (["give the place a repeatable she can do alone at those hours, close it then "
+                "(`hours` + `closed_text`), or mark it `kind = \"thoroughfare\"` — the-board.md §1"]
+               if bad else []),
+            len(denom))
+    return rows
 
 
 def main():

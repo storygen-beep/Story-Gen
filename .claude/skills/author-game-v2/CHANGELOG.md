@@ -5,6 +5,53 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 CK7: rooms and heat (I2 · D9a · D9c · H25)
+
+**Why.** D9a (LO decided): a destination always offers something she can do alone, or is closed then. D9c: a
+place is hot when it holds a sex scene, about 60% of places. Neither had a check; the old `traversal heat`
+counted clip pools only.
+
+**What changed.**
+- `scripts/gates.py`, new helpers `_ck7_*` above `main()`; the old G5 block in `score()` is replaced line for
+  line (16 → 16) so no cited line moves.
+  - Gate **`a destination is never open and exit-only`**: a 168-hour grid per destination (not a thoroughfare,
+    container or offscreen label). An hour is open unless EN3 `hours` close it, and exit-only when no canvas
+    there (not random, not substitution-only, not the opening) is live. Live means its schedule covers the
+    hour and every condition this check reads is true at the room's first-reachable state: start state plus
+    the room's own `entry_conditions` / EN4 `hidden_until` and its parents'. `time_of_day` and
+    `npc_at_location` narrow the hours; a canvas bound to a person counts only while he is scheduled there.
+    FAIL lists the hours per room.
+  - **`traversal heat` redefined**: destinations holding a beat with 3+ explicit words or `_t4`/`_t5` media; a
+    placeless scene counts at its man's home. The engine has no home field, so home = the place his schedule
+    fills most (decided here: the PRD's `home_location` does not exist). Floor 60%.
+  - **`explicit pools by place`**: the old count, unchanged, as its own gate and a REPORT row on `--ship`.
+  - `--ship`: `SHIP_BLOCK_JOINS` lets a BLOCK row be two gates; *no empty rooms* = `standing surface` + the
+    exit-only gate. `SHIP_SINCE["exit_only"] = 2026-09-30` (LO B, reusing `_legacy` / `_grandfathered`).
+- `tests/test_gates_ws6.py`: the green fixture's `room_a` holds only A's portrait, so it now opens 18:00-20:00.
+- `SKILL.md`: rows for the three gates; the `--ship` paragraph names the join and the new REPORT row.
+- `references/the-board.md`: both *(check: pending CK7)* markers removed (two in the skill; the third
+  occurrence is in this CHANGELOG, which is history); a man's home is defined.
+
+**Verified.**
+- `tests/test_gates_ck7.py`: 13 tests. Pass: an ungated activity, thoroughfares n/a, a room closed while he is
+  away, a room locked on the same flag its canvas reads, searching his room while he is out, heat 5/5.
+  Fail: portrait-only room (154 h listed), content behind a later flag (168 h), a random event only, the old
+  pool row, a phone scene at his home, a new game blocked on `--ship`, a grandfathered game WARNs.
+- Suite: 359 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (before → after):
+  - members_only: exit-only n/a → FAIL (6 rooms: bar_floor, cliff_path, club, library, members_floor,
+    pool_terrace); heat 7/11 PASS; *no empty rooms* PASS → WARN.
+  - orientation: exit-only → FAIL (halloran_office, the_back_bedroom 01-06, wes_room); heat 8/13 PASS;
+    *no empty rooms* FAIL → FAIL (standing surface already red).
+  - probation: → FAIL (martys, the_county_office, the_stairwell); heat 6/7 PASS; PASS → WARN.
+  - the_balance: → FAIL (10 rooms); heat 1/20 FAIL; FAIL → FAIL.
+  - vesper_two: → FAIL (bastien_backroom, kess_berth, mercer_room, penthouse); heat 10/15 PASS; PASS → WARN.
+  Every red was read canvas by canvas: rooms whose only canvas is a man's portrait, rooms whose activity waits
+  on a flag set elsewhere, a random event as the only content, halls not marked thoroughfare. Two check faults
+  were found and fixed first: unread condition shapes counted as never-live, and one-time steps were ignored.
+
+words: 139,102 → 139,154 (+52) · running total 139,154 / 149,283. Over the ≤ 0 aim: three scoreboard rows.
+
 ## 2026-09-30 — Phase 4 L1: lint `adjacent groups` (I27)
 
 **Why.** Review I27: the group-chain trap bit twice in the fix pass. Adjacent `group` blocks compile to ONE

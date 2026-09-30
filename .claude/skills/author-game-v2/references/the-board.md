@@ -40,7 +40,7 @@ Write the list of places that answer at least one of those, and count it. That i
 > ⚠️ **Two kinds of place** *(LO decided, D9 · D10)*. A **thoroughfare** (`kind = "thoroughfare"`,
 > `engine.md` §22) only routes: a corridor, a lobby, a street. A **destination** — the default —
 > always offers one thing she can do alone, or it is closed then (`hours` + `closed_text`,
-> `engine.md` §22) *(check: pending CK7)*. A room that is neither is not a location yet. One passing
+> `engine.md` §22) A room that is neither is not a location yet. One passing
 > game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
 > and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
 
@@ -124,7 +124,7 @@ the end. A ratio gate cannot be satisfied by working elsewhere; the target moves
 **Cold rooms are allowed.** Not every place is erotic — the reference game had no sexual
 content in 8 of its 25 locations (a police station, a museum). **A place is hot when it holds at least
 one sex scene** *(LO decided, D9c)*, counting the men's own rooms and a phone-started scene under the
-man's home. About **60% of places** are hot, not 100% *(check: pending CK7)*.
+man's home (where his schedule puts him most). About **60% of places** are hot, not 100%.
 
 ---
 
