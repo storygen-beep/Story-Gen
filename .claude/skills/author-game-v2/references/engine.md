@@ -464,7 +464,8 @@ wardrobeEffects = [
 ```
 
 Exact path: `canvases[].nodes[].exit_block.config.wardrobeEffects`. Fields are **`action`** and
-**`item_id`** — not `op` / `itemId`.
+**`item_id`** — not `op` / `itemId`. `action` is `add` (into the wardrobe) or `equip` (added and put on:
+`setup.addToWardrobe` + `setup.equipItem`, `_get_wardrobe_effects_for_node`, `v2.py:15554`).
 
 **⚠️ THE FAILURE CLASS: an unrecognised key is silently ignored.** I first wrote
 `clothingEffects = [{ itemId = "…", op = "grant" }]`. The TOML parsed, the validator passed, the
@@ -1584,31 +1585,36 @@ and there is no equivalent for places or activities. `references/the-clock.md` C
 
 ## 33. Money on the screen — where the engine prints it, and in what notation
 
-The generator prints a money figure at **sixteen sites**. `[settings.rent] currency_symbol`
-governs **five**, every one on the rent pages. Eight hardcode `$`; three print no notation at all. This is why a game that never
+The generator prints a money figure at **twenty-two sites**. `[settings.rent] currency_symbol`
+governs **eleven**, every one on the rent pages. Eight hardcode `$`; three print no notation at all. This is why a game that never
 declares a symbol still ends up with more than one, and why declaring a symbol other than `$` does
 not give you one either.
 
 ### 33.1 The census
 
+Re-read line by line on 2026-09-30.
+
 | notation | where | `v2.py` |
 |---|---|---|
-| **honours `currency_symbol`** | `RentDay` — the collector's default greeting | `:15922` |
-| | `RentDay` — *"You have X. Rent is Y."* (2 prints) | `:15926` |
-| | `RentDay` — the `Pay $N rent` button | `:15929` |
-| | `RentDay_Paid` — remaining money | `:15968` |
-| | `RentDay_Short` — *"You have: … You need: …"* (2 prints) | `:17804` |
-| **hardcodes `"$"`** | the clothing shop — balance | `:2018` |
-| | the clothing shop — item prices (3 prints) | `:2075` `:2078` `:2081` |
-| | the phone job board — a job's income | `:2926` |
-| | the phone bank — balance, and cash | `:2960` `:2961` |
-| | the bank-interest notification | `:5618` |
-| **no notation at all** | an unaffordable choice — *"Requires 3 Money (you have 1)"* | `:4680` |
-| | a location's nav cost tag — *"30m · 3 Money"* | `:4731` |
-| | the sidebar `trait_bar` — *"money: 12 / 100"* | `:16241` |
+| **honours `currency_symbol`** | `RentDay` — the collector's default greeting | `:18182` |
+| | `RentDay` — *"You have X. Rent is Y."* (2 prints) | `:18186` |
+| | `RentDay` — the `Pay $N rent` button | `:18189` |
+| | `RentDay` — *"Owed from last week"* (`on_short = "carry"`) | `:18138` |
+| | `RentDay` — the pay-what-you-have button (carry) | `:18147` |
+| | `RentDay_Paid` — remaining money | `:18228` |
+| | `RentDay_Short` — *"You have: … You need: …"* (2 prints) | `:18261` |
+| | the carried-week screen — *"You paid … Carried to next week …"* (2 prints) | `:13577` |
+| **hardcodes `"$"`** | the clothing shop — balance | `:2168` |
+| | the clothing shop — item prices (3 prints) | `:2225` `:2228` `:2231` |
+| | the phone job board — a job's income | `:3077` |
+| | the phone bank — balance, and cash | `:3111` `:3112` |
+| | the bank-interest notification | `:6320` |
+| **no notation at all** | an unaffordable choice — *"Requires 3 Money (you have 1)"* | `:5368` |
+| | a location's nav cost tag — *"30m · 3 Money"* | `:5415-5419` |
+| | the sidebar `trait_bar` — *"Money: 12 / 100"* | `:18524` |
 
-`self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1152`.
-Emitted to the runtime only when rent is enabled (`v2.py:3123`), so a game without
+`self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1212`.
+Emitted to the runtime only when rent is enabled (`v2.py:3445`), so a game without
 `[settings.rent]` has no symbol setting at all.
 
 `RentDay_Short` is the one every rent game reaches: the branch taken when the player cannot pay,
@@ -1619,32 +1625,31 @@ screen. It covers nothing else — the eight sites above still print `$`.
 ### 33.2 The symbol is a prefix
 
 Every honouring site concatenates symbol-then-number:
-`"Pay " + _cur + _rent + " rent"` (`v2.py:17382`),
+`"Pay " + _cur + _rent + " rent"` (`v2.py:18189`),
 `<<print _cur>><<print _money>>` (`v2.py:18186`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
-### 33.3 The sidebar ignores `[[traits.labels]]`
+### 33.3 The sidebar's label
 
 ```
-<<set _traitLabel to _item.label || _tbKey>>     v2.py:16215
-<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:16241
+<<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>     v2.py:18498
+<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:18524
 ```
 
-A `trait_bar` takes its label from **the sidebar item's own `label` key**, falling back to the raw
-trait key. `setup.trait_labels` is read only by `_labelForTrait` (`v2.py:6781`), which formats
-*condition* text — hint lines and blocked-choice reasons. So
-`[[traits.labels]] key = "money", label = "Change bag"` does **not** rename the sidebar readout.
+A `trait_bar` takes its label from the sidebar item's own `label`, and falls back to the trait's one
+name (`setup.traitLabel`, `v2.py:4191`, EN5), so `[[traits.labels]] key = "money", label = "Change
+bag"` now names the sidebar readout too (§30).
 
-And `_traitMax` defaults to 100 (`v2.py:16214`), so an uncapped counter renders as a fraction of a
-maximum it does not have: a money trait with no `max` prints **`money: 12 / 100`** over a 12% fill
-bar. Set `label`, and set `max` to something the currency will not exceed, or use
-`trait_status_text`.
+`_traitMax` defaults to 100 (`v2.py:18497`), so an uncapped counter renders as a fraction of a
+maximum it does not have: a money trait with no `max` prints **`Money: 12 / 100`** over a 12% fill
+bar. Set `max` to something the currency will not exceed, or show money as `trait_words` with
+`show_value = true` and no bands (*"Money: 140"*, §30).
 
 ### 33.4 A choice's price is never rendered when the player can afford it
 
 An affordable choice renders its authored label and nothing else. The engine speaks a price **only
-on the failure path** — `getCostBlockedMessage` (`v2.py:4656`) emitted into
-`<span class="locked-choice">` at `v2.py:13140`:
+on the failure path** — `getCostBlockedMessage` (`v2.py:5358`) emitted into
+`<span class="locked-choice">` at `v2.py:14763`:
 
 ```
 affordable      Feed the meter ($3)                        exactly what the author typed
@@ -1657,7 +1662,7 @@ gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
 
 ### 33.5 `[[traits.labels]] unit` is dead
 
-The importer reads it (`template_import.py:2885`) and stores it in project metadata (`:6310`). No
+The importer reads it (`template_import.py:3332`) and stores it in project metadata (`:7813`). No
 generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
 pluralising a currency.
 
@@ -2742,3 +2747,50 @@ free = true
 
 `play` skips only the place and the hours; the scene's own effects move the counter. It skips the
 canvas's costs too.
+
+---
+
+## 49. A one-time step is used on its yes — `consume_on`
+
+**Opt-in (EN1, 2026-09-30).** By default a one-time canvas is used up when its first screen shows, so a
+no on screen 2 can never come back. With `consume_on = "exit"` on the trigger, the step is used only by
+the choice that says so:
+
+```toml
+[canvases.trigger]
+consume_on       = "exit"
+retry_after_days = 2          # the wait when she leaves without deciding (default 1)
+
+# on a choice — at most one of the three:
+consumes = true               # the yes: the step is used up
+final    = true               # the warned no: used up, and sets the flag <canvas>_closed
+retry_after_days = 3          # a parked no: the step comes back after 3 days
+```
+
+- The record is `$game_state.canvas_state[id] = {consumed, retryDay, closed, open}`; node 0's fired
+  mark in `trigger_history` is unchanged and still drives day limits and decay contact
+  (`setup.canvasOptedIn` and the readers after it, `v2.py:4729`; the choice decision, `v2.py:15328`).
+- Leaving mid-scene with none of the three parks the step for the trigger's `retry_after_days`, so a
+  no cannot be farmed.
+- Keys: `template_import.py:836-845` (trigger), `:1018-1024` (choice). A canvas that does not opt in
+  behaves exactly as before. The rule it serves is `the-arc.md` A3.
+- **Old saves:** a step fired before the change, with no record, reads as used up.
+
+---
+
+## 50. Decay settles at a rest point — `trait_rest`, `decay_after_days`
+
+**EN8, 2026-09-30, a deliberate global change.** `setup.decayToward` (`v2.py:10789`) moves a decaying
+trait toward its rest point from either side and never crosses it, in both nightly loops. A value below
+0 now climbs toward 0 instead of snapping to it.
+
+```toml
+[[npcs]]
+id               = "npc_…"
+trait_rest       = { trust = 20 }   # where his trust settles (default 0)
+decay_after_days = 7                # decay starts only after 7 days without contact
+```
+
+- Contact records `$npcs[id].last_contact_day`. Keys: `template_import.py:144-147`.
+- **Old saves:** an undefined contact day counts as contact today, so the wait starts now.
+

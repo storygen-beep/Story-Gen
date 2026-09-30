@@ -115,7 +115,7 @@ one's explicit beat comes from outside the arc: a stranger or a one-off (A15).
 **One rule** (LO decided, D6; R2 K7):
 
 - **An ordinary no is parked.** The step comes back after the author's wait (`retry_after_days` on the
-  no, with the step's trigger set to `consume_on = "exit"`, EN1), and his next line may remember it:
+  no, with the step's trigger set to `consume_on = "exit"`, `engine.md` §49), and his next line may remember it:
   a pushy man says so, a nice man drops it.
 - **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
   It closes his story, never the person: he stays in the world.

@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC11: engine facts documented — one-time steps on yes, decay to a rest point, equip, and the money census (engine docs)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC11 (EN1–EN4, EN6–EN8, EN10, EN11 · I8). `engine.md` is the one home for engine
+facts (the-arc.md "The engine, verified").
+- Checked on 2026-09-30 and already documented, so only checked:
+  - EN2 in §26 (DC3);
+  - EN3, EN4, EN10, EN11 in §22;
+  - EN5, EN6, EN9 in §30;
+  - EN7 in §34.
+- **Missing:** EN1 and EN8. Wardrobe `equip` was undocumented (I8).
+- The §33.1 census's bare line numbers were stale, as the PRD found at EN2c review.
+
+**What changed.** `references/engine.md`:
+- **§49 (new): a one-time step is used on its yes.**
+  - Keys: `consume_on = "exit"` and the trigger's `retry_after_days`; on a choice, one of `consumes` / `final` /
+    `retry_after_days`.
+  - The `canvas_state` record; node 0's mark is unchanged.
+  - Old saves: a fired step with no record reads as used up.
+  - Cites `v2.py:4729`, `:15328` and `template_import.py:836-845`, `:1018-1024`. the-arc.md A3 points here.
+- **§50 (new): decay settles at a rest point.**
+  - `setup.decayToward` (`v2.py:10789`), `[[npcs]] trait_rest` and `decay_after_days`, and `last_contact_day`.
+  - Old saves: an undefined contact day counts as today.
+- **§17:** `action = "equip"` adds the garment and puts it on (`v2.py:15554`).
+- **§33:**
+  - the census is re-read line by line: twenty-two sites, not sixteen. The symbol governs eleven, because EN2b
+    added the owed line, the pay-what-you-have button and the carried-week screen. Eight hardcode `$`; three
+    carry no notation.
+  - `rent_currency_symbol` is at `:1212` and its emit at `:3445`.
+  - §33.2 and §33.4 citations are refreshed. §33.5 is refreshed to `template_import.py:3332`, `:7813`.
+  - **§33.3 is corrected.** "The sidebar ignores `[[traits.labels]]`" was false since EN5: a `trait_bar` falls
+    back to `setup.traitLabel` (`v2.py:18498`).
+
+**Verified.**
+- Every new citation was read by hand. The 14 stale line strings are at 0.
+- Suite: 329 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,711 → 139,103 (+392) · running total 139,103 / 149,283. The growth is two engine sections EN1 and EN8
+needed, plus five new census rows.
+
 ## 2026-09-30 — DC9e: stop at every phase boundary; before TOML the check is shape.py (process)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9e (G2 · H16 · I21):
