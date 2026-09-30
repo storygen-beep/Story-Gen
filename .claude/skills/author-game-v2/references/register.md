@@ -331,8 +331,8 @@ numbers only: 84.6% of 39 willingness pairs put the composure on the high branch
 
 ## What a scene contains
 
-**Every scene with a named person answers seven tests, one line each.** The first three go on its
-scene sheet (`the-sheets.md` S1); `v2-reader` judges all seven (`agents.md`, The Reader).
+**Every scene with a named person answers nine tests, one line each.** The first three go on its
+scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The Reader).
 
 1. **Want** — what this person visibly wants here. On a sexual step, an **earlier** scene has already
    shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on.
@@ -345,6 +345,9 @@ scene sheet (`the-sheets.md` S1); `v2-reader` judges all seven (`agents.md`, The
 6. **The written no** — where there is an offer, a refusal exists, is written and is priced
    (`the-surfaces.md` R5b).
 7. **The body** — an explicit beat stays on the body to its last sentence (the pivot, above).
+8. **The numbers agree** — every number the scene states agrees with the Want and the ledger.
+9. **Companion and rival** — where `want.companion_is_rival` is declared, her scenes show both the help
+   and the competition *(LO decided, D15)*.
 
 ## One event, several levels
 

@@ -129,6 +129,12 @@ python3 scripts/gates.py --release <slug>
 > ⚠️ **The rule is LO's and it is not the obvious one: dev mode and missing media block RELEASE, not
 > testing** — a test build with labelled placeholders and a jump list is a *good* test build.
 
+**6b. Read** *(LO decided, D12)*. Run `v2-reader` on every canvas **touched** this release: its id is
+new, or its TOML table differs from the one in the last shipped release's `7_final_game.toml`, read at
+`releases[].commit`. With no shipped release, every canvas is touched. Save its verdicts in
+`release_page.reader` and LO's waivers in `release_page.reader_waivers`; a FAIL with no waiver blocks the
+release *(check: pending NC1)*. The reader can be wrong either way, and LO's playthrough is the final say.
+
 **7. Log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
 own-words count and anything you consciously left. A number in the ledger is one that has to come
@@ -366,6 +372,7 @@ signature of doctrine living in the wrong place:
    the field, the sidebar footer it renders and its four `file:line`s are `engine.md` §38.
 5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
 6. **`v2_state.json` promises reconciled** — paid or cut, per *Named but never paid* above.
+6b. **The reader has run** on every touched canvas (loop step 6b), its verdicts saved.
 7. **`gates.py --ship <slug>` exits 0** — run by `scripts/release_upload.py` before it packages
    anything, and by `scripts/hooks/pre-commit` when this commit stages the build or the portal
    entry without `dev: true`. The release page (`release_page` in `v2_state.json`) is signed by LO
@@ -374,7 +381,8 @@ signature of doctrine living in the wrong place:
    each unlock can be earned, then plays the build with `playtest.reach_step` — which sets the
    clock and the place for each step and applies its declared gate, but never the step counter,
    so step 3 is reached only if steps 1 and 2 really moved it.
-8. **`releases[]` gets `repeatables` and `ladder_steps`** — the lint *repeatables without a step*
+8. **`releases[]` gets `repeatables`, `ladder_steps` and `commit`** (the git commit it shipped from;
+   the next release's step 6b diffs against it) — the lint *repeatables without a step*
    compares the next release against them.
 
 **`dev: true` and `version` are mutually exclusive.** One says not published; the other says this is

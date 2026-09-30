@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC10: the reader is required every release, and its verdicts gate (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC10 (D12 · I1 · B6 · D15). `v2-reader` was optional and its table went nowhere,
+so the scoreboard could be green while scenes failed as scenes (I1). D12 (LO): it runs on every canvas touched this
+release, before `--ship`, and its verdicts gate. The BLOCK itself is NC1, in phase 4. DC2b promised two new reader
+tests (B6, D15).
+
+**What changed.**
+- `references/the-release.md`:
+  - loop step **6b. Read**: `v2-reader` on every touched canvas (a new id, or a TOML table that differs from the
+    last shipped release's, read at `releases[].commit`; with nothing shipped, every canvas);
+  - verdicts go in `release_page.reader`, waivers in `release_page.reader_waivers`;
+  - a FAIL without a waiver blocks, with *(check: pending NC1)*;
+  - the reader can be wrong either way, and LO's playthrough is the final say.
+  - Shipping the build: a new item, 6b, and item 8 records `commit`.
+- `SKILL.md` dispatch `release` row: "gate, read, ship" (not a scoreboard row).
+- `references/state.md`: `releases[].commit`, `release_page.reader`, `release_page.reader_waivers`.
+- `references/register.md` "What a scene contains": seven tests become nine. The new two are 8 *the numbers agree*
+  (B6) and 9 *companion and rival* (LO decided, D15).
+- `references/agents.md` The Reader: it runs every release on touched canvases and returns a table plus JSON; its
+  verdicts gate (LO decided, D12; check: pending NC1).
+- `.claude/agents/v2-reader.md`:
+  - the description;
+  - how to find touched canvases (`git show <releases[-1].commit>:…`);
+  - nine tests;
+  - a JSON block the session saves.
+  - It stays read-only.
+
+**Verified.**
+- Greps: "seven tests" is 0 in register.md, agents.md and v2-reader.md; "LO reads the table" 0; "gate, ship, log"
+  0. The new keys are present in state.md.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 137,841 → 138,051 (+210) · running total 138,051 / 149,283. The growth is the new loop step, three ledger keys
+and two tests.
+
 ## 2026-09-30 — DC6a: numbers are shown and named; the toast stays; the sidebar shows the number once (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC6a (D1 · D1b · D3 · D4 · J5). LO reversed the 2026-09-25 rule "the score is

@@ -242,7 +242,9 @@ belong here; only decisions, debts, and promises do.
       "added":   { "units": 0, "words": 0, "locations": 0, "characters": 0 },
       "opened":  ["the thing now visible and locked"],
       "gates":   { "passed": 10, "of": 10 },
-      "shipped": "2026-08-10"
+      "shipped": "2026-08-10",
+      "commit":  "abc1234"                   // the git commit it shipped from; the reader's
+                                             //   "touched" diffs against it (the-release.md 6b)
     }
   ],
 
@@ -400,7 +402,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
 | `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
-| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. Absent means `--ship` FAILS: nothing says what the release is |
+| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 

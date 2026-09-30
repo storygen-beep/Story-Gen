@@ -173,7 +173,7 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` | every sheet is [READY] and signed → `sheets` |
 | `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
-| `release` | run the loop — pitch, attack, write, gate, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
+| `release` | run the loop — pitch, attack, write, gate, read, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
 
 **The board phase ends in SHEETS, not in TOML.** A sandbox in this engine cannot be reviewed by playing it (Ashwell 2015, on the two
 patterns our games are built from: *"Reviewers may miss narrative content if exploration becomes
