@@ -14,7 +14,8 @@ amendment — never let it quietly stop being true.
 ## The form
 
 One page, five parts (`templates/want.md`) *(LO decided, D16)*. The detail tables live later: the crude
-words on SP2, rung numbers, needs and the map shape on the board.
+words on SP2, rung numbers, needs and the map shape on the board. Every number on the page agrees with
+every other; the reader checks it *(check: pending NC1)*.
 
 ### 0. The fantasy, the model to beat, and the promise — the idea page
 
@@ -380,7 +381,9 @@ A person with no row is a person with no reason to exist. Cut them or write it.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
-Way's Jasmin sets up her dating app [Download Finder]. Record as `want.companion`.
+Way's Jasmin sets up her dating app [Download Finder]. Record as `want.companion`. She may also be the
+rival only when declared (`want.companion_is_rival = true`), and her scenes show both the help and the
+competition *(LO decided, D15; the reader checks both sides, check: pending NC1)*.
 
 **The pressure-man** — one man whose demand drives her choices release after release. The no has a
 stated price and there is an opt-out somewhere (`the-release.md`, the pressure type). Cupid's Way's
@@ -395,7 +398,7 @@ faults its *"ZERO actress consistency"* (F95, second-hand). Record as `want.face
 ### 7. Register
 Declared elsewhere, once: `narration_person` on the board (`[settings]`, recommend `second`,
 immutable after the first release ships), and the crude words per person and rung band on SP2
-(`want.crude_ceiling`). **The crude register lives on the repeatable surfaces.**
+(`want.crude_ceiling`; a walk-on keys as `role:<name>`). **The crude register lives on the repeatable surfaces.**
 
 ## The test before you leave this file
 

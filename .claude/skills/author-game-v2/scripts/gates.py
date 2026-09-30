@@ -9981,8 +9981,17 @@ def _words_declared_names(path):
     # The protagonist. She is not in board.characters[] — she is the player — so
     # without this her own name tops her own report on every single run.
     names += [state.get("protagonist"), board.get("protagonist")]
-    names += list((state.get("want") or {}).get("why_this_person") or {})
-    names += list((state.get("want") or {}).get("crude_ceiling") or {})
+    want = state.get("want") or {}
+    names += list(want.get("why_this_person") or {})
+    # A `role:<name>` key (a walk-on with no id, PRD v2 DC2b · H34) is not a name the
+    # fiction teaches: "role:night man" would hide "night" and "man" from the report.
+    names += [k for k in (want.get("crude_ceiling") or {}) if not str(k).startswith("role:")]
+    # The Want's own people and places (DC2b · B7): the board does not exist yet in the
+    # want phase, so without these the game's own place names top its own report.
+    names += [c.get("id") for c in want.get("cast") or [] if isinstance(c, dict)]
+    for p in want.get("places") or []:
+        if isinstance(p, dict):
+            names += [p.get("id"), p.get("name")]
     for key in ("characters", "locations"):
         for entry in board.get(key) or []:
             if isinstance(entry, dict):

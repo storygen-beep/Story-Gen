@@ -43,6 +43,7 @@ belong here; only decisions, debts, and promises do.
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
     "promise":       { "goal": "…", "date": "…", "mystery": "…", "payout": "…", "rival": "npc_id" },
     "companion":     "npc_id",   // who leads her, or whom she leads
+    "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
     "face":          "…",        // one performer or one look, kept across the game
     "toggles":       [ { "id": "…", "flag": "…", "turns_off": "…" } ],
@@ -87,7 +88,9 @@ belong here; only decisions, debts, and promises do.
                               // the-want.md §6. shape.py FAILS a person (here or in
                               // board.characters[]) with no age or under 18.
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
-    "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"] },   // SP2
+    "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"],
+                         "role:night man": ["…"] },   // SP2 · a walk-on with no id: `role:<name>`
+    "places":          [ { "id": "location_id", "name": "…" } ],   // read by `gates.py --words`
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 

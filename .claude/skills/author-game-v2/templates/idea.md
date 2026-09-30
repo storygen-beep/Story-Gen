@@ -43,6 +43,8 @@ announced and then forgotten is a named player complaint. Record it as `want.pro
 ## 3. The people who carry it
 
 **The companion:** <who leads her, or whom she leads — the friend one step ahead, or one step behind>
+She may also be the rival only when declared (`want.companion_is_rival = true`), and her scenes then show
+both the help and the competition.
 
 **The pressure-man:** <optional — the man whose demand drives her choices; the price of her no, and her way out>
 

@@ -5,6 +5,50 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC2b: the Want names its places, its money and its walk-ons (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2b (B6 · B7 · I19 · D15/E7 · H34), plus `want.cast` names in `--words`
+(LO, after DC2a).
+- `--words` flagged the game's own place names in the want phase, before the board exists (B7).
+- The currency rule appeared only at the board, after amounts were set (I19).
+- Nothing said whether her companion may be her rival (E7). LO decided D15: yes, when declared, with both sides
+  shown.
+- The crude ceiling keyed only named characters (H34).
+- Nothing checked the Want's own numbers (B6).
+
+**What changed.**
+- `scripts/gates.py` `_words_declared_names` (the PRD said :9494-9530; it sits at :9952):
+  - reads `want.places[].id`/`.name` and `want.cast[].id` as names the fiction teaches;
+  - skips `role:<name>` crude-ceiling keys, which would otherwise hide "night" and "man".
+- `templates/want.md`:
+  - a `want.places[]` line;
+  - a money line: house default `$`, no real-world currency (`the-economy.md` R7);
+  - "every number on this page agrees", with *(check: pending NC1)*.
+- `templates/spine/SP4_loop_and_pressure.md`: a currency row, and R7 added to its rule pointer. R7 stays in
+  `the-economy.md` as the rule's home. "Moves" is read as "is stated from the Want on".
+- D15 *(LO decided)*: a companion may also be the rival only when declared (`want.companion_is_rival = true`),
+  and her scenes show the help and the competition. Added in:
+  - `templates/idea.md`;
+  - `references/the-want.md` §6, with *(check: pending NC1)*;
+  - `references/state.md`.
+- H34: `want.crude_ceiling` accepts `role:<name>` keys. Added in:
+  - `references/state.md`;
+  - `references/the-want.md` §7;
+  - the SP2 crude-words table.
+- B6: `references/the-want.md` "The form" says the page's numbers agree; the reader checks it (DC10 writes the
+  test).
+
+**Verified.**
+- `tests/test_gates_dc2b.py`: 3 cases.
+  - Places and cast come back as names, and "chandlery" and "oskar" leave the list.
+  - Without them, "chandlery" is listed.
+  - A `role:` key is not a name.
+- Suite: 310 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+
+words: 137,639 → 137,730 (+91) · running total 137,730 / 149,283. The growth is two new ledger keys
+(`companion_is_rival`, `places`), the `role:` form, and the D15 rule, all new decisions with no old text to
+replace.
+
 ## 2026-09-30 — DC2a: the Want is one page; every person has an age and a score he keeps (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2a (D16 · B1 · B2 · B3 · B4 · B5 · I18 · J6 · D5, pace per LO Q2). The Want

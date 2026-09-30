@@ -11,6 +11,8 @@
 
 <Her situation at minute zero. Concrete: a job, a debt, a room, a reputation.>
 
+**The places she knows:** <name each> → `want.places[] = [{id, name}]`, so `--words` reads them as names.
+
 **What she has to lose:** <the thing that makes the first transgression cost something>
 
 **The player:** `female` · `male` · `picked` — `written` · `blank` — start choice: <what she is asked at
@@ -20,6 +22,10 @@ minute zero, or `none`>. Record in `want.player`, with the start choice's flags 
 ## 2. What holds her
 
 <The hold, in her nouns, with a face and a moment it comes due.>
+
+Money is written in the currency, house default `$`; no real-world currency in the prose
+(`references/the-economy.md` R7). Every number on this page agrees with every other; the reader checks
+it *(check: pending NC1)*.
 
 **Hold kind:** `ambition` · `bill` · `order` · `body` · `subsistence` · `appetite` · `job` · `erosion` ·
 `displacement` → `want.hold_kind` (counts in `references/the-want.md` §1b).
