@@ -742,6 +742,23 @@ def universal(page, errors, game=None, rep=None):
               f"current_location = {where!r}" if where
               else "still empty after 12 steps — the funnel does not land anywhere")
 
+    # 3b · finish the opening before anything reads what it sets (PRD v2 L2 · I28).
+    #     `current_location` is set by the opening's FIRST node when that node has a place,
+    #     so the loop above can stop screens before the opening's exit sets its flags —
+    #     measured on one game: 0 of 19 cards read there, 8 once the opening had exited.
+    #     The opening is over when its funnel exits to a room — a `Location_` passage —
+    #     which may be several canvases on (a capstone the opening walks into, e.g.
+    #     `StartingCanvas_opening_…` → `Canvas_opening_club_…` → `Location_bar_floor`).
+    #     Keep taking the first link until then, and read the guidance cards once, here,
+    #     before check 5 plays every canvas and check 6 walks every room.
+    for _ in range(20):
+        if str(passage(page) or "").startswith("Location_"):
+            break
+        avail = links(page)
+        if not avail or not click(page, avail[0]):
+            break
+    cards_after_opening = quest_cards(page)
+
     # 4 · declared meters exist at runtime
     if game:
         declared = list((game.get("player") or {}).get("core_traits", {}).keys())
@@ -779,14 +796,14 @@ def universal(page, errors, game=None, rep=None):
     if not declared_cards:
         rep.na("the guidance page resolves cards", "no [[quest_cards]] declared")
     else:
-        got = quest_cards(page)
+        got = cards_after_opening
         if not isinstance(got, dict):
             rep.check("the guidance page resolves cards", False, str(got)[:60])
         else:
             n = sum(got.values())
             where = ", ".join(f"{k}:{v}" for k, v in got.items() if v)
             rep.check("the guidance page resolves cards", n > 0,
-                      f"{n} of {declared_cards} declared cards resolve at turn one"
+                      f"{n} of {declared_cards} declared cards resolve once the opening ends"
                       + (f" · {where}" if where else ""))
 
     # 8 · the world can interrupt the player.
@@ -806,18 +823,20 @@ def universal(page, errors, game=None, rep=None):
                   f"{' …' if len(dead) > 3 else ''})")
         # Sweep the clock. One hardcoded hour reads a night game as a dead world:
         # a night game's ambients are all rejected by `isCanvasValid` at noon
-        # because the whole game is scheduled after dark.
+        # because the whole game is scheduled after dark. And every weekday, not
+        # Monday alone (PRD v2 L2 · I28): an ambient scheduled Tue–Sat never came up.
         rollable = sorted({c["location"] for c in rc if c.get("chance")})
         if rollable:
             fired, hours = set(), [2, 8, 12, 16, 20, 23]
-            for hour in hours:
-                set_time(page, "Monday", hour)
-                for loc in rollable:
-                    if loc not in fired and sample_ambients(page, loc, rolls=40):
-                        fired.add(loc)
+            for day in DAYS:
+                for hour in hours:
+                    set_time(page, day, hour)
+                    for loc in rollable:
+                        if loc not in fired and sample_ambients(page, loc, rolls=40):
+                            fired.add(loc)
             rep.check("a random event actually fires", bool(fired),
                       f"{len(fired)}/{len(rollable)} locations resolved one "
-                      f"across {len(hours)} hours of a Monday")
+                      f"across {len(hours)} hours of each of the 7 days")
 
     # 9 · nothing threw during any of that
     rep.check("no uncaught page errors", not errors,

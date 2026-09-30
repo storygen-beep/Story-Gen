@@ -5,6 +5,40 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 L2: two `playtest.py` misreads (I28)
+
+**Why.** Review I28: "guidance cards" read 0 of 19 on one game, and "a random event fires" sampled Mondays only.
+Both were verified live before any change (PRD: verify first, skip one that isn't real). Both are real.
+- Guidance: the funnel loop stops as soon as `player.current_location` is set, which the opening's FIRST node
+  does. On members_only the walk went `StartingCanvas_opening_…` → `Canvas_opening_club_Node_julian` (location
+  set, `opening_done` unset) and the cards read 0; once the funnel reached `Location_bar_floor`, 8 resolved.
+- Random: the sweep called `set_time(page, "Monday", hour)` only; members_only's `bar_talk` runs Tue–Sat 18–22.
+
+**What changed.**
+- `scripts/playtest.py` `universal()`: new step 3b takes the first link until the screen is a `Location_` passage
+  (the opening, capstones included, has handed over), then reads the guidance cards once, before check 5 plays
+  every canvas; check 7 reports that reading ("resolve once the opening ends"). Check 8 sweeps the same six hours
+  on all seven `DAYS`.
+
+**Verified.**
+- `tests/test_playtest_l2.py`: two real fixture builds (package_from_toml into tmp, played headless). Pass: a card
+  behind the opening's exit flag resolves; a Wednesday-only ambient is found. Fail: a card behind a flag nothing
+  reachable sets; an ambient behind the same flag. Both pass tests FAIL on the old `playtest.py` (swapped in and
+  run).
+- Suite: 431 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch builds, before → after (guidance · random fires):
+  - members_only: FAIL 0/19 → PASS 8/19 · FAIL 0/2 → PASS 1/2.
+  - orientation: PASS 8/16 → PASS 6/16 (read after the opening now; cards that only show during it retire) ·
+    FAIL 0/1 → FAIL 0/1 (real: `walkin_latelab` waits on `late_lab_open`).
+  - probation: PASS 9/22 → PASS 9/22 · PASS 5/7 → PASS 5/7.
+  - the_balance: FAIL 0/9 → PASS 2/9 · FAIL 0/4 → PASS 4/4 (the ambients wait on the opening's flag).
+  - vesper_two: FAIL 0/12 → FAIL 0/12 (real: `--ship` says the opening arms no card with goals) · its one random
+    canvas has no `chance` (real, unchanged).
+- Found, not fixed (outside L2): check 5 plays every canvas's first node, and a `location` exit fires its effects on
+  render, so later checks can see flags no player set. The L2 fixture sets its flag on a choice to stay clear of it.
+
+words: 139,327 → 139,327 (+0; code and tests only) · running total 139,327 / 149,283.
+
 ## 2026-09-30 — Phase 4: the printed-stat lint, redefined (D1b)
 
 **Why.** Under D1 a real stat may be shown, and D1b keeps the "+N" toast. The lint still listed real stats (as a
