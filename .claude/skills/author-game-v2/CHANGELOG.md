@@ -5,6 +5,43 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC9b: the spine's ladder page separates tiers from his meters, and a gate must be reachable (doctrine + shape.py)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9b (H17 · I16 · I17 · I25 · H31):
+- SP2 capped "ascent tiers" at 2, but the cap is per person (H17);
+- SP2 had no `canvas` column, which the ledger needs (I16);
+- nothing gave first rung numbers (I17);
+- "≤ 400 words" didn't say how tables count (I25);
+- nothing could check before TOML whether a step's gate is reachable (H31).
+
+**What changed.**
+- `templates/spine/SP2_ladders.md`:
+  - her tiers (game-wide) are separate from each person's meters (his `keeps`, at most two);
+  - the table gains `canvas` and `raises` columns;
+  - the first rung sits near 5 (W4).
+- `references/the-board.md` §3b: "no shape to copy" becomes "the board sets the rung numbers; default 8–17 rungs,
+  lowest near 5".
+- `references/the-spine.md`:
+  - ≤ 400 words counts words, not pipes or dashes;
+  - checkpoint A lists the new row.
+- `references/state.md`: a step's optional `raises` and `board.daily_raises`.
+- `scripts/shape.py`: new row **"a step's gate can be reached"** (12; the adult row is now 13).
+  - Judged traits are only those a step's `raises` or `board.daily_raises` names. A repeatable's raises live in
+    the TOML, so other traits are n/a.
+  - A gte/gt gate passes if the daily tick raises the trait, or if the raises before it reach the value. "Before"
+    means the same person's lower steps plus SP3 dependencies, transitively.
+  - With no `raises` anywhere, the row is n/a.
+- `SKILL.md` tools row: the new check is named (not a scoreboard row).
+
+**Verified.**
+- `tests/test_shape_dc9b.py`: 7 cases (reached, short, gt vs equal, daily raise, dependency, unraised trait n/a,
+  none declared n/a). The `test_shape.py` fixture gains `raises: {trust: 5}`.
+- Suite: 322 passed. `--selfcheck`: the index is current. cite_check: 0.
+- shape.py (read-only) on the five ledgers: n/a on all.
+- Greps: `<≤ 2 meters>` 0, "no shape to copy" 0.
+
+words: 138,574 → 138,637 (+63) · running total 138,637 / 149,283.
+
 ## 2026-09-30 — DC9a: where spine pages and proposals live; the board is ledger-first; doors hang on rungs (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9a (H19 · H22 · H23 · H24 · H32):

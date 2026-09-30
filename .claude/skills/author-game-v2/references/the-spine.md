@@ -12,7 +12,8 @@ is repeating a reference — cut it and point.
 
 - **Seven pages, SP1–SP7**, each from its template in `templates/spine/`, saved in
   `games/<slug>/spine/`. Tables first.
-- **≤ 400 words a page.** Longer means a rule is being restated.
+- **≤ 400 words a page**, counting words, not table pipes or dashes. Longer means a rule is being
+  restated.
 - **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
   it **(LO decided, D13)**.
 - **One home per decision.** A page records the answer and names the ledger key that holds it
@@ -93,7 +94,7 @@ ledger only and FAILS on: a step at an undeclared place (once the board declares
 are not a window, a trait the ledger never declares, a dependency on a missing step or in a cycle,
 pressure the release's weeks cannot pay without a declared `shortfall`, a release person with no
 ladder, a step with no `hint`, a door that is not a declared step, a promise with no beat on the
-release page, a READY page unsigned, and a person with no age or
+release page, a READY page unsigned, a gate the `raises` before it cannot reach, and a person with no age or
 under 18 (in every mode). With `--finish`, or once the
 phase is `spine` or later, a missing piece is a FAIL: an empty ledger never finishes the spine. Flags
 in a step's gate are listed, not judged. Run it again before accepting any change to money, the

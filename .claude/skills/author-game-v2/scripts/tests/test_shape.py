@@ -29,7 +29,7 @@ def full():
                  "schedule": [{"where": "bar", "weekdays": ["Mon", "Wed"], "from": "17:00", "to": "21:00"},
                               {"where": "flat", "weekdays": ["Mon", "Wed"], "from": "18:00", "to": "23:00"}],
                  "ladder": {"counter": "a_stage", "steps": [
-                    {"n": 1, "canvas": "a_1", "where": "bar", "when": dict(WIN),
+                    {"n": 1, "canvas": "a_1", "where": "bar", "when": dict(WIN), "raises": {"trust": 5},
                      "gate": [{"trait": "nerve", "op": "gte", "value": 10}], "hint": "He is at the bar."},
                     {"n": 2, "canvas": "a_2", "where": "flat", "when": dict(WIN),
                      "gate": [{"flag": "met_a"}], "hint": "He asked you up."}]}},

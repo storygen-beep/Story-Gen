@@ -306,7 +306,60 @@ def check(state, strict=False):
     else:
         row("the person is there at the step's hour", not bad, f"{judged - len(bad)}/{judged} steps", bad)
 
-    # 12 · every person is an adult (PRD v2 DC2a · B2). `want.cast[] = {id, age, keeps}` holds the
+    # 12 · a step's gate can be reached (PRD v2 DC9b · H31). Optional step `raises = {trait: n}`
+    # and `board.daily_raises = {trait: per_day}`. Only traits the ledger says something raises are
+    # judged: a repeatable's raises live in the TOML, so any other trait is not this check's to fail.
+    # A gte/gt gate on a judged trait passes if the daily tick raises it, or if the raises of the
+    # steps before it — the same person's lower steps, plus every step it depends on (SP3), and
+    # theirs, transitively — reach the value.
+    daily = {k: v for k, v in ((board.get("daily_raises") or {}).items())
+             if isinstance(v, (int, float)) and v > 0}
+    by_key = {(n, s.get("n")): s for n, s in steps}
+    raised = {t for _n, s in steps for t in (s.get("raises") or {})} | set(daily)
+    needs = {}
+    for d in (state.get("dependencies") or []):
+        if isinstance(d, dict) and "step" in (d.get("needs") or {}):
+            frm, nd = d.get("from") or {}, d["needs"]
+            needs.setdefault((frm.get("npc"), frm.get("step")), []).append((nd.get("npc"), nd.get("step")))
+
+    def before(key, seen):
+        """Every step that must have happened before `key` — excluding `key` itself."""
+        npc, n = key
+        out = {k for k in by_key if k[0] == npc and isinstance(k[1], (int, float))
+               and isinstance(n, (int, float)) and k[1] < n}
+        for dep in needs.get(key, []):
+            out |= {k for k in by_key if k[0] == dep[0] and isinstance(k[1], (int, float))
+                    and isinstance(dep[1], (int, float)) and k[1] <= dep[1]}
+        for k in list(out):
+            if k not in seen:
+                seen.add(k)
+                out |= before(k, seen)
+        return out
+
+    if not any(s.get("raises") for _n, s in steps):
+        row("a step's gate can be reached", None, "n/a — no ladder step declares `raises`")
+    else:
+        judged, bad = 0, []
+        for n, s in steps:
+            for it in s.get("gate") or []:
+                if not isinstance(it, dict) or it.get("trait") not in raised:
+                    continue
+                if it.get("op") not in ("gte", "gt") or not isinstance(it.get("value"), (int, float)):
+                    continue
+                judged += 1
+                t, v = it["trait"], it["value"]
+                if t in daily:
+                    continue
+                got = sum(((by_key[k].get("raises") or {}).get(t) or 0)
+                          for k in before((n, s.get("n")), set()))
+                if got < v or (it["op"] == "gt" and got == v):
+                    bad.append(f"{n} step {s.get('n')}: `{t} {it['op']} {v}` but the steps before it "
+                               f"raise {t} by {got}")
+        row("a step's gate can be reached", not bad if judged else None,
+            f"{judged - len(bad)}/{judged} gates reachable" if judged
+            else "n/a — no gate reads a trait the ledger raises", bad)
+
+    # 13 · every person is an adult (PRD v2 DC2a · B2). `want.cast[] = {id, age, keeps}` holds the
     # ages; a board character with no cast entry has no age. Not a missing piece that lenient mode
     # waits for: a person declared without an age FAILS in both modes (LO, 2026-09-30).
     cast = {c.get("id"): c for c in (want.get("cast") or []) if isinstance(c, dict) and c.get("id")}

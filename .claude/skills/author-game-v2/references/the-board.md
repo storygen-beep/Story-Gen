@@ -287,7 +287,8 @@ and gives every player the same ladder.
 its 2026 build returns different figures because most of that game's logic now lives in JavaScript —
 the two are not comparable and neither supersedes the other.)*
 
-⚠️ **Rung spacing is NOT declared here and there is no shape to copy.** The field's live meters run **8–17 rungs with the lowest at ~5** (`the-meters.md` W4).
+**The board sets the rung numbers.** The default is the field's: **8–17 rungs, the lowest near 5**
+(`the-meters.md` W4). The spine's first gates start there, and the board may move them.
 
 **Layer 2 — volatile state.** Arousal, stress, energy. These move both ways and are managed minute
 to minute; they are *not* ascent. **But volatile is not the same as unread** — a throttle gates the
