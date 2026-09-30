@@ -1,0 +1,512 @@
+:: TimeWidgets [widget nobr]
+<!-- Time Display Widgets -->
+<<widget "timeFormatted">>
+<<set _hour to $game_state.time_state.current_hour>>
+<<set _minute to $game_state.time_state.current_minute>>
+<<set _displayHour to (_hour is 0 ? 12 : (_hour > 12 ? _hour - 12 : _hour))>>
+<<set _ampm to (_hour < 12 ? "AM" : "PM")>>
+<<set _minuteStr to (_minute < 10 ? "0" + _minute : _minute)>>
+<<print _displayHour + ":" + _minuteStr + " " + _ampm>>
+<</widget>>
+
+<!-- Render a quest card: narrative line + (Pattern 2) auto-rendered 🎯 goal
+     block + 💡 tip line. Author tags state-pressure variants in the TOML and
+     the picker swaps which line fires; widget renders the chosen line, then
+     calls setup.computeHintGoal() to render the structured progress block from
+     the hint's stage condition (or canvas trigger conditions for branch-inside-
+     shell transitions). Game-level mechanics (decay rates, time costs, etc.)
+     live on :: TipsPage instead. -->
+<<widget "renderStageHint">>
+/* Pattern 2 (2026-05-01): accepts either a string (legacy callers) OR a
+   hint object {text, condition, tip, auto_goal, ...}. When passed an object
+   with auto_goal=true and a stage condition, the engine computes the
+   structured 🎯 goal block (bullets + live progress + 📍 location). When
+   passed a string OR a no-auto-goal object, falls back to splitting on
+   " — 🎯 " (legacy behavior) so existing games keep working unchanged. */
+<<set _hintArg to $args[0]>>
+<<set _hintObj to (typeof _hintArg === "object" && _hintArg !== null) ? _hintArg : null>>
+<<set _hintText to _hintObj ? (_hintObj.text || "") : (_hintArg || "")>>
+<<set _computedGoalHtml to _hintObj ? setup.computeHintGoal(_hintObj) : "">>
+<<set _separator to " — 🎯 ">>
+<<set _splitIdx to _hintText.indexOf(_separator)>>
+<<if _computedGoalHtml>>
+  /* New path: structured auto-render. If text contains " — 🎯 ", strip the
+     manual goal portion (auto-render replaces it). */
+  <<if _splitIdx gt -1>>
+    <<set _flavor to _hintText.substring(0, _splitIdx)>>
+  <<else>>
+    <<set _flavor to _hintText>>
+  <</if>>
+  /* 2026-05-09: when State C "🔓 Ready" fires AND the hint defines
+     ready_text, swap flavor → ready_text. The author-supplied ready_text
+     replaces the regular text once all helper gates are met. */
+  <<if _hintObj && _hintObj.ready_text && setup._isHintReady(_hintObj)>>
+    <<set _flavor to _hintObj.ready_text>>
+  <</if>>
+  <div class="stage-hint-card">
+    <div class="stage-hint-flavor"><<print _flavor>></div>
+    <<print _computedGoalHtml>>
+    <<if _hintObj && _hintObj.tip>>
+      <div class="stage-hint-tip">💡 <<print _hintObj.tip>></div>
+    <</if>>
+  </div>
+<<elseif _splitIdx gt -1>>
+  /* Legacy path: split on " — 🎯 " */
+  <<set _flavor to _hintText.substring(0, _splitIdx)>>
+  <<set _goal to _hintText.substring(_splitIdx + _separator.length)>>
+  <div class="stage-hint-card">
+    <div class="stage-hint-flavor"><<print _flavor>></div>
+    <div class="stage-hint-goal"><span class="stage-hint-target">🎯</span> <<print _goal>></div>
+    <<if _hintObj && _hintObj.tip>>
+      <div class="stage-hint-tip">💡 <<print _hintObj.tip>></div>
+    <</if>>
+  </div>
+<<elseif _hintText>>
+  <div class="stage-hint-card">
+    <div class="stage-hint-flavor"><<print _hintText>></div>
+  </div>
+<</if>>
+<</widget>>
+
+<<widget "timeDisplay">>
+<div id="time-widget" class="time-display">
+    <div class="time-line">
+        <span id="time-display"><<timeFormatted>></span> | <span id="current-day"><<print $game_state.time_state.current_day>></span>
+    </div>
+    <div class="control-line">
+        <button class="time-btn" onclick="waitTime(10)" title="Advance 10 minutes">></button> | <button class="time-btn" onclick="waitTime(60)" title="Advance 1 hour">>></button> | <button class="time-btn" onclick="waitTime(1440)" title="Advance 1 day">>>>>></button>
+    </div>
+</div>
+<</widget>>
+
+
+<<widget "sidebarItems">>
+<<if setup.sidebar_items && setup.sidebar_items.length > 0>>
+<div id="sidebar-items-widget">
+<<for _si to 0; _si lt setup.sidebar_items.length; _si++>>
+  <<set _item to setup.sidebar_items[_si]>>
+  <<if _item.show_when and not setup.triggerConditionsSatisfied(_item.show_when)>>
+    <<continue>>
+  <</if>>
+  <<if _item.type is "countdown">>
+    <<set _daysLeft to _item.total_days - $game_state.time_state.day + 1>>
+    <div class="sidebar-item countdown-item" id="sidebar-countdown-<<print _si>>">
+    <<if _daysLeft gt 1>>
+      <<print _daysLeft + " " + _item.label>>
+    <<elseif _daysLeft is 1>>
+      <<print "Tomorrow is " + _item.label.replace("days until ", "")>>
+    <<elseif _daysLeft is 0>>
+      <<print "Today is " + _item.label.replace("days until ", "")>>
+    <<else>>
+      <<print _item.label.replace("days until ", "") + " has passed">>
+    <</if>>
+    </div>
+  <<elseif _item.type is "quest_next">>
+    /* The next STEP, on every screen — as opposed to trait_status_text, which is the
+       next STATE. A game shipped with four band strings in the sidebar and no verb, no
+       place and no person anywhere in the always-visible chrome: a player who never
+       opened the Quests page had no direction at all. Renders the same goal block as
+       the Quests page and the npc_panel "next" row (setup.renderQuestsGoalBlock), so
+       there is one implementation of what an objective looks like, not three.
+       `npc_id` picks that character's live card; omitted, it takes the live tier cards
+       in file order. `max` caps how many render (default 3). Terminal cards are
+       skipped: they carry no goals and would render a bare completion badge forever. */
+    <<if setup.renderQuestsGoalBlock and setup.evaluateGoals>>
+      <<set _qnCards to []>>
+      <<if _item.npc_id>>
+        <<set _qnOne to setup.pickQuestsCard(_item.npc_id)>>
+        <<if _qnOne>><<run _qnCards.push(_qnOne)>><</if>>
+      <<else>>
+        <<set _qnCards to setup.pickQuestsCards("story_goals") || []>>
+      <</if>>
+      <<set _qnMax to _item.max || 3>>
+      <<set _qnShown to 0>>
+      <<for _qi to 0; _qi lt _qnCards.length; _qi++>>
+        <<set _qnCard to _qnCards[_qi]>>
+        <<if _qnShown lt _qnMax and _qnCard and _qnCard.goals and _qnCard.goals.length gt 0 and not _qnCard.terminal>>
+          <<set _qnBlock to setup.renderQuestsGoalBlock(_qnCard, setup.evaluateGoals(_qnCard))>>
+          <<if _qnBlock>>
+            <<set _qnShown to _qnShown + 1>>
+            <div class="sidebar-item quest-next-item" id="sidebar-questnext-<<print _si>>-<<print _qi>>">
+              <<print _qnBlock>>
+            </div>
+          <</if>>
+        <</if>>
+      <</for>>
+    <</if>>
+  <<elseif _item.type is "trait_bar">>
+    <<set _tbOwner to _item.trait_owner || "player">>
+    <<set _tbKey to _item.trait>>
+    <<if _tbOwner is "npc">>
+      <<set _tbNpcId to _item.npc_id>>
+      <<set _tbNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tbNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tbNpcId]] : (State.variables.npcs ? State.variables.npcs[_tbNpcId] : null)>>
+      <<set _traitVal to (_tbNpcObj && _tbNpcObj.core_traits) ? (_tbNpcObj.core_traits[_tbKey] || 0) : 0>>
+    <<else>>
+      <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_tbKey] || 0) : 0>>
+    <</if>>
+    <<set _traitMax to _item.max || 100>>
+    <<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>
+    <<set _traitPct to Math.max(0, Math.min(100, (_traitVal / _traitMax) * 100))>>
+    <<set _tbTier to "">>
+    <<if _item.color_tiers>>
+      <<for _ti to 0; _ti lt _item.color_tiers.length; _ti++>>
+        <<if _tbTier is "" and _traitPct lte (_item.color_tiers[_ti].up_to)>>
+          <<set _tbTier to _item.color_tiers[_ti].class>>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<set _tbBandText to "">>
+    <<set _tbBandIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<if _tbBandText is "" and _bb.min isnot undefined and _bb.max isnot undefined and _traitVal gte _bb.min and _traitVal lte _bb.max>>
+          <<set _tbBandText to _bb.text>>
+          <<set _tbBandIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
+    <div class="sidebar-item trait-bar-item" id="sidebar-trait-bar-<<print _si>>">
+      <div class="trait-bar-label">
+        <<if _item.hide_value is true>>
+          <<print _traitLabel>>
+        <<else>>
+          <<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>
+        <</if>>
+      </div>
+      <div class="trait-bar-bg">
+        <div class="trait-bar-fill <<print _tbTier>>" style="width: <<print _traitPct>>%"></div>
+        <<if _tbBandText isnot "">>
+          <span class="trait-bar-band-text"><<print (_tbBandIcon ? _tbBandIcon + " " : "") + _tbBandText>></span>
+        <</if>>
+      </div>
+    </div>
+  <<elseif _item.type is "trait_status_text">>
+    <<set _tsOwner to _item.trait_owner || "player">>
+    <<set _tsKey to _item.trait>>
+    <<if _tsOwner is "npc">>
+      <<set _tsNpcId to _item.npc_id>>
+      <<set _tsNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tsNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tsNpcId]] : (State.variables.npcs ? State.variables.npcs[_tsNpcId] : null)>>
+      <<set _tsVal to (_tsNpcObj && _tsNpcObj.core_traits) ? (_tsNpcObj.core_traits[_tsKey] || 0) : 0>>
+    <<else>>
+      <<set _tsVal to ($player && $player.core_traits) ? ($player.core_traits[_tsKey] || 0) : 0>>
+    <</if>>
+    <<set _tsText to "">>
+    <<set _tsIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<set _bMin to (_bb.min isnot undefined) ? _bb.min : -1e9>>
+        <<set _bMax to (_bb.max isnot undefined) ? _bb.max : 1e9>>
+        <<if _tsText is "" and _tsVal gte _bMin and _tsVal lte _bMax>>
+          <<set _tsText to _bb.text>>
+          <<set _tsIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<if _tsText isnot "">>
+      <div class="sidebar-item trait-status-text-item">
+        <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
+        <span class="band-value"><<print (_tsIcon ? _tsIcon + " " : "") + _tsText>></span>
+      </div>
+    <</if>>
+  <<elseif _item.type is "trait_decay_warning">>
+    <!-- E20: render an amber warning when a decaying trait dropped today AND
+         is within 2.0 of its next stage gate. setup.getDecayWarnings() walks
+         the configured thresholds and compares last_day_snapshot vs current. -->
+    <<set _decayWarnings to setup.getDecayWarnings(_item.thresholds || {})>>
+    <<for _dw range _decayWarnings>>
+      <div class="sidebar-item trait-decay-warning-item">
+        ⚠ <<print _dw.text>>
+      </div>
+    <</for>>
+  <<elseif _item.type is "passes">>
+    <div class="sidebar-item passes-item" id="sidebar-passes-<<print _si>>">
+      <<for _pi to 0; _pi lt setup.passes.length; _pi++>>
+        <<set _pass to setup.passes[_pi]>>
+        <<set _remaining to setup.getPassDaysRemaining(_pass.id)>>
+        <<if _remaining gte 0>>
+          <div class="pass-entry pass-active" id="pass-display-<<print _pass.id>>">
+            <<print (_pass.icon || "") + " " + _pass.name + ": " + _remaining + "d">>
+          </div>
+        <</if>>
+      <</for>>
+    </div>
+  <<elseif _item.type is "inventory">>
+    <div class="sidebar-item inventory-item" id="sidebar-inventory-<<print _si>>">
+      <<for _ii to 0; _ii lt setup.items.length; _ii++>>
+        <<set _itm to setup.items[_ii]>>
+        <<set _count to setup.getItemCount(_itm.id)>>
+        <<if _count gt 0>>
+          <div class="inventory-entry" id="inventory-display-<<print _itm.id>>">
+            <<print (_itm.icon || "") + " " + _itm.name + ": " + _count>>
+          </div>
+        <</if>>
+      <</for>>
+    </div>
+  <<elseif _item.type is "trait_words">>
+    <<set _twOwner to _item.trait_owner || "player">>
+    <<set _twKey to _item.trait>>
+    <<if _twOwner is "npc">>
+      <<set _twNpcId to _item.npc_id>>
+      <<set _twNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_twNpcId]) ? State.variables.npcs[setup.npc_slug_map[_twNpcId]] : (State.variables.npcs ? State.variables.npcs[_twNpcId] : null)>>
+      <<set _twVal to (_twNpcObj && _twNpcObj.core_traits) ? (_twNpcObj.core_traits[_twKey] || 0) : 0>>
+    <<else>>
+      <<set _twVal to ($player && $player.core_traits) ? ($player.core_traits[_twKey] || 0) : 0>>
+    <</if>>
+    <<set _twMatched to "">>
+    <<set _twFound to false>>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<if not _twFound>>
+          <<set _twBand to _item.bands[_bi]>>
+          <<if _twBand.flag>>
+            <<if $flags and $flags[_twBand.flag] is true>>
+              <<set _twMatched to _twBand.text>>
+              <<set _twFound to true>>
+            <</if>>
+          <<elseif _twBand.min isnot undefined and _twBand.max isnot undefined>>
+            <<if _twVal gte _twBand.min and _twVal lte _twBand.max>>
+              <<set _twMatched to _twBand.text>>
+              <<set _twFound to true>>
+            <</if>>
+          <</if>>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<if _twMatched isnot "">>
+      <div class="sidebar-item trait-words-item" id="sidebar-trait-words-<<print _si>>">
+        <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
+        <span class="band-value"><<print _twMatched>></span>
+      </div>
+    <</if>>
+  <<elseif _item.type is "stage_label">>
+    /* E11: render "<prefix>: <stage label>" sourced from arc_stages.
+       Stage value lives in $player.core_traits[<slug>_stage] (integer).
+       Out-of-range value → highest-defined label. Undefined trait → just
+       the prefix with no colon. Empty arc_stages → renders nothing. */
+    <<set _slNpcId to _item.npc_id>>
+    <<set _slStages to (setup.npc_arc_stages && setup.npc_arc_stages[_slNpcId]) ? setup.npc_arc_stages[_slNpcId] : []>>
+    <<set _slRawStage to ($player && $player.core_traits) ? $player.core_traits[_slNpcId + "_stage"] : undefined>>
+    <<set _slPrefix to _item.prefix>>
+    <<if not _slPrefix>>
+      <<set _slUuid to (setup.npc_slug_map && setup.npc_slug_map[_slNpcId]) ? setup.npc_slug_map[_slNpcId] : _slNpcId>>
+      <<set _slNpcObj to State.variables.npcs ? State.variables.npcs[_slUuid] : null>>
+      <<set _slPrefix to _slNpcObj ? (_slNpcObj.name || _slNpcId) : _slNpcId>>
+    <</if>>
+    <<if _slStages.length gt 0 and _slRawStage isnot undefined>>
+      <<set _slIdx to Math.max(0, Math.min(Number(_slRawStage), _slStages.length - 1))>>
+      <<set _slLabel to _slStages[_slIdx]>>
+      <div class="sidebar-item stage-label-item" id="sidebar-stage-label-<<print _si>>">
+        <<print _slPrefix>>: <<print _slLabel>>
+      </div>
+    <<elseif _slPrefix>>
+      <div class="sidebar-item stage-label-item" id="sidebar-stage-label-<<print _si>>">
+        <<print _slPrefix>>
+      </div>
+    <</if>>
+  <<elseif _item.type is "npc_panel">>
+    /* RTS-style per-NPC card: name header + rows (arousal band / corruption / location).
+       Location uses setup.getNpcLocation — the SAME schedule source the Schedule page uses. */
+    <<set _npId to _item.npc_id>>
+    <<set _npObj to (setup.npc_slug_map && setup.npc_slug_map[_npId]) ? State.variables.npcs[setup.npc_slug_map[_npId]] : (State.variables.npcs ? State.variables.npcs[_npId] : null)>>
+    <<if _npObj>>
+      <<set _npRows to _item.rows || ["arousal"]>>
+      <<set _npHeader to _item.label || _npObj.name || _npId>>
+      <div class="sidebar-item npc-panel-item" id="sidebar-npc-panel-<<print _si>>">
+        <div class="npc-panel-header"><<print _npHeader>></div>
+        <<for _npri to 0; _npri lt _npRows.length; _npri++>>
+          <<set _npRow to _npRows[_npri]>>
+          <<if _npRow is "arousal">>
+            <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("arousal"))>>
+              <<set _npAr to (_npObj.core_traits) ? (_npObj.core_traits.arousal || 0) : 0>>
+              <<set _npBands to _item.arousal_bands || [{"min":0,"max":0,"text":"❄️"},{"min":1,"max":1,"text":"🔥"},{"min":2,"max":2,"text":"🔥🔥"},{"min":3,"max":3,"text":"🔥🔥🔥"}]>>
+              <<set _npArText to "">>
+              <<for _nbi to 0; _nbi lt _npBands.length; _nbi++>>
+                <<set _nb to _npBands[_nbi]>>
+                <<if _npArText is "" and _nb.min isnot undefined and _nb.max isnot undefined and _npAr gte _nb.min and _npAr lte _nb.max>>
+                  <<set _npArText to _nb.text>>
+                <</if>>
+              <</for>>
+              <div class="sidebar-row"><span class="sidebar-label">🔥 <<print setup.traitLabel("arousal")>></span> <span class="sidebar-value"><<print _npArText>></span></div>
+            <</if>>
+          <<elseif _npRow is "corruption">>
+            <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>
+              <<set _npCorr to (_npObj.core_traits) ? (_npObj.core_traits.corruption || 0) : 0>>
+              <<set _npCorrOut to _npCorr>>
+              <<if _item.corruption_max_value isnot undefined and _npCorr gte _item.corruption_max_value>>
+                <<set _npCorrOut to (_item.corruption_max_label || "MAX")>>
+              <</if>>
+              <div class="sidebar-row"><span class="sidebar-label">🫦 <<print setup.traitLabel("corruption")>></span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
+            <</if>>
+          <<elseif _npRow is "location">>
+            <<set _npLoc to setup.getNpcLocation(_npId)>>
+            <<set _npLocName to _npLoc ? (setup._locNameFromUuid(_npLoc.location) || _npLoc.location) : (_item.away_label || "Away")>>
+            <div class="sidebar-row"><span class="sidebar-label">📍 Location</span> <span class="sidebar-value"><<print _npLocName>></span></div>
+          <<elseif _npRow is "next">>
+            /* Next-milestone block — EXACT Quests-page parity: reuses setup.renderQuestsGoalBlock, so
+               the card shows the same goal block as the Quests page — 🎯 To advance + ◯ live progress
+               (climbing) / 🔓 Ready + 📍 + 🕒 (ready) / ✓ Arc complete (terminal). No flavor/tip text. */
+            <<if setup.pickQuestsCard and setup.renderQuestsGoalBlock>>
+              <<set _npCard to setup.pickQuestsCard(_npId)>>
+              <<if _npCard>>
+                <<set _npGoalBlock to setup.renderQuestsGoalBlock(_npCard, setup.evaluateGoals(_npCard))>>
+                <<if _npGoalBlock>>
+                  <div class="npc-panel-next"><<print _npGoalBlock>></div>
+                <</if>>
+              <</if>>
+            <</if>>
+          <</if>>
+        <</for>>
+      </div>
+    <</if>>
+  <</if>>
+<</for>>
+</div>
+<</if>>
+<</widget>>
+
+
+<<widget "activeModifiers">>
+<<if $game_state && $game_state.active_modifiers && Object.keys($game_state.active_modifiers).length gt 0>>
+<div id="sidebar-modifiers-widget" class="traits-display">
+  <div class="traits-header">Active Effects</div>
+  <<set _modKeys to Object.keys($game_state.active_modifiers)>>
+  <<for _mi to 0; _mi lt _modKeys.length; _mi++>>
+    <<set _mod to $game_state.active_modifiers[_modKeys[_mi]]>>
+    <<set _hoursLeft to (_mod.expires_day - $game_state.time_state.day) * 24 + (_mod.expires_hour - $game_state.time_state.current_hour)>>
+    <div class="modifier-badge"><<print _mod.name>> (<<print _hoursLeft>>h)</div>
+  <</for>>
+</div>
+<</if>>
+<</widget>>
+
+
+<<widget "inc">>
+<<set _incTrait to $args[0]>>
+<<set _incBy to ($args[1] != null) ? Number($args[1]) : 1>>
+<<script>>setup.applyAndNotifyTrait("player", null, _incTrait, "add", _incBy, false, null);<</script>>
+<</widget>>
+
+<<widget "dec">>
+<<set _decTrait to $args[0]>>
+<<set _decBy to ($args[1] != null) ? Number($args[1]) : 1>>
+<<script>>setup.applyAndNotifyTrait("player", null, _decTrait, "add", -_decBy, false, null);<</script>>
+<</widget>>
+
+<<widget "playerTraits">>
+<div id="traits-widget" class="traits-display">
+  <div class="traits-header">Traits</div>
+  <<if $player and $player.core_traits and Object.keys($player.core_traits).length > 0>>
+    <<set _keys to Object.keys($player.core_traits).sort()>>
+    <ul class="traits-list">
+      <<for _i to 0; _i lt _keys.length; _i++>>
+        <<set _k to _keys[_i]>>
+        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
+        <li class="trait-item">
+          <span class="trait-name"><<print setup.traitLabel(_k)>></span>
+          <span class="trait-value"><<print $player.core_traits[_k]>></span>
+        </li>
+      <</for>>
+    </ul>
+  <<else>>
+    <div class="no-traits">No traits</div>
+  <</if>>
+  <div class="traits-hint">Updates after each choice.</div>
+
+</div>
+<</widget>>
+
+<<widget "playerFlags">>
+<div id="flags-widget" class="traits-display">
+  <div class="traits-header">Flags</div>
+  <<if $flags and Object.keys($flags).length > 0>>
+    <<set _fkeys to Object.keys($flags).sort()>>
+    <ul class="traits-list">
+      <<for _j to 0; _j lt _fkeys.length; _j++>>
+        <<set _fk to _fkeys[_j]>>
+        <li class="trait-item">
+          <span class="trait-name"><<print _fk>></span>
+          <span class="trait-value"><<print $flags[_fk] ? '✔' : '✖'>></span>
+        </li>
+      <</for>>
+    </ul>
+  <<else>>
+    <div class="no-traits">No flags</div>
+  <</if>>
+  <div class="traits-hint">Set by choices and story logic.</div>
+</div>
+<</widget>>
+
+<<widget "questsButton">>
+<!-- Debug/legacy quest view - shows raw mechanics -->
+<div id="quests-btn-widget">
+  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
+</div>
+<</widget>>
+
+<<widget "missingMediaButton">>
+<<if $flags.debug_mode>>
+<div id="missing-media-btn-widget" style="margin-bottom:8px;">
+  <<if passage() isnot "MissingMediaPage">><<link "⚠️ Missing Media" "MissingMediaPage">><</link>><<else>>⚠️ Missing Media<</if>>
+</div>
+<</if>>
+<</widget>>
+
+<<widget "journalButton">>
+<!-- Quests - active per-NPC quest cards -->
+<div id="journal-btn-widget">
+  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
+</div>
+<</widget>>
+
+<<widget "tipsButton">>
+<!-- Tips - game-level mechanics surface; conditional on [ui.tips_page] authored -->
+<<if setup.tips_page && setup.tips_page.content>>
+<div id="tips-btn-widget">
+  <<if passage() isnot "TipsPage">><<link "Tips" "TipsPage">><</link>><<else>><span class="nav-row">Tips</span><</if>><span class="nav-i">💡</span>
+</div>
+<</if>>
+<</widget>>
+
+<<widget "statsButton">>
+<div id="stats-btn-widget">
+  <<if passage() isnot "StatsPage">><<link "Stats" "StatsPage">><</link>><<else>><span class="nav-row">Stats</span><</if>><span class="nav-i">📊</span>
+</div>
+<</widget>>
+
+<<widget "scheduleButton">>
+<<set _npcsWithSchedules to setup.getNpcsWithSchedules()>>
+<<set _soloActivities to setup.getSoloActivitiesForToday()>>
+<<if _npcsWithSchedules.length > 0 || _soloActivities.length > 0>>
+<div id="schedule-btn-widget">
+  <<if passage() isnot "SchedulePage">><<link "Schedules" "SchedulePage">><</link>><<else>><span class="nav-row">Schedules</span><</if>><span class="nav-i">📅</span>
+</div>
+<</if>>
+<</widget>>
+
+<<widget "patreonButton">>
+<div id="patreon-btn-widget">
+  <a href="https://www.patreon.com/cw/nutgames844" target="_blank" rel="noopener" class="patreon-link">
+    <svg class="patreon-icon" viewBox="0 0 24 24" width="16" height="16">
+      <path fill="currentColor" d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+    </svg>
+    Support Us
+  </a>
+  <a href="https://discord.gg/MJXBxEqsa" target="_blank" rel="noopener" class="discord-link">
+    <svg class="discord-icon" viewBox="0 0 24 24" width="16" height="16">
+      <path fill="currentColor" d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+    </svg>
+    Discord
+  </a>
+</div>
+<</widget>>
+
+<<widget "flagsButton">>
+<div id="flags-btn-widget">
+  <<if passage() isnot "FlagsPage">><<link "Flags" "FlagsPage">><</link>><<else>><span class="nav-row">Flags</span><</if>><span class="nav-i">🚩</span>
+</div>
+<</widget>>
+
+
+<<widget "versionFooter">><</widget>>

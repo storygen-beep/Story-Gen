@@ -10,10 +10,12 @@ is repeating a reference — cut it and point.
 
 ## Page rules
 
-- **Seven pages, SP1–SP7**, each from its template in `templates/spine/`. Tables first.
-- **≤ 400 words a page.** Longer means a rule is being restated.
-- **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page **no earlier than
-  the day after it was drafted** — a page signed the day it was written has not been read cold.
+- **Seven pages, SP1–SP7**, each from its template in `templates/spine/`, saved in
+  `games/<slug>/spine/`. Tables first.
+- **≤ 400 words a page**, counting words, not table pipes or dashes. Longer means a rule is being
+  restated.
+- **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
+  it **(LO decided, D13)**.
 - **One home per decision.** A page records the answer and names the ledger key that holds it
   (`references/state.md`); the ledger does not copy the page. `spine.pages[]` holds only each page's
   status and sign-off.
@@ -39,7 +41,7 @@ carries `where`, `when`, `gate`, and one **hint line** for the guidance page (`t
 |---|---|---|
 | `her_line_low` · `her_line_high` | her own thought at a low and a high level | `the-meters.md` W1b |
 | `who_notices` | who reacts to what she did, or nobody | `the-meters.md` W5b |
-| `refusal` | `parked` (the door stays open, the address printed) or `counted` (warned, and it closes) | `the-surfaces.md` R5b · `the-arc.md` A14 |
+| `refusal` | `parked` (the step comes back after a wait) or `final` (the button says "(ends his path)") | `the-surfaces.md` R5b · `the-arc.md` A3 |
 
 Arc rules: `the-arc.md` A1–A14. Ledger: `board.who_climbs`, `board.ascent_tiers`,
 `board.characters[].ladder`. `lint · the arc ladder` prints each person's longest chain.
@@ -92,7 +94,8 @@ ledger only and FAILS on: a step at an undeclared place (once the board declares
 are not a window, a trait the ledger never declares, a dependency on a missing step or in a cycle,
 pressure the release's weeks cannot pay without a declared `shortfall`, a release person with no
 ladder, a step with no `hint`, a door that is not a declared step, a promise with no beat on the
-release page, and a READY page unsigned or signed the day it was drafted. With `--finish`, or once the
+release page, a READY page unsigned, a gate the start (his meter's, or `board.player_start` for hers) plus the `raises` before it cannot reach (a trait in `board.daily_raises` or `board.repeat_raises` is not judged), and a person with no age or
+under 18 (in every mode). With `--finish`, or once the
 phase is `spine` or later, a missing piece is a FAIL: an empty ledger never finishes the spine. Flags
 in a step's gate are listed, not judged. Run it again before accepting any change to money, the
 ending or the release page.

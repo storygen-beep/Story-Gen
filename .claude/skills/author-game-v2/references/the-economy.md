@@ -337,6 +337,9 @@ moment of payment** — the same widget that advances the stage prints the next 
 is never surprised, and the collector is a believable threat. `course-of-temptation` does the identical
 thing through her mother (*"the interest is killing us… next week we're going to need $X"*).
 
+**On this engine the ratchet is `[settings.rent] stages` with `stage_lines`** (`engine.md` §26): the
+payment that moves the stage shows the collector's line with the new number, the same moment DoL uses.
+
 **So: a bare ratchet needs a person whose motive the player already accepts.** If the money is
 already owed to the household — a wage handed over, a till counted — a number that climbs on its own
 reads as the author turning a dial, and the shape below is the honest one.
@@ -376,14 +379,16 @@ flag's `is_false`. Worked example, invented numbers: buying a van adds `-20/day`
 day hook (`+140`/week of obligation) and turns a $30 errand into a $120 haul (`+450`/week over five
 runs). The week's demand goes 260 → 400, she is 310 better off, and **both of those are her doing.**
 
-⚠️ **No engine change was needed for any of this and none should be reached for first.**
-`[engine.daily_tick]` already takes `traitEffects` with a per-effect condition gate
-(`template_import.py:706`), applied through `setup.applyAndNotifyTrait` (`v2.py:5586`) — so a daily
-upkeep **notifies the player** instead of draining silently. A silent charge meter is the one
-economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
-A staged `[settings.rent] amount` would also make two surfaces lie — a `trait_bar max` set to the
-rent and any quest goal naming it — because `_traitMax` is static (`v2.py:16702`). A daily upkeep
-leaves the Friday number alone and both surfaces stay true.
+**Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
+`engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
+`traitEffects` with a per-effect condition gate (`template_import.py:707`), applied through
+`setup.applyAndNotifyTrait` (`v2.py:6560`). Either way the player is told. A silent charge meter is
+the one economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
+⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
+(`v2.py:18497`), so the number there stops being true at the first stage.
+
+**A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
+it)*: `on_short = "carry"` (`engine.md` §26).
 
 ### R3d · The obligation is an ignition, not a tax — and it is allowed to go quiet
 
@@ -506,14 +511,14 @@ Six rules are carried by that one choice:
    day rolls and this hook clears. A rung that crosses midnight with an exit-set cap starts the new
    day **already capped**, and a sleep rung that runs overnight is never offered before midnight
    again from the second night. `engine.md` §28.
-3. **A flag, not a counter trait.** A hidden counter with an `lt` condition works and reads to
+3. **A flag, not a counter trait.** A counter trait with an `lt` condition works and reads to
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
 4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
-   ⚠️ And know the asymmetry: a **`costs` deduction is hard-clamped to 0–100 and cannot be
-   unclamped**, so above 100 the next priced purchase truncates the balance. §27.
+   ⚠️ And know the asymmetry: a **canvas or location `costs` deduction is clamped to 0–100** and
+   cannot be unclamped, so above 100 it truncates the balance. A choice's `costs` is not clamped. §27.
 5. **`show_when_locked` + `locked_text`** — a shown-locked row with no reason is mute, which is the
    gate `a locked door says why`. A cost-only choice is exempt, because the engine writes its own
-   reason; a *condition*-locked one is not.
+   reason; a *flag*-locked one is not (a number lock gets the engine's line, `engine.md` §15).
 6. **The duration is on the label**, in one form held across the game, and it is the real spend.
    A label may never name a clock time — the engine has no absolute-time advance.
    `the-clock.md` C3/C4.
@@ -581,11 +586,9 @@ a money WORD carrying an EXACT amount     20%
 
 **We have no printer**, so every price is retyped by hand and the engine adds notations of its own.
 `[settings.rent] currency_symbol` is the closest thing to one, and of the sixteen sites where the
-generator prints a money figure it governs **four — all on the rent-day screen**. Nine hardcode `$`
+generator prints a money figure it governs **five — all on the rent pages**. Eight hardcode `$`
 and three print no notation at all (`engine.md` §33 carries the full census). A game that declares
-`currency_symbol = "£"` still ships
-`You have: <strong>$<<print $player.core_traits.money>></strong>` on `RentDay_Short`
-(`v2.py:17453`), the screen the player sees **when she cannot pay**.
+`currency_symbol = "£"` gets `£` on every rent screen and `$` on its shop, phone bank and job board.
 
 #### The rule, in four parts
 

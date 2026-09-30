@@ -32,11 +32,11 @@ what their players quote:
    it. Who moves first and why: a pressure type moves first and names the act; a nice type waits,
    so she moves; or he wants her from scene one. And **the leak** — one small, repeatable line or
    look on his hub that shows his want, tied to his number.
-3. **Her answers, and his "no" branch.** Three to five, graded. The **no** is written too, and it
-   has a price, is **parked** (it comes back), or is **counted** (someone remembers). Pressure: the
-   no has a stated price, he asks again, and the button says Submit, not Agree — and every pressure
-   arc offers an opt-out somewhere. Nice: the no costs nothing, and he may be the one who says no.
-   **A no parks the step; it never locks the relationship for good.**
+3. **Her answers, and his "no" branch.** Three to five, graded. The **no** is written too: it is
+   **parked** (the step comes back after a wait) or **final** (the button says "(ends his path)")
+   (`the-arc.md` A3). Pressure: he asks again, and the button says Submit, not Agree — and every
+   pressure arc offers an opt-out somewhere. Nice: the no costs nothing, and he may be the one who
+   says no.
 4. **Her voice at her level.** A low line and a high line for the same moment, so the player hears
    how far she has come.
 5. **Who notices.** Somebody sees or hears of it, and does something differently afterwards.
@@ -46,9 +46,11 @@ what their players quote:
 7. **The moment to remember.** Which of the five kinds — her firsts · being seen · her body as the
    price for something she needs · taboo at home · a consequence she lives with — and the line a
    player would quote.
-8. **The door it opens, and the clip we can get.** The live goal, mystery or rival beat it moves,
-   and a clip that exists or can be found for it. A moment with no clip is a moment the game cannot
-   show.
+8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
+   this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
+   canvas sets (`validate_flag_chains()`, `v2.py:13269`). The live goal, mystery or rival beat it moves,
+   and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
+   enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
 **Leads to — what it opens.** The next step, named; the promise line this step ends on; and **how
 the player finds the next step** — the guidance card line. Being lost is the field's top complaint
@@ -92,7 +94,7 @@ happens*, above) — if this release opens one, it arrives filled, not as a prom
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
 script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
-instrument that judges nothing. Lints never touch the tally (`gates.py:11315`), so a game
+instrument that judges nothing. Lints never touch the tally (`gates.py:12991`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -128,6 +130,12 @@ python3 scripts/gates.py --release <slug>
 
 > ⚠️ **The rule is LO's and it is not the obvious one: dev mode and missing media block RELEASE, not
 > testing** — a test build with labelled placeholders and a jump list is a *good* test build.
+
+**6b. Read** *(LO decided, D12)*. Run `v2-reader` on every canvas **touched** this release: its id is
+new, or its TOML table differs from the one in the last shipped release's `7_final_game.toml`, read at
+`releases[].commit`. With no shipped release, every canvas is touched. Save its verdicts in
+`release_page.reader` and LO's waivers in `release_page.reader_waivers`; a FAIL with no waiver blocks the
+release (`--ship` row *the reader passed*). The reader can be wrong either way, and LO's playthrough is the final say.
 
 **7. Log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the
@@ -237,8 +245,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:17375   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:17379   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:18182   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:18186   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -366,6 +374,7 @@ signature of doctrine living in the wrong place:
    the field, the sidebar footer it renders and its four `file:line`s are `engine.md` §38.
 5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
 6. **`v2_state.json` promises reconciled** — paid or cut, per *Named but never paid* above.
+6b. **The reader has run** on every touched canvas (loop step 6b), its verdicts saved.
 7. **`gates.py --ship <slug>` exits 0** — run by `scripts/release_upload.py` before it packages
    anything, and by `scripts/hooks/pre-commit` when this commit stages the build or the portal
    entry without `dev: true`. The release page (`release_page` in `v2_state.json`) is signed by LO
@@ -374,7 +383,9 @@ signature of doctrine living in the wrong place:
    each unlock can be earned, then plays the build with `playtest.reach_step` — which sets the
    clock and the place for each step and applies its declared gate, but never the step counter,
    so step 3 is reached only if steps 1 and 2 really moved it.
-8. **`releases[]` gets `repeatables` and `ladder_steps`** — the lint *repeatables without a step*
+8. **`releases[]` gets `repeatables`, `ladder_steps` and `commit`** (the HEAD the build was made from,
+   before the ship commit;
+   the next release's step 6b diffs against it) — the lint *repeatables without a step*
    compares the next release against them.
 
 **`dev: true` and `version` are mutually exclusive.** One says not published; the other says this is
@@ -418,6 +429,13 @@ That is correct for a release gate — it judges what ships — and it means the
 
 ⚠️ **The archive is reported, never judged.** `output/` is legitimately rebuilt after archiving.
 
+**New BLOCK rules warn first (LO B, 2026-09-30).** A rule that makes a `--ship` BLOCK row stricter carries a
+`since` date (`SHIP_SINCE` in `gates.py`). A game whose `v2_state.json` existed before that date
+(`SHIP_GRANDFATHERED`: members_only, orientation, probation, the_balance, vesper_two) gets `[WARN] … blocks
+from your next release` where only the new rule is red. It keeps warning until it records a release with
+`shipped` on or after `since`; then the row blocks. A game started later is blocked from the start. Ordinary
+gates are never grandfathered.
+
 ---
 
 ## § The first release (v0.1) — the one exception
@@ -438,8 +456,9 @@ is never finished. *(LO decided.)*
   "every gate green")*. The BLOCK list is green; the REPORT list is printed and LO judges it when he
   plays. A red REPORT row is not a reason to hold the release, and not a reason to ignore it either.
 - **The explicit floor is met from minute one**, including the traversal layer.
-- **First explicit beat early.** The strongest-retained game in the comparison set is explicit
-  on night one, two clicks from free roam.
+- **First explicit beat early** — from a stranger or a one-off, never the paid route or the main man
+  (`the-arc.md` A15). The strongest-retained game in the comparison set is explicit on night one,
+  two clicks from free roam.
 - **The first hour is authored, not assumed** — `references/the-first-hour.md`. One opening shape,
   not both; the funnel hands over into something that is open at the minute it lands; every
   character is met before their portrait goes live; the anchor says what kind of place it is the

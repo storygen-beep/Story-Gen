@@ -1,0 +1,61 @@
+:: CastPage
+<<nobr>>
+<h2>The Cast</h2>
+
+/* Roster + reveal, both from the quest cards. See _generate_cast_page's docstring. */
+<<set _allCards to setup.quests_cards || []>>
+<<set _hidden to setup.hiddenNpcs || {}>>
+<<set _slugMap to setup.npc_slug_map || {}>>
+<<set _slugs to []>>
+<<for _c range _allCards>>
+  <<if _c && _c.npc_id && _slugs.indexOf(_c.npc_id) === -1>>
+    /* hiddenNpcs is UUID-keyed; check both forms so hidden_from_ui holds in
+       either build mode, exactly as QuestsPage does. */
+    <<if !_hidden[_c.npc_id] && !_hidden[_slugMap[_c.npc_id]]>>
+      <<run _slugs.push(_c.npc_id)>>
+    <</if>>
+  <</if>>
+<</for>>
+
+<<set _shown to 0>>
+<<for _slug range _slugs>>
+  <<set _card to setup.pickQuestsCard(_slug)>>
+  <<if _card>>
+    <<set _nid to _slugMap[_slug] || _slug>>
+    <<set _npc to State.variables.npcs ? (State.variables.npcs[_nid] || State.variables.npcs[_slug]) : null>>
+    <<if _npc>>
+      <<set _shown to _shown + 1>>
+      <<set _loc to setup.getNpcLocation(_slug)>>
+      <<set _locName to _loc ? (setup._locNameFromUuid(_loc.location) || "") : "">>
+      <<set _goalBlock to setup.renderQuestsGoalBlock(_card, setup.evaluateGoals(_card))>>
+      <div class="stats-card stats-card-with-portrait cast-card">
+        <div class="stats-portrait">
+          <<if _npc.portrait>>
+            <img @src="'./media/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='&lt;svg viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;35&quot; r=&quot;20&quot; fill=&quot;#6c757d&quot;/&gt;&lt;ellipse cx=&quot;50&quot; cy=&quot;85&quot; rx=&quot;35&quot; ry=&quot;25&quot; fill=&quot;#6c757d&quot;/&gt;&lt;/svg&gt;';">
+          <<else>>
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="35" r="20" fill="#6c757d"/><ellipse cx="50" cy="85" rx="35" ry="25" fill="#6c757d"/></svg>
+          <</if>>
+        </div>
+        <div class="stats-info">
+          <div class="stats-name"><<print _npc.name>></div>
+          <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
+          <<set _tags to setup.npc_tags[_slug]>>
+          <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
+          <<if _locName>>
+            <div class="cast-where">📍 <<print _locName>></div>
+          <<else>>
+            <div class="cast-where cast-away">📍 Not about right now</div>
+          <</if>>
+          <<if _goalBlock>><<print _goalBlock>><</if>>
+          <<if _card.tip>><div class="quests-tip">💡 <<print _card.tip>></div><</if>>
+        </div>
+      </div>
+    <</if>>
+  <</if>>
+<</for>>
+
+<<if _shown === 0>>
+  <div class="no-quests">You have not met anybody yet.</div>
+<</if>>
+<</nobr>>
+<<link "← Back">><<run setup.smartBack()>><</link>>

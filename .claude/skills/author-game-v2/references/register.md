@@ -89,9 +89,9 @@ one was out of character, and one printed a stat that does not exist.
 | allowed | not allowed |
 |---|---|
 | texture that cannot clash with anything: the kettle, a pet name, the oil in the tray | anything that contradicts the design: clothes, times, who is where |
-| her opinions in her thoughts | claims about the past that no flag tracks: *last night*, *this week*, *again* |
+| her opinions in her thoughts | claims about her past that no flag tracks — a past-tense clause about her: *you came last night*, *you did this again*. *Again* alone on a repeatable is fine (*he wants you again*) |
 | dialogue that fits the person's cast entry | behaviour the cast entry rules out |
-| a consequence printed on a button when a real flag or stat sits behind it | made-up stats (`the-meters.md`, "What the player is shown") |
+| a consequence printed on a button when a real flag or stat sits behind it | a `+X` for a stat that does not exist (`the-meters.md`, "What the player is shown") |
 
 **The four rules.**
 
@@ -102,8 +102,8 @@ one was out of character, and one printed a stat that does not exist.
    outside it.
 3. **A big moment is a one-time step, not a repeatable.** A repeatable plays every visit, so it
    cannot carry a revelation. L3.
-4. **A consequence printed on a button is a real flag**, or it is added to the design first. Scores,
-   including a person's own, are never printed (`the-meters.md`, "What the player is shown").
+4. **A consequence printed on a button is a real flag or stat**, or it is added to the design first.
+   Numbers are shown and named (`the-meters.md`, "What the player is shown").
 
 **How to check a scene — seven steps.**
 
@@ -180,7 +180,8 @@ sacrificing a single line of the psychology, which is the part that makes the ga
 
 **Not word-stuffing.** Eleven rewrites moved a game from 7.5% to 9.4% without adding one
 gratuitous noun. The words arrived because the camera stayed on the body long enough to need
-them, not because they were sprinkled in.
+them, not because they were sprinkled in. **The floor is a share across the whole game, not a quota
+per beat, and repeating one word is not craft**: the counter takes every repeat, the reader does not.
 
 **Not loosening the wordlist.** `come` was excluded from the frozen list because it matches "come
 downstairs" everywhere. When prose scores low, the prose is what is wrong. The list has been
@@ -331,8 +332,8 @@ numbers only: 84.6% of 39 willingness pairs put the composure on the high branch
 
 ## What a scene contains
 
-**Every scene with a named person answers seven tests, one line each.** The first three go on its
-scene sheet (`the-sheets.md` S1); `v2-reader` judges all seven (`agents.md`, The Reader).
+**Every scene with a named person answers nine tests, one line each.** The first three go on its
+scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The Reader).
 
 1. **Want** — what this person visibly wants here. On a sexual step, an **earlier** scene has already
    shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on.
@@ -345,6 +346,10 @@ scene sheet (`the-sheets.md` S1); `v2-reader` judges all seven (`agents.md`, The
 6. **The written no** — where there is an offer, a refusal exists, is written and is priced
    (`the-surfaces.md` R5b).
 7. **The body** — an explicit beat stays on the body to its last sentence (the pivot, above).
+8. **The numbers agree** — every number the scene states agrees with the Want and the ledger, and the
+   Want's own numbers agree with each other (one span said two ways is a FAIL).
+9. **Companion and rival** — where `want.companion_is_rival` is declared, her scenes show both the help
+   and the competition *(LO decided, D15)*.
 
 ## One event, several levels
 
@@ -549,8 +554,10 @@ screen's text opens on:
 
 ```
                      touch  strip  hands  oral  vaginal  anal  finish
-FIELD                  13%    15%    11%   14%     28%     5%    13%
+FIELD                  13%    14%    13%   15%     25%     3%    17%
 ```
+
+Four games (CoT, IHOH, Shady Deals, Cupid's Way), 1,034 explicit passages, re-measured 2026-09-30.
 
 Evenly spread, because no single screen is the whole climb.
 
@@ -982,8 +989,9 @@ prior state of the world before the present one means anything.
 Three inferences before anyone in the room does anything.
 
 **Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence nobody has gated is
-something happening now. No *used to*, no *since*, no *two years ago*, no *they moved* — and, since the loud voice makes these claims constantly, no *last night*, *this week*,
-*again*, *every time* on a line the player can read on their first visit.
+something happening now. No *used to*, no *since*, no *two years ago*, no *they moved* — and, since the loud voice makes these claims constantly, no past-tense clause about her with *last night*,
+*this week* or *again* (*you came again*) on a line the player can read on their first visit. *Again* in
+the present (*he wants you again*) is not a claim.
 
 **The one exception is the truth rule's rule 2:** a line about the past may show on a repeatable
 when it sits inside a `group` whose `conditions` read the flag or counter that records that past.
@@ -1053,7 +1061,8 @@ games, reads **0.8**.
 Eleven common regional words appear in **zero of 27 games across 14.7M words**: *airer,
 anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.* 
 
-**Gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
+**The genre word counts as the player's own word** for a sex trait — *Corruption*, *Exhibitionism*
+— *(LO decided, D3b)*. **Otherwise, gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
 pitch → rent · chandlery → hardware shop · the front → the seafront · float → the till money · went
 inside → went to prison.* Either the sentence carries the meaning or the word does not earn its
 place. This costs nothing: the specificity that matters is what the thing is DOING, not which

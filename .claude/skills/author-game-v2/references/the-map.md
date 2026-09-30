@@ -26,9 +26,9 @@ measured against five named shipped games.
 
 | `archetype` | the shape | fits |
 |---|---|---|
-| **`nested_zones`** *(the default to beat)* | district → venue → interior room; each hub lists its children | most life-sims: a town or campus **plus** a home |
-| **`two_hub`** | two strong hubs — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
-| **`map_hotspots`** | a drawn map with clickable districts and fast-travel | a large, replay-heavy world, 10+ zones |
+| **`nested_zones`** *(the default to beat)* | district → venue → interior room; each zone lists its children | most life-sims: a town or campus **plus** a home |
+| **`two_hub`** | two strong anchors — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
+| **`map_hotspots`** | a drawn map with clickable districts | a large, replay-heavy world, 10+ zones |
 | **`street_mesh`** | named streets, each listing its neighbours and its venues | a city that should feel real without a drawn map |
 | **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain | heavily scripted content where a map is friction |
 
@@ -52,7 +52,7 @@ measured against five named shipped games.
 the location count from where your cast's rosters go. That is right, and on its own it is circular:
 the premise fixes the cast, the cast fixes the map, and a family of five who live in one house
 returns a house every time. **The shape is the input that breaks the circle**, so it is picked
-first — before the cast exists, in the Want.
+first on the board (`board.map.archetype`), before a room is derived from anyone's roster.
 
 ---
 
@@ -108,7 +108,9 @@ location. This is not decoration:
 
 **The declared `exterior` must be a root** — no `entry_from` — with the home base among the
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
-genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other.
+genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other,
+and list both in `board.map.roots[]`. Gate 11 walks on foot, so it exempts the second root only when
+that root is marked `offscreen` or sealed (entered only by a canvas exit).
 
 The diagram above is the topology. This is what it is in keys, and it is the whole of the
 difference — one field, present or absent, on the location the board names as `exterior`:
@@ -131,7 +133,8 @@ id = "<exterior_location_id>"
 > *(LO decided.)* That is why this shows one key and no rooms.
 
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
-see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
+see. Declare the exterior in `board.map.exterior`; the cost of crossing it goes on the area as
+`crossing_costs` (`engine.md` §22).
 
 ⚠️ **A missing map fails too.** A game that declares no `board.map` block fails both `the map is a
 place` and `residents have homes`. An undeclared board is undone work, and the gates report it as
@@ -237,8 +240,9 @@ card on the map. A locked bathroom is a sentence, not a screen.
 `is_absent`). The shape is a pair of rows in the one room — `activity_bathe` gated `is_absent` beside
 `bathroom_occupied` gated `is_present` — and a row in someone's room gated on that person being out.
 
-**And the empty room is content.** Where the field has a door it usually also has *going through
-their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
+**And his room while he is out is content** — in *his* room, as occupancy, not a destination left
+with nothing to do (`the-board.md` §1, two kinds of place). Where the field has a door it usually also
+has *going through their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
 the best shape of it: the row is there, and the game names who is inside, in red, beside the
 option to search anyway. Occupancy as a stated risk, not a lock.
 
@@ -253,7 +257,11 @@ All five verified against source; full citations in `references/engine.md`.
 | you want | the field |
 |---|---|
 | walking somewhere to **cost** time or a trait | `costs = { time = 20, energy = 5 }` on `[[locations]]` |
-| a place that is **shut and inert** — the mall at midnight, a story gate | `entry_conditions` + `blocked_message` (a greyed, unclickable card) |
+| a place that is **shut and inert** — a story gate | `entry_conditions` + `blocked_message` (a greyed, unclickable card) |
+| a place **shut at set hours**, saying when it opens | `hours` + `closed_text` — `engine.md` §22 |
+| a place **not listed until she finds it** | `hidden_until = { flag }` — `engine.md` §22 |
+| a place she **only passes through** | `kind = "thoroughfare"` — `engine.md` §22 |
+| time charged **once, on crossing into an area** | `crossing_costs` on the area's container — `engine.md` §22 |
 | a door she can **stand at and knock on**, whether or not she may enter | `[locations.door]` — R6, `engine.md` §44 |
 | an "away" label for a schedule with **no nav card** | `offscreen = true` |
 | a pure navigation wrapper holding no content | `is_container` + `default_entry` |
@@ -261,7 +269,7 @@ All five verified against source; full citations in `references/engine.md`.
 **Travel friction is what makes schedules bite.** A premise that says *"ten minutes' walk away"*
 while arriving costs nothing has written a fact the player never experiences. Put twenty minutes on
 the bridge and being in two places stops being free — which is the entire point of having authored
-a schedule grid at all. Put the cost on **bridges between zones**, never on every room.
+a schedule grid at all. Put the cost on the **area** (`crossing_costs`), never on every room.
 
 ---
 
@@ -277,8 +285,9 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
     "home_base":  "<location_id — where she sleeps>",
     "exterior":   "<location_id — the ground everything else sits on. MUST be a root.>",
     "homes":      { "<npc_id>": "<location_id | offscreen>" },
-    "bridges":    [ { "from": "<location_id>", "to": "<location_id>", "costs": { "time": 0 } } ],
-    "r1_signoff": "<WHO signed it and WHEN, then what they saw. 'the author' is not a name.>"
+    "roots":      ["<location_id>"],
+    "scale":      "<one street · a district · a town>",
+    "alive":      "<tight slice | living world>"
   }
 }
 ```
@@ -296,11 +305,26 @@ rather than against a guess.
 
 ---
 
+## Navigation — area, building, room
+
+*(LO decided, D10.)*
+
+- **Area → building → room.** Time is charged on crossing into another area (`crossing_costs`), not on
+  every room inside it.
+- **No fast travel**, for now.
+- **Places she has not found are hidden** (`hidden_until`); **closed places show why**
+  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4175`).
+- **Guidance cards carry place, time and what is waiting**, and a travel link carries the engine's NEW
+  mark when something new waits there.
+- **Faces stay on travel cards.**
+
+---
+
 ## What is checked, and what is not
 
 | | |
 |---|---|
-| **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed |
+| **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed — a second root in `board.map.roots[]` needs one of the two |
 | **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
 | **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
 | **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |
@@ -315,7 +339,4 @@ gate 28 takes both: *did you choose a shape* (a declaration), and *is the outsid
 outside* (`entry_from`, which no ledger can talk its way out of). What is left for the human is the
 part that genuinely needs eyes.
 
-> ⚠️ **`r1_signoff` records who and when.** *(LO decided.)* A sign-off with no name and no date
-> cannot be checked. A sign-off by the author of the thing being signed
-> off is not a sign-off, and a gate cannot tell the difference — which is exactly why it is written
-> down here instead.
+> The map is signed like every spine page: LO signs it once LO has read it (`the-spine.md`).

@@ -18,3 +18,23 @@ def test_every_toml_template_parses():
     for f in files:
         with open(f, "rb") as fh:
             tomllib.load(fh)
+
+
+SHEETS = ["place", "person", "scene", "system", "opening", "decision"]
+
+
+def test_every_sheet_template_is_one_page_of_slots():
+    """PRD v2 DC9c · I20: six sheet templates, one page each, slots rather than example prose."""
+    import re
+    for name in SHEETS:
+        path = os.path.join(TEMPLATES, "sheets", name + ".md")
+        with open(path, encoding="utf-8") as fh:
+            lines = fh.read().splitlines()
+        assert len(lines) <= 60, (name, len(lines))
+        assert lines[0].startswith("# [REVIEW]"), name
+        assert any("<" in l and ">" in l for l in lines), name
+        # a table cell is a slot, a fixed choice or a key: never a filled sentence of prose
+        for l in lines:
+            if l.startswith("| ") and not set(l) <= set("|- "):
+                for c in (c.strip() for c in l.strip("|").split("|")):
+                    assert not re.search(r"^[A-Z][a-z]+( [a-z]+){4,}[.!?]$", c), (name, c)

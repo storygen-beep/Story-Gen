@@ -1,6 +1,6 @@
 # SP7 · The release page — <game title>
 
-> [REVIEW] · drafted <date> · signed by LO: <name, date — no earlier than the day after drafting>
+> [REVIEW] · drafted <date> · signed by LO: <name, date>
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP7 · `the-release.md`, § Shipping the build.
 
 | decision | answer |

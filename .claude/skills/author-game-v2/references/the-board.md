@@ -37,9 +37,12 @@ Write the list of places that answer at least one of those, and count it. That i
 > every time. Pick the archetype (`the-map.md` R0) before this step; the count is derived *within*
 > that shape.
 >
-> ⚠️ **A room that answers none of the three is not a location yet** (the field's rooms:
-> `the-surfaces.md`, *"What a room is for, measured"*). The incumbent skill's version of this rule (*"this place exists so the player can ___"*)
-> was a question in a review document rather than a check, and it never fired.
+> ⚠️ **Two kinds of place** *(LO decided, D9 · D10)*. A **thoroughfare** (`kind = "thoroughfare"`,
+> `engine.md` §22) only routes: a corridor, a lobby, a street. A **destination** — the default —
+> always offers one thing she can do alone, or it is closed then (`hours` + `closed_text`,
+> `engine.md` §22). A room that is neither is not a location yet. One passing
+> game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
+> and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
 
 Budget the set as a *shape*, not a flat quota:
 
@@ -69,11 +72,11 @@ navigation_order     = ["back_room"]
 For each location, decide and record in `v2_state.json` under `board.locations[]`:
 
 - **Its dramatic job** (`job`). Why she goes there when nothing is happening.
-- **Who is there, and when.** At least one scheduled character, or it is scenery.
+- **Who is there and when — and on a destination, one thing she does alone.** A thoroughfare needs
+  neither.
 - **What its list holds** (`serves`) — the three kinds and nothing else (`the-surfaces.md` R2):
   which declared **needs** she can fill here, what **work** is done here, which **people** are
-  scheduled here. *That is the room's menu, and its length.* A room that answers none of the three
-  is not a location yet.
+  scheduled here. *That is the room's menu, and its length.*
 
   ```jsonc
   { "id": "the_kitchen", "serves": { "needs": ["hunger"], "work": [], "people": ["npc_martin", "npc_denise"] } }
@@ -119,8 +122,9 @@ total you are planning for and put that share into every increment, rather than 
 the end. A ratio gate cannot be satisfied by working elsewhere; the target moves with you.
 
 **Cold rooms are allowed.** Not every place is erotic — the reference game had no sexual
-content in 8 of its 25 locations (a police station, a museum). The floor is **60% of
-locations carrying heat**, not 100%.
+content in 8 of its 25 locations (a police station, a museum). **A place is hot when it holds at least
+one sex scene** *(LO decided, D9c)*, counting the men's own rooms and a phone-started scene under the
+man's home (where his schedule puts him most). About **60% of places** are hot, not 100%.
 
 ---
 
@@ -151,17 +155,18 @@ fails otherwise.
 the weekday are two separate checks, and the weekday one runs first against **today**:
 
 ```
-v2.py:3742   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:3743   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:3800   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:3801   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
-startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:3784`). So
+startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4152`). So
 `weekdays = [0,1,2,3,4,5,6]`, `22:00`–`04:00` is correctly **one** row.
 
 ⚠️ **But `weekdays = [1]`, `23:00`–`06:00` puts the character on site on Tuesday night and DELETES
 them at midnight**, because `todayIndex` is now Wednesday and Wednesday is not in the list. A
-day-specific overnight window needs **two rows** — `[1] 23:00–23:59` and `[2] 00:00–06:00`.
+day-specific overnight window needs **two rows** — `[1] 23:00–00:00` and `[2] 00:00–06:00`. The end is
+exclusive, so `23:59` would lose the last minute; `00:00` wraps and keeps it.
 
 This section previously said "`22:00`–`04:00` is one row, not two" with no weekday qualifier, and
 its own example happens to use all seven days — which is exactly why the caveat stayed invisible.
@@ -282,7 +287,8 @@ and gives every player the same ladder.
 its 2026 build returns different figures because most of that game's logic now lives in JavaScript —
 the two are not comparable and neither supersedes the other.)*
 
-⚠️ **Rung spacing is NOT declared here and there is no shape to copy.** The field's live meters run **8–17 rungs with the lowest at ~5** (`the-meters.md` W4).
+**The board sets the rung numbers.** The default is the field's: **8–17 rungs, the lowest near 5**
+(`the-meters.md` W4). The spine's first gates start there, and the board may move them.
 
 **Layer 2 — volatile state.** Arousal, stress, energy. These move both ways and are managed minute
 to minute; they are *not* ascent. **But volatile is not the same as unread** — a throttle gates the
@@ -313,9 +319,11 @@ Three hard rules, all gated:
 - **Rising must expand.** For each ascent tier, `gte`/`gt` gates must outnumber `lt`/`lte`.
   Gate 10 checks the three most-gated meters. A meter whose rise mostly *closes* content is a
   descent wearing an ascent's clothes.
-- **The ceiling must be bought.** The top band's `max` is a promise to the player. If the
-  highest authored gate on that trait is below it, the remaining points buy nothing. Gate 8.
-  *(A top band with no `max` is unbounded on purpose and promises nothing.)*
+- **The ceiling must be bought.** Every band boundary is a promise to the player, so the highest
+  band `min` needs an authored gate on that trait at or above it, or the points past the last gate
+  buy nothing. Gate 8. Two exceptions: the band holding the meter's **starting value** (a meter that
+  starts full and drains starts there), and a meter declared `falling = true` in `[[traits.labels]]`
+  (read by `gates.py` only).
 - **Every meter you raise is read by something.** Gate 33, `the-meters.md` W3.
 
 **Where ceilings live:** `sidebar_items[].bands[]`. **Not** in `player.core_traits`, which is
@@ -356,11 +364,11 @@ Declare each need with the four fields from `the-meters.md` M8:
 
 ```jsonc
 "needs": [
-  { "key":   "hygiene",
-    "falls": "10 a day",                                  // [player.trait_decay]
-    "fills": "the_bathroom · Wash · 30 min",
-    "costs": "$5 for the water heater",
-    "shuts": "under 40 she will not go out in public" }   // ← gate 29 checks THIS
+  { "key":   "energy",
+    "falls": "8 a day",                                   // [player.trait_decay]
+    "fills": "her_room · Sleep · 8 hours",
+    "costs": "nothing",
+    "shuts": "under 20 she will not go out" }             // ← gate 29 checks THIS
 ]
 ```
 
@@ -416,14 +424,14 @@ wardrobe_location = "her_room"
 Record in `v2_state.json`: every location with its budget and current fill, every character
 with its surface count and schedule rows, the ascent meter and its ceiling.
 
-Then run the scoreboard — it works on an empty world and will simply report the debt:
+Then run the check that reads the ledger alone — before any TOML exists, `gates.py` has nothing to
+read and says so:
 
 ```
-python3 .claude/skills/author-game-v2/scripts/gates.py <slug>
+python3 .claude/skills/author-game-v2/scripts/shape.py <slug>
 ```
 
-Gates 1, 5, 6, 8 and 10 are all decidable from the Board alone. Fix them here, where it is
-cheap, rather than after content is hung on a broken frame.
+The scoreboard (`gates.py`) takes over once the build writes `7_final_game.toml`.
 
 Then set `phase = "board"` and move to `references/the-sheets.md`: write the sheets LO reads and
 signs, before any TOML.

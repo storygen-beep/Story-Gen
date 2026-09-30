@@ -41,8 +41,11 @@ belong here; only decisions, debts, and promises do.
     "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
-    "promise":       { "goal": "…", "date": "…", "mystery": "…", "payout": "…", "rival": "npc_id" },
+    "promise":       { "goal": "…", "mystery": "…", "payout": "…", "rival": "npc_id",
+                       "goals": [ { "goal": "…", "ends_when": "…", "next": "…" } ] },
+                                 // no date (D8). A goal with ends_when names next (shape.py).
     "companion":     "npc_id",   // who leads her, or whom she leads
+    "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
     "face":          "…",        // one performer or one look, kept across the game
     "toggles":       [ { "id": "…", "flag": "…", "turns_off": "…" } ],
@@ -62,28 +65,24 @@ belong here; only decisions, debts, and promises do.
     },
 
     "who_she_is":      "…",
-    // WHAT HOLDS HER HERE. A bill is 4 of 23 in the female-lead field and only the
-    // FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
-    "obligation":      "…",   // the hold, in her nouns, with a face and a date
+    "obligation":      "…",   // the hold, in her nouns, with a face and a due day that repeats
     "hold_kind":       "ambition" | "bill" | "order" | "body" | "subsistence"
-                     | "appetite" | "job" | "erosion" | "displacement",
-                              // the-want.md §1b carries the count and an example each.
-                              // `bill` hands the mechanism to the-economy.md R3-R3d.
-    "hold_collector":  "npc_id",  // WHO enforces it, when a person does. Omit when
-                              // nothing does — `in-her-own-hands` charges rent with no
-                              // collector at all, and that is a shape, not an omission.
-                              // Read by the lint `the collector is also the target`,
-                              // which prints his share of the game's explicit surfaces.
-                              // the-want.md §4a: the person who holds the obligation is
-                              // not automatically the person she fucks — measured at
-                              // 0.4-3.8% of explicit passages across the whole field.
+                     | "appetite" | "job" | "erosion" | "displacement",   // the-want.md §1b
+    "hold_collector":  "npc_id",  // who enforces it, when a person does; omit when nothing does.
+                              // Read by the lint `the collector is also the target` (§4a).
     "appetite":        "…",   // must not be completable. A DESTINATION, not the opening
                               // position and not the content schedule — the tiers are that
                               // (the-want.md §2)
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
     "charge":          "reversal" | "taboo" | "transformation" | "…",
+    "cast":            [ { "id": "npc_id", "age": 18, "keeps": "step counter + memory flags"
+                                                  | "want + warmth" | "want + power" } ],
+                              // the-want.md §6. shape.py FAILS a person (here or in
+                              // board.characters[]) with no age or under 18.
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
-    "crude_ceiling":   { "npc_id": ["the actual words permitted, per tier"] },
+    "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"],
+                         "role:night man": ["…"] },   // SP2 · a walk-on with no id: `role:<name>`
+    "places":          [ { "id": "location_id", "name": "…" } ],   // read by `gates.py --words`
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 
@@ -91,7 +90,7 @@ belong here; only decisions, debts, and promises do.
   // its page names (board.*, dependencies, release_page), never copied here.
   "spine": {
     "pages": [ { "id": "SP1", "status": "REVIEW" | "READY", "drafted_at": "YYYY-MM-DD",
-                 "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]   // shape.py: signed_at after drafted_at
+                 "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]   // shape.py: a READY page is signed
   },
 
   // SP3 — a step that needs another person's step, a window, or a place.
@@ -148,21 +147,19 @@ belong here; only decisions, debts, and promises do.
     // the body's clock. Declared here, gated by gate 29. the-meters.md M8-M10.
     // `shuts` is the load-bearing field: a need that shuts nothing is a chore.
     "needs": [
-      { "key": "hygiene", "falls": "10 a day", "fills": "the_bathroom · Wash · 30 min",
-        "costs": "$5 for the water heater", "shuts": "under 40 she will not go out in public" }
+      { "key": "energy", "falls": "8 a day", "fills": "her_room · Sleep · 8 hours",
+        "costs": "nothing", "shuts": "under 20 she will not go out" }
     ],
     // SP5 and SP6 — the cast's width and the rule for adding one; where it is played, and clips.
     "cast":  { "width": 4, "adding_rule": "a new person brings a place, a ladder, and why she wants them" },
     "media": { "platform": "…", "clips": "…" },
 
     "characters": [
-      // `meters` — which numbers THIS person owns and what each one gates. In a
-      //   who_climbs = "player" game one bond meter is a correct, deliberate answer;
-      //   in a "cast" game an identical pair on everyone is the engine missing.
-      //   the-meters.md W6.
+      // `meters` — which numbers THIS person owns and what each one gates: what his
+      //   want.cast[].keeps declares (the-meters.md W1 · W6).
       { "id": "npc_…", "surfaces": 2, "schedule_rows": 3, "why_wanted": "…",
-        "meters": { "relation": "access — what she is allowed to be near",
-                    "lust":     "willingness — how far he will go" } }
+        "meters": { "want":   { "type": "opens his next step", "min": 0, "max": 100 },
+                    "warmth": { "type": "lover vs user", "min": 0, "max": 100 } } }
     ],
 
     // the map, as a place — declared BEFORE locations are written, and the SHAPE
@@ -173,10 +170,19 @@ belong here; only decisions, debts, and promises do.
       "shape":      "one sentence a stranger could draw from",
       "home_base":  "location_id",
       "exterior":   "location_id — MUST be a root, not a leaf off an interior room",
+      "roots":      ["location_id", "…"],   // every root; a second one is joined by a travel canvas
+                                            //   and marked offscreen or sealed for gate 11 (the-map.md R3)
       "homes":      { "npc_…": "location_id", "npc_…": "offscreen" },
-      "bridges":    [ { "from": "location_id", "to": "location_id", "costs": { "time": 0 } } ],
-      "r1_signoff": "WHO signed it and WHEN, then what they saw"
+      "scale":      "one street · a district · a town",
+      "alive":      "tight slice" | "living world"        // the-map.md, "Aliveness"
+      // travel costs live on the area: [[locations]] crossing_costs (engine.md §22). A place's
+      // `name` comes from want.places[].
     },
+
+    // SP4 — the hold's pressure, money or not. `stages` mirrors [settings.rent] stages;
+    //   shape.py reads it when present.
+    "pressure": { "what_repeats": "…", "who_collects": "npc_id", "cost_of_a_miss": "…",
+                  "stages": [ { "amount": 100, "after_total_paid": 0 } ] },
 
     // what money is FOR — the question asked while it is still cheap to answer
     "economy": {
@@ -226,10 +232,14 @@ belong here; only decisions, debts, and promises do.
                                              // the step as shipped (the-release.md, "The next
                                              //   step"). Optional; the pitch pack reads person to
                                              //   count releases since each person's last step.
+                                             //   Unshipped: `release_page.her_moment`.
       "added":   { "units": 0, "words": 0, "locations": 0, "characters": 0 },
       "opened":  ["the thing now visible and locked"],
       "gates":   { "passed": 10, "of": 10 },
-      "shipped": "2026-08-10"
+      "shipped": "2026-08-10",
+      "commit":  "abc1234"                   // the HEAD the build was made from (before the ship
+                                             //   commit); the reader's
+                                             //   "touched" diffs against it (the-release.md 6b)
     }
   ],
 
@@ -331,10 +341,6 @@ interior, so it is also the only renewable source of new characters.
 **`board.map.home_base`** — where she sleeps. Older ledgers may carry the retired key `dwelling`;
 nothing reads it.
 
-**`board.map.r1_signoff`** — **who** signed the map off and **when**. A sign-off written by the
-author of the map is not a sign-off, and one with no name and no date cannot be checked.
-*(LO decided.)* `the-map.md`, "What is checked".
-
 **`board.economy.currency`** — declaring it is strictly better than letting the gates infer one
 from `player.core_traits`; the headline says which was used, and inference picks wrong on a game
 with two currencies. **`board.economy.symbol`** is the notation that currency is written in, and it
@@ -380,13 +386,14 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.characters` | *residents have homes* · *guidance exists* | `[{ id, name, role }]` |
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
-| `board.needs[]` | *a need shuts a door* | `[{ key, decay_per_day, shuts }]` — and every key must be READ by a condition somewhere in the game |
-| `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) takes over once a release page is written |
+| `board.needs[]` | *a need shuts a door* | `[{ key, falls, fills, costs, shuts }]` — and every key must be READ by a condition somewhere in the game |
+| `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
+| `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place, past midnight included; a `fires_from = "opening"` step is exempt. A row it cannot read (an unknown weekday, or the TOML's `location`/`start_time`/`end_time`) is bad input, and that person's steps are not judged. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
-| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "counted"` |
+| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. `shape.py` *a step's gate can be reached* checks each gate against the trait's start (his: `meters[k].start`, else `.min`; hers, a gate with no `npc`: `board.player_start = {trait: n}`, listed as bad input when malformed; else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
-| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), recorded and not gated. Absent means `--ship` FAILS: nothing says what the release is |
+| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 

@@ -5,6 +5,2262 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 5 (verify, members_only only)
+
+**Why.** Phase 5 of PRD v2 §6, scoped by LO to members_only. Checker bugs found on the scratch run are fixed
+here; game problems are listed in the phase 5 report, never edited.
+
+**What changed.**
+- **CK5 schedule rows are read or refused (`scripts/shape.py`, `references/state.md`).** *The person is there at
+  the step's hour* dropped any `board.characters[].schedule` row it could not read and blamed the person's hours:
+  a misspelled weekday ("Wensday") read as "does not cover … on Wed" (carried note from GAME_FOLLOWUPS.md), and a
+  row in the TOML's own words (`location`/`start_time`/`end_time`) matched no place, so members_only read 0/9 steps
+  covered while its rows cover all nine. Both are now bad input that names the day or the keys, and that person's
+  steps are not judged. Verified: two new tests in `tests/test_shape_ck5.py`; the same fixture against the previous
+  `shape.py` printed `npc_a step 1: npc_a's schedule does not cover bar 18:00-20:00 on Wed`.
+- **CK8a "face fucking" (`scripts/gates.py` RUNGS, lines 353 and 355 edited in place, no line moved).** The oral
+  rung matched only `face-?fuck`, so "face fucking" with a space fell to the vaginal rung, whose lookbehind knew
+  only "face-" (carried note from GAME_FOLLOWUPS.md). Oral now matches `face[- ]?fuck\w*` and the vaginal rung also
+  skips "face ". Verified: new test in `tests/test_gates_ck8a.py` ("He is face fucking her." is `{oral}`, "He
+  fucks you face down." stays `{vaginal}`); the previous `gates.py` read both space forms as `{'vaginal'}`.
+- **RUNGS field figures re-measured; "re-measure pending" dropped (`scripts/gates.py` RUNGS comment and
+  `lint_ladder`, line-for-line; `references/register.md` S2; `tests/test_gates_ck8a.py`).** The opening-rung
+  distribution was measured on the old 25-game field with the pre-CK8a rung list, and that instrument is not in the
+  repo. Re-measured with the current RUNGS and EXPLICIT on the four quotable games only
+  (`~/Documents/Great_Games_Study_20260926/round2/passages/`; CoT, IHOH, Shady Deals, Cupid's Way; Cupid's Way
+  passages naming Jack, Aaron, the aunt or Jemma left out, 139 passages): one passage is one screen, a screen is
+  explicit at 3+ frozen-list words, its rung is the first one its text reaches. Pooled over 1,034 explicit passages:
+  touch 13% · strip 14% · hands 13% · oral 15% · vaginal 25% · anal 3% · finish 17%; vaginal-or-above 44% (was 46%).
+  The basis is now four games, not the field, and the text says so. Script:
+  `round2/rungs_remeasure_20260930.py`. Verified: pytest 462 passed, `--selfcheck` current, `cite_check` 0.
+
+---
+
+## 2026-09-30 — Phase 4 follow-ups (LO's review)
+
+**Why.** LO reviewed phase 4: one decision (Gate 42 mixed locks), five must-fixes and nine smaller ones.
+
+**What changed.**
+- **Gate 42 (LO decided).** Only a PURE number lock (every item a trait gte/gt/lte/lt, value ≥ 2, hers or his)
+  with `locked_text` FAILS as doubled ("drop locked_text"). A mixed lock (any flag, clock, clothing, `eq` or
+  value-1 item) is a story lock: it needs its line ("write a short line for the story part") and is never doubled,
+  because the engine's suffix names only the number legs. A `rejection_node` lock (Mode B, no suffix,
+  `v2.py:14770-14797`) is never doubled. Docs: `engine.md` §15, `the-voice.md` R4, `the-surfaces.md` R5c, SKILL row.
+- **NC3.** Only exits that leave the step unused are judged: a choice to a location, or to a node from which no
+  consuming choice is reachable. Node-to-node steps inside the yes path and anything after a consuming choice are
+  not judged.
+- **NC2.** (a/d) a choice inside the canvas that leads into an act node gates it (an ungated hub whose "Go up"
+  needs `first_done` passes (b) and (d)); "open on a new save" walks the entry through open choices to an act.
+  (c) a tier group plus an unconditioned last group is two voices. (e) a choice is followed through non-act nodes,
+  and a loop back to the same act is not leaving. The first time must itself name an act, else (b) says the setter
+  "names no act".
+- **NC6.** A man's `show_traits` counts only when `[ui.cast_page]` exists (no page renders without it,
+  `v2.py:11040`; the detail says "no cast page"). Step gates also count in a location's `entry_conditions`, a
+  schedule `when`, and a phone thread.
+- **DC6b leftovers.** `engine.md` §15's "nothing beside it" is limited to story locks; `the-surfaces.md` R5c's
+  "third shape … by default" is now for a story lock with no line; `engine.md` §36's worked example was a
+  rejection-node lock whose bar never showed before the click (Mode B shows only the label, `v2.py:14773`). Its
+  label now carries the bar, "Tell him no (Nerve 40)", and the dead `locked_text_threshold` line is gone.
+- **NC4.** Also reads `costs`, `pre_substitution_effects`, `fast_jobs` `money_trait` (default money) and phone
+  post actions' `counter_trait` (default followers), all toasted. The bank is left out: `bankTransfer` doesn't
+  toast. The message names the tidied key ("Kessler stage").
+- **NC1.** An empty verdict table, or a verdict other than PASS / FAIL / N/A, is "not read". `state.md`'s
+  `release_page` row names the row and the `reader` / `reader_waivers` shapes; the SKILL row states the scope.
+- **L1.** A group whose conditions lack `version = "1.0"` fails open (`v2.py:4330`), so every group after it is
+  dead. An `<<else>>` after an exhaustive NPC ladder is "dead unless the trait is undefined (old save)".
+- **CK7.** A condition shape the check can't read (clothing, `days_since_flag`, a modifier, a non-numeric NPC
+  compare) makes the canvas NOT live and is listed as "not judged".
+- **L2.** When step 3b never reaches a `Location_` passage in 20 steps, check 7's detail says where it stopped.
+- **shape.py.** A bad `player_start` FAILS "a step's gate can be reached" even when no step declares `raises`;
+  a malformed `goals` (a table, a list of strings) and a string `want.promise` (a crash before) are bad input.
+- **Gate 27.** The `trait_key` fallback is gone (the engine and importer read `trait` only).
+- **printed-stat.** The `SHIP_SINCE` comment says plainly it can never produce a WARN.
+- **Citations.** `the-want.md` → `v2.py:16216` (was `:14637`). `the-board.md` §1 gets its full stop back.
+  `the-release.md`'s tally citation re-pointed to `gates.py:12991`.
+
+**Verified.**
+- Tests added or extended: `test_gates_g42.py` (mixed with a line passes; mixed without one is mute on its story
+  part; a rejection node is never doubled; "drop locked_text"), `test_gates_nc3.py` (a 3-screen yes passes;
+  "Walk out" on screen 1 fails; "Continue" after the yes is not judged), `test_gates_nc2.py` (hub gate, the
+  first time names no act, tier + else = two voices, act → text → act, loop back), `test_gates_nc6.py`,
+  `test_gates_nc4.py`, `test_gates_nc1.py`, `test_gates_l1.py`, `test_gates_ck7.py`, `test_gates_g27.py`,
+  `test_playtest_l2.py` (a live build whose opening loops), `test_shape_nc5.py`.
+- Suite: 459 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, HEAD before (d36cde1) → after:
+  - Gate 42 doubled: members_only 6 → 4 · orientation 17 → 8 · probation 11 → 6 · the_balance 8 → 7 ·
+    vesper_two 9 → 5. The difference is mixed locks, now story locks. No new mute rows.
+  - NC2 problems: members_only 8 → 7, vesper_two 15 → 13; orientation / probation n/a; the_balance parked.
+  - NC3: n/a on all five (no `consume_on`). NC6: unchanged (no game has a cast page or `show_traits`).
+  - `--ship`: the red BLOCK rows are identical before and after on all five — nothing new blocks.
+
+words: 139,327 → 139,480 (+153) · running total 139,480 / 149,283.
+
+## 2026-09-30 — Phase 4 L2: two `playtest.py` misreads (I28)
+
+**Why.** Review I28: "guidance cards" read 0 of 19 on one game, and "a random event fires" sampled Mondays only.
+Both were verified live before any change (PRD: verify first, skip one that isn't real). Both are real.
+- Guidance: the funnel loop stops as soon as `player.current_location` is set, which the opening's FIRST node
+  does. On members_only the walk went `StartingCanvas_opening_…` → `Canvas_opening_club_Node_julian` (location
+  set, `opening_done` unset) and the cards read 0; once the funnel reached `Location_bar_floor`, 8 resolved.
+- Random: the sweep called `set_time(page, "Monday", hour)` only; members_only's `bar_talk` runs Tue–Sat 18–22.
+
+**What changed.**
+- `scripts/playtest.py` `universal()`: new step 3b takes the first link until the screen is a `Location_` passage
+  (the opening, capstones included, has handed over), then reads the guidance cards once, before check 5 plays
+  every canvas; check 7 reports that reading ("resolve once the opening ends"). Check 8 sweeps the same six hours
+  on all seven `DAYS`.
+
+**Verified.**
+- `tests/test_playtest_l2.py`: two real fixture builds (package_from_toml into tmp, played headless). Pass: a card
+  behind the opening's exit flag resolves; a Wednesday-only ambient is found. Fail: a card behind a flag nothing
+  reachable sets; an ambient behind the same flag. Both pass tests FAIL on the old `playtest.py` (swapped in and
+  run).
+- Suite: 431 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch builds, before → after (guidance · random fires):
+  - members_only: FAIL 0/19 → PASS 8/19 · FAIL 0/2 → PASS 1/2.
+  - orientation: PASS 8/16 → PASS 6/16 (read after the opening now; cards that only show during it retire) ·
+    FAIL 0/1 → FAIL 0/1 (real: `walkin_latelab` waits on `late_lab_open`).
+  - probation: PASS 9/22 → PASS 9/22 · PASS 5/7 → PASS 5/7.
+  - the_balance: FAIL 0/9 → PASS 2/9 · FAIL 0/4 → PASS 4/4 (the ambients wait on the opening's flag).
+  - vesper_two: FAIL 0/12 → FAIL 0/12 (real: `--ship` says the opening arms no card with goals) · its one random
+    canvas has no `chance` (real, unchanged).
+- Found, not fixed (outside L2): check 5 plays every canvas's first node, and a `location` exit fires its effects on
+  render, so later checks can see flags no player set. The L2 fixture sets its flag on a choice to stay clear of it.
+
+words: 139,327 → 139,327 (+0; code and tests only) · running total 139,327 / 149,283.
+
+## 2026-09-30 — Phase 4: the printed-stat lint, redefined (D1b)
+
+**Why.** Under D1 a real stat may be shown, and D1b keeps the "+N" toast. The lint still listed real stats (as a
+note), and its `--ship` BLOCK row blocked on any hit, so a correct `(+5 Trust)` on a game with a `trust` trait
+stopped a release.
+
+**What changed.**
+- `scripts/gates.py` `lint_printed_stat`: lists only a `+X` whose X is no declared trait or flag (same line
+  count). The old rule, every printed stat, runs only under `_legacy("printed_stat")`.
+- The `--ship` row is renamed **a printed stat is real** (`SHIP_STAT_ROW`; was "no printed stat labels"), with
+  `SHIP_SINCE["printed_stat"] = 2026-09-30` and a legacy re-run branch in `ship_rows` (LO B). The new rule is
+  looser, so a grandfathered game red now was red before too and stays a FAIL.
+- `tests/test_gates_ws6.py`: the row's new name (its fixture's `Trust` is undeclared, so it still flips).
+- `SKILL.md`: the `--ship` BLOCK list names the row. `references/the-release.md`: the stale `gates.py:11315`
+  citation (already wrong at 97c45f4, where the line was `_capture`) now points at the "Lints sit BELOW the
+  tally" comment, `gates.py:12816`.
+
+**Verified.**
+- `tests/test_gates_printed_stat.py`: a real stat is not listed; an unreal one is; the legacy rule lists the real
+  one; on `--ship` a real stat no longer blocks, an unreal one blocks a new game and a grandfathered one.
+- Suite: 427 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: PASS → PASS on all five (no printed stat label anywhere, before or after).
+
+words: 139,320 → 139,327 (+7) · running total 139,327 / 149,283.
+
+## 2026-09-30 — Phase 4 Gate 27: a banded meter is shown once (D1 · D4)
+
+**Why.** D1 shows numbers; D4 puts the number on the sidebar item. Gate 27 only kept the number out of the dump,
+so a banded meter could pass while the player never saw its number. The rule carried *(check: pending Gate 27)*.
+
+**What changed.**
+- `scripts/gates.py`: gate renamed **`a banded meter is shown once`** (was "a banded meter is not also a number").
+  Walk moved to `_banded_shown_once` (above `main()`); the block in `run_gates` is replaced line for line. It still
+  needs the key out of the dump (`in_dump = false`, EN5; `hidden = true` accepted, per LO's decision) and now needs
+  the item to print the number: `trait_words` with `show_value = true`, or `trait_bar` without `hide_value`
+  (`v2.py:18409-18422`, `:18521`). `trait_status_text` prints only the word, so a banded one fails.
+- `tests/test_gates_en5_in_dump.py`: the gate's new name, and its fixture item shows its value.
+- `SKILL.md`: the row renamed and rewritten. `references/the-meters.md` M7: marker removed; the Gate 27 sentence
+  names both halves.
+
+**Verified.**
+- `tests/test_gates_g27.py`: pass (words + `show_value`, a bar, `hidden` still accepted); fail (words with no
+  number, a bar with `hide_value`, banded `trait_status_text`, a key left in the dump).
+- Suite: 421 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, PASS → FAIL on all five, real under D4: members_only 0/5 (banded `trait_words` without
+  `show_value`), orientation 0/7, probation 0/5, the_balance 0/3, vesper_two 0/3 (banded `trait_status_text`).
+  Every one keeps the key out of the dump as the old rule asked, and none prints the number anywhere.
+
+words: 139,304 → 139,320 (+16) · running total 139,320 / 149,283.
+
+## 2026-09-30 — Phase 4 NC5: the goal chain, in shape.py (D8a · D8b · C2) + `player_start` bad input
+
+**Why.** D8 (LO decided): the goal has no date, and a goal that can end names the next one. Two rules carried
+*(check: pending NC5)*. Same batch (LO): a phase-3 leftover — a malformed `board.player_start` (not a table, or a
+non-number value) was silently read as 0.
+
+**What changed.**
+- `scripts/shape.py`: row **the goal chain holds** (9b). FAIL on `want.promise.date`, on a dated
+  `want.promise.goals[]` entry, and on an entry with `ends_when` and no `next`. n/a with no goal.
+- `scripts/shape.py` check 12: `board.player_start` that is not a table, or a value that is not a number, is
+  listed as bad input in "a step's gate can be reached" (like a bad `raises`); a numeric string still reads.
+- `tests/test_shape.py`: the full-spine fixture's promise loses its `date = "week 6"` (D8), and the per-check
+  defect table gains the new row.
+- `SKILL.md` (the `shape.py` mode row), `references/state.md` (marker; `player_start` bad input),
+  `references/the-want.md` (marker).
+
+**Verified.**
+- `tests/test_shape_nc5.py`: pass (a chain with `next`), n/a, fail (dated promise, dated goal, `ends_when` with no
+  `next`); `player_start` as a list and as `"twenty"` are bad input, `"20"` still reads.
+- Suite: 414 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch ledgers (`shape.py`, row absent → now): members_only PASS (a goal, no `goals[]`, no date);
+  orientation / the_balance / vesper_two n/a (no goal declared); probation FAIL — `want.promise.date` holds the
+  review schedule ("reviews on the first Tuesday on or after day 30, 60 and 90"). Real: the promise carries a
+  date field; that schedule is the pressure, not the goal. `a step's gate can be reached` unchanged (n/a on all
+  five: no step declares `raises`).
+
+words: 139,288 → 139,304 (+16) · running total 139,304 / 149,283.
+
+## 2026-09-30 — Phase 4 NC4: one name per trait (D3a · D4 · J5)
+
+**Why.** D3a: one name per trait everywhere (EN5). D1b keeps the "+N" toast, which names every trait an effect
+moves and is never filtered by `hiddenTraits`, so an unlabelled key reaches the player as a tidied key.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`one name per trait`** (`_one_name_per_trait`), registered in
+  `_phase4_gates`. Every trait key in any `effects` / `rejection_effects` / `traitEffects` list needs a
+  `[[traits.labels]]` entry with a `label`; a `[[sidebar_items]]` entry that sets its own `label` must use that
+  label (and its trait must have one). n/a when nothing moves a trait and no sidebar item names one.
+- `references/engine.md` §30: "an entry with `in_dump = false` or `hidden = true` may leave out `label`" rewritten
+  (every entry carries one), and the §30 example gains `label = "Cover"`. `SKILL.md`: scoreboard row.
+
+**Verified.**
+- `tests/test_gates_nc4.py`: pass (labelled + matching sidebar, a sidebar item with no label of its own), n/a,
+  fail (a moved trait with no label, a sidebar label that differs).
+- Suite: 406 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now): all FAIL, real — labels were optional on hidden entries until now.
+  members_only 1/10 moved traits labelled, orientation 0/10, probation 0/16, the_balance 10/13 (`arousal`,
+  `doubt`, `relation` — the men's), vesper_two 6/11.
+
+words: 139,239 → 139,288 (+49) · running total 139,288 / 149,283.
+
+## 2026-09-30 — Phase 4 DC6b + Gate 42: a locked door says why, once (D2 · J1)
+
+**Why.** EN6 made the engine print a number lock's need beside the label (`setup.requirementSuffix`). The skill
+test found an authored `locked_text` beside it saying the same thing (J1), and the docs still taught "set
+`locked_text` by default". D2 (LO decided): a number lock shows the real label and the engine's requirement, no
+`locked_text`; a story lock gets a short written line. Doc and gate land together (PRD rule 11).
+
+**What changed.**
+- `scripts/gates.py`: gate 42's walk moved to `_locked_doors` / `_is_number_lock` (above `main()`); the block in
+  `run_gates` is replaced line for line. *Number lock* = the engine's `_wants_number` predicate exactly (a trait
+  item, hers or a man's, `gte`/`gt`/`lte`/`lt`, value ≥ 2, `v2.py:14816`). A number lock passes bare and FAILS
+  with `locked_text` ("doubled"); any other lock still needs `locked_text`, `locked_text_threshold` or
+  `rejection_node`; cost-only choices stay exempt.
+- `references/engine.md` §15 rewritten (title, the "set `locked_text` by default" paragraph and the live-render
+  line, which was a number lock with `locked_text`, and the gate paragraph); §27's asymmetry sentence; the Mode A
+  table row; the worked example's `locked_text` line removed (the nerve ≥ 40 lock the new gate would fail).
+- `references/the-voice.md` R4 rewritten (it left even flag locks bare and said "deliberately no gate"), and the
+  gate table's "R4 has no gate on purpose" line.
+- `references/the-surfaces.md` R5b.2's last line, R5c "Ours", the Gate 42 table row, the tired-author paragraph.
+- `references/the-economy.md` item 5 (flag lock vs number lock). `SKILL.md`: Gate 42's row.
+
+**Verified.**
+- `tests/test_gates_g42.py`: the predicate matches the engine's (incl. an NPC trait, not `eq`, not value 1);
+  pass for a bare number lock, a story lock with a line, a number lock with a threshold toast; fail for a number
+  lock with `locked_text` (hers and his) and for a bare flag / `eq` / value-1 lock.
+- Suite: 401 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, before → after (all were PASS): members_only FAIL 6 doubled of 6 · orientation FAIL 17 of
+  19 · probation FAIL 11 of 12 · the_balance FAIL 8 of 14 · vesper_two FAIL 9 of 9. Real under D2: each is a
+  number lock with the old doctrine's `locked_text`, so the engine's need is printed twice. Not a check fault —
+  the games obeyed the doctrine this commit replaces.
+
+words: 139,215 → 139,239 (+24) · running total 139,239 / 149,283.
+
+## 2026-09-30 — Phase 4 NC6: the men's numbers are read (D5 · J6)
+
+**Why.** D1 shows numbers and D5 says a shown number opens something and gets a reaction (`the-meters.md` W1
+rule 1). Two rules carried *(check: pending NC6)*; nothing checked that a man's kept traits are shown or read.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`the men's numbers are read`** (`_mens_numbers`), registered in
+  `_phase4_gates`. A trait in a man's `core_traits` that neither `[ui.cast_page] show_traits` nor his own
+  `show_traits` names FAILS, except a `[[traits.labels]]` `hidden = true` key, `<npc>_stage`, and his
+  `board.characters[].ladder.counter`. A shown trait needs a condition on him in a trigger or choice (the step
+  gate) and one inside blocks (the line branch). n/a when no man keeps a trait.
+- `SKILL.md`: scoreboard row. `references/the-meters.md`: both markers removed; rule 1 names the gate.
+
+**Verified.**
+- `tests/test_gates_nc6.py`: pass (page list, his own list, hidden + counters exempt), n/a (no kept traits), fail
+  (kept and unshown, shown with no gate read, shown with no line read).
+- Suite: 393 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now): members_only n/a and probation n/a (the men keep no traits);
+  orientation FAIL (7 kept traits, none shown — `relation` / `lust`), the_balance FAIL (17 of 22 unshown;
+  `corruption` exempt as hidden), vesper_two FAIL (8 kept, none shown). Real: no game uses EN7 `show_traits` yet.
+
+words: 139,185 → 139,215 (+30) · running total 139,215 / 149,283.
+
+## 2026-09-30 — Phase 4 NC3: a no has content (D6)
+
+**Why.** `the-arc.md` A3 (LO decided, D6): an ordinary no is parked, a final no is labelled. Nothing checked that
+a no on an EN1 step does anything; a bare "Walk out" passed.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`a no has content`** (`_no_has_content`), registered in
+  `_phase4_gates`. On canvases with `consume_on = "exit"` only (n/a otherwise, with a note), every exit without
+  `consumes = true` must carry `retry_after_days`, be `final = true`, or lead to a node of the canvas with text
+  and an effect / flag / `retry_after_days` on the choice or that node's exits. A `final` exit's label must say it
+  ends the path (`end`, `for good`, `(ends`).
+- The CK8a refusal pattern moved to module level as `_REFUSAL_RE` (NC3 names each exit a no or a way out with
+  it); `run_gates`' local `_REFUSAL` now points at it, same line count.
+- `SKILL.md`: scoreboard row. `references/the-arc.md`: the *(check: pending NC3, …)* marker becomes the gate's
+  name.
+
+**Verified.**
+- `tests/test_gates_nc3.py`: n/a without opt-in; pass for a parked no, a written reply that sets a flag, a
+  labelled final; fail for a bare "Walk out", a reply that changes nothing, an unlabelled final; runs in the
+  scoreboard.
+- Suite: 386 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: gate absent → n/a on all five (none opts into `consume_on`, as expected). Tallies
+  unchanged.
+
+words: 139,160 → 139,185 (+25) · running total 139,185 / 149,283.
+
+## 2026-09-30 — Phase 4 NC2: her climb (D7 · J3 · J4)
+
+**Why.** `the-arc.md` A15 (LO decided, D7) set her climb into paid sex: introduced, a step, a first time, then the
+repeatable, with two voices per act and "stop him" at each stage. Five rules carried *(check: pending NC2)*.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`her climb`** (`_her_climb`), registered by `_phase4_gates`, which
+  `run_gates` calls from a line that was a comment in the CK7 block, so no cited line moves.
+  - *Paid*: a repeatable, not substitution-only, whose exit adds to the money trait (declared currency, else the
+    first money-like trait) and which names an act: an explicit beat AND a `RUNGS` act past `touch`. Decided
+    here: rung words alone made a bar shift and a hub read as paid sex ("she came home" is `finish`).
+  - *Needs*: what a canvas's trigger reads set, plus the reads on every choice routing into it (a step reached
+    from a hub is gated on the hub's choice). First time = a one-time canvas setting what the repeatable needs;
+    introduction = one setting what the first time needs.
+  - (a) introduction · (b) first time · (c) two live groups per act node on a `board.ascent_tiers` tier at
+    different thresholds, dead groups excluded via L1's `_dead_groups` (not judged without declared tiers) ·
+    (d) shut on a new save, and intro → a step → first time · (e) a stop exit on every act node that goes on to
+    another act; the last act node is exempt (decided here: its exits all leave).
+- `SKILL.md`: scoreboard row. `references/the-arc.md`: five markers removed, the gate named under A15, and "The
+  check" rewritten (it said nothing ships with the file).
+
+**Verified.**
+- `tests/test_gates_nc2.py`: the full climb passes; n/a without a paid repeatable; fails for (a), (b), (c) one
+  voice, (c) a dead second voice, (d) no step, (d) open on a new save, (e) no stop; (c) noted without tiers.
+- Suite: 378 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now):
+  - members_only FAIL: `work_shift` and `paid_visit` open from the opening (`opening_done`), no step before
+    their first time, one or no voice per act node.
+  - orientation n/a, probation n/a (no paid repeatable with an explicit act).
+  - the_balance: parked (FAIL with parked content counted).
+  - vesper_two FAIL: `act_bar_work` / `act_the_house` open on a new save with no first time; act nodes on
+    `loop_marsh_sunday` and `loop_upstairs` read no declared tier.
+  Two false alarms fixed first (rung words alone; steps routed from a hub).
+
+words: 139,158 → 139,160 (+2) · running total 139,160 / 149,283.
+
+## 2026-09-30 — Phase 4 NC1: the reader passed (D12)
+
+**Why.** D12 (LO decided): the reader's verdicts gate the release. Phase 3 wrote the rule and marked it
+*(check: pending NC1)*; nothing read `release_page.reader`.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): `_ship_reader` and the `--ship` BLOCK row **the reader passed**.
+  - Due canvases: every *touched* canvas (new id, or its table differs from the one in the last shipped
+    release's `7_final_game.toml` at `releases[].commit`, via `git show`; with no shipped release every canvas)
+    that has a named person (trigger `npc` / `requires_npc`, or a `dialog` with `npcId`) or an explicit beat.
+  - A due canvas with no `release_page.reader` entry blocks. A `FAIL` blocks unless
+    `release_page.reader_waivers` holds `{canvas_id, test, why}`. `N/A` is not a failure (DC10).
+  - LO B: `SHIP_SINCE["reader"] = 2026-09-30`; the legacy re-run in `ship_rows` knows the row.
+- `tests/test_gates_ws6.py`: the green state carries reader verdicts for its two canvases with a person.
+- Markers removed (5): `references/the-release.md` 6b, `references/the-want.md` ×2, `references/agents.md`,
+  `templates/want.md`. `SKILL.md`'s `--ship` paragraph names the row.
+
+**Verified.**
+- `tests/test_gates_nc1.py`: pass (PASS + N/A, a waived FAIL, a canvas with no person needs no entry, the green
+  fixture ships) and fail (unread, unwaived FAIL, a waiver with no reason, the git-diffed touched set, a new game
+  blocks, a grandfathered one WARNs).
+- Suite: 368 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: row absent → WARN on all five (no reader verdicts saved; members_only 36 canvases due,
+  orientation 25, probation 28, the_balance 42, vesper_two 73). SHIP verdict counts unchanged.
+
+words: 139,154 → 139,158 (+4) · running total 139,158 / 149,283.
+
+## 2026-09-30 — Phase 4 CK7: rooms and heat (I2 · D9a · D9c · H25)
+
+**Why.** D9a (LO decided): a destination always offers something she can do alone, or is closed then. D9c: a
+place is hot when it holds a sex scene, about 60% of places. Neither had a check; the old `traversal heat`
+counted clip pools only.
+
+**What changed.**
+- `scripts/gates.py`, new helpers `_ck7_*` above `main()`; the old G5 block in `score()` is replaced line for
+  line (16 → 16) so no cited line moves.
+  - Gate **`a destination is never open and exit-only`**: a 168-hour grid per destination (not a thoroughfare,
+    container or offscreen label). An hour is open unless EN3 `hours` close it, and exit-only when no canvas
+    there (not random, not substitution-only, not the opening) is live. Live means its schedule covers the
+    hour and every condition this check reads is true at the room's first-reachable state: start state plus
+    the room's own `entry_conditions` / EN4 `hidden_until` and its parents'. `time_of_day` and
+    `npc_at_location` narrow the hours; a canvas bound to a person counts only while he is scheduled there.
+    FAIL lists the hours per room.
+  - **`traversal heat` redefined**: destinations holding a beat with 3+ explicit words or `_t4`/`_t5` media; a
+    placeless scene counts at its man's home. The engine has no home field, so home = the place his schedule
+    fills most (decided here: the PRD's `home_location` does not exist). Floor 60%.
+  - **`explicit pools by place`**: the old count, unchanged, as its own gate and a REPORT row on `--ship`.
+  - `--ship`: `SHIP_BLOCK_JOINS` lets a BLOCK row be two gates; *no empty rooms* = `standing surface` + the
+    exit-only gate. `SHIP_SINCE["exit_only"] = 2026-09-30` (LO B, reusing `_legacy` / `_grandfathered`).
+- `tests/test_gates_ws6.py`: the green fixture's `room_a` holds only A's portrait, so it now opens 18:00-20:00.
+- `SKILL.md`: rows for the three gates; the `--ship` paragraph names the join and the new REPORT row.
+- `references/the-board.md`: both *(check: pending CK7)* markers removed (two in the skill; the third
+  occurrence is in this CHANGELOG, which is history); a man's home is defined.
+
+**Verified.**
+- `tests/test_gates_ck7.py`: 13 tests. Pass: an ungated activity, thoroughfares n/a, a room closed while he is
+  away, a room locked on the same flag its canvas reads, searching his room while he is out, heat 5/5.
+  Fail: portrait-only room (154 h listed), content behind a later flag (168 h), a random event only, the old
+  pool row, a phone scene at his home, a new game blocked on `--ship`, a grandfathered game WARNs.
+- Suite: 359 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (before → after):
+  - members_only: exit-only n/a → FAIL (6 rooms: bar_floor, cliff_path, club, library, members_floor,
+    pool_terrace); heat 7/11 PASS; *no empty rooms* PASS → WARN.
+  - orientation: exit-only → FAIL (halloran_office, the_back_bedroom 01-06, wes_room); heat 8/13 PASS;
+    *no empty rooms* FAIL → FAIL (standing surface already red).
+  - probation: → FAIL (martys, the_county_office, the_stairwell); heat 6/7 PASS; PASS → WARN.
+  - the_balance: → FAIL (10 rooms); heat 1/20 FAIL; FAIL → FAIL.
+  - vesper_two: → FAIL (bastien_backroom, kess_berth, mercer_room, penthouse); heat 10/15 PASS; PASS → WARN.
+  Every red was read canvas by canvas: rooms whose only canvas is a man's portrait, rooms whose activity waits
+  on a flag set elsewhere, a random event as the only content, halls not marked thoroughfare. Two check faults
+  were found and fixed first: unread condition shapes counted as never-live, and one-time steps were ignored.
+
+words: 139,102 → 139,154 (+52) · running total 139,154 / 149,283. Over the ≤ 0 aim: three scoreboard rows.
+
+## 2026-09-30 — Phase 4 L1: lint `adjacent groups` (I27)
+
+**Why.** Review I27: the group-chain trap bit twice in the fix pass. Adjacent `group` blocks compile to ONE
+if/elseif chain (`_render_group_chain`, `v2.py:15807`, called at `v2.py:16221`); the skill warned in prose and
+nothing checked it.
+
+**What changed.**
+- `scripts/gates.py`: `lint_adjacent_groups` plus helpers `_group_runs` and `_dead_groups` (NC2(c) reuses them),
+  placed just above `main()` so no cited `gates.py` line moves. It walks the runs the engine builds (group
+  children, each pool variant alone, each cascade beat) and lists:
+  - (a) two or more unconditioned groups in a run — all but the last are dropped;
+  - (b) a conditioned group that is true only when an earlier one is (a low-first ladder, a repeated band), or
+    whose range an earlier one-key ladder already covers (the I27 shape: a second ladder after one that always
+    matches), and an `<<else>>` such a ladder leaves dead.
+  Only AND conditions on trait numbers and flags are reasoned about; an OR group is never judged. Printed below
+  the tally and in `--json` as `adjacent_groups`.
+- `SKILL.md`: the lint list names **adjacent groups**.
+- `references/the-want.md` (the placement trap) and `references/engine.md` (the group-chain note): "no build
+  warning" / "a second ladder IS dead" corrected to name the lint.
+
+**Verified.**
+- `tests/test_gates_l1.py`: 5 pass fixtures (high-first ladder, stage bands, separator, pool/OR, different axis)
+  and 5 fail fixtures (two elses, low-first, the I27 two-ladder shape, dead else, nested + repeated).
+- Suite: 346 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, before → after: lint absent → 0 dead groups on all five (members_only 37 chains,
+  orientation 18, probation 390, the_balance 34, vesper_two 49); gate tallies unchanged.
+
+words: 139,097 → 139,102 (+5) · running total 139,102 / 149,283.
+
+## 2026-09-30 — shape.py: her own starting values (`board.player_start`)
+
+**Why.** LO's probe after the follow-ups: in "a step's gate can be reached", a gate with no `npc` (her own trait)
+always started from 0, because the ledger had nowhere for her starting values. Her nerve starting at 20, step 1
+raising it by 5 and step 2 gated `nerve gte 20` FAILED with "reach 5".
+
+**What changed.**
+- `scripts/shape.py`: optional `board.player_start = {trait: n}`. A gate without `npc` starts from it (else 0). A
+  gate with `npc` still starts from his `meters[k].start`, else `.min`.
+- Documented in `references/state.md` (next to `raises`) and in `references/the-spine.md` checkpoint A.
+
+**Verified.**
+- `tests/test_shape_dc9b.py` gains the probe: it fails without `player_start` ("reach 5") and passes with
+  `{nerve: 20}`.
+- Suite: 336 passed. `--selfcheck`: the index is current. cite_check: 0.
+- The five ledgers are still n/a (read-only).
+
+words: 139,080 → 139,097 (+17) · running total 139,097 / 149,283.
+
+## 2026-09-30 — Doctrine phase 3 follow-ups (review of DC1–DC11)
+
+**Why.** LO's review of phase 3 listed nine must-fixes and eleven small ones. This entry covers all twenty.
+
+**What changed.**
+1. **engine.md citation sweep.** Three read-only sub-agents each read one third of the file, citation by citation,
+   against `v2.py`, `template_import.py`, `game_graph.py` and `gates.py`. 368 citations were checked and 274 were
+   wrong; the 259 fix entries below cover them (some entries fix two), each applied by exact substring.
+   - Five of the fixed citations were then mis-anchored by `cite_check` (it anchors on the nearest function
+     name). Four were reworded so the right name sits nearest: §21's quest row now names
+     `setup.applyQuestEffect()` at `:6617` (the agent's `:6616` was one line off); §26 `advanceDay()`; §27
+     `checkCostsAffordable`; §28 `validate_flag_chains()`. The fifth, §37 `compare`, lost its parentheses.
+   - Claims found false and corrected (each read in code):
+     - §27: a **choice's** `costs` is deducted inline with `clamp = false` (`v2.py:14665`). Only canvas and
+       location costs go through the clamped `deductCostArray`. `the-economy.md:517` said the same and is
+       corrected too.
+     - §29: the cap code sits in `window.applyTraitEffect`.
+     - §41: the quest-condition error now names three keys (`template_import.py:6713`).
+     - §47: the goal-bullet snippet now includes `days_since_flag` (`v2.py:17139-17150`).
+   - Every line change, old → new:
+
+v2.py:12474 → v2.py:13907; v2.py:11908 → v2.py:14066; v2.py:11872-11874 → v2.py:13879-13881; v2.py:14572 →
+v2.py:16001; :14512 → :15941; v2.py:3448 → v2.py:3801; :3465 → :3819; :3612 → :3977; v2.py:11634 → v2.py:12694;
+v2.py:420-424 → v2.py:423-427; :447-451 → :450-454; v2.py:13258 → v2.py:15301; v2.py:3317-3331 → v2.py:3500-3514;
+v2.py:3159 → v2.py:3487; :13219-13220 → :14839-14840; v2.py:13210-13217 → v2.py:14830-14837; gates.py:1148 →
+gates.py:1114; template_import.py:208-221 → template_import.py:282-294; v2.py:4044 → v2.py:4573; v2.py:1608 →
+v2.py:1748; v2.py:4111 → v2.py:4549; :7922 → :8558; template_import.py:2525 → template_import.py:2806; v2.py:1578-1579
+→ v2.py:1718-1719; template_import.py:743-745 → template_import.py:918-920; template_import.py:4227-4241 →
+template_import.py:4792-4806; v2.py:7816-7823 → v2.py:8564-8573; v2.py:4131-4145 → v2.py:4667-4681; :7791 → :8533;
+v2.py:5928 → v2.py:6461; v2.py:5930 → v2.py:6463; v2.py:4496 → v2.py:5144; :4625 → :5313; v2.py:5749-5756 →
+v2.py:6451-6458; v2.py:5749-5756 → v2.py:6451-6458; v2.py:5810-5825 → v2.py:6517-6532; v2.py:4647 → v2.py:6617;
+v2.py:4687 → v2.py:5375; v2.py:15885 → v2.py:17441; template_import.py:1898-1899 → template_import.py:2159-2160;
+template_import.py:154 → template_import.py:191; template_import.py:153 → template_import.py:190; :3968 → :4714;
+template_import.py:1085 → template_import.py:1239; v2.py:15316 → v2.py:16809; v2.py:15569 → v2.py:17101; v2.py:15371 →
+v2.py:17076; v2.py:16383 → v2.py:17108; template_import.py:1017-1023 → template_import.py:1194-1203; v2.py:14878 →
+v2.py:16990; v2.py:15454-15456 → v2.py:18700-18703; template_import.py:997-1039 → template_import.py:1239-1281;
+v2.py:13185-13186 → v2.py:14830-14831; v2.py:3422 → v2.py:3605; :3593 :3737 :3792 :3855 → :3797 :3953 :4008 :4074;
+v2.py:19995 → v2.py:21742; v2.py:20019 → v2.py:21783; v2.py:14561-14568 → v2.py:16215-16221; v2.py:15908 v2.py:16004 →
+v2.py:16633 v2.py:16729; v2.py:15930-15939 → v2.py:16635-16665; v2.py:15943 → v2.py:16668; v2.py:15950 → v2.py:16675;
+v2.py:15943 → v2.py:16668; v2.py:15950 → v2.py:16675; v2.py:16016-16021 → v2.py:16741-16747; v2.py:16024 →
+v2.py:16749; v2.py:16030 → v2.py:16755; v2.py:16024 → v2.py:16749; v2.py:16020 → v2.py:16745; v2.py:15937 →
+v2.py:16662; v2.py:14673 → v2.py:16776; template_import.py:4786 → template_import.py:5827; v2.py:6146 → v2.py:6168;
+v2.py:5405-5408 → v2.py:6111-6114; v2.py:15253-15262 → v2.py:17397-17406; v2.py:15931 → v2.py:18191; v2.py:5313 :4527
+:4975 → v2.py:5144 :5177 :5664; v2.py:4625 → v2.py:5313; v2.py:13014-13015 → v2.py:14598-14599; v2.py:13159-13166 →
+v2.py:14757-14764; v2.py:4655-4661 → v2.py:5343-5349; template_import.py:2133-2136 → template_import.py:2522-2525;
+template_import.py:2714-2769 → template_import.py:3115-3172; v2.py:11634 → v2.py:12694; v2.py:12648-12733 →
+v2.py:14647-14749; v2.py:13085-13088 :13049-13050 → v2.py:15123-15126 :15087-15088; v2.py:5411-5414 → v2.py:6111-6114;
+v2.py:5552 → v2.py:6254; v2.py:11017 → v2.py:12694; v2.py:4290 → v2.py:4931; v2.py:13421 → v2.py:13360; v2.py:12806 →
+v2.py:14587; v2.py:13016 → v2.py:14767; v2.py:12827-12836 → v2.py:14606-14616; v2.py:13113-13175 → v2.py:14929-14992;
+v2.py:12545 → v2.py:14324; v2.py:4919 → v2.py:5633; v2.py:5763-5769 → v2.py:6465-6471; v2.py:5858 → v2.py:6560;
+v2.py:13464 :13472 :9813 → v2.py:15512 :15520 :11488; v2.py:16933 → v2.py:18534; v2.py:16996 → v2.py:18597;
+v2.py:16886 → v2.py:18487; template_import.py:3751-3757 v2.py:16948-16949 → template_import.py:4187-4193
+v2.py:18549-18550; template_import.py:3613-3623 v2.py:17017-17018 → template_import.py:4049-4059 v2.py:18618-18619;
+template_import.py:3659 :3676-3681 → template_import.py:4095 :4111-4117; template_import.py:3685-3690 →
+template_import.py:4156-4160; v2.py:5406 → v2.py:5610; v2.py:4893 → v2.py:5099; v2.py:5047 → v2.py:5253; v2.py:5057 →
+v2.py:5263; v2.py:12231 → v2.py:12799; v2.py:4968 → v2.py:5174; v2.py:5580 → v2.py:5784; v2.py:4931 → v2.py:5137;
+v2.py:13819 → v2.py:15238; :13388 → :15436; v2.py:14027 → v2.py:16075; v2.py:15663 :15679 → v2.py:17874 :17891;
+v2.py:16043 → v2.py:18399; :19353 :19370 → :21745 :21779; v2.py:12733 → v2.py:14749; v2.py:4670 → v2.py:5358;
+v2.py:11055-11059 → v2.py:12732-12736; v2.py:11100-11101 → v2.py:12795-12796; v2.py:5242 → v2.py:5762; v2.py:4742 →
+v2.py:5263; v2.py:4573-4580 → v2.py:5265-5270; v2.py:5309 → v2.py:5838; v2.py:5263 → v2.py:5792; v2.py:18964 →
+v2.py:21334; v2.py:1046 → v2.py:1098; v2.py:1031 → v2.py:1098; v2.py:15035 → v2.py:16676; v2.py:15042 → v2.py:16715;
+template_import.py:864-880 :2818 → template_import.py:924-937 :2903; v2.py:17091 → v2.py:18744; v2.py:1767 →
+v2.py:1826; v2.py:1579 → v2.py:1638; v2.py:14581-14588 → v2.py:16236-16244; v2.py:14574 → v2.py:16228;
+v2.py:14576-14578 → v2.py:16230-16232; v2.py:14578 :14587 → v2.py:16232 :16243; template_import.py:6210-6237 →
+template_import.py:7559-7587; :6225 → :7574; :6214 → :7563; :6230 → :7579; :6218-6222 → :7567-7571; :6235 → :7583;
+:6143 → :7492; v2.py:14580 → v2.py:16235; gates.py:338-349 → gates.py:464-475; gates.py:298-306 → gates.py:398-405;
+CHANGELOG.md:4835 → CHANGELOG.md:15841; v2.py:13171 → v2.py:14769; v2.py:13210-13217 → v2.py:14830-14837; v2.py:14055
+→ v2.py:14771; v2.py:13668-13673 → v2.py:15314-15318; v2.py:13152-13165 → v2.py:14774-14794;
+template_import.py:825-826 → template_import.py:999-1000; :806 → :980; :2204 → :2514; template_import.py:4616-4624 →
+template_import.py:5408-5413; template_import.py:3143 → template_import.py:3526; v2.py:2004 → v2.py:4219; :2027 →
+:4242; :2037 → :4253; v2.py:7658 → v2.py:8214; :7670 → :8226; :7692 → :8248; v2.py:15536 → v2.py:16990; v2.py:4349 →
+v2.py:4440; v2.py:7686 → v2.py:8242; v2.py:7903 → v2.py:8459; :7918 → :8474; template_import.py:5509 →
+template_import.py:6768; template_import.py:5502-5509 → template_import.py:6761-6768; template_import.py:5315 →
+template_import.py:6023; template_import.py:5242 → template_import.py:5950; :5265 → :5973; template_import.py:5877 →
+template_import.py:7136; template_import.py:1706 → template_import.py:1954; template_import.py:6402 →
+template_import.py:7663; v2.py:16325-16326 → v2.py:17856-17857; :16328 → :17859; v2.py:16333-16336 →
+v2.py:17864-17867; v2.py:16356 → v2.py:17887; :16371 → :17902; v2.py:16333-16336 → v2.py:17864-17867; v2.py:16356 →
+v2.py:17887; :16371 → :17902; v2.py:16325-16326 → v2.py:17856-17857; v2.py:16329-16331 → v2.py:17860-17862; v2.py:4128
+→ v2.py:4566; :7915 → :8555; v2.py:3856 → v2.py:4152; v2.py:2202 → v2.py:2293; v2.py:3244 → v2.py:3426; v2.py:16011 →
+v2.py:17542; v2.py:16164 → v2.py:17695; :3209 → :3391; :3230 → :3412; v2.py:5742-5751 → v2.py:6451-6458;
+v2.py:5928-5930 → v2.py:6461-6463; template_import.py:1361 → template_import.py:1225; template_import.py:906-913 →
+template_import.py:1055-1062; :2302-2310 → :2583-2591; template_import.py:642 → template_import.py:755;
+game_graph.py:311 → game_graph.py:344; v2.py:11656 → v2.py:12716; v2.py:4651 → v2.py:5129; v2.py:5114 → v2.py:5633;
+v2.py:5176-5179 → v2.py:5696-5699; v2.py:5259 → v2.py:5779; v2.py:5290 → v2.py:5810; v2.py:5125-5158 →
+v2.py:5640-5677; v2.py:4662 → v2.py:5137; v2.py:15350 → v2.py:16075; v2.py:13937 → v2.py:16122; v2.py:15897 →
+v2.py:16622; v2.py:13937 → v2.py:14639; v2.py:10252 → v2.py:10719; :10276 → :10743; v2.py:10209 → v2.py:10479; :12961
+→ :13662; :12963 → :13664; v2.py:15985 → v2.py:16710; v2.py:2239-2670 → v2.py:2298-2729; :6826 → :7032; :6838 → :7044;
+v2.py:10127 → v2.py:10386; :1039 → :1050; :5241 → :5445; v2.py:3464 → v2.py:3524; :924 → :926; v2.py:3414 →
+v2.py:3473; :14053 → :14769; v2.py:9294 → v2.py:9869; v2.py:6090 → v2.py:6560; :6126 → :6596; v2.py:6239 → v2.py:6711;
+v2.py:14090 → v2.py:15285; v2.py:13503 → v2.py:14662; v2.py:18228 → v2.py:19611; v2.py:18246 → v2.py:19629; v2.py:3110
+→ v2.py:3169; v2.py:3566 → v2.py:3686; template_import.py:7210 → template_import.py:8378; game_graph.py:308 →
+game_graph.py:336; v2.py:15921-15977 → v2.py:17101-17160; v2.py:15960-15969 → v2.py:17139-17150;
+template_import.py:5669-5673 → template_import.py:6775-6779; template_import.py:1092-1095 →
+template_import.py:1214-1219; v2.py:15875-15877 → v2.py:17054-17056; v2.py:15974-15976 → v2.py:17157-17159;
+template_import.py:1108-1151 → template_import.py:1239-1281; v2.py:10572 → v2.py:11140; template_import.py:3486 →
+template_import.py:3580; v2.py:11055-11059 → v2.py:12732-12736
+
+2. **shape.py "a step's gate can be reached":**
+   - it counts the trait's start (`meters[k].start`, else `.min`, else 0);
+   - `board.repeat_raises = {trait: per_visit}` is not judged, like `daily_raises`;
+   - bad input (a raise that isn't a number, `raises` not a table, a non-numeric `n`) is listed and never crashes,
+     and a numeric-string `n` is coerced;
+   - a gate with `npc` counts only that person's raises.
+   - `state.md` and `the-spine.md` say so. Tests: `test_shape_dc9b.py`, now 12.
+   - The five ledgers are still n/a (read-only).
+3. **B6:** reader test 8 also checks that the Want's own numbers agree with each other (one span never said two
+   ways). Changed in `v2-reader.md`, `register.md`, `the-want.md` "The form" and `templates/want.md`.
+4. **engine.md §26:** the main example is `on_short = "carry"` with stages. The grace/eviction route is shown
+   second, as the old route, and the "eviction branch" is no longer the default.
+5. **the-surfaces.md R3c:** "A no parks; only a labelled final no closes his path (A3)".
+6. **Hygiene:** `the-board.md` §4's worked need is energy; `engine.md` §29's table, `the-meters.md` M6 and a
+   `gates.py` comment no longer use hygiene.
+7. **`releases[].commit`** is the HEAD the build was made from, before the ship commit (`the-release.md`,
+   `state.md`).
+8. **the-map.md:** "Opens at 10:00 PM" (`setup.formatTime` is 12-hour, `v2.py:4175`).
+9. **SKILL.md:** the nine scene tests, required on touched canvases; their verdicts gate.
+10. **the-map.md R0:** "zone" and "anchor" replace "hub" for places (`two_hub` stays as a key); `map_hotspots`
+    drops "fast-travel".
+11. **the-board.md §1:** "Who is there and when — and on a destination, one thing she does alone."
+12. **the-first-hour.md:** "an obligation that comes back".
+13. **templates/idea.md:** "The premise LO picked: <shape>".
+14. **state.md:** "(check: pending NC5)".
+15. **pitch_pack.py:** the built-game `--json` lists only shipped releases (test added).
+16. **v2-pitcher.md:** at the idea phase there's no TOML, and the pitch is step 1.
+17. **engine.md §22/§30/§34:** an "Old saves:" line for EN3, EN4, EN6, EN7, EN10 and EN11.
+18. **board.toml:** one card per ladder step plus one per ascent tier (R2); `the-sheets.md` S10 points at R2.
+19. **the-arc.md:** the old "a refusal is remembered" lint candidate points at A3 / NC3 (pending); "Warmth, never
+    Want" is marked (R5).
+20. **Note for phase 4 (DC6a):** M7 uses `[[traits.labels]] in_dump = false`, not the PRD's `hidden = true`,
+    because `hidden` also drops the trait from the Stats page (`v2.py:1260-1264`; the Stats page skips
+    `hiddenTraits` at `:17930`). **Gate 27 must accept `in_dump = false`.**
+
+Trims to keep the net negative:
+- `state.md`'s hold comments now point at `the-want.md` §1b/§4a instead of repeating them;
+- §33's intro and the RentDay_Short paragraph are shortened.
+
+**Verified.**
+- Suite: 335 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- Every claim-false fix was read in code. Spot-checks of applied citations: `:16662` "Stranger", `:18597`
+  trait_words, `:1098` description pop, `:6168` `is_due`.
+
+words: 139,103 → 139,080 (−23) · running total 139,080 / 149,283.
+
+## 2026-09-30 — DC11: engine facts documented — one-time steps on yes, decay to a rest point, equip, and the money census (engine docs)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC11 (EN1–EN4, EN6–EN8, EN10, EN11 · I8). `engine.md` is the one home for engine
+facts (the-arc.md "The engine, verified").
+- Checked on 2026-09-30 and already documented, so only checked:
+  - EN2 in §26 (DC3);
+  - EN3, EN4, EN10, EN11 in §22;
+  - EN5, EN6, EN9 in §30;
+  - EN7 in §34.
+- **Missing:** EN1 and EN8. Wardrobe `equip` was undocumented (I8).
+- The §33.1 census's bare line numbers were stale, as the PRD found at EN2c review.
+
+**What changed.** `references/engine.md`:
+- **§49 (new): a one-time step is used on its yes.**
+  - Keys: `consume_on = "exit"` and the trigger's `retry_after_days`; on a choice, one of `consumes` / `final` /
+    `retry_after_days`.
+  - The `canvas_state` record; node 0's mark is unchanged.
+  - Old saves: a fired step with no record reads as used up.
+  - Cites `v2.py:4729`, `:15328` and `template_import.py:836-845`, `:1018-1024`. the-arc.md A3 points here.
+- **§50 (new): decay settles at a rest point.**
+  - `setup.decayToward` (`v2.py:10789`), `[[npcs]] trait_rest` and `decay_after_days`, and `last_contact_day`.
+  - Old saves: an undefined contact day counts as today.
+- **§17:** `action = "equip"` adds the garment and puts it on (`v2.py:15554`).
+- **§33:**
+  - the census is re-read line by line: twenty-two sites, not sixteen. The symbol governs eleven, because EN2b
+    added the owed line, the pay-what-you-have button and the carried-week screen. Eight hardcode `$`; three
+    carry no notation.
+  - `rent_currency_symbol` is at `:1212` and its emit at `:3445`.
+  - §33.2 and §33.4 citations are refreshed. §33.5 is refreshed to `template_import.py:3332`, `:7813`.
+  - **§33.3 is corrected.** "The sidebar ignores `[[traits.labels]]`" was false since EN5: a `trait_bar` falls
+    back to `setup.traitLabel` (`v2.py:18498`).
+
+**Verified.**
+- Every new citation was read by hand. The 14 stale line strings are at 0.
+- Suite: 329 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,711 → 139,103 (+392) · running total 139,103 / 149,283. The growth is two engine sections EN1 and EN8
+needed, plus five new census rows.
+
+## 2026-09-30 — DC9e: stop at every phase boundary; before TOML the check is shape.py (process)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9e (G2 · H16 · I21):
+- the skill never said to stop at a phase boundary, and a session wrote all seven spine pages before LO picked
+  the idea (G2, checked: a real gap);
+- `the-board.md` said the scoreboard works on an empty world, but `gates.py` stops with `not found` when there is
+  no TOML (H16);
+- the sheets dispatch row said "write the sheets", which clashes with LO's rule; S13 was never pointed at (I21).
+
+**What changed.**
+- `SKILL.md` Dispatch:
+  - "Stop at every phase boundary and wait for LO's pick or signature";
+  - the `board` row is "the sheets": where LO writes them, drafts are handed over in `proposals/` (S13), with
+    `templates/sheets/`.
+- `references/the-board.md`: before TOML the check is `shape.py <slug>`, and the scoreboard takes over after the
+  build. The "empty world" claim and the "gates decidable from the Board" line are gone.
+- `scripts/gates.py`: with no TOML but a ledger, it prints "no TOML yet: use shape.py <slug> (checkpoint A reads the
+  ledger alone)", still exit 2.
+
+**Verified.**
+- `tests/test_gates_dc9e.py`: 2 cases (a ledger without TOML points at shape.py; nothing at all is still "not
+  found").
+- Suite: 329 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- Greps: "it works on an empty world" 0; "**write the sheets**" 0.
+
+words: 138,697 → 138,711 (+14) · running total 138,711 / 149,283.
+
+## 2026-09-30 — DC9d: doc slips, typed meters, and map keys nothing read (doctrine + shape.py)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9d (H26 · H27 · H28 · H29 · H33):
+- the explicit floor could be met by repeating one word (H26);
+- a walk-on can't be labelled by his role (H27);
+- slips (H28): a need had two shapes in `state.md`; W1b's +1 against the-arc's +5; stale citations;
+- "declared" meant only that a name existed (H29);
+- the docs asked for `board.map.bridges`, `r1_signoff`, map scale and aliveness, and nothing read them (H33).
+
+**What changed.**
+- `references/register.md`: the floor is a game-wide share, not a quota per beat, and repeating one word is not
+  craft. The word list is unchanged.
+- `references/engine.md` §25: a walk-on uses `speaker = "unknown"` ("Stranger") and the narration line before
+  names his role. A role-labelled speaker is a known gap.
+- `references/state.md`:
+  - the need row is `{key, falls, fills, costs, shuts}`;
+  - `board.map` loses `bridges` and `r1_signoff` and gains `scale` and `alive`, and a note that travel costs are
+    area `crossing_costs` and a place's `name` comes from `want.places[]`;
+  - the meters example is `{type, min, max}`.
+- `references/the-arc.md` A4: the +5/+10 example sits on top of W1b-i's +1 unit.
+- `references/the-meters.md`: stale citations fixed: `gates.py:8183` and `:8249` → `:8567`, and `:3402` → `:3400`.
+- `references/the-map.md`, `references/engine.md`, `templates/board.toml`:
+  - bridges become area `crossing_costs`;
+  - `r1_signoff` is removed; the map is signed like every spine page;
+  - the schema shows `roots`, `scale`, `alive`.
+- `scripts/shape.py`:
+  - a new row 3b, **"a person's meter has a type and range"**. A bare description string WARNS, a new tag,
+    listed and never a FAIL. `--ship` counts only `False` as bad, so a WARN never reds it.
+  - the tally prints warns.
+- `SKILL.md` tools row names the WARN.
+
+**Verified.**
+- `tests/test_shape_dc9d.py`: 4 cases (typed passes, bare warns, a warn exits 0 and prints `[WARN]`, none is n/a).
+  The `test_shape.py` fixture's meter is typed.
+- Suite: 327 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Greps: `bridges`, `r1_signoff`, `gates.py:8183`, `:8249`, `:3402` and `decay_per_day` are 0 in skill files.
+- shape.py (read-only): orientation, probation, the_balance and vesper_two WARN (0/7, 0/8, 0/9, 0/7 typed);
+  members_only n/a.
+
+words: 138,682 → 138,697 (+15) · running total 138,697 / 149,283.
+
+## 2026-09-30 — DC9c: six sheet templates; an idea-stage clip may be intent; the opening clock counts travel (templates)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9c (I20 · E6 · I7):
+- six sheet types and 13 rules, but no template (I20);
+- at the idea stage there's no media, and line 8 had no way to mark a clip as intent (E6);
+- the opening clock formula left out travel time: 18:01 by the formula, 18:08 played (I7).
+
+**What changed.**
+- `templates/sheets/{place,person,scene,system,opening,decision}.md` (new): one page each, slots only, each
+  pointing at its S-rules and its save path.
+  - `decision.md` sits at `games/<slug>/DECISIONS.md`, outside `sheets/`, as the folder section says.
+  - The person template asks age, his visible want and what he keeps (DC2a), and one guidance card per step
+    (DC9a).
+- `references/the-sheets.md`:
+  - "Six sheet types" points at the templates;
+  - the folder tree gains `spine/` and `proposals/`, which completes DC9a's H32.
+- `references/the-release.md` her moment, line 8: at the idea stage the clip may be `intent`, found later.
+- `templates/first-hour.toml` F3: the landing clock adds the landing location's own `costs.time` and any area
+  `crossing_costs.time`, which the travel intercept charges on arrival. Read in `v2.py`: the intercept fires on
+  any move into a `Location_` passage.
+- `scripts/tests/test_templates_parse.py`: a new test. All six exist, each ≤ 60 lines, starts `# [REVIEW]`, has
+  slots, and no table cell is a filled sentence.
+
+**Verified.**
+- Suite: 323 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Grep: the old line-8 sentence is 0.
+
+words: 138,637 → 138,682 (+45) · running total 138,682 / 149,283. Templates aren't counted.
+
+## 2026-09-30 — DC9b: the spine's ladder page separates tiers from his meters, and a gate must be reachable (doctrine + shape.py)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9b (H17 · I16 · I17 · I25 · H31):
+- SP2 capped "ascent tiers" at 2, but the cap is per person (H17);
+- SP2 had no `canvas` column, which the ledger needs (I16);
+- nothing gave first rung numbers (I17);
+- "≤ 400 words" didn't say how tables count (I25);
+- nothing could check before TOML whether a step's gate is reachable (H31).
+
+**What changed.**
+- `templates/spine/SP2_ladders.md`:
+  - her tiers (game-wide) are separate from each person's meters (his `keeps`, at most two);
+  - the table gains `canvas` and `raises` columns;
+  - the first rung sits near 5 (W4).
+- `references/the-board.md` §3b: "no shape to copy" becomes "the board sets the rung numbers; default 8–17 rungs,
+  lowest near 5".
+- `references/the-spine.md`:
+  - ≤ 400 words counts words, not pipes or dashes;
+  - checkpoint A lists the new row.
+- `references/state.md`: a step's optional `raises` and `board.daily_raises`.
+- `scripts/shape.py`: new row **"a step's gate can be reached"** (12; the adult row is now 13).
+  - Judged traits are only those a step's `raises` or `board.daily_raises` names. A repeatable's raises live in
+    the TOML, so other traits are n/a.
+  - A gte/gt gate passes if the daily tick raises the trait, or if the raises before it reach the value. "Before"
+    means the same person's lower steps plus SP3 dependencies, transitively.
+  - With no `raises` anywhere, the row is n/a.
+- `SKILL.md` tools row: the new check is named (not a scoreboard row).
+
+**Verified.**
+- `tests/test_shape_dc9b.py`: 7 cases (reached, short, gt vs equal, daily raise, dependency, unraised trait n/a,
+  none declared n/a). The `test_shape.py` fixture gains `raises: {trust: 5}`.
+- Suite: 322 passed. `--selfcheck`: the index is current. cite_check: 0.
+- shape.py (read-only) on the five ledgers: n/a on all.
+- Greps: `<≤ 2 meters>` 0, "no shape to copy" 0.
+
+words: 138,574 → 138,637 (+63) · running total 138,637 / 149,283.
+
+## 2026-09-30 — DC9a: where spine pages and proposals live; the board is ledger-first; doors hang on rungs (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9a (H19 · H22 · H23 · H24 · H32):
+- no folder was named for spine pages or handed-over drafts (H32);
+- the board template said "copy into toml_phases" while the board phase ends before any TOML (H19);
+- S12 didn't say whether a signed spine page beats an older sheet (H22);
+- the door rule never said the build refuses a gate on a flag nothing sets (H23);
+- S10 asked for one card per tier and per person while `--ship` wants one per ladder step, and the card generator
+  shipped an example tip that authors copy (H24).
+
+**What changed.**
+- `references/the-spine.md`: pages are saved in `games/<slug>/spine/`.
+- `references/the-sheets.md`:
+  - S13: a handed-over draft sheet goes in `games/<slug>/proposals/`;
+  - S12: a signed spine page wins over an older sheet;
+  - S10: one guidance card per ladder step, written by `guidance_from_ladder.py`.
+- `templates/board.toml` header: ledger-first; the blocks are copied into `toml_phases/` only at the build.
+- `references/the-release.md` her moment, line 8: a later release's door hangs on a meter rung this release can't
+  reach, never a flag nothing sets (`validate_flag_chains()`, `v2.py:13269`).
+- `scripts/guidance_from_ladder.py`: the commented example tip is removed.
+
+**Verified.**
+- Grep: "I wonder what he is into" and "quest-card row per" are 0 in skill files. The-voice.md keeps the IHOH
+  quote as evidence.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,508 → 138,574 (+66) · running total 138,574 / 149,283.
+
+## 2026-09-30 — DC8: a button names the act; a spend price is on it, pay earned is not (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC8 (D11 · J2). A button could hide the act behind a soft name. And the price
+rule didn't separate a spend price, which goes on the button (gate 21), from income pay, which 0 of the 4 passing
+games put there (§L).
+
+**What changed.** `references/the-voice.md`:
+- R1: **a button never hides the act** *(LO decided, D11)*. A paid visit to a man's room is labelled as one, never
+  as waiting or being asked.
+- The cost paragraph states two rules:
+  - a **spend** price stays on the button (about 8 of 15 games, gate 21);
+  - **pay she earns** does not go on the button (0 of 4 passing games). It is said in the scene that first
+    offers the work, kept on the guidance card, and shown by the toast after.
+- The PRD's example labels come from members_only, one of our own games, so the rule is written without them
+  (ground rule 3).
+
+**Verified.**
+- Both new rules are present (1 each).
+- No other doc tells authors to put earned pay on a button (grep).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,395 → 138,508 (+113) · running total 138,508 / 149,283. Two new rules; nothing old covered them.
+
+## 2026-09-30 — DC7: two kinds of place, hours and hidden places, and navigation by area (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC7 (D9 · D10 · H20 · H21 · I6 · I22 · I23).
+- EN3/EN4/EN10/EN11 shipped and are documented in `engine.md` §22, but the doctrine still said:
+  - "a room that answers none of three is not a location" beside "needs a scheduled person, or it's scenery"
+    (H20);
+  - "the empty room is content";
+  - that only people publish hours;
+  - heat was loosely defined.
+- Three small contradictions: `23:00–23:59` loses a minute (I6); engine.md said both "treat as error" and "highest
+  priority wins" (I22); the worked need was hygiene, which engine.md §30.1 forbids (I23).
+
+**What changed.**
+- `references/the-board.md` §1:
+  - **two kinds of place** *(LO decided, D9 · D10)*: a thoroughfare routes; a destination always offers one thing
+    she can do alone, or is closed then *(check: pending CK7)*;
+  - the IHOH exception named: 76 of its 77 open hours empty (§L), with its line *"There's nothing to do here right
+    now."* [WindsorBase], grepped;
+  - "who is there" no longer calls a place without people scenery;
+  - heat: a place holding at least one sex scene, counting the men's rooms and phone-started scenes, about 60%
+    *(LO decided, D9c; check: pending CK7)*;
+  - the overnight row is `23:00–00:00` (end exclusive);
+  - a stale `isCurrentTimeSlot` citation is fixed, `v2.py:3784` → `:4152`.
+- `references/the-map.md`:
+  - the second root goes in `board.map.roots[]`, with gate 11's exemption stated (offscreen or sealed; also in
+    the gate table) (H21);
+  - "the empty room is content" becomes his room while he is out, as occupancy;
+  - the engine table gains hours, hidden places, `kind` and `crossing_costs`;
+  - a new **Navigation** section *(LO decided, D10)*: area → building → room, time charged on crossing areas, no
+    fast travel for now, unfound places hidden, closed places say why, guidance cards carry place + time + what's
+    waiting, the NEW mark on travel links, faces stay.
+- `references/the-clock.md` C5: places have `hours` + `closed_text` now. A stale `SchedulePage` citation is fixed,
+  `v2.py:18964` → `:21334`.
+- `references/state.md`: `board.map.roots[]`; the worked need is energy, not hygiene.
+- `references/engine.md` §19 (I22): the warning is a note; the highest priority wins (§42).
+- `templates/board.toml`: the worked need is energy, with a note that there is no hygiene need; the location
+  comment is two kinds of place.
+- `references/the-meters.md` M10: the decay example is energy only; DC6a's M7 row reads "energy".
+
+**Verified.**
+- Greps: 13 old phrases at 0. `board.toml`'s one `hygiene` is the new "no hygiene need" note.
+- The NEW badge exists (`v2.py:21741`, `nav-new-badge`).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,051 → 138,395 (+344) · running total 138,395 / 149,283. The growth is the navigation section, two kinds of
+place, heat's definition and four engine-table rows, all new decisions.
+
+## 2026-09-30 — DC10: the reader is required every release, and its verdicts gate (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC10 (D12 · I1 · B6 · D15). `v2-reader` was optional and its table went nowhere,
+so the scoreboard could be green while scenes failed as scenes (I1). D12 (LO): it runs on every canvas touched this
+release, before `--ship`, and its verdicts gate. The BLOCK itself is NC1, in phase 4. DC2b promised two new reader
+tests (B6, D15).
+
+**What changed.**
+- `references/the-release.md`:
+  - loop step **6b. Read**: `v2-reader` on every touched canvas (a new id, or a TOML table that differs from the
+    last shipped release's, read at `releases[].commit`; with nothing shipped, every canvas);
+  - verdicts go in `release_page.reader`, waivers in `release_page.reader_waivers`;
+  - a FAIL without a waiver blocks, with *(check: pending NC1)*;
+  - the reader can be wrong either way, and LO's playthrough is the final say.
+  - Shipping the build: a new item, 6b, and item 8 records `commit`.
+- `SKILL.md` dispatch `release` row: "gate, read, ship" (not a scoreboard row).
+- `references/state.md`: `releases[].commit`, `release_page.reader`, `release_page.reader_waivers`.
+- `references/register.md` "What a scene contains": seven tests become nine. The new two are 8 *the numbers agree*
+  (B6) and 9 *companion and rival* (LO decided, D15).
+- `references/agents.md` The Reader: it runs every release on touched canvases and returns a table plus JSON; its
+  verdicts gate (LO decided, D12; check: pending NC1).
+- `.claude/agents/v2-reader.md`:
+  - the description;
+  - how to find touched canvases (`git show <releases[-1].commit>:…`);
+  - nine tests;
+  - a JSON block the session saves.
+  - It stays read-only.
+
+**Verified.**
+- Greps: "seven tests" is 0 in register.md, agents.md and v2-reader.md; "LO reads the table" 0; "gate, ship, log"
+  0. The new keys are present in state.md.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 137,841 → 138,051 (+210) · running total 138,051 / 149,283. The growth is the new loop step, three ledger keys
+and two tests.
+
+## 2026-09-30 — DC6a: numbers are shown and named; the toast stays; the sidebar shows the number once (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC6a (D1 · D1b · D3 · D4 · J5). LO reversed the 2026-09-25 rule "the score is
+hidden". Now:
+- numbers are shown and named, the field's way (R3 K12: corruption is a number in 13 of 15);
+- the "+N" toast stays (D1b);
+- one name per trait, with genre words for sex traits (D3, D3b);
+- the sidebar mix is D4.
+
+The docs and four gates.py messages still taught "hidden".
+
+**What changed.**
+- `references/the-meters.md`:
+  - "What the player is shown" is rewritten to D1 in four parts:
+    - her traits as name + number + band word;
+    - a man's kept traits in `show_traits`, with *(check: pending NC6)*;
+    - a reaction line plus the toast, and a `+X` for a non-existent stat is still wrong;
+    - the requirement is told.
+  - The DoL `$exposed` evidence is kept. The band-ladder line "the number is internal" is gone.
+- M7 is now "Band a meter, show it once":
+  - `in_dump = false` keeps the number to one place;
+  - the D4 table: sex traits `trait_words` + `show_value`; needs `trait_bar` "Energy: 60 / 100"; money
+    `trait_words` + `show_value` with no bands, "Money: 140";
+  - every item has a `label`, with *(check: pending Gate 27)*.
+- `references/register.md`:
+  - truth rule 4 and its table row: a consequence on a button is a real flag or stat, numbers are shown, and a
+    `+X` for no real stat is the defect;
+  - the genre word counts as the player's own word *(LO decided, D3b)*.
+- `references/the-voice.md`:
+  - the label rule gets the same genre-word line;
+  - the Zara "raw" row is gone (adults-only). It is replaced by Cupid's Way, numbers only: 38 of its 48 greyed
+    buttons outside Jack/Aaron (§L).
+- `references/the-first-hour.md` F1b step 3: a reaction line plus the toast.
+- `references/the-economy.md:514`: "a counter trait", not "a hidden counter".
+- `SKILL.md:334` lint text (not a scoreboard gate row) points at "What the player is shown".
+- `references/engine.md`:
+  - §41d is corrected: `hide_value` does drop the number from a `trait_bar`'s own label (`v2.py:18521`); it does
+    not keep the key out of the dump;
+  - §34 says every trait he keeps is named under D1;
+  - §41e's citation now points at `_is_free()` (`gates.py:5238`). The old `:5115` was already stale, and this
+    edit moved it again.
+- `scripts/gates.py`: text only, no behaviour change:
+  - the :1583 comment;
+  - the `lint_printed_stat` docstring and messages ("prints a real stat (allowed; the engine's toast already
+    shows it)");
+  - the lint footer.
+  - The lint's own rewrite is phase 4.
+
+**Flagged, not edited:** `CLAUDE.md:122`, "no made-up stats — show the reaction, not the number", now contradicts D1
+(ground rule 14).
+
+**Verified.**
+- Greps: 14 old phrases at 0.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,101 → 137,841 (−260) · running total 137,841 / 149,283.
+
+## 2026-09-30 — DC5: her climb into paid sex — introduced, a first time, then the repeatable (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC5 (D7 · E5 · J2 · J3 · J4). Nothing said:
+- a paid activity is introduced before it appears (J3);
+- it gets a first time before the repeatable opens (J4);
+- how the repeatable changes with her level.
+
+The first release asked for an explicit beat on night one while A2 says an arc's first third has no sex (E5). D7
+(LO): all six R1 options accepted.
+
+**What changed.**
+- `references/the-arc.md`: a new **A15**, six rules (LO decided, D7), each citing R1's "How sure" line. No new
+  quotes.
+  - introduced first (R1:76). It points at `the-first-hour.md` F5 rather than the SKILL.md scoreboard row
+    (rule 11).
+  - a first time before every paid repeatable (R1:138).
+  - two voices per act, marked **thin** (R1:170), and a growing menu (R3c).
+  - the start matches the Want's bottom, with a minimum path and no day count (R1:268).
+  - night one is a stranger or a one-off, never the paid route or the main man (R1:296).
+  - always a no before (R1:228). "Stop him" costs part of the pay, marked **thin** (R1:218-228). The route ends
+    only by a labelled final no (A3).
+  - Five rules carry *(check: pending NC2)*.
+- A2: night one's explicit beat comes from outside the arc (A15), which answers E5.
+- A11's stopping row: in a paid scene it costs part of the pay.
+- `references/the-release.md` § The first release: the first explicit beat is a stranger or a one-off.
+- `references/the-meters.md` W1b: a paid repeatable carries the slope as two voices per act.
+- `references/the-first-hour.md` step 4: the same night-one limit.
+
+**Verified.**
+- `A15` appears in the-arc (3), the-release, the-meters and the-first-hour (1 each).
+- R1 lines 76/138/170/228/268/296 were read and match.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 137,766 → 138,101 (+335) · running total 138,101 / 149,283. All of it is new doctrine D7 asks for; no
+old text covered it.
+
+## 2026-09-30 — DC4: a no is parked, or final only when the button says so (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC4 (D6 · Dr1).
+- `the-arc.md` taught three answers:
+  - A3: counted, warned and routed;
+  - A3b: parked, with the address printed;
+  - A14: never locks.
+- A3b's examples didn't hold: the two CoT lines are hint-page text (§L), and the CW line is unreachable (R2 K7).
+- A3's routing example was Zara, which fails the adults-only rule. 0 of 4 passing games route a refusal.
+
+**What changed.**
+- `references/the-arc.md`: A3 + A3b are replaced by one rule (LO decided, D6; R2 K7):
+  - an ordinary no is parked: the step returns after `retry_after_days` (EN1 `consume_on = "exit"`), and his
+    next line may remember it;
+  - a final no only on a button that says "(ends his path)", with `final = true`; it closes his story, never
+    the person;
+  - where he keeps feelings, a no may cost Warmth, never Want.
+  - The evidence is in-scene lines, each grepped in `round2/passages/`: IHOH [ShaunBRTalk4D], CW [damien13],
+    IHOH [JamesCoffeeShop2E], and [DevDadDiner1] with its "(ends path)" button.
+  - Remembering a no in words is marked thin (2 men in 1 game of 4).
+  - A14's no bullet now points at A3. A11's table row says "parked or final, A3".
+- `references/the-surfaces.md` R5b: the hint-page CoT line and "a counted no closes" are gone; parked and
+  final, with the IHOH lines kept.
+- `references/state.md` ladder row: `refusal: "parked" | "final"`.
+- `templates/spine/SP2_ladders.md`: `parked · final`.
+- `references/the-release.md` eight lines, line 3: parked or final.
+- `.claude/agents/v2-pitcher.md`: the rule bullet and line 3 of the return format.
+- `.claude/agents/v2-attack.md:79` (only that line; LO's own 2-line change is untouched): an unlabelled final no
+  is flagged as a defect.
+- `references/agents.md`: same wording.
+- `references/the-systems.md`: "ask again" is needed less when steps park with `retry_after_days`.
+
+**Verified.**
+- Greps: 16 old phrases at 0.
+- the-arc.md's 4 remaining `zaras-school-life` hits are numbers-only (lines 27, 209, 309, 354).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+**Also fixed (LO, same rule, not in the PRD's list):**
+- `references/the-spine.md:42`: `refusal` is `parked` or `final`, pointing at A3;
+- `references/the-arc.md:280`: "A3's counted refusal" becomes "A3's no".
+
+words: 138,123 → 137,766 (−357) · running total 137,766 / 149,283.
+
+## 2026-09-30 — DC3: the goal has no date; the bill repeats, rises in stages and carries (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC3 (D8 · C1 · C2 · H18 · I12).
+- The skill asked for a dated goal. The engine fires nothing on a date, and a sidebar `countdown` only displays
+  (R4:89).
+- A goal could end with nothing next (C2).
+- R3c argued against staged rent, and engine.md §26 defaulted to eviction. EN2a/EN2b now ship stages, stage lines
+  and carried debt.
+- A non-money hold had no ledger home (H18).
+
+**What changed.**
+- `references/the-want.md` §0:
+  - the shape table's "a clock" becomes "something that repeats";
+  - "Declare the goal with a date" becomes "the goal and what comes after it";
+  - the goal has no date *(LO decided, D8)*, and a countdown fires nothing;
+  - a goal that can end names the next one, with *(check: pending NC5)*.
+- `templates/idea.md`:
+  - :15 now reads "something that repeats";
+  - the goal line drops "**by** <a date>" and asks for the next goal.
+- `references/state.md`:
+  - `want.promise.date` is gone, and `want.promise.goals[] = [{goal, ends_when, next}]` is added;
+  - `obligation` says "a due day that repeats" (the PRD's :67 is :68);
+  - `board.pressure = {what_repeats, who_collects, cost_of_a_miss, stages}` is added (H18).
+- `references/the-economy.md`:
+  - R3b: the ratchet is `[settings.rent] stages` + `stage_lines`;
+  - R3c: the "no engine change / a staged amount makes surfaces lie" paragraph is rewritten. Two notified
+    routes, and never put the rent in a static `trait_bar max`;
+  - a short week is carried, no game over *(LO decided, D8d)*;
+  - stale citations fixed on the edited lines: `v2.py:5586` → `:6560`, `:16702` → `:18497`,
+    `template_import.py:706` → `:707`.
+- `references/engine.md` §26 (the PRD's :1030-1055 is now :1088): `stages`, `stage_lines`, `on_short = "carry"`,
+  with `v2.py:13541` / `:13592` and `template_import.py:481-490`. `grace_periods` and `eviction_mode` are ignored
+  under carry. Old saves restart at stage 1 owing 0. DC11 will only check this.
+- `templates/spine/SP4_loop_and_pressure.md`: rows for stages and stage lines, carry, and a non-money hold, with
+  a pointer to `board.pressure`.
+- Wording: `references/the-voice.md:105` and `scripts/gates.py:8007` (the PRD's :7623) now say "a bill that comes
+  back". No test asserts the string.
+
+**Verified.**
+- Greps: 10 old phrases at 0.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Every new `v2.py` line was read by hand.
+
+words: 137,836 → 138,123 (+287) · running total 138,123 / 149,283. Growth:
+- the EN2 engine facts, which DC11 would otherwise add;
+- two new ledger keys (`promise.goals`, `board.pressure`);
+- the no-date rule.
+
+The rest was trimmed.
+
+## 2026-09-30 — DC1: the premise comes first, and the idea page's first step is pitched three ways (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC1 (A1 · A2 · D14 · E1 · E2 · E3 · E4 · E8 · H30).
+- Dispatch started at the Want, but the Want's hold and charge depend on a premise picked later (A1).
+- The only model-to-beat example was a failing game (A2).
+- The idea page's "first step" was singular, read like the opening, and had no save path (E1, E8, E3).
+- `pitch_pack.py` could not run before a build (E2).
+- An unshipped step in `releases[]` was counted as shipped (E4, H30).
+- D14 (LO): three pitchers, one per man.
+
+**What changed.**
+- `SKILL.md` Dispatch (not a scoreboard row):
+  - a new first row, *the premise*: three premises in different shapes; LO picks one, and it becomes
+    `want.fantasy_shape`;
+  - then the Want row;
+  - the `want` row names `games/<slug>/IDEA.md` and three `v2-pitcher`s, one per man, with no shared context;
+    LO picks, and the others become later steps.
+  - The pitch_pack paragraph says it runs with no TOML.
+- `references/the-want.md` §0:
+  - the premise comes before the Want;
+  - the model to beat is one of Course of Temptation, In Her Own Hands, Shady Deals or Cupid's Way;
+  - the Zara example is gone, and the round4b finding stays as a paraphrase (no new quote);
+  - `## Then` names `IDEA.md`.
+- `templates/idea.md`:
+  - it is saved at `games/<slug>/IDEA.md`;
+  - the model to beat is limited to the four;
+  - §4 is "The first step with one person — not the game's opening": three pitchers, LO picks, the other two
+    stay as later steps, and there is a line on how the opening (F1b) hands over;
+  - the step is recorded as `release_page.her_moment`, not `releases[]`.
+- `.claude/agents/v2-pitcher.md`: the description and a new "idea phase" paragraph. With no build, the pack
+  prints the Want and idea pages, `want.places[]` and `want.cast[]`, and the pitch is step 1, with his want
+  first.
+- `scripts/pitch_pack.py`:
+  - `_shipped()` keeps only releases with a `shipped` date. It is used by `_kinds_shipped`, SHIPPED ALREADY
+    (the PRD's :938, now in `_print_shipped`) and `_relationships`' releases-since-last-step. The last one is
+    the same E4 bug, one function over.
+  - The promise, kinds, library and shipped blocks are pulled out of `pack()` into helpers.
+  - The new `idea_pack()` runs when there is no TOML but there is a ledger or `WANT.md`. It prints the
+    promise, the kinds, the library slice, places, people, both pages verbatim and the shipped releases, and
+    has `--json`.
+- `references/state.md`: `release_page.her_moment` holds the chosen, unshipped step. The `releases[].her_moment`
+  comment points at it.
+
+**Verified.**
+- `tests/test_pitch_pack_dc1.py` (5 cases):
+  - only shipped releases count;
+  - idea mode runs from the ledger + WANT.md + IDEA.md and prints both pages, places and people;
+  - JSON works;
+  - missing pages are named;
+  - no inputs at all is "not found".
+- The `test_pitch_pack_ic2.py` fixture gains `shipped` dates.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Read-only smoke run on members_only: no traceback. Its unshipped release is no longer listed as shipped.
+
+words: 137,730 → 137,836 (+106) · running total 137,836 / 149,283. The growth is the premise step and the
+idea-phase pack, both new.
+
+## 2026-09-30 — DC2b: the Want names its places, its money and its walk-ons (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2b (B6 · B7 · I19 · D15/E7 · H34), plus `want.cast` names in `--words`
+(LO, after DC2a).
+- `--words` flagged the game's own place names in the want phase, before the board exists (B7).
+- The currency rule appeared only at the board, after amounts were set (I19).
+- Nothing said whether her companion may be her rival (E7). LO decided D15: yes, when declared, with both sides
+  shown.
+- The crude ceiling keyed only named characters (H34).
+- Nothing checked the Want's own numbers (B6).
+
+**What changed.**
+- `scripts/gates.py` `_words_declared_names` (the PRD said :9494-9530; it sits at :9952):
+  - reads `want.places[].id`/`.name` and `want.cast[].id` as names the fiction teaches;
+  - skips `role:<name>` crude-ceiling keys, which would otherwise hide "night" and "man".
+- `templates/want.md`:
+  - a `want.places[]` line;
+  - a money line: house default `$`, no real-world currency (`the-economy.md` R7);
+  - "every number on this page agrees", with *(check: pending NC1)*.
+- `templates/spine/SP4_loop_and_pressure.md`: a currency row, and R7 added to its rule pointer. R7 stays in
+  `the-economy.md` as the rule's home. "Moves" is read as "is stated from the Want on".
+- D15 *(LO decided)*: a companion may also be the rival only when declared (`want.companion_is_rival = true`),
+  and her scenes show the help and the competition. Added in:
+  - `templates/idea.md`;
+  - `references/the-want.md` §6, with *(check: pending NC1)*;
+  - `references/state.md`.
+- H34: `want.crude_ceiling` accepts `role:<name>` keys. Added in:
+  - `references/state.md`;
+  - `references/the-want.md` §7;
+  - the SP2 crude-words table.
+- B6: `references/the-want.md` "The form" says the page's numbers agree; the reader checks it (DC10 writes the
+  test).
+
+**Verified.**
+- `tests/test_gates_dc2b.py`: 3 cases.
+  - Places and cast come back as names, and "chandlery" and "oskar" leave the list.
+  - Without them, "chandlery" is listed.
+  - A `role:` key is not a name.
+- Suite: 310 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+
+words: 137,639 → 137,730 (+91) · running total 137,730 / 149,283. The growth is two new ledger keys
+(`companion_is_rival`, `places`), the `role:` form, and the D15 rule, all new decisions with no old text to
+replace.
+
+## 2026-09-30 — DC2a: the Want is one page; every person has an age and a score he keeps (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2a (D16 · B1 · B2 · B3 · B4 · B5 · I18 · J6 · D5, pace per LO Q2). The Want
+template was 221 lines in seven sections with three tables and shipped fixed rungs 15/35/55/75. It never asked
+ages or what he wants. The hold and the fantasy shape were tangled, and the-want.md pushed "three or four
+tiers" against the-board.md. the-meters.md W6 still taught "one willingness word" and a hidden suspicion
+accumulator, which D5 and D1 reverse.
+
+**What changed.**
+- `templates/want.md`: rewritten as one page in five parts: who she is (with a `want.player` line), what
+  holds her, what she wants (plus the charge), how she climbs (early and late rungs in words, no numbers),
+  and the people (age · what she wants from him · what he visibly wants · what he keeps).
+- Moved tables:
+  - crude words go to a new table in `templates/spine/SP2_ladders.md`;
+  - rung numbers get a pointer comment in `templates/board.toml`;
+  - needs and the map shape were already on the board;
+  - `narration_person` was already in board `[settings]`.
+  - `templates/first-hour.toml` gets one comment line: the start choice stays in `want.player.start_choice`
+    (LO).
+- `references/the-want.md`:
+  - "The form" now names the five parts.
+  - §1 is kept (LO), so scoreboard pointers stay true.
+  - §1b says the hold and the shape are separate choices (B1).
+  - §3 has rungs in words, and the tier count is a board decision (I18).
+  - §5 points at the board.
+  - §6 is "The people": age, his visible want (A13), what he keeps.
+  - §7 points at the board and SP2.
+  - The leave-test is cut to three questions.
+- `references/the-meters.md`:
+  - W1 gains "What each man keeps score of": the D5 table (LO decided; R5; lover/user marked thin, 1 of 4)
+    and four rules. Rule 1 is marked "(check: pending NC6)". Rule 4 reads "about 1–10% of the next
+    threshold, with 3–10 visits between steps" (R5:243-244).
+  - W6 "one word for the cast" is rewritten as per-man keeps, shown (D5, D1). The hidden suspicion row is
+    gone.
+- `references/state.md`: new `want.cast[] = {id, age, keeps}`. The example meters are now want/warmth.
+  `crude_ceiling` points at SP2.
+- `references/the-map.md` R0: the map shape is picked on the board (it said "in the Want").
+- `scripts/shape.py`: new row "every person is an adult". A person in `want.cast` or `board.characters` with
+  no age, a non-number age, or an age under 18 FAILS in every mode (LO). It is n/a when nobody is declared.
+  The docstring, `SKILL.md` (tools table, not a scoreboard row) and `the-spine.md` checkpoint A mention it.
+- `templates/board.toml`: the cast meter comment points at `want.cast[].keeps`.
+- `references/the-spine.md` checkpoint A: dropped "or signed the day it was drafted". shape.py removed that
+  check in CK5 (D13), and this line was missed (LO, 2026-09-30).
+
+**Verified.**
+- Greps: 17 old phrases are at 0 in their files.
+- Tests:
+  - `tests/test_shape_dc2a.py` is new, 6 cases;
+  - the `test_shape.py` fixture gains ages;
+  - the suite runs 307 passed.
+- `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- shape.py (read-only) on the five ledgers: all FAIL the new row (0/4, 0/5, 0/4, 0/11, 0/7). None declares
+  `want.cast` yet. It is a REPORT row in `--ship`.
+
+words: 137,538 → 137,639 (+101) · running total 137,639 / 149,283. The growth is the D5 table and its four
+rules plus the `want.cast` key, which this item requires. The rest was trimmed.
+
+## 2026-09-30 — CK9: location fill reads this release's places (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK9 (H11, the gates.py half; CK5 did shape.py). G1 *location fill* summed every
+`board.locations[].fill`. A place cut from the release still counted in the plan total and the plan's anchor share,
+and got a drift line of its own.
+
+**What changed.** `scripts/gates.py` G1:
+- With `release_page.places` declared (ids or `{id}`, the same read as shape.py row 1), the budget keeps only
+  those places.
+- The per-place drift loop runs over the game's locations that are on the release page, and the plan total and
+  anchor come from those budgets.
+- The post-hoc (round-number) test also reads the filtered budgets.
+- The headline counts "N/M on their own budget" over the judged places and adds "· K place(s) cut from this
+  release ignored" when a cut place carried a fill.
+- Without `release_page.places`, nothing changes. The empty-location check and the backstop branch are
+  untouched.
+- No gate added or renamed; "location fill" is a REPORT row in `--ship`, not BLOCK. No doc edits.
+
+**Verified.**
+- `tests/test_gates_ck9.py`: 4 passed. The cases:
+  - a cut place gets no line, the plan is 2,500, "2/2" and "1 place(s) cut … ignored";
+  - without `places` the cut place drifts, as before, and the plan is 5,500;
+  - six cut 2,000-word fills dilute bar to 14% ("the PLAN has no centre") and, cut, do not;
+  - `{id}` entries work.
+- Skill tests 301 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong (no
+  line moved under a citation).
+- Scratch copies of the five games:
+  - members_only (its release page cuts `club` and `town`): plan 24,100 → 22,500 declared, 0/11 → 0/9 on
+    budget, the two cut drift lines gone, and the plan anchor share 29% → 31%. Still FAIL.
+  - probation: its places match its seven fills; unchanged.
+  - orientation, the_balance, vesper_two: no `release_page.places`; unchanged.
+
+words: 137,538 → 137,538 (0)
+
+---
+
+## 2026-09-30 — CK8c: alone means alone at that hour; a long click is a brake; a need can be met every day (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8c (I11 · H13 · H12). Three checks read "anywhere, any time" where the
+doctrine means "at that hour":
+- G30 called any unbound repeatable "she works alone", however full the room was;
+- `_routes` never counted a time cost as a brake;
+- nothing checked that a need could be filled on every weekday.
+
+**What changed.** `scripts/gates.py`:
+- **I11:** `_walkin_join` builds hour slots, using new helpers `_hour_slots` and `_trigger_slots`. A solo
+  canvas counts only if it is live in some hour when nobody is scheduled in the room; the room still needs
+  somebody scheduled at another hour. The G30 text is unchanged.
+- **H13:** `_routes` marks a route `timecap` when the click costs at least the SOURCE canvas's longest
+  schedule window. The time is the choice's `time_progression_minutes`, else the target node's exit time. The
+  route counts as braked; no schedule means no window. The docstring gains the bullet.
+- **H12:** a new ordinary gate, *a need can be met every day*. For each `board.needs[]` key, a canvas whose
+  effects `add` a positive value or `set` one must be live on every weekday: its trigger's days, narrowed by
+  its place's EN3 `hours`, and a triggerless rung takes the days of the canvases routing into it.
+  - The first run read `add` only and failed every need in four games: their restores are `set 100` ("wash
+    set 100"). `set` to a positive value counts as a refill, and a test covers it.
+- `SKILL.md` scoreboard: a new row for *a need can be met every day*.
+- No `--ship` BLOCK row touched. G30 is a REPORT row. `_routes` feeds only *no free uncapped income* and *the
+  climb is paid for* (grep), both ordinary, and H13 only loosens them.
+- `cite_check --fix` moved `engine.md:2381` (gates.py 5080 → 5115). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8c.py`: 14 passed.
+  - I11: a never-empty room doesn't qualify; a canvas live while the room is empty does; a canvas live only
+    while someone is there doesn't; an unscheduled canvas in a part-time room does.
+  - H13: a 240-minute click from an 18–22 hub is braked; 60 is not; no schedule, no brake; time on the target's
+    exit counts.
+  - H12: no Sunday source fails naming Sun; a Sunday source passes; a place closed Sunday fails; a triggerless
+    rung takes its hub's days; `set 100` is a refill; no needs is n/a.
+- Skill tests 297 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five games, before → after. No BLOCK row changed.
+  - *a need can be met every day* (new): PASS on all five (2/2, 3/3, 4/4, 2/2, 2/2).
+  - *the walk-in floor* (REPORT in `--ship`):
+    - members_only 8/8 PASS → 7/8 FAIL. On `bar_floor` the walk-in rides `work_shift`, which runs only while
+      someone is scheduled there; the room's alone-hours canvas, `service_stairs`, carries none.
+    - the_balance 5/10 → 4/9, still FAIL. `the_cafe` no longer qualifies; `the_classroom` loses its covered
+      canvases, since `class_3`/`class_4` run only with Sam there.
+    - probation 2/2 → 1/1, still PASS. `martys` no longer qualifies: `work_martys` runs only with Marty there.
+    - orientation and vesper_two are unchanged.
+  - *no free uncapped income* / *the climb is paid for*: no verdict change in any game.
+
+words: 137,504 → 137,538 (+34) · running total 137,538 / 149,283
+
+---
+
+## 2026-09-30 — CK8b: counting fixes, and new BLOCK rules warn first (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8b (I9 · I14 · H9 · H10 · H14). Five counting defects:
+- walk-in pay counted as income of its own (~1,950 against a declared 600);
+- ladder counters ignored by the climb split;
+- the person-present check passing on any overlap;
+- a declared tier with no reads failing gate 10 (0 ≤ 0);
+- the "NOTHING is gated on money" lint not saying it is only a warning.
+
+H9 and I9 both tighten a `--ship` BLOCK row, so they are the first rules under LO B (§0.9), and this item
+builds that mechanism.
+
+**What changed.** `scripts/gates.py`:
+- **I9:** `_week_income` skips `substitution_only` canvases. They render only in place of another visit, so
+  their pay replaces that visit's.
+- **I14 (LO chose option 3 after the first run):** `_school_split` counts a `<npc>_stage` ladder counter
+  (`_engine_read_stage_traits`) on NEITHER side, even when `ascent_tiers` names it. A ladder counter is progress,
+  not his score (review J6, LO D5).
+  - The first build put it on the cast side. That flipped probation (declared `player`) to FAIL, because every
+    game with ladders drifted to "cast".
+  - A new `_ladder_counter_sites` counts what was left out. When *the climb is where you said it is* FAILS, a
+    detail line says "N gate(s) read a ladder counter and are not counted: a ladder counter is not his score;
+    give him a meter of his own (D5)".
+- **H9:** the ladder's person-present check needs FULL cover through `_window_uncovered` (CK5's helper). The
+  wording is now "does not fully cover {where} {from}-{to} on {days}". The old any-overlap test is kept only
+  as the legacy branch.
+- **H10:** gate 10 leaves a declared tier with zero reads out of the failures and gives it a note: "declared,
+  no gate reads it this release — n/a for this tier". With only unread tiers and no descents, the gate is n/a.
+- **H14:** the lint reads "NOTHING is gated on money (warning only — a lint, never a gate)".
+- **LO B:**
+  - `SHIP_GRANDFATHERED` (the five games) and `SHIP_SINCE` sit beside `SHIP_BLOCK_GATES`. `SHIP_SINCE` holds
+    `full_cover` for the ladder row and `sub_income` for "the pressure can be paid or is signposted" (gate
+    24), both since 2026-09-30.
+  - The rules check `_legacy(rule)`. `_grandfathered(slug, state, since)` holds until a release is `shipped`
+    on or after `since`.
+  - `ship_rows` re-runs a red since-dated row on a grandfathered game with the rule in its old form. If it
+    was green then, the row becomes `warn`: "… — new since 2026-09-30 (rule); blocks from your next
+    release".
+  - `ship_mode` prints `[WARN]` and does not count it red.
+  - The block-gate verdict is factored into `_block_gate_verdict` (same logic) so the re-run can use it.
+- `references/the-release.md` § The check: a "New BLOCK rules warn first (LO B)" paragraph with the rule and
+  the list.
+- `tests/test_gates_ws4.py` `test_person_must_be_there`: the expected wording is now "does not fully cover".
+- No gate or lint added or renamed; no scoreboard edit.
+- `cite_check --fix` moved `engine.md:2381` (gates.py 5043 → 5080 over the item). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8b.py`: 17 passed.
+  - I9: 350 vs 1400, and legacy counts it.
+  - I14: `jo_stage` counts on neither side, even named as a tier; the climb FAIL carries the D5 line.
+  - H9: partial overlap fails with the new wording; full cover and back-to-back rows pass; legacy passes the
+    overlap.
+  - H10: an unread tier is n/a with the note; only unread is n/a.
+  - H14: warning only.
+  - LO B: grandfathered warns and `ship_mode` exits 0 with `[WARN]`; a release shipped after `since` blocks;
+    an older release still warns; a new slug blocks; red under the old rule too stays a FAIL; the income rule
+    warns for vesper_two and blocks for a new game; the legacy set is empty afterwards.
+- Skill tests 283 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five games, gates and `--ship` before → after. No BLOCK verdict changed and no WARN
+  appeared.
+  - members_only: week income 1950 → 900 (declared 600, still PASS). *the climb is where you said it is*
+    stays FAIL (declared `both`, 0% on the cast), and now adds "28 gate(s) read a ladder counter and are not
+    counted: a ladder counter is not his score; give him a meter of his own (D5)".
+  - vesper_two: week income 2335 → 2230, still PASS.
+  - orientation, probation, the_balance: unchanged. Under option 3, probation's *climb* stays PASS
+    (`player`, 7 tier sites, 0 cast).
+
+words: 137,419 → 137,504 (+85) · running total 137,504 / 149,283
+
+---
+
+## 2026-09-30 — CK8a: a quoted "no" counts; "ass" alone is not anal, a mouth fuck is oral (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8a (I3 · I10). A no written as her spoken line (`"No."`, `“Not tonight.”`)
+counted zero in *she can say no*, and a game with four refusals failed. `RUNGS` read body parts as acts: "your
+ass" was anal, and "he fucks your mouth" was vaginal.
+
+**What changed.** `scripts/gates.py`:
+- `_REFUSAL` skips leading `"`, `“`, `'` and `‘`, and `no` may be followed by a closing quote (`"No"`).
+  Nothing else in the pattern moved; `Leave …` is still not a refusal.
+- `RUNGS`:
+  - `oral` adds `fuck… (your|her|my|his) (mouth|face|throat)` and `face-?fuck…`;
+  - `vaginal`'s `fuck…` no longer matches when a mouth, face, throat or ass follows, or when `face-` sits right
+    before it ("face-fucking her"; LO, before commit: vaginal outranks oral, so the screen read vaginal);
+  - `anal` drops the bare `her ass` / `your ass` and needs an act: `in the ass`, `(in|up) (your|her|my) ass`,
+    `fuck… (your|her|my) ass`, `anal`, `butthole`.
+- The comment under `RUNGS` says the field distribution was measured with the list as it was before this
+  change, re-measure pending. The `lint_ladder` summary's "field screens open at vaginal-or-above 46%" now
+  reads "(old rung list — re-measure pending)".
+- No gate or lint added or renamed; neither is a `--ship` row. No doc edits.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 5034 → 5043). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8a.py`: 8 passed. Five quoted refusals each count once; `"Leave the shop"` does not. "grabs
+  your ass" and "her ass is red" are not anal; mouth and face fucks are oral only; "fucks your ass" is anal only;
+  "in the ass" / "up your ass" are anal; "fucks you hard" is still vaginal; "face-fucking her" / "face-fucks you" are oral only; the lint says
+  re-measure pending.
+- Skill tests 266 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five v2 games:
+  - *she can say no* changed only on probation, 5 → 6 refusals. The new one is `hub_delgado` `"No." (30m)`, a
+    real refusal the leading quote had hidden.
+  - `lint_ladder` moved where "ass" had been read as anal:
+    - members_only: 11% → 0% open at vaginal-or-above, 33% → 55% never reach oral;
+    - probation: never reach oral 33% → 77%;
+    - vesper_two: 41 → 38 explicit canvases with a rung, 73% → 60% open at vaginal-or-above, 14% → 23% never
+      reach oral;
+    - orientation and the_balance unchanged.
+
+words: 137,419 → 137,419 (0)
+
+---
+
+## 2026-09-30 — CK6: --beat shows the joints (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK6 (H8). The build judges `but` and `and` per 1,000 words (*prose has room*),
+but `--beat` never printed them. A writer measuring a beat before it is in a game could not see the joints the
+build will judge.
+
+**What changed.**
+- `scripts/gates.py`: a new `_print_beat_joints(text)` prints `but` and `and` per 1,000 words against `FIELD_BUT_P10`
+  (2.88) and `FIELD_AND_MAX` (41.11), with "too short to judge (under 500 words; printed, not judged)" under
+  `JOINTS_MIN_WORDS`. `beat_mode` calls it for each beat and for ALL BEATS. Nothing is judged; the mode still exits 0.
+- `SKILL.md` `--beat` mode row names the joints line. No gate added or renamed; not a `--ship` row.
+
+**Verified.**
+- `tests/test_gates_ck6.py`: 3 passed. A 100-word beat (1 `but`, 3 `and`) prints 10.00/1k and 30.0/1k with the note;
+  a 600-word beat prints no note; two beats give three joints lines, the last over the whole text.
+- Skill tests 258 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- A scratch two-beat file prints a joints line under BEAT 1, BEAT 2 and ALL BEATS, each marked too short to judge.
+
+words: 137,394 → 137,419 (+25) · running total 137,419 / 149,283
+
+---
+
+## 2026-09-30 — CK4 follow-up: a marker cut off by a comma is judged with its neighbour (checker)
+
+**Why.** LO, 2026-09-30, after CK5 and before CK6. CK4's clause split left a comma hole. "Last night, you came to
+his room.", "This week, you worked six shifts." and "You were tired, again." did not fire, because the marker sat
+alone in its clause, apart from the pronoun and the verb.
+
+**What changed.** `scripts/gates.py` `_past_claim_clause`: a clause that holds only the marker (nothing else but
+punctuation) is judged joined to its neighbour clause on each side, and fires if either join holds her pronoun and
+a past-tense verb. A marker joined to a clause about somebody else still has no pronoun of hers.
+
+**Verified.**
+- `tests/test_gates_ck4.py`: 3 new tests, 13 passed. The three lines above fire; "Last night, Delgado read the
+  log." still does not. On the CK4 commit all four read False.
+- Skill tests 255 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong, after
+  `--fix` moved `engine.md:2381` (gates.py 5016 → 5034; same line, checked by hand).
+- Five-game scratch table (bare marker → CK4 → now): members_only 0 → 0 → 0, orientation 5 → 0 → 0, probation
+  0 → 0 → 0, the_balance 16 → 1 → 1, vesper_two 28 → 1 → 1. No new hits.
+
+words: 137,394 → 137,394 (0)
+
+---
+
+## 2026-09-30 — CK5: shape.py — no day-after rule, this release's places, a rising bill, the person's hours (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK5 (H7 · G1/D13 · H15 · H11 · I12 · I13). `shape.py` said PASS "0/7 READY"
+with nothing signed. It refused LO's same-day approval of all seven spine pages. It accepted steps at places cut
+from the release. It priced a rising bill at its starting amount. And it never checked that the person is at the
+step's place at the step's hour.
+
+**What changed.**
+- `scripts/shape.py` row 10 *every spine page is signed*:
+  - **D13 (LO decided):** the `signed_at` vs `drafted_at` compare is gone, and so is the strict "no drafted_at"
+    line. A READY page must still be signed. H15 (a waiver key) is no longer needed.
+  - **H7:** lenient mode with no READY page is n/a.
+- Row 1 *a step's place is declared* (**H11**): reads `release_page.places` when it lists any (ids or `{id}`),
+  else `board.locations`, and the headline names the source. It also exempts `fires_from = "opening"` steps, which
+  `state.md` (CK1) already says need no `where`. That exemption goes beyond the PRD's CK1 list; it keeps row 1 from
+  contradicting the doc.
+- Row 5 *the pressure can be met* (**I12**): when `board.pressure.stages = [{amount, after_total_paid}]` is present
+  (the EN2a mirror; DC3 documents the key), the bill is walked week by week. Each due week pays the highest stage
+  whose `after_total_paid` has been reached. Without stages it stays the starting amount × due weeks. The headline
+  says "(flat)" or "(rising in N stage(s))". `obligation_moves` is appended as "moves: …" and never judged.
+- New row 11 *the person is there at the step's hour* (**I13**): optional
+  `board.characters[].schedule = [{where, weekdays, from, to}]`. Each step's window, on each of its days, must be
+  fully covered by the union of that person's rows at the step's place, past midnight included.
+  `fires_from = "opening"` steps are exempt. n/a with no schedule.
+- `scripts/gates.py`: a new shared helper, `_window_uncovered(days, frm, to, rows)`. Full cover, not overlap; spans
+  split at midnight with `_ladder_spans`; an end of "23:59" reads as midnight. Nothing else in gates.py uses it
+  yet; CK8b-H9 points the ladder's person-present check at it.
+- Docs (D13, in this item as the PRD says):
+  - `SKILL.md:171` (phase table) drops "no earlier than the day after drafting".
+  - `SKILL.md:453` (`shape.py` mode row) now lists this release's places, the rising bill, "every READY SP page
+    signed" and the new row.
+  - `references/state.md`: the spine comment reads "a READY page is signed", and a new `board.characters[].schedule`
+    row says the per-room count stays `occupancy_rows`.
+  - `references/the-spine.md` page rules: "LO signs each page when LO has read it (LO decided, D13)".
+  - Line 3 of all seven `templates/spine/SP1–SP7`: `signed by LO: <name, date>`.
+- `tests/test_shape.py`:
+  - The "same day fails" mutation becomes "`signed_at` removed" (D13).
+  - `full()` gains schedules, so the new row passes, plus a failing case for it.
+  - The place case adds a matching roof row, so it breaks only row 1.
+- Not a `--ship` BLOCK row (shape.py is the REPORT row "the spine holds together"), and no gates.py gate was added
+  or renamed. No scoreboard edit, no `since` date.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4982 → 5016). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_shape_ck5.py`: 19 passed. The cases:
+  - H7: n/a lenient, FAIL strict.
+  - D13: same-day PASS, unsigned FAIL.
+  - H11: a cut place FAILS naming `release_page.places`; board fallback.
+  - I12: stages 100 → 150 after 200 paid, 120/week × 4 = 480 against 500, FAIL; flat 400 PASS; moves printed.
+  - I13: covered, a missing day named, back-to-back rows, a gap, past midnight with two rows and with one, the
+    wrong place, an opening step exempt, no schedule n/a.
+  - Row 1: an opening step with no `where` passes.
+  - The helper directly.
+- Skill tests 252 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation, before → after:
+  - *every spine page is signed*: FAIL on 7 same-day pages → PASS.
+  - Row 1 now reads from `release_page.places`, 12/12.
+  - The new row is n/a (no `schedule` in its ledger).
+  - `shape.py`: 8 pass · 1 fail → 9 pass · 0 fail. `--ship` REPORT *the spine holds together*: red 8/9 → ok 9/9.
+
+words: 137,332 → 137,394 (+62) · running total 137,394 / 149,283
+
+---
+
+## 2026-09-30 — CK4: the past-claim BLOCK judges claims, not markers (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK4 (H6 · I15 · I26), with LO Q1: "again" alone never fires. The bare
+marker fired on "Delgado reads this week's log aloud", on "the last night in May" (about her sister), and on
+"he wants you again". None of those claims anything about her.
+
+**What changed.**
+- `scripts/gates.py` `lint_past_claim` (the `--ship` BLOCK row *no past claim on a repeatable*, and the
+  ordinary lint): a `PAST_CLAIM_RE` hit counts only when the same clause also holds the player's pronoun and a
+  past-tense verb.
+  - Clauses split on `, ; : — – ( )` and " and " / " but ".
+  - The pronoun comes from `[settings] narration_person`: second (the default, as `readable.py` reads it) is
+    you/your; first is I/me/my (capital "I" only); third is the words of `player.name` plus she/her.
+  - Past tense is `-ed` or the named irregulars (was, were, had, did, went, came, saw, said, told, took, gave,
+    made, got, left, ate, slept).
+  - `re` only; no new import.
+  - New helpers `_PAST_VERB_RE`, `_CLAUSE_SPLIT_RE`, `_player_pronoun_re`, `_past_claim_clause`.
+  - The printed sentence runs to 160 characters (was 100). The gated-group skip is unchanged.
+- `references/register.md` line 92 (the PRD's :91), the truth-rule table: "claims about her past that no flag
+  tracks — a past-tense clause about her … *Again* alone on a repeatable is fine (*he wants you again*)".
+- `references/register.md` ~line 986 carried the same bare *last night / this week / again / every time*
+  ban. It is rewritten to the same rule, beyond the PRD's named line, because ground rule 1 leaves no old text
+  beside the new rule.
+- `tests/test_gates_ws6.py` `test_past_claim_blocks`: its line "She is at the table again, like last time." has
+  no past-tense verb and no longer fires. It is now "You came to the table last night.", and the row still
+  blocks.
+- BLOCK row: *no past claim on a repeatable* is redefined, and it only narrows: every new fire was an old
+  fire. So no `since` date, the same as CK1/CK2.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4940 → 4982). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck4.py`: 10 passed. The four PRD lines (Delgado's log, her sister's night, "you did this
+  last night" fires, "he wants you again" doesn't), "again" inside a past clause about her fires, first person,
+  third person by name and by "she" (another man's name doesn't fire), a pronoun in another clause doesn't
+  fire, a gated line doesn't fire, and the 160-character cut.
+- Skill tests 233 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five v2 games, hits before → after: members_only 0 → 0, orientation 5 → 0,
+  probation 0 → 0, the_balance 16 → 1, vesper_two 28 → 1. No new hits. Every dropped hit was read. Each is
+  another person's past, a present-tense "again" or an NPC speaking of himself. The two left are real claims
+  about her: the_balance `sam_sits_down` "You were on the bus at half past seven again." and vesper_two
+  `act_feed_line` "You came in under thirty again."
+
+words: 137,293 → 137,332 (+39) · running total 137,332 / 149,283
+
+---
+
+## 2026-09-30 — CK3: meter ceiling skips the band a meter starts in, and falling meters (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK3 (H5). A meter that starts full and drains failed "bands promise
+something at 90": probation's `clean` starts at 100, inside its own 90+ band, so no gate has to buy it.
+
+**What changed.**
+- `scripts/gates.py` G8 *meter ceiling*: the band holding the meter's starting value is dropped before the
+  highest promised `min` is taken. The start is `player.core_traits`, or the NPC's `core_traits` when the
+  sidebar item has `npc_id`.
+  - A meter declared `falling = true` in `[[traits.labels]]` is not judged. `falling` is a checker-only key;
+    the importer keeps only its own label keys (template_import.py:3324-3335).
+  - Rising meters are unchanged: one starting at 0 drops only its bottom band.
+  - The comments above the gate are rewritten to say this.
+- `references/the-board.md` "The ceiling must be bought": the bullet is rewritten, not appended to. It used
+  to say the top band's `max` is the promise and an unbounded top band promises nothing. The code has judged
+  the highest band `min` ("every band boundary is a promise") since before this change. It now says that,
+  plus the two exceptions.
+- Gate name unchanged and not a `--ship` row, so there is no scoreboard edit and no `since` date.
+
+**Verified.**
+- `tests/test_gates_ck3.py`: 5 passed. The cases are start-band skipped (`clean` 100 with a 90+ band, gate
+  at 60: PASS), a falling meter still judged below its start (gate at 40: "at 60" only), rising 15/35/55/75+
+  still judged at 75, `falling = true` not judged (undeclared: judged), and an NPC item reading the NPC's
+  start. Against the pre-change gates.py, 4 of 5 fail; the rising case passes on both, as it should.
+- Skill tests 223 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation: *meter ceiling* went from 2 lines to 1. The `clean` line is gone. `battery` narrows from
+  "at 50/90" to "at 50": its 90+ band holds the start, and the highest gate is 30. Clearing it needs
+  `falling = true` on battery in the game's `[[traits.labels]]` (a game edit, not made).
+
+words: 137,267 → 137,293 (+26) · running total 137,293 / 149,283
+
+---
+
+## 2026-09-30 — CK2: "ends on an opening" reads the door from the release page (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK2 (H4). G9 read only `board.door`, so a game that declared its door
+only on `release_page.door` failed "board.door is not declared".
+
+**What changed.**
+- `scripts/gates.py` G9: the door comes from `_declared_door(state)` (`release_page.door`, else `board.door`;
+  added in CK1). The choice is found with `_door_choice`, which replaces the inline copy of that loop.
+  - The no-door FAIL now reads "no door declared — name the door this release ends on in
+    release_page.door (or board.door before the release page exists)".
+  - The headline and the missing-canvas line name the source: "declared door (release_page.door): …".
+  - The comment above the gate states the rule.
+  - The `--ship` equality row is unchanged, per the PRD.
+- `SKILL.md` scoreboard row *ends on an opening*: "the door declared in `release_page.door` (else
+  `board.door`)". The gate name is unchanged.
+- `references/state.md` `board.door` row: a ledger FAILS without it **or** `release_page.door`, and the release
+  page's copy is read first.
+- `tests/test_gates_ws6.py` `test_undeclared_door_blocks` now deletes both copies. It used to delete only
+  `board.door` while its green state kept `release_page.door`, which counts as declared since this change.
+- BLOCK row: *ends on an opening* is in `SHIP_BLOCK_GATES`, and it is looser, not stricter. A door on the
+  release page now passes where it used to fail. The verdict can change otherwise only when the two copies
+  disagree, and `--ship` already goes red on that. No `since` date, as with CK1.
+
+**Verified.**
+- `tests/test_gates_ck2.py`: 6 passed. Release page only (PASS, source named); board only (PASS); neither
+  (FAIL, new text); both differ (the release page is judged); a broken release-page door (FAIL, source named);
+  no ledger (n/a).
+- Skill tests 218 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation: G9 still PASS, now "declared door (release_page.door): tobin_04_home"; `--ship` "the
+  declared door works" and "the build matches the release page" both PASS.
+
+words: 137,262 → 137,267 (+5) · running total 137,267 / 149,283
+
+---
+
+## 2026-09-30 — CK1: the ladder check reads the night, the door and the opening (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK1 (H1 · H2 · H3 · I24). The skill test's probation run had four false
+reds on meters the day roll raises, a door step called unearnable although it opens next release by design,
+no way to declare a step the opening plays, and no check that a door can be seen twice.
+
+**What changed.**
+- `scripts/gates.py` `_player_trait_raises`: `[engine.daily_tick].traitEffects` counts as a writer. The engine
+  applies it on every day roll (v2.py:6276-6293; imported at template_import.py:3146). The camelCase key never
+  matched the old `effects|[]` suffix.
+- `_ladder_earnable`: the day roll is a farmable source. Each tick effect counts only while its own
+  `conditions` can hold: a counter item must be true below step N, nothing else on it may be "never", and a
+  `cap` must reach the gate.
+- New helpers `_declared_door` (`release_page.door`, else `board.door`), `_door_choice` and
+  `_opening_canvas_ids` (the starting canvas plus the capstones `_funnel_walk` enters).
+- `ladder_problems(game, state, notes=None)`:
+  - the door step (its canvas holds the declared door) skips the earnable check and is noted "the door —
+    opens next release" in the *ladders move forward* headline;
+  - a `fires_from = "opening"` step skips the place, hours, person-present and counter-read checks. It must be
+    step 1 and name a canvas the opening plays. Any other `fires_from` value fails.
+  - `_ladder_reachable` counts an opening canvas as a setter although it has no place.
+- `_ship_ladders` keeps the declared door in the sub-ledger it checks, so `--ship` reads the door step the
+  same way. The played half stops just before the door's step, since this release's build can't climb it
+  or any step after it (LO, 2026-09-30). The green headline names it: "not played, the door — opens next
+  release: <who> step N (<canvas>)".
+- New ordinary gate **the door can be seen again** (G9b, not a `--ship` BLOCK row). The door's canvas must be
+  repeatable, or `consume_on = "exit"` (EN1) with the door choice neither `consumes` nor `final`. Otherwise
+  it FAILS "the door is seen once".
+- `scripts/shape.py` row 2 skips `fires_from = "opening"` steps.
+- `scripts/playtest.py` `reach_step`: an opening step sets no clock or place and asks no `offered`. If the new
+  game already shows the counter at N (the opening's exit effects run as it renders), it is reached.
+  Otherwise it is searched like any step.
+- `SKILL.md` scoreboard: the *ladders move forward* row names the tick, the door step and opening steps; a
+  new row for *the door can be seen again*. `references/state.md` ladder row documents `fires_from`.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4829 → 4940). Same line, checked by hand.
+- LO's calls (2026-09-30): keep the counter-read skip and the step-1 rule for opening steps; the loosened
+  `--ship` ladder row takes no `since` date.
+- Not done here, on purpose: CK5's cover check (CK5 adds it, with the opening exemption); G9 still reads
+  `board.door` (CK2 switches it to `_declared_door`).
+
+**Verified.**
+- `tests/test_gates_ck1.py`: 30 tests, own fixture, one build. They cover the tick (present, absent,
+  never-true condition, counter above/below the step, cap), the door step (skip, note, release page, other
+  checks still run, headline, `--ship` sub-ledger, the played half skips it and plays every step when there is
+  no door), opening steps (skips, step-1 rule, not-an-opening canvas,
+  bad value, person check, placeless setter, `shape.py` row 2), the door row (one-time, repeatable, EN1
+  non-consuming, EN1 consuming, n/a, not a BLOCK row), and `reach_step` played (reached; not credited when
+  the opening never moves the counter).
+- Skill tests 212 passed (was 182). `--selfcheck`: the index is current. cite_check: SKILL.md + references/
+  0 wrong.
+- Scratch probation (whole tree copied; run from scratch root). *ladders move forward* went from 7 problems
+  to 2: the four `review_days` reds and the `vouch gte 45` door red are gone, and the headline notes
+  tobin_04_home as the door. *the door can be seen again* FAILS, because tobin_04_home is one-time (expected).
+  `--ship` ladder row went from 7 to 2 static problems. The 2 left are delgado step 1: `delgado_01_intake`
+  is probation's starting canvas, so the fix is `fires_from = "opening"` in its ledger (a game edit, not
+  made).
+
+words: 137,172 → 137,262 (+90) · running total 137,262 / 149,283
+
+---
+
+## 2026-09-30 — EN11: an area can charge a toll on the way in (engine; checked, then built)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN11 (D10a). "Charge travel only when crossing between areas" had
+no primitive.
+
+**The check (PRD: check first).** A parent container's `costs` alone can't do it.
+- The only charge is the travel intercept. On any move to a place other than her `current_location`,
+  it charges the destination's own `entry_costs` (`deductLocationCosts`). Areas are never looked at.
+- A link from outside straight to an inner room never charges the container.
+- A container page reached back from its own room charges it again.
+
+LO chose the PRD's fallback (2026-09-30).
+
+**What changed (engine).**
+- `[[locations]] crossing_costs = {time, <trait>…}` on an area (a container, which the validator
+  requires). It is charged once when she moves to any place inside the area from a place outside
+  it: the container page, or a direct link to any inner room, however deep. Nested areas crossed
+  together are each charged.
+- Moves inside the area pay only each room's own `costs`, and leaving is free.
+- A container with a `default_entry` only redirects, so the toll is charged on the room it lands on,
+  once.
+- No previous place (game start) means no toll.
+- The room's cost and the tolls are one bill: summed per trait, checked together, and charged
+  together. If she can't afford it she goes to `TravelBlock`, and nothing is charged.
+- Runtime: `setup.loc_parent`, `setup.loc_redirect`, `setup.crossingCostsFor` and friends, plus the
+  extended intercept. All are emitted only when some area declares `crossing_costs`.
+  - A game with room costs only keeps its intercept byte-identical: members_only and the_balance both
+    have one, and both build a byte-identical index.html. So does vesper.
+- Both writers (T and G) carry the field. `validate()` errors on a non-container, a non-table, a
+  non-number or a negative value (the same rules as `costs`).
+- **Old saves:** no new state; the toll reads `current_location`. A save the pre-change build wrote
+  pays the toll crossing into the mall.
+
+**What changed (skill).**
+- `references/engine.md` travel friction: "A bridge between zones is `crossing_costs` on the area",
+  with why a container's `costs` can't do it.
+- Words +140 (137,172). `cite_check.py --fix` moved 57 citations. Each was compared with the
+  pre-change code: 49 in v2.py and 8 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_crossing_costs.py`: 12 passed. The trips:
+
+  | trip | minutes |
+  |---|---|
+  | bar → mall | 20 |
+  | mall → food | 0 |
+  | food → shop | 0 |
+  | shop → mall | 0 |
+  | mall → bar | 0 |
+  | bar → food, direct | 20 |
+
+  It also covers no previous place (0), a `default_entry` area (20 once, landing on the food court),
+  an unaffordable toll (TravelBlock, nothing charged), the old save, and the validator.
+- The fixture gained the `loc_mall` area (off `loc_shop`, so no earlier golden moves) with two rooms.
+  All EN1–EN10 tests still pass.
+- Engine suite 608 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN10: a place says whether it is a thoroughfare or a destination (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN10 (D9a · H20 · CK7). A location couldn't say whether she passes
+through it or goes there to do something, and DC7 and CK7 need that word. It is "thoroughfare", never
+"hub", because "hub" already means a character's hub canvas.
+
+**What changed (engine).**
+- `[[locations]] kind = "thoroughfare" | "destination"`; absent means a destination.
+  - It is parsed, and written to the location's properties by both writers (T and G) only when the
+    TOML sets it.
+  - `validate()` errors on anything but the two exact words, and says what "hub" means when that is
+    the word used.
+- The generator doesn't read it, so every build is byte-identical: members_only, the_balance and
+  vesper, and the fixture with and without the key.
+- **Old saves:** no runtime state and no runtime reader, so nothing changes.
+
+**What changed (skill).**
+- `references/engine.md` §22: a "`kind`" line beside `offscreen`.
+- Words +67 (137,032). `cite_check.py --fix` moved 9 citations in template_import.py, each compared
+  with the pre-change code, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_location_kind.py`: 8 passed. It covers:
+  - the fixture being clean, and the property written only when set;
+  - "hub", 3, "Thoroughfare" and "" rejected, with the hub message;
+  - byte-identical twee with and without the key.
+- The fixture's `loc_bar` is `kind = "thoroughfare"`.
+- Engine suite 596 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN9: a sidebar line can read "Corruption: 12 · Curious" (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN9 (D4). No sidebar type printed a trait's name, number and word on
+one line: `trait_bar` always draws the bar, and `trait_words` prints the band word only.
+
+**What changed (engine).**
+- `[[sidebar_items]] type = "trait_words"` gains `show_value = true`. The item then always renders
+  one line:
+  - "Label: N · <band word>" when a band matches;
+  - "Label: N" when none does.
+- The label is the item's `label`, else the trait's one name (EN5 `setup.traitLabel`).
+- `validate()` errors when `show_value` isn't a real bool.
+- Spliced into the `sidebarItems` widget only when some item sets it. members_only, the_balance and
+  vesper build a byte-identical index.html, and the fixture's widget without it matches a golden
+  from the pre-change engine.
+- **Old saves:** no new state. A save the pre-change build wrote shows the line.
+
+**What changed (skill).**
+- `references/engine.md` §30: "A number beside the word", with the reminder to keep
+  `in_dump = false`, or the dump prints the number a second time.
+- Words +57 (136,965). `cite_check.py --fix` moved 3 citations in template_import.py, each compared
+  with the pre-change code, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_sidebar_value.py`: 7 passed. It covers:
+  - "Corruption: 5 · Clean", "Corruption: 12 · Curious" (the PRD's case), and "Corruption: 50"
+    with no band;
+  - an authored label ("Heat: 12 · Curious") and an NPC-owned item ("Trust: 70");
+  - the golden, the bool check, and the old save.
+- The fixture gained the `trait_words` item on `corr`. All EN1–EN8 tests still pass.
+- Engine suite 588 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN8: decay settles at a rest point; a man can wait before he cools (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN8 (D5 · Power). Nightly decay was one rule, `Math.max(0, v − d)`,
+for NPCs and the player alike. A trait couldn't settle anywhere but 0, a value below 0 snapped straight
+to 0, and a man cooled from the first night apart.
+
+**What changed (engine).**
+- `setup.decayToward(v, rest, d)` moves a trait toward its rest point from either side and never crosses
+  it. Both nightly loops use it.
+  - **Deliberate global change (LO A):** a value below 0 now climbs by its amount toward 0 instead of
+    snapping. Positive values behave as before.
+  - The player's rest point is always 0.
+- `[[npcs]] trait_rest = {trait: value}` sets his rest point (default 0).
+- `[[npcs]] decay_after_days = N` makes him decay only after N days without contact.
+  - Contact (a canvas of his firing) records `$npcs[id].last_contact_day`.
+  - An old save lacks it (rule 8). Undefined means contact today: the first night records it and
+    does not decay him.
+  - `N = 0` is today's rule, and a man she saw that day still never decays that night.
+  - The contact write and the wait are emitted only when some NPC sets `decay_after_days`. The rest
+    and wait maps (`setup.npc_trait_rest`, `setup.npc_decay_after_days`) are emitted only when used
+    and never ship in `$npcs`.
+- **E20 is two-sided.**
+  - The auto warning item also collects `lt`/`lte` gates, with `op` on those entries only, so
+    existing entries are unchanged.
+  - `getDecayWarnings` warns "rising" when a value climbs toward an `lt`/`lte` gate it still meets.
+  - Both warnings name the trait with `setup.traitLabel` (EN5).
+- Both writers (T and G) carry the fields.
+- `validate()` errors on:
+  - a `trait_rest` that isn't a table of numbers, or names a trait he doesn't have;
+  - a `decay_after_days` that isn't a whole number ≥ 0.
+
+  It warns on a rest point or a wait with no `trait_decay` to act on.
+- **Passage diff** against the pre-change engine: 0 changed passages in members_only, the_balance and
+  vesper. The decay code is engine script; their auto-warning thresholds are empty and unchanged.
+
+**What changed (skill).**
+- `references/the-meters.md` after M10: "Decay stops at a rest point and never crosses it", with
+  `trait_rest` and `decay_after_days`.
+- Words +109 (136,908). `cite_check.py --fix` moved 62 citations. Each was compared with the pre-change
+  code: 49 in v2.py and 13 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_decay_rest.py`: 16 passed. It covers:
+  - `decayToward` from +30 and −30, and at rest points from above and below;
+  - Vic's trust 70 settling at 20, and his grudge −30 rising to 0;
+  - Sal's two-day wait after contact, and the reset on seeing him;
+  - "never met" starting the wait;
+  - the player rising from −12;
+  - the two-sided warnings, the old save, and the validator.
+- The fixture gained Vic's decay and a third man, Sal, with `sal_chat`. All EN1–EN7 tests still pass.
+- Engine suite 581 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN7: the men's numbers on the cast page (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN7 (D1 · D5 · J6). The cast page showed a man's name, relationship,
+tags, where he is and his next step, but never a number. D1 says numbers are shown.
+
+**What changed (engine).**
+- Opt-in `[ui.cast_page] show_traits = [...]` covers every card. `[[npcs]] show_traits = [...]` is
+  added for that man only, after the page's list.
+- Optional `[ui.cast_page] trait_bands = {trait = [{min, max, text}]}` puts a word beside the number,
+  through a new `setup.traitBand` (min and max may each be left off).
+- A row reads "Trust 40 · Warming": the trait's one name (EN5 `setup.traitLabel`), his value, and the
+  band word. A `hidden` trait never shows, and neither does one he doesn't have.
+- The Stats page already used labels and honoured `hidden` since EN5, so it needed nothing.
+- Shipped as `setup.cast_show_traits`, `setup.cast_trait_bands` and `setup.npc_show_traits` (the last
+  slug-keyed, like `npc_tags`), all only when used.
+- The per-NPC field is written by both writers (T and G).
+- `validate()` errors on:
+  - a key no character carries, or a man's own key he doesn't have;
+  - a malformed `show_traits` list;
+  - a malformed band table.
+
+  It warns on a band no list shows, a `hidden` trait in a list, and an NPC list with no cast page.
+- Emitted only when used. members_only's cast page, which has no `show_traits`, builds
+  byte-identical, as do the_balance and vesper. The fixture's CastPage without the keys matches a golden
+  from the pre-change engine.
+- **Old saves:** no new state. A save the pre-change build wrote shows both men's numbers.
+
+**What changed (skill).**
+- `references/engine.md` §34: a "his numbers" row and block.
+- `references/the-meters.md` (the "where a person stands" rule): the stale "the engine has no
+  per-person word band yet" now points at §34. The words-not-scores doctrine itself is left for D1's
+  doc item.
+- Words +142 (136,799). `cite_check.py --fix` moved 62 citations. Each was compared with the
+  pre-change code: 49 in v2.py and 13 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_cast_traits.py`: 23 passed. It covers:
+  - two men, one with an extra Power: Tobin "Trust 10 · Wary"; Vic "Trust 70 · Yours" and "Power 30";
+  - the band moving with the number, a hidden trait (cast page and Stats page), and a label;
+  - `traitBand` edges, the golden, the old save, and every validator error and warning.
+- The fixture gained `quests_engine = "v2"`, a `[ui.cast_page]`, a second man `vic`, and two quest
+  cards. All EN1–EN6 tests still pass on it.
+- Engine suite 565 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN5+EN6: one name per trait; a locked button names his feeling (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN5 + EN6 (D3a · D5).
+- A trait's name came from a dozen places that disagreed:
+  - the lock suffix printed `cap(key)`, and so did the toast;
+  - the Stats page and the sidebar dump printed the raw key;
+  - guidance printed "" for a hide-only label.
+- `hidden = true` did two jobs, and because it is keyed by name, hiding the player's banded
+  `corruption` hid every man's.
+- Locked buttons dropped every NPC gate, so a tile locked on his feeling showed no reason.
+
+**What changed (engine).** This is a deliberate global change (PRD §0 rule 7).
+- `setup.traitLabel(key)` is every screen's name for a trait: the `[[traits.labels]]` label, else the
+  tidied key ("crowd_standing" becomes "Crowd standing", LO 2026-09-30). It is used by:
+  - the lock suffix and shop, `formatCanvasConditions`, the "+N" toast (still never filtered, D1b);
+  - the Stats page, the sidebar dump, `_labelForTrait` (the empty-label bug);
+  - the `npc_panel` rows, and `trait_bar` with no `label` (LO: only where a name already shows);
+  - the auto counter bars, the cost message, the location and solo cost tags,
+    `formatTraitRequirements`, and the trait modal.
+- A new `[[traits.labels]] in_dump = false` keeps a trait out of the sidebar's auto Traits dump only
+  (`setup.dumpSkipTraits`). The Stats page and `npc_panel` keep `hidden`, which still means a secret.
+  - An `in_dump = false` entry may leave out `label`.
+  - It is written to the metadata only when false.
+  - `validate()` errors on a non-bool.
+- **EN6:**
+  - `describeUnmetTraits` and the Python `_wants_number` no longer drop NPC subjects.
+  - `describeUnmetConditions` resolves him (`resolveNpcId`) and reads his value. A met item is not
+    listed; an unmet one prints "Tobin's Trust 50+ (has 10)".
+  - `setup.traitSubjectLabel` phrases whose trait it is for both the suffix and
+    `formatCanvasConditions`.
+- **Passage diff** against the pre-change engine, engine script excluded. Only these texts:
+  - StatsPage and TimeWidgets (the dump, `npc_panel`, `trait_bar`) in all three games;
+  - vesper: 4 locked-choice passages gain the NPC suffix (Calloway, Renner, Grier).
+- **Old saves:** no new state. A save the pre-change build wrote loads, and the NPC suffix renders.
+
+**What changed (skill).**
+- `scripts/gates.py` G27 "a banded meter is not also a number" passes `in_dump = false` (and still
+  `hidden`), and its fix line says `in_dump = false`. Test: `scripts/tests/test_gates_en5_in_dump.py`.
+- `references/engine.md` §30 teaches `in_dump = false`, with a paragraph on "one name per trait" and
+  the NPC suffix; §41d is updated too.
+- `references/the-meters.md` M7: `in_dump = false`, and why not `hidden`.
+- Words +186 (136,657). `cite_check.py --fix` moved 56 citations; each was compared with the
+  pre-change code (49 in v2.py, 7 in template_import.py), all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_trait_names.py`: 15 passed. It covers:
+  - `traitLabel`;
+  - the three locked buttons, including the met half not listed;
+  - `formatCanvasConditions`, the toast, the dump and the Stats page;
+  - the guidance label, `trait_bar`, and the cost message;
+  - the metadata, the validator, the Python suffix, and the old save.
+- The fixture gained `corr` ("Corruption"), `stamina` (`in_dump = false`), and the `gate_board` canvas.
+- Engine suite 542 passed; skill tests 182 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  apps/projects has the same 6 failures; cite_check 0.
+
+## 2026-09-30 — EN4: a place can stay hidden until she finds it (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN4 (D10b). Every place was listed from the start. A locked one
+showed greyed with its reason, so the map gave away every room before she had heard of it.
+
+**What changed (engine).**
+- Opt-in `[[locations]] hidden_until = {flag = "<player flag>"}`. While that flag is false the place
+  is not listed: not on the travel card, not in the text link, not in a container's child list, and
+  not on the Navigation page.
+- A `door` place is hidden like any other; the wrap sits outside the door branch.
+- Its name is withheld as "somewhere you haven't found yet" on:
+  - the Schedules page;
+  - guidance 📍;
+  - the cast page 📍;
+  - the quests page 📍 (not in the PRD's list, but the same leak);
+  - `npc_panel`.
+
+  The runtime wraps `setup._locNameFromUuid` and `setup._findHelperTransitionLocation` once, emitted
+  right after their definitions, so the originals' text is unchanged.
+- **Empty list (LO, 2026-09-30):** when every place a room lists can be hidden, the header hides with
+  them. The room keeps whatever exits it already has; no "Leave" link is added.
+- There is no passage guard: a scene can still take her there, which is how she finds it.
+- `validate()` errors on:
+  - a non-table value, or an unknown key;
+  - a missing flag, or one that isn't a declared player flag;
+  - `hidden_until` on an offscreen place.
+
+  It warns when a room with no Leave exit lists only places that can be hidden.
+- Written by both writers (T and G). Emitted only when some place uses it: members_only, the_balance
+  and vesper build a byte-identical index.html.
+- **Old saves:** no new state; the flag is an ordinary player flag. A save the pre-change build wrote
+  shows the attic hidden, then listed once the flag is set.
+
+**What changed (skill).**
+- `references/engine.md` §22: a "Hidden until found" block. Words +179 (136,471).
+- `cite_check.py --fix` moved 56 citations. Each was compared with the pre-change code: 48 in v2.py
+  and 8 in template_import.py, all identical.
+
+**Verified.**
+- `apps/game_generation/tests/test_hidden_places.py`: 20 passed. It covers:
+  - before and after the flag: the link, the Schedules page, `_locNameFromUuid`, and where Tobin is;
+  - a door place; the header going when every place is hidden;
+  - the card wrap outside the door branch;
+  - the old save; every validator error; the no-way-out warning.
+- The fixture gained `loc_attic`, the flag `found_attic`, and a Sunday schedule row for Tobin. EN1–EN3
+  tests are unchanged and green.
+- Engine suite 527 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
+## 2026-09-30 — EN3: a place can have opening hours (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN3 (D9b · I2). A place was always open, or locked by
+`entry_conditions`. Nothing could say "the shop opens 09:00–17:00 on weekdays".
+
+**What changed (engine).**
+- Opt-in `[[locations]] hours = [{weekdays, open, close}]` and `closed_text`.
+  - `weekdays` counts from 0 = Monday; empty means every day.
+  - A `close` that is not after `open` runs past midnight into the next weekday, so a Friday
+    22:00–04:00 place is open at 02:00 on Saturday. `close = "24:00"` means midnight.
+- Runtime `setup.locOpenNow`, `navDestOpenNow`, `locNextOpen` and `locClosedReason` (in the game's clock
+  format: "Closed. Opens tomorrow at 9:00 AM."; it names the day when the next opening isn't today or
+  tomorrow).
+- The room's passage is guarded even with no `entry_conditions`. Closed, it shows `closed_text` and the
+  reason, with a way back, and she does not enter. The travel card and the text link grey out first.
+  The Schedules page keeps `navDestUnlocked`, so it is not muted. A door place keeps its clickable
+  card; the room inside is guarded.
+- **Not done, and documented:** she is not moved out when a place closes around her. The guard runs
+  when the room's passage is shown again.
+- Fields are parsed in T and written by both writers (T and G). `validate()` errors on:
+  - a malformed window, unknown keys, or a weekday outside 0–6;
+  - a time that isn't HH:MM, or `open == close`;
+  - `closed_text` without `hours`;
+  - `hours` on a container or offscreen place.
+- `validate()` warns when an NPC schedule row or a canvas schedule at the place never overlaps an open
+  minute. Each side is read over the week's 10,080 minutes the way its runtime reads it; an NPC row's
+  overnight tail stays on its own weekday.
+- Emitted only when some place has `hours`. members_only, the_balance and vesper build a
+  byte-identical index.html. The fixture's hour-less `loc_bar` room and link match a golden from the
+  pre-change engine.
+- **Old saves:** no new state. A save parked in a place that is now closed shows the closed screen on
+  load. Proven with a save the pre-change build wrote in the shop at 20:00.
+
+**What changed (skill).**
+- `references/engine.md` §22: an "Opening hours" block beside "Locked location", with the
+  not-moved-out note. Words +207 (136,292).
+- `cite_check.py --fix` moved 54 citations. Each was compared with the pre-change code: 47 in v2.py
+  and 7 in template_import.py, all identical.
+- `DOCTRINE_GAPS.md`: two citations that were already wrong before this item (`v2.py:13372`,
+  `:15495`/`:14065`) now point at the code they quote (`:14446`; `:16627`/`:16602`).
+
+**Verified.**
+- `apps/game_generation/tests/test_location_hours.py`: 30 passed. It covers:
+  - an open hour, a closed hour, a weekday and an overnight window;
+  - the text link and the card (rendered by SugarCube's wikifier);
+  - the closed-room guard, not being moved out, and the old save;
+  - every validator error and the warnings, including the club read across midnight.
+- Engine suite 507 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
+## 2026-09-30 — EN2c: the short-pay line prints the rent currency symbol (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2c (I5 follow-up). RentDay_Short's "You have: … You need: …"
+typed `$`. It was the one rent screen that ignored `[settings.rent] currency_symbol`, so a game in
+pounds showed dollars on the screen she sees when she cannot pay.
+
+**What changed (engine).**
+- `v2.py` RentDay_Short's grace branch sets `_cur` from `setup.rent_currency_symbol`, like the other
+  rent pages, and prints it on both amounts.
+- This is a global change to every rent game's passage text. With the default `$` the render is
+  unchanged: members_only's RentDay_Short renders the same text on the old and new builds, headless.
+  the_balance and vesper have 0 changed passages. No new state, so saves mean what they did.
+
+**What changed (skill).**
+- `references/engine.md` §33 was rewritten so it stays true:
+  - `currency_symbol` governs **five** money sites, every one on the rent pages;
+  - eight sites hardcode `$`;
+  - the RentDay_Short row moves to "honours";
+  - the ⚠️ paragraph now says the key covers every rent screen and nothing else;
+  - the `[settings.rent]` example comment says "eight other money prints".
+- `references/the-economy.md`: the same count, and the stale `RentDay_Short` example is gone.
+- Words: +5 (136,085). No citations moved.
+
+**Verified.**
+- `apps/game_generation/tests/test_rent_currency.py`: 4 passed. It covers no typed `$` on the
+  screen, "£20 / £100" in a pounds build, "$20 / $100" by default, and the pre-change save in a
+  pounds build.
+- The EN2a/EN2b golden tests apply exactly this one edit to their goldens (`after_en2c`).
+- Engine suite 477 passed; skill tests 179 passed; `--selfcheck` OK; `--saves vesper` all PASS;
+  cite_check 0.
+
+## 2026-09-30 — EN2b: a short rent week is carried, never the end of the game (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2b (D8d). A short week gave one grace warning, and the next ended
+the game (`eviction_mode = "game_end"`) or set the eviction flag. There was no way to build rent that
+piles up as debt instead.
+
+**What changed (engine).**
+- Opt-in `[settings.rent] on_short = "carry"`:
+  - RentDay asks for this week's rent plus `$game_state.rent_state.owed`, and says "Owed from last
+    week: N" when there is any.
+  - She can pay what she has ("Pay the $N you have"; override the label with `text.partial_pay`) or
+    nothing. `setup.carryRent` takes the money in the link, writes the rest to `owed`, and sets the
+    player flag `rent_carried`.
+  - RentDay_Short only reports it: no warning count, no eviction, no GAME OVER. A reload charges
+    nothing. `text.carry_scene`, `carry_response` and `carry_closing` override its words.
+  - A full payment clears `owed`. A partial one counts toward EN2a's `total_paid`.
+- `rent_carried` is registered on the player by both writers (T and G, through `rent_carries()`) and
+  in the flag-chain map, the way the eviction flag is. It is set on the first carried week and never
+  cleared: it records that she came up short.
+- **Precedence:** carry ignores `grace_periods` and `eviction_mode`. `validate()` warns when the TOML
+  sets either one, and errors on any `on_short` other than "carry".
+- **`amount` is relaxed when `stages` is given:** it may be absent. In that case `stages[0]` must start
+  at `after_total_paid = 0`, or the rent would be 0 until a stage no payment can reach. A negative
+  amount is still an error.
+- Emitted only when `on_short = "carry"`. members_only, the_balance and vesper build a byte-identical
+  index.html. The fixture without carry builds its RentDay passages identical to a golden from the
+  pre-change engine.
+- **Old saves start with `owed = 0`** (backfill), and an old warning count is ignored. Proven by loading
+  a save the pre-change build wrote right after a grace warning (`tests/data/en2b_pre_change_save.txt`).
+  Under the old rules its next short week was the eviction; under carry it is carried.
+
+**What changed (skill).**
+- `scripts/gates.py`, "the obligation is charged": a staged rent with no `amount` is read from its
+  first stage. Before, such a game was told its rent charges nothing. Test:
+  `scripts/tests/test_gates_en2b_rent.py`. It fails on the old gates.py and passes now.
+- 52 citations were re-anchored by `cite_check.py --fix` (engine.md, the-board.md, the-clock.md,
+  the-phone.md, the-release.md, the-returning-player.md). Each was compared with the pre-change code,
+  and all 52 point at the same line of code. Words are unchanged (136,080).
+
+**Verified.**
+- `apps/game_generation/tests/test_rent_carry.py`: 16 passed. It covers a short pay then a full pay,
+  three empty weeks piling up with no game over, the reload, the old save, and every validator rule.
+- EN2a's `test_rent_stages.py` is still green. Engine suite 473 passed; skill tests 179 passed.
+- `gates.py --selfcheck` OK; `--saves vesper` all PASS; cite_check 0.
+
+## 2026-09-30 — EN2a: the bill rises in stages, and the collector says so (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN2a (D8c · I5). Rent was one number for the whole game
+(`setup.rent_amount`), so a bill that climbs as she pays could not be built.
+
+**What changed (engine).**
+- Opt-in `[settings.rent] stages = [{amount, after_total_paid}]` and `stage_lines = ["…"]`. The rent is
+  the amount of the last stage whose `after_total_paid` has been reached, or `amount` before the first.
+  `stage_lines[i]` is what the collector says on the pay screen (RentDay_Paid) when `stages[i]` takes
+  over. A reload of that screen shows the same line; one payment that crosses two stages shows the
+  newer line.
+- Runtime `setup.currentRent()` replaces the constant at every read (RentDay's greeting, "Rent is", the
+  affordability check and the deduction; RentDay_Short's "You need"). `$game_state.rent_state` gains
+  `total_paid`, `stage` and `stage_changed`.
+- The keys are parsed in T and written by `_assemble_project_metadata`, which the no-DB path (G) calls
+  too. `validate()` errors on a malformed stage, stages out of order, lines without stages, more lines
+  than stages, and a non-string line. `amount` is still required (EN2b relaxes it).
+- Emitted only when `stages` is set. Without it, members_only, the_balance and vesper build a
+  byte-identical index.html; the three RentDay passages match a golden written by the pre-EN2a engine.
+- **Old saves restart at stage 1:** the backfill gives them `total_paid = 0`. Proven by loading a save
+  the pre-change build wrote (`tests/data/en2a_pre_change_save.txt`).
+- **Not done here:** the ledger mirror `board.pressure.stages`. DC3 adds that key and its doc; CK5's
+  `shape.py` reads it.
+
+**What changed (skill).** 52 citations re-anchored by `cite_check.py --fix` (engine.md, the-board.md,
+the-clock.md, the-phone.md, the-release.md, the-returning-player.md). Each was checked against the
+pre-change code: all 52 point at the same line of code. Words unchanged (136,080).
+
+**Verified.** `apps/game_generation/tests/test_rent_stages.py` 21 passed (100 → 150 → 200, the lines,
+the reload, the short screen, no-stages unchanged, the old save, every validator error). Engine suite
+457 passed; skill tests 177 passed; `gates.py --selfcheck` OK; `--saves vesper` all PASS; cite_check 0.
+
+## 2026-09-30 — EN1: a step is used only on "yes"; a no is parked or final (engine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN1 (D6 · I4 · Dr1). Node 0 of a one-time canvas marked it fired and
+`canTriggerCanvas` refused it for ever at `total >= 1`, so a "no" that parks a step could not exist.
+
+**What changed (engine).**
+- Opt-in trigger key `consume_on = "exit"` (+ canvas default `retry_after_days`, 1 when absent) on a
+  non-repeatable canvas. Choice keys `consumes` (the yes), `final` (used up + flag `<canvas>_closed`),
+  `retry_after_days = N` (parked). Leaving mid-scene undecided parks for the canvas default; an info
+  page is not a leave.
+- Node 0's fired mark is unchanged; the decision lives in `$game_state.canvas_state[id]`. Every "done"
+  reader (`canTriggerCanvas`, `_isCanvasAvailable`, `isCanvasValidForSelection`, `isCanvasNew`,
+  `getNextActivity`, the trait-hint list, `cheatCanPlay` via `canTriggerCanvas`) goes through
+  `canvasConsumed` / `canvasStepBlocked`, which return the old `total >= 1` for any canvas that did not
+  opt in. `max_triggers_per_day` is unchanged.
+- The keys are copied in T and G (trigger metadata, all three choice writers); `<canvas>_closed` is
+  declared on the player in both and registered as a located setter for the flag-chain validator.
+  `validate()` errors on every misuse and warns when an opted-in step has nothing that uses it up.
+- **Old saves:** an opted-in step that a pre-EN1 build fired (trigger_history total ≥ 1, no record)
+  reads as used up — that build's meaning.
+
+**What changed (skill).** `gates.py` "no canvas key is discarded" knows `consume_on` and
+`retry_after_days` as trigger keys (test: `tests/test_gates_en1_keys.py`). 52 citations re-anchored by
+`cite_check.py --fix`; each checked by hand against the code it named before the move (all identical).
+`playtest.py reach_step` needs no change: it restores the full `State.variables` between tries.
+
+**Verified.** `apps/game_generation/tests/test_step_consume_on_exit.py` 26 passed (12 headless, built
+through `package_from_toml --output <tmp> --no-prune`; old save written by the pre-change engine) ·
+engine suite 436 passed · passage diff old vs new engine, `[script]` excluded: members_only,
+the_balance, vesper 0 changed · `--saves vesper` all PASS · skill pytest 177 passed · `--selfcheck`
+exit 0 · cite_check in scope 0.
+
+words: 136,080 → 136,080 (0) · running total 136,080 / 149,283
+
+---
+
 ## 2026-09-28 — IC18 follow-up: the description and the opening line match "the game never stalls"
 
 **Why.** LO: two lines still contradicted commitment 1 after IC18 — the frontmatter description ("a

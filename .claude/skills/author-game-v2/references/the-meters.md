@@ -17,7 +17,7 @@ between an ascent and a button.
 **M8–M10 — the body.** A need falls on its own, she refills it, and while it is empty something is
 shut. Missing until 2026-08-18.
 
-> **Gate `the climb is paid for`** (gates.py:8183) walks every trait any condition reads, not just
+> **Gate `the climb is paid for`** (gates.py:8567) walks every trait any condition reads, not just
 > the declared tiers. It fails when any route into a rung that raises a gated meter carries no
 > `costs`, no `max_triggers_per_day` on the target's trigger, and no day-cap flag cleared in
 > `[engine.daily_tick]`. One free route is enough to fail. It prints clicks and in-game time to the
@@ -89,6 +89,26 @@ the declaration (`player` ≥60% on her tiers · `cast` ≥60% on the cast · `b
 points sit inside the corpus's own empty band, so nothing here was invented — but what is judged is
 the game against **its own declaration**, never against a number this file picked.
 
+### What each man keeps score of
+
+Declared per man at the Want (`want.cast[].keeps`), from the fantasy and `who_climbs`. The shape is
+**(LO decided, D5)**; the evidence is R5
+(`~/Documents/Skill_Test_Research_20260929/R5_HIS_FEELINGS.md`).
+
+| the game is about… | the men keep | like |
+|---|---|---|
+| her change | a step counter + memory flags | Cupid's Way, In Her Own Hands |
+| relationships | Want + Warmth; the split picks lover vs user (**thin**: 1 of 4 games does it fully, R5 Part 1b) | Course of Temptation's dating |
+| power | Want + Power; Power changes which acts happen | Shady Deals |
+
+It can differ per man: a pressure man gets Power, a nice man doesn't. The author declares it; LO
+approves. **Whatever he keeps:**
+
+1. A shown number opens something visible, and he reacts the visit it crosses (gate `the men's numbers are read`).
+2. No hidden setting overrides the numbers.
+3. A locked step shows how close he is: the locked button names his feeling and the need.
+4. One visit moves about 1–10% of the next threshold, with 3–10 visits between steps (R5:243-244).
+
 ---
 
 ## W1b · The meter gates how far she goes — and the inner conflict stays
@@ -109,7 +129,8 @@ what the player plays** — not a switch that flips at a threshold.
 > (`zaras-school-life`, numbers only) has 36 act scenes where she simply wants him against 5 where
 > she gives herself a reason.
 
-How to write one event at several levels: `register.md`, "One event, several levels".
+How to write one event at several levels: `register.md`, "One event, several levels". A paid
+repeatable carries the slope as two voices per act (`the-arc.md` A15, thin).
 
 ### W1b-i · The unit is +1, and the raise goes through a named widget
 
@@ -244,7 +265,7 @@ on the same scale.
 ⚠️ **It follows W1's fork.** A ladder game is measured on the tiers `board.ascent_tiers` names; a
 roster game (`who_climbs = "cast"`, which leaves that list empty by definition) is measured on its
 per-character meters instead. A lint that read only the first of those would print nothing
-for a roster game (`gates.py:3402` takes the `who_climbs == "cast"` branch). **Half a fork is not
+for a roster game (`gates.py:3400` takes the `who_climbs == "cast"` branch). **Half a fork is not
 an instrument.** A gate above the meter's
 ceiling is skipped on both sides: that is a locked door (`the-release.md` G9), not a rung.
 
@@ -417,10 +438,10 @@ No threshold here; `gates.py` is unchanged (`findings_H_known.md`).
 > **W6 is the cast's own gating meters**, one set per character, and it is the only one of the three
 > that is per-person. A rule from any of the three does not transfer to the other two.
 
-### One word for the cast, and the difference lives in the modifiers
+### Each man keeps his own score, and it is shown
 
-> **Pick ONE willingness word for the whole game. Put every person on it, on the same scale.
-> Differentiate people by what modifies that number, never by giving them different vocabularies.**
+> **Each man keeps what `want.cast[].keeps` declares (W1), and his numbers are shown (D1).** Two men
+> on the same keeps differ by their modifiers ("The meter is a trade", below).
 
 Measured across the thirteen corpus games that run a per-person willingness meter on three or more
 people (`findings_E_yes.md` §1):
@@ -446,38 +467,25 @@ that is the one W4 measures at 8–17 rungs. Two meters, two jobs, two depths, a
 (`findings_F_further.md` §4).
 
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
+Replace it with what each man's `keeps` declares (W1's table). For a **ladder** game a step counter +
+memory flags is correct and deliberate: the tiers do the gating. For a **roster** game his numbers
+*are* the engine. Two rows the W1 table does not cover:
 
-For a **ladder** game that is correct and deliberate — the tiers do the gating and a bond meter
-colours the arc. Say so and move on.
-
-For a **roster** game the cast meter *is* the engine, so choose the word deliberately rather than
-inheriting `relation` from a template. Pick it from what the relationships in this game mostly
-**are** — adapted from `author-game/references/trait-design.md`, which has the full version:
-
-| the relationship | what gates the rungs |
+| the relationship | what he keeps |
 |---|---|
-| peer / dating | their **bond**, in small milestones — courtship is the climb |
-| slow burn / escalation | their own **willingness** odometer, warmed by a throttle |
-| leverage / transactional | money or debt — not affection |
 | service / workplace | trust only; willingness does not apply |
-| antagonist / witness | a hidden suspicion accumulator, never surfaced |
 | **someone she already belongs to** | **no climbing meter at all** — presence plus one opened flag. He is not a conquest; the variation is in pose and framing, not in a rising bar |
 
-⚠️ **Read the table as a menu of ONE choice, not a per-character assignment.** The last row is the
-exception that still holds per person: someone she already belongs to gets no climbing meter, and
-that is a decision about *that* character. Everyone who does climb, climbs on the same word.
+A suspicion or a debt he holds is a number like any other: shown, and he reacts when it crosses.
 
-Two more rules that survive from v1 and are worth restating:
-
-- **Reserve the rich two-meter model for the one or two arcs that carry the game.** The reference
-  game gives it to three housemates and runs its other fourteen characters light. Gold-plating
-  every character dilutes the core and triples the authoring.
+- **Match the keeps to the man.** The reference game gives its rich model to three housemates and
+  runs its other fourteen characters light.
 - **A character who gates nothing is not in the game yet.** A full meter pair with zero gate
   sites on either meter is a character the player can raise and nothing ever answers.
 
 ### The meter is a trade, not a bonus
 
-Added 2026-08-24 from Section G. Above, W6 says an identical meter pair across the cast is *the
+Added 2026-08-24 from Section G. An identical meter pair across a roster cast is *the
 engine missing*. This is the half that was missing from W6 itself: **picking a different meter is
 not enough if every meter only ever opens things.**
 
@@ -589,56 +597,28 @@ string per band. What separates a good implementation from a bad one is **where 
 `corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
 set a descriptor string, copy-pasted through the game instead of factored into one place.
 
-Note what the bands say. Not `45/100`: **a body state in words**. The number is internal; what the
-player meets is how she is. Our surface for this is `trait_status_text` (`engine.md` §30) — one
+Note what the bands say: **a body state in words**, printed beside the number (M7), so the player
+meets both how she is and how far. Our surface for this is `trait_status_text` (`engine.md` §30) — one
 authored ladder, rendered wherever the trait sits.
 
 ### What the player is shown
 
-The field does not show you the number. **It shows you the world reacting to it.**
-`degrees-of-lewdity`'s real body system is `$exposed`, a three-state value the author writes exactly
-once — `<<set $exposed to 0>>` at game start — and the engine derives from the worn set thereafter.
-The world then reads it about **900 times**: 415 sites test `gte 1`, 151 test `gte 2`, 90 test
-`lte 0`. Eighty-two per cent of those reads only change words. The portrait reads it too, setting
-the model's mouth to a frown at `exposed === 2`.
+**Numbers are shown and named, and the world reacts to them** *(LO decided, D1; R3 K12: corruption is
+a number in 13 of 15 top games)*. `degrees-of-lewdity`'s body system is `$exposed`, a three-state value
+the author writes once and the engine derives from the worn set; the world then reads it about **900
+times**, and 82% of those reads only change words. **One derived number, cheap enough to test that the
+whole world tests it.** W3's gate makes sure somebody reads it.
 
-**That is the shape to copy: one derived number, cheap enough to test that the whole world tests
-it.** W3's gate is what makes sure somebody reads it.
-
-**Show the reaction, not the number** (added 2026-09-24).
-The same holds after a choice. What the player sees when a click moves something is **a reaction
-line** — *"He nods. Once."*, *"Her face goes hard."* — or **a real consequence named after a real
-flag**, like a lift offered for tomorrow that the flag actually delivers. Never `+Respect` or
-`−Relationship` for a stat that does not exist; lint `a printed stat is real` lists them.
-
-| where the field prints the change | games |
-|---|---|
-| after the click, e.g. corpo-life's *"(Relationship +4 from interaction)"* | ~12 of 26 |
-| on the button before the click | 1 at scale (degrees-of-lewdity, a coloured marker, no number), 2 marginal |
-| players asking to see a stat | 4 of 22,252 comments |
-
-Source: the 2026-09-24 scene-content review, which read the 26 games' own source.
-
-**LO's decision, 2026-09-25: the score is hidden, the reaction is shown, the requirement is told.**
-Four parts, and they apply to every game this skill authors:
-
-1. **A person can keep their own score, and the player never sees it.** Where W1 puts weight on
-   the cast (`who_climbs = "cast"` or `"both"`), each person's number is internal. It picks which
-   reaction, which line and which step comes next. This is what the field does: 21 of 26 games keep
-   per-person state, and 8 of 26 never print a change to it.
-2. **After a choice, the player sees a reaction or a real consequence.** Never a number, and never
-   a `+Respect` or `−Relationship` label, whether or not the stat is declared. The reaction is the first
-   line of the node the choice leads to; when reactions differ, one short node per choice
-   (`the-first-hour.md` F1b step 3). A number invites
-   farming: the player repeats a choice to watch it climb.
-3. **When something is out of reach, the player is told what it needs.** That is the question
-   players actually ask: of 22,252 comments, 4 ask to *see* a stat, and the recurring ask is *"how
-   do I raise X / it's stuck at N"*. The requirement goes on the guidance card, as a trait goal that
-   prints *"14 / 20"* (`the-voice.md` R3b). On a locked button, R4 still governs.
-4. **Where a person stands is said in words, not a score.** For example, *"warming to you"*. ⚠️ **The
-   engine has no per-person word band yet.** `[ui.cast_page]` (`engine.md` §34) shows name,
-   relationship, tags, location and the next step; none of those reads a per-person score. Until
-   that exists, the words live in the reaction lines and on that person's quest card.
+1. **Her traits show as name + number**, with a band word beside it where it has bands (M7). One name
+   per trait, everywhere (`engine.md` §30).
+2. **A man's numbers show on the cast page**: every trait he keeps (W1) goes in `show_traits`, with a
+   word beside it (`engine.md` §34).
+3. **After a choice, a reaction line and the toast.** The engine's "+N" toast stays *(D1b)*; the first
+   line of the next node is his reaction. A `+X` label for a stat that does not exist is still wrong —
+   lint `a printed stat is real`.
+4. **When something is out of reach, the requirement is told**: the guidance card's trait goal prints
+   *"14 / 20"* (`the-voice.md` R3b), and a locked button prints the need (R4). Players ask *"how do I
+   raise X"* far more than *"show me X"* (4 of 22,252 comments ask to see a stat).
 
 ⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
 `getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
@@ -804,7 +784,7 @@ always compute the same two numbers:
 clicks to the top band  ·  in-game minutes to the top band
 ```
 
-`the climb is paid for` prints both numbers for every free route (gates.py:8249).
+`the climb is paid for` prints both numbers for every free route (gates.py:8567).
 
 ### M3 · The throttle menu — four levers, and none of them works alone
 
@@ -900,30 +880,31 @@ sleeping. Declare the tick.
 `cap` is real (§29) and the skill never mentioned it before this file, so it is easy to over-learn.
 It bounds **how high a trait can go**, not **how fast**:
 
-- ✅ bounding a restore — a sleep rung adding energy, a wash adding hygiene
+- ✅ bounding a restore — a sleep rung adding energy
 - ✅ bounding a repeatable relation grant so one rung cannot max a character on its own
 - ❌ **never on an ascent tier** — the tier must reach its top band, and a cap there deletes content
 - ❌ it is not a throttle. A capped rung is still infinitely clickable up to the cap.
 
-### M7 · Band a meter, hide its number
+### M7 · Band a meter, show it once
 
 The sidebar prints a trait twice — once from the auto Traits dump, once from whatever
 `[[sidebar_items]]` you wrote — and the two do not know about each other (§30).
 
-**Every trait carrying `bands` in `[[sidebar_items]]` needs `hidden = true` in `[[traits.labels]]`.**
-A trait absent from `[[traits.labels]]` entirely is *not* hidden; it prints.
+**Every trait carrying `bands` in `[[sidebar_items]]` needs `in_dump = false` in `[[traits.labels]]`**,
+so its number shows once, in the item. A trait absent from `[[traits.labels]]` entirely is *not* kept
+out; it prints. Don't use `hidden = true` for this: it is the secret-trait switch, and because it is
+keyed by name it hides every man's trait of the same name.
 
-Choose the primitive by what the number **means**:
+The sidebar shows the number *(D4)*, and every item carries a `label`:
 
-| kind | example | sidebar type | why |
+| kind | example | sidebar type | reads |
 |---|---|---|---|
-| identity / qualitative state | an ascent tier, corruption | `trait_words` + `bands` | the player thinks in a word, not a number |
-| transient mood | arousal | `trait_bar` + `bands` + `hide_value = true` | show the band, hide the volatile figure |
-| body-need | energy, hygiene | `trait_status_text` + `bands` | passive banded body-state |
-| countable resource | money | `trait_bar`, `hide_value = false`, **no `bands`** | you want the exact figure; don't band a thing the player counts |
+| sex trait | corruption | `trait_words` + `bands` + `show_value = true` | *Corruption: 12 · Curious* |
+| body need | energy | `trait_bar` + `bands` (no `hide_value`) | *Energy: 60 / 100*, a bar, the band word |
+| money | money | `trait_words` + `show_value = true`, no `bands` | *Money: 140* |
 
-**Gate 27** fails any banded item whose key is not hidden. It is deterministic — no threshold to
-invent, no false positives.
+**Gate 27** (*a banded meter is shown once*) fails a banded item whose key is neither `in_dump = false` nor
+`hidden`, or whose item prints no number. It is deterministic — no threshold to invent.
 
 ⚠️ And the other half: a banded value that lands **outside every band renders nothing at all** — the
 card vanishes, which reads as a missing HUD element rather than a wrong number. Leave the top band's
@@ -977,7 +958,6 @@ with different nouns.
 ```toml
 # Decay is a POSITIVE MAGNITUDE — the validator rejects a negative (engine.md §11).
 [player.trait_decay]
-hygiene = 10
 energy  = 8
 ```
 
@@ -986,8 +966,23 @@ games do write. **The half they drop is `shuts`.**
 
 Two shapes, and pick on purpose:
 
-- **decay** — falls every day whether or not she does anything. Right for hygiene, energy, hunger.
+- **decay** — falls every day whether or not she does anything. Right for energy (no hygiene or
+  hunger system: `engine.md` §30.1).
 - **spent** — falls only when something takes it, via `costs` on a trigger (§27). Right for a
   resource.
 
 A need can use both. What it cannot do is neither, which is a trait that only ever goes up.
+
+**Decay stops at a rest point and never crosses it.** Each night a decaying trait moves by its amount
+toward its rest point, from either side. The rest point is 0 unless you set one, so a value below 0
+climbs back up to 0. A man can have his own settings:
+
+```toml
+[[npcs]]
+id               = "vic"
+trait_decay      = { trust = 10 }
+trait_rest       = { trust = 20 }   # his trust cools to 20 and stops there
+decay_after_days = 2                # he starts cooling only after two days apart
+```
+
+Seeing him resets the wait, and a man she saw that day never decays that night.

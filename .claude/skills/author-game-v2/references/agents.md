@@ -101,8 +101,8 @@ whether the pitch is **too close to a moment-library entry** — the same situat
 of person — naming the entry. **It scores nothing**: it returns the pitch with a one-line note beside
 each line, and LO judges. Its only rejections are two instant fails, each quoting the line: a big
 turn forced on her with no warning or way round, and sex used only as a punishment
-(`the-surfaces.md` R5b.3). A "no" that
-locks the relationship for good is flagged, not failed.
+(`the-surfaces.md` R5b.3). A final "no"
+the button does not label is a defect: flagged, not failed.
 
 **Every finding gets an adversarial verify.** *(LO decided.)* A raw finding is a hypothesis, and
 the verify pass is what makes the survivors usable.
@@ -114,11 +114,13 @@ catches failure modes that redundancy cannot.
 
 ## The Reader — the scenes, read as scenes
 
-The agent is `.claude/agents/v2-reader.md`. Give it a slug or a list of canvases, after a build. It
-reads every scene with a named person and every explicit beat against the seven tests in
-`register.md` "What a scene contains", and returns a table — scene · test · PASS/FAIL/N/A · the
-line judged · why. **It fixes nothing and scores nothing**; LO reads the table. On test 1 it names
-the earlier canvases it checked for his wanting (A13). The excitement lens is not here — it reads
+The agent is `.claude/agents/v2-reader.md`. Every release, after the build and before `--ship`, it reads
+each **touched** canvas (`the-release.md` 6b) with a named person, and every explicit beat, against the
+nine tests in `register.md` "What a scene contains". It returns a table — scene · test · PASS/FAIL/N/A ·
+the line judged · why — and the same verdicts as JSON, which the session saves in
+`release_page.reader`. **It fixes nothing and scores nothing; its verdicts gate** *(LO decided, D12;
+`--ship` row *the reader passed*)*, with LO's waivers beside them. On test 1 it names the earlier canvases it checked
+for his wanting (A13). The excitement lens is not here — it reads
 pitches, on `v2-attack`.
 
 ---

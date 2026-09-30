@@ -31,6 +31,9 @@ from .template_import import (
     _assemble_project_metadata,
     _normalize_block_list,
     _serialize_exit_block,
+    closed_step_flags,
+    rent_carries,
+    RENT_CARRIED_FLAG,
 )
 
 # Coerce "HH:MM" schedule strings to datetime.time exactly as a DB save would
@@ -91,6 +94,11 @@ def build_game_graph(
             and template.rent_eviction_flag not in _player_flag_keys
         ):
             _player_flag_keys.append(template.rent_eviction_flag)
+    if rent_carries(template) and RENT_CARRIED_FLAG not in _player_flag_keys:  # EN2b
+        _player_flag_keys.append(RENT_CARRIED_FLAG)
+    for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
+        if _cf not in _player_flag_keys:
+            _player_flag_keys.append(_cf)
 
     player = Character(
         project=project,
@@ -169,6 +177,10 @@ def build_game_graph(
             npc.ai_behavior_config["relationship_options"] = n.relationship_options
         if n.trait_decay:
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
+        if n.trait_rest:  # EN8 — MIRRORED in template_import.create_project_from_template
+            npc.ai_behavior_config["trait_rest"] = dict(n.trait_rest)
+        if n.decay_after_days:
+            npc.ai_behavior_config["decay_after_days"] = n.decay_after_days
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
         # G: per-NPC cast-card tag line. Mirrors the same write in
@@ -177,6 +189,8 @@ def build_game_graph(
         # reaches the database and never reaches a packaged game.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.show_traits:  # EN7 — MIRRORED in template_import.create_project_from_template
+            npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
         graph.npcs.append(npc)
@@ -204,11 +218,21 @@ def build_game_graph(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.hours:  # EN3 — MIRRORED in template_import.create_project_from_template
+            loc.properties["hours"] = l.hours
+        if l.closed_text:
+            loc.properties["closed_text"] = l.closed_text
+        if l.hidden_until:  # EN4 — MIRRORED in template_import.create_project_from_template
+            loc.properties["hidden_until"] = l.hidden_until
+        if l.kind is not None:  # EN10 — MIRRORED in template_import.create_project_from_template
+            loc.properties["kind"] = l.kind
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False
         if l.costs:
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
+        if l.crossing_costs:  # EN11 — MIRRORED in template_import.create_project_from_template
+            loc.properties["crossing_costs"] = {k: int(v) for k, v in l.crossing_costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:
@@ -338,6 +362,9 @@ def build_game_graph(
                             if c.trigger.entry_only_from
                             else None,
                             "requires_npc": c.trigger.requires_npc or None,
+                            # EN1 — opt-in step consumption (absent unless authored)
+                            "consume_on": c.trigger.consume_on or None,
+                            "retry_after_days": c.trigger.retry_after_days,
                             "pre_substitution_effects": (
                                 c.trigger.pre_substitution_effects
                                 if c.trigger.pre_substitution_effects
@@ -452,6 +479,13 @@ def build_game_graph(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        # EN1 — the step decision (absent unless authored)
+                        if ch.consumes:
+                            ch_d["consumes"] = True
+                        if ch.final:
+                            ch_d["final"] = True
+                        if ch.retry_after_days is not None:
+                            ch_d["retry_after_days"] = ch.retry_after_days
                         if ch.rejection_node:
                             # Resolve rejection_node slug → UUID (same as nodeId)
                             rej_key = (

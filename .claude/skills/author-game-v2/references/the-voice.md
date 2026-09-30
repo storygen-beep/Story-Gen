@@ -35,6 +35,10 @@ produces, never in the button.
 Failure kinds: *Make peace with it* = abstract phrase · *The window seat*, *The usual crowd* = bare
 noun · *Let the evening settle*, *Something left unsaid* = register-flavoured / literary.
 
+**A button never hides the act** *(LO decided, D11)*. A paid visit to a man's room is labelled as a
+visit to his room, never as waiting or being asked; a soft name for a sex act or for sex work is the
+failure.
+
 **Location names are UI too.** A name a player cannot resolve is a navigation bug wearing register's
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
 anyone. *The Undercroft* becomes *The Basement* and says what the place is in one word anybody owns.
@@ -45,8 +49,9 @@ anyone. *The Undercroft* becomes *The Basement* and says what the place is in on
 **The word on a label is `register.md`'s, and it has no gloss.** A button cannot explain itself:
 there is no sentence on it to carry one, and the player reads it *before* the prose behind it. So
 a room name, a canvas `name` and a room-list choice take the **plain word**, however well the
-paragraph downstream glosses it. `references/register.md`, "The words the player has to already
-own" — the label sub-rule.
+paragraph downstream glosses it. A sex trait's genre word (*Corruption*) counts as a plain word
+*(LO decided, D3b)*. `references/register.md`, "The words the player has to already own" — the label
+sub-rule.
 
 **A character's name is navigation too, and it is not a label until the player owns it.** Before a
 character has been met, name them by their **role** and where they are — *"your landlady"*,
@@ -101,8 +106,11 @@ That last one is the shape worth stealing: the label names the skill check **and
 verdict**, so a player never spends a turn discovering they were never eligible. Failing it still
 paid £8.50 — the cost is information, not a wall.
 
-**Money is the one that is gated** (gate 21). A price the player cannot see is a plan they cannot
-make, and they are budgeting against a stated deadline. **And the notation is gated too** — the
+**Money is the one that is gated** (gate 21) — **a spend price stays on the button**: about 8 of 15
+games print it there. A price the player cannot see is a plan they cannot make, and they are budgeting
+against a bill that comes back. **Pay she earns does not go on the button** *(LO decided, D11)*: 0 of
+the 4 passing games put it there. It is said in the scene that first offers the work, kept on the
+guidance card, and the toast shows it after the click. Spend and income are two rules, kept apart. **And the notation is gated too** — the
 amount on the button has to be written in the game's one currency, the same one
 `[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
 `references/the-economy.md` R7 owns this; `engine.md` §33 lists every place the engine prints money
@@ -214,7 +222,7 @@ Three attested ways to say it, all from the field:
 | | |
 |---|---|
 | **in fiction** | *"You could ask him about his headquarters if you had a way to approach… **If only you've worked here, hm…**"* — `shady-deals`. Names the want, refuses her, and prints the key, in her own voice |
-| **raw** | `Required Corruption: 20   Required Energy: 10` — `zaras-school-life`, printed inside the written refusal |
+| **raw** | the button greyed with the number beside it — Cupid's Way, 38 of its 48 greyed buttons outside the Jack/Aaron routes |
 | **term by term** | `become-taxi-driver` names **every** unmet term with directions — *"You need more friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the car' and then 'Street Race'…)"* |
 
 **Reach for a trait goal whenever a card gates on a number**, because the engine then prints
@@ -224,20 +232,15 @@ nothing but its label, and with no label it prints its raw key — which gate
 
 ### R4 · A wall shows the want; the card shows the route
 
-A locked choice renders greyed. By default **leave `locked_text` off** — the row then shows the
-action itself (*"Ask him where the bench went"*), which is a want the player can name, and a want is
-what sells the next release. Setting `locked_text` **replaces** that with a reason (*"Not yet — he
-still thinks he's getting away with it"*): clearer about the gate, weaker as a door. Prefer the want
-unless the gate is genuinely obscure. `engine.md` §15 has the verified render behaviour.
+A locked choice renders greyed, with its action as the label (*"Ask him where the bench went"*) — a
+want the player can name *(LO decided, D2)*. **A pure number lock** says the rest itself: the engine
+prints the need and her value beside it (`engine.md` §15), so it gets no `locked_text`. **A story
+lock** — a flag, or a flag beside a number — gets one short line, which replaces the label, because
+the engine's suffix never names the flag.
 
-**So a greyed action line is not silent — it states the want.** What it cannot state is the
-**route**, and that is R3's job on the guidance card. The two work as a pair: the door advertises,
-the card directs.
-
-⚠️ *This rule is written the way it is because the opposite was drafted first, made into a gate, and
-fired on seven of eight doors in a real game — every one of which was following `engine.md` §15
-correctly. A rule that fails a game for obeying the skill is a bug in the rule. There is
-deliberately no gate here.*
+**So a greyed line states the want and the bar.** What it cannot state is the **route**, and that is
+R3's job on the guidance card. The door advertises, the card directs. Gate **a locked door says why**
+checks both, and fails a `locked_text` only on a pure number lock, as doubled.
 
 ⚠️ **`guidance exists` checks only that a card exists; it never reads what the card says.** Two
 checks cover the route: gate **`a goal says what it wants`** (a bullet renders words, not a raw key)
@@ -347,7 +350,7 @@ Field reference and citations: `references/engine.md`.
 | **Lint · label length** | median words per label and the share at 6+, with the field's 3 / 10% printed alongside |
 | **Lint · she permits or she acts** | the share of choices opening `let`, overall and inside sex loops, against the field's 1.01%. R6 |
 
-**R4 has no gate on purpose** — see the warning under it.
+**R4's gate is `a locked door says why`** — see R4.
 
 **R6 has no gate either.** A rate floor on act-words fails games doing it right: the field runs 9.2%,
 and a third of its explicit-surface buttons are `continue` or `leave`. The SHAPE of the surface predicts

@@ -74,8 +74,6 @@ def cards_for(who, ladder, loc_names, npc_names):
             f"npc_id       = {_q(who)}",
             f"text         = {_q('<her line for step ' + str(n) + ' — write it>')}",
             f"tip          = {_q(pt)}",
-            f"# her voice, optional — keep the place and the time in it:",
-            f"# tip        = {_q('I wonder what he is into… ' + pt)}",
             f"when         = [ {{ type = \"trait\", subject = \"player\", trait = {_q(counter)}, "
             f"op = \"eq\", value = {n - 1} }} ]",
             f"goals        = [ {{ type = \"trait\", subject = \"player\", trait = {_q(counter)}, "

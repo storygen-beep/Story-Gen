@@ -139,6 +139,12 @@ class TemplateNPC:
     # Trait decay: {trait_name: decay_per_day}. Traits decay by this amount each day
     # the player doesn't interact with this NPC. Keys must exist in core_traits.
     trait_decay: Dict[str, float] = field(default_factory=dict)
+    # EN8 — where decay stops: {trait: value}, default 0. Decay moves a trait toward its
+    # rest point from either side and never crosses it. Kept raw; validate() checks it.
+    trait_rest: Any = field(default_factory=dict)
+    # EN8 — decay starts only after this many days without contact (0 = every day she
+    # does not see him, as before). Kept raw; validate() checks it.
+    decay_after_days: Any = 0
     # UI visibility: when True, the NPC is omitted from the Guide Page, Stats Page,
     # and sidebar NPC-traits widget. Runtime $npcs dict still contains the NPC so
     # prologue/narrative dialog speaker lookups by UUID keep working.
@@ -156,6 +162,10 @@ class TemplateNPC:
     # `relationship`. Ships to runtime via the slug-keyed `setup.npc_tags`
     # registry, NOT via $npcs — see v2.py's npc_tags_map for why.
     tags: List[str] = field(default_factory=list)
+    # EN7 — traits shown on THIS character's cast card, on top of [ui.cast_page]
+    # show_traits (e.g. a Power only the boss has). Kept raw; validate() checks it.
+    # Ships slug-keyed as setup.npc_show_traits, like `tags`.
+    show_traits: Any = field(default_factory=list)
     # F10 · the short label under this character's NAME in every dialogue box.
     # NOT `relationship`, which is a cast-page sentence and — measured across the
     # repo — repeats: five of one game's six relationship strings contain
@@ -185,6 +195,20 @@ class TemplateLocation:
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
     blocked_message: str = ""
+    # EN3 — opening hours. Each window is {weekdays, open, close} ("HH:MM"; weekdays 0=Monday,
+    # empty = every day). close <= open runs overnight into the next day; close may be
+    # "24:00". Empty = always open, exactly as before. closed_text is what the room says
+    # when she arrives while it is closed.
+    hours: List[Dict[str, Any]] = field(default_factory=list)
+    closed_text: str = ""
+    # EN4 — {flag = "<player flag>"}: the place is not listed, and its name is withheld,
+    # until that flag is true. Empty = always listed, exactly as before.
+    hidden_until: Dict[str, Any] = field(default_factory=dict)
+    # EN10 — "thoroughfare" (a place she passes through) or "destination" (a place she
+    # goes to do something). None = not written = a destination. Nothing in the engine
+    # reads it; the release checks do (DC7 / CK7). Never "hub": that word already means
+    # a character's hub canvas.
+    kind: Any = None
     # A TRANSIT STOP opts out of engine-built navigation: no auto "Leave <name>" link, and an
     # empty nav list is treated as intentional rather than as a stranded location (so the
     # list-every-location fallback stays quiet). For a location the player arrives at and leaves
@@ -195,6 +219,10 @@ class TemplateLocation:
     # `time` (minutes) advances the day-cycle clock; every other key deducts that
     # player trait (e.g. energy). Empty = a free move (today's behavior).
     costs: Dict[str, int] = field(default_factory=dict)
+    # EN11 — on an AREA (a container): charged once when she enters any place inside the
+    # area from a place outside it; moves inside the area pay only each room's `costs`.
+    # Same shape as `costs`. Kept raw; validate() checks it. Empty = no crossing charge.
+    crossing_costs: Any = field(default_factory=dict)
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
     # State-reactive room prose. `description` above is the ELSE branch and stays
     # required; each variant is {conditions, text} and the generator emits them as a
@@ -450,6 +478,19 @@ class GameTemplate:
     # that is what those pages hardcoded before this field existed — a game shipped
     # with every price in the prose written "£3" and its rent page saying "$245".
     rent_currency_symbol: str = "$"
+    # EN2a — the bill rises in stages. Each stage is {amount, after_total_paid}: once the
+    # player has paid that much in total, the stage's amount is the rent. stage_lines[i]
+    # is what the collector says on the pay screen when stages[i] takes over. Empty = the
+    # fixed `rent_amount`, exactly as before.
+    rent_stages: List[Dict[str, Any]] = field(default_factory=list)
+    rent_stage_lines: List[Any] = field(default_factory=list)
+    # EN2b — what a short week does. "" = today's grace warning, then eviction_mode.
+    # "carry" = she pays what she can, the rest is owed on top of next week, and the
+    # game never ends over rent (grace_periods and eviction_mode are ignored).
+    rent_on_short: str = ""
+    # Which of grace_periods / eviction_mode the TOML wrote itself. Both have defaults,
+    # so only this tells validate() that a carry game set one it will ignore.
+    rent_explicit_keys: List[str] = field(default_factory=list)
     # Sidebar items (custom display elements)
     sidebar_items: List[Dict[str, Any]] = field(default_factory=list)
     # Phone system
@@ -532,6 +573,10 @@ class TemplateTraitLabel:
                           # A label entry may exist SOLELY to hide (label may be empty).
                           # NOTE: name-keyed, not namespaced — hides for player + any NPC
                           # that has a core_trait of this name.
+    # EN5 — False keeps the trait out of the sidebar's auto Traits dump ONLY; it still
+    # shows on the Stats page and in every toast. For a banded meter whose words already
+    # sit in [[sidebar_items]]. `hidden` above keeps its meaning: a secret trait.
+    in_dump: Any = True
 
 
 @dataclass
@@ -573,6 +618,11 @@ class TemplateCastPage:
     intro: str = ""
     button_label: str = ""    # defaults to title
     button_icon: str = ""
+    # EN7 — the traits every card shows (name from [[traits.labels]], the number, and a
+    # word when a band in trait_bands = {trait: [{min, max, text}]} matches). Kept raw;
+    # validate() checks them. Empty = the card shows no numbers, exactly as before.
+    show_traits: Any = field(default_factory=list)
+    trait_bands: Any = field(default_factory=dict)
 
 
 @dataclass
@@ -784,6 +834,15 @@ class TemplateTrigger:
     # (targetType / npcId / trait / op / value / clamp / cap). Empty list =
     # current behavior unchanged (Pattern A semantics). See Doc 69 §4 + §5.2.
     pre_substitution_effects: List[Dict[str, Any]] = field(default_factory=list)
+    # EN1 (2026-09-30) — a one-time step is used up on its "yes", not on entry.
+    # Opt-in: `consume_on = "exit"` on a non-repeatable canvas. The engine keeps
+    # node 0's fired mark (trigger_history) as it is, and adds a separate record in
+    # $game_state.canvas_state: a choice with `consumes` uses the step up, one with
+    # `final` uses it up and sets `<canvas>_closed`, one with `retry_after_days`
+    # parks it. Leaving mid-scene with none of those parks it for
+    # `retry_after_days` days (1 when absent), so a no cannot be farmed.
+    consume_on: Optional[str] = None
+    retry_after_days: Optional[int] = None
 
 
 @dataclass
@@ -957,6 +1016,12 @@ class TemplateChoice:
     # click, and shown as a greyed getCostBlockedMessage rung when unaffordable. Mirrors the
     # canvas-level `costs` semantic (TemplateTrigger.costs) at the choice level.
     costs: List[Dict[str, Any]] = field(default_factory=list)
+    # EN1 — the step decision, read only on a canvas whose trigger has
+    # `consume_on = "exit"`. At most one per choice: `consumes` (the yes),
+    # `final` (the warned no that closes his path), `retry_after_days` (a parked no).
+    consumes: bool = False
+    final: bool = False
+    retry_after_days: Optional[int] = None
 
 
 @dataclass
@@ -2056,9 +2121,12 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 relationship=_require_str(n, "relationship", "") or None,
                 relationship_options=_require_list(n, "relationship_options"),
                 trait_decay=trait_decay,
+                trait_rest=n.get("trait_rest") or {},
+                decay_after_days=n.get("decay_after_days", 0),
                 hidden_from_ui=bool(n.get("hidden_from_ui", False)),
                 arc_stages=arc_stages,
                 tags=npc_tags,
+                show_traits=n.get("show_traits") or [],
                 role=_require_str(n, "role", ""),
             )
         )
@@ -2090,8 +2158,15 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
                 blocked_message=_require_str(l, "blocked_message", ""),
+                # Kept raw; validate() reports every malformed window.
+                hours=l.get("hours") or [],
+                closed_text=_require_str(l, "closed_text", ""),
+                # Kept raw (not _require_dict) so validate() can report a non-table.
+                hidden_until=l.get("hidden_until") or {},
+                kind=l.get("kind"),
                 auto_exit=bool(l.get("auto_exit", True)),
                 costs=_require_dict(l, "costs"),
+                crossing_costs=l.get("crossing_costs") or {},
                 clothing_rules=l.get("clothing_rules", []) or [],
                 description_variants=l.get("description_variants", []) or [],
                 # ⚠️ Nothing in this file rejects an unknown key, so a [locations.door]
@@ -2207,6 +2282,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         for eff in (trig_def.get("pre_substitution_effects") or [])
                         if isinstance(eff, dict)
                     ],
+                    # EN1 — kept raw; validate() owns the type and value checks.
+                    consume_on=trig_def.get("consume_on"),
+                    retry_after_days=trig_def.get("retry_after_days"),
                 )
                 # Doc 69 Item 2 — validate pre_substitution_effects field names
                 # + trait declarations (reuses Phase 1 + Phase 2 validators).
@@ -2446,6 +2524,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                 for ci in (ch.get("costs") or [])
                                 if isinstance(ci, dict) and "trait" in ci and "value" in ci
                             ],
+                            # EN1 — the step decision; validate() owns the checks.
+                            consumes=bool(ch.get("consumes", False)),
+                            final=bool(ch.get("final", False)),
+                            retry_after_days=ch.get("retry_after_days"),
                         )
                     )
                 # Validate exit_block type
@@ -2896,6 +2978,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     rent_eviction_mode = _require_str(rent_raw, "eviction_mode", "game_end")
     rent_eviction_flag = _require_str(rent_raw, "eviction_flag", "rent_evicted")
     rent_currency_symbol = _require_str(rent_raw, "currency_symbol", "$") or "$"
+    # Kept raw; validate() reports every malformed stage instead of the parser dropping it.
+    rent_stages = rent_raw.get("stages") or []
+    rent_stage_lines = rent_raw.get("stage_lines") or []
+    rent_on_short = _require_str(rent_raw, "on_short", "")
+    rent_explicit_keys = [k for k in ("grace_periods", "eviction_mode") if k in rent_raw]
 
     # ── Phone system ──
     phone_raw = data.get("phone")
@@ -3128,6 +3215,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 intro=_require_str(castp_raw, "intro", ""),
                 button_label=_require_str(castp_raw, "button_label", "") or castp_title,
                 button_icon=_require_str(castp_raw, "button_icon", ""),
+                show_traits=castp_raw.get("show_traits") or [],
+                trait_bands=castp_raw.get("trait_bands") or {},
             )
 
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
@@ -3242,6 +3331,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     verb=_require_str(tl_raw, "verb", "reach") or "reach",
                     unit=_require_str(tl_raw, "unit", ""),
                     hidden=bool(tl_raw.get("hidden", False)),
+                    in_dump=tl_raw.get("in_dump", True),
                 )
             )
 
@@ -3291,6 +3381,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         rent_eviction_mode=rent_eviction_mode,
         rent_eviction_flag=rent_eviction_flag,
         rent_currency_symbol=rent_currency_symbol,
+        rent_stages=rent_stages,
+        rent_stage_lines=rent_stage_lines,
+        rent_on_short=rent_on_short,
+        rent_explicit_keys=rent_explicit_keys,
         sidebar_items=sidebar_items,
         phone_enabled=phone_enabled,
         phone=phone_obj,
@@ -3935,6 +4029,10 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"{ctx}: trait '{trait}' not found in player.core_traits (widget will render empty)"
                 )
+            # EN9 — show_value prints "Label: N · word"; a string "true" would be truthy
+            # and render it by accident, so only a real bool is accepted.
+            if "show_value" in item and not isinstance(item.get("show_value"), bool):
+                errors.append(f"{ctx}: 'show_value' must be true or false, got {item.get('show_value')!r}")
             if not isinstance(bands, list) or not bands:
                 errors.append(f"{ctx}: 'bands' must be a non-empty list")
             else:
@@ -4744,6 +4842,26 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"location '{l.id}' costs['{k}'] must be a number")
             elif v < 0:
                 errors.append(f"location '{l.id}' costs['{k}'] must not be negative")
+
+    # EN11 — crossing costs: an AREA's toll, same shape and rules as `costs`.
+    for l in template.locations:
+        if not l.crossing_costs:
+            continue
+        if not isinstance(l.crossing_costs, dict):
+            errors.append(
+                f"location '{l.id}' crossing_costs must be a dict (e.g. {{ time = 20, energy = 5 }})"
+            )
+            continue
+        if not l.is_container:
+            errors.append(
+                f"location '{l.id}' crossing_costs needs is_container = true: it is charged on "
+                f"entering the AREA, and a plain room has no inside to cross into (use `costs`)"
+            )
+        for k, v in l.crossing_costs.items():
+            if not isinstance(v, (int, float)) or isinstance(v, bool):
+                errors.append(f"location '{l.id}' crossing_costs['{k}'] must be a number")
+            elif v < 0:
+                errors.append(f"location '{l.id}' crossing_costs['{k}'] must not be negative")
 
     # ===== Story validation (optional) =====
     canvas_ids = {c.id for c in getattr(template, "canvases", [])}
@@ -5702,7 +5820,9 @@ def validate(template: GameTemplate) -> List[str]:
 
     # ===== Rent validation (optional) =====
     if template.rent_enabled:
-        if template.rent_amount <= 0:
+        # EN2b — with stages the bill can come from them alone, so `amount` may be
+        # absent (0); _validate_rent_on_short then demands a stage from total 0.
+        if template.rent_amount < 0 or (template.rent_amount == 0 and not template.rent_stages):
             errors.append("rent amount must be a positive integer")
         if template.rent_due_day not in VALID_DAYS:
             errors.append(
@@ -5721,6 +5841,8 @@ def validate(template: GameTemplate) -> List[str]:
                 f"rent eviction_mode must be 'game_end' or 'flag_set', "
                 f"got '{template.rent_eviction_mode}'"
             )
+        errors.extend(_validate_rent_stages(template))
+        errors.extend(_validate_rent_on_short(template))
         if template.rent_eviction_mode == "flag_set":
             if not _is_valid_slug(template.rent_eviction_flag):
                 errors.append(
@@ -5978,9 +6100,12 @@ def validate(template: GameTemplate) -> List[str]:
         if not tl.key:
             errors.append("traits.labels entry missing required `key` field")
             continue
-        # A hide-only entry (hidden=true) may omit `label` — its sole purpose is to
-        # suppress the trait from player-facing dumps, not to render a goal label.
-        if not tl.label and not tl.hidden:
+        # A hide-only entry (hidden=true, or EN5's in_dump=false) may omit `label` — its
+        # sole purpose is to keep the trait out of a dump; the name falls back to the
+        # tidied key ("crowd_standing" -> "Crowd standing").
+        if not isinstance(tl.in_dump, bool):
+            errors.append(f"traits.labels[{tl.key}] in_dump must be true or false, got {tl.in_dump!r}")
+        if not tl.label and not tl.hidden and tl.in_dump is not False:
             errors.append(f"traits.labels[{tl.key}] missing required `label` field")
         if tl.hidden and tl.key not in _all_core_trait_keys and warnings is not None:
             warnings.append(
@@ -6019,6 +6144,528 @@ def validate(template: GameTemplate) -> List[str]:
             errors,
         )
 
+    # EN1 — opt-in step consumption (`consume_on` / `consumes` / `final` /
+    # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
+    errors.extend(_validate_step_consumption(template))
+
+    # EN3 — location opening hours.
+    errors.extend(_validate_location_hours(template))
+
+    # EN4 — places hidden until found.
+    errors.extend(_validate_hidden_places(template))
+
+    # EN10 — thoroughfare or destination.
+    errors.extend(_validate_location_kind(template))
+
+    # EN7 — the men's numbers on the cast page.
+    errors.extend(_validate_cast_traits(template))
+
+    # EN8 — decay toward a rest point; wait after contact.
+    errors.extend(_validate_decay_rest(template))
+
+    return errors
+
+
+def _is_plain_int(v) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _validate_rent_stages(template) -> List[str]:
+    """EN2a — [settings.rent] stages / stage_lines.
+
+    A stage the engine cannot order or price would silently charge the wrong bill, so
+    every malformed one is an error, not a skip.
+    """
+    errors: List[str] = []
+    stages = template.rent_stages
+    lines = template.rent_stage_lines
+    if not isinstance(stages, list):
+        return ["rent stages must be a list of {amount, after_total_paid} tables"]
+    if not isinstance(lines, list):
+        return ["rent stage_lines must be a list of strings"]
+    last_after = None
+    for i, st in enumerate(stages):
+        ctx = f"rent stages[{i}]"
+        if not isinstance(st, dict):
+            errors.append(f"{ctx} must be a table {{amount, after_total_paid}}")
+            continue
+        unknown = sorted(set(st) - {"amount", "after_total_paid"})
+        if unknown:
+            errors.append(f"{ctx} has unknown key(s) {unknown}; only amount and after_total_paid")
+        amount, after = st.get("amount"), st.get("after_total_paid")
+        if not _is_plain_int(amount) or amount <= 0:
+            errors.append(f"{ctx}.amount must be a positive integer, got {amount!r}")
+        if not _is_plain_int(after) or after < 0:
+            errors.append(f"{ctx}.after_total_paid must be an integer >= 0, got {after!r}")
+            continue
+        if last_after is not None and after <= last_after:
+            errors.append(
+                f"{ctx}.after_total_paid ({after}) must be greater than the stage before "
+                f"it ({last_after}); stages are listed in the order she reaches them"
+            )
+        last_after = after
+    if lines and not stages:
+        errors.append("rent stage_lines is set but stages is not; a line belongs to a stage")
+    if len(lines) > len(stages):
+        errors.append(
+            f"rent stage_lines has {len(lines)} lines for {len(stages)} stages; "
+            f"stage_lines[i] is spoken when stages[i] takes over"
+        )
+    for i, ln in enumerate(lines):
+        if not isinstance(ln, str):
+            errors.append(f"rent stage_lines[{i}] must be a string, got {ln!r}")
+    return errors
+
+
+def _validate_rent_on_short(template) -> List[str]:
+    """EN2b — `on_short`, and a staged bill with no `amount`.
+
+    Carry replaces the grace warning and the eviction, so a grace_periods or eviction_mode
+    the author wrote does nothing: a warning, not an error, because eviction_mode has a
+    default and the pair is harmless.
+    """
+    errors: List[str] = []
+    if template.rent_on_short not in ("", "carry"):
+        errors.append(
+            f"rent on_short must be 'carry' (or absent), got '{template.rent_on_short}'"
+        )
+    if template.rent_on_short == "carry":
+        import warnings
+
+        for key in template.rent_explicit_keys:
+            warnings.warn(
+                f"[settings.rent] {key} is ignored when on_short = \"carry\": a short "
+                f"week is carried to the next one, never warned or evicted",
+                UserWarning,
+                stacklevel=2,
+            )
+    stages = template.rent_stages
+    if (
+        template.rent_amount == 0
+        and isinstance(stages, list)
+        and stages
+        and isinstance(stages[0], dict)
+        and stages[0].get("after_total_paid") != 0
+    ):
+        errors.append(
+            "rent has no amount, so stages[0].after_total_paid must be 0; otherwise the "
+            "rent is 0 until a stage is reached, and paying 0 never reaches one"
+        )
+    return errors
+
+
+_WEEK_MINUTES = 7 * 1440
+
+
+def _hhmm_minutes(v: Any, allow_24: bool = False) -> Optional[int]:
+    """"HH:MM" -> minutes after midnight, or None when it is not a real clock time."""
+    import re
+
+    if not isinstance(v, str):
+        return None
+    m = re.fullmatch(r"(\d{1,2}):(\d{2})", v.strip())
+    if not m:
+        return None
+    h, mi = int(m.group(1)), int(m.group(2))
+    if allow_24 and h == 24 and mi == 0:
+        return 1440
+    if h > 23 or mi > 59:
+        return None
+    return h * 60 + mi
+
+
+def _days(weekdays: Any) -> List[int]:
+    return list(weekdays) if weekdays else list(range(7))
+
+
+def _open_minutes_of_week(hours: List[Dict[str, Any]]) -> Set[int]:
+    """EN3 — the minutes of a week a place is open, read exactly as setup.locOpenNow reads
+    `hours`: a window whose close is not after its open runs past midnight into the next
+    weekday."""
+    out: Set[int] = set()
+    for w in hours:
+        o, c = _hhmm_minutes(w.get("open")), _hhmm_minutes(w.get("close"), allow_24=True)
+        if o is None or c is None or o == c:
+            continue
+        for d in _days(w.get("weekdays")):
+            base = d * 1440
+            if o < c:
+                out.update(range(base + o, base + c))
+            else:
+                out.update(range(base + o, base + 1440))
+                nxt = ((d + 1) % 7) * 1440
+                out.update(range(nxt, nxt + c))
+    return out
+
+
+def _row_minutes_of_week(weekdays: Any, start: Any, end: Any) -> Set[int]:
+    """The minutes of a week a schedule row is live, read as the runtime reads it
+    (setup.isCurrentTimeSlot + that day's weekday): no end = one hour; an end before the
+    start wraps inside the SAME weekday (the row's 02:00 belongs to its own day)."""
+    s = _hhmm_minutes(start)
+    e = _hhmm_minutes(end) if end else (s + 60 if s is not None else None)
+    if s is None or e is None:
+        return set()
+    out: Set[int] = set()
+    for d in _days(weekdays):
+        base = d * 1440
+        if e < s:
+            out.update(range(base + s, base + 1440))
+            out.update(range(base, base + e))
+        else:
+            out.update(range(base + s, base + min(e, 1440)))
+    return out
+
+
+def _validate_location_hours(template) -> List[str]:
+    """EN3 — `hours` / `closed_text` on a location.
+
+    A window the engine cannot read would leave a place open or shut at the wrong time
+    with no sign anywhere, so every malformed one is an error. A schedule row that only
+    ever puts someone (or a canvas) in a place while it is shut is legal but almost never
+    meant: a warning.
+    """
+    import warnings
+
+    errors: List[str] = []
+    open_sets: Dict[str, Set[int]] = {}
+    for li, l in enumerate(template.locations or []):
+        ctx = f"locations[{li}] '{l.id}'"
+        if l.closed_text and not l.hours:
+            errors.append(f"{ctx}: closed_text is set but hours is not")
+        if not l.hours:
+            continue
+        if not isinstance(l.hours, list):
+            errors.append(f"{ctx}: hours must be a list of {{weekdays, open, close}} tables")
+            continue
+        if l.is_container or l.offscreen:
+            errors.append(
+                f"{ctx}: hours on {'a container' if l.is_container else 'an offscreen'} "
+                f"location does nothing; there is no room passage to close"
+            )
+        bad = False
+        for wi, w in enumerate(l.hours):
+            wctx = f"{ctx}.hours[{wi}]"
+            if not isinstance(w, dict):
+                errors.append(f"{wctx} must be a table {{weekdays, open, close}}")
+                bad = True
+                continue
+            unknown = sorted(set(w) - {"weekdays", "open", "close"})
+            if unknown:
+                errors.append(f"{wctx} has unknown key(s) {unknown}; only weekdays, open, close")
+            wd = w.get("weekdays", [])
+            if not isinstance(wd, list) or any(
+                not isinstance(x, int) or isinstance(x, bool) or not 0 <= x <= 6 for x in wd
+            ):
+                errors.append(f"{wctx}.weekdays must be integers 0..6 (0 = Monday), got {wd!r}")
+                bad = True
+            o = _hhmm_minutes(w.get("open"))
+            c = _hhmm_minutes(w.get("close"), allow_24=True)
+            if o is None:
+                errors.append(f"{wctx}.open must be \"HH:MM\", got {w.get('open')!r}")
+            if c is None:
+                errors.append(
+                    f"{wctx}.close must be \"HH:MM\" (or \"24:00\"), got {w.get('close')!r}"
+                )
+            if o is not None and c is not None and o == c:
+                errors.append(f"{wctx}: open and close are both {w.get('open')}; the window is empty")
+            bad = bad or o is None or c is None
+        if not bad:
+            open_sets[l.id] = _open_minutes_of_week(l.hours)
+
+    def _warn_if_shut(where: str, loc: str, weekdays, start, end) -> None:
+        live = _row_minutes_of_week(weekdays, start, end)
+        if loc in open_sets and live and not (live & open_sets[loc]):
+            warnings.warn(
+                f"{where} puts it at '{loc}' only while '{loc}' is closed (its hours never "
+                f"overlap this row), so it can never be met there",
+                UserWarning,
+                stacklevel=3,
+            )
+
+    for ni, n in enumerate(template.npcs or []):
+        for si, sch in enumerate(getattr(n, "schedules", None) or []):
+            _warn_if_shut(f"npcs[{ni}] '{n.id}'.schedules[{si}]", sch.location,
+                          sch.weekdays, sch.start_time, sch.end_time)
+    for ci, c in enumerate(template.canvases or []):
+        trig = c.trigger
+        if not trig:
+            continue
+        for si, sch in enumerate(trig.schedules or []):
+            _warn_if_shut(f"canvases[{ci}] '{c.id}'.trigger.schedules[{si}]", trig.location,
+                          sch.weekdays, sch.start_time, sch.end_time)
+    return errors
+
+
+def _validate_hidden_places(template) -> List[str]:
+    """EN4 — `hidden_until = {flag}` on a location.
+
+    A place hidden behind a flag nothing can ever set stays invisible with no error
+    anywhere, so the flag must be a declared player flag. A room whose every destination
+    can be hidden and which has no "Leave" exit of its own can leave her with no way out
+    (LO: the empty list only loses its header) — a warning, because a scene may carry the
+    exit.
+    """
+    import warnings
+
+    errors: List[str] = []
+    declared = set(template.player.flag_keys or [])
+    hideable: Set[str] = set()
+    for li, l in enumerate(template.locations or []):
+        hu = l.hidden_until
+        if not hu:
+            continue
+        ctx = f"locations[{li}] '{l.id}'.hidden_until"
+        if not isinstance(hu, dict):
+            errors.append(f"{ctx} must be a table {{flag = \"<player flag>\"}}, got {hu!r}")
+            continue
+        unknown = sorted(set(hu) - {"flag"})
+        if unknown:
+            errors.append(f"{ctx} has unknown key(s) {unknown}; only flag")
+        flag = hu.get("flag")
+        if not isinstance(flag, str) or not flag:
+            errors.append(f"{ctx}.flag is required: the player flag that reveals the place")
+        elif flag not in declared:
+            errors.append(
+                f"{ctx}.flag '{flag}' is not a declared player flag (player.flag_keys); "
+                f"nothing could reveal the place"
+            )
+        if l.offscreen:
+            errors.append(f"{ctx}: an offscreen location is never listed; hidden_until does nothing")
+        hideable.add(l.id)
+
+    if hideable:
+        for l in template.locations or []:
+            if l.is_container or l.offscreen:
+                continue
+            dests = {x.id for x in template.locations if x.entry_from == l.id and not x.offscreen}
+            dests.update(d for d in (l.navigation_order or []) if d != l.id)
+            has_exit = bool(l.entry_from) and l.auto_exit
+            if dests and dests <= hideable and not has_exit:
+                warnings.warn(
+                    f"location '{l.id}' has no Leave exit and every place it lists "
+                    f"({sorted(dests)}) is hidden_until a flag: until one is found, its "
+                    f"page has no way out unless a scene there carries one",
+                    UserWarning,
+                    stacklevel=2,
+                )
+    return errors
+
+
+def _validate_show_traits(value: Any, ctx: str, errors: List[str]) -> List[str]:
+    if not isinstance(value, list) or not all(isinstance(k, str) and k.strip() for k in value):
+        errors.append(f"{ctx} must be a list of trait keys, got {value!r}")
+        return []
+    return list(value)
+
+
+def _validate_cast_traits(template) -> List[str]:
+    """EN7 — `[ui.cast_page] show_traits / trait_bands` and `[[npcs]] show_traits`.
+
+    A key no character carries renders nothing and says nothing, so it is an error. A
+    band on a trait no list shows, a hidden trait in a list, and a per-NPC list with no
+    cast page are all legal and all do nothing: warnings.
+    """
+    import warnings
+
+    errors: List[str] = []
+    cp = template.cast_page
+    hidden = {tl.key for tl in (template.trait_labels or []) if tl.hidden}
+    npc_traits = {n.id: set((n.core_traits or {}).keys()) for n in template.npcs or []}
+    any_npc_traits = set().union(*npc_traits.values()) if npc_traits else set()
+    shown: Set[str] = set()
+
+    if cp is not None:
+        page = _validate_show_traits(cp.show_traits, "[ui.cast_page] show_traits", errors)
+        for k in page:
+            if k not in any_npc_traits:
+                errors.append(f"[ui.cast_page] show_traits: no character has a core trait '{k}'")
+        shown.update(page)
+        bands = cp.trait_bands
+        if not isinstance(bands, dict):
+            errors.append(f"[ui.cast_page] trait_bands must be a table {{trait = [bands]}}, got {bands!r}")
+            bands = {}
+        for key, rows in bands.items():
+            bctx = f"[ui.cast_page] trait_bands.{key}"
+            if not isinstance(rows, list):
+                errors.append(f"{bctx} must be a list of {{min, max, text}} tables")
+                continue
+            for bi, b in enumerate(rows):
+                if not isinstance(b, dict):
+                    errors.append(f"{bctx}[{bi}] must be a table {{min, max, text}}")
+                    continue
+                unknown = sorted(set(b) - {"min", "max", "text"})
+                if unknown:
+                    errors.append(f"{bctx}[{bi}] has unknown key(s) {unknown}; only min, max, text")
+                if not isinstance(b.get("text"), str) or not b.get("text").strip():
+                    errors.append(f"{bctx}[{bi}].text is required: the word shown beside the number")
+                lo, hi = b.get("min"), b.get("max")
+                for name, v in (("min", lo), ("max", hi)):
+                    if v is not None and (isinstance(v, bool) or not isinstance(v, (int, float))):
+                        errors.append(f"{bctx}[{bi}].{name} must be a number, got {v!r}")
+                if (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+                        and not isinstance(lo, bool) and not isinstance(hi, bool) and lo > hi):
+                    errors.append(f"{bctx}[{bi}]: min {lo} is above max {hi}")
+
+    for n in template.npcs or []:
+        if not n.show_traits:
+            continue
+        own = _validate_show_traits(n.show_traits, f"npcs['{n.id}'].show_traits", errors)
+        for k in own:
+            if k not in npc_traits.get(n.id, set()):
+                errors.append(f"npcs['{n.id}'].show_traits: '{n.id}' has no core trait '{k}'")
+        shown.update(own)
+        if cp is None:
+            warnings.warn(
+                f"npcs['{n.id}'].show_traits does nothing: there is no [ui.cast_page]",
+                UserWarning, stacklevel=2,
+            )
+
+    if cp is not None and isinstance(cp.trait_bands, dict):
+        for key in cp.trait_bands:
+            if key not in shown:
+                warnings.warn(
+                    f"[ui.cast_page] trait_bands.{key}: no show_traits list names '{key}', "
+                    f"so the band never shows", UserWarning, stacklevel=2,
+                )
+    for key in sorted(shown & hidden):
+        warnings.warn(
+            f"show_traits names '{key}', which [[traits.labels]] marks hidden = true; "
+            f"a hidden trait never shows on the cast page", UserWarning, stacklevel=2,
+        )
+    return errors
+
+
+def _validate_decay_rest(template) -> List[str]:
+    """EN8 — `[[npcs]] trait_rest` and `decay_after_days`.
+
+    A rest point on a trait he does not have, or a wait that is not a whole number of
+    days, would silently do nothing or the wrong thing: errors. A rest point or a wait
+    with no trait_decay to act on is legal and inert: a warning.
+    """
+    import warnings
+
+    errors: List[str] = []
+    for n in template.npcs or []:
+        ctx = f"npcs['{n.id}']"
+        rest = n.trait_rest
+        if rest:
+            if not isinstance(rest, dict):
+                errors.append(f"{ctx}.trait_rest must be a table {{trait = value}}, got {rest!r}")
+            else:
+                for k, v in rest.items():
+                    if isinstance(v, bool) or not isinstance(v, (int, float)):
+                        errors.append(f"{ctx}.trait_rest.{k} must be a number, got {v!r}")
+                    if k not in (n.core_traits or {}):
+                        errors.append(f"{ctx}.trait_rest.{k}: '{n.id}' has no core trait '{k}'")
+                    elif k not in (n.trait_decay or {}):
+                        warnings.warn(
+                            f"{ctx}.trait_rest.{k} does nothing: '{k}' has no trait_decay, "
+                            f"so nothing moves it toward its rest point",
+                            UserWarning, stacklevel=2,
+                        )
+        wait = n.decay_after_days
+        if isinstance(wait, bool) or not isinstance(wait, int) or wait < 0:
+            errors.append(f"{ctx}.decay_after_days must be a whole number of days >= 0, got {wait!r}")
+        elif wait and not n.trait_decay:
+            warnings.warn(
+                f"{ctx}.decay_after_days does nothing: '{n.id}' has no trait_decay",
+                UserWarning, stacklevel=2,
+            )
+    return errors
+
+
+LOCATION_KINDS = ("thoroughfare", "destination")
+
+
+def _validate_location_kind(template) -> List[str]:
+    """EN10 — `[[locations]] kind`. Exact words only: a checker that reads "Thoroughfare"
+    or "hub" as a destination would judge the room by the wrong rule and say nothing."""
+    errors: List[str] = []
+    for li, l in enumerate(template.locations or []):
+        if l.kind is None or l.kind in LOCATION_KINDS:
+            continue
+        errors.append(
+            f"locations[{li}] '{l.id}'.kind must be \"thoroughfare\" or \"destination\", "
+            f"got {l.kind!r}" + ("; \"hub\" names a character's hub canvas, not a place"
+                                 if str(l.kind).strip().lower() == "hub" else "")
+        )
+    return errors
+
+
+def _is_whole_days(v: Any) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool) and v >= 1
+
+
+def _validate_step_consumption(template: GameTemplate) -> List[str]:
+    """EN1 — the checks for a step that is used only on its "yes".
+
+    Errors, not warnings: nothing in the importer rejects an unknown or misplaced
+    key, so a `consumes` on a canvas that did not opt in would build clean and do
+    nothing. One warning: an opted-in step with no choice that uses it up comes back
+    after every visit, which is legal but almost never meant.
+    """
+    errors: List[str] = []
+    for ci, c in enumerate(template.canvases or []):
+        trig = c.trigger
+        opted_in = bool(trig and trig.consume_on == "exit")
+        where = f"canvases[{ci}] '{c.id}'"
+        if trig and trig.consume_on is not None and trig.consume_on != "exit":
+            errors.append(
+                f"{where}: trigger.consume_on must be \"exit\" (got {trig.consume_on!r})"
+            )
+        if opted_in and trig.is_repeatable:
+            errors.append(
+                f"{where}: consume_on = \"exit\" needs is_repeatable = false — it "
+                f"changes when a ONE-TIME step is used up; a repeatable canvas is never used up"
+            )
+        if trig and trig.retry_after_days is not None:
+            if not opted_in:
+                errors.append(
+                    f"{where}: trigger.retry_after_days is read only with consume_on = \"exit\""
+                )
+            elif not _is_whole_days(trig.retry_after_days):
+                errors.append(
+                    f"{where}: trigger.retry_after_days must be a whole number of days >= 1 "
+                    f"(got {trig.retry_after_days!r})"
+                )
+        uses_up = False
+        for n in c.nodes or []:
+            for chi, ch in enumerate(n.exit_block.choices or []):
+                cwhere = f"{where} node '{n.id}' choice {chi} ({ch.text!r})"
+                marks = [k for k, on in (
+                    ("consumes", ch.consumes),
+                    ("final", ch.final),
+                    ("retry_after_days", ch.retry_after_days is not None),
+                ) if on]
+                if not marks:
+                    continue
+                if not opted_in:
+                    errors.append(
+                        f"{cwhere}: `{marks[0]}` is read only on a canvas whose trigger has "
+                        f"consume_on = \"exit\""
+                    )
+                    continue
+                if len(marks) > 1:
+                    errors.append(
+                        f"{cwhere}: set only one of consumes / final / retry_after_days "
+                        f"(got {', '.join(marks)})"
+                    )
+                if ch.retry_after_days is not None and not _is_whole_days(ch.retry_after_days):
+                    errors.append(
+                        f"{cwhere}: retry_after_days must be a whole number of days >= 1 "
+                        f"(got {ch.retry_after_days!r})"
+                    )
+                if ch.consumes or ch.final:
+                    uses_up = True
+        if opted_in and not uses_up:
+            import warnings as _w
+            _w.warn(
+                f"{where} has consume_on = \"exit\" but no choice with consumes or final — "
+                f"the step comes back after every visit and is never used up.",
+                UserWarning,
+                stacklevel=2,
+            )
     return errors
 
 
@@ -7163,7 +7810,9 @@ def _assemble_project_metadata(project, template):
     # for the goal-block renderer (setup.computeHintGoal).
     if template.trait_labels:
         project.metadata["trait_labels"] = {
-            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden}
+            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden,
+                     # EN5 — written only when false, so an existing game's labels are unchanged.
+                     **({"in_dump": False} if tl.in_dump is False else {})}
             for tl in template.trait_labels
         }
     if template.flag_labels:
@@ -7186,6 +7835,11 @@ def _assemble_project_metadata(project, template):
             "button_label": template.cast_page.button_label,
             "button_icon": template.cast_page.button_icon,
         }
+        # EN7 — only when set, so an existing cast page's metadata is unchanged.
+        if template.cast_page.show_traits:
+            project.metadata["cast_page"]["show_traits"] = list(template.cast_page.show_traits)
+        if template.cast_page.trait_bands:
+            project.metadata["cast_page"]["trait_bands"] = dict(template.cast_page.trait_bands)
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.
@@ -7261,6 +7915,16 @@ def _assemble_project_metadata(project, template):
             "eviction_flag": template.rent_eviction_flag,
             "currency_symbol": template.rent_currency_symbol,
         }
+        # EN2a — emitted only when used, so an unstaged game's metadata is unchanged.
+        if template.rent_stages:
+            project.metadata["rent_settings"]["stages"] = [
+                {"amount": st["amount"], "after_total_paid": st["after_total_paid"]}
+                for st in template.rent_stages
+            ]
+        if template.rent_stage_lines:
+            project.metadata["rent_settings"]["stage_lines"] = list(template.rent_stage_lines)
+        if template.rent_on_short:  # EN2b — only when set
+            project.metadata["rent_settings"]["on_short"] = template.rent_on_short
     # Store story_arc if defined (for narrative journal and help page)
     if template.story_arc:
         project.metadata["story_arc"] = {
@@ -7475,6 +8139,11 @@ def create_project_from_template(
     if template.rent_enabled and template.rent_eviction_mode == "flag_set":
         if template.rent_eviction_flag and template.rent_eviction_flag not in _player_flag_keys:
             _player_flag_keys.append(template.rent_eviction_flag)
+    if rent_carries(template) and RENT_CARRIED_FLAG not in _player_flag_keys:  # EN2b
+        _player_flag_keys.append(RENT_CARRIED_FLAG)
+    for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
+        if _cf not in _player_flag_keys:
+            _player_flag_keys.append(_cf)
 
     player = Character(
         project=project,
@@ -7551,12 +8220,18 @@ def create_project_from_template(
             npc.ai_behavior_config["relationship_options"] = n.relationship_options
         if n.trait_decay:
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
+        if n.trait_rest:  # EN8 — MIRRORED in game_graph.py
+            npc.ai_behavior_config["trait_rest"] = dict(n.trait_rest)
+        if n.decay_after_days:
+            npc.ai_behavior_config["decay_after_days"] = n.decay_after_days
         # E9/E10/E11: per-NPC arc_stages list (display names per stage value).
         if n.arc_stages:
             npc.ai_behavior_config["arc_stages"] = n.arc_stages
         # G: per-NPC cast-card tag line.
         if n.tags:
             npc.ai_behavior_config["tags"] = n.tags
+        if n.show_traits:  # EN7 — MIRRORED in game_graph.py
+            npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
         npc.save()
@@ -7583,12 +8258,22 @@ def create_project_from_template(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.hours:  # EN3 — MIRRORED in game_graph.py's location loop
+            loc.properties["hours"] = l.hours
+        if l.closed_text:
+            loc.properties["closed_text"] = l.closed_text
+        if l.hidden_until:  # EN4 — MIRRORED in game_graph.py's location loop
+            loc.properties["hidden_until"] = l.hidden_until
+        if l.kind is not None:  # EN10 — only when written; MIRRORED in game_graph.py
+            loc.properties["kind"] = l.kind
         if not l.auto_exit:
             # Transit stop — the author owns the way out (see TemplateLocation.auto_exit).
             loc.properties["auto_exit"] = False
         if l.costs:
             # int-coerce (TOML may give floats); the generator reads entry_costs.
             loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
+        if l.crossing_costs:  # EN11 — MIRRORED in game_graph.py
+            loc.properties["crossing_costs"] = {k: int(v) for k, v in l.crossing_costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         if l.description_variants:
@@ -7714,6 +8399,9 @@ def create_project_from_template(
                             # Engine reads requiresNpc from canvas metadata at
                             # runtime and AND-gates with all other conditions.
                             "requires_npc": c.trigger.requires_npc or None,
+                            # EN1 — opt-in step consumption (absent unless authored)
+                            "consume_on": c.trigger.consume_on or None,
+                            "retry_after_days": c.trigger.retry_after_days,
                             # Doc 69 Item 2 — Pattern C pre-substitution effects.
                             # Engine reads from canvas metadata + emits
                             # <<script>>setup.applyAndNotifyTrait(...)<</script>>
@@ -7847,6 +8535,13 @@ def create_project_from_template(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        # EN1 — the step decision (absent unless authored)
+                        if ch.consumes:
+                            ch_d["consumes"] = True
+                        if ch.final:
+                            ch_d["final"] = True
+                        if ch.retry_after_days is not None:
+                            ch_d["retry_after_days"] = ch.retry_after_days
                         if ch.rejection_node:
                             # Resolve rejection_node slug → UUID (same as nodeId)
                             rej_key = (
@@ -7955,6 +8650,33 @@ def create_project_from_template(
     }
 
 
+
+def closed_step_flags(template: "GameTemplate") -> List[str]:
+    """EN1 — the `<canvas>_closed` flag of every opt-in step that has a final no.
+
+    Declared on the player like the rent eviction flag, so a condition on it reads
+    false (not undefined) until the final no is clicked. Both writers call this —
+    create_project_from_template and game_graph.build_game_graph.
+    """
+    out: List[str] = []
+    for c in template.canvases or []:
+        if not (c.trigger and c.trigger.consume_on == "exit"):
+            continue
+        if any(ch.final for n in c.nodes for ch in (n.exit_block.choices or [])):
+            out.append(f"{c.id}_closed")
+    return out
+
+
+# EN2b — the flag a carried rent week sets. Fixed, like EN1's `<canvas>_closed`.
+RENT_CARRIED_FLAG = "rent_carried"
+
+
+def rent_carries(template: "GameTemplate") -> bool:
+    """EN2b — does a short rent week carry? Both writers register RENT_CARRIED_FLAG
+    on the player when it does, the way they register the eviction flag."""
+    return bool(template.rent_enabled and template.rent_on_short == "carry")
+
+
 def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
     d: Dict[str, Any] = {
         "type": eb.type or "location",
@@ -8012,6 +8734,9 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 **({"show_when_locked": True} if ch.show_when_locked else {}),
                 **({"locked_text": ch.locked_text} if ch.locked_text else {}),
                 **({"locked_text_threshold": ch.locked_text_threshold} if ch.locked_text_threshold else {}),
+                **({"consumes": True} if ch.consumes else {}),  # EN1
+                **({"final": True} if ch.final else {}),  # EN1
+                **({"retry_after_days": ch.retry_after_days} if ch.retry_after_days is not None else {}),  # EN1
                 **({"rejection_node": ch.rejection_node} if ch.rejection_node else {}),
                 **(
                     {

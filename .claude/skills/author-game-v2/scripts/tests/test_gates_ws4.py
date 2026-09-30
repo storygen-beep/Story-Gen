@@ -349,7 +349,7 @@ def test_person_must_be_there():
     g = game()
     g["npcs"][0]["schedules"][0]["weekdays"] = [0, 1, 2, 3, 4]
     p = problems(g)
-    assert any("does not put them at shed" in x and "Sat, Sun" in x for x in p), p
+    assert any("does not fully cover shed" in x and "Sat, Sun" in x for x in p), p   # CK8b wording
 
 
 def test_unearnable_meter_fails():

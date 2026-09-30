@@ -485,7 +485,7 @@ the player would ask why it has not happened yet:
 
 **That is the whole answer to "how does she get from no to yes".** The act simply is not on the menu
 yet, which is section B's silent 71%, and three times on the climb the game spends a scene letting
-her say *why not yet*, in her own voice. A no parks; it never locks (`the-arc.md` A14). In a
+her say *why not yet*, in her own voice. A no parks; only a labelled final no closes his path (`the-arc.md` A3). In a
 female-lead game, In Her Own Hands' `BRLaptopPorn` grows the same way on her own history: two
 categories at first, the rest opened by her dates and by how often she has watched (5, 10, 30).
 
@@ -527,16 +527,13 @@ games do the opposite: a refusal that exists at all is usually a bare link back 
 > deal: go with him · pay him off in stock · use the taser · push him off (only if she is fit enough)
 > · *"No way."*, which means a night in custody.
 
-**The default no is PARKED, and the game prints where to come back** (`the-arc.md` A3b). The price is
-real, and the door stays open: `course-of-temptation`'s best friend — *"You don't have to go any
-further, but if you want to then you can try again another night."* — with a live count of the days
-until she can (*"you need to wait N more days"*, the number filled in). In Her Own Hands offers the same: *"Excuse yourself
-to think more about it and say you'll be in touch."*
+**The default no is PARKED: the step comes back after a wait** (`the-arc.md` A3). In Her Own Hands
+offers the soft form in the scene itself: *"Excuse yourself to think more about it and say you'll be
+in touch."*
 
-**A counted no closes, and only when the closing is itself content and she is warned** (A3). In Her
-Own Hands labels that answer before she clicks it — *"Say 'fuck you' and leave (ends path)"* — and
-the route closes. Shady Deals' custody is counted too: the price rises every time (*"Next time,
-prepare for penalty."*).
+**A final no closes his path, and only on a button that says so** (A3). In Her Own Hands labels that
+answer before she clicks it — *"Say 'fuck you' and leave (ends path)"* — and the route closes; the
+man stays in the world.
 
 Being refused is content too (`course-of-temptation`: friendship −50, arousal −100, *"That
 certainly backfired."*). **A "no" that returns the player to an unchanged menu was never a door.**
@@ -575,7 +572,7 @@ this game should be seriously toned down"*), and the field's answer is that the 
 next to the choice before it is clicked** — 314 rendered `skillcheck` labels. Our engine has no
 per-choice roll anyway: the mechanism is `rejection_node`, a locked choice that stays clickable and
 routes to its own failure node with its own price (`engine.md` §36, and it is used by **zero**
-games today). **State the bar with `locked_text_threshold`; never fail silently.**
+games today). **A number bar is printed by the engine (`engine.md` §15); never fail silently.**
 
 Still **not a gate** — three games is not a field, the same bar that stopped a gate last cycle.
 (`~/Documents/Female_PC_Craft_Study_20260823/findings_J_players.md` §4)
@@ -628,7 +625,7 @@ The field's refusal has exactly two shapes and we ship a third that it does not
   *already done* (18%), a time (5%), a place (2%). Price is the field's answer; wayfinding is not.
 - **2.26% show a dead label with nothing beside it**, and nearly all of that is settings and
   pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits` "Previous"/"Next" greyed at
-  the ends. **That third shape is the one our engine renders by default** (`engine.md` §15).
+  the ends. **That third shape is what our engine renders for a story lock with no line** (`engine.md` §15).
 
 **The shape, measured:** a refusal stands **where the action stood**, runs about **nine words**,
 **names a handle**, and is **marked as the game's own voice**. Typography is a binary house
@@ -641,8 +638,10 @@ the row holds an italic, parenthesised line saying where to find her instead; pa
 same row becomes a *different* link. The refusal occupies the row the link would have used, so the
 roster never reflows and the eye learns one shape. Three states, one row, no dead end at any of them.
 
-**Ours:** `locked_text` (the reason), `locked_text_threshold` (the bar, delivered on click —
-`engine.md` §23), or `rejection_node` (a live link to a real failure node — §36, still used by zero
+**Ours** *(LO decided, D2)*: a pure number lock needs nothing — the engine prints the need and her
+value (`engine.md` §15), and a `locked_text` there doubles it. A story lock, mixed ones included (the
+suffix never names a flag), takes `locked_text` (the reason),
+`locked_text_threshold` (the bar, on click — `engine.md` §23), or `rejection_node` (a live link to a real failure node — §36, still used by zero
 games). A choice gated only by `costs` needs none of them: the engine appends the requirement itself
 (`engine.md` §27). Gate: **"a locked door says why"**.
 
@@ -1084,7 +1083,7 @@ is a gate (`every authored node is reachable`).
 | **Gate 29 · a need shuts a door** | every entry in `board.needs[]` is read by at least one condition somewhere in the game. `the-meters.md` M9 |
 | **Gate 30 · the walk-in floor** | a location with at least one repeatable solo activity **and** at least one NPC schedule row carries at least one `substitutions` rule. R3 |
 | **Gate 37 · a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs`. Mirrors the engine's own `has_unconditional_choice`, so the gate and the runtime cannot disagree. R7 |
-| **Gate 42 · a locked door says why** | every choice with `show_when_locked = true` carries a `locked_text`, a `locked_text_threshold` or a `rejection_node`. A choice gated only by `costs` is exempt — the engine writes that message itself (`engine.md` §27). R5c |
+| **Gate 42 · a locked door says why** | a number lock carries no `locked_text` (the engine prints its need); every other `show_when_locked` choice carries a `locked_text`, a `locked_text_threshold` or a `rejection_node`. A choice gated only by `costs` is exempt — the engine writes that message itself (`engine.md` §27). R5c |
 | **Lint · noun-only buttons** | the share of room-list labels that open on a determiner and name no verb. A number, not a bar — `the-voice.md` R1 |
 | **Lint · the browse share** | the share of repeatable room canvases whose entire click changes nothing but the clock |
 | **Gate 46 · she can say no** | at least one choice in the whole game declines an offer. Fails only on zero — the rate is printed and never judged. R5b's existence half; its quality half stays ungated |
@@ -1093,7 +1092,7 @@ is a gate (`every authored node is reachable`).
 | **Gate 48 · every authored node is reachable** | no node outside a canvas's entry has zero inbound edges. `world reachable` one level down: that asks whether a ROOM can be walked to, this whether a SCREEN can be opened. R9 |
 | **Lint · the act between the click and the number** | location exits that fire effects and show no screen, with the game-time they burn. A LIST, never a score — the field runs 0–68% — R9 |
 
-**What a tired author writes to satisfy gate 42, checked before it landed.** The answer is
+**What a tired author writes to satisfy gate 42 on a story lock, checked before it landed.** The answer is
 `locked_text = "Not yet"` — a bare negative with no handle. That is a real shape in the field:
 13% of its spoken refusals are exactly that, and it is still strictly better than the mute label,
 which is 2.26% and almost entirely UI chrome. **The fig leaf here produces something the field

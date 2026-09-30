@@ -1,0 +1,127 @@
+"""PRD v2 DC9b · H31: shape.py's "a step's gate can be reached". A step may declare `raises`; the
+board may declare `daily_raises`. A gte/gt gate on a trait the ledger raises FAILS when the steps
+before it (same person, lower n, plus SP3 dependencies, transitively) cannot reach it."""
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
+import shape  # noqa: E402
+
+ROW = "a step's gate can be reached"
+
+
+def verdict(state):
+    for name, ok, head, detail in shape.check(state, False)[0]:
+        if name == ROW:
+            return ok, detail
+    raise AssertionError("row missing")
+
+
+def step(n, raises=None, gate=None):
+    s = {"n": n, "canvas": f"c{n}", "where": "bar", "when": {"days": ["Mon"], "from": "18:00", "to": "20:00"}}
+    if raises:
+        s["raises"] = raises
+    if gate:
+        s["gate"] = gate
+    return s
+
+
+def ledger(a_steps, b_steps=None, deps=None, daily=None):
+    chars = [{"id": "npc_a", "ladder": {"counter": "a_stage", "steps": a_steps}}]
+    if b_steps:
+        chars.append({"id": "npc_b", "ladder": {"counter": "b_stage", "steps": b_steps}})
+    board = {"characters": chars}
+    if daily:
+        board["daily_raises"] = daily
+    return {"phase": "idea", "board": board, "dependencies": deps or []}
+
+
+def gate(v, op="gte"):
+    return [{"trait": "nerve", "op": op, "value": v}]
+
+
+def test_earlier_raises_reach_the_gate():
+    ok, _ = verdict(ledger([step(1, {"nerve": 5}), step(2, {"nerve": 5}), step(3, gate=gate(10))]))
+    assert ok is True
+
+
+def test_short_of_the_gate_fails():
+    ok, detail = verdict(ledger([step(1, {"nerve": 5}), step(2, gate=gate(10))]))
+    assert ok is False and "reach 5" in detail[0]
+
+
+def test_gt_needs_more_than_equal():
+    ok, _ = verdict(ledger([step(1, {"nerve": 10}), step(2, gate=gate(10, "gt"))]))
+    assert ok is False
+
+
+def test_a_daily_raise_makes_it_reachable():
+    ok, _ = verdict(ledger([step(1, {"nerve": 1}), step(2, gate=gate(50))], daily={"nerve": 2}))
+    assert ok is True
+
+
+def test_a_repeatable_raise_makes_it_reachable():
+    st = ledger([step(1, {"nerve": 1}), step(2, gate=gate(50))])
+    st["board"]["repeat_raises"] = {"nerve": 1}
+    assert verdict(st)[0] is True
+
+
+def test_the_starting_value_counts():
+    st = ledger([step(1, {"nerve": 2}), step(2, gate=[{"trait": "nerve", "op": "gte", "value": 10,
+                                                        "npc": "npc_a"}])])
+    st["board"]["characters"][0]["meters"] = {"nerve": {"type": "t", "min": 0, "max": 100, "start": 8}}
+    assert verdict(st)[0] is True
+    st["board"]["characters"][0]["meters"]["nerve"] = {"type": "t", "min": 0, "max": 100}
+    assert verdict(st)[0] is False
+
+
+def test_a_gate_with_npc_counts_only_his_raises():
+    deps = [{"from": {"npc": "npc_b", "step": 1}, "needs": {"npc": "npc_a", "step": 1}}]
+    b = [step(1, gate=[{"trait": "nerve", "op": "gte", "value": 5, "npc": "npc_b"}])]
+    ok, _ = verdict(ledger([step(1, {"nerve": 5})], b, deps=deps))
+    assert ok is False
+    b[0]["gate"][0].pop("npc")
+    assert verdict(ledger([step(1, {"nerve": 5})], b, deps=deps))[0] is True
+
+
+def test_bad_input_is_listed_never_a_crash():
+    ok, detail = verdict(ledger([step(1, {"nerve": "lots"}), step(2, gate=gate(1))]))
+    assert ok is False and any("not a number" in d for d in detail)
+    st = ledger([step(1), step(2, gate=gate(1))])
+    st["board"]["characters"][0]["ladder"]["steps"][0]["raises"] = ["nerve", 5]
+    ok, detail = verdict(st)
+    assert ok is False and any("must be a table" in d for d in detail)
+    st = ledger([step("x", {"nerve": 5}), step(2, gate=gate(1))])
+    ok, detail = verdict(st)
+    assert ok is False and any("`n` is not a number" in d for d in detail)
+
+
+def test_a_numeric_string_n_is_read():
+    ok, _ = verdict(ledger([step("1", {"nerve": 5}), step("2", gate=gate(5))]))
+    assert ok is True
+
+
+def test_a_dependency_counts_its_steps():
+    deps = [{"from": {"npc": "npc_b", "step": 1}, "needs": {"npc": "npc_a", "step": 2}}]
+    ok, _ = verdict(ledger([step(1, {"nerve": 6}), step(2, {"nerve": 6})],
+                           [step(1, gate=gate(12))], deps=deps))
+    assert ok is True
+
+
+def test_a_trait_nothing_in_the_ledger_raises_is_not_judged():
+    ok, _ = verdict(ledger([step(1, {"lust": 3}), step(2, gate=[{"trait": "money", "op": "gte", "value": 99}])]))
+    assert ok is None
+
+
+def test_no_raises_anywhere_is_na():
+    assert verdict(ledger([step(1), step(2, gate=gate(10))]))[0] is None
+
+
+def test_her_starting_value_comes_from_player_start():
+    """Her own trait (a gate with no npc) starts from board.player_start, else 0."""
+    st = ledger([step(1, {"nerve": 5}), step(2, gate=gate(20))])
+    ok, detail = verdict(st)
+    assert ok is False and "reach 5" in detail[0]
+    st["board"]["player_start"] = {"nerve": 20}
+    assert verdict(st)[0] is True

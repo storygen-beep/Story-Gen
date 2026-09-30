@@ -1,221 +1,73 @@
 # The Want — <game title>
 
-> Fill every field. Keep the whole thing to one page; longer means vaguer.
-> Doctrine and the reasoning behind each field: `references/the-want.md`.
+> One page, five parts. Doctrine: `references/the-want.md`.
 > **Re-read this before every release.** Bump `want.last_read_at_release` in `v2_state.json`.
+> The detail tables live later: the crude words per rung on SP2, rung numbers, needs and the map shape on
+> the board (`templates/board.toml`), and the fantasy and the promise on the idea page (`templates/idea.md`).
 
 ---
 
-## 0. The fantasy — on the idea page
-
-The fantasy, the model to beat, the promise and the moment kinds are written on the next page,
-`templates/idea.md`, once this one is done. Doctrine: `references/the-want.md` §0.
-
-## 1. Who the player is — answered BEFORE she is described
-
-> Doctrine and the measurements: `references/the-want.md` §1.
-
-**Who is the player?** `female` · `male` · `picked at start`
-
-> Default **`female`**, and the reason travels with it so it stays a choice rather than a habit. In
-> ~22,600 corpus comments, **49 ask for a female lead against 11 opposed**, and the opposed get
-> argued down. `female 4 of 30` in the top ranks is a **supply** figure, not a verdict — one player
-> counted the tags at 44 female to 100 male. The strongest practical case is a player's own: *"as a
-> guy I like to play female mc since we can get to the spicy part quicker."*
-
-**Written character, or blank slate?** `written` · `blank`
-
-> The field runs **19 blank to 10 written**, and blank carries **80.4%** of the top-30's engagement.
-> ⚠️ `written`
-> is a legitimate answer — it is what real-porn media and a named cast want — but write it down.
-
-**What does the player choose about her at minute zero?** <the start choice, or `none`>
-
-> **Choosing matters, and so does the premise.** `freedom` (25.9%) is the largest thing the male-heavy
-> top 30 is loved for. For a female lead, players name the premise too: her first year away from
-> home, a crew she has to run, a life she has to pay for on her own. Give her both: a premise in §0, and a choice here.
->
-> **A memory, not a slider.** Do not build a stat screen. Ask her something the scene is already
-> asking — the answer reveals what she did before — and set a flag from it. See §3: what the flag
-> buys is *reach*.
->
-> ⚠️ **Additive only.** Every rung the choice touches keeps its original version behind
-> `<flag> is_false`. A start choice that takes content away is the version players punish, and a save
-> made before it shipped must read exactly what it read yesterday.
-
-Record all three in `v2_state.json` under `want.player`, with the start choice's flags — the gate
-**"the start choice is read"** checks the game against that declaration and reports `n/a` if it is
-missing, which is not a pass.
-
-> **A note on this file's own pronouns.** Everything below is written `she/her` because that is the
-> default above and the measured guidance in §3 is specific to it. **If you declared otherwise, swap
-> them as you fill it in** — the pronoun is downstream of the declaration, never the other way round.
-
-## 1b. Who she is
+## 1. Who she is
 
 <Her situation at minute zero. Concrete: a job, a debt, a room, a reputation.>
 
+**The places she knows:** <name each> → `want.places[] = [{id, name}]`, so `--words` reads them as names.
+
 **What she has to lose:** <the thing that makes the first transgression cost something>
 
-**What holds her here:** <the thing that keeps her in the situation the game is about. Whatever
-shape you pick, give it a FACE and a DATE — a hold with neither is a mood. Record the shape in
-`v2_state.json` as `want.hold_kind`.>
+**The player:** `female` · `male` · `picked` — `written` · `blank` — start choice: <what she is asked at
+minute zero, or `none`>. Record in `want.player`, with the start choice's flags in
+`want.player.start_choice` (`references/the-want.md` §1: the default and the evidence).
 
-⚠️ **Do not default to the bill.** Measured across 23 female-lead sandboxes
-(`~/Documents/Female_Hold_Study_20260904/`), a recurring money demand is **4 of 23** and is the
-field's *fourth* most common hold. Pick from what the field actually uses — the count is how
-often, never how good:
+## 2. What holds her
 
-- [ ] `ambition` — **5 of 23, the largest.** She picked the thing herself and the world charges
-      for it: the job, the name, the house she wants, and a price the world names
-- [ ] `bill` — **4 of 23.** A recurring money demand with a collector and a date.
-      `the-economy.md` R3 owns the mechanism, and §4's collector rule applies
-- [ ] `order` — **3 of 23.** An institution, a sentence or a mission. Somebody with authority
-      decides what she may do next
-- [ ] `body` — **3 of 23.** What she is turning into, and cannot stop
-- [ ] `subsistence` — **3 of 23.** The place will not feed her. Not a debt: a need
-- [ ] `appetite` — **2 of 23.** No hold at all, on purpose. One of the two says so in its own
-      opening
-- [ ] `job` · `erosion` · `displacement` — **1 each.** A workplace and the man in it · she starts
-      with everything and it goes · she is a stranger here
+<The hold, in her nouns, with a face and a moment it comes due.>
 
-⚠️ **These are LEDGER KEYS, not player words.** `subsistence`, `erosion` and `displacement` are
-three of the words `gates.py --words` flags as absent from all 27 field games. They belong in
-`want.hold_kind` and nowhere else — never in a room name, a button label or a line of prose.
-`register.md`: the examples are the register.
+Money is written in the currency, house default `$`; no real-world currency in the prose
+(`references/the-economy.md` R7). Every number on this page agrees with every other — one span is never said two
+ways — and the reader checks it.
 
-<Then write it in her nouns, one line.>
+**Hold kind:** `ambition` · `bill` · `order` · `body` · `subsistence` · `appetite` · `job` · `erosion` ·
+`displacement` → `want.hold_kind` (counts in `references/the-want.md` §1b).
 
-## 2. The appetite — where she lands, not where she starts
+The hold and the fantasy shape (idea page) are **separate choices**. `order`, `job` and `displacement` fit
+any shape: an order can drive a fall by need, a job can drive a rise by want. These are ledger keys, never
+player words.
 
-<What she wants, phrased so it can never be finished.>
+## 3. What she wants
 
-⚠️ **Do not copy the line below. It is a SHAPE, not an answer.** Write hers, in her nouns, from
-§1b's hold.
+<What she wants, phrased so it can never be finished: where she lands, not where she starts.>
 
-- ✅ shape: an appetite the world can always supply one more of, stated in the vocabulary of the
-  place she is actually standing in
-- ❌ "get revenge on X" — that completes, and then there is nothing left to want
+**The charge:** reversal · taboo · transformation → `want.charge` (`references/the-want.md` §4).
 
-**Where the hold stops being the reason:** <the moment she still does it and the reason has changed —
-§4's Transformation charge, stated as a moment>
+## 4. How she climbs
 
-## 3. What she is becoming — as ACCESS
+**Early:** <what she will do, and where, near the bottom — in words>
+**Late:** <what she will do, and where, near the top — in words>
 
-**Bottom:** <what she can do, in which places, at zero>
-**Top:** <what she can do, in which places, at the ceiling>
+No numbers here. Tiers and rung values are set on the board (`references/the-board.md` §3b).
 
-### The ascent tiers
+## 5. The people
 
-Three or four ratcheting tiers, each a *different kind* of going-further. One
-undifferentiated "corruption" hands every player the same ladder; several tiers let a player
-who doesn't want one still climb another. Rungs at **15 / 35 / 55 / 75**.
+| person | age | what she wants from him | what he visibly wants, each visit | what he keeps score of |
+|---|---|---|---|---|
+| `npc_<id>` | | | | |
 
-| tier key | what going further means on this axis | rung 15 | rung 35 | rung 55 | rung 75 |
-|---|---|---|---|---|---|
-| `<tier_1>` | | | | | |
-| `<tier_2>` | | | | | |
-| `<tier_3>` | | | | | |
-
-**Counterweight (optional):** `<key>` — <what it protects, and what spends it>
-
-**What does release 41 add?** <answer it against a named tier above, in one line. Asked HERE and
-not of §2: the tiers are what still gate content that far out — 1,336 rung-gated sites in the
-reference game against 57 conditions that read its rent.>
-
-## 4. The charge
-
-Pick and name it. "It's hot" is the absence of a charge, not one.
-
-- [ ] **Reversal** — <who has power over her, and how it flips>
-- [ ] **Taboo** — <what the relationship itself transgresses>
-- [ ] **Transformation** — <what she becomes that she'd not have recognised>
-
-## 5. The world
-
-Answered **here**, before a single character exists — because the cast is derived from the world and
-not the other way round. Deriving the map from the cast is circular: the premise fixes the cast, the
-cast fixes the map, and a household returns a house every time. `references/the-map.md` R0.
-
-**Where does this happen?** <the ground the whole game sits on — a town, a site, a street, a compound>
-
-**What is outside the door she wakes up behind?** <what she crosses to get anywhere. If the answer is
-"nothing", the world can only ever recycle its own interior and it has no renewable source of new
-people.>
-
-**How far can she get from it, and what stops her?** <distance, money, time, permission>
-
-**Which shape is this?** — pick one, and it goes in `board.map.archetype`:
-
-- [ ] `nested_zones` — district → venue → room. A town or campus *plus* a home. **The default to beat.**
-- [ ] `two_hub` — two strong places joined by a commute
-- [ ] `map_hotspots` — a drawn map with clickable districts, 10+ zones
-- [ ] `street_mesh` — named streets listing their neighbours
-- [ ] `time_slot` — no geography at all; a scripted Morning → Work → Evening chain
-
-**What does her body need here, and what stops when it goes unmet?** <sleep · eat · wash · plus
-whatever the premise adds. Each one names the thing it SHUTS — *filthy means she will not go out*,
-*broke means the bus is walking*. A need that shuts nothing is a chore, and a game whose anchor room
-is a kitchen shipped with no food and no bed because nothing ever asked this.
-`references/the-meters.md` M8.>
-
-**How alive?** <tight slice — only what the content needs · living world — ambient traffic and
-routines she did not trigger. A budget fork, not a quality dial. For a sandbox, lean alive.>
-
-## 6. Why *this* person
-
-One line each — not their plot role. **Why she wants them, or why being wanted by them lands.**
-A character with no line here has no reason to exist: cut them, or write it.
-
-| character | why they are wanted |
-|---|---|
-| `npc_<id>` | |
-| `npc_<id>` | |
-
-The companion, the pressure-man and her face are on the idea page (`templates/idea.md`).
-
-## 7. Register
-
-- **`narration_person`** = `second` — declared once, **immutable** after the first release.
-- **Crude-vocabulary ceiling** — write the actual words, per character, per tier. A ceiling
-  described abstractly gets written around.
-
-| character | tier 1 | tier 2 | tier 3 |
-|---|---|---|---|
-| `npc_<id>` | | | |
-
-- **Where the crude register lives:** <name the repeatable surfaces>
-
-  This is the correction the whole skill exists for. The measured failure wrote its explicit
-  register only into scenes the player sees once, and wrote its fifty-times-replayed loops as
-  literary character study.
+Every person is 18 or older, and the age is written (`shape.py` fails a missing one). What he keeps: a step
+counter + memory flags, Want + Warmth, or Want + Power (`references/the-meters.md` W1); LO approves each.
+Record as `want.cast[] = {id, age, keeps}`, and what she wants from him as `want.why_this_person`.
 
 ---
 
-## The checks — answer out loud before leaving this file
+## Before you leave this page
 
-1. **What does release 41 add?** (ask it of a named §3 tier. If no tier can answer, the tier is
-   decorative)
-2. **What can she reach at the top that she cannot at the bottom?** (the ascent, §3)
-3. **Which character would a player miss if deleted, and why?** (the product, §6)
-4. **Which repeatable surface carries the crudest writing in the game?** (§7 — and if the
-   answer is a one-time scene, the game is already cold)
-
-5. **Run the vocabulary check and read what it prints.** Not a judgement call, and not optional:
+1. What can she reach at the top that she cannot at the bottom? (§4)
+2. Which person would a player miss if deleted, and what does he want back? (§5)
+3. Run the vocabulary check and read the list — a list, never a score:
 
    ```
    python3 scripts/gates.py --words games/<slug>/WANT.md
    ```
 
-   A list, never a score. This page is where the game's nouns get chosen — its rooms, its work,
-   its objects, its meters — so it is the cheapest place to catch a word the player does not
-   already own. Catching one after the prose exists means renaming things.
-   `references/the-want.md`, "The test before you leave this file".
-
-6. **Is the idea page next?** The fantasy, the promise and the people who carry it are written
-   there (`templates/idea.md`), once this page is done.
-
----
-
-**Then:** create `games/<slug>/v2_state.json` with `phase = "want"` per `references/state.md`,
-and move to `templates/idea.md`.
+**Then:** create `games/<slug>/v2_state.json` with `phase = "want"` per `references/state.md`, and move to
+`templates/idea.md`.

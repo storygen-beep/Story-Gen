@@ -879,6 +879,8 @@ class TweeComprehensiveGeneratorV2:
         # rather than a field on $npcs, deliberately: $npcs is snapshotted into every
         # history moment, which is the same reason `description` is popped below.
         npc_tags_map = {}
+        # EN7: slug → [trait keys] this character's cast card shows on top of the page's.
+        npc_show_traits_map = {}
         # Phase A (2026-05-14): slug-keyed NPC schedule registry. Engine
         # consults this first in setup.getNpcLocation(); falls back to
         # canvas-derived presence when an NPC has no declared schedule.
@@ -923,6 +925,9 @@ class TweeComprehensiveGeneratorV2:
                     "customizable": ai_config.get("customizable", False),
                     "relationship_options": ai_config.get("relationship_options", []),
                     "trait_decay": ai_config.get("trait_decay", {}),
+                    # EN8 — config, popped into setup below like trait_decay.
+                    "trait_rest": ai_config.get("trait_rest", {}),
+                    "decay_after_days": ai_config.get("decay_after_days", 0),
                 }
                 # Track NPC portrait for file copying
                 npc_portrait = ai_config.get("portrait", "")
@@ -950,6 +955,10 @@ class TweeComprehensiveGeneratorV2:
                 tags_for_npc = ai_config.get("tags") or []
                 if tags_for_npc and slug:
                     npc_tags_map[slug] = list(tags_for_npc)
+                # EN7: his own cast-card traits, slug-keyed like tags.
+                show_for_npc = ai_config.get("show_traits") or []
+                if show_for_npc and slug:
+                    npc_show_traits_map[slug] = list(show_for_npc)
                 # Phase A (2026-05-14): per-NPC schedule registry, slug-keyed.
                 # Consumed by setup.getNpcLocation() at runtime. Schedules with no
                 # entries leave the NPC un-keyed → getNpcLocation falls back to
@@ -1004,6 +1013,7 @@ class TweeComprehensiveGeneratorV2:
             hidden_npcs_map = {}
             npc_arc_stages_map = {}
             npc_tags_map = {}
+            npc_show_traits_map = {}
             npc_schedules_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
@@ -1016,6 +1026,7 @@ class TweeComprehensiveGeneratorV2:
         # G: slug-keyed cast-card tag registry. Empty when no NPC declares `tags`
         # — the cast card checks length before rendering the line.
         self.npc_tags_map = npc_tags_map
+        self.npc_show_traits_map = npc_show_traits_map
         # Phase A (2026-05-14): slug-keyed schedule registry. Empty when no
         # NPC has declared schedules — engine.getNpcLocation falls back to
         # canvas-derived presence for those NPCs.
@@ -1038,6 +1049,16 @@ class TweeComprehensiveGeneratorV2:
                 "entry_conditions": loc_props.get("entry_conditions", {}),
                 "blocked_message": loc_props.get("blocked_message", ""),
             }
+            # EN3 — opening hours, read by setup.locOpenNow. Absent, not empty, when
+            # unauthored, so a game without hours has the payload it had before.
+            if loc_props.get("hours"):
+                locations_map[loc_slug]["hours"] = loc_props["hours"]
+            # EN11 — an area's toll, read by setup.crossingCostsFor. Absent when unauthored.
+            if loc_props.get("crossing_costs"):
+                locations_map[loc_slug]["crossing_costs"] = loc_props["crossing_costs"]
+            # EN4 — read by setup.locFound. Absent when unauthored, like `hours`.
+            if loc_props.get("hidden_until"):
+                locations_map[loc_slug]["hidden_until"] = loc_props["hidden_until"]
             # THE DOOR — the threshold screen's own data, with every option's target
             # resolved to a passage name HERE (see _door_for_payload). Fed by BOTH
             # importer write-outs (create_project_from_template and
@@ -1068,6 +1089,8 @@ class TweeComprehensiveGeneratorV2:
         # dead key in every save of every game — including the games that never set one.
         npc_map_for_json = {}
         npc_trait_decay_config = {}  # {npc_uuid: {trait: decay_per_day}}
+        npc_trait_rest_config = {}  # EN8 — {npc_uuid: {trait: rest}}
+        npc_decay_after_days_config = {}  # EN8 — {npc_uuid: days}
         for uuid, data in npc_map.items():
             entry = dict(data)
             entry.pop("customizable", None)
@@ -1078,9 +1101,17 @@ class TweeComprehensiveGeneratorV2:
             td = entry.pop("trait_decay", None)
             if td:
                 npc_trait_decay_config[uuid] = td
+            tr = entry.pop("trait_rest", None)
+            if tr:
+                npc_trait_rest_config[uuid] = tr
+            wait = entry.pop("decay_after_days", None)
+            if wait:
+                npc_decay_after_days_config[uuid] = wait
             npc_map_for_json[uuid] = entry
         npc_map_json = json.dumps(npc_map_for_json)
         self.npc_trait_decay_config = npc_trait_decay_config
+        self.npc_trait_rest_config = npc_trait_rest_config
+        self.npc_decay_after_days_config = npc_decay_after_days_config
         npc_slug_map_json = json.dumps(npc_slug_map)
         hidden_npcs_json = json.dumps(hidden_npcs_map)
 
@@ -1179,6 +1210,13 @@ class TweeComprehensiveGeneratorV2:
         # dollars — and it was the screen the whole economy hangs off. Default stays "$"
         # so no existing build moves.
         self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"
+        # EN2a — staged rent. Absent in every game that does not declare `stages`, and
+        # then nothing below changes: the fixed setup.rent_amount is read as before.
+        self.rent_stages = rent_settings.get("stages") or []
+        self.rent_stage_lines = rent_settings.get("stage_lines") or []
+        # EN2b — a short week carried to the next instead of warned and evicted. Absent
+        # (every game before EN2b) = the grace warning, then eviction_mode, as before.
+        self.rent_carries = rent_settings.get("on_short") == "carry"
 
         # Passes (recurring time-limited purchases)
         self.passes = (self.project.metadata or {}).get("passes", [])
@@ -1217,6 +1255,13 @@ class TweeComprehensiveGeneratorV2:
         self.hidden_trait_keys = [
             k for k, v in self.trait_labels.items()
             if isinstance(v, dict) and v.get("hidden")
+        ]
+        # EN5 — what the sidebar's auto Traits dump skips: every hidden key plus every
+        # `in_dump = false` key. Only the dump reads it; the Stats page and npc_panel keep
+        # hiddenTraits, so a banded meter kept out of the dump is still named elsewhere.
+        self.dump_skip_keys = [
+            k for k, v in self.trait_labels.items()
+            if isinstance(v, dict) and (v.get("hidden") or v.get("in_dump") is False)
         ]
         # Pattern 2: stage_setter_canvases — runtime index mapping
         # (npc_slug, stage_value) → canvas_id for branch-inside-shell transitions
@@ -1481,12 +1526,26 @@ class TweeComprehensiveGeneratorV2:
         }
         # Optional systems. Each one is the case the backfill exists for: a game
         # that ships without it and turns it on later.
+        if self._has_consume_on():
+            # EN1 — per-step records; an absent entry for a fired step reads as used up.
+            game_state_init["canvas_state"] = {}
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
                 "warnings": 0,
                 "is_due": False,
             }
+            if self.rent_stages:
+                # EN2a — what she has paid in all, and the stage it bought. An old save
+                # gets these from the :passagestart backfill as 0, so it restarts at the
+                # first stage.
+                game_state_init["rent_state"].update(
+                    {"total_paid": 0, "stage": 0, "stage_changed": False}
+                )
+            if self.rent_carries:
+                # EN2b — what is owed on top of next week's rent, and what she paid the
+                # week she came up short. An old save backfills both as 0.
+                game_state_init["rent_state"].update({"owed": 0, "short_paid": 0})
         if self.passes:
             game_state_init["passes"] = {}
         if self.items:
@@ -3383,7 +3442,7 @@ setup.rent_enabled = {"true" if self.rent_enabled else "false"};
 {f'setup.rent_text = {json.dumps(self.rent_text)};' if self.rent_enabled else ''}
 {f'setup.rent_eviction_mode = "{self.rent_eviction_mode}";' if self.rent_enabled else ''}
 {f'setup.rent_eviction_flag = "{self.rent_eviction_flag}";' if self.rent_enabled else ''}
-{f'setup.rent_currency_symbol = {json.dumps(self.rent_currency_symbol)};' if self.rent_enabled else ''}
+{f'setup.rent_currency_symbol = {json.dumps(self.rent_currency_symbol)};' if self.rent_enabled else ''}{self._rent_stages_js()}{self._rent_carry_js()}
 setup.sidebar_items = {sidebar_items_json};
 setup.player_portrait_enabled = {"true" if self.player_portrait_enabled else "false"};
 setup.player_portrait = {player_portrait_json};
@@ -3398,7 +3457,7 @@ for (var _ii = 0; _ii < setup.items.length; _ii++) {{
     setup.items_map[setup.items[_ii].id] = setup.items[_ii];
 }}
 setup.npc_trait_decay = {json.dumps(self.npc_trait_decay_config)};
-setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};
+setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};{self._decay_rest_js()}
 setup.daily_tick = {json.dumps(self.daily_tick)};
 setup.quests_data = {json.dumps(self.quests)};
 setup.corruption_tiers = {json.dumps(self.corruption_tiers)};
@@ -3417,6 +3476,7 @@ setup.flag_labels = {json.dumps(self.flag_labels)};
 // in [[traits.labels]]. Every player/NPC trait-dump loop skips these via
 // <<continue>>, so internal stage/pregnancy/awareness traits never surface.
 setup.hiddenTraits = {json.dumps(self.hidden_trait_keys)};
+setup.dumpSkipTraits = {json.dumps(self.dump_skip_keys)};
 setup.stage_setter_canvases = {json.dumps(self.stage_setter_canvases)};
 setup.flag_setter_canvases = {json.dumps(self.flag_setter_canvases)};
 // Sub-menu parent index (2026-05-09) — child_canvas_id → parent_menu_canvas_id
@@ -3461,7 +3521,7 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 // G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
 // `tags` and the cast card renders no tag row (existing TOMLs unaffected).
-setup.npc_tags = {json.dumps(self.npc_tags_map)};
+setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_traits_js()}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -3633,10 +3693,8 @@ setup._isCanvasAvailable = function(c) {{
         if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
             return false;
         }}
-        // Check repeatability (non-repeatable and already triggered ever)
-        var hist = State.variables.game_state.trigger_history || {{}};
-        var rec = hist[String(c.id)];
-        if (!c.isRepeatable && rec && (rec.total || 0) >= 1) {{
+        // Check repeatability (non-repeatable and already used up — EN1: or parked)
+        if (!c.isRepeatable && setup.canvasStepBlocked(c)) {{
             return false;
         }}
         return true;
@@ -4126,6 +4184,34 @@ setup.formatTime = function(hour, minute) {{
 // renderer needs it and a game with locked choices need not have a shop. Phrasing mirrors
 // triggerConditionsSatisfied's operator vocabulary directly above, so the message can never
 // disagree with the gate that produced it.
+// ===== EN5 — one name per trait =====
+// Every screen that names a trait asks this: the [[traits.labels]] label when it is
+// non-empty, else the tidied key ("crowd_standing" -> "Crowd standing"). The lock suffix,
+// the toast, the Stats page, the dump, guidance, the sidebar and the cost tags all agree.
+setup.traitLabel = function(key) {{
+    var d = (setup.trait_labels || {{}})[key];
+    if (d && d.label) return d.label;
+    var s = String(key == null ? "" : key).replace(/_/g, " ");
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}};
+// EN6 — the NPC a trait condition item is about, or null for hers.
+setup.traitItemNpc = function(item) {{
+    if (!item) return null;
+    var raw = item.npc_id || item.character_id || "";
+    if (item.subject === "player" || !raw) return null;
+    var id = setup.resolveNpcId(raw);
+    var npc = id ? ((State.variables.npcs || {{}})[id] || null) : null;
+    return {{ raw: raw, npc: npc }};
+}};
+// "Tobin's Trust" for his trait, "Trust" for hers. Shared by the lock suffix and
+// formatCanvasConditions so both say whose number it is the same way.
+setup.traitSubjectLabel = function(item) {{
+    var label = setup.traitLabel(item.trait_key);
+    var who = setup.traitItemNpc(item);
+    if (!who) return label;
+    return ((who.npc && who.npc.name) || who.raw) + "'s " + label;
+}};
+
 // Human-readable summary of the conditions on an item that are NOT currently met.
 // Generic over any trait, using the same operator vocabulary as
 // triggerConditionsSatisfied so the message can never disagree with the gate.
@@ -4145,7 +4231,12 @@ setup.describeUnmetConditions = function(conditions) {{
             var key = it.trait_key;
             var op = it.operator;
             var want = it.value;
-            var cur = (it.subject === 'npc') ? null : num(traits[key]);
+            // EN6 — his value when the item is about an NPC; null (no value printed) when
+            // he cannot be resolved.
+            var who = setup.traitItemNpc(it);
+            var cur = who
+                ? ((who.npc && who.npc.core_traits) ? num(who.npc.core_traits[key]) : null)
+                : num(traits[key]);
             if (cur !== null) {{
                 var sat = false;
                 if (op === 'gte') sat = cur >= want;
@@ -4156,10 +4247,9 @@ setup.describeUnmetConditions = function(conditions) {{
                 else if (op === 'ne') sat = cur !== want;
                 if (sat) continue;
             }}
-            // Underscores out, same as the flag branch below has always done —
-            // "Crowd standing 30+", not "Crowd_standing 30+". These strings are read by
-            // the player now that locked CHOICES carry them, not only the shop.
-            var label = cap(String(key).replace(/_/g, ' '));
+            // EN5 — the trait's one name (its label, else the tidied key), and EN6 — whose:
+            // "Tobin's Trust 50+", "Corruption 20+".
+            var label = setup.traitSubjectLabel(it);
             var phrase;
             if (op === 'gte') phrase = label + ' ' + want + '+';
             else if (op === 'gt') phrase = label + ' above ' + want;
@@ -4168,7 +4258,7 @@ setup.describeUnmetConditions = function(conditions) {{
             else if (op === 'eq') phrase = label + ' exactly ' + want;
             else if (op === 'ne') phrase = label + ' not ' + want;
             else phrase = label + ' ' + op + ' ' + want;
-            if (cur !== null) phrase += ' (you have ' + cur + ')';
+            if (cur !== null) phrase += (who ? ' (has ' : ' (you have ') + cur + ')';
             parts.push(phrase);
         }} else if (it.type === 'flag') {{
             var fkey = String(it.flag_key || '');
@@ -4204,8 +4294,8 @@ setup.describeUnmetConditions = function(conditions) {{
 // ("Requires: Raid done"), and a locked choice is very often gated on a hidden plot
 // flag - printing those would spoil the story on a greyed tile. Trait gates are the
 // numbers the player is meant to chase, so they are the ones worth naming. NPC-subject
-// traits are dropped too: the helper renders them as a bare "Corruption 40+" with no
-// idea whose, and the player cannot see an NPC's stats anyway. Anything the helper has
+// traits are named too (EN6, 2026-09-30): "Tobin's Trust 50+ (has 10)" — a man's feeling
+// is the number the player is chasing on most locked tiles. Anything the helper has
 // no phrasing for (time_of_day, clothing, quest) contributes nothing, so a clock-gated
 // choice appends silence rather than half a sentence.
 setup.REQUIREMENT_OPS = ['gte', 'gt', 'lte', 'lt'];
@@ -4214,7 +4304,7 @@ setup.describeUnmetTraits = function(conditions) {{
     var items = [];
     for (var i = 0; i < conditions.items.length; i++) {{
         var it = conditions.items[i];
-        if (!it || it.type !== 'trait' || it.subject === 'npc') continue;
+        if (!it || it.type !== 'trait') continue;
         if (setup.REQUIREMENT_OPS.indexOf(it.operator) === -1) continue;
         if (!(Number(it.value) >= 2)) continue;
         items.push(it);
@@ -4625,6 +4715,109 @@ setup.getCurrentDayKey = function() {{
     }}
 }};
 
+// ===== EN1: a one-time step is used only on its "yes" =====
+// Opt-in per canvas: trigger `consume_on = "exit"` (payload `consumeOn`). Node 0's
+// fired mark in trigger_history is UNCHANGED — it still drives the per-day and
+// activity limits and decay contact. This is a separate record,
+// $game_state.canvas_state[id] = {{consumed, retryDay, closed, open}}:
+//   a `consumes` choice (the yes)        -> consumed
+//   a `final` choice (the warned no)     -> consumed + closed + flag <canvas>_closed
+//   a `retry_after_days` choice (a no)   -> retryDay = today + N
+//   leaving mid-scene with none of those -> retryDay = today + the canvas default (1)
+// Every "done" reader goes through canvasConsumed / canvasStepBlocked. For a canvas
+// that did not opt in they return exactly the inline `total >= 1` they replaced.
+setup.canvasOptedIn = function(c) {{
+    return !!(c && c.consumeOn === "exit");
+}};
+setup._canvasToday = function() {{
+    try {{ return Number(State.variables.game_state.time_state.day) || 0; }} catch (e) {{ return 0; }}
+}};
+// Used up for good: said yes to, or closed by a final no.
+setup.canvasConsumed = function(c) {{
+    var gs = State.variables.game_state || {{}};
+    var id = String(c.id);
+    var fired = (gs.trigger_history || {{}})[id];
+    var firedOnce = !!(fired && (fired.total || 0) >= 1);
+    if (!setup.canvasOptedIn(c)) return firedOnce;
+    var rec = (gs.canvas_state || {{}})[id];
+    // A save from before EN1 fired the step but holds no record. It keeps that
+    // build's meaning: a one-time canvas was used up the moment it fired.
+    if (!rec) return firedOnce;
+    return !!(rec.consumed || rec.closed);
+}};
+// By id, for readers that hold only an id. An id with no canvas object (no trigger
+// location) cannot have opted in, so it falls back to the fired mark.
+setup.canvasConsumedById = function(canvasId) {{
+    var c = setup.getCanvasById(canvasId);
+    if (c) return setup.canvasConsumed(c);
+    var fired = ((State.variables.game_state || {{}}).trigger_history || {{}})[String(canvasId)];
+    return !!(fired && (fired.total || 0) >= 1);
+}};
+// Not offerable right now: used up, or parked after a no and still waiting.
+setup.canvasStepBlocked = function(c) {{
+    if (setup.canvasConsumed(c)) return true;
+    if (!setup.canvasOptedIn(c)) return false;
+    var rec = ((State.variables.game_state || {{}}).canvas_state || {{}})[String(c.id)];
+    return !!(rec && rec.retryDay !== null && rec.retryDay !== undefined
+              && setup._canvasToday() < rec.retryDay);
+}};
+setup._canvasStepRecord = function(canvasId) {{
+    var sv = State.variables;
+    sv.game_state = sv.game_state || {{}};
+    var cs = sv.game_state.canvas_state = sv.game_state.canvas_state || {{}};
+    var id = String(canvasId);
+    if (!cs[id]) cs[id] = {{ consumed: false, retryDay: null, closed: false, open: false }};
+    return cs[id];
+}};
+// Entry. Called from markCanvasTriggered, so every path that fires a canvas opens it.
+setup.openCanvasStep = function(canvasId) {{
+    if (!setup.canvasOptedIn(setup.getCanvasById(canvasId))) return;
+    setup._canvasStepRecord(canvasId).open = true;
+}};
+// A choice's decision. Emitted inside the link body, so it runs BEFORE navigation
+// and the leave check below finds the step already decided.
+setup.decideCanvasStep = function(canvasId, op, days, closedFlag) {{
+    try {{
+        var rec = setup._canvasStepRecord(canvasId);
+        rec.open = false;
+        if (op === "consumes") {{
+            rec.consumed = true;
+        }} else if (op === "final") {{
+            rec.consumed = true;
+            rec.closed = true;
+            if (closedFlag) {{
+                State.variables.flags = State.variables.flags || {{}};
+                State.variables.flags[closedFlag] = true;
+            }}
+        }} else if (op === "retry") {{
+            rec.retryDay = setup._canvasToday() + Math.max(1, Number(days) || 1);
+        }}
+    }} catch (e) {{
+        // ignore
+    }}
+}};
+// Leaving mid-scene. Run on :passagestart for every non-info passage: a step still
+// open whose own passages are not the new one was left undecided, which is a parked
+// no — otherwise walking out would re-offer it at once and a no could be farmed.
+setup.parkLeftCanvasSteps = function(title) {{
+    try {{
+        var cs = ((State.variables.game_state || {{}}).canvas_state) || {{}};
+        for (var id in cs) {{
+            var rec = cs[id];
+            if (!rec || !rec.open) continue;
+            var c = setup.getCanvasById(id);
+            if (c && title && (title.indexOf("Canvas_" + c.canvasSlug + "_Node_") === 0 ||
+                               title.indexOf("StartingCanvas_" + c.canvasSlug + "_Node_") === 0)) {{
+                continue;
+            }}
+            rec.open = false;
+            rec.retryDay = setup._canvasToday() + Math.max(1, Number(c && c.retryAfterDays) || 1);
+        }}
+    }} catch (e) {{
+        // ignore
+    }}
+}};
+
 // Check if a canvas can trigger based on repeatability and per-day limit
 setup.canTriggerCanvas = function(canvasId, isRepeatable, maxPerDay) {{
     try {{
@@ -4633,13 +4826,21 @@ setup.canTriggerCanvas = function(canvasId, isRepeatable, maxPerDay) {{
         var hist = sv.game_state.trigger_history = sv.game_state.trigger_history || {{}};
         var rec = hist[String(canvasId)] || null;
 
+        // EN1 — an opted-in one-time step is refused while used up or parked,
+        // and NOT merely because it has fired.
+        var stepCanvas = isRepeatable ? null : setup.getCanvasById(canvasId);
+        var optedIn = setup.canvasOptedIn(stepCanvas);
+        if (optedIn && setup.canvasStepBlocked(stepCanvas)) {{
+            return false;
+        }}
+
         if (!rec) {{
             // Never triggered before; allowed
             return true;
         }}
 
         // Not repeatable and already triggered once
-        if (!isRepeatable && (rec.total || 0) >= 1) {{
+        if (!isRepeatable && !optedIn && (rec.total || 0) >= 1) {{
             return false;
         }}
 
@@ -4742,6 +4943,7 @@ setup.markCanvasTriggered = function(canvasId) {{
         rec.total = (rec.total || 0) + 1;
         rec.dayCount = (rec.dayCount || 0) + 1;
         hist[key] = rec;
+        setup.openCanvasStep(key);  // EN1 — no-op unless the canvas opted in
 
         // Also track at activity level (all tiers share same daily limit)
         var helpData = setup.help_data || {{}};
@@ -4756,7 +4958,7 @@ setup.markCanvasTriggered = function(canvasId) {{
         var npcUuid = npcUuidMap[key];
         if (npcUuid) {{
             sv.npc_interacted_today = sv.npc_interacted_today || {{}};
-            sv.npc_interacted_today[npcUuid] = true;
+            sv.npc_interacted_today[npcUuid] = true;{self._decay_contact_js()}
         }}
     }} catch (e) {{
         // ignore
@@ -4869,6 +5071,10 @@ setup.isCanvasNew = function(canvasId) {{
     try {{
         var sv = State.variables;
         sv.game_state = sv.game_state || {{}};
+        // EN1 — an opted-in step stays new until it is used up (a parked no
+        // comes back as the same unanswered step).
+        var stepCanvas = setup.getCanvasById(canvasId);
+        if (setup.canvasOptedIn(stepCanvas)) return !setup.canvasConsumed(stepCanvas);
         var hist = sv.game_state.trigger_history || {{}};
         var record = hist[String(canvasId)];
         return !record || (record.total || 0) === 0;
@@ -5091,10 +5297,8 @@ setup.isCanvasValidForSelection = function(c) {{
         if (c.conditions && !setup.triggerConditionsSatisfied(c.conditions)) {{
             return false;
         }}
-        // Check repeatability (non-repeatable and already triggered ever)
-        var hist = State.variables.game_state.trigger_history || {{}};
-        var rec = hist[String(c.id)];
-        if (!c.isRepeatable && rec && (rec.total || 0) >= 1) {{
+        // Check repeatability (non-repeatable and already used up — EN1: or parked)
+        if (!c.isRepeatable && setup.canvasStepBlocked(c)) {{
             return false;
         }}
         return true;
@@ -5159,7 +5363,7 @@ setup.getCostBlockedMessage = function(costs) {{
     for (var i = 0; i < costs.length; i++) {{
         var cost = costs[i];
         var current = Number(playerTraits[String(cost.trait)] || 0);
-        var traitDisplay = String(cost.trait).charAt(0).toUpperCase() + String(cost.trait).slice(1);
+        var traitDisplay = setup.traitLabel(cost.trait);
         if (current < Number(cost.value)) {{
             lines.push('Requires ' + cost.value + ' ' + traitDisplay + ' (you have ' + Math.floor(current) + ')');
         }}
@@ -5211,7 +5415,7 @@ setup.getLocationCostTag = function(slug) {{
     if (Number(ec.time || 0) > 0) parts.push(Number(ec.time) + 'm');
     Object.keys(ec).forEach(function(k) {{
         if (k === 'time') return;
-        var disp = String(k).charAt(0).toUpperCase() + String(k).slice(1);
+        var disp = setup.traitLabel(k);
         parts.push(Number(ec[k]) + ' ' + disp);
     }});
     return parts.join(' · ');
@@ -5221,7 +5425,7 @@ setup.getLocationCostTag = function(slug) {{
 setup.getLocationCostBlockedMessage = function(slug) {{
     return setup.getCostBlockedMessage(setup.locationCostTraitArray(slug));
 }};
-
+{self._crossing_costs_js()}
 // ===== Lock-as-prose on the nav surface =====
 // Is this destination's door open right now? Versionless/empty conditions fail OPEN
 // (matches the passage-entry guard + the global condition evaluator), so a location
@@ -5245,7 +5449,7 @@ setup.navDestBlockedReason = function(slug) {{
     }}
     return 'Locked for now.';
 }};
-
+{self._location_hours_js()}
 // Get NPCs whose declared [[npcs.schedules]] places them at this location right
 // now AND who have a reachable affordable+valid canvas here. Schedule-only —
 // no canvas-derived fallback (2026-05-25 doctrine tightening).
@@ -5620,7 +5824,7 @@ setup.renderSoloActivities = function(locationId) {{
             var costTag = '';
             if (blocked.costs && blocked.costs.length > 0) {{
                 var ct = blocked.costs[0];
-                var ctDisplay = String(ct.trait).charAt(0).toUpperCase() + String(ct.trait).slice(1);
+                var ctDisplay = setup.traitLabel(ct.trait);
                 costTag = ' <span class="solo-cost-tag">(' + ct.value + ' ' + ctDisplay + ')</span>';
             }}
             html += '<a class="link-internal solo-activity-btn solo-activity-blocked" data-passage="' + bPassageName + '">' + bDisplayName + costTag + '</a><br>';
@@ -6019,14 +6223,16 @@ window.advanceDay = function() {{
     if (setup.npc_trait_decay && Object.keys(setup.npc_trait_decay).length > 0) {{
         var interacted = State.variables.npc_interacted_today || {{}};
         for (var npcId in setup.npc_trait_decay) {{
-            if (interacted[npcId]) continue; // Player interacted, skip decay
+            if (interacted[npcId]) continue; // Player interacted, skip decay{self._decay_wait_js()}
             var decayConfig = setup.npc_trait_decay[npcId];
             var npcData = State.variables.npcs[npcId];
             if (!npcData || !npcData.core_traits) continue;
             for (var traitName in decayConfig) {{
                 var decayAmount = decayConfig[traitName];
                 if (typeof npcData.core_traits[traitName] === 'number' && decayAmount > 0) {{
-                    npcData.core_traits[traitName] = Math.max(0, npcData.core_traits[traitName] - decayAmount);
+                    // EN8 — toward his rest point (default 0), from either side.
+                    var _rest = ((setup.npc_trait_rest || {{}})[npcId] || {{}})[traitName] || 0;
+                    npcData.core_traits[traitName] = setup.decayToward(npcData.core_traits[traitName], _rest, decayAmount);
                 }}
             }}
         }}
@@ -6038,7 +6244,7 @@ window.advanceDay = function() {{
             for (var _ptKey in setup.player_trait_decay) {{
                 var _ptDecay = setup.player_trait_decay[_ptKey];
                 if (typeof _pt[_ptKey] === 'number' && _ptDecay > 0) {{
-                    _pt[_ptKey] = Math.max(0, _pt[_ptKey] - _ptDecay);
+                    _pt[_ptKey] = setup.decayToward(_pt[_ptKey], 0, _ptDecay);  // EN8 — toward 0 from either side
                 }}
             }}
         }}
@@ -6480,7 +6686,7 @@ setup.showEffectNotification = function() {{
     var eff = effects[i];
     if (eff.type === 'trait') {{
       var sign = eff.delta > 0 ? '+' : '';
-      var traitDisplay = eff.trait.charAt(0).toUpperCase() + eff.trait.slice(1);
+      var traitDisplay = setup.traitLabel(eff.trait);  // EN5; never filtered by hiddenTraits (D1b)
       var prefix = eff.name ? (eff.name + "'s ") : '';
       lines.push(sign + eff.delta + ' ' + prefix + traitDisplay);
     }} else if (eff.type === 'flag') {{
@@ -7035,28 +7241,46 @@ setup.getDecayWarnings = function(thresholds) {{
         }} else {{
             continue;
         }}
-        // Need a snapshot AND current must be < snapshot (decreased today)
+        // Need a snapshot AND a move since it. EN8: decay is two-sided, so a value can
+        // DROP toward its rest (the gte/gt gates above it are at risk) or RISE toward it
+        // (the lt/lte gates it still meets are at risk).
         if (!(snapKey in snap)) continue;
         var snapVal = snap[snapKey];
-        if (currentVal >= snapVal) continue;  // Did not decrease
-        // Find next gate above current (lowest threshold > currentVal)
-        var nextGate = null;
-        for (var ei = 0; ei < entries.length; ei++) {{
-            var v = entries[ei].value;
-            if (v > currentVal && (nextGate === null || v < nextGate)) {{
-                nextGate = v;
+        if (currentVal === snapVal) continue;
+        var traitName = setup.traitLabel ? setup.traitLabel(traitKey) : traitKey;
+        if (currentVal < snapVal) {{
+            // Find next gate above current (lowest gte/gt threshold > currentVal)
+            var nextGate = null;
+            for (var ei = 0; ei < entries.length; ei++) {{
+                if (entries[ei].op === "lt" || entries[ei].op === "lte") continue;
+                var v = entries[ei].value;
+                if (v > currentVal && (nextGate === null || v < nextGate)) {{
+                    nextGate = v;
+                }}
             }}
+            if (nextGate === null) continue;  // Already past all gates
+            // Only warn if within 2.0 of the next gate
+            if (nextGate - currentVal > 2.0) continue;
+            warnings.push({{
+                text: entityLabel + " " + traitName + " dropping (" + currentVal.toFixed(1) +
+                      " today, was " + snapVal.toFixed(1) + " yesterday). " +
+                      "Next gate at " + nextGate + " — interact today or lose more."
+            }});
+        }} else {{
+            // The lowest lt/lte gate she still meets (current <= v for lte, < v for lt).
+            var heldGate = null;
+            for (var ej = 0; ej < entries.length; ej++) {{
+                var eop = entries[ej].op, ev = entries[ej].value;
+                var held = (eop === "lte") ? currentVal <= ev : (eop === "lt") ? currentVal < ev : false;
+                if (held && (heldGate === null || ev < heldGate)) heldGate = ev;
+            }}
+            if (heldGate === null || heldGate - currentVal > 2.0) continue;
+            warnings.push({{
+                text: entityLabel + " " + traitName + " rising (" + currentVal.toFixed(1) +
+                      " today, was " + snapVal.toFixed(1) + " yesterday). " +
+                      "Gate at " + heldGate + " — interact today or lose it."
+            }});
         }}
-        if (nextGate === null) continue;  // Already past all gates
-        // Only warn if within 2.0 of the next gate
-        if (nextGate - currentVal > 2.0) continue;
-        // Build human-readable warning
-        var dropAmount = (snapVal - currentVal).toFixed(1);
-        warnings.push({{
-            text: entityLabel + " " + traitKey + " dropping (" + currentVal.toFixed(1) +
-                  " today, was " + snapVal.toFixed(1) + " yesterday). " +
-                  "Next gate at " + nextGate + " — interact today or lose more."
-        }});
     }}
     return warnings;
 }};
@@ -7274,8 +7498,7 @@ setup._currentTraitValue = function(item) {{
 // For NPC subjects, prepends NPC display name (e.g., "Frank trust").
 setup._labelForTrait = function(item) {{
     var key = item.trait_key;
-    var labelData = (setup.trait_labels || {{}})[key];
-    var labelText = labelData ? labelData.label : key;
+    var labelText = setup.traitLabel(key);  // EN5 — was `labelData ? labelData.label : key` ("" for a hide-only entry)
     if (item.subject === "npc" && item.npc_id) {{
         var slug = item.npc_id;
         var uuid = (setup.npc_slug_map || {{}})[slug] || slug;
@@ -7503,7 +7726,7 @@ setup._locNameFromUuid = function(locUuid) {{
     var locData = locs[slug];
     return (locData && locData.name) || slug || null;
 }};
-
+{self._hidden_places_js()}
 // Main entry — returns HTML for the structured goal block.
 //
 // THREE frames depending on gate state (helper path; canvas-trigger fallback
@@ -7789,6 +8012,12 @@ setup.getNextActivity = function(npcId) {{
                 isCompleted = visitedNodes.some(function(vn) {{
                     return vn.indexOf(canvasPrefix) === 0;
                 }});
+                // EN1 — an opted-in step is done only when used up: a parked no
+                // has visited its nodes and must still read as the next step.
+                var stepCanvas = activity.canvas_id ? setup.getCanvasById(activity.canvas_id) : null;
+                if (setup.canvasOptedIn(stepCanvas)) {{
+                    isCompleted = setup.canvasConsumed(stepCanvas);
+                }}
             }}
         }}
 
@@ -8200,7 +8429,7 @@ setup.formatTraitRequirements = function(missingTraits) {{
     if (!missingTraits || missingTraits.length === 0) return "";
 
     var parts = missingTraits.map(function(req) {{
-        var traitName = req.trait.charAt(0).toUpperCase() + req.trait.slice(1);
+        var traitName = setup.traitLabel(req.trait);
         return traitName + " " + (req.operator || ">") + " " + req.value;
     }});
 
@@ -8258,14 +8487,17 @@ setup.formatCanvasConditions = function(conditions) {{
                 var npcName = (uuid && npcsData[uuid]) ? (npcsData[uuid].name || npcId) : npcId;
                 displayNpc = npcName + "'s";
             }}
-            var displayTrait = trait.charAt(0).toUpperCase() + trait.slice(1);
+            // EN5/EN6 — the trait's one name, and his name the way the lock suffix says it.
+            var displayText = isPlayerTrait
+                ? displayNpc + ' ' + setup.traitLabel(trait)
+                : setup.traitSubjectLabel(item);
 
             // Wrap in clickable span with data attributes
             var link = '<span class="trait-requirement-link" ' +
                 'data-npc="' + npcId + '" ' +
                 'data-trait="' + trait + '" ' +
                 'data-value="' + value + '">' +
-                displayNpc + ' ' + displayTrait + ' ' + op + ' ' + value +
+                displayText + ' ' + op + ' ' + value +
                 '</span>';
             parts.push(link);
         }}
@@ -8478,7 +8710,7 @@ setup.showTraitActivitiesModal = function(npcId, traitKey, requiredValue) {{
             var flags = State.variables.flags || {{}};
             var hist = (State.variables.game_state && State.variables.game_state.trigger_history) || {{}};
             var isCompleted = (act.linked_flag && flags[act.linked_flag]) ||
-                              (act.canvas_id && hist[act.canvas_id] && hist[act.canvas_id].total > 0);
+                              (act.canvas_id && setup.canvasConsumedById(act.canvas_id));  // EN1
             if (isCompleted) continue;
         }}
 
@@ -8560,7 +8792,7 @@ setup.showTraitActivitiesModal = function(npcId, traitKey, requiredValue) {{
     relevantActivities = Object.values(byName);
 
     // Build modal HTML (no inline onclick - use jQuery event delegation)
-    var traitDisplay = traitKey.charAt(0).toUpperCase() + traitKey.slice(1);
+    var traitDisplay = setup.traitLabel(traitKey);
     var html = '<div class="trait-modal-overlay">';
     html += '<div class="trait-modal">';
     html += '<div class="trait-modal-header">';
@@ -8787,6 +9019,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             # Build a human-readable label: frank_bookkeeping_count → "Frank bookkeeping"
             base = trait_key.replace("_count", "").replace("_done", "")
             label = base.replace("_", " ").strip().capitalize()
+            # EN5 — a [[traits.labels]] label wins over the derived one.
+            _tl = self.trait_labels.get(trait_key)
+            if isinstance(_tl, dict) and _tl.get("label"):
+                label = _tl["label"]
             self.sidebar_items.append({
                 "type": "trait_bar",
                 "trait": trait_key,
@@ -8838,19 +9074,23 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     continue
                 op = it.get("operator", "")
                 val = it.get("value")
-                if op not in ("gte", "gt") or not isinstance(val, (int, float)):
+                # EN8 — lt/lte gates too: two-sided decay can carry a value UP out of one.
+                if op not in ("gte", "gt", "lt", "lte") or not isinstance(val, (int, float)):
                     continue
                 # Build a synthetic key: subject:[npc_id:]trait_key
                 subj = it.get("subject", "")
                 key = it.get("trait_key", "")
                 npc_id = it.get("npc_id", "")
                 synth = f"{subj}:{npc_id}:{key}" if subj == "npc" else f"player::{key}"
-                trait_thresholds.setdefault(synth, []).append({
+                entry = {
                     "value": int(val),
                     "subject": subj,
                     "npc_id": npc_id,
                     "trait_key": key,
-                })
+                }
+                if op in ("lt", "lte"):
+                    entry["op"] = op  # absent on gte/gt, so those entries are unchanged
+                trait_thresholds.setdefault(synth, []).append(entry)
         self.sidebar_items.append({
             "type": "trait_decay_warning",
             "thresholds": trait_thresholds,
@@ -9970,7 +10210,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="location-list">
 """
             for location in self.locations:
-                content += f"""    [[{location.name}->{self._location_entry_passage(location)}]]<br>\n"""
+                entry = f"[[{location.name}->{self._location_entry_passage(location)}]]<br>"
+                if self._is_hidden_place(location):  # EN4
+                    entry = f'<<if setup.locFound("{self._location_nav_slug(location)}")>>{entry}<</if>>'
+                content += f"""    {entry}\n"""
             content += """</div>"""
             return content
 
@@ -9989,8 +10232,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         lines.append("<<if $player.current_location == \"\">>")
         lines.append("<div class=\"location-list\">")
         for location in self.locations:
-            lines.append(
-                f"    [[{location.name}->{self._location_entry_passage(location)}]]<br>")
+            entry = f"[[{location.name}->{self._location_entry_passage(location)}]]<br>"
+            if self._is_hidden_place(location):  # EN4
+                entry = f'<<if setup.locFound("{self._location_nav_slug(location)}")>>{entry}<</if>>'
+            lines.append(f"    {entry}")
         lines.append("</div>")
         lines.append("<</if>>")
         return "\n".join(lines)
@@ -10069,10 +10314,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if getattr(connected_loc, 'is_container', False) and getattr(connected_loc, 'default_entry_location', None):
                             # If destination is container with default_entry, go to default_entry directly
                             default_entry_name = connected_loc.default_entry_location.name.replace(' ', '_')
-                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
+                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>"
                         else:
                             # Regular location or container without default_entry
-                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>\n"
+                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>"
+                        if self._is_hidden_place(connected_loc):  # EN4
+                            child_link = f'<<if setup.locFound("{self._location_nav_slug(connected_loc)}")>>{child_link}<</if>>'
+                        content += child_link + "\n"
 
                     # Add normal hierarchical navigation for containers without default_entry
                     content += """<div class="location-navigation">
@@ -10085,8 +10333,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             else:
                 # Regular location: Normal passage generation
                 entry_conditions = (location.properties or {}).get('entry_conditions') if hasattr(location, 'properties') else None
-                if entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'):
-                    entry_cond_json = json.dumps(entry_conditions)
+                has_entry_conditions = bool(entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'))
+                # EN3 — a place with opening hours gets the guard too, even with no
+                # entry_conditions. Without hours this branch is emitted exactly as before.
+                loc_hours = (location.properties or {}).get('hours') if hasattr(location, 'properties') else None
+                if has_entry_conditions or loc_hours:
+                    entry_cond_json = json.dumps(entry_conditions) if has_entry_conditions else ""
+                    hours_slug = self._location_nav_slug(location)
+                    guard_parts = []
+                    if has_entry_conditions:
+                        guard_parts.append(f"setup.triggerConditionsSatisfied({entry_cond_json})")
+                    if loc_hours:
+                        guard_parts.append(f'setup.locOpenNow("{hours_slug}")')
+                    entry_guard = " && ".join(guard_parts)
                     blocked_message = (location.properties or {}).get('blocked_message', '')
                     # Find parent location for "go back" link
                     parent_name = None
@@ -10105,7 +10364,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
 
                     content += f""":: {self._location_passage_name(location)}
-<<if setup.triggerConditionsSatisfied({entry_cond_json})>>\
+<<if {entry_guard}>>\
 <<nobr>>
 <<set $player.current_location = "{location_id}">>
 <<if not $game_state.visited_locations.includes("{location_id}")>>
@@ -10130,6 +10389,17 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         blocked_html = (
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
+                        )
+                    if loc_hours:
+                        closed_text = (location.properties or {}).get('closed_text', '')
+                        closed_html = (
+                            (f'<p class="entry-blocked-narrative">{self._resolve_at_references(closed_text)}</p>\n'
+                             if closed_text else '')
+                            + f'<p class="entry-closed"><<= setup.locClosedReason("{hours_slug}")>></p>'
+                        )
+                        blocked_html = (
+                            f'<<if !setup.locOpenNow("{hours_slug}")>>\n{closed_html}\n<<else>>\n{blocked_html}\n<</if>>'
+                            if has_entry_conditions else closed_html
                         )
                     content += f"""</div>
 <</if>>\
@@ -10233,6 +10503,203 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
 """
 
+    def _is_hidden_place(self, loc) -> bool:
+        return bool((getattr(loc, 'properties', None) or {}).get('hidden_until'))
+
+    def _has_hidden_places(self) -> bool:
+        return any(self._is_hidden_place(loc) for loc in self.locations)
+
+    def _loc_found_cond(self, locs) -> str:
+        """`setup.locFound("a") || setup.locFound("b")` for the given places."""
+        return " || ".join(f'setup.locFound("{self._location_nav_slug(l)}")' for l in locs)
+
+    def _hidden_places_js(self) -> str:
+        """EN4 — places hidden until found. Empty unless some location has `hidden_until`."""
+        if not self._has_hidden_places():
+            return ""
+        return """
+// ===== EN4 — places hidden until found =====
+// A place with hidden_until = {flag} is not listed, and its name is withheld, until that
+// player flag is true. Every "where is this" printer goes through _locNameFromUuid or
+// _findHelperTransitionLocation (guidance, the cast page, the quests page, npc_panel),
+// so both are wrapped here; the Schedules page and the nav lists ask locFound directly.
+setup.LOC_HIDDEN_NAME = "somewhere you haven't found yet";
+setup.locFound = function (slugOrUuid) {
+    var slug = setup._getLocUuidToSlug()[slugOrUuid] || slugOrUuid;
+    var loc = (setup.locations || {})[String(slug)];
+    var hu = loc && loc.hidden_until;
+    if (!hu || !hu.flag) return true;
+    return !!(State.variables.flags || {})[hu.flag];
+};
+setup.locShownName = function (slugOrUuid, name) {
+    return setup.locFound(slugOrUuid) ? name : setup.LOC_HIDDEN_NAME;
+};
+setup._locNameFromUuid = (function (orig) {
+    return function (locUuid) {
+        if (locUuid && !setup.locFound(locUuid)) return setup.LOC_HIDDEN_NAME;
+        return orig(locUuid);
+    };
+})(setup._locNameFromUuid);
+setup._findHelperTransitionLocation = (function (orig) {
+    return function (helperName) {
+        var name = orig(helperName);
+        if (!name) return name;
+        var locs = setup.locations || {};
+        for (var slug in locs) {
+            if (locs[slug] && locs[slug].name === name && !setup.locFound(slug)) {
+                return setup.LOC_HIDDEN_NAME;
+            }
+        }
+        return name;
+    };
+})(setup._findHelperTransitionLocation);
+"""
+
+    def _has_crossing_costs(self) -> bool:
+        return any((getattr(loc, 'properties', None) or {}).get('crossing_costs')
+                   for loc in self.locations)
+
+    def _crossing_costs_js(self) -> str:
+        """EN11 — an area's toll. Empty unless some container declares crossing_costs."""
+        if not self._has_crossing_costs():
+            return ""
+        parents, redirects = {}, {}
+        for loc in self.locations:
+            slug = self._location_nav_slug(loc)
+            parent = getattr(loc, 'parent_location', None)
+            if parent is not None:
+                parents[slug] = self._location_nav_slug(parent)
+            if getattr(loc, 'is_container', False) and getattr(loc, 'default_entry_location', None):
+                redirects[slug] = True
+        return """
+// ===== EN11 — crossing costs =====
+// An AREA is a container and everything below it. Its crossing_costs are charged once,
+// when she moves to a place inside it from a place outside it — the container page or a
+// direct link to any inner room. Moves inside the area pay only each room's own costs;
+// leaving is free. A container with a default_entry only redirects, so the crossing is
+// charged on the room it lands on, once. No previous place (game start) = no crossing.
+setup.loc_parent = """ + json.dumps(parents) + """;
+setup.loc_redirect = """ + json.dumps(redirects) + """;
+setup._locAncestors = function (slug) {
+    var out = [], s = slug, guard = 0;
+    while (s && guard++ < 64) { out.push(s); s = setup.loc_parent[s]; }
+    return out;
+};
+setup.crossingCostsFor = function (destSlug, curId) {
+    if (!curId || setup.loc_redirect[destSlug]) return [];
+    var curSlug = (setup._getLocUuidToSlug() || {})[curId] || curId;
+    var inside = setup._locAncestors(curSlug), out = [];
+    setup._locAncestors(destSlug).forEach(function (a) {
+        var cc = ((setup.locations || {})[a] || {}).crossing_costs;
+        if (cc && inside.indexOf(a) === -1) out.push(cc);
+    });
+    return out;
+};
+setup.crossingTraitArray = function (list) {
+    var arr = [];
+    list.forEach(function (cc) {
+        Object.keys(cc).forEach(function (k) { if (k !== 'time') arr.push({ trait: k, value: Number(cc[k]) }); });
+    });
+    return arr;
+};
+// One entry per trait, summed — a room's cost and an area's toll on the same trait are one bill.
+setup.mergeCostArrays = function (arr) {
+    var by = {}, order = [];
+    arr.forEach(function (c) {
+        if (!(c.trait in by)) { by[c.trait] = 0; order.push(c.trait); }
+        by[c.trait] += Number(c.value);
+    });
+    return order.map(function (t) { return { trait: t, value: by[t] }; });
+};
+setup.deductCrossingCosts = function (list) {
+    list.forEach(function (cc) {
+        var mins = Number(cc.time || 0);
+        if (mins > 0 && typeof window.advanceTime === 'function') window.advanceTime(mins);
+    });
+    setup.deductCostArray(setup.crossingTraitArray(list));
+};
+"""
+
+    def _has_location_hours(self) -> bool:
+        return any((getattr(loc, 'properties', None) or {}).get('hours')
+                   for loc in self.locations)
+
+    def _location_hours_js(self) -> str:
+        """EN3 — opening hours. Empty unless some location declares `hours`."""
+        if not self._has_location_hours():
+            return ""
+        return """
+// ===== EN3 — opening hours =====
+// A window {weekdays, open, close} is open on each listed weekday (empty = every day) from
+// open to close; a close that is not after the open runs past midnight into the next
+// weekday, so a Friday 22:00-04:00 place is open at 02:00 on Saturday. A place with no
+// hours is always open. Nothing moves her out when a place closes around her: the room's
+// passage guard only runs when the room is (re)entered.
+setup._LOC_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+setup._locHours = function (slug) {
+    var loc = (setup.locations || {})[String(slug)];
+    return (loc && loc.hours) || [];
+};
+setup._hhmm = function (s) {
+    var p = String(s).split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+};
+setup._locWindowDays = function (w) {
+    return (w.weekdays && w.weekdays.length) ? w.weekdays : [0, 1, 2, 3, 4, 5, 6];
+};
+setup._locNow = function () {
+    var ts = State.variables.game_state.time_state;
+    return { day: setup._LOC_DAYS.indexOf(ts.current_day),
+             min: ts.current_hour * 60 + (ts.current_minute || 0) };
+};
+setup.locOpenNow = function (slug) {
+    var hours = setup._locHours(slug);
+    if (!hours.length) return true;
+    var now = setup._locNow();
+    var yesterday = (now.day + 6) % 7;
+    for (var i = 0; i < hours.length; i++) {
+        var w = hours[i], days = setup._locWindowDays(w);
+        var o = setup._hhmm(w.open), c = setup._hhmm(w.close);
+        if (o < c) {
+            if (days.indexOf(now.day) !== -1 && now.min >= o && now.min < c) return true;
+        } else {
+            if (days.indexOf(now.day) !== -1 && now.min >= o) return true;
+            if (days.indexOf(yesterday) !== -1 && now.min < c) return true;
+        }
+    }
+    return false;
+};
+// The travel card and the text link ask this; the Schedules page does not (it keeps
+// navDestUnlocked), so a closed place is not muted there.
+setup.navDestOpenNow = function (slug) {
+    return setup.locOpenNow(slug);
+};
+// The next window start after now, searched a week ahead: {days, min} or null.
+setup.locNextOpen = function (slug) {
+    var hours = setup._locHours(slug), now = setup._locNow(), best = null;
+    for (var k = 0; k <= 7; k++) {
+        var d = (now.day + k) % 7;
+        for (var i = 0; i < hours.length; i++) {
+            var w = hours[i];
+            if (setup._locWindowDays(w).indexOf(d) === -1) continue;
+            var o = setup._hhmm(w.open);
+            if (k === 0 && o <= now.min) continue;
+            var at = k * 1440 + o;
+            if (best === null || at < best) best = at;
+        }
+    }
+    return best === null ? null : { days: Math.floor(best / 1440), min: best % 1440 };
+};
+setup.locClosedReason = function (slug) {
+    var n = setup.locNextOpen(slug);
+    if (!n) return 'Closed.';
+    var t = setup.formatTime(Math.floor(n.min / 60), n.min % 60);
+    if (n.days === 0) return 'Closed. Opens at ' + t + '.';
+    if (n.days === 1) return 'Closed. Opens tomorrow at ' + t + '.';
+    return 'Closed. Opens ' + setup._LOC_DAYS[(setup._locNow().day + n.days) % 7] + ' at ' + t + '.';
+};
+"""
+
     def _render_location_description(self, location) -> str:
         """The description slot on a room screen — one paragraph, or a chain of them.
 
@@ -10313,6 +10780,89 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         return content
 
+    def _decay_rest_js(self) -> str:
+        """EN8 — the decay step (always: it is the deliberate global change) and the
+        per-NPC rest points and waits (only when some NPC declares them)."""
+        out = """
+// EN8 — one decay step toward a rest point, from either side, never crossing it. A
+// value above its rest falls by d; one below rises by d (it used to snap to 0).
+setup.decayToward = function (v, rest, d) {
+    if (v > rest) return Math.max(rest, v - d);
+    if (v < rest) return Math.min(rest, v + d);
+    return v;
+};"""
+        if self.npc_trait_rest_config:
+            out += "\nsetup.npc_trait_rest = " + json.dumps(self.npc_trait_rest_config) + ";"
+        if self.npc_decay_after_days_config:
+            out += "\nsetup.npc_decay_after_days = " + json.dumps(self.npc_decay_after_days_config) + ";"
+        return out
+
+    def _decay_contact_js(self) -> str:
+        """EN8 — record the day of contact, only when some NPC waits before decaying."""
+        if not self.npc_decay_after_days_config:
+            return ""
+        return """
+            // EN8 — the day she last saw him, for decay_after_days.
+            if (sv.npcs && sv.npcs[npcUuid]) {
+                sv.npcs[npcUuid].last_contact_day = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 0;
+            }"""
+
+    def _decay_wait_js(self) -> str:
+        """EN8 — skip a man still inside his wait. An old save (or a man never met) has no
+        last_contact_day: that counts as contact today, so the wait starts now."""
+        if not self.npc_decay_after_days_config:
+            return ""
+        return """
+            var _wait = (setup.npc_decay_after_days || {})[npcId];
+            if (_wait) {
+                var _npcW = State.variables.npcs[npcId];
+                var _ended = State.variables.game_state.time_state.day - 1;  // the day that just ended
+                if (_npcW && _npcW.last_contact_day === undefined) { _npcW.last_contact_day = _ended; continue; }
+                if (_npcW && (_ended - _npcW.last_contact_day) < _wait) continue;
+            }"""
+
+    def _cast_shows_traits(self) -> bool:
+        """EN7 — does the cast page show any numbers? Only then is anything below emitted."""
+        return bool(self.cast_page and (self.cast_page.get("show_traits") or self.npc_show_traits_map))
+
+    def _cast_traits_js(self) -> str:
+        """EN7 — the cast card's trait data and the band lookup. Empty unless used."""
+        if not self._cast_shows_traits():
+            return ""
+        return """
+// EN7 — the men's numbers on the cast page. A card shows the page's traits plus the
+// character's own, skipping any hidden trait or one he does not have; each row is the
+// trait's one name (setup.traitLabel), the number, and a word when a band matches.
+setup.cast_show_traits = """ + json.dumps(self.cast_page.get("show_traits") or []) + """;
+setup.cast_trait_bands = """ + json.dumps(self.cast_page.get("trait_bands") or {}) + """;
+setup.npc_show_traits = """ + json.dumps(self.npc_show_traits_map) + """;
+// The first band whose min/max (either may be left off) holds the value; "" when none.
+setup.traitBand = function (key, value) {
+    var bands = (setup.cast_trait_bands || {})[key] || [];
+    var v = Number(value);
+    for (var i = 0; i < bands.length; i++) {
+        var b = bands[i] || {};
+        if (b.min !== undefined && v < b.min) continue;
+        if (b.max !== undefined && v > b.max) continue;
+        return b.text || "";
+    }
+    return "";
+};
+// The rows for one card: [{label, value, band}], page traits first, then his own.
+setup.castTraitRows = function (slug, npc) {
+    var keys = (setup.cast_show_traits || []).concat((setup.npc_show_traits || {})[slug] || []);
+    var traits = (npc && npc.core_traits) || {};
+    var hidden = setup.hiddenTraits || [];
+    var rows = [], seen = {};
+    for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        if (seen[k] || hidden.indexOf(k) !== -1 || traits[k] === undefined) continue;
+        seen[k] = true;
+        rows.push({ label: setup.traitLabel(k), value: traits[k], band: setup.traitBand(k, traits[k]) });
+    }
+    return rows;
+};"""
+
     def _cast_page_css(self) -> str:
         """Cast-page styling, emitted ONLY for games that author a cast page.
 
@@ -10360,7 +10910,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 .cast-card .quests-tip {
     margin-top: 6px;
 }
-"""
+""" + ("""/* EN7: his numbers — the trait's name, the number, and the word beside it. */
+.cast-card .cast-traits {
+    font-size: 13px;
+    margin: 0 0 6px;
+}
+.cast-card .cast-trait-band {
+    color: var(--theme-text-muted, #8a8a8a);
+}
+""" if self._cast_shows_traits() else "")
 
     def _cheat_page_css(self) -> str:
         """Cheat-page styling, emitted ONLY for games that author a cheat page.
@@ -10504,6 +11062,16 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         escaped_svg = html.escape(placeholder_svg).replace("'", "\\'")
 
         intro_line = f'<div class="cast-intro">{html.escape(intro)}</div>\n' if intro else ""
+        # EN7 — his numbers, only when the page shows any (else the card is as before).
+        traits_block = (
+            '          <<set _traitRows to setup.castTraitRows(_slug, _npc)>>\n'
+            '          <<if _traitRows.length>><div class="cast-traits"><<for _tr range _traitRows>>'
+            '<div class="cast-trait"><span class="cast-trait-name"><<print _tr.label>></span> '
+            '<span class="cast-trait-value"><<print _tr.value>></span>'
+            '<<if _tr.band>> <span class="cast-trait-band">· <<print _tr.band>></span><</if>>'
+            '</div><</for>></div><</if>>\n'
+            if self._cast_shows_traits() else ""
+        )
 
         page = f""":: CastPage
 <<nobr>>
@@ -10548,7 +11116,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
           <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
           <<set _tags to setup.npc_tags[_slug]>>
           <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
-          <<if _locName>>
+{traits_block}          <<if _locName>>
             <div class="cast-where">📍 <<print _locName>></div>
           <<else>>
             <div class="cast-where cast-away">📍 Not about right now</div>
@@ -12237,6 +12805,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 # falsy exactly as it must for a save written before this shipped.
                 if hidden_from_location:
                     location_canvas_list[-1]["hiddenFromLocation"] = True
+                # EN1 — a one-time step used up on its "yes". Added ONLY when set, for
+                # the same reason as hiddenFromLocation: a game that authors none emits
+                # a byte-identical payload, and a missing key reads as "not opted in".
+                _consume_on = (trigger.metadata or {}).get("consume_on") if trigger else None
+                if _consume_on == "exit" and not is_repeatable:
+                    location_canvas_list[-1]["consumeOn"] = "exit"
+                    location_canvas_list[-1]["retryAfterDays"] = int(
+                        (trigger.metadata or {}).get("retry_after_days") or 1
+                    )
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -12544,6 +13121,20 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     "npc_name": canvas_npc_map.get(str(canvas.id)) or "player"
                                 }
 
+                        # EN1 — a final no sets `<canvas>_closed` (setup.decideCanvasStep),
+                        # so this canvas is its located setter, as for a flagEffect.
+                        if choice.get("final"):
+                            flag_key = f"{self._get_canvas_slug(canvas)}_closed"
+                            if flag_key not in flag_unlock_map:
+                                flag_unlock_map[flag_key] = {
+                                    "canvas_name": canvas.name,
+                                    "canvas_id": str(canvas.id),
+                                    "location": location_name,
+                                    "schedule": schedule_text,
+                                    "canvas_conditions": canvas_conditions,
+                                    "npc_name": canvas_npc_map.get(str(canvas.id)) or "player"
+                                }
+
                         # Also check effects array in choices for flag property
                         choice_effects = choice.get("effects", [])
                         for eff in choice_effects:
@@ -12643,6 +13234,18 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "canvas_id": None,
                     "location": None,
                     "schedule": "when the payment is missed past grace",
+                    "canvas_conditions": None,
+                    "npc_name": _rent.get("collector_npc", "") or "player",
+                    "is_engine": True,
+                }
+        # EN2b — the carried-debt flag, set by the rent pages when a week is short.
+        if _rent.get("enabled") and _rent.get("on_short") == "carry":
+            if "rent_carried" not in flag_unlock_map:
+                flag_unlock_map["rent_carried"] = {
+                    "canvas_name": "the weekly payment (rent system)",
+                    "canvas_id": None,
+                    "location": None,
+                    "schedule": "when a rent payment is short",
                     "canvas_conditions": None,
                     "npc_name": _rent.get("collector_npc", "") or "player",
                     "is_engine": True,
@@ -12914,6 +13517,104 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """
         return any((getattr(loc, 'properties', None) or {}).get('door')
                    for loc in self.locations)
+
+    def _rent_stages_js(self) -> str:
+        """EN2a — the staged-rent runtime. Empty unless the game declares `stages`."""
+        if not (self.rent_enabled and self.rent_stages):
+            return ""
+        return """
+// EN2a — the bill rises in stages. A stage takes over once the player has paid its
+// after_total_paid in all; before the first one is reached the rent is setup.rent_amount.
+setup.rent_stages = """ + json.dumps(self.rent_stages) + """;
+setup.rent_stage_lines = """ + json.dumps(self.rent_stage_lines) + """;
+setup.rentStageIndex = function (totalPaid) {
+    var reached = 0;
+    for (var i = 0; i < setup.rent_stages.length; i++) {
+        if (totalPaid >= setup.rent_stages[i].after_total_paid) reached = i + 1;
+    }
+    return reached;
+};
+setup._rentState = function () {
+    var gs = State.variables.game_state;
+    return (gs && gs.rent_state) || {};
+};
+setup.currentRent = function () {
+    var stage = setup.rentStageIndex(setup._rentState().total_paid || 0);
+    return stage ? setup.rent_stages[stage - 1].amount : setup.rent_amount;
+};
+// Runs inside the pay link. The pay screen only reads what this stores, so a reload of
+// that screen shows the same line; the next payment overwrites it.
+setup.recordRentPayment = function (amount) {
+    var rs = setup._rentState();
+    var before = setup.rentStageIndex(rs.total_paid || 0);
+    rs.total_paid = (rs.total_paid || 0) + amount;
+    rs.stage = setup.rentStageIndex(rs.total_paid);
+    rs.stage_changed = rs.stage !== before;
+};
+// The collector's line for the stage this payment reached, or "" when it reached none.
+setup.rentStageLine = function () {
+    var rs = setup._rentState();
+    if (!rs.stage_changed || !rs.stage) return "";
+    return setup.rent_stage_lines[rs.stage - 1] || "";
+};"""
+
+    @staticmethod
+    def _rent_carry_short_body(stage_line_block: str) -> str:
+        """EN2b — RentDay_Short in a carry game. It only reads: setup.carryRent already
+        took the money and wrote the debt in the link that led here."""
+        return """<<set _cur to setup.rent_currency_symbol || "$">>
+<<set _rs to $game_state.rent_state>>
+<p><<print _rt.carry_scene || "You tell " + _collectorName + " you're short this week. " + _collectorName + " writes the number down.">></p>
+
+<div class="dialog-block dialog-npc">
+  <div class="dialog-content">
+    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _rt.carry_response || "Then it goes on top of next week's. All of it.">>
+  </div>
+</div>
+
+""" + stage_line_block + """<p><<print _rt.carry_closing || "The debt doesn't go anywhere. It waits for next week.">></p>
+
+<p class="rent-balance">You paid: <strong><<print _cur>><<print _rs.short_paid || 0>></strong>. Carried to next week: <strong><<print _cur>><<print _rs.owed || 0>></strong>.</p>
+
+<<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+<<link "Continue your day" _returnTo>><</link>>
+"""
+
+    def _rent_carry_js(self) -> str:
+        """EN2b — the carried-debt runtime. Empty unless `on_short = "carry"`."""
+        if not (self.rent_enabled and self.rent_carries):
+            return ""
+        return """
+// EN2b — a short week never ends the game. She pays what she can (maybe nothing); the
+// rest is owed on top of next week's rent. Runs inside the RentDay links, so the short
+// screen only reads what this stores and a reload of it charges nothing.
+setup.RENT_CARRIED_FLAG = "rent_carried";
+setup.carryRent = function (due, paid) {
+    var rs = State.variables.game_state.rent_state;
+    State.variables.player.core_traits.money -= paid;
+    if (setup.recordRentPayment) setup.recordRentPayment(paid);
+    rs.owed = due - paid;
+    rs.short_paid = paid;
+    rs.is_due = false;
+    if (!(State.variables.flags || {})[setup.RENT_CARRIED_FLAG]) {
+        setup.applyAndNotifyFlag('player', null, setup.RENT_CARRIED_FLAG, 'set');
+    }
+};"""
+
+    def _has_consume_on(self) -> bool:
+        """EN1 — does any included one-time canvas opt in to `consume_on = "exit"`?
+
+        Gates the per-game pieces: the `canvas_state` default and the :passagestart
+        leave check. The helpers they call are always emitted, because every "done"
+        reader routes through them and returns the old answer for a canvas that did
+        not opt in.
+        """
+        for canvas in (self.story_canvases or []):
+            trig = getattr(canvas, "trigger", None)
+            meta = (getattr(trig, "metadata", None) or {}) if trig else {}
+            if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
+                return True
+        return False
 
     def _canvas_entry_passages(self) -> dict:
         """slug -> the passage a canvas is ENTERED at (its first ordered node).
@@ -13848,6 +14549,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         quest_effects_list = choice_tuple[16] if len(choice_tuple) > 16 else []
                         schedule_effects_list = choice_tuple[17] if len(choice_tuple) > 17 else []
                         choice_costs_list = choice_tuple[18] if len(choice_tuple) > 18 else []
+                        step_decision = choice_tuple[19] if len(choice_tuple) > 19 else None
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -14020,6 +14722,20 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # Mark conditional choice as visited when clicked
                         if choice_key:
                             passage_body += f'<<script>>setup.markChoiceVisited("{choice_key}");<</script>>'
+                        # EN1 — record the step decision. Runs inside the link body, i.e.
+                        # BEFORE the navigation, so the :passagestart leave-check sees a
+                        # decided step and does not also park it.
+                        if step_decision:
+                            _sd_id = json.dumps(str(canvas.id))
+                            if step_decision["op"] == "retry":
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "retry", {int(step_decision["days"])});<</script>>'
+                            elif step_decision["op"] == "final":
+                                # The flag name is the TOML canvas id, as template_import's
+                                # closed_step_flags declares it — never the runtime id.
+                                _sd_flag = json.dumps(f"{self._get_canvas_slug(canvas)}_closed")
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "final", null, {_sd_flag});<</script>>'
+                            else:
+                                passage_body += f'<<script>>setup.decideCanvasStep({_sd_id}, "consumes", null);<</script>>'
 
                         # ── Loop: inject loop state changes inside the link ──
                         if is_loop_base and role == 'non_terminal' and choice_node_slug:
@@ -14099,7 +14815,6 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     # to what it was before.
                                     _wants_number = any(
                                         isinstance(it, dict) and it.get('type') == 'trait'
-                                        and it.get('subject') != 'npc'
                                         and it.get('operator') in ('gte', 'gt', 'lte', 'lt')
                                         and isinstance(it.get('value'), (int, float))
                                         and it.get('value') >= 2
@@ -14603,6 +15318,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             logger.warning(f"Choice in node {node.id} references unknown rejection_node {rejection_node_id}")
 
                     text_variants = choice.get('text_variants', []) or []
+                    # EN1 — the step decision on an opted-in canvas (validated to at
+                    # most one per choice). None on every choice of every other game.
+                    step_decision = None
+                    if choice.get('final'):
+                        step_decision = {"op": "final"}
+                    elif choice.get('consumes'):
+                        step_decision = {"op": "consumes"}
+                    elif choice.get('retry_after_days') is not None:
+                        step_decision = {"op": "retry", "days": int(choice.get('retry_after_days'))}
                     processed_choices.append((
                         target_passage, choice_text, time_minutes, effects, flag_effects,
                         conditions_obj, wardrobe_effects,
@@ -14615,6 +15339,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         quest_effects,           # doc 45 G4 — position 16
                         schedule_effects,        # doc 45 G5 — position 17
                         choice_costs,            # per-choice costs — position 18
+                        step_decision,           # EN1 step decision — position 19
                     ))
 
                 return processed_choices
@@ -16660,6 +17385,12 @@ window.devGoBack = function() {
 
         # Info page back-navigation: track last game passage via [script] tag
         # so the handler survives save/load (runs on every story initialization)
+        # EN1 — a step left undecided is a parked no. Info pages (stats, schedules…)
+        # are a look aside, not a leave: the player comes back to the same node.
+        consume_leave_block = ""
+        if self._has_consume_on():
+            consume_leave_block = """    if (infoPages.indexOf(psg) === -1) { setup.parkLeftCanvasSteps(psg); }
+"""
         rent_redirect_block = ""
         if self.rent_enabled:
             rent_redirect_block = """
@@ -16706,12 +17437,41 @@ window.devGoBack = function() {
         # move. Runs AFTER rent/clothing so a blocked entry never charges (no
         # double-charge on retry). Only emitted when some location declares costs;
         # otherwise movement stays free (backward-compatible).
+        has_crossing_costs = self._has_crossing_costs()  # EN11
         has_location_costs = any(
             (getattr(loc, 'properties', None) or {}).get('entry_costs')
             for loc in self.locations
-        )
+        ) or has_crossing_costs
         travel_cost_block = ""
-        if has_location_costs:
+        if has_crossing_costs:
+            # EN11 — the same intercept, plus the areas this move crosses into. One bill:
+            # the room's cost and every toll, checked together, charged together.
+            travel_cost_block = """
+    // Travel-friction intercept: charge entry cost (and any area crossing) on a genuine move.
+    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
+        var travelSlug = (setup.passage_to_location || {})[psg];
+        if (travelSlug) {
+            var destLoc = (setup.locations || {})[travelSlug] || {};
+            var curLoc = (sv.player && sv.player.current_location) || "";
+            // Only a real move (entering a DIFFERENT location) is charged — re-entry
+            // and back-from-a-menu are free.
+            if (String(destLoc.id) !== String(curLoc)) {
+                var crossCosts = setup.crossingCostsFor(travelSlug, curLoc);
+                var tripTraits = setup.mergeCostArrays(
+                    setup.locationCostTraitArray(travelSlug).concat(setup.crossingTraitArray(crossCosts)));
+                if (!setup.checkCostsAffordable(tripTraits)) {
+                    sv._travel_block_message = setup.getCostBlockedMessage(tripTraits);
+                    sv._travel_block_destination = psg;
+                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
+                    return;
+                }
+                setup.deductLocationCosts(travelSlug);
+                setup.deductCrossingCosts(crossCosts);
+            }
+        }
+    }
+"""
+        elif has_location_costs:
             travel_cost_block = """
     // Travel-friction intercept: charge entry cost on a genuine move.
     if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
@@ -16942,7 +17702,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -17021,9 +17781,9 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
-        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
+        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
-          <span class="trait-name"><<print _k>></span>
+          <span class="trait-name"><<print setup.traitLabel(_k)>></span>
           <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="-1">-</button> <span @id="'sidebar-player-trait-' + _k" class="trait-value"><<print $player.core_traits[_k]>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="1">+</button></span>
         </li>
       <</for>>
@@ -17047,9 +17807,9 @@ $(document).on(':passagestart', function(ev) {
           <<set _npcKeys to Object.keys(_npc.core_traits).sort()>>
           <<for _j to 0; _j lt _npcKeys.length; _j++>>
             <<set _nk to _npcKeys[_j]>>
-            <<if setup.hiddenTraits && setup.hiddenTraits.includes(_nk)>><<continue>><</if>>
+            <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_nk)>><<continue>><</if>>
             <li class="trait-item">
-              <span class="trait-name"><<print _nk>></span>
+              <span class="trait-name"><<print setup.traitLabel(_nk)>></span>
               <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="-1">-</button> <span @id="'sidebar-npc-trait-' + _npcId + '-' + _nk" class="trait-value"><<print _npc.core_traits[_nk]>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="1">+</button></span>
             </li>
           <</for>>
@@ -17068,9 +17828,9 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
-        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
+        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
-          <span class="trait-name"><<print _k>></span>
+          <span class="trait-name"><<print setup.traitLabel(_k)>></span>
           <span class="trait-value"><<print $player.core_traits[_k]>></span>
         </li>
       <</for>>
@@ -17169,7 +17929,7 @@ $(document).on(':passagestart', function(ev) {
         <<for _tk, _tv range $player.core_traits>>
           <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
-            <span><<print _tk>></span>
+            <span><<print setup.traitLabel(_tk)>></span>
             <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="-1">-</button> <span @id="'stats-player-trait-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="1">+</button></span>
           </div>
         <</for>>
@@ -17199,7 +17959,7 @@ $(document).on(':passagestart', function(ev) {
             <<for _tk, _tv range _npc.core_traits>>
               <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
-                <span><<print _tk>></span>
+                <span><<print setup.traitLabel(_tk)>></span>
                 <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="-1">-</button> <span @id="'npc-trait-' + _npcId + '-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="1">+</button></span>
               </div>
             <</for>>
@@ -17236,7 +17996,7 @@ $(document).on(':passagestart', function(ev) {
         <<for _tk, _tv range $player.core_traits>>
           <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
-            <span><<print _tk>></span>
+            <span><<print setup.traitLabel(_tk)>></span>
             <span class="stats-trait-value"><<print _tv>></span>
           </div>
         <</for>>
@@ -17266,7 +18026,7 @@ $(document).on(':passagestart', function(ev) {
             <<for _tk, _tv range _npc.core_traits>>
               <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
-                <span><<print _tk>></span>
+                <span><<print setup.traitLabel(_tk)>></span>
                 <span class="stats-trait-value"><<print _tv>></span>
               </div>
             <</for>>
@@ -17348,11 +18108,58 @@ if (clothingMsg) {
         # Rent day page (only if rent enabled)
         rent_page = ""
         if self.rent_enabled:
+            # EN2a — a staged game reads the rent from setup.currentRent(), records each
+            # payment, and lets the collector announce a new stage. An unstaged game's
+            # three passages are byte-identical to before.
+            rent_expr = "setup.currentRent()" if self.rent_stages else "setup.rent_amount"
+            rent_pay_record = (
+                "      <<run setup.recordRentPayment(_rent)>>\n" if self.rent_stages else ""
+            )
+            rent_stage_line_block = (
+                "<<set _stageLine to setup.rentStageLine()>>\n"
+                "<<if _stageLine>>\n"
+                '<div class="dialog-block dialog-npc">\n'
+                '  <div class="dialog-content">\n'
+                '    <strong class="dlg-inline"><<print _collectorName>></strong> <<print _stageLine>>\n'
+                "  </div>\n"
+                "</div>\n"
+                "<</if>>\n\n"
+                if self.rent_stages else ""
+            )
+            # EN2b — carry: the rent due includes what was owed, a partial payment is
+            # allowed, and the short screen reports the carry instead of warning or
+            # evicting. Every piece is "" without carry.
+            carry = self.rent_carries
+            rent_due_expr = (
+                "(" + rent_expr + ") + ($game_state.rent_state.owed || 0)" if carry else rent_expr
+            )
+            rent_owed_line = (
+                "<<if $game_state.rent_state.owed gt 0>>\n"
+                '<p class="rent-owed">Owed from last week: <<print _cur>><<print $game_state.rent_state.owed>>.</p>\n'
+                "<</if>>\n"
+                if carry else ""
+            )
+            rent_paid_clears_owed = (
+                "      <<set $game_state.rent_state.owed to 0>>\n" if carry else ""
+            )
+            rent_partial_link = (
+                "  <<if _money gt 0 and _money lt _rent>>\n"
+                '    <<set _partText to (_rt.partial_pay || "Pay the " + _cur + _money + " you have")>>\n'
+                "    <<link _partText>>\n"
+                "      <<run setup.carryRent(_rent, _money)>>\n"
+                '      <<goto "RentDay_Short">>\n'
+                "    <</link>>\n"
+                "  <</if>>\n"
+                if carry else ""
+            )
+            rent_cant_pay_carry = (
+                "    <<run setup.carryRent(_rent, 0)>>\n" if carry else ""
+            )
             rent_page = """
 :: RentDay
 <<nobr>>
 <<set _money to $player.core_traits.money || 0>>
-<<set _rent to setup.rent_amount>>
+<<set _rent to """ + rent_due_expr + """>>
 <<set _cur to setup.rent_currency_symbol || "$">>
 <<set _rt to setup.rent_text || {}>>
 <<set _collectorName to "the landlord">>
@@ -17377,20 +18184,20 @@ if (clothingMsg) {
 </div>
 
 <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
-<div class="rent-choices">
+""" + rent_owed_line + """<div class="rent-choices">
   <<if _money gte _rent>>
     <<set _payText to "Pay " + _cur + _rent + " rent">>
     <<link _payText>>
       <<set $player.core_traits.money -= _rent>>
-      <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
+""" + rent_pay_record + rent_paid_clears_owed + """      <<set $game_state.rent_state.last_paid_week to $game_state.time_state.current_week>>
       <<set $game_state.rent_state.is_due to false>>
       <<set $game_state.rent_state.warnings to 0>>
       <<goto "RentDay_Paid">>
     <</link>>
   <</if>>
-  <<set _cantPayText to (_rt.cant_pay || "Tell them you can't pay")>>
+""" + rent_partial_link + """  <<set _cantPayText to (_rt.cant_pay || "Tell them you can't pay")>>
   <<link _cantPayText>>
-    <<goto "RentDay_Short">>
+""" + rent_cant_pay_carry + """    <<goto "RentDay_Short">>
   <</link>>
 </div>
 <</nobr>>
@@ -17415,7 +18222,7 @@ if (clothingMsg) {
   </div>
 </div>
 
-<p><<print _rt.paid_closing || "Another week secured.">></p>
+""" + rent_stage_line_block + """<p><<print _rt.paid_closing || "Another week secured.">></p>
 
 <<set _cur to setup.rent_currency_symbol || "$">>
 <p class="rent-balance">Remaining money: <strong><<print _cur>><<print $player.core_traits.money>></strong></p>
@@ -17436,7 +18243,7 @@ if (clothingMsg) {
   <</if>>
 <</if>>
 
-<<if $game_state.rent_state.warnings lt setup.rent_grace_periods>>
+""" + (self._rent_carry_short_body(rent_stage_line_block) if carry else """<<if $game_state.rent_state.warnings lt setup.rent_grace_periods>>
   <p><<print _rt.warning_scene || "You explain that you're short this week. " + _collectorName + "'s expression doesn't change.">></p>
 
   <div class="dialog-block dialog-npc">
@@ -17450,7 +18257,8 @@ if (clothingMsg) {
   <<set $game_state.rent_state.warnings += 1>>
   <<set $game_state.rent_state.is_due to false>>
 
-  <p class="rent-balance">You have: <strong>$<<print $player.core_traits.money>></strong>. You need: <strong>$<<print setup.rent_amount>></strong>.</p>
+  <<set _cur to setup.rent_currency_symbol || "$">>
+  <p class="rent-balance">You have: <strong><<print _cur>><<print $player.core_traits.money>></strong>. You need: <strong><<print _cur>><<print """ + rent_expr + """>></strong>.</p>
 
   <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
   <<link "Continue your day" _returnTo>><</link>>
@@ -17488,7 +18296,14 @@ if (clothingMsg) {
     <<link "Start Over">><<run Engine.restart()>><</link>>
   <</if>>
 <</if>>
-<</nobr>>"""
+""") + """<</nobr>>"""
+
+        # EN4 — the Schedules page withholds a hidden place's name. "" without hidden places,
+        # so the page is emitted exactly as before.
+        hidden = self._has_hidden_places()
+        sched_now_open = "setup.locShownName(_nowSlug, " if hidden else ""
+        sched_row_open = "setup.locShownName(_schSlug, " if hidden else ""
+        sched_close = ")" if hidden else ""
 
         # Build the time widgets content using string concatenation to avoid f-string escaping issues
         time_widgets_start = """:: TimeWidgets [widget nobr]
@@ -17591,6 +18406,21 @@ if (clothingMsg) {
 
 """
 
+        # EN9 — `trait_words` with show_value = true prints "Label: N · word" (or "Label: N"
+        # when no band matches). Spliced in only when some item asks, so every other game's
+        # sidebarItems widget is byte-identical.
+        if any(isinstance(si, dict) and si.get("show_value") for si in (self.sidebar_items or [])):
+            tw_show_value = (
+                '    <<if _item.show_value>>\n'
+                '      <<set _twLabel to _item.label || setup.traitLabel(_twKey)>>\n'
+                '      <div class="sidebar-item trait-words-item trait-words-value" id="sidebar-trait-words-<<print _si>>">\n'
+                '        <span class="band-value"><<print _twLabel + ": " + _twVal + (_twMatched isnot "" ? " · " + _twMatched : "")>></span>\n'
+                '      </div>\n'
+                '    <<elseif _twMatched isnot "">>'
+            )
+        else:
+            tw_show_value = '    <<if _twMatched isnot "">>'
+
         # Sidebar items widget (configurable via TOML [[sidebar_items]])
         sidebar_items_widget = """
 <<widget "sidebarItems">>
@@ -17665,7 +18495,7 @@ if (clothingMsg) {
       <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_tbKey] || 0) : 0>>
     <</if>>
     <<set _traitMax to _item.max || 100>>
-    <<set _traitLabel to _item.label || _tbKey>>
+    <<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>
     <<set _traitPct to Math.max(0, Math.min(100, (_traitVal / _traitMax) * 100))>>
     <<set _tbTier to "">>
     <<if _item.color_tiers>>
@@ -17794,7 +18624,7 @@ if (clothingMsg) {
         <</if>>
       <</for>>
     <</if>>
-    <<if _twMatched isnot "">>
+""" + tw_show_value + """
       <div class="sidebar-item trait-words-item" id="sidebar-trait-words-<<print _si>>">
         <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
         <span class="band-value"><<print _twMatched>></span>
@@ -17848,7 +18678,7 @@ if (clothingMsg) {
                   <<set _npArText to _nb.text>>
                 <</if>>
               <</for>>
-              <div class="sidebar-row"><span class="sidebar-label">🔥 Arousal</span> <span class="sidebar-value"><<print _npArText>></span></div>
+              <div class="sidebar-row"><span class="sidebar-label">🔥 <<print setup.traitLabel("arousal")>></span> <span class="sidebar-value"><<print _npArText>></span></div>
             <</if>>
           <<elseif _npRow is "corruption">>
             <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>
@@ -17857,7 +18687,7 @@ if (clothingMsg) {
               <<if _item.corruption_max_value isnot undefined and _npCorr gte _item.corruption_max_value>>
                 <<set _npCorrOut to (_item.corruption_max_label || "MAX")>>
               <</if>>
-              <div class="sidebar-row"><span class="sidebar-label">🫦 Corruption</span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
+              <div class="sidebar-row"><span class="sidebar-label">🫦 <<print setup.traitLabel("corruption")>></span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
             <</if>>
           <<elseif _npRow is "location">>
             <<set _npLoc to setup.getNpcLocation(_npId)>>
@@ -20539,7 +21369,7 @@ if (clothingMsg) {
 <<set _nowSlug to _currentLoc ? (setup._getLocUuidToSlug()[_currentLoc.location] || _currentLoc.location) : "">>
 <<set _nowOpen to _currentLoc ? setup.navDestUnlocked(_nowSlug) : false>>
 <<if _currentLoc and _nowOpen>>
-<<set _locName to (setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location>>
+<<set _locName to """ + sched_now_open + """(setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location""" + sched_close + """>>
 <span class="now-badge">NOW: <<print _locName>></span>
 <</if>>
 </h3>
@@ -20557,7 +21387,7 @@ if (clothingMsg) {
 <<set _schOpen to setup.navDestUnlocked(_schSlug)>>
 <<set _isCurrent to _schOpen && setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)>>
 <<set _rowClass to _isCurrent ? "current-slot" : (_schOpen ? "" : "locked-slot")>>
-<<set _schLocName to (setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location>>
+<<set _schLocName to """ + sched_row_open + """(setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location""" + sched_close + """>>
 <!-- @class, NOT class="<<print>>". SugarCube does not evaluate macros inside a raw HTML attribute — it
      emits them verbatim, so the row shipped with the literal string as its class and `.current-slot`
      never matched anything. Found 2026-08-11 while adding `.locked-slot`; the attribute directive is the
@@ -20878,6 +21708,22 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         return (getattr(loc, 'properties', None) or {}).get('slug') or f"loc_{loc.id}"
 
     def _render_location_nav_card(self, loc, video_path):
+        """EN4 — the card, wrapped so a place hidden until found is not listed. The wrap sits
+        outside the door branch: a door place is hidden like any other."""
+        card = self._render_location_nav_card_body(loc, video_path)
+        if self._is_hidden_place(loc):
+            return f'<<if setup.locFound("{self._location_nav_slug(loc)}")>>{card}<</if>>'
+        return card
+
+    def _nav_link_line(self, loc, video_path):
+        """One text-mode destination line. A hidden place keeps its <br> inside the wrap,
+        so an unfound place leaves no blank line."""
+        link = self._render_location_nav_link(loc, video_path)
+        if self._is_hidden_place(loc):
+            return f'    <<if setup.locFound("{self._location_nav_slug(loc)}")>>{link}<br><</if>>\n'
+        return "    " + link + "<br>\n"
+
+    def _render_location_nav_card_body(self, loc, video_path):
         """A single nav-grid card for a destination, lock-as-prose aware: a normal
         clickable card when the door is open, else a greyed non-clickable card showing
         the in-world reason. A travel-cost tag rides along when the location has costs."""
@@ -20914,6 +21760,15 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         if (getattr(loc, 'properties', None) or {}).get('door'):
             return open_card.replace(f'data-passage="{passage_name}"',
                                      f'data-passage="{self._location_entry_passage(loc)}"')
+        if (getattr(loc, 'properties', None) or {}).get('hours'):
+            # EN3 — closed comes first: a shut place is greyed with when it opens.
+            closed_card = (
+                f'<div class="location-card location-card-locked location-card-closed">{img_html}'
+                f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>'
+                f'<span class="nav-locked-reason"><<= setup.locClosedReason("{slug}")>></span></div></div>'
+            )
+            return (f'<<if !setup.navDestOpenNow("{slug}")>>{closed_card}'
+                    f'<<elseif setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>'
 
     def _render_location_nav_link(self, loc, video_path):
@@ -20934,6 +21789,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             return open_link.replace(
                 f'[[{loc.name}->{link_name}]]',
                 f'[[{loc.name}->{self._location_entry_passage(loc)}]]')
+        if (getattr(loc, 'properties', None) or {}).get('hours'):
+            # EN3 — text-mode sibling of the closed card.
+            closed_link = f'<span class="nav-link-locked nav-link-closed">{html.escape(loc.name)} — <<= setup.locClosedReason("{slug}")>></span>'
+            return (f'<<if !setup.navDestOpenNow("{slug}")>>{closed_link}'
+                    f'<<elseif setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>')
         return f'<<if setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>'
 
     def _generate_hierarchical_navigation(self, location) -> str:
@@ -20984,9 +21844,13 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 navigation_html += '</div><</nobr>>\n'
             else:
                 # TEXT-ONLY MODE (no images)
-                navigation_html += "    <strong>Available destinations:</strong><br>\n"
+                header = "<strong>Available destinations:</strong><br>"
+                if all(self._is_hidden_place(d) for d in ordered_destinations):
+                    # EN4 — every place here can be hidden: the header goes with them.
+                    header = f"<<if {self._loc_found_cond(ordered_destinations)}>>{header}<</if>>"
+                navigation_html += "    " + header + "\n"
                 for dest in ordered_destinations:
-                    navigation_html += "    " + self._render_location_nav_link(dest, video_path) + "<br>\n"
+                    navigation_html += self._nav_link_line(dest, video_path)
 
         # EXIT LINKS (always text-only, below the grid)
         exit_links = []
@@ -21039,8 +21903,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                     for loc in other_locations
                 )
 
+                all_header = "<p><strong>All locations:</strong></p>"
+                if all(self._is_hidden_place(l) for l in other_locations):
+                    all_header = f"<<if {self._loc_found_cond(other_locations)}>>{all_header}<</if>>"
                 if has_any_images:
-                    navigation_html += "    <p><strong>All locations:</strong></p>\n"
+                    navigation_html += "    " + all_header + "\n"
                     navigation_html += '<<nobr>><div class="location-nav-grid">'
 
                     for other_loc in other_locations:
@@ -21048,9 +21915,9 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 
                     navigation_html += '</div><</nobr>>\n'
                 else:
-                    navigation_html += "    <p><strong>All locations:</strong></p>\n"
+                    navigation_html += "    " + all_header + "\n"
                     for other_loc in other_locations:
-                        navigation_html += "    " + self._render_location_nav_link(other_loc, video_path) + "<br>\n"
+                        navigation_html += self._nav_link_line(other_loc, video_path)
 
         return navigation_html
 

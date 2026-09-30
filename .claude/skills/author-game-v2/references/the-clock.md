@@ -40,7 +40,7 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:5896`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:6100`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:14027`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
@@ -194,7 +194,7 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:5208`) renders `20m` on the
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:5412`) renders `20m` on the
   navigation card from `[[locations.costs]] time`, used at `v2.py:19353` and `:19370`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:12733`) with
@@ -267,10 +267,11 @@ the entry as a dimmed, non-clickable line carrying the author's message instead 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
 
-**People already have this surface; places and activities do not.** `SchedulePage`
-(`v2.py:18964`) publishes every declared `[[npcs.schedules]]` row as a Time / Location / Activity /
-Days table, and it is the only screen in the game that tells the player when to come back. A place
-with hours and no `cooldown_message` is a schedule the player can only learn by losing a day to it.
+**People and places both have this surface now.** `SchedulePage` (`v2.py:21334`) publishes every
+declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
+declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
+(`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
+learn by losing a day to it.
 
 ⚠️ The top-30 mopoga study found **lostness, not grind, is this genre's disease** — 15.5% of player
 comments against grind's 0.9% (Process Review, Round 1). A hidden window is lostness with a clock on it.
@@ -333,7 +334,7 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:5896`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6100`),
   and there is no `@time` token to print the clock either (`v2.py:14027`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*

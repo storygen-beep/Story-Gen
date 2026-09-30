@@ -93,13 +93,14 @@ setup → problem → character interaction → conflict → choice → temptati
    she answers → they push → she thinks. Who they are, what they want and how they feel about her
    in the first lines.
 3. **A first choice inside that first character scene**, not after the opening. Its consequence
-   is **visible as a reaction line**, or as a real flag named on the button — never a score or a stat label
-   (`the-meters.md`, "What the player is shown"). **How it is built:** the reaction is the first
+   is **visible as a reaction line** plus the engine's toast, or as a real flag named on the button —
+   never a `+X` for a stat that does not exist (`the-meters.md`, "What the player is shown"). **How it is built:** the reaction is the first
    line of the node the choice leads to. When the reactions differ, each choice gets its own short
    node that opens on its reaction and then rejoins the scene. That costs the player one click per
    choice, and it is the shape: the engine has no other place to print a line after a click.
 4. **An early temptation** in the first few scenes: attraction, tension, a look, a suggestive
-   choice. The player should know within minutes that sex is what this game is about. 15 of 26 top
+   choice. The player should know within minutes that sex is what this game is about. A hot moment
+   here comes from a stranger or a one-off, never the paid route or the main man (`the-arc.md` A15). 15 of 26 top
    games put something tempting in the opening and 3 put explicit sex there; 8 put nothing
    (measured 2026-09-24 in the 26 games' own source).
 5. **The first objective is a quest card with goal steps.** Not a tip alone: `goals`, so the page
@@ -322,7 +323,7 @@ Walked all 25 parseable games from their declared `startnode`; the scaffolding/f
 > single Continue.
 
 **Two openings worth copying.** The reference game (numbers only) spends **141 words** putting an
-obligation and a deadline on the player: the debt, the term and the threat, then a free first
+obligation that comes back on the player: the debt, the term and the threat, then a free first
 choice. `the-hellfire-club` spends **144** on year, city, why she is
 there, who she is meeting, *ten shillings in your pocket* — and ends on **three** ways to cross
 London. Both are inside the median. Neither explains a system.

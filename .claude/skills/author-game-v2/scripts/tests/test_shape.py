@@ -14,7 +14,8 @@ WIN = {"days": ["Mon", "Wed"], "from": "18:00", "to": "20:00"}
 def full():
     return {
         "phase": "idea",
-        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat", "date": "week 6"}},
+        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat"},   # no date: D8, NC5
+                 "cast": [{"id": "npc_a", "age": 34}, {"id": "npc_b", "age": 22}]},
         "spine": {"pages": [{"id": f"SP{i}", "status": "READY", "signed_by": "LO",
                              "drafted_at": "2026-09-27", "signed_at": "2026-09-28"}
                             for i in range(1, 8)]},
@@ -24,12 +25,17 @@ def full():
             "locations": [{"id": "bar"}, {"id": "flat"}],
             "economy": {"currency": "money", "obligation_amount": 100, "week_income": 150},
             "characters": [
-                {"id": "npc_a", "meters": {"trust": "access"}, "ladder": {"counter": "a_stage", "steps": [
-                    {"n": 1, "canvas": "a_1", "where": "bar", "when": dict(WIN),
+                {"id": "npc_a", "meters": {"trust": {"type": "access", "min": 0, "max": 100}},
+                 "schedule": [{"where": "bar", "weekdays": ["Mon", "Wed"], "from": "17:00", "to": "21:00"},
+                              {"where": "flat", "weekdays": ["Mon", "Wed"], "from": "18:00", "to": "23:00"}],
+                 "ladder": {"counter": "a_stage", "steps": [
+                    {"n": 1, "canvas": "a_1", "where": "bar", "when": dict(WIN), "raises": {"trust": 5},
                      "gate": [{"trait": "nerve", "op": "gte", "value": 10}], "hint": "He is at the bar."},
                     {"n": 2, "canvas": "a_2", "where": "flat", "when": dict(WIN),
                      "gate": [{"flag": "met_a"}], "hint": "He asked you up."}]}},
-                {"id": "npc_b", "ladder": {"counter": "b_stage", "steps": [
+                {"id": "npc_b",
+                 "schedule": [{"where": "bar", "weekdays": ["Mon", "Wed"], "from": "18:00", "to": "20:00"}],
+                 "ladder": {"counter": "b_stage", "steps": [
                     {"n": 1, "canvas": "b_1", "where": "bar", "when": dict(WIN),
                      "gate": [{"trait": "trust", "op": "gte", "value": 5}], "hint": "She waits after close."}]}},
             ],
@@ -80,7 +86,9 @@ def broken(edit):
 def test_each_check_fails_on_its_defect():
     ch = lambda s: s["board"]["characters"]
     cases = {
-        "a step's place is declared": lambda s: ch(s)[0]["ladder"]["steps"][0].update(where="roof"),
+        "a step's place is declared": lambda s: (ch(s)[0]["ladder"]["steps"][0].update(where="roof"),
+                                                 ch(s)[0]["schedule"].append(dict(ch(s)[0]["schedule"][0],
+                                                                                  where="roof"))),
         "a step's hours are a window": lambda s: ch(s)[0]["ladder"]["steps"][0].update(when={"days": ["Mon"]}),
         "a step's variables are declared": lambda s: ch(s)[0]["ladder"]["steps"][0].update(
             gate=[{"trait": "lust", "op": "gte", "value": 1}]),
@@ -91,7 +99,9 @@ def test_each_check_fails_on_its_defect():
         "every step has a guidance line": lambda s: ch(s)[1]["ladder"]["steps"][0].pop("hint"),
         "the door is a declared step": lambda s: s["release_page"]["door"].update(canvas="nowhere"),
         "the promise has a beat this release": lambda s: s["release_page"].pop("promise_alive"),
-        "every spine page is signed": lambda s: s["spine"]["pages"][0].update(signed_at="2026-09-27"),
+        "the goal chain holds": lambda s: s["want"]["promise"].update(date="week 6"),
+        "every spine page is signed": lambda s: s["spine"]["pages"][0].pop("signed_at"),   # D13: unsigned, not same-day
+        "the person is there at the step's hour": lambda s: ch(s)[1]["schedule"][0].update(weekdays=["Mon"]),
     }
     for name, edit in cases.items():
         assert broken(edit) == [name], name

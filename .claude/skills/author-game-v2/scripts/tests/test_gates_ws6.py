@@ -29,7 +29,9 @@ def green_game():
         "project": {"id": "fx", "name": "fx", "starting_canvas": "opening",
                     "quests_engine": "v2"},
         "player": {"core_traits": {"money": 10}},
-        "locations": [{"id": "room_a"}, {"id": "work"}],
+        # room_a holds only A's portrait, so it opens only while she is there (D9a, CK7).
+        "locations": [{"id": "room_a", "hours": [{"open": "18:00", "close": "20:00"}]},
+                      {"id": "work"}],
         # Five rows, not one: a share on fewer than 5 cases is "too few to judge" and a
         # too-few BLOCK row is red (PRD IC21), so a green fixture needs a real sample.
         "npcs": [{"id": "npc_a", "name": "A",
@@ -66,7 +68,9 @@ def green_state():
     return {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"}},
             "release_page": {"version": "0.1", "people": ["npc_a"],
                              "door": {"canvas": "office", "choice": "Take the closing shift"},
-                             "signed_by_lo": True, "signed_at": "2026-09-26"}}
+                             "signed_by_lo": True, "signed_at": "2026-09-26",
+                             # NC1: the reader has read both canvases with a person on them.
+                             "reader": {"meet_a": {"want": "PASS"}, "a_hub": {"want": "PASS"}}}}
 
 
 def rows(tmp_path, monkeypatch, game=None, state=None, release_rc=0, saves_rc=2,
@@ -99,15 +103,16 @@ def flips(tmp_path, monkeypatch, row, game=None, state=None, **kw):
 
 
 def test_past_claim_blocks(tmp_path, monkeypatch):
+    # A past-tense clause about her (CK4): a bare marker no longer blocks on its own.
     g = green_game()
-    g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "She is at the table again, like last time."
+    g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "You came to the table last night."
     flips(tmp_path, monkeypatch, "no past claim on a repeatable", game=g)
 
 
 def test_printed_stat_blocks(tmp_path, monkeypatch):
     g = green_game()
     g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "She smiles. (+5 Trust)"
-    flips(tmp_path, monkeypatch, "no printed stat labels", game=g)
+    flips(tmp_path, monkeypatch, "a printed stat is real", game=g)   # unreal: no Trust trait
 
 
 def test_mute_one_time_step_blocks(tmp_path, monkeypatch):
@@ -137,8 +142,10 @@ def test_broken_saves_block(tmp_path, monkeypatch):
 
 
 def test_undeclared_door_blocks(tmp_path, monkeypatch):
+    # Undeclared means neither copy: since CK2 the release page's door alone counts.
     st = green_state()
     del st["board"]["door"]
+    del st["release_page"]["door"]
     flips(tmp_path, monkeypatch, "the declared door works", state=st)
 
 

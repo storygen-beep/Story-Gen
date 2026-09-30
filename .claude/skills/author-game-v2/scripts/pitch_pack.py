@@ -338,8 +338,18 @@ LIBRARY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                             "references", "moment-library.md")
 
 
+def _shipped(releases):
+    """The releases that shipped: an entry with a `shipped` date (state.md).
+
+    A planned release, or the idea page's first step written into `releases[]`, is
+    not a shipped one, and counting it told the Pitchers a kind had been delivered
+    that no player had seen (PRD v2 DC1 · E4 · H30).
+    """
+    return [r for r in releases or [] if isinstance(r, dict) and r.get("shipped")]
+
+
 def _kinds_shipped(releases):
-    """({kind: count}, unrecorded, [three least used]) from releases[].moment_kind.
+    """({kind: count}, unrecorded, [three least used]) from SHIPPED releases' moment_kind.
 
     A release with no `moment_kind` is UNRECORDED, not guessed — the field is new,
     and inferring a kind from a subject line is an opinion the pack may not hold.
@@ -347,7 +357,7 @@ def _kinds_shipped(releases):
     """
     counts = {k: 0 for k in KIND_KEYS}
     unrecorded = 0
-    for r in releases or []:
+    for r in _shipped(releases):
         k = (r or {}).get("moment_kind")
         if k in counts:
             counts[k] += 1
@@ -514,7 +524,7 @@ def _relationships(game, model, st):
     board = st.get("board") or {}
     declared = {d.get("id"): d for d in (board.get("characters") or []) if isinstance(d, dict)}
     promises = [p for p in (st.get("promises") or []) if isinstance(p, dict) and not p.get("paid_in")]
-    releases = st.get("releases") or []
+    releases = _shipped(st.get("releases"))
     out = []
     for npc in game.get("npcs") or []:
         nid = npc.get("id")
@@ -728,6 +738,141 @@ def _days(idx):
         return str(idx)
 
 
+def _print_promise(want):
+    _rule("THE PROMISE — the fantasy this game already made (want; the idea page, the-want.md §0, §6)")
+    for key, label in (("fantasy_shape", "fantasy shape"), ("model_to_beat", "model to beat"),
+                       ("promise", "the promise"), ("moment_kinds", "moment kinds promised"),
+                       ("face", "her face"), ("companion", "the companion"),
+                       ("pressure", "the pressure-man")):
+        val = want.get(key)
+        if val in (None, "", [], {}):
+            print(f"  {label:<22}not declared")
+        else:
+            print(f"  {label}:")
+            _want_value(val, indent="      ")
+
+
+def _print_kinds(kinds_count, kinds_unrec, kinds_least):
+    _rule("MOMENT KINDS ALREADY SHIPPED — from shipped releases[].moment_kind")
+    for k, label in MOMENT_KINDS:
+        print(f"  {k:<18}{kinds_count[k]:>3}   {label}")
+    if kinds_unrec:
+        print(f"  {'unrecorded':<18}{kinds_unrec:>3}   releases with no moment_kind (not guessed)")
+    print(f"  three least used: {', '.join(kinds_least)}  — one per Pitcher")
+
+
+def _print_library(kind):
+    _rule("THE MOMENT LIBRARY — EVIDENCE, NOT A TEMPLATE. Take the kind, never an entry.")
+    if not kind:
+        print("  no kind given. Run with --kind <" + "|".join(KIND_KEYS) + ">")
+    elif kind not in KIND_KEYS:
+        print(f"  unknown kind `{kind}`. Kinds: {', '.join(KIND_KEYS)}")
+    else:
+        entries = _library_slice(kind)
+        if entries is None:
+            print("  references/moment-library.md not found.")
+        elif not entries:
+            print(f"  the library has no `## {kind}` section.")
+        else:
+            print(f"  kind: {kind}")
+            for line in entries:
+                print(f"  {line}")
+
+
+def _print_shipped(st):
+    shipped = _shipped(st.get("releases"))
+    if shipped:
+        _rule(f"SHIPPED ALREADY — {len(shipped)} release(s). Do not re-pitch these.")
+        for r in shipped:
+            print(f"  v{r.get('version')}  {str(r.get('subject') or '')[:100]}")
+            if r.get("want_line"):
+                _wrap(f"serves: {r['want_line']}", indent="        ")
+
+
+def _read_page(path):
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return fh.read()
+    except OSError:
+        return None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# The idea phase — no build yet (PRD v2 DC1 · E2 · D14)
+# ─────────────────────────────────────────────────────────────────────────────
+# The first step is pitched by three `v2-pitcher`s on the idea page, before a line of
+# TOML exists. The pack used to stop at "not found: …/7_final_game.toml", so the tool
+# built to keep Pitchers from inventing places was missing exactly when nothing is
+# built yet. With no TOML it prints what does exist: the ledger, `WANT.md`, `IDEA.md`,
+# and the Want's own places and people (`want.places[]`, `want.cast[]`).
+
+def idea_pack(slug, state_path, as_json=False, kind=None, person=None):
+    st = _state(state_path) or {}
+    want = st.get("want") or {}
+    game_dir = os.path.dirname(state_path)
+    want_md = _read_page(os.path.join(game_dir, "WANT.md"))
+    idea_md = _read_page(os.path.join(game_dir, "IDEA.md"))
+    kinds_count, kinds_unrec, kinds_least = _kinds_shipped(st.get("releases"))
+    places = [p for p in (want.get("places") or []) if isinstance(p, dict)]
+    why = want.get("why_this_person") or {}
+    people = [dict(c, why=why.get(c.get("id"))) for c in (want.get("cast") or [])
+              if isinstance(c, dict) and c.get("id")]
+
+    if as_json:
+        print(json.dumps(dict(
+            slug=slug, phase=st.get("phase"), built=False, want_page=want_md, idea_page=idea_md,
+            places=places, people=people,
+            promise={k: want.get(k) for k in
+                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
+            moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec, least_used=kinds_least),
+            releases=_shipped(st.get("releases")),
+        ), indent=2, default=list))
+        return 0
+
+    print(f"PITCH PACK — {slug}  (idea phase: no build yet)")
+    print("=" * 72)
+    print(f"  phase           {st.get('phase') or '(no v2_state.json)'}")
+    print(f"  protagonist     {st.get('protagonist') or '?'}")
+    print()
+    print("  No TOML exists, so there are no scenes, flags or schedules to read. A pitch here is")
+    print("  STEP 1 with its person: show his want first. Places and people come from the Want.")
+
+    _print_promise(want)
+    _print_kinds(kinds_count, kinds_unrec, kinds_least)
+    _print_library(kind)
+
+    _rule(f"PLACES — {len(places)}, from want.places[]. A pitch names one of these.")
+    if not places:
+        print("  none declared — want.places[] = [{id, name}] (templates/want.md §1).")
+    for p in places:
+        print(f"  {str(p.get('id')):<22}{p.get('name') or ''}")
+
+    _rule(f"PEOPLE — {len(people)}, from want.cast[]. A pitch names one of these.")
+    if person and person not in {p["id"] for p in people}:
+        print(f"  unknown person `{person}`. People: {', '.join(p['id'] for p in people) or 'none'}")
+    for p in people:
+        mark = "  <- your person" if person and p["id"] == person else ""
+        print(f"  {p['id']}  ·  age {p.get('age', '?')}  ·  keeps: {p.get('keeps') or 'not declared'}{mark}")
+        if p.get("why"):
+            _wrap(f"wanted for: {p['why']}")
+
+    for title, page, name in (("THE WANT PAGE — verbatim", want_md, "WANT.md"),
+                              ("THE IDEA PAGE — verbatim", idea_md, "IDEA.md")):
+        _rule(title)
+        if page is None:
+            print(f"  games/{slug}/{name} not found.")
+        else:
+            for line in page.rstrip().splitlines():
+                print(f"  {line}")
+
+    _print_shipped(st)
+    print()
+    print("─" * 72)
+    print("  Pitch step 1 in eight lines, with one of these people at one of these places.")
+    print("  Zero new places. LO picks one of the three; the others become later steps.")
+    return 0
+
+
 def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     game = gates._load(toml_path)
     model, _ = gates.build(game)
@@ -797,7 +942,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
                      for (o, t), d in lad.items()},
             movers={f"{o}.{t}": [c for c, _, _ in v] for (o, t), v in mv.items()},
             promises=[p for p in (st.get("promises") or []) if not p.get("paid_in")],
-            releases=st.get("releases") or [],
+            releases=_shipped(st.get("releases")),
             promise={k: want.get(k) for k in
                      ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
             moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec,
@@ -821,18 +966,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     print("  the lists below. Nothing here is a score; every figure is a count, or the")
     print("  author's own declared number. Judge nothing.")
 
-    # ── her moment: the promise ─────────────────────────────────────────────
-    _rule("THE PROMISE — the fantasy this game already made (want; the idea page, the-want.md §0, §6)")
-    for key, label in (("fantasy_shape", "fantasy shape"), ("model_to_beat", "model to beat"),
-                       ("promise", "the promise"), ("moment_kinds", "moment kinds promised"),
-                       ("face", "her face"), ("companion", "the companion"),
-                       ("pressure", "the pressure-man")):
-        val = want.get(key)
-        if val in (None, "", [], {}):
-            print(f"  {label:<22}not declared")
-        else:
-            print(f"  {label}:")
-            _want_value(val, indent="      ")
+    _print_promise(want)
 
     # ── what players said last time ─────────────────────────────────────────
     _rule("LAST LISTEN — what players said after the last release, verbatim")
@@ -844,30 +978,8 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     else:
         print("  no listen yet — nothing recorded in v2_state.json `listen[]`.")
 
-    # ── moment kinds shipped ────────────────────────────────────────────────
-    _rule("MOMENT KINDS ALREADY SHIPPED — from releases[].moment_kind")
-    for k, label in MOMENT_KINDS:
-        print(f"  {k:<18}{kinds_count[k]:>3}   {label}")
-    if kinds_unrec:
-        print(f"  {'unrecorded':<18}{kinds_unrec:>3}   releases with no moment_kind (not guessed)")
-    print(f"  three least used: {', '.join(kinds_least)}  — one per Pitcher")
-
-    # ── the moment library, one kind ────────────────────────────────────────
-    _rule("THE MOMENT LIBRARY — EVIDENCE, NOT A TEMPLATE. Take the kind, never an entry.")
-    if not kind:
-        print("  no kind given. Run with --kind <" + "|".join(KIND_KEYS) + ">")
-    elif kind not in KIND_KEYS:
-        print(f"  unknown kind `{kind}`. Kinds: {', '.join(KIND_KEYS)}")
-    else:
-        entries = _library_slice(kind)
-        if entries is None:
-            print("  references/moment-library.md not found.")
-        elif not entries:
-            print(f"  the library has no `## {kind}` section.")
-        else:
-            print(f"  kind: {kind}")
-            for line in entries:
-                print(f"  {line}")
+    _print_kinds(kinds_count, kinds_unrec, kinds_least)
+    _print_library(kind)
 
     # ── clips on the shelf ──────────────────────────────────────────────────
     _rule("CLIPS ON THE SHELF — media files on disk, per person and pool (a count)")
@@ -933,13 +1045,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
         print("  that cannot name the line it serves is unfocused (`the-release.md` loop step 1).")
 
     # ── releases and promises ───────────────────────────────────────────────
-    rels = st.get("releases") or []
-    if rels:
-        _rule(f"SHIPPED ALREADY — {len(rels)} release(s). Do not re-pitch these.")
-        for r in rels:
-            print(f"  v{r.get('version')}  {str(r.get('subject') or '')[:100]}")
-            if r.get("want_line"):
-                _wrap(f"serves: {r['want_line']}", indent="        ")
+    _print_shipped(st)
 
     proms = st.get("promises") or []
     openp = [p for p in proms if not p.get("paid_in")]
@@ -1124,7 +1230,11 @@ def main():
         return 2
     slug, toml_path, state_path = _paths(argv[0])
     if not os.path.exists(toml_path):
-        print(f"not found: {toml_path}")
+        # The idea phase: no build yet. Read the ledger and the Want and idea pages instead.
+        game_dir = os.path.dirname(state_path)
+        if os.path.exists(state_path) or os.path.exists(os.path.join(game_dir, "WANT.md")):
+            return idea_pack(slug, state_path, as_json="--json" in sys.argv, kind=kind, person=person)
+        print(f"not found: {toml_path}, and no v2_state.json or WANT.md in {game_dir}")
         return 2
     return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind, person=person)
 

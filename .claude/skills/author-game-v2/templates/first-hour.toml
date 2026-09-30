@@ -7,6 +7,8 @@
 # THE ONE RULE: the game does not use a name until it has earned it.
 #               People, places, things.
 #
+# The start choice is declared in the ledger, want.player.start_choice, not here.
+#
 # ⚠️ THIS FILE IS A MENU. Section A offers TWO opening shapes and you DELETE ONE.
 #    Keeping both, or blending them, is the defect (F1) — a cold open
 #    carrying a staged open's cast.
@@ -70,8 +72,9 @@ text = "<Named next action — a verb, not a mood. the-voice.md R1.>"
 destinationType = "specific"
 locationId      = "<landing_location>"
 # ⚠️ F3 — THE HANDOVER TIME IS COMPUTED, NOT FELT.
-#    starting_hour + 3 min per undeclared node exit + this number = the clock the
-#    player lands on. Check that something at <landing_location> is OPEN at that
+#    starting_hour + 3 min per undeclared node exit + this number + the landing
+#    location's own costs.time (+ any area crossing_costs.time), which the travel
+#    intercept charges on arrival = the clock the player lands on. Check that something at <landing_location> is OPEN at that
 #    minute. A `trigger_mode = "random"` ambient does not count; neither does a
 #    `substitution_only` walk-in.
 time_progression_minutes = 30

@@ -1,0 +1,387 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — skill-test fixes, phase 1 (PRD_SKILL_TEST_FIXES_v2 §2)
+#  Date: 2026-09-30
+#
+#  Media-free. Each engine item (EN1…EN11) adds only what its own tests need.
+#
+#  EN1 — "a step is used only on yes":
+#    step_offer   one-time, consume_on = "exit", retry_after_days = 2 (the leave
+#                 default). Its choices cover every decision: the yes (consumes),
+#                 a parked no (retry_after_days = 3), the final no (final), and an
+#                 undecided walk-out (no key — leaving counts as a parked no).
+#    step_plain   one-time, NOT opted in: the control. Used up on entry, as ever.
+#    after_closed repeatable, gated on the step_offer_closed flag the final no sets.
+#
+#  EN2a — "the bill rises in stages":
+#    [settings.rent] 100, then 150 once 100 is paid in all, then 200 once 250 is paid.
+#                 Tobin collects and says each new stage. start_after_flag = "rent_on",
+#                 which only the rent tests set, so no other item's test meets a RentDay.
+#
+#  EN3 — "location opening hours":
+#    loc_shop     open Monday-Friday 09:00-17:00, with closed_text.
+#    loc_club     open Friday 22:00-04:00 (overnight: open at 02:00 on Saturday).
+#                 Both are reached from loc_home; no other item's test goes there.
+#
+#  EN4 — "places hidden until found":
+#    loc_attic    reached from loc_home, hidden_until = {flag = "found_attic"}.
+#                 Tobin is scheduled there on Sundays only, so his location has a
+#                 name to withhold; the other items' tests run on Monday.
+#
+#  EN5+EN6 — "one name per trait; locked buttons read a man's feeling":
+#    corr         labelled "Corruption" — no screen may print "corr".
+#    stamina      in_dump = false, no label — off the sidebar dump, "Stamina" elsewhere.
+#    gate_board   a club canvas whose locked choices are gated on her corr, on Tobin's
+#                 trust, and on both (the met half is not listed); one open choice
+#                 moves corr and stamina for the toast.
+#
+#  EN7 — "the men's numbers on their page":
+#    quests_engine = "v2" and a [ui.cast_page] (it lists only people with a quest
+#                 card) showing trust on every card, with word bands; vic also shows
+#                 power (his own show_traits). Both cards open once `started` is set.
+#
+#  EN8 — "decay toward a rest point; wait after contact":
+#    vic          trust 70 decays by 10 toward trait_rest 20; grudge -30 rises by 10
+#                 toward 0 (the default rest) and never crosses it.
+#    sal          trust decays by 10 only after decay_after_days = 2 without contact;
+#                 sal_chat (loc_club, npc = "sal") is how contact is made.
+#
+#  EN9 — "sidebar Label: N · word":
+#    a trait_words sidebar item on corr with show_value = true: "Corruption: 5 · Clean".
+#
+#  EN10 — "thoroughfare vs destination":
+#    loc_bar      kind = "thoroughfare" (read by the release checks, not the engine).
+#
+#  EN11 — "crossing costs":
+#    loc_mall     an area (is_container, off loc_shop) with crossing_costs = { time = 20 }:
+#                 20 minutes on the way in, from outside; loc_mall_food and loc_mall_shop
+#                 inside it are free to move between.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_skill_test_fixes"
+title       = "Engine Skill-Test Fixes"
+description = "Engine fixture for PRD_SKILL_TEST_FIXES_v2 phase 1."
+quests_engine = "v2"
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40, corr = 5, stamina = 50 }
+flag_keys   = ["started", "rent_on", "found_attic"]
+
+[ui.cast_page]
+title       = "The Cast"
+show_traits = ["trust"]
+trait_bands = { trust = [ { max = 19, text = "Wary" },
+                          { min = 20, max = 59, text = "Warming" },
+                          { min = 60, text = "Yours" } ] }
+
+[[sidebar_items]]
+type       = "trait_words"
+trait      = "corr"
+show_value = true
+bands      = [ { min = 0, max = 9, text = "Clean" }, { min = 10, max = 19, text = "Curious" } ]
+
+[traits]
+[[traits.labels]]
+key   = "corr"
+label = "Corruption"
+
+[[traits.labels]]
+key     = "stamina"
+in_dump = false
+
+[settings.rent]
+enabled          = true
+amount           = 100
+collector_npc    = "tobin"
+start_after_flag = "rent_on"
+stages           = [ { amount = 150, after_total_paid = 100 },
+                     { amount = 200, after_total_paid = 250 } ]
+stage_lines      = [ "It's one-fifty from now on. The place costs more than you do.",
+                     "Two hundred. Don't look at me like that, you knew it would climb." ]
+
+[[npcs]]
+id          = "tobin"
+name        = "Tobin"
+description = "Fixture man."
+core_traits = { trust = 10 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "loc_attic"
+weekdays   = [6]
+start_time = "10:00"
+end_time   = "12:00"
+activity   = "Sorting boxes."
+
+[[npcs]]
+id           = "vic"
+name         = "Vic"
+description  = "Fixture boss."
+relationship = "Tobin's boss"
+core_traits  = { trust = 70, power = 30, grudge = -30 }
+flag_keys    = []
+show_traits  = ["power"]
+trait_decay  = { trust = 10, grudge = 10 }
+trait_rest   = { trust = 20 }
+
+[[npcs]]
+id               = "sal"
+name             = "Sal"
+description      = "Fixture regular."
+core_traits      = { trust = 50 }
+flag_keys        = []
+trait_decay      = { trust = 10 }
+decay_after_days = 2
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_bar", "loc_shop", "loc_club", "loc_attic"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+kind        = "thoroughfare"
+description = "The bar."
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_shop"
+name        = "Shop"
+description = "The corner shop."
+entry_from  = "loc_home"
+hours       = [ { weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "17:00" } ]
+closed_text = "The shutter's down. A paper sign: back at nine."
+
+[[locations]]
+id          = "loc_club"
+name        = "Club"
+description = "The club."
+entry_from  = "loc_home"
+hours       = [ { weekdays = [4], open = "22:00", close = "04:00" } ]
+
+[[locations]]
+id           = "loc_attic"
+name         = "Attic"
+description  = "Boxes under the eaves."
+entry_from   = "loc_home"
+hidden_until = { flag = "found_attic" }
+
+[[locations]]
+id             = "loc_mall"
+name           = "Mall"
+description    = "The mall."
+entry_from     = "loc_shop"
+is_container   = true
+crossing_costs = { time = 20 }
+
+[[locations]]
+id          = "loc_mall_food"
+name        = "Food Court"
+description = "The food court."
+parent      = "loc_mall"
+entry_from  = "loc_mall"
+
+[[locations]]
+id          = "loc_mall_shop"
+name        = "Boutique"
+description = "A boutique."
+parent      = "loc_mall"
+entry_from  = "loc_mall"
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── EN1: the opted-in step ───────────────────────────────────────────────────
+
+[[canvases]]
+id   = "step_offer"
+name = "Tobin's offer"
+
+[canvases.trigger]
+location         = "loc_bar"
+is_repeatable    = false
+is_active        = true
+consume_on       = "exit"
+retry_after_days = 2
+
+[[canvases.nodes]]
+id     = "ask"
+name   = "The ask"
+blocks = [ { type = "paragraph", content = "Tobin asks." } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Yes."
+targetType = "node"
+nodeId     = "step_offer.after"
+consumes   = true
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Not tonight."
+targetType       = "location"
+locationId       = "loc_home"
+retry_after_days = 3
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Never. (ends his path)"
+targetType = "location"
+locationId = "loc_home"
+final      = true
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Think about it"
+targetType = "node"
+nodeId     = "step_offer.think"
+
+[[canvases.nodes]]
+id     = "after"
+name   = "After yes"
+blocks = [ { type = "paragraph", content = "He smiles." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases.nodes]]
+id     = "think"
+name   = "Thinking"
+blocks = [ { type = "paragraph", content = "You think." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN1: the control (not opted in) ──────────────────────────────────────────
+
+[[canvases]]
+id   = "step_plain"
+name = "A plain one-time scene"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = false
+is_active     = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [ { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ]
+
+[[canvases.nodes]]
+id     = "only"
+name   = "Only"
+blocks = [ { type = "paragraph", content = "Once." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN1: a reader of the closed flag ─────────────────────────────────────────
+
+[[canvases]]
+id   = "after_closed"
+name = "After the final no"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [ { type = "flag", subject = "player", flag_key = "step_offer_closed", operator = "is_true" } ]
+
+[[canvases.nodes]]
+id     = "only"
+name   = "Only"
+blocks = [ { type = "paragraph", content = "His path is closed." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN5+EN6: the gate board ──────────────────────────────────────────────────
+
+[[canvases]]
+id   = "gate_board"
+name = "The gate board"
+
+[canvases.trigger]
+location      = "loc_club"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "board"
+name   = "Board"
+blocks = [ { type = "paragraph", content = "Four ways to go." } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Kiss him."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Ask him to stay."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "tobin", trait_key = "trust", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Take him upstairs."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "tobin", trait_key = "trust", operator = "gte", value = 5 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Dance."
+targetType = "location"
+locationId = "loc_home"
+effects    = [ { targetType = "player", trait = "corr", op = "add", value = 2 }, { targetType = "player", trait = "stamina", op = "add", value = 3 } ]
+
+# ── EN8: contact with Sal ─────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "sal_chat"
+name = "A word with Sal"
+
+[canvases.trigger]
+location      = "loc_club"
+npc           = "sal"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "Sal nods." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+# ── EN7: quest cards, so the cast page lists both men ────────────────────────
+
+[[quest_cards]]
+npc_id = "tobin"
+text   = "Tobin runs the bar."
+when   = [ { flag = "started", op = "is_true" } ]
+
+[[quest_cards]]
+npc_id = "vic"
+text   = "Vic owns it."
+when   = [ { flag = "started", op = "is_true" } ]
