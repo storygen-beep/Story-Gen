@@ -85,12 +85,14 @@ default_image = "images/her_default.jpg"
 [[sidebar_items]]
 type  = "trait_words"
 trait = "energy"
+show_value = true
 bands = [ { min = 0,  max = 19,  text = "Dead on your feet" },
           { min = 20, max = 100, text = "On your feet" } ]
 
 [[sidebar_items]]
 type  = "trait_words"
 trait = "look"
+show_value = true
 bands = [ { min = 0,  max = 39,  text = "A mess" },
           { min = 40, max = 69,  text = "Slipping" },
           { min = 70, max = 100, text = "Done up" } ]
@@ -98,12 +100,14 @@ bands = [ { min = 0,  max = 39,  text = "A mess" },
 [[sidebar_items]]
 type  = "trait_words"
 trait = "shown"
+show_value = true
 bands = [ { min = 0, max = 4,   text = "Nobody's looking yet" },
           { min = 5, max = 100, text = "They look when you walk in" } ]
 
 [[sidebar_items]]
 type  = "trait_words"
 trait = "favour"
+show_value = true
 bands = [ { min = 0,  max = 4,   text = "Nobody's asked for you" },
           { min = 5,  max = 14,  text = "Asked for upstairs" },
           { min = 15, max = 100, text = "Asked for by name" } ]
@@ -111,6 +115,7 @@ bands = [ { min = 0,  max = 4,   text = "Nobody's asked for you" },
 [[sidebar_items]]
 type  = "trait_words"
 trait = "nerve"
+show_value = true
 bands = [ { min = 0,  max = 9,   text = "Staff doors only" },
           { min = 10, max = 100, text = "Where staff don't go" } ]
 
@@ -119,31 +124,40 @@ type = "quest_next"
 max  = 3
 
 [[traits.labels]]
-key    = "energy"
-hidden = true
+key     = "energy"
+label   = "Energy"
+in_dump = false
 [[traits.labels]]
-key    = "look"
-hidden = true
+key     = "look"
+label   = "Look"
+in_dump = false
 [[traits.labels]]
-key    = "shown"
-hidden = true
+key     = "shown"
+label   = "Shown"
+in_dump = false
 [[traits.labels]]
-key    = "favour"
-hidden = true
+key     = "favour"
+label   = "Favour"
+in_dump = false
 [[traits.labels]]
-key    = "nerve"
-hidden = true
+key     = "nerve"
+label   = "Nerve"
+in_dump = false
 [[traits.labels]]
 key    = "reputation"
+label  = "Reputation"
 hidden = true
 [[traits.labels]]
 key    = "kessler_stage"
+label  = "Kessler step"
 hidden = true
 [[traits.labels]]
 key    = "ade_stage"
+label  = "Ade step"
 hidden = true
 [[traits.labels]]
 key    = "noor_stage"
+label  = "Noor step"
 hidden = true
 [[traits.labels]]
 key   = "money"
@@ -238,11 +252,36 @@ when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
              { trait = "shown", subject = "player", op = "lt", value = 5 } ]
 goals    = [ { trait = "shown", subject = "player", op = "gte", value = 5, label = "Be seen: shifts, the pool, the path" } ]
 
+# The paid climb (the-arc.md A15): Noor raises it, the note, room six. Then the Upstairs card.
+[[quest_cards]]
+text     = "Noor knows how the girls here really make their money."
+tip      = "The Dressing Room, 17:15 to 18:00, Tuesday to Saturday, after your first shift."
+priority = 5
+when     = [ { flag = "first_shift_done", subject = "player", op = "is_true" },
+             { flag = "heard_about_upstairs", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "heard_about_upstairs", subject = "player", op = "is_true", label = "Talk to Noor in the Dressing Room before your shift (17:15–18:00)" } ]
+
+[[quest_cards]]
+text     = "Somebody on the bar floor wants you upstairs."
+tip      = "Work the Bar, 18:00 to 22:00, Tuesday to Saturday. Table six is watching."
+priority = 5
+when     = [ { flag = "heard_about_upstairs", subject = "player", op = "is_true" },
+             { flag = "took_the_note", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "took_the_note", subject = "player", op = "is_true", label = "Get the note from table six at the Bar (18:00–22:00)" } ]
+
+[[quest_cards]]
+text     = "Room six. Any night. $100."
+tip      = "Upstairs, 18:00 to midnight, Tuesday to Saturday. Be done up and rested."
+priority = 5
+when     = [ { flag = "took_the_note", subject = "player", op = "is_true" },
+             { flag = "first_visit_done", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "first_visit_done", subject = "player", op = "is_true", label = "Go to room six Upstairs (18:00–midnight)" } ]
+
 [[quest_cards]]
 text     = "Upstairs. When a member asks for you, you go up. One visit a night."
 tip      = "Upstairs, 18:00 to midnight, Tuesday to Saturday. Be done up and rested."
 priority = 5
-when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
+when     = [ { flag = "first_visit_done", subject = "player", op = "is_true" },
              { trait = "favour", subject = "player", op = "lt", value = 15 } ]
 goals    = [ { trait = "favour", subject = "player", op = "gte", value = 15, label = "Be asked for by name Upstairs" } ]
 
@@ -252,7 +291,7 @@ tip      = "Ade knows how Dana got upstairs. Ask him on his day off."
 priority = 5
 when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
              { trait = "nerve", subject = "player", op = "lt", value = 10 } ]
-goals    = [ { trait = "nerve", subject = "player", op = "gte", value = 10, label = "Take the service stairs after close (22:00–midnight)" } ]
+goals    = [ { trait = "nerve", subject = "player", op = "gte", value = 10, label = "Take the service stairs after close (22:00–23:00)" } ]
 
 # Kessler
 [[quest_cards]]

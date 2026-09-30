@@ -162,16 +162,17 @@ id   = "service_stairs"
 name = "Take the service stairs"
 
 [canvases.trigger]
-location             = "bar_floor"
+location             = "service_stairs"
 is_repeatable        = true
 priority             = 4
 is_active            = true
 max_triggers_per_day = 1
 
+# 22:00-23:00: inside the bar's hours, which is the only way in.
 [[canvases.trigger.schedules]]
 weekdays   = [1, 2, 3, 4, 5]
 start_time = "22:00"
-end_time   = "00:00"
+end_time   = "23:00"
 
 [canvases.trigger.conditions]
 version = "1.0"
@@ -227,6 +228,13 @@ subject  = "player"
 flag_key = "opening_done"
 operator = "is_true"
 
+# Shut until the first time in room six (5_scenes.toml first_visit, the-arc.md A15).
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "first_visit_done"
+operator = "is_true"
+
 [[canvases.trigger.conditions.items]]
 type      = "trait"
 subject   = "player"
@@ -243,7 +251,11 @@ id   = "hands"
 name = "Room four"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_hands_t5", pool = 3, description = "A man seated on a hotel bed, a woman in heels undresses for him, his hands on her breasts and between her legs", search_queries = ["woman undresses for man sitting on bed", "man fingers standing woman hotel room"] } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "first_visit_said_no", operator = "is_true" } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Last time you walked out of room six. This time you came up on your own." } ] },
   { type = "paragraph", content = "The member in room four locks the door and sits on the end of the bed. \"Dress off. Leave the heels.\" You strip for him. Your tits come free and he reaches for them, squeezing hard, thumbs dragging over your nipples. Then his hand goes between your legs and he pushes two fingers into your cunt while you stand there." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Deeper." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "It's a job, and you're good at this job." } ] },
+  { type = "group", blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Just stand here. Just let him. It's a hundred dollars." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -253,6 +265,7 @@ type = "choices"
 text       = "Kneel for him"
 targetType = "node"
 nodeId     = "paid_visit.mouth"
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }
 
@@ -264,14 +277,12 @@ time_progression_minutes = 60
 effects = [ { targetType = "player", trait = "money", op = "add", value = 100, clamp = false },
             { targetType = "player", trait = "favour", op = "add", value = 1 },
             { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"That's all you're getting.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
-time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+targetType = "node"
+nodeId     = "paid_visit.stopped"
 
 [[canvases.nodes]]
 id   = "mouth"
@@ -279,6 +290,8 @@ name = "On your knees"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_oral_t5", pool = 3, description = "A woman kneeling on carpet between a seated man's knees giving him a blowjob, his hand in her hair", search_queries = ["woman kneeling blowjob hand in hair", "kneeling oral hotel room"] } },
   { type = "paragraph", content = "You kneel on the carpet between his knees. He unzips and his cock springs out, thick and already hard. You lick it from the balls to the tip. Then you take it in your mouth and suck, slow at first, then deep. His hand fists in your hair. He fucks your mouth until you gag, and you keep going." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Give it to me." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Breathe through your nose. Keep your eyes on his." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -298,11 +311,8 @@ nodeId     = "paid_visit.after"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"That's all you're getting.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
-time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+targetType = "node"
+nodeId     = "paid_visit.stopped"
 
 [[canvases.nodes]]
 id   = "fucked"
@@ -310,6 +320,8 @@ name = "Over the dresser"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_doggy_t5", pool = 3, description = "A man fucks a woman from behind as she's bent over a dresser, watching in the mirror", search_queries = ["bent over dresser from behind mirror", "doggy style against dresser hotel mirror"] } },
   { type = "paragraph", content = "He bends you over the dresser and yanks your panties down to your knees. He rubs the head of his cock through your wet cunt, then shoves it in. He fucks you hard from behind, one hand on your hip. Your tits bounce against the wood every time he slams in. You watch his face in the mirror while he fucks you." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 25 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Harder. Let the corridor hear it." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Watch his face in the mirror. He's paying to see you like this, and you want him to see it." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -322,12 +334,50 @@ nodeId     = "paid_visit.after"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"Not inside me.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
+targetType = "node"
+nodeId     = "paid_visit.not_inside"
+
+[[canvases.nodes]]
+id   = "stopped"
+name = "That's all"
+blocks = [
+  { type = "paragraph", content = "You put your hand flat on his chest and push him back. He stops. He doesn't like it, but he stops." },
+  { type = "paragraph", content = "\"Half, then,\" he says, and counts fifty onto the dresser instead of a hundred." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Fifty dollars and your dress back on. He'll tell Julian you're hard work." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the fifty"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
 time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 75, clamp = false },
-            { targetType = "player", trait = "favour", op = "add", value = 1 },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+effects     = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
+
+[[canvases.nodes]]
+id   = "not_inside"
+name = "Not inside me"
+blocks = [
+  { type = "paragraph", content = "You twist away from the dresser before he can come. He swears, then finishes in his own fist and wipes his hand on the towel." },
+  { type = "paragraph", content = "\"Seventy-five,\" he says. \"You stopped short.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Seventy-five, and your legs are still shaking. You made the rule. He paid for it anyway." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the seventy-five"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+effects     = [ { targetType = "player", trait = "money", op = "add", value = 75, clamp = false },
+                { targetType = "player", trait = "favour", op = "add", value = 1 },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
 
 [[canvases.nodes]]
 id   = "after"
@@ -350,6 +400,102 @@ time_progression_minutes = 60
 effects = [ { targetType = "player", trait = "money", op = "add", value = 100, clamp = false },
             { targetType = "player", trait = "favour", op = "add", value = 1 },
             { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+
+[[canvases]]
+id   = "carry_drinks_up"
+name = "Carry drinks up to the rooms"
+
+# Upstairs work she can do alone from night one, before the paid climb opens (CK7, LO 2026-10-01).
+# Pays nothing: money comes from the bar and the rooms, not the corridor.
+[canvases.trigger]
+location             = "members_floor"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+max_triggers_per_day = 1
+costs                = [ { trait = "energy", value = 10 } ]
+substitutions        = [ { target_canvas_id = "walkin_member_door", chance = 0.2 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:00"
+end_time   = "23:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "The rooms ring for drinks from 18:00 to 23:00, Tuesday to Saturday. One run a night."
+
+[[canvases.nodes]]
+id   = "corridor"
+name = "The corridor"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You carry a tray of whisky down the long corridor. Room three takes it through a gap in the door. A man's hand, a woman's laugh behind him." },
+    { type = "paragraph", content = "Champagne for room five. The member signs for it without looking at the bill. He looks at your legs the whole time instead." },
+    { type = "paragraph", content = "Room one wants ice. You knock, and the door opens on a man in a towel who takes the bucket and tells you you're new." },
+    { type = "paragraph", content = "Somebody behind room seven is moaning, loud and not faking it. You set the tray down outside the door and knock twice, the way Julian taught you." },
+  ] },
+  { type = "paragraph", content = "Every door up here is shut, and every one of them has a price on it." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "took_the_note", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "first_visit_done", operator = "is_false" } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Room six is at the end of the corridor. The note is still in your bra." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Half the men behind these doors have asked for you by name. You slow down outside theirs." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "You know what goes on behind these doors now. You know what it pays." } ] },
+  { type = "group", blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Dana carried these trays. Then Dana went through these doors. You keep your eyes on the carpet." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the empty tray back down (30m)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+
+[[canvases]]
+id   = "walkin_member_door"
+name = "A door opens"
+
+[canvases.trigger]
+location             = "members_floor"
+is_repeatable        = true
+substitution_only    = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "door"
+name = "A door opens"
+blocks = [
+  { type = "paragraph", content = "A door opens as you pass. A member in a silk robe takes his glass off your tray and doesn't let go of the tray." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [
+      { type = "paragraph", content = "\"You're the one they ask for,\" he says, and his hand slides down to your ass and squeezes. \"Next time, I'm asking.\"" } ] },
+  { type = "group", blocks = [
+      { type = "paragraph", content = "\"New girl,\" he says, looking you up and down. \"I'm going to ask Julian for you.\"" } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pull the tray free and walk on (30m)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+effects                  = [ { targetType = "player", trait = "shown", op = "add", value = 1 } ]
 
 # ══ STAFF HOUSE ═════════════════════════════════════════════════════════════
 [[canvases]]
@@ -782,7 +928,6 @@ targetType       = "location"
 locationId       = "town"
 time_progression_minutes = 10
 show_when_locked = true
-locked_text      = "A charger costs $40, and you don't have it."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 40 } ] }
 effects          = [ { targetType = "player", trait = "money", op = "add", value = -40, clamp = false } ]
@@ -824,7 +969,6 @@ text             = "Hire a boat ($1,000)"
 targetType       = "node"
 nodeId           = "boat_board.where"
 show_when_locked = true
-locked_text      = "A private boat costs $1,000."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 1000 } ] }
 
@@ -915,7 +1059,6 @@ text             = "Look for the members' book"
 targetType       = "node"
 nodeId           = "office_search.safe"
 show_when_locked = true
-locked_text      = "You don't know where he keeps the members' book. Kessler's pages might."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 4 } ] }
 
@@ -1087,7 +1230,6 @@ targetType       = "location"
 locationId       = "town"
 time_progression_minutes = 60
 show_when_locked = true
-locked_text      = "Hair and nails cost $30."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 30 } ] }
 effects          = [ { targetType = "player", trait = "money", op = "add", value = -30, clamp = false },

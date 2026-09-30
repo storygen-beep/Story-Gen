@@ -23,6 +23,12 @@
     "appetite": "To be the one the whole room asks for by name, and to know everything the men at the Linden know.",
     "ascent": "From trays on the bar floor and every door upstairs shut, to the run of the members' floor, the library after hours, Julian's office and the boats at the docks; booked by name.",
     "charge": "transformation, turning into reversal",
+    "cast": [
+      { "id": "julian", "age": 46, "keeps": "nothing: the climb is hers; he holds the tab" },
+      { "id": "ade", "age": 34, "keeps": "step counter + memory flags" },
+      { "id": "kessler", "age": 63, "keeps": "step counter + memory flags" },
+      { "id": "noor", "age": 27, "keeps": "step counter + memory flags" }
+    ],
     "why_this_person": {
       "julian": "The man who made Dana; being wanted by him is being told she is better. Visibly wants her as Dana.",
       "ade": "The one man here who looks at her. Visibly wants her and is scared of it; pours her drink before she asks.",
@@ -82,7 +88,7 @@
       "favour",
       "nerve"
     ],
-    "who_climbs": "both",
+    "who_climbs": "player",
     "ceilings": {
       "shown": 100,
       "favour": 100,
@@ -234,7 +240,7 @@
         "role": "member",
         "schedule": [
           {
-            "location": "bar_floor",
+            "where": "bar_floor",
             "weekdays": [
               1,
               2,
@@ -242,12 +248,12 @@
               4,
               5
             ],
-            "start_time": "17:30",
-            "end_time": "22:00",
+            "from": "17:30",
+            "to": "22:00",
             "activity": "at his table"
           },
           {
-            "location": "library",
+            "where": "library",
             "weekdays": [
               1,
               2,
@@ -255,12 +261,12 @@
               4,
               5
             ],
-            "start_time": "22:00",
-            "end_time": "23:00",
+            "from": "22:00",
+            "to": "23:00",
             "activity": "in the armchair by the lamp"
           },
           {
-            "location": "members_floor",
+            "where": "members_floor",
             "weekdays": [
               1,
               2,
@@ -268,14 +274,14 @@
               4,
               5
             ],
-            "start_time": "23:00",
-            "end_time": "00:00",
+            "from": "23:00",
+            "to": "00:00",
             "activity": "in his room"
           }
         ],
         "schedule_rows": 3,
         "meters": {},
-        "meters_note": "counter is the spine (who_climbs = both); no separate willingness meter in v0.1"
+        "meters_note": "a step counter + memory flags; the climb is hers (who_climbs = player, LO 2026-09-30); no meter of his own in v0.1"
       },
       {
         "id": "ade",
@@ -328,7 +334,7 @@
         "role": "bartender",
         "schedule": [
           {
-            "location": "bar_floor",
+            "where": "bar_floor",
             "weekdays": [
               1,
               2,
@@ -336,23 +342,23 @@
               4,
               5
             ],
-            "start_time": "17:00",
-            "end_time": "23:00",
+            "from": "17:00",
+            "to": "23:00",
             "activity": "behind the bar"
           },
           {
-            "location": "the_docks",
+            "where": "the_docks",
             "weekdays": [
               0
             ],
-            "start_time": "11:00",
-            "end_time": "14:00",
+            "from": "11:00",
+            "to": "14:00",
             "activity": "his day off, by the boats"
           }
         ],
         "schedule_rows": 2,
         "meters": {},
-        "meters_note": "counter is the spine (who_climbs = both); no separate willingness meter in v0.1"
+        "meters_note": "a step counter + memory flags; the climb is hers (who_climbs = player, LO 2026-09-30); no meter of his own in v0.1"
       },
       {
         "id": "noor",
@@ -411,7 +417,7 @@
         "role": "hostess",
         "schedule": [
           {
-            "location": "staff_house",
+            "where": "staff_house",
             "weekdays": [
               0,
               1,
@@ -421,12 +427,12 @@
               5,
               6
             ],
-            "start_time": "09:00",
-            "end_time": "17:15",
+            "from": "09:00",
+            "to": "17:15",
             "activity": "at home"
           },
           {
-            "location": "dressing_room",
+            "where": "dressing_room",
             "weekdays": [
               1,
               2,
@@ -434,12 +440,12 @@
               4,
               5
             ],
-            "start_time": "17:15",
-            "end_time": "18:00",
+            "from": "17:15",
+            "to": "18:00",
             "activity": "getting ready"
           },
           {
-            "location": "bar_floor",
+            "where": "bar_floor",
             "weekdays": [
               1,
               2,
@@ -447,23 +453,23 @@
               4,
               5
             ],
-            "start_time": "18:00",
-            "end_time": "22:00",
+            "from": "18:00",
+            "to": "22:00",
             "activity": "working the floor"
           },
           {
-            "location": "pool_terrace",
+            "where": "pool_terrace",
             "weekdays": [
               5
             ],
-            "start_time": "22:00",
-            "end_time": "00:00",
+            "from": "22:00",
+            "to": "00:00",
             "activity": "swimming after close"
           }
         ],
         "schedule_rows": 4,
         "meters": {},
-        "meters_note": "counter is the spine (who_climbs = both); no separate willingness meter in v0.1"
+        "meters_note": "a step counter + memory flags; the climb is hers (who_climbs = player, LO 2026-09-30); no meter of his own in v0.1"
       },
       {
         "id": "julian",
@@ -471,7 +477,7 @@
         "role": "manager",
         "schedule": [
           {
-            "location": "club",
+            "where": "club",
             "weekdays": [
               1,
               2,
@@ -479,12 +485,12 @@
               4,
               5
             ],
-            "start_time": "17:30",
-            "end_time": "18:30",
+            "from": "17:30",
+            "to": "18:30",
             "activity": "greeting members"
           },
           {
-            "location": "bar_floor",
+            "where": "bar_floor",
             "weekdays": [
               1,
               2,
@@ -492,17 +498,17 @@
               4,
               5
             ],
-            "start_time": "18:30",
-            "end_time": "22:00",
+            "from": "18:30",
+            "to": "22:00",
             "activity": "watching the floor"
           },
           {
-            "location": "julians_office",
+            "where": "julians_office",
             "weekdays": [
               6
             ],
-            "start_time": "12:00",
-            "end_time": "14:00",
+            "from": "12:00",
+            "to": "14:00",
             "activity": "the Sunday count"
           }
         ],
@@ -1046,6 +1052,22 @@
     {
       "at": "sheets",
       "note": "2026-09-29 Fix pass after the v2-player and v2-reader checks: every 'no' written as a scene with a line and a remembered flag (kessler_refused_2..5, ade_refused_1/2, noor_refused_1/2) read back by that person later; refusals added to the shift (both bands), the last paid-visit screen, the library hand, Noor's pool hub; hooks on hubs and activities; her voice banded on Kessler 2/3, Noor 1, the paid visit; Julian reacts to page three, Kessler to the pool; Julian's Sunday line no longer puts the sex through him (WANT §4a); daily tab charge guarded at $15; every 23:59 end -> 00:00 (end is exclusive, v2.py:4112); Kessler's door hub split at page five; a Library row before Kessler's hour; a member shows he wants her upstairs on the opening floor (A13). Sheets not edited."
+    },
+    {
+      "at": "sheets",
+      "note": "2026-09-30 Repair pass for the 2026-09-30 skill, items 1-5 (LO: mechanical). (1) board.characters[].schedule rows renamed to {where, weekdays, from, to}. (2) want.cast declared: Julian 46, Ade 34, Kessler 63, Noor 27 (ages from WANT.md). keeps = step counter + memory flags for Ade, Kessler and Noor; Julian's is open until LO picks item 8. (3) locked_text dropped on the 4 pure number locks (charger, boat, members' book, hair and nails). (4) show_value = true on the 5 banded sidebar meters, and their labels changed from hidden = true to in_dump = false. (5) labels on all 9 changed traits (the stages read 'Kessler step', 'Ade step', 'Noor step'). Side effect: look is no longer hidden, so 'ascent tiers expand the world' now reads its one colour line (look < 40) as a descent. Left red and logged as SKILL_TEST_FINDINGS #56. Open for LO: items 6, 7, 8, work_shift under NC2, walk-in/service_stairs."
+    },
+    {
+      "at": "sheets",
+      "note": "2026-09-30 LO took the recommendations. Item 8: who_climbs both -> player (option A, reverses the 2026-09-29 'keep both'); the men keep a step counter + memory flags; spine/SP2_ladders.md:6 and BOARD.md:73 still say 'both' (LO's pages; wording drafted in proposals/who_climbs_player.md). Item 6: club and cliff_path are thoroughfares; hours on bar_floor Tue-Sat 17-23, library Tue-Sat 18-23, members_floor Tue-Sat 18-24, pool_terrace daily 22-24, each with an in-world closed_text (the engine adds the opening time itself). Service stairs: now a location (thoroughfare, entry_from bar_floor, hidden_until knows_service_stairs, declared in player.flag_keys); the service_stairs canvas moved there, window narrowed to 22-23 so it sits inside the bar's hours; still +1 nerve, still the only nerve raiser. work_shift unchanged; its NC2 red is logged as SKILL_TEST_FINDINGS #58. Item 7 (paid_visit climb) drafted in proposals/paid_visit_climb.md, not built."
+    },
+    {
+      "at": "sheets",
+      "note": "2026-09-30 Item 7 BUILT from proposals/paid_visit_climb.md (LO's answers: her no still opens upstairs, with a once-only line that remembers it; the note is its own scene at the Bar; room six). New one-time canvases in 5_scenes.toml: noor_upstairs_talk (Dressing Room, Tue-Sat 17:15-18:00, reads first_shift_done, sets heard_about_upstairs), the_note (Bar, 18:00-22:00, sets took_the_note on both choices), first_visit (Upstairs, 18:00-00:00, sets first_visit_done, and first_visit_said_no on the no). paid_visit now reads first_visit_done; hands/mouth/fucked carry favour bands (>=15 / >=5 / else); the hands node shows 'Last time you walked out of room six' once, behind first_visit_said_no, and its exits unset it. Four new guidance cards replace the old Upstairs card's opening. Noor's rival line names room TWO, not four as the draft said, because paid_visit's own text is set in room four. favour (Kessler steps 4-5) now comes only after the first visit. Explicit beats for first_visit.hands and .mouth were written by v2-prose (5 explicit words each). Live probe: every step fires in its window, the no path works, the line shows once. New red: Upstairs 18:00-23:00 is empty on a new save (LO to pick a fix). v2-reader found 5 FAILs (two no-choices that changed nothing, an hour that could be false, an eager thought at favour 0, bare stop buttons) and dead bands; all fixed: Noor's no sets told_noor_no and dropping the note sets dropped_the_note, both read at room six; stops on paid_visit and first_visit get written screens (paid_visit.stopped , not_inside , first_visit.stopped -); bands rebased to what each node can reach. Re-read: 0 FAIL. The new stop screens also made sinks >= sources pass (5:5); finding #60 stands as an instrument note."
+    },
+    {
+      "at": "sheets",
+      "note": "2026-10-01 LO picked A for the empty Upstairs: new repeatable carry_drinks_up (Upstairs, Tue-Sat 18:00-23:00, costs 10 energy, pays nothing, once a night, block_pool of four corridor lines, a thought about room six while she holds the note) and its walk-in walkin_member_door (20%, a member in a robe, favour bands, shown +1). Upstairs is no longer open with nothing to do before the paid climb."
     }
   ],
   "dependencies": [
@@ -1126,7 +1148,8 @@
       "everything else gates.py prints"
     ],
     "signed_by_lo": false,
-    "signed_at": null
+    "signed_at": null,
+    "reader": {"noor_upstairs_talk": {"want": "PASS", "next step": "PASS", "hook": "PASS", "her voice at her level": "PASS", "who notices": "PASS", "the written no": "PASS", "the body": "N/A", "the numbers agree": "PASS", "companion and rival": "N/A"}, "the_note": {"want": "PASS", "next step": "PASS", "hook": "PASS", "her voice at her level": "PASS", "who notices": "PASS", "the written no": "PASS", "the body": "N/A", "the numbers agree": "PASS", "companion and rival": "N/A"}, "first_visit": {"want": "PASS", "next step": "PASS", "hook": "PASS", "her voice at her level": "PASS", "who notices": "PASS", "the written no": "PASS", "the body": "PASS", "the numbers agree": "PASS", "companion and rival": "N/A"}, "paid_visit": {"want": "PASS", "next step": "PASS", "hook": "PASS", "her voice at her level": "PASS", "who notices": "PASS", "the written no": "PASS", "the body": "PASS", "the numbers agree": "PASS", "companion and rival": "N/A"}, "carry_drinks_up": {"want": "N/A", "next step": "N/A", "hook": "PASS", "her voice at her level": "PASS", "who notices": "PASS", "the written no": "N/A", "the body": "N/A", "the numbers agree": "PASS", "companion and rival": "N/A"}, "walkin_member_door": {"want": "PASS", "next step": "PASS", "hook": "PASS", "her voice at her level": "N/A", "who notices": "PASS", "the written no": "N/A", "the body": "N/A", "the numbers agree": "PASS", "companion and rival": "N/A"}}
   },
   "spine": {
     "pages": [
@@ -1188,9 +1211,9 @@
     "note": "all [READY]; same-day signing, LO bypassed the day-after rule"
   },
   "build_v0_1": {
-    "built_at": "2026-09-29 (after fix pass 2)",
+    "built_at": "2026-10-01 00:31 (repair pass: items 1-8, the service stairs, Upstairs work; built --debug --dev as before)",
     "output": "games/members_only/output/index.html",
-    "gates": "45/47 pass (location fill; the climb is where you said it is — skill bug #41, LO keeps both)",
+    "gates": "50/54 pass on the 2026-09-30 skill (45/53 before the repair). Red: location fill; her climb (work_shift only, #58); ascent tiers expand the world (look, #56); v2-reader: 0 FAIL on the 4 touched canvases (release_page.reader); explicit pools by place is a REPORT row (7/12, #59). shape.py 12/13 (the door is a declared step, #42).",
     "ship": "NO — 2 BLOCK rows red, both LO's: playtest signature; release build (24 missing media by LO's choice, no games-data.js entry)",
     "words": 5975,
     "explicit_floor": "14.3% of 84 repeatable beats",

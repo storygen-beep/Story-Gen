@@ -93,12 +93,14 @@ default_image = "images/her_default.jpg"
 [[sidebar_items]]
 type  = "trait_words"
 trait = "energy"
+show_value = true
 bands = [ { min = 0,  max = 19,  text = "Dead on your feet" },
           { min = 20, max = 100, text = "On your feet" } ]
 
 [[sidebar_items]]
 type  = "trait_words"
 trait = "look"
+show_value = true
 bands = [ { min = 0,  max = 39,  text = "A mess" },
           { min = 40, max = 69,  text = "Slipping" },
           { min = 70, max = 100, text = "Done up" } ]
@@ -106,12 +108,14 @@ bands = [ { min = 0,  max = 39,  text = "A mess" },
 [[sidebar_items]]
 type  = "trait_words"
 trait = "shown"
+show_value = true
 bands = [ { min = 0, max = 4,   text = "Nobody's looking yet" },
           { min = 5, max = 100, text = "They look when you walk in" } ]
 
 [[sidebar_items]]
 type  = "trait_words"
 trait = "favour"
+show_value = true
 bands = [ { min = 0,  max = 4,   text = "Nobody's asked for you" },
           { min = 5,  max = 14,  text = "Asked for upstairs" },
           { min = 15, max = 100, text = "Asked for by name" } ]
@@ -119,6 +123,7 @@ bands = [ { min = 0,  max = 4,   text = "Nobody's asked for you" },
 [[sidebar_items]]
 type  = "trait_words"
 trait = "nerve"
+show_value = true
 bands = [ { min = 0,  max = 9,   text = "Staff doors only" },
           { min = 10, max = 100, text = "Where staff don't go" } ]
 
@@ -127,31 +132,40 @@ type = "quest_next"
 max  = 3
 
 [[traits.labels]]
-key    = "energy"
-hidden = true
+key     = "energy"
+label   = "Energy"
+in_dump = false
 [[traits.labels]]
-key    = "look"
-hidden = true
+key     = "look"
+label   = "Look"
+in_dump = false
 [[traits.labels]]
-key    = "shown"
-hidden = true
+key     = "shown"
+label   = "Shown"
+in_dump = false
 [[traits.labels]]
-key    = "favour"
-hidden = true
+key     = "favour"
+label   = "Favour"
+in_dump = false
 [[traits.labels]]
-key    = "nerve"
-hidden = true
+key     = "nerve"
+label   = "Nerve"
+in_dump = false
 [[traits.labels]]
 key    = "reputation"
+label  = "Reputation"
 hidden = true
 [[traits.labels]]
 key    = "kessler_stage"
+label  = "Kessler step"
 hidden = true
 [[traits.labels]]
 key    = "ade_stage"
+label  = "Ade step"
 hidden = true
 [[traits.labels]]
 key    = "noor_stage"
+label  = "Noor step"
 hidden = true
 [[traits.labels]]
 key   = "money"
@@ -246,11 +260,36 @@ when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
              { trait = "shown", subject = "player", op = "lt", value = 5 } ]
 goals    = [ { trait = "shown", subject = "player", op = "gte", value = 5, label = "Be seen: shifts, the pool, the path" } ]
 
+# The paid climb (the-arc.md A15): Noor raises it, the note, room six. Then the Upstairs card.
+[[quest_cards]]
+text     = "Noor knows how the girls here really make their money."
+tip      = "The Dressing Room, 17:15 to 18:00, Tuesday to Saturday, after your first shift."
+priority = 5
+when     = [ { flag = "first_shift_done", subject = "player", op = "is_true" },
+             { flag = "heard_about_upstairs", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "heard_about_upstairs", subject = "player", op = "is_true", label = "Talk to Noor in the Dressing Room before your shift (17:15–18:00)" } ]
+
+[[quest_cards]]
+text     = "Somebody on the bar floor wants you upstairs."
+tip      = "Work the Bar, 18:00 to 22:00, Tuesday to Saturday. Table six is watching."
+priority = 5
+when     = [ { flag = "heard_about_upstairs", subject = "player", op = "is_true" },
+             { flag = "took_the_note", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "took_the_note", subject = "player", op = "is_true", label = "Get the note from table six at the Bar (18:00–22:00)" } ]
+
+[[quest_cards]]
+text     = "Room six. Any night. $100."
+tip      = "Upstairs, 18:00 to midnight, Tuesday to Saturday. Be done up and rested."
+priority = 5
+when     = [ { flag = "took_the_note", subject = "player", op = "is_true" },
+             { flag = "first_visit_done", subject = "player", op = "is_false" } ]
+goals    = [ { flag = "first_visit_done", subject = "player", op = "is_true", label = "Go to room six Upstairs (18:00–midnight)" } ]
+
 [[quest_cards]]
 text     = "Upstairs. When a member asks for you, you go up. One visit a night."
 tip      = "Upstairs, 18:00 to midnight, Tuesday to Saturday. Be done up and rested."
 priority = 5
-when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
+when     = [ { flag = "first_visit_done", subject = "player", op = "is_true" },
              { trait = "favour", subject = "player", op = "lt", value = 15 } ]
 goals    = [ { trait = "favour", subject = "player", op = "gte", value = 15, label = "Be asked for by name Upstairs" } ]
 
@@ -260,7 +299,7 @@ tip      = "Ade knows how Dana got upstairs. Ask him on his day off."
 priority = 5
 when     = [ { flag = "opening_done", subject = "player", op = "is_true" },
              { trait = "nerve", subject = "player", op = "lt", value = 10 } ]
-goals    = [ { trait = "nerve", subject = "player", op = "gte", value = 10, label = "Take the service stairs after close (22:00–midnight)" } ]
+goals    = [ { trait = "nerve", subject = "player", op = "gte", value = 10, label = "Take the service stairs after close (22:00–23:00)" } ]
 
 # Kessler
 [[quest_cards]]
@@ -390,6 +429,8 @@ id           = "player"
 name         = "Mara"
 description  = "Dana's little sister. Twenty-four. Nobody here knows your name yet."
 customizable = true
+# Declared so the service stairs can stay hidden until Ade shows her (hidden_until needs a declared flag).
+flag_keys    = ["knows_service_stairs"]
 
 [[player.customization_fields]]
 id      = "name"
@@ -440,6 +481,7 @@ image_search_queries = ["coastal cliff path evening", "path up a sea cliff"]
 entry_from           = "town"
 navigation_order     = ["staff_house", "club"]
 costs                = { time = 10 }
+kind                 = "thoroughfare"
 
 [[locations]]
 id                   = "staff_house"
@@ -459,6 +501,7 @@ image_search_queries = ["private club entrance hall marble", "luxury members clu
 entry_from           = "cliff_path"
 navigation_order     = ["bar_floor", "dressing_room", "pool_terrace", "library", "julians_office", "members_floor"]
 costs                = { time = 10 }
+kind                 = "thoroughfare"
 
 [[locations]]
 id                   = "bar_floor"
@@ -467,7 +510,9 @@ description          = "The club's bar, where you work your shift for tips: low 
 image                = "locations/bar_floor.jpg"
 image_search_queries = ["exclusive club bar dim lamps", "luxury bar dark wood night"]
 entry_from           = "club"
-navigation_order     = []
+navigation_order     = ["service_stairs"]
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "17:00", close = "23:00" } ]
+closed_text          = "The bar's dark. Chairs up on the tables, and Ade's not here."
 
 [[locations]]
 id                   = "dressing_room"
@@ -486,6 +531,8 @@ image                = "locations/pool_terrace.jpg"
 image_search_queries = ["lit swimming pool terrace night sea", "luxury pool terrace evening"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { open = "22:00", close = "24:00" } ]
+closed_text          = "The terrace is shut and the pool is dark."
 
 [[locations]]
 id                   = "library"
@@ -495,6 +542,8 @@ image                = "locations/library.jpg"
 image_search_queries = ["old library armchair lamp fire", "dark wood library reading lamp"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "18:00", close = "23:00" } ]
+closed_text          = "The library's locked. Kessler's chair sits empty behind the glass."
 
 [[locations]]
 id                   = "julians_office"
@@ -532,6 +581,21 @@ image                = "locations/members_floor.jpg"
 image_search_queries = ["hotel corridor thick carpet numbered doors", "luxury hallway doors dim light"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "18:00", close = "24:00" } ]
+closed_text          = "Upstairs is shut. A rope hangs across the stairs."
+
+[[locations]]
+id                   = "service_stairs"
+name                 = "Service Stairs"
+description          = "A narrow stair behind the STAFF ONLY door at the back of the bar. Nobody sweeps it. It comes out at the far end of the corridor upstairs."
+image                = "locations/service_stairs.jpg"
+image_search_queries = ["narrow back staircase dim", "service stairwell old building"]
+entry_from           = "bar_floor"
+# The way up is the climb itself (the service_stairs canvas exits to members_floor);
+# navigation_order may only list rooms whose entry_from is this one.
+navigation_order     = []
+kind                 = "thoroughfare"
+hidden_until         = { flag = "knows_service_stairs" }
 
 # ── people ───────────────────────────────────────────────────────────────────
 [[npcs]]
@@ -1086,16 +1150,17 @@ id   = "service_stairs"
 name = "Take the service stairs"
 
 [canvases.trigger]
-location             = "bar_floor"
+location             = "service_stairs"
 is_repeatable        = true
 priority             = 4
 is_active            = true
 max_triggers_per_day = 1
 
+# 22:00-23:00: inside the bar's hours, which is the only way in.
 [[canvases.trigger.schedules]]
 weekdays   = [1, 2, 3, 4, 5]
 start_time = "22:00"
-end_time   = "00:00"
+end_time   = "23:00"
 
 [canvases.trigger.conditions]
 version = "1.0"
@@ -1151,6 +1216,13 @@ subject  = "player"
 flag_key = "opening_done"
 operator = "is_true"
 
+# Shut until the first time in room six (5_scenes.toml first_visit, the-arc.md A15).
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "first_visit_done"
+operator = "is_true"
+
 [[canvases.trigger.conditions.items]]
 type      = "trait"
 subject   = "player"
@@ -1167,7 +1239,11 @@ id   = "hands"
 name = "Room four"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_hands_t5", pool = 3, description = "A man seated on a hotel bed, a woman in heels undresses for him, his hands on her breasts and between her legs", search_queries = ["woman undresses for man sitting on bed", "man fingers standing woman hotel room"] } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "first_visit_said_no", operator = "is_true" } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Last time you walked out of room six. This time you came up on your own." } ] },
   { type = "paragraph", content = "The member in room four locks the door and sits on the end of the bed. \"Dress off. Leave the heels.\" You strip for him. Your tits come free and he reaches for them, squeezing hard, thumbs dragging over your nipples. Then his hand goes between your legs and he pushes two fingers into your cunt while you stand there." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Deeper." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "It's a job, and you're good at this job." } ] },
+  { type = "group", blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Just stand here. Just let him. It's a hundred dollars." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1177,6 +1253,7 @@ type = "choices"
 text       = "Kneel for him"
 targetType = "node"
 nodeId     = "paid_visit.mouth"
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }
 
@@ -1188,14 +1265,12 @@ time_progression_minutes = 60
 effects = [ { targetType = "player", trait = "money", op = "add", value = 100, clamp = false },
             { targetType = "player", trait = "favour", op = "add", value = 1 },
             { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"That's all you're getting.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
-time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+targetType = "node"
+nodeId     = "paid_visit.stopped"
 
 [[canvases.nodes]]
 id   = "mouth"
@@ -1203,6 +1278,8 @@ name = "On your knees"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_oral_t5", pool = 3, description = "A woman kneeling on carpet between a seated man's knees giving him a blowjob, his hand in her hair", search_queries = ["woman kneeling blowjob hand in hair", "kneeling oral hotel room"] } },
   { type = "paragraph", content = "You kneel on the carpet between his knees. He unzips and his cock springs out, thick and already hard. You lick it from the balls to the tip. Then you take it in your mouth and suck, slow at first, then deep. His hand fists in your hair. He fucks your mouth until you gag, and you keep going." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Give it to me." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Breathe through your nose. Keep your eyes on his." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1222,11 +1299,8 @@ nodeId     = "paid_visit.after"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"That's all you're getting.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
-time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+targetType = "node"
+nodeId     = "paid_visit.stopped"
 
 [[canvases.nodes]]
 id   = "fucked"
@@ -1234,6 +1308,8 @@ name = "Over the dresser"
 blocks = [
   { type = "video", props = { pool_dir = "sex/visit_doggy_t5", pool = 3, description = "A man fucks a woman from behind as she's bent over a dresser, watching in the mirror", search_queries = ["bent over dresser from behind mirror", "doggy style against dresser hotel mirror"] } },
   { type = "paragraph", content = "He bends you over the dresser and yanks your panties down to your knees. He rubs the head of his cock through your wet cunt, then shoves it in. He fucks you hard from behind, one hand on your hip. Your tits bounce against the wood every time he slams in. You watch his face in the mirror while he fucks you." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 25 } ] }, blocks = [ { type = "dialog", props = { speaker = "player" }, content = "Harder. Let the corridor hear it." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "Watch his face in the mirror. He's paying to see you like this, and you want him to see it." } ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1246,12 +1322,50 @@ nodeId     = "paid_visit.after"
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Stop him: \"Not inside me.\" (30m)"
-targetType = "location"
-locationId = "members_floor"
+targetType = "node"
+nodeId     = "paid_visit.not_inside"
+
+[[canvases.nodes]]
+id   = "stopped"
+name = "That's all"
+blocks = [
+  { type = "paragraph", content = "You put your hand flat on his chest and push him back. He stops. He doesn't like it, but he stops." },
+  { type = "paragraph", content = "\"Half, then,\" he says, and counts fifty onto the dresser instead of a hundred." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Fifty dollars and your dress back on. He'll tell Julian you're hard work." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the fifty"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
 time_progression_minutes = 30
-effects = [ { targetType = "player", trait = "money", op = "add", value = 75, clamp = false },
-            { targetType = "player", trait = "favour", op = "add", value = 1 },
-            { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+effects     = [ { targetType = "player", trait = "money", op = "add", value = 50, clamp = false },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_said_no", op = "unset" } ]
+
+[[canvases.nodes]]
+id   = "not_inside"
+name = "Not inside me"
+blocks = [
+  { type = "paragraph", content = "You twist away from the dresser before he can come. He swears, then finishes in his own fist and wipes his hand on the towel." },
+  { type = "paragraph", content = "\"Seventy-five,\" he says. \"You stopped short.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Seventy-five, and your legs are still shaking. You made the rule. He paid for it anyway." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the seventy-five"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+effects     = [ { targetType = "player", trait = "money", op = "add", value = 75, clamp = false },
+                { targetType = "player", trait = "favour", op = "add", value = 1 },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
 
 [[canvases.nodes]]
 id   = "after"
@@ -1274,6 +1388,102 @@ time_progression_minutes = 60
 effects = [ { targetType = "player", trait = "money", op = "add", value = 100, clamp = false },
             { targetType = "player", trait = "favour", op = "add", value = 1 },
             { targetType = "player", trait = "reputation", op = "add", value = 1 } ]
+
+[[canvases]]
+id   = "carry_drinks_up"
+name = "Carry drinks up to the rooms"
+
+# Upstairs work she can do alone from night one, before the paid climb opens (CK7, LO 2026-10-01).
+# Pays nothing: money comes from the bar and the rooms, not the corridor.
+[canvases.trigger]
+location             = "members_floor"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+max_triggers_per_day = 1
+costs                = [ { trait = "energy", value = 10 } ]
+substitutions        = [ { target_canvas_id = "walkin_member_door", chance = 0.2 } ]
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:00"
+end_time   = "23:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "The rooms ring for drinks from 18:00 to 23:00, Tuesday to Saturday. One run a night."
+
+[[canvases.nodes]]
+id   = "corridor"
+name = "The corridor"
+blocks = [
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "You carry a tray of whisky down the long corridor. Room three takes it through a gap in the door. A man's hand, a woman's laugh behind him." },
+    { type = "paragraph", content = "Champagne for room five. The member signs for it without looking at the bill. He looks at your legs the whole time instead." },
+    { type = "paragraph", content = "Room one wants ice. You knock, and the door opens on a man in a towel who takes the bucket and tells you you're new." },
+    { type = "paragraph", content = "Somebody behind room seven is moaning, loud and not faking it. You set the tray down outside the door and knock twice, the way Julian taught you." },
+  ] },
+  { type = "paragraph", content = "Every door up here is shut, and every one of them has a price on it." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "took_the_note", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "first_visit_done", operator = "is_false" } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Room six is at the end of the corridor. The note is still in your bra." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 15 } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Half the men behind these doors have asked for you by name. You slow down outside theirs." } ] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "You know what goes on behind these doors now. You know what it pays." } ] },
+  { type = "group", blocks = [
+      { type = "thought_bubble", props = { speaker = "player" }, content = "Dana carried these trays. Then Dana went through these doors. You keep your eyes on the carpet." } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the empty tray back down (30m)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+
+[[canvases]]
+id   = "walkin_member_door"
+name = "A door opens"
+
+[canvases.trigger]
+location             = "members_floor"
+is_repeatable        = true
+substitution_only    = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "door"
+name = "A door opens"
+blocks = [
+  { type = "paragraph", content = "A door opens as you pass. A member in a silk robe takes his glass off your tray and doesn't let go of the tray." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "favour", operator = "gte", value = 5 } ] }, blocks = [
+      { type = "paragraph", content = "\"You're the one they ask for,\" he says, and his hand slides down to your ass and squeezes. \"Next time, I'm asking.\"" } ] },
+  { type = "group", blocks = [
+      { type = "paragraph", content = "\"New girl,\" he says, looking you up and down. \"I'm going to ask Julian for you.\"" } ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pull the tray free and walk on (30m)"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+effects                  = [ { targetType = "player", trait = "shown", op = "add", value = 1 } ]
 
 # ══ STAFF HOUSE ═════════════════════════════════════════════════════════════
 [[canvases]]
@@ -1706,7 +1916,6 @@ targetType       = "location"
 locationId       = "town"
 time_progression_minutes = 10
 show_when_locked = true
-locked_text      = "A charger costs $40, and you don't have it."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 40 } ] }
 effects          = [ { targetType = "player", trait = "money", op = "add", value = -40, clamp = false } ]
@@ -1748,7 +1957,6 @@ text             = "Hire a boat ($1,000)"
 targetType       = "node"
 nodeId           = "boat_board.where"
 show_when_locked = true
-locked_text      = "A private boat costs $1,000."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 1000 } ] }
 
@@ -1839,7 +2047,6 @@ text             = "Look for the members' book"
 targetType       = "node"
 nodeId           = "office_search.safe"
 show_when_locked = true
-locked_text      = "You don't know where he keeps the members' book. Kessler's pages might."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "kessler_stage", operator = "gte", value = 4 } ] }
 
@@ -2011,7 +2218,6 @@ targetType       = "location"
 locationId       = "town"
 time_progression_minutes = 60
 show_when_locked = true
-locked_text      = "Hair and nails cost $30."
 conditions       = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 30 } ] }
 effects          = [ { targetType = "player", trait = "money", op = "add", value = -30, clamp = false },
@@ -3961,4 +4167,346 @@ time_progression_minutes = 30
 text       = "Say goodnight"
 targetType = "location"
 locationId = "members_floor"
+
+# ══ THE PAID CLIMB — Noor raises it, the note, the first time (the-arc.md A15) ═══════════
+# LO signed proposals/paid_visit_climb.md on 2026-09-30. Three one-time canvases, each reading what
+# the one before sets; paid_visit opens on first_visit_done. Her no at the first time still sets
+# first_visit_done (a one-time canvas is spent when it fires), and paid_visit remembers it once.
+
+[[canvases]]
+id   = "noor_upstairs_talk"
+name = "Noor, about upstairs"
+
+[canvases.trigger]
+location      = "dressing_room"
+is_repeatable = false
+priority      = 10
+is_active     = true
+requires_npc  = "noor"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "17:15"
+end_time   = "18:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "opening_done"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "first_shift_done"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "talk"
+name = "Noor at the mirror"
+blocks = [
+  { type = "paragraph", content = "Noor's at the long mirror doing her lashes. She sees you in the glass and doesn't turn round." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "You've worked a shift and you still think the money's in the tips. Babe. The money's upstairs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "A member asks Julian for you. Julian sends you up. You go in, you do what he paid for, and the money's on the dresser when you leave. Dana went up most nights." },
+  { type = "dialog", props = { speaker = "player" }, content = "Dana did that?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Dana was good at it. Better than me, some weeks. One more thing. Don't take room two. He's mine." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "She says it like advice. It sounds like a warning." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"How much?\""
+targetType  = "node"
+nodeId      = "noor_upstairs_talk.how_much"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"I'm not here for that.\""
+targetType  = "node"
+nodeId      = "noor_upstairs_talk.not_for_that"
+
+[[canvases.nodes]]
+id   = "how_much"
+name = "How much"
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "A hundred a visit. More if you ask for it and mean it. Somebody will ask for you. You've got her face." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A hundred dollars. A third of Dana's tab, for one room and one man." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish getting ready"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "dressing_room"
+time_progression_minutes = 10
+flagEffects              = [ { targetType = "player", flag = "heard_about_upstairs", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "not_for_that"
+name = "Not here for that"
+blocks = [
+  { type = "paragraph", content = "Noor laughs at you in the mirror, not unkindly." },
+  { type = "dialog", props = { speaker = "npc", npcId = "noor" }, content = "Nobody's here for that. Then Sunday comes, and Julian opens his book." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Three hundred every Sunday. You've done the sums. They don't work on tips." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish getting ready"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "dressing_room"
+time_progression_minutes = 10
+flagEffects              = [ { targetType = "player", flag = "heard_about_upstairs", op = "set" },
+                             { targetType = "player", flag = "told_noor_no", op = "set" } ]
+
+[[canvases]]
+id   = "the_note"
+name = "The note from table six"
+
+[canvases.trigger]
+location      = "bar_floor"
+is_repeatable = false
+priority      = 10
+is_active     = true
+requires_npc  = "ade"
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:00"
+end_time   = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "heard_about_upstairs"
+operator = "is_true"
+
+[[canvases.nodes]]
+id   = "table_six"
+name = "Table six"
+blocks = [
+  { type = "paragraph", content = "The man at table six watches you from the moment you walk onto the floor. Grey at the temples, a good watch, soda water and nothing else. When you set his glass down, he keeps hold of your wrist." },
+  { type = "paragraph", content = "\"I've watched you carry that tray since you walked in,\" he says. \"I want you without it. Without the dress too.\"" },
+  { type = "paragraph", content = "He folds a note into your palm and closes your fingers over it. Then he lets go and goes back to his soda. You open it at the bar. Room six. Any night. $100." },
+  { type = "dialog", props = { speaker = "npc", npcId = "ade" }, content = "Put that away before Julian sees it. Or don't. It's your night." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Ade isn't looking at the note. He's looking at your face." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Fold the note into your bra"
+targetType  = "location"
+locationId  = "bar_floor"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "took_the_note", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Drop it on the bar"
+targetType = "node"
+nodeId     = "the_note.dropped"
+
+[[canvases.nodes]]
+id   = "dropped"
+name = "Dropped"
+blocks = [
+  { type = "paragraph", content = "You drop the note on the bar. Ade slides it back to you with two fingers and says nothing." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Room six. Any night. You don't have to go. You just can't stop knowing it's there." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to your tables"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "bar_floor"
+time_progression_minutes = 5
+flagEffects              = [ { targetType = "player", flag = "took_the_note", op = "set" },
+                             { targetType = "player", flag = "dropped_the_note", op = "set" } ]
+
+[[canvases]]
+id   = "first_visit"
+name = "Room six"
+
+[canvases.trigger]
+location      = "members_floor"
+is_repeatable = false
+priority      = 10
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [1, 2, 3, 4, 5]
+start_time = "18:00"
+end_time   = "00:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type     = "flag"
+subject  = "player"
+flag_key = "took_the_note"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "energy"
+operator  = "gte"
+value     = 20
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "look"
+operator  = "gte"
+value     = 50
+
+[[canvases.nodes]]
+id   = "door"
+name = "Room six"
+blocks = [
+  { type = "paragraph", content = "Room six is at the far end of the corridor. He opens the door before you knock. He's in his shirtsleeves, and his watch is already off." },
+  { type = "paragraph", content = "\"You came.\" He shuts the door behind you. \"I've wanted this since the first glass you poured me. Take your time. I paid for the whole hour.\"" },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "dropped_the_note", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "\"You dropped my note on the bar,\" he says. \"And here you are.\"" } ] },
+  { type = "dialog", props = { speaker = "player" }, content = "I've never done this." },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "told_noor_no", operator = "is_true" } ] }, blocks = [ { type = "thought_bubble", props = { speaker = "player" }, content = "You told Noor you weren't here for this. You're standing in room six anyway." } ] },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Dana did. Dana did this most nights, in rooms like this one. Your heart is going so hard he must see it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"A hundred, like the note says.\""
+targetType = "node"
+nodeId     = "first_visit.hands"
+effects    = [ { targetType = "player", trait = "money", op = "add", value = 100, clamp = false } ]
+
+[[canvases.nodes.exit_block.choices]]
+text             = "\"Two hundred, or I walk.\""
+targetType       = "node"
+nodeId           = "first_visit.hands"
+show_when_locked = true
+effects          = [ { targetType = "player", trait = "money", op = "add", value = 200, clamp = false } ]
+conditions       = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "shown", operator = "gte", value = 5 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"No. I'm not Dana.\""
+targetType = "node"
+nodeId     = "first_visit.no"
+
+[[canvases.nodes]]
+id   = "hands"
+name = "Dress off"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/first_visit_hands_t5", pool = 3, description = "A nervous woman undresses in front of a seated man in a hotel room; he touches her breasts and fingers her while she stands", search_queries = ["woman undresses for seated man hotel room", "man fingers standing woman nervous first time"] } },
+  { type = "paragraph", content = "He sits on the end of the bed in room six. He loosens his tie. \"Take it off. Slow.\" You unzip the dress and let it drop. Your bra goes next, then your panties. You stand in your heels with your tits bare, nipples hard. He pulls you in between his knees. His hands close on your tits and squeeze. His thumbs roll your nipples until they ache. Then his hand slides down your belly. Two thick fingers push inside you. You're already wet. He feels it and grins. \"Look at that.\" He curls his fingers deep in your cunt and your hips jerk against his palm." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Kneel for him"
+targetType = "node"
+nodeId     = "first_visit.mouth"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop him: \"That's all you're getting.\" (30m)"
+targetType = "node"
+nodeId     = "first_visit.stopped"
+
+[[canvases.nodes]]
+id   = "mouth"
+name = "On your knees"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/first_visit_oral_t5", pool = 3, description = "A woman kneels between a seated man's knees in a hotel room giving him a blowjob, his hand on her head", search_queries = ["woman kneeling blowjob hotel room first time", "kneeling oral man guides her head"] } },
+  { type = "paragraph", content = "You kneel on the carpet between his knees. Your hands shake on his belt, so he opens it himself and pulls his cock out, thick and half hard. \"Lick it first,\" he says. You run your tongue up the shaft and feel it stiffen against your lips. You take the head in your mouth and suck. Your teeth catch him. \"Softer. Use your hand.\" You wrap your fingers round the base and pump while you suck. He pushes deeper and you gag, and his hand holds your head still. His hips jerk. His cock swells on your tongue and he comes, hot and salty, filling your mouth." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up off your knees"
+targetType = "node"
+nodeId     = "first_visit.after"
+
+[[canvases.nodes]]
+id   = "after"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "He's buttoning his shirt before you're off your knees. He puts his watch back on and nods at the dresser, where your money already is." },
+  { type = "paragraph", content = "\"Same time next week,\" he says. \"I'll ask Julian for you by name.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "You did it. You got on your knees for money, and you were wet the whole time. It's for Dana's tab. That's the only reason. You say it twice, because once doesn't hold." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the money"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 60
+effects     = [ { targetType = "player", trait = "favour", op = "add", value = 1 },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 },
+                { targetType = "player", trait = "energy", op = "add", value = -20 },
+                { targetType = "player", trait = "look", op = "add", value = -50 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_done", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "stopped"
+name = "That's all"
+blocks = [
+  { type = "paragraph", content = "You step back out of his hands and pick your dress up off the floor. He lets you." },
+  { type = "paragraph", content = "\"Then I'll have fifty back,\" he says, and holds his hand out until you give it to him." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Your first time upstairs, and you stopped halfway. Your skin still feels his fingers." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get dressed and go"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 30
+effects     = [ { targetType = "player", trait = "money", op = "add", value = -50, clamp = false },
+                { targetType = "player", trait = "reputation", op = "add", value = 1 },
+                { targetType = "player", trait = "energy", op = "add", value = -20 },
+                { targetType = "player", trait = "look", op = "add", value = -50 } ]
+flagEffects = [ { targetType = "player", flag = "first_visit_done", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "no"
+name = "Not Dana"
+blocks = [
+  { type = "paragraph", content = "He looks at you for a long moment. Then he opens the door for you, polite as a waiter." },
+  { type = "paragraph", content = "\"Room six,\" he says. \"Whenever you change your mind.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Your hands are shaking. You can't tell if it's relief or if you wanted him to argue." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk back down the corridor"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "members_floor"
+time_progression_minutes = 15
+flagEffects              = [ { targetType = "player", flag = "first_visit_done", op = "set" },
+                             { targetType = "player", flag = "first_visit_said_no", op = "set" } ]
 
