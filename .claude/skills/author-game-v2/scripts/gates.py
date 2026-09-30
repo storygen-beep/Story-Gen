@@ -6944,6 +6944,17 @@ def run_gates(model, game, state=None):
         b = l.get("fill", l.get("budget"))
         if isinstance(b, (int, float)) and b > 0:
             budgets[l.get("id")] = float(b)
+    # THIS RELEASE'S PLACES (PRD v2 CK9 · H11, 2026-09-30). A place cut from the release
+    # keeps its board fill, and summing it put a plan nobody is building into the total, the
+    # anchor share and a drift line of its own. With `release_page.places` declared, the
+    # budget is judged over those places only (the same read as shape.py row 1).
+    rp_places = {p if isinstance(p, str) else (p or {}).get("id")
+                 for p in (((state or {}).get("release_page") or {}).get("places") or [])
+                 if isinstance(p, (str, dict))}
+    cut = sorted(lid for lid in budgets if rp_places and lid not in rp_places)
+    if rp_places:
+        budgets = {lid: v for lid, v in budgets.items() if lid in rp_places}
+    judged = sorted(declared & rp_places) if rp_places else sorted(declared)
 
     fails = []
     if empty:
@@ -6981,7 +6992,7 @@ def run_gates(model, game, state=None):
                 f"judged on the backstop]")
     elif budgets:
         off = []
-        for lid in sorted(declared):
+        for lid in judged:
             want_w = budgets.get(lid)
             if not want_w:
                 off.append(f"{lid}: no fill declared in board.locations — nothing to check against")
@@ -7003,8 +7014,9 @@ def run_gates(model, game, state=None):
             fails.append(f"no anchor as built: {anchor_id} holds {anchor_pct:.1f}% of location "
                          f"prose (plan said {plan_anchor_pct:.0f}%) — the world has no centre")
         head = (f"{n} locations · {total:,} words vs {plan_total:,.0f} declared · "
-                f"{len(declared) - len(off)}/{n} on their own budget · "
-                f"anchor {anchor_id} {anchor_pct:.0f}%")
+                f"{len(judged) - len(off)}/{len(judged)} on their own budget · "
+                f"anchor {anchor_id} {anchor_pct:.0f}%"
+                + (f" · {len(cut)} place(s) cut from this release ignored" if cut else ""))
     else:
         # BACKSTOP ONLY — no ledger. See the constants block for why these are not the check.
         if anchor_pct < ANCHOR_SHARE_PCT:

@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK9: location fill reads this release's places (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK9 (H11, the gates.py half; CK5 did shape.py). G1 *location fill* summed every
+`board.locations[].fill`. A place cut from the release still counted in the plan total and the plan's anchor share,
+and got a drift line of its own.
+
+**What changed.** `scripts/gates.py` G1:
+- With `release_page.places` declared (ids or `{id}`, the same read as shape.py row 1), the budget keeps only
+  those places.
+- The per-place drift loop runs over the game's locations that are on the release page, and the plan total and
+  anchor come from those budgets.
+- The post-hoc (round-number) test also reads the filtered budgets.
+- The headline counts "N/M on their own budget" over the judged places and adds "· K place(s) cut from this
+  release ignored" when a cut place carried a fill.
+- Without `release_page.places`, nothing changes. The empty-location check and the backstop branch are
+  untouched.
+- No gate added or renamed; "location fill" is a REPORT row in `--ship`, not BLOCK. No doc edits.
+
+**Verified.**
+- `tests/test_gates_ck9.py`: 4 passed. The cases:
+  - a cut place gets no line, the plan is 2,500, "2/2" and "1 place(s) cut … ignored";
+  - without `places` the cut place drifts, as before, and the plan is 5,500;
+  - six cut 2,000-word fills dilute bar to 14% ("the PLAN has no centre") and, cut, do not;
+  - `{id}` entries work.
+- Skill tests 301 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong (no
+  line moved under a citation).
+- Scratch copies of the five games:
+  - members_only (its release page cuts `club` and `town`): plan 24,100 → 22,500 declared, 0/11 → 0/9 on
+    budget, the two cut drift lines gone, and the plan anchor share 29% → 31%. Still FAIL.
+  - probation: its places match its seven fills; unchanged.
+  - orientation, the_balance, vesper_two: no `release_page.places`; unchanged.
+
+words: 137,538 → 137,538 (0)
+
+---
+
 ## 2026-09-30 — CK8c: alone means alone at that hour; a long click is a brake; a need can be met every day (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8c (I11 · H13 · H12). Three checks read "anywhere, any time" where the
