@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC8: a button names the act; a spend price is on it, pay earned is not (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC8 (D11 · J2). A button could hide the act behind a soft name. And the price
+rule didn't separate a spend price, which goes on the button (gate 21), from income pay, which 0 of the 4 passing
+games put there (§L).
+
+**What changed.** `references/the-voice.md`:
+- R1: **a button never hides the act** *(LO decided, D11)*. A paid visit to a man's room is labelled as one, never
+  as waiting or being asked.
+- The cost paragraph states two rules:
+  - a **spend** price stays on the button (about 8 of 15 games, gate 21);
+  - **pay she earns** does not go on the button (0 of 4 passing games). It is said in the scene that first
+    offers the work, kept on the guidance card, and shown by the toast after.
+- The PRD's example labels come from members_only, one of our own games, so the rule is written without them
+  (ground rule 3).
+
+**Verified.**
+- Both new rules are present (1 each).
+- No other doc tells authors to put earned pay on a button (grep).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,395 → 138,508 (+113) · running total 138,508 / 149,283. Two new rules; nothing old covered them.
+
 ## 2026-09-30 — DC7: two kinds of place, hours and hidden places, and navigation by area (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC7 (D9 · D10 · H20 · H21 · I6 · I22 · I23).

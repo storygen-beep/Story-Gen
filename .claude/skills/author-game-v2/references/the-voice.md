@@ -35,6 +35,10 @@ produces, never in the button.
 Failure kinds: *Make peace with it* = abstract phrase · *The window seat*, *The usual crowd* = bare
 noun · *Let the evening settle*, *Something left unsaid* = register-flavoured / literary.
 
+**A button never hides the act** *(LO decided, D11)*. A paid visit to a man's room is labelled as a
+visit to his room, never as waiting or being asked; a soft name for a sex act or for sex work is the
+failure.
+
 **Location names are UI too.** A name a player cannot resolve is a navigation bug wearing register's
 clothes. Keep the setting's voice in every paragraph; make the words on the nav buttons parseable by
 anyone. *The Undercroft* becomes *The Basement* and says what the place is in one word anybody owns.
@@ -102,8 +106,11 @@ That last one is the shape worth stealing: the label names the skill check **and
 verdict**, so a player never spends a turn discovering they were never eligible. Failing it still
 paid £8.50 — the cost is information, not a wall.
 
-**Money is the one that is gated** (gate 21). A price the player cannot see is a plan they cannot
-make, and they are budgeting against a bill that comes back. **And the notation is gated too** — the
+**Money is the one that is gated** (gate 21) — **a spend price stays on the button**: about 8 of 15
+games print it there. A price the player cannot see is a plan they cannot make, and they are budgeting
+against a bill that comes back. **Pay she earns does not go on the button** *(LO decided, D11)*: 0 of
+the 4 passing games put it there. It is said in the scene that first offers the work, kept on the
+guidance card, and the toast shows it after the click. Spend and income are two rules, kept apart. **And the notation is gated too** — the
 amount on the button has to be written in the game's one currency, the same one
 `[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
 `references/the-economy.md` R7 owns this; `engine.md` §33 lists every place the engine prints money
