@@ -3261,16 +3261,32 @@ def _school_split(game, state):
     decide which school the game is in.
     """
     tiers = set(((state or {}).get("board") or {}).get("ascent_tiers") or [])
+    # A `<npc>_stage` counter is a ladder counter: it records how far a step has come, not
+    # how he feels about her (review J6, LO D5). It counts on NEITHER side (PRD v2 CK8b · I14,
+    # LO 2026-09-30), even when it is named in `ascent_tiers`. `_ladder_counter_sites` counts
+    # what was left out, so the FAIL can say so.
+    stages = _engine_read_stage_traits(game)
     player, npc = collections.Counter(), collections.Counter()
     for path, node in _walk_paths(game):
         if "quest_cards" in "|".join(path) or node.get("type") != "trait":
             continue
         key = str(node.get("trait_key") or "")
+        if key in stages:
+            continue
         if node.get("subject") == "npc":
             npc[f"{node.get('npc_id') or '?'}.{key}"] += 1
         elif key in tiers:
             player[key] += 1
     return player, npc
+
+
+def _ladder_counter_sites(game):
+    """How many trait predicates read a `<npc>_stage` ladder counter (quest cards excluded,
+    as in `_school_split`, which leaves these out)."""
+    stages = _engine_read_stage_traits(game)
+    return sum(1 for path, node in _walk_paths(game)
+               if "quest_cards" not in "|".join(path) and node.get("type") == "trait"
+               and str(node.get("trait_key") or "") in stages)
 
 
 # A meter runs 0-100, so a gate above 100 is a locked door declared in the open
@@ -4171,6 +4187,12 @@ def _week_income(game, currency):
         if _is_dev(c):
             continue
         t = c.get("trigger") or {}
+        # A `substitution_only` canvas only ever renders IN PLACE OF another canvas's visit
+        # (v2.py checkAndSubstituteCanvas), so its pay replaces that visit's pay rather than
+        # adding a visit. Counting it read one game's week as ~1,950 against 600
+        # (PRD v2 CK8b · I9). Since-dated under LO B: `_legacy("sub_income")` is the old count.
+        if t.get("substitution_only") and not _legacy("sub_income"):
+            continue
         sets_on_canvas = {fe.get("flag") for n in c.get("nodes") or []
                           for h in _exit_holders([n]) for fe in (h.get("flagEffects") or [])
                           if fe.get("op", "set") == "set" and fe.get("flag")}
@@ -4780,22 +4802,37 @@ def ladder_problems(game, state, notes=None):
             if npc_id and days and None not in days and frm and to and not from_opening:
                 rows = [r for r in (npcs.get(npc_id) or {}).get("schedules") or []
                         if r.get("location") == st.get("where")]
-                a, b = _pr_mins(frm), _pr_end_mins(to)
-                absent = []
-                for d in sorted(set(days)):
-                    win = _ladder_spans(d, a, b)
-                    hit = False
-                    for r in rows:
-                        ra, rb = _pr_mins(r.get("start_time", "00:00")), _pr_end_mins(r.get("end_time", "23:59"))
-                        for rd in r.get("weekdays") or range(7):
-                            for sd, sa, sb in _ladder_spans(rd, ra, rb):
-                                if any(sd == wd and sa < wb and wa < sb for wd, wa, wb in win):
-                                    hit = True
-                    if not hit:
-                        absent.append(_PR_DAYS[d])
-                if absent:
-                    problems.append(f"{tag}: bound to {npc_id}, whose schedule does not put them at "
-                                    f"{st.get('where')} in {frm}-{to} on {', '.join(absent)}")
+                if _legacy("full_cover"):
+                    # The rule before 2026-09-30: any overlap on the day was enough.
+                    a, b = _pr_mins(frm), _pr_end_mins(to)
+                    absent = []
+                    for d in sorted(set(days)):
+                        win = _ladder_spans(d, a, b)
+                        hit = False
+                        for r in rows:
+                            ra, rb = _pr_mins(r.get("start_time", "00:00")), _pr_end_mins(r.get("end_time", "23:59"))
+                            for rd in r.get("weekdays") or range(7):
+                                for sd, sa, sb in _ladder_spans(rd, ra, rb):
+                                    if any(sd == wd and sa < wb and wa < sb for wd, wa, wb in win):
+                                        hit = True
+                        if not hit:
+                            absent.append(_PR_DAYS[d])
+                    if absent:
+                        problems.append(f"{tag}: bound to {npc_id}, whose schedule does not put them at "
+                                        f"{st.get('where')} in {frm}-{to} on {', '.join(absent)}")
+                else:
+                    # FULL cover (PRD v2 CK8b · H9): ten minutes of him in a two-hour window
+                    # is not him being there for the step. `_window_uncovered` is the helper
+                    # `shape.py` uses for the same question on the ledger. Since-dated
+                    # under LO B (`SHIP_SINCE["full_cover"]`).
+                    missing = _window_uncovered(
+                        days, frm, to,
+                        [(r.get("weekdays") or None, r.get("start_time", "00:00"),
+                          r.get("end_time", "23:59")) for r in rows])
+                    if missing:
+                        problems.append(f"{tag}: bound to {npc_id}, whose schedule does not fully "
+                                        f"cover {st.get('where')} {frm}-{to} on "
+                                        f"{', '.join(_PR_DAYS[d] for d in missing)}")
             # ── every unlock is earnable ── (not the door's: it opens next release)
             if cid == door_canvas:
                 if notes is not None:
@@ -6358,7 +6395,8 @@ def lint_money_channel(model, game, state):
                f"{len(cond_sites)} canvas(es) and priced by {n_price} choice(s) across "
                f"{len(price_sites)} canvas(es)")
     if not n_cond:
-        summary += (" · ⚠ NOTHING is gated on money — every purchase buys a number, "
+        summary += (" · ⚠ NOTHING is gated on money (warning only — a lint, never a gate) — "
+                    "every purchase buys a number, "
                     "and gate 16 passes on the price channel alone")
     rows = [f"{cid}: {n} condition(s) read `{currency}`"
             for cid, n in cond_sites.most_common(12)]
@@ -7370,7 +7408,10 @@ def run_gates(model, game, state=None):
     declared = (state.get("board") or {}).get("ascent_tiers") if state else None
     tiers = list(declared) if declared else ranked[:ASCENT_TIERS]
     source = "declared" if declared else f"top-{ASCENT_TIERS} guess — no v2_state.json"
-    bad = [k for k in tiers if expand[k] <= contract[k]]
+    # A declared tier nothing reads YET is n/a for that tier, not a meter that closes as
+    # much as it opens (0 <= 0 used to fail it; PRD v2 CK8b · H10). Its note says so.
+    unread = [k for k in tiers if not expand[k] and not contract[k]] if declared else []
+    bad = [k for k in tiers if expand[k] <= contract[k] and k not in unread]
 
     # ⚠️ DECLARING MUST NOT NARROW THE CHECK. Judging only what the board names means a
     # descent-shaped meter — the exact failure this gate exists to catch — disappears by not
@@ -7411,8 +7452,10 @@ def run_gates(model, game, state=None):
                 if p_contract[k] >= p_expand[k] and (p_expand[k] + p_contract[k])
                 and k not in bad and k not in _hidden]
 
+    read_tiers = [k for k in tiers if k not in unread]
     gate("ascent tiers expand the world",
-         None if not (expand or contract) else (bool(tiers) and not bad and not descents),
+         None if not (expand or contract) or (declared and not read_tiers and not descents)
+         else (bool(read_tiers) and not bad and not descents),
          f"[{source}] " + ", ".join(f"{k} ({expand[k]}+/{contract[k]}-)" for k in tiers)
          if tiers else "no gated meter found",
          [f"{k} closes more than it opens ({expand[k]} expanding / {contract[k]} contracting)"
@@ -7421,6 +7464,7 @@ def run_gates(model, game, state=None):
           f"({p_expand[k]}+/{p_contract[k]}-) and is NOT declared as an ascent tier — "
           f"a descent wearing an ascent's clothes is invisible to the declaration"
           for k in descents] +
+         [f"`{k}`: declared, no gate reads it this release — n/a for this tier" for k in unread] +
          [f"also ranked: {k} ({expand[k]}+/{contract[k]}-)" for k in ranked if k not in tiers])
 
     # ─────────────────────────────────────────────────────────────────────────
@@ -8961,7 +9005,10 @@ def run_gates(model, game, state=None):
              [f"the board says `{who}` and the game does not do it: {shape}",
               "either move the gating to where the declaration says it lives, or change the "
               "declaration — but do not leave it in the middle, where no field game sits "
-              "(the-meters.md W1)"])
+              "(the-meters.md W1)"]
+             + ([f"{_ladder_counter_sites(game)} gate(s) read a ladder counter and are not "
+                 f"counted: a ladder counter is not his score; give him a meter of his own (D5)"]
+                if _ladder_counter_sites(game) else []))
     # G44 — the start choice is read. `the-want.md` §1.
     #
     # WHAT THIS CATCHES: fake freedom — a start question whose answers share one target,
@@ -11028,6 +11075,38 @@ SHIP_BLOCK_GATES = {
 # "plays end to end", and the row does not say so.
 SHIP_LADDER_ROW = "each step fires when unlocked, and each unlock is earnable"
 
+# ── NEW BLOCK RULES WARN FIRST (LO B, PRD v2 §0.9; `the-release.md`) ────────────────
+# A rule that makes a `--ship` BLOCK row stricter carries a `since` date. A game whose
+# v2_state.json existed before that date is GRANDFATHERED: where the row is red under the
+# new rule and green under the old one, it prints [WARN] "… blocks from your next release"
+# instead of blocking — until the game records a release with `shipped` on or after the
+# date, from which point the row blocks. A game started after the date is blocked from
+# the start. Ordinary gates are never grandfathered: they may go red, and never stop a
+# commit.
+SHIP_GRANDFATHERED = frozenset({"members_only", "orientation", "probation", "the_balance",
+                                "vesper_two"})
+SHIP_SINCE = {
+    # CK8b · H9: a person must be at the step's place for the WHOLE window, not any overlap.
+    "full_cover": ("2026-09-30", SHIP_LADDER_ROW),
+    # CK8b · I9: a substitution_only canvas's pay is not income of its own.
+    "sub_income": ("2026-09-30", SHIP_BLOCK_GATES["the obligation is charged"]),
+}
+# The rules running in their OLD form. Empty except while `ship_rows` re-runs one row to
+# ask whether a grandfathered game would have passed before the rule changed.
+_LEGACY_RULES = set()
+
+
+def _legacy(rule_id):
+    return rule_id in _LEGACY_RULES
+
+
+def _grandfathered(slug, state, since):
+    """Is this game still warned, not blocked, by a rule dated `since`?"""
+    if slug not in SHIP_GRANDFATHERED:
+        return False
+    return not any(str((r or {}).get("shipped") or "") >= since
+                   for r in ((state or {}).get("releases") or []) if isinstance(r, dict))
+
 
 def _ship_ladders(root, slug, game, state, people, player=None):
     """(ok, headline, detail) for the ladder row. `player(build, game, ladder)` returns
@@ -11174,20 +11253,7 @@ def ship_rows(slug, root=None):
           "every --saves check passes" if rc == 0 else f"gates.py --saves {slug} fails",
           _fail_lines(lines))
     for gname, label in SHIP_BLOCK_GATES.items():
-        r = results.get(gname)
-        if r is None:
-            B(label, False, f"gate '{gname}' did not run")
-        elif r.get("parked"):
-            # PRD IC21: a parked block is never read as green, and says why it is red.
-            B(label, False, f"{gname}: {r['headline']}", r["detail"][:10])
-        elif r.get("few"):
-            B(label, False, f"{gname}: {r['headline']}", r["detail"][:10])
-        elif r["na"] and gname != "the obligation is charged":
-            B(label, False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)",
-              r["detail"][:10])
-        else:
-            B(label, None if r["na"] else r["pass_"], f"{gname}: {r['headline']}",
-              r["detail"][:10])
+        B(label, *_block_gate_verdict(gname, results.get(gname)))
 
     # ── untrue: the build against the page it claims to be ───────────────────
     if not rp:
@@ -11242,7 +11308,42 @@ def ship_rows(slug, root=None):
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
                    [f"FAIL {g}" for g in red]))
+
+    # ── LO B: a row red only under a rule newer than a grandfathered game WARNS ──
+    # Re-run just that row with the rule in its old form. Red then too: it stays a FAIL.
+    labels = {label: gname for gname, label in SHIP_BLOCK_GATES.items()}
+    for rule, (since, label) in SHIP_SINCE.items():
+        i = next((k for k, row in enumerate(block) if row[0] == label), None)
+        if i is None or block[i][1] is not False or not _grandfathered(slug, state, since):
+            continue
+        _LEGACY_RULES.add(rule)
+        try:
+            if label == SHIP_LADDER_ROW:
+                old_ok = _ship_ladders(root, slug, game, state, people)[0]
+            else:
+                old_scored, _ = score(model, game, state, os.path.join(root, "games", slug))
+                gname = labels[label]
+                old_ok = _block_gate_verdict(
+                    gname, next((r for r in old_scored if r["gate"] == gname), None))[0]
+        finally:
+            _LEGACY_RULES.discard(rule)
+        if old_ok is not False:
+            name, _ok, head, detail = block[i]
+            block[i] = (name, "warn", f"{head} — new since {since} ({rule}); blocks from your "
+                                      f"next release", detail)
     return block, report
+
+
+def _block_gate_verdict(gname, r):
+    """(ok, headline, detail) for a gate promoted to a `--ship` BLOCK row."""
+    if r is None:
+        return False, f"gate '{gname}' did not run", []
+    if r.get("parked") or r.get("few"):
+        # PRD IC21: a parked block is never read as green, and says why it is red.
+        return False, f"{gname}: {r['headline']}", r["detail"][:10]
+    if r["na"] and gname != "the obligation is charged":
+        return False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
+    return (None if r["na"] else r["pass_"]), f"{gname}: {r['headline']}", r["detail"][:10]
 
 
 def ship_mode(slug):
@@ -11252,7 +11353,8 @@ def ship_mode(slug):
     print(f"  {'─'*72}")
     print("  BLOCK — broken, unfinishable or untrue. Any red row stops the publish.")
     for name, ok, head, detail in block:
-        tag = "n/a " if ok is None else ("PASS" if ok else "FAIL")
+        tag = ("WARN" if ok == "warn" else "n/a " if ok is None else
+               ("PASS" if ok else "FAIL"))
         print(f"  [{tag}]  {name:42s} {head}")
         for d in detail:
             print(f"          · {d}")

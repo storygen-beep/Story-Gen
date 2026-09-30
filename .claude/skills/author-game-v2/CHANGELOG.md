@@ -5,6 +5,77 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK8b: counting fixes, and new BLOCK rules warn first (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8b (I9 · I14 · H9 · H10 · H14). Five counting defects:
+- walk-in pay counted as income of its own (~1,950 against a declared 600);
+- ladder counters ignored by the climb split;
+- the person-present check passing on any overlap;
+- a declared tier with no reads failing gate 10 (0 ≤ 0);
+- the "NOTHING is gated on money" lint not saying it is only a warning.
+
+H9 and I9 both tighten a `--ship` BLOCK row, so they are the first rules under LO B (§0.9), and this item
+builds that mechanism.
+
+**What changed.** `scripts/gates.py`:
+- **I9:** `_week_income` skips `substitution_only` canvases. They render only in place of another visit, so
+  their pay replaces that visit's.
+- **I14 (LO chose option 3 after the first run):** `_school_split` counts a `<npc>_stage` ladder counter
+  (`_engine_read_stage_traits`) on NEITHER side, even when `ascent_tiers` names it. A ladder counter is progress,
+  not his score (review J6, LO D5).
+  - The first build put it on the cast side. That flipped probation (declared `player`) to FAIL, because every
+    game with ladders drifted to "cast".
+  - A new `_ladder_counter_sites` counts what was left out. When *the climb is where you said it is* FAILS, a
+    detail line says "N gate(s) read a ladder counter and are not counted: a ladder counter is not his score;
+    give him a meter of his own (D5)".
+- **H9:** the ladder's person-present check needs FULL cover through `_window_uncovered` (CK5's helper). The
+  wording is now "does not fully cover {where} {from}-{to} on {days}". The old any-overlap test is kept only
+  as the legacy branch.
+- **H10:** gate 10 leaves a declared tier with zero reads out of the failures and gives it a note: "declared,
+  no gate reads it this release — n/a for this tier". With only unread tiers and no descents, the gate is n/a.
+- **H14:** the lint reads "NOTHING is gated on money (warning only — a lint, never a gate)".
+- **LO B:**
+  - `SHIP_GRANDFATHERED` (the five games) and `SHIP_SINCE` sit beside `SHIP_BLOCK_GATES`. `SHIP_SINCE` holds
+    `full_cover` for the ladder row and `sub_income` for "the pressure can be paid or is signposted" (gate
+    24), both since 2026-09-30.
+  - The rules check `_legacy(rule)`. `_grandfathered(slug, state, since)` holds until a release is `shipped`
+    on or after `since`.
+  - `ship_rows` re-runs a red since-dated row on a grandfathered game with the rule in its old form. If it
+    was green then, the row becomes `warn`: "… — new since 2026-09-30 (rule); blocks from your next
+    release".
+  - `ship_mode` prints `[WARN]` and does not count it red.
+  - The block-gate verdict is factored into `_block_gate_verdict` (same logic) so the re-run can use it.
+- `references/the-release.md` § The check: a "New BLOCK rules warn first (LO B)" paragraph with the rule and
+  the list.
+- `tests/test_gates_ws4.py` `test_person_must_be_there`: the expected wording is now "does not fully cover".
+- No gate or lint added or renamed; no scoreboard edit.
+- `cite_check --fix` moved `engine.md:2381` (gates.py 5043 → 5080 over the item). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8b.py`: 17 passed.
+  - I9: 350 vs 1400, and legacy counts it.
+  - I14: `jo_stage` counts on neither side, even named as a tier; the climb FAIL carries the D5 line.
+  - H9: partial overlap fails with the new wording; full cover and back-to-back rows pass; legacy passes the
+    overlap.
+  - H10: an unread tier is n/a with the note; only unread is n/a.
+  - H14: warning only.
+  - LO B: grandfathered warns and `ship_mode` exits 0 with `[WARN]`; a release shipped after `since` blocks;
+    an older release still warns; a new slug blocks; red under the old rule too stays a FAIL; the income rule
+    warns for vesper_two and blocks for a new game; the legacy set is empty afterwards.
+- Skill tests 283 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five games, gates and `--ship` before → after. No BLOCK verdict changed and no WARN
+  appeared.
+  - members_only: week income 1950 → 900 (declared 600, still PASS). *the climb is where you said it is*
+    stays FAIL (declared `both`, 0% on the cast), and now adds "28 gate(s) read a ladder counter and are not
+    counted: a ladder counter is not his score; give him a meter of his own (D5)".
+  - vesper_two: week income 2335 → 2230, still PASS.
+  - orientation, probation, the_balance: unchanged. Under option 3, probation's *climb* stays PASS
+    (`player`, 7 tier sites, 0 cast).
+
+words: 137,419 → 137,504 (+85) · running total 137,504 / 149,283
+
+---
+
 ## 2026-09-30 — CK8a: a quoted "no" counts; "ass" alone is not anal, a mouth fuck is oral (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8a (I3 · I10). A no written as her spoken line (`"No."`, `“Not tonight.”`)

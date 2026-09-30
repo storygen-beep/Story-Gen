@@ -418,6 +418,13 @@ That is correct for a release gate — it judges what ships — and it means the
 
 ⚠️ **The archive is reported, never judged.** `output/` is legitimately rebuilt after archiving.
 
+**New BLOCK rules warn first (LO B, 2026-09-30).** A rule that makes a `--ship` BLOCK row stricter carries a
+`since` date (`SHIP_SINCE` in `gates.py`). A game whose `v2_state.json` existed before that date
+(`SHIP_GRANDFATHERED`: members_only, orientation, probation, the_balance, vesper_two) gets `[WARN] … blocks
+from your next release` where only the new rule is red. It keeps warning until it records a release with
+`shipped` on or after `since`; then the row blocks. A game started later is blocked from the start. Ordinary
+gates are never grandfathered.
+
 ---
 
 ## § The first release (v0.1) — the one exception
