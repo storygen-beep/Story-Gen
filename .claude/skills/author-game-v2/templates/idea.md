@@ -12,7 +12,7 @@
 **Which shape?** Pick one, or name a mix. Each has its own engine:
 
 - [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
-- [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, a clock)*
+- [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, something that repeats)*
 - [ ] **Taboo at home** — the house, and who is in the next room
 - [ ] **Mystery** — she investigates, and something works on her while she does *(secrets she buys)*
 
@@ -34,7 +34,8 @@ Record these as `want.fantasy_shape`, `want.model_to_beat` and `want.moment_kind
 
 ## 2. The promise — what keeps pulling the player forward
 
-- **The goal:** <a named goal> **by** <a date or a moment>
+- **The goal:** <a named goal> — **when it ends, the next goal:** <named> (no date: the clock is something
+  that repeats)
 - **The mystery:** <what she does not know yet> — **it pays out** <roughly when>
 - **The rival:** <who wants the same thing, or stands in her way>
 

@@ -5,6 +5,56 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC3: the goal has no date; the bill repeats, rises in stages and carries (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC3 (D8 · C1 · C2 · H18 · I12).
+- The skill asked for a dated goal. The engine fires nothing on a date, and a sidebar `countdown` only displays
+  (R4:89).
+- A goal could end with nothing next (C2).
+- R3c argued against staged rent, and engine.md §26 defaulted to eviction. EN2a/EN2b now ship stages, stage lines
+  and carried debt.
+- A non-money hold had no ledger home (H18).
+
+**What changed.**
+- `references/the-want.md` §0:
+  - the shape table's "a clock" becomes "something that repeats";
+  - "Declare the goal with a date" becomes "the goal and what comes after it";
+  - the goal has no date *(LO decided, D8)*, and a countdown fires nothing;
+  - a goal that can end names the next one, with *(check: pending NC5)*.
+- `templates/idea.md`:
+  - :15 now reads "something that repeats";
+  - the goal line drops "**by** <a date>" and asks for the next goal.
+- `references/state.md`:
+  - `want.promise.date` is gone, and `want.promise.goals[] = [{goal, ends_when, next}]` is added;
+  - `obligation` says "a due day that repeats" (the PRD's :67 is :68);
+  - `board.pressure = {what_repeats, who_collects, cost_of_a_miss, stages}` is added (H18).
+- `references/the-economy.md`:
+  - R3b: the ratchet is `[settings.rent] stages` + `stage_lines`;
+  - R3c: the "no engine change / a staged amount makes surfaces lie" paragraph is rewritten. Two notified
+    routes, and never put the rent in a static `trait_bar max`;
+  - a short week is carried, no game over *(LO decided, D8d)*;
+  - stale citations fixed on the edited lines: `v2.py:5586` → `:6560`, `:16702` → `:18497`,
+    `template_import.py:706` → `:707`.
+- `references/engine.md` §26 (the PRD's :1030-1055 is now :1088): `stages`, `stage_lines`, `on_short = "carry"`,
+  with `v2.py:13541` / `:13592` and `template_import.py:481-490`. `grace_periods` and `eviction_mode` are ignored
+  under carry. Old saves restart at stage 1 owing 0. DC11 will only check this.
+- `templates/spine/SP4_loop_and_pressure.md`: rows for stages and stage lines, carry, and a non-money hold, with
+  a pointer to `board.pressure`.
+- Wording: `references/the-voice.md:105` and `scripts/gates.py:8007` (the PRD's :7623) now say "a bill that comes
+  back". No test asserts the string.
+
+**Verified.**
+- Greps: 10 old phrases at 0.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Every new `v2.py` line was read by hand.
+
+words: 137,836 → 138,123 (+287) · running total 138,123 / 149,283. Growth:
+- the EN2 engine facts, which DC11 would otherwise add;
+- two new ledger keys (`promise.goals`, `board.pressure`);
+- the no-date rule.
+
+The rest was trimmed.
+
 ## 2026-09-30 — DC1: the premise comes first, and the idea page's first step is pitched three ways (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC1 (A1 · A2 · D14 · E1 · E2 · E3 · E4 · E8 · H30).

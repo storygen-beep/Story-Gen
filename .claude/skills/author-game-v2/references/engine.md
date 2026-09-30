@@ -1133,6 +1133,22 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
 **Money must be unclamped for this to work at all.** A demand above 100 against `clamp = true` money
 (caps at 100) is unpayable and the only reachable outcome is eviction — see §21.
 
+**The bill can rise, and a short week can be carried** (both opt-in, emitted only when used):
+
+```toml
+[settings.rent]
+stages      = [ { amount = 100, after_total_paid = 0 }, { amount = 150, after_total_paid = 300 } ]
+stage_lines = [ "…", "…" ]           # what the collector says when stages[i] takes over
+on_short    = "carry"                # a short week is owed next week; no eviction, no game over
+```
+
+- `setup.currentRent()` (`v2.py:13541`) is the amount at every read; the payment that moves the stage
+  shows its line on the paid screen. Keys: `template_import.py:481-490`.
+- Carry: she pays what she has; `setup.carryRent` (`v2.py:13592`) owes the rest and sets `rent_carried`.
+  `grace_periods` and `eviction_mode` (default `game_end`) are ignored. **No game over over rent**
+  *(LO decided, D8d)*.
+- Old saves restart at stage 1, owing 0.
+
 ---
 
 ## 27. `costs` on a choice — the only price the engine enforces by itself

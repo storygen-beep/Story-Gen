@@ -102,7 +102,7 @@ verdict**, so a player never spends a turn discovering they were never eligible.
 paid £8.50 — the cost is information, not a wall.
 
 **Money is the one that is gated** (gate 21). A price the player cannot see is a plan they cannot
-make, and they are budgeting against a stated deadline. **And the notation is gated too** — the
+make, and they are budgeting against a bill that comes back. **And the notation is gated too** — the
 amount on the button has to be written in the game's one currency, the same one
 `[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
 `references/the-economy.md` R7 owns this; `engine.md` §33 lists every place the engine prints money

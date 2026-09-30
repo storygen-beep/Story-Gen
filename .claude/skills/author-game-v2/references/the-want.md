@@ -28,7 +28,7 @@ Deals); a sheltered girl's slow corruption (Cupid's Way). Each game sits in one 
 | shape | what she feels | what drives each step |
 |---|---|---|
 | **fall by need** | alone, broke, and the world prices her body | rent, and a price list for acts |
-| **rise by want** | she chose it, for status, freedom or power | her own goal, a rival, a clock |
+| **rise by want** | she chose it, for status, freedom or power | her own goal, a rival, something that repeats |
 | **taboo at home** | the house, and who is in the next room | the chance of being walked in on |
 | **mystery** | she investigates while something works on her | secrets she buys, clues that pay out |
 
@@ -46,8 +46,10 @@ Deals) and punish one without a spine: *"no driving plot or even a MacGuffin"* (
 Temptation), updates that add *"unnecessary sounds"* instead of *"continuing the story"* (Shady
 Deals). §1b's hold starts her and §3's meters carry her; **the
 goal or the mystery is what pulls the player.** It stays alive after the hold goes quiet, and the
-guidance page (`engine.md` §23) carries it. Declare the goal with a date, the mystery with a rough
-payout, and the rival.
+guidance page (`engine.md` §23) carries it. Declare the goal and what comes after it, the mystery with
+a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*; a sidebar `countdown`
+only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
+count. A goal that can end names the next (`want.promise.goals[]`) *(check: pending NC5)*.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.

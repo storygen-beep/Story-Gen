@@ -9,6 +9,8 @@
 | the currency (house default `$`; no real-world currency in the prose) | |
 | a full week of the income rungs pays | <number, with the working> |
 | the obligation, its amount and day | |
-| does the obligation move? how? | |
+| does the obligation move? `stages` (amount after total paid) and each `stage_lines` entry | |
+| a short week: `on_short = "carry"` (owed next week, no game over) | |
+| a hold that is not money: what repeats, who collects, what a miss costs, its stages | |
 
-Record it in `board.economy`.
+Record money in `board.economy` and `[settings.rent]` (`engine.md` §26); any hold in `board.pressure`.

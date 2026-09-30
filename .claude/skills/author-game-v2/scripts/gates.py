@@ -8004,7 +8004,7 @@ def run_gates(model, game, state=None):
                  f"{len(silent)} of {priced} choices spend `{currency}` without naming the amount"
                  + (f" · {other_cost} non-currency costs not judged" if other_cost else ""),
                  silent + (["field: every game in the play corpus that charges money puts the "
-                            "amount in the label — the player is budgeting against a deadline"]
+                            "amount in the label — the player is budgeting against a bill that comes back"]
                            if silent else []))
         else:
             gate("a price is on its label", None,

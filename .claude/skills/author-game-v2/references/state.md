@@ -41,7 +41,9 @@ belong here; only decisions, debts, and promises do.
     "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
-    "promise":       { "goal": "…", "date": "…", "mystery": "…", "payout": "…", "rival": "npc_id" },
+    "promise":       { "goal": "…", "mystery": "…", "payout": "…", "rival": "npc_id",
+                       "goals": [ { "goal": "…", "ends_when": "…", "next": "…" } ] },
+                                 // no date (D8). A goal with ends_when names next (NC5, pending).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
@@ -65,7 +67,7 @@ belong here; only decisions, debts, and promises do.
     "who_she_is":      "…",
     // WHAT HOLDS HER HERE. A bill is 4 of 23 in the female-lead field and only the
     // FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
-    "obligation":      "…",   // the hold, in her nouns, with a face and a date
+    "obligation":      "…",   // the hold, in her nouns, with a face and a due day that repeats
     "hold_kind":       "ambition" | "bill" | "order" | "body" | "subsistence"
                      | "appetite" | "job" | "erosion" | "displacement",
                               // the-want.md §1b carries the count and an example each.
@@ -182,6 +184,11 @@ belong here; only decisions, debts, and promises do.
       "bridges":    [ { "from": "location_id", "to": "location_id", "costs": { "time": 0 } } ],
       "r1_signoff": "WHO signed it and WHEN, then what they saw"
     },
+
+    // SP4 — the hold's pressure, money or not. `stages` mirrors [settings.rent] stages;
+    //   shape.py reads it when present.
+    "pressure": { "what_repeats": "…", "who_collects": "npc_id", "cost_of_a_miss": "…",
+                  "stages": [ { "amount": 100, "after_total_paid": 0 } ] },
 
     // what money is FOR — the question asked while it is still cheap to answer
     "economy": {

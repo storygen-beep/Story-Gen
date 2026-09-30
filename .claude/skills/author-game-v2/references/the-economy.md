@@ -337,6 +337,9 @@ moment of payment** — the same widget that advances the stage prints the next 
 is never surprised, and the collector is a believable threat. `course-of-temptation` does the identical
 thing through her mother (*"the interest is killing us… next week we're going to need $X"*).
 
+**On this engine the ratchet is `[settings.rent] stages` with `stage_lines`** (`engine.md` §26): the
+payment that moves the stage shows the collector's line with the new number, the same moment DoL uses.
+
 **So: a bare ratchet needs a person whose motive the player already accepts.** If the money is
 already owed to the household — a wage handed over, a till counted — a number that climbs on its own
 reads as the author turning a dial, and the shape below is the honest one.
@@ -376,14 +379,16 @@ flag's `is_false`. Worked example, invented numbers: buying a van adds `-20/day`
 day hook (`+140`/week of obligation) and turns a $30 errand into a $120 haul (`+450`/week over five
 runs). The week's demand goes 260 → 400, she is 310 better off, and **both of those are her doing.**
 
-⚠️ **No engine change was needed for any of this and none should be reached for first.**
-`[engine.daily_tick]` already takes `traitEffects` with a per-effect condition gate
-(`template_import.py:706`), applied through `setup.applyAndNotifyTrait` (`v2.py:5586`) — so a daily
-upkeep **notifies the player** instead of draining silently. A silent charge meter is the one
-economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
-A staged `[settings.rent] amount` would also make two surfaces lie — a `trait_bar max` set to the
-rent and any quest goal naming it — because `_traitMax` is static (`v2.py:16702`). A daily upkeep
-leaves the Friday number alone and both surfaces stay true.
+**Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
+`engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
+`traitEffects` with a per-effect condition gate (`template_import.py:707`), applied through
+`setup.applyAndNotifyTrait` (`v2.py:6560`). Either way the player is told. A silent charge meter is
+the one economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
+⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
+(`v2.py:18497`), so the number there stops being true at the first stage.
+
+**A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
+it)*: `on_short = "carry"` (`engine.md` §26).
 
 ### R3d · The obligation is an ignition, not a tax — and it is allowed to go quiet
 
