@@ -13,7 +13,8 @@ amendment — never let it quietly stop being true.
 
 ## The form
 
-Keep it to one page. Longer means vaguer.
+One page, five parts (`templates/want.md`) *(LO decided, D16)*. The detail tables live later: the crude
+words on SP2, rung numbers, needs and the map shape on the board.
 
 ### 0. The fantasy, the model to beat, and the promise — the idea page
 
@@ -206,8 +207,9 @@ settles that **she is the creditor**: a money system is not a money hold.
 > cap the ratchet by hand. Whatever hold you pick, §3's meters are what still gate content at
 > release 41. Pick the hold that starts her; do not expect it to carry her.
 
-**Declare the shape** as `want.hold_kind` in `v2_state.json` (`references/state.md`), and if a person
-enforces it, `want.hold_collector`. The lint **`the collector is also the target`** reads both.
+**Declare the hold** as `want.hold_kind` in `v2_state.json` (`references/state.md`), and if a person
+enforces it, `want.hold_collector`. The hold and the fantasy shape (§0) are **separate choices**: no
+hold maps to one shape, and `order`, `job` and `displacement` fit any of the four. The lint **`the collector is also the target`** reads both.
 
 ⚠️ **Then read §4b before you write the hold.** It says, measured 36 scenes to 5, that she wants it
 and goes and gets it — so **design what stops her, not a reason for every act.** A hold chosen as a
@@ -255,14 +257,11 @@ measured on — this is **not money and not status**; it is reach.
 Write the ascent as a sentence about doors: at the bottom she can do these things in these
 places; at the top she can do these things in those places.
 
-**Then split it into three or four kinds of going-further.** Measured: the reference game does
-not run one corruption axis — it runs separate ratcheting tiers for *sleeping around*, *being
-seen*, and *doing the strange thing*, each gating content at 15 / 35 / 55 / 75, plus a purity
-counterweight. Several tiers means several parallel ascents, so a player who doesn't want one
-can still climb another. One undifferentiated meter hands every player the same ladder.
-
-Name your tiers here. They become the meters in `references/the-board.md`, and each one's rise
-must open content or gates 8 and 10 fail.
+Write the early rungs and the late rungs **in words** — what she does, and where. No numbers: a
+number written here becomes the declared tier, whatever the field runs. Whether the climb is one
+tier, several, or none is a board decision (`the-board.md` §3b: 15 of 27 field games have no player
+tier), and so are the rung values (`the-meters.md` W4). Each tier's rise must open content or gates
+8 and 10 fail.
 
 **Anti-pattern, measured:** a protagonist whose dominant meter rises toward failure while the
 world contracts to a sealed room. Rising must widen.
@@ -357,19 +356,27 @@ author of this section did first, and the game it was read from does the opposit
 of 41.
 
 ### 5. The world
-Root it outdoors, in more than one zone — `the-map.md` R0 — unless the fantasy is taboo at home,
-where the house is the point.
+Decided on the board, not here: the shape first (`board.map.archetype`, `the-map.md` R0), rooted
+outdoors in more than one zone unless the fantasy is taboo at home, where the house is the point.
 
-### 6. Why *this* person
-One line per character. Not their role in a plot — **why she wants them, or why being wanted
-by them lands.**
+### 6. The people
+Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
 
-> Measured, and the strongest single finding in ~11,000 player comments: praise for the porn
-> itself scores lowest of every theme, while performer identity and character attachment score
-> highest. One game swapped its performers and its three most-liked comments were the revolt;
-> another recast and died. **The person is the product.**
+- **Age.** Every person is 18 or older, and the age is written. `shape.py` fails a person with no age
+  or under 18, a board character missing from `want.cast` included.
+- **What she wants from him** — not his role in a plot: why she wants him, or why being wanted by him
+  lands.
 
-A character with no line here is a character with no reason to exist. Cut them or write it.
+  > Measured, and the strongest single finding in ~11,000 player comments: praise for the porn
+  > itself scores lowest of every theme, while performer identity and character attachment score
+  > highest. One game swapped its performers and its three most-liked comments were the revolt;
+  > another recast and died. **The person is the product.**
+
+- **What he visibly wants, and how it shows each visit.** No step is pitched before his side is
+  written (`the-arc.md` A13).
+- **What he keeps score of** — `keeps`, picked per man by `the-meters.md` W1's table; LO approves.
+
+A person with no row is a person with no reason to exist. Cut them or write it.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
@@ -386,27 +393,18 @@ faults its *"ZERO actress consistency"* (F95, second-hand). Record as `want.face
 `[player_portrait]` (`engine.md` §34b).
 
 ### 7. Register
-Three declarations, made once:
-
-- **`narration_person`** — recommend `second`. It is per-game and immutable after the first
-  release ships, because changing it rewrites every line. (The measured exemplar for a female
-  protagonist is second person.)
-- **Crude-vocabulary ceiling** — the actual words that may appear, per character and per tier.
-  Write the words down. A ceiling described abstractly gets written around.
-- **Where the crude register lives** — and the answer is **the repeatable surfaces**.
+Declared elsewhere, once: `narration_person` on the board (`[settings]`, recommend `second`,
+immutable after the first release ships), and the crude words per person and rung band on SP2
+(`want.crude_ceiling`). **The crude register lives on the repeatable surfaces.**
 
 ## The test before you leave this file
 
-Answer these five out loud. If any answer is soft, the Want is not done.
+Answer these out loud. If any answer is soft, the Want is not done.
 
-1. What does release 41 add? *(ask it of a named §3 tier. If no tier can answer it, the tier is
-   decorative — the appetite was never what scheduled content)*
+1. What does release 41 add? *(ask it of the climb, §3. If nothing can answer it, the climb is
+   decorative)*
 2. What can she reach at the top that she cannot reach at the bottom? *(the ascent)*
-3. Which character would a player miss if you deleted them, and why? *(the product)*
-4. Which repeatable surface carries the crudest writing in the game? *(the register, in the
-   right place)*
-5. What is the promise, and which release pays the mystery's next clue? Which moment kinds does this
-   game keep delivering? *(§0)*
+3. Which person would a player miss if you deleted him, and what does he want back? *(§6)*
 
 Then run the last, which is not a judgement call:
 

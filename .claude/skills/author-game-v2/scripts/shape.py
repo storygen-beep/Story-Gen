@@ -16,6 +16,9 @@ exist — every SP page READY, signed and dated, the release page, a ladder for 
 promise and the beat that keeps it alive — and a missing one FAILS. An empty ledger never passes a
 finished spine: an absence is not a pass.
 
+One row is strict in every mode: every person is an adult. A person in `want.cast` or
+`board.characters` with no age, or under 18, FAILS while the spine is still being written too.
+
 Flags in a step's gate are LISTED, not failed: the ledger does not record which canvas sets a
 flag, so "undeclared" cannot be told from "set by a canvas not written yet". The TOML-side
 `ladders move forward` gate proves every unlock is earnable once the canvases exist.
@@ -302,6 +305,28 @@ def check(state, strict=False):
             "n/a — no step belongs to a person with board.characters[].schedule")
     else:
         row("the person is there at the step's hour", not bad, f"{judged - len(bad)}/{judged} steps", bad)
+
+    # 12 · every person is an adult (PRD v2 DC2a · B2). `want.cast[] = {id, age, keeps}` holds the
+    # ages; a board character with no cast entry has no age. Not a missing piece that lenient mode
+    # waits for: a person declared without an age FAILS in both modes (LO, 2026-09-30).
+    cast = {c.get("id"): c for c in (want.get("cast") or []) if isinstance(c, dict) and c.get("id")}
+    people = list(cast) + [c.get("id") for c in (board.get("characters") or [])
+                           if isinstance(c, dict) and c.get("id") and c.get("id") not in cast]
+    bad = []
+    for pid in people:
+        age = (cast.get(pid) or {}).get("age")
+        if pid not in cast:
+            bad.append(f"{pid}: on the board but not in want.cast — no age declared")
+        elif age is None:
+            bad.append(f"{pid}: want.cast has no age")
+        elif isinstance(age, bool) or not isinstance(age, (int, float)):
+            bad.append(f"{pid}: age must be a number — got {age!r}")
+        elif age < 18:
+            bad.append(f"{pid}: age {age} is under 18")
+    if not people:
+        row("every person is an adult", None, "n/a — no person declared yet")
+    else:
+        row("every person is an adult", not bad, f"{len(people) - len(bad)}/{len(people)} people 18+", bad)
 
     return rows, sorted(flags)
 

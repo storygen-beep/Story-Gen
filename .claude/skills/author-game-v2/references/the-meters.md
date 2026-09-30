@@ -89,6 +89,26 @@ the declaration (`player` ≥60% on her tiers · `cast` ≥60% on the cast · `b
 points sit inside the corpus's own empty band, so nothing here was invented — but what is judged is
 the game against **its own declaration**, never against a number this file picked.
 
+### What each man keeps score of
+
+Declared per man at the Want (`want.cast[].keeps`), from the fantasy and `who_climbs`. The shape is
+**(LO decided, D5)**; the evidence is R5
+(`~/Documents/Skill_Test_Research_20260929/R5_HIS_FEELINGS.md`).
+
+| the game is about… | the men keep | like |
+|---|---|---|
+| her change | a step counter + memory flags | Cupid's Way, In Her Own Hands |
+| relationships | Want + Warmth; the split picks lover vs user (**thin**: 1 of 4 games does it fully, R5 Part 1b) | Course of Temptation's dating |
+| power | Want + Power; Power changes which acts happen | Shady Deals |
+
+It can differ per man: a pressure man gets Power, a nice man doesn't. The author declares it; LO
+approves. **Whatever he keeps:**
+
+1. A shown number opens something visible, and he reacts the visit it crosses. *(check: pending NC6)*
+2. No hidden setting overrides the numbers.
+3. A locked step shows how close he is: the locked button names his feeling and the need.
+4. One visit moves about 1–10% of the next threshold, with 3–10 visits between steps (R5:243-244).
+
 ---
 
 ## W1b · The meter gates how far she goes — and the inner conflict stays
@@ -417,10 +437,10 @@ No threshold here; `gates.py` is unchanged (`findings_H_known.md`).
 > **W6 is the cast's own gating meters**, one set per character, and it is the only one of the three
 > that is per-person. A rule from any of the three does not transfer to the other two.
 
-### One word for the cast, and the difference lives in the modifiers
+### Each man keeps his own score, and it is shown
 
-> **Pick ONE willingness word for the whole game. Put every person on it, on the same scale.
-> Differentiate people by what modifies that number, never by giving them different vocabularies.**
+> **Each man keeps what `want.cast[].keeps` declares (W1), and his numbers are shown (D1).** Two men
+> on the same keeps differ by their modifiers ("The meter is a trade", below).
 
 Measured across the thirteen corpus games that run a per-person willingness meter on three or more
 people (`findings_E_yes.md` §1):
@@ -446,38 +466,25 @@ that is the one W4 measures at 8–17 rungs. Two meters, two jobs, two depths, a
 (`findings_F_further.md` §4).
 
 The default the template shipped is `core_traits = { relation = 0, lust = 0 }` on every character.
+Replace it with what each man's `keeps` declares (W1's table). For a **ladder** game a step counter +
+memory flags is correct and deliberate: the tiers do the gating. For a **roster** game his numbers
+*are* the engine. Two rows the W1 table does not cover:
 
-For a **ladder** game that is correct and deliberate — the tiers do the gating and a bond meter
-colours the arc. Say so and move on.
-
-For a **roster** game the cast meter *is* the engine, so choose the word deliberately rather than
-inheriting `relation` from a template. Pick it from what the relationships in this game mostly
-**are** — adapted from `author-game/references/trait-design.md`, which has the full version:
-
-| the relationship | what gates the rungs |
+| the relationship | what he keeps |
 |---|---|
-| peer / dating | their **bond**, in small milestones — courtship is the climb |
-| slow burn / escalation | their own **willingness** odometer, warmed by a throttle |
-| leverage / transactional | money or debt — not affection |
 | service / workplace | trust only; willingness does not apply |
-| antagonist / witness | a hidden suspicion accumulator, never surfaced |
 | **someone she already belongs to** | **no climbing meter at all** — presence plus one opened flag. He is not a conquest; the variation is in pose and framing, not in a rising bar |
 
-⚠️ **Read the table as a menu of ONE choice, not a per-character assignment.** The last row is the
-exception that still holds per person: someone she already belongs to gets no climbing meter, and
-that is a decision about *that* character. Everyone who does climb, climbs on the same word.
+A suspicion or a debt he holds is a number like any other: shown, and he reacts when it crosses.
 
-Two more rules that survive from v1 and are worth restating:
-
-- **Reserve the rich two-meter model for the one or two arcs that carry the game.** The reference
-  game gives it to three housemates and runs its other fourteen characters light. Gold-plating
-  every character dilutes the core and triples the authoring.
+- **Match the keeps to the man.** The reference game gives its rich model to three housemates and
+  runs its other fourteen characters light.
 - **A character who gates nothing is not in the game yet.** A full meter pair with zero gate
   sites on either meter is a character the player can raise and nothing ever answers.
 
 ### The meter is a trade, not a bonus
 
-Added 2026-08-24 from Section G. Above, W6 says an identical meter pair across the cast is *the
+Added 2026-08-24 from Section G. An identical meter pair across a roster cast is *the
 engine missing*. This is the half that was missing from W6 itself: **picking a different meter is
 not enough if every meter only ever opens things.**
 

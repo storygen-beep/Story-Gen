@@ -82,8 +82,12 @@ belong here; only decisions, debts, and promises do.
                               // (the-want.md §2)
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
     "charge":          "reversal" | "taboo" | "transformation" | "…",
+    "cast":            [ { "id": "npc_id", "age": 18, "keeps": "step counter + memory flags"
+                                                  | "want + warmth" | "want + power" } ],
+                              // the-want.md §6. shape.py FAILS a person (here or in
+                              // board.characters[]) with no age or under 18.
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
-    "crude_ceiling":   { "npc_id": ["the actual words permitted, per tier"] },
+    "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"] },   // SP2
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 
@@ -156,13 +160,11 @@ belong here; only decisions, debts, and promises do.
     "media": { "platform": "…", "clips": "…" },
 
     "characters": [
-      // `meters` — which numbers THIS person owns and what each one gates. In a
-      //   who_climbs = "player" game one bond meter is a correct, deliberate answer;
-      //   in a "cast" game an identical pair on everyone is the engine missing.
-      //   the-meters.md W6.
+      // `meters` — which numbers THIS person owns and what each one gates: what his
+      //   want.cast[].keeps declares (the-meters.md W1 · W6).
       { "id": "npc_…", "surfaces": 2, "schedule_rows": 3, "why_wanted": "…",
-        "meters": { "relation": "access — what she is allowed to be near",
-                    "lust":     "willingness — how far he will go" } }
+        "meters": { "want":   "how far he will go — opens his next step",
+                    "warmth": "lover vs user — which next step he offers" } }
     ],
 
     // the map, as a place — declared BEFORE locations are written, and the SHAPE

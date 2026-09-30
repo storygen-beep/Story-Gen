@@ -14,7 +14,8 @@ WIN = {"days": ["Mon", "Wed"], "from": "18:00", "to": "20:00"}
 def full():
     return {
         "phase": "idea",
-        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat", "date": "week 6"}},
+        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat", "date": "week 6"},
+                 "cast": [{"id": "npc_a", "age": 34}, {"id": "npc_b", "age": 22}]},
         "spine": {"pages": [{"id": f"SP{i}", "status": "READY", "signed_by": "LO",
                              "drafted_at": "2026-09-27", "signed_at": "2026-09-28"}
                             for i in range(1, 8)]},

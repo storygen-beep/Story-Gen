@@ -146,6 +146,7 @@ name = "<Name>"
 #    at all; three-or-four is one game's shape, not the genre's (the-meters.md W1).
 #    (Read "14 of 25" until 2026-08-24 — the recheck moved the-board.md and missed
 #    this copy of the same number. Section K.)
+#    The Want (§4) writes the early and late rungs in words; the numbers are set here.
 #    Placeholders are QUOTED so this file loads as TOML; write your trait keys bare.
 "<tier_1>" = 0
 "<tier_2>" = 0
@@ -353,13 +354,10 @@ portrait    = "<id>.jpg"
 #      no kin at all→ the canteen · the night shift · housemate, top floor
 relationship = "<one sentence — the cast page renders this>"
 role         = "<1-3 words — the label under the name in every dialogue box>"
-# ⚠️ THE PAIR BELOW IS THE LADDER SCHOOL'S ANSWER — correct when who_climbs is
-#    "player" (the tiers gate, the bond colours). For who_climbs = "cast" it is
-#    the engine missing: pick THIS character's gating meter from what the
-#    relationship IS — bond for a peer, their own willingness for a slow burn,
-#    money for leverage, trust for service, and NO climbing meter at all for
-#    someone she already belongs to. the-meters.md W6. A character whose meter
-#    gates nothing is not in the game yet.
+# ⚠️ THE PAIR BELOW IS A PLACEHOLDER. Replace it with what this man keeps
+#    (want.cast[].keeps): a step counter + memory flags, Want + Warmth, or
+#    Want + Power — the-meters.md W1 · W6. A character whose meter gates
+#    nothing is not in the game yet.
 core_traits = { relation = 0, lust = 0 }
 flag_keys   = []
 arc_stages  = ["<Stranger>", "<…>"]

@@ -92,7 +92,8 @@ ledger only and FAILS on: a step at an undeclared place (once the board declares
 are not a window, a trait the ledger never declares, a dependency on a missing step or in a cycle,
 pressure the release's weeks cannot pay without a declared `shortfall`, a release person with no
 ladder, a step with no `hint`, a door that is not a declared step, a promise with no beat on the
-release page, and a READY page unsigned or signed the day it was drafted. With `--finish`, or once the
+release page, a READY page unsigned, and a person with no age or
+under 18 (in every mode). With `--finish`, or once the
 phase is `spine` or later, a missing piece is a FAIL: an empty ledger never finishes the spine. Flags
 in a step's gate are listed, not judged. Run it again before accepting any change to money, the
 ending or the release page.

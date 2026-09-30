@@ -7,6 +7,8 @@
 # THE ONE RULE: the game does not use a name until it has earned it.
 #               People, places, things.
 #
+# The start choice is declared in the ledger, want.player.start_choice, not here.
+#
 # ⚠️ THIS FILE IS A MENU. Section A offers TWO opening shapes and you DELETE ONE.
 #    Keeping both, or blending them, is the defect (F1) — a cold open
 #    carrying a staged open's cast.

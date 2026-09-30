@@ -12,3 +12,11 @@ One table per person. Record it in `board.characters[].ladder`.
 | n | what happens | where | when | gate | hint line | her_line_low | her_line_high | who_notices | refusal |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | | | | | | | | | parked · counted |
+
+**The crude words** — the actual words each person's scenes may use, per rung band. A ceiling written
+abstractly gets written around. Record in `want.crude_ceiling`; they live on the repeatable surfaces
+(`the-surfaces.md`), not only in one-time scenes.
+
+| person | early rungs | middle rungs | late rungs |
+|---|---|---|---|
+| `npc_<id>` | | | |

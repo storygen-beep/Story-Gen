@@ -5,6 +5,63 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC2a: the Want is one page; every person has an age and a score he keeps (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2a (D16 · B1 · B2 · B3 · B4 · B5 · I18 · J6 · D5, pace per LO Q2). The Want
+template was 221 lines in seven sections with three tables and shipped fixed rungs 15/35/55/75. It never asked
+ages or what he wants. The hold and the fantasy shape were tangled, and the-want.md pushed "three or four
+tiers" against the-board.md. the-meters.md W6 still taught "one willingness word" and a hidden suspicion
+accumulator, which D5 and D1 reverse.
+
+**What changed.**
+- `templates/want.md`: rewritten as one page in five parts: who she is (with a `want.player` line), what
+  holds her, what she wants (plus the charge), how she climbs (early and late rungs in words, no numbers),
+  and the people (age · what she wants from him · what he visibly wants · what he keeps).
+- Moved tables:
+  - crude words go to a new table in `templates/spine/SP2_ladders.md`;
+  - rung numbers get a pointer comment in `templates/board.toml`;
+  - needs and the map shape were already on the board;
+  - `narration_person` was already in board `[settings]`.
+  - `templates/first-hour.toml` gets one comment line: the start choice stays in `want.player.start_choice`
+    (LO).
+- `references/the-want.md`:
+  - "The form" now names the five parts.
+  - §1 is kept (LO), so scoreboard pointers stay true.
+  - §1b says the hold and the shape are separate choices (B1).
+  - §3 has rungs in words, and the tier count is a board decision (I18).
+  - §5 points at the board.
+  - §6 is "The people": age, his visible want (A13), what he keeps.
+  - §7 points at the board and SP2.
+  - The leave-test is cut to three questions.
+- `references/the-meters.md`:
+  - W1 gains "What each man keeps score of": the D5 table (LO decided; R5; lover/user marked thin, 1 of 4)
+    and four rules. Rule 1 is marked "(check: pending NC6)". Rule 4 reads "about 1–10% of the next
+    threshold, with 3–10 visits between steps" (R5:243-244).
+  - W6 "one word for the cast" is rewritten as per-man keeps, shown (D5, D1). The hidden suspicion row is
+    gone.
+- `references/state.md`: new `want.cast[] = {id, age, keeps}`. The example meters are now want/warmth.
+  `crude_ceiling` points at SP2.
+- `references/the-map.md` R0: the map shape is picked on the board (it said "in the Want").
+- `scripts/shape.py`: new row "every person is an adult". A person in `want.cast` or `board.characters` with
+  no age, a non-number age, or an age under 18 FAILS in every mode (LO). It is n/a when nobody is declared.
+  The docstring, `SKILL.md` (tools table, not a scoreboard row) and `the-spine.md` checkpoint A mention it.
+- `templates/board.toml`: the cast meter comment points at `want.cast[].keeps`.
+- `references/the-spine.md` checkpoint A: dropped "or signed the day it was drafted". shape.py removed that
+  check in CK5 (D13), and this line was missed (LO, 2026-09-30).
+
+**Verified.**
+- Greps: 17 old phrases are at 0 in their files.
+- Tests:
+  - `tests/test_shape_dc2a.py` is new, 6 cases;
+  - the `test_shape.py` fixture gains ages;
+  - the suite runs 307 passed.
+- `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- shape.py (read-only) on the five ledgers: all FAIL the new row (0/4, 0/5, 0/4, 0/11, 0/7). None declares
+  `want.cast` yet. It is a REPORT row in `--ship`.
+
+words: 137,538 → 137,639 (+101) · running total 137,639 / 149,283. The growth is the D5 table and its four
+rules plus the `want.cast` key, which this item requires. The rest was trimmed.
+
 ## 2026-09-30 — CK9: location fill reads this release's places (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK9 (H11, the gates.py half; CK5 did shape.py). G1 *location fill* summed every

@@ -52,7 +52,7 @@ measured against five named shipped games.
 the location count from where your cast's rosters go. That is right, and on its own it is circular:
 the premise fixes the cast, the cast fixes the map, and a family of five who live in one house
 returns a house every time. **The shape is the input that breaks the circle**, so it is picked
-first — before the cast exists, in the Want.
+first on the board (`board.map.archetype`), before a room is derived from anyone's roster.
 
 ---
 
