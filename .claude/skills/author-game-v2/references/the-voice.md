@@ -233,13 +233,14 @@ nothing but its label, and with no label it prints its raw key — which gate
 ### R4 · A wall shows the want; the card shows the route
 
 A locked choice renders greyed, with its action as the label (*"Ask him where the bench went"*) — a
-want the player can name *(LO decided, D2)*. **A number lock** says the rest itself: the engine
+want the player can name *(LO decided, D2)*. **A pure number lock** says the rest itself: the engine
 prints the need and her value beside it (`engine.md` §15), so it gets no `locked_text`. **A story
-lock** (a flag) gets one short line, which replaces the label, because nothing else says why.
+lock** — a flag, or a flag beside a number — gets one short line, which replaces the label, because
+the engine's suffix never names the flag.
 
 **So a greyed line states the want and the bar.** What it cannot state is the **route**, and that is
 R3's job on the guidance card. The door advertises, the card directs. Gate **a locked door says why**
-checks both locks, and fails a `locked_text` on a number lock as doubled.
+checks both, and fails a `locked_text` only on a pure number lock, as doubled.
 
 ⚠️ **`guidance exists` checks only that a card exists; it never reads what the card says.** Two
 checks cover the route: gate **`a goal says what it wants`** (a bullet renders words, not a raw key)

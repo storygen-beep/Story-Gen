@@ -83,3 +83,40 @@ def test_the_gate_runs_in_the_scoreboard():
     model, g2 = gates.build(copy.deepcopy(g))
     r = next(r for r in gates.run_gates(model, g2, None) if r["gate"] == "a no has content")
     assert r["pass_"] is False
+
+
+# ── follow-ups: only exits that leave the step unused are judged ─────────────
+
+def yes_scene(first_extra=()):
+    screens = [
+        {"id": "one", "blocks": [{"type": "paragraph", "content": "He leans in."}],
+         "exit_block": {"type": "choices", "choices": [
+             {"text": "Kiss him", "targetType": "node", "nodeId": "s.two"}, *first_extra]}},
+        {"id": "two", "blocks": [{"type": "paragraph", "content": "He kisses back."}],
+         "exit_block": {"type": "choices", "choices": [
+             {"text": "Let him", "targetType": "node", "nodeId": "s.three"}]}},
+        {"id": "three", "blocks": [{"type": "paragraph", "content": "You go upstairs."}],
+         "exit_block": {"type": "choices", "choices": [
+             {"text": "Yes", "consumes": True, "targetType": "node", "nodeId": "s.after"}]}},
+        {"id": "after", "blocks": [{"type": "paragraph", "content": "Later."}],
+         "exit_block": {"type": "choices", "choices": [
+             {"text": "Continue", "targetType": "location", "locationId": "room"}]}},
+    ]
+    return {"canvases": [{"id": "s", "trigger": {"location": "room", "is_repeatable": False,
+                                                  "consume_on": "exit"}, "nodes": screens}]}
+
+
+def test_a_three_screen_yes_scene_passes():
+    ok, head, detail, n = no_row(yes_scene())
+    assert ok is None or ok is True, (head, detail)
+    assert n == 0          # nothing leaves the step unused: Kiss/Let are the yes path
+
+
+def test_walk_out_on_screen_one_still_fails():
+    ok, _h, detail, n = no_row(yes_scene([WALK]))
+    assert ok is False and n == 1 and '"Walk out"' in detail[0]
+
+
+def test_continue_after_a_consuming_yes_is_not_judged():
+    _ok, _h, detail, _n = no_row(yes_scene([WALK]))
+    assert not any("Continue" in d for d in detail)

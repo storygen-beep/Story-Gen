@@ -92,3 +92,21 @@ def test_a_repeated_group_and_a_nested_run_are_found():
     hits = lint(inner, group(trait("x", "gte", 1), flag("y")))
     assert any("group 2 of a run of 2 never renders — it is true only when #1" in h for h in hits)
     assert any("dropped" in h for h in hits)
+
+
+# ── follow-ups ───────────────────────────────────────────────────────────────
+
+def test_a_group_without_version_fails_open_and_kills_the_rest():
+    bad = group(flag("a"))
+    bad["conditions"].pop("version")
+    hits = lint(bad, group(flag("b")), group())
+    assert [h.split(" of a run")[0] for h in hits] == ["c.n: group 2", "c.n: group 3"]
+    assert all("fails open" in h for h in hits)
+
+
+def test_the_else_after_an_npc_ladder_names_the_old_save_case():
+    def his(op, v):
+        return {"type": "trait", "subject": "npc", "npc_id": "npc_vic", "trait_key": "trust",
+                "operator": op, "value": v}
+    hits = lint(group(his("gte", 50)), group(his("lt", 50)), group())
+    assert len(hits) == 1 and "dead unless the trait is undefined (old save)" in hits[0]

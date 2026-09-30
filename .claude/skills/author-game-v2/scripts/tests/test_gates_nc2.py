@@ -28,12 +28,12 @@ def nerve(op, v):
     return {"type": "trait", "subject": "player", "trait_key": "nerve", "operator": op, "value": v}
 
 
-def step(cid, reads, sets):
+def step(cid, reads, sets, text="He asks."):
     t = {"location": "room", "is_repeatable": False}
     if reads:
         t["conditions"] = dict(V1, items=[flag(reads)])
     return {"id": cid, "trigger": t, "nodes": [{"id": "n", "blocks": [
-        {"type": "paragraph", "content": "He asks."}], "exit_block": {"config": {
+        {"type": "paragraph", "content": text}], "exit_block": {"config": {
             "flagEffects": [{"flag": sets, "op": "set"}]}}}]}
 
 
@@ -58,7 +58,8 @@ def game(intro=True, middle=True, gated=True, voices=2, stop=True):
         chain.append(step("intro", None, "heard"))
     if middle:
         chain.append(step("ask", "heard" if intro else None, "asked"))
-    chain.append(step("first", "asked" if middle else ("heard" if intro else None), "first_done"))
+    chain.append(step("first", "asked" if middle else ("heard" if intro else None), "first_done",
+                      HOT))            # the first time is itself the act (A15)
     t = {"location": "room", "is_repeatable": True}
     if gated:
         t["conditions"] = dict(V1, items=[flag("first_done")])
@@ -128,3 +129,61 @@ def test_the_gate_runs_in_the_scoreboard():
     model, g2 = gates.build(copy.deepcopy(game()))
     r = next(r for r in gates.run_gates(model, g2, STATE) if r["gate"] == "her climb")
     assert r["headline"].startswith("too few to judge") or r["pass_"] is True
+
+
+# ── follow-ups ───────────────────────────────────────────────────────────────
+
+def test_a_first_time_that_names_no_act_is_not_one():
+    g = game()
+    g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "He asks."
+    ok, _h, detail, _n = climb(g)
+    assert ok is False and any("names no act" in d for d in detail)
+
+
+def hub_game(gated=True):
+    g = game(gated=False)
+    sell = g["canvases"][-1]
+    go = {"text": "Go up", "targetType": "node", "nodeId": "sell.mouth"}
+    if gated:
+        go["conditions"] = dict(V1, items=[flag("first_done")])
+    sell["nodes"].insert(0, {"id": "hub", "blocks": [{"type": "paragraph", "content": "The bar."}],
+                             "exit_block": {"type": "choices", "choices": [go]}})
+    return g
+
+
+def test_a_gated_choice_into_the_act_counts_as_its_gate():
+    ok, head, detail, _n = climb(hub_game())
+    assert ok is True, detail
+
+
+def test_an_ungated_choice_into_the_act_is_open_on_a_new_save():
+    ok, _h, detail, _n = climb(hub_game(gated=False))
+    assert any("(d) open on a new save" in d for d in detail)
+
+
+def test_a_tier_group_and_an_else_are_two_voices():
+    g = game()
+    for n in g["canvases"][-1]["nodes"]:
+        n["blocks"][1] = {"type": "group", "blocks": [{"type": "paragraph", "content": HOT}]}
+    assert climb(g)[0] is True
+
+
+def test_act_to_text_to_act_is_not_a_stop():
+    g = game(stop=False)
+    sell = g["canvases"][-1]
+    sell["nodes"][0]["exit_block"]["choices"][0]["nodeId"] = "sell.breath"
+    sell["nodes"].append({"id": "breath", "blocks": [{"type": "paragraph", "content": "A breath."}],
+                          "exit_block": {"type": "choices", "choices": [
+                              {"text": "Go on", "targetType": "node", "nodeId": "sell.fuck"}]}})
+    ok, _h, detail, _n = climb(g)
+    assert any(d.startswith("sell.mouth: (e) no stop exit") for d in detail), detail
+
+
+def test_a_loop_back_to_the_same_act_is_not_leaving():
+    g = game()
+    mouth = g["canvases"][-1]["nodes"][0]
+    mouth["exit_block"]["choices"] = [
+        {"text": "Again", "targetType": "node", "nodeId": "sell.mouth"},
+        {"text": "Keep going", "targetType": "node", "nodeId": "sell.fuck"}]
+    ok, _h, detail, _n = climb(g)
+    assert any(d.startswith("sell.mouth: (e) no stop exit") for d in detail), detail

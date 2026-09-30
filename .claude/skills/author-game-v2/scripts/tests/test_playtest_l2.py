@@ -189,3 +189,40 @@ def test_a_card_nothing_opens_still_fails(bad):
 
 def test_an_ambient_that_can_never_open_still_fails(bad):
     assert bad["a random event actually fires"][0] == "FAIL"
+
+
+# ── follow-up: an opening that never reaches a room says so ──────────────────
+
+@pytest.fixture(scope="module")
+def stuck(tmp_path_factory):
+    pytest.importorskip("playwright")
+    loop = HEAD.replace('''[canvases.nodes.exit_block]
+type = "location"
+[canvases.nodes.exit_block.config]
+locationId  = "yard"
+flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]''', '''[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text        = "Stand there"
+targetType  = "node"
+nodeId      = "base"
+flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]''', 1)
+    assert loop != HEAD
+    d = tmp_path_factory.mktemp("l2_stuck")
+    src = d / "game.toml"
+    src.write_text(loop.replace("{card_flag}", "opening_done").replace("{amb_conditions}", "")
+                   .replace("{extra}", ""))
+    res = subprocess.run([os.path.join(REPO, "venv", "bin", "python"), "manage.py",
+                          "package_from_toml", "--file", str(src), "--output", str(d / "out"),
+                          "--gen-version", "v2"], cwd=REPO, capture_output=True, text=True)
+    assert res.returncode == 0, res.stdout[-2000:] + res.stderr[-2000:]
+    return _rows((str(d / "out" / "index.html"), str(src)))
+
+
+def test_an_opening_that_never_reaches_a_room_says_so(stuck):
+    _status, detail = stuck["the guidance page resolves cards"]
+    assert "never reached a room in 20 steps" in detail, detail
+
+
+def test_an_opening_that_reaches_a_room_does_not(good):
+    assert "never reached a room" not in good["the guidance page resolves cards"][1]

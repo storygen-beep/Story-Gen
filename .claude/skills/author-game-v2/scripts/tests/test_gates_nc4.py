@@ -44,3 +44,24 @@ def test_a_sidebar_label_that_differs_fails():
     ok, _h, detail, _n = gates._one_name_per_trait(
         game(sidebar=[{"type": "trait_bar", "trait": "nerve", "label": "Courage"}]))
     assert ok is False and '"Courage"; its label is "Nerve"' in detail[0]
+
+
+# ── follow-ups: every list that toasts ───────────────────────────────────────
+
+def test_costs_substitution_jobs_and_phone_counters_are_moved_traits():
+    g = {"traits": {"labels": []},
+         "canvases": [{"id": "c", "trigger": {"pre_substitution_effects": [
+                          {"trait": "nerve", "op": "add", "value": 1}]},
+                       "nodes": [{"id": "n", "exit_block": {"choices": [
+                           {"text": "Buy", "costs": [{"trait": "energy", "value": 5}]}]}}]}],
+         "fast_jobs": [{"id": "j", "income": 10}],
+         "phone": {"apps": [{"id": "feed", "post_actions": [{"label": "Post", "counter_trait": "posts"}]}]}}
+    ok, _h, detail, _n = gates._one_name_per_trait(g)
+    named = {d.split("`")[1] for d in detail}
+    assert ok is False and named == {"nerve", "energy", "money", "posts"}
+
+
+def test_the_message_names_the_tidied_key():
+    g = {"traits": {"labels": []}, "canvases": [{"id": "c", "nodes": [{"id": "n", "exit_block": {
+        "config": {"effects": [{"trait": "kessler_stage", "op": "add", "value": 1}]}}}]}]}
+    assert '("Kessler stage")' in gates._one_name_per_trait(g)[2][0]

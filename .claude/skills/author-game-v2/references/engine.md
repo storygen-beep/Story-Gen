@@ -334,22 +334,24 @@ array. Two levels of nesting is where it breaks.
 
 ---
 
-## 15. A number lock prints its own need; a story lock needs `locked_text`, which REPLACES the label
+## 15. A pure number lock prints its own need; a story lock needs `locked_text`, which REPLACES the label
 
 A choice with `show_when_locked = true` renders as `<span class="locked-choice">`. If
 `locked_text` is set, that string is shown **instead of** the action text — the player never
 sees what the action was called.
 
-**Omit it and the row is not blank — it is the action label, greyed, with nothing beside it.**
+**Omit it on a story lock and the row is the action label, greyed, with nothing beside it.**
 `escaped_locked = (locked_text or choice_text)` at `v2.py:14769`, and the same string is repeated
-into the `title` tooltip at `:14839-14840`, so the tooltip adds nothing either. The player sees
-"Kiss him" struck out and learns neither why nor when.
+into the `title` tooltip at `:14839-14840`. The player sees "Kiss him" struck out and learns neither
+why nor when. A number leg gets the engine's suffix; a flag leg gets nothing.
 
-**A number lock needs nothing** *(LO decided, D2)*. When the conditions hold a trait gate the engine
+**A pure number lock needs nothing** *(LO decided, D2)*. When every item is a trait gate the engine
 can number — hers or a man's, `gte`/`gt`/`lte`/`lt`, value 2 or more (`_wants_number`, `v2.py:14816`) —
 it appends the need and her value beside the label (`setup.requirementSuffix`, `v2.py:4319`). A
-`locked_text` there says it twice (J1). **A story lock** — a flag, an `eq`, a value of 1 — gets no
-suffix, so it gets a short `locked_text`.
+`locked_text` there says it twice (J1): drop it. **Any other lock is a story lock** — a flag, a clock or
+day item, clothing, an `eq`, a value of 1 — and so is a **mixed** lock: the suffix names only the unmet
+number legs, never the flag, so without a line the button goes silent when only the flag blocks. A story
+lock gets a short `locked_text` (for a mixed lock, the story part) and is never "doubled".
 
 Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
 
@@ -360,8 +362,8 @@ Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
   settings and pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits`
   "Previous"/"Next" greyed at the ends — rather than gated content.
 
-Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It fails `locked_text` on a number
-lock; a story lock needs `locked_text`,
+Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It fails `locked_text` on a pure
+number lock; a story lock needs `locked_text`,
 `locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:14830-14837`) or
 `rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
@@ -2045,19 +2047,19 @@ demanding · hard · very hard · nearly impossible` (`skillcheck_descriptor`), 
 A dice roll the player can see and accept is not the RNG their comments resent (§35).
 
 > A published *threshold* keeps the same promise a published *probability* does: **the player knows
-> what they are risking before they click.** Use `locked_text_threshold` to say the bar out loud.
+> what they are risking before they click.** Say the bar out loud: in the label on a `rejection_node`
+> lock (Mode B shows only the label, `v2.py:14773`), or the engine's suffix on a Mode A number lock.
 > Do not simulate a roll.
 
 ### The authoring shape
 
 ```toml
 [[canvases.nodes.choices]]
-text                  = "Tell him no"
+text                  = "Tell him no (Nerve 40)"   # Mode B shows only this label: the bar goes here
 conditions            = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 40 },
 ] }
 show_when_locked      = true
-locked_text_threshold = "She would need to be steadier than this — 40 nerve."
 rejection_node        = "node_told_him_no_failed"
 rejection_effects     = [ { targetType = "player", trait = "known", op = "add", value = 4 } ]
 ```

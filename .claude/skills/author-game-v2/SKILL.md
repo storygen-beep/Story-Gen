@@ -252,8 +252,8 @@ how many fails are [off].
 | traversal heat | ~60% of destinations hold a sex scene (3+ explicit words or `_t4`/`_t5` media) | `the-board.md` §1 |
 | explicit pools by place | the old heat count: cycling explicit pools | `the-board.md` §1 |
 | her climb | a paid repeatable is introduced, then a step, then a first time; it is shut on a new save; each act node has two voices on a declared tier and a stop exit | `the-arc.md` A15 |
-| a no has content | a `consume_on` step's other exits park, are a labelled final, or reach a reply that changes something | `the-arc.md` A3 |
-| the men's numbers are read | each trait a man keeps is shown (hidden and counters aside) and read by a gate and a line | `the-meters.md` W1 |
+| a no has content | a `consume_on` step's exits that leave it unused park, are a labelled final, or reach a reply that changes something | `the-arc.md` A3 |
+| the men's numbers are read | each trait a man keeps is shown on the cast page (hidden and counters aside) and read by a gate and a line | `the-meters.md` W1 |
 | one name per trait | every trait an effect moves has a `[[traits.labels]]` label, and a sidebar item's own `label` matches it | `engine.md` §30 |
 | a destination is never open and exit-only | each open hour has something to do alone, from the room's first opening | `the-board.md` §1 |
 | standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger | `the-board.md` §2 |
@@ -281,7 +281,7 @@ how many fails are [off].
 | **the climb is paid for** | every meter a gate reads has a brake on the rungs that raise it | `the-meters.md` M1–M5 |
 | **a day-cap closes** | every flag read `is_false` and cleared in `[engine.daily_tick]` is SET somewhere — a cap with two of its three parts validates and throttles nothing | `the-meters.md` M5 · `engine.md` §28.2 |
 | **a spent day still has a door** | no screen whose every choice is day-capped or priced lacks one choice free of **both** `conditions` and `costs` — a spent cap renders nothing at all, not a greyed line | `the-surfaces.md` R7 · `engine.md` §28.3 |
-| **a locked door says why** | a number lock shows the engine's need and no `locked_text` (doubled, J1); a story lock carries a `locked_text`, a threshold or a rejection node. 2% of the field ships a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
+| **a locked door says why** | a pure number lock shows the engine's need and no `locked_text` (doubled, J1); a story lock, mixed ones included, carries a `locked_text`, a threshold or a rejection node, and is never doubled. 2% of the field ships a dead greyed label | `the-surfaces.md` R5c · `engine.md` §15 · §36 |
 | **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `step_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
@@ -443,7 +443,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
   declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
-  matches the release page · the reader passed (`the-release.md` 6b). **Everything else is REPORTED** for LO to judge when he plays —
+  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b). **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
   when, and every other gate. `gates.py <slug>` still

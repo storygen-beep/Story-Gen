@@ -40,7 +40,7 @@ Write the list of places that answer at least one of those, and count it. That i
 > ⚠️ **Two kinds of place** *(LO decided, D9 · D10)*. A **thoroughfare** (`kind = "thoroughfare"`,
 > `engine.md` §22) only routes: a corridor, a lobby, a street. A **destination** — the default —
 > always offers one thing she can do alone, or it is closed then (`hours` + `closed_text`,
-> `engine.md` §22) A room that is neither is not a location yet. One passing
+> `engine.md` §22). A room that is neither is not a location yet. One passing
 > game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
 > and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
 

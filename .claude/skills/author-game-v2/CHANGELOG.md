@@ -5,6 +5,65 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 follow-ups (LO's review)
+
+**Why.** LO reviewed phase 4: one decision (Gate 42 mixed locks), five must-fixes and nine smaller ones.
+
+**What changed.**
+- **Gate 42 (LO decided).** Only a PURE number lock (every item a trait gte/gt/lte/lt, value ≥ 2, hers or his)
+  with `locked_text` FAILS as doubled ("drop locked_text"). A mixed lock (any flag, clock, clothing, `eq` or
+  value-1 item) is a story lock: it needs its line ("write a short line for the story part") and is never doubled,
+  because the engine's suffix names only the number legs. A `rejection_node` lock (Mode B, no suffix,
+  `v2.py:14770-14797`) is never doubled. Docs: `engine.md` §15, `the-voice.md` R4, `the-surfaces.md` R5c, SKILL row.
+- **NC3.** Only exits that leave the step unused are judged: a choice to a location, or to a node from which no
+  consuming choice is reachable. Node-to-node steps inside the yes path and anything after a consuming choice are
+  not judged.
+- **NC2.** (a/d) a choice inside the canvas that leads into an act node gates it (an ungated hub whose "Go up"
+  needs `first_done` passes (b) and (d)); "open on a new save" walks the entry through open choices to an act.
+  (c) a tier group plus an unconditioned last group is two voices. (e) a choice is followed through non-act nodes,
+  and a loop back to the same act is not leaving. The first time must itself name an act, else (b) says the setter
+  "names no act".
+- **NC6.** A man's `show_traits` counts only when `[ui.cast_page]` exists (no page renders without it,
+  `v2.py:11040`; the detail says "no cast page"). Step gates also count in a location's `entry_conditions`, a
+  schedule `when`, and a phone thread.
+- **DC6b leftovers.** `engine.md` §15's "nothing beside it" is limited to story locks; `the-surfaces.md` R5c's
+  "third shape … by default" is now for a story lock with no line; `engine.md` §36's worked example was a
+  rejection-node lock whose bar never showed before the click (Mode B shows only the label, `v2.py:14773`). Its
+  label now carries the bar, "Tell him no (Nerve 40)", and the dead `locked_text_threshold` line is gone.
+- **NC4.** Also reads `costs`, `pre_substitution_effects`, `fast_jobs` `money_trait` (default money) and phone
+  post actions' `counter_trait` (default followers), all toasted. The bank is left out: `bankTransfer` doesn't
+  toast. The message names the tidied key ("Kessler stage").
+- **NC1.** An empty verdict table, or a verdict other than PASS / FAIL / N/A, is "not read". `state.md`'s
+  `release_page` row names the row and the `reader` / `reader_waivers` shapes; the SKILL row states the scope.
+- **L1.** A group whose conditions lack `version = "1.0"` fails open (`v2.py:4330`), so every group after it is
+  dead. An `<<else>>` after an exhaustive NPC ladder is "dead unless the trait is undefined (old save)".
+- **CK7.** A condition shape the check can't read (clothing, `days_since_flag`, a modifier, a non-numeric NPC
+  compare) makes the canvas NOT live and is listed as "not judged".
+- **L2.** When step 3b never reaches a `Location_` passage in 20 steps, check 7's detail says where it stopped.
+- **shape.py.** A bad `player_start` FAILS "a step's gate can be reached" even when no step declares `raises`;
+  a malformed `goals` (a table, a list of strings) and a string `want.promise` (a crash before) are bad input.
+- **Gate 27.** The `trait_key` fallback is gone (the engine and importer read `trait` only).
+- **printed-stat.** The `SHIP_SINCE` comment says plainly it can never produce a WARN.
+- **Citations.** `the-want.md` → `v2.py:16216` (was `:14637`). `the-board.md` §1 gets its full stop back.
+  `the-release.md`'s tally citation re-pointed to `gates.py:12991`.
+
+**Verified.**
+- Tests added or extended: `test_gates_g42.py` (mixed with a line passes; mixed without one is mute on its story
+  part; a rejection node is never doubled; "drop locked_text"), `test_gates_nc3.py` (a 3-screen yes passes;
+  "Walk out" on screen 1 fails; "Continue" after the yes is not judged), `test_gates_nc2.py` (hub gate, the
+  first time names no act, tier + else = two voices, act → text → act, loop back), `test_gates_nc6.py`,
+  `test_gates_nc4.py`, `test_gates_nc1.py`, `test_gates_l1.py`, `test_gates_ck7.py`, `test_gates_g27.py`,
+  `test_playtest_l2.py` (a live build whose opening loops), `test_shape_nc5.py`.
+- Suite: 459 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, HEAD before (d36cde1) → after:
+  - Gate 42 doubled: members_only 6 → 4 · orientation 17 → 8 · probation 11 → 6 · the_balance 8 → 7 ·
+    vesper_two 9 → 5. The difference is mixed locks, now story locks. No new mute rows.
+  - NC2 problems: members_only 8 → 7, vesper_two 15 → 13; orientation / probation n/a; the_balance parked.
+  - NC3: n/a on all five (no `consume_on`). NC6: unchanged (no game has a cast page or `show_traits`).
+  - `--ship`: the red BLOCK rows are identical before and after on all five — nothing new blocks.
+
+words: 139,327 → 139,480 (+153) · running total 139,480 / 149,283.
+
 ## 2026-09-30 — Phase 4 L2: two `playtest.py` misreads (I28)
 
 **Why.** Review I28: "guidance cards" read 0 of 19 on one game, and "a random event fires" sampled Mondays only.

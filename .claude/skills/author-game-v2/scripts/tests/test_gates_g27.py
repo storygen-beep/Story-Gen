@@ -55,3 +55,10 @@ def test_status_text_prints_only_the_word_and_fails():
 def test_a_key_left_in_the_dump_still_fails():
     v, r = verdict(g({"type": "trait_words", "show_value": True}, {}), {}, GATE)
     assert v == "FAIL" and "declared without in_dump = false" in " ".join(r["detail"])
+
+
+def test_an_item_that_names_its_trait_as_trait_key_is_not_read():
+    # The engine and importer read `trait` only; a `trait_key` item names nothing.
+    game = g({"type": "trait_words"})
+    game["sidebar_items"][0]["trait_key"] = game["sidebar_items"][0].pop("trait")
+    assert verdict(game, {}, GATE)[0] == "n/a"

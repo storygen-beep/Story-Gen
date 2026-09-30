@@ -71,3 +71,24 @@ def test_a_numeric_string_player_start_is_read():
     st = dc9b.ledger([dc9b.step(1, {"nerve": 5}), dc9b.step(2, gate=dc9b.gate(25))])
     st["board"]["player_start"] = {"nerve": "20"}
     assert dc9b.verdict(st)[0] is True
+
+
+# ── follow-ups: bad input is listed, never a crash ───────────────────────────
+
+def test_a_bad_player_start_shows_with_no_raises_declared():
+    st = dc9b.ledger([dc9b.step(1), dc9b.step(2, gate=dc9b.gate(5))])
+    st["board"]["player_start"] = {"nerve": "twenty"}
+    ok, detail = dc9b.verdict(st)
+    assert ok is False and "board.player_start.nerve is not a number" in detail[0]
+
+
+def test_malformed_goals_are_bad_input():
+    ok, detail = verdict({"goal": "x", "goals": {"goal": "Pay"}})
+    assert ok is False and "goals must be a list of tables" in detail[0]
+    ok, detail = verdict({"goal": "x", "goals": ["Pay the debt"]})
+    assert ok is False and "goals[0] must be a table" in detail[0]
+
+
+def test_a_string_promise_is_bad_input_not_a_crash():
+    ok, detail = verdict("Pay the debt by Friday")
+    assert ok is False and "want.promise must be a table" in detail[0]

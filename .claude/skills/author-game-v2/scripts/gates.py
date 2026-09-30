@@ -9067,13 +9067,13 @@ def run_gates(model, game, state=None):
                       f"another story lock render the action label greyed with no reason beside "
                       f"it — v2.py:14769 falls back to the label when `locked_text` is absent")
         detail.append(f"mute: {_shown}" + (" …" if len(mute) > 8 else ""))
-        detail.append("give each story lock a short `locked_text` (the reason), a "
-                      "`locked_text_threshold` or a `rejection_node` (the-surfaces.md R5c, "
-                      "engine.md §15/§36)")
+        detail.append("give each story lock a short `locked_text` — for a mixed lock, a short "
+                      "line for the story part the engine can't name — or a `rejection_node` "
+                      "(the-surfaces.md R5c, engine.md §15/§36)")
     if doubled:
-        detail.append(f"{len(doubled)} number lock(s) also carry `locked_text` — the engine "
-                      f"already prints the need and her value; the line says it twice (J1). "
-                      f"Drop it: " + ", ".join(f'"{m[:40]}"' for m in doubled[:6])
+        detail.append(f"{len(doubled)} pure number lock(s) also carry `locked_text` — the "
+                      f"engine already prints the need and her value; the line says it twice "
+                      f"(J1). Drop locked_text: " + ", ".join(f'"{m[:40]}"' for m in doubled[:6])
                       + (" …" if len(doubled) > 6 else ""))
     _N["a locked door says why"] = len(shown_locked)
     gate("a locked door says why",
@@ -11242,7 +11242,8 @@ SHIP_SINCE = {
     # NC1 · D12: the reader's verdicts gate (SHIP_READER_ROW, defined with `_ship_reader`).
     "reader": ("2026-09-30", "the reader passed"),
     # The printed-stat lint, redefined (D1b): only a `+X` whose X is no declared trait blocks.
-    # Looser than before, so a grandfathered game red now was red then too — dated anyway.
+    # This entry can NEVER produce a WARN: the new rule is looser than the old one, so any game
+    # red under it was red under the old rule too and stays a FAIL. It is dated for the record.
     "printed_stat": ("2026-09-30", "a printed stat is real"),
 }
 SHIP_STAT_ROW = "a printed stat is real"
@@ -11729,6 +11730,17 @@ def _dead_groups(run):
     for i in uncond[:-1]:
         out.append((i, f"a second group with no conditions follows at #{uncond[-1] + 1}; "
                        "only the last one is the <<else>>, this one is dropped"))
+    # A conditioned group whose conditions lack `version = "1.0"` is ALWAYS true in the engine
+    # (`triggerConditionsSatisfied`, v2.py:4330), so it is the first match every time and
+    # every group after it in the run — the <<else>> included — never renders.
+    open_at = next((i for i, g in enumerate(run)
+                    if _group_conditions(g) is not None
+                    and str(_group_conditions(g).get("version") or "") != "1.0"), None)
+    if open_at is not None:
+        return sorted(out + [(i, f"#{open_at + 1} has no version = \"1.0\", so it is always true "
+                                 f"and matches first (it fails open)")
+                             for i in range(open_at + 1, len(run))
+                             if i not in {j for j, _w in out}])
     earlier = []                        # (index, regions, other) of conditioned groups above
     for i, g in enumerate(run):
         cond = _group_conditions(g)
@@ -11775,9 +11787,13 @@ def _dead_groups(run):
         for k, parts in by_key.items():
             full = frozenset([True, False]) if k[0] == "flag" else (-_INF, False, _INF, False)
             if _covered(full, [r for _, r in parts]):
+                # A man's trait is undefined on a save made before he had it (new per-NPC keys
+                # are not backfilled), every comparison is then false, and the <<else>> shows.
+                old_save = (" — dead unless the trait is undefined (old save)"
+                            if k[0] == "trait" and k[1] == "npc" else "")
                 out.append((uncond[-1], f"it is the <<else>>, and "
                             f"#{', #'.join(str(j + 1) for j, _ in parts)} above already match "
-                            f"every value of {k[3]}"))
+                            f"every value of {k[3]}{old_save}"))
                 break
     return sorted(out)
 
@@ -11810,6 +11826,8 @@ def lint_adjacent_groups(game):
 #              to a person (`npc` / `requires_npc`) counts only in hours she is scheduled
 #              there: D9a asks for something she can do ALONE.
 #   exit-only  open and nothing live. FAIL lists those hours.
+#   not judged a canvas with a condition shape this check can't read is NOT live, and is
+#              listed as "not judged" (phase-4 follow-ups).
 # In Her Own Hands keeps its formal-wear shop open and empty 76 of 77 hours and says so on
 # screen (`the-board.md` §1); that exception is documented, not exempted.
 #
@@ -11867,12 +11885,14 @@ def _ck7_reach_state(game, places, lid, base):
 
 
 def _ck7_live_slots(canvas, game, flags, traits, ever_set, written, lid):
-    """The hour slots in which this canvas is on offer at the given state (empty = never).
+    """(slots, unread): the hour slots in which this canvas is on offer at the given state
+    (empty = never), and the condition shapes it could not judge.
 
     Clock and presence conditions narrow the hours: `time_of_day`, and `npc_at_location`
     (is_present / is_absent, read against his schedule rows at the place). A shape this
-    check does not read (a clothing slot, an item) counts as satisfiable, the same
-    convention `_cond_state` keeps for "unknown"; everything it does read must be open.
+    check does not read (a clothing slot, `days_since_flag`, a modifier, an item) makes the
+    canvas NOT live — an exit-only hour is never excused by a guess — and is returned so the
+    row can list it as "not judged" (phase-4 follow-ups, LO).
     """
     t = canvas.get("trigger") or {}
     slots = _trigger_slots(t)
@@ -11895,12 +11915,18 @@ def _ck7_live_slots(canvas, game, flags, traits, ever_set, written, lid):
         kind, key, op, val = _cond_parts(it)
         if kind == "trait" and it.get("subject") == "npc":
             start = ((npcs.get(it.get("npc_id")) or {}).get("core_traits") or {}).get(key, 0)
-            if _cmp(start, op, val) is False:
-                return set()
+            res = _cmp(start, op, val)
+            if res is None:
+                return set(), [typ or "npc trait"]
+            if res is False:
+                return set(), []
             continue
-        if _cond_state(it, flags, traits, ever_set, written) in ("closed", "never"):
-            return set()
-    return slots
+        st = _cond_state(it, flags, traits, ever_set, written)
+        if st == "unknown":
+            return set(), [typ or it.get("operator") or "?"]
+        if st in ("closed", "never"):
+            return set(), []
+    return slots, []
 
 
 def _ck7_npc_slots(game, npc_id, lid, flags, traits, ever_set, written):
@@ -11935,13 +11961,14 @@ def _ck7_hours_text(slots):
 
 
 def _ck7_exit_only(game):
-    """{location id: exit-only hour slots} for every destination (empty set = none)."""
+    """({location id: exit-only hour slots}, {location id: [canvas (shape), …] not judged})
+    for every destination (an empty set = no exit-only hour)."""
     places = _ck7_places(game)
     base = (_opening_flags(game) or set(),
             dict(((game.get("player") or {}).get("core_traits")) or {}))
     ever_set, written = _flags_ever_set(game), set(_player_trait_raises(game))
     all_slots = {(d, h) for d in range(7) for h in range(24)}
-    out = {}
+    out, not_judged = {}, {}
     for lid, loc in places.items():
         if not _ck7_is_destination(loc):
             continue
@@ -11961,13 +11988,15 @@ def _ck7_exit_only(game):
             if (t.get("location") != lid or _is_dev(c) or t.get("is_active", True) is False
                     or t.get("trigger_mode") == "random" or t.get("substitution_only")):
                 continue
-            slots = _ck7_live_slots(c, game, flags, traits, ever_set, written, lid)
+            slots, unread = _ck7_live_slots(c, game, flags, traits, ever_set, written, lid)
+            if unread:
+                not_judged.setdefault(lid, []).append(f"{c.get('id')} ({', '.join(unread)})")
             who = t.get("npc") or t.get("requires_npc")
             if slots and who:
                 slots &= _ck7_npc_slots(game, who, lid, flags, traits, ever_set, written)
             live |= slots
         out[lid] = open_slots - live
-    return out
+    return out, not_judged
 
 
 def _ck7_home(game):
@@ -12043,7 +12072,7 @@ def _ck7_rows(model, game, state):
         rows[name] = (None, "no destinations — every place is a thoroughfare, container or "
                             "offscreen", [], 0)
     else:
-        eo = _ck7_exit_only(game)
+        eo, unread = _ck7_exit_only(game)
         bad = sorted((lid, s) for lid, s in eo.items() if s)
         rows[name] = (
             not bad,
@@ -12053,7 +12082,9 @@ def _ck7_rows(model, game, state):
              for lid, s in bad]
             + (["give the place a repeatable she can do alone at those hours, close it then "
                 "(`hours` + `closed_text`), or mark it `kind = \"thoroughfare\"` — the-board.md §1"]
-               if bad else []),
+               if bad else [])
+            + [f"not judged at {lid}: {', '.join(v[:4])} — a condition shape this check can't "
+               f"read, counted as not live" for lid, v in sorted(unread.items())],
             len(denom))
     return rows
 
@@ -12137,7 +12168,11 @@ def _ship_reader(root, slug, model, game, state):
     due = [i for i in touched if i in must]
     if not due:
         return None, f"no touched canvas has a named person or an explicit beat ({note})", []
-    missing = [i for i in due if not isinstance(reader.get(i), dict)]
+    # Not read: no entry, an empty table, or a verdict that is not PASS / FAIL / N/A.
+    def _read(v):
+        return (isinstance(v, dict) and bool(v)
+                and all(str(x).strip().upper() in ("PASS", "FAIL", "N/A") for x in v.values()))
+    missing = [i for i in due if not _read(reader.get(i))]
     fails, waived = [], 0
     for cid in due:
         for test, verdict in (reader.get(cid) or {}).items():
@@ -12147,8 +12182,10 @@ def _ship_reader(root, slug, model, game, state):
                 waived += 1
             else:
                 fails.append(f"{cid}: FAIL on \"{test}\" with no waiver")
-    detail = ([f"{i}: not read ({must[i]}) — run v2-reader and save its JSON in "
-               f"release_page.reader" for i in missing[:8]]
+    detail = ([f"{i}: not read ({must[i]}) — "
+               + ("its verdict table is empty or holds something other than PASS / FAIL / N/A"
+                  if i in reader else "run v2-reader and save its JSON in release_page.reader")
+               for i in missing[:8]]
               + ([f"… and {len(missing) - 8} more unread"] if len(missing) > 8 else [])
               + fails[:10])
     if fails:
@@ -12232,8 +12269,21 @@ def _her_climb(game, state):
     model, _g = build(copy.deepcopy(game))
     explicit_ids = {m["id"] for m in model if any(b.explicit >= 3 for b in m["beats"])}
 
+    def acts_of(c):
+        return {n.get("id") for n in c.get("nodes") or [] if _rungs_of(_node_text(n))[1] - {"touch"}}
+
+    def inner_gates(c):
+        """Condition items on this canvas's own choices that lead into one of its act nodes —
+        an ungated hub whose "Go up" needs `first_done` gates the act with that choice."""
+        acts = acts_of(c)
+        return [it for n in c.get("nodes") or [] for ch in _node_choices(n)
+                if str(ch.get("nodeId") or "").split(".")[-1] in acts
+                and ch.get("targetType") != "location"
+                for it in _conditions_of(ch)]
+
     def preds(c):
-        need = _positive_reads(c.get("trigger")) | routed.get(c.get("id"), set())
+        need = (_positive_reads(c.get("trigger")) | routed.get(c.get("id"), set())
+                | _positive_reads({"conditions": {"items": inner_gates(c)}}))
         return [p for p in one_time if p is not c and sets[p.get("id")] & need]
 
     paid = []
@@ -12257,22 +12307,43 @@ def _her_climb(game, state):
     bad, notes = [], []
     for c in paid:
         cid = c.get("id")
-        firsts = preds(c)
-        if not firsts:
+        setters = preds(c)
+        # The first time is itself an act (A15: "the act", then the repeatable opens).
+        firsts = [f for f in setters if acts_of(f)]
+        if not setters:
             bad.append(f"{cid}: (b) no one-time first time sets what it reads — introduced, a "
                        f"first time, then the repeatable (the-arc.md A15)")
+        elif not firsts:
+            bad.append(f"{cid}: (b) {', '.join(f.get('id') for f in setters[:3])} set(s) what it "
+                       f"reads but names no act — that is not a first time; the first time is the act")
         elif not any(preds(f) for f in firsts):
             bad.append(f"{cid}: (a) its first time ({', '.join(f.get('id') for f in firsts[:3])}) "
                        f"reads nothing an introduction sets")
         elif not any(p2 is not f and p2 is not p for f in firsts for p in preds(f) for p2 in preds(p)):
             bad.append(f"{cid}: (d) no step between the introduction and the first time — the "
                        f"minimum path is introduced → a step → first time")
-        items = list(_conditions_of(c.get("trigger") or {}))
-        if all(_cond_state(it, start_flags, start_traits, ever_set, written) == "open" for it in items):
+        nodes = {n.get("id"): n for n in c.get("nodes") or []}
+        acts = acts_of(c)
+
+        def is_open(holder):
+            return all(_cond_state(it, start_flags, start_traits, ever_set, written) == "open"
+                       for it in _conditions_of(holder))
+
+        # (d) on a new save: the trigger is open AND some act node is reachable from the entry
+        # through choices whose own conditions are open (a gated "Go up" keeps it shut).
+        reached, todo = set(), [((c.get("nodes") or [{}])[0]).get("id")]
+        while todo:
+            i = todo.pop()
+            if i in reached or i not in nodes:
+                continue
+            reached.add(i)
+            for ch in _node_choices(nodes[i]):
+                t = str(ch.get("nodeId") or "").split(".")[-1]
+                if ch.get("targetType") != "location" and t in nodes and is_open(ch):
+                    todo.append(t)
+        if is_open(c.get("trigger") or {}) and reached & acts:
             bad.append(f"{cid}: (d) open on a new save — nothing paid is reachable before its "
                        f"introduction and first time")
-        nodes = {n.get("id"): n for n in c.get("nodes") or []}
-        acts = {i for i, n in nodes.items() if _rungs_of(_node_text(n))[1] - {"touch"}}
         for nid in sorted(acts):
             node = nodes[nid]
             # (c) two voices on her level, dead groups excluded
@@ -12280,27 +12351,46 @@ def _her_climb(game, state):
                 live = []
                 for run in _group_runs(node.get("blocks")):
                     dead = {i for i, _w in _dead_groups(run)}
+                    run_voices, has_else = [], False
                     for i, g in enumerate(run):
                         cond = _group_conditions(g)
-                        if i in dead or cond is None:
+                        if i in dead:
+                            continue
+                        if cond is None:
+                            has_else = True        # the chain's <<else>>: "otherwise"
                             continue
                         th = {(k, op, v) for it in cond.get("items") or []
                               for kind, k, op, v in [_cond_parts(it)]
                               if kind == "trait" and k in tiers
                               and it.get("subject") in (None, "player")}
                         if th:
-                            live.append(frozenset(th))
+                            run_voices.append(frozenset(th))
+                    # gte 50 + an unconditioned last group = two voices: above and otherwise.
+                    if run_voices and has_else:
+                        run_voices.append(frozenset({("otherwise",)}))
+                    live.extend(run_voices)
                 if len(live) < 2 or len(set(live)) < 2:
                     bad.append(f"{cid}.{nid}: (c) {len(live)} live group(s) read a declared tier "
                                f"— two voices on her level want two, at different thresholds "
                                f"(adjacent groups are one chain: lint adjacent groups)")
-            # (e) a stop exit beside the one that goes on
+            # (e) a stop exit beside the one that goes on. A choice is followed through
+            # non-act nodes (act → a text screen → act is going on, not a stop), and a choice
+            # back to this same act node stays in the act — it is not leaving either.
+            def leads_on(t, seen):
+                if t in acts:
+                    return True
+                if t in seen or t not in nodes:
+                    return False
+                seen.add(t)
+                return any(leads_on(str(ch2.get("nodeId") or "").split(".")[-1], seen)
+                           for ch2 in _node_choices(nodes[t])
+                           if ch2.get("targetType") != "location")
+
             nxt = []
             for ch in _node_choices(node):
                 tgt = str(ch.get("nodeId") or "").split(".")[-1]
-                nxt.append(("on" if tgt in acts and tgt != nid else "leave")
-                           if (ch.get("targetType") != "location" and tgt in nodes)
-                           else "leave")
+                nxt.append("on" if (ch.get("targetType") != "location" and tgt in nodes
+                                    and leads_on(tgt, set())) else "leave")
             if "on" in nxt and "leave" not in nxt:
                 bad.append(f"{cid}.{nid}: (e) no stop exit — only the way on (D7f: \"stop him\" "
                            f"at each stage)")
@@ -12314,10 +12404,13 @@ def _her_climb(game, state):
 # NC3 · a no has content (D6) — `the-arc.md` A3, `engine.md` §49.
 # Judged only on canvases that opted into EN1 (`consume_on = "exit"`); anywhere else the
 # step is used up when its first screen shows, and there is no parked no to judge.
-#   · every NON-consuming exit (no `consumes = true`) must carry `retry_after_days` or
-#     `final = true`, or lead to a node of this canvas that has text AND something the no
-#     changes: an effect or a flag on the choice or on that node's exits, or a
+#   · every exit that LEAVES the step without consuming it — a choice to a location, or to
+#     a node from which no path reaches a consuming choice — must carry `retry_after_days`
+#     or `final = true`, or lead to a node of this canvas that has text AND something the
+#     no changes: an effect or a flag on the choice or on that node's exits, or a
 #     `retry_after_days` there. A bare "Walk out" to a location is the failure.
+#   · not judged: a node-to-node choice inside the yes path ("Kiss him" on screen 2 of a
+#     3-screen yes), and any choice on a node reached only after a consuming choice.
 #   · a `final = true` exit's label says it ends the path.
 # The CK8a refusal pattern (`_REFUSAL_RE`) names each exit as a no or a way out in the list.
 # CK8a (I3): a no written as her spoken line starts with a quote mark — skip it.
@@ -12343,7 +12436,37 @@ def _no_has_content(game):
 
     for c in opted:
         nodes = {n.get("id"): n for n in c.get("nodes") or []}
+
+        def target(ch):
+            if ch.get("targetType") == "location":
+                return None
+            return nodes.get(str(ch.get("nodeId") or "").split(".")[-1])
+
+        # Nodes from which a consuming choice can be reached through node-to-node choices.
+        reaches = {i for i, n in nodes.items() if any(ch.get("consumes") for ch in _node_choices(n))}
+        grew = True
+        while grew:
+            grew = False
+            for i, n in nodes.items():
+                if i not in reaches and any((t := target(ch)) is not None and t.get("id") in reaches
+                                            for ch in _node_choices(n) if not ch.get("consumes")):
+                    reaches.add(i)
+                    grew = True
+        # Nodes on screen before the step is used: from the entry, never through a consume.
+        first = (c.get("nodes") or [{}])[0].get("id")
+        before, todo = set(), [first]
+        while todo:
+            i = todo.pop()
+            if i in before or i not in nodes:
+                continue
+            before.add(i)
+            for ch in _node_choices(nodes[i]):
+                t = target(ch)
+                if t is not None and not ch.get("consumes") and not ch.get("final"):
+                    todo.append(t.get("id"))
         for n in c.get("nodes") or []:
+            if n.get("id") not in before:
+                continue                       # only reached after a yes: nothing to park
             for ch in _node_choices(n):
                 text = str(ch.get("text") or "").strip()
                 kind = "a no" if _REFUSAL_RE.match(text) else "a way out"
@@ -12355,11 +12478,12 @@ def _no_has_content(game):
                     continue
                 if ch.get("consumes"):
                     continue
+                tgt = target(ch)
+                if tgt is not None and tgt.get("id") in reaches:
+                    continue                   # a step inside the yes path, not a way out
                 judged += 1
                 if ch.get("retry_after_days"):
                     continue
-                tgt = nodes.get(str(ch.get("nodeId") or "").split(".")[-1]) \
-                    if ch.get("targetType") != "location" else None
                 has_text = bool(tgt) and any(b.get("content") for b in _flat_blocks(tgt.get("blocks"))
                                              if b.get("type") not in MEDIA_BLOCKS)
                 if has_text and (changes(ch) or any(changes(h) for h in _exit_holders([tgt]))):
@@ -12368,9 +12492,8 @@ def _no_has_content(game):
                            + ("leads to a node with no text" if tgt and not has_text else
                               "changes nothing" if tgt else "leaves with nothing")
                            + " — give it a written reply that moves something, or retry_after_days")
-    return (not bad, f"{judged - len(bad)}/{judged} non-consuming or final exits on {len(opted)} "
-                     f"consume_on step(s) have content", bad[:14], judged)
-
+    return (not bad, f"{judged - len(bad)}/{judged} exits that leave a consume_on step unused "
+                     f"(or end it for good) have content, on {len(opted)} step(s)", bad[:14], judged)
 
 # NC6 · the men's numbers are read (D5 · J6) — `the-meters.md` W1 rule 1 and "What the
 # player is shown" 2. Under D1 every trait a man keeps is shown (EN7 `show_traits`, on
@@ -12379,8 +12502,11 @@ def _no_has_content(game):
 #   · a trait in his `core_traits` that nothing shows FAILS — except one whose
 #     `[[traits.labels]]` entry is `hidden = true`, and a ladder counter (`<npc>_stage`, or
 #     the `counter` of his `board.characters[].ladder`);
-#   · a shown trait needs a STEP GATE (a trigger or choice condition reading it on him) AND
-#     a LINE BRANCH (a `group` / pool condition inside blocks reading it on him).
+#   · a shown trait needs a STEP GATE (a trigger or choice condition reading it on him, or one
+#     in a location's `entry_conditions`, a schedule row's `when`, or a phone thread) AND a
+#     LINE BRANCH (a `group` / pool condition inside blocks reading it on him).
+#   · "shown" means it can render: with no `[ui.cast_page]` the engine emits no cast page at
+#     all (`_generate_cast_page`, v2.py:11040), so his own `show_traits` shows nothing.
 # Ages are shape.py's (DC2a), not this gate's.
 def _npc_key(x):
     x = str(x or "")
@@ -12390,7 +12516,9 @@ def _npc_key(x):
 def _mens_numbers(game, state):
     """(ok, headline, detail, n) for `the men's numbers are read`."""
     npcs = [n for n in (game.get("npcs") or []) if n.get("id")]
-    page = (((game.get("ui") or {}).get("cast_page")) or {}).get("show_traits") or []
+    cast_page = ((game.get("ui") or {}).get("cast_page"))
+    has_page = isinstance(cast_page, dict) and bool(cast_page)
+    page = (cast_page or {}).get("show_traits") or [] if has_page else []
     hidden = {l.get("key") for l in ((game.get("traits") or {}).get("labels") or [])
               if isinstance(l, dict) and l.get("hidden") is True}
     counters = {}
@@ -12406,15 +12534,28 @@ def _mens_numbers(game, state):
             who = _npc_key(d.get("npc_id") or d.get("character_id"))
             key = d.get("trait_key") or d.get("trait")
             (lines_read if ("blocks" in path or "beats" in path) else gates_read)[who].add(key)
+    # Step gates outside canvases: a location's entry_conditions, a schedule row's `when`,
+    # and a phone thread's conditions.
+    for src in ([l for l in (game.get("locations") or [])]
+                + [r for n in (game.get("npcs") or []) for r in (n.get("schedules") or [])]
+                + [((game.get("phone") or {}).get("conversations") or [])]):
+        for _path, d in _walk_paths(src):
+            if d.get("subject") == "npc" and (d.get("trait_key") or d.get("trait")):
+                gates_read[_npc_key(d.get("npc_id") or d.get("character_id"))].add(
+                    d.get("trait_key") or d.get("trait"))
     bad, shown_n = [], 0
     for n in npcs:
         who = _npc_key(n.get("id"))
         kept = set((n.get("core_traits") or {}).keys())
-        shown = (set(page) | set(n.get("show_traits") or [])) & kept
+        own = set(n.get("show_traits") or [])
+        shown = ((set(page) | own) & kept) if has_page else set()
         exempt = hidden | {f"{who}_stage"} | counters.get(who, set())
         for k in sorted(kept - shown - exempt):
-            bad.append(f"{n.get('id')}: keeps `{k}` and nothing shows it — add it to show_traits, "
-                       f"or mark it hidden = true (the-meters.md, D1)")
+            bad.append(f"{n.get('id')}: keeps `{k}` and nothing shows it — "
+                       + ("his show_traits names it, but there is no [ui.cast_page], so no cast page "
+                          "renders" if (k in own and not has_page) else
+                          "add it to show_traits, or mark it hidden = true")
+                       + " (the-meters.md, D1)")
         for k in sorted(shown):
             shown_n += 1
             miss = [w for w, got in (("no step gate", gates_read[who]),
@@ -12429,24 +12570,42 @@ def _mens_numbers(game, state):
                      f"{judged} kept trait(s)", bad[:14], judged)
 
 
-# Gate 42 · a locked door says why — rebuilt with DC6b (PRD v2 phase 4 · D2 · J1, 2026-09-30).
-# A NUMBER LOCK is exactly the engine's `_wants_number` predicate (v2.py:14816): a trait item
-# (hers or a man's — EN6's NPC gate is the same shape), gte / gt / lte / lt, a numeric value
-# of 2 or more. The engine appends the requirement and her value beside the label
-# (`setup.requirementSuffix`, v2.py:4319), so that suffix IS the why; a `locked_text` on
-# such a choice replaces the label and says the reason twice — FAIL, "doubled" (J1). Any
-# other lock (a flag, an `eq`, a value of 1) still needs a line: `locked_text`,
-# `locked_text_threshold` or `rejection_node`. A cost-only choice explains itself (§27).
+# Gate 42 · a locked door says why — rebuilt with DC6b (PRD v2 phase 4 · D2 · J1, 2026-09-30),
+# mixed locks settled by LO in the phase-4 follow-ups.
+# The engine appends `setup.requirementSuffix` (v2.py:4319) beside a Mode A locked label when
+# `_wants_number` (v2.py:14816) holds, and the suffix names ONLY the unmet number legs
+# (`describeUnmetTraits`), never a flag, a clock item or clothing. So:
+#   PURE number lock   every item is a trait (hers or a man's) gte / gt / lte / lt with a value
+#                      of 2 or more. The suffix is the whole why; a `locked_text` beside it says
+#                      it twice -> FAIL "doubled" (J1). Fix: drop `locked_text`.
+#   STORY lock         anything else, INCLUDING a mixed lock with a number leg and a flag leg:
+#                      the suffix can't say the flag part, and a deleted line leaves a silent
+#                      grey button when only the flag blocks. It needs its written line —
+#                      `locked_text`, a `locked_text_threshold` toast or a `rejection_node` —
+#                      and is never "doubled". Fix: write a short line (for the story part).
+#   rejection_node     Mode B (v2.py:14770-14797): a live link, no suffix at all, so never doubled.
+# A cost-only choice explains itself (§27).
+def _number_item(it):
+    return (isinstance(it, dict) and it.get("type") == "trait"
+            and it.get("operator") in ("gte", "gt", "lte", "lt")
+            and isinstance(it.get("value"), (int, float)) and not isinstance(it.get("value"), bool)
+            and it.get("value") >= 2)
+
+
 def _is_number_lock(conditions):
-    return any(isinstance(it, dict) and it.get("type") == "trait"
-               and it.get("operator") in ("gte", "gt", "lte", "lt")
-               and isinstance(it.get("value"), (int, float)) and not isinstance(it.get("value"), bool)
-               and it.get("value") >= 2
-               for it in ((conditions or {}).get("items") or []))
+    """The engine's own `_wants_number`: ANY number item gets the suffix."""
+    return any(_number_item(it) for it in ((conditions or {}).get("items") or []))
+
+
+def _is_pure_number_lock(conditions):
+    """Every item is a number item — the suffix says the whole why."""
+    items = (conditions or {}).get("items") or []
+    return bool(items) and all(_number_item(it) for it in items)
 
 
 def _locked_doors(game):
-    """(shown_locked, mute, doubled) label lists for gate 42."""
+    """(shown_locked, mute, doubled) label lists for gate 42. A mute MIXED lock's label is
+    tagged "(story part)" so the fix line can say which part needs words."""
     shown_locked, mute, doubled = [], [], []
     for path, node in _walk_paths(game):
         if not path or path[-1] != "[]" or "choices" not in path:
@@ -12457,17 +12616,19 @@ def _locked_doors(game):
             continue
         label = str(node.get("text") or node.get("target") or "?")
         shown_locked.append(label)
-        if _is_number_lock(node.get("conditions")):
-            if str(node.get("locked_text") or "").strip():
+        conds = node.get("conditions")
+        has_line = bool(str(node.get("locked_text") or "").strip())
+        if node.get("rejection_node"):
+            continue                                   # Mode B: its own node is the why
+        if _is_pure_number_lock(conds):
+            if has_line:
                 doubled.append(label)
             continue
-        if (str(node.get("locked_text") or "").strip()
-                or str(node.get("locked_text_threshold") or "").strip()
-                or node.get("rejection_node")):
+        if has_line or str(node.get("locked_text_threshold") or "").strip():
             continue
-        if not node.get("conditions") and node.get("costs"):
+        if not conds and node.get("costs"):
             continue
-        mute.append(label)
+        mute.append(f"{label} (story part)" if _is_number_lock(conds) else label)
     return shown_locked, mute, doubled
 
 
@@ -12485,13 +12646,27 @@ def _one_name_per_trait(game):
         if isinstance(l, dict) and l.get("key"):
             labels[l["key"]] = str(l.get("label") or "").strip()
     moved = set()
+    # Every list that toasts a trait change: effects, costs (v2.py:14665 on a choice, :5347 on
+    # a canvas), a substitution's pre-effects, the day roll; plus a fast job's
+    # `money_trait` (default "money", v2.py:3096) and a phone post action's `counter_trait`
+    # (default "followers", v2.py:2878-2880).
     for _path, d in _walk_paths(game):
-        for k in ("effects", "rejection_effects", "traitEffects"):
+        for k in ("effects", "rejection_effects", "traitEffects", "costs",
+                  "pre_substitution_effects"):
             for ef in (d.get(k) or []) if isinstance(d.get(k), list) else []:
                 if isinstance(ef, dict) and (ef.get("trait") or ef.get("trait_key")):
                     moved.add(ef.get("trait") or ef.get("trait_key"))
+        for act in (d.get("post_actions") or []) if isinstance(d.get("post_actions"), list) else []:
+            if isinstance(act, dict):
+                moved.add(act.get("counter_trait") or "followers")      # v2.py:2878 default
+    for job in (game.get("fast_jobs") or []):
+        if isinstance(job, dict):
+            moved.add(job.get("money_trait") or "money")
+    # (The bank moves money without a toast — v2.py `bankTransfer` — so it is not read here.)
+    tidy = lambda k: str(k).replace("_", " ").capitalize()          # noqa: E731
     bad = [f"`{k}` is changed by an effect and has no [[traits.labels]] label — the toast "
-           f"names it by its key" for k in sorted(moved) if not labels.get(k)]
+           f"shows the tidied key (\"{tidy(k)}\"), not a name you chose"
+           for k in sorted(moved) if not labels.get(k)]
     items = [i for i in (game.get("sidebar_items") or []) if isinstance(i, dict) and i.get("trait")]
     for i in items:
         own = str(i.get("label") or "").strip()
@@ -12524,7 +12699,7 @@ def _banded_shown_once(game):
     for item in (game.get("sidebar_items") or []):
         if not isinstance(item, dict) or not item.get("bands") or item.get("trait_owner") == "npc":
             continue                           # per-NPC cards do not come from the player dump
-        k = item.get("trait") or item.get("trait_key")
+        k = item.get("trait")                  # the engine and importer read `trait` only
         if not k:
             continue
         n += 1

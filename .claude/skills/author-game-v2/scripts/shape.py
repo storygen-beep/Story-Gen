@@ -250,7 +250,8 @@ def check(state, strict=False):
             [] if ok else [f"`{door['canvas']}` is not a ladder step's canvas"])
 
     # 9 · the promise has a beat this release (IC16, SP7)
-    prom = want.get("promise") or {}
+    prom_raw = want.get("promise")
+    prom = prom_raw if isinstance(prom_raw, dict) else {}       # a string used to crash here
     if not (prom.get("goal") or prom.get("mystery")):
         row("the promise has a beat this release", False if strict else None,
             "want.promise names no goal or mystery (the idea page §2)")
@@ -264,10 +265,17 @@ def check(state, strict=False):
     # sidebar countdown only displays, so a date promises an ending the engine never runs. And a
     # goal that can end names the next one (`want.promise.goals[] = {goal, ends_when, next}`),
     # because the game never stalls. `the-want.md` §2.
-    goals = [g for g in (prom.get("goals") or []) if isinstance(g, dict)] \
-        if isinstance(prom, dict) else []
+    raw_goals = prom.get("goals")
+    goals = [g for g in raw_goals if isinstance(g, dict)] if isinstance(raw_goals, list) else []
     bad = []
-    if isinstance(prom, dict) and prom.get("date") not in (None, ""):
+    if prom_raw not in (None, "", {}) and not isinstance(prom_raw, dict):
+        bad.append(f"want.promise must be a table — got {prom_raw!r} (bad input)")
+    if raw_goals is not None and not isinstance(raw_goals, list):
+        bad.append(f"want.promise.goals must be a list of tables — got {raw_goals!r} (bad input)")
+    elif isinstance(raw_goals, list):
+        bad.extend(f"want.promise.goals[{i}] must be a table — got {g!r} (bad input)"
+                   for i, g in enumerate(raw_goals) if not isinstance(g, dict))
+    if prom.get("date") not in (None, ""):
         bad.append(f"want.promise.date = {prom['date']!r} — the goal has no date (D8)")
     for i, g in enumerate(goals):
         label = str(g.get("goal") or f"goals[{i}]")[:50]
@@ -430,7 +438,11 @@ def check(state, strict=False):
                 out |= before(k, seen)
         return out
 
-    if not any(s.get("raises") for _n, s in steps):
+    ps_bad = [b for b in bad_input if b.startswith("board.player_start")]
+    if not any(s.get("raises") for _n, s in steps) and ps_bad:
+        # A bad player_start is shown even with nothing to judge it against.
+        row("a step's gate can be reached", False, f"{len(ps_bad)} bad input", ps_bad)
+    elif not any(s.get("raises") for _n, s in steps):
         row("a step's gate can be reached", None, "n/a — no ladder step declares `raises`")
     else:
         judged, bad = 0, list(bad_input)

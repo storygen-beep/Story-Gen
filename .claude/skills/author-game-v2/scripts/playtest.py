@@ -757,6 +757,8 @@ def universal(page, errors, game=None, rep=None):
         avail = links(page)
         if not avail or not click(page, avail[0]):
             break
+    opening_left = str(passage(page) or "").startswith("Location_")
+    stuck_at = "" if opening_left else str(passage(page) or "?")
     cards_after_opening = quest_cards(page)
 
     # 4 · declared meters exist at runtime
@@ -803,7 +805,10 @@ def universal(page, errors, game=None, rep=None):
             n = sum(got.values())
             where = ", ".join(f"{k}:{v}" for k, v in got.items() if v)
             rep.check("the guidance page resolves cards", n > 0,
-                      f"{n} of {declared_cards} declared cards resolve once the opening ends"
+                      (f"{n} of {declared_cards} declared cards resolve once the opening ends"
+                       if opening_left else
+                       f"{n} of {declared_cards} declared cards resolve — read at {stuck_at}: the "
+                       f"first link never reached a room in 20 steps, so the opening may not be over")
                       + (f" · {where}" if where else ""))
 
     # 8 · the world can interrupt the player.

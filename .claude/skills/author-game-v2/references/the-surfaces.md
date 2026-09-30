@@ -625,7 +625,7 @@ The field's refusal has exactly two shapes and we ship a third that it does not
   *already done* (18%), a time (5%), a place (2%). Price is the field's answer; wayfinding is not.
 - **2.26% show a dead label with nothing beside it**, and nearly all of that is settings and
   pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits` "Previous"/"Next" greyed at
-  the ends. **That third shape is the one our engine renders by default** (`engine.md` §15).
+  the ends. **That third shape is what our engine renders for a story lock with no line** (`engine.md` §15).
 
 **The shape, measured:** a refusal stands **where the action stood**, runs about **nine words**,
 **names a handle**, and is **marked as the game's own voice**. Typography is a binary house
@@ -638,8 +638,9 @@ the row holds an italic, parenthesised line saying where to find her instead; pa
 same row becomes a *different* link. The refusal occupies the row the link would have used, so the
 roster never reflows and the eye learns one shape. Three states, one row, no dead end at any of them.
 
-**Ours** *(LO decided, D2)*: a number lock needs nothing — the engine prints the need and her value
-(`engine.md` §15), and a `locked_text` there doubles it. A story lock takes `locked_text` (the reason),
+**Ours** *(LO decided, D2)*: a pure number lock needs nothing — the engine prints the need and her
+value (`engine.md` §15), and a `locked_text` there doubles it. A story lock, mixed ones included (the
+suffix never names a flag), takes `locked_text` (the reason),
 `locked_text_threshold` (the bar, on click — `engine.md` §23), or `rejection_node` (a live link to a real failure node — §36, still used by zero
 games). A choice gated only by `costs` needs none of them: the engine appends the requirement itself
 (`engine.md` §27). Gate: **"a locked door says why"**.

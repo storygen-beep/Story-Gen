@@ -89,3 +89,35 @@ def test_a_bare_story_lock_is_mute():
 def test_an_eq_or_value_one_lock_still_needs_a_line():
     assert "1 mute" in row(locked(trait("eq", 40)))["headline"]
     assert "1 mute" in row(locked(trait("gte", 1)))["headline"]
+
+
+# ── follow-ups: mixed locks (LO) and Mode B ──────────────────────────────────
+
+def mixed(**extra):
+    ch = {"text": "Tell him no", "show_when_locked": True,
+          "conditions": dict(V1, items=[trait("gte", 40), FLAG]),
+          "targetType": "location", "locationId": "room"}
+    ch.update(extra)
+    return ch
+
+
+def test_a_mixed_lock_with_its_line_passes_and_is_never_doubled():
+    r = row(mixed(locked_text="Not with the key still in his pocket."))
+    assert not r["detail"] and "doubled" not in r["headline"]
+
+
+def test_a_mixed_lock_with_no_line_is_mute_on_its_story_part():
+    r = row(mixed())
+    assert "1 mute" in r["headline"]
+    assert "(story part)" in r["detail"][1] and "line for the story part" in r["detail"][2]
+
+
+def test_a_rejection_node_lock_is_never_doubled():
+    # Mode B renders a live link with no suffix (v2.py:14770-14797).
+    r = row(locked(trait("gte", 40), locked_text="Tell him no", rejection_node="n"))
+    assert not r["detail"]
+
+
+def test_the_doubled_fix_says_drop_locked_text():
+    r = row(locked(trait("gte", 40), locked_text="Tell him no"))
+    assert "Drop locked_text" in r["detail"][0]

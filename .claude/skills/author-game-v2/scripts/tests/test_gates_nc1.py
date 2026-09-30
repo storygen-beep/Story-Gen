@@ -140,3 +140,9 @@ def test_a_new_game_blocks_and_a_grandfathered_one_warns(tmp_path, monkeypatch):
     assert ship(tmp_path, monkeypatch, "brand_new", {})[0] is False
     ok, head = ship(tmp_path, monkeypatch, "vesper_two", {})
     assert ok == "warn" and "(reader)" in head
+
+
+def test_an_empty_table_or_an_unknown_verdict_is_not_read():
+    for entry in ({}, {"want": "MAYBE"}, {"want": ""}):
+        ok, _h, detail = reader_row(page({"hub_a": entry}))
+        assert ok is False and "empty or holds something other" in detail[0], entry

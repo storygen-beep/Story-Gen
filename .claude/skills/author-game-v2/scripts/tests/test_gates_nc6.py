@@ -47,7 +47,7 @@ def test_shown_and_read_both_ways_passes():
 
 
 def test_shown_on_his_own_card_counts():
-    assert row(game(own=["trust"]))[0] is True
+    assert row(game(own=["trust"], page=[]))[0] is True       # page=[] still makes a cast page
 
 
 def test_hidden_and_counters_are_exempt():
@@ -74,3 +74,29 @@ def test_a_shown_trait_no_gate_reads_fails():
 def test_a_shown_trait_no_line_reads_fails():
     ok, _h, detail, _n = row(game(page=["trust"], line_read=False))
     assert ok is False and "no line branch reads it" in detail[0]
+
+
+# ── follow-ups ───────────────────────────────────────────────────────────────
+
+def test_his_own_list_with_no_cast_page_is_not_shown():
+    ok, _h, detail, _n = row(game(own=["trust"]))          # no [ui.cast_page]
+    assert ok is False and "no cast page" in detail[0]
+
+
+def test_his_own_list_counts_once_a_cast_page_exists():
+    g = game(own=["trust"])
+    g["ui"] = {"cast_page": {"show_traits": []}}
+    assert row(g)[0] is True
+
+
+def test_a_gate_on_a_location_a_schedule_or_a_phone_thread_counts():
+    for where in ("location", "schedule", "phone"):
+        g = game(page=["trust"], gate_read=False)
+        cond = {"version": "1.0", "logic": "AND", "items": [dict(TRUST)]}
+        if where == "location":
+            g["locations"] = [{"id": "his_room", "entry_conditions": cond}]
+        elif where == "schedule":
+            g["npcs"][0]["schedules"] = [{"location": "bar", "when": cond}]
+        else:
+            g["phone"] = {"conversations": [{"id": "t", "npc": "npc_vic", "trigger": {"conditions": cond}}]}
+        assert row(g)[0] is True, where

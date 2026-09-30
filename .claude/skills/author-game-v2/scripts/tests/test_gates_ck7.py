@@ -168,3 +168,13 @@ def test_the_empty_room_blocks_a_new_game(tmp_path, monkeypatch):
 def test_a_grandfathered_game_warns(tmp_path, monkeypatch):
     ok, head, _ = ship(tmp_path, monkeypatch, "probation")
     assert ok == "warn" and "exit_only" in head and "blocks from your next release" in head
+
+
+# ── follow-ups: an unread condition shape is not live, and is listed ─────────
+
+def test_a_clothing_gated_canvas_is_not_live_and_is_listed_not_judged():
+    g = game([{"id": "shop"}], [canvas("try_on", "shop", conditions=cond(
+        {"type": "clothing_slot", "slot": "top", "operator": "equipped"}))])
+    r = row(g)
+    assert r["pass_"] is False and "(168 h)" in r["detail"][0]
+    assert any(d.startswith("not judged at shop: try_on (clothing_slot)") for d in r["detail"])
