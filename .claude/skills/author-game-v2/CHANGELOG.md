@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC9c: six sheet templates; an idea-stage clip may be intent; the opening clock counts travel (templates)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9c (I20 · E6 · I7):
+- six sheet types and 13 rules, but no template (I20);
+- at the idea stage there's no media, and line 8 had no way to mark a clip as intent (E6);
+- the opening clock formula left out travel time: 18:01 by the formula, 18:08 played (I7).
+
+**What changed.**
+- `templates/sheets/{place,person,scene,system,opening,decision}.md` (new): one page each, slots only, each
+  pointing at its S-rules and its save path.
+  - `decision.md` sits at `games/<slug>/DECISIONS.md`, outside `sheets/`, as the folder section says.
+  - The person template asks age, his visible want and what he keeps (DC2a), and one guidance card per step
+    (DC9a).
+- `references/the-sheets.md`:
+  - "Six sheet types" points at the templates;
+  - the folder tree gains `spine/` and `proposals/`, which completes DC9a's H32.
+- `references/the-release.md` her moment, line 8: at the idea stage the clip may be `intent`, found later.
+- `templates/first-hour.toml` F3: the landing clock adds the landing location's own `costs.time` and any area
+  `crossing_costs.time`, which the travel intercept charges on arrival. Read in `v2.py`: the intercept fires on
+  any move into a `Location_` passage.
+- `scripts/tests/test_templates_parse.py`: a new test. All six exist, each ≤ 60 lines, starts `# [REVIEW]`, has
+  slots, and no table cell is a filled sentence.
+
+**Verified.**
+- Suite: 323 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Grep: the old line-8 sentence is 0.
+
+words: 138,637 → 138,682 (+45) · running total 138,682 / 149,283. Templates aren't counted.
+
 ## 2026-09-30 — DC9b: the spine's ladder page separates tiers from his meters, and a gate must be reachable (doctrine + shape.py)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9b (H17 · I16 · I17 · I25 · H31):

@@ -49,8 +49,8 @@ what their players quote:
 8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
    this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
    canvas sets (`validate_flag_chains()`, `v2.py:13269`). The live goal, mystery or rival beat it moves,
-   and a clip that exists or can be found for it. A moment with no clip is a moment the game cannot
-   show.
+   and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
+   enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
 **Leads to — what it opens.** The next step, named; the promise line this step ends on; and **how
 the player finds the next step** — the guidance card line. Being lost is the field's top complaint
