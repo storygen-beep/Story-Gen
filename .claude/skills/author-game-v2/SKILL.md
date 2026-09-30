@@ -436,7 +436,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   player, and it is the one mode wired to stop a publish: `scripts/release_upload.py` refuses to
   package on a red, and `scripts/hooks/pre-commit` refuses to commit a non-dev portal build of a
   v2 game. It **BLOCKS** only what makes a build broken, unfinishable
-  or untrue — no past claim on a repeatable · no printed stat · no raw token on screen · a one-time step with a person
+  or untrue — no past claim on a repeatable · a printed stat is real (only an unreal `+X` blocks) · no raw token on screen · a one-time step with a person
   speaks · the opening's card has goals · each step fires when unlocked, and each unlock is
   earnable (every person on the release page has a declared ladder, it passes *ladders move
   forward*, and `playtest.reach_step` climbs it in the build — the clock and place are set per

@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4: the printed-stat lint, redefined (D1b)
+
+**Why.** Under D1 a real stat may be shown, and D1b keeps the "+N" toast. The lint still listed real stats (as a
+note), and its `--ship` BLOCK row blocked on any hit, so a correct `(+5 Trust)` on a game with a `trust` trait
+stopped a release.
+
+**What changed.**
+- `scripts/gates.py` `lint_printed_stat`: lists only a `+X` whose X is no declared trait or flag (same line
+  count). The old rule, every printed stat, runs only under `_legacy("printed_stat")`.
+- The `--ship` row is renamed **a printed stat is real** (`SHIP_STAT_ROW`; was "no printed stat labels"), with
+  `SHIP_SINCE["printed_stat"] = 2026-09-30` and a legacy re-run branch in `ship_rows` (LO B). The new rule is
+  looser, so a grandfathered game red now was red before too and stays a FAIL.
+- `tests/test_gates_ws6.py`: the row's new name (its fixture's `Trust` is undeclared, so it still flips).
+- `SKILL.md`: the `--ship` BLOCK list names the row. `references/the-release.md`: the stale `gates.py:11315`
+  citation (already wrong at 97c45f4, where the line was `_capture`) now points at the "Lints sit BELOW the
+  tally" comment, `gates.py:12816`.
+
+**Verified.**
+- `tests/test_gates_printed_stat.py`: a real stat is not listed; an unreal one is; the legacy rule lists the real
+  one; on `--ship` a real stat no longer blocks, an unreal one blocks a new game and a grandfathered one.
+- Suite: 427 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: PASS → PASS on all five (no printed stat label anywhere, before or after).
+
+words: 139,320 → 139,327 (+7) · running total 139,327 / 149,283.
+
 ## 2026-09-30 — Phase 4 Gate 27: a banded meter is shown once (D1 · D4)
 
 **Why.** D1 shows numbers; D4 puts the number on the sidebar item. Gate 27 only kept the number out of the dump,

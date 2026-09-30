@@ -1889,8 +1889,8 @@ def lint_printed_stat(game):
 
     `the-meters.md` "What the player is shown": numbers are shown and named (D1), and a `+X`
     for a stat that does not exist is wrong; `register.md` truth rule 4, a consequence printed on a
-    button is real. A declared stat is still listed, as a note, until the lint is rebuilt (PRD v2
-    phase 4, the printed-stat lint).
+    button is real. Since PRD v2 phase 4 a declared stat is not listed (D1b's toast shows it
+    too); the old rule, every printed stat, runs only in LO B's `_legacy("printed_stat")` re-run.
     Matches by the LAST words of the printed name, so "+Jo Respect" counts as declared if
     `respect` or `jo respect` is. A list, never a score.
     """
@@ -1904,11 +1904,11 @@ def lint_printed_stat(game):
             if not words:
                 continue
             tails = {" ".join(words[i:]) for i in range(len(words))}
-            # Under D1 (`the-meters.md` "What the player is shown") a real stat may be shown;
-            # it is still listed, marked as real, until phase 4 narrows this lint.
+            # Under D1 (`the-meters.md` "What the player is shown") a real stat may be shown,
+            # so only an unreal one is listed. The old rule listed (and blocked on) both.
             if tails & declared or {t.replace(" ", "_") for t in tails} & declared:
-                hits.append(f"{cid}: \"{m.group(0).strip()}\" prints a real stat (allowed; "
-                            f"the engine's toast already shows it)")
+                if _legacy("printed_stat"):
+                    hits.append(f"{cid}: \"{m.group(0).strip()}\" prints a stat (old rule)")
             else:
                 hits.append(f"{cid}: \"{m.group(0).strip()}\" names no declared trait or flag")
 
@@ -11241,7 +11241,11 @@ SHIP_SINCE = {
     "exit_only": ("2026-09-30", SHIP_BLOCK_GATES["standing surface"]),
     # NC1 · D12: the reader's verdicts gate (SHIP_READER_ROW, defined with `_ship_reader`).
     "reader": ("2026-09-30", "the reader passed"),
+    # The printed-stat lint, redefined (D1b): only a `+X` whose X is no declared trait blocks.
+    # Looser than before, so a grandfathered game red now was red then too — dated anyway.
+    "printed_stat": ("2026-09-30", "a printed stat is real"),
 }
+SHIP_STAT_ROW = "a printed stat is real"
 # The rules running in their OLD form. Empty except while `ship_rows` re-runs one row to
 # ask whether a grandfathered game would have passed before the rule changed.
 _LEGACY_RULES = set()
@@ -11368,7 +11372,7 @@ def ship_rows(slug, root=None):
     B("no past claim on a repeatable", not hits,
       s or "no repeatable screen to check", hits[:10])
     s, hits = lint_printed_stat(game)
-    B("no printed stat labels", not hits, s, hits[:10])
+    B(SHIP_STAT_ROW, not hits, s, hits[:10])
     s, mute = lint_one_time_speaks(game)
     B("a one-time step with a person speaks", not mute,
       s or "no one-time step bound to a person", mute[:10])
@@ -11475,6 +11479,8 @@ def ship_rows(slug, root=None):
                 old_ok = _ship_ladders(root, slug, game, state, people)[0]
             elif label == SHIP_READER_ROW:
                 old_ok = _ship_reader(root, slug, model, game, state)[0]
+            elif label == SHIP_STAT_ROW:
+                old_ok = not lint_printed_stat(game)[1]
             else:
                 old_scored, _ = score(model, game, state, os.path.join(root, "games", slug))
                 old_ok = _block_row_verdict(labels[label],

@@ -112,7 +112,7 @@ def test_past_claim_blocks(tmp_path, monkeypatch):
 def test_printed_stat_blocks(tmp_path, monkeypatch):
     g = green_game()
     g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "She smiles. (+5 Trust)"
-    flips(tmp_path, monkeypatch, "no printed stat labels", game=g)
+    flips(tmp_path, monkeypatch, "a printed stat is real", game=g)   # unreal: no Trust trait
 
 
 def test_mute_one_time_step_blocks(tmp_path, monkeypatch):
