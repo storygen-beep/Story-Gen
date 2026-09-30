@@ -5,6 +5,8 @@ id           = "player"
 name         = "Mara"
 description  = "Dana's little sister. Twenty-four. Nobody here knows your name yet."
 customizable = true
+# Declared so the service stairs can stay hidden until Ade shows her (hidden_until needs a declared flag).
+flag_keys    = ["knows_service_stairs"]
 
 [[player.customization_fields]]
 id      = "name"
@@ -55,6 +57,7 @@ image_search_queries = ["coastal cliff path evening", "path up a sea cliff"]
 entry_from           = "town"
 navigation_order     = ["staff_house", "club"]
 costs                = { time = 10 }
+kind                 = "thoroughfare"
 
 [[locations]]
 id                   = "staff_house"
@@ -74,6 +77,7 @@ image_search_queries = ["private club entrance hall marble", "luxury members clu
 entry_from           = "cliff_path"
 navigation_order     = ["bar_floor", "dressing_room", "pool_terrace", "library", "julians_office", "members_floor"]
 costs                = { time = 10 }
+kind                 = "thoroughfare"
 
 [[locations]]
 id                   = "bar_floor"
@@ -82,7 +86,9 @@ description          = "The club's bar, where you work your shift for tips: low 
 image                = "locations/bar_floor.jpg"
 image_search_queries = ["exclusive club bar dim lamps", "luxury bar dark wood night"]
 entry_from           = "club"
-navigation_order     = []
+navigation_order     = ["service_stairs"]
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "17:00", close = "23:00" } ]
+closed_text          = "The bar's dark. Chairs up on the tables, and Ade's not here."
 
 [[locations]]
 id                   = "dressing_room"
@@ -101,6 +107,8 @@ image                = "locations/pool_terrace.jpg"
 image_search_queries = ["lit swimming pool terrace night sea", "luxury pool terrace evening"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { open = "22:00", close = "24:00" } ]
+closed_text          = "The terrace is shut and the pool is dark."
 
 [[locations]]
 id                   = "library"
@@ -110,6 +118,8 @@ image                = "locations/library.jpg"
 image_search_queries = ["old library armchair lamp fire", "dark wood library reading lamp"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "18:00", close = "23:00" } ]
+closed_text          = "The library's locked. Kessler's chair sits empty behind the glass."
 
 [[locations]]
 id                   = "julians_office"
@@ -147,6 +157,21 @@ image                = "locations/members_floor.jpg"
 image_search_queries = ["hotel corridor thick carpet numbered doors", "luxury hallway doors dim light"]
 entry_from           = "club"
 navigation_order     = []
+hours                = [ { weekdays = [1, 2, 3, 4, 5], open = "18:00", close = "24:00" } ]
+closed_text          = "Upstairs is shut. A rope hangs across the stairs."
+
+[[locations]]
+id                   = "service_stairs"
+name                 = "Service Stairs"
+description          = "A narrow stair behind the STAFF ONLY door at the back of the bar. Nobody sweeps it. It comes out at the far end of the corridor upstairs."
+image                = "locations/service_stairs.jpg"
+image_search_queries = ["narrow back staircase dim", "service stairwell old building"]
+entry_from           = "bar_floor"
+# The way up is the climb itself (the service_stairs canvas exits to members_floor);
+# navigation_order may only list rooms whose entry_from is this one.
+navigation_order     = []
+kind                 = "thoroughfare"
+hidden_until         = { flag = "knows_service_stairs" }
 
 # ── people ───────────────────────────────────────────────────────────────────
 [[npcs]]
