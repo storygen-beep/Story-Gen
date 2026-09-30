@@ -119,7 +119,7 @@ one's explicit beat comes from outside the arc: a stranger or a one-off (A15).
   a pushy man says so, a nice man drops it.
 - **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
   It closes his story, never the person: he stays in the world.
-- **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want.
+- **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want (R5).
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** In-scene lines from the passing games:
 >
@@ -643,9 +643,8 @@ The candidates below are **lints**, not gates, and each is built only once one g
 the thing — the order that produced `the start choice is read` (shipped after a game built
 it first) rather than the order that produced P0.
 
-1. **`a refusal is remembered`** — for every declining choice (the `she can say no` gate already
-   locates them), whether its effects write a key that is read anywhere else. A list, never a
-   score.
+1. **`a refusal is remembered`** — superseded by A3's rule and its check *(check: pending NC3,
+   "a no has content")*.
 2. **`the arc ladder`** — BUILT. Per person: the one-time steps written, how many are switched
    off, and the longest chain where each step's trigger reads what the one before sets; the
    game's longest beside the field's (median ~15). A list, never a bar.

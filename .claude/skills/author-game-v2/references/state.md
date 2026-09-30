@@ -43,7 +43,7 @@ belong here; only decisions, debts, and promises do.
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
     "promise":       { "goal": "…", "mystery": "…", "payout": "…", "rival": "npc_id",
                        "goals": [ { "goal": "…", "ends_when": "…", "next": "…" } ] },
-                                 // no date (D8). A goal with ends_when names next (NC5, pending).
+                                 // no date (D8). A goal with ends_when names next (check: pending NC5).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
@@ -65,21 +65,11 @@ belong here; only decisions, debts, and promises do.
     },
 
     "who_she_is":      "…",
-    // WHAT HOLDS HER HERE. A bill is 4 of 23 in the female-lead field and only the
-    // FOURTH most common hold (~/Documents/Female_Hold_Study_20260904/).
     "obligation":      "…",   // the hold, in her nouns, with a face and a due day that repeats
     "hold_kind":       "ambition" | "bill" | "order" | "body" | "subsistence"
-                     | "appetite" | "job" | "erosion" | "displacement",
-                              // the-want.md §1b carries the count and an example each.
-                              // `bill` hands the mechanism to the-economy.md R3-R3d.
-    "hold_collector":  "npc_id",  // WHO enforces it, when a person does. Omit when
-                              // nothing does — `in-her-own-hands` charges rent with no
-                              // collector at all, and that is a shape, not an omission.
-                              // Read by the lint `the collector is also the target`,
-                              // which prints his share of the game's explicit surfaces.
-                              // the-want.md §4a: the person who holds the obligation is
-                              // not automatically the person she fucks — measured at
-                              // 0.4-3.8% of explicit passages across the whole field.
+                     | "appetite" | "job" | "erosion" | "displacement",   // the-want.md §1b
+    "hold_collector":  "npc_id",  // who enforces it, when a person does; omit when nothing does.
+                              // Read by the lint `the collector is also the target` (§4a).
     "appetite":        "…",   // must not be completable. A DESTINATION, not the opening
                               // position and not the content schedule — the tiers are that
                               // (the-want.md §2)
@@ -247,7 +237,8 @@ belong here; only decisions, debts, and promises do.
       "opened":  ["the thing now visible and locked"],
       "gates":   { "passed": 10, "of": 10 },
       "shipped": "2026-08-10",
-      "commit":  "abc1234"                   // the git commit it shipped from; the reader's
+      "commit":  "abc1234"                   // the HEAD the build was made from (before the ship
+                                             //   commit); the reader's
                                              //   "touched" diffs against it (the-release.md 6b)
     }
   ],
@@ -400,7 +391,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
 | `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place, past midnight included; a `fires_from = "opening"` step is exempt. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
-| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds; with `board.daily_raises = {trait: per_day}` (what the daily tick adds), `shape.py` *a step's gate can be reached* checks each gate against the steps before it. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
+| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. `shape.py` *a step's gate can be reached* checks each gate against the trait's start (`meters[k].start`, else `.min`, else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
 | `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |

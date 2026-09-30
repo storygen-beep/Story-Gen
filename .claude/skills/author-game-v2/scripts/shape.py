@@ -320,30 +320,73 @@ def check(state, strict=False):
     else:
         row("the person is there at the step's hour", not bad, f"{judged - len(bad)}/{judged} steps", bad)
 
-    # 12 · a step's gate can be reached (PRD v2 DC9b · H31). Optional step `raises = {trait: n}`
-    # and `board.daily_raises = {trait: per_day}`. Only traits the ledger says something raises are
-    # judged: a repeatable's raises live in the TOML, so any other trait is not this check's to fail.
-    # A gte/gt gate on a judged trait passes if the daily tick raises it, or if the raises of the
-    # steps before it — the same person's lower steps, plus every step it depends on (SP3), and
-    # theirs, transitively — reach the value.
-    daily = {k: v for k, v in ((board.get("daily_raises") or {}).items())
-             if isinstance(v, (int, float)) and v > 0}
-    by_key = {(n, s.get("n")): s for n, s in steps}
-    raised = {t for _n, s in steps for t in (s.get("raises") or {})} | set(daily)
+    # 12 · a step's gate can be reached (PRD v2 DC9b · H31). Optional step `raises = {trait: n}`,
+    # `board.daily_raises = {trait: per_day}` and `board.repeat_raises = {trait: per_visit}` (a
+    # repeatable in the TOML raises it). Only traits a step's `raises` names are judged; a trait the
+    # daily tick or a repeatable raises can always be reached, and any other trait is not this
+    # check's to fail. A gte/gt gate passes if the trait's starting value (`meters[k].start`, else
+    # `.min`, else 0) plus the raises of the steps before it reaches the value. "Before" = the same
+    # person's lower steps, plus every step it depends on (SP3), transitively; a gate with `npc`
+    # counts only that person's raises. Bad input is listed, never a crash.
+    def _num(v):
+        if isinstance(v, bool):
+            return None
+        if isinstance(v, (int, float)):
+            return v
+        try:
+            return float(v) if isinstance(v, str) and v.strip() else None
+        except ValueError:
+            return None
+
+    def _raise_table(key):
+        t = (board.get(key) or {})
+        return {k: v for k, v in t.items() if (_num(v) or 0) > 0} if isinstance(t, dict) else {}
+
+    always = set(_raise_table("daily_raises")) | set(_raise_table("repeat_raises"))
+    bad_input, by_key = [], {}
+    for n, s in steps:
+        sn = _num(s.get("n"))
+        if sn is None:
+            bad_input.append(f"{n} step {s.get('n')!r}: `n` is not a number — skipped")
+            continue
+        r = s.get("raises")
+        if r is not None and not isinstance(r, dict):
+            bad_input.append(f"{n} step {s.get('n')}: `raises` must be a table — got {r!r}")
+        elif isinstance(r, dict):
+            for t, v in r.items():
+                if _num(v) is None:
+                    bad_input.append(f"{n} step {s.get('n')}: `raises.{t}` is not a number — got {v!r}")
+        by_key[(n, sn)] = s
+
+    def _raises(step):
+        r = step.get("raises")
+        return {t: _num(v) for t, v in r.items() if _num(v) is not None} if isinstance(r, dict) else {}
+
+    raised = {t for s in by_key.values() for t in _raises(s)}
+    meters = {c.get("id"): (c.get("meters") or {}) for c in (board.get("characters") or [])
+              if isinstance(c, dict)}
+
+    def _start(npc, trait):
+        m = (meters.get(npc) or {}).get(trait)
+        if isinstance(m, dict):
+            for k in ("start", "min"):
+                if _num(m.get(k)) is not None:
+                    return _num(m.get(k))
+        return 0
+
     needs = {}
     for d in (state.get("dependencies") or []):
         if isinstance(d, dict) and "step" in (d.get("needs") or {}):
             frm, nd = d.get("from") or {}, d["needs"]
-            needs.setdefault((frm.get("npc"), frm.get("step")), []).append((nd.get("npc"), nd.get("step")))
+            needs.setdefault((frm.get("npc"), _num(frm.get("step"))), []).append(
+                (nd.get("npc"), _num(nd.get("step"))))
 
     def before(key, seen):
         """Every step that must have happened before `key` — excluding `key` itself."""
         npc, n = key
-        out = {k for k in by_key if k[0] == npc and isinstance(k[1], (int, float))
-               and isinstance(n, (int, float)) and k[1] < n}
+        out = {k for k in by_key if k[0] == npc and n is not None and k[1] < n}
         for dep in needs.get(key, []):
-            out |= {k for k in by_key if k[0] == dep[0] and isinstance(k[1], (int, float))
-                    and isinstance(dep[1], (int, float)) and k[1] <= dep[1]}
+            out |= {k for k in by_key if k[0] == dep[0] and dep[1] is not None and k[1] <= dep[1]}
         for k in list(out):
             if k not in seen:
                 seen.add(k)
@@ -353,24 +396,28 @@ def check(state, strict=False):
     if not any(s.get("raises") for _n, s in steps):
         row("a step's gate can be reached", None, "n/a — no ladder step declares `raises`")
     else:
-        judged, bad = 0, []
-        for n, s in steps:
+        judged, bad = 0, list(bad_input)
+        for (n, sn), s in by_key.items():
             for it in s.get("gate") or []:
                 if not isinstance(it, dict) or it.get("trait") not in raised:
                     continue
-                if it.get("op") not in ("gte", "gt") or not isinstance(it.get("value"), (int, float)):
+                v = _num(it.get("value"))
+                if it.get("op") not in ("gte", "gt") or v is None:
                     continue
                 judged += 1
-                t, v = it["trait"], it["value"]
-                if t in daily:
+                t = it["trait"]
+                if t in always:
                     continue
-                got = sum(((by_key[k].get("raises") or {}).get(t) or 0)
-                          for k in before((n, s.get("n")), set()))
+                who = it.get("npc")
+                earlier = [k for k in before((n, sn), set()) if who is None or k[0] == who]
+                got = _start(who, t) + sum(_raises(by_key[k]).get(t, 0) for k in earlier)
                 if got < v or (it["op"] == "gt" and got == v):
-                    bad.append(f"{n} step {s.get('n')}: `{t} {it['op']} {v}` but the steps before it "
-                               f"raise {t} by {got}")
-        row("a step's gate can be reached", not bad if judged else None,
-            f"{judged - len(bad)}/{judged} gates reachable" if judged
+                    bad.append(f"{n} step {s.get('n')}: `{t} {it['op']} {it.get('value')}` but the "
+                               f"start plus the steps before it reach {got:g}")
+        ok = None if not judged and not bad_input else not bad
+        row("a step's gate can be reached", ok,
+            f"{judged - (len(bad) - len(bad_input))}/{judged} gates reachable"
+            + (f" · {len(bad_input)} bad input" if bad_input else "") if judged or bad_input
             else "n/a — no gate reads a trait the ledger raises", bad)
 
     # 13 · every person is an adult (PRD v2 DC2a · B2). `want.cast[] = {id, age, keeps}` holds the

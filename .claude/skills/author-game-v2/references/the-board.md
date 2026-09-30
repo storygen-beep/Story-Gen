@@ -72,8 +72,8 @@ navigation_order     = ["back_room"]
 For each location, decide and record in `v2_state.json` under `board.locations[]`:
 
 - **Its dramatic job** (`job`). Why she goes there when nothing is happening.
-- **Who is there, and when.** Scheduled people, or at least one thing she does there alone; a
-  thoroughfare needs neither.
+- **Who is there and when — and on a destination, one thing she does alone.** A thoroughfare needs
+  neither.
 - **What its list holds** (`serves`) — the three kinds and nothing else (`the-surfaces.md` R2):
   which declared **needs** she can fill here, what **work** is done here, which **people** are
   scheduled here. *That is the room's menu, and its length.*
@@ -364,11 +364,11 @@ Declare each need with the four fields from `the-meters.md` M8:
 
 ```jsonc
 "needs": [
-  { "key":   "hygiene",
-    "falls": "10 a day",                                  // [player.trait_decay]
-    "fills": "the_bathroom · Wash · 30 min",
-    "costs": "$5 for the water heater",
-    "shuts": "under 40 she will not go out in public" }   // ← gate 29 checks THIS
+  { "key":   "energy",
+    "falls": "8 a day",                                   // [player.trait_decay]
+    "fills": "her_room · Sleep · 8 hours",
+    "costs": "nothing",
+    "shuts": "under 20 she will not go out" }             // ← gate 29 checks THIS
 ]
 ```
 

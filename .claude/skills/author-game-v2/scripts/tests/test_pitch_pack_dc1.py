@@ -72,3 +72,15 @@ def test_nothing_at_all_is_not_found(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(sys, "argv", ["pitch_pack.py", "nope"])
     assert pitch_pack.main() == 2
     assert "not found" in capsys.readouterr().out
+
+
+def test_built_json_lists_only_shipped_releases(tmp_path, monkeypatch, capsys):
+    """Phase 3 follow-up #15: the built-game --json pack filters releases to shipped too."""
+    game = {"project": {"id": "fx"}, "locations": [{"id": "bar"}], "npcs": [], "canvases": []}
+    monkeypatch.setattr(pitch_pack.gates, "_load", lambda path: game)
+    sp = tmp_path / "v2_state.json"
+    sp.write_text(json.dumps(STATE))
+    monkeypatch.chdir(tmp_path)
+    assert pitch_pack.pack("fx", "unused.toml", str(sp), as_json=True) == 0
+    data = json.loads(capsys.readouterr().out)
+    assert [r["version"] for r in data["releases"]] == ["0.0"]

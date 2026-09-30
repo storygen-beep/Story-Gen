@@ -37,7 +37,7 @@ rules each test points at.
 | 5 | **who notices** | someone reacts to what she does, or the ledger declares nobody does (`the-meters.md` W5b). N/A for a scene with nothing to notice. |
 | 6 | **the written no** | where the scene makes her an offer, a refusal exists, is written, and moves something (`the-surfaces.md` R5b). N/A with no offer. |
 | 7 | **the body** | an explicit beat's last sentence is about what is happening, not what it means (the pivot, `register.md`). N/A for a non-explicit scene. |
-| 8 | **the numbers agree** | every number the scene states (a price, a count, a span of time) agrees with `WANT.md` and the ledger. N/A with no number. |
+| 8 | **the numbers agree** | every number the scene states (a price, a count, a span of time) agrees with `WANT.md` and the ledger, **and `WANT.md`'s own numbers agree with each other** (one span said two ways is a FAIL on the Want). N/A with no number. |
 | 9 | **companion and rival** | where `want.companion_is_rival` is true, the companion's scenes together show both her help and her competition. N/A otherwise. |
 
 ## Output

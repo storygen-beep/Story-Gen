@@ -5,6 +5,149 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Doctrine phase 3 follow-ups (review of DC1–DC11)
+
+**Why.** LO's review of phase 3 listed nine must-fixes and eleven small ones. This entry covers all twenty.
+
+**What changed.**
+1. **engine.md citation sweep.** Three read-only sub-agents each read one third of the file, citation by citation,
+   against `v2.py`, `template_import.py`, `game_graph.py` and `gates.py`. 368 citations were checked and 274 were
+   wrong; the 259 fix entries below cover them (some entries fix two), each applied by exact substring.
+   - Five of the fixed citations were then mis-anchored by `cite_check` (it anchors on the nearest function
+     name). Four were reworded so the right name sits nearest: §21's quest row now names
+     `setup.applyQuestEffect()` at `:6617` (the agent's `:6616` was one line off); §26 `advanceDay()`; §27
+     `checkCostsAffordable`; §28 `validate_flag_chains()`. The fifth, §37 `compare`, lost its parentheses.
+   - Claims found false and corrected (each read in code):
+     - §27: a **choice's** `costs` is deducted inline with `clamp = false` (`v2.py:14665`). Only canvas and
+       location costs go through the clamped `deductCostArray`. `the-economy.md:517` said the same and is
+       corrected too.
+     - §29: the cap code sits in `window.applyTraitEffect`.
+     - §41: the quest-condition error now names three keys (`template_import.py:6713`).
+     - §47: the goal-bullet snippet now includes `days_since_flag` (`v2.py:17139-17150`).
+   - Every line change, old → new:
+
+v2.py:12474 → v2.py:13907; v2.py:11908 → v2.py:14066; v2.py:11872-11874 → v2.py:13879-13881; v2.py:14572 →
+v2.py:16001; :14512 → :15941; v2.py:3448 → v2.py:3801; :3465 → :3819; :3612 → :3977; v2.py:11634 → v2.py:12694;
+v2.py:420-424 → v2.py:423-427; :447-451 → :450-454; v2.py:13258 → v2.py:15301; v2.py:3317-3331 → v2.py:3500-3514;
+v2.py:3159 → v2.py:3487; :13219-13220 → :14839-14840; v2.py:13210-13217 → v2.py:14830-14837; gates.py:1148 →
+gates.py:1114; template_import.py:208-221 → template_import.py:282-294; v2.py:4044 → v2.py:4573; v2.py:1608 →
+v2.py:1748; v2.py:4111 → v2.py:4549; :7922 → :8558; template_import.py:2525 → template_import.py:2806; v2.py:1578-1579
+→ v2.py:1718-1719; template_import.py:743-745 → template_import.py:918-920; template_import.py:4227-4241 →
+template_import.py:4792-4806; v2.py:7816-7823 → v2.py:8564-8573; v2.py:4131-4145 → v2.py:4667-4681; :7791 → :8533;
+v2.py:5928 → v2.py:6461; v2.py:5930 → v2.py:6463; v2.py:4496 → v2.py:5144; :4625 → :5313; v2.py:5749-5756 →
+v2.py:6451-6458; v2.py:5749-5756 → v2.py:6451-6458; v2.py:5810-5825 → v2.py:6517-6532; v2.py:4647 → v2.py:6617;
+v2.py:4687 → v2.py:5375; v2.py:15885 → v2.py:17441; template_import.py:1898-1899 → template_import.py:2159-2160;
+template_import.py:154 → template_import.py:191; template_import.py:153 → template_import.py:190; :3968 → :4714;
+template_import.py:1085 → template_import.py:1239; v2.py:15316 → v2.py:16809; v2.py:15569 → v2.py:17101; v2.py:15371 →
+v2.py:17076; v2.py:16383 → v2.py:17108; template_import.py:1017-1023 → template_import.py:1194-1203; v2.py:14878 →
+v2.py:16990; v2.py:15454-15456 → v2.py:18700-18703; template_import.py:997-1039 → template_import.py:1239-1281;
+v2.py:13185-13186 → v2.py:14830-14831; v2.py:3422 → v2.py:3605; :3593 :3737 :3792 :3855 → :3797 :3953 :4008 :4074;
+v2.py:19995 → v2.py:21742; v2.py:20019 → v2.py:21783; v2.py:14561-14568 → v2.py:16215-16221; v2.py:15908 v2.py:16004 →
+v2.py:16633 v2.py:16729; v2.py:15930-15939 → v2.py:16635-16665; v2.py:15943 → v2.py:16668; v2.py:15950 → v2.py:16675;
+v2.py:15943 → v2.py:16668; v2.py:15950 → v2.py:16675; v2.py:16016-16021 → v2.py:16741-16747; v2.py:16024 →
+v2.py:16749; v2.py:16030 → v2.py:16755; v2.py:16024 → v2.py:16749; v2.py:16020 → v2.py:16745; v2.py:15937 →
+v2.py:16662; v2.py:14673 → v2.py:16776; template_import.py:4786 → template_import.py:5827; v2.py:6146 → v2.py:6168;
+v2.py:5405-5408 → v2.py:6111-6114; v2.py:15253-15262 → v2.py:17397-17406; v2.py:15931 → v2.py:18191; v2.py:5313 :4527
+:4975 → v2.py:5144 :5177 :5664; v2.py:4625 → v2.py:5313; v2.py:13014-13015 → v2.py:14598-14599; v2.py:13159-13166 →
+v2.py:14757-14764; v2.py:4655-4661 → v2.py:5343-5349; template_import.py:2133-2136 → template_import.py:2522-2525;
+template_import.py:2714-2769 → template_import.py:3115-3172; v2.py:11634 → v2.py:12694; v2.py:12648-12733 →
+v2.py:14647-14749; v2.py:13085-13088 :13049-13050 → v2.py:15123-15126 :15087-15088; v2.py:5411-5414 → v2.py:6111-6114;
+v2.py:5552 → v2.py:6254; v2.py:11017 → v2.py:12694; v2.py:4290 → v2.py:4931; v2.py:13421 → v2.py:13360; v2.py:12806 →
+v2.py:14587; v2.py:13016 → v2.py:14767; v2.py:12827-12836 → v2.py:14606-14616; v2.py:13113-13175 → v2.py:14929-14992;
+v2.py:12545 → v2.py:14324; v2.py:4919 → v2.py:5633; v2.py:5763-5769 → v2.py:6465-6471; v2.py:5858 → v2.py:6560;
+v2.py:13464 :13472 :9813 → v2.py:15512 :15520 :11488; v2.py:16933 → v2.py:18534; v2.py:16996 → v2.py:18597;
+v2.py:16886 → v2.py:18487; template_import.py:3751-3757 v2.py:16948-16949 → template_import.py:4187-4193
+v2.py:18549-18550; template_import.py:3613-3623 v2.py:17017-17018 → template_import.py:4049-4059 v2.py:18618-18619;
+template_import.py:3659 :3676-3681 → template_import.py:4095 :4111-4117; template_import.py:3685-3690 →
+template_import.py:4156-4160; v2.py:5406 → v2.py:5610; v2.py:4893 → v2.py:5099; v2.py:5047 → v2.py:5253; v2.py:5057 →
+v2.py:5263; v2.py:12231 → v2.py:12799; v2.py:4968 → v2.py:5174; v2.py:5580 → v2.py:5784; v2.py:4931 → v2.py:5137;
+v2.py:13819 → v2.py:15238; :13388 → :15436; v2.py:14027 → v2.py:16075; v2.py:15663 :15679 → v2.py:17874 :17891;
+v2.py:16043 → v2.py:18399; :19353 :19370 → :21745 :21779; v2.py:12733 → v2.py:14749; v2.py:4670 → v2.py:5358;
+v2.py:11055-11059 → v2.py:12732-12736; v2.py:11100-11101 → v2.py:12795-12796; v2.py:5242 → v2.py:5762; v2.py:4742 →
+v2.py:5263; v2.py:4573-4580 → v2.py:5265-5270; v2.py:5309 → v2.py:5838; v2.py:5263 → v2.py:5792; v2.py:18964 →
+v2.py:21334; v2.py:1046 → v2.py:1098; v2.py:1031 → v2.py:1098; v2.py:15035 → v2.py:16676; v2.py:15042 → v2.py:16715;
+template_import.py:864-880 :2818 → template_import.py:924-937 :2903; v2.py:17091 → v2.py:18744; v2.py:1767 →
+v2.py:1826; v2.py:1579 → v2.py:1638; v2.py:14581-14588 → v2.py:16236-16244; v2.py:14574 → v2.py:16228;
+v2.py:14576-14578 → v2.py:16230-16232; v2.py:14578 :14587 → v2.py:16232 :16243; template_import.py:6210-6237 →
+template_import.py:7559-7587; :6225 → :7574; :6214 → :7563; :6230 → :7579; :6218-6222 → :7567-7571; :6235 → :7583;
+:6143 → :7492; v2.py:14580 → v2.py:16235; gates.py:338-349 → gates.py:464-475; gates.py:298-306 → gates.py:398-405;
+CHANGELOG.md:4835 → CHANGELOG.md:15841; v2.py:13171 → v2.py:14769; v2.py:13210-13217 → v2.py:14830-14837; v2.py:14055
+→ v2.py:14771; v2.py:13668-13673 → v2.py:15314-15318; v2.py:13152-13165 → v2.py:14774-14794;
+template_import.py:825-826 → template_import.py:999-1000; :806 → :980; :2204 → :2514; template_import.py:4616-4624 →
+template_import.py:5408-5413; template_import.py:3143 → template_import.py:3526; v2.py:2004 → v2.py:4219; :2027 →
+:4242; :2037 → :4253; v2.py:7658 → v2.py:8214; :7670 → :8226; :7692 → :8248; v2.py:15536 → v2.py:16990; v2.py:4349 →
+v2.py:4440; v2.py:7686 → v2.py:8242; v2.py:7903 → v2.py:8459; :7918 → :8474; template_import.py:5509 →
+template_import.py:6768; template_import.py:5502-5509 → template_import.py:6761-6768; template_import.py:5315 →
+template_import.py:6023; template_import.py:5242 → template_import.py:5950; :5265 → :5973; template_import.py:5877 →
+template_import.py:7136; template_import.py:1706 → template_import.py:1954; template_import.py:6402 →
+template_import.py:7663; v2.py:16325-16326 → v2.py:17856-17857; :16328 → :17859; v2.py:16333-16336 →
+v2.py:17864-17867; v2.py:16356 → v2.py:17887; :16371 → :17902; v2.py:16333-16336 → v2.py:17864-17867; v2.py:16356 →
+v2.py:17887; :16371 → :17902; v2.py:16325-16326 → v2.py:17856-17857; v2.py:16329-16331 → v2.py:17860-17862; v2.py:4128
+→ v2.py:4566; :7915 → :8555; v2.py:3856 → v2.py:4152; v2.py:2202 → v2.py:2293; v2.py:3244 → v2.py:3426; v2.py:16011 →
+v2.py:17542; v2.py:16164 → v2.py:17695; :3209 → :3391; :3230 → :3412; v2.py:5742-5751 → v2.py:6451-6458;
+v2.py:5928-5930 → v2.py:6461-6463; template_import.py:1361 → template_import.py:1225; template_import.py:906-913 →
+template_import.py:1055-1062; :2302-2310 → :2583-2591; template_import.py:642 → template_import.py:755;
+game_graph.py:311 → game_graph.py:344; v2.py:11656 → v2.py:12716; v2.py:4651 → v2.py:5129; v2.py:5114 → v2.py:5633;
+v2.py:5176-5179 → v2.py:5696-5699; v2.py:5259 → v2.py:5779; v2.py:5290 → v2.py:5810; v2.py:5125-5158 →
+v2.py:5640-5677; v2.py:4662 → v2.py:5137; v2.py:15350 → v2.py:16075; v2.py:13937 → v2.py:16122; v2.py:15897 →
+v2.py:16622; v2.py:13937 → v2.py:14639; v2.py:10252 → v2.py:10719; :10276 → :10743; v2.py:10209 → v2.py:10479; :12961
+→ :13662; :12963 → :13664; v2.py:15985 → v2.py:16710; v2.py:2239-2670 → v2.py:2298-2729; :6826 → :7032; :6838 → :7044;
+v2.py:10127 → v2.py:10386; :1039 → :1050; :5241 → :5445; v2.py:3464 → v2.py:3524; :924 → :926; v2.py:3414 →
+v2.py:3473; :14053 → :14769; v2.py:9294 → v2.py:9869; v2.py:6090 → v2.py:6560; :6126 → :6596; v2.py:6239 → v2.py:6711;
+v2.py:14090 → v2.py:15285; v2.py:13503 → v2.py:14662; v2.py:18228 → v2.py:19611; v2.py:18246 → v2.py:19629; v2.py:3110
+→ v2.py:3169; v2.py:3566 → v2.py:3686; template_import.py:7210 → template_import.py:8378; game_graph.py:308 →
+game_graph.py:336; v2.py:15921-15977 → v2.py:17101-17160; v2.py:15960-15969 → v2.py:17139-17150;
+template_import.py:5669-5673 → template_import.py:6775-6779; template_import.py:1092-1095 →
+template_import.py:1214-1219; v2.py:15875-15877 → v2.py:17054-17056; v2.py:15974-15976 → v2.py:17157-17159;
+template_import.py:1108-1151 → template_import.py:1239-1281; v2.py:10572 → v2.py:11140; template_import.py:3486 →
+template_import.py:3580; v2.py:11055-11059 → v2.py:12732-12736
+
+2. **shape.py "a step's gate can be reached":**
+   - it counts the trait's start (`meters[k].start`, else `.min`, else 0);
+   - `board.repeat_raises = {trait: per_visit}` is not judged, like `daily_raises`;
+   - bad input (a raise that isn't a number, `raises` not a table, a non-numeric `n`) is listed and never crashes,
+     and a numeric-string `n` is coerced;
+   - a gate with `npc` counts only that person's raises.
+   - `state.md` and `the-spine.md` say so. Tests: `test_shape_dc9b.py`, now 12.
+   - The five ledgers are still n/a (read-only).
+3. **B6:** reader test 8 also checks that the Want's own numbers agree with each other (one span never said two
+   ways). Changed in `v2-reader.md`, `register.md`, `the-want.md` "The form" and `templates/want.md`.
+4. **engine.md §26:** the main example is `on_short = "carry"` with stages. The grace/eviction route is shown
+   second, as the old route, and the "eviction branch" is no longer the default.
+5. **the-surfaces.md R3c:** "A no parks; only a labelled final no closes his path (A3)".
+6. **Hygiene:** `the-board.md` §4's worked need is energy; `engine.md` §29's table, `the-meters.md` M6 and a
+   `gates.py` comment no longer use hygiene.
+7. **`releases[].commit`** is the HEAD the build was made from, before the ship commit (`the-release.md`,
+   `state.md`).
+8. **the-map.md:** "Opens at 10:00 PM" (`setup.formatTime` is 12-hour, `v2.py:4175`).
+9. **SKILL.md:** the nine scene tests, required on touched canvases; their verdicts gate.
+10. **the-map.md R0:** "zone" and "anchor" replace "hub" for places (`two_hub` stays as a key); `map_hotspots`
+    drops "fast-travel".
+11. **the-board.md §1:** "Who is there and when — and on a destination, one thing she does alone."
+12. **the-first-hour.md:** "an obligation that comes back".
+13. **templates/idea.md:** "The premise LO picked: <shape>".
+14. **state.md:** "(check: pending NC5)".
+15. **pitch_pack.py:** the built-game `--json` lists only shipped releases (test added).
+16. **v2-pitcher.md:** at the idea phase there's no TOML, and the pitch is step 1.
+17. **engine.md §22/§30/§34:** an "Old saves:" line for EN3, EN4, EN6, EN7, EN10 and EN11.
+18. **board.toml:** one card per ladder step plus one per ascent tier (R2); `the-sheets.md` S10 points at R2.
+19. **the-arc.md:** the old "a refusal is remembered" lint candidate points at A3 / NC3 (pending); "Warmth, never
+    Want" is marked (R5).
+20. **Note for phase 4 (DC6a):** M7 uses `[[traits.labels]] in_dump = false`, not the PRD's `hidden = true`,
+    because `hidden` also drops the trait from the Stats page (`v2.py:1260-1264`; the Stats page skips
+    `hiddenTraits` at `:17930`). **Gate 27 must accept `in_dump = false`.**
+
+Trims to keep the net negative:
+- `state.md`'s hold comments now point at `the-want.md` §1b/§4a instead of repeating them;
+- §33's intro and the RentDay_Short paragraph are shortened.
+
+**Verified.**
+- Suite: 335 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- Every claim-false fix was read in code. Spot-checks of applied citations: `:16662` "Stranger", `:18597`
+  trait_words, `:1098` description pop, `:6168` `is_due`.
+
+words: 139,103 → 139,080 (−23) · running total 139,080 / 149,283.
+
 ## 2026-09-30 — DC11: engine facts documented — one-time steps on yes, decay to a rest point, equip, and the money census (engine docs)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC11 (EN1–EN4, EN6–EN8, EN10, EN11 · I8). `engine.md` is the one home for engine

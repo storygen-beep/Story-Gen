@@ -383,7 +383,8 @@ signature of doctrine living in the wrong place:
    each unlock can be earned, then plays the build with `playtest.reach_step` — which sets the
    clock and the place for each step and applies its declared gate, but never the step counter,
    so step 3 is reached only if steps 1 and 2 really moved it.
-8. **`releases[]` gets `repeatables`, `ladder_steps` and `commit`** (the git commit it shipped from;
+8. **`releases[]` gets `repeatables`, `ladder_steps` and `commit`** (the HEAD the build was made from,
+   before the ship commit;
    the next release's step 6b diffs against it) — the lint *repeatables without a step*
    compares the next release against them.
 

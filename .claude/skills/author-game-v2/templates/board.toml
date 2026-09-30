@@ -38,7 +38,8 @@ release_date = "<YYYY-MM-DD>"
 # ⚠️ THIS SWITCHES THE GUIDANCE PAGE ON. It does not author it.
 # With no [[quest_cards]] the sidebar shows a "Quests" entry leading to a page
 # with a heading and nothing under it — which is exactly what shipped once.
-# One card per ascent-tier band and one per character: references/the-voice.md R2.
+# One card per ladder step (guidance_from_ladder.py) plus one per ascent tier
+# (references/the-voice.md R2).
 quests_engine   = "v2"
 
 # ⚠️ THE CURRENCY IS ONE NOTATION, AND IT IS DECLARED. Write it into the ledger

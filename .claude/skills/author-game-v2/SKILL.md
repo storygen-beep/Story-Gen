@@ -223,8 +223,8 @@ climb or does the CAST?** The field splits 8 roster / 9 ladder with nothing betw
 `v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
 relationship each), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
 instance, before the build; the `excitement` lens reads each pitch), `v2-listener` (loop step 8,
-what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the seven scene tests in
-`register.md`, "What a scene contains"). The Panel has no instrument of its own (`agents.md`).
+what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the nine scene tests in
+`register.md`, "What a scene contains", required on every touched canvas; its verdicts gate). The Panel has no instrument of its own (`agents.md`).
 The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
 

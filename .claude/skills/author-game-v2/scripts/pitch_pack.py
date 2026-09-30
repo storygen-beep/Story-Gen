@@ -942,7 +942,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
                      for (o, t), d in lad.items()},
             movers={f"{o}.{t}": [c for c, _, _ in v] for (o, t), v in mv.items()},
             promises=[p for p in (st.get("promises") or []) if not p.get("paid_in")],
-            releases=st.get("releases") or [],
+            releases=_shipped(st.get("releases")),
             promise={k: want.get(k) for k in
                      ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
             moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec,

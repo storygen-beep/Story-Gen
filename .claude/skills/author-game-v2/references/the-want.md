@@ -15,7 +15,8 @@ amendment — never let it quietly stop being true.
 
 One page, five parts (`templates/want.md`) *(LO decided, D16)*. The detail tables live later: the crude
 words on SP2, rung numbers, needs and the map shape on the board. Every number on the page agrees with
-every other; the reader checks it *(check: pending NC1)*.
+every other (one span never said two ways), and so does every scene; the reader checks both *(check:
+pending NC1)*.
 
 ### 0. The premise first; the model to beat and the promise on the idea page
 

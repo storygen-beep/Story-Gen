@@ -8679,7 +8679,7 @@ def run_gates(model, game, state=None):
     #
     # ⚠️ A need that decays, is restored four ways and gates nothing costs the
     # player time and buys nothing. The shape is a need that shuts a door
-    # (`hygiene >= 40` gates leaving — filthy means she cannot leave).
+    # (`energy >= 20` gates leaving — spent means she cannot leave).
     #
     # Reads the WHOLE game, not just triggers: a need is just as validly gated
     # from a choice, a [group] band or a quest card.

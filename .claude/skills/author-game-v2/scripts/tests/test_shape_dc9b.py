@@ -48,7 +48,7 @@ def test_earlier_raises_reach_the_gate():
 
 def test_short_of_the_gate_fails():
     ok, detail = verdict(ledger([step(1, {"nerve": 5}), step(2, gate=gate(10))]))
-    assert ok is False and "raise nerve by 5" in detail[0]
+    assert ok is False and "reach 5" in detail[0]
 
 
 def test_gt_needs_more_than_equal():
@@ -57,7 +57,48 @@ def test_gt_needs_more_than_equal():
 
 
 def test_a_daily_raise_makes_it_reachable():
-    ok, _ = verdict(ledger([step(1, {"lust": 1}), step(2, gate=gate(50))], daily={"nerve": 2}))
+    ok, _ = verdict(ledger([step(1, {"nerve": 1}), step(2, gate=gate(50))], daily={"nerve": 2}))
+    assert ok is True
+
+
+def test_a_repeatable_raise_makes_it_reachable():
+    st = ledger([step(1, {"nerve": 1}), step(2, gate=gate(50))])
+    st["board"]["repeat_raises"] = {"nerve": 1}
+    assert verdict(st)[0] is True
+
+
+def test_the_starting_value_counts():
+    st = ledger([step(1, {"nerve": 2}), step(2, gate=[{"trait": "nerve", "op": "gte", "value": 10,
+                                                        "npc": "npc_a"}])])
+    st["board"]["characters"][0]["meters"] = {"nerve": {"type": "t", "min": 0, "max": 100, "start": 8}}
+    assert verdict(st)[0] is True
+    st["board"]["characters"][0]["meters"]["nerve"] = {"type": "t", "min": 0, "max": 100}
+    assert verdict(st)[0] is False
+
+
+def test_a_gate_with_npc_counts_only_his_raises():
+    deps = [{"from": {"npc": "npc_b", "step": 1}, "needs": {"npc": "npc_a", "step": 1}}]
+    b = [step(1, gate=[{"trait": "nerve", "op": "gte", "value": 5, "npc": "npc_b"}])]
+    ok, _ = verdict(ledger([step(1, {"nerve": 5})], b, deps=deps))
+    assert ok is False
+    b[0]["gate"][0].pop("npc")
+    assert verdict(ledger([step(1, {"nerve": 5})], b, deps=deps))[0] is True
+
+
+def test_bad_input_is_listed_never_a_crash():
+    ok, detail = verdict(ledger([step(1, {"nerve": "lots"}), step(2, gate=gate(1))]))
+    assert ok is False and any("not a number" in d for d in detail)
+    st = ledger([step(1), step(2, gate=gate(1))])
+    st["board"]["characters"][0]["ladder"]["steps"][0]["raises"] = ["nerve", 5]
+    ok, detail = verdict(st)
+    assert ok is False and any("must be a table" in d for d in detail)
+    st = ledger([step("x", {"nerve": 5}), step(2, gate=gate(1))])
+    ok, detail = verdict(st)
+    assert ok is False and any("`n` is not a number" in d for d in detail)
+
+
+def test_a_numeric_string_n_is_read():
+    ok, _ = verdict(ledger([step("1", {"nerve": 5}), step("2", gate=gate(5))]))
     assert ok is True
 
 

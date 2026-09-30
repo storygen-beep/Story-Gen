@@ -323,7 +323,7 @@ Walked all 25 parseable games from their declared `startnode`; the scaffolding/f
 > single Continue.
 
 **Two openings worth copying.** The reference game (numbers only) spends **141 words** putting an
-obligation and a deadline on the player: the debt, the term and the threat, then a free first
+obligation that comes back on the player: the debt, the term and the threat, then a free first
 choice. `the-hellfire-club` spends **144** on year, city, why she is
 there, who she is meeting, *ten shillings in your pocket* — and ends on **three** ways to cross
 London. Both are inside the median. Neither explains a system.

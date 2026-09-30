@@ -9,7 +9,7 @@
 
 ## 1. The fantasy — what the player comes here to feel
 
-**Which shape?** Pick one, or name a mix. Each has its own engine:
+**The premise LO picked:** <shape, or a named mix>. The four shapes, each with its own engine:
 
 - [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
 - [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, something that repeats)*

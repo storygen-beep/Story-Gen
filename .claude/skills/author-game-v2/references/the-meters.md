@@ -880,7 +880,7 @@ sleeping. Declare the tick.
 `cap` is real (§29) and the skill never mentioned it before this file, so it is easy to over-learn.
 It bounds **how high a trait can go**, not **how fast**:
 
-- ✅ bounding a restore — a sleep rung adding energy, a wash adding hygiene
+- ✅ bounding a restore — a sleep rung adding energy
 - ✅ bounding a repeatable relation grant so one rung cannot max a character on its own
 - ❌ **never on an ascent tier** — the tier must reach its top band, and a cap there deletes content
 - ❌ it is not a throttle. A capped rung is still infinitely clickable up to the cap.

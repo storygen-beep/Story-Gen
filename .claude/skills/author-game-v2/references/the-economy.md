@@ -514,8 +514,8 @@ Six rules are carried by that one choice:
 3. **A flag, not a counter trait.** A counter trait with an `lt` condition works and reads to
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
 4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
-   ⚠️ And know the asymmetry: a **`costs` deduction is hard-clamped to 0–100 and cannot be
-   unclamped**, so above 100 the next priced purchase truncates the balance. §27.
+   ⚠️ And know the asymmetry: a **canvas or location `costs` deduction is clamped to 0–100** and
+   cannot be unclamped, so above 100 it truncates the balance. A choice's `costs` is not clamped. §27.
 5. **`show_when_locked` + `locked_text`** — a shown-locked row with no reason is mute, which is the
    gate `a locked door says why`. A cost-only choice is exempt, because the engine writes its own
    reason; a *condition*-locked one is not.

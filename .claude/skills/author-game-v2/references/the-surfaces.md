@@ -485,7 +485,7 @@ the player would ask why it has not happened yet:
 
 **That is the whole answer to "how does she get from no to yes".** The act simply is not on the menu
 yet, which is section B's silent 71%, and three times on the climb the game spends a scene letting
-her say *why not yet*, in her own voice. A no parks; it never locks (`the-arc.md` A14). In a
+her say *why not yet*, in her own voice. A no parks; only a labelled final no closes his path (`the-arc.md` A3). In a
 female-lead game, In Her Own Hands' `BRLaptopPorn` grows the same way on her own history: two
 categories at first, the rest opened by her dates and by how often she has watched (5, 10, 30).
 

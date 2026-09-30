@@ -211,7 +211,8 @@ trigger whose setter sits on a choice inside.
 ## S10 · GUIDANCE HAS A ROW
 
 One guidance card per ladder step, on the person sheet — what `--ship` checks.
-`scripts/guidance_from_ladder.py` writes the cards from the ledger's ladder.
+`scripts/guidance_from_ladder.py` writes the cards from the ledger's ladder. Each ascent tier keeps its
+own card too (`the-voice.md` R2).
 
 > **The incident.** `quests_engine = "v2"` lights a sidebar entry and a page, and with no cards
 > renders a heading and nothing. **No sheet in the format mentioned a quest card.** Nine were written

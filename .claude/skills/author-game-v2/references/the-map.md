@@ -26,9 +26,9 @@ measured against five named shipped games.
 
 | `archetype` | the shape | fits |
 |---|---|---|
-| **`nested_zones`** *(the default to beat)* | district → venue → interior room; each hub lists its children | most life-sims: a town or campus **plus** a home |
-| **`two_hub`** | two strong hubs — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
-| **`map_hotspots`** | a drawn map with clickable districts and fast-travel | a large, replay-heavy world, 10+ zones |
+| **`nested_zones`** *(the default to beat)* | district → venue → interior room; each zone lists its children | most life-sims: a town or campus **plus** a home |
+| **`two_hub`** | two strong anchors — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
+| **`map_hotspots`** | a drawn map with clickable districts | a large, replay-heavy world, 10+ zones |
 | **`street_mesh`** | named streets, each listing its neighbours and its venues | a city that should feel real without a drawn map |
 | **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain | heavily scripted content where a map is friction |
 
@@ -313,7 +313,7 @@ rather than against a guess.
   every room inside it.
 - **No fast travel**, for now.
 - **Places she has not found are hidden** (`hidden_until`); **closed places show why**
-  (*"Closed. Opens at 22:00."*, `hours`).
+  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4175`).
 - **Guidance cards carry place, time and what is waiting**, and a travel link carries the engine's NEW
   mark when something new waits there.
 - **Faces stay on travel cards.**
