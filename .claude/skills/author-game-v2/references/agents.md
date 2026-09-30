@@ -119,7 +119,7 @@ each **touched** canvas (`the-release.md` 6b) with a named person, and every exp
 nine tests in `register.md` "What a scene contains". It returns a table — scene · test · PASS/FAIL/N/A ·
 the line judged · why — and the same verdicts as JSON, which the session saves in
 `release_page.reader`. **It fixes nothing and scores nothing; its verdicts gate** *(LO decided, D12;
-check: pending NC1)*, with LO's waivers beside them. On test 1 it names the earlier canvases it checked
+`--ship` row *the reader passed*)*, with LO's waivers beside them. On test 1 it names the earlier canvases it checked
 for his wanting (A13). The excitement lens is not here — it reads
 pitches, on `v2-attack`.
 

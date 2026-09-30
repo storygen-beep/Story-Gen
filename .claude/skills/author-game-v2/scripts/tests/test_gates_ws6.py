@@ -68,7 +68,9 @@ def green_state():
     return {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"}},
             "release_page": {"version": "0.1", "people": ["npc_a"],
                              "door": {"canvas": "office", "choice": "Take the closing shift"},
-                             "signed_by_lo": True, "signed_at": "2026-09-26"}}
+                             "signed_by_lo": True, "signed_at": "2026-09-26",
+                             # NC1: the reader has read both canvases with a person on them.
+                             "reader": {"meet_a": {"want": "PASS"}, "a_hub": {"want": "PASS"}}}}
 
 
 def rows(tmp_path, monkeypatch, game=None, state=None, release_rc=0, saves_rc=2,

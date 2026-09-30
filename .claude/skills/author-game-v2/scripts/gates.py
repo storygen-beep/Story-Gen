@@ -11239,6 +11239,8 @@ SHIP_SINCE = {
     "sub_income": ("2026-09-30", SHIP_BLOCK_GATES["the obligation is charged"]),
     # CK7 · D9a: a destination is never open and exit-only (joins `standing surface`).
     "exit_only": ("2026-09-30", SHIP_BLOCK_GATES["standing surface"]),
+    # NC1 · D12: the reader's verdicts gate (SHIP_READER_ROW, defined with `_ship_reader`).
+    "reader": ("2026-09-30", "the reader passed"),
 }
 # The rules running in their OLD form. Empty except while `ship_rows` re-runs one row to
 # ask whether a grandfathered game would have passed before the rule changed.
@@ -11420,6 +11422,7 @@ def ship_rows(slug, root=None):
         B("the build matches the release page", not probs,
           f"{len(rp.get('people') or [])} people on the page"
           + (f", door {door_rp.get('canvas')}" if isinstance(door_rp, dict) else ""), probs)
+    B(SHIP_READER_ROW, *_ship_reader(root, slug, model, game, state))
 
     # ── REPORT: printed for LO, never blocking ─────────────────────────────────
     for gname in SHIP_REPORT_GATES:
@@ -11470,6 +11473,8 @@ def ship_rows(slug, root=None):
         try:
             if label == SHIP_LADDER_ROW:
                 old_ok = _ship_ladders(root, slug, game, state, people)[0]
+            elif label == SHIP_READER_ROW:
+                old_ok = _ship_reader(root, slug, model, game, state)[0]
             else:
                 old_scored, _ = score(model, game, state, os.path.join(root, "games", slug))
                 old_ok = _block_row_verdict(labels[label],
@@ -12045,6 +12050,107 @@ def _ck7_rows(model, game, state):
                if bad else []),
             len(denom))
     return rows
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NC1 · the reader passed (PRD v2 phase 4 · D12, 2026-09-30) — a `--ship` BLOCK row.
+#
+# `the-release.md` 6b (LO decided, D12): `v2-reader` reads every TOUCHED canvas with a named
+# person and every explicit beat, and its verdicts gate. Touched = the id is new, or the
+# canvas's table differs from the one in the last shipped release's 7_final_game.toml,
+# read at `releases[].commit`; with no shipped release every canvas is touched.
+# Verdicts live in `release_page.reader` = {canvas_id: {test: "PASS" | "FAIL" | "N/A"}}
+# and LO's waivers in `release_page.reader_waivers` = [{canvas_id, test, why}]. N/A is not
+# a failure (DC10). A canvas the reader must read and has no entry blocks, and so does a
+# FAIL with no waiver naming its canvas and test. New since 2026-09-30, so the five
+# grandfathered games WARN (LO B, `SHIP_SINCE["reader"]`).
+# ─────────────────────────────────────────────────────────────────────────────
+SHIP_READER_ROW = "the reader passed"
+
+
+def _last_shipped(state):
+    """The latest `releases[]` entry with a `shipped` date, or None."""
+    shipped = [r for r in ((state or {}).get("releases") or [])
+               if isinstance(r, dict) and r.get("shipped")]
+    return max(shipped, key=lambda r: str(r["shipped"])) if shipped else None
+
+
+def _touched_canvases(root, slug, game, state):
+    """(ids, note): canvases new or changed since the last shipped release's commit."""
+    ids = [c.get("id") for c in (game.get("canvases") or []) if c.get("id")]
+    rel = _last_shipped(state)
+    if not rel:
+        return ids, "no shipped release — every canvas is touched"
+    commit = rel.get("commit")
+    if not commit:
+        return ids, f"release {rel.get('version')} records no commit — every canvas is touched"
+    import subprocess
+    try:
+        old_src = subprocess.run(
+            ["git", "show", f"{commit}:games/{slug}/toml_phases/7_final_game.toml"],
+            cwd=root, capture_output=True, check=True).stdout
+        old = _toml.loads(old_src.decode("utf-8"))
+    except Exception as exc:                    # noqa: BLE001 — any failure is reported
+        return ids, (f"could not read {commit}:games/{slug}/toml_phases/7_final_game.toml "
+                     f"({type(exc).__name__}) — every canvas is touched")
+    before = {c.get("id"): c for c in (old.get("canvases") or []) if c.get("id")}
+    return ([i for i in ids
+             if before.get(i) != next(c for c in game["canvases"] if c.get("id") == i)],
+            f"diffed against release {rel.get('version')} at {commit}")
+
+
+def _reader_must_read(model, game):
+    """{canvas id: why} for canvases with a named person or an explicit beat."""
+    out = {}
+    beats = {c["id"]: c["beats"] for c in model}
+    for c in game.get("canvases") or []:
+        if _is_dev(c):
+            continue
+        t = c.get("trigger") or {}
+        named = t.get("npc") or t.get("requires_npc") or any(
+            b.get("type") == "dialog" and ((b.get("props") or {}).get("npcId") or b.get("npcId"))
+            for n in (c.get("nodes") or []) for b in _flat_blocks(n.get("blocks")))
+        if named:
+            out[c.get("id")] = "a named person"
+        elif any(b.explicit >= 3 for b in beats.get(c.get("id")) or []):
+            out[c.get("id")] = "an explicit beat"
+    return out
+
+
+def _ship_reader(root, slug, model, game, state):
+    """(ok, headline, detail) for the `the reader passed` BLOCK row."""
+    if _legacy("reader"):
+        return None, "not judged under the rule before 2026-09-30", []
+    rp = (state or {}).get("release_page") or {}
+    reader = rp.get("reader") if isinstance(rp.get("reader"), dict) else {}
+    waivers = {(w.get("canvas_id"), str(w.get("test") or "").strip().lower())
+               for w in (rp.get("reader_waivers") or [])
+               if isinstance(w, dict) and w.get("canvas_id") and w.get("test") and w.get("why")}
+    touched, note = _touched_canvases(root, slug, game, state)
+    must = _reader_must_read(model, game)
+    due = [i for i in touched if i in must]
+    if not due:
+        return None, f"no touched canvas has a named person or an explicit beat ({note})", []
+    missing = [i for i in due if not isinstance(reader.get(i), dict)]
+    fails, waived = [], 0
+    for cid in due:
+        for test, verdict in (reader.get(cid) or {}).items():
+            if str(verdict).strip().upper() != "FAIL":
+                continue
+            if (cid, str(test).strip().lower()) in waivers:
+                waived += 1
+            else:
+                fails.append(f"{cid}: FAIL on \"{test}\" with no waiver")
+    detail = ([f"{i}: not read ({must[i]}) — run v2-reader and save its JSON in "
+               f"release_page.reader" for i in missing[:8]]
+              + ([f"… and {len(missing) - 8} more unread"] if len(missing) > 8 else [])
+              + fails[:10])
+    if fails:
+        detail.append("a waiver is {canvas_id, test, why} in release_page.reader_waivers — "
+                      "LO's call, the-release.md 6b")
+    ok = not missing and not fails
+    return ok, (f"{len(due) - len(missing)}/{len(due)} touched canvases read · {len(fails)} FAIL "
+                f"without a waiver · {waived} waived ({note})"), detail
 
 
 def main():

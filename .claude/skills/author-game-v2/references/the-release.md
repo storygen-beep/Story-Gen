@@ -135,7 +135,7 @@ python3 scripts/gates.py --release <slug>
 new, or its TOML table differs from the one in the last shipped release's `7_final_game.toml`, read at
 `releases[].commit`. With no shipped release, every canvas is touched. Save its verdicts in
 `release_page.reader` and LO's waivers in `release_page.reader_waivers`; a FAIL with no waiver blocks the
-release *(check: pending NC1)*. The reader can be wrong either way, and LO's playthrough is the final say.
+release (`--ship` row *the reader passed*). The reader can be wrong either way, and LO's playthrough is the final say.
 
 **7. Log.** Record in `v2_state.json`: the subject, what it added, **what it
 opened**, the gate scores, and **the lint figures you are shipping with** — at minimum the

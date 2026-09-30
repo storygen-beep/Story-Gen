@@ -25,7 +25,7 @@ minute zero, or `none`>. Record in `want.player`, with the start choice's flags 
 
 Money is written in the currency, house default `$`; no real-world currency in the prose
 (`references/the-economy.md` R7). Every number on this page agrees with every other — one span is never said two
-ways — and the reader checks it *(check: pending NC1)*.
+ways — and the reader checks it.
 
 **Hold kind:** `ambition` · `bill` · `order` · `body` · `subsistence` · `appetite` · `job` · `erosion` ·
 `displacement` → `want.hold_kind` (counts in `references/the-want.md` §1b).

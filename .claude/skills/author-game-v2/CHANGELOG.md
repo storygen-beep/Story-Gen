@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC1: the reader passed (D12)
+
+**Why.** D12 (LO decided): the reader's verdicts gate the release. Phase 3 wrote the rule and marked it
+*(check: pending NC1)*; nothing read `release_page.reader`.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): `_ship_reader` and the `--ship` BLOCK row **the reader passed**.
+  - Due canvases: every *touched* canvas (new id, or its table differs from the one in the last shipped
+    release's `7_final_game.toml` at `releases[].commit`, via `git show`; with no shipped release every canvas)
+    that has a named person (trigger `npc` / `requires_npc`, or a `dialog` with `npcId`) or an explicit beat.
+  - A due canvas with no `release_page.reader` entry blocks. A `FAIL` blocks unless
+    `release_page.reader_waivers` holds `{canvas_id, test, why}`. `N/A` is not a failure (DC10).
+  - LO B: `SHIP_SINCE["reader"] = 2026-09-30`; the legacy re-run in `ship_rows` knows the row.
+- `tests/test_gates_ws6.py`: the green state carries reader verdicts for its two canvases with a person.
+- Markers removed (5): `references/the-release.md` 6b, `references/the-want.md` ×2, `references/agents.md`,
+  `templates/want.md`. `SKILL.md`'s `--ship` paragraph names the row.
+
+**Verified.**
+- `tests/test_gates_nc1.py`: pass (PASS + N/A, a waived FAIL, a canvas with no person needs no entry, the green
+  fixture ships) and fail (unread, unwaived FAIL, a waiver with no reason, the git-diffed touched set, a new game
+  blocks, a grandfathered one WARNs).
+- Suite: 368 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: row absent → WARN on all five (no reader verdicts saved; members_only 36 canvases due,
+  orientation 25, probation 28, the_balance 42, vesper_two 73). SHIP verdict counts unchanged.
+
+words: 139,154 → 139,158 (+4) · running total 139,158 / 149,283.
+
 ## 2026-09-30 — Phase 4 CK7: rooms and heat (I2 · D9a · D9c · H25)
 
 **Why.** D9a (LO decided): a destination always offers something she can do alone, or is closed then. D9c: a

@@ -15,8 +15,7 @@ amendment — never let it quietly stop being true.
 
 One page, five parts (`templates/want.md`) *(LO decided, D16)*. The detail tables live later: the crude
 words on SP2, rung numbers, needs and the map shape on the board. Every number on the page agrees with
-every other (one span never said two ways), and so does every scene; the reader checks both *(check:
-pending NC1)*.
+every other (one span never said two ways), and so does every scene; the reader checks both.
 
 ### 0. The premise first; the model to beat and the promise on the idea page
 
@@ -388,7 +387,7 @@ A person with no row is a person with no reason to exist. Cut them or write it.
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
 Way's Jasmin sets up her dating app [Download Finder]. Record as `want.companion`. She may also be the
 rival only when declared (`want.companion_is_rival = true`), and her scenes show both the help and the
-competition *(LO decided, D15; the reader checks both sides, check: pending NC1)*.
+competition *(LO decided, D15; the reader checks both sides)*.
 
 **The pressure-man** — one man whose demand drives her choices release after release. The no has a
 stated price and there is an opt-out somewhere (`the-release.md`, the pressure type). Cupid's Way's
