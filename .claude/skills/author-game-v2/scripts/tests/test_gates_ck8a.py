@@ -83,3 +83,11 @@ def test_the_ladder_lint_says_the_field_needs_remeasuring():
 def test_a_hyphenated_face_fuck_is_oral_only():
     assert rungs("He is face-fucking her.") == {"oral"}
     assert rungs("He face-fucks you.") == {"oral"}
+
+
+def test_face_fucking_with_a_space_is_oral_only():
+    # Phase 5: "face fucking" with a space read as vaginal (the lookbehind only knew "face-").
+    assert rungs("He is face fucking her.") == {"oral"}
+    assert rungs("He face fucks you until you gag.") == {"oral"}
+    assert rungs("A face fuck, then he lets you breathe.") == {"oral"}
+    assert rungs("He fucks you face down.") == {"vaginal"}

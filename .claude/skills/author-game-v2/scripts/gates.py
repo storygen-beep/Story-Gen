@@ -350,9 +350,9 @@ RUNGS = (
     ("hands",   re.compile(r"\b(finger(?:s|ed|ing)?|handjob|hand job|jerk(?:s|ed|ing)?|wank"
                            r"|stroke[sd]? (?:his|her)|rub(?:s|bed|bing)?)\b", re.I)),
     ("oral",    re.compile(r"\b(suck(?:s|ed|ing)?|blowjob|blow job|lick(?:s|ed|ing)?"
-                           r"|oral|deepthroat|face-?fuck\w*"
+                           r"|oral|deepthroat|face[- ]?fuck\w*"
                            r"|fuck(?:s|ed|ing)? (?:your|her|my|his) (?:mouth|face|throat))\b", re.I)),
-    ("vaginal", re.compile(r"\b((?<!face-)fuck(?:s|ed|ing)?(?! (?:your|her|my|his) (?:mouth|face|throat|ass))"
+    ("vaginal", re.compile(r"\b((?<!face-)(?<!face )fuck(?:s|ed|ing)?(?! (?:your|her|my|his) (?:mouth|face|throat|ass))"
                            r"|thrust|penetrat\w*|rides? (?:him|his)"
                            r"|inside her|in her cunt|in her puss\w*)\b", re.I)),
     ("anal",    re.compile(r"\b(anal|in the ass|(?:in|up) (?:your|her|my) ass"

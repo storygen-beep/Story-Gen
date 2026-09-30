@@ -18,6 +18,11 @@ here; game problems are listed in the phase 5 report, never edited.
   covered while its rows cover all nine. Both are now bad input that names the day or the keys, and that person's
   steps are not judged. Verified: two new tests in `tests/test_shape_ck5.py`; the same fixture against the previous
   `shape.py` printed `npc_a step 1: npc_a's schedule does not cover bar 18:00-20:00 on Wed`.
+- **CK8a "face fucking" (`scripts/gates.py` RUNGS, lines 353 and 355 edited in place, no line moved).** The oral
+  rung matched only `face-?fuck`, so "face fucking" with a space fell to the vaginal rung, whose lookbehind knew
+  only "face-" (carried note from GAME_FOLLOWUPS.md). Oral now matches `face[- ]?fuck\w*` and the vaginal rung also
+  skips "face ". Verified: new test in `tests/test_gates_ck8a.py` ("He is face fucking her." is `{oral}`, "He
+  fucks you face down." stays `{vaginal}`); the previous `gates.py` read both space forms as `{'vaginal'}`.
 
 ---
 
