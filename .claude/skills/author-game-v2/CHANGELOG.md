@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK6: --beat shows the joints (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK6 (H8). The build judges `but` and `and` per 1,000 words (*prose has room*),
+but `--beat` never printed them. A writer measuring a beat before it is in a game could not see the joints the
+build will judge.
+
+**What changed.**
+- `scripts/gates.py`: a new `_print_beat_joints(text)` prints `but` and `and` per 1,000 words against `FIELD_BUT_P10`
+  (2.88) and `FIELD_AND_MAX` (41.11), with "too short to judge (under 500 words; printed, not judged)" under
+  `JOINTS_MIN_WORDS`. `beat_mode` calls it for each beat and for ALL BEATS. Nothing is judged; the mode still exits 0.
+- `SKILL.md` `--beat` mode row names the joints line. No gate added or renamed; not a `--ship` row.
+
+**Verified.**
+- `tests/test_gates_ck6.py`: 3 passed. A 100-word beat (1 `but`, 3 `and`) prints 10.00/1k and 30.0/1k with the note;
+  a 600-word beat prints no note; two beats give three joints lines, the last over the whole text.
+- Skill tests 258 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- A scratch two-beat file prints a joints line under BEAT 1, BEAT 2 and ALL BEATS, each marked too short to judge.
+
+words: 137,394 → 137,419 (+25) · running total 137,419 / 149,283
+
+---
+
 ## 2026-09-30 — CK4 follow-up: a marker cut off by a comma is judged with its neighbour (checker)
 
 **Why.** LO, 2026-09-30, after CK5 and before CK6. CK4's clause split left a comma hole. "Last night, you came to

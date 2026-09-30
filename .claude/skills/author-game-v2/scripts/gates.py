@@ -9875,6 +9875,18 @@ def _beat_sentences(text):
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
 
 
+def _print_beat_joints(text):
+    """One `--beat` line: `but` and `and` per 1,000 words against the field figures the
+    gate `prose has room` judges a whole game by (PRD v2 CK6 · H8). PRINTED, NOT JUDGED,
+    like every `--beat` line. Under JOINTS_MIN_WORDS the gate itself calls a rate too little
+    to judge, and the line says so."""
+    jp = _joint_profile(text)
+    short = (f" — too short to judge (under {JOINTS_MIN_WORDS} words; printed, not judged)"
+             if jp["words"] < JOINTS_MIN_WORDS else "")
+    print(f"    joints               but {jp['but_1k']:.2f}/1k (field p10 {FIELD_BUT_P10}) \u00b7 "
+          f"and {jp['and_1k']:.1f}/1k (field max {FIELD_AND_MAX}){short}")
+
+
 def beat_mode(path):
     """Measure loose prose the way the build measures a beat.
 
@@ -9946,6 +9958,7 @@ def beat_mode(path):
         print(f"    dashes               {dashes:>4}   {rate:.0f}/10k "
               f"(ceiling {DASH_CEILING:.0f}, field p50 0.99)")
         print(f"    act rungs named      {', '.join(rungs) if rungs else 'none — anatomy without an act, or no act here'}")
+        _print_beat_joints(text)
 
         # The pivot shape.
         if sents:
@@ -9967,6 +9980,7 @@ def beat_mode(path):
               f"{_median(all_sents) if all_sents else 0} \u00b7 "
               f"{sum(1 for b in beats if len(EXPLICIT.findall(b)) >= 3)}"
               f"/{len(beats)} register as explicit")
+        _print_beat_joints(" ".join(beats))
     print()
     print("  A beat outside a band is not a defect. The same 25 words are right as one")
     print("  rung of a cascade and thin as a capstone \u2014 which is why this exits 0.")
