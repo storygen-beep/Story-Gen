@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC3: a no has content (D6)
+
+**Why.** `the-arc.md` A3 (LO decided, D6): an ordinary no is parked, a final no is labelled. Nothing checked that
+a no on an EN1 step does anything; a bare "Walk out" passed.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`a no has content`** (`_no_has_content`), registered in
+  `_phase4_gates`. On canvases with `consume_on = "exit"` only (n/a otherwise, with a note), every exit without
+  `consumes = true` must carry `retry_after_days`, be `final = true`, or lead to a node of the canvas with text
+  and an effect / flag / `retry_after_days` on the choice or that node's exits. A `final` exit's label must say it
+  ends the path (`end`, `for good`, `(ends`).
+- The CK8a refusal pattern moved to module level as `_REFUSAL_RE` (NC3 names each exit a no or a way out with
+  it); `run_gates`' local `_REFUSAL` now points at it, same line count.
+- `SKILL.md`: scoreboard row. `references/the-arc.md`: the *(check: pending NC3, …)* marker becomes the gate's
+  name.
+
+**Verified.**
+- `tests/test_gates_nc3.py`: n/a without opt-in; pass for a parked no, a written reply that sets a flag, a
+  labelled final; fail for a bare "Walk out", a reply that changes nothing, an unlabelled final; runs in the
+  scoreboard.
+- Suite: 386 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games: gate absent → n/a on all five (none opts into `consume_on`, as expected). Tallies
+  unchanged.
+
+words: 139,160 → 139,185 (+25) · running total 139,185 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC2: her climb (D7 · J3 · J4)
 
 **Why.** `the-arc.md` A15 (LO decided, D7) set her climb into paid sex: introduced, a step, a first time, then the

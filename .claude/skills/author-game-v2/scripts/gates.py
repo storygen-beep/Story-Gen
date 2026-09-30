@@ -9365,11 +9365,11 @@ def run_gates(model, game, state=None):
     # against games with known refusals first.
     # ═════════════════════════════════════════════════════════════════════════
     # CK8a (I3): a no written as her spoken line starts with a quote mark — skip it.
-    _REFUSAL = re.compile(
-        r"^[\s\"“'‘]*(no[,.!\s\"”'’]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
-        r"don't|do not|not (tonight|now|today|this)|push (him|her|them) (off|away)|"
-        r"stop (him|her|them)|pull away|shake your head|tell (him|her|them) no|"
-        r"back off|not interested|keep (them|it) on|refuse to)", re.I)
+    # The pattern lives at module level as `_REFUSAL_RE` since NC3 (PRD v2 phase 4), which
+    # reads the same labels; these lines keep their count so no cited line below moves.
+    #
+    #
+    _REFUSAL = _REFUSAL_RE
     _ch_texts = [ch.get("text") for c in (game.get("canvases") or [])
                  for n in (c.get("nodes") or [])
                  for ch in ((n.get("exit_block") or {}).get("choices") or [])
@@ -12305,10 +12305,74 @@ def _her_climb(game, state):
             bad[:14] + notes, len(paid))
 
 
+# NC3 · a no has content (D6) — `the-arc.md` A3, `engine.md` §49.
+# Judged only on canvases that opted into EN1 (`consume_on = "exit"`); anywhere else the
+# step is used up when its first screen shows, and there is no parked no to judge.
+#   · every NON-consuming exit (no `consumes = true`) must carry `retry_after_days` or
+#     `final = true`, or lead to a node of this canvas that has text AND something the no
+#     changes: an effect or a flag on the choice or on that node's exits, or a
+#     `retry_after_days` there. A bare "Walk out" to a location is the failure.
+#   · a `final = true` exit's label says it ends the path.
+# The CK8a refusal pattern (`_REFUSAL_RE`) names each exit as a no or a way out in the list.
+# CK8a (I3): a no written as her spoken line starts with a quote mark — skip it.
+_REFUSAL_RE = re.compile(
+    r"^[\s\"“'‘]*(no[,.!\s\"”'’]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
+    r"don't|do not|not (tonight|now|today|this)|push (him|her|them) (off|away)|"
+    r"stop (him|her|them)|pull away|shake your head|tell (him|her|them) no|"
+    r"back off|not interested|keep (them|it) on|refuse to)", re.I)
+_FINAL_LABEL_RE = re.compile(r"\bend|for good|\(ends", re.I)
+
+
+def _no_has_content(game):
+    """(ok, headline, detail, n) for `a no has content`."""
+    opted = [c for c in (game.get("canvases") or [])
+             if not _is_dev(c) and (c.get("trigger") or {}).get("consume_on") == "exit"]
+    if not opted:
+        return None, ("no canvas opts into consume_on = \"exit\" (EN1) — n/a until a step does; "
+                      "then a bare \"Walk out\" is caught"), [], 0
+    bad, judged = [], 0
+
+    def changes(h):
+        return bool(h.get("effects") or h.get("flagEffects") or h.get("retry_after_days"))
+
+    for c in opted:
+        nodes = {n.get("id"): n for n in c.get("nodes") or []}
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                text = str(ch.get("text") or "").strip()
+                kind = "a no" if _REFUSAL_RE.match(text) else "a way out"
+                if ch.get("final"):
+                    judged += 1
+                    if not _FINAL_LABEL_RE.search(text):
+                        bad.append(f"{c.get('id')}: \"{text}\" is final = true and its label does "
+                                   f"not say it ends the path — write \"(ends his path)\"")
+                    continue
+                if ch.get("consumes"):
+                    continue
+                judged += 1
+                if ch.get("retry_after_days"):
+                    continue
+                tgt = nodes.get(str(ch.get("nodeId") or "").split(".")[-1]) \
+                    if ch.get("targetType") != "location" else None
+                has_text = bool(tgt) and any(b.get("content") for b in _flat_blocks(tgt.get("blocks"))
+                                             if b.get("type") not in MEDIA_BLOCKS)
+                if has_text and (changes(ch) or any(changes(h) for h in _exit_holders([tgt]))):
+                    continue
+                bad.append(f"{c.get('id')}.{n.get('id')}: \"{text}\" ({kind}) "
+                           + ("leads to a node with no text" if tgt and not has_text else
+                              "changes nothing" if tgt else "leaves with nothing")
+                           + " — give it a written reply that moves something, or retry_after_days")
+    return (not bad, f"{judged - len(bad)}/{judged} non-consuming or final exits on {len(opted)} "
+                     f"consume_on step(s) have content", bad[:14], judged)
+
+
 def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _her_climb(game, state)
     _N["her climb"] = n
     gate("her climb", ok, head, detail)
+    ok, head, detail, n = _no_has_content(game)
+    _N["a no has content"] = n
+    gate("a no has content", ok, head, detail)
 
 
 def main():

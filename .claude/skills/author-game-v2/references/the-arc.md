@@ -638,8 +638,7 @@ The candidates below are **lints**, not gates, and each is built only once one g
 the thing — the order that produced `the start choice is read` (shipped after a game built
 it first) rather than the order that produced P0.
 
-1. **`a refusal is remembered`** — superseded by A3's rule and its check *(check: pending NC3,
-   "a no has content")*.
+1. **`a refusal is remembered`** — superseded by A3's rule and its check (gate `a no has content`).
 2. **`the arc ladder`** — BUILT. Per person: the one-time steps written, how many are switched
    off, and the longest chain where each step's trigger reads what the one before sets; the
    game's longest beside the field's (median ~15). A list, never a bar.
