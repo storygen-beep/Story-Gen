@@ -37,9 +37,12 @@ Write the list of places that answer at least one of those, and count it. That i
 > every time. Pick the archetype (`the-map.md` R0) before this step; the count is derived *within*
 > that shape.
 >
-> ⚠️ **A room that answers none of the three is not a location yet** (the field's rooms:
-> `the-surfaces.md`, *"What a room is for, measured"*). The incumbent skill's version of this rule (*"this place exists so the player can ___"*)
-> was a question in a review document rather than a check, and it never fired.
+> ⚠️ **Two kinds of place** *(LO decided, D9 · D10)*. A **thoroughfare** (`kind = "thoroughfare"`,
+> `engine.md` §22) only routes: a corridor, a lobby, a street. A **destination** — the default —
+> always offers one thing she can do alone, or it is closed then (`hours` + `closed_text`,
+> `engine.md` §22) *(check: pending CK7)*. A room that is neither is not a location yet. One passing
+> game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
+> and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
 
 Budget the set as a *shape*, not a flat quota:
 
@@ -69,11 +72,11 @@ navigation_order     = ["back_room"]
 For each location, decide and record in `v2_state.json` under `board.locations[]`:
 
 - **Its dramatic job** (`job`). Why she goes there when nothing is happening.
-- **Who is there, and when.** At least one scheduled character, or it is scenery.
+- **Who is there, and when.** Scheduled people, or at least one thing she does there alone; a
+  thoroughfare needs neither.
 - **What its list holds** (`serves`) — the three kinds and nothing else (`the-surfaces.md` R2):
   which declared **needs** she can fill here, what **work** is done here, which **people** are
-  scheduled here. *That is the room's menu, and its length.* A room that answers none of the three
-  is not a location yet.
+  scheduled here. *That is the room's menu, and its length.*
 
   ```jsonc
   { "id": "the_kitchen", "serves": { "needs": ["hunger"], "work": [], "people": ["npc_martin", "npc_denise"] } }
@@ -119,8 +122,9 @@ total you are planning for and put that share into every increment, rather than 
 the end. A ratio gate cannot be satisfied by working elsewhere; the target moves with you.
 
 **Cold rooms are allowed.** Not every place is erotic — the reference game had no sexual
-content in 8 of its 25 locations (a police station, a museum). The floor is **60% of
-locations carrying heat**, not 100%.
+content in 8 of its 25 locations (a police station, a museum). **A place is hot when it holds at least
+one sex scene** *(LO decided, D9c)*, counting the men's own rooms and a phone-started scene under the
+man's home. About **60% of places** are hot, not 100% *(check: pending CK7)*.
 
 ---
 
@@ -156,12 +160,13 @@ v2.py:3801   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
-startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:3784`). So
+startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4152`). So
 `weekdays = [0,1,2,3,4,5,6]`, `22:00`–`04:00` is correctly **one** row.
 
 ⚠️ **But `weekdays = [1]`, `23:00`–`06:00` puts the character on site on Tuesday night and DELETES
 them at midnight**, because `todayIndex` is now Wednesday and Wednesday is not in the list. A
-day-specific overnight window needs **two rows** — `[1] 23:00–23:59` and `[2] 00:00–06:00`.
+day-specific overnight window needs **two rows** — `[1] 23:00–00:00` and `[2] 00:00–06:00`. The end is
+exclusive, so `23:59` would lose the last minute; `00:00` wraps and keeps it.
 
 This section previously said "`22:00`–`04:00` is one row, not two" with no weekday qualifier, and
 its own example happens to use all seven days — which is exactly why the caveat stayed invisible.

@@ -564,8 +564,9 @@ are a build-time warning, and only one of them will ever render:
     single canvas as choices instead.
 ```
 
-It does not stop the build. A canvas silently shadowed this way looks perfectly correct in the
-TOML and is unreachable in play, so treat the warning as an error.
+It does not stop the build, and it is a note, not an error: the highest `priority` wins (§42, "One
+location shows ONE canvas per character"). A canvas shadowed this way is unreachable while the other's
+conditions hold, so set the priorities on purpose.
 
 **The fix for THIS collision** — two canvases fighting over the same NPC in the same window — is
 the engine's own advice: make the second canvas a triggerless rung and hang it off the existing

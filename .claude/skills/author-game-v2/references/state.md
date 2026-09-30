@@ -157,8 +157,8 @@ belong here; only decisions, debts, and promises do.
     // the body's clock. Declared here, gated by gate 29. the-meters.md M8-M10.
     // `shuts` is the load-bearing field: a need that shuts nothing is a chore.
     "needs": [
-      { "key": "hygiene", "falls": "10 a day", "fills": "the_bathroom · Wash · 30 min",
-        "costs": "$5 for the water heater", "shuts": "under 40 she will not go out in public" }
+      { "key": "energy", "falls": "8 a day", "fills": "her_room · Sleep · 8 hours",
+        "costs": "nothing", "shuts": "under 20 she will not go out" }
     ],
     // SP5 and SP6 — the cast's width and the rule for adding one; where it is played, and clips.
     "cast":  { "width": 4, "adding_rule": "a new person brings a place, a ladder, and why she wants them" },
@@ -180,6 +180,8 @@ belong here; only decisions, debts, and promises do.
       "shape":      "one sentence a stranger could draw from",
       "home_base":  "location_id",
       "exterior":   "location_id — MUST be a root, not a leaf off an interior room",
+      "roots":      ["location_id", "…"],   // every root; a second one is joined by a travel canvas
+                                            //   and marked offscreen or sealed for gate 11 (the-map.md R3)
       "homes":      { "npc_…": "location_id", "npc_…": "offscreen" },
       "bridges":    [ { "from": "location_id", "to": "location_id", "costs": { "time": 0 } } ],
       "r1_signoff": "WHO signed it and WHEN, then what they saw"

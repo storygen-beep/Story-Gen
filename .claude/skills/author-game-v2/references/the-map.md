@@ -108,7 +108,9 @@ location. This is not decoration:
 
 **The declared `exterior` must be a root** — no `entry_from` — with the home base among the
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
-genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other.
+genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other,
+and list both in `board.map.roots[]`. Gate 11 walks on foot, so it exempts the second root only when
+that root is marked `offscreen` or sealed (entered only by a canvas exit).
 
 The diagram above is the topology. This is what it is in keys, and it is the whole of the
 difference — one field, present or absent, on the location the board names as `exterior`:
@@ -237,8 +239,9 @@ card on the map. A locked bathroom is a sentence, not a screen.
 `is_absent`). The shape is a pair of rows in the one room — `activity_bathe` gated `is_absent` beside
 `bathroom_occupied` gated `is_present` — and a row in someone's room gated on that person being out.
 
-**And the empty room is content.** Where the field has a door it usually also has *going through
-their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
+**And his room while he is out is content** — in *his* room, as occupancy, not a destination left
+with nothing to do (`the-board.md` §1, two kinds of place). Where the field has a door it usually also
+has *going through their things while they are out* — 260 such labels across 15 of 27 games. `new-life-project` (structure only) shows
 the best shape of it: the row is there, and the game names who is inside, in red, beside the
 option to search anyway. Occupancy as a stated risk, not a lock.
 
@@ -253,7 +256,11 @@ All five verified against source; full citations in `references/engine.md`.
 | you want | the field |
 |---|---|
 | walking somewhere to **cost** time or a trait | `costs = { time = 20, energy = 5 }` on `[[locations]]` |
-| a place that is **shut and inert** — the mall at midnight, a story gate | `entry_conditions` + `blocked_message` (a greyed, unclickable card) |
+| a place that is **shut and inert** — a story gate | `entry_conditions` + `blocked_message` (a greyed, unclickable card) |
+| a place **shut at set hours**, saying when it opens | `hours` + `closed_text` — `engine.md` §22 |
+| a place **not listed until she finds it** | `hidden_until = { flag }` — `engine.md` §22 |
+| a place she **only passes through** | `kind = "thoroughfare"` — `engine.md` §22 |
+| time charged **once, on crossing into an area** | `crossing_costs` on the area's container — `engine.md` §22 |
 | a door she can **stand at and knock on**, whether or not she may enter | `[locations.door]` — R6, `engine.md` §44 |
 | an "away" label for a schedule with **no nav card** | `offscreen = true` |
 | a pure navigation wrapper holding no content | `is_container` + `default_entry` |
@@ -296,11 +303,26 @@ rather than against a guess.
 
 ---
 
+## Navigation — area, building, room
+
+*(LO decided, D10.)*
+
+- **Area → building → room.** Time is charged on crossing into another area (`crossing_costs`), not on
+  every room inside it.
+- **No fast travel**, for now.
+- **Places she has not found are hidden** (`hidden_until`); **closed places show why**
+  (*"Closed. Opens at 22:00."*, `hours`).
+- **Guidance cards carry place, time and what is waiting**, and a travel link carries the engine's NEW
+  mark when something new waits there.
+- **Faces stay on travel cards.**
+
+---
+
 ## What is checked, and what is not
 
 | | |
 |---|---|
-| **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed |
+| **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed — a second root in `board.map.roots[]` needs one of the two |
 | **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
 | **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
 | **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |

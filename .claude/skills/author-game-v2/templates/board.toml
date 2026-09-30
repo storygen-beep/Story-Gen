@@ -200,9 +200,9 @@ bands = [
 #   ⚠️ `shuts` IS THE POINT. Gate 29 fails any need whose key no condition
 #      anywhere in the game reads — a decay, a way to refill it and no reader is
 #      a fully wired loop that means nothing.
-#      Working example: the gym and the night shift each drop hygiene by 30, the
-#      shower restores it, and hygiene >= 40 gates "Go out". Filthy means she
-#      cannot leave.
+#      Working example: the gym and the night shift each drop energy by 30,
+#      sleep restores it, and energy >= 20 gates "Go out". Spent means she
+#      cannot leave. (No hygiene need: engine.md §30.1.)
 #
 #   ⚠️ Every need must be fillable somewhere on a room's `serves.needs`. A need
 #      with nowhere to fill it is a countdown to a wall.
@@ -215,17 +215,18 @@ costs = "<money in the game's ONE notation / an item / nothing>"
 shuts = "<what she CANNOT do while this is empty>"
 
 # [[needs]]
-# key   = "hygiene"
-# falls = "10 a day"
-# fills = "the_bathroom · Wash · 30 min"
-# costs = "$5 for the water heater"
-# shuts = "under 40 she will not go out in public"
+# key   = "energy"
+# falls = "8 a day"
+# fills = "her_room · Sleep · 8 hours"
+# costs = "nothing"
+# shuts = "under 20 she will not go out"
 
 # ── locations: DERIVE the count, budget the set as a SHAPE ───────────────────
 #   How many? Not a number you pick. Derive it from what a place is FOR:
 #        needs served here + work done here + people scheduled here
-#   List the places that answer at least one of those, and count that. A room
-#   that answers NONE of the three is not a location yet.
+#   List the places that answer at least one of those, and count that. A
+#   thoroughfare only routes; a destination always offers one thing she can
+#   do alone, or is closed then (the-board.md §1, two kinds of place).
 #   ⚠️ This line used to read "6-8 at v0.1" WITH a caveat saying the count was a
 #      judgement, not evidence. A prose caveat does not survive next to a number.
 #      Study 6.

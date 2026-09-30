@@ -267,10 +267,11 @@ the entry as a dimmed, non-clickable line carrying the author's message instead 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
 
-**People already have this surface; places and activities do not.** `SchedulePage`
-(`v2.py:18964`) publishes every declared `[[npcs.schedules]]` row as a Time / Location / Activity /
-Days table, and it is the only screen in the game that tells the player when to come back. A place
-with hours and no `cooldown_message` is a schedule the player can only learn by losing a day to it.
+**People and places both have this surface now.** `SchedulePage` (`v2.py:21334`) publishes every
+declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
+declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
+(`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
+learn by losing a day to it.
 
 ⚠️ The top-30 mopoga study found **lostness, not grind, is this genre's disease** — 15.5% of player
 comments against grind's 0.9% (Process Review, Round 1). A hidden window is lostness with a clock on it.

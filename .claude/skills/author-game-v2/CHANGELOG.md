@@ -5,6 +5,53 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC7: two kinds of place, hours and hidden places, and navigation by area (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC7 (D9 · D10 · H20 · H21 · I6 · I22 · I23).
+- EN3/EN4/EN10/EN11 shipped and are documented in `engine.md` §22, but the doctrine still said:
+  - "a room that answers none of three is not a location" beside "needs a scheduled person, or it's scenery"
+    (H20);
+  - "the empty room is content";
+  - that only people publish hours;
+  - heat was loosely defined.
+- Three small contradictions: `23:00–23:59` loses a minute (I6); engine.md said both "treat as error" and "highest
+  priority wins" (I22); the worked need was hygiene, which engine.md §30.1 forbids (I23).
+
+**What changed.**
+- `references/the-board.md` §1:
+  - **two kinds of place** *(LO decided, D9 · D10)*: a thoroughfare routes; a destination always offers one thing
+    she can do alone, or is closed then *(check: pending CK7)*;
+  - the IHOH exception named: 76 of its 77 open hours empty (§L), with its line *"There's nothing to do here right
+    now."* [WindsorBase], grepped;
+  - "who is there" no longer calls a place without people scenery;
+  - heat: a place holding at least one sex scene, counting the men's rooms and phone-started scenes, about 60%
+    *(LO decided, D9c; check: pending CK7)*;
+  - the overnight row is `23:00–00:00` (end exclusive);
+  - a stale `isCurrentTimeSlot` citation is fixed, `v2.py:3784` → `:4152`.
+- `references/the-map.md`:
+  - the second root goes in `board.map.roots[]`, with gate 11's exemption stated (offscreen or sealed; also in
+    the gate table) (H21);
+  - "the empty room is content" becomes his room while he is out, as occupancy;
+  - the engine table gains hours, hidden places, `kind` and `crossing_costs`;
+  - a new **Navigation** section *(LO decided, D10)*: area → building → room, time charged on crossing areas, no
+    fast travel for now, unfound places hidden, closed places say why, guidance cards carry place + time + what's
+    waiting, the NEW mark on travel links, faces stay.
+- `references/the-clock.md` C5: places have `hours` + `closed_text` now. A stale `SchedulePage` citation is fixed,
+  `v2.py:18964` → `:21334`.
+- `references/state.md`: `board.map.roots[]`; the worked need is energy, not hygiene.
+- `references/engine.md` §19 (I22): the warning is a note; the highest priority wins (§42).
+- `templates/board.toml`: the worked need is energy, with a note that there is no hygiene need; the location
+  comment is two kinds of place.
+- `references/the-meters.md` M10: the decay example is energy only; DC6a's M7 row reads "energy".
+
+**Verified.**
+- Greps: 13 old phrases at 0. `board.toml`'s one `hygiene` is the new "no hygiene need" note.
+- The NEW badge exists (`v2.py:21741`, `nav-new-badge`).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,051 → 138,395 (+344) · running total 138,395 / 149,283. The growth is the navigation section, two kinds of
+place, heat's definition and four engine-table rows, all new decisions.
+
 ## 2026-09-30 — DC10: the reader is required every release, and its verdicts gate (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC10 (D12 · I1 · B6 · D15). `v2-reader` was optional and its table went nowhere,

@@ -900,7 +900,7 @@ The sidebar shows the number *(D4)* *(check: pending Gate 27)*, and every item c
 | kind | example | sidebar type | reads |
 |---|---|---|---|
 | sex trait | corruption | `trait_words` + `bands` + `show_value = true` | *Corruption: 12 · Curious* |
-| body need | energy, hygiene | `trait_bar` + `bands` (no `hide_value`) | *Energy: 60 / 100*, a bar, the band word |
+| body need | energy | `trait_bar` + `bands` (no `hide_value`) | *Energy: 60 / 100*, a bar, the band word |
 | money | money | `trait_words` + `show_value = true`, no `bands` | *Money: 140* |
 
 **Gate 27** fails any banded item whose key is neither `in_dump = false` nor `hidden`. It is deterministic — no threshold to
@@ -958,7 +958,6 @@ with different nouns.
 ```toml
 # Decay is a POSITIVE MAGNITUDE — the validator rejects a negative (engine.md §11).
 [player.trait_decay]
-hygiene = 10
 energy  = 8
 ```
 
@@ -967,7 +966,8 @@ games do write. **The half they drop is `shuts`.**
 
 Two shapes, and pick on purpose:
 
-- **decay** — falls every day whether or not she does anything. Right for hygiene, energy, hunger.
+- **decay** — falls every day whether or not she does anything. Right for energy (no hygiene or
+  hunger system: `engine.md` §30.1).
 - **spent** — falls only when something takes it, via `costs` on a trigger (§27). Right for a
   resource.
 
