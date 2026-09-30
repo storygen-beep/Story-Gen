@@ -49,7 +49,7 @@ goal or the mystery is what pulls the player.** It stays alive after the hold go
 guidance page (`engine.md` §23) carries it. Declare the goal and what comes after it, the mystery with
 a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*; a sidebar `countdown`
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
-count. A goal that can end names the next (`want.promise.goals[]`) *(check: pending NC5)*.
+count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain).
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.

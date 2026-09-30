@@ -14,7 +14,7 @@ WIN = {"days": ["Mon", "Wed"], "from": "18:00", "to": "20:00"}
 def full():
     return {
         "phase": "idea",
-        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat", "date": "week 6"},
+        "want": {"hold_kind": "bill", "promise": {"goal": "her own flat"},   # no date: D8, NC5
                  "cast": [{"id": "npc_a", "age": 34}, {"id": "npc_b", "age": 22}]},
         "spine": {"pages": [{"id": f"SP{i}", "status": "READY", "signed_by": "LO",
                              "drafted_at": "2026-09-27", "signed_at": "2026-09-28"}
@@ -99,6 +99,7 @@ def test_each_check_fails_on_its_defect():
         "every step has a guidance line": lambda s: ch(s)[1]["ladder"]["steps"][0].pop("hint"),
         "the door is a declared step": lambda s: s["release_page"]["door"].update(canvas="nowhere"),
         "the promise has a beat this release": lambda s: s["release_page"].pop("promise_alive"),
+        "the goal chain holds": lambda s: s["want"]["promise"].update(date="week 6"),
         "every spine page is signed": lambda s: s["spine"]["pages"][0].pop("signed_at"),   # D13: unsigned, not same-day
         "the person is there at the step's hour": lambda s: ch(s)[1]["schedule"][0].update(weekdays=["Mon"]),
     }

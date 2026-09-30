@@ -260,6 +260,30 @@ def check(state, strict=False):
     else:
         row("the promise has a beat this release", True, str(rp["promise_alive"])[:80])
 
+    # 9b · the goal chain (PRD v2 NC5 · D8a · D8b · C2). The goal has no date (LO decided, D8): a
+    # sidebar countdown only displays, so a date promises an ending the engine never runs. And a
+    # goal that can end names the next one (`want.promise.goals[] = {goal, ends_when, next}`),
+    # because the game never stalls. `the-want.md` §2.
+    goals = [g for g in (prom.get("goals") or []) if isinstance(g, dict)] \
+        if isinstance(prom, dict) else []
+    bad = []
+    if isinstance(prom, dict) and prom.get("date") not in (None, ""):
+        bad.append(f"want.promise.date = {prom['date']!r} — the goal has no date (D8)")
+    for i, g in enumerate(goals):
+        label = str(g.get("goal") or f"goals[{i}]")[:50]
+        if g.get("date") not in (None, ""):
+            bad.append(f"\"{label}\": has a date ({g['date']!r}) — the goal has no date (D8)")
+        if str(g.get("ends_when") or "").strip() and not str(g.get("next") or "").strip():
+            bad.append(f"\"{label}\": ends_when is set and next is not — a goal that can end names "
+                       f"the next one")
+    if not (prom.get("goal") or prom.get("mystery") or goals or bad):
+        row("the goal chain holds", None, "n/a — want.promise names no goal yet")
+    else:
+        ending = sum(1 for g in goals if str(g.get("ends_when") or "").strip())
+        row("the goal chain holds", not bad,
+            f"{len(goals)} goal(s), {ending} can end · no date" if not bad else
+            f"{len(bad)} problem(s) in want.promise", bad)
+
     # 10 · a READY page is signed (the spine's page rules).
     # D13 (LO decided, 2026-09-30): LO signs whenever LO has read the page. The day-after
     # compare of `signed_at` with `drafted_at` is gone; it blocked a real same-day approval
@@ -367,7 +391,15 @@ def check(state, strict=False):
     meters = {c.get("id"): (c.get("meters") or {}) for c in (board.get("characters") or [])
               if isinstance(c, dict)}
 
-    player_start = board.get("player_start") if isinstance(board.get("player_start"), dict) else {}
+    # A malformed board.player_start used to read silently as 0; it is bad input now (NC5 batch).
+    player_start = board.get("player_start")
+    if player_start is not None and not isinstance(player_start, dict):
+        bad_input.append(f"board.player_start must be a table — got {player_start!r}")
+        player_start = {}
+    for t, v in (player_start or {}).items():
+        if _num(v) is None:
+            bad_input.append(f"board.player_start.{t} is not a number — got {v!r}")
+    player_start = player_start or {}
 
     def _start(npc, trait):
         if npc is None:

@@ -5,6 +5,34 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC5: the goal chain, in shape.py (D8a · D8b · C2) + `player_start` bad input
+
+**Why.** D8 (LO decided): the goal has no date, and a goal that can end names the next one. Two rules carried
+*(check: pending NC5)*. Same batch (LO): a phase-3 leftover — a malformed `board.player_start` (not a table, or a
+non-number value) was silently read as 0.
+
+**What changed.**
+- `scripts/shape.py`: row **the goal chain holds** (9b). FAIL on `want.promise.date`, on a dated
+  `want.promise.goals[]` entry, and on an entry with `ends_when` and no `next`. n/a with no goal.
+- `scripts/shape.py` check 12: `board.player_start` that is not a table, or a value that is not a number, is
+  listed as bad input in "a step's gate can be reached" (like a bad `raises`); a numeric string still reads.
+- `tests/test_shape.py`: the full-spine fixture's promise loses its `date = "week 6"` (D8), and the per-check
+  defect table gains the new row.
+- `SKILL.md` (the `shape.py` mode row), `references/state.md` (marker; `player_start` bad input),
+  `references/the-want.md` (marker).
+
+**Verified.**
+- `tests/test_shape_nc5.py`: pass (a chain with `next`), n/a, fail (dated promise, dated goal, `ends_when` with no
+  `next`); `player_start` as a list and as `"twenty"` are bad input, `"20"` still reads.
+- Suite: 414 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch ledgers (`shape.py`, row absent → now): members_only PASS (a goal, no `goals[]`, no date);
+  orientation / the_balance / vesper_two n/a (no goal declared); probation FAIL — `want.promise.date` holds the
+  review schedule ("reviews on the first Tuesday on or after day 30, 60 and 90"). Real: the promise carries a
+  date field; that schedule is the pressure, not the goal. `a step's gate can be reached` unchanged (n/a on all
+  five: no step declares `raises`).
+
+words: 139,288 → 139,304 (+16) · running total 139,304 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC4: one name per trait (D3a · D4 · J5)
 
 **Why.** D3a: one name per trait everywhere (EN5). D1b keeps the "+N" toast, which names every trait an effect
