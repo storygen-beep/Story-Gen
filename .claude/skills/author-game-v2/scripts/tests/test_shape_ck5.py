@@ -177,6 +177,21 @@ def test_no_schedule_is_na():
     assert rows(base())["the person is there at the step's hour"][0] is None
 
 
+def test_a_misspelled_weekday_is_bad_input_that_names_the_day():
+    # Phase 5: "Wensday" used to drop out of the row and read as "does not cover ... on Wed".
+    ok, head, detail = cover([{"where": "bar", "weekdays": ["Mon", "Wensday"], "from": "17:00", "to": "22:00"}])
+    assert ok is False and "1 bad input" in head
+    assert detail == ["npc_a schedule[0]: unknown weekday 'Wensday'"]
+
+
+def test_a_row_in_the_tomls_words_is_bad_input_not_an_empty_schedule():
+    ok, head, detail = cover([{"location": "bar", "weekdays": [0, 2],
+                               "start_time": "17:00", "end_time": "22:00"}])
+    assert ok is False and "0/0 steps · 1 bad input" in head
+    assert len(detail) == 1 and "location, start_time, end_time are the TOML's names" in detail[0]
+    assert not any("does not cover" in d for d in detail)
+
+
 # ── the shared helper ─────────────────────────────────────────────────────────
 
 def test_window_uncovered_union_midnight_and_gap():

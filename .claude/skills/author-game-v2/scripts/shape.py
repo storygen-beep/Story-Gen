@@ -326,9 +326,33 @@ def check(state, strict=False):
     # A step the opening plays is exempt: it has no hour.
     scheds = {c.get("id"): c["schedule"] for c in (board.get("characters") or [])
               if isinstance(c, dict) and isinstance(c.get("schedule"), list)}
-    judged, bad = 0, []
+    # A row the check cannot read is bad input, never "does not cover" (phase 5): a misspelled
+    # weekday, or a row in the TOML's own words (`location`/`start_time`/`end_time`), used to
+    # drop out silently and blame the person's hours. That person's steps are not judged.
+    sched_bad, unreadable = [], set()
+    for n, rws in scheds.items():
+        before = len(sched_bad)
+        for i, r in enumerate(rws):
+            if not isinstance(r, dict):
+                sched_bad.append(f"{n} schedule[{i}] must be a table — got {r!r}")
+                continue
+            toml_words = [k for k in ("location", "start_time", "end_time") if k in r]
+            if toml_words:
+                sched_bad.append(f"{n} schedule[{i}]: {', '.join(toml_words)} are the TOML's names — "
+                                 "this row is read as {where, weekdays, from, to}")
+            elif not r.get("where"):
+                sched_bad.append(f"{n} schedule[{i}]: no `where`")
+            wd = r.get("weekdays")
+            if wd is not None and not isinstance(wd, list):
+                sched_bad.append(f"{n} schedule[{i}]: weekdays must be a list — got {wd!r}")
+            elif wd:
+                sched_bad.extend(f"{n} schedule[{i}]: unknown weekday {d!r}"
+                                 for d in wd if gates._ladder_day(d) is None)
+        if len(sched_bad) > before:
+            unreadable.add(n)
+    judged, bad = 0, list(sched_bad)
     for n, s in steps:
-        if n not in scheds or s.get("fires_from") == "opening":
+        if n not in scheds or n in unreadable or s.get("fires_from") == "opening":
             continue
         w = s.get("when") or {}
         days = [gates._ladder_day(d) for d in (w.get("days") or [])]
@@ -346,11 +370,13 @@ def check(state, strict=False):
         if missing:
             bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')} "
                        f"{w['from']}-{w['to']} on {', '.join(gates._PR_DAYS[d] for d in missing)}")
-    if not judged:
+    if not judged and not sched_bad:
         row("the person is there at the step's hour", None,
             "n/a — no step belongs to a person with board.characters[].schedule")
     else:
-        row("the person is there at the step's hour", not bad, f"{judged - len(bad)}/{judged} steps", bad)
+        row("the person is there at the step's hour", not bad,
+            f"{judged - (len(bad) - len(sched_bad))}/{judged} steps"
+            + (f" · {len(sched_bad)} bad input" if sched_bad else ""), bad)
 
     # 12 · a step's gate can be reached (PRD v2 DC9b · H31). Optional step `raises = {trait: n}`,
     # `board.daily_raises = {trait: per_day}` and `board.repeat_raises = {trait: per_visit}` (a

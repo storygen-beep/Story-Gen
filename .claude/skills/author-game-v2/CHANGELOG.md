@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 5 (verify, members_only only)
+
+**Why.** Phase 5 of PRD v2 §6, scoped by LO to members_only. Checker bugs found on the scratch run are fixed
+here; game problems are listed in the phase 5 report, never edited.
+
+**What changed.**
+- **CK5 schedule rows are read or refused (`scripts/shape.py`, `references/state.md`).** *The person is there at
+  the step's hour* dropped any `board.characters[].schedule` row it could not read and blamed the person's hours:
+  a misspelled weekday ("Wensday") read as "does not cover … on Wed" (carried note from GAME_FOLLOWUPS.md), and a
+  row in the TOML's own words (`location`/`start_time`/`end_time`) matched no place, so members_only read 0/9 steps
+  covered while its rows cover all nine. Both are now bad input that names the day or the keys, and that person's
+  steps are not judged. Verified: two new tests in `tests/test_shape_ck5.py`; the same fixture against the previous
+  `shape.py` printed `npc_a step 1: npc_a's schedule does not cover bar 18:00-20:00 on Wed`.
+
+---
+
 ## 2026-09-30 — Phase 4 follow-ups (LO's review)
 
 **Why.** LO reviewed phase 4: one decision (Gate 42 mixed locks), five must-fixes and nine smaller ones.
