@@ -84,9 +84,11 @@ def test_declared_fantasy_prints_verbatim(tmp_path, monkeypatch, capsys):
 
 
 def test_kinds_shipped_counts_and_three_least_used(tmp_path, monkeypatch, capsys):
-    st = {"releases": [{"moment_kind": "firsts"}, {"moment_kind": "firsts"},
-                       {"moment_kind": "being_seen"}, {"moment_kind": "consequence"},
-                       {"subject": "old release, no kind"}]}
+    d = "2026-09-01"
+    st = {"releases": [{"moment_kind": "firsts", "shipped": d}, {"moment_kind": "firsts", "shipped": d},
+                       {"moment_kind": "being_seen", "shipped": d},
+                       {"moment_kind": "consequence", "shipped": d},
+                       {"subject": "old release, no kind", "shipped": d}]}
     counts, unrec, least = pitch_pack._kinds_shipped(st["releases"])
     assert counts["firsts"] == 2 and counts["being_seen"] == 1 and unrec == 1
     assert least == ["body_as_payment", "taboo_at_home", "being_seen"]

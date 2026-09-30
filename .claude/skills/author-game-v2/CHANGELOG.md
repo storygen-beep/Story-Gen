@@ -5,6 +5,63 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC1: the premise comes first, and the idea page's first step is pitched three ways (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC1 (A1 · A2 · D14 · E1 · E2 · E3 · E4 · E8 · H30).
+- Dispatch started at the Want, but the Want's hold and charge depend on a premise picked later (A1).
+- The only model-to-beat example was a failing game (A2).
+- The idea page's "first step" was singular, read like the opening, and had no save path (E1, E8, E3).
+- `pitch_pack.py` could not run before a build (E2).
+- An unshipped step in `releases[]` was counted as shipped (E4, H30).
+- D14 (LO): three pitchers, one per man.
+
+**What changed.**
+- `SKILL.md` Dispatch (not a scoreboard row):
+  - a new first row, *the premise*: three premises in different shapes; LO picks one, and it becomes
+    `want.fantasy_shape`;
+  - then the Want row;
+  - the `want` row names `games/<slug>/IDEA.md` and three `v2-pitcher`s, one per man, with no shared context;
+    LO picks, and the others become later steps.
+  - The pitch_pack paragraph says it runs with no TOML.
+- `references/the-want.md` §0:
+  - the premise comes before the Want;
+  - the model to beat is one of Course of Temptation, In Her Own Hands, Shady Deals or Cupid's Way;
+  - the Zara example is gone, and the round4b finding stays as a paraphrase (no new quote);
+  - `## Then` names `IDEA.md`.
+- `templates/idea.md`:
+  - it is saved at `games/<slug>/IDEA.md`;
+  - the model to beat is limited to the four;
+  - §4 is "The first step with one person — not the game's opening": three pitchers, LO picks, the other two
+    stay as later steps, and there is a line on how the opening (F1b) hands over;
+  - the step is recorded as `release_page.her_moment`, not `releases[]`.
+- `.claude/agents/v2-pitcher.md`: the description and a new "idea phase" paragraph. With no build, the pack
+  prints the Want and idea pages, `want.places[]` and `want.cast[]`, and the pitch is step 1, with his want
+  first.
+- `scripts/pitch_pack.py`:
+  - `_shipped()` keeps only releases with a `shipped` date. It is used by `_kinds_shipped`, SHIPPED ALREADY
+    (the PRD's :938, now in `_print_shipped`) and `_relationships`' releases-since-last-step. The last one is
+    the same E4 bug, one function over.
+  - The promise, kinds, library and shipped blocks are pulled out of `pack()` into helpers.
+  - The new `idea_pack()` runs when there is no TOML but there is a ledger or `WANT.md`. It prints the
+    promise, the kinds, the library slice, places, people, both pages verbatim and the shipped releases, and
+    has `--json`.
+- `references/state.md`: `release_page.her_moment` holds the chosen, unshipped step. The `releases[].her_moment`
+  comment points at it.
+
+**Verified.**
+- `tests/test_pitch_pack_dc1.py` (5 cases):
+  - only shipped releases count;
+  - idea mode runs from the ledger + WANT.md + IDEA.md and prints both pages, places and people;
+  - JSON works;
+  - missing pages are named;
+  - no inputs at all is "not found".
+- The `test_pitch_pack_ic2.py` fixture gains `shipped` dates.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Read-only smoke run on members_only: no traceback. Its unshipped release is no longer listed as shipped.
+
+words: 137,730 → 137,836 (+106) · running total 137,836 / 149,283. The growth is the premise step and the
+idea-phase pack, both new.
+
 ## 2026-09-30 — DC2b: the Want names its places, its money and its walk-ons (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC2b (B6 · B7 · I19 · D15/E7 · H34), plus `want.cast` names in `--words`

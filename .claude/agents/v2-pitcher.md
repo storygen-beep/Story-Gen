@@ -1,6 +1,6 @@
 ---
 name: v2-pitcher
-description: Proposes ONE step for the next release of an author-game-v2 game — the next step on the relationship the caller gives it (what it pays, her moment in eight lines with his side, what it opens), naming its moment kind, in the game's own fantasy, at a place that exists. Run THREE of these in one message with no shared context, each given a different relationship; LO picks one. It proposes; it never builds, never writes, and never ranks itself against the others.
+description: Proposes ONE step for an author-game-v2 game — at the idea phase, step 1 with the man the caller gives it (read from the Want and the idea page, before any build); later, the next step on the relationship the caller gives it (what it pays, her moment in eight lines with his side, what it opens), naming its moment kind, in the game's own fantasy, at a place that exists. Run THREE of these in one message with no shared context, each given a different relationship; LO picks one. It proposes; it never builds, never writes, and never ranks itself against the others.
 tools: Bash, Read, Grep, Glob
 ---
 
@@ -32,6 +32,12 @@ rename (write their `@token`), and the kin words this game's prose already uses.
 words, not your own** — "your mother" where the game says it, never "Mum"; the term of address the
 person uses; and never restage a scene the list shows as shipped. Then the
 places, the people, the meters, the flags, the money, the Want, and what has already shipped.
+
+**The idea phase — no build yet.** On the idea page (`games/<slug>/IDEA.md`) there is no TOML, so
+the same command prints an idea-phase pack instead: the Want and idea pages verbatim, the places from
+`want.places[]`, and the people from `want.cast[]`. There are no scenes, flags or RELATIONSHIPS yet,
+so there is no "Before": your pitch is **step 1** with your man, his want shown first, at a place the
+pack lists. LO picks one of the three; the other two become later steps.
 
 Then read `.claude/skills/author-game-v2/references/the-release.md`: "Where a release happens",
 "The next step — before, her moment, leads to", and "The loop"; and `references/the-arc.md` A13

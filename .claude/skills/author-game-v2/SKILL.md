@@ -166,8 +166,9 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 
 | `phase` | do this | reference | the next phase is set when |
 |---|---|---|---|
-| *(no state file)* | write the Want, create the state file | `references/the-want.md` | the Want is recorded → `want` |
-| `want` | **write the idea page** — the game's Her moment: fantasy, promise, the people who carry it, the first step's eight lines | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks it → `idea` |
+| *(no state file)* | **pitch the premise** — three premises, each a different shape | `the-want.md` §0 table | LO picks one (it becomes `want.fantasy_shape`) → write the Want |
+| *(no state file)*, premise picked | write the Want, create the state file | `references/the-want.md` · `templates/want.md` | the Want is recorded → `want` |
+| `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, one per man, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
 | `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` | every sheet is [READY] and signed → `sheets` |
@@ -468,7 +469,8 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   remembered: places, people, the meters and flags a pitch can key to, the money, the Want
   verbatim, what already shipped, and which promises are still open. It is what the `v2-pitcher`
   agent reads first. **It scores nothing and always exits 0** — same rule as `--words`, and for a
-  harder reason: *"this location is too thin"* is an opinion.
+  harder reason: *"this location is too thin"* is an opinion. With no TOML it reads the ledger, `WANT.md`
+  and `IDEA.md`; only releases with a `shipped` date count.
 - **An example outranks every rule beside it, so it goes in LAST — after it is validated, or not
   at all.** *(LO decided.)* A rule is read; an example is copied. Where a shape has to be taught, teach a
   **menu the author must choose from**, never one picture they can copy. If a validated example is

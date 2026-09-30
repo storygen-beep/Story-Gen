@@ -17,7 +17,7 @@ One page, five parts (`templates/want.md`) *(LO decided, D16)*. The detail table
 words on SP2, rung numbers, needs and the map shape on the board. Every number on the page agrees with
 every other; the reader checks it *(check: pending NC1)*.
 
-### 0. The fantasy, the model to beat, and the promise — the idea page
+### 0. The premise first; the model to beat and the promise on the idea page
 
 **For a female lead, the premise matters.** In the fifteen core female-lead games of the Great Games
 Study (`~/Documents/Great_Games_Study_20260926/`), players name the premise when they say why they stay:
@@ -32,12 +32,14 @@ Deals); a sheltered girl's slow corruption (Cupid's Way). Each game sits in one 
 | **taboo at home** | the house, and who is in the next room | the chance of being walked in on |
 | **mystery** | she investigates while something works on her | secrets she buys, clues that pay out |
 
-Pick one, or name the mix, and write in one sentence what the player comes to feel.
+**The premise comes before the Want**, since the hold and the charge depend on it: three premises in
+different shapes, one sentence each on what the player comes to feel. LO picks; record it as
+`want.fantasy_shape`.
 
-**Name the model to beat.** The developers in the study took the premise from their own taste plus one
-game, show or film to copy or beat — one wanted another game done better, with a real story and an
-end in sight (`zaras-school-life`, paraphrased). No premise came from players or a poll; players chose the order of ideas
-the developer already owned (`round4b/ROUND4B_REPORT.md` §1–2).
+**Name the model to beat — one of the four passing games:** Course of Temptation, In Her Own Hands,
+Shady Deals or Cupid's Way, with what ours does better. The developers in the study took the premise
+from their own taste plus one game, show or film to copy or beat. No premise came from players or a
+poll; players chose the order of ideas the developer already owned (`round4b/ROUND4B_REPORT.md` §1–2).
 
 **Keep the promise alive.** Players praise a game with a goal (*"The goal is to become rich"*, Shady
 Deals) and punish one without a spine: *"no driving plot or even a MacGuffin"* (Course of
@@ -429,5 +431,5 @@ cannot decode is undecodable on a button.
 ## Then
 
 Create `games/<slug>/v2_state.json` with `phase = "want"` and the Want recorded, per
-`references/state.md`. Move to the idea page, `templates/idea.md`: §0 and §6's companion,
-pressure-man and face are written there.
+`references/state.md`. Move to the idea page, saved at `games/<slug>/IDEA.md` from `templates/idea.md`:
+§0 and §6's companion, pressure-man and face are written there.
