@@ -10,7 +10,8 @@ is repeating a reference — cut it and point.
 
 ## Page rules
 
-- **Seven pages, SP1–SP7**, each from its template in `templates/spine/`. Tables first.
+- **Seven pages, SP1–SP7**, each from its template in `templates/spine/`, saved in
+  `games/<slug>/spine/`. Tables first.
 - **≤ 400 words a page.** Longer means a rule is being restated.
 - **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
   it **(LO decided, D13)**.

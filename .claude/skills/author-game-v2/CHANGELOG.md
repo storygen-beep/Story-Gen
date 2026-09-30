@@ -5,6 +5,34 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC9a: where spine pages and proposals live; the board is ledger-first; doors hang on rungs (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9a (H19 · H22 · H23 · H24 · H32):
+- no folder was named for spine pages or handed-over drafts (H32);
+- the board template said "copy into toml_phases" while the board phase ends before any TOML (H19);
+- S12 didn't say whether a signed spine page beats an older sheet (H22);
+- the door rule never said the build refuses a gate on a flag nothing sets (H23);
+- S10 asked for one card per tier and per person while `--ship` wants one per ladder step, and the card generator
+  shipped an example tip that authors copy (H24).
+
+**What changed.**
+- `references/the-spine.md`: pages are saved in `games/<slug>/spine/`.
+- `references/the-sheets.md`:
+  - S13: a handed-over draft sheet goes in `games/<slug>/proposals/`;
+  - S12: a signed spine page wins over an older sheet;
+  - S10: one guidance card per ladder step, written by `guidance_from_ladder.py`.
+- `templates/board.toml` header: ledger-first; the blocks are copied into `toml_phases/` only at the build.
+- `references/the-release.md` her moment, line 8: a later release's door hangs on a meter rung this release can't
+  reach, never a flag nothing sets (`validate_flag_chains()`, `v2.py:13269`).
+- `scripts/guidance_from_ladder.py`: the commented example tip is removed.
+
+**Verified.**
+- Grep: "I wonder what he is into" and "quest-card row per" are 0 in skill files. The-voice.md keeps the IHOH
+  quote as evidence.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,508 → 138,574 (+66) · running total 138,574 / 149,283.
+
 ## 2026-09-30 — DC8: a button names the act; a spend price is on it, pay earned is not (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC8 (D11 · J2). A button could hide the act behind a soft name. And the price

@@ -208,7 +208,8 @@ trigger whose setter sits on a choice inside.
 
 ## S10 · GUIDANCE HAS A ROW
 
-One quest-card row per ascent tier on the decision sheet, one per character on the person sheet.
+One guidance card per ladder step, on the person sheet — what `--ship` checks.
+`scripts/guidance_from_ladder.py` writes the cards from the ledger's ladder.
 
 > **The incident.** `quests_engine = "v2"` lights a sidebar entry and a page, and with no cards
 > renders a heading and nothing. **No sheet in the format mentioned a quest card.** Nine were written
@@ -252,7 +253,8 @@ being asked to decide, the sheet is not done, however complete it is.
 
 **The rule:** when a rule in this skill and a line on the game's sheets point different ways, the
 author does not pick one. Stop, quote both lines, and ask the owner which wins. Until the owner
-answers, neither is built.
+answers, neither is built. **A signed spine page wins over an older sheet**: the sheet is updated to
+match it.
 
 **Two kinds of sheet line, and only one of them is asked about:**
 
@@ -272,7 +274,8 @@ only in a chat, a research folder or a document outside `games/<slug>/` is invis
 session, because the next session reads the game.
 
 - **The sheets are the owner's.** Where the owner has said the agent does not write them, the agent
-  hands over the paragraph and the owner places it, or the owner names the file and says to write it.
+  hands over the paragraph — as a draft sheet in `games/<slug>/proposals/` — and the owner places it,
+  or the owner names the file and says to write it.
   Either way, the plan ends up on the page.
 - **A sheet that an approved plan has replaced is marked**, so nobody builds from the old version
   while the new one is on its way. One line under the title is enough: *"Replaced by the plan approved

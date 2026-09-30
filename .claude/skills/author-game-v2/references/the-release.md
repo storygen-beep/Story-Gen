@@ -46,7 +46,9 @@ what their players quote:
 7. **The moment to remember.** Which of the five kinds — her firsts · being seen · her body as the
    price for something she needs · taboo at home · a consequence she lives with — and the line a
    player would quote.
-8. **The door it opens, and the clip we can get.** The live goal, mystery or rival beat it moves,
+8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
+   this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
+   canvas sets (`validate_flag_chains()`, `v2.py:13269`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it. A moment with no clip is a moment the game cannot
    show.
 

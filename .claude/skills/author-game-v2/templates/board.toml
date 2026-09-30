@@ -1,7 +1,9 @@
 # =============================================================================
 # The Board — <game title>
 #
-# Copy into games/<slug>/toml_phases/ split across:
+# The board is LEDGER-FIRST: its decisions go in v2_state.json `board.*` during the
+# board phase, before any TOML exists. Only at the build are these blocks copied into
+# games/<slug>/toml_phases/, split across:
 #   0_systems_spec.toml            [project] [settings] [time] [[sidebar_items]]
 #   1_metadata_and_locations.toml  [player] + [player.core_traits]
 #                                  [[locations]] [[npcs]] [[npcs.schedules]]
