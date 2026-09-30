@@ -350,16 +350,24 @@ RUNGS = (
     ("hands",   re.compile(r"\b(finger(?:s|ed|ing)?|handjob|hand job|jerk(?:s|ed|ing)?|wank"
                            r"|stroke[sd]? (?:his|her)|rub(?:s|bed|bing)?)\b", re.I)),
     ("oral",    re.compile(r"\b(suck(?:s|ed|ing)?|blowjob|blow job|lick(?:s|ed|ing)?"
-                           r"|oral|deepthroat)\b", re.I)),
-    ("vaginal", re.compile(r"\b(fuck(?:s|ed|ing)?|thrust|penetrat\w*|rides? (?:him|his)"
+                           r"|oral|deepthroat|face-?fuck\w*"
+                           r"|fuck(?:s|ed|ing)? (?:your|her|my|his) (?:mouth|face|throat))\b", re.I)),
+    ("vaginal", re.compile(r"\b((?<!face-)fuck(?:s|ed|ing)?(?! (?:your|her|my|his) (?:mouth|face|throat|ass))"
+                           r"|thrust|penetrat\w*|rides? (?:him|his)"
                            r"|inside her|in her cunt|in her puss\w*)\b", re.I)),
-    ("anal",    re.compile(r"\b(anal|in the ass|her ass\b|your ass\b|butthole)\b", re.I)),
+    ("anal",    re.compile(r"\b(anal|in the ass|(?:in|up) (?:your|her|my) ass"
+                           r"|fuck(?:s|ed|ing)? (?:your|her|my) ass|butthole)\b", re.I)),
     ("finish",  re.compile(r"\b(cum(?:s|ming)?|came|orgasm\w*|climax\w*|creampie)\b", re.I)),
 )
 # ⚠️ THE RUNG IS AN ACT, NOT A BODY PART. `cunt` / `puss` / `tits` name anatomy and
 # say nothing about what is happening to it — a first draft of this list had them in
 # the `vaginal` rung and over-counted penetration openings roughly eightfold. Every entry above is a verb or a verb phrase, and the field
-# distribution quoted in the lint was produced by exactly this list.
+# distribution quoted in the lint was produced by this list AS IT WAS BEFORE 2026-09-30.
+#
+# ⚠️ CHANGED 2026-09-30 (PRD v2 CK8a · I10), on the same principle: `her ass` / `your ass`
+# alone is anatomy, not anal ("he grabs your ass"), and "fucks your mouth / face" is oral,
+# not vaginal. Anal now needs an act on the ass (in / up / fucks). The field figures above
+# and in `lint_ladder` were measured with the old list — RE-MEASURE PENDING.
 RUNG_ORDER = [k for k, _ in RUNGS]
 
 PROSE_BLOCKS = {"paragraph", "dialog", "thought_bubble", "quote", "note"}
@@ -2780,7 +2788,8 @@ def lint_ladder(model, game):
     stuck = [r for r in rows if not (r[3] & TOP)]
     summary = (f"{len(rows)} explicit canvases · {100*len(high)//len(rows)}% OPEN at "
                f"vaginal-or-above · {100*len(stuck)//len(rows)}% never reach oral "
-               f"· field screens open at vaginal-or-above 46% of the time")
+               f"· field screens open at vaginal-or-above 46% of the time "
+               f"(old rung list — re-measure pending)")
     findings = ([f"{cid} @{loc}: opens on {first} — no rung below it anywhere in the canvas"
                  for cid, loc, first, _ in high[:5]]
                 + [f"{cid} @{loc}: never gets past {first} — {len(pres)} rung(s) total"
@@ -9175,8 +9184,9 @@ def run_gates(model, game, state=None):
     # that merely exits a room is not one. If this gate is ever loosened, re-check it
     # against games with known refusals first.
     # ═════════════════════════════════════════════════════════════════════════
+    # CK8a (I3): a no written as her spoken line starts with a quote mark — skip it.
     _REFUSAL = re.compile(
-        r"^\s*(no[,.!\s]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
+        r"^[\s\"“'‘]*(no[,.!\s\"”'’]|no$|refuse|decline|say no|reject|resist|turn (him|her|it|them) down|"
         r"don't|do not|not (tonight|now|today|this)|push (him|her|them) (off|away)|"
         r"stop (him|her|them)|pull away|shake your head|tell (him|her|them) no|"
         r"back off|not interested|keep (them|it) on|refuse to)", re.I)

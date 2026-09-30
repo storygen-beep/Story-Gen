@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK8a: a quoted "no" counts; "ass" alone is not anal, a mouth fuck is oral (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8a (I3 · I10). A no written as her spoken line (`"No."`, `“Not tonight.”`)
+counted zero in *she can say no*, and a game with four refusals failed. `RUNGS` read body parts as acts: "your
+ass" was anal, and "he fucks your mouth" was vaginal.
+
+**What changed.** `scripts/gates.py`:
+- `_REFUSAL` skips leading `"`, `“`, `'` and `‘`, and `no` may be followed by a closing quote (`"No"`).
+  Nothing else in the pattern moved; `Leave …` is still not a refusal.
+- `RUNGS`:
+  - `oral` adds `fuck… (your|her|my|his) (mouth|face|throat)` and `face-?fuck…`;
+  - `vaginal`'s `fuck…` no longer matches when a mouth, face, throat or ass follows, or when `face-` sits right
+    before it ("face-fucking her"; LO, before commit: vaginal outranks oral, so the screen read vaginal);
+  - `anal` drops the bare `her ass` / `your ass` and needs an act: `in the ass`, `(in|up) (your|her|my) ass`,
+    `fuck… (your|her|my) ass`, `anal`, `butthole`.
+- The comment under `RUNGS` says the field distribution was measured with the list as it was before this
+  change, re-measure pending. The `lint_ladder` summary's "field screens open at vaginal-or-above 46%" now
+  reads "(old rung list — re-measure pending)".
+- No gate or lint added or renamed; neither is a `--ship` row. No doc edits.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 5034 → 5043). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8a.py`: 8 passed. Five quoted refusals each count once; `"Leave the shop"` does not. "grabs
+  your ass" and "her ass is red" are not anal; mouth and face fucks are oral only; "fucks your ass" is anal only;
+  "in the ass" / "up your ass" are anal; "fucks you hard" is still vaginal; "face-fucking her" / "face-fucks you" are oral only; the lint says
+  re-measure pending.
+- Skill tests 266 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five v2 games:
+  - *she can say no* changed only on probation, 5 → 6 refusals. The new one is `hub_delgado` `"No." (30m)`, a
+    real refusal the leading quote had hidden.
+  - `lint_ladder` moved where "ass" had been read as anal:
+    - members_only: 11% → 0% open at vaginal-or-above, 33% → 55% never reach oral;
+    - probation: never reach oral 33% → 77%;
+    - vesper_two: 41 → 38 explicit canvases with a rung, 73% → 60% open at vaginal-or-above, 14% → 23% never
+      reach oral;
+    - orientation and the_balance unchanged.
+
+words: 137,419 → 137,419 (0)
+
+---
+
 ## 2026-09-30 — CK6: --beat shows the joints (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK6 (H8). The build judges `but` and `and` per 1,000 words (*prose has room*),
