@@ -254,6 +254,7 @@ how many fails are [off].
 | her climb | a paid repeatable is introduced, then a step, then a first time; it is shut on a new save; each act node has two voices on a declared tier and a stop exit | `the-arc.md` A15 |
 | a no has content | a `consume_on` step's other exits park, are a labelled final, or reach a reply that changes something | `the-arc.md` A3 |
 | the men's numbers are read | each trait a man keeps is shown (hidden and counters aside) and read by a gate and a line | `the-meters.md` W1 |
+| one name per trait | every trait an effect moves has a `[[traits.labels]]` label, and a sidebar item's own `label` matches it | `engine.md` §30 |
 | a destination is never open and exit-only | each open hour has something to do alone, from the room's first opening | `the-board.md` §1 |
 | standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger | `the-board.md` §2 |
 | milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening | this file, "three kinds of content" |

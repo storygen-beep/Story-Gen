@@ -1348,8 +1348,8 @@ They do not know about each other. Band a trait without suppressing its number a
 **The suppression is `[[traits.labels]] in_dump = false`.** It keeps the key out of the auto Traits
 dump and nothing else: the Stats page and every "+N" toast still name it. `hidden = true` also
 suppresses it, but that is the secret-trait switch (no dump, no Stats page), and it is keyed by name,
-so hiding the player's banded `corruption` with it hides every man's `corruption` too. An entry with
-`in_dump = false` or `hidden = true` may leave out `label`.
+so hiding the player's banded `corruption` with it hides every man's `corruption` too. Every entry
+carries a `label`, hidden or not: the toast names every trait an effect moves (gate `one name per trait`).
 
 **One name per trait.** Every screen names a trait the same way: its `label`, or the key tidied
 ("crowd_standing" becomes "Crowd standing") when there is none. That covers the locked-button
@@ -1373,6 +1373,7 @@ bands = [ { min = 0, max = 14, text = "Long dress, hair pinned" },
 
 [[traits.labels]]
 key     = "cover"          # ← REQUIRED, or the number prints underneath the words
+label   = "Cover"          # the one name every screen uses (gate `one name per trait`)
 in_dump = false
 ```
 

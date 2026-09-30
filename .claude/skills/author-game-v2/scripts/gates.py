@@ -12465,6 +12465,44 @@ def _locked_doors(game):
     return shown_locked, mute, doubled
 
 
+# NC4 · one name per trait (D3a · D4 · J5) — `engine.md` §30, `the-meters.md` "What the
+# player is shown" 1. The "+N" toast names every trait an effect moves, hidden or not (D1b;
+# `setup.traitLabel`, never filtered by `hiddenTraits`), so:
+#   · every trait key any effect changes has a `[[traits.labels]]` entry with a `label`;
+#   · a `[[sidebar_items]]` entry that sets its own `label` uses that same label.
+# Without a label the engine tidies the key ("crowd_standing" -> "Crowd standing"), which is
+# one name but the author never chose it.
+def _one_name_per_trait(game):
+    """(ok, headline, detail, n) for `one name per trait`."""
+    labels = {}
+    for l in ((game.get("traits") or {}).get("labels") or []):
+        if isinstance(l, dict) and l.get("key"):
+            labels[l["key"]] = str(l.get("label") or "").strip()
+    moved = set()
+    for _path, d in _walk_paths(game):
+        for k in ("effects", "rejection_effects", "traitEffects"):
+            for ef in (d.get(k) or []) if isinstance(d.get(k), list) else []:
+                if isinstance(ef, dict) and (ef.get("trait") or ef.get("trait_key")):
+                    moved.add(ef.get("trait") or ef.get("trait_key"))
+    bad = [f"`{k}` is changed by an effect and has no [[traits.labels]] label — the toast "
+           f"names it by its key" for k in sorted(moved) if not labels.get(k)]
+    items = [i for i in (game.get("sidebar_items") or []) if isinstance(i, dict) and i.get("trait")]
+    for i in items:
+        own = str(i.get("label") or "").strip()
+        if own and labels.get(i["trait"]) and own != labels[i["trait"]]:
+            bad.append(f"sidebar {i.get('type')} `{i['trait']}` says \"{own}\"; its label is "
+                       f"\"{labels[i['trait']]}\" — one name per trait")
+        elif own and not labels.get(i["trait"]):
+            bad.append(f"sidebar {i.get('type')} `{i['trait']}` says \"{own}\" and the trait has no "
+                       f"[[traits.labels]] label — every other screen calls it something else")
+    n = len(moved) + len(items)
+    if not n:
+        return None, "no effect changes a trait and no sidebar item names one", [], 0
+    return (not bad, f"{len(moved) - sum(1 for k in moved if not labels.get(k))}/{len(moved)} "
+                     f"changed traits carry a label · {len(items)} sidebar item(s) checked",
+            bad[:14] + ([f"… and {len(bad) - 14} more"] if len(bad) > 14 else []), n)
+
+
 def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _her_climb(game, state)
     _N["her climb"] = n
@@ -12475,6 +12513,9 @@ def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _mens_numbers(game, state)
     _N["the men's numbers are read"] = n
     gate("the men's numbers are read", ok, head, detail)
+    ok, head, detail, n = _one_name_per_trait(game)
+    _N["one name per trait"] = n
+    gate("one name per trait", ok, head, detail)
 
 
 def main():

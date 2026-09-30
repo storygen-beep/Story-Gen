@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC4: one name per trait (D3a · D4 · J5)
+
+**Why.** D3a: one name per trait everywhere (EN5). D1b keeps the "+N" toast, which names every trait an effect
+moves and is never filtered by `hiddenTraits`, so an unlabelled key reaches the player as a tidied key.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`one name per trait`** (`_one_name_per_trait`), registered in
+  `_phase4_gates`. Every trait key in any `effects` / `rejection_effects` / `traitEffects` list needs a
+  `[[traits.labels]]` entry with a `label`; a `[[sidebar_items]]` entry that sets its own `label` must use that
+  label (and its trait must have one). n/a when nothing moves a trait and no sidebar item names one.
+- `references/engine.md` §30: "an entry with `in_dump = false` or `hidden = true` may leave out `label`" rewritten
+  (every entry carries one), and the §30 example gains `label = "Cover"`. `SKILL.md`: scoreboard row.
+
+**Verified.**
+- `tests/test_gates_nc4.py`: pass (labelled + matching sidebar, a sidebar item with no label of its own), n/a,
+  fail (a moved trait with no label, a sidebar label that differs).
+- Suite: 406 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now): all FAIL, real — labels were optional on hidden entries until now.
+  members_only 1/10 moved traits labelled, orientation 0/10, probation 0/16, the_balance 10/13 (`arousal`,
+  `doubt`, `relation` — the men's), vesper_two 6/11.
+
+words: 139,239 → 139,288 (+49) · running total 139,288 / 149,283.
+
 ## 2026-09-30 — Phase 4 DC6b + Gate 42: a locked door says why, once (D2 · J1)
 
 **Why.** EN6 made the engine print a number lock's need beside the label (`setup.requirementSuffix`). The skill
