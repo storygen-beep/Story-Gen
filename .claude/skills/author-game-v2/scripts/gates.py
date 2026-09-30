@@ -3129,12 +3129,20 @@ def _player_trait_raises(game):
     `where` is the canvas id when the effect sits inside one, else the top-level
     section that carried it (`engine`, `settings`, …), so a failure line can name
     the place to go and look rather than saying "somewhere".
+
+    ⚠️ `[engine.daily_tick].traitEffects` IS A WRITER (PRD v2 CK1 · H1, 2026-09-30).
+    The engine applies it on every day roll (v2.py:6276-6293; imported at
+    template_import.py:3146). The key is camelCase, so the old `effects|[]` suffix
+    test never matched it, and a meter the night adds to (`review_days +1`) read as
+    one nothing raises. That is the only place the importer reads `traitEffects`,
+    so it is matched there and nowhere else.
     """
     out = collections.defaultdict(list)
 
     def scan(obj, where):
         for path, node in _walk_paths(obj):
-            if not "|".join(path).endswith("effects|[]"):
+            if not ("|".join(path).endswith("effects|[]")
+                    or path == ("engine", "daily_tick", "traitEffects", "[]")):
                 continue
             if "trait" in node and "op" in node and node.get("targetType", "player") == "player":
                 out[str(node["trait"])].append(where)
@@ -4245,6 +4253,41 @@ def _declared_ladders(state):
     return out
 
 
+def _declared_door(state):
+    """The door this release ends on: `release_page.door`, else `board.door`, else None.
+
+    The release page is the newer source (PRD WS8) and wins when both exist; `--ship`
+    already fails a build whose two copies differ ("the build matches the release page").
+    Only a dict with both `canvas` and `choice` counts as declared.
+    """
+    for door in (((state or {}).get("release_page") or {}).get("door"),
+                 ((state or {}).get("board") or {}).get("door")):
+        if isinstance(door, dict) and door.get("canvas") and door.get("choice"):
+            return door
+    return None
+
+
+def _door_choice(canvas, door):
+    """The choice dict on `canvas` whose text is the declared door's, or None."""
+    found = None
+    for n in (canvas or {}).get("nodes") or []:
+        if door.get("node") and n.get("id") != door["node"]:
+            continue
+        for ch in _node_choices(n):
+            if str(ch.get("text") or "").strip() == str(door["choice"]).strip():
+                found = ch
+    return found
+
+
+def _opening_canvas_ids(game):
+    """Ids of every canvas the opening plays: the starting canvas and the capstones its
+    funnel walks into (`_funnel_walk`). A ladder step marked `fires_from = "opening"`
+    must be one of these."""
+    walked = []
+    _funnel_walk(game, walked=walked)
+    return {c.get("id") for c in walked if isinstance(c, dict)}
+
+
 _DAY_WORDS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
               "mon", "tue", "tues", "wed", "thu", "thurs", "fri", "sat", "sun")
 _TIME_WORDS = ("weekday", "weekend", "every day", "daily", "each day", "morning",
@@ -4379,20 +4422,25 @@ def _ladder_open_below(canvas, counter, n, ever_set, start_flags, start_traits, 
                for it in rest)
 
 
-def _ladder_reachable(canvas):
-    """Can the player walk into this canvas at all: not dev, active, and placed."""
+def _ladder_reachable(canvas, opening_ids=frozenset()):
+    """Can the player walk into this canvas at all: not dev, active, and placed.
+
+    A canvas the opening plays (`opening_ids`, from `_opening_canvas_ids`) is reached
+    by starting a new game, so it counts although it has no place (PRD v2 CK1 · H3).
+    """
     trig = canvas.get("trigger") or {}
     return (not _is_dev(canvas) and trig.get("is_active", True) is not False
-            and bool(trig.get("location") or trig.get("npc")))
+            and (bool(trig.get("location") or trig.get("npc"))
+                 or canvas.get("id") in opening_ids))
 
 
-def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx):
+def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=frozenset()):
     """None if this gate item can be earned before step N, else why not."""
     kind, key, op, val = _cond_parts(item)
     npc = item.get("npc_id") or item.get("npc")
     start_flags, start_traits, ever_set, written = ctx
     open_setters = [c for c in game.get("canvases") or []
-                    if c.get("id") != step_canvas_id and _ladder_reachable(c)
+                    if c.get("id") != step_canvas_id and _ladder_reachable(c, opening_ids)
                     and _ladder_open_below(c, counter, n, ever_set, start_flags,
                                            start_traits, written)]
 
@@ -4455,6 +4503,37 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx):
                         else:
                             best = max(best, abs(v))
             once_total += best
+        # The day roll is a farm: `[engine.daily_tick].traitEffects` runs every night,
+        # each effect only while its own `conditions` hold (v2.py:6276-6281). A counter
+        # item there must be true at some value below N, and nothing else on it may be
+        # "never" (PRD v2 CK1 · H1).
+        for ef in (((game.get("engine") or {}).get("daily_tick") or {}).get("traitEffects") or []):
+            if not isinstance(ef, dict) or (ef.get("trait") or ef.get("trait_key")) != key:
+                continue
+            tgt = ef.get("targetType", "player")
+            if (npc and (tgt != "npc" or ef.get("npcId") != npc)) or (not npc and tgt != "player"):
+                continue
+            tick_conds = list(_conditions_of(ef))
+            on_counter = [it for it in tick_conds if _ladder_cond_key(it)[:2] == ("trait", counter)
+                          and _ladder_cond_key(it)[4] == "player"]
+            if on_counter and not any(all(_cmp(v, it.get("operator"), it.get("value"))
+                                          for it in on_counter) for v in range(0, n)):
+                continue
+            if any(_cond_state(it, start_flags, start_traits, ever_set, written) == "never"
+                   for it in tick_conds if it not in on_counter):
+                continue
+            v = ef.get("value")
+            if isinstance(v, dict) and v.get("type") == "random":
+                v = v.get("max", v.get("min"))
+            if not isinstance(v, (int, float)) or isinstance(v, bool):
+                continue
+            eop = ef.get("op") or "add"
+            if eop == "set":
+                sets_ok = sets_ok or bool(_cmp(v, op, val))
+            elif eop == "add" and v != 0 and (v > 0) == rising:
+                cap = ef.get("cap")
+                if cap is None or _cmp(cap, op, val):
+                    farm = True
         if sets_ok or farm:
             return None
         reach = start + once_total if rising else start - once_total
@@ -4465,11 +4544,25 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx):
     return f"a gate this check cannot read: {item}"
 
 
-def ladder_problems(game, state):
-    """(ladders, steps_checked, problems). ladders == 0 means no ladder is declared."""
+def ladder_problems(game, state, notes=None):
+    """(ladders, steps_checked, problems). ladders == 0 means no ladder is declared.
+
+    Two kinds of step are read differently (PRD v2 CK1, 2026-09-30):
+      · THE DOOR STEP — the step whose canvas holds the declared door choice
+        (`_declared_door`). The door opens next release by design, so its unlock is not
+        judged earnable; the step is noted "the door — opens next release" in `notes`
+        (a list the caller passes, appended to) and every other check still runs.
+      · AN OPENING STEP — `fires_from = "opening"`. It fires at a new game, not in a
+        room, so the place, the hours and the person-present checks are skipped, and
+        so is the counter read (the opening plays once, with the counter at 0). It
+        must be step 1 and its canvas must be one the opening plays.
+    """
     ladders = _declared_ladders(state)
     if not ladders:
         return 0, 0, []
+    door = _declared_door(state)
+    door_canvas = door.get("canvas") if door else None
+    opening_ids = frozenset(_opening_canvas_ids(game))
     canvases = {c.get("id"): c for c in game.get("canvases") or []}
     npcs = {n.get("id"): n for n in game.get("npcs") or []}
     ctx = (_opening_flags(game) or set(),
@@ -4501,11 +4594,23 @@ def ladder_problems(game, state):
                 problems.append(f"{tag}: no canvas with that id")
                 continue
             trig = c.get("trigger") or {}
+            from_opening = st.get("fires_from") == "opening"
+            if st.get("fires_from") not in (None, "opening"):
+                problems.append(f"{tag}: fires_from = {st.get('fires_from')!r} — the only "
+                                f"value is \"opening\"")
+            if from_opening:
+                if n != 1:
+                    problems.append(f"{tag}: fires_from = \"opening\" on step {n} — the "
+                                    f"opening plays once, at the start, so it can only be step 1")
+                if cid not in opening_ids:
+                    problems.append(f"{tag}: fires_from = \"opening\", but the opening never "
+                                    f"plays {cid} — it is not the starting canvas or a "
+                                    f"capstone the opening walks into")
             if _is_dev(c):
                 problems.append(f"{tag}: it is a dev canvas — a shipped build strips it")
             if trig.get("is_active", True) is False:
                 problems.append(f"{tag}: the trigger is not active")
-            if trig.get("location") != st.get("where"):
+            if not from_opening and trig.get("location") != st.get("where"):
                 problems.append(f"{tag}: declared at {st.get('where')}, the canvas fires at "
                                 f"{trig.get('location')}")
             # ── hours ──
@@ -4513,7 +4618,9 @@ def ladder_problems(game, state):
             days = [_ladder_day(d) for d in when.get("days") or []]
             frm, to = when.get("from"), when.get("to")
             scheds = trig.get("schedules") or ([trig["schedule"]] if trig.get("schedule") else [])
-            if not days or None in days or not frm or not to:
+            if from_opening:
+                pass                                   # no room, no clock: a new game
+            elif not days or None in days or not frm or not to:
                 problems.append(f"{tag}: `when` must be a window — days, from, to — got {when}")
             elif not scheds:
                 problems.append(f"{tag}: declared {when}, but the canvas has no hours of its own — "
@@ -4541,7 +4648,7 @@ def ladder_problems(game, state):
                 if (conds_obj.get("logic") or "and").lower() not in ("and", "all"):
                     problems.append(f"{tag}: trigger conditions are joined by "
                                     f"{conds_obj.get('logic')}, a step's gate is AND")
-            why = _ladder_counter_ok(conds, counter, n)
+            why = None if from_opening else _ladder_counter_ok(conds, counter, n)
             if why:
                 problems.append(f"{tag}: {why}")
             actual = {_ladder_cond_key(it) for it in conds
@@ -4567,7 +4674,7 @@ def ladder_problems(game, state):
                 problems.append(f"{tag}: no exit sets {counter} to {n} — the ladder stops here")
             # ── the person is there ──
             npc_id = trig.get("npc") if isinstance(trig.get("npc"), str) else None
-            if npc_id and days and None not in days and frm and to:
+            if npc_id and days and None not in days and frm and to and not from_opening:
                 rows = [r for r in (npcs.get(npc_id) or {}).get("schedules") or []
                         if r.get("location") == st.get("where")]
                 a, b = _pr_mins(frm), _pr_end_mins(to)
@@ -4586,9 +4693,13 @@ def ladder_problems(game, state):
                 if absent:
                     problems.append(f"{tag}: bound to {npc_id}, whose schedule does not put them at "
                                     f"{st.get('where')} in {frm}-{to} on {', '.join(absent)}")
-            # ── every unlock is earnable ──
+            # ── every unlock is earnable ── (not the door's: it opens next release)
+            if cid == door_canvas:
+                if notes is not None:
+                    notes.append(f"{tag}: the door — opens next release")
+                continue
             for it in declared_items:
-                why = _ladder_earnable(it, cid, counter, n, game, ctx)
+                why = _ladder_earnable(it, cid, counter, n, game, ctx, opening_ids)
                 if why:
                     problems.append(f"{tag}: {why}")
     return len(ladders), checked, problems
@@ -6972,10 +7083,12 @@ def run_gates(model, game, state=None):
     # G7b — every declared step matches its canvas, and every unlock can be earned.
     # n/a until a ladder is declared; `--ship` is where an undeclared ladder is red.
     # See `ladder_problems` (PRD WS4, 2026-09-26).
-    n_lad, n_steps, lad_probs = ladder_problems(game, state)
+    lad_notes = []
+    n_lad, n_steps, lad_probs = ladder_problems(game, state, notes=lad_notes)
     _N["ladders move forward"] = n_steps
     gate("ladders move forward", None if not n_lad else not lad_probs,
          (f"{n_steps} declared steps across {n_lad} ladder(s), {len(lad_probs)} problem(s)"
+          + "".join(f" · {t}" for t in lad_notes)
           if n_lad else "no ladder declared in board.characters[].ladder"),
          lad_probs[:25])
 
@@ -7083,6 +7196,39 @@ def run_gates(model, game, state=None):
                                     f"never come true — nothing in the game sets or raises it")
         gate("ends on an opening", not problems,
              f"declared door: {door['canvas']} · \"{door['choice']}\" · " + census, problems)
+
+    # G9b — the door can be seen again (PRD v2 CK1 · I24, 2026-09-30). A door is a
+    # locked choice the player is meant to walk past now and come back to. On a
+    # ONE-TIME canvas the first visit spends the canvas, so a player who reaches it
+    # before the unlock never sees the door again. It passes when the door's canvas is
+    # repeatable, or opted into EN1 (`consume_on = "exit"`) with the door choice itself
+    # neither `consumes` nor `final`. A separate row from the ladder's on purpose: a
+    # ladder can be sound and still end on a door shown once. n/a when there is no
+    # door to read; "ends on an opening" reports a missing or broken one.
+    d_door = _declared_door(state)
+    d_canvas = next((c for c in (game.get("canvases") or [])
+                     if d_door and c.get("id") == d_door["canvas"]), None)
+    d_choice = _door_choice(d_canvas, d_door) if d_canvas else None
+    if d_choice is None:
+        gate("the door can be seen again", None,
+             "no declared door found in the game — nothing to re-enter")
+    else:
+        d_trig = d_canvas.get("trigger") or {}
+        opt_in = d_trig.get("consume_on") == "exit"
+        spent = bool(d_choice.get("consumes") or d_choice.get("final"))
+        again = _rep_of(d_trig) or (opt_in and not spent)
+        why = ("the canvas is repeatable" if _rep_of(d_trig) else
+               "consume_on = \"exit\" and the door choice does not consume it" if again else
+               "consume_on = \"exit\", but the door choice is marked "
+               + ("consumes" if d_choice.get("consumes") else "final") if opt_in else
+               "the canvas is one-time (is_repeatable = false)")
+        gate("the door can be seen again", again,
+             f"{d_door['canvas']}: {why}",
+             [] if again else
+             [f"the door is seen once — {d_door['canvas']} spends itself on the first visit, "
+              f"so a player who reaches it before the unlock never sees \"{d_door['choice']}\" "
+              f"again. Make the canvas repeatable, or set consume_on = \"exit\" on its trigger "
+              f"and leave the door choice without consumes/final"])
 
     # G10 — the ASCENT meter must expand the world, never contract it.
     # Judged on the single most-gated meter only. A female-protagonist game runs one
@@ -10756,9 +10902,11 @@ def _ship_ladders(root, slug, game, state, people, player=None):
         return False, f"{len(missing)} of {len(people)} people on the release page have no ladder", \
             [f"{p}: no board.characters[].ladder — nothing says what their steps are"
              for p in missing]
+    # The sub-ledger keeps the declared door, so the door's step is read as the door
+    # here too (PRD v2 CK1 · H2).
     sub = {"board": {"characters": [
         ch for ch in (((state or {}).get("board") or {}).get("characters") or [])
-        if ch.get("id") in people]}}
+        if ch.get("id") in people], "door": _declared_door(state)}}
     _, checked, probs = ladder_problems(game, sub)
     if probs:
         return False, f"{len(probs)} static problem(s) in {checked} steps — not played yet", probs[:10]
@@ -10775,9 +10923,18 @@ def _ship_ladders(root, slug, game, state, people, player=None):
                     res.append(dict(n="-", canvas="-", reached=False,
                                     why=f"page error: {errors[0]}"))
                 return res
-    bad = []
+    # The door's step is not played (PRD v2 CK1 · H2, LO 2026-09-30): it opens next
+    # release, so this release's build cannot climb it, nor any step after it. The
+    # ladder handed to the player stops just before it.
+    door_canvas = (_declared_door(state) or {}).get("canvas")
+    bad, unplayed = [], []
     for p in people:
         lad = ladders[p]
+        steps = sorted(lad.get("steps") or [], key=lambda s: s.get("n", 0))
+        at_door = next((s.get("n") for s in steps if s.get("canvas") == door_canvas), None)
+        if at_door is not None:
+            lad = dict(lad, steps=[s for s in steps if s.get("n", 0) < at_door])
+            unplayed.append(f"{p} step {at_door} ({door_canvas})")
         try:
             res = player(build_path, game, lad)
         except Exception as e:                      # a harness that cannot run is not a pass
@@ -10791,8 +10948,10 @@ def _ship_ladders(root, slug, game, state, people, player=None):
                        f"({miss.get('canvas')}): {miss.get('why')}")
     if bad:
         return False, f"{len(bad)} of {len(people)} ladders stop before the top", bad
+    door_note = (f" · not played, the door — opens next release: {', '.join(unplayed)}"
+                 if unplayed else "")
     return True, (f"{checked} steps across {len(people)} people: each matches its canvas, "
-                  f"each unlock is earnable, and each fired in the build"), []
+                  f"each unlock is earnable, and each fired in the build" + door_note), []
 
 
 def _capture(fn, *args):

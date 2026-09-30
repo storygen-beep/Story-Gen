@@ -523,6 +523,12 @@ def reach_step(page, game, ladder, upto, budget=40, settle=200):
     and searches its choice paths — restoring the step-start state between tries — until
     the counter reads N. `budget` is clicks per step. Dice are pinned for the whole run.
 
+    A step with `fires_from = "opening"` (PRD v2 CK1 · H3) is played from the new game
+    the page opened on: no clock, no place and no `offered` — the opening is not a
+    room offer. If the new game already shows the counter at N (the opening's exit
+    effects run as it renders), the step is reached; otherwise it is searched from its
+    entry node like any other step.
+
     Asserts on state only. Returns [{n, canvas, offered, reached, clicks, path, why}].
     """
     canvases = {c.get("id"): c for c in game.get("canvases") or []}
@@ -538,6 +544,12 @@ def reach_step(page, game, ladder, upto, budget=40, settle=200):
             res = dict(n=n, canvas=cid, offered=False, reached=False, clicks=0, path=[], why="")
             out.append(res)
             have = traits(page).get(counter, 0)
+            from_opening = st.get("fires_from") == "opening"
+            if from_opening and have == n:
+                # A new game plays the opening before the first click, and its exit
+                # effects have already run: the step fired on its own.
+                res.update(offered=True, reached=True)
+                continue
             if have != n - 1:
                 res["why"] = f"{counter} is {have} before step {n}, not {n-1}"
                 break
@@ -548,8 +560,9 @@ def reach_step(page, game, ladder, upto, budget=40, settle=200):
             elif isinstance(day, str):
                 day = next((d for d in DAYS if d.lower().startswith(day[:3].lower())), day)
             hh, _, mm = str(when.get("from", "00:00")).partition(":")
-            set_time(page, day, int(hh), int(mm or 0))
-            stand_at(page, st["where"])
+            if not from_opening:
+                set_time(page, day, int(hh), int(mm or 0))
+                stand_at(page, st["where"])
             for it in st.get("gate") or []:
                 if it.get("flag"):
                     op = it.get("op", "is_true")
@@ -558,7 +571,7 @@ def reach_step(page, game, ladder, upto, budget=40, settle=200):
                     npc = it.get("npc")
                     apply_effect(page, it["trait"], "set", _gate_value(it.get("op"), it["value"]),
                                  target="npc" if npc else "player", npc_id=npc, clamp=False)
-            if not offered(page, st["where"], cid):
+            if not from_opening and not offered(page, st["where"], cid):
                 res["why"] = (f"the room {st['where']} does not offer {cid} on {day} at "
                               f"{when.get('from')} with the declared gate applied")
                 break

@@ -5,6 +5,67 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK1: the ladder check reads the night, the door and the opening (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK1 (H1 · H2 · H3 · I24). The skill test's probation run had four false
+reds on meters the day roll raises, a door step called unearnable although it opens next release by design,
+no way to declare a step the opening plays, and no check that a door can be seen twice.
+
+**What changed.**
+- `scripts/gates.py` `_player_trait_raises`: `[engine.daily_tick].traitEffects` counts as a writer. The engine
+  applies it on every day roll (v2.py:6276-6293; imported at template_import.py:3146). The camelCase key never
+  matched the old `effects|[]` suffix.
+- `_ladder_earnable`: the day roll is a farmable source. Each tick effect counts only while its own
+  `conditions` can hold: a counter item must be true below step N, nothing else on it may be "never", and a
+  `cap` must reach the gate.
+- New helpers `_declared_door` (`release_page.door`, else `board.door`), `_door_choice` and
+  `_opening_canvas_ids` (the starting canvas plus the capstones `_funnel_walk` enters).
+- `ladder_problems(game, state, notes=None)`:
+  - the door step (its canvas holds the declared door) skips the earnable check and is noted "the door —
+    opens next release" in the *ladders move forward* headline;
+  - a `fires_from = "opening"` step skips the place, hours, person-present and counter-read checks. It must be
+    step 1 and name a canvas the opening plays. Any other `fires_from` value fails.
+  - `_ladder_reachable` counts an opening canvas as a setter although it has no place.
+- `_ship_ladders` keeps the declared door in the sub-ledger it checks, so `--ship` reads the door step the
+  same way. The played half stops just before the door's step, since this release's build can't climb it
+  or any step after it (LO, 2026-09-30). The green headline names it: "not played, the door — opens next
+  release: <who> step N (<canvas>)".
+- New ordinary gate **the door can be seen again** (G9b, not a `--ship` BLOCK row). The door's canvas must be
+  repeatable, or `consume_on = "exit"` (EN1) with the door choice neither `consumes` nor `final`. Otherwise
+  it FAILS "the door is seen once".
+- `scripts/shape.py` row 2 skips `fires_from = "opening"` steps.
+- `scripts/playtest.py` `reach_step`: an opening step sets no clock or place and asks no `offered`. If the new
+  game already shows the counter at N (the opening's exit effects run as it renders), it is reached.
+  Otherwise it is searched like any step.
+- `SKILL.md` scoreboard: the *ladders move forward* row names the tick, the door step and opening steps; a
+  new row for *the door can be seen again*. `references/state.md` ladder row documents `fires_from`.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4829 → 4940). Same line, checked by hand.
+- LO's calls (2026-09-30): keep the counter-read skip and the step-1 rule for opening steps; the loosened
+  `--ship` ladder row takes no `since` date.
+- Not done here, on purpose: CK5's cover check (CK5 adds it, with the opening exemption); G9 still reads
+  `board.door` (CK2 switches it to `_declared_door`).
+
+**Verified.**
+- `tests/test_gates_ck1.py`: 30 tests, own fixture, one build. They cover the tick (present, absent,
+  never-true condition, counter above/below the step, cap), the door step (skip, note, release page, other
+  checks still run, headline, `--ship` sub-ledger, the played half skips it and plays every step when there is
+  no door), opening steps (skips, step-1 rule, not-an-opening canvas,
+  bad value, person check, placeless setter, `shape.py` row 2), the door row (one-time, repeatable, EN1
+  non-consuming, EN1 consuming, n/a, not a BLOCK row), and `reach_step` played (reached; not credited when
+  the opening never moves the counter).
+- Skill tests 212 passed (was 182). `--selfcheck`: the index is current. cite_check: SKILL.md + references/
+  0 wrong.
+- Scratch probation (whole tree copied; run from scratch root). *ladders move forward* went from 7 problems
+  to 2: the four `review_days` reds and the `vouch gte 45` door red are gone, and the headline notes
+  tobin_04_home as the door. *the door can be seen again* FAILS, because tobin_04_home is one-time (expected).
+  `--ship` ladder row went from 7 to 2 static problems. The 2 left are delgado step 1: `delgado_01_intake`
+  is probation's starting canvas, so the fix is `fires_from = "opening"` in its ledger (a game edit, not
+  made).
+
+words: 137,172 → 137,262 (+90) · running total 137,262 / 149,283
+
+---
+
 ## 2026-09-30 — EN11: an area can charge a toll on the way in (engine; checked, then built)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §2 EN11 (D10a). "Charge travel only when crossing between areas" had

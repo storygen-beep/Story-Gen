@@ -70,12 +70,15 @@ def check(state, strict=False):
                for n, s in steps if s.get("where") not in locs]
         row("a step's place is declared", not bad, f"{len(steps) - len(bad)}/{len(steps)} steps", bad)
 
-    # 2 · a step's hours are a window (SP2)
+    # 2 · a step's hours are a window (SP2). A step with `fires_from = "opening"` fires at a
+    # new game, not at an hour, so it has no window to check (PRD v2 CK1 · H3).
     if not steps:
         row("a step's hours are a window", None, "n/a — no ladder steps")
     else:
         bad = []
         for n, s in steps:
+            if s.get("fires_from") == "opening":
+                continue
             w = s.get("when") or {}
             days = [gates._ladder_day(d) for d in (w.get("days") or [])]
             if not days or None in days or not w.get("from") or not w.get("to"):

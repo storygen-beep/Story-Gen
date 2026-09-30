@@ -250,9 +250,10 @@ how many fails are [off].
 | traversal heat | most locations carry something, not just the one hot room | `the-board.md` §1 |
 | standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger | `the-board.md` §2 |
 | milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening | this file, "three kinds of content" |
-| ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step. n/a until a ladder is declared | `references/state.md` |
+| ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step (the day roll's `traitEffects` count). The door's step skips the earnable check; a `fires_from = "opening"` step skips place, hours, person and counter read. n/a until a ladder is declared | `references/state.md` |
 | meter ceiling | the top of a bar buys something | `the-board.md` §3 · `state.md` |
 | ends on an opening | the release closes on the door declared in `board.door`: locked at the start, openable later | `the-release.md` |
+| the door can be seen again | the door's canvas is repeatable, or `consume_on = "exit"` with the door choice not consuming — a one-time canvas shows the door once | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
 | **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open | `the-surfaces.md` R9 |
