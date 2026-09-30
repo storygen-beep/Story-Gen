@@ -293,8 +293,7 @@ shuts = "<what she CANNOT do while this is empty>"
 #      on every turn. Two shipped that a player cannot resolve, one of which was
 #      the naming rule's own example of a bad name.
 #
-#   5. WHO signs the map off, and WHEN? Put both in board.map.r1_signoff. The
-#      author signing off their own map is not a sign-off (LO decided).
+#   5. LO signs the map off, like every spine page (the-spine.md).
 
 [[locations]]
 id                   = "<location_id>"

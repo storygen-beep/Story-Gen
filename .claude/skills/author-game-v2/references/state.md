@@ -168,8 +168,8 @@ belong here; only decisions, debts, and promises do.
       // `meters` — which numbers THIS person owns and what each one gates: what his
       //   want.cast[].keeps declares (the-meters.md W1 · W6).
       { "id": "npc_…", "surfaces": 2, "schedule_rows": 3, "why_wanted": "…",
-        "meters": { "want":   "how far he will go — opens his next step",
-                    "warmth": "lover vs user — which next step he offers" } }
+        "meters": { "want":   { "type": "opens his next step", "min": 0, "max": 100 },
+                    "warmth": { "type": "lover vs user", "min": 0, "max": 100 } } }
     ],
 
     // the map, as a place — declared BEFORE locations are written, and the SHAPE
@@ -183,8 +183,10 @@ belong here; only decisions, debts, and promises do.
       "roots":      ["location_id", "…"],   // every root; a second one is joined by a travel canvas
                                             //   and marked offscreen or sealed for gate 11 (the-map.md R3)
       "homes":      { "npc_…": "location_id", "npc_…": "offscreen" },
-      "bridges":    [ { "from": "location_id", "to": "location_id", "costs": { "time": 0 } } ],
-      "r1_signoff": "WHO signed it and WHEN, then what they saw"
+      "scale":      "one street · a district · a town",
+      "alive":      "tight slice" | "living world"        // the-map.md, "Aliveness"
+      // travel costs live on the area: [[locations]] crossing_costs (engine.md §22). A place's
+      // `name` comes from want.places[].
     },
 
     // SP4 — the hold's pressure, money or not. `stages` mirrors [settings.rent] stages;
@@ -348,10 +350,6 @@ interior, so it is also the only renewable source of new characters.
 **`board.map.home_base`** — where she sleeps. Older ledgers may carry the retired key `dwelling`;
 nothing reads it.
 
-**`board.map.r1_signoff`** — **who** signed the map off and **when**. A sign-off written by the
-author of the map is not a sign-off, and one with no name and no date cannot be checked.
-*(LO decided.)* `the-map.md`, "What is checked".
-
 **`board.economy.currency`** — declaring it is strictly better than letting the gates infer one
 from `player.core_traits`; the headline says which was used, and inference picks wrong on a game
 with two currencies. **`board.economy.symbol`** is the notation that currency is written in, and it
@@ -397,7 +395,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.characters` | *residents have homes* · *guidance exists* | `[{ id, name, role }]` |
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
-| `board.needs[]` | *a need shuts a door* | `[{ key, decay_per_day, shuts }]` — and every key must be READ by a condition somewhere in the game |
+| `board.needs[]` | *a need shuts a door* | `[{ key, falls, fills, costs, shuts }]` — and every key must be READ by a condition somewhere in the game |
 | `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
 | `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place, past midnight included; a `fires_from = "opening"` step is exempt. The per-room count stays `occupancy_rows` |

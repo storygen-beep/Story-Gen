@@ -17,7 +17,7 @@ between an ascent and a button.
 **M8–M10 — the body.** A need falls on its own, she refills it, and while it is empty something is
 shut. Missing until 2026-08-18.
 
-> **Gate `the climb is paid for`** (gates.py:8183) walks every trait any condition reads, not just
+> **Gate `the climb is paid for`** (gates.py:8567) walks every trait any condition reads, not just
 > the declared tiers. It fails when any route into a rung that raises a gated meter carries no
 > `costs`, no `max_triggers_per_day` on the target's trigger, and no day-cap flag cleared in
 > `[engine.daily_tick]`. One free route is enough to fail. It prints clicks and in-game time to the
@@ -265,7 +265,7 @@ on the same scale.
 ⚠️ **It follows W1's fork.** A ladder game is measured on the tiers `board.ascent_tiers` names; a
 roster game (`who_climbs = "cast"`, which leaves that list empty by definition) is measured on its
 per-character meters instead. A lint that read only the first of those would print nothing
-for a roster game (`gates.py:3402` takes the `who_climbs == "cast"` branch). **Half a fork is not
+for a roster game (`gates.py:3400` takes the `who_climbs == "cast"` branch). **Half a fork is not
 an instrument.** A gate above the meter's
 ceiling is skipped on both sides: that is a locked door (`the-release.md` G9), not a rung.
 
@@ -784,7 +784,7 @@ always compute the same two numbers:
 clicks to the top band  ·  in-game minutes to the top band
 ```
 
-`the climb is paid for` prints both numbers for every free route (gates.py:8249).
+`the climb is paid for` prints both numbers for every free route (gates.py:8567).
 
 ### M3 · The throttle menu — four levers, and none of them works alone
 

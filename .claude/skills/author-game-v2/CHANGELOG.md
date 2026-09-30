@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC9d: doc slips, typed meters, and map keys nothing read (doctrine + shape.py)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9d (H26 · H27 · H28 · H29 · H33):
+- the explicit floor could be met by repeating one word (H26);
+- a walk-on can't be labelled by his role (H27);
+- slips (H28): a need had two shapes in `state.md`; W1b's +1 against the-arc's +5; stale citations;
+- "declared" meant only that a name existed (H29);
+- the docs asked for `board.map.bridges`, `r1_signoff`, map scale and aliveness, and nothing read them (H33).
+
+**What changed.**
+- `references/register.md`: the floor is a game-wide share, not a quota per beat, and repeating one word is not
+  craft. The word list is unchanged.
+- `references/engine.md` §25: a walk-on uses `speaker = "unknown"` ("Stranger") and the narration line before
+  names his role. A role-labelled speaker is a known gap.
+- `references/state.md`:
+  - the need row is `{key, falls, fills, costs, shuts}`;
+  - `board.map` loses `bridges` and `r1_signoff` and gains `scale` and `alive`, and a note that travel costs are
+    area `crossing_costs` and a place's `name` comes from `want.places[]`;
+  - the meters example is `{type, min, max}`.
+- `references/the-arc.md` A4: the +5/+10 example sits on top of W1b-i's +1 unit.
+- `references/the-meters.md`: stale citations fixed: `gates.py:8183` and `:8249` → `:8567`, and `:3402` → `:3400`.
+- `references/the-map.md`, `references/engine.md`, `templates/board.toml`:
+  - bridges become area `crossing_costs`;
+  - `r1_signoff` is removed; the map is signed like every spine page;
+  - the schema shows `roots`, `scale`, `alive`.
+- `scripts/shape.py`:
+  - a new row 3b, **"a person's meter has a type and range"**. A bare description string WARNS, a new tag,
+    listed and never a FAIL. `--ship` counts only `False` as bad, so a WARN never reds it.
+  - the tally prints warns.
+- `SKILL.md` tools row names the WARN.
+
+**Verified.**
+- `tests/test_shape_dc9d.py`: 4 cases (typed passes, bare warns, a warn exits 0 and prints `[WARN]`, none is n/a).
+  The `test_shape.py` fixture's meter is typed.
+- Suite: 327 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Greps: `bridges`, `r1_signoff`, `gates.py:8183`, `:8249`, `:3402` and `decay_per_day` are 0 in skill files.
+- shape.py (read-only): orientation, probation, the_balance and vesper_two WARN (0/7, 0/8, 0/9, 0/7 typed);
+  members_only n/a.
+
+words: 138,682 → 138,697 (+15) · running total 138,697 / 149,283.
+
 ## 2026-09-30 — DC9c: six sheet templates; an idea-stage clip may be intent; the opening clock counts travel (templates)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9c (I20 · E6 · I7):

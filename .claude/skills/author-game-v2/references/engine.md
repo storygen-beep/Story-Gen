@@ -695,7 +695,7 @@ v2.py:15885               has_location_costs = any(...)   # the travel-cost bloc
 
 **This is what makes a schedule grid matter.** With free instant travel, "who is where at which
 hour" is a lookup table. Charge twenty minutes each way and the player cannot be everywhere, so
-presence becomes a constraint. Put the cost on **bridges between zones**, never on every room.
+presence becomes a constraint. Put the cost on the **area**, never on every room.
 
 **A bridge between zones is `crossing_costs` on the area.** A room's `costs` are charged on every
 entry, so a container's `costs` can't mean "charged when she crosses into this area". A link
@@ -1043,6 +1043,10 @@ Read and cite before using; delete from this list once promoted above.
   ```
 
   So `speaker = "npc_bev"` with no `npcId` renders "NPC", not Bev.
+
+  **A walk-on with no id** uses `speaker = "unknown"` ("Stranger"), and the narration line just
+  before his dialogue names his role. A role-labelled speaker is a known gap, left for a later
+  engine item.
 
 - **`thought_bubble`** — `"player"` renders the player's thought label. `"unknown"`, **or any
   speaker that does not start with `npc_` or `npc`**, renders **"💭 Someone is thinking:"**

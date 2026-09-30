@@ -25,7 +25,7 @@ def full():
             "locations": [{"id": "bar"}, {"id": "flat"}],
             "economy": {"currency": "money", "obligation_amount": 100, "week_income": 150},
             "characters": [
-                {"id": "npc_a", "meters": {"trust": "access"},
+                {"id": "npc_a", "meters": {"trust": {"type": "access", "min": 0, "max": 100}},
                  "schedule": [{"where": "bar", "weekdays": ["Mon", "Wed"], "from": "17:00", "to": "21:00"},
                               {"where": "flat", "weekdays": ["Mon", "Wed"], "from": "18:00", "to": "23:00"}],
                  "ladder": {"counter": "a_stage", "steps": [

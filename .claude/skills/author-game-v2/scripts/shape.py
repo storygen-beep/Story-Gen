@@ -49,7 +49,7 @@ def _person(p):
 
 
 def check(state, strict=False):
-    """[(name, ok, headline, detail)] — ok True / False / None (n/a)."""
+    """[(name, ok, headline, detail)] — ok True / False / None (n/a) / "warn" (listed, never a FAIL)."""
     state = state or {}
     board = state.get("board") or {}
     want = state.get("want") or {}
@@ -122,6 +122,20 @@ def check(state, strict=False):
                     flags.add(it["flag"])
         row("a step's variables are declared", not bad,
             f"{len(steps)} steps · traits checked, {len(flags)} flag(s) listed below", bad)
+
+    # 3b · a person's meter has a type and a range (PRD v2 DC9d · H29). `meters[k]` is
+    # `{type, min, max}`; the older bare description string still declares the name (row 3), so
+    # it WARNS here rather than failing — a name alone says nothing about its range or reader.
+    mdecl = [(c.get("id"), k, v) for c in (board.get("characters") or []) if isinstance(c, dict)
+             for k, v in ((c.get("meters") or {}).items())]
+    if not mdecl:
+        row("a person's meter has a type and range", None, "n/a — no board.characters[].meters")
+    else:
+        bare = [f"{who}.{k}: a description string — write {{type, min, max}}"
+                for who, k, v in mdecl
+                if not (isinstance(v, dict) and v.get("type") and "min" in v and "max" in v)]
+        row("a person's meter has a type and range", "warn" if bare else True,
+            f"{len(mdecl) - len(bare)}/{len(mdecl)} meters typed", bare)
 
     # 4 · dependencies resolve (SP3)
     deps = [d for d in (state.get("dependencies") or []) if isinstance(d, dict)]
@@ -413,15 +427,16 @@ def main(argv=None):
     print(f"  {path}")
     print(f"  {'─'*72}")
     for name, ok, head, detail in rows:
-        tag = "n/a " if ok is None else "PASS" if ok else "FAIL"
+        tag = "n/a " if ok is None else "WARN" if ok == "warn" else "PASS" if ok else "FAIL"
         print(f"  [{tag}]  {name:42s} {head}")
         for d in detail[:10]:
             print(f"          · {d}")
     print(f"  {'─'*72}")
     if flags:
         print(f"  flags a step's gate reads — listed, not judged: {', '.join(flags)}")
-    print(f"  {len(rows) - len(failed) - sum(1 for r in rows if r[1] is None)} pass · "
-          f"{len(failed)} fail · {sum(1 for r in rows if r[1] is None)} n/a")
+    warned = sum(1 for r in rows if r[1] == "warn")
+    print(f"  {len(rows) - len(failed) - warned - sum(1 for r in rows if r[1] is None)} pass · "
+          f"{len(failed)} fail · {warned} warn · {sum(1 for r in rows if r[1] is None)} n/a")
     print()
     return 1 if failed else 0
 

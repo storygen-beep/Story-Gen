@@ -133,7 +133,8 @@ id = "<exterior_location_id>"
 > *(LO decided.)* That is why this shows one key and no rooms.
 
 **Gate 28 checks this mechanically**, off `entry_from`. It is the half of R1 a parser can actually
-see. Declare the exterior in `board.map.exterior` and the routes across it in `board.map.bridges`.
+see. Declare the exterior in `board.map.exterior`; the cost of crossing it goes on the area as
+`crossing_costs` (`engine.md` §22).
 
 ⚠️ **A missing map fails too.** A game that declares no `board.map` block fails both `the map is a
 place` and `residents have homes`. An undeclared board is undone work, and the gates report it as
@@ -268,7 +269,7 @@ All five verified against source; full citations in `references/engine.md`.
 **Travel friction is what makes schedules bite.** A premise that says *"ten minutes' walk away"*
 while arriving costs nothing has written a fact the player never experiences. Put twenty minutes on
 the bridge and being in two places stops being free — which is the entire point of having authored
-a schedule grid at all. Put the cost on **bridges between zones**, never on every room.
+a schedule grid at all. Put the cost on the **area** (`crossing_costs`), never on every room.
 
 ---
 
@@ -284,8 +285,9 @@ a schedule grid at all. Put the cost on **bridges between zones**, never on ever
     "home_base":  "<location_id — where she sleeps>",
     "exterior":   "<location_id — the ground everything else sits on. MUST be a root.>",
     "homes":      { "<npc_id>": "<location_id | offscreen>" },
-    "bridges":    [ { "from": "<location_id>", "to": "<location_id>", "costs": { "time": 0 } } ],
-    "r1_signoff": "<WHO signed it and WHEN, then what they saw. 'the author' is not a name.>"
+    "roots":      ["<location_id>"],
+    "scale":      "<one street · a district · a town>",
+    "alive":      "<tight slice | living world>"
   }
 }
 ```
@@ -337,7 +339,4 @@ gate 28 takes both: *did you choose a shape* (a declaration), and *is the outsid
 outside* (`entry_from`, which no ledger can talk its way out of). What is left for the human is the
 part that genuinely needs eyes.
 
-> ⚠️ **`r1_signoff` records who and when.** *(LO decided.)* A sign-off with no name and no date
-> cannot be checked. A sign-off by the author of the thing being signed
-> off is not a sign-off, and a gate cannot tell the difference — which is exactly why it is written
-> down here instead.
+> The map is signed like every spine page: LO signs it once LO has read it (`the-spine.md`).

@@ -180,7 +180,8 @@ sacrificing a single line of the psychology, which is the part that makes the ga
 
 **Not word-stuffing.** Eleven rewrites moved a game from 7.5% to 9.4% without adding one
 gratuitous noun. The words arrived because the camera stayed on the body long enough to need
-them, not because they were sprinkled in.
+them, not because they were sprinkled in. **The floor is a share across the whole game, not a quota
+per beat, and repeating one word is not craft**: the counter takes every repeat, the reader does not.
 
 **Not loosening the wordlist.** `come` was excluded from the frozen list because it matches "come
 downstairs" everywhere. When prose scores low, the prose is what is wrong. The list has been

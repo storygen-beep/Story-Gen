@@ -157,9 +157,10 @@ together or the result is either a free elevator or a wall.**
 > states a locked door the same way: *"You can't launch an orgy, you need more girls working in
 > here."*
 >
-> Two refinements have one example, in one game (`family-ties`, numbers only): the grant is
-> scaled by where she already is (+5 below 30, +10 above), and the raise stops at the next
-> threshold, so she cannot climb past a rung by repeating the one below it.
+> Two refinements have one example, in one game (`family-ties`, numbers only), on top of the +1
+> unit (`the-meters.md` W1b-i): the grant is scaled by where she already is (+5 below 30, +10
+> above), and the raise stops at the next threshold, so she cannot climb past a rung by repeating
+> the one below it.
 
 Two exits per page is the whole navigation of a five-page scene. Compare the act-menu figures
 in `the-surfaces.md` R3b — field median 2 options, span 1. **The same narrowness, applied down
