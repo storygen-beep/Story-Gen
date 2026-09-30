@@ -11584,7 +11584,12 @@ def main():
     arg = sys.argv[1]
     path = arg if arg.endswith(".toml") else f"games/{arg}/toml_phases/7_final_game.toml"
     if not os.path.exists(path):
-        print(f"not found: {path}")
+        # Before the build there is no TOML, and the ledger is what can be checked (PRD v2
+        # DC9e · H16): point at shape.py rather than a bare "not found".
+        if not arg.endswith(".toml") and os.path.exists(f"games/{arg}/v2_state.json"):
+            print(f"no TOML yet: use shape.py {arg} (checkpoint A reads the ledger alone)")
+        else:
+            print(f"not found: {path}")
         sys.exit(2)
 
     model, game = build(_load(path))

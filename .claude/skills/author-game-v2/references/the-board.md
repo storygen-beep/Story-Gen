@@ -424,14 +424,14 @@ wardrobe_location = "her_room"
 Record in `v2_state.json`: every location with its budget and current fill, every character
 with its surface count and schedule rows, the ascent meter and its ceiling.
 
-Then run the scoreboard — it works on an empty world and will simply report the debt:
+Then run the check that reads the ledger alone — before any TOML exists, `gates.py` has nothing to
+read and says so:
 
 ```
-python3 .claude/skills/author-game-v2/scripts/gates.py <slug>
+python3 .claude/skills/author-game-v2/scripts/shape.py <slug>
 ```
 
-Gates 1, 5, 6, 8 and 10 are all decidable from the Board alone. Fix them here, where it is
-cheap, rather than after content is hung on a broken frame.
+The scoreboard (`gates.py`) takes over once the build writes `7_final_game.toml`.
 
 Then set `phase = "board"` and move to `references/the-sheets.md`: write the sheets LO reads and
 signs, before any TOML.

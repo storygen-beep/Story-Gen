@@ -162,7 +162,8 @@ one sentence whose first clause is his arousal and whose second is hers. `engine
 
 ## Dispatch
 
-Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
+Resolve the game slug from the request, then read `games/<slug>/v2_state.json`. **Stop at every phase
+boundary and wait for LO's pick or signature** before starting the next phase's work.
 
 | `phase` | do this | reference | the next phase is set when |
 |---|---|---|---|
@@ -171,7 +172,7 @@ Resolve the game slug from the request, then read `games/<slug>/v2_state.json`:
 | `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, one per man, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
 | `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
-| `board` | **write the sheets** — the design LO reads and signs, before any TOML | `references/the-sheets.md` | every sheet is [READY] and signed → `sheets` |
+| `board` | **the sheets** — the design LO reads and signs, before any TOML. Where LO writes them, hand drafts over in `proposals/` (S13) | `references/the-sheets.md` S13 · `templates/sheets/` | every sheet is [READY] and signed → `sheets` |
 | `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
 | `release` | run the loop — pitch, attack, write, gate, read, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
 

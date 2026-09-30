@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC9e: stop at every phase boundary; before TOML the check is shape.py (process)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9e (G2 · H16 · I21):
+- the skill never said to stop at a phase boundary, and a session wrote all seven spine pages before LO picked
+  the idea (G2, checked: a real gap);
+- `the-board.md` said the scoreboard works on an empty world, but `gates.py` stops with `not found` when there is
+  no TOML (H16);
+- the sheets dispatch row said "write the sheets", which clashes with LO's rule; S13 was never pointed at (I21).
+
+**What changed.**
+- `SKILL.md` Dispatch:
+  - "Stop at every phase boundary and wait for LO's pick or signature";
+  - the `board` row is "the sheets": where LO writes them, drafts are handed over in `proposals/` (S13), with
+    `templates/sheets/`.
+- `references/the-board.md`: before TOML the check is `shape.py <slug>`, and the scoreboard takes over after the
+  build. The "empty world" claim and the "gates decidable from the Board" line are gone.
+- `scripts/gates.py`: with no TOML but a ledger, it prints "no TOML yet: use shape.py <slug> (checkpoint A reads the
+  ledger alone)", still exit 2.
+
+**Verified.**
+- `tests/test_gates_dc9e.py`: 2 cases (a ledger without TOML points at shape.py; nothing at all is still "not
+  found").
+- Suite: 329 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0.
+- Greps: "it works on an empty world" 0; "**write the sheets**" 0.
+
+words: 138,697 → 138,711 (+14) · running total 138,711 / 149,283.
+
 ## 2026-09-30 — DC9d: doc slips, typed meters, and map keys nothing read (doctrine + shape.py)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC9d (H26 · H27 · H28 · H29 · H33):
