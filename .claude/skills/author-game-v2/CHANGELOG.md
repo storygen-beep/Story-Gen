@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — shape.py: her own starting values (`board.player_start`)
+
+**Why.** LO's probe after the follow-ups: in "a step's gate can be reached", a gate with no `npc` (her own trait)
+always started from 0, because the ledger had nowhere for her starting values. Her nerve starting at 20, step 1
+raising it by 5 and step 2 gated `nerve gte 20` FAILED with "reach 5".
+
+**What changed.**
+- `scripts/shape.py`: optional `board.player_start = {trait: n}`. A gate without `npc` starts from it (else 0). A
+  gate with `npc` still starts from his `meters[k].start`, else `.min`.
+- Documented in `references/state.md` (next to `raises`) and in `references/the-spine.md` checkpoint A.
+
+**Verified.**
+- `tests/test_shape_dc9b.py` gains the probe: it fails without `player_start` ("reach 5") and passes with
+  `{nerve: 20}`.
+- Suite: 336 passed. `--selfcheck`: the index is current. cite_check: 0.
+- The five ledgers are still n/a (read-only).
+
+words: 139,080 → 139,097 (+17) · running total 139,097 / 149,283.
+
 ## 2026-09-30 — Doctrine phase 3 follow-ups (review of DC1–DC11)
 
 **Why.** LO's review of phase 3 listed nine must-fixes and eleven small ones. This entry covers all twenty.

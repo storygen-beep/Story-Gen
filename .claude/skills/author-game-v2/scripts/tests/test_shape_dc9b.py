@@ -116,3 +116,12 @@ def test_a_trait_nothing_in_the_ledger_raises_is_not_judged():
 
 def test_no_raises_anywhere_is_na():
     assert verdict(ledger([step(1), step(2, gate=gate(10))]))[0] is None
+
+
+def test_her_starting_value_comes_from_player_start():
+    """Her own trait (a gate with no npc) starts from board.player_start, else 0."""
+    st = ledger([step(1, {"nerve": 5}), step(2, gate=gate(20))])
+    ok, detail = verdict(st)
+    assert ok is False and "reach 5" in detail[0]
+    st["board"]["player_start"] = {"nerve": 20}
+    assert verdict(st)[0] is True

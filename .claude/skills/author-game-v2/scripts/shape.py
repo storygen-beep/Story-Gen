@@ -324,8 +324,9 @@ def check(state, strict=False):
     # `board.daily_raises = {trait: per_day}` and `board.repeat_raises = {trait: per_visit}` (a
     # repeatable in the TOML raises it). Only traits a step's `raises` names are judged; a trait the
     # daily tick or a repeatable raises can always be reached, and any other trait is not this
-    # check's to fail. A gte/gt gate passes if the trait's starting value (`meters[k].start`, else
-    # `.min`, else 0) plus the raises of the steps before it reaches the value. "Before" = the same
+    # check's to fail. A gte/gt gate passes if the trait's starting value (his: `meters[k].start`,
+    # else `.min`; hers, a gate with no `npc`: `board.player_start[k]`; else 0) plus the raises of
+    # the steps before it reaches the value. "Before" = the same
     # person's lower steps, plus every step it depends on (SP3), transitively; a gate with `npc`
     # counts only that person's raises. Bad input is listed, never a crash.
     def _num(v):
@@ -366,7 +367,11 @@ def check(state, strict=False):
     meters = {c.get("id"): (c.get("meters") or {}) for c in (board.get("characters") or [])
               if isinstance(c, dict)}
 
+    player_start = board.get("player_start") if isinstance(board.get("player_start"), dict) else {}
+
     def _start(npc, trait):
+        if npc is None:
+            return _num(player_start.get(trait)) or 0          # her own trait
         m = (meters.get(npc) or {}).get(trait)
         if isinstance(m, dict):
             for k in ("start", "min"):
