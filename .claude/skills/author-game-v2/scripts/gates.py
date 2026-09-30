@@ -7094,29 +7094,48 @@ def run_gates(model, game, state=None):
 
     # G8 — no meter may rise past the content it can buy.
     # A meter's PROMISED ceiling is the top band the player can see on the sidebar
-    # (sidebar_items[].bands[]). A top band with no `max` is unbounded by design
-    # and promises nothing, so it is skipped rather than guessed at.
+    # (sidebar_items[].bands[]).
+    #
+    # A FALLING METER IS NOT A CLIMB (PRD v2 CK3 · H5, 2026-09-30). A meter that starts
+    # full and drains (`clean` at 100 with a "90+" band) failed "bands promise something
+    # at 90": the player starts in that band, so nothing has to buy it. Two exemptions:
+    # the band holding the meter's STARTING value is not a promise, and a meter declared
+    # `falling = true` in [[traits.labels]] is not judged at all. `falling` is read here
+    # only; the importer keeps just its own label keys (template_import.py:3324-3335).
     tops = collections.defaultdict(int)
     for c in model:
         for k, op, v in c["traits"]:
             if isinstance(v, (int, float)) and op in ("gte", "gt", "eq"):
                 tops[k] = max(tops[k], int(v))
+    falling = {l.get("key") for l in ((game.get("traits") or {}).get("labels") or [])
+               if isinstance(l, dict) and l.get("falling") is True}
+    npc_start = {n.get("id"): (n.get("core_traits") or {}) for n in (game.get("npcs") or [])}
     over = []
     for item in (game.get("sidebar_items") or []):
         key = item.get("trait")
         bands = item.get("bands") or []
-        if not key or not bands or key not in tops:
+        if not key or not bands or key not in tops or key in falling:
             continue
-        # EVERY BAND BOUNDARY IS A PROMISE. A meter showing bands at 15/35/55/75 tells the
-        # player there is something different at each of those. So the threshold that must be
-        # bought is the TOP band's `min` — not the highest `max`, which is missing entirely
-        # once the top band is (correctly) left unbounded.
-        top_min = max((b["min"] for b in bands if isinstance(b.get("min"), (int, float))), default=None)
+        start = (npc_start.get(item["npc_id"], {}) if item.get("npc_id")
+                 else ((game.get("player") or {}).get("core_traits") or {})).get(key, 0)
+
+        def holds_start(b):
+            lo, hi = b.get("min"), b.get("max")
+            return (isinstance(start, (int, float)) and isinstance(lo, (int, float))
+                    and lo <= start and (hi is None or start <= hi))
+        # EVERY BAND BOUNDARY IS A PROMISE — except the one she starts in. A meter showing
+        # bands at 15/35/55/75 tells the player there is something different at each of
+        # those. So the threshold that must be bought is the highest `min` left after the
+        # starting band is dropped — not the highest `max`, which is missing entirely once
+        # the top band is (correctly) left unbounded. A rising meter starting at 0 drops
+        # only its bottom band, so it is still judged at its top band's `min`.
+        promised = [b["min"] for b in bands
+                    if isinstance(b.get("min"), (int, float)) and not holds_start(b)]
+        top_min = max(promised, default=None)
         if top_min is None or top_min == 0:
             continue
         if tops[key] < top_min:
-            empty = [b["min"] for b in bands
-                     if isinstance(b.get("min"), (int, float)) and b["min"] > tops[key]]
+            empty = [m for m in promised if m > tops[key]]
             over.append(f"{key}: bands promise something at {'/'.join(str(int(e)) for e in empty)}, "
                         f"but the highest authored gate is {tops[key]}")
     _N["meter ceiling"] = len(tops)

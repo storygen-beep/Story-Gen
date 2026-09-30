@@ -313,9 +313,11 @@ Three hard rules, all gated:
 - **Rising must expand.** For each ascent tier, `gte`/`gt` gates must outnumber `lt`/`lte`.
   Gate 10 checks the three most-gated meters. A meter whose rise mostly *closes* content is a
   descent wearing an ascent's clothes.
-- **The ceiling must be bought.** The top band's `max` is a promise to the player. If the
-  highest authored gate on that trait is below it, the remaining points buy nothing. Gate 8.
-  *(A top band with no `max` is unbounded on purpose and promises nothing.)*
+- **The ceiling must be bought.** Every band boundary is a promise to the player, so the highest
+  band `min` needs an authored gate on that trait at or above it, or the points past the last gate
+  buy nothing. Gate 8. Two exceptions: the band holding the meter's **starting value** (a meter that
+  starts full and drains starts there), and a meter declared `falling = true` in `[[traits.labels]]`
+  (read by `gates.py` only).
 - **Every meter you raise is read by something.** Gate 33, `the-meters.md` W3.
 
 **Where ceilings live:** `sidebar_items[].bands[]`. **Not** in `player.core_traits`, which is

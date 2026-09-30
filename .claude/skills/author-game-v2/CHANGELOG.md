@@ -5,6 +5,39 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK3: meter ceiling skips the band a meter starts in, and falling meters (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK3 (H5). A meter that starts full and drains failed "bands promise
+something at 90": probation's `clean` starts at 100, inside its own 90+ band, so no gate has to buy it.
+
+**What changed.**
+- `scripts/gates.py` G8 *meter ceiling*: the band holding the meter's starting value is dropped before the
+  highest promised `min` is taken. The start is `player.core_traits`, or the NPC's `core_traits` when the
+  sidebar item has `npc_id`.
+  - A meter declared `falling = true` in `[[traits.labels]]` is not judged. `falling` is a checker-only key;
+    the importer keeps only its own label keys (template_import.py:3324-3335).
+  - Rising meters are unchanged: one starting at 0 drops only its bottom band.
+  - The comments above the gate are rewritten to say this.
+- `references/the-board.md` "The ceiling must be bought": the bullet is rewritten, not appended to. It used
+  to say the top band's `max` is the promise and an unbounded top band promises nothing. The code has judged
+  the highest band `min` ("every band boundary is a promise") since before this change. It now says that,
+  plus the two exceptions.
+- Gate name unchanged and not a `--ship` row, so there is no scoreboard edit and no `since` date.
+
+**Verified.**
+- `tests/test_gates_ck3.py`: 5 passed. The cases are start-band skipped (`clean` 100 with a 90+ band, gate
+  at 60: PASS), a falling meter still judged below its start (gate at 40: "at 60" only), rising 15/35/55/75+
+  still judged at 75, `falling = true` not judged (undeclared: judged), and an NPC item reading the NPC's
+  start. Against the pre-change gates.py, 4 of 5 fail; the rising case passes on both, as it should.
+- Skill tests 223 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation: *meter ceiling* went from 2 lines to 1. The `clean` line is gone. `battery` narrows from
+  "at 50/90" to "at 50": its 90+ band holds the start, and the highest gate is 30. Clearing it needs
+  `falling = true` on battery in the game's `[[traits.labels]]` (a game edit, not made).
+
+words: 137,267 → 137,293 (+26) · running total 137,293 / 149,283
+
+---
+
 ## 2026-09-30 — CK2: "ends on an opening" reads the door from the release page (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK2 (H4). G9 read only `board.door`, so a game that declared its door
