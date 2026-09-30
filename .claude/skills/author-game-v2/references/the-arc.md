@@ -105,7 +105,8 @@ is paid for with three visits. **Information the player earns is a rung; informa
 narrates is exposition.**
 
 Note what steps 0–3 are made of: a **place**, an **hour**, and **who else is in the building**.
-That is `the-clock.md` and `the-map.md` doing arc work. An arc opening needs no new systems.
+That is `the-clock.md` and `the-map.md` doing arc work. An arc opening needs no new systems. Night
+one's explicit beat comes from outside the arc: a stranger or a one-off (A15).
 
 ---
 
@@ -462,7 +463,7 @@ pivot defect (`register.md`, "Where the interiority goes instead").
 | exit | when | what it is about |
 |---|---|---|
 | **refusing** | at the door, before anything | whether she wants this at all — parked or final, A3 |
-| **stopping** | mid-scene, with it already happening | how he takes being stopped |
+| **stopping** | mid-scene, with it already happening | how he takes being stopped; in a paid scene it costs part of the pay (A15, thin) |
 | **chickening out** | after she already agreed | what she owes, and what it costs to renege |
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` ships **113 `*Abort` passages**
@@ -574,6 +575,30 @@ Four rules follow:
   stuck", and 0 are about his character.
 - **A "no" parks the step** (A3); only a labelled final no closes his path, never the person.
 - **A pitch is a step on a named relationship** (`the-release.md`, "The next step").
+
+---
+
+## A15 · Her climb into paid sex — introduced, a first time, then the repeatable
+
+*(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`.)*
+
+- **Introduced first.** Someone raises it in a one-time scene before the activity appears — the
+  activity's version of "every hub is met first" (`the-first-hour.md` F5). 4 of 5 games do (R1:76).
+  *(check: pending NC2)*
+- **A first time before every paid repeatable:** his want → her hesitation → a price named or
+  bargained → the act → her feeling after, as its own beat. Then the repeatable opens (R1:138).
+  *(check: pending NC2)*
+- **The repeatable changes with her level:** two voices per act, reluctant and eager, split on her main
+  sex trait (**thin**, R1:170), and a menu that grows as the acts open one by one (`the-surfaces.md`
+  R3c). *(check: pending NC2)*
+- **The start matches the Want's bottom.** Nothing paid is reachable on a new save before its
+  introduction and first time; the minimum path is introduced → at least one step → first time. No day
+  count (R1:268). *(check: pending NC2)*
+- **Night one** may carry one hot moment from a stranger or a one-off — never the paid route and never
+  the main man. 3 of 5 games have a day-one scene of that kind (R1:296).
+- **Always a no before** (5 of 5, R1:228). "Stop him" at each stage of a paid scene costs part of the
+  pay (**thin**: only one game does it fully, R1:218-228). The route ends only through a labelled final
+  no (A3). *(check: pending NC2)*
 
 ---
 

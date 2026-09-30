@@ -445,8 +445,9 @@ is never finished. *(LO decided.)*
   "every gate green")*. The BLOCK list is green; the REPORT list is printed and LO judges it when he
   plays. A red REPORT row is not a reason to hold the release, and not a reason to ignore it either.
 - **The explicit floor is met from minute one**, including the traversal layer.
-- **First explicit beat early.** The strongest-retained game in the comparison set is explicit
-  on night one, two clicks from free roam.
+- **First explicit beat early** — from a stranger or a one-off, never the paid route or the main man
+  (`the-arc.md` A15). The strongest-retained game in the comparison set is explicit on night one,
+  two clicks from free roam.
 - **The first hour is authored, not assumed** — `references/the-first-hour.md`. One opening shape,
   not both; the funnel hands over into something that is open at the minute it lands; every
   character is met before their portrait goes live; the anchor says what kind of place it is the

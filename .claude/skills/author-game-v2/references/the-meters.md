@@ -129,7 +129,8 @@ what the player plays** — not a switch that flips at a threshold.
 > (`zaras-school-life`, numbers only) has 36 act scenes where she simply wants him against 5 where
 > she gives herself a reason.
 
-How to write one event at several levels: `register.md`, "One event, several levels".
+How to write one event at several levels: `register.md`, "One event, several levels". A paid
+repeatable carries the slope as two voices per act (`the-arc.md` A15, thin).
 
 ### W1b-i · The unit is +1, and the raise goes through a named widget
 

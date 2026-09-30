@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC5: her climb into paid sex — introduced, a first time, then the repeatable (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC5 (D7 · E5 · J2 · J3 · J4). Nothing said:
+- a paid activity is introduced before it appears (J3);
+- it gets a first time before the repeatable opens (J4);
+- how the repeatable changes with her level.
+
+The first release asked for an explicit beat on night one while A2 says an arc's first third has no sex (E5). D7
+(LO): all six R1 options accepted.
+
+**What changed.**
+- `references/the-arc.md`: a new **A15**, six rules (LO decided, D7), each citing R1's "How sure" line. No new
+  quotes.
+  - introduced first (R1:76). It points at `the-first-hour.md` F5 rather than the SKILL.md scoreboard row
+    (rule 11).
+  - a first time before every paid repeatable (R1:138).
+  - two voices per act, marked **thin** (R1:170), and a growing menu (R3c).
+  - the start matches the Want's bottom, with a minimum path and no day count (R1:268).
+  - night one is a stranger or a one-off, never the paid route or the main man (R1:296).
+  - always a no before (R1:228). "Stop him" costs part of the pay, marked **thin** (R1:218-228). The route ends
+    only by a labelled final no (A3).
+  - Five rules carry *(check: pending NC2)*.
+- A2: night one's explicit beat comes from outside the arc (A15), which answers E5.
+- A11's stopping row: in a paid scene it costs part of the pay.
+- `references/the-release.md` § The first release: the first explicit beat is a stranger or a one-off.
+- `references/the-meters.md` W1b: a paid repeatable carries the slope as two voices per act.
+- `references/the-first-hour.md` step 4: the same night-one limit.
+
+**Verified.**
+- `A15` appears in the-arc (3), the-release, the-meters and the-first-hour (1 each).
+- R1 lines 76/138/170/228/268/296 were read and match.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 137,766 → 138,101 (+335) · running total 138,101 / 149,283. All of it is new doctrine D7 asks for; no
+old text covered it.
+
 ## 2026-09-30 — DC4: a no is parked, or final only when the button says so (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC4 (D6 · Dr1).

@@ -99,7 +99,8 @@ setup → problem → character interaction → conflict → choice → temptati
    node that opens on its reaction and then rejoins the scene. That costs the player one click per
    choice, and it is the shape: the engine has no other place to print a line after a click.
 4. **An early temptation** in the first few scenes: attraction, tension, a look, a suggestive
-   choice. The player should know within minutes that sex is what this game is about. 15 of 26 top
+   choice. The player should know within minutes that sex is what this game is about. A hot moment
+   here comes from a stranger or a one-off, never the paid route or the main man (`the-arc.md` A15). 15 of 26 top
    games put something tempting in the opening and 3 put explicit sex there; 8 put nothing
    (measured 2026-09-24 in the 26 games' own source).
 5. **The first objective is a quest card with goal steps.** Not a tip alone: `goals`, so the page
