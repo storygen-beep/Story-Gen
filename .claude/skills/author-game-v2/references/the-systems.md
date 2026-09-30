@@ -332,7 +332,7 @@ phone player cannot open a console (*I'll Never Leave This Town*). So every game
 - **the next step now** — `kind = "play"`: it **plays** the step's own one-time scene, through
   its own conditions. It never sets the counter, because a jumped counter skips the scene forever;
 - **ask again** — `kind = "reopen"`: unsets a refusal flag a trigger reads `is_false`. A game
-  whose every "no" parks (the-arc A14) may need none.
+  whose steps park with `retry_after_days` (the-arc A3) may need none.
 
 Cut what the game cannot use; anything sold stays behind a code. Rows and rules: `engine.md` §48.
 

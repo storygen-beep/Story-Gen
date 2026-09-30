@@ -39,7 +39,7 @@ carries `where`, `when`, `gate`, and one **hint line** for the guidance page (`t
 |---|---|---|
 | `her_line_low` · `her_line_high` | her own thought at a low and a high level | `the-meters.md` W1b |
 | `who_notices` | who reacts to what she did, or nobody | `the-meters.md` W5b |
-| `refusal` | `parked` (the door stays open, the address printed) or `counted` (warned, and it closes) | `the-surfaces.md` R5b · `the-arc.md` A14 |
+| `refusal` | `parked` (the step comes back after a wait) or `final` (the button says "(ends his path)") | `the-surfaces.md` R5b · `the-arc.md` A3 |
 
 Arc rules: `the-arc.md` A1–A14. Ledger: `board.who_climbs`, `board.ascent_tiers`,
 `board.characters[].ladder`. `lint · the arc ladder` prints each person's longest chain.

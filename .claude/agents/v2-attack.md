@@ -76,7 +76,7 @@ one-line note beside each part**:
 - **The library** — does the kind fit? And is the pitch **too close to one entry** — the same
   situation with the same kind of person? If so, name the entry and say what is the same. Being
   inspired by a kind is the point; restaging one entry is not.
-- **A "no" that locks the relationship for good** — flag it; it is not a fail.
+- **A final "no" the button does not label** ("(ends his path)") — flag it as a defect; it is not a fail.
 
 **You score nothing** — no number, no grade, no ranking. LO judges.
 

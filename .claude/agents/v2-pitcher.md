@@ -62,8 +62,8 @@ and A14. Nothing else. You are not wiring this; you are choosing what it is abou
 - **Do not re-pitch a shipped subject.** The pack's `SHIPPED ALREADY` section lists them.
 - **A `schedule` row is not a canvas trigger.** If your pitch turns on when a surface plays, open the
   game's TOML and read that canvas's trigger.
-- **A "no" parks the step; it never locks the relationship for good.** **His move never fires on a
-  dice roll alone** — the scene says why now.
+- **A "no" parks the step; a final no only on a button that says "(ends his path)"** (`the-arc.md` A3).
+  **His move never fires on a dice roll alone** — the scene says why now.
 - **The clip is part of the pitch.** Say what it is, so it can be found.
 - **Adults only.** Never set anything in a school or with anyone under 18.
 
@@ -79,9 +79,9 @@ RELATIONSHIPS (or "step 1", with the leak that shows the want first).
 1. **The fantasy** — the game's own shape, and how this step serves it.
 2. **The temptation, and his want before it** — what is offered, by whom, why she wants or needs it;
    who moves first and why; and **the leak**, the small repeatable line or look on his hub.
-3. **Her answers, and his "no" branch** — three to five, graded; the no has a price, is parked, or
-   is counted. Pressure: the no's price, he asks again, and an opt-out somewhere. Nice: the no costs
-   nothing, and he may be the one who says no.
+3. **Her answers, and his "no" branch** — three to five, graded; the no is parked (comes back after
+   a wait) or final (the button says so). Pressure: he asks again, and an opt-out somewhere. Nice: the
+   no costs nothing, and he may be the one who says no.
 4. **Her voice at her level** — a low line and a high line for the same moment.
 5. **Who notices** — who sees or hears of it, and what they do differently afterwards.
 6. **What sticks, and he remembers** — the flag, meter or line that changes, and the later line of

@@ -32,11 +32,11 @@ what their players quote:
    it. Who moves first and why: a pressure type moves first and names the act; a nice type waits,
    so she moves; or he wants her from scene one. And **the leak** — one small, repeatable line or
    look on his hub that shows his want, tied to his number.
-3. **Her answers, and his "no" branch.** Three to five, graded. The **no** is written too, and it
-   has a price, is **parked** (it comes back), or is **counted** (someone remembers). Pressure: the
-   no has a stated price, he asks again, and the button says Submit, not Agree — and every pressure
-   arc offers an opt-out somewhere. Nice: the no costs nothing, and he may be the one who says no.
-   **A no parks the step; it never locks the relationship for good.**
+3. **Her answers, and his "no" branch.** Three to five, graded. The **no** is written too: it is
+   **parked** (the step comes back after a wait) or **final** (the button says "(ends his path)")
+   (`the-arc.md` A3). Pressure: he asks again, and the button says Submit, not Agree — and every
+   pressure arc offers an opt-out somewhere. Nice: the no costs nothing, and he may be the one who
+   says no.
 4. **Her voice at her level.** A low line and a high line for the same moment, so the player hears
    how far she has come.
 5. **Who notices.** Somebody sees or hears of it, and does something differently afterwards.

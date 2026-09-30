@@ -109,58 +109,31 @@ That is `the-clock.md` and `the-map.md` doing arc work. An arc opening needs no 
 
 ---
 
-## A3 · The refusal is a written step — counted, warned about, and routed
+## A3 · Saying no — parked by default, final only when the button says so
 
-**The shape:** the refusal writes a counter · a threshold prints, in plain words, exactly what
-will close · the last refusal opens something else. Three parts, and the third is the one
-nobody builds.
+**One rule** (LO decided, D6; R2 K7):
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` records a refusal as a step of the
-> arc, in the quest log — *"\[He] snuck into your shower, but you made your feelings clear."*
+- **An ordinary no is parked.** The step comes back after the author's wait (`retry_after_days` on the
+  no, with the step's trigger set to `consume_on = "exit"`, EN1), and his next line may remember it:
+  a pushy man says so, a nice man drops it.
+- **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
+  It closes his story, never the person: he stays in the world.
+- **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want.
+
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** In-scene lines from the passing games:
 >
-> The counted form, in the same game: each dare the roommate's partner sets and she refuses adds
-> one to a count (`$rmpbully.resisted++`). At three he asks her straight, and the two buttons say
-> in plain words what each answer does — *"(… will stop giving you challenges)"*. In Her Own Hands
-> warns the same way: *"(Caution: This will be your final answer on the subject.)"*
->
-> The routing half has one example, in one game (`zaras-school-life`, numbers only): the fourth
-> refusal of one man starts **a different character's introduction three days later.**
+> - the nice man drops it — In Her Own Hands [ShaunBRTalk4D]: *"I get it," Shaun said quickly. "It's
+>   totally cool."*
+> - the pushy man asks again — Cupid's Way [damien13]: *"Haha, alright."*, and the same ask is back
+>   on her City screen as soon as she leaves;
+> - he remembers — In Her Own Hands [JamesCoffeeShop2E]: *"my texts and calls seemed to vanish into
+>   thin air"*; [DevDadDiner1]: *"You haven't called. Naughty girl . . ."*;
+> - the final no is labelled — the same passage: *"End the conversation and get back to work (ends
+>   path)"*.
 
-Three rules fall out, and the first two already exist elsewhere in weaker form:
-
-- **The refusal is free and in character.** `the-surfaces.md` R5b already says it is written at
-  full length. This adds: it is also *remembered*.
-- **A door may close, but out loud.** `the-want.md` §1 already carries this from
-  `the-company`'s *"If a choice locks you into a sub route, tell me that."* That warning is
-  the strongest version in the corpus names what is being forfeited, not only the fact that
-  something is.
-- **A refusal routes.** This one is new to the skill. Saying no is not a dead end and not a
-  punishment; it is a fork that hands the player a different person.
-
-### A3b · And the default refusal is PARKED, not closed — the game names where to go back
-
-Added after a second reading round. A3 above was built on the one case in the corpus where a
-refusal is permanent, and read as a whole rule it is too harsh. **The field's ordinary refusal
-costs nothing, changes nothing, and tells the player the address at which it can be reversed.**
-
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** Two passing games, the same shape:
->
-> - `course-of-temptation`: *"That could be the end of everything. Of course, they'll probably
->   be at it every weekend **if you ever change your mind**."*
-> - `cupids-way`: *"Alright, I won't push. **If you change your mind just message me.**"*
->
-> - `course-of-temptation`, the best friend: *"You don't have to go any further, but if you want to
->   then you can try again another night."*
-
-So the two shapes sit at opposite ends and an arc picks one deliberately:
-
-| | the refusal | when to use it |
-|---|---|---|
-| **parked** | free, reversible, and the game prints the place and the hour | the default. Most offers |
-| **counted** | tracked, warned with the content named, and finally closed | when the closing is itself content — A3's counted case |
-
-Writing every refusal as permanent makes a game a minefield. Writing every one as parked makes
-nothing matter. **The one thing neither shape does is stay silent about which it is.**
+Remembering a no in his words is **thin**: 2 men in 1 game of 4 (R2 K7). None of the four passing
+games routes a refusal to a new person, so a no never hands her on. **The one thing a no never does
+is stay silent about which kind it is.**
 
 ---
 
@@ -304,7 +277,7 @@ That is one of three shapes in the corpus, and the other two are more common:
 >   more difficult as it's a question of control."*
 
 **Declare which one an arc is before writing its first step**, because it decides who the
-refusals belong to. A3's counted refusal is hers in one direction and *his* in another — a
+refusals belong to. A3's no is hers in one direction and *his* in another — a
 refusal that is his is a legitimate shape, not a slip (the **theirs** line above: In Her Own Hands
 [K_LateShaun1A] opens on `$xr.sh.rel.at gte 10`, his number).
 
@@ -488,7 +461,7 @@ pivot defect (`register.md`, "Where the interiority goes instead").
 
 | exit | when | what it is about |
 |---|---|---|
-| **refusing** | at the door, before anything | whether she wants this at all — A3 |
+| **refusing** | at the door, before anything | whether she wants this at all — parked or final, A3 |
 | **stopping** | mid-scene, with it already happening | how he takes being stopped |
 | **chickening out** | after she already agreed | what she owes, and what it costs to renege |
 
@@ -599,9 +572,7 @@ Four rules follow:
 - **The next step is findable.** The guidance card names it. Being lost is the top complaint about
   the field's best relationships: 79 of 162 player comments on the three arcs are "how do I / I'm
   stuck", and 0 are about his character.
-- **A "no" parks the step; it never locks the relationship for good.** The two permanent lockouts
-  in the three arcs — one push-away in `course-of-temptation`, one refused invitation in
-  `in-her-own-hands` that nothing clears — are the worst-remembered moments.
+- **A "no" parks the step** (A3); only a labelled final no closes his path, never the person.
 - **A pitch is a step on a named relationship** (`the-release.md`, "The next step").
 
 ---

@@ -5,6 +5,49 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC4: a no is parked, or final only when the button says so (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC4 (D6 · Dr1).
+- `the-arc.md` taught three answers:
+  - A3: counted, warned and routed;
+  - A3b: parked, with the address printed;
+  - A14: never locks.
+- A3b's examples didn't hold: the two CoT lines are hint-page text (§L), and the CW line is unreachable (R2 K7).
+- A3's routing example was Zara, which fails the adults-only rule. 0 of 4 passing games route a refusal.
+
+**What changed.**
+- `references/the-arc.md`: A3 + A3b are replaced by one rule (LO decided, D6; R2 K7):
+  - an ordinary no is parked: the step returns after `retry_after_days` (EN1 `consume_on = "exit"`), and his
+    next line may remember it;
+  - a final no only on a button that says "(ends his path)", with `final = true`; it closes his story, never
+    the person;
+  - where he keeps feelings, a no may cost Warmth, never Want.
+  - The evidence is in-scene lines, each grepped in `round2/passages/`: IHOH [ShaunBRTalk4D], CW [damien13],
+    IHOH [JamesCoffeeShop2E], and [DevDadDiner1] with its "(ends path)" button.
+  - Remembering a no in words is marked thin (2 men in 1 game of 4).
+  - A14's no bullet now points at A3. A11's table row says "parked or final, A3".
+- `references/the-surfaces.md` R5b: the hint-page CoT line and "a counted no closes" are gone; parked and
+  final, with the IHOH lines kept.
+- `references/state.md` ladder row: `refusal: "parked" | "final"`.
+- `templates/spine/SP2_ladders.md`: `parked · final`.
+- `references/the-release.md` eight lines, line 3: parked or final.
+- `.claude/agents/v2-pitcher.md`: the rule bullet and line 3 of the return format.
+- `.claude/agents/v2-attack.md:79` (only that line; LO's own 2-line change is untouched): an unlabelled final no
+  is flagged as a defect.
+- `references/agents.md`: same wording.
+- `references/the-systems.md`: "ask again" is needed less when steps park with `retry_after_days`.
+
+**Verified.**
+- Greps: 16 old phrases at 0.
+- the-arc.md's 4 remaining `zaras-school-life` hits are numbers-only (lines 27, 209, 309, 354).
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+**Also fixed (LO, same rule, not in the PRD's list):**
+- `references/the-spine.md:42`: `refusal` is `parked` or `final`, pointing at A3;
+- `references/the-arc.md:280`: "A3's counted refusal" becomes "A3's no".
+
+words: 138,123 → 137,766 (−357) · running total 137,766 / 149,283.
+
 ## 2026-09-30 — DC3: the goal has no date; the bill repeats, rises in stages and carries (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC3 (D8 · C1 · C2 · H18 · I12).

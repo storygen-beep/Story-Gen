@@ -527,16 +527,13 @@ games do the opposite: a refusal that exists at all is usually a bare link back 
 > deal: go with him · pay him off in stock · use the taser · push him off (only if she is fit enough)
 > · *"No way."*, which means a night in custody.
 
-**The default no is PARKED, and the game prints where to come back** (`the-arc.md` A3b). The price is
-real, and the door stays open: `course-of-temptation`'s best friend — *"You don't have to go any
-further, but if you want to then you can try again another night."* — with a live count of the days
-until she can (*"you need to wait N more days"*, the number filled in). In Her Own Hands offers the same: *"Excuse yourself
-to think more about it and say you'll be in touch."*
+**The default no is PARKED: the step comes back after a wait** (`the-arc.md` A3). In Her Own Hands
+offers the soft form in the scene itself: *"Excuse yourself to think more about it and say you'll be
+in touch."*
 
-**A counted no closes, and only when the closing is itself content and she is warned** (A3). In Her
-Own Hands labels that answer before she clicks it — *"Say 'fuck you' and leave (ends path)"* — and
-the route closes. Shady Deals' custody is counted too: the price rises every time (*"Next time,
-prepare for penalty."*).
+**A final no closes his path, and only on a button that says so** (A3). In Her Own Hands labels that
+answer before she clicks it — *"Say 'fuck you' and leave (ends path)"* — and the route closes; the
+man stays in the world.
 
 Being refused is content too (`course-of-temptation`: friendship −50, arousal −100, *"That
 certainly backfired."*). **A "no" that returns the player to an unchanged menu was never a door.**

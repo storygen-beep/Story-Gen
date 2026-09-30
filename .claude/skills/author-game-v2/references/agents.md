@@ -101,8 +101,8 @@ whether the pitch is **too close to a moment-library entry** — the same situat
 of person — naming the entry. **It scores nothing**: it returns the pitch with a one-line note beside
 each line, and LO judges. Its only rejections are two instant fails, each quoting the line: a big
 turn forced on her with no warning or way round, and sex used only as a punishment
-(`the-surfaces.md` R5b.3). A "no" that
-locks the relationship for good is flagged, not failed.
+(`the-surfaces.md` R5b.3). A final "no"
+the button does not label is a defect: flagged, not failed.
 
 **Every finding gets an adversarial verify.** *(LO decided.)* A raw finding is a hypothesis, and
 the verify pass is what makes the survivors usable.

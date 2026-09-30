@@ -11,7 +11,7 @@ One table per person. Record it in `board.characters[].ladder`.
 
 | n | what happens | where | when | gate | hint line | her_line_low | her_line_high | who_notices | refusal |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | | | | | | | | | parked · counted |
+| 1 | | | | | | | | | parked · final |
 
 **The crude words** — the actual words each person's scenes may use, per rung band. A ceiling written
 abstractly gets written around. A walk-on with no id keys as `role:<name>`. Record in
