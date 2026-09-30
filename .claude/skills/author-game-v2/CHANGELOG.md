@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 Gate 27: a banded meter is shown once (D1 · D4)
+
+**Why.** D1 shows numbers; D4 puts the number on the sidebar item. Gate 27 only kept the number out of the dump,
+so a banded meter could pass while the player never saw its number. The rule carried *(check: pending Gate 27)*.
+
+**What changed.**
+- `scripts/gates.py`: gate renamed **`a banded meter is shown once`** (was "a banded meter is not also a number").
+  Walk moved to `_banded_shown_once` (above `main()`); the block in `run_gates` is replaced line for line. It still
+  needs the key out of the dump (`in_dump = false`, EN5; `hidden = true` accepted, per LO's decision) and now needs
+  the item to print the number: `trait_words` with `show_value = true`, or `trait_bar` without `hide_value`
+  (`v2.py:18409-18422`, `:18521`). `trait_status_text` prints only the word, so a banded one fails.
+- `tests/test_gates_en5_in_dump.py`: the gate's new name, and its fixture item shows its value.
+- `SKILL.md`: the row renamed and rewritten. `references/the-meters.md` M7: marker removed; the Gate 27 sentence
+  names both halves.
+
+**Verified.**
+- `tests/test_gates_g27.py`: pass (words + `show_value`, a bar, `hidden` still accepted); fail (words with no
+  number, a bar with `hide_value`, banded `trait_status_text`, a key left in the dump).
+- Suite: 421 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, PASS → FAIL on all five, real under D4: members_only 0/5 (banded `trait_words` without
+  `show_value`), orientation 0/7, probation 0/5, the_balance 0/3, vesper_two 0/3 (banded `trait_status_text`).
+  Every one keeps the key out of the dump as the old rule asked, and none prints the number anywhere.
+
+words: 139,304 → 139,320 (+16) · running total 139,320 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC5: the goal chain, in shape.py (D8a · D8b · C2) + `player_start` bad input
 
 **Why.** D8 (LO decided): the goal has no date, and a goal that can end names the next one. Two rules carried

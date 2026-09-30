@@ -287,7 +287,7 @@ how many fails are [off].
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
 | **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2077` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
-| **a banded meter is not also a number** | a banded sidebar stat is `hidden` in `[[traits.labels]]` | `the-meters.md` M7 · `engine.md` §30 |
+| **a banded meter is shown once** | a banded sidebar stat is `in_dump = false` in `[[traits.labels]]`, and its item prints the number (`trait_words` + `show_value`, or `trait_bar`) | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
 | **every hub is met first** | no character's portrait is live before a meeting has fired; a flag set by a scene that meets nobody opens nobody's hub | `the-first-hour.md` F5 · F8 |
 | **a meeting fires where they are** | a one-shot naming a character carries a `trigger.schedules` window matching that character's own hours — `requires_npc` does not gate the auto-fire path, so without one the introduction plays to an empty room | `the-first-hour.md` F5 · `engine.md` §31 |

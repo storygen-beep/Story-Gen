@@ -895,7 +895,7 @@ so its number shows once, in the item. A trait absent from `[[traits.labels]]` e
 out; it prints. Don't use `hidden = true` for this: it is the secret-trait switch, and because it is
 keyed by name it hides every man's trait of the same name.
 
-The sidebar shows the number *(D4)* *(check: pending Gate 27)*, and every item carries a `label`:
+The sidebar shows the number *(D4)*, and every item carries a `label`:
 
 | kind | example | sidebar type | reads |
 |---|---|---|---|
@@ -903,8 +903,8 @@ The sidebar shows the number *(D4)* *(check: pending Gate 27)*, and every item c
 | body need | energy | `trait_bar` + `bands` (no `hide_value`) | *Energy: 60 / 100*, a bar, the band word |
 | money | money | `trait_words` + `show_value = true`, no `bands` | *Money: 140* |
 
-**Gate 27** fails any banded item whose key is neither `in_dump = false` nor `hidden`. It is deterministic — no threshold to
-invent, no false positives.
+**Gate 27** (*a banded meter is shown once*) fails a banded item whose key is neither `in_dump = false` nor
+`hidden`, or whose item prints no number. It is deterministic — no threshold to invent.
 
 ⚠️ And the other half: a banded value that lands **outside every band renders nothing at all** — the
 card vanishes, which reads as a missing HUD element rather than a wrong number. Leave the top band's

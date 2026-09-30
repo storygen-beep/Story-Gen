@@ -8576,45 +8576,45 @@ def run_gates(model, game, state=None):
             if unpaid else []))
 
     # ─────────────────────────────────────────────────────────────────────────
-    # G27 — a banded meter is not also a number.  the-meters.md M7, engine.md §30.
+    # G27 — a banded meter is shown once.  the-meters.md M7, engine.md §30. (Was "a banded
+    # meter is not also a number"; renamed and widened in PRD v2 phase 4, D1 · D4.)
     #
     # The sidebar prints a trait twice, from two places that do not know about each
     # other: the auto Traits dump (every declared core_trait, as a bare number) and
     # whatever [[sidebar_items]] you authored. Measured live: a game rendered
     # "Nothing under it" and `cover 55` stacked on top of each other for all four of
     # its meters, because none of them was declared in [[traits.labels]] at all.
+    # Now also D4: with the key out of the dump, the ITEM must print the number, or the
+    # player sees the word and never the number. The walk is `_banded_shown_once`,
+    # above main(); this block keeps the old one's line count.
     #
     # Deterministic — no threshold to invent, so unlike the-surfaces R5/R6 this one
     # can be a gate.
-    labels = {l.get("key"): l for l in ((game.get("traits") or {}).get("labels") or [])
-              if isinstance(l, dict) and l.get("key")}
-    doubled = []
-    for item in (game.get("sidebar_items") or []):
-        if not isinstance(item, dict) or not item.get("bands"):
-            continue
-        if item.get("trait_owner") == "npc":
-            continue                                  # per-NPC cards do not come from the player dump
-        k = item.get("trait") or item.get("trait_key")
-        if not k:
-            continue
-        # EN5 (2026-09-30): `in_dump = false` is the switch for this — it keeps the key out
-        # of the dump only. `hidden = true` still passes (it removes the key everywhere),
-        # but it is the secret-trait switch, and name-keyed: hiding the player's banded
-        # `corruption` with it also hid every man's `corruption`.
-        _lab = labels.get(k) or {}
-        if not (_lab.get("in_dump") is False or _lab.get("hidden")):
-            doubled.append(
-                f"`{k}` is banded as {item.get('type', 'a sidebar item')} but "
-                + ("is not declared in [[traits.labels]] at all"
-                   if k not in labels else "is declared without in_dump = false")
-                + " — the band and the raw number both render")
-    n_banded = sum(1 for i in (game.get("sidebar_items") or [])
-                   if isinstance(i, dict) and i.get("bands") and i.get("trait_owner") != "npc")
-    _N["a banded meter is not also a number"] = n_banded
-    gate("a banded meter is not also a number", None if not n_banded else not doubled,
-         f"{len(doubled)} of {n_banded} banded sidebar meters also print as a raw number"
+    #
+    # What passes, by sidebar type (`the-meters.md` M7's table, D4):
+    #   trait_words + bands + show_value = true      "Corruption: 12 · Curious"
+    #   trait_bar + bands, no hide_value             "Energy: 60 / 100", a bar, the word
+    #   trait_status_text + bands                    FAILS — it prints the word only
+    #   any banded item whose key stays in the dump  FAILS — the number prints twice
+    # `hidden = true` still keeps a key out of the dump, as before; it is the secret-trait
+    # switch and name-keyed, so `in_dump = false` (EN5) is the one to write.
+    #
+    # Per-NPC cards (`trait_owner = "npc"`) are skipped, as before: they never come from the
+    # player's dump. An unbanded item is not this gate's — money as a bare number is D4's
+    # third row and has no band to double.
+    #
+    # The detail names each trait once per problem, so a key that is both in the dump and
+    # shows no number in its item lists two lines; the headline counts traits, not lines.
+    #
+    # (Same line count as the block it replaced, so no cited line below moved.)
+    n_banded, doubled = _banded_shown_once(game)
+    _N["a banded meter is shown once"] = n_banded
+    gate("a banded meter is shown once", None if not n_banded else not doubled,
+         f"{n_banded - len({d.split('`')[1] for d in doubled})} of {n_banded} banded sidebar "
+         f"meters show their number once, in the item"
          if n_banded else "no banded sidebar meters — nothing to judge",
-         doubled + (["set in_dump = false on the same key in [[traits.labels]] (engine.md §30)"]
+         doubled + (["set in_dump = false on the same key in [[traits.labels]], and show the "
+                     "number in the item (engine.md §30)"]
                     if doubled else []))
 
     # ─────────────────────────────────────────────────────────────────────────
@@ -12501,6 +12501,40 @@ def _one_name_per_trait(game):
     return (not bad, f"{len(moved) - sum(1 for k in moved if not labels.get(k))}/{len(moved)} "
                      f"changed traits carry a label · {len(items)} sidebar item(s) checked",
             bad[:14] + ([f"… and {len(bad) - 14} more"] if len(bad) > 14 else []), n)
+
+
+# Gate 27 · a banded meter is shown once (PRD v2 phase 4 · D1 · D4, 2026-09-30). Was "a banded
+# meter is not also a number". A banded player item still keeps its key out of the auto
+# Traits dump (`in_dump = false`, EN5; `hidden = true` still accepted), so the number is not
+# printed twice (v2.py:1260-1264). New under D4: the item itself shows the number —
+# `trait_words` with `show_value = true`, or `trait_bar` without `hide_value`. A banded item
+# of any other type (`trait_status_text` prints only the word) shows no number at all once
+# its key is out of the dump.
+def _banded_shown_once(game):
+    """(n_banded, problems) for gate 27."""
+    labels = {l.get("key"): l for l in ((game.get("traits") or {}).get("labels") or [])
+              if isinstance(l, dict) and l.get("key")}
+    bad, n = [], 0
+    for item in (game.get("sidebar_items") or []):
+        if not isinstance(item, dict) or not item.get("bands") or item.get("trait_owner") == "npc":
+            continue                           # per-NPC cards do not come from the player dump
+        k = item.get("trait") or item.get("trait_key")
+        if not k:
+            continue
+        n += 1
+        typ = item.get("type", "a sidebar item")
+        lab = labels.get(k) or {}
+        if not (lab.get("in_dump") is False or lab.get("hidden")):
+            bad.append(f"`{k}` is banded as {typ} but "
+                       + ("is not declared in [[traits.labels]] at all" if k not in labels
+                          else "is declared without in_dump = false")
+                       + " — the band and the raw number both render")
+        shows = ((typ == "trait_words" and item.get("show_value"))
+                 or (typ == "trait_bar" and not item.get("hide_value")))
+        if not shows:
+            bad.append(f"`{k}` is banded as {typ} and the item prints no number — use trait_words "
+                       f"with show_value = true, or trait_bar without hide_value (D4)")
+    return n, bad
 
 
 def _phase4_gates(gate, _N, model, game, state):
