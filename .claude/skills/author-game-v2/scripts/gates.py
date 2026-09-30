@@ -1587,6 +1587,44 @@ PAST_CLAIM_RE = re.compile(
     r"like always)\b", re.I)
 # ⚠️ "every time" was in the first cut and came out the same day: "every time" is habitual
 # present tense ("every time he draws back"), not a claim about a past.
+#
+# ⚠️ A MARKER IS NOT A CLAIM (PRD v2 CK4 · H6 · I15 · I26, 2026-09-30). The bare marker
+# fired on "Delgado reads this week's log aloud", on "the last night in May" about her
+# sister, and on "he wants you again". A hit now counts only when the SAME CLAUSE also has
+# the player's pronoun (subject or object, per `[settings] narration_person`) and a
+# past-tense verb. LO Q1: "again" alone never fires; it fires only inside a past-tense
+# clause about her ("you came again").
+_PAST_VERB_RE = re.compile(
+    r"\b(\w+ed|was|were|had|did|went|came|saw|said|told|took|gave|made|got|left|ate|slept)\b",
+    re.I)
+_CLAUSE_SPLIT_RE = re.compile(r"[,;:—–()]|\s(?:and|but)\s", re.I)
+
+
+def _player_pronoun_re(game):
+    """The player's own words for `[settings] narration_person` (default second, as
+    `readable.py` reads it): you/your in second, I/me/my in first, and in third the
+    protagonist's name plus she/her."""
+    person = str((game.get("settings") or {}).get("narration_person") or "second")
+    if person == "first":
+        words = ["me", "my", "mine", "myself"]
+    elif person == "third":
+        name = str((game.get("player") or {}).get("name") or "")
+        words = re.findall(r"[A-Za-z']+", name) + ["she", "her", "hers", "herself"]
+    else:
+        words = ["you", "your", "yours", "yourself"]
+    pat = r"(?i:\b(?:" + "|".join(re.escape(w) for w in words) + r")\b)"
+    # First person's "I" is matched as a capital only, so no stray lower-case "i" counts.
+    return re.compile(pat + (r"|\bI\b" if person == "first" else ""))
+
+
+def _past_claim_clause(sentence, pron_re):
+    """The PAST_CLAIM_RE match in `sentence` whose clause also holds the player's pronoun
+    and a past-tense verb, else None."""
+    for clause in _CLAUSE_SPLIT_RE.split(sentence):
+        m = PAST_CLAIM_RE.search(clause or "")
+        if m and pron_re.search(clause) and _PAST_VERB_RE.search(clause):
+            return m
+    return None
 
 # `+Jo Respect`, `-2 Trust`, `−Relationship`, `(Trust +4)`: a sign, an optional number,
 # then a Capitalised name — or a Capitalised name, then a signed number. The capital is
@@ -1866,8 +1904,12 @@ def lint_past_claim(game):
     under a conditioned group is skipped — which is LENIENT: it cannot tell whether the
     condition is the right one. Narration and speech both, because the rewrite this came
     from put the false past in a character's mouth ("Did you eat last night? You didn't").
+
+    A marker counts only in a clause that also holds the player's pronoun and a
+    past-tense verb (`_past_claim_clause`, PRD v2 CK4).
     """
     hits, scope = [], 0
+    pron_re = _player_pronoun_re(game)
 
     def walk(cid, blocks, gated):
         nonlocal scope
@@ -1880,9 +1922,9 @@ def lint_past_claim(game):
             if b.get("content") and b.get("type") in PROSE_BLOCKS:
                 for s in _beat_sentences(str(b["content"])):
                     scope += 1
-                    m = PAST_CLAIM_RE.search(s)
+                    m = _past_claim_clause(s, pron_re)
                     if m and not here:
-                        hits.append(f"{cid} [{m.group(0)}]: {s.strip()[:100]}")
+                        hits.append(f"{cid} [{m.group(0)}]: {s.strip()[:160]}")
             walk(cid, props.get("blocks") or b.get("blocks"), here)
             for beat in props.get("beats") or []:
                 walk(cid, beat.get("blocks"), here)

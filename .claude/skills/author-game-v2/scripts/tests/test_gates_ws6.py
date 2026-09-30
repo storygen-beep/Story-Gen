@@ -99,8 +99,9 @@ def flips(tmp_path, monkeypatch, row, game=None, state=None, **kw):
 
 
 def test_past_claim_blocks(tmp_path, monkeypatch):
+    # A past-tense clause about her (CK4): a bare marker no longer blocks on its own.
     g = green_game()
-    g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "She is at the table again, like last time."
+    g["canvases"][2]["nodes"][0]["blocks"][0]["content"] = "You came to the table last night."
     flips(tmp_path, monkeypatch, "no past claim on a repeatable", game=g)
 
 

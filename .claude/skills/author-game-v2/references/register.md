@@ -89,7 +89,7 @@ one was out of character, and one printed a stat that does not exist.
 | allowed | not allowed |
 |---|---|
 | texture that cannot clash with anything: the kettle, a pet name, the oil in the tray | anything that contradicts the design: clothes, times, who is where |
-| her opinions in her thoughts | claims about the past that no flag tracks: *last night*, *this week*, *again* |
+| her opinions in her thoughts | claims about her past that no flag tracks — a past-tense clause about her: *you came last night*, *you did this again*. *Again* alone on a repeatable is fine (*he wants you again*) |
 | dialogue that fits the person's cast entry | behaviour the cast entry rules out |
 | a consequence printed on a button when a real flag or stat sits behind it | made-up stats (`the-meters.md`, "What the player is shown") |
 
@@ -982,8 +982,9 @@ prior state of the world before the present one means anything.
 Three inferences before anyone in the room does anything.
 
 **Rule.** On a canvas with `trigger.is_repeatable = true`, every sentence nobody has gated is
-something happening now. No *used to*, no *since*, no *two years ago*, no *they moved* — and, since the loud voice makes these claims constantly, no *last night*, *this week*,
-*again*, *every time* on a line the player can read on their first visit.
+something happening now. No *used to*, no *since*, no *two years ago*, no *they moved* — and, since the loud voice makes these claims constantly, no past-tense clause about her with *last night*,
+*this week* or *again* (*you came again*) on a line the player can read on their first visit. *Again* in
+the present (*he wants you again*) is not a claim.
 
 **The one exception is the truth rule's rule 2:** a line about the past may show on a repeatable
 when it sits inside a `group` whose `conditions` read the flag or counter that records that past.

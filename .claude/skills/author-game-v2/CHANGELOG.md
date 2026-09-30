@@ -5,6 +5,52 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK4: the past-claim BLOCK judges claims, not markers (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK4 (H6 · I15 · I26), with LO Q1: "again" alone never fires. The bare
+marker fired on "Delgado reads this week's log aloud", on "the last night in May" (about her sister), and on
+"he wants you again". None of those claims anything about her.
+
+**What changed.**
+- `scripts/gates.py` `lint_past_claim` (the `--ship` BLOCK row *no past claim on a repeatable*, and the
+  ordinary lint): a `PAST_CLAIM_RE` hit counts only when the same clause also holds the player's pronoun and a
+  past-tense verb.
+  - Clauses split on `, ; : — – ( )` and " and " / " but ".
+  - The pronoun comes from `[settings] narration_person`: second (the default, as `readable.py` reads it) is
+    you/your; first is I/me/my (capital "I" only); third is the words of `player.name` plus she/her.
+  - Past tense is `-ed` or the named irregulars (was, were, had, did, went, came, saw, said, told, took, gave,
+    made, got, left, ate, slept).
+  - `re` only; no new import.
+  - New helpers `_PAST_VERB_RE`, `_CLAUSE_SPLIT_RE`, `_player_pronoun_re`, `_past_claim_clause`.
+  - The printed sentence runs to 160 characters (was 100). The gated-group skip is unchanged.
+- `references/register.md` line 92 (the PRD's :91), the truth-rule table: "claims about her past that no flag
+  tracks — a past-tense clause about her … *Again* alone on a repeatable is fine (*he wants you again*)".
+- `references/register.md` ~line 986 carried the same bare *last night / this week / again / every time*
+  ban. It is rewritten to the same rule, beyond the PRD's named line, because ground rule 1 leaves no old text
+  beside the new rule.
+- `tests/test_gates_ws6.py` `test_past_claim_blocks`: its line "She is at the table again, like last time." has
+  no past-tense verb and no longer fires. It is now "You came to the table last night.", and the row still
+  blocks.
+- BLOCK row: *no past claim on a repeatable* is redefined, and it only narrows: every new fire was an old
+  fire. So no `since` date, the same as CK1/CK2.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4940 → 4982). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck4.py`: 10 passed. The four PRD lines (Delgado's log, her sister's night, "you did this
+  last night" fires, "he wants you again" doesn't), "again" inside a past clause about her fires, first person,
+  third person by name and by "she" (another man's name doesn't fire), a pronoun in another clause doesn't
+  fire, a gated line doesn't fire, and the 160-character cut.
+- Skill tests 233 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five v2 games, hits before → after: members_only 0 → 0, orientation 5 → 0,
+  probation 0 → 0, the_balance 16 → 1, vesper_two 28 → 1. No new hits. Every dropped hit was read. Each is
+  another person's past, a present-tense "again" or an NPC speaking of himself. The two left are real claims
+  about her: the_balance `sam_sits_down` "You were on the bus at half past seven again." and vesper_two
+  `act_feed_line` "You came in under thirty again."
+
+words: 137,293 → 137,332 (+39) · running total 137,332 / 149,283
+
+---
+
 ## 2026-09-30 — CK3: meter ceiling skips the band a meter starts in, and falling meters (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK3 (H5). A meter that starts full and drains failed "bands promise
