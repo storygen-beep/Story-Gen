@@ -232,20 +232,14 @@ nothing but its label, and with no label it prints its raw key — which gate
 
 ### R4 · A wall shows the want; the card shows the route
 
-A locked choice renders greyed. By default **leave `locked_text` off** — the row then shows the
-action itself (*"Ask him where the bench went"*), which is a want the player can name, and a want is
-what sells the next release. Setting `locked_text` **replaces** that with a reason (*"Not yet — he
-still thinks he's getting away with it"*): clearer about the gate, weaker as a door. Prefer the want
-unless the gate is genuinely obscure. `engine.md` §15 has the verified render behaviour.
+A locked choice renders greyed, with its action as the label (*"Ask him where the bench went"*) — a
+want the player can name *(LO decided, D2)*. **A number lock** says the rest itself: the engine
+prints the need and her value beside it (`engine.md` §15), so it gets no `locked_text`. **A story
+lock** (a flag) gets one short line, which replaces the label, because nothing else says why.
 
-**So a greyed action line is not silent — it states the want.** What it cannot state is the
-**route**, and that is R3's job on the guidance card. The two work as a pair: the door advertises,
-the card directs.
-
-⚠️ *This rule is written the way it is because the opposite was drafted first, made into a gate, and
-fired on seven of eight doors in a real game — every one of which was following `engine.md` §15
-correctly. A rule that fails a game for obeying the skill is a bug in the rule. There is
-deliberately no gate here.*
+**So a greyed line states the want and the bar.** What it cannot state is the **route**, and that is
+R3's job on the guidance card. The door advertises, the card directs. Gate **a locked door says why**
+checks both locks, and fails a `locked_text` on a number lock as doubled.
 
 ⚠️ **`guidance exists` checks only that a card exists; it never reads what the card says.** Two
 checks cover the route: gate **`a goal says what it wants`** (a bullet renders words, not a raw key)
@@ -355,7 +349,7 @@ Field reference and citations: `references/engine.md`.
 | **Lint · label length** | median words per label and the share at 6+, with the field's 3 / 10% printed alongside |
 | **Lint · she permits or she acts** | the share of choices opening `let`, overall and inside sex loops, against the field's 1.01%. R6 |
 
-**R4 has no gate on purpose** — see the warning under it.
+**R4's gate is `a locked door says why`** — see R4.
 
 **R6 has no gate either.** A rate floor on act-words fails games doing it right: the field runs 9.2%,
 and a third of its explicit-surface buttons are `continue` or `leave`. The SHAPE of the surface predicts

@@ -9043,44 +9043,44 @@ def run_gates(model, game, state=None):
     # the field's mute share is ~2% and it is UI chrome. The summary prints
     # shown-locked against reasons given so a thin pass stays visible.
     # ═════════════════════════════════════════════════════════════════════════
-    shown_locked, mute = [], []
-    for path, node in _walk_paths(game):
-        if not path or path[-1] != "[]" or "choices" not in path:
-            continue
-        if "text" not in node and "target" not in node:
-            continue
-        if not node.get("show_when_locked"):
-            continue
-        label = str(node.get("text") or node.get("target") or "?")
-        shown_locked.append(label)
-        has_reason = (
-            str(node.get("locked_text") or "").strip()
-            or str(node.get("locked_text_threshold") or "").strip()
-            or node.get("rejection_node")
-        )
-        if has_reason:
-            continue
-        # A choice gated ONLY by costs explains itself — the engine writes the
-        # message. Anything else is a condition, and a condition goes mute.
-        if not node.get("conditions") and node.get("costs"):
-            continue
-        mute.append(label)
+    # Rebuilt with DC6b (phase 4): the walk is `_locked_doors`, above main(). A number lock's
+    # why is the engine's requirement suffix, and a `locked_text` on it is doubled (J1).
+    #
+    # ⚠️ WHAT CHANGED, AND WHY THE HEADER ABOVE IS ONLY HALF TRUE NOW. Until 2026-09-30
+    # every shown-locked choice needed an authored reason. EN6 (phase 1) made the engine
+    # print the need itself beside a number lock — "(Requires … (you have N))" through
+    # `setup.requirementSuffix` — and the skill test found that line printed beside an
+    # authored `locked_text` saying the same thing (J1). D2 (LO decided): a number lock
+    # shows the real label and the engine's requirement, with no `locked_text`; a story
+    # lock gets a short written line. The field measurements above still hold for the
+    # story lock, which is the only kind that can go mute.
+    #
+    # "Number lock" is the engine's own predicate, copied rather than approximated, so a
+    # choice the engine gives a suffix is never asked for a line, and an `eq` or a value
+    # of 1 (no suffix) always is.
+    # (Same line count as the block it replaced, so no cited line below moved.)
+    shown_locked, mute, doubled = _locked_doors(game)
     detail = []
     if mute:
         _shown = ", ".join(f'"{m[:52]}"' for m in mute[:8])
-        detail.append(f"{len(mute)} of {len(shown_locked)} shown-locked choice(s) render the "
-                      f"action label greyed with no reason beside it — v2.py:13171 falls back "
-                      f"to the label when `locked_text` is absent")
+        detail.append(f"{len(mute)} of {len(shown_locked)} shown-locked choice(s) behind a flag or "
+                      f"another story lock render the action label greyed with no reason beside "
+                      f"it — v2.py:14769 falls back to the label when `locked_text` is absent")
         detail.append(f"mute: {_shown}" + (" …" if len(mute) > 8 else ""))
-        detail.append("give each one a `locked_text` (the reason), a `locked_text_threshold` "
-                      "(the bar, on click), or a `rejection_node` (a real failure node). "
-                      "The field hides a refusal or explains it — 2.26% show a dead label "
-                      "(the-surfaces.md R5c, engine.md §15/§36)")
+        detail.append("give each story lock a short `locked_text` (the reason), a "
+                      "`locked_text_threshold` or a `rejection_node` (the-surfaces.md R5c, "
+                      "engine.md §15/§36)")
+    if doubled:
+        detail.append(f"{len(doubled)} number lock(s) also carry `locked_text` — the engine "
+                      f"already prints the need and her value; the line says it twice (J1). "
+                      f"Drop it: " + ", ".join(f'"{m[:40]}"' for m in doubled[:6])
+                      + (" …" if len(doubled) > 6 else ""))
     _N["a locked door says why"] = len(shown_locked)
     gate("a locked door says why",
-         None if not shown_locked else not mute,
-         (f"{len(shown_locked)} shown-locked · {len(shown_locked) - len(mute)} with a reason"
-          + (f" · {100 * len(mute) // len(shown_locked)}% mute (field 2%)" if mute else "")
+         None if not shown_locked else not (mute or doubled),
+         (f"{len(shown_locked)} shown-locked · {len(shown_locked) - len(mute) - len(doubled)} say "
+          f"why once" + (f" · {len(mute)} mute" if mute else "")
+          + (f" · {len(doubled)} doubled" if doubled else "")
           ) if shown_locked else "no `show_when_locked` choices authored",
          detail)
 
@@ -12421,6 +12421,48 @@ def _mens_numbers(game, state):
         return None, "no man keeps a trait — nothing to show", [], 0
     return (not bad, f"{shown_n} of the men's traits shown · {len(bad)} problem(s) across "
                      f"{judged} kept trait(s)", bad[:14], judged)
+
+
+# Gate 42 · a locked door says why — rebuilt with DC6b (PRD v2 phase 4 · D2 · J1, 2026-09-30).
+# A NUMBER LOCK is exactly the engine's `_wants_number` predicate (v2.py:14816): a trait item
+# (hers or a man's — EN6's NPC gate is the same shape), gte / gt / lte / lt, a numeric value
+# of 2 or more. The engine appends the requirement and her value beside the label
+# (`setup.requirementSuffix`, v2.py:4319), so that suffix IS the why; a `locked_text` on
+# such a choice replaces the label and says the reason twice — FAIL, "doubled" (J1). Any
+# other lock (a flag, an `eq`, a value of 1) still needs a line: `locked_text`,
+# `locked_text_threshold` or `rejection_node`. A cost-only choice explains itself (§27).
+def _is_number_lock(conditions):
+    return any(isinstance(it, dict) and it.get("type") == "trait"
+               and it.get("operator") in ("gte", "gt", "lte", "lt")
+               and isinstance(it.get("value"), (int, float)) and not isinstance(it.get("value"), bool)
+               and it.get("value") >= 2
+               for it in ((conditions or {}).get("items") or []))
+
+
+def _locked_doors(game):
+    """(shown_locked, mute, doubled) label lists for gate 42."""
+    shown_locked, mute, doubled = [], [], []
+    for path, node in _walk_paths(game):
+        if not path or path[-1] != "[]" or "choices" not in path:
+            continue
+        if "text" not in node and "target" not in node:
+            continue
+        if not node.get("show_when_locked"):
+            continue
+        label = str(node.get("text") or node.get("target") or "?")
+        shown_locked.append(label)
+        if _is_number_lock(node.get("conditions")):
+            if str(node.get("locked_text") or "").strip():
+                doubled.append(label)
+            continue
+        if (str(node.get("locked_text") or "").strip()
+                or str(node.get("locked_text_threshold") or "").strip()
+                or node.get("rejection_node")):
+            continue
+        if not node.get("conditions") and node.get("costs"):
+            continue
+        mute.append(label)
+    return shown_locked, mute, doubled
 
 
 def _phase4_gates(gate, _N, model, game, state):

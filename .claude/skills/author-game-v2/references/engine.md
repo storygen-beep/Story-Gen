@@ -334,7 +334,7 @@ array. Two levels of nesting is where it breaks.
 
 ---
 
-## 15. `locked_text` REPLACES the choice label — and a shown-locked row without one is mute
+## 15. A number lock prints its own need; a story lock needs `locked_text`, which REPLACES the label
 
 A choice with `show_when_locked = true` renders as `<span class="locked-choice">`. If
 `locked_text` is set, that string is shown **instead of** the action text — the player never
@@ -345,11 +345,11 @@ sees what the action was called.
 into the `title` tooltip at `:14839-14840`, so the tooltip adds nothing either. The player sees
 "Kiss him" struck out and learns neither why nor when.
 
-**Set `locked_text` by default.** Reach for the bare label only when the action's own name already
-carries the reason, and argue it when you do.
-
-Verified live: at `nerve` 60 against a 75 gate, the row rendered as
-`SPAN.locked-choice :: Not yet — he still thinks he's getting away with it.`
+**A number lock needs nothing** *(LO decided, D2)*. When the conditions hold a trait gate the engine
+can number — hers or a man's, `gte`/`gt`/`lte`/`lt`, value 2 or more (`_wants_number`, `v2.py:14816`) —
+it appends the need and her value beside the label (`setup.requirementSuffix`, `v2.py:4319`). A
+`locked_text` there says it twice (J1). **A story lock** — a flag, an `eq`, a value of 1 — gets no
+suffix, so it gets a short `locked_text`.
 
 Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
 
@@ -360,7 +360,8 @@ Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
   settings and pagination chrome — `OptionsWidget` toggle states, `Widgets Outfits`
   "Previous"/"Next" greyed at the ends — rather than gated content.
 
-Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It accepts `locked_text`,
+Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It fails `locked_text` on a number
+lock; a story lock needs `locked_text`,
 `locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:14830-14837`) or
 `rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
@@ -1176,8 +1177,8 @@ rung:
 
    **A priced choice explains itself with no authoring at all**, and a price is what the field's
    spoken refusals name most (37% — §15). This is the asymmetry worth knowing: `costs` come with
-   their own message, `conditions` do not, and a `show_when_locked` condition with no `locked_text`
-   goes mute. The gate **"a locked door says why"** therefore never counts a cost-only choice
+   their own message, a number condition gets the engine's suffix (§15), and a flag condition with no
+   `locked_text` goes mute. The gate **"a locked door says why"** therefore never counts a cost-only choice
    against a game.
 2. **The deduction is applied by the engine, not by your effects list.** A `costs` entry is parsed as
    `{trait, value}` only (`template_import.py:2522-2525`). On a **choice** it is deducted inline with
@@ -1982,7 +1983,7 @@ A choice whose `conditions` fail has **two** shapes, and the second one is the e
 
 | mode | set | renders as | on click |
 |---|---|---|---|
-| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:14769`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:14830-14837`, §23) |
+| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:14769`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:14830-14837`, §23); a number lock shows its need (§15) |
 | **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
 
 The generator names Mode B itself —
@@ -2055,7 +2056,6 @@ conditions            = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 40 },
 ] }
 show_when_locked      = true
-locked_text           = "Tell him no"          # same words — she still tries
 locked_text_threshold = "She would need to be steadier than this — 40 nerve."
 rejection_node        = "node_told_him_no_failed"
 rejection_effects     = [ { targetType = "player", trait = "known", op = "add", value = 4 } ]

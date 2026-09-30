@@ -5,6 +5,39 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 DC6b + Gate 42: a locked door says why, once (D2 · J1)
+
+**Why.** EN6 made the engine print a number lock's need beside the label (`setup.requirementSuffix`). The skill
+test found an authored `locked_text` beside it saying the same thing (J1), and the docs still taught "set
+`locked_text` by default". D2 (LO decided): a number lock shows the real label and the engine's requirement, no
+`locked_text`; a story lock gets a short written line. Doc and gate land together (PRD rule 11).
+
+**What changed.**
+- `scripts/gates.py`: gate 42's walk moved to `_locked_doors` / `_is_number_lock` (above `main()`); the block in
+  `run_gates` is replaced line for line. *Number lock* = the engine's `_wants_number` predicate exactly (a trait
+  item, hers or a man's, `gte`/`gt`/`lte`/`lt`, value ≥ 2, `v2.py:14816`). A number lock passes bare and FAILS
+  with `locked_text` ("doubled"); any other lock still needs `locked_text`, `locked_text_threshold` or
+  `rejection_node`; cost-only choices stay exempt.
+- `references/engine.md` §15 rewritten (title, the "set `locked_text` by default" paragraph and the live-render
+  line, which was a number lock with `locked_text`, and the gate paragraph); §27's asymmetry sentence; the Mode A
+  table row; the worked example's `locked_text` line removed (the nerve ≥ 40 lock the new gate would fail).
+- `references/the-voice.md` R4 rewritten (it left even flag locks bare and said "deliberately no gate"), and the
+  gate table's "R4 has no gate on purpose" line.
+- `references/the-surfaces.md` R5b.2's last line, R5c "Ours", the Gate 42 table row, the tired-author paragraph.
+- `references/the-economy.md` item 5 (flag lock vs number lock). `SKILL.md`: Gate 42's row.
+
+**Verified.**
+- `tests/test_gates_g42.py`: the predicate matches the engine's (incl. an NPC trait, not `eq`, not value 1);
+  pass for a bare number lock, a story lock with a line, a number lock with a threshold toast; fail for a number
+  lock with `locked_text` (hers and his) and for a bare flag / `eq` / value-1 lock.
+- Suite: 401 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, before → after (all were PASS): members_only FAIL 6 doubled of 6 · orientation FAIL 17 of
+  19 · probation FAIL 11 of 12 · the_balance FAIL 8 of 14 · vesper_two FAIL 9 of 9. Real under D2: each is a
+  number lock with the old doctrine's `locked_text`, so the engine's need is printed twice. Not a check fault —
+  the games obeyed the doctrine this commit replaces.
+
+words: 139,215 → 139,239 (+24) · running total 139,239 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC6: the men's numbers are read (D5 · J6)
 
 **Why.** D1 shows numbers and D5 says a shown number opens something and gets a reaction (`the-meters.md` W1

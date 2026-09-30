@@ -518,7 +518,7 @@ Six rules are carried by that one choice:
    cannot be unclamped, so above 100 it truncates the balance. A choice's `costs` is not clamped. §27.
 5. **`show_when_locked` + `locked_text`** — a shown-locked row with no reason is mute, which is the
    gate `a locked door says why`. A cost-only choice is exempt, because the engine writes its own
-   reason; a *condition*-locked one is not.
+   reason; a *flag*-locked one is not (a number lock gets the engine's line, `engine.md` §15).
 6. **The duration is on the label**, in one form held across the game, and it is the real spend.
    A label may never name a clock time — the engine has no absolute-time advance.
    `the-clock.md` C3/C4.
