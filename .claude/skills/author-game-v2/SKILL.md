@@ -331,7 +331,7 @@ elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable clai
 (*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
 gated on the flag that records it — the truth rule's rule 2, `register.md`) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
-`the-meters.md`, show the reaction, not the number) · **a one-time step speaks** (every one-time
+`the-meters.md`, "What the player is shown") · **a one-time step speaks** (every one-time
 canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest
 chain where each step reads what the one before sets; `the-arc.md` A1) · **a scene ends on nothing** (a one-time
 scene with a person and no choice anywhere, so its hook must be its last line) · **a person who never

@@ -1579,8 +1579,8 @@ def lint_history_repeatable(game):
 
 # ─────────────────────────────────────────────────────────────────────────────
 # The loud voice's lints — added 2026-09-24 with `register.md` "The voice — say it
-# loud" and "The truth rule", `the-first-hour.md` F1b and `the-meters.md` "show the
-# reaction, not the number". Source: PRD_SKILL_STYLE_AND_OPENING.md §5.5.
+# loud" and "The truth rule", `the-first-hour.md` F1b and `the-meters.md` "What the
+# player is shown". Source: PRD_SKILL_STYLE_AND_OPENING.md §5.5.
 #
 # ⚠️ ALL FIVE ARE LINTS, NOT GATES, on purpose. The PRD scoped the blocking overhaul
 # out, and P0 applies: a gate on a brand-new doctrine measures the doctrine's age, not
@@ -1887,8 +1887,10 @@ def _declared_stat_names(game):
 def lint_printed_stat(game):
     """`+Jo Respect` on a button, or in the prose after it: a score printed on screen.
 
-    `the-meters.md` "What the player is shown": show the reaction, not the number, and
-    `register.md` truth rule 4, a consequence printed on a button is a real flag. Since 2026-09-25 a declared stat is listed too: scores stay hidden.
+    `the-meters.md` "What the player is shown": numbers are shown and named (D1), and a `+X`
+    for a stat that does not exist is wrong; `register.md` truth rule 4, a consequence printed on a
+    button is real. A declared stat is still listed, as a note, until the lint is rebuilt (PRD v2
+    phase 4, the printed-stat lint).
     Matches by the LAST words of the printed name, so "+Jo Respect" counts as declared if
     `respect` or `jo respect` is. A list, never a score.
     """
@@ -1902,12 +1904,11 @@ def lint_printed_stat(game):
             if not words:
                 continue
             tails = {" ".join(words[i:]) for i in range(len(words))}
-            # Since LO's decision of 2026-09-25 (`the-meters.md` "What the player is shown"),
-            # a score is never printed: a person's own score is hidden, and the player sees the
-            # reaction. So every printed stat label is listed; the note only says which kind.
+            # Under D1 (`the-meters.md` "What the player is shown") a real stat may be shown;
+            # it is still listed, marked as real, until phase 4 narrows this lint.
             if tails & declared or {t.replace(" ", "_") for t in tails} & declared:
-                hits.append(f"{cid}: \"{m.group(0).strip()}\" prints a real score. Keep the "
-                            f"score hidden and show the reaction")
+                hits.append(f"{cid}: \"{m.group(0).strip()}\" prints a real stat (allowed; "
+                            f"the engine's toast already shows it)")
             else:
                 hits.append(f"{cid}: \"{m.group(0).strip()}\" names no declared trait or flag")
 
@@ -12154,10 +12155,9 @@ def main():
         print(f"  lint · a printed stat is real — {stat_summary}")
         for h in stat_lints[:10]:
             print(f"          · {h}")
-        print("          (the-meters.md 'What the player is shown' — show the reaction, not the"
-              " number. Print a reaction line or a real flag.")
-        print("           Scores stay hidden, a person's own included (LO, 2026-09-25). A LIST,"
-              " never a score)")
+        print("          (the-meters.md 'What the player is shown' — numbers are shown and named;"
+              " a +X for a stat that does not exist")
+        print("           is the defect. A LIST, never a score)")
 
     if speaks_summary:
         print(f"  {'─'*72}")

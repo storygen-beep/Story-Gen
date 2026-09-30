@@ -5,6 +5,63 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — DC6a: numbers are shown and named; the toast stays; the sidebar shows the number once (doctrine)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC6a (D1 · D1b · D3 · D4 · J5). LO reversed the 2026-09-25 rule "the score is
+hidden". Now:
+- numbers are shown and named, the field's way (R3 K12: corruption is a number in 13 of 15);
+- the "+N" toast stays (D1b);
+- one name per trait, with genre words for sex traits (D3, D3b);
+- the sidebar mix is D4.
+
+The docs and four gates.py messages still taught "hidden".
+
+**What changed.**
+- `references/the-meters.md`:
+  - "What the player is shown" is rewritten to D1 in four parts:
+    - her traits as name + number + band word;
+    - a man's kept traits in `show_traits`, with *(check: pending NC6)*;
+    - a reaction line plus the toast, and a `+X` for a non-existent stat is still wrong;
+    - the requirement is told.
+  - The DoL `$exposed` evidence is kept. The band-ladder line "the number is internal" is gone.
+- M7 is now "Band a meter, show it once":
+  - `in_dump = false` keeps the number to one place;
+  - the D4 table: sex traits `trait_words` + `show_value`; needs `trait_bar` "Energy: 60 / 100"; money
+    `trait_words` + `show_value` with no bands, "Money: 140";
+  - every item has a `label`, with *(check: pending Gate 27)*.
+- `references/register.md`:
+  - truth rule 4 and its table row: a consequence on a button is a real flag or stat, numbers are shown, and a
+    `+X` for no real stat is the defect;
+  - the genre word counts as the player's own word *(LO decided, D3b)*.
+- `references/the-voice.md`:
+  - the label rule gets the same genre-word line;
+  - the Zara "raw" row is gone (adults-only). It is replaced by Cupid's Way, numbers only: 38 of its 48 greyed
+    buttons outside Jack/Aaron (§L).
+- `references/the-first-hour.md` F1b step 3: a reaction line plus the toast.
+- `references/the-economy.md:514`: "a counter trait", not "a hidden counter".
+- `SKILL.md:334` lint text (not a scoreboard gate row) points at "What the player is shown".
+- `references/engine.md`:
+  - §41d is corrected: `hide_value` does drop the number from a `trait_bar`'s own label (`v2.py:18521`); it does
+    not keep the key out of the dump;
+  - §34 says every trait he keeps is named under D1;
+  - §41e's citation now points at `_is_free()` (`gates.py:5238`). The old `:5115` was already stale, and this
+    edit moved it again.
+- `scripts/gates.py`: text only, no behaviour change:
+  - the :1583 comment;
+  - the `lint_printed_stat` docstring and messages ("prints a real stat (allowed; the engine's toast already
+    shows it)");
+  - the lint footer.
+  - The lint's own rewrite is phase 4.
+
+**Flagged, not edited:** `CLAUDE.md:122`, "no made-up stats — show the reaction, not the number", now contradicts D1
+(ground rule 14).
+
+**Verified.**
+- Greps: 14 old phrases at 0.
+- Suite: 315 passed. `--selfcheck`: the index is current. cite_check: 0.
+
+words: 138,101 → 137,841 (−260) · running total 137,841 / 149,283.
+
 ## 2026-09-30 — DC5: her climb into paid sex — introduced, a first time, then the repeatable (doctrine)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §4 DC5 (D7 · E5 · J2 · J3 · J4). Nothing said:

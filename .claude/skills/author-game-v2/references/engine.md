@@ -1694,7 +1694,8 @@ card already exists elsewhere in the game and is read at runtime:
 | the next step | that character's own quest card — `renderQuestsGoalBlock` + its `tip` |
 | his numbers (opt-in) | `show_traits` below — each row is the trait's name, his value, and a word |
 
-**His numbers.** The page shows none unless you name them:
+**His numbers.** The page shows none unless you name them — and under D1 every trait he keeps is
+named (`the-meters.md` W1):
 
 ```toml
 [ui.cast_page]
@@ -2384,17 +2385,17 @@ hint that the other half of the same file uses a different one.
 Both are hard validation failures, and both come after 41b, so a first quest-card block typically
 costs three build rounds rather than one.
 
-### 41d. `hide_value` on a sidebar item does not hide the value
+### 41d. `hide_value` does not keep a trait out of the dump
 
 The suppression is `[[traits.labels]] in_dump = false` (or `hidden = true`, the secret-trait switch)
 and nothing else — §30 above says so, and it is worth repeating here because the wrong key is the
-obvious guess. `hide_value` parses, imports,
-builds and does nothing; the auto Traits dump keeps printing the bare number under the band.
+obvious guess. `hide_value = true` only drops the number from a `trait_bar`'s own label
+(`v2.py:18521`); the auto Traits dump keeps printing the bare number under the band.
 
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
 Not an engine fact but a scoreboard one, and it belongs beside them because it costs the same rounds.
-`gates.py:5115` decides a rung is farmable from **the way in**: `trigger.costs`,
+`_is_free()` (`gates.py:5238`) decides a rung is farmable from **the way in**: `trigger.costs`,
 `trigger.max_triggers_per_day`, or a day-cap flag condition on the trigger whose setter sits on a
 choice inside.
 

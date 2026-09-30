@@ -45,8 +45,9 @@ anyone. *The Undercroft* becomes *The Basement* and says what the place is in on
 **The word on a label is `register.md`'s, and it has no gloss.** A button cannot explain itself:
 there is no sentence on it to carry one, and the player reads it *before* the prose behind it. So
 a room name, a canvas `name` and a room-list choice take the **plain word**, however well the
-paragraph downstream glosses it. `references/register.md`, "The words the player has to already
-own" — the label sub-rule.
+paragraph downstream glosses it. A sex trait's genre word (*Corruption*) counts as a plain word
+*(LO decided, D3b)*. `references/register.md`, "The words the player has to already own" — the label
+sub-rule.
 
 **A character's name is navigation too, and it is not a label until the player owns it.** Before a
 character has been met, name them by their **role** and where they are — *"your landlady"*,
@@ -214,7 +215,7 @@ Three attested ways to say it, all from the field:
 | | |
 |---|---|
 | **in fiction** | *"You could ask him about his headquarters if you had a way to approach… **If only you've worked here, hm…**"* — `shady-deals`. Names the want, refuses her, and prints the key, in her own voice |
-| **raw** | `Required Corruption: 20   Required Energy: 10` — `zaras-school-life`, printed inside the written refusal |
+| **raw** | the button greyed with the number beside it — Cupid's Way, 38 of its 48 greyed buttons outside the Jack/Aaron routes |
 | **term by term** | `become-taxi-driver` names **every** unmet term with directions — *"You need more friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the car' and then 'Street Race'…)"* |
 
 **Reach for a trait goal whenever a card gates on a number**, because the engine then prints

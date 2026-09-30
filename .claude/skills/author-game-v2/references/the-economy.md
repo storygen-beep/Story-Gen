@@ -511,7 +511,7 @@ Six rules are carried by that one choice:
    day rolls and this hook clears. A rung that crosses midnight with an exit-set cap starts the new
    day **already capped**, and a sleep rung that runs overnight is never offered before midnight
    again from the second night. `engine.md` §28.
-3. **A flag, not a counter trait.** A hidden counter with an `lt` condition works and reads to
+3. **A flag, not a counter trait.** A counter trait with an `lt` condition works and reads to
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
 4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
    ⚠️ And know the asymmetry: a **`costs` deduction is hard-clamped to 0–100 and cannot be

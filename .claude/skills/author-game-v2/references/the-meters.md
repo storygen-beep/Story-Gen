@@ -597,55 +597,28 @@ string per band. What separates a good implementation from a bad one is **where 
 `corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
 set a descriptor string, copy-pasted through the game instead of factored into one place.
 
-Note what the bands say. Not `45/100`: **a body state in words**. The number is internal; what the
-player meets is how she is. Our surface for this is `trait_status_text` (`engine.md` §30) — one
+Note what the bands say: **a body state in words**, printed beside the number (M7), so the player
+meets both how she is and how far. Our surface for this is `trait_status_text` (`engine.md` §30) — one
 authored ladder, rendered wherever the trait sits.
 
 ### What the player is shown
 
-The field does not show you the number. **It shows you the world reacting to it.**
-`degrees-of-lewdity`'s real body system is `$exposed`, a three-state value the author writes exactly
-once — `<<set $exposed to 0>>` at game start — and the engine derives from the worn set thereafter.
-The world then reads it about **900 times**: 415 sites test `gte 1`, 151 test `gte 2`, 90 test
-`lte 0`. Eighty-two per cent of those reads only change words. The portrait reads it too, setting
-the model's mouth to a frown at `exposed === 2`.
+**Numbers are shown and named, and the world reacts to them** *(LO decided, D1; R3 K12: corruption is
+a number in 13 of 15 top games)*. `degrees-of-lewdity`'s body system is `$exposed`, a three-state value
+the author writes once and the engine derives from the worn set; the world then reads it about **900
+times**, and 82% of those reads only change words. **One derived number, cheap enough to test that the
+whole world tests it.** W3's gate makes sure somebody reads it.
 
-**That is the shape to copy: one derived number, cheap enough to test that the whole world tests
-it.** W3's gate is what makes sure somebody reads it.
-
-**Show the reaction, not the number** (added 2026-09-24).
-The same holds after a choice. What the player sees when a click moves something is **a reaction
-line** — *"He nods. Once."*, *"Her face goes hard."* — or **a real consequence named after a real
-flag**, like a lift offered for tomorrow that the flag actually delivers. Never `+Respect` or
-`−Relationship` for a stat that does not exist; lint `a printed stat is real` lists them.
-
-| where the field prints the change | games |
-|---|---|
-| after the click, e.g. corpo-life's *"(Relationship +4 from interaction)"* | ~12 of 26 |
-| on the button before the click | 1 at scale (degrees-of-lewdity, a coloured marker, no number), 2 marginal |
-| players asking to see a stat | 4 of 22,252 comments |
-
-Source: the 2026-09-24 scene-content review, which read the 26 games' own source.
-
-**LO's decision, 2026-09-25: the score is hidden, the reaction is shown, the requirement is told.**
-Four parts, and they apply to every game this skill authors:
-
-1. **A person can keep their own score, and the player never sees it.** Where W1 puts weight on
-   the cast (`who_climbs = "cast"` or `"both"`), each person's number is internal. It picks which
-   reaction, which line and which step comes next. This is what the field does: 21 of 26 games keep
-   per-person state, and 8 of 26 never print a change to it.
-2. **After a choice, the player sees a reaction or a real consequence.** Never a number, and never
-   a `+Respect` or `−Relationship` label, whether or not the stat is declared. The reaction is the first
-   line of the node the choice leads to; when reactions differ, one short node per choice
-   (`the-first-hour.md` F1b step 3). A number invites
-   farming: the player repeats a choice to watch it climb.
-3. **When something is out of reach, the player is told what it needs.** That is the question
-   players actually ask: of 22,252 comments, 4 ask to *see* a stat, and the recurring ask is *"how
-   do I raise X / it's stuck at N"*. The requirement goes on the guidance card, as a trait goal that
-   prints *"14 / 20"* (`the-voice.md` R3b). On a locked button, R4 still governs.
-4. **Where a person stands is said in words, not a score.** For example, *"warming to you"*. The
-   cast page (`engine.md` §34) can show a man's trait with a word beside it: `show_traits` plus
-   `trait_bands`. Without them the words live in the reaction lines and on that person's quest card.
+1. **Her traits show as name + number**, with a band word beside it where it has bands (M7). One name
+   per trait, everywhere (`engine.md` §30).
+2. **A man's numbers show on the cast page**: every trait he keeps (W1) goes in `show_traits`, with a
+   word beside it (`engine.md` §34) *(check: pending NC6)*.
+3. **After a choice, a reaction line and the toast.** The engine's "+N" toast stays *(D1b)*; the first
+   line of the next node is his reaction. A `+X` label for a stat that does not exist is still wrong —
+   lint `a printed stat is real`.
+4. **When something is out of reach, the requirement is told**: the guidance card's trait goal prints
+   *"14 / 20"* (`the-voice.md` R3b), and a locked button prints the need (R4). Players ask *"how do I
+   raise X"* far more than *"show me X"* (4 of 22,252 comments ask to see a stat).
 
 ⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
 `getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
@@ -912,24 +885,23 @@ It bounds **how high a trait can go**, not **how fast**:
 - ❌ **never on an ascent tier** — the tier must reach its top band, and a cap there deletes content
 - ❌ it is not a throttle. A capped rung is still infinitely clickable up to the cap.
 
-### M7 · Band a meter, hide its number
+### M7 · Band a meter, show it once
 
 The sidebar prints a trait twice — once from the auto Traits dump, once from whatever
 `[[sidebar_items]]` you wrote — and the two do not know about each other (§30).
 
-**Every trait carrying `bands` in `[[sidebar_items]]` needs `in_dump = false` in `[[traits.labels]]`.**
-A trait absent from `[[traits.labels]]` entirely is *not* kept out; it prints. Don't use
-`hidden = true` for this: it is the secret-trait switch, it takes the trait off the Stats page too,
-and because it is keyed by name it hides every man's trait of the same name.
+**Every trait carrying `bands` in `[[sidebar_items]]` needs `in_dump = false` in `[[traits.labels]]`**,
+so its number shows once, in the item. A trait absent from `[[traits.labels]]` entirely is *not* kept
+out; it prints. Don't use `hidden = true` for this: it is the secret-trait switch, and because it is
+keyed by name it hides every man's trait of the same name.
 
-Choose the primitive by what the number **means**:
+The sidebar shows the number *(D4)* *(check: pending Gate 27)*, and every item carries a `label`:
 
-| kind | example | sidebar type | why |
+| kind | example | sidebar type | reads |
 |---|---|---|---|
-| identity / qualitative state | an ascent tier, corruption | `trait_words` + `bands` | the player thinks in a word, not a number |
-| transient mood | arousal | `trait_bar` + `bands` + `hide_value = true` | show the band, hide the volatile figure |
-| body-need | energy, hygiene | `trait_status_text` + `bands` | passive banded body-state |
-| countable resource | money | `trait_bar`, `hide_value = false`, **no `bands`** | you want the exact figure; don't band a thing the player counts |
+| sex trait | corruption | `trait_words` + `bands` + `show_value = true` | *Corruption: 12 · Curious* |
+| body need | energy, hygiene | `trait_bar` + `bands` (no `hide_value`) | *Energy: 60 / 100*, a bar, the band word |
+| money | money | `trait_words` + `show_value = true`, no `bands` | *Money: 140* |
 
 **Gate 27** fails any banded item whose key is neither `in_dump = false` nor `hidden`. It is deterministic — no threshold to
 invent, no false positives.

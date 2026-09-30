@@ -91,7 +91,7 @@ one was out of character, and one printed a stat that does not exist.
 | texture that cannot clash with anything: the kettle, a pet name, the oil in the tray | anything that contradicts the design: clothes, times, who is where |
 | her opinions in her thoughts | claims about her past that no flag tracks — a past-tense clause about her: *you came last night*, *you did this again*. *Again* alone on a repeatable is fine (*he wants you again*) |
 | dialogue that fits the person's cast entry | behaviour the cast entry rules out |
-| a consequence printed on a button when a real flag or stat sits behind it | made-up stats (`the-meters.md`, "What the player is shown") |
+| a consequence printed on a button when a real flag or stat sits behind it | a `+X` for a stat that does not exist (`the-meters.md`, "What the player is shown") |
 
 **The four rules.**
 
@@ -102,8 +102,8 @@ one was out of character, and one printed a stat that does not exist.
    outside it.
 3. **A big moment is a one-time step, not a repeatable.** A repeatable plays every visit, so it
    cannot carry a revelation. L3.
-4. **A consequence printed on a button is a real flag**, or it is added to the design first. Scores,
-   including a person's own, are never printed (`the-meters.md`, "What the player is shown").
+4. **A consequence printed on a button is a real flag or stat**, or it is added to the design first.
+   Numbers are shown and named (`the-meters.md`, "What the player is shown").
 
 **How to check a scene — seven steps.**
 
@@ -1054,7 +1054,8 @@ games, reads **0.8**.
 Eleven common regional words appear in **zero of 27 games across 14.7M words**: *airer,
 anorak, bedsit, biro, chandlery, chippy, forecourt, fryers, holdall, lodger, wellies.* 
 
-**Gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
+**The genre word counts as the player's own word** for a sex trait — *Corruption*, *Exhibitionism*
+— *(LO decided, D3b)*. **Otherwise, gloss it in the sentence that first uses it, or use the plain word.** *immersion → water heater ·
 pitch → rent · chandlery → hardware shop · the front → the seafront · float → the till money · went
 inside → went to prison.* Either the sentence carries the meaning or the word does not earn its
 place. This costs nothing: the specificity that matters is what the thing is DOING, not which

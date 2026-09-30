@@ -93,8 +93,8 @@ setup → problem → character interaction → conflict → choice → temptati
    she answers → they push → she thinks. Who they are, what they want and how they feel about her
    in the first lines.
 3. **A first choice inside that first character scene**, not after the opening. Its consequence
-   is **visible as a reaction line**, or as a real flag named on the button — never a score or a stat label
-   (`the-meters.md`, "What the player is shown"). **How it is built:** the reaction is the first
+   is **visible as a reaction line** plus the engine's toast, or as a real flag named on the button —
+   never a `+X` for a stat that does not exist (`the-meters.md`, "What the player is shown"). **How it is built:** the reaction is the first
    line of the node the choice leads to. When the reactions differ, each choice gets its own short
    node that opens on its reaction and then rejoins the scene. That costs the player one click per
    choice, and it is the shape: the engine has no other place to print a line after a click.
