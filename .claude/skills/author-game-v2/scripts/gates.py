@@ -3744,19 +3744,52 @@ def lint_own_words(model, game):
              for field in ("name", "id")]
     return own_words_report(_player_visible_text(model, game), names)
 
+def _hour_slots(rows):
+    """{(day, hour)} touched by rows = [(weekdays or None for every day, start, end)].
+
+    An hour counts when any part of it is inside a row; a row past midnight spills into
+    the next day (`_ladder_spans`).
+    """
+    out = set()
+    for weekdays, start, stop in rows:
+        for d in (range(7) if not weekdays else weekdays):
+            for sd, sa, sb in _ladder_spans(d, _pr_mins(start), _pr_end_mins(stop)):
+                out |= {(sd, h) for h in range(24) if h * 60 < sb and sa < h * 60 + 60}
+    return out
+
+
+def _trigger_slots(trigger):
+    """The hour slots a canvas's own schedule makes it live in; every slot when it has none."""
+    scheds = (trigger or {}).get("schedules") or (
+        [trigger["schedule"]] if (trigger or {}).get("schedule") else [])
+    if not scheds:
+        return {(d, h) for d in range(7) for h in range(24)}
+    return _hour_slots([(s.get("weekdays"), s.get("start_time", "00:00"),
+                         s.get("end_time", "23:59")) for s in scheds])
+
+
 def _walkin_join(model, game):
     """The activity x schedule JOIN. `the-surfaces.md` R3.
 
     A location QUALIFIES when she does solo work there AND at least one character
     is scheduled there — then someone can walk in on her. Not a judgement: it is
     already true in the board. Returns (qualifying, covered, rows).
+
+    ⚠️ ALONE MEANS ALONE AT THAT HOUR (PRD v2 CK8c · I11, 2026-09-30). A repeatable not
+    bound to a person used to count as solo however full the room was. Now a solo canvas
+    counts only if it is live in some hour when NOBODY is scheduled in the room — and the
+    room must have somebody scheduled at another hour, or there is nobody to walk in.
     """
     sched = collections.defaultdict(set)
+    rows_at = collections.defaultdict(list)
     for npc in (game.get("npcs") or []):
         for r in (npc.get("schedules") or []):
             loc = r.get("location") or r.get("location_id")
             if loc:
                 sched[loc].add(npc.get("id"))
+                rows_at[loc].append((r.get("weekdays"), r.get("start_time", "00:00"),
+                                     r.get("end_time", "23:59")))
+    occupied = {loc: _hour_slots(rows) for loc, rows in rows_at.items()}
 
     solo = collections.defaultdict(list)
     subs = collections.Counter()
@@ -3768,6 +3801,8 @@ def _walkin_join(model, game):
         if (t.get("trigger_mode") == "random" or t.get("npc")
                 or t.get("requires_npc") or t.get("substitution_only")):
             continue
+        if not (_trigger_slots(t) - occupied.get(loc, set())):
+            continue                  # somebody is always there when this runs: not alone
         solo[loc].append(c["id"])
         subs[loc] += len(t.get("substitutions") or [])
 
@@ -5087,8 +5122,30 @@ def _routes(model, game):
       * the choice is gated on something the TARGET itself moves — the `_today` pattern:
         a flag the target sets, read `is_false`; or an `lt`/`lte` on a trait the target
         increments. That is self-limiting, which a plain tier gate is not.
+      * the click costs at least the SOURCE canvas's own schedule window in time — a
+        240-minute shift from a hub open 18:00-22:00 can run once per window (PRD v2
+        CK8c · H13). The time is the choice's `time_progression_minutes`, else the
+        target node's exit time. A source with no schedule has no window, so no brake.
     """
     by_id = {c["id"]: c for c in (game.get("canvases") or [])}
+
+    def window_minutes(trigger):
+        scheds = (trigger or {}).get("schedules") or (
+            [trigger["schedule"]] if (trigger or {}).get("schedule") else [])
+        spans = [(_pr_end_mins(s.get("end_time", "23:59")) - _pr_mins(s.get("start_time", "00:00")))
+                 % 1440 or 1440 for s in scheds]
+        return max(spans) if spans else None
+
+    def click_minutes(ch, tgt):
+        v = (ch.get("config") or {}).get("time_progression_minutes") or ch.get("time_progression_minutes")
+        if v:
+            return int(v)
+        nid = (ch.get("nodeId") or "").split(".", 1)[1] if "." in (ch.get("nodeId") or "") else None
+        for n in by_id[tgt].get("nodes") or []:
+            if nid is None or n.get("id") == nid:
+                tv = ((n.get("exit_block") or {}).get("config") or {}).get("time_progression_minutes")
+                return int(tv) if tv else 0
+        return 0
     sets_flag, bumps_trait = {}, {}
     for cid, c in by_id.items():
         f, t = set(), set()
@@ -5134,9 +5191,12 @@ def _routes(model, game):
                         tk, op, v = it.get("trait_key"), it.get("operator"), it.get("value")
                         if tk and op in ("gte", "gt") and isinstance(v, (int, float)):
                             reqs[tk] = max(reqs.get(tk, 0.0), float(v))
+                win = window_minutes(c.get("trigger"))
+                timecap = bool(win) and click_minutes(ch, tgt) >= win
                 routes[tgt].append(dict(
                     src=c["id"], costs=bool(costs), perday=perday, selflimit=selflimit,
-                    reqs=reqs, braked=bool(costs) or perday or selflimit))
+                    timecap=timecap, reqs=reqs,
+                    braked=bool(costs) or perday or selflimit or timecap))
     return routes
 
 
@@ -8637,6 +8697,66 @@ def run_gates(model, game, state=None):
               + " — but NO condition anywhere in the game reads it. A restore that gates "
                 "nothing is a chore, not a need (the-meters.md M9)"
               for n in dead])
+
+    # G29b — a need can be met every day (PRD v2 CK8c · H12, 2026-09-30). G29 asks whether
+    # a need gates anything; this asks whether she can FILL it on every weekday. A body that
+    # needs food and a kitchen closed on Sundays is a Sunday with no way out. A source is a
+    # canvas whose effects add a positive value to the need, or set it to one. It is live on its trigger's
+    # weekdays (every day with no schedule), narrowed by its place's EN3 `hours` when the
+    # place has them; a triggerless rung takes the days of the canvases that route into it.
+    if state is None or not needs:
+        gate("a need can be met every day", None,
+             "no declared needs — nothing to fill" if state is not None
+             else "no v2_state.json — nothing declared to check against")
+    else:
+        loc_hours = {l.get("id"): l.get("hours") for l in (game.get("locations") or [])
+                     if isinstance(l.get("hours"), list) and l.get("hours")}
+
+        def own_days(canvas):
+            t = canvas.get("trigger") or {}
+            live = _trigger_slots(t)
+            hours = loc_hours.get(t.get("location"))
+            if hours:
+                live &= _hour_slots([(h.get("weekdays"), h.get("open", "00:00"),
+                                      h.get("close", "23:59")) for h in hours])
+            return {d for d, _h in live}
+
+        by_id = {c.get("id"): c for c in (game.get("canvases") or [])}
+
+        def live_days(canvas):
+            t = canvas.get("trigger") or {}
+            if t.get("location"):
+                return own_days(canvas)
+            days = set()
+            for r in routes.get(canvas.get("id")) or []:
+                src = by_id.get(r["src"])
+                if src is not None and (src.get("trigger") or {}).get("location"):
+                    days |= own_days(src)
+            return days
+
+        short = []
+        for need in needs:
+            key = str(need.get("key"))
+            days = set()
+            for c in (game.get("canvases") or []):
+                if _is_dev(c) or (c.get("trigger") or {}).get("is_active", True) is False:
+                    continue
+                # A refill is an `add` of a positive value OR a `set` to one: the field's
+                # restores are mostly "wash set 100", and reading `add` only called every
+                # one of them unfillable.
+                raises = any((ef.get("trait") or ef.get("trait_key")) == key
+                             and ef.get("targetType", "player") == "player"
+                             and (ef.get("op") or "add") in ("add", "set")
+                             and _effect_value_sign(ef.get("value")) > 0
+                             for h in _exit_holders(c.get("nodes")) for ef in (h.get("effects") or []))
+                if raises:
+                    days |= live_days(c)
+            missing = [_PR_DAYS[d] for d in range(7) if d not in days]
+            if missing:
+                short.append(f"`{key}`: nothing that raises it is live on {', '.join(missing)}")
+        gate("a need can be met every day", not short,
+             f"{len(needs) - len(short)}/{len(needs)} declared needs can be filled on every weekday",
+             short)
 
     # ═════════════════════════════════════════════════════════════════════════
     # G30 — the walk-in floor. `the-surfaces.md` R3.

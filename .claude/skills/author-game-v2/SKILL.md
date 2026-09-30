@@ -264,6 +264,7 @@ how many fails are [off].
 | **what money buys opens a door** | a thing bought with the currency that survives the night is READ somewhere — money that buys meter points buys nothing | `the-economy.md` R1b |
 | a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
 | **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing is a chore | `the-meters.md` M8–M10 |
+| a need can be met every day | each declared need has something that raises it live on every weekday — its trigger's days, narrowed by the place's `hours` | `the-meters.md` M8–M10 |
 | **the walk-in floor** | a room where she works alone with someone scheduled carries a walk-in | `the-surfaces.md` R3 |
 | **an explicit beat carries a clip** | the picture is on the beat the player is reading, not on the one above it | `register.md` S1 · `engine.md` §8 |
 | **somebody speaks** | the game is not all narration — field median 2.93:1 | `register.md` S3 |

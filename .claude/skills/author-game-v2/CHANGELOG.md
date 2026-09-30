@@ -5,6 +5,55 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK8c: alone means alone at that hour; a long click is a brake; a need can be met every day (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8c (I11 · H13 · H12). Three checks read "anywhere, any time" where the
+doctrine means "at that hour":
+- G30 called any unbound repeatable "she works alone", however full the room was;
+- `_routes` never counted a time cost as a brake;
+- nothing checked that a need could be filled on every weekday.
+
+**What changed.** `scripts/gates.py`:
+- **I11:** `_walkin_join` builds hour slots, using new helpers `_hour_slots` and `_trigger_slots`. A solo
+  canvas counts only if it is live in some hour when nobody is scheduled in the room; the room still needs
+  somebody scheduled at another hour. The G30 text is unchanged.
+- **H13:** `_routes` marks a route `timecap` when the click costs at least the SOURCE canvas's longest
+  schedule window. The time is the choice's `time_progression_minutes`, else the target node's exit time. The
+  route counts as braked; no schedule means no window. The docstring gains the bullet.
+- **H12:** a new ordinary gate, *a need can be met every day*. For each `board.needs[]` key, a canvas whose
+  effects `add` a positive value or `set` one must be live on every weekday: its trigger's days, narrowed by
+  its place's EN3 `hours`, and a triggerless rung takes the days of the canvases routing into it.
+  - The first run read `add` only and failed every need in four games: their restores are `set 100` ("wash
+    set 100"). `set` to a positive value counts as a refill, and a test covers it.
+- `SKILL.md` scoreboard: a new row for *a need can be met every day*.
+- No `--ship` BLOCK row touched. G30 is a REPORT row. `_routes` feeds only *no free uncapped income* and *the
+  climb is paid for* (grep), both ordinary, and H13 only loosens them.
+- `cite_check --fix` moved `engine.md:2381` (gates.py 5080 → 5115). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_gates_ck8c.py`: 14 passed.
+  - I11: a never-empty room doesn't qualify; a canvas live while the room is empty does; a canvas live only
+    while someone is there doesn't; an unscheduled canvas in a part-time room does.
+  - H13: a 240-minute click from an 18–22 hub is braked; 60 is not; no schedule, no brake; time on the target's
+    exit counts.
+  - H12: no Sunday source fails naming Sun; a Sunday source passes; a place closed Sunday fails; a triggerless
+    rung takes its hub's days; `set 100` is a refill; no needs is n/a.
+- Skill tests 297 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch copies of the five games, before → after. No BLOCK row changed.
+  - *a need can be met every day* (new): PASS on all five (2/2, 3/3, 4/4, 2/2, 2/2).
+  - *the walk-in floor* (REPORT in `--ship`):
+    - members_only 8/8 PASS → 7/8 FAIL. On `bar_floor` the walk-in rides `work_shift`, which runs only while
+      someone is scheduled there; the room's alone-hours canvas, `service_stairs`, carries none.
+    - the_balance 5/10 → 4/9, still FAIL. `the_cafe` no longer qualifies; `the_classroom` loses its covered
+      canvases, since `class_3`/`class_4` run only with Sam there.
+    - probation 2/2 → 1/1, still PASS. `martys` no longer qualifies: `work_martys` runs only with Marty there.
+    - orientation and vesper_two are unchanged.
+  - *no free uncapped income* / *the climb is paid for*: no verdict change in any game.
+
+words: 137,504 → 137,538 (+34) · running total 137,538 / 149,283
+
+---
+
 ## 2026-09-30 — CK8b: counting fixes, and new BLOCK rules warn first (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK8b (I9 · I14 · H9 · H10 · H14). Five counting defects:
