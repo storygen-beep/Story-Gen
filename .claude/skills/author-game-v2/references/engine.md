@@ -1025,7 +1025,8 @@ Read and cite before using; delete from this list once promoted above.
 - The exact cooldown count for random events.
 
 *(`_render_group_chain` collects consecutive `group` blocks into one variant chain at
-`v2.py:16215-16221`, so a second ladder on the same node IS dead and first match wins.)*
+`v2.py:16215-16221`, and first match wins; lint
+**adjacent groups** lists the dead ones.)*
 
 ---
 

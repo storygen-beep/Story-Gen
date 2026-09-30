@@ -373,7 +373,7 @@ is around is a legitimate shape; the hard version of the failure is the gate abo
 **a token the engine never resolves** (`@player` / `@npc` in any field the engine emits verbatim,
 nested lists included; `engine.md` §43 has the table. A player-facing one is the `--ship` BLOCK row
 *no raw token on screen*) · **the joints** (the coordination ratio, `, which is` glosses, the
-shortest-sentence screens) · **a pronoun with nobody to point at** · **a past event the player
+shortest-sentence screens) · **adjacent groups** (dead `group` blocks) · **a pronoun with nobody to point at** · **a past event the player
 was never given** · **short lines with no verb** (the last three from `scripts/readable.py`) · **the badge arrives before the
 content** · **the role stays attached** · **which refusals are
 shown at all** · **the act between the click and the number** (`the-surfaces.md` R9 — location

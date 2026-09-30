@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 L1: lint `adjacent groups` (I27)
+
+**Why.** Review I27: the group-chain trap bit twice in the fix pass. Adjacent `group` blocks compile to ONE
+if/elseif chain (`_render_group_chain`, `v2.py:15807`, called at `v2.py:16221`); the skill warned in prose and
+nothing checked it.
+
+**What changed.**
+- `scripts/gates.py`: `lint_adjacent_groups` plus helpers `_group_runs` and `_dead_groups` (NC2(c) reuses them),
+  placed just above `main()` so no cited `gates.py` line moves. It walks the runs the engine builds (group
+  children, each pool variant alone, each cascade beat) and lists:
+  - (a) two or more unconditioned groups in a run — all but the last are dropped;
+  - (b) a conditioned group that is true only when an earlier one is (a low-first ladder, a repeated band), or
+    whose range an earlier one-key ladder already covers (the I27 shape: a second ladder after one that always
+    matches), and an `<<else>>` such a ladder leaves dead.
+  Only AND conditions on trait numbers and flags are reasoned about; an OR group is never judged. Printed below
+  the tally and in `--json` as `adjacent_groups`.
+- `SKILL.md`: the lint list names **adjacent groups**.
+- `references/the-want.md` (the placement trap) and `references/engine.md` (the group-chain note): "no build
+  warning" / "a second ladder IS dead" corrected to name the lint.
+
+**Verified.**
+- `tests/test_gates_l1.py`: 5 pass fixtures (high-first ladder, stage bands, separator, pool/OR, different axis)
+  and 5 fail fixtures (two elses, low-first, the I27 two-ladder shape, dead else, nested + repeated).
+- Suite: 346 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games, before → after: lint absent → 0 dead groups on all five (members_only 37 chains,
+  orientation 18, probation 390, the_balance 34, vesper_two 49); gate tallies unchanged.
+
+words: 139,097 → 139,102 (+5) · running total 139,102 / 149,283.
+
 ## 2026-09-30 — shape.py: her own starting values (`board.player_start`)
 
 **Why.** LO's probe after the follow-ups: in "a step's gate can be reached", a gate with no `npc` (her own trait)

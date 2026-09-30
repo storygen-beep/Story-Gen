@@ -11540,6 +11540,229 @@ def ship_targets(paths, root=None, portal=None):
     return out
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# L1 · adjacent groups (PRD v2 phase 4 · I27, 2026-09-30)
+#
+# The engine collects every run of consecutive `group` blocks in one blocks list into
+# ONE <<if>>/<<elseif>>/<<else>> chain (`_render_group_chain`, v2.py:15807, called from
+# `_convert_blocks_to_game_html`, v2.py:16221). Two ways that silently loses prose:
+#   (a) a group with no conditions is the chain's <<else>>, and there is one <<else>>:
+#       with two or more, every one but the LAST is dropped (`default = child_blocks`
+#       overwrites);
+#   (b) first match wins, so a conditioned group that can only be true when an earlier
+#       one is true never renders — a low-first ladder, a duplicated band, or a second
+#       ladder placed after one that always matches.
+# The fix-pass hit this twice (review I27). This reads the same runs the engine builds
+# and says which groups are dead. Only AND conditions on trait numbers (gte/gt/lte/lt/eq)
+# and player/NPC flags (is_true/is_false) are reasoned about; any other shape is judged
+# only when an identical item appears in both groups, and an OR group is never judged.
+# ─────────────────────────────────────────────────────────────────────────────
+_INF = float("inf")
+
+
+def _group_conditions(block):
+    """The conditions dict the engine reads for a group, or None when it has none."""
+    props = block.get("props") or {}
+    cond = props.get("conditions") or block.get("conditions")
+    if isinstance(cond, dict) and cond.get("items"):
+        return cond
+    return None
+
+
+def _group_children(block):
+    props = block.get("props") or {}
+    return props.get("blocks") or block.get("blocks") or []
+
+
+def _group_runs(blocks):
+    """Every run of consecutive `group` blocks, at every depth, as the engine builds them.
+
+    A group's children, each `block_pool` variant (rendered alone, v2.py:16243) and each
+    cascade beat are their own lists, so a run never crosses into them.
+    """
+    runs = []
+
+    def walk(lst):
+        run = []
+        for b in lst or []:
+            if not isinstance(b, dict):
+                continue
+            btype = (b.get("type") or "").strip()
+            if btype == "group":
+                run.append(b)
+                walk(_group_children(b))
+                continue
+            if run:
+                runs.append(run)
+                run = []
+            props = b.get("props") or {}
+            if btype == "block_pool":
+                for v in (props.get("blocks") or b.get("blocks") or []):
+                    walk([v])
+            for beat in (props.get("beats") or []):
+                if isinstance(beat, dict):
+                    walk(beat.get("blocks"))
+        if run:
+            runs.append(run)
+
+    walk(blocks)
+    return runs
+
+
+def _atom_key(item):
+    """(key, region) for an item this lint can reason about, else (None, None).
+
+    A trait region is an interval (lo, lo_closed, hi, hi_closed); a flag region is a
+    frozenset of the values that satisfy it. is_false is true when the flag is missing
+    (v2.py `triggerConditionsSatisfied`), so is_true / is_false split every save.
+    """
+    if not isinstance(item, dict):
+        return None, None
+    typ, subj = item.get("type"), item.get("subject") or "player"
+    who = item.get("npc_id") or item.get("character_id") or ""
+    op = item.get("operator") or item.get("op")
+    if typ == "flag":
+        key = item.get("flag_key") or item.get("flag")
+        region = {"is_true": frozenset([True]), "is_false": frozenset([False])}.get(op)
+        return ((("flag", subj, who, key), region) if key and region is not None
+                else (None, None))
+    if typ == "trait":
+        key, v = item.get("trait_key") or item.get("trait"), item.get("value")
+        if not key or isinstance(v, bool) or not isinstance(v, (int, float)):
+            return None, None
+        region = {"gte": (v, True, _INF, False), "gt": (v, False, _INF, False),
+                  "lte": (-_INF, False, v, True), "lt": (-_INF, False, v, False),
+                  "eq": (v, True, v, True)}.get(op)
+        return (("trait", subj, who, key), region) if region else (None, None)
+    return None, None
+
+
+def _meet(a, b):
+    if isinstance(a, frozenset):
+        return a & b
+    lo, loc = max((a[0], not a[1]), (b[0], not b[1]))
+    hi, hic = min((a[2], a[3]), (b[2], b[3]))
+    return (lo, not loc, hi, hic)
+
+
+def _empty(r):
+    if isinstance(r, frozenset):
+        return not r
+    return r[0] > r[2] or (r[0] == r[2] and not (r[1] and r[3]))
+
+
+def _covered(r, parts):
+    """True when region r lies inside the union of regions `parts`."""
+    if _empty(r):
+        return True
+    if isinstance(r, frozenset):
+        return r <= frozenset().union(*parts) if parts else False
+    x, need_x = r[0], r[1]
+    while True:
+        best = None
+        for a, ac, b, bc in parts:
+            if not (a < x or (a == x and (ac or not need_x))):
+                continue
+            if b > x or (b == x and bc and need_x):
+                if best is None or (b, bc) > best:
+                    best = (b, bc)
+        if best is None:
+            return False
+        b, bc = best
+        if b > r[2] or (b == r[2] and (bc or not r[3])):
+            return True
+        x, need_x = b, not bc
+
+
+def _group_shape(cond):
+    """({key: region}, [unreadable items], ok) for an AND group; ok False when the group
+    can't be reasoned about at all (OR over several items)."""
+    items = cond.get("items") or []
+    if (cond.get("logic") or "AND").upper() != "AND" and len(items) > 1:
+        return {}, [], False
+    regions, other = {}, []
+    for it in items:
+        k, reg = _atom_key(it)
+        if k is None:
+            other.append(it)
+        else:
+            regions[k] = _meet(regions[k], reg) if k in regions else reg
+    return regions, other, True
+
+
+def _dead_groups(run):
+    """[(index, why)] for every group in one run that can never render."""
+    out = []
+    uncond = [i for i, g in enumerate(run) if _group_conditions(g) is None]
+    for i in uncond[:-1]:
+        out.append((i, f"a second group with no conditions follows at #{uncond[-1] + 1}; "
+                       "only the last one is the <<else>>, this one is dropped"))
+    earlier = []                        # (index, regions, other) of conditioned groups above
+    for i, g in enumerate(run):
+        cond = _group_conditions(g)
+        if cond is None:
+            continue
+        regions, other, ok = _group_shape(cond)
+        if not ok:
+            earlier.append((i, None, None))
+            continue
+        why = None
+        if any(_empty(r) for r in regions.values()):
+            why = "its own conditions contradict each other"
+        for j, er, eo in earlier:
+            if why or er is None:
+                continue
+            # This group implies group j: each of j's items is implied here.
+            if (all(k in regions and _covered(regions[k], [r]) for k, r in er.items())
+                    and all(o in other for o in eo)):
+                why = f"it is true only when #{j + 1} is, and #{j + 1} comes first"
+        if not why:
+            # A ladder above on one key that already covers this group's range on it.
+            by_key = {}
+            for j, er, eo in earlier:
+                if er is not None and not eo and len(er) == 1:
+                    (k, r), = er.items()
+                    by_key.setdefault(k, []).append((j, r))
+            for k, parts in by_key.items():
+                mine = regions.get(k, frozenset([True, False]) if k[0] == "flag"
+                                   else (-_INF, False, _INF, False))
+                if _covered(mine, [r for _, r in parts]):
+                    why = (f"#{', #'.join(str(j + 1) for j, _ in parts)} above already match "
+                           f"every value of {k[3]} it can be true at")
+                    break
+        if why:
+            out.append((i, why))
+        earlier.append((i, regions, other))
+    # The <<else>> is dead too when a one-key ladder above it already matches every value.
+    if uncond:
+        by_key = {}
+        for j, er, eo in earlier:
+            if er is not None and not eo and len(er) == 1:
+                (k, r), = er.items()
+                by_key.setdefault(k, []).append((j, r))
+        for k, parts in by_key.items():
+            full = frozenset([True, False]) if k[0] == "flag" else (-_INF, False, _INF, False)
+            if _covered(full, [r for _, r in parts]):
+                out.append((uncond[-1], f"it is the <<else>>, and "
+                            f"#{', #'.join(str(j + 1) for j, _ in parts)} above already match "
+                            f"every value of {k[3]}"))
+                break
+    return sorted(out)
+
+
+def lint_adjacent_groups(game):
+    """Groups the engine's chain can never render (L1 · I27). A list, never a score."""
+    hits, nruns = [], 0
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            for run in _group_runs(n.get("blocks")):
+                nruns += 1
+                for i, why in _dead_groups(run):
+                    hits.append(f"{c.get('id')}.{n.get('id')}: group {i + 1} of a run of "
+                                f"{len(run)} never renders — {why}")
+    return f"{len(hits)} dead group(s) in {nruns} group chain(s)", hits
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -11650,6 +11873,7 @@ def main():
     cheat_summary, cheat_lints = lint_cheat_page(game)
     tog_summary, tog_lints = lint_toggles_declared(game, state)
     joint_summary, joint_lints = lint_joints(game)
+    groups_summary, groups_lints = lint_adjacent_groups(game)
     (pron_rows, pron_note), event_rows, (vl_rows, vl_seen) = lint_readable(game)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
@@ -11734,6 +11958,8 @@ def main():
                                                          "findings": tog_lints},
                                     "joints": {"summary": joint_summary,
                                                "findings": joint_lints},
+                                    "adjacent_groups": {"summary": groups_summary,
+                                                        "findings": groups_lints},
                                     "pronoun_nobody": {"note": pron_note,
                                                        "findings": pron_rows},
                                     "past_event_not_given": {"findings": event_rows},
@@ -12403,6 +12629,16 @@ def main():
             print(f"          · {h}")
         print("          (a LIST, never a score. `prose has room` judges `but` and `and`; the"
               " ratio and the glosses are for reading — register.md, \"Joints\" and L1)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · adjacent groups — {groups_summary}")
+    for h in groups_lints[:12]:
+        print(f"          · {h}")
+    if len(groups_lints) > 12:
+        print(f"          · … and {len(groups_lints) - 12} more")
+    if groups_lints:
+        print("          (a LIST, never a score. Adjacent groups are ONE if/elseif chain: an unconditioned"
+              " group is the <<else>> and first match wins — the-want.md, the placement trap)")
 
     print(f"  {'─'*72}")
     print(f"  lint · a pronoun with nobody to point at — "
