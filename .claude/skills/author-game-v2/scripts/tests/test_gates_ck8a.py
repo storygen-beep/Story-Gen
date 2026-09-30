@@ -2,7 +2,7 @@
 
   I3  · "she can say no" counts a no written as her spoken line (a leading quote mark).
   I10 · RUNGS: "ass" alone is not anal; "fucks your mouth / face" is oral, not vaginal.
-        The lint that quotes the field distribution says a re-measure is pending.
+        The lint quotes the field distribution re-measured with the new list (phase 5).
 
 Fixtures are written here; nothing in games/ is read or written.
 """
@@ -77,7 +77,8 @@ def test_the_ladder_lint_says_the_field_needs_remeasuring():
                        "nodes": [{"id": "n", "blocks": [{"type": "paragraph", "content": text}]}]}]}
     model, g2 = gates.build(copy.deepcopy(g))
     summary, _ = gates.lint_ladder(model, g2)
-    assert "re-measure pending" in summary
+    assert "44% of the time (4 games, 1,034 explicit passages)" in summary
+    assert "pending" not in summary
 
 
 def test_a_hyphenated_face_fuck_is_oral_only():

@@ -362,12 +362,12 @@ RUNGS = (
 # ⚠️ THE RUNG IS AN ACT, NOT A BODY PART. `cunt` / `puss` / `tits` name anatomy and
 # say nothing about what is happening to it — a first draft of this list had them in
 # the `vaginal` rung and over-counted penetration openings roughly eightfold. Every entry above is a verb or a verb phrase, and the field
-# distribution quoted in the lint was produced by this list AS IT WAS BEFORE 2026-09-30.
+# distribution quoted in the lint was re-measured with this list on 2026-09-30 (below).
 #
 # ⚠️ CHANGED 2026-09-30 (PRD v2 CK8a · I10), on the same principle: `her ass` / `your ass`
 # alone is anatomy, not anal ("he grabs your ass"), and "fucks your mouth / face" is oral,
-# not vaginal. Anal now needs an act on the ass (in / up / fucks). The field figures above
-# and in `lint_ladder` were measured with the old list — RE-MEASURE PENDING.
+# not vaginal. Anal now needs an act on the ass (in / up / fucks). Field re-measured 2026-09-30:
+# CoT/IHOH/SD/CW, 1,034 explicit passages (Great_Games_Study round2/rungs_remeasure_20260930.py).
 RUNG_ORDER = [k for k, _ in RUNGS]
 
 PROSE_BLOCKS = {"paragraph", "dialog", "thought_bubble", "quote", "note"}
@@ -2789,8 +2789,8 @@ def lint_ladder(model, game):
     stuck = [r for r in rows if not (r[3] & TOP)]
     summary = (f"{len(rows)} explicit canvases · {100*len(high)//len(rows)}% OPEN at "
                f"vaginal-or-above · {100*len(stuck)//len(rows)}% never reach oral "
-               f"· field screens open at vaginal-or-above 46% of the time "
-               f"(old rung list — re-measure pending)")
+               f"· field screens open at vaginal-or-above 44% of the time "
+               f"(4 games, 1,034 explicit passages)")
     findings = ([f"{cid} @{loc}: opens on {first} — no rung below it anywhere in the canvas"
                  for cid, loc, first, _ in high[:5]]
                 + [f"{cid} @{loc}: never gets past {first} — {len(pres)} rung(s) total"

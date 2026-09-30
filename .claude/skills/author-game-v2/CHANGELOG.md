@@ -23,6 +23,16 @@ here; game problems are listed in the phase 5 report, never edited.
   only "face-" (carried note from GAME_FOLLOWUPS.md). Oral now matches `face[- ]?fuck\w*` and the vaginal rung also
   skips "face ". Verified: new test in `tests/test_gates_ck8a.py` ("He is face fucking her." is `{oral}`, "He
   fucks you face down." stays `{vaginal}`); the previous `gates.py` read both space forms as `{'vaginal'}`.
+- **RUNGS field figures re-measured; "re-measure pending" dropped (`scripts/gates.py` RUNGS comment and
+  `lint_ladder`, line-for-line; `references/register.md` S2; `tests/test_gates_ck8a.py`).** The opening-rung
+  distribution was measured on the old 25-game field with the pre-CK8a rung list, and that instrument is not in the
+  repo. Re-measured with the current RUNGS and EXPLICIT on the four quotable games only
+  (`~/Documents/Great_Games_Study_20260926/round2/passages/`; CoT, IHOH, Shady Deals, Cupid's Way; Cupid's Way
+  passages naming Jack, Aaron, the aunt or Jemma left out, 139 passages): one passage is one screen, a screen is
+  explicit at 3+ frozen-list words, its rung is the first one its text reaches. Pooled over 1,034 explicit passages:
+  touch 13% · strip 14% · hands 13% · oral 15% · vaginal 25% · anal 3% · finish 17%; vaginal-or-above 44% (was 46%).
+  The basis is now four games, not the field, and the text says so. Script:
+  `round2/rungs_remeasure_20260930.py`. Verified: pytest 462 passed, `--selfcheck` current, `cite_check` 0.
 
 ---
 
