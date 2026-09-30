@@ -1619,11 +1619,29 @@ def _player_pronoun_re(game):
 
 def _past_claim_clause(sentence, pron_re):
     """The PAST_CLAIM_RE match in `sentence` whose clause also holds the player's pronoun
-    and a past-tense verb, else None."""
-    for clause in _CLAUSE_SPLIT_RE.split(sentence):
-        m = PAST_CLAIM_RE.search(clause or "")
-        if m and pron_re.search(clause) and _PAST_VERB_RE.search(clause):
+    and a past-tense verb, else None.
+
+    A clause that holds ONLY the marker ("Last night, you came to his room." / "You were
+    tired, again.") is judged joined to its neighbour clause on each side, because the
+    comma cut the claim from its verb (LO, 2026-09-30, the CK4 comma hole). A marker
+    joined to a clause about somebody else ("Last night, Delgado read the log.") still
+    has no pronoun of hers, so it still does not fire.
+    """
+    clauses = [c or "" for c in _CLAUSE_SPLIT_RE.split(sentence)]
+
+    def claims(text):
+        return bool(pron_re.search(text) and _PAST_VERB_RE.search(text))
+
+    for i, clause in enumerate(clauses):
+        m = PAST_CLAIM_RE.search(clause)
+        if not m:
+            continue
+        if claims(clause):
             return m
+        if re.fullmatch(r"[\W_]*", clause[:m.start()] + clause[m.end():]):
+            nearby = [clauses[j] for j in (i - 1, i + 1) if 0 <= j < len(clauses)]
+            if any(claims(clause + " " + other) for other in nearby):
+                return m
     return None
 
 # `+Jo Respect`, `-2 Trust`, `−Relationship`, `(Trust +4)`: a sign, an optional number,
@@ -4425,6 +4443,40 @@ def _ladder_key_text(k):
 def _ladder_spans(day, a, b):
     """[(day, start, end)] minutes; a window that runs past midnight is two spans."""
     return [(day, a, b)] if a < b else [(day, a, 1440), ((day + 1) % 7, 0, b)]
+
+
+def _window_uncovered(days, frm, to, rows):
+    """The days (0 = Monday) on which the window `frm`-`to` is NOT fully covered by the
+    union of `rows` = [(weekdays or None for every day, start, end)].
+
+    FULL cover, not overlap: a person at the place for ten minutes of a two-hour step is
+    not there for the step. A window or row that runs past midnight is split into two
+    spans (`_ladder_spans`), so "22:00-02:00" is covered by 21:00-23:59 plus 00:00-03:00.
+    An end of "23:59" reads as midnight, or those two rows would leave a one-minute gap.
+    Shared by `shape.py` (the person is there at the step's hour, PRD v2 CK5 · I13) and,
+    from CK8b, the ladder check's person-present test.
+    """
+    def end(t):
+        return 1440 if str(t).strip() == "23:59" else _pr_end_mins(t)
+
+    covered = collections.defaultdict(list)
+    for weekdays, start, stop in rows:
+        for rd in (range(7) if weekdays is None else weekdays):
+            for sd, sa, sb in _ladder_spans(rd, _pr_mins(start), end(stop)):
+                covered[sd].append((sa, sb))
+    missing = []
+    for d in sorted(set(days)):
+        for sd, sa, sb in _ladder_spans(d, _pr_mins(frm), end(to)):
+            at = sa
+            for ra, rb in sorted(covered[sd]):
+                if ra <= at < rb:
+                    at = rb
+                if at >= sb:
+                    break
+            if at < sb:
+                missing.append(d)
+                break
+    return missing
 
 
 def _ladder_holders(canvas):

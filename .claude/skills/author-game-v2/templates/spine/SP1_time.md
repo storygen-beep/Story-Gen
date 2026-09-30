@@ -1,6 +1,6 @@
 # SP1 · Time — <game title>
 
-> [REVIEW] · drafted <date> · signed by LO: <name, date — no earlier than the day after drafting>
+> [REVIEW] · drafted <date> · signed by LO: <name, date>
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP1 · `the-clock.md` · `engine.md` §28.
 
 | decision | answer |

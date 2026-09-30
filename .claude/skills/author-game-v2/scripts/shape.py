@@ -60,15 +60,24 @@ def check(state, strict=False):
         rows.append((name, ok, head, detail or []))
 
     # 1 · a step's place is declared (SP2). Places come with the board, which follows the spine.
-    locs = {l.get("id") for l in (board.get("locations") or []) if isinstance(l, dict)}
+    # THIS release's places when the release page lists them (PRD v2 CK5 · H11): a place cut
+    # from the release is still on the board, and a step there cannot be played.
+    rp_places = [p if isinstance(p, str) else (p or {}).get("id")
+                 for p in (rp.get("places") or []) if isinstance(p, (str, dict))]
+    if rp_places:
+        locs, src = set(rp_places), "release_page.places"
+    else:
+        locs = {l.get("id") for l in (board.get("locations") or []) if isinstance(l, dict)}
+        src = "board.locations"
     if not steps:
         row("a step's place is declared", None, "n/a — no ladder steps")
     elif not locs:
         row("a step's place is declared", None, "n/a — no board.locations yet (places come with the board)")
     else:
-        bad = [f"{n} step {s.get('n')}: `{s.get('where')}` is not a declared location"
-               for n, s in steps if s.get("where") not in locs]
-        row("a step's place is declared", not bad, f"{len(steps) - len(bad)}/{len(steps)} steps", bad)
+        bad = [f"{n} step {s.get('n')}: `{s.get('where')}` is not in {src}"
+               for n, s in steps if s.get("where") not in locs and s.get("fires_from") != "opening"]
+        row("a step's place is declared", not bad,
+            f"{len(steps) - len(bad)}/{len(steps)} steps (read from {src})", bad)
 
     # 2 · a step's hours are a window (SP2). A step with `fires_from = "opening"` fires at a
     # new game, not at an hour, so it has no window to check (PRD v2 CK1 · H3).
@@ -161,16 +170,37 @@ def check(state, strict=False):
         row("the pressure can be met", False if strict else None, "release_page.weeks is not declared (SP7)")
     else:
         every = eco.get("obligation_every_weeks") or 1
-        owed = eco["obligation_amount"] * math.ceil(rp["weeks"] / every)
+        due = math.ceil(rp["weeks"] / every)
+        # A RISING BILL (PRD v2 CK5 · I12). `board.pressure.stages` mirrors the engine's
+        # `[settings.rent] stages` (EN2a): each payment is the amount of the highest stage
+        # whose `after_total_paid` has been reached, so the bill is walked week by week.
+        # Without stages it is today's starting amount times the due weeks.
+        stages = [st for st in (((board.get("pressure") or {}).get("stages")) or [])
+                  if isinstance(st, dict) and isinstance(st.get("amount"), (int, float))]
+        if stages:
+            owed, paid = 0, 0
+            for _ in range(due):
+                reached = [st for st in stages if (st.get("after_total_paid") or 0) <= paid]
+                amt = max(reached, key=lambda st: st.get("after_total_paid") or 0)["amount"] \
+                    if reached else eco["obligation_amount"]
+                owed += amt
+                paid += amt
+            how = f"rising in {len(stages)} stage(s)"
+        else:
+            owed, how = eco["obligation_amount"] * due, "flat"
         earned = eco["week_income"] * rp["weeks"]
+        # `obligation_moves` is free text: printed beside the sum, never judged.
+        moves = f" · moves: {eco['obligation_moves']}" if eco.get("obligation_moves") else ""
         if earned >= owed:
-            row("the pressure can be met", True, f"{earned} earnable against {owed} owed over {rp['weeks']} week(s)")
+            row("the pressure can be met", True,
+                f"{earned} earnable against {owed} owed ({how}) over {rp['weeks']} week(s){moves}")
         elif eco.get("shortfall"):
-            row("the pressure can be met", True, f"{earned} against {owed} — short on purpose: {eco['shortfall']}")
+            row("the pressure can be met", True,
+                f"{earned} against {owed} ({how}) — short on purpose: {eco['shortfall']}{moves}")
         else:
             row("the pressure can be met", False,
-                f"{earned} earnable against {owed} owed over {rp['weeks']} week(s), and no "
-                f"board.economy.shortfall says it is on purpose")
+                f"{earned} earnable against {owed} owed ({how}) over {rp['weeks']} week(s), and no "
+                f"board.economy.shortfall says it is on purpose{moves}")
 
     # 6 · everyone on the release page has a ladder (SP7)
     people = [_person(p) for p in (rp.get("people") or [])]
@@ -213,8 +243,13 @@ def check(state, strict=False):
     else:
         row("the promise has a beat this release", True, str(rp["promise_alive"])[:80])
 
-    # 10 · a signed page is signed, and not on the day it was drafted (the spine's page rules)
+    # 10 · a READY page is signed (the spine's page rules).
+    # D13 (LO decided, 2026-09-30): LO signs whenever LO has read the page. The day-after
+    # compare of `signed_at` with `drafted_at` is gone; it blocked a real same-day approval
+    # and had no evidence behind it (review G1), and with it went the need for a waiver
+    # key (H15). H7: in lenient mode, no READY page is n/a — "0/7 READY" is not a pass.
     pages = {p.get("id"): p for p in ((state.get("spine") or {}).get("pages") or []) if isinstance(p, dict)}
+    ready = sum(1 for p in pages.values() if p.get("status") == "READY")
     bad = []
     for sp in SP_IDS:
         p = pages.get(sp)
@@ -228,16 +263,45 @@ def check(state, strict=False):
             continue
         if not p.get("signed_by") or not p.get("signed_at"):
             bad.append(f"{sp}: READY but not signed")
-        elif not p.get("drafted_at"):
-            if strict:
-                bad.append(f"{sp}: no drafted_at — the day-after rule cannot be checked")
-        elif str(p["signed_at"])[:10] <= str(p["drafted_at"])[:10]:
-            bad.append(f"{sp}: signed {p['signed_at']}, drafted {p['drafted_at']} — sign no earlier than the next day")
     if not pages and not strict:
         row("every spine page is signed", None, "n/a — no spine pages yet")
+    elif not ready and not strict:
+        row("every spine page is signed", None, "n/a — no spine page READY yet")
     else:
-        row("every spine page is signed", not bad,
-            f"{sum(1 for p in pages.values() if p.get('status') == 'READY')}/{len(SP_IDS)} READY", bad)
+        row("every spine page is signed", not bad, f"{ready}/{len(SP_IDS)} READY", bad)
+
+    # 11 · the person is there at the step's hour (PRD v2 CK5 · I13). Optional
+    # `board.characters[].schedule = [{where, weekdays, from, to}]` is the person's hours.
+    # Each step's window, on each of its days, must be FULLY covered by the union of that
+    # person's rows at the step's place (`gates._window_uncovered`, past midnight included).
+    # A step the opening plays is exempt: it has no hour.
+    scheds = {c.get("id"): c["schedule"] for c in (board.get("characters") or [])
+              if isinstance(c, dict) and isinstance(c.get("schedule"), list)}
+    judged, bad = 0, []
+    for n, s in steps:
+        if n not in scheds or s.get("fires_from") == "opening":
+            continue
+        w = s.get("when") or {}
+        days = [gates._ladder_day(d) for d in (w.get("days") or [])]
+        if not days or None in days or not w.get("from") or not w.get("to"):
+            continue                                   # row 2 reports a broken window
+        rows_here = []
+        for r in scheds[n]:
+            if not isinstance(r, dict) or r.get("where") != s.get("where"):
+                continue
+            wd = r.get("weekdays")
+            rows_here.append((None if wd is None else [gates._ladder_day(d) for d in wd],
+                              r.get("from", "00:00"), r.get("to", "23:59")))
+        judged += 1
+        missing = gates._window_uncovered(days, w["from"], w["to"], rows_here)
+        if missing:
+            bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')} "
+                       f"{w['from']}-{w['to']} on {', '.join(gates._PR_DAYS[d] for d in missing)}")
+    if not judged:
+        row("the person is there at the step's hour", None,
+            "n/a — no step belongs to a person with board.characters[].schedule")
+    else:
+        row("the person is there at the step's hour", not bad, f"{judged - len(bad)}/{judged} steps", bad)
 
     return rows, sorted(flags)
 

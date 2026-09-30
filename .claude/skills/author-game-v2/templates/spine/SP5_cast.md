@@ -1,6 +1,6 @@
 # SP5 · The cast — <game title>
 
-> [REVIEW] · drafted <date> · signed by LO: <name, date — no earlier than the day after drafting>
+> [REVIEW] · drafted <date> · signed by LO: <name, date>
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP5 · `the-want.md` §6.
 
 | decision | answer |

@@ -1,6 +1,6 @@
 # SP4 · Loop and pressure — <game title>
 
-> [REVIEW] · drafted <date> · signed by LO: <name, date — no earlier than the day after drafting>
+> [REVIEW] · drafted <date> · signed by LO: <name, date>
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP4 · `the-economy.md` R3, R3b, R3c.
 
 | decision | answer |

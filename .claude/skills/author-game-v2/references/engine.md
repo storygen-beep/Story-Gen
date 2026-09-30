@@ -2378,7 +2378,7 @@ builds and does nothing; the auto Traits dump keeps printing the bare number und
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
 Not an engine fact but a scoreboard one, and it belongs beside them because it costs the same rounds.
-`gates.py:4982` decides a rung is farmable from **the way in**: `trigger.costs`,
+`gates.py:5034` decides a rung is farmable from **the way in**: `trigger.costs`,
 `trigger.max_triggers_per_day`, or a day-cap flag condition on the trigger whose setter sits on a
 choice inside.
 

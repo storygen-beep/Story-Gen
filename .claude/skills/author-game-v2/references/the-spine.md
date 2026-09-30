@@ -12,8 +12,8 @@ is repeating a reference — cut it and point.
 
 - **Seven pages, SP1–SP7**, each from its template in `templates/spine/`. Tables first.
 - **≤ 400 words a page.** Longer means a rule is being restated.
-- **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page **no earlier than
-  the day after it was drafted** — a page signed the day it was written has not been read cold.
+- **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
+  it **(LO decided, D13)**.
 - **One home per decision.** A page records the answer and names the ledger key that holds it
   (`references/state.md`); the ledger does not copy the page. `spine.pages[]` holds only each page's
   status and sign-off.

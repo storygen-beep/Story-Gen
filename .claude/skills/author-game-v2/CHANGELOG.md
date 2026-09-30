@@ -5,6 +5,92 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK4 follow-up: a marker cut off by a comma is judged with its neighbour (checker)
+
+**Why.** LO, 2026-09-30, after CK5 and before CK6. CK4's clause split left a comma hole. "Last night, you came to
+his room.", "This week, you worked six shifts." and "You were tired, again." did not fire, because the marker sat
+alone in its clause, apart from the pronoun and the verb.
+
+**What changed.** `scripts/gates.py` `_past_claim_clause`: a clause that holds only the marker (nothing else but
+punctuation) is judged joined to its neighbour clause on each side, and fires if either join holds her pronoun and
+a past-tense verb. A marker joined to a clause about somebody else still has no pronoun of hers.
+
+**Verified.**
+- `tests/test_gates_ck4.py`: 3 new tests, 13 passed. The three lines above fire; "Last night, Delgado read the
+  log." still does not. On the CK4 commit all four read False.
+- Skill tests 255 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong, after
+  `--fix` moved `engine.md:2381` (gates.py 5016 → 5034; same line, checked by hand).
+- Five-game scratch table (bare marker → CK4 → now): members_only 0 → 0 → 0, orientation 5 → 0 → 0, probation
+  0 → 0 → 0, the_balance 16 → 1 → 1, vesper_two 28 → 1 → 1. No new hits.
+
+words: 137,394 → 137,394 (0)
+
+---
+
+## 2026-09-30 — CK5: shape.py — no day-after rule, this release's places, a rising bill, the person's hours (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK5 (H7 · G1/D13 · H15 · H11 · I12 · I13). `shape.py` said PASS "0/7 READY"
+with nothing signed. It refused LO's same-day approval of all seven spine pages. It accepted steps at places cut
+from the release. It priced a rising bill at its starting amount. And it never checked that the person is at the
+step's place at the step's hour.
+
+**What changed.**
+- `scripts/shape.py` row 10 *every spine page is signed*:
+  - **D13 (LO decided):** the `signed_at` vs `drafted_at` compare is gone, and so is the strict "no drafted_at"
+    line. A READY page must still be signed. H15 (a waiver key) is no longer needed.
+  - **H7:** lenient mode with no READY page is n/a.
+- Row 1 *a step's place is declared* (**H11**): reads `release_page.places` when it lists any (ids or `{id}`),
+  else `board.locations`, and the headline names the source. It also exempts `fires_from = "opening"` steps, which
+  `state.md` (CK1) already says need no `where`. That exemption goes beyond the PRD's CK1 list; it keeps row 1 from
+  contradicting the doc.
+- Row 5 *the pressure can be met* (**I12**): when `board.pressure.stages = [{amount, after_total_paid}]` is present
+  (the EN2a mirror; DC3 documents the key), the bill is walked week by week. Each due week pays the highest stage
+  whose `after_total_paid` has been reached. Without stages it stays the starting amount × due weeks. The headline
+  says "(flat)" or "(rising in N stage(s))". `obligation_moves` is appended as "moves: …" and never judged.
+- New row 11 *the person is there at the step's hour* (**I13**): optional
+  `board.characters[].schedule = [{where, weekdays, from, to}]`. Each step's window, on each of its days, must be
+  fully covered by the union of that person's rows at the step's place, past midnight included.
+  `fires_from = "opening"` steps are exempt. n/a with no schedule.
+- `scripts/gates.py`: a new shared helper, `_window_uncovered(days, frm, to, rows)`. Full cover, not overlap; spans
+  split at midnight with `_ladder_spans`; an end of "23:59" reads as midnight. Nothing else in gates.py uses it
+  yet; CK8b-H9 points the ladder's person-present check at it.
+- Docs (D13, in this item as the PRD says):
+  - `SKILL.md:171` (phase table) drops "no earlier than the day after drafting".
+  - `SKILL.md:453` (`shape.py` mode row) now lists this release's places, the rising bill, "every READY SP page
+    signed" and the new row.
+  - `references/state.md`: the spine comment reads "a READY page is signed", and a new `board.characters[].schedule`
+    row says the per-room count stays `occupancy_rows`.
+  - `references/the-spine.md` page rules: "LO signs each page when LO has read it (LO decided, D13)".
+  - Line 3 of all seven `templates/spine/SP1–SP7`: `signed by LO: <name, date>`.
+- `tests/test_shape.py`:
+  - The "same day fails" mutation becomes "`signed_at` removed" (D13).
+  - `full()` gains schedules, so the new row passes, plus a failing case for it.
+  - The place case adds a matching roof row, so it breaks only row 1.
+- Not a `--ship` BLOCK row (shape.py is the REPORT row "the spine holds together"), and no gates.py gate was added
+  or renamed. No scoreboard edit, no `since` date.
+- `cite_check --fix` moved 1 citation (`engine.md:2381`, gates.py 4982 → 5016). Same line, checked by hand.
+
+**Verified.**
+- `tests/test_shape_ck5.py`: 19 passed. The cases:
+  - H7: n/a lenient, FAIL strict.
+  - D13: same-day PASS, unsigned FAIL.
+  - H11: a cut place FAILS naming `release_page.places`; board fallback.
+  - I12: stages 100 → 150 after 200 paid, 120/week × 4 = 480 against 500, FAIL; flat 400 PASS; moves printed.
+  - I13: covered, a missing day named, back-to-back rows, a gap, past midnight with two rows and with one, the
+    wrong place, an opening step exempt, no schedule n/a.
+  - Row 1: an opening step with no `where` passes.
+  - The helper directly.
+- Skill tests 252 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation, before → after:
+  - *every spine page is signed*: FAIL on 7 same-day pages → PASS.
+  - Row 1 now reads from `release_page.places`, 12/12.
+  - The new row is n/a (no `schedule` in its ledger).
+  - `shape.py`: 8 pass · 1 fail → 9 pass · 0 fail. `--ship` REPORT *the spine holds together*: red 8/9 → ok 9/9.
+
+words: 137,332 → 137,394 (+62) · running total 137,394 / 149,283
+
+---
+
 ## 2026-09-30 — CK4: the past-claim BLOCK judges claims, not markers (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK4 (H6 · I15 · I26), with LO Q1: "again" alone never fires. The bare

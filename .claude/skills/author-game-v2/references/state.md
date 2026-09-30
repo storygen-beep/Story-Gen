@@ -91,7 +91,7 @@ belong here; only decisions, debts, and promises do.
   // its page names (board.*, dependencies, release_page), never copied here.
   "spine": {
     "pages": [ { "id": "SP1", "status": "REVIEW" | "READY", "drafted_at": "YYYY-MM-DD",
-                 "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]   // shape.py: signed_at after drafted_at
+                 "signed_by": "LO", "signed_at": "YYYY-MM-DD" } ]   // shape.py: a READY page is signed
   },
 
   // SP3 — a step that needs another person's step, a window, or a place.
@@ -383,6 +383,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.needs[]` | *a need shuts a door* | `[{ key, decay_per_day, shuts }]` — and every key must be READ by a condition somewhere in the game |
 | `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
+| `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place, past midnight included; a `fires_from = "opening"` step is exempt. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
 | `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "counted"`. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |

@@ -73,3 +73,18 @@ def test_the_printed_line_runs_to_160_characters():
     line = "You did this last night " + "and the rest " * 20 + "."
     got = hits(line)[0]
     assert got == "daily [last night]: " + line.strip()[:160]
+
+
+# ── the comma hole (LO, 2026-09-30): a clause holding only the marker joins its neighbour ──
+
+def test_a_leading_marker_cut_off_by_a_comma_fires():
+    assert hits("Last night, you came to his room.")
+    assert hits("This week, you worked six shifts.")
+
+
+def test_a_trailing_marker_cut_off_by_a_comma_fires():
+    assert hits("You were tired, again.")
+
+
+def test_a_leading_marker_before_someone_else_still_does_not_fire():
+    assert hits("Last night, Delgado read the log.") == []
