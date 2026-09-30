@@ -581,25 +581,23 @@ Four rules follow:
 
 ## A15 · Her climb into paid sex — introduced, a first time, then the repeatable
 
-*(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`.)*
+*(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`. Gate `her climb`.)*
 
 - **Introduced first.** Someone raises it in a one-time scene before the activity appears — the
   activity's version of "every hub is met first" (`the-first-hour.md` F5). 4 of 5 games do (R1:76).
-  *(check: pending NC2)*
 - **A first time before every paid repeatable:** his want → her hesitation → a price named or
   bargained → the act → her feeling after, as its own beat. Then the repeatable opens (R1:138).
-  *(check: pending NC2)*
 - **The repeatable changes with her level:** two voices per act, reluctant and eager, split on her main
   sex trait (**thin**, R1:170), and a menu that grows as the acts open one by one (`the-surfaces.md`
-  R3c). *(check: pending NC2)*
+  R3c).
 - **The start matches the Want's bottom.** Nothing paid is reachable on a new save before its
   introduction and first time; the minimum path is introduced → at least one step → first time. No day
-  count (R1:268). *(check: pending NC2)*
+  count (R1:268).
 - **Night one** may carry one hot moment from a stranger or a one-off — never the paid route and never
   the main man. 3 of 5 games have a day-one scene of that kind (R1:296).
 - **Always a no before** (5 of 5, R1:228). "Stop him" at each stage of a paid scene costs part of the
   pay (**thin**: only one game does it fully, R1:218-228). The route ends only through a labelled final
-  no (A3). *(check: pending NC2)*
+  no (A3).
 
 ---
 
@@ -632,12 +630,9 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 
 ## The check
 
-**Nothing ships with this file, and that is deliberate.**
-
-Two precedents rule it out. **P0** — never build a check for a state nothing is in: it would measure the doctrine's age
-and not the games. And **"a check that fails a game for obeying the doctrine is a bug in the
-check"** — until today nothing in this skill asked for any of this, so every red would be
-retrospective.
+**One gate ships here: `her climb` (A15, LO decided D7).** For A1–A14 two precedents hold. **P0** —
+never build a check for a state nothing is in. And **"a check that fails a game for obeying the doctrine
+is a bug in the check"**.
 
 The candidates below are **lints**, not gates, and each is built only once one game has built
 the thing — the order that produced `the start choice is read` (shipped after a game built

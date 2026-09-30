@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC2: her climb (D7 · J3 · J4)
+
+**Why.** `the-arc.md` A15 (LO decided, D7) set her climb into paid sex: introduced, a step, a first time, then the
+repeatable, with two voices per act and "stop him" at each stage. Five rules carried *(check: pending NC2)*.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`her climb`** (`_her_climb`), registered by `_phase4_gates`, which
+  `run_gates` calls from a line that was a comment in the CK7 block, so no cited line moves.
+  - *Paid*: a repeatable, not substitution-only, whose exit adds to the money trait (declared currency, else the
+    first money-like trait) and which names an act: an explicit beat AND a `RUNGS` act past `touch`. Decided
+    here: rung words alone made a bar shift and a hub read as paid sex ("she came home" is `finish`).
+  - *Needs*: what a canvas's trigger reads set, plus the reads on every choice routing into it (a step reached
+    from a hub is gated on the hub's choice). First time = a one-time canvas setting what the repeatable needs;
+    introduction = one setting what the first time needs.
+  - (a) introduction · (b) first time · (c) two live groups per act node on a `board.ascent_tiers` tier at
+    different thresholds, dead groups excluded via L1's `_dead_groups` (not judged without declared tiers) ·
+    (d) shut on a new save, and intro → a step → first time · (e) a stop exit on every act node that goes on to
+    another act; the last act node is exempt (decided here: its exits all leave).
+- `SKILL.md`: scoreboard row. `references/the-arc.md`: five markers removed, the gate named under A15, and "The
+  check" rewritten (it said nothing ships with the file).
+
+**Verified.**
+- `tests/test_gates_nc2.py`: the full climb passes; n/a without a paid repeatable; fails for (a), (b), (c) one
+  voice, (c) a dead second voice, (d) no step, (d) open on a new save, (e) no stop; (c) noted without tiers.
+- Suite: 378 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now):
+  - members_only FAIL: `work_shift` and `paid_visit` open from the opening (`opening_done`), no step before
+    their first time, one or no voice per act node.
+  - orientation n/a, probation n/a (no paid repeatable with an explicit act).
+  - the_balance: parked (FAIL with parked content counted).
+  - vesper_two FAIL: `act_bar_work` / `act_the_house` open on a new save with no first time; act nodes on
+    `loop_marsh_sunday` and `loop_upstairs` read no declared tier.
+  Two false alarms fixed first (rung words alone; steps routed from a hub).
+
+words: 139,158 → 139,160 (+2) · running total 139,160 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC1: the reader passed (D12)
 
 **Why.** D12 (LO decided): the reader's verdicts gate the release. Phase 3 wrote the rule and marked it

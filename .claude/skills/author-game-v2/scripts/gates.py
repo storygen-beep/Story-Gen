@@ -7206,8 +7206,8 @@ def run_gates(model, game, state=None):
     gate("explicit pools by place", *_ck7["explicit pools by place"][:3])
     gate("a destination is never open and exit-only",
          *_ck7["a destination is never open and exit-only"][:3])
-    # (`standing surface` below and the exit-only gate above make one --ship row together:
-    # "no empty rooms", SHIP_BLOCK_JOINS.)
+    # (`standing surface` + the exit-only gate = --ship "no empty rooms", SHIP_BLOCK_JOINS.)
+    _phase4_gates(gate, _N, model, game, state)       # NC2 on: defined above main()
 
     # G6 — every character is findable where and when the schedule puts her.
     #
@@ -12151,6 +12151,164 @@ def _ship_reader(root, slug, model, game, state):
     ok = not missing and not fails
     return ok, (f"{len(due) - len(missing)}/{len(due)} touched canvases read · {len(fails)} FAIL "
                 f"without a waiver · {waived} waived ({note})"), detail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase-4 gates that live outside `run_gates`' body (PRD v2 phase 4, 2026-09-30).
+# `run_gates` calls `_phase4_gates` once, from a line that used to be a comment, so no
+# cited `gates.py` line moved. Each gate here takes the same `gate` and `_N` it would have
+# used inline.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# NC2 · her climb (D7 · J3 · J4) — `the-arc.md` A15.
+#   paid       a repeatable (not substitution-only) whose exit adds to the money trait and
+#              that names an act: an explicit beat (3+ frozen-list words) and a `RUNGS` act
+#              past `touch`. Incidental words ("she came home", "touches his arm") made a
+#              bar shift and a hub read as paid sex on our own games, so both are required;
+#   needs      what a canvas's trigger reads set (flags is_true, traits gte/gt/eq > 0), plus
+#              the same read off every choice that routes into it — a step reached from a
+#              hub is gated on the hub's choice, not on its own trigger;
+#   first time a one-time canvas that sets something the paid repeatable needs;
+#   intro      a one-time canvas that sets something the first time needs;
+#   (a) the first time has an introduction;   (b) the repeatable has a first time;
+#   (c) each act node has two live `group`s reading a declared tier (`board.ascent_tiers`)
+#       at different thresholds — dead groups (L1, `_dead_groups`) don't count;
+#   (d) the repeatable is shut on a new save, and intro → at least one step → first time;
+#   (e) each act node that leads on to another act has a stop exit: a choice that leaves
+#       (a location, or a node with no act) beside the one that goes on. The last act node
+#       of a scene is exempt — its exits all leave, and the act is done.
+def _node_text(node):
+    return " ".join(str(b.get("content")) for b in _flat_blocks(node.get("blocks"))
+                    if b.get("content") and b.get("type") not in MEDIA_BLOCKS)
+
+
+def _positive_reads(trigger):
+    """Keys a trigger needs SET: flags read is_true, traits read gte / gt / eq > 0."""
+    keys = set()
+    for it in _conditions_of(trigger or {}):
+        kind, key, op, val = _cond_parts(it)
+        if kind == "flag" and op == "is_true":
+            keys.add(key)
+        elif kind == "trait" and op in ("gte", "gt", "eq") and isinstance(val, (int, float)) \
+                and not isinstance(val, bool) and val > 0:
+            keys.add(key)
+    return keys
+
+
+def _canvas_sets(canvas):
+    out = set()
+    for h in _exit_holders(canvas.get("nodes") or []):
+        for fe in h.get("flagEffects") or []:
+            if fe.get("flag") and fe.get("op", "set") == "set":
+                out.add(fe["flag"])
+        for ef in h.get("effects") or []:
+            if (ef.get("trait") or ef.get("trait_key")) and _effect_value_sign(ef.get("value")) > 0 \
+                    or (ef.get("op") == "set" and (ef.get("trait") or ef.get("trait_key"))):
+                out.add(ef.get("trait") or ef.get("trait_key"))
+    return out
+
+
+def _her_climb(game, state):
+    """(ok, headline, detail, n) for `her climb`."""
+    money = _declared_currency(state) or next(
+        (k for k in ((game.get("player") or {}).get("core_traits") or {}) if CURRENCY_HINT.search(k)),
+        None)
+    canvases = [c for c in (game.get("canvases") or []) if not _is_dev(c)]
+    one_time = [c for c in canvases if not _rep_of(c.get("trigger"))]
+    sets = {c.get("id"): _canvas_sets(c) for c in canvases}
+    routed = collections.defaultdict(set)
+    for c in canvases:
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                tgt = str(ch.get("nodeId") or "")
+                if "." in tgt and tgt.split(".", 1)[0] != c.get("id"):
+                    routed[tgt.split(".", 1)[0]] |= _positive_reads(ch)
+    model, _g = build(copy.deepcopy(game))
+    explicit_ids = {m["id"] for m in model if any(b.explicit >= 3 for b in m["beats"])}
+
+    def preds(c):
+        need = _positive_reads(c.get("trigger")) | routed.get(c.get("id"), set())
+        return [p for p in one_time if p is not c and sets[p.get("id")] & need]
+
+    paid = []
+    for c in canvases:
+        if (not _rep_of(c.get("trigger")) or not money
+                or (c.get("trigger") or {}).get("substitution_only") or c.get("id") not in explicit_ids):
+            continue
+        pays = any((ef.get("trait") or ef.get("trait_key")) == money
+                   and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0
+                   for h in _exit_holders(c.get("nodes") or []) for ef in (h.get("effects") or []))
+        if pays and _rungs_of(" ".join(_node_text(n) for n in c.get("nodes") or []))[1] - {"touch"}:
+            paid.append(c)
+    if not paid:
+        return None, ("no paid repeatable — nothing whose exit adds to "
+                      f"`{money}` names an act" if money else "no money trait declared or found"), [], 0
+
+    tiers = set(((state or {}).get("board") or {}).get("ascent_tiers") or [])
+    start_flags = _opening_flags(game) or set()
+    start_traits = dict(((game.get("player") or {}).get("core_traits")) or {})
+    ever_set, written = _flags_ever_set(game), set(_player_trait_raises(game))
+    bad, notes = [], []
+    for c in paid:
+        cid = c.get("id")
+        firsts = preds(c)
+        if not firsts:
+            bad.append(f"{cid}: (b) no one-time first time sets what it reads — introduced, a "
+                       f"first time, then the repeatable (the-arc.md A15)")
+        elif not any(preds(f) for f in firsts):
+            bad.append(f"{cid}: (a) its first time ({', '.join(f.get('id') for f in firsts[:3])}) "
+                       f"reads nothing an introduction sets")
+        elif not any(p2 is not f and p2 is not p for f in firsts for p in preds(f) for p2 in preds(p)):
+            bad.append(f"{cid}: (d) no step between the introduction and the first time — the "
+                       f"minimum path is introduced → a step → first time")
+        items = list(_conditions_of(c.get("trigger") or {}))
+        if all(_cond_state(it, start_flags, start_traits, ever_set, written) == "open" for it in items):
+            bad.append(f"{cid}: (d) open on a new save — nothing paid is reachable before its "
+                       f"introduction and first time")
+        nodes = {n.get("id"): n for n in c.get("nodes") or []}
+        acts = {i for i, n in nodes.items() if _rungs_of(_node_text(n))[1] - {"touch"}}
+        for nid in sorted(acts):
+            node = nodes[nid]
+            # (c) two voices on her level, dead groups excluded
+            if tiers:
+                live = []
+                for run in _group_runs(node.get("blocks")):
+                    dead = {i for i, _w in _dead_groups(run)}
+                    for i, g in enumerate(run):
+                        cond = _group_conditions(g)
+                        if i in dead or cond is None:
+                            continue
+                        th = {(k, op, v) for it in cond.get("items") or []
+                              for kind, k, op, v in [_cond_parts(it)]
+                              if kind == "trait" and k in tiers
+                              and it.get("subject") in (None, "player")}
+                        if th:
+                            live.append(frozenset(th))
+                if len(live) < 2 or len(set(live)) < 2:
+                    bad.append(f"{cid}.{nid}: (c) {len(live)} live group(s) read a declared tier "
+                               f"— two voices on her level want two, at different thresholds "
+                               f"(adjacent groups are one chain: lint adjacent groups)")
+            # (e) a stop exit beside the one that goes on
+            nxt = []
+            for ch in _node_choices(node):
+                tgt = str(ch.get("nodeId") or "").split(".")[-1]
+                nxt.append(("on" if tgt in acts and tgt != nid else "leave")
+                           if (ch.get("targetType") != "location" and tgt in nodes)
+                           else "leave")
+            if "on" in nxt and "leave" not in nxt:
+                bad.append(f"{cid}.{nid}: (e) no stop exit — only the way on (D7f: \"stop him\" "
+                           f"at each stage)")
+    if not tiers:
+        notes.append("(c) not judged: board.ascent_tiers declares no tier to read")
+    return (not bad, f"{len(paid)} paid repeatable(s) · {len(bad)} problem(s) on the climb "
+                     f"(introduced → a step → first time → the repeatable)",
+            bad[:14] + notes, len(paid))
+
+
+def _phase4_gates(gate, _N, model, game, state):
+    ok, head, detail, n = _her_climb(game, state)
+    _N["her climb"] = n
+    gate("her climb", ok, head, detail)
 
 
 def main():
