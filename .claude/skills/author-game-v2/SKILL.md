@@ -252,7 +252,7 @@ how many fails are [off].
 | milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening | this file, "three kinds of content" |
 | ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step (the day roll's `traitEffects` count). The door's step skips the earnable check; a `fires_from = "opening"` step skips place, hours, person and counter read. n/a until a ladder is declared | `references/state.md` |
 | meter ceiling | the top of a bar buys something | `the-board.md` §3 · `state.md` |
-| ends on an opening | the release closes on the door declared in `board.door`: locked at the start, openable later | `the-release.md` |
+| ends on an opening | the release closes on the door declared in `release_page.door` (else `board.door`): locked at the start, openable later | `the-release.md` |
 | the door can be seen again | the door's canvas is repeatable, or `consume_on = "exit"` with the door choice not consuming — a one-time canvas shows the door once | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |

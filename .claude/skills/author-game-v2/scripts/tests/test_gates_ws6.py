@@ -137,8 +137,10 @@ def test_broken_saves_block(tmp_path, monkeypatch):
 
 
 def test_undeclared_door_blocks(tmp_path, monkeypatch):
+    # Undeclared means neither copy: since CK2 the release page's door alone counts.
     st = green_state()
     del st["board"]["door"]
+    del st["release_page"]["door"]
     flips(tmp_path, monkeypatch, "the declared door works", state=st)
 
 

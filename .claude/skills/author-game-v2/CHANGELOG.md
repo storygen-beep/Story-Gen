@@ -5,6 +5,41 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — CK2: "ends on an opening" reads the door from the release page (checker)
+
+**Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK2 (H4). G9 read only `board.door`, so a game that declared its door
+only on `release_page.door` failed "board.door is not declared".
+
+**What changed.**
+- `scripts/gates.py` G9: the door comes from `_declared_door(state)` (`release_page.door`, else `board.door`;
+  added in CK1). The choice is found with `_door_choice`, which replaces the inline copy of that loop.
+  - The no-door FAIL now reads "no door declared — name the door this release ends on in
+    release_page.door (or board.door before the release page exists)".
+  - The headline and the missing-canvas line name the source: "declared door (release_page.door): …".
+  - The comment above the gate states the rule.
+  - The `--ship` equality row is unchanged, per the PRD.
+- `SKILL.md` scoreboard row *ends on an opening*: "the door declared in `release_page.door` (else
+  `board.door`)". The gate name is unchanged.
+- `references/state.md` `board.door` row: a ledger FAILS without it **or** `release_page.door`, and the release
+  page's copy is read first.
+- `tests/test_gates_ws6.py` `test_undeclared_door_blocks` now deletes both copies. It used to delete only
+  `board.door` while its green state kept `release_page.door`, which counts as declared since this change.
+- BLOCK row: *ends on an opening* is in `SHIP_BLOCK_GATES`, and it is looser, not stricter. A door on the
+  release page now passes where it used to fail. The verdict can change otherwise only when the two copies
+  disagree, and `--ship` already goes red on that. No `since` date, as with CK1.
+
+**Verified.**
+- `tests/test_gates_ck2.py`: 6 passed. Release page only (PASS, source named); board only (PASS); neither
+  (FAIL, new text); both differ (the release page is judged); a broken release-page door (FAIL, source named);
+  no ledger (n/a).
+- Skill tests 218 passed. `--selfcheck`: the index is current. cite_check: SKILL.md + references/ 0 wrong.
+- Scratch probation: G9 still PASS, now "declared door (release_page.door): tobin_04_home"; `--ship` "the
+  declared door works" and "the build matches the release page" both PASS.
+
+words: 137,262 → 137,267 (+5) · running total 137,267 / 149,283
+
+---
+
 ## 2026-09-30 — CK1: the ladder check reads the night, the door and the opening (checker)
 
 **Why.** PRD_SKILL_TEST_FIXES_v2 §3 CK1 (H1 · H2 · H3 · I24). The skill test's probation run had four false

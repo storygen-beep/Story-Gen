@@ -7137,8 +7137,10 @@ def run_gates(model, game, state=None):
     # {canvas, choice} (choice = the choice's text; optional `node`) — and the gate checks
     # that door: it exists outside dev, it renders locked, it is shut at the start, and
     # every condition on it can come true later. The declared-state rule applies: no
-    # ledger -> n/a; a ledger with no board.door -> FAIL (LO, 2026-09-26: an undeclared
-    # door is not a pass). `release_page.door` (PRD WS8) supersedes board.door later.
+    # ledger -> n/a; a ledger with no door -> FAIL (LO, 2026-09-26: an undeclared
+    # door is not a pass). The door is read by `_declared_door`: `release_page.door`,
+    # else `board.door` (PRD v2 CK2 · H4, 2026-09-30). Before that a door declared only
+    # on the release page read as "not declared".
     all_choices = [ch for c in model for n in c["nodes"]
                    for ch in ((n.get("exit_block") or {}).get("choices") or [])]
     locked = sum(1 for ch in all_choices if ch.get("show_when_locked"))
@@ -7147,30 +7149,28 @@ def run_gates(model, game, state=None):
     census = (f"{locked} choices render visible-but-locked · "
               f"{gated}/{len(all_choices)} choices carry any gate at all "
               f"({100 * (len(all_choices) - gated) // n_ch}% open on turn one)")
-    door = (((state or {}).get("board") or {}).get("door")) if state is not None else None
+    door = _declared_door(state) if state is not None else None
     if state is None:
         gate("ends on an opening", None, "no v2_state.json — no declared door to check · " + census)
-    elif not isinstance(door, dict) or not door.get("canvas") or not door.get("choice"):
+    elif door is None:
         gate("ends on an opening", False,
-             "board.door is not declared — name the door this release ends on · " + census,
-             ["declare board.door = {canvas = <canvas id>, choice = <the choice's text>} in "
-              "v2_state.json; `the-release.md`: every release ends on a visible locked door, "
+             "no door declared — name the door this release ends on in release_page.door "
+             "(or board.door before the release page exists) · " + census,
+             ["declare release_page.door = {canvas = <canvas id>, choice = <the choice's text>} "
+              "in v2_state.json; `the-release.md`: every release ends on a visible locked door, "
               "and a count of locked choices cannot tell which one that is"])
     else:
         problems = []
+        src = ("release_page.door" if door is ((state.get("release_page") or {}).get("door"))
+               else "board.door")
         canvas = next((c for c in (game.get("canvases") or []) if c.get("id") == door["canvas"]), None)
         choice = None
         if canvas is None:
-            problems.append(f"board.door.canvas '{door['canvas']}' is not a canvas in the game")
+            problems.append(f"{src}.canvas '{door['canvas']}' is not a canvas in the game")
         else:
             if _is_dev(canvas):
                 problems.append(f"'{door['canvas']}' is a dev canvas — a shipped build strips it")
-            for n in canvas.get("nodes") or []:
-                if door.get("node") and n.get("id") != door["node"]:
-                    continue
-                for ch in _node_choices(n):
-                    if str(ch.get("text") or "").strip() == str(door["choice"]).strip():
-                        choice = ch
+            choice = _door_choice(canvas, door)
             if choice is None:
                 problems.append(f"no choice with text '{door['choice']}' on '{door['canvas']}'")
         if choice is not None:
@@ -7195,7 +7195,7 @@ def run_gates(model, game, state=None):
                     problems.append(f"condition {key} {op} {val if val is not None else ''} can "
                                     f"never come true — nothing in the game sets or raises it")
         gate("ends on an opening", not problems,
-             f"declared door: {door['canvas']} · \"{door['choice']}\" · " + census, problems)
+             f"declared door ({src}): {door['canvas']} · \"{door['choice']}\" · " + census, problems)
 
     # G9b — the door can be seen again (PRD v2 CK1 · I24, 2026-09-30). A door is a
     # locked choice the player is meant to walk past now and come back to. On a
