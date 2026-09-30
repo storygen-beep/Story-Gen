@@ -1,0 +1,362 @@
+# =============================================================================
+# Billable Hours — 2 · the opening (sheets/OPENING.md), a staged open
+# boot (her room, 07:00) → breakfast (the family, the start choice) → the firm
+# (Callahan, the shift, Theo) → dinner (Jade's text, how this works) → play.
+# Clock: 07:00 → exit +10 → 07:10 · two default exits +6 → 07:16 · +165 → ~10:01 at
+# the firm · +50 → ~11:00 · +390 → ~17:24 · +45 → ~18:09 at dinner (gates.py _funnel_walk measured 17:54 with +30, before dinner's 18:00 window) · handover ~18:22.
+# =============================================================================
+
+# ── screen 1 · the boot ──────────────────────────────────────────────────────
+[[canvases]]
+id   = "opening_boot"
+name = "Monday"
+description = "Boot. Who she is, the bill, what she wants. Sets opening_boot."
+
+[canvases.trigger]
+location      = "her_room"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Monday, seven o'clock"
+blocks = [
+  { type = "image", props = { file = "scenes/opening_her_room.jpg", description = "A young woman sitting up in a narrow bed, morning light, a work blouse on a hanger", search_queries = ["young woman waking small bedroom morning light", "work blouse hanging bedroom door"] } },
+  { type = "paragraph", content = "It's seven o'clock on Monday, and today you start at Callahan Reed. You're Emma, you're twenty-one, and you've been out of college for exactly one summer." },
+  { type = "paragraph", content = "Here's the problem. Your stepfather Martin paid off your credit card in June, all of it, in one phone call. Now you pay him back: $250 every Friday to start, out of a $350 week. He's already told you the number goes up. He's a partner at the firm. He got you the job. You live in his house." },
+  { type = "paragraph", content = "And here's what you want. You want to be kept on at the end of the twelve weeks, and you want everyone in that building to stop thinking of you as Martin's favour." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Twelve weeks. I can do anything for twelve weeks." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get dressed and go down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "house"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "opening_boot", op = "set" } ]
+wardrobeEffects = [
+  { action = "equip", item_id = "blouse_white" },
+  { action = "equip", item_id = "skirt_pencil" },
+  { action = "equip", item_id = "heels_black" },
+  { action = "equip", item_id = "bra_plain" },
+  { action = "equip", item_id = "panties_plain" },
+]
+
+# ── screens 2–4 · breakfast: Martin, Diane, Ethan, and the start choice ──────
+[[canvases]]
+id   = "opening_breakfast"
+name = "Breakfast"
+description = "Meets Martin, Diane and Ethan (one flag for the group, F8). The start choice. Sets met_family."
+
+[canvases.trigger]
+location      = "house"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "07:00"
+end_time   = "08:30"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "opening_boot", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "met_family",   operator = "is_false" },
+]
+
+[[canvases.nodes]]
+id   = "kitchen"
+name = "The kitchen"
+blocks = [
+  { type = "image", props = { file = "scenes/opening_breakfast.jpg", description = "A family kitchen at breakfast, an older man in a suit reading a paper at the head of the table", search_queries = ["family breakfast table man in suit newspaper", "kitchen breakfast morning family"] } },
+  { type = "paragraph", content = "Your stepfather Martin is at the head of the table in a grey suit, reading the paper. He's fifty-two, a partner at Callahan Reed, and he owns everything in this kitchen, including the chair you sit in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "First day. Callahan wants you in at ten, not nine. Don't be early, and don't be late." },
+  { type = "paragraph", content = "Your mother Diane puts a plate in front of you. She's his assistant at the firm. She's been up since six, and she's already nervous for you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Eat something, sweetheart. And say thank you to Martin. He didn't have to do any of this." },
+  { type = "dialog", props = { speaker = "player" }, content = "Thank you, Martin." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Friday, Emma." },
+  { type = "paragraph", content = "That's all he says. His eyes stay on you a beat too long, down to your blouse and back up, and then he turns the page." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pour your coffee."
+targetType = "node"
+nodeId     = "opening_breakfast.ethan"
+
+[[canvases.nodes]]
+id   = "ethan"
+name = "Ethan"
+blocks = [
+  { type = "paragraph", content = "Your step-brother Ethan comes in already dressed for the firm, a junior associate two years in. He's twenty-five, and he has hated you since the day you moved in. He leans on the counter and watches you pour." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "So. The intern. We both know how you got this job." },
+  { type = "paragraph", content = "He says it to your face, but his eyes drop to your legs as you sit, and he looks away too fast. Martin doesn't look up. Your mother goes very still at the stove. Everyone is waiting to see what you say." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"I earned it.\""
+targetType = "node"
+nodeId     = "opening_breakfast.react_earned"
+flagEffects = [ { targetType = "player", flag = "day1_said_earned", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"So what?\""
+targetType = "node"
+nodeId     = "opening_breakfast.react_so_what"
+flagEffects = [ { targetType = "player", flag = "day1_said_so_what", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing."
+targetType = "node"
+nodeId     = "opening_breakfast.react_nothing"
+flagEffects = [ { targetType = "player", flag = "day1_said_nothing", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "react_earned"
+name = "\"I earned it.\""
+blocks = [
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Earned it. Right. I'll look forward to seeing that." },
+  { type = "paragraph", content = "He smirks, but he doesn't look away from you. You don't look away either, and your face is hot." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Enough. Both of you, out." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Grab your bag and catch the bus."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "firm"
+time_progression_minutes = 165
+flagEffects = [ { targetType = "player", flag = "met_family", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "react_so_what"
+name = "\"So what?\""
+blocks = [
+  { type = "paragraph", content = "Ethan blinks. He was ready for you to deny it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Wow. At least you're honest about it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Enough. Both of you, out." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Grab your bag and catch the bus."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "firm"
+time_progression_minutes = 165
+flagEffects = [ { targetType = "player", flag = "met_family", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "react_nothing"
+name = "Say nothing"
+blocks = [
+  { type = "paragraph", content = "You drink your coffee and let the silence sit there. Ethan waits for a comeback that doesn't come." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Nothing to say? Figures." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Enough. Both of you, out." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Grab your bag and catch the bus."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "firm"
+time_progression_minutes = 165
+flagEffects = [ { targetType = "player", flag = "met_family", op = "set" } ]
+
+# ── screens 6–9 · the first day at Callahan Reed ─────────────────────────────
+[[canvases]]
+id   = "opening_firm"
+name = "First day at Callahan Reed"
+description = "Meets Callahan, does the shift once, meets Theo (the temptation). Sets met_callahan, met_theo, firm_day1_done; pays $70."
+
+[canvases.trigger]
+location      = "firm"
+requires_npc  = "npc_callahan"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "10:00"
+end_time   = "12:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "met_family",   operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "met_callahan", operator = "is_false" },
+]
+
+[[canvases.nodes]]
+id   = "door"
+name = "The corner office"
+blocks = [
+  { type = "image", props = { file = "scenes/opening_firm.jpg", description = "A glass corner office in a law firm, a sharp man in shirtsleeves behind the desk", search_queries = ["law firm corner office glass man shirtsleeves", "corporate office interview young woman"] } },
+  { type = "paragraph", content = "The senior partner's office is all glass, so the whole floor can watch you walk in. The man behind the desk is forty-four, in shirtsleeves, with an espresso going cold at his elbow. His name is on the door: Callahan." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_callahan" }, content = "Martin's girl. Sit. We bill by the hour here, Emma. So will you. Seventy dollars a day, and at week twelve I decide if you're worth keeping." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'll be worth it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_callahan" }, content = "Everyone says that. Show me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the desk he points at."
+targetType = "node"
+nodeId     = "opening_firm.shift"
+
+[[canvases.nodes]]
+id   = "shift"
+name = "Filing"
+blocks = [
+  { type = "paragraph", content = "The job is filing, copying and fetching. You learn where the copy room is, which associates want their coffee black, and that your mother's desk sits right outside Martin's office, where she can see everyone who goes in. One associate with a loosened tie watches you every time you bend over the copier, and he doesn't care that you see him do it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "You're doing fine, sweetheart. Just keep your head down." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Carry the files to the conference room."
+targetType               = "node"
+nodeId                   = "opening_firm.theo"
+time_progression_minutes = 50
+
+[[canvases.nodes]]
+id   = "theo"
+name = "The client"
+blocks = [
+  { type = "paragraph", content = "A man in a very good suit is waiting outside the conference room. Thirty, maybe, with a watch that costs more than your internship. He watches you walk the whole length of the corridor, and he checks the watch as you reach him." },
+  { type = "dialog", props = { speaker = "unknown" }, content = "That's about a minute. Put it on my bill." },
+  { type = "paragraph", content = "Callahan comes out of the conference room behind him and claps him on the shoulder: \"Theo. Come in.\" Theo is the firm's biggest client. He doesn't take his eyes off you until the door shuts." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "Emma, is it? I'll remember that. I remember everything I pay for." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He was pricing me. I should hate that, but I liked it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text                     = "Get back to work."
+targetType               = "node"
+nodeId                   = "opening_firm.endday"
+time_progression_minutes = 390
+
+[[canvases.nodes]]
+id   = "endday"
+name = "Five thirty"
+blocks = [
+  { type = "paragraph", content = "At twenty past five Callahan walks past your desk and drops an envelope on it. Seventy dollars, cash, your first day's pay." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_callahan" }, content = "Same time tomorrow. Nine, from now on." },
+  { type = "paragraph", content = "Your feet hurt. You're exhausted and you're buzzing, both at once." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the bus home."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "house"
+time_progression_minutes = 45
+flagEffects = [
+  { targetType = "player", flag = "met_callahan",   op = "set" },
+  { targetType = "player", flag = "met_theo",       op = "set" },
+  { targetType = "player", flag = "firm_day1_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "money",  op = "add", value = 70,  clamp = false },
+  { targetType = "player", trait = "energy", op = "add", value = -30, clamp = true },
+]
+
+# ── screens 10–11 · dinner, Jade's text, and how this works ──────────────────
+[[canvases]]
+id   = "opening_dinner"
+name = "Dinner"
+description = "The family at dinner, Martin's line again, Jade's text, then the plain how-this-works screen. Sets opening_done."
+
+[canvases.trigger]
+location      = "house"
+is_repeatable = false
+priority      = 11
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "19:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "firm_day1_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "opening_done",   operator = "is_false" },
+]
+
+[[canvases.nodes]]
+id   = "dinner"
+name = "Dinner"
+blocks = [
+  { type = "paragraph", content = "Dinner is roast chicken and your mother asking about everything. Martin eats and listens. Ethan eats and doesn't." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Did Callahan say anything? Did he like you?" },
+  { type = "dialog", props = { speaker = "player" }, content = "He said show him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "He says that to the ones he's going to cut." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "He says it to the ones he's watching. Friday, Emma." },
+  { type = "paragraph", content = "Your phone buzzes under the table. It's your step-sister Jade, who quit the firm last year to dance at the Velvet Room downtown and has never looked back: \"First day?? Drinks. Velvet Room, after nine. Don't tell Diane.\"" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A strip club, on a Monday. My mother would die." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Text back: \"Nine. Save me a seat.\""
+targetType = "node"
+nodeId     = "opening_dinner.howto"
+flagEffects = [ { targetType = "player", flag = "jade_said_yes", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Text back: \"Can't. Work tomorrow.\""
+targetType = "node"
+nodeId     = "opening_dinner.howto"
+flagEffects = [ { targetType = "player", flag = "jade_said_no", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "howto"
+name = "How this works"
+blocks = [
+  { type = "paragraph", content = "Every Friday Martin takes his envelope at breakfast: $250 to start, and more later. A short week is carried to the next Friday." },
+  { type = "paragraph", content = "Callahan Reed pays $70 for a four-hour shift, starting between nine and one, Monday to Friday. A shift costs energy. Sleep in your room. Below 20 energy you can't work or take the bus." },
+  { type = "paragraph", content = "Nerve rises when you dare something. Some doors need more of it. People keep hours: the Cast page says who they are, and the Quests page says where to go next." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Start playing."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "house"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]

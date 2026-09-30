@@ -15,6 +15,19 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-10-01. Authored with author-game-v2 as the first game on the fixed skill
+    // (games/billable_hours/SKILL_TEST_FINDINGS.md, 9 findings). 9 locations, 37 canvases,
+    // 6 characters, 7 ladder steps (4 people), ~5,800 words, 56/58 gates (the 2 reds:
+    // location fill, a known REPORT red on LO's call, and `world reachable`, a checker gap, F7).
+    // Reader: 31/31 touched canvases, 0 unwaived FAIL. DEV + DEBUG build on LO's call: the jump
+    // list and stat controls are live. No media harvested. --ship is NO until LO playtests and signs.
+    slug: "billable_hours",
+    title: "Billable Hours",
+    badge: "v2",
+    dev: true,
+    summary: `Emma is twenty-one and starting an internship at the law firm where her stepfather Martin is a partner. He paid off her credit card, and every Friday at breakfast he takes $250 of her week, and more later. Her mother is his assistant, at the desk outside his office. Her step-brother Ethan works there too, and says she didn't earn the job. The bathroom door on the landing doesn't latch, his room is right across from it, and on Friday evenings Martin wants to see her in his study, with the door shut. Downtown, a client prices her by the minute, and her step-sister Jade dances at the Velvet Room and says she could make that $250 in a night.`,
+  },
+  {
     // Listed 2026-09-29. Authored with author-game-v2 as its second skill test, from zero
     // (games/members_only/SKILL_TEST_FINDINGS.md, 55 findings). 11 locations, 42 canvases,
     // 4 characters, 9 ladder steps, ~6,000 words, 45/47 gates (the 2 reds: location fill,
