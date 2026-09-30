@@ -12366,6 +12366,63 @@ def _no_has_content(game):
                      f"consume_on step(s) have content", bad[:14], judged)
 
 
+# NC6 · the men's numbers are read (D5 · J6) — `the-meters.md` W1 rule 1 and "What the
+# player is shown" 2. Under D1 every trait a man keeps is shown (EN7 `show_traits`, on
+# `[ui.cast_page]` for every card or on his `[[npcs]]` entry), and a shown number opens
+# something visible and gets a reaction. So:
+#   · a trait in his `core_traits` that nothing shows FAILS — except one whose
+#     `[[traits.labels]]` entry is `hidden = true`, and a ladder counter (`<npc>_stage`, or
+#     the `counter` of his `board.characters[].ladder`);
+#   · a shown trait needs a STEP GATE (a trigger or choice condition reading it on him) AND
+#     a LINE BRANCH (a `group` / pool condition inside blocks reading it on him).
+# Ages are shape.py's (DC2a), not this gate's.
+def _npc_key(x):
+    x = str(x or "")
+    return x[4:] if x.startswith("npc_") else x
+
+
+def _mens_numbers(game, state):
+    """(ok, headline, detail, n) for `the men's numbers are read`."""
+    npcs = [n for n in (game.get("npcs") or []) if n.get("id")]
+    page = (((game.get("ui") or {}).get("cast_page")) or {}).get("show_traits") or []
+    hidden = {l.get("key") for l in ((game.get("traits") or {}).get("labels") or [])
+              if isinstance(l, dict) and l.get("hidden") is True}
+    counters = {}
+    for ch in (((state or {}).get("board") or {}).get("characters") or []):
+        lad = ch.get("ladder") if isinstance(ch.get("ladder"), dict) else {}
+        if lad.get("counter"):
+            counters.setdefault(_npc_key(ch.get("id")), set()).add(lad["counter"])
+    gates_read, lines_read = collections.defaultdict(set), collections.defaultdict(set)
+    for c in game.get("canvases") or []:
+        for path, d in _walk_paths(c):
+            if d.get("subject") != "npc" or not (d.get("trait_key") or d.get("trait")):
+                continue
+            who = _npc_key(d.get("npc_id") or d.get("character_id"))
+            key = d.get("trait_key") or d.get("trait")
+            (lines_read if ("blocks" in path or "beats" in path) else gates_read)[who].add(key)
+    bad, shown_n = [], 0
+    for n in npcs:
+        who = _npc_key(n.get("id"))
+        kept = set((n.get("core_traits") or {}).keys())
+        shown = (set(page) | set(n.get("show_traits") or [])) & kept
+        exempt = hidden | {f"{who}_stage"} | counters.get(who, set())
+        for k in sorted(kept - shown - exempt):
+            bad.append(f"{n.get('id')}: keeps `{k}` and nothing shows it — add it to show_traits, "
+                       f"or mark it hidden = true (the-meters.md, D1)")
+        for k in sorted(shown):
+            shown_n += 1
+            miss = [w for w, got in (("no step gate", gates_read[who]),
+                                     ("no line branch", lines_read[who])) if k not in got]
+            if miss:
+                bad.append(f"{n.get('id')}: `{k}` is shown and {' and '.join(miss)} reads it — a "
+                           f"shown number opens something and gets a reaction (W1 rule 1)")
+    judged = sum(len((n.get("core_traits") or {})) for n in npcs)
+    if not judged:
+        return None, "no man keeps a trait — nothing to show", [], 0
+    return (not bad, f"{shown_n} of the men's traits shown · {len(bad)} problem(s) across "
+                     f"{judged} kept trait(s)", bad[:14], judged)
+
+
 def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _her_climb(game, state)
     _N["her climb"] = n
@@ -12373,6 +12430,9 @@ def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _no_has_content(game)
     _N["a no has content"] = n
     gate("a no has content", ok, head, detail)
+    ok, head, detail, n = _mens_numbers(game, state)
+    _N["the men's numbers are read"] = n
+    gate("the men's numbers are read", ok, head, detail)
 
 
 def main():

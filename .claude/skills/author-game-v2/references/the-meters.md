@@ -104,7 +104,7 @@ Declared per man at the Want (`want.cast[].keeps`), from the fantasy and `who_cl
 It can differ per man: a pressure man gets Power, a nice man doesn't. The author declares it; LO
 approves. **Whatever he keeps:**
 
-1. A shown number opens something visible, and he reacts the visit it crosses. *(check: pending NC6)*
+1. A shown number opens something visible, and he reacts the visit it crosses (gate `the men's numbers are read`).
 2. No hidden setting overrides the numbers.
 3. A locked step shows how close he is: the locked button names his feeling and the need.
 4. One visit moves about 1–10% of the next threshold, with 3–10 visits between steps (R5:243-244).
@@ -612,7 +612,7 @@ whole world tests it.** W3's gate makes sure somebody reads it.
 1. **Her traits show as name + number**, with a band word beside it where it has bands (M7). One name
    per trait, everywhere (`engine.md` §30).
 2. **A man's numbers show on the cast page**: every trait he keeps (W1) goes in `show_traits`, with a
-   word beside it (`engine.md` §34) *(check: pending NC6)*.
+   word beside it (`engine.md` §34).
 3. **After a choice, a reaction line and the toast.** The engine's "+N" toast stays *(D1b)*; the first
    line of the next node is his reaction. A `+X` label for a stat that does not exist is still wrong —
    lint `a printed stat is real`.

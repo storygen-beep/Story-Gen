@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-09-30 — Phase 4 NC6: the men's numbers are read (D5 · J6)
+
+**Why.** D1 shows numbers and D5 says a shown number opens something and gets a reaction (`the-meters.md` W1
+rule 1). Two rules carried *(check: pending NC6)*; nothing checked that a man's kept traits are shown or read.
+
+**What changed.**
+- `scripts/gates.py` (above `main()`): gate **`the men's numbers are read`** (`_mens_numbers`), registered in
+  `_phase4_gates`. A trait in a man's `core_traits` that neither `[ui.cast_page] show_traits` nor his own
+  `show_traits` names FAILS, except a `[[traits.labels]]` `hidden = true` key, `<npc>_stage`, and his
+  `board.characters[].ladder.counter`. A shown trait needs a condition on him in a trigger or choice (the step
+  gate) and one inside blocks (the line branch). n/a when no man keeps a trait.
+- `SKILL.md`: scoreboard row. `references/the-meters.md`: both markers removed; rule 1 names the gate.
+
+**Verified.**
+- `tests/test_gates_nc6.py`: pass (page list, his own list, hidden + counters exempt), n/a (no kept traits), fail
+  (kept and unshown, shown with no gate read, shown with no line read).
+- Suite: 393 passed. `--selfcheck`: the index is current. cite_check: 0.
+- Five scratch games (gate absent → now): members_only n/a and probation n/a (the men keep no traits);
+  orientation FAIL (7 kept traits, none shown — `relation` / `lust`), the_balance FAIL (17 of 22 unshown;
+  `corruption` exempt as hidden), vesper_two FAIL (8 kept, none shown). Real: no game uses EN7 `show_traits` yet.
+
+words: 139,185 → 139,215 (+30) · running total 139,215 / 149,283.
+
 ## 2026-09-30 — Phase 4 NC3: a no has content (D6)
 
 **Why.** `the-arc.md` A3 (LO decided, D6): an ordinary no is parked, a final no is labelled. Nothing checked that
