@@ -37,5 +37,5 @@
 
 ## Our engine today (round 9b §6)
 - Missing as a system (the skill has 0 hits for shoots); build it from canvases with tier conditions.
-- Pay of tier + Looks is computed pay, not supported (`v2.py:15899`, "only 'random' is supported"); author fixed
+- Pay of tier + Looks is computed pay, not supported (`v2.py:15935`, "only 'random' is supported"); author fixed
   amounts per tier instead.

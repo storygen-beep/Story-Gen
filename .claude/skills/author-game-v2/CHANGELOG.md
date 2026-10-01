@@ -5,6 +5,44 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: the ignore hook for a text she leaves unanswered (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add an ignore hook (the-phone.md P5: ignoring costs more than saying no). Silence
+was free: an unanswered text kept its buttons for ever, and the only way to charge for it was a canvas
+gated on the cause flag, `days_since_flag` and a reply flag still false.
+
+**What changed.**
+- `template_import.py`: `ignore_after_days` and `on_ignore` on `TemplatePhoneConversation`, parsed raw,
+  validated (whole days >= 1; the chat needs a reply block; `on_ignore` only with `ignore_after_days`;
+  `on_ignore` is `{effects, flagEffects}` with the keys a reply choice's effects carry, `trait`/`flag`
+  required, an `npcId` that exists) by the new `_validate_phone_effect_set`, and written into the phone
+  metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (phone games only): `setup._ignorePhoneConversation` closes the current instance
+  as ignored when no reply was sent `ignore_after_days` after it arrived, records the day in
+  `$game_state.phone.conv_ignored[key]`, and applies `on_ignore` once through the new
+  `setup.applyPhoneEffectSet` (which the reply path now uses too, unchanged in behaviour), with its own
+  toast so the passage's pending effects are kept. An ignored instance counts as answered, so a
+  repeatable chat re-arms after it (delay counted from the ignore). The thread shows "No reply." and no
+  buttons; `sendPhoneReply` refuses a stale tap. The flag-hint map reads `on_ignore` setters.
+  `conv_ignored` joins the phone skeleton only in a game with an ignore hook.
+- `references/engine.md` §51: the ignore gap row becomes the fact (a new paragraph and TOML example);
+  §40's backfill row names `phone.conv_ignored`.
+- Citations: every `v2.py` / `template_import.py` cite in SKILL.md, references/, templates/cards/ and
+  templates/*.toml re-pointed through the `git diff` line map (601 moved, 734 line endpoints checked
+  identical to HEAD's line); `cite_check.py` then reports 0 drifted in SKILL.md + references/.
+- Not changed (other lanes): `references/the-phone.md` P5 still says there is no ignore hook, and
+  `templates/cards/phone.md` "Our engine today" still lists it as missing.
+
+**Verified.** `test_phone_ignore_hook.py` (6, headless): effects apply once; a reply before day N applies
+nothing; the closed thread takes no late tap; per instance on a repeatable chat; a chat without the hook
+is unchanged; a save written by the pre-change engine (7d7f575) loads, gets `conv_ignored` and the hook
+fires. `PhoneIgnoreHookSchemaTests` (6) and `PhoneIgnoreHookIntegrationTests` (2, DB build); a
+save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,432 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C6: the wardrobe card, `[[clothing]]` in the-returning-player.md, the shop gaps
 
 **Why.** The clothing rules (C1–C5) point at one design; round 9a's wardrobe card is that design. The

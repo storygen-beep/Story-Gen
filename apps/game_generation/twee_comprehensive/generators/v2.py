@@ -1569,6 +1569,9 @@ class TweeComprehensiveGeneratorV2:
                 # E3 — the instance number of each repeatable chat. Only in a game that
                 # has one, so every other phone game keeps a byte-identical skeleton.
                 game_state_init["phone"]["conv_cycle"] = {}
+            if any(c.get("ignore_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3b — instance key -> the day it closed as ignored. Same opt-in rule.
+                game_state_init["phone"]["conv_ignored"] = {}
         # Schema signature stamped into every save via Config.saves.version: a
         # fingerprint of the trait/flag key surface and the corruption tiers, so a
         # build can tell whether a save was written against its own data shape.
@@ -2297,8 +2300,10 @@ setup.convCurrentKey = function(convId) {{
     var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
     return setup.convInstanceKey(convId, (ps.conv_cycle || {{}})[convId] || 0);
 }};
-// Answered = a reply sent; for a chat with no reply block, read.
+// Answered = a reply sent; for a chat with no reply block, read. E3b: an instance
+// closed as ignored is answered too, so a repeatable chat re-arms after it.
 setup._phoneConvAnswered = function(conv, ps, key) {{
+    if ((ps.conv_ignored || {{}})[key]) return true;
     var hasReply = (conv.blocks || []).some(function(b) {{ return b.type === 'reply'; }});
     if (!hasReply) return !!(ps.read_conversations || {{}})[key];
     var r = (ps.replies || {{}})[key];
@@ -2331,6 +2336,45 @@ setup._rearmPhoneConversation = function(conv, ps) {{
     }};
     return true;
 }};
+// The trait and flag effects a reply choice carries ({{effects, flagEffects}}), applied
+// with no canvas around them: a reply, and E3b's on_ignore.
+setup.applyPhoneEffectSet = function(src) {{
+    var effs = (src && src.effects) || [];
+    for (var e = 0; e < effs.length; e++) {{
+        var eff = effs[e];
+        if (eff.trait) {{
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
+        }}
+    }}
+    var feffs = (src && src.flagEffects) || [];
+    for (var f = 0; f < feffs.length; f++) {{
+        var fe = feffs[f];
+        // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
+        // is honored uniformly with passage-flow flag emission.
+        setup.applyAndNotifyFlag(fe.targetType || "player", fe.npcId || null, fe.flag, fe.op || "set");
+    }}
+}};
+// E3b — the ignore hook. The current instance of a chat with `ignore_after_days`
+// that has had no reply for that many days since it arrived closes as ignored:
+// ps.conv_ignored[key] = the day, and `on_ignore` applies once. Its own toast, so the
+// passage's pending effects are left alone. Returns true when it fired.
+setup._ignorePhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_ignored = ps.conv_ignored || {{}};
+    var key = setup.convCurrentKey(conv.id);
+    if (ps.conv_ignored[key] || setup._phoneConvAnswered(conv, ps, key)) return false;
+    var day = ((State.variables.game_state || {{}}).time_state || {{}}).day || 1;
+    if (day - (trig.triggered_day || 1) < conv.ignore_after_days) return false;
+    ps.conv_ignored[key] = day;
+    trig.answered_day = day;  // a repeatable chat counts its delay from here
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(conv.on_ignore);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+    return true;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2345,6 +2389,7 @@ setup.checkPhoneConversations = function() {{
     for (var i = 0; i < convs.length; i++) {{
         var conv = convs[i];
         if (ps.triggered_conversations[conv.id]) {{
+            if (conv.ignore_after_days) setup._ignorePhoneConversation(conv, ps);
             if (conv.repeat_after_days && setup._rearmPhoneConversation(conv, ps) && !_firstScan) {{
                 _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
             }}
@@ -2468,6 +2513,8 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     var ps = sv.game_state.phone;
     if (!ps) return;
     roundNum = roundNum || 1;
+    // E3b — an instance closed as ignored takes no late reply (a stale button).
+    if ((ps.conv_ignored || {{}})[convId]) return;
     // Multi-round: store replies as array of {{round, choice}}
     if (!Array.isArray(ps.replies[convId])) {{
         // Backward compat: convert old int format
@@ -2498,25 +2545,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
             if (choiceIndex >= 0 && choiceIndex < choices.length) {{
                 var choice = choices[choiceIndex];
                 setup.pendingEffects = [];
-                var effs = choice.effects || [];
-                for (var e = 0; e < effs.length; e++) {{
-                    var eff = effs[e];
-                    if (eff.trait) {{
-                        setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
-                    }}
-                }}
-                var feffs = choice.flagEffects || [];
-                for (var f = 0; f < feffs.length; f++) {{
-                    var fe = feffs[f];
-                    // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
-                    // is honored uniformly with passage-flow flag emission.
-                    setup.applyAndNotifyFlag(
-                        fe.targetType || "player",
-                        fe.npcId || null,
-                        fe.flag,
-                        fe.op || "set"
-                    );
-                }}
+                setup.applyPhoneEffectSet(choice);
                 // doc 45 G4/G5 — quest + scheduled effects on chat reply choices
                 var qeffs = choice.questEffects || [];
                 for (var qi = 0; qi < qeffs.length; qi++) {{
@@ -2738,6 +2767,11 @@ setup.openChatThread = function(appId, npcSlug) {{
                     }}
                     // E3 — a past instance is history: no buttons, never pending.
                     if (conv._past) continue;
+                    // E3b — an ignored instance is closed: one line, no buttons.
+                    if ((ps.conv_ignored || {{}})[convKey]) {{
+                        html += '<div class="phone-ignored" style="color:#888;font-size:12px;font-style:italic;text-align:right;padding:4px 14px;">No reply.</div>';
+                        break;
+                    }}
                     // Show reply buttons
                     _hasPendingReply = true;
                     var replyPending = '';
@@ -13451,7 +13485,9 @@ setup.castTraitRows = function (slug, npc) {
                         pass  # canvas_npc_map is canvas_id → name, not slug → name
                     # Use npc slug directly — formatFlagHint resolves at runtime
                     npc_display = conv_npc.replace("npc_", "").replace("_", " ").title()
-                for block in conv.get("blocks", []):
+                # E3b — an on_ignore effect set is a setter too, read like a choice.
+                _ignore_sets = [conv["on_ignore"]] if isinstance(conv.get("on_ignore"), dict) else []
+                for block in conv.get("blocks", []) + [{"type": "reply", "choices": _ignore_sets}]:
                     if block.get("type") != "reply":
                         continue
                     for choice in block.get("choices", []):

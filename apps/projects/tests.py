@@ -6130,6 +6130,107 @@ class RepeatableChatIntegrationTests(TestCase):
         self.assertNotIn('"conv_cycle"', twee)
 
 
+def _toml_with_ignore_hook(**conv_extra):
+    d = _toml_with_phone()
+    conv = d["phone"]["conversations"][0]
+    conv["blocks"].append({"type": "reply", "choices": [{"text": "sure"}]})
+    conv.update({
+        "ignore_after_days": 2,
+        "on_ignore": {
+            "effects": [{"targetType": "npc", "npcId": "npc_frank", "trait": "trust",
+                         "op": "add", "value": -2}],
+            "flagEffects": [{"targetType": "player", "flag": "summer_started", "op": "unset"}],
+        },
+    })
+    conv.update(conv_extra)
+    return d
+
+
+class PhoneIgnoreHookSchemaTests(SimpleTestCase):
+    """E3b (World and Systems PRD) — ignore_after_days / on_ignore on a conversation."""
+
+    def test_fields_parse(self):
+        conv = normalize(_toml_with_ignore_hook()).phone.conversations[0]
+        self.assertEqual(conv.ignore_after_days, 2)
+        self.assertEqual(conv.on_ignore["effects"][0]["value"], -2)
+
+    def test_fields_default_to_no_hook(self):
+        conv = normalize(_toml_with_phone()).phone.conversations[0]
+        self.assertIsNone(conv.ignore_after_days)
+        self.assertIsNone(conv.on_ignore)
+
+    def test_valid_hook_validates_clean(self):
+        self.assertEqual(validate(normalize(_toml_with_ignore_hook())), [])
+
+    def test_bad_values_are_errors(self):
+        for extra, fragment in (
+            ({"ignore_after_days": 0}, "ignore_after_days must be a whole number"),
+            ({"ignore_after_days": 1.5}, "ignore_after_days must be a whole number"),
+            ({"on_ignore": []}, "on_ignore: must be a table"),
+            ({"on_ignore": {"effect": []}}, "unknown key `effect`"),
+            ({"on_ignore": {"effects": [{"trait": "trust", "amount": 1}]}},
+             "unknown key `amount`"),
+            ({"on_ignore": {"effects": [{"op": "add", "value": 1}]}}, "needs `trait`"),
+            ({"on_ignore": {"flagEffects": [{"op": "set"}]}}, "needs `flag`"),
+            ({"on_ignore": {"effects": [{"targetType": "npc", "npcId": "npc_nobody",
+                                         "trait": "trust", "value": 1}]}},
+             "'npc_nobody' not found in npcs"),
+        ):
+            errors = validate(normalize(_toml_with_ignore_hook(**extra)))
+            self.assertTrue(any(fragment in e for e in errors), (extra, errors))
+
+    def test_on_ignore_without_the_days_is_an_error(self):
+        d = _toml_with_ignore_hook()
+        del d["phone"]["conversations"][0]["ignore_after_days"]
+        errors = validate(normalize(d))
+        self.assertTrue(any("on_ignore is read only with ignore_after_days" in e
+                            for e in errors), errors)
+
+    def test_a_chat_with_no_reply_cannot_be_ignored(self):
+        d = _toml_with_ignore_hook()
+        d["phone"]["conversations"][0]["blocks"] = [
+            {"type": "message", "sender": "npc", "content": "hey"}]
+        errors = validate(normalize(d))
+        self.assertTrue(any("ignore_after_days needs a reply block" in e
+                            for e in errors), errors)
+
+
+class PhoneIgnoreHookIntegrationTests(TestCase):
+    """E3b through the DB build. The no-DB path and the runtime are proven in
+    apps/game_generation/tests/test_phone_ignore_hook.py."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            email="ignore-hook-test@example.com", password="testpass123"
+        )
+
+    def _build(self, data):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(data)
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return project, TweeComprehensiveGeneratorV2().generate(project)
+
+    def test_the_keys_reach_metadata_and_the_runtime(self):
+        project, twee = self._build(_toml_with_ignore_hook())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertEqual(conv["ignore_after_days"], 2)
+        self.assertEqual(conv["on_ignore"]["flagEffects"][0]["flag"], "summer_started")
+        self.assertIn('"conv_ignored": {}', twee)
+        self.assertIn("setup._ignorePhoneConversation(conv, ps)", twee)
+
+    def test_a_chat_without_the_hook_emits_no_ignore_state(self):
+        project, twee = self._build(_toml_with_phone())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertNotIn("ignore_after_days", conv)
+        self.assertNotIn("on_ignore", conv)
+        self.assertNotIn('"conv_ignored"', twee)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

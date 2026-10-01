@@ -37,5 +37,5 @@
 
 ## Our engine today (round 9b §6)
 - Missing as a system: no viewers, tips or stream session. A follower count exists as a plain player trait
-  (`v2.py:2964`, `act.counter_trait || 'followers'`), so `trait_decay` can decay it.
-- No computed tips (`v2.py:15899`, "only 'random' is supported"); author tip bands per rung instead.
+  (`v2.py:2998`, `act.counter_trait || 'followers'`), so `trait_decay` can decay it.
+- No computed tips (`v2.py:15935`, "only 'random' is supported"); author tip bands per rung instead.

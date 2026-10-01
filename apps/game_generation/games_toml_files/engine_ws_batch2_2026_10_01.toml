@@ -1,0 +1,140 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7 batch 2 (E3b, E5, E6, E8, E8-calls)
+#  Date: 2026-10-01
+#
+#  Media-free. Each engine item adds only what its own tests need.
+#
+#  E3b — "the ignore hook":
+#    ana_ask      ignore_after_days = 2, on_ignore = -2 Ana trust and the flag
+#                 ignored_ana; one reply round (+1 Ana trust).
+#    ana_loop     a repeatable chat (repeat_after_days = 1) with ignore_after_days = 1:
+#                 the ignore is per instance, and an ignored instance re-arms.
+#    sal_hello    a one-time chat with a reply and no ignore hook: the control.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_batch2"
+title       = "Engine World and Systems Batch 2"
+description = "Engine fixture for the World and Systems PRD, Phase 7 batch 2."
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40 }
+flag_keys   = ["started", "ignored_ana"]
+
+[[npcs]]
+id          = "npc_ana"
+name        = "Ana"
+description = "Fixture texter."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_sal"
+name        = "Sal"
+description = "Fixture friend."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+# ── E3b: the ignore hook ─────────────────────────────────────────────────────
+
+[[phone.conversations]]
+id                = "ana_ask"
+app               = "messages"
+npc               = "npc_ana"
+ignore_after_days = 2
+[phone.conversations.on_ignore]
+effects     = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = -2 } ]
+flagEffects = [ { targetType = "player", flag = "ignored_ana" } ]
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Coffee tomorrow?"
+[[phone.conversations.blocks]]
+type    = "reply"
+round   = 1
+choices = [
+  { text = "Sure.", effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = 1 } ] },
+  { text = "Can't." } ]
+
+[[phone.conversations]]
+id                = "ana_loop"
+app               = "messages"
+npc               = "npc_ana"
+repeat_after_days = 1
+ignore_after_days = 1
+[phone.conversations.on_ignore]
+effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = -1 } ]
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "You up?"
+[[phone.conversations.blocks]]
+type    = "reply"
+choices = [ { text = "Yes." } ]
+
+[[phone.conversations]]
+id  = "sal_hello"
+app = "messages"
+npc = "npc_sal"
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Hey you."
+[[phone.conversations.blocks]]
+type    = "reply"
+choices = [ { text = "Hey." } ]
+
+# ── places ───────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_bar"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "The bar."
+entry_from  = "loc_home"
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }

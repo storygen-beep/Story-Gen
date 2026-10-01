@@ -372,6 +372,11 @@ class TemplatePhoneConversation:
     # still holds. `max_repeats` caps the re-arrivals (None = no cap). None = one-time.
     repeat_after_days: Optional[int] = None
     max_repeats: Optional[int] = None
+    # E3b — the ignore hook. If no reply is sent this many days after the current
+    # instance arrived, `on_ignore` ({effects, flagEffects}, the shapes a reply choice
+    # carries) applies once and the instance closes as ignored. None = no hook.
+    ignore_after_days: Optional[int] = None
+    on_ignore: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -3204,6 +3209,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     # E3 — kept raw; validate() owns the type and range checks.
                     repeat_after_days=c_raw.get("repeat_after_days"),
                     max_repeats=c_raw.get("max_repeats"),
+                    # E3b — kept raw too; validate() checks the shapes.
+                    ignore_after_days=c_raw.get("ignore_after_days"),
+                    on_ignore=c_raw.get("on_ignore"),
                 ))
 
             # Parse posts (social feed)
@@ -4889,6 +4897,20 @@ def validate(template: GameTemplate) -> List[str]:
                 elif not _is_whole_days(conv.max_repeats):
                     errors.append(f"{ctx}.max_repeats must be a whole number >= 1 "
                                   f"(got {conv.max_repeats!r})")
+            # E3b — the ignore hook. "Ignored" means no reply was sent, so a chat with
+            # no reply block can never be ignored and the hook would never fire.
+            if conv.ignore_after_days is not None:
+                if not _is_whole_days(conv.ignore_after_days):
+                    errors.append(f"{ctx}.ignore_after_days must be a whole number of days "
+                                  f">= 1 (got {conv.ignore_after_days!r})")
+                if not any(b.type == "reply" for b in conv.blocks):
+                    errors.append(f"{ctx}.ignore_after_days needs a reply block — a chat "
+                                  f"with nothing to answer cannot be ignored")
+            if conv.on_ignore is not None:
+                if conv.ignore_after_days is None:
+                    errors.append(f"{ctx}.on_ignore is read only with ignore_after_days")
+                errors.extend(_validate_phone_effect_set(conv.on_ignore, f"{ctx}.on_ignore",
+                                                         npc_id_set))
 
     # container/default entry rules
     for l in template.locations:
@@ -6779,6 +6801,44 @@ def _is_whole_days(v: Any) -> bool:
     return isinstance(v, int) and not isinstance(v, bool) and v >= 1
 
 
+# The keys the phone runtime reads on a trait effect and a flag effect it applies
+# outside a canvas (a reply choice's `effects` / `flagEffects`, setup.applyPhoneEffectSet).
+_PHONE_TRAIT_EFFECT_KEYS = frozenset({"targetType", "npcId", "trait", "op", "value", "clamp", "cap"})
+_PHONE_FLAG_EFFECT_KEYS = frozenset({"targetType", "npcId", "flag", "op"})
+
+
+def _validate_phone_effect_set(raw: Any, ctx: str, npc_ids: Set[str]) -> List[str]:
+    """E3b — a phone effect set, `{effects = [...], flagEffects = [...]}`: the trait and
+    flag effects a reply choice carries, applied by the phone with no canvas around it.
+    An unknown key is an error, because the runtime would skip it and the cost the
+    author wrote would never land."""
+    if not isinstance(raw, dict):
+        return [f"{ctx}: must be a table {{effects, flagEffects}}, got {type(raw).__name__}"]
+    errors: List[str] = []
+    for k in sorted(set(raw) - {"effects", "flagEffects"}):
+        errors.append(f"{ctx}: unknown key `{k}` (allowed: effects, flagEffects)")
+    for list_key, keys, need in (("effects", _PHONE_TRAIT_EFFECT_KEYS, "trait"),
+                                 ("flagEffects", _PHONE_FLAG_EFFECT_KEYS, "flag")):
+        items = raw.get(list_key, [])
+        if not isinstance(items, list):
+            errors.append(f"{ctx}.{list_key}: must be a list")
+            continue
+        for i, eff in enumerate(items):
+            ectx = f"{ctx}.{list_key}[{i}]"
+            if not isinstance(eff, dict):
+                errors.append(f"{ectx}: must be a table")
+                continue
+            for k in sorted(set(eff) - keys):
+                errors.append(f"{ectx}: unknown key `{k}` (allowed: {', '.join(sorted(keys))})")
+            if not isinstance(eff.get(need), str) or not eff.get(need):
+                errors.append(f"{ectx}: needs `{need}`")
+            if eff.get("targetType", "player") not in ("player", "npc"):
+                errors.append(f"{ectx}.targetType must be 'player' or 'npc'")
+            if eff.get("targetType") == "npc" and eff.get("npcId") not in npc_ids:
+                errors.append(f"{ectx}.npcId {eff.get('npcId')!r} not found in npcs")
+    return errors
+
+
 def _is_seen_weight(v: Any) -> bool:
     return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1
 
@@ -8332,6 +8392,9 @@ def _assemble_project_metadata(project, template):
                     **({"repeat_after_days": c.repeat_after_days}
                        if c.repeat_after_days is not None else {}),
                     **({"max_repeats": c.max_repeats} if c.max_repeats is not None else {}),
+                    **({"ignore_after_days": c.ignore_after_days}
+                       if c.ignore_after_days is not None else {}),
+                    **({"on_ignore": c.on_ignore} if c.on_ignore is not None else {}),
                     "blocks": [
                         {
                             "type": b.type,

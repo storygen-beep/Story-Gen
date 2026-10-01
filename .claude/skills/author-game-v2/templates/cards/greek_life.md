@@ -35,8 +35,8 @@
 - *"So many glitches with the pledge tasks"* (CoT, mopoga#155098): self-ticking tasks need testing.
 
 ## Our engine today (round 9b §6)
-- A weekly party fits schedule rows with `weekdays` (`template_import.py:747`); pledge tasks are flags, renown a trait.
-- Upgrades that raise another system's pay need computed pay, which is not built (`v2.py:15899`, "only
+- A weekly party fits schedule rows with `weekdays` (`template_import.py:752`); pledge tasks are flags, renown a trait.
+- Upgrades that raise another system's pay need computed pay, which is not built (`v2.py:15935`, "only
   'random' is supported"); author fixed pay bands instead.
 
 ## Other systems the round found

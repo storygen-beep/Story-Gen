@@ -36,6 +36,6 @@
 - Grind is rare here: 2 of 242 units name the gym or body.
 
 ## Our engine today (round 9b §6)
-- Partial: a gym membership is a pass (`template_import.py:951`, `pass` condition `v2.py:4761`); the body number
-  is a trait with `trait_decay` (applied at `v2.py:6443`). No body-shape primitive.
-- Tips from the body are computed pay, not supported (`v2.py:15899`); author tip bands per body tier instead.
+- Partial: a gym membership is a pass (`template_import.py:956`, `pass` condition `v2.py:4795`); the body number
+  is a trait with `trait_decay` (applied at `v2.py:6477`). No body-shape primitive.
+- Tips from the body are computed pay, not supported (`v2.py:15935`); author tip bands per body tier instead.

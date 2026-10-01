@@ -569,3 +569,23 @@ def test_e3_conv_cycle_reaches_a_save_written_before_it(tmp_path):
     got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
     assert got["conv_cycle"] == {}
     assert got["replies"] == {"dan_invite": [{"round": 1, "choice": 0}]}
+
+
+# --- World and Systems PRD, Phase 7 batch 2 -------------------------------------
+
+BATCH2 = "apps/game_generation/games_toml_files/engine_ws_batch2_2026_10_01.toml"
+
+
+@needs_node
+def test_e3b_conv_ignored_reaches_a_save_written_before_it(tmp_path):
+    """E3b: a game that adds an ignore hook. An old save's phone map has no
+    conv_ignored; the backfill fills it one level into the phone sub-map, and the
+    delivery record the hook reads (triggered_day) is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["conv_ignored"]
+    sv["game_state"]["phone"]["triggered_conversations"] = {
+        "ana_ask": {"triggered_day": 1, "triggered_hour": 18, "conv_index": 0}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["conv_ignored"] == {}
+    assert got["triggered_conversations"]["ana_ask"]["triggered_day"] == 1
