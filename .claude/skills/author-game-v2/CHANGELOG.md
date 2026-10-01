@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable B1: step-family nouns take a hyphen
+
+**Why.** The Billable Hours test found `--words` listing *stepbrother*, *stepfather* and *stepsister*:
+the field spells them with a hyphen, so the closed form reads as a word the genre does not use. An
+authoring note, not a false red.
+
+**What changed.**
+- `references/the-voice.md` "Adult wording": one line. Step-family nouns take a hyphen where a player
+  reads them (generic examples only).
+
+**Verified.** `gates.py --words` on a scratch line "Her stepbrother and her step-brother … her
+stepfather" lists `stepbrother` and `stepfather` and not `step-brother`. Selfcheck and the skill tests
+pass.
+
+**Words:** +33, running total 144,332 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable P6c: three sentences the engine merge made untrue, a stale shop cite, three PRD ids
 
 **Why.** Engine batch 1 built repeatable chats (`repeat_after_days`) and pools that remember

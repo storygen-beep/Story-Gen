@@ -335,6 +335,10 @@ school" · "high school" · "middle school" · "junior high" · teen · teenager
 uniform" · "class president" · "grade 9" through "grade 12". *Freshman* and *sophomore* are college
 words and are allowed. A whole-word match: "eighteen" is not "teen".
 
+**Step-family nouns take a hyphen where a player reads them:** step-brother, step-father, step-sister.
+The field spells them that way, so `--words` lists the closed forms (*stepbrother*) as words the genre
+does not use.
+
 ## Two traps worth knowing before you author a card
 
 - **Quest conditions use a different evaluator from canvas conditions, and do NOT fail open.** Never
