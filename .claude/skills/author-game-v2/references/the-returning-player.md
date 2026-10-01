@@ -30,7 +30,7 @@ that already exists.
 
 ## §1 — What the engine repairs for you, and what it cannot
 
-`setup.backfillStateDefaults` (`v2.py:16828`) runs from the `:passagestart` handler (`v2.py:16981`)
+`setup.backfillStateDefaults` (`v2.py:16851`) runs from the `:passagestart` handler (`v2.py:17004`)
 on **every passage**, and fill-if-absent merges the current default skeleton
 (`setup.stateDefaults`, `v2.py:3734`) into whatever the save carries. It never overwrites a value
 the player earned, and it is idempotent.
@@ -69,7 +69,7 @@ stripped of. Same for `equipped`.
 ## §2 — Slugs are immutable release ids
 
 Every passage is named from slugs: `Canvas_<canvasSlug>_Node_<nodeSlug>`
-(`v2.py:13089`) and `Location_<locSlug>` (`v2.py:13102`). `$npcs` is keyed by the NPC's TOML `id`
+(`v2.py:13112`) and `Location_<locSlug>` (`v2.py:13125`). `$npcs` is keyed by the NPC's TOML `id`
 (`game_graph.py:144`), locations by theirs (`:190`), nodes by `"<canvas>.<node>"` (`:376`).
 
 A save stores the passage it is parked on — `Location_home_room`,
@@ -148,7 +148,7 @@ cover, a key, a tool the next beat needs owned or equipped — the save is **sof
 forward canvas stays shut, and the "go and get it" reaction points at something not in the wardrobe.
 
 > **Why no load-time fix covers it.** The state backfill fills `$player` at the top level only and
-> never fills into `wardrobe` (`v2.py:17600-17603`), because filling into it would hand back a garment
+> never fills into `wardrobe` (`v2.py:17623-17626`), because filling into it would hand back a garment
 > the player sold or discarded. A reaction that fires on the item *unequipped* with no ownership
 > check cannot tell never-granted from took-it-off, so the stranded save has no path to the item.
 

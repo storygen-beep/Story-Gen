@@ -37,5 +37,5 @@
 
 ## Our engine today (round 9b §6)
 - Partial: a gym membership is a pass (`template_import.py:998`, `pass` condition `v2.py:5178`); the body number
-  is a trait with `trait_decay` (applied at `v2.py:6860`). No body-shape primitive.
-- Tips from the body are a stat-based value on the tip effect (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7161`)).
+  is a trait with `trait_decay` (applied at `v2.py:6883`). No body-shape primitive.
+- Tips from the body are a stat-based value on the tip effect (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7184`)).

@@ -634,7 +634,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
   play in ascending `priority`, and once all are seen it returns the highest-priority one
   forever. **Nothing calls it.** In a built game's `output/index.html` the symbol appears
   three times and is invoked zero times. The live path is `renderSoloActivities`
-  (`v2.py:5816`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
+  (`v2.py:5839`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
   does no progression at all. **Do not point an author at it.** Wiring it is an open engine
   decision, not a thing this file may assume.
 - **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:5204-5205`).

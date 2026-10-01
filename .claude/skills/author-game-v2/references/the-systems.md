@@ -260,7 +260,7 @@ In the field a system is written once and turns up wherever its label is.
 > own practisable sports.
 
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
-a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2402` —
+a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2408` —
 and there is no plural form. A row wanted in three rooms is authored three times.
 
 **So the labels are a design tool here, not a wiring mechanism.** That is not a lesser thing. The
@@ -328,7 +328,7 @@ priority   = 0
 ```
 
 **Why it is cheap, and the precedent to build it from.** `_render_location_description`
-(`v2.py:10548`) already emits a conditional chain onto the room screen using
+(`v2.py:10571`) already emits a conditional chain onto the room screen using
 `setup.triggerConditionsSatisfied` — the same helper the location passage calls for
 `entry_conditions`. The notice is that path with two changes: **every** match prints rather than
 first-match, and it appends after the description rather than replacing it.
@@ -338,7 +338,7 @@ and its own docstring records that they were byte-identical copies and that this
 change of this kind gets half-applied. Build it in one place.
 
 **What exists today and why it does not serve.** `[[story_arc.hints.templates]]` is a conditional
-hint engine with priorities and specificity sorting (`v2.py:7274`-`6650`), but it filters on
+hint engine with priorities and specificity sorting (`v2.py:7297`-`6650`), but it filters on
 `tpl.npc_id !== npcSlug` — one character at a time, never a system — and it is the **v1** guidance
 path, superseded by `[[quests.cards]]` for `quests_engine = "v2"` (`template_import.py:48`, `:447`),
 which every game here uses. It cannot be repurposed without changing what it is.
@@ -382,7 +382,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
 5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
-   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6085`).
+   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6108`).
 
 **Reputation is meters until the engine can spread gossip.** Course of Temptation and Shady Deals run it as a
 system (`templates/cards/reputation.md`); our engine has no reputation primitive (round 9b §6). Until it does,

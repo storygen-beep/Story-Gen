@@ -108,7 +108,7 @@ setup → problem → character interaction → conflict → choice → temptati
    text, and progression questions are the players' number-one comment topic: 8.4% of all comments,
    in 30 of 30 games (measured 2026-09-24). Lint `the opening arms a card with goals`. The goal
    shape is `engine.md` §47's: `flag` or `trait`, with `subject`, `op`, `value` and `label`. A
-   `type` key is ignored by the importer (`template_import.py:1257-1294` never reads it).
+   `type` key is ignored by the importer (`template_import.py:1263-1300` never reads it).
 6. **Plain tutorial lines on the last screen**, in the game's own plain voice (`the-voice.md`):
    money, work, exploring, people, choices. *"You need money. Take shifts at the bar, or find
    another way."* This is the one place the story text may explain a system directly. F2b's warning
@@ -234,7 +234,7 @@ funnel from the starting canvas, through its location exit, into a one-time canv
 whose trigger flags the funnel has set, and judges the handover at the end of *that*. Before, it
 stopped at the boot's exit and judged the hop to the capstone as if it were the handover. Node ids in
 the funnel may be bare (`"hall"`) or qualified (`"canvas_opening.hall"`); the engine keeps the last
-segment (`v2.py:14513`), and so does the walk.
+segment (`v2.py:14536`), and so does the walk.
 
 ⚠️ **This is not a size cut.** Build the opening at full designed size; the engine plays a node
 chain back one screen at a time. "Two canvases" is about *what each one is for*, not about brevity.
@@ -257,7 +257,7 @@ describing the second screen and calling it the first.
 
 **2 · There may be a character screen in front of the game, and its words are not ours.**
 `[player] customizable = true` with one `[[player.customization_fields]]` builds a
-`CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1070`, `v2.py:9951`). Its
+`CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1070`, `v2.py:9974`). Its
 headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
 story"*, *"Continue to Game"*. The only authored
 text on it is `player_description` (`v2.py:854`); an author who does not know that ships the
@@ -361,7 +361,7 @@ The failure, computed exactly the way the gate computes it:
 
 ```
 [time] starting_hour = 7                                  07:00
-node -> node, no time declared -> default 3 min           07:03      v2.py:15494
+node -> node, no time declared -> default 3 min           07:03      v2.py:15517
 node -> node, no time declared -> default 3 min           07:06
 exit: time_progression_minutes = 30, to the_diner         07:36
 
@@ -419,8 +419,8 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Arming a system is not the same as putting a door to it on the screen — and for the wardrobe the engine already put one there.
 >
 > Declaring `wardrobe_location` renders `[[Change Clothes->WardrobePage]]` on that location's screen
-> unconditionally (`v2.py:11126`, and `:11059` for the entry-gated variant); `shop_location` does
-> the same with `Browse Clothes` (`:10967`, `:10908`). It is above the portrait row and above the
+> unconditionally (`v2.py:11149`, and `:11082` for the entry-gated variant); `shop_location` does
+> the same with `Browse Clothes` (`:11154`, `:11087`). It is above the portrait row and above the
 > activity list, on every visit, needing nothing from you.
 >
 > So an authored canvas called *"The wardrobe"* at that same location is a **second door beside the
@@ -468,7 +468,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Nothing non-repeatable may live at the `shop_location` or the `wardrobe_location`.
 >
 > Both injected links are emitted **inside** the `<<if _autoFire>><<goto _autoFire>><<else>>`
-> branch (`v2.py:10602` and `:10649`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
+> branch (`v2.py:10625` and `:10672`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
 > *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
 > the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
 > and note that most corpus shop locations are bare rooms for exactly this reason.
@@ -604,15 +604,15 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > in the engine, that is **false** for a canvas that auto-fires:
 >
 > ```
-> getStoryCanvasRedirect              v2.py:5980
+> getStoryCanvasRedirect              v2.py:6003
 >   -> selectAutoFireCanvasForLocation    v2.py:5467
 >     -> isCanvasValid                    v2.py:5631
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:12944` and read on the random-encounter selector
-> (`v2.py:6362`), the substitution rules (`v2.py:6441`), and — through `setup._npcPresentForCanvas`
-> (`v2.py:5601`) — the solo lane (`v2.py:5542`, `:6193`) and the launcher (`v2.py:3595`).
+> `requiresNpc` is emitted at `v2.py:12967` and read on the random-encounter selector
+> (`v2.py:6385`), the substitution rules (`v2.py:6464`), and — through `setup._npcPresentForCanvas`
+> (`v2.py:5601`) — the solo lane (`v2.py:5542`, `:6216`) and the launcher (`v2.py:3595`).
 > **None of them is auto-fire.**
 >
 > Consequence: a meeting bound to a bar with `requires_npc`, whose character's schedule puts him
@@ -651,23 +651,23 @@ npc      = "npc_theo"     # ← RIGHT.
 
 `TemplateCanvas` has four content fields and `npc` is not one of them
 (`template_import.py:963-970`), and it is built with named arguments only
-(`:2397-2405`), so a canvas-level `npc` key is dropped with **no error, no warning, and a green
-build**. The field the engine reads is `TemplateTrigger.npc` (`:677`), carried through
-`game_graph.py:311` into trigger metadata, out at `v2.py:12369`, and emitted as `npcId`
-(`v2.py:12426`).
+(`:2408-2416`), so a canvas-level `npc` key is dropped with **no error, no warning, and a green
+build**. The field the engine reads is `TemplateTrigger.npc` (`:682`), carried through
+`game_graph.py:311` into trigger metadata, out at `v2.py:12392`, and emitted as `npcId`
+(`v2.py:12449`).
 
 **Three things ride on that one key, and all three fail together.**
 
 1. **The face.** `renderNpcPortraits` and its selector both bail on `if (!c.npcId) continue`
-   (`v2.py:5714`, `v2.py:5233`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
+   (`v2.py:5737`, `v2.py:5233`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
    the empty string at every location, for every hour, for the whole run.
 2. **The presence gate.** The portrait renderer is where a character's hours are actually enforced:
    it reads their declared `[[npcs.schedules]]` and compares `getNpcLocation` to where the player is
-   standing (`v2.py:5750-5753`). Lose the portrait and you lose the check — the surface stays
+   standing (`v2.py:5773-5776`). Lose the portrait and you lose the check — the surface stays
    clickable in an empty room at any hour.
 3. **The label.** A canvas with no `npcId` falls through to the solo path, which does not skip it
-   (`v2.py:5833`) and writes the canvas's own `displayName` straight into the link
-   (`v2.py:5864`). The portrait path would have written the resolved character name. So the title
+   (`v2.py:5856`) and writes the canvas's own `displayName` straight into the link
+   (`v2.py:5887`). The portrait path would have written the resolved character name. So the title
    you wrote for the author's benefit becomes the words on the player's screen — `@` tokens and all,
    because `name` is not a field the engine resolves tokens in (`engine.md` §43).
 
@@ -690,7 +690,7 @@ enforced nowhere. The copyable block in `templates/first-hour.toml` carries `npc
 where it genuinely is a top-level key.
 
 > **Gated as `no canvas key is discarded`.** Fails on any key sitting on `[[canvases]]` that is not
-> one of the seven `TemplateCanvas` fields (`template_import.py:1048-1054`). It invents no threshold
+> one of the seven `TemplateCanvas` fields (`template_import.py:1054-1060`). It invents no threshold
 > and cannot produce a false positive: such a key does nothing at all, so writing one is never
 > correct.
 >
@@ -705,7 +705,7 @@ where it genuinely is a top-level key.
 
 ⚠️ **One location shows one canvas per character.** The renderer collects every valid repeatable
 canvas for an NPC and keeps the highest `priority`, preferring affordable over cost-blocked
-(`v2.py:5699-5732`). Three surfaces for one person in one room is not three rows — it is one face
+(`v2.py:5722-5755`). Three surfaces for one person in one room is not three rows — it is one face
 showing whichever ranks highest right now. That is the intended shape and it composes with the
 tier ladder, but decide the priorities on purpose: a hub at 6 sitting under an escalation at 7 means
 the escalation replaces it whenever its conditions hold.
@@ -730,8 +730,8 @@ nodeId     = "talk"
 with the hub unless something links to it.** `act_garage_late` (p7) replaces `hub_theo_garage` (p6)
 the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
 most reason to want it. A **qualified** nodeId reaches across canvases —
-`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:8048-8054`,
-validated at `:4623-4643`). One line on the escalation's base, and the two surfaces share the pool
+`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:8076-8082`,
+validated at `:4646-4666`). One line on the escalation's base, and the two surfaces share the pool
 instead of duplicating forty lines of dialogue.
 
 ⚠️ **Check which phase file the surface lives in before you decide it is safe.**
@@ -759,7 +759,7 @@ the-company's entire first meeting with the player's employer is **80 words**:
 Role, then the look, then a beat. That is the whole thing.
 
 **Where the player cannot yet know the name**, set `speaker = "unknown"` on the `dialog` block and
-the engine prints **"Stranger:"** (`v2.py:15397-15403`); switch to the NPC speaker once names have
+the engine prints **"Stranger:"** (`v2.py:15420-15426`); switch to the NPC speaker once names have
 been exchanged.
 
 ⚠️ **A meeting with no `dialog` block is not a meeting.** The person is in the room. If they do not
@@ -846,15 +846,15 @@ when = [ { flag = "met_wade", subject = "player", op = "is_true" },
 ```
 
 The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
-(`v2.py:17267`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
-(`v2.py:17026`), so an unmet character renders **no heading and no section** — the roster fills in
+(`v2.py:17290`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
+(`v2.py:17049`), so an unmet character renders **no heading and no section** — the roster fills in
 as the player meets people, which is what the field ships (the-company's cast table is
 `<<if $player.met[_char.id]>>` per row).
 
 Three things to get right:
 
 - **A `when` item sets `flag` *or* `trait`, never both** — the importer rejects an item carrying
-  both (`template_import.py:5724`). The meeting flag is its own item beside the trait band.
+  both (`template_import.py:5733`). The meeting flag is its own item beside the trait band.
 - **Put it on *every* card in that character's ladder**, not just the first. A gap means the
   character reappears at the band whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
@@ -1061,7 +1061,7 @@ no kin word at all      the canteen · the night shift
 > a place. The label is the answer to *"who is this"*, which is the standing question this whole
 > rule exists to keep answered.
 
-⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:16803-16805`), which is the safe
+⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:16826-16828`), which is the safe
 default.
 
 ⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
@@ -1078,7 +1078,7 @@ has to remember who "Stepsister" is.
 >
 > A hard-coded label contradicts the player's pick or has to dodge it. The label exists to say what
 > he is to her, and that is the one thing the picker already knows. The generator resolves tokens
-> in this field (escape first, then resolve, `v2.py:16802`; `.rel` at `v2.py:16162`), and the
+> in this field (escape first, then resolve, `v2.py:16825`; `.rel` at `v2.py:16185`), and the
 > lint `the label under the name` flags a hard-coded label on any character the player can rename.
 >
 > A **fixed** character still takes a plain string — `mother`, `professor` — and a

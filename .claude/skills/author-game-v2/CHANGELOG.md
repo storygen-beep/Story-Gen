@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: item prices (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10 (item prices and a general shop), first half. An inventory item had
+no price, so nothing outside the clothing shop could be bought.
+
+**What changed.**
+- `template_import.py`: `[[items]]` take `price` (whole, ≥ 1), `money_trait` (a `[player] core_traits`
+  key; default `money`, which must then exist) and `conditions` (v1.0, what gates buying). `money_trait`
+  and `conditions` are read only with a price (build errors). Written into the item's metadata only when
+  set, so GG gets them and a game without them is unchanged. The condition walker finds
+  `items[].conditions` by its key; its docstring names it and a test proves it.
+- `generators/v2.py`: `setup.itemBuyBlock` says why she cannot buy one ('' when she can: a price, the
+  conditions, enough of the money trait, room in `max_stack`) and `setup.buyInventoryItem` buys one. The
+  general shop (next change) is what calls them.
+- `references/engine.md` §17: "Known gaps — the shop" becomes "Shops", with the price fact; the "planned:
+  item prices and a general shop" note is gone from the clothing-shop paragraph.
+- Citations re-pointed through the `git diff` line map (440 moved, 190 identical). **And a fix to the
+  method:** a bare `:NNNN` that opens a wrapped line, with its file named on the line before, was never
+  re-pointed by this batch's earlier changes. A paragraph-aware pass from the pre-batch engine (301f6f8)
+  moved those 21 (engine.md, the-first-hour.md, the-release.md); each now names the same code line it
+  named before the batch. `cite_check.py` 0 drifted in SKILL.md + references/.
+
+**Verified.** `test_item_prices.py` (2, headless: coffee bought twice for 8 money, then "You cannot carry
+more"; the pebble is not for sale; short of money says so; the pass card needs its flag, then costs 3
+charm and no money). `ItemPriceSchemaTests` (3: metadata only when set, five bad shapes, the walker on an
+item's conditions). No save state (bought items live in the existing inventory). Selfcheck and the
+skill tests pass; Django failures all in the known list.
+
+**Words:** +28, running total 145,653 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: more than one wardrobe room (World and Systems PRD, Phase 7; opt-in by use)
 
 **Why.** LO's engine order, step 7. `wardrobe_location` named one room, so a gym locker or a work

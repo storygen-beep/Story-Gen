@@ -40,20 +40,20 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:6713`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:6736`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
-way to print the current one into prose either — `_resolve_at_references` (`v2.py:14824`) resolves
+way to print the current one into prose either — `_resolve_at_references` (`v2.py:14847`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
 
 A node exit that declares nothing still moves the clock: the default is **3 minutes**
-(`v2.py:14616`, `config.get('default_time_progression', 3)`; the exception fallback at `:14129`
+(`v2.py:14639`, `config.get('default_time_progression', 3)`; the exception fallback at `:14152`
 emits the same). So a player walking a four-node opening has already drifted 9 minutes before
 their first real choice.
 
 The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` in every build
-(`v2.py:16468`, `:16484`), rendering a live 12-hour reading through `<<timeFormatted>>`
-(`v2.py:16860`) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
-day (`v2.py:16932-16952`, `waitTime` at `v2.py:6016`). The player can always see the time and can
+(`v2.py:16491`, `:16507`), rendering a live 12-hour reading through `<<timeFormatted>>`
+(`v2.py:16883`) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
+day (`v2.py:16955-16975`, `waitTime` at `v2.py:6039`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting
@@ -194,10 +194,10 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:5986`) renders `20m` on the
-  navigation card from `[[locations.costs]] time`, used at `v2.py:20256` and `:20273`.
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6009`) renders `20m` on the
+  navigation card from `[[locations.costs]] time`, used at `v2.py:20279` and `:20296`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
-  `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:13446`) with
+  `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:13469`) with
   nothing on the label.
 
 So a door says `20m` and a two-and-a-half-hour shift says nothing. The sidebar clock jumps and the
@@ -248,8 +248,8 @@ cooldown_message  = "<the hours, as a bare phrase>"
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
 `[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
 `trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
-`template_import.py:2425-2426`, the trigger table itself — and then writes them **into** metadata at
-`:7987-7988` for the generator to read back at `v2.py:12880-12881`. Authoring them in `metadata` directly
+`template_import.py:2431-2432`, the trigger table itself — and then writes them **into** metadata at
+`:7987-7988` for the generator to read back at `v2.py:12903-12904`. Authoring them in `metadata` directly
 skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
 `showWhenBlocked` reaches the built HTML **zero** times.
 
@@ -258,16 +258,16 @@ so restating the row's own name doubles it: *"Work the counter — The counter �
 one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
-`show_when_blocked` and `cooldown_message` are read at `v2.py:12877-12881` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:12940-12941`). When `isCanvasValid` returns false —
+`show_when_blocked` and `cooldown_message` are read at `v2.py:12900-12904` and emitted as
+`showWhenBlocked` / `cooldownMessage` (`v2.py:12963-12964`). When `isCanvasValid` returns false —
 and it returns false on a **schedule miss** first of all (`v2.py:5631-5637`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
-(`v2.py:6196`, `:6202`, `:6241-6248`).
+(`v2.py:6219`, `:6225`, `:6264-6271`).
 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
 
-**People and places both have this surface now.** `SchedulePage` (`v2.py:22237`) publishes every
+**People and places both have this surface now.** `SchedulePage` (`v2.py:22260`) publishes every
 declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
@@ -334,8 +334,8 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6713`),
-  and there is no `@time` token to print the clock either (`v2.py:14824`).
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6736`),
+  and there is no `@time` token to print the clock either (`v2.py:14847`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*
   Same fact, no claim about now.
@@ -347,9 +347,9 @@ to one?"*); excluding `one` leaves **0**.
   chapter markers in one linear game, 5 narration fragments. (It read "2 in 92,226" until the
   2026-08-24 recheck; C2 carries the split.) A duration in parentheses is not a clock time.
 - **A label that spends the clock says how much**, in one form, held across the game. Travel time
-  is tagged for you (`v2.py:5467`); activity time is not (`v2.py:13446`).
+  is tagged for you (`v2.py:5467`); activity time is not (`v2.py:13469`).
 - **A stated duration must equal the real spend** — the gate walks choice → target node → exit.
 - **If a thing has hours, publish them** — `show_when_blocked` + `cooldown_message`
-  (`v2.py:12877`), the one surface where an hour belongs.
+  (`v2.py:12900`), the one surface where an hour belongs.
 - **Never assert elapsed time the player's pace controls** — and where the precision is the
   character, keep the precision and drop the claim.

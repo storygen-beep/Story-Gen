@@ -6740,6 +6740,50 @@ class WardrobeLocationListTests(SimpleTestCase):
             self.assertTrue(any(fragment in e for e in errors), (value, errors))
 
 
+def _item(d, iid):
+    return next(i for i in d["items"] if i["id"] == iid)
+
+
+class ItemPriceSchemaTests(SimpleTestCase):
+    """E10 (World and Systems PRD) — `price`, `money_trait`, `conditions` on `[[items]]`."""
+
+    def test_prices_validate_and_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        t = normalize(_batch3())
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        items = {i["id"]: i for i in p.metadata["items"]}
+        self.assertEqual((items["coffee"]["price"], "money_trait" in items["coffee"]), (4, False))
+        self.assertEqual(items["pass_card"]["money_trait"], "charm")
+        self.assertEqual(sorted(items["pebble"]), ["icon", "id", "max_stack", "name"])
+
+    def test_bad_prices_are_errors(self):
+        for iid, change, fragment in (
+            ("coffee", {"price": 0}, "price must be a whole number of at least 1"),
+            ("coffee", {"price": 2.5}, "price must be a whole number of at least 1"),
+            ("coffee", {"money_trait": "gold"}, "money_trait 'gold' is not a [player] core_traits key"),
+            ("pebble", {"money_trait": "charm"}, "money_trait is read only with a price"),
+            ("pebble", {"conditions": {"version": "1.0", "items": []}}, "read only with a price"),
+        ):
+            d = _batch3()
+            _item(d, iid).update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (iid, change, errors))
+
+    def test_the_condition_walker_reaches_item_conditions(self):
+        d = _batch3()
+        _item(d, "pass_card")["conditions"] = {"items": [
+            {"type": "flag", "flag_key": "card_ok", "operator": "is_true"}]}
+        errors = validate(normalize(d))
+        self.assertTrue(any("items['pass_card'].conditions" in e for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

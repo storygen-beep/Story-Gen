@@ -25,6 +25,11 @@
 #                 both switches removed, to prove the defaults are today's behaviour.
 #    saved_outfits  the wardrobe page saves what she wears and puts it back on.
 #    wardrobe_location  two wardrobe rooms: loc_home and loc_dan (never loc_gym).
+#
+#  E10 — item prices and a general shop:
+#    coffee       4 money, at most 2 carried.
+#    pass_card    3 charm (money_trait), only once card_ok is set (conditions).
+#    pebble       no price: not for sale.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -46,7 +51,7 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40, charm = 10 }
-flag_keys   = ["started"]
+flag_keys   = ["started", "card_ok"]
 
 [[npcs]]
 id          = "npc_dan"
@@ -239,3 +244,22 @@ name           = "Office"
 description    = "The office."
 entry_from     = "loc_home"
 clothing_rules = [ { slots_required = ["top", "bottom"], message = "Dress code." } ]
+
+# E10 — items for sale
+[[items]]
+id        = "coffee"
+name      = "Coffee"
+max_stack = 2
+price     = 4
+
+[[items]]
+id          = "pass_card"
+name        = "Pass card"
+price       = 3
+money_trait = "charm"
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "card_ok", operator = "is_true" } ] }
+
+[[items]]
+id   = "pebble"
+name = "Pebble"

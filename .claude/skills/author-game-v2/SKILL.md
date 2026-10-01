@@ -556,7 +556,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   canvases and the charge lived in `[settings.rent]`.
 - **A vocabulary the engine does not recognise fails SILENTLY, and nothing else in this system
   does.** `op = "subtract"` is not an engine op — `applyTraitEffect` runs `add` and `set` and
-  returns on anything else (`v2.py:6858-6864`). This skill's own `engine.md` once discussed the op
+  returns on anything else (`v2.py:6881-6887`). This skill's own `engine.md` once discussed the op
   as though it worked. Valid TOML, green
   build, green gates, and a clean play-through, because **a number that never changes looks exactly
   like a number the player has not moved yet.** When you write an unfamiliar key or value, find the

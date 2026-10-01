@@ -1009,6 +1009,12 @@ class TemplateItem:
     name: str = ""
     icon: str = ""
     max_stack: int = 99
+    # E10 — for sale: a price, the trait it is paid from (default money), and v1.0
+    # conditions that gate buying. All None when unauthored, and then left out of
+    # the metadata, so a game without them is unchanged.
+    price: Any = None
+    money_trait: Optional[str] = None
+    conditions: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -1796,7 +1802,7 @@ def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[
     rejection effects and text variants, location entry_conditions, description
     variants, door options, clothing_rules, clothing items, phone app `conditions`,
     phone conversation / post / profile / gallery / call triggers, match_condition,
-    daily_topics, daily_tick effects,
+    daily_topics, daily_tick effects, item `conditions` (what gates buying),
     engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
     """
     errors: List[str] = []
@@ -3213,6 +3219,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 name=_require_str(item_def, "name", ""),
                 icon=_require_str(item_def, "icon", ""),
                 max_stack=_require_int(item_def, "max_stack", 99),
+                price=item_def.get("price"),
+                money_trait=item_def.get("money_trait"),
+                conditions=item_def.get("conditions"),
             )
         )
 
@@ -6251,6 +6260,25 @@ def validate(template: GameTemplate) -> List[str]:
         seen_item_ids.add(it.id)
         if it.max_stack <= 0:
             errors.append(f"items[{i}].max_stack must be positive")
+        # E10 — price, money_trait, conditions (the conditions' own shape is checked by
+        # the condition walker, which finds `items[].conditions` by its key).
+        if it.price is not None and (
+            isinstance(it.price, bool) or not isinstance(it.price, int) or it.price < 1
+        ):
+            errors.append(f"items[{i}].price must be a whole number of at least 1")
+        if it.money_trait is not None:
+            if it.price is None:
+                errors.append(f"items[{i}].money_trait is read only with a price")
+            elif it.money_trait not in (template.player.core_traits or {}):
+                errors.append(
+                    f"items[{i}].money_trait '{it.money_trait}' is not a [player] core_traits key"
+                )
+        elif it.price is not None and "money" not in (template.player.core_traits or {}):
+            errors.append(
+                f"items[{i}] has a price but no money_trait, and [player] has no `money` trait"
+            )
+        if it.conditions is not None and it.price is None:
+            errors.append(f"items[{i}].conditions gate buying and are read only with a price")
 
     # ===== Effect `op` must be an op the RUNTIME actually runs =====
     #
@@ -8416,7 +8444,10 @@ def _assemble_project_metadata(project, template):
     # Store items if defined
     if template.items:
         project.metadata["items"] = [
-            {"id": it.id, "name": it.name, "icon": it.icon, "max_stack": it.max_stack}
+            {"id": it.id, "name": it.name, "icon": it.icon, "max_stack": it.max_stack,
+             **({"price": it.price} if it.price is not None else {}),
+             **({"money_trait": it.money_trait} if it.money_trait else {}),
+             **({"conditions": it.conditions} if it.conditions else {})}
             for it in template.items
         ]
     # Store daily-tick hook if defined ([engine.daily_tick])

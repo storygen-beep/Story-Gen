@@ -5640,6 +5640,29 @@ setup.getItemCount = function(itemId) {{
     return inv[itemId] || 0;
 }};
 
+// E10 — an item with a price is bought with its money_trait (default money), when its
+// conditions hold and the stack has room. itemBuyBlock says why not ('' = she can).
+setup.itemBuyBlock = function(itemId) {{
+    var it = setup.items_map[itemId];
+    if (!it || !(Number(it.price) > 0)) return 'Not for sale.';
+    if (it.conditions && it.conditions.items && it.conditions.items.length &&
+        !setup.triggerConditionsSatisfied(it.conditions)) {{
+        var why = setup.describeUnmetConditions(it.conditions);
+        return why ? ('Needs ' + why + '.') : 'Not yet.';
+    }}
+    var mt = it.money_trait || 'money';
+    var have = Number(((State.variables.player || {{}}).core_traits || {{}})[mt] || 0);
+    if (have < Number(it.price)) return 'Not enough ' + setup.traitLabel(mt) + '.';
+    if (setup.getItemCount(itemId) >= (it.max_stack || 99)) return 'You cannot carry more.';
+    return '';
+}};
+setup.buyInventoryItem = function(itemId) {{
+    if (setup.itemBuyBlock(itemId)) return false;
+    var it = setup.items_map[itemId];
+    State.variables.player.core_traits[it.money_trait || 'money'] -= Number(it.price);
+    return setup.addItem(itemId, 1);
+}};
+
 // Check if a canvas has never been completed (for highlighting new content)
 setup.isCanvasNew = function(canvasId) {{
     try {{
