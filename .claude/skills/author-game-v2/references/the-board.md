@@ -18,9 +18,10 @@ key, it does not belong on the board.
 
 ## 1. Locations — `[[locations]]`
 
-⚠️ **Read `references/the-systems.md` before this section, and declare `board.systems[]` first.**
-The derivation below needs them: a room's rows come from the systems that describe her, not from
-the room. Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, so what
+⚠️ **Read `references/the-systems.md` before this section, and fill a card per system before the
+rooms** (`board.systems[]`, `templates/sheets/system.md`; its meters go in `board.meters[]`). The
+derivation below needs them: a room's rows come from the systems that live there, not from the
+room. Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, so what
 she has become changes what a room offers (`the-systems.md` SY1).
 
 **How many locations is not a number you pick. Derive it from what a place is FOR** — the three
@@ -421,8 +422,9 @@ wardrobe_location = "her_room"
 
 ## Before leaving this phase
 
-Record in `v2_state.json`: every location with its budget and current fill, every character
-with its surface count and schedule rows, the ascent meter and its ceiling.
+Record in `v2_state.json`: every system card, every meter and the infrastructure, every location
+with its budget and current fill, every character with its surface count and schedule rows, the
+ascent meter and its ceiling.
 
 Then run the check that reads the ledger alone — before any TOML exists, `gates.py` has nothing to
 read and says so:

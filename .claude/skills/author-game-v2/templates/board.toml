@@ -121,6 +121,10 @@ default_image = "<images/her_default.jpg>"
 
 
 # ── meters ───────────────────────────────────────────────────────────────────
+#   The systems (one card each), the meters they write and read, and the
+#   infrastructure are declared in v2_state.json, not here: board.systems[],
+#   board.meters[], board.infrastructure[] (references/state.md · the-systems.md).
+#
 #   ⚠️ ANSWER W1 BEFORE YOU NAME A SINGLE METER: does the PLAYER climb, or does
 #      the CAST? references/the-meters.md W1. Declare it as `who_climbs` in
 #      v2_state.json; gate 34 checks the built game against your answer.

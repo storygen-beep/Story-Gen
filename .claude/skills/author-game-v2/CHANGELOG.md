@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S2a: the ledger split and the card sheet (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3: a system is now a design card, not a meter, but every ledger's `board.systems[]` holds meter-shaped
+rows. The ledger needs a home for each.
+
+**What changed.** `references/state.md`: the `board` schema splits into `board.systems[]` (the cards: `id`, `name`,
+`place`, `hours`, `cost`, `pay_ladder[]`, `lewd_ladder[]` with `acts[]`, `one_ladder`, `people[]`, `pool[]`, `daily`,
+`memory`, `growth`, `sink`, `deadline`, `feeds[]`, `reads[]`, `hook_link`, `leads_to[]`), `board.meters[]` (today's
+shape unchanged) and `board.infrastructure[]` (`name`, `kind`: clock · view · channel); an entry with `kind` and no
+card fields is read as a meter until the game moves it. The prose block and the gate-keys table gain the three
+rows (the meters row says the lint still reads meter-shaped `board.systems[]` until S1b-code). `templates/sheets/
+system.md` becomes the card (one page of slots). `references/the-board.md` §1 says fill a card per system before
+the rooms; "Before leaving this phase" records cards, meters and infrastructure. `SKILL.md` dispatch row: "fill a
+card per system before the rooms". `templates/board.toml`: a commented pointer above the meters. No game ledger is
+touched (§9 G5 is a game session's job).
+
+**Verified.** `test_templates_parse` passes (the card sheet is one page of slots); an old-shape and a new-shape
+ledger both run through `lint_labels_and_systems` without error; `_template_field_gap` lists the same 37 fields
+(nothing new); `--selfcheck` current (orphans 3); pytest 468 passed.
+
+**Words:** +361, running total 141,375 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S1b: cross-references to the new definition (World and Systems PRD, Phase 2)
 
 **Why.** S1a changed what a system is (WS-D3); the files that pointed at the old "what the game keeps track of"
