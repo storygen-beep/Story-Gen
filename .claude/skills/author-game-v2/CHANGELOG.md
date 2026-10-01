@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S1b-code · PROTECTED (tools, Q9): the labels lint reads meters
+
+**Why.** S2a split the ledger: meter rows move to `board.meters[]` and `board.systems[]` holds design cards. The lint
+read `board.systems[]` only, so a migrated ledger would have read its cards as meters and its meters not at all.
+
+**What changed.** `scripts/gates.py`: `lint_labels_and_systems` reads `_meters_of_board(board)` — `board.meters[]`,
+plus any old meter-shaped `board.systems[]` entry (a `kind` and no card field); a card is never read as a meter.
+Its docstring, findings and summary say "meter"; the printed explanation under the lint says "meter" for ambient
+and sourced. All swaps are line-for-line. The new helper `_meters_of_board` and `_SYSTEM_CARD_FIELDS` sit just above
+`def main()` (+18 lines). The lint's name (`the labels and the systems agree`) is unchanged, so `SKILL.md`'s lints
+paragraph and `_emitted_names` still agree. `references/state.md`: the `board.meters[]` gate-keys row says the lint
+also reads old meter-shaped rows. New `scripts/tests/test_gates_s1b_meters.py` (5 tests: old shape, new shape, a
+card is not a meter, a clean meter, nothing declared).
+
+**Verified.** `cite_check.py --fix`: 0 drifted in SKILL.md + references; the one cite past `main()`,
+`the-release.md` "Lints never touch the tally" (`gates.py:12991`), was re-pointed by hand to `gates.py:13009`
+(the same comment line); `gates.py:7647`, `8567`, `9268`, `9350`, `9372`, `9424` checked unmoved. `gates.py
+billable_hours` (read-only) prints "6 meters declared (2 sourced)" from its old-shape ledger. `--selfcheck` current
+(orphans 3); pytest 473 passed.
+
+**Words:** 0, running total 141,375 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S2a: the ledger split and the card sheet (World and Systems PRD, Phase 2)
 
 **Why.** WS-D3: a system is now a design card, not a meter, but every ledger's `board.systems[]` holds meter-shaped

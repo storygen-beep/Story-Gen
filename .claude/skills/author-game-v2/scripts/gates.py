@@ -2227,9 +2227,9 @@ def _cost_traits_of(canvas):
 
 
 def lint_labels_and_systems(model, game, state):
-    """`the-systems.md` SY1-SY4 — do the declared systems and the room labels agree?
+    """`the-systems.md` SY1-SY4 — do the declared meters and the room labels agree?
 
-    DECLARE-THEN-CHECK against `board.systems[]` and `board.locations[].labels`, the
+    DECLARE-THEN-CHECK against `board.meters[]` and `board.locations[].labels`, the
     same shape as the `a need shuts a door` gate. Three lists, and a verdict on none
     of them.
 
@@ -2248,14 +2248,14 @@ def lint_labels_and_systems(model, game, state):
     if state is None:
         return "", []
     board = (state or {}).get("board") or {}
-    systems = [s for s in (board.get("systems") or []) if isinstance(s, dict)]
+    systems = _meters_of_board(board)  # board.meters[] + old meter-shaped board.systems[]
     locs = [l for l in (board.get("locations") or []) if isinstance(l, dict)]
     room_labels = {str(l.get("id")): {str(x) for x in (l.get("labels") or [])}
                    for l in locs if l.get("id")}
     declared_labels = set().union(*room_labels.values()) if room_labels else set()
 
     if not systems and not declared_labels:
-        return ("no board.systems[] and no room labels declared — the systems step has "
+        return ("no board.meters[] and no room labels declared — the systems step has "
                 "not been taken (the-systems.md SY1)"), []
 
     findings = []
@@ -2266,14 +2266,14 @@ def lint_labels_and_systems(model, game, state):
         claimed |= {str(x) for x in (s.get("labels") or [])}
     for lid, labs in sorted(room_labels.items()):
         for lab in sorted(labs - claimed):
-            findings.append(f"{lid}: label `{lab}` is claimed by no declared system")
+            findings.append(f"{lid}: label `{lab}` is claimed by no declared meter")
 
     # 2 · a label a system names that no room carries — nowhere to live.
     for s in systems:
         for lab in sorted({str(x) for x in (s.get("labels") or [])} - declared_labels):
-            findings.append(f"system `{s.get('id')}`: label `{lab}` is on no location")
+            findings.append(f"meter `{s.get('id')}`: label `{lab}` is on no location")
 
-    # 3 · a sourced system: fed where it says, and read somewhere else. SY2.
+    # 3 · a sourced meter: fed where it says, and read somewhere else. SY2.
     by_loc = {}
     for c in model:
         by_loc.setdefault(c["loc"], []).append(c)
@@ -2282,24 +2282,24 @@ def lint_labels_and_systems(model, game, state):
             continue
         key, sid = str(s.get("key") or ""), s.get("id")
         if not key:
-            findings.append(f"system `{sid}`: no `key` — nothing to check it against")
+            findings.append(f"meter `{sid}`: no `key` — nothing to check it against")
             continue
         fed = [str(x) for x in (s.get("fed_at") or [])]
         if not fed:
-            findings.append(f"system `{sid}`: `sourced` with no `fed_at` — say where it is fed")
+            findings.append(f"meter `{sid}`: `sourced` with no `fed_at` — say where it is fed")
             continue
         written_at = [f for f in fed if any(key in c["sets"] for c in by_loc.get(f, []))]
         elsewhere = sorted({c["loc"] for c in model
                             if c["loc"] not in fed
                             and (key in c["reads"] or key in _cost_traits_of(c["raw"]))})
         if not written_at:
-            findings.append(f"system `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
+            findings.append(f"meter `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
         if not elsewhere:
-            findings.append(f"system `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
+            findings.append(f"meter `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
                             f"— a source with no readers (SY2)")
 
     sourced = sum(1 for s in systems if str(s.get("kind")) == "sourced")
-    summary = (f"{len(systems)} systems declared ({sourced} sourced) · "
+    summary = (f"{len(systems)} meters declared ({sourced} sourced) · "
                f"{len(declared_labels)} distinct labels over {len(room_labels)} rooms · "
                f"{len(findings)} to eyeball")
     return summary, findings
@@ -12733,6 +12733,24 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("one name per trait", ok, head, detail)
 
 
+# ── the-systems.md S2a: meters vs system cards ─────────────────────────────
+# A system card (board.systems[]) carries any of these; a meter row never does.
+_SYSTEM_CARD_FIELDS = ("name", "place", "hours", "cost", "pay_ladder", "lewd_ladder",
+                       "one_ladder", "people", "pool", "daily", "memory", "growth",
+                       "sink", "deadline", "feeds", "reads", "hook_link", "leads_to")
+
+
+def _meters_of_board(board):
+    """The ledger's meters: `board.meters[]`, plus any old meter-shaped entry still in
+    `board.systems[]` (a `kind` and no card field) from a ledger written before S2a."""
+    meters = [m for m in (board.get("meters") or []) if isinstance(m, dict)]
+    for s in board.get("systems") or []:
+        if (isinstance(s, dict) and "kind" in s
+                and not any(f in s for f in _SYSTEM_CARD_FIELDS)):
+            meters.append(s)
+    return meters
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -13111,10 +13129,10 @@ def main():
             print(f"          · … and {len(sys_lints)-16} more")
         print("          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail"
               " anything. `serves` is what happens in a room; `labels` is what KIND of place")
-        print("           it is. An AMBIENT system is fed by nearly every room and so makes no"
+        print("           it is. An AMBIENT meter is fed by nearly every room and so makes no"
               " room special; a SOURCED one is fed in one or two places and read all over —")
         print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
-              " 1 → 53. A game of only ambient systems ships a duty list.")
+              " 1 → 53. A game of only ambient meters ships a duty list.")
         print("           ⚠️ Declaring MORE labels makes this output worse, not"
               " better — that direction is the only reason it is checked at all)")
 
