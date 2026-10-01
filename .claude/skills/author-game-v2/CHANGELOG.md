@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P2a: chat length and timing (World and Systems PRD, Phase 3; round 9a phone card)
+
+**Why.** Round 9a measured the four games this skill copies: a text is 1–3 bubbles of 3–7 words (CoT median 4 and
+3, CW median 5), and every text is caused by a scene flag and timed (IHOH 46/46 caused, 43/46 hour-gated; CW "+1
+day" in 150 of 210 delay setters). P3's ~15 words came from three games that fail the evidence rules.
+
+**What changed** (`references/the-phone.md` only, plus two superseded notes in `DOCTRINE_GAPS.md`).
+- **P3:** the 369-bubble table is cut to one counted line (the-company, patriarch, family-ties: numbers only); the
+  rule is 1–3 bubbles of 3–7 words from CoT and CW, with CoT's three-bubble booty call; long talk goes to a call or
+  a meeting (IHOH calls run 300–500 words); a WARN, never a block (planned gate: `a chat is short and timed`). The
+  CW Damien example, the "you up" lines and the reply-menu rule stay. Cut: the `the-company` quote "Love you Diana!".
+- **P4:** retitled "Every text is caused by a scene and timed — the phone keeps no state of its own". Cause (IHOH
+  46/46, CW 77/79, CoT's disabled random "hi"); timing (delay: next day by default, via `days_since_flag`; hour
+  window via `time_of_day`), with one TOML trigger showing flag + `days_since_flag` + `time_of_day`. Engine fact:
+  on a conversation `time_of_day` is checked once, at delivery (latch at `v2.py:2289`). The corpus gate table is
+  one counted line; engine cites re-pointed (`v2.py:4326` evaluator, `:4566` `time_of_day`). Cut: the
+  `college-daze` quote "Most of the characters stats on the phone profile…", and the `family-ties` noon-to-six
+  example.
+- **Footer** ("What is not gated here"): the "must not become a gate" paragraph becomes "a WARN, never a block
+  (planned gate: `a chat is short and timed`)". Its list of withdrawn rules (R4, study 6, P0, the wardrobe gate)
+  goes, which removes the P0 orphan pointer.
+
+**Verified.** All twelve P-ids present (`grep -c "^## P[0-9]"` = 12); `reply` → `applyAndNotifyFlag` →
+`applyFlagEffect` writes `set_day`, so `days_since_flag` works on a reply-set flag (`v2.py:6602`, `:6526`);
+`--selfcheck` current, **orphans 3 → 2** (the-phone.md P0 gone, as the PRD expects); pytest 475 passed.
+
+**Words:** +8, running total 142,462 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P1: flip the default (World and Systems PRD, Phase 3; LO's WS-D7)
 
 **Why.** WS-D7: every game the skill copies has a phone and its threads carry the arcs (round 9a §0, §2), while

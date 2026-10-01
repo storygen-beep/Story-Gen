@@ -32,7 +32,7 @@ Engine claims here carry a `file:line` into
 1. P1 · Every person she is involved with has a thread
 2. P2 · Build the channel, never the hub
 3. P3 · A message is 3–7 words — the phone is its own register
-4. P4 · The phone reads the world; it keeps no state of its own
+4. P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
 5. P5 · Everything on the phone costs something
 6. P6 · If she can be looked at, she has to be able to post
 7. P7 · A locked app names what unlocks it
@@ -106,25 +106,19 @@ builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the 
 
 ## P3 · A message is 3–7 words — the phone is its own register
 
-This is the highest-confidence measurement in the study and the one most likely to be got wrong,
-because every other surface in this skill is longer (the model beats in `register.md`).
+**1–3 bubbles of 3–7 words.** Course of Temptation's texts run a median of 4 words for the one he
+sends and 3 for her reply; Cupid's Way's run a median of 5, three lines to a thread (round 9a §2;
+the CoT figure is a regex count). Course of Temptation's booty call is three bubbles: *"Hey <pet
+name>"*, *"Feel like hooking up? I could use it"*, and the address. The phone study's three games
+whose markup marks a bubble ran longer, a median of 11–16 words over 369 bubbles (`the-company`,
+`patriarch`, `family-ties`; numbers only).
 
-Measured on the three corpus games whose markup marks an individual bubble, in two languages:
+**Long talk goes to a call or a meeting.** In Her Own Hands' texts are one line or an image; the
+talking happens in its calls, which run 300–500 words (round 9a §6). No text tells a story; the
+meeting it books does. Until the engine has a call type, write the call as the scene the text books.
 
-| game | bubbles | median | mean | p90 |
-|---|---|---|---|---|
-| `the-company` | 194 | 16 w | 14 w | 21 w |
-| `patriarch` | 163 | 11 w | 13 w | 23 w |
-| `family-ties` | 12 | 15 w | 15 w | 21 w |
-| **pooled** | **369** | **11–16 w** | **13–15 w** | **~22 w** |
-
-**A text message is under half a beat, and nine in ten are under 22 words.** This is a rate over
-word count, so unlike most corpus figures it survives the HTML/TOML change of basis and can be
-read against our own TOML directly.
-
-⚠️ **Do not turn this into a floor or a ceiling.** It is the shape of the thing. A three-word
-message is correct; `the-company` ships *"Love you Diana!"* Length varies with what is being said,
-the way it does in a real thread.
+**It is a WARN, never a block** (planned gate: `a chat is short and timed`). A two-word *"you up"* is
+right; the warning is for the twenty-word paragraph.
 
 **The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
 you up to?"*, and the thread goes on in the same hand:
@@ -170,27 +164,50 @@ is wrong twice: it is an instruction rather than a message, and nobody types eig
 
 ---
 
-## P4 · The phone reads the world; it keeps no state of its own
+## P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
 
-How the corpus decides what a phone shows:
+**Every text is caused by a flag a scene set.** In Her Own Hands' 46 of 46 texts sit behind trigger
+flags; 77 of Cupid's Way's 79 thread entries read an arc stage; Course of Temptation picks the sender
+by relationship and switched off its one random "hi" (round 9a §5 class c). A text with no cause is
+filler, and players ignore it. Random *timing* is fine; a random sender or topic is not.
 
-| gate | games |
-|---|---|
-| a **meter** — relationship, corruption, trust ≥ N | **22 / 27** |
-| an **hour window** — only between X and Y o'clock | **20 / 27** |
-| a **per-NPC stage number** | 13 / 27 |
-| a **past stamp plus a wait** — "last seen day 9, wait two days" | 3 / 27 |
-| a **stored future appointment** | **1 / 27** |
+**Every text is timed: a delay after the cause, and an hour window.**
+- **The delay** is the next day by default, +2 to +3 days between the steps of a slow burn. Cupid's
+  Way sets "+1 day" in 150 of its 210 delay setters; its Damien waits 2 (round 9a §1a).
+- **The hour window:** In Her Own Hands gates 43 of its 46 texts on the hour; Course of Temptation's
+  booty call comes only 18:00–22:00.
 
-**Every one of those except the last is state the map and the hubs already read.** A phone thread
-gated on her relationship meter is the same thread the world is gating its own scenes on. A phone
-that owns private variables nothing else can see is the bolted-on phone, and it is the one that
-goes stale — a player comment on `college-daze`: *"Most of the characters stats on the phone
-profile don't actually mean anything anymore."*
+Both are conditions on the conversation's trigger, beside the cause:
 
-**We are well placed here.** Phone conversations, posts and profiles are evaluated by
-`setup.triggerConditionsSatisfied` (`v2.py:2204`) — **the same evaluator canvases use**
-(`v2.py:3888`). Every condition type a canvas can gate on, a phone thread can gate on:
+```toml
+[[phone.conversations]]
+id     = "dana_the_morning_after"
+npc    = "npc_dana"
+notify = "📱 Dana"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag",            subject = "player", flag_key = "met_dana_at_the_bar", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "met_dana_at_the_bar", operator = "gte", value = 1 },
+  { type = "time_of_day",     start_time = "10:00", end_time = "21:00" },
+] }
+```
+
+`version = "1.0"` is not optional: without it the conditions fail open and the text arrives at once.
+`time_of_day` is `HH:MM`, 24-hour, end exclusive, and wraps midnight the way NPC schedules do
+(`v2.py:4566`, `engine.md` §39); omit `end_time` and the window is one hour.
+
+⚠️ **On a conversation, `time_of_day` is checked once, at delivery.** The trigger is a latch:
+`ps.triggered_conversations[conv.id]` is written the first time every condition passes and is never
+re-read (`v2.py:2289`). So the window means *"deliver this the first time she is awake between ten
+and nine"*, not *"this thread exists only then"*. A thread that must be reachable only inside an hour
+band belongs on a canvas the phone links to, where the condition is read fresh every time.
+
+**The phone keeps no state of its own.** How the phone study's 27 games decide what a phone shows:
+a meter 22 / 27, an hour window 20 / 27, a per-NPC stage 13 / 27, a past stamp plus a wait 3 / 27, a
+stored appointment 1 / 27. Every one but the last is state the map and the hubs already read. Phone
+conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4326`), the
+evaluator canvases use, so every condition a canvas can gate on, a thread can:
 
 ```
 clothing_item  clothing_slot  corruption_level  days_since_flag  flag  item  modifier
@@ -198,26 +215,7 @@ npc_at_location  pass  quest  stage  time_of_day  trait  worn_beauty  worn_corru
 worn_exposure  worn_type
 ```
 
-**`time_of_day` was built for this file** (2026-08-29, `v2.py:4128`, `engine.md` §39). It was the
-one gate in the field's list this engine could not express, and it is second only to a meter:
-
-```toml
-{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }
-```
-
-`HH:MM`, 24-hour, **end exclusive**, and it wraps midnight correctly because it delegates to the
-same function NPC schedules use. Omit `end_time` and the window is one hour.
-
-⚠️ **But a conversation's trigger is a latch, not a filter, and `time_of_day` does not change
-that.** `ps.triggered_conversations[conv.id]` (`v2.py:2202`) is written the first time the condition
-passes and never re-read. A thread is *delivered* once and then stays. So on a **conversation**,
-`time_of_day` means **"deliver this the first time she is awake at 2am"** — not **"this thread only
-exists at 2am"**, which is what `family-ties` does, re-checking its noon-to-six window every time the
-app opens. On a **canvas trigger**, which is evaluated fresh every read, it means the second.
-
-**So put the window where it will be re-read.** A thread that must only be reachable inside an hour
-band belongs on a canvas the phone links to, not on the conversation's own trigger. A conversation
-trigger is the right place for *when this arrives*, which is what most threads want anyway.
+A phone that keeps private variables nothing else reads is the bolted-on phone, and it goes stale.
 
 ---
 
@@ -511,7 +509,5 @@ zero, in the G44 / G45 / G46 line:
   block in the built TOML. Not phone-specific; it would catch
   any dropped system.
 
-⚠️ **P3's message length must not become a gate.** It is a shape, measured over 369 bubbles, and a
-threshold on it would fail a correct three-word message. The precedent is explicit: R4, study 6's
-anchoring check, P0 and the duplicate wardrobe gate were each withdrawn for inventing a number the
-evidence did not carry.
+⚠️ **P3's 3–7 words is a WARN, never a block** (planned gate: `a chat is short and timed`). A
+threshold that blocked would fail a correct two-word message.
