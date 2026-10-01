@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C2: engine.md §17 teaches states first, then items
+
+**Why.** LO's clothing decision: the wardrobe is designed as states, items second. §17 opened on
+granting a garment and never said what a state is, which predicates express one, or what a dress code
+and an `entry_conditions` refusal actually offer the player.
+
+**What changed.** `references/engine.md` §17 only:
+- opens on states (dressed, skirt, no bra, no panties, underwear, towel, topless, naked) and the two
+  predicates that express them (`worn_exposure` with its two-region rule, `v2.py:1755`;
+  `clothing_slot`), with `worn_type` for a kind of garment;
+- the catalog as a field table: `exposure`, the 7 fixed slots (`template_import.py:271`), one `type`
+  per item (no tag list), `conditions` as the price to put a garment on (`v2.py:1668-1669`);
+- `wardrobeEffects` is add/equip only; no remove or unequip (planned: remove and unequip);
+- "Where a state is read": a dress code checks coverage only and its refusal page offers "Change
+  clothes" (`v2.py:18393`), which opens the wardrobe from anywhere (the loophole, `v2.py:18397-18400`);
+  a place that wants a revealing state can only refuse with "Go back" (`v2.py:10653`); no leave hook;
+- the closing note's DoL variable name and code are cut to a count (one counted game, ~900 reads, 82%
+  change words only).
+The failure-class warning, the portrait reader and `validateClothing` stay.
+
+**Verified.** Every new `v2.py` / `template_import.py` line was read on the merged engine.
+`cite_check`: SKILL.md + references/ at 0 wrong. Selfcheck and the skill tests pass.
+
+**Words:** +237, running total 143,966 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C1 (PROTECTED, LO approved): A6 keeps key outfits, adds the reminder, points to states
 
 **Why.** LO's clothing decision: states first, items second; key outfits stay as rungs, with a reminder

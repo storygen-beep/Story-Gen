@@ -464,6 +464,37 @@ canvas, is the only arrangement that passes.
 
 ## 17. The wardrobe — and the most dangerous failure class in this engine
 
+**Design states first, then items.** A state is how much of her shows: dressed, a skirt, no bra, no
+panties, underwear only, a towel, topless, naked. The world reads the state; an item matters through
+the state it makes. Two predicates express a state today:
+
+- **`worn_exposure`** — one derived number, 0 covered, 1 underwear-level, 2 bare
+  (`setup.getWornExposure`, `v2.py:1755`; the predicate at `v2.py:4703`). It is the MAX over two
+  regions and every worn garment's own `exposure`. The upper region is bare unless `top` or `dress`
+  is filled (underwear-level with only a `bra`); the lower is bare unless `bottom` or `dress` is
+  filled (underwear-level with only `underwear`). **It is the only aggregate that reads an empty
+  slot.** `worn_corruption` and `worn_beauty` are `getWornStatMax` (`v2.py:1725-1726`), which skips
+  an empty slot, so naked and plainly dressed read the same.
+- **`clothing_slot`** — `slot` + `equipped` / `unequipped`: "no bra" is `bra` `unequipped`, naked is
+  every slot `unequipped`.
+
+A state that needs a garment's kind ("a skirt", "a towel") reads `worn_type`, so give that garment a
+`type`. The rest of the condition family: `clothing_item` (`equipped` / `unequipped` / `owned` /
+`not_owned`) for a key item; `worn_corruption` and `worn_beauty` for how the outfit reads. All are
+rows in `CONDITION_SCHEMA` (`template_import.py:1602-1609`).
+
+**The catalog** is a top-level `[[clothing]]` array (`template_import.py:282-300`):
+
+| field | what it is |
+|---|---|
+| `id`, `name`, `image` | the garment |
+| `slot` | one of 7 fixed slots: `bra`, `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes` (`template_import.py:271`) |
+| `exposure` | 0 covers, 1 shows underwear-level skin, 2 leaves the region bare while worn (a mesh top) |
+| `type` | **one** tag per item, read by `worn_type` (no tag list: a garment cannot be both "skirt" and "wet") |
+| `initial`, `price` | in the wardrobe at the start, or bought |
+| `conditions` | refuse equipping it (`setup.equipItem`, `v2.py:1668-1669`): the daring price to put it on |
+| `beauty`, `corruption` | folded as a MAX, not a sum: one loaded garment sets the number on its own |
+
 **Granting a garment** is `wardrobeEffects` on an exit block's **config**:
 
 ```toml
@@ -478,6 +509,9 @@ wardrobeEffects = [
 Exact path: `canvases[].nodes[].exit_block.config.wardrobeEffects`. Fields are **`action`** and
 **`item_id`** — not `op` / `itemId`. `action` is `add` (into the wardrobe) or `equip` (added and put on:
 `setup.addToWardrobe` + `setup.equipItem`, `_get_wardrobe_effects_for_node`, `v2.py:15843`).
+**There is no `remove` and no `unequip`** (planned: remove and unequip): no scene can take a garment
+off her or out of the wardrobe. She takes a slot off herself on the wardrobe page (`setup.unequipSlot`,
+`v2.py:1682`).
 
 **⚠️ THE FAILURE CLASS: an unrecognised key is silently ignored.** I first wrote
 `clothingEffects = [{ itemId = "…", op = "grant" }]`. The TOML parsed, the validator passed, the
@@ -493,41 +527,30 @@ grep -rn "yourKeyName" apps/projects/services/template_import.py
 
 Zero hits means the key does not exist, however plausible it looks.
 
-**The catalog** is a top-level `[[clothing]]` array — `id`, `name`, `slot`, `image`, `initial`,
-`conditions`, `price`, `beauty`, `corruption`, `type` (`template_import.py:282-294`). Slots: `bra`,
-`underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes`.
-
-**`worn_corruption` is a MAX aggregate, not a sum.** Verified live: with `sleep_vest` (2) worn,
-equipping `silk_slip` (7) moved the reading **2 → 7**. One loaded garment sets the number on
-its own, so a catalog does not need to be large to reach a tier — it needs one item per tier.
-**`worn_beauty` is the same fold over `beauty`** (`template_import.py:290`, `v2.py:4727`).
-
-### The three ways a wardrobe gets read
+### Where a state is read
 
 A garment nothing reads is not a garment (`the-meters.md` W3), and **gate · the wardrobe is read**
-enforces it. All three of these families satisfy it, and the second is the one authors forget:
+enforces it. Four readers:
 
-**1 · A condition predicate.** `worn_corruption`, `worn_beauty`, `worn_type`, `worn_exposure`,
-`clothing_slot` (empty/filled — i.e. "not wearing a bra"), and `clothing_item` with `equipped` /
-`unequipped` / `owned` / `not_owned`. This is the gate family.
+**1 · A condition** on a trigger, a choice, a `[group]` band (an NPC line), or a location's
+`entry_conditions`.
 
-> **`worn_exposure` is the only one of these that reads an EMPTY slot**, and it is the newest
-> (2026-08-28). A derived 0/1/2 — 0 covered, 1 underwear-level, 2 bare — from
-> `setup.getWornExposure` (`v2.py:1755`); the predicate is at `v2.py:4703` and its lock text at
-> `:8558`; a garment declares its own `exposure` via `template_import.py:2973`. ⚠️ **The other two
-> aggregates cannot see nakedness at all**: `worn_corruption` and `worn_beauty` are both
-> `getWornStatMax` (`v2.py:1725-1726`), which skips a slot with nothing in it, so naked and plainly
-> dressed return the same value. Use `worn_exposure` for how much is showing and the older pair for
-> how the outfit reads. `the-meters.md` W7 is why this matters: the field's body system is one
-> derived number the whole world tests.
+**2 · A dress code.** `clothing_rules` on a location (`template_import.py:4975-4987`): a list of
+rules, each `slots_required` with optional `conditions` and a refusal `message`; the first rule
+whose conditions hold applies (`setup.checkLocationClothing`, `v2.py:2024`). It checks **coverage
+only** — a `dress` counts for `top` and `bottom` — so it is a floor. Entering in breach plays
+`ClothingBlock` (`v2.py:18393`): the message, **"Change clothes"** and "Go back".
+⚠️ **The loophole:** "Change clothes" opens the wardrobe page from wherever she is
+(`v2.py:18397-18400`), though the wardrobe is otherwise reachable only in `wardrobe_location`. Any
+dress code is therefore one click from met, anywhere.
 
-**2 · A `player_portrait` outfit override.** `when = { worn_type?, corruption?, flag? }`, first match
-wins (`template_import.py:928-930`). Only `worn_type` and `corruption` are wardrobe reads; a `flag`
-override is not. **This is a display reader, not a gate, and `the-meters.md` W7 is what says that is
-the field's normal case**.
+**3 · A place that wants a revealing state** can only use `entry_conditions` with `worn_*`. Its
+refusal page offers **"Go back" only** (`v2.py:10653`), never a change: say in `blocked_message`
+what she must take off and where. There is no "leave the room" hook either; a price to go out in a
+state lives in each destination's `entry_conditions`.
 
-**3 · A location dress code.** `clothing_rules.slots_required` on a location
-(`template_import.py:4973-4987`), optionally with its own `conditions` and a refusal `message`.
+**4 · A `player_portrait` outfit override.** `when = { worn_type?, corruption?, flag? }`, first match
+wins (`template_import.py:928-930`). A display reader, not a gate.
 
 `setup.validateClothing` (`v2.py:1985`) words its warnings with `$player.name` ("Player" if unset;
 until 2026-10-01 it said "Emma"). Nothing in the engine or any game calls it today.
@@ -541,8 +564,8 @@ a standing state.** `v2.py:8805-8814` renders the lock text — `"Outfit must be
 so they cannot be given a sidebar band.
 
 **This is not a gap to close with a status row.** The field does not show the number either. It
-shows the world reacting — `degrees-of-lewdity` reads its derived `$exposed` about 900 times and 82%
-of those reads only change words. Write the reactions, not the readout.
+shows the world reacting: one counted game reads its derived exposure about 900 times, and 82% of
+those reads only change words. Write the reactions, not the readout.
 
 ---
 
