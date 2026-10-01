@@ -1529,6 +1529,9 @@ class TweeComprehensiveGeneratorV2:
         if self._has_consume_on():
             # EN1 — per-step records; an absent entry for a fired step reads as used up.
             game_state_init["canvas_state"] = {}
+        if self._has_pool_memory():
+            # E2 — which entries of each `memory = "seen"` block_pool she has seen.
+            game_state_init["pool_seen"] = {}
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -1562,6 +1565,10 @@ class TweeComprehensiveGeneratorV2:
                 "passed_profiles": {},
                 "matches": {},
             }
+            if any(c.get("repeat_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3 — the instance number of each repeatable chat. Only in a game that
+                # has one, so every other phone game keeps a byte-identical skeleton.
+                game_state_init["phone"]["conv_cycle"] = {}
         # Schema signature stamped into every save via Config.saves.version: a
         # fingerprint of the trait/flag key surface and the corruption tiers, so a
         # build can tell whether a save was written against its own data shape.
@@ -1981,11 +1988,14 @@ setup.validateClothing = function() {
     var flags = sv.flags || {};
     var req = setup.clothingRequirements || {};
     var issues = [];
+    // E1b: the player's own name ($player.name, customization included), never a
+    // hard-coded one. "Player" mirrors the hint fallback when no name is set.
+    var who = (sv.player && sv.player.name) || "Player";
 
     // Body coverage: must have (top AND bottom) OR dress
     if (req.body_coverage) {
         if (!eq['dress'] && (!eq['top'] || !eq['bottom'])) {
-            issues.push("Emma needs to be wearing a top and bottom, or a dress.");
+            issues.push(who + " needs to be wearing a top and bottom, or a dress.");
         }
     }
 
@@ -1994,7 +2004,7 @@ setup.validateClothing = function() {
     for (var i = 0; i < always.length; i++) {
         var s = always[i];
         if (!eq[s]) {
-            issues.push("Emma needs to put on " + s + ".");
+            issues.push(who + " needs to put on " + s + ".");
         }
     }
 
@@ -2002,7 +2012,7 @@ setup.validateClothing = function() {
     var cond = req.conditional || {};
     for (var slot in cond) {
         if (cond.hasOwnProperty(slot) && !eq[slot] && !flags[cond[slot].until_flag]) {
-            issues.push(cond[slot].message || "Emma needs " + slot + ".");
+            issues.push(cond[slot].message || who + " needs " + slot + ".");
         }
     }
 
@@ -2273,6 +2283,54 @@ setup._notifyPhoneDelivery = function(messages) {{
     jQuery('body').append('<div class="effect-toast phone-notify">' + safe.join('<br>') + '</div>');
     setTimeout(function() {{ jQuery('.phone-notify').remove(); }}, 3000);
 }};
+// E3 — repeatable chats. Instance 0 of a chat keeps the plain id as its key in
+// replies / read_conversations, exactly as before; instance n (n >= 1) uses "id#n".
+// ps.conv_cycle[id] is the current instance; absent = 0, so a one-time chat and a
+// save written before E3 read the same as they always did.
+setup.convInstanceKey = function(convId, n) {{
+    return (n && n > 0) ? (String(convId) + '#' + n) : String(convId);
+}};
+setup.convBaseId = function(key) {{
+    return String(key).split('#')[0];
+}};
+setup.convCurrentKey = function(convId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    return setup.convInstanceKey(convId, (ps.conv_cycle || {{}})[convId] || 0);
+}};
+// Answered = a reply sent; for a chat with no reply block, read.
+setup._phoneConvAnswered = function(conv, ps, key) {{
+    var hasReply = (conv.blocks || []).some(function(b) {{ return b.type === 'reply'; }});
+    if (!hasReply) return !!(ps.read_conversations || {{}})[key];
+    var r = (ps.replies || {{}})[key];
+    return typeof r === 'number' || (Array.isArray(r) && r.length > 0);
+}};
+// Re-arm a delivered repeatable chat: answered, `repeat_after_days` since it arrived
+// or was answered (whichever is later), under `max_repeats`, and its trigger still
+// holds. The old instance's arrival moves to `past`, which the thread view renders as
+// history. Returns true when a new instance arrived.
+setup._rearmPhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_cycle = ps.conv_cycle || {{}};
+    var n = ps.conv_cycle[conv.id] || 0;
+    if (conv.max_repeats && n >= conv.max_repeats) return false;
+    if (!setup._phoneConvAnswered(conv, ps, setup.convInstanceKey(conv.id, n))) return false;
+    var ts = State.variables.game_state.time_state || {{}};
+    var day = ts.day || 1;
+    if (day - Math.max(trig.triggered_day || 1, trig.answered_day || 0) < conv.repeat_after_days) return false;
+    var trigCond = conv.trigger ? conv.trigger.conditions : null;
+    if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) return false;
+    var past = Array.isArray(trig.past) ? trig.past.slice() : [];
+    past.push({{ triggered_day: trig.triggered_day || 1, triggered_hour: trig.triggered_hour || 0 }});
+    ps.conv_cycle[conv.id] = n + 1;
+    ps.triggered_conversations[conv.id] = {{
+        triggered_day: day,
+        triggered_hour: ts.current_hour || 0,
+        conv_index: trig.conv_index,
+        past: past
+    }};
+    return true;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2286,7 +2344,12 @@ setup.checkPhoneConversations = function() {{
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
         var conv = convs[i];
-        if (ps.triggered_conversations[conv.id]) continue;
+        if (ps.triggered_conversations[conv.id]) {{
+            if (conv.repeat_after_days && setup._rearmPhoneConversation(conv, ps) && !_firstScan) {{
+                _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
+            }}
+            continue;
+        }}
         var trigCond = conv.trigger ? conv.trigger.conditions : null;
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         var ts = sv.game_state.time_state || {{}};
@@ -2329,7 +2392,7 @@ setup.getPhoneUnreadCount = function() {{
     var read = ps.read_conversations || {{}};
     var keys = Object.keys(triggered);
     for (var i = 0; i < keys.length; i++) {{
-        if (!read[keys[i]]) count++;
+        if (!read[setup.convCurrentKey(keys[i])]) count++;
     }}
     // Unviewed posts
     if (!ps.viewed_feed && Object.keys(ps.triggered_posts || {{}}).length > 0) count++;
@@ -2362,9 +2425,23 @@ setup.getPhoneThreads = function(appId) {{
             }};
         }}
         var entry = byNpc[npcSlug];
-        entry.conversations.push(conv);
-        if (!read[conv.id]) entry.unreadCount++;
         var trig = triggered[conv.id];
+        // E3 — a repeated chat appears once per instance, oldest first; past ones are
+        // history. A chat that never repeated is pushed as itself, as before.
+        var cyc = (ps.conv_cycle || {{}})[conv.id] || 0;
+        var pastWhen = Array.isArray(trig.past) ? trig.past : [];
+        for (var k = 0; k <= cyc; k++) {{
+            var inst = conv;
+            if (cyc > 0) {{
+                inst = Object.assign({{}}, conv, {{
+                    _instKey: setup.convInstanceKey(conv.id, k),
+                    _past: k < cyc,
+                    _when: k < cyc ? (pastWhen[k] || {{}}) : trig
+                }});
+            }}
+            entry.conversations.push(inst);
+            if (!read[inst._instKey || conv.id]) entry.unreadCount++;
+        }}
         if (trig.triggered_day > entry.lastDay || (trig.triggered_day === entry.lastDay && trig.triggered_hour > entry.lastHour)) {{
             entry.lastDay = trig.triggered_day;
             entry.lastHour = trig.triggered_hour;
@@ -2374,8 +2451,8 @@ setup.getPhoneThreads = function(appId) {{
     var npcKeys = Object.keys(byNpc);
     for (var nk = 0; nk < npcKeys.length; nk++) {{
         byNpc[npcKeys[nk]].conversations.sort(function(a, b) {{
-            var ta = triggered[a.id] || {{}};
-            var tb = triggered[b.id] || {{}};
+            var ta = a._when || triggered[a.id] || {{}};
+            var tb = b._when || triggered[b.id] || {{}};
             if ((ta.triggered_day || 0) !== (tb.triggered_day || 0)) return (ta.triggered_day || 0) - (tb.triggered_day || 0);
             if ((ta.triggered_hour || 0) !== (tb.triggered_hour || 0)) return (ta.triggered_hour || 0) - (tb.triggered_hour || 0);
             return (ta.conv_index || 0) - (tb.conv_index || 0);
@@ -2402,10 +2479,16 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     }}
     ps.replies[convId].push({{round: roundNum, choice: choiceIndex}});
     ps.read_conversations[convId] = true;
-    // Find the reply block for this round and apply effects
+    // Find the reply block for this round and apply effects. E3: convId may be an
+    // instance key ("id#n"); the blocks belong to the base chat.
+    var baseConvId = setup.convBaseId(convId);
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
-        if (convs[i].id !== convId) continue;
+        if (convs[i].id !== baseConvId) continue;
+        if (convs[i].repeat_after_days && ps.triggered_conversations[baseConvId]) {{
+            ps.triggered_conversations[baseConvId].answered_day =
+                ((sv.game_state || {{}}).time_state || {{}}).day || 1;
+        }}
         var blocks = convs[i].blocks || [];
         for (var b = 0; b < blocks.length; b++) {{
             if (blocks[b].type !== "reply") continue;
@@ -2611,13 +2694,14 @@ setup.openChatThread = function(appId, npcSlug) {{
         var conv = thread.conversations[ci];
         var blocks = conv.blocks || [];
         // Multi-round: get replies array (backward compat: convert old int format)
-        var convReplies = ps.replies[conv.id];
+        var convKey = conv._instKey || conv.id;  // E3: per-instance replies
+        var convReplies = ps.replies[convKey];
         if (typeof convReplies === 'number') {{
             convReplies = [{{round: 1, choice: convReplies}}];
         }}
         convReplies = Array.isArray(convReplies) ? convReplies : [];
         var hasAnyReply = convReplies.length > 0;
-        setup.markConversationRead(conv.id);
+        setup.markConversationRead(convKey);
         for (var bi = 0; bi < blocks.length; bi++) {{
             var block = blocks[bi];
             var blockAfterRound = block.after_round;
@@ -2633,7 +2717,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (block.type === "message") {{
                 var cls = block.sender === "npc" ? "phone-bubble-npc" : "phone-bubble-player";
                 var pending = '';
-                if (block.sender === "npc" && setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                if (block.sender === "npc" && setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                     pending = ' phone-bubble-pending';
                 }}
                 html += '<div class="phone-bubble ' + cls + pending + '">' + setup.resolveAtRefs(block.content) + '</div>';
@@ -2652,16 +2736,18 @@ setup.openChatThread = function(appId, npcSlug) {{
                         var depReply = _getRoundReply(convReplies, blockAfterRound);
                         if (!depReply) continue;
                     }}
+                    // E3 — a past instance is history: no buttons, never pending.
+                    if (conv._past) continue;
                     // Show reply buttons
                     _hasPendingReply = true;
                     var replyPending = '';
-                    if (setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                    if (setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                         replyPending = ' phone-reply-pending';
                     }}
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + conv.id + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
                     }}
                     html += '</div>';
                 }}
@@ -4271,6 +4357,10 @@ setup.describeUnmetConditions = function(conditions) {{
             if (fsat) continue;
             var disp = cap(fkey.replace(/_/g, ' '));
             parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }} else if (it.type === 'weekday') {{
+            // E4 — the day is a fact she can plan around, so it is named.
+            if (setup.triggerConditionsSatisfied({{ version: "1.0", items: [it] }})) continue;
+            parts.push(setup.weekdayPhrase(it.weekdays));
         }}
     }}
     return parts.join(', ');
@@ -4319,6 +4409,55 @@ setup.describeUnmetTraits = function(conditions) {{
 setup.requirementSuffix = function(conditions) {{
     var why = setup.describeUnmetTraits(conditions);
     return why ? (' (' + why + ')') : '';
+}};
+
+// ===== E4 — the clock as minutes, flag times, weekday =====
+// One count of minutes on the scale of set_day * 1440, so a flag recorded before
+// set_minute existed reads as set at the start of its day and an old save never strands.
+setup.gameMinuteNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return (ts.day || 1) * 1440 + (ts.current_hour || 0) * 60 + (ts.current_minute || 0);
+}};
+setup.flagSetMinute = function(meta) {{
+    if (!meta) return null;
+    if (typeof meta.set_minute === 'number') return meta.set_minute;
+    if (typeof meta.set_day === 'number') return meta.set_day * 1440;
+    return null;
+}};
+// The meta a flag write leaves: the day (days_since_flag) and the minute
+// (hours_since_flag). applyFlagEffect and the two direct writers use it.
+setup.flagMetaNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return {{ set_day: ts.day || 1, set_minute: setup.gameMinuteNow() }};
+}};
+// Today as 0 = Monday … 6 = Sunday, the index NPC schedule rows use.
+setup.todayWeekdayIndex = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(ts.current_day);
+}};
+setup.weekdayPhrase = function(weekdays) {{
+    var NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var names = (weekdays || []).map(function(d) {{ return NAMES[d] || String(d); }});
+    return "Only on " + names.join(", ");
+}};
+// Hours since the condition item's flag was set, or null when it is unset or has no
+// meta (fails closed, as days_since_flag does).
+setup.hoursSinceFlag = function(item) {{
+    var sv = State.variables || {{}};
+    var key = String((item && item.flag_key) || '');
+    if (!key) return null;
+    var flags = sv.flags, metas = sv.flags_meta;
+    if (item.subject === 'npc') {{
+        var npcId = setup.resolveNpcId(item.npc_id || item.character_id || '');
+        var npc = npcId ? (sv.npcs || {{}})[npcId] : null;
+        if (!npc) return null;
+        flags = npc.flags;
+        metas = npc.flags_meta;
+    }}
+    if (!(flags || {{}})[key]) return null;
+    var setMin = setup.flagSetMinute((metas || {{}})[key]);
+    if (setMin === null) return null;
+    return (setup.gameMinuteNow() - setMin) / 60;
 }};
 
 // ===== Trigger Conditions Evaluator =====
@@ -4495,6 +4634,21 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                     satisfied = compare(dsOp, daysSince, requiredDays);
                 }}
                 results.push(satisfied);
+                continue;
+            }}
+
+            // E4 — weekday: today is one of `weekdays` (0 = Monday … 6 = Sunday).
+            if (type === 'weekday') {{
+                var wds = Array.isArray(it.weekdays) ? it.weekdays : [];
+                results.push(wds.length > 0 && setup._weekdayMatches(wds, setup.todayWeekdayIndex()));
+                continue;
+            }}
+
+            // E4 — hours_since_flag: hours since the flag was set, compared like
+            // days_since_flag. Fails closed when the flag is unset or has no meta.
+            if (type === 'hours_since_flag') {{
+                var hsf = setup.hoursSinceFlag(it);
+                results.push(hsf === null ? false : compare(it.operator, hsf, it.value));
                 continue;
             }}
 
@@ -4788,6 +4942,9 @@ setup.decideCanvasStep = function(canvasId, op, days, closedFlag) {{
             if (closedFlag) {{
                 State.variables.flags = State.variables.flags || {{}};
                 State.variables.flags[closedFlag] = true;
+                // E4 — a flag set outside applyFlagEffect gets its time too.
+                State.variables.flags_meta = State.variables.flags_meta || {{}};
+                State.variables.flags_meta[closedFlag] = setup.flagMetaNow();
             }}
         }} else if (op === "retry") {{
             rec.retryDay = setup._canvasToday() + Math.max(1, Number(days) || 1);
@@ -5490,6 +5647,45 @@ setup.getNpcsPresentAtLocation = function(locationId) {{
     return result;
 }};
 
+// E2 — the chance a random canvas rolls with. `seenWeight` is emitted only when the
+// author set trigger.seen_weight; once the canvas has fired (trigger_history total > 0)
+// it multiplies `chance`, so an event she has already seen comes up less often. Both
+// random rollers (selectCanvasByPriority, checkRandomEncounters) read it here.
+setup.canvasRollChance = function(canvas) {{
+    var chance = (canvas && canvas.chance) || 0;
+    if (canvas && canvas.seenWeight !== undefined) {{
+        var hist = ((State.variables.game_state || {{}}).trigger_history || {{}})[String(canvas.id)];
+        if (hist && (hist.total || 0) > 0) chance *= canvas.seenWeight;
+    }}
+    return chance;
+}};
+
+// E2 — a block_pool with memory = "seen": pick entry 0..n-1 by weight, an entry already
+// shown weighing `seenWeight` (default 0.1) against 1 for a fresh one, and record the
+// pick in $game_state.pool_seen[key] (index -> times shown). Once every entry has been
+// seen the weights are equal again. The map is in the skeleton (and so the backfill)
+// for any game that has such a pool; the guard covers a save the backfill missed.
+setup.pickRememberedPoolEntry = function(key, n, seenWeight) {{
+    var gs = State.variables.game_state = State.variables.game_state || {{}};
+    if (!gs.pool_seen || typeof gs.pool_seen !== 'object') gs.pool_seen = {{}};
+    var seen = gs.pool_seen[key];
+    if (!seen || typeof seen !== 'object') seen = gs.pool_seen[key] = {{}};
+    var w = (typeof seenWeight === 'number') ? seenWeight : 0.1;
+    var weights = [], total = 0;
+    for (var i = 0; i < n; i++) {{
+        var wi = seen[i] ? w : 1;
+        weights.push(wi);
+        total += wi;
+    }}
+    var r = Math.random() * total, pick = n - 1;
+    for (var j = 0; j < n; j++) {{
+        if (r < weights[j]) {{ pick = j; break; }}
+        r -= weights[j];
+    }}
+    seen[pick] = (seen[pick] || 0) + 1;
+    return pick;
+}};
+
 // Select appropriate canvas per activity name with tiered progression logic
 // Returns array of selected canvases (one per unique activity name)
 // Logic:
@@ -5504,7 +5700,7 @@ setup.selectCanvasByPriority = function(canvasList) {{
         var filteredList = [];
         for (var f = 0; f < canvasList.length; f++) {{
             if ((canvasList[f].triggerMode || "manual") === "random") {{
-                var chance = canvasList[f].chance || 0;
+                var chance = setup.canvasRollChance(canvasList[f]);
                 if (Math.random() < chance) {{
                     filteredList.push(canvasList[f]);
                 }}
@@ -5974,7 +6170,7 @@ setup.checkRandomEncounters = function(locationId) {{
         // Roll probability for each candidate
         for (var m = 0; m < shuffled.length; m++) {{
             var canvas = shuffled[m];
-            var chance = canvas.chance || 0;
+            var chance = setup.canvasRollChance(canvas);
             if (Math.random() < chance) {{
                 // Hit — mark as triggered, set cooldown, and return passage name
                 setup.markCanvasTriggered(canvas.id);
@@ -6493,7 +6689,6 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
     }}
 
     var key = String(flag);
-    var currentDay = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 1;
 
     var flagsObj = null;
     var metaObj = null;
@@ -6523,13 +6718,13 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
       var newVal = !flagsObj[key];
       flagsObj[key] = newVal;
       if (newVal === true) {{
-        metaObj[key] = {{ set_day: currentDay }};
+        metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
       }}
       return;
     }}
     // Default: 'set' (and any unrecognized op falls through to set for safety).
     flagsObj[key] = true;
-    metaObj[key] = {{ set_day: currentDay }};
+    metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
   }} catch (e) {{
     // ignore
   }}
@@ -8135,6 +8330,33 @@ setup.getNextActivity = function(npcId) {{
                 }}
                 // daysRemaining is 0 - condition effectively met, fall through
             }}
+
+            // E4 — weekday and hours_since_flag are waits on the clock, reported as one.
+            // An hours wait on a flag not set yet is a flag hint, as for days above.
+            for (var tg = 0; tg < items.length; tg++) {{
+                var tgIt = items[tg];
+                if (tgIt.type !== 'weekday' && tgIt.type !== 'hours_since_flag') continue;
+                if (setup.checkSingleCondition(tgIt)) continue;
+                if (tgIt.type === 'hours_since_flag' && setup.hoursSinceFlag(tgIt) === null) {{
+                    return {{
+                        activity: activity,
+                        isLocked: false,
+                        conditionsNotMet: true,
+                        flagConditionsNotMet: true,
+                        flagHint: setup.getBestFlagHint([{{
+                            type: 'flag', subject: 'player',
+                            flag_key: tgIt.flag_key, operator: 'is_true'
+                        }}])
+                    }};
+                }}
+                return {{
+                    activity: activity,
+                    isLocked: false,
+                    conditionsNotMet: true,
+                    timeConditionsNotMet: true,
+                    timeCondition: tgIt
+                }};
+            }}
         }}
 
         // Check node-level conditions (for linked_canvas_node targeting)
@@ -8213,6 +8435,11 @@ setup.checkTraitRequirement = function(req) {{
 // Check a single condition item (trait or flag)
 setup.checkSingleCondition = function(item) {{
     var sv = State.variables || {{}};
+
+    // E4 — one implementation of each, the main evaluator's.
+    if (item && (item.type === 'weekday' || item.type === 'hours_since_flag')) {{
+        return setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }});
+    }}
 
     if (item.type === 'flag') {{
         var flags = sv.flags || {{}};
@@ -8347,7 +8574,7 @@ setup.resolveUnlockChain = function(flagKey, flagUnlockMap, visited, depth) {{
     for (var i = 0; i < items.length; i++) {{
         var item = items[i];
         var isFlagType = (item.type === 'flag');
-        var isDaysSinceFlag = (item.type === 'days_since_flag');
+        var isDaysSinceFlag = (item.type === 'days_since_flag' || item.type === 'hours_since_flag');
 
         // Handle flag and days_since_flag conditions
         if ((isFlagType || isDaysSinceFlag) && !setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }})) {{
@@ -8548,6 +8775,20 @@ setup.formatCanvasConditions = function(conditions) {{
                 parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
             }}
         }}
+        else if (item.type === "weekday") {{
+            parts.push(setup.weekdayPhrase(item.weekdays));
+        }}
+        else if (item.type === "hours_since_flag") {{
+            var hsNow = setup.hoursSinceFlag(item);
+            var hsOp = item.operator || "gte";
+            var hsLeft = (hsNow === null) ? null : Math.ceil(Number(item.value || 0) - hsNow);
+            if ((hsOp === "gte" || hsOp === "gt") && hsLeft !== null && hsLeft > 0) {{
+                parts.push(hsLeft === 1 ? "Wait 1 more hour" : "Wait " + hsLeft + " more hours");
+            }} else {{
+                var hsFlag = String(item.flag_key || "").replace(/_/g, " ");
+                parts.push("Hours since " + hsFlag + " " + hsOp + " " + item.value);
+            }}
+        }}
         else if (item.type === "time_of_day") {{
             var todStart = item.start_time || "00:00";
             var todEnd = item.end_time || "";
@@ -8650,6 +8891,9 @@ setup.getSidebarHint = function() {{
         if (next.traitConditionsNotMet) return setup.formatCanvasConditions(next.canvasConditions);
         if (next.daysConditionsNotMet) {{
             return next.daysRemaining === 1 ? "Come back tomorrow" : "Wait " + next.daysRemaining + " more days";
+        }}
+        if (next.timeConditionsNotMet) {{
+            return setup.formatCanvasConditions({{ version: '1.0', items: [next.timeCondition] }});
         }}
         if (!next.conditionsNotMet) return setup.formatActivityHint(next.activity);
     }}
@@ -11378,7 +11622,12 @@ setup.castTraitRows = function (slug, npc) {
             "  sv.flags = sv.flags || {};\n"
             "  for (var i = 0; i < seen.length; i++) {\n"
             "    var key = 'cheat_' + seen[i];\n"
-            "    if (!sv.flags[key]) sv.flags[key] = true;\n"
+            "    if (!sv.flags[key]) {\n"
+            "      sv.flags[key] = true;\n"
+            "      // E4: a flag set outside applyFlagEffect gets its time too.\n"
+            "      sv.flags_meta = sv.flags_meta || {};\n"
+            "      sv.flags_meta[key] = setup.flagMetaNow();\n"
+            "    }\n"
             "  }\n"
             "};\n"
             "\n"
@@ -12814,6 +13063,11 @@ setup.castTraitRows = function (slug, npc) {
                     location_canvas_list[-1]["retryAfterDays"] = int(
                         (trigger.metadata or {}).get("retry_after_days") or 1
                     )
+                # E2 — seen-weighting of a random canvas. Added ONLY when set, so a game
+                # that authors none emits a byte-identical payload.
+                _seen_weight = (trigger.metadata or {}).get("seen_weight") if trigger else None
+                if _seen_weight is not None:
+                    location_canvas_list[-1]["seenWeight"] = float(_seen_weight)
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -13615,6 +13869,41 @@ setup.carryRent = function (due, paid) {
             if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
                 return True
         return False
+
+    def _has_pool_memory(self) -> bool:
+        """E2 — does any included canvas carry a block_pool with `memory = "seen"`?
+
+        Gates the `pool_seen` default, so a game without one keeps a byte-identical
+        :: Start and stateDefaults.
+        """
+        def walk(x):
+            if isinstance(x, dict):
+                if x.get("type") == "block_pool" and (x.get("props") or {}).get("memory") == "seen":
+                    return True
+                return any(walk(v) for v in x.values())
+            if isinstance(x, list):
+                return any(walk(v) for v in x)
+            return False
+
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                if walk(getattr(node, "node_data", None) or {}):
+                    return True
+        return False
+
+    def _block_pool_key(self, props: dict, pool_blocks: list) -> str:
+        """E2 — the `pool_seen` key of a remembering block_pool.
+
+        `props.id` when the author gave one (stable across edits to the entries);
+        otherwise a hash of the entries, like _media_pool_key's `files` form, so
+        editing the pool's text starts its memory afresh. Two nodes with the same pool
+        share one memory, as two nodes with the same media pool share one counter.
+        """
+        pid = props.get("id")
+        if isinstance(pid, str) and pid.strip():
+            return re.sub(r'[^A-Za-z0-9_]', '_', pid.strip())[:48]
+        raw = json.dumps(pool_blocks, sort_keys=True, ensure_ascii=False)
+        return "pool_" + hashlib.md5(raw.encode("utf-8")).hexdigest()[:10]
 
     def _canvas_entry_passages(self) -> dict:
         """slug -> the passage a canvas is ENTERED at (its first ordered node).
@@ -16232,7 +16521,15 @@ setup.carryRent = function (due, paid) {
                             html_parts.append(self._convert_blocks_to_game_html(pool_blocks))
                         else:
                             max_idx = len(pool_blocks) - 1
-                            parts = [f'<<set _bp to random(0, {max_idx})>>']
+                            pool_props = block.get("props") or {}
+                            if pool_props.get("memory") == "seen":
+                                # E2 — weighted toward entries she has not seen yet.
+                                key = self._block_pool_key(pool_props, pool_blocks)
+                                weight = float(pool_props.get("seen_weight", 0.1))
+                                parts = [f'<<set _bp to setup.pickRememberedPoolEntry('
+                                         f'"{key}", {len(pool_blocks)}, {weight})>>']
+                            else:
+                                parts = [f'<<set _bp to random(0, {max_idx})>>']
                             for pi, pool_item in enumerate(pool_blocks):
                                 if pi == 0:
                                     parts.append('<<if _bp is 0>>')
@@ -16903,6 +17200,11 @@ function _readCurrentValue(item) {
         var _elapsed = _today - _meta.set_day;
         return _elapsed > 0 ? _elapsed : 0;
     }
+    // E4 — an hour gate reports whole hours elapsed, like the day gate above.
+    if (item.hours_since_flag) {
+        var _hs = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        return (_hs !== null && _hs > 0) ? Math.floor(_hs) : 0;
+    }
     if (!item.trait) return null;
     if (item.subject === "player") {
         var pt = State.variables.player && State.variables.player.core_traits;
@@ -16989,6 +17291,26 @@ setup.pickQuestsCards = function(scope) {
 // by `evaluateGoals` (bullet progress).
 setup.checkQuestsCondition = function(item) {
     if (!item || typeof item !== "object") return false;
+    // ── E4: hour gate and weekday gate ──────────────────────────────────────
+    // `hours_since_flag` is the day gate in hours, through the canvas evaluator's
+    // own helper (set_minute, falling back to set_day * 1440); it fails closed the
+    // same way. `weekday` is a list of 0 = Monday … 6 = Sunday.
+    if (item.hours_since_flag) {
+        var hsNow = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        if (hsNow === null) return false;
+        switch (item.op) {
+            case "gte": return hsNow >= item.value;
+            case "lte": return hsNow <= item.value;
+            case "gt":  return hsNow > item.value;
+            case "lt":  return hsNow < item.value;
+            case "eq":  return hsNow === item.value;
+        }
+        return false;
+    }
+    if (Array.isArray(item.weekday)) {
+        return item.weekday.length > 0
+            && setup._weekdayMatches(item.weekday, setup.todayWeekdayIndex());
+    }
     // ── Day gate ────────────────────────────────────────────────────────────
     // The same predicate canvases use (days_since_flag): days elapsed since the
     // flag was SET, measured off $flags_meta[flag].set_day against the calendar
@@ -17140,12 +17462,14 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
             var label = (it.goal && it.goal.label) ||
                         (it.goal && it.goal.trait) ||
                         (it.goal && it.goal.days_since_flag) ||
+                        (it.goal && it.goal.hours_since_flag) ||
                         (it.goal && it.goal.flag) || "";
             // The "X / Y" suffix belongs to every COUNTED goal — a trait and a day
             // wait both have a number the player is waiting on. Gating it on `trait`
             // alone computed the day count and threw it away, which is the whole
             // reason the days shape exists (found on the built page, beat_0205).
-            if ((it.goal.trait || it.goal.days_since_flag) && typeof it.currentValue === "number") {
+            if ((it.goal.trait || it.goal.days_since_flag || it.goal.hours_since_flag)
+                    && typeof it.currentValue === "number") {
                 label += ' — ' + it.currentValue + ' / ' + it.goal.value;
             }
             html2 += '<li>' + marker + ' ' + label + '</li>';

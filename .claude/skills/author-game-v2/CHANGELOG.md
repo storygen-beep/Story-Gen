@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E4: `weekday` and `hours_since_flag` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** WS-D10 step 4. "Only on Saturday" and "three hours after he texts" could not be written as
+conditions: `engine.md` §39 said so ("No weekday form"), and `days_since_flag` was the finest wait.
+
+**What changed.**
+- `generators/v2.py` (+~150 lines, mostly helpers and comments): `weekday {weekdays=[…]}` (reuses
+  `setup._weekdayMatches`, 0 = Monday) and `hours_since_flag` (like `days_since_flag`, in hours) in
+  every evaluator: `triggerConditionsSatisfied`, `describeUnmetConditions` (names the days),
+  `checkSingleCondition` (delegates), `formatCanvasConditions`, `getNextActivity` (a time wait, or a
+  flag hint when the flag is unset) and its hint text, the flag-hint resolver, and the quest cards'
+  `checkQuestsCondition` with its progress reader and bullet. Every flag write stores `set_minute`
+  beside `set_day` through `setup.flagMetaNow`: `applyFlagEffect`, the EN1 closed flag and the cheat
+  restore (the two writers that bypass it). `setup.flagSetMinute` reads a meta with `set_day` only as
+  `set_day * 1440`.
+- `template_import.py`: both types join E1's `CONDITION_SCHEMA` (`weekday` must list 0–6, no
+  `operator`); quest cards gain `hours_since_flag` and `weekday` shapes (dataclass, parse,
+  validator, serializer).
+- `references/engine.md`: new §52; §39's "No weekday form" is replaced; §40's backfill table gains a
+  `$flags_meta` row (not filled; the `set_day * 1440` fallback); §37's quoted quest-card error text
+  updated to the new wording.
+- Tests: fixture section E4 (`sat_only`, `meet_dan`, `after_dan`, quest card `card_wait`); new
+  `test_weekday_hours_since_flag.py` (27: the import table and errors, quest-card shapes, every
+  evaluator, every flag writer, headless weekday, hours across midnight, an NPC flag, quest cards,
+  the old-save fallback). The old save (`tests/data/e4_pre_change_save.txt`) was written at
+  `d2ac5b4` from the fixture minus its E4 gates (that importer rejects the new types); its
+  `met_dan` meta is `{set_day: 1}` and reads 18 hours on at 18:00, so the wait opens rather than
+  strands.
+- Cites: 368 `v2.py` and 58 `template_import.py` cites re-pointed through the line maps; one lands on
+  the reworded quest-card error line, which is the same message.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with every
+non-script passage identical to `ed2f1c6` (the change is engine script only).
+
+**Words:** +258, running total 141,282 / 149,283 on the engine branch. **After the merge into `skill/world-and-systems`:** 143,674 / 149,283 (the skill side's 142,948, plus the engine batch's +742, less 16 from folding the repeatable-chat section into §51 "The phone" and dropping PRD ids from the engine text).
+
+---
+
 ## 2026-10-01 — Phone P5: engine facts for the phone (World and Systems PRD, Phase 3)
 
 **Why.** engine.md had no phone section; the-phone.md's workarounds and the engine items that close them need one
@@ -66,6 +105,46 @@ list, whole words) = 0 and a Jack/Aaron grep = 0; the template field-gap list is
 current (orphans 2); pytest 475 passed.
 
 **Words:** +36, running total 142,587 / 149,283 (the card is in `templates/`, not counted).
+
+---
+
+## 2026-10-01 — Engine E3: repeatable chats (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 3, WS-D7 ("a repeat invite after sex"). A conversation was delivered once and
+its replies were keyed by its id, so a chat could not come back; the skill's interim advice was to
+chain one-time messages.
+
+**What changed.**
+- `template_import.py`: `repeat_after_days` and `max_repeats` on `TemplatePhoneConversation`, parsed,
+  validated (whole numbers >= 1; `max_repeats` only with `repeat_after_days`), and written into the
+  phone metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (+~85 lines, phone games only): `setup._rearmPhoneConversation` re-arms a
+  delivered chat once its current instance is answered (a reply sent; read, for a chat with no reply
+  block), `repeat_after_days` have passed since it arrived or was answered, `max_repeats` is not used
+  up and its trigger still holds. `$game_state.phone.conv_cycle[id]` is the instance; instance 0
+  keeps the plain id in `replies`/`read_conversations` (so one-time chats and old saves read as
+  before), instance n uses `"id#n"`. The thread view renders every instance in order, past ones as
+  history with no reply buttons, so `_hasPendingReply` never blocks on an old instance. The unread
+  count, `sendPhoneReply` (records `answered_day`) and the reply buttons use the instance key.
+  `conv_cycle` joins the phone skeleton only in a game with a repeatable chat.
+- `references/engine.md`: new §51; §39's latch note points at it; §40's backfill row names
+  `phone.conv_cycle`.
+- Tests: `RepeatableChatSchemaTests` (4) and `RepeatableChatIntegrationTests` (2, DB build) in
+  `apps/projects/tests.py`; new `test_repeatable_chats.py` (8, headless: re-arm timing, history and
+  per-instance buttons, per-answer effects, `max_repeats`, read-only chats, trigger re-check, the
+  one-time control, the old-save load); one in `test_save_migration.py`. The old save
+  (`tests/data/e3_pre_change_save.txt`) was written at `9707f2d` and loads with `conv_cycle = {}`
+  and its answer kept as instance 0. `PhoneParity*` and `Tier2RuntimeIntegrationTests` pass
+  unchanged.
+- Cites: 430 `v2.py` and 76 `template_import.py` cites re-pointed through the line maps, each
+  checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. Rebuilds: five games byte-identical; the
+phone game, the_balance, changes in its phone engine script only (no skeleton change, no passage
+text change).
+
+**Words:** +204, running total 141,024 / 149,283.
 
 ---
 
@@ -205,6 +284,43 @@ SKILL.md references templates` = 0; `--selfcheck` current (orphans 3); pytest 47
 
 ---
 
+## 2026-10-01 — Engine E2: event pools that remember (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 2. A `block_pool` picked `random(0, n-1)` on every render and a random canvas
+rolled a flat `chance` for ever, so a big pool showed the same few events twice before the rest once.
+
+**What changed.**
+- `generators/v2.py` (+~95 lines): `block_pool` takes `memory = "seen"` (optional `seen_weight`,
+  default 0.1). `setup.pickRememberedPoolEntry` weighs a seen entry `seen_weight` against 1 for a
+  fresh one and records the pick in `$game_state.pool_seen[key]` (index -> times shown); the key is
+  the pool's `id`, else a hash of its entries. `pool_seen` joins the skeleton (so `stateDefaults` and
+  the backfill) only when a game has such a pool. A random canvas takes `trigger.seen_weight`:
+  `setup.canvasRollChance` multiplies `chance` by it once the canvas has fired, and both random
+  rollers (`selectCanvasByPriority`, `checkRandomEncounters`) read it. The payload carries
+  `seenWeight` only when set.
+- `template_import.py` + `game_graph.py`: `seen_weight` on the trigger dataclass, parsed, and copied
+  into trigger metadata by both writers. The block normalizer copies `memory`/`seen_weight` (and `id`
+  for a remembering pool) from the block's top level, as it already did for `blocks`; without that
+  the documented top-level shape would have dropped `memory` silently. `_validate_seen_memory`:
+  `seen_weight` must be in (0, 1], only on random canvases or remembering pools; `memory` must be
+  `"seen"`.
+- `references/engine.md` §35 gains "A pool that remembers"; §40's backfill table names `pool_seen`.
+- Tests: new fixture `engine_ws_batch1_2026_10_01.toml`; new `test_pool_memory.py` (18: route,
+  validator, inert without the keys, exact-draw weighting, play records, the old-save load); one in
+  `test_save_migration.py`. The old save (`tests/data/e2_pre_change_save.txt`) was written by a build
+  at `72cb456` (before E2) and loads with `pool_seen = {}` backfilled.
+- Cites: 426 `v2.py` and 67 `template_import.py` cites re-pointed through the edit's line maps; the
+  two that pointed at the rewritten `random(0, …)` line were moved by hand to `v2.py:16328`.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with passage text
+unchanged: the only `index.html` diff is the two new engine helpers and the two `chance` reads
+(43 script lines each).
+
+**Words:** +166, running total 140,820 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems E9b: reputation's interim doctrine (World and Systems PRD, Phase 7, lands with Phase 2)
 
 **Why.** Q7/WS-D20: reputation becomes a full gossip system later (E9a study, E9c engine). Until then games need a
@@ -295,6 +411,26 @@ who-climbs table gains one line pointing system pay and lewd ladders at SY8; W4 
 **Verified.** `git diff` touches only the intro, W1 and W4; `--selfcheck` current (orphans 3); pytest 473 passed.
 
 **Words:** +85, running total 142,134 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E1b: the clothing warning names the player, not "Emma" (World and Systems PRD, Phase 7; GLOBAL runtime text)
+
+**Why.** PRD E1b: `setup.validateClothing` hard-coded "Emma" in all three of its warnings.
+
+**What changed.** `generators/v2.py` (+3 lines): the three warnings read `$player.name` (customization
+included), falling back to "Player" as the hint code does. `references/engine.md` §17 gains two lines.
+The built script changes in every clothing game: members_only, billable_hours, orientation and vesper
+(9 lines each in `index.html`; probation and the_balance have clothing off and are byte-identical).
+**No player sees the change today:** nothing in `v2.py` or any game calls `setup.validateClothing`.
+New test file `apps/game_generation/tests/test_clothing_warning_name.py` (3 tests; node runs the built
+function with a named and an unnamed player; fails on the old code). 417 `v2.py` cites in SKILL.md
+and references moved +3 through the edit's line map, each checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures as `ed2f1c6`, nothing new. Skill pytest
+passed; `--selfcheck` current, orphans 3; `cite_check` 0 drifted in SKILL.md + references.
+
+**Words:** +26, running total 140,654 / 149,283.
 
 ---
 
@@ -456,6 +592,42 @@ build). Round 9b's `school.md` is not carried (S8's `college.md` replaces it); p
 re-read. `--selfcheck` current (orphans 3); pytest 473 passed.
 
 **Words:** +8 (the re-point), running total 141,514 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E1: the importer rejects bad conditions (World and Systems PRD, Phase 7; GLOBAL, build-time only)
+
+**Why.** WS-D10 step 1. A condition with an unknown type, key or operator imported clean and failed
+closed at runtime; one with no `version` failed open. Nothing between the TOML and the game said so
+(vesper_two's two buy locks with `state = "not_owned"` were always true, PRD §9 G1).
+
+**What changed.**
+- `apps/projects/services/template_import.py` (+130 lines): one table, `CONDITION_SCHEMA` (17 types,
+  each with its allowed keys and operators, mirroring `setup.triggerConditionsSatisfied`), and one
+  walker, `_walk_condition_carriers`, run from `normalize()` into `_parse_errors` so both builds (TI
+  and the no-DB `game_graph` path) fail. It walks the raw TOML by key name: `conditions`,
+  `entry_conditions`, `match_condition`, `show_when`, and a schedule row's `when`. Quest cards and
+  `player_portrait` are excluded. Errors: missing version, unknown block key or `logic`, unknown
+  type, key or operator. An empty table is "no condition".
+- `references/engine.md` §2 says the importer now rejects these; §37's "not validated by the
+  importer" line is now past tense.
+- Test fixture `engine_prd_2026_04_22.toml` carried the exact bug (an unversioned `entry_conditions`
+  with `id`/`value` keys, so the gate always passed): rewritten to a real v1.0 `is_false` gate. A
+  cascade test in `test_legacy_engine.py` used `trait` for `trait_key`: fixed.
+- Tests: `ConditionSchemaE1Tests` (15) in `apps/projects/tests.py`, including every carrier (27 in
+  one fixture), the two exclusions, a portrait-`when` fixture that still builds, and a drift guard
+  that every table type has a runtime branch; `TraitConditionNeSchemaTests`' "not whitelisted" test
+  now asserts the rejection; 2 in `tests/test_npc_schedule_when.py`.
+- Cites: 47 `template_import.py` cites in references re-pointed (5 by `cite_check --fix`, 42 through
+  the edit's line map, each checked to land on the same source line).
+
+**Verified.** Django tests (`apps/projects/tests.py`, `tests/`, `apps/game_generation/tests`): 14
+failed, the same 14 that fail at `ed2f1c6`. Skill pytest passed; `--selfcheck` current, orphans 3.
+Scratch rebuilds of members_only, billable_hours, orientation, probation, the_balance and vesper: all
+import, `index.html` byte-identical to `ed2f1c6`. vesper_two fails (its two `state` keys), as
+expected (WS-D24).
+
+**Words:** +88, running total 140,628 / 149,283.
 
 ---
 

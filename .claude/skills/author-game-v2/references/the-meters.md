@@ -190,7 +190,7 @@ condition, a `costs` entry, or a quest goal. Deterministic — either a reader e
 - **`costs` counts as a read.** The engine filters an unaffordable choice rather than letting it
   fail (`engine.md` §27), so a meter spent through `costs` is gating.
 - **`<npc>_stage` is exempt** when the prefix names a declared character: the *engine* reads those
-  (`v2.py:5549-5554`). `sex_stage` is not exempt — no character is called `sex`.
+  (`v2.py:5745-5750`). `sex_stage` is not exempt — no character is called `sex`.
 
 ⚠️ **This gate can be satisfied cheaply and wrongly** — one throwaway `arousal >= 1` per dead meter
 and it goes green. That is the deleted gate 22's failure mode in a new coat. The check can only ask
@@ -223,11 +223,11 @@ location** plus `price > 0`, because `renderShopPage` stocks only `!initial && p
 `wardrobeEffects = [{ item_id = "…", action = "add" }]` on a choice or an `exit_block.config`.
 Zero-based; no threshold to invent. **A shop existing does not make a garment buyable:** a
 non-initial garment at `price = 0` is invisible on the very shop page it sits beside
-(`v2.py:2077` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
+(`v2.py:2087` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:2536` takes it as a bare string,
-`v2.py:9935` compares it to each location's slug). A typo produces no error, no warning and no shop
+⚠️ **`shop_location` is never validated** (`template_import.py:2703` takes it as a bare string,
+`v2.py:10179` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.
 
@@ -363,7 +363,7 @@ audience meter is W5's thing, and W5's test applies to it, not this one's.
 
 `patriarch`'s shape has a native home here and it is the **Lane 3 dispatcher**. A substitution rule
 already takes an optional `conditions` block, evaluated per rule at
-`v2.py:5337` — so banding a walk-in on the meter is one block, no engine work, no new primitive.
+`v2.py:5494` — so banding a walk-in on the meter is one block, no engine work, no new primitive.
 
 ```toml
 [[canvases.trigger.substitutions]]          # the existing rule, untouched
@@ -382,8 +382,8 @@ conditions       = { version = "1.0", logic = "AND", items = [
 ```
 
 ⚠️ **APPEND it, never prepend it.** Rules sharing an `exclusive_group` share **one dice over
-cumulative buckets** (`v2.py:5345`), and a slot the dice claims whose conditions fail **falls
-through to solo rather than promoting the next rule** (`v2.py:5378`). Appended, the bonus rule
+cumulative buckets** (`v2.py:5502`), and a slot the dice claims whose conditions fail **falls
+through to solo rather than promoting the next rule** (`v2.py:5535`). Appended, the bonus rule
 takes a bucket that already fell to solo, so outside the band **nothing changes**. Prepended, it
 takes the bucket in *front* of the rules below it and silently cuts their rate at every band —
 including the NPC walk-ins, which have nothing to do with this meter.
@@ -629,15 +629,15 @@ whole world tests it.** W3's gate makes sure somebody reads it.
    raise X"* far more than *"show me X"* (4 of 22,252 comments ask to see a stat).
 
 ⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
-`getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
+`getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1585-1586`), so a naked player
 reads the same as one in plain underwear.
 
 **`worn_exposure` is the real equivalent, and it exists as of 2026-08-28.** A derived 0/1/2 — 0
-covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1608`), the one
+covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1615`), the one
 aggregate that reads an empty slot: the upper region is bare unless `top` or `dress` fills it and
 underwear-level if only `bra` does, the lower likewise, and the result is the max of the regions and
-any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4111`, lock text at
-`:7900`), the garment field is `exposure` (`template_import.py:2525`), and `engine.md` §17 lists it
+any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4197`, lock text at
+`:7900`), the garment field is `exposure` (`template_import.py:2692`), and `engine.md` §17 lists it
 with the rest.
 
 ⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
@@ -666,7 +666,7 @@ is the event; a swimsuit is exposure on the high street and unremarkable at the 
 DoL centralises the judgement in one function that knows which locations are safe. We distribute it:
 a canvas is bound to a location, so an exposure ambient only fires where an author put it, and her
 bedroom is safe by simply having none. The audience half is `npc_at_location` with no `npc_id` —
-the any-NPC "room occupied" form (`v2.py:4579`). **Gate on both.** An ambient that fires in an empty
+the any-NPC "room occupied" form (`v2.py:4733`). **Gate on both.** An ambient that fires in an empty
 room is the game talking to itself.
 
 **The starting move, written out.** A random ambient at one location that can only fire when she is
@@ -745,7 +745,7 @@ Five parts, all existing engine pieces, proved in one fixture (`round5/ic10_preg
 author's — and write it in the board. The fixture ends in a birth that resets the stage.
 
 ⚠️ **Engine limit:** the portrait code, and its pregnancy swap, ships only when `[settings]
-clothing_enabled = true` (`v2.py:1579`). A small engine fix — the portrait swap independent of the
+clothing_enabled = true` (`v2.py:1586`). A small engine fix — the portrait swap independent of the
 wardrobe — is listed, not built.
 
 ## W8 · What sticks — and every door it closes is warned
@@ -800,7 +800,7 @@ clicks to the top band  ·  in-game minutes to the top band
 |---|---|---|
 | **1 · Threshold spacing** *(always on)* | widen the gap between rungs while keeping the per-beat increment fixed, so the climb takes days | does nothing on its own — 55 free clicks is still 55 free clicks. And **don't over-space a thin repeated beat**: if the rung is one recycled paragraph, a huge bar is just tedium |
 | **2 · A window-sized time cost** | `time_progression_minutes` on the rung's exit. The best-*reading* throttle: it is fiction, not a mechanic, and no single deleted line removes it | **only bites when sized against the window.** A 10-minute rung against an all-day hub is farmable ~144× per day. A 180-minute rung against a 09:00–18:00 NPC window is ~3/day. Advancing past an NPC's schedule window makes them absent, which is what actually stops the rung |
-| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12126`) — a triggerless rung has none.** |
+| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12375`) — a triggerless rung has none.** |
 | **4 · A resource cost per rung** | `costs` (§27). Gate-enforced — the engine does not offer a rung the player cannot afford | energy is the wrong *primary* lock for a relationship ("too tired to seduce him" is bad fiction). It is a legitimate *throttle* when the fiction supports it, and it is the strongest tool available to a triggerless rung |
 
 ### M4 · The recipe — layer all three
@@ -819,7 +819,7 @@ A rung reached by a hub choice is **triggerless**: a canvas with no `[canvases.t
 That single structural fact voids the first tool everyone reaches for.
 
 ```
-max_triggers_per_day  →  read off the trigger (v2.py:12126)  →  DOES NOT APPLY
+max_triggers_per_day  →  read off the trigger (v2.py:12375)  →  DOES NOT APPLY
 ```
 
 The two that do:
@@ -857,12 +857,12 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > 2026-08-22.** The generator emits the two in opposite orders:
 >
 > ```
-> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:13955-13957 · :14033
-> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:14364-14373
+> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14244-14246 · :14322
+> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:14653-14662
 > ```
 >
-> `advanceTime` rolls the day inside itself (`v2.py:5906-5909`) and that is where the tick clears
-> every `_today` flag (`v2.py:6046-6048`). So an **exit**-set cap on a rung that crosses midnight is
+> `advanceTime` rolls the day inside itself (`v2.py:6102-6105`) and that is where the tick clears
+> every `_today` flag (`v2.py:6242-6244`). So an **exit**-set cap on a rung that crosses midnight is
 > written *after* the clear, and the new day starts already capped.
 >
 > A sleep rung that runs from evening to morning with its cap on the exit is never offered before
@@ -870,8 +870,8 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > says a word.
 >
 > ⚠️ **A LOCATED canvas does not need a flag at all.** `max_triggers_per_day` is read off the
-> trigger (`v2.py:12126`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
-> (`v2.py:4290`), so it is immune to this. Reach for the flag only when the rung is triggerless.
+> trigger (`v2.py:12375`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
+> (`v2.py:4380`), so it is immune to this. Reach for the flag only when the rung is triggerless.
 
 ⚠️ **Do not do this with a hidden counter trait and an `lt` condition.** It works, and it is what
 the failing game reached for in the absence of this section — but it puts a player-subject trait in

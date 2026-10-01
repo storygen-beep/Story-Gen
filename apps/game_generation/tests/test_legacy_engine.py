@@ -2710,8 +2710,8 @@ class CascadeLocationExitSpliceTests(TestCase):
             # Any beat with a non-empty conditions.items forces the SAFE path.
             beats[1]["conditions"] = {
                 "version": "1.0", "logic": "AND",
-                "items": [{"type": "trait", "trait": "energy",
-                           "operator": "gte", "value": 999}],
+                "items": [{"type": "trait", "subject": "player",
+                           "trait_key": "energy", "operator": "gte", "value": 999}],
             }
         node = {"id": "n1", "name": "Cascade Node",
                 "blocks": [{"type": "cascade",

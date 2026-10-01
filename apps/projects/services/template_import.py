@@ -11,7 +11,7 @@ import json
 import logging
 from dataclasses import asdict, dataclass, field, is_dataclass
 import uuid
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
 
 import tomli
 from django.contrib.auth import get_user_model
@@ -366,6 +366,12 @@ class TemplatePhoneConversation:
     # doc 45 G1 — optional toast text shown when this conversation is delivered
     # (its trigger first satisfied). Empty ⇒ default "📱 New message".
     notify: str = ""
+    # E3 (World and Systems PRD) — a repeatable chat. Once the current instance is
+    # answered (a reply sent; read, for a chat with no reply block) and this many days
+    # have passed since it arrived or was answered, it arrives again while its trigger
+    # still holds. `max_repeats` caps the re-arrivals (None = no cap). None = one-time.
+    repeat_after_days: Optional[int] = None
+    max_repeats: Optional[int] = None
 
 
 @dataclass
@@ -843,6 +849,10 @@ class TemplateTrigger:
     # `retry_after_days` days (1 when absent), so a no cannot be farmed.
     consume_on: Optional[str] = None
     retry_after_days: Optional[int] = None
+    # E2 (World and Systems PRD) — opt-in, random canvases only. Once the canvas has
+    # fired (trigger_history[id].total > 0) its `chance` is multiplied by this, so an
+    # event she has already seen comes up less often than one she has not.
+    seen_weight: Optional[float] = None
 
 
 @dataclass
@@ -1228,6 +1238,10 @@ class QuestsCondition:
     # the same predicate canvases use, so a card can show "◯ Let a day pass — 0 / 1"
     # instead of leaving the wait in the tip where the player reads it as a bug.
     days_since_flag: Optional[str] = None
+    # E4 — hour gate: `hours_since_flag`, a numeric `op`, `value` (hours) and, on a
+    # goal, `label`. Weekday gate: `weekday` = [0..6] (0 = Monday), no `op`.
+    hours_since_flag: Optional[str] = None
+    weekday: Optional[List[int]] = None
     subject: Optional[str] = None
     npc_id: Optional[str] = None
     op: str = ""
@@ -1293,6 +1307,10 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
         trait = None
     if not days_since_flag:
         days_since_flag = None
+    hours_since_flag = d.get("hours_since_flag") or None
+    weekday = d.get("weekday")
+    if weekday is not None and not isinstance(weekday, list):
+        weekday = [weekday]  # the validator names the bad shape
     subject = d.get("subject") or None
     npc_id = d.get("npc_id") or None
     op = str(d.get("op", "") or "")
@@ -1309,6 +1327,8 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
         flag=flag,
         trait=trait,
         days_since_flag=days_since_flag,
+        hours_since_flag=hours_since_flag,
+        weekday=weekday,
         subject=subject,
         npc_id=npc_id,
         op=op,
@@ -1555,6 +1575,147 @@ def _validate_predicate_items_block(
     errors: List[str] = []
     for ii, item in enumerate(items):
         errors.extend(_validate_predicate_field_names(item, f"{ctx}.items[{ii}]"))
+    return errors
+
+
+# E1 (World and Systems PRD) — the one table of what a v1.0 condition item may say.
+# type -> (keys it may carry besides `type`, operators it may use). It mirrors the
+# branches of setup.triggerConditionsSatisfied in generators/v2.py. Before this, an
+# unknown type, key or operator imported clean and then failed closed at runtime (or,
+# with no version, failed OPEN), so a typo made a gate silently always-false or
+# always-true with a green build. An empty operator set means the branch never reads
+# `operator`, so carrying one is an unknown key. Adding a branch to the evaluator
+# means adding its row here, or the importer rejects every game that uses it.
+_COND_NUMERIC_OPS = frozenset({"eq", "ne", "gt", "gte", "lt", "lte"})
+_COND_COMPARE_OPS = _COND_NUMERIC_OPS | frozenset(
+    {"in", "not_in", "contains", "not_contains", "exists", "not_exists"}
+)
+_COND_SUBJECT_KEYS = frozenset({"subject", "npc_id", "character_id"})
+CONDITION_SCHEMA: Dict[str, Tuple[FrozenSet[str], FrozenSet[str]]] = {
+    "flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator"},
+             frozenset({"is_true", "is_false", "exists"})),
+    "trait": (_COND_SUBJECT_KEYS | {"trait_key", "operator", "value"}, _COND_COMPARE_OPS),
+    "days_since_flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator", "value"},
+                        _COND_NUMERIC_OPS),
+    "modifier": (frozenset({"modifier_key", "operator"}),
+                 frozenset({"is_active", "is_inactive"})),
+    "clothing_slot": (frozenset({"slot", "operator"}),
+                      frozenset({"equipped", "unequipped"})),
+    "clothing_item": (frozenset({"item_id", "operator"}),
+                      frozenset({"equipped", "unequipped", "owned", "not_owned"})),
+    "worn_exposure": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_beauty": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_corruption": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_type": (frozenset({"operator", "value"}), frozenset({"eq", "neq"})),
+    "time_of_day": (frozenset({"start_time", "end_time"}), frozenset()),
+    "pass": (frozenset({"pass_id", "operator"}), frozenset({"is_active", "is_inactive"})),
+    "item": (frozenset({"item_id", "operator", "value"}), _COND_NUMERIC_OPS),
+    "stage": (frozenset({"helper", "operator"}), frozenset({"is_true", "is_false"})),
+    "quest": (frozenset({"quest_id", "quest", "operator", "value"}),
+              frozenset({"active", "completed", "step_gte"})),
+    "corruption_level": (frozenset({"operator", "value"}), frozenset({"gte", "lt", "eq"})),
+    "npc_at_location": (frozenset({"location_id", "location", "npc_id", "character_id",
+                                   "operator"}),
+                        frozenset({"is_present", "is_absent"})),
+    # E4 — today's weekday (0 = Monday … 6 = Sunday); hours since a flag was set.
+    "weekday": (frozenset({"weekdays"}), frozenset()),
+    "hours_since_flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator", "value"},
+                         _COND_NUMERIC_OPS),
+}
+_COND_BLOCK_KEYS = frozenset({"version", "logic", "items"})
+
+# Keys that hold a v1.0 conditions table wherever they appear in the TOML. A schedule
+# row's `when` is one too, but only there (see _walk_condition_carriers).
+_CONDITION_CARRIER_KEYS = frozenset({"conditions", "entry_conditions", "match_condition",
+                                     "show_when"})
+# Top-level tables with their own condition schema, never a v1.0 block: quest cards
+# (`when`/`goals` lists, validated by _validate_quests_cards) and the player portrait's
+# outfit `when` (a flat unversioned dict by design).
+_CONDITION_EXCLUDED_TABLES = frozenset({"quest_cards", "player_portrait"})
+
+
+def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
+    """E1 — check one conditions table against CONDITION_SCHEMA.
+
+    Errors: not a table, a missing or wrong `version` (the runtime fails open without
+    "1.0"), an unknown block key or `logic`, and per item an unknown type, key or
+    operator. An empty table means "no condition" and is skipped.
+    """
+    if isinstance(block, dict) and not block:
+        return []
+    if not isinstance(block, dict):
+        return [f"{ctx}: must be a conditions table {{version, logic, items}}, "
+                f"got {type(block).__name__}"]
+    errors: List[str] = []
+    if str(block.get("version") or "") != "1.0":
+        errors.append(f'{ctx}: must carry version = "1.0" — without it the engine '
+                      f"fails OPEN and the gate passes for everybody")
+    for k in sorted(set(block) - _COND_BLOCK_KEYS):
+        errors.append(f"{ctx}: unknown key `{k}` (a conditions table has only "
+                      f"version, logic, items)")
+    if "logic" in block and block["logic"] not in ("AND", "OR"):
+        errors.append(f"{ctx}: logic must be \"AND\" or \"OR\", got {block['logic']!r}")
+    items = block.get("items", [])
+    if not isinstance(items, list):
+        return errors + [f"{ctx}.items: must be a list, got {type(items).__name__}"]
+    for ii, item in enumerate(items):
+        ictx = f"{ctx}.items[{ii}]"
+        if not isinstance(item, dict):
+            errors.append(f"{ictx}: must be a table, got {type(item).__name__}")
+            continue
+        ctype = item.get("type")
+        if ctype not in CONDITION_SCHEMA:
+            errors.append(f"{ictx}: unknown condition type {ctype!r} (known: "
+                          f"{', '.join(sorted(CONDITION_SCHEMA))})")
+            continue
+        keys, ops = CONDITION_SCHEMA[ctype]
+        for k in sorted(set(item) - keys - {"type"}):
+            errors.append(f"{ictx}: unknown key `{k}` on a `{ctype}` condition "
+                          f"(allowed: {', '.join(sorted(keys))})")
+        if "operator" in item and ops and item["operator"] not in ops:
+            errors.append(f"{ictx}: unknown operator {item['operator']!r} on a `{ctype}` "
+                          f"condition (allowed: {', '.join(sorted(ops))})")
+        if ctype == "weekday":
+            # E4 — an empty list would match no day, which reads as a typo, not a gate.
+            wds = item.get("weekdays")
+            if not isinstance(wds, list) or not wds:
+                errors.append(f"{ictx}: a `weekday` condition needs weekdays = [0..6] "
+                              f"(0 = Monday), at least one day")
+            else:
+                try:
+                    _validate_weekdays(wds, ictx)
+                except (TypeError, ValueError) as exc:
+                    errors.append(str(exc))
+    return errors
+
+
+def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[str]:
+    """E1 — find every v1.0 conditions table in the raw TOML and check it.
+
+    Walks by key name rather than by a list of paths, so a carrier added later (a new
+    phone app, a new block kind) is covered without touching this function. The paths
+    it reaches in our games: canvas triggers and substitutions, every node block
+    (groups, cascades, linkreplace beats), choices and their effects, flagEffects,
+    rejection effects and text variants, location entry_conditions, description
+    variants, door options, clothing_rules, clothing items, phone conversation / post /
+    profile / gallery triggers, match_condition, daily_topics, daily_tick effects,
+    engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
+    """
+    errors: List[str] = []
+    if isinstance(node, dict):
+        for k, v in node.items():
+            child = f"{ctx}.{k}" if ctx else str(k)
+            if not ctx and k in _CONDITION_EXCLUDED_TABLES:
+                continue
+            if k in _CONDITION_CARRIER_KEYS or (k == "when" and parent_key == "schedules"):
+                errors.extend(_validate_condition_block_schema(v, child))
+                continue
+            errors.extend(_walk_condition_carriers(v, child, k))
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            label = v.get("id") if isinstance(v, dict) else None
+            child = f"{ctx}['{label}']" if isinstance(label, str) and label else f"{ctx}[{i}]"
+            errors.extend(_walk_condition_carriers(v, child, parent_key))
     return errors
 
 
@@ -1937,6 +2098,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # effect validators (_validate_effect_field_names / _validate_trait_declaration_
     # in_effect) against the authored keys rather than the normalized dataclass.
     _cheat_raw_rows: List[Dict[str, Any]] = []
+    # E1 — reject bad conditions at import. Walks the raw TOML (not the dataclasses) so
+    # every carrier is reached by its authored key, including ones parsed as raw dicts.
+    # Both builds (TI and the no-DB game_graph path) run normalize() then validate().
+    _parse_errors.extend(_walk_condition_carriers(data, ""))
 
     schema_version = _require_str(data, "schema_version", "0.1")
 
@@ -2285,6 +2450,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     # EN1 — kept raw; validate() owns the type and value checks.
                     consume_on=trig_def.get("consume_on"),
                     retry_after_days=trig_def.get("retry_after_days"),
+                    # E2 — kept raw; validate() owns the type and range checks.
+                    seen_weight=trig_def.get("seen_weight"),
                 )
                 # Doc 69 Item 2 — validate pre_substitution_effects field names
                 # + trait declarations (reuses Phase 1 + Phase 2 validators).
@@ -3034,6 +3201,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     trigger=trigger_cond,
                     blocks=conv_blocks,
                     notify=_require_str(c_raw, "notify", ""),
+                    # E3 — kept raw; validate() owns the type and range checks.
+                    repeat_after_days=c_raw.get("repeat_after_days"),
+                    max_repeats=c_raw.get("max_repeats"),
                 ))
 
             # Parse posts (social feed)
@@ -4708,6 +4878,17 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(f"{bctx}.sender must be 'npc' or 'player'")
                 if block.type == "reply" and not block.choices:
                     errors.append(f"{bctx} is a reply but has no choices")
+            # E3 — repeatable chats. Errors, for the EN1 reason: a misspelt or
+            # misplaced key would build clean and the chat would never come back.
+            if conv.repeat_after_days is not None and not _is_whole_days(conv.repeat_after_days):
+                errors.append(f"{ctx}.repeat_after_days must be a whole number of days >= 1 "
+                              f"(got {conv.repeat_after_days!r})")
+            if conv.max_repeats is not None:
+                if conv.repeat_after_days is None:
+                    errors.append(f"{ctx}.max_repeats is read only with repeat_after_days")
+                elif not _is_whole_days(conv.max_repeats):
+                    errors.append(f"{ctx}.max_repeats must be a whole number >= 1 "
+                                  f"(got {conv.max_repeats!r})")
 
     # container/default entry rules
     for l in template.locations:
@@ -6147,6 +6328,7 @@ def validate(template: GameTemplate) -> List[str]:
     # EN1 — opt-in step consumption (`consume_on` / `consumes` / `final` /
     # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
     errors.extend(_validate_step_consumption(template))
+    errors.extend(_validate_seen_memory(template))
 
     # EN3 — location opening hours.
     errors.extend(_validate_location_hours(template))
@@ -6597,6 +6779,58 @@ def _is_whole_days(v: Any) -> bool:
     return isinstance(v, int) and not isinstance(v, bool) and v >= 1
 
 
+def _is_seen_weight(v: Any) -> bool:
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1
+
+
+def _block_pools(node: Any):
+    """Every `block_pool` block under a node's blocks, nested ones included."""
+    if isinstance(node, dict):
+        if node.get("type") == "block_pool":
+            yield node
+        for v in node.values():
+            yield from _block_pools(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _block_pools(v)
+
+
+def _validate_seen_memory(template: GameTemplate) -> List[str]:
+    """E2 — pools and random canvases that remember what she has seen.
+
+    Errors, for the EN1 reason: an unknown value or a key on the wrong canvas would
+    build clean and do nothing. `seen_weight` is a multiplier in (0, 1].
+    """
+    errors: List[str] = []
+    for ci, c in enumerate(template.canvases or []):
+        where = f"canvases[{ci}] '{c.id}'"
+        trig = c.trigger
+        if trig and trig.seen_weight is not None:
+            if trig.trigger_mode != "random":
+                errors.append(f"{where}: trigger.seen_weight is read only with "
+                              f"trigger_mode = \"random\"")
+            elif not _is_seen_weight(trig.seen_weight):
+                errors.append(f"{where}: trigger.seen_weight must be a number in (0, 1] "
+                              f"(got {trig.seen_weight!r})")
+        for node in (c.nodes or []):
+            for pool in _block_pools(node.blocks):
+                # Both shapes, as the normalizer reads them: top-level keys win.
+                props = dict(pool.get("props") or {})
+                props.update({k: pool[k] for k in ("memory", "seen_weight") if k in pool})
+                memory = props.get("memory")
+                if memory is not None and memory != "seen":
+                    errors.append(f"{where} node '{node.id}': block_pool memory must be "
+                                  f"\"seen\" (got {memory!r})")
+                if "seen_weight" in props:
+                    if memory != "seen":
+                        errors.append(f"{where} node '{node.id}': block_pool seen_weight is "
+                                      f"read only with memory = \"seen\"")
+                    elif not _is_seen_weight(props["seen_weight"]):
+                        errors.append(f"{where} node '{node.id}': block_pool seen_weight must "
+                                      f"be a number in (0, 1] (got {props['seen_weight']!r})")
+    return errors
+
+
 def _validate_step_consumption(template: GameTemplate) -> List[str]:
     """EN1 — the checks for a step that is used only on its "yes".
 
@@ -6706,19 +6940,58 @@ def _validate_quests_cards(
         has_flag = item.flag is not None
         has_trait = item.trait is not None
         has_days = item.days_since_flag is not None
+        has_hours = item.hours_since_flag is not None
+        has_weekday = item.weekday is not None
         shapes = [n for n, on in (("flag", has_flag), ("trait", has_trait),
-                                  ("days_since_flag", has_days)) if on]
+                                  ("days_since_flag", has_days),
+                                  ("hours_since_flag", has_hours),
+                                  ("weekday", has_weekday)) if on]
         if not shapes:
             errors.append(
-                f"{ctx}: condition item must set one of `flag`, `trait` or "
-                f"`days_since_flag`"
+                f"{ctx}: condition item must set one of `flag`, `trait`, "
+                f"`days_since_flag`, `hours_since_flag` or `weekday`"
             )
             return
         if len(shapes) > 1:
             errors.append(
-                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait` or "
-                f"`days_since_flag`, not {' + '.join(shapes)}"
+                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait`, "
+                f"`days_since_flag`, `hours_since_flag` or `weekday`, not "
+                f"{' + '.join(shapes)}"
             )
+            return
+        if has_weekday:
+            # E4 — today is one of these days. No `op`: a day is in the list or not.
+            if not item.weekday:
+                errors.append(f"{ctx}: weekday must list at least one day (0-6)")
+            try:
+                _validate_weekdays(item.weekday, ctx)
+            except (TypeError, ValueError) as exc:
+                errors.append(str(exc))
+            if item.op:
+                errors.append(f"{ctx}: weekday condition takes no op, got {item.op!r}")
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: weekday goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
+            return
+        if has_hours:
+            # E4 — the day gate in hours, with the same rules.
+            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+                errors.append(
+                    f"{ctx}: hours_since_flag condition op must be gte/lte/gt/lt/eq, "
+                    f"got {item.op!r}"
+                )
+            if item.value is None:
+                errors.append(
+                    f"{ctx}: hours_since_flag condition requires numeric value "
+                    f"(the number of hours to wait)"
+                )
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: hours_since_flag goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
             return
         if has_days:
             # A DAY GATE. Same predicate the canvas side has had since 0.2.2: days
@@ -7339,6 +7612,10 @@ def _serialize_quests_condition(c: QuestsCondition) -> Dict[str, Any]:
         out["trait"] = c.trait
     if c.days_since_flag is not None:
         out["days_since_flag"] = c.days_since_flag
+    if c.hours_since_flag is not None:
+        out["hours_since_flag"] = c.hours_since_flag
+    if c.weekday is not None:
+        out["weekday"] = list(c.weekday)
     if c.subject is not None:
         out["subject"] = c.subject
     if c.npc_id is not None:
@@ -7585,6 +7862,14 @@ def _normalize_block_list(
                     child_types,
                 )
             props["blocks"] = inner_safe
+            # E2 — the memory keys, from top-level OR props like `blocks` above. Copied
+            # only when authored (and `id` only for a remembering pool, where it is the
+            # pool_seen key), so every other pool normalizes unchanged.
+            for _pool_key in ("memory", "seen_weight"):
+                if _pool_key in b:
+                    props[_pool_key] = b[_pool_key]
+            if props.get("memory") == "seen" and "id" in b and "id" not in props:
+                props["id"] = b["id"]
         elif b_type == "cascade":
             # S7 — multi-beat linkreplace cascade. Reads `id` + `beats` from
             # top-level OR `props` (same bug-fix-pattern as group/pool).
@@ -8042,6 +8327,11 @@ def _assemble_project_metadata(project, template):
                     "npc": c.npc,
                     "trigger": c.trigger,
                     "notify": c.notify,
+                    # E3 — emitted only when set, so a game without repeatable chats
+                    # produces a byte-identical payload.
+                    **({"repeat_after_days": c.repeat_after_days}
+                       if c.repeat_after_days is not None else {}),
+                    **({"max_repeats": c.max_repeats} if c.max_repeats is not None else {}),
                     "blocks": [
                         {
                             "type": b.type,
@@ -8402,6 +8692,8 @@ def create_project_from_template(
                             # EN1 — opt-in step consumption (absent unless authored)
                             "consume_on": c.trigger.consume_on or None,
                             "retry_after_days": c.trigger.retry_after_days,
+                            # E2 — opt-in seen-weighting of a random canvas
+                            "seen_weight": c.trigger.seen_weight,
                             # Doc 69 Item 2 — Pattern C pre-substitution effects.
                             # Engine reads from canvas metadata + emits
                             # <<script>>setup.applyAndNotifyTrait(...)<</script>>

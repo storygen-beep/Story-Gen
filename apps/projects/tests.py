@@ -6058,6 +6058,78 @@ class PhonePostActionsSchemaTests(SimpleTestCase):
         self.assertEqual(app.post_actions[1]["corruption_min"], 30)
 
 
+def _toml_with_repeatable_chat(**conv_extra):
+    d = _toml_with_phone()
+    conv = d["phone"]["conversations"][0]
+    conv["blocks"].append({"type": "reply", "choices": [{"text": "sure"}]})
+    conv.update({"repeat_after_days": 2, "max_repeats": 3})
+    conv.update(conv_extra)
+    return d
+
+
+class RepeatableChatSchemaTests(SimpleTestCase):
+    """E3 (World and Systems PRD) — repeat_after_days / max_repeats on a conversation."""
+
+    def test_fields_parse(self):
+        conv = normalize(_toml_with_repeatable_chat()).phone.conversations[0]
+        self.assertEqual((conv.repeat_after_days, conv.max_repeats), (2, 3))
+
+    def test_fields_default_to_one_time(self):
+        conv = normalize(_toml_with_phone()).phone.conversations[0]
+        self.assertIsNone(conv.repeat_after_days)
+        self.assertIsNone(conv.max_repeats)
+
+    def test_valid_repeat_validates_clean(self):
+        self.assertEqual(validate(normalize(_toml_with_repeatable_chat())), [])
+
+    def test_bad_values_are_errors(self):
+        for extra, fragment in (
+            ({"repeat_after_days": 0}, "repeat_after_days must be a whole number"),
+            ({"repeat_after_days": "2"}, "repeat_after_days must be a whole number"),
+            ({"max_repeats": 0}, "max_repeats must be a whole number"),
+            ({"repeat_after_days": None}, "max_repeats is read only with repeat_after_days"),
+        ):
+            d = _toml_with_repeatable_chat(**extra)
+            if extra.get("repeat_after_days", 1) is None:
+                del d["phone"]["conversations"][0]["repeat_after_days"]
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (extra, errors))
+
+
+class RepeatableChatIntegrationTests(TestCase):
+    """E3 through the DB build (create_project_from_template). The no-DB path and the
+    runtime are proven in apps/game_generation/tests/test_repeatable_chats.py."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            email="repeatable-chat-test@example.com", password="testpass123"
+        )
+
+    def _build(self, data):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(data)
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return project, TweeComprehensiveGeneratorV2().generate(project)
+
+    def test_the_keys_reach_metadata_and_the_runtime(self):
+        project, twee = self._build(_toml_with_repeatable_chat())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertEqual((conv["repeat_after_days"], conv["max_repeats"]), (2, 3))
+        self.assertIn('"conv_cycle": {}', twee)
+        self.assertIn("setup._rearmPhoneConversation(conv, ps)", twee)
+
+    def test_a_one_time_chat_emits_no_repeat_state(self):
+        project, twee = self._build(_toml_with_phone())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertNotIn("repeat_after_days", conv)
+        self.assertNotIn('"conv_cycle"', twee)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 
@@ -6876,14 +6948,16 @@ class TraitConditionNeSchemaTests(SimpleTestCase):
                 template = normalize(_toml_with_trait_condition(op))
                 self.assertEqual(validate(template), [], f"{op} should validate")
 
-    def test_canvas_condition_operators_are_not_whitelisted_at_all(self):
-        # Documents the real behaviour rather than asserting a rule that does
-        # not exist: a canvas condition carries any operator string through
-        # import, and an unknown one fails CLOSED at runtime with no build
-        # error. If a whitelist is ever added here, this test is the place the
-        # decision gets recorded.
+    def test_canvas_condition_unknown_operator_is_rejected(self):
+        # The decision this test used to record ("no whitelist: an unknown
+        # operator imports clean and fails CLOSED at runtime") was reversed by
+        # E1 on 2026-10-01: CONDITION_SCHEMA in template_import is the whitelist,
+        # and an unknown operator is now a build error. See ConditionSchemaE1Tests.
         template = normalize(_toml_with_trait_condition("nope"))
-        self.assertEqual(validate(template), [])
+        errors = validate(template)
+        self.assertTrue(
+            any("unknown operator 'nope'" in e for e in errors), errors
+        )
 
     def test_quest_card_still_rejects_ne(self):
         # DELIBERATE ASYMMETRY. setup.checkQuestsCondition has no `ne` case and
@@ -6901,6 +6975,157 @@ class TraitConditionNeSchemaTests(SimpleTestCase):
             any("gte/lte/gt/lt/eq" in e and "ne" in e for e in errors),
             f"Quest card should reject op='ne', got: {errors}",
         )
+
+
+class ConditionSchemaE1Tests(SimpleTestCase):
+    """E1 (World and Systems PRD): the importer rejects bad v1.0 conditions.
+
+    One table (CONDITION_SCHEMA) and one walker (_walk_condition_carriers) over
+    the raw TOML. Quest cards and the player portrait's `when` are excluded:
+    they have their own schemas.
+    """
+
+    def _cond(self, *items, **block):
+        out = {"version": "1.0", "logic": "AND", "items": list(items)}
+        out.update(block)
+        return out
+
+    FLAG = {"type": "flag", "subject": "player", "flag_key": "met", "operator": "is_true"}
+
+    def _walk(self, data):
+        from apps.projects.services.template_import import _walk_condition_carriers
+        return _walk_condition_carriers(data, "")
+
+    def test_clean_condition_has_no_errors(self):
+        self.assertEqual(self._walk({"canvases": [{"id": "c", "trigger": {
+            "conditions": self._cond(self.FLAG)}}]}), [])
+
+    def test_unknown_type_is_an_error(self):
+        errs = self._walk({"locations": [{"id": "l", "entry_conditions": self._cond(
+            {"type": "flagg", "flag_key": "x"})}]})
+        self.assertEqual(len(errs), 1)
+        self.assertIn("unknown condition type 'flagg'", errs[0])
+        self.assertIn("locations['l'].entry_conditions.items[0]", errs[0])
+
+    def test_unknown_key_is_an_error(self):
+        # vesper_two's buy-lock bug (PRD G1): `state` is not a key the engine reads.
+        errs = self._walk({"canvases": [{"id": "c", "nodes": [{"id": "n", "exit_block": {
+            "choices": [{"conditions": self._cond(
+                {"type": "clothing_item", "item_id": "coat", "state": "not_owned"})}]}}]}]})
+        self.assertEqual(len(errs), 1)
+        self.assertIn("unknown key `state` on a `clothing_item` condition", errs[0])
+
+    def test_effect_spelling_in_a_condition_is_an_error(self):
+        errs = self._walk({"canvases": [{"id": "c", "trigger": {"conditions": self._cond(
+            {"type": "trait", "subject": "player", "trait": "x", "op": "gte", "value": 1})}}]})
+        self.assertTrue(any("unknown key `trait`" in e for e in errs), errs)
+        self.assertTrue(any("unknown key `op`" in e for e in errs), errs)
+
+    def test_unknown_operator_is_an_error(self):
+        errs = self._walk({"canvases": [{"id": "c", "trigger": {"conditions": self._cond(
+            {"type": "npc_at_location", "location_id": "bar", "operator": "is_here"})}}]})
+        self.assertEqual(len(errs), 1)
+        self.assertIn("unknown operator 'is_here'", errs[0])
+
+    def test_missing_version_is_an_error(self):
+        errs = self._walk({"canvases": [{"id": "c", "trigger": {"conditions": {
+            "items": [self.FLAG]}}}]})
+        self.assertEqual(len(errs), 1)
+        self.assertIn('must carry version = "1.0"', errs[0])
+
+    def test_unknown_block_key_and_bad_logic_are_errors(self):
+        # `item` for `items` leaves the gate empty, which the runtime reads as true.
+        errs = self._walk({"canvases": [{"id": "c", "trigger": {"conditions": {
+            "version": "1.0", "logic": "or", "item": [self.FLAG]}}}]})
+        self.assertTrue(any("unknown key `item`" in e for e in errs), errs)
+        self.assertTrue(any("logic must be" in e for e in errs), errs)
+
+    def test_empty_table_means_no_condition(self):
+        self.assertEqual(self._walk({"canvases": [{"id": "c", "trigger": {
+            "conditions": {}}}]}), [])
+
+    def test_time_of_day_takes_no_operator(self):
+        errs = self._walk({"canvases": [{"id": "c", "trigger": {"conditions": self._cond(
+            {"type": "time_of_day", "start_time": "20:00", "operator": "eq"})}}]})
+        self.assertTrue(any("unknown key `operator` on a `time_of_day`" in e
+                            for e in errs), errs)
+
+    def test_every_carrier_is_walked(self):
+        bad = self._cond({"type": "nope"})
+        data = {
+            "canvases": [{"id": "c",
+                          "trigger": {"conditions": bad, "substitutions": [{"conditions": bad}]},
+                          "nodes": [{"id": "n", "blocks": [
+                              {"type": "group", "conditions": bad},
+                              {"type": "cascade", "props": {"beats": [
+                                  {"conditions": bad, "blocks": [
+                                      {"type": "linkreplace", "props": {"conditions": bad}}]}]}}],
+                              "exit_block": {"choices": [{
+                                  "conditions": bad,
+                                  "effects": [{"conditions": bad}],
+                                  "flagEffects": [{"conditions": bad}],
+                                  "rejection_effects": [{"conditions": bad}],
+                                  "text_variants": [{"conditions": bad}]}]}}]}],
+            "locations": [{"id": "l", "entry_conditions": bad,
+                           "clothing_rules": [{"conditions": bad}],
+                           "description_variants": [{"conditions": bad}],
+                           "door": {"description_variants": [{"conditions": bad}],
+                                    "options": [{"conditions": bad}]}}],
+            "clothing": [{"id": "coat", "conditions": bad}],
+            "phone": {"conversations": [{"id": "cv", "trigger": {"conditions": bad}}],
+                      "posts": [{"id": "p", "trigger": {"conditions": bad}}],
+                      "profiles": [{"id": "pr", "trigger": {"conditions": bad},
+                                    "match_condition": bad}],
+                      "gallery_items": [{"id": "g", "trigger": {"conditions": bad}}],
+                      "daily_topics": [{"id": "d", "conditions": bad}]},
+            "engine": {"stage_helpers": [{"name": "h", "conditions": bad}],
+                       "daily_tick": {"flagEffects": [{"conditions": bad}],
+                                      "traitEffects": [{"conditions": bad}]}},
+            "npcs": [{"id": "x", "schedules": [{"location": "l", "when": bad}]}],
+            "sidebar_items": [{"type": "trait_bar", "show_when": bad}],
+        }
+        errs = self._walk(data)
+        # 10 canvas + 5 location + 1 clothing + 6 phone + 3 engine + schedule + sidebar
+        self.assertEqual(len(errs), 27, "\n".join(errs))
+
+    def test_quest_cards_and_portrait_when_are_excluded(self):
+        data = {
+            "quest_cards": [{"text": "x", "when": [{"flag": "f", "op": "is_true"}],
+                             "conditions": {"type": "flag", "flag": "f"}}],
+            "player_portrait": {"outfits": [{"image": "a.jpg",
+                                             "when": {"worn_type": "dress"}}]},
+        }
+        self.assertEqual(self._walk(data), [])
+
+    def test_a_when_outside_a_schedule_is_not_a_carrier(self):
+        self.assertEqual(self._walk({"misc": [{"when": {"anything": 1}}]}), [])
+
+    def test_portrait_when_fixture_still_builds(self):
+        d = _toml_with_trait_condition("gte")
+        d["player_portrait"] = {
+            "default_image": "portraits/w.jpg",
+            "outfits": [{"image": "portraits/d.jpg", "when": {"worn_type": "dress"}},
+                        {"image": "portraits/f.jpg", "when": {"flag": "met"}}],
+        }
+        self.assertEqual(validate(normalize(d)), [])
+
+    def test_validate_surfaces_the_error(self):
+        d = _toml_with_trait_condition("gte")
+        d["locations"][0]["entry_conditions"] = {"items": [self.FLAG]}
+        errors = validate(normalize(d))
+        self.assertTrue(any("locations['loc_test'].entry_conditions" in e
+                            and "version" in e for e in errors), errors)
+
+    def test_every_table_type_has_a_runtime_branch(self):
+        # Drift guard: a row here with no branch in triggerConditionsSatisfied
+        # would import clean and fail closed at runtime, the bug E1 exists to stop.
+        from apps.projects.services.template_import import CONDITION_SCHEMA
+        src = (Path(__file__).resolve().parents[1] / "game_generation" / "twee_comprehensive"
+               / "generators" / "v2.py").read_text()
+        start = src.index("setup.triggerConditionsSatisfied = function")
+        body = src[start:src.index("// Unknown type", start)]
+        for ctype in CONDITION_SCHEMA:
+            self.assertIn(f"type === '{ctype}'", body, ctype)
 
 
 class TraitConditionNeIntegrationTests(TestCase):
