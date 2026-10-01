@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — B7 · PROTECTED (A13, LO approved, WS-D11): the reader's test 1 accepts strangers
+
+**Why.** Billable Hours finding F9: test 1 asked every sexual step for an earlier canvas showing his want, so a
+stranger or a one-off (A15's night one) could never pass. The her-life pitches (W4) add strangers, so this lands
+first.
+
+**What changed.** One sentence, in three places: "scoped to a person with a ladder; a stranger or one-off (A15)
+passes if the same canvas shows his want before the act" — `references/register.md` "What a scene contains"
+test 1, `references/the-arc.md` A13 (end of the section), and `.claude/agents/v2-reader.md` test 1. Rule ids
+unchanged; nothing else in A13 changed.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3); no
+`the-arc.md:NNN` line cite exists in the skill or the agents, so the three added lines move none.
+
+**Words:** +47, running total 140,016 / 149,283.
+
+---
+
 ## 2026-10-01 — World W8: spine places are provisional until the board (World and Systems PRD, Phase 1)
 
 **Why.** Billable Hours finding F5: the spine names places before the board has rooms, so re-pointing SP2's

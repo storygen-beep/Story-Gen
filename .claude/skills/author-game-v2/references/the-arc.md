@@ -560,6 +560,9 @@ move came from nowhere.
 A pressure type moves first and names the act; a nice type waits, so she moves. Both show the want
 first.
 
+Scoped to a person with a ladder; a stranger or one-off (A15) passes if the same canvas shows his want
+before the act.
+
 ## A14 · A relationship is a chain of steps
 
 **The shape:** every step pays one before it and opens one after it, and the text says so. The

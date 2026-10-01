@@ -336,7 +336,9 @@ numbers only: 84.6% of 39 willingness pairs put the composure on the high branch
 scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The Reader).
 
 1. **Want** — what this person visibly wants here. On a sexual step, an **earlier** scene has already
-   shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on.
+   shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on. Scoped to a person
+   with a ladder; a stranger or one-off (`the-arc.md` A15) passes if the same canvas shows his want
+   before the act.
 2. **Next step** — what goes one step further than last time.
 3. **Hook** — what the scene points at next.
 4. **Her voice at her level** — at a low level her own thought pushes back; at a high one it is

@@ -30,7 +30,7 @@ rules each test points at.
 
 | # | test | PASS when |
 |---|---|---|
-| 1 | **want** | the person visibly wants something in this scene. **On a sexual step** (an explicit beat, or a one-time step that opens one), an **earlier** canvas — one this step's conditions or flags come after — already showed him wanting it: a line, a look, a leak on his hub (`the-arc.md` A13). No earlier sign = FAIL, and say which earlier canvases you checked. |
+| 1 | **want** | the person visibly wants something in this scene. **On a sexual step** (an explicit beat, or a one-time step that opens one), an **earlier** canvas — one this step's conditions or flags come after — already showed him wanting it: a line, a look, a leak on his hub (`the-arc.md` A13). No earlier sign = FAIL, and say which earlier canvases you checked. Scoped to a person with a ladder; a stranger or one-off (`the-arc.md` A15) passes if the same canvas shows his want before the act. |
 | 2 | **next step** | something goes one step further than the last scene with this person |
 | 3 | **hook** | the scene points at what comes next — a line, a promise, a choice that names it |
 | 4 | **her voice at her level** | her own thought matches her meter: pushback at a low level, appetite at a high one (`the-meters.md` W1b). N/A if no thought or meter is in play. |
