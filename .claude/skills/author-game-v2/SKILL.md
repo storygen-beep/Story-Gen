@@ -289,7 +289,7 @@ how many fails are [off].
 | **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `step_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
-| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2174` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
+| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2177` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is shown once** | a banded sidebar stat is `in_dump = false` in `[[traits.labels]]`, and its item prints the number (`trait_words` + `show_value`, or `trait_bar`) | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
@@ -556,7 +556,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   canvases and the charge lived in `[settings.rent]`.
 - **A vocabulary the engine does not recognise fails SILENTLY, and nothing else in this system
   does.** `op = "subtract"` is not an engine op — `applyTraitEffect` runs `add` and `set` and
-  returns on anything else (`v2.py:6704-6710`). This skill's own `engine.md` once discussed the op
+  returns on anything else (`v2.py:6708-6714`). This skill's own `engine.md` once discussed the op
   as though it worked. Valid TOML, green
   build, green gates, and a clean play-through, because **a number that never changes looks exactly
   like a number the player has not moved yet.** When you write an unfamiliar key or value, find the

@@ -6611,6 +6611,40 @@ class PhoneCallsSchemaTests(SimpleTestCase):
                         errors)
 
 
+BATCH3_FIXTURE = "apps/game_generation/games_toml_files/engine_ws_batch3_2026_10_02.toml"
+
+
+def _batch3():
+    with open(BATCH3_FIXTURE, "rb") as f:
+        return tomli.load(f)
+
+
+def _canvas(d, cid):
+    return next(c for c in d["canvases"] if c["id"] == cid)
+
+
+class ReturnExitSchemaTests(SimpleTestCase):
+    """E8b (World and Systems PRD) — `destinationType = "return"` on a location exit."""
+
+    def test_return_exit_validates_clean(self):
+        self.assertEqual(validate(normalize(_batch3())), [])
+
+    def test_return_exit_needs_a_home_to_fall_back_to(self):
+        d = _batch3()
+        _canvas(d, "dan_call").pop("trigger")
+        _canvas(d, "dan_call")["nodes"][0]["exit_block"]["config"]["destinationType"] = "return"
+        d["phone"]["calls"] = []
+        errors = validate(normalize(d))
+        self.assertTrue(any("destinationType='return' but canvas has no resolving" in e
+                            for e in errors), errors)
+
+    def test_unknown_destination_type_names_return(self):
+        d = _batch3()
+        _canvas(d, "dan_door")["nodes"][0]["exit_block"]["config"]["destinationType"] = "back"
+        errors = validate(normalize(d))
+        self.assertTrue(any("'node', or 'return'" in e for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

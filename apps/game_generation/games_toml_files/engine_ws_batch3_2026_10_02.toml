@@ -1,0 +1,154 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7 batch 3 (E8b, E7a–E7d, E10, E11)
+#  Date: 2026-10-02
+#
+#  Media-free. Each engine item adds only what its own tests need.
+#
+#  E8b — "back to where she was":
+#    loc_gym      open 06:00–19:00 every day; she stands here when Dan calls.
+#    loc_dan      Dan's place; entering it costs 5 money and 20 minutes.
+#    dan_rings    Dan calls once `started` holds. Answer plays dan_call (home loc_dan),
+#                 whose exit is the place she was in when the scene started.
+#    taxi         an `anywhere` launcher whose option plays dan_visit (home loc_dan), with
+#                 the same exit.
+#    dan_door     a canvas in loc_dan entered from the room, with the same exit: no stored
+#                 place, so it ends at its own home.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_batch3"
+title       = "Engine World and Systems Batch 3"
+description = "Engine fixture for the World and Systems PRD, Phase 7 batch 3."
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40, charm = 10 }
+flag_keys   = ["started"]
+
+[[npcs]]
+id          = "npc_dan"
+name        = "Dan"
+description = "Fixture caller."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "calls"
+type  = "calls"
+label = "Calls"
+
+[[phone.apps]]
+id       = "taxi"
+type     = "launcher"
+label    = "Taxi"
+anywhere = true
+options  = [ { text = "Ride to Dan's", canvas = "dan_visit" } ]
+
+# ── E8b: a call she answers where she stands ─────────────────────────────────
+
+[[phone.calls]]
+id           = "dan_rings"
+app          = "calls"
+caller       = "npc_dan"
+accept       = "dan_call"
+ring_minutes = 600
+[phone.calls.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+
+# ── places ───────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_gym", "loc_dan"]
+
+[[locations]]
+id          = "loc_gym"
+name        = "Gym"
+description = "The gym."
+entry_from  = "loc_home"
+hours       = [ { open = "06:00", close = "19:00" } ]
+
+[[locations]]
+id          = "loc_dan"
+name        = "Dan's place"
+description = "Dan's flat."
+entry_from  = "loc_home"
+costs       = { money = 5, time = 20 }
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── E8b: the scenes that end where she was ───────────────────────────────────
+
+[[canvases]]
+id   = "dan_call"
+name = "Dan on the phone"
+
+[canvases.trigger]
+location      = "loc_dan"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "DAN_ON_THE_LINE" } ]
+exit_block = { type = "location", text = "Hang up", config = { destinationType = "return", time_progression_minutes = 10 } }
+
+[[canvases]]
+id   = "dan_visit"
+name = "A ride to Dan's"
+
+[canvases.trigger]
+location      = "loc_dan"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "ride"
+name   = "Ride"
+blocks = [ { type = "paragraph", content = "DAN_RIDE" } ]
+exit_block = { type = "location", text = "Ride back", config = { destinationType = "return", time_progression_minutes = 10 } }
+
+[[canvases]]
+id   = "dan_door"
+name = "Dan's door"
+
+[canvases.trigger]
+location      = "loc_dan"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "door"
+name   = "Door"
+blocks = [ { type = "paragraph", content = "DAN_DOOR" } ]
+exit_block = { type = "location", text = "Step back", config = { destinationType = "return", time_progression_minutes = 0 } }

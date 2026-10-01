@@ -5755,16 +5755,17 @@ def validate(template: GameTemplate) -> List[str]:
 
             if eb.type == "location":
                 dest = eb.config.get("destinationType", "trigger")
-                if dest not in ("trigger", "specific", "node"):
+                if dest not in ("trigger", "specific", "node", "return"):
                     errors.append(
-                        f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationType must be 'trigger', 'specific', or 'node'"
+                        f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationType must be 'trigger', 'specific', 'node', or 'return'"
                     )
-                # Layer 3 — silent-Navigation gate (single-link form).
-                if dest == "trigger" and not return_will_resolve:
+                # Layer 3 — silent-Navigation gate (single-link form). `return` falls
+                # back to the same home when no stored place is usable, so it needs one too.
+                if dest in ("trigger", "return") and not return_will_resolve:
                     eb_text = (eb.text or "").strip() or "<no text>"
                     errors.append(
                         f"canvases[{ci}].nodes[{ni}].exit_block ('{c.id}.{n.id}') uses "
-                        f"destinationType='trigger' but canvas has no resolving "
+                        f"destinationType='{dest}' but canvas has no resolving "
                         f"trigger.location — runtime return_target would silently "
                         f"land on the Navigation page. Exit text: {eb_text!r}. "
                         f"Fix: change destinationType to 'specific' and set "

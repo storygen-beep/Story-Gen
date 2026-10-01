@@ -170,12 +170,12 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 > ✅ **BUILT 2026-08-29.** The harness is `scripts/playtest.py`; the agent is
 > `.claude/agents/v2-player.md`, callable as `subagent_type: "v2-player"`. A live play finds what
 > no source gate can — for one, an effect op the runtime does not implement (`applyTraitEffect`
-> handles only `add` and `set`, `v2.py:6669`).
+> handles only `add` and `set`, `v2.py:6673`).
 >
 > ⚠️ **Why it is shared code.** The engine's signatures are easy to get wrong by hand:
 > `applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap)` takes seven positional
-> arguments, not one options object (`v2.py:6669`, `:21469`), and `pickQuestsCards` returns `[]`
-> for any scope but `"story_goals"` (`v2.py:16844-16845`). Every signature the harness wraps is one
+> arguments, not one options object (`v2.py:6673`, `:21532`), and `pickQuestsCards` returns `[]`
+> for any scope but `"story_goals"` (`v2.py:16869-16870`). Every signature the harness wraps is one
 > nobody has to re-derive.
 
 **Job:** play the build and report numbers.

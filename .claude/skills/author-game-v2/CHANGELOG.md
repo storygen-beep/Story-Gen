@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: back to where she was — a `return` exit (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add a "back to where she was" exit. A call's accept canvas and an `anywhere`
+launcher scene ended at the canvas's home, so answering a call at the gym moved her to the caller's
+place and charged that place's entry costs.
+
+**What changed.**
+- `generators/v2.py`: a location exit may say `destinationType = "return"`. Answer on a call and a
+  launcher option store the room she stands in (`setup.markReturnPlace`) in
+  `$game_state.return_place`, which exists only in a game with a `return` exit. The exit's link resolves
+  when it renders (`setup.returnPassage`): the stored room, free since it is not a move, or the canvas's
+  home when the room is closed (its hours), gone from the build, or nothing is stored. Arriving at a room
+  or the map clears it (a `:passagestart` block emitted only in such a game).
+- `template_import.py`: `return` is a valid `destinationType`; like `trigger` it needs a canvas whose
+  home resolves, as its fallback. The exit config already reached both build paths whole.
+- `references/engine.md` §13: the fact; §51's call and launcher sentences point to it.
+- Citations re-pointed through the `git diff` line map (519 moved, 104 identical; bare `:NNNN`
+  follow-ons included, reset after any other file's cite); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_return_exit.py` (6, headless: a call answered at the gym returns her there with her
+money unchanged and the place cleared; past the gym's closing it falls back to Dan's place and pays its
+entry cost, as before; a gone room falls back; an `anywhere` launcher returns her; a scene entered from
+its room ends at its home; a save written before the change, at 301f6f8, loads with `return_place`
+backfilled and the call returns her). `ReturnExitSchemaTests` (3). A save-migration case. Selfcheck and
+the skill tests pass. Django: every failure is in the known list (a Tweego probe that timed out under load
+failed 23 more; those files pass run alone).
+
+**Words:** +105, running total 145,536 / 149,283.
+
+---
+
 ## 2026-10-02 — Merge pointer fix: engine batch 2 citations re-pointed
 
 **Why.** Engine batch 2 (the ignore hook, pay from stats, job ranks, the phone's outward features,

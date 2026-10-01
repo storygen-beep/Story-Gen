@@ -1550,6 +1550,9 @@ class TweeComprehensiveGeneratorV2:
         if self._has_pool_memory():
             # E2 — which entries of each `memory = "seen"` block_pool she has seen.
             game_state_init["pool_seen"] = {}
+        if self._has_return_exit():
+            # E8b — the room a call or a launcher scene started in ("" = none).
+            game_state_init["return_place"] = ""
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -2488,6 +2491,7 @@ setup.answerCall = function(callId) {{
     if (!setup.isRerenderSafe(State.passage)) return false;
     st.state = 'answered';
     st.ended_minute = setup.gameMinuteNow();
+    if (setup.markReturnPlace) setup.markReturnPlace();
     setup.closePhone();
     Engine.play(c.accept_passage);
     return true;
@@ -3627,7 +3631,7 @@ jQuery(document).on('click', '.phone-gallery-link', function(e) {
 jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
-    if (link) { setup.closePhone(); Engine.play(String(link)); }
+    if (link) { if (setup.markReturnPlace) setup.markReturnPlace(); setup.closePhone(); Engine.play(String(link)); }
 });
 // E8-calls — Answer navigates (the navigation commits, like a launcher); Decline
 // navigates nowhere, so it commits.
@@ -14193,6 +14197,19 @@ setup.carryRent = function (due, paid) {
                 return True
         return False
 
+    def _has_return_exit(self) -> bool:
+        """E8b — does any included canvas end on a `destinationType = "return"` exit?
+
+        Gates the `return_place` default and its :passagestart clear, so a game without
+        one keeps a byte-identical :: Start and stateDefaults.
+        """
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                eb = getattr(node, "exit_block", None) or {}
+                if eb.get("type") == "location" and (eb.get("config") or {}).get("destinationType") == "return":
+                    return True
+        return False
+
     def _has_pool_memory(self) -> bool:
         """E2 — does any included canvas carry a block_pool with `memory = "seen"`?
 
@@ -15736,6 +15753,11 @@ setup.carryRent = function (due, paid) {
                     f"{flag_effects}\n{wardrobe_effects_code}\n"
                 )
                 exit_link = f"[[{continue_text}->{next_passage}]]\n"
+                if (getattr(node, 'exit_block', None) or {}).get('config', {}).get('destinationType') == 'return':
+                    # E8b — back to where she was: resolved when the link renders (after
+                    # this node's time progression), falling back to the home.
+                    _ret_text = str(continue_text).replace('"', '\\"')
+                    exit_link = f'<<link "{_ret_text}" `setup.returnPassage("{next_passage}")`>><</link>>\n'
 
                 # Cascade-aware exit routing for the single-Continue (location)
                 # exit — mirror of the choices-branch splice (~line 11971). When
@@ -15965,8 +15987,11 @@ setup.carryRent = function (due, paid) {
                 destination_type = config.get('destinationType', 'trigger')
                 BROKEN_EXIT = "_BrokenExitFallback"
 
-                if destination_type == 'trigger':
-                    # Return to trigger location (default behavior)
+                if destination_type in ('trigger', 'return'):
+                    # Return to trigger location (default behavior). E8b — `return` is
+                    # the place she was in when the scene started, resolved at runtime
+                    # by the location branch of the passage builder; the home is its
+                    # fallback, so every other reader of this value sees the home.
                     next_passage = return_target
                 elif destination_type == 'specific':
                     # Go to specific location (if locationId is provided)
@@ -18046,6 +18071,44 @@ window.devGoBack = function() {
         if self._has_consume_on():
             consume_leave_block = """    if (infoPages.indexOf(psg) === -1) { setup.parkLeftCanvasSteps(psg); }
 """
+        # E8b — the helpers exist only in a game with a `return` exit (the call and
+        # launcher handlers test for them), so every other game's script is unchanged.
+        return_place_js = ""
+        if self._has_return_exit():
+            return_place_js = """
+// E8b — "back to where she was". A call's Answer and a launcher's option store the
+// room she stands in ($game_state.return_place, only in a game with a `return` exit);
+// a `destinationType = "return"` exit goes back there. current_location is written
+// only by Location_ passages, so it still names that room. Arriving at a room or the
+// map clears it, so a later scene cannot use a stale place.
+setup.markReturnPlace = function () {
+    var gs = (State.variables || {}).game_state;
+    if (!gs || !('return_place' in gs)) return;
+    gs.return_place = String((State.variables.player || {}).current_location || '');
+};
+// The stored room's passage, or the fallback (the canvas's home) when nothing is
+// stored or the room is gone (not in this build) or closed (its hours).
+setup.returnPassage = function (fallback) {
+    var at = String(((State.variables || {}).game_state || {}).return_place || '');
+    if (!at) return fallback;
+    var p2l = setup.passage_to_location || {}, locs = setup.locations || {};
+    for (var psg in p2l) {
+        var slug = p2l[psg], loc = locs[slug];
+        if (!loc || String(loc.id) !== at) continue;
+        if (!Story.has(psg)) return fallback;
+        if (typeof setup.locOpenNow === 'function' && !setup.locOpenNow(slug)) return fallback;
+        return psg;
+    }
+    return fallback;
+};
+"""
+        # E8b — arriving at a room or the map ends the scene a stored place belongs to.
+        return_place_block = ""
+        if self._has_return_exit():
+            return_place_block = """    if ((psg.indexOf("Location_") === 0 || psg === "Navigation") && sv.game_state && sv.game_state.return_place) {
+        sv.game_state.return_place = "";
+    }
+"""
         rent_redirect_block = ""
         if self.rent_enabled:
             rent_redirect_block = """
@@ -18325,7 +18388,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-
+""" + return_place_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -18357,7 +18420,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations

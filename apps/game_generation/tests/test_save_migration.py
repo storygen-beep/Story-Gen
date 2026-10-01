@@ -617,3 +617,19 @@ def test_e8_calls_state_reaches_a_save_written_before_it(tmp_path):
     got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
     assert got["calls"] == {}
     assert got["matches"] == {"kai_profile": {"npc": "npc_kai"}}
+
+
+BATCH3 = "apps/game_generation/games_toml_files/engine_ws_batch3_2026_10_02.toml"
+
+
+@needs_node
+def test_e8b_return_place_reaches_a_save_written_before_it(tmp_path):
+    """E8b: a game that adds a `return` exit. An old save has no `return_place`; the
+    backfill fills it as "" (nothing stored), and a value already there is kept."""
+    twee = build(BATCH3)
+    sv = old_save(twee, drop_game_state=("return_place",))
+    kept = old_save(twee)
+    kept["game_state"]["return_place"] = "loc_gym"
+    got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
+    assert got[0]["game_state"]["return_place"] == ""
+    assert got[1]["game_state"]["return_place"] == "loc_gym"
