@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S9: a person who doesn't climb (`keeps = "none — …"`)
+
+**Why.** Billable F1: some people are part of a system (the bill's collector, a boss) rather than a climber, and
+`want.cast[].keeps` had only the three climbing values.
+
+**What changed.** `references/state.md` (`want.cast`): `keeps` may be `"none — <why>"`; such a person sits in a
+system card's `people[]`. `references/the-meters.md` W1 "What each man keeps score of": a generic row — a system,
+not him; `none — ` and why; like "a landlord who is the bill's deadline" (no game named). `templates/want.md` §5:
+the same option in the keeps sentence. No `shape.py` change (that is K11's).
+
+**Verified.** grep finds the `none — ` rule in `state.md`, `the-meters.md` and `templates/want.md`;
+`test_templates_parse` passes; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +65, running total 142,206 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S7: hygiene comes back, for routing only (WS-D5)
 
 **Why.** WS-D5: `engine.md` §30.1 banned hygiene on evidence from two adults-only FAIL games

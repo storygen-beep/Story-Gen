@@ -106,6 +106,7 @@ Declared per man at the Want (`want.cast[].keeps`), from the fantasy and `who_cl
 | her change | a step counter + memory flags | Cupid's Way, In Her Own Hands |
 | relationships | Want + Warmth; the split picks lover vs user (**thin**: 1 of 4 games does it fully, R5 Part 1b) | Course of Temptation's dating |
 | power | Want + Power; Power changes which acts happen | Shady Deals |
+| a system, not him | `none — ` and why: he does not climb; he belongs to a system card's `people[]` | a landlord who is the bill's deadline |
 
 It can differ per man: a pressure man gets Power, a nice man doesn't. The author declares it; LO
 approves. **Whatever he keeps:**

@@ -54,7 +54,8 @@ No numbers here. Tiers and rung values are set on the board (`references/the-boa
 | `npc_<id>` | | | | |
 
 Every person is 18 or older, and the age is written (`shape.py` fails a missing one). What he keeps: a step
-counter + memory flags, Want + Warmth, or Want + Power (`references/the-meters.md` W1); LO approves each.
+counter + memory flags, Want + Warmth, or Want + Power (`references/the-meters.md` W1); or `none — <why>` when
+he is part of a system rather than a climber (he goes in that card's `people[]`). LO approves each.
 Record as `want.cast[] = {id, age, keeps}`, and what she wants from him as `want.why_this_person`.
 
 **Her life — 4–6 threads** (job or study, friends, dating, side money, the town; `references/the-want.md` §6):

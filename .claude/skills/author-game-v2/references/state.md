@@ -78,7 +78,10 @@ belong here; only decisions, debts, and promises do.
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
     "charge":          "reversal" | "taboo" | "transformation" | "…",
     "cast":            [ { "id": "npc_id", "age": 18, "keeps": "step counter + memory flags"
-                                                  | "want + warmth" | "want + power" } ],
+                                                  | "want + warmth" | "want + power"
+                                                  | "none — <why: he is part of a system>" } ],
+                              // `none — …`: he does not climb; he sits in a system card's
+                              // `people[]` (the-meters.md W1, "What each man keeps score of").
                               // the-want.md §6. shape.py FAILS a person (here or in
                               // board.characters[]) with no age or under 18.
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
