@@ -578,7 +578,7 @@ Four rules follow:
   the field's best relationships: 79 of 162 player comments on the three arcs are "how do I / I'm
   stuck", and 0 are about his character.
 - **A "no" parks the step** (A3); only a labelled final no closes his path, never the person.
-- **A pitch is a step on a named relationship** (`the-release.md`, "The next step").
+- **A pitch is a step on a named relationship, or a step in a declared thread** (`the-release.md`, "The next step").
 
 ---
 

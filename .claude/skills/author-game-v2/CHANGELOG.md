@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W4b · PROTECTED (A14, LO approved, WS-D11): A14 names thread steps
+
+**Why.** WS-D2: the third Pitcher pitches a step in a declared thread of her life (W4), so A14's "a pitch is a step
+on a named relationship" has to name that case.
+
+**What changed.** `references/the-arc.md` A14, one sentence: "A pitch is a step on a named relationship, or a step
+in a declared thread". Nothing else in A14 changed.
+
+**Verified.** The A-rule headings (A1–A15) are identical before and after; `--selfcheck` current (160 rules,
+0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** +7, running total 140,197 / 149,283.
+
+---
+
 ## 2026-10-01 — World W4: the pitchers, two main idea + one her life (World and Systems PRD, Phase 1)
 
 **Why.** WS-D2: three Pitchers still run with no shared context, but "the three most owed" can only rank people
