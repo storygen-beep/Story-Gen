@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable B3: per-beat and per-reader scratch files in the agents
+
+**Why.** The Billable Hours test ran `v2-prose` writers side by side, and they overwrote each other's
+measurement file (`beat.txt`). The reader's table file had the same shape.
+
+**What changed.**
+- `.claude/agents/v2-prose.md` "Measure before you return": the scratch file is
+  `beat_<beat_id>.txt`, named for the beat.
+- `.claude/agents/v2-reader.md` "Output": the table file is named for the reader's input
+  (`reader_<slug>.md`, or `reader_<first canvas id>.md` given canvas ids).
+
+**Verified.** grep `beat.txt` in the two agents: 0 hits. Selfcheck and the skill tests pass.
+
+**Words:** +0 (agents are not counted), running total 144,332 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable B2 (PROTECTED, tools): the promise row is n/a in lenient mode
 
 **Why.** The Billable Hours test ran `shape.py` at phase `idea` (lenient) and got a red on "the

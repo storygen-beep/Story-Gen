@@ -54,8 +54,9 @@ Interiority is not banned — it gets **its own beat, after**. Cascade beats are
 
 ```bash
 source venv/bin/activate
-# write the beat to the scratchpad, one beat per blank-line-separated block
-python3 .claude/skills/author-game-v2/scripts/gates.py --beat <scratchpad>/beat.txt
+# write the beat to the scratchpad, one beat per blank-line-separated block, in a file named for
+# the beat (beat_<beat_id>.txt), so writers running side by side never overwrite each other
+python3 .claude/skills/author-game-v2/scripts/gates.py --beat <scratchpad>/beat_<beat_id>.txt
 ```
 
 That runs the build's **own** instrument — the same `EXPLICIT` regex, the same sentence split, the

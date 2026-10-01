@@ -42,7 +42,9 @@ rules each test points at.
 
 ## Output
 
-Write one table to your scratchpad and return it:
+Write one table to your scratchpad, in a file named for your input (`reader_<slug>.md`, or
+`reader_<first canvas id>.md` given canvas ids), so readers running side by side never overwrite each
+other, and return it:
 
 ```
 scene | test | PASS / FAIL / N/A | the line judged (quoted, short) | why (one line)
