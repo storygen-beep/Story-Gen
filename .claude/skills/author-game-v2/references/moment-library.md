@@ -106,8 +106,8 @@ world outside, and what she brings home from it, is what makes the house risky.
   Remembered because: Player asks: "Is there a way to have a threesome with Bobby and his gf".
 - **In Her Own Hands — into the taken roommate's bed** (`[BobbySleepPeek2ABJ]`) · "Since that first blow job, I had debated whether to pursue something physical with Bobby."
   Remembered because: "I'd really love the chance for something romantic happening between Bobby and MC"
-- **Cupid's Way — her mother walks in** (`[damien23]`) · "Damien pulls his hands out of your pants but from your mom's expression"
-  Remembered because: "The mother walking in on her in her bedroom with damien was hot"
+- **Cupid's Way — a thread that feeds the hook: the man from outside, caught at home** (`[damien23]`) · "Damien pulls his hands out of your pants but from your mom's expression"
+  Remembered because: "The mother walking in on her in her bedroom with damien was hot" [my reading] Damien comes from her life outside, her friend Jasmin's guy who texts her (`[Answer his message]`); the house is where he gets caught.
 - **In Her Own Hands — the shower at the sleepover** (`[Abby_Bath_Shower1a]`) · "'And watch?' she teased, already peeling layers off her body."
   Remembered because: [my reading] the shared bathroom at night; after two visits the menu offers the shower together.
 - **Shady Deals — the crew at her pool** (`[Pool Event Quickie]`) · "When you step back out, all conversation dies."

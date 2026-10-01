@@ -5,6 +5,27 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W7: the Cupid's Way example (World and Systems PRD, Phase 1)
+
+**Why.** N5: the taboo_at_home slice's Cupid's Way entry read as "the family is the world"; it is really a thread
+from outside feeding the hook, which is what W1 and W2 teach.
+
+**What changed.** `references/moment-library.md` taboo_at_home, the `[damien23]` entry, is restated as "a thread
+that feeds the hook: the man from outside, caught at home", with the reading that Damien comes from her life
+outside (her friend Jasmin's guy, who texts her, `[Answer his message]`) and is caught at home. The quote and the
+player line are unchanged.
+
+**Note.** The PRD says Damien comes from "her dating life". The source (`round2/passages/cupids-way.txt`) shows him
+arriving through her friend Jasmin and his texts, not a dating app, so the entry says "her life outside".
+
+**Verified.** The cited passage `[damien23]` is in `round2/passages/cupids-way.txt` (:16119) with the quoted line
+(:16122); neither it nor `[Answer his message]` names Jack or Aaron. pytest 462 passed; `--selfcheck` current
+(orphans 3).
+
+**Words:** +34, running total 139,931 / 149,283.
+
+---
+
 ## 2026-10-01 — World W6: open places early, add people over time (World and Systems PRD, Phase 1)
 
 **Why.** N2, Q8 (WS-D21): the top games open most places on day 1 and grow by people and rungs, not places.
