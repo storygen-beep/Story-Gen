@@ -115,7 +115,7 @@ creation and read forever**. `new-life-project` carries 8 and six describe her �
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
 **586 reads across 119 places**.
 
-`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4459`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4462`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
@@ -304,7 +304,7 @@ priority   = 0
 ```
 
 **Why it is cheap, and the precedent to build it from.** `_render_location_description`
-(`v2.py:9848`) already emits a conditional chain onto the room screen using
+(`v2.py:9851`) already emits a conditional chain onto the room screen using
 `setup.triggerConditionsSatisfied` — the same helper the location passage calls for
 `entry_conditions`. The notice is that path with two changes: **every** match prints rather than
 first-match, and it appends after the description rather than replacing it.
@@ -314,7 +314,7 @@ and its own docstring records that they were byte-identical copies and that this
 change of this kind gets half-applied. Build it in one place.
 
 **What exists today and why it does not serve.** `[[story_arc.hints.templates]]` is a conditional
-hint engine with priorities and specificity sorting (`v2.py:6625`-`6650`), but it filters on
+hint engine with priorities and specificity sorting (`v2.py:6628`-`6650`), but it filters on
 `tpl.npc_id !== npcSlug` — one character at a time, never a system — and it is the **v1** guidance
 path, superseded by `[[quests.cards]]` for `quests_engine = "v2"` (`template_import.py:48`, `:424`),
 which every game here uses. It cannot be repurposed without changing what it is.

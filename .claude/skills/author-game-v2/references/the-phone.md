@@ -93,7 +93,7 @@ she banks, shops, navigates or finds work.
 **Build in this order: messaging, then the thing that makes her looked at, then anything else.**
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
-`bank` both exist (`v2.py:2464`, `:2465`) and both are legitimate — `new-life-project` ships a phone
+`bank` both exist (`v2.py:2467`, `:2468`) and both are legitimate — `new-life-project` ships a phone
 bank *and* a phone GPS and is a well-liked game. But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
@@ -186,8 +186,8 @@ goes stale — a player comment on `college-daze`: *"Most of the characters stat
 profile don't actually mean anything anymore."*
 
 **We are well placed here.** Phone conversations, posts and profiles are evaluated by
-`setup.triggerConditionsSatisfied` (`v2.py:2204`) — **the same evaluator canvases use**
-(`v2.py:3888`). Every condition type a canvas can gate on, a phone thread can gate on:
+`setup.triggerConditionsSatisfied` (`v2.py:2207`) — **the same evaluator canvases use**
+(`v2.py:3891`). Every condition type a canvas can gate on, a phone thread can gate on:
 
 ```
 clothing_item  clothing_slot  corruption_level  days_since_flag  flag  item  modifier
@@ -195,7 +195,7 @@ npc_at_location  pass  quest  stage  time_of_day  trait  worn_beauty  worn_corru
 worn_exposure  worn_type
 ```
 
-**`time_of_day` was built for this file** (2026-08-29, `v2.py:4128`, `engine.md` §39). It was the
+**`time_of_day` was built for this file** (2026-08-29, `v2.py:4131`, `engine.md` §39). It was the
 one gate in the field's list this engine could not express, and it is second only to a meter:
 
 ```toml
@@ -206,7 +206,7 @@ one gate in the field's list this engine could not express, and it is second onl
 same function NPC schedules use. Omit `end_time` and the window is one hour.
 
 ⚠️ **But a conversation's trigger is a latch, not a filter, and `time_of_day` does not change
-that.** `ps.triggered_conversations[conv.id]` (`v2.py:2202`) is written the first time the condition
+that.** `ps.triggered_conversations[conv.id]` (`v2.py:2205`) is written the first time the condition
 passes and never re-read. A thread is *delivered* once and then stays. So on a **conversation**,
 `time_of_day` means **"deliver this the first time she is awake at 2am"** — not **"this thread only
 exists at 2am"**, which is what `family-ties` does, re-checking its noon-to-six window every time the
@@ -234,9 +234,9 @@ Six corpus games, the same instinct in six forms:
 **Read the register of those refusals.** A locked phone action in this genre is **a sentence in her
 voice**, not a greyed-out control. That is `the-voice.md`'s territory and it applies here unchanged.
 
-⚠️ **Nothing on our phone costs anything.** `setup.sendDailyChat` (`v2.py:2375`) applies trait
-effects and returns. Grepped the whole phone block (`v2.py:2180–3140`): the only occurrence of
-`advanceTime` or `passTime` is a comment at `v2.py:3096`. Our phone is a free action, repeatable
+⚠️ **Nothing on our phone costs anything.** `setup.sendDailyChat` (`v2.py:2378`) applies trait
+effects and returns. Grepped the whole phone block (`v2.py:2183–3143`): the only occurrence of
+`advanceTime` or `passTime` is a comment at `v2.py:3099`. Our phone is a free action, repeatable
 without limit inside a day except where a `daily_cap` happens to exist.
 
 **Until the engine can charge for a phone action, charge in the fiction and in the gates you do
@@ -272,7 +272,7 @@ ceilings**:
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
 a design doc, and it matches `kink-ceilings.md`'s own logic.
 
-The worked shape, in what our engine actually supports (`v2.py:2716` renders it, `v2.py:2771`
+The worked shape, in what our engine actually supports (`v2.py:2719` renders it, `v2.py:2774`
 sends it):
 
 ```toml
@@ -287,7 +287,7 @@ post_actions = [
 ]
 ```
 
-A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:2728`, `:2730`).
+A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:2731`, `:2733`).
 
 ⚠️ **`followers` must buy something.** A counter with no sink is the `college-daze` complaint
 waiting to happen — a number on a screen that stops meaning anything. Give it a door, per
@@ -295,9 +295,9 @@ waiting to happen — a number on a screen that stops meaning anything. Give it 
 price that drops. If nothing reads it, do not count it.
 
 ⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
-nothing else (`v2.py:2779`). `family-ties`' *"You must be at home to take selfies!"* is not
+nothing else (`v2.py:2782`). `family-ties`' *"You must be at home to take selfies!"* is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
-exists (`v2.py:4111`) and is exactly the predicate for it. Until then, the rung labels carry the
+exists (`v2.py:4114`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
@@ -321,7 +321,7 @@ likes), plus one player stuck in a town with no phone yet to get out (13 net).
 `family-ties` renders a locked app as a dead grey tile beside the live ones, which is the right
 instinct — the player sees the ladder they are climbing — and then never says how.
 
-⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2425`) renders every declared
+⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2428`) renders every declared
 app unconditionally. There is one gate and it is whole-phone: `purchase_flag`
 (`template_import.py:373`), which hides the sidebar button until a player flag is set — that is the
 *acquisition* story, not the ladder. Until per-app gating exists, publish the ladder in the app
@@ -429,10 +429,10 @@ and a cleanup that expires dates she did not attend.
 That is P1's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2442`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6652`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2445`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6655`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6091–6099`), where `setup.fireScheduledEvent` (`v2.py:6460`) can set a flag, start a quest,
+(`v2.py:6094–6102`), where `setup.fireScheduledEvent` (`v2.py:6463`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -460,7 +460,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:950`, `v2.py:7403`).
+(`template_import.py:950`, `v2.py:7406`).
 
 ---
 

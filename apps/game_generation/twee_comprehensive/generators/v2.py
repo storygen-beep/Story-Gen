@@ -1981,11 +1981,14 @@ setup.validateClothing = function() {
     var flags = sv.flags || {};
     var req = setup.clothingRequirements || {};
     var issues = [];
+    // E1b: the player's own name ($player.name, customization included), never a
+    // hard-coded one. "Player" mirrors the hint fallback when no name is set.
+    var who = (sv.player && sv.player.name) || "Player";
 
     // Body coverage: must have (top AND bottom) OR dress
     if (req.body_coverage) {
         if (!eq['dress'] && (!eq['top'] || !eq['bottom'])) {
-            issues.push("Emma needs to be wearing a top and bottom, or a dress.");
+            issues.push(who + " needs to be wearing a top and bottom, or a dress.");
         }
     }
 
@@ -1994,7 +1997,7 @@ setup.validateClothing = function() {
     for (var i = 0; i < always.length; i++) {
         var s = always[i];
         if (!eq[s]) {
-            issues.push("Emma needs to put on " + s + ".");
+            issues.push(who + " needs to put on " + s + ".");
         }
     }
 
@@ -2002,7 +2005,7 @@ setup.validateClothing = function() {
     var cond = req.conditional || {};
     for (var slot in cond) {
         if (cond.hasOwnProperty(slot) && !eq[slot] && !flags[cond[slot].until_flag]) {
-            issues.push(cond[slot].message || "Emma needs " + slot + ".");
+            issues.push(cond[slot].message || who + " needs " + slot + ".");
         }
     }
 

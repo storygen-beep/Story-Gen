@@ -226,7 +226,7 @@ The shape:
   prose is allowed to spend.
 
 Both auto-fire on entry through `selectAutoFireCanvasForLocation`, which picks the highest-priority
-valid **non-repeatable** canvas and skips every repeatable (`v2.py:4453-4471`). The flag gate is
+valid **non-repeatable** canvas and skips every repeatable (`v2.py:4456-4474`). The flag gate is
 what guarantees order — no schedule is needed.
 
 **The checker follows the boot into the capstone.** Since 2026-09-25, `gates.py` walks the
@@ -234,7 +234,7 @@ funnel from the starting canvas, through its location exit, into a one-time canv
 whose trigger flags the funnel has set, and judges the handover at the end of *that*. Before, it
 stopped at the boot's exit and judged the hop to the capstone as if it were the handover. Node ids in
 the funnel may be bare (`"hall"`) or qualified (`"canvas_opening.hall"`); the engine keeps the last
-segment (`v2.py:13716`), and so does the walk.
+segment (`v2.py:13719`), and so does the walk.
 
 ⚠️ **This is not a size cut.** Build the opening at full designed size; the engine plays a node
 chain back one screen at a time. "Two canvases" is about *what each one is for*, not about brevity.
@@ -257,7 +257,7 @@ describing the second screen and calling it the first.
 
 **2 · There may be a character screen in front of the game, and its words are not ours.**
 `[player] customizable = true` with one `[[player.customization_fields]]` builds a
-`CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1065`, `v2.py:9251`). Its
+`CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1065`, `v2.py:9254`). Its
 headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
 story"*, *"Continue to Game"*. The only authored
 text on it is `player_description` (`v2.py:849`); an author who does not know that ships the
@@ -361,7 +361,7 @@ The failure, computed exactly the way the gate computes it:
 
 ```
 [time] starting_hour = 7                                  07:00
-node -> node, no time declared -> default 3 min           07:03      v2.py:14697
+node -> node, no time declared -> default 3 min           07:03      v2.py:14700
 node -> node, no time declared -> default 3 min           07:06
 exit: time_progression_minutes = 30, to the_diner         07:36
 
@@ -416,7 +416,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Arming a system is not the same as putting a door to it on the screen — and for the wardrobe the engine already put one there.
 >
 > Declaring `wardrobe_location` renders `[[Change Clothes->WardrobePage]]` on that location's screen
-> unconditionally (`v2.py:10148`, and `:10100` for the entry-gated variant); `shop_location` does
+> unconditionally (`v2.py:10151`, and `:10103` for the entry-gated variant); `shop_location` does
 > the same with `Browse Clothes` (`:10153`, `:10105`). It is above the portrait row and above the
 > activity list, on every visit, needing nothing from you.
 >
@@ -434,7 +434,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 >
 > A clothing condition that names a property only unobtainable garments carry is dead, and so is
 > everything gated behind it — an arc step that can never be entered, and every step after it.
-> The shop only lists a garment that is not `initial` and has `price > 0` (`v2.py:2077`).
+> The shop only lists a garment that is not `initial` and has `price > 0` (`v2.py:2080`).
 >
 > **So the check is two-part:**
 >
@@ -454,7 +454,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Nothing non-repeatable may live at the `shop_location` or the `wardrobe_location`.
 >
 > Both injected links are emitted **inside** the `<<if _autoFire>><<goto _autoFire>><<else>>`
-> branch (`v2.py:9902` and `:9949`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
+> branch (`v2.py:9905` and `:9952`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
 > *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
 > the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
 > and note that most corpus shop locations are bare rooms for exactly this reason.
@@ -581,7 +581,7 @@ work. What is never correct is a hub with **no conditions at all**: it puts that
 portrait on a location screen from turn one, however well the first hub is gated.
 
 A non-repeatable canvas renders **no portrait** — `selectNpcPortraitCanvasesForLocation` skips
-`if (!c.isRepeatable) continue` (`v2.py:4482-4487`) — so the meeting cannot leak onto the location
+`if (!c.isRepeatable) continue` (`v2.py:4485-4490`) — so the meeting cannot leak onto the location
 screen as a face, and the hub cannot appear before the meeting has fired.
 
 > ### ⚠️ `requires_npc` does NOT gate the auto-fire path. This corrects v1.
@@ -590,15 +590,15 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > in the engine, that is **false** for a canvas that auto-fires:
 >
 > ```
-> getStoryCanvasRedirect              v2.py:5406
->   -> selectAutoFireCanvasForLocation    v2.py:4893
->     -> isCanvasValid                    v2.py:5057
+> getStoryCanvasRedirect              v2.py:5409
+>   -> selectAutoFireCanvasForLocation    v2.py:4896
+>     -> isCanvasValid                    v2.py:5060
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:12231` and read on the random-encounter selector
-> (`v2.py:5749`), the substitution rules (`v2.py:5828`), and — through `setup._npcPresentForCanvas`
-> (`v2.py:5027`) — the solo lane (`v2.py:4968`, `:5580`) and the launcher (`v2.py:3110`).
+> `requiresNpc` is emitted at `v2.py:12234` and read on the random-encounter selector
+> (`v2.py:5752`), the substitution rules (`v2.py:5831`), and — through `setup._npcPresentForCanvas`
+> (`v2.py:5030`) — the solo lane (`v2.py:4971`, `:5583`) and the launcher (`v2.py:3113`).
 > **None of them is auto-fire.**
 >
 > Consequence: a meeting bound to a bar with `requires_npc`, whose character's schedule puts him
@@ -639,21 +639,21 @@ npc      = "npc_theo"     # ← RIGHT.
 (`template_import.py:906-913`), and it is built with named arguments only
 (`:2302-2310`), so a canvas-level `npc` key is dropped with **no error, no warning, and a green
 build**. The field the engine reads is `TemplateTrigger.npc` (`:642`), carried through
-`game_graph.py:311` into trigger metadata, out at `v2.py:11656`, and emitted as `npcId`
-(`v2.py:11713`).
+`game_graph.py:311` into trigger metadata, out at `v2.py:11659`, and emitted as `npcId`
+(`v2.py:11716`).
 
 **Three things ride on that one key, and all three fail together.**
 
 1. **The face.** `renderNpcPortraits` and its selector both bail on `if (!c.npcId) continue`
-   (`v2.py:5140`, `v2.py:4662`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
+   (`v2.py:5143`, `v2.py:4665`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
    the empty string at every location, for every hour, for the whole run.
 2. **The presence gate.** The portrait renderer is where a character's hours are actually enforced:
    it reads their declared `[[npcs.schedules]]` and compares `getNpcLocation` to where the player is
-   standing (`v2.py:5176-5179`). Lose the portrait and you lose the check — the surface stays
+   standing (`v2.py:5179-5182`). Lose the portrait and you lose the check — the surface stays
    clickable in an empty room at any hour.
 3. **The label.** A canvas with no `npcId` falls through to the solo path, which does not skip it
-   (`v2.py:5259`) and writes the canvas's own `displayName` straight into the link
-   (`v2.py:5290`). The portrait path would have written the resolved character name. So the title
+   (`v2.py:5262`) and writes the canvas's own `displayName` straight into the link
+   (`v2.py:5293`). The portrait path would have written the resolved character name. So the title
    you wrote for the author's benefit becomes the words on the player's screen — `@` tokens and all,
    because `name` is not a field the engine resolves tokens in (`engine.md` §43).
 
@@ -691,7 +691,7 @@ where it genuinely is a top-level key.
 
 ⚠️ **One location shows one canvas per character.** The renderer collects every valid repeatable
 canvas for an NPC and keeps the highest `priority`, preferring affordable over cost-blocked
-(`v2.py:5125-5158`). Three surfaces for one person in one room is not three rows — it is one face
+(`v2.py:5128-5161`). Three surfaces for one person in one room is not three rows — it is one face
 showing whichever ranks highest right now. That is the intended shape and it composes with the
 tier ladder, but decide the priorities on purpose: a hub at 6 sitting under an escalation at 7 means
 the escalation replaces it whenever its conditions hold.
@@ -699,7 +699,7 @@ the escalation replaces it whenever its conditions hold.
 ### So a second surface for the same person in the same room is a NODE INSIDE THE FIRST.
 
 Written as its own canvas, a talk screen cannot take `npc` without the hub swallowing it (the
-selector keeps one canvas per character, `v2.py:4942-4946`), so it lands in the solo lane — the one
+selector keeps one canvas per character, `v2.py:4945-4949`), so it lands in the solo lane — the one
 that holds Sleep and Shower and attaches no name to anything — with its button text as its only
 identity. Folding it into the hub does not bury it: **a node has no priority.** Priority ranks
 canvases competing for one face. A node is reached by a choice.
@@ -745,7 +745,7 @@ the-company's entire first meeting with the player's employer is **80 words**:
 Role, then the look, then a beat. That is the whole thing.
 
 **Where the player cannot yet know the name**, set `speaker = "unknown"` on the `dialog` block and
-the engine prints **"Stranger:"** (`v2.py:14600-14606`); switch to the NPC speaker once names have
+the engine prints **"Stranger:"** (`v2.py:14603-14609`); switch to the NPC speaker once names have
 been exchanged.
 
 ⚠️ **A meeting with no `dialog` block is not a meeting.** The person is in the room. If they do not
@@ -813,7 +813,7 @@ strangers. So this rule is a choice backed by field evidence, not a universal la
 
 ⚠️ **Sequence the cast in waves.** Not everyone is reachable on day one. Stage the entrances so each
 arrival is a punctuation mark. For a character who arrives mid-game, **withhold their schedule until
-the meeting fires** — `getNpcsWithSchedules` (`v2.py:3537`) surfaces every declared NPC on the
+the meeting fires** — `getNpcsWithSchedules` (`v2.py:3540`) surfaces every declared NPC on the
 Schedule page from day one regardless of any gate, so a schedule given early spoils the entrance.
 
 ### The same flag belongs on that character's quest cards
@@ -832,8 +832,8 @@ when = [ { flag = "met_wade", subject = "player", op = "is_true" },
 ```
 
 The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
-(`v2.py:16442`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
-(`v2.py:16209`), so an unmet character renders **no heading and no section** — the roster fills in
+(`v2.py:16445`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
+(`v2.py:16212`), so an unmet character renders **no heading and no section** — the roster fills in
 as the player meets people, which is what the field ships (the-company's cast table is
 `<<if $player.met[_char.id]>>` per row).
 
@@ -1047,7 +1047,7 @@ no kin word at all      the canteen · the night shift
 > a place. The label is the answer to *"who is this"*, which is the standing question this whole
 > rule exists to keep answered.
 
-⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:15986-15988`), which is the safe
+⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:15989-15991`), which is the safe
 default.
 
 ⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
@@ -1064,7 +1064,7 @@ has to remember who "Stepsister" is.
 >
 > A hard-coded label contradicts the player's pick or has to dodge it. The label exists to say what
 > he is to her, and that is the one thing the picker already knows. The generator resolves tokens
-> in this field (escape first, then resolve, `v2.py:15985`; `.rel` at `v2.py:15360`), and the
+> in this field (escape first, then resolve, `v2.py:15988`; `.rel` at `v2.py:15363`), and the
 > lint `the label under the name` flags a hard-coded label on any character the player can rename.
 >
 > A **fixed** character still takes a plain string — `mother`, `professor` — and a
@@ -1118,7 +1118,7 @@ first-contact flag per character (F5, "Re-measured 2026-09-02").
 - **Every `npc=` hub sits behind a non-repeatable meeting** that names that character —
   the flag on the first hub, and **no** hub anywhere left with zero conditions.
 - **Gate the meeting on a schedule or a flag — `requires_npc` does not gate auto-fire**
-  (`v2.py:5057`).
+  (`v2.py:5060`).
 - **A meeting is ~100–170 words and somebody speaks.**
 - **Role before name.** Swap description for name on the meeting flag where the reference matters.
 - **The flag belongs to a scene that meets them.** `doors_open`, set by a scene that names nobody, is the cold-spawn hub in a coat.

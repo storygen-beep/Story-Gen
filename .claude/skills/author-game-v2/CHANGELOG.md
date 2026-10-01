@@ -5,6 +5,26 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E1b: the clothing warning names the player, not "Emma" (World and Systems PRD, Phase 7; GLOBAL runtime text)
+
+**Why.** PRD E1b: `setup.validateClothing` hard-coded "Emma" in all three of its warnings.
+
+**What changed.** `generators/v2.py` (+3 lines): the three warnings read `$player.name` (customization
+included), falling back to "Player" as the hint code does. `references/engine.md` §17 gains two lines.
+The built script changes in every clothing game: members_only, billable_hours, orientation and vesper
+(9 lines each in `index.html`; probation and the_balance have clothing off and are byte-identical).
+**No player sees the change today:** nothing in `v2.py` or any game calls `setup.validateClothing`.
+New test file `apps/game_generation/tests/test_clothing_warning_name.py` (3 tests; node runs the built
+function with a named and an unnamed player; fails on the old code). 417 `v2.py` cites in SKILL.md
+and references moved +3 through the edit's line map, each checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures as `ed2f1c6`, nothing new. Skill pytest
+passed; `--selfcheck` current, orphans 3; `cite_check` 0 drifted in SKILL.md + references.
+
+**Words:** +26, running total 140,654 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine E1: the importer rejects bad conditions (World and Systems PRD, Phase 7; GLOBAL, build-time only)
 
 **Why.** WS-D10 step 1. A condition with an unknown type, key or operator imported clean and failed
