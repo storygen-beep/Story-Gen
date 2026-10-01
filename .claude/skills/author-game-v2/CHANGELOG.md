@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W5 · PROTECTED (tools, LO approved, Q9): pitch_pack.py threads and the new person
+
+**Why.** WS-D2: two Pitchers take the top two most-owed people and the third pitches a step in a declared thread
+of her life, and may add one new person who belongs to it. The pack is the Pitcher's whole world, so it has to
+carry the threads and allow that one person.
+
+**What changed (`scripts/pitch_pack.py`).**
+- `--thread <id>` (main), passed to `idea_pack()` and `pack()`.
+- A THREADS section in both packs (`_print_threads`): each thread's id, name, person, place, system and link into
+  the hook; with `--thread`, that thread only, plus "may add ONE new person who belongs to it: name, age (18+),
+  thread. Zero new places." A thread person missing from `want.cast`, or a place missing from PLACES, prints as a
+  fact, never a score.
+- THE PROMISE prints a threads line ("N declared (THREADS below)" or "not declared"); both `--json` promise dicts
+  carry `threads`.
+- RELATIONSHIPS: "The caller gives the top two to two Pitchers, plus one thread (THREADS) to the third" (was "the
+  top three to the three Pitchers"); the MOST OWED comment says the same.
+- PEOPLE lines (both packs) and the closing lines allow one new person in a thread pitch's thread.
+- `--person` accepts an unknown person only with `--thread` ("new person … joins thread …"); without it, still
+  "unknown person".
+- The docstring and the kinds line make the moment kind a hint, not the assignment ("— a hint for a Pitcher, not
+  its assignment"; was "— one per Pitcher").
+
+**Tests.** `tests/test_pitch_pack_ic2.py`: the THE PROMISE "not declared" counts go 7→8 and 5→6 (the threads
+line). New `tests/test_pitch_pack_threads.py` (6 tests): THREADS section and facts, `--thread` filter and unknown
+thread, new person only with a thread (idea and built packs), no threads, JSON promise, the top-two caller text.
+The ic2 kinds pin (`three least used: …`), ic3 `--person` and dc1 pass unchanged.
+
+**Verified.** pytest 468 passed (462 + 6); a scratch `v2_state.json` with `want.threads` prints the THREADS section
+(`pitch_pack.py fx --thread dating --person npc_new`); `cite_check.py`: SKILL.md + references/ 0 wrong (baseline
+0), no `pitch_pack.py:NNN` cite exists; `--selfcheck` current (orphans 3). No `--ship` run: pitch_pack scores
+nothing and no gate reads it.
+
+**Words:** 0 (scripts are not counted), running total 140,016 / 149,283.
+
+---
+
 ## 2026-10-01 — B7 · PROTECTED (A13, LO approved, WS-D11): the reader's test 1 accepts strangers
 
 **Why.** Billable Hours finding F9: test 1 asked every sexual step for an earlier canvas showing his want, so a
