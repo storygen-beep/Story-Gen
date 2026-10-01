@@ -202,15 +202,17 @@ challenged twice and was right both times.
 | | |
 |---|---|
 | per explicit beat | **3+ words from the frozen list** |
-| across the whole game | **7.5–9.3% of beats carry 3+** |
+| across the whole game | **7.5% of beats carry 3+**, a floor |
 
-The band is the reference game's, held across eight years and twelve-fold growth.
+The floor comes from the reference game. Re-measured 2026-10-02 on ten snapshots of its source
+(2018–2026; the original method was lost), its share is 6.8–11.3% depending on how the code is
+cleaned out, and the 2026-10-02 word list moves it by at most 0.11 points. 7.5 stays, a lenient floor.
 
 > ⚠️ **It is a FLOOR. Its upper comparison is meaningless — do not read a game scoring far above it
 > as "too hot."** That reading has been wrong twice and cost one game a dilution pass it never
 > needed. Two independent reasons, both measured 2026-08-12:
 >
-> - **Different denominators.** The 7.5–9.3% band counts whole-source *passages* — combat, systems
+> - **Different denominators.** The reference band counts whole-source *passages* — combat, systems
 >   and UI included, 15,587 of them. `gates.py` counts beats in **location prose only**. Not the
 >   same scale, so the two numbers were never comparable.
 > - **The reference is the coldest game in its own genre.** Across 18 shipped sandboxes scored on

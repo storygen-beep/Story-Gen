@@ -104,16 +104,16 @@ SHARE_GATES = {"location fill", "explicit floor", "explicit in repeatable",
                "an explicit beat carries a clip", "traversal heat"}
 
 EXPLICIT_BEAT_FLOOR = 7.5
-# Share of beats carrying 3+ explicit words. DoL held 7.5%-9.3% across eight
-# years and 12x growth. Unlike raw sex-word share (which fell 3.00% -> 0.96% as
-# systems and UI outgrew prose), this ratio is stable, so it is the usable floor.
-# It is also robust to word-list choice: two different lists both put DoL at
-# 8-10%.
+# Share of beats carrying 3+ explicit words. DoL's band, re-measured 2026-10-02 on ten
+# gitgud snapshots 2018-11..2026-09 (the 2026-08-11 text preparation was lost): three ways
+# of removing the code give 6.8%-11.3%, and list v2 moves DoL by +0.00..+0.11 points. 7.5
+# stays as a lenient floor. Raw sex-word share fell 3.00% -> 0.96%; this ratio holds. Scripts
+# and table: ~/Documents/Great_Games_Study_20260926/round5/dol_snapshots/ (score_dol.py).
 #
 # ⚠️ THIS IS A FLOOR. ITS UPPER COMPARISON IS MEANINGLESS. Do not read a game
 # scoring far above it as "too hot". Two independent reasons:
 #
-#   1. DIFFERENT DENOMINATORS. The 7.5-9.3% band is per DoL *unit* = a passage in
+#   1. DIFFERENT DENOMINATORS. The DoL band is per DoL *unit* = a passage in
 #      the whole source, combat/systems/UI included: its file carries 15,587
 #      <tw-passagedata> entries, matching the "15.6k units" this header cites.
 #      THIS gate counts beats in LOCATION PROSE ONLY. Not the same scale.
@@ -305,13 +305,13 @@ ASCENT_TIERS = 3
 # easiest way to mis-measure a game.
 IS_REPEATABLE_DEFAULT = True
 
-# Frozen explicit-word list. Frozen on purpose: the absolute share swings ~3x
-# with list choice, so a floating list makes runs incomparable. Change it only
-# with a version bump and a re-baseline of every game.
+# Frozen explicit-word list, VERSION 2 (2026-10-02: grop, tit(s|ty|ties), ass(es)). Frozen on
+# purpose: the absolute share swings ~3x with list choice, so a floating list makes runs
+# incomparable. Change it only with a version bump and a re-baseline of every game.
 EXPLICIT = re.compile(
-    r"\b(cock|dick|penis|cunt|puss|clit|tits?\b|breast|nipple|ass\b|arse|anal|balls"
+    r"\b(cock|dick|penis|cunt|puss|clit|tit(?:s|ty|ties)?\b|breast|nipple|ass(?:es)?\b|arse|anal|balls"
     r"|fuck|suck|blowjob|handjob|cum|semen|orgasm|moan|naked|nude|undress|horny"
-    r"|arous|lust|lewd|slut|whore|thrust|penetrat|grope|erect|masturbat|vagina"
+    r"|arous|lust|lewd|slut|whore|thrust|penetrat|grop|erect|masturbat|vagina"
     r"|kiss|lick)", re.I)
 
 # ── The field's OWN word list, and why this is not `EXPLICIT` above ───────────
@@ -7044,7 +7044,7 @@ def run_gates(model, game, state=None):
 
     # G2 — explicit floor.
     # ⚠️ A BARE PASS HERE MEANS ALMOST NOTHING, and the headline has to say so.
-    # This floor is derived from the reference game's own 7.5-9.3% band — and that
+    # This floor sits inside the reference game's own band (6.8-11.3%) — and that
     # game is the COLDEST of 18 shipped sandboxes measured on this same word list
     # (field median 33.3%). A game landing on 7.6% is inside the reference's historical
     # range and still four times colder than its genre. Until a field-comparable threshold exists (see the constant),
@@ -7066,7 +7066,7 @@ def run_gates(model, game, state=None):
     # are cold — the shape this gate exists to catch.
     #
     # ⚠️ EXPLICIT_BEAT_FLOOR HAS NOT BEEN RE-BASELINED ON THIS DENOMINATOR, and the
-    # honest consequence is that the floor is now LENIENT, not strict. The 7.5-9.3% band
+    # honest consequence is that the floor is now LENIENT, not strict. The reference band
     # was measured on the reference game over all its beats; a repeatable-only share is
     # >= an all-beats share for any game whose one-shots are colder than its loops.
     # Re-baselining needs the reference game segmented by repeatability and that has

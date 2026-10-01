@@ -5,6 +5,56 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Billable B6 (PROTECTED, tools): EXPLICIT list version 2, the floor re-measured and kept
+
+**Why.** The Billable Hours test found EXPLICIT blind to "groping" (the stem was `grope`); `tits?\b` and
+`ass\b` miss "titties" and "asses" the same way. The list's own rule says a change needs a version bump
+and a re-baseline of every game. LO's yes covers the tools (protected list); LO chose to rebuild the
+reference measurement (2026-10-02) and then to keep the floor at 7.5 (WS-D30).
+
+**What changed.**
+- `scripts/gates.py` EXPLICIT, now **version 2**: `grop` (was `grope`), `tit(?:s|ty|ties)?` (was `tits?`),
+  `ass(?:es)?` (was `ass`). The version is in the comment above the list. Nothing else in the list moved.
+- `EXPLICIT_BEAT_FLOOR` stays **7.5**. Its comment now says: the band was re-measured 2026-10-02 on ten
+  gitgud snapshots (2018-11 to 2026-09); the 2026-08-11 text preparation was lost; three ways of removing
+  the code give 6.8–11.3%; list v2 moves the reference game by +0.00 to +0.11 points; 7.5 stays as a
+  lenient floor. "Valid as a floor / invalid as a target" is kept. The gate's own comments (G2) and
+  `references/register.md` "The measured targets" and `SKILL.md` commitment 3 drop "7.5–9.3%, held
+  eight years" for the same facts. Numbers only; no text from the reference game.
+- `scripts/tests/test_gates_explicit_v2.py` (new): the inflected forms count once each; "title",
+  "assume", "assistant" and "come" still do not. Four of the cases fail on version 1.
+- No line shift: the gates.py edit is 13 lines out, 13 in, so no citation moved.
+
+**The re-measure** (scripts and tables outside the repo, in
+`~/Documents/Great_Games_Study_20260926/round5/dol_snapshots/`: `score_dol.py`, `versions.tsv`,
+`results_old_vs_new.json`, `RESULTS_B6.md`; the preparation comparison is `probe_strip.py`,
+`probe_all.py`, `RESULTS_STEP3.md`). Unit = one twee passage of the whole source; unit counts match the
+2026-08 note exactly (1,772 at the root, 15,629 at v0.5.11.9). Preparation from here on: "code removed,
+quoted text kept" (the one that reproduces an old point, 9.13% against 9.1%).
+| reference game | list v1 | list v2 |
+|---|---|---|
+| band over ten versions | 8.94–11.30% | 9.03–11.30% |
+| largest per-version move | | +0.11 points (2025-06) |
+The 2026-08-12 18-game field corpus is not on disk whole (12 of 18 files), so the field check was skipped.
+
+**Every game re-scored**, committed version exported from `HEAD`, list v1 against v2, vesper_two excluded:
+| game | explicit share before | after | colour before | after |
+|---|---|---|---|---|
+| billable_hours | 20.0% | 20.0% | PASS | PASS |
+| media_lab | 0.0% | 0.0% | FAIL | FAIL |
+| members_only | 13.6% | 13.6% | PASS | PASS |
+| orientation | 11.1% | 11.1% | PASS | PASS |
+| probation | 13.6% | 13.6% | PASS | PASS |
+| the_balance | 1.1% | 1.1% | FAIL | FAIL |
+| vesper | 13.3% | 13.3% | PASS | PASS |
+No game's row changes colour, and no gate headline changed in any game.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
+
+**Words:** +42, running total 144,386 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable B5 (PROTECTED, tools): the RUNGS stems take their inflections, field re-measured
 
 **Why.** The Billable Hours test found `--beat`'s act-rung readout blind to "gropes", "fondles" and
