@@ -168,7 +168,7 @@ belong here; only decisions, debts, and promises do.
       //   (`home_base`, `she_can_undress`); a few by both. Keep ONE list, not two.
       { "id": "…", "job": "…", "anchor": false, "fill": 3200, "has_cycling_pool": false,
         "labels": ["private", "has_mirror"],
-        "serves": { "needs": ["hunger"], "work": ["the Saturday shift"], "people": ["npc_…"] } }
+        "serves": { "needs": ["hygiene"], "work": ["the Saturday shift"], "people": ["npc_…"] } }
     ],
 
     // the body's clock. Declared here, gated by gate 29. the-meters.md M8-M10.

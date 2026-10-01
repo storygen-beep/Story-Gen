@@ -940,6 +940,10 @@ household's. What is fixed is the *form*.
 ]
 ```
 
+`shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
+rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
+(`the-surfaces.md` R5b.4); with it off, nothing reads it.
+
 The field, on the fourth field:
 
 | game | need | what it shuts |
@@ -973,8 +977,8 @@ games do write. **The half they drop is `shuts`.**
 
 Two shapes, and pick on purpose:
 
-- **decay** — falls every day whether or not she does anything. Right for energy (no hygiene or
-  hunger system: `engine.md` §30.1).
+- **decay** — falls every day whether or not she does anything. Right for energy, and for hygiene
+  when the game has it (`engine.md` §30.1).
 - **spent** — falls only when something takes it, via `costs` on a trigger (§27). Right for a
   resource.
 

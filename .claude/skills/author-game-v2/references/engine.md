@@ -1400,39 +1400,30 @@ So the fix for a value off the top of the ladder is **not** to drop the `max` �
 type and hard-fails the build on the other two. Give the top band a `max` at or above the trait's
 ceiling, or `cap` the terminal add (§29).
 
-### 30.1 A hygiene system is a deliberate non-feature — do not build one
+### 30.1 Hygiene is allowed, for routing — one need whose refill places always roll events
 
-This engine has no hygiene, hunger or thirst primitive, and that is a decision rather than an
-omission. It is recorded here because **`trait_status_text` makes one authorable in an afternoon** —
-its own spec comment says *"Use for hygiene/energy/hunger-style needs that recover on action"*
-(`template_import.py:4156-4160`) — so the temptation lands precisely on this section.
+Hygiene comes back as **one need, for routing only** (LO, WS-D5). Course of Temptation says why in its
+own code: needs exist for *"pushing the player to do things that lead to events (like venturing into
+co-ed showers to get clean)"* (`cot_27_database_needs.js:2-3`, round 9b `cards/needs.md`).
 
-The field's verdict, from section I's read of all 27 parseable corpus games:
+- **One need: hygiene.** Its refill places always roll an event — the shared shower is the model
+  (Course of Temptation's co-ed shower pool: 20 entries, round 9b `cards/needs.md`).
+- **Low hygiene has a cost, never a game over.** Course of Temptation: below 200, every relationship
+  gain drops to 1/10.
+- **An off switch:** a start choice (`the-surfaces.md` R5b.4); with it off, nothing reads hygiene and
+  no event is gated on it.
+- **Hunger only when a premise needs it.**
+- **Like every system, it leads to a person or a sex scene** (the shower's events): it gets a card
+  (`templates/cards/needs.md`) and is declared in `board.needs[]` (`the-meters.md` M8–M10).
 
-- **`degrees-of-lewdity` built hygiene and switched it off.** 1,273 writes of `$hygiene`, 1,207 of
-  them the identical `<<set $hygiene += 500>>`, feeding **one** read site: a seven-band ladder in a
-  widget that is never called. The string `speckless` appears exactly once in 15,626 passages —
-  inside that widget. Its initialiser says so outright:
+The pieces exist: `[player.trait_decay]` (§11) is the clock, and `trait_status_text` is the sidebar
+band its own spec comment names for this (`template_import.py:4156-4160`).
 
-  ```
-  <<set $hungerenabled to 0>>  /* unused */
-  <<set $thirstenabled to 0>>  /* unused */
-  <<set $hygieneenabled to 0>> /* unused */
-  ```
-
-- **`free-cities`, the corpus's deepest body simulator, never modelled it** (structure only; it
-  fails the adults-only rule). Its character objects carry eight numeric body properties and no
-  hygiene or arousal property at all. Its two most-read properties are `devotion` (1,019) and
-  `trust` (667) — above every body part.
-
-- **Corpus-wide, hygiene is the rarest of the four body subsystems**: 234 read sites against
-  arousal's 8,183 and clothes' 6,821. Two of 27 games clear 20 read sites, and one of those two is
-  a single 22-read variable that is 86% colour.
-
-**If a need must exist, make it a `costs` entry on the acts that need it** (§27) — a price the
-engine already enforces — rather than a meter with a ladder and a decay hook. Recorded in the same
-register as the per-character dialogue colour in §34: a known difference from the field, left
-unbuilt on purpose.
+**The old ban's evidence, kept as counts only** (both games fail the adults-only rule):
+`degrees-of-lewdity` built hygiene and switched it off (1,273 writes, one read site, in a widget that
+is never called); `free-cities` never modelled it; corpus-wide, hygiene has 234 read sites against
+arousal's 8,183. Those counts show hygiene is rare as a *description* of her. They say nothing against
+a need that routes her into a room where something happens.
 
 ---
 

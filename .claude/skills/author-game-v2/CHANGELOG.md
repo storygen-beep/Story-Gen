@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S7: hygiene comes back, for routing only (WS-D5)
+
+**Why.** WS-D5: `engine.md` §30.1 banned hygiene on evidence from two adults-only FAIL games
+(degrees-of-lewdity, free-cities). Course of Temptation uses needs to route her into event places, and says so in
+its code.
+
+**What changed.** `references/engine.md` §30.1 rewritten (only that subsection): hygiene allowed as one need whose
+refill places always roll events (the shared shower); low hygiene has a cost, never a game over; an off switch (a
+start choice, R5b.4); hunger only when a premise needs it; it leads to a person or a sex scene and gets a card
+(`templates/cards/needs.md`); CoT's code note (`cot_27_database_needs.js:2-3`) is the reason; the existing pieces
+named (`[player.trait_decay]`, `trait_status_text`, `template_import.py:4156-4160` re-read). The old evidence stays
+as counts only, labelled adults-only FAIL; the quoted DoL code block is cut. `references/the-meters.md` M8: one
+paragraph (`shuts` routes her; the off switch); M10's decay line no longer says "no hygiene". `templates/board.toml`
+needs comment: hygiene allowed for routing. The `hunger` examples in `the-board.md` (`the_kitchen` serves) and
+`state.md` (`serves`) become `energy` and `hygiene`. The-systems.md's ambient list was handled in S1a.
+
+**Verified.** `grep "deliberate non-feature"` gives 0 hits outside this changelog; `git diff` of engine.md is one
+hunk inside §30.1; gate 29 (`a need shuts a door`, `gates.py:8675`) is untouched and still reads every
+`board.needs[]` key; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +7, running total 142,141 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S6: meters live inside systems (light touch)
 
 **Why.** WS-D3: meters are now what systems write and read; `the-meters.md` did not say so.

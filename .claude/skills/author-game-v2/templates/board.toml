@@ -209,7 +209,8 @@ bands = [
 #      a fully wired loop that means nothing.
 #      Working example: the gym and the night shift each drop energy by 30,
 #      sleep restores it, and energy >= 20 gates "Go out". Spent means she
-#      cannot leave. (No hygiene need: engine.md §30.1.)
+#      cannot leave. Hygiene is allowed for routing: its refill place always rolls
+#      an event, it has an off switch, never a game over (engine.md §30.1).
 #
 #   ⚠️ Every need must be fillable somewhere on a room's `serves.needs`. A need
 #      with nowhere to fill it is a countdown to a wall.

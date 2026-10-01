@@ -80,7 +80,7 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   card, listed under the `work` key), which **people** are scheduled here. *That is the room's menu, and its length.*
 
   ```jsonc
-  { "id": "the_kitchen", "serves": { "needs": ["hunger"], "work": [], "people": ["npc_martin", "npc_denise"] } }
+  { "id": "the_kitchen", "serves": { "needs": ["energy"], "work": [], "people": ["npc_martin", "npc_denise"] } }
   ```
 
   ⚠️ **This replaced an `objects` list on 2026-08-18 and the reason is worth carrying.** The old
