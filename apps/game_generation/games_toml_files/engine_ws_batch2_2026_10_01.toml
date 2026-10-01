@@ -1,0 +1,395 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7 batch 2 (E3b, E5, E6, E8, E8-calls)
+#  Date: 2026-10-01
+#
+#  Media-free. Each engine item adds only what its own tests need.
+#
+#  E3b — "the ignore hook":
+#    ana_ask      ignore_after_days = 2, on_ignore = -2 Ana trust and the flag
+#                 ignored_ana; one reply round (+1 Ana trust).
+#    ana_loop     a repeatable chat (repeat_after_days = 1) with ignore_after_days = 1:
+#                 the ignore is per instance, and an ignored instance re-arms.
+#    sal_hello    a one-time chat with a reply and no ignore hook: the control.
+#
+#  E5 — "pay worked out from stats" ({type = "trait", trait, mult, add, min, max}):
+#    charm = 10 on the player. Every value below reads it.
+#    shift        a fast job paying charm * 2 + 50, max 100 (= 70); `flat` pays 20.
+#    pay_desk     a bar canvas whose choice pays charm + 5 (= 15) through the passage path.
+#    sal_hello    its reply adds charm - 5 (= 5) to tips: the phone reply path.
+#    sal_photo    a daily topic adding charm * 0.5 (= 5) to tips: the daily-chat path.
+#    daily tick   adds charm, max 3 (= 3) to tips each day: the day-rollover path.
+#
+#  E6 — "a rank per job":
+#    bar_job      a fast job with ranks: Barback from 0 xp (pays 10), Server from 2 (pays
+#                 charm + 20 = 30), Head server from 4 (pays 60). `flat` has no ranks.
+#
+#  E8 — "the phone reaching outward":
+#    kai_profile  a dating profile that matches at charm >= 5 (she has 10): on_match
+#                 +2 Kai trust and the flag matched_kai, once.
+#    lee_profile  matches only at charm >= 50: a like is not a match, nothing applies.
+#    secret       a chat app with conditions (has_secret_app): off the phone until the
+#                 flag is set, and its delivered chat (kai_secret) is not counted unread.
+#    camera       a custom app whose passage is a canvas id (pay_desk): its entry passage.
+#    notes        a custom app whose passage is a passage name (Canvas_pay_desk_Node_paid).
+#    time_cost    ana_ask's "Sure." takes 20 minutes; sal_call (a daily topic) 30; the feed's
+#                 Selfie 15; night_shift (a fast job) 420, which rolls the day from 18:00.
+#    taxi         a launcher with anywhere = true: its pay_desk option (home loc_bar) is
+#                 live from loc_home. `door` is the same option without it: "Not here".
+#    feed         post actions gated by corruption_min = 5: "Tease" reads gate_trait = charm
+#                 (10, open); "Bare" reads the default corruption (0, locked).
+#
+#  E8-calls — "a real call type":
+#    ben_rings    Ben calls once `started` holds; it rings for 60 minutes. Answer plays
+#                 ben_call (home loc_home); decline: -1 Ben trust and declined_ben; left
+#                 ringing it is missed: -3 Ben trust and missed_ben.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_batch2"
+title       = "Engine World and Systems Batch 2"
+description = "Engine fixture for the World and Systems PRD, Phase 7 batch 2."
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40, charm = 10, tips = 0, followers = 0 }
+flag_keys   = ["started", "ignored_ana", "matched_kai", "has_secret_app", "declined_ben", "missed_ben"]
+
+[[npcs]]
+id          = "npc_ana"
+name        = "Ana"
+description = "Fixture texter."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_kai"
+name        = "Kai"
+description = "Fixture match."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_lee"
+name        = "Lee"
+description = "Fixture no-match."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_ben"
+name        = "Ben"
+description = "Fixture caller."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_sal"
+name        = "Sal"
+description = "Fixture friend."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+[[phone.apps]]
+id    = "jobs"
+type  = "fast_jobs"
+label = "Jobs"
+
+[[phone.apps]]
+id    = "dates"
+type  = "dating"
+label = "Dates"
+
+[[phone.apps]]
+id           = "feed"
+type         = "social_feed"
+label        = "Feed"
+post_actions = [
+  { label = "Selfie", followers_min = 1, followers_max = 1, counter_trait = "followers", time_cost = 15 },
+  { label = "Tease", followers_min = 2, followers_max = 2, counter_trait = "followers", corruption_min = 5, gate_trait = "charm" },
+  { label = "Bare", followers_min = 3, followers_max = 3, counter_trait = "followers", corruption_min = 5 } ]
+
+[[phone.apps]]
+id         = "secret"
+type       = "chat"
+label      = "Secret"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "has_secret_app", operator = "is_true" } ] }
+
+[[phone.apps]]
+id    = "calls"
+type  = "calls"
+label = "Calls"
+
+# ── E8-calls: a real call ────────────────────────────────────────────────────
+
+[[phone.calls]]
+id           = "ben_rings"
+app          = "calls"
+caller       = "npc_ben"
+accept       = "ben_call"
+ring_minutes = 60
+[phone.calls.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[phone.calls.on_decline]
+effects     = [ { targetType = "npc", npcId = "npc_ben", trait = "trust", op = "add", value = -1 } ]
+flagEffects = [ { targetType = "player", flag = "declined_ben" } ]
+[phone.calls.on_missed]
+effects     = [ { targetType = "npc", npcId = "npc_ben", trait = "trust", op = "add", value = -3 } ]
+flagEffects = [ { targetType = "player", flag = "missed_ben" } ]
+
+[[phone.apps]]
+id       = "taxi"
+type     = "launcher"
+label    = "Taxi"
+anywhere = true
+options  = [ { text = "Ride to the bar", canvas = "pay_desk", show_when_locked = true, locked_text = "Not yet." } ]
+
+[[phone.apps]]
+id      = "door"
+type    = "launcher"
+label   = "Door"
+options = [ { text = "Ride to the bar", canvas = "pay_desk", show_when_locked = true, locked_text = "Not yet." } ]
+
+[[phone.apps]]
+id      = "camera"
+type    = "custom"
+label   = "Camera"
+passage = "pay_desk"
+
+[[phone.apps]]
+id      = "notes"
+type    = "custom"
+label   = "Notes"
+passage = "Canvas_pay_desk_Node_paid"
+
+[[phone.conversations]]
+id  = "kai_secret"
+app = "secret"
+npc = "npc_kai"
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Our secret."
+
+# ── E8: a dating match leads somewhere ───────────────────────────────────────
+
+[[phone.profiles]]
+id              = "kai_profile"
+app             = "dates"
+npc             = "npc_kai"
+bio             = "Fixture bio."
+match_condition = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "charm", operator = "gte", value = 5 } ] }
+[phone.profiles.on_match]
+effects     = [ { targetType = "npc", npcId = "npc_kai", trait = "trust", op = "add", value = 2 } ]
+flagEffects = [ { targetType = "player", flag = "matched_kai" } ]
+[phone.profiles.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+
+[[phone.profiles]]
+id              = "lee_profile"
+app             = "dates"
+npc             = "npc_lee"
+bio             = "Fixture bio."
+match_condition = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "charm", operator = "gte", value = 50 } ] }
+[phone.profiles.on_match]
+effects = [ { targetType = "npc", npcId = "npc_lee", trait = "trust", op = "add", value = 9 } ]
+[phone.profiles.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+
+# ── E3b: the ignore hook ─────────────────────────────────────────────────────
+
+[[phone.conversations]]
+id                = "ana_ask"
+app               = "messages"
+npc               = "npc_ana"
+ignore_after_days = 2
+[phone.conversations.on_ignore]
+effects     = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = -2 } ]
+flagEffects = [ { targetType = "player", flag = "ignored_ana" } ]
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Coffee tomorrow?"
+[[phone.conversations.blocks]]
+type    = "reply"
+round   = 1
+choices = [
+  { text = "Sure.", time_cost = 20, effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = 1 } ] },
+  { text = "Can't." } ]
+
+[[phone.conversations]]
+id                = "ana_loop"
+app               = "messages"
+npc               = "npc_ana"
+repeat_after_days = 1
+ignore_after_days = 1
+[phone.conversations.on_ignore]
+effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = -1 } ]
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "You up?"
+[[phone.conversations.blocks]]
+type    = "reply"
+choices = [ { text = "Yes." } ]
+
+[[phone.conversations]]
+id  = "sal_hello"
+app = "messages"
+npc = "npc_sal"
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Hey you."
+[[phone.conversations.blocks]]
+type    = "reply"
+choices = [ { text = "Hey.", effects = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", add = -5 } } ] } ]
+
+# ── E5: pay worked out from stats ────────────────────────────────────────────
+
+[[phone.daily_topics]]
+id              = "sal_photo"
+npc             = "npc_sal"
+player_message  = "Sent a photo."
+npc_response    = "Nice."
+effects         = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", mult = 0.5 } } ]
+
+[[fast_jobs]]
+id     = "shift"
+name   = "Shift"
+income = { type = "trait", trait = "charm", mult = 2, add = 50, max = 100 }
+
+[[fast_jobs]]
+id     = "flat"
+name   = "Flat"
+income = 20
+
+[[fast_jobs]]
+id        = "night_shift"
+name      = "Night shift"
+income    = 1
+time_cost = 420
+
+[[phone.daily_topics]]
+id             = "sal_call"
+npc            = "npc_sal"
+player_message = "Call Sal."
+npc_response   = "Talked for ages."
+cooldown       = "per_topic"
+time_cost      = 30
+
+[[fast_jobs]]
+id     = "bar_job"
+name   = "Bar"
+income = 5
+ranks  = [
+  { xp = 0, title = "Barback", income = 10 },
+  { xp = 2, title = "Server", income = { type = "trait", trait = "charm", add = 20 } },
+  { xp = 4, title = "Head server", income = 60 } ]
+
+[engine.daily_tick]
+traitEffects = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", max = 3 } } ]
+
+# ── places ───────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_bar"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "The bar."
+entry_from  = "loc_home"
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── E5: a choice that pays from her stats ────────────────────────────────────
+
+[[canvases]]
+id   = "pay_desk"
+name = "Pay desk"
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "desk"
+name   = "Desk"
+blocks = [ { type = "paragraph", content = "The till." } ]
+exit_block = { type = "choices", choices = [
+  { text = "Take the pay", targetType = "node", nodeId = "paid", effects = [ { targetType = "player", trait = "money", op = "add", value = { type = "trait", trait = "charm", add = 5 } } ] } ] }
+
+[[canvases.nodes]]
+id     = "paid"
+name   = "Paid"
+blocks = [ { type = "paragraph", content = "Paid." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+# ── E8-calls: the scene a call plays ─────────────────────────────────────────
+
+[[canvases]]
+id   = "ben_call"
+name = "Ben on the phone"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "BEN_ON_THE_LINE" } ]
+exit_block = { type = "location", text = "Hang up", config = { destinationType = "trigger", time_progression_minutes = 10 } }

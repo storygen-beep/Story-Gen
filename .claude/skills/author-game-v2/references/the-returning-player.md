@@ -30,9 +30,9 @@ that already exists.
 
 ## §1 — What the engine repairs for you, and what it cannot
 
-`setup.backfillStateDefaults` (`v2.py:16300`) runs from the `:passagestart` handler (`v2.py:16453`)
+`setup.backfillStateDefaults` (`v2.py:16631`) runs from the `:passagestart` handler (`v2.py:16784`)
 on **every passage**, and fill-if-absent merges the current default skeleton
-(`setup.stateDefaults`, `v2.py:3330`) into whatever the save carries. It never overwrites a value
+(`setup.stateDefaults`, `v2.py:3580`) into whatever the save carries. It never overwrites a value
 the player earned, and it is idempotent.
 
 **Add these freely. They reach an existing save on the next screen.**
@@ -69,7 +69,7 @@ stripped of. Same for `equipped`.
 ## §2 — Slugs are immutable release ids
 
 Every passage is named from slugs: `Canvas_<canvasSlug>_Node_<nodeSlug>`
-(`v2.py:12625`) and `Location_<locSlug>` (`v2.py:12638`). `$npcs` is keyed by the NPC's TOML `id`
+(`v2.py:12925`) and `Location_<locSlug>` (`v2.py:12938`). `$npcs` is keyed by the NPC's TOML `id`
 (`game_graph.py:144`), locations by theirs (`:190`), nodes by `"<canvas>.<node>"` (`:376`).
 
 A save stores the passage it is parked on — `Location_home_room`,
@@ -118,7 +118,7 @@ stat's own scale that must stay put.
 ## §5 — Don't change the game title
 
 We pin `Config.saves.id` to the stable project slug rather than the SugarCube default
-(`v2.py:3294`), so an **exported** `.save` file still validates across a title change.
+(`v2.py:3542`), so an **exported** `.save` file still validates across a title change.
 
 The in-browser slots are a different store. SugarCube namespaces them by `Story.domId`, which is
 `Util.slugify(title)` — the save store is created as `SimpleStore.create(Story.domId, …)` in
@@ -148,7 +148,7 @@ cover, a key, a tool the next beat needs owned or equipped — the save is **sof
 forward canvas stays shut, and the "go and get it" reaction points at something not in the wardrobe.
 
 > **Why no load-time fix covers it.** The state backfill fills `$player` at the top level only and
-> never fills into `wardrobe` (`v2.py:17072-17075`), because filling into it would hand back a garment
+> never fills into `wardrobe` (`v2.py:17403-17406`), because filling into it would hand back a garment
 > the player sold or discarded. A reaction that fires on the item *unequipped* with no ownership
 > check cannot tell never-granted from took-it-off, so the stranded save has no path to the item.
 
@@ -156,7 +156,7 @@ forward canvas stays shut, and the "go and get it" reaction points at something 
 reaction, never on a lone burn-once grant.** Put an idempotent
 `wardrobeEffects = [ { action = "add", item_id = "…" } ]` on the canvas that already reacts to *you
 don't have it / it isn't on* — the out-of-cover reaction, the locked-door bounce, the wardrobe room.
-`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1594`), so a normal player
+`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1622`), so a normal player
 who merely took it off is untouched and sees no notification. Only the stranded save is healed, the
 instant it lands on that screen.
 
@@ -174,10 +174,10 @@ Ship the grant that way from the start and the version boundary can never strand
 | `last_version` / `last_schema` | the release **currently running**, restamped by `:passagestart` whenever it changes |
 
 `*_schema` is a fingerprint of the trait/flag key surface and the corruption tiers
-(`Config.saves.version`, `v2.py:3477`). Two builds with the same number are join-compatible on
+(`Config.saves.version`, `v2.py:3740`). Two builds with the same number are join-compatible on
 everything §3 and §4 govern; two different numbers mean something in that surface moved.
 
-**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3498`) logs the comparison
+**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3761`) logs the comparison
 and returns. Throwing from there would abort the load with a dialog — that *is* the reject-on-mismatch
 handler the stamp was minted for, and it stays unused on purpose: the backfill heals the mismatches a
 player can actually hit, and refusing a save costs somebody their whole run over a difference they

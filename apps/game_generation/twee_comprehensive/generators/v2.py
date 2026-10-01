@@ -71,6 +71,11 @@ DEFAULT_STUDIO_NAME = "NutGames"
 DEFAULT_COMMUNITY_URL = "https://discord.gg/MJXBxEqsa"
 
 
+def _is_stat_value(v) -> bool:
+    """E5 — an effect value computed from her stats at runtime ({type = "trait", ...})."""
+    return isinstance(v, dict) and v.get("type") == "trait"
+
+
 class TweeComprehensiveGeneratorV2:
     """
     Simplified Twee generator for canvas-based stories.
@@ -1390,6 +1395,12 @@ class TweeComprehensiveGeneratorV2:
                 # project.metadata in place) resolves to the same answer.
                 if app.get("type") == "launcher":
                     app["options"] = self._launcher_options_for_payload(app.get("options"))
+                # E8 — a custom app wikifies `passage` inside the phone. A canvas id
+                # resolves to that canvas's entry passage (as a launcher option does);
+                # anything else is taken as a passage name. Idempotent, like the above.
+                if app.get("type") == "custom" and app.get("passage"):
+                    app["passage"] = self._canvas_entry_passages().get(
+                        self._sanitize_canvas_name(str(app["passage"])), app["passage"])
             phone_posts = phone_settings.get("posts", [])
             phone_profiles = phone_settings.get("profiles", [])
             # Validate and track post images and profile photos
@@ -1463,9 +1474,16 @@ class TweeComprehensiveGeneratorV2:
                             'canvas_id': 'phone',
                             'category': 'Social Media',
                         })
+            # E8-calls — a call's accept canvas resolves here to its entry passage, as a
+            # launcher option's does. Idempotent: writes beside `accept`, never over it.
+            phone_calls = phone_settings.get("calls", []) or []
+            for call in phone_calls:
+                call["accept_passage"] = self._canvas_entry_passages().get(
+                    self._sanitize_canvas_name(str(call.get("accept") or "")), "")
             phone_data_json = json.dumps({
                 "apps": phone_apps,
                 "conversations": phone_conversations,
+                **({"calls": phone_calls} if phone_calls else {}),
                 "posts": phone_posts,
                 "profiles": phone_profiles,
                 "daily_topics": phone_daily_topics,
@@ -1569,6 +1587,16 @@ class TweeComprehensiveGeneratorV2:
                 # E3 — the instance number of each repeatable chat. Only in a game that
                 # has one, so every other phone game keeps a byte-identical skeleton.
                 game_state_init["phone"]["conv_cycle"] = {}
+            if any(j.get("ranks") for j in self.fast_jobs_data):
+                # E6 — each job's own xp, read by its ranks. Only in a game with a ranked
+                # job, so every other game keeps a byte-identical skeleton.
+                game_state_init["fast_jobs"]["job_xp"] = {}
+            if phone_settings.get("calls"):
+                # E8-calls — call id -> {state, rang_minute, ...}. Only in a game with calls.
+                game_state_init["phone"]["calls"] = {}
+            if any(c.get("ignore_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3b — instance key -> the day it closed as ignored. Same opt-in rule.
+                game_state_init["phone"]["conv_ignored"] = {}
         # Schema signature stamped into every save via Config.saves.version: a
         # fingerprint of the trait/flag key surface and the corruption tiers, so a
         # build can tell whether a save was written against its own data shape.
@@ -2297,8 +2325,10 @@ setup.convCurrentKey = function(convId) {{
     var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
     return setup.convInstanceKey(convId, (ps.conv_cycle || {{}})[convId] || 0);
 }};
-// Answered = a reply sent; for a chat with no reply block, read.
+// Answered = a reply sent; for a chat with no reply block, read. E3b: an instance
+// closed as ignored is answered too, so a repeatable chat re-arms after it.
 setup._phoneConvAnswered = function(conv, ps, key) {{
+    if ((ps.conv_ignored || {{}})[key]) return true;
     var hasReply = (conv.blocks || []).some(function(b) {{ return b.type === 'reply'; }});
     if (!hasReply) return !!(ps.read_conversations || {{}})[key];
     var r = (ps.replies || {{}})[key];
@@ -2331,6 +2361,175 @@ setup._rearmPhoneConversation = function(conv, ps) {{
     }};
     return true;
 }};
+// E8 — an app with `conditions` is on the phone only while they hold.
+setup.phoneAppVisible = function(appOrId) {{
+    var app = appOrId;
+    if (typeof appOrId !== 'object') {{
+        var apps = (setup.phone_data || {{}}).apps || [];
+        app = null;
+        for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appOrId) {{ app = apps[i]; break; }} }}
+    }}
+    if (!app) return false;
+    return !(app.conditions && app.conditions.items) || setup.triggerConditionsSatisfied(app.conditions);
+}};
+// E8 — `time_cost` (minutes) on a phone action: a reply choice, a daily topic, a post
+// action, a fast job. Spent through advanceTime, so the day can roll (rent due, the daily
+// tick) exactly as on a wait button; the click handler commits the moment. Opt-in: an
+// action with no time_cost spends nothing and its label is unchanged.
+setup.spendPhoneTime = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    if (m > 0 && typeof window.advanceTime === 'function') window.advanceTime(m);
+}};
+setup.phoneTimeTag = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    return m > 0 ? ' · ' + m + 'm' : '';
+}};
+// The trait and flag effects a reply choice carries ({{effects, flagEffects}}), applied
+// with no canvas around them: a reply, and E3b's on_ignore.
+setup.applyPhoneEffectSet = function(src) {{
+    var effs = (src && src.effects) || [];
+    for (var e = 0; e < effs.length; e++) {{
+        var eff = effs[e];
+        if (eff.trait) {{
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
+        }}
+    }}
+    var feffs = (src && src.flagEffects) || [];
+    for (var f = 0; f < feffs.length; f++) {{
+        var fe = feffs[f];
+        // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
+        // is honored uniformly with passage-flow flag emission.
+        setup.applyAndNotifyFlag(fe.targetType || "player", fe.npcId || null, fe.flag, fe.op || "set");
+    }}
+}};
+// E3b — the ignore hook. The current instance of a chat with `ignore_after_days`
+// that has had no reply for that many days since it arrived closes as ignored:
+// ps.conv_ignored[key] = the day, and `on_ignore` applies once. Its own toast, so the
+// passage's pending effects are left alone. Returns true when it fired.
+setup._ignorePhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_ignored = ps.conv_ignored || {{}};
+    var key = setup.convCurrentKey(conv.id);
+    if (ps.conv_ignored[key] || setup._phoneConvAnswered(conv, ps, key)) return false;
+    var day = ((State.variables.game_state || {{}}).time_state || {{}}).day || 1;
+    if (day - (trig.triggered_day || 1) < conv.ignore_after_days) return false;
+    ps.conv_ignored[key] = day;
+    trig.answered_day = day;  // a repeatable chat counts its delay from here
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(conv.on_ignore);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+    return true;
+}};
+// ===== E8-calls — incoming calls =====
+// A call rings once its trigger holds: a badge and a toast (pull delivery), never a
+// covering pop-up. ps.calls[id] = {{state: ringing | answered | declined | missed,
+// rang_minute, ended_minute}}. Left ringing for ring_minutes (default 60) it is missed
+// and on_missed applies once; a missed call counts as ignored. One-time.
+setup.callerName = function(call) {{
+    var npc = ((State.variables || {{}}).npcs || {{}})[setup.resolveNpcId(call.caller)] || {{}};
+    return npc.name || String(call.caller || '').replace('npc_', '').replace(/_/g, ' ');
+}};
+setup._applyCallEffects = function(set) {{
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(set);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+}};
+// Runs on every passage and before any call screen or answer: time can pass on a wait
+// button without a passage, and a call past its window must not be answerable.
+setup._expirePhoneCalls = function(ps) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length || !ps) return;
+    ps.calls = ps.calls || {{}};
+    var now = setup.gameMinuteNow();
+    for (var i = 0; i < calls.length; i++) {{
+        var st = ps.calls[calls[i].id];
+        if (!st || st.state !== 'ringing') continue;
+        if (now - (st.rang_minute || 0) < (calls[i].ring_minutes || 60)) continue;
+        st.state = 'missed';
+        st.ended_minute = now;
+        setup._applyCallEffects(calls[i].on_missed);
+    }}
+}};
+setup._checkPhoneCalls = function(ps, firstScan, toasts) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length) return;
+    setup._expirePhoneCalls(ps);
+    for (var i = 0; i < calls.length; i++) {{
+        var c = calls[i];
+        if (ps.calls[c.id]) continue;
+        var trigCond = c.trigger ? c.trigger.conditions : null;
+        if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
+        ps.calls[c.id] = {{ state: 'ringing', rang_minute: setup.gameMinuteNow() }};
+        if (!firstScan) toasts.push(setup.resolveAtRefs(c.notify) || ('📞 ' + setup.callerName(c) + ' is calling'));
+    }}
+}};
+setup.ringingCalls = function(appId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    var st = ps.calls || {{}};
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{
+        return st[c.id] && st[c.id].state === 'ringing' && (!appId || c.app === appId);
+    }});
+}};
+setup._findCall = function(callId) {{
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.id === callId; }})[0] || null;
+}};
+// Answer: plays the accept canvas. Not mid-scene (the launcher's rule); the scene
+// returns her to the canvas's own home. Returns true when it navigated.
+setup.answerCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing' || !c.accept_passage) return false;
+    if (!setup.isRerenderSafe(State.passage)) return false;
+    st.state = 'answered';
+    st.ended_minute = setup.gameMinuteNow();
+    setup.closePhone();
+    Engine.play(c.accept_passage);
+    return true;
+}};
+setup.declineCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing') return false;
+    st.state = 'declined';
+    st.ended_minute = setup.gameMinuteNow();
+    setup._applyCallEffects(c.on_decline);
+    return true;
+}};
+setup._renderCalls = function(appId, appLabel) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var st = ps.calls || {{}};
+    var calls = ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.app === appId; }});
+    var placed = setup.isRerenderSafe(State.passage);
+    var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || 'Calls') + '</span><span class="phone-close">&times;</span></div>';
+    html += '<div class="phone-screen"><div class="phone-launcher phone-calls">';
+    var ringing = calls.filter(function(c) {{ return st[c.id] && st[c.id].state === 'ringing'; }});
+    for (var i = 0; i < ringing.length; i++) {{
+        var c = ringing[i];
+        html += '<div class="phone-daily-label">📞 ' + setup.callerName(c) + ' is calling</div>';
+        if (placed) html += '<a class="phone-daily-btn phone-call-answer" data-call-id="' + c.id + '">Answer</a>';
+        else html += '<div class="phone-daily-locked">Answer when you are free.</div>';
+        html += '<a class="phone-daily-btn phone-call-decline" data-call-id="' + c.id + '">Decline</a>';
+    }}
+    var past = calls.filter(function(c) {{ return st[c.id] && st[c.id].state !== 'ringing'; }});
+    past.sort(function(a, b) {{ return (st[b.id].ended_minute || 0) - (st[a.id].ended_minute || 0); }});
+    var words = {{ answered: 'answered', declined: 'declined', missed: 'missed' }};
+    for (var j = 0; j < past.length; j++) {{
+        html += '<div class="phone-daily-locked">' + setup.callerName(past[j]) + ' \u2014 ' + (words[st[past[j].id].state] || '') + '</div>';
+    }}
+    if (!ringing.length && !past.length) html += '<div class="phone-empty">No calls yet.</div>';
+    html += '</div></div>';
+    jQuery('.phone-frame').html(html);
+    setup._phoneView = 'calls';
+    setup._phoneApp = appId;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2345,6 +2544,7 @@ setup.checkPhoneConversations = function() {{
     for (var i = 0; i < convs.length; i++) {{
         var conv = convs[i];
         if (ps.triggered_conversations[conv.id]) {{
+            if (conv.ignore_after_days) setup._ignorePhoneConversation(conv, ps);
             if (conv.repeat_after_days && setup._rearmPhoneConversation(conv, ps) && !_firstScan) {{
                 _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
             }}
@@ -2380,6 +2580,7 @@ setup.checkPhoneConversations = function() {{
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         ps.triggered_profiles[prof.id] = true;
     }}
+    setup._checkPhoneCalls(ps, _firstScan, _phoneToasts);  // E8-calls
     if (_phoneToasts.length) setup._notifyPhoneDelivery(_phoneToasts);
 }};
 
@@ -2387,15 +2588,21 @@ setup.getPhoneUnreadCount = function() {{
     var ps = ((State.variables || {{}}).game_state || {{}}).phone;
     if (!ps) return 0;
     var count = 0;
-    // Unread conversations
+    // Unread conversations (E8: not in an app that is off the phone)
     var triggered = ps.triggered_conversations || {{}};
     var read = ps.read_conversations || {{}};
     var keys = Object.keys(triggered);
+    var _convApp = {{}};
+    ((setup.phone_data || {{}}).conversations || []).forEach(function(c) {{ _convApp[c.id] = c.app; }});
     for (var i = 0; i < keys.length; i++) {{
+        if (_convApp[keys[i]] && !setup.phoneAppVisible(_convApp[keys[i]])) continue;
         if (!read[setup.convCurrentKey(keys[i])]) count++;
     }}
     // Unviewed posts
     if (!ps.viewed_feed && Object.keys(ps.triggered_posts || {{}}).length > 0) count++;
+    // E8-calls — a ringing call, in an app that is on the phone
+    var _ring = setup.ringingCalls ? setup.ringingCalls() : [];
+    for (var rc = 0; rc < _ring.length; rc++) {{ if (setup.phoneAppVisible(_ring[rc].app)) count++; }}
     return count;
 }};
 
@@ -2468,6 +2675,8 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     var ps = sv.game_state.phone;
     if (!ps) return;
     roundNum = roundNum || 1;
+    // E3b — an instance closed as ignored takes no late reply (a stale button).
+    if ((ps.conv_ignored || {{}})[convId]) return;
     // Multi-round: store replies as array of {{round, choice}}
     if (!Array.isArray(ps.replies[convId])) {{
         // Backward compat: convert old int format
@@ -2498,25 +2707,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
             if (choiceIndex >= 0 && choiceIndex < choices.length) {{
                 var choice = choices[choiceIndex];
                 setup.pendingEffects = [];
-                var effs = choice.effects || [];
-                for (var e = 0; e < effs.length; e++) {{
-                    var eff = effs[e];
-                    if (eff.trait) {{
-                        setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
-                    }}
-                }}
-                var feffs = choice.flagEffects || [];
-                for (var f = 0; f < feffs.length; f++) {{
-                    var fe = feffs[f];
-                    // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
-                    // is honored uniformly with passage-flow flag emission.
-                    setup.applyAndNotifyFlag(
-                        fe.targetType || "player",
-                        fe.npcId || null,
-                        fe.flag,
-                        fe.op || "set"
-                    );
-                }}
+                setup.applyPhoneEffectSet(choice);
                 // doc 45 G4/G5 — quest + scheduled effects on chat reply choices
                 var qeffs = choice.questEffects || [];
                 for (var qi = 0; qi < qeffs.length; qi++) {{
@@ -2525,6 +2716,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
                 var seffs = choice.scheduleEffects || [];
                 for (var sj = 0; sj < seffs.length; sj++) {{ setup.scheduleEvent(seffs[sj]); }}
                 setup.showEffectNotification();
+                setup.spendPhoneTime(choice.time_cost);  // E8
             }}
             break;
         }}
@@ -2585,10 +2777,11 @@ setup.sendDailyChat = function(npcSlug, topicId) {{
     for (var e = 0; e < effs.length; e++) {{
         var eff = effs[e];
         if (eff.trait) {{
-            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
         }}
     }}
     setup.showEffectNotification();
+    setup.spendPhoneTime(topic.time_cost);  // E8
     setup.refreshPhoneView();
 }};
 
@@ -2600,6 +2793,7 @@ setup.openPhone = function() {{
     html += '<div class="phone-screen"><div class="phone-app-grid">';
     for (var i = 0; i < apps.length; i++) {{
         var app = apps[i];
+        if (!setup.phoneAppVisible(app)) continue;  // E8 — per-app conditions
         var iconHtml = app._icon_src
             ? '<img src="' + app._icon_src + '" class="phone-app-icon-img" alt="' + (app.label || app.id) + '">'
             : '<div class="phone-app-icon-letter">' + (app.label || app.id).charAt(0).toUpperCase() + '</div>';
@@ -2609,6 +2803,9 @@ setup.openPhone = function() {{
             var unread = 0;
             for (var t = 0; t < threads.length; t++) unread += threads[t].unreadCount;
             if (unread > 0) badge = '<span class="phone-app-badge">' + unread + '</span>';
+        }} else if (app.type === "calls") {{
+            var ringN = setup.ringingCalls(app.id).length;  // E8-calls — the ring badge
+            if (ringN > 0) badge = '<span class="phone-app-badge">' + ringN + '</span>';
         }}
         html += '<div class="phone-app-item" data-app-id="' + app.id + '" data-app-type="' + app.type + '">';
         html += '<div class="phone-app-icon-wrap">' + iconHtml + badge + '</div>';
@@ -2624,7 +2821,7 @@ setup.openPhoneApp = function(appId) {{
     var apps = (setup.phone_data || {{}}).apps || [];
     var appDef = null;
     for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appId) {{ appDef = apps[i]; break; }} }}
-    if (!appDef) return;
+    if (!appDef || !setup.phoneAppVisible(appDef)) return;  // E8 — a stale tap on a hidden app
     if (appDef.type === "chat") {{ setup._renderThreadList(appId, appDef.label); }}
     else if (appDef.type === "social_feed") {{ setup._renderSocialFeed(appId, appDef.label); }}
     else if (appDef.type === "dating") {{ setup._renderDatingApp(appId, appDef.label); }}
@@ -2633,7 +2830,8 @@ setup.openPhoneApp = function(appId) {{
     else if (appDef.type === "custom" && appDef.passage) {{ setup._renderCustom(appId, appDef.label, appDef.passage); }}
     else if (appDef.type === "fast_jobs") {{ setup._renderFastJobs(appId, appDef.label); }}
     else if (appDef.type === "bank") {{ setup._renderBank(appId, appDef.label); }}
-    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer); }}
+    else if (appDef.type === "calls") {{ setup._renderCalls(appId, appDef.label); }}
+    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer, appDef.anywhere === true); }}
     else {{ setup._renderPlaceholder(appDef); }}
 }};
 
@@ -2738,6 +2936,11 @@ setup.openChatThread = function(appId, npcSlug) {{
                     }}
                     // E3 — a past instance is history: no buttons, never pending.
                     if (conv._past) continue;
+                    // E3b — an ignored instance is closed: one line, no buttons.
+                    if ((ps.conv_ignored || {{}})[convKey]) {{
+                        html += '<div class="phone-ignored" style="color:#888;font-size:12px;font-style:italic;text-align:right;padding:4px 14px;">No reply.</div>';
+                        break;
+                    }}
                     // Show reply buttons
                     _hasPendingReply = true;
                     var replyPending = '';
@@ -2747,7 +2950,7 @@ setup.openChatThread = function(appId, npcSlug) {{
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + setup.phoneTimeTag(choices[ri].time_cost) + '</button>';
                     }}
                     html += '</div>';
                 }}
@@ -2792,7 +2995,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (ph.corruption_min != null && _corr < ph.corruption_min) {{
                 photoHtml += '<div class="phone-daily-locked">🔒 ' + setup.resolveAtRefs(ph.player_message) + '</div>';
             }} else if (npcDc.topic_days[ph.id] !== currentDayKey) {{
-                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + '</button>';
+                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + setup.phoneTimeTag(ph.time_cost) + '</button>';
             }}
         }}
         // Legacy "Say something" — per-NPC 1/day over non-photo topics.
@@ -2812,7 +3015,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             }}
             var shown = available.slice(0, 3);
             for (var sti = 0; sti < shown.length; sti++) {{
-                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + '</button>';
+                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + setup.phoneTimeTag(shown[sti].time_cost) + '</button>';
             }}
         }}
         if (photoHtml || sayHtml) {{
@@ -2889,7 +3092,7 @@ setup._renderSocialFeed = function(appId, appLabel) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var postActions = appDef.post_actions || [];
     if (postActions.length) {{
-        var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+        var _pct = ((sv.player || {{}}).core_traits || {{}});
         var _pd = ps.posted_days = ps.posted_days || {{}};
         var _dayKey = setup.getCurrentDayKey();
         html += '<div class="phone-post-composer">';
@@ -2898,12 +3101,13 @@ setup._renderSocialFeed = function(appId, appLabel) {{
             var cap = (act.daily_cap != null ? Number(act.daily_cap) : 1);
             var usedKey = appId + ':' + pa;
             var usedToday = (_pd[usedKey] && _pd[usedKey].day === _dayKey) ? _pd[usedKey].count : 0;
-            if (act.corruption_min != null && _corr < act.corruption_min) {{
+            // E8 — `corruption_min` is read against `gate_trait` (default corruption).
+            if (act.corruption_min != null && (_pct[act.gate_trait || 'corruption'] || 0) < act.corruption_min) {{
                 html += '<div class="phone-daily-locked">🔒 ' + (act.label || 'Post') + '</div>';
             }} else if (usedToday >= cap) {{
                 html += '<div class="phone-daily-locked">' + (act.label || 'Post') + ' ✓</div>';
             }} else {{
-                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + '</button>';
+                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + setup.phoneTimeTag(act.time_cost) + '</button>';
             }}
         }}
         html += '</div>';
@@ -2949,7 +3153,8 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var act = (appDef.post_actions || [])[actionIdx];
     if (!act) return;
-    var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+    // E8 — the gate reads `gate_trait` (default corruption), the same as the composer.
+    var _corr = ((sv.player || {{}}).core_traits || {{}})[act.gate_trait || 'corruption'] || 0;
     if (act.corruption_min != null && _corr < act.corruption_min) return;
     var _pd = ps.posted_days = ps.posted_days || {{}};
     var _dayKey = setup.getCurrentDayKey();
@@ -2965,6 +3170,7 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     setup.pendingEffects = [];
     setup.applyAndNotifyTrait('player', null, trait, 'add', gain, false, null);
     setup.showEffectNotification();
+    setup.spendPhoneTime(act.time_cost);  // E8
     setup._renderSocialFeed(appId, appDef.label || '');
 }};
 
@@ -3055,12 +3261,21 @@ setup.likeProfile = function(profileId) {{
     for (var i = 0; i < profiles.length; i++) {{ if (profiles[i].id === profileId) {{ prof = profiles[i]; break; }} }}
     if (!prof) return;
 
-    // Check match condition
-    var matchCond = prof.match_condition ? prof.match_condition.conditions : null;
+    // Check match condition. The importer checks `match_condition` as a v1.0 block
+    // itself (E1); the older `{{conditions = {{...}}}}` wrapping is read too.
+    var mc = prof.match_condition || null;
+    var matchCond = mc ? (mc.conditions || (mc.items ? mc : null)) : null;
     var isMatch = !matchCond || setup.triggerConditionsSatisfied(matchCond);
 
     if (isMatch) {{
+        var _firstMatch = !ps.matches[profileId];
         ps.matches[profileId] = {{ npc: prof.npc, profile_id: profileId }};
+        // E8 — on_match ({{effects, flagEffects}}) applies once, on the first match.
+        if (_firstMatch && prof.on_match) {{
+            setup.pendingEffects = [];
+            setup.applyPhoneEffectSet(prof.on_match);
+            setup.showEffectNotification();
+        }}
         // Show match overlay briefly
         var resolvedId = setup.resolveNpcId(prof.npc);
         var npcData = (sv.npcs || {{}})[resolvedId] || {{}};
@@ -3160,7 +3375,10 @@ setup._renderFastJobs = function(appId, appLabel) {{
         var j = jobs[i];
         var cd = fj.cooldowns[j.id] || 0;
         html += '<div class="phone-job-card"><div class="phone-job-name">' + j.name + '</div>';
-        html += '<div class="phone-job-meta">$' + j.income + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
+        var _rk = (j.ranks && j.ranks.length) ? setup.fastJobRank(j) : null;
+        if (_rk && _rk.rank) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.rank.title + (_rk.next ? ' · ' + _rk.xp + '/' + _rk.next.xp + ' xp' : '') + '</div>';
+        else if (_rk && _rk.next) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.xp + '/' + _rk.next.xp + ' xp</div>';
+        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(setup.fastJobIncome(j)) + setup.phoneTimeTag(j.time_cost) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
         if ((fj.xp || 0) < (j.xp_req || 0)) html += '<div class="phone-daily-locked">🔒 Need more XP</div>';
         else if (cd > 0) html += '<div class="phone-daily-locked">Again in ' + cd + 'd</div>';
         else html += '<button class="phone-job-btn" data-job-id="' + j.id + '">Work</button>';
@@ -3169,6 +3387,23 @@ setup._renderFastJobs = function(appId, appLabel) {{
     html += '</div></div>';
     jQuery('.phone-frame').html(html);
     setup._phoneView = 'fast_jobs'; setup._phoneApp = appId;
+}};
+// E6 — a rank per job. Her rank on a job is the last of its `ranks` whose xp she has
+// reached on that job (fast_jobs.job_xp[id], +1 per shift); its income replaces the
+// job's. A job with no ranks pays `income` and counts no job xp.
+setup.fastJobRank = function(job) {{
+    var fj = ((State.variables.game_state || {{}}).fast_jobs) || {{}};
+    var xp = ((fj.job_xp || {{}})[job.id]) || 0;
+    var ranks = job.ranks || [], cur = null, next = null;
+    for (var i = 0; i < ranks.length; i++) {{
+        if (xp >= (ranks[i].xp || 0)) cur = ranks[i];
+        else {{ next = ranks[i]; break; }}
+    }}
+    return {{ xp: xp, rank: cur, next: next }};
+}};
+setup.fastJobIncome = function(job) {{
+    var r = (job.ranks && job.ranks.length) ? setup.fastJobRank(job).rank : null;
+    return (r && r.income !== undefined) ? r.income : job.income;
 }};
 setup.doFastJob = function(jobId) {{
     var sv = State.variables;
@@ -3179,9 +3414,19 @@ setup.doFastJob = function(jobId) {{
     if ((fj.xp || 0) < (job.xp_req || 0)) return;
     if ((fj.cooldowns[jobId] || 0) > 0) return;
     setup.pendingEffects = [];
-    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', Number(job.income || 0), false, null);
+    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', setup.resolveEffectValue(setup.fastJobIncome(job)), false, null);
     setup.showEffectNotification();
     fj.xp = (fj.xp || 0) + 1;
+    if (job.ranks && job.ranks.length) {{
+        var _before = setup.fastJobRank(job).rank;
+        fj.job_xp = fj.job_xp || {{}};
+        fj.job_xp[jobId] = (fj.job_xp[jobId] || 0) + 1;
+        var _after = setup.fastJobRank(job).rank;
+        if (_after && _after !== _before && setup._notifyPhoneDelivery) {{
+            setup._notifyPhoneDelivery(['⭐ ' + job.name + ': ' + _after.title]);
+        }}
+    }}
+    setup.spendPhoneTime(job.time_cost);  // E8
     fj.cooldowns[jobId] = Number(job.cooldown_days || 0);
     setup._renderFastJobs(setup._phoneApp, '');
 }};
@@ -3227,7 +3472,7 @@ setup.bankTransfer = function(dir) {{
 // returns her to its own home. That is what keeps a phone-launched scene honest.
 //
 // PURE RENDER. This writes nothing. Everything moves inside the canvas, after the jump.
-setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
+setup._renderLauncher = function(appId, appLabel, options, noAnswer, anywhere) {{
     var sv = State.variables;
     var here = String((sv.player || {{}}).current_location || '');
     var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || '') + '</span><span class="phone-close">&times;</span></div>';
@@ -3244,7 +3489,10 @@ setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
         var text = String(o.text || '');
         if (!text || !o.passage) continue;   // resolved nowhere — never link nowhere
         var why = '';
-        if (!placed || String(o.locationId) !== here) {{
+        // E8 — `anywhere = true` on the app lifts the room lock (never the mid-scene
+        // one): the option plays from any room, and the scene returns her to its own
+        // home, which is a real move — that place's entry costs apply on arrival.
+        if (!placed || (!anywhere && String(o.locationId) !== here)) {{
             // WRONG PLACE. The engine writes this one, naming the room, because the
             // author cannot: one locked_text cannot also mean "not yet" and "not now".
             why = o.locationName ? ('Not here \\u2014 ' + o.locationName + '.') : 'Not here.';
@@ -3309,6 +3557,8 @@ setup.refreshPhoneView = function() {{
         setup.openChatThread(setup._phoneApp, setup._phoneNpc);
     }} else if (setup._phoneView === 'threadList' && setup._phoneApp) {{
         setup._renderThreadList(setup._phoneApp, '');
+    }} else if (setup._phoneView === 'calls' && setup._phoneApp) {{
+        setup._renderCalls(setup._phoneApp, '');
     }} else {{ setup.openPhone(); }}
 }};
 
@@ -3378,6 +3628,19 @@ jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
     if (link) { setup.closePhone(); Engine.play(String(link)); }
+});
+// E8-calls — Answer navigates (the navigation commits, like a launcher); Decline
+// navigates nowhere, so it commits.
+jQuery(document).on('click', '.phone-call-answer', function(e) {
+    e.preventDefault();
+    setup.answerCall(String(jQuery(this).data('call-id')));
+});
+jQuery(document).on('click', '.phone-call-decline', function(e) {
+    e.preventDefault();
+    setup.declineCall(String(jQuery(this).data('call-id')));
+    setup.updatePhoneBadge();
+    setup.refreshPhoneView();
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-job-btn', function(e) {
     e.preventDefault();
@@ -6481,7 +6744,7 @@ window.advanceDay = function() {{
                     dtTe.npcId || null,
                     dtTe.trait,
                     dtTe.op || 'add',
-                    Number(dtTe.value || 0),
+                    setup.resolveEffectValue(dtTe.value),
                     (dtTe.clamp === undefined || dtTe.clamp === null) ? false : dtTe.clamp,
                     (dtTe.cap === undefined) ? null : dtTe.cap
                 );
@@ -6734,6 +6997,43 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
 
 // Pending effects to show
 setup.pendingEffects = [];
+
+// E5 — one resolver for an effect's `value` at runtime, wherever the engine reads it
+// outside a passage (phone replies and on_ignore, daily chat topics, the daily tick,
+// fast-job income). A number passes through; {{type: "random", min, max}} rolls an
+// inclusive integer; {{type: "trait", trait, mult, add, min, max}} reads her player
+// trait: trait * mult (default 1) + add (default 0), rounded to a whole number, then
+// held inside min / max when given. Anything else is 0, never NaN.
+setup.resolveEffectValue = function(v) {{
+  if (v === null || v === undefined || v === '') return 0;
+  if (typeof v === 'object') {{
+    if (v.type === 'random') {{
+      var lo = Number(v.min) || 0;
+      var hi = (v.max === undefined || v.max === null) ? lo : Number(v.max);
+      return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+    }}
+    if (v.type === 'trait') {{
+      var ct = ((State.variables.player || {{}}).core_traits) || {{}};
+      var mult = (v.mult === undefined || v.mult === null) ? 1 : Number(v.mult);
+      var x = Math.round((Number(ct[v.trait]) || 0) * mult + (Number(v.add) || 0));
+      if (v.min !== undefined && v.min !== null) x = Math.max(x, Number(v.min));
+      if (v.max !== undefined && v.max !== null) x = Math.min(x, Number(v.max));
+      return x;
+    }}
+    return 0;
+  }}
+  var n = Number(v);
+  return isNaN(n) ? 0 : n;
+}};
+// What the player reads for a value before it is applied (a job's pay on the job board):
+// a range reads "8–14", a stat-based value reads what it would pay right now.
+setup.effectValueLabel = function(v) {{
+  if (v && typeof v === 'object' && v.type === 'random') {{
+    var hi = (v.max === undefined || v.max === null) ? v.min : v.max;
+    return (Number(v.min) || 0) + '–' + (Number(hi) || 0);
+  }}
+  return String(setup.resolveEffectValue(v));
+}};
 
 // Get current trait value helper
 setup.getTraitValue = function(targetType, npcId, trait) {{
@@ -13235,7 +13535,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in choice_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -13249,7 +13549,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in config_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -13295,7 +13595,7 @@ setup.castTraitRows = function (slug, npc) {
                         "effects": [
                             {"trait": e["trait"], "value": e["value"],
                              **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                            for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                            for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                         ],
                         "conditions": None
                     })
@@ -13309,7 +13609,7 @@ setup.castTraitRows = function (slug, npc) {
                             "effects": [
                                 {"trait": e["trait"], "value": e["value"],
                                  **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                                for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                                for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                             ],
                             "conditions": conditions
                         })
@@ -13451,7 +13751,9 @@ setup.castTraitRows = function (slug, npc) {
                         pass  # canvas_npc_map is canvas_id → name, not slug → name
                     # Use npc slug directly — formatFlagHint resolves at runtime
                     npc_display = conv_npc.replace("npc_", "").replace("_", " ").title()
-                for block in conv.get("blocks", []):
+                # E3b — an on_ignore effect set is a setter too, read like a choice.
+                _ignore_sets = [conv["on_ignore"]] if isinstance(conv.get("on_ignore"), dict) else []
+                for block in conv.get("blocks", []) + [{"type": "reply", "choices": _ignore_sets}]:
                     if block.get("type") != "reply":
                         continue
                     for choice in block.get("choices", []):
@@ -13467,6 +13769,27 @@ setup.castTraitRows = function (slug, npc) {
                                     "npc_name": npc_display or "player",
                                     "is_phone": True,
                                 }
+            # E8 — a dating profile's on_match sets flags too, and so does a call's
+            # on_decline / on_missed (E8-calls).
+            _setter_sets = [(p.get("id", ""), p.get("npc") or "", p.get("on_match"))
+                            for p in phone_settings.get("profiles", [])]
+            for _cl in (phone_settings.get("calls") or []):
+                _setter_sets += [(_cl.get("id", ""), _cl.get("caller") or "", _cl.get(k))
+                                 for k in ("on_decline", "on_missed")]
+            for _sid, _snpc, _set in _setter_sets:
+                prof = {"id": _sid, "npc": _snpc}
+                for fe in ((_set or {}).get("flagEffects") or []):
+                    flag_key = fe.get("flag")
+                    if flag_key and flag_key not in flag_unlock_map:
+                        flag_unlock_map[flag_key] = {
+                            "canvas_name": prof.get("id", ""),
+                            "canvas_id": None,
+                            "location": None,
+                            "schedule": None,
+                            "canvas_conditions": None,
+                            "npc_name": (prof.get("npc") or "").replace("npc_", "").replace("_", " ").title() or "player",
+                            "is_phone": True,
+                        }
 
         # Also register flags the ENGINE sets (not any canvas): the rent
         # eviction_flag (set when the weekly payment is missed past grace) and any
@@ -15890,13 +16213,21 @@ setup.carryRent = function (due, paid) {
         if isinstance(val, (int, float)):
             return str(float(val))
 
+        # E5 — a value computed from her stats at the moment it applies. Emitted as a
+        # call to setup.resolveEffectValue with the shape as JSON (keys checked at
+        # import by _validate_effect_value_shape).
+        if isinstance(val, dict) and val.get("type") == "trait":
+            if not isinstance(val.get("trait"), str) or not val.get("trait"):
+                raise ValueError(f"Stat-based effect value needs a `trait`. Got: {val!r}")
+            return f"setup.resolveEffectValue({json.dumps(val, sort_keys=True)})"
+
         # Random-range dict — new shape.
         if isinstance(val, dict):
             vtype = val.get("type")
             if vtype != "random":
                 raise ValueError(
                     f"Effect value dict has unknown type {vtype!r}; "
-                    f"only 'random' is supported. Got: {val!r}"
+                    f"only 'random' and 'trait' are supported. Got: {val!r}"
                 )
             try:
                 mn = int(val["min"])

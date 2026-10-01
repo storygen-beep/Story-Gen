@@ -51,7 +51,279 @@ No game's row changes colour, and no gate headline changed in any game.
 
 **Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
 
-**Words:** +42, running total 144,386 / 149,283.
+**Words:** +42, running total 144,386 / 149,283 on the skill branch; 145,431 / 149,283 after the merge
+of engine batch 2 (the engine side adds +1,045; the merge itself adds no words).
+
+---
+
+## 2026-10-01 — Engine: calls, part 2 — ring, answer, decline, missed (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to build a real call type now; the-phone.md P5 (a missed call counts as ignored)
+and P8 (pull delivery: a badge, never a covering pop-up).
+
+**What changed.**
+- `generators/v2.py`: each call's `accept` canvas resolves at build time to its entry passage (as a
+  launcher option's does). On every passage `setup._checkPhoneCalls` rings a call whose trigger holds
+  (a toast, the ring badge on the `calls` app and in the sidebar count) and `setup._expirePhoneCalls`
+  marks one left ringing past `ring_minutes` (default 60) as missed, applying `on_missed` once; the call
+  screen and answer/decline run the expiry too, since a wait button passes time without a passage. The
+  `calls` screen lists the ringing call with Answer (refused mid-scene, as a launcher) and Decline, then
+  the history. `setup.answerCall` plays the canvas (the navigation commits); `setup.declineCall` applies
+  `on_decline` (the handler commits). `$game_state.phone.calls[id]` = `{state, rang_minute,
+  ended_minute}` joins the phone skeleton only in a game with calls. The flag-hint map registers
+  `on_decline` / `on_missed` flags.
+- `references/engine.md` §51: the last gap row (calls) becomes the fact, with a TOML example; the gap
+  table is gone. `templates/cards/phone.md` "Our engine today" follows.
+- Citations re-pointed through the `git diff` line map (509 moved, 602 endpoints identical); one new cite
+  re-anchored by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_calls.py` (6, headless: a call rings with a badge and no overlay; Answer plays
+the scene; mid-scene it cannot be answered; Decline applies once; left ringing past 60 minutes on wait
+buttons it is missed once and cannot be answered; a save written before calls existed, at 54c67d0, loads
+with the call map backfilled and the call rings). A save-migration case. Selfcheck and the skill tests
+pass. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine (7d7f575); only the engine script differs.
+
+**Words:** +179, running total 145,310 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: calls, part 1 — the data and the import (World and Systems PRD, Phase 7)
+
+**Why.** LO's decision to build a real call type now. The phone had no calls; the skill's advice was to
+write the call as the scene a text books. This part reads and checks calls; the runtime (ring, answer,
+decline, missed) is the next change.
+
+**What changed.**
+- `template_import.py`: `calls` joins the phone app types. `TemplatePhoneCall` (`id`, `app`, `caller`,
+  `trigger`, `accept`, `ring_minutes`, `on_decline`, `on_missed`, `notify`) and `TemplatePhone.calls`,
+  parsed from `[[phone.calls]]`. Checks (build errors): id, a `calls` app, a caller that is an NPC, an
+  `accept` canvas that exists and has a trigger location (the launcher's canvas rule), whole
+  `ring_minutes`, and `on_decline` / `on_missed` as phone effect sets. Written into metadata only in a
+  game with calls (GG gets it through `_assemble_project_metadata`). The condition check walks every
+  `conditions` key by name, so it already reaches `phone.calls[].trigger.conditions`; its docstring
+  names them and a test proves it.
+- `references/engine.md` §51: the calls row says the importer reads calls and nothing rings yet.
+- Citations re-pointed through the `git diff` line map (103 moved, 141 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `PhoneCallsSchemaTests` (4: parse, metadata only when present, nine bad shapes, the walker
+on a call trigger). Selfcheck and the skill tests pass.
+
+**Words:** +14, running total 145,131 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a post gated on her own meter — `gate_trait` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.sendSocialPost` and the composer read `corruption_min` against
+the hard-coded `corruption` trait, so a game whose ascent meter has another name could not gate a post.
+
+**What changed.**
+- `generators/v2.py`: a post action's `corruption_min` reads `gate_trait` when set (default corruption),
+  in the composer's lock and in `sendSocialPost`.
+- `template_import.py`: `gate_trait` must be a `[player] core_traits` key and is read only with
+  `corruption_min` (build errors). Post actions are raw dicts, so it reaches metadata as written.
+- `references/engine.md` §51: the fact.
+- Citations re-pointed through the `git diff` line map (491 moved, 588 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed: daily topics' `corruption_min` still reads corruption (not in this step).
+
+**Verified.** `test_phone_outward.py` (+1, headless: "Tease" gated on charm opens and posts, "Bare" on
+the default corruption stays locked and a stale tap does nothing). `PostActionGateTraitTests` (2).
+Selfcheck and the skill tests pass.
+
+**Words:** +53, running total 145,117 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a launcher that works from any room — `anywhere` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. A launcher option is live only in its canvas's room, so the phone
+could not book a ride, a date or a shift somewhere else.
+
+**What changed.**
+- `generators/v2.py`: `_renderLauncher` takes `anywhere`; with it the room lock is lifted and the
+  mid-scene lock stays. The scene still returns her to its own home, and that place's entry costs apply
+  on arrival (the travel intercept treats it as a move, which it is).
+- `template_import.py`: `anywhere` on `TemplatePhoneApp`; it must be a bool and is read only on a
+  launcher (build errors); written into metadata only when true.
+- `references/engine.md` §51: the fact; §42's launcher sentence notes the `anywhere` case.
+- Citations re-pointed through the `git diff` line map (558 moved, 685 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: from loc_home the plain launcher says "Not here",
+the `anywhere` one plays the bar canvas, and mid-scene it says "Not here" again).
+`PhoneAnywhereLauncherTests` (2). The existing launcher tests pass. Selfcheck and the skill tests pass.
+
+**Words:** +75, running total 145,064 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: phone actions that cost time — `time_cost` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8; the-phone.md P5 ("using the phone costs too"). No phone action spent
+time: a shift worked from the phone, a call or a selfie took zero minutes.
+
+**What changed.**
+- `generators/v2.py`: `setup.spendPhoneTime(minutes)` spends through `advanceTime` (so the day can roll
+  and the daily tick run, as on a wait button; the click handlers already commit the moment) after a
+  reply choice, a daily topic, a post action and a fast job that carry `time_cost`;
+  `setup.phoneTimeTag` adds "· Nm" to that action's button or job line. Without `time_cost`, nothing
+  changes.
+- `template_import.py`: `time_cost` on `TemplateFastJob` and `TemplatePhoneDailyTopic` (into metadata
+  only when set); reply choices and post actions are raw dicts and carry it through. All four must be
+  whole minutes ≥ 1, or a build error.
+- `references/engine.md` §51: the time gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (585 moved; 712 endpoints identical, one range end
+  is the line this change edited, checked by hand); `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+3, headless: a reply, a daily topic and a post spend 20, 30 and
+15 minutes, an action without a cost spends none; a 420-minute shift from 18:00 rolls to day 2 at 01:00
+and the daily tick runs; the buttons read "· 15m" / "· 20m" / "· 420m", an uncosted choice has no tag).
+`PhoneTimeCostTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +52, running total 144,989 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: the `custom` app renders its `passage` (World and Systems PRD, Phase 7)
+
+**Why.** LO's engine order, step 8. `openPhoneApp` renders a custom app only with `appDef.passage`, which
+the importer never sent, so every custom app fell to "Coming Soon". A camera app is planned on this.
+
+**What changed.**
+- `template_import.py`: `passage` on `TemplatePhoneApp`, parsed, written into metadata only when set; a
+  custom app with no `passage`, or a `passage` on another type, is a build error. No game has a custom
+  app, so no game's build changes.
+- `generators/v2.py`: a custom app's `passage` that is a canvas id resolves at build time to the canvas's
+  entry passage (`_canvas_entry_passages`, as a launcher option does); anything else is a passage name.
+- `references/engine.md` §51: the custom-app gap row becomes the fact.
+- Citations re-pointed through the `git diff` line map (613 moved, 745 endpoints identical); one cite in
+  the new text corrected by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a canvas-id passage and a passage-name passage both
+render inside the phone, no "Coming Soon"). `PhoneCustomAppPassageTests` (2). The existing Tier-3 tests,
+which already wrote `passage` on a custom app, pass. Selfcheck and the skill tests pass.
+
+**Words:** +44, running total 144,937 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: an app that appears later — `conditions` on a phone app (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.openPhone` rendered every declared app from day 1, so an app
+she installs, or a job board that opens later, had to exist from the start.
+
+**What changed.**
+- `template_import.py`: `conditions` on `TemplatePhoneApp`, parsed, written into metadata only when set.
+  The condition check already walks every `conditions` key by name, so it reaches app conditions with no
+  new code; its docstring now lists them and a test proves it.
+- `generators/v2.py`: `setup.phoneAppVisible`; `openPhone` leaves a hidden app off the home grid,
+  `openPhoneApp` ignores a stale tap on one, and `getPhoneUnreadCount` does not count its chats. The
+  helper sits above `checkPhoneConversations`, outside the window a source test reads.
+- `references/engine.md` §51: the per-app gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (588 moved, 717 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a gated chat app is off the grid, a tap does
+nothing, its delivered chat is not counted until the flag is set, then it shows and counts).
+`PhoneAppConditionsTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +39, running total 144,893 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a dating match leads somewhere — `on_match` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8 (the phone reaching outward). `setup.likeProfile` wrote `ps.matches`
+and nothing but the dating screen read it, so a match could not cause a scene or a text.
+
+**What changed.**
+- `template_import.py`: `on_match` on `TemplatePhoneProfile` (`{effects, flagEffects}`), parsed raw,
+  checked by `_validate_phone_effect_set`, written into metadata only when set.
+- `generators/v2.py`: `likeProfile` applies `on_match` once, on the first match, through
+  `setup.applyPhoneEffectSet`. The flag-hint map registers `on_match` flags as phone setters.
+- **A batch-1 defect fixed on the way:** the condition check rejects anything but a v1.0 block at
+  `match_condition`, while `likeProfile` read `match_condition.conditions`, so no gate that imports
+  was ever read (every like matched). The runtime now reads the block itself (and the old wrapping).
+- `references/engine.md` §51: the dating gap row becomes the fact. `templates/cards/phone.md` "Our
+  engine today": the ignore hook and `on_match` now exist.
+- Citations re-pointed through the `git diff` line map (563 moved, 692 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (2, headless: a match applies `on_match` once, a stale second like
+applies nothing; a profile whose `match_condition` fails is liked, not matched, and applies nothing,
+which failed before the fix). `PhoneOnMatchTests` (3). Selfcheck and the skill tests pass.
+
+**Words:** +66, running total 144,854 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a rank per job (World and Systems PRD, Phase 7; opt-in per job)
+
+**Why.** LO's engine order, step 6. The phone's fast jobs kept one global XP count for every job and
+each job paid one fixed income, so a job could not promote her (`the-systems.md` rule 1, "a second
+ladder with its own rank").
+
+**What changed.**
+- `template_import.py`: `ranks = [{xp, title, income}]` on `TemplateFastJob`, parsed raw, validated
+  (`xp` whole and rising, a `title`, an `income` that is a number or a value table, no other key;
+  a stat-based income is checked by the value walker), written into metadata only when set.
+- `generators/v2.py`: `setup.fastJobRank` (her rank on a job = the last whose xp she has reached on
+  it) and `setup.fastJobIncome`; `doFastJob` pays the rank's income through `setup.resolveEffectValue`,
+  adds one to `$game_state.fast_jobs.job_xp[id]` and toasts a promotion; the board shows the title and
+  the xp to the next rank. The global `xp` still counts every shift. `job_xp` joins the skeleton (and
+  the backfill) only in a game with a ranked job.
+- `references/engine.md` §51 (the job board is a phone app; engine.md had no job section): the rank
+  fact; §40's backfill row names `fast_jobs.job_xp`. `templates/cards/job.md`: "no per-job rank"
+  becomes the fact.
+- Citations re-pointed through the `git diff` line map (589 moved, 720 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed (other lane): `references/the-systems.md` rule 1 still says a second ladder "waits on the
+  engine's rank per job".
+
+**Verified.** `test_fast_job_ranks.py` (4, headless: pays 10, 10, 30, 30, 60 up the ladder; the board
+and the promotion toast; a job without ranks counts no job xp; a save written by the pre-change engine
+at e8dcadc loads with `job_xp` backfilled, its global xp kept, and starts at the first rank).
+`FastJobRankTests` (4); a save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +189, running total 144,788 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: pay worked out from her stats (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 5. Every amount the engine paid was fixed at build time (or a random
+range), so a shift paid the same on day 1 and day 90 while rent climbed (the Billable Hours test).
+
+**What changed.**
+- `generators/v2.py`: one runtime resolver, `setup.resolveEffectValue`: a number passes through;
+  `{type = "random", min, max}` rolls; `{type = "trait", trait, mult, add, min, max}` reads her player
+  trait as round(trait × mult + add), held inside min / max. The Python `_resolve_effect_value` emits a
+  call to it for the trait shape (number and random emission byte-identical). The four runtime paths
+  that did `Number(value)` use it: phone reply and `on_ignore` effects, daily-chat topics, the daily
+  tick, fast-job income. The job board prints `setup.effectValueLabel` (a range reads "8–14"). The
+  "what raises this trait" hint readers skip a stat-based value instead of raising on `> 0`.
+- `template_import.py`: a fast job's `income` may be a value table; `_walk_effect_values` checks every
+  stat-based `value` / `income` in the raw TOML (unknown key, trait not in `[player] core_traits`,
+  non-number factor, min above max are errors).
+- `references/engine.md` §3: the value shape, where it applies, the import check, its one-trait limit.
+- `templates/cards/` (job, sex_for_pay, streaming, shoots, gym_body, greek_life, college,
+  money_pressure): "no computed pay" becomes the fact; the bills stay unbuilt (rent `amount` and
+  `costs` take numbers only).
+- Citations re-pointed through the `git diff` line map (604 moved; 729 endpoints identical to HEAD's
+  line, 8 card cites into the changed resolver rewritten by hand above); `cite_check.py` 0 drifted.
+- Not in this change: `validate_game_toml._numeric_effect_value` and the gates.py effect readers (the
+  protected tools step) still read a stat-based value as nothing.
+
+**Verified.** `test_effect_value_from_stats.py` (4, headless: the resolver on every shape; a fast job
+pays 70 then 100 at the cap and the board says $70; a choice pays through the passage; reply, daily
+topic and day roll pay from charm). `StatEffectValueSchemaTests` (4), `StatEffectValueEmitTests` (3).
+Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,599 / 149,283.
 
 ---
 
@@ -125,6 +397,44 @@ The row is not a `--ship` BLOCK row, so no `--ship` verdict moves.
 **Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
 
 **Words:** +12, running total 144,344 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: the ignore hook for a text she leaves unanswered (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add an ignore hook (the-phone.md P5: ignoring costs more than saying no). Silence
+was free: an unanswered text kept its buttons for ever, and the only way to charge for it was a canvas
+gated on the cause flag, `days_since_flag` and a reply flag still false.
+
+**What changed.**
+- `template_import.py`: `ignore_after_days` and `on_ignore` on `TemplatePhoneConversation`, parsed raw,
+  validated (whole days >= 1; the chat needs a reply block; `on_ignore` only with `ignore_after_days`;
+  `on_ignore` is `{effects, flagEffects}` with the keys a reply choice's effects carry, `trait`/`flag`
+  required, an `npcId` that exists) by the new `_validate_phone_effect_set`, and written into the phone
+  metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (phone games only): `setup._ignorePhoneConversation` closes the current instance
+  as ignored when no reply was sent `ignore_after_days` after it arrived, records the day in
+  `$game_state.phone.conv_ignored[key]`, and applies `on_ignore` once through the new
+  `setup.applyPhoneEffectSet` (which the reply path now uses too, unchanged in behaviour), with its own
+  toast so the passage's pending effects are kept. An ignored instance counts as answered, so a
+  repeatable chat re-arms after it (delay counted from the ignore). The thread shows "No reply." and no
+  buttons; `sendPhoneReply` refuses a stale tap. The flag-hint map reads `on_ignore` setters.
+  `conv_ignored` joins the phone skeleton only in a game with an ignore hook.
+- `references/engine.md` §51: the ignore gap row becomes the fact (a new paragraph and TOML example);
+  §40's backfill row names `phone.conv_ignored`.
+- Citations: every `v2.py` / `template_import.py` cite in SKILL.md, references/, templates/cards/ and
+  templates/*.toml re-pointed through the `git diff` line map (601 moved, 734 line endpoints checked
+  identical to HEAD's line); `cite_check.py` then reports 0 drifted in SKILL.md + references/.
+- Not changed (other lanes): `references/the-phone.md` P5 still says there is no ignore hook, and
+  `templates/cards/phone.md` "Our engine today" still lists it as missing.
+
+**Verified.** `test_phone_ignore_hook.py` (6, headless): effects apply once; a reply before day N applies
+nothing; the closed thread takes no late tap; per instance on a repeatable chat; a chat without the hook
+is unchanged; a save written by the pre-change engine (7d7f575) loads, gets `conv_ignored` and the hook
+fires. `PhoneIgnoreHookSchemaTests` (6) and `PhoneIgnoreHookIntegrationTests` (2, DB build); a
+save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,432 / 149,283.
 
 ---
 

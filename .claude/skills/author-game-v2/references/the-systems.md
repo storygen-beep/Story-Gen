@@ -139,7 +139,7 @@ creation and read forever**. `new-life-project` carries 8 and six describe her �
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
 **586 reads across 119 places**.
 
-`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4598`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:4861`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
@@ -260,7 +260,7 @@ In the field a system is written once and turns up wherever its label is.
 > own practisable sports.
 
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
-a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2302` —
+a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2397` —
 and there is no plural form. A row wanted in three rooms is authored three times.
 
 **So the labels are a design tool here, not a wiring mechanism.** That is not a lesser thing. The
@@ -328,7 +328,7 @@ priority   = 0
 ```
 
 **Why it is cheap, and the precedent to build it from.** `_render_location_description`
-(`v2.py:10092`) already emits a conditional chain onto the room screen using
+(`v2.py:10392`) already emits a conditional chain onto the room screen using
 `setup.triggerConditionsSatisfied` — the same helper the location passage calls for
 `entry_conditions`. The notice is that path with two changes: **every** match prints rather than
 first-match, and it appends after the description rather than replacing it.
@@ -338,9 +338,9 @@ and its own docstring records that they were byte-identical copies and that this
 change of this kind gets half-applied. Build it in one place.
 
 **What exists today and why it does not serve.** `[[story_arc.hints.templates]]` is a conditional
-hint engine with priorities and specificity sorting (`v2.py:6820`-`6650`), but it filters on
+hint engine with priorities and specificity sorting (`v2.py:7120`-`6650`), but it filters on
 `tpl.npc_id !== npcSlug` — one character at a time, never a system — and it is the **v1** guidance
-path, superseded by `[[quests.cards]]` for `quests_engine = "v2"` (`template_import.py:48`, `:430`),
+path, superseded by `[[quests.cards]]` for `quests_engine = "v2"` (`template_import.py:48`, `:447`),
 which every game here uses. It cannot be repurposed without changing what it is.
 
 ---
@@ -371,7 +371,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    that touch, grades feeding each professor's favor (`templates/cards/college.md`). Its River Rat bar
    keeps rank and flirtiness apart, joined only by event tips (round 9b, `traces/job_cot_river_rat.md`).
    A second ladder with its own rank waits on the engine's rank per job: today `fast_jobs` keeps one
-   global count (`v2.py:3184`).
+   global count (`v2.py:3419`).
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
    9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and

@@ -569,3 +569,51 @@ def test_e3_conv_cycle_reaches_a_save_written_before_it(tmp_path):
     got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
     assert got["conv_cycle"] == {}
     assert got["replies"] == {"dan_invite": [{"round": 1, "choice": 0}]}
+
+
+# --- World and Systems PRD, Phase 7 batch 2 -------------------------------------
+
+BATCH2 = "apps/game_generation/games_toml_files/engine_ws_batch2_2026_10_01.toml"
+
+
+@needs_node
+def test_e3b_conv_ignored_reaches_a_save_written_before_it(tmp_path):
+    """E3b: a game that adds an ignore hook. An old save's phone map has no
+    conv_ignored; the backfill fills it one level into the phone sub-map, and the
+    delivery record the hook reads (triggered_day) is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["conv_ignored"]
+    sv["game_state"]["phone"]["triggered_conversations"] = {
+        "ana_ask": {"triggered_day": 1, "triggered_hour": 18, "conv_index": 0}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["conv_ignored"] == {}
+    assert got["triggered_conversations"]["ana_ask"]["triggered_day"] == 1
+
+
+@needs_node
+def test_e6_job_xp_reaches_a_save_written_before_it(tmp_path):
+    """E6: a game that adds a ranked job. An old save's fast_jobs map has no job_xp;
+    the backfill fills it one level into the sub-map, and the global xp and cooldowns
+    the player already has are kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    sv["game_state"]["fast_jobs"] = {"xp": 2, "cooldowns": {"bar_job": 1}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["fast_jobs"]
+    assert got["job_xp"] == {}
+    assert got["xp"] == 2
+    assert got["cooldowns"] == {"bar_job": 1}
+
+
+@needs_node
+def test_e8_calls_state_reaches_a_save_written_before_it(tmp_path):
+    """E8-calls: a game that adds calls. An old save's phone map has no `calls`; the
+    backfill fills it one level into the phone sub-map, and the phone state the player
+    already has is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["calls"]
+    sv["game_state"]["phone"]["matches"] = {"kai_profile": {"npc": "npc_kai"}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["calls"] == {}
+    assert got["matches"] == {"kai_profile": {"npc": "npc_kai"}}

@@ -6130,6 +6130,487 @@ class RepeatableChatIntegrationTests(TestCase):
         self.assertNotIn('"conv_cycle"', twee)
 
 
+def _toml_with_ignore_hook(**conv_extra):
+    d = _toml_with_phone()
+    conv = d["phone"]["conversations"][0]
+    conv["blocks"].append({"type": "reply", "choices": [{"text": "sure"}]})
+    conv.update({
+        "ignore_after_days": 2,
+        "on_ignore": {
+            "effects": [{"targetType": "npc", "npcId": "npc_frank", "trait": "trust",
+                         "op": "add", "value": -2}],
+            "flagEffects": [{"targetType": "player", "flag": "summer_started", "op": "unset"}],
+        },
+    })
+    conv.update(conv_extra)
+    return d
+
+
+class PhoneIgnoreHookSchemaTests(SimpleTestCase):
+    """E3b (World and Systems PRD) — ignore_after_days / on_ignore on a conversation."""
+
+    def test_fields_parse(self):
+        conv = normalize(_toml_with_ignore_hook()).phone.conversations[0]
+        self.assertEqual(conv.ignore_after_days, 2)
+        self.assertEqual(conv.on_ignore["effects"][0]["value"], -2)
+
+    def test_fields_default_to_no_hook(self):
+        conv = normalize(_toml_with_phone()).phone.conversations[0]
+        self.assertIsNone(conv.ignore_after_days)
+        self.assertIsNone(conv.on_ignore)
+
+    def test_valid_hook_validates_clean(self):
+        self.assertEqual(validate(normalize(_toml_with_ignore_hook())), [])
+
+    def test_bad_values_are_errors(self):
+        for extra, fragment in (
+            ({"ignore_after_days": 0}, "ignore_after_days must be a whole number"),
+            ({"ignore_after_days": 1.5}, "ignore_after_days must be a whole number"),
+            ({"on_ignore": []}, "on_ignore: must be a table"),
+            ({"on_ignore": {"effect": []}}, "unknown key `effect`"),
+            ({"on_ignore": {"effects": [{"trait": "trust", "amount": 1}]}},
+             "unknown key `amount`"),
+            ({"on_ignore": {"effects": [{"op": "add", "value": 1}]}}, "needs `trait`"),
+            ({"on_ignore": {"flagEffects": [{"op": "set"}]}}, "needs `flag`"),
+            ({"on_ignore": {"effects": [{"targetType": "npc", "npcId": "npc_nobody",
+                                         "trait": "trust", "value": 1}]}},
+             "'npc_nobody' not found in npcs"),
+        ):
+            errors = validate(normalize(_toml_with_ignore_hook(**extra)))
+            self.assertTrue(any(fragment in e for e in errors), (extra, errors))
+
+    def test_on_ignore_without_the_days_is_an_error(self):
+        d = _toml_with_ignore_hook()
+        del d["phone"]["conversations"][0]["ignore_after_days"]
+        errors = validate(normalize(d))
+        self.assertTrue(any("on_ignore is read only with ignore_after_days" in e
+                            for e in errors), errors)
+
+    def test_a_chat_with_no_reply_cannot_be_ignored(self):
+        d = _toml_with_ignore_hook()
+        d["phone"]["conversations"][0]["blocks"] = [
+            {"type": "message", "sender": "npc", "content": "hey"}]
+        errors = validate(normalize(d))
+        self.assertTrue(any("ignore_after_days needs a reply block" in e
+                            for e in errors), errors)
+
+
+class PhoneIgnoreHookIntegrationTests(TestCase):
+    """E3b through the DB build. The no-DB path and the runtime are proven in
+    apps/game_generation/tests/test_phone_ignore_hook.py."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            email="ignore-hook-test@example.com", password="testpass123"
+        )
+
+    def _build(self, data):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(data)
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return project, TweeComprehensiveGeneratorV2().generate(project)
+
+    def test_the_keys_reach_metadata_and_the_runtime(self):
+        project, twee = self._build(_toml_with_ignore_hook())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertEqual(conv["ignore_after_days"], 2)
+        self.assertEqual(conv["on_ignore"]["flagEffects"][0]["flag"], "summer_started")
+        self.assertIn('"conv_ignored": {}', twee)
+        self.assertIn("setup._ignorePhoneConversation(conv, ps)", twee)
+
+    def test_a_chat_without_the_hook_emits_no_ignore_state(self):
+        project, twee = self._build(_toml_with_phone())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertNotIn("ignore_after_days", conv)
+        self.assertNotIn("on_ignore", conv)
+        self.assertNotIn('"conv_ignored"', twee)
+
+
+def _toml_with_stat_pay(value=None, income=None):
+    d = _base_toml()
+    d["player"]["core_traits"]["charm"] = 10
+    d["player"]["core_traits"]["money"] = 0
+    d["fast_jobs"] = [{"id": "shift", "name": "Shift",
+                       "income": income if income is not None else
+                       {"type": "trait", "trait": "charm", "mult": 2, "add": 50, "max": 100}}]
+    d["engine"] = {"daily_tick": {"traitEffects": [
+        {"targetType": "player", "trait": "money", "op": "add",
+         "value": value if value is not None else {"type": "trait", "trait": "charm"}}]}}
+    return d
+
+
+class StatEffectValueSchemaTests(SimpleTestCase):
+    """E5 (World and Systems PRD) — {type = "trait", trait, mult, add, min, max}."""
+
+    def test_valid_shapes_validate_clean(self):
+        t = normalize(_toml_with_stat_pay())
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.fast_jobs[0].income["mult"], 2)
+
+    def test_a_plain_number_income_still_parses(self):
+        self.assertEqual(normalize(_toml_with_stat_pay(income=20)).fast_jobs[0].income, 20)
+
+    def test_bad_shapes_are_errors(self):
+        for value, fragment in (
+            ({"type": "trait"}, "needs `trait`"),
+            ({"type": "trait", "trait": "luck"}, "'luck' is not in [player] core_traits"),
+            ({"type": "trait", "trait": "charm", "times": 2}, "unknown key `times`"),
+            ({"type": "trait", "trait": "charm", "mult": "2"}, "mult must be a number"),
+            ({"type": "trait", "trait": "charm", "add": True}, "add must be a number"),
+            ({"type": "trait", "trait": "charm", "min": 9, "max": 3}, "min (9) is above max (3)"),
+        ):
+            errors = validate(normalize(_toml_with_stat_pay(value=value)))
+            self.assertTrue(any(fragment in e for e in errors), (value, errors))
+        errors = validate(normalize(_toml_with_stat_pay(income={"type": "trait"})))
+        self.assertTrue(any("fast_jobs[0].income" in e for e in errors), errors)
+
+    def test_a_trait_condition_is_not_mistaken_for_a_value(self):
+        d = _toml_with_stat_pay()
+        d["engine"]["daily_tick"]["traitEffects"][0]["conditions"] = {
+            "version": "1.0", "items": [{"type": "trait", "subject": "player",
+                                         "trait_key": "charm", "operator": "gte", "value": 3}]}
+        self.assertEqual(validate(normalize(d)), [])
+
+
+class StatEffectValueEmitTests(SimpleTestCase):
+    """E5 — v2's `_resolve_effect_value` emits a call to the one JS resolver for the
+    trait shape, and leaves the number and random shapes byte-identical."""
+
+    def setUp(self):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        self.gen = TweeComprehensiveGeneratorV2()
+
+    def test_the_trait_shape_emits_the_resolver(self):
+        out = self.gen._resolve_effect_value({"type": "trait", "trait": "charm", "mult": 2})
+        self.assertEqual(
+            out, 'setup.resolveEffectValue({"mult": 2, "trait": "charm", "type": "trait"})')
+
+    def test_number_and_random_are_unchanged(self):
+        self.assertEqual(self.gen._resolve_effect_value(5), "5.0")
+        self.assertEqual(self.gen._resolve_effect_value({"type": "random", "min": 3, "max": 5}),
+                         "(Math.floor(Math.random() * 3) + 3)")
+
+    def test_a_trait_shape_without_a_trait_raises(self):
+        with self.assertRaises(ValueError):
+            self.gen._resolve_effect_value({"type": "trait"})
+
+
+def _toml_with_job_ranks(ranks=None):
+    d = _toml_with_stat_pay()
+    d["fast_jobs"][0]["ranks"] = ranks if ranks is not None else [
+        {"xp": 0, "title": "Barback", "income": 10},
+        {"xp": 3, "title": "Server", "income": {"type": "trait", "trait": "charm", "add": 20}},
+    ]
+    return d
+
+
+class FastJobRankTests(SimpleTestCase):
+    """E6 (World and Systems PRD) — `ranks = [{xp, title, income}]` on a fast job."""
+
+    def test_ranks_parse_and_validate_clean(self):
+        t = normalize(_toml_with_job_ranks())
+        self.assertEqual(validate(t), [])
+        self.assertEqual([r["title"] for r in t.fast_jobs[0].ranks], ["Barback", "Server"])
+
+    def test_no_ranks_by_default(self):
+        self.assertEqual(normalize(_toml_with_stat_pay()).fast_jobs[0].ranks, [])
+
+    def test_bad_ladders_are_errors(self):
+        for ranks, fragment in (
+            ([{"xp": 0, "title": "A", "income": 1}, {"xp": 0, "title": "B", "income": 2}],
+             "xp must rise rank by rank"),
+            ([{"xp": -1, "title": "A", "income": 1}], "xp must be a whole number"),
+            ([{"xp": 0, "income": 1}], "title is required"),
+            ([{"xp": 0, "title": "A"}], "income must be a number or a value table"),
+            ([{"xp": 0, "title": "A", "income": 1, "pay": 2}], "unknown key `pay`"),
+            ([{"xp": 0, "title": "A", "income": {"type": "trait", "trait": "luck"}}],
+             "'luck' is not in [player] core_traits"),
+            (["Barback"], "must be a table"),
+        ):
+            errors = validate(normalize(_toml_with_job_ranks(ranks)))
+            self.assertTrue(any(fragment in e for e in errors), (ranks, errors))
+
+    def test_ranks_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, normalize(_toml_with_job_ranks()))
+        self.assertEqual(p.metadata["fast_jobs"][0]["ranks"][1]["title"], "Server")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(_toml_with_stat_pay()))
+        self.assertNotIn("ranks", p2.metadata["fast_jobs"][0])
+
+
+def _toml_with_dating(**prof_extra):
+    d = _toml_with_phone()
+    d["phone"]["apps"].append({"id": "dates", "type": "dating", "label": "Dates"})
+    prof = {"id": "frank_profile", "app": "dates", "npc": "npc_frank", "bio": "hi",
+            "match_condition": {"version": "1.0", "items": [
+                {"type": "trait", "subject": "player", "trait_key": "energy",
+                 "operator": "gte", "value": 5}]},
+            "on_match": {"effects": [{"targetType": "npc", "npcId": "npc_frank",
+                                      "trait": "trust", "op": "add", "value": 2}]}}
+    prof.update(prof_extra)
+    d["phone"]["profiles"] = [prof]
+    return d
+
+
+class PhoneOnMatchTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `on_match` on a dating profile."""
+
+    def test_on_match_parses_validates_and_reaches_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        t = normalize(_toml_with_dating())
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.phone.profiles[0].on_match["effects"][0]["value"], 2)
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, t)
+        self.assertIn("on_match", p.metadata["phone_settings"]["profiles"][0])
+
+    def test_no_on_match_emits_nothing(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        d = _toml_with_dating()
+        del d["phone"]["profiles"][0]["on_match"]
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, normalize(d))
+        self.assertNotIn("on_match", p.metadata["phone_settings"]["profiles"][0])
+
+    def test_a_bad_on_match_is_an_error(self):
+        errors = validate(normalize(_toml_with_dating(on_match={"effect": []})))
+        self.assertTrue(any("on_match: unknown key `effect`" in e for e in errors), errors)
+
+
+class PhoneAppConditionsTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `conditions` on a phone app."""
+
+    GATE = {"version": "1.0", "items": [{"type": "flag", "subject": "player",
+                                         "flag_key": "summer_started", "operator": "is_true"}]}
+
+    def _meta(self, d):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(d))
+        return p.metadata["phone_settings"]["apps"]
+
+    def test_conditions_parse_and_reach_metadata_only_when_set(self):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["conditions"] = self.GATE
+        t = normalize(d)
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.phone.apps[1].conditions, self.GATE)
+        apps = self._meta(d)
+        self.assertEqual(apps[1]["conditions"], self.GATE)
+        self.assertNotIn("conditions", apps[0])
+
+    def test_the_condition_walker_reaches_app_conditions(self):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["conditions"] = {"items": [{"type": "flag", "flag_key": "x"}]}
+        errors = validate(normalize(d))
+        self.assertTrue(any("phone.apps['flaunt'].conditions" in e and 'version = "1.0"' in e
+                            for e in errors), errors)
+
+
+class PhoneCustomAppPassageTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — the `custom` app's `passage` reaches the build."""
+
+    def _phone(self, app):
+        d = _toml_with_phone()
+        d["phone"]["apps"].append(app)
+        return d
+
+    def test_passage_parses_and_reaches_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        d = self._phone({"id": "cam", "type": "custom", "label": "Cam", "passage": "Start"})
+        t = normalize(d)
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        apps = p.metadata["phone_settings"]["apps"]
+        self.assertEqual(apps[-1]["passage"], "Start")
+        self.assertNotIn("passage", apps[0])
+
+    def test_a_custom_app_needs_a_passage_and_no_other_type_takes_one(self):
+        errors = validate(normalize(self._phone({"id": "cam", "type": "custom", "label": "Cam"})))
+        self.assertTrue(any("custom app with no passage" in e for e in errors), errors)
+        errors = validate(normalize(self._phone(
+            {"id": "pics", "type": "gallery", "label": "Pics", "passage": "Start"})))
+        self.assertTrue(any("passage is read only on a custom app" in e for e in errors), errors)
+
+
+class PhoneTimeCostTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `time_cost` on phone actions."""
+
+    def _with_costs(self, cost=30):
+        d = _toml_with_stat_pay()
+        d["fast_jobs"][0]["time_cost"] = cost
+        d["phone"] = _toml_with_phone()["phone"]
+        d["npcs"] = _toml_with_phone()["npcs"]
+        d["phone"]["daily_topics"][0]["time_cost"] = cost
+        d["phone"]["apps"][1]["post_actions"] = [{"label": "Selfie", "time_cost": cost}]
+        d["phone"]["conversations"][0]["blocks"].append(
+            {"type": "reply", "choices": [{"text": "ok", "time_cost": cost}]})
+        return d
+
+    def test_costs_validate_and_reach_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        t = normalize(self._with_costs())
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        self.assertEqual(p.metadata["fast_jobs"][0]["time_cost"], 30)
+        self.assertEqual(p.metadata["phone_settings"]["daily_topics"][0]["time_cost"], 30)
+        self.assertNotIn("time_cost", p.metadata["phone_settings"]["daily_topics"][1])
+
+    def test_bad_costs_are_errors(self):
+        errors = validate(normalize(self._with_costs(cost=0)))
+        for where in ("fast_jobs[0].time_cost", "phone.daily_topics[0].time_cost",
+                      "phone.apps[1].post_actions[0].time_cost",
+                      "phone.conversations[0].blocks[1].choices[0].time_cost"):
+            self.assertTrue(any(where in e for e in errors), (where, errors))
+
+
+class PhoneAnywhereLauncherTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `anywhere` on a launcher app."""
+
+    def _apps(self, app):
+        d = _toml_with_phone()
+        d["phone"]["apps"].append(app)
+        return d
+
+    def test_anywhere_is_read_only_on_a_launcher_and_must_be_a_bool(self):
+        errors = validate(normalize(self._apps(
+            {"id": "pics", "type": "gallery", "label": "Pics", "anywhere": True})))
+        self.assertTrue(any("anywhere is read only on a launcher app" in e for e in errors), errors)
+        errors = validate(normalize(self._apps(
+            {"id": "pics", "type": "gallery", "label": "Pics", "anywhere": "yes"})))
+        self.assertTrue(any("anywhere must be true or false" in e for e in errors), errors)
+
+    def test_anywhere_reaches_metadata_only_when_true(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        for flag, present in ((True, True), (False, False)):
+            d = _toml_with_phone()
+            d["phone"]["apps"][0]["anywhere"] = flag
+            d["phone"]["apps"][0]["type"] = "chat"
+            t = normalize(d)
+            t.phone.apps[0].type = "launcher"  # metadata only; skip the option rules
+            p = _P()
+            p.metadata = {}
+            _assemble_project_metadata(p, t)
+            self.assertEqual("anywhere" in p.metadata["phone_settings"]["apps"][0], present)
+
+
+class PostActionGateTraitTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `gate_trait` on a social_feed post action."""
+
+    def _with(self, **act):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["post_actions"] = [dict({"label": "Tease"}, **act)]
+        return d
+
+    def test_a_declared_gate_trait_validates_clean(self):
+        self.assertEqual(validate(normalize(self._with(corruption_min=5, gate_trait="energy"))), [])
+
+    def test_bad_gate_traits_are_errors(self):
+        errors = validate(normalize(self._with(corruption_min=5, gate_trait="luck")))
+        self.assertTrue(any("gate_trait 'luck' is not in [player] core_traits" in e for e in errors), errors)
+        errors = validate(normalize(self._with(gate_trait="energy")))
+        self.assertTrue(any("gate_trait is read only with corruption_min" in e for e in errors), errors)
+
+
+BATCH2_FIXTURE = "apps/game_generation/games_toml_files/engine_ws_batch2_2026_10_01.toml"
+
+
+def _batch2():
+    with open(BATCH2_FIXTURE, "rb") as f:
+        return tomli.load(f)
+
+
+def _call(d):
+    return d["phone"]["calls"][0]
+
+
+class PhoneCallsSchemaTests(SimpleTestCase):
+    """E8-calls (World and Systems PRD) — `[[phone.calls]]` and the `calls` app type."""
+
+    def test_calls_parse_and_validate_clean(self):
+        t = normalize(_batch2())
+        self.assertEqual(validate(t), [])
+        call = t.phone.calls[0]
+        self.assertEqual((call.id, call.app, call.caller, call.accept, call.ring_minutes),
+                         ("ben_rings", "calls", "npc_ben", "ben_call", 60))
+        self.assertEqual(call.on_missed["flagEffects"][0]["flag"], "missed_ben")
+
+    def test_calls_reach_metadata_only_when_present(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(_batch2()))
+        self.assertEqual(p.metadata["phone_settings"]["calls"][0]["accept"], "ben_call")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(_toml_with_phone()))
+        self.assertNotIn("calls", p2.metadata["phone_settings"])
+
+    def test_bad_calls_are_errors(self):
+        for change, fragment in (
+            ({"app": "messages"}, "app 'messages' not found in calls apps"),
+            ({"caller": "npc_nobody"}, "caller 'npc_nobody' not found in npcs"),
+            ({"caller": ""}, "caller is required"),
+            ({"accept": ""}, "accept is required"),
+            ({"accept": "no_such_canvas"}, "accept canvas 'no_such_canvas' not found"),
+            ({"accept": "scene_start"}, "has no trigger location"),
+            ({"ring_minutes": 0}, "ring_minutes must be a whole number"),
+            ({"on_decline": {"effect": []}}, "on_decline: unknown key `effect`"),
+            ({"on_missed": {"flagEffects": [{"op": "set"}]}}, "needs `flag`"),
+        ):
+            d = _batch2()
+            _call(d).update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (change, errors))
+
+    def test_the_condition_walker_reaches_call_triggers(self):
+        d = _batch2()
+        _call(d)["trigger"] = {"conditions": {"items": [
+            {"type": "flag", "flag_key": "started", "operator": "is_true"}]}}
+        errors = validate(normalize(d))
+        self.assertTrue(any("phone.calls['ben_rings'].trigger.conditions" in e for e in errors),
+                        errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

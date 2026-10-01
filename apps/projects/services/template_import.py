@@ -11,7 +11,7 @@ import json
 import logging
 from dataclasses import asdict, dataclass, field, is_dataclass
 import uuid
-from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple, Union
 
 import tomli
 from django.contrib.auth import get_user_model
@@ -315,7 +315,7 @@ class TemplateClothingRequirements:
 
 VALID_PHONE_APP_TYPES = {
     "chat", "social_feed", "gallery", "dating", "custom", "quests",
-    "fast_jobs", "bank", "launcher",
+    "fast_jobs", "bank", "launcher", "calls",
 }
 
 
@@ -341,6 +341,15 @@ class TemplatePhoneApp:
     # Shown when no option on a launcher is offerable right now. The door screen's
     # `no_answer` serves the same purpose: one short line beats an empty screen.
     no_answer: str = ""
+    # E8 — a v1.0 conditions block: the app is on the phone only while it holds (an
+    # app she installs, a job board that opens later). Empty = always there.
+    conditions: Dict[str, Any] = field(default_factory=dict)
+    # E8 — a launcher with `anywhere = true` offers its options in any room (never
+    # mid-scene); the scene returns her to its own home. False = the room lock.
+    anywhere: bool = False
+    # E8 — a "custom" app's screen: a canvas id (its entry passage) or a passage name,
+    # rendered inside the phone. Required on a custom app, read on no other type.
+    passage: str = ""
 
 
 @dataclass
@@ -372,6 +381,11 @@ class TemplatePhoneConversation:
     # still holds. `max_repeats` caps the re-arrivals (None = no cap). None = one-time.
     repeat_after_days: Optional[int] = None
     max_repeats: Optional[int] = None
+    # E3b — the ignore hook. If no reply is sent this many days after the current
+    # instance arrived, `on_ignore` ({effects, flagEffects}, the shapes a reply choice
+    # carries) applies once and the instance closes as ignored. None = no hook.
+    ignore_after_days: Optional[int] = None
+    on_ignore: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -402,6 +416,8 @@ class TemplatePhoneProfile:
     trigger: Dict[str, Any] = field(default_factory=dict)
     match_condition: Dict[str, Any] = field(default_factory=dict)
     search_queries: List[str] = field(default_factory=list)
+    # E8 — {effects, flagEffects} applied once, on the first match (the reply shapes).
+    on_match: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -420,6 +436,7 @@ class TemplatePhoneDailyTopic:
     image: str = ""
     corruption_min: Optional[int] = None
     cooldown: str = ""
+    time_cost: Optional[int] = None  # E8 — minutes the topic takes (None = none)
 
 
 @dataclass
@@ -430,6 +447,23 @@ class TemplatePhoneGalleryItem:
     caption: str = ""
     trigger: Dict[str, Any] = field(default_factory=dict)
     link: str = ""  # optional passage to open on click (PornCenter "watch")
+
+
+@dataclass
+class TemplatePhoneCall:
+    """E8-calls — an incoming call. It rings once its `trigger.conditions` hold (a ring
+    badge and a toast, never a covering pop-up) for `ring_minutes` of game time. Answering
+    plays the `accept` canvas; declining applies `on_decline`; a call left ringing is
+    missed and applies `on_missed` (a missed call counts as ignored). One-time."""
+    id: str
+    app: str                 # a `type = "calls"` app
+    caller: str              # NPC id
+    trigger: Dict[str, Any] = field(default_factory=dict)
+    accept: str = ""         # canvas id, played on answer
+    ring_minutes: Optional[int] = None   # None = 60
+    on_decline: Optional[Dict[str, Any]] = None
+    on_missed: Optional[Dict[str, Any]] = None
+    notify: str = ""         # toast when it starts ringing; "" = "📞 <name> is calling"
 
 
 @dataclass
@@ -444,6 +478,7 @@ class TemplatePhone:
     # doc 45 G11 — when set, the sidebar phone button shows only once this
     # player flag is true (the phone is "acquired" in-world). "" = always shown.
     purchase_flag: str = ""
+    calls: List[TemplatePhoneCall] = field(default_factory=list)  # E8-calls
 
 
 @dataclass
@@ -907,11 +942,18 @@ class TemplateFastJob:
     """doc 45 G9 — a repeatable money job. Worked from the Fast Jobs phone app."""
     id: str = ""
     name: str = ""
-    income: int = 0
+    # A number, or an effect-value table (E5: {type = "trait", ...} pays from her stats;
+    # {type = "random", min, max} rolls). Resolved at runtime by setup.resolveEffectValue.
+    income: Union[int, Dict[str, Any]] = 0
     xp_req: int = 0          # fast-jobs XP needed to unlock
     cooldown_days: int = 0   # days locked after working it
     time_period: str = ""    # optional game.time gate (e.g. "M","A")
     money_trait: str = "money"
+    time_cost: Optional[int] = None  # E8 — minutes a shift takes (None = none)
+    # E6 — a rank per job: [{xp, title, income}], xp rising. The rank is the last one
+    # whose xp she has reached on THIS job ($game_state.fast_jobs.job_xp[id]); its
+    # income replaces the job's. Empty = no ranks, the job pays `income` as before.
+    ranks: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -1634,6 +1676,56 @@ _CONDITION_CARRIER_KEYS = frozenset({"conditions", "entry_conditions", "match_co
 _CONDITION_EXCLUDED_TABLES = frozenset({"quest_cards", "player_portrait"})
 
 
+# E5 — the keys of an effect value computed from her stats, and the keys that hold an
+# effect value wherever they appear (`value` on a trait effect, `income` on a job).
+_TRAIT_VALUE_KEYS = frozenset({"type", "trait", "mult", "add", "min", "max"})
+_EFFECT_VALUE_CARRIER_KEYS = frozenset({"value", "income"})
+
+
+def _validate_effect_value_shape(val: Any, ctx: str, player_traits: Set[str]) -> List[str]:
+    """E5 — check `{type = "trait", trait, mult, add, min, max}`.
+
+    Errors: an unknown key, a missing or undeclared player trait (the runtime would read
+    0 and pay the floor for ever), a non-number factor, and min above max.
+    """
+    errors: List[str] = []
+    for k in sorted(set(val) - _TRAIT_VALUE_KEYS):
+        errors.append(f"{ctx}: unknown key `{k}` on a stat-based value "
+                      f"(allowed: {', '.join(sorted(_TRAIT_VALUE_KEYS))})")
+    trait = val.get("trait")
+    if not isinstance(trait, str) or not trait:
+        errors.append(f"{ctx}: a stat-based value needs `trait`, a player trait")
+    elif player_traits and trait not in player_traits:
+        errors.append(f"{ctx}: trait {trait!r} is not in [player] core_traits")
+    for k in ("mult", "add", "min", "max"):
+        if k in val and (isinstance(val[k], bool) or not isinstance(val[k], (int, float))):
+            errors.append(f"{ctx}.{k} must be a number, got {val[k]!r}")
+    lo, hi = val.get("min"), val.get("max")
+    if (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+            and not isinstance(lo, bool) and not isinstance(hi, bool) and lo > hi):
+        errors.append(f"{ctx}: min ({lo}) is above max ({hi})")
+    return errors
+
+
+def _walk_effect_values(node: Any, ctx: str, player_traits: Set[str]) -> List[str]:
+    """E5 — find every stat-based effect value in the raw TOML and check it. Walks by
+    key name, like _walk_condition_carriers; a `value` that is a plain number or a
+    random range is left to the generator's own check."""
+    errors: List[str] = []
+    if isinstance(node, dict):
+        for k, v in node.items():
+            child = f"{ctx}.{k}" if ctx else str(k)
+            if (k in _EFFECT_VALUE_CARRIER_KEYS and isinstance(v, dict)
+                    and v.get("type") == "trait"):
+                errors.extend(_validate_effect_value_shape(v, child, player_traits))
+                continue
+            errors.extend(_walk_effect_values(v, child, player_traits))
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            errors.extend(_walk_effect_values(v, f"{ctx}[{i}]", player_traits))
+    return errors
+
+
 def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
     """E1 — check one conditions table against CONDITION_SCHEMA.
 
@@ -1697,8 +1789,9 @@ def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[
     it reaches in our games: canvas triggers and substitutions, every node block
     (groups, cascades, linkreplace beats), choices and their effects, flagEffects,
     rejection effects and text variants, location entry_conditions, description
-    variants, door options, clothing_rules, clothing items, phone conversation / post /
-    profile / gallery triggers, match_condition, daily_topics, daily_tick effects,
+    variants, door options, clothing_rules, clothing items, phone app `conditions`,
+    phone conversation / post / profile / gallery / call triggers, match_condition,
+    daily_topics, daily_tick effects,
     engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
     """
     errors: List[str] = []
@@ -2102,6 +2195,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # every carrier is reached by its authored key, including ones parsed as raw dicts.
     # Both builds (TI and the no-DB game_graph path) run normalize() then validate().
     _parse_errors.extend(_walk_condition_carriers(data, ""))
+    _parse_errors.extend(_walk_effect_values(
+        data, "", set(((data.get("player") or {}).get("core_traits") or {}).keys())))
 
     schema_version = _require_str(data, "schema_version", "0.1")
 
@@ -3047,11 +3142,15 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             TemplateFastJob(
                 id=_require_str(fj, "id"),
                 name=_require_str(fj, "name", ""),
-                income=_require_int(fj, "income", 0),
+                income=(fj["income"] if isinstance(fj.get("income"), dict)
+                        else _require_int(fj, "income", 0)),
                 xp_req=_require_int(fj, "xp_req", 0),
                 cooldown_days=_require_int(fj, "cooldown_days", 0),
                 time_period=_require_str(fj, "time_period", ""),
                 money_trait=_require_str(fj, "money_trait", "money") or "money",
+                # E6 — kept raw; validate() checks the ladder.
+                ranks=list(fj.get("ranks") or []),
+                time_cost=fj.get("time_cost"),  # E8 — kept raw; validate() checks it
             )
         )
 
@@ -3170,6 +3269,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     post_actions=list(a_raw.get("post_actions") or []),
                     options=[o for o in (a_raw.get("options") or []) if isinstance(o, dict)],
                     no_answer=_require_str(a_raw, "no_answer", ""),
+                    conditions=a_raw.get("conditions") or {},  # E8; E1's walker checks it
+                    passage=_require_str(a_raw, "passage", ""),  # E8
+                    anywhere=a_raw.get("anywhere", False),  # E8 — validate() checks it
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -3204,6 +3306,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     # E3 — kept raw; validate() owns the type and range checks.
                     repeat_after_days=c_raw.get("repeat_after_days"),
                     max_repeats=c_raw.get("max_repeats"),
+                    # E3b — kept raw too; validate() checks the shapes.
+                    ignore_after_days=c_raw.get("ignore_after_days"),
+                    on_ignore=c_raw.get("on_ignore"),
                 ))
 
             # Parse posts (social feed)
@@ -3240,6 +3345,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     trigger=p_raw.get("trigger", {}) or {},
                     match_condition=p_raw.get("match_condition", {}) or {},
                     search_queries=[str(q) for q in _require_list(p_raw, "search_queries")],
+                    on_match=p_raw.get("on_match"),  # E8 — validate() checks the shape
                 ))
 
             phone_daily_topics: List[TemplatePhoneDailyTopic] = []
@@ -3257,6 +3363,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     image=_require_str(dt_raw, "image", ""),
                     corruption_min=int(_dt_corr_min) if _dt_corr_min is not None else None,
                     cooldown=_require_str(dt_raw, "cooldown", ""),
+                    time_cost=dt_raw.get("time_cost"),  # E8 — validate() checks it
                 ))
 
             phone_gallery_items: List[TemplatePhoneGalleryItem] = []
@@ -3271,6 +3378,23 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     link=_require_str(g_raw, "link", ""),
                 ))
 
+            # E8-calls — incoming calls. Kept close to raw; validate() owns the checks.
+            phone_calls: List[TemplatePhoneCall] = []
+            for cl_raw in (phone_raw.get("calls") or []):
+                if not isinstance(cl_raw, dict):
+                    continue
+                phone_calls.append(TemplatePhoneCall(
+                    id=_require_str(cl_raw, "id"),
+                    app=_require_str(cl_raw, "app", ""),
+                    caller=_require_str(cl_raw, "caller", ""),
+                    trigger=cl_raw.get("trigger", {}) or {},
+                    accept=_require_str(cl_raw, "accept", ""),
+                    ring_minutes=cl_raw.get("ring_minutes"),
+                    on_decline=cl_raw.get("on_decline"),
+                    on_missed=cl_raw.get("on_missed"),
+                    notify=_require_str(cl_raw, "notify", ""),
+                ))
+
             phone_obj = TemplatePhone(
                 enabled=phone_enabled,
                 apps=phone_apps,
@@ -3280,6 +3404,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 daily_topics=phone_daily_topics,
                 gallery_items=phone_gallery_items,
                 purchase_flag=_require_str(phone_raw, "purchase_flag", ""),
+                calls=phone_calls,
             )
 
     # ── Day-rollover hook ── [engine.daily_tick]
@@ -4827,6 +4952,20 @@ def validate(template: GameTemplate) -> List[str]:
                 chat_app_ids.add(app.id)
             if not app.label:
                 errors.append(f"{ctx}.label is required")
+            # E8 — a custom app with no passage renders "Coming Soon"; a passage on any
+            # other type is never read.
+            if app.type == "custom" and not app.passage:
+                errors.append(f"{ctx} is a custom app with no passage — it would render "
+                              f"a placeholder")
+            elif app.type != "custom" and app.passage:
+                errors.append(f"{ctx}.passage is read only on a custom app (type is "
+                              f"'{app.type}')")
+            # E8 — `anywhere` lifts a launcher's room lock; read on no other type.
+            if not isinstance(app.anywhere, bool):
+                errors.append(f"{ctx}.anywhere must be true or false (got {app.anywhere!r})")
+            elif app.anywhere and app.type != "launcher":
+                errors.append(f"{ctx}.anywhere is read only on a launcher app (type is "
+                              f"'{app.type}')")
 
         feed_app_ids = {a.id for a in phone.apps if a.type == "social_feed"}
         dating_app_ids = {a.id for a in phone.apps if a.type == "dating"}
@@ -4852,6 +4991,9 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"{ctx}.npc '{prof.npc}' not found in npcs")
             if not prof.bio:
                 errors.append(f"{ctx}.bio is required")
+            if prof.on_match is not None:  # E8
+                errors.extend(_validate_phone_effect_set(
+                    prof.on_match, f"{ctx}.on_match", {n.id for n in template.npcs}))
 
         seen_conv_ids: Set[str] = set()
         npc_id_set = {n.id for n in template.npcs}
@@ -4889,6 +5031,98 @@ def validate(template: GameTemplate) -> List[str]:
                 elif not _is_whole_days(conv.max_repeats):
                     errors.append(f"{ctx}.max_repeats must be a whole number >= 1 "
                                   f"(got {conv.max_repeats!r})")
+            # E3b — the ignore hook. "Ignored" means no reply was sent, so a chat with
+            # no reply block can never be ignored and the hook would never fire.
+            if conv.ignore_after_days is not None:
+                if not _is_whole_days(conv.ignore_after_days):
+                    errors.append(f"{ctx}.ignore_after_days must be a whole number of days "
+                                  f">= 1 (got {conv.ignore_after_days!r})")
+                if not any(b.type == "reply" for b in conv.blocks):
+                    errors.append(f"{ctx}.ignore_after_days needs a reply block — a chat "
+                                  f"with nothing to answer cannot be ignored")
+            if conv.on_ignore is not None:
+                if conv.ignore_after_days is None:
+                    errors.append(f"{ctx}.on_ignore is read only with ignore_after_days")
+                errors.extend(_validate_phone_effect_set(conv.on_ignore, f"{ctx}.on_ignore",
+                                                         npc_id_set))
+            for bi, block in enumerate(conv.blocks):  # E8 — time_cost on a reply choice
+                for chi, ch in enumerate(block.choices or []):
+                    if isinstance(ch, dict) and "time_cost" in ch and not _is_whole_days(ch["time_cost"]):
+                        errors.append(f"{ctx}.blocks[{bi}].choices[{chi}].time_cost must be a "
+                                      f"whole number of minutes >= 1 (got {ch['time_cost']!r})")
+        # E8 — time_cost on a daily topic and on a post action (minutes).
+        for dti, dt in enumerate(phone.daily_topics):
+            if dt.time_cost is not None and not _is_whole_days(dt.time_cost):
+                errors.append(f"phone.daily_topics[{dti}].time_cost must be a whole number of "
+                              f"minutes >= 1 (got {dt.time_cost!r})")
+        player_traits = set((template.player.core_traits or {}).keys())
+        for ai, app in enumerate(phone.apps):
+            for pai, act in enumerate(app.post_actions or []):
+                if isinstance(act, dict) and "time_cost" in act and not _is_whole_days(act["time_cost"]):
+                    errors.append(f"phone.apps[{ai}].post_actions[{pai}].time_cost must be a "
+                                  f"whole number of minutes >= 1 (got {act['time_cost']!r})")
+                # E8 — the trait `corruption_min` is read against (default corruption).
+                if isinstance(act, dict) and "gate_trait" in act:
+                    gt = act["gate_trait"]
+                    if not isinstance(gt, str) or gt not in player_traits:
+                        errors.append(f"phone.apps[{ai}].post_actions[{pai}].gate_trait {gt!r} "
+                                      f"is not in [player] core_traits")
+                    elif act.get("corruption_min") is None:
+                        errors.append(f"phone.apps[{ai}].post_actions[{pai}].gate_trait is read "
+                                      f"only with corruption_min")
+        # E8-calls — incoming calls. The accept canvas is checked with the launcher's
+        # canvas rules below, where the canvas sets exist.
+        calls_app_ids = {a.id for a in phone.apps if a.type == "calls"}
+        seen_call_ids: Set[str] = set()
+        for cli, call in enumerate(phone.calls):
+            cctx = f"phone.calls[{cli}]"
+            if not call.id or not _is_valid_slug(call.id):
+                errors.append(f"{cctx}.id is required, lowercase snake_case")
+            elif call.id in seen_call_ids:
+                errors.append(f"phone.calls: duplicate id '{call.id}'")
+            seen_call_ids.add(call.id)
+            if call.app not in calls_app_ids:
+                errors.append(f"{cctx}.app '{call.app}' not found in calls apps")
+            if not call.caller:
+                errors.append(f"{cctx}.caller is required (an NPC id)")
+            elif call.caller not in npc_id_set:
+                errors.append(f"{cctx}.caller '{call.caller}' not found in npcs")
+            if not call.accept:
+                errors.append(f"{cctx}.accept is required — the canvas answering plays")
+            if call.ring_minutes is not None and not _is_whole_days(call.ring_minutes):
+                errors.append(f"{cctx}.ring_minutes must be a whole number of minutes >= 1 "
+                              f"(got {call.ring_minutes!r})")
+            for key in ("on_decline", "on_missed"):
+                if getattr(call, key) is not None:
+                    errors.extend(_validate_phone_effect_set(getattr(call, key),
+                                                             f"{cctx}.{key}", npc_id_set))
+
+    # E6 — a rank per job. Errors: a misordered or malformed ladder would build clean
+    # and pay the wrong rank, or never promote her.
+    for ji, job in enumerate(template.fast_jobs):
+        if job.time_cost is not None and not _is_whole_days(job.time_cost):  # E8
+            errors.append(f"fast_jobs[{ji}].time_cost must be a whole number of minutes >= 1 "
+                          f"(got {job.time_cost!r})")
+        last_xp = -1
+        for ri, rank in enumerate(job.ranks):
+            rctx = f"fast_jobs[{ji}].ranks[{ri}]"
+            if not isinstance(rank, dict):
+                errors.append(f"{rctx}: must be a table {{xp, title, income}}")
+                continue
+            for k in sorted(set(rank) - {"xp", "title", "income"}):
+                errors.append(f"{rctx}: unknown key `{k}` (allowed: income, title, xp)")
+            xp = rank.get("xp")
+            if isinstance(xp, bool) or not isinstance(xp, int) or xp < 0:
+                errors.append(f"{rctx}.xp must be a whole number >= 0 (got {xp!r})")
+            elif xp <= last_xp:
+                errors.append(f"{rctx}.xp must rise rank by rank (got {xp} after {last_xp})")
+            else:
+                last_xp = xp
+            if not isinstance(rank.get("title"), str) or not rank.get("title", "").strip():
+                errors.append(f"{rctx}.title is required — it is the rank she reads")
+            inc = rank.get("income")
+            if inc is None or isinstance(inc, bool) or not isinstance(inc, (int, float, dict)):
+                errors.append(f"{rctx}.income must be a number or a value table (got {inc!r})")
 
     # container/default entry rules
     for l in template.locations:
@@ -5191,6 +5425,16 @@ def validate(template: GameTemplate) -> List[str]:
     # HERE rather than in the phone block above, because `canvas_ids` is not built
     # until this point and the comment above says not to rebuild that set locally.
     if template.phone_enabled and template.phone:
+        # E8-calls — the accept canvas: it exists, and it has a home to return her to.
+        for cli, call in enumerate(template.phone.calls):
+            if not call.accept:
+                continue
+            if call.accept not in canvas_ids:
+                errors.append(f"phone.calls[{cli}].accept canvas '{call.accept}' not found "
+                              f"in canvases")
+            elif call.accept in canvas_without_trigger_location:
+                errors.append(f"phone.calls[{cli}].accept canvas '{call.accept}' has no "
+                              f"trigger location, so the call would have nowhere to end")
         for ai, app in enumerate(template.phone.apps):
             if app.type != "launcher":
                 if app.options:
@@ -6779,6 +7023,44 @@ def _is_whole_days(v: Any) -> bool:
     return isinstance(v, int) and not isinstance(v, bool) and v >= 1
 
 
+# The keys the phone runtime reads on a trait effect and a flag effect it applies
+# outside a canvas (a reply choice's `effects` / `flagEffects`, setup.applyPhoneEffectSet).
+_PHONE_TRAIT_EFFECT_KEYS = frozenset({"targetType", "npcId", "trait", "op", "value", "clamp", "cap"})
+_PHONE_FLAG_EFFECT_KEYS = frozenset({"targetType", "npcId", "flag", "op"})
+
+
+def _validate_phone_effect_set(raw: Any, ctx: str, npc_ids: Set[str]) -> List[str]:
+    """E3b — a phone effect set, `{effects = [...], flagEffects = [...]}`: the trait and
+    flag effects a reply choice carries, applied by the phone with no canvas around it.
+    An unknown key is an error, because the runtime would skip it and the cost the
+    author wrote would never land."""
+    if not isinstance(raw, dict):
+        return [f"{ctx}: must be a table {{effects, flagEffects}}, got {type(raw).__name__}"]
+    errors: List[str] = []
+    for k in sorted(set(raw) - {"effects", "flagEffects"}):
+        errors.append(f"{ctx}: unknown key `{k}` (allowed: effects, flagEffects)")
+    for list_key, keys, need in (("effects", _PHONE_TRAIT_EFFECT_KEYS, "trait"),
+                                 ("flagEffects", _PHONE_FLAG_EFFECT_KEYS, "flag")):
+        items = raw.get(list_key, [])
+        if not isinstance(items, list):
+            errors.append(f"{ctx}.{list_key}: must be a list")
+            continue
+        for i, eff in enumerate(items):
+            ectx = f"{ctx}.{list_key}[{i}]"
+            if not isinstance(eff, dict):
+                errors.append(f"{ectx}: must be a table")
+                continue
+            for k in sorted(set(eff) - keys):
+                errors.append(f"{ectx}: unknown key `{k}` (allowed: {', '.join(sorted(keys))})")
+            if not isinstance(eff.get(need), str) or not eff.get(need):
+                errors.append(f"{ectx}: needs `{need}`")
+            if eff.get("targetType", "player") not in ("player", "npc"):
+                errors.append(f"{ectx}.targetType must be 'player' or 'npc'")
+            if eff.get("targetType") == "npc" and eff.get("npcId") not in npc_ids:
+                errors.append(f"{ectx}.npcId {eff.get('npcId')!r} not found in npcs")
+    return errors
+
+
 def _is_seen_weight(v: Any) -> bool:
     return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1
 
@@ -8012,7 +8294,10 @@ def _assemble_project_metadata(project, template):
         project.metadata["fast_jobs"] = [
             {"id": j.id, "name": j.name, "income": j.income, "xp_req": j.xp_req,
              "cooldown_days": j.cooldown_days, "time_period": j.time_period,
-             "money_trait": j.money_trait}
+             "money_trait": j.money_trait,
+             # E6 — emitted only when set, so a game without ranks is byte-identical.
+             **({"ranks": j.ranks} if j.ranks else {}),
+             **({"time_cost": j.time_cost} if j.time_cost is not None else {})}
             for j in template.fast_jobs
         ]
     if template.bank is not None:
@@ -8317,7 +8602,10 @@ def _assemble_project_metadata(project, template):
                  # Emitted only when non-empty so every game without a launcher
                  # app produces a byte-identical payload.
                  **({"options": a.options} if a.options else {}),
-                 **({"no_answer": a.no_answer} if a.no_answer else {})}
+                 **({"no_answer": a.no_answer} if a.no_answer else {}),
+                 **({"conditions": a.conditions} if a.conditions else {}),
+                 **({"passage": a.passage} if a.passage else {}),
+                 **({"anywhere": True} if a.anywhere is True else {})}
                 for a in phone.apps
             ],
             "conversations": [
@@ -8332,6 +8620,9 @@ def _assemble_project_metadata(project, template):
                     **({"repeat_after_days": c.repeat_after_days}
                        if c.repeat_after_days is not None else {}),
                     **({"max_repeats": c.max_repeats} if c.max_repeats is not None else {}),
+                    **({"ignore_after_days": c.ignore_after_days}
+                       if c.ignore_after_days is not None else {}),
+                    **({"on_ignore": c.on_ignore} if c.on_ignore is not None else {}),
                     "blocks": [
                         {
                             "type": b.type,
@@ -8375,6 +8666,8 @@ def _assemble_project_metadata(project, template):
                     "trigger": p.trigger,
                     "match_condition": p.match_condition,
                     "search_queries": p.search_queries,
+                    # E8 — emitted only when set (a byte-identical payload otherwise).
+                    **({"on_match": p.on_match} if p.on_match is not None else {}),
                 }
                 for p in phone.profiles
             ],
@@ -8389,6 +8682,7 @@ def _assemble_project_metadata(project, template):
                     "image": dt.image,
                     "corruption_min": dt.corruption_min,
                     "cooldown": dt.cooldown,
+                    **({"time_cost": dt.time_cost} if dt.time_cost is not None else {}),
                 }
                 for dt in phone.daily_topics
             ],
@@ -8398,6 +8692,19 @@ def _assemble_project_metadata(project, template):
                 for g in phone.gallery_items
             ],
         }
+        # E8-calls — only in a game with calls, so every other payload is byte-identical.
+        if phone.calls:
+            project.metadata["phone_settings"]["calls"] = [
+                {
+                    "id": c.id, "app": c.app, "caller": c.caller, "trigger": c.trigger,
+                    "accept": c.accept,
+                    **({"ring_minutes": c.ring_minutes} if c.ring_minutes is not None else {}),
+                    **({"on_decline": c.on_decline} if c.on_decline is not None else {}),
+                    **({"on_missed": c.on_missed} if c.on_missed is not None else {}),
+                    **({"notify": c.notify} if c.notify else {}),
+                }
+                for c in phone.calls
+            ]
 
 @transaction.atomic
 def create_project_from_template(
