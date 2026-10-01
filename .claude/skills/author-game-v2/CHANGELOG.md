@@ -5,6 +5,34 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Merge pointer fix: engine batch 2 citations re-pointed
+
+**Why.** Engine batch 2 (the ignore hook, pay from stats, job ranks, the phone's outward features,
+calls) moved `v2.py` and `template_import.py` lines. The skill side's own citations still pointed at
+the pre-merge engine, and the two templates' comments had drifted further than that.
+
+**What changed.**
+- `cite_check.py --fix`: `references/the-systems.md` SY8 rule 5, `setup.pickRememberedPoolEntry`
+  `v2.py:5668` becomes `v2.py:5931`.
+- By hand, read on disk: `SKILL.md` ("a declared garment can be got") and `references/the-meters.md`
+  W3, the shop's `!initial && price > 0` filter, `v2.py:2146` becomes `v2.py:2174`.
+- `templates/board.toml`: the version footer `v2.py:17426-17438` becomes `v2.py:18507-18521`; the
+  rent currency default `v2.py:1186` becomes `v2.py:1217`.
+- `templates/first-hour.toml`: "Stranger" `v2.py:14923-14929` becomes `17283-17290`;
+  `getStoryCanvasRedirect` `5184` becomes `6069`; `selectAutoFireCanvasForLocation` `4716` and `4722`
+  become `5519`; `isCanvasValid` `4836` becomes `5683`; `requiresNpc` in random encounters `5522`
+  becomes `6412` and in substitutions `5595` becomes `6491`; the fail-open conditions check `3797`
+  becomes `4732`; `TemplateCanvas` `template_import.py:1032-1039` becomes `1107-1114`; the portrait
+  presence filter `5457-5462` becomes `6153-6158`. These were already wrong before the merge.
+- Every `v2.py:` and `template_import.py:` citation in `templates/cards/*.md` was read against the
+  source; all were already correct (the engine side re-pointed them).
+
+**Verified.** cite_check: SKILL.md + references/ at 0. Selfcheck and the skill tests pass.
+
+**Words:** +0 (numbers only), running total 145,431 / 149,283.
+
+---
+
 ## 2026-10-02 — Billable B6 (PROTECTED, tools): EXPLICIT list version 2, the floor re-measured and kept
 
 **Why.** The Billable Hours test found EXPLICIT blind to "groping" (the stem was `grope`); `tits?\b` and
