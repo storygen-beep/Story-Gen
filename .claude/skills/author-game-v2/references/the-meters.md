@@ -3,6 +3,10 @@
 The ascent tiers are this skill's whole thesis: **a meter that buys access.** Every other file here
 is about *what* the meter unlocks. This one is about the meters themselves.
 
+**Meters live inside systems.** A meter is what a system writes and reads (`the-systems.md` SY1): the
+job writes her wage and her nerve, the gym her body, the bill her debt. That file owns the activity and
+its card; this one owns which meters exist, who owns them, and what the climb costs.
+
 **Three parts, and they are read in order.**
 
 **W1–W6 — which meters exist and who owns them.** The decision that comes before every other one on
@@ -78,6 +82,8 @@ dropped it.
 | `"player"` | she is the thing that changes; her meters gate the world | 1–2 deep player tiers doing the heavy gating · the cast runs light, one bond meter each |
 | `"cast"` | *they* are what change; you work on each person in turn | little or no player tier · **two meters per character**, one for access and one for willingness, gating that person's whole ladder |
 | `"both"` | a player floor under per-character arcs | a player tier as the *floor* on the most explicit content, the per-character meter as the *spine* of each arc |
+
+A system's own pay and lewd ladders are not this fork; they follow `the-systems.md` SY8.
 
 **Neither is better.** A ladder game is cheaper to author and gives every player the same climb; a
 roster game costs more and gives a player somebody to be attached to — which is what
@@ -247,7 +253,8 @@ the-company  player.horny   24 gates  11 rungs   2,20,30,40,49,50,60,70,80,90,99
 DoL          exhibitionism  21 gates  11 rungs   15,19,25,35,40,50,55,60,75,80,95
 ```
 
-**8–17 rungs, densest at the bottom, lowest rung at a median of 5.**
+**8–17 rungs, densest at the bottom, lowest rung at a median of 5.** A system's lewd ladder is a
+shorter object: ≥4 lewd rungs, ≥2 acts per rung (`the-systems.md` SY8).
 
 ⚠️ **That number is about the meter that CARRIES the game, and it does not transfer to the cast.**
 Every meter in the table above is a player ascent meter. A per-character willingness meter is a

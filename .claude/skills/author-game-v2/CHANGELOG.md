@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S6: meters live inside systems (light touch)
+
+**Why.** WS-D3: meters are now what systems write and read; `the-meters.md` did not say so.
+
+**What changed.** `references/the-meters.md`: the intro gains one paragraph (meters live inside systems;
+`the-systems.md` owns the activity and its card, this file owns which meters exist and what the climb costs); W1's
+who-climbs table gains one line pointing system pay and lewd ladders at SY8; W4 cross-links SY8's "≥4 lewd rungs,
+≥2 acts per rung" floor. W5b, W8 and M1–M5 are not edited.
+
+**Verified.** `git diff` touches only the intro, W1 and W4; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +85, running total 142,134 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S5b: A15 as a money system's lewd ladder, and the stale "zero hits" line
 
 **Why.** WS-D3/WS-D4: paid sex is a money system, and A15 is its lewd ladder. And `the-want.md` §4a claimed a grep
