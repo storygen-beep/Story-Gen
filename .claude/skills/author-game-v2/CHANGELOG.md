@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C4: the-first-hour.md arms the wardrobe with its first-release minimum
+
+**Why.** The opening asked for "one read" of the wardrobe, which is the floor gate, not a wardrobe.
+Round 9a's first-release minimum (Shady Deals' early shape) is what a first release should carry.
+
+**What changed.** `references/the-first-hour.md`, the F4 wardrobe box: "one read" becomes five items —
+one number (`worn_exposure` and the states), one gate reachable on day 1 with a notice (Shady Deals'
+gate at the best day-1 score), the leave rules (through `entry_conditions`), one event, one line — and
+"grow by adding readers" (Shady Deals, ~13 wardrobe entries over 20 versions, round 9a §4). In the same
+box, four stale `v2.py` cites for the engine's wardrobe and shop links and one for the shop's stock
+filter were re-pointed (`v2.py:10662`, `:10603`, `:10667`, `:10608`, `:2146`; each read).
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +121, running total 144,096 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C3: the-meters.md W7 and W3 — read clothing cheaply and often, gate only at doors that say why
 
 **Why.** LO's clothing decision: states first, each read in ≥3 places. W7 said "if you find yourself

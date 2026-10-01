@@ -419,25 +419,36 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Arming a system is not the same as putting a door to it on the screen — and for the wardrobe the engine already put one there.
 >
 > Declaring `wardrobe_location` renders `[[Change Clothes->WardrobePage]]` on that location's screen
-> unconditionally (`v2.py:10392`, and `:10344` for the entry-gated variant); `shop_location` does
-> the same with `Browse Clothes` (`:10153`, `:10105`). It is above the portrait row and above the
+> unconditionally (`v2.py:10662`, and `:10603` for the entry-gated variant); `shop_location` does
+> the same with `Browse Clothes` (`:10667`, `:10608`). It is above the portrait row and above the
 > activity list, on every visit, needing nothing from you.
 >
 > So an authored canvas called *"The wardrobe"* at that same location is a **second door beside the
 > engine's**, and it will be the one that does not work: its exit has to route somewhere, and
 > nothing you write reaches `WardrobePage` the way the engine's own link does. Do not author one.
 >
-> **What F4 actually asks for here is a READ, not a door.** The clothing system is armed when
-> something in the world asks what she is wearing — one `worn_type`, `worn_exposure`,
-> `clothing_slot` or `clothing_item` condition, or a `player_portrait` outfit override. See
-> `the-meters.md` W7, which carries the field evidence that the reads belong in ordinary places
-> rather than in sex scenes. The gate that measures it is `the wardrobe is read`.
+> **What F4 asks for here is the wardrobe's first-release minimum, not a door.** Round 9a's
+> smallest wardrobe that does not feel empty is Shady Deals' early shape — cheap clothes, a style
+> number, one gate reachable on day 1:
+>
+> 1. **one number** the world reads: `worn_exposure`, with the states read through it
+>    (`the-meters.md` W7);
+> 2. **one gate reachable on day 1, with a notice**: set it at what day-1 clothes can reach (Shady
+>    Deals' gate of 10 is exactly the best day-1 score from the cheapest shop), and the block says why;
+> 3. **the leave rules**: a daring price to go out in each revealing state, carried by the
+>    destinations' `entry_conditions` (`engine.md` §17);
+> 4. **one event** fired from a revealing state;
+> 5. **one line**: a person who notices what she has on.
+>
+> Then grow by adding readers, not items: Shady Deals' log shows about 13 wardrobe entries over 20
+> versions, each one a new reader (round 9a §4). The reads belong in ordinary places, not in sex
+> scenes (W7). The gate that measures the floor is `the wardrobe is read`.
 >
 > ### ⚠️ And a read is only armed if something she can GET satisfies it.
 >
 > A clothing condition that names a property only unobtainable garments carry is dead, and so is
 > everything gated behind it — an arc step that can never be entered, and every step after it.
-> The shop only lists a garment that is not `initial` and has `price > 0` (`v2.py:2087`).
+> The shop only lists a garment that is not `initial` and has `price > 0` (`v2.py:2146`).
 >
 > **So the check is two-part:**
 >
