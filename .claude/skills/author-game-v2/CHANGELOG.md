@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W10b · PROTECTED (truth rule, WS-D25): a neutral example
+
+**Why.** WS-D25: W10's example *"at week twelve he decides"* came from one of our own games, and our own games are
+never examples (§0.6 of the World and Systems PRD).
+
+**What changed.** `references/register.md` "The truth rule", the "A promise about the future must be built"
+paragraph: the example becomes *"next month he decides"*. Nothing else in the section changed.
+
+**Verified.** `git diff` is that one phrase; `grep -rn "week twelve"` over the skill finds only this changelog;
+`--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** −1, running total 140,539 / 149,283.
+
+---
+
 ## 2026-10-01 — World W11: a goal's end is something the game builds (World and Systems PRD, Phase 1b)
 
 **Why.** WS-D23, N18: a game's ledger declared a goal whose `ends_when` nothing in the TOML could see, so the goal
