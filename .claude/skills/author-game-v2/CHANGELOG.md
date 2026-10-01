@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P2b: costs, gates and delivery (World and Systems PRD, Phase 3)
+
+**Why.** Round 9a: ignoring costs more than saying no (CoT −20/−20 vs −2/−3), a no-show costs (CoT −25 ×3),
+hidden phone gates are 43 of 194 player failures (class b), and a covering pop-up drew SD 5 complaints (class f).
+
+**What changed** (`references/the-phone.md` only).
+- **P5** ("…— and ignoring costs most"): ignoring costs more than no; a no-show costs; using the phone costs
+  (five corpus games, counts only). Engine fact (`sendDailyChat` re-pointed to `v2.py:2462`): no time cost, no
+  ignore hook; workaround canvases for ignoring and a no-show. Cut: the six-row table — the `family-ties` and
+  `the-company` code rows, the `new-life-project` quote "It's too late to watch memes…", and the `patriarch`
+  quotes "You're too tired to text anyone" / "Better not text anyone this late..", and the `destroyer` row
+  (patriarch and destroyer also fail the adults-only rule). The old text said "six games"; the table held five.
+- **P7** ("No hidden phone gate; a locked app names what unlocks it"): no buy, carry or PIN step (43 failures, 32
+  on one PIN, numbers only; IHOH and CW 0); never copy CoT's pocket rule; leave `purchase_flag` unset (re-pointed
+  to `template_import.py:1362`). The `family-ties` unlock complaint is kept as counts (50 and 31 net); its
+  grey-tile example is cut. `openPhone` re-pointed to `v2.py:2512`.
+- **P8** ("One thing at a time, delivered by pull"): a badge, never a covering pop-up (IHOH sidebar line, CW ❕,
+  SD's three-step fix); our engine already pulls (badge `v2.py:3229`, 3-second toast `v2.py:2270`, `notify`).
+  Cut: the `college-daze` quotes "Check the phone in the game…" / "Check the in-game phone…" (kept as two
+  comments, 20 and 14 net), the `destroyer` latch code (kept as n = 1) and the `patriarch` plans-screen example.
+- **P11:** the "a one-off price to buy the phone is fine — destroyer sells one for $500" line is dropped; no price
+  to buy it either (P7).
+
+**Verified.** All twelve P-ids present; engine cites read on this branch; `--selfcheck` current (orphans 2);
+pytest 475 passed.
+
+**Words:** −120, running total 142,342 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P2a: chat length and timing (World and Systems PRD, Phase 3; round 9a phone card)
 
 **Why.** Round 9a measured the four games this skill copies: a text is 1–3 bubbles of 3–7 words (CoT median 4 and

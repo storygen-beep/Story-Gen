@@ -33,10 +33,10 @@ Engine claims here carry a `file:line` into
 2. P2 · Build the channel, never the hub
 3. P3 · A message is 3–7 words — the phone is its own register
 4. P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
-5. P5 · Everything on the phone costs something
+5. P5 · Everything on the phone costs something — and ignoring costs most
 6. P6 · If she can be looked at, she has to be able to post
-7. P7 · A locked app names what unlocks it
-8. P8 · One thing at a time
+7. P7 · No hidden phone gate; a locked app names what unlocks it
+8. P8 · One thing at a time, delivered by pull
 9. P9 · A repeatable thread is built out of today, and needs a null branch
 10. P10 · A plan the player cannot see is worse than no plan
 11. P11 · Never a battery
@@ -219,32 +219,27 @@ A phone that keeps private variables nothing else reads is the bolted-on phone, 
 
 ---
 
-## P5 · Everything on the phone costs something
+## P5 · Everything on the phone costs something — and ignoring costs most
 
-Six corpus games, the same instinct in six forms:
+**Ignoring a text costs more than saying no.** Course of Temptation's booty call charges −20
+friendship and −20 romance for "Ignore it", and only −2 / −3 for "no thanks" (round 9a §1a). A
+thread she can leave unread for free is a thread she will leave unread.
 
-| game | what it charges |
-|---|---|
-| `family-ties` | `$time.min += 1; $you.arousal += 2` **per scroll** — an infinite feed as an arousal loop |
-| `family-ties` | `$time.min += random(2, 3)` to open a message |
-| `the-company` | `passTime()` on every text sent |
-| `patriarch` | Energy < 1 → *"You're too tired to text anyone"*; late → *"Better not text anyone this late.."* |
-| `destroyer` | every phone event needs `$Energy > 19`, most also N days since the last beat |
-| `new-life-project` | memes before the evening only → *"It's too late to watch memes. Get some rest!"* |
+**A no-show costs.** The reply books a meeting; missing it costs Course of Temptation −25 romance,
+−25 lust and −25 friendship. The booking and its reminder are P10.
 
-**Read the register of those refusals.** A locked phone action in this genre is **a sentence in her
-voice**, not a greyed-out control. That is `the-voice.md`'s territory and it applies here unchanged.
+**Using the phone costs too.** Five of the phone study's games charge for phone actions — minutes off
+the clock, energy, or a late hour that refuses (numbers only). A refusal is **a sentence in her
+voice**, not a greyed-out control (`the-voice.md`).
 
-⚠️ **Nothing on our phone costs anything.** `setup.sendDailyChat` (`v2.py:2375`) applies trait
-effects and returns. Grepped the whole phone block (`v2.py:2180–3140`): the only occurrence of
-`advanceTime` or `passTime` is a comment at `v2.py:3096`. Our phone is a free action, repeatable
-without limit inside a day except where a `daily_cap` happens to exist.
-
-**Until the engine can charge for a phone action, charge in the fiction and in the gates you do
-have.** `daily_cap` on a post action, `cooldown = "per_topic"` on a daily topic, and a
-`corruption_min` that makes the rung cost something she has to have become. What you may not do is
-ship a phone that is a free infinite button — that is the *"use the app, wait, use the app, wait"*
-complaint, quoted in P11.
+⚠️ **Nothing on our phone costs anything, and nothing charges for silence.** `setup.sendDailyChat`
+(`v2.py:2462`) applies trait effects and returns; phone actions spend no time; there is no hook for
+"unanswered by day X". Until the engine has them:
+- **ignoring:** a one-time canvas on her next visit home, gated on the cause flag, `days_since_flag
+  ≥ 2` on it, and a flag every reply choice sets still `is_false`, applies the cost;
+- **a no-show:** the same shape, on the booked flag and the meeting's flag;
+- **using:** `daily_cap` on a post action, `cooldown = "per_topic"` on a daily topic, and a
+  `corruption_min` she has to have become. Never a free infinite button (P11).
 
 ---
 
@@ -308,57 +303,40 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 
 ---
 
-## P7 · A locked app names what unlocks it
+## P7 · No hidden phone gate; a locked app names what unlocks it
 
-The two loudest phone threads in 22,622 harvested comments are the same question:
+**No buy, carry or PIN step.** Hidden phone gates are 43 of the 194 player failures round 9a
+classed (class b), 32 of them on one game's PIN (`new-life-project`, numbers only). In Her Own
+Hands puts the phone in the menu from the first minute, with no step to get it, and draws 0 such
+complaints; Cupid's Way also 0 (round 9a §5). Course of Temptation's "the phone needs a pocket"
+rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:1362`) unset:
+it hides the whole phone until a flag is set.
 
-> how to unlock one locked adult app on the phone — `family-ties`, **50 net**, and again at **31 net** (paraphrased)
+**Showing a locked app is good; showing it without saying what opens it is a support ticket.** The
+two loudest phone threads in the phone study's 22,622 comments ask how to unlock one locked app
+(50 and 31 net, `family-ties`, numbers only).
 
-And the worst case in the corpus is a phone locked behind a puzzle. `new-life-project` (numbers only) puts a PIN
-on its phone and **seven separate high-scoring comments ask for it** (40, 38, 36, 32, 30, 27 and 21
-likes), plus one player stuck in a town with no phone yet to get out (13 net).
-
-**Showing a locked app is good. Showing it without saying what opens it is a support ticket.**
-`family-ties` renders a locked app as a dead grey tile beside the live ones, which is the right
-instinct — the player sees the ladder they are climbing — and then never says how.
-
-⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2425`) renders every declared
-app unconditionally. There is one gate and it is whole-phone: `purchase_flag`
-(`template_import.py:373`), which hides the sidebar button until a player flag is set — that is the
-*acquisition* story, not the ladder. Until per-app gating exists, publish the ladder in the app
-that is already open: a rung labelled `🔒` with its `corruption_min` is legible; a second app that
-silently is not there is not.
+⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2512`) renders every declared
+app unconditionally. Until per-app gating exists, publish the ladder in the app that is already
+open: a rung labelled `🔒` with its `corruption_min` is legible; a second app that silently is not
+there is not.
 
 ---
 
-## P8 · One thing at a time
+## P8 · One thing at a time, delivered by pull
 
-`destroyer`'s phone is a single latch and fourteen guarded blocks:
+**Deliver by pull: a badge, never a covering pop-up.** In Her Own Hands puts a line in its sidebar;
+Cupid's Way marks the contact with ❕ and turns the Study button yellow while a text waits. Shady
+Deals' phone covered the screen, drew 5 complaints, and was fixed in three steps: a hide button, a
+glow on a call, the hidden state remembered (round 9a §5 class f, 8 failures). Our engine already
+pulls: a delivered conversation raises the sidebar badge (`v2.py:3229`) and a three-second toast
+(`v2.py:2270`) whose text is the conversation's `notify`.
 
-```
-<<set _activequest to true>>
-<<if _activequest is true>><<if $taxistory is 1>><<if $Energy > 19>>
-    <<set _activequest to false>><a data-passage="taxievent1">…</a>
-<</if>><</if>><</if>>
-… ×14, each clearing the latch when it fires
-```
-
-The first eligible event claims the slot and nothing below it renders. **The phone never shows the
-player more than one thing to do.**
-
-The mopoga field study named **lostness, not grind, as this genre's disease** — 15.5% of player
-comments against grind's 0.9% (Process Review, Round 1). The phone is the best place in a sandbox to answer *what now*, and the corpus's
-players say so themselves, twice, unprompted:
-
-> *"Check the phone in the game. It tells you who's playing who."* — `college-daze`, 20 net
-> *"Check the in-game phone, it will tell you who plays who."* — `college-daze`, 14 net
-
-`patriarch` (structure only) does the same job in a different register — its plans screen names
-the **world** blocker when the phone cannot help: a person is ready, but a room has to be renovated
-before she can move in.
-
-⚠️ **n = 1 for the latch specifically.** It is offered as a shape, not a rate, and nothing gates
-it. What is measured is the disease it treats, not the frequency of this cure.
+**The phone answers *what now*, one thing at a time.** Lostness, not grind, is this genre's disease
+— 15.5% of player comments against grind's 0.9% (Process Review, Round 1) — and in the phone study
+players point each other at the phone to find out what to do next (two comments, 20 and 14 net, in
+a game that fails the adults-only rule; numbers only). One game shows only the first eligible phone
+event and hides the rest (`destroyer`, numbers only; n = 1, a shape, not a rate).
 
 ---
 
@@ -480,9 +458,7 @@ and it buys nothing — it reads as a chore, and the field's own players say so.
 
 ⚠️ **This is the one place where corpus prevalence and player verdict point in opposite
 directions**, and the verdict wins. Prevalence measures what authors built, not what worked. No
-battery, no charging, no data plan, no phone bill as a repeating upkeep. (A one-off *price* to buy
-the phone is a different thing and is fine — `destroyer` sells one for $500 — that is
-`the-economy.md` R1b's territory, a thing that stays bought.)
+battery, no charging, no data plan, no phone bill as a repeating upkeep, and no price to buy it either (P7).
 
 ## P12 · The phone brings someone to her
 
