@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W8: spine places are provisional until the board (World and Systems PRD, Phase 1)
+
+**Why.** Billable Hours finding F5: the spine names places before the board has rooms, so re-pointing SP2's
+`where` to a room looked like a reach-back change needing a re-sign.
+
+**What changed.** `references/the-spine.md` rules list: SP2's `where` and SP7's places are provisional until the
+board names rooms; re-pointing them to rooms is a board edit, not a re-sign. SP2's step fields mark `where` as
+provisional.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (orphans 3: the two the-spine.md orphans moved from :24 to
+:27 with the new bullet, same rules).
+
+**Words:** +38, running total 139,969 / 149,283.
+
+---
+
 ## 2026-10-01 — World W7: the Cupid's Way example (World and Systems PRD, Phase 1)
 
 **Why.** N5: the taboo_at_home slice's Cupid's Way entry read as "the family is the world"; it is really a thread

@@ -21,6 +21,9 @@ is repeating a reference — cut it and point.
   status and sign-off.
 - **The spine changes only between releases**, as a reach-back change that lists every page and
   reader it touches.
+- **Places on the spine are provisional until the board names rooms.** SP2's `where` and SP7's places
+  are written before the map exists; re-pointing them to the board's rooms is a board edit, not a
+  re-sign.
 - The `SP` ids are the spine's own. `the-sheets.md` S1–S13 and `register.md` S1–S4 are other rules.
 
 ## SP1 · Time
@@ -34,7 +37,7 @@ TOML.
 
 Per person, one table: **who climbs** (`the-meters.md` W1 — the player, the cast, or both), the
 **counter** the steps read and set, **at most two meters** beside it, and the **steps**. Each step
-carries `where`, `when`, `gate`, and one **hint line** for the guidance page (`the-voice.md` R2;
+carries `where` (provisional, above), `when`, `gate`, and one **hint line** for the guidance page (`the-voice.md` R2;
 `scripts/guidance_from_ladder.py` generates the cards from it). Four optional fields a step may carry:
 
 | field | what it records | rule |
