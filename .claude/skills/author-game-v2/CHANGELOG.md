@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P6a: engine.md §51 names planned changes, not PRD ids
+
+**Why.** LO's rule (World and Systems PRD carry-over P6a): skill text never names a PRD id. §51's gap
+table named its fixes by id, which an author cannot look up.
+
+**What changed.** `references/engine.md` §51 "The phone": the gap table's last column is now "planned:
+an ignore hook" and "planned: phone apps, calls and time cost" (with `time_cost` / `on_match` kept as the
+field names). The intro line says "planned engine change" instead of "engine item". Nothing else in
+engine.md moved.
+
+**Verified.** No PRD id is left in §51 (grep for `E[0-9]` and "until E3" over the section: 0). Selfcheck
+and the skill tests pass.
+
+**Words:** +33, running total 143,707 / 149,283.
+
+---
+
 ## 2026-10-01 — Merge pointer fix: Phases 2–3 citations re-pointed to the merged engine
 
 **Why.** The skill branch (Phases 2–3) cited `v2.py` and `template_import.py` lines as they were at

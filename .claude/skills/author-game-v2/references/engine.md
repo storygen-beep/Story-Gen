@@ -2855,16 +2855,16 @@ writes the flag's `set_day` and `set_minute` (`v2.py:6727`), so `days_since_flag
 on a reply-set flag. The chain must start from a scene. A loop invite that comes back is one conversation with
 `repeat_after_days`, not a chain. Hours since a flag and the weekday are conditions (§52).
 
-**The gaps**, each with the engine item that closes it:
+**The gaps**, each with the planned engine change that closes it:
 
 | gap | today | closed by |
 |---|---|---|
-| an "ignored by day X" hook | none; charge it on a canvas gated on the cause flag, `days_since_flag` and a reply flag still false | no E item yet (E8's calls count a missed call as ignored) |
-| calls | none; write the call as the scene the text books | E8-calls |
-| a per-app gate | `setup.openPhone` (`v2.py:2595`) renders every declared app | E8 |
-| phone actions cost time | none (`setup.sendDailyChat`, `v2.py:2545`, applies traits and returns) | E8 (`time_cost`) |
-| a dating match leads somewhere | `setup.likeProfile` (`v2.py:3049-3071`) writes `ps.matches` and nothing reads it but the dating screen | E8 (`on_match`) |
-| the `custom` app renders | `openPhoneApp` needs `appDef.passage` (`v2.py:2633`), which the importer never sends (`template_import.py:8313-8321`), so it falls to the placeholder | E8 |
+| an "ignored by day X" hook | none; charge it on a canvas gated on the cause flag, `days_since_flag` and a reply flag still false | planned: an ignore hook (and the planned calls count a missed call as ignored) |
+| calls | none; write the call as the scene the text books | planned: phone apps, calls and time cost |
+| a per-app gate | `setup.openPhone` (`v2.py:2595`) renders every declared app | planned: phone apps, calls and time cost |
+| phone actions cost time | none (`setup.sendDailyChat`, `v2.py:2545`, applies traits and returns) | planned: phone apps, calls and time cost (`time_cost`) |
+| a dating match leads somewhere | `setup.likeProfile` (`v2.py:3049-3071`) writes `ps.matches` and nothing reads it but the dating screen | planned: phone apps, calls and time cost (`on_match`) |
+| the `custom` app renders | `openPhoneApp` needs `appDef.passage` (`v2.py:2633`), which the importer never sends (`template_import.py:8313-8321`), so it falls to the placeholder | planned: phone apps, calls and time cost |
 
 ---
 
