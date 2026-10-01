@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: the `custom` app renders its `passage` (World and Systems PRD, Phase 7)
+
+**Why.** LO's engine order, step 8. `openPhoneApp` renders a custom app only with `appDef.passage`, which
+the importer never sent, so every custom app fell to "Coming Soon". A camera app is planned on this.
+
+**What changed.**
+- `template_import.py`: `passage` on `TemplatePhoneApp`, parsed, written into metadata only when set; a
+  custom app with no `passage`, or a `passage` on another type, is a build error. No game has a custom
+  app, so no game's build changes.
+- `generators/v2.py`: a custom app's `passage` that is a canvas id resolves at build time to the canvas's
+  entry passage (`_canvas_entry_passages`, as a launcher option does); anything else is a passage name.
+- `references/engine.md` §51: the custom-app gap row becomes the fact.
+- Citations re-pointed through the `git diff` line map (613 moved, 745 endpoints identical); one cite in
+  the new text corrected by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a canvas-id passage and a passage-name passage both
+render inside the phone, no "Coming Soon"). `PhoneCustomAppPassageTests` (2). The existing Tier-3 tests,
+which already wrote `passage` on a custom app, pass. Selfcheck and the skill tests pass.
+
+**Words:** +44, running total 144,937 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: an app that appears later — `conditions` on a phone app (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 8. `setup.openPhone` rendered every declared app from day 1, so an app

@@ -1395,6 +1395,12 @@ class TweeComprehensiveGeneratorV2:
                 # project.metadata in place) resolves to the same answer.
                 if app.get("type") == "launcher":
                     app["options"] = self._launcher_options_for_payload(app.get("options"))
+                # E8 — a custom app wikifies `passage` inside the phone. A canvas id
+                # resolves to that canvas's entry passage (as a launcher option does);
+                # anything else is taken as a passage name. Idempotent, like the above.
+                if app.get("type") == "custom" and app.get("passage"):
+                    app["passage"] = self._canvas_entry_passages().get(
+                        self._sanitize_canvas_name(str(app["passage"])), app["passage"])
             phone_posts = phone_settings.get("posts", [])
             phone_profiles = phone_settings.get("profiles", [])
             # Validate and track post images and profile photos

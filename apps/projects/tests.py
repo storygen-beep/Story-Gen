@@ -6430,6 +6430,37 @@ class PhoneAppConditionsTests(SimpleTestCase):
                             for e in errors), errors)
 
 
+class PhoneCustomAppPassageTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — the `custom` app's `passage` reaches the build."""
+
+    def _phone(self, app):
+        d = _toml_with_phone()
+        d["phone"]["apps"].append(app)
+        return d
+
+    def test_passage_parses_and_reaches_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        d = self._phone({"id": "cam", "type": "custom", "label": "Cam", "passage": "Start"})
+        t = normalize(d)
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        apps = p.metadata["phone_settings"]["apps"]
+        self.assertEqual(apps[-1]["passage"], "Start")
+        self.assertNotIn("passage", apps[0])
+
+    def test_a_custom_app_needs_a_passage_and_no_other_type_takes_one(self):
+        errors = validate(normalize(self._phone({"id": "cam", "type": "custom", "label": "Cam"})))
+        self.assertTrue(any("custom app with no passage" in e for e in errors), errors)
+        errors = validate(normalize(self._phone(
+            {"id": "pics", "type": "gallery", "label": "Pics", "passage": "Start"})))
+        self.assertTrue(any("passage is read only on a custom app" in e for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

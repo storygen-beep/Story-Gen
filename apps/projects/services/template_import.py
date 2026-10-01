@@ -344,6 +344,9 @@ class TemplatePhoneApp:
     # E8 — a v1.0 conditions block: the app is on the phone only while it holds (an
     # app she installs, a job board that opens later). Empty = always there.
     conditions: Dict[str, Any] = field(default_factory=dict)
+    # E8 — a "custom" app's screen: a canvas id (its entry passage) or a passage name,
+    # rendered inside the phone. Required on a custom app, read on no other type.
+    passage: str = ""
 
 
 @dataclass
@@ -3243,6 +3246,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     options=[o for o in (a_raw.get("options") or []) if isinstance(o, dict)],
                     no_answer=_require_str(a_raw, "no_answer", ""),
                     conditions=a_raw.get("conditions") or {},  # E8; E1's walker checks it
+                    passage=_require_str(a_raw, "passage", ""),  # E8
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -4904,6 +4908,14 @@ def validate(template: GameTemplate) -> List[str]:
                 chat_app_ids.add(app.id)
             if not app.label:
                 errors.append(f"{ctx}.label is required")
+            # E8 — a custom app with no passage renders "Coming Soon"; a passage on any
+            # other type is never read.
+            if app.type == "custom" and not app.passage:
+                errors.append(f"{ctx} is a custom app with no passage — it would render "
+                              f"a placeholder")
+            elif app.type != "custom" and app.passage:
+                errors.append(f"{ctx}.passage is read only on a custom app (type is "
+                              f"'{app.type}')")
 
         feed_app_ids = {a.id for a in phone.apps if a.type == "social_feed"}
         dating_app_ids = {a.id for a in phone.apps if a.type == "dating"}
@@ -8476,7 +8488,8 @@ def _assemble_project_metadata(project, template):
                  # app produces a byte-identical payload.
                  **({"options": a.options} if a.options else {}),
                  **({"no_answer": a.no_answer} if a.no_answer else {}),
-                 **({"conditions": a.conditions} if a.conditions else {})}
+                 **({"conditions": a.conditions} if a.conditions else {}),
+                 **({"passage": a.passage} if a.passage else {})}
                 for a in phone.apps
             ],
             "conversations": [

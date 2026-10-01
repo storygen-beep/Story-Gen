@@ -7,7 +7,10 @@ Each part is opt-in and has its own section below:
     but the dating screen); and `match_condition`, which the importer checks as a v1.0
     block itself, is read by the runtime in that shape;
   * an app's `conditions` keep it off the phone while they fail: not on the home grid,
-    a stale tap does nothing, and its chats are not counted unread.
+    a stale tap does nothing, and its chats are not counted unread;
+  * a `custom` app renders its `passage` inside the phone (before, the importer never
+    sent the field and every custom app fell to "Coming Soon"). A canvas id resolves to
+    the canvas's entry passage, as a launcher option does.
 
     pytest apps/game_generation/tests/test_phone_outward.py -q
 """
@@ -81,4 +84,21 @@ def test_an_app_is_on_the_phone_only_while_its_conditions_hold(html):
         assert unread() == hidden_count + 1
         g.js("() => SugarCube.setup.openPhoneApp('secret')")
         assert "Kai" in g.js("() => jQuery('.phone-frame').html()")  # the thread list
+        assert g.errors == []
+
+
+# ── the custom app ───────────────────────────────────────────────────────────
+
+
+@needs_browser
+def test_a_custom_app_renders_its_passage(html):
+    with open_game(html) as g:
+        screen = lambda app: g.js(
+            "(a) => { SugarCube.setup.openPhone(); SugarCube.setup.openPhoneApp(a);"
+            " return jQuery('#phone-custom-body').text(); }", app)
+        assert "The till." in screen("camera")   # a canvas id, resolved at build time
+        assert "Paid." in screen("notes")        # a passage name, as written
+        assert "Coming Soon" not in g.js("() => jQuery('.phone-frame').text()")
+        assert g.js("() => SugarCube.setup.phone_data.apps.filter(a => a.id === 'camera')[0].passage") \
+            == "Canvas_pay_desk_Node_desk"
         assert g.errors == []

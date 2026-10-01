@@ -29,6 +29,8 @@
 #    lee_profile  matches only at charm >= 50: a like is not a match, nothing applies.
 #    secret       a chat app with conditions (has_secret_app): off the phone until the
 #                 flag is set, and its delivered chat (kai_secret) is not counted unread.
+#    camera       a custom app whose passage is a canvas id (pay_desk): its entry passage.
+#    notes        a custom app whose passage is a passage name (Canvas_pay_desk_Node_paid).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -104,6 +106,18 @@ type       = "chat"
 label      = "Secret"
 conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "has_secret_app", operator = "is_true" } ] }
+
+[[phone.apps]]
+id      = "camera"
+type    = "custom"
+label   = "Camera"
+passage = "pay_desk"
+
+[[phone.apps]]
+id      = "notes"
+type    = "custom"
+label   = "Notes"
+passage = "Canvas_pay_desk_Node_paid"
 
 [[phone.conversations]]
 id  = "kai_secret"
