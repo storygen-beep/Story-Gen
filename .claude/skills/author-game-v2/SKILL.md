@@ -45,6 +45,10 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 4. **A release adds events, not places.** One full six-week DoL cycle: +196 units,
    +24,388 words, **zero** new locations, and all ten of its content commits were events at
    an existing place with an existing character. 55.6% of its commits were fixes.
+   **Open places early, add people over time.** Day 1 opens most places and few people: 42–98% of
+   places and 0–38% of people, in 7 of 7 games (round 7, `ROUND7_REPORT.md`). Most systems are usable
+   on day 1 at their bottom rung, 79–87% (round 9b, `ROUND9B_REPORT.md`). So a release adds rungs and
+   people, and a new system only as the top of an existing ladder.
 
 ## The fifth commitment — the machinery colours far more than it locks
 

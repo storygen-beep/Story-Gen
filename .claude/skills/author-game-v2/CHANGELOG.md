@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W6: open places early, add people over time (World and Systems PRD, Phase 1)
+
+**Why.** N2, Q8 (WS-D21): the top games open most places on day 1 and grow by people and rungs, not places.
+
+**What changed.**
+- `SKILL.md` commitment 4 is extended with the rule, once: day 1 opens 42–98% of places and 0–38% of people in
+  7 of 7 games (round 7, `ROUND7_REPORT.md`); 79–87% of systems are usable on day 1 at their bottom rung
+  (round 9b, `ROUND9B_REPORT.md`); a release adds rungs and people, and a new system only as the top of an
+  existing ladder.
+- `references/the-release.md` "Where a release happens" points at it.
+
+**Verified.** `grep -rn "Open places early"` finds the rule once (`SKILL.md`); `the-release.md` points at
+"`SKILL.md` commitment 4" (and `the-arc.md` already cites commitment 4 for "events, not places", still true);
+pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +75, running total 139,897 / 149,283.
+
+---
+
 ## 2026-10-01 — World W3: a new person brings a thread, not a place (World and Systems PRD, Phase 1)
 
 **Why.** SP5's adding rule ("a new person brings a place, a ladder, and why she wants them") clashed with zero new

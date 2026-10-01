@@ -8,8 +8,8 @@ The game is never the unit. The **release** is, and it repeats, release after re
 
 Measured on one six-week cycle of a mature game (DoL): +196 scene units, **zero new locations**, and
 every content commit an event at an existing place. That is a **maintenance-cycle observation**, and it
-stays the default for WHERE a release happens: zero new places. It does not say what a release is
-ABOUT. The next section does.
+stays the default for WHERE a release happens: zero new places. What a release adds is rungs and
+people (`SKILL.md` commitment 4). It does not say what a release is ABOUT. The next section does.
 
 ---
 
