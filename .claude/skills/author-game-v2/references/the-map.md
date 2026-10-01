@@ -83,6 +83,17 @@ This cannot be inferred and must not be guessed. A tenant working nights legitim
 schedule row; a shopkeeper legitimately has no bed in the player's house. Only a declaration
 separates *lives elsewhere* from *was never given a room*. Gate 12.
 
+**A home is laid out like a house.** The defect this stops: the kitchen as the house hub, the
+people who live there homed in it, the bathroom folded into a landing.
+
+- **A home is a bedroom:** a room of the person's own (a couple shares one). Never the hub, a
+  thoroughfare, the kitchen, a hallway or a landing.
+- **The house is entered through its entry.** Its hub is the hall or front door, named for the home
+  ("Home", "The House"), and the street's button shows that name. The kitchen, the bathroom and the
+  bedrooms are rooms off it, never the hub.
+- **One room, one job:** a shared bathroom is its own room (R6c), not part of a hallway.
+- **Plain names** a player reads at a glance: "Upstairs", not "The Landing".
+
 ⚠️ **A room the Want promises must exist.** If the Want sells access to somewhere as a reward for
 topping out a tier — *her father's room*, *the office*, *upstairs* — that location is owed. Nothing
 else in the scoreboard can see this: the meter-ceiling gate checks that authored **gates** reach a
@@ -106,6 +117,18 @@ location. This is not decoration:
 
 ❌  the kitchen ─┬── the rooms                       the home contains a bit of world
                  └── the shops
+```
+
+Inside the house, the same shape one level down (R2):
+
+```
+✅  the street ── Home (the hall) ─┬── the kitchen        the hall is the hub
+                                   ├── the bathroom
+                                   └── Upstairs ─┬── her room
+                                                 └── a bedroom for each other resident
+
+❌  the street ── The Kitchen ─┬── the landing           the kitchen is the hub; the bathroom
+                               └── her room              and his room are the landing
 ```
 
 **The declared `exterior` must be a root** — no `entry_from` — with the home base among the
@@ -327,7 +350,7 @@ rather than against a guess.
 | | |
 |---|---|
 | **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed — a second root in `board.map.roots[]` needs one of the two |
-| **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
+| **Gate 12 · residents have homes** | every declared character has a `home` that is a real location or `offscreen`. Not checked yet (planned, K13): that the home is not the hub, a thoroughfare or a container, and is shared only by a declared couple (R2) |
 | **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
 | **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |
 | **Lint · a door opens onto something** | every `[locations.door]`: one no option can ever open, one whose only option is `enter`, a knock nobody is scheduled to answer, and a door on a room the whole cast passes through (R6–R6c). Silent on a game that declares none |

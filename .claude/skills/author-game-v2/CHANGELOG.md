@@ -5,6 +5,26 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W9: a home is laid out like a house (World and Systems PRD, Phase 1b)
+
+**Why.** WS-D23, N18: a game shipped with the kitchen as the house hub, the people who live there homed in it, and
+the bathroom folded into a landing. R2 "If someone lives there, they have a room" never said what a room is, and
+gate 12 accepts any declared location as a home.
+
+**What changed.** `references/the-map.md`: R2 gains "A home is laid out like a house" (a home is a bedroom, never
+the hub, a thoroughfare, the kitchen, a hallway or a landing; the house is entered through its hall, named for the
+home; one room, one job, so a shared bathroom is its own room per R6c; plain names). R3 gains one inside-the-house
+diagram under the ground diagram. The checked table's gate 12 row now says what gate 12 checks today (a real
+location or `offscreen`) and marks the bedroom checks as planned (K13); no gate code changed. `the-board.md`'s
+`the_kitchen` example is left alone (a kitchen as a room with people scheduled in it is correct).
+
+**Verified.** grep finds each new rule once; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the
+baseline); pytest passed.
+
+**Words:** +230, running total 140,427 / 149,283.
+
+---
+
 ## 2026-10-01 — World W4b · PROTECTED (A14, LO approved, WS-D11): A14 names thread steps
 
 **Why.** WS-D2: the third Pitcher pitches a step in a declared thread of her life (W4), so A14's "a pitch is a step
