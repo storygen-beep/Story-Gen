@@ -2143,7 +2143,7 @@ def _names_any(text, vocab):
 # ═════════════════════════════════════════════════════════════════════════════
 # NEEDS + WALK-INS + LABELS — the 2026-08-18 pass. These replaced `objects`.
 #
-# The rule they enforce: a room's list is NEEDS + WORK + PEOPLE and nothing else
+# The rule they enforce: a room's list is NEEDS + SYSTEMS + PEOPLE and nothing else
 # (`the-surfaces.md` R2). The previous occupant of this space, gate 22, computed
 # affordances from `exit_block.choices` and could not see a canvas at all — so
 # "Get the washing in off the airer", an entire canvas about the airer, counted
@@ -8147,7 +8147,7 @@ def run_gates(model, game, state=None):
                 if fat else [])
          + ([f"⚠️ {at_cap} of {len(per_screen)} screens sit ON the cap. {MENU_CEILING} is a "
              f"backstop for the pathological case, NOT the size of a normal room — the field "
-             f"median is 3. A room's list is needs + work + people (the-surfaces.md R2) — a "
+             f"median is 3. A room's list is needs + systems + people (the-surfaces.md R2) — a "
              f"CLOSED set that sizes itself, not an open one filled up to this number."]
             if per_screen and at_cap * 2 > len(per_screen) else []))
 
@@ -8696,7 +8696,7 @@ def run_gates(model, game, state=None):
              "no board.needs[] declared — this game has no body",
              ["declare the body's clock in v2_state.json: what falls, where it fills, "
               "what it costs, and WHAT IT SHUTS (references/the-meters.md M8)",
-              "a room's list is needs + work + people (the-surfaces.md R2) — with no "
+              "a room's list is needs + systems + people (the-surfaces.md R2) — with no "
               "declared needs, a third of every room's menu cannot exist"])
     else:
         read = _traits_read_by_conditions(game)
@@ -13152,7 +13152,7 @@ def main():
         for h in browse_lints[:8]:
             print(f"          · {h}")
         if browse_lints:
-            print("          (a room's list is needs + work + people, the-surfaces.md R2."
+            print("          (a room's list is needs + systems + people, the-surfaces.md R2."
                   " KNOWN NOISY: a travel bridge legitimately changes nothing, so read WHICH"
                   " canvases are named, not the percentage alone)")
 

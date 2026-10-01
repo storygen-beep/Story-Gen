@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S3-text · PROTECTED (tools, Q9): gates.py says "needs + systems + people"
+
+**Why.** S3 made a job a system with a card; four printed texts in `gates.py` still taught "needs + work + people".
+
+**What changed.** `scripts/gates.py`, four line-for-line text swaps, no logic touched: the section comment above
+the needs/walk-in/labels pass (`:2146`), the menu-cap note (`:8150`), the no-needs advice (`:8699`) and the
+browse lint's footnote (`:13155`) now say "needs + systems + people".
+
+**Verified.** Line count unchanged (13,718 before and after); `cite_check.py --fix`: 0 drifted in SKILL.md +
+references, nothing moved; `grep "work + people"` over `scripts/` gives 0 hits; `--selfcheck` current (orphans 3);
+pytest 473 passed.
+
+**Words:** 0, running total 141,872 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S3: SY8 "Designing a system", and jobs become systems (World and Systems PRD, Phase 2)
 
 **Why.** WS-D4, N16: the skill had a definition of a system (S1a) but no rules for designing one, and still taught
