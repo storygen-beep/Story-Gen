@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S2b (3 of 3): job, sex for pay, shoots, streaming, gym and pregnancy cards (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3/WS-D12: the remaining round 9b system cards.
+
+**What changed.** New `templates/cards/`: `job.md` (CoT River Rat, with CW's waitress counter as the one-ladder
+default; the River Rat trace says its two ladders do not touch, and the card says they meet only through the
+shift's event tips), `sex_for_pay.md` (SD's stroll: price shown before she agrees; CoT's $0 gloryholes as the
+failure), `shoots.md` (CW modelling and porn studio; one ladder), `streaming.md` (CoT, IHOH for the 4-rung floor),
+`gym_body.md` (IHOH body that pays; CoT gym and sports), `pregnancy.md` (CoT). Round 9b's `tv_leisure.md` is not
+carried: round 9b judges TV a surface, not a system.
+
+**Verified.** The scratch cite/banned-word/own-game check over all 15 cards: 0 problems; engine cites re-read.
+`--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** 0 (cards are not counted), running total 141,514 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S2b (2 of 3): money, needs, shops and Greek life cards (World and Systems PRD, Phase 2)
 
 **Why.** WS-D3/WS-D12: one worked card per system from round 9b, in `templates/cards/`.
