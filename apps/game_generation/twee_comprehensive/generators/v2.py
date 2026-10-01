@@ -1574,6 +1574,10 @@ class TweeComprehensiveGeneratorV2:
                 # E3 — the instance number of each repeatable chat. Only in a game that
                 # has one, so every other phone game keeps a byte-identical skeleton.
                 game_state_init["phone"]["conv_cycle"] = {}
+            if any(j.get("ranks") for j in self.fast_jobs_data):
+                # E6 — each job's own xp, read by its ranks. Only in a game with a ranked
+                # job, so every other game keeps a byte-identical skeleton.
+                game_state_init["fast_jobs"]["job_xp"] = {}
             if any(c.get("ignore_after_days") for c in (phone_settings.get("conversations") or [])):
                 # E3b — instance key -> the day it closed as ignored. Same opt-in rule.
                 game_state_init["phone"]["conv_ignored"] = {}
@@ -3199,7 +3203,10 @@ setup._renderFastJobs = function(appId, appLabel) {{
         var j = jobs[i];
         var cd = fj.cooldowns[j.id] || 0;
         html += '<div class="phone-job-card"><div class="phone-job-name">' + j.name + '</div>';
-        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(j.income) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
+        var _rk = (j.ranks && j.ranks.length) ? setup.fastJobRank(j) : null;
+        if (_rk && _rk.rank) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.rank.title + (_rk.next ? ' · ' + _rk.xp + '/' + _rk.next.xp + ' xp' : '') + '</div>';
+        else if (_rk && _rk.next) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.xp + '/' + _rk.next.xp + ' xp</div>';
+        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(setup.fastJobIncome(j)) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
         if ((fj.xp || 0) < (j.xp_req || 0)) html += '<div class="phone-daily-locked">🔒 Need more XP</div>';
         else if (cd > 0) html += '<div class="phone-daily-locked">Again in ' + cd + 'd</div>';
         else html += '<button class="phone-job-btn" data-job-id="' + j.id + '">Work</button>';
@@ -3208,6 +3215,23 @@ setup._renderFastJobs = function(appId, appLabel) {{
     html += '</div></div>';
     jQuery('.phone-frame').html(html);
     setup._phoneView = 'fast_jobs'; setup._phoneApp = appId;
+}};
+// E6 — a rank per job. Her rank on a job is the last of its `ranks` whose xp she has
+// reached on that job (fast_jobs.job_xp[id], +1 per shift); its income replaces the
+// job's. A job with no ranks pays `income` and counts no job xp.
+setup.fastJobRank = function(job) {{
+    var fj = ((State.variables.game_state || {{}}).fast_jobs) || {{}};
+    var xp = ((fj.job_xp || {{}})[job.id]) || 0;
+    var ranks = job.ranks || [], cur = null, next = null;
+    for (var i = 0; i < ranks.length; i++) {{
+        if (xp >= (ranks[i].xp || 0)) cur = ranks[i];
+        else {{ next = ranks[i]; break; }}
+    }}
+    return {{ xp: xp, rank: cur, next: next }};
+}};
+setup.fastJobIncome = function(job) {{
+    var r = (job.ranks && job.ranks.length) ? setup.fastJobRank(job).rank : null;
+    return (r && r.income !== undefined) ? r.income : job.income;
 }};
 setup.doFastJob = function(jobId) {{
     var sv = State.variables;
@@ -3218,9 +3242,18 @@ setup.doFastJob = function(jobId) {{
     if ((fj.xp || 0) < (job.xp_req || 0)) return;
     if ((fj.cooldowns[jobId] || 0) > 0) return;
     setup.pendingEffects = [];
-    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', setup.resolveEffectValue(job.income), false, null);
+    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', setup.resolveEffectValue(setup.fastJobIncome(job)), false, null);
     setup.showEffectNotification();
     fj.xp = (fj.xp || 0) + 1;
+    if (job.ranks && job.ranks.length) {{
+        var _before = setup.fastJobRank(job).rank;
+        fj.job_xp = fj.job_xp || {{}};
+        fj.job_xp[jobId] = (fj.job_xp[jobId] || 0) + 1;
+        var _after = setup.fastJobRank(job).rank;
+        if (_after && _after !== _before && setup._notifyPhoneDelivery) {{
+            setup._notifyPhoneDelivery(['⭐ ' + job.name + ': ' + _after.title]);
+        }}
+    }}
     fj.cooldowns[jobId] = Number(job.cooldown_days || 0);
     setup._renderFastJobs(setup._phoneApp, '');
 }};

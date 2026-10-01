@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: a rank per job (World and Systems PRD, Phase 7; opt-in per job)
+
+**Why.** LO's engine order, step 6. The phone's fast jobs kept one global XP count for every job and
+each job paid one fixed income, so a job could not promote her (`the-systems.md` rule 1, "a second
+ladder with its own rank").
+
+**What changed.**
+- `template_import.py`: `ranks = [{xp, title, income}]` on `TemplateFastJob`, parsed raw, validated
+  (`xp` whole and rising, a `title`, an `income` that is a number or a value table, no other key;
+  a stat-based income is checked by the value walker), written into metadata only when set.
+- `generators/v2.py`: `setup.fastJobRank` (her rank on a job = the last whose xp she has reached on
+  it) and `setup.fastJobIncome`; `doFastJob` pays the rank's income through `setup.resolveEffectValue`,
+  adds one to `$game_state.fast_jobs.job_xp[id]` and toasts a promotion; the board shows the title and
+  the xp to the next rank. The global `xp` still counts every shift. `job_xp` joins the skeleton (and
+  the backfill) only in a game with a ranked job.
+- `references/engine.md` §51 (the job board is a phone app; engine.md had no job section): the rank
+  fact; §40's backfill row names `fast_jobs.job_xp`. `templates/cards/job.md`: "no per-job rank"
+  becomes the fact.
+- Citations re-pointed through the `git diff` line map (589 moved, 720 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed (other lane): `references/the-systems.md` rule 1 still says a second ladder "waits on the
+  engine's rank per job".
+
+**Verified.** `test_fast_job_ranks.py` (4, headless: pays 10, 10, 30, 30, 60 up the ladder; the board
+and the promotion toast; a job without ranks counts no job xp; a save written by the pre-change engine
+at e8dcadc loads with `job_xp` backfilled, its global xp kept, and starts at the first rank).
+`FastJobRankTests` (4); a save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +189, running total 144,788 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: pay worked out from her stats (World and Systems PRD, Phase 7; opt-in by use)
 
 **Why.** LO's engine order, step 5. Every amount the engine paid was fixed at build time (or a random

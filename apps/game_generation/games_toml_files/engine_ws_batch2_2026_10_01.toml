@@ -18,6 +18,10 @@
 #    sal_hello    its reply adds charm - 5 (= 5) to tips: the phone reply path.
 #    sal_photo    a daily topic adding charm * 0.5 (= 5) to tips: the daily-chat path.
 #    daily tick   adds charm, max 3 (= 3) to tips each day: the day-rollover path.
+#
+#  E6 — "a rank per job":
+#    bar_job      a fast job with ranks: Barback from 0 xp (pays 10), Server from 2 (pays
+#                 charm + 20 = 30), Head server from 4 (pays 60). `flat` has no ranks.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -144,6 +148,15 @@ income = { type = "trait", trait = "charm", mult = 2, add = 50, max = 100 }
 id     = "flat"
 name   = "Flat"
 income = 20
+
+[[fast_jobs]]
+id     = "bar_job"
+name   = "Bar"
+income = 5
+ranks  = [
+  { xp = 0, title = "Barback", income = 10 },
+  { xp = 2, title = "Server", income = { type = "trait", trait = "charm", add = 20 } },
+  { xp = 4, title = "Head server", income = 60 } ]
 
 [engine.daily_tick]
 traitEffects = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", max = 3 } } ]

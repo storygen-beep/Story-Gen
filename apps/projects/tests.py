@@ -6302,6 +6302,55 @@ class StatEffectValueEmitTests(SimpleTestCase):
             self.gen._resolve_effect_value({"type": "trait"})
 
 
+def _toml_with_job_ranks(ranks=None):
+    d = _toml_with_stat_pay()
+    d["fast_jobs"][0]["ranks"] = ranks if ranks is not None else [
+        {"xp": 0, "title": "Barback", "income": 10},
+        {"xp": 3, "title": "Server", "income": {"type": "trait", "trait": "charm", "add": 20}},
+    ]
+    return d
+
+
+class FastJobRankTests(SimpleTestCase):
+    """E6 (World and Systems PRD) — `ranks = [{xp, title, income}]` on a fast job."""
+
+    def test_ranks_parse_and_validate_clean(self):
+        t = normalize(_toml_with_job_ranks())
+        self.assertEqual(validate(t), [])
+        self.assertEqual([r["title"] for r in t.fast_jobs[0].ranks], ["Barback", "Server"])
+
+    def test_no_ranks_by_default(self):
+        self.assertEqual(normalize(_toml_with_stat_pay()).fast_jobs[0].ranks, [])
+
+    def test_bad_ladders_are_errors(self):
+        for ranks, fragment in (
+            ([{"xp": 0, "title": "A", "income": 1}, {"xp": 0, "title": "B", "income": 2}],
+             "xp must rise rank by rank"),
+            ([{"xp": -1, "title": "A", "income": 1}], "xp must be a whole number"),
+            ([{"xp": 0, "income": 1}], "title is required"),
+            ([{"xp": 0, "title": "A"}], "income must be a number or a value table"),
+            ([{"xp": 0, "title": "A", "income": 1, "pay": 2}], "unknown key `pay`"),
+            ([{"xp": 0, "title": "A", "income": {"type": "trait", "trait": "luck"}}],
+             "'luck' is not in [player] core_traits"),
+            (["Barback"], "must be a table"),
+        ):
+            errors = validate(normalize(_toml_with_job_ranks(ranks)))
+            self.assertTrue(any(fragment in e for e in errors), (ranks, errors))
+
+    def test_ranks_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, normalize(_toml_with_job_ranks()))
+        self.assertEqual(p.metadata["fast_jobs"][0]["ranks"][1]["title"], "Server")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(_toml_with_stat_pay()))
+        self.assertNotIn("ranks", p2.metadata["fast_jobs"][0])
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

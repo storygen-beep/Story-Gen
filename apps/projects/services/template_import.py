@@ -919,6 +919,10 @@ class TemplateFastJob:
     cooldown_days: int = 0   # days locked after working it
     time_period: str = ""    # optional game.time gate (e.g. "M","A")
     money_trait: str = "money"
+    # E6 — a rank per job: [{xp, title, income}], xp rising. The rank is the last one
+    # whose xp she has reached on THIS job ($game_state.fast_jobs.job_xp[id]); its
+    # income replaces the job's. Empty = no ranks, the job pays `income` as before.
+    ranks: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -3112,6 +3116,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 cooldown_days=_require_int(fj, "cooldown_days", 0),
                 time_period=_require_str(fj, "time_period", ""),
                 money_trait=_require_str(fj, "money_trait", "money") or "money",
+                # E6 — kept raw; validate() checks the ladder.
+                ranks=list(fj.get("ranks") or []),
             )
         )
 
@@ -4966,6 +4972,30 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(f"{ctx}.on_ignore is read only with ignore_after_days")
                 errors.extend(_validate_phone_effect_set(conv.on_ignore, f"{ctx}.on_ignore",
                                                          npc_id_set))
+
+    # E6 — a rank per job. Errors: a misordered or malformed ladder would build clean
+    # and pay the wrong rank, or never promote her.
+    for ji, job in enumerate(template.fast_jobs):
+        last_xp = -1
+        for ri, rank in enumerate(job.ranks):
+            rctx = f"fast_jobs[{ji}].ranks[{ri}]"
+            if not isinstance(rank, dict):
+                errors.append(f"{rctx}: must be a table {{xp, title, income}}")
+                continue
+            for k in sorted(set(rank) - {"xp", "title", "income"}):
+                errors.append(f"{rctx}: unknown key `{k}` (allowed: income, title, xp)")
+            xp = rank.get("xp")
+            if isinstance(xp, bool) or not isinstance(xp, int) or xp < 0:
+                errors.append(f"{rctx}.xp must be a whole number >= 0 (got {xp!r})")
+            elif xp <= last_xp:
+                errors.append(f"{rctx}.xp must rise rank by rank (got {xp} after {last_xp})")
+            else:
+                last_xp = xp
+            if not isinstance(rank.get("title"), str) or not rank.get("title", "").strip():
+                errors.append(f"{rctx}.title is required — it is the rank she reads")
+            inc = rank.get("income")
+            if inc is None or isinstance(inc, bool) or not isinstance(inc, (int, float, dict)):
+                errors.append(f"{rctx}.income must be a number or a value table (got {inc!r})")
 
     # container/default entry rules
     for l in template.locations:
@@ -8127,7 +8157,9 @@ def _assemble_project_metadata(project, template):
         project.metadata["fast_jobs"] = [
             {"id": j.id, "name": j.name, "income": j.income, "xp_req": j.xp_req,
              "cooldown_days": j.cooldown_days, "time_period": j.time_period,
-             "money_trait": j.money_trait}
+             "money_trait": j.money_trait,
+             # E6 — emitted only when set, so a game without ranks is byte-identical.
+             **({"ranks": j.ranks} if j.ranks else {})}
             for j in template.fast_jobs
         ]
     if template.bank is not None:

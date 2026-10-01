@@ -589,3 +589,17 @@ def test_e3b_conv_ignored_reaches_a_save_written_before_it(tmp_path):
     got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
     assert got["conv_ignored"] == {}
     assert got["triggered_conversations"]["ana_ask"]["triggered_day"] == 1
+
+
+@needs_node
+def test_e6_job_xp_reaches_a_save_written_before_it(tmp_path):
+    """E6: a game that adds a ranked job. An old save's fast_jobs map has no job_xp;
+    the backfill fills it one level into the sub-map, and the global xp and cooldowns
+    the player already has are kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    sv["game_state"]["fast_jobs"] = {"xp": 2, "cooldowns": {"bar_job": 1}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["fast_jobs"]
+    assert got["job_xp"] == {}
+    assert got["xp"] == 2
+    assert got["cooldowns"] == {"bar_job": 1}
