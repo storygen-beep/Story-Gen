@@ -100,7 +100,7 @@ she banks, shops, navigates or finds work.
 **Build in this order: messaging, then the thing that makes her looked at, then anything else.**
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
-`bank` both exist (`v2.py:2585`, `:2586`) and both are legitimate — `new-life-project` ships a phone
+`bank` both exist (`v2.py:2599`, `:2600`) and both are legitimate — `new-life-project` ships a phone
 bank *and* a phone GPS (numbers only). But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
@@ -199,11 +199,11 @@ conditions = { version = "1.0", items = [
 
 `version = "1.0"` is not optional: without it the conditions fail open and the text arrives at once.
 `time_of_day` is `HH:MM`, 24-hour, end exclusive, and wraps midnight the way NPC schedules do
-(`v2.py:4801`, `engine.md` §39); omit `end_time` and the window is one hour.
+(`v2.py:4816`, `engine.md` §39); omit `end_time` and the window is one hour.
 
 ⚠️ **On a conversation, `time_of_day` is checked once, at delivery.** The trigger is a latch:
 `ps.triggered_conversations[conv.id]` is written the first time every condition passes and is never
-re-read (`v2.py:2400`). So the window means *"deliver this the first time she is awake between ten
+re-read (`v2.py:2411`). So the window means *"deliver this the first time she is awake between ten
 and nine"*, not *"this thread exists only then"*. A thread that must be reachable only inside an hour
 band belongs on a canvas the phone links to, where the condition is read fresh every time. (A chat
 with `repeat_after_days` reads its trigger again each time it comes back: `engine.md` §51.)
@@ -211,7 +211,7 @@ with `repeat_after_days` reads its trigger again each time it comes back: `engin
 **The phone keeps no state of its own.** How the phone study's 27 games decide what a phone shows:
 a meter 22 / 27, an hour window 20 / 27, a per-NPC stage 13 / 27, a past stamp plus a wait 3 / 27, a
 stored appointment 1 / 27. Every one but the last is state the map and the hubs already read. Phone
-conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4546`), the
+conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4561`), the
 evaluator canvases use, so every condition a canvas can gate on, a thread can:
 
 ```
@@ -238,7 +238,7 @@ the clock, energy, or a late hour that refuses (numbers only). A refusal is **a 
 voice**, not a greyed-out control (`the-voice.md`).
 
 ⚠️ **Nothing on our phone costs anything, and nothing charges for silence.** `setup.sendDailyChat`
-(`v2.py:2583`) applies trait effects and returns; phone actions spend no time; there is no hook for
+(`v2.py:2597`) applies trait effects and returns; phone actions spend no time; there is no hook for
 "unanswered by day X". Until the engine has them:
 - **ignoring:** a one-time canvas on her next visit home, gated on the cause flag, `days_since_flag
   ≥ 2` on it, and a flag every reply choice sets still `is_false`, applies the cost;
@@ -264,7 +264,7 @@ has to unlock.
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
 a design doc, and it matches `kink-ceilings.md`'s own logic.
 
-The worked shape, in what our engine actually supports (`v2.py:2845` renders it, `v2.py:2900`
+The worked shape, in what our engine actually supports (`v2.py:2860` renders it, `v2.py:2915`
 sends it):
 
 ```toml
@@ -279,7 +279,7 @@ post_actions = [
 ]
 ```
 
-A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:2857`, `:2859`).
+A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:2872`, `:2874`).
 
 ⚠️ **`followers` must buy something.** A counter with no sink is the `college-daze` complaint
 waiting to happen — a number on a screen that stops meaning anything. Give it a door, per
@@ -287,9 +287,9 @@ waiting to happen — a number on a screen that stops meaning anything. Give it 
 price that drops. If nothing reads it, do not count it.
 
 ⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
-nothing else (`v2.py:2908`). A place rule ("only at home") is not
+nothing else (`v2.py:2923`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
-exists (`v2.py:4278`) and is exactly the predicate for it. Until then, the rung labels carry the
+exists (`v2.py:4293`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
@@ -305,14 +305,14 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 classed (class b), 32 of them on one game's PIN (`new-life-project`, numbers only). In Her Own
 Hands puts the phone in the menu from the first minute, with no step to get it, and draws 0 such
 complaints; Cupid's Way also 0 (round 9a §5). Course of Temptation's "the phone needs a pocket"
-rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:453`) unset:
+rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:456`) unset:
 it hides the whole phone until a flag is set.
 
 **Showing a locked app is good; showing it without saying what opens it is a support ticket.** The
 two loudest phone threads in the phone study's 22,622 comments ask how to unlock one locked app
 (50 and 31 net, `family-ties`, numbers only).
 
-⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2633`) renders every declared
+⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2647`) renders every declared
 app unconditionally. Until per-app gating exists, publish the ladder in the app that is already
 open: a rung labelled `🔒` with its `corruption_min` is legible; a second app that silently is not
 there is not.
@@ -325,7 +325,7 @@ there is not.
 Cupid's Way marks the contact with ❕ and turns the Study button yellow while a text waits. Shady
 Deals' phone covered the screen, drew 5 complaints, and was fixed in three steps: a hide button, a
 glow on a call, the hidden state remembered (round 9a §5 class f, 8 failures). Our engine already
-pulls: a delivered conversation raises the sidebar badge (`v2.py:3396`) and a three-second toast
+pulls: a delivered conversation raises the sidebar badge (`v2.py:3411`) and a three-second toast
 (`v2.py:2292`) whose text is the conversation's `notify`.
 
 **The phone answers *what now*, one thing at a time.** Lostness, not grind, is this genre's disease
@@ -352,7 +352,7 @@ lead anywhere — hang out, date, booty call; its friendly texts only nudge atti
 a day (round 9a §1a). Every message on a thread serves a booking or the loop.
 
 **Until the engine repeats a conversation, chain one-time ones.** A conversation delivers once,
-ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2410`). So each
+ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2421`). So each
 invite is its own `[[phone.conversations]]` entry, caused by a flag the last link set and timed
 with `days_since_flag`:
 
@@ -405,10 +405,10 @@ and a cleanup that expires dates she did not attend.
 That is this file's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2563`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6965`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2577`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6980`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6580-6581`), where `setup.fireScheduledEvent` (`v2.py:6979`) can set a flag, start a quest,
+(`v2.py:6595-6596`), where `setup.fireScheduledEvent` (`v2.py:6994`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -436,7 +436,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:973`, `v2.py:7716`).
+(`template_import.py:976`, `v2.py:7731`).
 
 ---
 
@@ -464,12 +464,12 @@ least 10 of the 17 top games with a phone, a call or a text starts a scene witho
 (Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
 and credits links.
 
-**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3311`):
-an option plays only when she is already in that canvas's room (`v2.py:3328`), and a canvas that
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3326`):
+an option plays only when she is already in that canvas's room (`v2.py:3343`), and a canvas that
 requires him present needs him there. So a summon is a launcher option pointing at a canvas in
 **her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are
 player-sent too, but they only move traits; give one a `conditions` block on a flag the world set,
-and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:425`) — without it the
+and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:428`) — without it the
 cap is per NPC and one topic starves the others.
 
 ---

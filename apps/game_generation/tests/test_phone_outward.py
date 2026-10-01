@@ -5,7 +5,9 @@ Each part is opt-in and has its own section below:
   * a dating profile's `on_match` ({effects, flagEffects}) applies once, on the first
     match, so a match can lead to a scene (before, `ps.matches` was read by nothing
     but the dating screen); and `match_condition`, which the importer checks as a v1.0
-    block itself, is read by the runtime in that shape.
+    block itself, is read by the runtime in that shape;
+  * an app's `conditions` keep it off the phone while they fail: not on the home grid,
+    a stale tap does nothing, and its chats are not counted unread.
 
     pytest apps/game_generation/tests/test_phone_outward.py -q
 """
@@ -57,4 +59,26 @@ def test_the_match_condition_is_read_and_a_like_is_not_a_match(html):
         assert g.sv("game_state.phone.matches.lee_profile") is None
         assert g.sv("game_state.phone.liked_profiles.lee_profile") is True
         assert _npc_trust(g, "npc_lee") == 0
+        assert g.errors == []
+
+
+# ── app conditions ───────────────────────────────────────────────────────────
+
+
+@needs_browser
+def test_an_app_is_on_the_phone_only_while_its_conditions_hold(html):
+    with open_game(html) as g:
+        _start(g)
+        home = lambda: g.js("() => { SugarCube.setup.openPhone(); return jQuery('.phone-frame').html(); }")
+        unread = lambda: g.js("() => SugarCube.setup.getPhoneUnreadCount()")
+        assert g.sv("game_state.phone.triggered_conversations.kai_secret") is not None
+        assert 'data-app-id="secret"' not in home()
+        hidden_count = unread()
+        g.js("() => SugarCube.setup.openPhoneApp('secret')")  # a stale tap
+        assert "Our secret." not in g.js("() => jQuery('.phone-frame').html()")
+        g.js("() => { SugarCube.State.variables.flags.has_secret_app = true; }")
+        assert 'data-app-id="secret"' in home()
+        assert unread() == hidden_count + 1
+        g.js("() => SugarCube.setup.openPhoneApp('secret')")
+        assert "Kai" in g.js("() => jQuery('.phone-frame').html()")  # the thread list
         assert g.errors == []

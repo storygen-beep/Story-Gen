@@ -2345,6 +2345,17 @@ setup._rearmPhoneConversation = function(conv, ps) {{
     }};
     return true;
 }};
+// E8 — an app with `conditions` is on the phone only while they hold.
+setup.phoneAppVisible = function(appOrId) {{
+    var app = appOrId;
+    if (typeof appOrId !== 'object') {{
+        var apps = (setup.phone_data || {{}}).apps || [];
+        app = null;
+        for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appOrId) {{ app = apps[i]; break; }} }}
+    }}
+    if (!app) return false;
+    return !(app.conditions && app.conditions.items) || setup.triggerConditionsSatisfied(app.conditions);
+}};
 // The trait and flag effects a reply choice carries ({{effects, flagEffects}}), applied
 // with no canvas around them: a reply, and E3b's on_ignore.
 setup.applyPhoneEffectSet = function(src) {{
@@ -2441,11 +2452,14 @@ setup.getPhoneUnreadCount = function() {{
     var ps = ((State.variables || {{}}).game_state || {{}}).phone;
     if (!ps) return 0;
     var count = 0;
-    // Unread conversations
+    // Unread conversations (E8: not in an app that is off the phone)
     var triggered = ps.triggered_conversations || {{}};
     var read = ps.read_conversations || {{}};
     var keys = Object.keys(triggered);
+    var _convApp = {{}};
+    ((setup.phone_data || {{}}).conversations || []).forEach(function(c) {{ _convApp[c.id] = c.app; }});
     for (var i = 0; i < keys.length; i++) {{
+        if (_convApp[keys[i]] && !setup.phoneAppVisible(_convApp[keys[i]])) continue;
         if (!read[setup.convCurrentKey(keys[i])]) count++;
     }}
     // Unviewed posts
@@ -2638,6 +2652,7 @@ setup.openPhone = function() {{
     html += '<div class="phone-screen"><div class="phone-app-grid">';
     for (var i = 0; i < apps.length; i++) {{
         var app = apps[i];
+        if (!setup.phoneAppVisible(app)) continue;  // E8 — per-app conditions
         var iconHtml = app._icon_src
             ? '<img src="' + app._icon_src + '" class="phone-app-icon-img" alt="' + (app.label || app.id) + '">'
             : '<div class="phone-app-icon-letter">' + (app.label || app.id).charAt(0).toUpperCase() + '</div>';
@@ -2662,7 +2677,7 @@ setup.openPhoneApp = function(appId) {{
     var apps = (setup.phone_data || {{}}).apps || [];
     var appDef = null;
     for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appId) {{ appDef = apps[i]; break; }} }}
-    if (!appDef) return;
+    if (!appDef || !setup.phoneAppVisible(appDef)) return;  // E8 — a stale tap on a hidden app
     if (appDef.type === "chat") {{ setup._renderThreadList(appId, appDef.label); }}
     else if (appDef.type === "social_feed") {{ setup._renderSocialFeed(appId, appDef.label); }}
     else if (appDef.type === "dating") {{ setup._renderDatingApp(appId, appDef.label); }}

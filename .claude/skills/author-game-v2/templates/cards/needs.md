@@ -49,6 +49,6 @@
   move after sleeping"* (CoT, mopoga#50909/r2). When sleep is the day's only advance, a broken sleep passage kills the game.
 
 ## Our engine today (round 9b §6)
-- Decay toward a value exists (`v2.py:6524`) and a daily tick runs effects at day rollover
-  (`template_import.py:716`); there is no sleep primitive and no event roll tied to a refill.
+- Decay toward a value exists (`v2.py:6539`) and a daily tick runs effects at day rollover
+  (`template_import.py:719`); there is no sleep primitive and no event roll tied to a refill.
 - The skill's hygiene rule lives in `engine.md` §30.1 (WS-D5: hygiene for routing only).

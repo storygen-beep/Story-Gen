@@ -6396,6 +6396,40 @@ class PhoneOnMatchTests(SimpleTestCase):
         self.assertTrue(any("on_match: unknown key `effect`" in e for e in errors), errors)
 
 
+class PhoneAppConditionsTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `conditions` on a phone app."""
+
+    GATE = {"version": "1.0", "items": [{"type": "flag", "subject": "player",
+                                         "flag_key": "summer_started", "operator": "is_true"}]}
+
+    def _meta(self, d):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(d))
+        return p.metadata["phone_settings"]["apps"]
+
+    def test_conditions_parse_and_reach_metadata_only_when_set(self):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["conditions"] = self.GATE
+        t = normalize(d)
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.phone.apps[1].conditions, self.GATE)
+        apps = self._meta(d)
+        self.assertEqual(apps[1]["conditions"], self.GATE)
+        self.assertNotIn("conditions", apps[0])
+
+    def test_the_condition_walker_reaches_app_conditions(self):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["conditions"] = {"items": [{"type": "flag", "flag_key": "x"}]}
+        errors = validate(normalize(d))
+        self.assertTrue(any("phone.apps['flaunt'].conditions" in e and 'version = "1.0"' in e
+                            for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

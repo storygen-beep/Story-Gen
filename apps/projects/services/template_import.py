@@ -341,6 +341,9 @@ class TemplatePhoneApp:
     # Shown when no option on a launcher is offerable right now. The door screen's
     # `no_answer` serves the same purpose: one short line beats an empty screen.
     no_answer: str = ""
+    # E8 — a v1.0 conditions block: the app is on the phone only while it holds (an
+    # app she installs, a job board that opens later). Empty = always there.
+    conditions: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -1760,8 +1763,9 @@ def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[
     it reaches in our games: canvas triggers and substitutions, every node block
     (groups, cascades, linkreplace beats), choices and their effects, flagEffects,
     rejection effects and text variants, location entry_conditions, description
-    variants, door options, clothing_rules, clothing items, phone conversation / post /
-    profile / gallery triggers, match_condition, daily_topics, daily_tick effects,
+    variants, door options, clothing_rules, clothing items, phone app `conditions`,
+    phone conversation / post / profile / gallery triggers, match_condition,
+    daily_topics, daily_tick effects,
     engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
     """
     errors: List[str] = []
@@ -3238,6 +3242,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     post_actions=list(a_raw.get("post_actions") or []),
                     options=[o for o in (a_raw.get("options") or []) if isinstance(o, dict)],
                     no_answer=_require_str(a_raw, "no_answer", ""),
+                    conditions=a_raw.get("conditions") or {},  # E8; E1's walker checks it
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -8470,7 +8475,8 @@ def _assemble_project_metadata(project, template):
                  # Emitted only when non-empty so every game without a launcher
                  # app produces a byte-identical payload.
                  **({"options": a.options} if a.options else {}),
-                 **({"no_answer": a.no_answer} if a.no_answer else {})}
+                 **({"no_answer": a.no_answer} if a.no_answer else {}),
+                 **({"conditions": a.conditions} if a.conditions else {})}
                 for a in phone.apps
             ],
             "conversations": [

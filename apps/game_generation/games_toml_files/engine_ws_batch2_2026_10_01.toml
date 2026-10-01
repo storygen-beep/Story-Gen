@@ -27,6 +27,8 @@
 #    kai_profile  a dating profile that matches at charm >= 5 (she has 10): on_match
 #                 +2 Kai trust and the flag matched_kai, once.
 #    lee_profile  matches only at charm >= 50: a like is not a match, nothing applies.
+#    secret       a chat app with conditions (has_secret_app): off the phone until the
+#                 flag is set, and its delivered chat (kai_secret) is not counted unread.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -48,7 +50,7 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40, charm = 10, tips = 0 }
-flag_keys   = ["started", "ignored_ana", "matched_kai"]
+flag_keys   = ["started", "ignored_ana", "matched_kai", "has_secret_app"]
 
 [[npcs]]
 id          = "npc_ana"
@@ -95,6 +97,25 @@ label = "Jobs"
 id    = "dates"
 type  = "dating"
 label = "Dates"
+
+[[phone.apps]]
+id         = "secret"
+type       = "chat"
+label      = "Secret"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "has_secret_app", operator = "is_true" } ] }
+
+[[phone.conversations]]
+id  = "kai_secret"
+app = "secret"
+npc = "npc_kai"
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Our secret."
 
 # ── E8: a dating match leads somewhere ───────────────────────────────────────
 

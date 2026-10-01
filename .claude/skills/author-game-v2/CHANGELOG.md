@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: an app that appears later — `conditions` on a phone app (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.openPhone` rendered every declared app from day 1, so an app
+she installs, or a job board that opens later, had to exist from the start.
+
+**What changed.**
+- `template_import.py`: `conditions` on `TemplatePhoneApp`, parsed, written into metadata only when set.
+  The condition check already walks every `conditions` key by name, so it reaches app conditions with no
+  new code; its docstring now lists them and a test proves it.
+- `generators/v2.py`: `setup.phoneAppVisible`; `openPhone` leaves a hidden app off the home grid,
+  `openPhoneApp` ignores a stale tap on one, and `getPhoneUnreadCount` does not count its chats. The
+  helper sits above `checkPhoneConversations`, outside the window a source test reads.
+- `references/engine.md` §51: the per-app gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (588 moved, 717 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a gated chat app is off the grid, a tap does
+nothing, its delivered chat is not counted until the flag is set, then it shows and counts).
+`PhoneAppConditionsTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +39, running total 144,893 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: a dating match leads somewhere — `on_match` (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 8 (the phone reaching outward). `setup.likeProfile` wrote `ps.matches`
