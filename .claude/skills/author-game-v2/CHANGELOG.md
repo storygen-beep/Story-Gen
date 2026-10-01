@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P4 (PROTECTED, LO approved, WS-D11): A1's loop names the phone thread
+
+**Why.** The arc's conversion into a repeatable is where the phone thread turns into the loop invite (the-phone.md
+P9); A1 did not say so.
+
+**What changed.** `references/the-arc.md` A1: one line after "The repeatable surface is the reward for finishing
+the arc…": "After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9)." Nothing
+else in A1 or the-arc.md changed.
+
+**Verified.** `git diff` is that one added line; `--selfcheck` current (orphans 2); pytest 475 passed.
+
+**Words:** +14, running total 142,601 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P3: the phone card and the sheets (World and Systems PRD, Phase 3)
 
 **Why.** WS-D12: the design detail lives in an uncounted card; the-phone.md keeps short rules plus a pointer. The

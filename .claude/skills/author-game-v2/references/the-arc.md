@@ -61,6 +61,7 @@ example is being taught too.** *(LO decided.)* Take the mechanism. Leave the fur
 turns the act into something she can simply do · doing *that* repeatedly opens the next act.
 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
+After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9).
 
 The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
