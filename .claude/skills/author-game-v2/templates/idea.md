@@ -13,7 +13,7 @@
 
 - [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
 - [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, something that repeats)*
-- [ ] **Taboo at home** — the house, and who is in the next room
+- [ ] **Taboo at home** — the house she comes back to, and who is in the next room; the world outside makes it risky
 - [ ] **Mystery** — she investigates, and something works on her while she does *(secrets she buys)*
 
 **In one sentence, what does the player come here to feel?** <…>

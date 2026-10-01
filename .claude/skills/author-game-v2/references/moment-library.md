@@ -91,7 +91,8 @@ Rent, a clue, a grade, a way out. The body is the currency, and the price climbs
 
 ## taboo_at_home · taboo at home
 
-The house, and who is in the next room. The relationship is the transgression.
+The house she comes back to, and who is in the next room. The relationship is the transgression; the
+world outside, and what she brings home from it, is what makes the house risky.
 
 - **In Her Own Hands — Wine with roommates** (`[JobCelebrate1A]`) · "should steer clear since these were my roommates, but I couldn't resist."
   Remembered because: Remembered: "Finding job earns you celebration sex with a room mate." (F95 review Space_Cow99).

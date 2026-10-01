@@ -7,9 +7,10 @@ validates almost none of it.
 > ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
 > [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,
 > City Center), and Course of Temptation's [Maps] splits into `<<tab Campus>>` and `<<tab Town>>`.
-> A world of one house plus a row of shops is not that shape, however many gates it passes —
-> unless the fantasy is taboo at home (`want.fantasy_shape = "taboo_at_home"`), where the house is
-> the point. *(LO decided.)*
+> A world of one house plus a row of shops is not that shape, however many gates it passes, and
+> that holds for every fantasy. In a taboo-at-home game (`want.fantasy_shape = "taboo_at_home"`) the
+> house is her hub, the place she returns to; the world outside is what makes the house risky.
+> *(LO decided.)*
 > **An example outranks every rule beside it: a rule is read, an example is copied.** So this file
 > teaches a *menu* you must choose from and carries no picture you can copy. See `SKILL.md`,
 > operating rules.
@@ -30,7 +31,7 @@ measured against five named shipped games.
 | **`two_hub`** | two strong anchors — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
 | **`map_hotspots`** | a drawn map with clickable districts | a large, replay-heavy world, 10+ zones |
 | **`street_mesh`** | named streets, each listing its neighbours and its venues | a city that should feel real without a drawn map |
-| **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain | heavily scripted content where a map is friction |
+| **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain; the one exception to the zone rule, and each slot still carries a thread of her life, with its people and its link to the hook | heavily scripted content where a map is friction |
 
 **Record the pick in `board.map.archetype`. Gate 28 fails a board that has not chosen.**
 
@@ -41,7 +42,8 @@ measured against five named shipped games.
 
 **Then size it on two axes, and they are independent:**
 
-- **Scale** — how many zones. Match it to the cast; a small cast does not need a city.
+- **Scale** — how many zones. Match it to the threads of her life (`the-want.md` §6), not to the
+  cast size: each thread needs its place, and two threads may share one.
 - **Aliveness** — how lived-in. A *tight slice* holds only what the content needs; a *living world*
   carries ambient traffic, routines and events the player did not trigger. This is a
   **content-budget fork, not a quality dial** — every ambient zone is content you have to fund.

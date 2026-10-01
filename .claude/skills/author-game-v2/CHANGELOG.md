@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W1: drop "the house is the point" (World and Systems PRD, Phase 1)
+
+**Why.** WS-D1: every game gets a world outside, rooted outdoors in more than one zone. For a taboo-at-home game
+the house is her hub, the place she returns to, and the world outside is what makes the house risky. The old
+carve-out let a family game ship as one house.
+
+**What changed.**
+- `references/the-want.md` §5 and the shape table's taboo row: the carve-out is gone; the house is her hub.
+- `references/the-map.md` header warning: the zone rule holds for every fantasy. R0's `time_slot` row is the one
+  exception to the zone rule, and each slot still carries a thread of her life (Q4, WS-D17). Scale follows the
+  number of threads, not the cast size.
+- `templates/idea.md` §1 taboo line and `references/moment-library.md` taboo_at_home intro (the slice
+  `pitch_pack.py` prints) say the same.
+- Prose only: no script reads `fantasy_shape` to change a rule.
+
+**Verified.** `grep -rn "house is the" references templates` and `grep -n "where the house" references/the-map.md`
+give 0 hits; `test_templates_parse` passes; pytest 462 passed; `--selfcheck` current (orphans 3, the baseline).
+
+**Words:** +103, running total 139,618 / 149,283.
+
+---
+
 ## 2026-09-30 — Phase 5 (verify, members_only only)
 
 **Why.** Phase 5 of PRD v2 §6, scoped by LO to members_only. Checker bugs found on the scratch run are fixed

@@ -29,7 +29,7 @@ Deals); a sheltered girl's slow corruption (Cupid's Way). Each game sits in one 
 |---|---|---|
 | **fall by need** | alone, broke, and the world prices her body | rent, and a price list for acts |
 | **rise by want** | she chose it, for status, freedom or power | her own goal, a rival, something that repeats |
-| **taboo at home** | the house, and who is in the next room | the chance of being walked in on |
+| **taboo at home** | the house she comes back to, and who is in the next room | the chance of being walked in on, and what she brings home from outside |
 | **mystery** | she investigates while something works on her | secrets she buys, clues that pay out |
 
 **The premise comes before the Want**, since the hold and the charge depend on it: three premises in
@@ -362,7 +362,8 @@ of 41.
 
 ### 5. The world
 Decided on the board, not here: the shape first (`board.map.archetype`, `the-map.md` R0), rooted
-outdoors in more than one zone unless the fantasy is taboo at home, where the house is the point.
+outdoors in more than one zone, for every game. In a taboo-at-home game the house is her hub, the
+place she returns to, not the whole world: the world outside is what makes the house risky.
 
 ### 6. The people
 Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
