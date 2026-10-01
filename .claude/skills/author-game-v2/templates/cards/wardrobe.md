@@ -98,9 +98,9 @@ it feeds · key use · taken away · sex scenes strip it.
   7 fixed slots. No tag list, so a garment cannot be both "skirt" and "wet".
 - The price to put a garment on: its `conditions`. There is no "leave the room" hook: a price to go out in a state
   lives in each destination's `entry_conditions`.
-- A dress code (`clothing_rules`) checks coverage and offers "Change clothes", which opens the wardrobe from
-  anywhere. A place that wants a revealing state (`entry_conditions` with `worn_*`) can only offer "Go back"
-  (planned: the refusal offers a change).
+- A dress code (`clothing_rules`) checks coverage and offers "Change clothes", from anywhere unless
+  `wardrobe_anywhere = false`. A place that wants a revealing state (`entry_conditions` with `worn_*`) offers
+  "Go back", plus "Change clothes" with `wardrobe_change_on_refusal = true`.
 - Events from states: `worn_*` on a canvas trigger, with `trigger_mode = "random"`. No per-item malfunction chance.
 - Lines: a `[group]` band on a `worn_*` condition.
 - The number: `worn_exposure`; `worn_beauty` and `worn_corruption` are readable, but pay cannot be computed from them.

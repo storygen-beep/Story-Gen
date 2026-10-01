@@ -36,8 +36,8 @@
 - Job complaints across the field: low pay 7, grind 6, repetitive 5. They are about pace, not about working.
 
 ## Our engine today (round 9b §6)
-- No job primitive: a shift is a scheduled canvas with `costs` (`template_import.py:799`) and
-  `max_triggers_per_day` (`template_import.py:792`). Rank and performance are hand-built traits and flags.
-- A phone fast job can carry `ranks` (xp, title, income), counted on that job's own xp (`setup.fastJobRank`, `v2.py:3425`; `references/engine.md` §51).
-- Pay can be worked out from one player trait (`{type = "trait", trait, mult, add, min, max}`, `setup.resolveEffectValue` (`v2.py:7038`)), on a
+- No job primitive: a shift is a scheduled canvas with `costs` (`template_import.py:803`) and
+  `max_triggers_per_day` (`template_import.py:796`). Rank and performance are hand-built traits and flags.
+- A phone fast job can carry `ranks` (xp, title, income), counted on that job's own xp (`setup.fastJobRank`, `v2.py:3456`; `references/engine.md` §51).
+- Pay can be worked out from one player trait (`{type = "trait", trait, mult, add, min, max}`, `setup.resolveEffectValue` (`v2.py:7069`)), on a
   choice effect or a fast job's `income`.

@@ -36,5 +36,5 @@
   #1 ask: 226 ask verdicts across 30 games.
 
 ## Our engine today (round 9b §6)
-- Partial: a pregnancy trait only swaps the player portrait to a pregnant variant (`template_import.py:987`,
-  used at `v2.py:1938`). No cycle, conception roll or stage primitive; build them from traits, flags and conditions.
+- Partial: a pregnancy trait only swaps the player portrait to a pregnant variant (`template_import.py:991`,
+  used at `v2.py:1941`). No cycle, conception roll or stage primitive; build them from traits, flags and conditions.

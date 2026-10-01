@@ -6670,6 +6670,47 @@ class WardrobeEffectSchemaTests(SimpleTestCase):
                                 (where, effect, errors))
 
 
+class WardrobeSwitchSchemaTests(SimpleTestCase):
+    """E7b (World and Systems PRD) — `wardrobe_change_on_refusal`, `wardrobe_anywhere`."""
+
+    def test_switches_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(_batch3()))
+        cs = p.metadata["clothing_settings"]
+        self.assertIs(cs["wardrobe_change_on_refusal"], True)
+        self.assertIs(cs["wardrobe_anywhere"], False)
+        d = _batch3()
+        d["settings"].pop("wardrobe_change_on_refusal")
+        d["settings"].pop("wardrobe_anywhere")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(d))
+        self.assertNotIn("wardrobe_change_on_refusal", p2.metadata["clothing_settings"])
+        self.assertNotIn("wardrobe_anywhere", p2.metadata["clothing_settings"])
+
+    def test_bad_switches_are_errors(self):
+        d = _batch3()
+        d["settings"]["wardrobe_anywhere"] = "no"
+        self.assertTrue(any("settings.wardrobe_anywhere must be true or false" in e
+                            for e in validate(normalize(d))))
+        d = _batch3()
+        d["settings"]["clothing_enabled"] = False
+        d["settings"].pop("wardrobe_anywhere")
+        for c in d["canvases"]:
+            for n in c["nodes"]:
+                for ch in n["exit_block"].get("choices", []):
+                    ch.pop("wardrobeEffects", None)
+                n["exit_block"].get("config", {}).pop("wardrobeEffects", None)
+        errors = validate(normalize(d))
+        self.assertTrue(any("settings.wardrobe_change_on_refusal needs clothing_enabled" in e
+                            for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

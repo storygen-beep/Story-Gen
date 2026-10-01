@@ -37,5 +37,5 @@
 
 ## Our engine today (round 9b §6)
 - Missing as a system: no viewers, tips or stream session. A follower count exists as a plain player trait
-  (`v2.py:3200`, `act.counter_trait || 'followers'`), so `trait_decay` can decay it.
-- Tips from one stat are a stat-based value (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7038`)); from several, tip bands per rung.
+  (`v2.py:3231`, `act.counter_trait || 'followers'`), so `trait_decay` can decay it.
+- Tips from one stat are a stat-based value (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7069`)); from several, tip bands per rung.

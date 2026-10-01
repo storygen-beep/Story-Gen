@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: two wardrobe switches — a change on refusal, and no change from anywhere (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. A place that wants a revealing state could only say "Go back", and a
+dress code's "Change clothes" opened the wardrobe from wherever she was, so every dress code was one
+click from met.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_change_on_refusal` (default false) and `wardrobe_anywhere`
+  (default true). Each must be a bool, and switching one from its default needs clothing (build errors).
+  Written into `clothing_settings` only when switched, so GG gets them and every other game's metadata
+  is unchanged.
+- `generators/v2.py`: with `wardrobe_change_on_refusal`, a location's `entry_conditions` refusal adds
+  "Change clothes" when an unmet item is a clothing condition (`worn_*`, `clothing_slot`,
+  `clothing_item`; `setup.refusalOffersChange`), and the wardrobe's Back tries the place again. With
+  `wardrobe_anywhere = false`, "Change clothes" on the ClothingBlock and on that refusal shows only when
+  she came from the wardrobe room (`setup.canChangeClothesHere`); the ClothingBlock intercept records
+  where she came from, because the refused room's passage renders (and writes `current_location`)
+  before the redirect lands. The helpers, the intercept line and the `<<if>>` around the link are
+  emitted only when a switch is on.
+- `references/engine.md` §17: the loophole and the "Go back only" lines become the facts.
+  `templates/cards/wardrobe.md`: "planned: the refusal offers a change" becomes the fact.
+- Citations re-pointed through the `git diff` line map (599 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (4, headless: from the wardrobe room the club's refusal offers
+"Change clothes", the wardrobe's Back after taking the top off lets her in; from the gym neither the
+refusal nor the office's dress code offers a change; from the wardrobe room the dress code does; the same
+fixture with both switches removed behaves as before and emits no helper). `WardrobeSwitchSchemaTests`
+(2). No save state. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all
+import, 0 passages differ from the pre-batch engine (301f6f8); only the engine script differs.
+Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +21, running total 145,560 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: a scene takes clothes off her — `unequip` and `remove` (World and Systems PRD, Phase 7; opt-in by use)
 
 **Why.** LO's engine order, step 7 (clothing upgrades). `wardrobeEffects` knew only `add` and `equip`:

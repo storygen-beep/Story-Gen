@@ -17,6 +17,12 @@
 #  E7 — clothing (blouse, skirt and bra are worn from the start; the slip is not owned):
 #    strip_scene  "Lose the blouse" unequips it (it stays in the wardrobe); "Wear the
 #                 slip" equips it; the next node's exit removes the skirt (gone).
+#    loc_club     entry_conditions: worn_exposure >= 1 (something must show). The refusal
+#                 offers "Change clothes" (wardrobe_change_on_refusal), only where she can
+#                 change: wardrobe_anywhere = false makes that the wardrobe room, loc_home.
+#    loc_office   a dress code (top + bottom). Its ClothingBlock offers "Change clothes" only
+#                 in loc_home for the same reason. The tests also build this fixture with
+#                 both switches removed, to prove the defaults are today's behaviour.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -160,8 +166,10 @@ exit_block = { type = "location", text = "Step back", config = { destinationType
 # ── E7: clothing ─────────────────────────────────────────────────────────────
 
 [settings]
-clothing_enabled  = true
-wardrobe_location = "loc_home"
+clothing_enabled           = true
+wardrobe_location          = "loc_home"
+wardrobe_change_on_refusal = true
+wardrobe_anywhere          = false
 
 [[clothing]]
 id      = "blouse"
@@ -211,3 +219,20 @@ id     = "gone"
 name   = "Gone"
 blocks = [ { type = "paragraph", content = "STRIP_GONE" } ]
 exit_block = { type = "location", text = "Done", config = { destinationType = "trigger", time_progression_minutes = 0, wardrobeEffects = [ { action = "remove", item_id = "skirt" } ] } }
+
+# E7b — a place that wants a revealing state, and a dress code
+[[locations]]
+id               = "loc_club"
+name             = "Club"
+description      = "The club."
+entry_from       = "loc_home"
+entry_conditions = { version = "1.0", items = [
+  { type = "worn_exposure", operator = "gte", value = 1 } ] }
+blocked_message  = "The doorman shakes his head. Show something."
+
+[[locations]]
+id             = "loc_office"
+name           = "Office"
+description    = "The office."
+entry_from     = "loc_home"
+clothing_rules = [ { slots_required = ["top", "bottom"], message = "Dress code." } ]

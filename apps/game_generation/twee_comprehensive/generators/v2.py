@@ -1173,6 +1173,9 @@ class TweeComprehensiveGeneratorV2:
         self.clothing_enabled = clothing_settings.get("enabled", False)
         self.wardrobe_location_slug = clothing_settings.get("wardrobe_location", "")
         self.shop_location_slug = clothing_settings.get("shop_location", "")
+        # E7b — both absent in every game that does not opt in.
+        self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
+        self.wardrobe_anywhere = clothing_settings.get("wardrobe_anywhere") is not False
         clothing_items = clothing_settings.get("items", [])
         clothing_requirements = clothing_settings.get("requirements", {})
         if self.clothing_enabled:
@@ -2119,6 +2122,34 @@ setup.checkLocationClothing = function(passageName) {
     if (missing.length === 0) return null;
 
     return activeRule.message || "You need to put on more clothes before going there.";
+};
+"""
+            if self.wardrobe_change_on_refusal or not self.wardrobe_anywhere:
+                wardrobe_js_block += """
+// E7b — where she can change (any room, or with wardrobe_anywhere = false only a
+// wardrobe room), and whether a refusal's unmet part is about her clothes.
+setup.wardrobe_anywhere = """ + json.dumps(self.wardrobe_anywhere) + """;
+setup.wardrobe_location_ids = """ + json.dumps(self._wardrobe_location_ids()) + """;
+setup.canChangeClothesHere = function(fromId) {
+    if (setup.wardrobe_anywhere) return true;
+    var here = String(fromId || (State.variables.player || {}).current_location || '');
+    return setup.wardrobe_location_ids.indexOf(here) !== -1;
+};
+setup._clothingConditionTypes = ['clothing_slot', 'clothing_item', 'worn_exposure',
+    'worn_beauty', 'worn_corruption', 'worn_type'];
+setup.unmetClothingCondition = function(cond) {
+    var items = (cond && cond.items) || [];
+    for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (!it) continue;
+        if (it.items) { if (setup.unmetClothingCondition(it)) return true; continue; }
+        if (setup._clothingConditionTypes.indexOf(it.type) === -1) continue;
+        if (!setup.triggerConditionsSatisfied({ "version": "1.0", "logic": "AND", "items": [it] })) return true;
+    }
+    return false;
+};
+setup.refusalOffersChange = function(cond) {
+    return setup.unmetClothingCondition(cond) && setup.canChangeClothesHere();
 };
 """
             wardrobe_handlers_block = """
@@ -10967,6 +10998,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
                         )
+                    if self.clothing_enabled and self.wardrobe_change_on_refusal and has_entry_conditions:
+                        # E7b — the unmet part is about her clothes: offer the wardrobe, and
+                        # come back here (WardrobePage's Back re-renders this passage).
+                        blocked_html += (
+                            f'\n<<if setup.refusalOffersChange({entry_cond_json})>>'
+                            f'<<link "Change clothes" "WardrobePage">>'
+                            f'<<set $last_game_passage to "{self._location_passage_name(location)}">><</link>><br><</if>>'
+                        )
                     if loc_hours:
                         closed_text = (location.properties or {}).get('closed_text', '')
                         closed_html = (
@@ -14225,6 +14264,14 @@ setup.carryRent = function (due, paid) {
             if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
                 return True
         return False
+
+    def _wardrobe_location_ids(self) -> list:
+        """E7b — the location ids ($player.current_location's form) of the wardrobe room."""
+        slugs = {self.wardrobe_location_slug} if self.wardrobe_location_slug else set()
+        return [
+            str(loc.id) for loc in self.locations
+            if (getattr(loc, "properties", None) or {}).get("slug") in slugs
+        ]
 
     def _has_return_exit(self) -> bool:
         """E8b — does any included canvas end on a `destinationType = "return"` exit?
@@ -18158,6 +18205,13 @@ setup.returnPassage = function (fallback) {
 """
 
         clothing_redirect_block = ""
+        # E7b — with wardrobe_anywhere = false the ClothingBlock asks where she came
+        # from: the refused room's passage still renders (and writes current_location)
+        # before the redirect lands.
+        clothing_from_line = (
+            "            State.variables._clothing_block_from = (sv.player || {}).current_location;\n"
+            if not self.wardrobe_anywhere else ""
+        )
         if self.clothing_enabled:
             clothing_redirect_block = """
     // Clothing intercept: block location entry if not dressed enough
@@ -18166,7 +18220,7 @@ setup.returnPassage = function (fallback) {
         if (clothingMsg) {
             State.variables._clothing_block_message = clothingMsg;
             State.variables._clothing_block_destination = psg;
-            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
+""" + clothing_from_line + """            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
             return;
         }
     }
@@ -18797,6 +18851,12 @@ $(document).on(':passagestart', function(ev) {
         # Wardrobe page and clothing block (only if clothing enabled)
         wardrobe_page = ""
         clothing_block_page = ""
+        # E7b — `wardrobe_anywhere = false`: a dress code's "Change clothes" shows only
+        # where she can really change. Empty (today's text) in every other game.
+        change_open = change_close = ""
+        if not self.wardrobe_anywhere:
+            change_open = "<<if setup.canChangeClothesHere(State.variables._clothing_block_from)>>"
+            change_close = "<</if>>"
         if self.clothing_enabled:
             wardrobe_page = """
 :: WardrobePage
@@ -18821,12 +18881,12 @@ if (clothingMsg) {
 <h2>Not Dressed for This</h2>
 <p><<print State.variables._clothing_block_message || "You need to put on more clothes.">></p>
 <div class="clothing-block-choices">
-<<link "Change clothes">><<script>>
+""" + change_open + """<<link "Change clothes">><<script>>
     State.variables.last_game_passage = State.variables._clothing_block_destination;
     Engine.play("WardrobePage");
 <</script>><</link>>
 <br>
-<<link "Go back">><<script>>
+""" + change_close + """<<link "Go back">><<script>>
     Engine.play(State.variables.last_game_passage || "Navigation");
 <</script>><</link>>
 </div>"""

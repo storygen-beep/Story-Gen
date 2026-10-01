@@ -504,6 +504,10 @@ class GameTemplate:
     clothing_items: List[TemplateClothingItem] = field(default_factory=list)
     wardrobe_location: Optional[str] = None
     shop_location: Optional[str] = None
+    # E7b — both opt-in, raw so validate() can name a non-bool. Off (False / True) is
+    # today's behaviour: no change link on a refusal, a dress code's change from anywhere.
+    wardrobe_change_on_refusal: Any = False
+    wardrobe_anywhere: Any = True
     clothing_requirements: Optional[TemplateClothingRequirements] = None
     # Rent system
     rent_enabled: bool = False
@@ -3048,6 +3052,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     clothing_enabled = _require_bool(settings_raw, "clothing_enabled", False)
     wardrobe_location = _require_str(settings_raw, "wardrobe_location", "")
     shop_location = _require_str(settings_raw, "shop_location", "")
+    wardrobe_change_on_refusal = settings_raw.get("wardrobe_change_on_refusal", False)
+    wardrobe_anywhere = settings_raw.get("wardrobe_anywhere", True)
     clothing_items: List[TemplateClothingItem] = []
     if clothing_enabled:
         for ci, c_raw in enumerate(data.get("clothing", []) or []):
@@ -3665,6 +3671,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         clothing_items=clothing_items,
         wardrobe_location=wardrobe_location or None,
         shop_location=shop_location or None,
+        wardrobe_change_on_refusal=wardrobe_change_on_refusal,
+        wardrobe_anywhere=wardrobe_anywhere,
         clothing_requirements=clothing_requirements_obj,
         rent_enabled=rent_enabled,
         rent_amount=rent_amount,
@@ -6139,6 +6147,14 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"duplicate clothing id: {ci.id}")
             seen_clothing_ids.add(ci.id)
 
+    # E7b — the two wardrobe switches: bools, and only in a game with clothing.
+    for _w_key, _w_default in (("wardrobe_change_on_refusal", False), ("wardrobe_anywhere", True)):
+        _w_val = getattr(template, _w_key)
+        if not isinstance(_w_val, bool):
+            errors.append(f"settings.{_w_key} must be true or false")
+        elif _w_val != _w_default and not template.clothing_enabled:
+            errors.append(f"settings.{_w_key} needs clothing_enabled = true")
+
     # E7a — wardrobe effects: a known action on a declared garment. An unknown action or
     # a missing item_id used to emit nothing at all, with no error anywhere.
     _clothing_ids = {ci.id for ci in template.clothing_items}
@@ -8285,6 +8301,11 @@ def _assemble_project_metadata(project, template):
             "enabled": True,
             "wardrobe_location": template.wardrobe_location or "",
             "shop_location": template.shop_location or "",
+            # E7b — written only when switched from the default, so an existing game's
+            # metadata is unchanged.
+            **({"wardrobe_change_on_refusal": True}
+               if template.wardrobe_change_on_refusal is True else {}),
+            **({"wardrobe_anywhere": False} if template.wardrobe_anywhere is False else {}),
             "items": [
                 {
                     "id": ci.id,
