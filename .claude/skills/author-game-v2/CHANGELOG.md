@@ -5,6 +5,34 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P1: flip the default (World and Systems PRD, Phase 3; LO's WS-D7)
+
+**Why.** WS-D7: every game the skill copies has a phone and its threads carry the arcs (round 9a §0, §2), while
+`SKILL.md` said "most games should not have one". The new primary failure is live arcs with no phone.
+
+**What changed.**
+- `references/the-phone.md`: the intro's failure line is now "live arcs with no phone" (IHOH's 10 senders are all
+  arc people; SD calls only met contacts; the feed failure is pointed at P6). P1 is rewritten as "Every person she
+  is involved with has a thread": the default is a phone with a thread per person she is involved with (CW Damien,
+  lunch scene to sex); a thread starts at the scene flag that causes its first text (P4); every app is a door to
+  sex, money or people, or it isn't there (IHOH 6 of 15 apps pay nothing; CW followers buy nothing; CoT Findr, IHOH
+  OnlyGirlz as doors). The three refusal questions are cut. The thin-phone warning and "a declared channel must
+  exist in the built game" are kept (its "see below" pointer dropped, since P2c replaces that section). Contents:
+  P1 and P3 titles, and the missing P12 line. P3's heading loses "fifteen words" (its body is P2a's). P10's "That
+  is P1's rule" becomes "this file's rule". The footer's "P3's fifteen words" becomes "P3's message length" so
+  this item's Verify grep is clean before P2a rewrites the footer.
+- `SKILL.md` (the routing line for the phone): P1 is the default, not a refusal question.
+- `references/the-first-hour.md` F4: the phone is armed by the first scene flag that causes a text.
+- `DOCTRINE_GAPS.md` row 12 and the 2026-08-29 phone-study row: superseded notes (not rewrites).
+- `references/the-want.md:162-163` is W1b (PROTECTED) and was not touched.
+
+**Verified.** `grep -rn "should not have one\|fifteen words" SKILL.md references` = 0; `--selfcheck` current
+(orphans 3); pytest 475 passed.
+
+**Words:** +123, running total 142,454 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone S3b: two carry-overs from the Phase 2 build (World and Systems PRD)
 
 **Why.** S3 left `references/engine.md` §19 alone because the Phase 2 prompt kept engine.md edits inside §26 and

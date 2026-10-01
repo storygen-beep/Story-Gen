@@ -405,6 +405,9 @@ For every system switched ON in `0_systems_spec.toml`, either a named beat in th
 it, or it sits on the sidebar at value-zero where the player can read it. One row per system, none
 cold.
 
+The phone is a channel, and it is armed the same way: by the first scene flag that causes a text
+(`the-phone.md` P4). Its first thread arrives because a scene happened, not because `[phone]` exists.
+
 The field arms its wardrobe inside the opening. Course of Temptation's [Prologue6c] has her *"look
 over your wardrobe, picking out something in your usual style."* and puts the outfit picker on
 that same screen.

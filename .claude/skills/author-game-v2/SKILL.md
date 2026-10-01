@@ -210,10 +210,10 @@ CHANGE once players hold saves — ids, flag and trait keys, stat ranges, the ti
 to every gate in this skill and strands every save in the wild; the engine's own migration seam
 (`engine.md` §40) repairs additions and nothing else.
 
-**One optional file, read only if the game declares the phone (a channel, not a system):** `the-phone.md` (whether this game
-needs a phone, what goes on it, and how it is wired to the world). **Its P1 is a refusal question —
-most games should not have one**, and a thinly-filled phone is worse than none. Read it before
-writing `[phone]`, not after.
+**The phone (a channel, not a system):** `the-phone.md` (what goes on it, how a text is written, and
+how it is wired to the world). **Its P1 is the default — a chat thread for every person she is
+involved with, and every app a door to sex, money or people, or it isn't there.** A thinly-filled
+phone is still worse than none. Read it before writing `[phone]`, not after.
 
 **Read `the-first-hour.md` before you author a single canvas.** It is the only one of these that
 governs content the player meets in a fixed order, and it is the one v2 shipped without.

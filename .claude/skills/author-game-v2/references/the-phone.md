@@ -8,9 +8,11 @@ This file owns **one rule**, and every section below is that rule applied:
 > **The phone is a door into the world, not a room of its own. It reads state the world already
 > keeps, and everything it offers costs the world something.**
 
-> The failure this exists to prevent: **a social feed she cannot post to.** With `post_actions`
-> empty, the app is a wall she reads. The phone offers her actions — Course of Temptation's
-> [ElkbookWidgets]: *"You can post a selfie."*
+> The failure this exists to prevent: **live arcs with no phone.** Every game this skill copies
+> carries its arcs on threads — In Her Own Hands' 10 senders are all arc people, Shady Deals calls
+> only contacts she met in scenes (round 9a, `ROUND9A_REPORT.md` §2). A game whose people never text
+> her between meetings has a world that stops when she leaves the room. (The older failure, a feed
+> she cannot post to, is P6.)
 
 **Why this file exists.** `DOCTRINE_GAPS.md` Tier 3 row 12 — *"Optional systems — phone,
 customization"*. The phone is a channel — infrastructure, not a system (`the-systems.md` SY1): it
@@ -27,9 +29,9 @@ Engine claims here carry a `file:line` into
 `apps/projects/services/template_import.py`, per `SKILL.md` operating rules.
 
 ## Contents
-1. P1 · Whether this game has a phone at all
+1. P1 · Every person she is involved with has a thread
 2. P2 · Build the channel, never the hub
-3. P3 · A message is fifteen words — the phone is its own register
+3. P3 · A message is 3–7 words — the phone is its own register
 4. P4 · The phone reads the world; it keeps no state of its own
 5. P5 · Everything on the phone costs something
 6. P6 · If she can be looked at, she has to be able to post
@@ -38,33 +40,33 @@ Engine claims here carry a `file:line` into
 9. P9 · A repeatable thread is built out of today, and needs a null branch
 10. P10 · A plan the player cannot see is worse than no plan
 11. P11 · Never a battery
+12. P12 · The phone brings someone to her
 
 ---
 
-## P1 · Whether this game has a phone at all
+## P1 · Every person she is involved with has a thread
 
-The phone is not free. It is a second map of the same world, and it goes stale the moment the
-world outgrows it.
+**The default is a phone, with a chat thread for every person she is involved with** (LO, WS-D7).
+Every game this skill copies has one, and its threads carry the arcs: Cupid's Way's Damien thread
+opens at a lunch scene and runs to sex at her place (round 9a §1a). The phone is how a person she is
+involved with reaches her between the times she can reach him in person.
 
-**The prerequisite is people, not features.** A phone is worth building when there are characters
-the player wants to reach *between* the times they can reach them in person. If every character is
-always findable at a known place and hour, the phone has nothing to add and will read as a menu.
+**A thread follows the person.** List the live arcs first. Each gets a thread when its first scene
+sets the flag that causes a text (P4); a person she has not met has none. A phone with no live arc
+has nothing to say, so a release with no arc running yet leaves `[phone]` out.
 
-**Ask three questions before declaring `[phone]`:**
+**Every app is a door to sex, money or people, or it isn't there.** In Her Own Hands ships 15 apps,
+and 6 pay nothing; Cupid's Way's followers buy nothing; neither drew praise for them (round 9a §0).
+Course of Temptation's Findr ends in a booty call; In Her Own Hands' OnlyGirlz pays the bank on the
+1st. An app that cannot end in a person, a sex scene or money is cut.
 
-1. **Is there someone she cannot get to right now?** If the cast is four people in one house, no.
-2. **Does anything in this world happen while she is elsewhere?** A phone's whole value is that it
-   is the channel for offscreen life. A game with no offscreen life has no use for it.
-3. **Is she looked at by anyone she is not in the room with?** That is the other half — see P6.
-
-If the answer to all three is no, do not declare a phone. Declaring one and filling it thinly is
-strictly worse than not having one: an app with a single item in it reads as a broken feature,
-and 18% of the field's phone comments are players asking how to make an empty-looking phone work.
+**A thin phone is still worse than none.** An app with a single item in it reads as a broken
+feature, and 18% of the field's phone comments are players asking how to make an empty-looking
+phone work. Build what the live arcs and one door app use, and nothing else (round 9a §4).
 
 ⚠️ **A declared channel must exist in the built game.** If `0_systems_spec.toml` says the phone is
 ON, the built `7_final_game.toml` has to carry its block — `[phone]` for the phone — or the spec has
-to change. Nothing checks this: no script in `scripts/` compares the spec with the build (see
-"What is not gated here", below).
+to change. Nothing checks this: no script in `scripts/` compares the spec with the build.
 
 ---
 
@@ -102,7 +104,7 @@ builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the 
 
 ---
 
-## P3 · A message is fifteen words — the phone is its own register
+## P3 · A message is 3–7 words — the phone is its own register
 
 This is the highest-confidence measurement in the study and the one most likely to be got wrong,
 because every other surface in this skill is longer (the model beats in `register.md`).
@@ -427,7 +429,7 @@ face, the dating app, a bar pickup, being invited after class, a reward inside a
 and a cleanup that expires dates she did not attend.
 
 **The phone does not own the date. The world owns a calendar and the phone is one door into it.**
-That is P1's rule stated as architecture, and it is why that system does not read as bolted on.
+That is this file's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2442`).
@@ -509,7 +511,7 @@ zero, in the G44 / G45 / G46 line:
   block in the built TOML. Not phone-specific; it would catch
   any dropped system.
 
-⚠️ **P3's fifteen words must not become a gate.** It is a shape, measured over 369 bubbles, and a
+⚠️ **P3's message length must not become a gate.** It is a shape, measured over 369 bubbles, and a
 threshold on it would fail a correct three-word message. The precedent is explicit: R4, study 6's
 anchoring check, P0 and the duplicate wardrobe gate were each withdrawn for inventing a number the
 evidence did not carry.
