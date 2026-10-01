@@ -42,7 +42,7 @@
 
 ## Our engine today (round 9b §6)
 - A recurring bill that escalates by total paid exists: `rent_stages` (`template_import.py:496`) and
-  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13820`); `rent_on_short` (`template_import.py:501`)
+  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13862`); `rent_on_short` (`template_import.py:501`)
   carries a short payment forward, like back debt.
-- A computed bill (±20% for grades, +$200 per child) is not built (`v2.py:15935`, "only 'random' is
-  supported"); author fixed amounts per band instead.
+- A computed bill (±20% for grades, +$200 per child) is not built: rent `amount` and `costs` take numbers only
+  (a stat-based value is an effect's, `references/engine.md` §3); author fixed amounts per band instead.

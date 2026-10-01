@@ -11,7 +11,7 @@ import json
 import logging
 from dataclasses import asdict, dataclass, field, is_dataclass
 import uuid
-from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple, Union
 
 import tomli
 from django.contrib.auth import get_user_model
@@ -912,7 +912,9 @@ class TemplateFastJob:
     """doc 45 G9 — a repeatable money job. Worked from the Fast Jobs phone app."""
     id: str = ""
     name: str = ""
-    income: int = 0
+    # A number, or an effect-value table (E5: {type = "trait", ...} pays from her stats;
+    # {type = "random", min, max} rolls). Resolved at runtime by setup.resolveEffectValue.
+    income: Union[int, Dict[str, Any]] = 0
     xp_req: int = 0          # fast-jobs XP needed to unlock
     cooldown_days: int = 0   # days locked after working it
     time_period: str = ""    # optional game.time gate (e.g. "M","A")
@@ -1639,6 +1641,56 @@ _CONDITION_CARRIER_KEYS = frozenset({"conditions", "entry_conditions", "match_co
 _CONDITION_EXCLUDED_TABLES = frozenset({"quest_cards", "player_portrait"})
 
 
+# E5 — the keys of an effect value computed from her stats, and the keys that hold an
+# effect value wherever they appear (`value` on a trait effect, `income` on a job).
+_TRAIT_VALUE_KEYS = frozenset({"type", "trait", "mult", "add", "min", "max"})
+_EFFECT_VALUE_CARRIER_KEYS = frozenset({"value", "income"})
+
+
+def _validate_effect_value_shape(val: Any, ctx: str, player_traits: Set[str]) -> List[str]:
+    """E5 — check `{type = "trait", trait, mult, add, min, max}`.
+
+    Errors: an unknown key, a missing or undeclared player trait (the runtime would read
+    0 and pay the floor for ever), a non-number factor, and min above max.
+    """
+    errors: List[str] = []
+    for k in sorted(set(val) - _TRAIT_VALUE_KEYS):
+        errors.append(f"{ctx}: unknown key `{k}` on a stat-based value "
+                      f"(allowed: {', '.join(sorted(_TRAIT_VALUE_KEYS))})")
+    trait = val.get("trait")
+    if not isinstance(trait, str) or not trait:
+        errors.append(f"{ctx}: a stat-based value needs `trait`, a player trait")
+    elif player_traits and trait not in player_traits:
+        errors.append(f"{ctx}: trait {trait!r} is not in [player] core_traits")
+    for k in ("mult", "add", "min", "max"):
+        if k in val and (isinstance(val[k], bool) or not isinstance(val[k], (int, float))):
+            errors.append(f"{ctx}.{k} must be a number, got {val[k]!r}")
+    lo, hi = val.get("min"), val.get("max")
+    if (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+            and not isinstance(lo, bool) and not isinstance(hi, bool) and lo > hi):
+        errors.append(f"{ctx}: min ({lo}) is above max ({hi})")
+    return errors
+
+
+def _walk_effect_values(node: Any, ctx: str, player_traits: Set[str]) -> List[str]:
+    """E5 — find every stat-based effect value in the raw TOML and check it. Walks by
+    key name, like _walk_condition_carriers; a `value` that is a plain number or a
+    random range is left to the generator's own check."""
+    errors: List[str] = []
+    if isinstance(node, dict):
+        for k, v in node.items():
+            child = f"{ctx}.{k}" if ctx else str(k)
+            if (k in _EFFECT_VALUE_CARRIER_KEYS and isinstance(v, dict)
+                    and v.get("type") == "trait"):
+                errors.extend(_validate_effect_value_shape(v, child, player_traits))
+                continue
+            errors.extend(_walk_effect_values(v, child, player_traits))
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            errors.extend(_walk_effect_values(v, f"{ctx}[{i}]", player_traits))
+    return errors
+
+
 def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
     """E1 — check one conditions table against CONDITION_SCHEMA.
 
@@ -2107,6 +2159,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # every carrier is reached by its authored key, including ones parsed as raw dicts.
     # Both builds (TI and the no-DB game_graph path) run normalize() then validate().
     _parse_errors.extend(_walk_condition_carriers(data, ""))
+    _parse_errors.extend(_walk_effect_values(
+        data, "", set(((data.get("player") or {}).get("core_traits") or {}).keys())))
 
     schema_version = _require_str(data, "schema_version", "0.1")
 
@@ -3052,7 +3106,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             TemplateFastJob(
                 id=_require_str(fj, "id"),
                 name=_require_str(fj, "name", ""),
-                income=_require_int(fj, "income", 0),
+                income=(fj["income"] if isinstance(fj.get("income"), dict)
+                        else _require_int(fj, "income", 0)),
                 xp_req=_require_int(fj, "xp_req", 0),
                 cooldown_days=_require_int(fj, "cooldown_days", 0),
                 time_period=_require_str(fj, "time_period", ""),

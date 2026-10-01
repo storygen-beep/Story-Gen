@@ -5,6 +5,41 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: pay worked out from her stats (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 5. Every amount the engine paid was fixed at build time (or a random
+range), so a shift paid the same on day 1 and day 90 while rent climbed (the Billable Hours test).
+
+**What changed.**
+- `generators/v2.py`: one runtime resolver, `setup.resolveEffectValue`: a number passes through;
+  `{type = "random", min, max}` rolls; `{type = "trait", trait, mult, add, min, max}` reads her player
+  trait as round(trait × mult + add), held inside min / max. The Python `_resolve_effect_value` emits a
+  call to it for the trait shape (number and random emission byte-identical). The four runtime paths
+  that did `Number(value)` use it: phone reply and `on_ignore` effects, daily-chat topics, the daily
+  tick, fast-job income. The job board prints `setup.effectValueLabel` (a range reads "8–14"). The
+  "what raises this trait" hint readers skip a stat-based value instead of raising on `> 0`.
+- `template_import.py`: a fast job's `income` may be a value table; `_walk_effect_values` checks every
+  stat-based `value` / `income` in the raw TOML (unknown key, trait not in `[player] core_traits`,
+  non-number factor, min above max are errors).
+- `references/engine.md` §3: the value shape, where it applies, the import check, its one-trait limit.
+- `templates/cards/` (job, sex_for_pay, streaming, shoots, gym_body, greek_life, college,
+  money_pressure): "no computed pay" becomes the fact; the bills stay unbuilt (rent `amount` and
+  `costs` take numbers only).
+- Citations re-pointed through the `git diff` line map (604 moved; 729 endpoints identical to HEAD's
+  line, 8 card cites into the changed resolver rewritten by hand above); `cite_check.py` 0 drifted.
+- Not in this change: `validate_game_toml._numeric_effect_value` and the gates.py effect readers (the
+  protected tools step) still read a stat-based value as nothing.
+
+**Verified.** `test_effect_value_from_stats.py` (4, headless: the resolver on every shape; a fast job
+pays 70 then 100 at the cap and the board says $70; a choice pays through the passage; reply, daily
+topic and day roll pay from charm). `StatEffectValueSchemaTests` (4), `StatEffectValueEmitTests` (3).
+Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,599 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: the ignore hook for a text she leaves unanswered (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's decision to add an ignore hook (the-phone.md P5: ignoring costs more than saying no). Silence

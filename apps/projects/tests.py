@@ -6231,6 +6231,77 @@ class PhoneIgnoreHookIntegrationTests(TestCase):
         self.assertNotIn('"conv_ignored"', twee)
 
 
+def _toml_with_stat_pay(value=None, income=None):
+    d = _base_toml()
+    d["player"]["core_traits"]["charm"] = 10
+    d["player"]["core_traits"]["money"] = 0
+    d["fast_jobs"] = [{"id": "shift", "name": "Shift",
+                       "income": income if income is not None else
+                       {"type": "trait", "trait": "charm", "mult": 2, "add": 50, "max": 100}}]
+    d["engine"] = {"daily_tick": {"traitEffects": [
+        {"targetType": "player", "trait": "money", "op": "add",
+         "value": value if value is not None else {"type": "trait", "trait": "charm"}}]}}
+    return d
+
+
+class StatEffectValueSchemaTests(SimpleTestCase):
+    """E5 (World and Systems PRD) — {type = "trait", trait, mult, add, min, max}."""
+
+    def test_valid_shapes_validate_clean(self):
+        t = normalize(_toml_with_stat_pay())
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.fast_jobs[0].income["mult"], 2)
+
+    def test_a_plain_number_income_still_parses(self):
+        self.assertEqual(normalize(_toml_with_stat_pay(income=20)).fast_jobs[0].income, 20)
+
+    def test_bad_shapes_are_errors(self):
+        for value, fragment in (
+            ({"type": "trait"}, "needs `trait`"),
+            ({"type": "trait", "trait": "luck"}, "'luck' is not in [player] core_traits"),
+            ({"type": "trait", "trait": "charm", "times": 2}, "unknown key `times`"),
+            ({"type": "trait", "trait": "charm", "mult": "2"}, "mult must be a number"),
+            ({"type": "trait", "trait": "charm", "add": True}, "add must be a number"),
+            ({"type": "trait", "trait": "charm", "min": 9, "max": 3}, "min (9) is above max (3)"),
+        ):
+            errors = validate(normalize(_toml_with_stat_pay(value=value)))
+            self.assertTrue(any(fragment in e for e in errors), (value, errors))
+        errors = validate(normalize(_toml_with_stat_pay(income={"type": "trait"})))
+        self.assertTrue(any("fast_jobs[0].income" in e for e in errors), errors)
+
+    def test_a_trait_condition_is_not_mistaken_for_a_value(self):
+        d = _toml_with_stat_pay()
+        d["engine"]["daily_tick"]["traitEffects"][0]["conditions"] = {
+            "version": "1.0", "items": [{"type": "trait", "subject": "player",
+                                         "trait_key": "charm", "operator": "gte", "value": 3}]}
+        self.assertEqual(validate(normalize(d)), [])
+
+
+class StatEffectValueEmitTests(SimpleTestCase):
+    """E5 — v2's `_resolve_effect_value` emits a call to the one JS resolver for the
+    trait shape, and leaves the number and random shapes byte-identical."""
+
+    def setUp(self):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        self.gen = TweeComprehensiveGeneratorV2()
+
+    def test_the_trait_shape_emits_the_resolver(self):
+        out = self.gen._resolve_effect_value({"type": "trait", "trait": "charm", "mult": 2})
+        self.assertEqual(
+            out, 'setup.resolveEffectValue({"mult": 2, "trait": "charm", "type": "trait"})')
+
+    def test_number_and_random_are_unchanged(self):
+        self.assertEqual(self.gen._resolve_effect_value(5), "5.0")
+        self.assertEqual(self.gen._resolve_effect_value({"type": "random", "min": 3, "max": 5}),
+                         "(Math.floor(Math.random() * 3) + 3)")
+
+    def test_a_trait_shape_without_a_trait_raises(self):
+        with self.assertRaises(ValueError):
+            self.gen._resolve_effect_value({"type": "trait"})
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

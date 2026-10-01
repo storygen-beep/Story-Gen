@@ -92,8 +92,8 @@ meeting scene · the no-show cost · the loop entry.
 
 ## Our engine today (round 9a §8; `references/engine.md` §51)
 - A conversation is caused by its `trigger.conditions` (version 1.0); `days_since_flag` is the delay and
-  `time_of_day` the window, which on a conversation is checked once, at delivery (`v2.py:2391`, `:4754`).
+  `time_of_day` the window, which on a conversation is checked once, at delivery (`v2.py:2396`, `:4759`).
 - A conversation delivers once, ever, so the loop is a chain of one-time conversations (`references/the-phone.md` P9).
-- A reply's `flagEffects` and `scheduleEffects` book the meeting (`v2.py:2554`); a canvas holds the place and time.
+- A reply's `flagEffects` and `scheduleEffects` book the meeting (`v2.py:2559`); a canvas holds the place and time.
 - No ignore hook, no calls, no per-app gate, phone actions cost no time, and a dating match leads nowhere.
-- Delivery is pulled: the sidebar badge (`v2.py:3349`) and a three-second toast (`v2.py:2283`).
+- Delivery is pulled: the sidebar badge (`v2.py:3354`) and a three-second toast (`v2.py:2288`).

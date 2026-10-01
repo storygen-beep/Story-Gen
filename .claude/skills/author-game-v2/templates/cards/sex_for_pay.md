@@ -38,4 +38,5 @@
 
 ## Our engine today (round 9b §6)
 - Missing as a system: no client pool, venue or price formula. Composable from canvases, `block_pool` and money effects.
-- No computed price (`v2.py:15935`, "only 'random' is supported"); author price bands per sluttiness tier instead.
+- A price from one stat is a stat-based value (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:6783`)); a price from several stats is
+  bands per sluttiness tier. The value is worked out when it applies, so the price on the label is authored.

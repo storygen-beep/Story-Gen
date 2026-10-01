@@ -71,6 +71,11 @@ DEFAULT_STUDIO_NAME = "NutGames"
 DEFAULT_COMMUNITY_URL = "https://discord.gg/MJXBxEqsa"
 
 
+def _is_stat_value(v) -> bool:
+    """E5 — an effect value computed from her stats at runtime ({type = "trait", ...})."""
+    return isinstance(v, dict) and v.get("type") == "trait"
+
+
 class TweeComprehensiveGeneratorV2:
     """
     Simplified Twee generator for canvas-based stories.
@@ -2343,7 +2348,7 @@ setup.applyPhoneEffectSet = function(src) {{
     for (var e = 0; e < effs.length; e++) {{
         var eff = effs[e];
         if (eff.trait) {{
-            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
         }}
     }}
     var feffs = (src && src.flagEffects) || [];
@@ -2614,7 +2619,7 @@ setup.sendDailyChat = function(npcSlug, topicId) {{
     for (var e = 0; e < effs.length; e++) {{
         var eff = effs[e];
         if (eff.trait) {{
-            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
         }}
     }}
     setup.showEffectNotification();
@@ -3194,7 +3199,7 @@ setup._renderFastJobs = function(appId, appLabel) {{
         var j = jobs[i];
         var cd = fj.cooldowns[j.id] || 0;
         html += '<div class="phone-job-card"><div class="phone-job-name">' + j.name + '</div>';
-        html += '<div class="phone-job-meta">$' + j.income + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
+        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(j.income) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
         if ((fj.xp || 0) < (j.xp_req || 0)) html += '<div class="phone-daily-locked">🔒 Need more XP</div>';
         else if (cd > 0) html += '<div class="phone-daily-locked">Again in ' + cd + 'd</div>';
         else html += '<button class="phone-job-btn" data-job-id="' + j.id + '">Work</button>';
@@ -3213,7 +3218,7 @@ setup.doFastJob = function(jobId) {{
     if ((fj.xp || 0) < (job.xp_req || 0)) return;
     if ((fj.cooldowns[jobId] || 0) > 0) return;
     setup.pendingEffects = [];
-    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', Number(job.income || 0), false, null);
+    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', setup.resolveEffectValue(job.income), false, null);
     setup.showEffectNotification();
     fj.xp = (fj.xp || 0) + 1;
     fj.cooldowns[jobId] = Number(job.cooldown_days || 0);
@@ -6515,7 +6520,7 @@ window.advanceDay = function() {{
                     dtTe.npcId || null,
                     dtTe.trait,
                     dtTe.op || 'add',
-                    Number(dtTe.value || 0),
+                    setup.resolveEffectValue(dtTe.value),
                     (dtTe.clamp === undefined || dtTe.clamp === null) ? false : dtTe.clamp,
                     (dtTe.cap === undefined) ? null : dtTe.cap
                 );
@@ -6768,6 +6773,43 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
 
 // Pending effects to show
 setup.pendingEffects = [];
+
+// E5 — one resolver for an effect's `value` at runtime, wherever the engine reads it
+// outside a passage (phone replies and on_ignore, daily chat topics, the daily tick,
+// fast-job income). A number passes through; {{type: "random", min, max}} rolls an
+// inclusive integer; {{type: "trait", trait, mult, add, min, max}} reads her player
+// trait: trait * mult (default 1) + add (default 0), rounded to a whole number, then
+// held inside min / max when given. Anything else is 0, never NaN.
+setup.resolveEffectValue = function(v) {{
+  if (v === null || v === undefined || v === '') return 0;
+  if (typeof v === 'object') {{
+    if (v.type === 'random') {{
+      var lo = Number(v.min) || 0;
+      var hi = (v.max === undefined || v.max === null) ? lo : Number(v.max);
+      return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+    }}
+    if (v.type === 'trait') {{
+      var ct = ((State.variables.player || {{}}).core_traits) || {{}};
+      var mult = (v.mult === undefined || v.mult === null) ? 1 : Number(v.mult);
+      var x = Math.round((Number(ct[v.trait]) || 0) * mult + (Number(v.add) || 0));
+      if (v.min !== undefined && v.min !== null) x = Math.max(x, Number(v.min));
+      if (v.max !== undefined && v.max !== null) x = Math.min(x, Number(v.max));
+      return x;
+    }}
+    return 0;
+  }}
+  var n = Number(v);
+  return isNaN(n) ? 0 : n;
+}};
+// What the player reads for a value before it is applied (a job's pay on the job board):
+// a range reads "8–14", a stat-based value reads what it would pay right now.
+setup.effectValueLabel = function(v) {{
+  if (v && typeof v === 'object' && v.type === 'random') {{
+    var hi = (v.max === undefined || v.max === null) ? v.min : v.max;
+    return (Number(v.min) || 0) + '–' + (Number(hi) || 0);
+  }}
+  return String(setup.resolveEffectValue(v));
+}};
 
 // Get current trait value helper
 setup.getTraitValue = function(targetType, npcId, trait) {{
@@ -13269,7 +13311,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in choice_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -13283,7 +13325,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in config_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -13329,7 +13371,7 @@ setup.castTraitRows = function (slug, npc) {
                         "effects": [
                             {"trait": e["trait"], "value": e["value"],
                              **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                            for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                            for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                         ],
                         "conditions": None
                     })
@@ -13343,7 +13385,7 @@ setup.castTraitRows = function (slug, npc) {
                             "effects": [
                                 {"trait": e["trait"], "value": e["value"],
                                  **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                                for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                                for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                             ],
                             "conditions": conditions
                         })
@@ -15926,13 +15968,21 @@ setup.carryRent = function (due, paid) {
         if isinstance(val, (int, float)):
             return str(float(val))
 
+        # E5 — a value computed from her stats at the moment it applies. Emitted as a
+        # call to setup.resolveEffectValue with the shape as JSON (keys checked at
+        # import by _validate_effect_value_shape).
+        if isinstance(val, dict) and val.get("type") == "trait":
+            if not isinstance(val.get("trait"), str) or not val.get("trait"):
+                raise ValueError(f"Stat-based effect value needs a `trait`. Got: {val!r}")
+            return f"setup.resolveEffectValue({json.dumps(val, sort_keys=True)})"
+
         # Random-range dict — new shape.
         if isinstance(val, dict):
             vtype = val.get("type")
             if vtype != "random":
                 raise ValueError(
                     f"Effect value dict has unknown type {vtype!r}; "
-                    f"only 'random' is supported. Got: {val!r}"
+                    f"only 'random' and 'trait' are supported. Got: {val!r}"
                 )
             try:
                 mn = int(val["min"])

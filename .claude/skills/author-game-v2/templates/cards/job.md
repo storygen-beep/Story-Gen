@@ -38,5 +38,6 @@
 ## Our engine today (round 9b §6)
 - No job primitive: a shift is a scheduled canvas with `costs` (`template_import.py:769`) and
   `max_triggers_per_day` (`template_import.py:762`). Rank and performance are hand-built traits and flags.
-- Phone `fast_jobs` keep one global XP for all jobs, no per-job rank (`v2.py:3218`).
-- No computed pay (`v2.py:15935`, "only 'random' is supported"); author fixed wages per rank instead.
+- Phone `fast_jobs` keep one global XP for all jobs, no per-job rank (`v2.py:3223`).
+- Pay can be worked out from one player trait (`{type = "trait", trait, mult, add, min, max}`, `setup.resolveEffectValue` (`v2.py:6783`)), on a
+  choice effect or a fast job's `income`.

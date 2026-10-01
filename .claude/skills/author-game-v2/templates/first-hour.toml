@@ -105,7 +105,7 @@ op         = "set"
 # npcId   = "<npc_id>"
 #
 # ⚠️ Where the player cannot yet know the name, use speaker = "unknown" and the
-#    engine prints "Stranger:" (v2.py:14636-14642).
+#    engine prints "Stranger:" (v2.py:14678-14684).
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -130,10 +130,10 @@ priority      = 10
 is_active     = true
 
 # ⚠️ F5 — `requires_npc` DOES NOT GATE AUTO-FIRE. Verified:
-#    getStoryCanvasRedirect (v2.py:4955) -> selectAutoFireCanvasForLocation
-#    (v2.py:4487) -> isCanvasValid (v2.py:4607), which reads schedules,
+#    getStoryCanvasRedirect (v2.py:4960) -> selectAutoFireCanvasForLocation
+#    (v2.py:4492) -> isCanvasValid (v2.py:4612), which reads schedules,
 #    conditions and repeatability and NEVER reads requiresNpc. The field is only
-#    consumed at v2.py:5293 (random encounters) and v2.py:5366 (substitutions).
+#    consumed at v2.py:5298 (random encounters) and v2.py:5371 (substitutions).
 #    Keep it — it is free and it documents intent — but the SCHEDULE below is
 #    what actually stops this firing in an empty room.
 [[canvases.trigger.schedules]]
@@ -145,7 +145,7 @@ end_time   = "<matches this character's own schedule row>"
 version = "1.0"
 logic   = "AND"
 # ⚠️ A conditions block without version = "1.0" FAILS OPEN — the engine returns
-#    true and the meeting cold-spawns at game start (v2.py:3568).
+#    true and the meeting cold-spawns at game start (v2.py:3573).
 [[canvases.trigger.conditions.items]]
 type      = "flag"
 subject   = "player"
@@ -194,7 +194,7 @@ op         = "set"
 #    This block used to be COMMENTED OUT, which made `requires_npc` — live in the
 #    two blocks above — the only NPC key an author could copy. Written on
 #    `[[canvases]]` instead, one level too high, `npc` does nothing: `TemplateCanvas`
-#    has no `npc` field (template_import.py:995-1002), so the key is dropped with no
+#    has no `npc` field (template_import.py:997-1004), so the key is dropped with no
 #    error and no warning, the game ships with ZERO portraits, and every character
 #    surface renders as a text link labelled with the canvas's own title.
 #    See references/the-first-hour.md F5b.
@@ -207,7 +207,7 @@ name = "<A DIFFERENT name from the meeting canvas>"
 location      = "<where they are>"
 npc           = "<npc_id>"     # THE PORTRAIT. Also the presence gate: the renderer
                                # checks this character's own [[npcs.schedules]] against
-                               # where the player is standing (v2.py:5228-5233). Without
+                               # where the player is standing (v2.py:5233-5238). Without
                                # it there is no face, no presence check, and the link
                                # label becomes `name` above — tokens and all.
 requires_npc  = "<npc_id>"     # NOT a substitute for `npc` — it draws no face. It DOES
@@ -260,7 +260,7 @@ operator = "is_true"
 #   TAKE ONE ONLY when a place has a genuinely ONE-TIME thing to say: a door that
 #   was locked and now is not, an arrival that changes her standing. Then a
 #   non-repeatable canvas bound to the location auto-fires on entry
-#   (setup.selectAutoFireCanvasForLocation, v2.py:4493) — no new primitive.
+#   (setup.selectAutoFireCanvasForLocation, v2.py:4498) — no new primitive.
 #   Otherwise DELETE the block below. references/the-first-hour.md F9.
 
 [[canvases]]

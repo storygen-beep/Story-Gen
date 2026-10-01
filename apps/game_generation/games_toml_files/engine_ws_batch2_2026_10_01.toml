@@ -10,6 +10,14 @@
 #    ana_loop     a repeatable chat (repeat_after_days = 1) with ignore_after_days = 1:
 #                 the ignore is per instance, and an ignored instance re-arms.
 #    sal_hello    a one-time chat with a reply and no ignore hook: the control.
+#
+#  E5 — "pay worked out from stats" ({type = "trait", trait, mult, add, min, max}):
+#    charm = 10 on the player. Every value below reads it.
+#    shift        a fast job paying charm * 2 + 50, max 100 (= 70); `flat` pays 20.
+#    pay_desk     a bar canvas whose choice pays charm + 5 (= 15) through the passage path.
+#    sal_hello    its reply adds charm - 5 (= 5) to tips: the phone reply path.
+#    sal_photo    a daily topic adding charm * 0.5 (= 5) to tips: the daily-chat path.
+#    daily tick   adds charm, max 3 (= 3) to tips each day: the day-rollover path.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -30,7 +38,7 @@ starting_week = 1
 id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
-core_traits = { energy = 100, money = 40 }
+core_traits = { energy = 100, money = 40, charm = 10, tips = 0 }
 flag_keys   = ["started", "ignored_ana"]
 
 [[npcs]]
@@ -54,6 +62,11 @@ enabled = true
 id    = "messages"
 type  = "chat"
 label = "Messages"
+
+[[phone.apps]]
+id    = "jobs"
+type  = "fast_jobs"
+label = "Jobs"
 
 # ── E3b: the ignore hook ─────────────────────────────────────────────────────
 
@@ -111,7 +124,29 @@ sender  = "npc"
 content = "Hey you."
 [[phone.conversations.blocks]]
 type    = "reply"
-choices = [ { text = "Hey." } ]
+choices = [ { text = "Hey.", effects = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", add = -5 } } ] } ]
+
+# ── E5: pay worked out from stats ────────────────────────────────────────────
+
+[[phone.daily_topics]]
+id              = "sal_photo"
+npc             = "npc_sal"
+player_message  = "Sent a photo."
+npc_response    = "Nice."
+effects         = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", mult = 0.5 } } ]
+
+[[fast_jobs]]
+id     = "shift"
+name   = "Shift"
+income = { type = "trait", trait = "charm", mult = 2, add = 50, max = 100 }
+
+[[fast_jobs]]
+id     = "flat"
+name   = "Flat"
+income = 20
+
+[engine.daily_tick]
+traitEffects = [ { targetType = "player", trait = "tips", op = "add", value = { type = "trait", trait = "charm", max = 3 } } ]
 
 # ── places ───────────────────────────────────────────────────────────────────
 
@@ -138,3 +173,27 @@ id     = "intro"
 name   = "Intro"
 blocks = [ { type = "paragraph", content = "Fixture start." } ]
 exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── E5: a choice that pays from her stats ────────────────────────────────────
+
+[[canvases]]
+id   = "pay_desk"
+name = "Pay desk"
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "desk"
+name   = "Desk"
+blocks = [ { type = "paragraph", content = "The till." } ]
+exit_block = { type = "choices", choices = [
+  { text = "Take the pay", targetType = "node", nodeId = "paid", effects = [ { targetType = "player", trait = "money", op = "add", value = { type = "trait", trait = "charm", add = 5 } } ] } ] }
+
+[[canvases.nodes]]
+id     = "paid"
+name   = "Paid"
+blocks = [ { type = "paragraph", content = "Paid." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
