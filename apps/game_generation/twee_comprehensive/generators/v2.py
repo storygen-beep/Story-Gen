@@ -1474,9 +1474,16 @@ class TweeComprehensiveGeneratorV2:
                             'canvas_id': 'phone',
                             'category': 'Social Media',
                         })
+            # E8-calls — a call's accept canvas resolves here to its entry passage, as a
+            # launcher option's does. Idempotent: writes beside `accept`, never over it.
+            phone_calls = phone_settings.get("calls", []) or []
+            for call in phone_calls:
+                call["accept_passage"] = self._canvas_entry_passages().get(
+                    self._sanitize_canvas_name(str(call.get("accept") or "")), "")
             phone_data_json = json.dumps({
                 "apps": phone_apps,
                 "conversations": phone_conversations,
+                **({"calls": phone_calls} if phone_calls else {}),
                 "posts": phone_posts,
                 "profiles": phone_profiles,
                 "daily_topics": phone_daily_topics,
@@ -1584,6 +1591,9 @@ class TweeComprehensiveGeneratorV2:
                 # E6 — each job's own xp, read by its ranks. Only in a game with a ranked
                 # job, so every other game keeps a byte-identical skeleton.
                 game_state_init["fast_jobs"]["job_xp"] = {}
+            if phone_settings.get("calls"):
+                # E8-calls — call id -> {state, rang_minute, ...}. Only in a game with calls.
+                game_state_init["phone"]["calls"] = {}
             if any(c.get("ignore_after_days") for c in (phone_settings.get("conversations") or [])):
                 # E3b — instance key -> the day it closed as ignored. Same opt-in rule.
                 game_state_init["phone"]["conv_ignored"] = {}
@@ -2413,6 +2423,113 @@ setup._ignorePhoneConversation = function(conv, ps) {{
     setup.pendingEffects = held;
     return true;
 }};
+// ===== E8-calls — incoming calls =====
+// A call rings once its trigger holds: a badge and a toast (pull delivery), never a
+// covering pop-up. ps.calls[id] = {{state: ringing | answered | declined | missed,
+// rang_minute, ended_minute}}. Left ringing for ring_minutes (default 60) it is missed
+// and on_missed applies once; a missed call counts as ignored. One-time.
+setup.callerName = function(call) {{
+    var npc = ((State.variables || {{}}).npcs || {{}})[setup.resolveNpcId(call.caller)] || {{}};
+    return npc.name || String(call.caller || '').replace('npc_', '').replace(/_/g, ' ');
+}};
+setup._applyCallEffects = function(set) {{
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(set);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+}};
+// Runs on every passage and before any call screen or answer: time can pass on a wait
+// button without a passage, and a call past its window must not be answerable.
+setup._expirePhoneCalls = function(ps) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length || !ps) return;
+    ps.calls = ps.calls || {{}};
+    var now = setup.gameMinuteNow();
+    for (var i = 0; i < calls.length; i++) {{
+        var st = ps.calls[calls[i].id];
+        if (!st || st.state !== 'ringing') continue;
+        if (now - (st.rang_minute || 0) < (calls[i].ring_minutes || 60)) continue;
+        st.state = 'missed';
+        st.ended_minute = now;
+        setup._applyCallEffects(calls[i].on_missed);
+    }}
+}};
+setup._checkPhoneCalls = function(ps, firstScan, toasts) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length) return;
+    setup._expirePhoneCalls(ps);
+    for (var i = 0; i < calls.length; i++) {{
+        var c = calls[i];
+        if (ps.calls[c.id]) continue;
+        var trigCond = c.trigger ? c.trigger.conditions : null;
+        if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
+        ps.calls[c.id] = {{ state: 'ringing', rang_minute: setup.gameMinuteNow() }};
+        if (!firstScan) toasts.push(setup.resolveAtRefs(c.notify) || ('📞 ' + setup.callerName(c) + ' is calling'));
+    }}
+}};
+setup.ringingCalls = function(appId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    var st = ps.calls || {{}};
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{
+        return st[c.id] && st[c.id].state === 'ringing' && (!appId || c.app === appId);
+    }});
+}};
+setup._findCall = function(callId) {{
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.id === callId; }})[0] || null;
+}};
+// Answer: plays the accept canvas. Not mid-scene (the launcher's rule); the scene
+// returns her to the canvas's own home. Returns true when it navigated.
+setup.answerCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing' || !c.accept_passage) return false;
+    if (!setup.isRerenderSafe(State.passage)) return false;
+    st.state = 'answered';
+    st.ended_minute = setup.gameMinuteNow();
+    setup.closePhone();
+    Engine.play(c.accept_passage);
+    return true;
+}};
+setup.declineCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing') return false;
+    st.state = 'declined';
+    st.ended_minute = setup.gameMinuteNow();
+    setup._applyCallEffects(c.on_decline);
+    return true;
+}};
+setup._renderCalls = function(appId, appLabel) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var st = ps.calls || {{}};
+    var calls = ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.app === appId; }});
+    var placed = setup.isRerenderSafe(State.passage);
+    var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || 'Calls') + '</span><span class="phone-close">&times;</span></div>';
+    html += '<div class="phone-screen"><div class="phone-launcher phone-calls">';
+    var ringing = calls.filter(function(c) {{ return st[c.id] && st[c.id].state === 'ringing'; }});
+    for (var i = 0; i < ringing.length; i++) {{
+        var c = ringing[i];
+        html += '<div class="phone-daily-label">📞 ' + setup.callerName(c) + ' is calling</div>';
+        if (placed) html += '<a class="phone-daily-btn phone-call-answer" data-call-id="' + c.id + '">Answer</a>';
+        else html += '<div class="phone-daily-locked">Answer when you are free.</div>';
+        html += '<a class="phone-daily-btn phone-call-decline" data-call-id="' + c.id + '">Decline</a>';
+    }}
+    var past = calls.filter(function(c) {{ return st[c.id] && st[c.id].state !== 'ringing'; }});
+    past.sort(function(a, b) {{ return (st[b.id].ended_minute || 0) - (st[a.id].ended_minute || 0); }});
+    var words = {{ answered: 'answered', declined: 'declined', missed: 'missed' }};
+    for (var j = 0; j < past.length; j++) {{
+        html += '<div class="phone-daily-locked">' + setup.callerName(past[j]) + ' \u2014 ' + (words[st[past[j].id].state] || '') + '</div>';
+    }}
+    if (!ringing.length && !past.length) html += '<div class="phone-empty">No calls yet.</div>';
+    html += '</div></div>';
+    jQuery('.phone-frame').html(html);
+    setup._phoneView = 'calls';
+    setup._phoneApp = appId;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2463,6 +2580,7 @@ setup.checkPhoneConversations = function() {{
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         ps.triggered_profiles[prof.id] = true;
     }}
+    setup._checkPhoneCalls(ps, _firstScan, _phoneToasts);  // E8-calls
     if (_phoneToasts.length) setup._notifyPhoneDelivery(_phoneToasts);
 }};
 
@@ -2482,6 +2600,9 @@ setup.getPhoneUnreadCount = function() {{
     }}
     // Unviewed posts
     if (!ps.viewed_feed && Object.keys(ps.triggered_posts || {{}}).length > 0) count++;
+    // E8-calls — a ringing call, in an app that is on the phone
+    var _ring = setup.ringingCalls ? setup.ringingCalls() : [];
+    for (var rc = 0; rc < _ring.length; rc++) {{ if (setup.phoneAppVisible(_ring[rc].app)) count++; }}
     return count;
 }};
 
@@ -2682,6 +2803,9 @@ setup.openPhone = function() {{
             var unread = 0;
             for (var t = 0; t < threads.length; t++) unread += threads[t].unreadCount;
             if (unread > 0) badge = '<span class="phone-app-badge">' + unread + '</span>';
+        }} else if (app.type === "calls") {{
+            var ringN = setup.ringingCalls(app.id).length;  // E8-calls — the ring badge
+            if (ringN > 0) badge = '<span class="phone-app-badge">' + ringN + '</span>';
         }}
         html += '<div class="phone-app-item" data-app-id="' + app.id + '" data-app-type="' + app.type + '">';
         html += '<div class="phone-app-icon-wrap">' + iconHtml + badge + '</div>';
@@ -2706,6 +2830,7 @@ setup.openPhoneApp = function(appId) {{
     else if (appDef.type === "custom" && appDef.passage) {{ setup._renderCustom(appId, appDef.label, appDef.passage); }}
     else if (appDef.type === "fast_jobs") {{ setup._renderFastJobs(appId, appDef.label); }}
     else if (appDef.type === "bank") {{ setup._renderBank(appId, appDef.label); }}
+    else if (appDef.type === "calls") {{ setup._renderCalls(appId, appDef.label); }}
     else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer, appDef.anywhere === true); }}
     else {{ setup._renderPlaceholder(appDef); }}
 }};
@@ -3432,6 +3557,8 @@ setup.refreshPhoneView = function() {{
         setup.openChatThread(setup._phoneApp, setup._phoneNpc);
     }} else if (setup._phoneView === 'threadList' && setup._phoneApp) {{
         setup._renderThreadList(setup._phoneApp, '');
+    }} else if (setup._phoneView === 'calls' && setup._phoneApp) {{
+        setup._renderCalls(setup._phoneApp, '');
     }} else {{ setup.openPhone(); }}
 }};
 
@@ -3501,6 +3628,19 @@ jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
     if (link) { setup.closePhone(); Engine.play(String(link)); }
+});
+// E8-calls — Answer navigates (the navigation commits, like a launcher); Decline
+// navigates nowhere, so it commits.
+jQuery(document).on('click', '.phone-call-answer', function(e) {
+    e.preventDefault();
+    setup.answerCall(String(jQuery(this).data('call-id')));
+});
+jQuery(document).on('click', '.phone-call-decline', function(e) {
+    e.preventDefault();
+    setup.declineCall(String(jQuery(this).data('call-id')));
+    setup.updatePhoneBadge();
+    setup.refreshPhoneView();
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-job-btn', function(e) {
     e.preventDefault();
@@ -13629,9 +13769,16 @@ setup.castTraitRows = function (slug, npc) {
                                     "npc_name": npc_display or "player",
                                     "is_phone": True,
                                 }
-            # E8 — a dating profile's on_match sets flags too.
-            for prof in phone_settings.get("profiles", []):
-                for fe in ((prof.get("on_match") or {}).get("flagEffects") or []):
+            # E8 — a dating profile's on_match sets flags too, and so does a call's
+            # on_decline / on_missed (E8-calls).
+            _setter_sets = [(p.get("id", ""), p.get("npc") or "", p.get("on_match"))
+                            for p in phone_settings.get("profiles", [])]
+            for _cl in (phone_settings.get("calls") or []):
+                _setter_sets += [(_cl.get("id", ""), _cl.get("caller") or "", _cl.get(k))
+                                 for k in ("on_decline", "on_missed")]
+            for _sid, _snpc, _set in _setter_sets:
+                prof = {"id": _sid, "npc": _snpc}
+                for fe in ((_set or {}).get("flagEffects") or []):
                     flag_key = fe.get("flag")
                     if flag_key and flag_key not in flag_unlock_map:
                         flag_unlock_map[flag_key] = {

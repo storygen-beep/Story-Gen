@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: calls, part 2 — ring, answer, decline, missed (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to build a real call type now; the-phone.md P5 (a missed call counts as ignored)
+and P8 (pull delivery: a badge, never a covering pop-up).
+
+**What changed.**
+- `generators/v2.py`: each call's `accept` canvas resolves at build time to its entry passage (as a
+  launcher option's does). On every passage `setup._checkPhoneCalls` rings a call whose trigger holds
+  (a toast, the ring badge on the `calls` app and in the sidebar count) and `setup._expirePhoneCalls`
+  marks one left ringing past `ring_minutes` (default 60) as missed, applying `on_missed` once; the call
+  screen and answer/decline run the expiry too, since a wait button passes time without a passage. The
+  `calls` screen lists the ringing call with Answer (refused mid-scene, as a launcher) and Decline, then
+  the history. `setup.answerCall` plays the canvas (the navigation commits); `setup.declineCall` applies
+  `on_decline` (the handler commits). `$game_state.phone.calls[id]` = `{state, rang_minute,
+  ended_minute}` joins the phone skeleton only in a game with calls. The flag-hint map registers
+  `on_decline` / `on_missed` flags.
+- `references/engine.md` §51: the last gap row (calls) becomes the fact, with a TOML example; the gap
+  table is gone. `templates/cards/phone.md` "Our engine today" follows.
+- Citations re-pointed through the `git diff` line map (509 moved, 602 endpoints identical); one new cite
+  re-anchored by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_calls.py` (6, headless: a call rings with a badge and no overlay; Answer plays
+the scene; mid-scene it cannot be answered; Decline applies once; left ringing past 60 minutes on wait
+buttons it is missed once and cannot be answered; a save written before calls existed, at 54c67d0, loads
+with the call map backfilled and the call rings). A save-migration case. Selfcheck and the skill tests
+pass. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine (7d7f575); only the engine script differs.
+
+**Words:** +179, running total 145,310 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: calls, part 1 — the data and the import (World and Systems PRD, Phase 7)
 
 **Why.** LO's decision to build a real call type now. The phone had no calls; the skill's advice was to

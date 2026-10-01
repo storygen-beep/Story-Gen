@@ -603,3 +603,17 @@ def test_e6_job_xp_reaches_a_save_written_before_it(tmp_path):
     assert got["job_xp"] == {}
     assert got["xp"] == 2
     assert got["cooldowns"] == {"bar_job": 1}
+
+
+@needs_node
+def test_e8_calls_state_reaches_a_save_written_before_it(tmp_path):
+    """E8-calls: a game that adds calls. An old save's phone map has no `calls`; the
+    backfill fills it one level into the phone sub-map, and the phone state the player
+    already has is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["calls"]
+    sv["game_state"]["phone"]["matches"] = {"kai_profile": {"npc": "npc_kai"}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["calls"] == {}
+    assert got["matches"] == {"kai_profile": {"npc": "npc_kai"}}

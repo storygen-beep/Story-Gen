@@ -38,7 +38,7 @@
   text is pending and she wears a skirt. Don't hide a key behind a quest state and an outfit.
 
 ## Our engine today (round 9b §6)
-- The clothing shop has prices (`v2.py:2138`, `var price = item.price || 0;`).
+- The clothing shop has prices (`v2.py:2148`, `var price = item.price || 0;`).
 - A general `[[items]]` entry has no price (`template_import.py:1002-1006`: id, name, icon, max_stack); buying a
   bed or a camera is a hand-built choice with `costs` and `itemEffects`.
-- Any condition can read an item (`v2.py:4894`), so an owned rung can gate another system.
+- Any condition can read an item (`v2.py:5034`), so an owned rung can gate another system.
