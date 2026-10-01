@@ -108,7 +108,7 @@ setup → problem → character interaction → conflict → choice → temptati
    text, and progression questions are the players' number-one comment topic: 8.4% of all comments,
    in 30 of 30 games (measured 2026-09-24). Lint `the opening arms a card with goals`. The goal
    shape is `engine.md` §47's: `flag` or `trait`, with `subject`, `op`, `value` and `label`. A
-   `type` key is ignored by the importer (`template_import.py:1234-1271` never reads it).
+   `type` key is ignored by the importer (`template_import.py:1252-1289` never reads it).
 6. **Plain tutorial lines on the last screen**, in the game's own plain voice (`the-voice.md`):
    money, work, exploring, people, choices. *"You need money. Take shifts at the bar, or find
    another way."* This is the one place the story text may explain a system directly. F2b's warning
@@ -628,7 +628,7 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 > ⚠️ **When doctrine and the schema comment disagree, the schema wins, because the schema is what
 > is open while you type.** `template_import.py` once described `requires_npc` as something that
 > *"lets authors drop per-canvas location+time gates"*, with no scope on the claim — false for
-> every meeting canvas. The comment is corrected (`template_import.py:792`); the gate is why it
+> every meeting canvas. The comment is corrected (`template_import.py:810`); the gate is why it
 > cannot come back.
 
 ---
@@ -650,9 +650,9 @@ npc      = "npc_theo"     # ← RIGHT.
 ```
 
 `TemplateCanvas` has four content fields and `npc` is not one of them
-(`template_import.py:940-947`), and it is built with named arguments only
-(`:2379-2387`), so a canvas-level `npc` key is dropped with **no error, no warning, and a green
-build**. The field the engine reads is `TemplateTrigger.npc` (`:659`), carried through
+(`template_import.py:958-965`), and it is built with named arguments only
+(`:2397-2405`), so a canvas-level `npc` key is dropped with **no error, no warning, and a green
+build**. The field the engine reads is `TemplateTrigger.npc` (`:677`), carried through
 `game_graph.py:311` into trigger metadata, out at `v2.py:12065`, and emitted as `npcId`
 (`v2.py:12122`).
 
@@ -690,7 +690,7 @@ enforced nowhere. The copyable block in `templates/first-hour.toml` carries `npc
 where it genuinely is a top-level key.
 
 > **Gated as `no canvas key is discarded`.** Fails on any key sitting on `[[canvases]]` that is not
-> one of the seven `TemplateCanvas` fields (`template_import.py:1025-1031`). It invents no threshold
+> one of the seven `TemplateCanvas` fields (`template_import.py:1043-1049`). It invents no threshold
 > and cannot produce a false positive: such a key does nothing at all, so writing one is never
 > correct.
 >
@@ -730,8 +730,8 @@ nodeId     = "talk"
 with the hub unless something links to it.** `act_garage_late` (p7) replaces `hub_theo_garage` (p6)
 the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
 most reason to want it. A **qualified** nodeId reaches across canvases —
-`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:7901-7907`,
-validated at `:4587-4607`). One line on the escalation's base, and the two surfaces share the pool
+`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:7973-7979`,
+validated at `:4623-4643`). One line on the escalation's base, and the two surfaces share the pool
 instead of duplicating forty lines of dialogue.
 
 ⚠️ **Check which phase file the surface lives in before you decide it is safe.**
@@ -854,7 +854,7 @@ as the player meets people, which is what the field ships (the-company's cast ta
 Three things to get right:
 
 - **A `when` item sets `flag` *or* `trait`, never both** — the importer rejects an item carrying
-  both (`template_import.py:5638`). The meeting flag is its own item beside the trait band.
+  both (`template_import.py:5710`). The meeting flag is its own item beside the trait band.
 - **Put it on *every* card in that character's ladder**, not just the first. A gap means the
   character reappears at the band whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo

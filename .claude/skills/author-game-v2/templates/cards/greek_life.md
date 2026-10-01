@@ -35,7 +35,7 @@
 - *"So many glitches with the pledge tasks"* (CoT, mopoga#155098): self-ticking tasks need testing.
 
 ## Our engine today (round 9b §6)
-- A weekly party fits schedule rows with `weekdays` (`template_import.py:764`); pledge tasks are flags, renown a trait.
+- A weekly party fits schedule rows with `weekdays` (`template_import.py:782`); pledge tasks are flags, renown a trait.
 - An upgrade can raise another system's pay: the upgrade raises a trait, and the pay is a stat-based value
   that reads it (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:6867`); one trait per value).
 

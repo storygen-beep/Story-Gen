@@ -136,7 +136,7 @@ belong here; only decisions, debts, and promises do.
     //               is five, the thing is probably ambient (SY2).
     //   `labels`  — which room labels this meter attaches to. ⚠️ In THIS engine that is a
     //               design statement, not wiring: a canvas belongs to exactly one location
-    //               (template_import.py:2175), so the row is authored per room. SY4.
+    //               (template_import.py:2193), so the row is authored per room. SY4.
     // ⚠️ An older ledger keeps these rows in `systems` (an entry with `kind` and no card
     //   fields). It is read as a meter until the game moves it here.
     "meters": [

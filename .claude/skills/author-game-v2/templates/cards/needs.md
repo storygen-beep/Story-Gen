@@ -50,5 +50,5 @@
 
 ## Our engine today (round 9b §6)
 - Decay toward a value exists (`v2.py:6566`) and a daily tick runs effects at day rollover
-  (`template_import.py:726`); there is no sleep primitive and no event roll tied to a refill.
+  (`template_import.py:744`); there is no sleep primitive and no event roll tied to a refill.
 - The skill's hygiene rule lives in `engine.md` §30.1 (WS-D5: hygiene for routing only).

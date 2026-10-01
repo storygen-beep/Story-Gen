@@ -6548,6 +6548,69 @@ class PostActionGateTraitTests(SimpleTestCase):
         self.assertTrue(any("gate_trait is read only with corruption_min" in e for e in errors), errors)
 
 
+BATCH2_FIXTURE = "apps/game_generation/games_toml_files/engine_ws_batch2_2026_10_01.toml"
+
+
+def _batch2():
+    with open(BATCH2_FIXTURE, "rb") as f:
+        return tomli.load(f)
+
+
+def _call(d):
+    return d["phone"]["calls"][0]
+
+
+class PhoneCallsSchemaTests(SimpleTestCase):
+    """E8-calls (World and Systems PRD) — `[[phone.calls]]` and the `calls` app type."""
+
+    def test_calls_parse_and_validate_clean(self):
+        t = normalize(_batch2())
+        self.assertEqual(validate(t), [])
+        call = t.phone.calls[0]
+        self.assertEqual((call.id, call.app, call.caller, call.accept, call.ring_minutes),
+                         ("ben_rings", "calls", "npc_ben", "ben_call", 60))
+        self.assertEqual(call.on_missed["flagEffects"][0]["flag"], "missed_ben")
+
+    def test_calls_reach_metadata_only_when_present(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(_batch2()))
+        self.assertEqual(p.metadata["phone_settings"]["calls"][0]["accept"], "ben_call")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(_toml_with_phone()))
+        self.assertNotIn("calls", p2.metadata["phone_settings"])
+
+    def test_bad_calls_are_errors(self):
+        for change, fragment in (
+            ({"app": "messages"}, "app 'messages' not found in calls apps"),
+            ({"caller": "npc_nobody"}, "caller 'npc_nobody' not found in npcs"),
+            ({"caller": ""}, "caller is required"),
+            ({"accept": ""}, "accept is required"),
+            ({"accept": "no_such_canvas"}, "accept canvas 'no_such_canvas' not found"),
+            ({"accept": "scene_start"}, "has no trigger location"),
+            ({"ring_minutes": 0}, "ring_minutes must be a whole number"),
+            ({"on_decline": {"effect": []}}, "on_decline: unknown key `effect`"),
+            ({"on_missed": {"flagEffects": [{"op": "set"}]}}, "needs `flag`"),
+        ):
+            d = _batch2()
+            _call(d).update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (change, errors))
+
+    def test_the_condition_walker_reaches_call_triggers(self):
+        d = _batch2()
+        _call(d)["trigger"] = {"conditions": {"items": [
+            {"type": "flag", "flag_key": "started", "operator": "is_true"}]}}
+        errors = validate(normalize(d))
+        self.assertTrue(any("phone.calls['ben_rings'].trigger.conditions" in e for e in errors),
+                        errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

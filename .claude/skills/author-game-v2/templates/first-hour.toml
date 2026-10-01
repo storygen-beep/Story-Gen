@@ -194,7 +194,7 @@ op         = "set"
 #    This block used to be COMMENTED OUT, which made `requires_npc` — live in the
 #    two blocks above — the only NPC key an author could copy. Written on
 #    `[[canvases]]` instead, one level too high, `npc` does nothing: `TemplateCanvas`
-#    has no `npc` field (template_import.py:1014-1021), so the key is dropped with no
+#    has no `npc` field (template_import.py:1032-1039), so the key is dropped with no
 #    error and no warning, the game ships with ZERO portraits, and every character
 #    surface renders as a text link labelled with the canvas's own title.
 #    See references/the-first-hour.md F5b.

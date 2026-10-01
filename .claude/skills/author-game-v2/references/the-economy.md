@@ -383,7 +383,7 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 
 **Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
 `engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
-`traitEffects` with a per-effect condition gate (`template_import.py:730`), applied through
+`traitEffects` with a per-effect condition gate (`template_import.py:748`), applied through
 `setup.applyAndNotifyTrait` (`v2.py:6915`). Either way the player is told. A silent charge meter is
 the one economy device the corpus universally hates (`sluttown-usa` is the counted case).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static

@@ -260,7 +260,7 @@ In the field a system is written once and turns up wherever its label is.
 > own practisable sports.
 
 **⚠️ WE CANNOT EXPRESS THIS. A canvas belongs to exactly one room.** `TemplateTrigger.location` is
-a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2379` —
+a single string — `location=_require_str(trig_def, "location", "")`, `template_import.py:2397` —
 and there is no plural form. A row wanted in three rooms is authored three times.
 
 **So the labels are a design tool here, not a wiring mechanism.** That is not a lesser thing. The

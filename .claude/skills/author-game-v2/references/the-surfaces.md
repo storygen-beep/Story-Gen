@@ -238,7 +238,7 @@ And the branches are **cheap**: two of them are under 500 bytes and hand off to 
 engine that **1,742 other passages also call**. The richness is combinatorial, not authored.
 
 **The same pattern is authorable in our engine** with the keys the importer already reads
-(`template_import.py:2417-2437`):
+(`template_import.py:2435-2455`):
 
 ```toml
 # "Stock the shelves" @ the_storeroom — the odds ride the same trait as the content
@@ -1056,7 +1056,7 @@ Route the choice at a node with `targetType = "node"`, write what happened, and 
   meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
   ⚠️ **Node prose has no `text_variants`.** The key exists only on a **choice**, where it swaps the
   button label: a list of `{ text, conditions }`, first match wins, the base `text` otherwise
-  (`template_import.py:2649-2687`; rendered as a `<<set _cv>>` chain at `v2.py:14385-14399`).
+  (`template_import.py:2667-2705`; rendered as a `<<set _cv>>` chain at `v2.py:14385-14399`).
   Variant labels are static strings — an `@npc` token inside one does not resolve.
 - **Video on outcome nodes, images on hubs.**
 

@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: calls, part 1 — the data and the import (World and Systems PRD, Phase 7)
+
+**Why.** LO's decision to build a real call type now. The phone had no calls; the skill's advice was to
+write the call as the scene a text books. This part reads and checks calls; the runtime (ring, answer,
+decline, missed) is the next change.
+
+**What changed.**
+- `template_import.py`: `calls` joins the phone app types. `TemplatePhoneCall` (`id`, `app`, `caller`,
+  `trigger`, `accept`, `ring_minutes`, `on_decline`, `on_missed`, `notify`) and `TemplatePhone.calls`,
+  parsed from `[[phone.calls]]`. Checks (build errors): id, a `calls` app, a caller that is an NPC, an
+  `accept` canvas that exists and has a trigger location (the launcher's canvas rule), whole
+  `ring_minutes`, and `on_decline` / `on_missed` as phone effect sets. Written into metadata only in a
+  game with calls (GG gets it through `_assemble_project_metadata`). The condition check walks every
+  `conditions` key by name, so it already reaches `phone.calls[].trigger.conditions`; its docstring
+  names them and a test proves it.
+- `references/engine.md` §51: the calls row says the importer reads calls and nothing rings yet.
+- Citations re-pointed through the `git diff` line map (103 moved, 141 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `PhoneCallsSchemaTests` (4: parse, metadata only when present, nine bad shapes, the walker
+on a call trigger). Selfcheck and the skill tests pass.
+
+**Words:** +14, running total 145,131 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: a post gated on her own meter — `gate_trait` (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 8. `setup.sendSocialPost` and the composer read `corruption_min` against

@@ -305,7 +305,7 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 classed (class b), 32 of them on one game's PIN (`new-life-project`, numbers only). In Her Own
 Hands puts the phone in the menu from the first minute, with no step to get it, and draws 0 such
 complaints; Cupid's Way also 0 (round 9a §5). Course of Temptation's "the phone needs a pocket"
-rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:463`) unset:
+rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:480`) unset:
 it hides the whole phone until a flag is set.
 
 **Showing a locked app is good; showing it without saying what opens it is a support ticket.** The
@@ -436,7 +436,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:984`, `v2.py:7758`).
+(`template_import.py:1002`, `v2.py:7758`).
 
 ---
 

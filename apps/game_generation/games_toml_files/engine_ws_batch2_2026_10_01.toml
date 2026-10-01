@@ -37,6 +37,11 @@
 #                 live from loc_home. `door` is the same option without it: "Not here".
 #    feed         post actions gated by corruption_min = 5: "Tease" reads gate_trait = charm
 #                 (10, open); "Bare" reads the default corruption (0, locked).
+#
+#  E8-calls — "a real call type":
+#    ben_rings    Ben calls once `started` holds; it rings for 60 minutes. Answer plays
+#                 ben_call (home loc_home); decline: -1 Ben trust and declined_ben; left
+#                 ringing it is missed: -3 Ben trust and missed_ben.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -58,7 +63,7 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40, charm = 10, tips = 0, followers = 0 }
-flag_keys   = ["started", "ignored_ana", "matched_kai", "has_secret_app"]
+flag_keys   = ["started", "ignored_ana", "matched_kai", "has_secret_app", "declined_ben", "missed_ben"]
 
 [[npcs]]
 id          = "npc_ana"
@@ -78,6 +83,13 @@ flag_keys   = []
 id          = "npc_lee"
 name        = "Lee"
 description = "Fixture no-match."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_ben"
+name        = "Ben"
+description = "Fixture caller."
 core_traits = { trust = 0 }
 flag_keys   = []
 
@@ -121,6 +133,29 @@ type       = "chat"
 label      = "Secret"
 conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "has_secret_app", operator = "is_true" } ] }
+
+[[phone.apps]]
+id    = "calls"
+type  = "calls"
+label = "Calls"
+
+# ── E8-calls: a real call ────────────────────────────────────────────────────
+
+[[phone.calls]]
+id           = "ben_rings"
+app          = "calls"
+caller       = "npc_ben"
+accept       = "ben_call"
+ring_minutes = 60
+[phone.calls.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[phone.calls.on_decline]
+effects     = [ { targetType = "npc", npcId = "npc_ben", trait = "trust", op = "add", value = -1 } ]
+flagEffects = [ { targetType = "player", flag = "declined_ben" } ]
+[phone.calls.on_missed]
+effects     = [ { targetType = "npc", npcId = "npc_ben", trait = "trust", op = "add", value = -3 } ]
+flagEffects = [ { targetType = "player", flag = "missed_ben" } ]
 
 [[phone.apps]]
 id       = "taxi"
@@ -340,3 +375,21 @@ id     = "paid"
 name   = "Paid"
 blocks = [ { type = "paragraph", content = "Paid." } ]
 exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+# ── E8-calls: the scene a call plays ─────────────────────────────────────────
+
+[[canvases]]
+id   = "ben_call"
+name = "Ben on the phone"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "BEN_ON_THE_LINE" } ]
+exit_block = { type = "location", text = "Hang up", config = { destinationType = "trigger", time_progression_minutes = 10 } }

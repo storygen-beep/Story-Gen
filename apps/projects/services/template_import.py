@@ -315,7 +315,7 @@ class TemplateClothingRequirements:
 
 VALID_PHONE_APP_TYPES = {
     "chat", "social_feed", "gallery", "dating", "custom", "quests",
-    "fast_jobs", "bank", "launcher",
+    "fast_jobs", "bank", "launcher", "calls",
 }
 
 
@@ -450,6 +450,23 @@ class TemplatePhoneGalleryItem:
 
 
 @dataclass
+class TemplatePhoneCall:
+    """E8-calls — an incoming call. It rings once its `trigger.conditions` hold (a ring
+    badge and a toast, never a covering pop-up) for `ring_minutes` of game time. Answering
+    plays the `accept` canvas; declining applies `on_decline`; a call left ringing is
+    missed and applies `on_missed` (a missed call counts as ignored). One-time."""
+    id: str
+    app: str                 # a `type = "calls"` app
+    caller: str              # NPC id
+    trigger: Dict[str, Any] = field(default_factory=dict)
+    accept: str = ""         # canvas id, played on answer
+    ring_minutes: Optional[int] = None   # None = 60
+    on_decline: Optional[Dict[str, Any]] = None
+    on_missed: Optional[Dict[str, Any]] = None
+    notify: str = ""         # toast when it starts ringing; "" = "📞 <name> is calling"
+
+
+@dataclass
 class TemplatePhone:
     enabled: bool = True
     apps: List[TemplatePhoneApp] = field(default_factory=list)
@@ -461,6 +478,7 @@ class TemplatePhone:
     # doc 45 G11 — when set, the sidebar phone button shows only once this
     # player flag is true (the phone is "acquired" in-world). "" = always shown.
     purchase_flag: str = ""
+    calls: List[TemplatePhoneCall] = field(default_factory=list)  # E8-calls
 
 
 @dataclass
@@ -1772,7 +1790,7 @@ def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[
     (groups, cascades, linkreplace beats), choices and their effects, flagEffects,
     rejection effects and text variants, location entry_conditions, description
     variants, door options, clothing_rules, clothing items, phone app `conditions`,
-    phone conversation / post / profile / gallery triggers, match_condition,
+    phone conversation / post / profile / gallery / call triggers, match_condition,
     daily_topics, daily_tick effects,
     engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
     """
@@ -3360,6 +3378,23 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     link=_require_str(g_raw, "link", ""),
                 ))
 
+            # E8-calls — incoming calls. Kept close to raw; validate() owns the checks.
+            phone_calls: List[TemplatePhoneCall] = []
+            for cl_raw in (phone_raw.get("calls") or []):
+                if not isinstance(cl_raw, dict):
+                    continue
+                phone_calls.append(TemplatePhoneCall(
+                    id=_require_str(cl_raw, "id"),
+                    app=_require_str(cl_raw, "app", ""),
+                    caller=_require_str(cl_raw, "caller", ""),
+                    trigger=cl_raw.get("trigger", {}) or {},
+                    accept=_require_str(cl_raw, "accept", ""),
+                    ring_minutes=cl_raw.get("ring_minutes"),
+                    on_decline=cl_raw.get("on_decline"),
+                    on_missed=cl_raw.get("on_missed"),
+                    notify=_require_str(cl_raw, "notify", ""),
+                ))
+
             phone_obj = TemplatePhone(
                 enabled=phone_enabled,
                 apps=phone_apps,
@@ -3369,6 +3404,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 daily_topics=phone_daily_topics,
                 gallery_items=phone_gallery_items,
                 purchase_flag=_require_str(phone_raw, "purchase_flag", ""),
+                calls=phone_calls,
             )
 
     # ── Day-rollover hook ── [engine.daily_tick]
@@ -5034,6 +5070,32 @@ def validate(template: GameTemplate) -> List[str]:
                     elif act.get("corruption_min") is None:
                         errors.append(f"phone.apps[{ai}].post_actions[{pai}].gate_trait is read "
                                       f"only with corruption_min")
+        # E8-calls — incoming calls. The accept canvas is checked with the launcher's
+        # canvas rules below, where the canvas sets exist.
+        calls_app_ids = {a.id for a in phone.apps if a.type == "calls"}
+        seen_call_ids: Set[str] = set()
+        for cli, call in enumerate(phone.calls):
+            cctx = f"phone.calls[{cli}]"
+            if not call.id or not _is_valid_slug(call.id):
+                errors.append(f"{cctx}.id is required, lowercase snake_case")
+            elif call.id in seen_call_ids:
+                errors.append(f"phone.calls: duplicate id '{call.id}'")
+            seen_call_ids.add(call.id)
+            if call.app not in calls_app_ids:
+                errors.append(f"{cctx}.app '{call.app}' not found in calls apps")
+            if not call.caller:
+                errors.append(f"{cctx}.caller is required (an NPC id)")
+            elif call.caller not in npc_id_set:
+                errors.append(f"{cctx}.caller '{call.caller}' not found in npcs")
+            if not call.accept:
+                errors.append(f"{cctx}.accept is required — the canvas answering plays")
+            if call.ring_minutes is not None and not _is_whole_days(call.ring_minutes):
+                errors.append(f"{cctx}.ring_minutes must be a whole number of minutes >= 1 "
+                              f"(got {call.ring_minutes!r})")
+            for key in ("on_decline", "on_missed"):
+                if getattr(call, key) is not None:
+                    errors.extend(_validate_phone_effect_set(getattr(call, key),
+                                                             f"{cctx}.{key}", npc_id_set))
 
     # E6 — a rank per job. Errors: a misordered or malformed ladder would build clean
     # and pay the wrong rank, or never promote her.
@@ -5363,6 +5425,16 @@ def validate(template: GameTemplate) -> List[str]:
     # HERE rather than in the phone block above, because `canvas_ids` is not built
     # until this point and the comment above says not to rebuild that set locally.
     if template.phone_enabled and template.phone:
+        # E8-calls — the accept canvas: it exists, and it has a home to return her to.
+        for cli, call in enumerate(template.phone.calls):
+            if not call.accept:
+                continue
+            if call.accept not in canvas_ids:
+                errors.append(f"phone.calls[{cli}].accept canvas '{call.accept}' not found "
+                              f"in canvases")
+            elif call.accept in canvas_without_trigger_location:
+                errors.append(f"phone.calls[{cli}].accept canvas '{call.accept}' has no "
+                              f"trigger location, so the call would have nowhere to end")
         for ai, app in enumerate(template.phone.apps):
             if app.type != "launcher":
                 if app.options:
@@ -8620,6 +8692,19 @@ def _assemble_project_metadata(project, template):
                 for g in phone.gallery_items
             ],
         }
+        # E8-calls — only in a game with calls, so every other payload is byte-identical.
+        if phone.calls:
+            project.metadata["phone_settings"]["calls"] = [
+                {
+                    "id": c.id, "app": c.app, "caller": c.caller, "trigger": c.trigger,
+                    "accept": c.accept,
+                    **({"ring_minutes": c.ring_minutes} if c.ring_minutes is not None else {}),
+                    **({"on_decline": c.on_decline} if c.on_decline is not None else {}),
+                    **({"on_missed": c.on_missed} if c.on_missed is not None else {}),
+                    **({"notify": c.notify} if c.notify else {}),
+                }
+                for c in phone.calls
+            ]
 
 @transaction.atomic
 def create_project_from_template(
