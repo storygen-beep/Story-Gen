@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S1a: the new definition (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3 (N13, round 9b §1): SY1 defined a system as "something the game keeps track of about her" — a meter.
+A job, a stream or a class had no home, and SY2b's "never a new mechanic" forbade one.
+
+**What changed.** `references/the-systems.md`: the title; "Why this file exists"; the excluded-recipes note gains
+one sentence (the cards in `templates/cards/` are not those recipes; every line cites a traced game); the
+ownership table; the W1 paragraph. **SY1** is rewritten: a system is a place she goes or a thing she does, by
+choice, again and again, with rules, a memory, a ladder that climbs or decays, and a link to money, body, people
+or sex; the 5 questions plus round 9b's two (does she choose to use it, does it own a place or an action);
+clocks, views and channels are infrastructure, named and counted apart (In Her Own Hands' energy bar, Shady
+Deals' actions a day, Course of Temptation's walk pool, from round 9b §1); meters live inside systems, and
+ambient vs sourced is now a property of a meter ("hunger" dropped from the ambient examples, per S7). **SY2** and
+**SY2b** speak of meters; "never a new mechanic" now heads the meter rule only. **The brake**: a new system must
+feed something already read, or be a source or sink of money; the meter half is kept. "What the board phase
+records" shows the `board.systems[]` (cards) / `board.meters[]` / `board.infrastructure[]` split (schema lands
+in `state.md` with S2a), and "The check" describes the lint over meters (the code follows in S1b-code). SY ids
+unchanged.
+
+**Verified.** `--selfcheck` current (160 rules, SY ids unchanged, 0 broken pointers, orphans 3, the baseline);
+`grep -rn "never a new mechanic"` finds only the meter heading; pytest 468 passed.
+
+**Words:** +408, running total 140,947 / 149,283.
+
+---
+
 ## 2026-10-01 — World W10b · PROTECTED (truth rule, WS-D25): a neutral example
 
 **Why.** WS-D25: W10's example *"at week twelve he decides"* came from one of our own games, and our own games are

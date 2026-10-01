@@ -1,4 +1,4 @@
-# The Systems — what the game keeps track of, decided before the rooms
+# The Systems — what she does again and again, decided before the rooms
 
 ## Why this file exists
 
@@ -9,8 +9,9 @@ nowhere — no field in `v2_state.json`, no sheet, no board step, no check. And 
 never uses the word *system* at all: a release adds events to surfaces that already exist, so a
 system can only be born in the board phase, which had no place to be born in.
 
-A room needs a system that describes her, or it has nothing to be about. Course of Temptation reads what she is like
-(`has_inclination`) in **218** of its 5,294 passages; SY1 carries the evidence.
+A room is where a system lives — a place she goes or a thing she does there, again and again — and
+a system needs a meter that describes her, or it has nothing to read. SY1 carries the definition and
+the evidence.
 
 Read out of the female-lead set — `family-ties` (rank 24), `zaras-school-life` (22),
 `course-of-temptation` (5), `new-life-project` (16), with `degrees-of-lewdity` as reference —
@@ -20,13 +21,15 @@ scripts: `~/Documents/Systems_Study_20260902/`.
 ⚠️ **Nothing here is ported from the incumbent skill.** `author-game/references/system-patterns.md`
 carries nine authored system recipes and `systems.md` an engine index. Both were read and
 **deliberately excluded** — LO's call, 2026-09-02. They are cookbooks written from taste, and this
-skill's standard is that nothing is taste. Every rule below is read out of a shipped game.
+skill's standard is that nothing is taste. Every rule below is read out of a shipped game. The
+worked cards in `templates/cards/` are not those recipes: every line in them cites a traced game.
 
 ## What this file owns, and what it does not
 
 | the question | the file |
 |---|---|
-| **what the game keeps track of about her, and what kind of place each room is** | **this file** |
+| **what she does again and again (the systems), what each one writes and reads (the meters), and what kind of place each room is** | **this file** |
+| one worked design card per system | `templates/cards/` |
 | which screen a piece of content lives on, and how long a room's list is | `the-surfaces.md` |
 | which meters exist, who owns them, and what the climb costs | `the-meters.md` |
 | what happens between the introduction and the repeatable surface | `the-arc.md` |
@@ -34,9 +37,9 @@ skill's standard is that nothing is taste. Every rule below is read out of a shi
 | how the prose reads once they click | `register.md` |
 
 The nearest neighbour is `the-meters.md` W1, and the line between them is real: **W1 asks who
-climbs, this file asks what the game is keeping track of at all.** A meter is one kind of system.
-A skill she practises, a wardrobe, a tally of what she has done, a place's own reputation — those
-are systems too, and none of them is an ascent tier.
+climbs, this file asks what she does and what the game keeps track of while she does it.** A meter
+is a part inside a system — what the system writes and reads. A skill she practises, a tally of
+what she has done, a place's own reputation are meters too, and none of them is an ascent tier.
 
 ⚠️ **Read this file BEFORE `the-board.md` §1.** The location count is derived from what a place is
 for, and that derivation is circular unless the systems exist first: ask *"what would she do in
@@ -52,10 +55,36 @@ example is being taught too.** *(LO decided.)* Take the mechanism. Leave the fur
 
 ---
 
-## SY1 · A system is something the game keeps track of about her, and there are two kinds
+## SY1 · A system is a place she goes or a thing she does, and a meter is what it writes
 
-**Ambient** — fed by nearly every room. Time, money, tiredness, hunger, how clean she is. These
-are the texture of an ordinary day.
+**A system is a place she goes or a thing she does, by choice, again and again, with rules, a
+memory, a ladder that climbs or decays, and a link to money, body, people or sex.** A job, a stream,
+a class, a shoot, the gym. Round 9b (`round9b/ROUND9B_REPORT.md` §1) read it out of 17 design cards
+across Course of Temptation, In Her Own Hands, Shady Deals and Cupid's Way.
+
+**The seven questions** — mostly yes is a system:
+
+1. Can it repeat?
+2. Does it have rules — when it is open, what it costs, what it gives?
+3. Does it remember — rank, audience, what she owns, what happened?
+4. Does it change over time — a ladder that climbs or decays?
+5. Does it touch money, her body, people or sex?
+6. Does she choose to use it?
+7. Does it own a place or an action?
+
+**Infrastructure is not a system, and it is named and counted apart** (`board.infrastructure[]`):
+a **clock** (time, energy, actions a day), a **view** (hint journals, notices) or a **channel**
+(the phone, a walk pool). Questions 6 and 7 are what catch them. In Her Own Hands' 150-point energy
+bar and Shady Deals' 6 actions a day repeat and touch everything, but nobody uses them and they
+remember nothing: they are the clock. Course of Temptation's walk pool (206 live campus events)
+passes questions 1–5, but 40% of its ordinary events belong to other systems: it is a channel, and
+counting it as a system doubles every count (round 9b §1).
+
+**Meters live inside systems.** A meter is one number a system writes or reads, and each meter is
+one of two kinds — the fork is a property of the meter, not of the system:
+
+**Ambient** — fed by nearly every room. Time, money, tiredness, how clean she is. These are the
+texture of an ordinary day.
 
 **Sourced** — fed in one or two places, read all over the game. What she looks like, what she can
 do, what she owns, what she has already done.
@@ -64,26 +93,21 @@ do, what she owns, what she has already done.
 > of its 5,294 passages — [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`
 > is one. What she is like is checked all over the game.
 
-**A room needs a system about who she is.** An ambient system is fed by every room, so it cannot
-make any room special — which is exactly what it is for, and exactly why it is not enough.
-
-⚠️ **The split is not universal.** An earned resource such as money legitimately runs
-write-heavy. **The read-heavy ones are the systems about who she is** — and those are the ones a
-room can be built around.
-
-⚠️ **Both kinds are required.** This is not an argument against ambient systems: the body's needs
-are ambient, and `the-meters.md` M8–M10 owns them. The rule is that
-ambient systems alone cannot furnish a world.
+**A system needs a sourced meter about who she is.** An ambient meter is fed by every room, so it
+cannot make any room special — which is exactly what it is for, and exactly why it is not enough.
+Money legitimately runs write-heavy; **the read-heavy meters are the ones about who she is**, and a
+room is built around them. Both kinds are required: the body's needs are ambient, and
+`the-meters.md` M8–M10 owns them.
 
 ---
 
-## SY2 · A sourced system has ONE place that feeds it and many that read it
+## SY2 · A sourced meter has ONE place that feeds it and many that read it
 
 R2c says a system earns its place *"by being read in more than one room, by more than one kind of
-content."* That is right, and it is only half the shape: **it says nothing about where a system is
-FED,** and the natural reading of it — build the thing in three rooms — describes an ambient system.
+content."* That is right, and it is only half the shape: **it says nothing about where a meter is
+FED,** and the natural reading of it — build the thing in three rooms — describes an ambient meter.
 
-The field's answer is the opposite on the write side: one place feeds the system, and the rest of
+The field's answer is the opposite on the write side: one place feeds the meter, and the rest of
 the game checks it.
 
 **So the payoff of a thin room is not thinness. It is being the only source of something.** A room
@@ -96,7 +120,7 @@ a chore"* (`the-arc.md` A4b). Build what checks the number, then build the place
 
 ---
 
-## SY2b · The shape is not enough — a system describes her
+## SY2b · The shape is not enough — a meter describes her
 
 Written 2026-09-02 from `~/Documents/Load_Bearing_Systems_Study_20260902/`, a study run
 independently of SY1–SY2 and finished a few hours before them. Reproduced here before it was
@@ -121,13 +145,13 @@ cannot answer because `getWornStatMax` skips empty slots and returns the same va
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
 rather than in sex scenes.
 
-### What to actually do about it — and it is never a new mechanic
+### What to do about a meter — and it is never a new mechanic
 
-**Go back to scenes that already exist and give each a second version.** The system is already
+**Go back to scenes that already exist and give each a second version.** The meter is already
 declared; what is missing is the content that consults it. Adding another meter is the wrong move
-and makes the ratio worse.
+and makes the ratio worse. This rule is about meters; a new system answers to the brake below.
 
-> ⚠️ **ILLUSTRATION, NOT EVIDENCE — written for this file and not measured.** One system, read
+> ⚠️ **ILLUSTRATION, NOT EVIDENCE — written for this file and not measured.** One meter, read
 > inside a scene that has nothing to do with clothes.
 >
 > ```
@@ -154,19 +178,19 @@ and makes the ratio worse.
 > bands on one key — `engine.md` §35, `the-surfaces.md` R6 — which is the same machinery the
 > register file calls directed variety.
 
-⚠️ **The brake, and it is not optional.** This is not a licence to declare more systems. R2c's
-mirror-image failure is twenty declared systems and twenty dead ones, and SY3's own warning applies
-here unchanged: **a system that describes her and is read in one place is worse than a plot flag
-read in nine, because it cost a meter and bought nothing.** The instruction above is to write
-content against what is already declared, not to declare more.
+⚠️ **The brake, and it is not optional.** R2c's mirror-image failure is twenty declared systems
+and twenty dead ones. **A new system must feed something already read, or be a source or sink of
+money** (round 9b §8). A new meter answers to the rule above: **a meter that describes her and is
+read in one place is worse than a plot flag read in nine, because it cost a meter and bought
+nothing** — write content against what is declared, do not declare more.
 
 ⚠️ **Instrument limits, to be restated wherever these numbers are cited.** The ≥10:1 / ≥80% / ≥5
-bar is **invented** — it exists to sort systems into two piles so the sides can be compared, and
-the field's own spread (3 to 121 systems clearing it) means no threshold drawn from it is
-defensible. An object read as a unit counts as one system, which inflates DoL and
+bar is **invented** — it exists to sort values into two piles so the sides can be compared, and
+the field's own spread (3 to 121 values clearing it) means no threshold drawn from it is
+defensible. An object read as a unit counts as one value, which inflates DoL and
 `course-of-temptation`; **`zaras-school-life` and `new-life-project` use plain scalars and are the
 fair comparison** — and they still carry 9 and 8, six descriptive each. `family-ties` routes
-everything through page variables, so its top-by-reads is plumbing rather than systems. Condition
+everything through page variables, so its top-by-reads is plumbing rather than meters. Condition
 reads are counted structurally, never evaluated: a condition that can never be true still counts.
 
 **No gate and no lint.** The bar is invented, which rules out a gate on the precedent that retired
@@ -342,18 +366,24 @@ In `v2_state.json`, before locations are written (`state.md` carries the schema)
 
 ```jsonc
 "board": {
-  "systems": [
+  "systems": [ { "id": "…", "name": "…" /* one design card per system */ } ],
+  "meters": [
     { "id": "…", "kind": "sourced" | "ambient", "key": "…",
       "fed_at": ["location_id"], "labels": ["…"],
       "read_by": "one line — what changes because of it" }
   ],
+  "infrastructure": [ { "name": "…", "kind": "clock" | "view" | "channel" } ],
   "locations": [ { "id": "…", "labels": ["…"] } ]
 }
 ```
 
-**`kind` is the SY1 fork and it is answered per system, not per game.** A game needs both.
+**A system is a card; a meter is a row.** The card's fields and the sheet are in `state.md` and
+`templates/sheets/system.md`. An old ledger whose `board.systems[]` still holds meter-shaped rows (a
+`kind`, no card fields) is read as meters until it moves them to `board.meters[]`.
 
-**`fed_at` on a `sourced` system should usually be ONE location.** If it is five, ask whether the
+**`kind` is the SY1 fork and it is answered per meter, not per game.** A game needs both.
+
+**`fed_at` on a `sourced` meter should usually be ONE location.** If it is five, ask whether the
 thing is actually ambient — that is the SY2 test, and it is cheaper to answer in the ledger than
 after the prose exists.
 
@@ -363,12 +393,12 @@ after the prose exists.
 
 **One lint ships with this file. No gate, and the reason is in the skill's own history.**
 
-`lint · the labels and the systems agree` — a declare-then-check over the ledger, modelled on the
-`a need shuts a door` gate. It prints three lists and **moves no score**:
+`lint · the labels and the systems agree` — a declare-then-check over the ledger's meters, modelled
+on the `a need shuts a door` gate. It prints three lists and **moves no score**:
 
-1. a label on a room that no declared system names — dead weight
-2. a label a system names that no room carries — the system has nowhere to live
-3. for each `sourced` system: whether `key` is written by a canvas at a `fed_at` location and read
+1. a label on a room that no declared meter names — dead weight
+2. a label a meter names that no room carries — the meter has nowhere to live
+3. for each `sourced` meter: whether `key` is written by a canvas at a `fed_at` location and read
    by at least one canvas somewhere else
 
 ⚠️ **Why a lint and not a gate.** A count is satisfied by declaring more, which is why R2c shipped
@@ -379,15 +409,15 @@ ratio was measured and inventing one is how four checks in this project were wit
 
 ⚠️ **P0 applies and is respected: never build a check for a state nothing is in.** A gate here
 would be measuring the doctrine's age rather than the games. The lint is safe under
-that rule precisely because it cannot fail anything — it reports *"no `board.systems[]` declared"*
-and moves on.
+that rule precisely because it cannot fail anything — it reports that nothing is declared and
+moves on.
 
 **The candidates deliberately not built**, to be revisited once one game has used this file:
 
-1. **`a source is alone`** — for each sourced system, how many rooms write it, printed against the
+1. **`a source is alone`** — for each sourced meter, how many rooms write it, printed against the
    field's own figures (1–2). Needs a game that has declared one; a distribution over zero games is
    not a distribution.
-2. **`the room has something of its own`** — locations carrying no sourced system at all. This is
-   the missing system about who she is, stated as a number, and it is the most useful check in this file. It is
+2. **`the room has something of its own`** — locations carrying no sourced meter at all. This is
+   the missing meter about who she is, stated as a number, and it is the most useful check in this file. It is
    not built because it needs the declaration to exist first, and because "how many is enough" has
    no measured answer.
