@@ -6645,6 +6645,31 @@ class ReturnExitSchemaTests(SimpleTestCase):
         self.assertTrue(any("'node', or 'return'" in e for e in errors), errors)
 
 
+class WardrobeEffectSchemaTests(SimpleTestCase):
+    """E7a (World and Systems PRD) — `action` and `item_id` on a wardrobe effect."""
+
+    def test_unequip_and_remove_validate_clean(self):
+        self.assertEqual(validate(normalize(_batch3())), [])
+
+    def test_bad_wardrobe_effects_are_errors(self):
+        for effect, fragment in (
+            ({"action": "grant", "item_id": "slip"}, "action 'grant' must be one of"),
+            ({"action": "remove"}, "item_id is required"),
+            ({"action": "unequip", "itemId": "slip"}, "item_id is required"),
+            ({"action": "remove", "item_id": "cape"}, "item_id 'cape' is not a declared"),
+        ):
+            for where in ("choice", "exit"):
+                d = _batch3()
+                nodes = _canvas(d, "strip_scene")["nodes"]
+                if where == "choice":
+                    nodes[0]["exit_block"]["choices"][0]["wardrobeEffects"] = [effect]
+                else:
+                    nodes[1]["exit_block"]["config"]["wardrobeEffects"] = [effect]
+                errors = validate(normalize(d))
+                self.assertTrue(any(fragment in e and "wardrobeEffects" in e for e in errors),
+                                (where, effect, errors))
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

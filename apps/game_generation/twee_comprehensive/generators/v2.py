@@ -1716,6 +1716,33 @@ setup.unequipSlot = function(slotName) {
     sv.player.equipped[slotName] = null;
 };
 
+// E7a — a scene takes a garment off her (`unequip`: it stays in the wardrobe) or
+// away (`remove`: taken off, then gone from the wardrobe; a shop can sell it again).
+// Both are no-ops on a garment she is not wearing / does not own.
+setup.unequipItem = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.equipped) return false;
+    var hit = false;
+    for (var s in sv.player.equipped) {
+        if (sv.player.equipped.hasOwnProperty(s) && sv.player.equipped[s] === itemId) {
+            sv.player.equipped[s] = null;
+            hit = true;
+        }
+    }
+    return hit;
+};
+
+setup.removeFromWardrobe = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.wardrobe || !sv.player.wardrobe[itemId]) return false;
+    setup.unequipItem(itemId);
+    var name = sv.player.wardrobe[itemId].name;
+    delete sv.player.wardrobe[itemId];
+    setup.pendingEffects = setup.pendingEffects || [];
+    setup.pendingEffects.push({ "type": "wardrobe_removed", "name": name });
+    return true;
+};
+
 setup.getWardrobeItemsForSlot = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.wardrobe) return [];
@@ -7194,6 +7221,8 @@ setup.showEffectNotification = function() {{
       lines.push('🔓 ' + flagDisplay);
     }} else if (eff.type === 'wardrobe') {{
       lines.push('👗 New item: ' + eff.name);
+    }} else if (eff.type === 'wardrobe_removed') {{
+      lines.push('👗 Gone: ' + eff.name);
     }} else if (eff.type === 'quest') {{
       lines.push('📜 ' + (eff.op === 'complete' ? 'Quest complete' : eff.op === 'cancel' ? 'Quest dropped' : 'Quest updated'));
     }} else if (eff.type === 'gated_action') {{
@@ -15517,12 +15546,9 @@ setup.carryRent = function (due, paid) {
                                     passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}", "{fop}");<</script>>'
                             if self.clothing_enabled and lb_wardrobe_effects and isinstance(lb_wardrobe_effects, list):
                                 for we in lb_wardrobe_effects:
-                                    w_action = we.get('action', 'add')
-                                    w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                                    if w_action == 'add' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>'
-                                    elif w_action == 'equip' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>'
+                                    w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                                    if w_js:
+                                        passage_body += f'<<script>>{w_js}<</script>>'
                             # doc 45 G4/G5 — duplicate quest + scheduled effects on the loop-back choice
                             if lb_quest_effects and isinstance(lb_quest_effects, list):
                                 for qe in lb_quest_effects:
@@ -16182,14 +16208,9 @@ setup.carryRent = function (due, paid) {
 
             code_parts = []
             for we in wardrobe_effects:
-                action = we.get('action', 'add')
-                item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if not item_id:
-                    continue
-                if action == 'add':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}");')
-                elif action == 'equip':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    code_parts.append(w_js)
 
             if code_parts:
                 return "<<script>>setup.pendingEffects = setup.pendingEffects || [];" + "".join(code_parts) + "setup.showEffectNotification();<</script>>"
@@ -16343,6 +16364,21 @@ setup.carryRent = function (due, paid) {
                 ) from e
         return "".join(out)
 
+    @staticmethod
+    def _wardrobe_effect_js(action, item_id) -> str:
+        """The JS one wardrobe effect runs, shared by all three emitters (the choice path,
+        the loop-back link beat, a node exit's config). "" for an unknown action or no
+        item (the importer rejects both). E7a added `unequip` and `remove`."""
+        item_id = str(item_id or '').replace('"', '\\"')
+        if not item_id:
+            return ""
+        return {
+            'add': f'setup.addToWardrobe("{item_id}");',
+            'equip': f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");',
+            'unequip': f'setup.unequipItem("{item_id}");',
+            'remove': f'setup.removeFromWardrobe("{item_id}");',
+        }.get(action, "")
+
     def _emit_wardrobe_effects_inline(self, effects, context: str = "") -> str:
         """Emit wardrobe-effect <<script>> blocks for a list of effect dicts.
         Respects clothing_enabled flag. Returns "" if disabled or no effects.
@@ -16353,12 +16389,9 @@ setup.carryRent = function (due, paid) {
         out = []
         for we in effects:
             try:
-                w_action = we.get('action', 'add')
-                w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if w_action == 'add' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>')
-                elif w_action == 'equip' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    out.append(f'<<script>>{w_js}<</script>>')
             except (KeyError, TypeError, ValueError) as e:
                 logger.warning("Invalid wardrobe effect in %s: %s", context or "unknown context", e)
         return "".join(out)

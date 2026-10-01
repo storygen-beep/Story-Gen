@@ -43,7 +43,7 @@
    gown is the failure).
 8. **Tell the rules in the shop:** where an item counts and what it risks (CoT).
 9. **Open tiers over time** by money or reputation (SD, CW).
-10. **Let the world take clothes away** (CoT, SD). Our engine cannot yet (planned: remove and unequip).
+10. **Let the world take clothes away** (CoT, SD). Ours: `wardrobeEffects` `unequip` and `remove`.
 11. **Keep changing cheap:** 1–2 clicks (CoT, IHOH). Ours is one click per slot (planned: saved outfits).
 
 ## Amounts (directions, never gates)
@@ -105,7 +105,7 @@ it feeds · key use · taken away · sex scenes strip it.
 - Lines: a `[group]` band on a `worn_*` condition.
 - The number: `worn_exposure`; `worn_beauty` and `worn_corruption` are readable, but pay cannot be computed from them.
 - Key garments: `clothing_item` conditions; the reminder is a hand-written band (a hub line, a quest card).
-- `wardrobeEffects` add and equip only (planned: remove and unequip). One wardrobe room (planned: more than one
+- `wardrobeEffects` add, equip, unequip and remove. One wardrobe room (planned: more than one
   wardrobe room). No saved outfits (planned: saved outfits).
 - The shop groups by corruption tiers, shows no "approved for" text, and there is one shop (planned: item
   prices and a general shop).

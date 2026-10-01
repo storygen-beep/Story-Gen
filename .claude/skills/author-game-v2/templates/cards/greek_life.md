@@ -37,7 +37,7 @@
 ## Our engine today (round 9b §6)
 - A weekly party fits schedule rows with `weekdays` (`template_import.py:782`); pledge tasks are flags, renown a trait.
 - An upgrade can raise another system's pay: the upgrade raises a trait, and the pay is a stat-based value
-  that reads it (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7011`); one trait per value).
+  that reads it (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7038`); one trait per value).
 
 ## Other systems the round found
 - **SD heat:** 0–125, raised by crime, drops 1–16% a day scaled by reputation; at 100 or more on a new day, one of 5 losses; 4 faction heats block a racket at 80. [Heat Widgets]

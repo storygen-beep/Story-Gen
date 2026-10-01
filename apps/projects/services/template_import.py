@@ -6139,6 +6139,44 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"duplicate clothing id: {ci.id}")
             seen_clothing_ids.add(ci.id)
 
+    # E7a — wardrobe effects: a known action on a declared garment. An unknown action or
+    # a missing item_id used to emit nothing at all, with no error anywhere.
+    _clothing_ids = {ci.id for ci in template.clothing_items}
+    _wardrobe_actions = ("add", "equip", "unequip", "remove")
+    for c in template.canvases:
+        for n in c.nodes:
+            _w_sets = [(
+                f"canvases['{c.id}'].nodes['{n.id}'].exit_block.config.wardrobeEffects",
+                (n.exit_block.config or {}).get("wardrobeEffects") or [],
+            )]
+            for chi, ch in enumerate(n.exit_block.choices or []):
+                _w_sets.append((
+                    f"canvases['{c.id}'].nodes['{n.id}'].exit_block.choices[{chi}].wardrobeEffects",
+                    ch.wardrobeEffects or [],
+                ))
+            for _w_ctx, _w_effs in _w_sets:
+                if not isinstance(_w_effs, list):
+                    errors.append(f"{_w_ctx} must be a list")
+                    continue
+                for wi, we in enumerate(_w_effs):
+                    if not isinstance(we, dict):
+                        errors.append(f"{_w_ctx}[{wi}] must be a table")
+                        continue
+                    action = we.get("action", "add")
+                    if action not in _wardrobe_actions:
+                        errors.append(
+                            f"{_w_ctx}[{wi}].action '{action}' must be one of "
+                            f"add, equip, unequip, remove"
+                        )
+                    item_id = we.get("item_id")
+                    if not item_id:
+                        errors.append(f"{_w_ctx}[{wi}].item_id is required")
+                    elif item_id not in _clothing_ids:
+                        errors.append(
+                            f"{_w_ctx}[{wi}].item_id '{item_id}' is not a declared "
+                            f"[[clothing]] item"
+                        )
+
     # ===== Player-portrait validation (optional) =====
     if template.player_portrait is not None:
         pp = template.player_portrait

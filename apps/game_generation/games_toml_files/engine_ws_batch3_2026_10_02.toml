@@ -13,6 +13,10 @@
 #                 the same exit.
 #    dan_door     a canvas in loc_dan entered from the room, with the same exit: no stored
 #                 place, so it ends at its own home.
+#
+#  E7 — clothing (blouse, skirt and bra are worn from the start; the slip is not owned):
+#    strip_scene  "Lose the blouse" unequips it (it stays in the wardrobe); "Wear the
+#                 slip" equips it; the next node's exit removes the skirt (gone).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -152,3 +156,58 @@ id     = "door"
 name   = "Door"
 blocks = [ { type = "paragraph", content = "DAN_DOOR" } ]
 exit_block = { type = "location", text = "Step back", config = { destinationType = "return", time_progression_minutes = 0 } }
+
+# ── E7: clothing ─────────────────────────────────────────────────────────────
+
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_home"
+
+[[clothing]]
+id      = "blouse"
+name    = "Blouse"
+slot    = "top"
+initial = true
+
+[[clothing]]
+id      = "skirt"
+name    = "Skirt"
+slot    = "bottom"
+initial = true
+
+[[clothing]]
+id      = "bra"
+name    = "Bra"
+slot    = "bra"
+initial = true
+
+[[clothing]]
+id    = "slip"
+name  = "Slip"
+slot  = "dress"
+
+# E7a — a scene that takes clothes off her: "Lose the blouse" unequips it (it stays in
+# the wardrobe), the next node's exit removes the skirt (gone), and "Keep it" equips the slip.
+[[canvases]]
+id   = "strip_scene"
+name = "Strip"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "ask"
+name   = "Ask"
+blocks = [ { type = "paragraph", content = "STRIP_ASK" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Lose the blouse", targetType = "node", nodeId = "gone", wardrobeEffects = [ { action = "unequip", item_id = "blouse" } ] },
+  { text = "Wear the slip", targetType = "node", nodeId = "gone", wardrobeEffects = [ { action = "equip", item_id = "slip" } ] } ] }
+
+[[canvases.nodes]]
+id     = "gone"
+name   = "Gone"
+blocks = [ { type = "paragraph", content = "STRIP_GONE" } ]
+exit_block = { type = "location", text = "Done", config = { destinationType = "trigger", time_progression_minutes = 0, wardrobeEffects = [ { action = "remove", item_id = "skirt" } ] } }

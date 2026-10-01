@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a scene takes clothes off her — `unequip` and `remove` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7 (clothing upgrades). `wardrobeEffects` knew only `add` and `equip`:
+no scene could take a garment off her or out of the wardrobe, and an unknown action or a missing item
+emitted nothing, with no error.
+
+**What changed.**
+- `generators/v2.py`: `setup.unequipItem` (takes a worn garment off; it stays in the wardrobe) and
+  `setup.removeFromWardrobe` (takes it off and out; a "👗 Gone" toast; a shop can sell it again). One
+  helper, `_wardrobe_effect_js`, now writes every action for all three emitters (a choice, the loop-back
+  link beat, a node exit's config); `add` and `equip` emit exactly what they did before.
+- `template_import.py`: every wardrobe effect on a choice or an exit config needs `action` in add / equip /
+  unequip / remove and an `item_id` that is a declared `[[clothing]]` item (build errors). All six games'
+  effects pass.
+- `references/engine.md` §17: the gap line becomes the fact. `templates/cards/wardrobe.md`: its two
+  "planned: remove and unequip" lines become the fact.
+- Citations re-pointed through the `git diff` line map (509 moved, 115 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+- Not changed: `references/the-arc.md` A6's "no effect removes or unequips a garment" (listed for the
+  skill-text session).
+
+**Verified.** `test_wardrobe_effects.py` (3: the helper's four actions, `add` and `equip` byte-identical;
+headless, "Lose the blouse" unequips it and keeps it, the next exit removes the skirt and nothing else
+moves; `equip` still works, removing a garment she does not own does nothing). `WardrobeEffectSchemaTests`
+(2: four bad shapes, on a choice and on an exit). No save state (the save shape is unchanged).
+The six games validate with 0 errors. Selfcheck and the skill tests pass; Django failures all in the
+known list.
+
+**Words:** +3, running total 145,539 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: back to where she was — a `return` exit (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's decision to add a "back to where she was" exit. A call's accept canvas and an `anywhere`
