@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P5: engine facts for the phone (World and Systems PRD, Phase 3)
+
+**Why.** engine.md had no phone section; the-phone.md's workarounds and the engine items that close them need one
+home. The engine session's E3 doc will merge into this section later.
+
+**What changed.** `references/engine.md`: a new §51 "The phone — what a thread can do today, and the gaps", appended
+at the end (no other engine.md section touched). It holds: a conversation delivers once, ever (`v2.py:2289`), so
+`time_of_day` on it is a delivery window; the chaining workaround (one entry per link, a flag the last link set —
+canvas or reply — plus `days_since_flag` and `time_of_day`; reply flags get `set_day` via `applyFlagEffect`,
+`v2.py:6532`; the chain starts from a scene); and a gap table, each row pointing at its engine item: repeatable
+chats (E3), hours since a flag and a weekday condition (E4), calls (E8-calls), a per-app gate (`openPhone`
+`v2.py:2512`), time cost (`sendDailyChat` `v2.py:2462`), the dating match (`likeProfile` `v2.py:2963-2985`) and the
+`custom` app (`v2.py:2550` needs `passage`, `template_import.py:8028-8036` never sends it) (all E8). The "ignored by
+day X" hook has no E item (E8-calls covers only a missed call); the row says so. `templates/cards/phone.md`'s engine
+heading points at §51.
+
+**Verified.** Every engine cite read on this branch; `cite_check.py`: SKILL.md + references 0 drifted (baseline 0);
+`--selfcheck` current (orphans 2); pytest 475 passed.
+
+**Words:** +347, running total 142,948 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P4 (PROTECTED, LO approved, WS-D11): A1's loop names the phone thread
 
 **Why.** The arc's conversion into a repeatable is where the phone thread turns into the loop invite (the-phone.md

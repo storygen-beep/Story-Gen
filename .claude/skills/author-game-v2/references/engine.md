@@ -2783,3 +2783,34 @@ decay_after_days = 7                # decay starts only after 7 days without con
 - Contact records `$npcs[id].last_contact_day`. Keys: `template_import.py:144-147`.
 - **Old saves:** an undefined contact day counts as contact today, so the wait starts now.
 
+
+---
+
+## 51. The phone — what a thread can do today, and the gaps
+
+The rules are `the-phone.md` P1–P12; the card is `templates/cards/phone.md`. This section is the engine as it
+stands.
+
+**A conversation delivers once, ever.** `setup.checkPhoneConversations` scans every passage and delivers a
+conversation the first time its `trigger.conditions` pass; `ps.triggered_conversations[conv.id]` is then written and
+never cleared (`v2.py:2289`). So `time_of_day` on a conversation is a delivery window, checked once, not a filter.
+
+**The chaining workaround** (until E3, repeatable chats). Each message and each loop invite is its own
+`[[phone.conversations]]` entry, caused by a flag the last link set — a canvas, or an earlier conversation's reply —
+and timed with `days_since_flag` plus `time_of_day`. A reply's `flagEffects` go through `applyFlagEffect`, which
+writes the flag's `set_day` (`v2.py:6532`), so `days_since_flag` works on a reply-set flag. The chain must start
+from a scene.
+
+**The gaps**, each with the engine item that closes it:
+
+| gap | today | closed by |
+|---|---|---|
+| a repeatable conversation with a cooldown | the latch above; chain one-time entries | E3 |
+| hours since a flag | flags store the day only (`v2.py:6532`); `days_since_flag` is the finest delay | E4 |
+| a weekday condition | none; split by `time_of_day` and the day count | E4 |
+| an "ignored by day X" hook | none; charge it on a canvas gated on the cause flag, `days_since_flag` and a reply flag still false | no E item yet (E8's calls count a missed call as ignored) |
+| calls | none; write the call as the scene the text books | E8-calls |
+| a per-app gate | `setup.openPhone` (`v2.py:2512`) renders every declared app | E8 |
+| phone actions cost time | none (`setup.sendDailyChat`, `v2.py:2462`, applies traits and returns) | E8 (`time_cost`) |
+| a dating match leads somewhere | `setup.likeProfile` (`v2.py:2963-2985`) writes `ps.matches` and nothing reads it but the dating screen | E8 (`on_match`) |
+| the `custom` app renders | `openPhoneApp` needs `appDef.passage` (`v2.py:2550`), which the importer never sends (`template_import.py:8028-8036`), so it falls to the placeholder | E8 |

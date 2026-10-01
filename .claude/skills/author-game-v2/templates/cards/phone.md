@@ -90,7 +90,7 @@ meeting scene · the no-show cost · the loop entry.
 - Texts that lead nowhere: *"friendly message are too shy, not direct"* (CoT, mopoga#213160, +8).
 - Random texts and dead apps barely draw complaints (2 each): players don't complain, they ignore them.
 
-## Our engine today (round 9a §8)
+## Our engine today (round 9a §8; `references/engine.md` §51)
 - A conversation is caused by its `trigger.conditions` (version 1.0); `days_since_flag` is the delay and
   `time_of_day` the window, which on a conversation is checked once, at delivery (`v2.py:2289`, `:4566`).
 - A conversation delivers once, ever, so the loop is a chain of one-time conversations (`references/the-phone.md` P9).
