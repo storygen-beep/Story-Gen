@@ -364,14 +364,16 @@ economy's ending. Its extra apartments cost $1,000 and $20,000 a week and **buy 
 
 ⚠️ **Otherwise the ratchet is the corpus's single most-punished design.** The two field games that
 deliberately made money bite are the two whose players are angriest about it, and one of the devs
-answers in-thread that he is undoing it. The decisive complaint is four words long:
-
-> *"here u still grind for nothing."*
+answers in-thread that he is undoing it.
 
 **Grind is not the complaint. Grind that buys nothing is.** `course-of-temptation`'s answer is to
 denominate the payouts in the obligation itself — its homework jobs pay
 `Math.floor($weeklydebt * 0.15)` — so a rising debt is a **difficulty curve** and never more
 clicking.
+
+**This holds for every money system, not only the obligation.** Each system that pays names its sink
+and its deadline on its card (`board.systems[]`, `the-systems.md` SY8), and its pay ladder rises with
+the bill it answers to. The price is shown before she agrees — gate 21, below.
 
 **Our engine has no computed effect values**, so do it with a band: gate a better-paying variant of
 an existing rung on the same flag that turned the obligation up, and keep the original behind the
@@ -383,7 +385,7 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 `engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
 `traitEffects` with a per-effect condition gate (`template_import.py:707`), applied through
 `setup.applyAndNotifyTrait` (`v2.py:6560`). Either way the player is told. A silent charge meter is
-the one economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
+the one economy device the corpus universally hates (`sluttown-usa` is the counted case).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
 (`v2.py:18497`), so the number there stops being true at the first stage.
 
@@ -424,6 +426,7 @@ the meters gate content, the bill going soft is the system working, not the syst
 ⚠️ **This does NOT license a flat number.** R3b still holds for the stretch where the bill is doing
 its job: a constant against a rising income goes soft *before* the meters are ready to take over,
 which leaves a gap where nothing is pulling. Ratchet it through the ignition, then let it plateau.
+**A plateau is fine, but the deadline persists:** the bill stops climbing; it does not stop coming due.
 
 ⚠️ **And it does not license squeezing.** R3c owns that half and the corpus is unambiguous. The
 opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
@@ -686,7 +689,8 @@ agree with (R7). Declaring the currency is strictly better than letting the gate
 of them will pick the wrong one.
 
 **Listing the sinks in the ledger is the useful part.** It is the question *what is money actually
-for in this game* asked at the point where it is still cheap to answer.
+for in this game* asked at the point where it is still cheap to answer. Each money system's own sink
+and deadline live on its card (`board.systems[].sink`, `.deadline`; `templates/sheets/system.md`).
 
 ---
 

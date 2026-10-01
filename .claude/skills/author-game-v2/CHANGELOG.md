@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S4 · PROTECTED (money file, WS-D11): money systems name a sink and a deadline
+
+**Why.** WS-D3/WS-D4 and round 9b §2.7: every money system needs a sink with a deadline, and pay must rise with
+the bill — R3c said so only for "the obligation".
+
+**What changed.** `references/the-economy.md`: **R3c** gains one paragraph — every money system names its sink and
+deadline on its card, its pay ladder rises with the bill it answers to, and the price is shown before she agrees
+(gate 21). R3c's `sluttown-usa` quote goes (the game stays as the counted case, §0.6). R3c's opening also loses the
+four-word player quote *"here u still grind for nothing."*: it comes from `high-school-days`
+(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/comments/high-school-days.json`), a game that fails the
+adults-only rule, and §0.6 cuts FAIL-game quotes from a section an item rewrites — **the PRD's S4 text does not
+name this cut; flagged for the lead.** **R3d** gains one line: a plateau is fine, but the deadline persists. "What
+the board phase records" points at the cards for per-system sinks and deadlines. R-ids unchanged; the file's
+protected title untouched.
+
+**Verified.** R-ids diff against HEAD: unchanged; `--selfcheck` current (161 rules, 0 broken pointers, orphans 3);
+pytest 473 passed.
+
+**Words:** +69, running total 141,941 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S3-text · PROTECTED (tools, Q9): gates.py says "needs + systems + people"
 
 **Why.** S3 made a job a system with a card; four printed texts in `gates.py` still taught "needs + work + people".
