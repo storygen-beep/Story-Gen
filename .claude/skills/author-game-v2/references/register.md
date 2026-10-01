@@ -565,10 +565,10 @@ screen's text opens on:
 
 ```
                      touch  strip  hands  oral  vaginal  anal  finish
-FIELD                  13%    14%    13%   15%     25%     3%    17%
+FIELD                  14%    15%    13%   15%     24%     3%    16%
 ```
 
-Four games (CoT, IHOH, Shady Deals, Cupid's Way), 1,034 explicit passages, re-measured 2026-09-30.
+Four games (CoT, IHOH, Shady Deals, Cupid's Way), 1,045 explicit passages, re-measured 2026-10-01.
 
 Evenly spread, because no single screen is the whole climb.
 

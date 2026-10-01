@@ -5,6 +5,40 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable B5 (PROTECTED, tools): the RUNGS stems take their inflections, field re-measured
+
+**Why.** The Billable Hours test found `--beat`'s act-rung readout blind to "gropes", "fondles" and
+"nuzzles": `caress`, `fondl`, `nuzzl`, `grope`, `undress`, `unbutton`, `unzip` and `thrust` sat before a
+`\b`, so only the bare stem matched. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/gates.py` RUNGS: `caress\w*`, `fondl\w*`, `nuzzl\w*`, `grop\w*` (touch); `undress\w*`,
+  `unbutton\w*`, `unzip\w*` (strip); `thrust\w*` (vaginal). Nothing else in the list changed.
+- The field re-measured with the new list (`round2/rungs_remeasure_20260930.py`, which imports the live
+  `gates.RUNGS` and `gates.EXPLICIT`), pooled over CoT, IHOH, Shady Deals and Cupid's Way, opening rung
+  per explicit passage:
+
+  | | touch | strip | hands | oral | vaginal | anal | finish | n | vaginal-or-above |
+  |---|---|---|---|---|---|---|---|---|---|
+  | old list | 13% | 14% | 13% | 15% | 25% | 3% | 17% | 1,034 | 44% |
+  | new list | 14% | 15% | 13% | 15% | 24% | 3% | 16% | 1,045 | 43% |
+
+  The cites follow: `references/register.md` S2's FIELD row and its "1,045 explicit passages,
+  re-measured 2026-10-01"; `lint_ladder`'s "43% … 1,045" and its test in `test_gates_ck8a.py`; the
+  gates.py comments above and below RUNGS. The "Field, per screen" comment (touch 13 · strip 15 · hands
+  11 · oral 14 · vaginal 28 · anal 5 · finish 13) was already older than the 2026-09-30 table; it now
+  carries the new pooled row.
+- `scripts/tests/test_gates_rungs_inflected.py` (new): ten inflected forms find their rung. All ten
+  fail on the old list.
+- No line shift: the gates.py edit is 11 lines out, 11 lines in, so no citation moved.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0. The explicit share
+is untouched (RUNGS feeds only the ladder lint and `--beat`).
+
+**Words:** +0, running total 144,344 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable B4 (PROTECTED, tools): "world reachable" exempts the rooms under an exempt root
 
 **Why.** `the-map.md` R1 tells an author to build two separate grounds as two roots joined by a travel

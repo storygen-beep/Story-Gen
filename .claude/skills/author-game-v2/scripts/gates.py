@@ -339,21 +339,21 @@ _CANVAS_NAME = re.compile(r'^(?:Starting)?Canvas_[A-Za-z0-9_]+?_Node_')
 # word-presence would survive contact. It exists to print WHERE a game's scenes sit,
 # because both failure directions are real and they look nothing alike — a game can
 # open at the top with no stairs to it, or climb forever with no ceiling.
-# Field, per screen: touch 13 · strip 15 · hands 11 · oral 14 · vaginal 28 · anal 5
-# · finish 13 — spread evenly, because a field scene is ONE rung and the ladder is
+# Field, per screen: touch 14 · strip 15 · hands 13 · oral 15 · vaginal 24 · anal 3
+# · finish 16 — spread evenly, because a field scene is ONE rung and the ladder is
 # climbed across 3-4 chained screens. references/register.md.
 RUNGS = (
-    ("touch",   re.compile(r"\b(kiss(?:e[sd]|ing)?|caress|fondl|nuzzl|grope"
+    ("touch",   re.compile(r"\b(kiss(?:e[sd]|ing)?|caress\w*|fondl\w*|nuzzl\w*|grop\w*"
                            r"|touch(?:es|ed|ing)?)\b", re.I)),
-    ("strip",   re.compile(r"\b(undress|strip(?:s|ped|ping)?|naked|nude|topless|bra\b"
-                           r"|panties|knickers|unbutton|unzip)\b", re.I)),
+    ("strip",   re.compile(r"\b(undress\w*|strip(?:s|ped|ping)?|naked|nude|topless|bra\b"
+                           r"|panties|knickers|unbutton\w*|unzip\w*)\b", re.I)),
     ("hands",   re.compile(r"\b(finger(?:s|ed|ing)?|handjob|hand job|jerk(?:s|ed|ing)?|wank"
                            r"|stroke[sd]? (?:his|her)|rub(?:s|bed|bing)?)\b", re.I)),
     ("oral",    re.compile(r"\b(suck(?:s|ed|ing)?|blowjob|blow job|lick(?:s|ed|ing)?"
                            r"|oral|deepthroat|face[- ]?fuck\w*"
                            r"|fuck(?:s|ed|ing)? (?:your|her|my|his) (?:mouth|face|throat))\b", re.I)),
     ("vaginal", re.compile(r"\b((?<!face-)(?<!face )fuck(?:s|ed|ing)?(?! (?:your|her|my|his) (?:mouth|face|throat|ass))"
-                           r"|thrust|penetrat\w*|rides? (?:him|his)"
+                           r"|thrust\w*|penetrat\w*|rides? (?:him|his)"
                            r"|inside her|in her cunt|in her puss\w*)\b", re.I)),
     ("anal",    re.compile(r"\b(anal|in the ass|(?:in|up) (?:your|her|my) ass"
                            r"|fuck(?:s|ed|ing)? (?:your|her|my) ass|butthole)\b", re.I)),
@@ -362,12 +362,12 @@ RUNGS = (
 # ⚠️ THE RUNG IS AN ACT, NOT A BODY PART. `cunt` / `puss` / `tits` name anatomy and
 # say nothing about what is happening to it — a first draft of this list had them in
 # the `vaginal` rung and over-counted penetration openings roughly eightfold. Every entry above is a verb or a verb phrase, and the field
-# distribution quoted in the lint was re-measured with this list on 2026-09-30 (below).
+# distribution quoted in the lint was re-measured with this list on 2026-10-01 (below).
 #
 # ⚠️ CHANGED 2026-09-30 (PRD v2 CK8a · I10), on the same principle: `her ass` / `your ass`
 # alone is anatomy, not anal ("he grabs your ass"), and "fucks your mouth / face" is oral,
-# not vaginal. Anal now needs an act on the ass (in / up / fucks). Field re-measured 2026-09-30:
-# CoT/IHOH/SD/CW, 1,034 explicit passages (Great_Games_Study round2/rungs_remeasure_20260930.py).
+# not vaginal. Anal now needs an act on the ass (in / up / fucks). Stems inflected 2026-10-01 (gropes,
+# fondles); re-measured: CoT/IHOH/SD/CW, 1,045 passages (round2/rungs_remeasure_20260930.py).
 RUNG_ORDER = [k for k, _ in RUNGS]
 
 PROSE_BLOCKS = {"paragraph", "dialog", "thought_bubble", "quote", "note"}
@@ -2789,8 +2789,8 @@ def lint_ladder(model, game):
     stuck = [r for r in rows if not (r[3] & TOP)]
     summary = (f"{len(rows)} explicit canvases · {100*len(high)//len(rows)}% OPEN at "
                f"vaginal-or-above · {100*len(stuck)//len(rows)}% never reach oral "
-               f"· field screens open at vaginal-or-above 44% of the time "
-               f"(4 games, 1,034 explicit passages)")
+               f"· field screens open at vaginal-or-above 43% of the time "
+               f"(4 games, 1,045 explicit passages)")
     findings = ([f"{cid} @{loc}: opens on {first} — no rung below it anywhere in the canvas"
                  for cid, loc, first, _ in high[:5]]
                 + [f"{cid} @{loc}: never gets past {first} — {len(pres)} rung(s) total"

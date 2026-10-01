@@ -77,7 +77,7 @@ def test_the_ladder_lint_says_the_field_needs_remeasuring():
                        "nodes": [{"id": "n", "blocks": [{"type": "paragraph", "content": text}]}]}]}
     model, g2 = gates.build(copy.deepcopy(g))
     summary, _ = gates.lint_ladder(model, g2)
-    assert "44% of the time (4 games, 1,034 explicit passages)" in summary
+    assert "43% of the time (4 games, 1,045 explicit passages)" in summary
     assert "pending" not in summary
 
 
