@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P6b: the last FAIL-game quotes in the-phone.md cut, counts kept
+
+**Why.** LO's evidence rule (World and Systems PRD carry-over P6b): a FAIL game may be counted, never
+quoted or used as a model. Three spots in `references/the-phone.md` still did.
+
+**What changed.** `references/the-phone.md`:
+- P6: `family-ties`' two-app table (its variable names and unlock code) is cut to one counted line
+  (3 rungs free, 4 more and video in a paid app she unlocks); its "at home" selfie quote becomes a
+  plain "a place rule is not expressible".
+- P11: the two `sluttown-usa` paraphrases are cut; the vote count (24 likes, 0 dislikes) stays.
+- P2: `new-life-project` is no longer called "well-liked"; that it ships a phone bank and GPS stays.
+
+**Verified.** The quote, the paraphrase marker, the praise and the table's code grep to 0 in
+the-phone.md. Selfcheck and the skill tests pass.
+
+**Words:** −110, running total 143,597 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P6a: engine.md §51 names planned changes, not PRD ids
 
 **Why.** LO's rule (World and Systems PRD carry-over P6a): skill text never names a PRD id. §51's gap

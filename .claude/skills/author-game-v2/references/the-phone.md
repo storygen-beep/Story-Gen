@@ -101,7 +101,7 @@ she banks, shops, navigates or finds work.
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
 `bank` both exist (`v2.py:2547`, `:2548`) and both are legitimate — `new-life-project` ships a phone
-bank *and* a phone GPS and is a well-liked game. But an author who reads the app-type list and
+bank *and* a phone GPS (numbers only). But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
 ⚠️ **Nobody puts a map on a phone.** Zero of 27. Navigation belongs to `the-map.md`.
@@ -256,18 +256,9 @@ In Her Own Hands' camera (`CameraMain`) runs selfies as a ladder — dressed →
 each rung gated on the room she is in, what she is wearing, and her inhibition, and a rung she is
 not ready for refuses in her own voice: *"I can't take a selfie in just my bra and panties!"*
 
-`family-ties` (structure only; it fails the adults-only rule) runs two apps as **one system at two
-ceilings**:
-
-| | the free app | the paid app |
-|---|---|---|
-| rungs | three, the top one topless | four more, then video |
-| counters | one per rung, kept separately | one per rung, kept separately |
-| subscribers | `$you.inst.sub` | `$you.onlyfans.sub` |
-| income | monthly, recurring | monthly, recurring |
-| daily cap | once | once |
-| place gate | she must be at home | she must be at home |
-| unlock | there from the start | `$app.onlyfans == 1` — earned |
+One counted game (`family-ties`, numbers only; it fails the adults-only rule) runs two apps as
+**one system at two ceilings**: 3 rungs in the free app, 4 more and then video in a paid app she
+has to unlock.
 
 **The free tier stops at topless. The paid tier has to be unlocked and goes further.** The
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
@@ -296,7 +287,7 @@ waiting to happen — a number on a screen that stops meaning anything. Give it 
 price that drops. If nothing reads it, do not count it.
 
 ⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
-nothing else (`v2.py:2865`). `family-ties`' *"You must be at home to take selfies!"* is not
+nothing else (`v2.py:2865`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
 exists (`v2.py:4197`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
@@ -452,11 +443,9 @@ hand.**
 ## P11 · Never a battery
 
 Seventeen of 27 corpus games mention a phone battery. The players are not divided about it. This is
-the cleanest single verdict in the 622 phone comments and the highest ratio in the set:
-a player asks for the app-charging to be removed altogether, because it adds nothing and everyone
-hates it (`sluttown-usa`, **24 likes, 0 dislikes**; paraphrased, it fails the adults-only rule).
-And on the loop it creates: use the app, wait, use it again, ten times for one small reward
-(`sluttown-usa`, paraphrased).
+the cleanest single verdict in the 622 phone comments and the highest ratio in the set: the
+battery comment against it scored **24 likes, 0 dislikes** (`sluttown-usa`, numbers only; it fails
+the adults-only rule).
 
 **Upkeep is not pressure.** P5's costs are pressure because they trade the phone against something
 else she could be doing with that minute. A battery is a second clock that governs only the phone,
