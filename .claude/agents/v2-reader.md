@@ -1,6 +1,6 @@
 ---
 name: v2-reader
-description: Reads the scenes of an author-game-v2 game against the nine tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers agree, and companion and rival — and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
+description: Reads the scenes of an author-game-v2 game against the nine tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers and the clothes agree, and companion and rival — and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
 tools: Bash, Read, Grep, Glob, Write
 ---
 
@@ -37,7 +37,7 @@ rules each test points at.
 | 5 | **who notices** | someone reacts to what she does, or the ledger declares nobody does (`the-meters.md` W5b). N/A for a scene with nothing to notice. |
 | 6 | **the written no** | where the scene makes her an offer, a refusal exists, is written, and moves something (`the-surfaces.md` R5b). N/A with no offer. |
 | 7 | **the body** | an explicit beat's last sentence is about what is happening, not what it means (the pivot, `register.md`). N/A for a non-explicit scene. |
-| 8 | **the numbers agree** | every number the scene states (a price, a count, a span of time) agrees with `WANT.md` and the ledger, **and `WANT.md`'s own numbers agree with each other** (one span said two ways is a FAIL on the Want). N/A with no number. |
+| 8 | **the numbers and the clothes agree** | every number the scene states (a price, a count, a span of time) agrees with `WANT.md` and the ledger, **and `WANT.md`'s own numbers agree with each other** (one span said two ways is a FAIL on the Want). **The clothes agree:** every garment of hers the prose names is backed by a clothing condition — the trigger, an enclosing `group`, the location's `entry_conditions`, the choice that led here, or a `wardrobeEffects` equip earlier in the canvas; undressing inside an explicit act is backed by the act (`register.md`, "The truth rule", rule 5). N/A with no number and no garment. |
 | 9 | **companion and rival** | where `want.companion_is_rival` is true, the companion's scenes together show both her help and her competition. N/A otherwise. |
 
 ## Output
@@ -51,7 +51,7 @@ scene | test | PASS / FAIL / N/A | the line judged (quoted, short) | why (one li
 Then the same verdicts as JSON, for the session to save in `release_page.reader`:
 
 ```json
-{"<canvas_id>": {"want": "PASS", "next step": "FAIL", "the numbers agree": "N/A"}}
+{"<canvas_id>": {"want": "PASS", "next step": "FAIL", "the numbers and the clothes agree": "N/A"}}
 ```
 
 Then one line per FAIL, grouped by test. **No fixes, no severity, no score, no ranking.** A FAIL you

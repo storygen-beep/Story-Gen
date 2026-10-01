@@ -356,8 +356,9 @@ scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The 
 6. **The written no** — where there is an offer, a refusal exists, is written and is priced
    (`the-surfaces.md` R5b).
 7. **The body** — an explicit beat stays on the body to its last sentence (the pivot, above).
-8. **The numbers agree** — every number the scene states agrees with the Want and the ledger, and the
-   Want's own numbers agree with each other (one span said two ways is a FAIL).
+8. **The numbers and the clothes agree** — every number the scene states agrees with the Want and the
+   ledger, and the Want's own numbers agree with each other (one span said two ways is a FAIL); every
+   garment of hers the scene names is backed by a clothing condition (the truth rule, rule 5).
 9. **Companion and rival** — where `want.companion_is_rival` is declared, her scenes show both the help
    and the competition *(LO decided, D15)*.
 

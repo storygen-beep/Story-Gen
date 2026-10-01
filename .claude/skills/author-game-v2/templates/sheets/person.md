@@ -11,6 +11,7 @@
 | what he keeps (`keeps`) | <step counter + flags · want + warmth · want + power> |
 | where he sleeps (`board.map.homes`) | <location_id — or "offscreen"> |
 | what he calls her | <word> |
+| his line per clothing state | <state: line — one per state worth noticing, in a `[group]` on that state> |
 
 ## Schedule grid (S5)
 

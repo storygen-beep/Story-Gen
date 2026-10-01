@@ -27,6 +27,12 @@ Whoever calls you gives you: **the beat, the character, the tier, the explicit c
 target.** If any of those is missing, ask for it and write nothing — a beat written against a
 guessed ceiling is worse than no beat.
 
+**And her clothes on this screen, with the condition that backs them** (a trigger, a group, the
+place's `entry_conditions`, the choice that led here, or an equip earlier in the canvas). You never
+read the TOML, so the spec is your only source. With no clothing state in the spec, the beat names
+no garment of hers; undressing inside an explicit act is backed by the act (`register.md`, "The
+truth rule", rule 5).
+
 **You do not argue with the spec.** Not the tier, not the ceiling, not the character. If you
 think the spec is wrong, write the beat as specified and say so in one line at the end.
 

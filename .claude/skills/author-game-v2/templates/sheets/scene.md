@@ -9,6 +9,7 @@
 | want (test 1) | <what he visibly wants here> |
 | next step (test 2) | <what goes one step further> |
 | hook (test 3) | <what it points at next> |
+| what she wears here (test 8) | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
 
 ## Branch map — one row per screen (S1)
 

@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C5b: the agents and sheets follow the clothes truth rule
+
+**Why.** Rule 5 of "The truth rule" (C5a) only holds if the writer is told what she wears and the
+reader checks it. `v2-prose` never reads the TOML, so its spec is its only source for her clothes.
+
+**What changed.**
+- `.claude/agents/v2-prose.md` "Your spec": the spec also carries her clothes on this screen and the
+  condition that backs them; with none, the beat names no garment of hers.
+- `references/register.md` "What a scene contains", test 8 becomes "The numbers and the clothes
+  agree" (every garment of hers the scene names is backed, rule 5). Not the protected section.
+- `.claude/agents/v2-reader.md` follows: test 8's row, the description and the JSON example key.
+- `templates/sheets/scene.md`: a row for what she wears here and the condition behind it.
+- `templates/sheets/place.md`: a row for the dress code or wanted state, the reason, the way out.
+- `templates/sheets/person.md`: a row for his line per clothing state.
+
+**Verified.** No script reads the reader's test names (grep). Selfcheck and the skill tests (with
+`test_templates_parse`) pass.
+
+**Words:** +21, running total 144,194 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C5a (PROTECTED, LO approved): the truth rule for clothes
 
 **Why.** LO's clothing decision: prose names her clothes only when a check backs it. "The truth rule"
