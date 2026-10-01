@@ -1206,6 +1206,9 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
 - `setup.currentRent()` (`v2.py:14118`) is the amount at every read; the payment that moves the stage
   shows its line on the paid screen. `stages`, `stage_lines` and `on_short` are opt-in, emitted only
   when used. Keys: `template_import.py:522-531`.
+- A stage with `after_total_paid = 0` is the starting rent: it is reached before any payment
+  (`setup.recordRentPayment`, `v2.py:14124`), so its stage line never prints; put those words in the
+  rent's own text (planned: an import warning for that shape).
 - Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
   over rent** *(LO decided, D8d)*.
 - **The old route**, without `on_short`: a fixed `amount`, a short week spends `grace_periods`, then

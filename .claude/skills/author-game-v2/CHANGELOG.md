@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Cleanup rent note: the first stage is the starting rent
+
+**Why.** The Billable Hours rebuild found a rent stage line that can never show: a stage with
+`after_total_paid = 0` is reached from the start, so no payment moves into it. It works as coded; the
+docs did not say so.
+
+**What changed.** `references/engine.md` §26 (`[settings.rent]`): one bullet saying a stage with
+`after_total_paid = 0` is the starting rent, its stage line never prints, its words belong in the
+rent's own text, and an import warning is planned.
+
+**Verified.** Read on disk: `setup.recordRentPayment` (`v2.py:14124`) takes `before` from
+`setup.rentStageIndex` on the old total, which already counts that stage at 0 (`v2.py:14107-14113`), and
+`setup.rentStageLine` prints only when the stage changed. Selfcheck, skill tests and cite_check
+(SKILL.md + references/ at 0) pass.
+
+**Words:** +40, running total 145,475 / 149,283.
+
+---
+
 ## 2026-10-02 — Cleanup carry-overs: lines the engine batches made untrue
 
 **Why.** Engine batch 2 built the ignore hook, phone time costs, app conditions, calls and ranks per
