@@ -391,7 +391,8 @@ A person with no row is a person with no reason to exist. Cut them or write it.
 threads: job or study, friends, dating, side money, the town. Each thread has:
 - a **named, fixed person** — in `want.cast`, with an age;
 - a **place** — in `want.places`;
-- the **system that runs it** — what she does there again and again (`the-systems.md`);
+- the **system that runs it** — what she does there again and again (`the-systems.md` SY1; a worked
+  card per system in `templates/cards/`);
 - **one link into the hook** — how this part of her life feeds the fantasy: a man she brings home,
   money that changes things, a friend who sees.
 

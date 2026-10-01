@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S2b (1 of 3): infrastructure cards, the reputation card, and W2's re-point (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3 and WS-D12: the worked cards live in `templates/cards/` (not counted). Round 9b's map, quests/hints,
+cheats and walk-pool cards describe clocks, views and channels, which S1a made infrastructure; reputation stays
+meters until the gossip engine (E9b/E9c).
+
+**What changed.** New `templates/cards/`: `map_travel.md` (channel; CoT, with SD and IHOH travel speeds),
+`quests_hints.md` (view; CoT, IHOH, SD), `cheats.md` (view; CoT, SD; points at SY7 and `engine.md` §48 rather than
+restating them), `random_encounters.md` (channel; CoT walk pools — round 9b §1 names the walk pool a channel; the
+PRD's S2b list does not name it either way), each saying it is declared in `board.infrastructure[]`, never
+`board.systems[]`; `reputation.md` (meters until the gossip engine; CoT and SD as the target shape; one trait per
+audience from existing pieces, declared in `board.meters[]`). `references/the-want.md` §6: the thread's "system
+that runs it" line points at `the-systems.md` SY1 and `templates/cards/` (W2's re-point, found by the Phase 1
+build). Round 9b's `school.md` is not carried (S8's `college.md` replaces it); phone and wardrobe are P3 and C6.
+
+**Verified.** A scratch check over every card: every `[Passage]` cite exists in `round2/passages/`, every `.js:`,
+`userjs:` and `mopoga#` cite appears in round 9b's files, the banned school-word grep (S8's whole-word list) gives
+0 hits, and no own game, Jack, Aaron or FAIL game is named; every `v2.py`/`template_import.py` line cited was
+re-read. `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +8 (the re-point), running total 141,514 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S8: adult college, Course of Temptation model only (World and Systems PRD, Phase 2)
 
 **Why.** WS-D6: the skill banned any school, which also ruled out an adult college — the setting of the field's
