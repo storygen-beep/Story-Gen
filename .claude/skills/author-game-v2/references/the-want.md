@@ -365,7 +365,7 @@ Decided on the board, not here: the shape first (`board.map.archetype`, `the-map
 outdoors in more than one zone, for every game. In a taboo-at-home game the house is her hub, the
 place she returns to, not the whole world: the world outside is what makes the house risky.
 
-### 6. The people
+### 6. The people and her life
 Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
 
 - **Age.** Every person is 18 or older, and the age is written. `shape.py` fails a person with no age
@@ -383,6 +383,18 @@ Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
 - **What he keeps score of** — `keeps`, picked per man by `the-meters.md` W1's table; LO approves.
 
 A person with no row is a person with no reason to exist. Cut them or write it.
+
+**Her life — the threads.** The hook is why the game starts, not the whole world. Give her 4–6
+threads: job or study, friends, dating, side money, the town. Each thread has:
+- a **named, fixed person** — in `want.cast`, with an age;
+- a **place** — in `want.places`;
+- the **system that runs it** — what she does there again and again (`the-systems.md`);
+- **one link into the hook** — how this part of her life feeds the fantasy: a man she brings home,
+  money that changes things, a friend who sees.
+
+Record as `want.threads[] = {id, name, person, place, system, link}`. Threads hold most of a game's
+text: in the seven games round 7 measured, the hook is 11–54% of story passages, and 28–52% even in
+the taboo-at-home games (round 7, `ROUND7_REPORT.md`). A direction, not a target.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
@@ -413,6 +425,7 @@ Answer these out loud. If any answer is soft, the Want is not done.
    decorative)*
 2. What can she reach at the top that she cannot reach at the bottom? *(the ascent)*
 3. Which person would a player miss if you deleted him, and what does he want back? *(§6)*
+4. Does she have 4–6 threads, each with a named person? *(§6)*
 
 Then run the last, which is not a judgement call:
 

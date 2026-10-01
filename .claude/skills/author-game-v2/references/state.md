@@ -83,6 +83,10 @@ belong here; only decisions, debts, and promises do.
     "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"],
                          "role:night man": ["…"] },   // SP2 · a walk-on with no id: `role:<name>`
     "places":          [ { "id": "location_id", "name": "…" } ],   // read by `gates.py --words`
+    "threads":         [ { "id": "job", "name": "…", "person": "npc_id", "place": "location_id",
+                           "system": "…", "link": "one line — how it feeds the hook" } ],
+                              // her life, 4–6 threads — the-want.md §6. person is in `cast`,
+                              // place is in `places`.
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 

@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W2: her life, the threads (World and Systems PRD, Phase 1)
+
+**Why.** N1 and N11: the skill gave her the hook and nothing else, while the top games build a life around it.
+Round 7 (`ROUND7_REPORT.md`): the hook is 11–54% of story passages in seven games, 28–52% even in the
+taboo-at-home ones. Q5 (WS-D18): the threads go in part 5 of the Want, renamed, and the Want keeps five parts.
+
+**What changed.**
+- `references/the-want.md` §6 is renamed "The people and her life" (number kept: §6 pointers live in ten files)
+  and gains "Her life — the threads": 4–6 threads, each with a named fixed person in `want.cast`, a place in
+  `want.places`, the system that runs it, and one link into the hook; round 7's share stated as a direction.
+  The leave-file test gains question 4 (4–6 threads, each with a person). §5 keeps only W1's hub text.
+- `templates/want.md` part 5 renamed, with a threads table (thread · person · place · system · link) and the
+  matching leave-page question.
+- `references/state.md` want block: `want.threads[] = {id, name, person, place, system, link}`. The ":40" comment
+  ("no gate reads them yet") is left for K11.
+- `templates/idea.md` §3 names the threads beside the companion, the pressure-man and the face.
+
+**Verified.** A scratch `v2_state.json` with `want.threads` (two threads) loads and runs through `shape.py`
+(1 pass, 0 fail, exit 0); `test_templates_parse` passes; pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +195, running total 139,809 / 149,283.
+
+---
+
 ## 2026-10-01 — World W1b · PROTECTED (LO approved, WS-D11): two lines in the-want.md §1
 
 **Why.** WS-D1 makes the house her hub, not the setting. The phone's P1 is being flipped (WS-D7), so §1 can no

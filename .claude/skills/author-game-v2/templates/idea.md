@@ -52,7 +52,9 @@ both the help and the competition.
 
 **Her face:** <one performer or one look, kept across the game — players notice when it changes>
 
-Record them as `want.companion`, `want.pressure` and `want.face` (`references/the-want.md` §6).
+**Her life, the threads:** <4–6, each with its person — from the Want's part 5>
+
+Record them as `want.companion`, `want.pressure`, `want.face` and `want.threads` (`references/the-want.md` §6).
 
 ## 4. The first step with one person — not the game's opening
 

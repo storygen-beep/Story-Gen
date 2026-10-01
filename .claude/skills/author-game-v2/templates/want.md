@@ -47,7 +47,7 @@ player words.
 
 No numbers here. Tiers and rung values are set on the board (`references/the-board.md` §3b).
 
-## 5. The people
+## 5. The people and her life
 
 | person | age | what she wants from him | what he visibly wants, each visit | what he keeps score of |
 |---|---|---|---|---|
@@ -57,12 +57,21 @@ Every person is 18 or older, and the age is written (`shape.py` fails a missing 
 counter + memory flags, Want + Warmth, or Want + Power (`references/the-meters.md` W1); LO approves each.
 Record as `want.cast[] = {id, age, keeps}`, and what she wants from him as `want.why_this_person`.
 
+**Her life — 4–6 threads** (job or study, friends, dating, side money, the town; `references/the-want.md` §6):
+
+| thread | person (in the table above) | place | system that runs it | its link into the hook |
+|---|---|---|---|---|
+| `<id>` | `npc_<id>` | `<location_id>` | | |
+
+Record as `want.threads[] = {id, name, person, place, system, link}`; each place also goes in `want.places[]`.
+
 ---
 
 ## Before you leave this page
 
 1. What can she reach at the top that she cannot at the bottom? (§4)
 2. Which person would a player miss if deleted, and what does he want back? (§5)
+   Does she have 4–6 threads, each with a named person? (§5)
 3. Run the vocabulary check and read the list — a list, never a score:
 
    ```
