@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems E9b: reputation's interim doctrine (World and Systems PRD, Phase 7, lands with Phase 2)
+
+**Why.** Q7/WS-D20: reputation becomes a full gossip system later (E9a study, E9c engine). Until then games need a
+rule that does not wait, and that keeps reputation out of the system checks (K1/K2).
+
+**What changed.** `references/the-systems.md`, one paragraph after SY8: reputation is meters until the engine can
+spread gossip — one trait per audience from existing pieces (trait conditions, sidebar bands,
+`[[traits.labels]]`, daily-tick decay, the cast page's `show_traits`), declared in `board.meters[]`, never
+`board.systems[]`; the card is `templates/cards/reputation.md` (S2b, 1 of 3); W5b (protected, untouched) still
+owns what reputation is for.
+
+**Verified.** `grep -ci reputation generators/v2.py` = 0 (no engine primitive, as round 9b says);
+`[[traits.labels]]` and `show_traits` are in `engine.md` §30 and the cast-page section; `--selfcheck` current
+(161 rules, orphans 3); pytest 475 passed.
+
+**Words:** +71, running total 142,331 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S10: the engine collects the bill at midnight (pitch_pack part PROTECTED, tools)
 
 **Why.** Billable F4: a pitched scene was written ON the rent payment, while `[settings.rent]` collects it itself.

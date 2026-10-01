@@ -384,6 +384,12 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    (round 9b, `cards/job.md`, `cards/streaming.md`). The engine's `block_pool` has no memory yet
    (`v2.py:16235`), so author the weighting by hand.
 
+**Reputation is meters until the engine can spread gossip.** Course of Temptation and Shady Deals run it as a
+system (`templates/cards/reputation.md`); our engine has no reputation primitive (round 9b §6). Until it does,
+build **one trait per audience** from pieces that exist — trait conditions, sidebar bands, `[[traits.labels]]`
+(`engine.md` §30), daily-tick decay, the cast page's `show_traits` — and declare each in `board.meters[]`, never
+`board.systems[]`. What reputation is for is `the-meters.md` W5b.
+
 ## What the board phase records
 
 In `v2_state.json`, before locations are written (`state.md` carries the schema):
