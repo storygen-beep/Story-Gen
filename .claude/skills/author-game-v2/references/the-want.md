@@ -50,7 +50,9 @@ guidance page (`engine.md` §23) carries it. Declare the goal and what comes aft
 a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*, and a line promising a dated event must be built
 (`register.md`, "The truth rule"); a sidebar `countdown`
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
-count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain).
+count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain). It also names
+`ends_flag`, the flag the game sets when it is met: a goal whose end the game can't see is one the
+player never finishes.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.

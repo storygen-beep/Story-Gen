@@ -42,8 +42,10 @@ belong here; only decisions, debts, and promises do.
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
     "promise":       { "goal": "…", "mystery": "…", "payout": "…", "rival": "npc_id",
-                       "goals": [ { "goal": "…", "ends_when": "…", "next": "…" } ] },
-                                 // no date (D8). A goal with ends_when names next (shape.py).
+                       "goals": [ { "goal": "…", "ends_when": "…", "ends_flag": "flag_id",
+                                    "next": "…" } ] },
+                                 // no date (D8). A goal with ends_when names next (shape.py),
+                                 // and ends_flag: the flag set when it is met (check planned, K14).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6

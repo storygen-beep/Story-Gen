@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W11: a goal's end is something the game builds (World and Systems PRD, Phase 1b)
+
+**Why.** WS-D23, N18: a game's ledger declared a goal whose `ends_when` nothing in the TOML could see, so the goal
+could never finish. The goal chain records the end only as text.
+
+**What changed.** `references/state.md`: the `want.promise.goals[]` line gains `ends_flag` (the flag id set when
+the goal is met), with its comment marking the check as planned (K14). `references/the-want.md`: one sentence
+after the goal-chain sentence. `templates/want.md` names none of these keys, so it is unchanged. No shape.py or
+gates.py change.
+
+**Verified.** grep finds `ends_flag` in `state.md` and `the-want.md`; `test_templates_parse` and the full skill
+pytest pass; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline).
+
+**Words:** +42, running total 140,540 / 149,283.
+
+---
+
 ## 2026-10-01 — World W10 · PROTECTED (truth rule, WS-D11): a promise about the future must be built
 
 **Why.** WS-D23, N18: a game promised a dated review ("week twelve") many times and never built it. The truth rule
