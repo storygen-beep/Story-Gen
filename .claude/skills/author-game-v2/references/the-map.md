@@ -135,7 +135,8 @@ Inside the house, the same shape one level down (R2):
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
 genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other,
 and list both in `board.map.roots[]`. Gate 11 walks on foot, so it exempts the second root only when
-that root is marked `offscreen` or sealed (entered only by a canvas exit).
+that root is marked `offscreen` or sealed (entered only by a canvas exit), and with it every room
+whose `entry_from` chain ends at that root.
 
 The diagram above is the topology. This is what it is in keys, and it is the whole of the
 difference — one field, present or absent, on the location the board names as `exterior`:

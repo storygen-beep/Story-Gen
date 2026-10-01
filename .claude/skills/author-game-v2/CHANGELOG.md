@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable B4 (PROTECTED, tools): "world reachable" exempts the rooms under an exempt root
+
+**Why.** `the-map.md` R1 tells an author to build two separate grounds as two roots joined by a travel
+canvas, and gate 11 exempts the second root when it is `offscreen` or sealed. The Billable Hours test
+found the rooms built off that root still reported stranded, so the gate failed the shape the skill
+prescribes. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/gates.py` gate 11: the `exempt = {…}` line and its two-line comment are swapped line for
+  line; the set now goes through a new helper `_under_exempt_roots` (above `main()`), which adds every
+  room whose `entry_from` chain ends at an exempt root. A chain that loops or names a missing id
+  exempts nothing. Nothing else in the gate changed (the headline still counts rooms reached on foot).
+- `scripts/tests/test_gates_world_reachable.py` (new): a two-root fixture — the rooms under a sealed
+  root and under an `offscreen` root pass; a second root that is neither still strands itself and its
+  rooms; a loop and a missing parent exempt nothing. Three of the four fail on the old code.
+- `references/the-map.md` R1: the exemption sentence now says the rooms whose `entry_from` chain ends
+  at that root go with it.
+- Line shift: the helper adds 18 lines above `main()`, so only citations after it move.
+  `references/the-release.md` `gates.py:13009` becomes `gates.py:13027` ("Lints sit BELOW the tally",
+  read on disk). cite_check `--fix` moved nothing (it cannot anchor these). Every other skill cite of
+  `gates.py` (7647, 8567, 9268, 9350, 9372, 9424, and `pitch_pack.py`'s 6663) sits above the helper
+  and did not move; gates.py's own line comments cite other files.
+
+**Before/after,** every game scored from `HEAD` in a scratch folder (vesper_two excluded), the old
+and new gates.py, every gate compared: only "world reachable" changed, in two games.
+| game | world reachable before | after |
+|---|---|---|
+| billable_hours | FAIL (club, firm, hotel_bar, …) | PASS |
+| the_balance | FAIL (the_back_room, the_cafe, the_cafe_toilet, …) | PASS |
+| vesper | FAIL | FAIL (unchanged: its stranded rooms hang off no exempt root) |
+| media_lab, members_only, orientation, probation | PASS | PASS |
+The row is not a `--ship` BLOCK row, so no `--ship` verdict moves.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
+
+**Words:** +12, running total 144,344 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable B3: per-beat and per-reader scratch files in the agents
 
 **Why.** The Billable Hours test ran `v2-prose` writers side by side, and they overwrote each other's

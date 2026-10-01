@@ -7580,9 +7580,9 @@ def run_gates(model, game, state=None):
             continue
         seen_locs.add(cur_loc)
         stack.extend(adj[cur_loc] - seen_locs)
-    # `offscreen` is a schedule label with no nav card; `auto_exit = false` is a
-    # deliberately sealed room entered only by a canvas exit. Neither is stranded.
-    exempt = {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False}
+    # `offscreen` is a schedule label with no nav card; `auto_exit = false` is a sealed
+    # room entered only by a canvas exit. Neither is stranded, nor is a room under one.
+    exempt = _under_exempt_roots(locs, {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False})
     stranded = sorted(loc_ids - seen_locs - exempt)
     _N["world reachable"] = len(loc_ids)
     gate("world reachable", None if not loc_ids else not stranded,
@@ -12749,6 +12749,24 @@ def _meters_of_board(board):
                 and not any(f in s for f in _SYSTEM_CARD_FIELDS)):
             meters.append(s)
     return meters
+
+
+# ── G11 world reachable: the rooms under a second root ─────────────────────
+# the-map.md R1: two separate grounds are two roots joined by a travel canvas, and gate 11
+# exempts the second root when it is `offscreen` or sealed. The rooms built off that root
+# are reached the same way, so they are exempt too: a room whose `entry_from` chain ends at
+# an exempt root. A chain that loops or names a missing id exempts nothing.
+def _under_exempt_roots(locs, exempt):
+    parent = {l["id"]: l.get("entry_from") for l in locs if l.get("id")}
+    out = set(exempt)
+    for lid in parent:
+        cur, chain = lid, set()
+        while parent.get(cur) and cur not in chain:
+            chain.add(cur)
+            cur = parent[cur]
+        if cur not in chain and cur in parent and not parent[cur] and cur in exempt:
+            out.add(lid)
+    return out
 
 
 def main():
