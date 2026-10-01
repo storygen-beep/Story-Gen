@@ -508,6 +508,7 @@ class GameTemplate:
     # today's behaviour: no change link on a refusal, a dress code's change from anywhere.
     wardrobe_change_on_refusal: Any = False
     wardrobe_anywhere: Any = True
+    saved_outfits: Any = False  # E7c — the wardrobe page saves and re-wears outfits
     clothing_requirements: Optional[TemplateClothingRequirements] = None
     # Rent system
     rent_enabled: bool = False
@@ -3054,6 +3055,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     shop_location = _require_str(settings_raw, "shop_location", "")
     wardrobe_change_on_refusal = settings_raw.get("wardrobe_change_on_refusal", False)
     wardrobe_anywhere = settings_raw.get("wardrobe_anywhere", True)
+    saved_outfits = settings_raw.get("saved_outfits", False)
     clothing_items: List[TemplateClothingItem] = []
     if clothing_enabled:
         for ci, c_raw in enumerate(data.get("clothing", []) or []):
@@ -3673,6 +3675,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         shop_location=shop_location or None,
         wardrobe_change_on_refusal=wardrobe_change_on_refusal,
         wardrobe_anywhere=wardrobe_anywhere,
+        saved_outfits=saved_outfits,
         clothing_requirements=clothing_requirements_obj,
         rent_enabled=rent_enabled,
         rent_amount=rent_amount,
@@ -6148,7 +6151,8 @@ def validate(template: GameTemplate) -> List[str]:
             seen_clothing_ids.add(ci.id)
 
     # E7b — the two wardrobe switches: bools, and only in a game with clothing.
-    for _w_key, _w_default in (("wardrobe_change_on_refusal", False), ("wardrobe_anywhere", True)):
+    for _w_key, _w_default in (("wardrobe_change_on_refusal", False), ("wardrobe_anywhere", True),
+                               ("saved_outfits", False)):
         _w_val = getattr(template, _w_key)
         if not isinstance(_w_val, bool):
             errors.append(f"settings.{_w_key} must be true or false")
@@ -8306,6 +8310,7 @@ def _assemble_project_metadata(project, template):
             **({"wardrobe_change_on_refusal": True}
                if template.wardrobe_change_on_refusal is True else {}),
             **({"wardrobe_anywhere": False} if template.wardrobe_anywhere is False else {}),
+            **({"saved_outfits": True} if template.saved_outfits is True else {}),
             "items": [
                 {
                     "id": ci.id,

@@ -156,12 +156,12 @@ fails otherwise.
 the weekday are two separate checks, and the weekday one runs first against **today**:
 
 ```
-v2.py:4211   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:4212   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:4301   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:4302   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
-startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4563`). So
+startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4653`). So
 `weekdays = [0,1,2,3,4,5,6]`, `22:00`–`04:00` is correctly **one** row.
 
 ⚠️ **But `weekdays = [1]`, `23:00`–`06:00` puts the character on site on Tuesday night and DELETES

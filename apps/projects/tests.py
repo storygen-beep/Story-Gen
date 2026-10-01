@@ -6692,6 +6692,12 @@ class WardrobeSwitchSchemaTests(SimpleTestCase):
         _assemble_project_metadata(p2, normalize(d))
         self.assertNotIn("wardrobe_change_on_refusal", p2.metadata["clothing_settings"])
         self.assertNotIn("wardrobe_anywhere", p2.metadata["clothing_settings"])
+        self.assertIs(cs["saved_outfits"], True)  # E7c
+        d["settings"].pop("saved_outfits")
+        p3 = _P()
+        p3.metadata = {}
+        _assemble_project_metadata(p3, normalize(d))
+        self.assertNotIn("saved_outfits", p3.metadata["clothing_settings"])
 
     def test_bad_switches_are_errors(self):
         d = _batch3()

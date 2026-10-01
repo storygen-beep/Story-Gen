@@ -1176,6 +1176,7 @@ class TweeComprehensiveGeneratorV2:
         # E7b — both absent in every game that does not opt in.
         self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
         self.wardrobe_anywhere = clothing_settings.get("wardrobe_anywhere") is not False
+        self.saved_outfits = clothing_settings.get("saved_outfits") is True  # E7c
         clothing_items = clothing_settings.get("items", [])
         clothing_requirements = clothing_settings.get("requirements", {})
         if self.clothing_enabled:
@@ -1515,6 +1516,10 @@ class TweeComprehensiveGeneratorV2:
         if self.clothing_enabled:
             player_init["wardrobe"] = initial_wardrobe
             player_init["equipped"] = initial_equipped
+            if self.saved_outfits:
+                # E7c — name -> {slot: item id or null}. Top level of $player, so an
+                # old save gets it from the backfill.
+                player_init["outfits"] = {}
         if self.player_customizable and self.player_customization_fields:
             for cf in self.player_customization_fields:
                 if cf["id"] == "name":
@@ -2025,6 +2030,7 @@ setup.renderWardrobePage = function() {
     }
 
     html += '</table>';
+    if (setup.renderSavedOutfits) html += setup.renderSavedOutfits();
     html += '</div>';
     return html;
 };
@@ -2152,6 +2158,90 @@ setup.refusalOffersChange = function(cond) {
     return setup.unmetClothingCondition(cond) && setup.canChangeClothesHere();
 };
 """
+            outfit_handlers = ""
+            if self.saved_outfits:
+                outfit_handlers = """jQuery(document).on('click', '.wardrobe-outfit-save', function(e) {
+    e.preventDefault();
+    setup.saveOutfit(jQuery('#wardrobe-outfit-name').val());
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-wear', function(e) {
+    e.preventDefault();
+    setup.wearOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-delete', function(e) {
+    e.preventDefault();
+    setup.deleteOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+
+"""
+                wardrobe_js_block += """
+// E7c — saved outfits: $player.outfits[name] = {slot: item id or null}, at most 5.
+// Wearing one equips each saved garment she still owns (equipItem keeps its own
+// conditions and the dress/top rule) and empties the slots it left empty, where the
+// slot may be emptied; a garment sold or removed since is skipped.
+setup.OUTFIT_SLOTS = ['bra', 'underwear', 'top', 'bottom', 'dress', 'legwear', 'shoes'];
+setup._esc = function(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+};
+setup.saveOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.equipped) return false;
+    p.outfits = p.outfits || {};
+    name = String(name || '').trim().slice(0, 30);
+    if (!name) name = 'Outfit ' + (Object.keys(p.outfits).length + 1);
+    if (!p.outfits[name] && Object.keys(p.outfits).length >= 5) return false;
+    var snap = {};
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        snap[s] = p.equipped[s] || null;
+    }
+    p.outfits[name] = snap;
+    return true;
+};
+setup.wearOutfit = function(name) {
+    var p = State.variables.player;
+    var o = p && p.outfits && p.outfits[name];
+    if (!o) return false;
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        if (!o[s] && p.equipped[s] && setup.canRemoveSlot(s)) setup.unequipSlot(s);
+    }
+    for (var j = 0; j < setup.OUTFIT_SLOTS.length; j++) {
+        var id = o[setup.OUTFIT_SLOTS[j]];
+        if (id && p.wardrobe && p.wardrobe[id]) setup.equipItem(id);
+    }
+    return true;
+};
+setup.deleteOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.outfits || !p.outfits[name]) return false;
+    delete p.outfits[name];
+    return true;
+};
+setup.renderSavedOutfits = function() {
+    var outfits = (State.variables.player || {}).outfits || {};
+    var names = Object.keys(outfits);
+    var html = '<table class="wardrobe-table wardrobe-outfits">';
+    for (var i = 0; i < names.length; i++) {
+        var key = encodeURIComponent(names[i]);
+        html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">' + setup._esc(names[i]) + '</td>';
+        html += '<td class="wardrobe-slot-items"><button class="wardrobe-outfit-wear" data-outfit="' + key + '">Wear</button> ';
+        html += '<button class="wardrobe-outfit-delete" data-outfit="' + key + '">Delete</button></td></tr>';
+    }
+    html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">Outfits</td><td class="wardrobe-slot-items">';
+    if (names.length < 5) {
+        html += '<input id="wardrobe-outfit-name" type="text" maxlength="30" placeholder="Name"> ';
+        html += '<button class="wardrobe-outfit-save">Save what I am wearing</button>';
+    } else {
+        html += '<span class="wardrobe-empty-hint">Five saved. Delete one to save another.</span>';
+    }
+    html += '</td></tr></table>';
+    return html;
+};
+"""
             wardrobe_handlers_block = """
 // Wardrobe page event handlers
 jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', function(e) {
@@ -2163,7 +2253,7 @@ jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', functi
     }
 });
 
-jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
+""" + outfit_handlers + """jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
     e.preventDefault();
     e.stopPropagation();
     var slot = jQuery(this).data('slot');

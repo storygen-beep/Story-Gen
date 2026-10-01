@@ -23,6 +23,7 @@
 #    loc_office   a dress code (top + bottom). Its ClothingBlock offers "Change clothes" only
 #                 in loc_home for the same reason. The tests also build this fixture with
 #                 both switches removed, to prove the defaults are today's behaviour.
+#    saved_outfits  the wardrobe page saves what she wears and puts it back on.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -170,6 +171,7 @@ clothing_enabled           = true
 wardrobe_location          = "loc_home"
 wardrobe_change_on_refusal = true
 wardrobe_anywhere          = false
+saved_outfits              = true
 
 [[clothing]]
 id      = "blouse"

@@ -633,3 +633,16 @@ def test_e8b_return_place_reaches_a_save_written_before_it(tmp_path):
     got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
     assert got[0]["game_state"]["return_place"] == ""
     assert got[1]["game_state"]["return_place"] == "loc_gym"
+
+
+@needs_node
+def test_e7c_outfits_reach_a_save_written_before_them(tmp_path):
+    """E7c: a game that turns on saved outfits. An old save's $player has no `outfits`;
+    the backfill fills it at the top level, and an outfit already saved is kept."""
+    twee = build(BATCH3)
+    sv = old_save(twee, drop_player=("outfits",))
+    kept = old_save(twee)
+    kept["player"]["outfits"] = {"Work": {"top": "blouse"}}
+    got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
+    assert got[0]["player"]["outfits"] == {}
+    assert got[1]["player"]["outfits"] == {"Work": {"top": "blouse"}}

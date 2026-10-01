@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: saved outfits (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. Changing cost one click per slot; the counted games keep changing
+cheap (`templates/cards/wardrobe.md` rule 11: one click for a favourite outfit, five saved sets).
+
+**What changed.**
+- `template_import.py`: `[settings] saved_outfits` (default false; a bool, and it needs clothing),
+  written into `clothing_settings` only when true.
+- `generators/v2.py`: with it, `$player.outfits = {}` (name → {slot: item id or null}) joins the player
+  skeleton, so an old save gets it from the top-level `$player` backfill. The wardrobe page lists each
+  outfit with Wear and Delete and saves what she wears under a typed name (or "Outfit N"), five at most.
+  `setup.wearOutfit` empties the slots the outfit left empty (where `canRemoveSlot` allows) and equips each
+  saved garment she still owns through `setup.equipItem`, so a garment's own conditions and the dress/top
+  rule still hold; one removed since is skipped. Names are escaped on the page. Emitted only in such a
+  game.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: its two "planned: saved outfits"
+  lines become the fact.
+- Citations re-pointed through the `git diff` line map (601 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_saved_outfits.py` (3, headless: save, wear and delete, with an escaped name; a
+removed garment is skipped and five is the cap; a save written before the change, at 24b0793, loads with
+`outfits` backfilled and saves one). A save-migration case. `WardrobeSwitchSchemaTests` covers the
+metadata. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +39, running total 145,599 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: two wardrobe switches — a change on refusal, and no change from anywhere (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 7. A place that wants a revealing state could only say "Go back", and a
