@@ -1101,7 +1101,8 @@ different question and stays a lint (`lint_dialogue_attribution`).
 ## 26. `[settings.rent]` — the engine charges the money, so do not author a canvas that does
 
 The recurring-demand system is real, it is wired end to end, and it **takes the money**. Read this
-before writing a settle-up scene.
+before writing a settle-up scene. **In one line: the engine arms the bill at 00:00 on the due day and
+takes it on her next move; authored scenes sit beside the payment, never on it.**
 
 ```toml
 [settings.rent]

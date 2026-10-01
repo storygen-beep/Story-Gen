@@ -757,6 +757,11 @@ def _print_promise(want):
     threads = _threads(want)
     print(f"  {'her life, the threads':<22}"
           + (f"{len(threads)} declared (THREADS below)" if threads else "not declared"))
+    if want.get("hold_kind") == "bill":
+        # World and Systems PRD S10: a pitch must not put a scene ON the payment.
+        print(f"  {'the bill':<22}the engine collects it: it arms at 00:00 on the due day and is"
+              " taken on her next move")
+        print(f"  {'':<22}(engine.md §26). A pitched scene sits beside the payment, never on it.")
 
 
 def _threads(want):

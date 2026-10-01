@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S10: the engine collects the bill at midnight (pitch_pack part PROTECTED, tools)
+
+**Why.** Billable F4: a pitched scene was written ON the rent payment, while `[settings.rent]` collects it itself.
+
+**What changed.** `references/engine.md` §26 (only that section): a one-line summary under the heading — the engine
+arms the bill at 00:00 on the due day and takes it on her next move; authored scenes sit beside the payment,
+never on it (matching steps 1–2 already in §26). `references/the-want.md` §2 (not §1b): the same line in the §2
+bullet, pointing at §26. `scripts/pitch_pack.py` `_print_promise`: when `want.hold_kind = "bill"` the promise
+block prints the line (+5 lines inside the function). New `scripts/tests/test_pitch_pack_s10_bill.py` (2 tests).
+
+**Verified.** The new test shows the line with `hold_kind="bill"` and not for another hold; `cite_check.py --fix`:
+0 drifted in SKILL.md + references (nothing in the skill cites `pitch_pack.py` lines); engine.md's diff is one hunk
+inside §26; `--selfcheck` current (orphans 3); pytest 475 passed.
+
+**Words:** +54, running total 142,260 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S9: a person who doesn't climb (`keeps = "none — …"`)
 
 **Why.** Billable F1: some people are part of a system (the bill's collector, a boss) rather than a climber, and

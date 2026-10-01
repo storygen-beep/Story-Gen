@@ -242,7 +242,8 @@ So the four parts of this page divide the game between them, and each does one j
 - **§1b — the hold starts her.** It has to be there in week one, when nothing else is.
 - **§3 — the meters carry her.** They are what still gates content at release 41.
 - **§2 — the appetite is what she arrives at.** The hold goes quiet (`the-economy.md` R3d for the
-  `bill` case) and the act does not change; the *reason* does.
+  `bill` case) and the act does not change; the *reason* does. A bill is collected by the engine at
+  00:00 on the due day; authored scenes sit beside the payment, never on it (`engine.md` §26).
 
 That last sentence is **§4's Transformation charge stated mechanically** — see it, and write the two
 to agree.
