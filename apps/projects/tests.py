@@ -6058,6 +6058,78 @@ class PhonePostActionsSchemaTests(SimpleTestCase):
         self.assertEqual(app.post_actions[1]["corruption_min"], 30)
 
 
+def _toml_with_repeatable_chat(**conv_extra):
+    d = _toml_with_phone()
+    conv = d["phone"]["conversations"][0]
+    conv["blocks"].append({"type": "reply", "choices": [{"text": "sure"}]})
+    conv.update({"repeat_after_days": 2, "max_repeats": 3})
+    conv.update(conv_extra)
+    return d
+
+
+class RepeatableChatSchemaTests(SimpleTestCase):
+    """E3 (World and Systems PRD) — repeat_after_days / max_repeats on a conversation."""
+
+    def test_fields_parse(self):
+        conv = normalize(_toml_with_repeatable_chat()).phone.conversations[0]
+        self.assertEqual((conv.repeat_after_days, conv.max_repeats), (2, 3))
+
+    def test_fields_default_to_one_time(self):
+        conv = normalize(_toml_with_phone()).phone.conversations[0]
+        self.assertIsNone(conv.repeat_after_days)
+        self.assertIsNone(conv.max_repeats)
+
+    def test_valid_repeat_validates_clean(self):
+        self.assertEqual(validate(normalize(_toml_with_repeatable_chat())), [])
+
+    def test_bad_values_are_errors(self):
+        for extra, fragment in (
+            ({"repeat_after_days": 0}, "repeat_after_days must be a whole number"),
+            ({"repeat_after_days": "2"}, "repeat_after_days must be a whole number"),
+            ({"max_repeats": 0}, "max_repeats must be a whole number"),
+            ({"repeat_after_days": None}, "max_repeats is read only with repeat_after_days"),
+        ):
+            d = _toml_with_repeatable_chat(**extra)
+            if extra.get("repeat_after_days", 1) is None:
+                del d["phone"]["conversations"][0]["repeat_after_days"]
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (extra, errors))
+
+
+class RepeatableChatIntegrationTests(TestCase):
+    """E3 through the DB build (create_project_from_template). The no-DB path and the
+    runtime are proven in apps/game_generation/tests/test_repeatable_chats.py."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            email="repeatable-chat-test@example.com", password="testpass123"
+        )
+
+    def _build(self, data):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(data)
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return project, TweeComprehensiveGeneratorV2().generate(project)
+
+    def test_the_keys_reach_metadata_and_the_runtime(self):
+        project, twee = self._build(_toml_with_repeatable_chat())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertEqual((conv["repeat_after_days"], conv["max_repeats"]), (2, 3))
+        self.assertIn('"conv_cycle": {}', twee)
+        self.assertIn("setup._rearmPhoneConversation(conv, ps)", twee)
+
+    def test_a_one_time_chat_emits_no_repeat_state(self):
+        project, twee = self._build(_toml_with_phone())
+        conv = project.metadata["phone_settings"]["conversations"][0]
+        self.assertNotIn("repeat_after_days", conv)
+        self.assertNotIn('"conv_cycle"', twee)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

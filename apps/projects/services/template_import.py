@@ -366,6 +366,12 @@ class TemplatePhoneConversation:
     # doc 45 G1 — optional toast text shown when this conversation is delivered
     # (its trigger first satisfied). Empty ⇒ default "📱 New message".
     notify: str = ""
+    # E3 (World and Systems PRD) — a repeatable chat. Once the current instance is
+    # answered (a reply sent; read, for a chat with no reply block) and this many days
+    # have passed since it arrived or was answered, it arrives again while its trigger
+    # still holds. `max_repeats` caps the re-arrivals (None = no cap). None = one-time.
+    repeat_after_days: Optional[int] = None
+    max_repeats: Optional[int] = None
 
 
 @dataclass
@@ -3170,6 +3176,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     trigger=trigger_cond,
                     blocks=conv_blocks,
                     notify=_require_str(c_raw, "notify", ""),
+                    # E3 — kept raw; validate() owns the type and range checks.
+                    repeat_after_days=c_raw.get("repeat_after_days"),
+                    max_repeats=c_raw.get("max_repeats"),
                 ))
 
             # Parse posts (social feed)
@@ -4844,6 +4853,17 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(f"{bctx}.sender must be 'npc' or 'player'")
                 if block.type == "reply" and not block.choices:
                     errors.append(f"{bctx} is a reply but has no choices")
+            # E3 — repeatable chats. Errors, for the EN1 reason: a misspelt or
+            # misplaced key would build clean and the chat would never come back.
+            if conv.repeat_after_days is not None and not _is_whole_days(conv.repeat_after_days):
+                errors.append(f"{ctx}.repeat_after_days must be a whole number of days >= 1 "
+                              f"(got {conv.repeat_after_days!r})")
+            if conv.max_repeats is not None:
+                if conv.repeat_after_days is None:
+                    errors.append(f"{ctx}.max_repeats is read only with repeat_after_days")
+                elif not _is_whole_days(conv.max_repeats):
+                    errors.append(f"{ctx}.max_repeats must be a whole number >= 1 "
+                                  f"(got {conv.max_repeats!r})")
 
     # container/default entry rules
     for l in template.locations:
@@ -8239,6 +8259,11 @@ def _assemble_project_metadata(project, template):
                     "npc": c.npc,
                     "trigger": c.trigger,
                     "notify": c.notify,
+                    # E3 — emitted only when set, so a game without repeatable chats
+                    # produces a byte-identical payload.
+                    **({"repeat_after_days": c.repeat_after_days}
+                       if c.repeat_after_days is not None else {}),
+                    **({"max_repeats": c.max_repeats} if c.max_repeats is not None else {}),
                     "blocks": [
                         {
                             "type": b.type,

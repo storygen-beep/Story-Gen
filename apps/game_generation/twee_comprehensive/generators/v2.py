@@ -1565,6 +1565,10 @@ class TweeComprehensiveGeneratorV2:
                 "passed_profiles": {},
                 "matches": {},
             }
+            if any(c.get("repeat_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3 — the instance number of each repeatable chat. Only in a game that
+                # has one, so every other phone game keeps a byte-identical skeleton.
+                game_state_init["phone"]["conv_cycle"] = {}
         # Schema signature stamped into every save via Config.saves.version: a
         # fingerprint of the trait/flag key surface and the corruption tiers, so a
         # build can tell whether a save was written against its own data shape.
@@ -2279,6 +2283,54 @@ setup._notifyPhoneDelivery = function(messages) {{
     jQuery('body').append('<div class="effect-toast phone-notify">' + safe.join('<br>') + '</div>');
     setTimeout(function() {{ jQuery('.phone-notify').remove(); }}, 3000);
 }};
+// E3 — repeatable chats. Instance 0 of a chat keeps the plain id as its key in
+// replies / read_conversations, exactly as before; instance n (n >= 1) uses "id#n".
+// ps.conv_cycle[id] is the current instance; absent = 0, so a one-time chat and a
+// save written before E3 read the same as they always did.
+setup.convInstanceKey = function(convId, n) {{
+    return (n && n > 0) ? (String(convId) + '#' + n) : String(convId);
+}};
+setup.convBaseId = function(key) {{
+    return String(key).split('#')[0];
+}};
+setup.convCurrentKey = function(convId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    return setup.convInstanceKey(convId, (ps.conv_cycle || {{}})[convId] || 0);
+}};
+// Answered = a reply sent; for a chat with no reply block, read.
+setup._phoneConvAnswered = function(conv, ps, key) {{
+    var hasReply = (conv.blocks || []).some(function(b) {{ return b.type === 'reply'; }});
+    if (!hasReply) return !!(ps.read_conversations || {{}})[key];
+    var r = (ps.replies || {{}})[key];
+    return typeof r === 'number' || (Array.isArray(r) && r.length > 0);
+}};
+// Re-arm a delivered repeatable chat: answered, `repeat_after_days` since it arrived
+// or was answered (whichever is later), under `max_repeats`, and its trigger still
+// holds. The old instance's arrival moves to `past`, which the thread view renders as
+// history. Returns true when a new instance arrived.
+setup._rearmPhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_cycle = ps.conv_cycle || {{}};
+    var n = ps.conv_cycle[conv.id] || 0;
+    if (conv.max_repeats && n >= conv.max_repeats) return false;
+    if (!setup._phoneConvAnswered(conv, ps, setup.convInstanceKey(conv.id, n))) return false;
+    var ts = State.variables.game_state.time_state || {{}};
+    var day = ts.day || 1;
+    if (day - Math.max(trig.triggered_day || 1, trig.answered_day || 0) < conv.repeat_after_days) return false;
+    var trigCond = conv.trigger ? conv.trigger.conditions : null;
+    if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) return false;
+    var past = Array.isArray(trig.past) ? trig.past.slice() : [];
+    past.push({{ triggered_day: trig.triggered_day || 1, triggered_hour: trig.triggered_hour || 0 }});
+    ps.conv_cycle[conv.id] = n + 1;
+    ps.triggered_conversations[conv.id] = {{
+        triggered_day: day,
+        triggered_hour: ts.current_hour || 0,
+        conv_index: trig.conv_index,
+        past: past
+    }};
+    return true;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2292,7 +2344,12 @@ setup.checkPhoneConversations = function() {{
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
         var conv = convs[i];
-        if (ps.triggered_conversations[conv.id]) continue;
+        if (ps.triggered_conversations[conv.id]) {{
+            if (conv.repeat_after_days && setup._rearmPhoneConversation(conv, ps) && !_firstScan) {{
+                _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
+            }}
+            continue;
+        }}
         var trigCond = conv.trigger ? conv.trigger.conditions : null;
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         var ts = sv.game_state.time_state || {{}};
@@ -2335,7 +2392,7 @@ setup.getPhoneUnreadCount = function() {{
     var read = ps.read_conversations || {{}};
     var keys = Object.keys(triggered);
     for (var i = 0; i < keys.length; i++) {{
-        if (!read[keys[i]]) count++;
+        if (!read[setup.convCurrentKey(keys[i])]) count++;
     }}
     // Unviewed posts
     if (!ps.viewed_feed && Object.keys(ps.triggered_posts || {{}}).length > 0) count++;
@@ -2368,9 +2425,23 @@ setup.getPhoneThreads = function(appId) {{
             }};
         }}
         var entry = byNpc[npcSlug];
-        entry.conversations.push(conv);
-        if (!read[conv.id]) entry.unreadCount++;
         var trig = triggered[conv.id];
+        // E3 — a repeated chat appears once per instance, oldest first; past ones are
+        // history. A chat that never repeated is pushed as itself, as before.
+        var cyc = (ps.conv_cycle || {{}})[conv.id] || 0;
+        var pastWhen = Array.isArray(trig.past) ? trig.past : [];
+        for (var k = 0; k <= cyc; k++) {{
+            var inst = conv;
+            if (cyc > 0) {{
+                inst = Object.assign({{}}, conv, {{
+                    _instKey: setup.convInstanceKey(conv.id, k),
+                    _past: k < cyc,
+                    _when: k < cyc ? (pastWhen[k] || {{}}) : trig
+                }});
+            }}
+            entry.conversations.push(inst);
+            if (!read[inst._instKey || conv.id]) entry.unreadCount++;
+        }}
         if (trig.triggered_day > entry.lastDay || (trig.triggered_day === entry.lastDay && trig.triggered_hour > entry.lastHour)) {{
             entry.lastDay = trig.triggered_day;
             entry.lastHour = trig.triggered_hour;
@@ -2380,8 +2451,8 @@ setup.getPhoneThreads = function(appId) {{
     var npcKeys = Object.keys(byNpc);
     for (var nk = 0; nk < npcKeys.length; nk++) {{
         byNpc[npcKeys[nk]].conversations.sort(function(a, b) {{
-            var ta = triggered[a.id] || {{}};
-            var tb = triggered[b.id] || {{}};
+            var ta = a._when || triggered[a.id] || {{}};
+            var tb = b._when || triggered[b.id] || {{}};
             if ((ta.triggered_day || 0) !== (tb.triggered_day || 0)) return (ta.triggered_day || 0) - (tb.triggered_day || 0);
             if ((ta.triggered_hour || 0) !== (tb.triggered_hour || 0)) return (ta.triggered_hour || 0) - (tb.triggered_hour || 0);
             return (ta.conv_index || 0) - (tb.conv_index || 0);
@@ -2408,10 +2479,16 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     }}
     ps.replies[convId].push({{round: roundNum, choice: choiceIndex}});
     ps.read_conversations[convId] = true;
-    // Find the reply block for this round and apply effects
+    // Find the reply block for this round and apply effects. E3: convId may be an
+    // instance key ("id#n"); the blocks belong to the base chat.
+    var baseConvId = setup.convBaseId(convId);
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
-        if (convs[i].id !== convId) continue;
+        if (convs[i].id !== baseConvId) continue;
+        if (convs[i].repeat_after_days && ps.triggered_conversations[baseConvId]) {{
+            ps.triggered_conversations[baseConvId].answered_day =
+                ((sv.game_state || {{}}).time_state || {{}}).day || 1;
+        }}
         var blocks = convs[i].blocks || [];
         for (var b = 0; b < blocks.length; b++) {{
             if (blocks[b].type !== "reply") continue;
@@ -2617,13 +2694,14 @@ setup.openChatThread = function(appId, npcSlug) {{
         var conv = thread.conversations[ci];
         var blocks = conv.blocks || [];
         // Multi-round: get replies array (backward compat: convert old int format)
-        var convReplies = ps.replies[conv.id];
+        var convKey = conv._instKey || conv.id;  // E3: per-instance replies
+        var convReplies = ps.replies[convKey];
         if (typeof convReplies === 'number') {{
             convReplies = [{{round: 1, choice: convReplies}}];
         }}
         convReplies = Array.isArray(convReplies) ? convReplies : [];
         var hasAnyReply = convReplies.length > 0;
-        setup.markConversationRead(conv.id);
+        setup.markConversationRead(convKey);
         for (var bi = 0; bi < blocks.length; bi++) {{
             var block = blocks[bi];
             var blockAfterRound = block.after_round;
@@ -2639,7 +2717,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (block.type === "message") {{
                 var cls = block.sender === "npc" ? "phone-bubble-npc" : "phone-bubble-player";
                 var pending = '';
-                if (block.sender === "npc" && setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                if (block.sender === "npc" && setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                     pending = ' phone-bubble-pending';
                 }}
                 html += '<div class="phone-bubble ' + cls + pending + '">' + setup.resolveAtRefs(block.content) + '</div>';
@@ -2658,16 +2736,18 @@ setup.openChatThread = function(appId, npcSlug) {{
                         var depReply = _getRoundReply(convReplies, blockAfterRound);
                         if (!depReply) continue;
                     }}
+                    // E3 — a past instance is history: no buttons, never pending.
+                    if (conv._past) continue;
                     // Show reply buttons
                     _hasPendingReply = true;
                     var replyPending = '';
-                    if (setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                    if (setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                         replyPending = ' phone-reply-pending';
                     }}
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + conv.id + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
                     }}
                     html += '</div>';
                 }}

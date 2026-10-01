@@ -555,3 +555,17 @@ def test_e2_pool_seen_reaches_a_save_written_before_it(tmp_path):
     sv2["game_state"]["pool_seen"] = {"home_pool": {"1": 2}}
     got2 = run_backfill(twee, [sv2], tmp_path)["saves"][0]
     assert got2["game_state"]["pool_seen"] == {"home_pool": {"1": 2}}
+
+
+@needs_node
+def test_e3_conv_cycle_reaches_a_save_written_before_it(tmp_path):
+    """E3: a game that adds a repeatable chat. An old save's phone map has no
+    conv_cycle; the backfill fills it one level into the phone sub-map, and the
+    replies the player already sent are kept."""
+    twee = build(BATCH1)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["conv_cycle"]
+    sv["game_state"]["phone"]["replies"] = {"dan_invite": [{"round": 1, "choice": 0}]}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["conv_cycle"] == {}
+    assert got["replies"] == {"dan_invite": [{"round": 1, "choice": 0}]}

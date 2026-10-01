@@ -5,6 +5,46 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E3: repeatable chats (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 3, WS-D7 ("a repeat invite after sex"). A conversation was delivered once and
+its replies were keyed by its id, so a chat could not come back; the skill's interim advice was to
+chain one-time messages.
+
+**What changed.**
+- `template_import.py`: `repeat_after_days` and `max_repeats` on `TemplatePhoneConversation`, parsed,
+  validated (whole numbers >= 1; `max_repeats` only with `repeat_after_days`), and written into the
+  phone metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (+~85 lines, phone games only): `setup._rearmPhoneConversation` re-arms a
+  delivered chat once its current instance is answered (a reply sent; read, for a chat with no reply
+  block), `repeat_after_days` have passed since it arrived or was answered, `max_repeats` is not used
+  up and its trigger still holds. `$game_state.phone.conv_cycle[id]` is the instance; instance 0
+  keeps the plain id in `replies`/`read_conversations` (so one-time chats and old saves read as
+  before), instance n uses `"id#n"`. The thread view renders every instance in order, past ones as
+  history with no reply buttons, so `_hasPendingReply` never blocks on an old instance. The unread
+  count, `sendPhoneReply` (records `answered_day`) and the reply buttons use the instance key.
+  `conv_cycle` joins the phone skeleton only in a game with a repeatable chat.
+- `references/engine.md`: new §51; §39's latch note points at it; §40's backfill row names
+  `phone.conv_cycle`.
+- Tests: `RepeatableChatSchemaTests` (4) and `RepeatableChatIntegrationTests` (2, DB build) in
+  `apps/projects/tests.py`; new `test_repeatable_chats.py` (8, headless: re-arm timing, history and
+  per-instance buttons, per-answer effects, `max_repeats`, read-only chats, trigger re-check, the
+  one-time control, the old-save load); one in `test_save_migration.py`. The old save
+  (`tests/data/e3_pre_change_save.txt`) was written at `9707f2d` and loads with `conv_cycle = {}`
+  and its answer kept as instance 0. `PhoneParity*` and `Tier2RuntimeIntegrationTests` pass
+  unchanged.
+- Cites: 430 `v2.py` and 76 `template_import.py` cites re-pointed through the line maps, each
+  checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. Rebuilds: five games byte-identical; the
+phone game, the_balance, changes in its phone engine script only (no skeleton change, no passage
+text change).
+
+**Words:** +204, running total 141,024 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine E2: event pools that remember (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** WS-D10 step 2. A `block_pool` picked `random(0, n-1)` on every render and a random canvas

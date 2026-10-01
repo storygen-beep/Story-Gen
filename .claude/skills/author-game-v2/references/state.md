@@ -117,7 +117,7 @@ belong here; only decisions, debts, and promises do.
     //               is five, the thing is probably ambient (SY2).
     //   `labels`  — which room labels this system attaches to. ⚠️ In THIS engine that is a
     //               design statement, not wiring: a canvas belongs to exactly one location
-    //               (template_import.py:2069), so the row is authored per room. SY4.
+    //               (template_import.py:2075), so the row is authored per room. SY4.
     "systems": [
       { "id": "look", "kind": "sourced", "key": "grooming",
         "fed_at": ["the_office"], "labels": ["has_mirror"],

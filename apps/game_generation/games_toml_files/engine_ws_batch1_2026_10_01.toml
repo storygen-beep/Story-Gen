@@ -12,6 +12,12 @@
 #    random_seen  a random canvas at loc_bar with chance = 1.0 and seen_weight = 0.5:
 #                 1.0 until it has fired, 0.5 after.
 #    random_plain the control: chance = 1.0 and no seen_weight, 1.0 for ever.
+#
+#  E3 — "repeatable chats":
+#    dan_invite   repeat_after_days = 2, max_repeats = 2, one reply round (+1 Dan trust):
+#                 comes back two days after she answers, at most twice.
+#    dan_note     repeat_after_days = 1 and no reply block: "answered" means read.
+#    sal_hello    a one-time chat with a reply: the control, unchanged.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -34,6 +40,82 @@ name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40 }
 flag_keys   = ["started"]
+
+[[npcs]]
+id          = "npc_dan"
+name        = "Dan"
+description = "Fixture texter."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_sal"
+name        = "Sal"
+description = "Fixture friend."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+[[phone.conversations]]
+id                = "dan_invite"
+app               = "messages"
+npc               = "npc_dan"
+notify            = "Dan texted you."
+repeat_after_days = 2
+max_repeats       = 2
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Free tonight?"
+[[phone.conversations.blocks]]
+type    = "reply"
+round   = 1
+choices = [
+  { text = "Yes.", effects = [ { targetType = "npc", npcId = "npc_dan", trait = "trust", op = "add", value = 1 } ] },
+  { text = "Not tonight." } ]
+[[phone.conversations.blocks]]
+type        = "message"
+sender      = "npc"
+content     = "Noted."
+after_round = 1
+
+[[phone.conversations]]
+id                = "dan_note"
+app               = "messages"
+npc               = "npc_dan"
+repeat_after_days = 1
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Thinking of you."
+
+[[phone.conversations]]
+id  = "sal_hello"
+app = "messages"
+npc = "npc_sal"
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "Hey you."
+[[phone.conversations.blocks]]
+type    = "reply"
+choices = [ { text = "Hey." } ]
 
 [[locations]]
 id               = "loc_home"
