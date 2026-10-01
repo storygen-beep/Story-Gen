@@ -27,7 +27,7 @@ shows his want first.
 what their players quote:
 
 1. **The fantasy.** The game's own shape, from the Want §0. Keep it; a pitch serves the fantasy the
-   game already promised.
+   game already promised, and a thread step serves it through the thread's link into the hook.
 2. **The temptation, and his want before it.** What is offered, by whom, and why she wants or needs
    it. Who moves first and why: a pressure type moves first and names the act; a nice type waits,
    so she moves; or he wants her from scene one. And **the leak** — one small, repeatable line or
@@ -69,9 +69,11 @@ never an entry.
 **1. Read the Want.** Not optional, not skimmable. Name the line this release serves. If you
 cannot, the release is unfocused — pick again.
 
-**2. Pitch — three, independent.** Three Pitcher agents, no shared context, each given a different
-relationship — the three most owed, from the pack's RELATIONSHIPS — and each naming its moment
-kind. LO picks one. Independence is the point: shared context produces three shades of one idea.
+**2. Pitch — three, independent.** Three Pitcher agents, no shared context. Two are each given one
+of the two most-owed relationships, from the pack's RELATIONSHIPS; the third is given a declared
+thread of her life (THREADS, `the-want.md` §6), pitches a step in it, and may add one new person who
+belongs to that thread (name, age, thread). The assignment is the relationship or the thread; the
+moment kind is a hint, and each pitch names its kind. LO picks one. Independence is the point: shared context produces three shades of one idea.
 See `references/agents.md`.
 
 **3. Attack, before writing.** The panel runs on the *design*, not the build. Every cheap
@@ -84,7 +86,8 @@ each line. Its only rejections are the two instant fails — a big turn forced o
 or way round, and sex used only as a punishment — each quoting the line. LO judges.
 
 **4. Write.** Events on existing surfaces. Default to **zero new locations** (*Where a release
-happens*, above) — if this release opens one, it arrives filled, not as a promise.
+happens*, above); a thread's new person arrives at a place she already has. If this release opens a
+location, it arrives filled, not as a promise.
 
 > ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
 > window, a parent location, a label — it is an amendment, not an addition.** See *The prose

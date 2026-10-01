@@ -20,7 +20,7 @@ You will be given **either**:
 ```bash
 source venv/bin/activate
 PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py <slug>   # every gate and lint
-python3 .claude/skills/author-game-v2/scripts/pitch_pack.py <slug>               # the world as facts
+python3 .claude/skills/author-game-v2/scripts/pitch_pack.py <slug>               # the world as facts (+ --thread <id>)
 ```
 
 **You may not report anything those already report.** That is not a courtesy, it is your whole
@@ -61,11 +61,13 @@ cheap.
 ## The `excitement` lens — reading a pitch, not breaking a design
 
 You are given one pitch and the slug. Run `pitch_pack.py <slug> --person <npc> --kind <kind>` for
-the pitch's person and kind, and read `references/moment-library.md`. Then return **the pitch with a
+the pitch's person and kind (a thread pitch: `--thread <id>` too, and `--person` may name its new
+person), and read `references/moment-library.md`. Then return **the pitch with a
 one-line note beside each part**:
 
-- **Before** — does it name something the pack shows as shipped on this relationship (quote the
-  pack line), or declare itself step 1 and show the want first?
+- **Before** — does it name something the pack shows as shipped on this relationship or thread
+  (quote the pack line), or declare itself step 1 and show the want first? A thread step also names
+  its link into the hook (THREADS).
 - **Each of the eight lines** — filled, specific, and about her? Flag any line that could be written
   without saying what she feels.
 - **His three halves** — his want before (and the leak), his "no" branch, and a later line where he

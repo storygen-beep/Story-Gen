@@ -10,8 +10,8 @@
 > any character as under 18 or as a school pupil now. Every moment here involves adults. Never set an
 > idea in a school, or with anyone under 18.
 
-The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); each Pitcher is given a
-different kind (`the-release.md`, "Her moment — eight lines"). A `why` marked **[my reading]** has no player
+The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); a kind given to a Pitcher is
+a hint, not its assignment (`the-release.md`, "The loop" step 2). A `why` marked **[my reading]** has no player
 comment behind it; the rest cite the player evidence in the study's game files.
 
 ## firsts · her firsts

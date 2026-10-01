@@ -5,6 +5,40 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W4: the pitchers, two main idea + one her life (World and Systems PRD, Phase 1)
+
+**Why.** WS-D2: three Pitchers still run with no shared context, but "the three most owed" can only rank people
+who already exist, so every pitch stayed inside the hook. Two now take the two most-owed relationships; the third
+takes a declared thread of her life (W2), pitches a step in it, and may add one new person who belongs to that
+thread (name, age, thread). Zero new places stays. Assignment is by relationship or thread; the moment kind is a
+hint (this reconciles the two schemes the files carried). Lands after B7 (the reader accepts strangers) and W5
+(the pack carries threads).
+
+**What changed.**
+- `.claude/agents/v2-pitcher.md`: frontmatter; the three-way split; the caller gives a person or a thread, the kind
+  is a hint; `--thread` command; idea phase step 1 in a thread; reads "Her life — the threads" (`the-want.md` §6)
+  when given a thread; the rule on the next step covers a thread step and its link; the hand-on rule becomes "a
+  new person only in a thread pitch", with the hand-on kept for relationships and its citation fixed (the
+  film-production quote is `the-arc.md` A5, not A4); "you pitch content, not systems" becomes "a pitch may add a
+  rung or a person to an existing system, never a new system"; line 1 of the eight; a **New** slot (name, thread,
+  age).
+- `.claude/agents/v2-attack.md`: the pitch_pack calls (`--thread`, the new person) and "Before" for a thread step.
+- `references/the-release.md`: eight lines 1 (a thread step serves the fantasy through its link), loop step 2
+  (two + one, kind as hint), step 4 (a thread's new person arrives at a place she already has).
+- `references/agents.md`: the Pitcher's cost paragraph, what the pack holds, what each returns, and the
+  assignment paragraph (LO, 2026-10-01).
+- `SKILL.md`: the `want` dispatch row, the agent roster line, the `pitch_pack.py` bullet (THREADS).
+- `templates/idea.md` §4 and `references/moment-library.md` intro (a given kind is a hint).
+- `tests/test_pitch_pack_threads.py`: one assertion no longer spells the old phrase, so the Verify grep is clean.
+- Not here: `the-arc.md` A14 (W4b, protected).
+
+**Verified.** `grep -rn "three most owed" .claude/` gives 0 hits; pytest 468 passed; `--selfcheck` current
+(orphans 3).
+
+**Words:** +174, running total 140,190 / 149,283.
+
+---
+
 ## 2026-10-01 — World W5 · PROTECTED (tools, LO approved, Q9): pitch_pack.py threads and the new person
 
 **Why.** WS-D2: two Pitchers take the top two most-owed people and the third pitches a step in a declared thread

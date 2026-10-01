@@ -88,7 +88,7 @@ def test_built_pack_threads_and_the_caller_split(tmp_path, monkeypatch, capsys):
     out = built(tmp_path, monkeypatch, capsys)
     assert "THREADS — 2" in out
     assert "top two to two Pitchers, plus one thread" in " ".join(out.split())
-    assert "three most owed" not in out and "top three" not in out
+    assert "top three" not in out
     out = built(tmp_path, monkeypatch, capsys, person="npc_new")
     assert "unknown person `npc_new`" in out
     out = built(tmp_path, monkeypatch, capsys, person="npc_new", thread="dating")

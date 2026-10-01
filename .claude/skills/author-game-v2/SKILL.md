@@ -173,7 +173,7 @@ boundary and wait for LO's pick or signature** before starting the next phase's 
 |---|---|---|---|
 | *(no state file)* | **pitch the premise** — three premises, each a different shape | `the-want.md` §0 table | LO picks one (it becomes `want.fantasy_shape`) → write the Want |
 | *(no state file)*, premise picked | write the Want, create the state file | `references/the-want.md` · `templates/want.md` | the Want is recorded → `want` |
-| `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, one per man, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
+| `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, two on the main men and one on a thread of her life, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
 | `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **the sheets** — the design LO reads and signs, before any TOML. Where LO writes them, hand drafts over in `proposals/` (S13) | `references/the-sheets.md` S13 · `templates/sheets/` | every sheet is [READY] and signed → `sheets` |
@@ -224,8 +224,8 @@ are not using.
 climb or does the CAST?** The field splits 8 roster / 9 ladder with nothing between them. Declare `board.who_climbs` before naming a meter.
 
 **The agent roster is in `references/agents.md`, and all six are BUILT** —
-`v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
-relationship each), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
+`v2-player` (plays the build), `v2-pitcher` (three per release, no shared context: two on the
+most-owed relationships, one on a thread of her life), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
 instance, before the build; the `excitement` lens reads each pitch), `v2-listener` (loop step 8,
 what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the nine scene tests in
 `register.md`, "What a scene contains", required on every touched canvas; its verdicts gate). The Panel has no instrument of its own (`agents.md`).
@@ -473,7 +473,8 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
 - **`scripts/pitch_pack.py <slug> --person <npc> --kind <moment_kind>` is the world a Pitcher may
   pitch into.** It opens with the promise, the moment kinds already shipped, that kind's slice of
   `references/moment-library.md`, the clips on disk, and RELATIONSHIPS — each person's steps so far,
-  what they set and whether anything reads it, sorted by who is most owed. The loop (`the-release.md` step 2)
+  what they set and whether anything reads it, sorted by who is most owed — and THREADS, her life
+  (`--thread <id>` for the third Pitcher). The loop (`the-release.md` step 2)
   runs three Pitchers with **no shared context** — that is the design, and its unpaid cost is that
   a Pitcher with no context does not know what the game already contains and will name a location
   that exists or a character who does not. The pack is that context, generated instead of

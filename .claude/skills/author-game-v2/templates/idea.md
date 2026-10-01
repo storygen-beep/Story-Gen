@@ -58,9 +58,10 @@ Record them as `want.companion`, `want.pressure`, `want.face` and `want.threads`
 
 ## 4. The first step with one person — not the game's opening
 
-Three `v2-pitcher`s, one per man, run at once with no shared context; each returns step 1 with his
-person in eight lines (`references/the-release.md`, "Her moment — eight lines"). LO picks one. Keep
-the other two here: they become later steps on SP2.
+Three `v2-pitcher`s run at once with no shared context: two on the main men, one on a thread of her
+life (§3), which may add one new person in that thread. Each returns step 1 in eight lines
+(`references/the-release.md`, "Her moment — eight lines"). LO picks one. Keep the other two here:
+they become later steps on SP2.
 
 <the chosen step's eight lines, one sentence each>
 
