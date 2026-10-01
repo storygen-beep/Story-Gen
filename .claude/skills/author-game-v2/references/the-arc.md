@@ -584,9 +584,15 @@ Four rules follow:
 
 ---
 
-## A15 · Her climb into paid sex — introduced, a first time, then the repeatable
+## A15 · Her climb into paid sex — the lewd ladder of a money system
 
 *(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`. Gate `her climb`.)*
+
+Paid sex is a money system (`the-systems.md` SY8), and this climb is its lewd ladder: each rung opens
+an act and better pay. **The model is Shady Deals' stroll:** the price is built from her stats
+(charm × 10–24, plus 0–120, plus sluttiness × 10–25), the corner picks the act, and the price is on
+screen before she agrees ([Spot Work]). **The failure is Course of Temptation's gloryholes:** 38
+passages, and none pays a cent (round 9b, `cards/sex_for_pay.md`; `templates/cards/sex_for_pay.md`).
 
 - **Introduced first.** Someone raises it in a one-time scene before the activity appears — the
   activity's version of "every hub is met first" (`the-first-hour.md` F5). 4 of 5 games do (R1:76).

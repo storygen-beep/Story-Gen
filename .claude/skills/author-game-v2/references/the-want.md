@@ -293,9 +293,9 @@ Name which. "It's hot" is not a charge; it is the absence of one.
 Added 2026-09-04. It had never been written down anywhere in this skill, and its absence is what
 produced ten pitches in a row where a man collects money and the sex is how the money gets settled.
 
-**Nothing here teaches that.** Grepping `references/`, `SKILL.md` and `templates/` for
-`prostitut|sex work|escort|paid sex|sex for money|instead of money` returns **zero hits**. It is
-emergent: §1b used to ask for a collector, §4's first charge is *"someone with power over her"* — the
+**Nothing here taught that when it was written.** Paid sex is now taught on purpose — as a money
+system's lewd ladder (`the-arc.md` A15) and with its own card (`templates/cards/sex_for_pay.md`). The
+collector-who-fucks-her shape was emergent: §1b used to ask for a collector, §4's first charge is *"someone with power over her"* — the
 collector already is that — and `the-surfaces.md` requires the repeatable surface be explicit. Three
 defensible rules compose into one architecture, and nobody chose it.
 

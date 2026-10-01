@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S5b: A15 as a money system's lewd ladder, and the stale "zero hits" line
+
+**Why.** WS-D3/WS-D4: paid sex is a money system, and A15 is its lewd ladder. And `the-want.md` §4a claimed a grep
+for paid sex "returns zero hits" in the skill — false since A15 and `the-voice.md` taught it.
+
+**What changed.** `references/the-arc.md` A15 (not protected): the heading becomes "Her climb into paid sex — the
+lewd ladder of a money system"; one paragraph names Shady Deals' stroll as the model (price built from her stats,
+the corner picks the act, the price on screen before she agrees, `[Spot Work]`) and Course of Temptation's
+gloryholes as the failure (38 passages, none pays; round 9b `cards/sex_for_pay.md`), pointing at
+`templates/cards/sex_for_pay.md`. The A15 bullets are unchanged. `references/the-want.md` §4a: the "zero hits"
+sentence is replaced by a line saying paid sex is now taught on purpose (A15 and the card).
+
+**Verified.** `grep -n "returns \*\*zero hits\*\*" references/the-want.md` gives 0 hits; `[Spot Work]` exists in
+the Shady Deals passages; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +91, running total 142,049 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S5a · PROTECTED (the arc, WS-D11): A5's two ladders
 
 **Why.** WS-D4: SY8 now says a system runs one ladder by default and two only if they touch; A5's "two routes means
