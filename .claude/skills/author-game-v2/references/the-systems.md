@@ -371,7 +371,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    that touch, grades feeding each professor's favor (`templates/cards/college.md`). Its River Rat bar
    keeps rank and flirtiness apart, joined only by event tips (round 9b, `traces/job_cot_river_rat.md`).
    A second ladder with its own rank waits on the engine's rank per job: today `fast_jobs` keeps one
-   global count (`v2.py:3098`).
+   global count (`v2.py:3184`).
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
    9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and
@@ -382,7 +382,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
 5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). The engine's `block_pool` has no memory yet
-   (`v2.py:16235`), so author the weighting by hand.
+   (`v2.py:16328`), so author the weighting by hand.
 
 **Reputation is meters until the engine can spread gossip.** Course of Temptation and Shady Deals run it as a
 system (`templates/cards/reputation.md`); our engine has no reputation primitive (round 9b §6). Until it does,

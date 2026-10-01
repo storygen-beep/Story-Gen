@@ -1430,7 +1430,7 @@ co-ed showers to get clean)"* (`cot_27_database_needs.js:2-3`, round 9b `cards/n
   (`templates/cards/needs.md`) and is declared in `board.needs[]` (`the-meters.md` M8–M10).
 
 The pieces exist: `[player.trait_decay]` (§11) is the clock, and `trait_status_text` is the sidebar
-band its own spec comment names for this (`template_import.py:4156-4160`).
+band its own spec comment names for this (`template_import.py:4326-4330`).
 
 **The old ban's evidence, kept as counts only** (both games fail the adults-only rule):
 `degrees-of-lewdity` built hygiene and switched it off (1,273 writes, one read site, in a widget that

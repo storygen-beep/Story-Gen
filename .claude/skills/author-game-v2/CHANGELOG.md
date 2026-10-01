@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Merge pointer fix: Phases 2–3 citations re-pointed to the merged engine
+
+**Why.** The skill branch (Phases 2–3) cited `v2.py` and `template_import.py` lines as they were at
+`ed2f1c6`; the engine batch merged in `774e27e` moved those lines. `cite_check` cannot anchor most of
+them and does not scan `templates/cards/`.
+
+**What changed.** Numbers only, on the lines the skill branch added since `ed2f1c6`: 46 citations on 41
+lines in `references/engine.md`, `the-phone.md`, `the-systems.md` and 15 cards in `templates/cards/`.
+41 went through the line map from `ed2f1c6` to the merged engine files (each checked to land on the same
+source line). Five were placed by hand: three pointed at lines the engine rewrote (the phone delivery
+latch, now `v2.py:2356` / `:2347`; the plain `block_pool` pick, now `v2.py:16328`), and two were wrong
+before the merge (`[phone] purchase_flag` pointed at a stage-stall comment, now `template_import.py:446`;
+the job card's `costs` pointed at a comment line, now `template_import.py:764`). Every citation in
+`templates/cards/` (38) was read against the source.
+
+**Verified.** `cite_check --fix` then finds nothing to move; SKILL.md + references at 0. Selfcheck, skill
+pytest, the Django suite and two scratch rebuilds: see the merge report.
+
+**Words:** 0, running total 143,674 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine E4: `weekday` and `hours_since_flag` (World and Systems PRD, Phase 7; opt-in by use)
 
 **Why.** WS-D10 step 4. "Only on Saturday" and "three hours after he texts" could not be written as

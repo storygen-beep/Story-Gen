@@ -36,7 +36,7 @@
 - Job complaints across the field: low pay 7, grind 6, repetitive 5. They are about pace, not about working.
 
 ## Our engine today (round 9b §6)
-- No job primitive: a shift is a scheduled canvas with `costs` (`template_import.py:759`) and
-  `max_triggers_per_day` (`template_import.py:751`). Rank and performance are hand-built traits and flags.
-- Phone `fast_jobs` keep one global XP for all jobs, no per-job rank (`v2.py:3098`).
-- No computed pay (`v2.py:15610`, "only 'random' is supported"); author fixed wages per rank instead.
+- No job primitive: a shift is a scheduled canvas with `costs` (`template_import.py:764`) and
+  `max_triggers_per_day` (`template_import.py:757`). Rank and performance are hand-built traits and flags.
+- Phone `fast_jobs` keep one global XP for all jobs, no per-job rank (`v2.py:3184`).
+- No computed pay (`v2.py:15899`, "only 'random' is supported"); author fixed wages per rank instead.

@@ -314,7 +314,7 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 classed (class b), 32 of them on one game's PIN (`new-life-project`, numbers only). In Her Own
 Hands puts the phone in the menu from the first minute, with no step to get it, and draws 0 such
 complaints; Cupid's Way also 0 (round 9a §5). Course of Temptation's "the phone needs a pocket"
-rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:1362`) unset:
+rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:446`) unset:
 it hides the whole phone until a flag is set.
 
 **Showing a locked app is good; showing it without saying what opens it is a support ticket.** The
@@ -334,8 +334,8 @@ there is not.
 Cupid's Way marks the contact with ❕ and turns the Study button yellow while a text waits. Shady
 Deals' phone covered the screen, drew 5 complaints, and was fixed in three steps: a hide button, a
 glow on a call, the hidden state remembered (round 9a §5 class f, 8 failures). Our engine already
-pulls: a delivered conversation raises the sidebar badge (`v2.py:3229`) and a three-second toast
-(`v2.py:2270`) whose text is the conversation's `notify`.
+pulls: a delivered conversation raises the sidebar badge (`v2.py:3315`) and a three-second toast
+(`v2.py:2280`) whose text is the conversation's `notify`.
 
 **The phone answers *what now*, one thing at a time.** Lostness, not grind, is this genre's disease
 — 15.5% of player comments against grind's 0.9% (Process Review, Round 1) — and in the phone study
@@ -361,7 +361,7 @@ lead anywhere — hang out, date, booty call; its friendly texts only nudge atti
 a day (round 9a §1a). Every message on a thread serves a booking or the loop.
 
 **Until the engine repeats a conversation, chain one-time ones.** A conversation delivers once,
-ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2289`). So each
+ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2356`). So each
 invite is its own `[[phone.conversations]]` entry, caused by a flag the last link set and timed
 with `days_since_flag`:
 
@@ -475,12 +475,12 @@ least 10 of the 17 top games with a phone, a call or a text starts a scene witho
 (Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
 and credits links.
 
-**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3144`):
-an option plays only when she is already in that canvas's room (`v2.py:3161`), and a canvas that
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3230`):
+an option plays only when she is already in that canvas's room (`v2.py:3247`), and a canvas that
 requires him present needs him there. So a summon is a launcher option pointing at a canvas in
 **her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are
 player-sent too, but they only move traits; give one a `conditions` block on a flag the world set,
-and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:412`) — without it the
+and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:418`) — without it the
 cap is per NPC and one topic starves the others.
 
 ---

@@ -39,5 +39,5 @@
 
 ## Our engine today (round 9b §6)
 - A weekly timetable is composable from schedule rows and conditions.
-- A computed bill (±20% of an amount) is not built (`v2.py:15610`, "only 'random' is supported"); author
+- A computed bill (±20% of an amount) is not built (`v2.py:15899`, "only 'random' is supported"); author
   fixed amounts per GPA band instead.

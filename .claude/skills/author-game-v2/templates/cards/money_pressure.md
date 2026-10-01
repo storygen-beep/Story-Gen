@@ -41,8 +41,8 @@
   lmao"* (CoT, mopoga#68535). The bill must stay inside ~15–30 starter hours a week.
 
 ## Our engine today (round 9b §6)
-- A recurring bill that escalates by total paid exists: `rent_stages` (`template_import.py:485`) and
-  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13530`); `rent_on_short` (`template_import.py:490`)
+- A recurring bill that escalates by total paid exists: `rent_stages` (`template_import.py:491`) and
+  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13784`); `rent_on_short` (`template_import.py:496`)
   carries a short payment forward, like back debt.
-- A computed bill (±20% for grades, +$200 per child) is not built (`v2.py:15610`, "only 'random' is
+- A computed bill (±20% for grades, +$200 per child) is not built (`v2.py:15899`, "only 'random' is
   supported"); author fixed amounts per band instead.
