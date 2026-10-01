@@ -41,8 +41,8 @@
   lmao"* (CoT, mopoga#68535). The bill must stay inside ~15–30 starter hours a week.
 
 ## Our engine today (round 9b §6)
-- A recurring bill that escalates by total paid exists: `rent_stages` (`template_import.py:504`) and
-  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13939`); `rent_on_short` (`template_import.py:509`)
+- A recurring bill that escalates by total paid exists: `rent_stages` (`template_import.py:505`) and
+  `setup.rentStageIndex = function (totalPaid)` (`v2.py:13955`); `rent_on_short` (`template_import.py:510`)
   carries a short payment forward, like back debt.
 - A computed bill (±20% for grades, +$200 per child) is not built: rent `amount` and `costs` take numbers only
   (a stat-based value is an effect's, `references/engine.md` §3); author fixed amounts per band instead.

@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: phone actions that cost time — `time_cost` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8; the-phone.md P5 ("using the phone costs too"). No phone action spent
+time: a shift worked from the phone, a call or a selfie took zero minutes.
+
+**What changed.**
+- `generators/v2.py`: `setup.spendPhoneTime(minutes)` spends through `advanceTime` (so the day can roll
+  and the daily tick run, as on a wait button; the click handlers already commit the moment) after a
+  reply choice, a daily topic, a post action and a fast job that carry `time_cost`;
+  `setup.phoneTimeTag` adds "· Nm" to that action's button or job line. Without `time_cost`, nothing
+  changes.
+- `template_import.py`: `time_cost` on `TemplateFastJob` and `TemplatePhoneDailyTopic` (into metadata
+  only when set); reply choices and post actions are raw dicts and carry it through. All four must be
+  whole minutes ≥ 1, or a build error.
+- `references/engine.md` §51: the time gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (585 moved; 712 endpoints identical, one range end
+  is the line this change edited, checked by hand); `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+3, headless: a reply, a daily topic and a post spend 20, 30 and
+15 minutes, an action without a cost spends none; a 420-minute shift from 18:00 rolls to day 2 at 01:00
+and the daily tick runs; the buttons read "· 15m" / "· 20m" / "· 420m", an uncosted choice has no tag).
+`PhoneTimeCostTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +52, running total 144,989 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: the `custom` app renders its `passage` (World and Systems PRD, Phase 7)
 
 **Why.** LO's engine order, step 8. `openPhoneApp` renders a custom app only with `appDef.passage`, which

@@ -433,6 +433,7 @@ class TemplatePhoneDailyTopic:
     image: str = ""
     corruption_min: Optional[int] = None
     cooldown: str = ""
+    time_cost: Optional[int] = None  # E8 — minutes the topic takes (None = none)
 
 
 @dataclass
@@ -927,6 +928,7 @@ class TemplateFastJob:
     cooldown_days: int = 0   # days locked after working it
     time_period: str = ""    # optional game.time gate (e.g. "M","A")
     money_trait: str = "money"
+    time_cost: Optional[int] = None  # E8 — minutes a shift takes (None = none)
     # E6 — a rank per job: [{xp, title, income}], xp rising. The rank is the last one
     # whose xp she has reached on THIS job ($game_state.fast_jobs.job_xp[id]); its
     # income replaces the job's. Empty = no ranks, the job pays `income` as before.
@@ -3127,6 +3129,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 money_trait=_require_str(fj, "money_trait", "money") or "money",
                 # E6 — kept raw; validate() checks the ladder.
                 ranks=list(fj.get("ranks") or []),
+                time_cost=fj.get("time_cost"),  # E8 — kept raw; validate() checks it
             )
         )
 
@@ -3338,6 +3341,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     image=_require_str(dt_raw, "image", ""),
                     corruption_min=int(_dt_corr_min) if _dt_corr_min is not None else None,
                     cooldown=_require_str(dt_raw, "cooldown", ""),
+                    time_cost=dt_raw.get("time_cost"),  # E8 — validate() checks it
                 ))
 
             phone_gallery_items: List[TemplatePhoneGalleryItem] = []
@@ -4995,10 +4999,28 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(f"{ctx}.on_ignore is read only with ignore_after_days")
                 errors.extend(_validate_phone_effect_set(conv.on_ignore, f"{ctx}.on_ignore",
                                                          npc_id_set))
+            for bi, block in enumerate(conv.blocks):  # E8 — time_cost on a reply choice
+                for chi, ch in enumerate(block.choices or []):
+                    if isinstance(ch, dict) and "time_cost" in ch and not _is_whole_days(ch["time_cost"]):
+                        errors.append(f"{ctx}.blocks[{bi}].choices[{chi}].time_cost must be a "
+                                      f"whole number of minutes >= 1 (got {ch['time_cost']!r})")
+        # E8 — time_cost on a daily topic and on a post action (minutes).
+        for dti, dt in enumerate(phone.daily_topics):
+            if dt.time_cost is not None and not _is_whole_days(dt.time_cost):
+                errors.append(f"phone.daily_topics[{dti}].time_cost must be a whole number of "
+                              f"minutes >= 1 (got {dt.time_cost!r})")
+        for ai, app in enumerate(phone.apps):
+            for pai, act in enumerate(app.post_actions or []):
+                if isinstance(act, dict) and "time_cost" in act and not _is_whole_days(act["time_cost"]):
+                    errors.append(f"phone.apps[{ai}].post_actions[{pai}].time_cost must be a "
+                                  f"whole number of minutes >= 1 (got {act['time_cost']!r})")
 
     # E6 — a rank per job. Errors: a misordered or malformed ladder would build clean
     # and pay the wrong rank, or never promote her.
     for ji, job in enumerate(template.fast_jobs):
+        if job.time_cost is not None and not _is_whole_days(job.time_cost):  # E8
+            errors.append(f"fast_jobs[{ji}].time_cost must be a whole number of minutes >= 1 "
+                          f"(got {job.time_cost!r})")
         last_xp = -1
         for ri, rank in enumerate(job.ranks):
             rctx = f"fast_jobs[{ji}].ranks[{ri}]"
@@ -8182,7 +8204,8 @@ def _assemble_project_metadata(project, template):
              "cooldown_days": j.cooldown_days, "time_period": j.time_period,
              "money_trait": j.money_trait,
              # E6 — emitted only when set, so a game without ranks is byte-identical.
-             **({"ranks": j.ranks} if j.ranks else {})}
+             **({"ranks": j.ranks} if j.ranks else {}),
+             **({"time_cost": j.time_cost} if j.time_cost is not None else {})}
             for j in template.fast_jobs
         ]
     if template.bank is not None:
@@ -8566,6 +8589,7 @@ def _assemble_project_metadata(project, template):
                     "image": dt.image,
                     "corruption_min": dt.corruption_min,
                     "cooldown": dt.cooldown,
+                    **({"time_cost": dt.time_cost} if dt.time_cost is not None else {}),
                 }
                 for dt in phone.daily_topics
             ],

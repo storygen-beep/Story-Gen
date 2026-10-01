@@ -48,7 +48,7 @@ what their players quote:
    player would quote.
 8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
    this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
-   canvas sets (`validate_flag_chains()`, `v2.py:13678`). The live goal, mystery or rival beat it moves,
+   canvas sets (`validate_flag_chains()`, `v2.py:13694`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
    enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
@@ -248,8 +248,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:18669   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:18673   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:18685   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:18689   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -421,8 +421,8 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12937`, `:15197`,
-`:15061`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12953`, `:15213`,
+`:15077`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 

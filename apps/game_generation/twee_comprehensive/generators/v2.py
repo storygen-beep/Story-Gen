@@ -2362,6 +2362,18 @@ setup.phoneAppVisible = function(appOrId) {{
     if (!app) return false;
     return !(app.conditions && app.conditions.items) || setup.triggerConditionsSatisfied(app.conditions);
 }};
+// E8 — `time_cost` (minutes) on a phone action: a reply choice, a daily topic, a post
+// action, a fast job. Spent through advanceTime, so the day can roll (rent due, the daily
+// tick) exactly as on a wait button; the click handler commits the moment. Opt-in: an
+// action with no time_cost spends nothing and its label is unchanged.
+setup.spendPhoneTime = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    if (m > 0 && typeof window.advanceTime === 'function') window.advanceTime(m);
+}};
+setup.phoneTimeTag = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    return m > 0 ? ' · ' + m + 'm' : '';
+}};
 // The trait and flag effects a reply choice carries ({{effects, flagEffects}}), applied
 // with no canvas around them: a reply, and E3b's on_ignore.
 setup.applyPhoneEffectSet = function(src) {{
@@ -2583,6 +2595,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
                 var seffs = choice.scheduleEffects || [];
                 for (var sj = 0; sj < seffs.length; sj++) {{ setup.scheduleEvent(seffs[sj]); }}
                 setup.showEffectNotification();
+                setup.spendPhoneTime(choice.time_cost);  // E8
             }}
             break;
         }}
@@ -2647,6 +2660,7 @@ setup.sendDailyChat = function(npcSlug, topicId) {{
         }}
     }}
     setup.showEffectNotification();
+    setup.spendPhoneTime(topic.time_cost);  // E8
     setup.refreshPhoneView();
 }};
 
@@ -2811,7 +2825,7 @@ setup.openChatThread = function(appId, npcSlug) {{
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + setup.phoneTimeTag(choices[ri].time_cost) + '</button>';
                     }}
                     html += '</div>';
                 }}
@@ -2856,7 +2870,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (ph.corruption_min != null && _corr < ph.corruption_min) {{
                 photoHtml += '<div class="phone-daily-locked">🔒 ' + setup.resolveAtRefs(ph.player_message) + '</div>';
             }} else if (npcDc.topic_days[ph.id] !== currentDayKey) {{
-                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + '</button>';
+                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + setup.phoneTimeTag(ph.time_cost) + '</button>';
             }}
         }}
         // Legacy "Say something" — per-NPC 1/day over non-photo topics.
@@ -2876,7 +2890,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             }}
             var shown = available.slice(0, 3);
             for (var sti = 0; sti < shown.length; sti++) {{
-                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + '</button>';
+                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + setup.phoneTimeTag(shown[sti].time_cost) + '</button>';
             }}
         }}
         if (photoHtml || sayHtml) {{
@@ -2967,7 +2981,7 @@ setup._renderSocialFeed = function(appId, appLabel) {{
             }} else if (usedToday >= cap) {{
                 html += '<div class="phone-daily-locked">' + (act.label || 'Post') + ' ✓</div>';
             }} else {{
-                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + '</button>';
+                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + setup.phoneTimeTag(act.time_cost) + '</button>';
             }}
         }}
         html += '</div>';
@@ -3029,6 +3043,7 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     setup.pendingEffects = [];
     setup.applyAndNotifyTrait('player', null, trait, 'add', gain, false, null);
     setup.showEffectNotification();
+    setup.spendPhoneTime(act.time_cost);  // E8
     setup._renderSocialFeed(appId, appDef.label || '');
 }};
 
@@ -3236,7 +3251,7 @@ setup._renderFastJobs = function(appId, appLabel) {{
         var _rk = (j.ranks && j.ranks.length) ? setup.fastJobRank(j) : null;
         if (_rk && _rk.rank) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.rank.title + (_rk.next ? ' · ' + _rk.xp + '/' + _rk.next.xp + ' xp' : '') + '</div>';
         else if (_rk && _rk.next) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.xp + '/' + _rk.next.xp + ' xp</div>';
-        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(setup.fastJobIncome(j)) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
+        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(setup.fastJobIncome(j)) + setup.phoneTimeTag(j.time_cost) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
         if ((fj.xp || 0) < (j.xp_req || 0)) html += '<div class="phone-daily-locked">🔒 Need more XP</div>';
         else if (cd > 0) html += '<div class="phone-daily-locked">Again in ' + cd + 'd</div>';
         else html += '<button class="phone-job-btn" data-job-id="' + j.id + '">Work</button>';
@@ -3284,6 +3299,7 @@ setup.doFastJob = function(jobId) {{
             setup._notifyPhoneDelivery(['⭐ ' + job.name + ': ' + _after.title]);
         }}
     }}
+    setup.spendPhoneTime(job.time_cost);  // E8
     fj.cooldowns[jobId] = Number(job.cooldown_days || 0);
     setup._renderFastJobs(setup._phoneApp, '');
 }};

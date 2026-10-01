@@ -10,7 +10,9 @@ Each part is opt-in and has its own section below:
     a stale tap does nothing, and its chats are not counted unread;
   * a `custom` app renders its `passage` inside the phone (before, the importer never
     sent the field and every custom app fell to "Coming Soon"). A canvas id resolves to
-    the canvas's entry passage, as a launcher option does.
+    the canvas's entry passage, as a launcher option does;
+  * `time_cost` (minutes) on a reply choice, a daily topic, a post action and a fast job
+    spends time through advanceTime, so the day can roll; its button says "· Nm".
 
     pytest apps/game_generation/tests/test_phone_outward.py -q
 """
@@ -101,4 +103,62 @@ def test_a_custom_app_renders_its_passage(html):
         assert "Coming Soon" not in g.js("() => jQuery('.phone-frame').text()")
         assert g.js("() => SugarCube.setup.phone_data.apps.filter(a => a.id === 'camera')[0].passage") \
             == "Canvas_pay_desk_Node_desk"
+        assert g.errors == []
+
+
+# ── time_cost ────────────────────────────────────────────────────────────────
+
+
+def _clock(g):
+    ts = g.sv("game_state.time_state")
+    return ts["day"], ts["current_hour"], ts.get("current_minute", 0)
+
+
+def _minutes(g):
+    d, h, m = _clock(g)
+    return (d * 24 + h) * 60 + m
+
+
+@needs_browser
+def test_each_phone_action_spends_its_time(html):
+    with open_game(html) as g:
+        _start(g)
+        t0 = _minutes(g)
+        g.js("() => SugarCube.setup.sendPhoneReply('ana_ask', 0, 1)")       # 20
+        assert _minutes(g) == t0 + 20
+        g.js("() => SugarCube.setup.sendDailyChat('npc_sal', 'sal_call')")   # 30
+        assert _minutes(g) == t0 + 50
+        g.js("() => SugarCube.setup.sendSocialPost('feed', 0)")             # 15
+        assert _minutes(g) == t0 + 65
+        assert g.sv("player.core_traits.followers") == 1
+        g.js("() => SugarCube.setup.sendPhoneReply('sal_hello', 0, 1)")     # no time_cost
+        assert _minutes(g) == t0 + 65
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_long_shift_rolls_the_day(html):
+    with open_game(html) as g:
+        day, hour, _ = _clock(g)
+        assert hour == 18
+        tips = g.sv("player.core_traits.tips")
+        g.js("() => SugarCube.setup.doFastJob('night_shift')")              # 420 = 7h
+        assert _clock(g)[:2] == (day + 1, 1)
+        assert g.sv("player.core_traits.tips") == tips + 3  # the daily tick ran
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_timed_action_says_so_on_its_button(html):
+    with open_game(html) as g:
+        _start(g)
+        g.js("() => { SugarCube.setup.openPhone(); SugarCube.setup.openPhoneApp('jobs'); }")
+        board = g.js("() => jQuery('.phone-frame').text()")
+        assert "$1 · 420m" in board
+        g.js("() => { SugarCube.setup.openPhone(); SugarCube.setup.openPhoneApp('feed'); }")
+        assert "Selfie · 15m" in g.js("() => jQuery('.phone-frame').text()")
+        thread = g.js("""() => { SugarCube.setup.openPhone();
+                                SugarCube.setup.openChatThread('messages', 'npc_ana');
+                                return jQuery('.phone-frame').text(); }""")
+        assert "Sure. · 20m" in thread and "Can't. · " not in thread
         assert g.errors == []

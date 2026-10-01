@@ -37,5 +37,5 @@
 
 ## Our engine today (round 9b §6)
 - Missing as a system (the skill has 0 hits for shoots); build it from canvases with tier conditions.
-- Pay of tier + Looks reads two traits, and a stat-based value reads one (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:6846`)):
+- Pay of tier + Looks reads two traits, and a stat-based value reads one (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:6862`)):
   author one value on Looks per tier.

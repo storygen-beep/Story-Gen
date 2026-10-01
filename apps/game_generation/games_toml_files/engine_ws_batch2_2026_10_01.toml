@@ -31,6 +31,8 @@
 #                 flag is set, and its delivered chat (kai_secret) is not counted unread.
 #    camera       a custom app whose passage is a canvas id (pay_desk): its entry passage.
 #    notes        a custom app whose passage is a passage name (Canvas_pay_desk_Node_paid).
+#    time_cost    ana_ask's "Sure." takes 20 minutes; sal_call (a daily topic) 30; the feed's
+#                 Selfie 15; night_shift (a fast job) 420, which rolls the day from 18:00.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -51,7 +53,7 @@ starting_week = 1
 id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
-core_traits = { energy = 100, money = 40, charm = 10, tips = 0 }
+core_traits = { energy = 100, money = 40, charm = 10, tips = 0, followers = 0 }
 flag_keys   = ["started", "ignored_ana", "matched_kai", "has_secret_app"]
 
 [[npcs]]
@@ -99,6 +101,12 @@ label = "Jobs"
 id    = "dates"
 type  = "dating"
 label = "Dates"
+
+[[phone.apps]]
+id           = "feed"
+type         = "social_feed"
+label        = "Feed"
+post_actions = [ { label = "Selfie", followers_min = 1, followers_max = 1, counter_trait = "followers", time_cost = 15 } ]
 
 [[phone.apps]]
 id         = "secret"
@@ -181,7 +189,7 @@ content = "Coffee tomorrow?"
 type    = "reply"
 round   = 1
 choices = [
-  { text = "Sure.", effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = 1 } ] },
+  { text = "Sure.", time_cost = 20, effects = [ { targetType = "npc", npcId = "npc_ana", trait = "trust", op = "add", value = 1 } ] },
   { text = "Can't." } ]
 
 [[phone.conversations]]
@@ -236,6 +244,20 @@ income = { type = "trait", trait = "charm", mult = 2, add = 50, max = 100 }
 id     = "flat"
 name   = "Flat"
 income = 20
+
+[[fast_jobs]]
+id        = "night_shift"
+name      = "Night shift"
+income    = 1
+time_cost = 420
+
+[[phone.daily_topics]]
+id             = "sal_call"
+npc            = "npc_sal"
+player_message = "Call Sal."
+npc_response   = "Talked for ages."
+cooldown       = "per_topic"
+time_cost      = 30
 
 [[fast_jobs]]
 id     = "bar_job"

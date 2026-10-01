@@ -6461,6 +6461,42 @@ class PhoneCustomAppPassageTests(SimpleTestCase):
         self.assertTrue(any("passage is read only on a custom app" in e for e in errors), errors)
 
 
+class PhoneTimeCostTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `time_cost` on phone actions."""
+
+    def _with_costs(self, cost=30):
+        d = _toml_with_stat_pay()
+        d["fast_jobs"][0]["time_cost"] = cost
+        d["phone"] = _toml_with_phone()["phone"]
+        d["npcs"] = _toml_with_phone()["npcs"]
+        d["phone"]["daily_topics"][0]["time_cost"] = cost
+        d["phone"]["apps"][1]["post_actions"] = [{"label": "Selfie", "time_cost": cost}]
+        d["phone"]["conversations"][0]["blocks"].append(
+            {"type": "reply", "choices": [{"text": "ok", "time_cost": cost}]})
+        return d
+
+    def test_costs_validate_and_reach_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        t = normalize(self._with_costs())
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        self.assertEqual(p.metadata["fast_jobs"][0]["time_cost"], 30)
+        self.assertEqual(p.metadata["phone_settings"]["daily_topics"][0]["time_cost"], 30)
+        self.assertNotIn("time_cost", p.metadata["phone_settings"]["daily_topics"][1])
+
+    def test_bad_costs_are_errors(self):
+        errors = validate(normalize(self._with_costs(cost=0)))
+        for where in ("fast_jobs[0].time_cost", "phone.daily_topics[0].time_cost",
+                      "phone.apps[1].post_actions[0].time_cost",
+                      "phone.conversations[0].blocks[1].choices[0].time_cost"):
+            self.assertTrue(any(where in e for e in errors), (where, errors))
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 
