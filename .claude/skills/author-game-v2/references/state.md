@@ -155,7 +155,7 @@ belong here; only decisions, debts, and promises do.
         "costs": "nothing", "shuts": "under 20 she will not go out" }
     ],
     // SP5 and SP6 — the cast's width and the rule for adding one; where it is played, and clips.
-    "cast":  { "width": 4, "adding_rule": "a new person brings a place, a ladder, and why she wants them" },
+    "cast":  { "width": 4, "adding_rule": "a new person brings a thread (or joins one), a ladder, and why she wants them" },
     "media": { "platform": "…", "clips": "…" },
 
     "characters": [

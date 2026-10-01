@@ -62,7 +62,7 @@ Ledger: `board.economy`.
 ## SP5 · The cast
 
 How many people this release carries, and **the rule for adding one** — what a new person must bring
-(a place, a ladder, a reason she wants them, `the-want.md` §6) before the cast grows. Ledger:
+(a thread of her life, or a part in one she has; a ladder; a reason she wants them; `the-want.md` §6) before the cast grows. Ledger:
 `board.cast{width, adding_rule}`.
 
 ## SP6 · Media and platform

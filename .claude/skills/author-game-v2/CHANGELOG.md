@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W3: a new person brings a thread, not a place (World and Systems PRD, Phase 1)
+
+**Why.** SP5's adding rule ("a new person brings a place, a ladder, and why she wants them") clashed with zero new
+places per step and with a her-life person who arrives at a place she already has (W2, W4).
+
+**What changed.** The rule now reads "a new person brings a thread (or joins one), a ladder, and why she wants
+them" in `references/state.md` (`board.cast.adding_rule`), `templates/spine/SP5_cast.md` and
+`references/the-spine.md` SP5.
+
+**Verified.** `grep -rn "a place, a ladder\|a place · a ladder\|brings a place\|bring a place"` over the skill gives
+0 hits; pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +13, running total 139,822 / 149,283.
+
+---
+
 ## 2026-10-01 — World W2: her life, the threads (World and Systems PRD, Phase 1)
 
 **Why.** N1 and N11: the skill gave her the hook and nothing else, while the top games build a life around it.
