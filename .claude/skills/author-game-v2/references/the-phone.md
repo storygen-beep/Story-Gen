@@ -430,9 +430,9 @@ That is P1's rule stated as architecture, and it is why that system does not rea
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2525`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6777`) pushes
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6847`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6216–6224`), where `setup.fireScheduledEvent` (`v2.py:6585`) can set a flag, start a quest,
+(`v2.py:6287–6295`), where `setup.fireScheduledEvent` (`v2.py:6656`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -460,7 +460,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:960`, `v2.py:7528`).
+(`template_import.py:960`, `v2.py:7598`).
 
 ---
 

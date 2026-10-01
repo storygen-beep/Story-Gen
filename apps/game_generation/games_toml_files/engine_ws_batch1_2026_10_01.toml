@@ -18,6 +18,12 @@
 #                 comes back two days after she answers, at most twice.
 #    dan_note     repeat_after_days = 1 and no reply block: "answered" means read.
 #    sal_hello    a one-time chat with a reply: the control, unchanged.
+#
+#  E4 — "weekday and hours-since-flag":
+#    sat_only     a bar canvas gated on weekday = [5] (Saturday); the game starts Monday.
+#    meet_dan     a home canvas whose exit sets met_dan.
+#    after_dan    a home canvas gated on hours_since_flag met_dan >= 3.
+#    card_wait    a quest card whose goals are the same two gates in quest-card shape.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -27,6 +33,7 @@ starting_canvas = "scene_start"
 id          = "engine_ws_batch1"
 title       = "Engine World and Systems Batch 1"
 description = "Engine fixture for the World and Systems PRD, Phase 7 batch 1."
+quests_engine = "v2"
 
 [time]
 enabled       = true
@@ -39,7 +46,7 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40 }
-flag_keys   = ["started"]
+flag_keys   = ["started", "met_dan"]
 
 [[npcs]]
 id          = "npc_dan"
@@ -220,3 +227,62 @@ id     = "meet"
 name   = "Meet"
 blocks = [ { type = "paragraph", content = "Someone new." } ]
 exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+# ── E4: weekday and hours since a flag ───────────────────────────────────────
+
+[[canvases]]
+id   = "sat_only"
+name = "Saturday crowd"
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+is_active     = true
+conditions    = { version = "1.0", items = [ { type = "weekday", weekdays = [5] } ] }
+
+[[canvases.nodes]]
+id     = "crowd"
+name   = "Crowd"
+blocks = [ { type = "paragraph", content = "The Saturday crowd." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "meet_dan"
+name = "Meet Dan"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "hello"
+name   = "Hello"
+blocks = [ { type = "paragraph", content = "Dan at the door." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "met_dan" } ] } }
+
+[[canvases]]
+id   = "after_dan"
+name = "After Dan"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+conditions    = { version = "1.0", items = [
+  { type = "hours_since_flag", subject = "player", flag_key = "met_dan", operator = "gte", value = 3 } ] }
+
+[[canvases.nodes]]
+id     = "later"
+name   = "Later"
+blocks = [ { type = "paragraph", content = "Three hours on." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[quest_cards]]
+id       = "card_wait"
+text     = "Dan said he would call."
+priority = 1
+when     = [ { flag = "started", op = "is_true" } ]
+goals    = [
+  { hours_since_flag = "met_dan", op = "gte", value = 3, label = "Let three hours pass" },
+  { weekday = [5], label = "Wait for Saturday" } ]

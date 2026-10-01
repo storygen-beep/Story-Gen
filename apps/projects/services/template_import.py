@@ -1238,6 +1238,10 @@ class QuestsCondition:
     # the same predicate canvases use, so a card can show "◯ Let a day pass — 0 / 1"
     # instead of leaving the wait in the tip where the player reads it as a bug.
     days_since_flag: Optional[str] = None
+    # E4 — hour gate: `hours_since_flag`, a numeric `op`, `value` (hours) and, on a
+    # goal, `label`. Weekday gate: `weekday` = [0..6] (0 = Monday), no `op`.
+    hours_since_flag: Optional[str] = None
+    weekday: Optional[List[int]] = None
     subject: Optional[str] = None
     npc_id: Optional[str] = None
     op: str = ""
@@ -1303,6 +1307,10 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
         trait = None
     if not days_since_flag:
         days_since_flag = None
+    hours_since_flag = d.get("hours_since_flag") or None
+    weekday = d.get("weekday")
+    if weekday is not None and not isinstance(weekday, list):
+        weekday = [weekday]  # the validator names the bad shape
     subject = d.get("subject") or None
     npc_id = d.get("npc_id") or None
     op = str(d.get("op", "") or "")
@@ -1319,6 +1327,8 @@ def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
         flag=flag,
         trait=trait,
         days_since_flag=days_since_flag,
+        hours_since_flag=hours_since_flag,
+        weekday=weekday,
         subject=subject,
         npc_id=npc_id,
         op=op,
@@ -1607,6 +1617,10 @@ CONDITION_SCHEMA: Dict[str, Tuple[FrozenSet[str], FrozenSet[str]]] = {
     "npc_at_location": (frozenset({"location_id", "location", "npc_id", "character_id",
                                    "operator"}),
                         frozenset({"is_present", "is_absent"})),
+    # E4 — today's weekday (0 = Monday … 6 = Sunday); hours since a flag was set.
+    "weekday": (frozenset({"weekdays"}), frozenset()),
+    "hours_since_flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator", "value"},
+                         _COND_NUMERIC_OPS),
 }
 _COND_BLOCK_KEYS = frozenset({"version", "logic", "items"})
 
@@ -1661,6 +1675,17 @@ def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
         if "operator" in item and ops and item["operator"] not in ops:
             errors.append(f"{ictx}: unknown operator {item['operator']!r} on a `{ctype}` "
                           f"condition (allowed: {', '.join(sorted(ops))})")
+        if ctype == "weekday":
+            # E4 — an empty list would match no day, which reads as a typo, not a gate.
+            wds = item.get("weekdays")
+            if not isinstance(wds, list) or not wds:
+                errors.append(f"{ictx}: a `weekday` condition needs weekdays = [0..6] "
+                              f"(0 = Monday), at least one day")
+            else:
+                try:
+                    _validate_weekdays(wds, ictx)
+                except (TypeError, ValueError) as exc:
+                    errors.append(str(exc))
     return errors
 
 
@@ -6915,19 +6940,58 @@ def _validate_quests_cards(
         has_flag = item.flag is not None
         has_trait = item.trait is not None
         has_days = item.days_since_flag is not None
+        has_hours = item.hours_since_flag is not None
+        has_weekday = item.weekday is not None
         shapes = [n for n, on in (("flag", has_flag), ("trait", has_trait),
-                                  ("days_since_flag", has_days)) if on]
+                                  ("days_since_flag", has_days),
+                                  ("hours_since_flag", has_hours),
+                                  ("weekday", has_weekday)) if on]
         if not shapes:
             errors.append(
-                f"{ctx}: condition item must set one of `flag`, `trait` or "
-                f"`days_since_flag`"
+                f"{ctx}: condition item must set one of `flag`, `trait`, "
+                f"`days_since_flag`, `hours_since_flag` or `weekday`"
             )
             return
         if len(shapes) > 1:
             errors.append(
-                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait` or "
-                f"`days_since_flag`, not {' + '.join(shapes)}"
+                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait`, "
+                f"`days_since_flag`, `hours_since_flag` or `weekday`, not "
+                f"{' + '.join(shapes)}"
             )
+            return
+        if has_weekday:
+            # E4 — today is one of these days. No `op`: a day is in the list or not.
+            if not item.weekday:
+                errors.append(f"{ctx}: weekday must list at least one day (0-6)")
+            try:
+                _validate_weekdays(item.weekday, ctx)
+            except (TypeError, ValueError) as exc:
+                errors.append(str(exc))
+            if item.op:
+                errors.append(f"{ctx}: weekday condition takes no op, got {item.op!r}")
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: weekday goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
+            return
+        if has_hours:
+            # E4 — the day gate in hours, with the same rules.
+            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+                errors.append(
+                    f"{ctx}: hours_since_flag condition op must be gte/lte/gt/lt/eq, "
+                    f"got {item.op!r}"
+                )
+            if item.value is None:
+                errors.append(
+                    f"{ctx}: hours_since_flag condition requires numeric value "
+                    f"(the number of hours to wait)"
+                )
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: hours_since_flag goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
             return
         if has_days:
             # A DAY GATE. Same predicate the canvas side has had since 0.2.2: days
@@ -7548,6 +7612,10 @@ def _serialize_quests_condition(c: QuestsCondition) -> Dict[str, Any]:
         out["trait"] = c.trait
     if c.days_since_flag is not None:
         out["days_since_flag"] = c.days_since_flag
+    if c.hours_since_flag is not None:
+        out["hours_since_flag"] = c.hours_since_flag
+    if c.weekday is not None:
+        out["weekday"] = list(c.weekday)
     if c.subject is not None:
         out["subject"] = c.subject
     if c.npc_id is not None:

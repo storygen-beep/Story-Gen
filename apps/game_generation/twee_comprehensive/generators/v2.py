@@ -4357,6 +4357,10 @@ setup.describeUnmetConditions = function(conditions) {{
             if (fsat) continue;
             var disp = cap(fkey.replace(/_/g, ' '));
             parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }} else if (it.type === 'weekday') {{
+            // E4 — the day is a fact she can plan around, so it is named.
+            if (setup.triggerConditionsSatisfied({{ version: "1.0", items: [it] }})) continue;
+            parts.push(setup.weekdayPhrase(it.weekdays));
         }}
     }}
     return parts.join(', ');
@@ -4405,6 +4409,55 @@ setup.describeUnmetTraits = function(conditions) {{
 setup.requirementSuffix = function(conditions) {{
     var why = setup.describeUnmetTraits(conditions);
     return why ? (' (' + why + ')') : '';
+}};
+
+// ===== E4 — the clock as minutes, flag times, weekday =====
+// One count of minutes on the scale of set_day * 1440, so a flag recorded before
+// set_minute existed reads as set at the start of its day and an old save never strands.
+setup.gameMinuteNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return (ts.day || 1) * 1440 + (ts.current_hour || 0) * 60 + (ts.current_minute || 0);
+}};
+setup.flagSetMinute = function(meta) {{
+    if (!meta) return null;
+    if (typeof meta.set_minute === 'number') return meta.set_minute;
+    if (typeof meta.set_day === 'number') return meta.set_day * 1440;
+    return null;
+}};
+// The meta a flag write leaves: the day (days_since_flag) and the minute
+// (hours_since_flag). applyFlagEffect and the two direct writers use it.
+setup.flagMetaNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return {{ set_day: ts.day || 1, set_minute: setup.gameMinuteNow() }};
+}};
+// Today as 0 = Monday … 6 = Sunday, the index NPC schedule rows use.
+setup.todayWeekdayIndex = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(ts.current_day);
+}};
+setup.weekdayPhrase = function(weekdays) {{
+    var NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var names = (weekdays || []).map(function(d) {{ return NAMES[d] || String(d); }});
+    return "Only on " + names.join(", ");
+}};
+// Hours since the condition item's flag was set, or null when it is unset or has no
+// meta (fails closed, as days_since_flag does).
+setup.hoursSinceFlag = function(item) {{
+    var sv = State.variables || {{}};
+    var key = String((item && item.flag_key) || '');
+    if (!key) return null;
+    var flags = sv.flags, metas = sv.flags_meta;
+    if (item.subject === 'npc') {{
+        var npcId = setup.resolveNpcId(item.npc_id || item.character_id || '');
+        var npc = npcId ? (sv.npcs || {{}})[npcId] : null;
+        if (!npc) return null;
+        flags = npc.flags;
+        metas = npc.flags_meta;
+    }}
+    if (!(flags || {{}})[key]) return null;
+    var setMin = setup.flagSetMinute((metas || {{}})[key]);
+    if (setMin === null) return null;
+    return (setup.gameMinuteNow() - setMin) / 60;
 }};
 
 // ===== Trigger Conditions Evaluator =====
@@ -4581,6 +4634,21 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                     satisfied = compare(dsOp, daysSince, requiredDays);
                 }}
                 results.push(satisfied);
+                continue;
+            }}
+
+            // E4 — weekday: today is one of `weekdays` (0 = Monday … 6 = Sunday).
+            if (type === 'weekday') {{
+                var wds = Array.isArray(it.weekdays) ? it.weekdays : [];
+                results.push(wds.length > 0 && setup._weekdayMatches(wds, setup.todayWeekdayIndex()));
+                continue;
+            }}
+
+            // E4 — hours_since_flag: hours since the flag was set, compared like
+            // days_since_flag. Fails closed when the flag is unset or has no meta.
+            if (type === 'hours_since_flag') {{
+                var hsf = setup.hoursSinceFlag(it);
+                results.push(hsf === null ? false : compare(it.operator, hsf, it.value));
                 continue;
             }}
 
@@ -4874,6 +4942,9 @@ setup.decideCanvasStep = function(canvasId, op, days, closedFlag) {{
             if (closedFlag) {{
                 State.variables.flags = State.variables.flags || {{}};
                 State.variables.flags[closedFlag] = true;
+                // E4 — a flag set outside applyFlagEffect gets its time too.
+                State.variables.flags_meta = State.variables.flags_meta || {{}};
+                State.variables.flags_meta[closedFlag] = setup.flagMetaNow();
             }}
         }} else if (op === "retry") {{
             rec.retryDay = setup._canvasToday() + Math.max(1, Number(days) || 1);
@@ -6618,7 +6689,6 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
     }}
 
     var key = String(flag);
-    var currentDay = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 1;
 
     var flagsObj = null;
     var metaObj = null;
@@ -6648,13 +6718,13 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
       var newVal = !flagsObj[key];
       flagsObj[key] = newVal;
       if (newVal === true) {{
-        metaObj[key] = {{ set_day: currentDay }};
+        metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
       }}
       return;
     }}
     // Default: 'set' (and any unrecognized op falls through to set for safety).
     flagsObj[key] = true;
-    metaObj[key] = {{ set_day: currentDay }};
+    metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
   }} catch (e) {{
     // ignore
   }}
@@ -8260,6 +8330,33 @@ setup.getNextActivity = function(npcId) {{
                 }}
                 // daysRemaining is 0 - condition effectively met, fall through
             }}
+
+            // E4 — weekday and hours_since_flag are waits on the clock, reported as one.
+            // An hours wait on a flag not set yet is a flag hint, as for days above.
+            for (var tg = 0; tg < items.length; tg++) {{
+                var tgIt = items[tg];
+                if (tgIt.type !== 'weekday' && tgIt.type !== 'hours_since_flag') continue;
+                if (setup.checkSingleCondition(tgIt)) continue;
+                if (tgIt.type === 'hours_since_flag' && setup.hoursSinceFlag(tgIt) === null) {{
+                    return {{
+                        activity: activity,
+                        isLocked: false,
+                        conditionsNotMet: true,
+                        flagConditionsNotMet: true,
+                        flagHint: setup.getBestFlagHint([{{
+                            type: 'flag', subject: 'player',
+                            flag_key: tgIt.flag_key, operator: 'is_true'
+                        }}])
+                    }};
+                }}
+                return {{
+                    activity: activity,
+                    isLocked: false,
+                    conditionsNotMet: true,
+                    timeConditionsNotMet: true,
+                    timeCondition: tgIt
+                }};
+            }}
         }}
 
         // Check node-level conditions (for linked_canvas_node targeting)
@@ -8338,6 +8435,11 @@ setup.checkTraitRequirement = function(req) {{
 // Check a single condition item (trait or flag)
 setup.checkSingleCondition = function(item) {{
     var sv = State.variables || {{}};
+
+    // E4 — one implementation of each, the main evaluator's.
+    if (item && (item.type === 'weekday' || item.type === 'hours_since_flag')) {{
+        return setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }});
+    }}
 
     if (item.type === 'flag') {{
         var flags = sv.flags || {{}};
@@ -8472,7 +8574,7 @@ setup.resolveUnlockChain = function(flagKey, flagUnlockMap, visited, depth) {{
     for (var i = 0; i < items.length; i++) {{
         var item = items[i];
         var isFlagType = (item.type === 'flag');
-        var isDaysSinceFlag = (item.type === 'days_since_flag');
+        var isDaysSinceFlag = (item.type === 'days_since_flag' || item.type === 'hours_since_flag');
 
         // Handle flag and days_since_flag conditions
         if ((isFlagType || isDaysSinceFlag) && !setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }})) {{
@@ -8673,6 +8775,20 @@ setup.formatCanvasConditions = function(conditions) {{
                 parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
             }}
         }}
+        else if (item.type === "weekday") {{
+            parts.push(setup.weekdayPhrase(item.weekdays));
+        }}
+        else if (item.type === "hours_since_flag") {{
+            var hsNow = setup.hoursSinceFlag(item);
+            var hsOp = item.operator || "gte";
+            var hsLeft = (hsNow === null) ? null : Math.ceil(Number(item.value || 0) - hsNow);
+            if ((hsOp === "gte" || hsOp === "gt") && hsLeft !== null && hsLeft > 0) {{
+                parts.push(hsLeft === 1 ? "Wait 1 more hour" : "Wait " + hsLeft + " more hours");
+            }} else {{
+                var hsFlag = String(item.flag_key || "").replace(/_/g, " ");
+                parts.push("Hours since " + hsFlag + " " + hsOp + " " + item.value);
+            }}
+        }}
         else if (item.type === "time_of_day") {{
             var todStart = item.start_time || "00:00";
             var todEnd = item.end_time || "";
@@ -8775,6 +8891,9 @@ setup.getSidebarHint = function() {{
         if (next.traitConditionsNotMet) return setup.formatCanvasConditions(next.canvasConditions);
         if (next.daysConditionsNotMet) {{
             return next.daysRemaining === 1 ? "Come back tomorrow" : "Wait " + next.daysRemaining + " more days";
+        }}
+        if (next.timeConditionsNotMet) {{
+            return setup.formatCanvasConditions({{ version: '1.0', items: [next.timeCondition] }});
         }}
         if (!next.conditionsNotMet) return setup.formatActivityHint(next.activity);
     }}
@@ -11503,7 +11622,12 @@ setup.castTraitRows = function (slug, npc) {
             "  sv.flags = sv.flags || {};\n"
             "  for (var i = 0; i < seen.length; i++) {\n"
             "    var key = 'cheat_' + seen[i];\n"
-            "    if (!sv.flags[key]) sv.flags[key] = true;\n"
+            "    if (!sv.flags[key]) {\n"
+            "      sv.flags[key] = true;\n"
+            "      // E4: a flag set outside applyFlagEffect gets its time too.\n"
+            "      sv.flags_meta = sv.flags_meta || {};\n"
+            "      sv.flags_meta[key] = setup.flagMetaNow();\n"
+            "    }\n"
             "  }\n"
             "};\n"
             "\n"
@@ -17076,6 +17200,11 @@ function _readCurrentValue(item) {
         var _elapsed = _today - _meta.set_day;
         return _elapsed > 0 ? _elapsed : 0;
     }
+    // E4 — an hour gate reports whole hours elapsed, like the day gate above.
+    if (item.hours_since_flag) {
+        var _hs = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        return (_hs !== null && _hs > 0) ? Math.floor(_hs) : 0;
+    }
     if (!item.trait) return null;
     if (item.subject === "player") {
         var pt = State.variables.player && State.variables.player.core_traits;
@@ -17162,6 +17291,26 @@ setup.pickQuestsCards = function(scope) {
 // by `evaluateGoals` (bullet progress).
 setup.checkQuestsCondition = function(item) {
     if (!item || typeof item !== "object") return false;
+    // ── E4: hour gate and weekday gate ──────────────────────────────────────
+    // `hours_since_flag` is the day gate in hours, through the canvas evaluator's
+    // own helper (set_minute, falling back to set_day * 1440); it fails closed the
+    // same way. `weekday` is a list of 0 = Monday … 6 = Sunday.
+    if (item.hours_since_flag) {
+        var hsNow = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        if (hsNow === null) return false;
+        switch (item.op) {
+            case "gte": return hsNow >= item.value;
+            case "lte": return hsNow <= item.value;
+            case "gt":  return hsNow > item.value;
+            case "lt":  return hsNow < item.value;
+            case "eq":  return hsNow === item.value;
+        }
+        return false;
+    }
+    if (Array.isArray(item.weekday)) {
+        return item.weekday.length > 0
+            && setup._weekdayMatches(item.weekday, setup.todayWeekdayIndex());
+    }
     // ── Day gate ────────────────────────────────────────────────────────────
     // The same predicate canvases use (days_since_flag): days elapsed since the
     // flag was SET, measured off $flags_meta[flag].set_day against the calendar
@@ -17313,12 +17462,14 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
             var label = (it.goal && it.goal.label) ||
                         (it.goal && it.goal.trait) ||
                         (it.goal && it.goal.days_since_flag) ||
+                        (it.goal && it.goal.hours_since_flag) ||
                         (it.goal && it.goal.flag) || "";
             // The "X / Y" suffix belongs to every COUNTED goal — a trait and a day
             // wait both have a number the player is waiting on. Gating it on `trait`
             // alone computed the day count and threw it away, which is the whole
             // reason the days shape exists (found on the built page, beat_0205).
-            if ((it.goal.trait || it.goal.days_since_flag) && typeof it.currentValue === "number") {
+            if ((it.goal.trait || it.goal.days_since_flag || it.goal.hours_since_flag)
+                    && typeof it.currentValue === "number") {
                 label += ' — ' + it.currentValue + ' / ' + it.goal.value;
             }
             html2 += '<li>' + marker + ' ' + label + '</li>';

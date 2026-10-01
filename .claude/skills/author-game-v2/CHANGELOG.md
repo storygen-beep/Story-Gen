@@ -5,6 +5,45 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E4: `weekday` and `hours_since_flag` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** WS-D10 step 4. "Only on Saturday" and "three hours after he texts" could not be written as
+conditions: `engine.md` §39 said so ("No weekday form"), and `days_since_flag` was the finest wait.
+
+**What changed.**
+- `generators/v2.py` (+~150 lines, mostly helpers and comments): `weekday {weekdays=[…]}` (reuses
+  `setup._weekdayMatches`, 0 = Monday) and `hours_since_flag` (like `days_since_flag`, in hours) in
+  every evaluator: `triggerConditionsSatisfied`, `describeUnmetConditions` (names the days),
+  `checkSingleCondition` (delegates), `formatCanvasConditions`, `getNextActivity` (a time wait, or a
+  flag hint when the flag is unset) and its hint text, the flag-hint resolver, and the quest cards'
+  `checkQuestsCondition` with its progress reader and bullet. Every flag write stores `set_minute`
+  beside `set_day` through `setup.flagMetaNow`: `applyFlagEffect`, the EN1 closed flag and the cheat
+  restore (the two writers that bypass it). `setup.flagSetMinute` reads a meta with `set_day` only as
+  `set_day * 1440`.
+- `template_import.py`: both types join E1's `CONDITION_SCHEMA` (`weekday` must list 0–6, no
+  `operator`); quest cards gain `hours_since_flag` and `weekday` shapes (dataclass, parse,
+  validator, serializer).
+- `references/engine.md`: new §52; §39's "No weekday form" is replaced; §40's backfill table gains a
+  `$flags_meta` row (not filled; the `set_day * 1440` fallback); §37's quoted quest-card error text
+  updated to the new wording.
+- Tests: fixture section E4 (`sat_only`, `meet_dan`, `after_dan`, quest card `card_wait`); new
+  `test_weekday_hours_since_flag.py` (27: the import table and errors, quest-card shapes, every
+  evaluator, every flag writer, headless weekday, hours across midnight, an NPC flag, quest cards,
+  the old-save fallback). The old save (`tests/data/e4_pre_change_save.txt`) was written at
+  `d2ac5b4` from the fixture minus its E4 gates (that importer rejects the new types); its
+  `met_dan` meta is `{set_day: 1}` and reads 18 hours on at 18:00, so the wait opens rather than
+  strands.
+- Cites: 368 `v2.py` and 58 `template_import.py` cites re-pointed through the line maps; one lands on
+  the reworded quest-card error line, which is the same message.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with every
+non-script passage identical to `ed2f1c6` (the change is engine script only).
+
+**Words:** +258, running total 141,282 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine E3: repeatable chats (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** WS-D10 step 3, WS-D7 ("a repeat invite after sex"). A conversation was delivered once and
