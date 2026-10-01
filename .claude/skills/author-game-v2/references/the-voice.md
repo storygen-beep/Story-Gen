@@ -324,6 +324,17 @@ Source: `~/Documents/Sex_Loop_Study_20260829/shape.py`, and the label counts in 
 
 ---
 
+## Adult wording — a college, never a school
+
+Every character is 18+ and the game says so. **An adult college is allowed** (LO, WS-D6), modelled on
+Course of Temptation only: a lecture timetable, grades that move money, professors as a door
+(`templates/cards/college.md`). Use university words — lecture, professor, campus, dorm, term, major.
+
+**Banned, as whole words or phrases, anywhere a player reads:** detention · homeroom · prom · "after
+school" · "high school" · "middle school" · "junior high" · teen · teenager · schoolgirl · "school
+uniform" · "class president" · "grade 9" through "grade 12". *Freshman* and *sophomore* are college
+words and are allowed. A whole-word match: "eighteen" is not "teen".
+
 ## Two traps worth knowing before you author a card
 
 - **Quest conditions use a different evaluator from canvas conditions, and do NOT fail open.** Never

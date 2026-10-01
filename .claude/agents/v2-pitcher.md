@@ -73,7 +73,9 @@ and A14; and, given a thread, "Her life — the threads" in `references/the-want
 - **A "no" parks the step; a final no only on a button that says "(ends his path)"** (`the-arc.md` A3).
   **His move never fires on a dice roll alone** — the scene says why now.
 - **The clip is part of the pitch.** Say what it is, so it can be found.
-- **Adults only.** Never set anything in a school or with anyone under 18.
+- **Adults only.** Never set anything in a school or with anyone under 18. An adult college is allowed:
+  everyone 18+ and stated, university words only, never a word on the banned list (`the-voice.md`,
+  "Adult wording").
 
 ## What you return
 

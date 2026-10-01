@@ -8,7 +8,8 @@
 > ⚠️ **Adults only.** A game is in this library only if its own text states its characters are adults
 > (an 18+ statement, a college or university setting, or an 18+ age list) **and** nothing in it describes
 > any character as under 18 or as a school pupil now. Every moment here involves adults. Never set an
-> idea in a school, or with anyone under 18.
+> idea in a school, or with anyone under 18. An adult college is allowed: everyone 18+, stated, in
+> university words only (`the-voice.md`, "Adult wording"; `templates/cards/college.md`).
 
 The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); a kind given to a Pitcher is
 a hint, not its assignment (`the-release.md`, "The loop" step 2). A `why` marked **[my reading]** has no player

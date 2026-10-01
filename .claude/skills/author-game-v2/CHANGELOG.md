@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S8: adult college, Course of Temptation model only (World and Systems PRD, Phase 2)
+
+**Why.** WS-D6: the skill banned any school, which also ruled out an adult college — the setting of the field's
+strongest model (Course of Temptation). LO allowed an adult college, CoT only, with a list of words a game never
+uses.
+
+**What changed.** `references/the-voice.md`: new short section "Adult wording — a college, never a school" (everyone
+18+ and stated; university words; the banned list as whole words or phrases: detention, homeroom, prom, "after
+school", "high school", "middle school", "junior high", teen, teenager, schoolgirl, "school uniform", "class
+president", "grade 9"–"grade 12"; freshman and sophomore allowed). `references/moment-library.md` adults-only
+note: an adult college is allowed, with pointers. `.claude/agents/v2-pitcher.md` "Adults only" line: the same.
+New `templates/cards/college.md`: the college system card from round 9b's `cards/school.md` and
+`traces/school.md`, re-scoped to CoT only (lecture timetable, grades that move the weekly bill ±20% at 2
+thresholds, professor favor as the door to 24 extra-credit events in 5 chains, homework for cash or sex, the
+weekly bill as sink and deadline). Round 9b's `school.md` is not carried over (S2b).
+
+**Verified.** The card cites only CoT; every `[Passage]` cite greps in `round2/passages/`, every `.js:` and
+`mopoga#` cite in round 9b's files, and the banned-word grep over the card gives 0 hits (scratch script, same
+whole-word list). `v2.py:15610` re-read ("only 'random' is supported"). `--selfcheck` current (orphans 3); pytest
+473 passed.
+
+**Words:** +131, running total 141,506 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S1b-code · PROTECTED (tools, Q9): the labels lint reads meters
 
 **Why.** S2a split the ledger: meter rows move to `board.meters[]` and `board.systems[]` holds design cards. The lint
