@@ -45,7 +45,7 @@ belong here; only decisions, debts, and promises do.
                        "goals": [ { "goal": "…", "ends_when": "…", "ends_flag": "flag_id",
                                     "next": "…" } ] },
                                  // no date (D8). A goal with ends_when names next (shape.py),
-                                 // and ends_flag: the flag set when it is met (check planned, K14).
+                                 // and ends_flag: the flag set when it is met (planned check: some choice sets it).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6

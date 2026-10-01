@@ -351,13 +351,14 @@ The arc names this thread as its loop (`the-arc.md` A1).
 lead anywhere — hang out, date, booty call; its friendly texts only nudge attitude, at most ±10 once
 a day (round 9a §1a). Every message on a thread serves a booking or the loop.
 
-**Until the engine repeats a conversation, chain one-time ones.** A conversation delivers once,
-ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2356`). So each
-invite is its own `[[phone.conversations]]` entry, caused by a flag the last link set and timed
-with `days_since_flag`:
+**A loop invite is one conversation that repeats; a chain is for different texts.** Set
+`repeat_after_days` (and `max_repeats` if the loop should end) on the invite: it comes back that
+many days after she answers, while its trigger still holds (`engine.md` §51). A sequence of
+different texts is a chain: each is its own `[[phone.conversations]]` entry, caused by a flag the
+last link set and timed with `days_since_flag`:
 
 ```toml
-# invite 2 waits three days after the meeting invite 1 booked
+# text 2 waits three days after the meeting text 1 booked
 [phone.conversations.trigger]
 conditions = { version = "1.0", items = [
   { type = "flag",            subject = "player", flag_key = "dana_invite_1_met", operator = "is_true" },

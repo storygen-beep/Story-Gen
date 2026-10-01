@@ -6,7 +6,7 @@
 > with heat pushing back). Fill your own card on `templates/sheets/system.md`; record it in `board.meters[]`,
 > **never** `board.systems[]`.
 >
-> ⚠️ **Meters, not a system, until the engine's gossip piece (E9c) exists.** Until then reputation is one
+> ⚠️ **Meters, not a system, until the engine has a gossip piece.** Until then reputation is one
 > trait per audience, built from existing pieces: trait conditions, sidebar bands, `[[traits.labels]]`,
 > daily-tick decay, and the cast page's `show_traits`. The table below is the target shape, not today's build.
 

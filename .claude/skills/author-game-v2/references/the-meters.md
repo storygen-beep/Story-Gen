@@ -225,7 +225,7 @@ location** plus `price > 0`, because `renderShopPage` stocks only `!initial && p
 `wardrobeEffects = [{ item_id = "…", action = "add" }]` on a choice or an `exit_block.config`.
 Zero-based; no threshold to invent. **A shop existing does not make a garment buyable:** a
 non-initial garment at `price = 0` is invisible on the very shop page it sits beside
-(`v2.py:2087` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
+(`v2.py:2146` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
 ⚠️ **`shop_location` is never validated** (`template_import.py:2703` takes it as a bare string,

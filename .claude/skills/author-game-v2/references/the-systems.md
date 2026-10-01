@@ -381,8 +381,8 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    rungs and people (SKILL.md commitment 4).
 5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
-   (round 9b, `cards/job.md`, `cards/streaming.md`). The engine's `block_pool` has no memory yet
-   (`v2.py:16328`), so author the weighting by hand.
+   (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
+   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:5668`).
 
 **Reputation is meters until the engine can spread gossip.** Course of Temptation and Shady Deals run it as a
 system (`templates/cards/reputation.md`); our engine has no reputation primitive (round 9b §6). Until it does,

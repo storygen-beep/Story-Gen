@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable P6c: three sentences the engine merge made untrue, a stale shop cite, three PRD ids
+
+**Why.** Engine batch 1 built repeatable chats (`repeat_after_days`) and pools that remember
+(`memory = "seen"`), so three sentences now said something false. The shop's stock filter moved, and
+three planned-work ids from the PRD were left in skill text (skill text never names a PRD id).
+
+**What changed.**
+- `references/the-phone.md` P9: "Until the engine repeats a conversation, chain one-time ones" becomes
+  "a loop invite is one conversation that repeats; a chain is for different texts", pointing at
+  `engine.md` §51. The chain example's comment now says "text 2" instead of "invite 2".
+- `templates/cards/phone.md` "Our engine today": the same correction.
+- `references/the-systems.md` SY8 rule 5: "`block_pool` has no memory yet (`v2.py:16328`)" becomes a
+  pointer to `memory = "seen"` (`engine.md` §35). The old cite pointed at cascade-beat code; the new
+  one names `setup.pickRememberedPoolEntry` at `v2.py:5668` so cite_check can anchor it.
+- `SKILL.md` ("a declared garment can be got" row) and `references/the-meters.md`: `v2.py:2087`
+  becomes `v2.py:2146` (the shop's `!initial && price > 0` filter; read on disk).
+- `references/state.md` "(check planned, K14)", `references/the-map.md` "(planned, K13)" and
+  `templates/cards/reputation.md` "(E9c)" become plain planned names.
+
+**Verified.** grep for "delivers once, ever", "no memory yet", `v2.py:16328`, `v2.py:2087`, K13, K14
+and E9c: 0 hits outside this file and the scripts. cite_check: 0 wrong in SKILL.md + references/.
+Selfcheck and the skill tests pass.
+
+**Words:** +34, running total 144,299 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C6: the wardrobe card, `[[clothing]]` in the-returning-player.md, the shop gaps
 
 **Why.** The clothing rules (C1–C5) point at one design; round 9a's wardrobe card is that design. The
