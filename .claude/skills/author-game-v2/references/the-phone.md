@@ -64,6 +64,10 @@ Course of Temptation's Findr ends in a booty call; In Her Own Hands' OnlyGirlz p
 feature, and 18% of the field's phone comments are players asking how to make an empty-looking
 phone work. Build what the live arcs and one door app use, and nothing else (round 9a §4).
 
+**The card:** `templates/cards/phone.md` — the steps, amounts, chains, first-release minimum and failure
+list, from the four games. Declare the phone in `board.infrastructure[]` (`kind = "channel"`), never in
+`board.systems[]`; each thread goes on its person's sheet (`templates/sheets/person.md`).
+
 ⚠️ **A declared channel must exist in the built game.** If `0_systems_spec.toml` says the phone is
 ON, the built `7_final_game.toml` has to carry its block — `[phone]` for the phone — or the spec has
 to change. Nothing checks this: no script in `scripts/` compares the spec with the build.

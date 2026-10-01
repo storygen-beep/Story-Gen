@@ -382,6 +382,15 @@ end_time   = "18:00"
 activity   = "<what they are doing — shown to the player>"
 
 
+# ── phone ────────────────────────────────────────────────────────────────────
+#   The phone is a channel, not a system: declare it in v2_state.json as
+#     board.infrastructure[] += { "name": "phone", "kind": "channel" }
+#   and never in board.systems[]. Write its tables from templates/cards/phone.md
+#   (a thread for every person she is involved with; every app a door to sex,
+#   money or people) and references/the-phone.md. Each thread's cause, delay,
+#   window, booking and loop go on that person's sheet first.
+
+
 # ── media declaration ────────────────────────────────────────────────────────
 # This skill DECLARES slots. `find-media` fills them. Three gated rules:
 #

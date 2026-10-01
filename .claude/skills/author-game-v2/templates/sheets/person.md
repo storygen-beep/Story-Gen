@@ -23,3 +23,9 @@
 | n | canvas | where | when | gate | raises | the no (parked · final) | guidance card line |
 |---|---|---|---|---|---|---|---|
 | 1 | <canvas> | <location_id> | <days, from–to> | <trait op value> | <trait: n> | <parked · final> | <place + time + what waits> |
+
+## Phone thread (`the-phone.md` P1–P12 · `templates/cards/phone.md`)
+
+| thread | cause flag (a scene sets it) | delay | window | booking (place + time, and its reminder) | loop (after the sex step, cooldown) |
+|---|---|---|---|---|---|
+| <conversation id> | <flag_key — the canvas that sets it> | <days_since_flag ≥ n> | <HH:MM–HH:MM> | <location_id, day, from — reminder: quest card · hub line · waking line> | <every n days, HH:MM–HH:MM> |

@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P3: the phone card and the sheets (World and Systems PRD, Phase 3)
+
+**Why.** WS-D12: the design detail lives in an uncounted card; the-phone.md keeps short rules plus a pointer. The
+phone is a channel, so its card is infrastructure, never a system that K1/K2 would read.
+
+**What changed.**
+- New `templates/cards/phone.md` (infrastructure: a channel; declared in `board.infrastructure[]` as
+  `{ "name": "phone", "kind": "channel" }`, never `board.systems[]`): the field table (cause, delay, hour window,
+  delivery, the text, reply, booking and reminder, the meeting, no-show, the loop, her side, calls, apps, alerts,
+  the systems it serves), the ten steps, amounts, touchpoints, chains, first release, failure checklist, what
+  players say, and our engine today. Models and quotes only from CoT, IHOH, SD and CW (Damien; nothing from Jack
+  or Aaron), cited to round 9a's report and traces.
+- `templates/sheets/person.md`: a "Phone thread" table — thread, cause flag, delay, window, booking (with its
+  reminder), loop.
+- `templates/board.toml`: a commented `phone` pointer block (prose only — no `[phone]` header and no `key =` line,
+  so `_template_field_gap` sees no phone table and its gates.py comment stays true; no gates.py edit).
+- `references/the-phone.md` P1: a three-line pointer to the card, `board.infrastructure[]` and the person sheet.
+
+**Verified.** `test_templates_parse` passes (2); the card's banned school-word grep (the-voice.md "Adult wording"
+list, whole words) = 0 and a Jack/Aaron grep = 0; the template field-gap list is unchanged (37); `--selfcheck`
+current (orphans 2); pytest 475 passed.
+
+**Words:** +36, running total 142,587 / 149,283 (the card is in `templates/`, not counted).
+
+---
+
 ## 2026-10-01 — Phone P2c: the loop, the booking and her own doors (World and Systems PRD, Phase 3)
 
 **Why.** Round 9a: no good thread has a last text — after the sex step it becomes a repeatable invite (CoT every 3
