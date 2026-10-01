@@ -950,7 +950,7 @@ A restore with no gate behind it is a button that maintains a number. It costs t
 buys them nothing.
 
 **This is also what makes a room worth entering.** `the-surfaces.md` R2 says a room's list is needs,
-work and people — a *need* on that list has to be a real one, or R2 degrades into the object rule
+systems and people — a *need* on that list has to be a real one, or R2 degrades into the object rule
 with different nouns.
 
 ### M10 · The clock is `[player.trait_decay]`

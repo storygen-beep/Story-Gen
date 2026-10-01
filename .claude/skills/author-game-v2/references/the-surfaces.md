@@ -79,7 +79,7 @@ A room's menu is **exactly three kinds of thing, and nothing else.**
 | kind | what it is | how many |
 |---|---|---|
 | **a need** | the body's clock — sleep, eat, wash, plus whatever the premise adds. Declared in `board.needs[]`, ruled by `the-meters.md` M8–M10 | one per need this room serves |
-| **work** | where money comes from | one per job done here |
+| **a system** | what she does here again and again — a job is a system with a card (`the-systems.md` SY8) | one per system that lives here |
 | **a person** | that character's hub | one per schedule row — location × window |
 
 Anything that is none of the three does not belong on the room's list. It belongs **inside a beat**,
@@ -132,7 +132,7 @@ screens offering more than 12 ......... ~2% (median across the field)
 ```
 
 The typical screen in a real game — the one the player is on most of the time — is **small**, and
-needs + work + people lands there without being told to.
+needs + systems + people lands there without being told to.
 
 Big screens do exist. **But look at what they are: shops, wardrobes, character creation, DoL's recipe
 list. Catalogues.** A catalogue is legitimately long, because its job is to list. A place you return
@@ -146,16 +146,17 @@ to every day is not one.
 and does her own work is **at least two canvases**, plus a walk-in if anyone can interrupt her.
 Never put work inside a character's hub.
 
-**R2 · A room's list is needs, work and people — nothing else.**
+**R2 · A room's list is needs, systems and people — nothing else.**
 
-Write the room's job first: *what does her body need here, what work is done here, who is scheduled
+Write the room's job first: *what does her body need here, which systems live here, who is scheduled
 here.* Those three answers are the menu. A candidate that is none of the three is either a beat
 inside one of them, or it belongs on a different surface entirely.
 
 - **A need on this list is a real need**, declared in `board.needs[]` and holding a door shut when it
   goes unmet (`the-meters.md` M8/M9). A restore that gates nothing is a chore, and a chore is not a
   reason to build a screen.
-- **Work is where money comes from.** One per job, not one per till-shaped noun.
+- **A system is what she does here again and again.** A job is a system with a card
+  (`the-systems.md` SY8) — one row per system, not one per till-shaped noun.
 - **A person is a hub**, one per schedule row, and it is judged by the object test above.
 - **A menu item with HOURS says so when it is shut.** A canvas whose schedule window has closed
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
@@ -167,7 +168,7 @@ inside one of them, or it belongs on a different surface entirely.
 **R2c · Each row is a SYSTEM surfacing in this room — so the room list cannot be written before
 the systems list is.**
 
-Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, work and people is a closed
+Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, systems and people is a closed
 set, so a room cannot sprawl. What it does not say is what an individual row IS.
 
 **Read an anchor room in a shipped game and every row is a different system of the game,

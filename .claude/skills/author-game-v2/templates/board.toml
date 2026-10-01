@@ -230,7 +230,7 @@ shuts = "<what she CANNOT do while this is empty>"
 
 # ── locations: DERIVE the count, budget the set as a SHAPE ───────────────────
 #   How many? Not a number you pick. Derive it from what a place is FOR:
-#        needs served here + work done here + people scheduled here
+#        needs served here + systems that live here + people scheduled here
 #   List the places that answer at least one of those, and count that. A
 #   thoroughfare only routes; a destination always offers one thing she can
 #   do alone, or is closed then (the-board.md §1, two kinds of place).
@@ -247,7 +247,7 @@ shuts = "<what she CANNOT do while this is empty>"
 #   · what she can do there REPEATEDLY — if nothing, it is not a location yet
 #   · `serves` — the THREE kinds this room's list may hold, and nothing else:
 #       needs  = which declared board.needs[] she can fill here
-#       work   = what earns money here
+#       work   = the systems that live here (a job is a system with a card)
 #       people = who is scheduled here (one hub per schedule row)
 #     THAT IS THE MENU, and its length. Anything that is none of the three is a
 #     BEAT INSIDE one of them, not a button. references/the-surfaces.md R2.
@@ -328,7 +328,7 @@ navigation_order     = ["<neighbour_id>"]
 #   anchor  = false       # exactly one location sets this true
 #   [locations.serves]
 #   needs  = ["<a key from [[needs]] below>"]
-#   work   = ["<what earns money here>"]
+#   work   = ["<a system that lives here — its card id>"]
 #   people = ["npc_<id>"]                           # one hub per schedule row
 #   fill    = 4000        # ⚠️ YOUR BUDGET, in round numbers, written NOW — a PLAN.
 #

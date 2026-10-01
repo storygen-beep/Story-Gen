@@ -28,7 +28,7 @@ she has become changes what a room offers (`the-systems.md` SY1).
 things a room's list can hold (`the-surfaces.md` R2):
 
 ```
-needs served here  +  work done here  +  people scheduled here
+needs served here  +  systems that live here  +  people scheduled here
 ```
 
 Write the list of places that answer at least one of those, and count it. That is the answer.
@@ -76,8 +76,8 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
 - **Who is there and when — and on a destination, one thing she does alone.** A thoroughfare needs
   neither.
 - **What its list holds** (`serves`) — the three kinds and nothing else (`the-surfaces.md` R2):
-  which declared **needs** she can fill here, what **work** is done here, which **people** are
-  scheduled here. *That is the room's menu, and its length.*
+  which declared **needs** she can fill here, which **systems** live here (a job is a system with a
+  card, listed under the `work` key), which **people** are scheduled here. *That is the room's menu, and its length.*
 
   ```jsonc
   { "id": "the_kitchen", "serves": { "needs": ["hunger"], "work": [], "people": ["npc_martin", "npc_denise"] } }

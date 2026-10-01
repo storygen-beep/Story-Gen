@@ -156,7 +156,8 @@ belong here; only decisions, debts, and promises do.
       //   each location against its own figure; it refuses to credit a set that is mostly
       //   non-round, because that is a post-hoc record and cannot fail. (`budget` is an
       //   observed drift of the same key — accepted on read, but write `fill`.)
-      // `serves` — the three kinds a room's list may hold, and nothing else. THIS is the
+      // `serves` — the three kinds a room's list may hold, and nothing else (`work` lists the
+      //   systems that live here; a job is a system with a card, SY8). THIS is the
       //   room's menu and its length. the-surfaces.md R2. (It replaced `objects` on 2026-08-18;
       //   the old key stays readable in shipped ledgers but nothing reads it.)
       // `labels` — what KIND of place this is. the-systems.md SY3. ⚠️ NOT the same field as

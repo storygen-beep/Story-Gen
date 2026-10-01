@@ -138,7 +138,7 @@ at*: a person → their hub · the room or herself → its own located canvas ·
 substitution. They never share an exit block.
 
 **How many choices a room has is not a number you pick — it falls out of what the room serves.**
-A room's list is **needs + work + people**, and nothing else (`the-surfaces.md` R2). A body needs
+A room's list is **needs + systems + people**, and nothing else (`the-surfaces.md` R2). A body needs
 about five things and a room contains fifty nouns, so the count falls out of a set that cannot grow.
 That is what separates a room from a button list.
 
@@ -506,7 +506,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   `exit_block.choices` and could not see a canvas at all — so an entire canvas about one object
   counted as zero, and the only way to pass was a second screen
   re-listing what was already there. That is worse than no check, because it ships green. It was
-  replaced by `the-surfaces.md` R2: a room's list is **needs + work +
+  replaced by `the-surfaces.md` R2: a room's list is **needs + systems +
   people**, a CLOSED set that sizes itself, instead of objects, an OPEN one that never can.
 - **An instrument that cannot see a thing reports its ABSENCE, not its rarity.** Before a
   measurement is allowed to retire a rule, ask what the measurement is blind to. v1's dialogue rule

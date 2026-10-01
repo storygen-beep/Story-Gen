@@ -234,7 +234,7 @@ when a place is shut — the map reads those. `homebase`, `stripallowed`, `study
 systems read those. A few are read by both: `outdoors` decides whether weather applies *and*
 whether being seen counts as public. **One declaration, two layers.** Do not keep two lists.
 
-⚠️ **`labels` is not `serves`.** `the-surfaces.md` R2's `serves` is the room's *menu* — needs, work,
+⚠️ **`labels` is not `serves`.** `the-surfaces.md` R2's `serves` is the room's *menu* — needs, systems,
 people, what happens here. `labels` is what kind of place it *is* — what would let anything happen
 here at all. A room with `has_mirror` and no mirror row is a room whose systems have not arrived
 yet, which is a finding, not an error. **Do not merge the two fields.**
@@ -359,6 +359,30 @@ phone player cannot open a console (*I'll Never Leave This Town*). So every game
   whose steps park with `retry_after_days` (the-arc A3) may need none.
 
 Cut what the game cannot use; anything sold stays behind a code. Rows and rules: `engine.md` §48.
+
+## SY8 · Designing a system
+
+Fill one card per system before the rooms (`templates/sheets/system.md`; worked cards, each line cited
+to a traced game, in `templates/cards/`). A job is a system with a card. Five rules:
+
+1. **One ladder by default; two only if they touch.** The lewd ladder opens better pay, or pay feeds
+   the lewd ladder — never two ladders that ignore each other. Course of Temptation's burger job and
+   Cupid's Way's waitress job run one (round 9b, `cards/job.md`); Course of Temptation's lectures run two
+   that touch, grades feeding each professor's favor (`templates/cards/college.md`). Its River Rat bar
+   keeps rank and flirtiness apart, joined only by event tips (round 9b, `traces/job_cot_river_rat.md`).
+   A second ladder with its own rank waits on the engine's rank per job: today `fast_jobs` keeps one
+   global count (`v2.py:3098`).
+2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
+   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
+3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and
+   `leads_to[]`. The systems with no such link are the measured failures — Course of Temptation's 38
+   gloryhole passages pay $0, and its shops carry items whose bonus nothing reads (round 9b §3).
+4. **Day 1 at the bottom rung.** 79–87% of the four games' systems are usable on day 1; a release adds
+   rungs and people (SKILL.md commitment 4).
+5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
+   rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
+   (round 9b, `cards/job.md`, `cards/streaming.md`). The engine's `block_pool` has no memory yet
+   (`v2.py:16235`), so author the weighting by hand.
 
 ## What the board phase records
 

@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S3: SY8 "Designing a system", and jobs become systems (World and Systems PRD, Phase 2)
+
+**Why.** WS-D4, N16: the skill had a definition of a system (S1a) but no rules for designing one, and still taught
+a room's list as "needs + work + people" with "one per job".
+
+**What changed.** `references/the-systems.md`: new **SY8 · Designing a system** — fill a card per system before
+the rooms; one ladder by default, two only if they touch (CoT's burger job and CW's waitress job run one; CoT's
+lectures run two that touch; its River Rat bar keeps rank and flirtiness apart, joined only by event tips, per
+the round 9b trace; a second ladder with its own rank waits on the engine, `v2.py:3098`); the price is shown
+before she agrees (SD; gate 21); ≥2 connections and ≥1 ending in a person or a sex scene (round 9b §3); day 1 at
+the bottom rung (SKILL.md commitment 4); the measured floors as directions (≥20 events in a daily pool, ≥4 lewd
+rungs, ≥2 acts per rung, a seen event weighted down — CoT 1/10; `block_pool` has no memory yet, `v2.py:16235`).
+SY3's `labels`/`serves` note says "needs, systems, people". **Jobs become systems:** `the-surfaces.md` (the
+three-kinds table row "a system … a job is a system with a card", the field line, R2's heading, opening and
+bullet, R2c's opening); `SKILL.md` (the room-list sentence and the objects lesson); `the-board.md` (the
+derivation formula and the `serves` bullet); `templates/board.toml` (the derivation comment and both `work`
+comments); `references/state.md` (the `serves` comment); `the-meters.md` M9. The `serves.work` key is unchanged.
+
+**Not done, and why.** `references/engine.md:588` (§19) still reads "needs + work + people": this session's brief
+keeps engine.md edits inside §30.1 and §26, because a parallel engine session edits engine.md. Left for the lead.
+
+**Verified.** `grep "one per job"` 0 hits; `grep "needs + work + people"` 1 hit, engine.md:588 (above);
+`--selfcheck` current (161 rules — SY8 picked up by `_RULE_DEF`; 0 broken pointers; orphans 3); pytest 473
+passed.
+
+**Words:** +358, running total 141,872 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S2b (3 of 3): job, sex for pay, shoots, streaming, gym and pregnancy cards (World and Systems PRD, Phase 2)
 
 **Why.** WS-D3/WS-D12: the remaining round 9b system cards.
