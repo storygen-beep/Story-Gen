@@ -29,8 +29,17 @@ one-shot. Assuming otherwise inverts your read of what the game actually is.
 v2.py:4330   if (!conditions.version || conditions.version !== '1.0') return true;
 ```
 
-**Why it matters:** a gate missing its `version` passes for everybody, silently, with a green
-build and no error. Every `conditions` block you author carries `version = "1.0"`.
+**Why it matters:** at runtime a gate missing its `version` passes for everybody. Every
+`conditions` block you author carries `version = "1.0"`.
+
+**The importer now rejects bad conditions (E1, 2026-10-01).** One table,
+`CONDITION_SCHEMA` (`template_import.py:1574`), lists each condition type's allowed keys and
+operators; one walker, `_walk_condition_carriers` (`template_import.py:1657`, run from
+`normalize`, `:2069`), checks every v1.0 block in the raw TOML by key name (`conditions`,
+`entry_conditions`, `match_condition`, `show_when`, and a schedule row's `when`). A missing
+version, an unknown block key or `logic`, or an unknown type, key or operator fails the build.
+Quest cards and `player_portrait` outfit `when` keep their own schemas and are not walked. A new
+evaluator branch needs its row in the table, or every game using it fails to import.
 
 Shape:
 
@@ -505,7 +514,7 @@ enforces it. All three of these families satisfy it, and the second is the one a
 > **`worn_exposure` is the only one of these that reads an EMPTY slot**, and it is the newest
 > (2026-08-28). A derived 0/1/2 — 0 covered, 1 underwear-level, 2 bare — from
 > `setup.getWornExposure` (`v2.py:1748`); the predicate is at `v2.py:4549` and its lock text at
-> `:8558`; a garment declares its own `exposure` via `template_import.py:2806`. ⚠️ **The other two
+> `:8558`; a garment declares its own `exposure` via `template_import.py:2936`. ⚠️ **The other two
 > aggregates cannot see nakedness at all**: `worn_corruption` and `worn_beauty` are both
 > `getWornStatMax` (`v2.py:1718-1719`), which skips a slot with nothing in it, so naked and plainly
 > dressed return the same value. Use `worn_exposure` for how much is showing and the older pair for
@@ -518,7 +527,7 @@ override is not. **This is a display reader, not a gate, and `the-meters.md` W7 
 the field's normal case**.
 
 **3 · A location dress code.** `clothing_rules.slots_required` on a location
-(`template_import.py:4792-4806`), optionally with its own `conditions` and a refusal `message`.
+(`template_import.py:4922-4936`), optionally with its own `conditions` and a refusal `message`.
 
 ### One thing the wardrobe cannot do, recorded deliberately
 
@@ -691,7 +700,7 @@ costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any ot
 
 ```
 template_import.py:221    costs: Dict[str, int] = field(default_factory=dict)
-template_import.py:2168   costs=_require_dict(l, "costs"),
+template_import.py:2298   costs=_require_dict(l, "costs"),
 v2.py:5375                // A location's per-entry cost lives in setup.locations[slug].entry_costs
 v2.py:17441               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
@@ -729,8 +738,8 @@ blocked_message  = "The dining room's been dark since the staff went."
 ```
 template_import.py:196      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:197      blocked_message: str = ""
-template_import.py:2159-2160 parsed
-template_import.py:8258      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:2289-2290 parsed
+template_import.py:8388      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
@@ -757,7 +766,7 @@ closed_text = "The shutter's down. A paper sign: back at nine."    # optional
 
 ```
 template_import.py:202      hours: List[Dict[str, Any]] = field(default_factory=list)
-template_import.py:6320     def _validate_location_hours(template) -> List[str]:
+template_import.py:6450     def _validate_location_hours(template) -> List[str]:
 v2.py:10655                 setup.locOpenNow = function (slug) {
 ```
 
@@ -780,7 +789,7 @@ hidden_until = { flag = "found_attic" }     # a declared player flag
 
 ```
 template_import.py:206      hidden_until: Dict[str, Any] = field(default_factory=dict)
-template_import.py:6400     def _validate_hidden_places(template) -> List[str]:
+template_import.py:6530     def _validate_hidden_places(template) -> List[str]:
 v2.py:10527                 setup.locFound = function (slugOrUuid) {
 ```
 
@@ -795,7 +804,7 @@ presence floor and reachability. Use it for a character who is genuinely elsewhe
 inventing a room for them. `template_import.py:191`.
 
 **`is_container` + `default_entry`** — a pure navigation wrapper that holds no content.
-`template_import.py:190`, `:4714`. A container **swallows** any canvas attached to it; attach to a
+`template_import.py:190`, `:4844`. A container **swallows** any canvas attached to it; attach to a
 non-container hub instead.
 
 ⚠️ **The lock above is the INERT kind** — a greyed, unclickable card. For a door she can stand at
@@ -809,7 +818,7 @@ The table is **`quest_cards`**, flat and top-level — **not** `[[quests]]`, whi
 table.
 
 ```
-template_import.py:2868        for qc_raw in (data.get("quest_cards", []) or []):
+template_import.py:2998        for qc_raw in (data.get("quest_cards", []) or []):
 template_import.py:1239         class QuestsCard
 template_import.py:1320        def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
 v2.py:16809                    the V2 QuestsPage overlay is emitted only when
@@ -1106,7 +1115,7 @@ before writing a settle-up scene.
 ```toml
 [settings.rent]
 enabled          = true
-due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:5827
+due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:5957
 collector_npc    = "npc_collector"   # must exist in [[npcs]]
 start_after_flag = "first_shift_done"
 stages      = [ { amount = 100, after_total_paid = 0 }, { amount = 150, after_total_paid = 300 } ]
@@ -1183,7 +1192,7 @@ rung:
    `locked_text` goes mute. The gate **"a locked door says why"** therefore never counts a cost-only choice
    against a game.
 2. **The deduction is applied by the engine, not by your effects list.** A `costs` entry is parsed as
-   `{trait, value}` only (`template_import.py:2522-2525`). On a **choice** it is deducted inline with
+   `{trait, value}` only (`template_import.py:2652-2655`). On a **choice** it is deducted inline with
    `clamp = false` (`v2.py:14665`), so a balance above 100 survives it.
 
 ⚠️ **Canvas and location costs ARE clamped to 0–100, and you cannot turn it off.** They go through
@@ -1210,7 +1219,7 @@ traitEffects = [
 ]
 ```
 
-Parsed at `template_import.py:3115-3172` (`TemplateDailyTick`), and both effect lists run when the
+Parsed at `template_import.py:3245-3302` (`TemplateDailyTick`), and both effect lists run when the
 day rolls. `flagEffects` with `op = "unset"` is the mechanism behind every `_today` flag.
 
 **Why it matters more than it looks.** `max_triggers_per_day` is read **off the trigger**
@@ -1392,9 +1401,9 @@ it blindly cannot break a build.
 
 | type | open-ended top band? | the rule | source |
 |---|---|---|---|
-| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4187-4193` · `v2.py:18549-18550` |
-| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4049-4059` · `v2.py:18618-18619` |
-| `trait_bar` | **no** | both `min` and `max`; `flag` is rejected outright; `bands` itself is optional | `template_import.py:4095`, `:4111-4117` |
+| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4317-4323` · `v2.py:18549-18550` |
+| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4179-4189` · `v2.py:18618-18619` |
+| `trait_bar` | **no** | both `min` and `max`; `flag` is rejected outright; `bands` itself is optional | `template_import.py:4225`, `:4241-4247` |
 
 So the fix for a value off the top of the ladder is **not** to drop the `max` — that compiles on one
 type and hard-fails the build on the other two. Give the top band a `max` at or above the trait's
@@ -1405,7 +1414,7 @@ ceiling, or `cap` the terminal add (§29).
 This engine has no hygiene, hunger or thirst primitive, and that is a decision rather than an
 omission. It is recorded here because **`trait_status_text` makes one authorable in an afternoon** —
 its own spec comment says *"Use for hygiene/energy/hunger-style needs that recover on action"*
-(`template_import.py:4156-4160`) — so the temptation lands precisely on this section.
+(`template_import.py:4286-4290`) — so the temptation lands precisely on this section.
 
 The field's verdict, from section I's read of all 27 parseable corpus games:
 
@@ -1657,7 +1666,7 @@ gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
 
 ### 33.5 `[[traits.labels]] unit` is dead
 
-The importer reads it (`template_import.py:3332`) and stores it in project metadata (`:7813`). No
+The importer reads it (`template_import.py:3462`) and stores it in project metadata (`:7943`). No
 generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
 pluralising a currency.
 
@@ -1826,7 +1835,7 @@ rediscover it as a gap; build it when a game asks for it.
 
 ## 34b. `[player_portrait]` — her face in the sidebar
 
-A top-level table (`template_import.py:924-937`, parsed at `:2903`; `enabled` defaults to true when
+A top-level table (`template_import.py:924-937`, parsed at `:3033`; `enabled` defaults to true when
 the block is present). Keys: `default_image`, the undress states `naked_image` / `topless_image` /
 `bottomless_image` / `underwear_image`, `pregnancy_trait` with `pregnancy_suffix` (default `Preg`), and
 `[[player_portrait.outfits]]` rules (`image`, `when` on worn type, corruption or a flag). It renders
@@ -1871,7 +1880,7 @@ every time the passage draws. Re-enter the surface and the sentence is different
 
 ### The four authoring facts, verified in the importer
 
-`template_import.py:7559-7587` normalises both container types side by side, so the rules are the
+`template_import.py:7689-7717` normalises both container types side by side, so the rules are the
 same ones `group` follows — with one exception that is not.
 
 | | |
@@ -2002,7 +2011,7 @@ class at `:980`), beside `conditions`, `show_when_locked`, `locked_text` and
 `locked_text_threshold`, and are read from the TOML at `:2514`.
 
 ⚠️ **`rejection_node` IS build-validated, contrary to what the paragraph below used to imply.**
-`template_import.py:5408-5413` raises when it names a node that is not in the same canvas — so a
+`template_import.py:5538-5543` raises when it names a node that is not in the same canvas — so a
 typo fails the build with a message naming the canvas and the choice index. The fail-open warning
 described below is the generator's later slug→passage resolution, which only sees ids the importer
 has already accepted.
@@ -2037,7 +2046,7 @@ Measured 2026-08-23 — `findings_H_known.md` and `findings_J_players.md` §4.
 ### ⚠️ Ours is deterministic, and theirs is a roll
 
 **This engine has no per-choice random outcome.** `conditions` has no `random` type — the
-*"flag/trait/random"* list at `template_import.py:3526` is a docstring, not a feature — and the only
+*"flag/trait/random"* list at `template_import.py:3656` is a docstring, not a feature — and the only
 randomness available is `trigger_mode = "random"` (whether a canvas fires at all) and `block_pool`
 (which words render). A choice goes where its conditions send it.
 
@@ -2126,9 +2135,9 @@ SECOND EVALUATOR": read this table, not that comment, before adding an operator.
 
 ### What was actually broken, and what was not
 
-**A canvas condition's operator is not validated by the importer at all.** An unknown operator
-imports clean, reaches the runtime JSON, and fails **closed** in `compare()` with no build error and
-no warning. So `ne` was always writable on a canvas gate and always worked there.
+**Until E1 (2026-10-01) a canvas condition's operator was not validated by the importer.** An
+unknown operator imported clean and failed **closed** in `compare()`. The importer now rejects it
+(§2). `ne` was always writable on a canvas gate and always worked there.
 
 What did not work: the **same condition item** read through `setup.checkSingleCondition`, whose trait
 branch ran `gte / gt / lte / lt / eq` and then `return false`. A `ne` gate was therefore true on the
@@ -2148,20 +2157,20 @@ conditions = { version = "1.0", items = [
 
 ### ⚠️ Quest cards reject `ne` on purpose — do not "fix" the whitelist
 
-`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:6768`, `gte/lte/gt/lt/eq`) and
+`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:6898`, `gte/lte/gt/lt/eq`) and
 their evaluator, `setup.checkQuestsCondition`, has no `ne` case — its `switch` falls through to
 `return false`. Widening that whitelist without adding the case would let an author write a card
 condition that is **silently always false**, which is the failure this engine has had before with
 `conditions` lacking `version = "1.0"`.
 
 Widening it correctly means the whitelist **and** the evaluator, in the same change. The comment at
-`template_import.py:6761-6768` says so at the site.
+`template_import.py:6891-6898` says so at the site.
 
 Also unchanged, and for the same reason — each is its own path:
 
-- `template_import.py:6023` — hint `trait_checks`.
-- `template_import.py:5950`, checked at `:5973` — hint-template `stage_op`, `{eq, gte, lte}`.
-- `template_import.py:7136` — a **heuristic** threshold reader, not a validator. `ne` is not a
+- `template_import.py:6153` — hint `trait_checks`.
+- `template_import.py:6080`, checked at `:6103` — hint-template `stage_op`, `{eq, gte, lte}`.
+- `template_import.py:7266` — a **heuristic** threshold reader, not a validator. `ne` is not a
   threshold and does not belong there.
 
 ### ⚠️ The v1 rollback path
@@ -2193,8 +2202,8 @@ The path from the TOML to the screen, traced end to end:
 
 | step | where |
 |---|---|
-| read off `[project]`, defaulting to `""` | `template_import.py:1954` |
-| copied onto the project's metadata | `template_import.py:7663` |
+| read off `[project]`, defaulting to `""` | `template_import.py:2084` |
+| copied onto the project's metadata | `template_import.py:7793` |
 | escaped, then joined with ` · ` | `v2.py:17856-17857`, joined at `:17859` |
 | composed into the `versionFooter` widget | `v2.py:17864-17867` |
 | called unconditionally from `StoryCaption` — both variants | `v2.py:17887` and `:17902` |
@@ -2380,7 +2389,7 @@ Same word "condition", two parsers, two key names:
 
 `template_import.py:1225` is the quest side. Writing `trait_key` in a quest card fails validation
 with *"condition item must set one of `flag`, `trait` or `days_since_flag`"*
-(`template_import.py:6713`), which names the key it wants and gives no hint that the other half of the
+(`template_import.py:6843`), which names the key it wants and gives no hint that the other half of the
 same file uses a different one.
 
 ### 41c. A quest goal needs a `label`; every card needs a `when`
@@ -2422,7 +2431,7 @@ text**, and the same key is what enforces that character's hours. It lives at th
 
 ```
 [[canvases]] npc = …            → dropped. TemplateCanvas has no such field
-                                  (template_import.py:1055-1062, built named-only at :2583-2591)
+                                  (template_import.py:1055-1062, built named-only at :2713-2721)
 
 [canvases.trigger] npc = …      → TemplateTrigger.npc (template_import.py:755)
                                   → game_graph.py:344  "npc" into trigger metadata
@@ -2637,7 +2646,7 @@ both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAv
 (`v2.py:3686`), which covers the four schedule/planner consumers at once.
 
 Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
-written identically by both build paths (`template_import.py:8378`, `game_graph.py:336`), and read
+written identically by both build paths (`template_import.py:8508`, `game_graph.py:336`), and read
 by **nothing** in the generator.
 
 > **What that meant.** An author switches off the canvas that sets a door's key flag so the door
@@ -2690,7 +2699,7 @@ Two engine facts fall out, and they pull in opposite directions.
 
 **47.1 · A trait goal already prints the number.** `label — 14 / 20`, appended by the engine, with
 no author involvement. The importer also *requires* `label` on any trait or counter goal —
-`apps/projects/services/template_import.py:6775-6779`, whose own error text says *"it renders next
+`apps/projects/services/template_import.py:6905-6909`, whose own error text says *"it renders next
 to the ◯ bullet"*. So trait goals are safe by construction and are the shape to reach for whenever
 a card is gated on a number.
 
@@ -2735,7 +2744,7 @@ wake = "06:00"
 free = true
 ```
 
-| `kind` | does | the validator refuses (`template_import.py:3580`) |
+| `kind` | does | the validator refuses (`template_import.py:3710`) |
 |---|---|---|
 | `trait` (default) | one trait write: `trait`, `value`, `op`, `cap`, `clamp` | stage counters, hidden traits, flags, uncapped banded meters |
 | `next_day` | `advanceDay()`, then the clock to `wake` | any trait or flag field |

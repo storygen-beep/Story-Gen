@@ -11,7 +11,7 @@ import json
 import logging
 from dataclasses import asdict, dataclass, field, is_dataclass
 import uuid
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple
 
 import tomli
 from django.contrib.auth import get_user_model
@@ -1558,6 +1558,132 @@ def _validate_predicate_items_block(
     return errors
 
 
+# E1 (World and Systems PRD) — the one table of what a v1.0 condition item may say.
+# type -> (keys it may carry besides `type`, operators it may use). It mirrors the
+# branches of setup.triggerConditionsSatisfied in generators/v2.py. Before this, an
+# unknown type, key or operator imported clean and then failed closed at runtime (or,
+# with no version, failed OPEN), so a typo made a gate silently always-false or
+# always-true with a green build. An empty operator set means the branch never reads
+# `operator`, so carrying one is an unknown key. Adding a branch to the evaluator
+# means adding its row here, or the importer rejects every game that uses it.
+_COND_NUMERIC_OPS = frozenset({"eq", "ne", "gt", "gte", "lt", "lte"})
+_COND_COMPARE_OPS = _COND_NUMERIC_OPS | frozenset(
+    {"in", "not_in", "contains", "not_contains", "exists", "not_exists"}
+)
+_COND_SUBJECT_KEYS = frozenset({"subject", "npc_id", "character_id"})
+CONDITION_SCHEMA: Dict[str, Tuple[FrozenSet[str], FrozenSet[str]]] = {
+    "flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator"},
+             frozenset({"is_true", "is_false", "exists"})),
+    "trait": (_COND_SUBJECT_KEYS | {"trait_key", "operator", "value"}, _COND_COMPARE_OPS),
+    "days_since_flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator", "value"},
+                        _COND_NUMERIC_OPS),
+    "modifier": (frozenset({"modifier_key", "operator"}),
+                 frozenset({"is_active", "is_inactive"})),
+    "clothing_slot": (frozenset({"slot", "operator"}),
+                      frozenset({"equipped", "unequipped"})),
+    "clothing_item": (frozenset({"item_id", "operator"}),
+                      frozenset({"equipped", "unequipped", "owned", "not_owned"})),
+    "worn_exposure": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_beauty": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_corruption": (frozenset({"operator", "value"}), _COND_NUMERIC_OPS),
+    "worn_type": (frozenset({"operator", "value"}), frozenset({"eq", "neq"})),
+    "time_of_day": (frozenset({"start_time", "end_time"}), frozenset()),
+    "pass": (frozenset({"pass_id", "operator"}), frozenset({"is_active", "is_inactive"})),
+    "item": (frozenset({"item_id", "operator", "value"}), _COND_NUMERIC_OPS),
+    "stage": (frozenset({"helper", "operator"}), frozenset({"is_true", "is_false"})),
+    "quest": (frozenset({"quest_id", "quest", "operator", "value"}),
+              frozenset({"active", "completed", "step_gte"})),
+    "corruption_level": (frozenset({"operator", "value"}), frozenset({"gte", "lt", "eq"})),
+    "npc_at_location": (frozenset({"location_id", "location", "npc_id", "character_id",
+                                   "operator"}),
+                        frozenset({"is_present", "is_absent"})),
+}
+_COND_BLOCK_KEYS = frozenset({"version", "logic", "items"})
+
+# Keys that hold a v1.0 conditions table wherever they appear in the TOML. A schedule
+# row's `when` is one too, but only there (see _walk_condition_carriers).
+_CONDITION_CARRIER_KEYS = frozenset({"conditions", "entry_conditions", "match_condition",
+                                     "show_when"})
+# Top-level tables with their own condition schema, never a v1.0 block: quest cards
+# (`when`/`goals` lists, validated by _validate_quests_cards) and the player portrait's
+# outfit `when` (a flat unversioned dict by design).
+_CONDITION_EXCLUDED_TABLES = frozenset({"quest_cards", "player_portrait"})
+
+
+def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
+    """E1 — check one conditions table against CONDITION_SCHEMA.
+
+    Errors: not a table, a missing or wrong `version` (the runtime fails open without
+    "1.0"), an unknown block key or `logic`, and per item an unknown type, key or
+    operator. An empty table means "no condition" and is skipped.
+    """
+    if isinstance(block, dict) and not block:
+        return []
+    if not isinstance(block, dict):
+        return [f"{ctx}: must be a conditions table {{version, logic, items}}, "
+                f"got {type(block).__name__}"]
+    errors: List[str] = []
+    if str(block.get("version") or "") != "1.0":
+        errors.append(f'{ctx}: must carry version = "1.0" — without it the engine '
+                      f"fails OPEN and the gate passes for everybody")
+    for k in sorted(set(block) - _COND_BLOCK_KEYS):
+        errors.append(f"{ctx}: unknown key `{k}` (a conditions table has only "
+                      f"version, logic, items)")
+    if "logic" in block and block["logic"] not in ("AND", "OR"):
+        errors.append(f"{ctx}: logic must be \"AND\" or \"OR\", got {block['logic']!r}")
+    items = block.get("items", [])
+    if not isinstance(items, list):
+        return errors + [f"{ctx}.items: must be a list, got {type(items).__name__}"]
+    for ii, item in enumerate(items):
+        ictx = f"{ctx}.items[{ii}]"
+        if not isinstance(item, dict):
+            errors.append(f"{ictx}: must be a table, got {type(item).__name__}")
+            continue
+        ctype = item.get("type")
+        if ctype not in CONDITION_SCHEMA:
+            errors.append(f"{ictx}: unknown condition type {ctype!r} (known: "
+                          f"{', '.join(sorted(CONDITION_SCHEMA))})")
+            continue
+        keys, ops = CONDITION_SCHEMA[ctype]
+        for k in sorted(set(item) - keys - {"type"}):
+            errors.append(f"{ictx}: unknown key `{k}` on a `{ctype}` condition "
+                          f"(allowed: {', '.join(sorted(keys))})")
+        if "operator" in item and ops and item["operator"] not in ops:
+            errors.append(f"{ictx}: unknown operator {item['operator']!r} on a `{ctype}` "
+                          f"condition (allowed: {', '.join(sorted(ops))})")
+    return errors
+
+
+def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[str]:
+    """E1 — find every v1.0 conditions table in the raw TOML and check it.
+
+    Walks by key name rather than by a list of paths, so a carrier added later (a new
+    phone app, a new block kind) is covered without touching this function. The paths
+    it reaches in our games: canvas triggers and substitutions, every node block
+    (groups, cascades, linkreplace beats), choices and their effects, flagEffects,
+    rejection effects and text variants, location entry_conditions, description
+    variants, door options, clothing_rules, clothing items, phone conversation / post /
+    profile / gallery triggers, match_condition, daily_topics, daily_tick effects,
+    engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
+    """
+    errors: List[str] = []
+    if isinstance(node, dict):
+        for k, v in node.items():
+            child = f"{ctx}.{k}" if ctx else str(k)
+            if not ctx and k in _CONDITION_EXCLUDED_TABLES:
+                continue
+            if k in _CONDITION_CARRIER_KEYS or (k == "when" and parent_key == "schedules"):
+                errors.extend(_validate_condition_block_schema(v, child))
+                continue
+            errors.extend(_walk_condition_carriers(v, child, k))
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            label = v.get("id") if isinstance(v, dict) else None
+            child = f"{ctx}['{label}']" if isinstance(label, str) and label else f"{ctx}[{i}]"
+            errors.extend(_walk_condition_carriers(v, child, parent_key))
+    return errors
+
+
 # Doc 72 — `worn_type` predicate validator. Soft typo-catch: if a condition
 # references `worn_type == "X"` but no clothing item declares `type = "X"`,
 # emit a WARN naming the bad value. Plus an info note if `X` is outside the
@@ -1937,6 +2063,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # effect validators (_validate_effect_field_names / _validate_trait_declaration_
     # in_effect) against the authored keys rather than the normalized dataclass.
     _cheat_raw_rows: List[Dict[str, Any]] = []
+    # E1 — reject bad conditions at import. Walks the raw TOML (not the dataclasses) so
+    # every carrier is reached by its authored key, including ones parsed as raw dicts.
+    # Both builds (TI and the no-DB game_graph path) run normalize() then validate().
+    _parse_errors.extend(_walk_condition_carriers(data, ""))
 
     schema_version = _require_str(data, "schema_version", "0.1")
 

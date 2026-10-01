@@ -182,9 +182,11 @@ entry_from  = "loc_home"
 # location was always accessible. Post-PRD, the v1.0 conditions block applies
 # regardless of clothing settings.
 #
-# conditions.items is the v1.0 condition format. `type = "flag"` + `value = false`
-# means "this flag must NOT be set." Add more items to AND them together. For
-# OR-style gating, use multiple canvases or flag_effects on choices.
+# conditions.items is the v1.0 condition format: `operator = "is_false"` means
+# "this flag must NOT be set." Add more items to AND them together. The block
+# needs `version = "1.0"` (without it the engine fails open) and the predicate
+# keys `subject`/`flag_key`/`operator`; since E1 (2026-10-01) the importer
+# rejects the old `id`/`value` spelling this fixture used to carry.
 [[locations]]
 id          = "loc_prologue_cafe"
 name        = "Prologue Café"
@@ -192,8 +194,9 @@ description = "A café that belongs to a life you've already left."
 image       = ""
 entry_from  = "loc_home"
 [locations.entry_conditions]
+version = "1.0"
 items = [
-  { type = "flag", id = "summer_started", value = false },
+  { type = "flag", subject = "player", flag_key = "summer_started", operator = "is_false" },
 ]
 
 # ──────────────────────────────────────────────────────────────────────────────

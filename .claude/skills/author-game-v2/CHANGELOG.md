@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E1: the importer rejects bad conditions (World and Systems PRD, Phase 7; GLOBAL, build-time only)
+
+**Why.** WS-D10 step 1. A condition with an unknown type, key or operator imported clean and failed
+closed at runtime; one with no `version` failed open. Nothing between the TOML and the game said so
+(vesper_two's two buy locks with `state = "not_owned"` were always true, PRD §9 G1).
+
+**What changed.**
+- `apps/projects/services/template_import.py` (+130 lines): one table, `CONDITION_SCHEMA` (17 types,
+  each with its allowed keys and operators, mirroring `setup.triggerConditionsSatisfied`), and one
+  walker, `_walk_condition_carriers`, run from `normalize()` into `_parse_errors` so both builds (TI
+  and the no-DB `game_graph` path) fail. It walks the raw TOML by key name: `conditions`,
+  `entry_conditions`, `match_condition`, `show_when`, and a schedule row's `when`. Quest cards and
+  `player_portrait` are excluded. Errors: missing version, unknown block key or `logic`, unknown
+  type, key or operator. An empty table is "no condition".
+- `references/engine.md` §2 says the importer now rejects these; §37's "not validated by the
+  importer" line is now past tense.
+- Test fixture `engine_prd_2026_04_22.toml` carried the exact bug (an unversioned `entry_conditions`
+  with `id`/`value` keys, so the gate always passed): rewritten to a real v1.0 `is_false` gate. A
+  cascade test in `test_legacy_engine.py` used `trait` for `trait_key`: fixed.
+- Tests: `ConditionSchemaE1Tests` (15) in `apps/projects/tests.py`, including every carrier (27 in
+  one fixture), the two exclusions, a portrait-`when` fixture that still builds, and a drift guard
+  that every table type has a runtime branch; `TraitConditionNeSchemaTests`' "not whitelisted" test
+  now asserts the rejection; 2 in `tests/test_npc_schedule_when.py`.
+- Cites: 47 `template_import.py` cites in references re-pointed (5 by `cite_check --fix`, 42 through
+  the edit's line map, each checked to land on the same source line).
+
+**Verified.** Django tests (`apps/projects/tests.py`, `tests/`, `apps/game_generation/tests`): 14
+failed, the same 14 that fail at `ed2f1c6`. Skill pytest passed; `--selfcheck` current, orphans 3.
+Scratch rebuilds of members_only, billable_hours, orientation, probation, the_balance and vesper: all
+import, `index.html` byte-identical to `ed2f1c6`. vesper_two fails (its two `state` keys), as
+expected (WS-D24).
+
+**Words:** +88, running total 140,628 / 149,283.
+
+---
+
 ## 2026-10-01 — World W11: a goal's end is something the game builds (World and Systems PRD, Phase 1b)
 
 **Why.** WS-D23, N18: a game's ledger declared a goal whose `ends_when` nothing in the TOML could see, so the goal

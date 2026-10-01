@@ -716,7 +716,7 @@ nodeId     = "talk"
 with the hub unless something links to it.** `act_garage_late` (p7) replaces `hub_theo_garage` (p6)
 the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
 most reason to want it. A **qualified** nodeId reaches across canvases —
-`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:7414-7420`,
+`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:7544-7550`,
 validated at `:4498-4518`). One line on the escalation's base, and the two surfaces share the pool
 instead of duplicating forty lines of dialogue.
 
@@ -840,7 +840,7 @@ as the player meets people, which is what the field ships (the-company's cast ta
 Three things to get right:
 
 - **A `when` item sets `flag` *or* `trait`, never both** — the importer rejects an item carrying
-  both (`template_import.py:5285`). The meeting flag is its own item beside the trait band.
+  both (`template_import.py:5415`). The meeting flag is its own item beside the trait band.
 - **Put it on *every* card in that character's ladder**, not just the first. A gap means the
   character reappears at the band whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo

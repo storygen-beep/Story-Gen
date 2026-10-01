@@ -248,7 +248,7 @@ cooldown_message  = "<the hours, as a bare phrase>"
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
 `[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
 `trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
-`template_import.py:2160-2161`, the trigger table itself — and then writes them **into** metadata at
+`template_import.py:2290-2291`, the trigger table itself — and then writes them **into** metadata at
 `:7705-7706` for the generator to read back at `v2.py:12167-12168`. Authoring them in `metadata` directly
 skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
 `showWhenBlocked` reaches the built HTML **zero** times.

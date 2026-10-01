@@ -219,7 +219,7 @@ non-initial garment at `price = 0` is invisible on the very shop page it sits be
 (`v2.py:2077` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:2536` takes it as a bare string,
+⚠️ **`shop_location` is never validated** (`template_import.py:2666` takes it as a bare string,
 `v2.py:9935` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.
@@ -629,7 +629,7 @@ covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.
 aggregate that reads an empty slot: the upper region is bare unless `top` or `dress` fills it and
 underwear-level if only `bra` does, the lower likewise, and the result is the max of the regions and
 any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4111`, lock text at
-`:7900`), the garment field is `exposure` (`template_import.py:2525`), and `engine.md` §17 lists it
+`:7900`), the garment field is `exposure` (`template_import.py:2655`), and `engine.md` §17 lists it
 with the rest.
 
 ⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
