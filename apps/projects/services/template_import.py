@@ -502,7 +502,7 @@ class GameTemplate:
     # Clothing system
     clothing_enabled: bool = False
     clothing_items: List[TemplateClothingItem] = field(default_factory=list)
-    wardrobe_location: Optional[str] = None
+    wardrobe_location: Any = None  # a slug, or (E7d) a list of slugs
     shop_location: Optional[str] = None
     # E7b — both opt-in, raw so validate() can name a non-bool. Off (False / True) is
     # today's behaviour: no change link on a refusal, a dress code's change from anywhere.
@@ -3051,7 +3051,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     settings_raw = data.get("settings", {}) or {}
     narration_person = _require_str(settings_raw, "narration_person", "second")
     clothing_enabled = _require_bool(settings_raw, "clothing_enabled", False)
-    wardrobe_location = _require_str(settings_raw, "wardrobe_location", "")
+    # E7d — one slug as before, or a list of them (more than one wardrobe room).
+    wardrobe_location = settings_raw.get("wardrobe_location", "")
+    if isinstance(wardrobe_location, list) and len(wardrobe_location) == 1:
+        wardrobe_location = wardrobe_location[0]
     shop_location = _require_str(settings_raw, "shop_location", "")
     wardrobe_change_on_refusal = settings_raw.get("wardrobe_change_on_refusal", False)
     wardrobe_anywhere = settings_raw.get("wardrobe_anywhere", True)
@@ -6149,6 +6152,19 @@ def validate(template: GameTemplate) -> List[str]:
             if ci.id in seen_clothing_ids:
                 errors.append(f"duplicate clothing id: {ci.id}")
             seen_clothing_ids.add(ci.id)
+
+    # E7d — wardrobe_location: a slug or a list of slugs, each a declared location.
+    _wl = template.wardrobe_location
+    _wl_list = _wl if isinstance(_wl, list) else ([_wl] if _wl else [])
+    if not (_wl is None or isinstance(_wl, str) or isinstance(_wl, list)):
+        errors.append("settings.wardrobe_location must be a location id or a list of them")
+    else:
+        _loc_ids = {l.id for l in template.locations}
+        for _w in _wl_list:
+            if not isinstance(_w, str) or not _w:
+                errors.append("settings.wardrobe_location entries must be location ids")
+            elif _w not in _loc_ids:
+                errors.append(f"settings.wardrobe_location '{_w}' not found in locations")
 
     # E7b — the two wardrobe switches: bools, and only in a game with clothing.
     for _w_key, _w_default in (("wardrobe_change_on_refusal", False), ("wardrobe_anywhere", True),

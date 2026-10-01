@@ -1171,7 +1171,9 @@ class TweeComprehensiveGeneratorV2:
         # Clothing system data
         clothing_settings = (self.project.metadata or {}).get("clothing_settings", {})
         self.clothing_enabled = clothing_settings.get("enabled", False)
-        self.wardrobe_location_slug = clothing_settings.get("wardrobe_location", "")
+        # E7d — one slug or a list; every reader asks the set.
+        _wl = clothing_settings.get("wardrobe_location", "") or []
+        self.wardrobe_location_slugs = set(_wl if isinstance(_wl, list) else [_wl])
         self.shop_location_slug = clothing_settings.get("shop_location", "")
         # E7b — both absent in every game that does not opt in.
         self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
@@ -11053,7 +11055,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug_ec = (location.properties or {}).get("slug", "")
                     wardrobe_link_ec = ""
-                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec in self.wardrobe_location_slugs:
                         wardrobe_link_ec = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
@@ -11120,7 +11122,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug = (location.properties or {}).get("slug", "")
                     wardrobe_link = ""
-                    if self.clothing_enabled and loc_slug and loc_slug == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug and loc_slug in self.wardrobe_location_slugs:
                         wardrobe_link = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
@@ -14356,8 +14358,8 @@ setup.carryRent = function (due, paid) {
         return False
 
     def _wardrobe_location_ids(self) -> list:
-        """E7b — the location ids ($player.current_location's form) of the wardrobe room."""
-        slugs = {self.wardrobe_location_slug} if self.wardrobe_location_slug else set()
+        """E7b — the location ids ($player.current_location's form) of the wardrobe rooms."""
+        slugs = self.wardrobe_location_slugs
         return [
             str(loc.id) for loc in self.locations
             if (getattr(loc, "properties", None) or {}).get("slug") in slugs

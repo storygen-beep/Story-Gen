@@ -7,6 +7,9 @@
     ClothingBlock, and on the refusal) shows only where she can really change — a
     wardrobe room. The default keeps the old loophole: change from anywhere.
 
+E7d — `wardrobe_location` may be a list: every room in it gets "Change Clothes" and counts
+as a wardrobe room for `wardrobe_anywhere = false`.
+
     pytest apps/game_generation/tests/test_wardrobe_switches.py -q
 """
 import pytest
@@ -96,4 +99,17 @@ def test_the_defaults_are_todays_behaviour(html_default):
         assert g.passage() == "ClothingBlock"
         assert "Change clothes" in _links(g)            # the loophole, from anywhere
         assert g.js("() => typeof SugarCube.setup.canChangeClothesHere") == "undefined"
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_second_wardrobe_room_works_like_the_first(html):
+    with open_game(html) as g:
+        for room in ("loc_home", "loc_dan"):
+            _at(g, room)
+            assert "Change Clothes" in _links(g)
+            g.play("Location_loc_club")
+            assert "Change clothes" in _links(g)
+        _at(g, "loc_gym")
+        assert "Change Clothes" not in _links(g)
         assert g.errors == []

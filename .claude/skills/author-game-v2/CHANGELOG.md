@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: more than one wardrobe room (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7. `wardrobe_location` named one room, so a gym locker or a work
+changing room could not also be a place to change.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_location` is a slug, as before, or a list of slugs (a
+  one-item list is read as the slug). Each must be a declared location (build errors; the four clothing
+  games' single slugs pass). The list reaches `clothing_settings` as written, so GG gets it.
+- `generators/v2.py`: every reader asks the set of wardrobe rooms: the "Change Clothes" link on a room's
+  screen (both location paths) and the wardrobe rooms `wardrobe_anywhere = false` allows.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: "planned: more than one wardrobe
+  room" becomes the fact.
+- Citations re-pointed through the `git diff` line map (551 moved, 78 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (+1, headless: home and Dan's place both show "Change
+Clothes" and both let the club's refusal offer a change; the gym does neither). `WardrobeLocationListTests`
+(2: a list and a single slug validate; an unknown room, a non-string entry and a number are errors). The
+six games validate with 0 errors. No save state. Selfcheck and the skill tests pass; Django failures all
+in the known list.
+
+**Words:** +26, running total 145,625 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: saved outfits (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 7. Changing cost one click per slot; the counted games keep changing

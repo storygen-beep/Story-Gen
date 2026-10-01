@@ -28,7 +28,7 @@ starting_canvas = "<canvas_id>"
 
 # ⚠️ THE ONLY RELEASE NUMBER A PLAYER CAN READ WITHOUT LEAVING THE GAME. Both
 # optional; together they render "v0.1 · 2026-08-23" in the sidebar footer
-# (v2.py:18747-18761 — the widget is always defined and renders nothing when
+# (v2.py:18749-18763 — the widget is always defined and renders nothing when
 # both are empty). Set `version` in the SAME commit that rebuilds output/, and
 # make it match the portal entry in games-data.js. references/the-release.md
 # § Shipping the build · references/engine.md §38.
@@ -45,7 +45,7 @@ quests_engine   = "v2"
 # ⚠️ THE CURRENCY IS ONE NOTATION, AND IT IS DECLARED. Write it into the ledger
 # as board.economy.symbol, and set [settings.rent] currency_symbol (in
 # 0_systems_spec.toml) to the same string. Left undeclared the rent pages print
-# "$" (v2.py:1221) while every button prints whatever it was typed with.
+# "$" (v2.py:1223) while every button prints whatever it was typed with.
 # references/the-economy.md R7.
 # House default "$": it is the only symbol the engine renders consistently, and
 # name no real-world currency in the prose.

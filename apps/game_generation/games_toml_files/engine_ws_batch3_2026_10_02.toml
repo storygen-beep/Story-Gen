@@ -24,6 +24,7 @@
 #                 in loc_home for the same reason. The tests also build this fixture with
 #                 both switches removed, to prove the defaults are today's behaviour.
 #    saved_outfits  the wardrobe page saves what she wears and puts it back on.
+#    wardrobe_location  two wardrobe rooms: loc_home and loc_dan (never loc_gym).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -168,7 +169,7 @@ exit_block = { type = "location", text = "Step back", config = { destinationType
 
 [settings]
 clothing_enabled           = true
-wardrobe_location          = "loc_home"
+wardrobe_location          = ["loc_home", "loc_dan"]
 wardrobe_change_on_refusal = true
 wardrobe_anywhere          = false
 saved_outfits              = true

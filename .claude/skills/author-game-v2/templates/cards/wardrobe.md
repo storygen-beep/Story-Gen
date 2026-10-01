@@ -105,7 +105,7 @@ it feeds · key use · taken away · sex scenes strip it.
 - Lines: a `[group]` band on a `worn_*` condition.
 - The number: `worn_exposure`; `worn_beauty` and `worn_corruption` are readable, but pay cannot be computed from them.
 - Key garments: `clothing_item` conditions; the reminder is a hand-written band (a hub line, a quest card).
-- `wardrobeEffects` add, equip, unequip and remove. One wardrobe room (planned: more than one
-  wardrobe room). Saved outfits behind `saved_outfits = true`.
+- `wardrobeEffects` add, equip, unequip and remove. One or more wardrobe rooms (a list in
+  `wardrobe_location`). Saved outfits behind `saved_outfits = true`.
 - The shop groups by corruption tiers, shows no "approved for" text, and there is one shop (planned: item
   prices and a general shop).

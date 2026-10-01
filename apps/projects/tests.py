@@ -6717,6 +6717,29 @@ class WardrobeSwitchSchemaTests(SimpleTestCase):
                             for e in errors), errors)
 
 
+class WardrobeLocationListTests(SimpleTestCase):
+    """E7d (World and Systems PRD) — `wardrobe_location` may be a list."""
+
+    def test_a_list_and_a_single_slug_validate(self):
+        d = _batch3()
+        self.assertEqual(d["settings"]["wardrobe_location"], ["loc_home", "loc_dan"])
+        self.assertEqual(validate(normalize(d)), [])
+        d["settings"]["wardrobe_location"] = "loc_home"
+        self.assertEqual(validate(normalize(d)), [])
+
+    def test_unknown_rooms_are_errors(self):
+        for value, fragment in (
+            (["loc_home", "loc_moon"], "settings.wardrobe_location 'loc_moon' not found"),
+            ("loc_moon", "settings.wardrobe_location 'loc_moon' not found"),
+            (["loc_home", 3], "entries must be location ids"),
+            (5, "must be a location id or a list of them"),
+        ):
+            d = _batch3()
+            d["settings"]["wardrobe_location"] = value
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (value, errors))
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

@@ -311,7 +311,7 @@ opened it. The hub opener stays constant, exactly as Course of Temptation's does
 
 **How to build it.** The choice that routes into the act sets a flag or trait; the act's opening
 beat is a `group` chain reading it. Adjacent `group` blocks merge into one if/elseif chain and first
-match wins (`engine.md` §35, `v2.py:15356-15363`), so the branches must be mutually exclusive.
+match wins (`engine.md` §35, `v2.py:15358-15365`), so the branches must be mutually exclusive.
 
 ### It is field-wide
 
@@ -488,7 +488,7 @@ gets neither.
 > **A clip at the top of a canvas is a clip for beat 0. Every beat that ESCALATES carries its own.**
 
 This is an engine fact before it is a rule. A cascade renders as nested `<<linkreplace>>`
-(`v2.py:15367` — the beat's blocks become the linkreplace body, `_render_cascade_tail` at `:15307`), so **every beat
+(`v2.py:15369` — the beat's blocks become the linkreplace body, `_render_cascade_tail` at `:15309`), so **every beat
 appends below the last and nothing is ever removed.** The clip stays pinned where it was. By the
 beat that is the act, it has scrolled away, and the player reads the payoff under a picture of the
 setup.
@@ -515,7 +515,7 @@ requires" — and then shows a node-level block, which is the thing this rule ex
 
 Both blocks below are **one beat out of a cascade**, shown alone. In a real cascade **beat 0 carries
 no `advance_text`** — it renders on entry — and so does a terminal beat; the `advance_text` is what
-makes a beat a click. `v2.py:15221`.
+makes a beat a click. `v2.py:15223`.
 
 **One-shot beat — a fixed `file`:**
 
@@ -552,7 +552,7 @@ review dedupes by file, so two beats sharing an asset collect **one** verdict be
 second beat is reviewed by nobody.
 
 ⚠️ **The node lead's clip does not scroll away — the beats append underneath it.** A cascade renders
-as nested `<<linkreplace>>` (`_render_cascade`, `v2.py:15221`), so nothing is ever removed. That is why a clip at the
+as nested `<<linkreplace>>` (`_render_cascade`, `v2.py:15223`), so nothing is ever removed. That is why a clip at the
 top is a clip for beat 0 and cannot serve beat 4: by then the player is reading the act under a
 picture of the setup.
 
@@ -1094,7 +1094,7 @@ regional name it has.
 does it in the first sentence: *"You are outside the Summit Market, a building which contains the
 eponymous market"*. Descriptive metadata never reaches the player: `image_search_queries` are
 search terms, and a video block's `description` becomes only the `alt` text when its file is an
-image (`v2.py:16650`) — an image block's `alt` comes from its own `alt` prop. Neither is on screen.
+image (`v2.py:16652`) — an image block's `alt` comes from its own `alt` prop. Neither is on screen.
 A location's kind belongs in the first sentence that names it, not in its metadata. (The map is
 `the-map.md`'s; what the prose calls it is this file's.)
 
