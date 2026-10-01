@@ -47,7 +47,8 @@ Temptation), updates that add *"unnecessary sounds"* instead of *"continuing the
 Deals). §1b's hold starts her and §3's meters carry her; **the
 goal or the mystery is what pulls the player.** It stays alive after the hold goes quiet, and the
 guidance page (`engine.md` §23) carries it. Declare the goal and what comes after it, the mystery with
-a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*; a sidebar `countdown`
+a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*, and a line promising a dated event must be built
+(`register.md`, "The truth rule"); a sidebar `countdown`
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
 count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain).
 

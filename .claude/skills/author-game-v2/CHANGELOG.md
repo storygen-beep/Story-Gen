@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W10 · PROTECTED (truth rule, WS-D11): a promise about the future must be built
+
+**Why.** WS-D23, N18: a game promised a dated review ("week twelve") many times and never built it. The truth rule
+covered claims about the past and the present, not promises about the future, and "The goal has no date" in
+`the-want.md` had nothing to point at for the lines that repeat the date.
+
+**What changed.** `references/register.md` "The truth rule": one paragraph added after the four numbered rules,
+"A promise about the future must be built" (a line naming a future day, week or scene is true only if the game
+builds that event or its step is in the release plan; otherwise cut it or drop the date). The paragraph sits
+outside the numbered list so the heading "The four rules." and every other line of the section stay unchanged.
+`references/the-want.md` "The goal has no date" now points at it.
+
+**Verified.** `git diff` of `register.md` is the four added lines only; grep finds the rule once; `--selfcheck`
+current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest passed.
+
+**Words:** +71, running total 140,498 / 149,283.
+
+---
+
 ## 2026-10-01 — World W9: a home is laid out like a house (World and Systems PRD, Phase 1b)
 
 **Why.** WS-D23, N18: a game shipped with the kitchen as the house hub, the people who live there homed in it, and

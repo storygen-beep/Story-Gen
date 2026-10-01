@@ -105,6 +105,10 @@ one was out of character, and one printed a stat that does not exist.
 4. **A consequence printed on a button is a real flag or stat**, or it is added to the design first.
    Numbers are shown and named (`the-meters.md`, "What the player is shown").
 
+**A promise about the future must be built.** A line that names a future event (a day, a week or a
+scene: *"at week twelve he decides"*) is true only if the game builds that event, or the step that
+reaches it is in the release plan. Otherwise cut the line, or rewrite it without the date.
+
 **How to check a scene — seven steps.**
 
 1. List every time the canvas can fire: its trigger, plus the NPC's schedule rows on every
