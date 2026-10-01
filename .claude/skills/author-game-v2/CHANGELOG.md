@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C3: the-meters.md W7 and W3 — read clothing cheaply and often, gate only at doors that say why
+
+**Why.** LO's clothing decision: states first, each read in ≥3 places. W7 said "if you find yourself
+writing gates on it, you are building the wrong kind of meter", which contradicts dress codes and
+leave prices — Course of Temptation enforces a dress code on 61.9% of its location passages (round 9a
+§2). And W7 leaned on a FAIL game's code (DoL) for its models.
+
+**What changed.** `references/the-meters.md`:
+- W7's rule and title: read cheaply and often; gate only at a door that says why (a leave price, a
+  dress code, a place that wants her bare); hidden clothing gates are 41 of 194 classed failures.
+- A new paragraph reconciles "small and gates, or large and colours" with clothing's doors (CoT's
+  dress codes, its reason text; IHOH's club refusal).
+- The DoL band-ladder code block is cut; the counts stay (seven rungs; `corpo-life` 5,785 sites).
+- "What the player is shown": the one number is `worn_exposure` and the states read through it;
+  the two `worn_exposure` paragraphs (with stale `v2.py` cites) become one pointer to `engine.md` §17
+  plus the ≥3-readers rule (planned gate: `every clothing state is read three times`).
+- DoL's variable names, district names, `exposure()` code and garment field names are cut; the counts
+  stay (~900 reads, 82%; ~20 reactions; 14 audience checks; 515/37/5 garments).
+- `npc_at_location` cite re-pointed (`v2.py:4823`).
+- W3: the wardrobe gate is the floor; the rule is ≥3 readers per declared state and key item.
+
+**Verified.** No DoL name, variable or code is left in W7 (grep). Selfcheck and the skill tests pass.
+
+**Words:** +9, running total 143,975 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C2: engine.md §17 teaches states first, then items
 
 **Why.** LO's clothing decision: the wardrobe is designed as states, items second. §17 opened on

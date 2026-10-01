@@ -210,7 +210,9 @@ reader families count, and all three are legitimate: a **condition predicate** (
 (`clothing_rules`). The
 portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
 field's normal case**. Same fig-leaf risk as above, answered the same way: the summary
-prints garments against reads, so a thin pass is visible.
+prints garments against reads, so a thin pass is visible. **That gate is the floor; the rule is ≥3
+readers for every declared state and key item** (W7; planned gate: `every clothing state is read
+three times`).
 
 **⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
 the wardrobe is read. It cannot ask whether the read can ever be **true**. A clothing condition that
@@ -551,11 +553,13 @@ carries, plus how many distinct shapes exist across the cast.
 
 ---
 
-## W7 · The body's meters are read to colour, not to refuse
+## W7 · The body's meters are read to colour, and gate only at doors that say why
 
 > **A body value — clothes, arousal, hygiene — earns its place by changing the words in
-> a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. If you
-> find yourself writing gates on it, you are building the wrong kind of meter.**
+> a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. Gate on
+> it only at a door that says why: a daring price to leave in a revealing state, a dress code, a
+> place that wants her bare. A gate that hides its reason is the field's biggest clothing failure
+> (41 of 194 classed player failures, round 9a §5).**
 
 W5 is the counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
 gating meters. **The body is a fourth shape and it behaves like none of them.**
@@ -585,25 +589,19 @@ gates 47% of its pregnancy reads — of **34**.
 > **A body system either stays small and gates, or grows large and colours. Nothing in the corpus
 > is both big and gating.**
 
+**Clothing is the one body system with doors, and the doors are few and loud.** Course of
+Temptation enforces a dress code on 61.9% of its location passages (78 of 126; round 9a §2), and its
+clothes still gate only a small share of reads: a dress code is one read per place, and the rest are
+lines. Each of its blocks names what is missing (*"(Need Exhibitionism N)"*), and In Her Own Hands'
+club refusal sends her back to the wardrobe. Gate at the door, say why at the door, offer the change
+(`engine.md` §17: a dress code offers it; an `entry_conditions` refusal cannot yet).
+
 ### The band ladder — write it once
 
 The mechanic underneath every one of these is the same: a number, a ladder of bands, and a short
 string per band. What separates a good implementation from a bad one is **where the ladder lives.**
-
-`degrees-of-lewdity` writes it once, in a widget, seven rungs wide:
-
-```
-<<if $hygiene gte 2000>>   You are filthy.
-<<elseif $hygiene gte 1600>>You are soiled.
-<<elseif $hygiene gte 1200>>You are smelly.
-<<elseif $hygiene gte 800>> You are messy.
-<<elseif $hygiene gte 400>> You are neat.
-<<elseif $hygiene gte 1>>   You are clean.
-<<elseif $hygiene lte 0>>   You are speckless.
-```
-
-`corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
-set a descriptor string, copy-pasted through the game instead of factored into one place.
+One counted game writes it once, seven rungs wide; `corpo-life` (counted) writes the identical
+structure **inline, across 5,785 sites**.
 
 Note what the bands say: **a body state in words**, printed beside the number (M7), so the player
 meets both how she is and how far. Our surface for this is `trait_status_text` (`engine.md` §30) — one
@@ -612,10 +610,10 @@ authored ladder, rendered wherever the trait sits.
 ### What the player is shown
 
 **Numbers are shown and named, and the world reacts to them** *(LO decided, D1; R3 K12: corruption is
-a number in 13 of 15 top games)*. `degrees-of-lewdity`'s body system is `$exposed`, a three-state value
-the author writes once and the engine derives from the worn set; the world then reads it about **900
-times**, and 82% of those reads only change words. **One derived number, cheap enough to test that the
-whole world tests it.** W3's gate makes sure somebody reads it.
+a number in 13 of 15 top games)*. One counted game's body system is a three-state value derived from
+the worn set; its world reads it about **900 times**, and 82% of those reads only change words. **One
+derived number, cheap enough to test that the whole world tests it.** Ours is `worn_exposure`, and the
+states read through it. W3's gate makes sure somebody reads it.
 
 1. **Her traits show as name + number**, with a band word beside it where it has bands (M7). One name
    per trait, everywhere (`engine.md` §30).
@@ -628,45 +626,33 @@ whole world tests it.** W3's gate makes sure somebody reads it.
    *"14 / 20"* (`the-voice.md` R3b), and a locked button prints the need (R4). Players ask *"how do I
    raise X"* far more than *"show me X"* (4 of 22,252 comments ask to see a stat).
 
-⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
-`getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1585-1586`), so a naked player
-reads the same as one in plain underwear.
+⚠️ **The one number is `worn_exposure` (0 covered, 1 underwear-level, 2 bare), and the states are
+its readers.** `worn_corruption` and `worn_beauty` skip an empty slot, so naked reads the same as
+plain underwear; `worn_exposure` reads the empty slot, and `clothing_slot` names a state exactly
+("no bra"). The mechanism is `engine.md` §17. Design the states first — dressed, skirt, no bra, no
+panties, underwear, towel, topless, naked — and read each one in ≥3 places: a leave rule, a place,
+an event or an NPC line (round 9a, the wardrobe card; planned gate: `every clothing state is read
+three times`).
 
-**`worn_exposure` is the real equivalent, and it exists as of 2026-08-28.** A derived 0/1/2 — 0
-covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1615`), the one
-aggregate that reads an empty slot: the upper region is bare unless `top` or `dress` fills it and
-underwear-level if only `bra` does, the lower likewise, and the result is the max of the regions and
-any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4197`, lock text at
-`:7900`), the garment field is `exposure` (`template_import.py:2692`), and `engine.md` §17 lists it
-with the rest.
-
-⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
-gate on clothing most are Cliff Street, the Arcade, the Moor, Connudatus Street and the Park — the
-walk to work, not the sex scenes. It carries roughly twenty per-district reactions
-(`cliffexposed`, `parkexposed`, `commercialexposed`…), so walking out underdressed means something
-different on the cliff than in the park. **One
+⚠️ **And copy where the reads live, not just the number.** In the counted game that reads exposure
+most, the passages that gate on clothing most are five streets and open places — the walk to work,
+not the sex scenes — with roughly twenty per-district reactions, so walking out underdressed means
+something different in each. **One
 ambient at one location, gated on exposure AND on somebody being there to see it, is the whole
 starting move**; add the second when the first earns it. A derived number that only the wardrobe
 screen reads is the same defect in a new place.
 
 ⚠️ **Exposure is not a property of the outfit. It is a property of the outfit in a PLACE, with an
-AUDIENCE** — and this is the half that is easy to miss, because the number itself hides it. Read
-`degrees-of-lewdity`'s `exposure()` and the first thing it computes is not clothing at all:
-
-```js
-const safeLocations = ["Bedroom", "Sleep", "Bird Tower", "Mirror", "Spa Tan Naked", ...];
-if (safeLocations.some(...) && !V.audiencepresent) { V.libertine = 2; }   // anything goes
-else if (["beach", "pool", "sea", "lake"].includes(...)) { ... }
-```
-
-`audiencepresent` is consulted 14 times. Naked in her own bedroom is nothing; naked on Cliff Street
-is the event; a swimsuit is exposure on the high street and unremarkable at the pool.
+AUDIENCE** — and this is the half that is easy to miss, because the number itself hides it. The same
+counted game computes the place before the clothes: a list of safe places where anything goes with
+nobody present, and water places where a swimsuit is nothing; its audience check is consulted 14
+times. Naked in her own bedroom is nothing; naked on the street is the event.
 
 **Our engine reaches the same place from the other direction, and the place half costs nothing.**
-DoL centralises the judgement in one function that knows which locations are safe. We distribute it:
+That game centralises the judgement in one function that knows which places are safe. We distribute it:
 a canvas is bound to a location, so an exposure ambient only fires where an author put it, and her
 bedroom is safe by simply having none. The audience half is `npc_at_location` with no `npc_id` —
-the any-NPC "room occupied" form (`v2.py:4733`). **Gate on both.** An ambient that fires in an empty
+the any-NPC "room occupied" form (`v2.py:4823`). **Gate on both.** An ambient that fires in an empty
 room is the game talking to itself.
 
 **The starting move, written out.** A random ambient at one location that can only fire when she is
@@ -705,11 +691,9 @@ being broken. `engine.md` records the same trap for `entry_conditions`.
 a clickable link instead of firing on entry — a link labelled *"The market notices"* is not the same
 content and gives the game away.
 
-⚠️ **0/1/2 on the garment is the right scale, and this was checked rather than assumed.** DoL
-carries TWO fields per garment and it is easy to copy the wrong one. `exposed` is **0/1/2** — 515
-garments at 0, 37 at 1, 5 at 2 — and it is what `itemExposure()` returns and what the world gates
-on. `reveal` is a separate 0–10000 *look* rating feeding a colour scale (`>=900` red, `>=700` pink,
-`>=500` purple) and NPC lust checks; **our nearest equivalent to `reveal` is `beauty`, which we
+⚠️ **0/1/2 on the garment is the right scale, and this was checked rather than assumed.** The counted
+game's gated garment field is **0/1/2** — 515 garments at 0, 37 at 1, 5 at 2. A separate 0–10000 look
+rating feeds its colour and NPC lust checks; **our nearest equivalent to that is `beauty`, which we
 already have.** So `exposure = 0` as the default is correct too: the overwhelming majority of real
 garments cover.
 
