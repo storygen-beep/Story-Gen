@@ -5,6 +5,27 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Billable B2 (PROTECTED, tools): the promise row is n/a in lenient mode
+
+**Why.** The Billable Hours test ran `shape.py` at phase `idea` (lenient) and got a red on "the
+promise has a beat this release": the promise named a goal, and the release page did not yet say
+which beat keeps it alive. That branch was a bare `False`, while its siblings (the same row's
+no-goal branch, "the door is a declared step", "the pressure can be met") are `False if strict else
+None`. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/shape.py`, "the promise has a beat this release", the empty `promise_alive` branch:
+  `False` becomes `False if strict else None`. One line, nothing else.
+- `scripts/tests/test_shape.py`: a new test — with `promise_alive` popped, lenient gives `None` and
+  strict gives `False`.
+
+**Verified.** The new test fails on the old line and passes on the new one. Selfcheck and the skill
+tests pass.
+
+**Words:** +0, running total 144,332 / 149,283.
+
+---
+
 ## 2026-10-01 — Billable B1: step-family nouns take a hyphen
 
 **Why.** The Billable Hours test found `--words` listing *stepbrother*, *stepfather* and *stepsister*:
