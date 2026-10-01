@@ -1,6 +1,7 @@
 # =============================================================================
 # Billable Hours — 1 · player, locations, people
-# Map: two_hub. Two roots joined by the bus: linden_street (the house) and downtown
+# Map: two_hub. Two roots joined by the bus: linden_street (the house: hall, kitchen, study,
+# upstairs with four rooms) and downtown
 # (the firm, the hotel bar, the Velvet Room). Downtown is sealed: only the bus reaches it.
 # =============================================================================
 
@@ -32,12 +33,31 @@ navigation_order     = ["house"]
 
 [[locations]]
 id                   = "house"
+name                 = "Home"
+kind                 = "thoroughfare"   # the front hall: it only routes (the-map.md R2)
+description          = "The front hall of Martin's house. The kitchen is straight ahead, Martin's study is off to the side, and the stairs go up to the bedrooms and the bathroom."
+image                = "locations/house_hall.jpg"
+image_search_queries = ["suburban house front hall staircase", "family home entrance hallway stairs evening"]
+entry_from           = "linden_street"
+navigation_order     = ["kitchen", "landing", "study"]
+
+[[locations]]
+id                   = "kitchen"
 name                 = "The Kitchen"
-description          = "The kitchen of Martin's house: the big table where the family eats breakfast and dinner, and where Martin collects his money on Fridays. The stairs go up to your room and the landing. Martin's study is off the hall."
+description          = "The kitchen: the big table where the family eats breakfast and dinner. On Fridays Martin sits at the head of it and waits for his envelope."
 image                = "locations/kitchen.jpg"
 image_search_queries = ["family kitchen table morning suburban", "modern kitchen dinner table evening"]
-entry_from           = "linden_street"
-navigation_order     = ["her_room", "landing", "study"]
+entry_from           = "house"
+
+[[locations]]
+id                   = "landing"
+name                 = "Upstairs"
+kind                 = "thoroughfare"   # a hallway only; every room up here is its own location
+description          = "The upstairs hall. Your room is at the back. The bathroom is across from Ethan's room, and Martin and Diane's room is at the front."
+image                = "locations/landing.jpg"
+image_search_queries = ["upstairs hallway bedroom doors", "dark upstairs hallway door ajar light"]
+entry_from           = "house"
+navigation_order     = ["her_room", "bathroom", "ethan_room", "parents_room"]
 
 [[locations]]
 id                   = "her_room"
@@ -45,15 +65,31 @@ name                 = "Your Room"
 description          = "Your room: the small back bedroom with a single bed, a wardrobe of work clothes, and a door that shuts. This is where you sleep and dress."
 image                = "locations/her_room.jpg"
 image_search_queries = ["small bedroom single bed wardrobe", "young woman bedroom night lamp"]
-entry_from           = "house"
+entry_from           = "landing"
 
 [[locations]]
-id                   = "landing"
-name                 = "The Landing"
-description          = "The upstairs landing. The bathroom is here, and its door doesn't latch. Ethan's door is right across from it."
-image                = "locations/landing.jpg"
-image_search_queries = ["upstairs landing hallway bathroom door", "dark hallway door ajar light"]
-entry_from           = "house"
+id                   = "bathroom"
+name                 = "The Bathroom"
+description          = "The bathroom everyone shares. The shower is hot, and the door doesn't latch. Ethan's door is right across the hall."
+image                = "locations/bathroom.jpg"
+image_search_queries = ["family bathroom shower glass door", "bathroom door ajar steam light"]
+entry_from           = "landing"
+
+[[locations]]
+id                   = "ethan_room"
+name                 = "Ethan's Room"
+description          = "Ethan's room: a desk covered in files and red pens, an unmade bed, a tub of protein powder. He's in here most nights after nine."
+image                = "locations/ethan_room.jpg"
+image_search_queries = ["young man bedroom desk files unmade bed", "male bedroom desk lamp night"]
+entry_from           = "landing"
+
+[[locations]]
+id                   = "parents_room"
+name                 = "Martin and Diane's Room"
+description          = "Martin and Diane's bedroom: a big bed, your mother's dresser with her pearls on it, and Martin's side with the whisky glass on the nightstand."
+image                = "locations/parents_room.jpg"
+image_search_queries = ["master bedroom big bed dresser lamp", "parents bedroom nightstand whisky glass"]
+entry_from           = "landing"
 
 [[locations]]
 id                   = "study"
@@ -120,7 +156,7 @@ core_traits  = { martin_want = 0, martin_power = 0 }
 show_traits  = ["martin_want", "martin_power"]
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time = "08:30"
@@ -134,14 +170,14 @@ end_time = "17:00"
 activity = "In his office"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "18:00"
 end_time = "19:00"
 activity = "Dinner"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3]
 start_time = "19:00"
 end_time = "22:00"
@@ -155,7 +191,7 @@ end_time = "23:00"
 activity = "In his study, door shut"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [5, 6]
 start_time = "09:00"
 end_time = "22:00"
@@ -171,7 +207,7 @@ role         = "mother"
 tags         = ["Worry", "Your success", "Pearls", "Tea"]
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time = "08:30"
@@ -185,14 +221,14 @@ end_time = "17:00"
 activity = "At her desk outside Martin's office"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "18:00"
 end_time = "22:00"
-activity = "Dinner, then TV"
+activity = "Dinner, then the TV in the kitchen"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [5, 6]
 start_time = "09:00"
 end_time = "22:00"
@@ -208,7 +244,7 @@ role         = "step-brother"
 tags         = ["Contempt", "Winning", "Red ink", "Protein shakes"]
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time = "08:30"
@@ -222,7 +258,7 @@ end_time = "18:00"
 activity = "At his desk"
 
 [[npcs.schedules]]
-location = "house"
+location = "kitchen"
 weekdays = [0, 1, 2, 4]
 start_time = "18:00"
 end_time = "19:00"
@@ -236,11 +272,11 @@ end_time = "21:00"
 activity = "Staying late"
 
 [[npcs.schedules]]
-location = "landing"
+location = "ethan_room"
 weekdays = [0, 1, 2, 3, 6]
 start_time = "21:00"
 end_time = "23:30"
-activity = "In his room across the landing"
+activity = "In his room"
 
 [[npcs]]
 id           = "npc_jade"

@@ -11,7 +11,7 @@ name = "Martin at breakfast"
 description = "Martin's hub. The leak by stage; reads her outfit and Ethan's face. Raises his want +1 a day, cap 14."
 
 [canvases.trigger]
-location      = "house"
+location      = "kitchen"
 npc           = "npc_martin"
 requires_npc  = "npc_martin"
 is_repeatable = true
@@ -80,7 +80,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit with him."
 targetType = "location"
-locationId = "house"
+locationId = "kitchen"
 time_progression_minutes = 15
 flagEffects = [ { targetType = "player", flag = "breakfast_today", op = "set" } ]
 effects = [ { targetType = "npc", npcId = "npc_martin", trait = "martin_want", op = "add", value = 1, cap = 14 } ]
@@ -108,7 +108,7 @@ text = "Go."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "house"
+locationId               = "kitchen"
 time_progression_minutes = 5
 
 # ── Diane in the evening ─────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ name = "Your mother"
 description = "Diane's hub at home. Worried; reads office talk and whether Fridays are 'sweet'."
 
 [canvases.trigger]
-location      = "house"
+location      = "kitchen"
 npc           = "npc_diane"
 requires_npc  = "npc_diane"
 is_repeatable = true
@@ -143,14 +143,24 @@ blocks = [
   { type = "group", props = { blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Are you eating properly? You look tired. Is Callahan being fair to you?" },
   ] } },
-  { type = "paragraph", content = "She pats the sofa next to her." },
+  { type = "paragraph", content = "She pats the chair next to hers at the table." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 2 } ] }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "You and Martin were up so late on Friday. He came to bed humming. I haven't seen him like that in years." },
   ] } },
-  { type = "group", props = { blocks = [
-    { type = "paragraph", content = "The TV murmurs." },
+  { type = "paragraph", content = "The TV on the counter murmurs." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "parents_bed_used", operator = "is_true" } ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Martin says I've started making his side of the bed too neatly. I haven't touched it." },
   ] } },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Week twelve, sweetheart. I've told everyone you'll be kept on. Don't let me down." },
+  { type = "paragraph", content = "She squeezes your hand." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "review_failed", operator = "is_false" } ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Week twelve, sweetheart. I've told everyone you'll be kept on. Don't let me down." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_failed", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_false" } ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Probation. I told everyone it was a formality, sweetheart. Make it one." },
+  ] } },
+  { type = "group", props = { blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Kept on. I told everyone you would be. Now go and get that contract signed." },
+  ] } },
 ]
 
 [canvases.nodes.exit_block]
@@ -159,17 +169,17 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "Tell her it's fine."
 targetType = "location"
-locationId = "house"
+locationId = "kitchen"
 time_progression_minutes = 10
 
-# ── Ethan's door on the landing ──────────────────────────────────────────────
+# ── Ethan in his room ────────────────────────────────────────────────────────
 [[canvases]]
 id   = "hub_ethan_landing"
 name = "Ethan's door"
 description = "Ethan's hub. The leak: his door is open an inch, and only when yours is. Reads what she is wearing."
 
 [canvases.trigger]
-location      = "landing"
+location      = "ethan_room"
 npc           = "npc_ethan"
 requires_npc  = "npc_ethan"
 is_repeatable = true
@@ -190,10 +200,17 @@ blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "What. Did you want something, or are you just standing there?" },
   ] } },
   { type = "group", props = { blocks = [
-    { type = "paragraph", content = "He's at his desk with the door half open, marking something up in red. He pushes it shut with his foot as you pass." },
+    { type = "paragraph", content = "He's at his desk, marking something up in red. When you lean in his doorway his pen stops, and he looks you up and down before he looks away." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Night, intern." },
   ] } },
-  { type = "paragraph", content = "The landing light is on. The bathroom door stands open behind you." },
+  { type = "paragraph", content = "Behind you, across the hall, the bathroom door stands open." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_bed_used", operator = "is_true" } ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Somebody's been in my bed. It smelled like you." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_caught_snooping", operator = "is_true" } ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Stay out of my desk, intern." },
+  ] } },
+  { type = "paragraph", content = "He waits for you to say something." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "touch_loud", operator = "is_true" } ] }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Thin walls, intern. Some of us are trying to sleep." },
   ] } },
@@ -206,8 +223,8 @@ blocks = [
   { type = "group", props = { blocks = [
     { type = "paragraph", content = "He doesn't say anything else." },
   ] } },
-  { type = "paragraph", content = "Through his wall you can hear him moving around, not sleeping." },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 } ] }, blocks = [
+  { type = "paragraph", content = "He doesn't ask you in." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" } ] }, blocks = [
     { type = "paragraph", content = "His eyes drop to your bare legs under the sleep shirt, and he forgets what he was going to say." },
   ] } },
 ]
@@ -293,7 +310,7 @@ id   = "desk"
 name = "Her desk"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "office_talk", operator = "gte", value = 3 } ] }, blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "People are talking about you in the kitchen. Keep your head down, Emma. I mean it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "People are talking about you at the coffee machine. Keep your head down, Emma. I mean it." },
   ] } },
   { type = "group", props = { blocks = [
     { type = "paragraph", content = "Your mother looks up from her screen and smiles when she sees you." },

@@ -124,18 +124,21 @@
       "consequence"
     ],
     "promise": {
-      "goal": "be kept on at the week-12 review",
+      "goal": "be kept on at Callahan's review",
       "rival": "npc_ethan",
       "goals": [
         {
-          "goal": "be kept on at the week-12 review",
-          "ends_when": "Callahan's review passes",
+          "goal": "be kept on at Callahan's review",
+          "ends_when": "Callahan's review passes (callahan_review, on or after day 78; any one of: office_talk 30+, Theo asked for her, Martin spoke for her)",
+          "ends_flag": "review_passed",
           "next": "the full-time contract Martin co-signs"
         },
         {
           "goal": "the full-time contract Martin co-signs",
           "ends_when": "Martin signs",
-          "next": "Ethan's desk \u2014 outrank him"
+          "ends_flag": "contract_signed",
+          "next": "Ethan's desk \u2014 outrank him",
+          "note": "opens on review_passed (a terminal card); nothing sets contract_signed yet \u2014 next release"
         },
         {
           "goal": "Ethan's desk \u2014 outrank him"
@@ -167,6 +170,40 @@
         "by": "LO",
         "what": "SP2 who_climbs both \u2192 player; budgets kept as the game's target (v0.1 ships under them, REPORT red); firm walk-in top band stays the associate; four reader FAILs waived",
         "why": "fix pass; NOTES.md"
+      }
+    ],
+    "threads": [
+      {
+        "id": "job",
+        "name": "the internship",
+        "person": "npc_callahan",
+        "place": "firm",
+        "system": "intern_job",
+        "link": "the shift pays the envelope, and the review decides whether she stays"
+      },
+      {
+        "id": "family",
+        "name": "home",
+        "person": "npc_diane",
+        "place": "kitchen",
+        "system": "friday_money",
+        "link": "her mother's hours decide when the house is watched; the table is where the envelope goes"
+      },
+      {
+        "id": "side_money",
+        "name": "Theo's hour",
+        "person": "npc_theo",
+        "place": "hotel_bar",
+        "system": "none yet",
+        "link": "he pays her, not the firm, and he can ask Callahan for her"
+      },
+      {
+        "id": "nights_out",
+        "name": "nights out with Jade",
+        "person": "npc_jade",
+        "place": "club",
+        "system": "none yet",
+        "link": "Jade already did all of it and got out happy"
       }
     ]
   },
@@ -216,7 +253,11 @@
       "downtown",
       "firm",
       "hotel_bar",
-      "club"
+      "club",
+      "kitchen",
+      "bathroom",
+      "ethan_room",
+      "parents_room"
     ],
     "door": {
       "canvas": "martin_03_jacket_downstairs",
@@ -310,8 +351,8 @@
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
-        "the body": "PASS",
-        "the numbers agree": "N/A",
+        "the body": "N/A",
+        "the numbers agree": "PASS",
         "companion and rival": "N/A"
       },
       "ethan_02_copier": {
@@ -406,7 +447,7 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "PASS",
@@ -487,7 +528,7 @@
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers agree": "N/A",
+        "the numbers agree": "PASS",
         "companion and rival": "N/A"
       },
       "hub_callahan": {
@@ -575,6 +616,50 @@
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
+        "the numbers agree": "N/A",
+        "companion and rival": "N/A"
+      },
+      "callahan_review": {
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "N/A",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "N/A",
+        "the numbers agree": "PASS",
+        "companion and rival": "N/A"
+      },
+      "ethan_room_out": {
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "PASS",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "PASS",
+        "the numbers agree": "PASS",
+        "companion and rival": "N/A"
+      },
+      "parents_room_out": {
+        "want": "N/A",
+        "next step": "N/A",
+        "hook": "PASS",
+        "her voice at her level": "N/A",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "PASS",
+        "the numbers agree": "PASS",
+        "companion and rival": "N/A"
+      },
+      "walkin_ethan_room": {
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "PASS",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "PASS",
         "the numbers agree": "N/A",
         "companion and rival": "N/A"
       }
@@ -805,7 +890,7 @@
         },
         "schedule": [
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -829,7 +914,7 @@
             "to": "17:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -841,7 +926,7 @@
             "to": "19:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Sat",
               "Sun"
@@ -850,7 +935,7 @@
             "to": "22:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -878,7 +963,7 @@
             {
               "n": 1,
               "canvas": "ethan_01_red_ink",
-              "where": "landing",
+              "where": "bathroom",
               "when": {
                 "days": [
                   "Mon",
@@ -894,9 +979,10 @@
                   "flag": "firm_day1_done"
                 }
               ],
-              "hint": "Evenings at the house: Ethan's door is across the landing.",
+              "hint": "Evenings at the house: the bathroom upstairs, while Ethan is in his room across the hall.",
               "refusal": "parked",
-              "who_notices": "npc_martin"
+              "who_notices": "npc_martin",
+              "presence_note": "Ethan is in his room across the hall, not in the bathroom: the step's window is exactly his ethan_room row (Mon-Thu 21:00-23:30), so he is there. shape.py 'the person is there' reads only the step's own place, so it reports this step."
             },
             {
               "n": 2,
@@ -917,7 +1003,7 @@
         },
         "schedule": [
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -941,7 +1027,7 @@
             "to": "18:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -960,7 +1046,7 @@
             "to": "21:00"
           },
           {
-            "where": "landing",
+            "where": "ethan_room",
             "weekdays": [
               "Mon",
               "Tue",
@@ -1071,7 +1157,7 @@
         "id": "npc_diane",
         "schedule": [
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -1095,7 +1181,7 @@
             "to": "17:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Mon",
               "Tue",
@@ -1107,7 +1193,7 @@
             "to": "22:00"
           },
           {
-            "where": "house",
+            "where": "kitchen",
             "weekdays": [
               "Sat",
               "Sun"
@@ -1177,76 +1263,154 @@
     },
     "systems": [
       {
-        "id": "time",
-        "kind": "ambient",
-        "key": "time_of_day",
-        "fed_at": [],
-        "labels": [
-          "opens_at"
+        "id": "intern_job",
+        "name": "The intern shift",
+        "place": "firm",
+        "hours": "Mon-Fri, a shift starts 09:00-13:00 and runs 4h",
+        "cost": "4h \u00b7 30 energy \u00b7 the dress code (top, bottom, shoes)",
+        "one_ladder": true,
+        "pay_ladder": [
+          {
+            "gate": "before Callahan's review",
+            "pay": 70
+          },
+          {
+            "gate": "review_passed",
+            "pay": 100
+          },
+          {
+            "gate": "stays late with Callahan (nerve 20-29)",
+            "pay": "shift + 50, 8h"
+          }
         ],
-        "read_by": "who is home: Diane's evenings, Martin's Fridays, Ethan's nights on the landing"
+        "lewd_ladder": [
+          {
+            "gate": "nerve 0-9",
+            "acts": [
+              "an associate's remark in the copy-room doorway"
+            ]
+          },
+          {
+            "gate": "nerve 10-19",
+            "acts": [
+              "Ethan at the copier: toner on her blouse, 'no, lower'"
+            ]
+          },
+          {
+            "gate": "nerve 20-29",
+            "acts": [
+              "Callahan asks her to stay late",
+              "late in his glass office, him watching her mouth"
+            ]
+          },
+          {
+            "gate": "nerve 30+",
+            "acts": [
+              "the associate pressed behind her at the copier",
+              "her blouse open, groped, grinding back"
+            ]
+          }
+        ],
+        "people": [
+          "npc_callahan",
+          "npc_ethan",
+          "npc_diane",
+          "npc_martin",
+          "npc_theo"
+        ],
+        "pool": [
+          "act_work_shift",
+          "walkin_firm"
+        ],
+        "daily": true,
+        "memory": "worked_today (day cap), office_talk, callahan_turned_down, stayed_late, review_passed",
+        "growth": "climbs",
+        "sink": "the Friday envelope (friday_money)",
+        "deadline": "Friday, and the week-12 review",
+        "feeds": [
+          "money",
+          "office_talk",
+          "nerve"
+        ],
+        "reads": [
+          "nerve",
+          "energy",
+          "outfit"
+        ],
+        "hook_link": "the copy room is where the firm's men get at her; staying late is how Callahan sees her; office_talk is one of the review's three routes",
+        "leads_to": [
+          "npc_callahan",
+          "npc_ethan",
+          "callahan_review"
+        ]
       },
       {
-        "id": "money",
-        "kind": "ambient",
-        "key": "money",
-        "fed_at": [
-          "firm",
-          "hotel_bar"
+        "id": "friday_money",
+        "name": "Friday's envelope",
+        "place": "none \u2014 the engine's rent page, armed Friday 00:00 ([settings.rent])",
+        "hours": "every Friday",
+        "cost": "$250, then $300 after $500 paid, then $350 after $1,400 paid; a short week carries",
+        "one_ladder": true,
+        "pay_ladder": [
+          {
+            "gate": "total paid 0",
+            "pay": -250
+          },
+          {
+            "gate": "total paid 500",
+            "pay": -300
+          },
+          {
+            "gate": "total paid 1400",
+            "pay": -350
+          }
         ],
-        "labels": [],
-        "read_by": "the Friday bill; Theo's price; what she can buy for the firm's dress code"
-      },
-      {
-        "id": "energy",
-        "kind": "ambient",
-        "key": "energy",
-        "fed_at": [
-          "her_room"
+        "lewd_ladder": [
+          {
+            "gate": "martin_stage 0",
+            "acts": [
+              "the first Friday in his study: sit on the arm, lean on him, his hand on her knee"
+            ]
+          },
+          {
+            "gate": "martin_stage 1",
+            "acts": [
+              "nobody knocks: his hand on her knee before she answers"
+            ]
+          },
+          {
+            "gate": "martin_stage 2 + martin_want 15",
+            "acts": [
+              "the jacket comes off (the door, next release)"
+            ]
+          }
         ],
-        "labels": [
-          "she_can_sleep"
+        "people": [
+          "npc_martin",
+          "npc_diane"
         ],
-        "read_by": "under 20 she cannot work a shift or go downtown"
-      },
-      {
-        "id": "nerve",
-        "kind": "ambient",
-        "key": "nerve",
-        "fed_at": [
-          "landing",
-          "study",
-          "hotel_bar",
-          "club"
+        "pool": [
+          "martin_01_first_friday",
+          "martin_02_nobody_knocks",
+          "martin_03_jacket_downstairs",
+          "hub_martin_study",
+          "hub_martin_breakfast"
         ],
-        "labels": [
-          "she_can_undress"
+        "daily": false,
+        "memory": "rent_state.total_paid / owed, rent_carried, martin_stage, martin_friday_sat",
+        "growth": "climbs",
+        "sink": "every dollar the shift, Theo and the overtime pay",
+        "deadline": "Friday",
+        "feeds": [
+          "martin_want"
         ],
-        "read_by": "her two voices on every act node; the bold answers on each step; the floor under the most explicit content"
-      },
-      {
-        "id": "outfit",
-        "kind": "sourced",
-        "key": "worn_exposure",
-        "fed_at": [
-          "her_room"
+        "reads": [
+          "money"
         ],
-        "labels": [
-          "has_wardrobe"
-        ],
-        "read_by": "the firm's dress code at the door; what Martin, Ethan and Theo say about what she has on; the shower's variants"
-      },
-      {
-        "id": "office_talk",
-        "kind": "sourced",
-        "key": "office_talk",
-        "fed_at": [
-          "firm"
-        ],
-        "labels": [
-          "public"
-        ],
-        "read_by": "what the associates say at the copier; Diane's line at dinner; Martin's Friday line (W5b: who knows about her)"
+        "hook_link": "the envelope takes her to Martin's study on Friday evenings; his drawer of sealed envelopes says it was never the money",
+        "leads_to": [
+          "npc_martin"
+        ]
       }
     ],
     "locations": [
@@ -1270,8 +1434,25 @@
       },
       {
         "id": "house",
-        "name": "the house",
-        "job": "the kitchen and the table: breakfast with Martin, dinner with all of them, the rent page on Fridays",
+        "name": "Home",
+        "job": "the front hall: the street's door into the house; kitchen, study and stairs hang off it",
+        "anchor": false,
+        "fill": 200,
+        "labels": [
+          "zone:suburb",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "kind": "thoroughfare"
+      },
+      {
+        "id": "kitchen",
+        "name": "the kitchen",
+        "job": "the table: breakfast with Martin, dinner with all of them, Martin waiting for his envelope on Fridays",
         "anchor": true,
         "fill": 7500,
         "labels": [
@@ -1313,10 +1494,27 @@
       },
       {
         "id": "landing",
-        "name": "the landing",
-        "job": "the bathroom whose door doesn't latch, and Ethan's door across from it",
+        "name": "Upstairs",
+        "job": "the upstairs hall: her room, the bathroom, Ethan's room, Martin and Diane's room",
         "anchor": false,
-        "fill": 3500,
+        "fill": 200,
+        "labels": [
+          "zone:suburb",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "kind": "thoroughfare"
+      },
+      {
+        "id": "bathroom",
+        "name": "the bathroom",
+        "job": "the shower whose door doesn't latch, across the hall from Ethan's room",
+        "anchor": false,
+        "fill": 3000,
         "labels": [
           "zone:suburb",
           "private",
@@ -1329,6 +1527,42 @@
           "people": [
             "npc_ethan"
           ]
+        }
+      },
+      {
+        "id": "ethan_room",
+        "name": "Ethan's room",
+        "job": "his room: him most nights after nine; his desk and his bed while he is out",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:suburb",
+          "private",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ethan"
+          ]
+        }
+      },
+      {
+        "id": "parents_room",
+        "name": "Martin and Diane's room",
+        "job": "their bedroom: her mother's pearls, Martin's drawer, his side of the bed while they are out",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:suburb",
+          "private",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
         }
       },
       {
@@ -1446,7 +1680,7 @@
     ],
     "map": {
       "archetype": "two_hub",
-      "shape": "Two grounds joined by a bus: Linden Street in the suburbs with the house on it (kitchen, her room, the landing, Martin's study), and downtown with Callahan Reed, the hotel bar across the road and the Velvet Room round the corner.",
+      "shape": "Two grounds joined by a bus: Linden Street in the suburbs with the house on it, and downtown with Callahan Reed, the hotel bar across the road and the Velvet Room round the corner. The house is entered through its front hall (Home): the kitchen, Martin's study and the stairs hang off it; Upstairs is a hallway to her room, the bathroom, Ethan's room and Martin and Diane's room, which the couple share.",
       "home_base": "her_room",
       "exterior": "linden_street",
       "roots": [
@@ -1454,9 +1688,9 @@
         "downtown"
       ],
       "homes": {
-        "npc_martin": "house",
-        "npc_diane": "house",
-        "npc_ethan": "landing",
+        "npc_martin": "parents_room",
+        "npc_diane": "parents_room",
+        "npc_ethan": "ethan_room",
         "npc_jade": "offscreen",
         "npc_theo": "offscreen",
         "npc_callahan": "offscreen",
@@ -1464,12 +1698,13 @@
       },
       "scale": "a town: one suburban street and one downtown block",
       "alive": "tight slice",
-      "travel": "the bus, 25 minutes each way; downtown is sealed (entered only by the bus canvas) \u2014 gate 11"
+      "travel": "the bus, 25 minutes each way; downtown is sealed (entered only by the bus canvas) \u2014 gate 11",
+      "homes_note": "Martin and Diane share parents_room as a couple. The ledger schema has no shared_homes field (state.md, 2026-10-02), so both simply point at the same room."
     },
     "repeatables_planned": [
       {
         "id": "landing_shower",
-        "where": "landing",
+        "where": "bathroom",
         "note": "banded on nerve; after ethan step 1 Ethan may watch"
       },
       {
@@ -1481,6 +1716,16 @@
         "id": "her_room_touch",
         "where": "her_room",
         "note": "banded on nerve; once a day"
+      },
+      {
+        "id": "ethan_room_out",
+        "where": "ethan_room",
+        "note": "his desk while he is out; at nerve 30+ his bed; Ethan can walk in"
+      },
+      {
+        "id": "parents_room_out",
+        "where": "parents_room",
+        "note": "Martin's drawer while they are out; at nerve 30+ his side of the bed"
       }
     ],
     "shower_bands": {
@@ -1510,6 +1755,108 @@
     },
     "customization": "none (LO 2026-09-30)",
     "arousal": "not declared in v0.1 (LO 2026-09-30)",
-    "martin_want_v01_cap": 14
-  }
+    "martin_want_v01_cap": 14,
+    "meters": [
+      {
+        "id": "time",
+        "kind": "ambient",
+        "key": "time_of_day",
+        "fed_at": [],
+        "labels": [
+          "opens_at"
+        ],
+        "read_by": "who is home: Diane's evenings, Martin's Fridays, Ethan's nights in his room"
+      },
+      {
+        "id": "money",
+        "kind": "ambient",
+        "key": "money",
+        "fed_at": [
+          "firm",
+          "hotel_bar"
+        ],
+        "labels": [],
+        "read_by": "the Friday bill; Theo's price; what she can buy for the firm's dress code"
+      },
+      {
+        "id": "energy",
+        "kind": "ambient",
+        "key": "energy",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "she_can_sleep"
+        ],
+        "read_by": "under 20 she cannot work a shift or go downtown"
+      },
+      {
+        "id": "nerve",
+        "kind": "ambient",
+        "key": "nerve",
+        "fed_at": [
+          "bathroom",
+          "study",
+          "hotel_bar",
+          "club"
+        ],
+        "labels": [
+          "she_can_undress"
+        ],
+        "read_by": "her two voices on every act node; the bold answers on each step; the floor under the most explicit content"
+      },
+      {
+        "id": "outfit",
+        "kind": "sourced",
+        "key": "worn_exposure",
+        "fed_at": [
+          "her_room"
+        ],
+        "labels": [
+          "has_wardrobe"
+        ],
+        "read_by": "the firm's dress code at the door; what Martin, Ethan and Theo say about what she has on; the shower's variants"
+      },
+      {
+        "id": "office_talk",
+        "kind": "sourced",
+        "key": "office_talk",
+        "fed_at": [
+          "firm"
+        ],
+        "labels": [
+          "public"
+        ],
+        "read_by": "what the associates say at the copier; Diane's line at dinner; Martin's Friday line (W5b: who knows about her)"
+      }
+    ],
+    "infrastructure": [
+      {
+        "name": "the day and week clock ([time], [engine.daily_tick], days_since_flag for the week-12 review)",
+        "kind": "clock"
+      },
+      {
+        "name": "the guidance page (quest_cards)",
+        "kind": "view"
+      },
+      {
+        "name": "the cast page",
+        "kind": "view"
+      },
+      {
+        "name": "the shortcuts page (cheat page)",
+        "kind": "view"
+      }
+    ],
+    "infrastructure_note": "time and energy are clocks by SY1; kept in meters unchanged on LO's call (2026-10-02)."
+  },
+  "decisions": [
+    {
+      "date": "2026-10-02",
+      "by": "LO",
+      "what": "G6 house + week 12, G5 ledger split, G3 option C",
+      "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+      "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
+    }
+  ]
 }
