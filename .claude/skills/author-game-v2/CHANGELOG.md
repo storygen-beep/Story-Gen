@@ -5,6 +5,43 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine E2: event pools that remember (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 2. A `block_pool` picked `random(0, n-1)` on every render and a random canvas
+rolled a flat `chance` for ever, so a big pool showed the same few events twice before the rest once.
+
+**What changed.**
+- `generators/v2.py` (+~95 lines): `block_pool` takes `memory = "seen"` (optional `seen_weight`,
+  default 0.1). `setup.pickRememberedPoolEntry` weighs a seen entry `seen_weight` against 1 for a
+  fresh one and records the pick in `$game_state.pool_seen[key]` (index -> times shown); the key is
+  the pool's `id`, else a hash of its entries. `pool_seen` joins the skeleton (so `stateDefaults` and
+  the backfill) only when a game has such a pool. A random canvas takes `trigger.seen_weight`:
+  `setup.canvasRollChance` multiplies `chance` by it once the canvas has fired, and both random
+  rollers (`selectCanvasByPriority`, `checkRandomEncounters`) read it. The payload carries
+  `seenWeight` only when set.
+- `template_import.py` + `game_graph.py`: `seen_weight` on the trigger dataclass, parsed, and copied
+  into trigger metadata by both writers. The block normalizer copies `memory`/`seen_weight` (and `id`
+  for a remembering pool) from the block's top level, as it already did for `blocks`; without that
+  the documented top-level shape would have dropped `memory` silently. `_validate_seen_memory`:
+  `seen_weight` must be in (0, 1], only on random canvases or remembering pools; `memory` must be
+  `"seen"`.
+- `references/engine.md` §35 gains "A pool that remembers"; §40's backfill table names `pool_seen`.
+- Tests: new fixture `engine_ws_batch1_2026_10_01.toml`; new `test_pool_memory.py` (18: route,
+  validator, inert without the keys, exact-draw weighting, play records, the old-save load); one in
+  `test_save_migration.py`. The old save (`tests/data/e2_pre_change_save.txt`) was written by a build
+  at `72cb456` (before E2) and loads with `pool_seen = {}` backfilled.
+- Cites: 426 `v2.py` and 67 `template_import.py` cites re-pointed through the edit's line maps; the
+  two that pointed at the rewritten `random(0, …)` line were moved by hand to `v2.py:16328`.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with passage text
+unchanged: the only `index.html` diff is the two new engine helpers and the two `chance` reads
+(43 script lines each).
+
+**Words:** +166, running total 140,820 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine E1b: the clothing warning names the player, not "Emma" (World and Systems PRD, Phase 7; GLOBAL runtime text)
 
 **Why.** PRD E1b: `setup.validateClothing` hard-coded "Emma" in all three of its warnings.

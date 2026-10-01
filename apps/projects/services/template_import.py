@@ -843,6 +843,10 @@ class TemplateTrigger:
     # `retry_after_days` days (1 when absent), so a no cannot be farmed.
     consume_on: Optional[str] = None
     retry_after_days: Optional[int] = None
+    # E2 (World and Systems PRD) — opt-in, random canvases only. Once the canvas has
+    # fired (trigger_history[id].total > 0) its `chance` is multiplied by this, so an
+    # event she has already seen comes up less often than one she has not.
+    seen_weight: Optional[float] = None
 
 
 @dataclass
@@ -2415,6 +2419,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     # EN1 — kept raw; validate() owns the type and value checks.
                     consume_on=trig_def.get("consume_on"),
                     retry_after_days=trig_def.get("retry_after_days"),
+                    # E2 — kept raw; validate() owns the type and range checks.
+                    seen_weight=trig_def.get("seen_weight"),
                 )
                 # Doc 69 Item 2 — validate pre_substitution_effects field names
                 # + trait declarations (reuses Phase 1 + Phase 2 validators).
@@ -6277,6 +6283,7 @@ def validate(template: GameTemplate) -> List[str]:
     # EN1 — opt-in step consumption (`consume_on` / `consumes` / `final` /
     # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
     errors.extend(_validate_step_consumption(template))
+    errors.extend(_validate_seen_memory(template))
 
     # EN3 — location opening hours.
     errors.extend(_validate_location_hours(template))
@@ -6725,6 +6732,58 @@ def _validate_location_kind(template) -> List[str]:
 
 def _is_whole_days(v: Any) -> bool:
     return isinstance(v, int) and not isinstance(v, bool) and v >= 1
+
+
+def _is_seen_weight(v: Any) -> bool:
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1
+
+
+def _block_pools(node: Any):
+    """Every `block_pool` block under a node's blocks, nested ones included."""
+    if isinstance(node, dict):
+        if node.get("type") == "block_pool":
+            yield node
+        for v in node.values():
+            yield from _block_pools(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _block_pools(v)
+
+
+def _validate_seen_memory(template: GameTemplate) -> List[str]:
+    """E2 — pools and random canvases that remember what she has seen.
+
+    Errors, for the EN1 reason: an unknown value or a key on the wrong canvas would
+    build clean and do nothing. `seen_weight` is a multiplier in (0, 1].
+    """
+    errors: List[str] = []
+    for ci, c in enumerate(template.canvases or []):
+        where = f"canvases[{ci}] '{c.id}'"
+        trig = c.trigger
+        if trig and trig.seen_weight is not None:
+            if trig.trigger_mode != "random":
+                errors.append(f"{where}: trigger.seen_weight is read only with "
+                              f"trigger_mode = \"random\"")
+            elif not _is_seen_weight(trig.seen_weight):
+                errors.append(f"{where}: trigger.seen_weight must be a number in (0, 1] "
+                              f"(got {trig.seen_weight!r})")
+        for node in (c.nodes or []):
+            for pool in _block_pools(node.blocks):
+                # Both shapes, as the normalizer reads them: top-level keys win.
+                props = dict(pool.get("props") or {})
+                props.update({k: pool[k] for k in ("memory", "seen_weight") if k in pool})
+                memory = props.get("memory")
+                if memory is not None and memory != "seen":
+                    errors.append(f"{where} node '{node.id}': block_pool memory must be "
+                                  f"\"seen\" (got {memory!r})")
+                if "seen_weight" in props:
+                    if memory != "seen":
+                        errors.append(f"{where} node '{node.id}': block_pool seen_weight is "
+                                      f"read only with memory = \"seen\"")
+                    elif not _is_seen_weight(props["seen_weight"]):
+                        errors.append(f"{where} node '{node.id}': block_pool seen_weight must "
+                                      f"be a number in (0, 1] (got {props['seen_weight']!r})")
+    return errors
 
 
 def _validate_step_consumption(template: GameTemplate) -> List[str]:
@@ -7715,6 +7774,14 @@ def _normalize_block_list(
                     child_types,
                 )
             props["blocks"] = inner_safe
+            # E2 — the memory keys, from top-level OR props like `blocks` above. Copied
+            # only when authored (and `id` only for a remembering pool, where it is the
+            # pool_seen key), so every other pool normalizes unchanged.
+            for _pool_key in ("memory", "seen_weight"):
+                if _pool_key in b:
+                    props[_pool_key] = b[_pool_key]
+            if props.get("memory") == "seen" and "id" in b and "id" not in props:
+                props["id"] = b["id"]
         elif b_type == "cascade":
             # S7 — multi-beat linkreplace cascade. Reads `id` + `beats` from
             # top-level OR `props` (same bug-fix-pattern as group/pool).
@@ -8532,6 +8599,8 @@ def create_project_from_template(
                             # EN1 — opt-in step consumption (absent unless authored)
                             "consume_on": c.trigger.consume_on or None,
                             "retry_after_days": c.trigger.retry_after_days,
+                            # E2 — opt-in seen-weighting of a random canvas
+                            "seen_weight": c.trigger.seen_weight,
                             # Doc 69 Item 2 — Pattern C pre-substitution effects.
                             # Engine reads from canvas metadata + emits
                             # <<script>>setup.applyAndNotifyTrait(...)<</script>>

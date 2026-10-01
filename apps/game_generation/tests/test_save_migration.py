@@ -536,3 +536,22 @@ def test_the_backfill_runs_on_every_passage():
     twee = build()
     handler = twee.split("$(document).on(':passagestart'", 1)[1][:6000]
     assert "setup.backfillStateDefaults" in handler
+
+
+# --- World and Systems PRD, Phase 7 batch 1 -------------------------------------
+
+BATCH1 = "apps/game_generation/games_toml_files/engine_ws_batch1_2026_10_01.toml"
+
+
+@needs_node
+def test_e2_pool_seen_reaches_a_save_written_before_it(tmp_path):
+    """E2: a game that adds a `memory = "seen"` pool. An old save has no pool_seen;
+    the backfill gives it an empty map, and a map the player already has is kept."""
+    twee = build(BATCH1)
+    sv = old_save(twee, drop_game_state=("pool_seen",))
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]
+    assert got["game_state"]["pool_seen"] == {}
+    sv2 = old_save(twee)
+    sv2["game_state"]["pool_seen"] = {"home_pool": {"1": 2}}
+    got2 = run_backfill(twee, [sv2], tmp_path)["saves"][0]
+    assert got2["game_state"]["pool_seen"] == {"home_pool": {"1": 2}}

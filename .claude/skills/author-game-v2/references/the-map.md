@@ -338,7 +338,7 @@ rather than against a guess.
   every room inside it.
 - **No fast travel**, for now.
 - **Places she has not found are hidden** (`hidden_until`); **closed places show why**
-  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4178`).
+  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4181`).
 - **Guidance cards carry place, time and what is waiting**, and a travel link carries the engine's NEW
   mark when something new waits there.
 - **Faces stay on travel cards.**

@@ -382,10 +382,10 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 **Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
 `engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
 `traitEffects` with a per-effect condition gate (`template_import.py:707`), applied through
-`setup.applyAndNotifyTrait` (`v2.py:6563`). Either way the player is told. A silent charge meter is
+`setup.applyAndNotifyTrait` (`v2.py:6605`). Either way the player is told. A silent charge meter is
 the one economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
-(`v2.py:18500`), so the number there stops being true at the first stage.
+(`v2.py:18590`), so the number there stops being true at the first stage.
 
 **A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
 it)*: `on_short = "carry"` (`engine.md` §26).
@@ -553,13 +553,13 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > room-list button   Buy a coffee (GBP 3)                         author
 > the choice         Pay three pounds (GBP 3, 5 min).             author
 > the paragraph      … three pounds gets you …                    author
-> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5167
-> the sidebar        money: 12 / 100                              engine  v2.py:17697
-> rent day, short    $90                                          engine  v2.py:17456
+> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5170
+> the sidebar        money: 12 / 100                              engine  v2.py:17787
+> rent day, short    $90                                          engine  v2.py:17546
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads
-> `_item.label || trait_key` (`v2.py:17671`) and never consults the trait labels at all
+> `_item.label || trait_key` (`v2.py:17761`) and never consults the trait labels at all
 > (`engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
@@ -634,7 +634,7 @@ Name no real-world currency in the prose. A game set in a specific place still h
 price and a wage; it does not need the word *pounds* to have them.
 
 > ⚠️ **The symbol is a PREFIX, and the engine has no suffix form.** All four rent prints concatenate
-> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:16614`). An invented unit that reads as a
+> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:16704`). An invented unit that reads as a
 > suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
 > `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
 
@@ -718,7 +718,7 @@ establishes that it happens.
 ## ⚠️ Two ways these gates read the wrong thing — both found 2026-08-14, both fixed
 
 **A `costs` block is a gate.** The engine refuses a choice the player cannot afford
-(`v2.py:4499` filters it out, `:4628` is the check — `engine.md` §27), but gate 16 was built from
+(`v2.py:4502` filters it out, `:4631` is the check — `engine.md` §27), but gate 16 was built from
 *conditions* only. A game that prices its choices
 instead of condition-gating them therefore read as **"nothing in the game reads the currency"**. Gate 16 now counts either channel.
 

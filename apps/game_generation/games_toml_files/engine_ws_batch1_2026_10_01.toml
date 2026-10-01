@@ -1,0 +1,140 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7 batch 1 (E2, E3, E4)
+#  Date: 2026-10-01
+#
+#  Media-free. Each engine item adds only what its own tests need.
+#
+#  E2 — "event pools that remember":
+#    pool_room    a repeatable canvas at loc_home with two block_pools: `remembered`
+#                 (memory = "seen", id = "home_pool", three entries) and a plain
+#                 pool beside it (the control, still random(0, 2)).
+#    pool_hashed  a remembering pool with no id: its key is a hash of its entries.
+#    random_seen  a random canvas at loc_bar with chance = 1.0 and seen_weight = 0.5:
+#                 1.0 until it has fired, 0.5 after.
+#    random_plain the control: chance = 1.0 and no seen_weight, 1.0 for ever.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_batch1"
+title       = "Engine World and Systems Batch 1"
+description = "Engine fixture for the World and Systems PRD, Phase 7 batch 1."
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40 }
+flag_keys   = ["started"]
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_bar"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "The bar."
+entry_from  = "loc_home"
+
+# ── start ────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+# ── E2: pools that remember ──────────────────────────────────────────────────
+
+[[canvases]]
+id   = "pool_room"
+name = "Pool room"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id   = "look"
+name = "Look"
+blocks = [
+  { type = "block_pool", props = { id = "home_pool", memory = "seen", blocks = [
+      { type = "paragraph", content = "REMEMBERED_A" },
+      { type = "paragraph", content = "REMEMBERED_B" },
+      { type = "paragraph", content = "REMEMBERED_C" } ] } },
+  { type = "block_pool", props = { blocks = [
+      { type = "paragraph", content = "PLAIN_A" },
+      { type = "paragraph", content = "PLAIN_B" },
+      { type = "paragraph", content = "PLAIN_C" } ] } },
+]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "pool_hashed"
+name = "Hashed pool"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id   = "look"
+name = "Look"
+blocks = [
+  { type = "block_pool", props = { memory = "seen", seen_weight = 0.25, blocks = [
+      { type = "paragraph", content = "HASHED_A" },
+      { type = "paragraph", content = "HASHED_B" } ] } },
+]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "random_seen"
+name = "A face at the bar"
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+is_active     = true
+trigger_mode  = "random"
+chance        = 1.0
+seen_weight   = 0.5
+
+[[canvases.nodes]]
+id     = "meet"
+name   = "Meet"
+blocks = [ { type = "paragraph", content = "Someone you know." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "random_plain"
+name = "A stranger at the bar"
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+is_active     = true
+trigger_mode  = "random"
+chance        = 1.0
+
+[[canvases.nodes]]
+id     = "meet"
+name   = "Meet"
+blocks = [ { type = "paragraph", content = "Someone new." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }

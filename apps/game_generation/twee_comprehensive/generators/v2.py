@@ -1529,6 +1529,9 @@ class TweeComprehensiveGeneratorV2:
         if self._has_consume_on():
             # EN1 — per-step records; an absent entry for a fired step reads as used up.
             game_state_init["canvas_state"] = {}
+        if self._has_pool_memory():
+            # E2 — which entries of each `memory = "seen"` block_pool she has seen.
+            game_state_init["pool_seen"] = {}
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -5493,6 +5496,45 @@ setup.getNpcsPresentAtLocation = function(locationId) {{
     return result;
 }};
 
+// E2 — the chance a random canvas rolls with. `seenWeight` is emitted only when the
+// author set trigger.seen_weight; once the canvas has fired (trigger_history total > 0)
+// it multiplies `chance`, so an event she has already seen comes up less often. Both
+// random rollers (selectCanvasByPriority, checkRandomEncounters) read it here.
+setup.canvasRollChance = function(canvas) {{
+    var chance = (canvas && canvas.chance) || 0;
+    if (canvas && canvas.seenWeight !== undefined) {{
+        var hist = ((State.variables.game_state || {{}}).trigger_history || {{}})[String(canvas.id)];
+        if (hist && (hist.total || 0) > 0) chance *= canvas.seenWeight;
+    }}
+    return chance;
+}};
+
+// E2 — a block_pool with memory = "seen": pick entry 0..n-1 by weight, an entry already
+// shown weighing `seenWeight` (default 0.1) against 1 for a fresh one, and record the
+// pick in $game_state.pool_seen[key] (index -> times shown). Once every entry has been
+// seen the weights are equal again. The map is in the skeleton (and so the backfill)
+// for any game that has such a pool; the guard covers a save the backfill missed.
+setup.pickRememberedPoolEntry = function(key, n, seenWeight) {{
+    var gs = State.variables.game_state = State.variables.game_state || {{}};
+    if (!gs.pool_seen || typeof gs.pool_seen !== 'object') gs.pool_seen = {{}};
+    var seen = gs.pool_seen[key];
+    if (!seen || typeof seen !== 'object') seen = gs.pool_seen[key] = {{}};
+    var w = (typeof seenWeight === 'number') ? seenWeight : 0.1;
+    var weights = [], total = 0;
+    for (var i = 0; i < n; i++) {{
+        var wi = seen[i] ? w : 1;
+        weights.push(wi);
+        total += wi;
+    }}
+    var r = Math.random() * total, pick = n - 1;
+    for (var j = 0; j < n; j++) {{
+        if (r < weights[j]) {{ pick = j; break; }}
+        r -= weights[j];
+    }}
+    seen[pick] = (seen[pick] || 0) + 1;
+    return pick;
+}};
+
 // Select appropriate canvas per activity name with tiered progression logic
 // Returns array of selected canvases (one per unique activity name)
 // Logic:
@@ -5507,7 +5549,7 @@ setup.selectCanvasByPriority = function(canvasList) {{
         var filteredList = [];
         for (var f = 0; f < canvasList.length; f++) {{
             if ((canvasList[f].triggerMode || "manual") === "random") {{
-                var chance = canvasList[f].chance || 0;
+                var chance = setup.canvasRollChance(canvasList[f]);
                 if (Math.random() < chance) {{
                     filteredList.push(canvasList[f]);
                 }}
@@ -5977,7 +6019,7 @@ setup.checkRandomEncounters = function(locationId) {{
         // Roll probability for each candidate
         for (var m = 0; m < shuffled.length; m++) {{
             var canvas = shuffled[m];
-            var chance = canvas.chance || 0;
+            var chance = setup.canvasRollChance(canvas);
             if (Math.random() < chance) {{
                 // Hit — mark as triggered, set cooldown, and return passage name
                 setup.markCanvasTriggered(canvas.id);
@@ -12817,6 +12859,11 @@ setup.castTraitRows = function (slug, npc) {
                     location_canvas_list[-1]["retryAfterDays"] = int(
                         (trigger.metadata or {}).get("retry_after_days") or 1
                     )
+                # E2 — seen-weighting of a random canvas. Added ONLY when set, so a game
+                # that authors none emits a byte-identical payload.
+                _seen_weight = (trigger.metadata or {}).get("seen_weight") if trigger else None
+                if _seen_weight is not None:
+                    location_canvas_list[-1]["seenWeight"] = float(_seen_weight)
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -13618,6 +13665,41 @@ setup.carryRent = function (due, paid) {
             if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
                 return True
         return False
+
+    def _has_pool_memory(self) -> bool:
+        """E2 — does any included canvas carry a block_pool with `memory = "seen"`?
+
+        Gates the `pool_seen` default, so a game without one keeps a byte-identical
+        :: Start and stateDefaults.
+        """
+        def walk(x):
+            if isinstance(x, dict):
+                if x.get("type") == "block_pool" and (x.get("props") or {}).get("memory") == "seen":
+                    return True
+                return any(walk(v) for v in x.values())
+            if isinstance(x, list):
+                return any(walk(v) for v in x)
+            return False
+
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                if walk(getattr(node, "node_data", None) or {}):
+                    return True
+        return False
+
+    def _block_pool_key(self, props: dict, pool_blocks: list) -> str:
+        """E2 — the `pool_seen` key of a remembering block_pool.
+
+        `props.id` when the author gave one (stable across edits to the entries);
+        otherwise a hash of the entries, like _media_pool_key's `files` form, so
+        editing the pool's text starts its memory afresh. Two nodes with the same pool
+        share one memory, as two nodes with the same media pool share one counter.
+        """
+        pid = props.get("id")
+        if isinstance(pid, str) and pid.strip():
+            return re.sub(r'[^A-Za-z0-9_]', '_', pid.strip())[:48]
+        raw = json.dumps(pool_blocks, sort_keys=True, ensure_ascii=False)
+        return "pool_" + hashlib.md5(raw.encode("utf-8")).hexdigest()[:10]
 
     def _canvas_entry_passages(self) -> dict:
         """slug -> the passage a canvas is ENTERED at (its first ordered node).
@@ -16235,7 +16317,15 @@ setup.carryRent = function (due, paid) {
                             html_parts.append(self._convert_blocks_to_game_html(pool_blocks))
                         else:
                             max_idx = len(pool_blocks) - 1
-                            parts = [f'<<set _bp to random(0, {max_idx})>>']
+                            pool_props = block.get("props") or {}
+                            if pool_props.get("memory") == "seen":
+                                # E2 — weighted toward entries she has not seen yet.
+                                key = self._block_pool_key(pool_props, pool_blocks)
+                                weight = float(pool_props.get("seen_weight", 0.1))
+                                parts = [f'<<set _bp to setup.pickRememberedPoolEntry('
+                                         f'"{key}", {len(pool_blocks)}, {weight})>>']
+                            else:
+                                parts = [f'<<set _bp to random(0, {max_idx})>>']
                             for pi, pool_item in enumerate(pool_blocks):
                                 if pi == 0:
                                     parts.append('<<if _bp is 0>>')
