@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone S3b: two carry-overs from the Phase 2 build (World and Systems PRD)
+
+**Why.** S3 left `references/engine.md` §19 alone because the Phase 2 prompt kept engine.md edits inside §26 and
+§30.1, so one "needs + work + people" survived. The-board.md's `the_kitchen` example used `npc_martin` /
+`npc_denise`, ids from off_season, one of our own games (commit e0783a1); our games are never examples.
+
+**What changed.** `references/engine.md` §19 (`:588`, the only engine.md line touched): "needs + work + people"
+becomes "needs + systems + people". `references/the-board.md:83`: the `the_kitchen` `serves.people` ids become
+`npc_a` / `npc_b`; the example itself stays (W9). The `serves.work` key is unchanged.
+
+**Verified.** `grep -rn "needs + work + people" SKILL.md references` = 0; `grep -rn "npc_martin\|npc_denise"
+SKILL.md references templates` = 0; `--selfcheck` current (orphans 3); pytest 475 passed.
+
+**Words:** +0, running total 142,331 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems E9b: reputation's interim doctrine (World and Systems PRD, Phase 7, lands with Phase 2)
 
 **Why.** Q7/WS-D20: reputation becomes a full gossip system later (E9a study, E9c engine). Until then games need a

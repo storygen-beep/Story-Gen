@@ -585,7 +585,7 @@ is not covered by §19 at all.
 The rule is: *same NPC, same location, overlapping windows.* Two repeatable canvases at one
 location that bind **different** NPCs, or **no** NPC, do not collide and **should be separate
 canvases** — that is the normal shape, not a workaround. What lives on which screen is
-`references/the-surfaces.md`; a room's list is **needs + work + people** and its length falls out of
+`references/the-surfaces.md`; a room's list is **needs + systems + people** and its length falls out of
 that closed set (R2), and **8 is a backstop, not a size** (gate 20 — never treat it as a target).
 
 ---
