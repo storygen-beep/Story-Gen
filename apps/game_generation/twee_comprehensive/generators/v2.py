@@ -3098,12 +3098,21 @@ setup.likeProfile = function(profileId) {{
     for (var i = 0; i < profiles.length; i++) {{ if (profiles[i].id === profileId) {{ prof = profiles[i]; break; }} }}
     if (!prof) return;
 
-    // Check match condition
-    var matchCond = prof.match_condition ? prof.match_condition.conditions : null;
+    // Check match condition. The importer checks `match_condition` as a v1.0 block
+    // itself (E1); the older `{{conditions = {{...}}}}` wrapping is read too.
+    var mc = prof.match_condition || null;
+    var matchCond = mc ? (mc.conditions || (mc.items ? mc : null)) : null;
     var isMatch = !matchCond || setup.triggerConditionsSatisfied(matchCond);
 
     if (isMatch) {{
+        var _firstMatch = !ps.matches[profileId];
         ps.matches[profileId] = {{ npc: prof.npc, profile_id: profileId }};
+        // E8 — on_match ({{effects, flagEffects}}) applies once, on the first match.
+        if (_firstMatch && prof.on_match) {{
+            setup.pendingEffects = [];
+            setup.applyPhoneEffectSet(prof.on_match);
+            setup.showEffectNotification();
+        }}
         // Show match overlay briefly
         var resolvedId = setup.resolveNpcId(prof.npc);
         var npcData = (sv.npcs || {{}})[resolvedId] || {{}};
@@ -13578,6 +13587,20 @@ setup.castTraitRows = function (slug, npc) {
                                     "npc_name": npc_display or "player",
                                     "is_phone": True,
                                 }
+            # E8 — a dating profile's on_match sets flags too.
+            for prof in phone_settings.get("profiles", []):
+                for fe in ((prof.get("on_match") or {}).get("flagEffects") or []):
+                    flag_key = fe.get("flag")
+                    if flag_key and flag_key not in flag_unlock_map:
+                        flag_unlock_map[flag_key] = {
+                            "canvas_name": prof.get("id", ""),
+                            "canvas_id": None,
+                            "location": None,
+                            "schedule": None,
+                            "canvas_conditions": None,
+                            "npc_name": (prof.get("npc") or "").replace("npc_", "").replace("_", " ").title() or "player",
+                            "is_phone": True,
+                        }
 
         # Also register flags the ENGINE sets (not any canvas): the rent
         # eviction_flag (set when the weekly payment is missed past grace) and any

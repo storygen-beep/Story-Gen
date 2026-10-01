@@ -22,6 +22,11 @@
 #  E6 — "a rank per job":
 #    bar_job      a fast job with ranks: Barback from 0 xp (pays 10), Server from 2 (pays
 #                 charm + 20 = 30), Head server from 4 (pays 60). `flat` has no ranks.
+#
+#  E8 — "the phone reaching outward":
+#    kai_profile  a dating profile that matches at charm >= 5 (she has 10): on_match
+#                 +2 Kai trust and the flag matched_kai, once.
+#    lee_profile  matches only at charm >= 50: a like is not a match, nothing applies.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -43,12 +48,26 @@ id          = "player"
 name        = "Mara"
 description = "Fixture protagonist."
 core_traits = { energy = 100, money = 40, charm = 10, tips = 0 }
-flag_keys   = ["started", "ignored_ana"]
+flag_keys   = ["started", "ignored_ana", "matched_kai"]
 
 [[npcs]]
 id          = "npc_ana"
 name        = "Ana"
 description = "Fixture texter."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_kai"
+name        = "Kai"
+description = "Fixture match."
+core_traits = { trust = 0 }
+flag_keys   = []
+
+[[npcs]]
+id          = "npc_lee"
+name        = "Lee"
+description = "Fixture no-match."
 core_traits = { trust = 0 }
 flag_keys   = []
 
@@ -71,6 +90,40 @@ label = "Messages"
 id    = "jobs"
 type  = "fast_jobs"
 label = "Jobs"
+
+[[phone.apps]]
+id    = "dates"
+type  = "dating"
+label = "Dates"
+
+# ── E8: a dating match leads somewhere ───────────────────────────────────────
+
+[[phone.profiles]]
+id              = "kai_profile"
+app             = "dates"
+npc             = "npc_kai"
+bio             = "Fixture bio."
+match_condition = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "charm", operator = "gte", value = 5 } ] }
+[phone.profiles.on_match]
+effects     = [ { targetType = "npc", npcId = "npc_kai", trait = "trust", op = "add", value = 2 } ]
+flagEffects = [ { targetType = "player", flag = "matched_kai" } ]
+[phone.profiles.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
+
+[[phone.profiles]]
+id              = "lee_profile"
+app             = "dates"
+npc             = "npc_lee"
+bio             = "Fixture bio."
+match_condition = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "charm", operator = "gte", value = 50 } ] }
+[phone.profiles.on_match]
+effects = [ { targetType = "npc", npcId = "npc_lee", trait = "trust", op = "add", value = 9 } ]
+[phone.profiles.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "started", operator = "is_true" } ] }
 
 # ── E3b: the ignore hook ─────────────────────────────────────────────────────
 

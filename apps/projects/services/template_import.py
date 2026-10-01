@@ -407,6 +407,8 @@ class TemplatePhoneProfile:
     trigger: Dict[str, Any] = field(default_factory=dict)
     match_condition: Dict[str, Any] = field(default_factory=dict)
     search_queries: List[str] = field(default_factory=list)
+    # E8 — {effects, flagEffects} applied once, on the first match (the reply shapes).
+    on_match: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -3309,6 +3311,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     trigger=p_raw.get("trigger", {}) or {},
                     match_condition=p_raw.get("match_condition", {}) or {},
                     search_queries=[str(q) for q in _require_list(p_raw, "search_queries")],
+                    on_match=p_raw.get("on_match"),  # E8 — validate() checks the shape
                 ))
 
             phone_daily_topics: List[TemplatePhoneDailyTopic] = []
@@ -4921,6 +4924,9 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"{ctx}.npc '{prof.npc}' not found in npcs")
             if not prof.bio:
                 errors.append(f"{ctx}.bio is required")
+            if prof.on_match is not None:  # E8
+                errors.extend(_validate_phone_effect_set(
+                    prof.on_match, f"{ctx}.on_match", {n.id for n in template.npcs}))
 
         seen_conv_ids: Set[str] = set()
         npc_id_set = {n.id for n in template.npcs}
@@ -8525,6 +8531,8 @@ def _assemble_project_metadata(project, template):
                     "trigger": p.trigger,
                     "match_condition": p.match_condition,
                     "search_queries": p.search_queries,
+                    # E8 — emitted only when set (a byte-identical payload otherwise).
+                    **({"on_match": p.on_match} if p.on_match is not None else {}),
                 }
                 for p in phone.profiles
             ],

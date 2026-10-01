@@ -6351,6 +6351,51 @@ class FastJobRankTests(SimpleTestCase):
         self.assertNotIn("ranks", p2.metadata["fast_jobs"][0])
 
 
+def _toml_with_dating(**prof_extra):
+    d = _toml_with_phone()
+    d["phone"]["apps"].append({"id": "dates", "type": "dating", "label": "Dates"})
+    prof = {"id": "frank_profile", "app": "dates", "npc": "npc_frank", "bio": "hi",
+            "match_condition": {"version": "1.0", "items": [
+                {"type": "trait", "subject": "player", "trait_key": "energy",
+                 "operator": "gte", "value": 5}]},
+            "on_match": {"effects": [{"targetType": "npc", "npcId": "npc_frank",
+                                      "trait": "trust", "op": "add", "value": 2}]}}
+    prof.update(prof_extra)
+    d["phone"]["profiles"] = [prof]
+    return d
+
+
+class PhoneOnMatchTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `on_match` on a dating profile."""
+
+    def test_on_match_parses_validates_and_reaches_metadata(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        t = normalize(_toml_with_dating())
+        self.assertEqual(validate(t), [])
+        self.assertEqual(t.phone.profiles[0].on_match["effects"][0]["value"], 2)
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, t)
+        self.assertIn("on_match", p.metadata["phone_settings"]["profiles"][0])
+
+    def test_no_on_match_emits_nothing(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+        d = _toml_with_dating()
+        del d["phone"]["profiles"][0]["on_match"]
+
+        class _P:
+            metadata = {}
+        p = _P()
+        _assemble_project_metadata(p, normalize(d))
+        self.assertNotIn("on_match", p.metadata["phone_settings"]["profiles"][0])
+
+    def test_a_bad_on_match_is_an_error(self):
+        errors = validate(normalize(_toml_with_dating(on_match={"effect": []})))
+        self.assertTrue(any("on_match: unknown key `effect`" in e for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

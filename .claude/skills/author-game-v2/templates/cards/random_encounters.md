@@ -40,5 +40,5 @@
   add; they rarely take.
 
 ## Our engine today (round 9b §6)
-- SUPPORTED: `setup.checkRandomEncounters` (`v2.py:6136`) rolls per location canvas, with a cooldown of 3
-  after a hit (`v2.py:6249`).
+- SUPPORTED: `setup.checkRandomEncounters` (`v2.py:6145`) rolls per location canvas, with a cooldown of 3
+  after a hit (`v2.py:6258`).

@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: a dating match leads somewhere — `on_match` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8 (the phone reaching outward). `setup.likeProfile` wrote `ps.matches`
+and nothing but the dating screen read it, so a match could not cause a scene or a text.
+
+**What changed.**
+- `template_import.py`: `on_match` on `TemplatePhoneProfile` (`{effects, flagEffects}`), parsed raw,
+  checked by `_validate_phone_effect_set`, written into metadata only when set.
+- `generators/v2.py`: `likeProfile` applies `on_match` once, on the first match, through
+  `setup.applyPhoneEffectSet`. The flag-hint map registers `on_match` flags as phone setters.
+- **A batch-1 defect fixed on the way:** the condition check rejects anything but a v1.0 block at
+  `match_condition`, while `likeProfile` read `match_condition.conditions`, so no gate that imports
+  was ever read (every like matched). The runtime now reads the block itself (and the old wrapping).
+- `references/engine.md` §51: the dating gap row becomes the fact. `templates/cards/phone.md` "Our
+  engine today": the ignore hook and `on_match` now exist.
+- Citations re-pointed through the `git diff` line map (563 moved, 692 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (2, headless: a match applies `on_match` once, a stale second like
+applies nothing; a profile whose `match_condition` fails is liked, not matched, and applies nothing,
+which failed before the fix). `PhoneOnMatchTests` (3). Selfcheck and the skill tests pass.
+
+**Words:** +66, running total 144,854 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: a rank per job (World and Systems PRD, Phase 7; opt-in per job)
 
 **Why.** LO's engine order, step 6. The phone's fast jobs kept one global XP count for every job and
