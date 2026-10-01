@@ -5,6 +5,37 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Phone P2c: the loop, the booking and her own doors (World and Systems PRD, Phase 3)
+
+**Why.** Round 9a: no good thread has a last text — after the sex step it becomes a repeatable invite (CoT every 3
+days 18–22; IHOH James 2/70 per passage after 20:00; SD daily callers); every text books a meeting with a reminder;
+she can open the same doors herself (IHOH outgoing booty call; CoT's menu, 3 of 13 links lead anywhere).
+
+**What changed** (`references/the-phone.md` only).
+- **P9** → "After the sex step, the thread becomes the loop invite": the three loops, a 1–3 day cooldown, the arc
+  names it (`the-arc.md` A1); small talk that leads nowhere is filler; until the engine repeats a conversation,
+  chain one-time ones with flags plus `days_since_flag` (a conversation delivers once ever, `v2.py:2289`), with a
+  TOML link; a link's cause may be an earlier reply if the chain starts from a scene (planned gate: `every chat is
+  caused by a scene`). Cut: the `become-someone` daily-thread dispatcher, its null-branch rule and its ~1,300-words
+  budget (a game outside the four; a daily small-talk thread is now filler). The `daily_topics` /
+  `cooldown = "per_topic"` fact moves to P12.
+- **P10** → "Every thread ends in a booking she can see": a new lead paragraph (CoT plan, IHOH Saturday, SD meeting
+  now; CoT's four reminders, IHOH's journal). The CoT `$planneddate` study and the `scheduleEffects` primitive stay;
+  cites re-pointed (`v2.py:6303-6304` tick, `:6666` `fireScheduledEvent`).
+- **P12** → "She can open the same doors herself": IHOH's outgoing booty call, CoT [PhoneText]; the launcher summon
+  (`v2.py:3144`, room lock `:3161`); `daily_topics` are player-sent and trait-only, with `per_topic`
+  (`template_import.py:412`).
+- **"What is not gated here"**: the two old zero-failure candidates are replaced by the planned gate labels
+  (`every chat is caused by a scene`, a block that passes a game with no phone; `a chat is short and timed`, a
+  warn). No PRD ids in skill text.
+
+**Verified.** All twelve P-ids present; no other skill file pointed at the old P9/P10/P12 wording; `--selfcheck`
+current (orphans 2); pytest 475 passed.
+
+**Words:** +209, running total 142,551 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P2b: costs, gates and delivery (World and Systems PRD, Phase 3)
 
 **Why.** Round 9a: ignoring costs more than saying no (CoT −20/−20 vs −2/−3), a no-show costs (CoT −25 ×3),

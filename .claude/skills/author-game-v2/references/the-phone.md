@@ -37,10 +37,10 @@ Engine claims here carry a `file:line` into
 6. P6 · If she can be looked at, she has to be able to post
 7. P7 · No hidden phone gate; a locked app names what unlocks it
 8. P8 · One thing at a time, delivered by pull
-9. P9 · A repeatable thread is built out of today, and needs a null branch
-10. P10 · A plan the player cannot see is worse than no plan
+9. P9 · After the sex step, the thread becomes the loop invite
+10. P10 · Every thread ends in a booking she can see
 11. P11 · Never a battery
-12. P12 · The phone brings someone to her
+12. P12 · She can open the same doors herself
 
 ---
 
@@ -340,49 +340,50 @@ event and hides the rest (`destroyer`, numbers only; n = 1, a shape, not a rate)
 
 ---
 
-## P9 · A repeatable thread is built out of today, and needs a null branch
+## P9 · After the sex step, the thread becomes the loop invite
 
-`become-someone` gives **8 NPCs their own daily thread** — 115 passages, 10,557 words. The whole
-dispatcher:
+**A thread has no last text; it turns into a loop.** After the arc's sex step, the person invites
+her again on a cooldown of 1–3 days (round 9a §6):
+- Course of Temptation: every 3 days at the soonest, 18:00–22:00, rolled on her moves;
+- In Her Own Hands' James: an incoming booty call at 2 in 70 per passage after 20:00, at most once a
+  day — and she can call him whenever she wants (P12);
+- Shady Deals: callers reset daily, and their own stats move them on to new kinds of call.
 
-```
-<<if $jade.train is 1 && $jade.class is 1>>  ...pick one of the two at random
-<<elseif $jade.train is 1>>  [[Talk about today training with Jade]]
-<<elseif $jade.class is 1>>  [[Talk about today's class with Jade]]
-<<else>>                     [[Exchange a few messages with Jade]]
-```
+The arc names this thread as its loop (`the-arc.md` A1).
 
-Two things to copy.
+**Small talk that leads nowhere is filler.** Course of Temptation's phone menu has 13 links and 3
+lead anywhere — hang out, date, booty call; its friendly texts only nudge attitude, at most ±10 once
+a day (round 9a §1a). Every message on a thread serves a booking or the loop.
 
-**The topic comes from something they actually shared today.** She can text Jade about the training
-only if the training happened. That is a `daily_topics` entry with a `conditions` block on the flag
-the training sets — the same flag the world set, per P4.
-
-**There is an explicit null branch.** When nothing happened, the game says so plainly — *"exchange
-a few messages"* — instead of inventing a topic. A daily thread with no null branch either repeats
-one line forever or lies about a day that had nothing in it.
-
-**Budget, measured: ~1,300 words per NPC** to run a daily thread at production scale. Know that
-number before agreeing to build one.
+**Until the engine repeats a conversation, chain one-time ones.** A conversation delivers once,
+ever: `ps.triggered_conversations[conv.id]` is written and never cleared (`v2.py:2289`). So each
+invite is its own `[[phone.conversations]]` entry, caused by a flag the last link set and timed
+with `days_since_flag`:
 
 ```toml
-[[phone.daily_topics]]
-id             = "mara_about_the_shift"
-npc            = "npc_mara"
-player_message = "you survived then"
-npc_response   = "barely. ankle's still bad"
-cooldown       = "per_topic"
-conditions     = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "worked_with_mara_today", operator = "is_true" },
+# invite 2 waits three days after the meeting invite 1 booked
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag",            subject = "player", flag_key = "dana_invite_1_met", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "dana_invite_1_met", operator = "gte", value = 3 },
+  { type = "time_of_day",     start_time = "18:00", end_time = "22:00" },
 ] }
 ```
 
-⚠️ **`cooldown = "per_topic"` gives this topic its own once-a-day cap** (`template_import.py:349`).
-Without it the cap is per-NPC and one topic starves the others.
+A link's cause flag may be set by an earlier conversation's reply, as long as the chain starts from
+a scene (planned gate: `every chat is caused by a scene`). Author as many links as the release
+needs.
 
 ---
 
-## P10 · A plan the player cannot see is worse than no plan
+## P10 · Every thread ends in a booking she can see
+
+**Every text ends in a choice that books something, with a place and a time.** Course of
+Temptation's booty call books a plan; In Her Own Hands' first call books Saturday; a Shady Deals
+call books a meeting now. Warm and cold answers move the relationship. The meeting happens in the
+world, and the player is reminded where she looks: Course of Temptation points to it from a
+Reminders app, the calendar, a map marker and a wake-up line; In Her Own Hands from its hint journal
+(round 9a §6). A plan the player cannot see is worse than no plan.
 
 **One game in 27 stores a real appointment.** Twenty-six talk about making plans and keep none —
 "meet me at the bar tomorrow" is prose, and the link under it goes there now.
@@ -411,7 +412,7 @@ That is this file's rule stated as architecture, and it is why that system does 
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2442`).
 `setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6652`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6091–6099`), where `setup.fireScheduledEvent` (`v2.py:6460`) can set a flag, start a quest,
+(`v2.py:6303-6304`), where `setup.fireScheduledEvent` (`v2.py:6666`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -460,30 +461,32 @@ and it buys nothing — it reads as a chore, and the field's own players say so.
 directions**, and the verdict wins. Prevalence measures what authors built, not what worked. No
 battery, no charging, no data plan, no phone bill as a repeating upkeep, and no price to buy it either (P7).
 
-## P12 · The phone brings someone to her
+## P12 · She can open the same doors herself
 
-In at least 10 of the 17 top games with a phone, a call or a text starts a scene without travelling
-(Process Review, Round 1, numbers only). Course of Temptation's [PhoneText] texts a contact for a
-booty call and offers *"Tonight"* or *"Tomorrow night"*. The failure is a phone that only holds
-Patreon, Discord and credits links.
+**Every door a thread opens, she can open from her side too.** In Her Own Hands' James calls her
+for a booty call, and she can call him for one whenever she wants; Course of Temptation's
+[PhoneText] texts a contact for a booty call and offers *"Tonight"* or *"Tomorrow night"*. In at
+least 10 of the 17 top games with a phone, a call or a text starts a scene without travelling
+(Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
+and credits links.
 
-**In this engine** the phone's `launcher` app is a door, not a button (`setup._renderLauncher`): an
-option plays only when she is already in that canvas's room, and a canvas that requires him present
-needs him there. So a summon is a launcher option pointing at a canvas in **her** room, with no
-presence requirement on him — he arrives in the scene.
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3144`):
+an option plays only when she is already in that canvas's room (`v2.py:3161`), and a canvas that
+requires him present needs him there. So a summon is a launcher option pointing at a canvas in
+**her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are
+player-sent too, but they only move traits; give one a `conditions` block on a flag the world set,
+and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:412`) — without it the
+cap is per NPC and one topic starves the others.
 
 ---
 
 ## What is not gated here
 
-Nothing in this file is checked by `gates.py` yet. Two candidates exist and both would fail only on
-zero, in the G44 / G45 / G46 line:
+Nothing in this file is checked by `gates.py` yet. Two planned gates will read it:
 
-- **the phone is not a decoration** — a declared phone whose apps hold no content, or a
-  `social_feed` with empty `post_actions` in a game that has a corruption meter.
-- **a specced system exists** — a system named ON in `0_systems_spec.toml` with no corresponding
-  block in the built TOML. Not phone-specific; it would catch
-  any dropped system.
-
-⚠️ **P3's 3–7 words is a WARN, never a block** (planned gate: `a chat is short and timed`). A
-threshold that blocked would fail a correct two-word message.
+- **planned gate: `every chat is caused by a scene`** (a block): every conversation's trigger holds
+  a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9).
+  A game with no phone passes.
+- **planned gate: `a chat is short and timed`** (a warn, never a block — a block would fail a
+  correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
+  delay and an hour window (P3, P4).
