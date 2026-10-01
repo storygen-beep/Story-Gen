@@ -315,8 +315,16 @@ changing what it does.
 > ordinarily, something happens **36%** of the time; dressed provocatively, **71%**. Same scenes.
 > Twice as much world.
 
+**Remind her before the key is needed.** A garment the arc needs is named where she will see it
+before its window opens. In Her Own Hands reminds her of the date dress in two rooms; its gala gown
+has no reminder, so a player who is not wearing it gets a silent gala night (round 9a,
+`traces/ihoh_wardrobe.md`). A key garment is one reader among many: the wardrobe is designed as
+states first, then items (`engine.md` §17).
+
 The gate `the wardrobe is read` asks only whether a declared `[[clothing]]` catalog is read
-*anywhere*. This says where it earns its keep: on a rung, and on a rate. `the-meters.md` W7 and
+*anywhere*. The rule is stricter: every declared state and key item is read in ≥3 places (planned
+gate: `every clothing state is read three times`). This says where it earns its keep: on a rung,
+and on a rate. `the-meters.md` W7 and
 `engine.md` §17 own the mechanism (`worn_exposure` is the predicate that reads an empty slot).
 
 ### A6b · Somebody else can set the dress code — and showing by accident is not showing on purpose
@@ -632,7 +640,8 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 - **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:4787-4788`).
 - **A6 is available** — `worn_exposure`, `worn_type`, `worn_corruption` and `worn_beauty` are
   condition predicates (`engine.md` §17; `worn_exposure` is the only one that reads an empty
-  slot).
+  slot). Two gaps: no effect removes or unequips a garment, and there is no "leave the room" hook,
+  so a price to go out in a state lives in each destination's `entry_conditions`.
 - **A4's grant-while-under-threshold** is an ordinary `[group]` band on the meter plus an
   `add` effect. ⚠️ Adjacent `[group]` blocks merge into one if/elseif chain and first match
   wins (`engine.md` §35) — separate the grant band from any other ladder on the same node with

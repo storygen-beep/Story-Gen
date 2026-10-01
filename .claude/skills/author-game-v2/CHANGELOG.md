@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C1 (PROTECTED, LO approved): A6 keeps key outfits, adds the reminder, points to states
+
+**Why.** LO's clothing decision: states first, items second; key outfits stay as rungs, with a reminder
+to wear them; every state and key item read in ≥3 places. Round 9a found In Her Own Hands' gala gown
+has no reminder, so its night is silent.
+
+**What changed.** `references/the-arc.md` (protected; only what the item names):
+- A6: a new paragraph "Remind her before the key is needed" (IHOH's date dress, reminded in two rooms,
+  against its gown; round 9a `traces/ihoh_wardrobe.md`), and a pointer that the wardrobe is states
+  first (`engine.md` §17).
+- A6's gate text: every declared state and key item is read in ≥3 places (planned gate: `every
+  clothing state is read three times`).
+- "The engine, verified": the A6 bullet adds the two gaps (no remove or unequip; no leave hook, so a
+  price to go out lives in each destination's `entry_conditions`).
+Rule ids unchanged.
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +132, running total 143,729 / 149,283.
+
+---
+
 ## 2026-10-01 — Phone P6b: the last FAIL-game quotes in the-phone.md cut, counts kept
 
 **Why.** LO's evidence rule (World and Systems PRD carry-over P6b): a FAIL game may be counted, never
