@@ -252,6 +252,8 @@ Three things worth taking:
   question of who climbs — because two routes means two ladders to declare.
 - **The arc ends by pointing at another arc.** Neither path terminates. Both hand over.
 
+**Two routes on one person are two arcs; inside a system, ladders follow `the-systems.md` SY8's touch rule.**
+
 ⚠️ **Blockers are declared in the same list as requirements.** Both CoT paths refuse to
 conclude while she is wearing a chastity device; the submissive path also refuses while she is
 in an exclusive relationship. A social or worn state that stops an arc is stated up front on

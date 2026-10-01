@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S5a · PROTECTED (the arc, WS-D11): A5's two ladders
+
+**Why.** WS-D4: SY8 now says a system runs one ladder by default and two only if they touch; A5's "two routes means
+two ladders" read as if it licensed two untouched ladders anywhere.
+
+**What changed.** `references/the-arc.md` A5: one line after "Three things worth taking" — two routes on one person
+are two arcs; inside a system, ladders follow SY8's touch rule. Nothing else in A5.
+
+**Verified.** `git diff` is the one added line (plus its blank line); `--selfcheck` current (orphans 3); pytest
+473 passed.
+
+**Words:** +17, running total 141,958 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S4 · PROTECTED (money file, WS-D11): money systems name a sink and a deadline
 
 **Why.** WS-D3/WS-D4 and round 9b §2.7: every money system needs a sink with a deadline, and pay must rise with
