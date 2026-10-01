@@ -93,7 +93,7 @@ one was out of character, and one printed a stat that does not exist.
 | dialogue that fits the person's cast entry | behaviour the cast entry rules out |
 | a consequence printed on a button when a real flag or stat sits behind it | a `+X` for a stat that does not exist (`the-meters.md`, "What the player is shown") |
 
-**The four rules.**
+**The five rules.**
 
 1. **Every fact line is checked** against the sheets and the built schedules: who is there, what
    they are wearing, what time it is, what day.
@@ -104,6 +104,10 @@ one was out of character, and one printed a stat that does not exist.
    cannot carry a revelation. L3.
 4. **A consequence printed on a button is a real flag or stat**, or it is added to the design first.
    Numbers are shown and named (`the-meters.md`, "What the player is shown").
+5. **Prose names her clothes only where a clothing condition backs it**: the trigger's conditions,
+   an enclosing `group`'s, the location's `entry_conditions`, the choice that led here, or a
+   `wardrobeEffects` equip earlier in the same canvas. Undressing during an explicit act is backed
+   by the act. *"Your skirt rides up"* on a canvas any outfit reaches is a lie to every player in jeans.
 
 **A promise about the future must be built.** A line that names a future event (a day, a week or a
 scene: *"next month he decides"*) is true only if the game builds that event, or the step that

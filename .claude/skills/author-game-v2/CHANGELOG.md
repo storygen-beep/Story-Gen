@@ -5,6 +5,26 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C5a (PROTECTED, LO approved): the truth rule for clothes
+
+**Why.** LO's clothing decision: prose names her clothes only when a check backs it. "The truth rule"
+already counted "the wrong clothes for that hour" as a defect, with no rule to stop it.
+
+**What changed.**
+- `references/register.md` "The truth rule" (protected): a new rule 5 — prose names her clothes only
+  where a clothing condition backs it (the trigger, an enclosing group, the location's
+  `entry_conditions`, the choice that led here, or a `wardrobeEffects` equip earlier in the same
+  canvas); undressing during an explicit act is backed by the act. **"The four rules" becomes "The
+  five rules"** in the same commit. Rules 1–4 unchanged.
+- `SKILL.md`: the lints paragraph says rule 5 is not linted yet; the operating rule on the truth rule
+  points at rule 5. The protected-list line is unchanged.
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +77, running total 144,173 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C4: the-first-hour.md arms the wardrobe with its first-release minimum
 
 **Why.** The opening asked for "one read" of the wardrobe, which is the floor gate, not a wardrobe.

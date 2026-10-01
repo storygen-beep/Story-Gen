@@ -340,7 +340,7 @@ because the loud voice negates on purpose) · **history on a repeatable screen**
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
 (*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
-gated on the flag that records it — the truth rule's rule 2, `register.md`) · **a printed stat is
+gated on the flag that records it — the truth rule's rule 2, `register.md`; its rule 5, her clothes, is not linted yet) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
 `the-meters.md`, "What the player is shown") · **a one-time step speaks** (every one-time
 canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest
@@ -419,7 +419,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   on screen and her thoughts beside them (`references/register.md`, "The voice — say it loud");
   the opening runs setup → problem → person → conflict → choice → temptation → objective → play
   (`references/the-first-hour.md` F1b); and every claim a screen makes is true on every visit it can
-  render on (`references/register.md`, "The truth rule"). Labels and guidance stay plain
+  render on, her clothes included (`references/register.md`, "The truth rule", rule 5). Labels and guidance stay plain
   (`references/the-voice.md`).
 
 - **When this skill and a game's sheets disagree, stop and ask.** A fact on a sheet holds; a design
