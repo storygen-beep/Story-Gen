@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S2b (2 of 3): money, needs, shops and Greek life cards (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3/WS-D12: one worked card per system from round 9b, in `templates/cards/`.
+
+**What changed.** New `templates/cards/`: `money_pressure.md` (CoT's Monday bill; IHOH's late rent that turns into
+sex; CW's Mark debt chain only), `needs.md` (CoT, framed hygiene-first per WS-D5: one need, refill places roll
+events, a cost and never a game over, an off switch; CoT's code note quoted; its other needs kept as the measured
+model), `shops_items.md` (CoT upgrade ladders; IHOH items as keys; CW Looks items), `greek_life.md` (CoT, with the
+lead's corrected pledge counts — 41 tasks, 79 points, 30 to join — plus one line each for SD heat, SD businesses
+and IHOH porn taste, and the round's not-systems as counts). Every money card names its sink and deadline.
+
+**Verified.** The same scratch cite/banned-word/own-game check as (1 of 3): 0 problems; engine cites re-read.
+`--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** 0 (cards are not counted), running total 141,514 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S2b (1 of 3): infrastructure cards, the reputation card, and W2's re-point (World and Systems PRD, Phase 2)
 
 **Why.** WS-D3 and WS-D12: the worked cards live in `templates/cards/` (not counted). Round 9b's map, quests/hints,
