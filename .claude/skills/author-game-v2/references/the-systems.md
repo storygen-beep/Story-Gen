@@ -370,8 +370,8 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    Cupid's Way's waitress job run one (round 9b, `cards/job.md`); Course of Temptation's lectures run two
    that touch, grades feeding each professor's favor (`templates/cards/college.md`). Its River Rat bar
    keeps rank and flirtiness apart, joined only by event tips (round 9b, `traces/job_cot_river_rat.md`).
-   A second ladder with its own rank waits on the engine's rank per job: today `fast_jobs` keeps one
-   global count (`v2.py:3419`).
+   A second ladder with its own rank is `ranks` on a fast job, counted per job (`engine.md` §51); a
+   canvas job keeps its rank as a trait.
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
    9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and

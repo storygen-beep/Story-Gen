@@ -119,7 +119,7 @@ whose markup marks a bubble ran longer, a median of 11–16 words over 369 bubbl
 
 **Long talk goes to a call or a meeting.** In Her Own Hands' texts are one line or an image; the
 talking happens in its calls, which run 300–500 words (round 9a §6). No text tells a story; the
-meeting it books does. Until the engine has a call type, write the call as the scene the text books.
+meeting it books does. A call is `[[phone.calls]]`: it rings, and answering plays its scene (`engine.md` §51).
 
 **It is a WARN, never a block** (planned gate: `a chat is short and timed`). A two-word *"you up"* is
 right; the warning is for the twenty-word paragraph.
@@ -237,14 +237,13 @@ thread she can leave unread for free is a thread she will leave unread.
 the clock, energy, or a late hour that refuses (numbers only). A refusal is **a sentence in her
 voice**, not a greyed-out control (`the-voice.md`).
 
-⚠️ **Nothing on our phone costs anything, and nothing charges for silence.** `setup.sendDailyChat`
-(`v2.py:2737`) applies trait effects and returns; phone actions spend no time; there is no hook for
-"unanswered by day X". Until the engine has them:
-- **ignoring:** a one-time canvas on her next visit home, gated on the cause flag, `days_since_flag
-  ≥ 2` on it, and a flag every reply choice sets still `is_false`, applies the cost;
-- **a no-show:** the same shape, on the booked flag and the meeting's flag;
-- **using:** `daily_cap` on a post action, `cooldown = "per_topic"` on a daily topic, and a
-  `corruption_min` she has to have become. Never a free infinite button (P11).
+⚠️ **On our phone silence and time cost only where you set them** (`engine.md` §51):
+- **ignoring:** `ignore_after_days` with `on_ignore` on every thread that matters;
+- **using:** `time_cost` on a reply, a daily topic, a post or a fast job; `daily_cap` on a post action,
+  `cooldown = "per_topic"` on a daily topic, a `corruption_min` she has to have become. Never a free
+  infinite button (P11);
+- **a no-show has no hook:** a one-time canvas on her next visit home, gated on the booked flag,
+  `days_since_flag ≥ 2` on it, and the meeting's flag still `is_false`, applies the cost.
 
 ---
 
@@ -286,10 +285,10 @@ waiting to happen — a number on a screen that stops meaning anything. Give it 
 `the-economy.md` R1b: a rung of content, a character who only answers a girl with a following, a
 price that drops. If nothing reads it, do not count it.
 
-⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
-nothing else (`v2.py:3068`). A place rule ("only at home") is not
+⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min`, against
+`gate_trait` when set (`engine.md` §51), and nothing else (`v2.py:3158`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
-exists (`v2.py:4460`) and is exactly the predicate for it. Until then, the rung labels carry the
+exists (`v2.py:4966`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
@@ -312,10 +311,9 @@ it hides the whole phone until a flag is set.
 two loudest phone threads in the phone study's 22,622 comments ask how to unlock one locked app
 (50 and 31 net, `family-ties`, numbers only).
 
-⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2788`) renders every declared
-app unconditionally. Until per-app gating exists, publish the ladder in the app that is already
-open: a rung labelled `🔒` with its `corruption_min` is legible; a second app that silently is not
-there is not.
+**An app with `conditions` stays off the phone until they hold** (`engine.md` §51). A hidden app says
+nothing, so the scene that opens it says so; inside an open app, a rung labelled `🔒` with its
+`corruption_min` is legible.
 
 ---
 

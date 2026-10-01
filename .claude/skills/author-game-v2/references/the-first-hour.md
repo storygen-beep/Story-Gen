@@ -610,9 +610,9 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:12780` and read on the random-encounter selector
-> (`v2.py:6208`), the substitution rules (`v2.py:6287`), and — through `setup._npcPresentForCanvas`
-> (`v2.py:5447`) — the solo lane (`v2.py:5388`, `:6039`) and the launcher (`v2.py:3441`).
+> `requiresNpc` is emitted at `v2.py:13348` and read on the random-encounter selector
+> (`v2.py:6412`), the substitution rules (`v2.py:6491`), and — through `setup._npcPresentForCanvas`
+> (`v2.py:5653`) — the solo lane (`v2.py:5594`, `:6243`) and the launcher (`v2.py:3503`).
 > **None of them is auto-fire.**
 >
 > Consequence: a meeting bound to a bar with `requires_npc`, whose character's schedule puts him

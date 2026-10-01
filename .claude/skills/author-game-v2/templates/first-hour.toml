@@ -132,10 +132,12 @@ is_active     = true
 # ⚠️ F5 — `requires_npc` DOES NOT GATE AUTO-FIRE. Verified:
 #    getStoryCanvasRedirect (v2.py:6069) -> selectAutoFireCanvasForLocation
 #    (v2.py:5519) -> isCanvasValid (v2.py:5683), which reads schedules,
-#    conditions and repeatability and NEVER reads requiresNpc. The field is only
-#    consumed at v2.py:6412 (random encounters) and v2.py:6491 (substitutions).
-#    Keep it — it is free and it documents intent — but the SCHEDULE below is
-#    what actually stops this firing in an empty room.
+#    conditions and repeatability and NEVER reads requiresNpc. The field is read
+#    at v2.py:6412 (random encounters), v2.py:6491 (substitutions) and, through
+#    _npcPresentForCanvas (v2.py:5653), on the lanes: the solo lane (v2.py:5594),
+#    the location's rows (v2.py:6243) and the launcher (v2.py:3503). Auto-fire
+#    still never reads it. Keep it — it is free and it documents intent — but the
+#    SCHEDULE below is what actually stops this firing in an empty room.
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "<matches this character's own schedule row>"
@@ -211,8 +213,8 @@ npc           = "<npc_id>"     # THE PORTRAIT. Also the presence gate: the rende
                                # it there is no face, no presence check, and the link
                                # label becomes `name` above — tokens and all.
 requires_npc  = "<npc_id>"     # NOT a substitute for `npc` — it draws no face. It DOES
-                               # gate: read on three paths since 2026-09-03 — random
-                               # ambients, substitution targets, and the solo lane
+                               # gate: read on random ambients, substitution targets,
+                               # the solo lane and the launcher
                                # (_npcPresentForCanvas). On a canvas with `npc` set the
                                # portrait's own check is stricter, so this is belt and
                                # braces here; on a solo-lane row it is the only gate.

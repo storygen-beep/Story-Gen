@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Cleanup carry-overs: lines the engine batches made untrue
+
+**Why.** Engine batch 2 built the ignore hook, phone time costs, app conditions, calls and ranks per
+job, and the lanes now read `requires_npc`. Several skill lines still said these did not exist.
+
+**What changed.**
+- `references/the-phone.md` P5's ⚠️ paragraph: "nothing on our phone costs anything" becomes "silence and
+  time cost only where you set them" — `ignore_after_days` / `on_ignore` and `time_cost` (pointer to
+  `engine.md` §51); the no-show keeps its hand-built canvas, since it has no hook.
+- `references/the-phone.md` "Our engine has no per-app condition": now an app's `conditions` keep it off the
+  phone until they hold (§51), and the scene that opens it says so.
+- `references/the-phone.md` "Until the engine has a call type…": a call is `[[phone.calls]]` (§51).
+- `references/the-phone.md` "`post_actions` cannot gate on place or on clothing": it reads `corruption_min`
+  against `gate_trait` when set (§51); cites re-read, `v2.py:3068` becomes `v2.py:3158` (the gate in
+  `setup.sendSocialPost`) and `worn_exposure` `v2.py:4460` becomes `v2.py:4966`.
+- `references/the-systems.md` SY8 rule 1: a second ladder no longer waits on rank per job; it is `ranks`
+  on a fast job (§51), and a canvas job keeps its rank as a trait.
+- `templates/first-hour.toml` F5 and F5b: `requiresNpc` is also read through `_npcPresentForCanvas`
+  (`v2.py:5653`) on the solo lane (`:5594`), the location's rows (`:6243`) and the launcher (`:3503`);
+  auto-fire still never reads it.
+- `references/the-first-hour.md` F5: the same six `requiresNpc` cites re-pointed (`12780`, `6208`,
+  `6287`, `5447`, `5388`/`6039`, `3441` become `13348`, `6412`, `6491`, `5653`, `5594`/`6243`, `3503`).
+- **Left:** `references/the-economy.md:378` "Our engine has no computed effect values" is now untrue
+  (`engine.md` §3, a value worked out from her stats), but the economy file is protected; it needs its own
+  item with LO's yes.
+
+**Verified.** Every new `v2.py:` cite read on disk; `selectAutoFireCanvasForLocation` (`v2.py:5519`)
+and `isCanvasValid` (`v2.py:5683`) do not call `_npcPresentForCanvas`. A wider grep (no ignore hook, no
+calls, no time, no memory, no rank, per-app, dead-end matches, "until the engine") found nothing else
+the built engine contradicts in SKILL.md, references/ or templates/. Selfcheck, skill tests and
+cite_check (SKILL.md + references/ at 0) pass.
+
+**Words:** −14, running total 145,435 / 149,283.
+
+---
+
 ## 2026-10-02 — Cleanup E9b-fix: the reputation text follows round 10
 
 **Why.** Round 10 read Course of Temptation's reputation in code for the first time. It has no
