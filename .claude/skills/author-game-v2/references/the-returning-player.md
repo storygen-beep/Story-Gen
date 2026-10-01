@@ -76,7 +76,7 @@ A save stores the passage it is parked on — `Location_home_room`,
 `Canvas_loop_boss_office_Node_base_r` — and its NPC, wardrobe and quest state under those slugs.
 
 **So:** rename the `id` of a `[[canvases]]`, `[[canvases.nodes]]`, `[[locations]]`, `[[npcs]]`,
-`[[clothing_items]]`, `[[quests]]` or `[[fast_jobs]]` on a shipped game, and the save points at a
+`[[clothing]]`, `[[quests]]` or `[[fast_jobs]]` on a shipped game, and the save points at a
 passage that no longer exists — the player lands nowhere — or an NPC, outfit or quest silently
 vanishes.
 

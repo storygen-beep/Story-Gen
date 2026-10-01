@@ -567,6 +567,14 @@ so they cannot be given a sidebar band.
 shows the world reacting: one counted game reads its derived exposure about 900 times, and 82% of
 those reads only change words. Write the reactions, not the readout.
 
+### Known gaps — the shop
+
+**One shop, and it tells no rules.** `[settings] shop_location` is a single location
+(`template_import.py:2955`). `setup.renderShopPage` (`v2.py:2137`) groups the stock by corruption
+tier (`:2160-2169`) and shows a garment's name and price only: no "approved for" or "risks" text.
+Say where a garment counts in the place's own lines or the key scene's reminder (planned: item
+prices and a general shop). The full wardrobe design is `templates/cards/wardrobe.md`.
+
 ---
 
 ## 18. Build

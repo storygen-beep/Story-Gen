@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Clothing C6: the wardrobe card, `[[clothing]]` in the-returning-player.md, the shop gaps
+
+**Why.** The clothing rules (C1–C5) point at one design; round 9a's wardrobe card is that design. The
+card lives in `templates/cards/` (not counted, LO's word-budget decision).
+
+**What changed.**
+- New `templates/cards/wardrobe.md` (round 9a's card): the field table (the unit, leave rules, the
+  refusal, dress codes, a place that wants revealing, events, pay, people noticing, one number, the
+  day-1 gate, key garments, shop text, tiers, taken away, sex scenes, changing), steps in order,
+  amounts, touchpoints, chains, first release, the failure checklist, what players say, and our engine
+  today with planned names. Models only from In Her Own Hands, Course of Temptation, Shady Deals and
+  Cupid's Way (nothing on Jack or Aaron; CW's wardrobe peeping event left out).
+- `references/the-returning-player.md`: `[[clothing_items]]` becomes `[[clothing]]`, the real table
+  name.
+- `references/engine.md` §17: a short "Known gaps — the shop" (one shop; no "approved for" text;
+  planned: item prices and a general shop) and a pointer to the card. No other engine.md section.
+
+**Verified.** The card greps clean for the-voice.md "Adult wording" banned list, and for Jack, Aaron and
+peeping. Its `v2.py` and `template_import.py` facts were read on the merged engine. Selfcheck and the
+skill tests pass.
+
+**Words:** +71, running total 144,265 / 149,283.
+
+---
+
 ## 2026-10-01 — Clothing C5b: the agents and sheets follow the clothes truth rule
 
 **Why.** Rule 5 of "The truth rule" (C5a) only holds if the writer is told what she wears and the
