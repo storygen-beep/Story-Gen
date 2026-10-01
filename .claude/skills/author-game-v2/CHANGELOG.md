@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: a post gated on her own meter — `gate_trait` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.sendSocialPost` and the composer read `corruption_min` against
+the hard-coded `corruption` trait, so a game whose ascent meter has another name could not gate a post.
+
+**What changed.**
+- `generators/v2.py`: a post action's `corruption_min` reads `gate_trait` when set (default corruption),
+  in the composer's lock and in `sendSocialPost`.
+- `template_import.py`: `gate_trait` must be a `[player] core_traits` key and is read only with
+  `corruption_min` (build errors). Post actions are raw dicts, so it reaches metadata as written.
+- `references/engine.md` §51: the fact.
+- Citations re-pointed through the `git diff` line map (491 moved, 588 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed: daily topics' `corruption_min` still reads corruption (not in this step).
+
+**Verified.** `test_phone_outward.py` (+1, headless: "Tease" gated on charm opens and posts, "Bare" on
+the default corruption stays locked and a stale tap does nothing). `PostActionGateTraitTests` (2).
+Selfcheck and the skill tests pass.
+
+**Words:** +53, running total 145,117 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: a launcher that works from any room — `anywhere` (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 8. A launcher option is live only in its canvas's room, so the phone

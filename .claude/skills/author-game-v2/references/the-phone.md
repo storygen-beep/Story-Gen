@@ -199,7 +199,7 @@ conditions = { version = "1.0", items = [
 
 `version = "1.0"` is not optional: without it the conditions fail open and the text arrives at once.
 `time_of_day` is `HH:MM`, 24-hour, end exclusive, and wraps midnight the way NPC schedules do
-(`v2.py:4841`, `engine.md` §39); omit `end_time` and the window is one hour.
+(`v2.py:4843`, `engine.md` §39); omit `end_time` and the window is one hour.
 
 ⚠️ **On a conversation, `time_of_day` is checked once, at delivery.** The trigger is a latch:
 `ps.triggered_conversations[conv.id]` is written the first time every condition passes and is never
@@ -211,7 +211,7 @@ with `repeat_after_days` reads its trigger again each time it comes back: `engin
 **The phone keeps no state of its own.** How the phone study's 27 games decide what a phone shows:
 a meter 22 / 27, an hour window 20 / 27, a per-NPC stage 13 / 27, a past stamp plus a wait 3 / 27, a
 stored appointment 1 / 27. Every one but the last is state the map and the hubs already read. Phone
-conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4586`), the
+conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4588`), the
 evaluator canvases use, so every condition a canvas can gate on, a thread can:
 
 ```
@@ -289,7 +289,7 @@ price that drops. If nothing reads it, do not count it.
 ⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
 nothing else (`v2.py:2943`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
-exists (`v2.py:4318`) and is exactly the predicate for it. Until then, the rung labels carry the
+exists (`v2.py:4320`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
@@ -325,7 +325,7 @@ there is not.
 Cupid's Way marks the contact with ❕ and turns the Study button yellow while a text waits. Shady
 Deals' phone covered the screen, drew 5 complaints, and was fixed in three steps: a hide button, a
 glow on a call, the hidden state remembered (round 9a §5 class f, 8 failures). Our engine already
-pulls: a delivered conversation raises the sidebar badge (`v2.py:3436`) and a three-second toast
+pulls: a delivered conversation raises the sidebar badge (`v2.py:3438`) and a three-second toast
 (`v2.py:2298`) whose text is the conversation's `notify`.
 
 **The phone answers *what now*, one thing at a time.** Lostness, not grind, is this genre's disease
@@ -406,9 +406,9 @@ That is this file's rule stated as architecture, and it is why that system does 
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2595`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7005`) pushes
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7007`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6620-6621`), where `setup.fireScheduledEvent` (`v2.py:7019`) can set a flag, start a quest,
+(`v2.py:6622-6623`), where `setup.fireScheduledEvent` (`v2.py:7021`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -436,7 +436,7 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:984`, `v2.py:7756`).
+(`template_import.py:984`, `v2.py:7758`).
 
 ---
 
@@ -464,8 +464,8 @@ least 10 of the 17 top games with a phone, a call or a text starts a scene witho
 (Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
 and credits links.
 
-**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3348`):
-an option plays only when she is already in that canvas's room (`v2.py:3365`), and a canvas that
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3350`):
+an option plays only when she is already in that canvas's room (`v2.py:3367`), and a canvas that
 requires him present needs him there. So a summon is a launcher option pointing at a canvas in
 **her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are
 player-sent too, but they only move traits; give one a `conditions` block on a flag the world set,

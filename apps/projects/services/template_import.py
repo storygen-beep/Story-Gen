@@ -5019,11 +5019,21 @@ def validate(template: GameTemplate) -> List[str]:
             if dt.time_cost is not None and not _is_whole_days(dt.time_cost):
                 errors.append(f"phone.daily_topics[{dti}].time_cost must be a whole number of "
                               f"minutes >= 1 (got {dt.time_cost!r})")
+        player_traits = set((template.player.core_traits or {}).keys())
         for ai, app in enumerate(phone.apps):
             for pai, act in enumerate(app.post_actions or []):
                 if isinstance(act, dict) and "time_cost" in act and not _is_whole_days(act["time_cost"]):
                     errors.append(f"phone.apps[{ai}].post_actions[{pai}].time_cost must be a "
                                   f"whole number of minutes >= 1 (got {act['time_cost']!r})")
+                # E8 — the trait `corruption_min` is read against (default corruption).
+                if isinstance(act, dict) and "gate_trait" in act:
+                    gt = act["gate_trait"]
+                    if not isinstance(gt, str) or gt not in player_traits:
+                        errors.append(f"phone.apps[{ai}].post_actions[{pai}].gate_trait {gt!r} "
+                                      f"is not in [player] core_traits")
+                    elif act.get("corruption_min") is None:
+                        errors.append(f"phone.apps[{ai}].post_actions[{pai}].gate_trait is read "
+                                      f"only with corruption_min")
 
     # E6 — a rank per job. Errors: a misordered or malformed ladder would build clean
     # and pay the wrong rank, or never promote her.

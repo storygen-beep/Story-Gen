@@ -2967,7 +2967,7 @@ setup._renderSocialFeed = function(appId, appLabel) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var postActions = appDef.post_actions || [];
     if (postActions.length) {{
-        var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+        var _pct = ((sv.player || {{}}).core_traits || {{}});
         var _pd = ps.posted_days = ps.posted_days || {{}};
         var _dayKey = setup.getCurrentDayKey();
         html += '<div class="phone-post-composer">';
@@ -2976,7 +2976,8 @@ setup._renderSocialFeed = function(appId, appLabel) {{
             var cap = (act.daily_cap != null ? Number(act.daily_cap) : 1);
             var usedKey = appId + ':' + pa;
             var usedToday = (_pd[usedKey] && _pd[usedKey].day === _dayKey) ? _pd[usedKey].count : 0;
-            if (act.corruption_min != null && _corr < act.corruption_min) {{
+            // E8 — `corruption_min` is read against `gate_trait` (default corruption).
+            if (act.corruption_min != null && (_pct[act.gate_trait || 'corruption'] || 0) < act.corruption_min) {{
                 html += '<div class="phone-daily-locked">🔒 ' + (act.label || 'Post') + '</div>';
             }} else if (usedToday >= cap) {{
                 html += '<div class="phone-daily-locked">' + (act.label || 'Post') + ' ✓</div>';
@@ -3027,7 +3028,8 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var act = (appDef.post_actions || [])[actionIdx];
     if (!act) return;
-    var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+    // E8 — the gate reads `gate_trait` (default corruption), the same as the composer.
+    var _corr = ((sv.player || {{}}).core_traits || {{}})[act.gate_trait || 'corruption'] || 0;
     if (act.corruption_min != null && _corr < act.corruption_min) return;
     var _pd = ps.posted_days = ps.posted_days || {{}};
     var _dayKey = setup.getCurrentDayKey();

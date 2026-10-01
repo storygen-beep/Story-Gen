@@ -35,6 +35,8 @@
 #                 Selfie 15; night_shift (a fast job) 420, which rolls the day from 18:00.
 #    taxi         a launcher with anywhere = true: its pay_desk option (home loc_bar) is
 #                 live from loc_home. `door` is the same option without it: "Not here".
+#    feed         post actions gated by corruption_min = 5: "Tease" reads gate_trait = charm
+#                 (10, open); "Bare" reads the default corruption (0, locked).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -108,7 +110,10 @@ label = "Dates"
 id           = "feed"
 type         = "social_feed"
 label        = "Feed"
-post_actions = [ { label = "Selfie", followers_min = 1, followers_max = 1, counter_trait = "followers", time_cost = 15 } ]
+post_actions = [
+  { label = "Selfie", followers_min = 1, followers_max = 1, counter_trait = "followers", time_cost = 15 },
+  { label = "Tease", followers_min = 2, followers_max = 2, counter_trait = "followers", corruption_min = 5, gate_trait = "charm" },
+  { label = "Bare", followers_min = 3, followers_max = 3, counter_trait = "followers", corruption_min = 5 } ]
 
 [[phone.apps]]
 id         = "secret"

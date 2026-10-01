@@ -6530,6 +6530,24 @@ class PhoneAnywhereLauncherTests(SimpleTestCase):
             self.assertEqual("anywhere" in p.metadata["phone_settings"]["apps"][0], present)
 
 
+class PostActionGateTraitTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `gate_trait` on a social_feed post action."""
+
+    def _with(self, **act):
+        d = _toml_with_phone()
+        d["phone"]["apps"][1]["post_actions"] = [dict({"label": "Tease"}, **act)]
+        return d
+
+    def test_a_declared_gate_trait_validates_clean(self):
+        self.assertEqual(validate(normalize(self._with(corruption_min=5, gate_trait="energy"))), [])
+
+    def test_bad_gate_traits_are_errors(self):
+        errors = validate(normalize(self._with(corruption_min=5, gate_trait="luck")))
+        self.assertTrue(any("gate_trait 'luck' is not in [player] core_traits" in e for e in errors), errors)
+        errors = validate(normalize(self._with(gate_trait="energy")))
+        self.assertTrue(any("gate_trait is read only with corruption_min" in e for e in errors), errors)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

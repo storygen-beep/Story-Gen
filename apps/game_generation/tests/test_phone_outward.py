@@ -14,7 +14,9 @@ Each part is opt-in and has its own section below:
   * `time_cost` (minutes) on a reply choice, a daily topic, a post action and a fast job
     spends time through advanceTime, so the day can roll; its button says "· Nm";
   * a launcher app with `anywhere = true` offers its options in any room (still never
-    mid-scene); without it the room lock stands.
+    mid-scene); without it the room lock stands;
+  * a post action's `corruption_min` reads `gate_trait` when set (before, it always read
+    corruption).
 
     pytest apps/game_generation/tests/test_phone_outward.py -q
 """
@@ -186,4 +188,22 @@ def test_an_anywhere_launcher_plays_from_another_room(html):
         assert g.passage() == "Canvas_pay_desk_Node_desk"
         # mid-scene is still not a place
         assert "Not here" in _launcher(g, "taxi")
+        assert g.errors == []
+
+
+# ── the post action's gate trait ─────────────────────────────────────────────
+
+
+@needs_browser
+def test_a_post_action_gate_reads_its_gate_trait(html):
+    with open_game(html) as g:
+        _start(g)
+        feed = g.js("() => { SugarCube.setup.openPhone(); SugarCube.setup.openPhoneApp('feed');"
+                    " return jQuery('.phone-post-composer').html(); }")
+        assert 'data-action-idx="1"' in feed      # Tease: charm 10 >= 5
+        assert "🔒 Bare" in feed                  # Bare: corruption 0 < 5
+        g.js("() => SugarCube.setup.sendSocialPost('feed', 1)")
+        assert g.sv("player.core_traits.followers") == 2
+        g.js("() => SugarCube.setup.sendSocialPost('feed', 2)")  # a stale tap on the lock
+        assert g.sv("player.core_traits.followers") == 2
         assert g.errors == []
