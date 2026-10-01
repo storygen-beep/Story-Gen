@@ -193,8 +193,8 @@ nodes, report different numbers for the same design. There is no `--sheets` mode
 every count on a sheet sits on the intent side of the measured/intent split.
 
 **The world files, all read in the board phase — `the-systems.md` before any of them:**
-**`the-systems.md` (WHAT THE GAME KEEPS TRACK OF, and what kind of place each room is — read
-first, because every other file below derives from it)** · `the-board.md` (fill, meters, cast) ·
+**`the-systems.md` (WHAT SHE DOES AGAIN AND AGAIN — the systems, the meters they write, and what kind
+of place each room is — read first, because every other file below derives from it)** · `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
 piece of content lives on) · `the-economy.md` (what money is for) · **`the-meters.md` (WHICH meters
 exist and who owns them, what the climb costs, and how the player reads it off the sidebar)** ·
@@ -210,7 +210,7 @@ CHANGE once players hold saves — ids, flag and trait keys, stat ranges, the ti
 to every gate in this skill and strands every save in the wild; the engine's own migration seam
 (`engine.md` §40) repairs additions and nothing else.
 
-**One optional file, read only if the game declares the system:** `the-phone.md` (whether this game
+**One optional file, read only if the game declares the phone (a channel, not a system):** `the-phone.md` (whether this game
 needs a phone, what goes on it, and how it is wired to the world). **Its P1 is a refusal question —
 most games should not have one**, and a thinly-filled phone is worse than none. Read it before
 writing `[phone]`, not after.
@@ -305,8 +305,8 @@ how many fails are [off].
 | prose texture | the dash rate against the field — p50 0.99, p90 17.5, ceiling 35.0/10k. The other three texture figures print and are **not** judged | `register.md` — "Dashes stay rare" |
 
 Lints sit below the tally and never move it: dialogue attribution · **the labels and the systems
-agree** (`the-systems.md` SY1–SY3 — every declared system against every room label: a label no
-system claims, a system whose label is on no room, and a `sourced` system that is not fed where it
+agree** (`the-systems.md` SY1–SY3 — every declared meter against every room label: a label no
+meter claims, a meter whose label is on no room, and a sourced meter that is not fed where it
 says or is read nowhere else. ⚠️ Declaring more labels makes it worse, not better, which is the only
 reason it is checked; a count that can be optimised upward is the `objects`/gate-22 failure) ·
 room-list labels ·
@@ -573,18 +573,18 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   median **139** characters (degrees-of-lewdity) and **84** (zaras-school-life). Section G:
   personality is read the same way — **896** `if` branches gated on an inclination in
   course-of-temptation, median **114** characters, deciles 30/37/50/72/**114**/153/204/284/448.
-  Roughly twenty words. One sentence, swapped. **When a system feels like it needs a big branch per
+  Roughly twenty words. One sentence, swapped. **When a meter feels like it needs a big branch per
   state, the field's answer is almost always a small branch per site instead.**
-- **A system is read to change the words, not to refuse the action.** The same law, arriving a fourth
+- **A meter is read to change the words, not to refuse the action.** The same law, arriving a fourth
   time from a fourth instrument. Section H: reputation gates **2%** of its 644 read sites and colours
   the other 98% — ⚠️ *corrected 2026-08-27: that is three games, 95% of it degrees-of-lewdity. Over
   13 games it is ~10% link-bearing, and a median 41% of reads change something mechanical without
   ever refusing. The law survives; "colours" must not be read as "does nothing." See W5b.* Section G: differentiation is many small swaps, above. Section I: the body —
-  clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured systems, 17 of
+  clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured body values, 17 of
   them under 25%. Section B reaches it from the *choice* side rather than the meter side: of **27,505**
   conditionals wrapped around an action, **35% are variant selectors where every branch offers
-  something** and only **23% refuse anything at all**. The exceptions are all *small* systems, which is the rule underneath it:
-  **a system either stays small and gates, or grows large and colours; nothing in the field is
+  something** and only **23% refuse anything at all**. The exceptions are all *small* meters, which is the rule underneath it:
+  **a meter either stays small and gates, or grows large and colours; nothing in the field is
   both.** When you are designing a meter and reaching for gates, you are probably building the
   wrong kind (`the-meters.md` W7).
 - **A per-NPC field has TWO write sites and the default build uses the second.**

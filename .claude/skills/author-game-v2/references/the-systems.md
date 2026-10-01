@@ -103,7 +103,7 @@ room is built around them. Both kinds are required: the body's needs are ambient
 
 ## SY2 · A sourced meter has ONE place that feeds it and many that read it
 
-R2c says a system earns its place *"by being read in more than one room, by more than one kind of
+R2c says a meter earns its place *"by being read in more than one room, by more than one kind of
 content."* That is right, and it is only half the shape: **it says nothing about where a meter is
 FED,** and the natural reading of it — build the thing in three rooms — describes an ambient meter.
 

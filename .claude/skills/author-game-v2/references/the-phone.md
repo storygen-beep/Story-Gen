@@ -13,7 +13,8 @@ This file owns **one rule**, and every section below is that rule applied:
 > [ElkbookWidgets]: *"You can post a selfie."*
 
 **Why this file exists.** `DOCTRINE_GAPS.md` Tier 3 row 12 — *"Optional systems — phone,
-customization"*. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
+customization"*. The phone is a channel — infrastructure, not a system (`the-systems.md` SY1): it
+carries other systems' threads. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
 all incidental: the gap row itself, one economy example listing "her phone" as a bill, and two
 `engine.md` table rows. The engine has shipped eight phone app types since doc 45 and the skill
 never said a word about any of them.
@@ -60,7 +61,7 @@ If the answer to all three is no, do not declare a phone. Declaring one and fill
 strictly worse than not having one: an app with a single item in it reads as a broken feature,
 and 18% of the field's phone comments are players asking how to make an empty-looking phone work.
 
-⚠️ **A declared system must exist in the built game.** If `0_systems_spec.toml` says a system is
+⚠️ **A declared channel must exist in the built game.** If `0_systems_spec.toml` says the phone is
 ON, the built `7_final_game.toml` has to carry its block — `[phone]` for the phone — or the spec has
 to change. Nothing checks this: no script in `scripts/` compares the spec with the build (see
 "What is not gated here", below).

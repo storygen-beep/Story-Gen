@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Systems S1b: cross-references to the new definition (World and Systems PRD, Phase 2)
+
+**Why.** S1a changed what a system is (WS-D3); the files that pointed at the old "what the game keeps track of"
+sense had to follow, or they would teach the meter as the system.
+
+**What changed.** `SKILL.md`: the world-files paragraph names `the-systems.md` as "what she does again and again";
+the optional-file line calls the phone a channel, not a system; the labels lint text says "meter"; the four
+lessons bullets on swaps, colouring and small-vs-large say "meter" or "body values". `the-surfaces.md` R2c: the
+brake now carries both halves (a system earns its place by feeding something already read or by moving money; a
+meter by being read in more than one room); R2c's "No gate" lines are unchanged until K1/K2. `the-systems.md` SY2
+quotes R2c's meter half. `the-sheets.md`: the system sheet row is a design card; the "written first" paragraph
+and the review order follow. `the-board.md`: the room question asks whether a system there writes a sourced meter.
+`the-map.md` intro: the map is infrastructure. `the-phone.md`: "Why this file exists" names the phone a channel,
+and "A declared system must exist" becomes "A declared channel". `DOCTRINE_GAPS.md`: follow-on row 19b; row 19
+left as written. `the-economy.md`'s title is untouched (protected vocabulary).
+
+**Verified.** `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** +67, running total 141,014 / 149,283.
+
+---
+
 ## 2026-10-01 — Systems S1a: the new definition (World and Systems PRD, Phase 2)
 
 **Why.** WS-D3 (N13, round 9b §1): SY1 defined a system as "something the game keeps track of about her" — a meter.

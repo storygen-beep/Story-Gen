@@ -98,7 +98,7 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   { "id": "the_kitchen", "labels": ["private", "sells_food", "has_washer"] }
   ```
 
-  ⚠️ **Does the room carry a `sourced` system?** (`the-systems.md` SY2) It is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
+  ⚠️ **Does a system here write a `sourced` meter?** (`the-systems.md` SY2) It is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
   of every room on this list before the prose exists.
 - **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
 - **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**

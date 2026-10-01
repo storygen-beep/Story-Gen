@@ -1,8 +1,8 @@
 # The Map — the world as a place, not a list of rooms
 
 Read this in the **board** phase, before a character is placed and before a word of prose is
-written. The map is the only system the player touches on **every single turn**, and the engine
-validates almost none of it.
+written. The map is infrastructure, not a system (`the-systems.md` SY1), and the only one the player
+touches on **every single turn**; the engine validates almost none of it.
 
 > ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
 > [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,

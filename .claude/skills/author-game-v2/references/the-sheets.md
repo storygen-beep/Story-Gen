@@ -50,7 +50,7 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 
 | | what it carries | one per |
 |---|---|---|
-| **system** | what the game keeps track of about her: `ambient` or `sourced`, the key it keeps, where it is fed, what reads it, which room labels it attaches to | system |
+| **system** | one design card: what she does again and again, where and when, what it costs, its ladder, its people and pool, and the meters it writes and reads | system |
 | **place** | what the player sees on entering a room: auto-fires, who is here, things to do, ways out — **what kind of place it is** (its labels), and whether it has a DOOR | location |
 | **person** | the ladder — rungs, both gates, where and **when** they are reachable, refusals | character |
 | **scene** | one rung: branch map, node bodies, exits, and every explicit beat written out | rung |
@@ -60,8 +60,8 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 Each type has a one-page template in `templates/sheets/` — slots only, no example prose.
 
 ⚠️ **The system sheets are written FIRST and the place sheets are written against them**
-(`the-systems.md` SY1–SY3). A room's rows come from the systems that describe her — Course of Temptation reads
-`has_inclination` in 218 of its 5,294 passages, e.g. [ClassroomMenu]
+(`the-systems.md` SY1–SY3). A room's rows are the systems that live there, reading meters that describe her —
+Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, e.g. [ClassroomMenu]
 `<<if $pc.has_inclination("Knowledge from the Deep")`. A place sheet whose rows
 name no system is the finding, and the labels line is where it shows.
 
@@ -343,8 +343,8 @@ name. 80 cross-references between sheets are by filename and a rename breaks the
 
 The order is already fixed by the rules above, so it is derived instead:
 
-**1** `decision` — everything reconciles against it (S6) · **2** `system` — written first, and the
-place sheets are written against them (SY1–SY3) · **3** `place` · **4** `person` — a place × hours
+**1** `decision` — everything reconciles against it (S6) · **2** `system` — one card per system,
+written first, and the place sheets are written against them (SY1–SY3) · **3** `place` · **4** `person` — a place × hours
 grid, so its places must exist (S5) · **5** `scene` — one rung of a person · **6–9** `opening`,
 `guidance`, `index`, `format`.
 

@@ -191,9 +191,11 @@ failure: declare twenty systems, get twenty rows, ship twenty dead meters —
 which is `the-meters.md` W3's defect at scale, and exactly what SKILL.md's *"ask what a tired author
 would build"* rules out. So:
 
-> **A system earns its place by being read in more than one room, by more than one kind of content.**
+> **A system earns its place by feeding something already read, or by being a source or sink of
+> money** (`the-systems.md`, the brake). **A meter earns its place by being read in more than one
+> room, by more than one kind of content.**
 
-One system that surfaces in three rooms beats three that surface in one each. **The test is not how
+One meter read in three rooms beats three read in one each. **The test is not how
 many systems the game has; it is whether a room has anything of its own to show.**
 
 **No gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
