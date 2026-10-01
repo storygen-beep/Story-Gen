@@ -19,12 +19,12 @@ You will be given **either**:
 
 ```bash
 source venv/bin/activate
-PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py <slug>   # 46 gates, 28 lints
+PYTHONHASHSEED=0 python3 .claude/skills/author-game-v2/scripts/gates.py <slug>   # every gate and lint
 python3 .claude/skills/author-game-v2/scripts/pitch_pack.py <slug>               # the world as facts
 ```
 
 **You may not report anything those already report.** That is not a courtesy, it is your whole
-job description: 46 gates and 28 lints occupy the space of "broken in a way we have seen before",
+job description: the gates and lints occupy the space of "broken in a way we have seen before",
 and a finding that duplicates one is noise wearing a suit. The scoreboard's own honest limit is
 that it *"catches old mistakes and has never once found a new one."* **New is your half.**
 
