@@ -384,11 +384,12 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
    `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:5931`).
 
-**Reputation is meters until the engine can spread gossip.** Course of Temptation and Shady Deals run it as a
-system (`templates/cards/reputation.md`); our engine has no reputation primitive (round 9b §6). Until it does,
-build **one trait per audience** from pieces that exist — trait conditions, sidebar bands, `[[traits.labels]]`
-(`engine.md` §30), daily-tick decay, the cast page's `show_traits` — and declare each in `board.meters[]`, never
-`board.systems[]`. What reputation is for is `the-meters.md` W5b.
+**Reputation is meters until the engine can remember who saw what.** Course of Temptation runs it on per-person
+memory, spread only in scenes she is in, one hop (round 10, `cards/gossip.md`). Until then: **one audience** with an
+unnamed crowd, as **one trait** (`engine.md` §30, no decay), plus an NPC-scoped flag for each thing a person saw,
+gating his lines. Declare it in `board.meters[]`, never `board.systems[]`. The minimum (two kinds, the spread
+scenes, the refusal, the door with a way back) is `templates/cards/reputation.md`; what reputation is for is
+`the-meters.md` W5b.
 
 ## What the board phase records
 

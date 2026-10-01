@@ -5,6 +5,39 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Cleanup E9b-fix: the reputation text follows round 10
+
+**Why.** Round 10 read Course of Temptation's reputation in code for the first time. It has no
+background spread: each person remembers what he saw, a rumour moves one hop and only in a scene she
+is in, and the score is the share of the audience who knows. The interim text said the engine lacked
+"spread", asked for two audiences that no CoT content reads, and missed the refusal, the mask's real
+effect and the NPC-flag workaround (round 10 §7, 14 issues). LO's gossip decisions set the minimum.
+
+**What changed.**
+- `templates/cards/reputation.md` rewritten from round 10 (`round10/cards/gossip.md`): what is missing is
+  memory of who saw what; spread is one hop, in her scenes; witnesses, tellers, hearers and defenders;
+  the 27 inline reads, the 6 personal-knowledge reads and the one refusal (waived by closeness); the mask
+  wipes strangers' memory; no decay; Shady Deals' heat as the door with a way back; the unnamed crowd;
+  the minimum (2 kinds, 1 audience, ≥4 rungs, ≥2 reads per rung as a direction, ≥3 spread scenes,
+  ≥2 personal-knowledge reads, a refusal, a door, a way down, friends who won't tell, no decay, no price
+  effects yet); today's build is an audience trait plus an NPC-scoped flag per thing a person saw.
+- `references/the-systems.md` "Reputation is meters until…": reworded to "remember who saw what", one
+  audience with an unnamed crowd, no decay, the NPC-flag workaround, and a pointer to the card.
+- Round 10 §7 issue 2 (`the-meters.md` W5b's "passes them from one to the next") is **left**: W5b is a
+  protected section and needs its own item.
+
+**Verified.** Engine cites read on disk, not taken from round 10 (its `v2.py:6680` and `:4531` had
+drifted): the NPC branch of `applyFlagEffect` is `v2.py:6963`, the NPC flag condition `v2.py:4812`; a
+`flagEffects` entry with `targetType = "npc"` reaches it through `_emit_flag_effects_inline`; the flag
+condition schema accepts `subject` / `npc_id` (`template_import.py:1635-1638`); `show_traits` is still
+`template_import.py:168`. The `[[traits.labels]]` cite is now a pointer to `engine.md` §30. The card
+passes the banned-word grep (`the-voice.md`, "Adult wording"). Selfcheck, skill tests and cite_check
+(SKILL.md + references/ at 0) pass.
+
+**Words:** +18, running total 145,449 / 149,283.
+
+---
+
 ## 2026-10-02 — Merge pointer fix: engine batch 2 citations re-pointed
 
 **Why.** Engine batch 2 (the ignore hook, pay from stats, job ranks, the phone's outward features,

@@ -1,45 +1,86 @@
 # Card — Reputation (meters until the gossip engine exists)
 
 > **A worked card, not a template.** Take the shape, leave the furniture. Every line cites a traced game:
-> round 9b, `round9b/cards/reputation.md` and `round9b/traces/reputation.md`. The models are **Course of
-> Temptation (CoT)** (built from what each person saw) and **Shady Deals (SD)** (one score that buys titles,
-> with heat pushing back). Fill your own card on `templates/sheets/system.md`; record it in `board.meters[]`,
-> **never** `board.systems[]`.
+> round 10, `round10/cards/gossip.md`, `round10/traces/cot_gossip.md` and `round10/traces/cot_reads.md` (CoT read in
+> code), with `round10/traces/sd.md` for the door. The model is **Course of Temptation (CoT)**: each person remembers
+> what he saw her do, and tells it in a scene she is in. **Shady Deals (SD)** is the model for the door a bad name
+> closes. Fill your own card on `templates/sheets/system.md`; record it in `board.meters[]`, **never**
+> `board.systems[]`.
 >
-> ⚠️ **Meters, not a system, until the engine has a gossip piece.** Until then reputation is one
-> trait per audience, built from existing pieces: trait conditions, sidebar bands, `[[traits.labels]]`,
-> daily-tick decay, and the cast page's `show_traits`. The table below is the target shape, not today's build.
+> ⚠️ **Meters, not a system, until the gossip engine exists.** What our engine lacks is **memory of who saw
+> what**, not a background spread: CoT has none either. Today's build is two pieces, both existing:
+> **one trait for the audience** (the score) **plus one NPC-scoped flag per thing a person saw** (the memory).
+> "Our engine today", below, shows both.
+
+## What it is, in one paragraph
+Each person remembers what he personally saw her do, or did with her. One who saw it, and doesn't like her, says
+it out loud in a scene **she is in**; the people around him now know a weaker version. That is the only spread:
+**one hop, in her scenes**, never off-screen, and a rumour heard second-hand is never retold. Her friends and lovers
+never tell, and shut the teller down. The audience's score is the share of that audience who knows. It opens
+strangers' offers, insults and feed posts, and one refusal. Nothing fades.
 
 | field | the model (CoT; SD where it differs) | cite |
 |---|---|---|
-| place and hours | everywhere: read wherever events fire (walks, parties, the bar, the social feed); rebuilt every night | `cot_68_time.js:1087` |
-| cost | exposure: being seen naked or having sex in front of people. A mask blocks most of it (10 of 29 gated events need `not anonymous`). SD: titles cost 15–40 reputation a day | round 9b `traces/reputation.md` A.12; [The Code] |
-| one ladder or two | CoT: **one** — no pay; the lewd ladder is the reputation ladder. SD: two (status tiers for pay, depravity for sex) that meet only at the Slut Boss title | round 9b `cards/reputation.md` |
-| pay ladder | CoT none. SD: tiers Nobody → Crime Legend at 300 to 30,000; rewards ×1/×2/×3/×4 at 0/3k/7k/20k | [Character]; [Scales] |
-| lewd ladder | Exhibitionism 175: rumors said to her face; 200: social-feed posts; 250: strangers ask her to flash, call her a slut; 400–500: slut posts, underwear theft. Promiscuity 100: groped at parties; 110: rumors; 150–175: called a slut; 200: threesome offers; 250: her number on a stall | [EventCampusRepRumor]; [EventQuadPartyCalledSlut]; round 9b `cards/reputation.md` |
-| people | every NPC holds what they saw and heard; a rumor passes to friends (association ≥ 0.7) at ×10 strength; friends and lovers never spread | [EventCampusRepRumor] |
-| pool, daily | 29 gated events (12 exhibitionism, 12 promiscuity, 3 studious, 1 kind, 1 mean) + 24 inline reads | round 9b `traces/reputation.md` A.8–9 |
-| memory | per NPC: parts seen (in person, photo, video), sex acts, rumor strengths 0–1000; a global table of 7 types × 3 audiences (students, townies, faculty) | round 9b `traces/reputation.md` A.2–3 |
-| growth | only grows; opposites cancel (promiscuity and reservedness, kindness and meanness); popularity drifts back after 14 days unmet; rumors never decay. SD: title drain, heat losses | round 9b `traces/reputation.md` A.6, A.11 |
-| sink and deadline | not a money system. SD's counter-meter: heat 0–125; at 100 or more on a new day, one of 5 losses | [Player NewDay]; [Heat Widgets] |
-| feeds · reads | feeds who approaches her and what they want: promiscuity reputation / 100 goes into each NPC's date and rival wishes · reads exposure and sex memories; shown as words ("pretty exhibitionist among the students"), never numbers | [Reputation]; round 9b `traces/reputation.md` A.7, A.10 |
-| link into the hook | gates the random-encounter pool (9 gated campus-walk events) and NPC desire | round 9b `cards/reputation.md` |
-| leads to | the stranger who asks her to flash, the party grope, the threesome offer | [EventQuadPartyCalledSlut] |
+| place and hours | **written** wherever she is seen: everyone at the place is a witness. **Spread** only in 4 social hubs she is at: the campus walk, the classroom, the quad party, the River Rat bar | `cot_40_events.js:1384`; `traces/cot_gossip.md` §3 |
+| cost | being seen. With a mask, strangers keep **no memory at all** (only people who already know her do), and 10 of 29 gated events also need no mask. A spread scene costs her humiliation, and friendship with every hearer (−15) and the teller (−25) | `cot_40_events.js:1540-1543`, `:181`; `traces/cot_gossip.md` §3 |
+| one ladder or two | one lewd ladder, no pay. SD: one global score that prices the world (bribes, gig pay), plus four faction heats | `cards/gossip.md`; `traces/sd.md` |
+| lewd ladder | exhibitionism rungs 50 / 175 / 200 / 250 / 500; promiscuity 100 / 110 / 125 / 150 / 175 / 200 / 250 / 400 — "per mille of the audience who knows". At 250 a student on the walk asks her to flash; at 100 she is groped at the party, at 200 offered a threesome, at 250 her number is on a stall wall; at 400–500 the feed calls her a slut | `cot_40_events.js:102-103`; `traces/cot_reads.md` |
+| people | **witnesses**: everyone present. **Tellers**: someone with first-hand memory who isn't her friend or lover. **Hearers**, by passage: the teller's close friends present (3 of 6 spread passages), one student, or a quarter of the people present who dislike her. **Defenders**: her friends, lovers and would-be dates tell the teller off and don't take it in | `cot_53_people.js:3057-3077`; `traces/cot_gossip.md` §3 |
+| pool | 6 spread passages. Reads: 29 gated events (12 exhibitionism, 12 promiscuity, 3 studious, 1 kind, 1 mean) and 27 inline reads; 6 entries read **one person's own knowledge** ("I saw her naked"); 1 refusal | `traces/cot_reads.md` §1 |
+| memory | per person: what he saw (in person, photo, video), sex acts with her, and heard rumours as a bare strength per kind (0–1000). No time, place or source; a heard rumour loses the act | `cot_40_events.js:1708-1755`; `cot_53_people.js:5215-5255` |
+| growth, way down | rises when a person sees her, sleeps with her or hears. **No decay** — the fantasy is that it sticks. Down only by opposite acts (refusing a flash writes reservedness) and friends defending her | `cot_53_people.js:5243-5252` |
+| the refusal | *"You sleep around too much for my liking"*: a Chaste man turns down a date at promiscuity ≥500 — **waived by closeness** (friendship ≥1000, lust ≥800 or romance ≥600) | `cot_53_people.js:2133-2155` |
+| the door | SD: a faction's heat at ≥80 shuts its place — *"Word is, you ain't welcome here"* — and she gets back in with a bribe, or charm and sex for a cheaper one. A setback, never a dead end | `traces/sd.md` |
+| feeds · reads | every person's liking for her reads **his own audience's** promiscuity, kindness and meanness. The player sees words, per audience ("pretty exhibitionist among the students"), and in scenes the act said aloud | `cot_53_people.js:1767-1829`, `:5118-5188` |
+| leads to | flash request → she flashes → more witnesses → more spread scenes → the slut posts. The loop feeds itself | `traces/cot_gossip.md` §1 |
 
-## Measured floors (directions, never gates)
-- At least 2 lewd types (exposure, sex) × 2 audiences, so the same act on campus doesn't make her known in town.
-  Round 9b `cards/reputation.md`.
-- At least 4 rungs per type; CoT uses 11 distinct thresholds, 25–500, median 200. Round 9b `cards/reputation.md`.
-- At least 3 events per rung; CoT's 29 over ~11 rungs is 2.6, thin. Round 9b `cards/reputation.md`.
-- One spread rule (who tells whom) and one way to lower it (a mask, opposites, heat). Round 9b `cards/reputation.md`.
+## The size of one person (the dial)
+The score is a plain average, so the audience size sets the speed. CoT has 180+ students: one who saw her topless
+moves the score ≈ +2.8. **Our casts are 5–30 people**, so the same sum jumps 30–200 points per person. Give the
+audience **an unnamed crowd**: the named people are part of it, a one-person scene moves the score a little, and
+a crowd scene (the party, the bar) moves it a lot. HAND/HEURISTIC, `cards/gossip.md`.
+
+## The minimum (measured; directions, never gates)
+- **2 kinds: exposure and sex.** CoT's two lewd kinds hold 24 of its 29 gated events. A kind nothing reads
+  shouldn't exist (CoT writes `troublemaking` 4 times and never reads it).
+- **1 audience to start, with its unnamed crowd.** CoT's events and passages read only the students; townies and
+  faculty reach play only through the tab. Add a second audience in a later release, when a second place has its
+  own reads.
+- **≥4 rungs per kind** (CoT: 5 and 8).
+- **≥2 reads per rung**: at least one offer, and one line that names what she did. CoT has ≈1.8 — the floor
+  is a direction, above the model.
+- **≥3 spread scenes in ≥2 hubs** (CoT: 6 in 4).
+- **≥2 reads of one person's own knowledge**: a man says the exact act; a man asks because he heard.
+- **1 refusal, waived by closeness.**
+- **1 door it can close, with a way back** (SD's heat): lie low, earn trust or pay. A setback, never a dead end.
+- **1 way down**, and **friends who won't spread it**.
+- **No decay.** Say so on the card.
+- **No price effects yet**: prices that read reputation wait for item prices. Pay can already read it (a value
+  worked out from her stats, `references/engine.md` §3).
+
+The smallest version that feels alive: she is seen → the people who saw remember that act → one of them who
+doesn't like her says it in a hub while she's there → his friends know, hers refuse to → a word on her status page
+moves → by the next rung strangers act on it, and one man who heard says it to her face.
 
 ## What players say
-- No risk: *"I can go out anywhere in the world and NOTHING happens to me"* (CoT, mopoga#183006/r2). Give it at
-  least one loss path; SD's heat is the model.
+- No risk: *"I can go out anywhere in the world and NOTHING happens to me"* (CoT, mopoga#183006/r2). CoT's reads
+  only add encounters. Keep the refusal, the door, and one cost scene per rung.
+- They barely see it: 2 of 26 matching CoT comments are about reputation, one asking for a "gossip column"
+  (mopoga#183006). Surface it: name the teller, what he told, and who heard.
 - Fame should cross over: *"a fame Inclination since she is known at bar, live stream etc"* (CoT, mopoga#119006).
-  CoT's reputation never reads stream popularity.
 
-## Our engine today (round 9b §6)
-- No reputation or audience primitive: "reputation" has 0 hits in `v2.py`. Build one player trait per audience by hand.
-- `[[traits.labels]]` give a trait player-facing words (`template_import.py:566`), and the cast page shows the
-  traits a person lists in `show_traits` (`template_import.py:168`).
+## Our engine today
+No gossip piece: nothing stores "who saw what" for the audience, and nothing spreads. Build both halves by hand:
+- **The memory: an NPC-scoped flag per thing a person saw.** The scene she is seen in sets it on each named
+  witness — `flagEffects = [ { targetType = "npc", npcId = "npc_jake", flag = "saw_topless" } ]` (written by
+  `applyFlagEffect`, `v2.py:6963`) — and his line is gated on it:
+  `{ type = "flag", subject = "npc", npc_id = "npc_jake", flag_key = "saw_topless", operator = "is_true" }`
+  (`v2.py:4812`). A spread scene sets `heard_topless` on the hearers present the same way, and adds to the score.
+- **The score: one player trait for the audience**, with words through `[[traits.labels]]` and a banded sidebar
+  item (`references/engine.md` §30), and on the cast page through `show_traits` (`template_import.py:168`). Size
+  each write by who saw: a one-person scene adds a little, a crowd scene a lot. Give it no `trait_decay`.
+- **The teller and the defenders are conditions**: the spread scene needs a teller whose flag is set and whose
+  closeness to her is low; a friend present gets a line that shuts him down, and is never given the flag to pass.
+- **The refusal and the door are a closeness check and a score check**: the score above a rung and his closeness
+  below a line refuses; a place's entry or a person's yes is gated on the score below a line, with a way back
+  (a `costs` payment, a lie-low scene that lowers it).
