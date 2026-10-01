@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — World W1b · PROTECTED (LO approved, WS-D11): two lines in the-want.md §1
+
+**Why.** WS-D1 makes the house her hub, not the setting. The phone's P1 is being flipped (WS-D7), so §1 can no
+longer lean on "P1's refusal rule"; and the 24-likes-to-0 verdict it quoted was never P1's, it is P11's battery
+verdict (`references/the-phone.md` P11).
+
+**What changed.** `references/the-want.md` §1, W4: "which in this genre is the setting" becomes "her hub". W5's
+warning no longer cites P1; it cites P11 ("never a battery") as the rule a verdict can carry. Nothing else in §1
+changed.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (rule pointers 0 broken, orphans 3, the baseline).
+
+**Words:** −4, running total 139,614 / 149,283.
+
+---
+
 ## 2026-10-01 — World W1: drop "the house is the point" (World and Systems PRD, Phase 1)
 
 **Why.** WS-D1: every game gets a world outside, rooted outdoors in more than one zone. For a taboo-at-home game

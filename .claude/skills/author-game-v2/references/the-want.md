@@ -150,7 +150,7 @@ read off it would be invented, per the P0 refusal.
 
 **W4 · The distinctive axis is the cast, not the player — and it is already built.** The field's
 creation screens ask the player to fill in each person's relation to her. The player names the household and the kinship inside it, which in this
-genre is the setting. We ship this already: `npcs[].relationship_options` renders a picker on the
+genre is her hub. We ship this already: `npcs[].relationship_options` renders a picker on the
 same screen, the pick lands on the NPC, the cast page prints it, and prose has a token for it —
 **`@<npc>.rel`**. See `engine.md` for the field
 reference.
@@ -159,8 +159,8 @@ reference.
 second-ranked game. Across 22,614 comments the entire subject runs at **0.12%** — against lostness
 at 15.5% and grind at 0.9% (Process Review, Round 1). Six comments ask for more customization; two ask for a skip button.
 
-⚠️ **This is NOT `the-phone.md` P1's refusal rule, and must not be written as one.** P1 could say
-*"most games should not have a phone"* because the corpus returned a verdict — 24 likes to 0.
+⚠️ **This is not a refusal rule, and must not be written as one.** `the-phone.md` P11 can say
+*"never a battery"* because the corpus returned a verdict — 24 likes to 0.
 **Here there is no verdict in either direction.** Nobody is asking for a creation screen and nobody
 resents one. So the rule is conditional, not prohibitive: **have one or don't; if you have one,
 read it back.**
