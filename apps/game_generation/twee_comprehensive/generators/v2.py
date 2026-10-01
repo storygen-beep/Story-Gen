@@ -2706,7 +2706,7 @@ setup.openPhoneApp = function(appId) {{
     else if (appDef.type === "custom" && appDef.passage) {{ setup._renderCustom(appId, appDef.label, appDef.passage); }}
     else if (appDef.type === "fast_jobs") {{ setup._renderFastJobs(appId, appDef.label); }}
     else if (appDef.type === "bank") {{ setup._renderBank(appId, appDef.label); }}
-    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer); }}
+    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer, appDef.anywhere === true); }}
     else {{ setup._renderPlaceholder(appDef); }}
 }};
 
@@ -3345,7 +3345,7 @@ setup.bankTransfer = function(dir) {{
 // returns her to its own home. That is what keeps a phone-launched scene honest.
 //
 // PURE RENDER. This writes nothing. Everything moves inside the canvas, after the jump.
-setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
+setup._renderLauncher = function(appId, appLabel, options, noAnswer, anywhere) {{
     var sv = State.variables;
     var here = String((sv.player || {{}}).current_location || '');
     var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || '') + '</span><span class="phone-close">&times;</span></div>';
@@ -3362,7 +3362,10 @@ setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
         var text = String(o.text || '');
         if (!text || !o.passage) continue;   // resolved nowhere — never link nowhere
         var why = '';
-        if (!placed || String(o.locationId) !== here) {{
+        // E8 — `anywhere = true` on the app lifts the room lock (never the mid-scene
+        // one): the option plays from any room, and the scene returns her to its own
+        // home, which is a real move — that place's entry costs apply on arrival.
+        if (!placed || (!anywhere && String(o.locationId) !== here)) {{
             // WRONG PLACE. The engine writes this one, naming the room, because the
             // author cannot: one locked_text cannot also mean "not yet" and "not now".
             why = o.locationName ? ('Not here \\u2014 ' + o.locationName + '.') : 'Not here.';

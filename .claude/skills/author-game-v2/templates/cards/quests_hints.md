@@ -39,4 +39,4 @@
   (CoT, mopoga#75597).
 
 ## Our engine today (round 9b §6)
-- SUPPORTED: `TemplateQuest` (`template_import.py:909`) and a `quest` condition (`v2.py:4918`).
+- SUPPORTED: `TemplateQuest` (`template_import.py:912`) and a `quest` condition (`v2.py:4921`).

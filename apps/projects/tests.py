@@ -6497,6 +6497,39 @@ class PhoneTimeCostTests(SimpleTestCase):
             self.assertTrue(any(where in e for e in errors), (where, errors))
 
 
+class PhoneAnywhereLauncherTests(SimpleTestCase):
+    """E8 (World and Systems PRD) — `anywhere` on a launcher app."""
+
+    def _apps(self, app):
+        d = _toml_with_phone()
+        d["phone"]["apps"].append(app)
+        return d
+
+    def test_anywhere_is_read_only_on_a_launcher_and_must_be_a_bool(self):
+        errors = validate(normalize(self._apps(
+            {"id": "pics", "type": "gallery", "label": "Pics", "anywhere": True})))
+        self.assertTrue(any("anywhere is read only on a launcher app" in e for e in errors), errors)
+        errors = validate(normalize(self._apps(
+            {"id": "pics", "type": "gallery", "label": "Pics", "anywhere": "yes"})))
+        self.assertTrue(any("anywhere must be true or false" in e for e in errors), errors)
+
+    def test_anywhere_reaches_metadata_only_when_true(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        for flag, present in ((True, True), (False, False)):
+            d = _toml_with_phone()
+            d["phone"]["apps"][0]["anywhere"] = flag
+            d["phone"]["apps"][0]["type"] = "chat"
+            t = normalize(d)
+            t.phone.apps[0].type = "launcher"  # metadata only; skip the option rules
+            p = _P()
+            p.metadata = {}
+            _assemble_project_metadata(p, t)
+            self.assertEqual("anywhere" in p.metadata["phone_settings"]["apps"][0], present)
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

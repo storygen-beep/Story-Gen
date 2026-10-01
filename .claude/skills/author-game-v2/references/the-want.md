@@ -112,7 +112,7 @@ friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the
 on. Measured in `~/Documents/Accumulation_Study_20260828/` §4.
 
 ⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
-chain (`v2.py:16684`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
+chain (`v2.py:16687`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
 **that ladder becomes unreachable for every player carrying a past** — no error, and the prose
 stops appearing; lint **adjacent groups** lists it. Separate the two chains with any
 non-`group` block.

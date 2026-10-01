@@ -161,7 +161,7 @@ inside one of them, or it belongs on a different surface entirely.
 - **A menu item with HOURS says so when it is shut.** A canvas whose schedule window has closed
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
   game rather than a timetable. `show_when_blocked = true` plus a `cooldown_message` keeps the entry
-  as a dimmed line carrying the author's own words (`v2.py:11454`, rendered at `v2.py:5418`).
+  as a dimmed line carrying the author's own words (`v2.py:11457`, rendered at `v2.py:5421`).
   `references/the-clock.md` C5 owns the rule; this is the
   surface it lands on.
 
@@ -238,7 +238,7 @@ And the branches are **cheap**: two of them are under 500 bytes and hand off to 
 engine that **1,742 other passages also call**. The richness is combinatorial, not authored.
 
 **The same pattern is authorable in our engine** with the keys the importer already reads
-(`template_import.py:2414-2434`):
+(`template_import.py:2417-2437`):
 
 ```toml
 # "Stock the shelves" @ the_storeroom — the odds ride the same trait as the content
@@ -266,9 +266,9 @@ the branch    ONE canvas, substitution_only = true, [group] bands on the axis th
 the payoff    routes into the rung that already exists, instead of authoring new content
 ```
 
-**⚠️ The payoff canvas must declare a `location`.** `setup.getCanvasById` (`v2.py:3381-3395`) builds
+**⚠️ The payoff canvas must declare a `location`.** `setup.getCanvasById` (`v2.py:3384-3398`) builds
 its lookup **only** from `help_data.locationCanvases`, which is populated only for canvases carrying
-`trigger.location` (`v2.py:11385-11537`). Point a substitution at a triggerless rung and it
+`trigger.location` (`v2.py:11388-11540`). Point a substitution at a triggerless rung and it
 **silently never fires** — no error, no red build, the branch just never happens.
 
 The working shape, **verified live 2026-08-18** (probe build, three-way reachability, zero JS
@@ -277,7 +277,7 @@ errors):
 ```toml
 [canvases.trigger]
 location          = "the_kitchen"   # so getCanvasById can find it
-substitution_only = true            # so it stays OUT of the room's list (v2.py:4795)
+substitution_only = true            # so it stays OUT of the room's list (v2.py:4798)
 ```
 
 That canvas is then reachable **both** as a substitution target **and** from a hub choice pointing at
@@ -314,7 +314,7 @@ differently depending on one optional field:
 
 | | **Pattern A** — no `exclusive_group` | **Pattern B** — `exclusive_group = "<name>"` |
 |---|---|---|
-| the dice | **one roll per rule**, in declaration order, first match wins (`v2.py:5657-5666`) | **ONE roll**, split into cumulative buckets (`v2.py:5636-5654`) |
+| the dice | **one roll per rule**, in declaration order, first match wins (`v2.py:5660-5669`) | **ONE roll**, split into cumulative buckets (`v2.py:5639-5657`) |
 | substitution rate | `1 − ∏(1 − pᵢ)` — it compounds | `Σ pᵢ` — it is what you wrote |
 | five branches at 0.12 | the host renders **53%** | the host renders **40%** |
 | use it for | bands where **one** condition can be true at a time | a menu of outcomes that all **could** fire |
@@ -326,13 +326,13 @@ mutually exclusive by condition want Pattern A, and **must actually be exclusive
 
 **⚠️ Pattern B falls through to the HOST, never to the next bucket.** If the roll claims a slot whose
 target, conditions or `requires_npc` fail, `checkAndSubstituteCanvas` returns null and the activity
-itself renders (`v2.py:5649-5652`). A gated bucket therefore gives its share back to the host while
+itself renders (`v2.py:5652-5655`). A gated bucket therefore gives its share back to the host while
 its gate is shut — it does not hand it on. That is the right behaviour and it has to be written for:
 the player sees the room being quiet, not the next branch along. Note that **presence gets in twice**
 — an `npc_at_location` condition on the rule, and `requires_npc` on the target, which `_tryRule`
-resolves against the player's current location (`v2.py:5605-5611`).
+resolves against the player's current location (`v2.py:5608-5614`).
 
-**Groups are processed before independent rules** (`v2.py:5634`), so a group added beside existing
+**Groups are processed before independent rules** (`v2.py:5637`), so a group added beside existing
 Pattern A bands takes its slice off the top and quietly cuts how often those bands fire. Declare new
 independent rules **after** the bands instead if the bands are the headline content.
 
@@ -689,7 +689,7 @@ quest goal, or gate a later scene on. The set of flags is the only place its sha
 
 ⚠️ **And a counter nobody reads is worse than no counter.** A `<npc>_stage` key whose prefix names a
 declared character is read by the engine's own stage-label system, and gate 33 carves those out on
-purpose (`v2.py:5863-5868`). Any other counter written and never read by a condition — a bare
+purpose (`v2.py:5866-5871`). Any other counter written and never read by a condition — a bare
 `sex_stage`, say — fails gate 33.
 
 ⚠️ **Not a gate, and not a quota.** No threshold here is defensible — a game can be built entirely on
@@ -834,7 +834,7 @@ Three things about that line carry the rule:
 - **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
-wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14838`.
+wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14841`.
 This is recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**.
 `the-economy.md` R1b owns the asset half.
 
@@ -869,9 +869,9 @@ R5 says most doors are gated. This is the floor under it: **one** choice on ever
 neither `conditions` nor `costs`, so the screen still works on the day everything else is shut.
 
 Not a defensive habit — a consequence of how the engine renders. A choice whose conditions fail is
-wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:14345`) and renders **nothing**: no
+wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:14348`) and renders **nothing**: no
 greyed line, no reason, no hours. And a **cost-bearing** choice counts as conditional too
-(`v2.py:13236-13245`), so a screen whose only affordance costs $3 is equally empty to a player at
+(`v2.py:13239-13248`), so a screen whose only affordance costs $3 is equally empty to a player at
 $0. When nothing is left the engine emits a bare `[[Continue->…]]` that fires no effects, and the
 player cannot tell a spent day from a broken build.
 
@@ -1056,7 +1056,7 @@ Route the choice at a node with `targetType = "node"`, write what happened, and 
   meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
   ⚠️ **Node prose has no `text_variants`.** The key exists only on a **choice**, where it swaps the
   button label: a list of `{ text, conditions }`, first match wins, the base `text` otherwise
-  (`template_import.py:2646-2684`; rendered as a `<<set _cv>>` chain at `v2.py:14380-14394`).
+  (`template_import.py:2649-2687`; rendered as a `<<set _cv>>` chain at `v2.py:14383-14397`).
   Variant labels are static strings — an `@npc` token inside one does not resolve.
 - **Video on outcome nodes, images on hubs.**
 

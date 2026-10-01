@@ -12,7 +12,9 @@ Each part is opt-in and has its own section below:
     sent the field and every custom app fell to "Coming Soon"). A canvas id resolves to
     the canvas's entry passage, as a launcher option does;
   * `time_cost` (minutes) on a reply choice, a daily topic, a post action and a fast job
-    spends time through advanceTime, so the day can roll; its button says "· Nm".
+    spends time through advanceTime, so the day can roll; its button says "· Nm";
+  * a launcher app with `anywhere = true` offers its options in any room (still never
+    mid-scene); without it the room lock stands.
 
     pytest apps/game_generation/tests/test_phone_outward.py -q
 """
@@ -161,4 +163,27 @@ def test_a_timed_action_says_so_on_its_button(html):
                                 SugarCube.setup.openChatThread('messages', 'npc_ana');
                                 return jQuery('.phone-frame').text(); }""")
         assert "Sure. · 20m" in thread and "Can't. · " not in thread
+        assert g.errors == []
+
+
+# ── the anywhere launcher ────────────────────────────────────────────────────
+
+
+def _launcher(g, app):
+    return g.js("(a) => { SugarCube.setup.openPhone(); SugarCube.setup.openPhoneApp(a);"
+                " return jQuery('.phone-launcher').html(); }", app)
+
+
+@needs_browser
+def test_an_anywhere_launcher_plays_from_another_room(html):
+    with open_game(html) as g:
+        _start(g)  # at loc_home; pay_desk lives at loc_bar
+        assert "Not here" in _launcher(g, "door")
+        taxi = _launcher(g, "taxi")
+        assert "phone-launch" in taxi and "Not here" not in taxi
+        g.js("() => jQuery('.phone-launch').first().trigger('click')")
+        g.page.wait_for_timeout(200)
+        assert g.passage() == "Canvas_pay_desk_Node_desk"
+        # mid-scene is still not a place
+        assert "Not here" in _launcher(g, "taxi")
         assert g.errors == []

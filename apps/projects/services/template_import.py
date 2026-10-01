@@ -344,6 +344,9 @@ class TemplatePhoneApp:
     # E8 — a v1.0 conditions block: the app is on the phone only while it holds (an
     # app she installs, a job board that opens later). Empty = always there.
     conditions: Dict[str, Any] = field(default_factory=dict)
+    # E8 — a launcher with `anywhere = true` offers its options in any room (never
+    # mid-scene); the scene returns her to its own home. False = the room lock.
+    anywhere: bool = False
     # E8 — a "custom" app's screen: a canvas id (its entry passage) or a passage name,
     # rendered inside the phone. Required on a custom app, read on no other type.
     passage: str = ""
@@ -3250,6 +3253,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     no_answer=_require_str(a_raw, "no_answer", ""),
                     conditions=a_raw.get("conditions") or {},  # E8; E1's walker checks it
                     passage=_require_str(a_raw, "passage", ""),  # E8
+                    anywhere=a_raw.get("anywhere", False),  # E8 — validate() checks it
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -4919,6 +4923,12 @@ def validate(template: GameTemplate) -> List[str]:
                               f"a placeholder")
             elif app.type != "custom" and app.passage:
                 errors.append(f"{ctx}.passage is read only on a custom app (type is "
+                              f"'{app.type}')")
+            # E8 — `anywhere` lifts a launcher's room lock; read on no other type.
+            if not isinstance(app.anywhere, bool):
+                errors.append(f"{ctx}.anywhere must be true or false (got {app.anywhere!r})")
+            elif app.anywhere and app.type != "launcher":
+                errors.append(f"{ctx}.anywhere is read only on a launcher app (type is "
                               f"'{app.type}')")
 
         feed_app_ids = {a.id for a in phone.apps if a.type == "social_feed"}
@@ -8512,7 +8522,8 @@ def _assemble_project_metadata(project, template):
                  **({"options": a.options} if a.options else {}),
                  **({"no_answer": a.no_answer} if a.no_answer else {}),
                  **({"conditions": a.conditions} if a.conditions else {}),
-                 **({"passage": a.passage} if a.passage else {})}
+                 **({"passage": a.passage} if a.passage else {}),
+                 **({"anywhere": True} if a.anywhere is True else {})}
                 for a in phone.apps
             ],
             "conversations": [

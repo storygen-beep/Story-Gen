@@ -41,5 +41,5 @@
 
 ## Our engine today (round 9b §6)
 - No reputation or audience primitive: "reputation" has 0 hits in `v2.py`. Build one player trait per audience by hand.
-- `[[traits.labels]]` give a trait player-facing words (`template_import.py:545`), and the cast page shows the
+- `[[traits.labels]]` give a trait player-facing words (`template_import.py:548`), and the cast page shows the
   traits a person lists in `show_traits` (`template_import.py:168`).

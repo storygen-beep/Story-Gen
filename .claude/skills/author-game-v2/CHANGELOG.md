@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-01 — Engine: a launcher that works from any room — `anywhere` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. A launcher option is live only in its canvas's room, so the phone
+could not book a ride, a date or a shift somewhere else.
+
+**What changed.**
+- `generators/v2.py`: `_renderLauncher` takes `anywhere`; with it the room lock is lifted and the
+  mid-scene lock stays. The scene still returns her to its own home, and that place's entry costs apply
+  on arrival (the travel intercept treats it as a move, which it is).
+- `template_import.py`: `anywhere` on `TemplatePhoneApp`; it must be a bool and is read only on a
+  launcher (build errors); written into metadata only when true.
+- `references/engine.md` §51: the fact; §42's launcher sentence notes the `anywhere` case.
+- Citations re-pointed through the `git diff` line map (558 moved, 685 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: from loc_home the plain launcher says "Not here",
+the `anywhere` one plays the bar canvas, and mid-scene it says "Not here" again).
+`PhoneAnywhereLauncherTests` (2). The existing launcher tests pass. Selfcheck and the skill tests pass.
+
+**Words:** +75, running total 145,064 / 149,283.
+
+---
+
 ## 2026-10-01 — Engine: phone actions that cost time — `time_cost` (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 8; the-phone.md P5 ("using the phone costs too"). No phone action spent

@@ -33,6 +33,8 @@
 #    notes        a custom app whose passage is a passage name (Canvas_pay_desk_Node_paid).
 #    time_cost    ana_ask's "Sure." takes 20 minutes; sal_call (a daily topic) 30; the feed's
 #                 Selfie 15; night_shift (a fast job) 420, which rolls the day from 18:00.
+#    taxi         a launcher with anywhere = true: its pay_desk option (home loc_bar) is
+#                 live from loc_home. `door` is the same option without it: "Not here".
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -114,6 +116,19 @@ type       = "chat"
 label      = "Secret"
 conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "has_secret_app", operator = "is_true" } ] }
+
+[[phone.apps]]
+id       = "taxi"
+type     = "launcher"
+label    = "Taxi"
+anywhere = true
+options  = [ { text = "Ride to the bar", canvas = "pay_desk", show_when_locked = true, locked_text = "Not yet." } ]
+
+[[phone.apps]]
+id      = "door"
+type    = "launcher"
+label   = "Door"
+options = [ { text = "Ride to the bar", canvas = "pay_desk", show_when_locked = true, locked_text = "Not yet." } ]
 
 [[phone.apps]]
 id      = "camera"
