@@ -48,9 +48,17 @@ def _person(p):
     return p if isinstance(p, str) else (p or {}).get("id") or (p or {}).get("npc")
 
 
-def check(state, strict=False):
-    """[(name, ok, headline, detail)] — ok True / False / None (n/a) / "warn" (listed, never a FAIL)."""
+KEEPS = ("step counter + memory flags", "want + warmth", "want + power")
+
+
+def check(state, strict=False, slug=None):
+    """[(name, ok, headline, detail)] — ok True / False / None (n/a) / "warn" (listed, never a FAIL).
+
+    `slug` (else the ledger's own `slug`) names the game: a game in `gates.SHIP_GRANDFATHERED`
+    WARNS where the newer rows (keeps, a card per system) would FAIL it, until it next ships.
+    """
     state = state or {}
+    grandfathered = (slug or state.get("slug")) in gates.SHIP_GRANDFATHERED
     board = state.get("board") or {}
     want = state.get("want") or {}
     rp = state.get("release_page") or {}
@@ -107,6 +115,13 @@ def check(state, strict=False):
             declared |= set((c.get("meters") or {}).keys())
     if (board.get("economy") or {}).get("currency"):
         declared.add(board["economy"]["currency"])
+    # The meters (`board.meters[].key`, and an old meter-shaped row in `board.systems[]`) and what
+    # each system card feeds and reads are declared too (the-systems.md S2a).
+    declared |= {m.get("key") for m in gates._meters_of_board(board) if m.get("key")}
+    for card in board.get("systems") or []:
+        if isinstance(card, dict):
+            declared |= {k for k in (card.get("feeds") or []) + (card.get("reads") or [])
+                         if isinstance(k, str)}
     flags = set()
     if not steps:
         row("a step's variables are declared", None, "n/a — no ladder steps")
@@ -292,6 +307,18 @@ def check(state, strict=False):
             f"{len(goals)} goal(s), {ending} can end · no date" if not bad else
             f"{len(bad)} problem(s) in want.promise", bad)
 
+    # 9c · the goal's words name no date (the-want.md W10). Row 9b reads a `date` key; this reads
+    # the goal text itself, where "the week-12 review" hid. A WARN: listed, never a FAIL.
+    texts = ([("want.promise.goal", prom.get("goal"))] if isinstance(prom.get("goal"), str) else []) + \
+        [(f"goals[{i}]", g.get("goal")) for i, g in enumerate(goals) if isinstance(g.get("goal"), str)]
+    if not texts:
+        row("a goal's words name no date", None, "n/a — no goal written yet")
+    else:
+        dated = [f"{w}: \"{t[:60]}\" names \"{m.group(0)}\" — the goal has no date (D8)"
+                 for w, t in texts for m in [gates._DATE_RE.search(t)] if m]
+        row("a goal's words name no date", "warn" if dated else True,
+            f"{len(texts) - len(dated)}/{len(texts)} goal(s) undated", dated)
+
     # 10 · a READY page is signed (the spine's page rules).
     # D13 (LO decided, 2026-09-30): LO signs whenever LO has read the page. The day-after
     # compare of `signed_at` with `drafted_at` is gone; it blocked a real same-day approval
@@ -323,7 +350,10 @@ def check(state, strict=False):
     # `board.characters[].schedule = [{where, weekdays, from, to}]` is the person's hours.
     # Each step's window, on each of its days, must be FULLY covered by the union of that
     # person's rows at the step's place (`gates._window_uncovered`, past midnight included).
-    # A step the opening plays is exempt: it has no hour.
+    # A step the opening plays is exempt: it has no hour. A step may declare `seen_from`, the room
+    # next door the person is seen from (a substitution's `requires_npc` must be in the same room,
+    # v2.py:6229-6230): his rows there count too. gates.py's `a step is seen from the next room`
+    # checks that room shares a parent with the step's place once the TOML exists.
     scheds = {c.get("id"): c["schedule"] for c in (board.get("characters") or [])
               if isinstance(c, dict) and isinstance(c.get("schedule"), list)}
     # A row the check cannot read is bad input, never "does not cover" (phase 5): a misspelled
@@ -360,7 +390,7 @@ def check(state, strict=False):
             continue                                   # row 2 reports a broken window
         rows_here = []
         for r in scheds[n]:
-            if not isinstance(r, dict) or r.get("where") != s.get("where"):
+            if not isinstance(r, dict) or r.get("where") not in (s.get("where"), s.get("seen_from")):
                 continue
             wd = r.get("weekdays")
             rows_here.append((None if wd is None else [gates._ladder_day(d) for d in wd],
@@ -368,7 +398,8 @@ def check(state, strict=False):
         judged += 1
         missing = gates._window_uncovered(days, w["from"], w["to"], rows_here)
         if missing:
-            bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')} "
+            seen = f" or {s['seen_from']}" if s.get("seen_from") else ""
+            bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')}{seen} "
                        f"{w['from']}-{w['to']} on {', '.join(gates._PR_DAYS[d] for d in missing)}")
     if not judged and not sched_bad:
         row("the person is there at the step's hour", None,
@@ -517,6 +548,58 @@ def check(state, strict=False):
     else:
         row("every person is an adult", not bad, f"{len(people) - len(bad)}/{len(people)} people 18+", bad)
 
+    # 13b · her life's threads (the-want.md §6): each thread's person is in want.cast with an age,
+    # and the count is reported — 4–6 is the direction, so outside it WARNS, never fails.
+    threads = [t for t in (want.get("threads") or []) if isinstance(t, dict)]
+    if not threads:
+        row("her life has threads", "warn" if strict else None,
+            "no want.threads[] — her life, 4–6 threads (the-want.md §6)" if strict
+            else "n/a — no want.threads[] yet")
+    else:
+        bad = []
+        for t in threads:
+            pid = t.get("person")
+            if pid not in cast:
+                bad.append(f"thread {t.get('id')}: person `{pid}` is not in want.cast")
+            elif (cast[pid] or {}).get("age") is None:
+                bad.append(f"thread {t.get('id')}: `{pid}` has no age in want.cast")
+        n = len(threads)
+        ok = False if bad else (True if 4 <= n <= 6 else "warn")
+        row("her life has threads", ok, f"{n} thread(s)" + ("" if 4 <= n <= 6 else " — the direction is 4–6"), bad)
+
+    # 13c · what each man keeps (the-want.md §6, the-meters.md W1): one of the three, or
+    # `none — <why>`. A grandfathered game WARNS. A missing `keeps` fails only when strict.
+    kept = [(pid, c.get("keeps")) for pid, c in cast.items()]
+    bad = []
+    for pid, k in kept:
+        if k is None:
+            if strict:
+                bad.append(f"{pid}: no `keeps`")
+        elif not (k in KEEPS or (isinstance(k, str) and k.startswith("none — "))):
+            bad.append(f"{pid}: keeps {k!r} — one of {', '.join(KEEPS)}, or `none — <why>`")
+    if not kept:
+        row("each man's keeps is named", None, "n/a — no want.cast yet")
+    else:
+        row("each man's keeps is named", ("warn" if grandfathered else False) if bad else True,
+            f"{len(kept) - len(bad)}/{len(kept)} people"
+            + (" · grandfathered: warns until it next ships" if bad and grandfathered else ""), bad)
+
+    # 14 · every declared system has a card (the-systems.md S2a), strict only. At least one card
+    # in `board.systems[]` (an old meter-shaped row is a meter, not a card), and every system a
+    # thread names (`want.threads[].system`, except `none …`) is a card. A grandfathered game WARNS.
+    cards = {c.get("id") for c in (board.get("systems") or []) if isinstance(c, dict)
+             and any(f in c for f in gates._SYSTEM_CARD_FIELDS)}
+    named = {t.get("system") for t in threads if isinstance(t.get("system"), str)
+             and t["system"].strip() and not t["system"].startswith("none")}
+    if not strict:
+        row("every system has a card", None, "n/a — checked once the spine is finished")
+    else:
+        bad = [] if cards else ["board.systems[] holds no system card (a meter-shaped row is a meter)"]
+        bad += [f"thread system `{sid}` has no card in board.systems[]" for sid in sorted(named - cards)]
+        row("every system has a card", ("warn" if grandfathered else False) if bad else True,
+            f"{len(cards)} card(s), {len(named)} named by a thread"
+            + (" · grandfathered: warns until it next ships" if bad and grandfathered else ""), bad)
+
     return rows, sorted(flags)
 
 
@@ -537,7 +620,7 @@ def main(argv=None):
         return 2
     state = json.load(open(path))
     strict = is_strict(state, "--finish" in argv)
-    rows, flags = check(state, strict)
+    rows, flags = check(state, strict, None if target.endswith(".json") else target)
     failed = [r for r in rows if r[1] is False]
     if "--json" in argv:
         print(json.dumps({"strict": strict, "rows": [dict(name=n, ok=o, headline=h, detail=d)

@@ -37,7 +37,7 @@ belong here; only decisions, debts, and promises do.
 
   "want": {
     // THE FANTASY AND THE PROMISE — written on the idea page (templates/idea.md), the-want.md §0.
-    // All optional; no gate reads them yet.
+    // All optional. shape.py reads `threads`, `cast` (age, keeps) and the goal chain.
     "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
@@ -45,7 +45,7 @@ belong here; only decisions, debts, and promises do.
                        "goals": [ { "goal": "…", "ends_when": "…", "ends_flag": "flag_id",
                                     "next": "…" } ] },
                                  // no date (D8). A goal with ends_when names next (shape.py),
-                                 // and ends_flag: the flag set when it is met (planned check: some choice sets it).
+                                 // and ends_flag: the flag set when it is met (gate: a goal's end is built).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
@@ -91,7 +91,8 @@ belong here; only decisions, debts, and promises do.
     "threads":         [ { "id": "job", "name": "…", "person": "npc_id", "place": "location_id",
                            "system": "…", "link": "one line — how it feeds the hook" } ],
                               // her life, 4–6 threads — the-want.md §6. person is in `cast`,
-                              // place is in `places`.
+                              // place is in `places`. shape.py: a person outside `cast` FAILS;
+                              // a count outside 4–6 WARNS.
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 
@@ -203,6 +204,7 @@ belong here; only decisions, debts, and promises do.
       "roots":      ["location_id", "…"],   // every root; a second one is joined by a travel canvas
                                             //   and marked offscreen or sealed for gate 11 (the-map.md R3)
       "homes":      { "npc_…": "location_id", "npc_…": "offscreen" },
+      "shared_homes": [["npc_…", "npc_…"]],   // people who share one home (a couple; the-map.md R2)
       "scale":      "one street · a district · a town",
       "alive":      "tight slice" | "living world"        // the-map.md, "Aliveness"
       // travel costs live on the area: [[locations]] crossing_costs (engine.md §22). A place's
@@ -218,7 +220,7 @@ belong here; only decisions, debts, and promises do.
     "economy": {
       "currency":   "money",
       // ⚠️ The NOTATION every button, every paragraph and [settings.rent] currency_symbol
-      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1201) while the
+      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1223) while the
       //    buttons print whatever each was typed with. the-economy.md R7.
       "symbol":     "$",
       // ⚠️ THE MONEY CASE ONLY — this block and gate 24 exist for `want.hold_kind = "bill"`.
@@ -418,22 +420,23 @@ file sits there being read by a different gate. These are the exact paths:
 | key | read by | shape |
 |---|---|---|
 | `board.ascent_tiers` | *ascent tiers expand the world* | `["corruption", "exhibitionism"]` — a list of trait keys, **not** rung numbers, and **not** at the top level |
-| `board.map` | *the map is a place* · *residents have homes* | `{ archetype, shape, home_base, exterior, homes{npc_id: location_id} }`; archetype is one of `nested_zones` / `two_hub` / `map_hotspots` / `street_mesh` / `time_slot` |
+| `board.map` | *the map is a place* · *residents have homes* | `{ archetype, shape, home_base, exterior, homes{npc_id: location_id}, shared_homes[[npc_id, npc_id]] }`; archetype is one of `nested_zones` / `two_hub` / `map_hotspots` / `street_mesh` / `time_slot` |
 | `board.characters` | *residents have homes* · *guidance exists* | `[{ id, name, role }]` |
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
 | `board.needs[]` | *a need shuts a door* | `[{ key, falls, fills, costs, shuts }]` — and every key must be READ by a condition somewhere in the game |
 | `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
-| `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place, past midnight included; a `fires_from = "opening"` step is exempt. A row it cannot read (an unknown weekday, or the TOML's `location`/`start_time`/`end_time`) is bad input, and that person's steps are not judged. The per-room count stays `occupancy_rows` |
+| `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the union of the person's rows at its place (or its `seen_from`), past midnight included; a `fires_from = "opening"` step is exempt. A row it cannot read (an unknown weekday, or the TOML's `location`/`start_time`/`end_time`) is bad input, and that person's steps are not judged. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
-| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. `shape.py` *a step's gate can be reached* checks each gate against the trait's start (his: `meters[k].start`, else `.min`; hers, a gate with no `npc`: `board.player_start = {trait: n}`, listed as bad input when malformed; else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
+| `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. Optional `seen_from` — the room next door he is in (`shape.py` reads his hours there; it must share the step's parent). `shape.py` *a step's gate can be reached* checks each gate against the trait's start (his: `meters[k].start`, else `.min`; hers, a gate with no `npc`: `board.player_start = {trait: n}`, listed as bad input when malformed; else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
 | `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 | `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
-| `board.systems[]` | no gate yet | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
+| `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
+| `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of

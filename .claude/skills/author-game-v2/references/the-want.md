@@ -52,7 +52,8 @@ a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*, and 
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
 count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain). It also names
 `ends_flag`, the flag the game sets when it is met: a goal whose end the game can't see is one the
-player never finishes.
+player never finishes. Checked: `shape.py` warns on a date in a goal's words; gate *a goal's end is
+built* warns on an `ends_flag` nothing sets; `--ship` lists every line naming a future week or day.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.
@@ -112,7 +113,7 @@ friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the
 on. Measured in `~/Documents/Accumulation_Study_20260828/` §4.
 
 ⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
-chain (`v2.py:17124`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
+chain (`v2.py:17139`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
 **that ladder becomes unreachable for every player carrying a past** — no error, and the prose
 stops appearing; lint **adjacent groups** lists it. Separate the two chains with any
 non-`group` block.
@@ -399,7 +400,9 @@ threads: job or study, friends, dating, side money, the town. Each thread has:
 
 Record as `want.threads[] = {id, name, person, place, system, link}`. Threads hold most of a game's
 text: in the seven games round 7 measured, the hook is 11–54% of story passages, and 28–52% even in
-the taboo-at-home games (round 7, `ROUND7_REPORT.md`). A direction, not a target.
+the taboo-at-home games (round 7, `ROUND7_REPORT.md`). A direction, not a target: `lint · world size`
+(and a `--ship` REPORT row) prints the hook share (hook people, or the house her room is in),
+threads built, speaking NPCs, links and zones.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's

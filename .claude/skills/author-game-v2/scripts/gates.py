@@ -465,7 +465,7 @@ def _collect(blocks, beat, out, canvas, node):
         #
         # ⚠️ BOTH SHAPES. The importer accepts a group's children at the block's own
         # `blocks` key OR inside `props.blocks`, and normalises to the latter
-        # (`template_import.py:6062-6086`); the generator then renders `props.blocks`
+        # (`template_import.py:8313-8337`); the generator then renders `props.blocks`
         # (`v2.py:13770`). Reading only the first shape made 158 groups across FOUR
         # games invisible to every beat-based gate in this file — their prose was not
         # counted as words, as explicit beats, as dialogue, or as sentences, while it
@@ -545,8 +545,8 @@ def _effect_value_sign(val):
         return 0
     if isinstance(val, (int, float)):
         return 1 if val > 0 else (-1 if val < 0 else 0)
-    if isinstance(val, dict) and val.get("type") == "random":
-        hi = val.get("max", val.get("min"))
+    if isinstance(val, dict) and val.get("type") in ("random", "trait"):
+        hi = val.get("max", val.get("min")) if val.get("type") == "random" else _value_bounds(val)[1]
         if isinstance(hi, (int, float)):
             return 1 if hi > 0 else (-1 if hi < 0 else 0)
     return 0
@@ -914,7 +914,7 @@ def lint_badge_before_content(model, game):
     gate a badge on at all: put the ✓ on a FLAG the content sets on its way out, so it
     means "you have played this" instead of "you have ground past it". The v1 hint
     system had exactly that pairing (`arc_closure_flag` + `arc_complete`,
-    `template_import.py:1017-1023`) and the v2 card schema dropped it.
+    `template_import.py:1272-1281`) and the v2 card schema dropped it.
 
     A LIST, NEVER A GATE. "Content" here means a canvas condition reading that same
     (character, trait), which is a proxy: an author may legitimately put a badge on a
@@ -2477,7 +2477,7 @@ def lint_unwritten_act(model, game):
         last = nodes[-1].get("id") if nodes else None
         for n in nodes:
             for ch in _node_choices(n):
-                if (ch.get("targetType") or "node") != "location" or not _choice_acts(ch):
+                if (ch.get("targetType") or "trigger") == "node" or not _choice_acts(ch):
                     continue
                 mins = ch.get("time_progression_minutes") or 0
                 closes = len(nodes) > 1 and n.get("id") == last
@@ -2496,7 +2496,7 @@ def lint_unwritten_act(model, game):
                     # games do use. Formatting it as a scalar
                     # raised TypeError and took the whole lint down with it.
                     if isinstance(v, dict):
-                        what.append(f"+{v.get('min','?')}..{v.get('max','?')} {t}")
+                        what.append(_effect_value_label(v, t))
                     elif isinstance(v, (int, float)):
                         what.append(f"{'+' if v >= 0 else ''}{v:g} {t}")
                     else:
@@ -2890,7 +2890,7 @@ def _act_nodes(canvas):
             continue
         eb = node.get("exit_block") or {}
         for ch in list(eb.get("choices") or []):
-            if (ch.get("targetType") or "node") != "node":
+            if (ch.get("targetType") or "trigger") != "node":
                 continue
             tgt = str(ch.get("nodeId") or "").split(".")[-1]
             if tgt and tgt in byid and tgt not in out:
@@ -3202,7 +3202,7 @@ def _player_trait_raises(game):
 
     ⚠️ `[engine.daily_tick].traitEffects` IS A WRITER (PRD v2 CK1 · H1, 2026-09-30).
     The engine applies it on every day roll (v2.py:6276-6293; imported at
-    template_import.py:3146). The key is camelCase, so the old `effects|[]` suffix
+    template_import.py:3492). The key is camelCase, so the old `effects|[]` suffix
     test never matched it, and a meter the night adds to (`review_days +1`) read as
     one nothing raises. That is the only place the importer reads `traitEffects`,
     so it is matched there and nowhere else.
@@ -4187,16 +4187,16 @@ def _schedule_rows_backed(game, state=None):
 # ─────────────────────────────────────────────────────────────────────────────
 # Money a week can actually bring in (PRD WS5, `the obligation is charged`).
 # ─────────────────────────────────────────────────────────────────────────────
-def _value_mean_max(val):
-    """(mean, max) of an effect value that may be a number or {type="random", min, max}."""
+def _value_mean_max(val, traits=None):
+    """(mean, max) of an effect value: a number, {type="random", min, max} or {type="trait", …}."""
     if isinstance(val, bool):
         return 0.0, 0.0
     if isinstance(val, (int, float)):
         return float(val), float(val)
-    if isinstance(val, dict) and val.get("type") == "random":
-        lo, hi = val.get("min"), val.get("max", val.get("min"))
+    if isinstance(val, dict) and val.get("type") in ("random", "trait"):
+        lo, hi = _value_bounds(val, traits)
         if isinstance(lo, (int, float)) and isinstance(hi, (int, float)):
-            return (lo + hi) / 2.0, float(hi)
+            return ((lo + hi) / 2.0 if val.get("type") == "random" else float(lo)), float(hi)
     return 0.0, 0.0
 
 
@@ -4256,7 +4256,7 @@ def _week_income(game, currency):
             for ef in (h.get("effects") or []):
                 if (ef.get("trait") or ef.get("trait_key")) != currency or ef.get("op") != "add":
                     continue
-                mean, mx = _value_mean_max(ef.get("value"))
+                mean, mx = _value_mean_max(ef.get("value"), (game.get("player") or {}).get("core_traits"))
                 if mx > 0:
                     pay_mean += mean
                     pay_max += mx
@@ -4649,8 +4649,8 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
                     if (npc and (tgt != "npc" or ef.get("npcId") != npc)) or (not npc and tgt != "player"):
                         continue
                     v = ef.get("value")
-                    if isinstance(v, dict) and v.get("type") == "random":
-                        v = v.get("max", v.get("min"))
+                    if isinstance(v, dict) and v.get("type") in ("random", "trait"):
+                        v = _value_bounds(v, start_traits)[1]
                     if not isinstance(v, (int, float)) or isinstance(v, bool):
                         continue
                     eop = ef.get("op") or "add"
@@ -4684,8 +4684,8 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
                    for it in tick_conds if it not in on_counter):
                 continue
             v = ef.get("value")
-            if isinstance(v, dict) and v.get("type") == "random":
-                v = v.get("max", v.get("min"))
+            if isinstance(v, dict) and v.get("type") in ("random", "trait"):
+                v = _value_bounds(v, start_traits)[1]
             if not isinstance(v, (int, float)) or isinstance(v, bool):
                 continue
             eop = ef.get("op") or "add"
@@ -7315,7 +7315,7 @@ def run_gates(model, game, state=None):
     # at 90": the player starts in that band, so nothing has to buy it. Two exemptions:
     # the band holding the meter's STARTING value is not a promise, and a meter declared
     # `falling = true` in [[traits.labels]] is not judged at all. `falling` is read here
-    # only; the importer keeps just its own label keys (template_import.py:3324-3335).
+    # only; the importer keeps just its own label keys (template_import.py:3670-3682).
     tops = collections.defaultdict(int)
     for c in model:
         for k, op, v in c["traits"]:
@@ -7667,7 +7667,7 @@ def run_gates(model, game, state=None):
              ["the board phase must record the map: archetype, shape, home_base, exterior, homes",
               "until it does, a cast with nowhere to sleep cannot be distinguished from one that lives out"])
     else:
-        homeless = []
+        homeless, home_warn = _home_is_a_bedroom(game, state, chars, homes)
         for ch in chars:
             cid2 = ch.get("id")
             where = homes.get(cid2)
@@ -7676,8 +7676,8 @@ def run_gates(model, game, state=None):
             elif where not in loc_ids and where != "offscreen":
                 homeless.append(f"{cid2}: home '{where}' is not a declared location")
         _N["residents have homes"] = len(chars)
-        gate("residents have homes", None if not chars else not homeless,
-             f"{len(chars)-len(homeless)}/{len(chars)} characters have a home that exists", homeless)
+        gate("residents have homes", None if not chars else not homeless, f"{len(chars)-len({h.split(':')[0] for h in homeless})}/"
+             f"{len(chars)} characters have a home that exists and is a room of their own", homeless + home_warn)
 
     # G13 — the guidance surface is authored, not just switched on.
     # `quests_engine = "v2"` lights up a sidebar entry and a page; without cards it
@@ -7686,8 +7686,8 @@ def run_gates(model, game, state=None):
     cards = game.get("quest_cards") or []
     tiers_owed = board.get("ascent_tiers") or []
     # ⚠️ CORRECTED 2026-09-26 (PRD WS5). This used to accept `quests_engine` from
-    # [settings] too. The engine reads it ONLY from [project] (`template_import.py:1870`;
-    # the [[quest_cards]] block is parsed only when that value is "v2", `:2767`), so a game
+    # [settings] too. The engine reads it ONLY from [project] (`template_import.py:2239`;
+    # the [[quest_cards]] block is parsed only when that value is "v2", `:3161`), so a game
     # with it under [settings] ships with every card dropped (`setup.quests_cards = [];`)
     # while this gate passed. It now reads
     # [project] only, and a [settings] placement FAILS by name. It also lists cards that
@@ -7703,7 +7703,7 @@ def run_gates(model, game, state=None):
              f"quests_engine is under [settings] — the engine reads it only from [project], "
              f"so none of the {len(cards)} quest cards render",
              ["move `quests_engine = \"v2\"` from [settings] to [project] "
-              "(template_import.py:1870, :2767)"])
+              "(template_import.py:2239, :3161)"])
     elif not engine_on and not cards:
         gate("guidance exists", None, "quests engine not enabled — no guidance surface to author")
     elif not tiers_owed and not chars:
@@ -7759,8 +7759,8 @@ def run_gates(model, game, state=None):
     # The goal renderer falls back `label -> trait -> flag -> ""` (v2.py:15962-15964),
     # so a goals item carrying no `label` prints its RAW KEY to the player: a bullet
     # reading "◯ x_05_done" under the 🎯 To advance header. The importer requires
-    # `label` on trait and counter goals ONLY (template_import.py:5669-5673; the
-    # dataclass says so itself at :1092-1095) — flag-shaped goals fall straight through.
+    # `label` on trait/counter, weekday, hours_since_flag and days_since_flag goals
+    # (template_import.py:7447-7527) — only flag-shaped goals fall straight through.
     #
     # Trait goals are already safe and already print the number: the renderer appends
     # " — <current> / <target>" for them (v2.py:15966-15968). The engine does its half
@@ -8125,7 +8125,7 @@ def run_gates(model, game, state=None):
 
             choices = _node_choices(n)
             decisions = [ch for ch in choices
-                         if (ch.get("targetType") or "node") != "location"
+                         if (ch.get("targetType") or "trigger") == "node"
                          or _choice_acts(ch)]
             if decisions:
                 (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions))
@@ -8285,9 +8285,9 @@ def run_gates(model, game, state=None):
     # ⚠️ THE CHEAPEST GATE HERE, AND IT CATCHES THE MOST INVISIBLE CLASS OF BUG.
     # `applyTraitEffect` runs `add` and `set`, and on anything else falls through to
     # `// Unknown op; do nothing` and RETURNS (v2.py:5742-5751). Nothing normalises the
-    # value: `subtract` appears nowhere in the generator or the importer. The importer
-    # validates `op` for cheat-page grants (template_import.py:3755) and for nothing else,
-    # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
+    # value. The importer now rejects a dead op on every canvas effect and cheat-page grant
+    # (template_import.py:6353-6406, :4763) but never walks the [engine] block, so a dead
+    # op there is valid TOML, builds green, and emits verbatim into the HTML.
     #
     # A dead effect builds green and changes nothing: a meter never moves, a cost is never
     # charged, and nothing says why — a live play-through passes it too, because the number
@@ -8858,7 +8858,7 @@ def run_gates(model, game, state=None):
     # W3's law is "a number nothing reads is not a meter", and the gate above
     # enforces it for player traits an `effects` entry RAISES. It is structurally
     # blind to clothing: `worn_beauty` / `worn_corruption` are DERIVED from a
-    # garment's own `beauty` / `corruption` declaration (template_import.py:218-219,
+    # garment's own `beauty` / `corruption` declaration (template_import.py:290-291,
     # a MAX aggregate — engine.md §17), never raised by an effect, so a game can
     # ship a full catalog and the meter gate sees nothing at all.
     #
@@ -8871,9 +8871,9 @@ def run_gates(model, game, state=None):
     #      · a condition predicate — worn_corruption / worn_beauty / worn_type /
     #        clothing_slot / clothing_item                        (engine.md §17)
     #      · a player_portrait outfit override — when = { worn_type = … } or
-    #        { corruption = … }                          (template_import.py:744)
+    #        { corruption = … }                          (template_import.py:977)
     #      · a location dress code — clothing_rules.slots_required
-    #                                              (template_import.py:4227-4241)
+    #                                              (template_import.py:5262-5276)
     #    The portrait override is a DISPLAY reaction rather than a gate, and W7 is
     #    what says that is the field's dominant mode — DoL swaps the model's mouth
     #    on `V.exposed === 2`. A game can read its wardrobe mostly through
@@ -8946,7 +8946,7 @@ def run_gates(model, game, state=None):
     # invisible on the very page they sit beside. A check reading "there is a shop,
     # therefore buyable" misses them.
     #
-    # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:2536 takes the slug as a bare
+    # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:3079 takes the slug as a bare
     # string and v2.py:9935 compares it to each location's own slug; a typo is silent and the
     # whole catalog is unreachable with no error anywhere. Hence the `in _loc_ids` test.
     #
@@ -9825,10 +9825,10 @@ def run_gates(model, game, state=None):
     # G47b — no canvas key is discarded (the-first-hour.md F5b, engine.md §42)
     #
     # `TemplateCanvas` has seven fields — id, name, description, trigger, nodes, connections,
-    # loop (template_import.py:906-913) — and it is built with named arguments only
-    # (:2302-2310), so ANY other key on a [[canvases]] table is dropped: no error, no
+    # loop (template_import.py:1133-1140) — and it is built with named arguments only
+    # (:2871-2879), so ANY other key on a [[canvases]] table is dropped: no error, no
     # warning, green build. `slug` is tolerated because the parser does read it, as a
-    # fallback label in error context (:2033).
+    # fallback label in error context (:2598).
     #
     # The keys that get written up here are TRIGGER keys, and losing one is invisible in
     # exactly the way that hurts — the TOML still says what the author meant.
@@ -11194,7 +11194,7 @@ def selfcheck_mode():
 #
 # It BLOCKS only what makes a build broken, unfinishable or untrue (LO, 2026-09-26), and
 # REPORTS everything else for LO to judge when he plays. The two lists are fixed here and
-# in `the-release.md`; a row moves between them only at a release boundary.
+# in `the-release.md` (later rows are appended above `main()`); rows move at a release.
 #
 # `--release` and `--saves` are CALLED, not re-implemented, and their own output is left
 # exactly as it was: their exit codes are read, and their [FAIL] lines are quoted.
@@ -11462,6 +11462,9 @@ def ship_rows(slug, root=None):
              | {j for js in SHIP_BLOCK_JOINS.values() for j in js})
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
+    report.append(_future_dates_row(model, game))
+    report.append(_world_size_row(model, state, game))
+    report.append(_systems_row(state))
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
@@ -11516,7 +11519,7 @@ def _block_gate_verdict(gname, r):
     if r.get("parked") or r.get("few"):
         # PRD IC21: a parked block is never read as green, and says why it is red.
         return False, f"{gname}: {r['headline']}", r["detail"][:10]
-    if r["na"] and gname != "the obligation is charged":
+    if r["na"] and gname not in SHIP_NA_PASSES:
         return False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
     return (None if r["na"] else r["pass_"]), f"{gname}: {r['headline']}", r["detail"][:10]
 
@@ -12278,7 +12281,7 @@ def _her_climb(game, state):
         acts = acts_of(c)
         return [it for n in c.get("nodes") or [] for ch in _node_choices(n)
                 if str(ch.get("nodeId") or "").split(".")[-1] in acts
-                and ch.get("targetType") != "location"
+                and (ch.get("targetType") or "trigger") == "node"
                 for it in _conditions_of(ch)]
 
     def preds(c):
@@ -12339,7 +12342,7 @@ def _her_climb(game, state):
             reached.add(i)
             for ch in _node_choices(nodes[i]):
                 t = str(ch.get("nodeId") or "").split(".")[-1]
-                if ch.get("targetType") != "location" and t in nodes and is_open(ch):
+                if (ch.get("targetType") or "trigger") == "node" and t in nodes and is_open(ch):
                     todo.append(t)
         if is_open(c.get("trigger") or {}) and reached & acts:
             bad.append(f"{cid}: (d) open on a new save — nothing paid is reachable before its "
@@ -12384,12 +12387,12 @@ def _her_climb(game, state):
                 seen.add(t)
                 return any(leads_on(str(ch2.get("nodeId") or "").split(".")[-1], seen)
                            for ch2 in _node_choices(nodes[t])
-                           if ch2.get("targetType") != "location")
+                           if (ch2.get("targetType") or "trigger") == "node")
 
             nxt = []
             for ch in _node_choices(node):
                 tgt = str(ch.get("nodeId") or "").split(".")[-1]
-                nxt.append("on" if (ch.get("targetType") != "location" and tgt in nodes
+                nxt.append("on" if ((ch.get("targetType") or "trigger") == "node" and tgt in nodes
                                     and leads_on(tgt, set())) else "leave")
             if "on" in nxt and "leave" not in nxt:
                 bad.append(f"{cid}.{nid}: (e) no stop exit — only the way on (D7f: \"stop him\" "
@@ -12438,7 +12441,7 @@ def _no_has_content(game):
         nodes = {n.get("id"): n for n in c.get("nodes") or []}
 
         def target(ch):
-            if ch.get("targetType") == "location":
+            if (ch.get("targetType") or "trigger") != "node":
                 return None
             return nodes.get(str(ch.get("nodeId") or "").split(".")[-1])
 
@@ -12731,6 +12734,19 @@ def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _one_name_per_trait(game)
     _N["one name per trait"] = n
     gate("one name per trait", ok, head, detail)
+    ok, head, detail = _adult_wording(model, game)
+    gate("adult wording", ok, head, detail)
+    gate("a goal's end is built", *_goal_end_is_built(game, state))
+    gate("a step is seen from the next room", *_seen_from_next_room(game, state))
+    gate("every system has a card", *_every_system_has_a_card(state))
+    gate("every system leads to a person or a sex scene",
+         *_every_system_leads_somewhere(model, game, state))
+    gate("every clothing state is read three times", *_wardrobe_is_read(game, state))
+    gate("her clothes are backed", *_her_clothes_are_backed(model, game))
+    gate("every chat is caused by a scene", *_chats_are_caused(game))
+    gate("a chat is short and timed", *_chats_short_and_timed(game))
+    gate("a system meets its floors", *_system_floors(model, state))
+    gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -12767,6 +12783,858 @@ def _under_exempt_roots(locs, exempt):
         if cur not in chain and cur in parent and not parent[cur] and cur in exempt:
             out.add(lid)
     return out
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# A value worked out from her stats — `{type = "trait", trait, mult, add, min, max}`
+# (`engine.md` §3). The engine resolves it when the effect applies, as
+# round(trait × mult + add) held inside min / max (`setup.resolveEffectValue`), so a
+# reader here sees a shape, not a number. These read it the way the readers above
+# already read `{type = "random", min, max}`.
+# ─────────────────────────────────────────────────────────────────────────────
+def _trait_value_at(val, x):
+    """What a trait-shaped value pays when the trait reads `x` (JS Math.round, then min/max)."""
+    mult, add = val.get("mult", 1), val.get("add", 0)
+    mult = mult if isinstance(mult, (int, float)) and not isinstance(mult, bool) else 1
+    add = add if isinstance(add, (int, float)) and not isinstance(add, bool) else 0
+    out = math.floor(x * mult + add + 0.5)
+    lo, hi = val.get("min"), val.get("max")
+    if isinstance(lo, (int, float)) and not isinstance(lo, bool):
+        out = max(out, lo)
+    if isinstance(hi, (int, float)) and not isinstance(hi, bool):
+        out = min(out, hi)
+    return out
+
+
+def _value_bounds(val, traits=None):
+    """(low, high) of a ranged or trait-shaped effect value; (None, None) if neither.
+
+    random: (min, max), max falling back to min.
+    trait:  low is what it pays at her STARTING trait (`traits`, else 0: the engine
+            reads a missing trait as 0); high is the declared `max`, or, with no max,
+            +inf when `mult` is positive (it grows with the stat) and the low otherwise.
+    """
+    if not isinstance(val, dict):
+        return None, None
+    if val.get("type") == "random":
+        return val.get("min"), val.get("max", val.get("min"))
+    if val.get("type") != "trait":
+        return None, None
+    start = (traits or {}).get(val.get("trait"), 0)
+    start = start if isinstance(start, (int, float)) and not isinstance(start, bool) else 0
+    low = _trait_value_at(val, start)
+    hi = val.get("max")
+    if isinstance(hi, (int, float)) and not isinstance(hi, bool):
+        return low, max(low, hi)
+    mult = val.get("mult", 1)
+    grows = isinstance(mult, (int, float)) and not isinstance(mult, bool) and mult > 0
+    return low, (math.inf if grows else low)
+
+
+def _effect_value_label(val, trait):
+    """How a lint prints a non-number effect value: `+2..4 money`, `+charm×2+50 money`."""
+    if isinstance(val, dict) and val.get("type") == "trait":
+        mult, add = val.get("mult", 1), val.get("add", 0)
+        add_s = f"{add:+g}" if isinstance(add, (int, float)) and add else ""
+        mult_s = f"×{mult:g}" if isinstance(mult, (int, float)) and mult != 1 else ""
+        return f"+{val.get('trait', '?')}{mult_s}{add_s} {trait}"
+    return f"+{val.get('min','?')}..{val.get('max','?')} {trait}"
+
+
+
+# ── the-voice.md "Adult wording": the banned school words ──────────────────
+# Whole words or phrases, case-blind, anywhere a player reads (`_player_visible_text`'s
+# scope: prose, labels, room names and descriptions). "eighteen" is not "teen"; freshman
+# and sophomore are college words and are allowed. A WARN (LO): a scored gate, so under
+# --ship it shows inside "every other gate" and never blocks. n/a: no player text.
+_ADULT_WORDING_RE = re.compile(
+    r"\b(detention|homeroom|prom|after[\s-]+school|high[\s-]+school|middle[\s-]+school"
+    r"|junior[\s-]+high|teen|teenager|schoolgirl|school[\s-]+uniform|class[\s-]+president"
+    r"|grade[\s-]+(?:9|1[0-2]))\b", re.I)
+
+
+def _adult_wording(model, game):
+    """(ok, headline, detail): every banned school word a player can read, by place."""
+    parts = [(c["id"], t) for c in model for b in c["beats"] for t in b.text]
+    for path, node in _walk_paths(game):
+        if isinstance(node.get("text"), str) and ("targetType" in node or "config" in node):
+            parts.append((".".join(k for k in path if k != "[]") or "label", node["text"]))
+    for loc in (game.get("locations") or []):
+        for key in ("name", "description"):
+            if loc.get(key):
+                parts.append((f"location {loc.get('id')}", str(loc[key])))
+    if not any(str(t).strip() for _, t in parts):
+        return None, "no player-facing text to read", []
+    hits = []
+    for where, text in parts:
+        for m in _ADULT_WORDING_RE.finditer(str(text)):
+            a, b = max(0, m.start() - 30), min(len(text), m.end() + 30)
+            hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
+    if not hits:
+        return True, "no banned school word anywhere a player reads", []
+    return (False, f"{len(hits)} banned school word(s) where a player reads — a warning, "
+                   f"never a block (the-voice.md \"Adult wording\")", hits)
+
+
+# ── G12 residents have homes: a home is a bedroom (the-map.md R2) ───────────
+# Gate 12 used to pass any declared location. A home is a room of the person's own, so it is
+# red when the home is a thoroughfare (`kind = "thoroughfare"`) or a container (`is_container`),
+# when it is a hub (another room's `entry_from` points at it), or when two people share it
+# and `board.map.shared_homes` does not declare them (a couple). A landing with no rooms off it
+# still passes; the name and R2 carry that case. A game in SHIP_GRANDFATHERED gets these reasons
+# as warnings (listed, the gate still passes) until it next ships.
+HOME_IS_A_BEDROOM_SINCE = "2026-10-02"
+
+
+def _home_is_a_bedroom(game, state, chars, homes):
+    """(red, warned): reasons a declared home is not a room of the person's own."""
+    locs = {l.get("id"): l for l in (game.get("locations") or []) if isinstance(l, dict)}
+    hubs = {l.get("entry_from") for l in locs.values()       # a container is not a room
+            if l.get("entry_from") and not l.get("is_container")}
+    shared = (((state or {}).get("board") or {}).get("map") or {}).get("shared_homes") or []
+    couples = [set(g) for g in shared if isinstance(g, (list, tuple))]
+    by_home = collections.defaultdict(list)
+    reasons = []
+    for ch in chars:
+        cid = ch.get("id")
+        where = homes.get(cid)
+        loc = locs.get(where)
+        if loc is None:
+            continue                                   # no home / offscreen / undeclared: above
+        by_home[where].append(cid)
+        if loc.get("kind") == "thoroughfare":
+            reasons.append(f"{cid}: home '{where}' is a thoroughfare — a home is a bedroom (the-map.md R2)")
+        if loc.get("is_container"):
+            reasons.append(f"{cid}: home '{where}' is a container — a home is a bedroom (the-map.md R2)")
+        if where in hubs:
+            reasons.append(f"{cid}: home '{where}' is a hub (rooms open off it) — a home is a bedroom")
+    for where, who in by_home.items():
+        if len(who) > 1 and not any(set(who) <= c for c in couples):
+            reasons += [f"{cid}: shares '{where}' with {', '.join(o for o in who if o != cid)}, and "
+                        f"board.map.shared_homes does not declare them" for cid in who]
+    if _grandfathered((state or {}).get("slug"), state, HOME_IS_A_BEDROOM_SINCE):
+        return [], [f"warn (grandfathered until it next ships) — {r}" for r in reasons]
+    return reasons, []
+
+
+
+# ── the-want.md "The goal has no date" (W10) and its end is built (W11) ────
+# A date in a goal's words is a promise the engine never keeps (a sidebar countdown only
+# displays). `_DATE_RE` finds one: "week 12", "the week-12 review", "week twelve", "day 30",
+# "three months". `_FUTURE_DATE_RE` is the subset a player reads as an appointment: "week
+# twelve", "day 30", "in thirty days", "two weeks from now". shape.py reads `_DATE_RE` too.
+_NUM_WORDS = (r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen"
+              r"|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty"
+              r"|sixty|ninety|a hundred)")
+_DATE_RE = re.compile(rf"\b(?:(?:week|day|month)[\s-]+{_NUM_WORDS}|{_NUM_WORDS}[\s-]+(?:weeks?|days?|months?))\b",
+                      re.I)
+_FUTURE_DATE_RE = re.compile(
+    rf"\b(?:(?:week|day)[\s-]+{_NUM_WORDS}|in\s+{_NUM_WORDS}\s+(?:weeks?|days?|months?)"
+    rf"|{_NUM_WORDS}\s+(?:weeks?|days?|months?)\s+from\s+now)\b", re.I)
+
+
+_PAST_DURATION_RE = re.compile(r"\b(?:not|never|nobody|nothing|no one|first time)\b|n't\b", re.I)
+
+
+def _goal_end_is_built(game, state):
+    """(ok, headline, detail) for `a goal's end is built`.
+
+    Each goal in `want.promise.goals[]` with `ends_when`, except the last, names an `ends_flag`,
+    and some effect in the TOML sets that flag (`_flags_ever_set`). A WARN by type: a scored gate,
+    never a --ship BLOCK. n/a: no ledger, or no goal but the last can end."""
+    prom = (((state or {}).get("want") or {}).get("promise"))
+    goals = [g for g in ((prom or {}).get("goals") or []) if isinstance(g, dict)] \
+        if isinstance(prom, dict) and isinstance(prom.get("goals"), list) else []
+    ending = [g for g in goals[:-1] if str(g.get("ends_when") or "").strip()]
+    if not ending:
+        return None, "no goal but the last declares ends_when", []
+    set_flags = _flags_ever_set(game)
+    bad = []
+    for g in ending:
+        label = str(g.get("goal") or "?")[:50]
+        flag = g.get("ends_flag")
+        if not flag:
+            bad.append(f"\"{label}\": ends_when is set and ends_flag is not — name the flag set when it is met")
+        elif flag not in set_flags:
+            bad.append(f"\"{label}\": nothing in the TOML sets `{flag}` — the goal can never end")
+    return (not bad, f"{len(ending) - len(bad)}/{len(ending)} goal ends are built (the last goal "
+                     f"is exempt)", bad)
+
+
+def _future_dates_row(model, game):
+    """The --ship REPORT row: player-facing lines that name a future week or day, listed so the
+    author checks each against the-want.md W10 (an event that is built, or no date)."""
+    parts = [(c["id"], t) for c in model for b in c["beats"] for t in b.text]
+    for path, node in _walk_paths(game):
+        if isinstance(node.get("text"), str) and ("targetType" in node or "config" in node):
+            parts.append((".".join(k for k in path if k != "[]") or "label", node["text"]))
+    hits = []
+    for where, text in parts:
+        for m in _FUTURE_DATE_RE.finditer(str(text)):
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 40)
+            # "hasn't answered you in eight months" is the past: an "in N …" after a negation
+            # in the same sentence is a duration, not an appointment.
+            if m.group(0).lower().startswith("in") and _PAST_DURATION_RE.search(
+                    re.split(r"[.!?]", text[:m.start()])[-1]):
+                continue
+            hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
+    return ("a dated line names a built event", not hits,
+            f"{len(hits)} line(s) name a future week or day — check each is built or cut (W10)"
+            if hits else "no line names a future week or day", hits[:12]
+            + ([f"… and {len(hits) - 12} more"] if len(hits) > 12 else []))
+
+
+# ── shape.py's "the person is there at the step's hour", the TOML half ─────
+# A ladder step may declare `seen_from`: the person is scheduled in the room next door, not in
+# the step's own room (shape.py checks his hours). Here, once the TOML exists, that room must
+# share a parent (`entry_from`) with the step's place — across the hall, not across town. Red
+# when it does not, or names no location. A game in SHIP_GRANDFATHERED gets warnings (the gate
+# still passes) until it ships on or after SEEN_FROM_SINCE. n/a: no step declares `seen_from`.
+SEEN_FROM_SINCE = "2026-10-02"
+
+
+def _seen_from_next_room(game, state):
+    """(ok, headline, detail) for `a step is seen from the next room`."""
+    parent = {l.get("id"): l.get("entry_from") for l in (game.get("locations") or [])
+              if isinstance(l, dict) and l.get("id")}
+    steps = [(npc, s) for npc, lad in _declared_ladders(state) for s in (lad.get("steps") or [])
+             if isinstance(s, dict) and s.get("seen_from")]
+    if not steps:
+        return None, "no ladder step declares seen_from", []
+    bad = []
+    for npc, s in steps:
+        where, seen = s.get("where"), s["seen_from"]
+        tag = f"{npc} step {s.get('n')}: seen_from `{seen}`"
+        if seen not in parent:
+            bad.append(f"{tag} is not a declared location")
+        elif where not in parent:
+            bad.append(f"{tag}: the step's place `{where}` is not a declared location")
+        elif seen != where and (not parent[seen] or parent[seen] != parent[where]):
+            bad.append(f"{tag} hangs off `{parent[seen]}`, `{where}` off `{parent[where]}` — "
+                       f"not the room next door")
+    head = f"{len(steps) - len(bad)}/{len(steps)} seen_from rooms share the step's parent"
+    if bad and _grandfathered((state or {}).get("slug"), state, SEEN_FROM_SINCE):
+        return True, head, [f"warn (grandfathered until it next ships) — {b}" for b in bad]
+    return not bad, head, bad
+
+
+# ── the-systems.md, the card: the `--ship` BLOCK rows on systems (WS-D3, WS-D9) ─────────
+# Appended to SHIP_BLOCK_GATES / SHIP_SINCE here rather than inside them, so the lines the
+# skill cites above do not move. Each row is a scored gate too, so `gates.py <slug>` shows it
+# while the game is written. Under LO B a grandfathered game warns until it ships on or after
+# the row's date; the legacy form of every row is a pass, never n/a, or the warn never shows.
+SYSTEMS_SINCE = "2026-10-02"
+
+
+def _filled(v):
+    return v not in (None, "", [], {})
+
+
+def _system_cards(state):
+    """board.systems[] minus the old meter-shaped entries (a `kind` and no card field)."""
+    board = (state or {}).get("board") or {}
+    meters = _meters_of_board(board)
+    return [s for s in (board.get("systems") or [])
+            if isinstance(s, dict) and not any(s is m for m in meters)]
+
+
+def _card_is_money(card, state):
+    """Does the card's `cost` or `pay_ladder` involve money? Then it needs a sink and a
+    deadline; otherwise it must feed something (the brake)."""
+    econ = (((state or {}).get("board") or {}).get("economy") or {})
+    words = {w.lower() for w in ("money", "$", "£", "€", str(econ.get("currency") or ""),
+                                 str(econ.get("symbol") or "")) if w}
+    for rung in card.get("pay_ladder") or []:
+        pay = rung.get("pay") if isinstance(rung, dict) else rung
+        if isinstance(pay, (int, float)) and not isinstance(pay, bool) and pay:
+            return True
+        if isinstance(pay, str) and any(w in pay.lower() for w in words):
+            return True
+    return any(w in str(card.get("cost") or "").lower() for w in words)
+
+
+# A card's fields (the-systems.md, the card). `hours` and `daily` are read by other rows.
+_CARD_REQUIRED = ("place", "cost", "people", "pool", "memory", "growth", "hook_link",
+                  "leads_to")
+
+
+def _every_system_has_a_card(state):
+    """(ok, headline, detail) for `every system has a card`. Zero cards is red, never n/a."""
+    if _legacy("system_card"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    systems = ((state or {}).get("board") or {}).get("systems") or []
+    cards = _system_cards(state)
+    old = len(systems) - len(cards)
+    as_meters = (f" · {old} meter-shaped entr{'y' if old == 1 else 'ies'} in board.systems[] "
+                 f"read as meters" if old else "")
+    if not cards:
+        return False, "no system card in board.systems[] — zero systems is red" + as_meters, \
+            ["declare at least one card (the-systems.md SY8; templates/sheets/system.md)"]
+    bad = []
+    for c in cards:
+        miss = [f for f in _CARD_REQUIRED if not _filled(c.get(f))]
+        if not (_filled(c.get("pay_ladder")) or _filled(c.get("lewd_ladder"))):
+            miss.append("a ladder (pay_ladder[] or lewd_ladder[])")
+        if not (_filled(c.get("feeds")) or _filled(c.get("reads"))):
+            miss.append("feeds[] / reads[]")
+        if _card_is_money(c, state):
+            miss += [f + " (the card involves money)" for f in ("sink", "deadline")
+                     if not _filled(c.get(f))]
+        elif not _filled(c.get("feeds")):
+            miss.append("feeds[] (no money in it, so it must feed something already read)")
+        if miss:
+            bad.append(f"{c.get('id') or '?'}: missing {', '.join(dict.fromkeys(miss))}")
+    return not bad, f"{len(cards) - len(bad)}/{len(cards)} system cards filled" + as_meters, bad
+
+
+def _every_system_leads_somewhere(model, game, state):
+    """(ok, headline, detail) for `every system leads to a person or a sex scene`: each card's
+    `leads_to[]` names a person in board.characters, or a canvas with an explicit beat (3+
+    explicit words in one beat, as the floors count them), that exists in the build. Zero
+    cards is red."""
+    if _legacy("system_leads"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    cards = _system_cards(state)
+    if not cards:
+        return False, "no system card in board.systems[] — zero systems is red", []
+    chars = {c.get("id") for c in (((state or {}).get("board") or {}).get("characters") or [])
+             if isinstance(c, dict)}
+    npcs = {n.get("id") for n in (game.get("npcs") or []) if isinstance(n, dict)}
+    built = {c["id"] for c in model}
+    hot = {c["id"] for c in model if any(b.explicit >= 3 for b in c["beats"])}
+
+    def why(x):
+        if x in npcs or x in chars:
+            return "not in board.characters" if x not in chars else "not in the build"
+        return "a canvas with no explicit beat" if x in built else "in neither the cast nor the build"
+
+    bad = []
+    for c in cards:
+        leads = [x for x in (c.get("leads_to") or []) if isinstance(x, str)]
+        if not any((x in chars and x in npcs) or x in hot for x in leads):
+            bad.append(f"{c.get('id') or '?'}: leads_to names no person or sex scene — "
+                       + ("; ".join(f"`{x}` {why(x)}" for x in leads) or "it is empty"))
+    return not bad, f"{len(cards) - len(bad)}/{len(cards)} systems lead to a person or a sex scene", bad
+
+
+SHIP_BLOCK_GATES["every system has a card"] = "every system has a card"
+SHIP_SINCE["system_card"] = (SYSTEMS_SINCE, "every system has a card")
+SHIP_BLOCK_GATES["every system leads to a person or a sex scene"] = \
+    "every system leads to a person or a sex scene"
+SHIP_SINCE["system_leads"] = (SYSTEMS_SINCE, "every system leads to a person or a sex scene")
+
+
+# ── the wardrobe card: every declared state and key item is read in ≥3 places (WS-D8) ──────
+# `board.wardrobe = {states: [{id, condition}], key_items: [clothing_id]}` (state.md). A reader
+# is a condition item on a canvas trigger, in a `group` (a scene's or an NPC's lines), in a
+# location's `entry_conditions` or a dress code's `conditions`, plus a dress code's
+# `slots_required` (it reads `clothing_slot` on each slot it names). A reader MATCHES a state when
+# it is the same predicate (and the same slot) and the values its operator allows overlap the
+# state's. A key item is read by a `clothing_item` naming it. Choice conditions, quest cards and
+# the portrait override are not counted. Clothing off: n/a, which passes (SHIP_NA_PASSES).
+WARDROBE_READS = 3
+
+
+def _cond_leaves(cond):
+    """Every condition item under a conditions dict, through nested `items` groups."""
+    if isinstance(cond, list):
+        for c in cond:
+            yield from _cond_leaves(c)
+    elif isinstance(cond, dict):
+        if isinstance(cond.get("items"), list):
+            yield from _cond_leaves(cond["items"])
+        elif cond.get("type"):
+            yield cond
+
+
+def _wardrobe_readers(game):
+    """Condition items that count as wardrobe readers, plus one `clothing_slot … unequipped`
+    reader per slot a dress code requires."""
+    out = []
+    for c in game.get("canvases") or []:
+        out += _cond_leaves(((c or {}).get("trigger") or {}).get("conditions"))
+    for _path, d in _walk_paths(game):
+        if d.get("type") == "group":
+            out += _cond_leaves((d.get("props") or {}).get("conditions") or d.get("conditions"))
+    for loc in game.get("locations") or []:
+        out += _cond_leaves((loc or {}).get("entry_conditions"))
+        for rule in (loc or {}).get("clothing_rules") or []:
+            if isinstance(rule, dict):
+                out += _cond_leaves(rule.get("conditions"))
+                out += [{"type": "clothing_slot", "slot": s, "operator": "unequipped"}
+                        for s in rule.get("slots_required") or []]
+    return out
+
+
+def _state_matches(state_cond, reader):
+    """Does `reader` read the declared clothing state (same predicate, overlapping values)?"""
+    t = state_cond.get("type")
+    if reader.get("type") != t:
+        return False
+    sop, rop = state_cond.get("operator"), reader.get("operator")
+    if t == "clothing_slot":
+        return reader.get("slot") == state_cond.get("slot") and rop == sop
+    if t == "worn_type":
+        same = reader.get("value") == state_cond.get("value")
+        if sop == "eq" and rop == "eq":
+            return same
+        return not same if "eq" in (sop, rop) else True
+    span = range(-1, 21)
+    want = {x for x in span if _cmp(x, sop, state_cond.get("value"))}
+    return bool(want & {x for x in span if _cmp(x, rop, reader.get("value"))})
+
+
+_STATE_TYPES = ("worn_exposure", "worn_corruption", "worn_beauty", "worn_type", "clothing_slot")
+
+
+def _wardrobe_is_read(game, state):
+    """(ok, headline, detail) for `every clothing state is read three times`."""
+    if _legacy("wardrobe_reads"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    if not (game.get("settings") or {}).get("clothing_enabled"):
+        return None, "clothing is off", []
+    wd = (((state or {}).get("board") or {}).get("wardrobe") or {})
+    states = [s for s in (wd.get("states") or []) if isinstance(s, dict)]
+    items = [i for i in (wd.get("key_items") or []) if isinstance(i, str)]
+    if not states and not items:
+        return False, "clothing is on and board.wardrobe declares no state or key item", \
+            ["declare board.wardrobe (state.md; templates/cards/wardrobe.md)"]
+    readers = _wardrobe_readers(game)
+    catalog = {c.get("id") for c in (game.get("clothing") or []) if isinstance(c, dict)}
+    bad, counts = [], []
+    for s in states:
+        cond = s.get("condition") if isinstance(s.get("condition"), dict) else {}
+        if cond.get("type") not in _STATE_TYPES:
+            bad.append(f"state `{s.get('id')}`: condition type `{cond.get('type')}` is not a "
+                       f"clothing state ({' / '.join(_STATE_TYPES)})")
+            continue
+        n = sum(1 for r in readers if _state_matches(cond, r))
+        counts.append(n)
+        if n < WARDROBE_READS:
+            what = " ".join(str(cond[k]) for k in ("type", "slot", "operator", "value")
+                            if cond.get(k) is not None)
+            bad.append(f"state `{s.get('id')}` ({what}): read {n} time(s), needs {WARDROBE_READS}")
+    for i in items:
+        n = sum(1 for r in readers if r.get("type") == "clothing_item" and r.get("item_id") == i)
+        counts.append(n)
+        if i not in catalog:
+            bad.append(f"key item `{i}` is not a [[clothing]] id")
+        elif n < WARDROBE_READS:
+            bad.append(f"key item `{i}`: read {n} time(s), needs {WARDROBE_READS}")
+    head = (f"{len(states) + len(items) - len(bad)}/{len(states) + len(items)} declared states "
+            f"and key items read {WARDROBE_READS}+ times")
+    return not bad, head, bad
+
+
+SHIP_BLOCK_GATES["every clothing state is read three times"] = \
+    "every clothing state is read three times"
+SHIP_SINCE["wardrobe_reads"] = (SYSTEMS_SINCE, "every clothing state is read three times")
+# A BLOCK row whose n/a passes: there is nothing to check (no clothing, no phone).
+SHIP_NA_PASSES = {"the obligation is charged", "every clothing state is read three times"}
+
+
+# ── register.md, the truth rule, rule 5: prose names her clothes only where a check backs it ──
+# Built on readable.py's `unearned_events` in its `needs_clothing` mode. A garment is a word from
+# the game's own `[[clothing]]` names (its last word: "blouse", "heels"), never a generic list —
+# the strip rung matches "strip club". "Hers": `your <garment>` in a second-person game; in a
+# third-person one, `<her name>'s <garment>`, or `her <garment>` in a sentence that opens on her
+# name. Words before the garment that are also in a catalog name narrow it ("your tight blouse"
+# is the tight silk blouse); in "A dress of your own" the garment is "dress". Backers: a condition that IMPLIES one of those garments is worn — on
+# the trigger, an enclosing `group`, the location's `entry_conditions`, a choice into the canvas
+# or the node — or a `wardrobeEffects` equip of one in an earlier node of the same canvas. A
+# beat on an explicit canvas with a strip word besides the garment, or an undressing phrase
+# ("yanks your panties down", "takes your bra off"), is exempt: the act undresses. A `--ship`
+# BLOCK (WS-D9); n/a with clothing off or no catalog, and n/a passes.
+_UNDRESS = re.compile(r"\b(?:pull|yank|tug|slid|slide|push|peel|take|took|pop|rip|tore|tear|shove|"
+                      r"drag|strip)\w*\s+(?:your|her|them|it)\b(?:\s+[\w'’]+){0,2}?\s+"
+                      r"(?:off|down|open|aside)\b", re.I)
+_GARMENT_STOP = {"the", "a", "an", "his", "her", "their", "my", "our", "your", "on", "in",
+                 "under", "over", "of", "off", "up", "down", "and", "to", "with", "at", "from",
+                 "into", "onto", "through", "by", "for", "is", "was", "are", "were"}
+_STAT_KEYS = {"worn_corruption": "corruption", "worn_beauty": "beauty"}
+
+
+def _garment_vocab(game):
+    """(item ids by garment word, words of each item's name) from the catalog."""
+    by_noun, words = {}, {}
+    for c in game.get("clothing") or []:
+        if not (isinstance(c, dict) and c.get("id") and c.get("name")):
+            continue
+        # "A dress of your own": the garment is the word before "of", not the last word.
+        ws = re.findall(r"[a-z]+", re.split(r"\s+of\s+", str(c["name"]).lower())[0])
+        if not ws:
+            continue
+        words[c["id"]] = set(ws)
+        by_noun.setdefault(ws[-1], set()).add(c["id"])
+    return by_noun, words
+
+
+def _her_garments(game):
+    """`find(text, block)` for readable.py: [(phrase, set of item ids it can be)]."""
+    by_noun, words = _garment_vocab(game)
+    if not by_noun:
+        return lambda text, block: []
+    third = str((game.get("settings") or {}).get("narration_person") or "second") == "third"
+    name = str((game.get("player") or {}).get("name") or "")
+    mod = r"(?:(?!(?:%s)\b)[a-z'-]+\s+){0,2}" % "|".join(sorted(_GARMENT_STOP))
+    noun = r"(%s)\b" % "|".join(sorted(map(re.escape, by_noun), key=len, reverse=True))
+    owners = ([rf"\b{re.escape(name)}(?:'s|’s)\s+"] if third and name else []) if third \
+        else [r"\byour\s+"]
+
+    def items_for(phrase, n):
+        ids = by_noun[n]
+        mods = set(re.findall(r"[a-z]+", phrase.lower())[1:-1]) - _GARMENT_STOP
+        narrowed = {i for i in ids if mods and mods <= words[i]}
+        return narrowed or ids
+
+    def find(text, block):
+        out = []
+        spans = [text]
+        if third and name:
+            spans = [s for s in re.split(r"(?<=[.!?])\s+", text)
+                     if re.match(rf"^\W*{re.escape(name)}\b", s)]
+        for o in owners:
+            for m in re.finditer(o + "(" + mod + ")" + noun, text, re.I):
+                out.append((m.group(0), items_for(m.group(0), m.group(2).lower())))
+        if third:
+            for sp in spans:
+                for m in re.finditer(r"\bher\s+(" + mod + ")" + noun, sp, re.I):
+                    out.append((m.group(0), items_for(m.group(0), m.group(2).lower())))
+        return out
+    return find
+
+
+def _cond_backs(item, garments, catalog):
+    """Does this condition item imply she wears one of `garments` (item ids)?"""
+    t, op = item.get("type"), item.get("operator")
+    if t == "clothing_item":
+        return op == "equipped" and item.get("item_id") in garments
+    if t == "clothing_slot":
+        ids = {c["id"] for c in catalog if c.get("slot") == item.get("slot")}
+        return op == "equipped" and bool(ids) and ids <= garments
+    if t == "worn_type":
+        ids = {c["id"] for c in catalog if c.get("type") == item.get("value")}
+        return op == "eq" and bool(ids) and ids <= garments
+    if t in _STAT_KEYS:
+        v = item.get("value")
+        if _cmp(0, op, v) is not False:          # an empty slot (or a bad shape) satisfies it
+            return False
+        ids = {c["id"] for c in catalog if _cmp(c.get(_STAT_KEYS[t]) or 0, op, v)}
+        return bool(ids) and ids <= garments
+    return False
+
+
+def _clothes_unbacked(model, game):
+    """Rows for `her clothes are backed`: prose naming her clothes with nothing behind it.
+    None when clothing is off or there is no catalog."""
+    import readable
+    catalog = [c for c in (game.get("clothing") or []) if isinstance(c, dict) and c.get("id")]
+    if not (game.get("settings") or {}).get("clothing_enabled") or not catalog:
+        return None
+    locs = {l.get("id"): l for l in (game.get("locations") or []) if isinstance(l, dict)}
+    hot = {c["id"] for c in model if any(b.explicit >= 3 for b in c["beats"])}
+    strip = dict(RUNGS)["strip"]
+    ways_in = collections.defaultdict(list)      # canvas id or (canvas, node) -> conditions
+    for cv in game.get("canvases") or []:
+        for nd in cv.get("nodes") or []:
+            for ch in ((nd.get("exit_block") or {}).get("choices") or []):
+                tt = ch.get("targetType") or "trigger"
+                if tt == "node" and ch.get("nodeId"):
+                    ways_in[(cv.get("id"), str(ch["nodeId"]).split(".")[-1])].append(
+                        ch.get("conditions"))
+                elif tt == "canvas" and ch.get("canvasId"):
+                    ways_in[ch["canvasId"]].append(ch.get("conditions"))
+
+    def equips(nd):
+        eb = nd.get("exit_block") or {}
+        for src in [eb.get("config") or {}] + list(eb.get("choices") or []):
+            for w in (src or {}).get("wardrobeEffects") or []:
+                if isinstance(w, dict) and w.get("action") == "equip":
+                    yield w.get("item_id")
+
+    def backed(canvas, node, conditions, garments, text, phrase):
+        rest = re.sub(r"\bstrip (?:club|joint|bar)s?\b", " ", text.replace(phrase, " "), flags=re.I)
+        if canvas.get("id") in hot and (strip.search(rest) or _UNDRESS.search(text)):
+            return True
+        conds = list(conditions)
+        loc = locs.get((canvas.get("trigger") or {}).get("location")) or {}
+        conds.append(loc.get("entry_conditions"))
+        conds += ways_in.get(canvas.get("id"), []) + ways_in.get((canvas.get("id"), node.get("id")), [])
+        if any(_cond_backs(i, garments, catalog) for c in conds for i in _cond_leaves(c)):
+            return True
+        nodes = canvas.get("nodes") or []
+        before = nodes[:next((k for k, n in enumerate(nodes) if n is node), 0)]
+        return any(i in garments for n in before for i in equips(n))
+
+    return readable.unearned_events(game, needs_clothing={"find": _her_garments(game),
+                                                          "backed": backed})
+
+
+def _her_clothes_are_backed(model, game):
+    """(ok, headline, detail) for the gate `her clothes are backed`."""
+    if _legacy("clothes_backed"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    rows = _clothes_unbacked(model, game)
+    if rows is None:
+        return None, "clothing is off, or no [[clothing]] catalog", []
+    return not rows, (f"{len(rows)} line(s) name her clothes with no clothing check behind them"
+                      if rows else "every line naming her clothes has a check behind it"), rows
+
+
+SHIP_BLOCK_GATES["her clothes are backed"] = "her clothes are backed"
+SHIP_SINCE["clothes_backed"] = (SYSTEMS_SINCE, "her clothes are backed")
+SHIP_NA_PASSES.add("her clothes are backed")
+
+
+# ── the-phone.md: every chat (and every call) is caused by a scene (WS-D7, WS-D9) ────────────
+# Each `[[phone.conversations]]` and `[[phone.calls]]` trigger holds a flag item (`is_true`) whose
+# flag a canvas sets, or a reply sets in a conversation that is itself caused (transitive, so
+# a chain of one-time messages passes). Dev canvases, the cheat page and the daily tick are not
+# scenes. A call's own decline / missed effects cause nothing. n/a with no conversation and no
+# call, and n/a passes.
+def _flags_set_in(o):
+    return {d["flag"] for path, d in _walk_paths(o)
+            if "flagEffects" in path and isinstance(d.get("flag"), str)
+            and d.get("op", "set") == "set"}
+
+
+def _chats_are_caused(game):
+    """(ok, headline, detail) for `every chat is caused by a scene`."""
+    if _legacy("chat_caused"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    phone = game.get("phone") or {}
+    convs = [c for c in (phone.get("conversations") or []) if isinstance(c, dict)]
+    calls = [c for c in (phone.get("calls") or []) if isinstance(c, dict)]
+    if not convs and not calls:
+        return None, "no phone conversation or call", []
+
+    def wants(entry):
+        return [i.get("flag_key") for i in _cond_leaves((entry.get("trigger") or {}).get("conditions"))
+                if i.get("type") == "flag" and i.get("operator") == "is_true" and i.get("flag_key")]
+
+    caused = set()
+    for cv in game.get("canvases") or []:
+        if isinstance(cv, dict) and not _is_dev(cv):
+            caused |= _flags_set_in(cv)
+    done, grew = set(), True
+    while grew:
+        grew = False
+        for i, c in enumerate(convs):
+            if i not in done and any(f in caused for f in wants(c)):
+                done.add(i)
+                caused |= _flags_set_in(c.get("blocks"))
+                grew = True
+    bad = []
+    for kind, entries, ok in (("chat", convs, lambda i, c: i in done),
+                              ("call", calls, lambda i, c: any(f in caused for f in wants(c)))):
+        for i, c in enumerate(entries):
+            if not ok(i, c):
+                fl = wants(c)
+                bad.append(f"{kind} `{c.get('id')}`: " + (
+                    f"no scene sets {', '.join(f'`{f}`' for f in fl)} (nor a caused chat's reply)"
+                    if fl else "its trigger holds no flag a scene sets (`is_true`)"))
+    n = len(convs) + len(calls)
+    return not bad, f"{n - len(bad)}/{n} chats and calls are caused by a scene", bad
+
+
+SHIP_BLOCK_GATES["every chat is caused by a scene"] = "every chat is caused by a scene"
+SHIP_SINCE["chat_caused"] = (SYSTEMS_SINCE, "every chat is caused by a scene")
+SHIP_NA_PASSES.add("every chat is caused by a scene")
+
+
+# ── the-phone.md P3/P4: a chat is short and timed (a WARN: a scored gate, never a block) ─────
+# A message bubble is 3–7 words, and a message (one sender's bubbles in a row, in one round) is at
+# most 3 of them. Every conversation trigger carries a delay (`days_since_flag` or
+# `hours_since_flag`) and an hour window (`time_of_day` or `weekday`); a call needs the timing
+# only. Directions from four games (round 9a), so no grandfathering. n/a with no phone.
+CHAT_WORDS, CHAT_BUBBLES = (3, 7), 3
+
+
+def _chats_short_and_timed(game):
+    """(ok, headline, detail) for `a chat is short and timed`."""
+    phone = game.get("phone") or {}
+    convs = [c for c in (phone.get("conversations") or []) if isinstance(c, dict)]
+    calls = [c for c in (phone.get("calls") or []) if isinstance(c, dict)]
+    if not convs and not calls:
+        return None, "no phone conversation or call", []
+    bad = []
+    for kind, entries in (("chat", convs), ("call", calls)):
+        for c in entries:
+            types = {i.get("type") for i in _cond_leaves((c.get("trigger") or {}).get("conditions"))}
+            miss = [w for w, ok in (("a delay (days_since_flag / hours_since_flag)",
+                                     types & {"days_since_flag", "hours_since_flag"}),
+                                    ("an hour window (time_of_day / weekday)",
+                                     types & {"time_of_day", "weekday"})) if not ok]
+            if miss:
+                bad.append(f"{kind} `{c.get('id')}`: its trigger lacks {' and '.join(miss)}")
+            if kind == "call":
+                continue
+            run, last = 0, None
+            for b in c.get("blocks") or []:
+                if not isinstance(b, dict) or b.get("type") != "message":
+                    run, last = 0, None
+                    continue
+                key = (b.get("sender"), b.get("round"))
+                run = run + 1 if key == last else 1
+                last = key
+                n = len(str(b.get("content") or "").split())
+                if not CHAT_WORDS[0] <= n <= CHAT_WORDS[1]:
+                    bad.append(f"chat `{c.get('id')}`: a {n}-word bubble "
+                               f"({CHAT_WORDS[0]}–{CHAT_WORDS[1]})")
+                if run == CHAT_BUBBLES + 1:
+                    bad.append(f"chat `{c.get('id')}`: more than {CHAT_BUBBLES} bubbles in one message")
+    n = len(convs) + len(calls)
+    return not bad, f"{len(bad)} problem(s) across {n} chats and calls", bad
+
+
+# ── the-systems.md SY8 rule 5: the measured floors, as directions (WARNs, round 9b) ──────────
+# From each card: a `daily` card's `pool[]` holds ≥20 canvases that exist in the build (the card
+# cannot just claim them); a card's `lewd_ladder[]` has ≥4 rungs and each rung ≥2 `acts[]`.
+# n/a with no card. And SY8 rule 2: a choice on an explicit canvas that pays her names the amount.
+SYSTEM_POOL, SYSTEM_RUNGS, SYSTEM_ACTS = 20, 4, 2
+# An amount in figures or in words ("A hundred, like the note says.").
+_NAMES_AMOUNT = re.compile(r"\d|\b(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|"
+                           r"thousand|grand)\b|\b\w+ (?:bucks|dollars|quid|pounds|euros)\b", re.I)
+
+
+def _system_floors(model, state):
+    """(ok, headline, detail) for `a system meets its floors`."""
+    cards = _system_cards(state)
+    if not cards:
+        return None, "no system card", []
+    built = {c["id"] for c in model}
+    bad = []
+    for c in cards:
+        cid = c.get("id") or "?"
+        if c.get("daily") is True:
+            pool = [p for p in (c.get("pool") or []) if p in built]
+            if len(pool) < SYSTEM_POOL:
+                bad.append(f"{cid}: a daily pool of {len(pool)} built canvas(es), floor {SYSTEM_POOL}")
+        rungs = [r for r in (c.get("lewd_ladder") or []) if isinstance(r, dict)]
+        if rungs and len(rungs) < SYSTEM_RUNGS:
+            bad.append(f"{cid}: {len(rungs)} lewd rung(s), floor {SYSTEM_RUNGS}")
+        thin = [str(r.get("gate") or k) for k, r in enumerate(rungs)
+                if len(r.get("acts") or []) < SYSTEM_ACTS]
+        if thin:
+            bad.append(f"{cid}: rung(s) with fewer than {SYSTEM_ACTS} acts — {', '.join(thin)}")
+    return not bad, f"{len(cards)} card(s), {len(bad)} below a floor (directions from four games, " \
+        f"round 9b)", bad
+
+
+def _paid_choice_names_amount(model, game, state):
+    """(ok, headline, detail) for `sex for pay names the amount`."""
+    money = _declared_currency(state) or next(
+        (k for k in ((game.get("player") or {}).get("core_traits") or {}) if CURRENCY_HINT.search(k)),
+        None)
+    hot = {m["id"] for m in model if any(b.explicit >= 3 for b in m["beats"])}
+    paid, bad = 0, []
+    for c in game.get("canvases") or []:
+        if not money or _is_dev(c) or c.get("id") not in hot:
+            continue
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                if not any((ef.get("trait") or ef.get("trait_key")) == money
+                           and (ef.get("op") or "add") == "add"
+                           and _effect_value_sign(ef.get("value")) > 0
+                           for ef in (ch.get("effects") or []) if isinstance(ef, dict)):
+                    continue
+                paid += 1
+                if not _NAMES_AMOUNT.search(str(ch.get("text") or "")):
+                    bad.append(f"{c.get('id')}/{n.get('id')}: \"{ch.get('text')}\" pays "
+                               f"`{money}` and names no amount")
+    if not paid:
+        return None, "no choice on an explicit canvas pays her", []
+    return not bad, f"{paid - len(bad)}/{paid} paid choices name the amount", bad
+
+
+# ── the-want.md, her life: how big the world is (a REPORT, no threshold — WS-D9) ─────────────
+# Hook people are `want.cast` ids that are no thread's `person`; the hub is the house her room
+# (`board.map.home_base`) is in (`_world_hub`). A canvas holds a person when its trigger names
+# them (`npc` / `requires_npc`) or they speak in it. Hook share = words in canvases holding a
+# hook person or at the hub, over all words. A link is a thread canvas that sets or reads a flag
+# a hook canvas reads.
+def _canvas_speakers(c):
+    blocks = []
+    for n in c.get("nodes") or []:
+        _dialog_blocks(n.get("blocks"), blocks)
+    return {((b.get("props") or {}).get("npcId") or "").strip() for b in blocks} - {""}
+
+
+def _canvas_people(c):
+    return (_canvas_speakers(c) | {c.get("npc"), c.get("requires_npc")}) - {"", None}
+
+
+def _world_hub(board, game):
+    """The top of the house: the room her room's `entry_from` chain reaches just below
+    `board.map.exterior` (or the chain's root when the street isn't on it). No home base, or one
+    the build doesn't declare: the first `board.map.roots[]`, as before."""
+    bmap = board.get("map") or {}
+    parent = {l.get("id"): l.get("entry_from") for l in (game or {}).get("locations") or []
+              if l.get("id")}
+    lid, seen = bmap.get("home_base"), set()
+    if lid not in parent:
+        return (bmap.get("roots") or [None])[0]
+    while parent.get(lid) and parent[lid] != bmap.get("exterior") and lid not in seen:
+        seen.add(lid)
+        lid = parent[lid]
+    return lid
+
+
+def _world_size(model, state, game=None):
+    """(summary, rows) for the `world size` REPORT row and lint."""
+    want = (state or {}).get("want") or {}
+    board = (state or {}).get("board") or {}
+    threads = [t for t in (want.get("threads") or []) if isinstance(t, dict)]
+    thread_people = {t.get("person") for t in threads}
+    hooks = {c.get("id") for c in (want.get("cast") or []) if isinstance(c, dict)} - thread_people
+    hub = _world_hub(board, game)
+    people = {c["id"]: _canvas_people(c) for c in model}
+    words = {c["id"]: sum(b.words for b in c["beats"]) for c in model}
+    hook_cv = [c for c in model if people[c["id"]] & hooks or (hub and c["loc"] == hub)]
+    total = sum(words.values())
+    share = 100 * sum(words[c["id"]] for c in hook_cv) / total if total else 0.0
+    built = [t for t in threads if any(t.get("person") in p for p in people.values())]
+    hook_reads = set().union(*(set(c["reads"]) for c in hook_cv)) if hook_cv else set()
+    hook_ids = {c["id"] for c in hook_cv}
+    links = [c["id"] for c in model if c["id"] not in hook_ids and people[c["id"]] & thread_people
+             and (set(c["sets"]) | set(c["reads"])) & hook_reads]
+    speakers = set().union(*(_canvas_speakers(c) for c in model)) if model else set()
+    zones = {l for loc in (board.get("locations") or []) if isinstance(loc, dict)
+             for l in (loc.get("labels") or []) if str(l).startswith("zone:")}
+    summary = (f"hook share {share:.0f}% of {total:,} words ({len(hooks)} hook people, hub "
+               f"`{hub}`) · threads {len(threads)} declared, {len(built)} built · "
+               f"{len(speakers)} speaking NPCs · {len(links)} links · {len(zones)} zones")
+    rows = ([f"threads not built yet: {', '.join(str(t.get('id')) for t in threads if t not in built)}"]
+            if len(built) < len(threads) else []) + \
+        ([f"links: {', '.join(links[:10])}" + (" …" if len(links) > 10 else "")] if links else [])
+    return summary, rows
+
+
+def _world_size_row(model, state, game=None):
+    summary, rows = _world_size(model, state, game)
+    return ("world size", None, summary + " — a size, never a score", rows)
+
+
+# ── the-systems.md: how many systems, and how they connect (a REPORT, no threshold — WS-D9) ──
+def _systems_and_connections(state):
+    """(summary, rows): the cards, the infrastructure apart, each card's feeds / reads."""
+    board = (state or {}).get("board") or {}
+    cards = _system_cards(state)
+    infra = [i for i in (board.get("infrastructure") or []) if isinstance(i, dict)]
+    meters = _meters_of_board(board)
+    summary = (f"{len(cards)} system(s) · {len(infra)} infrastructure "
+               f"({', '.join(sorted({str(i.get('kind')) for i in infra})) or 'none'}) · "
+               f"{len(meters)} meter(s)")
+    rows = [f"{c.get('id') or '?'}: feeds {len(c.get('feeds') or [])} "
+            f"({', '.join(map(str, c.get('feeds') or [])) or '—'}) · reads {len(c.get('reads') or [])} "
+            f"({', '.join(map(str, c.get('reads') or [])) or '—'}) · leads to "
+            f"{len(c.get('leads_to') or [])}" for c in cards]
+    return summary, rows
+
+
+def _systems_row(state):
+    summary, rows = _systems_and_connections(state)
+    return ("systems and connections", None, summary + " — a count, never a score", rows)
 
 
 def main():
@@ -13619,6 +14487,18 @@ def main():
     if cheat_lints:
         print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
               " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
+
+    ws_summary, ws_rows = _world_size(model, state, game)
+    print(f"  {'─'*72}")
+    print(f"  lint · world size — {ws_summary}")
+    for h in ws_rows:
+        print(f"          · {h}")
+    print("          (a SIZE, never a score — the-want.md, \"Her life — the threads\")")
+    sc_summary, sc_rows = _systems_and_connections(state)
+    print(f"  {'─'*72}")
+    print(f"  lint · systems and connections — {sc_summary}")
+    for h in sc_rows:
+        print(f"          · {h}")
 
     print(f"  {'─'*72}")
     print(f"  lint · toggles declared — {tog_summary}")

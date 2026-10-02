@@ -139,7 +139,7 @@ creation and read forever**. `new-life-project` carries 8 and six describe her �
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
 **586 reads across 119 places**.
 
-`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:5021`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:5126`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
@@ -328,7 +328,7 @@ priority   = 0
 ```
 
 **Why it is cheap, and the precedent to build it from.** `_render_location_description`
-(`v2.py:10630`) already emits a conditional chain onto the room screen using
+(`v2.py:11495`) already emits a conditional chain onto the room screen using
 `setup.triggerConditionsSatisfied` — the same helper the location passage calls for
 `entry_conditions`. The notice is that path with two changes: **every** match prints rather than
 first-match, and it appends after the description rather than replacing it.
@@ -373,13 +373,15 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    A second ladder with its own rank is `ranks` on a fast job, counted per job (`engine.md` §51); a
    canvas job keeps its rank as a trait.
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
-   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
+   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label"); `sex for pay names the
+   amount` warns on a paying choice that doesn't.
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and
    `leads_to[]`. The systems with no such link are the measured failures — Course of Temptation's 38
    gloryhole passages pay $0, and its shops carry items whose bonus nothing reads (round 9b §3).
 4. **Day 1 at the bottom rung.** 79–87% of the four games' systems are usable on day 1; a release adds
    rungs and people (SKILL.md commitment 4).
-5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
+5. **The measured floors, as directions** (warning gate `a system meets its floors`, read from the card;
+   pool ids must be built): ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
    `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6167`).
@@ -422,7 +424,12 @@ after the prose exists.
 
 ## The check
 
-**One lint ships with this file. No gate, and the reason is in the skill's own history.**
+**`--ship` blocks on the cards:** `every system has a card` — SY8's fields filled; a money card (its
+`cost` or `pay_ladder`) has a `sink` and a `deadline`, any other `feeds[]` something; zero cards is red.
+`every system leads to a person or a sex scene` — SY8 rule 3's `leads_to[]`, checked against the build.
+`lint · systems and connections` counts the cards, the infrastructure and each card's links; no threshold.
+
+**One lint ships with this file. No count gate, and the reason is in the skill's own history.**
 
 `lint · the labels and the systems agree` — a declare-then-check over the ledger's meters, modelled
 on the `a need shuts a door` gate. It prints three lists and **moves no score**:

@@ -5,6 +5,921 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The tools read a `trigger` choice, and a missing `targetType`, as an exit (World and Systems PRD, Phase 7b, L8)
+
+**What.** The engine sends a `trigger` choice to the canvas's home, as it does a `return` one, and never follows its
+`nodeId`; an omitted `targetType` is `trigger` (`v2.py:16153`, `:16185`; the importer's default too). Only `node`
+stays inside the canvas. `scripts/gates.py` (**protected, LO approved**) saw `trigger` as a decision in the readers
+the `return` fix touched, and three readers defaulted a missing `targetType` to `node`. Nine line-for-line swaps, each
+now `(ch.get("targetType") or "trigger") == "node"` (or `!=`):
+- `lint_unwritten_act` (~:2480) — a `trigger` or untyped choice that acts is listed;
+- `_act_nodes` one-hop (~:2893) — the default was `node`;
+- `a place is not a catalogue` (~:8128) — a bare `trigger` is an exit, not a decision;
+- `her climb` (~:12284, ~:12345, ~:12390, ~:12395) — a `trigger` is a leave, never a way on;
+- `a no has content` (~:12444) — a `trigger` leaves the step;
+- `her clothes are backed` ways in (~:13341) — the default was `node`.
+Read and left: ~:1084, ~:2831, ~:6045 (already only `node`). Readers that follow `nodeId` without reading
+`targetType` (~:604/:611, ~:2879, ~:5144/:5168, ~:7629, ~:12269) still walk a stray `nodeId` on an exit; no game
+has one, and changing them is a new behaviour, so they are listed, not changed. `shape.py` reads no choice target.
+`references/engine.md` §13 says so in one line (+15 words).
+
+**Verified.** New `scripts/tests/test_gates_trigger_target.py` (4): the ws6 green fixture with a `trigger` or an
+untyped exit scores every gate exactly as with a location exit, and ships with no red BLOCK row; a `trigger` or
+untyped choice that pays is an unwritten act; one with a stray `nodeId` to a written reply is a walk out. Three of
+the four fail on the old code. `--ship` on HEAD exports of every game but vesper_two: no line moves (no game has a
+`trigger`, `return` or untyped choice). A probe turning every bare location exit into `trigger` moved
+`a place is not a catalogue` on the old code (billable_hours hubs median 2 → 1, members_only and probation
+hub/room counts) and nothing on the new. No line count moved; `cite_check.py --fix` 0 drifted; selfcheck clean;
+pytest passes.
+
+**Words:** +15, running total 146,841 / 149,283.
+
+## 2026-10-02 — Engine: a locked choice is not shown as a way to raise a trait (World and Systems PRD, Phase 7b)
+
+**Why.** The trait-help list ("How to increase Fitness", opened from a trait requirement) skips a tier
+whose conditions don't hold and shows each activity with the best bonus among the tiers left. The tier
+reader kept a `node` tier's choice conditions but wrote none for a `trigger` or `return` tier, so a locked
+choice of either kind was listed as a way to raise the trait while she couldn't pick it. On a menu with a
+locked "+5" and an open "+1" the list said "+5"; an activity whose only raising choice was locked was
+listed anyway.
+
+**What changed.**
+- `v2.py` (`_extract_tiered_effects_from_canvas`): a `trigger` or `return` tier carries its choice's
+  `conditions`, the same way a `node` tier does. One line for one line, so no citation moved.
+- `references/engine.md` (back to where she was): one clause, a locked tier is left out.
+
+**Verified.** New `apps/game_generation/tests/test_tiers_locked_choice.py` on the new fixture
+`engine_ws_tiers_locked_2026_10_02.toml` (4 tests: a locked `trigger` and a locked `return` tier keep their
+conditions in `help_data`; in the browser, at fitness 10 the list shows only Row +1, and at fitness 20 it
+shows Spar +4, Swim +3 and Row +5). All 4 fail on the old generator (it listed Spar +4, Swim +3, Row +5 at
+fitness 10). `test_tiers_return_choice.py` still passes. Rebuilds of members_only, billable_hours,
+orientation, probation, the_balance and vesper from `git archive` exports all import, byte-identical to the
+old generator's: none of the six has a locked `trigger` or `return` choice (every locked tier today is a
+`node` tier). `cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean; skill tests 672 passed.
+
+**Words:** +10, running total 146,838 / 149,283.
+
+---
+## 2026-10-02 — Stale `v2.py` cites re-pointed (World and Systems PRD, Phase 7b, L7)
+
+**What.** Numbers only; no sentence changed.
+- The two named: `references/the-economy.md:559` (**protected, LO approved**, numbers only) `v2.py:5820` → `:6024`
+  (`getCostBlockedMessage`'s "Requires … (you have …)" line); `references/the-clock.md:200` `v2.py:13530` → `:15649`
+  (a choice's `<<script>>advanceTime(…)<</script>>`, emitted last inside its link, nothing on the label). The same
+  claim at `the-clock.md:350` gets the same fix, and its travel-tag cite `v2.py:5473` → `:6068` (`getLocationCostTag`).
+- A sweep of every `v2.py:` cite in SKILL.md and references (four read-only passes, each candidate then read by hand
+  at the new line) found 81 more whose line no longer says what the sentence claims, mostly from insertions since
+  the cite was written. Re-pointed, outside protected sections only: agents.md 177-178; state.md 223; register.md 315,
+  492, 519, 556, 1098; the-phone.md 103, 266, 281; the-clock.md 45, 49, 54-56, 67, 252, 261-265, 338, 353; engine.md
+  1081 (four day-name lookups, a uniform +86), 1217 (`rs.is_due = true`), 1350 (the first `is_true` test inside
+  `validate_flag_chains`); the-first-hour.md 229, 260, 471, 598, 607-609, 656-657, 662, 666, 716, 762, 830, 849-850,
+  1064, 1081, 1135; the-surfaces.md 164, 270, 318, 330, 334, 336, 873, 875, 1060; the-systems.md 142, 331;
+  the-returning-player.md 33, 35, 72, 121, 159.
+
+**Found, not changed.** In protected sections (each needs its own item): the-economy.md 604 (`v2.py:1201` → `:1223`), 640
+(`:17542` → `:19204`) and 725 (`:5058`, `:5202`); the-arc.md 389-395 (A8) and 633-640;
+the-meters.md 368, 387, 388 (W5b), 788, 807, 845-859 (M3, M5). Not sure of the target (more than one line fits):
+SKILL.md:571; agents.md:173; engine.md:379, 1265; the-phone.md:438; the-first-hour.md 237,
+260 (`:10033`), 364, 669, 670, 708; the-meters.md 193, 232, 733; the-release.md 424-425; the-surfaces.md 164
+(`:11847`), 272, 281, 693, 838; the-systems.md:341 (its range runs backwards); the-returning-player.md:151.
+engine.md:2599-2601 point at where data is shipped, not where it prints; arguably fine.
+
+**Verified.** Each new line read in `v2.py`; `cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean;
+skill tests pass.
+
+**Words:** 0, running total 146,826 / 149,283.
+
+## 2026-10-02 — The sidebar does read trait labels (World and Systems PRD, Phase 7b, L6)
+
+**What.** `references/the-economy.md:564-566` (**protected, LO approved**, that sentence only): it said a
+`[[traits.labels]]` label never reaches the sidebar because `trait_bar` reads `_item.label || trait_key`
+(`v2.py:18677`). It now says the label does reach it: `trait_bar` reads `_item.label ||
+setup.traitLabel(_tbKey)` (`v2.py:19513`), and `setup.traitLabel` reads `setup.trait_labels` (`v2.py:4701`).
+
+**Why.** The engine changed (EN5); the sentence taught the old behaviour and contradicted `engine.md` §33.3.
+
+**Verified.** Both lines read in `v2.py`; `<<print _traitLabel>>` is the printed sidebar label (`v2.py:19539`);
+`cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean; skill tests pass.
+
+**Words:** −2, running total 146,826 / 149,283.
+
+## 2026-10-02 — Merge pointer fix: four cites engine batch 5 moved (World and Systems PRD, Phase 7b)
+
+**What.** `references/the-economy.md:560-561` (numbers only; the file is protected and the sentences
+are unchanged): `v2.py:19529` → `:19539` (the trait-bar "value / max" print), `v2.py:19266` → `:19276`
+(RentDay_Short). `references/the-clock.md:198`: `v2.py:22750` / `:22784` → `:22760` / `:22794` (the two
+`getLocationCostTag` cost-tag lines).
+
+**Why.** The tools session (L5) pointed these at the engine as it stood at 5d5af24; engine batch 5
+(E13, E14) added 10 lines above them, and the merge (735eff3) carried the old numbers.
+
+**Verified.** Each old line's text read at 5d5af24 and found once at the new number; `cite_check.py`
+0 in SKILL.md + references; `--selfcheck` clean; skill tests 672 passed.
+
+**Words:** 0, running total 146,828 / 149,283.
+
+## 2026-10-02 — Four stale cites re-pointed (World and Systems PRD, Phase 7b, L5)
+
+**What.** Numbers only:
+- `references/agents.md:139` — `Beat.explicit` `gates.py:409` → `gates.py:444` (the `def explicit` under
+  `@property` on `Beat`).
+- `references/the-clock.md:198` — the two uses of `getLocationCostTag` on the navigation card, `v2.py:20358` and
+  `:20375` (CSS: `.stage-hint-met`, `opacity`) → `v2.py:22750` and `:22784` (the two `cost_tag = …
+  setup.getLocationCostTag(…)` lines).
+- `references/the-economy.md:560-561` (**protected, LO approved**, numbers only) — the sentence claims the engine
+  prints "money: 12 / 100" in the sidebar and "$90" when rent day is short. `v2.py:18693` (a save-load comment) →
+  `v2.py:19529` (`<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>`); `v2.py:18452`
+  (`if (travelSlug) {`) → `v2.py:19266` (RentDay_Short: "You need: <<print _cur>>…", `_cur` the rent currency
+  symbol, `$` by default).
+
+**Found, not changed (outside this item):** `the-clock.md:199` `v2.py:13530` (the bare `advanceTime` emission is
+now at `v2.py:16336`); `the-economy.md:559` `v2.py:5820` (the "Requires … (you have …)" line is now `v2.py:6024`);
+and `the-economy.md:563-565` says `trait_bar` reads `_item.label || trait_key` (`v2.py:18667`) and never consults the
+trait labels — the line is now `v2.py:19503`, `_item.label || setup.traitLabel(_tbKey)`, and `setup.traitLabel`
+(`v2.py:4700-4705`) does read `setup.trait_labels`, so the claim itself looks stale. Protected file: for LO.
+
+**Verified.** Each target line read by hand; `cite_check.py --fix` 0 drifted and left all four alone; selfcheck clean
+(0 orphans); pytest 672 passed.
+
+**Words:** 0, running total 146,783 / 149,283.
+
+---
+
+## 2026-10-02 — The tools read `targetType = "return"` as an exit (World and Systems PRD, Phase 7b, L4)
+
+**What.** The engine resolves a `return` choice on the click (the stored room, else the canvas's home) and never
+follows its `nodeId` (`v2.py:16183`, `:15395`). `scripts/gates.py` saw only `location` as an exit, so a `return`
+was counted as a decision, and one carrying a stray `nodeId` was walked as a link into the scene. Seven
+line-for-line swaps, `!= "location"` → `not in ("location", "return")` (or the `==` / `!=` mirror):
+- `lint_unwritten_act` (~:2480) — a `return` that acts is listed, like a location exit that acts;
+- `a place is not a catalogue` (~:8128) — a bare `return` is an exit, not a decision on the menu count;
+- `her climb` (~:12284 inner gates, ~:12345 the new-save walk, ~:12390 and ~:12395 the stop exit) — a `return` is a
+  leave, never a way on;
+- `a no has content` (~:12444) — a `return` leaves the step, like a location exit.
+Read and left as they are (they follow only `node` targets, so `return` already falls out): ~:1084, ~:2831, ~:2893,
+~:6045, ~:13341; the opening walk (~:5421) follows `nodeId` / `locationId` and so never counts a `return` as the
+handover (none of our openings uses one). `shape.py` reads no choice target. `references/engine.md` §13 says so in
+one line (+8 words).
+
+**Verified.** New `scripts/tests/test_gates_return_target.py` (4): the ws6 green fixture with a `return` exit scores
+every gate (pass, n/a and headline) exactly as with a location exit, and still ships with no red BLOCK row; a
+`return` that pays is an unwritten act; a bare `return` (and one with a stray `nodeId` to a written reply) is a walk
+out on a `consume_on = "exit"` step. Three of the four fail on the old code. A probe turning every bare location
+exit into `return` on HEAD exports of billable_hours (16), members_only (18) and probation (53) moved one gate before
+the fix (`a place is not a catalogue` headline: hubs median 2 → 1) and none after. `--ship` on HEAD exports of every
+game but vesper_two: no change against L1 (no game uses `return` yet). No line count moved; `cite_check.py --fix` 0
+drifted; selfcheck clean (0 orphans); pytest 672 passed.
+
+**Words:** +8, running total 146,783 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: an activity's tiers count `return` choices (World and Systems PRD, Phase 7b)
+
+**Why.** An activity's tiers are the choices on its menu node (the last node whose choices leave it):
+each tier lists the traits it raises, and the trait-help list ("where can I raise X?") shows an activity
+under a trait only when a tier it can reach raises it. The tier reader counted `trigger` and `node`
+choices only. A `return` choice leaves the canvas just as a `trigger` one does, but on a menu mixed with
+a `node` choice its effects were dropped (an activity whose only raising choice was a `return` one was
+not listed at all), and a menu of `return` choices alone was not read as tiers.
+
+**What changed.**
+- `v2.py` (`_extract_tiered_effects_from_canvas`): a `return` choice counts exactly where a `trigger` one
+  does. It can make a node the menu, and it is one tier with its own effects and no conditions (a
+  `trigger` tier carries none either; a `node` tier carries its choice's conditions). Opt-in by use: no
+  game has a `return` choice yet.
+- `references/engine.md` (back to where she was): one sentence.
+- Citations re-pointed through the `git diff` line map: 237 moved `v2.py` cites, each target line checked
+  identical. The three stale cites the tools session is fixing (`the-economy.md:560-561`,
+  `the-clock.md:198`) were left alone.
+
+**Verified.** New `apps/game_generation/tests/test_tiers_return_choice.py` on the new fixture
+`engine_ws_tiers_return_2026_10_02.toml` (3 tests: a `return` choice is a tier beside a `node` choice and
+lists the activity under its trait; `return` choices alone make a tiered menu; a `trigger` choice is still
+a tier). Two of them fail on the old generator. `test_return_choice.py` still passes. Rebuilds of
+members_only, billable_hours, orientation, probation, the_balance and vesper from `git archive` exports all
+import with no passage change.
+
+**Words:** +16, running total 146,811 / 149,283.
+
+---
+
+## 2026-10-02 — Step reachability reads a value worked out from her stats (World and Systems PRD, Phase 7b, L3)
+
+**What.** `scripts/gates.py` `_ladder_earnable`, two line-for-line swaps (~:4652 a scene's effect, ~:4687
+`[engine.daily_tick]`): an effect value `{type = "trait", …}` is read through `_value_bounds(v, start_traits)[1]`,
+the helper the E5 readers use (its high end: the declared `max`, or unbounded when it grows with the stat).
+`{type = "random", …}` reads exactly as before (its high end is still `max`, falling back to `min`). Why: a
+stat-based pay was skipped, so a step whose gate it could meet read as unreachable.
+
+**Verified.** New `scripts/tests/test_gates_ladder_trait_value.py` (4): a scene paying charm × 10 (max 60) reaches
+money ≥ 40; capped at 30 it is still short ("moves it only to 30"); a day-roll stat value is a farm; random reads as
+before. Three of the four fail on the old code. No line count moved; `cite_check.py --fix` 0 drifted; selfcheck
+clean (0 orphans); pytest 668 passed.
+
+**Words:** 0, running total 146,775 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a room she can't afford to enter records no visit (GLOBAL fix for games with entry costs, World and Systems PRD, Phase 7b)
+
+**Why.** A location's entry cost (`costs` on a location, `crossing_costs` on an area) was checked in the
+`:passagestart` handler, which redirected to `TravelBlock` 10 ms later. By then SugarCube had made the
+refused room's history moment and its body still rendered, so `current_location` and `visited_locations`
+named a room she never paid for. Since only a move to a different room is charged, her next try to enter
+it was free, and "Go back" from `TravelBlock` charged the room she came from.
+
+**What changed.**
+- `v2.py`: the affordability check moves into `Config.navigation.override`, the way the dress-code check
+  already works, chained onto that one in a game that has both. A refused room never renders: no state
+  write, no history moment, nothing charged. The charge itself stays in `:passagestart`. Two small helpers
+  (`setup.travelFrom`, `setup.travelMoveSlug`) hold the "a real move" test both halves share.
+- **Global for every game with entry costs:** members_only, orientation, probation and the_balance. Their
+  Story JavaScript changes; no passage body changes in any game; billable_hours and vesper are unchanged.
+  Play changes only where a cost can refuse, which needs a trait cost (`time` never refuses): orientation's
+  Quad (`money = 2`) today. The other three charge time only.
+- `references/engine.md` (travel friction): one sentence, the refused room never renders and her next try
+  is charged in full.
+- Citations re-pointed through the `git diff` line map: 54 moved `v2.py` cites, each target line checked
+  identical. Three stale cites the tools session is fixing were left alone: `the-economy.md:560-561` and
+  `the-clock.md:198` (`the-economy.md:561`'s old target, a line of the travel block, no longer exists).
+
+**Verified.** New `apps/game_generation/tests/test_unaffordable_room.py` (3 tests: an unaffordable entry
+leaves `current_location`, `visited_locations`, the history, the money and the clock alone; a second try is
+refused again, and once she can pay it is charged in full; an affordable entry is charged once and a
+re-entry is free). Two of them fail on the old generator. `test_refused_room.py` (the dress code, on the
+same fixture, so through the chained override) and `test_crossing_costs.py` still pass. Rebuilds of
+members_only, billable_hours, orientation, probation, the_balance and vesper from `git archive` exports
+all import; passage diff as above.
+
+**Words:** +29, running total 146,795 / 149,283.
+## 2026-10-02 — Two gates.py comments made true (World and Systems PRD, Phase 7b, L2)
+
+**What.** `scripts/gates.py`, comments only, line for line (no line count moved):
+- G13b (a goal says what it wants, ~:7762): the importer requires `label` on trait/counter, weekday,
+  hours_since_flag and days_since_flag goals (`template_import.py:7447-7527`, read: the four
+  `require_label and not item.label` branches); only flag goals fall through. It said trait and counter only.
+- G25 (live ops, ~:8288): the importer now rejects a dead op on every canvas effect
+  (`template_import.py:6353-6406`, `_check_ops` over `template.canvases`) and on cheat-page grants (`:4763`),
+  but never walks the `[engine]` block (the daily_tick parse at `:3466-3530` takes `op` unchecked), so G25 still
+  earns its place there. It said cheat grants only.
+
+**Verified.** Read each importer line before writing. `wc -l gates.py` 14,616 before and after; `cite_check.py
+--fix` 0 drifted; selfcheck clean (0 orphans); pytest 664 passed.
+
+**Words:** 0, running total 146,775 / 149,283.
+
+---
+
+## 2026-10-02 — World size: the hub is the house, not the street (World and Systems PRD, Phase 7b, L1)
+
+**What.** `scripts/gates.py`: new `_world_hub(board, game)` (above `main()`) — the hub is the room her room
+(`board.map.home_base`) reaches on its `entry_from` chain just below `board.map.exterior`; when the exterior is
+not on the chain (the house is its own root), the chain's root. No home base, or one no location declares: the
+first `board.map.roots[]`, as before. `_world_size` / `_world_size_row` take the game and use it; both callers
+(`ship_rows`, `main()`) pass it. Why: the hub was `board.map.roots[0]`, which on billable_hours is the street,
+so the house's own scenes were counted as hook share only when a hook person was in them.
+`references/the-want.md` "Her life — the threads" names it (+9 words).
+
+**Verified.** `scripts/tests/test_gates_world_size.py` +4: a two-root fixture shaped like billable_hours (street →
+Home → Upstairs → her room, plus downtown) gives `house`; a single-root one gives the flat, and the house-is-the-root
+case gives the root; no home base gives the first root; `_world_size` names the hub. Before/after `--ship` on HEAD
+exports of every game but vesper_two: only the **world size** REPORT row changed —
+billable_hours `hook share 39% … hub linden_street` → `35% … hub house`; members_only `61% … hub None` → `63% …
+hub cliff_path`; orientation `0% … None` → `2% … the_hall`; probation `0% … None` → `6% … the_stairwell`; the_balance
+`None` → `the_hall` (still 0%); media_lab and vesper unchanged. No BLOCK row or exit code moved. `the-release.md:100`
+→ `gates.py:13895` (read by hand: "Lints sit BELOW the tally"); `cite_check.py --fix` 0 drifted; selfcheck clean
+(0 orphans); pytest 664 passed.
+
+**Words:** +9, running total 146,775 / 149,283 (HEAD measured 146,766, 35 above the last logged total, 146,731).
+
+---
+
+## 2026-10-02 — Systems and connections: a `--ship` REPORT row and a lint (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py` (above `main()`): `_systems_and_connections` counts the system cards
+(`board.systems[]`, old meter-shaped entries excluded), the infrastructure apart (`board.infrastructure[]`,
+with its kinds), the meters, and per card its `feeds[]`, `reads[]` and `leads_to[]` counts. Wiring: one line in
+`ship_rows` appends the REPORT row **systems and connections** (ok = None, "a count, never a score");
+`main()` prints `lint · systems and connections` after `world size`. No threshold (WS-D9); n/a and
+grandfathering don't apply to a REPORT row.
+- Docs: SKILL.md lints paragraph and REPORT list; `the-systems.md` "The check" (one line).
+
+**Verified.** New `scripts/tests/test_gates_systems_report.py` (3). Before/after, HEAD exports — before no
+row; after billable_hours 2 systems · 4 infrastructure (clock, view) · 6 meters (`intern_job` feeds 3 · reads
+3 · leads to 3; `friday_money` 1 · 1 · 1); members_only 0 · 0 · 8 meters; the_balance 0 · 0 · 23;
+probation 0 · 0 · 11; orientation, vesper, media_lab 0 · 0 · 0. Only the new REPORT row changed.
+`the-release.md:100` → `gates.py:13878` (read by hand); every other cite unchanged; `cite_check.py --fix` 0
+drifted; selfcheck clean (71 gates, 59 lints); pytest 660 passed.
+
+**Words:** +32, running total 146,731 / 149,283.
+
+---
+
+## 2026-10-02 — World size: a `--ship` REPORT row and `lint · world size` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py` (above `main()`): `_world_size` measures, with no threshold (WS-D9):
+- **hook people** = `want.cast` ids that are no `want.threads[].person`; **hub** = the first
+  `board.map.roots[]`; **hook share** = words in canvases holding a hook person (trigger `npc` /
+  `requires_npc`, or a speaker) or placed at the hub, over all words (beat words, as the floors count);
+- **threads** declared / built (a canvas holds the thread's person);
+- **speaking NPCs** (distinct dialog `npcId`s, the `_dialog_blocks` speaker walk);
+- **links** = thread canvases (not hook canvases) that set or read a flag a hook canvas reads;
+- **zones** = distinct `zone:<name>` labels on `board.locations[]`.
+Wiring: one line in `ship_rows` appends the REPORT row **world size** (`_world_size_row`, ok = None, "a
+size, never a score"); `main()` prints `lint · world size` before "toggles declared".
+- **n/a policy / grandfathering:** a REPORT row is never judged, so neither applies.
+- Docs: SKILL.md lints paragraph and the REPORT list; `the-want.md` "Her life — the threads" names it.
+
+**Verified.** New `scripts/tests/test_gates_world_size.py` (3): a fixture world (one hook person, one thread
+built of two, one link, two zones); no ledger still reports; on `ship_rows` it is a REPORT row and no BLOCK
+row. Before/after, HEAD exports — before no row; after:
+billable_hours hook share 39% of 6,733 words (3 hook people, hub `linden_street`), threads 4/4 built,
+6 speaking NPCs, 8 links, 2 zones; members_only 61% (4 hook people, no `board.map.roots`), 0 threads, 4 speakers;
+the_balance 9 speakers, 3 zones; orientation 5, probation 4, vesper 18, media_lab 0 speakers — none of those
+declares `want.cast` / threads, so their share is 0%. Only the new REPORT row changed; no BLOCK row or exit
+code. `the-release.md:100` → `gates.py:13855` (read by hand); every other cite unchanged; `cite_check.py
+--fix` 0 drifted; selfcheck clean (71 gates, 58 lints); pytest 657 passed.
+
+**Words:** +37, running total 146,699 / 149,283.
+
+---
+
+## 2026-10-02 — The system floors and the price of a paid act: two warnings (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`, two scored gates (above `main()`, in `_phase4_gates`), WARNs — never in
+`SHIP_BLOCK_GATES`, so under `--ship` a red shows in the `every other gate` REPORT row:
+- **a system meets its floors** (`_system_floors`): from each card, a `daily = true` card's `pool[]` holds
+  ≥20 canvases **that exist in the build** (unbuilt ids are not counted); a card's `lewd_ladder[]` has ≥4
+  rungs and each rung ≥2 `acts[]`. The rung floors apply to every card with a lewd ladder, the pool floor to
+  daily cards. n/a with no card.
+- **sex for pay names the amount** (`_paid_choice_names_amount`): a choice on an explicit canvas (not dev)
+  whose own `effects` add to the currency must name an amount — a figure, or one in words ("a hundred",
+  "ten bucks"). Money prices on `costs` stay with gate 21. n/a when no such choice exists.
+- **Grandfathering:** none — warnings never block.
+- Docs: two SKILL.md gate-table rows; `the-systems.md` SY8 rules 2 and 5 name them.
+
+**Why.** WS-D9: the measured minimums and "price shown before she agrees" are WARNs (directions from
+four games, round 9b).
+
+**Verified.** New `scripts/tests/test_gates_system_floors.py` (7): a full card passes; the pool counts only
+built canvases; few and thin rungs; a non-daily card skips the pool, no card n/a; a paid choice with an
+amount in figures or words passes; with none warns; no paid choice n/a; neither is a ship block. The first
+run counted only figures and flagged members_only's `first_visit/door` "A hundred, like the note says." /
+"Two hundred, or I walk." — amounts in words, so words were added before commit. Before/after, HEAD
+exports: billable_hours floors FAIL (`intern_job` daily pool 2 built of 20, two 1-act rungs; `friday_money` 3
+rungs, all 1-act), pay PASS 10/10 — its `every other gate` row 46/47 → 47/49; members_only pay PASS 5/5
+(39/41 → 40/42); the_balance pay **parked, not judged** (FAIL 0/3 with its parked content; 28/41 → 28/42);
+every other cell n/a. No BLOCK row or exit code changed. `the-release.md:100` → `gates.py:13803` (read by
+hand); every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck clean (71 gates); pytest 654
+passed.
+
+**Words:** +80, running total 146,662 / 149,283.
+
+---
+
+## 2026-10-02 — A chat is short and timed: a warning (World and Systems PRD, Phase 6B, with the calls half)
+
+**What.** `scripts/gates.py`: new scored gate **a chat is short and timed** (`_chats_short_and_timed`,
+above `main()`, in `_phase4_gates`). A WARN: never in `SHIP_BLOCK_GATES`, so under `--ship` a red shows in
+the `every other gate` REPORT row. Every message bubble is 3–7 words; one sender's bubbles in a row in one
+round are at most 3; every conversation trigger carries a delay (`days_since_flag` or `hours_since_flag`)
+and an hour window (`time_of_day` or `weekday`) — all four are built. A call is checked for the timing only.
+- **n/a policy:** no conversation and no call. **Grandfathering:** none — a warning never blocks.
+- Docs: SKILL.md gate-table row; `the-phone.md` (the planned label in P3 made live; "What is not gated
+  here" becomes "What is gated here", both gates now named live).
+
+**Why.** WS-D9: chat length and timing are measured directions from four games, so a WARN.
+
+**Verified.** New `scripts/tests/test_gates_chat_short_timed.py` (8): passes; a long and a one-word bubble;
+four bubbles in a run, and a reply resets the run; an untimed trigger; `hours_since_flag` + `weekday`
+count; a call's timing; no phone n/a; not a ship block. Before/after on HEAD exports: the_balance FAIL (7: both
+triggers untimed, bubbles of 28, 14, 20 and 10 words — §9 G2's "cut to 3–7 words and timed"), so its
+`every other gate` REPORT row reads 28/41 (was 28/40); every other game n/a, unchanged. No BLOCK row or exit
+code changed. `the-release.md:100` → `gates.py:13741` (read by hand); every other cite unchanged;
+`cite_check.py --fix` 0 drifted; selfcheck clean (69 gates); pytest 647 passed.
+
+**Words:** +30, running total 146,582 / 149,283.
+
+---
+
+## 2026-10-02 — `--ship` blocks on a chat or call nothing caused: `every chat is caused by a scene` (World and Systems PRD, Phase 6B, with the calls half)
+
+**What.** `scripts/gates.py`: new scored gate **every chat is caused by a scene** (`_chats_are_caused`,
+above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row. Every `[[phone.conversations]]` and
+every `[[phone.calls]]` trigger must hold a flag item (`is_true`) whose flag a canvas sets, or a reply sets
+in a conversation that is itself caused (walked to a fixed point, so a chain in any order passes). It walks
+setters by source rather than `_flags_ever_set`: dev canvases (`_is_dev`), the cheat page and
+`[engine.daily_tick]` are not scenes, and a call's `on_decline` / `on_missed` effects cause nothing.
+- **n/a policy:** no conversation and no call is n/a, and n/a passes (`SHIP_NA_PASSES`).
+- **Grandfathering:** `SHIP_SINCE["chat_caused"]` = 2026-10-02; the legacy form passes. One row covers
+  chats and calls, so the calls half has the same date and legacy branch.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list; `the-phone.md` (the planned label
+  at the chain paragraph made live; "What is not gated here" says this gate is built).
+
+**Verified.** New `scripts/tests/test_gates_chats_caused.py` (8): canvas-caused passes; a chain through a
+caused reply passes in either order; an uncaused chat and its chain are red; daily-tick and dev-canvas flags
+don't count; no flag is red; a call caused and uncaused; no phone n/a and legacy passes; on `ship_rows`
+the_balance warns, billable_hours blocks, shipped-since blocks, no phone n/a. Before/after `--ship`, HEAD
+exports: before no row; after the_balance PASS (2/2: `cara_hello` on `opening_done`, `cara_job` on
+`has_job`); every other game n/a (no phone). No other row moved; no exit code changed.
+`the-release.md:100` → `gates.py:13695` (read by hand); every other cite unchanged; `cite_check.py --fix` 0
+drifted; selfcheck clean (68 gates); pytest 639 passed.
+
+**Words:** +62, running total 146,552 / 149,283.
+
+---
+
+## 2026-10-02 — The truth rule's rule 5 promoted to a `--ship` BLOCK: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 2 of 2)
+
+**What.** `scripts/gates.py`: the lint from the commit before becomes the scored gate **her clothes are
+backed** (`_her_clothes_are_backed`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row.
+The `lint ·` print is removed (the gate's detail lists the lines). The two false-positive kinds the lint
+run found are fixed:
+- **a catalog name with "of"** ("A dress of your own"): the garment is the last word before "of", so "own"
+  is no longer a garment word;
+- **undressing in an explicit act the strip list misses** ("yanks your panties down", "takes your bra off",
+  "pops your blouse open", "slide them down"): on an explicit canvas, `_UNDRESS` — a pull/yank/slide/take/
+  pop… verb, then `your` / `her` / `them` / `it`, then `off` / `down` / `open` / `aside` — exempts the line
+  like a strip word. "You shove his hands off your blouse" stays listed.
+- **n/a policy:** clothing off or no catalog is n/a, and n/a passes (`SHIP_NA_PASSES`).
+- **Grandfathering:** `SHIP_SINCE["clothes_backed"]` = 2026-10-02; the legacy form passes.
+- Docs: SKILL.md gate-table row, BLOCK list and lints paragraph (rule 5 now names the gate);
+  `the-release.md`'s list; `register.md` rule 5 (what counts as a garment and as undressing).
+
+**Verified.** `test_gates_clothes_backed.py` +5 (17): the "of" name; three undressing phrases exempt;
+"shove his hands off" still listed; the gate n/a / red / legacy; on `ship_rows` members_only warns,
+billable_hours blocks, shipped-since blocks, clothing off n/a. Before/after `--ship`, HEAD exports: before no
+row; after **billable_hours FAIL 18** (19 − the one false positive; `hub_martin_breakfast/table` "your tight
+blouse" among them, as expected), **members_only WARN 11** (15 − the 4 false positives), orientation and
+vesper PASS (0 lines), media_lab, probation, the_balance n/a (clothing off). No other row moved; no exit code
+changed. `the-release.md:100` → `gates.py:13638` (read by hand); every other cite unchanged; `cite_check.py
+--fix` 0 drifted; selfcheck clean (67 gates, 57 lints); pytest 631 passed.
+
+**Words:** +63, running total 146,490 / 149,283.
+
+---
+
+## 2026-10-02 — The truth rule's rule 5 as a printed lint: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 1 of 2)
+
+**What.** A printed lint first, for one commit, so its false positives can be read before it blocks.
+- `scripts/readable.py`: `unearned_events` gains a `needs_clothing` mode — `find(text, block)` names the
+  lines, `backed(canvas, node, conditions, garment, text, phrase)` judges them; the canvas / node /
+  `_scoped_blocks` walk and the row shape are shared with check C. Check C itself is unchanged.
+- `scripts/gates.py` (above `main()`): `_her_garments` (garment words = the last word of each
+  `[[clothing]]` name, never a generic list; "hers" = `your <garment>` in second person, `<name>'s` or
+  `her` in a sentence opening on her name in third; up to two modifier words, and modifiers that are in a
+  catalog name narrow the item set), `_cond_backs` (a condition backs the garment when it IMPLIES one of
+  those items is worn: `clothing_item … equipped`; `clothing_slot … equipped` / `worn_type eq` when every
+  catalog item it allows is one of them; `worn_corruption` / `worn_beauty` when an empty slot fails it and
+  every item meeting it is one of them; `worn_exposure` never), `_clothes_unbacked` (the five backers:
+  trigger, enclosing group, the location's `entry_conditions`, a choice into the canvas or the node, a
+  `wardrobeEffects` equip in an earlier node; an explicit canvas with a strip-rung word besides the garment
+  — "strip club" removed first — is exempt). Printed as `lint · her clothes are backed` after "a past
+  event the player was never given". Silent with clothing off or no catalog.
+- Docs: SKILL.md lints paragraph (rule 5 "is not linted yet" becomes the lint's name); `register.md` rule
+  5 names the lint (one sentence, the truth rule's own item, WS-D8/WS-D9).
+
+**The run (HEAD exports), and its false positives.**
+- **billable_hours: 19 lines.** `hub_martin_breakfast/table` "your tight blouse" is listed, as expected:
+  its group is `worn_corruption gte 2`, which the short skirt meets with the white blouse. 1 false
+  positive: `walkin_firm/act` "He pops your blouse open" — undressing inside an explicit act, which the
+  rule exempts, missed because "pops … open" is not a strip-rung word. The rest are true: "your blouse"
+  at breakfast and on Martin's Fridays, "your skirt" on the bus and in the study, "your panties" in the
+  acts, "your heels" at bedtime, none behind a check that she wears them.
+- **members_only: 15 lines.** 4 false positives: `paid_visit/hands` "your own" (the catalog name "A dress
+  of your own" made "own" a garment word), and three undressings inside explicit acts the strip list
+  misses: `paid_visit/fucked` "yanks your panties down", `kessler_04_page_four/deal` "Your panties." / "you
+  slide them down", `noor_01_danas_locker/top` "takes your bra off". `kessler_02_page_two` is gated on the
+  flag `has_red_dress`, a flag rather than a clothing check, so it stays listed.
+- orientation 0, vesper 0 (third person: no line pairs "Wren" with a garment); media_lab, probation,
+  the_balance silent (clothing off). **5 false positives of 34** (15%); commit 2 fixes both kinds.
+
+**Verified.** New `scripts/tests/test_gates_clothes_backed.py` (12): unbacked listed; each backer
+(trigger, group, entry_conditions, choice into the canvas, an earlier equip — and a later one does not);
+the corruption case; explicit + strip word exempt; "strip club" neither exempts nor is a garment; "her
+skirt" / "his blouse" in second person are not hers; third person; clothing off. `the-release.md:100` →
+`gates.py:13614` (read by hand); every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck
+clean (66 gates, 58 lints); pytest 626 passed.
+
+**Words:** +7, running total 146,427 / 149,283.
+
+---
+
+## 2026-10-02 — `--ship` blocks on a clothing state read fewer than three times: `every clothing state is read three times` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every clothing state is read three times**
+(`_wardrobe_is_read`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row. Each state and
+key item in `board.wardrobe` (the widened shape: `worn_exposure` / `worn_corruption` / `worn_beauty` /
+`worn_type` / `clothing_slot`) needs 3 readers.
+- **Readers** (the PRD's list): condition items on a canvas trigger, in any `group` (a scene's or an NPC's
+  lines), in a location's `entry_conditions` or a dress code's `conditions`; and a dress code's
+  `slots_required`, which reads `clothing_slot <slot> unequipped`. Choice conditions, quest cards and the
+  portrait override do not count. Undeclared catalog items are not counted.
+- **Matching:** the same predicate (and slot), and the values the reader's operator allows overlap the
+  state's (numbers over -1..20; `worn_type` eq/neq by value; `clothing_slot` the same operator). A key item
+  is read by a `clothing_item` naming it, any operator.
+- Red: a state or key item with 0–2 readers; a state whose condition is not a clothing predicate; a key
+  item that is no `[[clothing]]` id; clothing on with no `board.wardrobe` states or key items.
+- **n/a policy:** clothing off (`[settings] clothing_enabled` false or absent) is n/a, and n/a passes: the
+  one-line swap in `_block_gate_verdict` now reads `SHIP_NA_PASSES` (defined above `main()`, holding the
+  obligation row and this one).
+- **Grandfathering:** `SHIP_SINCE["wardrobe_reads"]` = 2026-10-02; the legacy form passes. G41 `the
+  wardrobe is read` is unchanged.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list; `the-meters.md` W7 (the matching
+  rule, and the planned label at the "floor" line made live); `the-arc.md`'s planned label;
+  `state.md`'s `board.wardrobe` row; `templates/cards/wardrobe.md` (label, and its "never gates" heading).
+
+**Why.** WS-D8 / WS-D9: every clothing state and key item is read in ≥3 places, a BLOCK.
+
+**Verified.** New `scripts/tests/test_gates_wardrobe_reads.py` (12): three overlapping readers pass; a
+non-overlapping one doesn't count; a dress code reads its slots; worn_type eq/neq; key items count
+`clothing_item` and not choices; a key item outside the catalog; a non-clothing state; clothing off n/a;
+nothing declared red; legacy passes; on `ship_rows` clothing off is n/a, billable_hours blocks, a
+grandfathered game warns and blocks once shipped since. Before/after `--ship`, HEAD exports: before no row;
+after **billable_hours FAIL** 0/5 (in_sleepwear 1, no_top 1 — the firm's dress code, sleep_shirt 1,
+blouse_tight 0, skirt_short 0; the rule working, WS-D13); members_only, orientation WARN (clothing on, no
+`board.wardrobe`); vesper FAIL (same, not grandfathered); media_lab, probation, the_balance n/a (clothing
+off). No other row moved; no exit code changed. `the-release.md:100` → `gates.py:13484` (read by hand);
+every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck clean (66 gates); pytest 614 passed.
+
+**Words:** +85, running total 146,420 / 149,283.
+
+---
+
+## 2026-10-02 — `--ship` blocks on a system that leads nowhere: `every system leads to a person or a sex scene` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every system leads to a person or a sex scene**
+(`_every_system_leads_somewhere`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row.
+Each card's `leads_to[]` must name at least one person who is in `board.characters` and in the build's
+`[[npcs]]`, or a built canvas with an explicit beat (3+ explicit words in one beat). The red line says why
+each entry did not count (not in the cast, not in the build, a canvas with no explicit beat).
+- **n/a policy:** none. Zero cards is red, as for `every system has a card`.
+- **Grandfathering:** `SHIP_SINCE["system_leads"]` = 2026-10-02; the legacy form passes.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list of rows since 2026-10-02;
+  `the-systems.md` "The check"; `the-surfaces.md` R2c names it.
+
+**Why.** WS-D9: every system leads to ≥1 person or sex scene is a BLOCK (SY8 rule 3).
+
+**Verified.** `test_gates_system_cards.py` +7: a built cast member passes; an explicit canvas passes; a dry
+canvas and an unknown id fail with reasons; a person missing from `board.characters` fails; empty fails;
+zero systems red; on `ship_rows`: grandfathered warns, billable_hours blocks, shipped-since blocks, green
+passes. Before/after `--ship` on HEAD exports: before no row; after billable_hours PASS (2/2 —
+`intern_job` → Callahan, Ethan; `friday_money` → Martin); members_only, orientation, probation,
+the_balance WARN; media_lab and vesper FAIL (no cards). No other row moved; no exit code changed.
+`cite_check.py --fix` moved `agents.md:139`'s `Beat.explicit` cite onto this gate's docstring, which named
+`Beat.explicit`: reverted, and the docstring reworded so the anchor stays unique. `the-release.md:100`
+`gates.py:13339` → `:13374` (read by hand); every other cite unchanged. Selfcheck clean (65 gates); pytest
+602 passed.
+
+**Words:** +85, running total 146,335 / 149,283.
+
+---
+
+## 2026-10-02 — `--ship` blocks on a system with no card: `every system has a card` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every system has a card** (`_every_system_has_a_card`,
+above `main()`, registered in `_phase4_gates`), promoted to a `--ship` BLOCK row. Each card in
+`board.systems[]` fills its fields (place, cost, a pay or lewd ladder, people, pool, memory, growth,
+feeds/reads, hook_link, leads_to); a card whose `cost` or `pay_ladder` involves money (a numeric pay, or
+the currency / its symbol / "money" in the text) needs a `sink` and a `deadline`; any other card needs a
+non-empty `feeds[]` (the brake). An old meter-shaped entry (`kind`, no card field) is a meter, not a card.
+- **n/a policy:** none. Zero cards is red (an absence is not a pass).
+- **Grandfathering:** `SHIP_SINCE["system_card"]` = 2026-10-02. The legacy form passes, so a grandfathered
+  game warns until it ships on or after that date. billable_hours is not grandfathered.
+- **Wiring:** the row and its date are appended to `SHIP_BLOCK_GATES` / `SHIP_SINCE` above `main()` (one
+  comment line by `SHIP_BLOCK_GATES` swapped, line for line, to say so), so no cited line above moves.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md` (rows added since 2026-10-02);
+  `the-systems.md` "The check"; `the-surfaces.md` R2c's two "no gate" lines now say "no count gate" and
+  name the row; `state.md`'s `board.systems[]` row.
+
+**Why.** WS-D9: every declared system has a card is a BLOCK (the ledger otherwise claims a system nobody
+designed).
+
+**Verified.** New `scripts/tests/test_gates_system_cards.py` (13): filled passes; missing fields named;
+money card needs sink + deadline; a cost in the currency is money; a no-money card must feed; zero systems
+red; an old meter-shaped ledger red; legacy passes; on `ship_rows`: old shape blocks billable_hours,
+grandfathered warns, shipped-since blocks. `test_gates_ws6.green_state` gains one filled card (and
+`board.characters`), so the green fixture still ships. Before/after `--ship`, `git archive HEAD` exports
+(vesper_two excluded) — before: no row; after: billable_hours PASS (2/2 cards); members_only, orientation,
+probation, the_balance WARN (zero cards; 8 / 0 / 11 / 23 meter-shaped entries); media_lab and vesper FAIL
+(no v2 ledger, not grandfathered). Every game already exited 1 before, so no exit code changed; no other
+row moved. `the-release.md:100` `gates.py:13265` → `:13339` (read by hand); every other cite unchanged
+(each line compared with HEAD's); `cite_check.py --fix` 0 drifted in SKILL.md + references; selfcheck clean
+(64 gates); pytest 595 passed.
+
+**Words:** +103, running total 146,250 / 149,283.
+
+---
+
+## 2026-10-02 — A step seen from the next room: `seen_from`, checked in two halves (World and Systems PRD, Phase 6A)
+
+**What.** A ladder step may declare `seen_from = "<location_id>"`, the room next door the person is in.
+The engine forces this shape: a substitution's `requires_npc` must be in the same room
+(`v2.py:6229-6230`). Split in two because shape.py reads the ledger only and `entry_from` lives only in
+the TOML (LO's call):
+- `scripts/shape.py`, row **the person is there at the step's hour**: the person's rows at the step's
+  place **or** at its `seen_from` must cover the whole window. The FAIL line names both rooms.
+- `scripts/gates.py`, new scored gate **a step is seen from the next room** (`_seen_from_next_room`,
+  above `main()`, registered in `_phase4_gates`): `seen_from` must share a parent (`entry_from`) with the
+  step's place. Red when it doesn't, or names no declared location. Never a `--ship` BLOCK.
+  - **n/a policy:** n/a when no step declares `seen_from`.
+  - **Grandfathering:** a game in `SHIP_GRANDFATHERED` gets warnings (the gate still passes) until it
+    ships on or after `SEEN_FROM_SINCE` (2026-10-02). billable_hours is not grandfathered.
+- Docs: `state.md` (the ladder row's optional `seen_from`; the schedule row's coverage), SKILL.md
+  gate-table row.
+
+**Why.** Notebook N20: billable_hours' Ethan step 1 plays in the bathroom while Ethan is in his room
+across the landing, and shape.py could only look in the step's own room.
+
+**Verified.** New `scripts/tests/test_seen_from.py` (9). shape.py: same room passes, `seen_from` with
+him scheduled there passes, `seen_from` without him fails. gates.py: sibling room passes, a room with
+another parent is red, an undeclared room is red, grandfathered warns and then is red once shipped since,
+no `seen_from` is n/a. Before/after, `git archive HEAD` export (vesper_two excluded): gate n/a on every
+game (no ledger declares `seen_from` at HEAD); shape row unchanged on every game (billable_hours still
+FAIL 6/7, Ethan step 1, until §9 G7). With LO's uncommitted G7 ledger and TOML (copied to scratch,
+read-only): shape row FAIL 6/7 → PASS 7/7, gate PASS 1/1. `the-release.md:100`'s cite moved
+`gates.py:13230` → `:13265` (read by hand); `shape.py:12` still holds; `cite_check.py --fix` 0 drifted;
+selfcheck clean (63 gates); pytest 582 passed.
+
+**Words:** +46, running total 146,147 / 149,283.
+
+---
+
+## 2026-10-02 — The goal has no date, and its end is built: three checks (World and Systems PRD, Phase 6A)
+
+**What.**
+- `scripts/shape.py` — new row **a goal's words name no date** (WARN): `want.promise.goal` and each
+  `goals[].goal` are searched for a week, day or month ("week 12", "the week-12 review", "week twelve",
+  "day 30", "three months"). Row 9b only read a separate `date` key. n/a with no goal written.
+- `scripts/gates.py` — new scored gate **a goal's end is built** (`_goal_end_is_built`, registered in
+  `_phase4_gates`): each goal with `ends_when`, except the last, names an `ends_flag` and some
+  `flagEffects` sets it (`_flags_ever_set`). A WARN by type: never a `--ship` BLOCK (tested), so it shows
+  inside "every other gate" and needs no grandfathering. n/a: no ledger, or no goal but the last can end.
+- `scripts/gates.py` — new `--ship` REPORT row **a dated line names a built event** (`_future_dates_row`,
+  one inserted line in `ship_rows`): player-facing lines naming a future week or day ("week twelve",
+  "day 30", "in thirty days", "two weeks from now"), each listed with its canvas, for the author to check
+  against W10. An "in N …" after a negation in the same sentence ("hasn't answered you in eight months")
+  is a past duration and skipped. ok when nothing is listed.
+- The two regexes (`_DATE_RE`, `_FUTURE_DATE_RE`) live in gates.py; shape.py reads `gates._DATE_RE`.
+- Docs: SKILL.md gate-table row, its REPORT list and its `shape.py` row; `the-want.md` §0 says what is
+  checked; `state.md`'s "planned check" comment names the gate.
+
+**Why.** billable_hours' goal was a date that nothing built (notebook N18); the ledger said yes and
+the game had nothing.
+
+**Verified.** New `scripts/tests/test_goal_dates_and_ends.py` (16): "the week-12 review" warns and "be
+kept on" passes; an `ends_flag` nobody sets warns; `ends_when` without `ends_flag` warns; the last goal is
+exempt; "at week twelve" and "in thirty days" are listed and a past duration is not. Before/after on
+every game, `git archive HEAD` export (vesper_two excluded); before, none of the three rows existed:
+- gate: billable_hours FAIL (warn) 1/2, `contract_signed` set by nothing (next release); every other
+  game n/a.
+- shape row: billable_hours PASS 4/4 undated; members_only PASS 1/1; probation WARN ("monthly reviews
+  loosen one rule each: da…" names "day 30"); orientation and the_balance n/a.
+- REPORT: billable_hours 7 lines (six "week twelve" lines, which the built review now backs, and one
+  false hit, walkin_firm "the day two associates"); vesper 4 (kess_makes_the_blank "day one",
+  cap_case_insider "in ten days", hub_grier "in four months", cap_the_question "in one week");
+  media_lab, members_only, orientation, probation, the_balance none.
+`the-release.md:100`'s cite moved `gates.py:13162` → `:13230` (read by hand); `cite_check.py --fix` 0
+drifted; selfcheck clean (62 gates); pytest 573 passed.
+
+**Words:** +74, running total 146,101 / 149,283.
+
+---
+
+## 2026-10-02 — Gate 12 `residents have homes`: a home is a bedroom (World and Systems PRD, Phase 6A)
+
+**What.** `scripts/gates.py` gate 12 passed any declared location as a home. It now also lists, as red
+reasons (`_home_is_a_bedroom`, above `main()`; three line-for-line swaps at `:7670`, `:7679-7680`):
+- the home is a thoroughfare (`kind = "thoroughfare"`) or a container (`is_container`);
+- the home is a hub: another room's `entry_from` points at it (a container off a bedroom, such as a
+  wardrobe, does not make it a hub: a container is not a room);
+- two or more people share it and `board.map.shared_homes` doesn't declare them (each named).
+The headline counts people, not reasons. Same gate name, so SKILL.md's row is unchanged.
+- **n/a policy:** unchanged (no ledger, or no characters).
+- **Grandfathering:** a game in `SHIP_GRANDFATHERED` gets the new reasons as listed warnings and the
+  gate still passes, until it ships on or after `HOME_IS_A_BEDROOM_SINCE` (2026-10-02, through
+  `_grandfathered`). The old reasons (no home, an undeclared location) are never grandfathered.
+  billable_hours is not grandfathered.
+- Docs: `the-map.md`'s gate 12 row loses its "Not checked yet (planned)" sentence and states the limit
+  (a landing with no rooms off it still passes).
+
+**Why.** `the-map.md` R2 says a home is a bedroom; gate 12 let billable_hours home people in the
+kitchen hub and on the landing (notebook N18).
+
+**Verified.** New `scripts/tests/test_gates_home_is_a_bedroom.py` (10): one bedroom each and a declared
+couple pass; an undeclared share, a hub, a thoroughfare and a container fail; offscreen passes;
+grandfathered warns, then fails once it ships since the date; old reasons never grandfathered; n/a
+unchanged. Before/after, `git archive HEAD` export (vesper_two excluded):
+billable_hours PASS 6/6 → FAIL 4/6 (Martin and Diane share `parents_room`, undeclared; §9 G7 adds
+`shared_homes`); orientation PASS → PASS with 2 warnings (Ray and Dee share `the_back_bedroom`);
+the_balance FAIL → FAIL, same two old reasons plus 3 warnings (Owen's `the_cafe` is a hub; Gil and Lynn
+share `the_master_bedroom`); members_only and probation PASS, unchanged; media_lab and vesper n/a.
+`the-release.md:100`'s cite moved `gates.py:13120` → `:13162` (read by hand); `cite_check.py --fix` 0
+drifted; selfcheck clean; pytest 557 passed.
+
+**Words:** +1, running total 146,027 / 149,283.
+
+---
+
+## 2026-10-02 — shape.py reads her threads, each man's keeps, the meters and the system cards (World and Systems PRD, Phase 6A)
+
+**What.** `scripts/shape.py`:
+- **her life has threads** (new row): each `want.threads[].person` is in `want.cast` with an age (FAIL);
+  the count is reported, and outside 4–6 WARNS. n/a while no thread is written (lenient); WARN strict.
+- **each man's keeps is named** (new row): `keeps` is `step counter + memory flags`, `want + warmth`,
+  `want + power`, or starts `none — `. A missing `keeps` fails only when strict. n/a with no cast.
+- **every system has a card** (new row, strict only): `board.systems[]` holds at least one card (a
+  meter-shaped row is a meter), and every system a thread names (`want.threads[].system`, except
+  `none …`) is a card. n/a while the spine is written.
+- **a step's variables are declared**: the meter keys (`board.meters[].key`, plus an old meter-shaped
+  row) and each card's `feeds[]` / `reads[]` join the declared set, so a step reading them doesn't FAIL.
+- **Grandfathering:** `check(state, strict, slug=None)`; a game in `gates.SHIP_GRANDFATHERED` (by the
+  `slug` argument, else the ledger's own `slug`) WARNS on keeps and cards. billable_hours is not
+  grandfathered.
+- Docs: SKILL.md's `shape.py` row, `the-spine.md` checkpoint A, `state.md` (the `want` comment no longer
+  says no gate reads it; the threads comment says what shape.py does).
+
+**Why.** Her threads, the cast's `keeps` and the system cards are the new ledger's spine; nothing
+checked them, and a step reading a meter key failed as undeclared.
+
+**Verified.** New `scripts/tests/test_shape_threads_keeps_cards.py` (17), including billable_hours'
+and members_only's `keeps` strings and the grandfathered warn; `test_shape.py`'s full-spine fixture
+gains `keeps`, four threads and a card, and its defect table the three new rows. Before/after on every
+game with a ledger, from a `git archive HEAD` export (media_lab and vesper have none; vesper_two
+excluded): billable_hours PASS ×3 (4 threads, 7/7 keeps, 2 cards named by 2 threads); members_only WARN
+×3 (no threads; julian's `keeps` "nothing: the climb is hers; he holds the tab"; 0 cards); orientation,
+probation, the_balance WARN threads and cards, keeps n/a. No existing row changed on any game.
+`cite_check.py --fix` 0 drifted (`gates.py:325`'s `shape.py:12` still holds); selfcheck clean; pytest
+547 passed.
+
+**Words:** +77, running total 146,026 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a choice can go back to where she was (World and Systems PRD, Phase 7)
+
+**Why.** Only a location exit could say `destinationType = "return"`. A scene that ends on a choice
+(hang up, or keep talking) had to send her to the canvas's home, so a call answered at the gym could
+still end at the caller's place.
+
+**What changed.**
+- `template_import.py`: a choice's `targetType` accepts `return`; an unknown value now names the four
+  allowed ones; a `return` choice on a canvas with no resolving home is an error, as `trigger` is.
+  The field already passes through the importer and the default build unchanged.
+- `v2.py`: a `return` choice uses the stored place and the same fallback (the home when the place is
+  closed or gone, or nothing is stored). Its link names no passage; a `<<goto>>` at the end of the link
+  body resolves the place after the choice's time has passed, so a room that shuts in those minutes
+  falls back. A game with only `return` choices gets the stored-place helpers too. In a loop canvas a
+  `return` choice leaves the loop, as `trigger` does. Opt-in by use.
+- `references/engine.md` §13: one sentence, on the existing line (no line moved).
+- Citations re-pointed through the `git diff` line map (209 moved, 441 identical, each target line
+  checked identical; 2 unmapped, the choice-link `advanceTime` line this item changed, hand-pointed to
+  `v2.py:15647`); `cite_check.py` 0 drifted in SKILL.md + references/.
+
+**Verified.** `apps/game_generation/tests/test_return_choice.py` (new, 4 tests: a call answered at the
+gym returns her there free; a room that shuts during the choice's minutes falls back to the home; a gone
+room falls back; nothing stored ends at the home); it fails on the old generator.
+`ReturnChoiceSchemaTests` (3 import tests). Rebuilds of members_only, billable_hours, orientation,
+probation, the_balance and vesper all import with no passage-text change.
+
+**Words:** +19, running total 145,803 / 149,283.
+
+---
+
+## 2026-10-02 — Gate `adult wording`: the banned school words, as a warning (World and Systems PRD, Phase 6A)
+
+**What.** A scored gate in `scripts/gates.py` (`_adult_wording`, above `main()`, registered in
+`_phase4_gates`): whole-word, case-blind matches of `the-voice.md` "Adult wording"'s banned list
+(detention, homeroom, prom, after school, high school, middle school, junior high, teen, teenager,
+schoolgirl, school uniform, class president, grade 9–12) in prose, choice labels and room names and
+descriptions. Each hit is listed with where it is and its words around it.
+- **n/a policy:** n/a only when the game has no player-facing text.
+- **Grandfathering:** none needed; it is a WARN by LO's call, never a `--ship` BLOCK, so under `--ship`
+  a red shows inside "every other gate". It is not in `SHIP_BLOCK_GATES` (tested).
+- Docs: SKILL.md gate-table row; `the-voice.md` "Adult wording" names the gate (one line).
+
+**Why.** The rule existed in the voice doctrine with nothing reading it.
+
+**Verified.** New `scripts/tests/test_gates_adult_wording.py` (18): "eighteen" passes, "homeroom" warns,
+every listed phrase warns, near misses ("promise", "grade 8", "high schoolers") and college words
+(freshman, sophomore) pass, a label and a room name are read, no text is n/a. Before/after on every game
+from a `git archive HEAD` export (vesper_two excluded): before, no row; after, billable_hours, media_lab,
+members_only, orientation, the_balance and vesper PASS; probation FAIL (warn), one hit: `work_martys`
+"A teenager puts a tape measure in his ho…". gates.py grew 36 lines at `_phase4_gates` and above `main()`;
+the one cite past them, `the-release.md:100`, moved `gates.py:13084` → `:13120` (read by hand).
+`cite_check.py --fix` 0 drifted; selfcheck clean (61 gates); pytest 530 passed.
+
+**Words:** +32, running total 145,949 / 149,283.
+
+---
+
+## 2026-10-02 — The tools read a value worked out from her stats (World and Systems PRD, Phase 6A)
+
+**What.** The engine resolves `value = { type = "trait", trait, mult, add, min, max }` as
+round(trait × mult + add) held inside min / max (`engine.md` §3). The tools knew only numbers and
+`{type = "random", …}`, so a stat-based pay read as nothing. Now:
+- `scripts/gates.py` — three readers, line-for-line swaps: `_effect_value_sign` (`:548-549`, the sign of
+  a grant), `lint_unwritten_act` (`:2499`, prints `+charm×2+50 money` instead of `+?..100`), and
+  `_value_mean_max` (`:4190-4199`) with its `_week_income` call (`:4259`): a trait value's mean is what it
+  pays at her starting trait, its max is the declared `max` (no `max` and a rising `mult` = no ceiling).
+  Three helpers above `main()`: `_trait_value_at`, `_value_bounds`, `_effect_value_label`.
+- `apps/game_generation/management/commands/validate_game_toml.py` — `_numeric_effect_value` takes the
+  walker's current player traits and resolves the shape with the engine's arithmetic (`floor(x + 0.5)`,
+  the JS `Math.round`); both call sites pass their traits. Without traits it is skipped, never guessed.
+
+**Why.** Pay from stats is built; a checker that reads it as zero under-counts a week's income and
+mislabels the grant.
+
+**Verified.** New `scripts/tests/test_gates_e5_trait_value.py` (9 tests) and five new cases in
+`apps/game_generation/tests/test_validate_toml_effect_values.py` (15 pass, with
+`test_effect_value_from_stats.py`). No game uses the shape yet, so no game's score moves. gates.py grew
+57 lines, all above `main()`: the one cite past it, `the-release.md:100`, moved `gates.py:13027` →
+`:13084` (read by hand: "Lints sit BELOW the tally"); every other `gates.py:NNNN` cite is below the
+helpers and unmoved. `cite_check.py --fix`: 0 drifted in SKILL.md + references; selfcheck clean;
+pytest passes. Not changed (not named by the item): the two step-reachability readers at
+`gates.py:4652` and `:4687`, which still skip a trait value.
+
+**Words:** 0, running total 145,917 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a room she is refused by a dress code records no visit (GLOBAL fix, World and Systems PRD, Phase 7)
+
+**Why.** A dress code (`clothing_rules`) redirected to `ClothingBlock` from the `:passagestart` handler.
+By then SugarCube had already made the refused room's history moment, and the room's body still
+rendered, so `current_location` and `visited_locations` named a room she was turned away from (and the
+room's auto-fire check ran). The redirect landed 10 ms later. The wardrobe switch
+`wardrobe_anywhere = false` had to work around it by saving where she came from.
+
+**What changed.**
+- `v2.py`: the dress-code check moves into `Config.navigation.override`, which SugarCube 2.30 calls
+  before it creates the moment. A refused room never renders: no state write, no history moment, no
+  auto-fire. Emitted in every clothing game, so **this is global**: the Story JavaScript of members_only,
+  billable_hours, orientation and vesper changes (the intercept moves; nothing else); no passage body
+  changes in any game. Play changes only where a dress code exists (billable_hours today).
+  `entry_conditions` refusals already kept their writes inside the guard; unchanged.
+- The `wardrobe_anywhere = false` workaround is removed (`_clothing_block_from`, and
+  `setup.canChangeClothesHere`'s argument): `current_location` is now still the room she came from.
+- `references/engine.md` (where a state is read, reader 2): one clause, the refused room never renders.
+- Citations re-pointed through the `git diff` line map (49 moved, 602 identical, each target line
+  checked identical; 1 unmapped, `v2.py:2147`, hand-checked: same line); `cite_check.py` 0 drifted in
+  SKILL.md + references/.
+
+**Verified.** `apps/game_generation/tests/test_refused_room.py` (new, 3 tests: a dress-code refusal
+leaves `current_location`, `visited_locations` and the history alone; an allowed room records the
+visit; an `entry_conditions` refusal records nothing). The first fails on the old generator. The
+wardrobe-switch tests still pass. Rebuilds of members_only, billable_hours, orientation, probation,
+the_balance and vesper from `git archive` exports all import; passage diff as above.
+
+**Words:** +16, running total 145,784 / 149,283.
+## 2026-10-02 — The tools' template_import.py cites re-pointed (World and Systems PRD, Phase 6A)
+
+**What.** Comment and docstring lines only, line for line (no line count changed): 17 cites in
+`scripts/gates.py` (`:468`, `:917`, `:3205`, `:7318`, `:7689-7690`, `:7706`, `:7762-7763`, `:8289`,
+`:8861`, `:8874`, `:8876`, `:8949`, `:9828-9831`) and `scripts/cite_check.py:161` now point at the
+`template_import.py` lines engine batches 1–3 moved them to. Four of those (`:917`, `:8861`, `:8874`,
+`:9828-9831`) were stale too and are fixed the same way.
+
+**Why.** A citation that lands on the wrong line sends the reader confidently to code that says
+something else.
+
+**Verified.** Each old target mapped through `git diff <blame commit> HEAD -- template_import.py`, then
+every new line read by hand (e.g. `:2239` `quests_engine=_require_str(p, "quests_engine", "v1")`, `:4763`
+`if g.op not in ("add", "set")`, `:3079` `shop_location = …`). Two comments now say something the
+engine outgrew; left for LO, since this pass moves numbers only: `gates.py:8289` "validates `op` for
+cheat-page grants … and for nothing else" (`template_import.py:6368` `_LIVE_OPS` now validates live
+effects too), and `gates.py:7762` "label on trait and counter goals ONLY" (weekday, hours_since_flag and
+days_since_flag goals need one too, `template_import.py:7445-7490`). `cite_check.py --fix`: SKILL.md +
+references 0 drifted; selfcheck clean; pytest passes.
+
+**Words:** 0, running total 145,917 / 149,283.
+
+---
+
+## 2026-10-02 — Two ledger keys the checks need: `board.wardrobe` and `board.map.shared_homes` (World and Systems PRD, Phase 6A)
+
+**What.**
+- `references/state.md`: the `board.map` schema and its gate-table row gain `shared_homes` (pairs of npc
+  ids who share one home, a couple); a new table row for `board.wardrobe = { states: [{ id, condition }],
+  key_items: [clothing_id] }`, where a condition is one `worn_exposure`, `worn_corruption`,
+  `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item, the
+  fields `CONDITION_SCHEMA` takes (`template_import.py:1670`, `:1674-1677`). Widened the same day, before
+  any check read it: billable_hours' main clothing read is `worn_corruption gte 2`, which exposure and
+  slot alone couldn't declare.
+- `references/the-map.md` R2: "a couple shares one" now says where it is declared; its map schema shows the
+  key.
+- `templates/cards/wardrobe.md`: a short "Declare it" block with the shape and the five condition types.
+
+**Why.** The planned checks for "every clothing state is read three times" and "a home is a bedroom" read
+these keys, and nothing documented them.
+
+**Verified.** `test_templates_parse` passes; selfcheck clean (orphans 2); pytest passes.
+
+**Words:** +62 (the card is not counted), running total 145,917 / 149,283.
+
+---
+
 ## 2026-10-02 — A stale gates.py cite in the-board.md (World and Systems PRD, Phase 6A)
 
 **What.** `references/the-board.md:89` cited `gates.py:2248` for the deleted gate 22; that line is now

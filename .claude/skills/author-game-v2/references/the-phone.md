@@ -100,7 +100,7 @@ she banks, shops, navigates or finds work.
 **Build in this order: messaging, then the thing that makes her looked at, then anything else.**
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
-`bank` both exist (`v2.py:2899`, `:2900`) and both are legitimate — `new-life-project` ships a phone
+`bank` both exist (`v2.py:2991`, `:2992`) and both are legitimate — `new-life-project` ships a phone
 bank *and* a phone GPS (numbers only). But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
@@ -121,7 +121,7 @@ whose markup marks a bubble ran longer, a median of 11–16 words over 369 bubbl
 talking happens in its calls, which run 300–500 words (round 9a §6). No text tells a story; the
 meeting it books does. A call is `[[phone.calls]]`: it rings, and answering plays its scene (`engine.md` §51).
 
-**It is a WARN, never a block** (planned gate: `a chat is short and timed`). A two-word *"you up"* is
+**It is a WARN, never a block** (gate `a chat is short and timed`). A two-word *"you up"* is
 right; the warning is for the twenty-word paragraph.
 
 **The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
@@ -263,7 +263,7 @@ has to unlock.
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
 a design doc, and it matches `kink-ceilings.md`'s own logic.
 
-The worked shape, in what our engine actually supports (`v2.py:3165` renders it, `v2.py:3220`
+The worked shape, in what our engine actually supports (`v2.py:3232` renders it, `v2.py:3309`
 sends it):
 
 ```toml
@@ -278,7 +278,7 @@ post_actions = [
 ]
 ```
 
-A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:3177`, `:3179`).
+A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:3266`, `:3268`).
 
 ⚠️ **`followers` must buy something.** A counter with no sink is the `college-daze` complaint
 waiting to happen — a number on a screen that stops meaning anything. Give it a door, per
@@ -366,7 +366,7 @@ conditions = { version = "1.0", items = [
 ```
 
 A link's cause flag may be set by an earlier conversation's reply, as long as the chain starts from
-a scene (planned gate: `every chat is caused by a scene`). Author as many links as the release
+a scene (gate `every chat is caused by a scene`). Author as many links as the release
 needs.
 
 ---
@@ -473,13 +473,13 @@ cap is per NPC and one topic starves the others.
 
 ---
 
-## What is not gated here
+## What is gated here
 
-Nothing in this file is checked by `gates.py` yet. Two planned gates will read it:
+Two gates read this file:
 
-- **planned gate: `every chat is caused by a scene`** (a block): every conversation's trigger holds
-  a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9).
-  A game with no phone passes.
-- **planned gate: `a chat is short and timed`** (a warn, never a block — a block would fail a
+- **gate `every chat is caused by a scene`** (a `--ship` block): every conversation's and call's trigger
+  holds a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9);
+  dev canvases, cheats and the daily tick are not scenes. A game with no phone passes.
+- **gate `a chat is short and timed`** (a warn, never a block — a block would fail a
   correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
-  delay and an hour window (P3, P4).
+  delay and an hour window (P3, P4); a call needs the timing only.

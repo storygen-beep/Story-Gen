@@ -322,8 +322,8 @@ has no reminder, so a player who is not wearing it gets a silent gala night (rou
 states first, then items (`engine.md` §17).
 
 The gate `the wardrobe is read` asks only whether a declared `[[clothing]]` catalog is read
-*anywhere*. The rule is stricter: every declared state and key item is read in ≥3 places (planned
-gate: `every clothing state is read three times`). This says where it earns its keep: on a rung,
+*anywhere*. The rule is stricter: every declared state and key item is read in ≥3 places (gate
+`every clothing state is read three times`). This says where it earns its keep: on a rung,
 and on a rate. `the-meters.md` W7 and
 `engine.md` §17 own the mechanism (`worn_exposure` is the predicate that reads an empty slot).
 

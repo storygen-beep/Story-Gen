@@ -48,7 +48,7 @@ what their players quote:
    player would quote.
 8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
    this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
-   canvas sets (`validate_flag_chains()`, `v2.py:14094`). The live goal, mystery or rival beat it moves,
+   canvas sets (`validate_flag_chains()`, `v2.py:14096`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
    enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
@@ -97,7 +97,7 @@ location, it arrives filled, not as a promise.
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
 script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
-instrument that judges nothing. Lints never touch the tally (`gates.py:13027`), so a game
+instrument that judges nothing. Lints never touch the tally (`gates.py:13895`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -248,8 +248,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:19176   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:19180   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:19197   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:19201   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -421,8 +421,8 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:13346`, `:15641`,
-`:15505`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:13346`, `:15653`,
+`:15516`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 
@@ -437,7 +437,9 @@ That is correct for a release gate — it judges what ships — and it means the
 (`SHIP_GRANDFATHERED`: members_only, orientation, probation, the_balance, vesper_two) gets `[WARN] … blocks
 from your next release` where only the new rule is red. It keeps warning until it records a release with
 `shipped` on or after `since`; then the row blocks. A game started later is blocked from the start. Ordinary
-gates are never grandfathered.
+gates are never grandfathered. Rows added since 2026-10-02, each warning first: every system has a card · every system leads to a person or a sex scene · every
+clothing state is read three times · her clothes are backed (both n/a, a pass, with clothing off) · every chat is caused by
+a scene (n/a, a pass, with no phone).
 
 ---
 

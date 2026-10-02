@@ -2144,9 +2144,9 @@ setup.checkLocationClothing = function(passageName) {
 // wardrobe room), and whether a refusal's unmet part is about her clothes.
 setup.wardrobe_anywhere = """ + json.dumps(self.wardrobe_anywhere) + """;
 setup.wardrobe_location_ids = """ + json.dumps(self._wardrobe_location_ids()) + """;
-setup.canChangeClothesHere = function(fromId) {
+setup.canChangeClothesHere = function() {
     if (setup.wardrobe_anywhere) return true;
-    var here = String(fromId || (State.variables.player || {}).current_location || '');
+    var here = String((State.variables.player || {}).current_location || '');
     return setup.wardrobe_location_ids.indexOf(here) !== -1;
 };
 setup._clothingConditionTypes = ['clothing_slot', 'clothing_item', 'worn_exposure',
@@ -13826,7 +13826,9 @@ setup.castTraitRows = function (slug, npc) {
                 eb = node.exit_block or {}
                 if eb.get("type") == "choices":
                     choices = eb.get("choices", [])
-                    if any(c.get("targetType") in ("trigger", "node") for c in choices):
+                    # E14 — a `return` choice leaves the canvas as a `trigger` one does,
+                    # so it counts the same: it makes the menu and is one tier.
+                    if any(c.get("targetType") in ("trigger", "return", "node") for c in choices):
                         base_node = node
 
             if not base_node:
@@ -13837,7 +13839,7 @@ setup.castTraitRows = function (slug, npc) {
                 target_type = choice.get("targetType")
                 conditions = choice.get("conditions")
 
-                if target_type == "trigger":
+                if target_type in ("trigger", "return"):
                     raw_effects = choice.get("effects", [])
                     tiers.append({
                         "effects": [
@@ -13845,7 +13847,7 @@ setup.castTraitRows = function (slug, npc) {
                              **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
                             for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                         ],
-                        "conditions": None
+                        "conditions": conditions
                     })
                 elif target_type == "node":
                     node_id = choice.get("nodeId", "")
@@ -14457,7 +14459,8 @@ setup.carryRent = function (due, paid) {
         )
 
     def _has_return_exit(self) -> bool:
-        """E8b — does any included canvas end on a `destinationType = "return"` exit?
+        """E8b/E8c — does any included canvas end on a `destinationType = "return"` exit
+        or carry a `targetType = "return"` choice?
 
         Gates the `return_place` default and its :passagestart clear, so a game without
         one keeps a byte-identical :: Start and stateDefaults.
@@ -14466,6 +14469,9 @@ setup.carryRent = function (due, paid) {
             for node in self._get_canvas_nodes_ordered(canvas):
                 eb = getattr(node, "exit_block", None) or {}
                 if eb.get("type") == "location" and (eb.get("config") or {}).get("destinationType") == "return":
+                    return True
+                if eb.get("type") == "choices" and any(
+                        (ch or {}).get("targetType") == "return" for ch in (eb.get("choices") or [])):
                     return True
         return False
 
@@ -15388,7 +15394,7 @@ setup.carryRent = function (due, paid) {
                 for ci, raw_ch in enumerate(raw_choices):
                     raw_target_type = raw_ch.get('targetType', 'trigger')
                     raw_node_id = raw_ch.get('nodeId')
-                    if raw_target_type == 'trigger' or raw_target_type == 'location':
+                    if raw_target_type in ('trigger', 'location', 'return'):
                         loop_choice_roles[ci] = {'role': 'exit'}
                     elif raw_target_type == 'node' and raw_node_id:
                         # Check if target node is loop_terminal
@@ -15438,6 +15444,11 @@ setup.carryRent = function (due, paid) {
                         schedule_effects_list = choice_tuple[17] if len(choice_tuple) > 17 else []
                         choice_costs_list = choice_tuple[18] if len(choice_tuple) > 18 else []
                         step_decision = choice_tuple[19] if len(choice_tuple) > 19 else None
+                        # E8c — a `return` choice names no passage on its link; it goes at the
+                        # end of the link body, after the choice's time has passed, so a room
+                        # that shuts in those minutes falls back to the home.
+                        returns_to_place = choice_tuple[20] if len(choice_tuple) > 20 else False
+                        link_to = "" if returns_to_place else f' "{target_passage}"'
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -15522,16 +15533,16 @@ setup.carryRent = function (due, paid) {
                                 keyword = '<<if' if vi == 0 else '<<elseif'
                                 passage_body += f'{keyword} setup.triggerConditionsSatisfied({v_conds})>><<set _cv to "{v_text_esc}">>\n'
                             passage_body += '<</if>>\n'
-                            passage_body += f'<<link _cv "{target_passage}">>'
+                            passage_body += f'<<link _cv{link_to}>>'
                         else:
                             resolved_expr, is_dynamic = self._resolve_at_references_expr(choice_text)
                             if is_dynamic:
                                 # Backtick expression — no bracket escaping needed (it's JS)
-                                passage_body += f'<<link `{resolved_expr}` "{target_passage}">>'
+                                passage_body += f'<<link `{resolved_expr}`{link_to}>>'
                             else:
                                 # Static text — escape as before
                                 escaped_choice_text = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
-                                passage_body += f'<<link "{escaped_choice_text}" "{target_passage}">>'
+                                passage_body += f'<<link "{escaped_choice_text}"{link_to}>>'
                         # Clear pending effects at start
                         # Per-choice costs deduct here too (the spend), so they count
                         # toward has_effects (clear+flush pendingEffects) even if the
@@ -15634,7 +15645,8 @@ setup.carryRent = function (due, paid) {
                             passage_body += '<<set $game_state.loop_count to 0>><<set $game_state.loop_visited to []>>'
 
                         # Then emit time progression and close link
-                        passage_body += f"<<script>>advanceTime({int(time_minutes)});<</script>><</link>><br>\n"
+                        go_back = f'<<goto `setup.returnPassage("{target_passage}")`>>' if returns_to_place else ""
+                        passage_body += f"<<script>>advanceTime({int(time_minutes)});<</script>>{go_back}<</link>><br>\n"
 
                         # ── Close gate(s): span, then INNER cost rung, then OUTER conditions ──
                         # Close highlight wrapper (only opened when a real conditions gate exists).
@@ -16170,7 +16182,9 @@ setup.carryRent = function (due, paid) {
                     # the BROKEN_EXIT branches below means a code path bypassed the
                     # validator (test fixture, direct dev API, etc.).
                     BROKEN_EXIT = "_BrokenExitFallback"
-                    if target_type == 'trigger':
+                    if target_type in ('trigger', 'return'):
+                        # E8c — `return` is the stored place, resolved when she clicks; the
+                        # home is its fallback, so every other reader sees the home.
                         target_passage = return_target
                     elif target_type == 'location':
                         location_id = choice.get('locationId')
@@ -16230,6 +16244,7 @@ setup.carryRent = function (due, paid) {
                         schedule_effects,        # doc 45 G5 — position 17
                         choice_costs,            # per-choice costs — position 18
                         step_decision,           # EN1 step decision — position 19
+                        target_type == 'return',  # E8c back to where she was — position 20
                     ))
 
                 return processed_choices
@@ -18387,26 +18402,23 @@ setup.returnPassage = function (fallback) {
     }
 """
 
-        clothing_redirect_block = ""
-        # E7b — with wardrobe_anywhere = false the ClothingBlock asks where she came
-        # from: the refused room's passage still renders (and writes current_location)
-        # before the redirect lands.
-        clothing_from_line = (
-            "            State.variables._clothing_block_from = (sv.player || {}).current_location;\n"
-            if not self.wardrobe_anywhere else ""
-        )
+        # E12 — a dress code refuses BEFORE the room exists. SugarCube asks
+        # Config.navigation.override before it creates the moment, so a refused room's body
+        # never runs: no current_location or visited_locations write, no auto-fire, no
+        # history moment. (A :passagestart redirect can't do that — the body renders anyway
+        # and the ClothingBlock lands 10 ms later, after the room recorded the visit.)
+        clothing_override_js = ""
         if self.clothing_enabled:
-            clothing_redirect_block = """
-    // Clothing intercept: block location entry if not dressed enough
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var clothingMsg = setup.checkLocationClothing(psg);
-        if (clothingMsg) {
-            State.variables._clothing_block_message = clothingMsg;
-            State.variables._clothing_block_destination = psg;
-""" + clothing_from_line + """            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
-            return;
-        }
-    }
+            clothing_override_js = """
+// Clothing intercept: a room she isn't dressed for is never entered.
+Config.navigation.override = function (psg) {
+    if (psg.indexOf("Location_") !== 0 || setup.infoPages.indexOf(psg) !== -1) return null;
+    var clothingMsg = setup.checkLocationClothing(psg);
+    if (!clothingMsg) return null;
+    State.variables._clothing_block_message = clothingMsg;
+    State.variables._clothing_block_destination = psg;
+    return "ClothingBlock";
+};
 """
 
         # A DOOR screen is safe to re-render for the same reason a location is, and only
@@ -18422,64 +18434,73 @@ setup.returnPassage = function (fallback) {
         )
 
         # Travel-friction: charge a location's entry cost (time + traits) on a genuine
-        # move. Runs AFTER rent/clothing so a blocked entry never charges (no
-        # double-charge on retry). Only emitted when some location declares costs;
-        # otherwise movement stays free (backward-compatible).
+        # move. Runs AFTER rent so a blocked entry never charges (no double-charge on
+        # retry); a dress-code refusal never reaches :passagestart at all (E12), and
+        # neither does a move she can't afford (E13). Only emitted when some location
+        # declares costs; otherwise movement stays free (backward-compatible).
         has_crossing_costs = self._has_crossing_costs()  # EN11
         has_location_costs = any(
             (getattr(loc, 'properties', None) or {}).get('entry_costs')
             for loc in self.locations
         ) or has_crossing_costs
+        # E13 — an unaffordable move is refused BEFORE the room exists, the way E12 refuses
+        # a dress code: SugarCube asks Config.navigation.override before it creates the
+        # moment, so the room's body never runs (no current_location or visited_locations
+        # write, no history moment). Refused from :passagestart, the room still recorded the
+        # visit, and since only a move to a DIFFERENT room is charged, her next try was free.
+        # Chained onto E12's override in a game that has both.
+        travel_override_js = ""
         travel_cost_block = ""
-        if has_crossing_costs:
-            # EN11 — the same intercept, plus the areas this move crosses into. One bill:
-            # the room's cost and every toll, checked together, charged together.
-            travel_cost_block = """
-    // Travel-friction intercept: charge entry cost (and any area crossing) on a genuine move.
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var travelSlug = (setup.passage_to_location || {})[psg];
-        if (travelSlug) {
-            var destLoc = (setup.locations || {})[travelSlug] || {};
-            var curLoc = (sv.player && sv.player.current_location) || "";
-            // Only a real move (entering a DIFFERENT location) is charged — re-entry
-            // and back-from-a-menu are free.
-            if (String(destLoc.id) !== String(curLoc)) {
-                var crossCosts = setup.crossingCostsFor(travelSlug, curLoc);
-                var tripTraits = setup.mergeCostArrays(
-                    setup.locationCostTraitArray(travelSlug).concat(setup.crossingTraitArray(crossCosts)));
-                if (!setup.checkCostsAffordable(tripTraits)) {
-                    sv._travel_block_message = setup.getCostBlockedMessage(tripTraits);
-                    sv._travel_block_destination = psg;
-                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
-                    return;
-                }
-                setup.deductLocationCosts(travelSlug);
-                setup.deductCrossingCosts(crossCosts);
-            }
-        }
-    }
+        if has_location_costs:
+            if has_crossing_costs:
+                # EN11 — the room's cost plus the areas this move crosses into. One bill:
+                # the room's cost and every toll, checked together, charged together.
+                refuse_js = """        var trip = setup.mergeCostArrays(setup.locationCostTraitArray(slug).concat(
+            setup.crossingTraitArray(setup.crossingCostsFor(slug, setup.travelFrom()))));
+        if (setup.checkCostsAffordable(trip)) return null;
+        State.variables._travel_block_message = setup.getCostBlockedMessage(trip);
 """
-        elif has_location_costs:
+                charge_js = """        var crossCosts = setup.crossingCostsFor(travelSlug, setup.travelFrom());
+        setup.deductLocationCosts(travelSlug);
+        setup.deductCrossingCosts(crossCosts);
+"""
+            else:
+                refuse_js = """        if (setup.checkLocationCostsAffordable(slug)) return null;
+        State.variables._travel_block_message = setup.getLocationCostBlockedMessage(slug);
+"""
+                charge_js = """        setup.deductLocationCosts(travelSlug);
+"""
+            travel_override_js = """
+// Travel-friction: only a real move (entering a DIFFERENT location) is charged — re-entry
+// and back-from-a-menu are free. travelMoveSlug is the room's slug for a real move, else null.
+setup.travelFrom = function () {
+    return String((State.variables.player || {}).current_location || "");
+};
+setup.travelMoveSlug = function (psg) {
+    if (psg.indexOf("Location_") !== 0 || setup.infoPages.indexOf(psg) !== -1) return null;
+    var slug = (setup.passage_to_location || {})[psg];
+    if (!slug) return null;
+    var destLoc = (setup.locations || {})[slug] || {};
+    return String(destLoc.id) !== setup.travelFrom() ? slug : null;
+};
+// A move she can't afford is never entered.
+(function () {
+    var dressCode = Config.navigation.override;
+    Config.navigation.override = function (psg) {
+        var to = dressCode ? dressCode(psg) : null;
+        if (to) return to;
+        var slug = setup.travelMoveSlug(psg);
+        if (!slug) return null;
+""" + refuse_js + """        State.variables._travel_block_destination = psg;
+        return "TravelBlock";
+    };
+})();
+"""
             travel_cost_block = """
-    // Travel-friction intercept: charge entry cost on a genuine move.
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var travelSlug = (setup.passage_to_location || {})[psg];
-        if (travelSlug) {
-            var destLoc = (setup.locations || {})[travelSlug] || {};
-            var curLoc = (sv.player && sv.player.current_location) || "";
-            // Only a real move (entering a DIFFERENT location) is charged — re-entry
-            // and back-from-a-menu are free.
-            if (String(destLoc.id) !== String(curLoc)) {
-                if (!setup.checkLocationCostsAffordable(travelSlug)) {
-                    sv._travel_block_message = setup.getLocationCostBlockedMessage(travelSlug);
-                    sv._travel_block_destination = psg;
-                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
-                    return;
-                }
-                setup.deductLocationCosts(travelSlug);
-            }
-        }
-    }
+    // Travel-friction intercept: charge a genuine move (the override refused any she can't afford).
+    var travelSlug = setup.travelMoveSlug(psg);
+    if (travelSlug) {
+""" + charge_js + """    }
 """
 
         # FlagsPage belongs here too: it has a smartBack back-link and a sidebar button, so
@@ -18658,7 +18679,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-""" + return_place_js + """
+""" + return_place_js + clothing_override_js + travel_override_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -18690,7 +18711,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -19038,7 +19059,7 @@ $(document).on(':passagestart', function(ev) {
         # where she can really change. Empty (today's text) in every other game.
         change_open = change_close = ""
         if not self.wardrobe_anywhere:
-            change_open = "<<if setup.canChangeClothesHere(State.variables._clothing_block_from)>>"
+            change_open = "<<if setup.canChangeClothesHere()>>"
             change_close = "<</if>>"
         if self.clothing_enabled:
             wardrobe_page = """

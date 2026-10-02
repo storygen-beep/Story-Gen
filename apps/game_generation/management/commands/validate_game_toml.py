@@ -15,6 +15,7 @@ The command performs three-phase validation:
 """
 
 import json
+import math
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -87,7 +88,9 @@ class ReachabilityReport:
     warnings: List[str]
 
 
-def _numeric_effect_value(value: Any) -> Optional[float]:
+def _numeric_effect_value(
+    value: Any, player_traits: Optional[Dict[str, Any]] = None
+) -> Optional[float]:
     """Resolve a trait effect's `value` to a number this analyzer can add or set.
 
     Usually it already is one. But the engine also accepts a **random range** —
@@ -102,6 +105,12 @@ def _numeric_effect_value(value: Any) -> Optional[float]:
     range resolves to its **max** — the fastest a player can reach the gate. Using
     min would under-report reachability and invent trait gaps that do not exist.
 
+    A value worked out from her stats — ``value = { type = "trait", trait = "charm",
+    mult = 2, add = 50, min = 0, max = 100 }`` — resolves the way the engine does
+    (``setup.resolveEffectValue``): ``round(trait * mult + add)`` held inside min/max,
+    with the trait read from ``player_traits`` (the walker's current best-path values; a
+    missing trait reads 0, as in the engine). With no ``player_traits`` it is skipped.
+
     Any other non-numeric shape returns None and the caller skips the effect: a
     walker that cannot model an effect should leave the trait alone, not crash and
     take the whole validation with it.
@@ -113,7 +122,35 @@ def _numeric_effect_value(value: Any) -> Optional[float]:
     if isinstance(value, dict) and value.get("type") == "random":
         best = value.get("max", value.get("min"))
         return best if isinstance(best, (int, float)) else None
+    if isinstance(value, dict) and value.get("type") == "trait":
+        if player_traits is None:
+            return None
+        return _resolve_trait_value(value, player_traits)
     return None
+
+
+def _is_number(x: Any) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool)
+
+
+def _resolve_trait_value(value: Dict[str, Any], player_traits: Dict[str, Any]) -> float:
+    """``round(trait * mult + add)`` held inside min/max — the engine's arithmetic.
+
+    JS ``Math.round`` rounds .5 up, Python's ``round`` rounds .5 to even, so this uses
+    ``floor(x + 0.5)`` to land on the same number the game pays.
+    """
+    current = player_traits.get(value.get("trait"), 0)
+    current = current if _is_number(current) else 0
+    mult = value.get("mult", 1)
+    mult = mult if _is_number(mult) else 1
+    add = value.get("add", 0)
+    add = add if _is_number(add) else 0
+    out = math.floor(current * mult + add + 0.5)
+    if _is_number(value.get("min")):
+        out = max(out, value["min"])
+    if _is_number(value.get("max")):
+        out = min(out, value["max"])
+    return out
 
 
 class ReachabilityAnalyzer:
@@ -314,7 +351,7 @@ class ReachabilityAnalyzer:
             target_type = effect.targetType
             trait = effect.trait
             op = effect.op
-            value = _numeric_effect_value(effect.value)
+            value = _numeric_effect_value(effect.value, player_traits)
             if value is None:
                 continue  # shape this analyzer can't reason about — see the helper
 
@@ -361,7 +398,7 @@ class ReachabilityAnalyzer:
                             # Same guard as _apply_choice_effects: a `random` range is a
                             # dict, and comparing one to 0 raised TypeError here even
                             # after the add site was fixed. Resolve first, then compare.
-                            value = _numeric_effect_value(effect.value)
+                            value = _numeric_effect_value(effect.value, max_player_traits)
                             if value is None:
                                 continue
                             if effect.op == "add" and value > 0:

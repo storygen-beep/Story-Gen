@@ -158,7 +158,7 @@ def in_string_literal(line: str, needle: str) -> bool:
     """Does `needle` appear ONLY inside quotes on this line?
 
     An error message that happens to contain the words `[project] version` is not
-    where `[project] version` is implemented (`template_import.py:3013`).
+    where `[project] version` is implemented (`template_import.py:3662`).
     """
     stripped = re.sub(r'"[^"]*"|\'[^\']*\'', "", line)
     return needle not in stripped and needle in line

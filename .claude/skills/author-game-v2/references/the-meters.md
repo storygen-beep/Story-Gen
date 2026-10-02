@@ -211,8 +211,8 @@ reader families count, and all three are legitimate: a **condition predicate** (
 portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
 field's normal case**. Same fig-leaf risk as above, answered the same way: the summary
 prints garments against reads, so a thin pass is visible. **That gate is the floor; the rule is ≥3
-readers for every declared state and key item** (W7; planned gate: `every clothing state is read
-three times`).
+readers for every declared state and key item** (W7; gate `every clothing state is read three
+times`).
 
 **⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
 the wardrobe is read. It cannot ask whether the read can ever be **true**. A clothing condition that
@@ -631,8 +631,9 @@ its readers.** `worn_corruption` and `worn_beauty` skip an empty slot, so naked 
 plain underwear; `worn_exposure` reads the empty slot, and `clothing_slot` names a state exactly
 ("no bra"). The mechanism is `engine.md` §17. Design the states first — dressed, skirt, no bra, no
 panties, underwear, towel, topless, naked — and read each one in ≥3 places: a leave rule, a place,
-an event or an NPC line (round 9a, the wardrobe card; planned gate: `every clothing state is read
-three times`).
+an event or an NPC line (round 9a, the wardrobe card). Gate `every clothing state is read three
+times` (a `--ship` block) counts a reader when it is the same predicate and slot with values that
+overlap the state's; a dress code reads the slots it names; choice conditions do not count.
 
 ⚠️ **And copy where the reads live, not just the number.** In the counted game that reads exposure
 most, the passages that gate on clothing most are five streets and open places — the walk to work,
@@ -841,8 +842,8 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > 2026-08-22.** The generator emits the two in opposite orders:
 >
 > ```
-> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14843-14845 · :14921
-> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15252-15261
+> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14849-14851 · :14927
+> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15258-15267
 > ```
 >
 > `advanceTime` rolls the day inside itself (`v2.py:6601-6604`) and that is where the tick clears

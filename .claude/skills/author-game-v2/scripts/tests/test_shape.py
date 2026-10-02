@@ -15,13 +15,18 @@ def full():
     return {
         "phase": "idea",
         "want": {"hold_kind": "bill", "promise": {"goal": "her own flat"},   # no date: D8, NC5
-                 "cast": [{"id": "npc_a", "age": 34}, {"id": "npc_b", "age": 22}]},
+                 "cast": [{"id": "npc_a", "age": 34, "keeps": "want + warmth"},
+                          {"id": "npc_b", "age": 22, "keeps": "none — part of the bar system"}],
+                 "threads": [{"id": t, "person": p, "system": sy} for t, p, sy in
+                             (("bar", "npc_b", "bar_shifts"), ("home", "npc_a", "none yet"),
+                              ("nights", "npc_a", "none yet"), ("money", "npc_b", "none yet"))]},
         "spine": {"pages": [{"id": f"SP{i}", "status": "READY", "signed_by": "LO",
                              "drafted_at": "2026-09-27", "signed_at": "2026-09-28"}
                             for i in range(1, 8)]},
         "dependencies": [{"from": {"npc": "npc_b", "step": 1}, "needs": {"npc": "npc_a", "step": 2}}],
         "board": {
             "ascent_tiers": ["nerve"],
+            "systems": [{"id": "bar_shifts", "place": "bar", "people": ["npc_b"], "feeds": ["money"]}],
             "locations": [{"id": "bar"}, {"id": "flat"}],
             "economy": {"currency": "money", "obligation_amount": 100, "week_income": 150},
             "characters": [
@@ -111,6 +116,9 @@ def test_each_check_fails_on_its_defect():
         "the goal chain holds": lambda s: s["want"]["promise"].update(date="week 6"),
         "every spine page is signed": lambda s: s["spine"]["pages"][0].pop("signed_at"),   # D13: unsigned, not same-day
         "the person is there at the step's hour": lambda s: ch(s)[1]["schedule"][0].update(weekdays=["Mon"]),
+        "her life has threads": lambda s: s["want"]["threads"][0].update(person="npc_c"),
+        "each man's keeps is named": lambda s: s["want"]["cast"][0].update(keeps="his warmth"),
+        "every system has a card": lambda s: s["want"]["threads"][1].update(system="home_life"),
     }
     for name, edit in cases.items():
         assert broken(edit) == [name], name

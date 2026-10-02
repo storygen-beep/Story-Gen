@@ -64,8 +64,18 @@ def green_game():
     }
 
 
+def green_card():
+    """A filled system card (the-systems.md SY8) that leads to npc_a, who is in the build."""
+    return {"id": "shift", "name": "The shift", "place": "work", "hours": "18:00-20:00",
+            "cost": "an hour", "lewd_ladder": [{"gate": "start", "acts": ["a look", "a word"]}],
+            "people": ["npc_a"], "pool": ["office"], "daily": False, "memory": "met_a",
+            "growth": "climbs", "feeds": ["money"], "reads": [], "hook_link": "A works there",
+            "leads_to": ["npc_a"]}
+
+
 def green_state():
-    return {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"}},
+    return {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"},
+                      "characters": [{"id": "npc_a"}], "systems": [green_card()]},
             "release_page": {"version": "0.1", "people": ["npc_a"],
                              "door": {"canvas": "office", "choice": "Take the closing shift"},
                              "signed_by_lo": True, "signed_at": "2026-09-26",

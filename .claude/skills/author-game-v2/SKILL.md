@@ -299,6 +299,17 @@ how many fails are [off].
 | **the start choice is read** | a choice the opening asks the player to make is read by real content later — fails only on ZERO, and a game that asks nothing reports n/a, which is not a pass | `the-want.md` §1 · `state.md` |
 | **what she picks is read** | every `[[player.customization_fields]]` value is printed somewhere — `$player.<id>` or the `@player.<id>` token — fails only on ZERO, `sets_portrait` counts as a read, and a game declaring no customization reports n/a, which is not a pass | `the-want.md` §1 W1 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
+| a step is seen from the next room | a ladder step's `seen_from` shares its place's parent (`entry_from`) | `state.md` |
+| every system has a card | each `board.systems[]` card is filled; zero cards is red; a `--ship` block | `the-systems.md` "The check" |
+| every system leads to a person or a sex scene | each card's `leads_to[]` names a built person in the cast or an explicit canvas; a `--ship` block | `the-systems.md` SY8 |
+| every clothing state is read three times | each `board.wardrobe` state and key item has 3+ readers; n/a with clothing off; a `--ship` block | `the-meters.md` W7 |
+| her clothes are backed | a line naming her garment has a check that she wears it; a `--ship` block | `register.md` "The truth rule" |
+| every chat is caused by a scene | each chat's and call's trigger flag is set by a scene, directly or through a caused chat; n/a with no phone; a `--ship` block | `the-phone.md` |
+| a chat is short and timed | 3–7-word bubbles, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
+| a system meets its floors | a daily card's pool ≥20 built canvases, ≥4 lewd rungs, ≥2 acts a rung; a warning | `the-systems.md` SY8 |
+| sex for pay names the amount | a choice on an explicit canvas that pays her names the sum; a warning | `the-systems.md` SY8 |
+| a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
+| adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
 | prose has room | the first floor under the writing: `but` ≥ 2.88 per 1,000 words (field p10) and `and` ≤ 41.1 (field max) — compressed prose drops its joints | `register.md` — "Joints" |
@@ -340,7 +351,7 @@ because the loud voice negates on purpose) · **history on a repeatable screen**
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
 (*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
-gated on the flag that records it — the truth rule's rule 2, `register.md`; its rule 5, her clothes, is not linted yet) · **a printed stat is
+gated on the flag that records it — the truth rule's rule 2, `register.md`; rule 5 is gate *her clothes are backed*) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
 `the-meters.md`, "What the player is shown") · **a one-time step speaks** (every one-time
 canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest
@@ -369,7 +380,8 @@ behind** (how many surfaces she pays for deposit anything; a pure sink is not a 
 only of pure sinks is) · **repeatables without a step** (repeatables added since the last
 `releases[]` entry when no declared ladder step was added — a LIST, never a score; a first release
 prints its baseline) · **a flag that never resets** (a `*_today`/`*_week` flag, or one in
-`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **toggles declared** (each `want.toggles` flag and how many canvases read it; n/a when none is declared; a LIST — `the-surfaces.md` R5b.4) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **world size** (hook share, threads declared and built, speaking NPCs, links, zones; a size) · **systems and connections** (cards, infrastructure, each card's feeds and
+reads; a count) · **toggles declared** (each `want.toggles` flag and how many canvases read it; n/a when none is declared; a LIST — `the-surfaces.md` R5b.4) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
@@ -447,10 +459,10 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
   declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
-  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b). **Everything else is REPORTED** for LO to judge when he plays —
+  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
-  when, and every other gate. `gates.py <slug>` still
+  when, lines naming a future week or day, world size, systems and connections, and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
@@ -463,7 +475,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, does every rule the references POINT AT actually exist, and does any doc hand-write a gate or lint count that has gone stale? Needs no game. Docs point here for the counts rather than writing them. A qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
-  | `shape.py <slug>` | **checkpoint A** — do the spine's decisions hold together? Reads the ledger only: this release's places, hours and traits a step names, dependencies, the pressure sums (a rising bill walked by stage), a ladder per release person, a hint per step, the door, the promise's beat, the goal chain (no date; a goal that ends names `next`), every READY SP page signed, the person is there at the step's hour (`board.characters[].schedule`), a step's gate can be reached from the `raises` before it, and every person is 18+ (`want.cast[].age`, FAILS in every mode); a person's meter written as a bare string WARNS (`{type, min, max}`). Lenient while the spine is written; **strict** with `--finish` or once the phase is `spine` or later, where a missing piece FAILS. Flags in a gate are listed, not judged. `--ship` prints it as a REPORT row. `the-spine.md` |
+  | `shape.py <slug>` | **checkpoint A** — do the spine's decisions hold together? Reads the ledger only: this release's places, hours and traits a step names, dependencies, the pressure sums (a rising bill walked by stage), a ladder per release person, a hint per step, the door, the promise's beat, the goal chain (no date, and a date in a goal's words WARNS; a goal that ends names `next`), every READY SP page signed, the person is there at the step's hour (`board.characters[].schedule`), a step's gate can be reached from the `raises` before it, every person is 18+ (`want.cast[].age`, FAILS in every mode), each thread's person is in the cast (4–6 threads, else WARN), each `keeps` is one of the three or `none — <why>`, and (strict) every system has a card; a person's meter written as a bare string WARNS (`{type, min, max}`). A grandfathered game WARNS on `keeps` and cards. Lenient while the spine is written; **strict** with `--finish` or once the phase is `spine` or later, where a missing piece FAILS. Flags in a gate are listed, not judged. `--ship` prints it as a REPORT row. `the-spine.md` |
 - **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
   the running game in a browser and is the only place some defects exist at all. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own
