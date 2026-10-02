@@ -350,7 +350,7 @@ goes back there, free, since it is not a move (`setup.returnPassage`, `v2.py:183
 closed or gone, or nothing is stored (a scene entered from its room), the exit goes to the canvas's
 home, as `trigger` does. Arriving at any room clears it. `$game_state.return_place` exists only in a
 game with a `return` exit or choice; old saves get it empty. A choice uses `targetType = "return"` the same way, resolved on the click, after the choice's time;
-`gates.py` reads it as an exit, like `location`. In the trait-help list it counts as a `trigger` choice does: one tier, its own effects.
+`gates.py` reads it as an exit, like `location` and `trigger` (also what a missing `targetType` means, `v2.py:16153`); only `node` stays in the canvas. In the trait-help list it counts as a `trigger` choice does: one tier, its own effects.
 
 ---
 

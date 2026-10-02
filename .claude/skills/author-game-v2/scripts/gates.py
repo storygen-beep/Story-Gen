@@ -2477,7 +2477,7 @@ def lint_unwritten_act(model, game):
         last = nodes[-1].get("id") if nodes else None
         for n in nodes:
             for ch in _node_choices(n):
-                if (ch.get("targetType") or "node") not in ("location", "return") or not _choice_acts(ch):
+                if (ch.get("targetType") or "trigger") == "node" or not _choice_acts(ch):
                     continue
                 mins = ch.get("time_progression_minutes") or 0
                 closes = len(nodes) > 1 and n.get("id") == last
@@ -2890,7 +2890,7 @@ def _act_nodes(canvas):
             continue
         eb = node.get("exit_block") or {}
         for ch in list(eb.get("choices") or []):
-            if (ch.get("targetType") or "node") != "node":
+            if (ch.get("targetType") or "trigger") != "node":
                 continue
             tgt = str(ch.get("nodeId") or "").split(".")[-1]
             if tgt and tgt in byid and tgt not in out:
@@ -8125,7 +8125,7 @@ def run_gates(model, game, state=None):
 
             choices = _node_choices(n)
             decisions = [ch for ch in choices
-                         if (ch.get("targetType") or "node") not in ("location", "return")
+                         if (ch.get("targetType") or "trigger") == "node"
                          or _choice_acts(ch)]
             if decisions:
                 (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions))
@@ -12281,7 +12281,7 @@ def _her_climb(game, state):
         acts = acts_of(c)
         return [it for n in c.get("nodes") or [] for ch in _node_choices(n)
                 if str(ch.get("nodeId") or "").split(".")[-1] in acts
-                and ch.get("targetType") not in ("location", "return")
+                and (ch.get("targetType") or "trigger") == "node"
                 for it in _conditions_of(ch)]
 
     def preds(c):
@@ -12342,7 +12342,7 @@ def _her_climb(game, state):
             reached.add(i)
             for ch in _node_choices(nodes[i]):
                 t = str(ch.get("nodeId") or "").split(".")[-1]
-                if ch.get("targetType") not in ("location", "return") and t in nodes and is_open(ch):
+                if (ch.get("targetType") or "trigger") == "node" and t in nodes and is_open(ch):
                     todo.append(t)
         if is_open(c.get("trigger") or {}) and reached & acts:
             bad.append(f"{cid}: (d) open on a new save — nothing paid is reachable before its "
@@ -12387,12 +12387,12 @@ def _her_climb(game, state):
                 seen.add(t)
                 return any(leads_on(str(ch2.get("nodeId") or "").split(".")[-1], seen)
                            for ch2 in _node_choices(nodes[t])
-                           if ch2.get("targetType") not in ("location", "return"))
+                           if (ch2.get("targetType") or "trigger") == "node")
 
             nxt = []
             for ch in _node_choices(node):
                 tgt = str(ch.get("nodeId") or "").split(".")[-1]
-                nxt.append("on" if (ch.get("targetType") not in ("location", "return") and tgt in nodes
+                nxt.append("on" if ((ch.get("targetType") or "trigger") == "node" and tgt in nodes
                                     and leads_on(tgt, set())) else "leave")
             if "on" in nxt and "leave" not in nxt:
                 bad.append(f"{cid}.{nid}: (e) no stop exit — only the way on (D7f: \"stop him\" "
@@ -12441,7 +12441,7 @@ def _no_has_content(game):
         nodes = {n.get("id"): n for n in c.get("nodes") or []}
 
         def target(ch):
-            if ch.get("targetType") in ("location", "return"):
+            if (ch.get("targetType") or "trigger") != "node":
                 return None
             return nodes.get(str(ch.get("nodeId") or "").split(".")[-1])
 
@@ -13338,7 +13338,7 @@ def _clothes_unbacked(model, game):
     for cv in game.get("canvases") or []:
         for nd in cv.get("nodes") or []:
             for ch in ((nd.get("exit_block") or {}).get("choices") or []):
-                tt = ch.get("targetType") or "node"
+                tt = ch.get("targetType") or "trigger"
                 if tt == "node" and ch.get("nodeId"):
                     ways_in[(cv.get("id"), str(ch["nodeId"]).split(".")[-1])].append(
                         ch.get("conditions"))

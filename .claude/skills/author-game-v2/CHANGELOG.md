@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The tools read a `trigger` choice, and a missing `targetType`, as an exit (World and Systems PRD, Phase 7b, L8)
+
+**What.** The engine sends a `trigger` choice to the canvas's home, as it does a `return` one, and never follows its
+`nodeId`; an omitted `targetType` is `trigger` (`v2.py:16153`, `:16185`; the importer's default too). Only `node`
+stays inside the canvas. `scripts/gates.py` (**protected, LO approved**) saw `trigger` as a decision in the readers
+the `return` fix touched, and three readers defaulted a missing `targetType` to `node`. Nine line-for-line swaps, each
+now `(ch.get("targetType") or "trigger") == "node"` (or `!=`):
+- `lint_unwritten_act` (~:2480) — a `trigger` or untyped choice that acts is listed;
+- `_act_nodes` one-hop (~:2893) — the default was `node`;
+- `a place is not a catalogue` (~:8128) — a bare `trigger` is an exit, not a decision;
+- `her climb` (~:12284, ~:12345, ~:12390, ~:12395) — a `trigger` is a leave, never a way on;
+- `a no has content` (~:12444) — a `trigger` leaves the step;
+- `her clothes are backed` ways in (~:13341) — the default was `node`.
+Read and left: ~:1084, ~:2831, ~:6045 (already only `node`). Readers that follow `nodeId` without reading
+`targetType` (~:604/:611, ~:2879, ~:5144/:5168, ~:7629, ~:12269) still walk a stray `nodeId` on an exit; no game
+has one, and changing them is a new behaviour, so they are listed, not changed. `shape.py` reads no choice target.
+`references/engine.md` §13 says so in one line (+15 words).
+
+**Verified.** New `scripts/tests/test_gates_trigger_target.py` (4): the ws6 green fixture with a `trigger` or an
+untyped exit scores every gate exactly as with a location exit, and ships with no red BLOCK row; a `trigger` or
+untyped choice that pays is an unwritten act; one with a stray `nodeId` to a written reply is a walk out. Three of
+the four fail on the old code. `--ship` on HEAD exports of every game but vesper_two: no line moves (no game has a
+`trigger`, `return` or untyped choice). A probe turning every bare location exit into `trigger` moved
+`a place is not a catalogue` on the old code (billable_hours hubs median 2 → 1, members_only and probation
+hub/room counts) and nothing on the new. No line count moved; `cite_check.py --fix` 0 drifted; selfcheck clean;
+pytest passes.
+
+**Words:** +15, running total 146,841 / 149,283.
+
 ## 2026-10-02 — Stale `v2.py` cites re-pointed (World and Systems PRD, Phase 7b, L7)
 
 **What.** Numbers only; no sentence changed.
