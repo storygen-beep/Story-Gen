@@ -1,0 +1,104 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7b (E15): a locked choice is not
+#  shown as a way to raise a trait.
+#  Date: 2026-10-02
+#
+#  Media-free. An activity's tiers are the choices on its menu node; the trait-help
+#  modal ("where can I raise X?") lists an activity under a trait only when a tier
+#  whose conditions hold raises it. Every lock below is fitness >= 20; she starts
+#  at 10.
+#
+#    spar   menu: "Spar a round" is a locked `trigger` choice (fitness +4);
+#           "Not today" is an open `trigger` choice that raises nothing.
+#    swim   menu: "Swim laps" is a locked `return` choice (fitness +3);
+#           "Just look" is an open `return` choice that raises nothing.
+#    row    menu: "Race" is a locked `trigger` choice (fitness +5); "Paddle" is an
+#           open `trigger` choice (fitness +1).
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_tiers_locked"
+title       = "Engine World and Systems Tiers Locked"
+description = "Engine fixture: a locked tier is not listed as a way to raise a trait."
+
+[time]
+enabled       = true
+starting_hour = 9
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 50, fitness = 10 }
+flag_keys   = []
+
+[[locations]]
+id          = "loc_home"
+name        = "Home"
+description = "Her room."
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "spar"
+name = "Spar"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "ring"
+name   = "Ring"
+blocks = [ { type = "paragraph", content = "SPAR_RING" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Spar a round", targetType = "trigger", time_progression_minutes = 30, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 20 } ] }, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 4 } ] },
+  { text = "Not today", targetType = "trigger", time_progression_minutes = 0 } ] }
+
+[[canvases]]
+id   = "swim"
+name = "Swim"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "pool"
+name   = "Pool"
+blocks = [ { type = "paragraph", content = "SWIM_POOL" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Swim laps", targetType = "return", time_progression_minutes = 30, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 20 } ] }, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 3 } ] },
+  { text = "Just look", targetType = "return", time_progression_minutes = 0 } ] }
+
+[[canvases]]
+id   = "row"
+name = "Row"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "boat"
+name   = "Boat"
+blocks = [ { type = "paragraph", content = "ROW_BOAT" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Race", targetType = "trigger", time_progression_minutes = 30, conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 20 } ] }, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 5 } ] },
+  { text = "Paddle", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 1 } ] } ] }

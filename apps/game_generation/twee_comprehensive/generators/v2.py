@@ -13847,7 +13847,7 @@ setup.castTraitRows = function (slug, npc) {
                              **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
                             for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                         ],
-                        "conditions": None
+                        "conditions": conditions
                     })
                 elif target_type == "node":
                     node_id = choice.get("nodeId", "")
