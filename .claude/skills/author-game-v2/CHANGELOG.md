@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Two gates.py comments made true (World and Systems PRD, Phase 7b, L2)
+
+**What.** `scripts/gates.py`, comments only, line for line (no line count moved):
+- G13b (a goal says what it wants, ~:7762): the importer requires `label` on trait/counter, weekday,
+  hours_since_flag and days_since_flag goals (`template_import.py:7447-7527`, read: the four
+  `require_label and not item.label` branches); only flag goals fall through. It said trait and counter only.
+- G25 (live ops, ~:8288): the importer now rejects a dead op on every canvas effect
+  (`template_import.py:6353-6406`, `_check_ops` over `template.canvases`) and on cheat-page grants (`:4763`),
+  but never walks the `[engine]` block (the daily_tick parse at `:3466-3530` takes `op` unchecked), so G25 still
+  earns its place there. It said cheat grants only.
+
+**Verified.** Read each importer line before writing. `wc -l gates.py` 14,616 before and after; `cite_check.py
+--fix` 0 drifted; selfcheck clean (0 orphans); pytest 664 passed.
+
+**Words:** 0, running total 146,775 / 149,283.
+
+---
+
 ## 2026-10-02 — World size: the hub is the house, not the street (World and Systems PRD, Phase 7b, L1)
 
 **What.** `scripts/gates.py`: new `_world_hub(board, game)` (above `main()`) — the hub is the room her room

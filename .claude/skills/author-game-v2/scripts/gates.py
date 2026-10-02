@@ -7759,8 +7759,8 @@ def run_gates(model, game, state=None):
     # The goal renderer falls back `label -> trait -> flag -> ""` (v2.py:15962-15964),
     # so a goals item carrying no `label` prints its RAW KEY to the player: a bullet
     # reading "◯ x_05_done" under the 🎯 To advance header. The importer requires
-    # `label` on trait and counter goals ONLY (template_import.py:7521-7525; the
-    # dataclass says so itself at :1293-1296) — flag-shaped goals fall straight through.
+    # `label` on trait/counter, weekday, hours_since_flag and days_since_flag goals
+    # (template_import.py:7447-7527) — only flag-shaped goals fall straight through.
     #
     # Trait goals are already safe and already print the number: the renderer appends
     # " — <current> / <target>" for them (v2.py:15966-15968). The engine does its half
@@ -8285,9 +8285,9 @@ def run_gates(model, game, state=None):
     # ⚠️ THE CHEAPEST GATE HERE, AND IT CATCHES THE MOST INVISIBLE CLASS OF BUG.
     # `applyTraitEffect` runs `add` and `set`, and on anything else falls through to
     # `// Unknown op; do nothing` and RETURNS (v2.py:5742-5751). Nothing normalises the
-    # value: `subtract` appears nowhere in the generator or the importer. The importer
-    # validates `op` for cheat-page grants (template_import.py:4763) and for nothing else,
-    # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
+    # value. The importer now rejects a dead op on every canvas effect and cheat-page grant
+    # (template_import.py:6353-6406, :4763) but never walks the [engine] block, so a dead
+    # op there is valid TOML, builds green, and emits verbatim into the HTML.
     #
     # A dead effect builds green and changes nothing: a meter never moves, a cost is never
     # charged, and nothing says why — a live play-through passes it too, because the number
