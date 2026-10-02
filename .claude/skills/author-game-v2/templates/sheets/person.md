@@ -30,3 +30,12 @@
 | thread | cause flag (a scene sets it) | delay | window | booking (place + time, and its reminder) | loop (after the sex step, cooldown) |
 |---|---|---|---|---|---|
 | <conversation id> | <flag_key — the canvas that sets it> | <days_since_flag ≥ n> | <HH:MM–HH:MM> | <location_id, day, from — reminder: quest card · hub line · waking line> | <every n days, HH:MM–HH:MM> |
+
+## Why — the source of each key choice
+
+A rule (its file and id), a scout card, LO's call (with the date), or **guess**. Writing "guess" is
+allowed; hiding one is not (`references/the-release.md`, "When LO rejects something").
+
+| key choice | source |
+|---|---|
+| <where he sleeps · what he wants · each step and its gate> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

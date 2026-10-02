@@ -172,3 +172,10 @@ def test_leads_warns_when_grandfathered_and_blocks_when_not(tmp_path, monkeypatc
     st["releases"] = [{"version": "0.2", "shipped": "2026-10-03"}]
     assert ck8b.ship(tmp_path, monkeypatch, "probation", state=st)[LEADS_ROW][0] is False
     assert ck8b.ship(tmp_path, monkeypatch, "new_game")[LEADS_ROW][0] is True
+
+
+def test_the_row_says_its_label_once(tmp_path, monkeypatch):
+    head = ck8b.ship(tmp_path, monkeypatch, "new_game")[CARD_ROW][1]
+    assert not head.startswith(CARD_ROW) and CARD_ROW not in head
+    # A row named apart from its gate still names the gate.
+    assert gates._gate_prefix("standing surface") == "standing surface: "

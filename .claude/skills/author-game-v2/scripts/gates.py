@@ -11464,11 +11464,11 @@ def ship_rows(slug, root=None):
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
     report.append(_world_size_row(model, state, game))
-    report.append(_systems_row(state))
+    report += [_systems_row(state), _coverage_report_row(state), _guess_row(root, slug)]
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
-                   [f"FAIL {g}" for g in red]))
+                   [f"FAIL {g}" + _other_gate_names(g, results) for g in red]))
 
     # ── LO B: a row red only under a rule newer than a grandfathered game WARNS ──
     # Re-run just that row with the rule in its old form. Red then too: it stays a FAIL.
@@ -11518,10 +11518,10 @@ def _block_gate_verdict(gname, r):
         return False, f"gate '{gname}' did not run", []
     if r.get("parked") or r.get("few"):
         # PRD IC21: a parked block is never read as green, and says why it is red.
-        return False, f"{gname}: {r['headline']}", r["detail"][:10]
+        return False, f"{_gate_prefix(gname)}{r['headline']}", r["detail"][:10]
     if r["na"] and gname not in SHIP_NA_PASSES:
-        return False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
-    return (None if r["na"] else r["pass_"]), f"{gname}: {r['headline']}", r["detail"][:10]
+        return False, f"{_gate_prefix(gname)}n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
+    return (None if r["na"] else r["pass_"]), f"{_gate_prefix(gname)}{r['headline']}", r["detail"][:10]
 
 
 def ship_mode(slug):
@@ -12747,6 +12747,8 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("a chat is short and timed", *_chats_short_and_timed(game))
     gate("a system meets its floors", *_system_floors(model, state))
     gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
+    gate("no unknown topic", *_no_unknown_topic(state))
+    gate("a skill rejection names a notebook entry", *_skill_rejections_logged(state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -12972,10 +12974,10 @@ def _future_dates_row(model, game):
     for where, text in parts:
         for m in _FUTURE_DATE_RE.finditer(str(text)):
             a, b = max(0, m.start() - 40), min(len(text), m.end() + 40)
-            # "hasn't answered you in eight months" is the past: an "in N …" after a negation
-            # in the same sentence is a duration, not an appointment.
-            if m.group(0).lower().startswith("in") and _PAST_DURATION_RE.search(
-                    re.split(r"[.!?]", text[:m.start()])[-1]):
+            # "hasn't answered you in eight months", "in four months she has never", "four men in
+            # one week" (she has run them) and "the day two associates" are not appointments:
+            # `_not_an_appointment`, above main().
+            if _not_an_appointment(text, m):
                 continue
             hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
     return ("a dated line names a built event", not hits,
@@ -13566,15 +13568,19 @@ def _canvas_people(c):
 
 def _world_hub(board, game):
     """The top of the house: the room her room's `entry_from` chain reaches just below
-    `board.map.exterior` (or the chain's root when the street isn't on it). No home base, or one
-    the build doesn't declare: the first `board.map.roots[]`, as before."""
+    `board.map.exterior` or an `outdoors` place (a path outside is not the house: a home base whose
+    parent is outdoors is the house itself). No home base, or one the build doesn't declare: the
+    first `board.map.roots[]`, as before."""
     bmap = board.get("map") or {}
     parent = {l.get("id"): l.get("entry_from") for l in (game or {}).get("locations") or []
               if l.get("id")}
+    outdoors = {l.get("id") for l in (board.get("locations") or [])
+                if isinstance(l, dict) and "outdoors" in (l.get("labels") or [])}
     lid, seen = bmap.get("home_base"), set()
     if lid not in parent:
         return (bmap.get("roots") or [None])[0]
-    while parent.get(lid) and parent[lid] != bmap.get("exterior") and lid not in seen:
+    while parent.get(lid) and parent[lid] != bmap.get("exterior") and parent[lid] not in outdoors \
+            and lid not in seen:
         seen.add(lid)
         lid = parent[lid]
     return lid
@@ -13635,6 +13641,132 @@ def _systems_and_connections(state):
 def _systems_row(state):
     summary, rows = _systems_and_connections(state)
     return ("systems and connections", None, summary + " — a count, never a score", rows)
+
+
+# ── the dated-line REPORT: a match that is not an appointment ──────────────
+# A perfect tense in the sentence makes "in N weeks" a span already lived ("she has run four
+# men in one week", "in four months she has never once come in"); `_PAST_DURATION_RE` (a
+# negation before the match) is the older half of the same test.
+_PERFECT_RE = re.compile(
+    r"\b(?:has|have|had)\s+(?:(?:never|already|just|not|once|ever)\s+)*"
+    r"(?:\w+ed|been|run|done|gone|seen|had|made|taken|come|kept|met|got|gotten|spent|slept)\b"
+    r"|\w+'ve\s+\w+ed\b", re.I)
+
+
+def _not_an_appointment(text, m):
+    """True when `_FUTURE_DATE_RE`'s match `m` in `text` is not a date the player is promised.
+
+    "in N weeks" is a span, not an appointment, when its sentence has a negation before it or a
+    perfect tense on either side. "the day two associates" / "the day one of them" is "the day
+    [that] two …": `day` after "the", with the number spelled out, is not "day 2" ("by day two"
+    and "day 2" still count)."""
+    said = m.group(0).lower()
+    before = re.split(r"[.!?]", text[:m.start()])[-1]
+    after = re.split(r"[.!?]", text[m.end():])[0]
+    if said.startswith("in"):
+        return bool(_PAST_DURATION_RE.search(before) or _PERFECT_RE.search(before)
+                    or _PERFECT_RE.search(after))
+    return (said.startswith("day") and not re.search(r"\d", said)
+            and re.search(r"\bthe\s+$", before, re.I) is not None)
+
+
+def _gate_prefix(gname):
+    """A BLOCK row's headline names its gate only when the row's label is a different name
+    ("no empty rooms" ← `standing surface: …`); a row named after its gate says it once."""
+    return "" if SHIP_BLOCK_GATES.get(gname) == gname else f"{gname}: "
+
+
+# ── the coverage list (SKILL.md "Never build an unknown on a guess"; `templates/sheets/coverage.md`) ──
+# A WARN by type (LO: warn, never block): a scored gate, so `--ship` lists it under `every other
+# gate`, with the unknown topics by name. No list is red, never n/a: an absence is not a pass. A game
+# still grandfathered (COVERAGE_SINCE) is told it predates the rule; it warns either way. No ledger
+# at all is n/a. shape.py reads the same list (its coverage rows) and the same date.
+COVERAGE_SINCE = "2026-10-02"
+SHIP_OTHER_NAMED = {"no unknown topic"}
+
+
+def _coverage_list(state):
+    cov = (((state or {}).get("board") or {}).get("coverage"))
+    return [e for e in cov if isinstance(e, dict)] if isinstance(cov, list) else None
+
+
+def _no_unknown_topic(state):
+    """(ok, headline, detail) for `no unknown topic`: every `board.coverage[]` entry has a status
+    other than `unknown`."""
+    if not state:
+        return None, "no v2_state.json — no coverage list to read", []
+    cov = _coverage_list(state)
+    if cov is None:
+        late = _grandfathered(state.get("slug"), state, COVERAGE_SINCE)
+        return False, ("no board.coverage — the game predates the list; write it before the next "
+                       "release" if late else "no board.coverage — list every topic first"), []
+    unknown = [str(e.get("topic")) for e in cov if e.get("status") == "unknown"]
+    if unknown:
+        return False, f"{len(unknown)} unknown: {', '.join(unknown)}", \
+            [f"{u}: scout it (LO says which), ask LO, or a placeholder on the release page"
+             for u in unknown]
+    return True, f"{len(cov)} topic(s), none unknown", []
+
+
+def _other_gate_names(gname, results):
+    """The `every other gate` line names what a SHIP_OTHER_NAMED gate found, not only its name."""
+    return f": {results[gname]['headline']}" if gname in SHIP_OTHER_NAMED else ""
+
+
+def _coverage_report_row(state):
+    """The --ship REPORT row: how much of this release rests on thin ground — the placeholder and
+    scouted topics, by name. A count, never a score."""
+    cov = _coverage_list(state)
+    if cov is None:
+        return ("topics on thin ground", None, "no board.coverage — nothing to count", [])
+    rows = [f"{s}: {', '.join(str(e.get('topic')) for e in cov if e.get('status') == s)}"
+            for s in ("placeholder", "scouted") if any(e.get("status") == s for e in cov)]
+    n = {s: sum(1 for e in cov if e.get("status") == s) for s in ("placeholder", "scouted")}
+    return ("topics on thin ground", None, f"{n['placeholder']} placeholder · {n['scouted']} scouted "
+            f"of {len(cov)} topic(s) — a count, never a score", rows)
+
+
+# ── the-release.md "When LO rejects something": the reason trail ───────────
+# Each sheet's key choices carry a source (`templates/sheets/*.md`, "Why — the source of each key
+# choice"); "guess" is allowed and REPORTED, never judged. A rejection whose layer is the skill
+# is a gap the notebook must hold: the WARN gate below checks its `skill_fix` names one (`N<n>`).
+REJECTION_LAYERS = ("skill_wrong", "skill_silent", "ignored_rule", "lo_changed", "engine")
+_NOTEBOOK_ID_RE = re.compile(r"\bN\d+\b")
+
+
+def _skill_rejections_logged(state):
+    """(ok, headline, detail) for `a skill rejection names a notebook entry`. n/a: none recorded."""
+    rej = [r for r in (((state or {}).get("release_page") or {}).get("rejections") or [])
+           if isinstance(r, dict)]
+    if not rej:
+        return None, "no rejection recorded on the release page", []
+    bad = [f"{r.get('what') or '?'}: layer {r.get('layer')!r} — one of {', '.join(REJECTION_LAYERS)}"
+           for r in rej if r.get("layer") not in REJECTION_LAYERS]
+    skill = [r for r in rej if r.get("layer") in ("skill_wrong", "skill_silent")]
+    bad += [f"{r.get('what') or '?'}: a skill gap with no notebook entry in skill_fix (`N<n>`)"
+            for r in skill if not _NOTEBOOK_ID_RE.search(str(r.get("skill_fix") or ""))]
+    return not bad, f"{len(rej)} rejection(s), {len(skill)} in the skill", bad
+
+
+def _guess_row(root, slug):
+    """The --ship REPORT row: sheet table rows whose last cell is a source that starts "guess"
+    (the game's `sheets/**/*.md` and `DECISIONS.md`), by file and choice. A count, never a score."""
+    import glob as _glob
+    gdir = os.path.join(root or os.getcwd(), "games", slug)
+    files = sorted(_glob.glob(os.path.join(gdir, "sheets", "**", "*.md"), recursive=True)
+                   + _glob.glob(os.path.join(gdir, "DECISIONS.md")))
+    hits = []
+    for p in files:
+        for line in open(p, encoding="utf-8", errors="replace"):
+            if not line.lstrip().startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) >= 2 and cells[-1].lower().startswith("guess") and not cells[0].startswith("<"):
+                hits.append(f"{os.path.relpath(p, gdir)}: {cells[0][:60]}")
+    head = (f"{len(hits)} key choice(s) rest on a guess — a count, never a score" if hits
+            else f"no sheet marks a choice \"guess\" ({len(files)} sheet file(s) read)")
+    return ("choices marked guess", None, head, hits[:12] + ([f"… and {len(hits) - 12} more"]
+                                                            if len(hits) > 12 else []))
 
 
 def main():

@@ -37,3 +37,12 @@
 | meter id | kind | key | fed at | read by |
 |---|---|---|---|---|
 | <meter_id> | `ambient` · `sourced` | <trait or flag> | <location_id> | <one line — what changes because of it> |
+
+## Why — the source of each key choice
+
+A rule (its file and id), a scout card, LO's call (with the date), or **guess**. Writing "guess" is
+allowed; hiding one is not (`references/the-release.md`, "When LO rejects something").
+
+| key choice | source |
+|---|---|
+| <place and hours · the pay · each ladder · what it costs> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

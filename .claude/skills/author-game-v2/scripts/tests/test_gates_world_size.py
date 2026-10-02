@@ -88,6 +88,20 @@ def test_the_hub_single_root():
     assert gates._world_hub(board, game) == "house"
 
 
+def test_the_hub_is_the_house_itself_when_its_parent_is_outdoors():
+    # members_only's shape: town -> cliff path (outdoors) -> the staff house, which is her home.
+    game = _locs(("town", None), ("cliff_path", "town"), ("staff_house", "cliff_path"),
+                 ("club", "cliff_path"))
+    board = {"map": {"exterior": "town", "home_base": "staff_house"},
+             "locations": [{"id": "town", "labels": ["outdoors"]},
+                           {"id": "cliff_path", "labels": ["public", "outdoors"]},
+                           {"id": "staff_house", "labels": ["private", "home_base"]}]}
+    assert gates._world_hub(board, game) == "staff_house"
+    # The same chain with an indoor stairwell (probation's shape) still climbs to it.
+    board["locations"][1]["labels"] = ["public"]
+    assert gates._world_hub(board, game) == "cliff_path"
+
+
 def test_the_hub_without_a_home_base_is_the_first_root():
     assert gates._world_hub({"map": {"roots": ["room_a"]}}, _locs(("room_a", None))) == "room_a"
     assert gates._world_hub({}, None) is None

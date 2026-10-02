@@ -33,7 +33,7 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 3. **Heat lives where the player returns** — most explicit content sits where the player can go
    back. The gate counts **beats** (a beat is one screen): `explicit floor` wants **7.5% of repeatable
    beats** to carry three or more explicit words. The 7.5% is a lenient floor inside the reference game's band (6.8–11.3%,
-   re-measured 2026-10-02), not the genre's rate, and the field reads differently by unit:
+   re-measured 2026-10-02 with word list version 2, `round5/dol_snapshots/`), not the genre's rate, and the field reads differently by unit:
 
    | unit | field median | the reference game's 7.5% |
    |---|---|---|
@@ -175,7 +175,7 @@ boundary and wait for LO's pick or signature** before starting the next phase's 
 | *(no state file)*, premise picked | write the Want, create the state file | `references/the-want.md` · `templates/want.md` | the Want is recorded → `want` |
 | `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, two on the main men and one on a thread of her life, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
-| `spine` | lay down the world — the base — **`the-systems.md` first: fill a card per system before the rooms**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
+| `spine` | lay down the world — the base — **the coverage list first** (`templates/sheets/coverage.md`), then **`the-systems.md`: fill a card per system before the rooms**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **the sheets** — the design LO reads and signs, before any TOML. Where LO writes them, hand drafts over in `proposals/` (S13) | `references/the-sheets.md` S13 · `templates/sheets/` | every sheet is [READY] and signed → `sheets` |
 | `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
 | `release` | run the loop — pitch, attack, write, gate, read, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
@@ -308,6 +308,8 @@ how many fails are [off].
 | a chat is short and timed | 3–7-word bubbles, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
 | a system meets its floors | a daily card's pool ≥20 built canvases, ≥4 lewd rungs, ≥2 acts a rung; a warning | `the-systems.md` SY8 |
 | sex for pay names the amount | a choice on an explicit canvas that pays her names the sum; a warning | `the-systems.md` SY8 |
+| a skill rejection names a notebook entry | each `release_page.rejections[]` whose layer is the skill names its notebook entry; a warning | `the-release.md` "When LO rejects something" |
+| no unknown topic | every `board.coverage[]` topic has a status but `unknown`; no list is red; a warning, `--ship` names each | `templates/sheets/coverage.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
@@ -440,6 +442,11 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   goes onto the game's pages before it is built** (S13): a plan kept outside `games/<slug>/` is one
   the next session will not read.
 
+- **Never build an unknown on a guess.** Every topic the game needs (a system, a kind of place, a
+  recurring scene, a mechanic it leans on) goes on the coverage list with its source: a rule here, a
+  scout card, LO's call, or a placeholder named on the release page. An `unknown` waits for one of
+  those; the build session asks LO before any scout runs (`templates/sheets/coverage.md`).
+
 - **A number is a promise until an instrument produces it.** `the-sheets.md` S1. A sheet that
   counts paragraphs and `gates.py`, which counts nodes, disagree about the same design. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
   side of a summary, however carefully it was counted.
@@ -462,7 +469,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
-  when, lines naming a future week or day, world size, systems and connections, and every other gate. `gates.py <slug>` still
+  when, lines naming a future week or day, world size, systems and connections, topics on thin ground (placeholder and scouted, by name), choices whose sheet source is "guess", and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
@@ -475,7 +482,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   | `gates.py --saves <slug> [<ver> [<ver>]]` | **the only check that reads TWO releases.** Every other check here reads one snapshot, and a save break does not exist in a snapshot — renaming a canvas id produces a game that is correct on its own terms and strands every player holding a save. Diffs the current build's join keys (passage names, `$npcs` keys, flag keys, player and NPC meter keys, the story title) against the newest archived release; additions are counted and never judged, because the migration seam reaches them (`engine.md` §40). Needs `releases/v<version>.html` to exist — without an archive it cannot run. **Exits non-zero.** ⚠️ A rescaled stat and a burned one-shot grant are invisible to it and stay human: `the-returning-player.md` §4 and §6. |
   | `gates.py --ship <slug>` | **may this build reach a player?** The BLOCK list above, then the REPORT list. Calls `--release` and `--saves` rather than re-implementing them. **Exits non-zero on any red BLOCK row** — the only mode wired into publishing (`release_upload.py`, the pre-commit hook). |
   | `gates.py --selfcheck` | does this file still document every gate and lint the script emits, does every rule the references POINT AT actually exist, and does any doc hand-write a gate or lint count that has gone stale? Needs no game. Docs point here for the counts rather than writing them. A qualified pointer at a rule with no section FAILS, while a bare in-file reference is listed to eyeball and never scored, because a withdrawn rule discussed as history is correct prose. |
-  | `shape.py <slug>` | **checkpoint A** — do the spine's decisions hold together? Reads the ledger only: this release's places, hours and traits a step names, dependencies, the pressure sums (a rising bill walked by stage), a ladder per release person, a hint per step, the door, the promise's beat, the goal chain (no date, and a date in a goal's words WARNS; a goal that ends names `next`), every READY SP page signed, the person is there at the step's hour (`board.characters[].schedule`), a step's gate can be reached from the `raises` before it, every person is 18+ (`want.cast[].age`, FAILS in every mode), each thread's person is in the cast (4–6 threads, else WARN), each `keeps` is one of the three or `none — <why>`, and (strict) every system has a card; a person's meter written as a bare string WARNS (`{type, min, max}`). A grandfathered game WARNS on `keeps` and cards. Lenient while the spine is written; **strict** with `--finish` or once the phase is `spine` or later, where a missing piece FAILS. Flags in a gate are listed, not judged. `--ship` prints it as a REPORT row. `the-spine.md` |
+  | `shape.py <slug>` | **checkpoint A** — do the spine's decisions hold together? Reads the ledger only: this release's places, hours and traits a step names, dependencies, the pressure sums (a rising bill walked by stage), a ladder per release person, a hint per step, the door, the promise's beat, the goal chain (no date, and a date in a goal's words WARNS; a goal that ends names `next`), every READY SP page signed, the person is there at the step's hour (`board.characters[].schedule`), a step's gate can be reached from the `raises` before it, every person is 18+ (`want.cast[].age`, FAILS in every mode), each thread's person is in the cast (4–6 threads, else WARN), each `keeps` is one of the three or `none — <why>`, and (strict) every system has a card and the coverage list holds (a card's entry, each source on disk; an `unknown` WARNS by name); a person's meter written as a bare string WARNS (`{type, min, max}`). A grandfathered game WARNS on `keeps`, cards and coverage. Lenient while the spine is written; **strict** with `--finish` or once the phase is `spine` or later, where a missing piece FAILS. Flags in a gate are listed, not judged. `--ship` prints it as a REPORT row. `the-spine.md` |
 - **`scripts/playtest.py <slug>` plays the build.** Every gate above reads the source; this drives
   the running game in a browser and is the only place some defects exist at all. It is also what the `v2-player` agent runs.
   ⚠️ **A red is a hypothesis until its cause is quoted as `file:line`**: three of this harness's own

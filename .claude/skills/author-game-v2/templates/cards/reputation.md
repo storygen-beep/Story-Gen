@@ -55,8 +55,8 @@ a crowd scene (the party, the bar) moves it a lot. HAND/HEURISTIC, `cards/gossip
 - **1 door it can close, with a way back** (SD's heat): lie low, earn trust or pay. A setback, never a dead end.
 - **1 way down**, and **friends who won't spread it**.
 - **No decay.** Say so on the card.
-- **No price effects yet**: prices that read reputation wait for item prices. Pay can already read it (a value
-  worked out from her stats, `references/engine.md` §3).
+- **No price effects yet**: item prices exist, but a price is a fixed number and can't read a stat yet. Pay
+  can already read it (a value worked out from her stats, `references/engine.md` §3).
 
 The smallest version that feels alive: she is seen → the people who saw remember that act → one of them who
 doesn't like her says it in a hub while she's there → his friends know, hers refuse to → a word on her status page

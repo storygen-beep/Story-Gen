@@ -233,6 +233,13 @@ the Want's promise, it returns that as one question for LO.
 that changes state, and never judges or proposes ideas: players choose the order and supply small
 ideas; they do not set the premise (Great Games Study, round 4b).
 
+## The Scout — one unknown topic, from the top games
+
+`.claude/agents/v2-scout.md` (`subagent_type: "v2-scout"`). Only after LO picks which unknown topics to
+scout: it traces one real instance in the adults-only pass-list games and returns a mini card, or "not
+found", naming every game it used. Saved at `games/<slug>/scout/<topic>.md`; the path is the topic's
+`source`.
+
 ---
 
 ## What is NOT an agent

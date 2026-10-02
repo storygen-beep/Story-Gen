@@ -13,3 +13,12 @@
 | # | screen | who speaks | what she learns | button (quoted) | clock after |
 |---|---|---|---|---|---|
 | 1 | <passage or node> | <name or nobody> | <one line> | "<label>" | <HH:MM> |
+
+## Why — the source of each key choice
+
+A rule (its file and id), a scout card, LO's call (with the date), or **guess**. Writing "guess" is
+allowed; hiding one is not (`references/the-release.md`, "When LO rejects something").
+
+| key choice | source |
+|---|---|
+| <the goal · the first objective · the starting clock> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

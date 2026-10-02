@@ -26,6 +26,7 @@ flag, so "undeclared" cannot be told from "set by a canvas not written yet". The
 import json
 import math
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -51,7 +52,7 @@ def _person(p):
 KEEPS = ("step counter + memory flags", "want + warmth", "want + power")
 
 
-def check(state, strict=False, slug=None):
+def check(state, strict=False, slug=None, root=None):
     """[(name, ok, headline, detail)] — ok True / False / None (n/a) / "warn" (listed, never a FAIL).
 
     `slug` (else the ledger's own `slug`) names the game: a game in `gates.SHIP_GRANDFATHERED`
@@ -600,7 +601,91 @@ def check(state, strict=False, slug=None):
             f"{len(cards)} card(s), {len(named)} named by a thread"
             + (" · grandfathered: warns until it next ships" if bad and grandfathered else ""), bad)
 
+    # 15 · the coverage list (SKILL.md "Never build an unknown on a guess";
+    # `templates/sheets/coverage.md`), strict only: every system card has an entry; an `unknown`
+    # WARNS by name, never fails; a `covered` source names a file that exists (and the rule id it
+    # names is in it), a `scouted` source is a scout card on disk. A game with no list, still
+    # grandfathered (`gates._grandfathered`, COVERAGE_SINCE), WARNS until it next ships.
+    for r in _coverage_rows(state, strict, slug, cards, root):
+        row(*r)
+
     return rows, sorted(flags)
+
+
+COVERAGE_SINCE = gates.COVERAGE_SINCE
+COVERAGE_KINDS = ("system", "place", "scene", "mechanic")
+COVERAGE_STATUSES = ("covered", "scouted", "lo", "placeholder", "unknown")
+SKILL_DIR = os.path.dirname(HERE)
+
+
+def _coverage_source_problem(entry, slug, root):
+    """Why this entry's `source` does not hold up, or None. `covered`: a file in the skill (or
+    the repo) and, when it names a rule id (`SY1`, `W10`), that id appears in the file.
+    `scouted`: the scout card exists. `lo` and `placeholder`: a source is written at all."""
+    status, src = entry.get("status"), str(entry.get("source") or "").strip()
+    topic = entry.get("topic")
+    if status == "unknown":
+        return None
+    if not src:
+        return f"{topic} ({status}): no source"
+    if status in ("lo", "placeholder"):
+        return None
+    paths = re.findall(r"[\w./-]+\.(?:md|toml|py|json)\b", src)
+    if not paths:
+        return f"{topic} ({status}): source {src!r} names no file"
+    base = root or os.getcwd()
+    tries = [os.path.join(base, paths[0]), os.path.join(SKILL_DIR, paths[0]),
+             os.path.join(SKILL_DIR, "references", paths[0])]
+    if slug:
+        tries.append(os.path.join(base, "games", slug, paths[0]))
+    hit = next((p for p in tries if os.path.isfile(p)), None)
+    if hit is None:
+        what = "no scout card at" if status == "scouted" else "no file"
+        return f"{topic} ({status}): {what} {paths[0]}"
+    if status == "covered":
+        text = open(hit, encoding="utf-8", errors="replace").read()
+        ids = [i for i in re.findall(r"\b[A-Z]{1,3}\d+[a-z]?\b", src.split(paths[0], 1)[1])]
+        missing = [i for i in ids if not re.search(rf"\b{re.escape(i)}\b", text)]
+        if missing:
+            return f"{topic} (covered): {paths[0]} has no rule {', '.join(missing)}"
+    return None
+
+
+def _coverage_rows(state, strict, slug, cards, root=None):
+    """The three coverage rows, as (name, ok, headline, detail): n/a until the spine is finished."""
+    names = ("every system has a coverage entry", "no topic is unknown", "every coverage source exists")
+    if not strict:
+        return [(n, None, "n/a — checked once the spine is finished") for n in names]
+    cov = (state.get("board") or {}).get("coverage")
+    slug = slug or state.get("slug")
+    if not isinstance(cov, list):
+        late = gates._grandfathered(slug, state, COVERAGE_SINCE)
+        head = ("no board.coverage — grandfathered: warns until it next ships" if late else
+                "no board.coverage — list every topic first (templates/sheets/coverage.md)")
+        return [(n, "warn" if late else (False if n != "no topic is unknown" else "warn"), head)
+                for n in names]
+    entries = [e for e in cov if isinstance(e, dict)]
+    late = gates._grandfathered(slug, state, COVERAGE_SINCE)
+    out = []
+    systems = {e.get("topic") for e in entries if e.get("kind") == "system"}
+    names_of = {c.get("id"): c.get("name") for c in ((state.get("board") or {}).get("systems") or [])
+                if isinstance(c, dict)}
+    bad = [f"system card `{cid}` has no coverage entry (kind system, topic `{cid}`)"
+           for cid in sorted(c for c in cards if c not in systems and names_of.get(c) not in systems)]
+    bad += [f"{e.get('topic')}: kind {e.get('kind')!r} — one of {', '.join(COVERAGE_KINDS)}"
+            for e in entries if e.get("kind") not in COVERAGE_KINDS]
+    bad += [f"{e.get('topic')}: status {e.get('status')!r} — one of {', '.join(COVERAGE_STATUSES)}"
+            for e in entries if e.get("status") not in COVERAGE_STATUSES]
+    out.append((names[0], ("warn" if late else False) if bad else True,
+                f"{len(entries)} topic(s), {len(cards)} system card(s)", bad))
+    unknown = [str(e.get("topic")) for e in entries if e.get("status") == "unknown"]
+    out.append((names[1], "warn" if unknown else True,
+                f"{len(unknown)} unknown: {', '.join(unknown)} — scout it, ask LO, or a placeholder"
+                if unknown else "no topic is unknown", []))
+    bad = [p for p in (_coverage_source_problem(e, slug, root) for e in entries) if p]
+    out.append((names[2], ("warn" if late else False) if bad else True,
+                f"{len(entries) - len(bad)}/{len(entries)} sources hold up", bad))
+    return out
 
 
 def is_strict(state, finish=False):

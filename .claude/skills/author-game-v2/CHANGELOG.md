@@ -5,6 +5,220 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The reason trail and the rejection review (Coverage and the Scout PRD, CV7)
+
+**Why.** When LO rejects something built and asks why, nothing recorded why the choice was made, so the answer was
+reconstructed afterwards, and a guess could be rationalised into a reason. The answer has to question the skill,
+not only change the game.
+
+**What.**
+- `templates/sheets/` (system, place, person, scene, opening, decision; not counted): each ends in "Why — the source
+  of each key choice", a two-column table: the choice, and its source (a rule's file and id, a scout card, LO's call
+  with the date, or **guess**). Writing "guess" is allowed; hiding one is not.
+- `references/the-release.md`, new "When LO rejects something" under *Maintenance is the job*: the four-line answer
+  before anything changes (what, file:line; why, the recorded source quoted, never a new reason; which layer: the
+  skill taught it wrong, the skill was silent, the session ignored a rule, an earlier LO call changed, the engine;
+  the fix in each layer). A skill layer is a notebook gap. Recorded in `release_page.rejections[]`.
+- `references/state.md`: `release_page.rejections[] = {what, source, layer, game_fix, skill_fix}`, `layer` one of
+  `skill_wrong` · `skill_silent` · `ignored_rule` · `lo_changed` · `engine`.
+- `scripts/gates.py` (**protected, LO approved**), new code above `main()`:
+  - gate `a skill rejection names a notebook entry` (`_skill_rejections_logged`, one line added to `_phase4_gates`):
+    a WARN by type; each rejection has a known layer, and a skill-layer one names its notebook entry (`N<n>`) in
+    `skill_fix`. n/a when no rejection is recorded.
+  - REPORT row `choices marked guess` (`_guess_row`, on the `report +=` line, line for line): every table row in the
+    game's `sheets/**/*.md` and `DECISIONS.md` whose last cell starts "guess", by file and choice. A count.
+- `SKILL.md`: the gate-table row and the `--ship` REPORT list. `references/the-release.md:101` `gates.py:13983` →
+  `:14027` (the cite also moved down one line with the new section), read by hand; every other `gates.py:` cite sits
+  above the edits, checked unmoved.
+
+**Verified.** New `scripts/tests/test_gates_reason_trail.py` (9): no rejection is n/a; a skill gap with `N22` passes;
+one with no notebook entry, and an unknown layer, fail; the gate is not a BLOCK; guess rows are listed by file and
+choice (a template's `<placeholder>` row is skipped, "Guess — …" counts); no guess says how many files were read;
+`--ship` prints the row as a REPORT. `--ship` and `shape.py` on `git archive HEAD` exports of every game but
+vesper_two, before and after: each game gains only the n/a row `choices marked guess` (no game's sheets mark a
+guess yet; billable_hours 37 files read, members_only 32, orientation and the_balance 29, probation 7); no rejection is
+recorded, so the gate is n/a and `every other gate` is unchanged; `shape.py` output is identical. **No BLOCK row
+changed colour.** selfcheck 73/73 gates documented; pytest passes; `cite_check.py` 0.
+
+**Words:** +144, running total 147,306 / 149,283 (measured). This session: +455 in counted files.
+
+## 2026-10-02 — `--ship` reads the coverage list (Coverage and the Scout PRD, CV5)
+
+**What.** `scripts/gates.py` (**protected, LO approved**); new code above `main()`, two line-for-line swaps and one
+added line:
+- **Gate `no unknown topic`** (`_no_unknown_topic`), registered in `_phase4_gates` (the one added line). A **WARN by
+  type**, as LO chose (warn, never block): red when any `board.coverage[]` topic is `unknown`, each named. Its n/a
+  policy: **no list is red, never n/a** (an absence is not a pass); a game still grandfathered against
+  `COVERAGE_SINCE = "2026-10-02"` (`_grandfathered`, LO-B) is told it predates the list and warns all the same; only
+  a game with no `v2_state.json` is n/a. It is not a BLOCK row, so it takes no `SHIP_SINCE` entry and no legacy
+  branch: those exist to turn a red BLOCK row into a warn, and this row never blocks.
+- **`every other gate`** names what this gate found (`SHIP_OTHER_NAMED`, `_other_gate_names`): "FAIL no unknown
+  topic: 2 unknown: a party, a car", not only the gate's name. Every other line is unchanged.
+- **REPORT row `topics on thin ground`** (`_coverage_report_row`): the count of `placeholder` and `scouted` topics, each
+  named, out of the list; "no board.coverage" when there is none. A count, never a score.
+- `scripts/shape.py` reads the same date (`COVERAGE_SINCE = gates.COVERAGE_SINCE`).
+- Docs: the `SKILL.md` gate-table row and the `--ship` REPORT list. `references/the-release.md:100`
+  `gates.py:13932` → `:13983`, read by hand; every other `gates.py:` cite sits above the edits, checked unmoved.
+
+**Verified.** New `scripts/tests/test_gates_coverage.py` (10): no unknown passes; unknowns are red and named; no list
+is red, never n/a; a grandfathered game is told it predates the list until it ships on the date; no ledger is n/a;
+the gate is in no BLOCK, REPORT or SHIP_SINCE list; `--ship` names the unknowns under `every other gate`, gives the
+same BLOCK rows with and without an unknown, and reports thin ground by name. `--ship` on `git archive HEAD` exports
+of every game but vesper_two, before and after: billable_hours and the four grandfathered games gain one red line in
+`every other gate` (billable "list every topic first", the others "predates the list") and the n/a row `topics on
+thin ground`; media_lab and vesper (no ledger) gain only the n/a row. **No BLOCK row changed colour**; every SHIP
+headline is the same. selfcheck 72/72 gates documented; pytest passes; `cite_check.py` 0.
+
+**Words:** +34, running total 147,162 / 149,283 (measured).
+
+## 2026-10-02 — shape.py reads the coverage list (Coverage and the Scout PRD, CV4)
+
+**What.** `scripts/shape.py` (**protected, LO approved**), three rows, strict only (n/a while the spine is written),
+from `_coverage_rows` and `_coverage_source_problem`, new above `is_strict()`:
+- `every system has a coverage entry`: each `board.systems[]` card is a `system` topic (by id or name); every kind is
+  `system` · `place` · `scene` · `mechanic`, every status `covered` · `scouted` · `lo` · `placeholder` · `unknown`.
+- `no topic is unknown`: an `unknown` is a **WARN** naming each one, never a FAIL (LO: warn, never block).
+- `every coverage source exists`: `covered` names a file in the skill or the repo, and a rule id it names (`SY1`,
+  `R2`) must be in that file; `scouted` names a scout card that is on disk; `lo` and `placeholder` carry a source.
+- No `board.coverage` at all: a grandfathered game (`gates._grandfathered`, `COVERAGE_SINCE = "2026-10-02"`) WARNS on
+  all three until it ships on or after that date; any other game FAILS the first and third and WARNS on the second.
+  A grandfathered game with a bad entry WARNS too.
+- `check()` takes an optional `root` (where a scout card path resolves; the working directory by default).
+- `SKILL.md` (the `shape.py` row) and `references/state.md` (`board.coverage[]` is now read by `shape.py`) say so.
+
+**Verified.** New `scripts/tests/test_shape_coverage.py` (14): a full list passes; n/a when lenient; a card with no
+entry, a bad kind or status, a missing covered file, a rule id the file lacks, a missing scout card, and an `lo`
+with no source each fail; an `unknown` warns by name; no list fails billable_hours-style games and warns on a
+grandfathered one, a grandfathered bad entry warns, and a grandfathered game that shipped since fails. The green
+spine in `test_shape.py` gains a one-entry list, and its one-defect-per-row test two cases (an entry removed, a source
+that does not exist).
+`shape.py` and `--ship` on `git archive HEAD` exports of every game but vesper_two, before and after: the four
+grandfathered games WARN on all three rows; billable_hours (not grandfathered) FAILS two and WARNS on one, so its
+`--ship` REPORT row `the spine holds together` goes ok 18/18 → red 19/21; the other games' spine counts move by +3
+judged with no new failure; media_lab and vesper have no ledger. **No BLOCK row changed colour.** selfcheck clean;
+pytest passes; `cite_check.py` 0.
+
+**Words:** +22, running total 147,128 / 149,283 (measured).
+
+## 2026-10-02 — The scout agent (Coverage and the Scout PRD, CV3)
+
+**What.**
+- New `.claude/agents/v2-scout.md` (not counted): one topic per run, read-only. Its sources are the signed adults-only
+  pass list only (`round5/ADULTS_ONLY_PASS_LIST.md` §5, 12 games), with each game's text location and its exclusions
+  in one table (never Jack or Aaron; amore's two school/student outfits for their mechanics only, never their look;
+  the wasteland-lewdness magazine; in-their-own-hands' `WifeDanMem1`–`7`; corrupted-city's doll ending), plus CoT's
+  code and round 8's player comments from pass-list games. Every other game, FAIL games first, is counts only; our
+  own games are never a source. It asks the skill first (and says when a topic is already covered), greps, traces
+  one real instance end to end, and returns a mini card in the shape of `templates/cards/*.md` naming every game it
+  used, or "not found" with what it searched. It never writes `games/`; the caller saves the card at
+  `games/<slug>/scout/<topic>.md`. It runs only after LO picks the topics.
+- `references/agents.md`: one entry, "The Scout".
+
+**Verified, for real.** The agent type registers only in a new session, so the test ran the file itself through two
+general agents told to act exactly as `v2-scout.md`:
+- "a party" (no rule in the skill; it named the two near misses, `templates/cards/greek_life.md` and
+  `references/the-arc.md` A12): a card on CoT's Friday quad party (invite, hub, chat groups, the hookup, the
+  popularity door into the Greek party), contrast Shady Deals' yacht party (she hosts and pays).
+- "a job" (covered: it named `templates/cards/job.md` first and added only what the card lacks): IHOH's bartender
+  job (job board, interview, fixed paydays on the 14th and 28th, quitting and the half-shift rehire).
+Every cite was opened by hand at its line: all land on the claimed text. Only pass-list games were quoted
+(CoT, SD, IHOH); no excluded part and no FAIL game is on either card; player quotes are from pass-list games only.
+
+**Words:** +55, running total 147,106 / 149,283 (measured).
+
+## 2026-10-02 — The coverage ledger and its sheet (Coverage and the Scout PRD, CV2)
+
+**What.**
+- New `templates/sheets/coverage.md` (not counted): one table LO reads and signs with the other sheets: topic, kind
+  (`system` · `place` · `scene` · `mechanic`), status (`covered` · `scouted` · `lo` · `placeholder` · `unknown`),
+  source, note; what each status's source must name ("near the topic is not enough" for `covered`); and an
+  "Unknowns, for LO" table, since the build session asks before any scout runs. Saved in a game at
+  `games/<slug>/sheets/COVERAGE.md`.
+- `references/state.md`, the board-keys table: `board.coverage[] = {topic, kind, status, source}`, recorded (the
+  checks come in the next two items).
+- `references/the-sheets.md`: a `coverage` row in the sheet-type table; "Six sheet types" and "one of the six" become
+  seven, so the count stays true.
+
+**Verified.** `--selfcheck` clean; `cite_check.py` 0 in SKILL.md + references; skill pytest passes
+(`test_templates_parse.py` included).
+
+**Words:** +81, running total 147,051 / 149,283 (measured).
+
+## 2026-10-02 — Never build an unknown on a guess (Coverage and the Scout PRD, CV1)
+
+**Why.** The skill is strong only where it was researched. Where it has no rule (a party, a car, a landlord, a
+house layout), the build session did not stop: it invented a plausible default, and nothing failed, because no rule
+existed to check. The billable_hours house and its undated week-12 promise were built that way.
+
+**What.**
+- `SKILL.md` Operating rules: one commitment. Every topic the game needs (a system, a kind of place, a recurring
+  scene, a mechanic it leans on) goes on the coverage list with its source: a rule here, a scout card, LO's call, or a
+  placeholder named on the release page; an `unknown` waits for one of those, and the build session asks LO before
+  any scout runs.
+- `SKILL.md` Dispatch, the `spine` row: the coverage list first, then the system cards, then the rooms.
+- `references/the-release.md` loop step 4: each release puts any topic it adds on the list, with its source, before
+  it is built.
+The detail lives in the sheet (`templates/sheets/coverage.md`, the next commit) and the scout agent.
+
+**Verified.** `--selfcheck` clean (2 orphans); `cite_check.py` 0 in SKILL.md + references; skill pytest passes.
+
+**Words:** +102, running total 146,970 / 149,283 (measured).
+
+## 2026-10-02 — Phase 8 fixes, the tools (Coverage and the Scout PRD, CV-pre, tools)
+
+**What.** `scripts/gates.py` (**protected, LO approved**), three report-only fixes from the final check:
+- **The dated-line REPORT** (`a dated line names a built event`) skipped only an "in N …" after a negation. New
+  `_not_an_appointment` (above `main()`): an "in N weeks" whose sentence has a perfect tense on either side is a span
+  she has lived ("she has run four men in one week", "in four months she has never once come"), and "the day two
+  associates" / "the day one of them" (`day` after "the", the number spelled out) is not day 2. "By day two", "day 2"
+  and "in ten days" still list. The call site is a five-line swap for five lines.
+- **World size's hub** (`_world_hub`): the climb from her room stops below an `outdoors` place too, not only below
+  `board.map.exterior`. A home base whose parent is a path outside is the house itself: members_only's hub is now
+  `staff_house`, not `cliff_path`. billable_hours (`house`), probation (`the_stairwell`), orientation and the_balance
+  (`the_hall`) keep theirs: no place on their chain is outdoors.
+- **A BLOCK row named after its gate** printed the name twice ("every system has a card    every system has a card:
+  2/2 …"). New `_gate_prefix`: `_block_gate_verdict` names the gate only when the row's label differs (`no empty
+  rooms` still reads "standing surface: …"). Three line-for-line swaps.
+- `scripts/tests/test_playtest_l2.py`: builds with the repo's `venv/` when there is one, else the Python running the
+  tests (a git worktree has no `venv/`), else skips when Django is missing.
+- `references/the-release.md:100`: `gates.py:13895` → `:13932` (the "Lints sit BELOW the tally" comment, moved 37 by
+  the new code; read by hand). Every other `gates.py:` cite in SKILL.md, references, templates and agents sits above
+  the edits and was checked unmoved.
+
+**Verified.** Four new tests (`test_goal_dates_and_ends.py` 2, `test_gates_world_size.py` 1,
+`test_gates_system_cards.py` 1), all four failing on the old `gates.py`. `--ship` on `git archive HEAD` exports of
+every game but vesper_two, before and after: no row changed colour; K1–K5 headlines lose the repeated label;
+billable_hours' dated lines 7 → 6 (`walkin_firm` "the day two associates" gone), vesper's 4 → 1 (only `cap_case_insider`
+"in ten days" stays, a real appointment); members_only's hub `cliff_path` → `staff_house` (hook share 63% → 64%).
+`cite_check.py --fix` then 0 wrong in SKILL.md + references; selfcheck clean; skill pytest passes.
+
+**Words:** +0, running total 146,868 / 149,283 (measured).
+
+## 2026-10-02 — Phase 8 fixes, the words (Coverage and the Scout PRD, CV-pre, docs)
+
+**What.** The final check's wording findings, each a line-for-line swap so no cite moved:
+- `references/the-economy.md:73-74` (**protected, LO approved**, that sentence only): a conditions block without
+  `version = "1.0"` is now refused by the importer (a build error), not "fails open with no build error"; the runtime
+  fail-open is kept as what would happen.
+- `references/the-meters.md:689`, `references/the-phone.md:200`, `references/engine.md:827-828`,
+  `templates/first-hour.toml:149-150`: each fail-open warning now says the importer refuses the block. True for every
+  one of them: `_walk_condition_carriers` (`template_import.py:1810`) checks every `conditions` and `entry_conditions`
+  key in the raw TOML, so the meeting no longer "cold-spawns at game start" in a game that builds.
+- `references/engine.md:1500`, `references/the-phone.md:49`, `references/the-voice.md:329`: the three PRD ids became
+  "LO decided, 2026-10-01" (skill text names no PRD id).
+- `templates/board.toml:376`: the `isCurrentTimeSlot` cites `:3448 :3465 :3612` landed on unrelated lines; now the
+  definition `v2.py:4661` and the four call sites `:4310 :4328 :4486 :4605`, each read by hand.
+- `templates/cards/reputation.md:58`: item prices exist now, but a price is a fixed number and can't read a stat.
+- `references/register.md:210` and `SKILL.md:36` name word list version 2 and `round5/dol_snapshots/` where they state
+  the explicit floor (only `gates.py` and this ledger did).
+- The ledger: the last two entries each logged a total from their own branch, so the newest said 146,841 while the
+  files measured 146,851 before this commit. The total below is measured by `--selfcheck`.
+
+**Verified.** `--selfcheck` clean (2 orphans, the baseline); `cite_check.py` 0 in SKILL.md + references; skill
+pytest 676 passed.
+
+**Words:** +17, running total 146,868 / 149,283 (measured).
+
 ## 2026-10-02 — The tools read a `trigger` choice, and a missing `targetType`, as an exit (World and Systems PRD, Phase 7b, L8)
 
 **What.** The engine sends a `trigger` choice to the canvas's home, as it does a `return` one, and never follows its

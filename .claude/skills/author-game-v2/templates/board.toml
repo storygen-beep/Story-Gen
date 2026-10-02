@@ -373,7 +373,7 @@ arc_stages  = ["<Stranger>", "<…>"]
 # ⚠️ ORDERING: schedules bind to the [[npcs]] block ABOVE them. Inserting a new
 #    character between an existing one and its schedules silently re-parents them.
 # ✅ Overnight windows are fine — 22:00-04:00 is ONE row. setup.isCurrentTimeSlot
-#    handles the wrap (generators/v2.py, call sites :3448 :3465 :3612).
+#    handles the wrap (generators/v2.py :4661, called at :4310 :4328 :4486 :4605).
 [[npcs.schedules]]
 location   = "<location_id>"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]

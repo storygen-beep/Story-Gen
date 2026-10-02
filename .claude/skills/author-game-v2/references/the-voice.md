@@ -326,7 +326,7 @@ Source: `~/Documents/Sex_Loop_Study_20260829/shape.py`, and the label counts in 
 
 ## Adult wording — a college, never a school
 
-Every character is 18+ and the game says so. **An adult college is allowed** (LO, WS-D6), modelled on
+Every character is 18+ and the game says so. **An adult college is allowed** (LO decided, 2026-10-01), modelled on
 Course of Temptation only: a lecture timetable, grades that move money, professors as a door
 (`templates/cards/college.md`). Use university words — lecture, professor, campus, dorm, term, major.
 

@@ -20,6 +20,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", ".."))
 
+
+def _python():
+    """The Python that builds a fixture: the repo's venv, else the one running the tests (a
+    git worktree has no `venv/`), else skip — a build needs Django."""
+    venv = os.path.join(REPO, "venv", "bin", "python")
+    if os.path.exists(venv):
+        return venv
+    pytest.importorskip("django")
+    return sys.executable
+
 HEAD = '''
 schema_version = "1.0"
 
@@ -146,7 +156,7 @@ def _build(tmp_path_factory, name, card_flag, amb_conditions, extra=""):
     src = d / "game.toml"
     src.write_text(HEAD.replace("{card_flag}", card_flag).replace("{amb_conditions}", amb_conditions)
                    .replace("{extra}", extra))
-    res = subprocess.run([os.path.join(REPO, "venv", "bin", "python"), "manage.py",
+    res = subprocess.run([_python(), "manage.py",
                           "package_from_toml", "--file", str(src), "--output", str(d / "out"),
                           "--gen-version", "v2"], cwd=REPO, capture_output=True, text=True)
     assert res.returncode == 0, res.stdout[-2000:] + res.stderr[-2000:]
@@ -212,7 +222,7 @@ flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]''
     src = d / "game.toml"
     src.write_text(loop.replace("{card_flag}", "opening_done").replace("{amb_conditions}", "")
                    .replace("{extra}", ""))
-    res = subprocess.run([os.path.join(REPO, "venv", "bin", "python"), "manage.py",
+    res = subprocess.run([_python(), "manage.py",
                           "package_from_toml", "--file", str(src), "--output", str(d / "out"),
                           "--gen-version", "v2"], cwd=REPO, capture_output=True, text=True)
     assert res.returncode == 0, res.stdout[-2000:] + res.stderr[-2000:]
