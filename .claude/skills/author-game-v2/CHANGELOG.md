@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The backfill table lists the save state engine batches 2–3 added (World and Systems PRD, Phase 6A)
+
+**What.** `references/engine.md` §40's depth table gains one short row each for `phone.conv_ignored`,
+`phone.calls`, `fast_jobs.job_xp`, `$game_state.return_place`, `$game_state.shops` and
+`$player.outfits`, each pointing at its feature's own "old saves" sentence (§13, §17, §51). The
+`$game_state` row's parenthesis drops `conv_ignored` and `job_xp`, which now have rows; `pool_seen` and
+`conv_cycle` were already there and stay.
+
+**Why.** The table is where a release author looks to see what an old save gets; six keys the engine
+backfills were missing from it.
+
+**Verified.** Each row's depth read from `v2.py:1526`, `:1567`, `:1592`, `:1612-1618` (the defaults
+`setup.backfillStateDefaults` fills from); no `engine.md:NNNN` cite points past the edit; selfcheck
+clean; pytest passes.
+
+**Words:** +54, running total 145,855 / 149,283.
+
+---
+
 ## 2026-10-02 — Three facts the built engine and round 10 made untrue (World and Systems PRD, Phase 6A)
 
 **What.** Three line-for-line fact fixes, nothing else in each file:

@@ -2401,7 +2401,13 @@ never alias the shared default object.
 | `$flags` | keys | — |
 | `$flags_meta` | **not filled** (top-level, outside the backfill) | a flag set before 2026-10-01 has `set_day` only; `hours_since_flag` reads it as `set_day * 1440`, the start of that day, so an old save opens a wait early, never strands (§52) |
 | `$npcs` | whole NPC, then `core_traits` / `flags` | a missing NPC arrives entire |
-| `$game_state` | top level **and one level into a sub-map** | every non-empty default there is engine bookkeeping (`phone`, `rent_state`, `fast_jobs`, `bank`, `time_state`); the player-owned maps all default to `{}` so there is nothing to fill into them (`pool_seen` is one, present only in a game with a `memory = "seen"` pool; `phone.conv_cycle` and `phone.conv_ignored` are filled one level into the phone map, `fast_jobs.job_xp` into the fast_jobs map) |
+| `$game_state` | top level **and one level into a sub-map** | every non-empty default there is engine bookkeeping (`phone`, `rent_state`, `fast_jobs`, `bank`, `time_state`); the player-owned maps all default to `{}` so there is nothing to fill into them (`pool_seen` is one, present only in a game with a `memory = "seen"` pool; `phone.conv_cycle` is filled one level into the phone map) |
+| `phone.conv_ignored` | one level into `phone` | §51, old saves |
+| `phone.calls` | one level into `phone` | §51 |
+| `fast_jobs.job_xp` | one level into `fast_jobs` | §51, old saves |
+| `$game_state.return_place` | top level, empty | §13 |
+| `$game_state.shops` | top level, empty | §17 |
+| `$player.outfits` | top level, empty | §17 |
 | `$player` | **top level only**, plus `core_traits` by name | `$player.wardrobe` is an id → garment map — a deeper fill hands back a garment the player sold. Same for `equipped`. |
 
 Arrays are never merged at any depth: a default `[]` would re-seed a list the player emptied.
