@@ -133,6 +133,31 @@ def test_misuse_is_an_error(mutation, fragment):
     assert any(fragment in e for e in errs), errs
 
 
+def _stage_warnings(rent_change):
+    raw = _raw()
+    raw["settings"]["rent"].update(rent_change)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        errs = validate(normalize(raw))
+    return errs, [str(w.message) for w in caught if "stage_lines[0] never prints" in str(w.message)]
+
+
+def test_a_first_stage_at_zero_with_a_line_warns():
+    """E11 — stage 1 at after_total_paid = 0 is reached from the start, so its line can
+    never print: a warning that says why, never an error."""
+    errs, warned = _stage_warnings({"stages": [{"amount": 150, "after_total_paid": 0},
+                                              {"amount": 200, "after_total_paid": 250}]})
+    assert errs == []
+    assert len(warned) == 1 and "the first stage is the starting rent" in warned[0]
+
+
+def test_no_warning_above_zero_or_without_a_first_line():
+    assert _stage_warnings({})[1] == []  # the fixture: stage 1 after 100 paid
+    assert _stage_warnings({"stages": [{"amount": 150, "after_total_paid": 0},
+                                       {"amount": 200, "after_total_paid": 250}],
+                            "stage_lines": ["", "Two hundred."]})[1] == []
+
+
 # ── 2. emitted only when used ────────────────────────────────────────────────
 
 

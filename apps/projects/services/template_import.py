@@ -6811,6 +6811,26 @@ def _validate_rent_stages(template) -> List[str]:
     for i, ln in enumerate(lines):
         if not isinstance(ln, str):
             errors.append(f"rent stage_lines[{i}] must be a string, got {ln!r}")
+    # E11 — a first stage at after_total_paid = 0 is reached before any payment
+    # (setup.rentStageIndex counts it from the start), so no payment changes to it and
+    # its line can never print. It works as coded; say so instead of shipping a dead line.
+    if (
+        stages
+        and isinstance(stages[0], dict)
+        and stages[0].get("after_total_paid") == 0
+        and lines
+        and isinstance(lines[0], str)
+        and lines[0].strip()
+    ):
+        import warnings
+
+        warnings.warn(
+            "[settings.rent] stage_lines[0] never prints: stages[0].after_total_paid = 0 "
+            "is reached from the start, so the first stage is the starting rent and no "
+            "payment changes to it. Put its words in the rent's own text.",
+            UserWarning,
+            stacklevel=2,
+        )
     return errors
 
 

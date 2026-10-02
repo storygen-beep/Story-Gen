@@ -730,7 +730,7 @@ nodeId     = "talk"
 with the hub unless something links to it.** `act_garage_late` (p7) replaces `hub_theo_garage` (p6)
 the moment its arc flag sets, so the pool folded into the hub goes dark exactly when the player has
 most reason to want it. A **qualified** nodeId reaches across canvases —
-`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:8144-8150`,
+`nodeId = "hub_theo_garage.talk"` — resolved globally at import (`template_import.py:8164-8170`,
 validated at `:4678-4698`). One line on the escalation's base, and the two surfaces share the pool
 instead of duplicating forty lines of dialogue.
 

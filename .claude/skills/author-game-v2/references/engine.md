@@ -816,7 +816,7 @@ blocked_message  = "The dining room's been dark since the staff went."
 template_import.py:196      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:197      blocked_message: str = ""
 template_import.py:2445-2446 parsed
-template_import.py:9041      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:9061      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
@@ -843,7 +843,7 @@ closed_text = "The shutter's down. A paper sign: back at nine."    # optional
 
 ```
 template_import.py:202      hours: List[Dict[str, Any]] = field(default_factory=list)
-template_import.py:6917     def _validate_location_hours(template) -> List[str]:
+template_import.py:6937     def _validate_location_hours(template) -> List[str]:
 v2.py:11447                 setup.locOpenNow = function (slug) {
 ```
 
@@ -866,7 +866,7 @@ hidden_until = { flag = "found_attic" }     # a declared player flag
 
 ```
 template_import.py:206      hidden_until: Dict[str, Any] = field(default_factory=dict)
-template_import.py:6997     def _validate_hidden_places(template) -> List[str]:
+template_import.py:7017     def _validate_hidden_places(template) -> List[str]:
 v2.py:11319                 setup.locFound = function (slugOrUuid) {
 ```
 
@@ -1197,7 +1197,7 @@ due_day          = "Friday"          # weekday names only — VALID_DAYS, templa
 collector_npc    = "npc_collector"   # must exist in [[npcs]]
 start_after_flag = "first_shift_done"
 stages      = [ { amount = 100, after_total_paid = 0 }, { amount = 150, after_total_paid = 300 } ]
-stage_lines = [ "…", "…" ]           # what the collector says when stages[i] takes over
+stage_lines = [ "", "…" ]            # what the collector says when stages[i] takes over
 on_short    = "carry"                # a short week is owed next week; no eviction, no game over
 currency_symbol  = "$"               # rent pages only — eight other money prints hardcode "$" (§33)
 
@@ -1232,6 +1232,8 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
 - `setup.currentRent()` (`v2.py:14366`) is the amount at every read; the payment that moves the stage
   shows its line on the paid screen. `stages`, `stage_lines` and `on_short` are opt-in, emitted only
   when used. Keys: `template_import.py:527-536`.
+- A first stage at `after_total_paid = 0` is the starting rent: no payment moves to it, so its line
+  never prints, and the importer warns when `stage_lines[0]` has words (`template_import.py:6827`).
 - Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
   over rent** *(LO decided, D8d)*.
 - **The old route**, without `on_short`: a fixed `amount`, a short week spends `grace_periods`, then
@@ -1735,7 +1737,7 @@ gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
 
 ### 33.5 `[[traits.labels]] unit` is dead
 
-The importer reads it (`template_import.py:3678`) and stores it in project metadata (`:8569`). No
+The importer reads it (`template_import.py:3678`) and stores it in project metadata (`:8589`). No
 generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
 pluralising a currency.
 
@@ -1949,7 +1951,7 @@ every time the passage draws. Re-enter the surface and the sentence is different
 
 ### The four authoring facts, verified in the importer
 
-`template_import.py:8289-8317` normalises both container types side by side, so the rules are the
+`template_import.py:8309-8337` normalises both container types side by side, so the rules are the
 same ones `group` follows — with one exception that is not.
 
 | | |
@@ -1974,11 +1976,11 @@ An entry already shown weighs `seen_weight` (default 0.1, range (0, 1]) against 
 up. The pool emitter branches on `memory` at `v2.py:17144`. Seen counts live in `$game_state.pool_seen[key]`, which is in the
 skeleton only when a game has such a pool (`v2.py:1564`). The key is `id`, else a hash of the
 entries (`v2.py:14493`): editing an id-less pool's text resets its memory. The keys may sit at the
-block's top level or in `props` (`template_import.py:8321`).
+block's top level or in `props` (`template_import.py:8341`).
 
 **A random canvas** takes `trigger.seen_weight` (random mode only): once it has fired, its `chance`
 is multiplied by it (`setup.canvasRollChance`, `v2.py:6153`). Misuse is a build error
-(`template_import.py:7251`).
+(`template_import.py:7271`).
 
 ### Why this section exists
 
@@ -2243,20 +2245,20 @@ conditions = { version = "1.0", items = [
 
 ### ⚠️ Quest cards reject `ne` on purpose — do not "fix" the whitelist
 
-`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:7494`, `gte/lte/gt/lt/eq`) and
+`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:7514`, `gte/lte/gt/lt/eq`) and
 their evaluator, `setup.checkQuestsCondition`, has no `ne` case — its `switch` falls through to
 `return false`. Widening that whitelist without adding the case would let an author write a card
 condition that is **silently always false**, which is the failure this engine has had before with
 `conditions` lacking `version = "1.0"`.
 
 Widening it correctly means the whitelist **and** the evaluator, in the same change. The comment at
-`template_import.py:7487-7494` says so at the site.
+`template_import.py:7507-7514` says so at the site.
 
 Also unchanged, and for the same reason — each is its own path:
 
 - `template_import.py:6619` — hint `trait_checks`.
 - `template_import.py:6546`, checked at `:6569` — hint-template `stage_op`, `{eq, gte, lte}`.
-- `template_import.py:7862` — a **heuristic** threshold reader, not a validator. `ne` is not a
+- `template_import.py:7882` — a **heuristic** threshold reader, not a validator. `ne` is not a
   threshold and does not belong there.
 
 ### ⚠️ The v1 rollback path
@@ -2289,7 +2291,7 @@ The path from the TOML to the screen, traced end to end:
 | step | where |
 |---|---|
 | read off `[project]`, defaulting to `""` | `template_import.py:2240` |
-| copied onto the project's metadata | `template_import.py:8401` |
+| copied onto the project's metadata | `template_import.py:8421` |
 | escaped, then joined with ` · ` | `v2.py:18844-18845`, joined at `:18847` |
 | composed into the `versionFooter` widget | `v2.py:18852-18855` |
 | called unconditionally from `StoryCaption` — both variants | `v2.py:18875` and `:18890` |
@@ -2477,7 +2479,7 @@ Same word "condition", two parsers, two key names:
 `template_import.py:1303` is the quest side. Writing `trait_key` in a quest card fails validation
 with *"condition item must set one of `flag`, `trait`, `days_since_flag`, `hours_since_flag` or
 `weekday`"*
-(`template_import.py:7404`), which names the key it wants and gives no hint that the other half of the
+(`template_import.py:7424`), which names the key it wants and gives no hint that the other half of the
 same file uses a different one.
 
 ### 41c. A quest goal needs a `label`; every card needs a `when`
@@ -2735,7 +2737,7 @@ both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAv
 (`v2.py:4195`), which covers the four schedule/planner consumers at once.
 
 Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
-written identically by both build paths (`template_import.py:9161`, `game_graph.py:336`), and read
+written identically by both build paths (`template_import.py:9181`, `game_graph.py:336`), and read
 by **nothing** in the generator.
 
 > **What that meant.** An author switches off the canvas that sets a door's key flag so the door
@@ -2788,7 +2790,7 @@ Two engine facts fall out, and they pull in opposite directions.
 
 **47.1 · A trait goal already prints the number.** `label — 14 / 20`, appended by the engine, with
 no author involvement. The importer also *requires* `label` on any trait or counter goal —
-`apps/projects/services/template_import.py:7501-7505`, whose own error text says *"it renders next
+`apps/projects/services/template_import.py:7521-7525`, whose own error text says *"it renders next
 to the ◯ bullet"*. So trait goals are safe by construction and are the shape to reach for whenever
 a card is gated on a number.
 
@@ -2941,7 +2943,7 @@ flagEffects = [ { targetType = "player", flag = "ignored_dan" } ]
   hook). With `repeat_after_days` the ignore is per instance, and an ignored instance re-arms like an
   answered one, its delay counted from the ignore.
 - Import: a chat with no reply block cannot be ignored, and an unknown key in `on_ignore` is a build
-  error (`template_import.py:5096`, `:7203`).
+  error (`template_import.py:5096`, `:7223`).
 - **Old saves:** `conv_ignored` is backfilled into the phone map. A chat delivered before the change
   is ignored by its stored arrival day, so a long-unanswered one closes on the first passage.
 
@@ -3064,4 +3066,4 @@ activity hint (`v2.py:8894`), and quest cards in their own flat shape (`v2.py:17
 - **Old saves:** `$flags_meta` is outside the backfill. A flag with `set_day` only reads as set at
   the start of that day (`setup.flagSetMinute`, `v2.py:4844`).
 - Import: both are rows in `CONDITION_SCHEMA` (`template_import.py:1689`); `weekday` needs at least
-  one day, 0–6, and takes no `operator`. Quest-card shapes: `template_import.py:7415`.
+  one day, 0–6, and takes no `operator`. Quest-card shapes: `template_import.py:7435`.

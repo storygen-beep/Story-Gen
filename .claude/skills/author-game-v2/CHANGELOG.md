@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: the importer warns about a first rent stage whose line can never print (World and Systems PRD, Phase 7)
+
+**Why.** The billable_hours rebuild (notebook N20): a rent stage with `after_total_paid = 0` is reached
+from the start (`setup.rentStageIndex` counts it before any payment), so the first payment never changes
+the stage and `stage_lines[0]` never prints. It works as coded; nothing said so.
+
+**What changed.**
+- `template_import.py`: `_validate_rent_stages` warns (never an error) when stage 1 has
+  `after_total_paid = 0` and `stage_lines[0]` has words, and says why: the first stage is the starting
+  rent; put its words in the rent's own text. Of the six games, billable_hours warns (its own fix is
+  LO's, in a game session); the rest are silent.
+- `references/engine.md` §26: the fact as a bullet, and the example's first stage line is now empty, so
+  the example no longer teaches the dead line.
+- Citations re-pointed through the `git diff` line map (17 moved, 615 identical) and the
+  paragraph-aware pass (1); `cite_check.py` 0 drifted in SKILL.md + references/.
+- At merge: the parallel skill-text session writes the same fact as one sentence in §26 and calls the
+  warning planned; that sentence becomes this one.
+
+**Verified.** `test_rent_stages.py` (+2: the warning fires once on a first stage at 0 with a line, with
+no error; none on the fixture's stage at 100 or on an empty first line). The rent tests pass. No save
+state. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +31, running total 145,751 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: a general shop — `[[shops]]` (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 10, second half. The only shop sold clothes; any other purchase was a
