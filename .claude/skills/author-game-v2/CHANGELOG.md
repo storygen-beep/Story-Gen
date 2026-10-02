@@ -5,6 +5,18 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — A loop's finisher takes one file, not a pool
+
+**What.** `references/the-surfaces.md` (loop parts table): the FINISHER row now says each finish type
+gets ONE `file`, never a pool. Same-line edit, so no cited line moved.
+
+**Why.** LO noticed finish clips were pooled. A finisher renders once per session and is split across
+2–3 finish types, so clips 2–4 of a finish pool are almost never seen. Only the act nodes (the ones with a
+self-loop link) render several times in one session. Measured on `vesper`: 36 of 111 pools were finish
+screens. The full rule lives in `author-game/references/media.md` §7 Gate 1.
+
+**Verified.** grep of the row; vesper converted and rebuilt with the same rule.
+
 ## 2026-10-02 — Cleanup rent note: the first stage is the starting rent
 
 **Why.** The Billable Hours rebuild found a rent stage line that can never show: a stage with

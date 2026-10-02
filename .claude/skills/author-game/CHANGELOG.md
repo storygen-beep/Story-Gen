@@ -8,6 +8,21 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-10-02
+- **`references/media.md` §7 Gate 1 — the self-loop check names both `nodeId` forms.** A scan that matched
+  only the bare id classed `hunt_marsh_sunday`'s act screens as once-per-session; they self-loop through the
+  qualified `<canvas>.<node>` id. Caught before any change was made to them. Same day, a second vesper pass
+  converted 28 more pools (loop intros, one-shot capstones, once-per-attempt guard screens, short-lived rungs);
+  build green.
+- **`references/media.md` §7 Gate 1 + the repeatable-surface template — a pool is judged per SCREEN per
+  SESSION, not per canvas.** The old wording ("NSFW on a repeatable canvas wants a pool") made every screen
+  of a sex loop a pool, including the intro and the cum/finisher screens, which render once per session (and
+  the finisher is split across 2–3 finish types). LO caught it: cum clips 2–4 are almost never seen. New rule:
+  pool only a screen with a choice that routes back to itself (the act screens); intro, finisher, once-per-
+  attempt failure screens and one-time steps take one `file`. Root cause was the skill, not one game:
+  `vesper` had 36 finish pools out of 111. Verified: self-loop scan of vesper's TOML (31 LOOP / 80 once),
+  39 pools converted, vesper rebuilt.
+
 ## 2026-09-22
 - **`references/engine-reference.md` §8 — new `[project] community_url` key.** Built games linked
   Patreon but had no Discord link; LO asked for one. Engine now emits a Discord link beside every

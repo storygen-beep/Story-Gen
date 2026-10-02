@@ -364,7 +364,7 @@ an ACT NODE per rung          its own media pool; the passage swap is what refre
 a SELF-LOOP link              stay on this act, raise a hidden meter by random(8,14)
 SWITCH links                  change act, set the stage trait, both directions
 a FINISH link                 gated on the meter; elects which finish; routes to a finisher node
-the FINISHER                  [group] blocks per finish type, then resets every loop trait
+the FINISHER                  [group] per finish type, ONE `file` each (never a pool), then resets every loop trait
 the ENTRY rung                on the hub, gated, and it resets every loop trait on the way in
 ```
 
