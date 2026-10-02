@@ -137,10 +137,15 @@ def main() -> int:
         taken = nodes["bunker_guards"].get(f"{guard}_taken")
         check(taken is not None, f"{guard}_taken node missing")
 
-    # 3 — one asset, one block: every bunker pool_dir is unique
-    pools = re.findall(r'pool_dir = "(sex/bunker_[^"]+)"', open(GAME, encoding="utf-8").read())
-    check(len(pools) == len(set(pools)), f"pool_dir reused across blocks: {pools}")
-    check(len(pools) == 6, f"expected 6 bunker pools (five caught rooms + the door man), found {len(pools)}")
+    # 3 — one asset, one block: every bunker media slot is unique. A slot is a pool_dir OR a single
+    # `file` (minus its extension): caught screens render once per attempt, so since 2026-10-02 they
+    # carry one file, not a pool (author-game media.md §7 Gate 1). Count both shapes, or the guard
+    # reads "0 slots" off a correct game.
+    src = open(GAME, encoding="utf-8").read()
+    pools = (re.findall(r'pool_dir = "(sex/bunker_[^"]+)"', src)
+             + re.findall(r'file = "(sex/bunker_[^"]+?)\.\w+"', src))
+    check(len(pools) == len(set(pools)), f"media slot reused across blocks: {pools}")
+    check(len(pools) == 6, f"expected 6 bunker media slots (five caught rooms + the door man), found {len(pools)}")
 
     # 4 - PROSE TRUTH, CHECKED ON THE MNEMONIC LINE, NOT ON THE WHOLE SPEECH.
     #

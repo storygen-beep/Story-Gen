@@ -351,10 +351,22 @@ def main() -> int:
         walk((node or {}).get("blocks", []))
         return " ".join(out)
 
+    def slot(p):
+        """A video block's asset key: its pool_dir, or its single `file` minus the extension.
+
+        One-time and finisher screens carry one `file` since 2026-10-02 (author-game media.md §7
+        Gate 1: a pool cycles per visit, so it only pays on a self-looping act node).
+        """
+        if p.get("pool_dir"):
+            return p["pool_dir"]
+        f = p.get("file") or ""
+        return f.rsplit(".", 1)[0] if f else None
+
     def pool_ok(node, pool_dir, tag):
-        v = [p for p in videos(node) if p.get("pool_dir") == pool_dir]
-        check(len(v) == 1 and v[0].get("pool") == 4 and v[0].get("description") and v[0].get("search_queries"),
-              f"{tag}: needs exactly one video block {pool_dir}, pool 4, with description + search_queries")
+        v = [p for p in videos(node) if slot(p) == pool_dir]
+        shape_ok = bool(v) and (v[0].get("pool") == 4 if v[0].get("pool_dir") else bool(v[0].get("file")))
+        check(len(v) == 1 and shape_ok and v[0].get("description") and v[0].get("search_queries"),
+              f"{tag}: needs exactly one video block {pool_dir} (pool 4, or one file), with description + search_queries")
     if wn:
         pool_ok(wn, "sex/bastien_cot_wash_t5", "3")
         check("anal" not in node_text(wn).lower(), "3: the washing mentions anal — the chunk never goes there")
@@ -510,7 +522,7 @@ def main() -> int:
             ex = (cl.get("exit_block") or {}).get("choices") or []
             check(ex and all(resets(ch.get("effects")) and ch.get("locationId") == "the_cot" for ch in ex),
                   "6: every finisher exit must reset the five loop traits and return to the cot")
-            fins = {v.get("pool_dir") for v in videos(cl)}
+            fins = {slot(v) for v in videos(cl)}
             check({"sex/bastien_cot_finish_facial_t5", "sex/bastien_cot_finish_inside_t5"} <= fins,
                   "6: the finisher needs both finish pools (facial, inside)")
     # He keeps exactly one repeatable canvas at the cot.
@@ -521,15 +533,15 @@ def main() -> int:
             and "npc_bastien" in ((cv.get("trigger") or {}).get("npc"), (cv.get("trigger") or {}).get("requires_npc"))]
     check(reps == ["amb_bastien_cot"], f"6: he must keep exactly one repeatable canvas at the cot, has {reps}")
     # Every pool in the chunk is its own asset (the one-asset-one-block rule).
-    allpools = [v.get("pool_dir") for cid in ("amb_bastien_cot", "loop_bastien_cot", "loop_bastien_cot_finisher")
+    allpools = [slot(v) for cid in ("amb_bastien_cot", "loop_bastien_cot", "loop_bastien_cot_finisher")
                 for n in (canvases.get(cid) or {}).get("nodes", []) for v in videos(n)]
     check(len(allpools) == len(set(allpools)), f"6: a pool folder is used by two blocks: {allpools}")
     # ⚠️ AND ACROSS THE WHOLE GAME, not just the chunk. The first cut named three of THE COUNT's pools
     # sex/bastien_loop_oral_t5 / _finish_facial_t5 / _finish_inside_t5 — which ARE The Face's back-room loop
     # (loop_bastien_backroom, 1c), with its own clips on disk. The cot loop would have played the back room.
     # This section only checked uniqueness inside the chunk, so it passed. Found at beat_0204's media audit.
-    game_pools = [v.get("pool_dir") for cv in canvases.values() for n in cv.get("nodes", []) for v in videos(n)
-                  if v.get("pool_dir")]
+    game_pools = [slot(v) for cv in canvases.values() for n in cv.get("nodes", []) for v in videos(n)
+                  if slot(v)]
     for pd in allpools:
         check(game_pools.count(pd) == 1, f"6: pool {pd} is also used elsewhere in the game — two scenes, one shelf")
         check(pd.startswith("sex/bastien_cot_"), f"6: pool {pd} is outside THE COUNT's sex/bastien_cot_* family")
