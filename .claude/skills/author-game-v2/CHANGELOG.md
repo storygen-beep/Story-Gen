@@ -17,6 +17,257 @@ screens. The full rule lives in `author-game/references/media.md` §7 Gate 1.
 
 **Verified.** grep of the row; vesper converted and rebuilt with the same rule.
 
+---
+
+## 2026-10-02 — Engine: the importer warns about a first rent stage whose line can never print (World and Systems PRD, Phase 7)
+
+**Why.** The billable_hours rebuild (notebook N20): a rent stage with `after_total_paid = 0` is reached
+from the start (`setup.rentStageIndex` counts it before any payment), so the first payment never changes
+the stage and `stage_lines[0]` never prints. It works as coded; nothing said so.
+
+**What changed.**
+- `template_import.py`: `_validate_rent_stages` warns (never an error) when stage 1 has
+  `after_total_paid = 0` and `stage_lines[0]` has words, and says why: the first stage is the starting
+  rent; put its words in the rent's own text. Of the six games, billable_hours warns (its own fix is
+  LO's, in a game session); the rest are silent.
+- `references/engine.md` §26: the fact as a bullet, and the example's first stage line is now empty, so
+  the example no longer teaches the dead line.
+- Citations re-pointed through the `git diff` line map (17 moved, 615 identical) and the
+  paragraph-aware pass (1); `cite_check.py` 0 drifted in SKILL.md + references/.
+- At merge: the parallel skill-text session writes the same fact as one sentence in §26 and calls the
+  warning planned; that sentence becomes this one.
+
+**Verified.** `test_rent_stages.py` (+2: the warning fires once on a first stage at 0 with a line, with
+no error; none on the fixture's stage at 100 or on an empty first line). The rent tests pass. No save
+state. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +31, running total 145,751 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a general shop — `[[shops]]` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10, second half. The only shop sold clothes; any other purchase was a
+hand-built choice with `costs` and `itemEffects`.
+
+**What changed.**
+- `template_import.py`: `TemplateShop` and `[[shops]]` (`id`, `name`, `location`, `stock = [ { item,
+  limit? } ]`). Checks (build errors): a snake_case unique id, a name, a declared location, a non-empty
+  stock of priced items with no unknown key, no item twice, a whole `limit` ≥ 1. Written into metadata
+  only when a game has shops (GG gets it through `_assemble_project_metadata`).
+- `generators/v2.py`: each shop is its own section on its room's screen (`setup.renderGeneralShop`,
+  emitted into that room's passage only), a Buy row per item or the reason she cannot: the item's
+  conditions, her money, a full stack, "Sold out.". `setup.buyFromShop` buys through
+  `setup.buyInventoryItem`, toasts the price and counts a limited item's sales in
+  `$game_state.shops[shop][item]` (in the skeleton only in a game with a limit, so the backfill fills an
+  old save); the room re-renders so the sidebar follows. The clothing shop and its corruption tiers are
+  untouched.
+- `references/engine.md` §17 "Shops": the fact. `templates/cards/wardrobe.md` ("planned: item prices and
+  a general shop") and `templates/cards/shops_items.md` ("a general `[[items]]` entry has no price") now
+  say what is built.
+- Citations re-pointed through the `git diff` line map (596 moved, 34 identical) and the
+  paragraph-aware pass for wrapped-line `:NNNN` cites (21 moved); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_general_shop.py` (3, headless: the shop shows only in the gym, with "(3 left)" and
+the pass card's reason instead of a link; buying charges 4, counts the sale and re-renders, down to
+"Sold out."; a save written before the change, at b6edf38, loads with `shops` backfilled and buys).
+`GeneralShopSchemaTests` (2: metadata only when present, eight bad shapes). A save-migration case. Six
+games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages differ
+from the pre-batch engine (301f6f8); only the engine script differs. Selfcheck and the skill tests pass;
+Django failures all in the known list.
+
+**Words:** +67, running total 145,720 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: item prices (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10 (item prices and a general shop), first half. An inventory item had
+no price, so nothing outside the clothing shop could be bought.
+
+**What changed.**
+- `template_import.py`: `[[items]]` take `price` (whole, ≥ 1), `money_trait` (a `[player] core_traits`
+  key; default `money`, which must then exist) and `conditions` (v1.0, what gates buying). `money_trait`
+  and `conditions` are read only with a price (build errors). Written into the item's metadata only when
+  set, so GG gets them and a game without them is unchanged. The condition walker finds
+  `items[].conditions` by its key; its docstring names it and a test proves it.
+- `generators/v2.py`: `setup.itemBuyBlock` says why she cannot buy one ('' when she can: a price, the
+  conditions, enough of the money trait, room in `max_stack`) and `setup.buyInventoryItem` buys one. The
+  general shop (next change) is what calls them.
+- `references/engine.md` §17: "Known gaps — the shop" becomes "Shops", with the price fact; the "planned:
+  item prices and a general shop" note is gone from the clothing-shop paragraph.
+- Citations re-pointed through the `git diff` line map (440 moved, 190 identical). **And a fix to the
+  method:** a bare `:NNNN` that opens a wrapped line, with its file named on the line before, was never
+  re-pointed by this batch's earlier changes. A paragraph-aware pass from the pre-batch engine (301f6f8)
+  moved those 21 (engine.md, the-first-hour.md, the-release.md); each now names the same code line it
+  named before the batch. `cite_check.py` 0 drifted in SKILL.md + references/.
+
+**Verified.** `test_item_prices.py` (2, headless: coffee bought twice for 8 money, then "You cannot carry
+more"; the pebble is not for sale; short of money says so; the pass card needs its flag, then costs 3
+charm and no money). `ItemPriceSchemaTests` (3: metadata only when set, five bad shapes, the walker on an
+item's conditions). No save state (bought items live in the existing inventory). Selfcheck and the
+skill tests pass; Django failures all in the known list.
+
+**Words:** +28, running total 145,653 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: more than one wardrobe room (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7. `wardrobe_location` named one room, so a gym locker or a work
+changing room could not also be a place to change.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_location` is a slug, as before, or a list of slugs (a
+  one-item list is read as the slug). Each must be a declared location (build errors; the four clothing
+  games' single slugs pass). The list reaches `clothing_settings` as written, so GG gets it.
+- `generators/v2.py`: every reader asks the set of wardrobe rooms: the "Change Clothes" link on a room's
+  screen (both location paths) and the wardrobe rooms `wardrobe_anywhere = false` allows.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: "planned: more than one wardrobe
+  room" becomes the fact.
+- Citations re-pointed through the `git diff` line map (551 moved, 78 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (+1, headless: home and Dan's place both show "Change
+Clothes" and both let the club's refusal offer a change; the gym does neither). `WardrobeLocationListTests`
+(2: a list and a single slug validate; an unknown room, a non-string entry and a number are errors). The
+six games validate with 0 errors. No save state. Selfcheck and the skill tests pass; Django failures all
+in the known list.
+
+**Words:** +26, running total 145,625 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: saved outfits (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. Changing cost one click per slot; the counted games keep changing
+cheap (`templates/cards/wardrobe.md` rule 11: one click for a favourite outfit, five saved sets).
+
+**What changed.**
+- `template_import.py`: `[settings] saved_outfits` (default false; a bool, and it needs clothing),
+  written into `clothing_settings` only when true.
+- `generators/v2.py`: with it, `$player.outfits = {}` (name → {slot: item id or null}) joins the player
+  skeleton, so an old save gets it from the top-level `$player` backfill. The wardrobe page lists each
+  outfit with Wear and Delete and saves what she wears under a typed name (or "Outfit N"), five at most.
+  `setup.wearOutfit` empties the slots the outfit left empty (where `canRemoveSlot` allows) and equips each
+  saved garment she still owns through `setup.equipItem`, so a garment's own conditions and the dress/top
+  rule still hold; one removed since is skipped. Names are escaped on the page. Emitted only in such a
+  game.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: its two "planned: saved outfits"
+  lines become the fact.
+- Citations re-pointed through the `git diff` line map (601 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_saved_outfits.py` (3, headless: save, wear and delete, with an escaped name; a
+removed garment is skipped and five is the cap; a save written before the change, at 24b0793, loads with
+`outfits` backfilled and saves one). A save-migration case. `WardrobeSwitchSchemaTests` covers the
+metadata. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +39, running total 145,599 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: two wardrobe switches — a change on refusal, and no change from anywhere (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. A place that wants a revealing state could only say "Go back", and a
+dress code's "Change clothes" opened the wardrobe from wherever she was, so every dress code was one
+click from met.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_change_on_refusal` (default false) and `wardrobe_anywhere`
+  (default true). Each must be a bool, and switching one from its default needs clothing (build errors).
+  Written into `clothing_settings` only when switched, so GG gets them and every other game's metadata
+  is unchanged.
+- `generators/v2.py`: with `wardrobe_change_on_refusal`, a location's `entry_conditions` refusal adds
+  "Change clothes" when an unmet item is a clothing condition (`worn_*`, `clothing_slot`,
+  `clothing_item`; `setup.refusalOffersChange`), and the wardrobe's Back tries the place again. With
+  `wardrobe_anywhere = false`, "Change clothes" on the ClothingBlock and on that refusal shows only when
+  she came from the wardrobe room (`setup.canChangeClothesHere`); the ClothingBlock intercept records
+  where she came from, because the refused room's passage renders (and writes `current_location`)
+  before the redirect lands. The helpers, the intercept line and the `<<if>>` around the link are
+  emitted only when a switch is on.
+- `references/engine.md` §17: the loophole and the "Go back only" lines become the facts.
+  `templates/cards/wardrobe.md`: "planned: the refusal offers a change" becomes the fact.
+- Citations re-pointed through the `git diff` line map (599 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (4, headless: from the wardrobe room the club's refusal offers
+"Change clothes", the wardrobe's Back after taking the top off lets her in; from the gym neither the
+refusal nor the office's dress code offers a change; from the wardrobe room the dress code does; the same
+fixture with both switches removed behaves as before and emits no helper). `WardrobeSwitchSchemaTests`
+(2). No save state. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all
+import, 0 passages differ from the pre-batch engine (301f6f8); only the engine script differs.
+Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +21, running total 145,560 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a scene takes clothes off her — `unequip` and `remove` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7 (clothing upgrades). `wardrobeEffects` knew only `add` and `equip`:
+no scene could take a garment off her or out of the wardrobe, and an unknown action or a missing item
+emitted nothing, with no error.
+
+**What changed.**
+- `generators/v2.py`: `setup.unequipItem` (takes a worn garment off; it stays in the wardrobe) and
+  `setup.removeFromWardrobe` (takes it off and out; a "👗 Gone" toast; a shop can sell it again). One
+  helper, `_wardrobe_effect_js`, now writes every action for all three emitters (a choice, the loop-back
+  link beat, a node exit's config); `add` and `equip` emit exactly what they did before.
+- `template_import.py`: every wardrobe effect on a choice or an exit config needs `action` in add / equip /
+  unequip / remove and an `item_id` that is a declared `[[clothing]]` item (build errors). All six games'
+  effects pass.
+- `references/engine.md` §17: the gap line becomes the fact. `templates/cards/wardrobe.md`: its two
+  "planned: remove and unequip" lines become the fact.
+- Citations re-pointed through the `git diff` line map (509 moved, 115 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+- Not changed: `references/the-arc.md` A6's "no effect removes or unequips a garment" (listed for the
+  skill-text session).
+
+**Verified.** `test_wardrobe_effects.py` (3: the helper's four actions, `add` and `equip` byte-identical;
+headless, "Lose the blouse" unequips it and keeps it, the next exit removes the skirt and nothing else
+moves; `equip` still works, removing a garment she does not own does nothing). `WardrobeEffectSchemaTests`
+(2: four bad shapes, on a choice and on an exit). No save state (the save shape is unchanged).
+The six games validate with 0 errors. Selfcheck and the skill tests pass; Django failures all in the
+known list.
+
+**Words:** +3, running total 145,539 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: back to where she was — a `return` exit (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add a "back to where she was" exit. A call's accept canvas and an `anywhere`
+launcher scene ended at the canvas's home, so answering a call at the gym moved her to the caller's
+place and charged that place's entry costs.
+
+**What changed.**
+- `generators/v2.py`: a location exit may say `destinationType = "return"`. Answer on a call and a
+  launcher option store the room she stands in (`setup.markReturnPlace`) in
+  `$game_state.return_place`, which exists only in a game with a `return` exit. The exit's link resolves
+  when it renders (`setup.returnPassage`): the stored room, free since it is not a move, or the canvas's
+  home when the room is closed (its hours), gone from the build, or nothing is stored. Arriving at a room
+  or the map clears it (a `:passagestart` block emitted only in such a game).
+- `template_import.py`: `return` is a valid `destinationType`; like `trigger` it needs a canvas whose
+  home resolves, as its fallback. The exit config already reached both build paths whole.
+- `references/engine.md` §13: the fact; §51's call and launcher sentences point to it.
+- Citations re-pointed through the `git diff` line map (519 moved, 104 identical; bare `:NNNN`
+  follow-ons included, reset after any other file's cite); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_return_exit.py` (6, headless: a call answered at the gym returns her there with her
+money unchanged and the place cleared; past the gym's closing it falls back to Dan's place and pays its
+entry cost, as before; a gone room falls back; an `anywhere` launcher returns her; a scene entered from
+its room ends at its home; a save written before the change, at 301f6f8, loads with `return_place`
+backfilled and the call returns her). `ReturnExitSchemaTests` (3). A save-migration case. Selfcheck and
+the skill tests pass. Django: every failure is in the known list (a Tweego probe that timed out under load
+failed 23 more; those files pass run alone).
+
+**Words:** +105, running total 145,536 / 149,283.
+
+---
+
 ## 2026-10-02 — Cleanup rent note: the first stage is the starting rent
 
 **Why.** The Billable Hours rebuild found a rent stage line that can never show: a stage with

@@ -6611,6 +6611,219 @@ class PhoneCallsSchemaTests(SimpleTestCase):
                         errors)
 
 
+BATCH3_FIXTURE = "apps/game_generation/games_toml_files/engine_ws_batch3_2026_10_02.toml"
+
+
+def _batch3():
+    with open(BATCH3_FIXTURE, "rb") as f:
+        return tomli.load(f)
+
+
+def _canvas(d, cid):
+    return next(c for c in d["canvases"] if c["id"] == cid)
+
+
+class ReturnExitSchemaTests(SimpleTestCase):
+    """E8b (World and Systems PRD) — `destinationType = "return"` on a location exit."""
+
+    def test_return_exit_validates_clean(self):
+        self.assertEqual(validate(normalize(_batch3())), [])
+
+    def test_return_exit_needs_a_home_to_fall_back_to(self):
+        d = _batch3()
+        _canvas(d, "dan_call").pop("trigger")
+        _canvas(d, "dan_call")["nodes"][0]["exit_block"]["config"]["destinationType"] = "return"
+        d["phone"]["calls"] = []
+        errors = validate(normalize(d))
+        self.assertTrue(any("destinationType='return' but canvas has no resolving" in e
+                            for e in errors), errors)
+
+    def test_unknown_destination_type_names_return(self):
+        d = _batch3()
+        _canvas(d, "dan_door")["nodes"][0]["exit_block"]["config"]["destinationType"] = "back"
+        errors = validate(normalize(d))
+        self.assertTrue(any("'node', or 'return'" in e for e in errors), errors)
+
+
+class WardrobeEffectSchemaTests(SimpleTestCase):
+    """E7a (World and Systems PRD) — `action` and `item_id` on a wardrobe effect."""
+
+    def test_unequip_and_remove_validate_clean(self):
+        self.assertEqual(validate(normalize(_batch3())), [])
+
+    def test_bad_wardrobe_effects_are_errors(self):
+        for effect, fragment in (
+            ({"action": "grant", "item_id": "slip"}, "action 'grant' must be one of"),
+            ({"action": "remove"}, "item_id is required"),
+            ({"action": "unequip", "itemId": "slip"}, "item_id is required"),
+            ({"action": "remove", "item_id": "cape"}, "item_id 'cape' is not a declared"),
+        ):
+            for where in ("choice", "exit"):
+                d = _batch3()
+                nodes = _canvas(d, "strip_scene")["nodes"]
+                if where == "choice":
+                    nodes[0]["exit_block"]["choices"][0]["wardrobeEffects"] = [effect]
+                else:
+                    nodes[1]["exit_block"]["config"]["wardrobeEffects"] = [effect]
+                errors = validate(normalize(d))
+                self.assertTrue(any(fragment in e and "wardrobeEffects" in e for e in errors),
+                                (where, effect, errors))
+
+
+class WardrobeSwitchSchemaTests(SimpleTestCase):
+    """E7b (World and Systems PRD) — `wardrobe_change_on_refusal`, `wardrobe_anywhere`."""
+
+    def test_switches_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, normalize(_batch3()))
+        cs = p.metadata["clothing_settings"]
+        self.assertIs(cs["wardrobe_change_on_refusal"], True)
+        self.assertIs(cs["wardrobe_anywhere"], False)
+        d = _batch3()
+        d["settings"].pop("wardrobe_change_on_refusal")
+        d["settings"].pop("wardrobe_anywhere")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(d))
+        self.assertNotIn("wardrobe_change_on_refusal", p2.metadata["clothing_settings"])
+        self.assertNotIn("wardrobe_anywhere", p2.metadata["clothing_settings"])
+        self.assertIs(cs["saved_outfits"], True)  # E7c
+        d["settings"].pop("saved_outfits")
+        p3 = _P()
+        p3.metadata = {}
+        _assemble_project_metadata(p3, normalize(d))
+        self.assertNotIn("saved_outfits", p3.metadata["clothing_settings"])
+
+    def test_bad_switches_are_errors(self):
+        d = _batch3()
+        d["settings"]["wardrobe_anywhere"] = "no"
+        self.assertTrue(any("settings.wardrobe_anywhere must be true or false" in e
+                            for e in validate(normalize(d))))
+        d = _batch3()
+        d["settings"]["clothing_enabled"] = False
+        d["settings"].pop("wardrobe_anywhere")
+        for c in d["canvases"]:
+            for n in c["nodes"]:
+                for ch in n["exit_block"].get("choices", []):
+                    ch.pop("wardrobeEffects", None)
+                n["exit_block"].get("config", {}).pop("wardrobeEffects", None)
+        errors = validate(normalize(d))
+        self.assertTrue(any("settings.wardrobe_change_on_refusal needs clothing_enabled" in e
+                            for e in errors), errors)
+
+
+class WardrobeLocationListTests(SimpleTestCase):
+    """E7d (World and Systems PRD) — `wardrobe_location` may be a list."""
+
+    def test_a_list_and_a_single_slug_validate(self):
+        d = _batch3()
+        self.assertEqual(d["settings"]["wardrobe_location"], ["loc_home", "loc_dan"])
+        self.assertEqual(validate(normalize(d)), [])
+        d["settings"]["wardrobe_location"] = "loc_home"
+        self.assertEqual(validate(normalize(d)), [])
+
+    def test_unknown_rooms_are_errors(self):
+        for value, fragment in (
+            (["loc_home", "loc_moon"], "settings.wardrobe_location 'loc_moon' not found"),
+            ("loc_moon", "settings.wardrobe_location 'loc_moon' not found"),
+            (["loc_home", 3], "entries must be location ids"),
+            (5, "must be a location id or a list of them"),
+        ):
+            d = _batch3()
+            d["settings"]["wardrobe_location"] = value
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (value, errors))
+
+
+def _item(d, iid):
+    return next(i for i in d["items"] if i["id"] == iid)
+
+
+class ItemPriceSchemaTests(SimpleTestCase):
+    """E10 (World and Systems PRD) — `price`, `money_trait`, `conditions` on `[[items]]`."""
+
+    def test_prices_validate_and_reach_metadata_only_when_set(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        t = normalize(_batch3())
+        self.assertEqual(validate(t), [])
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        items = {i["id"]: i for i in p.metadata["items"]}
+        self.assertEqual((items["coffee"]["price"], "money_trait" in items["coffee"]), (4, False))
+        self.assertEqual(items["pass_card"]["money_trait"], "charm")
+        self.assertEqual(sorted(items["pebble"]), ["icon", "id", "max_stack", "name"])
+
+    def test_bad_prices_are_errors(self):
+        for iid, change, fragment in (
+            ("coffee", {"price": 0}, "price must be a whole number of at least 1"),
+            ("coffee", {"price": 2.5}, "price must be a whole number of at least 1"),
+            ("coffee", {"money_trait": "gold"}, "money_trait 'gold' is not a [player] core_traits key"),
+            ("pebble", {"money_trait": "charm"}, "money_trait is read only with a price"),
+            ("pebble", {"conditions": {"version": "1.0", "items": []}}, "read only with a price"),
+        ):
+            d = _batch3()
+            _item(d, iid).update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (iid, change, errors))
+
+    def test_the_condition_walker_reaches_item_conditions(self):
+        d = _batch3()
+        _item(d, "pass_card")["conditions"] = {"items": [
+            {"type": "flag", "flag_key": "card_ok", "operator": "is_true"}]}
+        errors = validate(normalize(d))
+        self.assertTrue(any("items['pass_card'].conditions" in e for e in errors), errors)
+
+
+class GeneralShopSchemaTests(SimpleTestCase):
+    """E10 (World and Systems PRD) — `[[shops]]`."""
+
+    def test_shops_parse_and_reach_metadata_only_when_present(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        t = normalize(_batch3())
+        self.assertEqual(validate(t), [])
+        self.assertEqual((t.shops[0].id, t.shops[0].location), ("corner_shop", "loc_gym"))
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        self.assertEqual(p.metadata["shops"][0]["stock"][0], {"item": "coffee", "limit": 3})
+        d = _batch3()
+        d.pop("shops")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(d))
+        self.assertNotIn("shops", p2.metadata)
+
+    def test_bad_shops_are_errors(self):
+        for change, fragment in (
+            ({"location": "loc_moon"}, "location 'loc_moon' not found"),
+            ({"name": ""}, "name is required"),
+            ({"stock": []}, "stock must be a non-empty list"),
+            ({"stock": [{"item": "pebble"}]}, "item 'pebble' has no price"),
+            ({"stock": [{"item": "cake"}]}, "item 'cake' not found in items"),
+            ({"stock": [{"item": "coffee", "limit": 0}]}, "limit must be a whole number"),
+            ({"stock": [{"item": "coffee", "price": 2}]}, "unknown key `price`"),
+            ({"stock": [{"item": "coffee"}, {"item": "coffee"}]}, "listed twice"),
+        ):
+            d = _batch3()
+            d["shops"][0].update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (change, errors))
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

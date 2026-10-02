@@ -502,8 +502,13 @@ class GameTemplate:
     # Clothing system
     clothing_enabled: bool = False
     clothing_items: List[TemplateClothingItem] = field(default_factory=list)
-    wardrobe_location: Optional[str] = None
+    wardrobe_location: Any = None  # a slug, or (E7d) a list of slugs
     shop_location: Optional[str] = None
+    # E7b — both opt-in, raw so validate() can name a non-bool. Off (False / True) is
+    # today's behaviour: no change link on a refusal, a dress code's change from anywhere.
+    wardrobe_change_on_refusal: Any = False
+    wardrobe_anywhere: Any = True
+    saved_outfits: Any = False  # E7c — the wardrobe page saves and re-wears outfits
     clothing_requirements: Optional[TemplateClothingRequirements] = None
     # Rent system
     rent_enabled: bool = False
@@ -553,6 +558,8 @@ class GameTemplate:
     player_portrait: Optional["TemplatePlayerPortrait"] = None
     # Consumable items (groceries, art supplies, etc.)
     items: List[TemplateItem] = field(default_factory=list)
+    # E10 — general shops ([[shops]]); empty in every game that has none
+    shops: List[TemplateShop] = field(default_factory=list)
     # Visual theme
     theme: Optional[TemplateTheme] = None
     # Day-rollover hook — fires inside window.advanceDay() once per day flip.
@@ -1004,6 +1011,25 @@ class TemplateItem:
     name: str = ""
     icon: str = ""
     max_stack: int = 99
+    # E10 — for sale: a price, the trait it is paid from (default money), and v1.0
+    # conditions that gate buying. All None when unauthored, and then left out of
+    # the metadata, so a game without them is unchanged.
+    price: Any = None
+    money_trait: Optional[str] = None
+    conditions: Optional[Dict[str, Any]] = None
+
+
+@dataclass
+class TemplateShop:
+    """E10 — a general shop: a place and its stock of priced `[[items]]`.
+
+    `stock` entries are {item, limit?}; a limit is how many the shop ever sells (its
+    sales live in $game_state.shops[shop][item]); none = it never runs out.
+    """
+    id: str = ""
+    name: str = ""
+    location: str = ""
+    stock: Any = field(default_factory=list)
 
 
 @dataclass
@@ -1791,7 +1817,7 @@ def _walk_condition_carriers(node: Any, ctx: str, parent_key: str = "") -> List[
     rejection effects and text variants, location entry_conditions, description
     variants, door options, clothing_rules, clothing items, phone app `conditions`,
     phone conversation / post / profile / gallery / call triggers, match_condition,
-    daily_topics, daily_tick effects,
+    daily_topics, daily_tick effects, item `conditions` (what gates buying),
     engine.stage_helpers, NPC schedule `when`, and sidebar `show_when`.
     """
     errors: List[str] = []
@@ -3046,8 +3072,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     settings_raw = data.get("settings", {}) or {}
     narration_person = _require_str(settings_raw, "narration_person", "second")
     clothing_enabled = _require_bool(settings_raw, "clothing_enabled", False)
-    wardrobe_location = _require_str(settings_raw, "wardrobe_location", "")
+    # E7d — one slug as before, or a list of them (more than one wardrobe room).
+    wardrobe_location = settings_raw.get("wardrobe_location", "")
+    if isinstance(wardrobe_location, list) and len(wardrobe_location) == 1:
+        wardrobe_location = wardrobe_location[0]
     shop_location = _require_str(settings_raw, "shop_location", "")
+    wardrobe_change_on_refusal = settings_raw.get("wardrobe_change_on_refusal", False)
+    wardrobe_anywhere = settings_raw.get("wardrobe_anywhere", True)
+    saved_outfits = settings_raw.get("saved_outfits", False)
     clothing_items: List[TemplateClothingItem] = []
     if clothing_enabled:
         for ci, c_raw in enumerate(data.get("clothing", []) or []):
@@ -3202,6 +3234,25 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 name=_require_str(item_def, "name", ""),
                 icon=_require_str(item_def, "icon", ""),
                 max_stack=_require_int(item_def, "max_stack", 99),
+                price=item_def.get("price"),
+                money_trait=item_def.get("money_trait"),
+                conditions=item_def.get("conditions"),
+            )
+        )
+
+    # ── Shops (E10) ──
+    shops: List[TemplateShop] = []
+    for shop_def in data.get("shops", []) or []:
+        if not isinstance(shop_def, dict):
+            continue
+        raw_stock = shop_def.get("stock")
+        shops.append(
+            TemplateShop(
+                id=_require_str(shop_def, "id"),
+                name=_require_str(shop_def, "name", ""),
+                location=_require_str(shop_def, "location", ""),
+                stock=[s for s in raw_stock if isinstance(s, dict)]
+                if isinstance(raw_stock, list) else raw_stock,
             )
         )
 
@@ -3665,6 +3716,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         clothing_items=clothing_items,
         wardrobe_location=wardrobe_location or None,
         shop_location=shop_location or None,
+        wardrobe_change_on_refusal=wardrobe_change_on_refusal,
+        wardrobe_anywhere=wardrobe_anywhere,
+        saved_outfits=saved_outfits,
         clothing_requirements=clothing_requirements_obj,
         rent_enabled=rent_enabled,
         rent_amount=rent_amount,
@@ -3687,6 +3741,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         quests=quests,
         quests_cards=quests_cards_parsed,
         items=items,
+        shops=shops,
         theme=theme_obj,
         daily_tick=daily_tick_obj,
         stage_helpers=stage_helpers,
@@ -5755,16 +5810,17 @@ def validate(template: GameTemplate) -> List[str]:
 
             if eb.type == "location":
                 dest = eb.config.get("destinationType", "trigger")
-                if dest not in ("trigger", "specific", "node"):
+                if dest not in ("trigger", "specific", "node", "return"):
                     errors.append(
-                        f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationType must be 'trigger', 'specific', or 'node'"
+                        f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationType must be 'trigger', 'specific', 'node', or 'return'"
                     )
-                # Layer 3 — silent-Navigation gate (single-link form).
-                if dest == "trigger" and not return_will_resolve:
+                # Layer 3 — silent-Navigation gate (single-link form). `return` falls
+                # back to the same home when no stored place is usable, so it needs one too.
+                if dest in ("trigger", "return") and not return_will_resolve:
                     eb_text = (eb.text or "").strip() or "<no text>"
                     errors.append(
                         f"canvases[{ci}].nodes[{ni}].exit_block ('{c.id}.{n.id}') uses "
-                        f"destinationType='trigger' but canvas has no resolving "
+                        f"destinationType='{dest}' but canvas has no resolving "
                         f"trigger.location — runtime return_target would silently "
                         f"land on the Navigation page. Exit text: {eb_text!r}. "
                         f"Fix: change destinationType to 'specific' and set "
@@ -6138,6 +6194,66 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"duplicate clothing id: {ci.id}")
             seen_clothing_ids.add(ci.id)
 
+    # E7d — wardrobe_location: a slug or a list of slugs, each a declared location.
+    _wl = template.wardrobe_location
+    _wl_list = _wl if isinstance(_wl, list) else ([_wl] if _wl else [])
+    if not (_wl is None or isinstance(_wl, str) or isinstance(_wl, list)):
+        errors.append("settings.wardrobe_location must be a location id or a list of them")
+    else:
+        _loc_ids = {l.id for l in template.locations}
+        for _w in _wl_list:
+            if not isinstance(_w, str) or not _w:
+                errors.append("settings.wardrobe_location entries must be location ids")
+            elif _w not in _loc_ids:
+                errors.append(f"settings.wardrobe_location '{_w}' not found in locations")
+
+    # E7b — the two wardrobe switches: bools, and only in a game with clothing.
+    for _w_key, _w_default in (("wardrobe_change_on_refusal", False), ("wardrobe_anywhere", True),
+                               ("saved_outfits", False)):
+        _w_val = getattr(template, _w_key)
+        if not isinstance(_w_val, bool):
+            errors.append(f"settings.{_w_key} must be true or false")
+        elif _w_val != _w_default and not template.clothing_enabled:
+            errors.append(f"settings.{_w_key} needs clothing_enabled = true")
+
+    # E7a — wardrobe effects: a known action on a declared garment. An unknown action or
+    # a missing item_id used to emit nothing at all, with no error anywhere.
+    _clothing_ids = {ci.id for ci in template.clothing_items}
+    _wardrobe_actions = ("add", "equip", "unequip", "remove")
+    for c in template.canvases:
+        for n in c.nodes:
+            _w_sets = [(
+                f"canvases['{c.id}'].nodes['{n.id}'].exit_block.config.wardrobeEffects",
+                (n.exit_block.config or {}).get("wardrobeEffects") or [],
+            )]
+            for chi, ch in enumerate(n.exit_block.choices or []):
+                _w_sets.append((
+                    f"canvases['{c.id}'].nodes['{n.id}'].exit_block.choices[{chi}].wardrobeEffects",
+                    ch.wardrobeEffects or [],
+                ))
+            for _w_ctx, _w_effs in _w_sets:
+                if not isinstance(_w_effs, list):
+                    errors.append(f"{_w_ctx} must be a list")
+                    continue
+                for wi, we in enumerate(_w_effs):
+                    if not isinstance(we, dict):
+                        errors.append(f"{_w_ctx}[{wi}] must be a table")
+                        continue
+                    action = we.get("action", "add")
+                    if action not in _wardrobe_actions:
+                        errors.append(
+                            f"{_w_ctx}[{wi}].action '{action}' must be one of "
+                            f"add, equip, unequip, remove"
+                        )
+                    item_id = we.get("item_id")
+                    if not item_id:
+                        errors.append(f"{_w_ctx}[{wi}].item_id is required")
+                    elif item_id not in _clothing_ids:
+                        errors.append(
+                            f"{_w_ctx}[{wi}].item_id '{item_id}' is not a declared "
+                            f"[[clothing]] item"
+                        )
+
     # ===== Player-portrait validation (optional) =====
     if template.player_portrait is not None:
         pp = template.player_portrait
@@ -6176,6 +6292,61 @@ def validate(template: GameTemplate) -> List[str]:
         seen_item_ids.add(it.id)
         if it.max_stack <= 0:
             errors.append(f"items[{i}].max_stack must be positive")
+        # E10 — price, money_trait, conditions (the conditions' own shape is checked by
+        # the condition walker, which finds `items[].conditions` by its key).
+        if it.price is not None and (
+            isinstance(it.price, bool) or not isinstance(it.price, int) or it.price < 1
+        ):
+            errors.append(f"items[{i}].price must be a whole number of at least 1")
+        if it.money_trait is not None:
+            if it.price is None:
+                errors.append(f"items[{i}].money_trait is read only with a price")
+            elif it.money_trait not in (template.player.core_traits or {}):
+                errors.append(
+                    f"items[{i}].money_trait '{it.money_trait}' is not a [player] core_traits key"
+                )
+        elif it.price is not None and "money" not in (template.player.core_traits or {}):
+            errors.append(
+                f"items[{i}] has a price but no money_trait, and [player] has no `money` trait"
+            )
+        if it.conditions is not None and it.price is None:
+            errors.append(f"items[{i}].conditions gate buying and are read only with a price")
+
+    # ===== Shops validation (E10) =====
+    _priced = {it.id for it in template.items if it.price is not None}
+    _all_items = {it.id for it in template.items}
+    _loc_slugs = {l.id for l in template.locations}
+    seen_shop_ids: Set[str] = set()
+    for i, sh in enumerate(template.shops):
+        ctx = f"shops['{sh.id}']" if sh.id else f"shops[{i}]"
+        if not _is_valid_slug(sh.id or ""):
+            errors.append(f"{ctx}.id must be lowercase snake_case")
+        if sh.id in seen_shop_ids:
+            errors.append(f"duplicate shop id: {sh.id}")
+        seen_shop_ids.add(sh.id)
+        if not sh.name:
+            errors.append(f"{ctx}.name is required")
+        if sh.location not in _loc_slugs:
+            errors.append(f"{ctx}.location '{sh.location}' not found in locations")
+        if not isinstance(sh.stock, list) or not sh.stock:
+            errors.append(f"{ctx}.stock must be a non-empty list of {{item, limit?}}")
+            continue
+        seen_stock: Set[str] = set()
+        for si, st in enumerate(sh.stock):
+            unknown = set(st) - {"item", "limit"}
+            if unknown:
+                errors.append(f"{ctx}.stock[{si}]: unknown key `{sorted(unknown)[0]}`")
+            item = st.get("item")
+            if item not in _all_items:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' not found in items")
+            elif item not in _priced:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' has no price")
+            if item in seen_stock:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' is listed twice")
+            seen_stock.add(item)
+            lim = st.get("limit")
+            if lim is not None and (isinstance(lim, bool) or not isinstance(lim, int) or lim < 1):
+                errors.append(f"{ctx}.stock[{si}].limit must be a whole number of at least 1")
 
     # ===== Effect `op` must be an op the RUNTIME actually runs =====
     #
@@ -6640,6 +6811,26 @@ def _validate_rent_stages(template) -> List[str]:
     for i, ln in enumerate(lines):
         if not isinstance(ln, str):
             errors.append(f"rent stage_lines[{i}] must be a string, got {ln!r}")
+    # E11 — a first stage at after_total_paid = 0 is reached before any payment
+    # (setup.rentStageIndex counts it from the start), so no payment changes to it and
+    # its line can never print. It works as coded; say so instead of shipping a dead line.
+    if (
+        stages
+        and isinstance(stages[0], dict)
+        and stages[0].get("after_total_paid") == 0
+        and lines
+        and isinstance(lines[0], str)
+        and lines[0].strip()
+    ):
+        import warnings
+
+        warnings.warn(
+            "[settings.rent] stage_lines[0] never prints: stages[0].after_total_paid = 0 "
+            "is reached from the start, so the first stage is the starting rent and no "
+            "payment changes to it. Put its words in the rent's own text.",
+            UserWarning,
+            stacklevel=2,
+        )
     return errors
 
 
@@ -8246,6 +8437,12 @@ def _assemble_project_metadata(project, template):
             "enabled": True,
             "wardrobe_location": template.wardrobe_location or "",
             "shop_location": template.shop_location or "",
+            # E7b — written only when switched from the default, so an existing game's
+            # metadata is unchanged.
+            **({"wardrobe_change_on_refusal": True}
+               if template.wardrobe_change_on_refusal is True else {}),
+            **({"wardrobe_anywhere": False} if template.wardrobe_anywhere is False else {}),
+            **({"saved_outfits": True} if template.saved_outfits is True else {}),
             "items": [
                 {
                     "id": ci.id,
@@ -8335,8 +8532,17 @@ def _assemble_project_metadata(project, template):
     # Store items if defined
     if template.items:
         project.metadata["items"] = [
-            {"id": it.id, "name": it.name, "icon": it.icon, "max_stack": it.max_stack}
+            {"id": it.id, "name": it.name, "icon": it.icon, "max_stack": it.max_stack,
+             **({"price": it.price} if it.price is not None else {}),
+             **({"money_trait": it.money_trait} if it.money_trait else {}),
+             **({"conditions": it.conditions} if it.conditions else {})}
             for it in template.items
+        ]
+    # E10 — general shops, only when declared
+    if template.shops:
+        project.metadata["shops"] = [
+            {"id": sh.id, "name": sh.name, "location": sh.location, "stock": sh.stock}
+            for sh in template.shops
         ]
     # Store daily-tick hook if defined ([engine.daily_tick])
     if template.daily_tick is not None:

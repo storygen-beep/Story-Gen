@@ -1171,8 +1171,14 @@ class TweeComprehensiveGeneratorV2:
         # Clothing system data
         clothing_settings = (self.project.metadata or {}).get("clothing_settings", {})
         self.clothing_enabled = clothing_settings.get("enabled", False)
-        self.wardrobe_location_slug = clothing_settings.get("wardrobe_location", "")
+        # E7d — one slug or a list; every reader asks the set.
+        _wl = clothing_settings.get("wardrobe_location", "") or []
+        self.wardrobe_location_slugs = set(_wl if isinstance(_wl, list) else [_wl])
         self.shop_location_slug = clothing_settings.get("shop_location", "")
+        # E7b — both absent in every game that does not opt in.
+        self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
+        self.wardrobe_anywhere = clothing_settings.get("wardrobe_anywhere") is not False
+        self.saved_outfits = clothing_settings.get("saved_outfits") is True  # E7c
         clothing_items = clothing_settings.get("items", [])
         clothing_requirements = clothing_settings.get("requirements", {})
         if self.clothing_enabled:
@@ -1227,6 +1233,8 @@ class TweeComprehensiveGeneratorV2:
         self.passes = (self.project.metadata or {}).get("passes", [])
         # Items (consumable inventory)
         self.items = (self.project.metadata or {}).get("items", [])
+        # E10 — general shops ([[shops]]), each rendered on its room's screen
+        self.shops = (self.project.metadata or {}).get("shops", []) or []
         # Day-rollover hook ([engine.daily_tick]) — fires inside advanceDay().
         # Always present as a dict with a flagEffects list (possibly empty)
         # so the generated JS loop has a stable target.
@@ -1512,6 +1520,10 @@ class TweeComprehensiveGeneratorV2:
         if self.clothing_enabled:
             player_init["wardrobe"] = initial_wardrobe
             player_init["equipped"] = initial_equipped
+            if self.saved_outfits:
+                # E7c — name -> {slot: item id or null}. Top level of $player, so an
+                # old save gets it from the backfill.
+                player_init["outfits"] = {}
         if self.player_customizable and self.player_customization_fields:
             for cf in self.player_customization_fields:
                 if cf["id"] == "name":
@@ -1550,6 +1562,9 @@ class TweeComprehensiveGeneratorV2:
         if self._has_pool_memory():
             # E2 — which entries of each `memory = "seen"` block_pool she has seen.
             game_state_init["pool_seen"] = {}
+        if self._has_return_exit():
+            # E8b — the room a call or a launcher scene started in ("" = none).
+            game_state_init["return_place"] = ""
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -1571,6 +1586,10 @@ class TweeComprehensiveGeneratorV2:
             game_state_init["passes"] = {}
         if self.items:
             game_state_init["inventory"] = {}
+        if any(st.get("limit") for sh in self.shops for st in (sh.get("stock") or [])):
+            # E10 — shop id -> {item id: how many it has sold}. Only in a game with a
+            # limited stock; an old save gets it from the backfill.
+            game_state_init["shops"] = {}
         if self.phone_enabled:
             game_state_init["phone"] = {
                 "triggered_conversations": {},
@@ -1711,6 +1730,33 @@ setup.unequipSlot = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.equipped) return;
     sv.player.equipped[slotName] = null;
+};
+
+// E7a — a scene takes a garment off her (`unequip`: it stays in the wardrobe) or
+// away (`remove`: taken off, then gone from the wardrobe; a shop can sell it again).
+// Both are no-ops on a garment she is not wearing / does not own.
+setup.unequipItem = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.equipped) return false;
+    var hit = false;
+    for (var s in sv.player.equipped) {
+        if (sv.player.equipped.hasOwnProperty(s) && sv.player.equipped[s] === itemId) {
+            sv.player.equipped[s] = null;
+            hit = true;
+        }
+    }
+    return hit;
+};
+
+setup.removeFromWardrobe = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.wardrobe || !sv.player.wardrobe[itemId]) return false;
+    setup.unequipItem(itemId);
+    var name = sv.player.wardrobe[itemId].name;
+    delete sv.player.wardrobe[itemId];
+    setup.pendingEffects = setup.pendingEffects || [];
+    setup.pendingEffects.push({ "type": "wardrobe_removed", "name": name });
+    return true;
 };
 
 setup.getWardrobeItemsForSlot = function(slotName) {
@@ -1992,6 +2038,7 @@ setup.renderWardrobePage = function() {
     }
 
     html += '</table>';
+    if (setup.renderSavedOutfits) html += setup.renderSavedOutfits();
     html += '</div>';
     return html;
 };
@@ -2091,6 +2138,118 @@ setup.checkLocationClothing = function(passageName) {
     return activeRule.message || "You need to put on more clothes before going there.";
 };
 """
+            if self.wardrobe_change_on_refusal or not self.wardrobe_anywhere:
+                wardrobe_js_block += """
+// E7b — where she can change (any room, or with wardrobe_anywhere = false only a
+// wardrobe room), and whether a refusal's unmet part is about her clothes.
+setup.wardrobe_anywhere = """ + json.dumps(self.wardrobe_anywhere) + """;
+setup.wardrobe_location_ids = """ + json.dumps(self._wardrobe_location_ids()) + """;
+setup.canChangeClothesHere = function(fromId) {
+    if (setup.wardrobe_anywhere) return true;
+    var here = String(fromId || (State.variables.player || {}).current_location || '');
+    return setup.wardrobe_location_ids.indexOf(here) !== -1;
+};
+setup._clothingConditionTypes = ['clothing_slot', 'clothing_item', 'worn_exposure',
+    'worn_beauty', 'worn_corruption', 'worn_type'];
+setup.unmetClothingCondition = function(cond) {
+    var items = (cond && cond.items) || [];
+    for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (!it) continue;
+        if (it.items) { if (setup.unmetClothingCondition(it)) return true; continue; }
+        if (setup._clothingConditionTypes.indexOf(it.type) === -1) continue;
+        if (!setup.triggerConditionsSatisfied({ "version": "1.0", "logic": "AND", "items": [it] })) return true;
+    }
+    return false;
+};
+setup.refusalOffersChange = function(cond) {
+    return setup.unmetClothingCondition(cond) && setup.canChangeClothesHere();
+};
+"""
+            outfit_handlers = ""
+            if self.saved_outfits:
+                outfit_handlers = """jQuery(document).on('click', '.wardrobe-outfit-save', function(e) {
+    e.preventDefault();
+    setup.saveOutfit(jQuery('#wardrobe-outfit-name').val());
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-wear', function(e) {
+    e.preventDefault();
+    setup.wearOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-delete', function(e) {
+    e.preventDefault();
+    setup.deleteOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+
+"""
+                wardrobe_js_block += """
+// E7c — saved outfits: $player.outfits[name] = {slot: item id or null}, at most 5.
+// Wearing one equips each saved garment she still owns (equipItem keeps its own
+// conditions and the dress/top rule) and empties the slots it left empty, where the
+// slot may be emptied; a garment sold or removed since is skipped.
+setup.OUTFIT_SLOTS = ['bra', 'underwear', 'top', 'bottom', 'dress', 'legwear', 'shoes'];
+setup._esc = function(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+};
+setup.saveOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.equipped) return false;
+    p.outfits = p.outfits || {};
+    name = String(name || '').trim().slice(0, 30);
+    if (!name) name = 'Outfit ' + (Object.keys(p.outfits).length + 1);
+    if (!p.outfits[name] && Object.keys(p.outfits).length >= 5) return false;
+    var snap = {};
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        snap[s] = p.equipped[s] || null;
+    }
+    p.outfits[name] = snap;
+    return true;
+};
+setup.wearOutfit = function(name) {
+    var p = State.variables.player;
+    var o = p && p.outfits && p.outfits[name];
+    if (!o) return false;
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        if (!o[s] && p.equipped[s] && setup.canRemoveSlot(s)) setup.unequipSlot(s);
+    }
+    for (var j = 0; j < setup.OUTFIT_SLOTS.length; j++) {
+        var id = o[setup.OUTFIT_SLOTS[j]];
+        if (id && p.wardrobe && p.wardrobe[id]) setup.equipItem(id);
+    }
+    return true;
+};
+setup.deleteOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.outfits || !p.outfits[name]) return false;
+    delete p.outfits[name];
+    return true;
+};
+setup.renderSavedOutfits = function() {
+    var outfits = (State.variables.player || {}).outfits || {};
+    var names = Object.keys(outfits);
+    var html = '<table class="wardrobe-table wardrobe-outfits">';
+    for (var i = 0; i < names.length; i++) {
+        var key = encodeURIComponent(names[i]);
+        html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">' + setup._esc(names[i]) + '</td>';
+        html += '<td class="wardrobe-slot-items"><button class="wardrobe-outfit-wear" data-outfit="' + key + '">Wear</button> ';
+        html += '<button class="wardrobe-outfit-delete" data-outfit="' + key + '">Delete</button></td></tr>';
+    }
+    html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">Outfits</td><td class="wardrobe-slot-items">';
+    if (names.length < 5) {
+        html += '<input id="wardrobe-outfit-name" type="text" maxlength="30" placeholder="Name"> ';
+        html += '<button class="wardrobe-outfit-save">Save what I am wearing</button>';
+    } else {
+        html += '<span class="wardrobe-empty-hint">Five saved. Delete one to save another.</span>';
+    }
+    html += '</td></tr></table>';
+    return html;
+};
+"""
             wardrobe_handlers_block = """
 // Wardrobe page event handlers
 jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', function(e) {
@@ -2102,7 +2261,7 @@ jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', functi
     }
 });
 
-jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
+""" + outfit_handlers + """jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
     e.preventDefault();
     e.stopPropagation();
     var slot = jQuery(this).data('slot');
@@ -2488,6 +2647,7 @@ setup.answerCall = function(callId) {{
     if (!setup.isRerenderSafe(State.passage)) return false;
     st.state = 'answered';
     st.ended_minute = setup.gameMinuteNow();
+    if (setup.markReturnPlace) setup.markReturnPlace();
     setup.closePhone();
     Engine.play(c.accept_passage);
     return true;
@@ -3627,7 +3787,7 @@ jQuery(document).on('click', '.phone-gallery-link', function(e) {
 jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
-    if (link) { setup.closePhone(); Engine.play(String(link)); }
+    if (link) { if (setup.markReturnPlace) setup.markReturnPlace(); setup.closePhone(); Engine.play(String(link)); }
 });
 // E8-calls — Answer navigates (the navigation commits, like a launcher); Decline
 // navigates nowhere, so it commits.
@@ -5486,6 +5646,82 @@ setup.getItemCount = function(itemId) {{
     return inv[itemId] || 0;
 }};
 
+// E10 — an item with a price is bought with its money_trait (default money), when its
+// conditions hold and the stack has room. itemBuyBlock says why not ('' = she can).
+setup.itemBuyBlock = function(itemId) {{
+    var it = setup.items_map[itemId];
+    if (!it || !(Number(it.price) > 0)) return 'Not for sale.';
+    if (it.conditions && it.conditions.items && it.conditions.items.length &&
+        !setup.triggerConditionsSatisfied(it.conditions)) {{
+        var why = setup.describeUnmetConditions(it.conditions);
+        return why ? ('Needs ' + why + '.') : 'Not yet.';
+    }}
+    var mt = it.money_trait || 'money';
+    var have = Number(((State.variables.player || {{}}).core_traits || {{}})[mt] || 0);
+    if (have < Number(it.price)) return 'Not enough ' + setup.traitLabel(mt) + '.';
+    if (setup.getItemCount(itemId) >= (it.max_stack || 99)) return 'You cannot carry more.';
+    return '';
+}};
+// E10 — [[shops]]: a room's own section. A stock limit counts sales in
+// $game_state.shops[shop][item]; no limit = it never runs out.
+setup.general_shops = {json.dumps({sh['id']: sh for sh in self.shops})};
+setup._shopStock = function(shopId, itemId) {{
+    var sh = setup.general_shops[shopId];
+    return (sh && (sh.stock || []).filter(function(s) {{ return s.item === itemId; }})[0]) || null;
+}};
+setup.shopLeft = function(shopId, itemId) {{
+    var st = setup._shopStock(shopId, itemId);
+    if (!st) return 0;
+    if (!st.limit) return Infinity;
+    var sold = (((State.variables.game_state || {{}}).shops || {{}})[shopId] || {{}})[itemId] || 0;
+    return Math.max(0, st.limit - sold);
+}};
+setup.buyFromShop = function(shopId, itemId) {{
+    if (setup.shopLeft(shopId, itemId) <= 0) return false;
+    var it = setup.items_map[itemId];
+    if (!setup.buyInventoryItem(itemId)) return false;
+    if (setup._shopStock(shopId, itemId).limit) {{
+        var gs = State.variables.game_state;
+        gs.shops = gs.shops || {{}};
+        gs.shops[shopId] = gs.shops[shopId] || {{}};
+        gs.shops[shopId][itemId] = (gs.shops[shopId][itemId] || 0) + 1;
+    }}
+    setup.pendingEffects = [{{ "type": "trait", "trait": it.money_trait || 'money', "delta": -Number(it.price) }}];
+    setup.showEffectNotification();
+    return true;
+}};
+setup.renderGeneralShop = function(shopId) {{
+    var sh = setup.general_shops[shopId];
+    if (!sh) return '';
+    var html = '<div class="general-shop"><h3>' + sh.name + '</h3>';
+    (sh.stock || []).forEach(function(st) {{
+        var it = setup.items_map[st.item];
+        if (!it) return;
+        var left = setup.shopLeft(shopId, st.item);
+        var why = left <= 0 ? 'Sold out.' : setup.itemBuyBlock(st.item);
+        var label = it.name + ' \u2014 ' + it.price + ' ' + setup.traitLabel(it.money_trait || 'money') +
+            (st.limit && left > 0 ? ' (' + left + ' left)' : '');
+        if (why) html += '<div class="general-shop-row general-shop-locked">' + label + ' \u2014 <em>' + why + '</em></div>';
+        else html += '<div class="general-shop-row"><a class="general-shop-buy" data-shop="' + shopId + '" data-item="' + st.item + '">' + label + '</a></div>';
+    }});
+    return html + '</div>';
+}};
+// The room re-renders after a purchase (a Location_ passage is safe to re-play:
+// entry costs, auto-fire and the random roll are guarded), so the sidebar's
+// numbers follow, and the navigation commits the moment.
+jQuery(document).on('click', '.general-shop-buy', function(e) {{
+    e.preventDefault();
+    if (setup.buyFromShop(String(jQuery(this).data('shop')), String(jQuery(this).data('item')))) {{
+        Engine.play(State.passage);
+    }}
+}});
+setup.buyInventoryItem = function(itemId) {{
+    if (setup.itemBuyBlock(itemId)) return false;
+    var it = setup.items_map[itemId];
+    State.variables.player.core_traits[it.money_trait || 'money'] -= Number(it.price);
+    return setup.addItem(itemId, 1);
+}};
+
 // Check if a canvas has never been completed (for highlighting new content)
 setup.isCanvasNew = function(canvasId) {{
     try {{
@@ -7190,6 +7426,8 @@ setup.showEffectNotification = function() {{
       lines.push('🔓 ' + flagDisplay);
     }} else if (eff.type === 'wardrobe') {{
       lines.push('👗 New item: ' + eff.name);
+    }} else if (eff.type === 'wardrobe_removed') {{
+      lines.push('👗 Gone: ' + eff.name);
     }} else if (eff.type === 'quest') {{
       lines.push('📜 ' + (eff.op === 'complete' ? 'Quest complete' : eff.op === 'cancel' ? 'Quest dropped' : 'Quest updated'));
     }} else if (eff.type === 'gated_action') {{
@@ -10899,13 +11137,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug_ec = (location.properties or {}).get("slug", "")
                     wardrobe_link_ec = ""
-                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec in self.wardrobe_location_slugs:
                         wardrobe_link_ec = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
                     shop_link_ec = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug_ec == self.shop_location_slug:
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link_ec += self._general_shops_html(loc_slug_ec)
 
                     content += f""":: {self._location_passage_name(location)}
 <<if {entry_guard}>>\
@@ -10934,6 +11173,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
                         )
+                    if self.clothing_enabled and self.wardrobe_change_on_refusal and has_entry_conditions:
+                        # E7b — the unmet part is about her clothes: offer the wardrobe, and
+                        # come back here (WardrobePage's Back re-renders this passage).
+                        blocked_html += (
+                            f'\n<<if setup.refusalOffersChange({entry_cond_json})>>'
+                            f'<<link "Change clothes" "WardrobePage">>'
+                            f'<<set $last_game_passage to "{self._location_passage_name(location)}">><</link>><br><</if>>'
+                        )
                     if loc_hours:
                         closed_text = (location.properties or {}).get('closed_text', '')
                         closed_html = (
@@ -10958,13 +11205,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug = (location.properties or {}).get("slug", "")
                     wardrobe_link = ""
-                    if self.clothing_enabled and loc_slug and loc_slug == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug and loc_slug in self.wardrobe_location_slugs:
                         wardrobe_link = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
                     shop_link = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug == self.shop_location_slug:
                         shop_link = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link += self._general_shops_html(loc_slug)
 
                     content += f""":: {self._location_passage_name(location)}
 <<nobr>>
@@ -14193,6 +14441,34 @@ setup.carryRent = function (due, paid) {
                 return True
         return False
 
+    def _wardrobe_location_ids(self) -> list:
+        """E7b — the location ids ($player.current_location's form) of the wardrobe rooms."""
+        slugs = self.wardrobe_location_slugs
+        return [
+            str(loc.id) for loc in self.locations
+            if (getattr(loc, "properties", None) or {}).get("slug") in slugs
+        ]
+
+    def _general_shops_html(self, loc_slug) -> str:
+        """E10 — one section per [[shops]] entry at this room ("" when it has none)."""
+        return "".join(
+            f'<<= setup.renderGeneralShop({json.dumps(sh["id"])})>>\n'
+            for sh in self.shops if loc_slug and sh.get("location") == loc_slug
+        )
+
+    def _has_return_exit(self) -> bool:
+        """E8b — does any included canvas end on a `destinationType = "return"` exit?
+
+        Gates the `return_place` default and its :passagestart clear, so a game without
+        one keeps a byte-identical :: Start and stateDefaults.
+        """
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                eb = getattr(node, "exit_block", None) or {}
+                if eb.get("type") == "location" and (eb.get("config") or {}).get("destinationType") == "return":
+                    return True
+        return False
+
     def _has_pool_memory(self) -> bool:
         """E2 — does any included canvas carry a block_pool with `memory = "seen"`?
 
@@ -15500,12 +15776,9 @@ setup.carryRent = function (due, paid) {
                                     passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}", "{fop}");<</script>>'
                             if self.clothing_enabled and lb_wardrobe_effects and isinstance(lb_wardrobe_effects, list):
                                 for we in lb_wardrobe_effects:
-                                    w_action = we.get('action', 'add')
-                                    w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                                    if w_action == 'add' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>'
-                                    elif w_action == 'equip' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>'
+                                    w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                                    if w_js:
+                                        passage_body += f'<<script>>{w_js}<</script>>'
                             # doc 45 G4/G5 — duplicate quest + scheduled effects on the loop-back choice
                             if lb_quest_effects and isinstance(lb_quest_effects, list):
                                 for qe in lb_quest_effects:
@@ -15736,6 +16009,11 @@ setup.carryRent = function (due, paid) {
                     f"{flag_effects}\n{wardrobe_effects_code}\n"
                 )
                 exit_link = f"[[{continue_text}->{next_passage}]]\n"
+                if (getattr(node, 'exit_block', None) or {}).get('config', {}).get('destinationType') == 'return':
+                    # E8b — back to where she was: resolved when the link renders (after
+                    # this node's time progression), falling back to the home.
+                    _ret_text = str(continue_text).replace('"', '\\"')
+                    exit_link = f'<<link "{_ret_text}" `setup.returnPassage("{next_passage}")`>><</link>>\n'
 
                 # Cascade-aware exit routing for the single-Continue (location)
                 # exit — mirror of the choices-branch splice (~line 11971). When
@@ -15965,8 +16243,11 @@ setup.carryRent = function (due, paid) {
                 destination_type = config.get('destinationType', 'trigger')
                 BROKEN_EXIT = "_BrokenExitFallback"
 
-                if destination_type == 'trigger':
-                    # Return to trigger location (default behavior)
+                if destination_type in ('trigger', 'return'):
+                    # Return to trigger location (default behavior). E8b — `return` is
+                    # the place she was in when the scene started, resolved at runtime
+                    # by the location branch of the passage builder; the home is its
+                    # fallback, so every other reader of this value sees the home.
                     next_passage = return_target
                 elif destination_type == 'specific':
                     # Go to specific location (if locationId is provided)
@@ -16157,14 +16438,9 @@ setup.carryRent = function (due, paid) {
 
             code_parts = []
             for we in wardrobe_effects:
-                action = we.get('action', 'add')
-                item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if not item_id:
-                    continue
-                if action == 'add':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}");')
-                elif action == 'equip':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    code_parts.append(w_js)
 
             if code_parts:
                 return "<<script>>setup.pendingEffects = setup.pendingEffects || [];" + "".join(code_parts) + "setup.showEffectNotification();<</script>>"
@@ -16318,6 +16594,21 @@ setup.carryRent = function (due, paid) {
                 ) from e
         return "".join(out)
 
+    @staticmethod
+    def _wardrobe_effect_js(action, item_id) -> str:
+        """The JS one wardrobe effect runs, shared by all three emitters (the choice path,
+        the loop-back link beat, a node exit's config). "" for an unknown action or no
+        item (the importer rejects both). E7a added `unequip` and `remove`."""
+        item_id = str(item_id or '').replace('"', '\\"')
+        if not item_id:
+            return ""
+        return {
+            'add': f'setup.addToWardrobe("{item_id}");',
+            'equip': f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");',
+            'unequip': f'setup.unequipItem("{item_id}");',
+            'remove': f'setup.removeFromWardrobe("{item_id}");',
+        }.get(action, "")
+
     def _emit_wardrobe_effects_inline(self, effects, context: str = "") -> str:
         """Emit wardrobe-effect <<script>> blocks for a list of effect dicts.
         Respects clothing_enabled flag. Returns "" if disabled or no effects.
@@ -16328,12 +16619,9 @@ setup.carryRent = function (due, paid) {
         out = []
         for we in effects:
             try:
-                w_action = we.get('action', 'add')
-                w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if w_action == 'add' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>')
-                elif w_action == 'equip' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    out.append(f'<<script>>{w_js}<</script>>')
             except (KeyError, TypeError, ValueError) as e:
                 logger.warning("Invalid wardrobe effect in %s: %s", context or "unknown context", e)
         return "".join(out)
@@ -18046,6 +18334,44 @@ window.devGoBack = function() {
         if self._has_consume_on():
             consume_leave_block = """    if (infoPages.indexOf(psg) === -1) { setup.parkLeftCanvasSteps(psg); }
 """
+        # E8b — the helpers exist only in a game with a `return` exit (the call and
+        # launcher handlers test for them), so every other game's script is unchanged.
+        return_place_js = ""
+        if self._has_return_exit():
+            return_place_js = """
+// E8b — "back to where she was". A call's Answer and a launcher's option store the
+// room she stands in ($game_state.return_place, only in a game with a `return` exit);
+// a `destinationType = "return"` exit goes back there. current_location is written
+// only by Location_ passages, so it still names that room. Arriving at a room or the
+// map clears it, so a later scene cannot use a stale place.
+setup.markReturnPlace = function () {
+    var gs = (State.variables || {}).game_state;
+    if (!gs || !('return_place' in gs)) return;
+    gs.return_place = String((State.variables.player || {}).current_location || '');
+};
+// The stored room's passage, or the fallback (the canvas's home) when nothing is
+// stored or the room is gone (not in this build) or closed (its hours).
+setup.returnPassage = function (fallback) {
+    var at = String(((State.variables || {}).game_state || {}).return_place || '');
+    if (!at) return fallback;
+    var p2l = setup.passage_to_location || {}, locs = setup.locations || {};
+    for (var psg in p2l) {
+        var slug = p2l[psg], loc = locs[slug];
+        if (!loc || String(loc.id) !== at) continue;
+        if (!Story.has(psg)) return fallback;
+        if (typeof setup.locOpenNow === 'function' && !setup.locOpenNow(slug)) return fallback;
+        return psg;
+    }
+    return fallback;
+};
+"""
+        # E8b — arriving at a room or the map ends the scene a stored place belongs to.
+        return_place_block = ""
+        if self._has_return_exit():
+            return_place_block = """    if ((psg.indexOf("Location_") === 0 || psg === "Navigation") && sv.game_state && sv.game_state.return_place) {
+        sv.game_state.return_place = "";
+    }
+"""
         rent_redirect_block = ""
         if self.rent_enabled:
             rent_redirect_block = """
@@ -18062,6 +18388,13 @@ window.devGoBack = function() {
 """
 
         clothing_redirect_block = ""
+        # E7b — with wardrobe_anywhere = false the ClothingBlock asks where she came
+        # from: the refused room's passage still renders (and writes current_location)
+        # before the redirect lands.
+        clothing_from_line = (
+            "            State.variables._clothing_block_from = (sv.player || {}).current_location;\n"
+            if not self.wardrobe_anywhere else ""
+        )
         if self.clothing_enabled:
             clothing_redirect_block = """
     // Clothing intercept: block location entry if not dressed enough
@@ -18070,7 +18403,7 @@ window.devGoBack = function() {
         if (clothingMsg) {
             State.variables._clothing_block_message = clothingMsg;
             State.variables._clothing_block_destination = psg;
-            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
+""" + clothing_from_line + """            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
             return;
         }
     }
@@ -18325,7 +18658,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-
+""" + return_place_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -18357,7 +18690,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -18701,6 +19034,12 @@ $(document).on(':passagestart', function(ev) {
         # Wardrobe page and clothing block (only if clothing enabled)
         wardrobe_page = ""
         clothing_block_page = ""
+        # E7b — `wardrobe_anywhere = false`: a dress code's "Change clothes" shows only
+        # where she can really change. Empty (today's text) in every other game.
+        change_open = change_close = ""
+        if not self.wardrobe_anywhere:
+            change_open = "<<if setup.canChangeClothesHere(State.variables._clothing_block_from)>>"
+            change_close = "<</if>>"
         if self.clothing_enabled:
             wardrobe_page = """
 :: WardrobePage
@@ -18725,12 +19064,12 @@ if (clothingMsg) {
 <h2>Not Dressed for This</h2>
 <p><<print State.variables._clothing_block_message || "You need to put on more clothes.">></p>
 <div class="clothing-block-choices">
-<<link "Change clothes">><<script>>
+""" + change_open + """<<link "Change clothes">><<script>>
     State.variables.last_game_passage = State.variables._clothing_block_destination;
     Engine.play("WardrobePage");
 <</script>><</link>>
 <br>
-<<link "Go back">><<script>>
+""" + change_close + """<<link "Go back">><<script>>
     Engine.play(State.variables.last_game_passage || "Navigation");
 <</script>><</link>>
 </div>"""

@@ -73,9 +73,9 @@ moves → by the next rung strangers act on it, and one man who heard says it to
 No gossip piece: nothing stores "who saw what" for the audience, and nothing spreads. Build both halves by hand:
 - **The memory: an NPC-scoped flag per thing a person saw.** The scene she is seen in sets it on each named
   witness — `flagEffects = [ { targetType = "npc", npcId = "npc_jake", flag = "saw_topless" } ]` (written by
-  `applyFlagEffect`, `v2.py:6963`) — and his line is gated on it:
+  `applyFlagEffect`, `v2.py:7199`) — and his line is gated on it:
   `{ type = "flag", subject = "npc", npc_id = "npc_jake", flag_key = "saw_topless", operator = "is_true" }`
-  (`v2.py:4812`). A spread scene sets `heard_topless` on the hearers present the same way, and adds to the score.
+  (`v2.py:4972`). A spread scene sets `heard_topless` on the hearers present the same way, and adds to the score.
 - **The score: one player trait for the audience**, with words through `[[traits.labels]]` and a banded sidebar
   item (`references/engine.md` §30), and on the cast page through `show_traits` (`template_import.py:168`). Size
   each write by who saw: a one-person scene adds a little, a crowd scene a lot. Give it no `trait_decay`.

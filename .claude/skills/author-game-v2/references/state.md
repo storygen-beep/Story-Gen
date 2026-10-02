@@ -136,7 +136,7 @@ belong here; only decisions, debts, and promises do.
     //               is five, the thing is probably ambient (SY2).
     //   `labels`  — which room labels this meter attaches to. ⚠️ In THIS engine that is a
     //               design statement, not wiring: a canvas belongs to exactly one location
-    //               (template_import.py:2193), so the row is authored per room. SY4.
+    //               (template_import.py:2219), so the row is authored per room. SY4.
     // ⚠️ An older ledger keeps these rows in `systems` (an entry with `kind` and no card
     //   fields). It is read as a meter until the game moves it here.
     "meters": [
@@ -218,7 +218,7 @@ belong here; only decisions, debts, and promises do.
     "economy": {
       "currency":   "money",
       // ⚠️ The NOTATION every button, every paragraph and [settings.rent] currency_symbol
-      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1195) while the
+      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1201) while the
       //    buttons print whatever each was typed with. the-economy.md R7.
       "symbol":     "$",
       // ⚠️ THE MONEY CASE ONLY — this block and gate 24 exist for `want.hold_kind = "bill"`.
