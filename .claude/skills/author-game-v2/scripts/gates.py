@@ -465,7 +465,7 @@ def _collect(blocks, beat, out, canvas, node):
         #
         # ⚠️ BOTH SHAPES. The importer accepts a group's children at the block's own
         # `blocks` key OR inside `props.blocks`, and normalises to the latter
-        # (`template_import.py:6062-6086`); the generator then renders `props.blocks`
+        # (`template_import.py:8313-8337`); the generator then renders `props.blocks`
         # (`v2.py:13770`). Reading only the first shape made 158 groups across FOUR
         # games invisible to every beat-based gate in this file — their prose was not
         # counted as words, as explicit beats, as dialogue, or as sentences, while it
@@ -914,7 +914,7 @@ def lint_badge_before_content(model, game):
     gate a badge on at all: put the ✓ on a FLAG the content sets on its way out, so it
     means "you have played this" instead of "you have ground past it". The v1 hint
     system had exactly that pairing (`arc_closure_flag` + `arc_complete`,
-    `template_import.py:1017-1023`) and the v2 card schema dropped it.
+    `template_import.py:1272-1281`) and the v2 card schema dropped it.
 
     A LIST, NEVER A GATE. "Content" here means a canvas condition reading that same
     (character, trait), which is a proxy: an author may legitimately put a badge on a
@@ -3202,7 +3202,7 @@ def _player_trait_raises(game):
 
     ⚠️ `[engine.daily_tick].traitEffects` IS A WRITER (PRD v2 CK1 · H1, 2026-09-30).
     The engine applies it on every day roll (v2.py:6276-6293; imported at
-    template_import.py:3146). The key is camelCase, so the old `effects|[]` suffix
+    template_import.py:3492). The key is camelCase, so the old `effects|[]` suffix
     test never matched it, and a meter the night adds to (`review_days +1`) read as
     one nothing raises. That is the only place the importer reads `traitEffects`,
     so it is matched there and nowhere else.
@@ -7315,7 +7315,7 @@ def run_gates(model, game, state=None):
     # at 90": the player starts in that band, so nothing has to buy it. Two exemptions:
     # the band holding the meter's STARTING value is not a promise, and a meter declared
     # `falling = true` in [[traits.labels]] is not judged at all. `falling` is read here
-    # only; the importer keeps just its own label keys (template_import.py:3324-3335).
+    # only; the importer keeps just its own label keys (template_import.py:3670-3682).
     tops = collections.defaultdict(int)
     for c in model:
         for k, op, v in c["traits"]:
@@ -7686,8 +7686,8 @@ def run_gates(model, game, state=None):
     cards = game.get("quest_cards") or []
     tiers_owed = board.get("ascent_tiers") or []
     # ⚠️ CORRECTED 2026-09-26 (PRD WS5). This used to accept `quests_engine` from
-    # [settings] too. The engine reads it ONLY from [project] (`template_import.py:1870`;
-    # the [[quest_cards]] block is parsed only when that value is "v2", `:2767`), so a game
+    # [settings] too. The engine reads it ONLY from [project] (`template_import.py:2239`;
+    # the [[quest_cards]] block is parsed only when that value is "v2", `:3161`), so a game
     # with it under [settings] ships with every card dropped (`setup.quests_cards = [];`)
     # while this gate passed. It now reads
     # [project] only, and a [settings] placement FAILS by name. It also lists cards that
@@ -7703,7 +7703,7 @@ def run_gates(model, game, state=None):
              f"quests_engine is under [settings] — the engine reads it only from [project], "
              f"so none of the {len(cards)} quest cards render",
              ["move `quests_engine = \"v2\"` from [settings] to [project] "
-              "(template_import.py:1870, :2767)"])
+              "(template_import.py:2239, :3161)"])
     elif not engine_on and not cards:
         gate("guidance exists", None, "quests engine not enabled — no guidance surface to author")
     elif not tiers_owed and not chars:
@@ -7759,8 +7759,8 @@ def run_gates(model, game, state=None):
     # The goal renderer falls back `label -> trait -> flag -> ""` (v2.py:15962-15964),
     # so a goals item carrying no `label` prints its RAW KEY to the player: a bullet
     # reading "◯ x_05_done" under the 🎯 To advance header. The importer requires
-    # `label` on trait and counter goals ONLY (template_import.py:5669-5673; the
-    # dataclass says so itself at :1092-1095) — flag-shaped goals fall straight through.
+    # `label` on trait and counter goals ONLY (template_import.py:7521-7525; the
+    # dataclass says so itself at :1293-1296) — flag-shaped goals fall straight through.
     #
     # Trait goals are already safe and already print the number: the renderer appends
     # " — <current> / <target>" for them (v2.py:15966-15968). The engine does its half
@@ -8286,7 +8286,7 @@ def run_gates(model, game, state=None):
     # `applyTraitEffect` runs `add` and `set`, and on anything else falls through to
     # `// Unknown op; do nothing` and RETURNS (v2.py:5742-5751). Nothing normalises the
     # value: `subtract` appears nowhere in the generator or the importer. The importer
-    # validates `op` for cheat-page grants (template_import.py:3755) and for nothing else,
+    # validates `op` for cheat-page grants (template_import.py:4763) and for nothing else,
     # so a dead effect is valid TOML, builds green, and emits verbatim into the HTML.
     #
     # A dead effect builds green and changes nothing: a meter never moves, a cost is never
@@ -8858,7 +8858,7 @@ def run_gates(model, game, state=None):
     # W3's law is "a number nothing reads is not a meter", and the gate above
     # enforces it for player traits an `effects` entry RAISES. It is structurally
     # blind to clothing: `worn_beauty` / `worn_corruption` are DERIVED from a
-    # garment's own `beauty` / `corruption` declaration (template_import.py:218-219,
+    # garment's own `beauty` / `corruption` declaration (template_import.py:290-291,
     # a MAX aggregate — engine.md §17), never raised by an effect, so a game can
     # ship a full catalog and the meter gate sees nothing at all.
     #
@@ -8871,9 +8871,9 @@ def run_gates(model, game, state=None):
     #      · a condition predicate — worn_corruption / worn_beauty / worn_type /
     #        clothing_slot / clothing_item                        (engine.md §17)
     #      · a player_portrait outfit override — when = { worn_type = … } or
-    #        { corruption = … }                          (template_import.py:744)
+    #        { corruption = … }                          (template_import.py:977)
     #      · a location dress code — clothing_rules.slots_required
-    #                                              (template_import.py:4227-4241)
+    #                                              (template_import.py:5262-5276)
     #    The portrait override is a DISPLAY reaction rather than a gate, and W7 is
     #    what says that is the field's dominant mode — DoL swaps the model's mouth
     #    on `V.exposed === 2`. A game can read its wardrobe mostly through
@@ -8946,7 +8946,7 @@ def run_gates(model, game, state=None):
     # invisible on the very page they sit beside. A check reading "there is a shop,
     # therefore buyable" misses them.
     #
-    # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:2536 takes the slug as a bare
+    # ⚠️ `shop_location` IS NEVER VALIDATED. template_import.py:3079 takes the slug as a bare
     # string and v2.py:9935 compares it to each location's own slug; a typo is silent and the
     # whole catalog is unreachable with no error anywhere. Hence the `in _loc_ids` test.
     #
@@ -9825,10 +9825,10 @@ def run_gates(model, game, state=None):
     # G47b — no canvas key is discarded (the-first-hour.md F5b, engine.md §42)
     #
     # `TemplateCanvas` has seven fields — id, name, description, trigger, nodes, connections,
-    # loop (template_import.py:906-913) — and it is built with named arguments only
-    # (:2302-2310), so ANY other key on a [[canvases]] table is dropped: no error, no
+    # loop (template_import.py:1133-1140) — and it is built with named arguments only
+    # (:2871-2879), so ANY other key on a [[canvases]] table is dropped: no error, no
     # warning, green build. `slug` is tolerated because the parser does read it, as a
-    # fallback label in error context (:2033).
+    # fallback label in error context (:2598).
     #
     # The keys that get written up here are TRIGGER keys, and losing one is invisible in
     # exactly the way that hurts — the TOML still says what the author meant.

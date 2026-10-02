@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The tools' template_import.py cites re-pointed (World and Systems PRD, Phase 6A)
+
+**What.** Comment and docstring lines only, line for line (no line count changed): 17 cites in
+`scripts/gates.py` (`:468`, `:917`, `:3205`, `:7318`, `:7689-7690`, `:7706`, `:7762-7763`, `:8289`,
+`:8861`, `:8874`, `:8876`, `:8949`, `:9828-9831`) and `scripts/cite_check.py:161` now point at the
+`template_import.py` lines engine batches 1–3 moved them to. Four of those (`:917`, `:8861`, `:8874`,
+`:9828-9831`) were stale too and are fixed the same way.
+
+**Why.** A citation that lands on the wrong line sends the reader confidently to code that says
+something else.
+
+**Verified.** Each old target mapped through `git diff <blame commit> HEAD -- template_import.py`, then
+every new line read by hand (e.g. `:2239` `quests_engine=_require_str(p, "quests_engine", "v1")`, `:4763`
+`if g.op not in ("add", "set")`, `:3079` `shop_location = …`). Two comments now say something the
+engine outgrew; left for LO, since this pass moves numbers only: `gates.py:8289` "validates `op` for
+cheat-page grants … and for nothing else" (`template_import.py:6368` `_LIVE_OPS` now validates live
+effects too), and `gates.py:7762` "label on trait and counter goals ONLY" (weekday, hours_since_flag and
+days_since_flag goals need one too, `template_import.py:7445-7490`). `cite_check.py --fix`: SKILL.md +
+references 0 drifted; selfcheck clean; pytest passes.
+
+**Words:** 0, running total 145,917 / 149,283.
+
+---
+
 ## 2026-10-02 — Two ledger keys the checks need: `board.wardrobe` and `board.map.shared_homes` (World and Systems PRD, Phase 6A)
 
 **What.**
