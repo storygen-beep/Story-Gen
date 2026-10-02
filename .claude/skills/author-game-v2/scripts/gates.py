@@ -13226,6 +13226,136 @@ SHIP_SINCE["wardrobe_reads"] = (SYSTEMS_SINCE, "every clothing state is read thr
 SHIP_NA_PASSES = {"the obligation is charged", "every clothing state is read three times"}
 
 
+# ── register.md, the truth rule, rule 5: prose names her clothes only where a check backs it ──
+# Built on readable.py's `unearned_events` in its `needs_clothing` mode. A garment is a word from
+# the game's own `[[clothing]]` names (its last word: "blouse", "heels"), never a generic list —
+# the strip rung matches "strip club". "Hers": `your <garment>` in a second-person game; in a
+# third-person one, `<her name>'s <garment>`, or `her <garment>` in a sentence that opens on her
+# name. Words before the garment that are also in a catalog name narrow it ("your tight blouse"
+# is the tight silk blouse). Backers: a condition that IMPLIES one of those garments is worn — on
+# the trigger, an enclosing `group`, the location's `entry_conditions`, a choice into the canvas
+# or the node — or a `wardrobeEffects` equip of one in an earlier node of the same canvas. A
+# beat on an explicit canvas with a strip word besides the garment is exempt: the act undresses.
+_GARMENT_STOP = {"the", "a", "an", "his", "her", "their", "my", "our", "your", "on", "in",
+                 "under", "over", "of", "off", "up", "down", "and", "to", "with", "at", "from",
+                 "into", "onto", "through", "by", "for", "is", "was", "are", "were"}
+_STAT_KEYS = {"worn_corruption": "corruption", "worn_beauty": "beauty"}
+
+
+def _garment_vocab(game):
+    """(item ids by garment word, words of each item's name) from the catalog."""
+    by_noun, words = {}, {}
+    for c in game.get("clothing") or []:
+        if not (isinstance(c, dict) and c.get("id") and c.get("name")):
+            continue
+        ws = re.findall(r"[a-z]+", str(c["name"]).lower())
+        if not ws:
+            continue
+        words[c["id"]] = set(ws)
+        by_noun.setdefault(ws[-1], set()).add(c["id"])
+    return by_noun, words
+
+
+def _her_garments(game):
+    """`find(text, block)` for readable.py: [(phrase, set of item ids it can be)]."""
+    by_noun, words = _garment_vocab(game)
+    if not by_noun:
+        return lambda text, block: []
+    third = str((game.get("settings") or {}).get("narration_person") or "second") == "third"
+    name = str((game.get("player") or {}).get("name") or "")
+    mod = r"(?:(?!(?:%s)\b)[a-z'-]+\s+){0,2}" % "|".join(sorted(_GARMENT_STOP))
+    noun = r"(%s)\b" % "|".join(sorted(map(re.escape, by_noun), key=len, reverse=True))
+    owners = ([rf"\b{re.escape(name)}(?:'s|’s)\s+"] if third and name else []) if third \
+        else [r"\byour\s+"]
+
+    def items_for(phrase, n):
+        ids = by_noun[n]
+        mods = set(re.findall(r"[a-z]+", phrase.lower())[1:-1]) - _GARMENT_STOP
+        narrowed = {i for i in ids if mods and mods <= words[i]}
+        return narrowed or ids
+
+    def find(text, block):
+        out = []
+        spans = [text]
+        if third and name:
+            spans = [s for s in re.split(r"(?<=[.!?])\s+", text)
+                     if re.match(rf"^\W*{re.escape(name)}\b", s)]
+        for o in owners:
+            for m in re.finditer(o + "(" + mod + ")" + noun, text, re.I):
+                out.append((m.group(0), items_for(m.group(0), m.group(2).lower())))
+        if third:
+            for sp in spans:
+                for m in re.finditer(r"\bher\s+(" + mod + ")" + noun, sp, re.I):
+                    out.append((m.group(0), items_for(m.group(0), m.group(2).lower())))
+        return out
+    return find
+
+
+def _cond_backs(item, garments, catalog):
+    """Does this condition item imply she wears one of `garments` (item ids)?"""
+    t, op = item.get("type"), item.get("operator")
+    if t == "clothing_item":
+        return op == "equipped" and item.get("item_id") in garments
+    if t == "clothing_slot":
+        ids = {c["id"] for c in catalog if c.get("slot") == item.get("slot")}
+        return op == "equipped" and bool(ids) and ids <= garments
+    if t == "worn_type":
+        ids = {c["id"] for c in catalog if c.get("type") == item.get("value")}
+        return op == "eq" and bool(ids) and ids <= garments
+    if t in _STAT_KEYS:
+        v = item.get("value")
+        if _cmp(0, op, v) is not False:          # an empty slot (or a bad shape) satisfies it
+            return False
+        ids = {c["id"] for c in catalog if _cmp(c.get(_STAT_KEYS[t]) or 0, op, v)}
+        return bool(ids) and ids <= garments
+    return False
+
+
+def _clothes_unbacked(model, game):
+    """Rows for `her clothes are backed`: prose naming her clothes with nothing behind it."""
+    import readable
+    catalog = [c for c in (game.get("clothing") or []) if isinstance(c, dict) and c.get("id")]
+    if not (game.get("settings") or {}).get("clothing_enabled") or not catalog:
+        return None
+    locs = {l.get("id"): l for l in (game.get("locations") or []) if isinstance(l, dict)}
+    hot = {c["id"] for c in model if any(b.explicit >= 3 for b in c["beats"])}
+    strip = dict(RUNGS)["strip"]
+    ways_in = collections.defaultdict(list)      # canvas id or (canvas, node) -> conditions
+    for cv in game.get("canvases") or []:
+        for nd in cv.get("nodes") or []:
+            for ch in ((nd.get("exit_block") or {}).get("choices") or []):
+                tt = ch.get("targetType") or "node"
+                if tt == "node" and ch.get("nodeId"):
+                    ways_in[(cv.get("id"), str(ch["nodeId"]).split(".")[-1])].append(
+                        ch.get("conditions"))
+                elif tt == "canvas" and ch.get("canvasId"):
+                    ways_in[ch["canvasId"]].append(ch.get("conditions"))
+
+    def equips(nd):
+        eb = nd.get("exit_block") or {}
+        for src in [eb.get("config") or {}] + list(eb.get("choices") or []):
+            for w in (src or {}).get("wardrobeEffects") or []:
+                if isinstance(w, dict) and w.get("action") == "equip":
+                    yield w.get("item_id")
+
+    def backed(canvas, node, conditions, garments, text, phrase):
+        rest = re.sub(r"\bstrip (?:club|joint|bar)s?\b", " ", text.replace(phrase, " "), flags=re.I)
+        if canvas.get("id") in hot and strip.search(rest):
+            return True
+        conds = list(conditions)
+        loc = locs.get((canvas.get("trigger") or {}).get("location")) or {}
+        conds.append(loc.get("entry_conditions"))
+        conds += ways_in.get(canvas.get("id"), []) + ways_in.get((canvas.get("id"), node.get("id")), [])
+        if any(_cond_backs(i, garments, catalog) for c in conds for i in _cond_leaves(c)):
+            return True
+        nodes = canvas.get("nodes") or []
+        before = nodes[:next((k for k, n in enumerate(nodes) if n is node), 0)]
+        return any(i in garments for n in before for i in equips(n))
+
+    return readable.unearned_events(game, needs_clothing={"find": _her_garments(game),
+                                                          "backed": backed})
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -14119,6 +14249,19 @@ def main():
             print(f"          · {h}")
         print("          (a LIST, never a score. Gate the line on the flag that records it,"
               " or cut it — register.md, \"The truth rule\")")
+
+    clothes_rows = _clothes_unbacked(model, game)
+    if clothes_rows is not None:
+        print(f"  {'─'*72}")
+        print(f"  lint · her clothes are backed — {len(clothes_rows)} line(s) name her clothes "
+              f"with no clothing check behind them")
+        for h in clothes_rows[:12]:
+            print(f"          · {h}")
+        if len(clothes_rows) > 12:
+            print(f"          · … and {len(clothes_rows) - 12} more")
+        if clothes_rows:
+            print("          (gate the line on a check that she wears it, or cut it —"
+                  " register.md, \"The truth rule\", rule 5)")
 
     vl_share = 100 * len(vl_rows) / vl_seen if vl_seen else 0.0
     print(f"  {'─'*72}")

@@ -343,10 +343,15 @@ def _scoped_blocks(node):
     return out
 
 
-def unearned_events(game, universal=()):
+def unearned_events(game, universal=(), needs_clothing=None):
     """Check C. `universal` = flags true for essentially the whole game, which prove
     nothing about any one event. A canvas whose schedule pins exactly the day a line
-    names has that day proved."""
+    names has that day proved.
+
+    `needs_clothing` switches it to the truth rule's rule 5 (her clothes): a dict of
+    `find(text, block)` -> [(phrase, garment)] — the lines that name her clothes — and
+    `backed(canvas, node, conditions, garment, text, phrase)` -> whether a check backs
+    it. Both come from the caller, which knows the game's own catalog."""
     universal = set(universal)
     rows = []
     for canvas in game.get("canvases") or []:
@@ -361,6 +366,14 @@ def unearned_events(game, universal=()):
                     continue
                 text = block.get("content")
                 if not isinstance(text, str):
+                    continue
+                if needs_clothing:
+                    for phrase, garment in needs_clothing["find"](text, block):
+                        if not needs_clothing["backed"](canvas, node, trigger_conditions + scope,
+                                                        garment, text, phrase):
+                            rows.append(f"{canvas.get('id')}/{node.get('id')}: \"{phrase}\" — "
+                                        f"names her clothes with no clothing check behind it"
+                                        + (" (inside a block_pool)" if in_pool else ""))
                     continue
                 for pattern, why, needs_flag in EVENT_PATTERNS:
                     hit = pattern.search(text)

@@ -5,6 +5,52 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The truth rule's rule 5 as a printed lint: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 1 of 2)
+
+**What.** A printed lint first, for one commit, so its false positives can be read before it blocks.
+- `scripts/readable.py`: `unearned_events` gains a `needs_clothing` mode — `find(text, block)` names the
+  lines, `backed(canvas, node, conditions, garment, text, phrase)` judges them; the canvas / node /
+  `_scoped_blocks` walk and the row shape are shared with check C. Check C itself is unchanged.
+- `scripts/gates.py` (above `main()`): `_her_garments` (garment words = the last word of each
+  `[[clothing]]` name, never a generic list; "hers" = `your <garment>` in second person, `<name>'s` or
+  `her` in a sentence opening on her name in third; up to two modifier words, and modifiers that are in a
+  catalog name narrow the item set), `_cond_backs` (a condition backs the garment when it IMPLIES one of
+  those items is worn: `clothing_item … equipped`; `clothing_slot … equipped` / `worn_type eq` when every
+  catalog item it allows is one of them; `worn_corruption` / `worn_beauty` when an empty slot fails it and
+  every item meeting it is one of them; `worn_exposure` never), `_clothes_unbacked` (the five backers:
+  trigger, enclosing group, the location's `entry_conditions`, a choice into the canvas or the node, a
+  `wardrobeEffects` equip in an earlier node; an explicit canvas with a strip-rung word besides the garment
+  — "strip club" removed first — is exempt). Printed as `lint · her clothes are backed` after "a past
+  event the player was never given". Silent with clothing off or no catalog.
+- Docs: SKILL.md lints paragraph (rule 5 "is not linted yet" becomes the lint's name); `register.md` rule
+  5 names the lint (one sentence, the truth rule's own item, WS-D8/WS-D9).
+
+**The run (HEAD exports), and its false positives.**
+- **billable_hours: 19 lines.** `hub_martin_breakfast/table` "your tight blouse" is listed, as expected:
+  its group is `worn_corruption gte 2`, which the short skirt meets with the white blouse. 1 false
+  positive: `walkin_firm/act` "He pops your blouse open" — undressing inside an explicit act, which the
+  rule exempts, missed because "pops … open" is not a strip-rung word. The rest are true: "your blouse"
+  at breakfast and on Martin's Fridays, "your skirt" on the bus and in the study, "your panties" in the
+  acts, "your heels" at bedtime, none behind a check that she wears them.
+- **members_only: 15 lines.** 4 false positives: `paid_visit/hands` "your own" (the catalog name "A dress
+  of your own" made "own" a garment word), and three undressings inside explicit acts the strip list
+  misses: `paid_visit/fucked` "yanks your panties down", `kessler_04_page_four/deal` "Your panties." / "you
+  slide them down", `noor_01_danas_locker/top` "takes your bra off". `kessler_02_page_two` is gated on the
+  flag `has_red_dress`, a flag rather than a clothing check, so it stays listed.
+- orientation 0, vesper 0 (third person: no line pairs "Wren" with a garment); media_lab, probation,
+  the_balance silent (clothing off). **5 false positives of 34** (15%); commit 2 fixes both kinds.
+
+**Verified.** New `scripts/tests/test_gates_clothes_backed.py` (12): unbacked listed; each backer
+(trigger, group, entry_conditions, choice into the canvas, an earlier equip — and a later one does not);
+the corruption case; explicit + strip word exempt; "strip club" neither exempts nor is a garment; "her
+skirt" / "his blouse" in second person are not hers; third person; clothing off. `the-release.md:100` →
+`gates.py:13614` (read by hand); every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck
+clean (66 gates, 58 lints); pytest 626 passed.
+
+**Words:** +7, running total 146,427 / 149,283.
+
+---
+
 ## 2026-10-02 — `--ship` blocks on a clothing state read fewer than three times: `every clothing state is read three times` (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py`: new scored gate **every clothing state is read three times**

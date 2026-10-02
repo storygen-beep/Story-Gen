@@ -346,7 +346,7 @@ because the loud voice negates on purpose) · **history on a repeatable screen**
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
 (*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
-gated on the flag that records it — the truth rule's rule 2, `register.md`; its rule 5, her clothes, is not linted yet) · **a printed stat is
+gated on the flag that records it — the truth rule's rule 2, `register.md`) · **her clothes are backed** (its rule 5) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
 `the-meters.md`, "What the player is shown") · **a one-time step speaks** (every one-time
 canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest

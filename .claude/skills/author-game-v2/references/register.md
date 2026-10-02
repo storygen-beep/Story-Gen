@@ -107,7 +107,7 @@ one was out of character, and one printed a stat that does not exist.
 5. **Prose names her clothes only where a clothing condition backs it**: the trigger's conditions,
    an enclosing `group`'s, the location's `entry_conditions`, the choice that led here, or a
    `wardrobeEffects` equip earlier in the same canvas. Undressing during an explicit act is backed
-   by the act. *"Your skirt rides up"* on a canvas any outfit reaches is a lie to every player in jeans.
+   by the act. Lint `her clothes are backed` lists the rest. *"Your skirt rides up"* on a canvas any outfit reaches is a lie to every player in jeans.
 
 **A promise about the future must be built.** A line that names a future event (a day, a week or a
 scene: *"next month he decides"*) is true only if the game builds that event, or the step that
