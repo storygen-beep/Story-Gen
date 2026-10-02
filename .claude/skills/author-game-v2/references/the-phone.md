@@ -100,7 +100,7 @@ she banks, shops, navigates or finds work.
 **Build in this order: messaging, then the thing that makes her looked at, then anything else.**
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
-`bank` both exist (`v2.py:2899`, `:2900`) and both are legitimate — `new-life-project` ships a phone
+`bank` both exist (`v2.py:2991`, `:2992`) and both are legitimate — `new-life-project` ships a phone
 bank *and* a phone GPS (numbers only). But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
@@ -263,7 +263,7 @@ has to unlock.
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
 a design doc, and it matches `kink-ceilings.md`'s own logic.
 
-The worked shape, in what our engine actually supports (`v2.py:3165` renders it, `v2.py:3220`
+The worked shape, in what our engine actually supports (`v2.py:3232` renders it, `v2.py:3309`
 sends it):
 
 ```toml
@@ -278,7 +278,7 @@ post_actions = [
 ]
 ```
 
-A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:3177`, `:3179`).
+A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:3266`, `:3268`).
 
 ⚠️ **`followers` must buy something.** A counter with no sink is the `college-daze` complaint
 waiting to happen — a number on a screen that stops meaning anything. Give it a door, per

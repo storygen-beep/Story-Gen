@@ -139,7 +139,7 @@ creation and read forever**. `new-life-project` carries 8 and six describe her �
 `degrees-of-lewdity` runs `speech_attitude` at **1,914 reads against 5 writes** and `exposed` at
 **586 reads across 119 places**.
 
-`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:5021`), a derived aggregate, its own lock text, and a section in
+`worn_exposure` shipped 2026-08-28 — an engine predicate (`v2.py:5126`), a derived aggregate, its own lock text, and a section in
 `engine.md` §17 — built precisely so a scene could ask *"is she covered?"*, which `worn_corruption`
 cannot answer because `getWornStatMax` skips empty slots and returns the same value for naked and
 plainly dressed. DoL reads its equivalent 586 times in 119 places, most of them in the street
@@ -328,7 +328,7 @@ priority   = 0
 ```
 
 **Why it is cheap, and the precedent to build it from.** `_render_location_description`
-(`v2.py:10630`) already emits a conditional chain onto the room screen using
+(`v2.py:11495`) already emits a conditional chain onto the room screen using
 `setup.triggerConditionsSatisfied` — the same helper the location passage calls for
 `entry_conditions`. The notice is that path with two changes: **every** match prints rather than
 first-match, and it appends after the description rather than replacing it.

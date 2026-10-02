@@ -1078,7 +1078,7 @@ it.)*
 
 ```
 v2.py:4114   const dayIndex = ["Monday", "Tuesday", …].indexOf(timeState.current_day);
-             also :4220 :4376 :4431 :4497
+             also :4306 :4462 :4516 :4583
 ```
 
 Set it to `0` and `indexOf` returns `-1` at every call site.
@@ -1214,7 +1214,7 @@ paid_closing = "…" · cant_pay = "…" · partial_pay = "…"
 **How it fires — and the timing is the part authors get wrong.**
 
 1. `advanceDay()` (`v2.py:6841`) sets `rent_state.is_due` when the day rolls over **to** `due_day`
-   (at `:6667`).
+   (at `:6863`).
    Days roll at midnight (`v2.py:6806-6809`), so the demand arms at **00:00 on the due day**, not at
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
@@ -1347,7 +1347,7 @@ trigger (`v2.py:13491`) and `markCanvasTriggered` stamps its day key **before** 
 A flag read as `is_false` and cleared here, with **no canvas setting it**, is a cap that never
 closes. Nothing in the toolchain objects: the generator's flag-chain validator only reports a
 never-set flag when a condition requires it `is_true` (`validate_flag_chains()`, `v2.py:14096`; the
-test at `:13910`) — deliberately, since an
+test at `:14187`) — deliberately, since an
 `is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
 
 A talk screen capped this way stays clickable all day and out-earns the day-capped

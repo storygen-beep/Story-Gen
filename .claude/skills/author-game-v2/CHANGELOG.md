@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Stale `v2.py` cites re-pointed (World and Systems PRD, Phase 7b, L7)
+
+**What.** Numbers only; no sentence changed.
+- The two named: `references/the-economy.md:559` (**protected, LO approved**, numbers only) `v2.py:5820` → `:6024`
+  (`getCostBlockedMessage`'s "Requires … (you have …)" line); `references/the-clock.md:200` `v2.py:13530` → `:15649`
+  (a choice's `<<script>>advanceTime(…)<</script>>`, emitted last inside its link, nothing on the label). The same
+  claim at `the-clock.md:350` gets the same fix, and its travel-tag cite `v2.py:5473` → `:6068` (`getLocationCostTag`).
+- A sweep of every `v2.py:` cite in SKILL.md and references (four read-only passes, each candidate then read by hand
+  at the new line) found 81 more whose line no longer says what the sentence claims, mostly from insertions since
+  the cite was written. Re-pointed, outside protected sections only: agents.md 177-178; state.md 223; register.md 315,
+  492, 519, 556, 1098; the-phone.md 103, 266, 281; the-clock.md 45, 49, 54-56, 67, 252, 261-265, 338, 353; engine.md
+  1081 (four day-name lookups, a uniform +86), 1217 (`rs.is_due = true`), 1350 (the first `is_true` test inside
+  `validate_flag_chains`); the-first-hour.md 229, 260, 471, 598, 607-609, 656-657, 662, 666, 716, 762, 830, 849-850,
+  1064, 1081, 1135; the-surfaces.md 164, 270, 318, 330, 334, 336, 873, 875, 1060; the-systems.md 142, 331;
+  the-returning-player.md 33, 35, 72, 121, 159.
+
+**Found, not changed.** In protected sections (each needs its own item): the-economy.md 604 (`v2.py:1201` → `:1223`), 640
+(`:17542` → `:19204`) and 725 (`:5058`, `:5202`); the-arc.md 389-395 (A8) and 633-640;
+the-meters.md 368, 387, 388 (W5b), 788, 807, 845-859 (M3, M5). Not sure of the target (more than one line fits):
+SKILL.md:571; agents.md:173; engine.md:379, 1265; the-phone.md:438; the-first-hour.md 237,
+260 (`:10033`), 364, 669, 670, 708; the-meters.md 193, 232, 733; the-release.md 424-425; the-surfaces.md 164
+(`:11847`), 272, 281, 693, 838; the-systems.md:341 (its range runs backwards); the-returning-player.md:151.
+engine.md:2599-2601 point at where data is shipped, not where it prints; arguably fine.
+
+**Verified.** Each new line read in `v2.py`; `cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean;
+skill tests pass.
+
+**Words:** 0, running total 146,826 / 149,283.
+
 ## 2026-10-02 — The sidebar does read trait labels (World and Systems PRD, Phase 7b, L6)
 
 **What.** `references/the-economy.md:564-566` (**protected, LO approved**, that sentence only): it said a

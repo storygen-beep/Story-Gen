@@ -556,7 +556,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > room-list button   Buy a coffee (GBP 3)                         author
 > the choice         Pay three pounds (GBP 3, 5 min).             author
 > the paragraph      … three pounds gets you …                    author
-> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5820
+> when she is short  Requires 3 Money (you have 1)                engine  v2.py:6024
 > the sidebar        money: 12 / 100                              engine  v2.py:19539
 > rent day, short    $90                                          engine  v2.py:19276
 > ```
