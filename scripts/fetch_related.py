@@ -20,8 +20,9 @@ over CDP to a DEDICATED automation profile so the daily browser stays untouched:
 One-time setup in that profile, by hand: open google.com, accept/dismiss consent,
 turn SafeSearch OFF (google.com/safesearch). Nothing else.
 
-Results land through the same dev API the harvest skill uses: one options/add per
-url (labelled, with its own docid so every stocked clip can seed the next hop) and
+Results land through the same dev API the harvest skill uses: one options/add_bulk
+per run (every url labelled, each with its own docid so every stocked clip can seed
+the next hop) and
 one queries/add closing record carrying `source:"related"` + `seed_url` — the pair
 the picker derives "related fetched" from. Re-running the same seed TOPS UP the
 same bucket; nothing is ever cleared.
@@ -364,30 +365,47 @@ def _stock(
     docids: dict,
     thumbs: dict | None = None,
 ) -> int:
+    """Stock the whole feed in ONE options/add_bulk call.
+
+    This used to post one options/add per url. Every options/add rewrites the whole
+    shelf under a lock that is global to the game: measured 214 ms/url on a 4.4 MB
+    store against 0.21 s for 250 urls in bulk (`_add_options_bulk`), and vesper's
+    store is ~30 MB. That per-url cost is why the ⇢ and ◆ buttons were slow while the
+    free-text search (already bulk) was fast. fetch_pornhub reuses this function.
+
+    Returns added PLUS duplicates — "urls that landed on the shelf" — which is what
+    the per-url path counted too (options/add answered ok for both).
+    """
     thumbs = thumbs or {}
-    ok = 0
+    items = []
     for u in urls:
         # Anchor on `(\?|$)` so a SIGNED .webm is still typed as video — a signed
         # url no longer ends at its extension.
         is_vid = re.search(r"\.(mp4|webm)(\?|$)", u, re.IGNORECASE)
-        r = _api_post(
-            api,
-            "options/add",
+        items.append(
             {
-                "game": game,
-                "file": file_,
-                "slot_key": slot_key,
                 "url": u,
-                "query": label,
                 "type": "video" if is_vid else "gif",
                 "media_kind": "video" if is_vid else "img",
                 "docid": docids.get(u, ""),
                 "thumb": thumbs.get(u, ""),
-            },
+            }
         )
-        if r.status_code == 200 and r.json().get("ok"):
-            ok += 1
-    return ok
+    r = _api_post(
+        api,
+        "options/add_bulk",
+        {
+            "game": game,
+            "file": file_,
+            "slot_key": slot_key,
+            "query": label,
+            "items": items,
+        },
+    )
+    if r.status_code != 200:
+        _fail(6, f"options/add_bulk refused ({r.status_code}): {r.text[:200]}")
+    body = r.json()
+    return int(body.get("added", 0)) + int(body.get("duplicates", 0))
 
 
 def main() -> None:
