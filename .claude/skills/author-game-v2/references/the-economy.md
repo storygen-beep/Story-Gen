@@ -557,8 +557,8 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > the choice         Pay three pounds (GBP 3, 5 min).             author
 > the paragraph      … three pounds gets you …                    author
 > when she is short  Requires 3 Money (you have 1)                engine  v2.py:5820
-> the sidebar        money: 12 / 100                              engine  v2.py:18693
-> rent day, short    $90                                          engine  v2.py:18452
+> the sidebar        money: 12 / 100                              engine  v2.py:19529
+> rent day, short    $90                                          engine  v2.py:19266
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads

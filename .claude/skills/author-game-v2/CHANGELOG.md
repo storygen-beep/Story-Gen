@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Four stale cites re-pointed (World and Systems PRD, Phase 7b, L5)
+
+**What.** Numbers only:
+- `references/agents.md:139` — `Beat.explicit` `gates.py:409` → `gates.py:444` (the `def explicit` under
+  `@property` on `Beat`).
+- `references/the-clock.md:198` — the two uses of `getLocationCostTag` on the navigation card, `v2.py:20358` and
+  `:20375` (CSS: `.stage-hint-met`, `opacity`) → `v2.py:22750` and `:22784` (the two `cost_tag = …
+  setup.getLocationCostTag(…)` lines).
+- `references/the-economy.md:560-561` (**protected, LO approved**, numbers only) — the sentence claims the engine
+  prints "money: 12 / 100" in the sidebar and "$90" when rent day is short. `v2.py:18693` (a save-load comment) →
+  `v2.py:19529` (`<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>`); `v2.py:18452`
+  (`if (travelSlug) {`) → `v2.py:19266` (RentDay_Short: "You need: <<print _cur>>…", `_cur` the rent currency
+  symbol, `$` by default).
+
+**Found, not changed (outside this item):** `the-clock.md:199` `v2.py:13530` (the bare `advanceTime` emission is
+now at `v2.py:16336`); `the-economy.md:559` `v2.py:5820` (the "Requires … (you have …)" line is now `v2.py:6024`);
+and `the-economy.md:563-565` says `trait_bar` reads `_item.label || trait_key` (`v2.py:18667`) and never consults the
+trait labels — the line is now `v2.py:19503`, `_item.label || setup.traitLabel(_tbKey)`, and `setup.traitLabel`
+(`v2.py:4700-4705`) does read `setup.trait_labels`, so the claim itself looks stale. Protected file: for LO.
+
+**Verified.** Each target line read by hand; `cite_check.py --fix` 0 drifted and left all four alone; selfcheck clean
+(0 orphans); pytest 672 passed.
+
+**Words:** 0, running total 146,783 / 149,283.
+
+---
+
 ## 2026-10-02 — The tools read `targetType = "return"` as an exit (World and Systems PRD, Phase 7b, L4)
 
 **What.** The engine resolves a `return` choice on the click (the stored room, else the canvas's home) and never

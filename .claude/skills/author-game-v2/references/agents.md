@@ -136,7 +136,7 @@ pitches, on `v2-attack`.
 >
 > ⚠️ **It was blocked on that instrument for as long as this section has existed, and the
 > section never noticed.** The spec below promises "one measurable target" — and nothing in
-> this skill could measure a loose paragraph. `Beat.explicit` (`gates.py:409`) is a property
+> this skill could measure a loose paragraph. `Beat.explicit` (`gates.py:444`) is a property
 > on a `Beat` assembled out of parsed TOML blocks, so it needs a built game; `--words` reports
 > vocabulary and nothing else. **The agent's own spec named a target that did not exist**, and
 > an agent that cannot be told whether it succeeded is not an agent, it is a wish.
