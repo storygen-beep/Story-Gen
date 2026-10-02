@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — A stale gates.py cite in the-board.md (World and Systems PRD, Phase 6A)
+
+**What.** `references/the-board.md:89` cited `gates.py:2248` for the deleted gate 22; that line is now
+unrelated code. It points at `gates.py:2147`, the comment that records the deletion ("The previous
+occupant of this space, gate 22, …").
+
+**Why.** A citation that lands on the wrong line sends the reader confidently to code that says
+something else.
+
+**Verified.** Read `gates.py:2144-2152`; selfcheck clean with the baseline of 2 orphan rule pointers
+(the-spine.md:27 S13 and S4); pytest passes.
+
+**Words:** 0, running total 145,855 / 149,283.
+
+---
+
 ## 2026-10-02 — The backfill table lists the save state engine batches 2–3 added (World and Systems PRD, Phase 6A)
 
 **What.** `references/engine.md` §40's depth table gains one short row each for `phone.conv_ignored`,

@@ -86,7 +86,7 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   ⚠️ **This replaced an `objects` list on 2026-08-18 and the reason is worth carrying.** The old
   rule declared the things in the room and derived the choice count from them, and gate 22 computed
   affordances from `exit_block.choices` and **could not see a canvas at all**; the gate is deleted
-  (`gates.py:2248`). A body needs about five things; a room contains fifty nouns. Needs are a closed
+  (`gates.py:2147`). A body needs about five things; a room contains fifty nouns. Needs are a closed
   list; objects are an open one. `the-surfaces.md`, *"Why this sizes itself"*.
 
   The `objects` key is left readable in old ledgers. **Nothing reads it any more.**
