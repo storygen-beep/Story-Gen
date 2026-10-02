@@ -12742,6 +12742,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("every clothing state is read three times", *_wardrobe_is_read(game, state))
     gate("her clothes are backed", *_her_clothes_are_backed(model, game))
     gate("every chat is caused by a scene", *_chats_are_caused(game))
+    gate("a chat is short and timed", *_chats_short_and_timed(game))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13435,6 +13436,51 @@ def _chats_are_caused(game):
 SHIP_BLOCK_GATES["every chat is caused by a scene"] = "every chat is caused by a scene"
 SHIP_SINCE["chat_caused"] = (SYSTEMS_SINCE, "every chat is caused by a scene")
 SHIP_NA_PASSES.add("every chat is caused by a scene")
+
+
+# ── the-phone.md P3/P4: a chat is short and timed (a WARN: a scored gate, never a block) ─────
+# A message bubble is 3–7 words, and a message (one sender's bubbles in a row, in one round) is at
+# most 3 of them. Every conversation trigger carries a delay (`days_since_flag` or
+# `hours_since_flag`) and an hour window (`time_of_day` or `weekday`); a call needs the timing
+# only. Directions from four games (round 9a), so no grandfathering. n/a with no phone.
+CHAT_WORDS, CHAT_BUBBLES = (3, 7), 3
+
+
+def _chats_short_and_timed(game):
+    """(ok, headline, detail) for `a chat is short and timed`."""
+    phone = game.get("phone") or {}
+    convs = [c for c in (phone.get("conversations") or []) if isinstance(c, dict)]
+    calls = [c for c in (phone.get("calls") or []) if isinstance(c, dict)]
+    if not convs and not calls:
+        return None, "no phone conversation or call", []
+    bad = []
+    for kind, entries in (("chat", convs), ("call", calls)):
+        for c in entries:
+            types = {i.get("type") for i in _cond_leaves((c.get("trigger") or {}).get("conditions"))}
+            miss = [w for w, ok in (("a delay (days_since_flag / hours_since_flag)",
+                                     types & {"days_since_flag", "hours_since_flag"}),
+                                    ("an hour window (time_of_day / weekday)",
+                                     types & {"time_of_day", "weekday"})) if not ok]
+            if miss:
+                bad.append(f"{kind} `{c.get('id')}`: its trigger lacks {' and '.join(miss)}")
+            if kind == "call":
+                continue
+            run, last = 0, None
+            for b in c.get("blocks") or []:
+                if not isinstance(b, dict) or b.get("type") != "message":
+                    run, last = 0, None
+                    continue
+                key = (b.get("sender"), b.get("round"))
+                run = run + 1 if key == last else 1
+                last = key
+                n = len(str(b.get("content") or "").split())
+                if not CHAT_WORDS[0] <= n <= CHAT_WORDS[1]:
+                    bad.append(f"chat `{c.get('id')}`: a {n}-word bubble "
+                               f"({CHAT_WORDS[0]}–{CHAT_WORDS[1]})")
+                if run == CHAT_BUBBLES + 1:
+                    bad.append(f"chat `{c.get('id')}`: more than {CHAT_BUBBLES} bubbles in one message")
+    n = len(convs) + len(calls)
+    return not bad, f"{len(bad)} problem(s) across {n} chats and calls", bad
 
 
 def main():

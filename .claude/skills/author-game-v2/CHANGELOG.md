@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — A chat is short and timed: a warning (World and Systems PRD, Phase 6B, with the calls half)
+
+**What.** `scripts/gates.py`: new scored gate **a chat is short and timed** (`_chats_short_and_timed`,
+above `main()`, in `_phase4_gates`). A WARN: never in `SHIP_BLOCK_GATES`, so under `--ship` a red shows in
+the `every other gate` REPORT row. Every message bubble is 3–7 words; one sender's bubbles in a row in one
+round are at most 3; every conversation trigger carries a delay (`days_since_flag` or `hours_since_flag`)
+and an hour window (`time_of_day` or `weekday`) — all four are built. A call is checked for the timing only.
+- **n/a policy:** no conversation and no call. **Grandfathering:** none — a warning never blocks.
+- Docs: SKILL.md gate-table row; `the-phone.md` (the planned label in P3 made live; "What is not gated
+  here" becomes "What is gated here", both gates now named live).
+
+**Why.** WS-D9: chat length and timing are measured directions from four games, so a WARN.
+
+**Verified.** New `scripts/tests/test_gates_chat_short_timed.py` (8): passes; a long and a one-word bubble;
+four bubbles in a run, and a reply resets the run; an untimed trigger; `hours_since_flag` + `weekday`
+count; a call's timing; no phone n/a; not a ship block. Before/after on HEAD exports: the_balance FAIL (7: both
+triggers untimed, bubbles of 28, 14, 20 and 10 words — §9 G2's "cut to 3–7 words and timed"), so its
+`every other gate` REPORT row reads 28/41 (was 28/40); every other game n/a, unchanged. No BLOCK row or exit
+code changed. `the-release.md:100` → `gates.py:13741` (read by hand); every other cite unchanged;
+`cite_check.py --fix` 0 drifted; selfcheck clean (69 gates); pytest 647 passed.
+
+**Words:** +30, running total 146,582 / 149,283.
+
+---
+
 ## 2026-10-02 — `--ship` blocks on a chat or call nothing caused: `every chat is caused by a scene` (World and Systems PRD, Phase 6B, with the calls half)
 
 **What.** `scripts/gates.py`: new scored gate **every chat is caused by a scene** (`_chats_are_caused`,

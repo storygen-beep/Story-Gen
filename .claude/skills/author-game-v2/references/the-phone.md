@@ -121,7 +121,7 @@ whose markup marks a bubble ran longer, a median of 11–16 words over 369 bubbl
 talking happens in its calls, which run 300–500 words (round 9a §6). No text tells a story; the
 meeting it books does. A call is `[[phone.calls]]`: it rings, and answering plays its scene (`engine.md` §51).
 
-**It is a WARN, never a block** (planned gate: `a chat is short and timed`). A two-word *"you up"* is
+**It is a WARN, never a block** (gate `a chat is short and timed`). A two-word *"you up"* is
 right; the warning is for the twenty-word paragraph.
 
 **The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
@@ -473,13 +473,13 @@ cap is per NPC and one topic starves the others.
 
 ---
 
-## What is not gated here
+## What is gated here
 
-Two gates read this file (one still planned):
+Two gates read this file:
 
 - **gate `every chat is caused by a scene`** (a `--ship` block): every conversation's and call's trigger
   holds a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9);
   dev canvases, cheats and the daily tick are not scenes. A game with no phone passes.
-- **planned gate: `a chat is short and timed`** (a warn, never a block — a block would fail a
+- **gate `a chat is short and timed`** (a warn, never a block — a block would fail a
   correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
-  delay and an hour window (P3, P4).
+  delay and an hour window (P3, P4); a call needs the timing only.
