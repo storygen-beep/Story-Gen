@@ -982,7 +982,8 @@
               "hint": "Evenings at the house: the bathroom upstairs, while Ethan is in his room across the hall.",
               "refusal": "parked",
               "who_notices": "npc_martin",
-              "presence_note": "Ethan is in his room across the hall, not in the bathroom: the step's window is exactly his ethan_room row (Mon-Thu 21:00-23:30), so he is there. shape.py 'the person is there' reads only the step's own place, so it reports this step."
+              "seen_from": "ethan_room",
+              "presence_note": "Ethan is in his room across the hall, not in the bathroom: the step's window is exactly his ethan_room row (Mon-Thu 21:00-23:30), and ethan_room and the bathroom both hang off the landing (entry_from), so seen_from names it."
             },
             {
               "n": 2,
@@ -1413,6 +1414,31 @@
         ]
       }
     ],
+    "wardrobe": {
+      "states": [
+        {
+          "id": "in_sleepwear",
+          "condition": {
+            "type": "worn_exposure",
+            "operator": "gte",
+            "value": 1
+          }
+        },
+        {
+          "id": "no_top",
+          "condition": {
+            "type": "clothing_slot",
+            "slot": "top",
+            "operator": "unequipped"
+          }
+        }
+      ],
+      "key_items": [
+        "sleep_shirt",
+        "blouse_tight",
+        "skirt_short"
+      ]
+    },
     "locations": [
       {
         "id": "linden_street",
@@ -1699,7 +1725,12 @@
       "scale": "a town: one suburban street and one downtown block",
       "alive": "tight slice",
       "travel": "the bus, 25 minutes each way; downtown is sealed (entered only by the bus canvas) \u2014 gate 11",
-      "homes_note": "Martin and Diane share parents_room as a couple. The ledger schema has no shared_homes field (state.md, 2026-10-02), so both simply point at the same room."
+      "shared_homes": [
+        [
+          "npc_martin",
+          "npc_diane"
+        ]
+      ]
     },
     "repeatables_planned": [
       {

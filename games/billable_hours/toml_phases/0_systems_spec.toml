@@ -27,7 +27,7 @@ collector_npc    = "npc_martin"
 start_after_flag = "firm_day1_done"
 stages      = [ { amount = 250, after_total_paid = 0 }, { amount = 300, after_total_paid = 500 }, { amount = 350, after_total_paid = 1400 } ]
 stage_lines = [
-  "Martin folds the envelope into his jacket without counting it. \"Two-fifty. Every Friday, Emma.\"",
+  "",
   "Martin counts it this time. \"Your mother's card was in your name too. Three hundred from next Friday.\"",
   "\"Three-fifty,\" Martin says, and puts the envelope away. \"That's the last number, Emma. It stays there.\"",
 ]
@@ -37,7 +37,7 @@ currency_symbol  = "$"
 [settings.rent.text]
 title         = "Friday"
 scene         = "It's Friday. Martin is at the kitchen table with his coffee, and there's an empty space on the table in front of him where the envelope goes."
-greeting      = "\"Friday, Emma.\" He doesn't look up from the paper."
+greeting      = "\"Friday, Emma. Every Friday.\" He doesn't look up from the paper."
 paid_scene    = "You put the envelope down. He slides it over with two fingers and it's gone into his jacket."
 paid_response = "\"Good girl.\" Your mother smiles at the stove like she didn't hear it."
 paid_closing  = "Go to work."
