@@ -561,9 +561,9 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > rent day, short    $90                                          engine  v2.py:19276
 > ```
 >
-> A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads
-> `_item.label || trait_key` (`v2.py:18677`) and never consults the trait labels at all
-> (`engine.md` §33.3).
+> A `[[traits.labels]] key = "money"` label does reach the sidebar: `trait_bar` reads
+> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:19513`), and `setup.traitLabel` reads the trait
+> labels (`v2.py:4701`, `engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
 economy do not type a symbol next to a number. They store one integer and render it in one place:

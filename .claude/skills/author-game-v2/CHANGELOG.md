@@ -5,6 +5,20 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The sidebar does read trait labels (World and Systems PRD, Phase 7b, L6)
+
+**What.** `references/the-economy.md:564-566` (**protected, LO approved**, that sentence only): it said a
+`[[traits.labels]]` label never reaches the sidebar because `trait_bar` reads `_item.label || trait_key`
+(`v2.py:18677`). It now says the label does reach it: `trait_bar` reads `_item.label ||
+setup.traitLabel(_tbKey)` (`v2.py:19513`), and `setup.traitLabel` reads `setup.trait_labels` (`v2.py:4701`).
+
+**Why.** The engine changed (EN5); the sentence taught the old behaviour and contradicted `engine.md` §33.3.
+
+**Verified.** Both lines read in `v2.py`; `<<print _traitLabel>>` is the printed sidebar label (`v2.py:19539`);
+`cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean; skill tests pass.
+
+**Words:** −2, running total 146,826 / 149,283.
+
 ## 2026-10-02 — Merge pointer fix: four cites engine batch 5 moved (World and Systems PRD, Phase 7b)
 
 **What.** `references/the-economy.md:560-561` (numbers only; the file is protected and the sentences
