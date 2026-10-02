@@ -427,6 +427,7 @@ after the prose exists.
 **`--ship` blocks on the cards:** `every system has a card` — SY8's fields filled; a money card (its
 `cost` or `pay_ladder`) has a `sink` and a `deadline`, any other `feeds[]` something; zero cards is red.
 `every system leads to a person or a sex scene` — SY8 rule 3's `leads_to[]`, checked against the build.
+`lint · systems and connections` counts the cards, the infrastructure and each card's links; no threshold.
 
 **One lint ships with this file. No count gate, and the reason is in the skill's own history.**
 

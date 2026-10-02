@@ -380,7 +380,8 @@ behind** (how many surfaces she pays for deposit anything; a pure sink is not a 
 only of pure sinks is) · **repeatables without a step** (repeatables added since the last
 `releases[]` entry when no declared ladder step was added — a LIST, never a score; a first release
 prints its baseline) · **a flag that never resets** (a `*_today`/`*_week` flag, or one in
-`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **world size** (hook share, threads declared and built, speaking NPCs, links, zones; a size) · **toggles declared** (each `want.toggles` flag and how many canvases read it; n/a when none is declared; a LIST — `the-surfaces.md` R5b.4) · **how much explicit content is in here** (the ABSOLUTE count and the rate
+`board.resetting_flags`, set somewhere and unset nowhere — not even `[engine.daily_tick]`; a LIST) · **a cheat page exists** (which of the four `the-systems.md` SY7 basics are free, and any time-saver sold behind a code; a LIST) · **world size** (hook share, threads declared and built, speaking NPCs, links, zones; a size) · **systems and connections** (cards, infrastructure, each card's feeds and
+reads; a count) · **toggles declared** (each `want.toggles` flag and how many canvases read it; n/a when none is declared; a LIST — `the-surfaces.md` R5b.4) · **how much explicit content is in here** (the ABSOLUTE count and the rate
 per 1,000 words against the field's 1.24 — every other heat check is a share with a hand-picked
 denominator; reads the built HTML
 on the field's own word list, and prints both the matched and the generous basis) · **the ambient
@@ -461,7 +462,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
-  when, lines naming a future week or day, world size, and every other gate. `gates.py <slug>` still
+  when, lines naming a future week or day, world size, systems and connections, and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**

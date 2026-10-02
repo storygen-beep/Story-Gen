@@ -5,6 +5,27 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Systems and connections: a `--ship` REPORT row and a lint (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py` (above `main()`): `_systems_and_connections` counts the system cards
+(`board.systems[]`, old meter-shaped entries excluded), the infrastructure apart (`board.infrastructure[]`,
+with its kinds), the meters, and per card its `feeds[]`, `reads[]` and `leads_to[]` counts. Wiring: one line in
+`ship_rows` appends the REPORT row **systems and connections** (ok = None, "a count, never a score");
+`main()` prints `lint · systems and connections` after `world size`. No threshold (WS-D9); n/a and
+grandfathering don't apply to a REPORT row.
+- Docs: SKILL.md lints paragraph and REPORT list; `the-systems.md` "The check" (one line).
+
+**Verified.** New `scripts/tests/test_gates_systems_report.py` (3). Before/after, HEAD exports — before no
+row; after billable_hours 2 systems · 4 infrastructure (clock, view) · 6 meters (`intern_job` feeds 3 · reads
+3 · leads to 3; `friday_money` 1 · 1 · 1); members_only 0 · 0 · 8 meters; the_balance 0 · 0 · 23;
+probation 0 · 0 · 11; orientation, vesper, media_lab 0 · 0 · 0. Only the new REPORT row changed.
+`the-release.md:100` → `gates.py:13878` (read by hand); every other cite unchanged; `cite_check.py --fix` 0
+drifted; selfcheck clean (71 gates, 59 lints); pytest 660 passed.
+
+**Words:** +32, running total 146,731 / 149,283.
+
+---
+
 ## 2026-10-02 — World size: a `--ship` REPORT row and `lint · world size` (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py` (above `main()`): `_world_size` measures, with no threshold (WS-D9):

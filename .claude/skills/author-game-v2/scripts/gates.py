@@ -11464,6 +11464,7 @@ def ship_rows(slug, root=None):
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
     report.append(_world_size_row(model, state))
+    report.append(_systems_row(state))
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
@@ -13597,6 +13598,28 @@ def _world_size_row(model, state):
     return ("world size", None, summary + " — a size, never a score", rows)
 
 
+# ── the-systems.md: how many systems, and how they connect (a REPORT, no threshold — WS-D9) ──
+def _systems_and_connections(state):
+    """(summary, rows): the cards, the infrastructure apart, each card's feeds / reads."""
+    board = (state or {}).get("board") or {}
+    cards = _system_cards(state)
+    infra = [i for i in (board.get("infrastructure") or []) if isinstance(i, dict)]
+    meters = _meters_of_board(board)
+    summary = (f"{len(cards)} system(s) · {len(infra)} infrastructure "
+               f"({', '.join(sorted({str(i.get('kind')) for i in infra})) or 'none'}) · "
+               f"{len(meters)} meter(s)")
+    rows = [f"{c.get('id') or '?'}: feeds {len(c.get('feeds') or [])} "
+            f"({', '.join(map(str, c.get('feeds') or [])) or '—'}) · reads {len(c.get('reads') or [])} "
+            f"({', '.join(map(str, c.get('reads') or [])) or '—'}) · leads to "
+            f"{len(c.get('leads_to') or [])}" for c in cards]
+    return summary, rows
+
+
+def _systems_row(state):
+    summary, rows = _systems_and_connections(state)
+    return ("systems and connections", None, summary + " — a count, never a score", rows)
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -14454,6 +14477,11 @@ def main():
     for h in ws_rows:
         print(f"          · {h}")
     print("          (a SIZE, never a score — the-want.md, \"Her life — the threads\")")
+    sc_summary, sc_rows = _systems_and_connections(state)
+    print(f"  {'─'*72}")
+    print(f"  lint · systems and connections — {sc_summary}")
+    for h in sc_rows:
+        print(f"          · {h}")
 
     print(f"  {'─'*72}")
     print(f"  lint · toggles declared — {tog_summary}")
