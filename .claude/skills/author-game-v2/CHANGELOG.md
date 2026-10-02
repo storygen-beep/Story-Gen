@@ -5,6 +5,41 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — shape.py reads her threads, each man's keeps, the meters and the system cards (World and Systems PRD, Phase 6A)
+
+**What.** `scripts/shape.py`:
+- **her life has threads** (new row): each `want.threads[].person` is in `want.cast` with an age (FAIL);
+  the count is reported, and outside 4–6 WARNS. n/a while no thread is written (lenient); WARN strict.
+- **each man's keeps is named** (new row): `keeps` is `step counter + memory flags`, `want + warmth`,
+  `want + power`, or starts `none — `. A missing `keeps` fails only when strict. n/a with no cast.
+- **every system has a card** (new row, strict only): `board.systems[]` holds at least one card (a
+  meter-shaped row is a meter), and every system a thread names (`want.threads[].system`, except
+  `none …`) is a card. n/a while the spine is written.
+- **a step's variables are declared**: the meter keys (`board.meters[].key`, plus an old meter-shaped
+  row) and each card's `feeds[]` / `reads[]` join the declared set, so a step reading them doesn't FAIL.
+- **Grandfathering:** `check(state, strict, slug=None)`; a game in `gates.SHIP_GRANDFATHERED` (by the
+  `slug` argument, else the ledger's own `slug`) WARNS on keeps and cards. billable_hours is not
+  grandfathered.
+- Docs: SKILL.md's `shape.py` row, `the-spine.md` checkpoint A, `state.md` (the `want` comment no longer
+  says no gate reads it; the threads comment says what shape.py does).
+
+**Why.** Her threads, the cast's `keeps` and the system cards are the new ledger's spine; nothing
+checked them, and a step reading a meter key failed as undeclared.
+
+**Verified.** New `scripts/tests/test_shape_threads_keeps_cards.py` (17), including billable_hours'
+and members_only's `keeps` strings and the grandfathered warn; `test_shape.py`'s full-spine fixture
+gains `keeps`, four threads and a card, and its defect table the three new rows. Before/after on every
+game with a ledger, from a `git archive HEAD` export (media_lab and vesper have none; vesper_two
+excluded): billable_hours PASS ×3 (4 threads, 7/7 keeps, 2 cards named by 2 threads); members_only WARN
+×3 (no threads; julian's `keeps` "nothing: the climb is hers; he holds the tab"; 0 cards); orientation,
+probation, the_balance WARN threads and cards, keeps n/a. No existing row changed on any game.
+`cite_check.py --fix` 0 drifted (`gates.py:325`'s `shape.py:12` still holds); selfcheck clean; pytest
+547 passed.
+
+**Words:** +77, running total 146,026 / 149,283.
+
+---
+
 ## 2026-10-02 — Gate `adult wording`: the banned school words, as a warning (World and Systems PRD, Phase 6A)
 
 **What.** A scored gate in `scripts/gates.py` (`_adult_wording`, above `main()`, registered in

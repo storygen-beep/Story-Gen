@@ -37,7 +37,7 @@ belong here; only decisions, debts, and promises do.
 
   "want": {
     // THE FANTASY AND THE PROMISE — written on the idea page (templates/idea.md), the-want.md §0.
-    // All optional; no gate reads them yet.
+    // All optional. shape.py reads `threads`, `cast` (age, keeps) and the goal chain.
     "fantasy_shape": "fall_by_need" | "rise_by_want" | "taboo_at_home" | "mystery" | "mix: …",
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
@@ -91,7 +91,8 @@ belong here; only decisions, debts, and promises do.
     "threads":         [ { "id": "job", "name": "…", "person": "npc_id", "place": "location_id",
                            "system": "…", "link": "one line — how it feeds the hook" } ],
                               // her life, 4–6 threads — the-want.md §6. person is in `cast`,
-                              // place is in `places`.
+                              // place is in `places`. shape.py: a person outside `cast` FAILS;
+                              // a count outside 4–6 WARNS.
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 
