@@ -373,13 +373,15 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    A second ladder with its own rank is `ranks` on a fast job, counted per job (`engine.md` §51); a
    canvas job keeps its rank as a trait.
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
-   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label").
+   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label"); `sex for pay names the
+   amount` warns on a paying choice that doesn't.
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and
    `leads_to[]`. The systems with no such link are the measured failures — Course of Temptation's 38
    gloryhole passages pay $0, and its shops carry items whose bonus nothing reads (round 9b §3).
 4. **Day 1 at the bottom rung.** 79–87% of the four games' systems are usable on day 1; a release adds
    rungs and people (SKILL.md commitment 4).
-5. **The measured floors, as directions, never gates:** ≥20 events in a pool clicked daily, ≥4 lewd
+5. **The measured floors, as directions** (warning gate `a system meets its floors`, read from the card;
+   pool ids must be built): ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
    `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6167`).

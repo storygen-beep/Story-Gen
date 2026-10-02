@@ -12743,6 +12743,8 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("her clothes are backed", *_her_clothes_are_backed(model, game))
     gate("every chat is caused by a scene", *_chats_are_caused(game))
     gate("a chat is short and timed", *_chats_short_and_timed(game))
+    gate("a system meets its floors", *_system_floors(model, state))
+    gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13481,6 +13483,66 @@ def _chats_short_and_timed(game):
                     bad.append(f"chat `{c.get('id')}`: more than {CHAT_BUBBLES} bubbles in one message")
     n = len(convs) + len(calls)
     return not bad, f"{len(bad)} problem(s) across {n} chats and calls", bad
+
+
+# ── the-systems.md SY8 rule 5: the measured floors, as directions (WARNs, round 9b) ──────────
+# From each card: a `daily` card's `pool[]` holds ≥20 canvases that exist in the build (the card
+# cannot just claim them); a card's `lewd_ladder[]` has ≥4 rungs and each rung ≥2 `acts[]`.
+# n/a with no card. And SY8 rule 2: a choice on an explicit canvas that pays her names the amount.
+SYSTEM_POOL, SYSTEM_RUNGS, SYSTEM_ACTS = 20, 4, 2
+# An amount in figures or in words ("A hundred, like the note says.").
+_NAMES_AMOUNT = re.compile(r"\d|\b(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|"
+                           r"thousand|grand)\b|\b\w+ (?:bucks|dollars|quid|pounds|euros)\b", re.I)
+
+
+def _system_floors(model, state):
+    """(ok, headline, detail) for `a system meets its floors`."""
+    cards = _system_cards(state)
+    if not cards:
+        return None, "no system card", []
+    built = {c["id"] for c in model}
+    bad = []
+    for c in cards:
+        cid = c.get("id") or "?"
+        if c.get("daily") is True:
+            pool = [p for p in (c.get("pool") or []) if p in built]
+            if len(pool) < SYSTEM_POOL:
+                bad.append(f"{cid}: a daily pool of {len(pool)} built canvas(es), floor {SYSTEM_POOL}")
+        rungs = [r for r in (c.get("lewd_ladder") or []) if isinstance(r, dict)]
+        if rungs and len(rungs) < SYSTEM_RUNGS:
+            bad.append(f"{cid}: {len(rungs)} lewd rung(s), floor {SYSTEM_RUNGS}")
+        thin = [str(r.get("gate") or k) for k, r in enumerate(rungs)
+                if len(r.get("acts") or []) < SYSTEM_ACTS]
+        if thin:
+            bad.append(f"{cid}: rung(s) with fewer than {SYSTEM_ACTS} acts — {', '.join(thin)}")
+    return not bad, f"{len(cards)} card(s), {len(bad)} below a floor (directions from four games, " \
+        f"round 9b)", bad
+
+
+def _paid_choice_names_amount(model, game, state):
+    """(ok, headline, detail) for `sex for pay names the amount`."""
+    money = _declared_currency(state) or next(
+        (k for k in ((game.get("player") or {}).get("core_traits") or {}) if CURRENCY_HINT.search(k)),
+        None)
+    hot = {m["id"] for m in model if any(b.explicit >= 3 for b in m["beats"])}
+    paid, bad = 0, []
+    for c in game.get("canvases") or []:
+        if not money or _is_dev(c) or c.get("id") not in hot:
+            continue
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                if not any((ef.get("trait") or ef.get("trait_key")) == money
+                           and (ef.get("op") or "add") == "add"
+                           and _effect_value_sign(ef.get("value")) > 0
+                           for ef in (ch.get("effects") or []) if isinstance(ef, dict)):
+                    continue
+                paid += 1
+                if not _NAMES_AMOUNT.search(str(ch.get("text") or "")):
+                    bad.append(f"{c.get('id')}/{n.get('id')}: \"{ch.get('text')}\" pays "
+                               f"`{money}` and names no amount")
+    if not paid:
+        return None, "no choice on an explicit canvas pays her", []
+    return not bad, f"{paid - len(bad)}/{paid} paid choices name the amount", bad
 
 
 def main():

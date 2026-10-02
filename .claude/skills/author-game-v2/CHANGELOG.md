@@ -5,6 +5,39 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The system floors and the price of a paid act: two warnings (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`, two scored gates (above `main()`, in `_phase4_gates`), WARNs — never in
+`SHIP_BLOCK_GATES`, so under `--ship` a red shows in the `every other gate` REPORT row:
+- **a system meets its floors** (`_system_floors`): from each card, a `daily = true` card's `pool[]` holds
+  ≥20 canvases **that exist in the build** (unbuilt ids are not counted); a card's `lewd_ladder[]` has ≥4
+  rungs and each rung ≥2 `acts[]`. The rung floors apply to every card with a lewd ladder, the pool floor to
+  daily cards. n/a with no card.
+- **sex for pay names the amount** (`_paid_choice_names_amount`): a choice on an explicit canvas (not dev)
+  whose own `effects` add to the currency must name an amount — a figure, or one in words ("a hundred",
+  "ten bucks"). Money prices on `costs` stay with gate 21. n/a when no such choice exists.
+- **Grandfathering:** none — warnings never block.
+- Docs: two SKILL.md gate-table rows; `the-systems.md` SY8 rules 2 and 5 name them.
+
+**Why.** WS-D9: the measured minimums and "price shown before she agrees" are WARNs (directions from
+four games, round 9b).
+
+**Verified.** New `scripts/tests/test_gates_system_floors.py` (7): a full card passes; the pool counts only
+built canvases; few and thin rungs; a non-daily card skips the pool, no card n/a; a paid choice with an
+amount in figures or words passes; with none warns; no paid choice n/a; neither is a ship block. The first
+run counted only figures and flagged members_only's `first_visit/door` "A hundred, like the note says." /
+"Two hundred, or I walk." — amounts in words, so words were added before commit. Before/after, HEAD
+exports: billable_hours floors FAIL (`intern_job` daily pool 2 built of 20, two 1-act rungs; `friday_money` 3
+rungs, all 1-act), pay PASS 10/10 — its `every other gate` row 46/47 → 47/49; members_only pay PASS 5/5
+(39/41 → 40/42); the_balance pay **parked, not judged** (FAIL 0/3 with its parked content; 28/41 → 28/42);
+every other cell n/a. No BLOCK row or exit code changed. `the-release.md:100` → `gates.py:13803` (read by
+hand); every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck clean (71 gates); pytest 654
+passed.
+
+**Words:** +80, running total 146,662 / 149,283.
+
+---
+
 ## 2026-10-02 — A chat is short and timed: a warning (World and Systems PRD, Phase 6B, with the calls half)
 
 **What.** `scripts/gates.py`: new scored gate **a chat is short and timed** (`_chats_short_and_timed`,

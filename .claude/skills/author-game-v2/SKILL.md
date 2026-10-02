@@ -306,6 +306,8 @@ how many fails are [off].
 | her clothes are backed | a line naming her garment has a check that she wears it; a `--ship` block | `register.md` "The truth rule" |
 | every chat is caused by a scene | each chat's and call's trigger flag is set by a scene, directly or through a caused chat; n/a with no phone; a `--ship` block | `the-phone.md` |
 | a chat is short and timed | 3–7-word bubbles, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
+| a system meets its floors | a daily card's pool ≥20 built canvases, ≥4 lewd rungs, ≥2 acts a rung; a warning | `the-systems.md` SY8 |
+| sex for pay names the amount | a choice on an explicit canvas that pays her names the sum; a warning | `the-systems.md` SY8 |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
