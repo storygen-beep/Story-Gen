@@ -4,6 +4,9 @@
       money has a sink and a deadline, any other feeds something; zero cards is red, never n/a;
       an old meter-shaped entry is a meter, not a card.
 
+  every system leads to a person or a sex scene — each card's leads_to[] names a person in
+      board.characters or a canvas with an explicit beat, and it exists in the build.
+
 LO B: a grandfathered game warns until it ships on or after the row's date; a game not in
 SHIP_GRANDFATHERED (billable_hours, a new game) blocks. Fixtures are written here; nothing in
 games/ is read or written.
@@ -112,3 +115,60 @@ def test_the_green_fixture_passes_the_row(tmp_path, monkeypatch):
 def test_a_card_is_not_mistaken_for_a_meter():
     st = state_with(copy.deepcopy(METER), card())
     assert [c["id"] for c in gates._system_cards(st)] == ["shift"]
+
+
+# ── every system leads to a person or a sex scene ─────────────────────────────
+
+LEADS_ROW = "every system leads to a person or a sex scene"
+
+
+def leads(st, game=None):
+    model, g = gates.build(game or ws6.green_game())
+    return gates._every_system_leads_somewhere(model, g, st)
+
+
+def hot_game():
+    g = ws6.green_game()
+    g["canvases"].append({"id": "backroom", "trigger": {"location": "work", "is_repeatable": True},
+                          "nodes": [{"id": "n", "blocks": [{"type": "paragraph", "content":
+                              "He fucks her, his cock deep in her wet cunt, and she comes."}]}]})
+    return g
+
+
+def test_a_card_leading_to_a_built_person_in_the_cast_passes():
+    assert leads(state_with(card()))[0] is True
+
+
+def test_a_card_leading_to_an_explicit_canvas_passes():
+    assert leads(state_with(card(leads_to=["backroom"])), hot_game())[0] is True
+
+
+def test_a_card_leading_to_a_dry_canvas_or_a_stranger_fails_and_says_why():
+    ok, _, detail = leads(state_with(card(leads_to=["office", "npc_ghost"])))
+    assert ok is False and "`office` a canvas with no explicit beat" in detail[0], detail
+    assert "`npc_ghost` in neither the cast nor the build" in detail[0], detail
+
+
+def test_a_person_not_in_board_characters_does_not_count():
+    st = state_with(card())
+    st["board"]["characters"] = []
+    ok, _, detail = leads(st)
+    assert ok is False and "not in board.characters" in detail[0], detail
+
+
+def test_an_empty_leads_to_fails():
+    ok, _, detail = leads(state_with(card(leads_to=[])))
+    assert ok is False and "it is empty" in detail[0]
+
+
+def test_zero_systems_is_red_for_leads_too():
+    assert leads(state_with())[0] is False
+
+
+def test_leads_warns_when_grandfathered_and_blocks_when_not(tmp_path, monkeypatch):
+    st = state_with(card(leads_to=["office"]))
+    assert ck8b.ship(tmp_path, monkeypatch, "probation", state=st)[LEADS_ROW][0] == "warn"
+    assert ck8b.ship(tmp_path, monkeypatch, "billable_hours", state=st)[LEADS_ROW][0] is False
+    st["releases"] = [{"version": "0.2", "shipped": "2026-10-03"}]
+    assert ck8b.ship(tmp_path, monkeypatch, "probation", state=st)[LEADS_ROW][0] is False
+    assert ck8b.ship(tmp_path, monkeypatch, "new_game")[LEADS_ROW][0] is True

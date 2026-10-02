@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — `--ship` blocks on a system that leads nowhere: `every system leads to a person or a sex scene` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every system leads to a person or a sex scene**
+(`_every_system_leads_somewhere`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row.
+Each card's `leads_to[]` must name at least one person who is in `board.characters` and in the build's
+`[[npcs]]`, or a built canvas with an explicit beat (3+ explicit words in one beat). The red line says why
+each entry did not count (not in the cast, not in the build, a canvas with no explicit beat).
+- **n/a policy:** none. Zero cards is red, as for `every system has a card`.
+- **Grandfathering:** `SHIP_SINCE["system_leads"]` = 2026-10-02; the legacy form passes.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list of rows since 2026-10-02;
+  `the-systems.md` "The check"; `the-surfaces.md` R2c names it.
+
+**Why.** WS-D9: every system leads to ≥1 person or sex scene is a BLOCK (SY8 rule 3).
+
+**Verified.** `test_gates_system_cards.py` +7: a built cast member passes; an explicit canvas passes; a dry
+canvas and an unknown id fail with reasons; a person missing from `board.characters` fails; empty fails;
+zero systems red; on `ship_rows`: grandfathered warns, billable_hours blocks, shipped-since blocks, green
+passes. Before/after `--ship` on HEAD exports: before no row; after billable_hours PASS (2/2 —
+`intern_job` → Callahan, Ethan; `friday_money` → Martin); members_only, orientation, probation,
+the_balance WARN; media_lab and vesper FAIL (no cards). No other row moved; no exit code changed.
+`cite_check.py --fix` moved `agents.md:139`'s `Beat.explicit` cite onto this gate's docstring, which named
+`Beat.explicit`: reverted, and the docstring reworded so the anchor stays unique. `the-release.md:100`
+`gates.py:13339` → `:13374` (read by hand); every other cite unchanged. Selfcheck clean (65 gates); pytest
+602 passed.
+
+**Words:** +85, running total 146,335 / 149,283.
+
+---
+
 ## 2026-10-02 — `--ship` blocks on a system with no card: `every system has a card` (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py`: new scored gate **every system has a card** (`_every_system_has_a_card`,

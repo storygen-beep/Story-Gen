@@ -201,7 +201,8 @@ many systems the game has; it is whether a room has anything of its own to show.
 
 **No count gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
 it is a matched instrument first, on its own, verified against three games before any doctrine
-cites it. The cards are checked instead: `every system has a card` (`the-systems.md`, "The check").
+cites it. The cards are checked instead: `every system has a card` and `every system leads to a person or a sex
+scene` (`the-systems.md`, "The check").
 
 > ### ✅ COMPLETED 2026-09-02 — where a system is FED, and where the list itself lives
 >

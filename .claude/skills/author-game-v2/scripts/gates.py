@@ -12737,6 +12737,8 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("a goal's end is built", *_goal_end_is_built(game, state))
     gate("a step is seen from the next room", *_seen_from_next_room(game, state))
     gate("every system has a card", *_every_system_has_a_card(state))
+    gate("every system leads to a person or a sex scene",
+         *_every_system_leads_somewhere(model, game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13077,8 +13079,41 @@ def _every_system_has_a_card(state):
     return not bad, f"{len(cards) - len(bad)}/{len(cards)} system cards filled" + as_meters, bad
 
 
+def _every_system_leads_somewhere(model, game, state):
+    """(ok, headline, detail) for `every system leads to a person or a sex scene`: each card's
+    `leads_to[]` names a person in board.characters, or a canvas with an explicit beat (3+
+    explicit words in one beat, as the floors count them), that exists in the build. Zero
+    cards is red."""
+    if _legacy("system_leads"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    cards = _system_cards(state)
+    if not cards:
+        return False, "no system card in board.systems[] — zero systems is red", []
+    chars = {c.get("id") for c in (((state or {}).get("board") or {}).get("characters") or [])
+             if isinstance(c, dict)}
+    npcs = {n.get("id") for n in (game.get("npcs") or []) if isinstance(n, dict)}
+    built = {c["id"] for c in model}
+    hot = {c["id"] for c in model if any(b.explicit >= 3 for b in c["beats"])}
+
+    def why(x):
+        if x in npcs or x in chars:
+            return "not in board.characters" if x not in chars else "not in the build"
+        return "a canvas with no explicit beat" if x in built else "in neither the cast nor the build"
+
+    bad = []
+    for c in cards:
+        leads = [x for x in (c.get("leads_to") or []) if isinstance(x, str)]
+        if not any((x in chars and x in npcs) or x in hot for x in leads):
+            bad.append(f"{c.get('id') or '?'}: leads_to names no person or sex scene — "
+                       + ("; ".join(f"`{x}` {why(x)}" for x in leads) or "it is empty"))
+    return not bad, f"{len(cards) - len(bad)}/{len(cards)} systems lead to a person or a sex scene", bad
+
+
 SHIP_BLOCK_GATES["every system has a card"] = "every system has a card"
 SHIP_SINCE["system_card"] = (SYSTEMS_SINCE, "every system has a card")
+SHIP_BLOCK_GATES["every system leads to a person or a sex scene"] = \
+    "every system leads to a person or a sex scene"
+SHIP_SINCE["system_leads"] = (SYSTEMS_SINCE, "every system leads to a person or a sex scene")
 
 
 def main():
