@@ -12740,6 +12740,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("every system leads to a person or a sex scene",
          *_every_system_leads_somewhere(model, game, state))
     gate("every clothing state is read three times", *_wardrobe_is_read(game, state))
+    gate("her clothes are backed", *_her_clothes_are_backed(model, game))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13232,10 +13233,15 @@ SHIP_NA_PASSES = {"the obligation is charged", "every clothing state is read thr
 # the strip rung matches "strip club". "Hers": `your <garment>` in a second-person game; in a
 # third-person one, `<her name>'s <garment>`, or `her <garment>` in a sentence that opens on her
 # name. Words before the garment that are also in a catalog name narrow it ("your tight blouse"
-# is the tight silk blouse). Backers: a condition that IMPLIES one of those garments is worn — on
+# is the tight silk blouse); in "A dress of your own" the garment is "dress". Backers: a condition that IMPLIES one of those garments is worn — on
 # the trigger, an enclosing `group`, the location's `entry_conditions`, a choice into the canvas
 # or the node — or a `wardrobeEffects` equip of one in an earlier node of the same canvas. A
-# beat on an explicit canvas with a strip word besides the garment is exempt: the act undresses.
+# beat on an explicit canvas with a strip word besides the garment, or an undressing phrase
+# ("yanks your panties down", "takes your bra off"), is exempt: the act undresses. A `--ship`
+# BLOCK (WS-D9); n/a with clothing off or no catalog, and n/a passes.
+_UNDRESS = re.compile(r"\b(?:pull|yank|tug|slid|slide|push|peel|take|took|pop|rip|tore|tear|shove|"
+                      r"drag|strip)\w*\s+(?:your|her|them|it)\b(?:\s+[\w'’]+){0,2}?\s+"
+                      r"(?:off|down|open|aside)\b", re.I)
 _GARMENT_STOP = {"the", "a", "an", "his", "her", "their", "my", "our", "your", "on", "in",
                  "under", "over", "of", "off", "up", "down", "and", "to", "with", "at", "from",
                  "into", "onto", "through", "by", "for", "is", "was", "are", "were"}
@@ -13248,7 +13254,8 @@ def _garment_vocab(game):
     for c in game.get("clothing") or []:
         if not (isinstance(c, dict) and c.get("id") and c.get("name")):
             continue
-        ws = re.findall(r"[a-z]+", str(c["name"]).lower())
+        # "A dress of your own": the garment is the word before "of", not the last word.
+        ws = re.findall(r"[a-z]+", re.split(r"\s+of\s+", str(c["name"]).lower())[0])
         if not ws:
             continue
         words[c["id"]] = set(ws)
@@ -13312,7 +13319,8 @@ def _cond_backs(item, garments, catalog):
 
 
 def _clothes_unbacked(model, game):
-    """Rows for `her clothes are backed`: prose naming her clothes with nothing behind it."""
+    """Rows for `her clothes are backed`: prose naming her clothes with nothing behind it.
+    None when clothing is off or there is no catalog."""
     import readable
     catalog = [c for c in (game.get("clothing") or []) if isinstance(c, dict) and c.get("id")]
     if not (game.get("settings") or {}).get("clothing_enabled") or not catalog:
@@ -13340,7 +13348,7 @@ def _clothes_unbacked(model, game):
 
     def backed(canvas, node, conditions, garments, text, phrase):
         rest = re.sub(r"\bstrip (?:club|joint|bar)s?\b", " ", text.replace(phrase, " "), flags=re.I)
-        if canvas.get("id") in hot and strip.search(rest):
+        if canvas.get("id") in hot and (strip.search(rest) or _UNDRESS.search(text)):
             return True
         conds = list(conditions)
         loc = locs.get((canvas.get("trigger") or {}).get("location")) or {}
@@ -13354,6 +13362,22 @@ def _clothes_unbacked(model, game):
 
     return readable.unearned_events(game, needs_clothing={"find": _her_garments(game),
                                                           "backed": backed})
+
+
+def _her_clothes_are_backed(model, game):
+    """(ok, headline, detail) for the gate `her clothes are backed`."""
+    if _legacy("clothes_backed"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    rows = _clothes_unbacked(model, game)
+    if rows is None:
+        return None, "clothing is off, or no [[clothing]] catalog", []
+    return not rows, (f"{len(rows)} line(s) name her clothes with no clothing check behind them"
+                      if rows else "every line naming her clothes has a check behind it"), rows
+
+
+SHIP_BLOCK_GATES["her clothes are backed"] = "her clothes are backed"
+SHIP_SINCE["clothes_backed"] = (SYSTEMS_SINCE, "her clothes are backed")
+SHIP_NA_PASSES.add("her clothes are backed")
 
 
 def main():
@@ -14249,19 +14273,6 @@ def main():
             print(f"          · {h}")
         print("          (a LIST, never a score. Gate the line on the flag that records it,"
               " or cut it — register.md, \"The truth rule\")")
-
-    clothes_rows = _clothes_unbacked(model, game)
-    if clothes_rows is not None:
-        print(f"  {'─'*72}")
-        print(f"  lint · her clothes are backed — {len(clothes_rows)} line(s) name her clothes "
-              f"with no clothing check behind them")
-        for h in clothes_rows[:12]:
-            print(f"          · {h}")
-        if len(clothes_rows) > 12:
-            print(f"          · … and {len(clothes_rows) - 12} more")
-        if clothes_rows:
-            print("          (gate the line on a check that she wears it, or cut it —"
-                  " register.md, \"The truth rule\", rule 5)")
 
     vl_share = 100 * len(vl_rows) / vl_seen if vl_seen else 0.0
     print(f"  {'─'*72}")

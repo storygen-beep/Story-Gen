@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The truth rule's rule 5 promoted to a `--ship` BLOCK: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 2 of 2)
+
+**What.** `scripts/gates.py`: the lint from the commit before becomes the scored gate **her clothes are
+backed** (`_her_clothes_are_backed`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row.
+The `lint ·` print is removed (the gate's detail lists the lines). The two false-positive kinds the lint
+run found are fixed:
+- **a catalog name with "of"** ("A dress of your own"): the garment is the last word before "of", so "own"
+  is no longer a garment word;
+- **undressing in an explicit act the strip list misses** ("yanks your panties down", "takes your bra off",
+  "pops your blouse open", "slide them down"): on an explicit canvas, `_UNDRESS` — a pull/yank/slide/take/
+  pop… verb, then `your` / `her` / `them` / `it`, then `off` / `down` / `open` / `aside` — exempts the line
+  like a strip word. "You shove his hands off your blouse" stays listed.
+- **n/a policy:** clothing off or no catalog is n/a, and n/a passes (`SHIP_NA_PASSES`).
+- **Grandfathering:** `SHIP_SINCE["clothes_backed"]` = 2026-10-02; the legacy form passes.
+- Docs: SKILL.md gate-table row, BLOCK list and lints paragraph (rule 5 now names the gate);
+  `the-release.md`'s list; `register.md` rule 5 (what counts as a garment and as undressing).
+
+**Verified.** `test_gates_clothes_backed.py` +5 (17): the "of" name; three undressing phrases exempt;
+"shove his hands off" still listed; the gate n/a / red / legacy; on `ship_rows` members_only warns,
+billable_hours blocks, shipped-since blocks, clothing off n/a. Before/after `--ship`, HEAD exports: before no
+row; after **billable_hours FAIL 18** (19 − the one false positive; `hub_martin_breakfast/table` "your tight
+blouse" among them, as expected), **members_only WARN 11** (15 − the 4 false positives), orientation and
+vesper PASS (0 lines), media_lab, probation, the_balance n/a (clothing off). No other row moved; no exit code
+changed. `the-release.md:100` → `gates.py:13638` (read by hand); every other cite unchanged; `cite_check.py
+--fix` 0 drifted; selfcheck clean (67 gates, 57 lints); pytest 631 passed.
+
+**Words:** +63, running total 146,490 / 149,283.
+
+---
+
 ## 2026-10-02 — The truth rule's rule 5 as a printed lint: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 1 of 2)
 
 **What.** A printed lint first, for one commit, so its false positives can be read before it blocks.

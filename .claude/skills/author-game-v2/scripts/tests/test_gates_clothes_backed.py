@@ -6,13 +6,14 @@ Garments come from the game's own `[[clothing]]` names; "hers" is `your <garment
 person) or her name's / `her` in a sentence opening on her name (third person). Backers: the
 trigger, an enclosing group, the location's entry_conditions, a choice into the canvas or node,
 an equip in an earlier node. An explicit canvas with a strip word in the same beat is exempt.
-Fixtures only.
+Promoted to a `--ship` BLOCK row (n/a passes; LO B as the other rows). Fixtures only.
 """
 import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, HERE)
 import gates  # noqa: E402
 
 HOT = "He fucks her, his cock deep in her wet cunt, and she comes."
@@ -126,3 +127,49 @@ def test_clothing_off_is_none():
     g = game(canvas("c", para("Your skirt rides up.")))
     g["settings"]["clothing_enabled"] = False
     assert rows(g) is None
+
+
+# ── promoted to a `--ship` BLOCK (K4 commit 2): the two false-positive kinds ──────
+
+def test_a_name_with_of_takes_the_garment_before_it():
+    assert rows(game(canvas("c", para("You did it on your own.")))) == []
+    assert len(rows(game(canvas("c", para("Your dress is new."))))) == 1
+
+
+def test_an_undressing_phrase_in_an_explicit_beat_is_exempt():
+    for line in ("He yanks your skirt down.", "He pops your blouse open.",
+                 "\"Your skirt.\" You slide them down your legs."):
+        assert rows(game(canvas("c", para(HOT + " " + line)))) == [], line
+
+
+def test_pushing_his_hands_off_is_not_undressing():
+    assert len(rows(game(canvas("c", para(HOT + " You shove his hands off your blouse."))))) == 1
+
+
+def test_the_gate_is_na_with_clothing_off_and_red_with_a_line():
+    model, g = gates.build(game(canvas("c", para("Your skirt rides up."))))
+    ok, head, detail = gates._her_clothes_are_backed(model, g)
+    assert ok is False and head.startswith("1 line(s)") and detail
+    g["settings"]["clothing_enabled"] = False
+    assert gates._her_clothes_are_backed(model, g)[0] is None
+    gates._LEGACY_RULES.add("clothes_backed")
+    try:
+        assert gates._her_clothes_are_backed(model, game())[0] is True
+    finally:
+        gates._LEGACY_RULES.discard("clothes_backed")
+
+
+def test_the_ship_row_warns_grandfathered_blocks_billable_and_na_passes(tmp_path, monkeypatch):
+    import test_gates_wardrobe_reads as wr
+    import test_gates_ws6 as ws6
+    g = wr.dressed_game()
+    g["clothing"][0]["name"] = "Short skirt"
+    g["canvases"][2]["nodes"][0]["blocks"].append(para("Your skirt rides up."))
+    row = "her clothes are backed"
+    assert wr.ship(tmp_path, monkeypatch, "members_only", g, ws6.green_state())[row] == "warn"
+    assert wr.ship(tmp_path, monkeypatch, "billable_hours", g, ws6.green_state())[row] is False
+    st = ws6.green_state()
+    st["releases"] = [{"version": "0.2", "shipped": "2026-10-02"}]
+    assert wr.ship(tmp_path, monkeypatch, "members_only", g, st)[row] is False
+    g["settings"]["clothing_enabled"] = False
+    assert wr.ship(tmp_path, monkeypatch, "billable_hours", g, ws6.green_state())[row] is None
