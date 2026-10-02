@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Merge pointer fix: four cites engine batch 5 moved (World and Systems PRD, Phase 7b)
+
+**What.** `references/the-economy.md:560-561` (numbers only; the file is protected and the sentences
+are unchanged): `v2.py:19529` → `:19539` (the trait-bar "value / max" print), `v2.py:19266` → `:19276`
+(RentDay_Short). `references/the-clock.md:198`: `v2.py:22750` / `:22784` → `:22760` / `:22794` (the two
+`getLocationCostTag` cost-tag lines).
+
+**Why.** The tools session (L5) pointed these at the engine as it stood at 5d5af24; engine batch 5
+(E13, E14) added 10 lines above them, and the merge (735eff3) carried the old numbers.
+
+**Verified.** Each old line's text read at 5d5af24 and found once at the new number; `cite_check.py`
+0 in SKILL.md + references; `--selfcheck` clean; skill tests 672 passed.
+
+**Words:** 0, running total 146,828 / 149,283.
+
 ## 2026-10-02 — Four stale cites re-pointed (World and Systems PRD, Phase 7b, L5)
 
 **What.** Numbers only:

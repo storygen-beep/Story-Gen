@@ -195,7 +195,7 @@ option, because there is no absolute advance to reach for.
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
 - **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6068`) renders `20m` on the
-  navigation card from `[[locations.costs]] time`, used at `v2.py:22750` and `:22784`.
+  navigation card from `[[locations.costs]] time`, used at `v2.py:22760` and `:22794`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:13530`) with
   nothing on the label.
