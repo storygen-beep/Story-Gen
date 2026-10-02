@@ -299,6 +299,7 @@ how many fails are [off].
 | **the start choice is read** | a choice the opening asks the player to make is read by real content later — fails only on ZERO, and a game that asks nothing reports n/a, which is not a pass | `the-want.md` §1 · `state.md` |
 | **what she picks is read** | every `[[player.customization_fields]]` value is printed somewhere — `$player.<id>` or the `@player.<id>` token — fails only on ZERO, `sets_portrait` counts as a read, and a game declaring no customization reports n/a, which is not a pass | `the-want.md` §1 W1 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
+| a step is seen from the next room | a ladder step's `seen_from` shares its place's parent (`entry_from`) | `state.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |

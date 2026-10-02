@@ -12735,6 +12735,7 @@ def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail = _adult_wording(model, game)
     gate("adult wording", ok, head, detail)
     gate("a goal's end is built", *_goal_end_is_built(game, state))
+    gate("a step is seen from the next room", *_seen_from_next_room(game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -12970,6 +12971,40 @@ def _future_dates_row(model, game):
             f"{len(hits)} line(s) name a future week or day — check each is built or cut (W10)"
             if hits else "no line names a future week or day", hits[:12]
             + ([f"… and {len(hits) - 12} more"] if len(hits) > 12 else []))
+
+
+# ── shape.py's "the person is there at the step's hour", the TOML half ─────
+# A ladder step may declare `seen_from`: the person is scheduled in the room next door, not in
+# the step's own room (shape.py checks his hours). Here, once the TOML exists, that room must
+# share a parent (`entry_from`) with the step's place — across the hall, not across town. Red
+# when it does not, or names no location. A game in SHIP_GRANDFATHERED gets warnings (the gate
+# still passes) until it ships on or after SEEN_FROM_SINCE. n/a: no step declares `seen_from`.
+SEEN_FROM_SINCE = "2026-10-02"
+
+
+def _seen_from_next_room(game, state):
+    """(ok, headline, detail) for `a step is seen from the next room`."""
+    parent = {l.get("id"): l.get("entry_from") for l in (game.get("locations") or [])
+              if isinstance(l, dict) and l.get("id")}
+    steps = [(npc, s) for npc, lad in _declared_ladders(state) for s in (lad.get("steps") or [])
+             if isinstance(s, dict) and s.get("seen_from")]
+    if not steps:
+        return None, "no ladder step declares seen_from", []
+    bad = []
+    for npc, s in steps:
+        where, seen = s.get("where"), s["seen_from"]
+        tag = f"{npc} step {s.get('n')}: seen_from `{seen}`"
+        if seen not in parent:
+            bad.append(f"{tag} is not a declared location")
+        elif where not in parent:
+            bad.append(f"{tag}: the step's place `{where}` is not a declared location")
+        elif seen != where and (not parent[seen] or parent[seen] != parent[where]):
+            bad.append(f"{tag} hangs off `{parent[seen]}`, `{where}` off `{parent[where]}` — "
+                       f"not the room next door")
+    head = f"{len(steps) - len(bad)}/{len(steps)} seen_from rooms share the step's parent"
+    if bad and _grandfathered((state or {}).get("slug"), state, SEEN_FROM_SINCE):
+        return True, head, [f"warn (grandfathered until it next ships) — {b}" for b in bad]
+    return not bad, head, bad
 
 
 def main():

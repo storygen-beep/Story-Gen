@@ -350,7 +350,10 @@ def check(state, strict=False, slug=None):
     # `board.characters[].schedule = [{where, weekdays, from, to}]` is the person's hours.
     # Each step's window, on each of its days, must be FULLY covered by the union of that
     # person's rows at the step's place (`gates._window_uncovered`, past midnight included).
-    # A step the opening plays is exempt: it has no hour.
+    # A step the opening plays is exempt: it has no hour. A step may declare `seen_from`, the room
+    # next door the person is seen from (a substitution's `requires_npc` must be in the same room,
+    # v2.py:6229-6230): his rows there count too. gates.py's `a step is seen from the next room`
+    # checks that room shares a parent with the step's place once the TOML exists.
     scheds = {c.get("id"): c["schedule"] for c in (board.get("characters") or [])
               if isinstance(c, dict) and isinstance(c.get("schedule"), list)}
     # A row the check cannot read is bad input, never "does not cover" (phase 5): a misspelled
@@ -387,7 +390,7 @@ def check(state, strict=False, slug=None):
             continue                                   # row 2 reports a broken window
         rows_here = []
         for r in scheds[n]:
-            if not isinstance(r, dict) or r.get("where") != s.get("where"):
+            if not isinstance(r, dict) or r.get("where") not in (s.get("where"), s.get("seen_from")):
                 continue
             wd = r.get("weekdays")
             rows_here.append((None if wd is None else [gates._ladder_day(d) for d in wd],
@@ -395,7 +398,8 @@ def check(state, strict=False, slug=None):
         judged += 1
         missing = gates._window_uncovered(days, w["from"], w["to"], rows_here)
         if missing:
-            bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')} "
+            seen = f" or {s['seen_from']}" if s.get("seen_from") else ""
+            bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')}{seen} "
                        f"{w['from']}-{w['to']} on {', '.join(gates._PR_DAYS[d] for d in missing)}")
     if not judged and not sched_bad:
         row("the person is there at the step's hour", None,

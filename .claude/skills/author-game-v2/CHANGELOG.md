@@ -5,6 +5,40 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — A step seen from the next room: `seen_from`, checked in two halves (World and Systems PRD, Phase 6A)
+
+**What.** A ladder step may declare `seen_from = "<location_id>"`, the room next door the person is in.
+The engine forces this shape: a substitution's `requires_npc` must be in the same room
+(`v2.py:6229-6230`). Split in two because shape.py reads the ledger only and `entry_from` lives only in
+the TOML (LO's call):
+- `scripts/shape.py`, row **the person is there at the step's hour**: the person's rows at the step's
+  place **or** at its `seen_from` must cover the whole window. The FAIL line names both rooms.
+- `scripts/gates.py`, new scored gate **a step is seen from the next room** (`_seen_from_next_room`,
+  above `main()`, registered in `_phase4_gates`): `seen_from` must share a parent (`entry_from`) with the
+  step's place. Red when it doesn't, or names no declared location. Never a `--ship` BLOCK.
+  - **n/a policy:** n/a when no step declares `seen_from`.
+  - **Grandfathering:** a game in `SHIP_GRANDFATHERED` gets warnings (the gate still passes) until it
+    ships on or after `SEEN_FROM_SINCE` (2026-10-02). billable_hours is not grandfathered.
+- Docs: `state.md` (the ladder row's optional `seen_from`; the schedule row's coverage), SKILL.md
+  gate-table row.
+
+**Why.** Notebook N20: billable_hours' Ethan step 1 plays in the bathroom while Ethan is in his room
+across the landing, and shape.py could only look in the step's own room.
+
+**Verified.** New `scripts/tests/test_seen_from.py` (9). shape.py: same room passes, `seen_from` with
+him scheduled there passes, `seen_from` without him fails. gates.py: sibling room passes, a room with
+another parent is red, an undeclared room is red, grandfathered warns and then is red once shipped since,
+no `seen_from` is n/a. Before/after, `git archive HEAD` export (vesper_two excluded): gate n/a on every
+game (no ledger declares `seen_from` at HEAD); shape row unchanged on every game (billable_hours still
+FAIL 6/7, Ethan step 1, until §9 G7). With LO's uncommitted G7 ledger and TOML (copied to scratch,
+read-only): shape row FAIL 6/7 → PASS 7/7, gate PASS 1/1. `the-release.md:100`'s cite moved
+`gates.py:13230` → `:13265` (read by hand); `shape.py:12` still holds; `cite_check.py --fix` 0 drifted;
+selfcheck clean (63 gates); pytest 582 passed.
+
+**Words:** +46, running total 146,147 / 149,283.
+
+---
+
 ## 2026-10-02 — The goal has no date, and its end is built: three checks (World and Systems PRD, Phase 6A)
 
 **What.**
