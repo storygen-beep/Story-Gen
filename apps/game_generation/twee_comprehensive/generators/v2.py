@@ -18433,64 +18433,72 @@ Config.navigation.override = function (psg) {
 
         # Travel-friction: charge a location's entry cost (time + traits) on a genuine
         # move. Runs AFTER rent so a blocked entry never charges (no double-charge on
-        # retry); a dress-code refusal never reaches :passagestart at all (E12). Only
-        # emitted when some location declares costs;
-        # otherwise movement stays free (backward-compatible).
+        # retry); a dress-code refusal never reaches :passagestart at all (E12), and
+        # neither does a move she can't afford (E13). Only emitted when some location
+        # declares costs; otherwise movement stays free (backward-compatible).
         has_crossing_costs = self._has_crossing_costs()  # EN11
         has_location_costs = any(
             (getattr(loc, 'properties', None) or {}).get('entry_costs')
             for loc in self.locations
         ) or has_crossing_costs
+        # E13 — an unaffordable move is refused BEFORE the room exists, the way E12 refuses
+        # a dress code: SugarCube asks Config.navigation.override before it creates the
+        # moment, so the room's body never runs (no current_location or visited_locations
+        # write, no history moment). Refused from :passagestart, the room still recorded the
+        # visit, and since only a move to a DIFFERENT room is charged, her next try was free.
+        # Chained onto E12's override in a game that has both.
+        travel_override_js = ""
         travel_cost_block = ""
-        if has_crossing_costs:
-            # EN11 — the same intercept, plus the areas this move crosses into. One bill:
-            # the room's cost and every toll, checked together, charged together.
-            travel_cost_block = """
-    // Travel-friction intercept: charge entry cost (and any area crossing) on a genuine move.
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var travelSlug = (setup.passage_to_location || {})[psg];
-        if (travelSlug) {
-            var destLoc = (setup.locations || {})[travelSlug] || {};
-            var curLoc = (sv.player && sv.player.current_location) || "";
-            // Only a real move (entering a DIFFERENT location) is charged — re-entry
-            // and back-from-a-menu are free.
-            if (String(destLoc.id) !== String(curLoc)) {
-                var crossCosts = setup.crossingCostsFor(travelSlug, curLoc);
-                var tripTraits = setup.mergeCostArrays(
-                    setup.locationCostTraitArray(travelSlug).concat(setup.crossingTraitArray(crossCosts)));
-                if (!setup.checkCostsAffordable(tripTraits)) {
-                    sv._travel_block_message = setup.getCostBlockedMessage(tripTraits);
-                    sv._travel_block_destination = psg;
-                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
-                    return;
-                }
-                setup.deductLocationCosts(travelSlug);
-                setup.deductCrossingCosts(crossCosts);
-            }
-        }
-    }
+        if has_location_costs:
+            if has_crossing_costs:
+                # EN11 — the room's cost plus the areas this move crosses into. One bill:
+                # the room's cost and every toll, checked together, charged together.
+                refuse_js = """        var trip = setup.mergeCostArrays(setup.locationCostTraitArray(slug).concat(
+            setup.crossingTraitArray(setup.crossingCostsFor(slug, setup.travelFrom()))));
+        if (setup.checkCostsAffordable(trip)) return null;
+        State.variables._travel_block_message = setup.getCostBlockedMessage(trip);
 """
-        elif has_location_costs:
+                charge_js = """        var crossCosts = setup.crossingCostsFor(travelSlug, setup.travelFrom());
+        setup.deductLocationCosts(travelSlug);
+        setup.deductCrossingCosts(crossCosts);
+"""
+            else:
+                refuse_js = """        if (setup.checkLocationCostsAffordable(slug)) return null;
+        State.variables._travel_block_message = setup.getLocationCostBlockedMessage(slug);
+"""
+                charge_js = """        setup.deductLocationCosts(travelSlug);
+"""
+            travel_override_js = """
+// Travel-friction: only a real move (entering a DIFFERENT location) is charged — re-entry
+// and back-from-a-menu are free. travelMoveSlug is the room's slug for a real move, else null.
+setup.travelFrom = function () {
+    return String((State.variables.player || {}).current_location || "");
+};
+setup.travelMoveSlug = function (psg) {
+    if (psg.indexOf("Location_") !== 0 || setup.infoPages.indexOf(psg) !== -1) return null;
+    var slug = (setup.passage_to_location || {})[psg];
+    if (!slug) return null;
+    var destLoc = (setup.locations || {})[slug] || {};
+    return String(destLoc.id) !== setup.travelFrom() ? slug : null;
+};
+// A move she can't afford is never entered.
+(function () {
+    var dressCode = Config.navigation.override;
+    Config.navigation.override = function (psg) {
+        var to = dressCode ? dressCode(psg) : null;
+        if (to) return to;
+        var slug = setup.travelMoveSlug(psg);
+        if (!slug) return null;
+""" + refuse_js + """        State.variables._travel_block_destination = psg;
+        return "TravelBlock";
+    };
+})();
+"""
             travel_cost_block = """
-    // Travel-friction intercept: charge entry cost on a genuine move.
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var travelSlug = (setup.passage_to_location || {})[psg];
-        if (travelSlug) {
-            var destLoc = (setup.locations || {})[travelSlug] || {};
-            var curLoc = (sv.player && sv.player.current_location) || "";
-            // Only a real move (entering a DIFFERENT location) is charged — re-entry
-            // and back-from-a-menu are free.
-            if (String(destLoc.id) !== String(curLoc)) {
-                if (!setup.checkLocationCostsAffordable(travelSlug)) {
-                    sv._travel_block_message = setup.getLocationCostBlockedMessage(travelSlug);
-                    sv._travel_block_destination = psg;
-                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
-                    return;
-                }
-                setup.deductLocationCosts(travelSlug);
-            }
-        }
-    }
+    // Travel-friction intercept: charge a genuine move (the override refused any she can't afford).
+    var travelSlug = setup.travelMoveSlug(psg);
+    if (travelSlug) {
+""" + charge_js + """    }
 """
 
         # FlagsPage belongs here too: it has a smartBack back-link and a sidebar button, so
@@ -18669,7 +18677,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-""" + return_place_js + clothing_override_js + """
+""" + return_place_js + clothing_override_js + travel_override_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with

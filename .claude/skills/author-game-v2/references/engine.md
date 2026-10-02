@@ -571,7 +571,7 @@ enforces it. Four readers:
 rules, each `slots_required` with optional `conditions` and a refusal `message`; the first rule
 whose conditions hold applies (`setup.checkLocationClothing`, `v2.py:2099`). It checks **coverage
 only** — a `dress` counts for `top` and `bottom` — so it is a floor. Entering in breach plays
-`ClothingBlock` (`v2.py:19074`) instead of the room, which never renders, so she isn't there and no
+`ClothingBlock` (`v2.py:19082`) instead of the room, which never renders, so she isn't there and no
 visit is recorded: the message, **"Change clothes"** and "Go back".
 ⚠️ **The loophole:** by default "Change clothes" opens the wardrobe from wherever she is, so any dress
 code is one click from met. `[settings] wardrobe_anywhere = false` shows it only when she came from a
@@ -783,6 +783,9 @@ v2.py:6031                // A location's per-entry cost lives in setup.location
 v2.py:18440               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
 ```
+
+A move she can't afford plays `TravelBlock` instead of the room, which never renders: no visit is
+recorded, nothing is charged, and her next try is charged in full.
 
 **This is what makes a schedule grid matter.** With free instant travel, "who is where at which
 hour" is a lookup table. Charge twenty minutes each way and the player cannot be everywhere, so
@@ -1012,7 +1015,7 @@ character — so a character's cards are a one-live-at-a-time chain.
 `v2.py:17924`. **Never paste `version = "1.0"` onto a quest card.** That key is required on canvas
 conditions and is wrong here.
 
-⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:19705-19708`). There is
+⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:19713-19716`). There is
 no separate "sidebar quest": edit a card and both surfaces move together, and a character with no
 card renders a blank next-row.
 
@@ -1087,8 +1090,8 @@ belongs.
 
 ```
 v2.py:6123    setup.getNpcsPresentAtLocation = function(locationId)
-v2.py:22747   the engine's own nav badges call it
-v2.py:22788   and again for the portrait row
+v2.py:22755   the engine's own nav badges call it
+v2.py:22796   and again for the portrait row
 ```
 
 **The false alarm:** hand-rolling presence from `[[npcs.schedules]]` gets overnight windows wrong —
@@ -1215,7 +1218,7 @@ paid_closing = "…" · cant_pay = "…" · partial_pay = "…"
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
    into `RentDay` (`v2.py:18391-18400`). Never mid-canvas.
-3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:19196`). Verified
+3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:19204`). Verified
    live.
 4. A short week with `on_short = "carry"` is paid as far as she can and the rest is owed next week
    (`setup.carryRent`, `v2.py:14417`); nothing ends.
@@ -1432,8 +1435,8 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 The sidebar prints **two** things about a trait, from two different places:
 
 1. **The auto Traits dump** — every declared `core_trait`, as a bare number.
-2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:19539`),
-   `trait_words` (`v2.py:19602`), `trait_bar` (`v2.py:19492`).
+2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:19547`),
+   `trait_words` (`v2.py:19610`), `trait_bar` (`v2.py:19500`).
 
 They do not know about each other. Band a trait without suppressing its number and the player reads
 *"Nothing under it"* and `cover 55` stacked on top of each other.
@@ -1483,8 +1486,8 @@ it blindly cannot break a build.
 
 | type | open-ended top band? | the rule | source |
 |---|---|---|---|
-| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4537-4543` · `v2.py:19554-19555` |
-| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4399-4409` · `v2.py:19623-19624` |
+| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4537-4543` · `v2.py:19562-19563` |
+| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4399-4409` · `v2.py:19631-19632` |
 | `trait_bar` | **no** | both `min` and `max`; `flag` is rejected outright; `bands` itself is optional | `template_import.py:4445`, `:4461-4467` |
 
 So the fix for a value off the top of the ladder is **not** to drop the `max` — that compiles on one
@@ -1618,14 +1621,14 @@ choice.
 
 There is no `@time` token either — `_resolve_at_references` (`v2.py:16996`) resolves `@player` and
 `@<npc>` and returns everything else untouched. The clock can be *shown* (`<<timeDisplay>>` at the
-top of `StoryCaption`, `v2.py:18873`/`:18890`, rendering `<<timeFormatted>>` at `v2.py:19404`) but it
+top of `StoryCaption`, `v2.py:18881`/`:18898`, rendering `<<timeFormatted>>` at `v2.py:19412`) but it
 cannot be *printed into prose* by any authored token.
 
 ### 32.2 Travel time is tagged on the card; activity time is tagged nowhere
 
 | what | tagged? | where |
 |---|---|---|
-| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:6068`, used at `:22750` / `:22784` |
+| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:6068`, used at `:22758` / `:22792` |
 | a choice's `time_progression_minutes` | **no** — emits a bare `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body | `v2.py:15647` |
 | a trait `costs` entry | yes, when unaffordable | `getCostBlockedMessage` `v2.py:6014` |
 
@@ -1658,7 +1661,7 @@ message (`v2.py:6533`). The same path also catches `max_triggers_per_day` exhaus
 (`v2.py:6487`).
 
 ⚠️ **Everywhere it is unset,** windowed work simply vanishes and the player has no surface that says
-when to come back. The `SchedulePage` (`v2.py:22339`) publishes hours for
+when to come back. The `SchedulePage` (`v2.py:22347`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
 
@@ -1691,7 +1694,7 @@ Re-read line by line on 2026-09-30.
 | | the bank-interest notification | `:6320` |
 | **no notation at all** | an unaffordable choice — *"Requires 3 Money (you have 1)"* | `:5368` |
 | | a location's nav cost tag — *"30m · 3 Money"* | `:5415-5419` |
-| | the sidebar `trait_bar` — *"Money: 12 / 100"* | `:18524` |
+| | the sidebar `trait_bar` — *"Money: 12 / 100"* | `:18532` |
 
 `self.rent_currency_symbol = rent_settings.get("currency_symbol", "$") or "$"` — `v2.py:1223`.
 Emitted to the runtime only when rent is enabled (`v2.py:3954`), so a game without
@@ -1702,22 +1705,22 @@ Since EN2c `currency_symbol` covers every rent screen, and nothing else.
 ### 33.2 The symbol is a prefix
 
 Every honouring site concatenates symbol-then-number:
-`"Pay " + _cur + _rent + " rent"` (`v2.py:19194`),
-`<<print _cur>><<print _money>>` (`v2.py:19191`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
+`"Pay " + _cur + _rent + " rent"` (`v2.py:19202`),
+`<<print _cur>><<print _money>>` (`v2.py:19199`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
 ### 33.3 The sidebar's label
 
 ```
-<<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>     v2.py:19503
-<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:19529
+<<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>     v2.py:19511
+<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:19537
 ```
 
 A `trait_bar` takes its label from the sidebar item's own `label`, and falls back to the trait's one
 name (`setup.traitLabel`, `v2.py:4700`, EN5), so `[[traits.labels]] key = "money", label = "Change
 bag"` now names the sidebar readout too (§30).
 
-`_traitMax` defaults to 100 (`v2.py:19502`), so an uncapped counter renders as a fraction of a
+`_traitMax` defaults to 100 (`v2.py:19510`), so an uncapped counter renders as a fraction of a
 maximum it does not have: a money trait with no `max` prints **`Money: 12 / 100`** over a 12% fill
 bar. Set `max` to something the currency will not exceed, or show money as `trait_words` with
 `show_value = true` and no bands (*"Money: 140"*, §30).
@@ -1912,7 +1915,7 @@ A top-level table (`template_import.py:983-996`, parsed at `:3201`; `enabled` de
 the block is present). Keys: `default_image`, the undress states `naked_image` / `topless_image` /
 `bottomless_image` / `underwear_image`, `pregnancy_trait` with `pregnancy_suffix` (default `Preg`), and
 `[[player_portrait.outfits]]` rules (`image`, `when` on worn type, corruption or a flag). It renders
-as the sidebar widget `<<playerPortrait>>` (`v2.py:19749`), resolved by `setup.getPlayerPortrait`
+as the sidebar widget `<<playerPortrait>>` (`v2.py:19757`), resolved by `setup.getPlayerPortrait`
 (`v2.py:1907`).
 
 ⚠️ **It renders only with `clothing_enabled = true`.** `getPlayerPortrait` is emitted inside the
@@ -2294,24 +2297,24 @@ The path from the TOML to the screen, traced end to end:
 |---|---|
 | read off `[project]`, defaulting to `""` | `template_import.py:2240` |
 | copied onto the project's metadata | `template_import.py:8423` |
-| escaped, then joined with ` · ` | `v2.py:18855-18856`, joined at `:18858` |
-| composed into the `versionFooter` widget | `v2.py:18863-18866` |
-| called unconditionally from `StoryCaption` — both variants | `v2.py:18886` and `:18901` |
+| escaped, then joined with ` · ` | `v2.py:18863-18864`, joined at `:18866` |
+| composed into the `versionFooter` widget | `v2.py:18871-18874` |
+| called unconditionally from `StoryCaption` — both variants | `v2.py:18894` and `:18909` |
 
 Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
 
 **Three facts that matter and are not guessable:**
 
 1. **The widget is ALWAYS defined, even when both keys are empty** — it just renders nothing. The
-   ternary at `v2.py:18863-18866` emits an empty `<<widget "versionFooter">><</widget>>` rather than
+   ternary at `v2.py:18871-18874` emits an empty `<<widget "versionFooter">><</widget>>` rather than
    nothing at all. Deliberate: SugarCube throws on a call to an undefined widget, and `StoryCaption`
-   calls it unconditionally in both its variants (`v2.py:18886`, `:18901`) — same reason the
+   calls it unconditionally in both its variants (`v2.py:18894`, `:18909`) — same reason the
    cheat-page and cast-page widgets are emitted outside their own feature blocks.
-2. **`html.escape` runs on both** (`v2.py:18855-18856`), so a stray quote in a date string cannot
+2. **`html.escape` runs on both** (`v2.py:18863-18864`), so a stray quote in a date string cannot
    break the build.
 3. **There is no build badge.** There is one build, and what a player needs to identify is the
    RELEASE — it is what their guide's codes are scoped to. The version string does that here and in
-   the cheat page's heading (`v2.py:18859-18861`).
+   the cheat page's heading (`v2.py:18867-18869`).
 
 ### Why it is not cosmetic
 
@@ -2390,8 +2393,8 @@ fall behind what a fresh game starts with. They used to be two hand-maintained s
 three-key dict, which is exactly how turning the phone on in a patch release left
 `$game_state.phone` undefined in every existing save with no build error anywhere.
 
-**`setup.backfillStateDefaults`** (`v2.py:18541`) is called from the `:passagestart` handler
-(`v2.py:18694`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
+**`setup.backfillStateDefaults`** (`v2.py:18549`) is called from the `:passagestart` handler
+(`v2.py:18702`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
 never overwrites an earned value, is idempotent, and hands out deep copies so a player's state can
 never alias the shared default object.
 
@@ -2503,7 +2506,7 @@ costs three build rounds rather than one.
 The suppression is `[[traits.labels]] in_dump = false` (or `hidden = true`, the secret-trait switch)
 and nothing else — §30 above says so, and it is worth repeating here because the wrong key is the
 obvious guess. `hide_value = true` only drops the number from a `trait_bar`'s own label
-(`v2.py:19526`); the auto Traits dump keeps printing the bare number under the band.
+(`v2.py:19534`); the auto Traits dump keeps printing the bare number under the band.
 
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
@@ -2708,10 +2711,10 @@ Three consequences, and the first is the one that matters:
    (`v2.py:15559`), so a spend is never silent. This is correct and needs no authoring.
 3. ⚠️ **The toast does not wrap and has no maximum width.** `.effect-toast` is
    `position: fixed; left: 50%; white-space: nowrap` with no `max-width` and no media query
-   (`v2.py:20616`). A five-effect choice produces a ~92-character line — roughly 650px at 14px — which
+   (`v2.py:20624`). A five-effect choice produces a ~92-character line — roughly 650px at 14px — which
    on a 390px phone is clipped at **both** ends, because the element is centred with
    `translateX(-50%)`. The warning variant `.effect-toast.notify-warning` was deliberately given
-   wrapping (`v2.py:20634`); the green one never was. **Not fixed** — recorded here so a future
+   wrapping (`v2.py:20642`); the green one never was. **Not fixed** — recorded here so a future
    change is a decision rather than a discovery.
 
 ---

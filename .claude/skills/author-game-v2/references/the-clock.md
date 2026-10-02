@@ -267,7 +267,7 @@ the entry as a dimmed, non-clickable line carrying the author's message instead 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
 
-**People and places both have this surface now.** `SchedulePage` (`v2.py:22339`) publishes every
+**People and places both have this surface now.** `SchedulePage` (`v2.py:22347`) publishes every
 declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only

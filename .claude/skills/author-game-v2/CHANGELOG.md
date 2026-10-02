@@ -5,6 +5,41 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a room she can't afford to enter records no visit (GLOBAL fix for games with entry costs, World and Systems PRD, Phase 7b)
+
+**Why.** A location's entry cost (`costs` on a location, `crossing_costs` on an area) was checked in the
+`:passagestart` handler, which redirected to `TravelBlock` 10 ms later. By then SugarCube had made the
+refused room's history moment and its body still rendered, so `current_location` and `visited_locations`
+named a room she never paid for. Since only a move to a different room is charged, her next try to enter
+it was free, and "Go back" from `TravelBlock` charged the room she came from.
+
+**What changed.**
+- `v2.py`: the affordability check moves into `Config.navigation.override`, the way the dress-code check
+  already works, chained onto that one in a game that has both. A refused room never renders: no state
+  write, no history moment, nothing charged. The charge itself stays in `:passagestart`. Two small helpers
+  (`setup.travelFrom`, `setup.travelMoveSlug`) hold the "a real move" test both halves share.
+- **Global for every game with entry costs:** members_only, orientation, probation and the_balance. Their
+  Story JavaScript changes; no passage body changes in any game; billable_hours and vesper are unchanged.
+  Play changes only where a cost can refuse, which needs a trait cost (`time` never refuses): orientation's
+  Quad (`money = 2`) today. The other three charge time only.
+- `references/engine.md` (travel friction): one sentence, the refused room never renders and her next try
+  is charged in full.
+- Citations re-pointed through the `git diff` line map: 54 moved `v2.py` cites, each target line checked
+  identical. Three stale cites the tools session is fixing were left alone: `the-economy.md:560-561` and
+  `the-clock.md:198` (`the-economy.md:561`'s old target, a line of the travel block, no longer exists).
+
+**Verified.** New `apps/game_generation/tests/test_unaffordable_room.py` (3 tests: an unaffordable entry
+leaves `current_location`, `visited_locations`, the history, the money and the clock alone; a second try is
+refused again, and once she can pay it is charged in full; an affordable entry is charged once and a
+re-entry is free). Two of them fail on the old generator. `test_refused_room.py` (the dress code, on the
+same fixture, so through the chained override) and `test_crossing_costs.py` still pass. Rebuilds of
+members_only, billable_hours, orientation, probation, the_balance and vesper from `git archive` exports
+all import; passage diff as above.
+
+**Words:** +29, running total 146,795 / 149,283.
+
+---
+
 ## 2026-10-02 — Systems and connections: a `--ship` REPORT row and a lint (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py` (above `main()`): `_systems_and_connections` counts the system cards

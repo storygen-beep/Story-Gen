@@ -174,7 +174,7 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 >
 > ⚠️ **Why it is shared code.** The engine's signatures are easy to get wrong by hand:
 > `applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap)` takes seven positional
-> arguments, not one options object (`v2.py:6905`, `:21819`), and `pickQuestsCards` returns `[]`
+> arguments, not one options object (`v2.py:6905`, `:21827`), and `pickQuestsCards` returns `[]`
 > for any scope but `"story_goals"` (`v2.py:17145-17146`). Every signature the harness wraps is one
 > nobody has to re-derive.
 
