@@ -307,6 +307,18 @@ def check(state, strict=False, slug=None):
             f"{len(goals)} goal(s), {ending} can end · no date" if not bad else
             f"{len(bad)} problem(s) in want.promise", bad)
 
+    # 9c · the goal's words name no date (the-want.md W10). Row 9b reads a `date` key; this reads
+    # the goal text itself, where "the week-12 review" hid. A WARN: listed, never a FAIL.
+    texts = ([("want.promise.goal", prom.get("goal"))] if isinstance(prom.get("goal"), str) else []) + \
+        [(f"goals[{i}]", g.get("goal")) for i, g in enumerate(goals) if isinstance(g.get("goal"), str)]
+    if not texts:
+        row("a goal's words name no date", None, "n/a — no goal written yet")
+    else:
+        dated = [f"{w}: \"{t[:60]}\" names \"{m.group(0)}\" — the goal has no date (D8)"
+                 for w, t in texts for m in [gates._DATE_RE.search(t)] if m]
+        row("a goal's words name no date", "warn" if dated else True,
+            f"{len(texts) - len(dated)}/{len(texts)} goal(s) undated", dated)
+
     # 10 · a READY page is signed (the spine's page rules).
     # D13 (LO decided, 2026-09-30): LO signs whenever LO has read the page. The day-after
     # compare of `signed_at` with `drafted_at` is gone; it blocked a real same-day approval

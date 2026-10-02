@@ -52,7 +52,8 @@ a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*, and 
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
 count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain). It also names
 `ends_flag`, the flag the game sets when it is met: a goal whose end the game can't see is one the
-player never finishes.
+player never finishes. Checked: `shape.py` warns on a date in a goal's words; gate *a goal's end is
+built* warns on an `ends_flag` nothing sets; `--ship` lists every line naming a future week or day.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.

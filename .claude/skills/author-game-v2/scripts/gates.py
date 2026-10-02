@@ -11462,6 +11462,7 @@ def ship_rows(slug, root=None):
              | {j for js in SHIP_BLOCK_JOINS.values() for j in js})
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
+    report.append(_future_dates_row(model, game))
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
@@ -12733,6 +12734,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("one name per trait", ok, head, detail)
     ok, head, detail = _adult_wording(model, game)
     gate("adult wording", ok, head, detail)
+    gate("a goal's end is built", *_goal_end_is_built(game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -12902,6 +12904,72 @@ def _home_is_a_bedroom(game, state, chars, homes):
         return [], [f"warn (grandfathered until it next ships) — {r}" for r in reasons]
     return reasons, []
 
+
+
+# ── the-want.md "The goal has no date" (W10) and its end is built (W11) ────
+# A date in a goal's words is a promise the engine never keeps (a sidebar countdown only
+# displays). `_DATE_RE` finds one: "week 12", "the week-12 review", "week twelve", "day 30",
+# "three months". `_FUTURE_DATE_RE` is the subset a player reads as an appointment: "week
+# twelve", "day 30", "in thirty days", "two weeks from now". shape.py reads `_DATE_RE` too.
+_NUM_WORDS = (r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen"
+              r"|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty"
+              r"|sixty|ninety|a hundred)")
+_DATE_RE = re.compile(rf"\b(?:(?:week|day|month)[\s-]+{_NUM_WORDS}|{_NUM_WORDS}[\s-]+(?:weeks?|days?|months?))\b",
+                      re.I)
+_FUTURE_DATE_RE = re.compile(
+    rf"\b(?:(?:week|day)[\s-]+{_NUM_WORDS}|in\s+{_NUM_WORDS}\s+(?:weeks?|days?|months?)"
+    rf"|{_NUM_WORDS}\s+(?:weeks?|days?|months?)\s+from\s+now)\b", re.I)
+
+
+_PAST_DURATION_RE = re.compile(r"\b(?:not|never|nobody|nothing|no one|first time)\b|n't\b", re.I)
+
+
+def _goal_end_is_built(game, state):
+    """(ok, headline, detail) for `a goal's end is built`.
+
+    Each goal in `want.promise.goals[]` with `ends_when`, except the last, names an `ends_flag`,
+    and some effect in the TOML sets that flag (`_flags_ever_set`). A WARN by type: a scored gate,
+    never a --ship BLOCK. n/a: no ledger, or no goal but the last can end."""
+    prom = (((state or {}).get("want") or {}).get("promise"))
+    goals = [g for g in ((prom or {}).get("goals") or []) if isinstance(g, dict)] \
+        if isinstance(prom, dict) and isinstance(prom.get("goals"), list) else []
+    ending = [g for g in goals[:-1] if str(g.get("ends_when") or "").strip()]
+    if not ending:
+        return None, "no goal but the last declares ends_when", []
+    set_flags = _flags_ever_set(game)
+    bad = []
+    for g in ending:
+        label = str(g.get("goal") or "?")[:50]
+        flag = g.get("ends_flag")
+        if not flag:
+            bad.append(f"\"{label}\": ends_when is set and ends_flag is not — name the flag set when it is met")
+        elif flag not in set_flags:
+            bad.append(f"\"{label}\": nothing in the TOML sets `{flag}` — the goal can never end")
+    return (not bad, f"{len(ending) - len(bad)}/{len(ending)} goal ends are built (the last goal "
+                     f"is exempt)", bad)
+
+
+def _future_dates_row(model, game):
+    """The --ship REPORT row: player-facing lines that name a future week or day, listed so the
+    author checks each against the-want.md W10 (an event that is built, or no date)."""
+    parts = [(c["id"], t) for c in model for b in c["beats"] for t in b.text]
+    for path, node in _walk_paths(game):
+        if isinstance(node.get("text"), str) and ("targetType" in node or "config" in node):
+            parts.append((".".join(k for k in path if k != "[]") or "label", node["text"]))
+    hits = []
+    for where, text in parts:
+        for m in _FUTURE_DATE_RE.finditer(str(text)):
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 40)
+            # "hasn't answered you in eight months" is the past: an "in N …" after a negation
+            # in the same sentence is a duration, not an appointment.
+            if m.group(0).lower().startswith("in") and _PAST_DURATION_RE.search(
+                    re.split(r"[.!?]", text[:m.start()])[-1]):
+                continue
+            hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
+    return ("a dated line names a built event", not hits,
+            f"{len(hits)} line(s) name a future week or day — check each is built or cut (W10)"
+            if hits else "no line names a future week or day", hits[:12]
+            + ([f"… and {len(hits) - 12} more"] if len(hits) > 12 else []))
 
 
 def main():

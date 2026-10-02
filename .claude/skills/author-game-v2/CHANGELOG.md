@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The goal has no date, and its end is built: three checks (World and Systems PRD, Phase 6A)
+
+**What.**
+- `scripts/shape.py` — new row **a goal's words name no date** (WARN): `want.promise.goal` and each
+  `goals[].goal` are searched for a week, day or month ("week 12", "the week-12 review", "week twelve",
+  "day 30", "three months"). Row 9b only read a separate `date` key. n/a with no goal written.
+- `scripts/gates.py` — new scored gate **a goal's end is built** (`_goal_end_is_built`, registered in
+  `_phase4_gates`): each goal with `ends_when`, except the last, names an `ends_flag` and some
+  `flagEffects` sets it (`_flags_ever_set`). A WARN by type: never a `--ship` BLOCK (tested), so it shows
+  inside "every other gate" and needs no grandfathering. n/a: no ledger, or no goal but the last can end.
+- `scripts/gates.py` — new `--ship` REPORT row **a dated line names a built event** (`_future_dates_row`,
+  one inserted line in `ship_rows`): player-facing lines naming a future week or day ("week twelve",
+  "day 30", "in thirty days", "two weeks from now"), each listed with its canvas, for the author to check
+  against W10. An "in N …" after a negation in the same sentence ("hasn't answered you in eight months")
+  is a past duration and skipped. ok when nothing is listed.
+- The two regexes (`_DATE_RE`, `_FUTURE_DATE_RE`) live in gates.py; shape.py reads `gates._DATE_RE`.
+- Docs: SKILL.md gate-table row, its REPORT list and its `shape.py` row; `the-want.md` §0 says what is
+  checked; `state.md`'s "planned check" comment names the gate.
+
+**Why.** billable_hours' goal was a date that nothing built (notebook N18); the ledger said yes and
+the game had nothing.
+
+**Verified.** New `scripts/tests/test_goal_dates_and_ends.py` (16): "the week-12 review" warns and "be
+kept on" passes; an `ends_flag` nobody sets warns; `ends_when` without `ends_flag` warns; the last goal is
+exempt; "at week twelve" and "in thirty days" are listed and a past duration is not. Before/after on
+every game, `git archive HEAD` export (vesper_two excluded); before, none of the three rows existed:
+- gate: billable_hours FAIL (warn) 1/2, `contract_signed` set by nothing (next release); every other
+  game n/a.
+- shape row: billable_hours PASS 4/4 undated; members_only PASS 1/1; probation WARN ("monthly reviews
+  loosen one rule each: da…" names "day 30"); orientation and the_balance n/a.
+- REPORT: billable_hours 7 lines (six "week twelve" lines, which the built review now backs, and one
+  false hit, walkin_firm "the day two associates"); vesper 4 (kess_makes_the_blank "day one",
+  cap_case_insider "in ten days", hub_grier "in four months", cap_the_question "in one week");
+  media_lab, members_only, orientation, probation, the_balance none.
+`the-release.md:100`'s cite moved `gates.py:13162` → `:13230` (read by hand); `cite_check.py --fix` 0
+drifted; selfcheck clean (62 gates); pytest 573 passed.
+
+**Words:** +74, running total 146,101 / 149,283.
+
+---
+
 ## 2026-10-02 — Gate 12 `residents have homes`: a home is a bedroom (World and Systems PRD, Phase 6A)
 
 **What.** `scripts/gates.py` gate 12 passed any declared location as a home. It now also lists, as red
