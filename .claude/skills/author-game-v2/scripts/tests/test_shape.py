@@ -73,6 +73,15 @@ def test_an_empty_ledger_while_the_spine_is_written_is_na():
     assert failing({"phase": "idea"}, strict=False) == []
 
 
+def test_a_promise_with_no_beat_yet_is_na_while_the_spine_is_written():
+    # The Billable Hours test: at phase `idea` the promise names a goal before the release page
+    # says which beat keeps it alive. Lenient mode reports n/a, like its sibling rows; strict fails.
+    s = full()
+    s["release_page"].pop("promise_alive")
+    assert rows(s, strict=False)["the promise has a beat this release"][0] is None
+    assert rows(s, strict=True)["the promise has a beat this release"][0] is False
+
+
 def test_past_the_spine_is_strict():
     assert all(shape.is_strict({"phase": p}) for p in ("spine", "board", "sheets", "release"))
 

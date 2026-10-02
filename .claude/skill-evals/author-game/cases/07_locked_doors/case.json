@@ -1,0 +1,7 @@
+{
+  "id": "07_locked_doors",
+  "source": "SKILL_TEST_REVIEW J1 (number lock carried locked_text; text doubled, real label hidden)",
+  "rule": "engine.md \u00a715; gate 'a locked door says why'",
+  "task": "In hub_ethan_landing, add two choices that stay visible but locked until Emma qualifies: 'Knock on his door.' needing Nerve 10, and 'Go into his room.' needing the flag ethan_watched_shower.",
+  "target_lints": []
+}

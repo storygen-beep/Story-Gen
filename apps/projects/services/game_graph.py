@@ -365,6 +365,8 @@ def build_game_graph(
                             # EN1 — opt-in step consumption (absent unless authored)
                             "consume_on": c.trigger.consume_on or None,
                             "retry_after_days": c.trigger.retry_after_days,
+                            # E2 — opt-in seen-weighting of a random canvas
+                            "seen_weight": c.trigger.seen_weight,
                             "pre_substitution_effects": (
                                 c.trigger.pre_substitution_effects
                                 if c.trigger.pre_substitution_effects

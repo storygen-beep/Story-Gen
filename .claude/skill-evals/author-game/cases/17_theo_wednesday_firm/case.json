@@ -1,0 +1,7 @@
+{
+  "id": "17_theo_wednesday_firm",
+  "source": "members_only #47 (NPC double-booked in two places)",
+  "rule": "the-board.md schedules",
+  "task": "Theo now also spends Wednesday afternoons at the firm, from 14:00 to 19:00. Add that to his schedule.",
+  "target_lints": []
+}

@@ -159,10 +159,9 @@ def _stock(
 ) -> int:
     """Stock the whole harvest in ONE options/add_bulk call.
 
-    This is the one place this script deliberately parts company with
-    fetch_pornhub.py, which posts one url at a time. That choice was made to keep
-    the first PornHub run byte-comparable with the proven related path, and it is
-    affordable there because `site:` scoping keeps a yield at tens of urls.
+    fetch_related.py and fetch_pornhub.py now stock the same way (they posted one
+    url at a time until 2026-10-02). This one keeps its own copy because it types
+    rows off `fmt` rather than off the url alone.
 
     An UNSCOPED search is the opposite case — full-depth Google is ~400 urls — and
     the per-url path is measured at 214 ms/url against a 4.4 MB store (see

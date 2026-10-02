@@ -1,0 +1,7 @@
+{
+  "id": "11_tonight_with_diane",
+  "source": "probation SKILL_TEST_FINDINGS #56 ('tonight' choice had no time gate and showed at noon)",
+  "rule": "the-clock.md C3",
+  "task": "Add a choice 'Sit up with Diane tonight.' to hub_diane_home.",
+  "target_lints": []
+}

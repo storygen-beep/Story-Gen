@@ -1,15 +1,16 @@
 # The Map — the world as a place, not a list of rooms
 
 Read this in the **board** phase, before a character is placed and before a word of prose is
-written. The map is the only system the player touches on **every single turn**, and the engine
-validates almost none of it.
+written. The map is infrastructure, not a system (`the-systems.md` SY1), and the only one the player
+touches on **every single turn**; the engine validates almost none of it.
 
 > ⚠️ **Root the world outdoors, in more than one zone.** The passing games do: Shady Deals'
 > [City Map] links five districts (`data-passage="Downtown Road"`, Harbor, Suburbs, Outskirts,
 > City Center), and Course of Temptation's [Maps] splits into `<<tab Campus>>` and `<<tab Town>>`.
-> A world of one house plus a row of shops is not that shape, however many gates it passes —
-> unless the fantasy is taboo at home (`want.fantasy_shape = "taboo_at_home"`), where the house is
-> the point. *(LO decided.)*
+> A world of one house plus a row of shops is not that shape, however many gates it passes, and
+> that holds for every fantasy. In a taboo-at-home game (`want.fantasy_shape = "taboo_at_home"`) the
+> house is her hub, the place she returns to; the world outside is what makes the house risky.
+> *(LO decided.)*
 > **An example outranks every rule beside it: a rule is read, an example is copied.** So this file
 > teaches a *menu* you must choose from and carries no picture you can copy. See `SKILL.md`,
 > operating rules.
@@ -30,7 +31,7 @@ measured against five named shipped games.
 | **`two_hub`** | two strong anchors — home and work — fanning to rooms, joined by a commute | a premise anchored to two places |
 | **`map_hotspots`** | a drawn map with clickable districts | a large, replay-heavy world, 10+ zones |
 | **`street_mesh`** | named streets, each listing its neighbours and its venues | a city that should feel real without a drawn map |
-| **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain | heavily scripted content where a map is friction |
+| **`time_slot`** *(the anti-map)* | no geography at all — a fixed Morning → Work → Evening chain; the one exception to the zone rule, and each slot still carries a thread of her life, with its people and its link to the hook | heavily scripted content where a map is friction |
 
 **Record the pick in `board.map.archetype`. Gate 28 fails a board that has not chosen.**
 
@@ -41,7 +42,8 @@ measured against five named shipped games.
 
 **Then size it on two axes, and they are independent:**
 
-- **Scale** — how many zones. Match it to the cast; a small cast does not need a city.
+- **Scale** — how many zones. Match it to the threads of her life (`the-want.md` §6), not to the
+  cast size: each thread needs its place, and two threads may share one.
 - **Aliveness** — how lived-in. A *tight slice* holds only what the content needs; a *living world*
   carries ambient traffic, routines and events the player did not trigger. This is a
   **content-budget fork, not a quality dial** — every ambient zone is content you have to fund.
@@ -81,6 +83,17 @@ This cannot be inferred and must not be guessed. A tenant working nights legitim
 schedule row; a shopkeeper legitimately has no bed in the player's house. Only a declaration
 separates *lives elsewhere* from *was never given a room*. Gate 12.
 
+**A home is laid out like a house.** The defect this stops: the kitchen as the house hub, the
+people who live there homed in it, the bathroom folded into a landing.
+
+- **A home is a bedroom:** a room of the person's own (a couple shares one). Never the hub, a
+  thoroughfare, the kitchen, a hallway or a landing.
+- **The house is entered through its entry.** Its hub is the hall or front door, named for the home
+  ("Home", "The House"), and the street's button shows that name. The kitchen, the bathroom and the
+  bedrooms are rooms off it, never the hub.
+- **One room, one job:** a shared bathroom is its own room (R6c), not part of a hallway.
+- **Plain names** a player reads at a glance: "Upstairs", not "The Landing".
+
 ⚠️ **A room the Want promises must exist.** If the Want sells access to somewhere as a reward for
 topping out a tier — *her father's room*, *the office*, *upstairs* — that location is owed. Nothing
 else in the scoreboard can see this: the meter-ceiling gate checks that authored **gates** reach a
@@ -106,11 +119,24 @@ location. This is not decoration:
                  └── the shops
 ```
 
+Inside the house, the same shape one level down (R2):
+
+```
+✅  the street ── Home (the hall) ─┬── the kitchen        the hall is the hub
+                                   ├── the bathroom
+                                   └── Upstairs ─┬── her room
+                                                 └── a bedroom for each other resident
+
+❌  the street ── The Kitchen ─┬── the landing           the kitchen is the hub; the bathroom
+                               └── her room              and his room are the landing
+```
+
 **The declared `exterior` must be a root** — no `entry_from` — with the home base among the
 things that hang off it. Where the fiction wants two separate grounds (a home and a town that are
 genuinely apart), make them **two roots joined by a travel canvas**, not one nested inside the other,
 and list both in `board.map.roots[]`. Gate 11 walks on foot, so it exempts the second root only when
-that root is marked `offscreen` or sealed (entered only by a canvas exit).
+that root is marked `offscreen` or sealed (entered only by a canvas exit), and with it every room
+whose `entry_from` chain ends at that root.
 
 The diagram above is the topology. This is what it is in keys, and it is the whole of the
 difference — one field, present or absent, on the location the board names as `exterior`:
@@ -313,7 +339,7 @@ rather than against a guess.
   every room inside it.
 - **No fast travel**, for now.
 - **Places she has not found are hidden** (`hidden_until`); **closed places show why**
-  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4175`).
+  (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4684`).
 - **Guidance cards carry place, time and what is waiting**, and a travel link carries the engine's NEW
   mark when something new waits there.
 - **Faces stay on travel cards.**
@@ -325,7 +351,7 @@ rather than against a guess.
 | | |
 |---|---|
 | **Gate 11 · world reachable** | every location reachable on foot from the start, unless `offscreen` or deliberately sealed — a second root in `board.map.roots[]` needs one of the two |
-| **Gate 12 · residents have homes** | every declared character has a `home` that is a real location |
+| **Gate 12 · residents have homes** | every declared character has a `home` that is a real location or `offscreen`. Not checked yet (planned): that the home is not the hub, a thoroughfare or a container, and is shared only by a declared couple (R2) |
 | **Gate 28 · the map is a place** | `board.map.archetype` is one of R0's five, **and** the declared `exterior` is a root rather than a leaf off an interior room (R3) |
 | **Lint · the prose names places the map does not have** | place nouns used three or more times with no matching location |
 | **Lint · a door opens onto something** | every `[locations.door]`: one no option can ever open, one whose only option is `enter`, a knock nobody is scheduled to answer, and a door on a room the whole cast passes through (R6–R6c). Silent on a game that declares none |

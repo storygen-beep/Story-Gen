@@ -1,0 +1,7 @@
+{
+  "id": "18_rent_friday_scene",
+  "source": "billable_hours SKILL_TEST_FINDINGS F4 (rent paid in an authored scene beside the engine's own charge)",
+  "rule": "engine.md \u00a726 rent page",
+  "task": "Write the Friday breakfast scene where Martin collects the rent from Emma.",
+  "target_lints": []
+}

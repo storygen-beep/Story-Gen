@@ -3,6 +3,10 @@
 The ascent tiers are this skill's whole thesis: **a meter that buys access.** Every other file here
 is about *what* the meter unlocks. This one is about the meters themselves.
 
+**Meters live inside systems.** A meter is what a system writes and reads (`the-systems.md` SY1): the
+job writes her wage and her nerve, the gym her body, the bill her debt. That file owns the activity and
+its card; this one owns which meters exist, who owns them, and what the climb costs.
+
 **Three parts, and they are read in order.**
 
 **W1–W6 — which meters exist and who owns them.** The decision that comes before every other one on
@@ -79,6 +83,8 @@ dropped it.
 | `"cast"` | *they* are what change; you work on each person in turn | little or no player tier · **two meters per character**, one for access and one for willingness, gating that person's whole ladder |
 | `"both"` | a player floor under per-character arcs | a player tier as the *floor* on the most explicit content, the per-character meter as the *spine* of each arc |
 
+A system's own pay and lewd ladders are not this fork; they follow `the-systems.md` SY8.
+
 **Neither is better.** A ladder game is cheaper to author and gives every player the same climb; a
 roster game costs more and gives a player somebody to be attached to — which is what
 `SKILL.md`'s "the person is the product" is about. Pick on the premise, write it down, and let the
@@ -100,6 +106,7 @@ Declared per man at the Want (`want.cast[].keeps`), from the fantasy and `who_cl
 | her change | a step counter + memory flags | Cupid's Way, In Her Own Hands |
 | relationships | Want + Warmth; the split picks lover vs user (**thin**: 1 of 4 games does it fully, R5 Part 1b) | Course of Temptation's dating |
 | power | Want + Power; Power changes which acts happen | Shady Deals |
+| a system, not him | `none — ` and why: he does not climb; he belongs to a system card's `people[]` | a landlord who is the bill's deadline |
 
 It can differ per man: a pressure man gets Power, a nice man doesn't. The author declares it; LO
 approves. **Whatever he keeps:**
@@ -183,7 +190,7 @@ condition, a `costs` entry, or a quest goal. Deterministic — either a reader e
 - **`costs` counts as a read.** The engine filters an unaffordable choice rather than letting it
   fail (`engine.md` §27), so a meter spent through `costs` is gating.
 - **`<npc>_stage` is exempt** when the prefix names a declared character: the *engine* reads those
-  (`v2.py:5549-5554`). `sex_stage` is not exempt — no character is called `sex`.
+  (`v2.py:6244-6249`). `sex_stage` is not exempt — no character is called `sex`.
 
 ⚠️ **This gate can be satisfied cheaply and wrongly** — one throwaway `arousal >= 1` per dead meter
 and it goes green. That is the deleted gate 22's failure mode in a new coat. The check can only ask
@@ -203,7 +210,9 @@ reader families count, and all three are legitimate: a **condition predicate** (
 (`clothing_rules`). The
 portrait override is a *display* reader rather than a gate, and **W7 is what says that is the
 field's normal case**. Same fig-leaf risk as above, answered the same way: the summary
-prints garments against reads, so a thin pass is visible.
+prints garments against reads, so a thin pass is visible. **That gate is the floor; the rule is ≥3
+readers for every declared state and key item** (W7; planned gate: `every clothing state is read
+three times`).
 
 **⚠️ AND A READ ONLY COUNTS IF SOMETHING SHE CAN GET SATISFIES IT.** The gate above asks whether
 the wardrobe is read. It cannot ask whether the read can ever be **true**. A clothing condition that
@@ -216,11 +225,11 @@ location** plus `price > 0`, because `renderShopPage` stocks only `!initial && p
 `wardrobeEffects = [{ item_id = "…", action = "add" }]` on a choice or an `exit_block.config`.
 Zero-based; no threshold to invent. **A shop existing does not make a garment buyable:** a
 non-initial garment at `price = 0` is invisible on the very shop page it sits beside
-(`v2.py:2077` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
+(`v2.py:2333` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:2536` takes it as a bare string,
-`v2.py:9935` compares it to each location's slug). A typo produces no error, no warning and no shop
+⚠️ **`shop_location` is never validated** (`template_import.py:2824` takes it as a bare string,
+`v2.py:10717` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.
 
@@ -247,7 +256,8 @@ the-company  player.horny   24 gates  11 rungs   2,20,30,40,49,50,60,70,80,90,99
 DoL          exhibitionism  21 gates  11 rungs   15,19,25,35,40,50,55,60,75,80,95
 ```
 
-**8–17 rungs, densest at the bottom, lowest rung at a median of 5.**
+**8–17 rungs, densest at the bottom, lowest rung at a median of 5.** A system's lewd ladder is a
+shorter object: ≥4 lewd rungs, ≥2 acts per rung (`the-systems.md` SY8).
 
 ⚠️ **That number is about the meter that CARRIES the game, and it does not transfer to the cast.**
 Every meter in the table above is a player ascent meter. A per-character willingness meter is a
@@ -307,8 +317,8 @@ Twelve of twenty-five male-heavy corpus games carry no reputation meter. For a f
 known is the fantasy and its absence is the complaint: **declare who notices what she does, even
 with no meter at all.**
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps rumours per person and passes them
-> from one to the next; a man who assumed reads them back — *"Maybe the rumors are wrong."*
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps what each person saw; a witness tells others only in scenes she is
+> in, one hop, and a rumour someone only heard is never retold; a man who assumed reads them back — *"Maybe the rumors are wrong."*
 > `shady-deals` lets reputation change who dares: at 4,000 the man who caught her backs off —
 > *"Sorry, I didn't mean to bother you. I'm not going to stand in your way..."* — and her crew talks
 > about what she is known for. `cupids-way` marks her publicly and for good, and her boyfriend uses
@@ -355,7 +365,7 @@ audience meter is W5's thing, and W5's test applies to it, not this one's.
 
 `patriarch`'s shape has a native home here and it is the **Lane 3 dispatcher**. A substitution rule
 already takes an optional `conditions` block, evaluated per rule at
-`v2.py:5337` — so banding a walk-in on the meter is one block, no engine work, no new primitive.
+`v2.py:5993` — so banding a walk-in on the meter is one block, no engine work, no new primitive.
 
 ```toml
 [[canvases.trigger.substitutions]]          # the existing rule, untouched
@@ -374,8 +384,8 @@ conditions       = { version = "1.0", logic = "AND", items = [
 ```
 
 ⚠️ **APPEND it, never prepend it.** Rules sharing an `exclusive_group` share **one dice over
-cumulative buckets** (`v2.py:5345`), and a slot the dice claims whose conditions fail **falls
-through to solo rather than promoting the next rule** (`v2.py:5378`). Appended, the bonus rule
+cumulative buckets** (`v2.py:6001`), and a slot the dice claims whose conditions fail **falls
+through to solo rather than promoting the next rule** (`v2.py:6034`). Appended, the bonus rule
 takes a bucket that already fell to solo, so outside the band **nothing changes**. Prepended, it
 takes the bucket in *front* of the rules below it and silently cuts their rate at every band —
 including the NPC walk-ins, which have nothing to do with this meter.
@@ -543,11 +553,13 @@ carries, plus how many distinct shapes exist across the cast.
 
 ---
 
-## W7 · The body's meters are read to colour, not to refuse
+## W7 · The body's meters are read to colour, and gate only at doors that say why
 
 > **A body value — clothes, arousal, hygiene — earns its place by changing the words in
-> a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. If you
-> find yourself writing gates on it, you are building the wrong kind of meter.**
+> a lot of places, not by closing doors in a few. Build it to be READ CHEAPLY AND OFTEN. Gate on
+> it only at a door that says why: a daring price to leave in a revealing state, a dress code, a
+> place that wants her bare. A gate that hides its reason is the field's biggest clothing failure
+> (41 of 194 classed player failures, round 9a §5).**
 
 W5 is the counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
 gating meters. **The body is a fourth shape and it behaves like none of them.**
@@ -577,25 +589,19 @@ gates 47% of its pregnancy reads — of **34**.
 > **A body system either stays small and gates, or grows large and colours. Nothing in the corpus
 > is both big and gating.**
 
+**Clothing is the one body system with doors, and the doors are few and loud.** Course of
+Temptation enforces a dress code on 61.9% of its location passages (78 of 126; round 9a §2), and its
+clothes still gate only a small share of reads: a dress code is one read per place, and the rest are
+lines. Each of its blocks names what is missing (*"(Need Exhibitionism N)"*), and In Her Own Hands'
+club refusal sends her back to the wardrobe. Gate at the door, say why at the door, offer the change
+(`engine.md` §17: a dress code offers it; an `entry_conditions` refusal cannot yet).
+
 ### The band ladder — write it once
 
 The mechanic underneath every one of these is the same: a number, a ladder of bands, and a short
 string per band. What separates a good implementation from a bad one is **where the ladder lives.**
-
-`degrees-of-lewdity` writes it once, in a widget, seven rungs wide:
-
-```
-<<if $hygiene gte 2000>>   You are filthy.
-<<elseif $hygiene gte 1600>>You are soiled.
-<<elseif $hygiene gte 1200>>You are smelly.
-<<elseif $hygiene gte 800>> You are messy.
-<<elseif $hygiene gte 400>> You are neat.
-<<elseif $hygiene gte 1>>   You are clean.
-<<elseif $hygiene lte 0>>   You are speckless.
-```
-
-`corpo-life` writes the identical structure **inline, across 5,785 sites** — clamp, then band, then
-set a descriptor string, copy-pasted through the game instead of factored into one place.
+One counted game writes it once, seven rungs wide; `corpo-life` (counted) writes the identical
+structure **inline, across 5,785 sites**.
 
 Note what the bands say: **a body state in words**, printed beside the number (M7), so the player
 meets both how she is and how far. Our surface for this is `trait_status_text` (`engine.md` §30) — one
@@ -604,10 +610,10 @@ authored ladder, rendered wherever the trait sits.
 ### What the player is shown
 
 **Numbers are shown and named, and the world reacts to them** *(LO decided, D1; R3 K12: corruption is
-a number in 13 of 15 top games)*. `degrees-of-lewdity`'s body system is `$exposed`, a three-state value
-the author writes once and the engine derives from the worn set; the world then reads it about **900
-times**, and 82% of those reads only change words. **One derived number, cheap enough to test that the
-whole world tests it.** W3's gate makes sure somebody reads it.
+a number in 13 of 15 top games)*. One counted game's body system is a three-state value derived from
+the worn set; its world reads it about **900 times**, and 82% of those reads only change words. **One
+derived number, cheap enough to test that the whole world tests it.** Ours is `worn_exposure`, and the
+states read through it. W3's gate makes sure somebody reads it.
 
 1. **Her traits show as name + number**, with a band word beside it where it has bands (M7). One name
    per trait, everywhere (`engine.md` §30).
@@ -620,45 +626,33 @@ whole world tests it.** W3's gate makes sure somebody reads it.
    *"14 / 20"* (`the-voice.md` R3b), and a locked button prints the need (R4). Players ask *"how do I
    raise X"* far more than *"show me X"* (4 of 22,252 comments ask to see a stat).
 
-⚠️ **`worn_corruption` and `worn_beauty` cannot stand in for `$exposed`.** Both are backed by
-`getWornStatMax`, **which skips a slot with nothing in it** (`v2.py:1578-1579`), so a naked player
-reads the same as one in plain underwear.
+⚠️ **The one number is `worn_exposure` (0 covered, 1 underwear-level, 2 bare), and the states are
+its readers.** `worn_corruption` and `worn_beauty` skip an empty slot, so naked reads the same as
+plain underwear; `worn_exposure` reads the empty slot, and `clothing_slot` names a state exactly
+("no bra"). The mechanism is `engine.md` §17. Design the states first — dressed, skirt, no bra, no
+panties, underwear, towel, topless, naked — and read each one in ≥3 places: a leave rule, a place,
+an event or an NPC line (round 9a, the wardrobe card; planned gate: `every clothing state is read
+three times`).
 
-**`worn_exposure` is the real equivalent, and it exists as of 2026-08-28.** A derived 0/1/2 — 0
-covered, 1 underwear-level, 2 bare — computed by `setup.getWornExposure` (`v2.py:1608`), the one
-aggregate that reads an empty slot: the upper region is bare unless `top` or `dress` fills it and
-underwear-level if only `bra` does, the lower likewise, and the result is the max of the regions and
-any garment's own declared `exposure`. The predicate is `worn_exposure` (`v2.py:4111`, lock text at
-`:7900`), the garment field is `exposure` (`template_import.py:2525`), and `engine.md` §17 lists it
-with the rest.
-
-⚠️ **And copy where the reads live, not just the number.** In `degrees-of-lewdity` the passages that
-gate on clothing most are Cliff Street, the Arcade, the Moor, Connudatus Street and the Park — the
-walk to work, not the sex scenes. It carries roughly twenty per-district reactions
-(`cliffexposed`, `parkexposed`, `commercialexposed`…), so walking out underdressed means something
-different on the cliff than in the park. **One
+⚠️ **And copy where the reads live, not just the number.** In the counted game that reads exposure
+most, the passages that gate on clothing most are five streets and open places — the walk to work,
+not the sex scenes — with roughly twenty per-district reactions, so walking out underdressed means
+something different in each. **One
 ambient at one location, gated on exposure AND on somebody being there to see it, is the whole
 starting move**; add the second when the first earns it. A derived number that only the wardrobe
 screen reads is the same defect in a new place.
 
 ⚠️ **Exposure is not a property of the outfit. It is a property of the outfit in a PLACE, with an
-AUDIENCE** — and this is the half that is easy to miss, because the number itself hides it. Read
-`degrees-of-lewdity`'s `exposure()` and the first thing it computes is not clothing at all:
-
-```js
-const safeLocations = ["Bedroom", "Sleep", "Bird Tower", "Mirror", "Spa Tan Naked", ...];
-if (safeLocations.some(...) && !V.audiencepresent) { V.libertine = 2; }   // anything goes
-else if (["beach", "pool", "sea", "lake"].includes(...)) { ... }
-```
-
-`audiencepresent` is consulted 14 times. Naked in her own bedroom is nothing; naked on Cliff Street
-is the event; a swimsuit is exposure on the high street and unremarkable at the pool.
+AUDIENCE** — and this is the half that is easy to miss, because the number itself hides it. The same
+counted game computes the place before the clothes: a list of safe places where anything goes with
+nobody present, and water places where a swimsuit is nothing; its audience check is consulted 14
+times. Naked in her own bedroom is nothing; naked on the street is the event.
 
 **Our engine reaches the same place from the other direction, and the place half costs nothing.**
-DoL centralises the judgement in one function that knows which locations are safe. We distribute it:
+That game centralises the judgement in one function that knows which places are safe. We distribute it:
 a canvas is bound to a location, so an exposure ambient only fires where an author put it, and her
 bedroom is safe by simply having none. The audience half is `npc_at_location` with no `npc_id` —
-the any-NPC "room occupied" form (`v2.py:4579`). **Gate on both.** An ambient that fires in an empty
+the any-NPC "room occupied" form (`v2.py:5246`). **Gate on both.** An ambient that fires in an empty
 room is the game talking to itself.
 
 **The starting move, written out.** A random ambient at one location that can only fire when she is
@@ -697,11 +691,9 @@ being broken. `engine.md` records the same trap for `entry_conditions`.
 a clickable link instead of firing on entry — a link labelled *"The market notices"* is not the same
 content and gives the game away.
 
-⚠️ **0/1/2 on the garment is the right scale, and this was checked rather than assumed.** DoL
-carries TWO fields per garment and it is easy to copy the wrong one. `exposed` is **0/1/2** — 515
-garments at 0, 37 at 1, 5 at 2 — and it is what `itemExposure()` returns and what the world gates
-on. `reveal` is a separate 0–10000 *look* rating feeding a colour scale (`>=900` red, `>=700` pink,
-`>=500` purple) and NPC lust checks; **our nearest equivalent to `reveal` is `beauty`, which we
+⚠️ **0/1/2 on the garment is the right scale, and this was checked rather than assumed.** The counted
+game's gated garment field is **0/1/2** — 515 garments at 0, 37 at 1, 5 at 2. A separate 0–10000 look
+rating feeds its colour and NPC lust checks; **our nearest equivalent to that is `beauty`, which we
 already have.** So `exposure = 0` as the default is correct too: the overwhelming majority of real
 garments cover.
 
@@ -737,7 +729,7 @@ Five parts, all existing engine pieces, proved in one fixture (`round5/ic10_preg
 author's — and write it in the board. The fixture ends in a birth that resets the stage.
 
 ⚠️ **Engine limit:** the portrait code, and its pregnancy swap, ships only when `[settings]
-clothing_enabled = true` (`v2.py:1579`). A small engine fix — the portrait swap independent of the
+clothing_enabled = true` (`v2.py:1633`). A small engine fix — the portrait swap independent of the
 wardrobe — is listed, not built.
 
 ## W8 · What sticks — and every door it closes is warned
@@ -792,7 +784,7 @@ clicks to the top band  ·  in-game minutes to the top band
 |---|---|---|
 | **1 · Threshold spacing** *(always on)* | widen the gap between rungs while keeping the per-beat increment fixed, so the climb takes days | does nothing on its own — 55 free clicks is still 55 free clicks. And **don't over-space a thin repeated beat**: if the rung is one recycled paragraph, a huge bar is just tedium |
 | **2 · A window-sized time cost** | `time_progression_minutes` on the rung's exit. The best-*reading* throttle: it is fiction, not a mechanic, and no single deleted line removes it | **only bites when sized against the window.** A 10-minute rung against an all-day hub is farmable ~144× per day. A 180-minute rung against a 09:00–18:00 NPC window is ~3/day. Advancing past an NPC's schedule window makes them absent, which is what actually stops the rung |
-| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12126`) — a triggerless rung has none.** |
+| **3 · A counted daily cap** | `max_triggers_per_day` on a *triggered* canvas, or a `_today` flag cleared in `[engine.daily_tick]` (§28) | **`max_triggers_per_day` is read off the trigger (`v2.py:12923`) — a triggerless rung has none.** |
 | **4 · A resource cost per rung** | `costs` (§27). Gate-enforced — the engine does not offer a rung the player cannot afford | energy is the wrong *primary* lock for a relationship ("too tired to seduce him" is bad fiction). It is a legitimate *throttle* when the fiction supports it, and it is the strongest tool available to a triggerless rung |
 
 ### M4 · The recipe — layer all three
@@ -811,7 +803,7 @@ A rung reached by a hub choice is **triggerless**: a canvas with no `[canvases.t
 That single structural fact voids the first tool everyone reaches for.
 
 ```
-max_triggers_per_day  →  read off the trigger (v2.py:12126)  →  DOES NOT APPLY
+max_triggers_per_day  →  read off the trigger (v2.py:12923)  →  DOES NOT APPLY
 ```
 
 The two that do:
@@ -849,12 +841,12 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > 2026-08-22.** The generator emits the two in opposite orders:
 >
 > ```
-> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:13955-13957 · :14033
-> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:14364-14373
+> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14843-14845 · :14921
+> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15252-15261
 > ```
 >
-> `advanceTime` rolls the day inside itself (`v2.py:5906-5909`) and that is where the tick clears
-> every `_today` flag (`v2.py:6046-6048`). So an **exit**-set cap on a rung that crosses midnight is
+> `advanceTime` rolls the day inside itself (`v2.py:6601-6604`) and that is where the tick clears
+> every `_today` flag (`v2.py:6741-6743`). So an **exit**-set cap on a rung that crosses midnight is
 > written *after* the clear, and the new day starts already capped.
 >
 > A sleep rung that runs from evening to morning with its cap on the exit is never offered before
@@ -862,8 +854,8 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > says a word.
 >
 > ⚠️ **A LOCATED canvas does not need a flag at all.** `max_triggers_per_day` is read off the
-> trigger (`v2.py:12126`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
-> (`v2.py:4290`), so it is immune to this. Reach for the flag only when the rung is triggerless.
+> trigger (`v2.py:12923`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
+> (`v2.py:4803`), so it is immune to this. Reach for the flag only when the rung is triggerless.
 
 ⚠️ **Do not do this with a hidden counter trait and an `lt` condition.** It works, and it is what
 the failing game reached for in the absence of this section — but it puts a player-subject trait in
@@ -933,6 +925,10 @@ household's. What is fixed is the *form*.
 ]
 ```
 
+`shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
+rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
+(`the-surfaces.md` R5b.4); with it off, nothing reads it.
+
 The field, on the fourth field:
 
 | game | need | what it shuts |
@@ -950,7 +946,7 @@ A restore with no gate behind it is a button that maintains a number. It costs t
 buys them nothing.
 
 **This is also what makes a room worth entering.** `the-surfaces.md` R2 says a room's list is needs,
-work and people — a *need* on that list has to be a real one, or R2 degrades into the object rule
+systems and people — a *need* on that list has to be a real one, or R2 degrades into the object rule
 with different nouns.
 
 ### M10 · The clock is `[player.trait_decay]`
@@ -966,8 +962,8 @@ games do write. **The half they drop is `shuts`.**
 
 Two shapes, and pick on purpose:
 
-- **decay** — falls every day whether or not she does anything. Right for energy (no hygiene or
-  hunger system: `engine.md` §30.1).
+- **decay** — falls every day whether or not she does anything. Right for energy, and for hygiene
+  when the game has it (`engine.md` §30.1).
 - **spent** — falls only when something takes it, via `costs` on a trigger (§27). Right for a
   resource.
 

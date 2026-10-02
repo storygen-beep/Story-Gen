@@ -1,0 +1,7 @@
+{
+  "id": "16_theo_friday_nights",
+  "source": "CHANGELOG.md:16365 (day-specific overnight row disappears at midnight, all gates green)",
+  "rule": "the-board.md \u00a72 overnight windows; v2.py:4149-4150",
+  "task": "Theo also drinks at the hotel bar on Friday nights from 22:00 to 02:00. Add that to his schedule.",
+  "target_lints": []
+}

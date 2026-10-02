@@ -5,6 +5,2236 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — A stale gates.py cite in the-board.md (World and Systems PRD, Phase 6A)
+
+**What.** `references/the-board.md:89` cited `gates.py:2248` for the deleted gate 22; that line is now
+unrelated code. It points at `gates.py:2147`, the comment that records the deletion ("The previous
+occupant of this space, gate 22, …").
+
+**Why.** A citation that lands on the wrong line sends the reader confidently to code that says
+something else.
+
+**Verified.** Read `gates.py:2144-2152`; selfcheck clean with the baseline of 2 orphan rule pointers
+(the-spine.md:27 S13 and S4); pytest passes.
+
+**Words:** 0, running total 145,855 / 149,283.
+
+---
+
+## 2026-10-02 — The backfill table lists the save state engine batches 2–3 added (World and Systems PRD, Phase 6A)
+
+**What.** `references/engine.md` §40's depth table gains one short row each for `phone.conv_ignored`,
+`phone.calls`, `fast_jobs.job_xp`, `$game_state.return_place`, `$game_state.shops` and
+`$player.outfits`, each pointing at its feature's own "old saves" sentence (§13, §17, §51). The
+`$game_state` row's parenthesis drops `conv_ignored` and `job_xp`, which now have rows; `pool_seen` and
+`conv_cycle` were already there and stay.
+
+**Why.** The table is where a release author looks to see what an old save gets; six keys the engine
+backfills were missing from it.
+
+**Verified.** Each row's depth read from `v2.py:1526`, `:1567`, `:1592`, `:1612-1618` (the defaults
+`setup.backfillStateDefaults` fills from); no `engine.md:NNNN` cite points past the edit; selfcheck
+clean; pytest passes.
+
+**Words:** +54, running total 145,855 / 149,283.
+
+---
+
+## 2026-10-02 — Three facts the built engine and round 10 made untrue (World and Systems PRD, Phase 6A)
+
+**What.** Three line-for-line fact fixes, nothing else in each file:
+- `references/the-meters.md` W5b evidence (`:320-321`): CoT doesn't pass rumours "from one to the
+  next". It keeps what each person saw; a witness tells others only in scenes she is in, one hop, and
+  a rumour someone only heard is never retold (round 10).
+- `references/the-economy.md:378`: "Our engine has no computed effect values" is no longer true. The
+  engine can compute an effect value from her stats (`{type = "trait", …}`, `engine.md` §3); the band
+  workaround stays as the option when a game doesn't use it.
+- `references/the-arc.md:643` ("The engine, verified"): a scene can take clothes off her
+  (`wardrobeEffects` `remove` / `unequip`, `engine.md` §17); the "leave the room" gap stays.
+
+**Why.** Protected text (LO's yes, 2026-10-02) that contradicted the built engine and the round-10
+gossip study.
+
+**Verified.** The three old phrases grep to 0 in SKILL.md + references; no R-, W- or A-id moved (each
+swap keeps its line count); selfcheck clean (orphans 2); pytest passes.
+
+**Words:** +33, running total 145,801 / 149,283.
+
+---
+
+## 2026-10-02 — A loop's finisher takes one file, not a pool
+
+**What.** `references/the-surfaces.md` (loop parts table): the FINISHER row now says each finish type
+gets ONE `file`, never a pool. Same-line edit, so no cited line moved.
+
+**Why.** LO noticed finish clips were pooled. A finisher renders once per session and is split across
+2–3 finish types, so clips 2–4 of a finish pool are almost never seen. Only the act nodes (the ones with a
+self-loop link) render several times in one session. Measured on `vesper`: 36 of 111 pools were finish
+screens. The full rule lives in `author-game/references/media.md` §7 Gate 1.
+
+**Verified.** grep of the row; vesper converted and rebuilt with the same rule.
+
+**Words:** +5. Running total after the engine batch 3 merge (f0d53c9): **145,768 / 149,283** — skill side
++49 (cleanup +44, this +5), engine side +320, and −32 where §26's planned rent sentence gave way to the
+built fact.
+
+---
+
+## 2026-10-02 — Engine: the importer warns about a first rent stage whose line can never print (World and Systems PRD, Phase 7)
+
+**Why.** The billable_hours rebuild (notebook N20): a rent stage with `after_total_paid = 0` is reached
+from the start (`setup.rentStageIndex` counts it before any payment), so the first payment never changes
+the stage and `stage_lines[0]` never prints. It works as coded; nothing said so.
+
+**What changed.**
+- `template_import.py`: `_validate_rent_stages` warns (never an error) when stage 1 has
+  `after_total_paid = 0` and `stage_lines[0]` has words, and says why: the first stage is the starting
+  rent; put its words in the rent's own text. Of the six games, billable_hours warns (its own fix is
+  LO's, in a game session); the rest are silent.
+- `references/engine.md` §26: the fact as a bullet, and the example's first stage line is now empty, so
+  the example no longer teaches the dead line.
+- Citations re-pointed through the `git diff` line map (17 moved, 615 identical) and the
+  paragraph-aware pass (1); `cite_check.py` 0 drifted in SKILL.md + references/.
+- At merge: the parallel skill-text session writes the same fact as one sentence in §26 and calls the
+  warning planned; that sentence becomes this one.
+
+**Verified.** `test_rent_stages.py` (+2: the warning fires once on a first stage at 0 with a line, with
+no error; none on the fixture's stage at 100 or on an empty first line). The rent tests pass. No save
+state. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +31, running total 145,751 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a general shop — `[[shops]]` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10, second half. The only shop sold clothes; any other purchase was a
+hand-built choice with `costs` and `itemEffects`.
+
+**What changed.**
+- `template_import.py`: `TemplateShop` and `[[shops]]` (`id`, `name`, `location`, `stock = [ { item,
+  limit? } ]`). Checks (build errors): a snake_case unique id, a name, a declared location, a non-empty
+  stock of priced items with no unknown key, no item twice, a whole `limit` ≥ 1. Written into metadata
+  only when a game has shops (GG gets it through `_assemble_project_metadata`).
+- `generators/v2.py`: each shop is its own section on its room's screen (`setup.renderGeneralShop`,
+  emitted into that room's passage only), a Buy row per item or the reason she cannot: the item's
+  conditions, her money, a full stack, "Sold out.". `setup.buyFromShop` buys through
+  `setup.buyInventoryItem`, toasts the price and counts a limited item's sales in
+  `$game_state.shops[shop][item]` (in the skeleton only in a game with a limit, so the backfill fills an
+  old save); the room re-renders so the sidebar follows. The clothing shop and its corruption tiers are
+  untouched.
+- `references/engine.md` §17 "Shops": the fact. `templates/cards/wardrobe.md` ("planned: item prices and
+  a general shop") and `templates/cards/shops_items.md` ("a general `[[items]]` entry has no price") now
+  say what is built.
+- Citations re-pointed through the `git diff` line map (596 moved, 34 identical) and the
+  paragraph-aware pass for wrapped-line `:NNNN` cites (21 moved); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_general_shop.py` (3, headless: the shop shows only in the gym, with "(3 left)" and
+the pass card's reason instead of a link; buying charges 4, counts the sale and re-renders, down to
+"Sold out."; a save written before the change, at b6edf38, loads with `shops` backfilled and buys).
+`GeneralShopSchemaTests` (2: metadata only when present, eight bad shapes). A save-migration case. Six
+games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages differ
+from the pre-batch engine (301f6f8); only the engine script differs. Selfcheck and the skill tests pass;
+Django failures all in the known list.
+
+**Words:** +67, running total 145,720 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: item prices (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10 (item prices and a general shop), first half. An inventory item had
+no price, so nothing outside the clothing shop could be bought.
+
+**What changed.**
+- `template_import.py`: `[[items]]` take `price` (whole, ≥ 1), `money_trait` (a `[player] core_traits`
+  key; default `money`, which must then exist) and `conditions` (v1.0, what gates buying). `money_trait`
+  and `conditions` are read only with a price (build errors). Written into the item's metadata only when
+  set, so GG gets them and a game without them is unchanged. The condition walker finds
+  `items[].conditions` by its key; its docstring names it and a test proves it.
+- `generators/v2.py`: `setup.itemBuyBlock` says why she cannot buy one ('' when she can: a price, the
+  conditions, enough of the money trait, room in `max_stack`) and `setup.buyInventoryItem` buys one. The
+  general shop (next change) is what calls them.
+- `references/engine.md` §17: "Known gaps — the shop" becomes "Shops", with the price fact; the "planned:
+  item prices and a general shop" note is gone from the clothing-shop paragraph.
+- Citations re-pointed through the `git diff` line map (440 moved, 190 identical). **And a fix to the
+  method:** a bare `:NNNN` that opens a wrapped line, with its file named on the line before, was never
+  re-pointed by this batch's earlier changes. A paragraph-aware pass from the pre-batch engine (301f6f8)
+  moved those 21 (engine.md, the-first-hour.md, the-release.md); each now names the same code line it
+  named before the batch. `cite_check.py` 0 drifted in SKILL.md + references/.
+
+**Verified.** `test_item_prices.py` (2, headless: coffee bought twice for 8 money, then "You cannot carry
+more"; the pebble is not for sale; short of money says so; the pass card needs its flag, then costs 3
+charm and no money). `ItemPriceSchemaTests` (3: metadata only when set, five bad shapes, the walker on an
+item's conditions). No save state (bought items live in the existing inventory). Selfcheck and the
+skill tests pass; Django failures all in the known list.
+
+**Words:** +28, running total 145,653 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: more than one wardrobe room (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7. `wardrobe_location` named one room, so a gym locker or a work
+changing room could not also be a place to change.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_location` is a slug, as before, or a list of slugs (a
+  one-item list is read as the slug). Each must be a declared location (build errors; the four clothing
+  games' single slugs pass). The list reaches `clothing_settings` as written, so GG gets it.
+- `generators/v2.py`: every reader asks the set of wardrobe rooms: the "Change Clothes" link on a room's
+  screen (both location paths) and the wardrobe rooms `wardrobe_anywhere = false` allows.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: "planned: more than one wardrobe
+  room" becomes the fact.
+- Citations re-pointed through the `git diff` line map (551 moved, 78 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (+1, headless: home and Dan's place both show "Change
+Clothes" and both let the club's refusal offer a change; the gym does neither). `WardrobeLocationListTests`
+(2: a list and a single slug validate; an unknown room, a non-string entry and a number are errors). The
+six games validate with 0 errors. No save state. Selfcheck and the skill tests pass; Django failures all
+in the known list.
+
+**Words:** +26, running total 145,625 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: saved outfits (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. Changing cost one click per slot; the counted games keep changing
+cheap (`templates/cards/wardrobe.md` rule 11: one click for a favourite outfit, five saved sets).
+
+**What changed.**
+- `template_import.py`: `[settings] saved_outfits` (default false; a bool, and it needs clothing),
+  written into `clothing_settings` only when true.
+- `generators/v2.py`: with it, `$player.outfits = {}` (name → {slot: item id or null}) joins the player
+  skeleton, so an old save gets it from the top-level `$player` backfill. The wardrobe page lists each
+  outfit with Wear and Delete and saves what she wears under a typed name (or "Outfit N"), five at most.
+  `setup.wearOutfit` empties the slots the outfit left empty (where `canRemoveSlot` allows) and equips each
+  saved garment she still owns through `setup.equipItem`, so a garment's own conditions and the dress/top
+  rule still hold; one removed since is skipped. Names are escaped on the page. Emitted only in such a
+  game.
+- `references/engine.md` §17: the fact. `templates/cards/wardrobe.md`: its two "planned: saved outfits"
+  lines become the fact.
+- Citations re-pointed through the `git diff` line map (601 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_saved_outfits.py` (3, headless: save, wear and delete, with an escaped name; a
+removed garment is skipped and five is the cap; a save written before the change, at 24b0793, loads with
+`outfits` backfilled and saves one). A save-migration case. `WardrobeSwitchSchemaTests` covers the
+metadata. Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +39, running total 145,599 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: two wardrobe switches — a change on refusal, and no change from anywhere (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 7. A place that wants a revealing state could only say "Go back", and a
+dress code's "Change clothes" opened the wardrobe from wherever she was, so every dress code was one
+click from met.
+
+**What changed.**
+- `template_import.py`: `[settings] wardrobe_change_on_refusal` (default false) and `wardrobe_anywhere`
+  (default true). Each must be a bool, and switching one from its default needs clothing (build errors).
+  Written into `clothing_settings` only when switched, so GG gets them and every other game's metadata
+  is unchanged.
+- `generators/v2.py`: with `wardrobe_change_on_refusal`, a location's `entry_conditions` refusal adds
+  "Change clothes" when an unmet item is a clothing condition (`worn_*`, `clothing_slot`,
+  `clothing_item`; `setup.refusalOffersChange`), and the wardrobe's Back tries the place again. With
+  `wardrobe_anywhere = false`, "Change clothes" on the ClothingBlock and on that refusal shows only when
+  she came from the wardrobe room (`setup.canChangeClothesHere`); the ClothingBlock intercept records
+  where she came from, because the refused room's passage renders (and writes `current_location`)
+  before the redirect lands. The helpers, the intercept line and the `<<if>>` around the link are
+  emitted only when a switch is on.
+- `references/engine.md` §17: the loophole and the "Go back only" lines become the facts.
+  `templates/cards/wardrobe.md`: "planned: the refusal offers a change" becomes the fact.
+- Citations re-pointed through the `git diff` line map (599 moved, 27 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+
+**Verified.** `test_wardrobe_switches.py` (4, headless: from the wardrobe room the club's refusal offers
+"Change clothes", the wardrobe's Back after taking the top off lets her in; from the gym neither the
+refusal nor the office's dress code offers a change; from the wardrobe room the dress code does; the same
+fixture with both switches removed behaves as before and emits no helper). `WardrobeSwitchSchemaTests`
+(2). No save state. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all
+import, 0 passages differ from the pre-batch engine (301f6f8); only the engine script differs.
+Selfcheck and the skill tests pass; Django failures all in the known list.
+
+**Words:** +21, running total 145,560 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: a scene takes clothes off her — `unequip` and `remove` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 7 (clothing upgrades). `wardrobeEffects` knew only `add` and `equip`:
+no scene could take a garment off her or out of the wardrobe, and an unknown action or a missing item
+emitted nothing, with no error.
+
+**What changed.**
+- `generators/v2.py`: `setup.unequipItem` (takes a worn garment off; it stays in the wardrobe) and
+  `setup.removeFromWardrobe` (takes it off and out; a "👗 Gone" toast; a shop can sell it again). One
+  helper, `_wardrobe_effect_js`, now writes every action for all three emitters (a choice, the loop-back
+  link beat, a node exit's config); `add` and `equip` emit exactly what they did before.
+- `template_import.py`: every wardrobe effect on a choice or an exit config needs `action` in add / equip /
+  unequip / remove and an `item_id` that is a declared `[[clothing]]` item (build errors). All six games'
+  effects pass.
+- `references/engine.md` §17: the gap line becomes the fact. `templates/cards/wardrobe.md`: its two
+  "planned: remove and unequip" lines become the fact.
+- Citations re-pointed through the `git diff` line map (509 moved, 115 identical); `cite_check.py` 0
+  drifted in SKILL.md + references/.
+- Not changed: `references/the-arc.md` A6's "no effect removes or unequips a garment" (listed for the
+  skill-text session).
+
+**Verified.** `test_wardrobe_effects.py` (3: the helper's four actions, `add` and `equip` byte-identical;
+headless, "Lose the blouse" unequips it and keeps it, the next exit removes the skirt and nothing else
+moves; `equip` still works, removing a garment she does not own does nothing). `WardrobeEffectSchemaTests`
+(2: four bad shapes, on a choice and on an exit). No save state (the save shape is unchanged).
+The six games validate with 0 errors. Selfcheck and the skill tests pass; Django failures all in the
+known list.
+
+**Words:** +3, running total 145,539 / 149,283.
+
+---
+
+## 2026-10-02 — Engine: back to where she was — a `return` exit (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add a "back to where she was" exit. A call's accept canvas and an `anywhere`
+launcher scene ended at the canvas's home, so answering a call at the gym moved her to the caller's
+place and charged that place's entry costs.
+
+**What changed.**
+- `generators/v2.py`: a location exit may say `destinationType = "return"`. Answer on a call and a
+  launcher option store the room she stands in (`setup.markReturnPlace`) in
+  `$game_state.return_place`, which exists only in a game with a `return` exit. The exit's link resolves
+  when it renders (`setup.returnPassage`): the stored room, free since it is not a move, or the canvas's
+  home when the room is closed (its hours), gone from the build, or nothing is stored. Arriving at a room
+  or the map clears it (a `:passagestart` block emitted only in such a game).
+- `template_import.py`: `return` is a valid `destinationType`; like `trigger` it needs a canvas whose
+  home resolves, as its fallback. The exit config already reached both build paths whole.
+- `references/engine.md` §13: the fact; §51's call and launcher sentences point to it.
+- Citations re-pointed through the `git diff` line map (519 moved, 104 identical; bare `:NNNN`
+  follow-ons included, reset after any other file's cite); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_return_exit.py` (6, headless: a call answered at the gym returns her there with her
+money unchanged and the place cleared; past the gym's closing it falls back to Dan's place and pays its
+entry cost, as before; a gone room falls back; an `anywhere` launcher returns her; a scene entered from
+its room ends at its home; a save written before the change, at 301f6f8, loads with `return_place`
+backfilled and the call returns her). `ReturnExitSchemaTests` (3). A save-migration case. Selfcheck and
+the skill tests pass. Django: every failure is in the known list (a Tweego probe that timed out under load
+failed 23 more; those files pass run alone).
+
+**Words:** +105, running total 145,536 / 149,283.
+
+---
+
+## 2026-10-02 — Cleanup rent note: the first stage is the starting rent
+
+**Why.** The Billable Hours rebuild found a rent stage line that can never show: a stage with
+`after_total_paid = 0` is reached from the start, so no payment moves into it. It works as coded; the
+docs did not say so.
+
+**What changed.** `references/engine.md` §26 (`[settings.rent]`): one bullet saying a stage with
+`after_total_paid = 0` is the starting rent, its stage line never prints, its words belong in the
+rent's own text, and an import warning is planned.
+
+**Verified.** Read on disk: `setup.recordRentPayment` (`v2.py:14124`) takes `before` from
+`setup.rentStageIndex` on the old total, which already counts that stage at 0 (`v2.py:14107-14113`), and
+`setup.rentStageLine` prints only when the stage changed. Selfcheck, skill tests and cite_check
+(SKILL.md + references/ at 0) pass.
+
+**Words:** +40, running total 145,475 / 149,283.
+
+---
+
+## 2026-10-02 — Cleanup carry-overs: lines the engine batches made untrue
+
+**Why.** Engine batch 2 built the ignore hook, phone time costs, app conditions, calls and ranks per
+job, and the lanes now read `requires_npc`. Several skill lines still said these did not exist.
+
+**What changed.**
+- `references/the-phone.md` P5's ⚠️ paragraph: "nothing on our phone costs anything" becomes "silence and
+  time cost only where you set them" — `ignore_after_days` / `on_ignore` and `time_cost` (pointer to
+  `engine.md` §51); the no-show keeps its hand-built canvas, since it has no hook.
+- `references/the-phone.md` "Our engine has no per-app condition": now an app's `conditions` keep it off the
+  phone until they hold (§51), and the scene that opens it says so.
+- `references/the-phone.md` "Until the engine has a call type…": a call is `[[phone.calls]]` (§51).
+- `references/the-phone.md` "`post_actions` cannot gate on place or on clothing": it reads `corruption_min`
+  against `gate_trait` when set (§51); cites re-read, `v2.py:3068` becomes `v2.py:3158` (the gate in
+  `setup.sendSocialPost`) and `worn_exposure` `v2.py:4460` becomes `v2.py:4966`.
+- `references/the-systems.md` SY8 rule 1: a second ladder no longer waits on rank per job; it is `ranks`
+  on a fast job (§51), and a canvas job keeps its rank as a trait.
+- `templates/first-hour.toml` F5 and F5b: `requiresNpc` is also read through `_npcPresentForCanvas`
+  (`v2.py:5653`) on the solo lane (`:5594`), the location's rows (`:6243`) and the launcher (`:3503`);
+  auto-fire still never reads it.
+- `references/the-first-hour.md` F5: the same six `requiresNpc` cites re-pointed (`12780`, `6208`,
+  `6287`, `5447`, `5388`/`6039`, `3441` become `13348`, `6412`, `6491`, `5653`, `5594`/`6243`, `3503`).
+- **Left:** `references/the-economy.md:378` "Our engine has no computed effect values" is now untrue
+  (`engine.md` §3, a value worked out from her stats), but the economy file is protected; it needs its own
+  item with LO's yes.
+
+**Verified.** Every new `v2.py:` cite read on disk; `selectAutoFireCanvasForLocation` (`v2.py:5519`)
+and `isCanvasValid` (`v2.py:5683`) do not call `_npcPresentForCanvas`. A wider grep (no ignore hook, no
+calls, no time, no memory, no rank, per-app, dead-end matches, "until the engine") found nothing else
+the built engine contradicts in SKILL.md, references/ or templates/. Selfcheck, skill tests and
+cite_check (SKILL.md + references/ at 0) pass.
+
+**Words:** −14, running total 145,435 / 149,283.
+
+---
+
+## 2026-10-02 — Cleanup E9b-fix: the reputation text follows round 10
+
+**Why.** Round 10 read Course of Temptation's reputation in code for the first time. It has no
+background spread: each person remembers what he saw, a rumour moves one hop and only in a scene she
+is in, and the score is the share of the audience who knows. The interim text said the engine lacked
+"spread", asked for two audiences that no CoT content reads, and missed the refusal, the mask's real
+effect and the NPC-flag workaround (round 10 §7, 14 issues). LO's gossip decisions set the minimum.
+
+**What changed.**
+- `templates/cards/reputation.md` rewritten from round 10 (`round10/cards/gossip.md`): what is missing is
+  memory of who saw what; spread is one hop, in her scenes; witnesses, tellers, hearers and defenders;
+  the 27 inline reads, the 6 personal-knowledge reads and the one refusal (waived by closeness); the mask
+  wipes strangers' memory; no decay; Shady Deals' heat as the door with a way back; the unnamed crowd;
+  the minimum (2 kinds, 1 audience, ≥4 rungs, ≥2 reads per rung as a direction, ≥3 spread scenes,
+  ≥2 personal-knowledge reads, a refusal, a door, a way down, friends who won't tell, no decay, no price
+  effects yet); today's build is an audience trait plus an NPC-scoped flag per thing a person saw.
+- `references/the-systems.md` "Reputation is meters until…": reworded to "remember who saw what", one
+  audience with an unnamed crowd, no decay, the NPC-flag workaround, and a pointer to the card.
+- Round 10 §7 issue 2 (`the-meters.md` W5b's "passes them from one to the next") is **left**: W5b is a
+  protected section and needs its own item.
+
+**Verified.** Engine cites read on disk, not taken from round 10 (its `v2.py:6680` and `:4531` had
+drifted): the NPC branch of `applyFlagEffect` is `v2.py:6963`, the NPC flag condition `v2.py:4812`; a
+`flagEffects` entry with `targetType = "npc"` reaches it through `_emit_flag_effects_inline`; the flag
+condition schema accepts `subject` / `npc_id` (`template_import.py:1635-1638`); `show_traits` is still
+`template_import.py:168`. The `[[traits.labels]]` cite is now a pointer to `engine.md` §30. The card
+passes the banned-word grep (`the-voice.md`, "Adult wording"). Selfcheck, skill tests and cite_check
+(SKILL.md + references/ at 0) pass.
+
+**Words:** +18, running total 145,449 / 149,283.
+
+---
+
+## 2026-10-02 — Merge pointer fix: engine batch 2 citations re-pointed
+
+**Why.** Engine batch 2 (the ignore hook, pay from stats, job ranks, the phone's outward features,
+calls) moved `v2.py` and `template_import.py` lines. The skill side's own citations still pointed at
+the pre-merge engine, and the two templates' comments had drifted further than that.
+
+**What changed.**
+- `cite_check.py --fix`: `references/the-systems.md` SY8 rule 5, `setup.pickRememberedPoolEntry`
+  `v2.py:5668` becomes `v2.py:5931`.
+- By hand, read on disk: `SKILL.md` ("a declared garment can be got") and `references/the-meters.md`
+  W3, the shop's `!initial && price > 0` filter, `v2.py:2146` becomes `v2.py:2174`.
+- `templates/board.toml`: the version footer `v2.py:17426-17438` becomes `v2.py:18507-18521`; the
+  rent currency default `v2.py:1186` becomes `v2.py:1217`.
+- `templates/first-hour.toml`: "Stranger" `v2.py:14923-14929` becomes `17283-17290`;
+  `getStoryCanvasRedirect` `5184` becomes `6069`; `selectAutoFireCanvasForLocation` `4716` and `4722`
+  become `5519`; `isCanvasValid` `4836` becomes `5683`; `requiresNpc` in random encounters `5522`
+  becomes `6412` and in substitutions `5595` becomes `6491`; the fail-open conditions check `3797`
+  becomes `4732`; `TemplateCanvas` `template_import.py:1032-1039` becomes `1107-1114`; the portrait
+  presence filter `5457-5462` becomes `6153-6158`. These were already wrong before the merge.
+- Every `v2.py:` and `template_import.py:` citation in `templates/cards/*.md` was read against the
+  source; all were already correct (the engine side re-pointed them).
+
+**Verified.** cite_check: SKILL.md + references/ at 0. Selfcheck and the skill tests pass.
+
+**Words:** +0 (numbers only), running total 145,431 / 149,283.
+
+---
+
+## 2026-10-02 — Billable B6 (PROTECTED, tools): EXPLICIT list version 2, the floor re-measured and kept
+
+**Why.** The Billable Hours test found EXPLICIT blind to "groping" (the stem was `grope`); `tits?\b` and
+`ass\b` miss "titties" and "asses" the same way. The list's own rule says a change needs a version bump
+and a re-baseline of every game. LO's yes covers the tools (protected list); LO chose to rebuild the
+reference measurement (2026-10-02) and then to keep the floor at 7.5 (WS-D30).
+
+**What changed.**
+- `scripts/gates.py` EXPLICIT, now **version 2**: `grop` (was `grope`), `tit(?:s|ty|ties)?` (was `tits?`),
+  `ass(?:es)?` (was `ass`). The version is in the comment above the list. Nothing else in the list moved.
+- `EXPLICIT_BEAT_FLOOR` stays **7.5**. Its comment now says: the band was re-measured 2026-10-02 on ten
+  gitgud snapshots (2018-11 to 2026-09); the 2026-08-11 text preparation was lost; three ways of removing
+  the code give 6.8–11.3%; list v2 moves the reference game by +0.00 to +0.11 points; 7.5 stays as a
+  lenient floor. "Valid as a floor / invalid as a target" is kept. The gate's own comments (G2) and
+  `references/register.md` "The measured targets" and `SKILL.md` commitment 3 drop "7.5–9.3%, held
+  eight years" for the same facts. Numbers only; no text from the reference game.
+- `scripts/tests/test_gates_explicit_v2.py` (new): the inflected forms count once each; "title",
+  "assume", "assistant" and "come" still do not. Four of the cases fail on version 1.
+- No line shift: the gates.py edit is 13 lines out, 13 in, so no citation moved.
+
+**The re-measure** (scripts and tables outside the repo, in
+`~/Documents/Great_Games_Study_20260926/round5/dol_snapshots/`: `score_dol.py`, `versions.tsv`,
+`results_old_vs_new.json`, `RESULTS_B6.md`; the preparation comparison is `probe_strip.py`,
+`probe_all.py`, `RESULTS_STEP3.md`). Unit = one twee passage of the whole source; unit counts match the
+2026-08 note exactly (1,772 at the root, 15,629 at v0.5.11.9). Preparation from here on: "code removed,
+quoted text kept" (the one that reproduces an old point, 9.13% against 9.1%).
+| reference game | list v1 | list v2 |
+|---|---|---|
+| band over ten versions | 8.94–11.30% | 9.03–11.30% |
+| largest per-version move | | +0.11 points (2025-06) |
+The 2026-08-12 18-game field corpus is not on disk whole (12 of 18 files), so the field check was skipped.
+
+**Every game re-scored**, committed version exported from `HEAD`, list v1 against v2, vesper_two excluded:
+| game | explicit share before | after | colour before | after |
+|---|---|---|---|---|
+| billable_hours | 20.0% | 20.0% | PASS | PASS |
+| media_lab | 0.0% | 0.0% | FAIL | FAIL |
+| members_only | 13.6% | 13.6% | PASS | PASS |
+| orientation | 11.1% | 11.1% | PASS | PASS |
+| probation | 13.6% | 13.6% | PASS | PASS |
+| the_balance | 1.1% | 1.1% | FAIL | FAIL |
+| vesper | 13.3% | 13.3% | PASS | PASS |
+No game's row changes colour, and no gate headline changed in any game.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
+
+**Words:** +42, running total 144,386 / 149,283 on the skill branch; 145,431 / 149,283 after the merge
+of engine batch 2 (the engine side adds +1,045; the merge itself adds no words).
+
+---
+
+## 2026-10-01 — Engine: calls, part 2 — ring, answer, decline, missed (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to build a real call type now; the-phone.md P5 (a missed call counts as ignored)
+and P8 (pull delivery: a badge, never a covering pop-up).
+
+**What changed.**
+- `generators/v2.py`: each call's `accept` canvas resolves at build time to its entry passage (as a
+  launcher option's does). On every passage `setup._checkPhoneCalls` rings a call whose trigger holds
+  (a toast, the ring badge on the `calls` app and in the sidebar count) and `setup._expirePhoneCalls`
+  marks one left ringing past `ring_minutes` (default 60) as missed, applying `on_missed` once; the call
+  screen and answer/decline run the expiry too, since a wait button passes time without a passage. The
+  `calls` screen lists the ringing call with Answer (refused mid-scene, as a launcher) and Decline, then
+  the history. `setup.answerCall` plays the canvas (the navigation commits); `setup.declineCall` applies
+  `on_decline` (the handler commits). `$game_state.phone.calls[id]` = `{state, rang_minute,
+  ended_minute}` joins the phone skeleton only in a game with calls. The flag-hint map registers
+  `on_decline` / `on_missed` flags.
+- `references/engine.md` §51: the last gap row (calls) becomes the fact, with a TOML example; the gap
+  table is gone. `templates/cards/phone.md` "Our engine today" follows.
+- Citations re-pointed through the `git diff` line map (509 moved, 602 endpoints identical); one new cite
+  re-anchored by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_calls.py` (6, headless: a call rings with a badge and no overlay; Answer plays
+the scene; mid-scene it cannot be answered; Decline applies once; left ringing past 60 minutes on wait
+buttons it is missed once and cannot be answered; a save written before calls existed, at 54c67d0, loads
+with the call map backfilled and the call rings). A save-migration case. Selfcheck and the skill tests
+pass. Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine (7d7f575); only the engine script differs.
+
+**Words:** +179, running total 145,310 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: calls, part 1 — the data and the import (World and Systems PRD, Phase 7)
+
+**Why.** LO's decision to build a real call type now. The phone had no calls; the skill's advice was to
+write the call as the scene a text books. This part reads and checks calls; the runtime (ring, answer,
+decline, missed) is the next change.
+
+**What changed.**
+- `template_import.py`: `calls` joins the phone app types. `TemplatePhoneCall` (`id`, `app`, `caller`,
+  `trigger`, `accept`, `ring_minutes`, `on_decline`, `on_missed`, `notify`) and `TemplatePhone.calls`,
+  parsed from `[[phone.calls]]`. Checks (build errors): id, a `calls` app, a caller that is an NPC, an
+  `accept` canvas that exists and has a trigger location (the launcher's canvas rule), whole
+  `ring_minutes`, and `on_decline` / `on_missed` as phone effect sets. Written into metadata only in a
+  game with calls (GG gets it through `_assemble_project_metadata`). The condition check walks every
+  `conditions` key by name, so it already reaches `phone.calls[].trigger.conditions`; its docstring
+  names them and a test proves it.
+- `references/engine.md` §51: the calls row says the importer reads calls and nothing rings yet.
+- Citations re-pointed through the `git diff` line map (103 moved, 141 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `PhoneCallsSchemaTests` (4: parse, metadata only when present, nine bad shapes, the walker
+on a call trigger). Selfcheck and the skill tests pass.
+
+**Words:** +14, running total 145,131 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a post gated on her own meter — `gate_trait` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.sendSocialPost` and the composer read `corruption_min` against
+the hard-coded `corruption` trait, so a game whose ascent meter has another name could not gate a post.
+
+**What changed.**
+- `generators/v2.py`: a post action's `corruption_min` reads `gate_trait` when set (default corruption),
+  in the composer's lock and in `sendSocialPost`.
+- `template_import.py`: `gate_trait` must be a `[player] core_traits` key and is read only with
+  `corruption_min` (build errors). Post actions are raw dicts, so it reaches metadata as written.
+- `references/engine.md` §51: the fact.
+- Citations re-pointed through the `git diff` line map (491 moved, 588 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed: daily topics' `corruption_min` still reads corruption (not in this step).
+
+**Verified.** `test_phone_outward.py` (+1, headless: "Tease" gated on charm opens and posts, "Bare" on
+the default corruption stays locked and a stale tap does nothing). `PostActionGateTraitTests` (2).
+Selfcheck and the skill tests pass.
+
+**Words:** +53, running total 145,117 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a launcher that works from any room — `anywhere` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. A launcher option is live only in its canvas's room, so the phone
+could not book a ride, a date or a shift somewhere else.
+
+**What changed.**
+- `generators/v2.py`: `_renderLauncher` takes `anywhere`; with it the room lock is lifted and the
+  mid-scene lock stays. The scene still returns her to its own home, and that place's entry costs apply
+  on arrival (the travel intercept treats it as a move, which it is).
+- `template_import.py`: `anywhere` on `TemplatePhoneApp`; it must be a bool and is read only on a
+  launcher (build errors); written into metadata only when true.
+- `references/engine.md` §51: the fact; §42's launcher sentence notes the `anywhere` case.
+- Citations re-pointed through the `git diff` line map (558 moved, 685 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: from loc_home the plain launcher says "Not here",
+the `anywhere` one plays the bar canvas, and mid-scene it says "Not here" again).
+`PhoneAnywhereLauncherTests` (2). The existing launcher tests pass. Selfcheck and the skill tests pass.
+
+**Words:** +75, running total 145,064 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: phone actions that cost time — `time_cost` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8; the-phone.md P5 ("using the phone costs too"). No phone action spent
+time: a shift worked from the phone, a call or a selfie took zero minutes.
+
+**What changed.**
+- `generators/v2.py`: `setup.spendPhoneTime(minutes)` spends through `advanceTime` (so the day can roll
+  and the daily tick run, as on a wait button; the click handlers already commit the moment) after a
+  reply choice, a daily topic, a post action and a fast job that carry `time_cost`;
+  `setup.phoneTimeTag` adds "· Nm" to that action's button or job line. Without `time_cost`, nothing
+  changes.
+- `template_import.py`: `time_cost` on `TemplateFastJob` and `TemplatePhoneDailyTopic` (into metadata
+  only when set); reply choices and post actions are raw dicts and carry it through. All four must be
+  whole minutes ≥ 1, or a build error.
+- `references/engine.md` §51: the time gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (585 moved; 712 endpoints identical, one range end
+  is the line this change edited, checked by hand); `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+3, headless: a reply, a daily topic and a post spend 20, 30 and
+15 minutes, an action without a cost spends none; a 420-minute shift from 18:00 rolls to day 2 at 01:00
+and the daily tick runs; the buttons read "· 15m" / "· 20m" / "· 420m", an uncosted choice has no tag).
+`PhoneTimeCostTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +52, running total 144,989 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: the `custom` app renders its `passage` (World and Systems PRD, Phase 7)
+
+**Why.** LO's engine order, step 8. `openPhoneApp` renders a custom app only with `appDef.passage`, which
+the importer never sent, so every custom app fell to "Coming Soon". A camera app is planned on this.
+
+**What changed.**
+- `template_import.py`: `passage` on `TemplatePhoneApp`, parsed, written into metadata only when set; a
+  custom app with no `passage`, or a `passage` on another type, is a build error. No game has a custom
+  app, so no game's build changes.
+- `generators/v2.py`: a custom app's `passage` that is a canvas id resolves at build time to the canvas's
+  entry passage (`_canvas_entry_passages`, as a launcher option does); anything else is a passage name.
+- `references/engine.md` §51: the custom-app gap row becomes the fact.
+- Citations re-pointed through the `git diff` line map (613 moved, 745 endpoints identical); one cite in
+  the new text corrected by hand; `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a canvas-id passage and a passage-name passage both
+render inside the phone, no "Coming Soon"). `PhoneCustomAppPassageTests` (2). The existing Tier-3 tests,
+which already wrote `passage` on a custom app, pass. Selfcheck and the skill tests pass.
+
+**Words:** +44, running total 144,937 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: an app that appears later — `conditions` on a phone app (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8. `setup.openPhone` rendered every declared app from day 1, so an app
+she installs, or a job board that opens later, had to exist from the start.
+
+**What changed.**
+- `template_import.py`: `conditions` on `TemplatePhoneApp`, parsed, written into metadata only when set.
+  The condition check already walks every `conditions` key by name, so it reaches app conditions with no
+  new code; its docstring now lists them and a test proves it.
+- `generators/v2.py`: `setup.phoneAppVisible`; `openPhone` leaves a hidden app off the home grid,
+  `openPhoneApp` ignores a stale tap on one, and `getPhoneUnreadCount` does not count its chats. The
+  helper sits above `checkPhoneConversations`, outside the window a source test reads.
+- `references/engine.md` §51: the per-app gap row becomes the fact. `templates/cards/phone.md` follows.
+- Citations re-pointed through the `git diff` line map (588 moved, 717 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (+1, headless: a gated chat app is off the grid, a tap does
+nothing, its delivered chat is not counted until the flag is set, then it shows and counts).
+`PhoneAppConditionsTests` (2). Selfcheck and the skill tests pass.
+
+**Words:** +39, running total 144,893 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a dating match leads somewhere — `on_match` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 8 (the phone reaching outward). `setup.likeProfile` wrote `ps.matches`
+and nothing but the dating screen read it, so a match could not cause a scene or a text.
+
+**What changed.**
+- `template_import.py`: `on_match` on `TemplatePhoneProfile` (`{effects, flagEffects}`), parsed raw,
+  checked by `_validate_phone_effect_set`, written into metadata only when set.
+- `generators/v2.py`: `likeProfile` applies `on_match` once, on the first match, through
+  `setup.applyPhoneEffectSet`. The flag-hint map registers `on_match` flags as phone setters.
+- **A batch-1 defect fixed on the way:** the condition check rejects anything but a v1.0 block at
+  `match_condition`, while `likeProfile` read `match_condition.conditions`, so no gate that imports
+  was ever read (every like matched). The runtime now reads the block itself (and the old wrapping).
+- `references/engine.md` §51: the dating gap row becomes the fact. `templates/cards/phone.md` "Our
+  engine today": the ignore hook and `on_match` now exist.
+- Citations re-pointed through the `git diff` line map (563 moved, 692 endpoints identical);
+  `cite_check.py` 0 drifted.
+
+**Verified.** `test_phone_outward.py` (2, headless: a match applies `on_match` once, a stale second like
+applies nothing; a profile whose `match_condition` fails is liked, not matched, and applies nothing,
+which failed before the fix). `PhoneOnMatchTests` (3). Selfcheck and the skill tests pass.
+
+**Words:** +66, running total 144,854 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: a rank per job (World and Systems PRD, Phase 7; opt-in per job)
+
+**Why.** LO's engine order, step 6. The phone's fast jobs kept one global XP count for every job and
+each job paid one fixed income, so a job could not promote her (`the-systems.md` rule 1, "a second
+ladder with its own rank").
+
+**What changed.**
+- `template_import.py`: `ranks = [{xp, title, income}]` on `TemplateFastJob`, parsed raw, validated
+  (`xp` whole and rising, a `title`, an `income` that is a number or a value table, no other key;
+  a stat-based income is checked by the value walker), written into metadata only when set.
+- `generators/v2.py`: `setup.fastJobRank` (her rank on a job = the last whose xp she has reached on
+  it) and `setup.fastJobIncome`; `doFastJob` pays the rank's income through `setup.resolveEffectValue`,
+  adds one to `$game_state.fast_jobs.job_xp[id]` and toasts a promotion; the board shows the title and
+  the xp to the next rank. The global `xp` still counts every shift. `job_xp` joins the skeleton (and
+  the backfill) only in a game with a ranked job.
+- `references/engine.md` §51 (the job board is a phone app; engine.md had no job section): the rank
+  fact; §40's backfill row names `fast_jobs.job_xp`. `templates/cards/job.md`: "no per-job rank"
+  becomes the fact.
+- Citations re-pointed through the `git diff` line map (589 moved, 720 endpoints identical);
+  `cite_check.py` 0 drifted.
+- Not changed (other lane): `references/the-systems.md` rule 1 still says a second ladder "waits on the
+  engine's rank per job".
+
+**Verified.** `test_fast_job_ranks.py` (4, headless: pays 10, 10, 30, 30, 60 up the ladder; the board
+and the promotion toast; a job without ranks counts no job xp; a save written by the pre-change engine
+at e8dcadc loads with `job_xp` backfilled, its global xp kept, and starts at the first rank).
+`FastJobRankTests` (4); a save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +189, running total 144,788 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: pay worked out from her stats (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** LO's engine order, step 5. Every amount the engine paid was fixed at build time (or a random
+range), so a shift paid the same on day 1 and day 90 while rent climbed (the Billable Hours test).
+
+**What changed.**
+- `generators/v2.py`: one runtime resolver, `setup.resolveEffectValue`: a number passes through;
+  `{type = "random", min, max}` rolls; `{type = "trait", trait, mult, add, min, max}` reads her player
+  trait as round(trait × mult + add), held inside min / max. The Python `_resolve_effect_value` emits a
+  call to it for the trait shape (number and random emission byte-identical). The four runtime paths
+  that did `Number(value)` use it: phone reply and `on_ignore` effects, daily-chat topics, the daily
+  tick, fast-job income. The job board prints `setup.effectValueLabel` (a range reads "8–14"). The
+  "what raises this trait" hint readers skip a stat-based value instead of raising on `> 0`.
+- `template_import.py`: a fast job's `income` may be a value table; `_walk_effect_values` checks every
+  stat-based `value` / `income` in the raw TOML (unknown key, trait not in `[player] core_traits`,
+  non-number factor, min above max are errors).
+- `references/engine.md` §3: the value shape, where it applies, the import check, its one-trait limit.
+- `templates/cards/` (job, sex_for_pay, streaming, shoots, gym_body, greek_life, college,
+  money_pressure): "no computed pay" becomes the fact; the bills stay unbuilt (rent `amount` and
+  `costs` take numbers only).
+- Citations re-pointed through the `git diff` line map (604 moved; 729 endpoints identical to HEAD's
+  line, 8 card cites into the changed resolver rewritten by hand above); `cite_check.py` 0 drifted.
+- Not in this change: `validate_game_toml._numeric_effect_value` and the gates.py effect readers (the
+  protected tools step) still read a stat-based value as nothing.
+
+**Verified.** `test_effect_value_from_stats.py` (4, headless: the resolver on every shape; a fast job
+pays 70 then 100 at the cap and the board says $70; a choice pays through the passage; reply, daily
+topic and day roll pay from charm). `StatEffectValueSchemaTests` (4), `StatEffectValueEmitTests` (3).
+Six games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages
+differ from the pre-batch engine. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,599 / 149,283.
+
+---
+
+## 2026-10-01 — Billable B5 (PROTECTED, tools): the RUNGS stems take their inflections, field re-measured
+
+**Why.** The Billable Hours test found `--beat`'s act-rung readout blind to "gropes", "fondles" and
+"nuzzles": `caress`, `fondl`, `nuzzl`, `grope`, `undress`, `unbutton`, `unzip` and `thrust` sat before a
+`\b`, so only the bare stem matched. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/gates.py` RUNGS: `caress\w*`, `fondl\w*`, `nuzzl\w*`, `grop\w*` (touch); `undress\w*`,
+  `unbutton\w*`, `unzip\w*` (strip); `thrust\w*` (vaginal). Nothing else in the list changed.
+- The field re-measured with the new list (`round2/rungs_remeasure_20260930.py`, which imports the live
+  `gates.RUNGS` and `gates.EXPLICIT`), pooled over CoT, IHOH, Shady Deals and Cupid's Way, opening rung
+  per explicit passage:
+
+  | | touch | strip | hands | oral | vaginal | anal | finish | n | vaginal-or-above |
+  |---|---|---|---|---|---|---|---|---|---|
+  | old list | 13% | 14% | 13% | 15% | 25% | 3% | 17% | 1,034 | 44% |
+  | new list | 14% | 15% | 13% | 15% | 24% | 3% | 16% | 1,045 | 43% |
+
+  The cites follow: `references/register.md` S2's FIELD row and its "1,045 explicit passages,
+  re-measured 2026-10-01"; `lint_ladder`'s "43% … 1,045" and its test in `test_gates_ck8a.py`; the
+  gates.py comments above and below RUNGS. The "Field, per screen" comment (touch 13 · strip 15 · hands
+  11 · oral 14 · vaginal 28 · anal 5 · finish 13) was already older than the 2026-09-30 table; it now
+  carries the new pooled row.
+- `scripts/tests/test_gates_rungs_inflected.py` (new): ten inflected forms find their rung. All ten
+  fail on the old list.
+- No line shift: the gates.py edit is 11 lines out, 11 lines in, so no citation moved.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0. The explicit share
+is untouched (RUNGS feeds only the ladder lint and `--beat`).
+
+**Words:** +0, running total 144,344 / 149,283.
+
+---
+
+## 2026-10-01 — Billable B4 (PROTECTED, tools): "world reachable" exempts the rooms under an exempt root
+
+**Why.** `the-map.md` R1 tells an author to build two separate grounds as two roots joined by a travel
+canvas, and gate 11 exempts the second root when it is `offscreen` or sealed. The Billable Hours test
+found the rooms built off that root still reported stranded, so the gate failed the shape the skill
+prescribes. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/gates.py` gate 11: the `exempt = {…}` line and its two-line comment are swapped line for
+  line; the set now goes through a new helper `_under_exempt_roots` (above `main()`), which adds every
+  room whose `entry_from` chain ends at an exempt root. A chain that loops or names a missing id
+  exempts nothing. Nothing else in the gate changed (the headline still counts rooms reached on foot).
+- `scripts/tests/test_gates_world_reachable.py` (new): a two-root fixture — the rooms under a sealed
+  root and under an `offscreen` root pass; a second root that is neither still strands itself and its
+  rooms; a loop and a missing parent exempt nothing. Three of the four fail on the old code.
+- `references/the-map.md` R1: the exemption sentence now says the rooms whose `entry_from` chain ends
+  at that root go with it.
+- Line shift: the helper adds 18 lines above `main()`, so only citations after it move.
+  `references/the-release.md` `gates.py:13009` becomes `gates.py:13027` ("Lints sit BELOW the tally",
+  read on disk). cite_check `--fix` moved nothing (it cannot anchor these). Every other skill cite of
+  `gates.py` (7647, 8567, 9268, 9350, 9372, 9424, and `pitch_pack.py`'s 6663) sits above the helper
+  and did not move; gates.py's own line comments cite other files.
+
+**Before/after,** every game scored from `HEAD` in a scratch folder (vesper_two excluded), the old
+and new gates.py, every gate compared: only "world reachable" changed, in two games.
+| game | world reachable before | after |
+|---|---|---|
+| billable_hours | FAIL (club, firm, hotel_bar, …) | PASS |
+| the_balance | FAIL (the_back_room, the_cafe, the_cafe_toilet, …) | PASS |
+| vesper | FAIL | FAIL (unchanged: its stranded rooms hang off no exempt root) |
+| media_lab, members_only, orientation, probation | PASS | PASS |
+The row is not a `--ship` BLOCK row, so no `--ship` verdict moves.
+
+**Verified.** The new tests pass; selfcheck and the skill tests pass; cite_check 0.
+
+**Words:** +12, running total 144,344 / 149,283.
+
+---
+
+## 2026-10-01 — Engine: the ignore hook for a text she leaves unanswered (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's decision to add an ignore hook (the-phone.md P5: ignoring costs more than saying no). Silence
+was free: an unanswered text kept its buttons for ever, and the only way to charge for it was a canvas
+gated on the cause flag, `days_since_flag` and a reply flag still false.
+
+**What changed.**
+- `template_import.py`: `ignore_after_days` and `on_ignore` on `TemplatePhoneConversation`, parsed raw,
+  validated (whole days >= 1; the chat needs a reply block; `on_ignore` only with `ignore_after_days`;
+  `on_ignore` is `{effects, flagEffects}` with the keys a reply choice's effects carry, `trait`/`flag`
+  required, an `npcId` that exists) by the new `_validate_phone_effect_set`, and written into the phone
+  metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (phone games only): `setup._ignorePhoneConversation` closes the current instance
+  as ignored when no reply was sent `ignore_after_days` after it arrived, records the day in
+  `$game_state.phone.conv_ignored[key]`, and applies `on_ignore` once through the new
+  `setup.applyPhoneEffectSet` (which the reply path now uses too, unchanged in behaviour), with its own
+  toast so the passage's pending effects are kept. An ignored instance counts as answered, so a
+  repeatable chat re-arms after it (delay counted from the ignore). The thread shows "No reply." and no
+  buttons; `sendPhoneReply` refuses a stale tap. The flag-hint map reads `on_ignore` setters.
+  `conv_ignored` joins the phone skeleton only in a game with an ignore hook.
+- `references/engine.md` §51: the ignore gap row becomes the fact (a new paragraph and TOML example);
+  §40's backfill row names `phone.conv_ignored`.
+- Citations: every `v2.py` / `template_import.py` cite in SKILL.md, references/, templates/cards/ and
+  templates/*.toml re-pointed through the `git diff` line map (601 moved, 734 line endpoints checked
+  identical to HEAD's line); `cite_check.py` then reports 0 drifted in SKILL.md + references/.
+- Not changed (other lanes): `references/the-phone.md` P5 still says there is no ignore hook, and
+  `templates/cards/phone.md` "Our engine today" still lists it as missing.
+
+**Verified.** `test_phone_ignore_hook.py` (6, headless): effects apply once; a reply before day N applies
+nothing; the closed thread takes no late tap; per instance on a repeatable chat; a chat without the hook
+is unchanged; a save written by the pre-change engine (7d7f575) loads, gets `conv_ignored` and the hook
+fires. `PhoneIgnoreHookSchemaTests` (6) and `PhoneIgnoreHookIntegrationTests` (2, DB build); a
+save-migration case. Selfcheck and the skill tests pass.
+
+**Words:** +167, running total 144,432 / 149,283.
+
+---
+
+## 2026-10-01 — Billable B3: per-beat and per-reader scratch files in the agents
+
+**Why.** The Billable Hours test ran `v2-prose` writers side by side, and they overwrote each other's
+measurement file (`beat.txt`). The reader's table file had the same shape.
+
+**What changed.**
+- `.claude/agents/v2-prose.md` "Measure before you return": the scratch file is
+  `beat_<beat_id>.txt`, named for the beat.
+- `.claude/agents/v2-reader.md` "Output": the table file is named for the reader's input
+  (`reader_<slug>.md`, or `reader_<first canvas id>.md` given canvas ids).
+
+**Verified.** grep `beat.txt` in the two agents: 0 hits. Selfcheck and the skill tests pass.
+
+**Words:** +0 (agents are not counted), running total 144,332 / 149,283.
+
+---
+
+## 2026-10-01 — Billable B2 (PROTECTED, tools): the promise row is n/a in lenient mode
+
+**Why.** The Billable Hours test ran `shape.py` at phase `idea` (lenient) and got a red on "the
+promise has a beat this release": the promise named a goal, and the release page did not yet say
+which beat keeps it alive. That branch was a bare `False`, while its siblings (the same row's
+no-goal branch, "the door is a declared step", "the pressure can be met") are `False if strict else
+None`. LO's yes covers the tools (protected list).
+
+**What changed.**
+- `scripts/shape.py`, "the promise has a beat this release", the empty `promise_alive` branch:
+  `False` becomes `False if strict else None`. One line, nothing else.
+- `scripts/tests/test_shape.py`: a new test — with `promise_alive` popped, lenient gives `None` and
+  strict gives `False`.
+
+**Verified.** The new test fails on the old line and passes on the new one. Selfcheck and the skill
+tests pass.
+
+**Words:** +0, running total 144,332 / 149,283.
+
+---
+
+## 2026-10-01 — Billable B1: step-family nouns take a hyphen
+
+**Why.** The Billable Hours test found `--words` listing *stepbrother*, *stepfather* and *stepsister*:
+the field spells them with a hyphen, so the closed form reads as a word the genre does not use. An
+authoring note, not a false red.
+
+**What changed.**
+- `references/the-voice.md` "Adult wording": one line. Step-family nouns take a hyphen where a player
+  reads them (generic examples only).
+
+**Verified.** `gates.py --words` on a scratch line "Her stepbrother and her step-brother … her
+stepfather" lists `stepbrother` and `stepfather` and not `step-brother`. Selfcheck and the skill tests
+pass.
+
+**Words:** +33, running total 144,332 / 149,283.
+
+---
+
+## 2026-10-01 — Billable P6c: three sentences the engine merge made untrue, a stale shop cite, three PRD ids
+
+**Why.** Engine batch 1 built repeatable chats (`repeat_after_days`) and pools that remember
+(`memory = "seen"`), so three sentences now said something false. The shop's stock filter moved, and
+three planned-work ids from the PRD were left in skill text (skill text never names a PRD id).
+
+**What changed.**
+- `references/the-phone.md` P9: "Until the engine repeats a conversation, chain one-time ones" becomes
+  "a loop invite is one conversation that repeats; a chain is for different texts", pointing at
+  `engine.md` §51. The chain example's comment now says "text 2" instead of "invite 2".
+- `templates/cards/phone.md` "Our engine today": the same correction.
+- `references/the-systems.md` SY8 rule 5: "`block_pool` has no memory yet (`v2.py:16328`)" becomes a
+  pointer to `memory = "seen"` (`engine.md` §35). The old cite pointed at cascade-beat code; the new
+  one names `setup.pickRememberedPoolEntry` at `v2.py:5668` so cite_check can anchor it.
+- `SKILL.md` ("a declared garment can be got" row) and `references/the-meters.md`: `v2.py:2087`
+  becomes `v2.py:2146` (the shop's `!initial && price > 0` filter; read on disk).
+- `references/state.md` "(check planned, K14)", `references/the-map.md` "(planned, K13)" and
+  `templates/cards/reputation.md` "(E9c)" become plain planned names.
+
+**Verified.** grep for "delivers once, ever", "no memory yet", `v2.py:16328`, `v2.py:2087`, K13, K14
+and E9c: 0 hits outside this file and the scripts. cite_check: 0 wrong in SKILL.md + references/.
+Selfcheck and the skill tests pass.
+
+**Words:** +34, running total 144,299 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C6: the wardrobe card, `[[clothing]]` in the-returning-player.md, the shop gaps
+
+**Why.** The clothing rules (C1–C5) point at one design; round 9a's wardrobe card is that design. The
+card lives in `templates/cards/` (not counted, LO's word-budget decision).
+
+**What changed.**
+- New `templates/cards/wardrobe.md` (round 9a's card): the field table (the unit, leave rules, the
+  refusal, dress codes, a place that wants revealing, events, pay, people noticing, one number, the
+  day-1 gate, key garments, shop text, tiers, taken away, sex scenes, changing), steps in order,
+  amounts, touchpoints, chains, first release, the failure checklist, what players say, and our engine
+  today with planned names. Models only from In Her Own Hands, Course of Temptation, Shady Deals and
+  Cupid's Way (nothing on Jack or Aaron; CW's wardrobe peeping event left out).
+- `references/the-returning-player.md`: `[[clothing_items]]` becomes `[[clothing]]`, the real table
+  name.
+- `references/engine.md` §17: a short "Known gaps — the shop" (one shop; no "approved for" text;
+  planned: item prices and a general shop) and a pointer to the card. No other engine.md section.
+
+**Verified.** The card greps clean for the-voice.md "Adult wording" banned list, and for Jack, Aaron and
+peeping. Its `v2.py` and `template_import.py` facts were read on the merged engine. Selfcheck and the
+skill tests pass.
+
+**Words:** +71, running total 144,265 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C5b: the agents and sheets follow the clothes truth rule
+
+**Why.** Rule 5 of "The truth rule" (C5a) only holds if the writer is told what she wears and the
+reader checks it. `v2-prose` never reads the TOML, so its spec is its only source for her clothes.
+
+**What changed.**
+- `.claude/agents/v2-prose.md` "Your spec": the spec also carries her clothes on this screen and the
+  condition that backs them; with none, the beat names no garment of hers.
+- `references/register.md` "What a scene contains", test 8 becomes "The numbers and the clothes
+  agree" (every garment of hers the scene names is backed, rule 5). Not the protected section.
+- `.claude/agents/v2-reader.md` follows: test 8's row, the description and the JSON example key.
+- `templates/sheets/scene.md`: a row for what she wears here and the condition behind it.
+- `templates/sheets/place.md`: a row for the dress code or wanted state, the reason, the way out.
+- `templates/sheets/person.md`: a row for his line per clothing state.
+
+**Verified.** No script reads the reader's test names (grep). Selfcheck and the skill tests (with
+`test_templates_parse`) pass.
+
+**Words:** +21, running total 144,194 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C5a (PROTECTED, LO approved): the truth rule for clothes
+
+**Why.** LO's clothing decision: prose names her clothes only when a check backs it. "The truth rule"
+already counted "the wrong clothes for that hour" as a defect, with no rule to stop it.
+
+**What changed.**
+- `references/register.md` "The truth rule" (protected): a new rule 5 — prose names her clothes only
+  where a clothing condition backs it (the trigger, an enclosing group, the location's
+  `entry_conditions`, the choice that led here, or a `wardrobeEffects` equip earlier in the same
+  canvas); undressing during an explicit act is backed by the act. **"The four rules" becomes "The
+  five rules"** in the same commit. Rules 1–4 unchanged.
+- `SKILL.md`: the lints paragraph says rule 5 is not linted yet; the operating rule on the truth rule
+  points at rule 5. The protected-list line is unchanged.
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +77, running total 144,173 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C4: the-first-hour.md arms the wardrobe with its first-release minimum
+
+**Why.** The opening asked for "one read" of the wardrobe, which is the floor gate, not a wardrobe.
+Round 9a's first-release minimum (Shady Deals' early shape) is what a first release should carry.
+
+**What changed.** `references/the-first-hour.md`, the F4 wardrobe box: "one read" becomes five items —
+one number (`worn_exposure` and the states), one gate reachable on day 1 with a notice (Shady Deals'
+gate at the best day-1 score), the leave rules (through `entry_conditions`), one event, one line — and
+"grow by adding readers" (Shady Deals, ~13 wardrobe entries over 20 versions, round 9a §4). In the same
+box, four stale `v2.py` cites for the engine's wardrobe and shop links and one for the shop's stock
+filter were re-pointed (`v2.py:10662`, `:10603`, `:10667`, `:10608`, `:2146`; each read).
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +121, running total 144,096 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C3: the-meters.md W7 and W3 — read clothing cheaply and often, gate only at doors that say why
+
+**Why.** LO's clothing decision: states first, each read in ≥3 places. W7 said "if you find yourself
+writing gates on it, you are building the wrong kind of meter", which contradicts dress codes and
+leave prices — Course of Temptation enforces a dress code on 61.9% of its location passages (round 9a
+§2). And W7 leaned on a FAIL game's code (DoL) for its models.
+
+**What changed.** `references/the-meters.md`:
+- W7's rule and title: read cheaply and often; gate only at a door that says why (a leave price, a
+  dress code, a place that wants her bare); hidden clothing gates are 41 of 194 classed failures.
+- A new paragraph reconciles "small and gates, or large and colours" with clothing's doors (CoT's
+  dress codes, its reason text; IHOH's club refusal).
+- The DoL band-ladder code block is cut; the counts stay (seven rungs; `corpo-life` 5,785 sites).
+- "What the player is shown": the one number is `worn_exposure` and the states read through it;
+  the two `worn_exposure` paragraphs (with stale `v2.py` cites) become one pointer to `engine.md` §17
+  plus the ≥3-readers rule (planned gate: `every clothing state is read three times`).
+- DoL's variable names, district names, `exposure()` code and garment field names are cut; the counts
+  stay (~900 reads, 82%; ~20 reactions; 14 audience checks; 515/37/5 garments).
+- `npc_at_location` cite re-pointed (`v2.py:4823`).
+- W3: the wardrobe gate is the floor; the rule is ≥3 readers per declared state and key item.
+
+**Verified.** No DoL name, variable or code is left in W7 (grep). Selfcheck and the skill tests pass.
+
+**Words:** +9, running total 143,975 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C2: engine.md §17 teaches states first, then items
+
+**Why.** LO's clothing decision: the wardrobe is designed as states, items second. §17 opened on
+granting a garment and never said what a state is, which predicates express one, or what a dress code
+and an `entry_conditions` refusal actually offer the player.
+
+**What changed.** `references/engine.md` §17 only:
+- opens on states (dressed, skirt, no bra, no panties, underwear, towel, topless, naked) and the two
+  predicates that express them (`worn_exposure` with its two-region rule, `v2.py:1755`;
+  `clothing_slot`), with `worn_type` for a kind of garment;
+- the catalog as a field table: `exposure`, the 7 fixed slots (`template_import.py:271`), one `type`
+  per item (no tag list), `conditions` as the price to put a garment on (`v2.py:1668-1669`);
+- `wardrobeEffects` is add/equip only; no remove or unequip (planned: remove and unequip);
+- "Where a state is read": a dress code checks coverage only and its refusal page offers "Change
+  clothes" (`v2.py:18393`), which opens the wardrobe from anywhere (the loophole, `v2.py:18397-18400`);
+  a place that wants a revealing state can only refuse with "Go back" (`v2.py:10653`); no leave hook;
+- the closing note's DoL variable name and code are cut to a count (one counted game, ~900 reads, 82%
+  change words only).
+The failure-class warning, the portrait reader and `validateClothing` stay.
+
+**Verified.** Every new `v2.py` / `template_import.py` line was read on the merged engine.
+`cite_check`: SKILL.md + references/ at 0 wrong. Selfcheck and the skill tests pass.
+
+**Words:** +237, running total 143,966 / 149,283.
+
+---
+
+## 2026-10-01 — Clothing C1 (PROTECTED, LO approved): A6 keeps key outfits, adds the reminder, points to states
+
+**Why.** LO's clothing decision: states first, items second; key outfits stay as rungs, with a reminder
+to wear them; every state and key item read in ≥3 places. Round 9a found In Her Own Hands' gala gown
+has no reminder, so its night is silent.
+
+**What changed.** `references/the-arc.md` (protected; only what the item names):
+- A6: a new paragraph "Remind her before the key is needed" (IHOH's date dress, reminded in two rooms,
+  against its gown; round 9a `traces/ihoh_wardrobe.md`), and a pointer that the wardrobe is states
+  first (`engine.md` §17).
+- A6's gate text: every declared state and key item is read in ≥3 places (planned gate: `every
+  clothing state is read three times`).
+- "The engine, verified": the A6 bullet adds the two gaps (no remove or unequip; no leave hook, so a
+  price to go out lives in each destination's `entry_conditions`).
+Rule ids unchanged.
+
+**Verified.** Selfcheck and the skill tests pass.
+
+**Words:** +132, running total 143,729 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P6b: the last FAIL-game quotes in the-phone.md cut, counts kept
+
+**Why.** LO's evidence rule (World and Systems PRD carry-over P6b): a FAIL game may be counted, never
+quoted or used as a model. Three spots in `references/the-phone.md` still did.
+
+**What changed.** `references/the-phone.md`:
+- P6: `family-ties`' two-app table (its variable names and unlock code) is cut to one counted line
+  (3 rungs free, 4 more and video in a paid app she unlocks); its "at home" selfie quote becomes a
+  plain "a place rule is not expressible".
+- P11: the two `sluttown-usa` paraphrases are cut; the vote count (24 likes, 0 dislikes) stays.
+- P2: `new-life-project` is no longer called "well-liked"; that it ships a phone bank and GPS stays.
+
+**Verified.** The quote, the paraphrase marker, the praise and the table's code grep to 0 in
+the-phone.md. Selfcheck and the skill tests pass.
+
+**Words:** −110, running total 143,597 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P6a: engine.md §51 names planned changes, not PRD ids
+
+**Why.** LO's rule (World and Systems PRD carry-over P6a): skill text never names a PRD id. §51's gap
+table named its fixes by id, which an author cannot look up.
+
+**What changed.** `references/engine.md` §51 "The phone": the gap table's last column is now "planned:
+an ignore hook" and "planned: phone apps, calls and time cost" (with `time_cost` / `on_match` kept as the
+field names). The intro line says "planned engine change" instead of "engine item". Nothing else in
+engine.md moved.
+
+**Verified.** No PRD id is left in §51 (grep for `E[0-9]` and "until E3" over the section: 0). Selfcheck
+and the skill tests pass.
+
+**Words:** +33, running total 143,707 / 149,283.
+
+---
+
+## 2026-10-01 — Merge pointer fix: Phases 2–3 citations re-pointed to the merged engine
+
+**Why.** The skill branch (Phases 2–3) cited `v2.py` and `template_import.py` lines as they were at
+`ed2f1c6`; the engine batch merged in `774e27e` moved those lines. `cite_check` cannot anchor most of
+them and does not scan `templates/cards/`.
+
+**What changed.** Numbers only, on the lines the skill branch added since `ed2f1c6`: 46 citations on 41
+lines in `references/engine.md`, `the-phone.md`, `the-systems.md` and 15 cards in `templates/cards/`.
+41 went through the line map from `ed2f1c6` to the merged engine files (each checked to land on the same
+source line). Five were placed by hand: three pointed at lines the engine rewrote (the phone delivery
+latch, now `v2.py:2356` / `:2347`; the plain `block_pool` pick, now `v2.py:16328`), and two were wrong
+before the merge (`[phone] purchase_flag` pointed at a stage-stall comment, now `template_import.py:446`;
+the job card's `costs` pointed at a comment line, now `template_import.py:764`). Every citation in
+`templates/cards/` (38) was read against the source.
+
+**Verified.** `cite_check --fix` then finds nothing to move; SKILL.md + references at 0. Selfcheck, skill
+pytest, the Django suite and two scratch rebuilds: see the merge report.
+
+**Words:** 0, running total 143,674 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E4: `weekday` and `hours_since_flag` (World and Systems PRD, Phase 7; opt-in by use)
+
+**Why.** WS-D10 step 4. "Only on Saturday" and "three hours after he texts" could not be written as
+conditions: `engine.md` §39 said so ("No weekday form"), and `days_since_flag` was the finest wait.
+
+**What changed.**
+- `generators/v2.py` (+~150 lines, mostly helpers and comments): `weekday {weekdays=[…]}` (reuses
+  `setup._weekdayMatches`, 0 = Monday) and `hours_since_flag` (like `days_since_flag`, in hours) in
+  every evaluator: `triggerConditionsSatisfied`, `describeUnmetConditions` (names the days),
+  `checkSingleCondition` (delegates), `formatCanvasConditions`, `getNextActivity` (a time wait, or a
+  flag hint when the flag is unset) and its hint text, the flag-hint resolver, and the quest cards'
+  `checkQuestsCondition` with its progress reader and bullet. Every flag write stores `set_minute`
+  beside `set_day` through `setup.flagMetaNow`: `applyFlagEffect`, the EN1 closed flag and the cheat
+  restore (the two writers that bypass it). `setup.flagSetMinute` reads a meta with `set_day` only as
+  `set_day * 1440`.
+- `template_import.py`: both types join E1's `CONDITION_SCHEMA` (`weekday` must list 0–6, no
+  `operator`); quest cards gain `hours_since_flag` and `weekday` shapes (dataclass, parse,
+  validator, serializer).
+- `references/engine.md`: new §52; §39's "No weekday form" is replaced; §40's backfill table gains a
+  `$flags_meta` row (not filled; the `set_day * 1440` fallback); §37's quoted quest-card error text
+  updated to the new wording.
+- Tests: fixture section E4 (`sat_only`, `meet_dan`, `after_dan`, quest card `card_wait`); new
+  `test_weekday_hours_since_flag.py` (27: the import table and errors, quest-card shapes, every
+  evaluator, every flag writer, headless weekday, hours across midnight, an NPC flag, quest cards,
+  the old-save fallback). The old save (`tests/data/e4_pre_change_save.txt`) was written at
+  `d2ac5b4` from the fixture minus its E4 gates (that importer rejects the new types); its
+  `met_dan` meta is `{set_day: 1}` and reads 18 hours on at 18:00, so the wait opens rather than
+  strands.
+- Cites: 368 `v2.py` and 58 `template_import.py` cites re-pointed through the line maps; one lands on
+  the reworded quest-card error line, which is the same message.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with every
+non-script passage identical to `ed2f1c6` (the change is engine script only).
+
+**Words:** +258, running total 141,282 / 149,283 on the engine branch. **After the merge into `skill/world-and-systems`:** 143,674 / 149,283 (the skill side's 142,948, plus the engine batch's +742, less 16 from folding the repeatable-chat section into §51 "The phone" and dropping PRD ids from the engine text).
+
+---
+
+## 2026-10-01 — Phone P5: engine facts for the phone (World and Systems PRD, Phase 3)
+
+**Why.** engine.md had no phone section; the-phone.md's workarounds and the engine items that close them need one
+home. The engine session's E3 doc will merge into this section later.
+
+**What changed.** `references/engine.md`: a new §51 "The phone — what a thread can do today, and the gaps", appended
+at the end (no other engine.md section touched). It holds: a conversation delivers once, ever (`v2.py:2289`), so
+`time_of_day` on it is a delivery window; the chaining workaround (one entry per link, a flag the last link set —
+canvas or reply — plus `days_since_flag` and `time_of_day`; reply flags get `set_day` via `applyFlagEffect`,
+`v2.py:6532`; the chain starts from a scene); and a gap table, each row pointing at its engine item: repeatable
+chats (E3), hours since a flag and a weekday condition (E4), calls (E8-calls), a per-app gate (`openPhone`
+`v2.py:2512`), time cost (`sendDailyChat` `v2.py:2462`), the dating match (`likeProfile` `v2.py:2963-2985`) and the
+`custom` app (`v2.py:2550` needs `passage`, `template_import.py:8028-8036` never sends it) (all E8). The "ignored by
+day X" hook has no E item (E8-calls covers only a missed call); the row says so. `templates/cards/phone.md`'s engine
+heading points at §51.
+
+**Verified.** Every engine cite read on this branch; `cite_check.py`: SKILL.md + references 0 drifted (baseline 0);
+`--selfcheck` current (orphans 2); pytest 475 passed.
+
+**Words:** +347, running total 142,948 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P4 (PROTECTED, LO approved, WS-D11): A1's loop names the phone thread
+
+**Why.** The arc's conversion into a repeatable is where the phone thread turns into the loop invite (the-phone.md
+P9); A1 did not say so.
+
+**What changed.** `references/the-arc.md` A1: one line after "The repeatable surface is the reward for finishing
+the arc…": "After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9)." Nothing
+else in A1 or the-arc.md changed.
+
+**Verified.** `git diff` is that one added line; `--selfcheck` current (orphans 2); pytest 475 passed.
+
+**Words:** +14, running total 142,601 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P3: the phone card and the sheets (World and Systems PRD, Phase 3)
+
+**Why.** WS-D12: the design detail lives in an uncounted card; the-phone.md keeps short rules plus a pointer. The
+phone is a channel, so its card is infrastructure, never a system that K1/K2 would read.
+
+**What changed.**
+- New `templates/cards/phone.md` (infrastructure: a channel; declared in `board.infrastructure[]` as
+  `{ "name": "phone", "kind": "channel" }`, never `board.systems[]`): the field table (cause, delay, hour window,
+  delivery, the text, reply, booking and reminder, the meeting, no-show, the loop, her side, calls, apps, alerts,
+  the systems it serves), the ten steps, amounts, touchpoints, chains, first release, failure checklist, what
+  players say, and our engine today. Models and quotes only from CoT, IHOH, SD and CW (Damien; nothing from Jack
+  or Aaron), cited to round 9a's report and traces.
+- `templates/sheets/person.md`: a "Phone thread" table — thread, cause flag, delay, window, booking (with its
+  reminder), loop.
+- `templates/board.toml`: a commented `phone` pointer block (prose only — no `[phone]` header and no `key =` line,
+  so `_template_field_gap` sees no phone table and its gates.py comment stays true; no gates.py edit).
+- `references/the-phone.md` P1: a three-line pointer to the card, `board.infrastructure[]` and the person sheet.
+
+**Verified.** `test_templates_parse` passes (2); the card's banned school-word grep (the-voice.md "Adult wording"
+list, whole words) = 0 and a Jack/Aaron grep = 0; the template field-gap list is unchanged (37); `--selfcheck`
+current (orphans 2); pytest 475 passed.
+
+**Words:** +36, running total 142,587 / 149,283 (the card is in `templates/`, not counted).
+
+---
+
+## 2026-10-01 — Engine E3: repeatable chats (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 3, WS-D7 ("a repeat invite after sex"). A conversation was delivered once and
+its replies were keyed by its id, so a chat could not come back; the skill's interim advice was to
+chain one-time messages.
+
+**What changed.**
+- `template_import.py`: `repeat_after_days` and `max_repeats` on `TemplatePhoneConversation`, parsed,
+  validated (whole numbers >= 1; `max_repeats` only with `repeat_after_days`), and written into the
+  phone metadata only when set (GG gets them through `_assemble_project_metadata`).
+- `generators/v2.py` (+~85 lines, phone games only): `setup._rearmPhoneConversation` re-arms a
+  delivered chat once its current instance is answered (a reply sent; read, for a chat with no reply
+  block), `repeat_after_days` have passed since it arrived or was answered, `max_repeats` is not used
+  up and its trigger still holds. `$game_state.phone.conv_cycle[id]` is the instance; instance 0
+  keeps the plain id in `replies`/`read_conversations` (so one-time chats and old saves read as
+  before), instance n uses `"id#n"`. The thread view renders every instance in order, past ones as
+  history with no reply buttons, so `_hasPendingReply` never blocks on an old instance. The unread
+  count, `sendPhoneReply` (records `answered_day`) and the reply buttons use the instance key.
+  `conv_cycle` joins the phone skeleton only in a game with a repeatable chat.
+- `references/engine.md`: new §51; §39's latch note points at it; §40's backfill row names
+  `phone.conv_cycle`.
+- Tests: `RepeatableChatSchemaTests` (4) and `RepeatableChatIntegrationTests` (2, DB build) in
+  `apps/projects/tests.py`; new `test_repeatable_chats.py` (8, headless: re-arm timing, history and
+  per-instance buttons, per-answer effects, `max_repeats`, read-only chats, trigger re-check, the
+  one-time control, the old-save load); one in `test_save_migration.py`. The old save
+  (`tests/data/e3_pre_change_save.txt`) was written at `9707f2d` and loads with `conv_cycle = {}`
+  and its answer kept as instance 0. `PhoneParity*` and `Tier2RuntimeIntegrationTests` pass
+  unchanged.
+- Cites: 430 `v2.py` and 76 `template_import.py` cites re-pointed through the line maps, each
+  checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. Rebuilds: five games byte-identical; the
+phone game, the_balance, changes in its phone engine script only (no skeleton change, no passage
+text change).
+
+**Words:** +204, running total 141,024 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P2c: the loop, the booking and her own doors (World and Systems PRD, Phase 3)
+
+**Why.** Round 9a: no good thread has a last text — after the sex step it becomes a repeatable invite (CoT every 3
+days 18–22; IHOH James 2/70 per passage after 20:00; SD daily callers); every text books a meeting with a reminder;
+she can open the same doors herself (IHOH outgoing booty call; CoT's menu, 3 of 13 links lead anywhere).
+
+**What changed** (`references/the-phone.md` only).
+- **P9** → "After the sex step, the thread becomes the loop invite": the three loops, a 1–3 day cooldown, the arc
+  names it (`the-arc.md` A1); small talk that leads nowhere is filler; until the engine repeats a conversation,
+  chain one-time ones with flags plus `days_since_flag` (a conversation delivers once ever, `v2.py:2289`), with a
+  TOML link; a link's cause may be an earlier reply if the chain starts from a scene (planned gate: `every chat is
+  caused by a scene`). Cut: the `become-someone` daily-thread dispatcher, its null-branch rule and its ~1,300-words
+  budget (a game outside the four; a daily small-talk thread is now filler). The `daily_topics` /
+  `cooldown = "per_topic"` fact moves to P12.
+- **P10** → "Every thread ends in a booking she can see": a new lead paragraph (CoT plan, IHOH Saturday, SD meeting
+  now; CoT's four reminders, IHOH's journal). The CoT `$planneddate` study and the `scheduleEffects` primitive stay;
+  cites re-pointed (`v2.py:6303-6304` tick, `:6666` `fireScheduledEvent`).
+- **P12** → "She can open the same doors herself": IHOH's outgoing booty call, CoT [PhoneText]; the launcher summon
+  (`v2.py:3144`, room lock `:3161`); `daily_topics` are player-sent and trait-only, with `per_topic`
+  (`template_import.py:412`).
+- **"What is not gated here"**: the two old zero-failure candidates are replaced by the planned gate labels
+  (`every chat is caused by a scene`, a block that passes a game with no phone; `a chat is short and timed`, a
+  warn). No PRD ids in skill text.
+
+**Verified.** All twelve P-ids present; no other skill file pointed at the old P9/P10/P12 wording; `--selfcheck`
+current (orphans 2); pytest 475 passed.
+
+**Words:** +209, running total 142,551 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P2b: costs, gates and delivery (World and Systems PRD, Phase 3)
+
+**Why.** Round 9a: ignoring costs more than saying no (CoT −20/−20 vs −2/−3), a no-show costs (CoT −25 ×3),
+hidden phone gates are 43 of 194 player failures (class b), and a covering pop-up drew SD 5 complaints (class f).
+
+**What changed** (`references/the-phone.md` only).
+- **P5** ("…— and ignoring costs most"): ignoring costs more than no; a no-show costs; using the phone costs
+  (five corpus games, counts only). Engine fact (`sendDailyChat` re-pointed to `v2.py:2462`): no time cost, no
+  ignore hook; workaround canvases for ignoring and a no-show. Cut: the six-row table — the `family-ties` and
+  `the-company` code rows, the `new-life-project` quote "It's too late to watch memes…", and the `patriarch`
+  quotes "You're too tired to text anyone" / "Better not text anyone this late..", and the `destroyer` row
+  (patriarch and destroyer also fail the adults-only rule). The old text said "six games"; the table held five.
+- **P7** ("No hidden phone gate; a locked app names what unlocks it"): no buy, carry or PIN step (43 failures, 32
+  on one PIN, numbers only; IHOH and CW 0); never copy CoT's pocket rule; leave `purchase_flag` unset (re-pointed
+  to `template_import.py:1362`). The `family-ties` unlock complaint is kept as counts (50 and 31 net); its
+  grey-tile example is cut. `openPhone` re-pointed to `v2.py:2512`.
+- **P8** ("One thing at a time, delivered by pull"): a badge, never a covering pop-up (IHOH sidebar line, CW ❕,
+  SD's three-step fix); our engine already pulls (badge `v2.py:3229`, 3-second toast `v2.py:2270`, `notify`).
+  Cut: the `college-daze` quotes "Check the phone in the game…" / "Check the in-game phone…" (kept as two
+  comments, 20 and 14 net), the `destroyer` latch code (kept as n = 1) and the `patriarch` plans-screen example.
+- **P11:** the "a one-off price to buy the phone is fine — destroyer sells one for $500" line is dropped; no price
+  to buy it either (P7).
+
+**Verified.** All twelve P-ids present; engine cites read on this branch; `--selfcheck` current (orphans 2);
+pytest 475 passed.
+
+**Words:** −120, running total 142,342 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P2a: chat length and timing (World and Systems PRD, Phase 3; round 9a phone card)
+
+**Why.** Round 9a measured the four games this skill copies: a text is 1–3 bubbles of 3–7 words (CoT median 4 and
+3, CW median 5), and every text is caused by a scene flag and timed (IHOH 46/46 caused, 43/46 hour-gated; CW "+1
+day" in 150 of 210 delay setters). P3's ~15 words came from three games that fail the evidence rules.
+
+**What changed** (`references/the-phone.md` only, plus two superseded notes in `DOCTRINE_GAPS.md`).
+- **P3:** the 369-bubble table is cut to one counted line (the-company, patriarch, family-ties: numbers only); the
+  rule is 1–3 bubbles of 3–7 words from CoT and CW, with CoT's three-bubble booty call; long talk goes to a call or
+  a meeting (IHOH calls run 300–500 words); a WARN, never a block (planned gate: `a chat is short and timed`). The
+  CW Damien example, the "you up" lines and the reply-menu rule stay. Cut: the `the-company` quote "Love you Diana!".
+- **P4:** retitled "Every text is caused by a scene and timed — the phone keeps no state of its own". Cause (IHOH
+  46/46, CW 77/79, CoT's disabled random "hi"); timing (delay: next day by default, via `days_since_flag`; hour
+  window via `time_of_day`), with one TOML trigger showing flag + `days_since_flag` + `time_of_day`. Engine fact:
+  on a conversation `time_of_day` is checked once, at delivery (latch at `v2.py:2289`). The corpus gate table is
+  one counted line; engine cites re-pointed (`v2.py:4326` evaluator, `:4566` `time_of_day`). Cut: the
+  `college-daze` quote "Most of the characters stats on the phone profile…", and the `family-ties` noon-to-six
+  example.
+- **Footer** ("What is not gated here"): the "must not become a gate" paragraph becomes "a WARN, never a block
+  (planned gate: `a chat is short and timed`)". Its list of withdrawn rules (R4, study 6, P0, the wardrobe gate)
+  goes, which removes the P0 orphan pointer.
+
+**Verified.** All twelve P-ids present (`grep -c "^## P[0-9]"` = 12); `reply` → `applyAndNotifyFlag` →
+`applyFlagEffect` writes `set_day`, so `days_since_flag` works on a reply-set flag (`v2.py:6602`, `:6526`);
+`--selfcheck` current, **orphans 3 → 2** (the-phone.md P0 gone, as the PRD expects); pytest 475 passed.
+
+**Words:** +8, running total 142,462 / 149,283.
+
+---
+
+## 2026-10-01 — Phone P1: flip the default (World and Systems PRD, Phase 3; LO's WS-D7)
+
+**Why.** WS-D7: every game the skill copies has a phone and its threads carry the arcs (round 9a §0, §2), while
+`SKILL.md` said "most games should not have one". The new primary failure is live arcs with no phone.
+
+**What changed.**
+- `references/the-phone.md`: the intro's failure line is now "live arcs with no phone" (IHOH's 10 senders are all
+  arc people; SD calls only met contacts; the feed failure is pointed at P6). P1 is rewritten as "Every person she
+  is involved with has a thread": the default is a phone with a thread per person she is involved with (CW Damien,
+  lunch scene to sex); a thread starts at the scene flag that causes its first text (P4); every app is a door to
+  sex, money or people, or it isn't there (IHOH 6 of 15 apps pay nothing; CW followers buy nothing; CoT Findr, IHOH
+  OnlyGirlz as doors). The three refusal questions are cut. The thin-phone warning and "a declared channel must
+  exist in the built game" are kept (its "see below" pointer dropped, since P2c replaces that section). Contents:
+  P1 and P3 titles, and the missing P12 line. P3's heading loses "fifteen words" (its body is P2a's). P10's "That
+  is P1's rule" becomes "this file's rule". The footer's "P3's fifteen words" becomes "P3's message length" so
+  this item's Verify grep is clean before P2a rewrites the footer.
+- `SKILL.md` (the routing line for the phone): P1 is the default, not a refusal question.
+- `references/the-first-hour.md` F4: the phone is armed by the first scene flag that causes a text.
+- `DOCTRINE_GAPS.md` row 12 and the 2026-08-29 phone-study row: superseded notes (not rewrites).
+- `references/the-want.md:162-163` is W1b (PROTECTED) and was not touched.
+
+**Verified.** `grep -rn "should not have one\|fifteen words" SKILL.md references` = 0; `--selfcheck` current
+(orphans 3); pytest 475 passed.
+
+**Words:** +123, running total 142,454 / 149,283.
+
+---
+
+## 2026-10-01 — Phone S3b: two carry-overs from the Phase 2 build (World and Systems PRD)
+
+**Why.** S3 left `references/engine.md` §19 alone because the Phase 2 prompt kept engine.md edits inside §26 and
+§30.1, so one "needs + work + people" survived. The-board.md's `the_kitchen` example used `npc_martin` /
+`npc_denise`, ids from off_season, one of our own games (commit e0783a1); our games are never examples.
+
+**What changed.** `references/engine.md` §19 (`:588`, the only engine.md line touched): "needs + work + people"
+becomes "needs + systems + people". `references/the-board.md:83`: the `the_kitchen` `serves.people` ids become
+`npc_a` / `npc_b`; the example itself stays (W9). The `serves.work` key is unchanged.
+
+**Verified.** `grep -rn "needs + work + people" SKILL.md references` = 0; `grep -rn "npc_martin\|npc_denise"
+SKILL.md references templates` = 0; `--selfcheck` current (orphans 3); pytest 475 passed.
+
+**Words:** +0, running total 142,331 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E2: event pools that remember (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** WS-D10 step 2. A `block_pool` picked `random(0, n-1)` on every render and a random canvas
+rolled a flat `chance` for ever, so a big pool showed the same few events twice before the rest once.
+
+**What changed.**
+- `generators/v2.py` (+~95 lines): `block_pool` takes `memory = "seen"` (optional `seen_weight`,
+  default 0.1). `setup.pickRememberedPoolEntry` weighs a seen entry `seen_weight` against 1 for a
+  fresh one and records the pick in `$game_state.pool_seen[key]` (index -> times shown); the key is
+  the pool's `id`, else a hash of its entries. `pool_seen` joins the skeleton (so `stateDefaults` and
+  the backfill) only when a game has such a pool. A random canvas takes `trigger.seen_weight`:
+  `setup.canvasRollChance` multiplies `chance` by it once the canvas has fired, and both random
+  rollers (`selectCanvasByPriority`, `checkRandomEncounters`) read it. The payload carries
+  `seenWeight` only when set.
+- `template_import.py` + `game_graph.py`: `seen_weight` on the trigger dataclass, parsed, and copied
+  into trigger metadata by both writers. The block normalizer copies `memory`/`seen_weight` (and `id`
+  for a remembering pool) from the block's top level, as it already did for `blocks`; without that
+  the documented top-level shape would have dropped `memory` silently. `_validate_seen_memory`:
+  `seen_weight` must be in (0, 1], only on random canvases or remembering pools; `memory` must be
+  `"seen"`.
+- `references/engine.md` §35 gains "A pool that remembers"; §40's backfill table names `pool_seen`.
+- Tests: new fixture `engine_ws_batch1_2026_10_01.toml`; new `test_pool_memory.py` (18: route,
+  validator, inert without the keys, exact-draw weighting, play records, the old-save load); one in
+  `test_save_migration.py`. The old save (`tests/data/e2_pre_change_save.txt`) was written by a build
+  at `72cb456` (before E2) and loads with `pool_seen = {}` backfilled.
+- Cites: 426 `v2.py` and 67 `template_import.py` cites re-pointed through the edit's line maps; the
+  two that pointed at the rewritten `random(0, …)` line were moved by hand to `v2.py:16328`.
+
+**Verified.** Django tests: the same 14 pre-existing failures, nothing new. Skill pytest passed;
+`--selfcheck` current, orphans 3; `cite_check` 0 drifted. The six games rebuild with passage text
+unchanged: the only `index.html` diff is the two new engine helpers and the two `chance` reads
+(43 script lines each).
+
+**Words:** +166, running total 140,820 / 149,283.
+
+---
+
+## 2026-10-01 — Systems E9b: reputation's interim doctrine (World and Systems PRD, Phase 7, lands with Phase 2)
+
+**Why.** Q7/WS-D20: reputation becomes a full gossip system later (E9a study, E9c engine). Until then games need a
+rule that does not wait, and that keeps reputation out of the system checks (K1/K2).
+
+**What changed.** `references/the-systems.md`, one paragraph after SY8: reputation is meters until the engine can
+spread gossip — one trait per audience from existing pieces (trait conditions, sidebar bands,
+`[[traits.labels]]`, daily-tick decay, the cast page's `show_traits`), declared in `board.meters[]`, never
+`board.systems[]`; the card is `templates/cards/reputation.md` (S2b, 1 of 3); W5b (protected, untouched) still
+owns what reputation is for.
+
+**Verified.** `grep -ci reputation generators/v2.py` = 0 (no engine primitive, as round 9b says);
+`[[traits.labels]]` and `show_traits` are in `engine.md` §30 and the cast-page section; `--selfcheck` current
+(161 rules, orphans 3); pytest 475 passed.
+
+**Words:** +71, running total 142,331 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S10: the engine collects the bill at midnight (pitch_pack part PROTECTED, tools)
+
+**Why.** Billable F4: a pitched scene was written ON the rent payment, while `[settings.rent]` collects it itself.
+
+**What changed.** `references/engine.md` §26 (only that section): a one-line summary under the heading — the engine
+arms the bill at 00:00 on the due day and takes it on her next move; authored scenes sit beside the payment,
+never on it (matching steps 1–2 already in §26). `references/the-want.md` §2 (not §1b): the same line in the §2
+bullet, pointing at §26. `scripts/pitch_pack.py` `_print_promise`: when `want.hold_kind = "bill"` the promise
+block prints the line (+5 lines inside the function). New `scripts/tests/test_pitch_pack_s10_bill.py` (2 tests).
+
+**Verified.** The new test shows the line with `hold_kind="bill"` and not for another hold; `cite_check.py --fix`:
+0 drifted in SKILL.md + references (nothing in the skill cites `pitch_pack.py` lines); engine.md's diff is one hunk
+inside §26; `--selfcheck` current (orphans 3); pytest 475 passed.
+
+**Words:** +54, running total 142,260 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S9: a person who doesn't climb (`keeps = "none — …"`)
+
+**Why.** Billable F1: some people are part of a system (the bill's collector, a boss) rather than a climber, and
+`want.cast[].keeps` had only the three climbing values.
+
+**What changed.** `references/state.md` (`want.cast`): `keeps` may be `"none — <why>"`; such a person sits in a
+system card's `people[]`. `references/the-meters.md` W1 "What each man keeps score of": a generic row — a system,
+not him; `none — ` and why; like "a landlord who is the bill's deadline" (no game named). `templates/want.md` §5:
+the same option in the keeps sentence. No `shape.py` change (that is K11's).
+
+**Verified.** grep finds the `none — ` rule in `state.md`, `the-meters.md` and `templates/want.md`;
+`test_templates_parse` passes; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +65, running total 142,206 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S7: hygiene comes back, for routing only (WS-D5)
+
+**Why.** WS-D5: `engine.md` §30.1 banned hygiene on evidence from two adults-only FAIL games
+(degrees-of-lewdity, free-cities). Course of Temptation uses needs to route her into event places, and says so in
+its code.
+
+**What changed.** `references/engine.md` §30.1 rewritten (only that subsection): hygiene allowed as one need whose
+refill places always roll events (the shared shower); low hygiene has a cost, never a game over; an off switch (a
+start choice, R5b.4); hunger only when a premise needs it; it leads to a person or a sex scene and gets a card
+(`templates/cards/needs.md`); CoT's code note (`cot_27_database_needs.js:2-3`) is the reason; the existing pieces
+named (`[player.trait_decay]`, `trait_status_text`, `template_import.py:4156-4160` re-read). The old evidence stays
+as counts only, labelled adults-only FAIL; the quoted DoL code block is cut. `references/the-meters.md` M8: one
+paragraph (`shuts` routes her; the off switch); M10's decay line no longer says "no hygiene". `templates/board.toml`
+needs comment: hygiene allowed for routing. The `hunger` examples in `the-board.md` (`the_kitchen` serves) and
+`state.md` (`serves`) become `energy` and `hygiene`. The-systems.md's ambient list was handled in S1a.
+
+**Verified.** `grep "deliberate non-feature"` gives 0 hits outside this changelog; `git diff` of engine.md is one
+hunk inside §30.1; gate 29 (`a need shuts a door`, `gates.py:8675`) is untouched and still reads every
+`board.needs[]` key; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +7, running total 142,141 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S6: meters live inside systems (light touch)
+
+**Why.** WS-D3: meters are now what systems write and read; `the-meters.md` did not say so.
+
+**What changed.** `references/the-meters.md`: the intro gains one paragraph (meters live inside systems;
+`the-systems.md` owns the activity and its card, this file owns which meters exist and what the climb costs); W1's
+who-climbs table gains one line pointing system pay and lewd ladders at SY8; W4 cross-links SY8's "≥4 lewd rungs,
+≥2 acts per rung" floor. W5b, W8 and M1–M5 are not edited.
+
+**Verified.** `git diff` touches only the intro, W1 and W4; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +85, running total 142,134 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E1b: the clothing warning names the player, not "Emma" (World and Systems PRD, Phase 7; GLOBAL runtime text)
+
+**Why.** PRD E1b: `setup.validateClothing` hard-coded "Emma" in all three of its warnings.
+
+**What changed.** `generators/v2.py` (+3 lines): the three warnings read `$player.name` (customization
+included), falling back to "Player" as the hint code does. `references/engine.md` §17 gains two lines.
+The built script changes in every clothing game: members_only, billable_hours, orientation and vesper
+(9 lines each in `index.html`; probation and the_balance have clothing off and are byte-identical).
+**No player sees the change today:** nothing in `v2.py` or any game calls `setup.validateClothing`.
+New test file `apps/game_generation/tests/test_clothing_warning_name.py` (3 tests; node runs the built
+function with a named and an unnamed player; fails on the old code). 417 `v2.py` cites in SKILL.md
+and references moved +3 through the edit's line map, each checked to land on the same source line.
+
+**Verified.** Django tests: the same 14 pre-existing failures as `ed2f1c6`, nothing new. Skill pytest
+passed; `--selfcheck` current, orphans 3; `cite_check` 0 drifted in SKILL.md + references.
+
+**Words:** +26, running total 140,654 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S5b: A15 as a money system's lewd ladder, and the stale "zero hits" line
+
+**Why.** WS-D3/WS-D4: paid sex is a money system, and A15 is its lewd ladder. And `the-want.md` §4a claimed a grep
+for paid sex "returns zero hits" in the skill — false since A15 and `the-voice.md` taught it.
+
+**What changed.** `references/the-arc.md` A15 (not protected): the heading becomes "Her climb into paid sex — the
+lewd ladder of a money system"; one paragraph names Shady Deals' stroll as the model (price built from her stats,
+the corner picks the act, the price on screen before she agrees, `[Spot Work]`) and Course of Temptation's
+gloryholes as the failure (38 passages, none pays; round 9b `cards/sex_for_pay.md`), pointing at
+`templates/cards/sex_for_pay.md`. The A15 bullets are unchanged. `references/the-want.md` §4a: the "zero hits"
+sentence is replaced by a line saying paid sex is now taught on purpose (A15 and the card).
+
+**Verified.** `grep -n "returns \*\*zero hits\*\*" references/the-want.md` gives 0 hits; `[Spot Work]` exists in
+the Shady Deals passages; `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +91, running total 142,049 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S5a · PROTECTED (the arc, WS-D11): A5's two ladders
+
+**Why.** WS-D4: SY8 now says a system runs one ladder by default and two only if they touch; A5's "two routes means
+two ladders" read as if it licensed two untouched ladders anywhere.
+
+**What changed.** `references/the-arc.md` A5: one line after "Three things worth taking" — two routes on one person
+are two arcs; inside a system, ladders follow SY8's touch rule. Nothing else in A5.
+
+**Verified.** `git diff` is the one added line (plus its blank line); `--selfcheck` current (orphans 3); pytest
+473 passed.
+
+**Words:** +17, running total 141,958 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S4 · PROTECTED (money file, WS-D11): money systems name a sink and a deadline
+
+**Why.** WS-D3/WS-D4 and round 9b §2.7: every money system needs a sink with a deadline, and pay must rise with
+the bill — R3c said so only for "the obligation".
+
+**What changed.** `references/the-economy.md`: **R3c** gains one paragraph — every money system names its sink and
+deadline on its card, its pay ladder rises with the bill it answers to, and the price is shown before she agrees
+(gate 21). R3c's `sluttown-usa` quote goes (the game stays as the counted case, §0.6). R3c's opening also loses the
+four-word player quote *"here u still grind for nothing."*: it comes from `high-school-days`
+(`~/Documents/Mopoga_Twine_Sandbox_Research_20260724/comments/high-school-days.json`), a game that fails the
+adults-only rule, and §0.6 cuts FAIL-game quotes from a section an item rewrites — **the PRD's S4 text does not
+name this cut; flagged for the lead.** **R3d** gains one line: a plateau is fine, but the deadline persists. "What
+the board phase records" points at the cards for per-system sinks and deadlines. R-ids unchanged; the file's
+protected title untouched.
+
+**Verified.** R-ids diff against HEAD: unchanged; `--selfcheck` current (161 rules, 0 broken pointers, orphans 3);
+pytest 473 passed.
+
+**Words:** +69, running total 141,941 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S3-text · PROTECTED (tools, Q9): gates.py says "needs + systems + people"
+
+**Why.** S3 made a job a system with a card; four printed texts in `gates.py` still taught "needs + work + people".
+
+**What changed.** `scripts/gates.py`, four line-for-line text swaps, no logic touched: the section comment above
+the needs/walk-in/labels pass (`:2146`), the menu-cap note (`:8150`), the no-needs advice (`:8699`) and the
+browse lint's footnote (`:13155`) now say "needs + systems + people".
+
+**Verified.** Line count unchanged (13,718 before and after); `cite_check.py --fix`: 0 drifted in SKILL.md +
+references, nothing moved; `grep "work + people"` over `scripts/` gives 0 hits; `--selfcheck` current (orphans 3);
+pytest 473 passed.
+
+**Words:** 0, running total 141,872 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S3: SY8 "Designing a system", and jobs become systems (World and Systems PRD, Phase 2)
+
+**Why.** WS-D4, N16: the skill had a definition of a system (S1a) but no rules for designing one, and still taught
+a room's list as "needs + work + people" with "one per job".
+
+**What changed.** `references/the-systems.md`: new **SY8 · Designing a system** — fill a card per system before
+the rooms; one ladder by default, two only if they touch (CoT's burger job and CW's waitress job run one; CoT's
+lectures run two that touch; its River Rat bar keeps rank and flirtiness apart, joined only by event tips, per
+the round 9b trace; a second ladder with its own rank waits on the engine, `v2.py:3098`); the price is shown
+before she agrees (SD; gate 21); ≥2 connections and ≥1 ending in a person or a sex scene (round 9b §3); day 1 at
+the bottom rung (SKILL.md commitment 4); the measured floors as directions (≥20 events in a daily pool, ≥4 lewd
+rungs, ≥2 acts per rung, a seen event weighted down — CoT 1/10; `block_pool` has no memory yet, `v2.py:16235`).
+SY3's `labels`/`serves` note says "needs, systems, people". **Jobs become systems:** `the-surfaces.md` (the
+three-kinds table row "a system … a job is a system with a card", the field line, R2's heading, opening and
+bullet, R2c's opening); `SKILL.md` (the room-list sentence and the objects lesson); `the-board.md` (the
+derivation formula and the `serves` bullet); `templates/board.toml` (the derivation comment and both `work`
+comments); `references/state.md` (the `serves` comment); `the-meters.md` M9. The `serves.work` key is unchanged.
+
+**Not done, and why.** `references/engine.md:588` (§19) still reads "needs + work + people": this session's brief
+keeps engine.md edits inside §30.1 and §26, because a parallel engine session edits engine.md. Left for the lead.
+
+**Verified.** `grep "one per job"` 0 hits; `grep "needs + work + people"` 1 hit, engine.md:588 (above);
+`--selfcheck` current (161 rules — SY8 picked up by `_RULE_DEF`; 0 broken pointers; orphans 3); pytest 473
+passed.
+
+**Words:** +358, running total 141,872 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S2b (3 of 3): job, sex for pay, shoots, streaming, gym and pregnancy cards (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3/WS-D12: the remaining round 9b system cards.
+
+**What changed.** New `templates/cards/`: `job.md` (CoT River Rat, with CW's waitress counter as the one-ladder
+default; the River Rat trace says its two ladders do not touch, and the card says they meet only through the
+shift's event tips), `sex_for_pay.md` (SD's stroll: price shown before she agrees; CoT's $0 gloryholes as the
+failure), `shoots.md` (CW modelling and porn studio; one ladder), `streaming.md` (CoT, IHOH for the 4-rung floor),
+`gym_body.md` (IHOH body that pays; CoT gym and sports), `pregnancy.md` (CoT). Round 9b's `tv_leisure.md` is not
+carried: round 9b judges TV a surface, not a system.
+
+**Verified.** The scratch cite/banned-word/own-game check over all 15 cards: 0 problems; engine cites re-read.
+`--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** 0 (cards are not counted), running total 141,514 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S2b (2 of 3): money, needs, shops and Greek life cards (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3/WS-D12: one worked card per system from round 9b, in `templates/cards/`.
+
+**What changed.** New `templates/cards/`: `money_pressure.md` (CoT's Monday bill; IHOH's late rent that turns into
+sex; CW's Mark debt chain only), `needs.md` (CoT, framed hygiene-first per WS-D5: one need, refill places roll
+events, a cost and never a game over, an off switch; CoT's code note quoted; its other needs kept as the measured
+model), `shops_items.md` (CoT upgrade ladders; IHOH items as keys; CW Looks items), `greek_life.md` (CoT, with the
+lead's corrected pledge counts — 41 tasks, 79 points, 30 to join — plus one line each for SD heat, SD businesses
+and IHOH porn taste, and the round's not-systems as counts). Every money card names its sink and deadline.
+
+**Verified.** The same scratch cite/banned-word/own-game check as (1 of 3): 0 problems; engine cites re-read.
+`--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** 0 (cards are not counted), running total 141,514 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S2b (1 of 3): infrastructure cards, the reputation card, and W2's re-point (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3 and WS-D12: the worked cards live in `templates/cards/` (not counted). Round 9b's map, quests/hints,
+cheats and walk-pool cards describe clocks, views and channels, which S1a made infrastructure; reputation stays
+meters until the gossip engine (E9b/E9c).
+
+**What changed.** New `templates/cards/`: `map_travel.md` (channel; CoT, with SD and IHOH travel speeds),
+`quests_hints.md` (view; CoT, IHOH, SD), `cheats.md` (view; CoT, SD; points at SY7 and `engine.md` §48 rather than
+restating them), `random_encounters.md` (channel; CoT walk pools — round 9b §1 names the walk pool a channel; the
+PRD's S2b list does not name it either way), each saying it is declared in `board.infrastructure[]`, never
+`board.systems[]`; `reputation.md` (meters until the gossip engine; CoT and SD as the target shape; one trait per
+audience from existing pieces, declared in `board.meters[]`). `references/the-want.md` §6: the thread's "system
+that runs it" line points at `the-systems.md` SY1 and `templates/cards/` (W2's re-point, found by the Phase 1
+build). Round 9b's `school.md` is not carried (S8's `college.md` replaces it); phone and wardrobe are P3 and C6.
+
+**Verified.** A scratch check over every card: every `[Passage]` cite exists in `round2/passages/`, every `.js:`,
+`userjs:` and `mopoga#` cite appears in round 9b's files, the banned school-word grep (S8's whole-word list) gives
+0 hits, and no own game, Jack, Aaron or FAIL game is named; every `v2.py`/`template_import.py` line cited was
+re-read. `--selfcheck` current (orphans 3); pytest 473 passed.
+
+**Words:** +8 (the re-point), running total 141,514 / 149,283.
+
+---
+
+## 2026-10-01 — Engine E1: the importer rejects bad conditions (World and Systems PRD, Phase 7; GLOBAL, build-time only)
+
+**Why.** WS-D10 step 1. A condition with an unknown type, key or operator imported clean and failed
+closed at runtime; one with no `version` failed open. Nothing between the TOML and the game said so
+(vesper_two's two buy locks with `state = "not_owned"` were always true, PRD §9 G1).
+
+**What changed.**
+- `apps/projects/services/template_import.py` (+130 lines): one table, `CONDITION_SCHEMA` (17 types,
+  each with its allowed keys and operators, mirroring `setup.triggerConditionsSatisfied`), and one
+  walker, `_walk_condition_carriers`, run from `normalize()` into `_parse_errors` so both builds (TI
+  and the no-DB `game_graph` path) fail. It walks the raw TOML by key name: `conditions`,
+  `entry_conditions`, `match_condition`, `show_when`, and a schedule row's `when`. Quest cards and
+  `player_portrait` are excluded. Errors: missing version, unknown block key or `logic`, unknown
+  type, key or operator. An empty table is "no condition".
+- `references/engine.md` §2 says the importer now rejects these; §37's "not validated by the
+  importer" line is now past tense.
+- Test fixture `engine_prd_2026_04_22.toml` carried the exact bug (an unversioned `entry_conditions`
+  with `id`/`value` keys, so the gate always passed): rewritten to a real v1.0 `is_false` gate. A
+  cascade test in `test_legacy_engine.py` used `trait` for `trait_key`: fixed.
+- Tests: `ConditionSchemaE1Tests` (15) in `apps/projects/tests.py`, including every carrier (27 in
+  one fixture), the two exclusions, a portrait-`when` fixture that still builds, and a drift guard
+  that every table type has a runtime branch; `TraitConditionNeSchemaTests`' "not whitelisted" test
+  now asserts the rejection; 2 in `tests/test_npc_schedule_when.py`.
+- Cites: 47 `template_import.py` cites in references re-pointed (5 by `cite_check --fix`, 42 through
+  the edit's line map, each checked to land on the same source line).
+
+**Verified.** Django tests (`apps/projects/tests.py`, `tests/`, `apps/game_generation/tests`): 14
+failed, the same 14 that fail at `ed2f1c6`. Skill pytest passed; `--selfcheck` current, orphans 3.
+Scratch rebuilds of members_only, billable_hours, orientation, probation, the_balance and vesper: all
+import, `index.html` byte-identical to `ed2f1c6`. vesper_two fails (its two `state` keys), as
+expected (WS-D24).
+
+**Words:** +88, running total 140,628 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S8: adult college, Course of Temptation model only (World and Systems PRD, Phase 2)
+
+**Why.** WS-D6: the skill banned any school, which also ruled out an adult college — the setting of the field's
+strongest model (Course of Temptation). LO allowed an adult college, CoT only, with a list of words a game never
+uses.
+
+**What changed.** `references/the-voice.md`: new short section "Adult wording — a college, never a school" (everyone
+18+ and stated; university words; the banned list as whole words or phrases: detention, homeroom, prom, "after
+school", "high school", "middle school", "junior high", teen, teenager, schoolgirl, "school uniform", "class
+president", "grade 9"–"grade 12"; freshman and sophomore allowed). `references/moment-library.md` adults-only
+note: an adult college is allowed, with pointers. `.claude/agents/v2-pitcher.md` "Adults only" line: the same.
+New `templates/cards/college.md`: the college system card from round 9b's `cards/school.md` and
+`traces/school.md`, re-scoped to CoT only (lecture timetable, grades that move the weekly bill ±20% at 2
+thresholds, professor favor as the door to 24 extra-credit events in 5 chains, homework for cash or sex, the
+weekly bill as sink and deadline). Round 9b's `school.md` is not carried over (S2b).
+
+**Verified.** The card cites only CoT; every `[Passage]` cite greps in `round2/passages/`, every `.js:` and
+`mopoga#` cite in round 9b's files, and the banned-word grep over the card gives 0 hits (scratch script, same
+whole-word list). `v2.py:15610` re-read ("only 'random' is supported"). `--selfcheck` current (orphans 3); pytest
+473 passed.
+
+**Words:** +131, running total 141,506 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S1b-code · PROTECTED (tools, Q9): the labels lint reads meters
+
+**Why.** S2a split the ledger: meter rows move to `board.meters[]` and `board.systems[]` holds design cards. The lint
+read `board.systems[]` only, so a migrated ledger would have read its cards as meters and its meters not at all.
+
+**What changed.** `scripts/gates.py`: `lint_labels_and_systems` reads `_meters_of_board(board)` — `board.meters[]`,
+plus any old meter-shaped `board.systems[]` entry (a `kind` and no card field); a card is never read as a meter.
+Its docstring, findings and summary say "meter"; the printed explanation under the lint says "meter" for ambient
+and sourced. All swaps are line-for-line. The new helper `_meters_of_board` and `_SYSTEM_CARD_FIELDS` sit just above
+`def main()` (+18 lines). The lint's name (`the labels and the systems agree`) is unchanged, so `SKILL.md`'s lints
+paragraph and `_emitted_names` still agree. `references/state.md`: the `board.meters[]` gate-keys row says the lint
+also reads old meter-shaped rows. New `scripts/tests/test_gates_s1b_meters.py` (5 tests: old shape, new shape, a
+card is not a meter, a clean meter, nothing declared).
+
+**Verified.** `cite_check.py --fix`: 0 drifted in SKILL.md + references; the one cite past `main()`,
+`the-release.md` "Lints never touch the tally" (`gates.py:12991`), was re-pointed by hand to `gates.py:13009`
+(the same comment line); `gates.py:7647`, `8567`, `9268`, `9350`, `9372`, `9424` checked unmoved. `gates.py
+billable_hours` (read-only) prints "6 meters declared (2 sourced)" from its old-shape ledger. `--selfcheck` current
+(orphans 3); pytest 473 passed.
+
+**Words:** 0, running total 141,375 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S2a: the ledger split and the card sheet (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3: a system is now a design card, not a meter, but every ledger's `board.systems[]` holds meter-shaped
+rows. The ledger needs a home for each.
+
+**What changed.** `references/state.md`: the `board` schema splits into `board.systems[]` (the cards: `id`, `name`,
+`place`, `hours`, `cost`, `pay_ladder[]`, `lewd_ladder[]` with `acts[]`, `one_ladder`, `people[]`, `pool[]`, `daily`,
+`memory`, `growth`, `sink`, `deadline`, `feeds[]`, `reads[]`, `hook_link`, `leads_to[]`), `board.meters[]` (today's
+shape unchanged) and `board.infrastructure[]` (`name`, `kind`: clock · view · channel); an entry with `kind` and no
+card fields is read as a meter until the game moves it. The prose block and the gate-keys table gain the three
+rows (the meters row says the lint still reads meter-shaped `board.systems[]` until S1b-code). `templates/sheets/
+system.md` becomes the card (one page of slots). `references/the-board.md` §1 says fill a card per system before
+the rooms; "Before leaving this phase" records cards, meters and infrastructure. `SKILL.md` dispatch row: "fill a
+card per system before the rooms". `templates/board.toml`: a commented pointer above the meters. No game ledger is
+touched (§9 G5 is a game session's job).
+
+**Verified.** `test_templates_parse` passes (the card sheet is one page of slots); an old-shape and a new-shape
+ledger both run through `lint_labels_and_systems` without error; `_template_field_gap` lists the same 37 fields
+(nothing new); `--selfcheck` current (orphans 3); pytest 468 passed.
+
+**Words:** +361, running total 141,375 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S1b: cross-references to the new definition (World and Systems PRD, Phase 2)
+
+**Why.** S1a changed what a system is (WS-D3); the files that pointed at the old "what the game keeps track of"
+sense had to follow, or they would teach the meter as the system.
+
+**What changed.** `SKILL.md`: the world-files paragraph names `the-systems.md` as "what she does again and again";
+the optional-file line calls the phone a channel, not a system; the labels lint text says "meter"; the four
+lessons bullets on swaps, colouring and small-vs-large say "meter" or "body values". `the-surfaces.md` R2c: the
+brake now carries both halves (a system earns its place by feeding something already read or by moving money; a
+meter by being read in more than one room); R2c's "No gate" lines are unchanged until K1/K2. `the-systems.md` SY2
+quotes R2c's meter half. `the-sheets.md`: the system sheet row is a design card; the "written first" paragraph
+and the review order follow. `the-board.md`: the room question asks whether a system there writes a sourced meter.
+`the-map.md` intro: the map is infrastructure. `the-phone.md`: "Why this file exists" names the phone a channel,
+and "A declared system must exist" becomes "A declared channel". `DOCTRINE_GAPS.md`: follow-on row 19b; row 19
+left as written. `the-economy.md`'s title is untouched (protected vocabulary).
+
+**Verified.** `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** +67, running total 141,014 / 149,283.
+
+---
+
+## 2026-10-01 — Systems S1a: the new definition (World and Systems PRD, Phase 2)
+
+**Why.** WS-D3 (N13, round 9b §1): SY1 defined a system as "something the game keeps track of about her" — a meter.
+A job, a stream or a class had no home, and SY2b's "never a new mechanic" forbade one.
+
+**What changed.** `references/the-systems.md`: the title; "Why this file exists"; the excluded-recipes note gains
+one sentence (the cards in `templates/cards/` are not those recipes; every line cites a traced game); the
+ownership table; the W1 paragraph. **SY1** is rewritten: a system is a place she goes or a thing she does, by
+choice, again and again, with rules, a memory, a ladder that climbs or decays, and a link to money, body, people
+or sex; the 5 questions plus round 9b's two (does she choose to use it, does it own a place or an action);
+clocks, views and channels are infrastructure, named and counted apart (In Her Own Hands' energy bar, Shady
+Deals' actions a day, Course of Temptation's walk pool, from round 9b §1); meters live inside systems, and
+ambient vs sourced is now a property of a meter ("hunger" dropped from the ambient examples, per S7). **SY2** and
+**SY2b** speak of meters; "never a new mechanic" now heads the meter rule only. **The brake**: a new system must
+feed something already read, or be a source or sink of money; the meter half is kept. "What the board phase
+records" shows the `board.systems[]` (cards) / `board.meters[]` / `board.infrastructure[]` split (schema lands
+in `state.md` with S2a), and "The check" describes the lint over meters (the code follows in S1b-code). SY ids
+unchanged.
+
+**Verified.** `--selfcheck` current (160 rules, SY ids unchanged, 0 broken pointers, orphans 3, the baseline);
+`grep -rn "never a new mechanic"` finds only the meter heading; pytest 468 passed.
+
+**Words:** +408, running total 140,947 / 149,283.
+
+---
+
+## 2026-10-01 — World W10b · PROTECTED (truth rule, WS-D25): a neutral example
+
+**Why.** WS-D25: W10's example *"at week twelve he decides"* came from one of our own games, and our own games are
+never examples (§0.6 of the World and Systems PRD).
+
+**What changed.** `references/register.md` "The truth rule", the "A promise about the future must be built"
+paragraph: the example becomes *"next month he decides"*. Nothing else in the section changed.
+
+**Verified.** `git diff` is that one phrase; `grep -rn "week twelve"` over the skill finds only this changelog;
+`--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** −1, running total 140,539 / 149,283.
+
+---
+
+## 2026-10-01 — World W11: a goal's end is something the game builds (World and Systems PRD, Phase 1b)
+
+**Why.** WS-D23, N18: a game's ledger declared a goal whose `ends_when` nothing in the TOML could see, so the goal
+could never finish. The goal chain records the end only as text.
+
+**What changed.** `references/state.md`: the `want.promise.goals[]` line gains `ends_flag` (the flag id set when
+the goal is met), with its comment marking the check as planned (K14). `references/the-want.md`: one sentence
+after the goal-chain sentence. `templates/want.md` names none of these keys, so it is unchanged. No shape.py or
+gates.py change.
+
+**Verified.** grep finds `ends_flag` in `state.md` and `the-want.md`; `test_templates_parse` and the full skill
+pytest pass; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the baseline).
+
+**Words:** +42, running total 140,540 / 149,283.
+
+---
+
+## 2026-10-01 — World W10 · PROTECTED (truth rule, WS-D11): a promise about the future must be built
+
+**Why.** WS-D23, N18: a game promised a dated review ("week twelve") many times and never built it. The truth rule
+covered claims about the past and the present, not promises about the future, and "The goal has no date" in
+`the-want.md` had nothing to point at for the lines that repeat the date.
+
+**What changed.** `references/register.md` "The truth rule": one paragraph added after the four numbered rules,
+"A promise about the future must be built" (a line naming a future day, week or scene is true only if the game
+builds that event or its step is in the release plan; otherwise cut it or drop the date). The paragraph sits
+outside the numbered list so the heading "The four rules." and every other line of the section stay unchanged.
+`references/the-want.md` "The goal has no date" now points at it.
+
+**Verified.** `git diff` of `register.md` is the four added lines only; grep finds the rule once; `--selfcheck`
+current (160 rules, 0 broken pointers, orphans 3, the baseline); pytest passed.
+
+**Words:** +71, running total 140,498 / 149,283.
+
+---
+
+## 2026-10-01 — World W9: a home is laid out like a house (World and Systems PRD, Phase 1b)
+
+**Why.** WS-D23, N18: a game shipped with the kitchen as the house hub, the people who live there homed in it, and
+the bathroom folded into a landing. R2 "If someone lives there, they have a room" never said what a room is, and
+gate 12 accepts any declared location as a home.
+
+**What changed.** `references/the-map.md`: R2 gains "A home is laid out like a house" (a home is a bedroom, never
+the hub, a thoroughfare, the kitchen, a hallway or a landing; the house is entered through its hall, named for the
+home; one room, one job, so a shared bathroom is its own room per R6c; plain names). R3 gains one inside-the-house
+diagram under the ground diagram. The checked table's gate 12 row now says what gate 12 checks today (a real
+location or `offscreen`) and marks the bedroom checks as planned (K13); no gate code changed. `the-board.md`'s
+`the_kitchen` example is left alone (a kitchen as a room with people scheduled in it is correct).
+
+**Verified.** grep finds each new rule once; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3, the
+baseline); pytest passed.
+
+**Words:** +230, running total 140,427 / 149,283.
+
+---
+
+## 2026-10-01 — World W4b · PROTECTED (A14, LO approved, WS-D11): A14 names thread steps
+
+**Why.** WS-D2: the third Pitcher pitches a step in a declared thread of her life (W4), so A14's "a pitch is a step
+on a named relationship" has to name that case.
+
+**What changed.** `references/the-arc.md` A14, one sentence: "A pitch is a step on a named relationship, or a step
+in a declared thread". Nothing else in A14 changed.
+
+**Verified.** The A-rule headings (A1–A15) are identical before and after; `--selfcheck` current (160 rules,
+0 broken pointers, orphans 3, the baseline); pytest 468 passed.
+
+**Words:** +7, running total 140,197 / 149,283.
+
+---
+
+## 2026-10-01 — World W4: the pitchers, two main idea + one her life (World and Systems PRD, Phase 1)
+
+**Why.** WS-D2: three Pitchers still run with no shared context, but "the three most owed" can only rank people
+who already exist, so every pitch stayed inside the hook. Two now take the two most-owed relationships; the third
+takes a declared thread of her life (W2), pitches a step in it, and may add one new person who belongs to that
+thread (name, age, thread). Zero new places stays. Assignment is by relationship or thread; the moment kind is a
+hint (this reconciles the two schemes the files carried). Lands after B7 (the reader accepts strangers) and W5
+(the pack carries threads).
+
+**What changed.**
+- `.claude/agents/v2-pitcher.md`: frontmatter; the three-way split; the caller gives a person or a thread, the kind
+  is a hint; `--thread` command; idea phase step 1 in a thread; reads "Her life — the threads" (`the-want.md` §6)
+  when given a thread; the rule on the next step covers a thread step and its link; the hand-on rule becomes "a
+  new person only in a thread pitch", with the hand-on kept for relationships and its citation fixed (the
+  film-production quote is `the-arc.md` A5, not A4); "you pitch content, not systems" becomes "a pitch may add a
+  rung or a person to an existing system, never a new system"; line 1 of the eight; a **New** slot (name, thread,
+  age).
+- `.claude/agents/v2-attack.md`: the pitch_pack calls (`--thread`, the new person) and "Before" for a thread step.
+- `references/the-release.md`: eight lines 1 (a thread step serves the fantasy through its link), loop step 2
+  (two + one, kind as hint), step 4 (a thread's new person arrives at a place she already has).
+- `references/agents.md`: the Pitcher's cost paragraph, what the pack holds, what each returns, and the
+  assignment paragraph (LO, 2026-10-01).
+- `SKILL.md`: the `want` dispatch row, the agent roster line, the `pitch_pack.py` bullet (THREADS).
+- `templates/idea.md` §4 and `references/moment-library.md` intro (a given kind is a hint).
+- `tests/test_pitch_pack_threads.py`: one assertion no longer spells the old phrase, so the Verify grep is clean.
+- Not here: `the-arc.md` A14 (W4b, protected).
+
+**Verified.** `grep -rn "three most owed" .claude/` gives 0 hits; pytest 468 passed; `--selfcheck` current
+(orphans 3).
+
+**Words:** +174, running total 140,190 / 149,283.
+
+---
+
+## 2026-10-01 — World W5 · PROTECTED (tools, LO approved, Q9): pitch_pack.py threads and the new person
+
+**Why.** WS-D2: two Pitchers take the top two most-owed people and the third pitches a step in a declared thread
+of her life, and may add one new person who belongs to it. The pack is the Pitcher's whole world, so it has to
+carry the threads and allow that one person.
+
+**What changed (`scripts/pitch_pack.py`).**
+- `--thread <id>` (main), passed to `idea_pack()` and `pack()`.
+- A THREADS section in both packs (`_print_threads`): each thread's id, name, person, place, system and link into
+  the hook; with `--thread`, that thread only, plus "may add ONE new person who belongs to it: name, age (18+),
+  thread. Zero new places." A thread person missing from `want.cast`, or a place missing from PLACES, prints as a
+  fact, never a score.
+- THE PROMISE prints a threads line ("N declared (THREADS below)" or "not declared"); both `--json` promise dicts
+  carry `threads`.
+- RELATIONSHIPS: "The caller gives the top two to two Pitchers, plus one thread (THREADS) to the third" (was "the
+  top three to the three Pitchers"); the MOST OWED comment says the same.
+- PEOPLE lines (both packs) and the closing lines allow one new person in a thread pitch's thread.
+- `--person` accepts an unknown person only with `--thread` ("new person … joins thread …"); without it, still
+  "unknown person".
+- The docstring and the kinds line make the moment kind a hint, not the assignment ("— a hint for a Pitcher, not
+  its assignment"; was "— one per Pitcher").
+
+**Tests.** `tests/test_pitch_pack_ic2.py`: the THE PROMISE "not declared" counts go 7→8 and 5→6 (the threads
+line). New `tests/test_pitch_pack_threads.py` (6 tests): THREADS section and facts, `--thread` filter and unknown
+thread, new person only with a thread (idea and built packs), no threads, JSON promise, the top-two caller text.
+The ic2 kinds pin (`three least used: …`), ic3 `--person` and dc1 pass unchanged.
+
+**Verified.** pytest 468 passed (462 + 6); a scratch `v2_state.json` with `want.threads` prints the THREADS section
+(`pitch_pack.py fx --thread dating --person npc_new`); `cite_check.py`: SKILL.md + references/ 0 wrong (baseline
+0), no `pitch_pack.py:NNN` cite exists; `--selfcheck` current (orphans 3). No `--ship` run: pitch_pack scores
+nothing and no gate reads it.
+
+**Words:** 0 (scripts are not counted), running total 140,016 / 149,283.
+
+---
+
+## 2026-10-01 — B7 · PROTECTED (A13, LO approved, WS-D11): the reader's test 1 accepts strangers
+
+**Why.** Billable Hours finding F9: test 1 asked every sexual step for an earlier canvas showing his want, so a
+stranger or a one-off (A15's night one) could never pass. The her-life pitches (W4) add strangers, so this lands
+first.
+
+**What changed.** One sentence, in three places: "scoped to a person with a ladder; a stranger or one-off (A15)
+passes if the same canvas shows his want before the act" — `references/register.md` "What a scene contains"
+test 1, `references/the-arc.md` A13 (end of the section), and `.claude/agents/v2-reader.md` test 1. Rule ids
+unchanged; nothing else in A13 changed.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (160 rules, 0 broken pointers, orphans 3); no
+`the-arc.md:NNN` line cite exists in the skill or the agents, so the three added lines move none.
+
+**Words:** +47, running total 140,016 / 149,283.
+
+---
+
+## 2026-10-01 — World W8: spine places are provisional until the board (World and Systems PRD, Phase 1)
+
+**Why.** Billable Hours finding F5: the spine names places before the board has rooms, so re-pointing SP2's
+`where` to a room looked like a reach-back change needing a re-sign.
+
+**What changed.** `references/the-spine.md` rules list: SP2's `where` and SP7's places are provisional until the
+board names rooms; re-pointing them to rooms is a board edit, not a re-sign. SP2's step fields mark `where` as
+provisional.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (orphans 3: the two the-spine.md orphans moved from :24 to
+:27 with the new bullet, same rules).
+
+**Words:** +38, running total 139,969 / 149,283.
+
+---
+
+## 2026-10-01 — World W7: the Cupid's Way example (World and Systems PRD, Phase 1)
+
+**Why.** N5: the taboo_at_home slice's Cupid's Way entry read as "the family is the world"; it is really a thread
+from outside feeding the hook, which is what W1 and W2 teach.
+
+**What changed.** `references/moment-library.md` taboo_at_home, the `[damien23]` entry, is restated as "a thread
+that feeds the hook: the man from outside, caught at home", with the reading that Damien comes from her life
+outside (her friend Jasmin's guy, who texts her, `[Answer his message]`) and is caught at home. The quote and the
+player line are unchanged.
+
+**Note.** The PRD says Damien comes from "her dating life". The source (`round2/passages/cupids-way.txt`) shows him
+arriving through her friend Jasmin and his texts, not a dating app, so the entry says "her life outside".
+
+**Verified.** The cited passage `[damien23]` is in `round2/passages/cupids-way.txt` (:16119) with the quoted line
+(:16122); neither it nor `[Answer his message]` names Jack or Aaron. pytest 462 passed; `--selfcheck` current
+(orphans 3).
+
+**Words:** +34, running total 139,931 / 149,283.
+
+---
+
+## 2026-10-01 — World W6: open places early, add people over time (World and Systems PRD, Phase 1)
+
+**Why.** N2, Q8 (WS-D21): the top games open most places on day 1 and grow by people and rungs, not places.
+
+**What changed.**
+- `SKILL.md` commitment 4 is extended with the rule, once: day 1 opens 42–98% of places and 0–38% of people in
+  7 of 7 games (round 7, `ROUND7_REPORT.md`); 79–87% of systems are usable on day 1 at their bottom rung
+  (round 9b, `ROUND9B_REPORT.md`); a release adds rungs and people, and a new system only as the top of an
+  existing ladder.
+- `references/the-release.md` "Where a release happens" points at it.
+
+**Verified.** `grep -rn "Open places early"` finds the rule once (`SKILL.md`); `the-release.md` points at
+"`SKILL.md` commitment 4" (and `the-arc.md` already cites commitment 4 for "events, not places", still true);
+pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +75, running total 139,897 / 149,283.
+
+---
+
+## 2026-10-01 — World W3: a new person brings a thread, not a place (World and Systems PRD, Phase 1)
+
+**Why.** SP5's adding rule ("a new person brings a place, a ladder, and why she wants them") clashed with zero new
+places per step and with a her-life person who arrives at a place she already has (W2, W4).
+
+**What changed.** The rule now reads "a new person brings a thread (or joins one), a ladder, and why she wants
+them" in `references/state.md` (`board.cast.adding_rule`), `templates/spine/SP5_cast.md` and
+`references/the-spine.md` SP5.
+
+**Verified.** `grep -rn "a place, a ladder\|a place · a ladder\|brings a place\|bring a place"` over the skill gives
+0 hits; pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +13, running total 139,822 / 149,283.
+
+---
+
+## 2026-10-01 — World W2: her life, the threads (World and Systems PRD, Phase 1)
+
+**Why.** N1 and N11: the skill gave her the hook and nothing else, while the top games build a life around it.
+Round 7 (`ROUND7_REPORT.md`): the hook is 11–54% of story passages in seven games, 28–52% even in the
+taboo-at-home ones. Q5 (WS-D18): the threads go in part 5 of the Want, renamed, and the Want keeps five parts.
+
+**What changed.**
+- `references/the-want.md` §6 is renamed "The people and her life" (number kept: §6 pointers live in ten files)
+  and gains "Her life — the threads": 4–6 threads, each with a named fixed person in `want.cast`, a place in
+  `want.places`, the system that runs it, and one link into the hook; round 7's share stated as a direction.
+  The leave-file test gains question 4 (4–6 threads, each with a person). §5 keeps only W1's hub text.
+- `templates/want.md` part 5 renamed, with a threads table (thread · person · place · system · link) and the
+  matching leave-page question.
+- `references/state.md` want block: `want.threads[] = {id, name, person, place, system, link}`. The ":40" comment
+  ("no gate reads them yet") is left for K11.
+- `templates/idea.md` §3 names the threads beside the companion, the pressure-man and the face.
+
+**Verified.** A scratch `v2_state.json` with `want.threads` (two threads) loads and runs through `shape.py`
+(1 pass, 0 fail, exit 0); `test_templates_parse` passes; pytest 462 passed; `--selfcheck` current (orphans 3).
+
+**Words:** +195, running total 139,809 / 149,283.
+
+---
+
+## 2026-10-01 — World W1b · PROTECTED (LO approved, WS-D11): two lines in the-want.md §1
+
+**Why.** WS-D1 makes the house her hub, not the setting. The phone's P1 is being flipped (WS-D7), so §1 can no
+longer lean on "P1's refusal rule"; and the 24-likes-to-0 verdict it quoted was never P1's, it is P11's battery
+verdict (`references/the-phone.md` P11).
+
+**What changed.** `references/the-want.md` §1, W4: "which in this genre is the setting" becomes "her hub". W5's
+warning no longer cites P1; it cites P11 ("never a battery") as the rule a verdict can carry. Nothing else in §1
+changed.
+
+**Verified.** pytest 462 passed; `--selfcheck` current (rule pointers 0 broken, orphans 3, the baseline).
+
+**Words:** −4, running total 139,614 / 149,283.
+
+---
+
+## 2026-10-01 — World W1: drop "the house is the point" (World and Systems PRD, Phase 1)
+
+**Why.** WS-D1: every game gets a world outside, rooted outdoors in more than one zone. For a taboo-at-home game
+the house is her hub, the place she returns to, and the world outside is what makes the house risky. The old
+carve-out let a family game ship as one house.
+
+**What changed.**
+- `references/the-want.md` §5 and the shape table's taboo row: the carve-out is gone; the house is her hub.
+- `references/the-map.md` header warning: the zone rule holds for every fantasy. R0's `time_slot` row is the one
+  exception to the zone rule, and each slot still carries a thread of her life (Q4, WS-D17). Scale follows the
+  number of threads, not the cast size.
+- `templates/idea.md` §1 taboo line and `references/moment-library.md` taboo_at_home intro (the slice
+  `pitch_pack.py` prints) say the same.
+- Prose only: no script reads `fantasy_shape` to change a rule.
+
+**Verified.** `grep -rn "house is the" references templates` and `grep -n "where the house" references/the-map.md`
+give 0 hits; `test_templates_parse` passes; pytest 462 passed; `--selfcheck` current (orphans 3, the baseline).
+
+**Words:** +103, running total 139,618 / 149,283.
+
+---
+
 ## 2026-09-30 — Phase 5 (verify, members_only only)
 
 **Why.** Phase 5 of PRD v2 §6, scoped by LO to members_only. Checker bugs found on the scratch run are fixed

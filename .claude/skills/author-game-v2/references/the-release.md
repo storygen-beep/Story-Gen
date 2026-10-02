@@ -8,8 +8,8 @@ The game is never the unit. The **release** is, and it repeats, release after re
 
 Measured on one six-week cycle of a mature game (DoL): +196 scene units, **zero new locations**, and
 every content commit an event at an existing place. That is a **maintenance-cycle observation**, and it
-stays the default for WHERE a release happens: zero new places. It does not say what a release is
-ABOUT. The next section does.
+stays the default for WHERE a release happens: zero new places. What a release adds is rungs and
+people (`SKILL.md` commitment 4). It does not say what a release is ABOUT. The next section does.
 
 ---
 
@@ -27,7 +27,7 @@ shows his want first.
 what their players quote:
 
 1. **The fantasy.** The game's own shape, from the Want §0. Keep it; a pitch serves the fantasy the
-   game already promised.
+   game already promised, and a thread step serves it through the thread's link into the hook.
 2. **The temptation, and his want before it.** What is offered, by whom, and why she wants or needs
    it. Who moves first and why: a pressure type moves first and names the act; a nice type waits,
    so she moves; or he wants her from scene one. And **the leak** — one small, repeatable line or
@@ -48,7 +48,7 @@ what their players quote:
    player would quote.
 8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
    this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
-   canvas sets (`validate_flag_chains()`, `v2.py:13269`). The live goal, mystery or rival beat it moves,
+   canvas sets (`validate_flag_chains()`, `v2.py:14094`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
    enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
@@ -69,9 +69,11 @@ never an entry.
 **1. Read the Want.** Not optional, not skimmable. Name the line this release serves. If you
 cannot, the release is unfocused — pick again.
 
-**2. Pitch — three, independent.** Three Pitcher agents, no shared context, each given a different
-relationship — the three most owed, from the pack's RELATIONSHIPS — and each naming its moment
-kind. LO picks one. Independence is the point: shared context produces three shades of one idea.
+**2. Pitch — three, independent.** Three Pitcher agents, no shared context. Two are each given one
+of the two most-owed relationships, from the pack's RELATIONSHIPS; the third is given a declared
+thread of her life (THREADS, `the-want.md` §6), pitches a step in it, and may add one new person who
+belongs to that thread (name, age, thread). The assignment is the relationship or the thread; the
+moment kind is a hint, and each pitch names its kind. LO picks one. Independence is the point: shared context produces three shades of one idea.
 See `references/agents.md`.
 
 **3. Attack, before writing.** The panel runs on the *design*, not the build. Every cheap
@@ -84,7 +86,8 @@ each line. Its only rejections are the two instant fails — a big turn forced o
 or way round, and sex used only as a punishment — each quoting the line. LO judges.
 
 **4. Write.** Events on existing surfaces. Default to **zero new locations** (*Where a release
-happens*, above) — if this release opens one, it arrives filled, not as a promise.
+happens*, above); a thread's new person arrives at a place she already has. If this release opens a
+location, it arrives filled, not as a promise.
 
 > ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
 > window, a parent location, a label — it is an amendment, not an addition.** See *The prose
@@ -94,7 +97,7 @@ happens*, above) — if this release opens one, it arrives filled, not as a prom
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
 script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
-instrument that judges nothing. Lints never touch the tally (`gates.py:12991`), so a game
+instrument that judges nothing. Lints never touch the tally (`gates.py:13027`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -245,8 +248,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:18182   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:18186   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:19176   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:19180   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -418,8 +421,8 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:12549`, `:14753`,
-`:14906`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:13346`, `:15641`,
+`:15505`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 

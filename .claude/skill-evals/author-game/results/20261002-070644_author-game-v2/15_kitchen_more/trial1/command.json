@@ -1,0 +1,25 @@
+{
+ "cwd": "/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_15_kitchen_more_phxyc194/w",
+ "cmd": [
+  "claude",
+  "-p",
+  "--setting-sources",
+  "project",
+  "--strict-mcp-config",
+  "--output-format",
+  "stream-json",
+  "--verbose",
+  "--max-turns",
+  "80",
+  "--max-budget-usd",
+  "5.0",
+  "--permission-mode",
+  "acceptEdits",
+  "--permission-prompts",
+  "none",
+  "--allowedTools",
+  "Read Edit Write Glob Grep Skill Agent TodoWrite Bash(python3 *) Bash(grep *) Bash(ls *) Bash(wc *) Bash(head *) Bash(cat *)",
+  "--no-session-persistence",
+  "/author-game-v2 Game: games/billable_hours. LO has already approved this step. Author it directly in the game's toml_phases files: do not pitch options, do not ask questions, and do not stop at a phase boundary. Do not build the game, commit, or touch media. When you are done, say in two lines what you changed.\n\nTask: Add four more things Emma can do in the kitchen."
+ ]
+}

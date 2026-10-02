@@ -1,0 +1,24 @@
+{
+ "skill": "author-game-v2",
+ "v2_ref": "b4005b7",
+ "skill_ref": "working tree",
+ "model": "default",
+ "trials_per_case": 1,
+ "cases": 1,
+ "pass_k_cases": 0,
+ "trial_pass_rate": 0.0,
+ "total_cost_usd": 0.81,
+ "per_case": {
+  "16_theo_friday_nights": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    0.8131606000000001
+   ],
+   "ran_gates": [
+    false
+   ]
+  }
+ }
+}

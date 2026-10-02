@@ -1,0 +1,1257 @@
+{
+ "gates": [
+  {
+   "gate": "location fill",
+   "pass_": false,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "13 locations \u00b7 6,858 words vs 30,200 declared \u00b7 0/13 on their own budget \u00b7 anchor firm 23% \u00b7 8 pools, 6,600 words per pass",
+   "detail": [
+    "2 declared locations with nothing placed: house, landing",
+    "bathroom: declared 3,000 words, delivered 703 (-77%)",
+    "club: declared 3,000 words, delivered 741 (-75%)",
+    "downtown: declared 800 words, delivered 43 (-95%)",
+    "ethan_room: declared 1,500 words, delivered 423 (-72%)",
+    "firm: declared 5,000 words, delivered 1,600 (-68%)",
+    "her_room: declared 2,000 words, delivered 364 (-82%)",
+    "hotel_bar: declared 2,500 words, delivered 604 (-76%)",
+    "house: declared 200 words, delivered 0 (-100%)",
+    "kitchen: declared 7,500 words, delivered 1,229 (-84%)",
+    "landing: declared 200 words, delivered 0 (-100%)",
+    "linden_street: declared 500 words, delivered 256 (-49%)",
+    "parents_room: declared 1,000 words, delivered 147 (-85%)",
+    "study: declared 3,000 words, delivered 748 (-75%)",
+    "the PLAN has no centre: its deepest location is only 25% of the declared total (need 25%)"
+   ]
+  },
+  {
+   "gate": "explicit floor",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 48,
+   "parked": false,
+   "headline": "22.9% of 48 REPEATABLE beats carry 3+ explicit words (floor 7.5%) \u00b7 12.3% of all 106 beats [reported, not judged]",
+   "detail": []
+  },
+  {
+   "gate": "explicit in repeatable",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "84.6% of 13 explicit beats are re-enterable (floor 40.0%)",
+   "detail": [
+    "once-only explicit at bathroom: 1",
+    "once-only explicit at club: 1"
+   ]
+  },
+  {
+   "gate": "repeatable explicit media cycles",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "13 pooled, 0 fixed single-clip in repeatable content (n = 13)",
+   "detail": []
+  },
+  {
+   "gate": "an explicit beat carries a clip",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "13/13 explicit beats carry a clip of their own (100%, floor 50%) \u00b7 field 91% of explicit screens, 58% of in-passage reveals",
+   "detail": []
+  },
+  {
+   "gate": "somebody speaks",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "3.7:1 narration to dialogue \u2014 1,463 spoken of 6,858 words (ceiling 5:1) \u00b7 field median 2.93:1, 10 of 27 games at or under 2:1",
+   "detail": [
+    "act_touch: 178 words, no dialog block anywhere",
+    "act_shower: 177 words, no dialog block anywhere",
+    "parents_room_out: 147 words, no dialog block anywhere",
+    "ethan_room_out: 128 words, no dialog block anywhere",
+    "opening_boot: 127 words, no dialog block anywhere",
+    "act_eat: 69 words, no dialog block anywhere"
+   ]
+  },
+  {
+   "gate": "traversal heat",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 9,
+   "parked": false,
+   "headline": "7/9 destinations (78%) hold a sex scene \u2014 a beat with 3+ explicit words or _t4/_t5 media (floor 60%, about 60% is the target)",
+   "detail": [
+    "cold: kitchen, study"
+   ]
+  },
+  {
+   "gate": "explicit pools by place",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "8/13 locations (62%) carry a cycling explicit pool on a repeatable (floor 60%)",
+   "detail": [
+    "downtown, house, kitchen, landing, study"
+   ]
+  },
+  {
+   "gate": "a destination is never open and exit-only",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 9,
+   "parked": false,
+   "headline": "9/9 destinations offer something she can do alone in every open hour, or are closed then",
+   "detail": [
+    "not judged at firm: callahan_review (days_since_flag) \u2014 a condition shape this check can't read, counted as not live"
+   ]
+  },
+  {
+   "gate": "her climb",
+   "pass_": false,
+   "na": true,
+   "few": false,
+   "n": 0,
+   "parked": false,
+   "headline": "no paid repeatable \u2014 nothing whose exit adds to `money` names an act (n = 0)",
+   "detail": []
+  },
+  {
+   "gate": "a no has content",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 11,
+   "parked": false,
+   "headline": "11/11 exits that leave a consume_on step unused (or end it for good) have content, on 8 step(s)",
+   "detail": []
+  },
+  {
+   "gate": "the men's numbers are read",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 2,
+   "parked": false,
+   "headline": "2 of the men's traits shown \u00b7 0 problem(s) across 2 kept trait(s) (n = 2)",
+   "detail": []
+  },
+  {
+   "gate": "one name per trait",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 12,
+   "parked": false,
+   "headline": "10/10 changed traits carry a label \u00b7 2 sidebar item(s) checked (n = 12)",
+   "detail": []
+  },
+  {
+   "gate": "standing surface",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 19,
+   "parked": false,
+   "headline": "19/19 schedule rows have something in the room on every weekday \u00b7 0 stranded \u00b7 0 day-capped portraits",
+   "detail": []
+  },
+  {
+   "gate": "milestones open something",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 12,
+   "parked": false,
+   "headline": "12 of 12 milestones open standing content",
+   "detail": []
+  },
+  {
+   "gate": "ladders move forward",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 7,
+   "parked": false,
+   "headline": "7 declared steps across 4 ladder(s), 0 problem(s) \u00b7 npc_martin step 3 (martin_03_jacket_downstairs): the door \u2014 opens next release (n = 7)",
+   "detail": []
+  },
+  {
+   "gate": "meter ceiling",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 9,
+   "parked": false,
+   "headline": "0 visible meters rise past their content (n = 9)",
+   "detail": []
+  },
+  {
+   "gate": "ends on an opening",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "declared door (release_page.door): martin_03_jacket_downstairs \u00b7 \"Take the jacket off.\" \u00b7 6 choices render visible-but-locked \u00b7 37/125 choices carry any gate at all (70% open on turn one)",
+   "detail": []
+  },
+  {
+   "gate": "the door can be seen again",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "martin_03_jacket_downstairs: consume_on = \"exit\" and the door choice does not consume it",
+   "detail": []
+  },
+  {
+   "gate": "ascent tiers expand the world",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "[declared] nerve (19+/3-)",
+   "detail": [
+    "also ranked: martin_stage (3+/3-)",
+    "also ranked: theo_stage (2+/2-)",
+    "also ranked: energy (2+/0-)",
+    "also ranked: office_talk (1+/1-)",
+    "also ranked: martin_power (0+/1-)"
+   ]
+  },
+  {
+   "gate": "world reachable",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 13,
+   "parked": false,
+   "headline": "9/13 locations reachable on foot from her_room",
+   "detail": []
+  },
+  {
+   "gate": "every authored node is reachable",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 106,
+   "parked": false,
+   "headline": "106/106 authored nodes can be opened",
+   "detail": []
+  },
+  {
+   "gate": "residents have homes",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 6,
+   "parked": false,
+   "headline": "6/6 characters have a home that exists",
+   "detail": []
+  },
+  {
+   "gate": "guidance exists",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 7,
+   "parked": false,
+   "headline": "20 quest cards for 1 ascent tiers and 6 characters in the game (n = 7)",
+   "detail": []
+  },
+  {
+   "gate": "a goal says what it wants",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 15,
+   "parked": false,
+   "headline": "15/15 goal bullets render words rather than a raw key",
+   "detail": []
+  },
+  {
+   "gate": "no chain ends in silence",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 6,
+   "parked": false,
+   "headline": "6/6 character ladders keep a card after the last rung",
+   "detail": []
+  },
+  {
+   "gate": "money gates something",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "[declared] 3 canvases gate on `money` (conditions or an affordability cost)",
+   "detail": []
+  },
+  {
+   "gate": "sinks >= sources",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "4 sinks : 4 sources (field median 2.2 : 1) \u00b7 2 at hotel_bar",
+   "detail": []
+  },
+  {
+   "gate": "no free uncapped income",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "every income surface has a brake on every route in",
+   "detail": []
+  },
+  {
+   "gate": "a price is on its label",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 6,
+   "parked": false,
+   "headline": "0 of 6 choices spend `money` without naming the amount",
+   "detail": []
+  },
+  {
+   "gate": "the price is in one currency",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "one currency (`dollar`) across 19 places \u00b7 declared `$`",
+   "detail": []
+  },
+  {
+   "gate": "a place is not a catalogue",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "0 screens over 8 \u00b7 rooms median 2 \u00b7 1/21 at the cap \u00b7 character hubs median 2 (0/4 at the cap)",
+   "detail": []
+  },
+  {
+   "gate": "the obligation is charged",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "[declared] 250 money \u00b7 charged by [settings.rent] 250 every Friday \u00b7 week income ~820 (max 820, declared 600)",
+   "detail": [
+    "income: opening_firm: +70 (max 70) \u00d7 1 (once)",
+    "income: act_work_shift: +100 (max 100) \u00d7 5 (1/day \u00d7 5 days)",
+    "income: theo_01_the_hour: +250 (max 250) \u00d7 1 (once)"
+   ]
+  },
+  {
+   "gate": "effects use a live op",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "every effect op is one the engine runs",
+   "detail": []
+  },
+  {
+   "gate": "a day-cap closes",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "8 day-cap flag(s) cleared in [engine.daily_tick], all of them set somewhere",
+   "detail": []
+  },
+  {
+   "gate": "a spent day still has a door",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "every screen keeps one choice free of both conditions and costs",
+   "detail": []
+  },
+  {
+   "gate": "the climb is paid for",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 5,
+   "parked": false,
+   "headline": "all 5 gated meters carry a brake on every route in (n = 5)",
+   "detail": [
+    "`nerve` gates at 30 \u00b7 no free route to it \u00b7 cheapest rung act_touch +2 / 20 min",
+    "`office_talk` gates at 30 \u00b7 no free route to it \u00b7 cheapest rung walkin_bar +3 / 30 min",
+    "`energy` gates at 20 \u00b7 no free route to it \u00b7 cheapest rung walkin_kitchen_ethan +20 / 15 min",
+    "`martin_want` gates at 15 \u00b7 no free route to it \u00b7 cheapest rung hub_martin_breakfast +1 / 15 min"
+   ]
+  },
+  {
+   "gate": "a banded meter is shown once",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 1,
+   "parked": false,
+   "headline": "1 of 1 banded sidebar meters show their number once, in the item",
+   "detail": []
+  },
+  {
+   "gate": "the map is a place",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "[two_hub] the exterior is the ground everything else sits on",
+   "detail": []
+  },
+  {
+   "gate": "a need shuts a door",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 1,
+   "parked": false,
+   "headline": "1/1 declared needs are read by a condition somewhere in the game",
+   "detail": []
+  },
+  {
+   "gate": "a need can be met every day",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "1/1 declared needs can be filled on every weekday",
+   "detail": []
+  },
+  {
+   "gate": "the walk-in floor",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 4,
+   "parked": false,
+   "headline": "4/4 rooms where she works alone with someone scheduled carry a walk-in",
+   "detail": []
+  },
+  {
+   "gate": "a meter is read",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 8,
+   "parked": false,
+   "headline": "8/8 raised player meters are read by a condition, a cost or a quest goal \u00b7 4 `_stage` key(s) exempt (the engine reads those)",
+   "detail": []
+  },
+  {
+   "gate": "the wardrobe is read",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "8 garment(s) \u00b7 4 read(s) \u00b7 clothing_rules x1 \u00b7 worn_exposure x1 \u00b7 worn_corruption x1 \u00b7 clothing_item x1 \u00b7 field: DoL ~900, the-hellfire-club 484, zaras-school-life 415",
+   "detail": []
+  },
+  {
+   "gate": "a declared garment can be got",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 8,
+   "parked": false,
+   "headline": "8/8 declared garment(s) have a route into the wardrobe \u00b7 no shop (no `shop_location` in [settings])",
+   "detail": []
+  },
+  {
+   "gate": "a locked door says why",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 6,
+   "parked": false,
+   "headline": "6 shown-locked \u00b7 6 say why once (n = 6)",
+   "detail": []
+  },
+  {
+   "gate": "the climb is where you said it is",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "declared `player` \u2014 53 gate site(s) on declared tiers, 4 on per-character meters \u2014 7% of the climb sits on the cast (wants at least 60% on her own tiers)",
+   "detail": []
+  },
+  {
+   "gate": "the start choice is read",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "3 start-choice flag(s) \u2014 day1_said_earned read 1x \u00b7 day1_said_so_what read 1x \u00b7 day1_said_nothing read 1x  (count reported, not judged \u2014 see the header)",
+   "detail": []
+  },
+  {
+   "gate": "what money buys opens a door",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "jade_saturday_yes (8) opens 2 \u00b7 jade_saturday_no (8) opens 1  (the purchase's own `is_false` gate is not a door)  (doors reported, not judged \u2014 see the header)",
+   "detail": []
+  },
+  {
+   "gate": "she can say no",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "6 refusal(s) in 125 choices = 4.8%  (rate reported, not judged \u2014 see the header) \u00b7 field 2.09% of labels",
+   "detail": [
+    "e.g. 'Say nothing.'",
+    "e.g. 'Shake your head at her, and finish your drink. ($8, 45m)'",
+    "e.g. 'Keep it on. Not yet.'"
+   ]
+  },
+  {
+   "gate": "what she picks is read",
+   "pass_": false,
+   "na": true,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "no customization declared \u2014 the player is handed a protagonist whole",
+   "detail": [
+    "that is a legitimate choice: half the corpus ships no creation step, including the second-ranked game, and across 22,614 comments the whole subject runs at 0.12% (lostness 4.7%, grind 0.9%)",
+    "if you do add one: the-want.md \u00a71 W1 \u2014 if you ask, print it back",
+    "this reports n/a, which is NOT a pass \u2014 an absence is not evidence"
+   ]
+  },
+  {
+   "gate": "speakers are named",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 179,
+   "parked": false,
+   "headline": "179/179 dialog and thought_bubble blocks name their speaker",
+   "detail": []
+  },
+  {
+   "gate": "sentence length",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "median sentence 7 words across 858 sentences (ceiling 14, margin +7) \u00b7 field median 10, p25 8.25 \u2014 the floor is printed, not judged (prose has room)",
+   "detail": []
+  },
+  {
+   "gate": "prose has room",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "`but` 3.19/1k (floor 2.88, field p10) \u00b7 `and` 35.5/1k (field max 41.11) \u00b7 over 7,216 words",
+   "detail": []
+  },
+  {
+   "gate": "prose texture",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "0 dashes in 6,853 prose words = 0.0/10k (ceiling 35) \u00b7 field p50 0.99, p90 17.5, max 35.4",
+   "detail": [
+    "where they live \u2014 narration 0.0/10k over 5,148 words \u00b7 speech 0.0/10k over 1,705 words. A dash in speech is how English writes an interruption and is usually correct; the narration figure is the one register.md's \"Dashes stay rare\" is about. Verdict above counts both, because the field cannot be split (see DASH_CEILING).",
+    "reported, not gated, NO field figure \u2014 joints/sentence 0.39 \u00b7 \"you\" 8.9% of words \u00b7 pronoun:name 3.42",
+    "\u26a0\ufe0f these three compare a game with its own earlier builds and with nothing else. The corpus exists only as built HTML, whose UI strings and list blocks move all three. The dash rate above is quoted against the field because it is the one that survives the change of basis."
+   ]
+  },
+  {
+   "gate": "the opening opens a door",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "1 handover(s) \u00b7 at least one lands on something open",
+   "detail": [
+    "hands over 18:22 at kitchen: 5 open \u2014 opening_dinner, act_eat, act_dinner, hub_martin_breakfast"
+   ]
+  },
+  {
+   "gate": "every hub is met first",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 6,
+   "parked": false,
+   "headline": "6/6 characters are introduced before their hub opens",
+   "detail": []
+  },
+  {
+   "gate": "a meeting fires where they are",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": 8,
+   "parked": false,
+   "headline": "8/8 one-shot canvases naming a character can only fire in that character's own hours",
+   "detail": []
+  },
+  {
+   "gate": "no canvas key is discarded",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "every canvas key is one the importer reads",
+   "detail": []
+  },
+  {
+   "gate": "the label keeps its time",
+   "pass_": true,
+   "na": false,
+   "few": false,
+   "n": null,
+   "parked": false,
+   "headline": "0 label(s) name a clock time \u00b7 29 stated duration(s) all match the spend",
+   "detail": []
+  }
+ ],
+ "tally": {
+  "pass": 57,
+  "fail": 1,
+  "parked": 0,
+  "few": 0,
+  "na": 2,
+  "denominator": 58,
+  "parked_files": [],
+  "parked_errors": [],
+  "switched_off": 0,
+  "switched_off_canvases": []
+ },
+ "lints": {
+  "dialogue_attribution": [
+   {
+    "canvas": "opening_breakfast",
+    "node": "kitchen",
+    "npc": "npc_martin",
+    "lines": 1,
+    "line": "First day. Callahan wants you in at ten, not nine. Don't be "
+   },
+   {
+    "canvas": "opening_breakfast",
+    "node": "kitchen",
+    "npc": "npc_diane",
+    "lines": 0,
+    "line": "Eat something, sweetheart. And say thank you to Martin. He d"
+   },
+   {
+    "canvas": "opening_breakfast",
+    "node": "ethan",
+    "npc": "npc_ethan",
+    "lines": 1,
+    "line": "So. The intern. We both know how you got this job."
+   },
+   {
+    "canvas": "opening_firm",
+    "node": "shift",
+    "npc": "npc_diane",
+    "lines": 0,
+    "line": "You're doing fine, sweetheart. Just keep your head down."
+   },
+   {
+    "canvas": "opening_firm",
+    "node": "theo",
+    "npc": "npc_theo",
+    "lines": 0,
+    "line": "Emma, is it? I'll remember that. I remember everything I pay"
+   },
+   {
+    "canvas": "opening_dinner",
+    "node": "dinner",
+    "npc": "npc_diane",
+    "lines": 0,
+    "line": "Did Callahan say anything? Did he like you?"
+   },
+   {
+    "canvas": "opening_dinner",
+    "node": "dinner",
+    "npc": "npc_ethan",
+    "lines": 0,
+    "line": "He says that to the ones he's going to cut."
+   },
+   {
+    "canvas": "opening_dinner",
+    "node": "dinner",
+    "npc": "npc_martin",
+    "lines": 0,
+    "line": "He says it to the ones he's watching. Friday, Emma."
+   },
+   {
+    "canvas": "walkin_firm",
+    "node": "no_late",
+    "npc": "npc_callahan",
+    "lines": 2,
+    "line": "Go home on time, then. Plenty of people want late."
+   },
+   {
+    "canvas": "martin_01_first_friday",
+    "node": "diane",
+    "npc": "npc_diane",
+    "lines": 0,
+    "line": "Look at you two. I knew you'd come round to him."
+   }
+  ],
+  "world_prose": [
+   {
+    "part": "hall",
+    "count": 11,
+    "line": "you lie in the dark listening to the house: the tv downstairs, a door "
+   },
+   {
+    "part": "corridor",
+    "count": 3,
+    "line": "he watches you walk the whole length of the corridor, and he checks th"
+   }
+  ],
+  "screen_shape": {
+   "summary": "median 1 ROWS render on a screen at turn one (max 3) \u00b7 37/65 location choices open \u00b7 3/13 locations render identically on every visit \u00b7 0/13 carry a random event (R6 mechanism 4, the one games drop)",
+   "findings": [
+    {
+     "kind": "still",
+     "id": "\u2014",
+     "loc": "downtown",
+     "note": "renders identically on every visit \u2014 none of R6's four mechanisms"
+    },
+    {
+     "kind": "still",
+     "id": "\u2014",
+     "loc": "house",
+     "note": "renders identically on every visit \u2014 none of R6's four mechanisms"
+    },
+    {
+     "kind": "still",
+     "id": "\u2014",
+     "loc": "landing",
+     "note": "renders identically on every visit \u2014 none of R6's four mechanisms"
+    },
+    {
+     "kind": "thin",
+     "id": "\u2014",
+     "loc": "bathroom",
+     "note": "varies by one mechanism only (a conditional clause)"
+    }
+   ]
+  },
+  "labels": {
+   "summary": "1/12 (8%) room-list buttons are bare noun phrases \u00b7 median 3 words, 0% at 6+ (field: 3 words, 21% at 6+)",
+   "findings": [
+    "parents_room: \"Their room\" names no verb \u2014 a player cannot tell what clicking does"
+   ]
+  },
+  "labels_and_systems": {
+   "summary": "6 meters declared (2 sourced) \u00b7 12 distinct labels over 13 rooms \u00b7 29 to eyeball",
+   "findings": [
+    "bathroom: label `has_shower` is claimed by no declared meter",
+    "bathroom: label `private` is claimed by no declared meter",
+    "bathroom: label `zone:suburb` is claimed by no declared meter",
+    "club: label `zone:downtown` is claimed by no declared meter",
+    "downtown: label `outdoors` is claimed by no declared meter",
+    "downtown: label `zone:downtown` is claimed by no declared meter",
+    "ethan_room: label `private` is claimed by no declared meter",
+    "ethan_room: label `zone:suburb` is claimed by no declared meter",
+    "firm: label `zone:downtown` is claimed by no declared meter",
+    "her_room: label `has_bed` is claimed by no declared meter",
+    "her_room: label `home_base` is claimed by no declared meter",
+    "her_room: label `private` is claimed by no declared meter",
+    "her_room: label `zone:suburb` is claimed by no declared meter",
+    "hotel_bar: label `zone:downtown` is claimed by no declared meter",
+    "house: label `private` is claimed by no declared meter",
+    "house: label `zone:suburb` is claimed by no declared meter",
+    "kitchen: label `private` is claimed by no declared meter",
+    "kitchen: label `zone:suburb` is claimed by no declared meter",
+    "landing: label `private` is claimed by no declared meter",
+    "landing: label `zone:suburb` is claimed by no declared meter",
+    "linden_street: label `outdoors` is claimed by no declared meter",
+    "linden_street: label `zone:suburb` is claimed by no declared meter",
+    "parents_room: label `private` is claimed by no declared meter",
+    "parents_room: label `zone:suburb` is claimed by no declared meter",
+    "study: label `private` is claimed by no declared meter",
+    "study: label `zone:suburb` is claimed by no declared meter",
+    "meter `outfit`: nothing at her_room writes `worn_exposure`",
+    "meter `outfit`: `worn_exposure` is read in no room outside her_room \u2014 a source with no readers (SY2)",
+    "meter `office_talk`: `office_talk` is read in no room outside firm \u2014 a source with no readers (SY2)"
+   ]
+  },
+  "doors": {
+   "summary": "",
+   "findings": []
+  },
+  "mute_cards": {
+   "summary": "1/20 cards render flavour text and no requirement",
+   "findings": [
+    "npc_diane: ALL 1 cards render no requirement \u2014 their section of the page never says what to do",
+    "npc_diane: mute card \u2014 \"Your mother. She got you this chance, and she's watching to \u2026\""
+   ]
+  },
+  "unwritten_act": {
+   "summary": "30 choice(s) change her and show nothing \u2014 3,390m (56.5h) of game time \u00b7 26 on a single-screen canvas, 4 closing a written chain",
+   "findings": [
+    "act_sleep.bed \"Sleep until morning. (8h)\" \u2014 480m, +100 energy",
+    "walkin_firm.overtime \"Clock out. (+$120)\" \u2014 480m, +120 money -40 energy +2 office_talk +1 nerve (closes a written chain)",
+    "walkin_firm.overtime \"Clock out. (+$150)\" \u2014 480m, +150 money -40 energy +2 office_talk +1 nerve (closes a written chain)",
+    "act_work_shift.shift \"Clock out with your $70. (4h)\" \u2014 240m, +70 money -30 energy worked_today",
+    "act_work_shift.shift \"Clock out with your $100. (4h)\" \u2014 240m, +100 money -30 energy worked_today",
+    "walkin_firm.copyroom \"Finish the shift with your $70. (4h)\" \u2014 240m, +70 money -30 energy +1 office_talk +1 nerve",
+    "walkin_firm.copyroom \"Finish the shift with your $100. (4h)\" \u2014 240m, +100 money -30 energy +1 office_talk +1 nerve",
+    "walkin_firm.act \"Button up and finish the shift. (4h)\" \u2014 240m, +70 money -30 energy +1 office_talk +1 nerve",
+    "walkin_firm.act \"Button up and finish the shift. (4h)\" \u2014 240m, +100 money -30 energy +1 office_talk +1 nerve",
+    "act_dinner.table \"Clear your plate. (45m)\" \u2014 45m, +15 energy dinner_today",
+    "act_club_stage.stage \"Mouth back at her: \"Saturday.\" ($8, 45m)\" \u2014 45m, +1 nerve -20 energy club_today jade_saturday_yes",
+    "act_club_stage.stage \"Shake your head at her, and finish your drin\" \u2014 45m, -20 energy club_today jade_saturday_no",
+    "act_club_stage.stage \"Finish your drink and go. ($8, 45m)\" \u2014 45m, +1 nerve -20 energy club_today",
+    "act_drink.drink \"Finish it and go. ($8, 30m)\" \u2014 30m, +1 nerve drink_today",
+    "walkin_bar.stool \"Put the glass down and go. ($8, 30m)\" \u2014 30m, +1 office_talk drink_today",
+    "ethan_room_out.bed \"Leave his room. (30m)\" \u2014 30m, touch_today ethan_bed_used (closes a written chain)",
+    "parents_room_out.bed \"Leave their room. (30m)\" \u2014 30m, touch_today parents_bed_used (closes a written chain)",
+    "martin_03_jacket_downstairs.jacket_off \"Sit.\" \u2014 30m, +3 martin_stage",
+    "act_touch.bed \"Lie there a while.\" \u2014 20m, +1 nerve touch_today",
+    "act_touch.bed \"Lie there loud and done, and let the house h\" \u2014 20m, +1 nerve touch_today touch_loud",
+    "act_shower.shower \"Towel off.\" \u2014 20m, +1 nerve shower_today",
+    "walkin_shower_ethan.gap \"Keep washing.\" \u2014 20m, +1 nerve shower_today ethan_watched_shower",
+    "hub_jade_club.saturday \"Tell her yes. Saturday.\" \u2014 20m, jade_saturday_yes jade_saturday_no",
+    "act_eat.fridge \"Rinse the plate. (15m)\" \u2014 15m, +10 energy eat_today",
+    "walkin_kitchen_ethan.counter \"Eat, and let him watch.\" \u2014 15m, +10 energy +1 nerve eat_today",
+    "callahan_review.fail \"Go back to your desk.\" \u2014 15m, review_failed",
+    "hub_martin_breakfast.table \"Sit with him.\" \u2014 15m, +1 martin_want breakfast_today",
+    "walkin_ethan_room.doorway \"Walk out past him.\" \u2014 10m, ethan_caught_snooping",
+    "walkin_kitchen_ethan.counter \"Take the plate upstairs.\" \u2014 5m, +10 energy eat_today",
+    "act_club_stage.stage \"Leave without a drink.\" \u2014 5m, club_today"
+   ]
+  },
+  "browse_share": {
+   "summary": "1/12 (8%) room canvases change nothing but the clock",
+   "findings": [
+    "downtown: \"Take the bus home\" \u2014 no effect, no flag, no cost"
+   ]
+  },
+  "ambient_presence": {
+   "summary": "",
+   "findings": []
+  },
+  "badge_before_content": {
+   "summary": "1 finding(s) across 5 terminal card(s) \u2014 a \u2713 at or before the last content, or a goal nothing reads",
+   "findings": [
+    "[badge] martin: terminal gated on martin_stage while the content reads martin_power, martin_want \u2014 a different meter, so the \u2713 can arrive at zero"
+   ]
+  },
+  "refusal_shape": {
+   "summary": "6 shown-locked \u00b7 6 in-scene \u00b7 4 gated on a bar the scene itself moves",
+   "findings": [
+    "ethan_02_copier: \"Lean back into him.\" \u2014 gated on player.nerve, which this canvas's own effects raise",
+    "hub_martin_breakfast: \"Say you're busy and go.\" \u2014 gated on npc:npc_martin.martin_power, which this canvas's own effects raise",
+    "martin_02_nobody_knocks: \"Tell him what he wants to hear.\" \u2014 gated on player.nerve, which this canvas's own effects raise",
+    "theo_01_the_hour: \"\"Make it two-fifty. I've got a Friday to pay.\"\" \u2014 gated on player.nerve, which this canvas's own effects raise",
+    "hub_jade_club: \"Ask her what Saturday is really like.\" \u2014 in-scene, gated on player.nerve",
+    "martin_03_jacket_downstairs: \"Take the jacket off.\" \u2014 in-scene, gated on npc:npc_martin.martin_want"
+   ]
+  },
+  "dispatch_depth": {
+   "summary": "6 dispatching activities \u00b7 12 rule(s) \u00b7 outcomes per host [1, 1, 1, 1, 1, 1] \u00b7 deepest act_shower at 1 \u00b7 field: DoL's Bath dispatches 12 from one activity",
+   "findings": [
+    "act_shower @bathroom: 3 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch",
+    "act_eat @kitchen: 2 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch",
+    "act_work_shift @firm: 2 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch",
+    "act_drink @hotel_bar: 2 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch",
+    "act_club_stage @club: 2 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch",
+    "ethan_room_out @ethan_room: 1 rule(s), ONE outcome \u2014 the roll decides whether the branch or the host renders, not which branch"
+   ]
+  },
+  "ladder": {
+   "summary": "12 explicit canvases \u00b7 16% OPEN at vaginal-or-above \u00b7 83% never reach oral \u00b7 field screens open at vaginal-or-above 43% of the time (4 games, 1,045 explicit passages)",
+   "findings": [
+    "ethan_01_red_ink @bathroom: opens on finish \u2014 no rung below it anywhere in the canvas",
+    "jade_01_first_night @club: opens on finish \u2014 no rung below it anywhere in the canvas",
+    "act_touch @her_room: never gets past hands \u2014 2 rung(s) total",
+    "act_shower @bathroom: never gets past hands \u2014 2 rung(s) total",
+    "walkin_shower_ethan @bathroom: never gets past hands \u2014 1 rung(s) total",
+    "walkin_bar @hotel_bar: never gets past hands \u2014 2 rung(s) total",
+    "act_club_stage @club: never gets past strip \u2014 1 rung(s) total"
+   ]
+  },
+  "talk_screens": {
+   "summary": "8/41 canvases (19%) are talk screens \u2014 40%+ spoken, no explicit load \u00b7 field 29% of all screens",
+   "findings": [
+    "hub_diane_home @kitchen",
+    "hub_callahan @firm",
+    "hub_diane_desk @firm",
+    "hub_ethan_desk @firm",
+    "hub_theo_firm @firm",
+    "hub_theo_bar @hotel_bar",
+    "hub_jade_club @club",
+    "hub_martin_firm @firm"
+   ]
+  },
+  "loop_shape": {
+   "summary": "0 act-menu loop(s) and 11 one-shot cascade(s) across 11 repeatable explicit surfaces",
+   "findings": [
+    "act_touch @her_room: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "act_shower @bathroom: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "walkin_shower_ethan @bathroom: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "walkin_firm @firm: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "walkin_bar @hotel_bar: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "act_club_stage @club: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "walkin_club_lap @club: repeatable, explicit, no act menu \u2014 one pass and it is spent",
+    "bus_downtown @linden_street: repeatable, explicit, no act menu \u2014 one pass and it is spent"
+   ]
+  },
+  "act_nodes": {
+   "summary": "",
+   "findings": []
+  },
+  "meter_ladder": {
+   "summary": "1 declared tiers \u00b7 median 5 rungs \u00b7 lowest rung 5 \u00b7 field 8-17 rungs, lowest at 5",
+   "findings": [
+    "nerve: 5 rung(s) [5, 10, 20, 30, 40]"
+   ]
+  },
+  "cast_meters": {
+   "summary": "6 characters \u00b7 2 distinct meter shape(s) \u00b7 4 per-character gate sites \u00b7 5 character(s) gate nothing",
+   "findings": [
+    "npc_martin: martin_power, martin_want \u2014 4 gate site(s)",
+    "npc_diane: no meters \u2014 0 gate site(s)",
+    "npc_ethan: no meters \u2014 0 gate site(s)",
+    "npc_jade: no meters \u2014 0 gate site(s)",
+    "npc_callahan: no meters \u2014 0 gate site(s)",
+    "npc_theo: no meters \u2014 0 gate site(s)"
+   ]
+  },
+  "counterweight": {
+   "summary": "",
+   "findings": []
+  },
+  "own_words": {
+   "summary": "25 word(s) the 27-game field does not use, 48 use(s) across 6,519 words \u00b7 plus 0 ambiguous and 1 false-friend term(s) \u00b7 read the list, do not read the number",
+   "findings": [
+    "copier \u00d79",
+    "stub \u00d76",
+    "clause \u00d73",
+    "councilman \u00d73",
+    "probation \u00d73",
+    "timesheets \u00d73",
+    "fishbowl \u00d72",
+    "stepfather \u00d72",
+    "aftershave \u00d71",
+    "barman \u00d71",
+    "cufflinks \u00d71",
+    "decanter \u00d71",
+    "expire \u00d71",
+    "floorboard \u00d71",
+    "henley \u00d71",
+    "indexing \u00d71",
+    "interns \u00d71",
+    "memos \u00d71",
+    "photocopying \u00d71",
+    "pricing \u00d71",
+    "\u2026 and 5 more word(s), 5 use(s), not printed \u2014 re-run with --json for the full list",
+    "[false friend] tea \u00d72 \u2014 the evening meal here, a hot drink to most readers"
+   ]
+  },
+  "named_before_met": {
+   "summary": "every named character is met before the game uses their name",
+   "findings": []
+  },
+  "place_function": {
+   "summary": "11 location(s) \u00b7 median description 29 words \u00b7 field room prose per visit, median 82 \u2014 read whether each one NAMES what the place is, not how long it is",
+   "findings": [
+    "Callahan Reed: 1,600 words happen here, described in 30 \u00b7 has a first visit too",
+    "The Kitchen: 1,229 words happen here, described in 26 \u00b7 has a first visit too",
+    "Martin's Study: 748 words happen here, described in 29 \u00b7 has a first visit too",
+    "The Velvet Room: 741 words happen here, described in 29 \u00b7 has a first visit too",
+    "The Bathroom: 703 words happen here, described in 20 \u00b7 has a first visit too",
+    "The Hotel Bar: 604 words happen here, described in 29 \u00b7 has a first visit too",
+    "Ethan's Room: 423 words happen here, described in 25",
+    "Your Room: 364 words happen here, described in 27",
+    "Linden Street: 256 words happen here, described in 30",
+    "Martin and Diane's Room: 147 words happen here, described in 25",
+    "Downtown: 43 words happen here, described in 34"
+   ]
+  },
+  "role_stays_attached": {
+   "summary": "6 character(s) \u00b7 median 33 anchor(s) per 10k words in their own surfaces \u00b7 anchors taken from each character's own `relationship` line, not from a kin list \u2014 read the thinnest row, there is no bar",
+   "findings": [
+    "Martin: 1,683 words across 9 canvases of his own, says who he is 1x (6 per 10k) \u2014 stepfatherx1",
+    "Ethan: 2,131 words across 11 canvases of his own, says who he is 3x (14 per 10k) \u2014 stepx2, brotherx1",
+    "Theo: 706 words across 4 canvases of his own, says who he is 2x (28 per 10k) \u2014 clientx2",
+    "Jade: 599 words across 3 canvases of his own, says who he is 2x (33 per 10k) \u2014 sisterx1, stepx1",
+    "Callahan: 1,044 words across 4 canvases of his own, says who he is 4x (38 per 10k) \u2014 partnerx3, seniorx1",
+    "Diane: 1,594 words across 7 canvases of his own, says who he is 12x (75 per 10k) \u2014 motherx12"
+   ]
+  },
+  "clock_in_prose": {
+   "summary": "8.9 clock references per 10k words \u2014 11x the field median (field median 0.8, p75 1.8) \u00b7 read the lines, not the number: a rule is correct, a reading is not",
+   "findings": [
+    "opening_boot: \"\u2026It's seven o'clock on Monday, and today you start at Call\u2026\"  (no window \u2014 fires at any hour)",
+    "act_work_shift: \"\u2026Your mother brings you a sandwich at one and checks you're sitting up straight.\u2026\"  (window 09:00\u201313:00, 240 min)",
+    "opening_breakfast: \"\u2026First day. Callahan wants you in at ten, not nine. Don't be early, and don't be\u2026\"  (window 07:00\u201308:30, 90 min)",
+    "opening_dinner: \"\u2026ooked back: \"First day?? Drinks. Velvet Room, after nine. Don't tell Diane.\"\u2026\"  (window 18:00\u201319:00, 60 min)"
+   ]
+  },
+  "time_cost_on_button": {
+   "summary": "16 of 29 clicks that move the clock an hour or more say nothing about it on the button",
+   "findings": [
+    "act_work_shift: \"Shut the laptop and go.\" spends 6h00m, label does not say so",
+    "opening_breakfast: \"\"I earned it.\"\" spends 2h45m, label does not say so",
+    "opening_breakfast: \"\"So what?\"\" spends 2h45m, label does not say so",
+    "opening_breakfast: \"Grab your bag and catch the bus.\" spends 2h45m, label does not say so",
+    "opening_breakfast: \"Grab your bag and catch the bus.\" spends 2h45m, label does not say so",
+    "opening_breakfast: \"Grab your bag and catch the bus.\" spends 2h45m, label does not say so",
+    "opening_breakfast: \"Say nothing.\" spends 2h45m, label does not say so",
+    "opening_firm: \"Get back to work.\" spends 6h30m, label does not say so",
+    "theo_01_the_hour: \"Finish your drink.\" spends 1h00m, label does not say so",
+    "theo_01_the_hour: \"Go out to the street.\" spends 1h00m, label does not say so",
+    "theo_01_the_hour: \"Put the money in your bag.\" spends 1h00m, label does not say so",
+    "theo_01_the_hour: \"Put the money in your bag.\" spends 1h00m, label does not say so",
+    "walkin_firm: \"Clock out. (+$120)\" spends 8h00m, label does not say so",
+    "walkin_firm: \"Clock out. (+$150)\" spends 8h00m, label does not say so",
+    "walkin_firm: \"Finish the shift.\" spends 4h00m, label does not say so",
+    "walkin_firm: \"Get back to your desk.\" spends 4h00m, label does not say so"
+   ]
+  },
+  "currency_in_prose": {
+   "summary": "7 money references \u00b7 100% in `dollar` (field median 92%) \u00b7 100% of the 2 money words carry an exact amount (field 20%)",
+   "findings": []
+  },
+  "price_spelled_out": {
+   "summary": "17 priced labels \u00b7 symbol 100% \u00b7 spelled out 0% \u00b7 code 0% (field 94% / 5% / 1%)",
+   "findings": []
+  },
+  "money_channel": {
+   "summary": "`money` is read by 1 condition(s) across 1 canvas(es) and priced by 6 choice(s) across 3 canvas(es)",
+   "findings": [
+    "act_drink: 1 condition(s) read `money`"
+   ]
+  },
+  "paid_repeatable_deposits": {
+   "summary": "17 of 18 paid repeatable choices deposit something (94%)",
+   "findings": [
+    "walkin_bar: \"Open your knees for him. ($8, 30m)\" costs 8 money and leaves nothing behind",
+    "R1c \u2014 R2 asks whether money leaves; this asks whether anything remembers that it left. A thing bought that stays bought is R1b.",
+    "currency read as `money`"
+   ]
+  },
+  "repeatables_without_step": {
+   "summary": "first release: 29 repeatables, 7 declared steps \u2014 nothing to compare",
+   "findings": []
+  },
+  "flag_never_resets": {
+   "summary": "all 8 resetting flag(s) are unset somewhere",
+   "findings": []
+  },
+  "cheat_page": {
+   "summary": "5 free row(s), 0 behind a code \u00b7 3 of 4 basics free",
+   "findings": [
+    "no free 'ask again' row"
+   ]
+  },
+  "toggles_declared": {
+   "summary": "n/a \u2014 none declared in want.toggles (the-surfaces.md R5b.4)",
+   "findings": []
+  },
+  "joints": {
+   "summary": "coordination ratio 3.59 (field p25 1.81 \u00b7 median 2.08 \u00b7 max 3.89) \u00b7 0 `, which is` gloss(es)",
+   "findings": [
+    "callahan_review: median sentence 6",
+    "hub_diane_home: median sentence 6",
+    "martin_01_first_friday: median sentence 6",
+    "opening_dinner: median sentence 6",
+    "ethan_01_red_ink: median sentence 7"
+   ]
+  },
+  "adjacent_groups": {
+   "summary": "0 dead group(s) in 52 group chain(s)",
+   "findings": []
+  },
+  "pronoun_nobody": {
+   "note": "",
+   "findings": [
+    "ethan_room_out/bed: \"his\" \u2014 You lie face down on his unmade bed and shove your face into his pillow. It smells li\u2026",
+    "ethan_room_out/desk: \"his\" \u2014 You go through his desk while he's out. Top drawer: your own timesheets, printed. Eve\u2026",
+    "walkin_firm/copyroom: \"his\" \u2014 The copier is running when the door clicks shut. The associate with the loosened tie \u2026"
+   ]
+  },
+  "past_event_not_given": {
+   "findings": []
+  },
+  "short_lines_no_verb": {
+   "sentences": 574,
+   "findings": [
+    "opening_boot/wake: Twelve weeks.",
+    "opening_breakfast/react_so_what: Ethan blinks.",
+    "opening_firm/endday: Your feet hurt.",
+    "opening_dinner/dinner: Your phone buzzes under the table.",
+    "opening_dinner/dinner: Velvet Room, after nine.",
+    "opening_dinner/dinner: A strip club, on a Monday.",
+    "opening_dinner/howto: Sleep in your room.",
+    "opening_dinner/howto: Nerve rises when you dare something.",
+    "act_sleep/bed: Then nothing, and you sleep.",
+    "act_touch/bed: Two fingers slide into your cunt.",
+    "act_touch/bed: Your thumb finds your clit.",
+    "act_touch/bed: The headboard knocks the wall.",
+    "act_touch/bed: The TV mutters downstairs.",
+    "act_touch/bed: Then a floorboard creaks in the hall outside.",
+    "act_shower/shower: Your legs shake under the spray.",
+    "act_shower/shower: Your hand slides down to your clit.",
+    "walkin_shower_ethan/gap: Good.",
+    "walkin_shower_ethan/gap: His hand speeds up.",
+    "act_dinner/table: Your mother serves.",
+    "act_dinner/table: Your mother passes the potatoes round the table.",
+    "act_work_shift/shift: Filing, copying, fetching.",
+    "walkin_firm/overtime: The floor empties.",
+    "act_drink/drink: The bartender pours without asking.",
+    "walkin_bar/stool: Waiting for you.",
+    "walkin_bar/out: Behind you somebody laughs.",
+    "act_club_stage/stage: The men up front lean in.",
+    "act_club_stage/stage: Then she finds you and grins.",
+    "bus_downtown/bus: Twenty-five minutes of stop-start traffic.",
+    "bus_downtown/act: His hand gropes your ass and squeezes.",
+    "bus_downtown/act: Except the woman across the aisle.",
+    "ethan_room_out/desk: Prick.",
+    "ethan_room_out/bed: Your other hand squeezes your tits.",
+    "parents_room_out/bed: Your hand slides under your waistband.",
+    "parents_room_out/bed: Two fingers find your clit and rub hard.",
+    "parents_room_out/bed: Your other hand squeezes your tits.",
+    "walkin_ethan_room/doorway: Ethan stops in the doorway.",
+    "martin_01_first_friday/sat3: Read it slowly.",
+    "martin_01_first_friday/diane: Someone knocks.",
+    "martin_02_nobody_knocks/door: Friday again.",
+    "martin_02_nobody_knocks/parked: His hand falls away.",
+    "ethan_01_red_ink/memo: \"So what, right?\"",
+    "ethan_01_red_ink/memo: Figures.",
+    "ethan_01_red_ink/seen: Cover up.",
+    "jade_01_first_night/watch: Jade owns the stage.",
+    "jade_01_first_night/watch: Thirty-five, maybe.",
+    "callahan_review/office: Week twelve.",
+    "callahan_review/office: Review day, late.",
+    "callahan_review/office: Twelve weeks.",
+    "callahan_review/office: Seventy dollars a day.",
+    "callahan_review/martin: His hand on my knee.",
+    "callahan_review/martin: Your stomach drops and your face burns.",
+    "callahan_review/fail: Out on the floor, Ethan smirks at you.",
+    "callahan_review/fail: Two weeks.",
+    "callahan_review/contract: A real contract.",
+    "callahan_review/contract: A real salary.",
+    "hub_diane_home/talk: The TV on the counter murmurs."
+   ]
+  },
+  "obligation_vs_week": {
+   "summary": "obligation 250 against a declared week of 600 \u2014 42% of the week",
+   "findings": [
+    "the obligation MOVES (R3b): [settings.rent] stages 250 \u2192 300 after $500 paid \u2192 350 after $1,400, then flat; Martin says each at breakfast",
+    "the ratio above is the BASELINE week by construction \u2014 a moving obligation is priced against the week it starts in, not the week it ends in"
+   ]
+  },
+  "collector_is_target": {
+   "summary": "collector Martin (want.hold_collector) holds 0 of 2 attributed, carrying none \u00b7 11 explicit repeatable surface(s), 2 attributed to a character \u00b7 Ethan 1, Callahan 1",
+   "findings": [
+    "field reference: the collector's share of a game's explicit passages runs 0.4\u20133.8% and he is NEVER the top figure \u2014 degrees-of-lewdity's collector 6 of 415 (1.4%) against another character's 61 (14.7%), who charges her nothing",
+    "the collector owns no explicit surface at all. Also a shape \u2014 but \u00a74a asks for a real character who CAN want her, not an absent one."
+   ]
+  },
+  "past_claim": {
+   "summary": "0 ungated sentence(s) on repeatable canvases claim a past (of 491 sentences)",
+   "findings": []
+  },
+  "printed_stat": {
+   "summary": "0 printed stat label(s) on screen",
+   "findings": []
+  },
+  "arc_ladder": {
+   "summary": "longest chain 3 step(s) (npc_martin) \u00b7 field median of the longest ~15",
+   "findings": [
+    "npc_martin: 3 one-time step(s) \u00b7 longest gated chain 3 (martin_01_first_friday \u2192 martin_03_jacket_downstairs) \u00b7 declared ladder 3 step(s)",
+    "npc_ethan: 2 one-time step(s) \u00b7 longest gated chain 2 (ethan_01_red_ink \u2192 ethan_02_copier) \u00b7 declared ladder 2 step(s)",
+    "npc_jade: 1 one-time step(s) \u00b7 longest gated chain 1 \u00b7 declared ladder 1 step(s)",
+    "npc_callahan: 2 one-time step(s) \u00b7 longest gated chain 2 (opening_firm \u2192 callahan_review)",
+    "npc_theo: 1 one-time step(s) \u00b7 longest gated chain 1 \u00b7 declared ladder 1 step(s)"
+   ]
+  },
+  "scene_ends_on_nothing": {
+   "summary": "0 of 11 one-time scenes with a person offer no choice at all",
+   "findings": []
+  },
+  "person_never_speaks": {
+   "summary": "0 of 11 repeatable scenes bound to a person where that person never speaks",
+   "findings": []
+  },
+  "one_time_speaks": {
+   "summary": "0 of 11 one-time canvases bound to a person have nobody speaking",
+   "findings": []
+  },
+  "thoughts_over_speech": {
+   "summary": "2 of 32 canvases with a person and any speech or thought think more than they say",
+   "findings": [
+    "walkin_shower_ethan: 18 thought words against 2 spoken",
+    "ethan_01_red_ink: 28 thought words against 19 spoken"
+   ]
+  },
+  "opening_card": {
+   "summary": "the opening arms a card with goals \u2014 7 of 8 visible card(s) carry goals",
+   "findings": [
+    "Your first week. Friday is the envelope;: goals 3",
+    "Nerve. The house has a door that doesn't: goals 1",
+    "Martin took your first envelope at break: goals 1",
+    "Ethan thinks you didn't earn the job. Hi: goals 1",
+    "The client who puts minutes on his bill.: goals 2",
+    "Your step-sister texted: drinks at the V: goals 1",
+    "Your mother. She got you this chance, an: NO goals",
+    "The senior partner. At week twelve he de: goals 1"
+   ]
+  }
+ }
+}

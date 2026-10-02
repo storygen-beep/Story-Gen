@@ -1700,19 +1700,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He holds her head still and finishes in her mouth; she takes it, swallows because the trade expects it, and sits back on her heels. He's already reaching for his drink." },
-    { type = "video", props = { pool_dir = "sex/brothel_finish_facial_t5", pool = 4, description = "An anonymous client holds her head still and finishes in her mouth in a dim red-lit room; she swallows and sits back on her heels as he reaches for his drink.", search_queries = ["brothel cum in mouth swallow pov", "escort facial mouth red room"] } },
+    { type = "video", props = { file = "sex/brothel_finish_facial_t5.webm", description = "An anonymous client holds her head still and finishes in her mouth in a dim red-lit room; she swallows and sits back on her heels as he reaches for his drink.", search_queries = ["brothel cum in mouth swallow pov", "escort facial mouth red room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her with a grunt, holds, then pulls out. His cum slides down the inside of her thigh. She waits the polite beat and lifts off, and counts the coin into her palm." },
-    { type = "video", props = { pool_dir = "sex/brothel_finish_inside_t5", pool = 4, description = "An anonymous client finishes inside her and pulls out in a dim red-lit room, his cum sliding down the inside of her thigh as she lifts off.", search_queries = ["brothel creampie pull out thigh", "escort cum inside red room"] } },
+    { type = "video", props = { file = "sex/brothel_finish_inside_t5.webm", description = "An anonymous client finishes inside her and pulls out in a dim red-lit room, his cum sliding down the inside of her thigh as she lifts off.", search_queries = ["brothel creampie pull out thigh", "escort cum inside red room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass and stays a moment, breathing, then steps back. His weight and his cum and then nothing. The same nothing as every man down here. She straightens. The next one's already on the stairs." },
-    { type = "video", props = { pool_dir = "sex/brothel_finish_ass_t5", pool = 4, description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
+    { type = "video", props = { file = "sex/brothel_finish_ass_t5.webm", description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
   ] },
 ]
 

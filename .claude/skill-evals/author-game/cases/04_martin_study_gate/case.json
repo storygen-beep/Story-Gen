@@ -1,0 +1,7 @@
+{
+  "id": "04_martin_study_gate",
+  "source": "memory conditions_version_failopen.md (17 choices ungated: conditions without version='1.0' fail open)",
+  "rule": "engine conditions version='1.0'",
+  "task": "In hub_martin_study, add a choice 'Stay after he closes the door.' that only appears once martin_stage is 3 or more.",
+  "target_lints": []
+}

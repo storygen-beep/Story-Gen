@@ -1,0 +1,291 @@
+diff --git a/games/billable_hours/toml_phases/0_systems_spec.toml b/games/billable_hours/toml_phases/0_systems_spec.toml
+index 4185ec2..fded8cf 100644
+--- a/games/billable_hours/toml_phases/0_systems_spec.toml
++++ b/games/billable_hours/toml_phases/0_systems_spec.toml
+@@ -56,6 +56,7 @@ flagEffects = [
+   { targetType = "player", flag = "worked_today",    op = "unset" },
+   { targetType = "player", flag = "breakfast_today", op = "unset" },
+   { targetType = "player", flag = "shower_today",    op = "unset" },
++  { targetType = "player", flag = "ethan_shower_today", op = "unset" },
+   { targetType = "player", flag = "touch_today",     op = "unset" },
+   { targetType = "player", flag = "club_today",      op = "unset" },
+   { targetType = "player", flag = "drink_today",     op = "unset" },
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..ac1bed1 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -243,6 +243,20 @@ relationship = "Your step-brother, 25. A junior associate at Callahan Reed. He s
+ role         = "step-brother"
+ tags         = ["Contempt", "Winning", "Red ink", "Protein shakes"]
+ 
++[[npcs.schedules]]
++location = "bathroom"
++weekdays = [0, 1, 2, 3, 4]
++start_time = "06:00"
++end_time = "07:00"
++activity = "In the shower"
++
++[[npcs.schedules]]
++location = "bathroom"
++weekdays = [5]
++start_time = "10:00"
++end_time = "11:00"
++activity = "In the shower after the gym"
++
+ [[npcs.schedules]]
+ location = "kitchen"
+ weekdays = [0, 1, 2, 3, 4]
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..41bf572 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -142,6 +142,8 @@ logic   = "AND"
+ items = [
+   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+   { type = "flag", subject = "player", flag_key = "shower_today", operator = "is_false" },
++  # Ethan's own shower rows put him in here; then the room is watch_ethan_shower, not hers.
++  { type = "npc_at_location", location_id = "bathroom", npc_id = "npc_ethan", operator = "is_absent" },
+ ]
+ 
+ [[canvases.nodes]]
+@@ -247,6 +249,169 @@ destinationType          = "specific"
+ locationId               = "landing"
+ time_progression_minutes = 10
+ 
++# ── the bathroom · Ethan in the shower — she watches him ─────────────────────
++# His portrait on the bathroom while his shower rows hold (weekday 06:00–07:00, Saturday 10:00–11:00).
++# Two-halves: his side is banded on ethan_stage, hers on nerve; first match wins in each chain.
++# act_shower reads him absent, so the two never render together.
++[[canvases]]
++id   = "watch_ethan_shower"
++name = "Ethan in the shower"
++description = "Ethan's shower, watched. Repeatable, once a day. His half banded on ethan_stage, hers on nerve."
++
++[canvases.trigger]
++location      = "bathroom"
++npc           = "npc_ethan"
++requires_npc  = "npc_ethan"
++is_repeatable = true
++priority      = 6
++is_active     = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "met_family",         operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "ethan_shower_today", operator = "is_false" },
++]
++
++[[canvases.nodes]]
++id   = "door"
++name = "The door"
++blocks = [
++  { type = "video", props = { pool_dir = "sex/ethan_shower_seen_t4", pool = 4, description = "A muscular naked man in a steamy glass shower, seen from a bathroom doorway, soaping his chest", search_queries = ["naked man glass shower steam from doorway", "muscular man showering soaping chest"] } },
++  { type = "block_pool", blocks = [
++    { type = "paragraph", content = "The bathroom door won't latch, and it swings open under your hand. Ethan is in the shower behind the glass, naked, his back to you. Water runs down his shoulders to his bare ass. He turns under the spray, and his cock swings heavy between his thighs, thick even soft." },
++    { type = "paragraph", content = "Steam rolls out when you push the door. Ethan stands under the spray with his eyes shut, soaping his chest. The suds slide down his stomach into the dark hair over his cock. It hangs long and heavy, and his balls are tight from the hot water." },
++    { type = "paragraph", content = "You hear the water before you see him. The door gives, and there he is behind the glass, naked and wet. He's got one hand on the tiles. The other is soaping his cock, slow and lazy, and it's getting thicker in his fist." },
++  ] },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_watched_shower", operator = "is_true" } ] }, blocks = [
++    { type = "thought_bubble", props = { speaker = "player" }, content = "He stood in this doorway and jerked off watching me. My turn." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "thought_bubble", props = { speaker = "player" }, content = "Back out. Right now. Any second now." },
++  ] } },
++  { type = "paragraph", content = "He hasn't seen you yet. Your feet don't move." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Stay in the doorway and watch him."
++targetType = "node"
++nodeId     = "watch_ethan_shower.watch"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Pull the door shut and go."
++targetType = "node"
++nodeId     = "watch_ethan_shower.leave"
++flagEffects = [ { targetType = "player", flag = "ethan_shower_today", op = "set" } ]
++
++[[canvases.nodes]]
++id   = "watch"
++name = "He sees you"
++blocks = [
++  { type = "video", props = { pool_dir = "sex/ethan_shower_stroke_t5", pool = 4, description = "A naked man in a glass shower stroking his hard cock, looking straight at the camera through the steam", search_queries = ["naked man shower stroking cock looking at camera", "man jerking off shower glass steam eye contact"] } },
++  # his half — ethan_stage
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "paragraph", content = "He sees you in the mirror. He doesn't cover up. He turns to face you through the glass and wraps his fist round his cock. His cock is hard in three strokes, long and thick and flushed dark at the head. He jerks it slow, right at you, naked and dripping, so you can watch the foreskin slide back off the head of his cock." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You going to stand there, intern? Then look properly." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "He sees you in the mirror and his hand stops. For a second he stares at you. Then he smirks and doesn't cover up. He takes his cock in his fist and strokes it, slow and deliberate, until it stands up hard and thick against his stomach." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Get a good look. That's the only thing in this house you'll ever have to earn." },
++  ] } },
++  # a plain block between the chains, so his band and hers each get their own first match
++  { type = "paragraph", content = "He keeps stroking, eyes on you." },
++  # her half — nerve
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "paragraph", content = "You step in and hitch yourself up onto the sink, knees apart. Your hand goes straight down over your cunt. You're soaking already, and you rub your clit in time with his fist. Your nipples are hard and aching. His eyes drop to your hand, and his cock jerks in his grip." },
++    { type = "dialog", props = { speaker = "player" }, content = "Faster. I want to see it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }, blocks = [
++    { type = "paragraph", content = "You lean on the doorframe and don't look away. Your nipples go hard and your cunt clenches on nothing. You squeeze your thighs together and feel how wet you are. His cock is fat and shiny with soap, and his fist works it from the root to the swollen head." },
++    { type = "dialog", props = { speaker = "player" }, content = "Don't stop on my account." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "Your face burns and you grip the door handle. You should go. You stare at his cock instead, at the fat vein along it and the wet head pushing through his fist. Your nipples are hard. Your cunt is hot and wet, and you squeeze your thighs together so he won't see." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "That's my stepbrother. Oh God, it's huge." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Stay until he comes."
++targetType = "node"
++nodeId     = "watch_ethan_shower.finish"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Leave him like that, hard."
++targetType = "location"
++locationId = "landing"
++time_progression_minutes = 10
++flagEffects = [
++  { targetType = "player", flag = "ethan_shower_today",  op = "set" },
++  { targetType = "player", flag = "watched_ethan_shower", op = "set" },
++]
++effects = [ { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 60 } ]
++
++[[canvases.nodes]]
++id   = "finish"
++name = "He comes"
++blocks = [
++  { type = "video", props = { pool_dir = "sex/ethan_shower_cum_t5", pool = 4, description = "A naked man in a glass shower coming, cum hitting the glass, hand braced on the tiles", search_queries = ["man cumming in shower on glass", "naked man orgasm shower glass door"] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "paragraph", content = "You rub your clit harder and he can't hold it. His hips jerk and his cock pumps, and thick white ropes of cum hit the glass in front of your face. You come on the sink with your fingers on your cunt, watching his cum run down the glass." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "His fist speeds up. He braces a hand on the tiles, his balls draw up tight, and he comes with a grunt. His cock jerks and spurts, and cum splatters the glass in thick white streaks. He keeps stroking until the last of it drips off the head." },
++  ] } },
++  { type = "paragraph", content = "He shuts the water off and looks at you, breathing hard, his cock still dripping." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Your turn tomorrow. Leave the door open." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Show's over, intern. Shut the door on your way out." },
++  ] } },
++  { type = "paragraph", content = "You back out into the hall with your legs shaking." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_diane", operator = "is_present" } ] }, blocks = [
++    { type = "paragraph", content = "Downstairs, your mother calls up that breakfast is on the table. Behind you, Ethan shouts back that he'll be right down." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Shut the door behind you."
++targetType = "location"
++locationId = "landing"
++time_progression_minutes = 20
++flagEffects = [
++  { targetType = "player", flag = "ethan_shower_today",  op = "set" },
++  { targetType = "player", flag = "watched_ethan_shower", op = "set" },
++]
++effects = [ { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 60 } ]
++
++[[canvases.nodes]]
++id   = "leave"
++name = "The door shut"
++blocks = [
++  { type = "paragraph", content = "You pull the door shut and it bounces back open an inch. Behind it the water stops, and Ethan laughs." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "It doesn't latch, intern. I'll know if you come back." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Go."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "landing"
++time_progression_minutes = 5
++
+ # ── the kitchen · Eat something + Ethan's late walk-in ───────────────────────
+ [[canvases]]
+ id   = "act_eat"
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..e10b248 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -220,6 +220,9 @@ blocks = [
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_watched_shower", operator = "is_true" } ] }, blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Shower's free. If you're going." },
+   ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "watched_ethan_shower", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You stood in that bathroom door and watched me jerk off, intern. Don't act like you didn't." },
++  ] } },
+   { type = "group", props = { blocks = [
+     { type = "paragraph", content = "He doesn't say anything else." },
+   ] } },
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..fcbbd75 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1002,6 +1002,26 @@
+           ]
+         },
+         "schedule": [
++          {
++            "where": "bathroom",
++            "weekdays": [
++              "Mon",
++              "Tue",
++              "Wed",
++              "Thu",
++              "Fri"
++            ],
++            "from": "06:00",
++            "to": "07:00"
++          },
++          {
++            "where": "bathroom",
++            "weekdays": [
++              "Sat"
++            ],
++            "from": "10:00",
++            "to": "11:00"
++          },
+           {
+             "where": "kitchen",
+             "weekdays": [
+@@ -1726,6 +1746,11 @@
+         "id": "parents_room_out",
+         "where": "parents_room",
+         "note": "Martin's drawer while they are out; at nerve 30+ his side of the bed"
++      },
++      {
++        "id": "watch_ethan_shower",
++        "where": "bathroom",
++        "note": "Ethan in the shower (his rows: weekdays 06:00-07:00, Saturday 10:00-11:00) and she watches. His half banded on ethan_stage, hers on nerve (0-9 / 10-29 / 30+). Once a day (ethan_shower_today). Sets watched_ethan_shower, read on hub_ethan_landing. act_shower now reads him absent."
+       }
+     ],
+     "shower_bands": {
+@@ -1857,6 +1882,13 @@
+       "what": "G6 house + week 12, G5 ledger split, G3 option C",
+       "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+       "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
++    },
++    {
++      "date": "2026-10-02",
++      "by": "LO",
++      "what": "repeatable: Emma watches Ethan in the shower",
++      "detail": "watch_ethan_shower at the bathroom, bound to npc_ethan (portrait). New Ethan schedule rows: bathroom Mon-Fri 06:00-07:00 and Sat 10:00-11:00. Nodes: door (pooled opening) then watch (his half on ethan_stage, hers on nerve) then finish (he comes; Diane calls up only when she is in the kitchen), or leave (a no that renders). Day cap ethan_shower_today, cleared in daily_tick. act_shower gains npc_at_location(bathroom, npc_ethan, is_absent) so the two never render together. hub_ethan_landing reads watched_ethan_shower. Not built or gated in this step: the build was out of scope.",
++      "replaces_heat": "nothing removed; one explicit repeatable added at the bathroom"
+     }
+   ]
+ }

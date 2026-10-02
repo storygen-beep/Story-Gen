@@ -364,16 +364,18 @@ economy's ending. Its extra apartments cost $1,000 and $20,000 a week and **buy 
 
 ⚠️ **Otherwise the ratchet is the corpus's single most-punished design.** The two field games that
 deliberately made money bite are the two whose players are angriest about it, and one of the devs
-answers in-thread that he is undoing it. The decisive complaint is four words long:
-
-> *"here u still grind for nothing."*
+answers in-thread that he is undoing it.
 
 **Grind is not the complaint. Grind that buys nothing is.** `course-of-temptation`'s answer is to
 denominate the payouts in the obligation itself — its homework jobs pay
 `Math.floor($weeklydebt * 0.15)` — so a rising debt is a **difficulty curve** and never more
 clicking.
 
-**Our engine has no computed effect values**, so do it with a band: gate a better-paying variant of
+**This holds for every money system, not only the obligation.** Each system that pays names its sink
+and its deadline on its card (`board.systems[]`, `the-systems.md` SY8), and its pay ladder rises with
+the bill it answers to. The price is shown before she agrees — gate 21, below.
+
+**The engine can compute an effect value from her stats** (`{type = "trait", …}`, `engine.md` §3); when a game doesn't use it, do it with a band: gate a better-paying variant of
 an existing rung on the same flag that turned the obligation up, and keep the original behind the
 flag's `is_false`. Worked example, invented numbers: buying a van adds `-20/day` on the
 day hook (`+140`/week of obligation) and turns a $30 errand into a $120 haul (`+450`/week over five
@@ -381,11 +383,11 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 
 **Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
 `engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
-`traitEffects` with a per-effect condition gate (`template_import.py:707`), applied through
-`setup.applyAndNotifyTrait` (`v2.py:6560`). Either way the player is told. A silent charge meter is
-the one economy device the corpus universally hates (`sluttown-usa`'s, *"time-cost-without-content"*).
+`traitEffects` with a per-effect condition gate (`template_import.py:755`), applied through
+`setup.applyAndNotifyTrait` (`v2.py:7291`). Either way the player is told. A silent charge meter is
+the one economy device the corpus universally hates (`sluttown-usa` is the counted case).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
-(`v2.py:18497`), so the number there stops being true at the first stage.
+(`v2.py:19491`), so the number there stops being true at the first stage.
 
 **A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
 it)*: `on_short = "carry"` (`engine.md` §26).
@@ -424,6 +426,7 @@ the meters gate content, the bill going soft is the system working, not the syst
 ⚠️ **This does NOT license a flat number.** R3b still holds for the stretch where the bill is doing
 its job: a constant against a rising income goes soft *before* the meters are ready to take over,
 which leaves a gap where nothing is pulling. Ratchet it through the ignition, then let it plateau.
+**A plateau is fine, but the deadline persists:** the bill stops climbing; it does not stop coming due.
 
 ⚠️ **And it does not license squeezing.** R3c owns that half and the corpus is unambiguous. The
 opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
@@ -553,13 +556,13 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > room-list button   Buy a coffee (GBP 3)                         author
 > the choice         Pay three pounds (GBP 3, 5 min).             author
 > the paragraph      … three pounds gets you …                    author
-> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5164
-> the sidebar        money: 12 / 100                              engine  v2.py:17694
-> rent day, short    $90                                          engine  v2.py:17453
+> when she is short  Requires 3 Money (you have 1)                engine  v2.py:5820
+> the sidebar        money: 12 / 100                              engine  v2.py:18682
+> rent day, short    $90                                          engine  v2.py:18441
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads
-> `_item.label || trait_key` (`v2.py:17668`) and never consults the trait labels at all
+> `_item.label || trait_key` (`v2.py:18656`) and never consults the trait labels at all
 > (`engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
@@ -598,7 +601,7 @@ uses for `board.economy.currency` — the gates infer when nothing is declared, 
 guess.
 
 **2 · Set the engine to it.** If `[settings.rent]` is on, `currency_symbol` must equal the declared
-symbol. Left out, it defaults to `"$"` (`v2.py:1190`) and the rent card contradicts every button in
+symbol. Left out, it defaults to `"$"` (`v2.py:1201`) and the rent card contradicts every button in
 the game.
 
 **3 · A price on a button is a figure in that notation.**
@@ -634,7 +637,7 @@ Name no real-world currency in the prose. A game set in a specific place still h
 price and a wage; it does not need the word *pounds* to have them.
 
 > ⚠️ **The symbol is a PREFIX, and the engine has no suffix form.** All four rent prints concatenate
-> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:16611`). An invented unit that reads as a
+> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:17527`). An invented unit that reads as a
 > suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
 > `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
 
@@ -686,7 +689,8 @@ agree with (R7). Declaring the currency is strictly better than letting the gate
 of them will pick the wrong one.
 
 **Listing the sinks in the ledger is the useful part.** It is the question *what is money actually
-for in this game* asked at the point where it is still cheap to answer.
+for in this game* asked at the point where it is still cheap to answer. Each money system's own sink
+and deadline live on its card (`board.systems[].sink`, `.deadline`; `templates/sheets/system.md`).
 
 ---
 
@@ -718,7 +722,7 @@ establishes that it happens.
 ## ⚠️ Two ways these gates read the wrong thing — both found 2026-08-14, both fixed
 
 **A `costs` block is a gate.** The engine refuses a choice the player cannot afford
-(`v2.py:4496` filters it out, `:4625` is the check — `engine.md` §27), but gate 16 was built from
+(`v2.py:5058` filters it out, `:5202` is the check — `engine.md` §27), but gate 16 was built from
 *conditions* only. A game that prices its choices
 instead of condition-gating them therefore read as **"nothing in the game reads the currency"**. Gate 16 now counts either channel.
 

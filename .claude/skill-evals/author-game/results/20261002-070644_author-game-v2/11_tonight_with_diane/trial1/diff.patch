@@ -1,0 +1,65 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..f2db971 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -172,6 +172,60 @@ targetType = "location"
+ locationId = "kitchen"
+ time_progression_minutes = 10
+ 
++# "Tonight" is only true in her evening row (kitchen 18:00-22:00), so the
++# choice is a window, not a lock: outside it the line simply isn't there.
++[[canvases.nodes.exit_block.choices]]
++text       = "Sit up with Diane tonight."
++targetType = "node"
++nodeId     = "hub_diane_home.sit_up"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "18:00", end_time = "22:00" } ] }
++
++[[canvases.nodes]]
++id   = "sit_up"
++name = "Sitting up with your mother"
++blocks = [
++  { type = "paragraph", content = "You make two cups of tea and sit down next to her. She turns the TV off without being asked." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Oh, this is nice. You never sit with me any more." },
++  { type = "dialog", props = { speaker = "player" }, content = "I'm sitting with you now." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Tell me about your day. All of it. I only ever see you from across the office." },
++  { type = "paragraph", content = "You tell her about the copier and the coffee order. She laughs in the right places and doesn't ask about anything you leave out." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "office_talk", operator = "gte", value = 3 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Someone in accounts asked me if you were seeing somebody at the firm. I said don't be ridiculous. You're not, are you?" },
++    { type = "dialog", props = { speaker = "player" }, content = "No, Mom." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "Not seeing. That's not the word for any of it." },
++  ] } },
++  { type = "paragraph", content = "She pours you more tea from the pot." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "19:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "diane_blessed_fridays", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "Down the hall, the study door is shut. The light is on under it." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "It's Friday, sweetheart. Don't keep Martin waiting on my account. He looks forward to it all week." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "She's sending me in there. She's actually sending me." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "He's softer since you came. I don't know what you two talk about in there, and I don't want to. Whatever it is, keep doing it." },
++    { type = "paragraph", content = "She means it kindly. Your face goes hot anyway, and you hide it in your mug." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Be nice to Martin, sweetheart. He went out on a limb for you." },
++  ] } },
++  { type = "paragraph", content = "She tucks her feet up under her on the chair." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "My daughter, kept on at Callahan Reed. I keep saying it out loud at my desk like an idiot." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_failed", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Probation isn't the end, sweetheart. Martin will talk to Callahan. He always fixes things." },
++  ] } },
++  { type = "paragraph", content = "She falls asleep with her head on your shoulder before the tea goes cold. You stay until she wakes up and sends you to bed." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Go up to bed."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "landing"
++time_progression_minutes = 60
++
+ # ── Ethan in his room ────────────────────────────────────────────────────────
+ [[canvases]]
+ id   = "hub_ethan_landing"

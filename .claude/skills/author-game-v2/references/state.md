@@ -42,8 +42,10 @@ belong here; only decisions, debts, and promises do.
     "model_to_beat": { "game": "…", "better": "one line — what ours does better" },
     "moment_kinds":  ["firsts" | "being_seen" | "body_as_payment" | "taboo_at_home" | "consequence"],
     "promise":       { "goal": "…", "mystery": "…", "payout": "…", "rival": "npc_id",
-                       "goals": [ { "goal": "…", "ends_when": "…", "next": "…" } ] },
-                                 // no date (D8). A goal with ends_when names next (shape.py).
+                       "goals": [ { "goal": "…", "ends_when": "…", "ends_flag": "flag_id",
+                                    "next": "…" } ] },
+                                 // no date (D8). A goal with ends_when names next (shape.py),
+                                 // and ends_flag: the flag set when it is met (planned check: some choice sets it).
     "companion":     "npc_id",   // who leads her, or whom she leads
     "companion_is_rival": true,  // only when declared; her scenes show help AND competition (D15)
     "pressure":      "npc_id",   // the man whose demand drives her choices — the-want.md §6
@@ -76,13 +78,20 @@ belong here; only decisions, debts, and promises do.
     "ascent":          "…",   // stated as ACCESS: what she can reach at the top
     "charge":          "reversal" | "taboo" | "transformation" | "…",
     "cast":            [ { "id": "npc_id", "age": 18, "keeps": "step counter + memory flags"
-                                                  | "want + warmth" | "want + power" } ],
+                                                  | "want + warmth" | "want + power"
+                                                  | "none — <why: he is part of a system>" } ],
+                              // `none — …`: he does not climb; he sits in a system card's
+                              // `people[]` (the-meters.md W1, "What each man keeps score of").
                               // the-want.md §6. shape.py FAILS a person (here or in
                               // board.characters[]) with no age or under 18.
     "why_this_person": { "npc_id": "one line — why she wants them, or why being wanted lands" },
     "crude_ceiling":   { "npc_id": ["the actual words permitted, per rung band"],
                          "role:night man": ["…"] },   // SP2 · a walk-on with no id: `role:<name>`
     "places":          [ { "id": "location_id", "name": "…" } ],   // read by `gates.py --words`
+    "threads":         [ { "id": "job", "name": "…", "person": "npc_id", "place": "location_id",
+                           "system": "…", "link": "one line — how it feeds the hook" } ],
+                              // her life, 4–6 threads — the-want.md §6. person is in `cast`,
+                              // place is in `places`.
     "last_read_at_release": "0.4"           // ← the anti-drift field. Bump it every release.
   },
 
@@ -98,25 +107,45 @@ belong here; only decisions, debts, and promises do.
                       "needs": { "npc": "npc_id", "step": 2 } } ],   // or { "window": {…} } · { "place": "location_id" }
 
   "board": {
-    // WHAT THE GAME KEEPS TRACK OF — answered BEFORE the locations exist, because the
+    // WHAT SHE DOES AGAIN AND AGAIN — answered BEFORE the locations exist, because the
     // location count is derived from what a place is FOR and that derivation is circular
-    // without it. the-systems.md SY1-SY3. Added 2026-09-02: the-surfaces.md R2c had said
-    // since 2026-09-01 that "the room list cannot be written before the systems list is",
-    // and there was no systems list — no field, no file, no step.
-    //   `kind`    — SY1's fork, answered per system, not per game. A game needs both.
+    // without it. the-systems.md SY1-SY3. Three lists, never merged:
+    // SYSTEMS — one design card each (templates/sheets/system.md; worked cards in
+    // templates/cards/). A system is a place she goes or a thing she does, again and again.
+    //   `pay_ladder` / `lewd_ladder` — one ladder by default (`one_ladder: true`); each lewd
+    //               rung lists its `acts`. `pool` — canvas ids; `daily: true` when the pool is
+    //               clicked every day. `growth` — "climbs" | "decays". `sink` / `deadline` —
+    //               where its money goes and when. `feeds` / `reads` — system or meter ids.
+    //               `leads_to` — npc ids or canvas ids.
+    "systems": [
+      { "id": "…", "name": "…", "place": "location_id", "hours": "Mon-Fri 18:00-02:00",
+        "cost": "60 min · energy", "one_ladder": true,
+        "pay_ladder":  [ { "gate": "…", "pay": 0 } ],
+        "lewd_ladder": [ { "gate": "…", "acts": ["…", "…"] } ],
+        "people": ["npc_id"], "pool": ["canvas_id"], "daily": true,
+        "memory": "…", "growth": "climbs", "sink": "…", "deadline": "…",
+        "feeds": ["meter_id"], "reads": ["meter_id"], "hook_link": "…",
+        "leads_to": ["npc_id"] }
+    ],
+    // METERS — what systems write and read.
+    //   `kind`    — SY1's fork, answered per meter, not per game. A game needs both.
     //               "ambient" is fed by nearly every room (time, money, the body);
     //               "sourced" is fed in one or two places and read all over.
     //   `key`     — the trait or flag the game actually keeps. This is what the lint reads.
-    //   `fed_at`  — location ids. On a `sourced` system this should usually be ONE; if it
+    //   `fed_at`  — location ids. On a `sourced` meter this should usually be ONE; if it
     //               is five, the thing is probably ambient (SY2).
-    //   `labels`  — which room labels this system attaches to. ⚠️ In THIS engine that is a
+    //   `labels`  — which room labels this meter attaches to. ⚠️ In THIS engine that is a
     //               design statement, not wiring: a canvas belongs to exactly one location
-    //               (template_import.py:1939), so the row is authored per room. SY4.
-    "systems": [
+    //               (template_import.py:2219), so the row is authored per room. SY4.
+    // ⚠️ An older ledger keeps these rows in `systems` (an entry with `kind` and no card
+    //   fields). It is read as a meter until the game moves it here.
+    "meters": [
       { "id": "look", "kind": "sourced", "key": "grooming",
         "fed_at": ["the_office"], "labels": ["has_mirror"],
         "read_by": "one line — what changes because of it" }
     ],
+    // INFRASTRUCTURE — clocks, views and channels, named and counted apart (SY1).
+    "infrastructure": [ { "name": "energy", "kind": "clock" | "view" | "channel" } ],
 
     // WHO CLIMBS — answered BEFORE any meter is named. the-meters.md W1, gate 34.
     // The field splits 8 roster / 9 ladder with nothing between 15% and 65%.
@@ -130,7 +159,8 @@ belong here; only decisions, debts, and promises do.
       //   each location against its own figure; it refuses to credit a set that is mostly
       //   non-round, because that is a post-hoc record and cannot fail. (`budget` is an
       //   observed drift of the same key — accepted on read, but write `fill`.)
-      // `serves` — the three kinds a room's list may hold, and nothing else. THIS is the
+      // `serves` — the three kinds a room's list may hold, and nothing else (`work` lists the
+      //   systems that live here; a job is a system with a card, SY8). THIS is the
       //   room's menu and its length. the-surfaces.md R2. (It replaced `objects` on 2026-08-18;
       //   the old key stays readable in shipped ledgers but nothing reads it.)
       // `labels` — what KIND of place this is. the-systems.md SY3. ⚠️ NOT the same field as
@@ -141,7 +171,7 @@ belong here; only decisions, debts, and promises do.
       //   (`home_base`, `she_can_undress`); a few by both. Keep ONE list, not two.
       { "id": "…", "job": "…", "anchor": false, "fill": 3200, "has_cycling_pool": false,
         "labels": ["private", "has_mirror"],
-        "serves": { "needs": ["hunger"], "work": ["the Saturday shift"], "people": ["npc_…"] } }
+        "serves": { "needs": ["hygiene"], "work": ["the Saturday shift"], "people": ["npc_…"] } }
     ],
 
     // the body's clock. Declared here, gated by gate 29. the-meters.md M8-M10.
@@ -151,7 +181,7 @@ belong here; only decisions, debts, and promises do.
         "costs": "nothing", "shuts": "under 20 she will not go out" }
     ],
     // SP5 and SP6 — the cast's width and the rule for adding one; where it is played, and clips.
-    "cast":  { "width": 4, "adding_rule": "a new person brings a place, a ladder, and why she wants them" },
+    "cast":  { "width": 4, "adding_rule": "a new person brings a thread (or joins one), a ladder, and why she wants them" },
     "media": { "platform": "…", "clips": "…" },
 
     "characters": [
@@ -188,7 +218,7 @@ belong here; only decisions, debts, and promises do.
     "economy": {
       "currency":   "money",
       // ⚠️ The NOTATION every button, every paragraph and [settings.rent] currency_symbol
-      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1190) while the
+      //    has to agree with. Undeclared, the rent pages print "$" (v2.py:1201) while the
       //    buttons print whatever each was typed with. the-economy.md R7.
       "symbol":     "$",
       // ⚠️ THE MONEY CASE ONLY — this block and gate 24 exist for `want.hold_kind = "bill"`.
@@ -297,14 +327,20 @@ and should not be mistaken for the spine.
 **`board.ceilings`** — each tier's top band. If the highest authored gate on a tier sits below
 its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to.
 
-**`board.systems[]`** — what the game keeps track of about her, declared before the locations are
-written. `the-systems.md` SY1–SY3. The load-bearing field is **`kind`**: an `ambient` system is fed
-by nearly every room and therefore cannot make any room special; a room needs a system about who
-she is. A `sourced` system is fed in one or two places and read all over: Course of Temptation
-reads her inclinations (`has_inclination`) in **218** of its 5,294 passages, e.g. [ClassroomMenu]
-`<<if $pc.has_inclination("Knowledge from the Deep")`.
-⚠️ **`fed_at` on a `sourced` system should usually name ONE location** — if it names five, the
-thing is ambient and the ledger is the cheapest place to find that out.
+**`board.systems[]`** — one design card per system (what she does again and again), filled before
+the locations are written. `the-systems.md` SY1; the sheet is `templates/sheets/system.md`.
+
+**`board.meters[]`** — what the systems write and read. The load-bearing field is **`kind`**: an
+`ambient` meter is fed by nearly every room and therefore cannot make any room special; a room
+needs a meter about who she is. A `sourced` meter is fed in one or two places and read all over:
+Course of Temptation reads her inclinations (`has_inclination`) in **218** of its 5,294 passages,
+e.g. [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`.
+⚠️ **`fed_at` on a `sourced` meter should usually name ONE location** — if it names five, the
+thing is ambient and the ledger is the cheapest place to find that out. A meter-shaped entry
+still in `board.systems[]` (a `kind`, no card fields) is read as a meter until it moves.
+
+**`board.infrastructure[]`** — the clocks, views and channels (`kind`: `clock` · `view` ·
+`channel`), named so they are not counted as systems.
 
 **`board.locations[].labels`** — what kind of place each room is. `the-systems.md` SY3. Read the
 label menu there and **cut it down**; a label no system reads is dead weight, and the lint prints it
@@ -396,6 +432,9 @@ file sits there being read by a different gate. These are the exact paths:
 | `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
+| `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
+| `board.systems[]` | no gate yet | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
+| `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of
 them. A need exists in the game as `[player.core_traits]` + `[player.trait_decay]` plus the

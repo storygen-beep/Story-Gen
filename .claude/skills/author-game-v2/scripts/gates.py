@@ -104,16 +104,16 @@ SHARE_GATES = {"location fill", "explicit floor", "explicit in repeatable",
                "an explicit beat carries a clip", "traversal heat"}
 
 EXPLICIT_BEAT_FLOOR = 7.5
-# Share of beats carrying 3+ explicit words. DoL held 7.5%-9.3% across eight
-# years and 12x growth. Unlike raw sex-word share (which fell 3.00% -> 0.96% as
-# systems and UI outgrew prose), this ratio is stable, so it is the usable floor.
-# It is also robust to word-list choice: two different lists both put DoL at
-# 8-10%.
+# Share of beats carrying 3+ explicit words. DoL's band, re-measured 2026-10-02 on ten
+# gitgud snapshots 2018-11..2026-09 (the 2026-08-11 text preparation was lost): three ways
+# of removing the code give 6.8%-11.3%, and list v2 moves DoL by +0.00..+0.11 points. 7.5
+# stays as a lenient floor. Raw sex-word share fell 3.00% -> 0.96%; this ratio holds. Scripts
+# and table: ~/Documents/Great_Games_Study_20260926/round5/dol_snapshots/ (score_dol.py).
 #
 # ⚠️ THIS IS A FLOOR. ITS UPPER COMPARISON IS MEANINGLESS. Do not read a game
 # scoring far above it as "too hot". Two independent reasons:
 #
-#   1. DIFFERENT DENOMINATORS. The 7.5-9.3% band is per DoL *unit* = a passage in
+#   1. DIFFERENT DENOMINATORS. The DoL band is per DoL *unit* = a passage in
 #      the whole source, combat/systems/UI included: its file carries 15,587
 #      <tw-passagedata> entries, matching the "15.6k units" this header cites.
 #      THIS gate counts beats in LOCATION PROSE ONLY. Not the same scale.
@@ -305,13 +305,13 @@ ASCENT_TIERS = 3
 # easiest way to mis-measure a game.
 IS_REPEATABLE_DEFAULT = True
 
-# Frozen explicit-word list. Frozen on purpose: the absolute share swings ~3x
-# with list choice, so a floating list makes runs incomparable. Change it only
-# with a version bump and a re-baseline of every game.
+# Frozen explicit-word list, VERSION 2 (2026-10-02: grop, tit(s|ty|ties), ass(es)). Frozen on
+# purpose: the absolute share swings ~3x with list choice, so a floating list makes runs
+# incomparable. Change it only with a version bump and a re-baseline of every game.
 EXPLICIT = re.compile(
-    r"\b(cock|dick|penis|cunt|puss|clit|tits?\b|breast|nipple|ass\b|arse|anal|balls"
+    r"\b(cock|dick|penis|cunt|puss|clit|tit(?:s|ty|ties)?\b|breast|nipple|ass(?:es)?\b|arse|anal|balls"
     r"|fuck|suck|blowjob|handjob|cum|semen|orgasm|moan|naked|nude|undress|horny"
-    r"|arous|lust|lewd|slut|whore|thrust|penetrat|grope|erect|masturbat|vagina"
+    r"|arous|lust|lewd|slut|whore|thrust|penetrat|grop|erect|masturbat|vagina"
     r"|kiss|lick)", re.I)
 
 # ── The field's OWN word list, and why this is not `EXPLICIT` above ───────────
@@ -339,21 +339,21 @@ _CANVAS_NAME = re.compile(r'^(?:Starting)?Canvas_[A-Za-z0-9_]+?_Node_')
 # word-presence would survive contact. It exists to print WHERE a game's scenes sit,
 # because both failure directions are real and they look nothing alike — a game can
 # open at the top with no stairs to it, or climb forever with no ceiling.
-# Field, per screen: touch 13 · strip 15 · hands 11 · oral 14 · vaginal 28 · anal 5
-# · finish 13 — spread evenly, because a field scene is ONE rung and the ladder is
+# Field, per screen: touch 14 · strip 15 · hands 13 · oral 15 · vaginal 24 · anal 3
+# · finish 16 — spread evenly, because a field scene is ONE rung and the ladder is
 # climbed across 3-4 chained screens. references/register.md.
 RUNGS = (
-    ("touch",   re.compile(r"\b(kiss(?:e[sd]|ing)?|caress|fondl|nuzzl|grope"
+    ("touch",   re.compile(r"\b(kiss(?:e[sd]|ing)?|caress\w*|fondl\w*|nuzzl\w*|grop\w*"
                            r"|touch(?:es|ed|ing)?)\b", re.I)),
-    ("strip",   re.compile(r"\b(undress|strip(?:s|ped|ping)?|naked|nude|topless|bra\b"
-                           r"|panties|knickers|unbutton|unzip)\b", re.I)),
+    ("strip",   re.compile(r"\b(undress\w*|strip(?:s|ped|ping)?|naked|nude|topless|bra\b"
+                           r"|panties|knickers|unbutton\w*|unzip\w*)\b", re.I)),
     ("hands",   re.compile(r"\b(finger(?:s|ed|ing)?|handjob|hand job|jerk(?:s|ed|ing)?|wank"
                            r"|stroke[sd]? (?:his|her)|rub(?:s|bed|bing)?)\b", re.I)),
     ("oral",    re.compile(r"\b(suck(?:s|ed|ing)?|blowjob|blow job|lick(?:s|ed|ing)?"
                            r"|oral|deepthroat|face[- ]?fuck\w*"
                            r"|fuck(?:s|ed|ing)? (?:your|her|my|his) (?:mouth|face|throat))\b", re.I)),
     ("vaginal", re.compile(r"\b((?<!face-)(?<!face )fuck(?:s|ed|ing)?(?! (?:your|her|my|his) (?:mouth|face|throat|ass))"
-                           r"|thrust|penetrat\w*|rides? (?:him|his)"
+                           r"|thrust\w*|penetrat\w*|rides? (?:him|his)"
                            r"|inside her|in her cunt|in her puss\w*)\b", re.I)),
     ("anal",    re.compile(r"\b(anal|in the ass|(?:in|up) (?:your|her|my) ass"
                            r"|fuck(?:s|ed|ing)? (?:your|her|my) ass|butthole)\b", re.I)),
@@ -362,12 +362,12 @@ RUNGS = (
 # ⚠️ THE RUNG IS AN ACT, NOT A BODY PART. `cunt` / `puss` / `tits` name anatomy and
 # say nothing about what is happening to it — a first draft of this list had them in
 # the `vaginal` rung and over-counted penetration openings roughly eightfold. Every entry above is a verb or a verb phrase, and the field
-# distribution quoted in the lint was re-measured with this list on 2026-09-30 (below).
+# distribution quoted in the lint was re-measured with this list on 2026-10-01 (below).
 #
 # ⚠️ CHANGED 2026-09-30 (PRD v2 CK8a · I10), on the same principle: `her ass` / `your ass`
 # alone is anatomy, not anal ("he grabs your ass"), and "fucks your mouth / face" is oral,
-# not vaginal. Anal now needs an act on the ass (in / up / fucks). Field re-measured 2026-09-30:
-# CoT/IHOH/SD/CW, 1,034 explicit passages (Great_Games_Study round2/rungs_remeasure_20260930.py).
+# not vaginal. Anal now needs an act on the ass (in / up / fucks). Stems inflected 2026-10-01 (gropes,
+# fondles); re-measured: CoT/IHOH/SD/CW, 1,045 passages (round2/rungs_remeasure_20260930.py).
 RUNG_ORDER = [k for k, _ in RUNGS]
 
 PROSE_BLOCKS = {"paragraph", "dialog", "thought_bubble", "quote", "note"}
@@ -2143,7 +2143,7 @@ def _names_any(text, vocab):
 # ═════════════════════════════════════════════════════════════════════════════
 # NEEDS + WALK-INS + LABELS — the 2026-08-18 pass. These replaced `objects`.
 #
-# The rule they enforce: a room's list is NEEDS + WORK + PEOPLE and nothing else
+# The rule they enforce: a room's list is NEEDS + SYSTEMS + PEOPLE and nothing else
 # (`the-surfaces.md` R2). The previous occupant of this space, gate 22, computed
 # affordances from `exit_block.choices` and could not see a canvas at all — so
 # "Get the washing in off the airer", an entire canvas about the airer, counted
@@ -2227,9 +2227,9 @@ def _cost_traits_of(canvas):
 
 
 def lint_labels_and_systems(model, game, state):
-    """`the-systems.md` SY1-SY4 — do the declared systems and the room labels agree?
+    """`the-systems.md` SY1-SY4 — do the declared meters and the room labels agree?
 
-    DECLARE-THEN-CHECK against `board.systems[]` and `board.locations[].labels`, the
+    DECLARE-THEN-CHECK against `board.meters[]` and `board.locations[].labels`, the
     same shape as the `a need shuts a door` gate. Three lists, and a verdict on none
     of them.
 
@@ -2248,14 +2248,14 @@ def lint_labels_and_systems(model, game, state):
     if state is None:
         return "", []
     board = (state or {}).get("board") or {}
-    systems = [s for s in (board.get("systems") or []) if isinstance(s, dict)]
+    systems = _meters_of_board(board)  # board.meters[] + old meter-shaped board.systems[]
     locs = [l for l in (board.get("locations") or []) if isinstance(l, dict)]
     room_labels = {str(l.get("id")): {str(x) for x in (l.get("labels") or [])}
                    for l in locs if l.get("id")}
     declared_labels = set().union(*room_labels.values()) if room_labels else set()
 
     if not systems and not declared_labels:
-        return ("no board.systems[] and no room labels declared — the systems step has "
+        return ("no board.meters[] and no room labels declared — the systems step has "
                 "not been taken (the-systems.md SY1)"), []
 
     findings = []
@@ -2266,14 +2266,14 @@ def lint_labels_and_systems(model, game, state):
         claimed |= {str(x) for x in (s.get("labels") or [])}
     for lid, labs in sorted(room_labels.items()):
         for lab in sorted(labs - claimed):
-            findings.append(f"{lid}: label `{lab}` is claimed by no declared system")
+            findings.append(f"{lid}: label `{lab}` is claimed by no declared meter")
 
     # 2 · a label a system names that no room carries — nowhere to live.
     for s in systems:
         for lab in sorted({str(x) for x in (s.get("labels") or [])} - declared_labels):
-            findings.append(f"system `{s.get('id')}`: label `{lab}` is on no location")
+            findings.append(f"meter `{s.get('id')}`: label `{lab}` is on no location")
 
-    # 3 · a sourced system: fed where it says, and read somewhere else. SY2.
+    # 3 · a sourced meter: fed where it says, and read somewhere else. SY2.
     by_loc = {}
     for c in model:
         by_loc.setdefault(c["loc"], []).append(c)
@@ -2282,24 +2282,24 @@ def lint_labels_and_systems(model, game, state):
             continue
         key, sid = str(s.get("key") or ""), s.get("id")
         if not key:
-            findings.append(f"system `{sid}`: no `key` — nothing to check it against")
+            findings.append(f"meter `{sid}`: no `key` — nothing to check it against")
             continue
         fed = [str(x) for x in (s.get("fed_at") or [])]
         if not fed:
-            findings.append(f"system `{sid}`: `sourced` with no `fed_at` — say where it is fed")
+            findings.append(f"meter `{sid}`: `sourced` with no `fed_at` — say where it is fed")
             continue
         written_at = [f for f in fed if any(key in c["sets"] for c in by_loc.get(f, []))]
         elsewhere = sorted({c["loc"] for c in model
                             if c["loc"] not in fed
                             and (key in c["reads"] or key in _cost_traits_of(c["raw"]))})
         if not written_at:
-            findings.append(f"system `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
+            findings.append(f"meter `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
         if not elsewhere:
-            findings.append(f"system `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
+            findings.append(f"meter `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
                             f"— a source with no readers (SY2)")
 
     sourced = sum(1 for s in systems if str(s.get("kind")) == "sourced")
-    summary = (f"{len(systems)} systems declared ({sourced} sourced) · "
+    summary = (f"{len(systems)} meters declared ({sourced} sourced) · "
                f"{len(declared_labels)} distinct labels over {len(room_labels)} rooms · "
                f"{len(findings)} to eyeball")
     return summary, findings
@@ -2789,8 +2789,8 @@ def lint_ladder(model, game):
     stuck = [r for r in rows if not (r[3] & TOP)]
     summary = (f"{len(rows)} explicit canvases · {100*len(high)//len(rows)}% OPEN at "
                f"vaginal-or-above · {100*len(stuck)//len(rows)}% never reach oral "
-               f"· field screens open at vaginal-or-above 44% of the time "
-               f"(4 games, 1,034 explicit passages)")
+               f"· field screens open at vaginal-or-above 43% of the time "
+               f"(4 games, 1,045 explicit passages)")
     findings = ([f"{cid} @{loc}: opens on {first} — no rung below it anywhere in the canvas"
                  for cid, loc, first, _ in high[:5]]
                 + [f"{cid} @{loc}: never gets past {first} — {len(pres)} rung(s) total"
@@ -7044,7 +7044,7 @@ def run_gates(model, game, state=None):
 
     # G2 — explicit floor.
     # ⚠️ A BARE PASS HERE MEANS ALMOST NOTHING, and the headline has to say so.
-    # This floor is derived from the reference game's own 7.5-9.3% band — and that
+    # This floor sits inside the reference game's own band (6.8-11.3%) — and that
     # game is the COLDEST of 18 shipped sandboxes measured on this same word list
     # (field median 33.3%). A game landing on 7.6% is inside the reference's historical
     # range and still four times colder than its genre. Until a field-comparable threshold exists (see the constant),
@@ -7066,7 +7066,7 @@ def run_gates(model, game, state=None):
     # are cold — the shape this gate exists to catch.
     #
     # ⚠️ EXPLICIT_BEAT_FLOOR HAS NOT BEEN RE-BASELINED ON THIS DENOMINATOR, and the
-    # honest consequence is that the floor is now LENIENT, not strict. The 7.5-9.3% band
+    # honest consequence is that the floor is now LENIENT, not strict. The reference band
     # was measured on the reference game over all its beats; a repeatable-only share is
     # >= an all-beats share for any game whose one-shots are colder than its loops.
     # Re-baselining needs the reference game segmented by repeatability and that has
@@ -7580,9 +7580,9 @@ def run_gates(model, game, state=None):
             continue
         seen_locs.add(cur_loc)
         stack.extend(adj[cur_loc] - seen_locs)
-    # `offscreen` is a schedule label with no nav card; `auto_exit = false` is a
-    # deliberately sealed room entered only by a canvas exit. Neither is stranded.
-    exempt = {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False}
+    # `offscreen` is a schedule label with no nav card; `auto_exit = false` is a sealed
+    # room entered only by a canvas exit. Neither is stranded, nor is a room under one.
+    exempt = _under_exempt_roots(locs, {l["id"] for l in locs if l.get("offscreen") or l.get("auto_exit") is False})
     stranded = sorted(loc_ids - seen_locs - exempt)
     _N["world reachable"] = len(loc_ids)
     gate("world reachable", None if not loc_ids else not stranded,
@@ -8147,7 +8147,7 @@ def run_gates(model, game, state=None):
                 if fat else [])
          + ([f"⚠️ {at_cap} of {len(per_screen)} screens sit ON the cap. {MENU_CEILING} is a "
              f"backstop for the pathological case, NOT the size of a normal room — the field "
-             f"median is 3. A room's list is needs + work + people (the-surfaces.md R2) — a "
+             f"median is 3. A room's list is needs + systems + people (the-surfaces.md R2) — a "
              f"CLOSED set that sizes itself, not an open one filled up to this number."]
             if per_screen and at_cap * 2 > len(per_screen) else []))
 
@@ -8696,7 +8696,7 @@ def run_gates(model, game, state=None):
              "no board.needs[] declared — this game has no body",
              ["declare the body's clock in v2_state.json: what falls, where it fills, "
               "what it costs, and WHAT IT SHUTS (references/the-meters.md M8)",
-              "a room's list is needs + work + people (the-surfaces.md R2) — with no "
+              "a room's list is needs + systems + people (the-surfaces.md R2) — with no "
               "declared needs, a third of every room's menu cannot exist"])
     else:
         read = _traits_read_by_conditions(game)
@@ -12733,6 +12733,42 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("one name per trait", ok, head, detail)
 
 
+# ── the-systems.md S2a: meters vs system cards ─────────────────────────────
+# A system card (board.systems[]) carries any of these; a meter row never does.
+_SYSTEM_CARD_FIELDS = ("name", "place", "hours", "cost", "pay_ladder", "lewd_ladder",
+                       "one_ladder", "people", "pool", "daily", "memory", "growth",
+                       "sink", "deadline", "feeds", "reads", "hook_link", "leads_to")
+
+
+def _meters_of_board(board):
+    """The ledger's meters: `board.meters[]`, plus any old meter-shaped entry still in
+    `board.systems[]` (a `kind` and no card field) from a ledger written before S2a."""
+    meters = [m for m in (board.get("meters") or []) if isinstance(m, dict)]
+    for s in board.get("systems") or []:
+        if (isinstance(s, dict) and "kind" in s
+                and not any(f in s for f in _SYSTEM_CARD_FIELDS)):
+            meters.append(s)
+    return meters
+
+
+# ── G11 world reachable: the rooms under a second root ─────────────────────
+# the-map.md R1: two separate grounds are two roots joined by a travel canvas, and gate 11
+# exempts the second root when it is `offscreen` or sealed. The rooms built off that root
+# are reached the same way, so they are exempt too: a room whose `entry_from` chain ends at
+# an exempt root. A chain that loops or names a missing id exempts nothing.
+def _under_exempt_roots(locs, exempt):
+    parent = {l["id"]: l.get("entry_from") for l in locs if l.get("id")}
+    out = set(exempt)
+    for lid in parent:
+        cur, chain = lid, set()
+        while parent.get(cur) and cur not in chain:
+            chain.add(cur)
+            cur = parent[cur]
+        if cur not in chain and cur in parent and not parent[cur] and cur in exempt:
+            out.add(lid)
+    return out
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -13111,10 +13147,10 @@ def main():
             print(f"          · … and {len(sys_lints)-16} more")
         print("          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail"
               " anything. `serves` is what happens in a room; `labels` is what KIND of place")
-        print("           it is. An AMBIENT system is fed by nearly every room and so makes no"
+        print("           it is. An AMBIENT meter is fed by nearly every room and so makes no"
               " room special; a SOURCED one is fed in one or two places and read all over —")
         print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
-              " 1 → 53. A game of only ambient systems ships a duty list.")
+              " 1 → 53. A game of only ambient meters ships a duty list.")
         print("           ⚠️ Declaring MORE labels makes this output worse, not"
               " better — that direction is the only reason it is checked at all)")
 
@@ -13134,7 +13170,7 @@ def main():
         for h in browse_lints[:8]:
             print(f"          · {h}")
         if browse_lints:
-            print("          (a room's list is needs + work + people, the-surfaces.md R2."
+            print("          (a room's list is needs + systems + people, the-surfaces.md R2."
                   " KNOWN NOISY: a travel bridge legitimately changes nothing, so read WHICH"
                   " canvases are named, not the percentage alone)")
 

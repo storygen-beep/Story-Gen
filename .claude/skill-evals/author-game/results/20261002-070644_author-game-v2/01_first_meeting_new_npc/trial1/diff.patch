@@ -1,0 +1,267 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..aece718 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -310,6 +310,22 @@ start_time = "08:00"
+ end_time = "19:00"
+ activity = "In the corner office"
+ 
++[[npcs]]
++id           = "npc_priya"
++name         = "Priya"
++description  = "Senior paralegal, 35. Trains the interns, hands out their work, and tells Callahan who is any good."
++portrait     = "priya.jpg"
++relationship = "Priya Shah, 35, the senior paralegal at Callahan Reed. She trains the interns, and she tells Callahan which of them are any good."
++role         = "senior paralegal"
++tags         = ["The interns", "Who's any good", "Pen behind her ear", "Green tea"]
++
++[[npcs.schedules]]
++location = "firm"
++weekdays = [0, 1, 2, 3, 4]
++start_time = "08:30"
++end_time = "17:30"
++activity = "Running the interns from the copy room"
++
+ [[npcs]]
+ id           = "npc_theo"
+ name         = "Theo"
+diff --git a/games/billable_hours/toml_phases/2_one_shots.toml b/games/billable_hours/toml_phases/2_one_shots.toml
+index 6ee3ab4..8c9af1a 100644
+--- a/games/billable_hours/toml_phases/2_one_shots.toml
++++ b/games/billable_hours/toml_phases/2_one_shots.toml
+@@ -360,3 +360,98 @@ destinationType          = "specific"
+ locationId               = "kitchen"
+ time_progression_minutes = 10
+ flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]
++
++# ── Priya · the first meeting (the-first-hour.md F5–F8) ──────────────────────
++# Her first shift after day one, inside Priya's own hours (firm, weekdays 08:30–17:30).
++# Sets met_priya, which gates hub_priya_copyroom and her quest card.
++[[canvases]]
++id   = "meet_priya"
++name = "The senior paralegal"
++description = "Meets Priya, the senior paralegal who trains the interns. Role before name; reads office_talk. Sets met_priya."
++
++[canvases.trigger]
++location      = "firm"
++requires_npc  = "npc_priya"
++is_repeatable = false
++priority      = 11
++is_active     = true
++
++[[canvases.trigger.schedules]]
++weekdays   = [0, 1, 2, 3, 4]
++start_time = "09:00"
++end_time   = "17:00"
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "firm_day1_done", operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "met_priya",      operator = "is_false" },
++]
++
++[[canvases.nodes]]
++id   = "copy_room"
++name = "The copy room"
++blocks = [
++  { type = "paragraph", content = "A woman in a charcoal suit is waiting at the copy room door with a stack of files on her hip and a pen behind her ear. She's the senior paralegal, mid-thirties, and every intern on this floor answers to her. She looks you over from your heels to your hair, slowly, the way she'd check a contract for mistakes." },
++  { type = "dialog", props = { speaker = "unknown" }, content = "You're the new intern. I'm Priya Shah. Callahan signs your envelope, but I decide what you do all day, and I'm the one who tells him if you're any good." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "office_talk", operator = "gte", value = 3 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "And I've already heard about you at the coffee machine. That was fast, even for this floor." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Everyone says you're Martin's. I don't care whose you are. I care if you can file." },
++  ] } },
++  { type = "paragraph", content = "She drops the stack into your arms. Then she nods past you, at the associate with the loosened tie who has stopped pretending to read his screen." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Rule one. They'll watch you bend over that copier all day. He already does. You can go red every time, or you can make them wait for their files. The girls who go red don't get kept on." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "She saw all of it. And she's telling me to use it." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "\"Show me where everything goes.\""
++targetType = "node"
++nodeId     = "meet_priya.tour"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "\"What if I want them watching?\""
++targetType = "node"
++nodeId     = "meet_priya.bold"
++
++[[canvases.nodes]]
++id   = "tour"
++name = "\"Show me where everything goes.\""
++blocks = [
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Good. Litigation on the left, contracts on the right, and nothing goes on a partner's desk without passing mine first. I'm here from half eight. When you run out of work, you come to me." },
++  { type = "paragraph", content = "She walks off without checking whether you follow. You follow, and you can feel the man with the loose tie watching you do it." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Get to work."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "firm"
++time_progression_minutes = 20
++flagEffects = [ { targetType = "player", flag = "met_priya", op = "set" } ]
++
++[[canvases.nodes]]
++id   = "bold"
++name = "\"What if I want them watching?\""
++blocks = [
++  { type = "paragraph", content = "Priya stops. For the first time she looks at you like you might be worth the trouble, and a slow smile pulls at one corner of her mouth." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Then make it worth their while, and make sure I hear about it before Callahan does. I'm here from half eight. When you run out of work, you come to me." },
++  { type = "paragraph", content = "She taps the top file against your chest, once, and leaves you holding the stack. Your face is hot, and you're grinning." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Get to work."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "firm"
++time_progression_minutes = 20
++flagEffects = [ { targetType = "player", flag = "met_priya", op = "set" } ]
+diff --git a/games/billable_hours/toml_phases/4_story_arc.toml b/games/billable_hours/toml_phases/4_story_arc.toml
+index 16a25e1..ab71af1 100644
+--- a/games/billable_hours/toml_phases/4_story_arc.toml
++++ b/games/billable_hours/toml_phases/4_story_arc.toml
+@@ -1463,6 +1463,13 @@ tip      = "Home for breakfast and in the evenings; at her desk at the firm in t
+ priority = 5
+ when     = [ { flag = "met_family", op = "is_true" } ]
+ 
++[[quest_cards]]
++npc_id   = "npc_priya"
++text     = "The senior paralegal. She trains the interns, hands out the work, and tells Callahan which of you are any good."
++tip      = "At Callahan Reed on weekdays, 8:30 to 5:30, at the copy room."
++priority = 5
++when     = [ { flag = "met_priya", op = "is_true" } ]
++
+ [[quest_cards]]
+ npc_id   = "npc_callahan"
+ text     = "The senior partner. At week twelve he decides whether you're kept on."
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..7014fad 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -332,6 +332,51 @@ targetType = "location"
+ locationId = "firm"
+ time_progression_minutes = 5
+ 
++# ── Priya at the copy room ───────────────────────────────────────────────────
++[[canvases]]
++id   = "hub_priya_copyroom"
++name = "Priya at the copy room"
++description = "Priya, the senior paralegal, after meet_priya. She hands out the interns' work and hears the floor's talk first."
++
++[canvases.trigger]
++location      = "firm"
++npc           = "npc_priya"
++requires_npc  = "npc_priya"
++is_repeatable = true
++priority      = 6
++is_active     = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [ { type = "flag", subject = "player", flag_key = "met_priya", operator = "is_true" } ]
++
++[[canvases.nodes]]
++id   = "copy_room"
++name = "The copy room"
++blocks = [
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "office_talk", operator = "gte", value = 3 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "They're saying your name at the coffee machine. I'm not asking. I'm telling you I heard." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "Priya, the senior paralegal, is sorting the interns' work into piles on the copier lid. She looks up when you come in." },
++  ] } },
++  { type = "block_pool", blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Contracts want this by four. Don't let anyone on litigation talk you into theirs first." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "The interns who last are the ones who come to me before they run out of work. Remember that." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_priya" }, content = "Loose Tie asked me your name this morning. I told him to ask you himself. He won't." },
++  ] },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Take the pile and get back to work."
++targetType = "location"
++locationId = "firm"
++time_progression_minutes = 5
++
+ # ── Ethan at his desk ────────────────────────────────────────────────────────
+ [[canvases]]
+ id   = "hub_ethan_desk"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..1c776a9 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -65,6 +65,11 @@
+         "id": "npc_pierce",
+         "age": 58,
+         "keeps": "none \u2014 a risk system"
++      },
++      {
++        "id": "npc_priya",
++        "age": 35,
++        "keeps": "none \u2014 a schedule and a hub"
+       }
+     ],
+     "why_this_person": {
+@@ -74,7 +79,8 @@
+       "npc_diane": "not wanted \u2014 the price tag; her hours at the desk are the house's unwatched hours",
+       "npc_callahan": "his yes is the only one worth a contract",
+       "npc_theo": "he pays, and he pays her, not the firm",
+-      "npc_pierce": "the consequence; wants nothing from her"
++      "npc_pierce": "the consequence; wants nothing from her",
++      "npc_priya": "she decides what the interns do all day and tells Callahan who is any good; she saw the copier before Emma did"
+     },
+     "places": [
+       {
+@@ -170,6 +176,12 @@
+         "by": "LO",
+         "what": "SP2 who_climbs both \u2192 player; budgets kept as the game's target (v0.1 ships under them, REPORT red); firm walk-in top band stays the associate; four reader FAILs waived",
+         "why": "fix pass; NOTES.md"
++      },
++      {
++        "at": "2026-10-02",
++        "by": "LO",
++        "what": "New person npc_priya (Priya Shah, 35, senior paralegal, trains the interns): weekday firm schedule 08:30-17:30; meeting meet_priya (2_one_shots, sets met_priya); hub hub_priya_copyroom (5_scenes); quest card (4_story_arc). Still owed under board.cast.adding_rule: a ladder with 1+ step and a WANT §5 line. Portrait priya.jpg is referenced and not yet on disk.",
++        "why": "LO-approved task: add Priya and Emma's first meeting with her"
+       }
+     ],
+     "threads": [
+@@ -1219,6 +1231,23 @@
+             "to": "19:00"
+           }
+         ]
++      },
++      {
++        "id": "npc_priya",
++        "schedule": [
++          {
++            "where": "firm",
++            "weekdays": [
++              "Mon",
++              "Tue",
++              "Wed",
++              "Thu",
++              "Fri"
++            ],
++            "from": "08:30",
++            "to": "17:30"
++          }
++        ]
+       }
+     ],
+     "economy": {

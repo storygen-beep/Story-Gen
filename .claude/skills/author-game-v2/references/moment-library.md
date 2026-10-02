@@ -8,10 +8,11 @@
 > ⚠️ **Adults only.** A game is in this library only if its own text states its characters are adults
 > (an 18+ statement, a college or university setting, or an 18+ age list) **and** nothing in it describes
 > any character as under 18 or as a school pupil now. Every moment here involves adults. Never set an
-> idea in a school, or with anyone under 18.
+> idea in a school, or with anyone under 18. An adult college is allowed: everyone 18+, stated, in
+> university words only (`the-voice.md`, "Adult wording"; `templates/cards/college.md`).
 
-The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); each Pitcher is given a
-different kind (`the-release.md`, "Her moment — eight lines"). A `why` marked **[my reading]** has no player
+The pitch pack prints one kind's ten (`pitch_pack.py <slug> --kind <kind>`); a kind given to a Pitcher is
+a hint, not its assignment (`the-release.md`, "The loop" step 2). A `why` marked **[my reading]** has no player
 comment behind it; the rest cite the player evidence in the study's game files.
 
 ## firsts · her firsts
@@ -91,7 +92,8 @@ Rent, a clue, a grade, a way out. The body is the currency, and the price climbs
 
 ## taboo_at_home · taboo at home
 
-The house, and who is in the next room. The relationship is the transgression.
+The house she comes back to, and who is in the next room. The relationship is the transgression; the
+world outside, and what she brings home from it, is what makes the house risky.
 
 - **In Her Own Hands — Wine with roommates** (`[JobCelebrate1A]`) · "should steer clear since these were my roommates, but I couldn't resist."
   Remembered because: Remembered: "Finding job earns you celebration sex with a room mate." (F95 review Space_Cow99).
@@ -105,8 +107,8 @@ The house, and who is in the next room. The relationship is the transgression.
   Remembered because: Player asks: "Is there a way to have a threesome with Bobby and his gf".
 - **In Her Own Hands — into the taken roommate's bed** (`[BobbySleepPeek2ABJ]`) · "Since that first blow job, I had debated whether to pursue something physical with Bobby."
   Remembered because: "I'd really love the chance for something romantic happening between Bobby and MC"
-- **Cupid's Way — her mother walks in** (`[damien23]`) · "Damien pulls his hands out of your pants but from your mom's expression"
-  Remembered because: "The mother walking in on her in her bedroom with damien was hot"
+- **Cupid's Way — a thread that feeds the hook: the man from outside, caught at home** (`[damien23]`) · "Damien pulls his hands out of your pants but from your mom's expression"
+  Remembered because: "The mother walking in on her in her bedroom with damien was hot" [my reading] Damien comes from her life outside, her friend Jasmin's guy who texts her (`[Answer his message]`); the house is where he gets caught.
 - **In Her Own Hands — the shower at the sleepover** (`[Abby_Bath_Shower1a]`) · "'And watch?' she teased, already peeling layers off her body."
   Remembered because: [my reading] the shared bathroom at night; after two visits the menu offers the shower together.
 - **Shady Deals — the crew at her pool** (`[Pool Event Quickie]`) · "When you step back out, all conversation dies."

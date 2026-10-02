@@ -6,6 +6,6 @@
 | decision | answer |
 |---|---|
 | people in this release | <number> |
-| a new person joins only when they bring | <a place · a ladder · why she wants them> |
+| a new person joins only when they bring | <a thread (or joins one) · a ladder · why she wants them> |
 
 Record it in `board.cast`.

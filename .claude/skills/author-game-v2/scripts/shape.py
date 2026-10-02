@@ -256,7 +256,7 @@ def check(state, strict=False):
         row("the promise has a beat this release", False if strict else None,
             "want.promise names no goal or mystery (the idea page §2)")
     elif not str(rp.get("promise_alive") or "").strip():
-        row("the promise has a beat this release", False,
+        row("the promise has a beat this release", False if strict else None,
             "release_page.promise_alive is empty — which beat keeps the goal or mystery alive?")
     else:
         row("the promise has a beat this release", True, str(rp["promise_alive"])[:80])

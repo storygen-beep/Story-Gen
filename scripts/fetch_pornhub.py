@@ -38,13 +38,10 @@ Usage:
 
 import argparse
 import json
-import re
 import sys
 import time
 from pathlib import Path
 from urllib.parse import quote_plus
-
-import requests
 
 # scripts/ is not a package. sys.path[0] is already this directory for a direct
 # run and for the subprocess the endpoint spawns, but make it explicit so the
@@ -77,26 +74,13 @@ def images_url(q: str) -> str:
 
 def _stock(api: str, game: str, file_: str, slot_key: str, label: str,
            urls: list, docids: dict, thumbs: dict) -> int:
-    """One options/add per url. Mirrors fetch_related._stock, plus `thumb`.
+    """Stock through fetch_related._stock — ONE options/add_bulk call.
 
-    Deliberately NOT batched: making this byte-identical to the proven related
-    path is what makes the first end-to-end run interpretable — a timing
-    difference then points at the extractor, not at the store.
+    This was a per-url copy of the related path, kept unbatched only so the first
+    PornHub run was comparable with Related. Both have run in anger since, and the
+    per-url writes against a ~30 MB shelf were what made ◆ slow.
     """
-    ok = 0
-    for u in urls:
-        is_vid = re.search(r"\.(mp4|webm)(\?|$)", u, re.IGNORECASE)
-        r = fr._api_post(api, "options/add", {
-            "game": game, "file": file_, "slot_key": slot_key, "url": u,
-            "query": label,
-            "type": "video" if is_vid else "gif",
-            "media_kind": "video" if is_vid else "img",
-            "docid": docids.get(u, ""),
-            "thumb": thumbs.get(u, ""),
-        })
-        if r.status_code == 200 and r.json().get("ok"):
-            ok += 1
-    return ok
+    return fr._stock(api, game, file_, slot_key, label, urls, docids, thumbs)
 
 
 def main() -> None:

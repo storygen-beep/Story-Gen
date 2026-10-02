@@ -28,7 +28,7 @@ starting_canvas = "<canvas_id>"
 
 # ⚠️ THE ONLY RELEASE NUMBER A PLAYER CAN READ WITHOUT LEAVING THE GAME. Both
 # optional; together they render "v0.1 · 2026-08-23" in the sidebar footer
-# (v2.py:17095-17107 — the widget is always defined and renders nothing when
+# (v2.py:18840-18854 — the widget is always defined and renders nothing when
 # both are empty). Set `version` in the SAME commit that rebuilds output/, and
 # make it match the portal entry in games-data.js. references/the-release.md
 # § Shipping the build · references/engine.md §38.
@@ -45,7 +45,7 @@ quests_engine   = "v2"
 # ⚠️ THE CURRENCY IS ONE NOTATION, AND IT IS DECLARED. Write it into the ledger
 # as board.economy.symbol, and set [settings.rent] currency_symbol (in
 # 0_systems_spec.toml) to the same string. Left undeclared the rent pages print
-# "$" (v2.py:1181) while every button prints whatever it was typed with.
+# "$" (v2.py:1223) while every button prints whatever it was typed with.
 # references/the-economy.md R7.
 # House default "$": it is the only symbol the engine renders consistently, and
 # name no real-world currency in the prose.
@@ -121,6 +121,10 @@ default_image = "<images/her_default.jpg>"
 
 
 # ── meters ───────────────────────────────────────────────────────────────────
+#   The systems (one card each), the meters they write and read, and the
+#   infrastructure are declared in v2_state.json, not here: board.systems[],
+#   board.meters[], board.infrastructure[] (references/state.md · the-systems.md).
+#
 #   ⚠️ ANSWER W1 BEFORE YOU NAME A SINGLE METER: does the PLAYER climb, or does
 #      the CAST? references/the-meters.md W1. Declare it as `who_climbs` in
 #      v2_state.json; gate 34 checks the built game against your answer.
@@ -205,7 +209,8 @@ bands = [
 #      a fully wired loop that means nothing.
 #      Working example: the gym and the night shift each drop energy by 30,
 #      sleep restores it, and energy >= 20 gates "Go out". Spent means she
-#      cannot leave. (No hygiene need: engine.md §30.1.)
+#      cannot leave. Hygiene is allowed for routing: its refill place always rolls
+#      an event, it has an off switch, never a game over (engine.md §30.1).
 #
 #   ⚠️ Every need must be fillable somewhere on a room's `serves.needs`. A need
 #      with nowhere to fill it is a countdown to a wall.
@@ -226,7 +231,7 @@ shuts = "<what she CANNOT do while this is empty>"
 
 # ── locations: DERIVE the count, budget the set as a SHAPE ───────────────────
 #   How many? Not a number you pick. Derive it from what a place is FOR:
-#        needs served here + work done here + people scheduled here
+#        needs served here + systems that live here + people scheduled here
 #   List the places that answer at least one of those, and count that. A
 #   thoroughfare only routes; a destination always offers one thing she can
 #   do alone, or is closed then (the-board.md §1, two kinds of place).
@@ -243,7 +248,7 @@ shuts = "<what she CANNOT do while this is empty>"
 #   · what she can do there REPEATEDLY — if nothing, it is not a location yet
 #   · `serves` — the THREE kinds this room's list may hold, and nothing else:
 #       needs  = which declared board.needs[] she can fill here
-#       work   = what earns money here
+#       work   = the systems that live here (a job is a system with a card)
 #       people = who is scheduled here (one hub per schedule row)
 #     THAT IS THE MENU, and its length. Anything that is none of the three is a
 #     BEAT INSIDE one of them, not a button. references/the-surfaces.md R2.
@@ -324,7 +329,7 @@ navigation_order     = ["<neighbour_id>"]
 #   anchor  = false       # exactly one location sets this true
 #   [locations.serves]
 #   needs  = ["<a key from [[needs]] below>"]
-#   work   = ["<what earns money here>"]
+#   work   = ["<a system that lives here — its card id>"]
 #   people = ["npc_<id>"]                           # one hub per schedule row
 #   fill    = 4000        # ⚠️ YOUR BUDGET, in round numbers, written NOW — a PLAN.
 #
@@ -375,6 +380,15 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "09:00"
 end_time   = "18:00"
 activity   = "<what they are doing — shown to the player>"
+
+
+# ── phone ────────────────────────────────────────────────────────────────────
+#   The phone is a channel, not a system: declare it in v2_state.json as
+#     board.infrastructure[] += { "name": "phone", "kind": "channel" }
+#   and never in board.systems[]. Write its tables from templates/cards/phone.md
+#   (a thread for every person she is involved with; every app a door to sex,
+#   money or people) and references/the-phone.md. Each thread's cause, delay,
+#   window, booking and loop go on that person's sheet first.
 
 
 # ── media declaration ────────────────────────────────────────────────────────

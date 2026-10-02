@@ -79,7 +79,7 @@ A room's menu is **exactly three kinds of thing, and nothing else.**
 | kind | what it is | how many |
 |---|---|---|
 | **a need** | the body's clock — sleep, eat, wash, plus whatever the premise adds. Declared in `board.needs[]`, ruled by `the-meters.md` M8–M10 | one per need this room serves |
-| **work** | where money comes from | one per job done here |
+| **a system** | what she does here again and again — a job is a system with a card (`the-systems.md` SY8) | one per system that lives here |
 | **a person** | that character's hub | one per schedule row — location × window |
 
 Anything that is none of the three does not belong on the room's list. It belongs **inside a beat**,
@@ -132,7 +132,7 @@ screens offering more than 12 ......... ~2% (median across the field)
 ```
 
 The typical screen in a real game — the one the player is on most of the time — is **small**, and
-needs + work + people lands there without being told to.
+needs + systems + people lands there without being told to.
 
 Big screens do exist. **But look at what they are: shops, wardrobes, character creation, DoL's recipe
 list. Catalogues.** A catalogue is legitimately long, because its job is to list. A place you return
@@ -146,28 +146,29 @@ to every day is not one.
 and does her own work is **at least two canvases**, plus a walk-in if anyone can interrupt her.
 Never put work inside a character's hub.
 
-**R2 · A room's list is needs, work and people — nothing else.**
+**R2 · A room's list is needs, systems and people — nothing else.**
 
-Write the room's job first: *what does her body need here, what work is done here, who is scheduled
+Write the room's job first: *what does her body need here, which systems live here, who is scheduled
 here.* Those three answers are the menu. A candidate that is none of the three is either a beat
 inside one of them, or it belongs on a different surface entirely.
 
 - **A need on this list is a real need**, declared in `board.needs[]` and holding a door shut when it
   goes unmet (`the-meters.md` M8/M9). A restore that gates nothing is a chore, and a chore is not a
   reason to build a screen.
-- **Work is where money comes from.** One per job, not one per till-shaped noun.
+- **A system is what she does here again and again.** A job is a system with a card
+  (`the-systems.md` SY8) — one row per system, not one per till-shaped noun.
 - **A person is a hub**, one per schedule row, and it is judged by the object test above.
 - **A menu item with HOURS says so when it is shut.** A canvas whose schedule window has closed
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
   game rather than a timetable. `show_when_blocked = true` plus a `cooldown_message` keeps the entry
-  as a dimmed line carrying the author's own words (`v2.py:11055`, rendered at `v2.py:5143`).
+  as a dimmed line carrying the author's own words (`v2.py:11847`, rendered at `v2.py:5799`).
   `references/the-clock.md` C5 owns the rule; this is the
   surface it lands on.
 
 **R2c · Each row is a SYSTEM surfacing in this room — so the room list cannot be written before
 the systems list is.**
 
-Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, work and people is a closed
+Added 2026-09-01. R2 above is a **sizing** rule and it works: needs, systems and people is a closed
 set, so a room cannot sprawl. What it does not say is what an individual row IS.
 
 **Read an anchor room in a shipped game and every row is a different system of the game,
@@ -191,9 +192,11 @@ failure: declare twenty systems, get twenty rows, ship twenty dead meters —
 which is `the-meters.md` W3's defect at scale, and exactly what SKILL.md's *"ask what a tired author
 would build"* rules out. So:
 
-> **A system earns its place by being read in more than one room, by more than one kind of content.**
+> **A system earns its place by feeding something already read, or by being a source or sink of
+> money** (`the-systems.md`, the brake). **A meter earns its place by being read in more than one
+> room, by more than one kind of content.**
 
-One system that surfaces in three rooms beats three that surface in one each. **The test is not how
+One meter read in three rooms beats three read in one each. **The test is not how
 many systems the game has; it is whether a room has anything of its own to show.**
 
 **No gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
@@ -235,7 +238,7 @@ And the branches are **cheap**: two of them are under 500 bytes and hand off to 
 engine that **1,742 other passages also call**. The richness is combinatorial, not authored.
 
 **The same pattern is authorable in our engine** with the keys the importer already reads
-(`template_import.py:2175-2195`):
+(`template_import.py:2461-2481`):
 
 ```toml
 # "Stock the shelves" @ the_storeroom — the odds ride the same trait as the content
@@ -263,9 +266,9 @@ the branch    ONE canvas, substitution_only = true, [group] bands on the axis th
 the payoff    routes into the rung that already exists, instead of authoring new content
 ```
 
-**⚠️ The payoff canvas must declare a `location`.** `setup.getCanvasById` (`v2.py:3177-3191`) builds
+**⚠️ The payoff canvas must declare a `location`.** `setup.getCanvasById` (`v2.py:3671-3685`) builds
 its lookup **only** from `help_data.locationCanvases`, which is populated only for canvases carrying
-`trigger.location` (`v2.py:10986-11138`). Point a substitution at a triggerless rung and it
+`trigger.location` (`v2.py:11778-11930`). Point a substitution at a triggerless rung and it
 **silently never fires** — no error, no red build, the branch just never happens.
 
 The working shape, **verified live 2026-08-18** (probe build, three-way reachability, zero JS
@@ -274,7 +277,7 @@ errors):
 ```toml
 [canvases.trigger]
 location          = "the_kitchen"   # so getCanvasById can find it
-substitution_only = true            # so it stays OUT of the room's list (v2.py:4523)
+substitution_only = true            # so it stays OUT of the room's list (v2.py:5100)
 ```
 
 That canvas is then reachable **both** as a substitution target **and** from a hub choice pointing at
@@ -311,7 +314,7 @@ differently depending on one optional field:
 
 | | **Pattern A** — no `exclusive_group` | **Pattern B** — `exclusive_group = "<name>"` |
 |---|---|---|
-| the dice | **one roll per rule**, in declaration order, first match wins (`v2.py:5382-5391`) | **ONE roll**, split into cumulative buckets (`v2.py:5361-5379`) |
+| the dice | **one roll per rule**, in declaration order, first match wins (`v2.py:6038-6047`) | **ONE roll**, split into cumulative buckets (`v2.py:6017-6035`) |
 | substitution rate | `1 − ∏(1 − pᵢ)` — it compounds | `Σ pᵢ` — it is what you wrote |
 | five branches at 0.12 | the host renders **53%** | the host renders **40%** |
 | use it for | bands where **one** condition can be true at a time | a menu of outcomes that all **could** fire |
@@ -323,13 +326,13 @@ mutually exclusive by condition want Pattern A, and **must actually be exclusive
 
 **⚠️ Pattern B falls through to the HOST, never to the next bucket.** If the roll claims a slot whose
 target, conditions or `requires_npc` fail, `checkAndSubstituteCanvas` returns null and the activity
-itself renders (`v2.py:5374-5377`). A gated bucket therefore gives its share back to the host while
+itself renders (`v2.py:6030-6033`). A gated bucket therefore gives its share back to the host while
 its gate is shut — it does not hand it on. That is the right behaviour and it has to be written for:
 the player sees the room being quiet, not the next branch along. Note that **presence gets in twice**
 — an `npc_at_location` condition on the rule, and `requires_npc` on the target, which `_tryRule`
-resolves against the player's current location (`v2.py:5330-5336`).
+resolves against the player's current location (`v2.py:5986-5992`).
 
-**Groups are processed before independent rules** (`v2.py:5359`), so a group added beside existing
+**Groups are processed before independent rules** (`v2.py:6015`), so a group added beside existing
 Pattern A bands takes its slice off the top and quietly cuts how often those bands fire. Declare new
 independent rules **after** the bands instead if the bands are the headline content.
 
@@ -361,7 +364,7 @@ an ACT NODE per rung          its own media pool; the passage swap is what refre
 a SELF-LOOP link              stay on this act, raise a hidden meter by random(8,14)
 SWITCH links                  change act, set the stage trait, both directions
 a FINISH link                 gated on the meter; elects which finish; routes to a finisher node
-the FINISHER                  [group] blocks per finish type, then resets every loop trait
+the FINISHER                  [group] per finish type, ONE `file` each (never a pool), then resets every loop trait
 the ENTRY rung                on the hub, gated, and it resets every loop trait on the way in
 ```
 
@@ -686,7 +689,7 @@ quest goal, or gate a later scene on. The set of flags is the only place its sha
 
 ⚠️ **And a counter nobody reads is worse than no counter.** A `<npc>_stage` key whose prefix names a
 declared character is read by the engine's own stage-label system, and gate 33 carves those out on
-purpose (`v2.py:5549-5554`). Any other counter written and never read by a condition — a bare
+purpose (`v2.py:6244-6249`). Any other counter written and never read by a condition — a bare
 `sex_stage`, say — fails gate 33.
 
 ⚠️ **Not a gate, and not a quota.** No threshold here is defensible — a game can be built entirely on
@@ -831,7 +834,7 @@ Three things about that line carry the rule:
 - **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
-wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:14378`.
+wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:15266`.
 This is recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**.
 `the-economy.md` R1b owns the asset half.
 
@@ -866,9 +869,9 @@ R5 says most doors are gated. This is the floor under it: **one** choice on ever
 neither `conditions` nor `costs`, so the screen still works on the day everything else is shut.
 
 Not a defensive habit — a consequence of how the engine renders. A choice whose conditions fail is
-wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:13885`) and renders **nothing**: no
+wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:14773`) and renders **nothing**: no
 greyed line, no reason, no hours. And a **cost-bearing** choice counts as conditional too
-(`v2.py:12827-12836`), so a screen whose only affordance costs $3 is equally empty to a player at
+(`v2.py:13629-13638`), so a screen whose only affordance costs $3 is equally empty to a player at
 $0. When nothing is left the engine emits a bare `[[Continue->…]]` that fires no effects, and the
 player cannot tell a spent day from a broken build.
 
@@ -1053,7 +1056,7 @@ Route the choice at a node with `targetType = "node"`, write what happened, and 
   meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
   ⚠️ **Node prose has no `text_variants`.** The key exists only on a **choice**, where it swaps the
   button label: a list of `{ text, conditions }`, first match wins, the base `text` otherwise
-  (`template_import.py:2405-2443`; rendered as a `<<set _cv>>` chain at `v2.py:13920-13934`).
+  (`template_import.py:2693-2731`; rendered as a `<<set _cv>>` chain at `v2.py:14808-14822`).
   Variant labels are static strings — an `@npc` token inside one does not resolve.
 - **Video on outcome nodes, images on hubs.**
 

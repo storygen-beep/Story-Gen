@@ -1,0 +1,9 @@
+{
+  "game": "billable_hours",
+  "commit": "301f6f8",
+  "paths": [
+    "games/billable_hours/toml_phases",
+    "games/billable_hours/v2_state.json"
+  ],
+  "note": "Baseline gates: 57 pass, 1 fail (location fill), 2 n/a. Grade on the diff from baseline_gates.json, never on the exit code."
+}

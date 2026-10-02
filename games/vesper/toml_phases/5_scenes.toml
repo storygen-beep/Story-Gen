@@ -290,19 +290,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He pulls out and finishes on her face, holding her there by the jaw until he's done, then letting go the way you drop a thing back in a drawer. He's already turned to the window." },
-    { type = "video", props = { pool_dir = "sex/mercer_finish_facial_t5", pool = 4, description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window in silence.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
+    { type = "video", props = { file = "sex/mercer_finish_facial_t5.webm", description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window in silence.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holds, pulls out in silence. His cum slides down the inside of her thigh. He wipes himself on a cloth from the drawer and checks the time." },
-    { type = "video", props = { pool_dir = "sex/mercer_finish_inside_t5", pool = 4, description = "He finishes inside her and holds, then pulls out in silence, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
+    { type = "video", props = { file = "sex/mercer_finish_inside_t5.webm", description = "He finishes inside her and holds, then pulls out in silence, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass. Nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She sets it aside with the other things kept off her list, and straightens up." },
-    { type = "video", props = { pool_dir = "sex/mercer_finish_ass_t5", pool = 4, description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
+    { type = "video", props = { file = "sex/mercer_finish_ass_t5.webm", description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
   ] },
 ]
 
@@ -959,7 +959,7 @@ description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal opens at npc
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/renner_loop_t5", pool = 4, description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
+  { type = "video", props = { file = "sex/renner_loop_t5.webm", description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
   { type = "paragraph", content = "She locks the office door. He's already reaching for her. The cold boss gone, just a wrecked man who's spent all day waiting for the help to come and take him apart." },
 ]
 [canvases.nodes.exit_block]
@@ -1099,19 +1099,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with a groan that's half a sob, one hand cradling the back of her head like she's something he can't believe he's allowed. He'd give her anything right now. He doesn't know yet how much that's going to cost him." },
-    { type = "video", props = { pool_dir = "sex/renner_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
+    { type = "video", props = { file = "sex/renner_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking. For a moment after he just breathes into her shoulder, wrecked and grateful, and she lets him have the moment because letting him have it is how she keeps him." },
-    { type = "video", props = { pool_dir = "sex/renner_finish_inside_t5", pool = 4, description = "A heavyset older man finishing inside a woman riding him in the chair of a cramped warehouse back office, holding her down on him, both shaking.", search_queries = ["heavyset older man creampie girl riding him gif", "warehouse back office chair finish inside woman on top"] } },
+    { type = "video", props = { file = "sex/renner_finish_inside_t5.webm", description = "A heavyset older man finishing inside a woman riding him in the chair of a cramped warehouse back office, holding her down on him, both shaking.", search_queries = ["heavyset older man creampie girl riding him gif", "warehouse back office chair finish inside woman on top"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the controls slide warm into her hand. The give, the opening, his whole ruined weight gone pliant against her back. The same act that hands her nothing with Mercer hands her everything with him." },
-    { type = "video", props = { pool_dir = "sex/renner_finish_anal_t5", pool = 4, description = "A heavyset older man finishing in a woman's ass as she's bent over a warehouse office desk piled with paperwork, gripping her hips.", search_queries = ["anal creampie bent over a desk piled with papers gif", "heavyset man anal finish woman bent over warehouse desk"] } },
+    { type = "video", props = { file = "sex/renner_finish_anal_t5.webm", description = "A heavyset older man finishing in a woman's ass as she's bent over a warehouse office desk piled with paperwork, gripping her hips.", search_queries = ["anal creampie bent over a desk piled with papers gif", "heavyset man anal finish woman bent over warehouse desk"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -2435,12 +2435,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/marsh_finish_facial_t5", pool = 4, description = "A small neat client finishing in a kneeling woman's mouth in a dim red-lit room, his hand steady at her jaw, still fully dressed and still composed — he does not come apart for this one.", search_queries = ["cum in her mouth hand on jaw kneeling gif", "clothed seated man mouth finish girl kneeling red light"] } },
+    { type = "video", props = { file = "sex/marsh_finish_facial_t5.webm", description = "A small neat client finishing in a kneeling woman's mouth in a dim red-lit room, his hand steady at her jaw, still fully dressed and still composed — he does not come apart for this one.", search_queries = ["cum in her mouth hand on jaw kneeling gif", "clothed seated man mouth finish girl kneeling red light"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/marsh_finish_inside_t5", pool = 4, description = "A small neat client finishing inside a woman riding him on a bed in a dim red-lit room, his hands flat on the sheets either side of him, holding still underneath her instead of grabbing.", search_queries = ["cowgirl creampie man hands flat on the bed gif", "riding finish inside man lying still beneath her"] } },
+    { type = "video", props = { file = "sex/marsh_finish_inside_t5.webm", description = "A small neat client finishing inside a woman riding him on a bed in a dim red-lit room, his hands flat on the sheets either side of him, holding still underneath her instead of grabbing.", search_queries = ["cowgirl creampie man hands flat on the bed gif", "riding finish inside man lying still beneath her"] } },
   ] },
   { type = "paragraph", content = "He finishes the way he came in. Quiet, contained, already reaching for his coat before his breath's back. A careful man keeps his softness behind him when he doesn't lose the last of himself, and the mouth and the cunt don't cost him that. She takes the coin he leaves and lets him go. Whatever he knows is still behind his face. It's the ass that opens him. She'll need him again, and the drain worn and charged." },
 ]
@@ -2465,12 +2465,12 @@ effects = [
 [[canvases.nodes]]
 id   = "finish_ass_paid"
 name = "He finishes"
-# Own pool, NOT shared with finish_ass_nodrain or drain. Same act, three different
+# Own clip, NOT shared with finish_ass_nodrain or drain. Same act, three different
 # aftermaths, and the aftermath is what the clip has to show: here he is finished and
-# already leaving. One asset, one block — a shared pool would collapse all three onto
+# already leaving. One asset, one block — a shared clip would collapse all three onto
 # one review verdict and couple their cycle counters.
 blocks = [
-  { type = "video", props = { pool_dir = "sex/marsh_finish_ass_paid_t5", pool = 4, description = "A small neat client finishing in a woman's ass and straightening up at once in a dim red-lit room, stepping clear and reaching for his clothes while she is still bent over the bed — a transaction closing, nothing left in it.", search_queries = ["anal creampie man stands up and steps away gif", "anal finish man dressing girl still bent over bed"] } },
+  { type = "video", props = { file = "sex/marsh_finish_ass_paid_t5.webm", description = "A small neat client finishing in a woman's ass and straightening up at once in a dim red-lit room, stepping clear and reaching for his clothes while she is still bent over the bed — a transaction closing, nothing left in it.", search_queries = ["anal creampie man stands up and steps away gif", "anal finish man dressing girl still bent over bed"] } },
   { type = "paragraph", content = "He finishes in her ass and goes slack against her, spent and honest and empty of anything she still needs. She took what was behind his face already, and a man only has the one secret worth the drain. Now he's just a careful regular with a standing Sunday, tipping fair, none the wiser. She straightens, takes the coin, and lets him go." },
 ]
 [canvases.nodes.exit_block]
@@ -2494,10 +2494,10 @@ effects = [
 [[canvases.nodes]]
 id   = "finish_ass_nodrain"
 name = "He finishes"
-# Own pool. He DOES open here — the difference from finish_ass_paid — but she has nothing
+# Own clip. He DOES open here — the difference from finish_ass_paid — but she has nothing
 # to take it with, so the picture is him spent and pulling away while she stays braced.
 blocks = [
-  { type = "video", props = { pool_dir = "sex/marsh_finish_ass_nodrain_t5", pool = 4, description = "A small neat client finishing in a woman's ass and pulling out to stand back in a dim red-lit room, loose and undone and open-faced, while she stays braced on the bed exactly where he left her.", search_queries = ["anal creampie pull out cum dripping girl stays bent gif", "anal finish from behind man steps back spent dim red room"] } },
+  { type = "video", props = { file = "sex/marsh_finish_ass_nodrain_t5.webm", description = "A small neat client finishing in a woman's ass and pulling out to stand back in a dim red-lit room, loose and undone and open-faced, while she stays braced on the bed exactly where he left her.", search_queries = ["anal creampie pull out cum dripping girl stays bent gif", "anal finish from behind man steps back spent dim red room"] } },
   { type = "paragraph", content = "He finishes in her ass and the careful goes out of him. Loose, open, everything he knows a touch away. She's got nothing on her to take it with. Without the drain worn and charged he's just a spent john with a soft face and a secret still locked behind it. She takes his coin and files the miss. Recharge the drain at the cradle, carry it, take his Sunday again. The truth's a touch away once the weapon's on her." },
 ]
 [canvases.nodes.exit_block]
@@ -6702,7 +6702,7 @@ blocks = [
     # ("so the print scene is vaginal"), and live_rev137_beat_c asserts this canvas stays anal-free because
     # the loop's controller_off gates depend on it.
     { advance_text = "Let him have your tits.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_tits_t5", pool = 4, description = "A heavy older man in shirtsleeves standing close to a naked younger woman in a bare concrete room, one hand working her breast, weighing it and thumbing the nipple, while he talks to her without looking down at his own hand. Must show: her naked and standing, his hand on her breast, him clothed, an unhurried absent-minded handling. Avoid: her kneeling or lying down, penetration, a bright or luxurious room, a young or slim man, her looking aroused at the camera.", search_queries = ["cmnf older man groping her tits amateur gif", "casting couch groping nude girl homemade gif", "quickie clothes on groping tits amateur gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_tits_t5.webm", description = "A heavy older man in shirtsleeves standing close to a naked younger woman in a bare concrete room, one hand working her breast, weighing it and thumbing the nipple, while he talks to her without looking down at his own hand. Must show: her naked and standing, his hand on her breast, him clothed, an unhurried absent-minded handling. Avoid: her kneeling or lying down, penetration, a bright or luxurious room, a young or slim man, her looking aroused at the camera.", search_queries = ["cmnf older man groping her tits amateur gif", "casting couch groping nude girl homemade gif", "quickie clothes on groping tits amateur gif"] } },
         { type = "paragraph", content = "She stands naked on the concrete and lets him. He gets a hand on her tits, weighing one and then the other, working a nipple with his thumb, and never looks down." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Two years and I never had an evening with nowhere to be at eight." },
     ] },
@@ -6714,7 +6714,7 @@ blocks = [
     # ⚠️ NOT "takes her ass" — that phrasing means the anal act everywhere else in this game, and the new
     # guard matches on it. Hands, explicitly.
     { advance_text = "Let him turn you round.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_ass_t5", pool = 4, description = "A heavy older man in shirtsleeves standing behind a naked younger woman in a bare concrete room, both hands full of her ass, squeezing and letting go while he talks past her without looking down. Must show: her naked and standing, him clothed and behind her, both his hands groping her ass, an unhurried absent-minded handling. Avoid: penetration of any kind, anal, her bent over or kneeling, spanking or striking, a bright or luxurious room, a young or slim man.", search_queries = ["cmnf groping her ass amateur gif", "clothed man grabbing nude ass homemade gif", "cmnf old man fondles her ass homemade gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_ass_t5.webm", description = "A heavy older man in shirtsleeves standing behind a naked younger woman in a bare concrete room, both hands full of her ass, squeezing and letting go while he talks past her without looking down. Must show: her naked and standing, him clothed and behind her, both his hands groping her ass, an unhurried absent-minded handling. Avoid: penetration of any kind, anal, her bent over or kneeling, spanking or striking, a bright or luxurious room, a young or slim man.", search_queries = ["cmnf groping her ass amateur gif", "clothed man grabbing nude ass homemade gif", "cmnf old man fondles her ass homemade gif"] } },
         { type = "paragraph", content = "He turns her round by the hip and gets both hands on her ass, weighing it the way he weighed her tits, squeezing hard enough to leave marks and letting go, unhurried." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You always did have the best ass in that building. I signed for that too." },
     ] },
@@ -6724,7 +6724,7 @@ blocks = [
     # that line became a continuity error the moment this rung existed. The discovery is spoken here; the
     # loop's line is re-cut in the same change to say it happens every time now.
     { advance_text = "Go down on him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_knees_t5", pool = 4, description = "A naked younger woman kneeling on bare concrete sucking a heavy older man's cock in a dim back room, him standing over her still in his shirtsleeves and talking, unhurried, not holding her head. Must show: her kneeling and naked, him standing and clothed, oral, an unhurried pace. Avoid: a facial finish, deepthroat roughness or gagging, a bright or luxurious room, her standing, a young or slim man.", search_queries = ["cmnf bj older man homemade gif", "fat old man blowjob nude amateur gif", "sloppy bj old man amateur gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_knees_t5.webm", description = "A naked younger woman kneeling on bare concrete sucking a heavy older man's cock in a dim back room, him standing over her still in his shirtsleeves and talking, unhurried, not holding her head. Must show: her kneeling and naked, him standing and clothed, oral, an unhurried pace. Avoid: a facial finish, deepthroat roughness or gagging, a bright or luxurious room, her standing, a young or slim man.", search_queries = ["cmnf bj older man homemade gif", "fat old man blowjob nude amateur gif", "sloppy bj old man amateur gif"] } },
         { type = "paragraph", content = "He puts a hand on her shoulder and presses her down onto the concrete. His cock is out before she settles. She sucks it. He fucks her mouth slowly and keeps talking." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "That's a new one. Two years and you never once. I'd have thought about it and not asked." },
     ] },
@@ -6734,7 +6734,7 @@ blocks = [
     # violence: he holds her there because he can, and lets her up when HE is finished talking. The last line
     # is the stitch back to standing for the shipped fingers beat below.
     { advance_text = "Let him hold you there.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_throat_t5", pool = 4, description = "A heavy older man holding a kneeling woman's head down on his cock and keeping her there, one fist in her hair, calm and unhurried, her eyes watering, then letting her up. Must show: her kneeling, his fist in her hair, him holding her down and keeping her there, an unhurried and calm hold. Avoid: violent face-fucking, slapping, choking, him angry or shouting, a bright room.", search_queries = ["older man deepthroat hair pulling amateur gif", "hair pulling blowjob fat old man homemade gif", "blowjob hair grip old man homemade gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_throat_t5.webm", description = "A heavy older man holding a kneeling woman's head down on his cock and keeping her there, one fist in her hair, calm and unhurried, her eyes watering, then letting her up. Must show: her kneeling, his fist in her hair, him holding her down and keeping her there, an unhurried and calm hold. Avoid: violent face-fucking, slapping, choking, him angry or shouting, a bright room.", search_queries = ["older man deepthroat hair pulling amateur gif", "hair pulling blowjob fat old man homemade gif", "blowjob hair grip old man homemade gif"] } },
         { type = "paragraph", content = "He gathers her hair in his fist and holds her down on his cock until her nose is against his balls, and keeps her there through a whole sentence. Her eyes run. She moans around him." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Up. Come on. I want you the other way now." },
     ] },
@@ -6749,7 +6749,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Stay like that. God. Yes — like that." },
     ] },
     { advance_text = "Let him have it.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_lockup_crate_t5", pool = 4, description = "Bent face-down over the end of a low bed in a bare room, a heavy older man fucking her from behind at an unhurried pace with one hand spread flat on the small of her back holding her down. Must show: her bent over the bed face-down, him behind her, his hand flat on her back. Avoid: her on top or riding, face-to-face positions, anal, a switch to another act partway through, a bright or luxurious room.", search_queries = ["prone bone fat old man fuck homemade gif", "pounded from behind fuck amateur gif", "bent over bed fat old man fuck amateur gif"] } },
+        { type = "video", props = { file = "sex/mercer_lockup_crate_t5.webm", description = "Bent face-down over the end of a low bed in a bare room, a heavy older man fucking her from behind at an unhurried pace with one hand spread flat on the small of her back holding her down. Must show: her bent over the bed face-down, him behind her, his hand flat on her back. Avoid: her on top or riding, face-to-face positions, anal, a switch to another act partway through, a bright or luxurious room.", search_queries = ["prone bone fat old man fuck homemade gif", "pounded from behind fuck amateur gif", "bent over bed fat old man fuck amateur gif"] } },
         # rev 138 — heat pass. ⚠️ "gets his cock into her" is the index anchor live_rev132_beat_b uses to prove
         # the build-up (i_cock >= 6); preserved verbatim. ⚠️ NO "ass" anywhere in this canvas, even as a grope —
         # the anal-free claim guarding the loop's controller_off gates should not need a reader's judgement.
@@ -6795,12 +6795,12 @@ blocks = [
     # ⚠️ The vaginal beats above KEEP their act and LOSE their finish — he pulls out, not comes. That is what
     # makes the ladder LO asked for (fuck, then anal, then cum inside anal) rather than two finishes.
     { advance_text = "Let him have your ass.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_anal_t5", pool = 4, description = "A heavy older man pulling out of a younger woman bent face-down over the end of a low bed in a bare concrete room and pushing his cock into her ass instead, unhurried, one hand spread flat on her back. Must show: her bent over face-down, him behind her, the switch from vaginal to anal, an unhurried pace. Avoid: her on top or riding, face-to-face positions, a facial finish, a bright or luxurious room.", search_queries = ["fat old man anal bent over bed homemade gif", "pounded from behind anal amateur gif", "face down ass up anal amateur gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_anal_t5.webm", description = "A heavy older man pulling out of a younger woman bent face-down over the end of a low bed in a bare concrete room and pushing his cock into her ass instead, unhurried, one hand spread flat on her back. Must show: her bent over face-down, him behind her, the switch from vaginal to anal, an unhurried pace. Avoid: her on top or riding, face-to-face positions, a facial finish, a bright or luxurious room.", search_queries = ["fat old man anal bent over bed homemade gif", "pounded from behind anal amateur gif", "face down ass up anal amateur gif"] } },
         { type = "paragraph", content = "He pulls out of her cunt and puts his cock in her ass instead, the way the evening always used to end. She opens for him out of two years of practice, and he does not rush that either." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There. That's the one I was thinking of." },
     ] },
     { advance_text = "Let him finish.", blocks = [
-        { type = "video", props = { pool_dir = "sex/mercer_print_anal_finish_t5", pool = 4, description = "A heavy older man finishing in a younger woman's ass over the end of a low bed in a bare concrete room, holding himself deep against her with his eyes shut, one hand still braced on a crate beside them. Must show: him coming inside her ass from behind, holding still at the end, her face-down. Avoid: pulling out to finish on her, facial or external cumshot, her looking back at him.", search_queries = ["throbbing anal creampie amateur gif", "internal cumshot anal from behind homemade gif", "anal creampie balls deep homemade gif"] } },
+        { type = "video", props = { file = "sex/mercer_print_anal_finish_t5.webm", description = "A heavy older man finishing in a younger woman's ass over the end of a low bed in a bare concrete room, holding himself deep against her with his eyes shut, one hand still braced on a crate beside them. Must show: him coming inside her ass from behind, holding still at the end, her face-down. Avoid: pulling out to finish on her, facial or external cumshot, her looking back at him.", search_queries = ["throbbing anal creampie amateur gif", "internal cumshot anal from behind homemade gif", "anal creampie balls deep homemade gif"] } },
         # rev 132 — RE-CUT FOR REGISTER. The shipped line was "He finishes inside her without changing pace",
         # which is the one beat in this scene carrying a sex clip and naming nothing: coy, and the failure
         # state the register doctrine names. Inside the signed ceiling — the terminal beat two down already
@@ -7556,7 +7556,8 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 # on RENDER (template_import.py:1968), and every one of these is a thing she does rather than a room she
 # arrives in. Same discipline the deleted loop's routing choice used.
 #
-# MEDIA: two new pools (facial, inside). sex/mercer_lockup_anal_finish_t5 MOVES here from
+# MEDIA: two new clips (facial, inside) — single files, not pools, since 2026-10-02: a finisher shows once
+# per session (author-game media.md §7 Gate 1). sex/mercer_lockup_anal_finish_t5 MOVES here from
 # loop_mercer_attempt.base's terminal beat — one asset, one block.
 [[canvases]]
 id          = "loop_mercer_finisher"
@@ -7570,21 +7571,21 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/mercer_lockup_finish_facial_t5", pool = 4, description = "A heavy older man finishing on a kneeling woman's face in a dim bare room, holding himself with one hand and her hair with the other, then looking down at it. Must show: him standing, her kneeling, a facial finish. Avoid: her swallowing instead, a bright room, a young or slim man, her standing.", search_queries = ["facial cumshot hair pulling amateur gif", "cum on face old man homemade gif", "cum all over her face amateur homemade gif"] } },
+    { type = "video", props = { file = "sex/mercer_lockup_finish_facial_t5.webm", description = "A heavy older man finishing on a kneeling woman's face in a dim bare room, holding himself with one hand and her hair with the other, then looking down at it. Must show: him standing, her kneeling, a facial finish. Avoid: her swallowing instead, a bright room, a young or slim man, her standing.", search_queries = ["facial cumshot hair pulling amateur gif", "cum on face old man homemade gif", "cum all over her face amateur homemade gif"] } },
     { type = "paragraph", content = "He finishes on her face, one hand on himself and one in her hair, and looks down at what he has put there with plain satisfaction. Nothing comes loose but him. The drain stays shut. It only opens the one way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "There. Don't take it on the sleeve, there's a cloth on the crate. I'm not an animal about it and I never was." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/mercer_lockup_finish_inside_t5", pool = 4, description = "A heavy older man finishing inside a younger woman bent over the end of a low bed in a bare room, holding her hips still, then straightening up unhurried. Must show: him behind her, her bent over, finishing inside, holding still at the end. Avoid: anal, pulling out to finish on her, a facial, a bright or luxurious room.", search_queries = ["pulsating creampie from behind amateur gif", "pumping cum inside her from behind homemade gif", "cum inside her pussy from behind homemade gif"] } },
+    { type = "video", props = { file = "sex/mercer_lockup_finish_inside_t5.webm", description = "A heavy older man finishing inside a younger woman bent over the end of a low bed in a bare room, holding her hips still, then straightening up unhurried. Must show: him behind her, her bent over, finishing inside, holding still at the end. Avoid: anal, pulling out to finish on her, a facial, a bright or luxurious room.", search_queries = ["pulsating creampie from behind amateur gif", "pumping cum inside her from behind homemade gif", "cum inside her pussy from behind homemade gif"] } },
     { type = "paragraph", content = "He finishes in her cunt at the same unhurried pace, holds there a moment, and does up his belt one-handed. His cum runs on the inside of her thigh and she leaves it. She has taken nothing. Not this way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Come Thursday. Or don't. You know where the door is." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/mercer_lockup_anal_finish_t5", pool = 4, description = "He finishes in her ass without changing pace and holds himself there against her hips with his eyes shut. Must show: him coming inside her ass from behind, holding still at the end, her face-down. Avoid: pulling out to finish on her, facial or external cumshot, her looking back at him.", search_queries = ["cum inside her ass from behind amateur gif", "bred anal creampie cum inside homemade gif", "anal creampie deep inside amateur gif"] } },
+    { type = "video", props = { file = "sex/mercer_lockup_anal_finish_t5.webm", description = "He finishes in her ass without changing pace and holds himself there against her hips with his eyes shut. Must show: him coming inside her ass from behind, holding still at the end, her face-down. Avoid: pulling out to finish on her, facial or external cumshot, her looking back at him.", search_queries = ["cum inside her ass from behind amateur gif", "bred anal creampie cum inside homemade gif", "anal creampie deep inside amateur gif"] } },
     { type = "paragraph", content = "He finishes in her ass at the same pace and holds there, one hand still flat on her back, breathing out like a man sitting down." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Ah. Stay there a moment. Don't go anywhere yet." },
   ] },
@@ -9509,7 +9510,7 @@ description = "Triggerless rung. Reaction climbs by npc_calloway.corruption band
 id   = "base"
 name = "Get close to him"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_calloway_contact_t4", pool = 4, description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean", "low cut top leaning forward over a desk tease gif"] } },
+  { type = "video", props = { file = "scenes/rung_calloway_contact_t4.webm", description = "A woman leaning forward toward the viewer, teasing — low-cut top, downblouse cleavage, clothed and withheld.", search_queries = ["downblouse cleavage tease lean", "low cut top leaning forward over a desk tease gif"] } },
   { type = "paragraph", content = "The file room, late. He's stopped pretending to work; she's stopped pretending to file. When she puts a hand flat on his chest he goes still." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 6 },
@@ -9543,7 +9544,7 @@ description = "Triggerless rung. Explicit (belief-lever: relief, being finally w
 id   = "base"
 name = "Take him in your mouth"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_calloway_oral_t5", pool = 4, description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
+  { type = "video", props = { file = "scenes/rung_calloway_oral_t5.webm", description = "A woman on her knees giving oral to a seated man in an office; explicit.", search_queries = ["office blowjob under desk pov", "woman kneeling oral seated man suit"] } },
   { type = "paragraph", content = "She takes him out from behind the desk and puts her mouth on him, and the sound he makes isn't lust. It's relief, like something clenched for two years finally letting go." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_calloway", trait_key = "corruption", operator = "lt", value = 12 },
@@ -9622,7 +9623,7 @@ description = "Triggerless Calloway sex loop. oral/vaginal/anal; climax-elect pl
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/calloway_loop_t5", pool = 4, description = "A man and woman coming together against a desk in a dim file-room, clothes coming off.", search_queries = ["office sex desk clothes off dim", "man woman against desk records room"] } },
+  { type = "video", props = { file = "sex/calloway_loop_t5.webm", description = "A man and woman coming together against a desk in a dim file-room, clothes coming off.", search_queries = ["office sex desk clothes off dim", "man woman against desk records room"] } },
   { type = "paragraph", content = "She shuts the file-room door for the last time as an analyst. He's already got his hands in her hair. The disbelieved man gone, just someone who's decided to trust the one person who ever let him." },
 ]
 [canvases.nodes.exit_block]
@@ -9756,19 +9757,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with a sound that's half relief, one hand cradling her head like she's the first good thing in two years. He'd give her anything now. He doesn't know what she's about to take." },
-    { type = "video", props = { pool_dir = "sex/calloway_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in a dim office.", search_queries = ["office facial kneeling", "man finishing on face office"] } },
+    { type = "video", props = { file = "sex/calloway_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in a dim office.", search_queries = ["office facial kneeling", "man finishing on face office"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking, and after he just breathes into her neck. Wrecked, grateful, believed. She lets him have it. Letting him have it is how she keeps him." },
-    { type = "video", props = { pool_dir = "sex/calloway_finish_inside_t5", pool = 4, description = "A man finishing inside a woman riding him in a desk chair in a half-lit records room, stacked file boxes behind them.", search_queries = ["creampie riding him in a desk chair archive room gif", "girl on top finish inside filing room dim boxes"] } },
+    { type = "video", props = { file = "sex/calloway_finish_inside_t5.webm", description = "A man finishing inside a woman riding him in a desk chair in a half-lit records room, stacked file boxes behind them.", search_queries = ["creampie riding him in a desk chair archive room gif", "girl on top finish inside filing room dim boxes"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to. His whole self coming loose through the contact, the last few minutes already going soft and white behind his eyes." },
-    { type = "video", props = { pool_dir = "sex/calloway_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over a desk in a records room, unlabelled file boxes stacked behind them.", search_queries = ["anal creampie bent over desk file room gif", "anal finish from behind archive boxes dim office"] } },
+    { type = "video", props = { file = "sex/calloway_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over a desk in a records room, unlabelled file boxes stacked behind them.", search_queries = ["anal creampie bent over desk file room gif", "anal finish from behind archive boxes dim office"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -10413,7 +10414,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_false" },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/colm_backroom_t4", pool = 4, description = "A clothed couple against shelving in a dim bar storeroom, his mouth on her neck, his hands under her clothes.", search_queries = ["couple making out against wall storeroom amateur gif", "man kissing woman neck against wall clothed amateur gif", "clothed grinding against wall dim room amateur gif"] } },
+    { type = "video", props = { file = "sex/colm_backroom_t4.webm", description = "A clothed couple against shelving in a dim bar storeroom, his mouth on her neck, his hands under her clothes.", search_queries = ["couple making out against wall storeroom amateur gif", "man kissing woman neck against wall clothed amateur gif", "clothed grinding against wall dim room amateur gif"] } },
     { type = "paragraph", content = "The back room is empties and stacked cases and one bad bulb. He has her against the shelving before the door's shut. Mouth on her neck, hands going everywhere at once, a careful man with nothing careful left in him." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Three weeks I've been telling myself you were being kind. Tell me to stop and I'll stop. Don't, and I won't." },
   ] },
@@ -10421,7 +10422,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/colm_ruin_t4", pool = 4, description = "A couple pressed against a wall in a dark fire-damaged storeroom, his hands under her clothes, her head back. avoid: bright light, avoid: clean tidy room.", search_queries = ["couple against wall dark derelict room hands under clothes amateur gif", "man pinning woman to wall abandoned dim interior amateur gif", "clothed grinding against wall pitch dark room amateur gif"] } },
+    { type = "video", props = { file = "sex/colm_ruin_t4.webm", description = "A couple pressed against a wall in a dark fire-damaged storeroom, his hands under her clothes, her head back. avoid: bright light, avoid: clean tidy room.", search_queries = ["couple against wall dark derelict room hands under clothes amateur gif", "man pinning woman to wall abandoned dim interior amateur gif", "clothed grinding against wall pitch dark room amateur gif"] } },
     { type = "paragraph", content = "The tape gives at the corner and the back room is black behind it and smells of burnt varnish. He has her against what is left of the shelving before the sheet has stopped swinging, mouth at her throat, hands already under her clothes." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Nothing left in here to knock over. Nobody left to walk in on us either. I've thought about that more than I'd care to say out loud." },
     { type = "paragraph", content = "The bad bulb went with the rest of it. He gets her clothes open in the dark by feel, rough about all of it now, and she does nothing at all to slow his hands down." },
@@ -10560,19 +10561,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with one hand shaking in her hair, apologising while he does it. Nothing comes loose but him. The drain stays shut. It only opens the one way." },
-    { type = "video", props = { pool_dir = "sex/colm_finish_facial_t5", pool = 4, description = "A man finishing on a kneeling woman's face in a dim storeroom.", search_queries = ["facial kneeling storeroom", "cumshot on face back room dim"] } },
+    { type = "video", props = { file = "sex/colm_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in a dim storeroom.", search_queries = ["facial kneeling storeroom", "cumshot on face back room dim"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her up against the shelving, breathing like a man who's just been given something. He has been. She hasn't taken anything. Not this way." },
-    { type = "video", props = { pool_dir = "sex/colm_finish_inside_t5", pool = 4, description = "A man finishing inside a woman held up against shelving in a storeroom.", search_queries = ["creampie standing against wall", "finishing inside standing sex back room"] } },
+    { type = "video", props = { file = "sex/colm_finish_inside_t5.webm", description = "A man finishing inside a woman held up against shelving in a storeroom.", search_queries = ["creampie standing against wall", "finishing inside standing sex back room"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass, and the drain opens under it the way it's built to. The shudder cracking him wide, her hand still locked on his forearm, everything he is starting to come loose down her arm." },
-    { type = "video", props = { pool_dir = "sex/colm_finish_anal_t5", pool = 4, description = "A man finishing in a woman's ass as she's bent over crates in a dim storeroom.", search_queries = ["anal creampie bent over from behind", "finishing anal bent over crates"] } },
+    { type = "video", props = { file = "sex/colm_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over crates in a dim storeroom.", search_queries = ["anal creampie bent over from behind", "finishing anal bent over crates"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -13116,7 +13117,7 @@ description = "beat_0082 (rev 127), RESTORED + PROSE REWRITTEN at beat_0102 (rev
 id   = "intro"
 name = "The back room"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/bastien_backroom_t4", pool = 4, description = "A composed older man unhurriedly undressing a woman in a private room behind a bar, her back to a desk, both still mostly clothed.", search_queries = ["man slowly undressing woman office desk clothed gif", "clothed couple back room man opening her shirt dim gif"] } },
+  { type = "video", props = { file = "sex/bastien_backroom_t4.webm", description = "A composed older man unhurriedly undressing a woman in a private room behind a bar, her back to a desk, both still mostly clothed.", search_queries = ["man slowly undressing woman office desk clothed gif", "clothed couple back room man opening her shirt dim gif"] } },
   { type = "paragraph", content = "He puts down the drink he has not touched and strips the dress off her over her head. She stands naked on his floor while he looks her over. Tits, hips, the closed seam. He takes his time about it, and has his cock out before he has finished looking." },
   # CLAUSE (ii) IN HIS OWN MOUTH, AT THE TOP, so the whole loop reads under it. Nobody here is enjoying this.
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I don't do this because I want you. I do it because it's the only way anybody down here is ever honest with me, and I've a stack of questions about you and no answers at all." },
@@ -13303,21 +13304,21 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/bastien_finish_facial_t5", pool = 4, description = "An older man finishing on a kneeling woman's face in a dim private room, looking down at the result without expression.", search_queries = ["facial kneeling woman older man dim room gif", "cumshot on face kneeling back room gif"] } },
+    { type = "video", props = { file = "sex/bastien_finish_facial_t5.webm", description = "An older man finishing on a kneeling woman's face in a dim private room, looking down at the result without expression.", search_queries = ["facial kneeling woman older man dim room gif", "cumshot on face kneeling back room gif"] } },
     { type = "paragraph", content = "He pulls out of her mouth and finishes across her face, cum on her cheek and her lashes and running off her chin, and looks down at it the way a man looks at a result. Nothing comes loose but him. The drain stays shut. It only ever opens the one way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. There's a cloth on the desk and I'd rather you used that than your sleeve, because you're going back out on my floor after this." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/bastien_finish_inside_t5", pool = 4, description = "An older man finishing inside a woman bent over a desk, holding her hips still, then straightening up unhurried.", search_queries = ["creampie bent over desk from behind gif", "finishing inside woman over desk holding hips gif"] } },
+    { type = "video", props = { file = "sex/bastien_finish_inside_t5.webm", description = "An older man finishing inside a woman bent over a desk, holding her hips still, then straightening up unhurried.", search_queries = ["creampie bent over desk from behind gif", "finishing inside woman over desk holding hips gif"] } },
     { type = "paragraph", content = "He finishes deep in her cunt with both hands locked on her hips, holds her there while it goes through him, and lets her up when he is ready and not before. She has taken nothing. Not this way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Stay down a minute. You'll walk out of here with it in you and go and carry a tray, and that's the whole of what I wanted tonight." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/bastien_finish_ass_t5", pool = 4, description = "An older man finishing deep in a woman's ass over a desk, holding still, her hand gripping his forearm.", search_queries = ["anal creampie bent over desk holding still gif", "finishing deep in her ass from behind gif"] } },
+    { type = "video", props = { file = "sex/bastien_finish_ass_t5.webm", description = "An older man finishing deep in a woman's ass over a desk, holding still, her hand gripping his forearm.", search_queries = ["anal creampie bent over desk holding still gif", "finishing deep in her ass from behind gif"] } },
     { type = "paragraph", content = "He drives all the way into her ass and stays there while he cums, dead still, breathing out through his teeth. Her hand is on his wrist, skin on skin, and this time the shudder goes through him and takes the door with it." },
   ] },
 ]
@@ -15275,7 +15276,8 @@ effects = [
 # ⚠️ SHE IS WORKING HIM, NOT FLIRTING WITH HIM (§14 row b). He is sour about all of it and it never turns
 # into warmth. She cannot get drunk, so every one of these hours is a sober woman watching a drunk man talk,
 # and he is the one man in the city who would clock that.
-# MEDIA: two slots — scenes/grier_drink.jpg on the lead, the pool scenes/rung_grier_flash_t3 on the flash.
+# MEDIA: two slots — scenes/grier_drink.jpg on the lead, the clip scenes/rung_grier_flash_t3 on the flash (a single file since 2026-10-02 — the
+# flash's live window is a few views, so a pool never cycled).
 # scenes/grier_look.jpg is RETIRED with the rung and comes off beat_0141's list.
 [[canvases.nodes]]
 id   = "drink"
@@ -15379,7 +15381,7 @@ flagEffects = [
 id   = "drink_tease"
 name = "The glass"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_grier_tease_t2", pool = 2, description = "A woman in an open-necked blouse bending down out of her chair toward the floor in a dim filthy workshop, the front of her blouse hanging open, a heavy older seated man watching from an armchair with a glass. Must show: downblouse cleavage, her clothed and bending, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["downblouse bending forward cleavage clothed gif", "woman bending over showing down her top older man watching gif", "downblouse tease dim room seated man gif"] } },
+  { type = "video", props = { file = "scenes/rung_grier_tease_t2.webm", description = "A woman in an open-necked blouse bending down out of her chair toward the floor in a dim filthy workshop, the front of her blouse hanging open, a heavy older seated man watching from an armchair with a glass. Must show: downblouse cleavage, her clothed and bending, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["downblouse bending forward cleavage clothed gif", "woman bending over showing down her top older man watching gif", "downblouse tease dim room seated man gif"] } },
   { type = "paragraph", content = "Her glass has stood full on the boards by her foot since he poured it, and she goes down after it, slow, every time he gets near the end of a sentence. Two buttons are down. She did those before she sat." },
   { type = "paragraph", content = "From that chair he gets the whole way down the front of her every time, four seconds of it, and she is back up before either of them has to decide what it was." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Put that up on the arm where you can reach it. You are going up and down like a bloody bench press and I am losing my thread." },
@@ -15410,7 +15412,7 @@ flagEffects = [
 id   = "drink_flash"
 name = "The pour"
 blocks = [
-  { type = "video", props = { pool_dir = "scenes/rung_grier_flash_t3", pool = 3, description = "A woman in an open blouse leaning over the arm of a chair to pour a drink for a heavy older seated man in a dim filthy room, her front on show, him looking. Must show: her leaning over him clothed but open, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["woman open blouse leaning over seated older man pouring drink gif", "cleavage flash leaning over man in armchair dim room gif", "woman teasing older man dim room clothed gif"] } },
+  { type = "video", props = { file = "scenes/rung_grier_flash_t3.webm", description = "A woman in an open blouse leaning over the arm of a chair to pour a drink for a heavy older seated man in a dim filthy room, her front on show, him looking. Must show: her leaning over him clothed but open, him seated and looking. Avoid: nudity, avoid: sex, avoid: a clean or bright room, avoid: a young man.", search_queries = ["woman open blouse leaning over seated older man pouring drink gif", "cleavage flash leaning over man in armchair dim room gif", "woman teasing older man dim room clothed gif"] } },
   { type = "paragraph", content = "She does not bother with the buttons. She has the blouse open before she lifts the bottle and pours it over the arm of his chair, tits out above the glass, nipples tight in the cold, the underside of one breast on the back of his hand." },
   { type = "paragraph", content = "She stays there while he drinks it. He does not look away and does not pretend to be doing anything else. He takes his time over her tits, the nipples first and then the seam under the left breast where the skin stops matching." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "You are doing that on purpose. Have been for weeks. I am not going to ask you to stop and you know I am not, so we can both leave it where it is." },
@@ -15508,7 +15510,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Do not look up at me like that. It has been a long time since that did anything on request and it is not going to start because you are pretty." },
     ] },
     { advance_text = "Put your mouth on it.", blocks = [
-        { type = "video", props = { pool_dir = "sex/grier_room_oral_t4", pool = 4, description = "A woman kneeling on bare boards in a filthy room giving slow head to a heavy older man sitting in an armchair, him holding a glass in one hand and her hair in the other. Must show: her kneeling, him seated and clothed above her, slow oral. Avoid: him standing, a bright or clean room, her looking like she is enjoying it, a young man.", search_queries = ["kneeling slow blowjob older man in armchair amateur gif", "woman on knees head older man sitting chair homemade gif", "slow deep blowjob seated man dim room gif"] } },
+        { type = "video", props = { file = "sex/grier_room_oral_t4.webm", description = "A woman kneeling on bare boards in a filthy room giving slow head to a heavy older man sitting in an armchair, him holding a glass in one hand and her hair in the other. Must show: her kneeling, him seated and clothed above her, slow oral. Avoid: him standing, a bright or clean room, her looking like she is enjoying it, a young man.", search_queries = ["kneeling slow blowjob older man in armchair amateur gif", "woman on knees head older man sitting chair homemade gif", "slow deep blowjob seated man dim room gif"] } },
         { type = "paragraph", content = "She takes him into her mouth soft and works him that way, tongue flat under the head, her fist moving at the base to give him something to push into. He fills out a little and then stops." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Slower. Slower. You are working it like a pump handle. Whoever taught you that taught you to get a man out of a room, not to get him off." },
     ] },
@@ -15756,7 +15758,7 @@ description = "beat_0126 (rev 176), WHOSE HAND. Grier's sex loop @grier_room, TR
 id   = "intro"
 name = "Let him have the rest of it"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/grier_loop_t4", pool = 4, description = "A woman undressing in a filthy cluttered workshop while a heavy older man watches from an armchair with a glass in his hand, still fully dressed. Must show: her stripping, him seated and clothed, a dim junk-filled room. Avoid: a bed, avoid: a clean or bright room, avoid: him undressing too, avoid: any tenderness.", search_queries = ["woman undressing while older man watches from chair dim room amateur gif", "woman stripping in front of seated clothed man homemade gif"] } },
+  { type = "video", props = { file = "sex/grier_loop_t4.webm", description = "A woman undressing in a filthy cluttered workshop while a heavy older man watches from an armchair with a glass in his hand, still fully dressed. Must show: her stripping, him seated and clothed, a dim junk-filled room. Avoid: a bed, avoid: a clean or bright room, avoid: him undressing too, avoid: any tenderness.", search_queries = ["woman undressing while older man watches from chair dim room amateur gif", "woman stripping in front of seated clothed man homemade gif"] } },
   { type = "paragraph", content = "He does not get up. She takes her coat off and then the rest of it and folds all of it onto the arm of the chair, because there is nowhere else in this room she would put anything of hers down." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "All of it. I want the whole build, not the parts you have decided I am getting. You are not doing me a favour and I would rather you stopped standing like you were." },
   { type = "paragraph", content = "He watches her strip the way he watched her under the bulb, takes another mouthful, and does not put a hand on himself once." },
@@ -15909,7 +15911,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/grier_finish_facial_t5", pool = 4, description = "A heavy older man finishing on the face of a woman kneeling in front of his armchair in a filthy room, then looking down at it. Must show: him seated, her kneeling, a facial finish. Avoid: her swallowing instead, avoid: a clean room, avoid: a young man.", search_queries = ["facial cumshot on kneeling woman older seated man gif", "cum on her face amateur homemade older man gif"] } },
+    { type = "video", props = { file = "sex/grier_finish_facial_t5.webm", description = "A heavy older man finishing on the face of a woman kneeling in front of his armchair in a filthy room, then looking down at it. Must show: him seated, her kneeling, a facial finish. Avoid: her swallowing instead, avoid: a clean room, avoid: a young man.", search_queries = ["facial cumshot on kneeling woman older seated man gif", "cum on her face amateur homemade older man gif"] } },
     { type = "paragraph", content = "He finishes on her face with his fist shut in her hair and the glass finally down, and looks at what he has put there for a long moment without saying anything. Nothing comes loose but him. The drain only opens the one way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "There. Do not wipe that on my chair. There is a rag on the bench and it is cleaner than anything else in here, which ought to tell you what sort of a place you have been walking to." },
   ] },
@@ -15917,7 +15919,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/grier_finish_inside_t5", pool = 4, description = "A heavy older man finishing inside a woman lying back on a cluttered workshop bench, holding her hips down against the wood. Must show: her on the bench, him standing, finishing inside. Avoid: anal, avoid: pulling out to finish on her, avoid: a bed.", search_queries = ["creampie on workbench amateur gif", "finishing inside her holding her hips homemade gif"] } },
+    { type = "video", props = { file = "sex/grier_finish_inside_t5.webm", description = "A heavy older man finishing inside a woman lying back on a cluttered workshop bench, holding her hips down against the wood. Must show: her on the bench, him standing, finishing inside. Avoid: anal, avoid: pulling out to finish on her, avoid: a bed.", search_queries = ["creampie on workbench amateur gif", "finishing inside her holding her hips homemade gif"] } },
     { type = "paragraph", content = "He finishes in her cunt on the bench and holds her hips down against the wood until it has stopped, then steps back breathing like a man who has carried something up a flight of stairs. She has taken nothing. Not this way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_grier" }, content = "Right. Off the bench. I have a bottle to get back to and you have a walk, and neither of us is going to stand here pretending that was anything other than exactly what it was." },
   ] },
@@ -15925,7 +15927,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/grier_finish_anal_t5", pool = 4, description = "A heavy older man finishing in the ass of a woman held face down over a workshop bench, gripping her hips and holding still at the end. Must show: anal finish from behind, her face-down, him holding still. Avoid: pulling out to finish on her, avoid: a facial, avoid: her looking back.", search_queries = ["anal creampie bent over bench holding her hips gif", "cum inside her ass from behind amateur homemade gif"] } },
+    { type = "video", props = { file = "sex/grier_finish_anal_t5.webm", description = "A heavy older man finishing in the ass of a woman held face down over a workshop bench, gripping her hips and holding still at the end. Must show: anal finish from behind, her face-down, him holding still. Avoid: pulling out to finish on her, avoid: a facial, avoid: her looking back.", search_queries = ["anal creampie bent over bench holding her hips gif", "cum inside her ass from behind amateur homemade gif"] } },
     { type = "paragraph", content = "He finishes in her ass and the drain opens under it the way it is built to. The shudder cracking him wide, her hand still shut on his wrist, nine years of him starting to come loose down her arm." },
   ] },
 ]
@@ -16896,7 +16898,7 @@ effects = [
 # a reward for lingering, exactly like Grier's tease having a two-view window.
 # ⚠️ pool = 2, NOT 4. flash strictly dominates from relation 10 at identical cost (60 min, same exit), so
 # this node's live window is relation 7-9: one or two views a playthrough, and a 4-clip pool would never
-# reach clip 3. Same arithmetic and the same pool size as rung_grier_tease_t2.
+# reach clip 3. Same arithmetic as rung_grier_tease_t2 (which went further: a single file since 2026-10-02).
 # ⚠️ THE LAST SENTENCE IS ACTION, NOT MEANING (register.md, the pivot rule). What it meant to either of them
 # is not in this node and must not be added to it.
 [[canvases.nodes]]
@@ -16950,7 +16952,7 @@ effects = [
 # game who asks and then waits for the answer (npc_sabin's own declaration), and §11's capstone needs "she
 # has never once been fucked without working" to be a thing the player FELT. A man checking while she keeps
 # not answering is the coldest reading of this ladder available, and it is the honest one.
-# ⚠️ pool = 3, matching rung_grier_flash_t3. Live window is relation 10-13 before the kiss dominates.
+# ⚠️ pool = 3 (rung_grier_flash_t3 had the same window and is a single file since 2026-10-02). Live window is relation 10-13 before the kiss dominates.
 # ⚠️ THE QUERIES MUST NOT SHARE A LEAD PHRASE WITH THE TEASE POOL (design_media_pools.md §3) or find-media
 # returns the same clips twice. Tease leads on reaching across a surface; this one on standing over him.
 [[canvases.nodes]]
@@ -17045,7 +17047,7 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "There. God. Do not move for a second." },
     ] },
     { advance_text = "Let him move.", blocks = [
-        { type = "video", props = { pool_dir = "sex/sabin_bench_t5", pool = 4, description = "A woman bent face down over a long bench in a bright room being fucked from behind by a clothed man with his hand on the back of her neck. Must show: her bent over a hard surface, him standing behind her fully dressed, a hand holding her down. Avoid: a bed, avoid: dim or coloured lighting, avoid: her making noise or looking at the camera.", search_queries = ["bent over desk fucked from behind office clothed man gif", "woman face down on table taken from behind bright room gif", "hand on back of neck bent over bench doggy gif"] } },
+        { type = "video", props = { file = "sex/sabin_bench_t5.webm", description = "A woman bent face down over a long bench in a bright room being fucked from behind by a clothed man with his hand on the back of her neck. Must show: her bent over a hard surface, him standing behind her fully dressed, a hand holding her down. Avoid: a bed, avoid: dim or coloured lighting, avoid: her making noise or looking at the camera.", search_queries = ["bent over desk fucked from behind office clothed man gif", "woman face down on table taken from behind bright room gif", "hand on back of neck bent over bench doggy gif"] } },
         { type = "paragraph", content = "Then he fucks her properly, one hand on the back of her neck holding her down on the bench, and every stroke of it goes through the steel and up into her arms. Her teeth stay shut on nothing at all." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Do not brace against it. Let it move you. There is nobody on this floor to see you do it." },
     ] },
@@ -17133,7 +17135,7 @@ description = "beat_0131 (rev 181), WHOSE HAND. Sabin's sex loop @sabin_lab, TRI
 id   = "intro"
 name = "Clear the bench"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/sabin_loop_t4", pool = 4, description = "A woman undressing beside a long workbench in a bright empty laboratory at night while a man in a shirt moves stacks of paper off it. Must show: her undressing, a bright clean workroom, a bench being cleared. Avoid: a bedroom, avoid: dim or coloured light, avoid: a filthy or cluttered room.", search_queries = ["woman undressing in bright empty office lab at night gif", "woman stripping beside desk clean bright room amateur gif"] } },
+  { type = "video", props = { file = "sex/sabin_loop_t4.webm", description = "A woman undressing beside a long workbench in a bright empty laboratory at night while a man in a shirt moves stacks of paper off it. Must show: her undressing, a bright clean workroom, a bench being cleared. Avoid: a bedroom, avoid: dim or coloured light, avoid: a filthy or cluttered room.", search_queries = ["woman undressing in bright empty office lab at night gif", "woman stripping beside desk clean bright room amateur gif"] } },
   { type = "paragraph", content = "He takes the stacks off the bench two at a time and puts them on the floor in order. That is the only part of any of this he is careful about. Neither of them says what the bench is being cleared for. It stopped needing saying." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Ten seconds. I am not losing this pile again, and if it goes on the floor in the wrong order that is a Thursday I do not get back." },
   { type = "paragraph", content = "She is out of the kit before he has turned round, and the lights stay exactly as on as they always are." },
@@ -17303,7 +17305,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/sabin_finish_facial_t5", pool = 4, description = "A man finishing on the face of a woman kneeling in front of him in a bright room, one hand in her hair. Must show: her kneeling, a facial finish, bright even light. Avoid: a dim room, avoid: a heavy older man, avoid: her swallowing instead.", search_queries = ["facial cumshot kneeling woman bright room gif", "cum on her face amateur standing man office gif"] } },
+    { type = "video", props = { file = "sex/sabin_finish_facial_t5.webm", description = "A man finishing on the face of a woman kneeling in front of him in a bright room, one hand in her hair. Must show: her kneeling, a facial finish, bright even light. Avoid: a dim room, avoid: a heavy older man, avoid: her swallowing instead.", search_queries = ["facial cumshot kneeling woman bright room gif", "cum on her face amateur standing man office gif"] } },
     { type = "paragraph", content = "He comes out of her mouth and finishes on her face with his fist shut in her hair, and makes a sound at the end of it that he is visibly annoyed with himself about. Nothing comes loose but him. The drain only opens the one way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Sorry. Sorry, that was loud. There is nobody in the building. There is nobody in the building and I still did that." },
   ] },
@@ -17311,7 +17313,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/sabin_finish_inside_t5", pool = 4, description = "A man finishing inside a woman lying back on a workbench in a bright room, holding her thighs and staying in her afterwards. Must show: her on the bench, him standing, finishing inside, bright light. Avoid: anal, avoid: pulling out, avoid: a bed.", search_queries = ["creampie on a table man holding her thighs gif", "finishing inside her on a desk bright room gif"] } },
+    { type = "video", props = { file = "sex/sabin_finish_inside_t5.webm", description = "A man finishing inside a woman lying back on a workbench in a bright room, holding her thighs and staying in her afterwards. Must show: her on the bench, him standing, finishing inside, bright light. Avoid: anal, avoid: pulling out, avoid: a bed.", search_queries = ["creampie on a table man holding her thighs gif", "finishing inside her on a desk bright room gif"] } },
     { type = "paragraph", content = "He finishes inside her on the bench with both hands under her thighs holding her open, and stays in her while it goes with his forehead down on her sternum. She has taken nothing. Not this way." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Give me a minute. I am nearly forty and that is a workbench, and I have three hours of somebody's handwriting left to get through tonight." },
   ] },
@@ -17466,7 +17468,7 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "It is a recording of her being made. It has been in a cabinet two floors under that bench the whole time she has been at a desk one floor below it, reading his filing for fifteen coin a day." },
     ] },
     { advance_text = "Come out of it.", blocks = [
-        { type = "video", props = { pool_dir = "sex/sabin_finish_anal_t5", pool = 4, description = "A man finishing in the ass of a woman bent over a bench in a bright room and sinking forward onto her back, both of them going still. Must show: anal finish from behind, her face down, him going still on her back. Avoid: pulling out to finish on her, avoid: a bed, avoid: dim light.", search_queries = ["anal creampie bent over a table he collapses onto her back gif", "anal creampie from behind holding her hips bright room gif"] } },
+        { type = "video", props = { file = "sex/sabin_finish_anal_t5.webm", description = "A man finishing in the ass of a woman bent over a bench in a bright room and sinking forward onto her back, both of them going still. Must show: anal finish from behind, her face down, him going still on her back. Avoid: pulling out to finish on her, avoid: a bed, avoid: dim light.", search_queries = ["anal creampie bent over a table he collapses onto her back gif", "anal creampie from behind holding her hips bright room gif"] } },
         { type = "paragraph", content = "It lets go all at once and she is on the bench with her mouth still open against his hand and his weight coming down slow onto her back. He takes the hand away and apologises for it, which he does every time." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Sorry. Was that too. No. All right. Good." },
     ] },
@@ -17915,7 +17917,7 @@ blocks = [
         { type = "paragraph", content = "He goes out and pulls the door to behind him and the door does not lock, and she hears him stop on the landing and not go any further down. Then nothing. Then somebody on the couch says something to somebody else that is not about her." },
     ] },
     { advance_text = "Let them start.", blocks = [
-        { type = "video", props = { pool_dir = "sex/capstone_fail_open_t5", pool = 4, description = "A woman being undressed by two men in a dim low room with a mattress on the floor, none of them speaking, a third man waiting on a couch. Must show: several men, one woman, a bare room, clothes coming off briskly. Avoid: a brothel set, avoid: violence or distress, avoid: anybody looking at the camera.", search_queries = ["woman undressed by several men in a bare room amateur gif", "group of men undressing a woman dim room homemade gif"] } },
+        { type = "video", props = { file = "sex/capstone_fail_open_t5.webm", description = "A woman being undressed by two men in a dim low room with a mattress on the floor, none of them speaking, a third man waiting on a couch. Must show: several men, one woman, a bare room, clothes coming off briskly. Avoid: a brothel set, avoid: violence or distress, avoid: anybody looking at the camera.", search_queries = ["woman undressed by several men in a bare room amateur gif", "group of men undressing a woman dim room homemade gif"] } },
         { type = "paragraph", content = "One of them takes her arm above the elbow and moves her, not hard, the way you move a thing that is in the way. Her coat goes on the arm of the couch and somebody else's hands get the rest of it off her." },
         { type = "dialog", props = { speaker = "unknown" }, content = "She the one he rang about?" },
         { type = "dialog", props = { speaker = "unknown" }, content = "Does it matter." },
@@ -17930,7 +17932,7 @@ blocks = [
         { type = "dialog", props = { speaker = "unknown" }, content = "There we go. That is better." },
     ] },
     { advance_text = "Both of them.", blocks = [
-        { type = "video", props = { pool_dir = "sex/capstone_fail_double_t5", pool = 4, description = "A naked woman on a mattress on the floor taking one man in her mouth while another fucks her from behind, a third waiting. Must show: two men using her at once, a bare floor mattress, no eye contact. Avoid: a bed with linens, avoid: any tenderness, avoid: her appearing distressed.", search_queries = ["woman taken by two men at once on a floor mattress amateur gif", "double team from behind and mouth homemade gif dim room"] } },
+        { type = "video", props = { file = "sex/capstone_fail_double_t5.webm", description = "A naked woman on a mattress on the floor taking one man in her mouth while another fucks her from behind, a third waiting. Must show: two men using her at once, a bare floor mattress, no eye contact. Avoid: a bed with linens, avoid: any tenderness, avoid: her appearing distressed.", search_queries = ["woman taken by two men at once on a floor mattress amateur gif", "double team from behind and mouth homemade gif dim room"] } },
         { type = "paragraph", content = "They swap without asking and she goes with it, and then there are hands on her hips from behind and a third one standing over her waiting his turn with his cock already out, and she is keeping all of it moving." },
         { type = "dialog", props = { speaker = "unknown" }, content = "I am not finished." },
     ] },
@@ -17943,7 +17945,7 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "And she is counting. How long she has held it, and checking, and pleased with the number. Running the whole thing like a job, with the job being not to have one." },
     ] },
     { advance_text = "Let them finish.", blocks = [
-        { type = "video", props = { pool_dir = "sex/capstone_fail_finish_t5", pool = 4, description = "Several men finishing on and in a woman kneeling and lying on a floor mattress in a dim room, all of them already turning away afterwards. Must show: multiple finishes, indifference afterwards, a bare room. Avoid: applause or celebration, avoid: degradation played for cruelty, avoid: any aftercare.", search_queries = ["group of men finishing on a woman on the floor amateur gif", "multiple cumshots woman on mattress homemade gif"] } },
+        { type = "video", props = { file = "sex/capstone_fail_finish_t5.webm", description = "Several men finishing on and in a woman kneeling and lying on a floor mattress in a dim room, all of them already turning away afterwards. Must show: multiple finishes, indifference afterwards, a bare room. Avoid: applause or celebration, avoid: degradation played for cruelty, avoid: any aftercare.", search_queries = ["group of men finishing on a woman on the floor amateur gif", "multiple cumshots woman on mattress homemade gif"] } },
         { type = "paragraph", content = "They finish on her and in her, one after another, and there is nothing said about any of it. The last one is off the mattress and doing his belt before she has got her breath back." },
         { type = "dialog", props = { speaker = "unknown" }, content = "Is there anything left in that bottle or did you finish it." },
         { type = "paragraph", content = "None of them looks at her face on the way out of the room." },
@@ -18044,7 +18046,7 @@ blocks = [
         { type = "paragraph", content = "The door goes to behind him and he stops on the landing the way he stopped on it before, and stays, and does not come down and does not go up." },
     ] },
     { advance_text = "Let them start.", blocks = [
-        { type = "video", props = { pool_dir = "sex/capstone_fire_open_t5", pool = 4, description = "A woman getting undressed on a mattress on the floor of a dim low room with several men around her, none of them hurrying. Must show: several men, one woman, a bare room, no ceremony. Avoid: a brothel set, avoid: distress, avoid: eye contact with camera.", search_queries = ["woman undressing on floor mattress several men around dim room gif", "group scene bare room woman undressing amateur homemade gif"] } },
+        { type = "video", props = { file = "sex/capstone_fire_open_t5.webm", description = "A woman getting undressed on a mattress on the floor of a dim low room with several men around her, none of them hurrying. Must show: several men, one woman, a bare room, no ceremony. Avoid: a brothel set, avoid: distress, avoid: eye contact with camera.", search_queries = ["woman undressing on floor mattress several men around dim room gif", "group scene bare room woman undressing amateur homemade gif"] } },
         { type = "paragraph", content = "It starts the same way. Somebody moves her where they want her, somebody else gets her clothes off, and inside about a minute there is a cock in her mouth and a hand spreading her open from behind." },
         { type = "dialog", props = { speaker = "unknown" }, content = "Shift the ashtray off there before somebody puts a knee in it." },
     ] },
@@ -18061,7 +18063,7 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "Not the working. The wanting. Nothing is going to come up out of her tonight and she is going to be here anyway, and that is the end of it." },
     ] },
     { advance_text = "Let them have it.", blocks = [
-        { type = "video", props = { pool_dir = "sex/capstone_fire_use_t5", pool = 4, description = "A naked woman on a floor mattress being used by several men at once, passive and unhurried, one holding her hip. Must show: multiple men, her not performing, a bare room. Avoid: a bed with linens, avoid: her directing the scene, avoid: any romance.", search_queries = ["woman used by group of men floor mattress amateur gif", "passive gangbang dim bare room homemade gif"] } },
+        { type = "video", props = { file = "sex/capstone_fire_use_t5.webm", description = "A naked woman on a floor mattress being used by several men at once, passive and unhurried, one holding her hip. Must show: multiple men, her not performing, a bare room. Avoid: a bed with linens, avoid: her directing the scene, avoid: any romance.", search_queries = ["woman used by group of men floor mattress amateur gif", "passive gangbang dim bare room homemade gif"] } },
         { type = "paragraph", content = "They take turns and they take their time. She is fucked in her cunt and in her mouth and in her ass by men whose faces stay a blur, and none of it is for anything, and she does not once try to make any of it go faster or better or longer." },
         { type = "dialog", props = { speaker = "unknown" }, content = "You had her twice." },
         { type = "dialog", props = { speaker = "unknown" }, content = "Nobody is counting. Go if you are going." },
@@ -18096,7 +18098,7 @@ blocks = [
     { advance_text = "Come back.", blocks = [
         { type = "dialog", props = { speaker = "unknown" }, content = "She is miles away. Look at her." },
         { type = "paragraph", content = "The afternoon closes and the room comes back all at once. The painted window, the mattress, a hand on her hip, somebody finishing on the small of her back and somebody else moving up to take his place. It has not stopped for any of it." },
-        { type = "video", props = { pool_dir = "sex/capstone_fire_finish_t5", pool = 4, description = "Men finishing on and around a woman lying on a floor mattress in a dim room, her lying still and not reacting to them. Must show: multiple finishes, her passive afterwards, a bare room. Avoid: aftercare, avoid: applause, avoid: cruelty played for effect.", search_queries = ["group finishing on woman lying still floor mattress amateur gif", "multiple men finish woman passive dim room homemade gif"] } },
+        { type = "video", props = { file = "sex/capstone_fire_finish_t5.webm", description = "Men finishing on and around a woman lying on a floor mattress in a dim room, her lying still and not reacting to them. Must show: multiple finishes, her passive afterwards, a bare room. Avoid: aftercare, avoid: applause, avoid: cruelty played for effect.", search_queries = ["group finishing on woman lying still floor mattress amateur gif", "multiple men finish woman passive dim room homemade gif"] } },
     ] },
     { advance_text = "Let it end.", blocks = [
         { type = "paragraph", content = "They finish and they are done and they go, one and then another. Somebody turns the light on." },
@@ -19148,7 +19150,7 @@ blocks = [
         { type = "paragraph", content = "She strips the coveralls off both shoulders. He gets his mouth on a nipple and sucks at her tits like he is starving, moaning into her, both hands full of her ass and pulling her in." },
     ] },
     { advance_text = "Sit down on him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_g1_crate_t5", pool = 4, description = "A woman straddling and riding a seated man on a crate in a dim concrete receiving bay, her overalls pulled down off her shoulders, his hands on her hips. Must show: her on top, riding, him seated and slack. Avoid: standing positions, a bed, bright light.", search_queries = ["woman riding seated man on crate warehouse", "girl on top fucking man sitting industrial dim"] } },
+        { type = "video", props = { file = "sex/bunker_g1_crate_t5.webm", description = "A woman straddling and riding a seated man on a crate in a dim concrete receiving bay, her overalls pulled down off her shoulders, his hands on her hips. Must show: her on top, riding, him seated and slack. Avoid: standing positions, a bed, bright light.", search_queries = ["woman riding seated man on crate warehouse", "girl on top fucking man sitting industrial dim"] } },
         { type = "paragraph", content = "She straddles him and takes his cock into her cunt in one long sit, down to his balls, and starts to fuck him on the crate at her own pace with her tits in his face and her eyes on the ramp." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -19180,7 +19182,7 @@ blocks = [
         { type = "paragraph", content = "She hitches the coveralls open and he goes straight for her tits, sucking, biting at a nipple, one hand shoved down between her legs to grope at her cunt with no idea at all what he is doing." },
     ] },
     { advance_text = "Take him standing.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_g2_water_t5", pool = 4, description = "A woman fucking a shirtless man standing against a wet concrete wall in a dim flooded corridor, water underfoot, both of them soaked. Must show: standing, against a wall, both wet. Avoid: a shower cubicle, a bathroom, a bed.", search_queries = ["standing sex against wet concrete wall dim", "couple fucking standing soaked industrial corridor"] } },
+        { type = "video", props = { file = "sex/bunker_g2_water_t5.webm", description = "A woman fucking a shirtless man standing against a wet concrete wall in a dim flooded corridor, water underfoot, both of them soaked. Must show: standing, against a wall, both wet. Avoid: a shower cubicle, a bathroom, a bed.", search_queries = ["standing sex against wet concrete wall dim", "couple fucking standing soaked industrial corridor"] } },
         { type = "paragraph", content = "She takes his cock into her cunt standing, up on her toes in an inch of water, forearm across his throat to hold him on the brick, and fucks him hard and fast because this corridor carries sound." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -19212,7 +19214,7 @@ blocks = [
         { type = "paragraph", content = "She drags his trousers off his hips. His cock lies flat and hard against his stomach and his balls are tight up under it, and he thrusts into the air when she puts a hand anywhere near." },
     ] },
     { advance_text = "Get on him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_g3_table_t5", pool = 4, description = "A woman riding a man laid back on a canteen table in a strip-lit mess room, plates and mugs pushed off, his boots off. Must show: him on his back on a table, her astride. Avoid: a kitchen counter, a bed, a desk.", search_queries = ["woman riding man on table canteen dim", "girl on top man lying on table industrial"] } },
+        { type = "video", props = { file = "sex/bunker_g3_table_t5.webm", description = "A woman riding a man laid back on a canteen table in a strip-lit mess room, plates and mugs pushed off, his boots off. Must show: him on his back on a table, her astride. Avoid: a kitchen counter, a bed, a desk.", search_queries = ["woman riding man on table canteen dim", "girl on top man lying on table industrial"] } },
         { type = "paragraph", content = "She opens the coveralls, climbs up over him, and takes his cock into her cunt. She fucks him with both palms flat on his chest and her tits swinging over his face and the table legs walking on the lino." },
     ] },
     { advance_text = "Finish him.", blocks = [
@@ -19247,7 +19249,7 @@ blocks = [
         { type = "paragraph", content = "She walks him back, sits him on the bench, gets his belt open. His cock comes up out of it erect and already wet at the head. She lays him flat across his tray of parts and strips the coveralls down off her tits." },
     ] },
     { advance_text = "Take him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_g4_bench_t5", pool = 4, description = "A woman astride a man pushed back onto a cluttered workbench under a low lamp, tools and parts scattered, his jaw set. Must show: him on his back on a workbench, her over him, harsh lamp light. Avoid: a table, a bed, soft lighting.", search_queries = ["woman on top man workbench workshop lamp", "couple fucking on cluttered work bench dim"] } },
+        { type = "video", props = { file = "sex/bunker_g4_bench_t5.webm", description = "A woman astride a man pushed back onto a cluttered workbench under a low lamp, tools and parts scattered, his jaw set. Must show: him on his back on a workbench, her over him, harsh lamp light. Avoid: a table, a bed, soft lighting.", search_queries = ["woman on top man workbench workshop lamp", "couple fucking on cluttered work bench dim"] } },
         { type = "paragraph", content = "She gets over him and takes his cock into her cunt slowly, all the way to the balls, watching his jaw the whole time to see when it goes. It goes about nine thrusts in, and he grabs her ass with both hands and pulls." },
     ] },
     { advance_text = "Fuck it out of him.", blocks = [
@@ -19283,7 +19285,7 @@ blocks = [
         { type = "paragraph", content = "She puts the rota and the kettle and a mug of cold tea off the desk with her forearm and gets his trousers open. His cock and balls come out into her hand, erect and leaking. He apologises again and lifts his hips." },
     ] },
     { advance_text = "Get on him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_g5_desk_t5", pool = 4, description = "A woman straddling a man seated in an office chair behind a cluttered desk in a small windowless office, papers pushed aside, a desk lamp on. Must show: him seated in an office chair, her astride him, office setting. Avoid: a workshop, a bed, a bench.", search_queries = ["woman riding man in office chair desk lamp", "girl straddling seated man small office dim"] } },
+        { type = "video", props = { file = "sex/bunker_g5_desk_t5.webm", description = "A woman straddling a man seated in an office chair behind a cluttered desk in a small windowless office, papers pushed aside, a desk lamp on. Must show: him seated in an office chair, her astride him, office setting. Avoid: a workshop, a bed, a bench.", search_queries = ["woman riding man in office chair desk lamp", "girl straddling seated man small office dim"] } },
         { type = "paragraph", content = "She strips the coveralls to her waist, gets up over him in the chair, and sits down on his cock. The castors go back an inch and hold, and she fucks him in it with her tits in his face and her hands on the chair back." },
     ] },
     { advance_text = "He does not stop talking.", blocks = [
@@ -19572,15 +19574,16 @@ time_progression_minutes = 30
 # the corridor man 55/60 — posted men, so above the loafer at the same depth. The door man is 60/70, the
 # only man in the building who outranks Loder, and he is the wall the emitter exists for. The clerk is
 # 35/40 and that is NOT a slip: he is a man with a book and his back turned, not a guard.
-# ⚠️ ONE NEW POOL ONLY. The gate has no emitter branch on purpose — sex/bunker_door_t5 is the sixth and
-# last bunker pool, and the media debt is 8 slots, not 12. ONE ASSET, ONE BLOCK.
+# ⚠️ ONE NEW CLIP ONLY. The gate has no emitter branch on purpose — sex/bunker_door_t5 is the sixth and
+# last bunker clip, and the media debt is 8 slots, not 12. A single file since 2026-10-02 (LO): the door man
+# is seen once per caught attempt, so a pool's clips 2–4 almost never rendered. ONE ASSET, ONE BLOCK.
 # ⚠️ LOCATED + substitution_only, the bunker_guards shape. These rooms ARE under facility_ruins; the
 # trigger exists for the attribution and for the flag-chain validator, and substitution_only keeps the
 # canvas off every render path so nothing appears on the Facility's page.
 [[canvases]]
 id          = "bunker_rings"
 name        = "Somebody is posted here"
-description = "beat_0191 (rev 226), THE RINGS. TRIGGERLESS in practice (located @facility_ruins + substitution_only, the bunker_guards shape). The posted men ON the correct path, at two depths below ground: `gate` sits between bunker_route.t3 and .t4, and `last`/`door`/`panel` sit between bunker_route.t5 and bunker_bastien.base. Ring 1 is above ground and lives in bunker_descent.base. Every quiet answer spends bunker_stealth_used, the ONE quiet thing per run; every loud answer raises bunker_noise (which the door man reads) and sets bunker_seen (which the slab reads). The clerk at the readout is exempt from noise — his back is turned. Six nodes plus three resolution beats; one new pool, sex/bunker_door_t5."
+description = "beat_0191 (rev 226), THE RINGS. TRIGGERLESS in practice (located @facility_ruins + substitution_only, the bunker_guards shape). The posted men ON the correct path, at two depths below ground: `gate` sits between bunker_route.t3 and .t4, and `last`/`door`/`panel` sit between bunker_route.t5 and bunker_bastien.base. Ring 1 is above ground and lives in bunker_descent.base. Every quiet answer spends bunker_stealth_used, the ONE quiet thing per run; every loud answer raises bunker_noise (which the door man reads) and sets bunker_seen (which the slab reads). The clerk at the readout is exempt from noise — his back is turned. Six nodes plus three resolution beats; one new clip, sex/bunker_door_t5 (a single file, not a pool, since 2026-10-02)."
 
 [canvases.trigger]
 location          = "facility_ruins"
@@ -19803,7 +19806,7 @@ blocks = [
         { type = "paragraph", content = "She strips the zip down to her waist and puts her tits in his face. He takes a nipple in his mouth and sucks like a man drinking, moaning into it, both hands full of her ass." },
     ] },
     { advance_text = "Get on him. Quietly.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bunker_door_t5", pool = 4, description = "A woman straddling and riding a man slumped back in a chair in a narrow dim concrete corridor, her overalls open to the waist, his weapon on the floor beside them. Must show: him seated in a chair, her astride him, corridor setting, low light. Avoid: an office, a bed, a desk, bright light.", search_queries = ["woman riding seated man chair dim corridor", "girl on top fucking man sitting hallway industrial"] } },
+        { type = "video", props = { file = "sex/bunker_door_t5.webm", description = "A woman straddling and riding a man slumped back in a chair in a narrow dim concrete corridor, her overalls open to the waist, his weapon on the floor beside them. Must show: him seated in a chair, her astride him, corridor setting, low light. Avoid: an office, a bed, a desk, bright light.", search_queries = ["woman riding seated man chair dim corridor", "girl on top fucking man sitting hallway industrial"] } },
         { type = "paragraph", content = "She straddles the chair and takes his cock into her cunt in one slow sit, and fucks him with her knees taking her weight, because a chair on this floor knocks, and her forearm is across his mouth to hold the moaning in." },
     ] },
     { advance_text = "Finish him against the door.", blocks = [
@@ -20601,7 +20604,7 @@ blocks = [
         { type = "paragraph", content = "His cock stands fully erect and jerks when the rag comes near. The rest of him lies naked and still, eyes on the ceiling." },
     ] },
     { advance_text = "Take him in your hand.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bastien_cot_wash_t5", pool = 4, description = "A thin naked man lying on his back on a narrow bunk in a small bare room while a woman sitting beside him washes him with a rag, then takes his cock in her wet hand and strokes him until he comes on his stomach. Must show: him flat and passive on a narrow bed, her hand doing the work, a rag or basin. Avoid: him standing, avoid: a shower or bathtub, avoid: a big bright bedroom, avoid: him touching her.", search_queries = ["woman gives slow handjob to man lying on narrow bed amateur gif", "sponge bath turns into handjob homemade gif", "handjob man lying still on small bed cumshot on stomach gif"] } },
+        { type = "video", props = { file = "sex/bastien_cot_wash_t5.webm", description = "A thin naked man lying on his back on a narrow bunk in a small bare room while a woman sitting beside him washes him with a rag, then takes his cock in her wet hand and strokes him until he comes on his stomach. Must show: him flat and passive on a narrow bed, her hand doing the work, a rag or basin. Avoid: him standing, avoid: a shower or bathtub, avoid: a big bright bedroom, avoid: him touching her.", search_queries = ["woman gives slow handjob to man lying on narrow bed amateur gif", "sponge bath turns into handjob homemade gif", "handjob man lying still on small bed cumshot on stomach gif"] } },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "My pulse is up. You will have noticed. I would have written it down." },
         { type = "paragraph", content = "She drops the rag and takes his cock in her wet hand, stroking slowly, root to tip. His balls draw up tight and he moans through his teeth." },
     ] },
@@ -20746,7 +20749,7 @@ blocks = [
         { type = "paragraph", content = "She reaches back, holds his cock steady and sinks down onto it until her cunt has all of him. Then she stays there, not moving, so he can feel it, before she starts to fuck him." },
     ] },
     { advance_text = "Ride him.", blocks = [
-        { type = "video", props = { pool_dir = "sex/bastien_cot_first_night_t5", pool = 4, description = "A naked woman on top of a thin naked man who lies flat on his back on a narrow bunk in a small dim room, riding him slowly and doing all the work while he lies still, two of her fingers resting at the side of his neck, not gripping. Must show: her on top, him flat and passive, a narrow bed. Avoid: him on top, avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: rough or violent sex.", search_queries = ["woman riding man lying still on narrow bed amateur gif", "slow cowgirl on skinny man small dark room homemade gif", "girl on top doing all the work man lying flat gif"] } },
+        { type = "video", props = { file = "sex/bastien_cot_first_night_t5.webm", description = "A naked woman on top of a thin naked man who lies flat on his back on a narrow bunk in a small dim room, riding him slowly and doing all the work while he lies still, two of her fingers resting at the side of his neck, not gripping. Must show: her on top, him flat and passive, a narrow bed. Avoid: him on top, avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: rough or violent sex.", search_queries = ["woman riding man lying still on narrow bed amateur gif", "slow cowgirl on skinny man small dark room homemade gif", "girl on top doing all the work man lying flat gif"] } },
         { type = "paragraph", content = "She rides him, rising almost off his cock and sinking back down, her hands flat either side of his head. The bunk creaks. He cannot thrust up to fuck her back, so every stroke is hers." },
     ] },
     { advance_text = "Go on.", blocks = [
@@ -21352,12 +21355,12 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/bastien_cot_finish_facial_t5", pool = 4, description = "A thin man coming on the face of a naked woman on a narrow bunk, his hand in her hair. Must show: a facial finish on a narrow bed in a small bare room. Avoid: a big bright bedroom, avoid: violence.", search_queries = ["cumshot on her face man lying on bed hand in her hair amateur gif", "facial from man lying down girl kneeling on bed homemade gif"] } },
+    { type = "video", props = { file = "sex/bastien_cot_finish_facial_t5.webm", description = "A thin man coming on the face of a naked woman on a narrow bunk, his hand in her hair. Must show: a facial finish on a narrow bed in a small bare room. Avoid: a big bright bedroom, avoid: violence.", search_queries = ["cumshot on her face man lying on bed hand in her hair amateur gif", "facial from man lying down girl kneeling on bed homemade gif"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/bastien_cot_finish_inside_t5", pool = 4, description = "A thin man coming inside a woman on a narrow bunk, holding her hips hard against him until he has finished. Must show: a creampie finish on a narrow bed. Avoid: pulling out, avoid: anal, avoid: a big bright bedroom.", search_queries = ["creampie girl on top stays down amateur gif", "cowgirl creampie small bed his hands on her thighs homemade gif"] } },
+    { type = "video", props = { file = "sex/bastien_cot_finish_inside_t5.webm", description = "A thin man coming inside a woman on a narrow bunk, holding her hips hard against him until he has finished. Must show: a creampie finish on a narrow bed. Avoid: pulling out, avoid: anal, avoid: a big bright bedroom.", search_queries = ["creampie girl on top stays down amateur gif", "cowgirl creampie small bed his hands on her thighs homemade gif"] } },
   ] },
   { type = "cascade", props = { beats = [
     { blocks = [

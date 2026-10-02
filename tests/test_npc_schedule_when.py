@@ -139,6 +139,21 @@ def test_npc_at_location_through_a_stage_helper_is_rejected():
     assert any("npc_at_location" in e for e in errs)
 
 
+def test_unknown_key_in_when_is_rejected_by_the_condition_table():
+    # E1: the schedule `when` is one of the carriers the import walker checks.
+    typo = copy.deepcopy(WHEN_RESCUED)
+    typo["items"][0]["flag"] = typo["items"][0].pop("flag_key")
+    errs = _when_errors(validate(normalize(_game(_row(when=typo)))))
+    assert any("unknown key `flag` on a `flag` condition" in e for e in errs), errs
+
+
+def test_unknown_operator_in_when_is_rejected_by_the_condition_table():
+    bad = copy.deepcopy(WHEN_RESCUED)
+    bad["items"][0]["operator"] = "is_set"
+    errs = _when_errors(validate(normalize(_game(_row(when=bad)))))
+    assert any("unknown operator 'is_set'" in e for e in errs), errs
+
+
 # ── 3. both write sites ───────────────────────────────────────────────────────
 
 def test_no_db_path_carries_when():

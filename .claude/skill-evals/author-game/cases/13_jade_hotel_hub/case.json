@@ -1,0 +1,9 @@
+{
+  "id": "13_jade_hotel_hub",
+  "source": "the-first-hour.md F5 cold spawn (a hub with no meeting / NPC not scheduled there)",
+  "rule": "the-first-hour.md F5; gate 'every hub is met first'",
+  "task": "Add a hub for Jade at the hotel bar.",
+  "target_lints": [
+    "ambient_presence"
+  ]
+}

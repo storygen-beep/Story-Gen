@@ -71,6 +71,11 @@ DEFAULT_STUDIO_NAME = "NutGames"
 DEFAULT_COMMUNITY_URL = "https://discord.gg/MJXBxEqsa"
 
 
+def _is_stat_value(v) -> bool:
+    """E5 — an effect value computed from her stats at runtime ({type = "trait", ...})."""
+    return isinstance(v, dict) and v.get("type") == "trait"
+
+
 class TweeComprehensiveGeneratorV2:
     """
     Simplified Twee generator for canvas-based stories.
@@ -1166,8 +1171,14 @@ class TweeComprehensiveGeneratorV2:
         # Clothing system data
         clothing_settings = (self.project.metadata or {}).get("clothing_settings", {})
         self.clothing_enabled = clothing_settings.get("enabled", False)
-        self.wardrobe_location_slug = clothing_settings.get("wardrobe_location", "")
+        # E7d — one slug or a list; every reader asks the set.
+        _wl = clothing_settings.get("wardrobe_location", "") or []
+        self.wardrobe_location_slugs = set(_wl if isinstance(_wl, list) else [_wl])
         self.shop_location_slug = clothing_settings.get("shop_location", "")
+        # E7b — both absent in every game that does not opt in.
+        self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
+        self.wardrobe_anywhere = clothing_settings.get("wardrobe_anywhere") is not False
+        self.saved_outfits = clothing_settings.get("saved_outfits") is True  # E7c
         clothing_items = clothing_settings.get("items", [])
         clothing_requirements = clothing_settings.get("requirements", {})
         if self.clothing_enabled:
@@ -1222,6 +1233,8 @@ class TweeComprehensiveGeneratorV2:
         self.passes = (self.project.metadata or {}).get("passes", [])
         # Items (consumable inventory)
         self.items = (self.project.metadata or {}).get("items", [])
+        # E10 — general shops ([[shops]]), each rendered on its room's screen
+        self.shops = (self.project.metadata or {}).get("shops", []) or []
         # Day-rollover hook ([engine.daily_tick]) — fires inside advanceDay().
         # Always present as a dict with a flagEffects list (possibly empty)
         # so the generated JS loop has a stable target.
@@ -1390,6 +1403,12 @@ class TweeComprehensiveGeneratorV2:
                 # project.metadata in place) resolves to the same answer.
                 if app.get("type") == "launcher":
                     app["options"] = self._launcher_options_for_payload(app.get("options"))
+                # E8 — a custom app wikifies `passage` inside the phone. A canvas id
+                # resolves to that canvas's entry passage (as a launcher option does);
+                # anything else is taken as a passage name. Idempotent, like the above.
+                if app.get("type") == "custom" and app.get("passage"):
+                    app["passage"] = self._canvas_entry_passages().get(
+                        self._sanitize_canvas_name(str(app["passage"])), app["passage"])
             phone_posts = phone_settings.get("posts", [])
             phone_profiles = phone_settings.get("profiles", [])
             # Validate and track post images and profile photos
@@ -1463,9 +1482,16 @@ class TweeComprehensiveGeneratorV2:
                             'canvas_id': 'phone',
                             'category': 'Social Media',
                         })
+            # E8-calls — a call's accept canvas resolves here to its entry passage, as a
+            # launcher option's does. Idempotent: writes beside `accept`, never over it.
+            phone_calls = phone_settings.get("calls", []) or []
+            for call in phone_calls:
+                call["accept_passage"] = self._canvas_entry_passages().get(
+                    self._sanitize_canvas_name(str(call.get("accept") or "")), "")
             phone_data_json = json.dumps({
                 "apps": phone_apps,
                 "conversations": phone_conversations,
+                **({"calls": phone_calls} if phone_calls else {}),
                 "posts": phone_posts,
                 "profiles": phone_profiles,
                 "daily_topics": phone_daily_topics,
@@ -1494,6 +1520,10 @@ class TweeComprehensiveGeneratorV2:
         if self.clothing_enabled:
             player_init["wardrobe"] = initial_wardrobe
             player_init["equipped"] = initial_equipped
+            if self.saved_outfits:
+                # E7c — name -> {slot: item id or null}. Top level of $player, so an
+                # old save gets it from the backfill.
+                player_init["outfits"] = {}
         if self.player_customizable and self.player_customization_fields:
             for cf in self.player_customization_fields:
                 if cf["id"] == "name":
@@ -1529,6 +1559,12 @@ class TweeComprehensiveGeneratorV2:
         if self._has_consume_on():
             # EN1 — per-step records; an absent entry for a fired step reads as used up.
             game_state_init["canvas_state"] = {}
+        if self._has_pool_memory():
+            # E2 — which entries of each `memory = "seen"` block_pool she has seen.
+            game_state_init["pool_seen"] = {}
+        if self._has_return_exit():
+            # E8b — the room a call or a launcher scene started in ("" = none).
+            game_state_init["return_place"] = ""
         if self.rent_enabled:
             game_state_init["rent_state"] = {
                 "last_paid_week": time_settings.get("starting_week", 1),
@@ -1550,6 +1586,10 @@ class TweeComprehensiveGeneratorV2:
             game_state_init["passes"] = {}
         if self.items:
             game_state_init["inventory"] = {}
+        if any(st.get("limit") for sh in self.shops for st in (sh.get("stock") or [])):
+            # E10 — shop id -> {item id: how many it has sold}. Only in a game with a
+            # limited stock; an old save gets it from the backfill.
+            game_state_init["shops"] = {}
         if self.phone_enabled:
             game_state_init["phone"] = {
                 "triggered_conversations": {},
@@ -1562,6 +1602,20 @@ class TweeComprehensiveGeneratorV2:
                 "passed_profiles": {},
                 "matches": {},
             }
+            if any(c.get("repeat_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3 — the instance number of each repeatable chat. Only in a game that
+                # has one, so every other phone game keeps a byte-identical skeleton.
+                game_state_init["phone"]["conv_cycle"] = {}
+            if any(j.get("ranks") for j in self.fast_jobs_data):
+                # E6 — each job's own xp, read by its ranks. Only in a game with a ranked
+                # job, so every other game keeps a byte-identical skeleton.
+                game_state_init["fast_jobs"]["job_xp"] = {}
+            if phone_settings.get("calls"):
+                # E8-calls — call id -> {state, rang_minute, ...}. Only in a game with calls.
+                game_state_init["phone"]["calls"] = {}
+            if any(c.get("ignore_after_days") for c in (phone_settings.get("conversations") or [])):
+                # E3b — instance key -> the day it closed as ignored. Same opt-in rule.
+                game_state_init["phone"]["conv_ignored"] = {}
         # Schema signature stamped into every save via Config.saves.version: a
         # fingerprint of the trait/flag key surface and the corruption tiers, so a
         # build can tell whether a save was written against its own data shape.
@@ -1676,6 +1730,33 @@ setup.unequipSlot = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.equipped) return;
     sv.player.equipped[slotName] = null;
+};
+
+// E7a — a scene takes a garment off her (`unequip`: it stays in the wardrobe) or
+// away (`remove`: taken off, then gone from the wardrobe; a shop can sell it again).
+// Both are no-ops on a garment she is not wearing / does not own.
+setup.unequipItem = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.equipped) return false;
+    var hit = false;
+    for (var s in sv.player.equipped) {
+        if (sv.player.equipped.hasOwnProperty(s) && sv.player.equipped[s] === itemId) {
+            sv.player.equipped[s] = null;
+            hit = true;
+        }
+    }
+    return hit;
+};
+
+setup.removeFromWardrobe = function(itemId) {
+    var sv = State.variables;
+    if (!sv.player || !sv.player.wardrobe || !sv.player.wardrobe[itemId]) return false;
+    setup.unequipItem(itemId);
+    var name = sv.player.wardrobe[itemId].name;
+    delete sv.player.wardrobe[itemId];
+    setup.pendingEffects = setup.pendingEffects || [];
+    setup.pendingEffects.push({ "type": "wardrobe_removed", "name": name });
+    return true;
 };
 
 setup.getWardrobeItemsForSlot = function(slotName) {
@@ -1957,6 +2038,7 @@ setup.renderWardrobePage = function() {
     }
 
     html += '</table>';
+    if (setup.renderSavedOutfits) html += setup.renderSavedOutfits();
     html += '</div>';
     return html;
 };
@@ -1981,11 +2063,14 @@ setup.validateClothing = function() {
     var flags = sv.flags || {};
     var req = setup.clothingRequirements || {};
     var issues = [];
+    // E1b: the player's own name ($player.name, customization included), never a
+    // hard-coded one. "Player" mirrors the hint fallback when no name is set.
+    var who = (sv.player && sv.player.name) || "Player";
 
     // Body coverage: must have (top AND bottom) OR dress
     if (req.body_coverage) {
         if (!eq['dress'] && (!eq['top'] || !eq['bottom'])) {
-            issues.push("Emma needs to be wearing a top and bottom, or a dress.");
+            issues.push(who + " needs to be wearing a top and bottom, or a dress.");
         }
     }
 
@@ -1994,7 +2079,7 @@ setup.validateClothing = function() {
     for (var i = 0; i < always.length; i++) {
         var s = always[i];
         if (!eq[s]) {
-            issues.push("Emma needs to put on " + s + ".");
+            issues.push(who + " needs to put on " + s + ".");
         }
     }
 
@@ -2002,7 +2087,7 @@ setup.validateClothing = function() {
     var cond = req.conditional || {};
     for (var slot in cond) {
         if (cond.hasOwnProperty(slot) && !eq[slot] && !flags[cond[slot].until_flag]) {
-            issues.push(cond[slot].message || "Emma needs " + slot + ".");
+            issues.push(cond[slot].message || who + " needs " + slot + ".");
         }
     }
 
@@ -2053,6 +2138,118 @@ setup.checkLocationClothing = function(passageName) {
     return activeRule.message || "You need to put on more clothes before going there.";
 };
 """
+            if self.wardrobe_change_on_refusal or not self.wardrobe_anywhere:
+                wardrobe_js_block += """
+// E7b — where she can change (any room, or with wardrobe_anywhere = false only a
+// wardrobe room), and whether a refusal's unmet part is about her clothes.
+setup.wardrobe_anywhere = """ + json.dumps(self.wardrobe_anywhere) + """;
+setup.wardrobe_location_ids = """ + json.dumps(self._wardrobe_location_ids()) + """;
+setup.canChangeClothesHere = function(fromId) {
+    if (setup.wardrobe_anywhere) return true;
+    var here = String(fromId || (State.variables.player || {}).current_location || '');
+    return setup.wardrobe_location_ids.indexOf(here) !== -1;
+};
+setup._clothingConditionTypes = ['clothing_slot', 'clothing_item', 'worn_exposure',
+    'worn_beauty', 'worn_corruption', 'worn_type'];
+setup.unmetClothingCondition = function(cond) {
+    var items = (cond && cond.items) || [];
+    for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (!it) continue;
+        if (it.items) { if (setup.unmetClothingCondition(it)) return true; continue; }
+        if (setup._clothingConditionTypes.indexOf(it.type) === -1) continue;
+        if (!setup.triggerConditionsSatisfied({ "version": "1.0", "logic": "AND", "items": [it] })) return true;
+    }
+    return false;
+};
+setup.refusalOffersChange = function(cond) {
+    return setup.unmetClothingCondition(cond) && setup.canChangeClothesHere();
+};
+"""
+            outfit_handlers = ""
+            if self.saved_outfits:
+                outfit_handlers = """jQuery(document).on('click', '.wardrobe-outfit-save', function(e) {
+    e.preventDefault();
+    setup.saveOutfit(jQuery('#wardrobe-outfit-name').val());
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-wear', function(e) {
+    e.preventDefault();
+    setup.wearOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.wardrobe-outfit-delete', function(e) {
+    e.preventDefault();
+    setup.deleteOutfit(decodeURIComponent(String(jQuery(this).data('outfit'))));
+    Engine.play("WardrobePage");
+});
+
+"""
+                wardrobe_js_block += """
+// E7c — saved outfits: $player.outfits[name] = {slot: item id or null}, at most 5.
+// Wearing one equips each saved garment she still owns (equipItem keeps its own
+// conditions and the dress/top rule) and empties the slots it left empty, where the
+// slot may be emptied; a garment sold or removed since is skipped.
+setup.OUTFIT_SLOTS = ['bra', 'underwear', 'top', 'bottom', 'dress', 'legwear', 'shoes'];
+setup._esc = function(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+};
+setup.saveOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.equipped) return false;
+    p.outfits = p.outfits || {};
+    name = String(name || '').trim().slice(0, 30);
+    if (!name) name = 'Outfit ' + (Object.keys(p.outfits).length + 1);
+    if (!p.outfits[name] && Object.keys(p.outfits).length >= 5) return false;
+    var snap = {};
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        snap[s] = p.equipped[s] || null;
+    }
+    p.outfits[name] = snap;
+    return true;
+};
+setup.wearOutfit = function(name) {
+    var p = State.variables.player;
+    var o = p && p.outfits && p.outfits[name];
+    if (!o) return false;
+    for (var i = 0; i < setup.OUTFIT_SLOTS.length; i++) {
+        var s = setup.OUTFIT_SLOTS[i];
+        if (!o[s] && p.equipped[s] && setup.canRemoveSlot(s)) setup.unequipSlot(s);
+    }
+    for (var j = 0; j < setup.OUTFIT_SLOTS.length; j++) {
+        var id = o[setup.OUTFIT_SLOTS[j]];
+        if (id && p.wardrobe && p.wardrobe[id]) setup.equipItem(id);
+    }
+    return true;
+};
+setup.deleteOutfit = function(name) {
+    var p = State.variables.player;
+    if (!p || !p.outfits || !p.outfits[name]) return false;
+    delete p.outfits[name];
+    return true;
+};
+setup.renderSavedOutfits = function() {
+    var outfits = (State.variables.player || {}).outfits || {};
+    var names = Object.keys(outfits);
+    var html = '<table class="wardrobe-table wardrobe-outfits">';
+    for (var i = 0; i < names.length; i++) {
+        var key = encodeURIComponent(names[i]);
+        html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">' + setup._esc(names[i]) + '</td>';
+        html += '<td class="wardrobe-slot-items"><button class="wardrobe-outfit-wear" data-outfit="' + key + '">Wear</button> ';
+        html += '<button class="wardrobe-outfit-delete" data-outfit="' + key + '">Delete</button></td></tr>';
+    }
+    html += '<tr class="wardrobe-row"><td class="wardrobe-slot-label">Outfits</td><td class="wardrobe-slot-items">';
+    if (names.length < 5) {
+        html += '<input id="wardrobe-outfit-name" type="text" maxlength="30" placeholder="Name"> ';
+        html += '<button class="wardrobe-outfit-save">Save what I am wearing</button>';
+    } else {
+        html += '<span class="wardrobe-empty-hint">Five saved. Delete one to save another.</span>';
+    }
+    html += '</td></tr></table>';
+    return html;
+};
+"""
             wardrobe_handlers_block = """
 // Wardrobe page event handlers
 jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', function(e) {
@@ -2064,7 +2261,7 @@ jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', functi
     }
 });
 
-jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
+""" + outfit_handlers + """jQuery(document).on('click', '.wardrobe-unequip-btn', function(e) {
     e.preventDefault();
     e.stopPropagation();
     var slot = jQuery(this).data('slot');
@@ -2273,6 +2470,226 @@ setup._notifyPhoneDelivery = function(messages) {{
     jQuery('body').append('<div class="effect-toast phone-notify">' + safe.join('<br>') + '</div>');
     setTimeout(function() {{ jQuery('.phone-notify').remove(); }}, 3000);
 }};
+// E3 — repeatable chats. Instance 0 of a chat keeps the plain id as its key in
+// replies / read_conversations, exactly as before; instance n (n >= 1) uses "id#n".
+// ps.conv_cycle[id] is the current instance; absent = 0, so a one-time chat and a
+// save written before E3 read the same as they always did.
+setup.convInstanceKey = function(convId, n) {{
+    return (n && n > 0) ? (String(convId) + '#' + n) : String(convId);
+}};
+setup.convBaseId = function(key) {{
+    return String(key).split('#')[0];
+}};
+setup.convCurrentKey = function(convId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    return setup.convInstanceKey(convId, (ps.conv_cycle || {{}})[convId] || 0);
+}};
+// Answered = a reply sent; for a chat with no reply block, read. E3b: an instance
+// closed as ignored is answered too, so a repeatable chat re-arms after it.
+setup._phoneConvAnswered = function(conv, ps, key) {{
+    if ((ps.conv_ignored || {{}})[key]) return true;
+    var hasReply = (conv.blocks || []).some(function(b) {{ return b.type === 'reply'; }});
+    if (!hasReply) return !!(ps.read_conversations || {{}})[key];
+    var r = (ps.replies || {{}})[key];
+    return typeof r === 'number' || (Array.isArray(r) && r.length > 0);
+}};
+// Re-arm a delivered repeatable chat: answered, `repeat_after_days` since it arrived
+// or was answered (whichever is later), under `max_repeats`, and its trigger still
+// holds. The old instance's arrival moves to `past`, which the thread view renders as
+// history. Returns true when a new instance arrived.
+setup._rearmPhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_cycle = ps.conv_cycle || {{}};
+    var n = ps.conv_cycle[conv.id] || 0;
+    if (conv.max_repeats && n >= conv.max_repeats) return false;
+    if (!setup._phoneConvAnswered(conv, ps, setup.convInstanceKey(conv.id, n))) return false;
+    var ts = State.variables.game_state.time_state || {{}};
+    var day = ts.day || 1;
+    if (day - Math.max(trig.triggered_day || 1, trig.answered_day || 0) < conv.repeat_after_days) return false;
+    var trigCond = conv.trigger ? conv.trigger.conditions : null;
+    if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) return false;
+    var past = Array.isArray(trig.past) ? trig.past.slice() : [];
+    past.push({{ triggered_day: trig.triggered_day || 1, triggered_hour: trig.triggered_hour || 0 }});
+    ps.conv_cycle[conv.id] = n + 1;
+    ps.triggered_conversations[conv.id] = {{
+        triggered_day: day,
+        triggered_hour: ts.current_hour || 0,
+        conv_index: trig.conv_index,
+        past: past
+    }};
+    return true;
+}};
+// E8 — an app with `conditions` is on the phone only while they hold.
+setup.phoneAppVisible = function(appOrId) {{
+    var app = appOrId;
+    if (typeof appOrId !== 'object') {{
+        var apps = (setup.phone_data || {{}}).apps || [];
+        app = null;
+        for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appOrId) {{ app = apps[i]; break; }} }}
+    }}
+    if (!app) return false;
+    return !(app.conditions && app.conditions.items) || setup.triggerConditionsSatisfied(app.conditions);
+}};
+// E8 — `time_cost` (minutes) on a phone action: a reply choice, a daily topic, a post
+// action, a fast job. Spent through advanceTime, so the day can roll (rent due, the daily
+// tick) exactly as on a wait button; the click handler commits the moment. Opt-in: an
+// action with no time_cost spends nothing and its label is unchanged.
+setup.spendPhoneTime = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    if (m > 0 && typeof window.advanceTime === 'function') window.advanceTime(m);
+}};
+setup.phoneTimeTag = function(minutes) {{
+    var m = Math.round(Number(minutes) || 0);
+    return m > 0 ? ' · ' + m + 'm' : '';
+}};
+// The trait and flag effects a reply choice carries ({{effects, flagEffects}}), applied
+// with no canvas around them: a reply, and E3b's on_ignore.
+setup.applyPhoneEffectSet = function(src) {{
+    var effs = (src && src.effects) || [];
+    for (var e = 0; e < effs.length; e++) {{
+        var eff = effs[e];
+        if (eff.trait) {{
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
+        }}
+    }}
+    var feffs = (src && src.flagEffects) || [];
+    for (var f = 0; f < feffs.length; f++) {{
+        var fe = feffs[f];
+        // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
+        // is honored uniformly with passage-flow flag emission.
+        setup.applyAndNotifyFlag(fe.targetType || "player", fe.npcId || null, fe.flag, fe.op || "set");
+    }}
+}};
+// E3b — the ignore hook. The current instance of a chat with `ignore_after_days`
+// that has had no reply for that many days since it arrived closes as ignored:
+// ps.conv_ignored[key] = the day, and `on_ignore` applies once. Its own toast, so the
+// passage's pending effects are left alone. Returns true when it fired.
+setup._ignorePhoneConversation = function(conv, ps) {{
+    var trig = ps.triggered_conversations[conv.id];
+    if (!trig || typeof trig !== 'object') return false;
+    ps.conv_ignored = ps.conv_ignored || {{}};
+    var key = setup.convCurrentKey(conv.id);
+    if (ps.conv_ignored[key] || setup._phoneConvAnswered(conv, ps, key)) return false;
+    var day = ((State.variables.game_state || {{}}).time_state || {{}}).day || 1;
+    if (day - (trig.triggered_day || 1) < conv.ignore_after_days) return false;
+    ps.conv_ignored[key] = day;
+    trig.answered_day = day;  // a repeatable chat counts its delay from here
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(conv.on_ignore);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+    return true;
+}};
+// ===== E8-calls — incoming calls =====
+// A call rings once its trigger holds: a badge and a toast (pull delivery), never a
+// covering pop-up. ps.calls[id] = {{state: ringing | answered | declined | missed,
+// rang_minute, ended_minute}}. Left ringing for ring_minutes (default 60) it is missed
+// and on_missed applies once; a missed call counts as ignored. One-time.
+setup.callerName = function(call) {{
+    var npc = ((State.variables || {{}}).npcs || {{}})[setup.resolveNpcId(call.caller)] || {{}};
+    return npc.name || String(call.caller || '').replace('npc_', '').replace(/_/g, ' ');
+}};
+setup._applyCallEffects = function(set) {{
+    var held = setup.pendingEffects;
+    setup.pendingEffects = [];
+    setup.applyPhoneEffectSet(set);
+    setup.showEffectNotification();
+    setup.pendingEffects = held;
+}};
+// Runs on every passage and before any call screen or answer: time can pass on a wait
+// button without a passage, and a call past its window must not be answerable.
+setup._expirePhoneCalls = function(ps) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length || !ps) return;
+    ps.calls = ps.calls || {{}};
+    var now = setup.gameMinuteNow();
+    for (var i = 0; i < calls.length; i++) {{
+        var st = ps.calls[calls[i].id];
+        if (!st || st.state !== 'ringing') continue;
+        if (now - (st.rang_minute || 0) < (calls[i].ring_minutes || 60)) continue;
+        st.state = 'missed';
+        st.ended_minute = now;
+        setup._applyCallEffects(calls[i].on_missed);
+    }}
+}};
+setup._checkPhoneCalls = function(ps, firstScan, toasts) {{
+    var calls = (setup.phone_data || {{}}).calls || [];
+    if (!calls.length) return;
+    setup._expirePhoneCalls(ps);
+    for (var i = 0; i < calls.length; i++) {{
+        var c = calls[i];
+        if (ps.calls[c.id]) continue;
+        var trigCond = c.trigger ? c.trigger.conditions : null;
+        if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
+        ps.calls[c.id] = {{ state: 'ringing', rang_minute: setup.gameMinuteNow() }};
+        if (!firstScan) toasts.push(setup.resolveAtRefs(c.notify) || ('📞 ' + setup.callerName(c) + ' is calling'));
+    }}
+}};
+setup.ringingCalls = function(appId) {{
+    var ps = ((State.variables || {{}}).game_state || {{}}).phone || {{}};
+    var st = ps.calls || {{}};
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{
+        return st[c.id] && st[c.id].state === 'ringing' && (!appId || c.app === appId);
+    }});
+}};
+setup._findCall = function(callId) {{
+    return ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.id === callId; }})[0] || null;
+}};
+// Answer: plays the accept canvas. Not mid-scene (the launcher's rule); the scene
+// returns her to the canvas's own home. Returns true when it navigated.
+setup.answerCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing' || !c.accept_passage) return false;
+    if (!setup.isRerenderSafe(State.passage)) return false;
+    st.state = 'answered';
+    st.ended_minute = setup.gameMinuteNow();
+    if (setup.markReturnPlace) setup.markReturnPlace();
+    setup.closePhone();
+    Engine.play(c.accept_passage);
+    return true;
+}};
+setup.declineCall = function(callId) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var c = setup._findCall(callId), st = (ps.calls || {{}})[callId];
+    if (!c || !st || st.state !== 'ringing') return false;
+    st.state = 'declined';
+    st.ended_minute = setup.gameMinuteNow();
+    setup._applyCallEffects(c.on_decline);
+    return true;
+}};
+setup._renderCalls = function(appId, appLabel) {{
+    var ps = State.variables.game_state.phone;
+    setup._expirePhoneCalls(ps);
+    var st = ps.calls || {{}};
+    var calls = ((setup.phone_data || {{}}).calls || []).filter(function(c) {{ return c.app === appId; }});
+    var placed = setup.isRerenderSafe(State.passage);
+    var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || 'Calls') + '</span><span class="phone-close">&times;</span></div>';
+    html += '<div class="phone-screen"><div class="phone-launcher phone-calls">';
+    var ringing = calls.filter(function(c) {{ return st[c.id] && st[c.id].state === 'ringing'; }});
+    for (var i = 0; i < ringing.length; i++) {{
+        var c = ringing[i];
+        html += '<div class="phone-daily-label">📞 ' + setup.callerName(c) + ' is calling</div>';
+        if (placed) html += '<a class="phone-daily-btn phone-call-answer" data-call-id="' + c.id + '">Answer</a>';
+        else html += '<div class="phone-daily-locked">Answer when you are free.</div>';
+        html += '<a class="phone-daily-btn phone-call-decline" data-call-id="' + c.id + '">Decline</a>';
+    }}
+    var past = calls.filter(function(c) {{ return st[c.id] && st[c.id].state !== 'ringing'; }});
+    past.sort(function(a, b) {{ return (st[b.id].ended_minute || 0) - (st[a.id].ended_minute || 0); }});
+    var words = {{ answered: 'answered', declined: 'declined', missed: 'missed' }};
+    for (var j = 0; j < past.length; j++) {{
+        html += '<div class="phone-daily-locked">' + setup.callerName(past[j]) + ' \u2014 ' + (words[st[past[j].id].state] || '') + '</div>';
+    }}
+    if (!ringing.length && !past.length) html += '<div class="phone-empty">No calls yet.</div>';
+    html += '</div></div>';
+    jQuery('.phone-frame').html(html);
+    setup._phoneView = 'calls';
+    setup._phoneApp = appId;
+}};
 setup.checkPhoneConversations = function() {{
     if (!setup.phone_enabled || !setup.phone_data) return;
     var sv = State.variables;
@@ -2286,7 +2703,13 @@ setup.checkPhoneConversations = function() {{
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
         var conv = convs[i];
-        if (ps.triggered_conversations[conv.id]) continue;
+        if (ps.triggered_conversations[conv.id]) {{
+            if (conv.ignore_after_days) setup._ignorePhoneConversation(conv, ps);
+            if (conv.repeat_after_days && setup._rearmPhoneConversation(conv, ps) && !_firstScan) {{
+                _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
+            }}
+            continue;
+        }}
         var trigCond = conv.trigger ? conv.trigger.conditions : null;
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         var ts = sv.game_state.time_state || {{}};
@@ -2317,6 +2740,7 @@ setup.checkPhoneConversations = function() {{
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         ps.triggered_profiles[prof.id] = true;
     }}
+    setup._checkPhoneCalls(ps, _firstScan, _phoneToasts);  // E8-calls
     if (_phoneToasts.length) setup._notifyPhoneDelivery(_phoneToasts);
 }};
 
@@ -2324,15 +2748,21 @@ setup.getPhoneUnreadCount = function() {{
     var ps = ((State.variables || {{}}).game_state || {{}}).phone;
     if (!ps) return 0;
     var count = 0;
-    // Unread conversations
+    // Unread conversations (E8: not in an app that is off the phone)
     var triggered = ps.triggered_conversations || {{}};
     var read = ps.read_conversations || {{}};
     var keys = Object.keys(triggered);
+    var _convApp = {{}};
+    ((setup.phone_data || {{}}).conversations || []).forEach(function(c) {{ _convApp[c.id] = c.app; }});
     for (var i = 0; i < keys.length; i++) {{
-        if (!read[keys[i]]) count++;
+        if (_convApp[keys[i]] && !setup.phoneAppVisible(_convApp[keys[i]])) continue;
+        if (!read[setup.convCurrentKey(keys[i])]) count++;
     }}
     // Unviewed posts
     if (!ps.viewed_feed && Object.keys(ps.triggered_posts || {{}}).length > 0) count++;
+    // E8-calls — a ringing call, in an app that is on the phone
+    var _ring = setup.ringingCalls ? setup.ringingCalls() : [];
+    for (var rc = 0; rc < _ring.length; rc++) {{ if (setup.phoneAppVisible(_ring[rc].app)) count++; }}
     return count;
 }};
 
@@ -2362,9 +2792,23 @@ setup.getPhoneThreads = function(appId) {{
             }};
         }}
         var entry = byNpc[npcSlug];
-        entry.conversations.push(conv);
-        if (!read[conv.id]) entry.unreadCount++;
         var trig = triggered[conv.id];
+        // E3 — a repeated chat appears once per instance, oldest first; past ones are
+        // history. A chat that never repeated is pushed as itself, as before.
+        var cyc = (ps.conv_cycle || {{}})[conv.id] || 0;
+        var pastWhen = Array.isArray(trig.past) ? trig.past : [];
+        for (var k = 0; k <= cyc; k++) {{
+            var inst = conv;
+            if (cyc > 0) {{
+                inst = Object.assign({{}}, conv, {{
+                    _instKey: setup.convInstanceKey(conv.id, k),
+                    _past: k < cyc,
+                    _when: k < cyc ? (pastWhen[k] || {{}}) : trig
+                }});
+            }}
+            entry.conversations.push(inst);
+            if (!read[inst._instKey || conv.id]) entry.unreadCount++;
+        }}
         if (trig.triggered_day > entry.lastDay || (trig.triggered_day === entry.lastDay && trig.triggered_hour > entry.lastHour)) {{
             entry.lastDay = trig.triggered_day;
             entry.lastHour = trig.triggered_hour;
@@ -2374,8 +2818,8 @@ setup.getPhoneThreads = function(appId) {{
     var npcKeys = Object.keys(byNpc);
     for (var nk = 0; nk < npcKeys.length; nk++) {{
         byNpc[npcKeys[nk]].conversations.sort(function(a, b) {{
-            var ta = triggered[a.id] || {{}};
-            var tb = triggered[b.id] || {{}};
+            var ta = a._when || triggered[a.id] || {{}};
+            var tb = b._when || triggered[b.id] || {{}};
             if ((ta.triggered_day || 0) !== (tb.triggered_day || 0)) return (ta.triggered_day || 0) - (tb.triggered_day || 0);
             if ((ta.triggered_hour || 0) !== (tb.triggered_hour || 0)) return (ta.triggered_hour || 0) - (tb.triggered_hour || 0);
             return (ta.conv_index || 0) - (tb.conv_index || 0);
@@ -2391,6 +2835,8 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     var ps = sv.game_state.phone;
     if (!ps) return;
     roundNum = roundNum || 1;
+    // E3b — an instance closed as ignored takes no late reply (a stale button).
+    if ((ps.conv_ignored || {{}})[convId]) return;
     // Multi-round: store replies as array of {{round, choice}}
     if (!Array.isArray(ps.replies[convId])) {{
         // Backward compat: convert old int format
@@ -2402,10 +2848,16 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
     }}
     ps.replies[convId].push({{round: roundNum, choice: choiceIndex}});
     ps.read_conversations[convId] = true;
-    // Find the reply block for this round and apply effects
+    // Find the reply block for this round and apply effects. E3: convId may be an
+    // instance key ("id#n"); the blocks belong to the base chat.
+    var baseConvId = setup.convBaseId(convId);
     var convs = setup.phone_data.conversations || [];
     for (var i = 0; i < convs.length; i++) {{
-        if (convs[i].id !== convId) continue;
+        if (convs[i].id !== baseConvId) continue;
+        if (convs[i].repeat_after_days && ps.triggered_conversations[baseConvId]) {{
+            ps.triggered_conversations[baseConvId].answered_day =
+                ((sv.game_state || {{}}).time_state || {{}}).day || 1;
+        }}
         var blocks = convs[i].blocks || [];
         for (var b = 0; b < blocks.length; b++) {{
             if (blocks[b].type !== "reply") continue;
@@ -2415,25 +2867,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
             if (choiceIndex >= 0 && choiceIndex < choices.length) {{
                 var choice = choices[choiceIndex];
                 setup.pendingEffects = [];
-                var effs = choice.effects || [];
-                for (var e = 0; e < effs.length; e++) {{
-                    var eff = effs[e];
-                    if (eff.trait) {{
-                        setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
-                    }}
-                }}
-                var feffs = choice.flagEffects || [];
-                for (var f = 0; f < feffs.length; f++) {{
-                    var fe = feffs[f];
-                    // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
-                    // is honored uniformly with passage-flow flag emission.
-                    setup.applyAndNotifyFlag(
-                        fe.targetType || "player",
-                        fe.npcId || null,
-                        fe.flag,
-                        fe.op || "set"
-                    );
-                }}
+                setup.applyPhoneEffectSet(choice);
                 // doc 45 G4/G5 — quest + scheduled effects on chat reply choices
                 var qeffs = choice.questEffects || [];
                 for (var qi = 0; qi < qeffs.length; qi++) {{
@@ -2442,6 +2876,7 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
                 var seffs = choice.scheduleEffects || [];
                 for (var sj = 0; sj < seffs.length; sj++) {{ setup.scheduleEvent(seffs[sj]); }}
                 setup.showEffectNotification();
+                setup.spendPhoneTime(choice.time_cost);  // E8
             }}
             break;
         }}
@@ -2502,10 +2937,11 @@ setup.sendDailyChat = function(npcSlug, topicId) {{
     for (var e = 0; e < effs.length; e++) {{
         var eff = effs[e];
         if (eff.trait) {{
-            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", Number(eff.value || 0), eff.clamp || false, eff.cap || null);
+            setup.applyAndNotifyTrait(eff.targetType || "player", eff.npcId || null, eff.trait, eff.op || "add", setup.resolveEffectValue(eff.value), eff.clamp || false, eff.cap || null);
         }}
     }}
     setup.showEffectNotification();
+    setup.spendPhoneTime(topic.time_cost);  // E8
     setup.refreshPhoneView();
 }};
 
@@ -2517,6 +2953,7 @@ setup.openPhone = function() {{
     html += '<div class="phone-screen"><div class="phone-app-grid">';
     for (var i = 0; i < apps.length; i++) {{
         var app = apps[i];
+        if (!setup.phoneAppVisible(app)) continue;  // E8 — per-app conditions
         var iconHtml = app._icon_src
             ? '<img src="' + app._icon_src + '" class="phone-app-icon-img" alt="' + (app.label || app.id) + '">'
             : '<div class="phone-app-icon-letter">' + (app.label || app.id).charAt(0).toUpperCase() + '</div>';
@@ -2526,6 +2963,9 @@ setup.openPhone = function() {{
             var unread = 0;
             for (var t = 0; t < threads.length; t++) unread += threads[t].unreadCount;
             if (unread > 0) badge = '<span class="phone-app-badge">' + unread + '</span>';
+        }} else if (app.type === "calls") {{
+            var ringN = setup.ringingCalls(app.id).length;  // E8-calls — the ring badge
+            if (ringN > 0) badge = '<span class="phone-app-badge">' + ringN + '</span>';
         }}
         html += '<div class="phone-app-item" data-app-id="' + app.id + '" data-app-type="' + app.type + '">';
         html += '<div class="phone-app-icon-wrap">' + iconHtml + badge + '</div>';
@@ -2541,7 +2981,7 @@ setup.openPhoneApp = function(appId) {{
     var apps = (setup.phone_data || {{}}).apps || [];
     var appDef = null;
     for (var i = 0; i < apps.length; i++) {{ if (apps[i].id === appId) {{ appDef = apps[i]; break; }} }}
-    if (!appDef) return;
+    if (!appDef || !setup.phoneAppVisible(appDef)) return;  // E8 — a stale tap on a hidden app
     if (appDef.type === "chat") {{ setup._renderThreadList(appId, appDef.label); }}
     else if (appDef.type === "social_feed") {{ setup._renderSocialFeed(appId, appDef.label); }}
     else if (appDef.type === "dating") {{ setup._renderDatingApp(appId, appDef.label); }}
@@ -2550,7 +2990,8 @@ setup.openPhoneApp = function(appId) {{
     else if (appDef.type === "custom" && appDef.passage) {{ setup._renderCustom(appId, appDef.label, appDef.passage); }}
     else if (appDef.type === "fast_jobs") {{ setup._renderFastJobs(appId, appDef.label); }}
     else if (appDef.type === "bank") {{ setup._renderBank(appId, appDef.label); }}
-    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer); }}
+    else if (appDef.type === "calls") {{ setup._renderCalls(appId, appDef.label); }}
+    else if (appDef.type === "launcher") {{ setup._renderLauncher(appId, appDef.label, appDef.options, appDef.no_answer, appDef.anywhere === true); }}
     else {{ setup._renderPlaceholder(appDef); }}
 }};
 
@@ -2611,13 +3052,14 @@ setup.openChatThread = function(appId, npcSlug) {{
         var conv = thread.conversations[ci];
         var blocks = conv.blocks || [];
         // Multi-round: get replies array (backward compat: convert old int format)
-        var convReplies = ps.replies[conv.id];
+        var convKey = conv._instKey || conv.id;  // E3: per-instance replies
+        var convReplies = ps.replies[convKey];
         if (typeof convReplies === 'number') {{
             convReplies = [{{round: 1, choice: convReplies}}];
         }}
         convReplies = Array.isArray(convReplies) ? convReplies : [];
         var hasAnyReply = convReplies.length > 0;
-        setup.markConversationRead(conv.id);
+        setup.markConversationRead(convKey);
         for (var bi = 0; bi < blocks.length; bi++) {{
             var block = blocks[bi];
             var blockAfterRound = block.after_round;
@@ -2633,7 +3075,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (block.type === "message") {{
                 var cls = block.sender === "npc" ? "phone-bubble-npc" : "phone-bubble-player";
                 var pending = '';
-                if (block.sender === "npc" && setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                if (block.sender === "npc" && setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                     pending = ' phone-bubble-pending';
                 }}
                 html += '<div class="phone-bubble ' + cls + pending + '">' + setup.resolveAtRefs(block.content) + '</div>';
@@ -2652,16 +3094,23 @@ setup.openChatThread = function(appId, npcSlug) {{
                         var depReply = _getRoundReply(convReplies, blockAfterRound);
                         if (!depReply) continue;
                     }}
+                    // E3 — a past instance is history: no buttons, never pending.
+                    if (conv._past) continue;
+                    // E3b — an ignored instance is closed: one line, no buttons.
+                    if ((ps.conv_ignored || {{}})[convKey]) {{
+                        html += '<div class="phone-ignored" style="color:#888;font-size:12px;font-style:italic;text-align:right;padding:4px 14px;">No reply.</div>';
+                        break;
+                    }}
                     // Show reply buttons
                     _hasPendingReply = true;
                     var replyPending = '';
-                    if (setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
+                    if (setup._chatAnimConv === convKey && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                         replyPending = ' phone-reply-pending';
                     }}
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + conv.id + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + convKey + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + setup.phoneTimeTag(choices[ri].time_cost) + '</button>';
                     }}
                     html += '</div>';
                 }}
@@ -2706,7 +3155,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             if (ph.corruption_min != null && _corr < ph.corruption_min) {{
                 photoHtml += '<div class="phone-daily-locked">🔒 ' + setup.resolveAtRefs(ph.player_message) + '</div>';
             }} else if (npcDc.topic_days[ph.id] !== currentDayKey) {{
-                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + '</button>';
+                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + setup.phoneTimeTag(ph.time_cost) + '</button>';
             }}
         }}
         // Legacy "Say something" — per-NPC 1/day over non-photo topics.
@@ -2726,7 +3175,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             }}
             var shown = available.slice(0, 3);
             for (var sti = 0; sti < shown.length; sti++) {{
-                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + '</button>';
+                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + setup.phoneTimeTag(shown[sti].time_cost) + '</button>';
             }}
         }}
         if (photoHtml || sayHtml) {{
@@ -2803,7 +3252,7 @@ setup._renderSocialFeed = function(appId, appLabel) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var postActions = appDef.post_actions || [];
     if (postActions.length) {{
-        var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+        var _pct = ((sv.player || {{}}).core_traits || {{}});
         var _pd = ps.posted_days = ps.posted_days || {{}};
         var _dayKey = setup.getCurrentDayKey();
         html += '<div class="phone-post-composer">';
@@ -2812,12 +3261,13 @@ setup._renderSocialFeed = function(appId, appLabel) {{
             var cap = (act.daily_cap != null ? Number(act.daily_cap) : 1);
             var usedKey = appId + ':' + pa;
             var usedToday = (_pd[usedKey] && _pd[usedKey].day === _dayKey) ? _pd[usedKey].count : 0;
-            if (act.corruption_min != null && _corr < act.corruption_min) {{
+            // E8 — `corruption_min` is read against `gate_trait` (default corruption).
+            if (act.corruption_min != null && (_pct[act.gate_trait || 'corruption'] || 0) < act.corruption_min) {{
                 html += '<div class="phone-daily-locked">🔒 ' + (act.label || 'Post') + '</div>';
             }} else if (usedToday >= cap) {{
                 html += '<div class="phone-daily-locked">' + (act.label || 'Post') + ' ✓</div>';
             }} else {{
-                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + '</button>';
+                html += '<button class="phone-post-btn" data-app-id="' + appId + '" data-action-idx="' + pa + '">' + (act.label || 'Post') + setup.phoneTimeTag(act.time_cost) + '</button>';
             }}
         }}
         html += '</div>';
@@ -2863,7 +3313,8 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     var appDef = ((setup.phone_data || {{}}).apps || []).filter(function(a) {{ return a.id === appId; }})[0] || {{}};
     var act = (appDef.post_actions || [])[actionIdx];
     if (!act) return;
-    var _corr = ((sv.player || {{}}).core_traits || {{}}).corruption || 0;
+    // E8 — the gate reads `gate_trait` (default corruption), the same as the composer.
+    var _corr = ((sv.player || {{}}).core_traits || {{}})[act.gate_trait || 'corruption'] || 0;
     if (act.corruption_min != null && _corr < act.corruption_min) return;
     var _pd = ps.posted_days = ps.posted_days || {{}};
     var _dayKey = setup.getCurrentDayKey();
@@ -2879,6 +3330,7 @@ setup.sendSocialPost = function(appId, actionIdx) {{
     setup.pendingEffects = [];
     setup.applyAndNotifyTrait('player', null, trait, 'add', gain, false, null);
     setup.showEffectNotification();
+    setup.spendPhoneTime(act.time_cost);  // E8
     setup._renderSocialFeed(appId, appDef.label || '');
 }};
 
@@ -2969,12 +3421,21 @@ setup.likeProfile = function(profileId) {{
     for (var i = 0; i < profiles.length; i++) {{ if (profiles[i].id === profileId) {{ prof = profiles[i]; break; }} }}
     if (!prof) return;
 
-    // Check match condition
-    var matchCond = prof.match_condition ? prof.match_condition.conditions : null;
+    // Check match condition. The importer checks `match_condition` as a v1.0 block
+    // itself (E1); the older `{{conditions = {{...}}}}` wrapping is read too.
+    var mc = prof.match_condition || null;
+    var matchCond = mc ? (mc.conditions || (mc.items ? mc : null)) : null;
     var isMatch = !matchCond || setup.triggerConditionsSatisfied(matchCond);
 
     if (isMatch) {{
+        var _firstMatch = !ps.matches[profileId];
         ps.matches[profileId] = {{ npc: prof.npc, profile_id: profileId }};
+        // E8 — on_match ({{effects, flagEffects}}) applies once, on the first match.
+        if (_firstMatch && prof.on_match) {{
+            setup.pendingEffects = [];
+            setup.applyPhoneEffectSet(prof.on_match);
+            setup.showEffectNotification();
+        }}
         // Show match overlay briefly
         var resolvedId = setup.resolveNpcId(prof.npc);
         var npcData = (sv.npcs || {{}})[resolvedId] || {{}};
@@ -3074,7 +3535,10 @@ setup._renderFastJobs = function(appId, appLabel) {{
         var j = jobs[i];
         var cd = fj.cooldowns[j.id] || 0;
         html += '<div class="phone-job-card"><div class="phone-job-name">' + j.name + '</div>';
-        html += '<div class="phone-job-meta">$' + j.income + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
+        var _rk = (j.ranks && j.ranks.length) ? setup.fastJobRank(j) : null;
+        if (_rk && _rk.rank) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.rank.title + (_rk.next ? ' · ' + _rk.xp + '/' + _rk.next.xp + ' xp' : '') + '</div>';
+        else if (_rk && _rk.next) html += '<div class="phone-job-rank" style="font-size:12px;opacity:0.8;">' + _rk.xp + '/' + _rk.next.xp + ' xp</div>';
+        html += '<div class="phone-job-meta">$' + setup.effectValueLabel(setup.fastJobIncome(j)) + setup.phoneTimeTag(j.time_cost) + (j.time_period ? ' · ' + j.time_period : '') + (j.xp_req ? ' · needs ' + j.xp_req + ' xp' : '') + '</div>';
         if ((fj.xp || 0) < (j.xp_req || 0)) html += '<div class="phone-daily-locked">🔒 Need more XP</div>';
         else if (cd > 0) html += '<div class="phone-daily-locked">Again in ' + cd + 'd</div>';
         else html += '<button class="phone-job-btn" data-job-id="' + j.id + '">Work</button>';
@@ -3083,6 +3547,23 @@ setup._renderFastJobs = function(appId, appLabel) {{
     html += '</div></div>';
     jQuery('.phone-frame').html(html);
     setup._phoneView = 'fast_jobs'; setup._phoneApp = appId;
+}};
+// E6 — a rank per job. Her rank on a job is the last of its `ranks` whose xp she has
+// reached on that job (fast_jobs.job_xp[id], +1 per shift); its income replaces the
+// job's. A job with no ranks pays `income` and counts no job xp.
+setup.fastJobRank = function(job) {{
+    var fj = ((State.variables.game_state || {{}}).fast_jobs) || {{}};
+    var xp = ((fj.job_xp || {{}})[job.id]) || 0;
+    var ranks = job.ranks || [], cur = null, next = null;
+    for (var i = 0; i < ranks.length; i++) {{
+        if (xp >= (ranks[i].xp || 0)) cur = ranks[i];
+        else {{ next = ranks[i]; break; }}
+    }}
+    return {{ xp: xp, rank: cur, next: next }};
+}};
+setup.fastJobIncome = function(job) {{
+    var r = (job.ranks && job.ranks.length) ? setup.fastJobRank(job).rank : null;
+    return (r && r.income !== undefined) ? r.income : job.income;
 }};
 setup.doFastJob = function(jobId) {{
     var sv = State.variables;
@@ -3093,9 +3574,19 @@ setup.doFastJob = function(jobId) {{
     if ((fj.xp || 0) < (job.xp_req || 0)) return;
     if ((fj.cooldowns[jobId] || 0) > 0) return;
     setup.pendingEffects = [];
-    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', Number(job.income || 0), false, null);
+    setup.applyAndNotifyTrait('player', null, job.money_trait || 'money', 'add', setup.resolveEffectValue(setup.fastJobIncome(job)), false, null);
     setup.showEffectNotification();
     fj.xp = (fj.xp || 0) + 1;
+    if (job.ranks && job.ranks.length) {{
+        var _before = setup.fastJobRank(job).rank;
+        fj.job_xp = fj.job_xp || {{}};
+        fj.job_xp[jobId] = (fj.job_xp[jobId] || 0) + 1;
+        var _after = setup.fastJobRank(job).rank;
+        if (_after && _after !== _before && setup._notifyPhoneDelivery) {{
+            setup._notifyPhoneDelivery(['⭐ ' + job.name + ': ' + _after.title]);
+        }}
+    }}
+    setup.spendPhoneTime(job.time_cost);  // E8
     fj.cooldowns[jobId] = Number(job.cooldown_days || 0);
     setup._renderFastJobs(setup._phoneApp, '');
 }};
@@ -3141,7 +3632,7 @@ setup.bankTransfer = function(dir) {{
 // returns her to its own home. That is what keeps a phone-launched scene honest.
 //
 // PURE RENDER. This writes nothing. Everything moves inside the canvas, after the jump.
-setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
+setup._renderLauncher = function(appId, appLabel, options, noAnswer, anywhere) {{
     var sv = State.variables;
     var here = String((sv.player || {{}}).current_location || '');
     var html = '<div class="phone-header"><span class="phone-back" data-target="home">&larr;</span><span class="phone-title">' + (appLabel || '') + '</span><span class="phone-close">&times;</span></div>';
@@ -3158,7 +3649,10 @@ setup._renderLauncher = function(appId, appLabel, options, noAnswer) {{
         var text = String(o.text || '');
         if (!text || !o.passage) continue;   // resolved nowhere — never link nowhere
         var why = '';
-        if (!placed || String(o.locationId) !== here) {{
+        // E8 — `anywhere = true` on the app lifts the room lock (never the mid-scene
+        // one): the option plays from any room, and the scene returns her to its own
+        // home, which is a real move — that place's entry costs apply on arrival.
+        if (!placed || (!anywhere && String(o.locationId) !== here)) {{
             // WRONG PLACE. The engine writes this one, naming the room, because the
             // author cannot: one locked_text cannot also mean "not yet" and "not now".
             why = o.locationName ? ('Not here \\u2014 ' + o.locationName + '.') : 'Not here.';
@@ -3223,6 +3717,8 @@ setup.refreshPhoneView = function() {{
         setup.openChatThread(setup._phoneApp, setup._phoneNpc);
     }} else if (setup._phoneView === 'threadList' && setup._phoneApp) {{
         setup._renderThreadList(setup._phoneApp, '');
+    }} else if (setup._phoneView === 'calls' && setup._phoneApp) {{
+        setup._renderCalls(setup._phoneApp, '');
     }} else {{ setup.openPhone(); }}
 }};
 
@@ -3291,7 +3787,20 @@ jQuery(document).on('click', '.phone-gallery-link', function(e) {
 jQuery(document).on('click', '.phone-launch', function(e) {
     e.preventDefault();
     var link = jQuery(this).data('link');
-    if (link) { setup.closePhone(); Engine.play(String(link)); }
+    if (link) { if (setup.markReturnPlace) setup.markReturnPlace(); setup.closePhone(); Engine.play(String(link)); }
+});
+// E8-calls — Answer navigates (the navigation commits, like a launcher); Decline
+// navigates nowhere, so it commits.
+jQuery(document).on('click', '.phone-call-answer', function(e) {
+    e.preventDefault();
+    setup.answerCall(String(jQuery(this).data('call-id')));
+});
+jQuery(document).on('click', '.phone-call-decline', function(e) {
+    e.preventDefault();
+    setup.declineCall(String(jQuery(this).data('call-id')));
+    setup.updatePhoneBadge();
+    setup.refreshPhoneView();
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-job-btn', function(e) {
     e.preventDefault();
@@ -4271,6 +4780,10 @@ setup.describeUnmetConditions = function(conditions) {{
             if (fsat) continue;
             var disp = cap(fkey.replace(/_/g, ' '));
             parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }} else if (it.type === 'weekday') {{
+            // E4 — the day is a fact she can plan around, so it is named.
+            if (setup.triggerConditionsSatisfied({{ version: "1.0", items: [it] }})) continue;
+            parts.push(setup.weekdayPhrase(it.weekdays));
         }}
     }}
     return parts.join(', ');
@@ -4319,6 +4832,55 @@ setup.describeUnmetTraits = function(conditions) {{
 setup.requirementSuffix = function(conditions) {{
     var why = setup.describeUnmetTraits(conditions);
     return why ? (' (' + why + ')') : '';
+}};
+
+// ===== E4 — the clock as minutes, flag times, weekday =====
+// One count of minutes on the scale of set_day * 1440, so a flag recorded before
+// set_minute existed reads as set at the start of its day and an old save never strands.
+setup.gameMinuteNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return (ts.day || 1) * 1440 + (ts.current_hour || 0) * 60 + (ts.current_minute || 0);
+}};
+setup.flagSetMinute = function(meta) {{
+    if (!meta) return null;
+    if (typeof meta.set_minute === 'number') return meta.set_minute;
+    if (typeof meta.set_day === 'number') return meta.set_day * 1440;
+    return null;
+}};
+// The meta a flag write leaves: the day (days_since_flag) and the minute
+// (hours_since_flag). applyFlagEffect and the two direct writers use it.
+setup.flagMetaNow = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return {{ set_day: ts.day || 1, set_minute: setup.gameMinuteNow() }};
+}};
+// Today as 0 = Monday … 6 = Sunday, the index NPC schedule rows use.
+setup.todayWeekdayIndex = function() {{
+    var ts = ((State.variables || {{}}).game_state || {{}}).time_state || {{}};
+    return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(ts.current_day);
+}};
+setup.weekdayPhrase = function(weekdays) {{
+    var NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var names = (weekdays || []).map(function(d) {{ return NAMES[d] || String(d); }});
+    return "Only on " + names.join(", ");
+}};
+// Hours since the condition item's flag was set, or null when it is unset or has no
+// meta (fails closed, as days_since_flag does).
+setup.hoursSinceFlag = function(item) {{
+    var sv = State.variables || {{}};
+    var key = String((item && item.flag_key) || '');
+    if (!key) return null;
+    var flags = sv.flags, metas = sv.flags_meta;
+    if (item.subject === 'npc') {{
+        var npcId = setup.resolveNpcId(item.npc_id || item.character_id || '');
+        var npc = npcId ? (sv.npcs || {{}})[npcId] : null;
+        if (!npc) return null;
+        flags = npc.flags;
+        metas = npc.flags_meta;
+    }}
+    if (!(flags || {{}})[key]) return null;
+    var setMin = setup.flagSetMinute((metas || {{}})[key]);
+    if (setMin === null) return null;
+    return (setup.gameMinuteNow() - setMin) / 60;
 }};
 
 // ===== Trigger Conditions Evaluator =====
@@ -4495,6 +5057,21 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                     satisfied = compare(dsOp, daysSince, requiredDays);
                 }}
                 results.push(satisfied);
+                continue;
+            }}
+
+            // E4 — weekday: today is one of `weekdays` (0 = Monday … 6 = Sunday).
+            if (type === 'weekday') {{
+                var wds = Array.isArray(it.weekdays) ? it.weekdays : [];
+                results.push(wds.length > 0 && setup._weekdayMatches(wds, setup.todayWeekdayIndex()));
+                continue;
+            }}
+
+            // E4 — hours_since_flag: hours since the flag was set, compared like
+            // days_since_flag. Fails closed when the flag is unset or has no meta.
+            if (type === 'hours_since_flag') {{
+                var hsf = setup.hoursSinceFlag(it);
+                results.push(hsf === null ? false : compare(it.operator, hsf, it.value));
                 continue;
             }}
 
@@ -4788,6 +5365,9 @@ setup.decideCanvasStep = function(canvasId, op, days, closedFlag) {{
             if (closedFlag) {{
                 State.variables.flags = State.variables.flags || {{}};
                 State.variables.flags[closedFlag] = true;
+                // E4 — a flag set outside applyFlagEffect gets its time too.
+                State.variables.flags_meta = State.variables.flags_meta || {{}};
+                State.variables.flags_meta[closedFlag] = setup.flagMetaNow();
             }}
         }} else if (op === "retry") {{
             rec.retryDay = setup._canvasToday() + Math.max(1, Number(days) || 1);
@@ -5064,6 +5644,82 @@ setup.removeItem = function(itemId, quantity) {{
 setup.getItemCount = function(itemId) {{
     var inv = (State.variables.game_state || {{}}).inventory || {{}};
     return inv[itemId] || 0;
+}};
+
+// E10 — an item with a price is bought with its money_trait (default money), when its
+// conditions hold and the stack has room. itemBuyBlock says why not ('' = she can).
+setup.itemBuyBlock = function(itemId) {{
+    var it = setup.items_map[itemId];
+    if (!it || !(Number(it.price) > 0)) return 'Not for sale.';
+    if (it.conditions && it.conditions.items && it.conditions.items.length &&
+        !setup.triggerConditionsSatisfied(it.conditions)) {{
+        var why = setup.describeUnmetConditions(it.conditions);
+        return why ? ('Needs ' + why + '.') : 'Not yet.';
+    }}
+    var mt = it.money_trait || 'money';
+    var have = Number(((State.variables.player || {{}}).core_traits || {{}})[mt] || 0);
+    if (have < Number(it.price)) return 'Not enough ' + setup.traitLabel(mt) + '.';
+    if (setup.getItemCount(itemId) >= (it.max_stack || 99)) return 'You cannot carry more.';
+    return '';
+}};
+// E10 — [[shops]]: a room's own section. A stock limit counts sales in
+// $game_state.shops[shop][item]; no limit = it never runs out.
+setup.general_shops = {json.dumps({sh['id']: sh for sh in self.shops})};
+setup._shopStock = function(shopId, itemId) {{
+    var sh = setup.general_shops[shopId];
+    return (sh && (sh.stock || []).filter(function(s) {{ return s.item === itemId; }})[0]) || null;
+}};
+setup.shopLeft = function(shopId, itemId) {{
+    var st = setup._shopStock(shopId, itemId);
+    if (!st) return 0;
+    if (!st.limit) return Infinity;
+    var sold = (((State.variables.game_state || {{}}).shops || {{}})[shopId] || {{}})[itemId] || 0;
+    return Math.max(0, st.limit - sold);
+}};
+setup.buyFromShop = function(shopId, itemId) {{
+    if (setup.shopLeft(shopId, itemId) <= 0) return false;
+    var it = setup.items_map[itemId];
+    if (!setup.buyInventoryItem(itemId)) return false;
+    if (setup._shopStock(shopId, itemId).limit) {{
+        var gs = State.variables.game_state;
+        gs.shops = gs.shops || {{}};
+        gs.shops[shopId] = gs.shops[shopId] || {{}};
+        gs.shops[shopId][itemId] = (gs.shops[shopId][itemId] || 0) + 1;
+    }}
+    setup.pendingEffects = [{{ "type": "trait", "trait": it.money_trait || 'money', "delta": -Number(it.price) }}];
+    setup.showEffectNotification();
+    return true;
+}};
+setup.renderGeneralShop = function(shopId) {{
+    var sh = setup.general_shops[shopId];
+    if (!sh) return '';
+    var html = '<div class="general-shop"><h3>' + sh.name + '</h3>';
+    (sh.stock || []).forEach(function(st) {{
+        var it = setup.items_map[st.item];
+        if (!it) return;
+        var left = setup.shopLeft(shopId, st.item);
+        var why = left <= 0 ? 'Sold out.' : setup.itemBuyBlock(st.item);
+        var label = it.name + ' \u2014 ' + it.price + ' ' + setup.traitLabel(it.money_trait || 'money') +
+            (st.limit && left > 0 ? ' (' + left + ' left)' : '');
+        if (why) html += '<div class="general-shop-row general-shop-locked">' + label + ' \u2014 <em>' + why + '</em></div>';
+        else html += '<div class="general-shop-row"><a class="general-shop-buy" data-shop="' + shopId + '" data-item="' + st.item + '">' + label + '</a></div>';
+    }});
+    return html + '</div>';
+}};
+// The room re-renders after a purchase (a Location_ passage is safe to re-play:
+// entry costs, auto-fire and the random roll are guarded), so the sidebar's
+// numbers follow, and the navigation commits the moment.
+jQuery(document).on('click', '.general-shop-buy', function(e) {{
+    e.preventDefault();
+    if (setup.buyFromShop(String(jQuery(this).data('shop')), String(jQuery(this).data('item')))) {{
+        Engine.play(State.passage);
+    }}
+}});
+setup.buyInventoryItem = function(itemId) {{
+    if (setup.itemBuyBlock(itemId)) return false;
+    var it = setup.items_map[itemId];
+    State.variables.player.core_traits[it.money_trait || 'money'] -= Number(it.price);
+    return setup.addItem(itemId, 1);
 }};
 
 // Check if a canvas has never been completed (for highlighting new content)
@@ -5490,6 +6146,45 @@ setup.getNpcsPresentAtLocation = function(locationId) {{
     return result;
 }};
 
+// E2 — the chance a random canvas rolls with. `seenWeight` is emitted only when the
+// author set trigger.seen_weight; once the canvas has fired (trigger_history total > 0)
+// it multiplies `chance`, so an event she has already seen comes up less often. Both
+// random rollers (selectCanvasByPriority, checkRandomEncounters) read it here.
+setup.canvasRollChance = function(canvas) {{
+    var chance = (canvas && canvas.chance) || 0;
+    if (canvas && canvas.seenWeight !== undefined) {{
+        var hist = ((State.variables.game_state || {{}}).trigger_history || {{}})[String(canvas.id)];
+        if (hist && (hist.total || 0) > 0) chance *= canvas.seenWeight;
+    }}
+    return chance;
+}};
+
+// E2 — a block_pool with memory = "seen": pick entry 0..n-1 by weight, an entry already
+// shown weighing `seenWeight` (default 0.1) against 1 for a fresh one, and record the
+// pick in $game_state.pool_seen[key] (index -> times shown). Once every entry has been
+// seen the weights are equal again. The map is in the skeleton (and so the backfill)
+// for any game that has such a pool; the guard covers a save the backfill missed.
+setup.pickRememberedPoolEntry = function(key, n, seenWeight) {{
+    var gs = State.variables.game_state = State.variables.game_state || {{}};
+    if (!gs.pool_seen || typeof gs.pool_seen !== 'object') gs.pool_seen = {{}};
+    var seen = gs.pool_seen[key];
+    if (!seen || typeof seen !== 'object') seen = gs.pool_seen[key] = {{}};
+    var w = (typeof seenWeight === 'number') ? seenWeight : 0.1;
+    var weights = [], total = 0;
+    for (var i = 0; i < n; i++) {{
+        var wi = seen[i] ? w : 1;
+        weights.push(wi);
+        total += wi;
+    }}
+    var r = Math.random() * total, pick = n - 1;
+    for (var j = 0; j < n; j++) {{
+        if (r < weights[j]) {{ pick = j; break; }}
+        r -= weights[j];
+    }}
+    seen[pick] = (seen[pick] || 0) + 1;
+    return pick;
+}};
+
 // Select appropriate canvas per activity name with tiered progression logic
 // Returns array of selected canvases (one per unique activity name)
 // Logic:
@@ -5504,7 +6199,7 @@ setup.selectCanvasByPriority = function(canvasList) {{
         var filteredList = [];
         for (var f = 0; f < canvasList.length; f++) {{
             if ((canvasList[f].triggerMode || "manual") === "random") {{
-                var chance = canvasList[f].chance || 0;
+                var chance = setup.canvasRollChance(canvasList[f]);
                 if (Math.random() < chance) {{
                     filteredList.push(canvasList[f]);
                 }}
@@ -5974,7 +6669,7 @@ setup.checkRandomEncounters = function(locationId) {{
         // Roll probability for each candidate
         for (var m = 0; m < shuffled.length; m++) {{
             var canvas = shuffled[m];
-            var chance = canvas.chance || 0;
+            var chance = setup.canvasRollChance(canvas);
             if (Math.random() < chance) {{
                 // Hit — mark as triggered, set cooldown, and return passage name
                 setup.markCanvasTriggered(canvas.id);
@@ -6285,7 +6980,7 @@ window.advanceDay = function() {{
                     dtTe.npcId || null,
                     dtTe.trait,
                     dtTe.op || 'add',
-                    Number(dtTe.value || 0),
+                    setup.resolveEffectValue(dtTe.value),
                     (dtTe.clamp === undefined || dtTe.clamp === null) ? false : dtTe.clamp,
                     (dtTe.cap === undefined) ? null : dtTe.cap
                 );
@@ -6493,7 +7188,6 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
     }}
 
     var key = String(flag);
-    var currentDay = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 1;
 
     var flagsObj = null;
     var metaObj = null;
@@ -6523,13 +7217,13 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
       var newVal = !flagsObj[key];
       flagsObj[key] = newVal;
       if (newVal === true) {{
-        metaObj[key] = {{ set_day: currentDay }};
+        metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
       }}
       return;
     }}
     // Default: 'set' (and any unrecognized op falls through to set for safety).
     flagsObj[key] = true;
-    metaObj[key] = {{ set_day: currentDay }};
+    metaObj[key] = setup.flagMetaNow();  // E4: set_day + set_minute
   }} catch (e) {{
     // ignore
   }}
@@ -6539,6 +7233,43 @@ window.applyFlagEffect = function(targetType, npcId, flag, op) {{
 
 // Pending effects to show
 setup.pendingEffects = [];
+
+// E5 — one resolver for an effect's `value` at runtime, wherever the engine reads it
+// outside a passage (phone replies and on_ignore, daily chat topics, the daily tick,
+// fast-job income). A number passes through; {{type: "random", min, max}} rolls an
+// inclusive integer; {{type: "trait", trait, mult, add, min, max}} reads her player
+// trait: trait * mult (default 1) + add (default 0), rounded to a whole number, then
+// held inside min / max when given. Anything else is 0, never NaN.
+setup.resolveEffectValue = function(v) {{
+  if (v === null || v === undefined || v === '') return 0;
+  if (typeof v === 'object') {{
+    if (v.type === 'random') {{
+      var lo = Number(v.min) || 0;
+      var hi = (v.max === undefined || v.max === null) ? lo : Number(v.max);
+      return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+    }}
+    if (v.type === 'trait') {{
+      var ct = ((State.variables.player || {{}}).core_traits) || {{}};
+      var mult = (v.mult === undefined || v.mult === null) ? 1 : Number(v.mult);
+      var x = Math.round((Number(ct[v.trait]) || 0) * mult + (Number(v.add) || 0));
+      if (v.min !== undefined && v.min !== null) x = Math.max(x, Number(v.min));
+      if (v.max !== undefined && v.max !== null) x = Math.min(x, Number(v.max));
+      return x;
+    }}
+    return 0;
+  }}
+  var n = Number(v);
+  return isNaN(n) ? 0 : n;
+}};
+// What the player reads for a value before it is applied (a job's pay on the job board):
+// a range reads "8–14", a stat-based value reads what it would pay right now.
+setup.effectValueLabel = function(v) {{
+  if (v && typeof v === 'object' && v.type === 'random') {{
+    var hi = (v.max === undefined || v.max === null) ? v.min : v.max;
+    return (Number(v.min) || 0) + '–' + (Number(hi) || 0);
+  }}
+  return String(setup.resolveEffectValue(v));
+}};
 
 // Get current trait value helper
 setup.getTraitValue = function(targetType, npcId, trait) {{
@@ -6695,6 +7426,8 @@ setup.showEffectNotification = function() {{
       lines.push('🔓 ' + flagDisplay);
     }} else if (eff.type === 'wardrobe') {{
       lines.push('👗 New item: ' + eff.name);
+    }} else if (eff.type === 'wardrobe_removed') {{
+      lines.push('👗 Gone: ' + eff.name);
     }} else if (eff.type === 'quest') {{
       lines.push('📜 ' + (eff.op === 'complete' ? 'Quest complete' : eff.op === 'cancel' ? 'Quest dropped' : 'Quest updated'));
     }} else if (eff.type === 'gated_action') {{
@@ -8135,6 +8868,33 @@ setup.getNextActivity = function(npcId) {{
                 }}
                 // daysRemaining is 0 - condition effectively met, fall through
             }}
+
+            // E4 — weekday and hours_since_flag are waits on the clock, reported as one.
+            // An hours wait on a flag not set yet is a flag hint, as for days above.
+            for (var tg = 0; tg < items.length; tg++) {{
+                var tgIt = items[tg];
+                if (tgIt.type !== 'weekday' && tgIt.type !== 'hours_since_flag') continue;
+                if (setup.checkSingleCondition(tgIt)) continue;
+                if (tgIt.type === 'hours_since_flag' && setup.hoursSinceFlag(tgIt) === null) {{
+                    return {{
+                        activity: activity,
+                        isLocked: false,
+                        conditionsNotMet: true,
+                        flagConditionsNotMet: true,
+                        flagHint: setup.getBestFlagHint([{{
+                            type: 'flag', subject: 'player',
+                            flag_key: tgIt.flag_key, operator: 'is_true'
+                        }}])
+                    }};
+                }}
+                return {{
+                    activity: activity,
+                    isLocked: false,
+                    conditionsNotMet: true,
+                    timeConditionsNotMet: true,
+                    timeCondition: tgIt
+                }};
+            }}
         }}
 
         // Check node-level conditions (for linked_canvas_node targeting)
@@ -8213,6 +8973,11 @@ setup.checkTraitRequirement = function(req) {{
 // Check a single condition item (trait or flag)
 setup.checkSingleCondition = function(item) {{
     var sv = State.variables || {{}};
+
+    // E4 — one implementation of each, the main evaluator's.
+    if (item && (item.type === 'weekday' || item.type === 'hours_since_flag')) {{
+        return setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }});
+    }}
 
     if (item.type === 'flag') {{
         var flags = sv.flags || {{}};
@@ -8347,7 +9112,7 @@ setup.resolveUnlockChain = function(flagKey, flagUnlockMap, visited, depth) {{
     for (var i = 0; i < items.length; i++) {{
         var item = items[i];
         var isFlagType = (item.type === 'flag');
-        var isDaysSinceFlag = (item.type === 'days_since_flag');
+        var isDaysSinceFlag = (item.type === 'days_since_flag' || item.type === 'hours_since_flag');
 
         // Handle flag and days_since_flag conditions
         if ((isFlagType || isDaysSinceFlag) && !setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }})) {{
@@ -8548,6 +9313,20 @@ setup.formatCanvasConditions = function(conditions) {{
                 parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
             }}
         }}
+        else if (item.type === "weekday") {{
+            parts.push(setup.weekdayPhrase(item.weekdays));
+        }}
+        else if (item.type === "hours_since_flag") {{
+            var hsNow = setup.hoursSinceFlag(item);
+            var hsOp = item.operator || "gte";
+            var hsLeft = (hsNow === null) ? null : Math.ceil(Number(item.value || 0) - hsNow);
+            if ((hsOp === "gte" || hsOp === "gt") && hsLeft !== null && hsLeft > 0) {{
+                parts.push(hsLeft === 1 ? "Wait 1 more hour" : "Wait " + hsLeft + " more hours");
+            }} else {{
+                var hsFlag = String(item.flag_key || "").replace(/_/g, " ");
+                parts.push("Hours since " + hsFlag + " " + hsOp + " " + item.value);
+            }}
+        }}
         else if (item.type === "time_of_day") {{
             var todStart = item.start_time || "00:00";
             var todEnd = item.end_time || "";
@@ -8650,6 +9429,9 @@ setup.getSidebarHint = function() {{
         if (next.traitConditionsNotMet) return setup.formatCanvasConditions(next.canvasConditions);
         if (next.daysConditionsNotMet) {{
             return next.daysRemaining === 1 ? "Come back tomorrow" : "Wait " + next.daysRemaining + " more days";
+        }}
+        if (next.timeConditionsNotMet) {{
+            return setup.formatCanvasConditions({{ version: '1.0', items: [next.timeCondition] }});
         }}
         if (!next.conditionsNotMet) return setup.formatActivityHint(next.activity);
     }}
@@ -10355,13 +11137,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug_ec = (location.properties or {}).get("slug", "")
                     wardrobe_link_ec = ""
-                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug_ec and loc_slug_ec in self.wardrobe_location_slugs:
                         wardrobe_link_ec = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
                     shop_link_ec = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug_ec == self.shop_location_slug:
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link_ec += self._general_shops_html(loc_slug_ec)
 
                     content += f""":: {self._location_passage_name(location)}
 <<if {entry_guard}>>\
@@ -10390,6 +11173,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
                         )
+                    if self.clothing_enabled and self.wardrobe_change_on_refusal and has_entry_conditions:
+                        # E7b — the unmet part is about her clothes: offer the wardrobe, and
+                        # come back here (WardrobePage's Back re-renders this passage).
+                        blocked_html += (
+                            f'\n<<if setup.refusalOffersChange({entry_cond_json})>>'
+                            f'<<link "Change clothes" "WardrobePage">>'
+                            f'<<set $last_game_passage to "{self._location_passage_name(location)}">><</link>><br><</if>>'
+                        )
                     if loc_hours:
                         closed_text = (location.properties or {}).get('closed_text', '')
                         closed_html = (
@@ -10414,13 +11205,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # Check if this location has the wardrobe
                     loc_slug = (location.properties or {}).get("slug", "")
                     wardrobe_link = ""
-                    if self.clothing_enabled and loc_slug and loc_slug == self.wardrobe_location_slug:
+                    if self.clothing_enabled and loc_slug and loc_slug in self.wardrobe_location_slugs:
                         wardrobe_link = "[[Change Clothes->WardrobePage]]<br>\n"
 
                     # Check if this location has the shop
                     shop_link = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug == self.shop_location_slug:
                         shop_link = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link += self._general_shops_html(loc_slug)
 
                     content += f""":: {self._location_passage_name(location)}
 <<nobr>>
@@ -11378,7 +12170,12 @@ setup.castTraitRows = function (slug, npc) {
             "  sv.flags = sv.flags || {};\n"
             "  for (var i = 0; i < seen.length; i++) {\n"
             "    var key = 'cheat_' + seen[i];\n"
-            "    if (!sv.flags[key]) sv.flags[key] = true;\n"
+            "    if (!sv.flags[key]) {\n"
+            "      sv.flags[key] = true;\n"
+            "      // E4: a flag set outside applyFlagEffect gets its time too.\n"
+            "      sv.flags_meta = sv.flags_meta || {};\n"
+            "      sv.flags_meta[key] = setup.flagMetaNow();\n"
+            "    }\n"
             "  }\n"
             "};\n"
             "\n"
@@ -12814,6 +13611,11 @@ setup.castTraitRows = function (slug, npc) {
                     location_canvas_list[-1]["retryAfterDays"] = int(
                         (trigger.metadata or {}).get("retry_after_days") or 1
                     )
+                # E2 — seen-weighting of a random canvas. Added ONLY when set, so a game
+                # that authors none emits a byte-identical payload.
+                _seen_weight = (trigger.metadata or {}).get("seen_weight") if trigger else None
+                if _seen_weight is not None:
+                    location_canvas_list[-1]["seenWeight"] = float(_seen_weight)
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name
@@ -12981,7 +13783,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in choice_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -12995,7 +13797,7 @@ setup.castTraitRows = function (slug, npc) {
                     for effect in config_effects:
                         trait = effect.get("trait")
                         value = effect.get("value", 0)
-                        if trait and value > 0:
+                        if trait and not _is_stat_value(value) and value > 0:
                             effect_entry = {"trait": trait, "value": value}
                             # Include npcId if this is an NPC-targeted effect
                             if effect.get("targetType") == "npc" and effect.get("npcId"):
@@ -13041,7 +13843,7 @@ setup.castTraitRows = function (slug, npc) {
                         "effects": [
                             {"trait": e["trait"], "value": e["value"],
                              **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                            for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                            for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                         ],
                         "conditions": None
                     })
@@ -13055,7 +13857,7 @@ setup.castTraitRows = function (slug, npc) {
                             "effects": [
                                 {"trait": e["trait"], "value": e["value"],
                                  **({"npc_id": e["npcId"]} if e.get("targetType") == "npc" and e.get("npcId") else {})}
-                                for e in raw_effects if e.get("trait") and e.get("value", 0) > 0
+                                for e in raw_effects if e.get("trait") and not _is_stat_value(e.get("value")) and e.get("value", 0) > 0
                             ],
                             "conditions": conditions
                         })
@@ -13197,7 +13999,9 @@ setup.castTraitRows = function (slug, npc) {
                         pass  # canvas_npc_map is canvas_id → name, not slug → name
                     # Use npc slug directly — formatFlagHint resolves at runtime
                     npc_display = conv_npc.replace("npc_", "").replace("_", " ").title()
-                for block in conv.get("blocks", []):
+                # E3b — an on_ignore effect set is a setter too, read like a choice.
+                _ignore_sets = [conv["on_ignore"]] if isinstance(conv.get("on_ignore"), dict) else []
+                for block in conv.get("blocks", []) + [{"type": "reply", "choices": _ignore_sets}]:
                     if block.get("type") != "reply":
                         continue
                     for choice in block.get("choices", []):
@@ -13213,6 +14017,27 @@ setup.castTraitRows = function (slug, npc) {
                                     "npc_name": npc_display or "player",
                                     "is_phone": True,
                                 }
+            # E8 — a dating profile's on_match sets flags too, and so does a call's
+            # on_decline / on_missed (E8-calls).
+            _setter_sets = [(p.get("id", ""), p.get("npc") or "", p.get("on_match"))
+                            for p in phone_settings.get("profiles", [])]
+            for _cl in (phone_settings.get("calls") or []):
+                _setter_sets += [(_cl.get("id", ""), _cl.get("caller") or "", _cl.get(k))
+                                 for k in ("on_decline", "on_missed")]
+            for _sid, _snpc, _set in _setter_sets:
+                prof = {"id": _sid, "npc": _snpc}
+                for fe in ((_set or {}).get("flagEffects") or []):
+                    flag_key = fe.get("flag")
+                    if flag_key and flag_key not in flag_unlock_map:
+                        flag_unlock_map[flag_key] = {
+                            "canvas_name": prof.get("id", ""),
+                            "canvas_id": None,
+                            "location": None,
+                            "schedule": None,
+                            "canvas_conditions": None,
+                            "npc_name": (prof.get("npc") or "").replace("npc_", "").replace("_", " ").title() or "player",
+                            "is_phone": True,
+                        }
 
         # Also register flags the ENGINE sets (not any canvas): the rent
         # eviction_flag (set when the weekly payment is missed past grace) and any
@@ -13615,6 +14440,69 @@ setup.carryRent = function (due, paid) {
             if meta.get("consume_on") == "exit" and not getattr(trig, "is_repeatable", True):
                 return True
         return False
+
+    def _wardrobe_location_ids(self) -> list:
+        """E7b — the location ids ($player.current_location's form) of the wardrobe rooms."""
+        slugs = self.wardrobe_location_slugs
+        return [
+            str(loc.id) for loc in self.locations
+            if (getattr(loc, "properties", None) or {}).get("slug") in slugs
+        ]
+
+    def _general_shops_html(self, loc_slug) -> str:
+        """E10 — one section per [[shops]] entry at this room ("" when it has none)."""
+        return "".join(
+            f'<<= setup.renderGeneralShop({json.dumps(sh["id"])})>>\n'
+            for sh in self.shops if loc_slug and sh.get("location") == loc_slug
+        )
+
+    def _has_return_exit(self) -> bool:
+        """E8b — does any included canvas end on a `destinationType = "return"` exit?
+
+        Gates the `return_place` default and its :passagestart clear, so a game without
+        one keeps a byte-identical :: Start and stateDefaults.
+        """
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                eb = getattr(node, "exit_block", None) or {}
+                if eb.get("type") == "location" and (eb.get("config") or {}).get("destinationType") == "return":
+                    return True
+        return False
+
+    def _has_pool_memory(self) -> bool:
+        """E2 — does any included canvas carry a block_pool with `memory = "seen"`?
+
+        Gates the `pool_seen` default, so a game without one keeps a byte-identical
+        :: Start and stateDefaults.
+        """
+        def walk(x):
+            if isinstance(x, dict):
+                if x.get("type") == "block_pool" and (x.get("props") or {}).get("memory") == "seen":
+                    return True
+                return any(walk(v) for v in x.values())
+            if isinstance(x, list):
+                return any(walk(v) for v in x)
+            return False
+
+        for canvas in (self.story_canvases or []):
+            for node in self._get_canvas_nodes_ordered(canvas):
+                if walk(getattr(node, "node_data", None) or {}):
+                    return True
+        return False
+
+    def _block_pool_key(self, props: dict, pool_blocks: list) -> str:
+        """E2 — the `pool_seen` key of a remembering block_pool.
+
+        `props.id` when the author gave one (stable across edits to the entries);
+        otherwise a hash of the entries, like _media_pool_key's `files` form, so
+        editing the pool's text starts its memory afresh. Two nodes with the same pool
+        share one memory, as two nodes with the same media pool share one counter.
+        """
+        pid = props.get("id")
+        if isinstance(pid, str) and pid.strip():
+            return re.sub(r'[^A-Za-z0-9_]', '_', pid.strip())[:48]
+        raw = json.dumps(pool_blocks, sort_keys=True, ensure_ascii=False)
+        return "pool_" + hashlib.md5(raw.encode("utf-8")).hexdigest()[:10]
 
     def _canvas_entry_passages(self) -> dict:
         """slug -> the passage a canvas is ENTERED at (its first ordered node).
@@ -14888,12 +15776,9 @@ setup.carryRent = function (due, paid) {
                                     passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}", "{fop}");<</script>>'
                             if self.clothing_enabled and lb_wardrobe_effects and isinstance(lb_wardrobe_effects, list):
                                 for we in lb_wardrobe_effects:
-                                    w_action = we.get('action', 'add')
-                                    w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                                    if w_action == 'add' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>'
-                                    elif w_action == 'equip' and w_item_id:
-                                        passage_body += f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>'
+                                    w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                                    if w_js:
+                                        passage_body += f'<<script>>{w_js}<</script>>'
                             # doc 45 G4/G5 — duplicate quest + scheduled effects on the loop-back choice
                             if lb_quest_effects and isinstance(lb_quest_effects, list):
                                 for qe in lb_quest_effects:
@@ -15124,6 +16009,11 @@ setup.carryRent = function (due, paid) {
                     f"{flag_effects}\n{wardrobe_effects_code}\n"
                 )
                 exit_link = f"[[{continue_text}->{next_passage}]]\n"
+                if (getattr(node, 'exit_block', None) or {}).get('config', {}).get('destinationType') == 'return':
+                    # E8b — back to where she was: resolved when the link renders (after
+                    # this node's time progression), falling back to the home.
+                    _ret_text = str(continue_text).replace('"', '\\"')
+                    exit_link = f'<<link "{_ret_text}" `setup.returnPassage("{next_passage}")`>><</link>>\n'
 
                 # Cascade-aware exit routing for the single-Continue (location)
                 # exit — mirror of the choices-branch splice (~line 11971). When
@@ -15353,8 +16243,11 @@ setup.carryRent = function (due, paid) {
                 destination_type = config.get('destinationType', 'trigger')
                 BROKEN_EXIT = "_BrokenExitFallback"
 
-                if destination_type == 'trigger':
-                    # Return to trigger location (default behavior)
+                if destination_type in ('trigger', 'return'):
+                    # Return to trigger location (default behavior). E8b — `return` is
+                    # the place she was in when the scene started, resolved at runtime
+                    # by the location branch of the passage builder; the home is its
+                    # fallback, so every other reader of this value sees the home.
                     next_passage = return_target
                 elif destination_type == 'specific':
                     # Go to specific location (if locationId is provided)
@@ -15545,14 +16438,9 @@ setup.carryRent = function (due, paid) {
 
             code_parts = []
             for we in wardrobe_effects:
-                action = we.get('action', 'add')
-                item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if not item_id:
-                    continue
-                if action == 'add':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}");')
-                elif action == 'equip':
-                    code_parts.append(f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    code_parts.append(w_js)
 
             if code_parts:
                 return "<<script>>setup.pendingEffects = setup.pendingEffects || [];" + "".join(code_parts) + "setup.showEffectNotification();<</script>>"
@@ -15601,13 +16489,21 @@ setup.carryRent = function (due, paid) {
         if isinstance(val, (int, float)):
             return str(float(val))
 
+        # E5 — a value computed from her stats at the moment it applies. Emitted as a
+        # call to setup.resolveEffectValue with the shape as JSON (keys checked at
+        # import by _validate_effect_value_shape).
+        if isinstance(val, dict) and val.get("type") == "trait":
+            if not isinstance(val.get("trait"), str) or not val.get("trait"):
+                raise ValueError(f"Stat-based effect value needs a `trait`. Got: {val!r}")
+            return f"setup.resolveEffectValue({json.dumps(val, sort_keys=True)})"
+
         # Random-range dict — new shape.
         if isinstance(val, dict):
             vtype = val.get("type")
             if vtype != "random":
                 raise ValueError(
                     f"Effect value dict has unknown type {vtype!r}; "
-                    f"only 'random' is supported. Got: {val!r}"
+                    f"only 'random' and 'trait' are supported. Got: {val!r}"
                 )
             try:
                 mn = int(val["min"])
@@ -15698,6 +16594,21 @@ setup.carryRent = function (due, paid) {
                 ) from e
         return "".join(out)
 
+    @staticmethod
+    def _wardrobe_effect_js(action, item_id) -> str:
+        """The JS one wardrobe effect runs, shared by all three emitters (the choice path,
+        the loop-back link beat, a node exit's config). "" for an unknown action or no
+        item (the importer rejects both). E7a added `unequip` and `remove`."""
+        item_id = str(item_id or '').replace('"', '\\"')
+        if not item_id:
+            return ""
+        return {
+            'add': f'setup.addToWardrobe("{item_id}");',
+            'equip': f'setup.addToWardrobe("{item_id}"); setup.equipItem("{item_id}");',
+            'unequip': f'setup.unequipItem("{item_id}");',
+            'remove': f'setup.removeFromWardrobe("{item_id}");',
+        }.get(action, "")
+
     def _emit_wardrobe_effects_inline(self, effects, context: str = "") -> str:
         """Emit wardrobe-effect <<script>> blocks for a list of effect dicts.
         Respects clothing_enabled flag. Returns "" if disabled or no effects.
@@ -15708,12 +16619,9 @@ setup.carryRent = function (due, paid) {
         out = []
         for we in effects:
             try:
-                w_action = we.get('action', 'add')
-                w_item_id = str(we.get('item_id', '')).replace('"', '\\"')
-                if w_action == 'add' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}");<</script>>')
-                elif w_action == 'equip' and w_item_id:
-                    out.append(f'<<script>>setup.addToWardrobe("{w_item_id}"); setup.equipItem("{w_item_id}");<</script>>')
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                if w_js:
+                    out.append(f'<<script>>{w_js}<</script>>')
             except (KeyError, TypeError, ValueError) as e:
                 logger.warning("Invalid wardrobe effect in %s: %s", context or "unknown context", e)
         return "".join(out)
@@ -16232,7 +17140,15 @@ setup.carryRent = function (due, paid) {
                             html_parts.append(self._convert_blocks_to_game_html(pool_blocks))
                         else:
                             max_idx = len(pool_blocks) - 1
-                            parts = [f'<<set _bp to random(0, {max_idx})>>']
+                            pool_props = block.get("props") or {}
+                            if pool_props.get("memory") == "seen":
+                                # E2 — weighted toward entries she has not seen yet.
+                                key = self._block_pool_key(pool_props, pool_blocks)
+                                weight = float(pool_props.get("seen_weight", 0.1))
+                                parts = [f'<<set _bp to setup.pickRememberedPoolEntry('
+                                         f'"{key}", {len(pool_blocks)}, {weight})>>']
+                            else:
+                                parts = [f'<<set _bp to random(0, {max_idx})>>']
                             for pi, pool_item in enumerate(pool_blocks):
                                 if pi == 0:
                                     parts.append('<<if _bp is 0>>')
@@ -16903,6 +17819,11 @@ function _readCurrentValue(item) {
         var _elapsed = _today - _meta.set_day;
         return _elapsed > 0 ? _elapsed : 0;
     }
+    // E4 — an hour gate reports whole hours elapsed, like the day gate above.
+    if (item.hours_since_flag) {
+        var _hs = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        return (_hs !== null && _hs > 0) ? Math.floor(_hs) : 0;
+    }
     if (!item.trait) return null;
     if (item.subject === "player") {
         var pt = State.variables.player && State.variables.player.core_traits;
@@ -16989,6 +17910,26 @@ setup.pickQuestsCards = function(scope) {
 // by `evaluateGoals` (bullet progress).
 setup.checkQuestsCondition = function(item) {
     if (!item || typeof item !== "object") return false;
+    // ── E4: hour gate and weekday gate ──────────────────────────────────────
+    // `hours_since_flag` is the day gate in hours, through the canvas evaluator's
+    // own helper (set_minute, falling back to set_day * 1440); it fails closed the
+    // same way. `weekday` is a list of 0 = Monday … 6 = Sunday.
+    if (item.hours_since_flag) {
+        var hsNow = setup.hoursSinceFlag({ flag_key: item.hours_since_flag, subject: "player" });
+        if (hsNow === null) return false;
+        switch (item.op) {
+            case "gte": return hsNow >= item.value;
+            case "lte": return hsNow <= item.value;
+            case "gt":  return hsNow > item.value;
+            case "lt":  return hsNow < item.value;
+            case "eq":  return hsNow === item.value;
+        }
+        return false;
+    }
+    if (Array.isArray(item.weekday)) {
+        return item.weekday.length > 0
+            && setup._weekdayMatches(item.weekday, setup.todayWeekdayIndex());
+    }
     // ── Day gate ────────────────────────────────────────────────────────────
     // The same predicate canvases use (days_since_flag): days elapsed since the
     // flag was SET, measured off $flags_meta[flag].set_day against the calendar
@@ -17140,12 +18081,14 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
             var label = (it.goal && it.goal.label) ||
                         (it.goal && it.goal.trait) ||
                         (it.goal && it.goal.days_since_flag) ||
+                        (it.goal && it.goal.hours_since_flag) ||
                         (it.goal && it.goal.flag) || "";
             // The "X / Y" suffix belongs to every COUNTED goal — a trait and a day
             // wait both have a number the player is waiting on. Gating it on `trait`
             // alone computed the day count and threw it away, which is the whole
             // reason the days shape exists (found on the built page, beat_0205).
-            if ((it.goal.trait || it.goal.days_since_flag) && typeof it.currentValue === "number") {
+            if ((it.goal.trait || it.goal.days_since_flag || it.goal.hours_since_flag)
+                    && typeof it.currentValue === "number") {
                 label += ' — ' + it.currentValue + ' / ' + it.goal.value;
             }
             html2 += '<li>' + marker + ' ' + label + '</li>';
@@ -17391,6 +18334,44 @@ window.devGoBack = function() {
         if self._has_consume_on():
             consume_leave_block = """    if (infoPages.indexOf(psg) === -1) { setup.parkLeftCanvasSteps(psg); }
 """
+        # E8b — the helpers exist only in a game with a `return` exit (the call and
+        # launcher handlers test for them), so every other game's script is unchanged.
+        return_place_js = ""
+        if self._has_return_exit():
+            return_place_js = """
+// E8b — "back to where she was". A call's Answer and a launcher's option store the
+// room she stands in ($game_state.return_place, only in a game with a `return` exit);
+// a `destinationType = "return"` exit goes back there. current_location is written
+// only by Location_ passages, so it still names that room. Arriving at a room or the
+// map clears it, so a later scene cannot use a stale place.
+setup.markReturnPlace = function () {
+    var gs = (State.variables || {}).game_state;
+    if (!gs || !('return_place' in gs)) return;
+    gs.return_place = String((State.variables.player || {}).current_location || '');
+};
+// The stored room's passage, or the fallback (the canvas's home) when nothing is
+// stored or the room is gone (not in this build) or closed (its hours).
+setup.returnPassage = function (fallback) {
+    var at = String(((State.variables || {}).game_state || {}).return_place || '');
+    if (!at) return fallback;
+    var p2l = setup.passage_to_location || {}, locs = setup.locations || {};
+    for (var psg in p2l) {
+        var slug = p2l[psg], loc = locs[slug];
+        if (!loc || String(loc.id) !== at) continue;
+        if (!Story.has(psg)) return fallback;
+        if (typeof setup.locOpenNow === 'function' && !setup.locOpenNow(slug)) return fallback;
+        return psg;
+    }
+    return fallback;
+};
+"""
+        # E8b — arriving at a room or the map ends the scene a stored place belongs to.
+        return_place_block = ""
+        if self._has_return_exit():
+            return_place_block = """    if ((psg.indexOf("Location_") === 0 || psg === "Navigation") && sv.game_state && sv.game_state.return_place) {
+        sv.game_state.return_place = "";
+    }
+"""
         rent_redirect_block = ""
         if self.rent_enabled:
             rent_redirect_block = """
@@ -17407,6 +18388,13 @@ window.devGoBack = function() {
 """
 
         clothing_redirect_block = ""
+        # E7b — with wardrobe_anywhere = false the ClothingBlock asks where she came
+        # from: the refused room's passage still renders (and writes current_location)
+        # before the redirect lands.
+        clothing_from_line = (
+            "            State.variables._clothing_block_from = (sv.player || {}).current_location;\n"
+            if not self.wardrobe_anywhere else ""
+        )
         if self.clothing_enabled:
             clothing_redirect_block = """
     // Clothing intercept: block location entry if not dressed enough
@@ -17415,7 +18403,7 @@ window.devGoBack = function() {
         if (clothingMsg) {
             State.variables._clothing_block_message = clothingMsg;
             State.variables._clothing_block_destination = psg;
-            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
+""" + clothing_from_line + """            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
             return;
         }
     }
@@ -17670,7 +18658,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-
+""" + return_place_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -17702,7 +18690,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -18046,6 +19034,12 @@ $(document).on(':passagestart', function(ev) {
         # Wardrobe page and clothing block (only if clothing enabled)
         wardrobe_page = ""
         clothing_block_page = ""
+        # E7b — `wardrobe_anywhere = false`: a dress code's "Change clothes" shows only
+        # where she can really change. Empty (today's text) in every other game.
+        change_open = change_close = ""
+        if not self.wardrobe_anywhere:
+            change_open = "<<if setup.canChangeClothesHere(State.variables._clothing_block_from)>>"
+            change_close = "<</if>>"
         if self.clothing_enabled:
             wardrobe_page = """
 :: WardrobePage
@@ -18070,12 +19064,12 @@ if (clothingMsg) {
 <h2>Not Dressed for This</h2>
 <p><<print State.variables._clothing_block_message || "You need to put on more clothes.">></p>
 <div class="clothing-block-choices">
-<<link "Change clothes">><<script>>
+""" + change_open + """<<link "Change clothes">><<script>>
     State.variables.last_game_passage = State.variables._clothing_block_destination;
     Engine.play("WardrobePage");
 <</script>><</link>>
 <br>
-<<link "Go back">><<script>>
+""" + change_close + """<<link "Go back">><<script>>
     Engine.play(State.variables.last_game_passage || "Navigation");
 <</script>><</link>>
 </div>"""

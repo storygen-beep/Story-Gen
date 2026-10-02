@@ -8,12 +8,15 @@ This file owns **one rule**, and every section below is that rule applied:
 > **The phone is a door into the world, not a room of its own. It reads state the world already
 > keeps, and everything it offers costs the world something.**
 
-> The failure this exists to prevent: **a social feed she cannot post to.** With `post_actions`
-> empty, the app is a wall she reads. The phone offers her actions — Course of Temptation's
-> [ElkbookWidgets]: *"You can post a selfie."*
+> The failure this exists to prevent: **live arcs with no phone.** Every game this skill copies
+> carries its arcs on threads — In Her Own Hands' 10 senders are all arc people, Shady Deals calls
+> only contacts she met in scenes (round 9a, `ROUND9A_REPORT.md` §2). A game whose people never text
+> her between meetings has a world that stops when she leaves the room. (The older failure, a feed
+> she cannot post to, is P6.)
 
 **Why this file exists.** `DOCTRINE_GAPS.md` Tier 3 row 12 — *"Optional systems — phone,
-customization"*. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
+customization"*. The phone is a channel — infrastructure, not a system (`the-systems.md` SY1): it
+carries other systems' threads. Before this file, a grep of the whole v2 skill for `phone` returned four hits,
 all incidental: the gap row itself, one economy example listing "her phone" as a bill, and two
 `engine.md` table rows. The engine has shipped eight phone app types since doc 45 and the skill
 never said a word about any of them.
@@ -26,44 +29,48 @@ Engine claims here carry a `file:line` into
 `apps/projects/services/template_import.py`, per `SKILL.md` operating rules.
 
 ## Contents
-1. P1 · Whether this game has a phone at all
+1. P1 · Every person she is involved with has a thread
 2. P2 · Build the channel, never the hub
-3. P3 · A message is fifteen words — the phone is its own register
-4. P4 · The phone reads the world; it keeps no state of its own
-5. P5 · Everything on the phone costs something
+3. P3 · A message is 3–7 words — the phone is its own register
+4. P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
+5. P5 · Everything on the phone costs something — and ignoring costs most
 6. P6 · If she can be looked at, she has to be able to post
-7. P7 · A locked app names what unlocks it
-8. P8 · One thing at a time
-9. P9 · A repeatable thread is built out of today, and needs a null branch
-10. P10 · A plan the player cannot see is worse than no plan
+7. P7 · No hidden phone gate; a locked app names what unlocks it
+8. P8 · One thing at a time, delivered by pull
+9. P9 · After the sex step, the thread becomes the loop invite
+10. P10 · Every thread ends in a booking she can see
 11. P11 · Never a battery
+12. P12 · She can open the same doors herself
 
 ---
 
-## P1 · Whether this game has a phone at all
+## P1 · Every person she is involved with has a thread
 
-The phone is not free. It is a second map of the same world, and it goes stale the moment the
-world outgrows it.
+**The default is a phone, with a chat thread for every person she is involved with** (LO, WS-D7).
+Every game this skill copies has one, and its threads carry the arcs: Cupid's Way's Damien thread
+opens at a lunch scene and runs to sex at her place (round 9a §1a). The phone is how a person she is
+involved with reaches her between the times she can reach him in person.
 
-**The prerequisite is people, not features.** A phone is worth building when there are characters
-the player wants to reach *between* the times they can reach them in person. If every character is
-always findable at a known place and hour, the phone has nothing to add and will read as a menu.
+**A thread follows the person.** List the live arcs first. Each gets a thread when its first scene
+sets the flag that causes a text (P4); a person she has not met has none. A phone with no live arc
+has nothing to say, so a release with no arc running yet leaves `[phone]` out.
 
-**Ask three questions before declaring `[phone]`:**
+**Every app is a door to sex, money or people, or it isn't there.** In Her Own Hands ships 15 apps,
+and 6 pay nothing; Cupid's Way's followers buy nothing; neither drew praise for them (round 9a §0).
+Course of Temptation's Findr ends in a booty call; In Her Own Hands' OnlyGirlz pays the bank on the
+1st. An app that cannot end in a person, a sex scene or money is cut.
 
-1. **Is there someone she cannot get to right now?** If the cast is four people in one house, no.
-2. **Does anything in this world happen while she is elsewhere?** A phone's whole value is that it
-   is the channel for offscreen life. A game with no offscreen life has no use for it.
-3. **Is she looked at by anyone she is not in the room with?** That is the other half — see P6.
+**A thin phone is still worse than none.** An app with a single item in it reads as a broken
+feature, and 18% of the field's phone comments are players asking how to make an empty-looking
+phone work. Build what the live arcs and one door app use, and nothing else (round 9a §4).
 
-If the answer to all three is no, do not declare a phone. Declaring one and filling it thinly is
-strictly worse than not having one: an app with a single item in it reads as a broken feature,
-and 18% of the field's phone comments are players asking how to make an empty-looking phone work.
+**The card:** `templates/cards/phone.md` — the steps, amounts, chains, first-release minimum and failure
+list, from the four games. Declare the phone in `board.infrastructure[]` (`kind = "channel"`), never in
+`board.systems[]`; each thread goes on its person's sheet (`templates/sheets/person.md`).
 
-⚠️ **A declared system must exist in the built game.** If `0_systems_spec.toml` says a system is
+⚠️ **A declared channel must exist in the built game.** If `0_systems_spec.toml` says the phone is
 ON, the built `7_final_game.toml` has to carry its block — `[phone]` for the phone — or the spec has
-to change. Nothing checks this: no script in `scripts/` compares the spec with the build (see
-"What is not gated here", below).
+to change. Nothing checks this: no script in `scripts/` compares the spec with the build.
 
 ---
 
@@ -93,35 +100,29 @@ she banks, shops, navigates or finds work.
 **Build in this order: messaging, then the thing that makes her looked at, then anything else.**
 
 ⚠️ **Two of the engine's eight app types are the rarest things in the genre.** `fast_jobs` and
-`bank` both exist (`v2.py:2464`, `:2465`) and both are legitimate — `new-life-project` ships a phone
-bank *and* a phone GPS and is a well-liked game. But an author who reads the app-type list and
+`bank` both exist (`v2.py:2899`, `:2900`) and both are legitimate — `new-life-project` ships a phone
+bank *and* a phone GPS (numbers only). But an author who reads the app-type list and
 builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the table, not the list.
 
 ⚠️ **Nobody puts a map on a phone.** Zero of 27. Navigation belongs to `the-map.md`.
 
 ---
 
-## P3 · A message is fifteen words — the phone is its own register
+## P3 · A message is 3–7 words — the phone is its own register
 
-This is the highest-confidence measurement in the study and the one most likely to be got wrong,
-because every other surface in this skill is longer (the model beats in `register.md`).
+**1–3 bubbles of 3–7 words.** Course of Temptation's texts run a median of 4 words for the one he
+sends and 3 for her reply; Cupid's Way's run a median of 5, three lines to a thread (round 9a §2;
+the CoT figure is a regex count). Course of Temptation's booty call is three bubbles: *"Hey <pet
+name>"*, *"Feel like hooking up? I could use it"*, and the address. The phone study's three games
+whose markup marks a bubble ran longer, a median of 11–16 words over 369 bubbles (`the-company`,
+`patriarch`, `family-ties`; numbers only).
 
-Measured on the three corpus games whose markup marks an individual bubble, in two languages:
+**Long talk goes to a call or a meeting.** In Her Own Hands' texts are one line or an image; the
+talking happens in its calls, which run 300–500 words (round 9a §6). No text tells a story; the
+meeting it books does. A call is `[[phone.calls]]`: it rings, and answering plays its scene (`engine.md` §51).
 
-| game | bubbles | median | mean | p90 |
-|---|---|---|---|---|
-| `the-company` | 194 | 16 w | 14 w | 21 w |
-| `patriarch` | 163 | 11 w | 13 w | 23 w |
-| `family-ties` | 12 | 15 w | 15 w | 21 w |
-| **pooled** | **369** | **11–16 w** | **13–15 w** | **~22 w** |
-
-**A text message is under half a beat, and nine in ten are under 22 words.** This is a rate over
-word count, so unlike most corpus figures it survives the HTML/TOML change of basis and can be
-read against our own TOML directly.
-
-⚠️ **Do not turn this into a floor or a ceiling.** It is the shape of the thing. A three-word
-message is correct; `the-company` ships *"Love you Diana!"* Length varies with what is being said,
-the way it does in a real thread.
+**It is a WARN, never a block** (planned gate: `a chat is short and timed`). A two-word *"you up"* is
+right; the warning is for the twenty-word paragraph.
 
 **The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
 you up to?"*, and the thread goes on in the same hand:
@@ -167,27 +168,51 @@ is wrong twice: it is an instruction rather than a message, and nobody types eig
 
 ---
 
-## P4 · The phone reads the world; it keeps no state of its own
+## P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
 
-How the corpus decides what a phone shows:
+**Every text is caused by a flag a scene set.** In Her Own Hands' 46 of 46 texts sit behind trigger
+flags; 77 of Cupid's Way's 79 thread entries read an arc stage; Course of Temptation picks the sender
+by relationship and switched off its one random "hi" (round 9a §5 class c). A text with no cause is
+filler, and players ignore it. Random *timing* is fine; a random sender or topic is not.
 
-| gate | games |
-|---|---|
-| a **meter** — relationship, corruption, trust ≥ N | **22 / 27** |
-| an **hour window** — only between X and Y o'clock | **20 / 27** |
-| a **per-NPC stage number** | 13 / 27 |
-| a **past stamp plus a wait** — "last seen day 9, wait two days" | 3 / 27 |
-| a **stored future appointment** | **1 / 27** |
+**Every text is timed: a delay after the cause, and an hour window.**
+- **The delay** is the next day by default, +2 to +3 days between the steps of a slow burn. Cupid's
+  Way sets "+1 day" in 150 of its 210 delay setters; its Damien waits 2 (round 9a §1a).
+- **The hour window:** In Her Own Hands gates 43 of its 46 texts on the hour; Course of Temptation's
+  booty call comes only 18:00–22:00.
 
-**Every one of those except the last is state the map and the hubs already read.** A phone thread
-gated on her relationship meter is the same thread the world is gating its own scenes on. A phone
-that owns private variables nothing else can see is the bolted-on phone, and it is the one that
-goes stale — a player comment on `college-daze`: *"Most of the characters stats on the phone
-profile don't actually mean anything anymore."*
+Both are conditions on the conversation's trigger, beside the cause:
 
-**We are well placed here.** Phone conversations, posts and profiles are evaluated by
-`setup.triggerConditionsSatisfied` (`v2.py:2204`) — **the same evaluator canvases use**
-(`v2.py:3888`). Every condition type a canvas can gate on, a phone thread can gate on:
+```toml
+[[phone.conversations]]
+id     = "dana_the_morning_after"
+npc    = "npc_dana"
+notify = "📱 Dana"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag",            subject = "player", flag_key = "met_dana_at_the_bar", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "met_dana_at_the_bar", operator = "gte", value = 1 },
+  { type = "time_of_day",     start_time = "10:00", end_time = "21:00" },
+] }
+```
+
+`version = "1.0"` is not optional: without it the conditions fail open and the text arrives at once.
+`time_of_day` is `HH:MM`, 24-hour, end exclusive, and wraps midnight the way NPC schedules do
+(`v2.py:5143`, `engine.md` §39); omit `end_time` and the window is one hour.
+
+⚠️ **On a conversation, `time_of_day` is checked once, at delivery.** The trigger is a latch:
+`ps.triggered_conversations[conv.id]` is written the first time every condition passes and is never
+re-read (`v2.py:2706`). So the window means *"deliver this the first time she is awake between ten
+and nine"*, not *"this thread exists only then"*. A thread that must be reachable only inside an hour
+band belongs on a canvas the phone links to, where the condition is read fresh every time. (A chat
+with `repeat_after_days` reads its trigger again each time it comes back: `engine.md` §51.)
+
+**The phone keeps no state of its own.** How the phone study's 27 games decide what a phone shows:
+a meter 22 / 27, an hour window 20 / 27, a per-NPC stage 13 / 27, a past stamp plus a wait 3 / 27, a
+stored appointment 1 / 27. Every one but the last is state the map and the hubs already read. Phone
+conversations, posts and profiles go through `setup.triggerConditionsSatisfied` (`v2.py:4888`), the
+evaluator canvases use, so every condition a canvas can gate on, a thread can:
 
 ```
 clothing_item  clothing_slot  corruption_level  days_since_flag  flag  item  modifier
@@ -195,55 +220,30 @@ npc_at_location  pass  quest  stage  time_of_day  trait  worn_beauty  worn_corru
 worn_exposure  worn_type
 ```
 
-**`time_of_day` was built for this file** (2026-08-29, `v2.py:4128`, `engine.md` §39). It was the
-one gate in the field's list this engine could not express, and it is second only to a meter:
-
-```toml
-{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }
-```
-
-`HH:MM`, 24-hour, **end exclusive**, and it wraps midnight correctly because it delegates to the
-same function NPC schedules use. Omit `end_time` and the window is one hour.
-
-⚠️ **But a conversation's trigger is a latch, not a filter, and `time_of_day` does not change
-that.** `ps.triggered_conversations[conv.id]` (`v2.py:2202`) is written the first time the condition
-passes and never re-read. A thread is *delivered* once and then stays. So on a **conversation**,
-`time_of_day` means **"deliver this the first time she is awake at 2am"** — not **"this thread only
-exists at 2am"**, which is what `family-ties` does, re-checking its noon-to-six window every time the
-app opens. On a **canvas trigger**, which is evaluated fresh every read, it means the second.
-
-**So put the window where it will be re-read.** A thread that must only be reachable inside an hour
-band belongs on a canvas the phone links to, not on the conversation's own trigger. A conversation
-trigger is the right place for *when this arrives*, which is what most threads want anyway.
+A phone that keeps private variables nothing else reads is the bolted-on phone, and it goes stale.
 
 ---
 
-## P5 · Everything on the phone costs something
+## P5 · Everything on the phone costs something — and ignoring costs most
 
-Six corpus games, the same instinct in six forms:
+**Ignoring a text costs more than saying no.** Course of Temptation's booty call charges −20
+friendship and −20 romance for "Ignore it", and only −2 / −3 for "no thanks" (round 9a §1a). A
+thread she can leave unread for free is a thread she will leave unread.
 
-| game | what it charges |
-|---|---|
-| `family-ties` | `$time.min += 1; $you.arousal += 2` **per scroll** — an infinite feed as an arousal loop |
-| `family-ties` | `$time.min += random(2, 3)` to open a message |
-| `the-company` | `passTime()` on every text sent |
-| `patriarch` | Energy < 1 → *"You're too tired to text anyone"*; late → *"Better not text anyone this late.."* |
-| `destroyer` | every phone event needs `$Energy > 19`, most also N days since the last beat |
-| `new-life-project` | memes before the evening only → *"It's too late to watch memes. Get some rest!"* |
+**A no-show costs.** The reply books a meeting; missing it costs Course of Temptation −25 romance,
+−25 lust and −25 friendship. The booking and its reminder are P10.
 
-**Read the register of those refusals.** A locked phone action in this genre is **a sentence in her
-voice**, not a greyed-out control. That is `the-voice.md`'s territory and it applies here unchanged.
+**Using the phone costs too.** Five of the phone study's games charge for phone actions — minutes off
+the clock, energy, or a late hour that refuses (numbers only). A refusal is **a sentence in her
+voice**, not a greyed-out control (`the-voice.md`).
 
-⚠️ **Nothing on our phone costs anything.** `setup.sendDailyChat` (`v2.py:2375`) applies trait
-effects and returns. Grepped the whole phone block (`v2.py:2180–3140`): the only occurrence of
-`advanceTime` or `passTime` is a comment at `v2.py:3096`. Our phone is a free action, repeatable
-without limit inside a day except where a `daily_cap` happens to exist.
-
-**Until the engine can charge for a phone action, charge in the fiction and in the gates you do
-have.** `daily_cap` on a post action, `cooldown = "per_topic"` on a daily topic, and a
-`corruption_min` that makes the rung cost something she has to have become. What you may not do is
-ship a phone that is a free infinite button — that is the *"use the app, wait, use the app, wait"*
-complaint, quoted in P11.
+⚠️ **On our phone silence and time cost only where you set them** (`engine.md` §51):
+- **ignoring:** `ignore_after_days` with `on_ignore` on every thread that matters;
+- **using:** `time_cost` on a reply, a daily topic, a post or a fast job; `daily_cap` on a post action,
+  `cooldown = "per_topic"` on a daily topic, a `corruption_min` she has to have become. Never a free
+  infinite button (P11);
+- **a no-show has no hook:** a one-time canvas on her next visit home, gated on the booked flag,
+  `days_since_flag ≥ 2` on it, and the meeting's flag still `is_false`, applies the cost.
 
 ---
 
@@ -255,24 +255,15 @@ In Her Own Hands' camera (`CameraMain`) runs selfies as a ladder — dressed →
 each rung gated on the room she is in, what she is wearing, and her inhibition, and a rung she is
 not ready for refuses in her own voice: *"I can't take a selfie in just my bra and panties!"*
 
-`family-ties` (structure only; it fails the adults-only rule) runs two apps as **one system at two
-ceilings**:
-
-| | the free app | the paid app |
-|---|---|---|
-| rungs | three, the top one topless | four more, then video |
-| counters | one per rung, kept separately | one per rung, kept separately |
-| subscribers | `$you.inst.sub` | `$you.onlyfans.sub` |
-| income | monthly, recurring | monthly, recurring |
-| daily cap | once | once |
-| place gate | she must be at home | she must be at home |
-| unlock | there from the start | `$app.onlyfans == 1` — earned |
+One counted game (`family-ties`, numbers only; it fails the adults-only rule) runs two apps as
+**one system at two ceilings**: 3 rungs in the free app, 4 more and then video in a paid app she
+has to unlock.
 
 **The free tier stops at topless. The paid tier has to be unlocked and goes further.** The
 escalation ladder *is* the app list — which is a cleaner way to publish a ceiling than a number in
 a design doc, and it matches `kink-ceilings.md`'s own logic.
 
-The worked shape, in what our engine actually supports (`v2.py:2716` renders it, `v2.py:2771`
+The worked shape, in what our engine actually supports (`v2.py:3165` renders it, `v2.py:3220`
 sends it):
 
 ```toml
@@ -287,17 +278,17 @@ post_actions = [
 ]
 ```
 
-A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:2728`, `:2730`).
+A locked rung renders as `🔒 <label>`; a spent one as `<label> ✓` (`v2.py:3177`, `:3179`).
 
 ⚠️ **`followers` must buy something.** A counter with no sink is the `college-daze` complaint
 waiting to happen — a number on a screen that stops meaning anything. Give it a door, per
 `the-economy.md` R1b: a rung of content, a character who only answers a girl with a following, a
 price that drops. If nothing reads it, do not count it.
 
-⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min` and
-nothing else (`v2.py:2779`). `family-ties`' *"You must be at home to take selfies!"* is not
+⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min`, against
+`gate_trait` when set (`engine.md` §51), and nothing else (`v2.py:3318`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
-exists (`v2.py:4111`) and is exactly the predicate for it. Until then, the rung labels carry the
+exists (`v2.py:5126`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6).
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
@@ -307,103 +298,87 @@ with a `trait` condition on its trigger, and it is the cheapest way to make a fe
 
 ---
 
-## P7 · A locked app names what unlocks it
+## P7 · No hidden phone gate; a locked app names what unlocks it
 
-The two loudest phone threads in 22,622 harvested comments are the same question:
+**No buy, carry or PIN step.** Hidden phone gates are 43 of the 194 player failures round 9a
+classed (class b), 32 of them on one game's PIN (`new-life-project`, numbers only). In Her Own
+Hands puts the phone in the menu from the first minute, with no step to get it, and draws 0 such
+complaints; Cupid's Way also 0 (round 9a §5). Course of Temptation's "the phone needs a pocket"
+rule is the one to never copy. So leave `[phone] purchase_flag` (`template_import.py:480`) unset:
+it hides the whole phone until a flag is set.
 
-> how to unlock one locked adult app on the phone — `family-ties`, **50 net**, and again at **31 net** (paraphrased)
+**Showing a locked app is good; showing it without saying what opens it is a support ticket.** The
+two loudest phone threads in the phone study's 22,622 comments ask how to unlock one locked app
+(50 and 31 net, `family-ties`, numbers only).
 
-And the worst case in the corpus is a phone locked behind a puzzle. `new-life-project` (numbers only) puts a PIN
-on its phone and **seven separate high-scoring comments ask for it** (40, 38, 36, 32, 30, 27 and 21
-likes), plus one player stuck in a town with no phone yet to get out (13 net).
-
-**Showing a locked app is good. Showing it without saying what opens it is a support ticket.**
-`family-ties` renders a locked app as a dead grey tile beside the live ones, which is the right
-instinct — the player sees the ladder they are climbing — and then never says how.
-
-⚠️ **Our engine has no per-app condition.** `setup.openPhone` (`v2.py:2425`) renders every declared
-app unconditionally. There is one gate and it is whole-phone: `purchase_flag`
-(`template_import.py:373`), which hides the sidebar button until a player flag is set — that is the
-*acquisition* story, not the ladder. Until per-app gating exists, publish the ladder in the app
-that is already open: a rung labelled `🔒` with its `corruption_min` is legible; a second app that
-silently is not there is not.
+**An app with `conditions` stays off the phone until they hold** (`engine.md` §51). A hidden app says
+nothing, so the scene that opens it says so; inside an open app, a rung labelled `🔒` with its
+`corruption_min` is legible.
 
 ---
 
-## P8 · One thing at a time
+## P8 · One thing at a time, delivered by pull
 
-`destroyer`'s phone is a single latch and fourteen guarded blocks:
+**Deliver by pull: a badge, never a covering pop-up.** In Her Own Hands puts a line in its sidebar;
+Cupid's Way marks the contact with ❕ and turns the Study button yellow while a text waits. Shady
+Deals' phone covered the screen, drew 5 complaints, and was fixed in three steps: a hide button, a
+glow on a call, the hidden state remembered (round 9a §5 class f, 8 failures). Our engine already
+pulls: a delivered conversation raises the sidebar badge (`v2.py:3725`) and a three-second toast
+(`v2.py:2467`) whose text is the conversation's `notify`.
 
-```
-<<set _activequest to true>>
-<<if _activequest is true>><<if $taxistory is 1>><<if $Energy > 19>>
-    <<set _activequest to false>><a data-passage="taxievent1">…</a>
-<</if>><</if>><</if>>
-… ×14, each clearing the latch when it fires
-```
-
-The first eligible event claims the slot and nothing below it renders. **The phone never shows the
-player more than one thing to do.**
-
-The mopoga field study named **lostness, not grind, as this genre's disease** — 15.5% of player
-comments against grind's 0.9% (Process Review, Round 1). The phone is the best place in a sandbox to answer *what now*, and the corpus's
-players say so themselves, twice, unprompted:
-
-> *"Check the phone in the game. It tells you who's playing who."* — `college-daze`, 20 net
-> *"Check the in-game phone, it will tell you who plays who."* — `college-daze`, 14 net
-
-`patriarch` (structure only) does the same job in a different register — its plans screen names
-the **world** blocker when the phone cannot help: a person is ready, but a room has to be renovated
-before she can move in.
-
-⚠️ **n = 1 for the latch specifically.** It is offered as a shape, not a rate, and nothing gates
-it. What is measured is the disease it treats, not the frequency of this cure.
+**The phone answers *what now*, one thing at a time.** Lostness, not grind, is this genre's disease
+— 15.5% of player comments against grind's 0.9% (Process Review, Round 1) — and in the phone study
+players point each other at the phone to find out what to do next (two comments, 20 and 14 net, in
+a game that fails the adults-only rule; numbers only). One game shows only the first eligible phone
+event and hides the rest (`destroyer`, numbers only; n = 1, a shape, not a rate).
 
 ---
 
-## P9 · A repeatable thread is built out of today, and needs a null branch
+## P9 · After the sex step, the thread becomes the loop invite
 
-`become-someone` gives **8 NPCs their own daily thread** — 115 passages, 10,557 words. The whole
-dispatcher:
+**A thread has no last text; it turns into a loop.** After the arc's sex step, the person invites
+her again on a cooldown of 1–3 days (round 9a §6):
+- Course of Temptation: every 3 days at the soonest, 18:00–22:00, rolled on her moves;
+- In Her Own Hands' James: an incoming booty call at 2 in 70 per passage after 20:00, at most once a
+  day — and she can call him whenever she wants (P12);
+- Shady Deals: callers reset daily, and their own stats move them on to new kinds of call.
 
-```
-<<if $jade.train is 1 && $jade.class is 1>>  ...pick one of the two at random
-<<elseif $jade.train is 1>>  [[Talk about today training with Jade]]
-<<elseif $jade.class is 1>>  [[Talk about today's class with Jade]]
-<<else>>                     [[Exchange a few messages with Jade]]
-```
+The arc names this thread as its loop (`the-arc.md` A1).
 
-Two things to copy.
+**Small talk that leads nowhere is filler.** Course of Temptation's phone menu has 13 links and 3
+lead anywhere — hang out, date, booty call; its friendly texts only nudge attitude, at most ±10 once
+a day (round 9a §1a). Every message on a thread serves a booking or the loop.
 
-**The topic comes from something they actually shared today.** She can text Jade about the training
-only if the training happened. That is a `daily_topics` entry with a `conditions` block on the flag
-the training sets — the same flag the world set, per P4.
-
-**There is an explicit null branch.** When nothing happened, the game says so plainly — *"exchange
-a few messages"* — instead of inventing a topic. A daily thread with no null branch either repeats
-one line forever or lies about a day that had nothing in it.
-
-**Budget, measured: ~1,300 words per NPC** to run a daily thread at production scale. Know that
-number before agreeing to build one.
+**A loop invite is one conversation that repeats; a chain is for different texts.** Set
+`repeat_after_days` (and `max_repeats` if the loop should end) on the invite: it comes back that
+many days after she answers, while its trigger still holds (`engine.md` §51). A sequence of
+different texts is a chain: each is its own `[[phone.conversations]]` entry, caused by a flag the
+last link set and timed with `days_since_flag`:
 
 ```toml
-[[phone.daily_topics]]
-id             = "mara_about_the_shift"
-npc            = "npc_mara"
-player_message = "you survived then"
-npc_response   = "barely. ankle's still bad"
-cooldown       = "per_topic"
-conditions     = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "worked_with_mara_today", operator = "is_true" },
+# text 2 waits three days after the meeting text 1 booked
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag",            subject = "player", flag_key = "dana_invite_1_met", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "dana_invite_1_met", operator = "gte", value = 3 },
+  { type = "time_of_day",     start_time = "18:00", end_time = "22:00" },
 ] }
 ```
 
-⚠️ **`cooldown = "per_topic"` gives this topic its own once-a-day cap** (`template_import.py:349`).
-Without it the cap is per-NPC and one topic starves the others.
+A link's cause flag may be set by an earlier conversation's reply, as long as the chain starts from
+a scene (planned gate: `every chat is caused by a scene`). Author as many links as the release
+needs.
 
 ---
 
-## P10 · A plan the player cannot see is worse than no plan
+## P10 · Every thread ends in a booking she can see
+
+**Every text ends in a choice that books something, with a place and a time.** Course of
+Temptation's booty call books a plan; In Her Own Hands' first call books Saturday; a Shady Deals
+call books a meeting now. Warm and cold answers move the relationship. The meeting happens in the
+world, and the player is reminded where she looks: Course of Temptation points to it from a
+Reminders app, the calendar, a map marker and a wake-up line; In Her Own Hands from its hint journal
+(round 9a §6). A plan the player cannot see is worse than no plan.
 
 **One game in 27 stores a real appointment.** Twenty-six talk about making plans and keep none —
 "meet me at the bar tomorrow" is prose, and the link under it goes there now.
@@ -426,13 +401,13 @@ face, the dating app, a bar pickup, being invited after class, a reward inside a
 and a cleanup that expires dates she did not attend.
 
 **The phone does not own the date. The world owns a calendar and the phone is one door into it.**
-That is P1's rule stated as architecture, and it is why that system does not read as bolted on.
+That is this file's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2442`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:6652`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2876`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7383`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:6091–6099`), where `setup.fireScheduledEvent` (`v2.py:6460`) can set a flag, start a quest,
+(`v2.py:6998-6999`), where `setup.fireScheduledEvent` (`v2.py:7397`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -460,18 +435,16 @@ hand.**
   on waking. One of the three, minimum.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
-(`template_import.py:950`, `v2.py:7403`).
+(`template_import.py:1009`, `v2.py:8136`).
 
 ---
 
 ## P11 · Never a battery
 
 Seventeen of 27 corpus games mention a phone battery. The players are not divided about it. This is
-the cleanest single verdict in the 622 phone comments and the highest ratio in the set:
-a player asks for the app-charging to be removed altogether, because it adds nothing and everyone
-hates it (`sluttown-usa`, **24 likes, 0 dislikes**; paraphrased, it fails the adults-only rule).
-And on the loop it creates: use the app, wait, use it again, ten times for one small reward
-(`sluttown-usa`, paraphrased).
+the cleanest single verdict in the 622 phone comments and the highest ratio in the set: the
+battery comment against it scored **24 likes, 0 dislikes** (`sluttown-usa`, numbers only; it fails
+the adults-only rule).
 
 **Upkeep is not pressure.** P5's costs are pressure because they trade the phone against something
 else she could be doing with that minute. A battery is a second clock that governs only the phone,
@@ -479,36 +452,34 @@ and it buys nothing — it reads as a chore, and the field's own players say so.
 
 ⚠️ **This is the one place where corpus prevalence and player verdict point in opposite
 directions**, and the verdict wins. Prevalence measures what authors built, not what worked. No
-battery, no charging, no data plan, no phone bill as a repeating upkeep. (A one-off *price* to buy
-the phone is a different thing and is fine — `destroyer` sells one for $500 — that is
-`the-economy.md` R1b's territory, a thing that stays bought.)
+battery, no charging, no data plan, no phone bill as a repeating upkeep, and no price to buy it either (P7).
 
-## P12 · The phone brings someone to her
+## P12 · She can open the same doors herself
 
-In at least 10 of the 17 top games with a phone, a call or a text starts a scene without travelling
-(Process Review, Round 1, numbers only). Course of Temptation's [PhoneText] texts a contact for a
-booty call and offers *"Tonight"* or *"Tomorrow night"*. The failure is a phone that only holds
-Patreon, Discord and credits links.
+**Every door a thread opens, she can open from her side too.** In Her Own Hands' James calls her
+for a booty call, and she can call him for one whenever she wants; Course of Temptation's
+[PhoneText] texts a contact for a booty call and offers *"Tonight"* or *"Tomorrow night"*. In at
+least 10 of the 17 top games with a phone, a call or a text starts a scene without travelling
+(Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
+and credits links.
 
-**In this engine** the phone's `launcher` app is a door, not a button (`setup._renderLauncher`): an
-option plays only when she is already in that canvas's room, and a canvas that requires him present
-needs him there. So a summon is a launcher option pointing at a canvas in **her** room, with no
-presence requirement on him — he arrives in the scene.
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3635`):
+an option plays only when she is already in that canvas's room (`v2.py:3652`), and a canvas that
+requires him present needs him there. So a summon is a launcher option pointing at a canvas in
+**her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are
+player-sent too, but they only move traits; give one a `conditions` block on a flag the world set,
+and `cooldown = "per_topic"` for its own once-a-day cap (`template_import.py:434`) — without it the
+cap is per NPC and one topic starves the others.
 
 ---
 
 ## What is not gated here
 
-Nothing in this file is checked by `gates.py` yet. Two candidates exist and both would fail only on
-zero, in the G44 / G45 / G46 line:
+Nothing in this file is checked by `gates.py` yet. Two planned gates will read it:
 
-- **the phone is not a decoration** — a declared phone whose apps hold no content, or a
-  `social_feed` with empty `post_actions` in a game that has a corruption meter.
-- **a specced system exists** — a system named ON in `0_systems_spec.toml` with no corresponding
-  block in the built TOML. Not phone-specific; it would catch
-  any dropped system.
-
-⚠️ **P3's fifteen words must not become a gate.** It is a shape, measured over 369 bubbles, and a
-threshold on it would fail a correct three-word message. The precedent is explicit: R4, study 6's
-anchoring check, P0 and the duplicate wardrobe gate were each withdrawn for inventing a number the
-evidence did not carry.
+- **planned gate: `every chat is caused by a scene`** (a block): every conversation's trigger holds
+  a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9).
+  A game with no phone passes.
+- **planned gate: `a chat is short and timed`** (a warn, never a block — a block would fail a
+  correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
+  delay and an hour window (P3, P4).

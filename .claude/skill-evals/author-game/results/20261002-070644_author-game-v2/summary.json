@@ -1,0 +1,211 @@
+{
+ "skill": "author-game-v2",
+ "v2_ref": "b4005b7",
+ "skill_ref": "working tree",
+ "model": "default",
+ "trials_per_case": 1,
+ "cases": 18,
+ "pass_k_cases": 10,
+ "trial_pass_rate": 0.556,
+ "total_cost_usd": 19.45,
+ "per_case": {
+  "01_first_meeting_new_npc": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.5830819999999999
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "02_ambient_diane_outfit": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    1.5276577999999998
+   ],
+   "ran_gates": [
+    true
+   ]
+  },
+  "03_drink_price": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.6348069999999999
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "04_martin_study_gate": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.6023804
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "05_diane_dialogue": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.4767848
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "06_breakfast_independent_line": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.734145
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "07_locked_doors": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.6753418
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "08_ethan_step3_no": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.7416082
+   ],
+   "ran_gates": [
+    true
+   ]
+  },
+  "09_theo_previous_evening": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.9781544000000001
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "10_work_late": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.8618081999999999
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "11_tonight_with_diane": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    1.1214828000000001
+   ],
+   "ran_gates": [
+    true
+   ]
+  },
+  "12_bathroom_watch": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.6299112
+   ],
+   "ran_gates": [
+    true
+   ]
+  },
+  "13_jade_hotel_hub": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.6581345999999997
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "14_walkin_tip": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.0531516
+   ],
+   "ran_gates": [
+    true
+   ]
+  },
+  "15_kitchen_more": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    1.9766366
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "16_theo_friday_nights": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    0.7358112
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "17_theo_wednesday_firm": {
+   "passed": [
+    false
+   ],
+   "cost_usd": [
+    0.6851564
+   ],
+   "ran_gates": [
+    false
+   ]
+  },
+  "18_rent_friday_scene": {
+   "passed": [
+    true
+   ],
+   "cost_usd": [
+    0.7745086000000001
+   ],
+   "ran_gates": [
+    true
+   ]
+  }
+ }
+}

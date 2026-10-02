@@ -536,3 +536,126 @@ def test_the_backfill_runs_on_every_passage():
     twee = build()
     handler = twee.split("$(document).on(':passagestart'", 1)[1][:6000]
     assert "setup.backfillStateDefaults" in handler
+
+
+# --- World and Systems PRD, Phase 7 batch 1 -------------------------------------
+
+BATCH1 = "apps/game_generation/games_toml_files/engine_ws_batch1_2026_10_01.toml"
+
+
+@needs_node
+def test_e2_pool_seen_reaches_a_save_written_before_it(tmp_path):
+    """E2: a game that adds a `memory = "seen"` pool. An old save has no pool_seen;
+    the backfill gives it an empty map, and a map the player already has is kept."""
+    twee = build(BATCH1)
+    sv = old_save(twee, drop_game_state=("pool_seen",))
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]
+    assert got["game_state"]["pool_seen"] == {}
+    sv2 = old_save(twee)
+    sv2["game_state"]["pool_seen"] = {"home_pool": {"1": 2}}
+    got2 = run_backfill(twee, [sv2], tmp_path)["saves"][0]
+    assert got2["game_state"]["pool_seen"] == {"home_pool": {"1": 2}}
+
+
+@needs_node
+def test_e3_conv_cycle_reaches_a_save_written_before_it(tmp_path):
+    """E3: a game that adds a repeatable chat. An old save's phone map has no
+    conv_cycle; the backfill fills it one level into the phone sub-map, and the
+    replies the player already sent are kept."""
+    twee = build(BATCH1)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["conv_cycle"]
+    sv["game_state"]["phone"]["replies"] = {"dan_invite": [{"round": 1, "choice": 0}]}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["conv_cycle"] == {}
+    assert got["replies"] == {"dan_invite": [{"round": 1, "choice": 0}]}
+
+
+# --- World and Systems PRD, Phase 7 batch 2 -------------------------------------
+
+BATCH2 = "apps/game_generation/games_toml_files/engine_ws_batch2_2026_10_01.toml"
+
+
+@needs_node
+def test_e3b_conv_ignored_reaches_a_save_written_before_it(tmp_path):
+    """E3b: a game that adds an ignore hook. An old save's phone map has no
+    conv_ignored; the backfill fills it one level into the phone sub-map, and the
+    delivery record the hook reads (triggered_day) is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["conv_ignored"]
+    sv["game_state"]["phone"]["triggered_conversations"] = {
+        "ana_ask": {"triggered_day": 1, "triggered_hour": 18, "conv_index": 0}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["conv_ignored"] == {}
+    assert got["triggered_conversations"]["ana_ask"]["triggered_day"] == 1
+
+
+@needs_node
+def test_e6_job_xp_reaches_a_save_written_before_it(tmp_path):
+    """E6: a game that adds a ranked job. An old save's fast_jobs map has no job_xp;
+    the backfill fills it one level into the sub-map, and the global xp and cooldowns
+    the player already has are kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    sv["game_state"]["fast_jobs"] = {"xp": 2, "cooldowns": {"bar_job": 1}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["fast_jobs"]
+    assert got["job_xp"] == {}
+    assert got["xp"] == 2
+    assert got["cooldowns"] == {"bar_job": 1}
+
+
+@needs_node
+def test_e8_calls_state_reaches_a_save_written_before_it(tmp_path):
+    """E8-calls: a game that adds calls. An old save's phone map has no `calls`; the
+    backfill fills it one level into the phone sub-map, and the phone state the player
+    already has is kept."""
+    twee = build(BATCH2)
+    sv = old_save(twee)
+    del sv["game_state"]["phone"]["calls"]
+    sv["game_state"]["phone"]["matches"] = {"kai_profile": {"npc": "npc_kai"}}
+    got = run_backfill(twee, [sv], tmp_path)["saves"][0]["game_state"]["phone"]
+    assert got["calls"] == {}
+    assert got["matches"] == {"kai_profile": {"npc": "npc_kai"}}
+
+
+BATCH3 = "apps/game_generation/games_toml_files/engine_ws_batch3_2026_10_02.toml"
+
+
+@needs_node
+def test_e8b_return_place_reaches_a_save_written_before_it(tmp_path):
+    """E8b: a game that adds a `return` exit. An old save has no `return_place`; the
+    backfill fills it as "" (nothing stored), and a value already there is kept."""
+    twee = build(BATCH3)
+    sv = old_save(twee, drop_game_state=("return_place",))
+    kept = old_save(twee)
+    kept["game_state"]["return_place"] = "loc_gym"
+    got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
+    assert got[0]["game_state"]["return_place"] == ""
+    assert got[1]["game_state"]["return_place"] == "loc_gym"
+
+
+@needs_node
+def test_e7c_outfits_reach_a_save_written_before_them(tmp_path):
+    """E7c: a game that turns on saved outfits. An old save's $player has no `outfits`;
+    the backfill fills it at the top level, and an outfit already saved is kept."""
+    twee = build(BATCH3)
+    sv = old_save(twee, drop_player=("outfits",))
+    kept = old_save(twee)
+    kept["player"]["outfits"] = {"Work": {"top": "blouse"}}
+    got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
+    assert got[0]["player"]["outfits"] == {}
+    assert got[1]["player"]["outfits"] == {"Work": {"top": "blouse"}}
+
+
+@needs_node
+def test_e10_shop_sales_reach_a_save_written_before_them(tmp_path):
+    """E10: a game that adds a shop with a limited stock. An old save has no `shops`; the
+    backfill fills it, and sales already counted are kept."""
+    twee = build(BATCH3)
+    sv = old_save(twee, drop_game_state=("shops",))
+    kept = old_save(twee)
+    kept["game_state"]["shops"] = {"corner_shop": {"coffee": 2}}
+    got = run_backfill(twee, [sv, kept], tmp_path)["saves"]
+    assert got[0]["game_state"]["shops"] == {}
+    assert got[1]["game_state"]["shops"] == {"corner_shop": {"coffee": 2}}

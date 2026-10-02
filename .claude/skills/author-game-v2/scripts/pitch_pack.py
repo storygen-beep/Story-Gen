@@ -8,6 +8,8 @@ Usage:
     python3 scripts/pitch_pack.py <slug> --json      # machine-readable
     python3 scripts/pitch_pack.py <slug> --kind being_seen   # + that kind's library slice
     python3 scripts/pitch_pack.py <slug> --person <npc_id>   # RELATIONSHIPS: one person only
+    python3 scripts/pitch_pack.py <slug> --thread <id>       # the her-life Pitcher: one thread
+                                                             #   (+ --person <new_id> for its new person)
 
 WHY THIS EXISTS, and why it is a script and not a paragraph in the agent's prompt.
 
@@ -20,15 +22,16 @@ that exists, a character who does not, or a mechanic the engine cannot run.
 So the pack IS the Pitcher's world. Everything it may name is in here and
 nothing else is.
 
-A pitch is HER MOMENT, in eight lines (`the-release.md`, "Her moment — eight lines"), and each
-of the three Pitchers is given a different moment kind. So the pack opens with
-what a moment needs, in this order (PRD_IDEAS_AND_CRAFT IC2):
+A pitch is HER MOMENT, in eight lines (`the-release.md`, "Her moment — eight lines"). Each
+Pitcher is assigned a relationship or a thread; a moment kind (--kind) is a hint, not
+the assignment. So the pack opens with what a moment needs, in this order
+(PRD_IDEAS_AND_CRAFT IC2):
 
     THE PROMISE                   the fantasy, the model to beat, the live goal /
                                   mystery / rival, the moment kinds promised
     LAST LISTEN                   what players said after the last release
     MOMENT KINDS ALREADY SHIPPED  counted from releases[].moment_kind
-    THE MOMENT LIBRARY            the one kind this Pitcher was given (--kind)
+    THE MOMENT LIBRARY            the one kind this Pitcher was hinted (--kind)
     CLIPS ON THE SHELF            media files on disk, per person and pool
 
 and then WHERE and WHO: PLACES, PEOPLE and the STATE a pitch can key to (by
@@ -569,7 +572,8 @@ def _relationships(game, model, st):
                         renameable=bool(npc.get("customizable"))))
     # MOST OWED is a sort, not a score: open promises naming them, then set-ups
     # nothing pays, then releases since their last step (never recorded counts as
-    # most), then fewest steps shipped.
+    # most), then fewest steps shipped. The caller hands the top two to two Pitchers;
+    # the third gets a thread (THREADS).
     out.sort(key=lambda r: (-len(r["promises"]), -r["unread"],
                             -(r["since_last"] if r["since_last"] is not None else 10 ** 6),
                             len(r["steps"]), r["id"]))
@@ -750,6 +754,56 @@ def _print_promise(want):
         else:
             print(f"  {label}:")
             _want_value(val, indent="      ")
+    threads = _threads(want)
+    print(f"  {'her life, the threads':<22}"
+          + (f"{len(threads)} declared (THREADS below)" if threads else "not declared"))
+    if want.get("hold_kind") == "bill":
+        # World and Systems PRD S10: a pitch must not put a scene ON the payment.
+        print(f"  {'the bill':<22}the engine collects it: it arms at 00:00 on the due day and is"
+              " taken on her next move")
+        print(f"  {'':<22}(engine.md §26). A pitched scene sits beside the payment, never on it.")
+
+
+def _threads(want):
+    """want.threads[] — her life (the-want.md §6), dict rows with an id only."""
+    return [t for t in (want.get("threads") or []) if isinstance(t, dict) and t.get("id")]
+
+
+def _print_threads(want, thread=None, place_ids=None):
+    """THREADS — her life. The third Pitcher pitches a step in one of these (--thread).
+
+    Facts only: a thread's person missing from want.cast, or its place missing from the
+    places a pitch may name, is printed as a fact, never scored.
+    """
+    threads = _threads(want)
+    cast = {c.get("id") for c in (want.get("cast") or []) if isinstance(c, dict)}
+    _rule(f"THREADS — {len(threads)}, her life (want.threads[], the-want.md §6). "
+          "The third Pitcher pitches a step in one.")
+    if not threads:
+        print("  none declared — want.threads[] = [{id, name, person, place, system, link}]"
+              " (templates/want.md §5).")
+        return
+    if thread and thread not in {t["id"] for t in threads}:
+        print(f"  unknown thread `{thread}`. Threads: {', '.join(t['id'] for t in threads)}")
+        return
+    for t in threads:
+        if thread and t["id"] != thread:
+            continue
+        notes = []
+        if t.get("person") and t.get("person") not in cast:
+            notes.append("person not in want.cast")
+        if place_ids is not None and t.get("place") and t.get("place") not in place_ids:
+            notes.append("place not among PLACES")
+        mark = "  <- your thread" if thread else ""
+        print(f"  {t['id']}  ·  {t.get('name') or ''}  ·  person {t.get('person') or '?'}  ·  "
+              f"place {t.get('place') or '?'}  ·  system {t.get('system') or '?'}{mark}")
+        if t.get("link"):
+            _wrap(f"link into the hook: {t['link']}")
+        if notes:
+            print(f"      ({'; '.join(notes)})")
+    if thread:
+        print("  A step in this thread may add ONE new person who belongs to it: name, age (18+),")
+        print("  thread. Zero new places.")
 
 
 def _print_kinds(kinds_count, kinds_unrec, kinds_least):
@@ -758,7 +812,7 @@ def _print_kinds(kinds_count, kinds_unrec, kinds_least):
         print(f"  {k:<18}{kinds_count[k]:>3}   {label}")
     if kinds_unrec:
         print(f"  {'unrecorded':<18}{kinds_unrec:>3}   releases with no moment_kind (not guessed)")
-    print(f"  three least used: {', '.join(kinds_least)}  — one per Pitcher")
+    print(f"  three least used: {', '.join(kinds_least)}  — a hint for a Pitcher, not its assignment")
 
 
 def _print_library(kind):
@@ -806,7 +860,7 @@ def _read_page(path):
 # built yet. With no TOML it prints what does exist: the ledger, `WANT.md`, `IDEA.md`,
 # and the Want's own places and people (`want.places[]`, `want.cast[]`).
 
-def idea_pack(slug, state_path, as_json=False, kind=None, person=None):
+def idea_pack(slug, state_path, as_json=False, kind=None, person=None, thread=None):
     st = _state(state_path) or {}
     want = st.get("want") or {}
     game_dir = os.path.dirname(state_path)
@@ -823,7 +877,7 @@ def idea_pack(slug, state_path, as_json=False, kind=None, person=None):
             slug=slug, phase=st.get("phase"), built=False, want_page=want_md, idea_page=idea_md,
             places=places, people=people,
             promise={k: want.get(k) for k in
-                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
+                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds", "threads")},
             moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec, least_used=kinds_least),
             releases=_shipped(st.get("releases")),
         ), indent=2, default=list))
@@ -847,9 +901,15 @@ def idea_pack(slug, state_path, as_json=False, kind=None, person=None):
     for p in places:
         print(f"  {str(p.get('id')):<22}{p.get('name') or ''}")
 
-    _rule(f"PEOPLE — {len(people)}, from want.cast[]. A pitch names one of these.")
+    _print_threads(want, thread, {p.get("id") for p in places})
+
+    _rule(f"PEOPLE — {len(people)}, from want.cast[]. A pitch names one of these, or a thread"
+          " pitch one new person in its thread.")
     if person and person not in {p["id"] for p in people}:
-        print(f"  unknown person `{person}`. People: {', '.join(p['id'] for p in people) or 'none'}")
+        if thread:
+            print(f"  new person `{person}` — joins thread `{thread}`; the pitch gives name, age, thread.")
+        else:
+            print(f"  unknown person `{person}`. People: {', '.join(p['id'] for p in people) or 'none'}")
     for p in people:
         mark = "  <- your person" if person and p["id"] == person else ""
         print(f"  {p['id']}  ·  age {p.get('age', '?')}  ·  keeps: {p.get('keeps') or 'not declared'}{mark}")
@@ -868,12 +928,13 @@ def idea_pack(slug, state_path, as_json=False, kind=None, person=None):
     _print_shipped(st)
     print()
     print("─" * 72)
-    print("  Pitch step 1 in eight lines, with one of these people at one of these places.")
-    print("  Zero new places. LO picks one of the three; the others become later steps.")
+    print("  Pitch step 1 in eight lines, with one of these people at one of these places")
+    print("  (a thread pitch may add one new person in its thread). Zero new places. LO picks")
+    print("  one of the three; the others become later steps.")
     return 0
 
 
-def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
+def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None, thread=None):
     game = gates._load(toml_path)
     model, _ = gates.build(game)
     st = _state(state_path) or {}
@@ -944,7 +1005,7 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
             promises=[p for p in (st.get("promises") or []) if not p.get("paid_in")],
             releases=_shipped(st.get("releases")),
             promise={k: want.get(k) for k in
-                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds")},
+                     ("fantasy_shape", "model_to_beat", "promise", "moment_kinds", "threads")},
             moment_kinds_shipped=dict(kinds_count, unrecorded=kinds_unrec,
                                       least_used=kinds_least),
             clips={who: {ref: _count_on_disk(roots, ref, pool) for ref, pool in rs}
@@ -999,14 +1060,20 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     _rule("RELATIONSHIPS — a pitch is the NEXT step on one of these (the-release.md, \"The next step\")")
     print("  Most owed first. The order is a sort, not a score: open promises naming them, then")
     print("  set-ups their steps made that nothing reads, then releases since their last step, then")
-    print("  fewest steps. The caller gives the top three to the three Pitchers.")
+    print("  fewest steps. The caller gives the top two to two Pitchers, plus one thread")
+    print("  (THREADS) to the third.")
     print()
     shown = [r for r in rels if not person or r["id"] == person]
     if person and not shown:
-        print(f"  unknown person `{person}`. People: {', '.join(r['id'] for r in rels)}")
+        if thread:
+            print(f"  new person `{person}` — joins thread `{thread}`; no steps yet, so this is step 1.")
+        else:
+            print(f"  unknown person `{person}`. People: {', '.join(r['id'] for r in rels)}")
     for r in shown:
         _print_relationship(r, full=True)
         print()
+
+    _print_threads(want, thread, {l["id"] for l in locs})
 
     # ── naming ──────────────────────────────────────────────────────────────
     _rule("NAMING — the game's own names and words. Write these, not your own.")
@@ -1100,7 +1167,8 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
         _wrap(", ".join(c["id"] for c in unplaced), indent="    ")
 
     # ── people ──────────────────────────────────────────────────────────────
-    _rule(f"PEOPLE — {len(npcs)}. A pitch names one of these and invents no one.")
+    _rule(f"PEOPLE — {len(npcs)}. A pitch names one of these; only a thread pitch may add one"
+          " new person, in its thread.")
     print("  `schedule` is where the CHARACTER stands, not when a canvas fires. The two are")
     print("  different gates and this pack does not carry canvas triggers — if a pitch depends")
     print("  on when an existing surface plays, open the TOML and read that canvas's trigger.")
@@ -1210,7 +1278,8 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
     print()
     print("─" * 72)
     print("  Pitch her moment in eight lines, at one of these places with one of these")
-    print("  people, keyed to state that already exists. Default to zero new places")
+    print("  people (or one new person in a thread pitch's thread), keyed to state that")
+    print("  already exists. Default to zero new places")
     print("  (`the-release.md`, \"Where a release happens\"). LO judges the pitch.")
     return 0
 
@@ -1218,12 +1287,12 @@ def pack(slug, toml_path, state_path, as_json=False, kind=None, person=None):
 def main():
     args = sys.argv[1:]
     opts = {}
-    for flag in ("--kind", "--person"):
+    for flag in ("--kind", "--person", "--thread"):
         if flag in args:
             i = args.index(flag)
             opts[flag] = args[i + 1] if i + 1 < len(args) else ""
             del args[i:i + 2]
-    kind, person = opts.get("--kind"), opts.get("--person")
+    kind, person, thread = opts.get("--kind"), opts.get("--person"), opts.get("--thread")
     argv = [a for a in args if a != "--json"]
     if not argv:
         print(__doc__)
@@ -1233,10 +1302,12 @@ def main():
         # The idea phase: no build yet. Read the ledger and the Want and idea pages instead.
         game_dir = os.path.dirname(state_path)
         if os.path.exists(state_path) or os.path.exists(os.path.join(game_dir, "WANT.md")):
-            return idea_pack(slug, state_path, as_json="--json" in sys.argv, kind=kind, person=person)
+            return idea_pack(slug, state_path, as_json="--json" in sys.argv, kind=kind, person=person,
+                             thread=thread)
         print(f"not found: {toml_path}, and no v2_state.json or WANT.md in {game_dir}")
         return 2
-    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind, person=person)
+    return pack(slug, toml_path, state_path, as_json="--json" in sys.argv, kind=kind, person=person,
+                thread=thread)
 
 
 if __name__ == "__main__":

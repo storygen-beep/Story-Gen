@@ -18,16 +18,17 @@ key, it does not belong on the board.
 
 ## 1. Locations — `[[locations]]`
 
-⚠️ **Read `references/the-systems.md` before this section, and declare `board.systems[]` first.**
-The derivation below needs them: a room's rows come from the systems that describe her, not from
-the room. Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, so what
+⚠️ **Read `references/the-systems.md` before this section, and fill a card per system before the
+rooms** (`board.systems[]`, `templates/sheets/system.md`; its meters go in `board.meters[]`). The
+derivation below needs them: a room's rows come from the systems that live there, not from the
+room. Course of Temptation reads `has_inclination` in 218 of its 5,294 passages, so what
 she has become changes what a room offers (`the-systems.md` SY1).
 
 **How many locations is not a number you pick. Derive it from what a place is FOR** — the three
 things a room's list can hold (`the-surfaces.md` R2):
 
 ```
-needs served here  +  work done here  +  people scheduled here
+needs served here  +  systems that live here  +  people scheduled here
 ```
 
 Write the list of places that answer at least one of those, and count it. That is the answer.
@@ -75,17 +76,17 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
 - **Who is there and when — and on a destination, one thing she does alone.** A thoroughfare needs
   neither.
 - **What its list holds** (`serves`) — the three kinds and nothing else (`the-surfaces.md` R2):
-  which declared **needs** she can fill here, what **work** is done here, which **people** are
-  scheduled here. *That is the room's menu, and its length.*
+  which declared **needs** she can fill here, which **systems** live here (a job is a system with a
+  card, listed under the `work` key), which **people** are scheduled here. *That is the room's menu, and its length.*
 
   ```jsonc
-  { "id": "the_kitchen", "serves": { "needs": ["hunger"], "work": [], "people": ["npc_martin", "npc_denise"] } }
+  { "id": "the_kitchen", "serves": { "needs": ["energy"], "work": [], "people": ["npc_a", "npc_b"] } }
   ```
 
   ⚠️ **This replaced an `objects` list on 2026-08-18 and the reason is worth carrying.** The old
   rule declared the things in the room and derived the choice count from them, and gate 22 computed
   affordances from `exit_block.choices` and **could not see a canvas at all**; the gate is deleted
-  (`gates.py:2248`). A body needs about five things; a room contains fifty nouns. Needs are a closed
+  (`gates.py:2147`). A body needs about five things; a room contains fifty nouns. Needs are a closed
   list; objects are an open one. `the-surfaces.md`, *"Why this sizes itself"*.
 
   The `objects` key is left readable in old ledgers. **Nothing reads it any more.**
@@ -98,7 +99,7 @@ For each location, decide and record in `v2_state.json` under `board.locations[]
   { "id": "the_kitchen", "labels": ["private", "sells_food", "has_washer"] }
   ```
 
-  ⚠️ **Does the room carry a `sourced` system?** (`the-systems.md` SY2) It is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
+  ⚠️ **Does a system here write a `sourced` meter?** (`the-systems.md` SY2) It is not gated — there is no measured answer to *how many is enough* — but it is the question to ask
   of every room on this list before the prose exists.
 - **Anchor or satellite?** (`anchor`) Exactly one location is the anchor.
 - **Its word budget** (`fill`) — **in round numbers, written now, before the prose.**
@@ -155,12 +156,12 @@ fails otherwise.
 the weekday are two separate checks, and the weekday one runs first against **today**:
 
 ```
-v2.py:3800   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:3801   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:4309   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:4310   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
-startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4152`). So
+startTotal || currentTotal < endTotal;`, the `isCurrentTimeSlot` definition at `v2.py:4661`). So
 `weekdays = [0,1,2,3,4,5,6]`, `22:00`–`04:00` is correctly **one** row.
 
 ⚠️ **But `weekdays = [1]`, `23:00`–`06:00` puts the character on site on Tuesday night and DELETES
@@ -421,8 +422,9 @@ wardrobe_location = "her_room"
 
 ## Before leaving this phase
 
-Record in `v2_state.json`: every location with its budget and current fill, every character
-with its surface count and schedule rows, the ascent meter and its ceiling.
+Record in `v2_state.json`: every system card, every meter and the infrastructure, every location
+with its budget and current fill, every character with its surface count and schedule rows, the
+ascent meter and its ceiling.
 
 Then run the check that reads the ledger alone — before any TOML exists, `gates.py` has nothing to
 read and says so:

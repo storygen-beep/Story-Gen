@@ -1,0 +1,9 @@
+{
+  "id": "06_breakfast_independent_line",
+  "source": "members_only SKILL_TEST_FINDINGS #54; SKILL_TEST_REVIEW I27 (adjacent groups merged, old lines went dead)",
+  "rule": "the-want.md:105; adjacent groups merge into one chain",
+  "task": "Add one more line to hub_martin_breakfast that changes depending on whether Diane is in the kitchen. Keep every existing line working.",
+  "target_lints": [
+    "adjacent_groups"
+  ]
+}

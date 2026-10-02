@@ -32,7 +32,7 @@ common context yields three shades of one idea, and the point is genuinely diffe
 
 ⚠️ **That design has a cost, and the cost is what took the build.** A Pitcher with no context
 does not know what the game already contains: it will name a location that exists, a character
-who does not, or a mechanic the engine cannot run. So the context it is denied is the
+who does not (outside the one new person a thread pitch may add), or a mechanic the engine cannot run. So the context it is denied is the
 *conversation*, never the *facts* — and the facts are generated rather than remembered:
 
 ```bash
@@ -41,7 +41,8 @@ python3 scripts/pitch_pack.py <slug>
 
 Places, people, the meters and flags a pitch can key to, the money, the Want verbatim, what
 already shipped, and which promises are still open — read off the game's own
-`7_final_game.toml` and `v2_state.json`. **Everything a Pitcher may name is in the pack.**
+`7_final_game.toml` and `v2_state.json`. **Everything a Pitcher may name is in the pack**, plus,
+in a thread pitch, one new person who belongs to that thread (`--thread <id>`).
 
 It reuses `gates.build()` and re-parses nothing, for the reason the Player's harness exists:
 in this subject alone, a condition names its trait `trait_key` while an effect names it
@@ -58,7 +59,8 @@ thin"* is an opinion, `gates.py <slug>` is where opinions with evidence live, an
 here have already been withdrawn for failing something correct.
 
 Each returns: the subject, which line of the Want it serves, which existing places and people
-it touches, what it opens, and roughly what it costs.
+it touches (and a thread pitch's new person: name, age, thread), what it opens, and roughly what it
+costs.
 
 LO picks one. The Owner develops it.
 
@@ -68,9 +70,11 @@ Removing the *conversation* removes conversational correlation. It does nothing 
 **informational** correlation, and three agents given identical facts and an identical prompt
 converge.
 
-**Each Pitcher is given a different relationship** (LO, 2026-09-27): the three most owed, from the
-pack's RELATIONSHIPS (`pitch_pack.py <slug> --person <npc>`), and each names the moment kind its
-step serves. All three keep the game's fantasy. A pitch is the next step on that relationship —
+**Each Pitcher is given a different assignment** (LO, 2026-10-01): two get the two most-owed
+relationships, from the pack's RELATIONSHIPS (`pitch_pack.py <slug> --person <npc>`); the third gets
+a declared thread of her life (`--thread <id>`, `the-want.md` §6) and may add one new person who
+belongs to it. Zero new places. The moment kind is a hint, and each names the kind its step serves.
+All three keep the game's fantasy. A pitch is the next step on that relationship or in that thread —
 what it pays, her moment, what it opens (`the-release.md`, "The next step").
 
 > This is the capability the incumbent system most visibly lacks. It is a correctness
@@ -166,12 +170,12 @@ target. Its output: the prose. It does not choose placement, gates, or media.
 > ✅ **BUILT 2026-08-29.** The harness is `scripts/playtest.py`; the agent is
 > `.claude/agents/v2-player.md`, callable as `subagent_type: "v2-player"`. A live play finds what
 > no source gate can — for one, an effect op the runtime does not implement (`applyTraitEffect`
-> handles only `add` and `set`, `v2.py:6210`).
+> handles only `add` and `set`, `v2.py:6905`).
 >
 > ⚠️ **Why it is shared code.** The engine's signatures are easy to get wrong by hand:
 > `applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap)` takes seven positional
-> arguments, not one options object (`v2.py:6210`, `:20814`), and `pickQuestsCards` returns `[]`
-> for any scope but `"story_goals"` (`v2.py:16224-16225`). Every signature the harness wraps is one
+> arguments, not one options object (`v2.py:6905`, `:21808`), and `pickQuestsCards` returns `[]`
+> for any scope but `"story_goals"` (`v2.py:17132-17133`). Every signature the harness wraps is one
 > nobody has to re-derive.
 
 **Job:** play the build and report numbers.

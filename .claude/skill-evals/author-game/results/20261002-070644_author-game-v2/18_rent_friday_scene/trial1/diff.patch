@@ -1,0 +1,26 @@
+diff --git a/games/billable_hours/toml_phases/0_systems_spec.toml b/games/billable_hours/toml_phases/0_systems_spec.toml
+index 4185ec2..b1473f3 100644
+--- a/games/billable_hours/toml_phases/0_systems_spec.toml
++++ b/games/billable_hours/toml_phases/0_systems_spec.toml
+@@ -36,13 +36,15 @@ currency_symbol  = "$"
+ 
+ [settings.rent.text]
+ title         = "Friday"
+-scene         = "It's Friday. Martin is at the kitchen table with his coffee, and there's an empty space on the table in front of him where the envelope goes."
+-greeting      = "\"Friday, Emma.\" He doesn't look up from the paper."
+-paid_scene    = "You put the envelope down. He slides it over with two fingers and it's gone into his jacket."
+-paid_response = "\"Good girl.\" Your mother smiles at the stove like she didn't hear it."
++# These pages render on every Friday at every stage of Martin's arc, so nothing here claims a past
++# or says whether he has touched her yet. The stage lines decide whether he counts it.
++scene         = "It's Friday. Martin is at the head of the kitchen table in his suit, coffee at his elbow, the paper in one hand. In front of him is a clean square of table with nothing on it. That's where your envelope goes. Your mother is at the stove. Ethan is at the counter with his mug, waiting to see you do it."
++greeting      = "\"Friday, Emma.\" He doesn't look up from the paper. He doesn't need to. You can feel him waiting for you, like a hand on the back of your neck."
++paid_scene    = "You put the envelope down in the empty square. That's your week, folded in half. He slides it over with two fingers and it goes inside his jacket, against his chest. Then he looks up. He takes his time about it, from your face down and slowly back up, with your mother three feet away. Your face goes hot. So does the rest of you, and you hate that he can probably tell."
++paid_response = "\"Good girl.\" He says it low, like it's only for you. Your mother smiles at the stove like she didn't hear it. Ethan heard it. He sets his mug down hard and looks at you like you just proved his point. You should hate hearing it. You don't, and that's worse."
+ paid_closing  = "Go to work."
+-cant_pay      = "You don't have it. He looks at you over the paper for a long time. \"Then it's owed. Next Friday it's all of it.\""
+-partial_pay   = "He counts what you've got and puts it away. \"The rest next week, Emma. I keep track.\""
++cant_pay      = "You don't have it, so you put nothing down. The square in front of him stays empty. He lowers the paper and looks at you over it for a long time. Your mother stops stirring. Ethan stops chewing. \"Then it's owed,\" Martin says. \"Next Friday it's all of it, Emma. You'll find a way. Girls like you always do.\" You know exactly what he means. He knows you know."
++partial_pay   = "The envelope is thin, and you both see it before it touches the table. He counts it in front of everyone, one bill at a time, while your mother pretends to read the cereal box. \"Short.\" He puts it away. \"The rest next week, Emma. I keep track of everything you owe me.\" He watches your mouth while he says it, and your knees go stupid."
+ 
+ [time]
+ enabled       = true

@@ -354,7 +354,8 @@ One-shot scene, a fixed `file`:
 ] } },
 ```
 
-Repeatable surface, a `pool_dir` (NSFW on a repeatable canvas wants a pool — §7):
+Repeatable SCREEN, a `pool_dir` (NSFW on a screen the player sees several times in one session wants a
+pool — §7; a loop's intro and finisher screens are NOT that, they take one `file`):
 
 ```toml
 { type = "cascade", props = { beats = [
@@ -432,6 +433,19 @@ Two engine features worth using:
       for so one can be seen once. A Lane-4 capstone plays exactly once; a pool there is pure waste.
     - Evidence this is the real line: **27 of the 30** pools shipping in `the_long_summer_test` are
       under `sex/`.
+    - **Inside a sex loop, count per SCREEN per SESSION — not per canvas.** A loop canvas is repeatable,
+      but its screens are not seen equally. An **act screen** (oral, riding, anal) has a "keep going"
+      choice that routes back to itself (`nodeId` = its own id), so one session renders it several
+      times: that screen earns a pool. The **intro** (first screen) and the **finisher** (cum) render
+      **once per session**, and the finisher is also split across 2–3 finish types, so each finish
+      clip comes up every 2nd or 3rd session at best — clips 2–4 of a finish pool are almost never
+      seen. **Intro and finish screens take one `file`.** Same for any screen that renders once per
+      attempt (a "caught" or failure screen) and any **one-time** step (a first night, a washing, a
+      capstone). Measured on `vesper`, 2026-10-02: **36 of its 111 pools were finish screens**, plus
+      two once-only steps (`bastien_cot_wash_t5`, `bastien_cot_first_night_t5`) whose clips 2–4 could
+      never render; all converted to single files. The check is one line per screen: does any choice
+      in its `exit_block` name its own node — as `nodeId = "oral"` OR qualified `nodeId = "<canvas>.oral"`
+      (`hunt_marsh_sunday` uses the qualified form, and a bare-id check misses it)? No → one `file`.
 
   **Gate 2 — are the clips INTERCHANGEABLE?** This decides whether the pool is *fillable*. Every clip
   must satisfy the *same* `description`, so a loose one (a generic act) pools well and a tight one (a

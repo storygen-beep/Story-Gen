@@ -61,6 +61,7 @@ example is being taught too.** *(LO decided.)* Take the mechanism. Leave the fur
 turns the act into something she can simply do · doing *that* repeatedly opens the next act.
 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
+After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9).
 
 The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
@@ -252,6 +253,8 @@ Three things worth taking:
   question of who climbs — because two routes means two ladders to declare.
 - **The arc ends by pointing at another arc.** Neither path terminates. Both hand over.
 
+**Two routes on one person are two arcs; inside a system, ladders follow `the-systems.md` SY8's touch rule.**
+
 ⚠️ **Blockers are declared in the same list as requirements.** Both CoT paths refuse to
 conclude while she is wearing a chastity device; the submissive path also refuses while she is
 in an exclusive relationship. A social or worn state that stops an arc is stated up front on
@@ -312,8 +315,16 @@ changing what it does.
 > ordinarily, something happens **36%** of the time; dressed provocatively, **71%**. Same scenes.
 > Twice as much world.
 
+**Remind her before the key is needed.** A garment the arc needs is named where she will see it
+before its window opens. In Her Own Hands reminds her of the date dress in two rooms; its gala gown
+has no reminder, so a player who is not wearing it gets a silent gala night (round 9a,
+`traces/ihoh_wardrobe.md`). A key garment is one reader among many: the wardrobe is designed as
+states first, then items (`engine.md` §17).
+
 The gate `the wardrobe is read` asks only whether a declared `[[clothing]]` catalog is read
-*anywhere*. This says where it earns its keep: on a rung, and on a rate. `the-meters.md` W7 and
+*anywhere*. The rule is stricter: every declared state and key item is read in ≥3 places (planned
+gate: `every clothing state is read three times`). This says where it earns its keep: on a rung,
+and on a rate. `the-meters.md` W7 and
 `engine.md` §17 own the mechanism (`worn_exposure` is the predicate that reads an empty slot).
 
 ### A6b · Somebody else can set the dress code — and showing by accident is not showing on purpose
@@ -375,13 +386,13 @@ next step. If it is, and its conditions hold, it fires. Arc content does not que
 > through to the standard scenes.
 
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
-location screen renders (`getStoryCanvasRedirect`, `v2.py:4921`), and among the candidates
-`selectAutoFireCanvasForLocation` (`v2.py:4622`) takes the **highest `priority`**
-(`v2.py:4633-4634`). So
+location screen renders (`getStoryCanvasRedirect`, `v2.py:5501`), and among the candidates
+`selectAutoFireCanvasForLocation` (`v2.py:5199`) takes the **highest `priority`**
+(`v2.py:5210-5211`). So
 an arc beat is a one-shot at the location, priced above the other one-shots that could fire there.
 
 ⚠️ **It is the auto-fire queue it wins, not the dice.** That selector skips
-`triggerMode == "random"` and `substitutionOnly` canvases outright (`v2.py:4630-4631`); random
+`triggerMode == "random"` and `substitutionOnly` canvases outright (`v2.py:5207-5208`); random
 ambients and substitutions are a separate selector on the location screen. The redirect happening
 first is what gives the same effect as that pre-empt — the player never reaches the roll — but
 the two are different mechanisms and the caveats do not carry across.
@@ -560,6 +571,9 @@ move came from nowhere.
 A pressure type moves first and names the act; a nice type waits, so she moves. Both show the want
 first.
 
+Scoped to a person with a ladder; a stranger or one-off (A15) passes if the same canvas shows his want
+before the act.
+
 ## A14 · A relationship is a chain of steps
 
 **The shape:** every step pays one before it and opens one after it, and the text says so. The
@@ -575,13 +589,19 @@ Four rules follow:
   the field's best relationships: 79 of 162 player comments on the three arcs are "how do I / I'm
   stuck", and 0 are about his character.
 - **A "no" parks the step** (A3); only a labelled final no closes his path, never the person.
-- **A pitch is a step on a named relationship** (`the-release.md`, "The next step").
+- **A pitch is a step on a named relationship, or a step in a declared thread** (`the-release.md`, "The next step").
 
 ---
 
-## A15 · Her climb into paid sex — introduced, a first time, then the repeatable
+## A15 · Her climb into paid sex — the lewd ladder of a money system
 
 *(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`. Gate `her climb`.)*
+
+Paid sex is a money system (`the-systems.md` SY8), and this climb is its lewd ladder: each rung opens
+an act and better pay. **The model is Shady Deals' stroll:** the price is built from her stats
+(charm × 10–24, plus 0–120, plus sluttiness × 10–25), the corner picks the act, and the price is on
+screen before she agrees ([Spot Work]). **The failure is Course of Temptation's gloryholes:** 38
+passages, and none pays a cent (round 9b, `cards/sex_for_pay.md`; `templates/cards/sex_for_pay.md`).
 
 - **Introduced first.** Someone raises it in a one-time scene before the activity appears — the
   activity's version of "every hub is met first" (`the-first-hour.md` F5). 4 of 5 games do (R1:76).
@@ -610,17 +630,18 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
   counter (`<npc>_stage eq n-1`) that sets it to `n`, and the final step opens the repeatable surface —
   the `counter` of `board.characters[].ladder` (`state.md`; `the-spine.md` SP2).
 - ⚠️ **The native primitive exists and is not wired.** `setup.selectCanvasByPriority`
-  (`v2.py:4980`) implements A1 exactly — canvases sharing a `name` form a group, unvisited tiers
+  (`v2.py:5560`) implements A1 exactly — canvases sharing a `name` form a group, unvisited tiers
   play in ascending `priority`, and once all are seen it returns the highest-priority one
   forever. **Nothing calls it.** In a built game's `output/index.html` the symbol appears
   three times and is invoked zero times. The live path is `renderSoloActivities`
-  (`v2.py:5242`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
+  (`v2.py:5898`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
   does no progression at all. **Do not point an author at it.** Wiring it is an open engine
   decision, not a thing this file may assume.
-- **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:4633-4634`).
+- **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:5210-5211`).
 - **A6 is available** — `worn_exposure`, `worn_type`, `worn_corruption` and `worn_beauty` are
   condition predicates (`engine.md` §17; `worn_exposure` is the only one that reads an empty
-  slot).
+  slot). A scene can take clothes off her (`wardrobeEffects` `remove` / `unequip`, `engine.md` §17); one gap: there is no "leave the room" hook,
+  so a price to go out in a state lives in each destination's `entry_conditions`.
 - **A4's grant-while-under-threshold** is an ordinary `[group]` band on the meter plus an
   `add` effect. ⚠️ Adjacent `[group]` blocks merge into one if/elseif chain and first match
   wins (`engine.md` §35) — separate the grant band from any other ladder on the same node with

@@ -35,7 +35,7 @@ text = "Get dressed and go down."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "house"
+locationId               = "kitchen"
 time_progression_minutes = 10
 flagEffects = [ { targetType = "player", flag = "opening_boot", op = "set" } ]
 wardrobeEffects = [
@@ -53,7 +53,7 @@ name = "Breakfast"
 description = "Meets Martin, Diane and Ethan (one flag for the group, F8). The start choice. Sets met_family."
 
 [canvases.trigger]
-location      = "house"
+location      = "kitchen"
 is_repeatable = false
 priority      = 11
 is_active     = true
@@ -277,7 +277,7 @@ text = "Take the bus home."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "house"
+locationId               = "kitchen"
 time_progression_minutes = 45
 flagEffects = [
   { targetType = "player", flag = "met_callahan",   op = "set" },
@@ -296,7 +296,7 @@ name = "Dinner"
 description = "The family at dinner, Martin's line again, Jade's text, then the plain how-this-works screen. Sets opening_done."
 
 [canvases.trigger]
-location      = "house"
+location      = "kitchen"
 is_repeatable = false
 priority      = 11
 is_active     = true
@@ -357,6 +357,6 @@ text = "Start playing."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "house"
+locationId               = "kitchen"
 time_progression_minutes = 10
 flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]

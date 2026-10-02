@@ -12,6 +12,7 @@
 | hidden until (`hidden_until`) | <flag — or "no"> |
 | fill — word budget (S3) | <a round number> |
 | door | <yes: who answers — or no> |
+| dress code or wanted state | <`clothing_rules` slots, or a `worn_*` state in `entry_conditions` — or "none"> · <the reason she is told> · <the way out: change · what to buy> |
 
 ## On entering
 

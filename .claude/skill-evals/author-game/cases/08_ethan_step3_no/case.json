@@ -1,0 +1,7 @@
+{
+  "id": "08_ethan_step3_no",
+  "source": "SKILL_TEST_REVIEW I1; members_only #51 (10 bare 'Walk out' refusals with no text and nothing changing)",
+  "rule": "the-arc.md A14 written no",
+  "task": "Write Ethan's step 3, the next step after ethan_02_copier, and give Emma a way to say no to him.",
+  "target_lints": []
+}

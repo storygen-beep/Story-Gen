@@ -1,0 +1,7 @@
+{
+  "id": "10_work_late",
+  "source": "probation SKILL_TEST_FINDINGS (button '(1 hour)' spent 110 minutes)",
+  "rule": "the-clock.md C3, C4",
+  "task": "Add a 'Work late' option to act_work_shift that keeps Emma at the firm for two extra hours.",
+  "target_lints": []
+}

@@ -1,0 +1,9 @@
+{
+  "id": "01_first_meeting_new_npc",
+  "source": "CHANGELOG.md:13526 (the_season meetings fired into empty rooms); CHANGELOG.md:13544 (meet_emmett bare name)",
+  "rule": "the-first-hour.md F5, F5b, F7",
+  "task": "Add a new person to the game: Priya Shah, 35, the firm's senior paralegal who trains the interns. Give her a weekday schedule at the firm and write Emma's first meeting with her.",
+  "target_lints": [
+    "ambient_presence"
+  ]
+}

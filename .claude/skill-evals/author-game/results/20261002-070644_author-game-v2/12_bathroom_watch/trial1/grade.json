@@ -1,0 +1,201 @@
+{
+ "case": "12_bathroom_watch",
+ "skill": "author-game-v2",
+ "passed": false,
+ "fails": [
+  "watch_ethan_shower: explicit beat has 2 frozen-list words (floor 3): Steam rolls out when you push the door. Ethan stands under t",
+  "watch_ethan_shower: explicit beat has 2 frozen-list words (floor 3): You hear the water before you see him. The door gives, and t",
+  "watch_ethan_shower: explicit beat has 1 frozen-list words (floor 3): He sees you in the mirror and his hand stops. For a second h",
+  "watch_ethan_shower: explicit beat pivots off the body at its last sentence: He keeps stroking until the last of it drips off the head.",
+  "watch_ethan_shower: explicit beat has 1 frozen-list words (floor 3): He shuts the water off and looks at you, breathing hard, his"
+ ],
+ "cost_usd": 1.6299112,
+ "turns": 39,
+ "subtype": "success",
+ "wall_s": 262.4,
+ "ran_gates": true,
+ "skills_called": [],
+ "permission_denials": [
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01FCa64QcKBTi8Tmtuev5V2N",
+   "tool_input": {
+    "command": "cd ../references && sed -n 653,674p engine.md; cd ../../../.. && sed -n 40,75p games/billable_hours/toml_phases/0_systems_spec.toml; head -40 scripts/merge_toml_phases.py; grep -n \"argv\\|argparse\\|add_argument\" scripts/merge_toml_phases.py .claude/skills/author-game-v2/scripts/gates.py | head",
+    "description": "Read npc_at_location, daily tick, merge script args"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01B8yJhW5cCwQvjys6yD8mtr",
+   "tool_input": {
+    "command": "python3 - <<'EOF'\nimport json\np='v2_state.json'\nd=json.load(open(p))\nb=d['board']\nfor c in b['characters']:\n    if c['id']=='npc_ethan':\n        c['schedule'][0:0]=[\n          {\"where\":\"bathroom\",\"weekdays\":[\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\"],\"from\":\"06:00\",\"to\":\"07:00\"},\n          {\"where\":\"bathroom\",\"weekdays\":[\"Sat\"],\"from\":\"10:00\",\"to\":\"11:00\"}]\nb['repeatables_planned'].append({\"id\":\"watch_ethan_shower\",\"where\":\"bathroom\",\n  \"note\":\"Ethan in the shower (his rows: weekdays 06:00-07:00, Saturday 10:00-11:00); she watches. His half banded on ethan_stage, hers on nerve (0-9 / 10-29 / 30+). Once a day (ethan_shower_today). Sets watched_ethan_shower, read on hub_ethan_landing. act_shower now reads him absent.\"})\nd['decisions'].append({\"date\":\"2026-10-02\",\"by\":\"LO\",\"what\":\"repeatable: Emma watches Ethan in the shower\",\n  \"detail\":\"watch_ethan_shower at the bathroom, bound to npc_ethan (portrait). New Ethan schedule rows: bathroom Mon-Fri 06:00-07:00, Sat 10:00-11:00. Nodes door (pooled) -> watch (his half on ethan_stage, hers on nerve) -> finish (he comes; Diane calls up when she is in the kitchen), or leave (a no that renders). Day cap ethan_shower_today cleared in daily_tick. act_shower gains npc_at_location(bathroom, npc_ethan, is_absent) so the two never render together. Not built, not gated: build was out of scope for this step.\",\n  \"replaces_heat\":\"nothing removed; one explicit repeatable added at the bathroom\"})\njson.dump(d,open(p,'w'),indent=2,ensure_ascii=True); open(p,'a').write('\\n')\nEOF\ngit diff --stat; python3 -c \"import tomli\" 2>&1; python3 -c \"import toml\" 2>&1; python3 --version",
+    "description": "Update ledger and check TOML parser availability"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01AUiar6KEQRNKu3EN9PdYgn",
+   "tool_input": {
+    "command": "for f in toml_phases/0_systems_spec.toml toml_phases/1_metadata_and_locations.toml toml_phases/3_activities.toml toml_phases/5_scenes.toml; do python3 -c \"import tomli,sys; tomli.load(open(sys.argv[1],'rb')); print('ok', sys.argv[1])\" \"$f\"; done",
+    "description": "Parse each edited TOML file"
+   }
+  }
+ ],
+ "changed_files": [
+  " M games/billable_hours/toml_phases/0_systems_spec.toml",
+  " M games/billable_hours/toml_phases/1_metadata_and_locations.toml",
+  " M games/billable_hours/toml_phases/3_activities.toml",
+  " M games/billable_hours/toml_phases/5_scenes.toml",
+  " M games/billable_hours/v2_state.json"
+ ],
+ "init": {
+  "model": "claude-opus-5-5",
+  "skills": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring"
+  ],
+  "agents": [
+   "claude",
+   "Explore",
+   "general-purpose",
+   "Plan",
+   "statusline-setup",
+   "v2-attack",
+   "v2-listener",
+   "v2-pitcher",
+   "v2-player",
+   "v2-prose",
+   "v2-reader"
+  ],
+  "plugins": [
+   {
+    "name": "cc-plugin-agents-md",
+    "path": "builtin",
+    "source": "cc-plugin-agents-md@builtin"
+   },
+   {
+    "name": "cc-plugin-telemetry",
+    "path": "builtin",
+    "source": "cc-plugin-telemetry@builtin"
+   },
+   {
+    "name": "cc-plugin-plugin-authoring",
+    "path": "builtin",
+    "source": "cc-plugin-plugin-authoring@builtin"
+   }
+  ],
+  "tools": [
+   "Task",
+   "Bash",
+   "CronCreate",
+   "CronDelete",
+   "CronList",
+   "DesignSync",
+   "Edit",
+   "EnterWorktree",
+   "ExitWorktree",
+   "Glob",
+   "Grep",
+   "ListAgents",
+   "Monitor",
+   "NotebookEdit",
+   "PushNotification",
+   "Read",
+   "RemoteTrigger",
+   "ReportFindings",
+   "ScheduleWakeup",
+   "SendMessage",
+   "Skill",
+   "TaskCreate",
+   "TaskGet",
+   "TaskList",
+   "TaskStop",
+   "TaskUpdate",
+   "ToolSearch",
+   "WebFetch",
+   "WebSearch",
+   "Workflow",
+   "Write"
+  ],
+  "slash_commands": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring",
+   "advisor",
+   "agents",
+   "auto-mode-setup",
+   "autocompact",
+   "clear",
+   "color",
+   "compact",
+   "config",
+   "output-style",
+   "context",
+   "effort",
+   "fast",
+   "focus",
+   "heapdump",
+   "init",
+   "mcp",
+   "import",
+   "model",
+   "__remote-workflow",
+   "workflow-launch-exec",
+   "reload-plugins",
+   "reload-skills",
+   "rename",
+   "ultrareview",
+   "security-review",
+   "usage-credits",
+   "extra-usage",
+   "usage",
+   "insights",
+   "recap",
+   "skill-doctor",
+   "goal",
+   "design-consent",
+   "design-revoke",
+   "list-agents",
+   "team-onboarding"
+  ],
+  "cwd": "/private/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_12_bathroom_watch_eouwtgo0/w",
+  "permissionMode": "acceptEdits"
+ },
+ "staging": "/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_12_bathroom_watch_eouwtgo0/w",
+ "regraded": true
+}

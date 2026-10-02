@@ -32,8 +32,8 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 
 3. **Heat lives where the player returns** — most explicit content sits where the player can go
    back. The gate counts **beats** (a beat is one screen): `explicit floor` wants **7.5% of repeatable
-   beats** to carry three or more explicit words. The 7.5% is the reference game's band (7.5–9.3%,
-   held eight years), not the genre's rate, and the field reads differently by unit:
+   beats** to carry three or more explicit words. The 7.5% is a lenient floor inside the reference game's band (6.8–11.3%,
+   re-measured 2026-10-02), not the genre's rate, and the field reads differently by unit:
 
    | unit | field median | the reference game's 7.5% |
    |---|---|---|
@@ -45,6 +45,10 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 4. **A release adds events, not places.** One full six-week DoL cycle: +196 units,
    +24,388 words, **zero** new locations, and all ten of its content commits were events at
    an existing place with an existing character. 55.6% of its commits were fixes.
+   **Open places early, add people over time.** Day 1 opens most places and few people: 42–98% of
+   places and 0–38% of people, in 7 of 7 games (round 7, `ROUND7_REPORT.md`). Most systems are usable
+   on day 1 at their bottom rung, 79–87% (round 9b, `ROUND9B_REPORT.md`). So a release adds rungs and
+   people, and a new system only as the top of an existing ladder.
 
 ## The fifth commitment — the machinery colours far more than it locks
 
@@ -134,7 +138,7 @@ at*: a person → their hub · the room or herself → its own located canvas ·
 substitution. They never share an exit block.
 
 **How many choices a room has is not a number you pick — it falls out of what the room serves.**
-A room's list is **needs + work + people**, and nothing else (`the-surfaces.md` R2). A body needs
+A room's list is **needs + systems + people**, and nothing else (`the-surfaces.md` R2). A body needs
 about five things and a room contains fifty nouns, so the count falls out of a set that cannot grow.
 That is what separates a room from a button list.
 
@@ -169,9 +173,9 @@ boundary and wait for LO's pick or signature** before starting the next phase's 
 |---|---|---|---|
 | *(no state file)* | **pitch the premise** — three premises, each a different shape | `the-want.md` §0 table | LO picks one (it becomes `want.fantasy_shape`) → write the Want |
 | *(no state file)*, premise picked | write the Want, create the state file | `references/the-want.md` · `templates/want.md` | the Want is recorded → `want` |
-| `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, one per man, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
+| `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, two on the main men and one on a thread of her life, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
-| `spine` | lay down the world — the base — **`the-systems.md` first**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
+| `spine` | lay down the world — the base — **`the-systems.md` first: fill a card per system before the rooms**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **the sheets** — the design LO reads and signs, before any TOML. Where LO writes them, hand drafts over in `proposals/` (S13) | `references/the-sheets.md` S13 · `templates/sheets/` | every sheet is [READY] and signed → `sheets` |
 | `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
 | `release` | run the loop — pitch, attack, write, gate, read, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
@@ -189,8 +193,8 @@ nodes, report different numbers for the same design. There is no `--sheets` mode
 every count on a sheet sits on the intent side of the measured/intent split.
 
 **The world files, all read in the board phase — `the-systems.md` before any of them:**
-**`the-systems.md` (WHAT THE GAME KEEPS TRACK OF, and what kind of place each room is — read
-first, because every other file below derives from it)** · `the-board.md` (fill, meters, cast) ·
+**`the-systems.md` (WHAT SHE DOES AGAIN AND AGAIN — the systems, the meters they write, and what kind
+of place each room is — read first, because every other file below derives from it)** · `the-board.md` (fill, meters, cast) ·
 `the-map.md` (the world as a place someone could draw) · `the-surfaces.md` (which screen each
 piece of content lives on) · `the-economy.md` (what money is for) · **`the-meters.md` (WHICH meters
 exist and who owns them, what the climb costs, and how the player reads it off the sidebar)** ·
@@ -206,10 +210,10 @@ CHANGE once players hold saves — ids, flag and trait keys, stat ranges, the ti
 to every gate in this skill and strands every save in the wild; the engine's own migration seam
 (`engine.md` §40) repairs additions and nothing else.
 
-**One optional file, read only if the game declares the system:** `the-phone.md` (whether this game
-needs a phone, what goes on it, and how it is wired to the world). **Its P1 is a refusal question —
-most games should not have one**, and a thinly-filled phone is worse than none. Read it before
-writing `[phone]`, not after.
+**The phone (a channel, not a system):** `the-phone.md` (what goes on it, how a text is written, and
+how it is wired to the world). **Its P1 is the default — a chat thread for every person she is
+involved with, and every app a door to sex, money or people, or it isn't there.** A thinly-filled
+phone is still worse than none. Read it before writing `[phone]`, not after.
 
 **Read `the-first-hour.md` before you author a single canvas.** It is the only one of these that
 governs content the player meets in a fixed order, and it is the one v2 shipped without.
@@ -220,8 +224,8 @@ are not using.
 climb or does the CAST?** The field splits 8 roster / 9 ladder with nothing between them. Declare `board.who_climbs` before naming a meter.
 
 **The agent roster is in `references/agents.md`, and all six are BUILT** —
-`v2-player` (plays the build), `v2-pitcher` (three per release, no shared context, one
-relationship each), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
+`v2-player` (plays the build), `v2-pitcher` (three per release, no shared context: two on the
+most-owed relationships, one on a thread of her life), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
 instance, before the build; the `excitement` lens reads each pitch), `v2-listener` (loop step 8,
 what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the nine scene tests in
 `register.md`, "What a scene contains", required on every touched canvas; its verdicts gate). The Panel has no instrument of its own (`agents.md`).
@@ -285,7 +289,7 @@ how many fails are [off].
 | **a goal says what it wants** | every quest-card goal bullet renders WORDS, not a raw key. The goal renderer falls back `label → trait → flag` (`engine.md` §44), so a flag goal with no `label` prints `step_05_done` to the player under 🎯 To advance. The importer requires `label` on trait and counter goals only, so flag goals fall straight through; trait goals are already safe and already print `label — current / target`. Invents no threshold — a card is compared against its own declared goals | `the-voice.md` R3 · `engine.md` §47 |
 | **a meter is read** | every number the game raises is read by a condition, a cost or a quest goal — a raise with no reader is decoration | `the-meters.md` W3 |
 | **the wardrobe is read** | a game declaring `[[clothing]]` reads it somewhere — she can dress and the world does not look | `the-meters.md` W3 · W7 · `engine.md` §17 |
-| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2077` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
+| **a declared garment can be got** | every `[[clothing]]` entry has a route into the wardrobe — `initial`, a shop purchase (`v2.py:2333` lists only a non-`initial` garment with `price > 0`), or `wardrobeEffects`. A garment with no route is dead, and so is every condition that reads a property only it carries — an arc step gated on wearing it can never be entered | `the-meters.md` W3 · `engine.md` §17 |
 | **the climb is where you said it is** | the game gates where `board.who_climbs` says it does | `the-meters.md` W1 · `state.md` |
 | **a banded meter is shown once** | a banded sidebar stat is `in_dump = false` in `[[traits.labels]]`, and its item prints the number (`trait_words` + `show_value`, or `trait_bar`) | `the-meters.md` M7 · `engine.md` §30 |
 | **the opening opens a door** | the funnel's last click lands on a clock time when something at that location is actually open | `the-first-hour.md` F3 |
@@ -301,8 +305,8 @@ how many fails are [off].
 | prose texture | the dash rate against the field — p50 0.99, p90 17.5, ceiling 35.0/10k. The other three texture figures print and are **not** judged | `register.md` — "Dashes stay rare" |
 
 Lints sit below the tally and never move it: dialogue attribution · **the labels and the systems
-agree** (`the-systems.md` SY1–SY3 — every declared system against every room label: a label no
-system claims, a system whose label is on no room, and a `sourced` system that is not fed where it
+agree** (`the-systems.md` SY1–SY3 — every declared meter against every room label: a label no
+meter claims, a meter whose label is on no room, and a sourced meter that is not fed where it
 says or is read nowhere else. ⚠️ Declaring more labels makes it worse, not better, which is the only
 reason it is checked; a count that can be optimised upward is the `objects`/gate-22 failure) ·
 room-list labels ·
@@ -336,7 +340,7 @@ because the loud voice negates on purpose) · **history on a repeatable screen**
 re-enters — `is_repeatable` only, because a one-time canvas is where the doctrine says to PUT it;
 elapsed time, NOT clock time, which is `the-clock.md` C2) · **a repeatable claims a past**
 (*last night · yesterday · this week · again · every time* on a repeatable canvas, outside a `group`
-gated on the flag that records it — the truth rule's rule 2, `register.md`) · **a printed stat is
+gated on the flag that records it — the truth rule's rule 2, `register.md`; its rule 5, her clothes, is not linted yet) · **a printed stat is
 real** (every `+X` / `−X Name` in prose or a button whose name is no declared trait or flag —
 `the-meters.md`, "What the player is shown") · **a one-time step speaks** (every one-time
 canvas bound to a person with no `dialog` block in it) · **the arc ladder** (per person: one-time steps written, how many switched off, and the longest
@@ -415,7 +419,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   on screen and her thoughts beside them (`references/register.md`, "The voice — say it loud");
   the opening runs setup → problem → person → conflict → choice → temptation → objective → play
   (`references/the-first-hour.md` F1b); and every claim a screen makes is true on every visit it can
-  render on (`references/register.md`, "The truth rule"). Labels and guidance stay plain
+  render on, her clothes included (`references/register.md`, "The truth rule", rule 5). Labels and guidance stay plain
   (`references/the-voice.md`).
 
 - **When this skill and a game's sheets disagree, stop and ask.** A fact on a sheet holds; a design
@@ -469,7 +473,8 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
 - **`scripts/pitch_pack.py <slug> --person <npc> --kind <moment_kind>` is the world a Pitcher may
   pitch into.** It opens with the promise, the moment kinds already shipped, that kind's slice of
   `references/moment-library.md`, the clips on disk, and RELATIONSHIPS — each person's steps so far,
-  what they set and whether anything reads it, sorted by who is most owed. The loop (`the-release.md` step 2)
+  what they set and whether anything reads it, sorted by who is most owed — and THREADS, her life
+  (`--thread <id>` for the third Pitcher). The loop (`the-release.md` step 2)
   runs three Pitchers with **no shared context** — that is the design, and its unpaid cost is that
   a Pitcher with no context does not know what the game already contains and will name a location
   that exists or a character who does not. The pack is that context, generated instead of
@@ -501,7 +506,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   `exit_block.choices` and could not see a canvas at all — so an entire canvas about one object
   counted as zero, and the only way to pass was a second screen
   re-listing what was already there. That is worse than no check, because it ships green. It was
-  replaced by `the-surfaces.md` R2: a room's list is **needs + work +
+  replaced by `the-surfaces.md` R2: a room's list is **needs + systems +
   people**, a CLOSED set that sizes itself, instead of objects, an OPEN one that never can.
 - **An instrument that cannot see a thing reports its ABSENCE, not its rarity.** Before a
   measurement is allowed to retire a rule, ask what the measurement is blind to. v1's dialogue rule
@@ -551,7 +556,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   canvases and the charge lived in `[settings.rent]`.
 - **A vocabulary the engine does not recognise fails SILENTLY, and nothing else in this system
   does.** `op = "subtract"` is not an engine op — `applyTraitEffect` runs `add` and `set` and
-  returns on anything else (`v2.py:6245-6251`). This skill's own `engine.md` once discussed the op
+  returns on anything else (`v2.py:6940-6946`). This skill's own `engine.md` once discussed the op
   as though it worked. Valid TOML, green
   build, green gates, and a clean play-through, because **a number that never changes looks exactly
   like a number the player has not moved yet.** When you write an unfamiliar key or value, find the
@@ -568,18 +573,18 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   median **139** characters (degrees-of-lewdity) and **84** (zaras-school-life). Section G:
   personality is read the same way — **896** `if` branches gated on an inclination in
   course-of-temptation, median **114** characters, deciles 30/37/50/72/**114**/153/204/284/448.
-  Roughly twenty words. One sentence, swapped. **When a system feels like it needs a big branch per
+  Roughly twenty words. One sentence, swapped. **When a meter feels like it needs a big branch per
   state, the field's answer is almost always a small branch per site instead.**
-- **A system is read to change the words, not to refuse the action.** The same law, arriving a fourth
+- **A meter is read to change the words, not to refuse the action.** The same law, arriving a fourth
   time from a fourth instrument. Section H: reputation gates **2%** of its 644 read sites and colours
   the other 98% — ⚠️ *corrected 2026-08-27: that is three games, 95% of it degrees-of-lewdity. Over
   13 games it is ~10% link-bearing, and a median 41% of reads change something mechanical without
   ever refusing. The law survives; "colours" must not be read as "does nothing." See W5b.* Section G: differentiation is many small swaps, above. Section I: the body —
-  clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured systems, 17 of
+  clothes, arousal, hygiene, pregnancy — gates a median **10%** across 25 measured body values, 17 of
   them under 25%. Section B reaches it from the *choice* side rather than the meter side: of **27,505**
   conditionals wrapped around an action, **35% are variant selectors where every branch offers
-  something** and only **23% refuse anything at all**. The exceptions are all *small* systems, which is the rule underneath it:
-  **a system either stays small and gates, or grows large and colours; nothing in the field is
+  something** and only **23% refuse anything at all**. The exceptions are all *small* meters, which is the rule underneath it:
+  **a meter either stays small and gates, or grows large and colours; nothing in the field is
   both.** When you are designing a meter and reaching for gates, you are probably building the
   wrong kind (`the-meters.md` W7).
 - **A per-NPC field has TWO write sites and the default build uses the second.**

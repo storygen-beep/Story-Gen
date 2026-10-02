@@ -1,0 +1,58 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..313aa54 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -130,7 +130,8 @@ description          = "The hotel bar across the road from the firm: low lights,
+ image                = "locations/hotel_bar.jpg"
+ image_search_queries = ["hotel bar leather stools low light", "upscale hotel bar evening"]
+ entry_from           = "downtown"
+-hours                = [ { open = "17:00", close = "23:00" } ]
++# Friday runs past midnight to 02:00 so Theo's late Friday drink has an open room (engine.md §22: a close before open wraps).
++hours                = [ { weekdays = [0, 1, 2, 3, 5, 6], open = "17:00", close = "23:00" }, { weekdays = [4], open = "17:00", close = "02:00" } ]
+ closed_text          = "The hotel bar opens at five."
+ 
+ [[locations]]
+@@ -332,3 +333,10 @@ weekdays = [1, 2, 3]
+ start_time = "18:00"
+ end_time = "21:00"
+ activity = "At his table"
++
++[[npcs.schedules]]
++location = "hotel_bar"
++weekdays = [4]
++start_time = "22:00"
++end_time = "02:00"
++activity = "Drinking late"
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..55a054c 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -447,7 +447,8 @@ items = [ { type = "trait", subject = "player", trait_key = "theo_stage", operat
+ id   = "table"
+ name = "His table"
+ blocks = [
+-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_knows_friday", operator = "is_true" } ] }, blocks = [
++  # Not on a Friday: he drinks here Friday nights now, and "How was Friday" is false while it still is.
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_knows_friday", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5, 6] } ] }, blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "How was Friday, Emma? Still paying whoever it is?" },
+   ] } },
+   { type = "group", props = { blocks = [
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..5d2bc93 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1109,6 +1109,14 @@
+             ],
+             "from": "18:00",
+             "to": "21:00"
++          },
++          {
++            "where": "hotel_bar",
++            "weekdays": [
++              "Fri"
++            ],
++            "from": "22:00",
++            "to": "02:00"
+           }
+         ]
+       },

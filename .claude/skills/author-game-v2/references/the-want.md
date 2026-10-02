@@ -29,7 +29,7 @@ Deals); a sheltered girl's slow corruption (Cupid's Way). Each game sits in one 
 |---|---|---|
 | **fall by need** | alone, broke, and the world prices her body | rent, and a price list for acts |
 | **rise by want** | she chose it, for status, freedom or power | her own goal, a rival, something that repeats |
-| **taboo at home** | the house, and who is in the next room | the chance of being walked in on |
+| **taboo at home** | the house she comes back to, and who is in the next room | the chance of being walked in on, and what she brings home from outside |
 | **mystery** | she investigates while something works on her | secrets she buys, clues that pay out |
 
 **The premise comes before the Want**, since the hold and the charge depend on it: three premises in
@@ -47,9 +47,12 @@ Temptation), updates that add *"unnecessary sounds"* instead of *"continuing the
 Deals). §1b's hold starts her and §3's meters carry her; **the
 goal or the mystery is what pulls the player.** It stays alive after the hold goes quiet, and the
 guidance page (`engine.md` §23) carries it. Declare the goal and what comes after it, the mystery with
-a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*; a sidebar `countdown`
+a rough payout, and the rival. **The goal has no date** *(LO decided, D8)*, and a line promising a dated event must be built
+(`register.md`, "The truth rule"); a sidebar `countdown`
 only displays and fires nothing at 0 (R4:89). The clock is something that repeats: a bill, a weekly
-count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain).
+count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, the goal chain). It also names
+`ends_flag`, the flag the game sets when it is met: a goal whose end the game can't see is one the
+player never finishes.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.
@@ -109,7 +112,7 @@ friendship with Lya"*, *"You need a better car (From the city, go to 'Get in the
 on. Measured in `~/Documents/Accumulation_Study_20260828/` §4.
 
 ⚠️ **THE PLACEMENT TRAP, AND IT FAILS SILENTLY.** Adjacent `[group]` blocks merge into ONE if/elseif
-chain (`v2.py:16216`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
+chain (`v2.py:17124`, `_convert_blocks_to_game_html`) and first match wins. Drop a past-ladder next to a surface's existing ladder and
 **that ladder becomes unreachable for every player carrying a past** — no error, and the prose
 stops appearing; lint **adjacent groups** lists it. Separate the two chains with any
 non-`group` block.
@@ -150,7 +153,7 @@ read off it would be invented, per the P0 refusal.
 
 **W4 · The distinctive axis is the cast, not the player — and it is already built.** The field's
 creation screens ask the player to fill in each person's relation to her. The player names the household and the kinship inside it, which in this
-genre is the setting. We ship this already: `npcs[].relationship_options` renders a picker on the
+genre is her hub. We ship this already: `npcs[].relationship_options` renders a picker on the
 same screen, the pick lands on the NPC, the cast page prints it, and prose has a token for it —
 **`@<npc>.rel`**. See `engine.md` for the field
 reference.
@@ -159,8 +162,8 @@ reference.
 second-ranked game. Across 22,614 comments the entire subject runs at **0.12%** — against lostness
 at 15.5% and grind at 0.9% (Process Review, Round 1). Six comments ask for more customization; two ask for a skip button.
 
-⚠️ **This is NOT `the-phone.md` P1's refusal rule, and must not be written as one.** P1 could say
-*"most games should not have a phone"* because the corpus returned a verdict — 24 likes to 0.
+⚠️ **This is not a refusal rule, and must not be written as one.** `the-phone.md` P11 can say
+*"never a battery"* because the corpus returned a verdict — 24 likes to 0.
 **Here there is no verdict in either direction.** Nobody is asking for a creation screen and nobody
 resents one. So the rule is conditional, not prohibitive: **have one or don't; if you have one,
 read it back.**
@@ -239,7 +242,8 @@ So the four parts of this page divide the game between them, and each does one j
 - **§1b — the hold starts her.** It has to be there in week one, when nothing else is.
 - **§3 — the meters carry her.** They are what still gates content at release 41.
 - **§2 — the appetite is what she arrives at.** The hold goes quiet (`the-economy.md` R3d for the
-  `bill` case) and the act does not change; the *reason* does.
+  `bill` case) and the act does not change; the *reason* does. A bill is collected by the engine at
+  00:00 on the due day; authored scenes sit beside the payment, never on it (`engine.md` §26).
 
 That last sentence is **§4's Transformation charge stated mechanically** — see it, and write the two
 to agree.
@@ -290,9 +294,9 @@ Name which. "It's hot" is not a charge; it is the absence of one.
 Added 2026-09-04. It had never been written down anywhere in this skill, and its absence is what
 produced ten pitches in a row where a man collects money and the sex is how the money gets settled.
 
-**Nothing here teaches that.** Grepping `references/`, `SKILL.md` and `templates/` for
-`prostitut|sex work|escort|paid sex|sex for money|instead of money` returns **zero hits**. It is
-emergent: §1b used to ask for a collector, §4's first charge is *"someone with power over her"* — the
+**Nothing here taught that when it was written.** Paid sex is now taught on purpose — as a money
+system's lewd ladder (`the-arc.md` A15) and with its own card (`templates/cards/sex_for_pay.md`). The
+collector-who-fucks-her shape was emergent: §1b used to ask for a collector, §4's first charge is *"someone with power over her"* — the
 collector already is that — and `the-surfaces.md` requires the repeatable surface be explicit. Three
 defensible rules compose into one architecture, and nobody chose it.
 
@@ -362,9 +366,10 @@ of 41.
 
 ### 5. The world
 Decided on the board, not here: the shape first (`board.map.archetype`, `the-map.md` R0), rooted
-outdoors in more than one zone unless the fantasy is taboo at home, where the house is the point.
+outdoors in more than one zone, for every game. In a taboo-at-home game the house is her hub, the
+place she returns to, not the whole world: the world outside is what makes the house risky.
 
-### 6. The people
+### 6. The people and her life
 Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
 
 - **Age.** Every person is 18 or older, and the age is written. `shape.py` fails a person with no age
@@ -382,6 +387,19 @@ Record `want.cast[] = {id, age, keeps}` and `want.why_this_person`.
 - **What he keeps score of** — `keeps`, picked per man by `the-meters.md` W1's table; LO approves.
 
 A person with no row is a person with no reason to exist. Cut them or write it.
+
+**Her life — the threads.** The hook is why the game starts, not the whole world. Give her 4–6
+threads: job or study, friends, dating, side money, the town. Each thread has:
+- a **named, fixed person** — in `want.cast`, with an age;
+- a **place** — in `want.places`;
+- the **system that runs it** — what she does there again and again (`the-systems.md` SY1; a worked
+  card per system in `templates/cards/`);
+- **one link into the hook** — how this part of her life feeds the fantasy: a man she brings home,
+  money that changes things, a friend who sees.
+
+Record as `want.threads[] = {id, name, person, place, system, link}`. Threads hold most of a game's
+text: in the seven games round 7 measured, the hook is 11–54% of story passages, and 28–52% even in
+the taboo-at-home games (round 7, `ROUND7_REPORT.md`). A direction, not a target.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's
@@ -412,6 +430,7 @@ Answer these out loud. If any answer is soft, the Want is not done.
    decorative)*
 2. What can she reach at the top that she cannot reach at the bottom? *(the ascent)*
 3. Which person would a player miss if you deleted him, and what does he want back? *(§6)*
+4. Does she have 4–6 threads, each with a named person? *(§6)*
 
 Then run the last, which is not a judgement call:
 

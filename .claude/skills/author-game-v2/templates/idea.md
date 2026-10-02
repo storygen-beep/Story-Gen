@@ -13,7 +13,7 @@
 
 - [ ] **Fall by need** — she is short of money or a place, and the world prices her body *(rent, a price list)*
 - [ ] **Rise by want** — she picked a goal and goes after it *(the goal, a rival, something that repeats)*
-- [ ] **Taboo at home** — the house, and who is in the next room
+- [ ] **Taboo at home** — the house she comes back to, and who is in the next room; the world outside makes it risky
 - [ ] **Mystery** — she investigates, and something works on her while she does *(secrets she buys)*
 
 **In one sentence, what does the player come here to feel?** <…>
@@ -52,13 +52,16 @@ both the help and the competition.
 
 **Her face:** <one performer or one look, kept across the game — players notice when it changes>
 
-Record them as `want.companion`, `want.pressure` and `want.face` (`references/the-want.md` §6).
+**Her life, the threads:** <4–6, each with its person — from the Want's part 5>
+
+Record them as `want.companion`, `want.pressure`, `want.face` and `want.threads` (`references/the-want.md` §6).
 
 ## 4. The first step with one person — not the game's opening
 
-Three `v2-pitcher`s, one per man, run at once with no shared context; each returns step 1 with his
-person in eight lines (`references/the-release.md`, "Her moment — eight lines"). LO picks one. Keep
-the other two here: they become later steps on SP2.
+Three `v2-pitcher`s run at once with no shared context: two on the main men, one on a thread of her
+life (§3), which may add one new person in that thread. Each returns step 1 in eight lines
+(`references/the-release.md`, "Her moment — eight lines"). LO picks one. Keep the other two here:
+they become later steps on SP2.
 
 <the chosen step's eight lines, one sentence each>
 

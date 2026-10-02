@@ -1,0 +1,7 @@
+{
+  "id": "14_walkin_tip",
+  "source": "members_only #43; SKILL_TEST_REVIEW I9 (walk-in paid with no daily cap)",
+  "rule": "the-economy.md; gate 'no free uncapped income'",
+  "task": "Add a walk-in at the firm where a client tips Emma $20.",
+  "target_lints": []
+}
