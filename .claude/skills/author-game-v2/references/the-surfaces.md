@@ -835,7 +835,7 @@ Three things about that line carry the rule:
 - **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
-wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:15270`.
+wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:15272`.
 This is recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**.
 `the-economy.md` R1b owns the asset half.
 
@@ -870,7 +870,7 @@ R5 says most doors are gated. This is the floor under it: **one** choice on ever
 neither `conditions` nor `costs`, so the screen still works on the day everything else is shut.
 
 Not a defensive habit — a consequence of how the engine renders. A choice whose conditions fail is
-wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:14777`) and renders **nothing**: no
+wrapped in `<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:14779`) and renders **nothing**: no
 greyed line, no reason, no hours. And a **cost-bearing** choice counts as conditional too
 (`v2.py:13629-13638`), so a screen whose only affordance costs $3 is equally empty to a player at
 $0. When nothing is left the engine emits a bare `[[Continue->…]]` that fires no effects, and the
@@ -1057,7 +1057,7 @@ Route the choice at a node with `targetType = "node"`, write what happened, and 
   meter the surface climbs, plus a `pool_dir` pool — the house style. `block_pool` works too.
   ⚠️ **Node prose has no `text_variants`.** The key exists only on a **choice**, where it swaps the
   button label: a list of `{ text, conditions }`, first match wins, the base `text` otherwise
-  (`template_import.py:2693-2731`; rendered as a `<<set _cv>>` chain at `v2.py:14812-14826`).
+  (`template_import.py:2693-2731`; rendered as a `<<set _cv>>` chain at `v2.py:14814-14828`).
   Variant labels are static strings — an `@npc` token inside one does not resolve.
 - **Video on outcome nodes, images on hubs.**
 

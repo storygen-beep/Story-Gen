@@ -234,7 +234,7 @@ funnel from the starting canvas, through its location exit, into a one-time canv
 whose trigger flags the funnel has set, and judges the handover at the end of *that*. Before, it
 stopped at the boot's exit and judged the hop to the capstone as if it were the handover. Node ids in
 the funnel may be bare (`"hall"`) or qualified (`"canvas_opening.hall"`); the engine keeps the last
-segment (`v2.py:14608`), and so does the walk.
+segment (`v2.py:14610`), and so does the walk.
 
 ⚠️ **This is not a size cut.** Build the opening at full designed size; the engine plays a node
 chain back one screen at a time. "Two canvases" is about *what each one is for*, not about brevity.
@@ -361,7 +361,7 @@ The failure, computed exactly the way the gate computes it:
 
 ```
 [time] starting_hour = 7                                  07:00
-node -> node, no time declared -> default 3 min           07:03      v2.py:15594
+node -> node, no time declared -> default 3 min           07:03      v2.py:15596
 node -> node, no time declared -> default 3 min           07:06
 exit: time_progression_minutes = 30, to the_diner         07:36
 
@@ -759,7 +759,7 @@ the-company's entire first meeting with the player's employer is **80 words**:
 Role, then the look, then a beat. That is the whole thing.
 
 **Where the player cannot yet know the name**, set `speaker = "unknown"` on the `dialog` block and
-the engine prints **"Stranger:"** (`v2.py:15497-15503`); switch to the NPC speaker once names have
+the engine prints **"Stranger:"** (`v2.py:15499-15505`); switch to the NPC speaker once names have
 been exchanged.
 
 ⚠️ **A meeting with no `dialog` block is not a meeting.** The person is in the room. If they do not
@@ -846,8 +846,8 @@ when = [ { flag = "met_wade", subject = "player", op = "is_true" },
 ```
 
 The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
-(`v2.py:17371`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
-(`v2.py:17130`), so an unmet character renders **no heading and no section** — the roster fills in
+(`v2.py:17373`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
+(`v2.py:17132`), so an unmet character renders **no heading and no section** — the roster fills in
 as the player meets people, which is what the field ships (the-company's cast table is
 `<<if $player.met[_char.id]>>` per row).
 
@@ -1061,7 +1061,7 @@ no kin word at all      the canteen · the night shift
 > a place. The label is the answer to *"who is this"*, which is the standing question this whole
 > rule exists to keep answered.
 
-⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:16907-16909`), which is the safe
+⚠️ **Author it.** An empty `role` renders no line at all (`v2.py:16909-16911`), which is the safe
 default.
 
 ⚠️ **`role` is not a swap for the name.** `destroyer` replaces the name with the relation
@@ -1078,7 +1078,7 @@ has to remember who "Stepsister" is.
 >
 > A hard-coded label contradicts the player's pick or has to dodge it. The label exists to say what
 > he is to her, and that is the one thing the picker already knows. The generator resolves tokens
-> in this field (escape first, then resolve, `v2.py:16906`; `.rel` at `v2.py:16266`), and the
+> in this field (escape first, then resolve, `v2.py:16908`; `.rel` at `v2.py:16268`), and the
 > lint `the label under the name` flags a hard-coded label on any character the player can rename.
 >
 > A **fixed** character still takes a plain string — `mother`, `professor` — and a
