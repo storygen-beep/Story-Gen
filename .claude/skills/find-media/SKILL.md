@@ -330,9 +330,10 @@ unreachable on clearnet from this machine. Of the 54 urls in that one harvest, *
 4 phncdn ones failed**; the other 50 yielded 40 files. Skip `*.phncdn.com` as a candidate.
 
 **The fetchable corpus** — measured 200 on plain clearnet GET, no Tor, no signing, no expiry:
-`blovjob.com`, `cdn.nsfwgify.com`, `xgroovy.com`, `porngif.co`, `cdn.hardcoregify.com`,
-`cdn.xgifer.com`, `imagex1.sx.cdn.live` (sex.com), `flashingjungle.com`,
-`static-ca-cdn.eporner.com`. That is the one host list; a host Google surfaces that isn't on
+`blovjob.com`, `cdn.nsfwgify.com`, `porngif.co`, `cdn.hardcoregify.com`,
+`cdn.xgifer.com`, `imagex1.sx.cdn.live` (sex.com), `flashingjungle.com`. **`xgroovy.com`,
+`eporner.com` and `pictoa.com` are DEAD here** (ISP sinkhole, 0 picks; the stocking API now
+refuses them — see `references/media_sources.md` §"Dead on this connection"). That is the one host list; a host Google surfaces that isn't on
 it is *surfaced, not yet characterised* — try it, record what it did, don't assume.
 
 Do NOT call `read_page` / `get_page_text` on a results page; accessibility snapshots are the

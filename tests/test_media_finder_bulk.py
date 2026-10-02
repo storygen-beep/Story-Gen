@@ -125,7 +125,14 @@ def test_empty_items_is_accepted_and_writes_nothing(games_root):
     with patch.object(mf, "_write_options", wraps=mf._write_options) as w:
         resp = _bulk(games_root, "sex/a_t5.webm", [], query="q")
     assert w.call_count == 0
-    assert _body(resp) == {"ok": True, "added": 0, "duplicates": 0, "invalid": 0, "count": 0}
+    assert _body(resp) == {
+        "ok": True,
+        "added": 0,
+        "duplicates": 0,
+        "invalid": 0,
+        "blocked": 0,
+        "count": 0,
+    }
 
 
 # ── dedup credits the sibling query, same as single ──────────────────────────
@@ -241,3 +248,45 @@ def test_no_query_is_byte_identical_to_the_unlabelled_write(games_root):
 
 def test_bulk_rejects_GET(games_root):
     assert mf.options_add_bulk(RequestFactory().get("/")).status_code == 405
+
+
+# ── dead hosts: refused at stocking, counted, never an error ─────────────────
+# xgroovy / eporner / pictoa sit on this connection's ISP sinkhole (measured
+# 2026-10-02: 4,838 shelved options, 0 picks, every sample timed out). They are
+# refused before they land, and the refusal is COUNTED so a thin bucket still
+# explains itself.
+
+_DEAD = [
+    "https://i.xgroovy.com/contents/videos_screenshots/1/2/preview_gif.mp4",
+    "https://static-ca-cdn.eporner.com/gallery/a/b/1/x.gif",
+    "https://s2.pictoa.com/media/galleries/1/x.gif",
+]
+
+
+def test_bulk_refuses_dead_hosts_and_counts_them(games_root):
+    items = [{"url": "https://x.test/live.gif"}] + [{"url": u} for u in _DEAD]
+    body = _body(_bulk(games_root, "sex/a_t5.webm", items, query="q"))
+    assert body["added"] == 1
+    assert body["blocked"] == 3
+    assert body["invalid"] == 0
+    assert [o["url"] for o in _shelf(games_root, "sex/a_t5.webm")] == [
+        "https://x.test/live.gif"
+    ]
+
+
+def test_single_add_of_a_dead_host_is_ok_blocked_and_writes_nothing(games_root):
+    with patch.object(mf, "_write_options", wraps=mf._write_options) as w:
+        resp = _single(games_root, "sex/a_t5.webm", _DEAD[0], query="q")
+    assert resp.status_code == 200
+    body = _body(resp)
+    assert body["ok"] is True and body["blocked"] is True
+    assert body["count"] == 0
+    assert w.call_count == 0
+    assert _shelf(games_root, "sex/a_t5.webm") == []
+
+
+def test_a_look_alike_domain_is_not_blocked(games_root):
+    body = _body(
+        _bulk(games_root, "sex/a_t5.webm", [{"url": "https://notxgroovy.com/a.gif"}])
+    )
+    assert body["added"] == 1 and body["blocked"] == 0

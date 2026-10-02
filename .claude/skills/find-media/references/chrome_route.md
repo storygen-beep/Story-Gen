@@ -8,10 +8,11 @@ setting. The old skill routed everything through Playwright + Tor + PornHub GIF 
 That route is gone.
 
 **Why:** one Google query in the user's Chrome surfaced nine hosts the old route could never
-touch. The fetchable corpus now stands at nine hosts gathered across queries — nsfwgify,
+touch. The fetchable corpus stood at nine hosts gathered across queries — nsfwgify,
 xgroovy, blovjob, porngif.co, hardcoregify, xgifer, sex.com, flashingjungle, eporner —
 of which seven came off that single page (the other two results were phncdn, unfetchable,
-and one uncharacterised host). (Exact host strings, and what each one serves, in
+and one uncharacterised host). ⚠️ xgroovy and eporner have since gone DEAD on this
+connection (ISP sinkhole) and are refused at stocking — see `references/media_sources.md` §"Dead on this connection". (Exact host strings, and what each one serves, in
 `media_sources.md` — use that one list, don't keep a second copy in your head.) The Tor
 route only ever reached PornHub, and PornHub is not a fetch target at all. That single
 source was the real ceiling, and no amount of query tuning was going to raise it.
@@ -307,10 +308,11 @@ that 400 as "I transformed too early", never as "the endpoint is broken".
 `window.__fm` dies if the tab navigates between the two passes. If §5 finds it undefined,
 re-run this block rather than guessing the url list.
 
-- Keep the original CDN hosts — that's the candidate pool (nsfwgify, xgroovy, blovjob,
-  porngif.co, hardcoregify, xgifer, sex.com, flashingjungle, eporner). All nine answer 200
-  on clearnet: no Tor, no signing, no expiry. Exact host strings — some are subdomains,
-  e.g. `public.flashingjungle.com`, `i.xgroovy.com` — in `references/media_sources.md`;
+- Keep the original CDN hosts — that's the candidate pool (nsfwgify, blovjob,
+  porngif.co, hardcoregify, xgifer, sex.com, flashingjungle). These answer 200 on
+  clearnet: no Tor, no signing, no expiry. xgroovy, eporner and pictoa do NOT — they are
+  sinkholed and the stocking API refuses them (see `references/media_sources.md` §"Dead on this connection"). Exact host strings — some are
+  subdomains, e.g. `public.flashingjungle.com` — in `references/media_sources.md`;
   match on the registrable domain, not the full host, or a filter misses half of them.
 - **Stock `*.phncdn.com` like any other host** — the cut that used to live here was
   removed 2026-08-06; its urls are signed and fetch 200 (see
@@ -817,7 +819,8 @@ back alley blowjob gif amateur
 
 One `javascript_tool` regex call over `innerHTML` returned **54 direct CDN URLs**. Fifty of
 them sat on fetchable aggregators — sex.com, blovjob, flashingjungle, xgroovy,
-hardcoregify, nsfwgify and eporner on this page; porngif.co and xgifer joined the corpus
+hardcoregify, nsfwgify and eporner on this page (xgroovy and eporner have since gone dead
+on this connection — `media_sources.md`); porngif.co and xgifer joined the corpus
 from other queries. Not one of them was reachable from the old PornHub-only route. The other **4 were phncdn**, and today they would be
 filtered out at §4.
 

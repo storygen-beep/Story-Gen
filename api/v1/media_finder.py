@@ -604,6 +604,24 @@ def _upsert_query(
     return rec, False
 
 
+# Hosts whose urls are refused at stocking time — they can never load here.
+# Measured 2026-10-02 across every game's shelf: xgroovy.com 3,163 options, eporner.com
+# 1,130, pictoa.com 545 — ZERO ever picked, every sampled url timed out, and `dig`
+# resolves i.xgroovy.com, xgroovy.com, static-ca-cdn.eporner.com, www.eporner.com and
+# s2.pictoa.com to the ISP's sinkhole 49.44.79.236 (first seen for xgroovy on 2026-08-05).
+# On the picker they are tiles that never render and can never install, pushing live
+# options down the shelf. This is THIS connection's block, not a property of the sites:
+# if the ISP changes or harvesting moves behind a VPN, re-measure and drop the entry.
+# Matched on the registrable domain, so every subdomain is caught. Never applied to
+# rows already on a shelf — refusing new ones is the whole job.
+_DEAD_HOSTS = ("xgroovy.com", "eporner.com", "pictoa.com")
+
+
+def _is_dead_host(url: str) -> bool:
+    host = (urlparse(url).hostname or "").lower()
+    return any(host == d or host.endswith("." + d) for d in _DEAD_HOSTS)
+
+
 def _apply_option(
     data: dict,
     file_: str,
@@ -802,14 +820,15 @@ def _add_options_bulk(
     Bulk costs ~20 seconds.
 
     A malformed row is SKIPPED, never fatal: a harvest of 250 urls must not lose 249
-    because one carried a `data:` scheme. Returns {added, duplicates, invalid, count}
-    so a caller can tell "the shelf already had these" from "the shelf refused these"
-    — a single total cannot, and a silent skip is how a short shelf reads as a bad
-    query for the rest of the run.
+    because one carried a `data:` scheme. Returns {added, duplicates, invalid,
+    blocked, count} so a caller can tell "the shelf already had these" from "the shelf
+    refused these" — a single total cannot, and a silent skip is how a short shelf
+    reads as a bad query for the rest of the run. `blocked` counts urls on a
+    `_DEAD_HOSTS` site: well-formed, but they can never load here.
     """
     now = datetime.now(timezone.utc).isoformat()
     q = _canon_query(query)
-    added = duplicates = invalid = 0
+    added = duplicates = invalid = blocked = 0
     changed_any = False
     count = 0
     with _options_lock(game_dir):
@@ -821,6 +840,9 @@ def _add_options_bulk(
             url = str(item.get("url") or "")
             if not url or urlparse(url).scheme not in ("http", "https"):
                 invalid += 1
+                continue
+            if _is_dead_host(url):
+                blocked += 1
                 continue
             was_added, changed, count = _apply_option(
                 data,
@@ -846,6 +868,7 @@ def _add_options_bulk(
         "added": added,
         "duplicates": duplicates,
         "invalid": invalid,
+        "blocked": blocked,
         "count": count,
     }
 
@@ -1157,6 +1180,11 @@ def options_add(request):
         return JsonResponse({"error": "file and url are required"}, status=400)
     if urlparse(url).scheme not in ("http", "https"):
         return JsonResponse({"error": "Invalid URL scheme"}, status=400)
+    if _is_dead_host(url):
+        # Not an error: the caller did nothing wrong and must not retry or read the
+        # query as failed. Nothing is written; `count` is the shelf as it stands.
+        count = len(_read_options(game_dir)["options"].get(file_) or [])
+        return JsonResponse({"ok": True, "blocked": True, "count": count})
 
     added, count = _add_option(
         game_dir,
@@ -1191,7 +1219,8 @@ def options_add_bulk(request):
     purely how many times the ledger is read and rewritten: once, instead of once
     per url. See `_add_options_bulk` for the measurement that motivated it.
 
-    Returns {ok, added, duplicates, invalid, count}. `invalid` is never silent.
+    Returns {ok, added, duplicates, invalid, blocked, count}. `invalid` is never
+    silent, and neither is `blocked` (a `_DEAD_HOSTS` url — see `_is_dead_host`).
     """
     if request.method != "POST":
         return JsonResponse({"error": "Method not allowed"}, status=405)

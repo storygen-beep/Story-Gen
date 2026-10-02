@@ -1,5 +1,26 @@
 # find-media — CHANGELOG
 
+## 2026-10-02 — xgroovy, eporner and pictoa are DEAD here; the corpus stops calling them fetchable
+
+LO: some shelf tiles never load. Measured across every game's `media_options.json`:
+`xgroovy.com` 3,163 options, `eporner.com` 1,130, `pictoa.com` 545 — **0 ever picked**; every
+sampled url timed out; `dig` puts `i.xgroovy.com`, `xgroovy.com`, `static-ca-cdn.eporner.com`,
+`www.eporner.com`, `s2.pictoa.com` on the ISP sinkhole `49.44.79.236`. The 2026-08-05 PornHub
+study already found xgroovy sinkholed, but this skill kept listing it as "measured 200 on clearnet".
+
+- **`references/media_sources.md`** — new §"Dead on this connection" (counts, cause, where the
+  refusal lives, how to re-measure); the `i.xgroovy.com` and `static-ca-cdn.eporner.com` corpus
+  rows are marked DEAD; the eporner URLError warning now points at the re-measurement; eporner
+  dropped from the slug term-mine list and xgroovy from the registrable-domain example.
+- **`SKILL.md`** (fetchable corpus line), **`references/chrome_route.md`** (the "Why" corpus
+  sentence, the keep-the-CDN-hosts bullet, the historical 54-url paragraph) and
+  **`templates/run_manifest.schema.json`** (both host-list descriptions; "nine" → "seven") — the
+  two hosts removed from every "fetchable" list, each pointing at the new section.
+- Engine side (not a skill file): `api/v1/media_finder.py` `_DEAD_HOSTS` now refuses all three at
+  `options/add` and `options/add_bulk`. Rows already shelved were deliberately left alone (LO).
+- Verified: grep finds no remaining "fetchable" claim for the three hosts outside history notes;
+  schema JSON parses; `tests/test_media_finder_bulk.py` covers the refusal.
+
 ## 2026-09-09 (latest) — an `avoid:` clause is a directive, not content; and a tease is never SFW
 
 Three defects in `scripts/scene_semantics.py`, stacked, produced four **unattended**

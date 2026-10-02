@@ -256,7 +256,11 @@ async function submitCapture(url, type, formElement, typeBtn) {
 
         const data = await response.json();
 
-        if (data.ok) {
+        if (data.ok && data.blocked) {
+            // A _DEAD_HOSTS site (media_finder.py): it never loads on this connection.
+            showToast('error', 'Not added — this site never loads here');
+            closeActiveForm();
+        } else if (data.ok) {
             showToast('success', data.duplicate ? 'Already in options' : `Added to options (${data.count})`);
             closeActiveForm();
         } else {

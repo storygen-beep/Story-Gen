@@ -35,7 +35,7 @@ skill uses; there is no second one. Hits are from the single query above, so a `
 "surfaced on other queries, fetch verified, catalog not yet profiled" — not "worse".
 
 Hosts below are the EXACT strings observed, some of them subdomains. Elsewhere in the
-skill the same hosts appear as registrable domains (`flashingjungle.com`, `xgroovy.com`).
+skill the same hosts appear as registrable domains (`flashingjungle.com`).
 **Match on the registrable domain**, or a host filter written off one list misses the other.
 
 | Host | Hits | URL shape | Serves | Worth |
@@ -43,10 +43,10 @@ skill the same hosts appear as registrable domains (`flashingjungle.com`, `xgroo
 | `imagex1.sx.cdn.live` (sex.com) | 16 | `/images/pinporn/<yyyy>/<mm>/<dd>/<numeric>.gif` | `.gif` | Biggest single supplier. Broad aggregator, shallow tags, **numeric ids — no vocabulary to mine** |
 | `blovjob.com` | 14 | `/content/<yyyy>/<mm>/<slug>.gif` | `.gif` | Single-act site (blowjob). Deep on its act, useless off it — query it by act, not by scene |
 | `public.flashingjungle.com` | 9 | `/exhibitionism/…/<hash>.gif` | `.gif` | Public / exhibitionism / flashing band. **Flash, not tease** — see Bands below |
-| `i.xgroovy.com` | 6 | `/contents/videos_screenshots/<n>/<n>/preview_gif.mp4` | `.mp4` | Tube-site **hover previews derived from a full video**, not authored loops. Strip these before trusting them — whether the preview is one continuous cut or sampled frames from across the video is UNMEASURED |
+| `i.xgroovy.com` | 6 | `/contents/videos_screenshots/<n>/<n>/preview_gif.mp4` | `.mp4` | ⚠️ **DEAD — see "Dead on this connection" below.** Tube-site **hover previews derived from a full video**, not authored loops. Strip these before trusting them — whether the preview is one continuous cut or sampled frames from across the video is UNMEASURED |
 | `cdn.hardcoregify.com` | 2 | `/<id>/<slug>.gif` | `.gif` | Descriptive slugs — term mine |
 | `cdn.nsfwgify.com` | 1 | `/<id>/<slug>.gif` | `.gif` | Descriptive slugs — term mine |
-| `static-ca-cdn.eporner.com` | 1 | `/gallery/<h>/<h>/<id>/<slug>.gif` | `.gif` | Tube-site gallery gifs, descriptive slugs |
+| `static-ca-cdn.eporner.com` | 1 | `/gallery/<h>/<h>/<id>/<slug>.gif` | `.gif` | ⚠️ **DEAD — see "Dead on this connection" below.** Tube-site gallery gifs, descriptive slugs |
 | `porngif.co` | — | `/wp-content/uploads/<yyyy>/<mm>/<id>-<slug>.gif` | `.gif` | Fetch verified (200). Deep, very descriptive slugs — strong term mine |
 | `cdn.xgifer.com` | — | `/<id>/<slug>.gif` | `.gif` | Fetch verified (200). Descriptive slugs |
 
@@ -62,7 +62,23 @@ Surfaced by the 10-slot study (27 queries). Fetch-verified, not yet catalog-prof
 catalog, so it arrives as pollution on any query with story words in it.
 
 **⚠️ `static-ca-cdn.eporner.com` failed every fetch attempted in that run** (URLError),
-despite being in the corpus above. Re-measure before relying on it.
+despite being in the corpus above. Re-measured 2026-10-02: it is sinkholed — see below.
+
+### Dead on this connection — refused at stocking (2026-10-02)
+
+| Registrable domain | Options already shelved (all games) | Ever picked | Why |
+|---|---|---|---|
+| `xgroovy.com` | 3,163 | 0 | `i.xgroovy.com` + `xgroovy.com` resolve to the ISP sinkhole `49.44.79.236`; every sampled url timed out (first seen 2026-08-05) |
+| `eporner.com` | 1,130 | 0 | `static-ca-cdn.` + `www.` resolve to the same sinkhole; every sample timed out |
+| `pictoa.com` | 545 | 0 | `s2.pictoa.com` resolves to the same sinkhole; every sample timed out |
+
+They render as tiles that never load and can never install, so they only push live options
+down the shelf. `api/v1/media_finder.py` `_DEAD_HOSTS` / `_is_dead_host` refuses them in both
+`options/add` (answers `{ok: true, blocked: true}`, writes nothing) and `options/add_bulk`
+(counted in `blocked`), which covers every route — the three runner scripts, agents posting
+from the page, and the capture extension. Rows already on a shelf were deliberately left alone.
+**This is the connection's block, not the sites':** on another ISP or behind a VPN, re-measure
+(`dig +short <host>`; a curl of a stored url) and drop the entry from `_DEAD_HOSTS`.
 
 ### PornHub is FETCHABLE — the ticket is the whole story
 
@@ -119,7 +135,7 @@ Three things this table teaches beyond the counts:
 1. **Slugs are a term mine; numeric ids are not.** `getting-our-cock-sucked-by-a-beauty-outdoors-in-a-discreet-backalley.gif`
    and `panties-down-in-an-alley-behind-the-club.gif` are where `back alley` came from
    this session, unprompted. Read the URLs you harvest — the descriptive-slug hosts
-   (nsfwgify, blovjob, hardcoregify, eporner) hand you the next query for free.
+   (nsfwgify, blovjob, hardcoregify) hand you the next query for free.
    sex.com's numeric ids hand you nothing, and neither does a phncdn URL — but the
    PornHub *page* behind it does, in its title and tags. That is the whole of what
    discovery-only buys you.
