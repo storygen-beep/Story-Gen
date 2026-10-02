@@ -21,3 +21,12 @@
 | `board.ascent_tiers` | <keys> |
 | `board.economy` | <currency, week income, obligation> |
 | `board.needs` | <keys> |
+
+## Why — the source of each key choice
+
+A rule (its file and id), a scout card, LO's call (with the date), or **guess**. Writing "guess" is
+allowed; hiding one is not (`references/the-release.md`, "When LO rejects something").
+
+| key choice | source |
+|---|---|
+| <each settled decision · each ledger value> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

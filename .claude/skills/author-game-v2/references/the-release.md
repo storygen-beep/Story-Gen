@@ -98,7 +98,7 @@ place, a recurring scene, a mechanic) goes on the coverage list, with its source
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
 script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
-instrument that judges nothing. Lints never touch the tally (`gates.py:13983`), so a game
+instrument that judges nothing. Lints never touch the tally (`gates.py:14027`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -230,6 +230,13 @@ defect to apologise for — under-shooting it is the more likely error.
 or a one-off in this game (CLAUDE.md, "When a built game misbehaves") — and fix it at that layer. A fix
 that needs a rebuild waits for the next release boundary and is listed on that release page
 (`release_page.rebuild`): one planned rebuild, not one per fix.
+
+### When LO rejects something
+
+Answer in four lines before changing anything: **what** was built (file:line); **why**, quoting its
+recorded source, never a new reason; **which layer** failed (the skill taught it wrong, the skill was
+silent and the session guessed, the session ignored a rule, an earlier LO call changed, the engine);
+and **the fix in each layer**. A skill layer is a notebook gap. Record it in `release_page.rejections[]`.
 
 ---
 

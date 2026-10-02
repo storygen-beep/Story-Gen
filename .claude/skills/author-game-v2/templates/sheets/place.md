@@ -25,3 +25,12 @@
 | row | kind (need · work · person) | system it surfaces | cost and effect, with op (S4) | BRAKE (S9) |
 |---|---|---|---|---|
 | <label> | <kind> | <system id> | <trait op value> | <trigger cost · per-day cap · day flag> |
+
+## Why — the source of each key choice
+
+A rule (its file and id), a scout card, LO's call (with the date), or **guess**. Writing "guess" is
+allowed; hiding one is not (`references/the-release.md`, "When LO rejects something").
+
+| key choice | source |
+|---|---|
+| <what it hangs off · its labels · its hours · its door> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

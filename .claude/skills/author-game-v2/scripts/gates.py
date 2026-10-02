@@ -11464,7 +11464,7 @@ def ship_rows(slug, root=None):
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
     report.append(_world_size_row(model, state, game))
-    report += [_systems_row(state), _coverage_report_row(state)]
+    report += [_systems_row(state), _coverage_report_row(state), _guess_row(root, slug)]
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
@@ -12748,6 +12748,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("a system meets its floors", *_system_floors(model, state))
     gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
     gate("no unknown topic", *_no_unknown_topic(state))
+    gate("a skill rejection names a notebook entry", *_skill_rejections_logged(state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13723,6 +13724,49 @@ def _coverage_report_row(state):
     n = {s: sum(1 for e in cov if e.get("status") == s) for s in ("placeholder", "scouted")}
     return ("topics on thin ground", None, f"{n['placeholder']} placeholder · {n['scouted']} scouted "
             f"of {len(cov)} topic(s) — a count, never a score", rows)
+
+
+# ── the-release.md "When LO rejects something": the reason trail ───────────
+# Each sheet's key choices carry a source (`templates/sheets/*.md`, "Why — the source of each key
+# choice"); "guess" is allowed and REPORTED, never judged. A rejection whose layer is the skill
+# is a gap the notebook must hold: the WARN gate below checks its `skill_fix` names one (`N<n>`).
+REJECTION_LAYERS = ("skill_wrong", "skill_silent", "ignored_rule", "lo_changed", "engine")
+_NOTEBOOK_ID_RE = re.compile(r"\bN\d+\b")
+
+
+def _skill_rejections_logged(state):
+    """(ok, headline, detail) for `a skill rejection names a notebook entry`. n/a: none recorded."""
+    rej = [r for r in (((state or {}).get("release_page") or {}).get("rejections") or [])
+           if isinstance(r, dict)]
+    if not rej:
+        return None, "no rejection recorded on the release page", []
+    bad = [f"{r.get('what') or '?'}: layer {r.get('layer')!r} — one of {', '.join(REJECTION_LAYERS)}"
+           for r in rej if r.get("layer") not in REJECTION_LAYERS]
+    skill = [r for r in rej if r.get("layer") in ("skill_wrong", "skill_silent")]
+    bad += [f"{r.get('what') or '?'}: a skill gap with no notebook entry in skill_fix (`N<n>`)"
+            for r in skill if not _NOTEBOOK_ID_RE.search(str(r.get("skill_fix") or ""))]
+    return not bad, f"{len(rej)} rejection(s), {len(skill)} in the skill", bad
+
+
+def _guess_row(root, slug):
+    """The --ship REPORT row: sheet table rows whose last cell is a source that starts "guess"
+    (the game's `sheets/**/*.md` and `DECISIONS.md`), by file and choice. A count, never a score."""
+    import glob as _glob
+    gdir = os.path.join(root or os.getcwd(), "games", slug)
+    files = sorted(_glob.glob(os.path.join(gdir, "sheets", "**", "*.md"), recursive=True)
+                   + _glob.glob(os.path.join(gdir, "DECISIONS.md")))
+    hits = []
+    for p in files:
+        for line in open(p, encoding="utf-8", errors="replace"):
+            if not line.lstrip().startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) >= 2 and cells[-1].lower().startswith("guess") and not cells[0].startswith("<"):
+                hits.append(f"{os.path.relpath(p, gdir)}: {cells[0][:60]}")
+    head = (f"{len(hits)} key choice(s) rest on a guess — a count, never a score" if hits
+            else f"no sheet marks a choice \"guess\" ({len(files)} sheet file(s) read)")
+    return ("choices marked guess", None, head, hits[:12] + ([f"… and {len(hits) - 12} more"]
+                                                            if len(hits) > 12 else []))
 
 
 def main():

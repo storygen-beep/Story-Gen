@@ -5,6 +5,43 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The reason trail and the rejection review (Coverage and the Scout PRD, CV7)
+
+**Why.** When LO rejects something built and asks why, nothing recorded why the choice was made, so the answer was
+reconstructed afterwards, and a guess could be rationalised into a reason. The answer has to question the skill,
+not only change the game.
+
+**What.**
+- `templates/sheets/` (system, place, person, scene, opening, decision; not counted): each ends in "Why — the source
+  of each key choice", a two-column table: the choice, and its source (a rule's file and id, a scout card, LO's call
+  with the date, or **guess**). Writing "guess" is allowed; hiding one is not.
+- `references/the-release.md`, new "When LO rejects something" under *Maintenance is the job*: the four-line answer
+  before anything changes (what, file:line; why, the recorded source quoted, never a new reason; which layer: the
+  skill taught it wrong, the skill was silent, the session ignored a rule, an earlier LO call changed, the engine;
+  the fix in each layer). A skill layer is a notebook gap. Recorded in `release_page.rejections[]`.
+- `references/state.md`: `release_page.rejections[] = {what, source, layer, game_fix, skill_fix}`, `layer` one of
+  `skill_wrong` · `skill_silent` · `ignored_rule` · `lo_changed` · `engine`.
+- `scripts/gates.py` (**protected, LO approved**), new code above `main()`:
+  - gate `a skill rejection names a notebook entry` (`_skill_rejections_logged`, one line added to `_phase4_gates`):
+    a WARN by type; each rejection has a known layer, and a skill-layer one names its notebook entry (`N<n>`) in
+    `skill_fix`. n/a when no rejection is recorded.
+  - REPORT row `choices marked guess` (`_guess_row`, on the `report +=` line, line for line): every table row in the
+    game's `sheets/**/*.md` and `DECISIONS.md` whose last cell starts "guess", by file and choice. A count.
+- `SKILL.md`: the gate-table row and the `--ship` REPORT list. `references/the-release.md:101` `gates.py:13983` →
+  `:14027` (the cite also moved down one line with the new section), read by hand; every other `gates.py:` cite sits
+  above the edits, checked unmoved.
+
+**Verified.** New `scripts/tests/test_gates_reason_trail.py` (9): no rejection is n/a; a skill gap with `N22` passes;
+one with no notebook entry, and an unknown layer, fail; the gate is not a BLOCK; guess rows are listed by file and
+choice (a template's `<placeholder>` row is skipped, "Guess — …" counts); no guess says how many files were read;
+`--ship` prints the row as a REPORT. `--ship` and `shape.py` on `git archive HEAD` exports of every game but
+vesper_two, before and after: each game gains only the n/a row `choices marked guess` (no game's sheets mark a
+guess yet; billable_hours 37 files read, members_only 32, orientation and the_balance 29, probation 7); no rejection is
+recorded, so the gate is n/a and `every other gate` is unchanged; `shape.py` output is identical. **No BLOCK row
+changed colour.** selfcheck 73/73 gates documented; pytest passes; `cite_check.py` 0.
+
+**Words:** +144, running total 147,306 / 149,283 (measured). This session: +455 in counted files.
+
 ## 2026-10-02 — `--ship` reads the coverage list (Coverage and the Scout PRD, CV5)
 
 **What.** `scripts/gates.py` (**protected, LO approved**); new code above `main()`, two line-for-line swaps and one
