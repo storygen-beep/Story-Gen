@@ -640,7 +640,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
 - **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:5210-5211`).
 - **A6 is available** — `worn_exposure`, `worn_type`, `worn_corruption` and `worn_beauty` are
   condition predicates (`engine.md` §17; `worn_exposure` is the only one that reads an empty
-  slot). Two gaps: no effect removes or unequips a garment, and there is no "leave the room" hook,
+  slot). A scene can take clothes off her (`wardrobeEffects` `remove` / `unequip`, `engine.md` §17); one gap: there is no "leave the room" hook,
   so a price to go out in a state lives in each destination's `entry_conditions`.
 - **A4's grant-while-under-threshold** is an ordinary `[group]` band on the meter plus an
   `add` effect. ⚠️ Adjacent `[group]` blocks merge into one if/elseif chain and first match

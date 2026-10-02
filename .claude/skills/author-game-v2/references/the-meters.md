@@ -317,8 +317,8 @@ Twelve of twenty-five male-heavy corpus games carry no reputation meter. For a f
 known is the fantasy and its absence is the complaint: **declare who notices what she does, even
 with no meter at all.**
 
-> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps rumours per person and passes them
-> from one to the next; a man who assumed reads them back — *"Maybe the rumors are wrong."*
+> ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps what each person saw; a witness tells others only in scenes she is
+> in, one hop, and a rumour someone only heard is never retold; a man who assumed reads them back — *"Maybe the rumors are wrong."*
 > `shady-deals` lets reputation change who dares: at 4,000 the man who caught her backs off —
 > *"Sorry, I didn't mean to bother you. I'm not going to stand in your way..."* — and her crew talks
 > about what she is known for. `cupids-way` marks her publicly and for good, and her boyfriend uses

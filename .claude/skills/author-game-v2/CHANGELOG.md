@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Three facts the built engine and round 10 made untrue (World and Systems PRD, Phase 6A)
+
+**What.** Three line-for-line fact fixes, nothing else in each file:
+- `references/the-meters.md` W5b evidence (`:320-321`): CoT doesn't pass rumours "from one to the
+  next". It keeps what each person saw; a witness tells others only in scenes she is in, one hop, and
+  a rumour someone only heard is never retold (round 10).
+- `references/the-economy.md:378`: "Our engine has no computed effect values" is no longer true. The
+  engine can compute an effect value from her stats (`{type = "trait", …}`, `engine.md` §3); the band
+  workaround stays as the option when a game doesn't use it.
+- `references/the-arc.md:643` ("The engine, verified"): a scene can take clothes off her
+  (`wardrobeEffects` `remove` / `unequip`, `engine.md` §17); the "leave the room" gap stays.
+
+**Why.** Protected text (LO's yes, 2026-10-02) that contradicted the built engine and the round-10
+gossip study.
+
+**Verified.** The three old phrases grep to 0 in SKILL.md + references; no R-, W- or A-id moved (each
+swap keeps its line count); selfcheck clean (orphans 2); pytest passes.
+
+**Words:** +33, running total 145,801 / 149,283.
+
+---
+
 ## 2026-10-02 — A loop's finisher takes one file, not a pool
 
 **What.** `references/the-surfaces.md` (loop parts table): the FINISHER row now says each finish type

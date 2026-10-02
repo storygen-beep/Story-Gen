@@ -375,7 +375,7 @@ clicking.
 and its deadline on its card (`board.systems[]`, `the-systems.md` SY8), and its pay ladder rises with
 the bill it answers to. The price is shown before she agrees — gate 21, below.
 
-**Our engine has no computed effect values**, so do it with a band: gate a better-paying variant of
+**The engine can compute an effect value from her stats** (`{type = "trait", …}`, `engine.md` §3); when a game doesn't use it, do it with a band: gate a better-paying variant of
 an existing rung on the same flag that turned the obligation up, and keep the original behind the
 flag's `is_false`. Worked example, invented numbers: buying a van adds `-20/day` on the
 day hook (`+140`/week of obligation) and turns a $30 errand into a $120 haul (`+450`/week over five
