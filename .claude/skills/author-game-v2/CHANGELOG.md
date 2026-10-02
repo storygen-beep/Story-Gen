@@ -5,6 +5,26 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Never build an unknown on a guess (Coverage and the Scout PRD, CV1)
+
+**Why.** The skill is strong only where it was researched. Where it has no rule (a party, a car, a landlord, a
+house layout), the build session did not stop: it invented a plausible default, and nothing failed, because no rule
+existed to check. The billable_hours house and its undated week-12 promise were built that way.
+
+**What.**
+- `SKILL.md` Operating rules: one commitment. Every topic the game needs (a system, a kind of place, a recurring
+  scene, a mechanic it leans on) goes on the coverage list with its source: a rule here, a scout card, LO's call, or a
+  placeholder named on the release page; an `unknown` waits for one of those, and the build session asks LO before
+  any scout runs.
+- `SKILL.md` Dispatch, the `spine` row: the coverage list first, then the system cards, then the rooms.
+- `references/the-release.md` loop step 4: each release puts any topic it adds on the list, with its source, before
+  it is built.
+The detail lives in the sheet (`templates/sheets/coverage.md`, the next commit) and the scout agent.
+
+**Verified.** `--selfcheck` clean (2 orphans); `cite_check.py` 0 in SKILL.md + references; skill pytest passes.
+
+**Words:** +102, running total 146,970 / 149,283 (measured).
+
 ## 2026-10-02 — Phase 8 fixes, the tools (Coverage and the Scout PRD, CV-pre, tools)
 
 **What.** `scripts/gates.py` (**protected, LO approved**), three report-only fixes from the final check:

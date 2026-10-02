@@ -87,7 +87,8 @@ or way round, and sex used only as a punishment — each quoting the line. LO ju
 
 **4. Write.** Events on existing surfaces. Default to **zero new locations** (*Where a release
 happens*, above); a thread's new person arrives at a place she already has. If this release opens a
-location, it arrives filled, not as a promise.
+location, it arrives filled, not as a promise. Each release: any topic it adds (a system, a kind of
+place, a recurring scene, a mechanic) goes on the coverage list, with its source, before it is built.
 
 > ⚠️ **If this release moves a field that prose already quotes — a price, an amount, a
 > window, a parent location, a label — it is an amendment, not an addition.** See *The prose

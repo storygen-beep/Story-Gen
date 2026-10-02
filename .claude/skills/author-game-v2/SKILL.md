@@ -175,7 +175,7 @@ boundary and wait for LO's pick or signature** before starting the next phase's 
 | *(no state file)*, premise picked | write the Want, create the state file | `references/the-want.md` · `templates/want.md` | the Want is recorded → `want` |
 | `want` | **write the idea page** (`games/<slug>/IDEA.md`) — fantasy, promise, the people who carry it, and the first step with one person: three `v2-pitcher`s, two on the main men and one on a thread of her life, no shared context | `templates/idea.md` · `the-want.md` §0, §6 · `moment-library.md` | LO picks one; the others become later steps → `idea` |
 | `idea` | **write the spine** — seven short decision pages (time, ladders, dependencies, loop, cast, media, the release page), each pointing at its rule | `references/the-spine.md` · `templates/spine/` | every page [READY] and signed, and **`shape.py <slug> --finish` passes** (checkpoint A) → `spine` |
-| `spine` | lay down the world — the base — **`the-systems.md` first: fill a card per system before the rooms**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
+| `spine` | lay down the world — the base — **the coverage list first** (`templates/sheets/coverage.md`), then **`the-systems.md`: fill a card per system before the rooms**, then who climbs | `references/the-systems.md` → `the-board.md` + `the-map.md` + `the-economy.md` + `the-meters.md` | the board is written → `board` |
 | `board` | **the sheets** — the design LO reads and signs, before any TOML. Where LO writes them, hand drafts over in `proposals/` (S13) | `references/the-sheets.md` S13 · `templates/sheets/` | every sheet is [READY] and signed → `sheets` |
 | `sheets` | build v0.1 from the signed sheets — the build | `references/the-release.md` (§ first release) + `the-voice.md` | v0.1 ships → `release` |
 | `release` | run the loop — pitch, attack, write, gate, read, ship, log, and keep the prose true to the fields it quotes | `references/the-release.md` + `the-returning-player.md` | — the checkpoint is `gates.py --ship` |
@@ -439,6 +439,11 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   never settled quietly and never only noted afterwards (`the-sheets.md` S12). **And an approved plan
   goes onto the game's pages before it is built** (S13): a plan kept outside `games/<slug>/` is one
   the next session will not read.
+
+- **Never build an unknown on a guess.** Every topic the game needs (a system, a kind of place, a
+  recurring scene, a mechanic it leans on) goes on the coverage list with its source: a rule here, a
+  scout card, LO's call, or a placeholder named on the release page. An `unknown` waits for one of
+  those; the build session asks LO before any scout runs (`templates/sheets/coverage.md`).
 
 - **A number is a promise until an instrument produces it.** `the-sheets.md` S1. A sheet that
   counts paragraphs and `gates.py`, which counts nodes, disagree about the same design. Anything not emitted by `gates.py`, `playtest.py` or a build belongs on the INTENT
