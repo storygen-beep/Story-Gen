@@ -11517,7 +11517,7 @@ def _block_gate_verdict(gname, r):
     if r.get("parked") or r.get("few"):
         # PRD IC21: a parked block is never read as green, and says why it is red.
         return False, f"{gname}: {r['headline']}", r["detail"][:10]
-    if r["na"] and gname != "the obligation is charged":
+    if r["na"] and gname not in SHIP_NA_PASSES:
         return False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
     return (None if r["na"] else r["pass_"]), f"{gname}: {r['headline']}", r["detail"][:10]
 
@@ -12739,6 +12739,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("every system has a card", *_every_system_has_a_card(state))
     gate("every system leads to a person or a sex scene",
          *_every_system_leads_somewhere(model, game, state))
+    gate("every clothing state is read three times", *_wardrobe_is_read(game, state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13114,6 +13115,115 @@ SHIP_SINCE["system_card"] = (SYSTEMS_SINCE, "every system has a card")
 SHIP_BLOCK_GATES["every system leads to a person or a sex scene"] = \
     "every system leads to a person or a sex scene"
 SHIP_SINCE["system_leads"] = (SYSTEMS_SINCE, "every system leads to a person or a sex scene")
+
+
+# ── the wardrobe card: every declared state and key item is read in ≥3 places (WS-D8) ──────
+# `board.wardrobe = {states: [{id, condition}], key_items: [clothing_id]}` (state.md). A reader
+# is a condition item on a canvas trigger, in a `group` (a scene's or an NPC's lines), in a
+# location's `entry_conditions` or a dress code's `conditions`, plus a dress code's
+# `slots_required` (it reads `clothing_slot` on each slot it names). A reader MATCHES a state when
+# it is the same predicate (and the same slot) and the values its operator allows overlap the
+# state's. A key item is read by a `clothing_item` naming it. Choice conditions, quest cards and
+# the portrait override are not counted. Clothing off: n/a, which passes (SHIP_NA_PASSES).
+WARDROBE_READS = 3
+
+
+def _cond_leaves(cond):
+    """Every condition item under a conditions dict, through nested `items` groups."""
+    if isinstance(cond, list):
+        for c in cond:
+            yield from _cond_leaves(c)
+    elif isinstance(cond, dict):
+        if isinstance(cond.get("items"), list):
+            yield from _cond_leaves(cond["items"])
+        elif cond.get("type"):
+            yield cond
+
+
+def _wardrobe_readers(game):
+    """Condition items that count as wardrobe readers, plus one `clothing_slot … unequipped`
+    reader per slot a dress code requires."""
+    out = []
+    for c in game.get("canvases") or []:
+        out += _cond_leaves(((c or {}).get("trigger") or {}).get("conditions"))
+    for _path, d in _walk_paths(game):
+        if d.get("type") == "group":
+            out += _cond_leaves((d.get("props") or {}).get("conditions") or d.get("conditions"))
+    for loc in game.get("locations") or []:
+        out += _cond_leaves((loc or {}).get("entry_conditions"))
+        for rule in (loc or {}).get("clothing_rules") or []:
+            if isinstance(rule, dict):
+                out += _cond_leaves(rule.get("conditions"))
+                out += [{"type": "clothing_slot", "slot": s, "operator": "unequipped"}
+                        for s in rule.get("slots_required") or []]
+    return out
+
+
+def _state_matches(state_cond, reader):
+    """Does `reader` read the declared clothing state (same predicate, overlapping values)?"""
+    t = state_cond.get("type")
+    if reader.get("type") != t:
+        return False
+    sop, rop = state_cond.get("operator"), reader.get("operator")
+    if t == "clothing_slot":
+        return reader.get("slot") == state_cond.get("slot") and rop == sop
+    if t == "worn_type":
+        same = reader.get("value") == state_cond.get("value")
+        if sop == "eq" and rop == "eq":
+            return same
+        return not same if "eq" in (sop, rop) else True
+    span = range(-1, 21)
+    want = {x for x in span if _cmp(x, sop, state_cond.get("value"))}
+    return bool(want & {x for x in span if _cmp(x, rop, reader.get("value"))})
+
+
+_STATE_TYPES = ("worn_exposure", "worn_corruption", "worn_beauty", "worn_type", "clothing_slot")
+
+
+def _wardrobe_is_read(game, state):
+    """(ok, headline, detail) for `every clothing state is read three times`."""
+    if _legacy("wardrobe_reads"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    if not (game.get("settings") or {}).get("clothing_enabled"):
+        return None, "clothing is off", []
+    wd = (((state or {}).get("board") or {}).get("wardrobe") or {})
+    states = [s for s in (wd.get("states") or []) if isinstance(s, dict)]
+    items = [i for i in (wd.get("key_items") or []) if isinstance(i, str)]
+    if not states and not items:
+        return False, "clothing is on and board.wardrobe declares no state or key item", \
+            ["declare board.wardrobe (state.md; templates/cards/wardrobe.md)"]
+    readers = _wardrobe_readers(game)
+    catalog = {c.get("id") for c in (game.get("clothing") or []) if isinstance(c, dict)}
+    bad, counts = [], []
+    for s in states:
+        cond = s.get("condition") if isinstance(s.get("condition"), dict) else {}
+        if cond.get("type") not in _STATE_TYPES:
+            bad.append(f"state `{s.get('id')}`: condition type `{cond.get('type')}` is not a "
+                       f"clothing state ({' / '.join(_STATE_TYPES)})")
+            continue
+        n = sum(1 for r in readers if _state_matches(cond, r))
+        counts.append(n)
+        if n < WARDROBE_READS:
+            what = " ".join(str(cond[k]) for k in ("type", "slot", "operator", "value")
+                            if cond.get(k) is not None)
+            bad.append(f"state `{s.get('id')}` ({what}): read {n} time(s), needs {WARDROBE_READS}")
+    for i in items:
+        n = sum(1 for r in readers if r.get("type") == "clothing_item" and r.get("item_id") == i)
+        counts.append(n)
+        if i not in catalog:
+            bad.append(f"key item `{i}` is not a [[clothing]] id")
+        elif n < WARDROBE_READS:
+            bad.append(f"key item `{i}`: read {n} time(s), needs {WARDROBE_READS}")
+    head = (f"{len(states) + len(items) - len(bad)}/{len(states) + len(items)} declared states "
+            f"and key items read {WARDROBE_READS}+ times")
+    return not bad, head, bad
+
+
+SHIP_BLOCK_GATES["every clothing state is read three times"] = \
+    "every clothing state is read three times"
+SHIP_SINCE["wardrobe_reads"] = (SYSTEMS_SINCE, "every clothing state is read three times")
+# A BLOCK row whose n/a passes: there is nothing to check (no clothing, no phone).
+SHIP_NA_PASSES = {"the obligation is charged", "every clothing state is read three times"}
 
 
 def main():

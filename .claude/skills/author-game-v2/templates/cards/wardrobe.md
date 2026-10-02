@@ -58,8 +58,8 @@ Name the states and key items in the ledger, so a check can count their readers:
 }
 ```
 
-## Amounts (directions, never gates)
-- 4–6 states, each read in at least 3 places: a leave rule, a place, an event or a line (planned gate: `every
+## Amounts (directions, except the 3 readers, which is a gate)
+- 4–6 states, each read in at least 3 places: a leave rule, a place, an event or a line (gate `every
   clothing state is read three times`).
 - At least one enforced dress code, and one place that wants a revealing state.
 - One event per revealing state.

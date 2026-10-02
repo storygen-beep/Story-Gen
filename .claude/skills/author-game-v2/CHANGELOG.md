@@ -5,6 +5,47 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — `--ship` blocks on a clothing state read fewer than three times: `every clothing state is read three times` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every clothing state is read three times**
+(`_wardrobe_is_read`, above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row. Each state and
+key item in `board.wardrobe` (the widened shape: `worn_exposure` / `worn_corruption` / `worn_beauty` /
+`worn_type` / `clothing_slot`) needs 3 readers.
+- **Readers** (the PRD's list): condition items on a canvas trigger, in any `group` (a scene's or an NPC's
+  lines), in a location's `entry_conditions` or a dress code's `conditions`; and a dress code's
+  `slots_required`, which reads `clothing_slot <slot> unequipped`. Choice conditions, quest cards and the
+  portrait override do not count. Undeclared catalog items are not counted.
+- **Matching:** the same predicate (and slot), and the values the reader's operator allows overlap the
+  state's (numbers over -1..20; `worn_type` eq/neq by value; `clothing_slot` the same operator). A key item
+  is read by a `clothing_item` naming it, any operator.
+- Red: a state or key item with 0–2 readers; a state whose condition is not a clothing predicate; a key
+  item that is no `[[clothing]]` id; clothing on with no `board.wardrobe` states or key items.
+- **n/a policy:** clothing off (`[settings] clothing_enabled` false or absent) is n/a, and n/a passes: the
+  one-line swap in `_block_gate_verdict` now reads `SHIP_NA_PASSES` (defined above `main()`, holding the
+  obligation row and this one).
+- **Grandfathering:** `SHIP_SINCE["wardrobe_reads"]` = 2026-10-02; the legacy form passes. G41 `the
+  wardrobe is read` is unchanged.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list; `the-meters.md` W7 (the matching
+  rule, and the planned label at the "floor" line made live); `the-arc.md`'s planned label;
+  `state.md`'s `board.wardrobe` row; `templates/cards/wardrobe.md` (label, and its "never gates" heading).
+
+**Why.** WS-D8 / WS-D9: every clothing state and key item is read in ≥3 places, a BLOCK.
+
+**Verified.** New `scripts/tests/test_gates_wardrobe_reads.py` (12): three overlapping readers pass; a
+non-overlapping one doesn't count; a dress code reads its slots; worn_type eq/neq; key items count
+`clothing_item` and not choices; a key item outside the catalog; a non-clothing state; clothing off n/a;
+nothing declared red; legacy passes; on `ship_rows` clothing off is n/a, billable_hours blocks, a
+grandfathered game warns and blocks once shipped since. Before/after `--ship`, HEAD exports: before no row;
+after **billable_hours FAIL** 0/5 (in_sleepwear 1, no_top 1 — the firm's dress code, sleep_shirt 1,
+blouse_tight 0, skirt_short 0; the rule working, WS-D13); members_only, orientation WARN (clothing on, no
+`board.wardrobe`); vesper FAIL (same, not grandfathered); media_lab, probation, the_balance n/a (clothing
+off). No other row moved; no exit code changed. `the-release.md:100` → `gates.py:13484` (read by hand);
+every other cite unchanged; `cite_check.py --fix` 0 drifted; selfcheck clean (66 gates); pytest 614 passed.
+
+**Words:** +85, running total 146,420 / 149,283.
+
+---
+
 ## 2026-10-02 — `--ship` blocks on a system that leads nowhere: `every system leads to a person or a sex scene` (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py`: new scored gate **every system leads to a person or a sex scene**

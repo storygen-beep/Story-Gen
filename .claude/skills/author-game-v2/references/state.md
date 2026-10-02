@@ -436,7 +436,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 | `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
 | `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
-| `board.wardrobe` | no gate yet | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
+| `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of
