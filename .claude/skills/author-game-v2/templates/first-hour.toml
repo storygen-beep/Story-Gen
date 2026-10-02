@@ -146,8 +146,8 @@ end_time   = "<matches this character's own schedule row>"
 [canvases.trigger.conditions]
 version = "1.0"
 logic   = "AND"
-# ⚠️ A conditions block without version = "1.0" FAILS OPEN — the engine returns
-#    true and the meeting cold-spawns at game start (v2.py:4892).
+# ⚠️ A conditions block without version = "1.0" is refused by the importer (a
+#    build error); at runtime it would fail open and return true (v2.py:4892).
 [[canvases.trigger.conditions.items]]
 type      = "flag"
 subject   = "player"

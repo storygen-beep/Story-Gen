@@ -686,7 +686,7 @@ content = "The woman on the fruit stall looks at her twice and does not pretend 
 
 ⚠️ **`version = "1.0"` is not optional.** A `conditions` block without it **fails open** — the engine
 returns true and the ambient fires whatever she is wearing, which reads exactly like the feature
-being broken. `engine.md` records the same trap for `entry_conditions`.
+being broken. The importer refuses the block; `engine.md` records the same for `entry_conditions`.
 
 ⚠️ **`trigger_mode = "random"` is what makes it an ambient.** The default is `"manual"`, which renders
 a clickable link instead of firing on entry — a link labelled *"The market notices"* is not the same

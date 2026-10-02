@@ -70,8 +70,8 @@ doctrine is the *relationship* — a full price and its half. What the price sho
 against a week's income is **R3c**, below, and it is derived per game. *An example outranks every rule
 beside it* — do not copy these.
 
-⚠️ **Conditions need `version = "1.0"` or they FAIL OPEN** — the engine returns true for any
-`conditions{}` without it, with no build error, so a ladder missing it renders every rung at once.
+⚠️ **Conditions need `version = "1.0"`** — the importer refuses any `conditions{}` without it, a
+build error; at runtime the engine would return true, and a ladder would render every rung at once.
 `engine.md` §2. Note that a **quest card** takes the opposite form and must never be given this
 key; `the-voice.md` R2 shows the two side by side.
 

@@ -824,8 +824,8 @@ template_import.py:2445-2446 parsed
 template_import.py:9063      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
-⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
-door silently unlocks (§4).
+⚠️ `entry_conditions` needs `version = "1.0"` like any condition block: the importer refuses it
+without one (at runtime it would **fail open** and the door silently unlock, §4).
 
 **Opening hours — the place is shut at set times.**
 
@@ -1497,7 +1497,7 @@ ceiling, or `cap` the terminal add (§29).
 
 ### 30.1 Hygiene is allowed, for routing — one need whose refill places always roll events
 
-Hygiene comes back as **one need, for routing only** (LO, WS-D5). Course of Temptation says why in its
+Hygiene comes back as **one need, for routing only** (LO decided, 2026-10-01). Course of Temptation says why in its
 own code: needs exist for *"pushing the player to do things that lead to events (like venturing into
 co-ed showers to get clean)"* (`cot_27_database_needs.js:2-3`, round 9b `cards/needs.md`).
 

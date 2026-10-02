@@ -33,7 +33,7 @@ Every one is a measured number, not an opinion. The evidence lives inline in
 3. **Heat lives where the player returns** — most explicit content sits where the player can go
    back. The gate counts **beats** (a beat is one screen): `explicit floor` wants **7.5% of repeatable
    beats** to carry three or more explicit words. The 7.5% is a lenient floor inside the reference game's band (6.8–11.3%,
-   re-measured 2026-10-02), not the genre's rate, and the field reads differently by unit:
+   re-measured 2026-10-02 with word list version 2, `round5/dol_snapshots/`), not the genre's rate, and the field reads differently by unit:
 
    | unit | field median | the reference game's 7.5% |
    |---|---|---|

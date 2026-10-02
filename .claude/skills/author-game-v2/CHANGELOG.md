@@ -5,6 +5,31 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Phase 8 fixes, the words (Coverage and the Scout PRD, CV-pre, docs)
+
+**What.** The final check's wording findings, each a line-for-line swap so no cite moved:
+- `references/the-economy.md:73-74` (**protected, LO approved**, that sentence only): a conditions block without
+  `version = "1.0"` is now refused by the importer (a build error), not "fails open with no build error"; the runtime
+  fail-open is kept as what would happen.
+- `references/the-meters.md:689`, `references/the-phone.md:200`, `references/engine.md:827-828`,
+  `templates/first-hour.toml:149-150`: each fail-open warning now says the importer refuses the block. True for every
+  one of them: `_walk_condition_carriers` (`template_import.py:1810`) checks every `conditions` and `entry_conditions`
+  key in the raw TOML, so the meeting no longer "cold-spawns at game start" in a game that builds.
+- `references/engine.md:1500`, `references/the-phone.md:49`, `references/the-voice.md:329`: the three PRD ids became
+  "LO decided, 2026-10-01" (skill text names no PRD id).
+- `templates/board.toml:376`: the `isCurrentTimeSlot` cites `:3448 :3465 :3612` landed on unrelated lines; now the
+  definition `v2.py:4661` and the four call sites `:4310 :4328 :4486 :4605`, each read by hand.
+- `templates/cards/reputation.md:58`: item prices exist now, but a price is a fixed number and can't read a stat.
+- `references/register.md:210` and `SKILL.md:36` name word list version 2 and `round5/dol_snapshots/` where they state
+  the explicit floor (only `gates.py` and this ledger did).
+- The ledger: the last two entries each logged a total from their own branch, so the newest said 146,841 while the
+  files measured 146,851 before this commit. The total below is measured by `--selfcheck`.
+
+**Verified.** `--selfcheck` clean (2 orphans, the baseline); `cite_check.py` 0 in SKILL.md + references; skill
+pytest 676 passed.
+
+**Words:** +17, running total 146,868 / 149,283 (measured).
+
 ## 2026-10-02 — The tools read a `trigger` choice, and a missing `targetType`, as an exit (World and Systems PRD, Phase 7b, L8)
 
 **What.** The engine sends a `trigger` choice to the canvas's home, as it does a `return` one, and never follows its

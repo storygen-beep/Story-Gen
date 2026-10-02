@@ -46,7 +46,7 @@ Engine claims here carry a `file:line` into
 
 ## P1 · Every person she is involved with has a thread
 
-**The default is a phone, with a chat thread for every person she is involved with** (LO, WS-D7).
+**The default is a phone, with a chat thread for every person she is involved with** (LO decided, 2026-10-01).
 Every game this skill copies has one, and its threads carry the arcs: Cupid's Way's Damien thread
 opens at a lunch scene and runs to sex at her place (round 9a §1a). The phone is how a person she is
 involved with reaches her between the times she can reach him in person.
@@ -197,7 +197,7 @@ conditions = { version = "1.0", items = [
 ] }
 ```
 
-`version = "1.0"` is not optional: without it the conditions fail open and the text arrives at once.
+`version = "1.0"` is not optional: the importer refuses the block (at runtime it would fail open).
 `time_of_day` is `HH:MM`, 24-hour, end exclusive, and wraps midnight the way NPC schedules do
 (`v2.py:5143`, `engine.md` §39); omit `end_time` and the window is one hour.
 

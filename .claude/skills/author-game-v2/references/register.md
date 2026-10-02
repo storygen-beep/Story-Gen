@@ -207,7 +207,7 @@ challenged twice and was right both times.
 
 The floor comes from the reference game. Re-measured 2026-10-02 on ten snapshots of its source
 (2018–2026; the original method was lost), its share is 6.8–11.3% depending on how the code is
-cleaned out, and the 2026-10-02 word list moves it by at most 0.11 points. 7.5 stays, a lenient floor.
+cleaned out, and word list version 2 moves it by at most 0.11 points (`round5/dol_snapshots/`). 7.5 stays.
 
 > ⚠️ **It is a FLOOR. Its upper comparison is meaningless — do not read a game scoring far above it
 > as "too hot."** That reading has been wrong twice and cost one game a dilution pass it never
