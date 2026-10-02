@@ -5,6 +5,30 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — World size: the hub is the house, not the street (World and Systems PRD, Phase 7b, L1)
+
+**What.** `scripts/gates.py`: new `_world_hub(board, game)` (above `main()`) — the hub is the room her room
+(`board.map.home_base`) reaches on its `entry_from` chain just below `board.map.exterior`; when the exterior is
+not on the chain (the house is its own root), the chain's root. No home base, or one no location declares: the
+first `board.map.roots[]`, as before. `_world_size` / `_world_size_row` take the game and use it; both callers
+(`ship_rows`, `main()`) pass it. Why: the hub was `board.map.roots[0]`, which on billable_hours is the street,
+so the house's own scenes were counted as hook share only when a hook person was in them.
+`references/the-want.md` "Her life — the threads" names it (+9 words).
+
+**Verified.** `scripts/tests/test_gates_world_size.py` +4: a two-root fixture shaped like billable_hours (street →
+Home → Upstairs → her room, plus downtown) gives `house`; a single-root one gives the flat, and the house-is-the-root
+case gives the root; no home base gives the first root; `_world_size` names the hub. Before/after `--ship` on HEAD
+exports of every game but vesper_two: only the **world size** REPORT row changed —
+billable_hours `hook share 39% … hub linden_street` → `35% … hub house`; members_only `61% … hub None` → `63% …
+hub cliff_path`; orientation `0% … None` → `2% … the_hall`; probation `0% … None` → `6% … the_stairwell`; the_balance
+`None` → `the_hall` (still 0%); media_lab and vesper unchanged. No BLOCK row or exit code moved. `the-release.md:100`
+→ `gates.py:13895` (read by hand: "Lints sit BELOW the tally"); `cite_check.py --fix` 0 drifted; selfcheck clean
+(0 orphans); pytest 664 passed.
+
+**Words:** +9, running total 146,775 / 149,283 (HEAD measured 146,766, 35 above the last logged total, 146,731).
+
+---
+
 ## 2026-10-02 — Systems and connections: a `--ship` REPORT row and a lint (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py` (above `main()`): `_systems_and_connections` counts the system cards

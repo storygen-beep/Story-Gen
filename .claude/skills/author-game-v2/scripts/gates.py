@@ -11463,7 +11463,7 @@ def ship_rows(slug, root=None):
     others = [r for g, r in results.items() if g not in shown]
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
-    report.append(_world_size_row(model, state))
+    report.append(_world_size_row(model, state, game))
     report.append(_systems_row(state))
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
@@ -13548,10 +13548,11 @@ def _paid_choice_names_amount(model, game, state):
 
 
 # ── the-want.md, her life: how big the world is (a REPORT, no threshold — WS-D9) ─────────────
-# Hook people are `want.cast` ids that are no thread's `person`; the hub is the first of
-# `board.map.roots[]`. A canvas holds a person when its trigger names them (`npc` /
-# `requires_npc`) or they speak in it. Hook share = words in canvases holding a hook person or at
-# the hub, over all words. A link is a thread canvas that sets or reads a flag a hook canvas reads.
+# Hook people are `want.cast` ids that are no thread's `person`; the hub is the house her room
+# (`board.map.home_base`) is in (`_world_hub`). A canvas holds a person when its trigger names
+# them (`npc` / `requires_npc`) or they speak in it. Hook share = words in canvases holding a
+# hook person or at the hub, over all words. A link is a thread canvas that sets or reads a flag
+# a hook canvas reads.
 def _canvas_speakers(c):
     blocks = []
     for n in c.get("nodes") or []:
@@ -13563,14 +13564,30 @@ def _canvas_people(c):
     return (_canvas_speakers(c) | {c.get("npc"), c.get("requires_npc")}) - {"", None}
 
 
-def _world_size(model, state):
+def _world_hub(board, game):
+    """The top of the house: the room her room's `entry_from` chain reaches just below
+    `board.map.exterior` (or the chain's root when the street isn't on it). No home base, or one
+    the build doesn't declare: the first `board.map.roots[]`, as before."""
+    bmap = board.get("map") or {}
+    parent = {l.get("id"): l.get("entry_from") for l in (game or {}).get("locations") or []
+              if l.get("id")}
+    lid, seen = bmap.get("home_base"), set()
+    if lid not in parent:
+        return (bmap.get("roots") or [None])[0]
+    while parent.get(lid) and parent[lid] != bmap.get("exterior") and lid not in seen:
+        seen.add(lid)
+        lid = parent[lid]
+    return lid
+
+
+def _world_size(model, state, game=None):
     """(summary, rows) for the `world size` REPORT row and lint."""
     want = (state or {}).get("want") or {}
     board = (state or {}).get("board") or {}
     threads = [t for t in (want.get("threads") or []) if isinstance(t, dict)]
     thread_people = {t.get("person") for t in threads}
     hooks = {c.get("id") for c in (want.get("cast") or []) if isinstance(c, dict)} - thread_people
-    hub = ((board.get("map") or {}).get("roots") or [None])[0]
+    hub = _world_hub(board, game)
     people = {c["id"]: _canvas_people(c) for c in model}
     words = {c["id"]: sum(b.words for b in c["beats"]) for c in model}
     hook_cv = [c for c in model if people[c["id"]] & hooks or (hub and c["loc"] == hub)]
@@ -13593,8 +13610,8 @@ def _world_size(model, state):
     return summary, rows
 
 
-def _world_size_row(model, state):
-    summary, rows = _world_size(model, state)
+def _world_size_row(model, state, game=None):
+    summary, rows = _world_size(model, state, game)
     return ("world size", None, summary + " — a size, never a score", rows)
 
 
@@ -14471,7 +14488,7 @@ def main():
         print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
               " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
 
-    ws_summary, ws_rows = _world_size(model, state)
+    ws_summary, ws_rows = _world_size(model, state, game)
     print(f"  {'─'*72}")
     print(f"  lint · world size — {ws_summary}")
     for h in ws_rows:

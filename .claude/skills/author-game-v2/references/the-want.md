@@ -401,7 +401,8 @@ threads: job or study, friends, dating, side money, the town. Each thread has:
 Record as `want.threads[] = {id, name, person, place, system, link}`. Threads hold most of a game's
 text: in the seven games round 7 measured, the hook is 11–54% of story passages, and 28–52% even in
 the taboo-at-home games (round 7, `ROUND7_REPORT.md`). A direction, not a target: `lint · world size`
-(and a `--ship` REPORT row) prints the hook share, threads built, speaking NPCs, links and zones.
+(and a `--ship` REPORT row) prints the hook share (hook people, or the house her room is in),
+threads built, speaking NPCs, links and zones.
 
 **The companion** — a friend one step ahead who leads her, or one step behind whom she leads. In Her
 Own Hands' Abby [AbbyDBDareStart1]: *"I'm here to push you out of the nest, baby bird."* Cupid's

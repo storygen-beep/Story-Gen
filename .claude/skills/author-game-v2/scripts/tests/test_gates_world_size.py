@@ -1,6 +1,7 @@
 """`world size` (World and Systems PRD, Phase 6B, 2026-10-02): a REPORT row under `--ship` and a
 `lint · world size` print. No threshold. Hook people are `want.cast` ids that are no thread's
-person; the hub is the first `board.map.roots[]`. Fixtures only.
+person; the hub is the top of the house her room (`board.map.home_base`) is in, below the
+street (leftovers L1, 2026-10-02); with no home base, the first `board.map.roots[]`. Fixtures only.
 """
 import os
 import sys
@@ -62,3 +63,39 @@ def test_it_is_a_ship_report_row_never_a_block(tmp_path, monkeypatch):
     row = next(r for r in report if r[0] == "world size")
     assert row[1] is None and "a size, never a score" in row[2]
     assert "world size" not in {r[0] for r in block}
+
+
+def _locs(*pairs):
+    return {"locations": [{"id": i, "entry_from": p} if p else {"id": i} for i, p in pairs]}
+
+
+def test_the_hub_is_the_house_not_the_street_two_roots():
+    # billable_hours' shape: street -> Home -> Upstairs -> her room, and a second root downtown.
+    game = _locs(("linden_street", None), ("house", "linden_street"), ("landing", "house"),
+                 ("her_room", "landing"), ("downtown", None), ("firm", "downtown"))
+    board = {"map": {"roots": ["linden_street", "downtown"], "exterior": "linden_street",
+                     "home_base": "her_room"}}
+    assert gates._world_hub(board, game) == "house"
+
+
+def test_the_hub_single_root():
+    game = _locs(("street", None), ("flat", "street"), ("her_room", "flat"))
+    board = {"map": {"roots": ["street"], "exterior": "street", "home_base": "her_room"}}
+    assert gates._world_hub(board, game) == "flat"
+    # The house is the root itself (the street is not on her room's chain): the root.
+    game = _locs(("house", None), ("her_room", "house"), ("street", None))
+    board = {"map": {"roots": ["house", "street"], "exterior": "street", "home_base": "her_room"}}
+    assert gates._world_hub(board, game) == "house"
+
+
+def test_the_hub_without_a_home_base_is_the_first_root():
+    assert gates._world_hub({"map": {"roots": ["room_a"]}}, _locs(("room_a", None))) == "room_a"
+    assert gates._world_hub({}, None) is None
+
+
+def test_world_size_counts_the_house_words():
+    g, st = world()
+    model, g2 = gates.build(g)
+    st["board"]["map"] = {"roots": ["street"], "exterior": "street", "home_base": "room_a"}
+    game = _locs(("street", None), ("room_a", "street"))
+    assert "hub `room_a`" in gates._world_size(model, st, game)[0]
