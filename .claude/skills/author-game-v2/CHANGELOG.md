@@ -5,6 +5,41 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Gate 12 `residents have homes`: a home is a bedroom (World and Systems PRD, Phase 6A)
+
+**What.** `scripts/gates.py` gate 12 passed any declared location as a home. It now also lists, as red
+reasons (`_home_is_a_bedroom`, above `main()`; three line-for-line swaps at `:7670`, `:7679-7680`):
+- the home is a thoroughfare (`kind = "thoroughfare"`) or a container (`is_container`);
+- the home is a hub: another room's `entry_from` points at it (a container off a bedroom, such as a
+  wardrobe, does not make it a hub: a container is not a room);
+- two or more people share it and `board.map.shared_homes` doesn't declare them (each named).
+The headline counts people, not reasons. Same gate name, so SKILL.md's row is unchanged.
+- **n/a policy:** unchanged (no ledger, or no characters).
+- **Grandfathering:** a game in `SHIP_GRANDFATHERED` gets the new reasons as listed warnings and the
+  gate still passes, until it ships on or after `HOME_IS_A_BEDROOM_SINCE` (2026-10-02, through
+  `_grandfathered`). The old reasons (no home, an undeclared location) are never grandfathered.
+  billable_hours is not grandfathered.
+- Docs: `the-map.md`'s gate 12 row loses its "Not checked yet (planned)" sentence and states the limit
+  (a landing with no rooms off it still passes).
+
+**Why.** `the-map.md` R2 says a home is a bedroom; gate 12 let billable_hours home people in the
+kitchen hub and on the landing (notebook N18).
+
+**Verified.** New `scripts/tests/test_gates_home_is_a_bedroom.py` (10): one bedroom each and a declared
+couple pass; an undeclared share, a hub, a thoroughfare and a container fail; offscreen passes;
+grandfathered warns, then fails once it ships since the date; old reasons never grandfathered; n/a
+unchanged. Before/after, `git archive HEAD` export (vesper_two excluded):
+billable_hours PASS 6/6 → FAIL 4/6 (Martin and Diane share `parents_room`, undeclared; §9 G7 adds
+`shared_homes`); orientation PASS → PASS with 2 warnings (Ray and Dee share `the_back_bedroom`);
+the_balance FAIL → FAIL, same two old reasons plus 3 warnings (Owen's `the_cafe` is a hub; Gil and Lynn
+share `the_master_bedroom`); members_only and probation PASS, unchanged; media_lab and vesper n/a.
+`the-release.md:100`'s cite moved `gates.py:13120` → `:13162` (read by hand); `cite_check.py --fix` 0
+drifted; selfcheck clean; pytest 557 passed.
+
+**Words:** +1, running total 146,027 / 149,283.
+
+---
+
 ## 2026-10-02 — shape.py reads her threads, each man's keeps, the meters and the system cards (World and Systems PRD, Phase 6A)
 
 **What.** `scripts/shape.py`:

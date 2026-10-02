@@ -7667,7 +7667,7 @@ def run_gates(model, game, state=None):
              ["the board phase must record the map: archetype, shape, home_base, exterior, homes",
               "until it does, a cast with nowhere to sleep cannot be distinguished from one that lives out"])
     else:
-        homeless = []
+        homeless, home_warn = _home_is_a_bedroom(game, state, chars, homes)
         for ch in chars:
             cid2 = ch.get("id")
             where = homes.get(cid2)
@@ -7676,8 +7676,8 @@ def run_gates(model, game, state=None):
             elif where not in loc_ids and where != "offscreen":
                 homeless.append(f"{cid2}: home '{where}' is not a declared location")
         _N["residents have homes"] = len(chars)
-        gate("residents have homes", None if not chars else not homeless,
-             f"{len(chars)-len(homeless)}/{len(chars)} characters have a home that exists", homeless)
+        gate("residents have homes", None if not chars else not homeless, f"{len(chars)-len({h.split(':')[0] for h in homeless})}/"
+             f"{len(chars)} characters have a home that exists and is a room of their own", homeless + home_warn)
 
     # G13 — the guidance surface is authored, not just switched on.
     # `quests_engine = "v2"` lights up a sidebar entry and a page; without cards it
@@ -12860,6 +12860,48 @@ def _adult_wording(model, game):
         return True, "no banned school word anywhere a player reads", []
     return (False, f"{len(hits)} banned school word(s) where a player reads — a warning, "
                    f"never a block (the-voice.md \"Adult wording\")", hits)
+
+
+# ── G12 residents have homes: a home is a bedroom (the-map.md R2) ───────────
+# Gate 12 used to pass any declared location. A home is a room of the person's own, so it is
+# red when the home is a thoroughfare (`kind = "thoroughfare"`) or a container (`is_container`),
+# when it is a hub (another room's `entry_from` points at it), or when two people share it
+# and `board.map.shared_homes` does not declare them (a couple). A landing with no rooms off it
+# still passes; the name and R2 carry that case. A game in SHIP_GRANDFATHERED gets these reasons
+# as warnings (listed, the gate still passes) until it next ships.
+HOME_IS_A_BEDROOM_SINCE = "2026-10-02"
+
+
+def _home_is_a_bedroom(game, state, chars, homes):
+    """(red, warned): reasons a declared home is not a room of the person's own."""
+    locs = {l.get("id"): l for l in (game.get("locations") or []) if isinstance(l, dict)}
+    hubs = {l.get("entry_from") for l in locs.values()       # a container is not a room
+            if l.get("entry_from") and not l.get("is_container")}
+    shared = (((state or {}).get("board") or {}).get("map") or {}).get("shared_homes") or []
+    couples = [set(g) for g in shared if isinstance(g, (list, tuple))]
+    by_home = collections.defaultdict(list)
+    reasons = []
+    for ch in chars:
+        cid = ch.get("id")
+        where = homes.get(cid)
+        loc = locs.get(where)
+        if loc is None:
+            continue                                   # no home / offscreen / undeclared: above
+        by_home[where].append(cid)
+        if loc.get("kind") == "thoroughfare":
+            reasons.append(f"{cid}: home '{where}' is a thoroughfare — a home is a bedroom (the-map.md R2)")
+        if loc.get("is_container"):
+            reasons.append(f"{cid}: home '{where}' is a container — a home is a bedroom (the-map.md R2)")
+        if where in hubs:
+            reasons.append(f"{cid}: home '{where}' is a hub (rooms open off it) — a home is a bedroom")
+    for where, who in by_home.items():
+        if len(who) > 1 and not any(set(who) <= c for c in couples):
+            reasons += [f"{cid}: shares '{where}' with {', '.join(o for o in who if o != cid)}, and "
+                        f"board.map.shared_homes does not declare them" for cid in who]
+    if _grandfathered((state or {}).get("slug"), state, HOME_IS_A_BEDROOM_SINCE):
+        return [], [f"warn (grandfathered until it next ships) — {r}" for r in reasons]
+    return reasons, []
+
 
 
 def main():
