@@ -1057,7 +1057,7 @@ class TemplateTheme:
 @dataclass
 class TemplateChoice:
     text: str = "Continue"
-    targetType: str = "trigger"  # 'trigger'|'location'|'node'
+    targetType: str = "trigger"  # 'trigger'|'location'|'node'|'return'
     locationId: Optional[str] = None
     nodeId: Optional[str] = None
     time_progression_minutes: Optional[int] = None
@@ -5849,19 +5849,21 @@ def validate(template: GameTemplate) -> List[str]:
                         )
             else:
                 for chi, ch in enumerate(eb.choices):
-                    if ch.targetType not in ("trigger", "location", "node"):
+                    if ch.targetType not in ("trigger", "location", "node", "return"):
                         errors.append(
-                            f"canvases[{ci}].nodes[{ni}].choices[{chi}].targetType invalid"
+                            f"canvases[{ci}].nodes[{ni}].choices[{chi}].targetType must be "
+                            f"'trigger', 'location', 'node', or 'return'"
                         )
                     # Layer 3 — silent-Navigation gate (choices form).
                     # Mirrors v1.py:10942 default (`choice.get('targetType', 'trigger')`):
                     # omitted targetType behaves as 'trigger' at runtime.
                     effective_tt = ch.targetType or "trigger"
-                    if effective_tt == "trigger" and not return_will_resolve:
+                    # `return` falls back to the same home, so it needs one too.
+                    if effective_tt in ("trigger", "return") and not return_will_resolve:
                         ch_text = (ch.text or "").strip() or "<no text>"
                         errors.append(
                             f"canvases[{ci}].nodes[{ni}].choices[{chi}] ('{c.id}.{n.id}') "
-                            f"uses targetType='trigger' but canvas has no resolving "
+                            f"uses targetType='{effective_tt}' but canvas has no resolving "
                             f"trigger.location — runtime return_target would silently "
                             f"land on the Navigation page. Choice text: {ch_text!r}. "
                             f"Fix: change targetType to 'location' and add a locationId "

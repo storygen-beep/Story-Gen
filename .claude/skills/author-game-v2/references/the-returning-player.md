@@ -30,7 +30,7 @@ that already exists.
 
 ## §1 — What the engine repairs for you, and what it cannot
 
-`setup.backfillStateDefaults` (`v2.py:16919`) runs from the `:passagestart` handler (`v2.py:17072`)
+`setup.backfillStateDefaults` (`v2.py:16932`) runs from the `:passagestart` handler (`v2.py:17085`)
 on **every passage**, and fill-if-absent merges the current default skeleton
 (`setup.stateDefaults`, `v2.py:3740`) into whatever the save carries. It never overwrites a value
 the player earned, and it is idempotent.
@@ -148,7 +148,7 @@ cover, a key, a tool the next beat needs owned or equipped — the save is **sof
 forward canvas stays shut, and the "go and get it" reaction points at something not in the wardrobe.
 
 > **Why no load-time fix covers it.** The state backfill fills `$player` at the top level only and
-> never fills into `wardrobe` (`v2.py:17691-17694`), because filling into it would hand back a garment
+> never fills into `wardrobe` (`v2.py:17704-17707`), because filling into it would hand back a garment
 > the player sold or discarded. A reaction that fires on the item *unequipped* with no ownership
 > check cannot tell never-granted from took-it-off, so the stranded save has no path to the item.
 

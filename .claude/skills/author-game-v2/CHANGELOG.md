@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a choice can go back to where she was (World and Systems PRD, Phase 7)
+
+**Why.** Only a location exit could say `destinationType = "return"`. A scene that ends on a choice
+(hang up, or keep talking) had to send her to the canvas's home, so a call answered at the gym could
+still end at the caller's place.
+
+**What changed.**
+- `template_import.py`: a choice's `targetType` accepts `return`; an unknown value now names the four
+  allowed ones; a `return` choice on a canvas with no resolving home is an error, as `trigger` is.
+  The field already passes through the importer and the default build unchanged.
+- `v2.py`: a `return` choice uses the stored place and the same fallback (the home when the place is
+  closed or gone, or nothing is stored). Its link names no passage; a `<<goto>>` at the end of the link
+  body resolves the place after the choice's time has passed, so a room that shuts in those minutes
+  falls back. A game with only `return` choices gets the stored-place helpers too. In a loop canvas a
+  `return` choice leaves the loop, as `trigger` does. Opt-in by use.
+- `references/engine.md` §13: one sentence, on the existing line (no line moved).
+- Citations re-pointed through the `git diff` line map (209 moved, 441 identical, each target line
+  checked identical; 2 unmapped, the choice-link `advanceTime` line this item changed, hand-pointed to
+  `v2.py:15647`); `cite_check.py` 0 drifted in SKILL.md + references/.
+
+**Verified.** `apps/game_generation/tests/test_return_choice.py` (new, 4 tests: a call answered at the
+gym returns her there free; a room that shuts during the choice's minutes falls back to the home; a gone
+room falls back; nothing stored ends at the home); it fails on the old generator.
+`ReturnChoiceSchemaTests` (3 import tests). Rebuilds of members_only, billable_hours, orientation,
+probation, the_balance and vesper all import with no passage-text change.
+
+**Words:** +19, running total 145,803 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: a room she is refused by a dress code records no visit (GLOBAL fix, World and Systems PRD, Phase 7)
 
 **Why.** A dress code (`clothing_rules`) redirected to `ClothingBlock` from the `:passagestart` handler.

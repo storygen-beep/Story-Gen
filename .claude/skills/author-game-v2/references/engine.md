@@ -79,7 +79,7 @@ value = { type = "trait", trait = "charm", mult = 2, add = 50, min = 0, max = 10
 ```
 
 - One runtime resolver, `setup.resolveEffectValue` (`v2.py:7243`), serves every path: passage effects
-  emit a call to it (`_resolve_effect_value`, `v2.py:16461`), and the phone reply and `on_ignore`,
+  emit a call to it (`_resolve_effect_value`, `v2.py:16474`), and the phone reply and `on_ignore`,
   daily-chat topics, the daily tick and fast-job income call it. `{type = "random", min, max}` works on
   all of them too.
 - The job board prints what a job pays right now (a range reads "8–14").
@@ -113,10 +113,10 @@ A top band with **no** `max` is unbounded by design and promises nothing. A top 
 ```
 
 ```python
-v2.py:14781   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
-v2.py:14795   def _media_pool_key(...)                  # cycle state key
-v2.py:14954   # ... $game_state.media_cycle
-v2.py:14767-14769  # `pool_dir` is preferred: the count is never hardcoded, so the human curates
+v2.py:14785   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
+v2.py:14799   def _media_pool_key(...)                  # cycle state key
+v2.py:14958   # ... $game_state.media_cycle
+v2.py:14771-14773  # `pool_dir` is preferred: the count is never hardcoded, so the human curates
 ```
 
 Pools **cycle** (1→2→3→1) through `$game_state.media_cycle` rather than re-rolling, so the
@@ -126,7 +126,7 @@ list because the count comes from disk.
 Media blocks also appear nested — under group blocks (`blocks[].blocks[].props`) and inside
 cascade beats (`blocks[].props.beats[].blocks[].props`). Any tool walking media must recurse.
 
-**A clip inside a cascade beat renders at that beat** (`v2.py:16909`, inside `_render_cascade_tail` at `:16849`) — nesting it there is not
+**A clip inside a cascade beat renders at that beat** (`v2.py:16922`, inside `_render_cascade_tail` at `:16862`) — nesting it there is not
 merely allowed, it is the shape `register.md` S1 requires, because a cascade appends and the node
 lead's clip stops being the current one after beat 0. See §8.
 
@@ -201,8 +201,8 @@ the mechanism behind "every release ends on a visible locked door."
 The single most load-bearing fact about how content is composed.
 
 ```python
-v2.py:16191   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
-v2.py:16909   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
+v2.py:16203   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
+v2.py:16922   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
 ```
 
 - **`targetType = "node"` is resolved when the game is built**, into a static link to
@@ -345,11 +345,11 @@ effects = [ { targetType = "npc", npcId = "npc_cal", trait = "lust", op = "add",
 array. Two levels of nesting is where it breaks.
 
 **Back to where she was — `destinationType = "return"`** (2026-10-02, opt-in). A call's Answer and a
-launcher option store the room she stands in (`setup.markReturnPlace`, `v2.py:18347`); a `return` exit
-goes back there, free, since it is not a move (`setup.returnPassage`, `v2.py:18354`). If that room is
+launcher option store the room she stands in (`setup.markReturnPlace`, `v2.py:18360`); a `return` exit
+goes back there, free, since it is not a move (`setup.returnPassage`, `v2.py:18367`). If that room is
 closed or gone, or nothing is stored (a scene entered from its room), the exit goes to the canvas's
 home, as `trigger` does. Arriving at any room clears it. `$game_state.return_place` exists only in a
-game with a `return` exit; old saves get it empty.
+game with a `return` exit or choice; old saves get it empty. A choice uses `targetType = "return"` the same way, resolved on the click, after the choice's time.
 
 ---
 
@@ -374,12 +374,12 @@ A choice with `show_when_locked = true` renders as `<span class="locked-choice">
 sees what the action was called.
 
 **Omit it on a story lock and the row is the action label, greyed, with nothing beside it.**
-`escaped_locked = (locked_text or choice_text)` at `v2.py:15657`, and the same string is repeated
-into the `title` tooltip at `:15438-15439`. The player sees "Kiss him" struck out and learns neither
+`escaped_locked = (locked_text or choice_text)` at `v2.py:15667`, and the same string is repeated
+into the `title` tooltip at `:15442-15443`. The player sees "Kiss him" struck out and learns neither
 why nor when. A number leg gets the engine's suffix; a flag leg gets nothing.
 
 **A pure number lock needs nothing** *(LO decided, D2)*. When every item is a trait gate the engine
-can number — hers or a man's, `gte`/`gt`/`lte`/`lt`, value 2 or more (`_wants_number`, `v2.py:15704`) —
+can number — hers or a man's, `gte`/`gt`/`lte`/`lt`, value 2 or more (`_wants_number`, `v2.py:15714`) —
 it appends the need and her value beside the label (`setup.requirementSuffix`, `v2.py:4832`). A
 `locked_text` there says it twice (J1): drop it. **Any other lock is a story lock** — a flag, a clock or
 day item, clothing, an `eq`, a value of 1 — and so is a **mixed** lock: the suffix names only the unmet
@@ -397,7 +397,7 @@ Measured across 26 shipped sandboxes (`findings_B_refusal.md`, section B):
 
 Gate: **"a locked door says why"** (`gates.py`, `the-surfaces.md` R5c). It fails `locked_text` on a pure
 number lock; a story lock needs `locked_text`,
-`locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:15718-15725`) or
+`locked_text_threshold` (§23 — the label becomes a clickable toast, `v2.py:15728-15735`) or
 `rejection_node` (§36). A choice gated only by `costs` is never counted against you — see §27.
 
 ### ⚠️ That is what a shown row must SAY. It is not how many rows to show.
@@ -534,8 +534,8 @@ Exact path: `canvases[].nodes[].exit_block.config.wardrobeEffects` (a choice tak
 are **`action`** and **`item_id`** — not `op` / `itemId`. `action` is `add` (into the wardrobe), `equip`
 (added and put on), `unequip` (taken off, kept: `setup.unequipItem`, `v2.py:1738`) or `remove` (taken off
 and gone: `setup.removeFromWardrobe`, `v2.py:1751`); one helper serves every emitter
-(`_wardrobe_effect_js`, `v2.py:16598`). An unknown action, or an `item_id` that is missing or not in
-`[[clothing]]`, is a build error (`template_import.py:6245`).
+(`_wardrobe_effect_js`, `v2.py:16611`). An unknown action, or an `item_id` that is missing or not in
+`[[clothing]]`, is a build error (`template_import.py:6247`).
 
 **Saved outfits** (`[settings] saved_outfits = true`): the wardrobe page saves what she wears, up to five
 (`$player.outfits`), and puts one back on in a click, skipping a garment she no longer owns
@@ -543,7 +543,7 @@ and gone: `setup.removeFromWardrobe`, `v2.py:1751`); one helper serves every emi
 
 **More than one wardrobe room:** `wardrobe_location` takes a list (`["her_room", "gym_locker"]`). Each
 room shows "Change Clothes" and counts for `wardrobe_anywhere`; each must be a location
-(`template_import.py:6208`).
+(`template_import.py:6210`).
 
 **⚠️ THE FAILURE CLASS: an unrecognised key is silently ignored.** I first wrote
 `clothingEffects = [{ itemId = "…", op = "grant" }]`. The TOML parsed, the validator passed, the
@@ -571,7 +571,7 @@ enforces it. Four readers:
 rules, each `slots_required` with optional `conditions` and a refusal `message`; the first rule
 whose conditions hold applies (`setup.checkLocationClothing`, `v2.py:2099`). It checks **coverage
 only** — a `dress` counts for `top` and `bottom` — so it is a floor. Entering in breach plays
-`ClothingBlock` (`v2.py:19061`) instead of the room, which never renders, so she isn't there and no
+`ClothingBlock` (`v2.py:19074`) instead of the room, which never renders, so she isn't there and no
 visit is recorded: the message, **"Change clothes"** and "Go back".
 ⚠️ **The loophole:** by default "Change clothes" opens the wardrobe from wherever she is, so any dress
 code is one click from met. `[settings] wardrobe_anywhere = false` shows it only when she came from a
@@ -611,7 +611,7 @@ those reads only change words. Write the reactions, not the readout.
 (priced items only) is its own section on that room's screen: a Buy row per item, or why not, "Sold
 out." included (`setup.renderGeneralShop`, `v2.py:5693`). A `limit` is how many it ever sells, counted
 in `$game_state.shops` (only in a game with a limit; old saves get it empty). Checks:
-`template_import.py:6315`.
+`template_import.py:6317`.
 
 **The clothing shop: one, and it tells no rules.** `[settings] shop_location` is a single location
 (`template_import.py:3079`). `setup.renderShopPage` (`v2.py:2324`) groups the stock by corruption
@@ -780,7 +780,7 @@ costs = { time = 20, energy = 5 }     # time is minutes on the day clock; any ot
 template_import.py:221    costs: Dict[str, int] = field(default_factory=dict)
 template_import.py:2454   costs=_require_dict(l, "costs"),
 v2.py:6031                // A location's per-entry cost lives in setup.locations[slug].entry_costs
-v2.py:18427               has_location_costs = any(...)   # the travel-cost block is only emitted
+v2.py:18440               has_location_costs = any(...)   # the travel-cost block is only emitted
                                                           # when some location declares costs
 ```
 
@@ -817,7 +817,7 @@ blocked_message  = "The dining room's been dark since the staff went."
 template_import.py:196      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:197      blocked_message: str = ""
 template_import.py:2445-2446 parsed
-template_import.py:9061      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:9063      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block, or it **fails open** and the
@@ -844,7 +844,7 @@ closed_text = "The shutter's down. A paper sign: back at nine."    # optional
 
 ```
 template_import.py:202      hours: List[Dict[str, Any]] = field(default_factory=list)
-template_import.py:6937     def _validate_location_hours(template) -> List[str]:
+template_import.py:6939     def _validate_location_hours(template) -> List[str]:
 v2.py:11447                 setup.locOpenNow = function (slug) {
 ```
 
@@ -867,7 +867,7 @@ hidden_until = { flag = "found_attic" }     # a declared player flag
 
 ```
 template_import.py:206      hidden_until: Dict[str, Any] = field(default_factory=dict)
-template_import.py:7017     def _validate_hidden_places(template) -> List[str]:
+template_import.py:7019     def _validate_hidden_places(template) -> List[str]:
 v2.py:11319                 setup.locFound = function (slugOrUuid) {
 ```
 
@@ -899,7 +899,7 @@ table.
 template_import.py:3162        for qc_raw in (data.get("quest_cards", []) or []):
 template_import.py:1321         class QuestsCard
 template_import.py:1408        def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
-v2.py:17725                    the V2 QuestsPage overlay is emitted only when
+v2.py:17738                    the V2 QuestsPage overlay is emitted only when
                                project.metadata["quests_engine"] == "v2"
 ```
 
@@ -907,7 +907,7 @@ v2.py:17725                    the V2 QuestsPage overlay is emitted only when
 sidebar entry and the page **on**. Authoring no cards leaves a nav link to a heading with nothing
 under it. Switching the engine on is not authoring guidance.
 
-**Rendering.** `renderQuestsGoalBlock` (`v2.py:18042`) renders **exactly one** frame per card, in
+**Rendering.** `renderQuestsGoalBlock` (`v2.py:18055`) renders **exactly one** frame per card, in
 order: ✓ terminal → 🔓 `ready_canvas` → 🎯 unmet goals. A card that matches none of the three returns
 empty and the row goes blank.
 
@@ -919,7 +919,7 @@ BUILD are different endings; it needs `terminal` set or the string is dead, and 
 
 ```
 template_import.py:1363        terminal_text: Optional[str] = None
-v2.py:18050                    var _tlabel = card.terminal_text || "Arc complete";
+v2.py:18063                    var _tlabel = card.terminal_text || "Arc complete";
 ```
 
 ⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** In a build
@@ -943,7 +943,7 @@ Own Hands, [Progress_Hints_Base], prints *"Your choices have closed this path. N
 possible."* where a path has truly closed.
 
 ⚠️ **`ready_canvas` MUST name a canvas that HAS A LOCATION, or Frame 2 renders NOTHING.**
-`lookupCanvasBySlug` (`v2.py:18017`) walks `help_data.locationCanvases`, keyed by location UUID, so a
+`lookupCanvasBySlug` (`v2.py:18030`) walks `help_data.locationCanvases`, keyed by location UUID, so a
 **triggerless** canvas — the usual shape for a sex loop or any sub-menu reached by a choice — is not
 in that index at all. It returns `null`, Frame 2 does `if (!found) return ""`, and the card falls
 through to **no frame**: text and 💡 tip with nothing ticked, the exact failure the warning above
@@ -952,7 +952,7 @@ and the schedule, which is what the 📍 and 🕒 lines are read from.
 
 ⚠️ **`terminal` IS NOT COMPUTED FROM PROGRESS, AND A CHARACTER WHOSE ONLY CARD CARRIES IT READS AS
 FINISHED FROM VALUE ZERO.** Frame 1 fires on `card.terminal === true` alone, ahead of every other
-frame (`v2.py:18049`) — nothing checks that anything was achieved. So a single card gated
+frame (`v2.py:18062`) — nothing checks that anything was achieved. So a single card gated
 `{ trait = "owed", op = "lt", value = 40 }` and marked terminal matches at `owed = 0` and prints
 **✓ Arc complete on turn one**, before the player has met the character.
 
@@ -997,22 +997,22 @@ content`** reports both.
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 
 ```
-v2.py:17870   setup.pickQuestsCards = function(scope) {
-v2.py:17871       if (scope !== "story_goals") return [];
+v2.py:17883   setup.pickQuestsCards = function(scope) {
+v2.py:17884       if (scope !== "story_goals") return [];
 ```
 
 A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
 guidance page** and no clue why. Read the whole function, not the part that answers your question.
 
-**Selection.** `pickQuestsCards(scope)` (`v2.py:17870`) returns every matching top-tier card;
-`pickQuestsCard(slug)` (`v2.py:17845`) returns the **single highest-`priority`** match for a
+**Selection.** `pickQuestsCards(scope)` (`v2.py:17883`) returns every matching top-tier card;
+`pickQuestsCard(slug)` (`v2.py:17858`) returns the **single highest-`priority`** match for a
 character — so a character's cards are a one-live-at-a-time chain.
 
 ⚠️ **Quest conditions use a SEPARATE evaluator with NO fail-open** — `checkQuestsCondition`,
-`v2.py:17911`. **Never paste `version = "1.0"` onto a quest card.** That key is required on canvas
+`v2.py:17924`. **Never paste `version = "1.0"` onto a quest card.** That key is required on canvas
 conditions and is wrong here.
 
-⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:19692-19695`). There is
+⚠️ **The sidebar next-row calls the identical functions as the page** (`v2.py:19705-19708`). There is
 no separate "sidebar quest": edit a card and both surfaces move together, and a character with no
 card renders a blank next-row.
 
@@ -1042,7 +1042,7 @@ card is trying to reach — a card for `trade ≥ 15` naming a choice that itsel
 `trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Nothing in `gates.py` catches this; read each card against the gate on
 the choice it names.
 
-**`locked_text_threshold`** (`v2.py:15718-15719`) prints an explicit *"Requires …"* hint on a
+**`locked_text_threshold`** (`v2.py:15728-15729`) prints an explicit *"Requires …"* hint on a
 locked choice, distinct from `locked_text`, which replaces the label (§15).
 
 ---
@@ -1087,8 +1087,8 @@ belongs.
 
 ```
 v2.py:6123    setup.getNpcsPresentAtLocation = function(locationId)
-v2.py:22734   the engine's own nav badges call it
-v2.py:22775   and again for the portrait row
+v2.py:22747   the engine's own nav badges call it
+v2.py:22788   and again for the portrait row
 ```
 
 **The false alarm:** hand-rolling presence from `[[npcs.schedules]]` gets overnight windows wrong —
@@ -1115,7 +1115,7 @@ Read and cite before using; delete from this list once promoted above.
 - The exact cooldown count for random events.
 
 *(`_render_group_chain` collects consecutive `group` blocks into one variant chain at
-`v2.py:17123-17129`, and first match wins; lint
+`v2.py:17136-17142`, and first match wins; lint
 **adjacent groups** lists the dead ones.)*
 
 ---
@@ -1123,18 +1123,18 @@ Read and cite before using; delete from this list once promoted above.
 ## 25. A speaking block with no `speaker` renders under a placeholder name, not a person
 
 **Verified against `v2.py` on 2026-09-28.** `dialog` and `thought_bubble` both default a missing
-`speaker` to the string `"npc"` (`v2.py:17549`, `v2.py:17645`), but they resolve the speaker
+`speaker` to the string `"npc"` (`v2.py:17562`, `v2.py:17658`), but they resolve the speaker
 **differently** after that, and the field is **not optional** for either:
 
 - **`dialog`** — `"player"` renders the player label; `"unknown"` renders **"Stranger"**
-  (`v2.py:17551-17581`). **Any other value, including a missing speaker, takes the NPC branch, and
+  (`v2.py:17564-17594`). **Any other value, including a missing speaker, takes the NPC branch, and
   that branch reads only `npcId`** — the `speaker` string is never used as the id
-  (`v2.py:17584`). With no `npcId` the id is `""`, and the fallback prints **"NPC"**
-  (`v2.py:17591`):
+  (`v2.py:17597`). With no `npcId` the id is `""`, and the fallback prints **"NPC"**
+  (`v2.py:17604`):
 
   ```python
-  npc_id = props.get("npcId", "")                                                     # v2.py:17584
-  npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"            # v2.py:17591
+  npc_id = props.get("npcId", "")                                                     # v2.py:17597
+  npc_name = npc_id.replace("npc_", "").replace("_", " ").title() or "NPC"            # v2.py:17604
   ```
 
   So `speaker = "npc_bev"` with no `npcId` renders "NPC", not Bev.
@@ -1145,13 +1145,13 @@ Read and cite before using; delete from this list once promoted above.
 
 - **`thought_bubble`** — `"player"` renders the player's thought label. `"unknown"`, **or any
   speaker that does not start with `npc_` or `npc`**, renders **"💭 Someone is thinking:"**
-  (`v2.py:17657-17663`). Otherwise the id is **`npcId` if present, else the `speaker` string
-  itself** (`v2.py:17665`), so `speaker = "npc_bev"` alone does find Bev. A missing speaker gives
+  (`v2.py:17670-17676`). Otherwise the id is **`npcId` if present, else the `speaker` string
+  itself** (`v2.py:17678`), so `speaker = "npc_bev"` alone does find Bev. A missing speaker gives
   the id `"npc"`, which matches nobody, and the same title-case fallback turns it into **"Npc"**
-  (`v2.py:17671`) — *"💭 Npc is thinking:"*.
+  (`v2.py:17684`) — *"💭 Npc is thinking:"*.
 
   ```python
-  npc_id = props.get("npcId") or speaker                                              # v2.py:17665
+  npc_id = props.get("npcId") or speaker                                              # v2.py:17678
   ```
 
 Either way, a speaking block with no `speaker` shows a placeholder where a person should be. Write
@@ -1168,11 +1168,11 @@ Either way, a speaking block with no `speaker` shows a placeholder where a perso
 ```
 
 `speaker = "unknown"` is the deliberate pre-introduction form: it renders **"Someone is thinking:"**
-for a thought bubble (`v2.py:17661`) and **"Stranger"** for dialogue (`v2.py:17578`). Use it while
+for a thought bubble (`v2.py:17674`) and **"Stranger"** for dialogue (`v2.py:17591`). Use it while
 the player cannot yet know the name — never as a shrug.
 
 ⚠️ **`dialog` is the correct type; `dialogue` is not.** The recognised list is `heading, paragraph,
-dialog, thought_bubble, image, video, cascade, group, block_pool, clip` (`v2.py:17692`). A mistyped
+dialog, thought_bubble, image, video, cascade, group, block_pool, clip` (`v2.py:17705`). A mistyped
 type degrades to a bare `<p>` and silently drops the speaker.
 
 ⚠️ **A player thought must be written in the game's `narration_person`.** Of the 147 broken bubbles,
@@ -1194,7 +1194,7 @@ takes it on her next move; authored scenes sit beside the payment, never on it.*
 ```toml
 [settings.rent]
 enabled          = true
-due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:6423
+due_day          = "Friday"          # weekday names only — VALID_DAYS, template_import.py:6425
 collector_npc    = "npc_collector"   # must exist in [[npcs]]
 start_after_flag = "first_shift_done"
 stages      = [ { amount = 100, after_total_paid = 0 }, { amount = 150, after_total_paid = 300 } ]
@@ -1214,8 +1214,8 @@ paid_closing = "…" · cant_pay = "…" · partial_pay = "…"
    Days roll at midnight (`v2.py:6806-6809`), so the demand arms at **00:00 on the due day**, not at
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
-   into `RentDay` (`v2.py:18378-18387`). Never mid-canvas.
-3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:19183`). Verified
+   into `RentDay` (`v2.py:18391-18400`). Never mid-canvas.
+3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:19196`). Verified
    live.
 4. A short week with `on_short = "carry"` is paid as far as she can and the rest is owed next week
    (`setup.carryRent`, `v2.py:14417`); nothing ends.
@@ -1234,7 +1234,7 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
   shows its line on the paid screen. `stages`, `stage_lines` and `on_short` are opt-in, emitted only
   when used. Keys: `template_import.py:527-536`.
 - A first stage at `after_total_paid = 0` is the starting rent: no payment moves to it, so its line
-  never prints, and the importer warns when `stage_lines[0]` has words (`template_import.py:6827`);
+  never prints, and the importer warns when `stage_lines[0]` has words (`template_import.py:6829`);
   put those words in the rent's own text.
 - Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
   over rent** *(LO decided, D8d)*.
@@ -1262,9 +1262,9 @@ rung:
    offered.
 
    ⚠️ **That is the canvas picker. An exit-block CHOICE behaves differently, and better.** There the
-   generator opens `<<if setup.checkCostsAffordable(...)>>` (`v2.py:15486-15487`) and writes an
+   generator opens `<<if setup.checkCostsAffordable(...)>>` (`v2.py:15495-15496`) and writes an
    `<<else>>` that keeps the row, greyed, with the requirement appended by the engine itself
-   (`v2.py:15645-15652`):
+   (`v2.py:15655-15662`):
 
    > `Work a shift 🍺 (Requires 15 Energy (you have 6))`
 
@@ -1275,7 +1275,7 @@ rung:
    against a game.
 2. **The deduction is applied by the engine, not by your effects list.** A `costs` entry is parsed as
    `{trait, value}` only (`template_import.py:2810-2813`). On a **choice** it is deducted inline with
-   `clamp = false` (`v2.py:15553`), so a balance above 100 survives it.
+   `clamp = false` (`v2.py:15562`), so a balance above 100 survives it.
 
 ⚠️ **Canvas and location costs ARE clamped to 0–100, and you cannot turn it off.** They go through
 `setup.deductCostArray` (`v2.py:5999-6005`), which passes `clampFlag = true` into
@@ -1320,8 +1320,8 @@ more than it opens. Use a flag; flags are not meters.
 ### 28.1 The flag goes on the CHOICE, because a choice and an exit run in opposite orders
 
 ```
-choice     flagEffects -> costs -> modifiers -> … -> advanceTime   v2.py:15535-15637
-node exit  advanceTime -> traitEffects -> flagEffects              v2.py:16008-16011 · :15972-15973
+choice     flagEffects -> costs -> modifiers -> … -> advanceTime   v2.py:15544-15647
+node exit  advanceTime -> traitEffects -> flagEffects              v2.py:16018-16021 · :15982-15983
 ```
 
 `advanceTime` rolls the day inside itself — `while (current_hour >= 24) { … advanceDay(); }`
@@ -1355,23 +1355,23 @@ rungs it sits below. `scripts/gates.py` gate **`a day-cap closes`** exists for e
 day, by design.
 
 **A choice whose conditions fail renders NOTHING.** It is wrapped in
-`<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:15475`) — no greyed line, no reason, no hours,
-unless the choice opts in with `show_when_locked` (`v2.py:15655`). Absent that, a spent rung leaves
+`<<if setup.triggerConditionsSatisfied(…)>>` (`v2.py:15484`) — no greyed line, no reason, no hours,
+unless the choice opts in with `show_when_locked` (`v2.py:15665`). Absent that, a spent rung leaves
 no trace on the screen it used to be on.
 
 **A cost-bearing choice counts as conditional too.** The engine's own test for whether a node has a
 usable exit is `has_unconditional_choice`, and a choice registers as unconditional only when it
-carries **neither** `conditions` **nor** `costs` (`v2.py:15494-15504`). So a screen whose one
+carries **neither** `conditions` **nor** `costs` (`v2.py:15503-15513`). So a screen whose one
 affordance is *"Put it in the slot ($3, 5m)."* is exactly as empty to a player at $0 as a spent hub
 is to a player who has had their go.
 
-**When nothing passes, the engine does three things** (`v2.py:15814-15877`):
+**When nothing passes, the engine does three things** (`v2.py:15824-15887`):
 
 | | |
 |---|---|
 | `console.warn` | always, in every build — canvas slug, every choice's conditions, and a live state snapshot |
 | a diagnostic banner | `$flags.debug_mode` only. Re-evaluates each predicate and prints ✓/✗ per item |
-| `[[Continue->…]]` | player-facing escape to the trigger location (`_get_return_location`, `v2.py:15212`). **Fires no effects** |
+| `[[Continue->…]]` | player-facing escape to the trigger location (`_get_return_location`, `v2.py:15216`). **Fires no effects** |
 
 That Continue link is a safety net, not an exit. The visit banks nothing, the label is the engine's
 word rather than the author's, and the player cannot distinguish a spent day from a broken build.
@@ -1407,7 +1407,7 @@ if (cap !== undefined && cap !== null) {
 `cap` is the **7th positional argument** to
 `setup.applyAndNotifyTrait(targetType, npcId, trait, op, val, clampFlag, cap)` (`v2.py:7291`).
 Authored as a sibling of `op`/`value` on any effect and passed straight through
-(`v2.py:16405`, `:16413`, `:12285`):
+(`v2.py:16418`, `:16426`, `:12285`):
 
 ```toml
 effects = [ { targetType = "player", trait = "energy", op = "add", value = 40, cap = 100 } ]
@@ -1432,8 +1432,8 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 The sidebar prints **two** things about a trait, from two different places:
 
 1. **The auto Traits dump** — every declared `core_trait`, as a bare number.
-2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:19526`),
-   `trait_words` (`v2.py:19589`), `trait_bar` (`v2.py:19479`).
+2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:19539`),
+   `trait_words` (`v2.py:19602`), `trait_bar` (`v2.py:19492`).
 
 They do not know about each other. Band a trait without suppressing its number and the player reads
 *"Nothing under it"* and `cover 55` stacked on top of each other.
@@ -1483,8 +1483,8 @@ it blindly cannot break a build.
 
 | type | open-ended top band? | the rule | source |
 |---|---|---|---|
-| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4537-4543` · `v2.py:19541-19542` |
-| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4399-4409` · `v2.py:19610-19611` |
+| `trait_status_text` | **yes** — an omitted bound defaults to ∓1e9 | at least one of `min` / `max` | `template_import.py:4537-4543` · `v2.py:19554-19555` |
+| `trait_words` | **no** | `flag` **XOR** range; in range mode BOTH `min` and `max`. A flag-only band is legal | `template_import.py:4399-4409` · `v2.py:19623-19624` |
 | `trait_bar` | **no** | both `min` and `max`; `flag` is rejected outright; `bands` itself is optional | `template_import.py:4445`, `:4461-4467` |
 
 So the fix for a value off the top of the ladder is **not** to drop the `max` — that compiles on one
@@ -1612,21 +1612,21 @@ advance, plus `setup.commitMoment()`, because a wait navigates nowhere and would
 in the active moment.
 
 An exit that declares no `time_progression_minutes` still costs **3 minutes**
-(`v2.py:16128`, `config.get('default_time_progression', 3)`; the exception fallback at `:16329` emits
+(`v2.py:16138`, `config.get('default_time_progression', 3)`; the exception fallback at `:16342` emits
 the same `advanceTime(3)`). A four-node opening has therefore drifted 9 minutes before the first real
 choice.
 
-There is no `@time` token either — `_resolve_at_references` (`v2.py:16983`) resolves `@player` and
+There is no `@time` token either — `_resolve_at_references` (`v2.py:16996`) resolves `@player` and
 `@<npc>` and returns everything else untouched. The clock can be *shown* (`<<timeDisplay>>` at the
-top of `StoryCaption`, `v2.py:18860`/`:18877`, rendering `<<timeFormatted>>` at `v2.py:19391`) but it
+top of `StoryCaption`, `v2.py:18873`/`:18890`, rendering `<<timeFormatted>>` at `v2.py:19404`) but it
 cannot be *printed into prose* by any authored token.
 
 ### 32.2 Travel time is tagged on the card; activity time is tagged nowhere
 
 | what | tagged? | where |
 |---|---|---|
-| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:6068`, used at `:22737` / `:22771` |
-| a choice's `time_progression_minutes` | **no** — emits a bare `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body | `v2.py:15637` |
+| `[[locations.costs]] time` | **yes, automatically** — renders `20m` on the nav card | `getLocationCostTag` `v2.py:6068`, used at `:22750` / `:22784` |
+| a choice's `time_progression_minutes` | **no** — emits a bare `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body | `v2.py:15647` |
 | a trait `costs` entry | yes, when unaffordable | `getCostBlockedMessage` `v2.py:6014` |
 
 So a door announces its twenty minutes and a two-and-a-half-hour shift announces nothing. If the
@@ -1658,7 +1658,7 @@ message (`v2.py:6533`). The same path also catches `max_triggers_per_day` exhaus
 (`v2.py:6487`).
 
 ⚠️ **Everywhere it is unset,** windowed work simply vanishes and the player has no surface that says
-when to come back. The `SchedulePage` (`v2.py:22326`) publishes hours for
+when to come back. The `SchedulePage` (`v2.py:22339`) publishes hours for
 **people** — every declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table —
 and there is no equivalent for places or activities. `references/the-clock.md` C5.
 
@@ -1702,22 +1702,22 @@ Since EN2c `currency_symbol` covers every rent screen, and nothing else.
 ### 33.2 The symbol is a prefix
 
 Every honouring site concatenates symbol-then-number:
-`"Pay " + _cur + _rent + " rent"` (`v2.py:19181`),
-`<<print _cur>><<print _money>>` (`v2.py:19178`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
+`"Pay " + _cur + _rent + " rent"` (`v2.py:19194`),
+`<<print _cur>><<print _money>>` (`v2.py:19191`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
 ### 33.3 The sidebar's label
 
 ```
-<<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>     v2.py:19490
-<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:19516
+<<set _traitLabel to _item.label || setup.traitLabel(_tbKey)>>     v2.py:19503
+<<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>   v2.py:19529
 ```
 
 A `trait_bar` takes its label from the sidebar item's own `label`, and falls back to the trait's one
 name (`setup.traitLabel`, `v2.py:4700`, EN5), so `[[traits.labels]] key = "money", label = "Change
 bag"` now names the sidebar readout too (§30).
 
-`_traitMax` defaults to 100 (`v2.py:19489`), so an uncapped counter renders as a fraction of a
+`_traitMax` defaults to 100 (`v2.py:19502`), so an uncapped counter renders as a fraction of a
 maximum it does not have: a money trait with no `max` prints **`Money: 12 / 100`** over a 12% fill
 bar. Set `max` to something the currency will not exceed, or show money as `trait_words` with
 `show_value = true` and no bands (*"Money: 140"*, §30).
@@ -1726,7 +1726,7 @@ bar. Set `max` to something the currency will not exceed, or show money as `trai
 
 An affordable choice renders its authored label and nothing else. The engine speaks a price **only
 on the failure path** — `getCostBlockedMessage` (`v2.py:6014`) emitted into
-`<span class="locked-choice">` at `v2.py:15651`:
+`<span class="locked-choice">` at `v2.py:15661`:
 
 ```
 affordable      Feed the meter ($3)                        exactly what the author typed
@@ -1739,7 +1739,7 @@ gate 21 exists because of this, and `the-economy.md` R7 governs its notation.
 
 ### 33.5 `[[traits.labels]] unit` is dead
 
-The importer reads it (`template_import.py:3678`) and stores it in project metadata (`:8589`). No
+The importer reads it (`template_import.py:3678`) and stores it in project metadata (`:8591`). No
 generator reads it back — a grep of `v2.py` for `unit` returns nothing. It is not a lever for
 pluralising a currency.
 
@@ -1898,8 +1898,8 @@ speaker-attribution component — `become-taxi-driver`'s `<<chat>>` **59,751** t
 - `lust-for-life` — `dialogColor` is a first-class field on the character object, beside `fontColor`
   and three separate name forms.
 
-**We already ship two of the three.** `v2.py:17592` puts the portrait on every NPC dialogue block
-and the name above it. What we do not ship is the third: the renderer emits one `dialog-npc` class for the whole cast (`v2.py:17631`).
+**We already ship two of the three.** `v2.py:17605` puts the portrait on every NPC dialogue block
+and the name above it. What we do not ship is the third: the renderer emits one `dialog-npc` class for the whole cast (`v2.py:17644`).
 
 **Do not build this on the strength of the count alone.** It is recorded so the next person does not
 rediscover it as a gap; build it when a game asks for it.
@@ -1912,7 +1912,7 @@ A top-level table (`template_import.py:983-996`, parsed at `:3201`; `enabled` de
 the block is present). Keys: `default_image`, the undress states `naked_image` / `topless_image` /
 `bottomless_image` / `underwear_image`, `pregnancy_trait` with `pregnancy_suffix` (default `Preg`), and
 `[[player_portrait.outfits]]` rules (`image`, `when` on worn type, corruption or a flag). It renders
-as the sidebar widget `<<playerPortrait>>` (`v2.py:19736`), resolved by `setup.getPlayerPortrait`
+as the sidebar widget `<<playerPortrait>>` (`v2.py:19749`), resolved by `setup.getPlayerPortrait`
 (`v2.py:1907`).
 
 ⚠️ **It renders only with `clothing_enabled = true`.** `getPlayerPortrait` is emitted inside the
@@ -1924,10 +1924,10 @@ look, kept across the game: `the-want.md` §6.
 **The engine has had this since v2 shipped.**
 
 ```python
-v2.py:17135   if block_type == "block_pool":
-v2.py:17136       pool_blocks = (block.get("props") or {}).get("blocks", [])
-v2.py:17151       parts = [f'<<set _bp to random(0, {max_idx})>>']
-v2.py:17152-17160 # if / elseif / else chain over the variants
+v2.py:17148   if block_type == "block_pool":
+v2.py:17149       pool_blocks = (block.get("props") or {}).get("blocks", [])
+v2.py:17164       parts = [f'<<set _bp to random(0, {max_idx})>>']
+v2.py:17165-17173 # if / elseif / else chain over the variants
 ```
 
 **It picks a different one of N blocks on every render.** Not once per game, not once per day —
@@ -1935,9 +1935,9 @@ every time the passage draws. Re-enter the surface and the sentence is different
 
 | fact | source |
 |---|---|
-| children live at **`props.blocks`** | `v2.py:17136` |
-| a **one-item** pool renders directly, no `random()` | `v2.py:17138-17140` |
-| variants may be **any block type** — the pool nests `_convert_blocks_to_game_html` | `v2.py:17140`, `:17159` |
+| children live at **`props.blocks`** | `v2.py:17149` |
+| a **one-item** pool renders directly, no `random()` | `v2.py:17151-17153` |
+| variants may be **any block type** — the pool nests `_convert_blocks_to_game_html` | `v2.py:17153`, `:17172` |
 
 ```toml
 # BOTH SHAPES PARSE. Children at the block's own `blocks` key:
@@ -1953,7 +1953,7 @@ every time the passage draws. Re-enter the surface and the sentence is different
 
 ### The four authoring facts, verified in the importer
 
-`template_import.py:8309-8337` normalises both container types side by side, so the rules are the
+`template_import.py:8311-8339` normalises both container types side by side, so the rules are the
 same ones `group` follows — with one exception that is not.
 
 | | |
@@ -1975,14 +1975,14 @@ argument below.
 
 An entry already shown weighs `seen_weight` (default 0.1, range (0, 1]) against 1 for a fresh one
 (`setup.pickRememberedPoolEntry`, `v2.py:6167`), so she sees every entry before the repeats pile
-up. The pool emitter branches on `memory` at `v2.py:17144`. Seen counts live in `$game_state.pool_seen[key]`, which is in the
+up. The pool emitter branches on `memory` at `v2.py:17157`. Seen counts live in `$game_state.pool_seen[key]`, which is in the
 skeleton only when a game has such a pool (`v2.py:1564`). The key is `id`, else a hash of the
-entries (`v2.py:14493`): editing an id-less pool's text resets its memory. The keys may sit at the
-block's top level or in `props` (`template_import.py:8341`).
+entries (`v2.py:14497`): editing an id-less pool's text resets its memory. The keys may sit at the
+block's top level or in `props` (`template_import.py:8343`).
 
 **A random canvas** takes `trigger.seen_weight` (random mode only): once it has fired, its `chance`
 is multiplied by it (`setup.canvasRollChance`, `v2.py:6153`). Misuse is a build error
-(`template_import.py:7271`).
+(`template_import.py:7273`).
 
 ### Why this section exists
 
@@ -2023,7 +2023,7 @@ with the bad, and nothing checked what was in the discarded half.
 
 ⚠️ The nesting constraint is **stated by v1's schema doc and NOT verified against `v2.py`** — treat
 it as unverified and do not cite it as an engine fact. The plausible mechanism is that both pools
-emit the same `_bp` temp variable (`v2.py:17151`), but whether SugarCube's already-matched
+emit the same `_bp` temp variable (`v2.py:17164`), but whether SugarCube's already-matched
 `if/elseif` chain actually breaks on the collision was not tested. **Do not nest until someone
 tests it.**
 
@@ -2085,15 +2085,15 @@ A choice whose `conditions` fail has **two** shapes, and the second one is the e
 
 | mode | set | renders as | on click |
 |---|---|---|---|
-| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:15657`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:15718-15725`, §23); a number lock shows its need (§15) |
+| **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:15667`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:15728-15735`, §23); a number lock shows its need (§15) |
 | **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
 
 The generator names Mode B itself —
-`# Mode B: Clickable rejection — redirects to rejection node` (`v2.py:15659`), entered from the
-`if rejection_passage:` branch at `v2.py:15658` (`rejection_passage`
-is the generator's internal name for the field authors write as `rejection_node`). The node id is resolved against `passage_name_map` at `v2.py:16204-16208`, which
+`# Mode B: Clickable rejection — redirects to rejection node` (`v2.py:15669`), entered from the
+`if rejection_passage:` branch at `v2.py:15668` (`rejection_passage`
+is the generator's internal name for the field authors write as `rejection_node`). The node id is resolved against `passage_name_map` at `v2.py:16216-16220`, which
 logs a warning rather than failing the build if the target does not exist, so **a typo here is
-silent in the game and visible only in the build log.** Effects are emitted at `v2.py:15662-15682`
+silent in the game and visible only in the build log.** Effects are emitted at `v2.py:15672-15692`
 through the same `setup.pendingEffects` path a normal choice uses.
 
 Both fields live on `TemplateChoice` (`apps/projects/services/template_import.py:1077-1078`, in the
@@ -2101,7 +2101,7 @@ class at `:1048`), beside `conditions`, `show_when_locked`, `locked_text` and
 `locked_text_threshold`, and are read from the TOML at `:2635`.
 
 ⚠️ **`rejection_node` IS build-validated, contrary to what the paragraph below used to imply.**
-`template_import.py:5889-5894` raises when it names a node that is not in the same canvas — so a
+`template_import.py:5891-5896` raises when it names a node that is not in the same canvas — so a
 typo fails the build with a message naming the canvas and the choice index. The fail-open warning
 described below is the generator's later slug→passage resolution, which only sees ids the importer
 has already accepted.
@@ -2147,7 +2147,7 @@ A dice roll the player can see and accept is not the RNG their comments resent (
 
 > A published *threshold* keeps the same promise a published *probability* does: **the player knows
 > what they are risking before they click.** Say the bar out loud: in the label on a `rejection_node`
-> lock (Mode B shows only the label, `v2.py:15661`), or the engine's suffix on a Mode A number lock.
+> lock (Mode B shows only the label, `v2.py:15671`), or the engine's suffix on a Mode A number lock.
 > Do not simulate a roll.
 
 ### The authoring shape
@@ -2189,7 +2189,7 @@ The real architecture is below, and it is the load-bearing fact:
 | `compare()` — `v2.py:4911` | canvas / node / choice `conditions` | **yes**, since v2 shipped |
 | `setup.describeUnmetConditions` — `v2.py:4728`, trait switch `:4751`, phrases `:4762` | the *why is this locked* text on a blocked choice | **yes** |
 | `setup.checkSingleCondition` — `v2.py:8974`, trait branch `:8991`, `ne` at `:9013` | hints, quest-card *goal* bullets, `_findFlagSetterCanvas`, ten-plus call sites | **yes** |
-| `setup.checkQuestsCondition` — `v2.py:17911` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
+| `setup.checkQuestsCondition` — `v2.py:17924` | `[[quest_cards]]` `when` and `goals` | **no, deliberately** |
 
 `compare` is reached first from the trait branch at `v2.py:5002`.
 
@@ -2247,20 +2247,20 @@ conditions = { version = "1.0", items = [
 
 ### ⚠️ Quest cards reject `ne` on purpose — do not "fix" the whitelist
 
-`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:7514`, `gte/lte/gt/lt/eq`) and
+`[[quest_cards]]` conditions **are** whitelisted (`template_import.py:7516`, `gte/lte/gt/lt/eq`) and
 their evaluator, `setup.checkQuestsCondition`, has no `ne` case — its `switch` falls through to
 `return false`. Widening that whitelist without adding the case would let an author write a card
 condition that is **silently always false**, which is the failure this engine has had before with
 `conditions` lacking `version = "1.0"`.
 
 Widening it correctly means the whitelist **and** the evaluator, in the same change. The comment at
-`template_import.py:7507-7514` says so at the site.
+`template_import.py:7509-7516` says so at the site.
 
 Also unchanged, and for the same reason — each is its own path:
 
-- `template_import.py:6619` — hint `trait_checks`.
-- `template_import.py:6546`, checked at `:6569` — hint-template `stage_op`, `{eq, gte, lte}`.
-- `template_import.py:7882` — a **heuristic** threshold reader, not a validator. `ne` is not a
+- `template_import.py:6621` — hint `trait_checks`.
+- `template_import.py:6548`, checked at `:6571` — hint-template `stage_op`, `{eq, gte, lte}`.
+- `template_import.py:7884` — a **heuristic** threshold reader, not a validator. `ne` is not a
   threshold and does not belong there.
 
 ### ⚠️ The v1 rollback path
@@ -2293,25 +2293,25 @@ The path from the TOML to the screen, traced end to end:
 | step | where |
 |---|---|
 | read off `[project]`, defaulting to `""` | `template_import.py:2240` |
-| copied onto the project's metadata | `template_import.py:8421` |
-| escaped, then joined with ` · ` | `v2.py:18842-18843`, joined at `:18845` |
-| composed into the `versionFooter` widget | `v2.py:18850-18853` |
-| called unconditionally from `StoryCaption` — both variants | `v2.py:18873` and `:18888` |
+| copied onto the project's metadata | `template_import.py:8423` |
+| escaped, then joined with ` · ` | `v2.py:18855-18856`, joined at `:18858` |
+| composed into the `versionFooter` widget | `v2.py:18863-18866` |
+| called unconditionally from `StoryCaption` — both variants | `v2.py:18886` and `:18901` |
 
 Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
 
 **Three facts that matter and are not guessable:**
 
 1. **The widget is ALWAYS defined, even when both keys are empty** — it just renders nothing. The
-   ternary at `v2.py:18850-18853` emits an empty `<<widget "versionFooter">><</widget>>` rather than
+   ternary at `v2.py:18863-18866` emits an empty `<<widget "versionFooter">><</widget>>` rather than
    nothing at all. Deliberate: SugarCube throws on a call to an undefined widget, and `StoryCaption`
-   calls it unconditionally in both its variants (`v2.py:18873`, `:18888`) — same reason the
+   calls it unconditionally in both its variants (`v2.py:18886`, `:18901`) — same reason the
    cheat-page and cast-page widgets are emitted outside their own feature blocks.
-2. **`html.escape` runs on both** (`v2.py:18842-18843`), so a stray quote in a date string cannot
+2. **`html.escape` runs on both** (`v2.py:18855-18856`), so a stray quote in a date string cannot
    break the build.
 3. **There is no build badge.** There is one build, and what a player needs to identify is the
    RELEASE — it is what their guide's codes are scoped to. The version string does that here and in
-   the cheat page's heading (`v2.py:18846-18848`).
+   the cheat page's heading (`v2.py:18859-18861`).
 
 ### Why it is not cosmetic
 
@@ -2390,8 +2390,8 @@ fall behind what a fresh game starts with. They used to be two hand-maintained s
 three-key dict, which is exactly how turning the phone on in a patch release left
 `$game_state.phone` undefined in every existing save with no build error anywhere.
 
-**`setup.backfillStateDefaults`** (`v2.py:18528`) is called from the `:passagestart` handler
-(`v2.py:18681`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
+**`setup.backfillStateDefaults`** (`v2.py:18541`) is called from the `:passagestart` handler
+(`v2.py:18694`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
 never overwrites an earned value, is idempotent, and hands out deep copies so a player's state can
 never alias the shared default object.
 
@@ -2481,7 +2481,7 @@ Same word "condition", two parsers, two key names:
 `template_import.py:1303` is the quest side. Writing `trait_key` in a quest card fails validation
 with *"condition item must set one of `flag`, `trait`, `days_since_flag`, `hours_since_flag` or
 `weekday`"*
-(`template_import.py:7424`), which names the key it wants and gives no hint that the other half of the
+(`template_import.py:7426`), which names the key it wants and gives no hint that the other half of the
 same file uses a different one.
 
 ### 41c. A quest goal needs a `label`; every card needs a `when`
@@ -2497,7 +2497,7 @@ costs three build rounds rather than one.
 The suppression is `[[traits.labels]] in_dump = false` (or `hidden = true`, the secret-trait switch)
 and nothing else — §30 above says so, and it is worth repeating here because the wrong key is the
 obvious guess. `hide_value = true` only drops the number from a `trait_bar`'s own label
-(`v2.py:19513`); the auto Traits dump keeps printing the bare number under the band.
+(`v2.py:19526`); the auto Traits dump keeps printing the bare number under the band.
 
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
@@ -2566,16 +2566,16 @@ level too high renders a walk-in as a clickable activity instead of a dispatcher
 ## 43. Where `@` tokens resolve, and where they do not
 
 `@player`, `@player.<field>`, `@<npc>` and `@<npc>.rel` are resolved by
-`_resolve_at_references` (`v2.py:16983`), its link-text twin `_resolve_at_references_expr`
-(`v2.py:17030`), and `setup.resolveAtRefs` at runtime. **These surfaces, and nothing else:**
+`_resolve_at_references` (`v2.py:16996`), its link-text twin `_resolve_at_references_expr`
+(`v2.py:17043`), and `setup.resolveAtRefs` at runtime. **These surfaces, and nothing else:**
 
 | resolved | site |
 |---|---|
-| block `content` — paragraph, heading, dialog, thought_bubble | `v2.py:17538` |
-| choice `text` | `v2.py:15527` |
+| block `content` — paragraph, heading, dialog, thought_bubble | `v2.py:17551` |
+| choice `text` | `v2.py:15536` |
 | `locations[].description` · `description_variants[].text` | `v2.py:11511` · `:11535` |
-| a door's `description`, option `text` and `locked_text` | `v2.py:11271`, `:14550`, `:14552` |
-| `npcs[].role` — the label under the name | `v2.py:17626` |
+| a door's `description`, option `text` and `locked_text` | `v2.py:11271`, `:14554`, `:14556` |
+| `npcs[].role` — the label under the name | `v2.py:17639` |
 | every phone surface; `story_arc` emotion ranges | runtime, `v2.py:2721-3178`; `:7765`, `:7777` |
 | ⚠️ `locations[].blocked_message` — **half** | resolved in the room (`v2.py:11169`), raw in `setup.locations` (`:1055`), which the nav card prints (`:6101`) |
 
@@ -2588,7 +2588,7 @@ Every other author string is emitted verbatim. The ones that reach a player:
 | `npcs[].description` | the CustomizeCharacters screen — the game's **first** screen (customizable NPCs only; for others it renders nowhere) |
 | `npcs[].tags[]` · `.relationship_options[]` | the cast page (`v2.py:4033`) · the relation picker (`:931`) |
 | `quest_cards[].text` · `.tip` · `.ready_text` · `.terminal_text` | the guidance page |
-| `traits.labels[].label` · choice `locked_text` | the sidebar (`v2.py:3982`) · a locked choice (`:15657`) |
+| `traits.labels[].label` · choice `locked_text` | the sidebar (`v2.py:3982`) · a locked choice (`:15667`) |
 | `canvases[].description` | dev surfaces only (`CanvasReview_*`, the `--debug` canvas banner) |
 
 ⚠️ **`npcs[].role` resolves `@` tokens.** A `customizable` NPC with `relationship_options` is one the
@@ -2695,17 +2695,17 @@ at the bottom of the screen** and removes it after **2000 ms** (`v2.py:7444`):
 Three consequences, and the first is the one that matters:
 
 1. **This is the whole of the feedback for a `targetType = "location"` choice.** The link goes
-   straight to `Location_<slug>` (`v2.py:16175`), so the toast is not a *summary* of a screen the
+   straight to `Location_<slug>` (`v2.py:16187`), so the toast is not a *summary* of a screen the
    player is about to read — it is instead of one. `the-surfaces.md` **R9** is the rule that follows
    from this fact.
 2. **Costs notify too.** A per-choice `costs` entry is emitted as a negative `applyAndNotifyTrait`
-   (`v2.py:15550`), so a spend is never silent. This is correct and needs no authoring.
+   (`v2.py:15559`), so a spend is never silent. This is correct and needs no authoring.
 3. ⚠️ **The toast does not wrap and has no maximum width.** `.effect-toast` is
    `position: fixed; left: 50%; white-space: nowrap` with no `max-width` and no media query
-   (`v2.py:20603`). A five-effect choice produces a ~92-character line — roughly 650px at 14px — which
+   (`v2.py:20616`). A five-effect choice produces a ~92-character line — roughly 650px at 14px — which
    on a 390px phone is clipped at **both** ends, because the element is centred with
    `translateX(-50%)`. The warning variant `.effect-toast.notify-warning` was deliberately given
-   wrapping (`v2.py:20621`); the green one never was. **Not fixed** — recorded here so a future
+   wrapping (`v2.py:20634`); the green one never was. **Not fixed** — recorded here so a future
    change is a decision rather than a discovery.
 
 ---
@@ -2739,7 +2739,7 @@ both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAv
 (`v2.py:4195`), which covers the four schedule/planner consumers at once.
 
 Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
-written identically by both build paths (`template_import.py:9181`, `game_graph.py:336`), and read
+written identically by both build paths (`template_import.py:9183`, `game_graph.py:336`), and read
 by **nothing** in the generator.
 
 > **What that meant.** An author switches off the canvas that sets a door's key flag so the door
@@ -2773,9 +2773,9 @@ substitution on its dispatcher while never rendering as a standalone row.
 
 The engine half of `the-voice.md` R3.
 
-`setup.renderQuestsGoalBlock` (`v2.py:18042-18103`) has four frames, tried in order: terminal →
+`setup.renderQuestsGoalBlock` (`v2.py:18055-18116`) has four frames, tried in order: terminal →
 ready → goal bullets → **nothing**. The bullet frame builds each row like this
-(`v2.py:18080-18093`):
+(`v2.py:18093-18106`):
 
 ```js
 var marker = it.met ? '✓' : '◯';
@@ -2805,9 +2805,9 @@ a bullet saying `◯ npc_x_step_05_done`.
 intended.
 
 **47.3 · A card can render no requirement at all.** `evaluateGoals` reports `allMet: true`
-vacuously for an empty goals list (`v2.py:17995-17997`), so the bullet frame is skipped, and with
+vacuously for an empty goals list (`v2.py:18008-18010`), so the bullet frame is skipped, and with
 no `ready_canvas` and no `terminal` the function falls through to `return "";`
-(`v2.py:18100-18102`). Its own comment calls this deliberate — *"happens for transitional cards
+(`v2.py:18113-18115`). Its own comment calls this deliberate — *"happens for transitional cards
 between capstones."*
 
 So a mute card is legal and sometimes right, which is why this half is a **lint**
@@ -2868,7 +2868,7 @@ retry_after_days = 3          # a parked no: the step comes back after 3 days
 
 - The record is `$game_state.canvas_state[id] = {consumed, retryDay, closed, open}`; node 0's fired
   mark in `trigger_history` is unchanged and still drives day limits and decay contact
-  (`setup.canvasOptedIn` and the readers after it, `v2.py:5306`; the choice decision, `v2.py:16218`).
+  (`setup.canvasOptedIn` and the readers after it, `v2.py:5306`; the choice decision, `v2.py:16230`).
 - Leaving mid-scene with none of the three parks the step for the trigger's `retry_after_days`, so a
   no cannot be farmed.
 - Keys: `template_import.py:884-893` (trigger), `:1096-1102` (choice). A canvas that does not opt in
@@ -2945,7 +2945,7 @@ flagEffects = [ { targetType = "player", flag = "ignored_dan" } ]
   hook). With `repeat_after_days` the ignore is per instance, and an ignored instance re-arms like an
   answered one, its delay counted from the ignore.
 - Import: a chat with no reply block cannot be ignored, and an unknown key in `on_ignore` is a build
-  error (`template_import.py:5096`, `:7223`).
+  error (`template_import.py:5096`, `:7225`).
 - **Old saves:** `conv_ignored` is backfilled into the phone map. A chat delivered before the change
   is ignored by its stored arrival day, so a long-unanswered one closes on the first passage.
 
@@ -3051,7 +3051,7 @@ flagEffects = [ { targetType = "player", flag = "missed_dan" } ]
 
 **2026-10-01, opt-in by use.** Two condition types, in every evaluator: the canvas evaluator
 (weekday branch at `v2.py:5064`), the lock text, the hint readers, the requirement label, the next-
-activity hint (`v2.py:8894`), and quest cards in their own flat shape (`v2.py:17929`).
+activity hint (`v2.py:8894`), and quest cards in their own flat shape (`v2.py:17942`).
 
 ```toml
 { type = "weekday", weekdays = [5, 6] }        # 0 = Monday … 6 = Sunday, the schedule rows' index
@@ -3068,4 +3068,4 @@ activity hint (`v2.py:8894`), and quest cards in their own flat shape (`v2.py:17
 - **Old saves:** `$flags_meta` is outside the backfill. A flag with `set_day` only reads as set at
   the start of that day (`setup.flagSetMinute`, `v2.py:4844`).
 - Import: both are rows in `CONDITION_SCHEMA` (`template_import.py:1689`); `weekday` needs at least
-  one day, 0–6, and takes no `operator`. Quest-card shapes: `template_import.py:7435`.
+  one day, 0–6, and takes no `operator`. Quest-card shapes: `template_import.py:7437`.
