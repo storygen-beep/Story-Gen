@@ -5,6 +5,24 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The coverage ledger and its sheet (Coverage and the Scout PRD, CV2)
+
+**What.**
+- New `templates/sheets/coverage.md` (not counted): one table LO reads and signs with the other sheets: topic, kind
+  (`system` · `place` · `scene` · `mechanic`), status (`covered` · `scouted` · `lo` · `placeholder` · `unknown`),
+  source, note; what each status's source must name ("near the topic is not enough" for `covered`); and an
+  "Unknowns, for LO" table, since the build session asks before any scout runs. Saved in a game at
+  `games/<slug>/sheets/COVERAGE.md`.
+- `references/state.md`, the board-keys table: `board.coverage[] = {topic, kind, status, source}`, recorded (the
+  checks come in the next two items).
+- `references/the-sheets.md`: a `coverage` row in the sheet-type table; "Six sheet types" and "one of the six" become
+  seven, so the count stays true.
+
+**Verified.** `--selfcheck` clean; `cite_check.py` 0 in SKILL.md + references; skill pytest passes
+(`test_templates_parse.py` included).
+
+**Words:** +81, running total 147,051 / 149,283 (measured).
+
 ## 2026-10-02 — Never build an unknown on a guess (Coverage and the Scout PRD, CV1)
 
 **Why.** The skill is strong only where it was researched. Where it has no rule (a party, a car, a landlord, a

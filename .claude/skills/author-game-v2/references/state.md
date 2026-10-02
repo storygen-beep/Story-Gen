@@ -437,6 +437,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
 | `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
 | `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
+| `board.coverage[]` | recorded (`templates/sheets/coverage.md`) | `[{ topic, kind: system \| place \| scene \| mechanic, status: covered \| scouted \| lo \| placeholder \| unknown, source }]`, one per topic. `source` names the rule (file and id) or card, the scout card `games/<slug>/scout/<topic>.md`, LO's call (quote or date), or the release page line of a placeholder |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of

@@ -46,10 +46,11 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 
 ---
 
-## Six sheet types, and they never merge
+## Seven sheet types, and they never merge
 
 | | what it carries | one per |
 |---|---|---|
+| **coverage** | every topic the game needs, its status and its source: what the skill really knows, written first | game |
 | **system** | one design card: what she does again and again, where and when, what it costs, its ladder, its people and pool, and the meters it writes and reads | system |
 | **place** | what the player sees on entering a room: auto-fires, who is here, things to do, ways out — **what kind of place it is** (its labels), and whether it has a DOOR | location |
 | **person** | the ladder — rungs, both gates, where and **when** they are reachable, refusals | character |
@@ -331,7 +332,7 @@ games/<slug>/
 `sheets/` is the design as it stands. `iterations/` is what each release did, and never changes
 again.
 
-⚠️ **`DECISIONS.md` is a sheet and sits outside `sheets/`.** It is one of the six types and carries a
+⚠️ **`DECISIONS.md` is a sheet and sits outside `sheets/`.** It is one of the seven types and carries a
 status marker like the rest, and because of where it lives the first version of the mirror could not
 see it. Anything walking the sheets collects it explicitly.
 
