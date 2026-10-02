@@ -1,0 +1,106 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — World and Systems PRD, Phase 7b (E14): activity tiers count
+#  `return` choices.
+#  Date: 2026-10-02
+#
+#  Media-free. An activity's tiers are the choices on its menu node (the last node
+#  whose choices leave it); each tier lists the traits it raises, and the trait-help
+#  modal ("where can I raise X?") reads them from setup.help_data.
+#
+#    gym_session  menu: "Push hard" goes to a node whose exit raises fitness by 3;
+#                 "Leave early" is a `return` choice that raises charm by 1.
+#    walk         menu: two `return` choices only (energy +2, charm +2).
+#    sit          one node, a `trigger` choice (charm +1): today's tier, unchanged.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_ws_tiers_return"
+title       = "Engine World and Systems Tiers Return"
+description = "Engine fixture: activity tiers count return choices."
+
+[time]
+enabled       = true
+starting_hour = 9
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 50, charm = 10, fitness = 10 }
+flag_keys   = []
+
+[[locations]]
+id          = "loc_home"
+name        = "Home"
+description = "Her room."
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "gym_session"
+name = "Gym session"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "menu"
+name   = "Menu"
+blocks = [ { type = "paragraph", content = "GYM_MENU" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Push hard", targetType = "node", nodeId = "hard" },
+  { text = "Leave early", targetType = "return", time_progression_minutes = 10, effects = [ { targetType = "player", trait = "charm", op = "add", value = 1 } ] } ] }
+
+[[canvases.nodes]]
+id     = "hard"
+name   = "Hard"
+blocks = [ { type = "paragraph", content = "GYM_HARD" } ]
+exit_block = { type = "location", text = "Done", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 3 } ] } }
+
+[[canvases]]
+id   = "walk"
+name = "Walk"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "route"
+name   = "Route"
+blocks = [ { type = "paragraph", content = "WALK_ROUTE" } ]
+exit_block = { type = "choices", choices = [
+  { text = "The long way", targetType = "return", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "energy", op = "add", value = 2 } ] },
+  { text = "Past the cafe", targetType = "return", time_progression_minutes = 20, effects = [ { targetType = "player", trait = "charm", op = "add", value = 2 } ] } ] }
+
+[[canvases]]
+id   = "sit"
+name = "Sit"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "chair"
+name   = "Chair"
+blocks = [ { type = "paragraph", content = "SIT_CHAIR" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Sit a while", targetType = "trigger", time_progression_minutes = 10, effects = [ { targetType = "player", trait = "charm", op = "add", value = 1 } ] } ] }

@@ -842,8 +842,8 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > 2026-08-22.** The generator emits the two in opposite orders:
 >
 > ```
-> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14847-14849 · :14925
-> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15256-15265
+> choice     traitEffects -> flagEffects -> costs -> … -> advanceTime   v2.py:14849-14851 · :14927
+> node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15258-15267
 > ```
 >
 > `advanceTime` rolls the day inside itself (`v2.py:6601-6604`) and that is where the tick clears

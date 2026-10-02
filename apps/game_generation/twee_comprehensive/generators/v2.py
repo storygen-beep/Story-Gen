@@ -13826,7 +13826,9 @@ setup.castTraitRows = function (slug, npc) {
                 eb = node.exit_block or {}
                 if eb.get("type") == "choices":
                     choices = eb.get("choices", [])
-                    if any(c.get("targetType") in ("trigger", "node") for c in choices):
+                    # E14 — a `return` choice leaves the canvas as a `trigger` one does,
+                    # so it counts the same: it makes the menu and is one tier.
+                    if any(c.get("targetType") in ("trigger", "return", "node") for c in choices):
                         base_node = node
 
             if not base_node:
@@ -13837,7 +13839,7 @@ setup.castTraitRows = function (slug, npc) {
                 target_type = choice.get("targetType")
                 conditions = choice.get("conditions")
 
-                if target_type == "trigger":
+                if target_type in ("trigger", "return"):
                     raw_effects = choice.get("effects", [])
                     tiers.append({
                         "effects": [

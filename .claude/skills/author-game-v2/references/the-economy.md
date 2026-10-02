@@ -387,7 +387,7 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 `setup.applyAndNotifyTrait` (`v2.py:7291`). Either way the player is told. A silent charge meter is
 the one economy device the corpus universally hates (`sluttown-usa` is the counted case).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
-(`v2.py:19510`), so the number there stops being true at the first stage.
+(`v2.py:19512`), so the number there stops being true at the first stage.
 
 **A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
 it)*: `on_short = "carry"` (`engine.md` §26).
@@ -562,7 +562,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does not reach the sidebar: `trait_bar` reads
-> `_item.label || trait_key` (`v2.py:18675`) and never consults the trait labels at all
+> `_item.label || trait_key` (`v2.py:18677`) and never consults the trait labels at all
 > (`engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real
@@ -637,7 +637,7 @@ Name no real-world currency in the prose. A game set in a specific place still h
 price and a wage; it does not need the word *pounds* to have them.
 
 > ⚠️ **The symbol is a PREFIX, and the engine has no suffix form.** All four rent prints concatenate
-> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:17540`). An invented unit that reads as a
+> symbol-then-number (`"Pay " + _cur + _rent`, `v2.py:17542`). An invented unit that reads as a
 > suffix — `10 coin`, `1000 caps` — is legitimate and the field ships it, but it cannot go through
 > `currency_symbol`. **If rent is enabled, the notation has to be a prefix.**
 

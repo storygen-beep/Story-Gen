@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: an activity's tiers count `return` choices (World and Systems PRD, Phase 7b)
+
+**Why.** An activity's tiers are the choices on its menu node (the last node whose choices leave it):
+each tier lists the traits it raises, and the trait-help list ("where can I raise X?") shows an activity
+under a trait only when a tier it can reach raises it. The tier reader counted `trigger` and `node`
+choices only. A `return` choice leaves the canvas just as a `trigger` one does, but on a menu mixed with
+a `node` choice its effects were dropped (an activity whose only raising choice was a `return` one was
+not listed at all), and a menu of `return` choices alone was not read as tiers.
+
+**What changed.**
+- `v2.py` (`_extract_tiered_effects_from_canvas`): a `return` choice counts exactly where a `trigger` one
+  does. It can make a node the menu, and it is one tier with its own effects and no conditions (a
+  `trigger` tier carries none either; a `node` tier carries its choice's conditions). Opt-in by use: no
+  game has a `return` choice yet.
+- `references/engine.md` (back to where she was): one sentence.
+- Citations re-pointed through the `git diff` line map: 237 moved `v2.py` cites, each target line checked
+  identical. The three stale cites the tools session is fixing (`the-economy.md:560-561`,
+  `the-clock.md:198`) were left alone.
+
+**Verified.** New `apps/game_generation/tests/test_tiers_return_choice.py` on the new fixture
+`engine_ws_tiers_return_2026_10_02.toml` (3 tests: a `return` choice is a tier beside a `node` choice and
+lists the activity under its trait; `return` choices alone make a tiered menu; a `trigger` choice is still
+a tier). Two of them fail on the old generator. `test_return_choice.py` still passes. Rebuilds of
+members_only, billable_hours, orientation, probation, the_balance and vesper from `git archive` exports all
+import with no passage change.
+
+**Words:** +16, running total 146,811 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: a room she can't afford to enter records no visit (GLOBAL fix for games with entry costs, World and Systems PRD, Phase 7b)
 
 **Why.** A location's entry cost (`costs` on a location, `crossing_costs` on an area) was checked in the
