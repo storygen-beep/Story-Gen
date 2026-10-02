@@ -11464,11 +11464,11 @@ def ship_rows(slug, root=None):
     red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
     report.append(_world_size_row(model, state, game))
-    report.append(_systems_row(state))
+    report += [_systems_row(state), _coverage_report_row(state)]
     report.append(("every other gate", not red,
                    f"{sum(1 for r in others if r['pass_'])}/"
                    f"{sum(1 for r in others if not r['na'])} pass",
-                   [f"FAIL {g}" for g in red]))
+                   [f"FAIL {g}" + _other_gate_names(g, results) for g in red]))
 
     # ── LO B: a row red only under a rule newer than a grandfathered game WARNS ──
     # Re-run just that row with the rule in its old form. Red then too: it stays a FAIL.
@@ -12747,6 +12747,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("a chat is short and timed", *_chats_short_and_timed(game))
     gate("a system meets its floors", *_system_floors(model, state))
     gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
+    gate("no unknown topic", *_no_unknown_topic(state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13672,6 +13673,56 @@ def _gate_prefix(gname):
     """A BLOCK row's headline names its gate only when the row's label is a different name
     ("no empty rooms" ← `standing surface: …`); a row named after its gate says it once."""
     return "" if SHIP_BLOCK_GATES.get(gname) == gname else f"{gname}: "
+
+
+# ── the coverage list (SKILL.md "Never build an unknown on a guess"; `templates/sheets/coverage.md`) ──
+# A WARN by type (LO: warn, never block): a scored gate, so `--ship` lists it under `every other
+# gate`, with the unknown topics by name. No list is red, never n/a: an absence is not a pass. A game
+# still grandfathered (COVERAGE_SINCE) is told it predates the rule; it warns either way. No ledger
+# at all is n/a. shape.py reads the same list (its coverage rows) and the same date.
+COVERAGE_SINCE = "2026-10-02"
+SHIP_OTHER_NAMED = {"no unknown topic"}
+
+
+def _coverage_list(state):
+    cov = (((state or {}).get("board") or {}).get("coverage"))
+    return [e for e in cov if isinstance(e, dict)] if isinstance(cov, list) else None
+
+
+def _no_unknown_topic(state):
+    """(ok, headline, detail) for `no unknown topic`: every `board.coverage[]` entry has a status
+    other than `unknown`."""
+    if not state:
+        return None, "no v2_state.json — no coverage list to read", []
+    cov = _coverage_list(state)
+    if cov is None:
+        late = _grandfathered(state.get("slug"), state, COVERAGE_SINCE)
+        return False, ("no board.coverage — the game predates the list; write it before the next "
+                       "release" if late else "no board.coverage — list every topic first"), []
+    unknown = [str(e.get("topic")) for e in cov if e.get("status") == "unknown"]
+    if unknown:
+        return False, f"{len(unknown)} unknown: {', '.join(unknown)}", \
+            [f"{u}: scout it (LO says which), ask LO, or a placeholder on the release page"
+             for u in unknown]
+    return True, f"{len(cov)} topic(s), none unknown", []
+
+
+def _other_gate_names(gname, results):
+    """The `every other gate` line names what a SHIP_OTHER_NAMED gate found, not only its name."""
+    return f": {results[gname]['headline']}" if gname in SHIP_OTHER_NAMED else ""
+
+
+def _coverage_report_row(state):
+    """The --ship REPORT row: how much of this release rests on thin ground — the placeholder and
+    scouted topics, by name. A count, never a score."""
+    cov = _coverage_list(state)
+    if cov is None:
+        return ("topics on thin ground", None, "no board.coverage — nothing to count", [])
+    rows = [f"{s}: {', '.join(str(e.get('topic')) for e in cov if e.get('status') == s)}"
+            for s in ("placeholder", "scouted") if any(e.get("status") == s for e in cov)]
+    n = {s: sum(1 for e in cov if e.get("status") == s) for s in ("placeholder", "scouted")}
+    return ("topics on thin ground", None, f"{n['placeholder']} placeholder · {n['scouted']} scouted "
+            f"of {len(cov)} topic(s) — a count, never a score", rows)
 
 
 def main():

@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — `--ship` reads the coverage list (Coverage and the Scout PRD, CV5)
+
+**What.** `scripts/gates.py` (**protected, LO approved**); new code above `main()`, two line-for-line swaps and one
+added line:
+- **Gate `no unknown topic`** (`_no_unknown_topic`), registered in `_phase4_gates` (the one added line). A **WARN by
+  type**, as LO chose (warn, never block): red when any `board.coverage[]` topic is `unknown`, each named. Its n/a
+  policy: **no list is red, never n/a** (an absence is not a pass); a game still grandfathered against
+  `COVERAGE_SINCE = "2026-10-02"` (`_grandfathered`, LO-B) is told it predates the list and warns all the same; only
+  a game with no `v2_state.json` is n/a. It is not a BLOCK row, so it takes no `SHIP_SINCE` entry and no legacy
+  branch: those exist to turn a red BLOCK row into a warn, and this row never blocks.
+- **`every other gate`** names what this gate found (`SHIP_OTHER_NAMED`, `_other_gate_names`): "FAIL no unknown
+  topic: 2 unknown: a party, a car", not only the gate's name. Every other line is unchanged.
+- **REPORT row `topics on thin ground`** (`_coverage_report_row`): the count of `placeholder` and `scouted` topics, each
+  named, out of the list; "no board.coverage" when there is none. A count, never a score.
+- `scripts/shape.py` reads the same date (`COVERAGE_SINCE = gates.COVERAGE_SINCE`).
+- Docs: the `SKILL.md` gate-table row and the `--ship` REPORT list. `references/the-release.md:100`
+  `gates.py:13932` → `:13983`, read by hand; every other `gates.py:` cite sits above the edits, checked unmoved.
+
+**Verified.** New `scripts/tests/test_gates_coverage.py` (10): no unknown passes; unknowns are red and named; no list
+is red, never n/a; a grandfathered game is told it predates the list until it ships on the date; no ledger is n/a;
+the gate is in no BLOCK, REPORT or SHIP_SINCE list; `--ship` names the unknowns under `every other gate`, gives the
+same BLOCK rows with and without an unknown, and reports thin ground by name. `--ship` on `git archive HEAD` exports
+of every game but vesper_two, before and after: billable_hours and the four grandfathered games gain one red line in
+`every other gate` (billable "list every topic first", the others "predates the list") and the n/a row `topics on
+thin ground`; media_lab and vesper (no ledger) gain only the n/a row. **No BLOCK row changed colour**; every SHIP
+headline is the same. selfcheck 72/72 gates documented; pytest passes; `cite_check.py` 0.
+
+**Words:** +34, running total 147,162 / 149,283 (measured).
+
 ## 2026-10-02 — shape.py reads the coverage list (Coverage and the Scout PRD, CV4)
 
 **What.** `scripts/shape.py` (**protected, LO approved**), three rows, strict only (n/a while the spine is written),

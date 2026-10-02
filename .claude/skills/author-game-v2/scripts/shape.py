@@ -612,7 +612,7 @@ def check(state, strict=False, slug=None, root=None):
     return rows, sorted(flags)
 
 
-COVERAGE_SINCE = "2026-10-02"
+COVERAGE_SINCE = gates.COVERAGE_SINCE
 COVERAGE_KINDS = ("system", "place", "scene", "mechanic")
 COVERAGE_STATUSES = ("covered", "scouted", "lo", "placeholder", "unknown")
 SKILL_DIR = os.path.dirname(HERE)

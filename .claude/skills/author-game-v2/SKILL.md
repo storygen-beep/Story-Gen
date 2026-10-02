@@ -308,6 +308,7 @@ how many fails are [off].
 | a chat is short and timed | 3–7-word bubbles, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
 | a system meets its floors | a daily card's pool ≥20 built canvases, ≥4 lewd rungs, ≥2 acts a rung; a warning | `the-systems.md` SY8 |
 | sex for pay names the amount | a choice on an explicit canvas that pays her names the sum; a warning | `the-systems.md` SY8 |
+| no unknown topic | every `board.coverage[]` topic has a status but `unknown`; no list is red; a warning, `--ship` names each | `templates/sheets/coverage.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
@@ -467,7 +468,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
-  when, lines naming a future week or day, world size, systems and connections, and every other gate. `gates.py <slug>` still
+  when, lines naming a future week or day, world size, systems and connections, topics on thin ground (placeholder and scouted, by name), and every other gate. `gates.py <slug>` still
   prints the whole scoreboard; a red there is a real defect or a wrong threshold, and it is fixed at
   the layer that caused it, never skipped. `the-release.md` § Shipping the build.
 - **The scoreboard has three other modes, and each answers something `<slug>` cannot.**
