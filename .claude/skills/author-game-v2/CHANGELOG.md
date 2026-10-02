@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a locked choice is not shown as a way to raise a trait (World and Systems PRD, Phase 7b)
+
+**Why.** The trait-help list ("How to increase Fitness", opened from a trait requirement) skips a tier
+whose conditions don't hold and shows each activity with the best bonus among the tiers left. The tier
+reader kept a `node` tier's choice conditions but wrote none for a `trigger` or `return` tier, so a locked
+choice of either kind was listed as a way to raise the trait while she couldn't pick it. On a menu with a
+locked "+5" and an open "+1" the list said "+5"; an activity whose only raising choice was locked was
+listed anyway.
+
+**What changed.**
+- `v2.py` (`_extract_tiered_effects_from_canvas`): a `trigger` or `return` tier carries its choice's
+  `conditions`, the same way a `node` tier does. One line for one line, so no citation moved.
+- `references/engine.md` (back to where she was): one clause, a locked tier is left out.
+
+**Verified.** New `apps/game_generation/tests/test_tiers_locked_choice.py` on the new fixture
+`engine_ws_tiers_locked_2026_10_02.toml` (4 tests: a locked `trigger` and a locked `return` tier keep their
+conditions in `help_data`; in the browser, at fitness 10 the list shows only Row +1, and at fitness 20 it
+shows Spar +4, Swim +3 and Row +5). All 4 fail on the old generator (it listed Spar +4, Swim +3, Row +5 at
+fitness 10). `test_tiers_return_choice.py` still passes. Rebuilds of members_only, billable_hours,
+orientation, probation, the_balance and vesper from `git archive` exports all import, byte-identical to the
+old generator's: none of the six has a locked `trigger` or `return` choice (every locked tier today is a
+`node` tier). `cite_check.py` 0 in SKILL.md + references; `--selfcheck` clean; skill tests 672 passed.
+
+**Words:** +10, running total 146,838 / 149,283.
+
+---
+
 ## 2026-10-02 — Merge pointer fix: four cites engine batch 5 moved (World and Systems PRD, Phase 7b)
 
 **What.** `references/the-economy.md:560-561` (numbers only; the file is protected and the sentences
