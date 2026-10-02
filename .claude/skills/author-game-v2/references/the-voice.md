@@ -333,7 +333,8 @@ Course of Temptation only: a lecture timetable, grades that move money, professo
 **Banned, as whole words or phrases, anywhere a player reads:** detention · homeroom · prom · "after
 school" · "high school" · "middle school" · "junior high" · teen · teenager · schoolgirl · "school
 uniform" · "class president" · "grade 9" through "grade 12". *Freshman* and *sophomore* are college
-words and are allowed. A whole-word match: "eighteen" is not "teen".
+words and are allowed. A whole-word match: "eighteen" is not "teen". Gate *adult wording* lists every
+hit; it warns, never blocks.
 
 **Step-family nouns take a hyphen where a player reads them:** step-brother, step-father, step-sister.
 The field spells them that way, so `--words` lists the closed forms (*stepbrother*) as words the genre

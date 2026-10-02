@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Gate `adult wording`: the banned school words, as a warning (World and Systems PRD, Phase 6A)
+
+**What.** A scored gate in `scripts/gates.py` (`_adult_wording`, above `main()`, registered in
+`_phase4_gates`): whole-word, case-blind matches of `the-voice.md` "Adult wording"'s banned list
+(detention, homeroom, prom, after school, high school, middle school, junior high, teen, teenager,
+schoolgirl, school uniform, class president, grade 9–12) in prose, choice labels and room names and
+descriptions. Each hit is listed with where it is and its words around it.
+- **n/a policy:** n/a only when the game has no player-facing text.
+- **Grandfathering:** none needed; it is a WARN by LO's call, never a `--ship` BLOCK, so under `--ship`
+  a red shows inside "every other gate". It is not in `SHIP_BLOCK_GATES` (tested).
+- Docs: SKILL.md gate-table row; `the-voice.md` "Adult wording" names the gate (one line).
+
+**Why.** The rule existed in the voice doctrine with nothing reading it.
+
+**Verified.** New `scripts/tests/test_gates_adult_wording.py` (18): "eighteen" passes, "homeroom" warns,
+every listed phrase warns, near misses ("promise", "grade 8", "high schoolers") and college words
+(freshman, sophomore) pass, a label and a room name are read, no text is n/a. Before/after on every game
+from a `git archive HEAD` export (vesper_two excluded): before, no row; after, billable_hours, media_lab,
+members_only, orientation, the_balance and vesper PASS; probation FAIL (warn), one hit: `work_martys`
+"A teenager puts a tape measure in his ho…". gates.py grew 36 lines at `_phase4_gates` and above `main()`;
+the one cite past them, `the-release.md:100`, moved `gates.py:13084` → `:13120` (read by hand).
+`cite_check.py --fix` 0 drifted; selfcheck clean (61 gates); pytest 530 passed.
+
+**Words:** +32, running total 145,949 / 149,283.
+
+---
+
 ## 2026-10-02 — The tools read a value worked out from her stats (World and Systems PRD, Phase 6A)
 
 **What.** The engine resolves `value = { type = "trait", trait, mult, add, min, max }` as

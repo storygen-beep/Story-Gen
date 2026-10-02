@@ -12731,6 +12731,8 @@ def _phase4_gates(gate, _N, model, game, state):
     ok, head, detail, n = _one_name_per_trait(game)
     _N["one name per trait"] = n
     gate("one name per trait", ok, head, detail)
+    ok, head, detail = _adult_wording(model, game)
+    gate("adult wording", ok, head, detail)
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -12824,6 +12826,40 @@ def _effect_value_label(val, trait):
         return f"+{val.get('trait', '?')}{mult_s}{add_s} {trait}"
     return f"+{val.get('min','?')}..{val.get('max','?')} {trait}"
 
+
+
+# ── the-voice.md "Adult wording": the banned school words ──────────────────
+# Whole words or phrases, case-blind, anywhere a player reads (`_player_visible_text`'s
+# scope: prose, labels, room names and descriptions). "eighteen" is not "teen"; freshman
+# and sophomore are college words and are allowed. A WARN (LO): a scored gate, so under
+# --ship it shows inside "every other gate" and never blocks. n/a: no player text.
+_ADULT_WORDING_RE = re.compile(
+    r"\b(detention|homeroom|prom|after[\s-]+school|high[\s-]+school|middle[\s-]+school"
+    r"|junior[\s-]+high|teen|teenager|schoolgirl|school[\s-]+uniform|class[\s-]+president"
+    r"|grade[\s-]+(?:9|1[0-2]))\b", re.I)
+
+
+def _adult_wording(model, game):
+    """(ok, headline, detail): every banned school word a player can read, by place."""
+    parts = [(c["id"], t) for c in model for b in c["beats"] for t in b.text]
+    for path, node in _walk_paths(game):
+        if isinstance(node.get("text"), str) and ("targetType" in node or "config" in node):
+            parts.append((".".join(k for k in path if k != "[]") or "label", node["text"]))
+    for loc in (game.get("locations") or []):
+        for key in ("name", "description"):
+            if loc.get(key):
+                parts.append((f"location {loc.get('id')}", str(loc[key])))
+    if not any(str(t).strip() for _, t in parts):
+        return None, "no player-facing text to read", []
+    hits = []
+    for where, text in parts:
+        for m in _ADULT_WORDING_RE.finditer(str(text)):
+            a, b = max(0, m.start() - 30), min(len(text), m.end() + 30)
+            hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
+    if not hits:
+        return True, "no banned school word anywhere a player reads", []
+    return (False, f"{len(hits)} banned school word(s) where a player reads — a warning, "
+                   f"never a block (the-voice.md \"Adult wording\")", hits)
 
 
 def main():
