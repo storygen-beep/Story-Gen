@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The tools read `targetType = "return"` as an exit (World and Systems PRD, Phase 7b, L4)
+
+**What.** The engine resolves a `return` choice on the click (the stored room, else the canvas's home) and never
+follows its `nodeId` (`v2.py:16183`, `:15395`). `scripts/gates.py` saw only `location` as an exit, so a `return`
+was counted as a decision, and one carrying a stray `nodeId` was walked as a link into the scene. Seven
+line-for-line swaps, `!= "location"` → `not in ("location", "return")` (or the `==` / `!=` mirror):
+- `lint_unwritten_act` (~:2480) — a `return` that acts is listed, like a location exit that acts;
+- `a place is not a catalogue` (~:8128) — a bare `return` is an exit, not a decision on the menu count;
+- `her climb` (~:12284 inner gates, ~:12345 the new-save walk, ~:12390 and ~:12395 the stop exit) — a `return` is a
+  leave, never a way on;
+- `a no has content` (~:12444) — a `return` leaves the step, like a location exit.
+Read and left as they are (they follow only `node` targets, so `return` already falls out): ~:1084, ~:2831, ~:2893,
+~:6045, ~:13341; the opening walk (~:5421) follows `nodeId` / `locationId` and so never counts a `return` as the
+handover (none of our openings uses one). `shape.py` reads no choice target. `references/engine.md` §13 says so in
+one line (+8 words).
+
+**Verified.** New `scripts/tests/test_gates_return_target.py` (4): the ws6 green fixture with a `return` exit scores
+every gate (pass, n/a and headline) exactly as with a location exit, and still ships with no red BLOCK row; a
+`return` that pays is an unwritten act; a bare `return` (and one with a stray `nodeId` to a written reply) is a walk
+out on a `consume_on = "exit"` step. Three of the four fail on the old code. A probe turning every bare location
+exit into `return` on HEAD exports of billable_hours (16), members_only (18) and probation (53) moved one gate before
+the fix (`a place is not a catalogue` headline: hubs median 2 → 1) and none after. `--ship` on HEAD exports of every
+game but vesper_two: no change against L1 (no game uses `return` yet). No line count moved; `cite_check.py --fix` 0
+drifted; selfcheck clean (0 orphans); pytest 672 passed.
+
+**Words:** +8, running total 146,783 / 149,283.
+
+---
+
 ## 2026-10-02 — Step reachability reads a value worked out from her stats (World and Systems PRD, Phase 7b, L3)
 
 **What.** `scripts/gates.py` `_ladder_earnable`, two line-for-line swaps (~:4652 a scene's effect, ~:4687
