@@ -558,6 +558,8 @@ class GameTemplate:
     player_portrait: Optional["TemplatePlayerPortrait"] = None
     # Consumable items (groceries, art supplies, etc.)
     items: List[TemplateItem] = field(default_factory=list)
+    # E10 — general shops ([[shops]]); empty in every game that has none
+    shops: List[TemplateShop] = field(default_factory=list)
     # Visual theme
     theme: Optional[TemplateTheme] = None
     # Day-rollover hook — fires inside window.advanceDay() once per day flip.
@@ -1015,6 +1017,19 @@ class TemplateItem:
     price: Any = None
     money_trait: Optional[str] = None
     conditions: Optional[Dict[str, Any]] = None
+
+
+@dataclass
+class TemplateShop:
+    """E10 — a general shop: a place and its stock of priced `[[items]]`.
+
+    `stock` entries are {item, limit?}; a limit is how many the shop ever sells (its
+    sales live in $game_state.shops[shop][item]); none = it never runs out.
+    """
+    id: str = ""
+    name: str = ""
+    location: str = ""
+    stock: Any = field(default_factory=list)
 
 
 @dataclass
@@ -3225,6 +3240,22 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             )
         )
 
+    # ── Shops (E10) ──
+    shops: List[TemplateShop] = []
+    for shop_def in data.get("shops", []) or []:
+        if not isinstance(shop_def, dict):
+            continue
+        raw_stock = shop_def.get("stock")
+        shops.append(
+            TemplateShop(
+                id=_require_str(shop_def, "id"),
+                name=_require_str(shop_def, "name", ""),
+                location=_require_str(shop_def, "location", ""),
+                stock=[s for s in raw_stock if isinstance(s, dict)]
+                if isinstance(raw_stock, list) else raw_stock,
+            )
+        )
+
     # ── Theme ──
     theme_obj: Optional[TemplateTheme] = None
     theme_raw = data.get("theme")
@@ -3710,6 +3741,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         quests=quests,
         quests_cards=quests_cards_parsed,
         items=items,
+        shops=shops,
         theme=theme_obj,
         daily_tick=daily_tick_obj,
         stage_helpers=stage_helpers,
@@ -6280,6 +6312,42 @@ def validate(template: GameTemplate) -> List[str]:
         if it.conditions is not None and it.price is None:
             errors.append(f"items[{i}].conditions gate buying and are read only with a price")
 
+    # ===== Shops validation (E10) =====
+    _priced = {it.id for it in template.items if it.price is not None}
+    _all_items = {it.id for it in template.items}
+    _loc_slugs = {l.id for l in template.locations}
+    seen_shop_ids: Set[str] = set()
+    for i, sh in enumerate(template.shops):
+        ctx = f"shops['{sh.id}']" if sh.id else f"shops[{i}]"
+        if not _is_valid_slug(sh.id or ""):
+            errors.append(f"{ctx}.id must be lowercase snake_case")
+        if sh.id in seen_shop_ids:
+            errors.append(f"duplicate shop id: {sh.id}")
+        seen_shop_ids.add(sh.id)
+        if not sh.name:
+            errors.append(f"{ctx}.name is required")
+        if sh.location not in _loc_slugs:
+            errors.append(f"{ctx}.location '{sh.location}' not found in locations")
+        if not isinstance(sh.stock, list) or not sh.stock:
+            errors.append(f"{ctx}.stock must be a non-empty list of {{item, limit?}}")
+            continue
+        seen_stock: Set[str] = set()
+        for si, st in enumerate(sh.stock):
+            unknown = set(st) - {"item", "limit"}
+            if unknown:
+                errors.append(f"{ctx}.stock[{si}]: unknown key `{sorted(unknown)[0]}`")
+            item = st.get("item")
+            if item not in _all_items:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' not found in items")
+            elif item not in _priced:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' has no price")
+            if item in seen_stock:
+                errors.append(f"{ctx}.stock[{si}].item '{item}' is listed twice")
+            seen_stock.add(item)
+            lim = st.get("limit")
+            if lim is not None and (isinstance(lim, bool) or not isinstance(lim, int) or lim < 1):
+                errors.append(f"{ctx}.stock[{si}].limit must be a whole number of at least 1")
+
     # ===== Effect `op` must be an op the RUNTIME actually runs =====
     #
     # ⚠️ SILENT NO-OP, AND THE MOST EXPENSIVE KIND OF BUG THIS FILE CAN LET THROUGH.
@@ -8449,6 +8517,12 @@ def _assemble_project_metadata(project, template):
              **({"money_trait": it.money_trait} if it.money_trait else {}),
              **({"conditions": it.conditions} if it.conditions else {})}
             for it in template.items
+        ]
+    # E10 — general shops, only when declared
+    if template.shops:
+        project.metadata["shops"] = [
+            {"id": sh.id, "name": sh.name, "location": sh.location, "stock": sh.stock}
+            for sh in template.shops
         ]
     # Store daily-tick hook if defined ([engine.daily_tick])
     if template.daily_tick is not None:

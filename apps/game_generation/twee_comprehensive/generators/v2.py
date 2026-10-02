@@ -1233,6 +1233,8 @@ class TweeComprehensiveGeneratorV2:
         self.passes = (self.project.metadata or {}).get("passes", [])
         # Items (consumable inventory)
         self.items = (self.project.metadata or {}).get("items", [])
+        # E10 — general shops ([[shops]]), each rendered on its room's screen
+        self.shops = (self.project.metadata or {}).get("shops", []) or []
         # Day-rollover hook ([engine.daily_tick]) — fires inside advanceDay().
         # Always present as a dict with a flagEffects list (possibly empty)
         # so the generated JS loop has a stable target.
@@ -1584,6 +1586,10 @@ class TweeComprehensiveGeneratorV2:
             game_state_init["passes"] = {}
         if self.items:
             game_state_init["inventory"] = {}
+        if any(st.get("limit") for sh in self.shops for st in (sh.get("stock") or [])):
+            # E10 — shop id -> {item id: how many it has sold}. Only in a game with a
+            # limited stock; an old save gets it from the backfill.
+            game_state_init["shops"] = {}
         if self.phone_enabled:
             game_state_init["phone"] = {
                 "triggered_conversations": {},
@@ -5656,6 +5662,59 @@ setup.itemBuyBlock = function(itemId) {{
     if (setup.getItemCount(itemId) >= (it.max_stack || 99)) return 'You cannot carry more.';
     return '';
 }};
+// E10 — [[shops]]: a room's own section. A stock limit counts sales in
+// $game_state.shops[shop][item]; no limit = it never runs out.
+setup.general_shops = {json.dumps({sh['id']: sh for sh in self.shops})};
+setup._shopStock = function(shopId, itemId) {{
+    var sh = setup.general_shops[shopId];
+    return (sh && (sh.stock || []).filter(function(s) {{ return s.item === itemId; }})[0]) || null;
+}};
+setup.shopLeft = function(shopId, itemId) {{
+    var st = setup._shopStock(shopId, itemId);
+    if (!st) return 0;
+    if (!st.limit) return Infinity;
+    var sold = (((State.variables.game_state || {{}}).shops || {{}})[shopId] || {{}})[itemId] || 0;
+    return Math.max(0, st.limit - sold);
+}};
+setup.buyFromShop = function(shopId, itemId) {{
+    if (setup.shopLeft(shopId, itemId) <= 0) return false;
+    var it = setup.items_map[itemId];
+    if (!setup.buyInventoryItem(itemId)) return false;
+    if (setup._shopStock(shopId, itemId).limit) {{
+        var gs = State.variables.game_state;
+        gs.shops = gs.shops || {{}};
+        gs.shops[shopId] = gs.shops[shopId] || {{}};
+        gs.shops[shopId][itemId] = (gs.shops[shopId][itemId] || 0) + 1;
+    }}
+    setup.pendingEffects = [{{ "type": "trait", "trait": it.money_trait || 'money', "delta": -Number(it.price) }}];
+    setup.showEffectNotification();
+    return true;
+}};
+setup.renderGeneralShop = function(shopId) {{
+    var sh = setup.general_shops[shopId];
+    if (!sh) return '';
+    var html = '<div class="general-shop"><h3>' + sh.name + '</h3>';
+    (sh.stock || []).forEach(function(st) {{
+        var it = setup.items_map[st.item];
+        if (!it) return;
+        var left = setup.shopLeft(shopId, st.item);
+        var why = left <= 0 ? 'Sold out.' : setup.itemBuyBlock(st.item);
+        var label = it.name + ' \u2014 ' + it.price + ' ' + setup.traitLabel(it.money_trait || 'money') +
+            (st.limit && left > 0 ? ' (' + left + ' left)' : '');
+        if (why) html += '<div class="general-shop-row general-shop-locked">' + label + ' \u2014 <em>' + why + '</em></div>';
+        else html += '<div class="general-shop-row"><a class="general-shop-buy" data-shop="' + shopId + '" data-item="' + st.item + '">' + label + '</a></div>';
+    }});
+    return html + '</div>';
+}};
+// The room re-renders after a purchase (a Location_ passage is safe to re-play:
+// entry costs, auto-fire and the random roll are guarded), so the sidebar's
+// numbers follow, and the navigation commits the moment.
+jQuery(document).on('click', '.general-shop-buy', function(e) {{
+    e.preventDefault();
+    if (setup.buyFromShop(String(jQuery(this).data('shop')), String(jQuery(this).data('item')))) {{
+        Engine.play(State.passage);
+    }}
+}});
 setup.buyInventoryItem = function(itemId) {{
     if (setup.itemBuyBlock(itemId)) return false;
     var it = setup.items_map[itemId];
@@ -11085,6 +11144,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     shop_link_ec = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug_ec == self.shop_location_slug:
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link_ec += self._general_shops_html(loc_slug_ec)
 
                     content += f""":: {self._location_passage_name(location)}
 <<if {entry_guard}>>\
@@ -11152,6 +11212,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     shop_link = ""
                     if self.clothing_enabled and self.shop_location_slug and loc_slug == self.shop_location_slug:
                         shop_link = '[[Browse Clothes->ShopPage]]<br>\n'
+                    shop_link += self._general_shops_html(loc_slug)
 
                     content += f""":: {self._location_passage_name(location)}
 <<nobr>>
@@ -14387,6 +14448,13 @@ setup.carryRent = function (due, paid) {
             str(loc.id) for loc in self.locations
             if (getattr(loc, "properties", None) or {}).get("slug") in slugs
         ]
+
+    def _general_shops_html(self, loc_slug) -> str:
+        """E10 — one section per [[shops]] entry at this room ("" when it has none)."""
+        return "".join(
+            f'<<= setup.renderGeneralShop({json.dumps(sh["id"])})>>\n'
+            for sh in self.shops if loc_slug and sh.get("location") == loc_slug
+        )
 
     def _has_return_exit(self) -> bool:
         """E8b — does any included canvas end on a `destinationType = "return"` exit?

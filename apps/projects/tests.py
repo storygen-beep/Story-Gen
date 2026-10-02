@@ -6784,6 +6784,46 @@ class ItemPriceSchemaTests(SimpleTestCase):
         self.assertTrue(any("items['pass_card'].conditions" in e for e in errors), errors)
 
 
+class GeneralShopSchemaTests(SimpleTestCase):
+    """E10 (World and Systems PRD) — `[[shops]]`."""
+
+    def test_shops_parse_and_reach_metadata_only_when_present(self):
+        from apps.projects.services.template_import import _assemble_project_metadata
+
+        t = normalize(_batch3())
+        self.assertEqual(validate(t), [])
+        self.assertEqual((t.shops[0].id, t.shops[0].location), ("corner_shop", "loc_gym"))
+
+        class _P:
+            metadata = {}
+        p = _P()
+        p.metadata = {}
+        _assemble_project_metadata(p, t)
+        self.assertEqual(p.metadata["shops"][0]["stock"][0], {"item": "coffee", "limit": 3})
+        d = _batch3()
+        d.pop("shops")
+        p2 = _P()
+        p2.metadata = {}
+        _assemble_project_metadata(p2, normalize(d))
+        self.assertNotIn("shops", p2.metadata)
+
+    def test_bad_shops_are_errors(self):
+        for change, fragment in (
+            ({"location": "loc_moon"}, "location 'loc_moon' not found"),
+            ({"name": ""}, "name is required"),
+            ({"stock": []}, "stock must be a non-empty list"),
+            ({"stock": [{"item": "pebble"}]}, "item 'pebble' has no price"),
+            ({"stock": [{"item": "cake"}]}, "item 'cake' not found in items"),
+            ({"stock": [{"item": "coffee", "limit": 0}]}, "limit must be a whole number"),
+            ({"stock": [{"item": "coffee", "price": 2}]}, "unknown key `price`"),
+            ({"stock": [{"item": "coffee"}, {"item": "coffee"}]}, "listed twice"),
+        ):
+            d = _batch3()
+            d["shops"][0].update(change)
+            errors = validate(normalize(d))
+            self.assertTrue(any(fragment in e for e in errors), (change, errors))
+
+
 class Tier2RuntimeIntegrationTests(TestCase):
     """Build a project exercising G4/G5/G2 and grep generated Twee (v1 + v2)."""
 

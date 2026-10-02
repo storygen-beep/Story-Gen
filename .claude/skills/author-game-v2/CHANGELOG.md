@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a general shop — `[[shops]]` (World and Systems PRD, Phase 7; opt-in)
+
+**Why.** LO's engine order, step 10, second half. The only shop sold clothes; any other purchase was a
+hand-built choice with `costs` and `itemEffects`.
+
+**What changed.**
+- `template_import.py`: `TemplateShop` and `[[shops]]` (`id`, `name`, `location`, `stock = [ { item,
+  limit? } ]`). Checks (build errors): a snake_case unique id, a name, a declared location, a non-empty
+  stock of priced items with no unknown key, no item twice, a whole `limit` ≥ 1. Written into metadata
+  only when a game has shops (GG gets it through `_assemble_project_metadata`).
+- `generators/v2.py`: each shop is its own section on its room's screen (`setup.renderGeneralShop`,
+  emitted into that room's passage only), a Buy row per item or the reason she cannot: the item's
+  conditions, her money, a full stack, "Sold out.". `setup.buyFromShop` buys through
+  `setup.buyInventoryItem`, toasts the price and counts a limited item's sales in
+  `$game_state.shops[shop][item]` (in the skeleton only in a game with a limit, so the backfill fills an
+  old save); the room re-renders so the sidebar follows. The clothing shop and its corruption tiers are
+  untouched.
+- `references/engine.md` §17 "Shops": the fact. `templates/cards/wardrobe.md` ("planned: item prices and
+  a general shop") and `templates/cards/shops_items.md` ("a general `[[items]]` entry has no price") now
+  say what is built.
+- Citations re-pointed through the `git diff` line map (596 moved, 34 identical) and the
+  paragraph-aware pass for wrapped-line `:NNNN` cites (21 moved); `cite_check.py` 0 drifted in SKILL.md +
+  references/.
+
+**Verified.** `test_general_shop.py` (3, headless: the shop shows only in the gym, with "(3 left)" and
+the pass card's reason instead of a link; buying charges 4, counts the sale and re-renders, down to
+"Sold out."; a save written before the change, at b6edf38, loads with `shops` backfilled and buys).
+`GeneralShopSchemaTests` (2: metadata only when present, eight bad shapes). A save-migration case. Six
+games rebuilt to scratch from a `git archive HEAD games/<slug>` export: all import, 0 passages differ
+from the pre-batch engine (301f6f8); only the engine script differs. Selfcheck and the skill tests pass;
+Django failures all in the known list.
+
+**Words:** +67, running total 145,720 / 149,283.
+
+---
+
 ## 2026-10-02 — Engine: item prices (World and Systems PRD, Phase 7; opt-in)
 
 **Why.** LO's engine order, step 10 (item prices and a general shop), first half. An inventory item had

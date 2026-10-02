@@ -107,5 +107,5 @@ it feeds · key use · taken away · sex scenes strip it.
 - Key garments: `clothing_item` conditions; the reminder is a hand-written band (a hub line, a quest card).
 - `wardrobeEffects` add, equip, unequip and remove. One or more wardrobe rooms (a list in
   `wardrobe_location`). Saved outfits behind `saved_outfits = true`.
-- The shop groups by corruption tiers, shows no "approved for" text, and there is one shop (planned: item
-  prices and a general shop).
+- The clothing shop groups by corruption tiers, shows no "approved for" text, and there is one. Other goods
+  sell in a `[[shops]]` general shop (priced `[[items]]`).

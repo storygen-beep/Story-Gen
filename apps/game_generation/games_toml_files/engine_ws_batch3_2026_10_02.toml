@@ -30,6 +30,7 @@
 #    coffee       4 money, at most 2 carried.
 #    pass_card    3 charm (money_trait), only once card_ok is set (conditions).
 #    pebble       no price: not for sale.
+#    corner_shop  at loc_gym: coffee (3 in stock, ever) and the pass card (never runs out).
 # ═══════════════════════════════════════════════════════════════════════════════
 
 schema_version  = "0.2"
@@ -263,3 +264,9 @@ conditions  = { version = "1.0", items = [
 [[items]]
 id   = "pebble"
 name = "Pebble"
+
+[[shops]]
+id       = "corner_shop"
+name     = "Corner shop"
+location = "loc_gym"
+stock    = [ { item = "coffee", limit = 3 }, { item = "pass_card" } ]
