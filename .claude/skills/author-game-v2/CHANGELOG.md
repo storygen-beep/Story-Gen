@@ -5,6 +5,32 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The scout agent (Coverage and the Scout PRD, CV3)
+
+**What.**
+- New `.claude/agents/v2-scout.md` (not counted): one topic per run, read-only. Its sources are the signed adults-only
+  pass list only (`round5/ADULTS_ONLY_PASS_LIST.md` §5, 12 games), with each game's text location and its exclusions
+  in one table (never Jack or Aaron; amore's two school/student outfits for their mechanics only, never their look;
+  the wasteland-lewdness magazine; in-their-own-hands' `WifeDanMem1`–`7`; corrupted-city's doll ending), plus CoT's
+  code and round 8's player comments from pass-list games. Every other game, FAIL games first, is counts only; our
+  own games are never a source. It asks the skill first (and says when a topic is already covered), greps, traces
+  one real instance end to end, and returns a mini card in the shape of `templates/cards/*.md` naming every game it
+  used, or "not found" with what it searched. It never writes `games/`; the caller saves the card at
+  `games/<slug>/scout/<topic>.md`. It runs only after LO picks the topics.
+- `references/agents.md`: one entry, "The Scout".
+
+**Verified, for real.** The agent type registers only in a new session, so the test ran the file itself through two
+general agents told to act exactly as `v2-scout.md`:
+- "a party" (no rule in the skill; it named the two near misses, `templates/cards/greek_life.md` and
+  `references/the-arc.md` A12): a card on CoT's Friday quad party (invite, hub, chat groups, the hookup, the
+  popularity door into the Greek party), contrast Shady Deals' yacht party (she hosts and pays).
+- "a job" (covered: it named `templates/cards/job.md` first and added only what the card lacks): IHOH's bartender
+  job (job board, interview, fixed paydays on the 14th and 28th, quitting and the half-shift rehire).
+Every cite was opened by hand at its line: all land on the claimed text. Only pass-list games were quoted
+(CoT, SD, IHOH); no excluded part and no FAIL game is on either card; player quotes are from pass-list games only.
+
+**Words:** +55, running total 147,106 / 149,283 (measured).
+
 ## 2026-10-02 — The coverage ledger and its sheet (Coverage and the Scout PRD, CV2)
 
 **What.**
