@@ -1,0 +1,91 @@
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..81a1f9f 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -444,7 +444,7 @@ effects = [ { targetType = "player", trait = "energy", op = "add", value = 15, c
+ [[canvases]]
+ id   = "act_work_shift"
+ name = "Work a shift"
+-description = "Work: $70, energy −30, once a day. The walk-in has four bands on nerve; B10 at 30+."
++description = "Work: $70, energy −30, once a day; or work late (6h): same pay, energy −40, office_talk +1. The walk-in has four bands on nerve; B10 at 30+."
+ 
+ [canvases.trigger]
+ location      = "firm"
+@@ -515,6 +515,59 @@ effects = [
+   { targetType = "player", trait = "energy", op = "add", value = -30, clamp = true },
+ ]
+ 
++# Work late: two more hours on the day rate. Interns are paid by the day, so the extra
++# hours buy no cash; they buy office_talk (the floor sees who stays) for 10 more energy.
++# Does NOT set stayed_late — callahan_review.work reads that as "I asked you to stay late".
++# Latest start 13:00 + 6h = 19:00, the firm's earliest close.
++[[canvases.nodes.exit_block.choices]]
++text       = "Work late with your $70. (6h)"
++targetType = "node"
++nodeId     = "act_work_shift.late"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_false" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",       op = "add", value = 70,  clamp = false },
++  { targetType = "player", trait = "energy",      op = "add", value = -40, clamp = true },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Work late with your $100. (6h)"
++targetType = "node"
++nodeId     = "act_work_shift.late"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_true" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",       op = "add", value = 100, clamp = false },
++  { targetType = "player", trait = "energy",      op = "add", value = -40, clamp = true },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++]
++
++[[canvases.nodes]]
++id   = "late"
++name = "After six"
++blocks = [
++  { type = "paragraph", content = "Your shift ends and you don't get up. You give the firm two more hours it isn't paying for." },
++  { type = "block_pool", blocks = [
++    { type = "paragraph", content = "You finish the indexing nobody asked you to finish. Your eyes burn and your shoulders ache, and you keep going anyway." },
++    { type = "paragraph", content = "You redo a binder an associate dumped on your desk. Every tab is straight. You want someone to open it and notice." },
++    { type = "paragraph", content = "The cleaners start at the far end of the floor. You type faster, like you're racing them." },
++  ] },
++  { type = "paragraph", content = "An associate stops at your desk on his way to the lift, coat over his arm." },
++  { type = "dialog", props = { speaker = "unknown" }, content = "Still here, intern? People are going to start talking." },
++  { type = "dialog", props = { speaker = "player" }, content = "Let them." },
++  { type = "paragraph", content = "He laughs and goes. You're proud, and you're wrecked, and you want the whole floor to know you stayed." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Shut the laptop and go."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "firm"
++time_progression_minutes = 360
++
+ [[canvases]]
+ id   = "walkin_firm"
+ name = "Someone in the copy room"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..dbc47ef 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1857,6 +1857,13 @@
+       "what": "G6 house + week 12, G5 ledger split, G3 option C",
+       "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+       "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
++    },
++    {
++      "date": "2026-10-02",
++      "by": "LO",
++      "what": "act_work_shift gets 'Work late'",
++      "detail": "Two choices on act_work_shift.shift (review_passed false/true) route to the new node act_work_shift.late: 6h total, the same day rate ($70 / $100), energy -40 instead of -30, office_talk +1. It does not set stayed_late, because callahan_review.work reads that flag as Callahan having asked her to stay. The latest start is 13:00, so 13:00 + 6h = 19:00, the firm's earliest close.",
++      "replaces_heat": "nothing removed; no explicit beat added"
+     }
+   ]
+ }

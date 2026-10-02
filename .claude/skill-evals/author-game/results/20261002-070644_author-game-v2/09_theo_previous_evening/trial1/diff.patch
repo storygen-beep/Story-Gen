@@ -1,0 +1,30 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..3480591 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -454,6 +454,25 @@ blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "Not tonight. I've got a councilman coming. Next time, and bring my file." },
+   ] } },
+   { type = "paragraph", content = "He signals the barman for another." },
++  # His evening with her, by which answer she gave at theo_01_the_hour. Every branch sits behind
++  # the flag that records it (the truth rule); theo_knows_friday is set only on the $250 answer,
++  # so it goes first and the $200 line never claims the wrong price.
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_knows_friday", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "He looks at your legs first, slowly, the way he looked at them for that whole hour." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "Two-fifty. You named your own price and then sat there and let me get my money's worth. I've thought about you crossing and uncrossing those legs every day since." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "He hasn't stopped thinking about it. Neither have I." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_hour_paid", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "His eyes go down you and back up to your mouth, the way they did for that whole hour he paid for." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "Two hundred dollars, and I never laid a finger on you. Best money I ever spent. Also the stupidest, because now I want the second hour." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "I remember exactly where he looked. My mouth, my chest, my legs. I liked every minute of it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_hour_talked", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "He looks at you over his glass like he's still deciding what you are." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "You kept the jacket on, so I told you about the councilman instead. Most girls take the money. You took the secret. I still can't tell if that makes you smart or dangerous." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "He's still wondering what I'd look like with it off. Let him wonder." },
++  ] } },
++  { type = "paragraph", content = "The barman sets the whisky down and leaves you to it." },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_hour_paid", operator = "is_true" } ] }, blocks = [
+     { type = "paragraph", content = "He slides a hotel key card across the table and leaves his hand on it, then takes it back." },
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_theo" }, content = "Suite twelve-oh-four. Not yet. When one hour isn't enough for either of us." },

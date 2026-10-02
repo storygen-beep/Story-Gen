@@ -1,0 +1,154 @@
+diff --git a/games/billable_hours/toml_phases/0_systems_spec.toml b/games/billable_hours/toml_phases/0_systems_spec.toml
+index 4185ec2..bea2bc7 100644
+--- a/games/billable_hours/toml_phases/0_systems_spec.toml
++++ b/games/billable_hours/toml_phases/0_systems_spec.toml
+@@ -61,6 +61,7 @@ flagEffects = [
+   { targetType = "player", flag = "drink_today",     op = "unset" },
+   { targetType = "player", flag = "eat_today",       op = "unset" },
+   { targetType = "player", flag = "dinner_today",    op = "unset" },
++  { targetType = "player", flag = "diane_outfit_today", op = "unset" },
+ ]
+ 
+ [ui.cast_page]
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..d10ee3e 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -362,6 +362,119 @@ time_progression_minutes = 5
+ flagEffects = [ { targetType = "player", flag = "eat_today", op = "set" } ]
+ effects = [ { targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 } ]
+ 
++# ── the kitchen · Diane reads the outfit (random ambient, once a day) ─────────
++# Every garment the prose names sits behind a clothing condition (register.md truth rule 5).
++# The groups run as first-match chains (v2.py:16835-16841), so a plain paragraph separates
++# each chain from the next. Exposure is read before the garments: bare beats a blouse.
++[[canvases]]
++id   = "ambient_kitchen_diane_outfit"
++name = "Your mother looks at what you're wearing"
++description = "Random ambient in the kitchen while Diane is there: she reads the outfit. Once a day; after diane_blessed_fridays she starts dressing Emma for Martin."
++
++[canvases.trigger]
++location      = "kitchen"
++requires_npc  = "npc_diane"
++is_repeatable = true
++is_active     = true
++priority      = 3
++trigger_mode  = "random"
++chance        = 0.30
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "opening_done",       operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "diane_outfit_today", operator = "is_false" },
++  { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_diane", operator = "is_present" },
++]
++
++[[canvases.nodes]]
++id   = "look"
++name = "Your mother"
++blocks = [
++  { type = "paragraph", content = "Your mother turns round from the counter when you come in, and her eyes go down you from head to toe before she says a word." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 2 } ] }, blocks = [
++    { type = "paragraph", content = "You're bare where she can see it. Her face goes red, then white." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Emma! Where are your clothes? This is Martin's kitchen!" },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "The sleep shirt stops at the top of your thighs. When you reach up for a mug it rides higher, and she watches it go." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "You came down in that? Sweetheart, you're not twelve. There are men in this house." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "paragraph", content = "Half of you is in nothing but underwear, in the middle of the kitchen." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Emma. Clothes. Now. What if Martin walked in?" },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "blouse_tight", operator = "equipped" }, { type = "clothing_item", item_id = "skirt_short", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "The silk blouse pulls tight across your tits, and the short skirt stops halfway down your thighs. She looks at both." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "That's what you're wearing to Callahan Reed? You look like you're going out, not going to work." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "blouse_tight", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "The silk blouse is tight enough that the buttons pull every time you breathe in, and she's looking right at them." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "That blouse is a size too small, sweetheart. Everyone at the firm can see your shape in it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "skirt_short", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "The short skirt stops well above your knees. Her eyes stay on your legs." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Don't bend over the filing cabinets in that. People already talk." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "White blouse buttoned to the collar, pencil skirt to the knee. She nods at it like she picked it out." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Good. That's what someone they keep on looks like. That's what Callahan wants to see." },
++  ] } },
++  { type = "paragraph", content = "She puts the spoon down." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "clothing_slot", slot = "top", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "Then her eyes drop to your chest and stop. No bra. The kitchen is cold, your nipples are hard, and they show through the blouse." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Emma. You're not wearing a bra." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "No, Mum. I'm not." },
++  ] } },
++  { type = "paragraph", content = "She folds her arms." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "paragraph", content = "She doesn't go back to the stove. She stands there with her arms folded until you move." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "diane_blessed_fridays", operator = "is_true" }, { type = "worn_corruption", operator = "gte", value = 2 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Actually, keep it on. Martin likes his people to look like they want something. You have your Friday with him, don't you?" },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "My mother is dressing me for him. She doesn't even hear herself." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "diane_blessed_fridays", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Wear the silk blouse on Friday, sweetheart. For Martin. He likes it when you make an effort." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "She wants me to look good for him. She has no idea what that means." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_corruption", operator = "gte", value = 2 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Go and change before Martin sees you. He got you that job. Don't embarrass him." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [
++    { type = "paragraph", content = "She looks at your chest one more time, and her mouth goes thin." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "She turns back to the stove, pleased with you." },
++  ] } },
++  { type = "paragraph", content = "Behind her the kettle starts to boil." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" }, { type = "worn_exposure", operator = "gte", value = 1 } ] }, blocks = [
++    { type = "paragraph", content = "Martin is at the table. He has stopped pretending to read, and he doesn't tell your mother to leave you alone." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" }, { type = "worn_corruption", operator = "gte", value = 2 } ] }, blocks = [
++    { type = "paragraph", content = "Martin looks up from the table, down the length of you, and back to his reading. He heard every word." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Tell her you're fine as you are."
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 5
++flagEffects = [ { targetType = "player", flag = "diane_outfit_today", op = "set" } ]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Go up and change."
++targetType = "location"
++locationId = "her_room"
++time_progression_minutes = 5
++flagEffects = [ { targetType = "player", flag = "diane_outfit_today", op = "set" } ]
++
+ # ── the kitchen · Dinner (the family table, Mon–Fri 18:00–19:00) ─────────────
+ [[canvases]]
+ id   = "act_dinner"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..6400d1d 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1857,6 +1857,13 @@
+       "what": "G6 house + week 12, G5 ledger split, G3 option C",
+       "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+       "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
++    },
++    {
++      "date": "2026-10-02",
++      "by": "LO",
++      "what": "Kitchen ambient: Diane comments on Emma's outfit",
++      "detail": "New random ambient ambient_kitchen_diane_outfit (3_activities.toml): kitchen, chance 0.30, requires_npc npc_diane plus an npc_at_location presence check, gated on opening_done, once a day via diane_outfit_today (set on both exits, unset in [engine.daily_tick]). Diane reads the outfit in first-match chains: bare, sleep shirt, underwear-level, tight blouse + short skirt, tight blouse, short skirt, plain work clothes; then no bra under a blouse; then her angle, which after diane_blessed_fridays turns into dressing Emma for Martin; then Martin's look if he is at the table. Every garment named sits behind a clothing condition (truth rule 5). Exits: stay in the kitchen or go up and change (her_room). Grants nothing.",
++      "replaces_heat": "nothing removed"
+     }
+   ]
+ }

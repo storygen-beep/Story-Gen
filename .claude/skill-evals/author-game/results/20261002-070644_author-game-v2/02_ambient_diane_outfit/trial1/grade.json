@@ -1,0 +1,201 @@
+{
+ "case": "02_ambient_diane_outfit",
+ "skill": "author-game-v2",
+ "passed": true,
+ "fails": [],
+ "cost_usd": 1.5276577999999998,
+ "turns": 35,
+ "subtype": "success",
+ "wall_s": 235.2,
+ "ran_gates": true,
+ "skills_called": [],
+ "permission_denials": [
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01La8kW62ZUZY13ZJfraBszx",
+   "tool_input": {
+    "command": "S=../../../.claude/skills/author-game-v2; grep -n \"^## \u00a717\" -A80 $S/references/engine.md | head -120; grep -n \"rule 5\\|5\\. \\*\\*Her clothes\\|her clothes\" $S/references/register.md | head",
+    "description": "Read engine clothing conditions and truth rule 5"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01WyJXbLpPaJcKmntA3qfhoa",
+   "tool_input": {
+    "command": "cd ../../.. && sed -n 1630,1660p apps/game_generation/*/template_import.py 2>/dev/null || grep -rn \"CONDITION_SCHEMA = \" --include=*.py . | head",
+    "description": "Read condition schema for clothing conditions"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01MjwVBM1dJBDKdfU2HM19V6",
+   "tool_input": {
+    "command": "for p in python3.13 python3.12 python3.11; do command -v $p && break; done; python3 -c \"import tomli\" 2>&1 | tail -1",
+    "description": "Find a TOML 1.0 capable parser"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01SZ9fPZ781jooenbBK8gfx4",
+   "tool_input": {
+    "command": "python3 - <<'EOF'\nimport json\np='../v2_state.json'\nd=json.load(open(p))\nd['decisions'].append({\n \"date\": \"2026-10-02\",\n \"by\": \"LO\",\n \"what\": \"Kitchen ambient: Diane comments on Emma's outfit\",\n \"detail\": \"New random ambient ambient_kitchen_diane_outfit (3_activities.toml): kitchen, chance 0.30, requires_npc npc_diane plus an npc_at_location presence check, gated on opening_done, once a day via diane_outfit_today (set on both exits, unset in [engine.daily_tick]). Diane reads the outfit in first-match chains: bare, sleep shirt, underwear-level, tight blouse + short skirt, tight blouse, short skirt, plain work clothes; then no bra under a blouse; then her angle, which after diane_blessed_fridays turns into dressing Emma for Martin; then Martin's look if he is at the table. Every garment named is behind a clothing condition. Exits: stay (kitchen) or go up and change (her_room). Grants nothing.\",\n \"replaces_heat\": \"nothing removed\"\n})\njson.dump(d, open(p,'w'), indent=2, ensure_ascii=False)\nopen(p,'a').write('\\n')\nEOF\ngit -C .. diff --stat",
+    "description": "Append decision entry to the game ledger"
+   }
+  }
+ ],
+ "changed_files": [
+  " M games/billable_hours/toml_phases/0_systems_spec.toml",
+  " M games/billable_hours/toml_phases/3_activities.toml",
+  " M games/billable_hours/v2_state.json"
+ ],
+ "init": {
+  "model": "claude-opus-5-5",
+  "skills": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring"
+  ],
+  "agents": [
+   "claude",
+   "Explore",
+   "general-purpose",
+   "Plan",
+   "statusline-setup",
+   "v2-attack",
+   "v2-listener",
+   "v2-pitcher",
+   "v2-player",
+   "v2-prose",
+   "v2-reader"
+  ],
+  "plugins": [
+   {
+    "name": "cc-plugin-agents-md",
+    "path": "builtin",
+    "source": "cc-plugin-agents-md@builtin"
+   },
+   {
+    "name": "cc-plugin-telemetry",
+    "path": "builtin",
+    "source": "cc-plugin-telemetry@builtin"
+   },
+   {
+    "name": "cc-plugin-plugin-authoring",
+    "path": "builtin",
+    "source": "cc-plugin-plugin-authoring@builtin"
+   }
+  ],
+  "tools": [
+   "Task",
+   "Bash",
+   "CronCreate",
+   "CronDelete",
+   "CronList",
+   "DesignSync",
+   "Edit",
+   "EnterWorktree",
+   "ExitWorktree",
+   "Glob",
+   "Grep",
+   "ListAgents",
+   "Monitor",
+   "NotebookEdit",
+   "PushNotification",
+   "Read",
+   "RemoteTrigger",
+   "ReportFindings",
+   "ScheduleWakeup",
+   "SendMessage",
+   "Skill",
+   "TaskCreate",
+   "TaskGet",
+   "TaskList",
+   "TaskStop",
+   "TaskUpdate",
+   "ToolSearch",
+   "WebFetch",
+   "WebSearch",
+   "Workflow",
+   "Write"
+  ],
+  "slash_commands": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring",
+   "advisor",
+   "agents",
+   "auto-mode-setup",
+   "autocompact",
+   "clear",
+   "color",
+   "compact",
+   "config",
+   "output-style",
+   "context",
+   "effort",
+   "fast",
+   "focus",
+   "heapdump",
+   "init",
+   "mcp",
+   "import",
+   "model",
+   "__remote-workflow",
+   "workflow-launch-exec",
+   "reload-plugins",
+   "reload-skills",
+   "rename",
+   "ultrareview",
+   "security-review",
+   "usage-credits",
+   "extra-usage",
+   "usage",
+   "insights",
+   "recap",
+   "skill-doctor",
+   "goal",
+   "design-consent",
+   "design-revoke",
+   "list-agents",
+   "team-onboarding"
+  ],
+  "cwd": "/private/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_02_ambient_diane_outfit_w6odlrbj/w",
+  "permissionMode": "acceptEdits"
+ },
+ "staging": "/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_02_ambient_diane_outfit_w6odlrbj/w",
+ "regraded": true
+}

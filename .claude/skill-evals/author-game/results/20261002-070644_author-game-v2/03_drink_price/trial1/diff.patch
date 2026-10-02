@@ -1,0 +1,96 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..6f594bb 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -126,7 +126,7 @@ clothing_rules       = [ { slots_required = ["top", "bottom", "shoes"], message
+ [[locations]]
+ id                   = "hotel_bar"
+ name                 = "The Hotel Bar"
+-description          = "The hotel bar across the road from the firm: low lights, leather stools, a long mirror behind the bottles. It's where the partners bring clients. A drink is $8."
++description          = "The hotel bar across the road from the firm: low lights, leather stools, a long mirror behind the bottles. It's where the partners bring clients. A drink is $15."
+ image                = "locations/hotel_bar.jpg"
+ image_search_queries = ["hotel bar leather stools low light", "upscale hotel bar evening"]
+ entry_from           = "downtown"
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..4e14813 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -779,7 +779,7 @@ effects = [
+ [[canvases]]
+ id   = "act_drink"
+ name = "Have a drink"
+-description = "$8. A little nerve. Walk-in: an associate (0–29) or a stranger in a suit (30+, B11)."
++description = "$15, −10 energy. A little nerve. Walk-in: an associate (0–29) or a stranger in a suit (30+, B11)."
+ 
+ [canvases.trigger]
+ location      = "hotel_bar"
+@@ -798,7 +798,7 @@ version = "1.0"
+ logic   = "AND"
+ items = [
+   { type = "flag",  subject = "player", flag_key = "drink_today", operator = "is_false" },
+-  { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 8 },
++  { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 15 },
+ ]
+ 
+ [[canvases.nodes]]
+@@ -816,13 +816,16 @@ blocks = [
+ type = "choices"
+ 
+ [[canvases.nodes.exit_block.choices]]
+-text       = "Finish it and go. ($8, 30m)"
++text       = "Finish it and go. ($15, 30m)"
+ targetType = "location"
+ locationId = "downtown"
+ time_progression_minutes = 30
+-costs      = [ { trait = "money", value = 8 } ]
++costs      = [ { trait = "money", value = 15 } ]
+ flagEffects = [ { targetType = "player", flag = "drink_today", op = "set" } ]
+-effects = [ { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 10 } ]
++effects = [
++  { targetType = "player", trait = "nerve",  op = "add", value = 1,   cap = 10 },
++  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
++]
+ 
+ [[canvases.nodes.exit_block.choices]]
+ text       = "Leave without ordering."
+@@ -864,20 +867,23 @@ blocks = [
+ type = "choices"
+ 
+ [[canvases.nodes.exit_block.choices]]
+-text       = "Open your knees for him. ($8, 30m)"
++text       = "Open your knees for him. ($15, 30m)"
+ targetType = "node"
+ nodeId     = "walkin_bar.act"
+-costs      = [ { trait = "money", value = 8 } ]
++costs      = [ { trait = "money", value = 15 } ]
+ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }
+ 
+ [[canvases.nodes.exit_block.choices]]
+-text       = "Put the glass down and go. ($8, 30m)"
++text       = "Put the glass down and go. ($15, 30m)"
+ targetType = "location"
+ locationId = "downtown"
+ time_progression_minutes = 30
+-costs      = [ { trait = "money", value = 8 } ]
++costs      = [ { trait = "money", value = 15 } ]
+ flagEffects = [ { targetType = "player", flag = "drink_today", op = "set" } ]
+-effects = [ { targetType = "player", trait = "office_talk", op = "add", value = 1, clamp = true } ]
++effects = [
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++  { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
++]
+ 
+ [[canvases.nodes.exit_block.choices]]
+ text       = "Get up and walk out."
+@@ -907,8 +913,9 @@ locationId               = "downtown"
+ time_progression_minutes = 30
+ flagEffects = [ { targetType = "player", flag = "drink_today", op = "set" } ]
+ effects = [
+-  { targetType = "player", trait = "nerve",       op = "add", value = 1, cap = 60 },
+-  { targetType = "player", trait = "office_talk", op = "add", value = 1, clamp = true },
++  { targetType = "player", trait = "nerve",       op = "add", value = 1,   cap = 60 },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++  { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
+ ]
+ 
+ [[canvases.nodes]]

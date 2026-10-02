@@ -1,0 +1,16 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..3db2434 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -143,6 +143,11 @@ blocks = [
+   { type = "group", props = { blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Are you eating properly? You look tired. Is Callahan being fair to you?" },
+   ] } },
++  { type = "block_pool", blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "There you are. I kept a plate warm for you. Sit down and tell me everything, sweetheart." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Did you thank Martin today? He went out on a limb to get you into that firm. Don't you ever forget it." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "I'm so proud of you I could burst. I tell everyone at the firm my daughter is the best hire they've made in years." },
++  ] },
+   { type = "paragraph", content = "She pats the chair next to hers at the table." },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 2 } ] }, blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "You and Martin were up so late on Friday. He came to bed humming. I haven't seen him like that in years." },

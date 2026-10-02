@@ -1,0 +1,68 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..50c9d7d 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -238,6 +238,63 @@ targetType = "location"
+ locationId = "landing"
+ time_progression_minutes = 5
+ 
++# Pure number lock: the engine prints the Nerve need beside the label, so no locked_text (engine.md §15).
++[[canvases.nodes.exit_block.choices]]
++text       = "Knock on his door."
++targetType = "node"
++nodeId     = "hub_ethan_landing.knock"
++show_when_locked = true
++conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }
++
++# Story lock on a flag: the engine prints nothing for a flag leg, so locked_text names the handle (engine.md §15).
++[[canvases.nodes.exit_block.choices]]
++text        = "Go into his room."
++targetType  = "node"
++nodeId      = "hub_ethan_landing.inside"
++show_when_locked = true
++locked_text = "Go into his room (not until he's watched you shower)."
++conditions  = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_watched_shower", operator = "is_true" } ] }
++
++[[canvases.nodes]]
++id   = "knock"
++name = "You knock"
++blocks = [
++  { type = "paragraph", content = "You knock twice on the open door. He takes his time turning round." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "It's open. It's always open. You know that." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "I know. That's why I knocked. I wanted him to say it." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "So? Come in or don't, intern. Don't just stand there in the doorway looking at me." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Say goodnight."
++targetType = "location"
++locationId = "landing"
++time_progression_minutes = 5
++
++[[canvases.nodes]]
++id   = "inside"
++name = "His room"
++blocks = [
++  { type = "paragraph", content = "You walk in without asking. He doesn't stop you. He pushes his chair back from the desk and looks at you, slowly, the same way he looked through the bathroom door." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You let me watch. You turned round so I could see." },
++  { type = "dialog", props = { speaker = "player" }, content = "I know what I did." },
++  { type = "paragraph", content = "His jeans are tight across his lap and he doesn't hide it. He's hard, and he wants you to see that too." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "He's my step-brother and I'm standing in his room at night, and all I can think about is his hand in that hallway." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Close the door on your way out. Or don't." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Leave his door open an inch."
++targetType = "location"
++locationId = "landing"
++time_progression_minutes = 10
++
+ # ── Callahan in the corner office ────────────────────────────────────────────
+ [[canvases]]
+ id   = "hub_callahan"

@@ -1,0 +1,10 @@
+{
+  "id": "02_ambient_diane_outfit",
+  "source": "CHANGELOG.md:12000 (mrs_vance ambients put a speaking man in a room he wasn't in)",
+  "rule": "the-first-hour.md F5b; engine requires_npc",
+  "task": "Add a random kitchen ambient where Diane comments on what Emma is wearing.",
+  "target_lints": [
+    "ambient_presence",
+    "dialogue_attribution"
+  ]
+}

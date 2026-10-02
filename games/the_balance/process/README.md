@@ -186,6 +186,12 @@ passes had back-written (`the_cast.md`, `the_house.md`, `the_house_day.md`, `the
 line removed was the agent's — all nine commits carry the co-author line — and the removed versions
 are whole-file copies in `parked/sheets_as_built/` and `parked/DECISIONS_as_built.md`.
 
+**Third exception, 2026-09-25:** LO: *"fix both gaps in the skill and update OPENING.md"*.
+`sheets/OPENING.md` was rewritten to the opening he approved on 2026-09-23 (the plan in
+`~/Documents/Scene_Content_Study_20260923/the_balance_rewrite/THE_BALANCE_NEW_OPENING.md`), because
+a redraft built from the old page produced the old opening (skill `the-sheets.md` S13). That page
+only; the approval does not extend to `the_cast.md` or any other sheet.
+
 ---
 
 ## 0c · The agent never runs a media harvest

@@ -1,0 +1,9 @@
+{
+  "id": "09_theo_previous_evening",
+  "source": "members_only #45, #55; probation #49 (past claims on repeatables)",
+  "rule": "register.md truth rule",
+  "task": "Add a variant to hub_theo_bar where Theo refers back to their previous evening together.",
+  "target_lints": [
+    "past_claim"
+  ]
+}

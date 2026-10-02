@@ -1,0 +1,47 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..ca003a1 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -130,8 +130,9 @@ description          = "The hotel bar across the road from the firm: low lights,
+ image                = "locations/hotel_bar.jpg"
+ image_search_queries = ["hotel bar leather stools low light", "upscale hotel bar evening"]
+ entry_from           = "downtown"
+-hours                = [ { open = "17:00", close = "23:00" } ]
+-closed_text          = "The hotel bar opens at five."
++# Friday runs to 02:00 so Theo's late Friday row sits inside open hours.
++hours                = [ { weekdays = [0, 1, 2, 3, 5, 6], open = "17:00", close = "23:00" }, { weekdays = [4], open = "17:00", close = "02:00" } ]
++closed_text          = "The hotel bar opens at five, and stays open till two on Fridays."
+ 
+ [[locations]]
+ id                   = "club"
+@@ -332,3 +333,11 @@ weekdays = [1, 2, 3]
+ start_time = "18:00"
+ end_time = "21:00"
+ activity = "At his table"
++
++# Friday night: wraps midnight (engine.md §6), so he is still there at 01:00 Saturday.
++[[npcs.schedules]]
++location = "hotel_bar"
++weekdays = [4]
++start_time = "22:00"
++end_time = "02:00"
++activity = "Drinking late"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..5d2bc93 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1109,6 +1109,14 @@
+             ],
+             "from": "18:00",
+             "to": "21:00"
++          },
++          {
++            "where": "hotel_bar",
++            "weekdays": [
++              "Fri"
++            ],
++            "from": "22:00",
++            "to": "02:00"
+           }
+         ]
+       },

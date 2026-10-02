@@ -1,0 +1,364 @@
+diff --git a/games/billable_hours/toml_phases/0_systems_spec.toml b/games/billable_hours/toml_phases/0_systems_spec.toml
+index 4185ec2..911c611 100644
+--- a/games/billable_hours/toml_phases/0_systems_spec.toml
++++ b/games/billable_hours/toml_phases/0_systems_spec.toml
+@@ -61,6 +61,9 @@ flagEffects = [
+   { targetType = "player", flag = "drink_today",     op = "unset" },
+   { targetType = "player", flag = "eat_today",       op = "unset" },
+   { targetType = "player", flag = "dinner_today",    op = "unset" },
++  { targetType = "player", flag = "dishes_today",    op = "unset" },
++  { targetType = "player", flag = "whisky_today",    op = "unset" },
++  { targetType = "player", flag = "cook_today",      op = "unset" },
+ ]
+ 
+ [ui.cast_page]
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..3be0106 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -440,6 +440,328 @@ time_progression_minutes = 45
+ flagEffects = [ { targetType = "player", flag = "dinner_today", op = "set" } ]
+ effects = [ { targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 } ]
+ 
++# ── the kitchen · Do the dishes (Mon–Fri 19:00–22:00, Diane at the TV) ───────
++# Diane is in the kitchen 18:00–22:00 on weekdays; Martin reads at the table Mon–Thu and
++# is in his study on Friday, so the bands key on whether he is in the room.
++[[canvases]]
++id   = "act_dishes"
++name = "Do the dishes"
++description = "After dinner, with her mother at the TV. Banded on nerve while Martin reads at the table (Mon–Thu); on Friday his chair is empty. Once a day."
++
++[canvases.trigger]
++location      = "kitchen"
++is_repeatable = true
++priority      = 3
++is_active     = true
++
++[[canvases.trigger.schedules]]
++weekdays   = [0, 1, 2, 3, 4]
++start_time = "19:00"
++end_time   = "22:00"
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "dishes_today", operator = "is_false" },
++]
++
++[canvases.trigger.metadata]
++show_when_blocked = true
++cooldown_message  = "The dishes get done after dinner, seven till ten, Monday to Friday."
++
++[[canvases.nodes]]
++id   = "sink"
++name = "The sink"
++blocks = [
++  { type = "paragraph", content = "Your mother has the little TV on the counter going while you run the water." },
++  { type = "block_pool", blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Leave the roasting pan, sweetheart. It needs to soak." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "You're good to do these. Ethan has never once picked up a plate." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Martin says you're doing well at the firm. He never says that about anyone." },
++  ] },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_dishes_t5", pool = 4, description = "A young woman bent deep over an open dishwasher, hem ridden up over her bare ass, an older man at the table behind her watching", search_queries = ["woman bent over dishwasher ass up man watching kitchen", "girl bending over kitchen skirt up showing ass"] } },
++    { type = "paragraph", content = "You load the dishwasher with your back to the table and bend from the hips for the bottom rack. Your hem rides up over your ass, and you leave it there. Martin's page stops turning. Your cunt is wet, and you know he can see the shape of it. You spread your feet and reach deeper into the rack, ass high, tits swinging loose. Behind you he sets his glass down hard. You stay bent over until your thighs shake and your clit throbs." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }, blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_dishes_t4", pool = 4, description = "A young woman stretching up to a high kitchen shelf, her top pulled tight across her breasts, hard nipples showing", search_queries = ["woman reaching high shelf kitchen nipples showing", "girl stretching up kitchen tight top breasts"] } },
++    { type = "paragraph", content = "You stretch up to put the glasses on the high shelf, and the cloth pulls tight across your tits. Your nipples are hard, and they show. Martin stops turning pages. You put the glasses away one at a time, slow, and arch your back for each one so your tits push out toward the table. Your nipples ache against the cloth." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" } ] }, blocks = [
++    { type = "paragraph", content = "You wash up with your back to the table. Martin reads at the head of it. Twice you turn round and he's looking at you, not at the page, and twice you're the one who looks away first." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "Martin's chair is empty. On Fridays he takes his whisky into the study after dinner and shuts the door. You wash, your mother dries, and you both keep glancing at the hall." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Finish the dishes. (30m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 30
++flagEffects = [ { targetType = "player", flag = "dishes_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
++  { targetType = "player", trait = "nerve",  op = "add", value = 1,  cap = 30 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Take your time at the dishwasher while he watches. (30m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 30
++conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }
++flagEffects = [ { targetType = "player", flag = "dishes_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "energy", op = "add", value = -5, clamp = true },
++  { targetType = "player", trait = "nerve",  op = "add", value = 1,  cap = 60 },
++  { targetType = "npc", npcId = "npc_martin", trait = "martin_want", op = "add", value = 1, cap = 14 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Leave them for your mother."
++targetType = "location"
++locationId = "kitchen"
++
++# ── the kitchen · Martin's whisky (22:00–midnight, the kitchen empty) ─────────
++# Drinking it straight sets took_martin_whisky, which hub_martin_breakfast reads, and gives
++# Martin power; topping the bottle up with water hides it and caps nerve lower.
++[[canvases]]
++id   = "act_whisky"
++name = "Pour a glass of Martin's whisky"
++description = "Late, with the kitchen empty. Drink it straight (nerve to 30, Martin's power +1, he notices) or top the bottle up with water (nerve to 10). Once a day."
++
++[canvases.trigger]
++location      = "kitchen"
++is_repeatable = true
++priority      = 3
++is_active     = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "whisky_today", operator = "is_false" },
++  { type = "time_of_day", start_time = "22:00", end_time = "23:59" },
++  { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_absent" },
++  { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_diane",  operator = "is_absent" },
++]
++
++[[canvases.nodes]]
++id   = "cupboard"
++name = "The cupboard over the fridge"
++blocks = [
++  { type = "paragraph", content = "Martin keeps the good whisky in the cupboard over the fridge, behind the cereal, where your mother can't see how fast it goes. The kitchen is dark except for the light over the stove." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "took_martin_whisky", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "There's a pencil line on the label now, right at the level of the whisky. He's marking the bottle." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "He knows it's me. He wants me to know he knows." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "thought_bubble", props = { speaker = "player" }, content = "He drinks it every night and never offers anyone a glass. One glass. He'll never notice." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "paragraph", content = "You hop up on the counter to drink it, right where he stands for his coffee every morning. Let him find the ring your glass leaves." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "You pour it standing by the fridge, one ear on the stairs." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Drink it straight and put the bottle back. (20m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 20
++flagEffects = [
++  { targetType = "player", flag = "whisky_today",       op = "set" },
++  { targetType = "player", flag = "took_martin_whisky", op = "set" },
++]
++effects = [
++  { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 30 },
++  { targetType = "npc", npcId = "npc_martin", trait = "martin_power", op = "add", value = 1, clamp = true },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Drink it, then top the bottle up with water. (20m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 20
++flagEffects = [ { targetType = "player", flag = "whisky_today", op = "set" } ]
++effects = [ { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 10 } ]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Put the bottle back untouched."
++targetType = "location"
++locationId = "kitchen"
++
++# ── the kitchen · Sit in Martin's chair (22:00–midnight, the kitchen empty) ───
++# Solo heat in the room he owns. Shares touch_today with act_touch and the two bed rungs.
++[[canvases]]
++id   = "act_martin_chair"
++name = "Sit in Martin's chair"
++description = "Late, with the kitchen empty. The chair at the head of the table; at nerve 10+ she touches herself in it (10–29 t4, 30+ t5). Sets martin_chair_used, which hub_martin_breakfast reads."
++
++[canvases.trigger]
++location      = "kitchen"
++is_repeatable = true
++priority      = 3
++is_active     = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
++  { type = "time_of_day", start_time = "22:00", end_time = "23:59" },
++  { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_martin", operator = "is_absent" },
++  { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_diane",  operator = "is_absent" },
++]
++
++[[canvases.nodes]]
++id   = "chair"
++name = "The head of the table"
++blocks = [
++  { type = "paragraph", content = "Martin's chair is pushed in at the head of the table. It's where he reads every morning, and where he waits on Fridays for your envelope. You pull it out and sit in it." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "martin_chair_used", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "The seat is cold. The last time you got up out of it, it was warm and wet." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "The seat is still shaped to him." },
++  ] } },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "This is where he counts my money. Right here." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Touch yourself in his chair."
++targetType = "node"
++nodeId     = "act_martin_chair.act"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "touch_today", operator = "is_false" } ] }
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Push his chair back in."
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 5
++
++[[canvases.nodes]]
++id   = "act"
++name = "His chair"
++blocks = [
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_chair_t5", pool = 4, description = "A young woman in a dark kitchen, one foot up on the table, knees spread in a chair, fingers deep inside herself, coming", search_queries = ["woman masturbating kitchen chair foot on table", "girl fingering herself chair dark kitchen orgasm"] } },
++    { type = "paragraph", content = "You put one foot up on the table, right where his envelope goes, and spread your knees wide in his chair. Two fingers go straight into your cunt. You're soaked. Your thumb grinds your clit while your other hand squeezes your tits. You fuck yourself hard and fast, and the chair creaks under your ass. You come with your heel braced on his place at the table, your cunt clenching on your fingers and soaking his seat." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_chair_t4", pool = 4, description = "A young woman slouched low in a kitchen chair at night, hand down the front of her clothes, biting her lip", search_queries = ["woman touching herself kitchen chair night", "girl hand down front chair biting lip quiet"] } },
++    { type = "paragraph", content = "You sit low in his chair and slide your hand down to your cunt. Your clit is already swollen. You rub it in small, tight circles, knees pressed together, then let them fall open. Your nipples are hard. You pinch one and bite your lip so you don't moan. Your hips lift off his seat into your hand, and your clit throbs under your fingers until you come in quick, hard pulses." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Push his chair back in. (30m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 30
++flagEffects = [
++  { targetType = "player", flag = "touch_today",       op = "set" },
++  { targetType = "player", flag = "martin_chair_used", op = "set" },
++]
++effects = [ { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 60 } ]
++
++# ── the kitchen · Cook breakfast (Sat–Sun 09:00–11:00, Martin and Diane home) ─
++[[canvases]]
++id   = "act_cook"
++name = "Cook breakfast"
++description = "Weekend mornings, with Martin and Diane at the table. Banded on the sleep shirt and nerve: 10–29 t4, 30+ t5. Once a day."
++
++[canvases.trigger]
++location      = "kitchen"
++is_repeatable = true
++priority      = 3
++is_active     = true
++
++[[canvases.trigger.schedules]]
++weekdays   = [5, 6]
++start_time = "09:00"
++end_time   = "11:00"
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
++  { type = "flag", subject = "player", flag_key = "cook_today",   operator = "is_false" },
++]
++
++[canvases.trigger.metadata]
++show_when_blocked = true
++cooldown_message  = "You cook on weekend mornings, nine till eleven."
++
++[[canvases.nodes]]
++id   = "stove"
++name = "The stove"
++blocks = [
++  { type = "paragraph", content = "It's the weekend, so Martin and your mother are home all day. You get the eggs out and the pan on." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_cook_t5", pool = 4, description = "A young woman cooking in only an oversized sleep shirt, bending to a low cupboard, the hem up over her ass, a man at the table watching", search_queries = ["woman bending kitchen cupboard sleep shirt ass showing", "girl oversized shirt cooking bending over man watching"] } },
++    { type = "paragraph", content = "You cook in the sleep shirt. Every time you reach for the top shelf the hem rides up over your ass, and you reach for the top shelf a lot. Martin lowers his paper. Your nipples push hard through the thin cotton, and your tits swing loose when you turn the eggs. You bend to the low cupboard for a plate and stay bent, ass to the table, your cunt on show to him for one long, slow breath." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }, blocks = [
++    { type = "video", props = { pool_dir = "sex/kitchen_cook_t4", pool = 4, description = "A young woman at a stove in an oversized sleep shirt, braless, nipples showing through the cotton", search_queries = ["woman cooking braless sleep shirt nipples", "girl at stove oversized t-shirt morning braless"] } },
++    { type = "paragraph", content = "You cook in the sleep shirt. Your tits are loose under it, and your nipples show through the cotton. Martin watches you over the top of his paper. You turn the eggs with your back straight and your chest out, and you let him look at your tits as long as he likes." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "Your mother hovers and tells you how she'd do it. Martin reads at the head of the table and doesn't look up until the plate is in front of him." },
++  ] } },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_diane" }, content = "Look at you, sweetheart. Martin, isn't she lovely?" },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Eggs soft, Emma. Your mother does them hard." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Serve up and eat with them. (45m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 45
++flagEffects = [ { targetType = "player", flag = "cook_today", op = "set" } ]
++effects = [ { targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 } ]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Serve his plate last, and lean over him to do it. (45m)"
++targetType = "location"
++locationId = "kitchen"
++time_progression_minutes = 45
++conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 } ] }
++flagEffects = [ { targetType = "player", flag = "cook_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 },
++  { targetType = "player", trait = "nerve",  op = "add", value = 1,  cap = 60 },
++  { targetType = "npc", npcId = "npc_martin", trait = "martin_want", op = "add", value = 1, cap = 14 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Leave the pan to your mother."
++targetType = "location"
++locationId = "kitchen"
++
+ # ── Callahan Reed · Work a shift + the walk-in (B10) ─────────────────────────
+ [[canvases]]
+ id   = "act_work_shift"
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..937a828 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -65,6 +65,12 @@ blocks = [
+   { type = "group", props = { blocks = [
+     { type = "paragraph", content = "He turns back to his reading." },
+   ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "took_martin_whisky", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "My whisky goes down faster than I drink it, Emma. I've started marking the bottle." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "martin_chair_used", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "He runs his palm over the seat of his chair before he sits in it. Then he looks at you down the table and says nothing at all." },
++  ] } },
+   { type = "paragraph", content = "He finishes his coffee." },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_martin", trait_key = "martin_want", operator = "gte", value = 10 } ] }, blocks = [
+     { type = "paragraph", content = "His hand rests on the back of your chair, and then on your shoulder, and stays there while he reads. He doesn't bother hiding it from the room any more." },

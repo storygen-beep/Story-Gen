@@ -1,0 +1,192 @@
+{
+ "case": "10_work_late",
+ "skill": "author-game-v2",
+ "passed": true,
+ "fails": [],
+ "cost_usd": 0.8618081999999999,
+ "turns": 23,
+ "subtype": "success",
+ "wall_s": 111.2,
+ "ran_gates": false,
+ "skills_called": [],
+ "permission_denials": [
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01BxrYDePA1KjBAMTkRtoUrj",
+   "tool_input": {
+    "command": "cd toml_phases && python3 - <<'E'\nimport tomllib\nd=tomllib.load(open('7_final_game.toml','rb'))\nfor l in d.get('locations',[]):\n    if l.get('id')=='firm': print({k:v for k,v in l.items() if k not in('description',)})\nprint(d.get('engine',{}).get('daily_tick'))\nfor t in d.get('traits',{}).get('labels',[]): print(t)\nE\ngrep -n \"late\\|overtime\\|stayed\" *.toml | grep -v 7_final | head -30",
+    "description": "Inspect firm location, traits, late refs"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_0138hU6bA3Lkx1gc6cyj2FsR",
+   "tool_input": {
+    "command": "ls ../../.venv/bin/python 2>/dev/null; for p in python3.13 python3.12 python3.11; do command -v $p; done; python3 -c \"import tomli; print('tomli ok')\"",
+    "description": "Find a Python with a TOML parser"
+   }
+  },
+  {
+   "tool_name": "Bash",
+   "tool_use_id": "toolu_01X5FTKFiLaz91ajhy1itiUQ",
+   "tool_input": {
+    "command": "python3 - <<'E'\nimport json\np='v2_state.json'\nd=json.load(open(p))\nd['decisions'].append({\n \"date\": \"2026-10-02\",\n \"by\": \"LO\",\n \"what\": \"act_work_shift gets 'Work late'\",\n \"detail\": \"Two choices on act_work_shift.shift (review_passed false/true) route to the new node act_work_shift.late: 6h total, the same day rate ($70 / $100), energy -40 instead of -30, office_talk +1. It does not set stayed_late, because callahan_review.work reads that flag as Callahan having asked her to stay. The latest start is 13:00, so 13:00 + 6h = 19:00, the firm's earliest close.\",\n \"replaces_heat\": \"nothing removed; no explicit beat added\"\n})\njson.dump(d,open(p,'w'),indent=2,ensure_ascii=False)\nopen(p,'a').write('\\n')\nE",
+    "description": "Append work-late decision to the ledger"
+   }
+  }
+ ],
+ "changed_files": [
+  " M games/billable_hours/toml_phases/3_activities.toml",
+  " M games/billable_hours/v2_state.json"
+ ],
+ "init": {
+  "model": "claude-opus-5-5",
+  "skills": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring"
+  ],
+  "agents": [
+   "claude",
+   "Explore",
+   "general-purpose",
+   "Plan",
+   "statusline-setup",
+   "v2-attack",
+   "v2-listener",
+   "v2-pitcher",
+   "v2-player",
+   "v2-prose",
+   "v2-reader"
+  ],
+  "plugins": [
+   {
+    "name": "cc-plugin-agents-md",
+    "path": "builtin",
+    "source": "cc-plugin-agents-md@builtin"
+   },
+   {
+    "name": "cc-plugin-telemetry",
+    "path": "builtin",
+    "source": "cc-plugin-telemetry@builtin"
+   },
+   {
+    "name": "cc-plugin-plugin-authoring",
+    "path": "builtin",
+    "source": "cc-plugin-plugin-authoring@builtin"
+   }
+  ],
+  "tools": [
+   "Task",
+   "Bash",
+   "CronCreate",
+   "CronDelete",
+   "CronList",
+   "DesignSync",
+   "Edit",
+   "EnterWorktree",
+   "ExitWorktree",
+   "Glob",
+   "Grep",
+   "ListAgents",
+   "Monitor",
+   "NotebookEdit",
+   "PushNotification",
+   "Read",
+   "RemoteTrigger",
+   "ReportFindings",
+   "ScheduleWakeup",
+   "SendMessage",
+   "Skill",
+   "TaskCreate",
+   "TaskGet",
+   "TaskList",
+   "TaskStop",
+   "TaskUpdate",
+   "ToolSearch",
+   "WebFetch",
+   "WebSearch",
+   "Workflow",
+   "Write"
+  ],
+  "slash_commands": [
+   "author-game-v2",
+   "deep-research",
+   "design",
+   "design-sync",
+   "dataviz",
+   "update-config",
+   "verify",
+   "debug",
+   "code-review",
+   "simplify",
+   "batch",
+   "fewer-permission-prompts",
+   "doctor",
+   "loop",
+   "schedule",
+   "claude-api",
+   "workflow-authoring",
+   "run",
+   "run-skill-generator",
+   "plugin-authoring",
+   "advisor",
+   "agents",
+   "auto-mode-setup",
+   "autocompact",
+   "clear",
+   "color",
+   "compact",
+   "config",
+   "output-style",
+   "context",
+   "effort",
+   "fast",
+   "focus",
+   "heapdump",
+   "init",
+   "mcp",
+   "import",
+   "model",
+   "__remote-workflow",
+   "workflow-launch-exec",
+   "reload-plugins",
+   "reload-skills",
+   "rename",
+   "ultrareview",
+   "security-review",
+   "usage-credits",
+   "extra-usage",
+   "usage",
+   "insights",
+   "recap",
+   "skill-doctor",
+   "goal",
+   "design-consent",
+   "design-revoke",
+   "list-agents",
+   "team-onboarding"
+  ],
+  "cwd": "/private/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_10_work_late_jqdmvjql/w",
+  "permissionMode": "acceptEdits"
+ },
+ "staging": "/var/folders/1p/h2jh07m92ws5zhn6_v0k1ylm0000gn/T/exam_10_work_late_jqdmvjql/w",
+ "regraded": true
+}

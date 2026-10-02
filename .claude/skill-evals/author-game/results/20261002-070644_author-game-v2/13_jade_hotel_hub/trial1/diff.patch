@@ -1,0 +1,246 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..7b0c5de 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -294,6 +294,14 @@ start_time = "21:00"
+ end_time = "23:59"
+ activity = "Dancing"
+ 
++# Before her shift, on the nights Theo isn't at his table (Tue-Thu are his).
++[[npcs.schedules]]
++location = "hotel_bar"
++weekdays = [0, 4, 5]
++start_time = "18:00"
++end_time = "21:00"
++activity = "A tequila before her shift"
++
+ [[npcs]]
+ id           = "npc_callahan"
+ name         = "Callahan"
+diff --git a/games/billable_hours/toml_phases/4_story_arc.toml b/games/billable_hours/toml_phases/4_story_arc.toml
+index 16a25e1..30d7f2f 100644
+--- a/games/billable_hours/toml_phases/4_story_arc.toml
++++ b/games/billable_hours/toml_phases/4_story_arc.toml
+@@ -1449,7 +1449,7 @@ goals = [ { trait = "jade_stage", subject = "player", op = "gte", value = 1, lab
+ [[quest_cards]]
+ npc_id        = "npc_jade"
+ text          = "\"Come Saturday. I'll get you on the stage.\""
+-tip           = "She dances Monday to Saturday, from nine."
++tip           = "She dances Monday to Saturday, from nine. Before that, Monday, Friday and Saturday 6 to 9, she drinks at the hotel bar."
+ priority      = 5
+ when          = [ { flag = "met_jade", op = "is_true" } ]
+ terminal      = true
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..2604309 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -586,6 +586,163 @@ destinationType          = "specific"
+ locationId               = "club"
+ time_progression_minutes = 20
+ 
++# ── Jade at the hotel bar (Mon, Fri, Sat before her shift) ───────────────────
++# The companion off the clock: she reads the men at the bar for Emma. At nerve
++# 30+ she picks one, and the act shares drink_today with act_drink / walkin_bar,
++# so the bar gives one man a day whichever way she gets to him.
++[[canvases]]
++id   = "hub_jade_bar"
++name = "Jade at the bar"
++description = "Jade's hub at the hotel bar before her shift. Reads the stage answer, Theo's hour and Martin's Fridays; at nerve 30+ she picks a man for Emma."
++
++[canvases.trigger]
++location      = "hotel_bar"
++npc           = "npc_jade"
++requires_npc  = "npc_jade"
++is_repeatable = true
++priority      = 6
++is_active     = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [ { type = "flag", subject = "player", flag_key = "met_jade", operator = "is_true" } ]
++
++[[canvases.nodes]]
++id   = "stool"
++name = "Jade at the bar"
++blocks = [
++  { type = "paragraph", content = "Jade is at the end of the long bar with a tequila, a coat thrown over her stage clothes and her gym bag at her feet. She pats the stool next to her." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Look at you. Every suit in here turned round when you walked in, and you let them look. Good girl." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Em! Sit. I'm on at nine, and I'm not drinking alone with these suits." },
++  ] } },
++  { type = "paragraph", content = "She orders you what she's having and slaps the barman's hand away when he gives you the bill." },
++  { type = "block_pool", blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Two years I sat in that firm while Callahan looked at my legs and pretended he wasn't. Now men pay to look, and I make more on a Saturday than he paid me in a week." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Grey suit in the corner booth? Partner at another firm. He comes to the club and tips in fifties. Pretend you don't know that when he's across a table from you." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Dad still takes the envelope every Friday? God. He did it to me too, right up until I stopped paying him." },
++  ] },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jade_saturday_yes", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "You said Saturday. The manager wants to see your tits before he puts you on, so wear something that comes off fast." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jade_saturday_no", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "You said no to the stage. Fine. Sitting at this bar in that skirt is the same job, Em. It just pays worse." },
++  ] } },
++  { type = "paragraph", content = "She licks the salt off her hand and watches the room over the rim of her glass." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "theo_hour_paid", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Theo bought an hour of you, didn't he? Don't make that face. He tried it with me at that same table. I said three hundred and he paid it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 2 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Your mother rang me. She says you and Dad sit up late in his study on Fridays now, and she thinks it's sweet. Is it sweet, Em?" },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "She bumps her knee against yours under the bar." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Have a drink with her. (30m)"
++targetType = "location"
++locationId = "hotel_bar"
++time_progression_minutes = 30
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Let her pick a man for you."
++targetType = "node"
++nodeId     = "hub_jade_bar.pick"
++conditions = { version = "1.0", logic = "AND", items = [
++  { type = "trait", subject = "player", trait_key = "nerve",      operator = "gte",      value = 30 },
++  { type = "flag",  subject = "player", flag_key  = "drink_today", operator = "is_false" },
++] }
++
++[[canvases.nodes]]
++id   = "pick"
++name = "Her pick"
++blocks = [
++  { type = "paragraph", content = "Jade turns on her stool and looks the bar over like a menu. Then she points with her glass." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Him. Navy suit, wedding ring, been staring at your legs since you sat down. He won't say a word. Go sit next to him, open your knees, and let him find out how wet you are." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "She's picking a man for me like a drink off the shelf. And she's right, I'm already wet." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Go and sit next to him."
++targetType = "node"
++nodeId     = "hub_jade_bar.act"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Tell her not tonight."
++targetType = "node"
++nodeId     = "hub_jade_bar.no"
++
++[[canvases.nodes]]
++id   = "act"
++name = "Under the bar"
++blocks = [
++  { type = "video", props = { pool_dir = "sex/hotel_bar_under_t5", pool = 4, description = "At a hotel bar a man's hand is under a woman's skirt, fingering her while she holds her drink", search_queries = ["man fingering woman under bar counter", "hand under skirt bar public discreet"] } },
++  { type = "paragraph", content = "You take the stool next to him. He doesn't look at you. His hand goes under the bar, up your thigh, under your skirt, and finds your panties soaked through." },
++  { type = "paragraph", content = "He hooks them aside and pushes two fingers into your cunt. Down the bar, Jade lifts her tequila to you. You grip the edge of the bar and ride his hand, your clit grinding on the heel of his palm, your nipples hard against your blouse." },
++  { type = "dialog", props = { speaker = "unknown" }, content = "Quiet." },
++  { type = "paragraph", content = "He curls his fingers and fucks you with them, slow, while the barman pours three feet away. You come on his hand with your mouth shut and your thighs clamped around his wrist. He pulls his fingers out of you, wipes them on your thigh, and leaves cash for both drinks." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Get your breath back."
++targetType = "node"
++nodeId     = "hub_jade_bar.after"
++
++[[canvases.nodes]]
++id   = "after"
++name = "Jade"
++blocks = [
++  { type = "paragraph", content = "He's gone before your legs stop shaking. Jade slides onto his stool, still warm, and clinks her glass against yours." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "See? You pick, they pay. Half this bar works across the road, Em. They'll be talking about you by lunch." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "Let them talk. I liked it more than I liked anything at the firm today." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Kiss her cheek and go."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "downtown"
++time_progression_minutes = 30
++flagEffects = [ { targetType = "player", flag = "drink_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "nerve",       op = "add", value = 1, cap = 60 },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1, clamp = true },
++]
++
++[[canvases.nodes]]
++id   = "no"
++name = "Not tonight"
++blocks = [
++  { type = "dialog", props = { speaker = "player" }, content = "Not tonight, Jade. I just want the drink." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_jade" }, content = "Fine. He'll be back. They always come back." },
++  { type = "paragraph", content = "She shrugs and orders you another, and the navy suit pays for it from across the bar without looking up." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Finish your drink."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "hotel_bar"
++time_progression_minutes = 20
++
+ # ── Martin at the firm ───────────────────────────────────────────────────────
+ [[canvases]]
+ id   = "hub_martin_firm"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..1dae6bf 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1150,6 +1150,16 @@
+             ],
+             "from": "21:00",
+             "to": "23:59"
++          },
++          {
++            "where": "hotel_bar",
++            "weekdays": [
++              "Mon",
++              "Fri",
++              "Sat"
++            ],
++            "from": "18:00",
++            "to": "21:00"
+           }
+         ]
+       },
+@@ -1644,7 +1654,8 @@
+             "Theo's hour"
+           ],
+           "people": [
+-            "npc_theo"
++            "npc_theo",
++            "npc_jade"
+           ]
+         }
+       },
+@@ -1857,6 +1868,14 @@
+       "what": "G6 house + week 12, G5 ledger split, G3 option C",
+       "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+       "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
++    },
++    {
++      "date": "2026-10-02",
++      "by": "LO",
++      "what": "Jade gets a second hub at the hotel bar",
++      "detail": "New schedule row: Jade at hotel_bar Mon, Fri, Sat 18:00-21:00, before her shift at the club (Tue-Thu stay Theo's). New canvas hub_jade_bar (5_scenes.toml), gated on met_jade: her lines colour by jade_saturday_yes/no, theo_hour_paid and martin_stage 2+. At nerve 30+, with drink_today unspent, 'Let her pick a man for you' leads to an explicit act under the bar (reuses the sex/hotel_bar_under_t5 pool), with a written no ('Tell her not tonight'). The act sets drink_today and adds nerve +1 (cap 60) and office_talk +1, the same as walkin_bar.act. Jade's terminal quest card tip now names the hotel bar window.",
++      "replaces_heat": "nothing removed; one explicit repeatable node added at the hotel bar",
++      "verified": "Not built, gated or merged, per the request. The local Python is 3.10 with neither tomllib nor tomli, so gates.py cannot run here and the TOML parse is unverified."
+     }
+   ]
+ }

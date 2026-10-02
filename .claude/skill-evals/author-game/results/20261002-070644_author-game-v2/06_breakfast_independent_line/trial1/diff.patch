@@ -1,0 +1,18 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..aac433d 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -66,6 +66,13 @@ blocks = [
+     { type = "paragraph", content = "He turns back to his reading." },
+   ] } },
+   { type = "paragraph", content = "He finishes his coffee." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "kitchen", npc_id = "npc_diane", operator = "is_present" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Eat something, Emma. Your mother worries." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Your mother's not down yet. Sit closer, Emma." },
++  ] } },
++  { type = "paragraph", content = "He sets the cup down." },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_martin", trait_key = "martin_want", operator = "gte", value = 10 } ] }, blocks = [
+     { type = "paragraph", content = "His hand rests on the back of your chair, and then on your shoulder, and stays there while he reads. He doesn't bother hiding it from the room any more." },
+   ] } },

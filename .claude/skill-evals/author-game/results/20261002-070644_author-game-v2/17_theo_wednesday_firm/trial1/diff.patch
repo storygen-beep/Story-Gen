@@ -1,0 +1,50 @@
+diff --git a/games/billable_hours/toml_phases/1_metadata_and_locations.toml b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+index f1d975b..1e25a81 100644
+--- a/games/billable_hours/toml_phases/1_metadata_and_locations.toml
++++ b/games/billable_hours/toml_phases/1_metadata_and_locations.toml
+@@ -326,6 +326,13 @@ start_time = "10:00"
+ end_time = "12:00"
+ activity = "Meeting with Callahan"
+ 
++[[npcs.schedules]]
++location = "firm"
++weekdays = [2]
++start_time = "14:00"
++end_time = "19:00"
++activity = "Working out of the conference room"
++
+ [[npcs.schedules]]
+ location = "hotel_bar"
+ weekdays = [1, 2, 3]
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..21c6834 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -383,7 +383,7 @@ targetType = "location"
+ locationId = "firm"
+ time_progression_minutes = 5
+ 
+-# ── Theo at the firm (Mon, Wed) — the leak ───────────────────────────────────
++# ── Theo at the firm (Mon/Wed mornings, Wed afternoon) — the leak────────────────────────────
+ [[canvases]]
+ id   = "hub_theo_firm"
+ name = "Theo in the corridor"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..734977e 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1100,6 +1100,14 @@
+             "from": "10:00",
+             "to": "12:00"
+           },
++          {
++            "where": "firm",
++            "weekdays": [
++              "Wed"
++            ],
++            "from": "14:00",
++            "to": "19:00"
++          },
+           {
+             "where": "hotel_bar",
+             "weekdays": [

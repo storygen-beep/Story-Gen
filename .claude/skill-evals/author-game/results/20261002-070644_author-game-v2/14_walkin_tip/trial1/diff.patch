@@ -1,0 +1,175 @@
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..035e14b 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -456,6 +456,9 @@ substitutions = [
+     { type = "trait", subject = "player", trait_key = "nerve", operator = "lt", value = 30 } ] } },
+   { target_canvas_id = "walkin_firm", chance = 0.40, conditions = { version = "1.0", logic = "AND", items = [
+     { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] } },
++  # The client at reception who tips her $20. Any nerve; the nerve bands colour how he hands it over.
++  { target_canvas_id = "walkin_firm_tip", chance = 0.20, conditions = { version = "1.0", logic = "AND", items = [
++    { type = "flag", subject = "player", flag_key = "worked_today", operator = "is_false" } ] } },
+ ]
+ 
+ [[canvases.trigger.schedules]]
+@@ -775,6 +778,142 @@ effects = [
+   { targetType = "player", trait = "nerve",       op = "add", value = 1,   cap = 60 },
+ ]
+ 
++# ── Callahan Reed · the client who tips (walk-in on the shift) ──────────────
++# A client waiting for a partner gets coffee from the intern and tips her $20. Repeatable:
++# the client is a block_pool (a die), how he hands the bill over is banded on nerve (state).
++# She can keep it or hand it back; both pay the shift, both close worked_today, so the
++# twenty is capped at one a day like the shift it rides on.
++[[canvases]]
++id   = "walkin_firm_tip"
++name = "A client at reception"
++description = "Walk-in on the shift: a client waiting on a partner tips her $20. Nerve 0–9 a folded bill; 10–29 into her hand, held; 30+ tucked into the neckline of her top. Keep it (+$20) or hand it back."
++
++[canvases.trigger]
++location          = "firm"
++is_repeatable     = true
++substitution_only = true
++priority          = 2
++is_active         = true
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [ { type = "flag", subject = "player", flag_key = "worked_today", operator = "is_false" } ]
++
++[[canvases.nodes]]
++id   = "reception"
++name = "Reception"
++blocks = [
++  { type = "block_pool", blocks = [
++    { type = "paragraph", content = "A man in a grey suit is waiting at reception for his partner meeting, checking his watch. Reception sends you over with a coffee for him. He takes the cup and takes a good long look at you over the top of it." },
++    { type = "paragraph", content = "A client with a silver watch and a tan from somewhere expensive is kept waiting by a partner. You're the one who gets told to keep him happy. You bring him water, then coffee, then walk him to the glass office when it's finally free." },
++    { type = "paragraph", content = "A heavy man in a pinstripe suit is pacing the lobby because his partner is late. You bring him a coffee and the papers he asked for. He stops pacing and watches you bend to put them on the table." },
++  ] },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 30 } ] }, blocks = [
++    { type = "paragraph", content = "He doesn't hold the twenty out. He hooks one finger in the neckline of your top, pulls it out an inch, and tucks the folded bill down inside. His knuckles drag over the top of your tits on the way in. You don't step back. You let him take his time." },
++    { type = "dialog", props = { speaker = "unknown" }, content = "For the coffee. And the view. Tell them I asked for you next time." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty dollars to put his hand down my top in the lobby. He'd have paid fifty." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "nerve", operator = "lt", value = 30 } ] }, blocks = [
++    { type = "paragraph", content = "He presses a folded twenty into your palm and closes your fingers over it with his own hand. Then he keeps holding on. His thumb rubs slow circles on your wrist while his eyes go down your body and back up." },
++    { type = "dialog", props = { speaker = "unknown" }, content = "Good girl. You're wasted on the copy room." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "Good girl. He paid twenty dollars to say that to me, and I liked it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "lt", value = 10 } ] }, blocks = [
++    { type = "paragraph", content = "On his way past he folds a twenty-dollar bill in half and holds it out to you between two fingers, like you're the girl who parks his car." },
++    { type = "dialog", props = { speaker = "unknown" }, content = "For you, sweetheart. Don't tell the partners." },
++    { type = "thought_bubble", props = { speaker = "player" }, content = "I'm a law intern. He's tipping me like a waitress. Twenty dollars is twenty dollars." },
++  ] } },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Keep the twenty and finish the shift. (4h, $90)"
++targetType = "node"
++nodeId     = "walkin_firm_tip.kept"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_false" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",       op = "add", value = 90,  clamp = false },
++  { targetType = "player", trait = "energy",      op = "add", value = -30, clamp = true },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++  { targetType = "player", trait = "nerve",       op = "add", value = 1,   cap = 60 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Keep the twenty and finish the shift. (4h, $120)"
++targetType = "node"
++nodeId     = "walkin_firm_tip.kept"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_true" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",       op = "add", value = 120, clamp = false },
++  { targetType = "player", trait = "energy",      op = "add", value = -30, clamp = true },
++  { targetType = "player", trait = "office_talk", op = "add", value = 1,   clamp = true },
++  { targetType = "player", trait = "nerve",       op = "add", value = 1,   cap = 60 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Hand it back and finish the shift. (4h, $70)"
++targetType = "node"
++nodeId     = "walkin_firm_tip.returned"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_false" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",  op = "add", value = 70,  clamp = false },
++  { targetType = "player", trait = "energy", op = "add", value = -30, clamp = true },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Hand it back and finish the shift. (4h, $100)"
++targetType = "node"
++nodeId     = "walkin_firm_tip.returned"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "review_passed", operator = "is_true" } ] }
++flagEffects = [ { targetType = "player", flag = "worked_today", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "money",  op = "add", value = 100, clamp = false },
++  { targetType = "player", trait = "energy", op = "add", value = -30, clamp = true },
++]
++
++[[canvases.nodes]]
++id   = "kept"
++name = "Twenty dollars"
++blocks = [
++  { type = "paragraph", content = "You keep it. You walk back across the floor with his twenty on you, and you can feel exactly where it is the whole way." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Did a client just tip you? Christ. Is that what you're here for?" },
++  { type = "dialog", props = { speaker = "player" }, content = "It's twenty more than you got today." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Get back to your desk."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "firm"
++time_progression_minutes = 240
++
++[[canvases.nodes]]
++id   = "returned"
++name = "Not for sale"
++blocks = [
++  { type = "paragraph", content = "You put the twenty back in his breast pocket and pat it flat. Your face is burning, but your voice comes out steady." },
++  { type = "dialog", props = { speaker = "player" }, content = "The firm pays me, sir. Your meeting's ready." },
++  { type = "dialog", props = { speaker = "unknown" }, content = "Suit yourself, sweetheart. Plenty of girls downstairs would've kept it." },
++  { type = "paragraph", content = "He winks and goes in. You stand there a second longer than you should, thinking about what you'd have let him do for it." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Get back to your desk."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "firm"
++time_progression_minutes = 240
++
+ # ── the hotel bar · Have a drink + the walk-in (B11) ─────────────────────────
+ [[canvases]]
+ id   = "act_drink"
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..f82af52 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -1857,6 +1857,13 @@
+       "what": "G6 house + week 12, G5 ledger split, G3 option C",
+       "detail": "house becomes the front hall 'Home' (thoroughfare); new kitchen, bathroom, ethan_room, parents_room; landing renamed 'Upstairs' (thoroughfare); all old ids kept. Week-12 review built as callahan_review (days_since_flag firm_day1_done >= 77); passes on office_talk 30+ / theo_stage 1+ / martin_stage 2+ (turned_down colours the line, never locks); fail = 14-day probation. G3: Callahan's 'stay late' gets its yes (+$50, 8h) and the shift pays $100 after review_passed.",
+       "replaces_heat": "nothing removed; two solo beds added (ethan_room_out, parents_room_out)"
++    },
++    {
++      "date": "2026-10-02",
++      "by": "LO",
++      "what": "Walk-in: a client tips Emma $20 at the firm",
++      "detail": "New substitution_only canvas walkin_firm_tip (3_activities.toml), added as a third substitution on act_work_shift at chance 0.20 with no nerve gate. The client is a block_pool of three men. How he hands over the bill is banded on nerve: 0-9 he holds it out, 10-29 he presses it into her hand, 30+ he tucks it into her top. Keeping it pays the shift plus $20 with office_talk +1 and nerve +1, and Ethan calls it out. Handing it back pays the shift only. Both set worked_today, so the tip is capped at one a day. Not built or gated in this session.",
++      "replaces_heat": "nothing removed; no clip added (fewer than 3 explicit words, no media touched)"
+     }
+   ]
+ }

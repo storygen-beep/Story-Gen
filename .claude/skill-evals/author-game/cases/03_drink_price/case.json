@@ -1,0 +1,7 @@
+{
+  "id": "03_drink_price",
+  "source": "CHANGELOG.md:16045 (op=subtract is dead: 105 effects never applied, all gates green)",
+  "rule": "engine.md \u00a721b live ops",
+  "task": "Make a drink at the hotel bar (act_drink) cost $15 and drain 10 energy.",
+  "target_lints": []
+}

@@ -1,0 +1,368 @@
+{
+  "version": 1,
+  "rev": 1802,
+  "savedAt": "2026-10-02T02:16:44.969Z",
+  "id": "project-1jomhhr",
+  "name": "story_gen_django",
+  "color": "#0a84ff",
+  "viewport": {
+    "x": -4876.024565038694,
+    "y": -510.244163715775,
+    "zoom": 1
+  },
+  "nodes": [
+    {
+      "id": "group-mufoizfh-bd27fd62",
+      "kind": "group",
+      "position": {
+        "x": 4956.024565038694,
+        "y": 4738.993346072029
+      },
+      "size": {
+        "width": 1193,
+        "height": 1324
+      },
+      "title": "Hyperframe",
+      "titleAuto": true,
+      "color": "#0a84ff",
+      "group": null,
+      "collapsed": false
+    },
+    {
+      "id": "term-mucq036b-ecb2a8c1",
+      "kind": "terminal",
+      "position": {
+        "x": 7082.711015441971,
+        "y": 2916.803452997104
+      },
+      "size": {
+        "width": 640,
+        "height": 440
+      },
+      "title": "Terminal 14",
+      "titleAuto": true,
+      "color": "#ff9f0a",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": "."
+    },
+    {
+      "id": "term-mucudxte-0870ab08",
+      "kind": "terminal",
+      "position": {
+        "x": 7471.332166401366,
+        "y": 590.244163715775
+      },
+      "size": {
+        "width": 291,
+        "height": 256
+      },
+      "title": "Mopoga games Patreon analysis",
+      "titleAuto": true,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "4ece9fa4-5236-4e58-bb41-3e2578d1bc52"
+    },
+    {
+      "id": "term-muds1dd3-24ae2fc9",
+      "kind": "terminal",
+      "position": {
+        "x": 9199.772758872106,
+        "y": 1576.5486739114206
+      },
+      "size": {
+        "width": 1515,
+        "height": 1271
+      },
+      "title": "main",
+      "titleAuto": false,
+      "color": "#bf5af2",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "32fa6567-7be9-4944-a867-1e9bb2a94e1c",
+      "premaxRect": {
+        "x": 9460.514804381348,
+        "y": 1880.5493591632626,
+        "width": 938,
+        "height": 725
+      }
+    },
+    {
+      "id": "term-mue5re3h-3cfcb364",
+      "kind": "terminal",
+      "position": {
+        "x": 31.663167539341885,
+        "y": 62
+      },
+      "size": {
+        "width": 1009,
+        "height": 586
+      },
+      "title": "Ghaghra Gali Reel Preview",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "parentId": "group-mufoizfh-bd27fd62",
+      "cwd": ".",
+      "agentId": "claude",
+      "premaxRect": {
+        "x": 7913.010244486162,
+        "y": 3590.1586125392973,
+        "width": 640,
+        "height": 440
+      }
+    },
+    {
+      "id": "term-mufiur2o-9c49f656",
+      "kind": "terminal",
+      "position": {
+        "x": 28,
+        "y": 712.0182394539816
+      },
+      "size": {
+        "width": 1137,
+        "height": 584
+      },
+      "title": "Shubhadra enterprises Instagram reel ideas",
+      "titleAuto": true,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "parentId": "group-mufoizfh-bd27fd62",
+      "cwd": ".",
+      "agentId": "claude"
+    },
+    {
+      "id": "term-mun2iktn-1928a92b",
+      "kind": "terminal",
+      "position": {
+        "x": 7513.776198486894,
+        "y": 604.4294284537978
+      },
+      "size": {
+        "width": 640,
+        "height": 440
+      },
+      "title": "Claude Code",
+      "titleAuto": true,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "b504c72e-38a2-4a51-8eb2-5ac1d5c3058f"
+    },
+    {
+      "id": "sticky-mun3k545-44d0040a",
+      "kind": "sticky",
+      "position": {
+        "x": 8518.511539769832,
+        "y": 3458.8457113890026
+      },
+      "size": {
+        "width": 658,
+        "height": 328
+      },
+      "title": "Note",
+      "titleAuto": true,
+      "color": "#ffd60a",
+      "group": null,
+      "collapsed": false,
+      "text": "Change Cloths\n\nPhone\n\nSystems / Streaming / Working job / college systems / watching tv and more. designing more systems\n\nExhibitionism, like how much to be shown and corruption.\n\n\nMattpecock skills, analyze and see if there is something or some skill we can use alongside our author game v2 skill or if there is something we can take inspirations from the skills and adopt our author game skill to it.\n\n\nRight now, the ideas it gives only points to one thing. When we say we want a step family kind of game, iot gives ideas for only step family. How top games does it?? Is there a more proper woprld around her??\n\nTo the skill I also want to add, \nSo there are things our skill knows well, but when we actually build the game, there can come a lot of things we dont know much or could have vague / naive details. For those stuffs, it can go ahead on building it which might be come to  vague / naive results. "
+    },
+    {
+      "id": "sticky-mun5q0jg-5223597a",
+      "kind": "sticky",
+      "position": {
+        "x": 7776.902900231755,
+        "y": 2874.002432523828
+      },
+      "size": {
+        "width": 240,
+        "height": 200
+      },
+      "title": "Note",
+      "titleAuto": true,
+      "color": "#ffd60a",
+      "group": null,
+      "collapsed": false,
+      "text": ""
+    },
+    {
+      "id": "sticky-mun5q6ur-9f8a4214",
+      "kind": "sticky",
+      "position": {
+        "x": 8520.706563737902,
+        "y": 3857.6184249253392
+      },
+      "size": {
+        "width": 658,
+        "height": 328
+      },
+      "title": "Media Finder",
+      "titleAuto": true,
+      "color": "#ffd60a",
+      "group": null,
+      "collapsed": false,
+      "text": "Media blocks have a type of media folder where we show the media one by one from the medias inside that folder.\nI think the rule for it is, adult medias in the repeatable canvases must have medias as media folders not one file but multiple juggling one by one in the game.\nI think a lot of wrong medias is being marked as media folder, like in each sex loop, cum is done at the end, then he sees cum only when he triggers the sex loop again, so it doesnt have that much of the value. Cum can remain single media while other medias like blowjob and anal can have media folders in the sex loop.\n\n\nWe also want to confirm if we are also having wrong medias as media folder in the vesper or not. Analyze the bastien kidnap arc.\n\nWhy multiple searches cant happen parallely like multiple related or pornhub related searches.\n"
+    },
+    {
+      "id": "term-muoet7c7-75caec24",
+      "kind": "terminal",
+      "position": {
+        "x": 7994.7101377995805,
+        "y": 676.3144699931509
+      },
+      "size": {
+        "width": 640,
+        "height": 440
+      },
+      "title": "World around her study",
+      "titleAuto": true,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude"
+    },
+    {
+      "id": "term-mupbqoca-38660afc",
+      "kind": "terminal",
+      "position": {
+        "x": 9201.900400804683,
+        "y": 1003.7236257547985
+      },
+      "size": {
+        "width": 735,
+        "height": 504
+      },
+      "title": "Cleanup",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "bb2377a4-c41c-4126-83eb-8ee513ba7e7e"
+    },
+    {
+      "id": "term-mupdaiti-052a8fa9",
+      "kind": "terminal",
+      "position": {
+        "x": 10000.958759701205,
+        "y": 1003.8923541891978
+      },
+      "size": {
+        "width": 735,
+        "height": 504
+      },
+      "title": "Engine",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "bb2377a4-c41c-4126-83eb-8ee513ba7e7e"
+    },
+    {
+      "id": "term-mupxyoj6-369c89d5",
+      "kind": "terminal",
+      "position": {
+        "x": 10783.37025767594,
+        "y": 1001.1831954835053
+      },
+      "size": {
+        "width": 735,
+        "height": 504
+      },
+      "title": "billable hours",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "bb2377a4-c41c-4126-83eb-8ee513ba7e7e"
+    },
+    {
+      "id": "term-mupzx2kt-79f431b9",
+      "kind": "terminal",
+      "position": {
+        "x": 11574.391970815706,
+        "y": 1005.5763542753833
+      },
+      "size": {
+        "width": 735,
+        "height": 504
+      },
+      "title": "CV0",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude",
+      "agentSessionId": "bb2377a4-c41c-4126-83eb-8ee513ba7e7e"
+    },
+    {
+      "id": "term-muq10nui-d1652f00",
+      "kind": "terminal",
+      "position": {
+        "x": 11268.30981603878,
+        "y": 1908.4448058220803
+      },
+      "size": {
+        "width": 946,
+        "height": 613
+      },
+      "title": "author-game-v2-lean-setup",
+      "titleAuto": true,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude"
+    },
+    {
+      "id": "term-muq1c39r-77d8f0bc",
+      "kind": "terminal",
+      "position": {
+        "x": 9405.548072992922,
+        "y": 3936.775901648597
+      },
+      "size": {
+        "width": 1049,
+        "height": 670
+      },
+      "title": "find media v3",
+      "titleAuto": false,
+      "color": "#d97757",
+      "group": null,
+      "tags": [],
+      "collapsed": false,
+      "cwd": ".",
+      "agentId": "claude"
+    }
+  ],
+  "bridges": [],
+  "ropes": []
+}

@@ -1,0 +1,323 @@
+diff --git a/games/billable_hours/toml_phases/3_activities.toml b/games/billable_hours/toml_phases/3_activities.toml
+index 11d2a3f..ce6779d 100644
+--- a/games/billable_hours/toml_phases/3_activities.toml
++++ b/games/billable_hours/toml_phases/3_activities.toml
+@@ -331,6 +331,9 @@ blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Still up, intern? Big day of photocopying tomorrow." },
+   ] } },
+   { type = "paragraph", content = "He fills his glass at the sink." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_touched", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "He reaches past you for a glass, and his other hand goes to your ass and squeezes it, slow, while he drinks. Upstairs he had two fingers inside you. Down here he takes his time." },
++  ] } },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "gte", value = 2 } ] }, blocks = [
+     { type = "paragraph", content = "He reaches past you for a glass, and his other hand settles on your hip and stays there while he drinks. At the copier he didn't touch you. Now he does." },
+   ] } },
+diff --git a/games/billable_hours/toml_phases/4_story_arc.toml b/games/billable_hours/toml_phases/4_story_arc.toml
+index 16a25e1..43c0432 100644
+--- a/games/billable_hours/toml_phases/4_story_arc.toml
++++ b/games/billable_hours/toml_phases/4_story_arc.toml
+@@ -784,6 +784,200 @@ destinationType          = "specific"
+ locationId               = "downtown"
+ time_progression_minutes = 15
+ 
++# ── Ethan · step 3 · his door locks ──────────────────────────────────────────
++# "Lock your door tonight." Hers doesn't; his does. She crosses the landing.
++# Two ordinary nos park the step (A3); the labelled one ends his path and sets
++# ethan_path_ended, which the hub and the quest cards read.
++[[canvases]]
++id   = "ethan_03_his_door"
++name = "His door locks"
++description = "Ethan step 3. She crosses the landing with the memo; his door locks and hers doesn't. First touch, Martin on the landing. Two parked nos and a final one."
++
++[canvases.trigger]
++location         = "ethan_room"
++requires_npc     = "npc_ethan"
++is_repeatable    = false
++priority         = 10
++is_active        = true
++consume_on       = "exit"
++retry_after_days = 2
++
++# Exactly his ethan_room row: Mon-Thu and Sun, 21:00-23:30.
++[[canvases.trigger.schedules]]
++weekdays   = [0, 1, 2, 3, 6]
++start_time = "21:00"
++end_time   = "23:30"
++
++[canvases.trigger.conditions]
++version = "1.0"
++logic   = "AND"
++items = [
++  { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "eq", value = 2 },
++  { type = "flag",  subject = "player", flag_key = "ethan_path_ended", operator = "is_false" },
++]
++
++[[canvases.nodes]]
++id   = "door"
++name = "Across the landing"
++blocks = [
++  { type = "paragraph", content = "His door is open an inch and his lamp is on. You don't knock. You push it open with the memo in your hand, the one that says \"Lock your door tonight.\"" },
++  { type = "paragraph", content = "He's at his desk in a T-shirt and shorts with a red pen in his teeth. He takes it out slowly and turns his chair round to face you." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_rebuffed", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Look who's at my door. Last time you sent me back to my desk." },
++  ] } },
++  { type = "dialog", props = { speaker = "player" }, content = "You told me to lock my door. It doesn't lock." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "I know. I've known since the day you moved in." },
++  { type = "paragraph", content = "He looks you over from your feet up, slow, and doesn't hide it. Down the landing the light is still on under Martin and Diane's door. He sees you look at it." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Mine locks. Shut it behind you, or go back to bed." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "He left his door open all night so I'd come over. And I came." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Shut his door and lock it."
++targetType = "node"
++nodeId     = "ethan_03_his_door.inside"
++
++[[canvases.nodes.exit_block.choices]]
++text             = "Tell him no, and go back to your room."
++targetType       = "node"
++nodeId           = "ethan_03_his_door.parked"
++retry_after_days = 3
++flagEffects = [ { targetType = "player", flag = "ethan_told_no", op = "set" } ]
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Tell him no for good. (ends his path)"
++targetType = "node"
++nodeId     = "ethan_03_his_door.final"
++final      = true
++flagEffects = [ { targetType = "player", flag = "ethan_path_ended", op = "set" } ]
++
++[[canvases.nodes]]
++id   = "inside"
++name = "The lock"
++blocks = [
++  { type = "paragraph", content = "The lock clicks. He rolls his chair back from the desk and pats his thigh. You walk over anyway and stand between his knees." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Say it. Say you didn't earn it." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_told_no", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You said no to me once. And here you are, back at my door." },
++  ] } },
++  { type = "paragraph", content = "His hands close on your hips. He's hard already. You can see it tenting his shorts, and he wants you to see it." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Sit in his lap."
++targetType = "node"
++nodeId     = "ethan_03_his_door.touch"
++consumes   = true
++flagEffects = [ { targetType = "player", flag = "ethan_touched", op = "set" } ]
++effects = [
++  { targetType = "player", trait = "ethan_stage", op = "set", value = 3 },
++  { targetType = "player", trait = "nerve", op = "add", value = 1, cap = 15 },
++]
++
++[[canvases.nodes.exit_block.choices]]
++text             = "Push him away and unlock the door."
++targetType       = "node"
++nodeId           = "ethan_03_his_door.parked"
++retry_after_days = 3
++flagEffects = [ { targetType = "player", flag = "ethan_told_no", op = "set" } ]
++
++[[canvases.nodes]]
++id   = "touch"
++name = "His lap"
++blocks = [
++  { type = "video", props = { file = "sex/ethan_03_lap_t4.webm", description = "A dim bedroom lit by a desk lamp; a woman straddling a man in a desk chair, her top pushed up, his mouth on her breast", search_queries = ["woman straddling man desk chair bedroom lamp", "girl on guy lap desk chair top pulled up"] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sleep_shirt", operator = "equipped" } ] }, blocks = [
++    { type = "paragraph", content = "You straddle his lap. He shoves your sleep shirt up to your neck, and your tits drop out right in front of his face." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "paragraph", content = "You straddle his lap. He drags your top up to your neck, and your tits spill out right in front of his face." },
++  ] } },
++  { type = "paragraph", content = "He grabs one tit and squeezes it hard. He sucks the other nipple into his mouth until it aches. His cock is rock hard under you, thick against your cunt through his shorts. You grind down on it, and he groans against your tit." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Quiet. Your mother's right down the hall." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "nerve", operator = "gte", value = 15 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "player" }, content = "Then make me be quiet." },
++  ] } },
++  { type = "group", props = { blocks = [
++    { type = "thought_bubble", props = { speaker = "player" }, content = "Don't make a sound. Don't make a sound." },
++  ] } },
++  { type = "paragraph", content = "His hand slides down your stomach to your cunt. Two fingers find your clit, already slick, and rub it in tight circles. Then he pushes them up inside you. You ride his fingers and his cock at once. Your thighs shake around his hips." },
++]
++
++[canvases.nodes.exit_block]
++type = "choices"
++
++[[canvases.nodes.exit_block.choices]]
++text       = "Keep riding his hand."
++targetType = "node"
++nodeId     = "ethan_03_his_door.landing"
++
++[[canvases.nodes]]
++id   = "landing"
++name = "Martin on the landing"
++blocks = [
++  { type = "paragraph", content = "Down the landing a door opens. Heavy footsteps on the boards. Martin." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Ethan? You still up?" },
++  { type = "paragraph", content = "Ethan doesn't take his fingers out of your cunt. He curls them deep, right where you need it. His other hand clamps over your mouth. You come on his fingers with his cock under you, clenching and shaking, and not a sound gets out." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Working. Night, Martin." },
++  { type = "paragraph", content = "The footsteps go on past his door to the back of the landing, to your room. They stop there a long time. Then they go back, and the bedroom door shuts." },
++  { type = "paragraph", content = "Ethan pulls his fingers out of you and puts them in his mouth, looking right at you." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "He looked in your room. Go, before he looks again. And next time you come in here, you lock it yourself." },
++  { type = "thought_bubble", props = { speaker = "player" }, content = "My stepbrother had his fingers in me with my mother down the hall. Martin knows I wasn't in my bed. And I want to go back tomorrow." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Go back across the landing."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "her_room"
++time_progression_minutes = 30
++
++[[canvases.nodes]]
++id   = "parked"
++name = "Your own door"
++blocks = [
++  { type = "dialog", props = { speaker = "player" }, content = "No, Ethan. Not like this." },
++  { type = "paragraph", content = "He laughs, short and ugly, and turns his chair back to the desk like you were never there." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Sure. Go to bed, intern. Your door's still broken. I'll still be here." },
++  { type = "paragraph", content = "You cross the landing and shut your door. It swings back open an inch on its own. Across the hall his light stays on, and his door stays open." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Go to bed."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "her_room"
++time_progression_minutes = 15
++
++[[canvases.nodes]]
++id   = "final"
++name = "Shut"
++blocks = [
++  { type = "dialog", props = { speaker = "player" }, content = "No. Not tonight, not ever. Stay away from my door." },
++  { type = "paragraph", content = "He looks at you a long moment. Then he caps the red pen, takes the memo out of your hand and drops it in the bin." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Fine. Enjoy the job you didn't earn." },
++  { type = "paragraph", content = "His door shuts behind you, and you hear the lock turn." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Go to bed."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "her_room"
++time_progression_minutes = 15
++
+ # ── Theo · step 1 · the hour ─────────────────────────────────────────────────
+ [[canvases]]
+ id   = "theo_01_the_hour"
+@@ -1409,14 +1603,30 @@ priority = 5
+ when  = [ { trait = "ethan_stage", subject = "player", op = "eq", value = 1 } ]
+ goals = [ { trait = "ethan_stage", subject = "player", op = "gte", value = 2, label = "Thursday after work: Ethan stays late at Callahan Reed" } ]
+ 
++[[quest_cards]]
++npc_id   = "npc_ethan"
++text     = "\"Better.\" One word, in red. And under it: \"Lock your door tonight.\" Yours doesn't lock. His does."
++tip      = "He's in his room after nine, Monday to Thursday and Sunday."
++priority = 5
++when  = [ { trait = "ethan_stage", subject = "player", op = "eq", value = 2 }, { flag = "ethan_path_ended", op = "is_false" } ]
++goals = [ { trait = "ethan_stage", subject = "player", op = "gte", value = 3, label = "After nine, Monday to Thursday or Sunday: Ethan's room, across the landing" } ]
++
+ [[quest_cards]]
+ npc_id        = "npc_ethan"
+-text          = "\"Better.\" One word, in red."
++text          = "\"Next time you come in here, you lock it yourself.\""
+ priority      = 5
+-when          = [ { trait = "ethan_stage", subject = "player", op = "gte", value = 2 } ]
++when          = [ { trait = "ethan_stage", subject = "player", op = "gte", value = 3 } ]
+ terminal      = true
+ terminal_text = "Ethan's next step arrives in the next update."
+ 
++[[quest_cards]]
++npc_id        = "npc_ethan"
++text          = "You told Ethan no for good. His door stays locked."
++priority      = 5
++when          = [ { flag = "ethan_path_ended", op = "is_true" } ]
++terminal      = true
++terminal_text = "Ethan's path is closed."
++
+ # Theo
+ [[quest_cards]]
+ npc_id   = "npc_theo"
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..c9e4adf 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -195,6 +195,10 @@ items = [ { type = "flag", subject = "player", flag_key = "met_family", operator
+ id   = "door"
+ name = "His door"
+ blocks = [
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_path_ended", operator = "is_true" } ] }, blocks = [
++    { type = "paragraph", content = "His door is shut and locked. When you knock, his voice comes through it and the door stays closed." },
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You said not ever. Go to bed, intern." },
++  ] } },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "gte", value = 1 } ] }, blocks = [
+     { type = "paragraph", content = "His door is open an inch. It's only ever open when yours is." },
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "What. Did you want something, or are you just standing there?" },
+@@ -211,6 +215,12 @@ blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Stay out of my desk, intern." },
+   ] } },
+   { type = "paragraph", content = "He waits for you to say something." },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_touched", operator = "is_true" } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Lock still works. If you're coming in, use it." },
++  ] } },
++  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ethan_told_no", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "ethan_stage", operator = "eq", value = 2 } ] }, blocks = [
++    { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "You walked all the way over here to tell me no. Want to try that again?" },
++  ] } },
+   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "touch_loud", operator = "is_true" } ] }, blocks = [
+     { type = "dialog", props = { speaker = "npc", npcId = "npc_ethan" }, content = "Thin walls, intern. Some of us are trying to sleep." },
+   ] } },
+diff --git a/games/billable_hours/v2_state.json b/games/billable_hours/v2_state.json
+index 49829c8..a48e1c9 100644
+--- a/games/billable_hours/v2_state.json
++++ b/games/billable_hours/v2_state.json
+@@ -240,7 +240,7 @@
+     ],
+     "steps": {
+       "npc_martin": 2,
+-      "npc_ethan": 2,
++      "npc_ethan": 3,
+       "npc_theo": 1,
+       "npc_jade": 1
+     },
+@@ -998,6 +998,29 @@
+               "gate": [],
+               "hint": "Thursday after work: Ethan stays late at Callahan Reed.",
+               "refusal": "parked"
++            },
++            {
++              "n": 3,
++              "canvas": "ethan_03_his_door",
++              "where": "ethan_room",
++              "when": {
++                "days": [
++                  "Mon",
++                  "Tue",
++                  "Wed",
++                  "Thu",
++                  "Sun"
++                ],
++                "from": "21:00",
++                "to": "23:30"
++              },
++              "gate": [],
++              "hint": "After nine, Monday to Thursday or Sunday: Ethan's room, across the landing.",
++              "refusal": "parked (two nos, retry 3 days, set ethan_told_no) + final ('Tell him no for good. (ends his path)', sets ethan_path_ended)",
++              "who_notices": "npc_martin",
++              "sets": "ethan_stage 3 and ethan_touched on the yes",
++              "read_by": "hub_ethan_landing (ethan_touched, ethan_told_no, ethan_path_ended); walkin_kitchen_ethan (ethan_touched); Ethan quest cards (ethan_path_ended)",
++              "added": "2026-10-02, LO approved"
+             }
+           ]
+         },

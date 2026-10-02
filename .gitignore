@@ -286,3 +286,10 @@ patreon/
 # as patreon/ and game_explorations/ above.
 # ============================================================
 /resume/
+
+# Notion sheet-review mirror (ids and local review state, not secrets)
+.notion_sheets.json
+.notion_handled_comments.json
+
+# HyperFrames workspace: upstream clone (own .git, node_modules) + local video projects
+/hyper-videos/

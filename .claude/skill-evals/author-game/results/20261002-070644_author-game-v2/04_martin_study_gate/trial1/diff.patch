@@ -1,0 +1,45 @@
+diff --git a/games/billable_hours/toml_phases/5_scenes.toml b/games/billable_hours/toml_phases/5_scenes.toml
+index 2945366..3328f49 100644
+--- a/games/billable_hours/toml_phases/5_scenes.toml
++++ b/games/billable_hours/toml_phases/5_scenes.toml
+@@ -674,6 +674,13 @@ targetType = "node"
+ nodeId     = "hub_martin_study.sit"
+ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 1 } ] }
+ 
++# Hidden until the jacket step (martin_03) sets martin_stage to 3; no locked_text, so it never greys.
++[[canvases.nodes.exit_block.choices]]
++text       = "Stay after he closes the door."
++targetType = "node"
++nodeId     = "hub_martin_study.stay"
++conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "martin_stage", operator = "gte", value = 3 } ] }
++
+ [[canvases.nodes.exit_block.choices]]
+ text       = "Say goodnight and leave him to it."
+ targetType = "node"
+@@ -697,6 +704,26 @@ destinationType          = "specific"
+ locationId               = "house"
+ time_progression_minutes = 20
+ 
++[[canvases.nodes]]
++id   = "stay"
++name = "After the door"
++blocks = [
++  { type = "paragraph", content = "Martin gets up, crosses the room and turns the key. Then he comes back and stands over you, so close his belt is level with your face." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Blouse. All of it." },
++  { type = "paragraph", content = "You undo the buttons while he watches. He pushes the blouse off your shoulders and unhooks your bra, and your tits fall free in the lamplight. He takes one in each hand and squeezes until you gasp." },
++  { type = "paragraph", content = "His thumbs drag over your nipples until they are hard and aching. He bends and sucks one into his mouth with his teeth on it, his other hand kneading your tit, and you grip the arm of the chair because your cunt is wet and throbbing and he has not touched it." },
++  { type = "dialog", props = { speaker = "npc", npcId = "npc_martin" }, content = "Next Friday you come up without the bra." },
++]
++
++[canvases.nodes.exit_block]
++type = "location"
++text = "Button up and go to bed."
++
++[canvases.nodes.exit_block.config]
++destinationType          = "specific"
++locationId               = "house"
++time_progression_minutes = 30
++
+ [[canvases.nodes]]
+ id   = "night"
+ name = "Goodnight"

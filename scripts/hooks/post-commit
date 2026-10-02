@@ -1,0 +1,27 @@
+#!/bin/sh
+# Mirror the sheets this commit touched to Notion.
+#
+# Install with:  python3 scripts/notion_sheets_sync.py install-hook
+#
+# A commit is the right trigger: the re-open feature diffs against the commit a
+# sheet was signed at, and a commit is the author saying "this is done" — which
+# a file save is not. See prd_notion_sheet_review.md §7.4.
+#
+# Never blocks, never fails a commit, and no-ops with no token so a fresh clone
+# and CI are unaffected.
+
+root=$(git rev-parse --show-toplevel) || exit 0
+[ -f "$HOME/.config/notion_sheets.env" ] || exit 0
+
+changed=$(git diff-tree --no-commit-id --name-only -r HEAD \
+            -- 'games/*/sheets/**' 'games/*/DECISIONS.md' \
+          | grep -v 'REVIEW_ORDER.md$')
+[ -z "$changed" ] && exit 0
+
+(
+  cd "$root" || exit 0
+  python3 scripts/notion_sheets_sync.py push --paths $changed \
+    >> .notion_sync.log 2>&1 &
+) >/dev/null 2>&1
+
+exit 0

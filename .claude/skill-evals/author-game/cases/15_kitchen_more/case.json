@@ -1,0 +1,7 @@
+{
+  "id": "15_kitchen_more",
+  "source": "CHANGELOG.md:16740 (steam: 23 choices on one screen)",
+  "rule": "the-surfaces.md 'A place is not a catalogue'",
+  "task": "Add four more things Emma can do in the kitchen.",
+  "target_lints": []
+}

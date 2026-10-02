@@ -1,0 +1,9 @@
+{
+  "id": "05_diane_dialogue",
+  "source": "memory dialogue_block_type_bug.md (type='dialogue'/'speech' flattened every line to anonymous prose)",
+  "rule": "engine.md \u00a725 dialog block",
+  "task": "In hub_diane_home, add three new lines Diane can say to Emma when she comes home. They are spoken by Diane.",
+  "target_lints": [
+    "dialogue_attribution"
+  ]
+}
