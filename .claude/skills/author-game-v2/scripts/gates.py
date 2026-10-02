@@ -545,8 +545,8 @@ def _effect_value_sign(val):
         return 0
     if isinstance(val, (int, float)):
         return 1 if val > 0 else (-1 if val < 0 else 0)
-    if isinstance(val, dict) and val.get("type") == "random":
-        hi = val.get("max", val.get("min"))
+    if isinstance(val, dict) and val.get("type") in ("random", "trait"):
+        hi = val.get("max", val.get("min")) if val.get("type") == "random" else _value_bounds(val)[1]
         if isinstance(hi, (int, float)):
             return 1 if hi > 0 else (-1 if hi < 0 else 0)
     return 0
@@ -2496,7 +2496,7 @@ def lint_unwritten_act(model, game):
                     # games do use. Formatting it as a scalar
                     # raised TypeError and took the whole lint down with it.
                     if isinstance(v, dict):
-                        what.append(f"+{v.get('min','?')}..{v.get('max','?')} {t}")
+                        what.append(_effect_value_label(v, t))
                     elif isinstance(v, (int, float)):
                         what.append(f"{'+' if v >= 0 else ''}{v:g} {t}")
                     else:
@@ -4187,16 +4187,16 @@ def _schedule_rows_backed(game, state=None):
 # ─────────────────────────────────────────────────────────────────────────────
 # Money a week can actually bring in (PRD WS5, `the obligation is charged`).
 # ─────────────────────────────────────────────────────────────────────────────
-def _value_mean_max(val):
-    """(mean, max) of an effect value that may be a number or {type="random", min, max}."""
+def _value_mean_max(val, traits=None):
+    """(mean, max) of an effect value: a number, {type="random", min, max} or {type="trait", …}."""
     if isinstance(val, bool):
         return 0.0, 0.0
     if isinstance(val, (int, float)):
         return float(val), float(val)
-    if isinstance(val, dict) and val.get("type") == "random":
-        lo, hi = val.get("min"), val.get("max", val.get("min"))
+    if isinstance(val, dict) and val.get("type") in ("random", "trait"):
+        lo, hi = _value_bounds(val, traits)
         if isinstance(lo, (int, float)) and isinstance(hi, (int, float)):
-            return (lo + hi) / 2.0, float(hi)
+            return ((lo + hi) / 2.0 if val.get("type") == "random" else float(lo)), float(hi)
     return 0.0, 0.0
 
 
@@ -4256,7 +4256,7 @@ def _week_income(game, currency):
             for ef in (h.get("effects") or []):
                 if (ef.get("trait") or ef.get("trait_key")) != currency or ef.get("op") != "add":
                     continue
-                mean, mx = _value_mean_max(ef.get("value"))
+                mean, mx = _value_mean_max(ef.get("value"), (game.get("player") or {}).get("core_traits"))
                 if mx > 0:
                     pay_mean += mean
                     pay_max += mx
@@ -12767,6 +12767,63 @@ def _under_exempt_roots(locs, exempt):
         if cur not in chain and cur in parent and not parent[cur] and cur in exempt:
             out.add(lid)
     return out
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# A value worked out from her stats — `{type = "trait", trait, mult, add, min, max}`
+# (`engine.md` §3). The engine resolves it when the effect applies, as
+# round(trait × mult + add) held inside min / max (`setup.resolveEffectValue`), so a
+# reader here sees a shape, not a number. These read it the way the readers above
+# already read `{type = "random", min, max}`.
+# ─────────────────────────────────────────────────────────────────────────────
+def _trait_value_at(val, x):
+    """What a trait-shaped value pays when the trait reads `x` (JS Math.round, then min/max)."""
+    mult, add = val.get("mult", 1), val.get("add", 0)
+    mult = mult if isinstance(mult, (int, float)) and not isinstance(mult, bool) else 1
+    add = add if isinstance(add, (int, float)) and not isinstance(add, bool) else 0
+    out = math.floor(x * mult + add + 0.5)
+    lo, hi = val.get("min"), val.get("max")
+    if isinstance(lo, (int, float)) and not isinstance(lo, bool):
+        out = max(out, lo)
+    if isinstance(hi, (int, float)) and not isinstance(hi, bool):
+        out = min(out, hi)
+    return out
+
+
+def _value_bounds(val, traits=None):
+    """(low, high) of a ranged or trait-shaped effect value; (None, None) if neither.
+
+    random: (min, max), max falling back to min.
+    trait:  low is what it pays at her STARTING trait (`traits`, else 0: the engine
+            reads a missing trait as 0); high is the declared `max`, or, with no max,
+            +inf when `mult` is positive (it grows with the stat) and the low otherwise.
+    """
+    if not isinstance(val, dict):
+        return None, None
+    if val.get("type") == "random":
+        return val.get("min"), val.get("max", val.get("min"))
+    if val.get("type") != "trait":
+        return None, None
+    start = (traits or {}).get(val.get("trait"), 0)
+    start = start if isinstance(start, (int, float)) and not isinstance(start, bool) else 0
+    low = _trait_value_at(val, start)
+    hi = val.get("max")
+    if isinstance(hi, (int, float)) and not isinstance(hi, bool):
+        return low, max(low, hi)
+    mult = val.get("mult", 1)
+    grows = isinstance(mult, (int, float)) and not isinstance(mult, bool) and mult > 0
+    return low, (math.inf if grows else low)
+
+
+def _effect_value_label(val, trait):
+    """How a lint prints a non-number effect value: `+2..4 money`, `+charm×2+50 money`."""
+    if isinstance(val, dict) and val.get("type") == "trait":
+        mult, add = val.get("mult", 1), val.get("add", 0)
+        add_s = f"{add:+g}" if isinstance(add, (int, float)) and add else ""
+        mult_s = f"×{mult:g}" if isinstance(mult, (int, float)) and mult != 1 else ""
+        return f"+{val.get('trait', '?')}{mult_s}{add_s} {trait}"
+    return f"+{val.get('min','?')}..{val.get('max','?')} {trait}"
+
 
 
 def main():

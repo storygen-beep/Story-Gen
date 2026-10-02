@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — The tools read a value worked out from her stats (World and Systems PRD, Phase 6A)
+
+**What.** The engine resolves `value = { type = "trait", trait, mult, add, min, max }` as
+round(trait × mult + add) held inside min / max (`engine.md` §3). The tools knew only numbers and
+`{type = "random", …}`, so a stat-based pay read as nothing. Now:
+- `scripts/gates.py` — three readers, line-for-line swaps: `_effect_value_sign` (`:548-549`, the sign of
+  a grant), `lint_unwritten_act` (`:2499`, prints `+charm×2+50 money` instead of `+?..100`), and
+  `_value_mean_max` (`:4190-4199`) with its `_week_income` call (`:4259`): a trait value's mean is what it
+  pays at her starting trait, its max is the declared `max` (no `max` and a rising `mult` = no ceiling).
+  Three helpers above `main()`: `_trait_value_at`, `_value_bounds`, `_effect_value_label`.
+- `apps/game_generation/management/commands/validate_game_toml.py` — `_numeric_effect_value` takes the
+  walker's current player traits and resolves the shape with the engine's arithmetic (`floor(x + 0.5)`,
+  the JS `Math.round`); both call sites pass their traits. Without traits it is skipped, never guessed.
+
+**Why.** Pay from stats is built; a checker that reads it as zero under-counts a week's income and
+mislabels the grant.
+
+**Verified.** New `scripts/tests/test_gates_e5_trait_value.py` (9 tests) and five new cases in
+`apps/game_generation/tests/test_validate_toml_effect_values.py` (15 pass, with
+`test_effect_value_from_stats.py`). No game uses the shape yet, so no game's score moves. gates.py grew
+57 lines, all above `main()`: the one cite past it, `the-release.md:100`, moved `gates.py:13027` →
+`:13084` (read by hand: "Lints sit BELOW the tally"); every other `gates.py:NNNN` cite is below the
+helpers and unmoved. `cite_check.py --fix`: 0 drifted in SKILL.md + references; selfcheck clean;
+pytest passes. Not changed (not named by the item): the two step-reachability readers at
+`gates.py:4652` and `:4687`, which still skip a trait value.
+
+**Words:** 0, running total 145,917 / 149,283.
+
+---
+
 ## 2026-10-02 — The tools' template_import.py cites re-pointed (World and Systems PRD, Phase 6A)
 
 **What.** Comment and docstring lines only, line for line (no line count changed): 17 cites in

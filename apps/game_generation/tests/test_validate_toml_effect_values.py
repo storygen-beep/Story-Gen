@@ -62,3 +62,34 @@ def test_a_bool_is_not_a_trait_delta():
     """bool subclasses int, so `True` would silently add 1 to a trait."""
     assert _numeric_effect_value(True) is None
     assert _numeric_effect_value(False) is None
+
+
+# ── A value worked out from her stats: `{type = "trait", trait, mult, add, min, max}` ──
+# The engine resolves it as round(trait × mult + add) held inside min / max
+# (`setup.resolveEffectValue`). The walker resolves it against its own current traits.
+
+def test_a_trait_value_reads_the_walkers_traits():
+    value = {"type": "trait", "trait": "charm", "mult": 2, "add": 50}
+    assert _numeric_effect_value(value, {"charm": 10}) == 70
+
+
+def test_a_trait_value_is_held_inside_min_and_max():
+    value = {"type": "trait", "trait": "charm", "mult": 2, "add": 50, "min": 0, "max": 100}
+    assert _numeric_effect_value(value, {"charm": 40}) == 100
+    low = {"type": "trait", "trait": "charm", "mult": -3, "min": 0}
+    assert _numeric_effect_value(low, {"charm": 5}) == 0
+
+
+def test_a_trait_value_defaults_mult_1_add_0_and_a_missing_trait_reads_0():
+    assert _numeric_effect_value({"type": "trait", "trait": "charm"}, {"charm": 7}) == 7
+    assert _numeric_effect_value({"type": "trait", "trait": "nerve", "add": 5}, {}) == 5
+
+
+def test_a_trait_value_rounds_half_up_like_js_math_round():
+    # Python's round(2.5) is 2; the game's Math.round(2.5) is 3.
+    value = {"type": "trait", "trait": "charm", "mult": 0.5}
+    assert _numeric_effect_value(value, {"charm": 5}) == 3
+
+
+def test_a_trait_value_with_no_traits_is_skipped_not_guessed():
+    assert _numeric_effect_value({"type": "trait", "trait": "charm", "add": 5}) is None
