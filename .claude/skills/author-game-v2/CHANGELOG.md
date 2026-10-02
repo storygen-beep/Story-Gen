@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Engine: a room she is refused by a dress code records no visit (GLOBAL fix, World and Systems PRD, Phase 7)
+
+**Why.** A dress code (`clothing_rules`) redirected to `ClothingBlock` from the `:passagestart` handler.
+By then SugarCube had already made the refused room's history moment, and the room's body still
+rendered, so `current_location` and `visited_locations` named a room she was turned away from (and the
+room's auto-fire check ran). The redirect landed 10 ms later. The wardrobe switch
+`wardrobe_anywhere = false` had to work around it by saving where she came from.
+
+**What changed.**
+- `v2.py`: the dress-code check moves into `Config.navigation.override`, which SugarCube 2.30 calls
+  before it creates the moment. A refused room never renders: no state write, no history moment, no
+  auto-fire. Emitted in every clothing game, so **this is global**: the Story JavaScript of members_only,
+  billable_hours, orientation and vesper changes (the intercept moves; nothing else); no passage body
+  changes in any game. Play changes only where a dress code exists (billable_hours today).
+  `entry_conditions` refusals already kept their writes inside the guard; unchanged.
+- The `wardrobe_anywhere = false` workaround is removed (`_clothing_block_from`, and
+  `setup.canChangeClothesHere`'s argument): `current_location` is now still the room she came from.
+- `references/engine.md` (where a state is read, reader 2): one clause, the refused room never renders.
+- Citations re-pointed through the `git diff` line map (49 moved, 602 identical, each target line
+  checked identical; 1 unmapped, `v2.py:2147`, hand-checked: same line); `cite_check.py` 0 drifted in
+  SKILL.md + references/.
+
+**Verified.** `apps/game_generation/tests/test_refused_room.py` (new, 3 tests: a dress-code refusal
+leaves `current_location`, `visited_locations` and the history alone; an allowed room records the
+visit; an `entry_conditions` refusal records nothing). The first fails on the old generator. The
+wardrobe-switch tests still pass. Rebuilds of members_only, billable_hours, orientation, probation,
+the_balance and vesper from `git archive` exports all import; passage diff as above.
+
+**Words:** +16, running total 145,784 / 149,283.
+
+---
+
 ## 2026-10-02 — A loop's finisher takes one file, not a pool
 
 **What.** `references/the-surfaces.md` (loop parts table): the FINISHER row now says each finish type

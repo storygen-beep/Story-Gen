@@ -195,7 +195,7 @@ option, because there is no absolute advance to reach for.
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
 - **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6068`) renders `20m` on the
-  navigation card from `[[locations.costs]] time`, used at `v2.py:20347` and `:20364`.
+  navigation card from `[[locations.costs]] time`, used at `v2.py:20345` and `:20362`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:13530`) with
   nothing on the label.
@@ -267,7 +267,7 @@ the entry as a dimmed, non-clickable line carrying the author's message instead 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
 
-**People and places both have this surface now.** `SchedulePage` (`v2.py:22328`) publishes every
+**People and places both have this surface now.** `SchedulePage` (`v2.py:22326`) publishes every
 declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only

@@ -2144,9 +2144,9 @@ setup.checkLocationClothing = function(passageName) {
 // wardrobe room), and whether a refusal's unmet part is about her clothes.
 setup.wardrobe_anywhere = """ + json.dumps(self.wardrobe_anywhere) + """;
 setup.wardrobe_location_ids = """ + json.dumps(self._wardrobe_location_ids()) + """;
-setup.canChangeClothesHere = function(fromId) {
+setup.canChangeClothesHere = function() {
     if (setup.wardrobe_anywhere) return true;
-    var here = String(fromId || (State.variables.player || {}).current_location || '');
+    var here = String((State.variables.player || {}).current_location || '');
     return setup.wardrobe_location_ids.indexOf(here) !== -1;
 };
 setup._clothingConditionTypes = ['clothing_slot', 'clothing_item', 'worn_exposure',
@@ -18387,26 +18387,23 @@ setup.returnPassage = function (fallback) {
     }
 """
 
-        clothing_redirect_block = ""
-        # E7b — with wardrobe_anywhere = false the ClothingBlock asks where she came
-        # from: the refused room's passage still renders (and writes current_location)
-        # before the redirect lands.
-        clothing_from_line = (
-            "            State.variables._clothing_block_from = (sv.player || {}).current_location;\n"
-            if not self.wardrobe_anywhere else ""
-        )
+        # E12 — a dress code refuses BEFORE the room exists. SugarCube asks
+        # Config.navigation.override before it creates the moment, so a refused room's body
+        # never runs: no current_location or visited_locations write, no auto-fire, no
+        # history moment. (A :passagestart redirect can't do that — the body renders anyway
+        # and the ClothingBlock lands 10 ms later, after the room recorded the visit.)
+        clothing_override_js = ""
         if self.clothing_enabled:
-            clothing_redirect_block = """
-    // Clothing intercept: block location entry if not dressed enough
-    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
-        var clothingMsg = setup.checkLocationClothing(psg);
-        if (clothingMsg) {
-            State.variables._clothing_block_message = clothingMsg;
-            State.variables._clothing_block_destination = psg;
-""" + clothing_from_line + """            setTimeout(function() { Engine.play("ClothingBlock"); }, 10);
-            return;
-        }
-    }
+            clothing_override_js = """
+// Clothing intercept: a room she isn't dressed for is never entered.
+Config.navigation.override = function (psg) {
+    if (psg.indexOf("Location_") !== 0 || setup.infoPages.indexOf(psg) !== -1) return null;
+    var clothingMsg = setup.checkLocationClothing(psg);
+    if (!clothingMsg) return null;
+    State.variables._clothing_block_message = clothingMsg;
+    State.variables._clothing_block_destination = psg;
+    return "ClothingBlock";
+};
 """
 
         # A DOOR screen is safe to re-render for the same reason a location is, and only
@@ -18422,8 +18419,9 @@ setup.returnPassage = function (fallback) {
         )
 
         # Travel-friction: charge a location's entry cost (time + traits) on a genuine
-        # move. Runs AFTER rent/clothing so a blocked entry never charges (no
-        # double-charge on retry). Only emitted when some location declares costs;
+        # move. Runs AFTER rent so a blocked entry never charges (no double-charge on
+        # retry); a dress-code refusal never reaches :passagestart at all (E12). Only
+        # emitted when some location declares costs;
         # otherwise movement stays free (backward-compatible).
         has_crossing_costs = self._has_crossing_costs()  # EN11
         has_location_costs = any(
@@ -18658,7 +18656,7 @@ setup.commitMoment = function () {
         return true;
     } catch (e) { return false; }
 };
-""" + return_place_js + """
+""" + return_place_js + clothing_override_js + """
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -18690,7 +18688,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
-""" + consume_leave_block + rent_redirect_block + clothing_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + consume_leave_block + rent_redirect_block + travel_cost_block + return_place_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -19038,7 +19036,7 @@ $(document).on(':passagestart', function(ev) {
         # where she can really change. Empty (today's text) in every other game.
         change_open = change_close = ""
         if not self.wardrobe_anywhere:
-            change_open = "<<if setup.canChangeClothesHere(State.variables._clothing_block_from)>>"
+            change_open = "<<if setup.canChangeClothesHere()>>"
             change_close = "<</if>>"
         if self.clothing_enabled:
             wardrobe_page = """
