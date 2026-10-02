@@ -27,6 +27,8 @@ def full():
         "board": {
             "ascent_tiers": ["nerve"],
             "systems": [{"id": "bar_shifts", "place": "bar", "people": ["npc_b"], "feeds": ["money"]}],
+            "coverage": [{"topic": "bar_shifts", "kind": "system", "status": "covered",
+                          "source": "templates/cards/job.md"}],
             "locations": [{"id": "bar"}, {"id": "flat"}],
             "economy": {"currency": "money", "obligation_amount": 100, "week_income": 150},
             "characters": [
@@ -119,6 +121,8 @@ def test_each_check_fails_on_its_defect():
         "her life has threads": lambda s: s["want"]["threads"][0].update(person="npc_c"),
         "each man's keeps is named": lambda s: s["want"]["cast"][0].update(keeps="his warmth"),
         "every system has a card": lambda s: s["want"]["threads"][1].update(system="home_life"),
+        "every system has a coverage entry": lambda s: s["board"]["coverage"].pop(),
+        "every coverage source exists": lambda s: s["board"]["coverage"][0].update(source="cards/none.md"),
     }
     for name, edit in cases.items():
         assert broken(edit) == [name], name

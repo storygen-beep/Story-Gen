@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — shape.py reads the coverage list (Coverage and the Scout PRD, CV4)
+
+**What.** `scripts/shape.py` (**protected, LO approved**), three rows, strict only (n/a while the spine is written),
+from `_coverage_rows` and `_coverage_source_problem`, new above `is_strict()`:
+- `every system has a coverage entry`: each `board.systems[]` card is a `system` topic (by id or name); every kind is
+  `system` · `place` · `scene` · `mechanic`, every status `covered` · `scouted` · `lo` · `placeholder` · `unknown`.
+- `no topic is unknown`: an `unknown` is a **WARN** naming each one, never a FAIL (LO: warn, never block).
+- `every coverage source exists`: `covered` names a file in the skill or the repo, and a rule id it names (`SY1`,
+  `R2`) must be in that file; `scouted` names a scout card that is on disk; `lo` and `placeholder` carry a source.
+- No `board.coverage` at all: a grandfathered game (`gates._grandfathered`, `COVERAGE_SINCE = "2026-10-02"`) WARNS on
+  all three until it ships on or after that date; any other game FAILS the first and third and WARNS on the second.
+  A grandfathered game with a bad entry WARNS too.
+- `check()` takes an optional `root` (where a scout card path resolves; the working directory by default).
+- `SKILL.md` (the `shape.py` row) and `references/state.md` (`board.coverage[]` is now read by `shape.py`) say so.
+
+**Verified.** New `scripts/tests/test_shape_coverage.py` (14): a full list passes; n/a when lenient; a card with no
+entry, a bad kind or status, a missing covered file, a rule id the file lacks, a missing scout card, and an `lo`
+with no source each fail; an `unknown` warns by name; no list fails billable_hours-style games and warns on a
+grandfathered one, a grandfathered bad entry warns, and a grandfathered game that shipped since fails. The green
+spine in `test_shape.py` gains a one-entry list, and its one-defect-per-row test two cases (an entry removed, a source
+that does not exist).
+`shape.py` and `--ship` on `git archive HEAD` exports of every game but vesper_two, before and after: the four
+grandfathered games WARN on all three rows; billable_hours (not grandfathered) FAILS two and WARNS on one, so its
+`--ship` REPORT row `the spine holds together` goes ok 18/18 → red 19/21; the other games' spine counts move by +3
+judged with no new failure; media_lab and vesper have no ledger. **No BLOCK row changed colour.** selfcheck clean;
+pytest passes; `cite_check.py` 0.
+
+**Words:** +22, running total 147,128 / 149,283 (measured).
+
 ## 2026-10-02 — The scout agent (Coverage and the Scout PRD, CV3)
 
 **What.**
