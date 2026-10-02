@@ -5,6 +5,36 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Phase 8 fixes, the tools (Coverage and the Scout PRD, CV-pre, tools)
+
+**What.** `scripts/gates.py` (**protected, LO approved**), three report-only fixes from the final check:
+- **The dated-line REPORT** (`a dated line names a built event`) skipped only an "in N …" after a negation. New
+  `_not_an_appointment` (above `main()`): an "in N weeks" whose sentence has a perfect tense on either side is a span
+  she has lived ("she has run four men in one week", "in four months she has never once come"), and "the day two
+  associates" / "the day one of them" (`day` after "the", the number spelled out) is not day 2. "By day two", "day 2"
+  and "in ten days" still list. The call site is a five-line swap for five lines.
+- **World size's hub** (`_world_hub`): the climb from her room stops below an `outdoors` place too, not only below
+  `board.map.exterior`. A home base whose parent is a path outside is the house itself: members_only's hub is now
+  `staff_house`, not `cliff_path`. billable_hours (`house`), probation (`the_stairwell`), orientation and the_balance
+  (`the_hall`) keep theirs: no place on their chain is outdoors.
+- **A BLOCK row named after its gate** printed the name twice ("every system has a card    every system has a card:
+  2/2 …"). New `_gate_prefix`: `_block_gate_verdict` names the gate only when the row's label differs (`no empty
+  rooms` still reads "standing surface: …"). Three line-for-line swaps.
+- `scripts/tests/test_playtest_l2.py`: builds with the repo's `venv/` when there is one, else the Python running the
+  tests (a git worktree has no `venv/`), else skips when Django is missing.
+- `references/the-release.md:100`: `gates.py:13895` → `:13932` (the "Lints sit BELOW the tally" comment, moved 37 by
+  the new code; read by hand). Every other `gates.py:` cite in SKILL.md, references, templates and agents sits above
+  the edits and was checked unmoved.
+
+**Verified.** Four new tests (`test_goal_dates_and_ends.py` 2, `test_gates_world_size.py` 1,
+`test_gates_system_cards.py` 1), all four failing on the old `gates.py`. `--ship` on `git archive HEAD` exports of
+every game but vesper_two, before and after: no row changed colour; K1–K5 headlines lose the repeated label;
+billable_hours' dated lines 7 → 6 (`walkin_firm` "the day two associates" gone), vesper's 4 → 1 (only `cap_case_insider`
+"in ten days" stays, a real appointment); members_only's hub `cliff_path` → `staff_house` (hook share 63% → 64%).
+`cite_check.py --fix` then 0 wrong in SKILL.md + references; selfcheck clean; skill pytest passes.
+
+**Words:** +0, running total 146,868 / 149,283 (measured).
+
 ## 2026-10-02 — Phase 8 fixes, the words (Coverage and the Scout PRD, CV-pre, docs)
 
 **What.** The final check's wording findings, each a line-for-line swap so no cite moved:

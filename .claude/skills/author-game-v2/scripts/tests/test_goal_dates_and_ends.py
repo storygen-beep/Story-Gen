@@ -118,3 +118,16 @@ def test_in_thirty_days_is_listed_and_a_past_duration_is_not():
 
 def test_no_date_is_ok():
     assert report("Be kept on.")[1] is True
+
+
+def test_the_day_two_associates_is_not_a_date():
+    assert report("By the end of the day two associates stop talking.")[1] is True
+    assert report("It holds until the day one of them opens it.")[1] is True
+    assert report("I want it on my desk by day two.")[1] is False
+    assert report("Come back on the day 2 review.")[1] is False
+
+
+def test_a_span_she_has_lived_is_not_a_date():
+    assert report("In four months she has never once come into this room.")[1] is True
+    assert report("She has run four men in one week off nothing but their breathing.")[1] is True
+    assert report("You put it on my desk in ten days.")[1] is False

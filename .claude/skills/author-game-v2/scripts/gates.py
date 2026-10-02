@@ -11518,10 +11518,10 @@ def _block_gate_verdict(gname, r):
         return False, f"gate '{gname}' did not run", []
     if r.get("parked") or r.get("few"):
         # PRD IC21: a parked block is never read as green, and says why it is red.
-        return False, f"{gname}: {r['headline']}", r["detail"][:10]
+        return False, f"{_gate_prefix(gname)}{r['headline']}", r["detail"][:10]
     if r["na"] and gname not in SHIP_NA_PASSES:
-        return False, f"{gname}: n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
-    return (None if r["na"] else r["pass_"]), f"{gname}: {r['headline']}", r["detail"][:10]
+        return False, f"{_gate_prefix(gname)}n/a — {r['headline']} (an absence is not a pass)", r["detail"][:10]
+    return (None if r["na"] else r["pass_"]), f"{_gate_prefix(gname)}{r['headline']}", r["detail"][:10]
 
 
 def ship_mode(slug):
@@ -12972,10 +12972,10 @@ def _future_dates_row(model, game):
     for where, text in parts:
         for m in _FUTURE_DATE_RE.finditer(str(text)):
             a, b = max(0, m.start() - 40), min(len(text), m.end() + 40)
-            # "hasn't answered you in eight months" is the past: an "in N …" after a negation
-            # in the same sentence is a duration, not an appointment.
-            if m.group(0).lower().startswith("in") and _PAST_DURATION_RE.search(
-                    re.split(r"[.!?]", text[:m.start()])[-1]):
+            # "hasn't answered you in eight months", "in four months she has never", "four men in
+            # one week" (she has run them) and "the day two associates" are not appointments:
+            # `_not_an_appointment`, above main().
+            if _not_an_appointment(text, m):
                 continue
             hits.append(f"{where}: \"{m.group(0)}\" — …{text[a:b].strip()}…")
     return ("a dated line names a built event", not hits,
@@ -13566,15 +13566,19 @@ def _canvas_people(c):
 
 def _world_hub(board, game):
     """The top of the house: the room her room's `entry_from` chain reaches just below
-    `board.map.exterior` (or the chain's root when the street isn't on it). No home base, or one
-    the build doesn't declare: the first `board.map.roots[]`, as before."""
+    `board.map.exterior` or an `outdoors` place (a path outside is not the house: a home base whose
+    parent is outdoors is the house itself). No home base, or one the build doesn't declare: the
+    first `board.map.roots[]`, as before."""
     bmap = board.get("map") or {}
     parent = {l.get("id"): l.get("entry_from") for l in (game or {}).get("locations") or []
               if l.get("id")}
+    outdoors = {l.get("id") for l in (board.get("locations") or [])
+                if isinstance(l, dict) and "outdoors" in (l.get("labels") or [])}
     lid, seen = bmap.get("home_base"), set()
     if lid not in parent:
         return (bmap.get("roots") or [None])[0]
-    while parent.get(lid) and parent[lid] != bmap.get("exterior") and lid not in seen:
+    while parent.get(lid) and parent[lid] != bmap.get("exterior") and parent[lid] not in outdoors \
+            and lid not in seen:
         seen.add(lid)
         lid = parent[lid]
     return lid
@@ -13635,6 +13639,39 @@ def _systems_and_connections(state):
 def _systems_row(state):
     summary, rows = _systems_and_connections(state)
     return ("systems and connections", None, summary + " — a count, never a score", rows)
+
+
+# ── the dated-line REPORT: a match that is not an appointment ──────────────
+# A perfect tense in the sentence makes "in N weeks" a span already lived ("she has run four
+# men in one week", "in four months she has never once come in"); `_PAST_DURATION_RE` (a
+# negation before the match) is the older half of the same test.
+_PERFECT_RE = re.compile(
+    r"\b(?:has|have|had)\s+(?:(?:never|already|just|not|once|ever)\s+)*"
+    r"(?:\w+ed|been|run|done|gone|seen|had|made|taken|come|kept|met|got|gotten|spent|slept)\b"
+    r"|\w+'ve\s+\w+ed\b", re.I)
+
+
+def _not_an_appointment(text, m):
+    """True when `_FUTURE_DATE_RE`'s match `m` in `text` is not a date the player is promised.
+
+    "in N weeks" is a span, not an appointment, when its sentence has a negation before it or a
+    perfect tense on either side. "the day two associates" / "the day one of them" is "the day
+    [that] two …": `day` after "the", with the number spelled out, is not "day 2" ("by day two"
+    and "day 2" still count)."""
+    said = m.group(0).lower()
+    before = re.split(r"[.!?]", text[:m.start()])[-1]
+    after = re.split(r"[.!?]", text[m.end():])[0]
+    if said.startswith("in"):
+        return bool(_PAST_DURATION_RE.search(before) or _PERFECT_RE.search(before)
+                    or _PERFECT_RE.search(after))
+    return (said.startswith("day") and not re.search(r"\d", said)
+            and re.search(r"\bthe\s+$", before, re.I) is not None)
+
+
+def _gate_prefix(gname):
+    """A BLOCK row's headline names its gate only when the row's label is a different name
+    ("no empty rooms" ← `standing surface: …`); a row named after its gate says it once."""
+    return "" if SHIP_BLOCK_GATES.get(gname) == gname else f"{gname}: "
 
 
 def main():
