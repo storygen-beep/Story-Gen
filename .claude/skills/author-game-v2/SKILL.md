@@ -304,6 +304,7 @@ how many fails are [off].
 | every system leads to a person or a sex scene | each card's `leads_to[]` names a built person in the cast or an explicit canvas; a `--ship` block | `the-systems.md` SY8 |
 | every clothing state is read three times | each `board.wardrobe` state and key item has 3+ readers; n/a with clothing off; a `--ship` block | `the-meters.md` W7 |
 | her clothes are backed | a line naming her garment has a check that she wears it; a `--ship` block | `register.md` "The truth rule" |
+| every chat is caused by a scene | each chat's and call's trigger flag is set by a scene, directly or through a caused chat; n/a with no phone; a `--ship` block | `the-phone.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
@@ -454,7 +455,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
   declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
-  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed. **Everything else is REPORTED** for LO to judge when he plays —
+  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
   when, lines naming a future week or day, and every other gate. `gates.py <slug>` still

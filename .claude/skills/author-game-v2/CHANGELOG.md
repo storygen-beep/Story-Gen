@@ -5,6 +5,33 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — `--ship` blocks on a chat or call nothing caused: `every chat is caused by a scene` (World and Systems PRD, Phase 6B, with the calls half)
+
+**What.** `scripts/gates.py`: new scored gate **every chat is caused by a scene** (`_chats_are_caused`,
+above `main()`, in `_phase4_gates`), promoted to a `--ship` BLOCK row. Every `[[phone.conversations]]` and
+every `[[phone.calls]]` trigger must hold a flag item (`is_true`) whose flag a canvas sets, or a reply sets
+in a conversation that is itself caused (walked to a fixed point, so a chain in any order passes). It walks
+setters by source rather than `_flags_ever_set`: dev canvases (`_is_dev`), the cheat page and
+`[engine.daily_tick]` are not scenes, and a call's `on_decline` / `on_missed` effects cause nothing.
+- **n/a policy:** no conversation and no call is n/a, and n/a passes (`SHIP_NA_PASSES`).
+- **Grandfathering:** `SHIP_SINCE["chat_caused"]` = 2026-10-02; the legacy form passes. One row covers
+  chats and calls, so the calls half has the same date and legacy branch.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md`'s list; `the-phone.md` (the planned label
+  at the chain paragraph made live; "What is not gated here" says this gate is built).
+
+**Verified.** New `scripts/tests/test_gates_chats_caused.py` (8): canvas-caused passes; a chain through a
+caused reply passes in either order; an uncaused chat and its chain are red; daily-tick and dev-canvas flags
+don't count; no flag is red; a call caused and uncaused; no phone n/a and legacy passes; on `ship_rows`
+the_balance warns, billable_hours blocks, shipped-since blocks, no phone n/a. Before/after `--ship`, HEAD
+exports: before no row; after the_balance PASS (2/2: `cara_hello` on `opening_done`, `cara_job` on
+`has_job`); every other game n/a (no phone). No other row moved; no exit code changed.
+`the-release.md:100` → `gates.py:13695` (read by hand); every other cite unchanged; `cite_check.py --fix` 0
+drifted; selfcheck clean (68 gates); pytest 639 passed.
+
+**Words:** +62, running total 146,552 / 149,283.
+
+---
+
 ## 2026-10-02 — The truth rule's rule 5 promoted to a `--ship` BLOCK: `her clothes are backed` (World and Systems PRD, Phase 6B, K4 commit 2 of 2)
 
 **What.** `scripts/gates.py`: the lint from the commit before becomes the scored gate **her clothes are

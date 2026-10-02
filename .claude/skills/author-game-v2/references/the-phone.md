@@ -366,7 +366,7 @@ conditions = { version = "1.0", items = [
 ```
 
 A link's cause flag may be set by an earlier conversation's reply, as long as the chain starts from
-a scene (planned gate: `every chat is caused by a scene`). Author as many links as the release
+a scene (gate `every chat is caused by a scene`). Author as many links as the release
 needs.
 
 ---
@@ -475,11 +475,11 @@ cap is per NPC and one topic starves the others.
 
 ## What is not gated here
 
-Nothing in this file is checked by `gates.py` yet. Two planned gates will read it:
+Two gates read this file (one still planned):
 
-- **planned gate: `every chat is caused by a scene`** (a block): every conversation's trigger holds
-  a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9).
-  A game with no phone passes.
+- **gate `every chat is caused by a scene`** (a `--ship` block): every conversation's and call's trigger
+  holds a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9);
+  dev canvases, cheats and the daily tick are not scenes. A game with no phone passes.
 - **planned gate: `a chat is short and timed`** (a warn, never a block — a block would fail a
   correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
   delay and an hour window (P3, P4).

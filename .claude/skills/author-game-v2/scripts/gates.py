@@ -12741,6 +12741,7 @@ def _phase4_gates(gate, _N, model, game, state):
          *_every_system_leads_somewhere(model, game, state))
     gate("every clothing state is read three times", *_wardrobe_is_read(game, state))
     gate("her clothes are backed", *_her_clothes_are_backed(model, game))
+    gate("every chat is caused by a scene", *_chats_are_caused(game))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13378,6 +13379,62 @@ def _her_clothes_are_backed(model, game):
 SHIP_BLOCK_GATES["her clothes are backed"] = "her clothes are backed"
 SHIP_SINCE["clothes_backed"] = (SYSTEMS_SINCE, "her clothes are backed")
 SHIP_NA_PASSES.add("her clothes are backed")
+
+
+# ── the-phone.md: every chat (and every call) is caused by a scene (WS-D7, WS-D9) ────────────
+# Each `[[phone.conversations]]` and `[[phone.calls]]` trigger holds a flag item (`is_true`) whose
+# flag a canvas sets, or a reply sets in a conversation that is itself caused (transitive, so
+# a chain of one-time messages passes). Dev canvases, the cheat page and the daily tick are not
+# scenes. A call's own decline / missed effects cause nothing. n/a with no conversation and no
+# call, and n/a passes.
+def _flags_set_in(o):
+    return {d["flag"] for path, d in _walk_paths(o)
+            if "flagEffects" in path and isinstance(d.get("flag"), str)
+            and d.get("op", "set") == "set"}
+
+
+def _chats_are_caused(game):
+    """(ok, headline, detail) for `every chat is caused by a scene`."""
+    if _legacy("chat_caused"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    phone = game.get("phone") or {}
+    convs = [c for c in (phone.get("conversations") or []) if isinstance(c, dict)]
+    calls = [c for c in (phone.get("calls") or []) if isinstance(c, dict)]
+    if not convs and not calls:
+        return None, "no phone conversation or call", []
+
+    def wants(entry):
+        return [i.get("flag_key") for i in _cond_leaves((entry.get("trigger") or {}).get("conditions"))
+                if i.get("type") == "flag" and i.get("operator") == "is_true" and i.get("flag_key")]
+
+    caused = set()
+    for cv in game.get("canvases") or []:
+        if isinstance(cv, dict) and not _is_dev(cv):
+            caused |= _flags_set_in(cv)
+    done, grew = set(), True
+    while grew:
+        grew = False
+        for i, c in enumerate(convs):
+            if i not in done and any(f in caused for f in wants(c)):
+                done.add(i)
+                caused |= _flags_set_in(c.get("blocks"))
+                grew = True
+    bad = []
+    for kind, entries, ok in (("chat", convs, lambda i, c: i in done),
+                              ("call", calls, lambda i, c: any(f in caused for f in wants(c)))):
+        for i, c in enumerate(entries):
+            if not ok(i, c):
+                fl = wants(c)
+                bad.append(f"{kind} `{c.get('id')}`: " + (
+                    f"no scene sets {', '.join(f'`{f}`' for f in fl)} (nor a caused chat's reply)"
+                    if fl else "its trigger holds no flag a scene sets (`is_true`)"))
+    n = len(convs) + len(calls)
+    return not bad, f"{n - len(bad)}/{n} chats and calls are caused by a scene", bad
+
+
+SHIP_BLOCK_GATES["every chat is caused by a scene"] = "every chat is caused by a scene"
+SHIP_SINCE["chat_caused"] = (SYSTEMS_SINCE, "every chat is caused by a scene")
+SHIP_NA_PASSES.add("every chat is caused by a scene")
 
 
 def main():
