@@ -203,6 +203,7 @@ belong here; only decisions, debts, and promises do.
       "roots":      ["location_id", "…"],   // every root; a second one is joined by a travel canvas
                                             //   and marked offscreen or sealed for gate 11 (the-map.md R3)
       "homes":      { "npc_…": "location_id", "npc_…": "offscreen" },
+      "shared_homes": [["npc_…", "npc_…"]],   // people who share one home (a couple; the-map.md R2)
       "scale":      "one street · a district · a town",
       "alive":      "tight slice" | "living world"        // the-map.md, "Aliveness"
       // travel costs live on the area: [[locations]] crossing_costs (engine.md §22). A place's
@@ -418,7 +419,7 @@ file sits there being read by a different gate. These are the exact paths:
 | key | read by | shape |
 |---|---|---|
 | `board.ascent_tiers` | *ascent tiers expand the world* | `["corruption", "exhibitionism"]` — a list of trait keys, **not** rung numbers, and **not** at the top level |
-| `board.map` | *the map is a place* · *residents have homes* | `{ archetype, shape, home_base, exterior, homes{npc_id: location_id} }`; archetype is one of `nested_zones` / `two_hub` / `map_hotspots` / `street_mesh` / `time_slot` |
+| `board.map` | *the map is a place* · *residents have homes* | `{ archetype, shape, home_base, exterior, homes{npc_id: location_id}, shared_homes[[npc_id, npc_id]] }`; archetype is one of `nested_zones` / `two_hub` / `map_hotspots` / `street_mesh` / `time_slot` |
 | `board.characters` | *residents have homes* · *guidance exists* | `[{ id, name, role }]` |
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
@@ -434,6 +435,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 | `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
 | `board.systems[]` | no gate yet | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
+| `board.wardrobe` | no gate yet | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 
 ⚠️ **`needs` has no TOML table.** The importer reads 24 top-level tables and `needs` is not one of

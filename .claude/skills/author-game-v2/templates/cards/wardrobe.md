@@ -46,6 +46,18 @@
 10. **Let the world take clothes away** (CoT, SD). Ours: `wardrobeEffects` `unequip` and `remove`.
 11. **Keep changing cheap:** 1–2 clicks (CoT, IHOH). Ours: one click per slot, or a saved outfit (`saved_outfits = true`).
 
+## Declare it
+Name the states and key items in the ledger, so a check can count their readers:
+```jsonc
+"wardrobe": {   // under "board"
+  "states":    [ { "id": "no_bra", "condition": { "type": "clothing_slot", "slot": "bra", "operator": "unequipped" } },
+                 { "id": "bare",   "condition": { "type": "worn_exposure", "operator": "gte", "value": 2 } } ],
+  // a condition is one of worn_exposure, worn_corruption, worn_beauty, worn_type (operator + value)
+  // or clothing_slot (slot + operator)
+  "key_items": [ "<clothing_id>" ]   // a [[clothing]] id
+}
+```
+
 ## Amounts (directions, never gates)
 - 4–6 states, each read in at least 3 places: a leave rule, a place, an event or a line (planned gate: `every
   clothing state is read three times`).

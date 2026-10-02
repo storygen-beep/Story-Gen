@@ -86,7 +86,7 @@ separates *lives elsewhere* from *was never given a room*. Gate 12.
 **A home is laid out like a house.** The defect this stops: the kitchen as the house hub, the
 people who live there homed in it, the bathroom folded into a landing.
 
-- **A home is a bedroom:** a room of the person's own (a couple shares one). Never the hub, a
+- **A home is a bedroom:** a room of the person's own (a couple shares one, declared in `board.map.shared_homes`). Never the hub, a
   thoroughfare, the kitchen, a hallway or a landing.
 - **The house is entered through its entry.** Its hub is the hall or front door, named for the home
   ("Home", "The House"), and the street's button shows that name. The kitchen, the bathroom and the
@@ -311,6 +311,7 @@ a schedule grid at all. Put the cost on the **area** (`crossing_costs`), never o
     "home_base":  "<location_id — where she sleeps>",
     "exterior":   "<location_id — the ground everything else sits on. MUST be a root.>",
     "homes":      { "<npc_id>": "<location_id | offscreen>" },
+    "shared_homes": [["<npc_id>", "<npc_id>"]],
     "roots":      ["<location_id>"],
     "scale":      "<one street · a district · a town>",
     "alive":      "<tight slice | living world>"

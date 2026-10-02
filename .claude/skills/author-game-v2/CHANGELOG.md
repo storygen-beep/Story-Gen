@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Two ledger keys the checks need: `board.wardrobe` and `board.map.shared_homes` (World and Systems PRD, Phase 6A)
+
+**What.**
+- `references/state.md`: the `board.map` schema and its gate-table row gain `shared_homes` (pairs of npc
+  ids who share one home, a couple); a new table row for `board.wardrobe = { states: [{ id, condition }],
+  key_items: [clothing_id] }`, where a condition is one `worn_exposure`, `worn_corruption`,
+  `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item, the
+  fields `CONDITION_SCHEMA` takes (`template_import.py:1670`, `:1674-1677`). Widened the same day, before
+  any check read it: billable_hours' main clothing read is `worn_corruption gte 2`, which exposure and
+  slot alone couldn't declare.
+- `references/the-map.md` R2: "a couple shares one" now says where it is declared; its map schema shows the
+  key.
+- `templates/cards/wardrobe.md`: a short "Declare it" block with the shape and the five condition types.
+
+**Why.** The planned checks for "every clothing state is read three times" and "a home is a bedroom" read
+these keys, and nothing documented them.
+
+**Verified.** `test_templates_parse` passes; selfcheck clean (orphans 2); pytest passes.
+
+**Words:** +62 (the card is not counted), running total 145,917 / 149,283.
+
+---
+
 ## 2026-10-02 — A stale gates.py cite in the-board.md (World and Systems PRD, Phase 6A)
 
 **What.** `references/the-board.md:89` cited `gates.py:2248` for the deleted gate 22; that line is now
