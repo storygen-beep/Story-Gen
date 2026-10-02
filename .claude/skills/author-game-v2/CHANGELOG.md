@@ -17,6 +17,10 @@ screens. The full rule lives in `author-game/references/media.md` §7 Gate 1.
 
 **Verified.** grep of the row; vesper converted and rebuilt with the same rule.
 
+**Words:** +5. Running total after the engine batch 3 merge (f0d53c9): **145,768 / 149,283** — skill side
++49 (cleanup +44, this +5), engine side +320, and −32 where §26's planned rent sentence gave way to the
+built fact.
+
 ---
 
 ## 2026-10-02 — Engine: the importer warns about a first rent stage whose line can never print (World and Systems PRD, Phase 7)
