@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — Step reachability reads a value worked out from her stats (World and Systems PRD, Phase 7b, L3)
+
+**What.** `scripts/gates.py` `_ladder_earnable`, two line-for-line swaps (~:4652 a scene's effect, ~:4687
+`[engine.daily_tick]`): an effect value `{type = "trait", …}` is read through `_value_bounds(v, start_traits)[1]`,
+the helper the E5 readers use (its high end: the declared `max`, or unbounded when it grows with the stat).
+`{type = "random", …}` reads exactly as before (its high end is still `max`, falling back to `min`). Why: a
+stat-based pay was skipped, so a step whose gate it could meet read as unreachable.
+
+**Verified.** New `scripts/tests/test_gates_ladder_trait_value.py` (4): a scene paying charm × 10 (max 60) reaches
+money ≥ 40; capped at 30 it is still short ("moves it only to 30"); a day-roll stat value is a farm; random reads as
+before. Three of the four fail on the old code. No line count moved; `cite_check.py --fix` 0 drifted; selfcheck
+clean (0 orphans); pytest 668 passed.
+
+**Words:** 0, running total 146,775 / 149,283.
+
+---
+
 ## 2026-10-02 — Two gates.py comments made true (World and Systems PRD, Phase 7b, L2)
 
 **What.** `scripts/gates.py`, comments only, line for line (no line count moved):

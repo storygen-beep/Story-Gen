@@ -4649,8 +4649,8 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
                     if (npc and (tgt != "npc" or ef.get("npcId") != npc)) or (not npc and tgt != "player"):
                         continue
                     v = ef.get("value")
-                    if isinstance(v, dict) and v.get("type") == "random":
-                        v = v.get("max", v.get("min"))
+                    if isinstance(v, dict) and v.get("type") in ("random", "trait"):
+                        v = _value_bounds(v, start_traits)[1]
                     if not isinstance(v, (int, float)) or isinstance(v, bool):
                         continue
                     eop = ef.get("op") or "add"
@@ -4684,8 +4684,8 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
                    for it in tick_conds if it not in on_counter):
                 continue
             v = ef.get("value")
-            if isinstance(v, dict) and v.get("type") == "random":
-                v = v.get("max", v.get("min"))
+            if isinstance(v, dict) and v.get("type") in ("random", "trait"):
+                v = _value_bounds(v, start_traits)[1]
             if not isinstance(v, (int, float)) or isinstance(v, bool):
                 continue
             eop = ef.get("op") or "add"
