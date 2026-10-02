@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — World size: a `--ship` REPORT row and `lint · world size` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py` (above `main()`): `_world_size` measures, with no threshold (WS-D9):
+- **hook people** = `want.cast` ids that are no `want.threads[].person`; **hub** = the first
+  `board.map.roots[]`; **hook share** = words in canvases holding a hook person (trigger `npc` /
+  `requires_npc`, or a speaker) or placed at the hub, over all words (beat words, as the floors count);
+- **threads** declared / built (a canvas holds the thread's person);
+- **speaking NPCs** (distinct dialog `npcId`s, the `_dialog_blocks` speaker walk);
+- **links** = thread canvases (not hook canvases) that set or read a flag a hook canvas reads;
+- **zones** = distinct `zone:<name>` labels on `board.locations[]`.
+Wiring: one line in `ship_rows` appends the REPORT row **world size** (`_world_size_row`, ok = None, "a
+size, never a score"); `main()` prints `lint · world size` before "toggles declared".
+- **n/a policy / grandfathering:** a REPORT row is never judged, so neither applies.
+- Docs: SKILL.md lints paragraph and the REPORT list; `the-want.md` "Her life — the threads" names it.
+
+**Verified.** New `scripts/tests/test_gates_world_size.py` (3): a fixture world (one hook person, one thread
+built of two, one link, two zones); no ledger still reports; on `ship_rows` it is a REPORT row and no BLOCK
+row. Before/after, HEAD exports — before no row; after:
+billable_hours hook share 39% of 6,733 words (3 hook people, hub `linden_street`), threads 4/4 built,
+6 speaking NPCs, 8 links, 2 zones; members_only 61% (4 hook people, no `board.map.roots`), 0 threads, 4 speakers;
+the_balance 9 speakers, 3 zones; orientation 5, probation 4, vesper 18, media_lab 0 speakers — none of those
+declares `want.cast` / threads, so their share is 0%. Only the new REPORT row changed; no BLOCK row or exit
+code. `the-release.md:100` → `gates.py:13855` (read by hand); every other cite unchanged; `cite_check.py
+--fix` 0 drifted; selfcheck clean (71 gates, 58 lints); pytest 657 passed.
+
+**Words:** +37, running total 146,699 / 149,283.
+
+---
+
 ## 2026-10-02 — The system floors and the price of a paid act: two warnings (World and Systems PRD, Phase 6B)
 
 **What.** `scripts/gates.py`, two scored gates (above `main()`, in `_phase4_gates`), WARNs — never in
