@@ -171,13 +171,13 @@ idea in the other form.
 
 Writing the canvas form on a card is **caught at build time**, so it is noisy rather than dangerous:
 the parser reads neither key, and the validator errors with
-`trait condition op must be gte/lte/gt/lt/eq, got ''` (`template_import.py:5990`). A stray
+`trait condition op must be gte/lte/gt/lt/eq, got ''` (`template_import.py:5992`). A stray
 `version` inside a `when` item is simply dropped.
 
 ⚠️ **The silent one is `ne`, and it is silent by design.** Cards are evaluated by their own
 evaluator — `setup.checkQuestsCondition`, one of the four this engine runs and the only one
 without `ne` — whose switch has **no `ne` case and falls through to `return false`**. So the card validator's whitelist deliberately excludes `ne`
-(`template_import.py:5983-5990`): widening it would let an author write a routing condition that is
+(`template_import.py:5985-5992`): widening it would let an author write a routing condition that is
 always false, and a card that never matches leaves a blank row rather than an error. Canvas
 conditions are a different path and do support it. `engine.md` §37.
 

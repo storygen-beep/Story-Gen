@@ -6645,6 +6645,37 @@ class ReturnExitSchemaTests(SimpleTestCase):
         self.assertTrue(any("'node', or 'return'" in e for e in errors), errors)
 
 
+class ReturnChoiceSchemaTests(SimpleTestCase):
+    """E8c (World and Systems PRD) — `targetType = "return"` on a choice."""
+
+    @staticmethod
+    def _return_choice(d, cid="dan_call"):
+        node = _canvas(d, cid)["nodes"][0]
+        node["exit_block"] = {"type": "choices", "choices": [
+            {"text": "Hang up", "targetType": "return", "time_progression_minutes": 10}]}
+        return node["exit_block"]["choices"][0]
+
+    def test_return_choice_validates_clean(self):
+        d = _batch3()
+        self._return_choice(d)
+        self.assertEqual(validate(normalize(d)), [])
+
+    def test_return_choice_needs_a_home_to_fall_back_to(self):
+        d = _batch3()
+        self._return_choice(d)
+        _canvas(d, "dan_call").pop("trigger")
+        d["phone"]["calls"] = []
+        errors = validate(normalize(d))
+        self.assertTrue(any("targetType='return' but canvas has no resolving" in e
+                            for e in errors), errors)
+
+    def test_unknown_target_type_names_return(self):
+        d = _batch3()
+        self._return_choice(d)["targetType"] = "back"
+        errors = validate(normalize(d))
+        self.assertTrue(any("'node', or 'return'" in e for e in errors), errors)
+
+
 class WardrobeEffectSchemaTests(SimpleTestCase):
     """E7a (World and Systems PRD) — `action` and `item_id` on a wardrobe effect."""
 

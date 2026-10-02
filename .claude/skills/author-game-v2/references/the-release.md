@@ -248,8 +248,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:19176   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:19180   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:19187   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:19191   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly
@@ -421,8 +421,8 @@ skill.
 > machine runs do not.
 
 ⚠️ **What the check reads, and why it is not the obvious thing.** `[IMAGE MISSING]` and
-`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:13346`, `:15641`,
-`:15505`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
+`[… POOL MISSING]` placeholders are emitted **only under `--debug`** (`v2.py:13346`, `:15651`,
+`:15514`). A clean build renders **silent gaps**, so grepping the HTML for those markers passes a
 game with missing files. The check reads the build's own flags-init map (`debug_mode`,
 `dev_mode_enabled`) and the always-generated `MissingMediaPage` count instead.
 
