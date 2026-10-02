@@ -300,6 +300,7 @@ how many fails are [off].
 | **what she picks is read** | every `[[player.customization_fields]]` value is printed somewhere — `$player.<id>` or the `@player.<id>` token — fails only on ZERO, `sets_portrait` counts as a read, and a game declaring no customization reports n/a, which is not a pass | `the-want.md` §1 W1 |
 | **the label keeps its time** | no button promises a clock time the engine cannot reach, and a stated duration is the real spend | `the-clock.md` C3 · C4 |
 | a step is seen from the next room | a ladder step's `seen_from` shares its place's parent (`entry_from`) | `state.md` |
+| every system has a card | each `board.systems[]` card is filled; zero cards is red; a `--ship` block | `the-systems.md` "The check" |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
@@ -450,7 +451,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
   declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
-  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b). **Everything else is REPORTED** for LO to judge when he plays —
+  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
   when, lines naming a future week or day, and every other gate. `gates.py <slug>` still

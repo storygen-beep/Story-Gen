@@ -11194,7 +11194,7 @@ def selfcheck_mode():
 #
 # It BLOCKS only what makes a build broken, unfinishable or untrue (LO, 2026-09-26), and
 # REPORTS everything else for LO to judge when he plays. The two lists are fixed here and
-# in `the-release.md`; a row moves between them only at a release boundary.
+# in `the-release.md` (later rows are appended above `main()`); rows move at a release.
 #
 # `--release` and `--saves` are CALLED, not re-implemented, and their own output is left
 # exactly as it was: their exit codes are read, and their [FAIL] lines are quoted.
@@ -12736,6 +12736,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("adult wording", ok, head, detail)
     gate("a goal's end is built", *_goal_end_is_built(game, state))
     gate("a step is seen from the next room", *_seen_from_next_room(game, state))
+    gate("every system has a card", *_every_system_has_a_card(state))
 
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
@@ -13005,6 +13006,79 @@ def _seen_from_next_room(game, state):
     if bad and _grandfathered((state or {}).get("slug"), state, SEEN_FROM_SINCE):
         return True, head, [f"warn (grandfathered until it next ships) — {b}" for b in bad]
     return not bad, head, bad
+
+
+# ── the-systems.md, the card: the `--ship` BLOCK rows on systems (WS-D3, WS-D9) ─────────
+# Appended to SHIP_BLOCK_GATES / SHIP_SINCE here rather than inside them, so the lines the
+# skill cites above do not move. Each row is a scored gate too, so `gates.py <slug>` shows it
+# while the game is written. Under LO B a grandfathered game warns until it ships on or after
+# the row's date; the legacy form of every row is a pass, never n/a, or the warn never shows.
+SYSTEMS_SINCE = "2026-10-02"
+
+
+def _filled(v):
+    return v not in (None, "", [], {})
+
+
+def _system_cards(state):
+    """board.systems[] minus the old meter-shaped entries (a `kind` and no card field)."""
+    board = (state or {}).get("board") or {}
+    meters = _meters_of_board(board)
+    return [s for s in (board.get("systems") or [])
+            if isinstance(s, dict) and not any(s is m for m in meters)]
+
+
+def _card_is_money(card, state):
+    """Does the card's `cost` or `pay_ladder` involve money? Then it needs a sink and a
+    deadline; otherwise it must feed something (the brake)."""
+    econ = (((state or {}).get("board") or {}).get("economy") or {})
+    words = {w.lower() for w in ("money", "$", "£", "€", str(econ.get("currency") or ""),
+                                 str(econ.get("symbol") or "")) if w}
+    for rung in card.get("pay_ladder") or []:
+        pay = rung.get("pay") if isinstance(rung, dict) else rung
+        if isinstance(pay, (int, float)) and not isinstance(pay, bool) and pay:
+            return True
+        if isinstance(pay, str) and any(w in pay.lower() for w in words):
+            return True
+    return any(w in str(card.get("cost") or "").lower() for w in words)
+
+
+# A card's fields (the-systems.md, the card). `hours` and `daily` are read by other rows.
+_CARD_REQUIRED = ("place", "cost", "people", "pool", "memory", "growth", "hook_link",
+                  "leads_to")
+
+
+def _every_system_has_a_card(state):
+    """(ok, headline, detail) for `every system has a card`. Zero cards is red, never n/a."""
+    if _legacy("system_card"):
+        return True, f"not checked before {SYSTEMS_SINCE}", []
+    systems = ((state or {}).get("board") or {}).get("systems") or []
+    cards = _system_cards(state)
+    old = len(systems) - len(cards)
+    as_meters = (f" · {old} meter-shaped entr{'y' if old == 1 else 'ies'} in board.systems[] "
+                 f"read as meters" if old else "")
+    if not cards:
+        return False, "no system card in board.systems[] — zero systems is red" + as_meters, \
+            ["declare at least one card (the-systems.md SY8; templates/sheets/system.md)"]
+    bad = []
+    for c in cards:
+        miss = [f for f in _CARD_REQUIRED if not _filled(c.get(f))]
+        if not (_filled(c.get("pay_ladder")) or _filled(c.get("lewd_ladder"))):
+            miss.append("a ladder (pay_ladder[] or lewd_ladder[])")
+        if not (_filled(c.get("feeds")) or _filled(c.get("reads"))):
+            miss.append("feeds[] / reads[]")
+        if _card_is_money(c, state):
+            miss += [f + " (the card involves money)" for f in ("sink", "deadline")
+                     if not _filled(c.get(f))]
+        elif not _filled(c.get("feeds")):
+            miss.append("feeds[] (no money in it, so it must feed something already read)")
+        if miss:
+            bad.append(f"{c.get('id') or '?'}: missing {', '.join(dict.fromkeys(miss))}")
+    return not bad, f"{len(cards) - len(bad)}/{len(cards)} system cards filled" + as_meters, bad
+
+
+SHIP_BLOCK_GATES["every system has a card"] = "every system has a card"
+SHIP_SINCE["system_card"] = (SYSTEMS_SINCE, "every system has a card")
 
 
 def main():

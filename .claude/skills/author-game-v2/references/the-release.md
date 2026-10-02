@@ -97,7 +97,7 @@ location, it arrives filled, not as a promise.
 **5. Gate — and read the lists.** `python3 scripts/gates.py <slug>` green, or fix it. That same
 command prints **its lints below the tally** — `gates.py --selfcheck` gives the count, from the
 script's own registry of printed `lint ·` labels (`_emitted_names`) — and they are the half of the
-instrument that judges nothing. Lints never touch the tally (`gates.py:13265`), so a game
+instrument that judges nothing. Lints never touch the tally (`gates.py:13339`), so a game
 can be green on every gate with the lints full, and a flagged word nobody reads ships on a button.
 
 > ⚠️ **This is a step in the loop, not a checklist, and the difference is deliberate.**
@@ -437,7 +437,7 @@ That is correct for a release gate — it judges what ships — and it means the
 (`SHIP_GRANDFATHERED`: members_only, orientation, probation, the_balance, vesper_two) gets `[WARN] … blocks
 from your next release` where only the new rule is red. It keeps warning until it records a release with
 `shipped` on or after `since`; then the row blocks. A game started later is blocked from the start. Ordinary
-gates are never grandfathered.
+gates are never grandfathered. Rows added since 2026-10-02, each warning first: every system has a card.
 
 ---
 

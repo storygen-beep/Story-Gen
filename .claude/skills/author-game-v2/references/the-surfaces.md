@@ -199,9 +199,9 @@ would build"* rules out. So:
 One meter read in three rooms beats three read in one each. **The test is not how
 many systems the game has; it is whether a room has anything of its own to show.**
 
-**No gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
+**No count gate and no lint.** A count is satisfied by declaring traits. If a check is ever built here
 it is a matched instrument first, on its own, verified against three games before any doctrine
-cites it.
+cites it. The cards are checked instead: `every system has a card` (`the-systems.md`, "The check").
 
 > ### ✅ COMPLETED 2026-09-02 — where a system is FED, and where the list itself lives
 >
@@ -220,7 +220,7 @@ cites it.
 > (`~/Documents/Systems_Study_20260902/matched2.py`): field median **82** distinct leaf names at
 > ≥25 references.
 >
-> ⚠️ **Still no gate**, and this note does not change that. What shipped is one **lint** —
+> ⚠️ **Still no count gate** (the cards have `every system has a card`), and this note does not change that. What shipped is one **lint** —
 > `the labels and the systems agree` — which reports and never scores, and which is safe only
 > because declaring more makes its output worse rather than better.
 

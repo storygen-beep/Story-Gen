@@ -5,6 +5,42 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-02 — `--ship` blocks on a system with no card: `every system has a card` (World and Systems PRD, Phase 6B)
+
+**What.** `scripts/gates.py`: new scored gate **every system has a card** (`_every_system_has_a_card`,
+above `main()`, registered in `_phase4_gates`), promoted to a `--ship` BLOCK row. Each card in
+`board.systems[]` fills its fields (place, cost, a pay or lewd ladder, people, pool, memory, growth,
+feeds/reads, hook_link, leads_to); a card whose `cost` or `pay_ladder` involves money (a numeric pay, or
+the currency / its symbol / "money" in the text) needs a `sink` and a `deadline`; any other card needs a
+non-empty `feeds[]` (the brake). An old meter-shaped entry (`kind`, no card field) is a meter, not a card.
+- **n/a policy:** none. Zero cards is red (an absence is not a pass).
+- **Grandfathering:** `SHIP_SINCE["system_card"]` = 2026-10-02. The legacy form passes, so a grandfathered
+  game warns until it ships on or after that date. billable_hours is not grandfathered.
+- **Wiring:** the row and its date are appended to `SHIP_BLOCK_GATES` / `SHIP_SINCE` above `main()` (one
+  comment line by `SHIP_BLOCK_GATES` swapped, line for line, to say so), so no cited line above moves.
+- Docs: SKILL.md gate-table row and BLOCK list; `the-release.md` (rows added since 2026-10-02);
+  `the-systems.md` "The check"; `the-surfaces.md` R2c's two "no gate" lines now say "no count gate" and
+  name the row; `state.md`'s `board.systems[]` row.
+
+**Why.** WS-D9: every declared system has a card is a BLOCK (the ledger otherwise claims a system nobody
+designed).
+
+**Verified.** New `scripts/tests/test_gates_system_cards.py` (13): filled passes; missing fields named;
+money card needs sink + deadline; a cost in the currency is money; a no-money card must feed; zero systems
+red; an old meter-shaped ledger red; legacy passes; on `ship_rows`: old shape blocks billable_hours,
+grandfathered warns, shipped-since blocks. `test_gates_ws6.green_state` gains one filled card (and
+`board.characters`), so the green fixture still ships. Before/after `--ship`, `git archive HEAD` exports
+(vesper_two excluded) — before: no row; after: billable_hours PASS (2/2 cards); members_only, orientation,
+probation, the_balance WARN (zero cards; 8 / 0 / 11 / 23 meter-shaped entries); media_lab and vesper FAIL
+(no v2 ledger, not grandfathered). Every game already exited 1 before, so no exit code changed; no other
+row moved. `the-release.md:100` `gates.py:13265` → `:13339` (read by hand); every other cite unchanged
+(each line compared with HEAD's); `cite_check.py --fix` 0 drifted in SKILL.md + references; selfcheck clean
+(64 gates); pytest 595 passed.
+
+**Words:** +103, running total 146,250 / 149,283.
+
+---
+
 ## 2026-10-02 — A step seen from the next room: `seen_from`, checked in two halves (World and Systems PRD, Phase 6A)
 
 **What.** A ladder step may declare `seen_from = "<location_id>"`, the room next door the person is in.

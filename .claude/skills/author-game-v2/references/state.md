@@ -435,7 +435,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 | `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
-| `board.systems[]` | no gate yet | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
+| `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
 | `board.wardrobe` | no gate yet | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 

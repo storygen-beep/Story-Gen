@@ -422,7 +422,10 @@ after the prose exists.
 
 ## The check
 
-**One lint ships with this file. No gate, and the reason is in the skill's own history.**
+**`--ship` blocks on the cards:** `every system has a card` — SY8's fields filled; a money card (its
+`cost` or `pay_ladder`) has a `sink` and a `deadline`, any other `feeds[]` something; zero cards is red.
+
+**One lint ships with this file. No count gate, and the reason is in the skill's own history.**
 
 `lint · the labels and the systems agree` — a declare-then-check over the ledger's meters, modelled
 on the `a need shuts a door` gate. It prints three lists and **moves no score**:
