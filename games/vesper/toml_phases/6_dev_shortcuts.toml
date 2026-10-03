@@ -2317,6 +2317,8 @@ flagEffects = [
   { targetType = "player", flag = "vega_dismantled",     op = "unset" },
   { targetType = "player", flag = "crew_list_held",      op = "unset" },
   { targetType = "player", flag = "crew_called",         op = "unset" },
+  { targetType = "player", flag = "vega_plan",           op = "unset" },
+  { targetType = "player", flag = "cradles_ready",       op = "unset" },
 ]
 
 # ═══ beat_0216, 0.2.3 — DEV JUMP 2. Ready for the take. ═══════════════════════════════════════════════════════════
@@ -2582,6 +2584,8 @@ flagEffects = [
   { targetType = "player", flag = "vega_dismantled",     op = "unset" },
   { targetType = "player", flag = "crew_list_held",      op = "set"   },
   { targetType = "player", flag = "crew_called",         op = "set"   },
+  { targetType = "player", flag = "vega_plan",           op = "set"  },
+  { targetType = "player", flag = "cradles_ready",       op = "unset" },
 ]
 
 # ═══ 0.2.3 — DEV JUMP 3. The hunt is on: part one done, after Kess's seam. ═══ (copied from dev_jump_hunt_take)
@@ -2844,6 +2848,8 @@ flagEffects = [
   { targetType = "player", flag = "vega_dismantled",     op = "unset" },
   { targetType = "player", flag = "crew_list_held",      op = "unset" },
   { targetType = "player", flag = "crew_called",         op = "unset" },
+  { targetType = "player", flag = "vega_plan",           op = "unset" },
+  { targetType = "player", flag = "cradles_ready",       op = "unset" },
 ]
 
 # ═══ 0.2.3 — DEV JUMP 4. The crew night is tomorrow (dace_met set today by this click). ═══
@@ -3106,6 +3112,8 @@ flagEffects = [
   { targetType = "player", flag = "vega_dismantled",     op = "unset" },
   { targetType = "player", flag = "crew_list_held",      op = "set"   },
   { targetType = "player", flag = "crew_called",         op = "set"   },
+  { targetType = "player", flag = "vega_plan",           op = "unset" },
+  { targetType = "player", flag = "cradles_ready",       op = "unset" },
 ]
 
 # ═══ 0.2.3 — DEV JUMP 5. Vega on the table (the take done). ═══
@@ -3368,4 +3376,6 @@ flagEffects = [
   { targetType = "player", flag = "vega_dismantled",     op = "unset" },
   { targetType = "player", flag = "crew_list_held",      op = "set"   },
   { targetType = "player", flag = "crew_called",         op = "set"   },
+  { targetType = "player", flag = "vega_plan",           op = "set"  },
+  { targetType = "player", flag = "cradles_ready",       op = "unset" },
 ]

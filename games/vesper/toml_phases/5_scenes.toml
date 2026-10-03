@@ -11894,17 +11894,31 @@ when = [
   { flag = "crew_back", op = "is_false" },
 ]
 
-# ── 25 · 0.2.3, beat_0216. His men are behind you. ──
+# ── 25a · 0.2.3, beat_0220 (LO). The three of them make one plan before anyone goes up the strip. ──
 [[quest_cards]]
 npc_id     = "npc_bastien"
 priority   = 25
-text       = "His men are back, ten of them, Dace's. When you are ready to draw Vega out, they will be behind her."
+text       = "His men are back, ten of them, Dace's. Before anybody goes up the strip after her, you, Bastien and Cain need the same plan."
+tip        = "At the cot, the day after the crew night. Cain will come."
+goals = [
+  { flag = "vega_plan", op = "is_true", label = "Make the plan with Bastien and Cain" },
+]
+when = [
+  { flag = "crew_back", op = "is_true"  },
+  { flag = "vega_plan", op = "is_false" },
+]
+
+# ── 25 · 0.2.3, beat_0216, re-gated beat_0220. The plan is made; his men are behind you. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 25
+text       = "The plan is made. His men will be in the stalls and the doorways. When you are ready to draw Vega out, they will be behind her."
 tip        = "The Vega card on the Underground opens when you are ready: her habits learned, good enough to stand with her, in one piece."
 goals = [
   { flag = "vega_taken", op = "is_true", label = "Draw Vega out (the Underground)" },
 ]
 when = [
-  { flag = "crew_back",  op = "is_true"  },
+  { flag = "vega_plan",  op = "is_true"  },
   { flag = "vega_taken", op = "is_false" },
 ]
 
@@ -23034,7 +23048,21 @@ when = [
   { flag = "vega_dismantled", op = "is_false" },
 ]
 
-# ── L · THE END CARD. Terminal. beat_0217. Names what is still standing and the door. ──
+# ── K2 · 0.2.3, beat_0221. The shell to the Site. ──
+# ⚠️ CAIN'S HOURS IN THE TIP: cap_the_cradles needs him there (his Site rows, 21:00-03:00).
+[[quest_cards]]
+priority   = 10
+text       = "Kess has her ready: a company machine in your shape, near enough, and nobody inside it. It goes where you were made, in the second cradle."
+tip        = "The Site, off the Underground, at night. Cain is there from nine."
+goals = [
+  { flag = "cradles_ready", op = "is_true", label = "Take the shell to the Site" },
+]
+when = [
+  { flag = "vega_dismantled", op = "is_true"  },
+  { flag = "cradles_ready",   op = "is_false" },
+]
+
+# ── L · THE END CARD. Terminal. beat_0217, moved to cradles_ready at beat_0221 (the cradle scene is now the last). ──
 # ⚠️ NO APOSTROPHE IN terminal_text — SugarCube source-byte escaping renders one as &amp;#x27; in the built page.
 # ⚠️ THE ONLY TERMINAL STORY-GOALS CARD IN THE GAME (check_the_hunt.py §0217), the job card H used to have.
 # Every place named in the tip was re-read at beat_0217: Bastien at the cot (round the clock) and his men at the
@@ -23042,12 +23070,12 @@ when = [
 # floor at eight and in his lab from eleven; Colm at the Undertow in the evenings; the House, the market, the pit.
 [[quest_cards]]
 priority   = 10
-text       = "Vega is in pieces on Kess's bench, and the shell of her is ready: a company machine in your shape, near enough. The method is in your head. The two cradles are in your father's lab. Cain will sit with your body while you wear hers."
+text       = "The shell of her is lying in the second cradle in your father's lab, and the first cradle is empty, waiting for you. The method is in your head. Cain will sit with your body while you wear hers."
 tip        = "That is where this build ends. Bastien is at the cot and his men are back at the Undertow. Cain keeps the nights at the Site. Renner's office is open, Grier is in his room from ten, Sabin is on the floor at eight and in his lab from eleven, and Colm drinks at the Undertow in the evenings. The House, the market and the pit are where you left them. The transfer is the next release. If you want it sooner, Support Us in the sidebar."
 terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
 when = [
-  { flag = "vega_dismantled", op = "is_true" },
+  { flag = "cradles_ready", op = "is_true" },
 ]
 
 # ── cap_rue_takes_the_list — 0.2.3, beat_0219 (LO's amendment). Auto-fire @underworld_brothel, pri 10, ONE-SHOT. ───
@@ -23093,4 +23121,151 @@ locationId               = "underworld_brothel"
 time_progression_minutes = 30
 flagEffects = [
   { targetType = "player", flag = "crew_called", op = "set" },
+]
+
+# ── cap_the_plan — 0.2.3, beat_0220 (LO's ask). Auto-fire @the_cot, pri 11, ONE-SHOT. ───────────────────────────
+# LO, 2026-10-04: "is there anything cain, bastien and wren planning about this, how they would take on vega?" The
+# pieces existed (Kess: someone behind her; Cain: the wrong move; Bastien: his men), but the three never sat down
+# together. Here they do, at the only place Bastien can be, and each owns a piece of the plan the take then plays
+# beat for beat: Bastien WHERE (the strip at night, his men in the stalls), Cain HOW (alone first, past the minute,
+# the wrong thing), Wren the END (the seam), Bastien AFTER (the bag, his Room), Cain THEN (Kess).
+# ⚠️ THE DAY AFTER THE CREW NIGHT: cap_the_crew_night exits to the cot, so on the bare flag this fires in its breath;
+# days_since_flag crew_back gte 1 separates them (crew_back is 0.2.3-only, set through the flag path).
+# ⚠️ face_worn is_false + Bastien present, like every cot scene. Cain needs no gate (a speaker in a one-shot).
+# ⚠️ THE ONE LINE BETWEEN THE TWO MEN: Cain carried Bastien up five turns of corridor (The Way Down) and they have
+# never spoken of it. Bastien does, once, sideways; Cain does not answer it.
+[[canvases]]
+id          = "cap_the_plan"
+name        = "The plan"
+description = "beat_0220 (0.2.3, LO's ask). Auto-fire @the_cot, pri 11, one-shot, gated crew_back + days_since_flag crew_back gte 1 + vega_plan is_false + face off + Bastien present. Cain comes to the cot and the three of them make the plan the take plays: the strip at night with Dace's men in the stalls (Bastien), Wren alone first, past the minute, the wrong thing (Cain), the seam (Wren), the bag and his Room (Bastien), then Kess (Cain). SETS vega_plan."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "crew_back", operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "crew_back", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "vega_plan", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_cot", operator = "is_present", npc_id = "npc_bastien" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The plan"
+blocks = [
+  { type = "paragraph", content = "Cain is at the bench when she comes in, across from Bastien, the ledger shut between them. Two men who have known each other eleven years, and the first time she has seen them sit down together." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Sit. We are going to say it once, all three of us, and then nobody improvises." },
+    ] },
+    { advance_text = "Sit down.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Where first. The strip, at night, when it's half empty. Dace's men in the stalls and the doorways. I know every one of those doorways. I paid for half of them." },
+    ] },
+    { advance_text = "Look at Cain.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "How. You go out alone. She comes, because she wants you whole and she thinks alone is easy." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You keep her past the minute. She slows. Every time she does the right thing, you do the wrong one." },
+    ] },
+    { advance_text = "\"And the men?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And the men?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Not until she is slow. Before that she kills them for nothing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She will kill some of them anyway. Dace knows. I told him." },
+    ] },
+    { advance_text = "Say your part.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then the seam. Kess showed me where. I'm the only one who can get behind her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes. That part is yours." },
+    ] },
+    { advance_text = "\"And after?\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "After is mine. The bag, a knee, and down the stair to my Room. It held you. It will hold her a night." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then Kess. In the morning." },
+    ] },
+    { advance_text = "Watch them.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You carried me up five turns of my own supplier's corridor. I have not said anything about that." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Don't." },
+        { type = "paragraph", content = "Bastien doesn't. He opens the ledger again and finds his place." },
+    ] },
+    { advance_text = "Stand up.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "When you're ready, not before. You'll know when." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two men who agree on nothing, agreeing on her. Her chest is tight. The air down here, she decides." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "When she's ready."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "vega_plan", op = "set" },
+]
+
+# ── cap_the_cradles — 0.2.3, beat_0221 (LO: "we can show vega … a body lying"). Auto-fire @the_site, pri 11. ─────
+# THE RELEASE'S LAST SCENE. The shell is laid in the second cradle in Marrow's lab, beside the empty one that is
+# waiting for her — the payoff of "Why are there two?" / "Not today." (cap_the_site).
+# ⚠️ IT STOPS ONE BREATH BEFORE THE TRANSFER, ON PURPOSE: the end card leaves free play open, and every surface she
+# can still reach describes Wren's own body (Bastien's loop, her covers, the weapon, the portrait). So Kess says
+# "Not tonight", nothing is transferred, and 0.2.4 opens with her lying down. LO agreed: the transfer is 0.2.4.
+# ⚠️ CAIN PRESENT (his Site rows 21:00-03:00, npc_at_location): the scene is his place and his promise. Kess is a
+# speaker here — he carried the shell with them; card K2's tip names Cain's hours.
+# MEDIA: one new slot, scenes/the_two_cradles.jpg, on the beat that shows them.
+[[canvases]]
+id          = "cap_the_cradles"
+name        = "Two cradles"
+description = "beat_0221 (0.2.3, LO's ask) — THE RELEASE'S LAST SCENE. Auto-fire @the_site, pri 11, one-shot, gated vega_dismantled + cradles_ready is_false + Cain present. They lay Vega's empty shell in the second cradle in Marrow's lab; Kess runs the lines between the two; Cain sits down by the empty one; Kess: when you're ready, lie down in that one and breathe out — not tonight. Her hand on her own empty cradle: 'Two cradles. Now she knows why.' SETS cradles_ready (end card L)."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "vega_dismantled", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "cradles_ready",   operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Two cradles"
+blocks = [
+  { type = "paragraph", content = "It takes the three of them to carry her down an hour and out an hour. Nobody on the strip looks twice at a long box." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The second one. Mind her head. It's the only part of her I put back the way I found it." },
+    ] },
+    { advance_text = "Lay her down.", blocks = [
+        { type = "image", props = { file = "scenes/the_two_cradles.jpg", description = "Two large dusty machine cradles side by side in a dim abandoned laboratory, joined by a run of cables; in one lies a perfect, still, woman-shaped figure with closed eyes, the other is empty. Must show: two cradles, one occupied, one empty, cables between. Avoid: gore, blood, bright light.", search_queries = ["two pods side by side lab one empty one with body cables", "sci fi cradles abandoned lab still figure lying in one"] } },
+        { type = "paragraph", content = "They lay the shell in the second cradle. Vega's face, Vega's hands, and nothing behind the eyes, the way there never was." },
+        { type = "dialog", props = { speaker = "player" }, content = "She looks like she's asleep." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "She looks like a coat on a hook. Asleep is something you do." },
+    ] },
+    { advance_text = "Watch Kess.", blocks = [
+        { type = "paragraph", content = "Kess runs the lines from one cradle to the other, the way they ran when her father was alive, and the dust comes off them in his hands." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "He wired these himself. Better than anything I own." },
+    ] },
+    { advance_text = "Look at Cain.", blocks = [
+        { type = "paragraph", content = "Cain pulls the chair from her father's bench to the empty cradle and sits down beside it, as if he means to be there a long time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I said I would sit with it. I will." },
+    ] },
+    { advance_text = "\"When?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "When?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "When you're ready, you lie down in that one and breathe out, and I do the rest. Not tonight. Tonight you go and do whatever you'd want to have done." },
+    ] },
+    { advance_text = "Touch the empty one.", blocks = [
+        { type = "paragraph", content = "She puts her hand on the empty cradle. Cold metal, her own shape worn into it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two cradles. Now she knows why." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Not tonight."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 180
+flagEffects = [
+  { targetType = "player", flag = "cradles_ready", op = "set" },
 ]
