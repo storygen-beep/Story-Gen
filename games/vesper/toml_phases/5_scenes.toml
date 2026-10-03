@@ -22712,7 +22712,7 @@ blocks = [
     { advance_text = "Ask what would.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Then what would bring you back?" },
         { type = "dialog", props = { speaker = "unknown" }, content = "Dace. He was out there with us and he walked off that strip and kept walking. If Dace comes back, we come back." },
-        { type = "dialog", props = { speaker = "unknown" }, content = "He drinks at the pit now. Ask him. He won't say yes." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "He's at the pit every night from six, at the rail over the fights. Ask him. He won't say yes." },
     ] },
     { advance_text = "Watch them go.", blocks = [
         { type = "paragraph", content = "They finish the drinks Sol poured, every one of them, and leave the coin on the counter for it." },
