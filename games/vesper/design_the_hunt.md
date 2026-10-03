@@ -506,12 +506,12 @@ there but there has to be something."* — and: *"she carries it to Rue."* Betwe
 
 New flags `crew_list_held`, `crew_called`; Bastien cards 22a / 22b / 22 re-gated; all five dev jumps updated.
 
-## Media — 21 slots, all missing, the harvest is LO's
+## Media — 28 slots, all missing, the harvest is LO's
 
 Portraits: `portraits/vega.jpg`, `portraits/dace.jpg`. Scenes: `scenes/the_site_lab.jpg`, `scenes/marrow_photo.jpg`,
 `scenes/vega_ambush.jpg`, `scenes/vega_street_t1..t5.jpg`, `scenes/cain_training.jpg`, `scenes/undertow_rebuild_1..3.jpg`,
 `scenes/undertow_reopened.jpg`, `scenes/the_take.jpg`, `scenes/vega_in_the_room.jpg`, `scenes/kess_table_vega.jpg`.
-Clips (one file each): `sex/crew_night_t5.webm`, `sex/bastien_cot_owner_t5.webm`, `sex/colm_rebuilt_t4.webm`. Every
+Clips (one file each): the crew night's eight, one per act beat (`sex/crew_night_t5.webm` on the knees beat, plus `sex/crew_night_strip_t5`, `_counter_t5`, `_turns_t5`, `_floor_t5`, `_finish_t5`, `_second_t5`, `_after_t5` — added 2026-10-04 at LO's ask), `sex/bastien_cot_owner_t5.webm`, `sex/colm_rebuilt_t4.webm`. Every
 scene and clip block carries `description` + `search_queries`.
 
 ## Measured
