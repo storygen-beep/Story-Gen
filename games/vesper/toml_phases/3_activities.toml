@@ -5136,12 +5136,14 @@ nodeId     = "activity_draw_her_out.take"
 show_when_locked = true
 # ⚠️ A GREYED CHOICE SHOWS ONLY locked_text + THE ENGINE'S BRACKET, NOT ITS LABEL (seen live at beat_0216), so the
 # text names the action itself or the player sees a reason with no door attached.
-locked_text = "Draw her out. Not yet: she has to know how Vega moves, be able to stand with her, be in one piece, and have men behind her."
+locked_text = "Draw her out. Not yet: she has to know how Vega moves, be able to stand with her, be in one piece, and have men behind her and a plan."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "fighting",    operator = "gte", value = 85 },
   { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 4 },
   { type = "trait", subject = "player", trait_key = "vega_damage", operator = "lt",  value = 30 },
   { type = "flag",  subject = "player", flag_key  = "crew_back",   operator = "is_true" },
+  # beat_0220 (LO): the take follows a plan the three of them made at the cot.
+  { type = "flag",  subject = "player", flag_key  = "vega_plan",   operator = "is_true" },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."

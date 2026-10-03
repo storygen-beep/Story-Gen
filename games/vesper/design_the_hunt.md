@@ -506,11 +506,23 @@ there but there has to be something."* — and: *"she carries it to Rue."* Betwe
 
 New flags `crew_list_held`, `crew_called`; Bastien cards 22a / 22b / 22 re-gated; all five dev jumps updated.
 
-## Media — 28 slots, all missing, the harvest is LO's
+## LO's asks — beats 0220 and 0221 (2026-10-04, rev 242)
+
+- **The plan (`cap_the_plan`, at the cot, the day after the crew night).** Cain comes; the three of them make the
+  plan the take then plays: Bastien *where* (the strip at night, Dace's men in the stalls and doorways), Cain *how*
+  (alone first, past the minute, the wrong thing; the men not until she is slow), Wren *the end* (the seam),
+  Bastien *after* (the bag, his Room), Cain *then* (Kess). "Draw her out." now needs it.
+- **The shell in the cradle (`cap_the_cradles`, at the Site, at night).** The release's last scene: Vega's empty shell
+  laid in the second cradle beside the empty one waiting for her; Kess runs the lines; Cain sits by the empty
+  cradle. *"Not tonight."* Her last thought: *"Two cradles. Now she knows why."* It stops one breath before the
+  transfer on purpose — free play continues after the end card and every surface still describes Wren's body. The
+  transfer is 0.2.4. End card L now follows this scene; card K2 points to it (Cain's hours).
+
+## Media — 29 slots, all missing, the harvest is LO's
 
 Portraits: `portraits/vega.jpg`, `portraits/dace.jpg`. Scenes: `scenes/the_site_lab.jpg`, `scenes/marrow_photo.jpg`,
 `scenes/vega_ambush.jpg`, `scenes/vega_street_t1..t5.jpg`, `scenes/cain_training.jpg`, `scenes/undertow_rebuild_1..3.jpg`,
-`scenes/undertow_reopened.jpg`, `scenes/the_take.jpg`, `scenes/vega_in_the_room.jpg`, `scenes/kess_table_vega.jpg`.
+`scenes/undertow_reopened.jpg`, `scenes/the_take.jpg`, `scenes/vega_in_the_room.jpg`, `scenes/kess_table_vega.jpg`, `scenes/the_two_cradles.jpg` (beat_0221).
 Clips (one file each): the crew night's eight, one per act beat (`sex/crew_night_t5.webm` on the knees beat, plus `sex/crew_night_strip_t5`, `_counter_t5`, `_turns_t5`, `_floor_t5`, `_finish_t5`, `_second_t5`, `_after_t5` — added 2026-10-04 at LO's ask), `sex/bastien_cot_owner_t5.webm`, `sex/colm_rebuilt_t4.webm`. Every
 scene and clip block carries `description` + `search_queries`.
 

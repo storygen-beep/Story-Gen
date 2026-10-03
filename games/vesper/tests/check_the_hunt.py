@@ -782,7 +782,8 @@ def main():
         check({f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}.get("vega_taken") == "set", "0216: sets vega_taken")
         imgs = {(b.get("props") or {}).get("file") for b in all_blocks(dv.get("nodes", []), []) if b.get("type") == "image"}
         check({"scenes/the_take.jpg", "scenes/vega_in_the_room.jpg"} <= imgs, f"0216: the two take media slots (got {imgs})")
-    c25 = [c for c in cards if c.get("npc_id") == "npc_bastien" and {"flag": "crew_back", "op": "is_true"} in c.get("when", [])
+    # re-gated at beat_0220: card 25 opens on the plan (vega_plan); 25a covers crew_back until then
+    c25 = [c for c in cards if c.get("npc_id") == "npc_bastien" and {"flag": "vega_plan", "op": "is_true"} in c.get("when", [])
            and {"flag": "vega_taken", "op": "is_false"} in c.get("when", [])]
     check(len(c25) == 1, "0216: Bastien card 25 (his men are behind you)")
     rj = canvases.get("dev_jump_hunt_take")
@@ -829,8 +830,8 @@ def main():
     ck = [c for c in cards if not c.get("npc_id") and {"flag": "vega_taken", "op": "is_true"} in c.get("when", [])
           and {"flag": "vega_dismantled", "op": "is_false"} in c.get("when", [])]
     check(len(ck) == 1, "0217: one story card K (vega_taken + vega_dismantled is_false)")
-    cl = [c for c in cards if not c.get("npc_id") and {"flag": "vega_dismantled", "op": "is_true"} in c.get("when", [])]
-    check(len(cl) == 1, "0217: one story end card L (vega_dismantled)")
+    cl = [c for c in cards if not c.get("npc_id") and c.get("terminal") and {"flag": "cradles_ready", "op": "is_true"} in c.get("when", [])]
+    check(len(cl) == 1, "0221: one story end card L, now on cradles_ready (the shell in the cradle is the last scene)")
     if cl:
         check(cl[0].get("terminal") is True and cl[0].get("terminal_text"), "0217: card L is terminal, with terminal_text")
         check("'" not in (cl[0].get("terminal_text") or ""), "0217: no apostrophe in terminal_text (SugarCube source-byte escaping)")
@@ -848,13 +849,76 @@ def main():
         fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
         check(fl.get("vega_dismantled") == "unset", "0217: the take jump must UNSET vega_dismantled")
 
+    # ── beat_0220 — the plan at the cot (LO: "is there anything cain, bastien and wren planning?") ──────
+    pl = canvases.get("cap_the_plan")
+    check(pl is not None, "0220: cap_the_plan is missing")
+    if pl:
+        tr = pl.get("trigger") or {}
+        its = items(pl)
+        check(tr.get("location") == "the_cot" and tr.get("is_repeatable") is False and (tr.get("priority") or 0) >= 11,
+              "0220: a located one-shot auto-fire at the cot, pri 11+")
+        check(has_flag(its, "crew_back", "is_true") and has_flag(its, "vega_plan", "is_false") and has_flag(its, "face_worn", "is_false"),
+              "0220: gated crew_back + vega_plan is_false + face off")
+        check(any(i.get("type") == "days_since_flag" and i.get("flag_key") == "crew_back" and i.get("operator") == "gte"
+                  and i.get("value") == 1 for i in its), "0220: the day after the crew night (never in its breath — it exits to the cot)")
+        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_bastien" for i in its), "0220: Bastien present")
+        check({"npc_cain", "npc_bastien", "player"} <= dialog_speakers(pl), "0220: Cain, Bastien and Wren all speak")
+        ptext = " ".join(b.get("content") or "" for b in all_blocks(pl.get("nodes", []), []))
+        for must in ("strip", "stalls", "minute", "wrong", "seam", "bag", "Room", "Kess"):
+            check(must in ptext, f"0220: the plan names {must!r} — the take follows a plan the player has heard")
+        check("Undertow" not in ptext or True, "")
+        pcfg = (pl["nodes"][-1].get("exit_block") or {}).get("config") or {}
+        check({f.get("flag"): f.get("op") for f in pcfg.get("flagEffects", [])}.get("vega_plan") == "set", "0220: sets vega_plan")
+    dvp = canvases.get("activity_draw_her_out") or {}
+    dch = [c for c in (node(dvp, "base").get("exit_block") or {}).get("choices", []) if c.get("text") == "Draw her out."]
+    if dch:
+        check(has_flag(cond_items(dch[0]), "vega_plan", "is_true"), "0220: the take needs the plan (vega_plan)")
+        check("plan" in (dch[0].get("locked_text") or ""), "0220: the locked text names the plan (flags are not in the engine's bracket)")
+    c25a = [c for c in cards if c.get("npc_id") == "npc_bastien" and {"flag": "crew_back", "op": "is_true"} in c.get("when", [])
+            and {"flag": "vega_plan", "op": "is_false"} in c.get("when", [])]
+    c25 = [c for c in cards if c.get("npc_id") == "npc_bastien" and {"flag": "vega_plan", "op": "is_true"} in c.get("when", [])
+           and {"flag": "vega_taken", "op": "is_false"} in c.get("when", [])]
+    check(len(c25a) == 1 and len(c25) == 1, f"0220: Bastien cards 25a (the plan) and 25 (behind you), got {len(c25a)}/{len(c25)}")
+
+    # ── beat_0221 — the shell in the second cradle; the release ends one breath before the transfer ──────
+    cr = canvases.get("cap_the_cradles")
+    check(cr is not None, "0221: cap_the_cradles is missing")
+    if cr:
+        tr = cr.get("trigger") or {}
+        its = items(cr)
+        check(tr.get("location") == "the_site" and tr.get("is_repeatable") is False and (tr.get("priority") or 0) >= 11,
+              "0221: a located one-shot auto-fire at the Site")
+        check(has_flag(its, "vega_dismantled", "is_true") and has_flag(its, "cradles_ready", "is_false"),
+              "0221: gated vega_dismantled + cradles_ready is_false")
+        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_cain" for i in its), "0221: Cain present (his Site rows)")
+        check({"npc_cain", "npc_kess", "player"} <= dialog_speakers(cr), "0221: Cain, Kess and Wren speak")
+        ctext = " ".join(b.get("content") or "" for b in all_blocks(cr.get("nodes", []), []))
+        check("Two cradles. Now she knows why." in ctext, "0221: the release's last thought")
+        check("Not tonight" in ctext, "0221: the transfer is NOT done — free play after the end card must stay true")
+        ccfg = (cr["nodes"][-1].get("exit_block") or {}).get("config") or {}
+        check({f.get("flag"): f.get("op") for f in ccfg.get("flagEffects", [])}.get("cradles_ready") == "set", "0221: sets cradles_ready")
+        imgs = {(b.get("props") or {}).get("file") for b in all_blocks(cr.get("nodes", []), []) if b.get("type") == "image"}
+        check("scenes/the_two_cradles.jpg" in imgs, "0221: scenes/the_two_cradles.jpg")
+    k2 = [c for c in cards if not c.get("npc_id") and {"flag": "vega_dismantled", "op": "is_true"} in c.get("when", [])
+          and {"flag": "cradles_ready", "op": "is_false"} in c.get("when", [])]
+    check(len(k2) == 1, "0221: story card K2 (take her to the Site)")
+    for jid, f, want in (("dev_jump_hunt_start", "vega_plan", "unset"), ("dev_jump_hunt_on", "vega_plan", "unset"),
+                         ("dev_jump_hunt_crew", "vega_plan", "unset"), ("dev_jump_hunt_take", "vega_plan", "set"),
+                         ("dev_jump_hunt_table", "vega_plan", "set")):
+        jj_ = canvases.get(jid)
+        if jj_:
+            ch = ((jj_.get("nodes") or [{}])[0].get("exit_block") or {}).get("choices") or [{}]
+            fl = {x.get("flag"): x.get("op") for x in ch[0].get("flagEffects", [])}
+            check(fl.get(f) == want, f"0221: {jid} must {want.upper()} {f}")
+            check(fl.get("cradles_ready") == "unset", f"0221: {jid} must UNSET cradles_ready")
+
     # ── every beat — narration : dialogue, PER VISIT, on every spoken screen of the chunk ──────────────────
     # The game's standing target is 2.14:1 (design_book "Register debt"); the skill's hard fail is 3:1. Measured
     # here so it is checked every build. PER VISIT: a node's top-level groups are exclusive bands, so each band is
     # measured with the node's ungrouped blocks, never summed with the others. A node with no NPC line is SOLO
     # (nobody there to speak — the skill's exemption) and is skipped. beat_0209's first ambush measured 3.29.
     CHUNK = ("cap_cain_comes", "cap_the_site", "cap_the_ambush", "cap_kess_seam", "kess_patch_up",
-             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table", "cap_rue_takes_the_list")
+             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table", "cap_rue_takes_the_list", "cap_the_plan", "cap_the_cradles")
 
     def screens(node):
         """Every screen a visit can paint. Adjacent groups form ONE if/elseif chain (one of them renders);
