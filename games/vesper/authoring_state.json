@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 239,
+  "book_revision": 240,
   "register": {
     "person": "third"
   },
@@ -2927,6 +2927,163 @@
         "npc_bastien cards B4-B9"
       ],
       "notes": "BUILT: THE QUESTS PAGE. LO: 'It says this but feels like stuck here what is going on' — he sat on '◯ Wait for him to drink' while the game counted a calendar day and waited for the bought face; nothing was broken and the page said neither. Then: 'the quests page should tell the days she needs to wait' and 'Fix the quests page properly'. AUDIT FIRST (read-only, all 16 states simulated from the real end-of-0.2.1 seed + the rendered page read in the built game): the spine was sound — one card live at every state, the daisy holds, every tip names place and time, all legibility measures pass — and four things were wrong. FIXED: (1) his own section said '✓ Arc complete — There is nothing left to work here' through the whole ladder; his post-raid card is now upper-gated bastien_at_cot is_false and five cot cards (pri 15-19) follow him to the bunk, prose only so the bullets are not doubled, ending on his own words ('He is himself. The nights stay open.') instead of a bare Arc complete; (2) 0.2.1's end card was still TERMINAL on two_men_done + bastien_alive_known is_false — every returning player read 'Chapter complete. That is where this build ends' with the release's first beat one cot visit away — it now hands over to the cot (third time this seam class has been paid, after beat_0165 and rev 222); (3) the face appeared on one card of nine, the last one; it is now a bullet on all six face-gated cards and deliberately absent from Kess's and Rue's, which have no face gate; (4) the waits were prose only — every cot card now carries its day as a bullet and the nights card carries bastien_mend gte 3, rendering 'Nights with him — 1 / 3'. ENGINE (additive, opt-in): quest-card conditions were flag-or-trait only, so a day wait was unsayable on the page. days_since_flag is a third shape — dataclass, parser, serializer, validator (its own numeric-op + label rules), setup.checkQuestsCondition (reads flags_meta set_day, FAILS CLOSED like the canvas predicate it mirrors) and _readCurrentValue. ⚠️ AND THE RENDERER: the '— X / Y' suffix was gated on goal.trait alone, so the day count was computed and thrown away; found by reading the BUILT page, not in review. VERIFIED: tests/test_quests_days_goal.py 15 cases red first then green; pytest 6F/501P (baseline 6F); check_the_count §11 and §11b, negative-tested SIX ways (face bullet removed, day bullet removed, nights counter downgraded to a flag, 0.2.1 card terminal again, his upper gate removed, a face bullet on Kess's card) — all caught; bunker guard, cascade order, quest cards (107 cards, every measure passing), guide numbers OK; live_the_count now reads the REAL Quests page at four states (day 0/1 and 1/1, the face bullet hollow in the face and ticked out of it, 'Nights with him — 2 / 3', his section never saying Arc complete mid-ladder, and his own terminal at the end); live_cot_decision and live_rings OK; gates.py unchanged (explicit floor 13.3%, in-repeatable 68.6%, 489/489 nodes, 2.9:1, 21/40)."
+    },
+    {
+      "id": "beat_0206",
+      "status": "validated",
+      "target_phase": "1_metadata_and_locations.toml",
+      "title": "0.2.3 — state + seams: traits, flags, npc_vega, npc_dace, Cain schedule, damage sidebar row, card H edit, dev jump, tests/check_the_hunt.py red-first",
+      "introduces": [
+        "npc_vega",
+        "npc_dace",
+        "vega_damage",
+        "vega_habits",
+        "undertow_build"
+      ],
+      "canvases": [
+        "dev_jump_hunt_start"
+      ],
+      "notes": "Built 2026-10-03. Traits vega_damage/vega_habits/undertow_build (core_traits + hidden labels), the 'Body:' sidebar row, npc_vega + npc_dace appended after npc_loder (schedule-less), dev_jump_hunt_start, tests/check_the_hunt.py (red first, then green). MOVED OUT, per the game's own whole-amendment rule: Cain's schedule row to beat_0211, Dace's to beat_0213, card H's two-step edit to beat_0207 (until card I exists, 'this build ends' is still true)."
+    },
+    {
+      "id": "beat_0207",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — cap_cain_comes + card H's two-step edit + card I",
+      "introduces": [],
+      "canvases": [
+        "cap_cain_comes"
+      ],
+      "notes": "Built 2026-10-03. Auto-fire @the_cot pri 11 one-shot: bastien_back + days_since_flag bastien_back gte 1 (never the same breath as Counting again; safe because bastien_back is 0.2.2-only and records set_day) + 06:00-12:00 + face off + Bastien present. 7-beat cascade, Cain/Bastien/Wren all speak, narration:dialogue 2.09. Exit -> the_site 120 min, sets site_offered + the_site_open. the_site description rewritten (was 'She doesn't have it yet'). Card H: terminal removed, tip rewritten ('Be at the cot one morning soon'), closes on site_offered. Card I opens. Dev jump unsets both new flags."
+    },
+    {
+      "id": "beat_0208",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — cap_the_site (Tier-3)",
+      "introduces": [],
+      "canvases": [
+        "cap_the_site"
+      ],
+      "notes": "Built 2026-10-04. Auto-fire @the_site pri 11 one-shot, site_offered + marrow_known is_false. Tier-3, 14 beats (max 43 words), narration:dialogue 1.24. She knows the room (piece two); Cain names Elias Marrow (first time the name reaches the player; ties to Sabin's 'method whose author is dead'); the memory spoken aloud by her as it comes back, quoting Whose Hand, with his face in it; 'He was my father.'; Cain did not know (a girl 'at school in the north', 'There was no school.'); 'I killed him. In this room. He asked me to'; 'I hoped it was me behind you. It was the man I killed.'; two cradles, 'Not today.'. Two media slots (lab on the lead, photo in its own beat). Exit -> underworld_strip for now; beat_0209 re-points it into the ambush."
+    },
+    {
+      "id": "beat_0209",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — cap_the_ambush + cap_kess_seam + repair choice on hub_kess_berth",
+      "introduces": [],
+      "canvases": [
+        "cap_the_ambush",
+        "cap_kess_seam",
+        "kess_patch_up"
+      ],
+      "notes": "Built 2026-10-04. cap_the_ambush: LOCATED auto-fire @underworld_strip pri 11 (not chained off cap_the_site as blueprinted — site_ambushed is read by triggers and a triggerless setter hard-fails the flag-chain validator; cap_the_site already exits to the strip, so same moment), 10 beats, Vega/Cain/Wren speak, nar:dia 2.07 (first draft 3.29), vega_damage SET 60, -> kess_berth. Card J0 'Get to Kess' (Kess's hours in the tip). cap_kess_seam @kess_berth pri 11 + Kess present: the repair, 'Same family. Better parts, and nobody home.', his thumb on the seam (her father's thumb, misnamed as solvent), 'If she has a back, she has this.', 'Then I will need someone behind her.' (Bastien's seed), -25 clamped, seam_known. kess_patch_up: substitution_only @kess_berth, three damage bands matching the sidebar, 10 coin -> -25 clamped, 60 min; reached from a new hub_kess_berth choice gated seam_known + vega_damage gte 1."
+    },
+    {
+      "id": "beat_0210",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — rand_vega_street (five habit bands) + card J",
+      "introduces": [],
+      "canvases": [
+        "rand_vega_street"
+      ],
+      "notes": "Built 2026-10-04. Lane-2 random @underworld_strip, chance 0.35, max 1/day, repeatable, gated seam_known + vega_taken is_false, no npc/requires_npc (Vega has no schedule). Two screens: base (damage overlay when >= 60, separated from the band chain by the ungrouped 'Asset Wren.'; five exclusive vega_habits bands 4/3/2/1/0) -> 'Run.' -> run (five lesson bands read PRE-increment, then exit effects: vega_damage +35 clamp, vega_habits +1 clamp cap 4, 540 min, home to the cot). Five media slots scenes/vega_street_t1..t5.jpg (the blueprint's four + one for the all-habits band). Card J: goals vega_habits gte 4, fighting gte 85, vega_damage lt 30 (crew goal joins at beat_0214). Cheat page fighting cap 70 -> 85 (the build refused 70)."
+    },
+    {
+      "id": "beat_0211",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.3 — activity_cain_trains + Cain's schedule rows at the_site",
+      "introduces": [],
+      "canvases": [
+        "activity_cain_trains"
+      ],
+      "notes": "Built 2026-10-04. Cain's first schedule rows (the_site 21:00-23:59 + 00:00-03:00, when the_site_open) directly under npc_cain; his description rewritten (it said 'no schedule'). activity_cain_trains: Lane-1 portrait hub (npc + requires_npc) @the_site, gated the_site_open + marrow_known; base bands on fighting (85+ / 70-84 / under 70, lock-as-prose); two same-label 'Train with him.' (fighting gte 70 + lt 85, 15 energy, fighting +1 cap 85 clamp) split on cain_rule_heard -> .first (the rule, sets the flag on render) / .session (four post-increment bands); 120 min each, back to the_site. Media scenes/cain_training.jpg on .first."
+    },
+    {
+      "id": "beat_0212",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — B1 'Tell him about Vega.' + B2 activity_rebuild_undertow + every Undertow surface kept true",
+      "introduces": [],
+      "canvases": [
+        "activity_rebuild_undertow",
+        "amb_bastien_cot",
+        "hub_sol_undertow",
+        "hub_colm_undertow",
+        "loop_colm_backroom",
+        "activity_sift_the_ruin"
+      ],
+      "notes": "Built 2026-10-04. B1: amb_bastien_cot choice (site_ambushed + crew_asked is_false + face off) -> new node .vega (his men died on the strip, no count; 'Take Rue's money to Sol... Never where I am.'; 'The rest is yours'), sets crew_asked. B2: solo card @underworld_bar while Sol is present (npc_at_location), three stage bands, 40/60/80 coin, undertow_build +1 cap 3, third stage sets undertow_open; .done post-increment with rebuild_1..3 images; Sol learns 'Alive.' at stage 1. Stage order changed to cleared / floor+counter / back wall+open so Colm's ruin text stays true through stage 2. Kept true: Sol base 4 bands (ruin closes at 1) + the Bastien question closes at 1; Colm base 3 ruin bands close at 3 + 3 open bands; 'through the tape' closes at 3, a post-rebuild 'Take him in the back.'; loop_colm_backroom intro band C (new clip sex/colm_rebuilt_t4.webm); activity_sift_the_ruin closes at 1. Bastien cards: 19 closes at site_ambushed, new 20 (tell him) and 21 (the bar)."
+    },
+    {
+      "id": "beat_0213",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — B3 cap_crew_refuses + B4 cap_dace_price + Dace's pit row + Bastien cards 22/23",
+      "introduces": [],
+      "canvases": [
+        "cap_crew_refuses",
+        "cap_dace_price"
+      ],
+      "notes": "Built 2026-10-04. cap_crew_refuses: auto-fire @underworld_bar pri 11, undertow_open + days_since_flag undertow_open gte 1 + 18:00-24:00 + crew_refused is_false + Sol present; she makes Bastien's offer (he is not in the room — his location stays secret); six unnamed men refuse ('Why would anybody walk back to this bar, after what came down the strip for it?'); 'If Dace comes back, we come back.' Media scenes/undertow_reopened.jpg. Dace's pit row 18:00-23:59 when crew_refused. cap_dace_price: auto-fire @underworld_pit pri 11 + Dace present; not for coin; 'You. All of us, at once... About ten of us.'; 'You can say no.'; 'Tomorrow night. After Sol shuts. Bring all ten.' Cards 22 (the men; tip names the day's wait) and 23 (Dace, the Pit from six)."
+    },
+    {
+      "id": "beat_0214",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — B5 cap_the_crew_night (Tier-3 explicit) + card 24 + card J's crew goal",
+      "introduces": [],
+      "canvases": [
+        "cap_the_crew_night"
+      ],
+      "notes": "Built 2026-10-04. Auto-fire @underworld_bar pri 11, dace_met + days_since_flag dace_met gte 1 + 22:00-04:00 + undertow_open + crew_back is_false. 11 beats + lead; her yes first; 8 explicit beats, each 3+ frozen words (gates.py:311) and ending on the body; her thought in its own beat after; no anal (the weapon); Bastien absent; the men talk throughout (ratio <= 2.14). One clip sex/crew_night_t5.webm on the first full act beat. Exit -> the_cot, 480 min, sets crew_back. Bastien card 24 (the night). Card J gains the crew goal. Dace's pit row now ends at dace_met (gates.py standing-surface: DEAD row after his scene)."
+    },
+    {
+      "id": "beat_0215",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — B6 the owner band on loop_bastien_cot",
+      "introduces": [],
+      "canvases": [
+        "loop_bastien_cot",
+        "amb_bastien_cot"
+      ],
+      "notes": "Built 2026-10-04. OWNER band first in intro / oral / ride / under, gated bastien_himself + crew_back (keeps check_the_count §7 true); his Leash voice ('I owned a building once... I have the habit back', 'You work for me tonight', 'on your knees on my say-so'); each act band 3+ frozen words, no anal; text matches each node's existing clip (kneeling / riding / under, on the bunk). New clip sex/bastien_cot_owner_t5.webm is ONE FILE on the intro (the intro plays once a session — the pool-per-screen rule), not the blueprint's pool 4. amb_bastien_cot gained a crew_back band (after the face band, before the 0.2.2 band) so his card does not say 'in the brace' one click before the intro has the brace on the floor."
+    },
+    {
+      "id": "beat_0216",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — the take (activity_draw_her_out) + Bastien card 25 + dev jump 'ready for the take'",
+      "introduces": [],
+      "canvases": [
+        "activity_draw_her_out",
+        "activity_cain_trains"
+      ],
+      "notes": "Built 2026-10-04. activity_draw_her_out: solo card @underworld_strip (seam_known + vega_taken is_false), 'Draw her out.' show_when_locked until fighting gte 85 + vega_habits gte 4 + vega_damage lt 30 + crew_back; locked_text names the action (a greyed choice renders locked_text, not its label); labels 'Damage' / \"Vega's habits learned\" for the engine bracket. .take Tier-3, 14 beats: every habit and lesson in order, three men die, the seam, the bag, the Room narrated with Bastien in the chair, Dace counts his dead, her thought after. Exit -> kess_berth, 720 min, vega_damage +25, sets vega_taken. Cain's base gains an after-the-take band. Bastien card 25. dev_jump_hunt_take."
+    },
+    {
+      "id": "beat_0217",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — cap_the_table + card K + end card L + Bastien's closing card 26",
+      "introduces": [],
+      "canvases": [
+        "cap_the_table"
+      ],
+      "notes": "Built 2026-10-04. Auto-fire @kess_berth pri 11, vega_taken + vega_dismantled is_false + Kess present. Cain's plan (Sabin's method, the two cradles in her father's lab, Kess's hands; her body in the other cradle, Cain sits with it); Kess opens the seam; Vega: 'This unit will be reported lost.'; stops for good; taken apart through the night; her thought after; 'Let me sleep first. Then the Site.' Exit 600 min, vega_damage set 0, vega_dismantled. Card K (Kess's hours). End card L terminal (no apostrophe in terminal_text) — the only terminal Story-Goals card. Bastien card 26 terminal at vega_taken."
+    },
+    {
+      "id": "beat_0218",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — media pass + whole-chunk playthrough + release bookkeeping (media harvest HELD for LO)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "2026-10-04. 21 new media slots authored, all missing on disk, every scene slot with description + search_queries (19 scene slots + portraits/vega.jpg + portraits/dace.jpg). Whole-chunk headless playthrough dev_jump_hunt_start -> end card L through real locations and choices (25 checks, ~60 game days: 15 street-loss days + 15 nights with Cain). gates.py vs HEAD: the same 27 FAIL gates, no new failing gate. output/ rebuilt --dev --debug --codes; 0 code leaks; render-bucket guard clean (only react_renner_threat)."
     }
   ],
   "structure_registry": {
@@ -3272,6 +3429,20 @@
         "role": "the shift supervisor who runs the room under the Facility — the only named man in the bunker (LO: one named boss, four anonymous)",
         "depth": "minor",
         "arc_shape": "no arc, no ladder, no conquest. ZERO schedule rows, the npc_enns shape: a row is unconditional and the nav badge is not canvas-gated, and he exists only inside a bunker that closes at beat_0185."
+      },
+      {
+        "id": "npc_vega",
+        "role": "the company field unit sent to bring Wren in whole (0.2.3, THE HUNT)",
+        "depth": "minor (antagonist, scenes only)",
+        "arc_shape": "no arc, no ladder, no conquest. ZERO schedule rows: she appears only inside her own scenes.",
+        "status": "DECLARED beat_0206 (schedule-less)."
+      },
+      {
+        "id": "npc_dace",
+        "role": "the man Bastien's old crew still listens to; names the price at the pit (0.2.3, B4)",
+        "depth": "minor",
+        "arc_shape": "no arc, no ladder. Pit row 18:00-24:00 lands at beat_0213 with his scene, not before.",
+        "status": "DECLARED beat_0206 (schedule-less until beat_0213)."
       }
     ],
     "flags": [
@@ -3617,7 +3788,72 @@
         "set_by": "beat_0186 cap_bastien_at_the_cot @the_cot",
         "gates": "amb_bastien_cot, and the next chunk's ladder"
       },
-      "bunker_seen"
+      "bunker_seen",
+      {
+        "key": "site_offered",
+        "set_by": "beat_0207 cap_cain_comes exit (@the_cot)",
+        "gates": "cap_cain_comes (is_false), card H closes / card I opens"
+      },
+      {
+        "key": "the_site_open",
+        "set_by": "beat_0207 cap_cain_comes exit (@the_cot)",
+        "gates": "the_site's entry_conditions (the Phase-1 lock, never set until now)"
+      },
+      {
+        "key": "marrow_known",
+        "set_by": "beat_0208 cap_the_site exit (@the_site)",
+        "gates": "cap_the_site (is_false), card I closes; cap_the_ambush reads it at beat_0209"
+      },
+      {
+        "key": "site_ambushed",
+        "set_by": "beat_0209 cap_the_ambush exit (@underworld_strip, located auto-fire)",
+        "gates": "cap_kess_seam, card J0; rand_vega_street (beat_0210), B1 (beat_0212)"
+      },
+      {
+        "key": "seam_known",
+        "set_by": "beat_0209 cap_kess_seam exit (@kess_berth)",
+        "gates": "hub_kess_berth's repair choice, kess_patch_up, card J0 closes; the take (beat_0216)"
+      },
+      {
+        "key": "cain_rule_heard",
+        "set_by": "beat_0211 activity_cain_trains.first exit (@the_site hub)",
+        "gates": "activity_cain_trains' two same-label training choices"
+      },
+      {
+        "key": "crew_asked",
+        "set_by": "beat_0212 amb_bastien_cot.vega exit (@the_cot hub)",
+        "gates": "activity_rebuild_undertow, Bastien cards 20/21, the choice itself"
+      },
+      {
+        "key": "undertow_open",
+        "set_by": "beat_0212 activity_rebuild_undertow third-stage choice (@underworld_bar card)",
+        "gates": "card 21 closes; cap_crew_refuses (beat_0213)"
+      },
+      {
+        "key": "crew_refused",
+        "set_by": "beat_0213 cap_crew_refuses exit (@underworld_bar)",
+        "gates": "Dace's schedule row (when), cap_dace_price, cards 22/23"
+      },
+      {
+        "key": "dace_met",
+        "set_by": "beat_0213 cap_dace_price exit (@underworld_pit)",
+        "gates": "card 23 closes; cap_the_crew_night (beat_0214)"
+      },
+      {
+        "key": "crew_back",
+        "set_by": "beat_0214 cap_the_crew_night exit (@underworld_bar)",
+        "gates": "card 24 closes, card J's crew goal; Bastien's owner band (beat_0215); the take (beat_0216)"
+      },
+      {
+        "key": "vega_taken",
+        "set_by": "beat_0216 activity_draw_her_out.take exit (@underworld_strip, located repeatable card)",
+        "gates": "rand_vega_street + activity_draw_her_out + card J + card 25 close; Cain after-take band; cap_the_table (beat_0217)"
+      },
+      {
+        "key": "vega_dismantled",
+        "set_by": "beat_0217 cap_the_table exit (@kess_berth)",
+        "gates": "card K closes; end card L (terminal)"
+      }
     ],
     "_new_trait_note": "names_known (TRAIT, default 0, hidden) — set=1 on BOTH loop_renner_finisher drain choices (.intro first-drain + .again repeat); gates the whole hunt (Sol lead reads names_known>=1). A TRAIT not a flag because the drain setter is triggerless (flag-chain validator). Not in the flags[] list above; registered here + in beat_0030 introduces. Other unregistered trait counters (coin/drain_charge/arousal_charge/etc.) remain known-incomplete in this registry.  || CAPTIVITY (rev 63): core_strain (TRAIT, default 0, hidden from the traits dump, surfaced ONLY as a banded trait_status_text sidebar row). Bands start at min=1 so the row is INVISIBLE for the whole game before captivity (v2.py:15516 renders nothing when no band matches) and the TOP band carries NO max (unset max defaults to 1e9, v2.py:15508) so 'Core: Failing' persists forever at the frozen 96. +12 per use, clamp=true (clamp bounds 0-100 at BOTH ends, v2.py:5563-5567; OMITTING clamp passes false -> unbounded, v2.py:2123). 8 uses -> 96 -> the break. || cell_door (TRAIT, default 0, hidden, NEVER SET) = the sealed door's entry_conditions gate (gte 1). A TRAIT because a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | THE ARCHIVE (rev 69): calloway_drains_done (hidden counter, 0→2; the Renner drains_done twin — a TRAIT bumped on the TRIGGERLESS drain canvas (calloway_drain_canvas #10, the sex-loop finisher), which is why it is validator-exempt (traits are); it selects the two drain payloads (0->surface: he's certain the section's safe; 1->depths: the big pull, days ago, her file in it) — there are NO located cap_calloway_drain1/2 capstones. Gated on the counter + corruption band, never arousal. The 1->2 advance needs only the counter (theft2_done was REMOVED 7-22; the big theft is off-screen, uncovered in the drain). DOWNSTREAM (W4 cap_deal_place, the 'find the buyer' Quest card) reads the durable trait calloway_drains_done>=2 directly — there is NO big_chunk_known flag (a flag set mid-loop would hard-fail the flag-chain validator; this is the actual Renner discipline).  || RECONCILE (registered late at the rev-112 fold sweep): colm_drains_done (TRAIT, default 0, hidden) — the Colm sub-arc's drain counter, shipped at rev 85 (beat_0066) and never registered here. Bumped on the triggerless back-room drain canvas; d0 = the drain that names Vane's face (SETS vane_confirmed), done = the repeatable pure-power warm tap. GATES cap_vane_blackmail (beat_0067) and the Story-Goal B2->C quest step. A TRAIT not a flag for the standing reason: the drain canvas is triggerless, and a flag is_true gate demands a located setter or the flag-chain validator hard-fails.  || THE LEASH (rev 112): mercer_attempts (TRAIT, default 0, hidden) — 0->4, the loop counter; bumped on each loop_mercer_attempt exit; READ by the exclusive banded [group] chain that picks which failure plays and by cap_first_fire (gte 3) and cap_bastien_walks_in. A TRAIT not a flag because the loop canvas is node-routed and a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | part_gen (TRAIT, default 0, hidden) — 0->4, which prototype Kess has built; drives the install talk and the finding text. | part_installed (TRAIT, default 0, hidden) — 0/1, whether a live part is seated; SET by kess_install_part, BURNED back to 0 on every failed attempt (this is the pressure: no free retries, she must go earn). ⚠️ The part is deliberately a TRAIT and NOT a wardrobe/inventory item — setup.backfillStateDefaults (v2.py:14549) carries new flags and traits into old saves but has NO wardrobe branch, so an item added later than the beat that grants it never reaches an existing save (the cover_analyst post-mortem, save-safety.md:87-112). | mercer_drains_done (TRAIT, default 0, hidden) — bumped on the triggerless drain; d0 = THE first fire (power + the bad news that the key speaks for one name only), done = the repeatable warm tap. | bastien_drains_done (TRAIT, default 0, hidden) — same pattern; d0 payload = he was buying her file for Cain; GATES cap_extraction (gte 1). | controller_state (TRAIT, default 0, hidden) — 0 = idle, 1 = running; 'on' means the controller is RUNNING and the leash is SUPPRESSED. Mirrors the shipped equipped_weapon loadout shape. Surfaces ONLY on blocked targets — Renner/Calloway/Colm/Marsh/the brothel were never blocked and gain no new step. Retired entirely at leash_cut. | controller_charge (TRAIT, default 0, hidden, bounded) — the power the switch draws; reloaded at Kess's bench, which feeds the rent loop. ⚠️ verify at build: reload/idle semantics of a second loadout-shaped trait alongside equipped_weapon/drain_charge. | feed_line_days (TRAIT, default 0, hidden) — the feed-line upkeep countdown. RENAMED + RE-SHAPED at rev 114 (was `rent_paid_through`, planned as a paid-through day index — NOT AUTHORABLE: effect values are literals only, v2.py:13519-13578, and no condition type reads time_state.day, v2.py:3816+). Set to a literal 3 by activity_kess_cot's PAID tier (the 10-coin night — the paid night IS the upkeep; there is no separate rent canvas), decremented 1 per day rollover by [player.trait_decay] (template_import.py:1657-1666 -> v2.py:5532-5544, unconditional, floors at 0), READ by hub_kess_berth's two exclusive bands (gte 1 = Kess is working the key / lt 1 = he isn't) and, from beat_0070 on, by his work canvases. Crash rough sets nothing. ⚠️ It is the ONLY entry in [player.trait_decay] — anything spent by ACTIONS must never go there. | THE PARTS LOOP (beat_0075, rev 120) — THREE counters, all TRAITS not flags (the setters ride navigating choices and a triggerless exit, and the flag-chain validator hard-fails a flag required by a trigger whose only setter is triggerless; the shipped precedent is repair_armed/repair_session). All three declared in 1_metadata's [player.core_traits] with hidden=true labels in 0_systems_spec, which is what puts them in setup.stateDefaults and therefore into setup.backfillStateDefaults (v2.py:15332) for carried 0.1.7 saves. ⚠️ THE BACKFILL IS LOAD-BEARING: coerceNumber(undefined) returns null and EVERY lt/gte on a missing trait returns false (v2.py:3834-3849), so without it the loop would read both 'she has no part' AND 'she cannot buy one'. part_held (0/1) — bought and in her pocket; set by activity_buy_part's 25-coin choice, consumed by kess_install_part's exit, gates the install rung. part_installed (0/1) — seated and live; set by the install exit, burned back to 0 by every attempt (beat_0076+), and ANDed into the buy gate so she can never stockpile. mercer_attempts (0..4) — bands BOTH kess_install_part's build talk and loop_mercer_attempt itself, so the two can never disagree about which generation she is on. ⚠️ part_gen FROM THE PLAN SEED IS DROPPED: it counted the same thing mercer_attempts counts, they move in lockstep by construction, and two counters for one fact is a desync waiting to happen. ⚠️ NONE of the three decays — [player.trait_decay] still has exactly one entry, feed_line_days.  || THE LEASH (rev 124, beat_0079): mercer_drains_done (TRAIT, default 0, hidden from the <<playerTraits>> dump, no sidebar row) — the Mercer drain counter and the twin of calloway_drains_done / colm_drains_done. Bumped to 1 on cap_first_fire's EXIT BLOCK (an auto-fire she cannot decline, so render is the event) and again on every loop_mercer_warm_tap rung CLICK. A trait not a flag because the warm tap's setter is triggerless and the flag-chain validator hard-fails a flag whose only setter is triggerless. Declared in 0_systems_spec [[traits.labels]] and defaulted in 1_metadata [player.core_traits] so it joins the cross-release backfill. NOTE the asymmetry with mercer_attempts: the fourth part is NOT burned, so part_installed stays 1 from the first fire onward — that is what closes the parts economy and what cap_bastien_walks_in reads at beat_0080. || THE WAY DOWN (rev 222): bunker_stealth_used (per-run 0/1, the free back-out, zeroed on the way in) and bunker_runs (prose-only odometer). Deliberately NO position odometer — the node graph holds her place in the route and a counter beside it would be a second source of truth for the same fact, which is the bug activity_sift_the_ruin shipped once already.",
     "schedules": [
@@ -3681,7 +3917,9 @@
         "location": "bastien_backroom",
         "window": "20:00-23:59 all week",
         "note": "rev 225 — gated `when` raid_done is_false. Unchanged for the bar arc; stops resolving after the raid, where it used to outlive him."
-      }
+      },
+      "npc_cain — beat_0211: the_site 21:00-23:59 + 00:00-03:00, every weekday, when the_site_open is_true. His first rows; directly under npc_cain in 1_metadata.",
+      "npc_dace — beat_0213: underworld_pit 18:00-23:59, every weekday, when crew_refused is_true. Directly under npc_dace (the last NPC in the array)."
     ],
     "clothing": {
       "enabled": true,
@@ -3728,18 +3966,27 @@
       "sabin_drains_done — beat_0131, hidden. Set on loop_sabin_finisher's draining choices (triggerless, hence a trait). ALSO beat_0132's gate, which is why Sabin ships no cap canvas.",
       "sabin_suspects — beat_0131, hidden. §9's Track B. +1 per shift on work_the_archive ONLY. Gates nothing. Its terminal band is open item 2 and belongs to beat_0132.",
       "bunker_stealth_used — beat_0173, hidden. The ONE free stealth back-out per RUN. Zeroed on bunker_descent's 'Down.' choice because there is no engine hook for run-scoped state ([engine.daily_tick] is day-scoped and the route advances no day on purpose). Gates the back-out in all five caught rooms.",
-      "bunker_runs — beat_0173, hidden. Prose-only odometer of how many times she has been put back to the stair head. Gates NOTHING and must gate nothing."
+      "bunker_runs — beat_0173, hidden. Prose-only odometer of how many times she has been put back to the stair head. Gates NOTHING and must gate nothing.",
+      "vega_damage — beat_0206, hidden from the dump, shown as the banded 'Body:' sidebar row (bands from 1, top band no max). 0-100, clamped: +60 ambush, +35 per street loss, -25 per Kess repair. The take wants lt 30.",
+      "vega_habits — beat_0206, hidden. 0-4, +1 per street loss. The take needs 4.",
+      "undertow_build — beat_0206, hidden. 0-3, +1 per paid rebuild stage; stage 3 sets undertow_open."
     ],
     "dev_jumps": [
       "dev_jump_whose_hand — the 0.2.0 end-state, lands at the_cot, WHOSE HAND opens on arrival.",
       "dev_jump_whose_hand_end — through beat 13, lands at the_cot one beat short of the capstone, both loops open.",
       "⚠️ Any jump that seeds bastien_drains_done gte 1 MUST also set plan_made, or cap_the_wait auto-fires on arrival at the cot.",
       "dev_jump_way_down_start — the END of 0.2.1 (dev_jump_whose_hand_end's beat-13 seed carried through the six back-half flags: capstone_failed, vesper_named, cain_absent_confirmed, third_located, cain_came_along, two_men_done), every WAY DOWN flag cleared, lands at the_cot and cap_bastien_alive fires. Corrected rev 223; verified live.",
-      "dev_jump_way_down_door — through beat_0178 (route + part + link, yard at depth 4), emitter equipped and full, stealth/fighting 45 so the back-out is open at turns 1-3 and the fight at 1-2 and the rest locked. Lands at facility_ruins. Route answer is in the node's own prose."
+      "dev_jump_way_down_door — through beat_0178 (route + part + link, yard at depth 4), emitter equipped and full, stealth/fighting 45 so the back-out is open at turns 1-3 and the fight at 1-2 and the rest locked. Lands at facility_ruins. Route answer is in the node's own prose.",
+      "dev_jump_hunt_start — beat_0206. '▶ 0.2.3: the morning after the count'. The end of 0.2.2 (all ten Count flags set, bastien_mend 3), 0.2.3 counters at 0, lands at the_cot.",
+      "dev_jump_hunt_take — beat_0216. '▶ 0.2.3: ready for the take'. Every 0.2.3 flag through crew_back set, vega_taken unset, fighting 85, vega_habits 4, vega_damage 0, undertow_build 3; lands at kess_berth (the strip rolls a street fight).",
+      "dev_jump_hunt_on — 2026-10-04. '▶ 0.2.3: the hunt is on (after Kess)'. Part one done (site_offered..seam_known set), the rest unset, fighting 70, damage 35. Lands at the berth.",
+      "dev_jump_hunt_crew — 2026-10-04. '▶ 0.2.3: the crew night is tomorrow'. Flags through dace_met set by the click (crew night fires the next night after ten), bar built, fighting 85, habits 4. Lands at the pit.",
+      "dev_jump_hunt_table — 2026-10-04. '▶ 0.2.3: Vega on the table'. Every flag through vega_taken set, damage 25. Lands at the berth; the table fires in Kess's hours."
     ]
   },
   "next_up": [
-    "MARKET CAP — design_cheat_page.md §11.1, still open and now sharper: underworld_market_shop sells fighting +5 (40 coin) and stealth +5 (30 coin) with no cap and no clamp, repeatable. It defeats the cheat page's caps and, since rev 227 raised those, it is the only uncapped skill source left. Two lines to fix (cap + clamp on both effects) — LO's call, recommended yes.",
+    "0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 21 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
+    "RESOLVED 2026-10-02 — MARKET CAP. underworld_market_shop's two buys are one-time now (flags market_weapon_bought / market_gear_bought, each choice gated is_false). design_cheat_page.md §11.1 marked resolved.",
     "THE RINGS, two calls flagged to LO and not yet answered (design_the_rings.md 'Decisions'): (1) the door man is emitter-or-grind — the clean pass needs a silent run AND an unspent budget, so in practice the rescue is gated behind the emitter's 10-coin-and-a-day reload or fighting 70; (2) the slab's round runs 20:00-23:59, night rather than day. Both are one-line flips.",
     "THE WAY DOWN media harvest — 8 slots authored and empty: portraits/loder.jpg, scenes/the_plant_room.jpg, and sex/bunker_g1_crate_t5 / g2_water_t5 / g3_table_t5 / g4_bench_t5 / g5_desk_t5 / bunker_door_t5 (pool = 4 each). Every block already carries description + search_queries. Needs the find-media pipeline; nothing else in the release is outstanding.",
     "THE COUNT — BUILT 2026-09-19 (rev 230), beats 0194-0203 validated, beat_0204 (media) authored and pending. COMMITTED and pushed (8e79e20, 1678064, merge c6c8405). STILL OPEN, LO's: (1) the media harvest — 7 new pools (sex/bastien_cot_*, 28 clips) on top of 0.2.2's 8 slots; (2) the guide PDF gets a COUNT chapter at release (hand-written, untracked); (3) the four flip-able calls in design_the_count.md's last section (clause (ii) scoped to the back room; Rue sends money not a reply; no anal at all in his loop; the midnight straddle accepted); (4) narration:dialogue in the chunk is 3.6:1 against the design's 1.5:1 — if he should talk more in bed, it is more lines in the loop; (5) A 0.2.2 HOLE THE FACE CHECK EXPOSED, flagged not fixed: no bunker/arrival canvas reads face_worn, so a player who wears the bought face into the rescue is carried home by a man who had that face in his back room. THE COUNT is safe from it (every surface of his waits for the face to be off); the rescue is not. (6) RELEASE: THE COUNT is part of 0.2.2, not 0.2.3 — LO 2026-09-19.",
@@ -3748,7 +3995,7 @@
     "⚠️ OPEN ITEM 5, STILL LO's CALL — cap_grier_met, cap_grier_gives and cap_sabin_hires auto-fire with their NPC absent. One npc_at_location … is_present clause each; the fix is proved on cap_sabin_consults. It re-opens three validated beats.",
     "⚠️ STILL OPEN — the template_import.py:5375 engine bug (warnings.append where warnings is the stdlib module)."
   ],
-  "_active_beat": "RELEASE 0.2.2 — THE GUIDE (rev 236, 2026-09-21). The paper half of the release, written. Two new route chapters, Act 8 (The Way Down) and Act 9 (The Count), covering the 22 canvases 0.2.2 added: the news at the cot, the day's wait, the route out of Renner in the coveralls, the part at yard_depth 4, Kess's 40-coin link, the descent before 20:00, the five wrong doors, the three posted rings, the one quiet move per run, the noise that carries to the last door, the emitter as the third way through it, the extraction — then the cot's week of real days, the 40-coin brace, the 22:00-06:00 first night, mend to 3, the note, Rue at The House, and the loop. CORRECTIONS TO WHAT WAS ALREADY THERE: the Fighting chapter still described 0.2.0's ceiling (gates to 40, 'only three lt gates', 'the code caps at 40') against a build whose fighting ladder now runs to 70. The Stealth chapter listed six closing thresholds; only FOUR are doors. Re-measured per canvas: yard_crawl carries gte AND lt at the same four numbers (10, 25, 40, 55), one per guard encounter. 30 and 50 are not doors — 30 is bastien_door_search, where the climb HELPS (at 30 the taser goes through his hands, below it he finds it), and both are also the drills' own prose bands. THE SAME WRONG LIST WAS SHIPPING IN THE GAME: the stealth cheat row's hint printed all six numbers to the player at the moment of the press. Corrected in 0_systems_spec.toml, so the row and the guide now say the same true thing. Census re-derived (18 people, 259 scenes, 108 quest entries, 520 authored choices) and the ending rewritten — the build no longer ends with the two men. Added the one trap that had no entry: every scene at the cot is gated on the face being OFF, eight gates, one act after the Rise bounces her without it. Codes ROTATED for 0.2.2; every candidate word was collision-tested against the built page first, because the integrity gate compares codes to the output with whitespace stripped and a word that reads as two in the prose hard-fails the build. ⚠️ CAUGHT AT THE STAGING GATE: the first draft of this rev's ledger entry listed the six new words in plaintext, in a file that is committed to a PUBLIC repo — the same mistake the 0.2.1 entry made and shipped. Redacted here and in that older entry. The pre-push check that found it compares every candidate and live word against each file about to be staged, whitespace-stripped, and it is worth keeping in the release ritual.",
+  "_active_beat": "0.2.3 HER FATHER'S HOUSE and THE HUNT — BUILT 2026-10-04 (rev 240), beats 0206-0218, all validated. Uncommitted, awaiting LO. Media harvest (21 slots) held for LO.",
   "decisions_log": [
     {
       "turn": 1,
@@ -4876,6 +5123,28 @@
     "rev 239 (2026-09-25) — THOUGHTS BESIDE SPEECH. The v2 lint 'thoughts outweigh speech' listed 8 canvases; 4 were changed and 4 kept on purpose. CHANGED: activity_say_yes — Wren answers Cain aloud ('I couldn't find you. So I stopped.') and the thought that narrated the game's own structure ('this whole chapter', the v1 L3 example of that defect) becomes 'She reads men for a living. He reads her for free.'; cap_case_curated — she lies aloud to keep the secret without contradicting reveal #1 (she already told him it was an inside job, so the steer is 'Then it isn't your people. It's somebody else in this building.'), Calloway pushes back ('Forty floors of somebody else.'), the thought shrinks, and the exit 'Say nothing. Keep going.' becomes 'Keep it to yourself. Keep going.' so the button no longer contradicts her speaking; cap_case_pipe — the narrated 'She tells him that sounds right' is spoken ('Sounds right. Sleep on it.') and the 83-word thought is cut to 22; bunker_guards — the four guards with no NPC entry each get one line as speaker 'unknown' when they see her (g4's narrated 'says her step is wrong, out loud' is now the spoken line). KEPT: cap_bastien_drinks (he drank because she stopped asking — her speaking would undo it), cap_bastien_notices (she must not be recognised; Sol already speaks), grier_drain_canvas (a drained memory, nobody can speak in it), cap_capstone_fire (already 126 spoken words; the thoughts sit beside the speech). Verified: merge --validate OK; package green with the same 22 trait-extraction warnings as HEAD; judged gates unchanged; the lint now lists only the 4 kept canvases; a headless render shows every new line and none of the replaced ones; the five Vesper guards, the opening probe and the hub probe pass.",
     "2026-10-02 — FINISH SCREENS TAKE ONE FILE, NOT A POOL (LO). A media pool cycles one clip per visit, so it only pays on a screen the player sees several times in one session — the act screens, which self-loop. A finisher renders once per session and is split across 2–3 finish types, so clips 2–4 of a finish pool almost never rendered. Converted 39 pools to single `file` blocks: all 36 finish pools, plus the once-only bastien_cot_wash_t5 and bastien_cot_first_night_t5 and the once-per-attempt bunker_door_t5 (LO's call). Each folder's 4 clips moved to .find-media/previous/ and sit on the slot's shelf as origin:previous options; shelves, query labels, picks and review verdicts re-keyed from 'sex/X_t5' to 'sex/X_t5.webm' (check_shelves _move_key, these 39 only — the 5 older orphans left alone). Clip 1 of each old folder is installed as a PLACEHOLDER so the game renders; LO picks the keeper per slot in the review UI. Intro pools, one-shot capstone pools and rung pools were NOT converted — awaiting LO. Skill rule written to author-game media.md §7 Gate 1. Build green.",
     "2026-10-02 — SECOND PASS, 28 MORE POOLS TO ONE FILE (LO). Same rule (a pool only on a screen that repeats inside one session). Converted: the 7 loop intros (renner_loop_t5, calloway_loop_t5, colm_backroom_t4, colm_ruin_t4, bastien_backroom_t4, grier_loop_t4, sabin_loop_t4); the one-shot scenes cap_owner_print (6), cap_capstone_fail (2), cap_capstone_fire (2), hub_grier.knees and hub_sabin.bench (both lock on grier/sabin_opened_up); the 5 bunker_guards g1–g5 taken screens (once per wrong turn, the bunker_door precedent); and the short-lived rungs rung_calloway_contact/oral (close at calloway_drains_done 1) and rung_grier_tease/flash (close at grier_opened_up). Same mechanics as the first pass: clips to .find-media/previous/ as origin:previous shelf options, shelves + verdicts re-keyed to '<pool>.webm', clip 1 installed. KEPT as pools on purpose: bar_floor_handled_t4 (job shift), renner_cheerup ×2 (daily random ambient), the two weapon-use scenes, Renner's three rungs (~5/5/10 views at +2 corruption a click), Sabin's tease/flash (open to LO — the TOML's own note says 1–2 views). Correction: hunt_marsh_sunday's act screens DO self-loop (qualified nodeId) — they stay pools. Build green; 0 converted-slot orphans.",
-    "2026-10-02 — REBUILD ON THE WORLD-AND-SYSTEMS ENGINE (LO: rebuild with --dev --debug, commit, merge, push, deploy). No TOML change. Resume-and-reconcile: merge --validate OK and 7_final_game.toml byte-identical to HEAD; drift check 0 of 168 plan beats missing a produced canvas. output/ and output_dev/ rebuilt with --dev --debug --codes guide/codes.toml; the HTML diff is engine-only (the E7a unequip/remove-from-wardrobe helpers, saved outfits, the E10 item-buy gate from the World and Systems PRD). Same 22 'Error extracting trait effects' warnings and the same Kess salvage_repair_hub/hub_kess_berth overlap warning as before. TWO STALE GUARDS FIXED, not the game: check_bunker_route and check_the_count asserted pool_dir on every media block and failed after this morning's pool-to-file passes (caught rooms, wash, first night and finishers are one `file` now, media.md §7 Gate 1). Both now read a slot as pool_dir OR file-minus-extension; the bunker guard still counts exactly six slots, the Count guard still requires pool 4 where a pool remains. Verified: both guards OK; live_cot_decision, live_rings, live_the_count OK on the rebuilt output_dev; headless smoke on output/ loads Start, walks the opening, 0 JS errors; 0 of 6 codes in the output; no raw TOML."
+    "2026-10-02 — REBUILD ON THE WORLD-AND-SYSTEMS ENGINE (LO: rebuild with --dev --debug, commit, merge, push, deploy). No TOML change. Resume-and-reconcile: merge --validate OK and 7_final_game.toml byte-identical to HEAD; drift check 0 of 168 plan beats missing a produced canvas. output/ and output_dev/ rebuilt with --dev --debug --codes guide/codes.toml; the HTML diff is engine-only (the E7a unequip/remove-from-wardrobe helpers, saved outfits, the E10 item-buy gate from the World and Systems PRD). Same 22 'Error extracting trait effects' warnings and the same Kess salvage_repair_hub/hub_kess_berth overlap warning as before. TWO STALE GUARDS FIXED, not the game: check_bunker_route and check_the_count asserted pool_dir on every media block and failed after this morning's pool-to-file passes (caught rooms, wash, first night and finishers are one `file` now, media.md §7 Gate 1). Both now read a slot as pool_dir OR file-minus-extension; the bunker guard still counts exactly six slots, the Count guard still requires pool 4 where a pool remains. Verified: both guards OK; live_cot_decision, live_rings, live_the_count OK on the rebuilt output_dev; headless smoke on output/ loads Start, walks the opening, 0 JS errors; 0 of 6 codes in the output; no raw TOML.",
+    "2026-10-02 — THE MARKET SELLS EACH EDGE ONCE (LO: 'when bought once can't be bought again'). design_cheat_page.md §11.1 had underworld_market_shop selling fighting +5 for 40 coin and stealth +5 for 30, repeatable with no cap: the one uncapped skill source left after rev 227 raised the cheat page's caps. LO chose one-time over the cap+clamp the note recommended. 3_activities.toml: each buy choice now sets a flag (market_weapon_bought / market_gear_bought) and carries a v1.0 condition on that flag is_false, so the button disappears after the first buy; the weapon/gear result screens and the pens are unchanged. No player-facing text promised repeat buys (swept toml phases + guide). Save note: the flags are new keys, so old saves backfill them false and a returning player who already bought can buy each once more — 5 points, accepted. Verified: merge --validate OK; output and output_dev rebuilt --dev --debug --codes, validation and flag chains green, same 22 trait-extraction warnings and Kess overlap warning; headless probe on output: both buttons on a fresh visit, weapon buy gives fighting 0->5 coin 500->460 and removes only the weapon button, gear buy gives stealth 0->5 coin 460->430, then neither button shows while pens and leave stay, 0 JS errors; all five Vesper guards pass.",
+    "2026-10-03 — 0.2.3 STORY AGREED: HER FATHER'S HOUSE and THE HUNT (design_the_hunt.md; pointer appended to design_book.md). LO's calls: Cain takes her to the_site (the locked frontier card that has waited on the_site_open since Phase 1); Marrow is her father and the photo fills the empty face in her Whose Hand memory (supersedes that design note's 'the face is in the third piece'; no shipped line said it; the third piece is still Cain); she learns there that Cain killed Marrow; only a little closer to Cain. Then VEGA hunts her in the underworld, orders to bring her in whole; the weapon is useless on a machine; she loses again and again; she beats Vega by the fight route or by Bastien, who must first get his men back. Vega ends on Kess's table, killed and dismantled. 0.2.4 = the transfer, TEMPORARY, her feeling travels with her. Proposals left for LO in the doc's last section: no Cain sex at the site, what a loss costs, Bastien's men returned via the weapon, the site is watched, Cain as fight trainer. Blueprint not started.",
+    "2026-10-03 — 0.2.3 calls answered (design_the_hunt.md). Face: no older release changes; the shipped Whose Hand memory left the face blank and the site fills it with Marrow's, made plain on screen. Losing to Vega: she runs off on her own, loses the day, keeps every place; Vega catches her on the underworld streets, never in a hideout. Bastien's comeback is NOT via the weapon: rebuild and renovate the Undertow (costs money, hers too), offer his men pay, they refuse because many died there, the main man brings about ten back for one night with her and all of them at once; then Bastien takes Vega. No Cain sex at the site; the site being watched brings Vega; Cain trains her for the fight route. Story complete; blueprint next.",
+    "2026-10-03 — 0.2.3: Vega damages Wren in every fight; Kess repairs her for coin at the berth (the Salvage repair shape, salvage_repair_hub, on a NEW damage meter so core_strain keeps its meaning). Badly damaged she fights worse. Numbers at the blueprint.",
+    "2026-10-03 — 0.2.3: beating Vega takes BOTH routes, not either. Wren alone can't finish her; Bastien's men alone can't take her (Wren was easy to catch, Vega is stronger than any man and can kill one). Wren, trained by Cain, wears Vega down in a fight; the crew closes in with the bag, the knee and the seam. Open: some men die in the take (proposed).",
+    "2026-10-03 — 0.2.3: some of Bastien's men die in the take (LO yes). Part two OPENS with Vega attacking Cain and Wren as they leave the site; they run off badly damaged (first Kess repair). Vega's powers and how Wren learns to fight her: under discussion.",
+    "2026-10-03 — 0.2.3: VEGA locked (LO 'keep all'). Powers: stronger and faster than Wren, kills a man bare-handed; no pain; never forgets a fight (no trick works twice); tracks Wren through the underworld; immune to the weapon and the emitter; holds back on Wren (orders: whole), not on men. Weak spots: always the smart move (Wren's human unpredictability is the edge); burns power fast (wearing down); the seam at the base of the spine; won't kill Wren. Wren learns by: street losses (one habit each), Cain's night training ('She'll always do the right thing. You have to do the wrong one.'), Kess showing her the seam on her own body during repair, pit fights past 70. The take needs fighting + habits learned + damage repaired + Bastien's men. In design_the_hunt.md.",
+    "2026-10-03 — 0.2.3 BLUEPRINT written (design_the_hunt.md 'BLUEPRINT'). LO: no Kess test scenes, no repeatable crew loop, 'low sex scenes is fine here'. New state vega_damage (shown, banded) / vega_habits / undertow_build + 12 flags; npc_vega (no schedule), npc_dace (pit 18-24, name default), Cain scheduled at the_site 21-03. Part one 4 one-shots (cap_cain_comes on the clock not days_since_flag, cap_the_site Tier-3, the ambush, Kess shows the seam); hunt = rand_vega_street Lane-2 on underworld_strip (always loses, 4 habit bands, +35 damage, 540 min lost), repair as a CHOICE on hub_kess_berth (one-card-per-NPC-window rule), activity_cain_trains fighting 70->85; Bastien B1-B6 (rebuild 3 stages, refusal, Dace, crew night Tier-3, owner band pool 4); the take behind a show_when_locked choice on underworld_strip_hub (fighting 85 + habits 4 + damage lt 30 + crew_back + seam_known), the table at Kess. Quest cards H edit, I-L. 13 media slots. Build order beat_0206-0218. Flip-able defaults listed at its end.",
+    "2026-10-03 — beat_0206 BUILT (0.2.3 state + seams). Declared vega_damage, vega_habits, undertow_build in [player.core_traits] at 0 (cross-release backfill) and hidden in [[traits.labels]]; new trait_status_text row 'Body: Fine / Hurt / Badly hurt' on vega_damage (1-29 / 30-59 / 60+, absent at 0; 'Fine' = under 30 = what the take needs). npc_vega and npc_dace appended AFTER npc_loder (the one insert point that cannot re-parent a schedule), both schedule-less. Dace's description puts the raid deaths on the STRIP, because cap_the_raid empties the bar before the units arrive and shows no body there ('Three of them came down the strip'). dev_jump_hunt_start copied from dev_jump_count_one_short and carried to the end of 0.2.2. Plan changes: Cain's row -> beat_0211, Dace's -> beat_0213, card H edit -> beat_0207. check_the_count.py §6 now exempts dev jumps by prefix (it failed on the new jump with a correct game). Verified: check_the_hunt red then green; merge OK; package --dev --debug green, flag chains valid, same 22 trait warnings + Kess overlap warning; headless: jump listed, lands at the cot, 4 flags set, bastien_mend 3, new traits 0, both NPCs in $npcs, no Body row at 0 and the right band at 60/35/10, 0 JS errors; all six Vesper tests pass.",
+    "2026-10-03 — beat_0207 BUILT: cap_cain_comes (0.2.3 part one, scene 1). Cain on the end of her bunk with his coat over his knees (the Whose Hand image), Bastien at his ledger; 'Where you were made'; her thought misnames the feeling ('Low charge. She skipped the cradle.'); Bastien sends them off ('the pair of you are in my light'). Canon guards: no Undertow/raid mention in front of Bastien (he never learns she was the barmaid), no Marrow name (beat_0208's). Card H handed over (terminal + 'build ends' removed, upper-gated site_offered); card I added. the_site's description rewritten to be true once open. Old guards updated for the handover, the way The Count updated The Way Down's: check_the_count §1 accepts H as terminal OR handed over to 0.2.3, §9 exempts cap_cain_comes, live_the_count [8] expects H non-terminal. Verified: check_the_hunt red then green; merge OK; package green, flag chains valid; headless: no Cain the same day at 08:00, none at 20:00 next day, none with the face on, fires next morning with it off, all beats render, no Undertow/Marrow, lands at the_site, both flags set, new description, card I live and H closed on the Quests page, the strip's Site card unlocked, 0 JS errors; all six Vesper tests pass. gates.py lint 'cap_cain_comes chain never reaches standing content' is expected until beat_0208/0211.",
+    "2026-10-04 — beat_0208 BUILT: cap_the_site, 0.2.3's big written scene. Canon calls made in the writing, all inside LO's agreed story: (1) the memory is SPOKEN by her as it returns, the way she told it on her bunk in Whose Hand — the first draft narrated it and measured 3.5:1 against the 2.14 target, the spoken version 1.24:1; (2) Cain did not know she was Marrow's daughter (Marrow told him of 'a girl at school in the north'), which is what makes 'I hoped it was me behind you' true; (3) Cain answers only how Marrow died and why ('Because he asked. That is the only part of it that is mine to tell you') and says nothing of the rest of the iceberg (the plan's end for the girl and for him); (4) the lab is where she was made, never claimed as the room the memory was cut in (Grier's three trays stay unplaced); (5) 'Elias Marrow' reaches the player for the first time here. Verified: check_the_hunt red then green; merge OK; package green, flag chains valid; headless: no fire without site_offered, fires with it, all 14 beats render (9 key lines checked), media placeholders emit, marrow_known set, back on the strip, no second fire, card I closed, 0 JS errors; all six Vesper tests pass; gates.py lists nothing for cap_the_site.",
+    "2026-10-04 — beat_0209 BUILT: the ambush, the seam, the repair. Engine facts that shaped it: (1) the ambush is a located auto-fire on underworld_strip instead of a triggerless canvas chained off the Site, because its flag is read by triggers; (2) a type='location' exit's effects fire on RENDER (engine-reference.md:230), so vega_damage is 60 while the ambush is on screen and Kess's -25 lands as his scene opens — the right order, and the probe now checks at those moments; (3) choice/exit effects default to NO clamp (v2.py:15684), so every vega_damage write carries clamp = true, proved live (10 - 25 lands on 0, the row disappears). check_the_hunt.py now measures narration:dialogue on every 0.2.3 spoken scene against 2.14 (the ambush's first draft was 3.29, past the skill's 3:1 FAIL). Verified: guard red then green; merge OK; package green, flag chains valid; headless: no ambush before the Site, ambush fires on the walk back, all key lines, damage 60 + 'Body: Badly hurt', Kess's scene fires on arrival at 14:00, damage 35 + 'Body: Hurt', repair via Kess's card 35->10 for 10 coin with the Hurt line, then Fine line, then clamped to 0, row gone, choice gone at 0, 0 JS errors; all six Vesper tests pass.",
+    "2026-10-04 — beat_0210 BUILT: Vega on the streets. Calls made: (1) FIVE habit bands, not four — at 4 habits the 'she will not finish her' text would lie on later visits, so the 4+ band says what is true then (she knows it all, not enough alone); (2) the cheat page's fighting row cap 70 -> 85, forced by the build's own check ('cap 70 is below the highest gate this game puts on fighting (85)'), following LO's rev-227 stealth precedent (sell the full ladder); raising fighting deletes no content (the only new lt gate is Cain's training closing at 85, beat_0211); hint gains 'Vega at 85'; (3) check_the_hunt measures rand_vega_street's ratio PER VISIT on its fight screen (bands exclusive; escape screen solo, the skill's exemption) — each band <= 2.14 after adding Vega's replies. Engine facts confirmed: auto-fire outranks random (v2.py:6311-6318), so street fights can never block a story beat; a choice with no time adds the engine default 3 minutes. Verified: guard red then green; merge OK; package green, flag chains valid; headless (52 checks): every habit value 0-4 with damage 0 and 60 shows exactly its fight band and the overlay only at 60+, lesson band = pre-increment, habits capped at 4, damage +35 and 80->100 clamp, 543 minutes, home to the cot; the roll fired 27-29/40 days, never twice in a day; none after vega_taken; card J live with goals and closed on vega_taken; 0 JS errors; all six Vesper tests pass. OPEN FOR LO AT RELEASE: the paid guide's fighting chapter needs the 85 gate (untracked file).",
+    "2026-10-04 — beat_0211 BUILT: Cain trains her at the Site. Calls: lock-as-prose instead of a greyed button (one show_when_locked text cannot say both 'not yet' and 'nothing left'); the rule is said once via two same-label choices on cain_rule_heard; .session bands read post-increment because choice effects fire on click. check_the_hunt's ratio check rewritten to measure every screen PER VISIT: adjacent groups are one if/elseif chain, an ungrouped block starts an independent chain, and every combination (one group per chain) is measured — it caught real over-narrated hub/session/repair screens (fixed by trimming leads and adding the other speaker's line; Vega's damage overlay now speaks). p0207 (beat_0207's probe) updated: since beat_0208 the Site scene fires on arrival and its exit flags fire on render, so card I is checked during Cain's scene. Verified: guard red then green; merge OK; package green, flag chains valid; headless (23 checks): Cain absent before the Site opens, present 21-03 only after, the right band at 50/70/85, one training choice at 70, the rule once, fighting 71 energy 85, cain_rule_heard, 123 minutes, post-increment lines at 76/81, 84->85 'as far as I can take you', no training at 85, no session at 10 energy, 0 JS errors; p0207-p0210 and all six Vesper tests pass.",
+    "2026-10-04 — beat_0212 BUILT: Bastien asks; the Undertow rebuilt. Calls (flip-able, recorded in design_the_hunt.md): (1) the rebuild's stage order is cleared / floor and counter / back wall and open, so the burned back room is fixed LAST and Colm's shipped post-raid lines stay true through stage 2; (2) the ruin crawl (activity_sift_the_ruin) closes when the clearing starts — a player who never finished it loses its remaining bands; (3) Sol learns whose money it is on the stage-1 .done screen, the only one that paints exactly once. Canon held: the crew died on the strip, never in the bar (cap_the_raid empties the bar first); Bastien's location stays secret. PRE-EXISTING DEFECTS FOUND, NOT TOUCHED: mercer_end_table has no raid_done gate, so since 0.1.9 Mercer holds court at a working bar after the raid burned it; the underworld_bar location description ('Sol works the taps') has been false since the raid (static; true again once the bar reopens). check_the_hunt's ratio check now measures only what 0.2.3 wrote inside shipped canvases (a node of ours, or a band gated on a 0.2.3 key), never the shipped screens around it. Verified: guard red then green; merge OK; package green, flag chains valid; render-bucket guard: only the known react_renner_threat; headless (26 checks): Bastien's choice absent before the ambush and with the face on, present after, one-time, scene lines, crew_asked, cards 19/20/21 hand over; rebuild card absent at 02:00 and present at 12:00 alongside the crawl; Sol ruin band + question; 30 coin cannot pay; one stage offered at a time; 40/60/80 coin exact; 'Alive.' at stage 1; crawl and question gone after; Sol stage bands; Colm ruin band + tape at stage 2; undertow_open at 3; card gone; Sol open band; Colm open band, 'in the back' replaces 'through the tape', rebuilt loop intro; card 21 closes; 0 JS errors; all six Vesper tests + probes p0206-p0212 pass.",
+    "2026-10-04 — beat_0213 BUILT: the men refuse; Dace names the price. Canon held: Bastien never appears at the bar (The Count: 'none of them will know where I am'), so she makes his offer; the dead died on the strip; the men are unnamed (speaker 'unknown', the bunker-guard pattern) and Dace is the only name. Her thought on Dace's price is honest arousal, not a misnamed feeling — sex is the one thing she feels (design_book 'What she is'), so option B does not apply to it. Verified: guard red then green; merge OK; package green, flag chains valid; headless (31 checks): Dace on no map before the refusal; the bar opened through the real choice; no refusal in the same breath, at 20:00 the same day, or at 13:00 next day; card 22 live; refusal at 19:00 next day, lines render, crew_refused, no second fire; card 23 replaces 22; Dace at the pit 18 and 23, not 17 or 00; no scene at 14:00, scene at 20:00, lines render, dace_met, no second fire, card 23 closes; 0 JS errors. p0206's sidebar check raced the sidebar render (passed at beat_0212, failed once here) — a probe bug, fixed with a wait, stable over three runs. All six Vesper tests + p0206-p0213 pass.",
+    "2026-10-04 — beat_0214 BUILT: the crew night. Held: her yes first; no anal (the anal finish is the drain — The Count's line); every explicit beat on the body with 3+ frozen words, measured per beat by check_the_hunt.py with the scoreboard's own regex copied verbatim; interiority in its own beat; ratio fixed from 2.96 to <= 2.14 by trimming narration and giving the men lines. gates.py run against HEAD (a scratch worktree) and the working tree: the same 27 FAIL gates before and after, no new failing gate; inside them, two real items found and handled — Dace's pit row was DEAD after his scene (now when-gated dace_met is_false) and vega_damage's 30/60 bands have no gate above 1 until the take reads 'lt 30' (beat_0216, re-check then). The 'fighting via underworld_market_shop, no cost no cap' line is a gates.py modelling limit (it reads neither the coin cost nor the one-time flag of the market fix) and is identical on HEAD. CEILING ROW 'THE CREW NIGHT — Dace's ten' drafted in design_the_hunt.md for LO to sign. Probe note: --debug bakes the clip's 'Avoid: ... anal' authoring note into the page, so the absence check strips it (the documented QA-flag poison). Verified: guard red then green; merge OK; package green, flag chains valid; headless (21 checks): card J crew goal, Dace scene for real, card 24, not the same night, not 15:00 next day, fires 23:00 next night, key lines render, no anal in the prose, clip emits, crew_back, home to the cot, 480 min, no second fire, card 24 closes; 0 JS errors; all six Vesper tests + p0206-p0214 pass.",
+    "2026-10-04 — beat_0215 BUILT: Bastien's owner band. Calls: the clip is ONE FILE on the intro instead of the blueprint's 'pool 4' — the intro renders once per session, and LO's 2026-10-02 rule puts pools only on screens that repeat within a session; the band goes FIRST and carries bastien_himself so The Count's 'first band is HIMSELF' guard stays true while OWNER wins. Prose truth caught in review: his cot card said 'in the brace' while the owner intro has the brace on the floor — fixed with a crew_back band on amb_bastien_cot. Verified: guard red then green; check_the_count OK; merge OK; package green, flag chains valid; headless (14 checks): before crew_back his card and all four loop screens play the old bands, after it OWNER and only OWNER, the clip emits, the face band still wins; 0 JS errors; all six Vesper tests + p0206-p0215 pass.",
+    "2026-10-04 — beat_0216 BUILT: the take. Calls: (1) its own card, not a choice on underworld_strip_hub — that canvas is the single-exit 'Exit Underworld' card and holds no choices; the card is located and repeatable, so vega_taken has a legal setter; (2) the Room is narrated in .take's last beats, not entered — captive_room is teleport-only and its door never opens (cell_door is never set), so a port there would seal the player in; (3) the greyed choice's locked_text starts 'Draw her out.' because the engine renders a locked choice as locked_text + bracket and never shows its label (seen live); (4) Cain's hub gains an after-the-take band so his 85 band's 'somebody behind her' does not outlive its use. Verified: guard red then green; merge OK; package green, flag chains valid; headless (31 checks): no card before the seam; greyed with the voiced text and the labelled bracket; live with all four met; locked at fighting 84 / habits 3 / damage 30 / no crew; the take jump lands at the berth with the ready state; card 25 live; the take plays (9 key lines), vega_taken, damage +25, 723 min, at the berth; no street fight, no card, cards 25 + J closed, Cain's after-take line; 0 JS errors; all six Vesper tests + p0206-p0216 pass.",
+    "2026-10-04 — beat_0217 BUILT: the table and the end card. The 0.2.4 decision 'temporary transfer' is said as Cain's plan (her body in the other cradle, he sits with it); 'the feeling goes with her' is deliberately NOT said — it is what she finds out in 0.2.4. Verified: guard red then green; merge OK; package green, flag chains valid; headless (21 checks): arriving outside Kess's hours no table and card K with his hours, Bastien's closing card, the table in his hours with 9 key lines, vega_dismantled, damage 0 and the Body row gone, no second fire, end card L live with its terminal line, no escaped apostrophes; p0216's damage check updated (the table now fires on arrival in Kess's hours and its render-time exit sets damage 0); all six Vesper tests + p0206-p0217 pass.",
+    "2026-10-04 — beat_0218 + 0.2.3 BUILT (rev 240). Whole chunk verified end to end in a real browser from dev_jump_hunt_start to end card L (25 checks, 0 JS errors). gates.py: the same 27 FAIL gates as HEAD, none new; three in-gate items are gates.py modelling limits, each verified by probe (it ignores a schedule row's `when`, counts only gte gates for a meter's bands, and reads neither the market's coin cost nor its one-time flag). Open for LO: commit; media harvest (21 slots); sign the crew-night ceiling row; paid-guide chapters + fighting 85; version bump and publish build; pre-existing defects found and left alone (mercer_end_table has no raid gate; underworld_bar's static description has been false since the raid).",
+    "2026-10-04 — LO: 'add dev jumps if not added yet, rebuild with dev and debug flags, commit, merge, and push'. Three jumps added beside hunt_start and hunt_take (hunt_on, hunt_crew, hunt_table), each copied from dev_jump_hunt_take with its state carried. Verified live: all five listed, hunt_on opens Bastien's ask and Cain's training, hunt_crew fires the crew night the next night, hunt_table fires Kess's table in his hours, 0 JS errors; all six Vesper tests + probes pass. output/ and output_dev/ rebuilt --dev --debug --codes."
   ]
 }

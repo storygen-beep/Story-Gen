@@ -351,6 +351,22 @@ sabin_suspects    = 0
 # 0.2.0 save loads with bottle_held = 0 rather than undefined, and the drink choice's `gte 1` compares a
 # number instead of comparing against undefined.
 bottle_held       = 0
+# ─── 0.2.3, HER FATHER'S HOUSE and THE HUNT (beat_0206) — the chunk's three counters ─────────────────
+# design_the_hunt.md "BLUEPRINT · The numbers". Labels, the sidebar row and the full reasoning live in
+# 0_systems_spec.toml. Declared HERE for the pieces_seated reason above: core_traits is what the
+# cross-release backfill initialises, so a 0.2.2 save loads all three as 0 rather than undefined, and every
+# lt/gte against them compares a number.
+#   • vega_damage 0-100 — what Vega has done to her body. +60 at the ambush, +35 per street loss, -25 per
+#     repair at Kess's. The ONE number of the chunk the player sees (a banded sidebar row). Clamped on
+#     every write, because +35 on 80 must land on 100 and not 115.
+#   • vega_habits 0-4 — how many of Vega's habits she has learned, +1 per street loss. The take needs 4.
+#   • undertow_build 0-3 — the Undertow's rebuild, +1 per paid stage: cleared, rebuilt, renovated.
+# ⚠️ TRAITS, NOT FLAGS, for the house reason: the street fight and the rebuild are repeatable cards, and a
+# counter read with gte by several surfaces is one fact in one place.
+# ⚠️ NONE OF THEM DECAYS. Damage heals at Kess's for coin, not by sleeping it off — that is the loop.
+vega_damage       = 0
+vega_habits       = 0
+undertow_build    = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -768,11 +784,41 @@ arc_stages  = ["The burnout"]
 [[npcs]]
 id          = "npc_cain"
 name        = "Cain"
-description = "The rogue asset the company built her to kill. An early build with a lot of miles on him, taking Vance apart a year at a time on paper and putting the good pieces in himself. Bastien has supplied him for eleven years and has never had an address. Speaks little, explains nothing, and is the only person in the Reach who has ever looked at her face and used her name. NOT a conquest and NOT reachable: no schedule, no hub, no location that stays open."
+description = "The rogue asset the company built her to kill. An early build with a lot of miles on him, taking Vance apart a year at a time on paper and putting the good pieces in himself. Bastien has supplied him for eleven years and has never had an address. Speaks little, explains nothing, and is the only person in the Reach who has ever looked at her face and used her name. Not a conquest. Since he took her to the Site, where Marrow made them both, he keeps the nights there."
 portrait    = "cain.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The shape"]
+
+# ⚠️ ADDED beat_0211 (0.2.3). CAIN'S FIRST SCHEDULE ROWS — THE AMENDMENT THE NOTE ABOVE ANTICIPATED, DONE WHOLE.
+# The "no schedule row, load-bearing" rule held while he had no reachable location. He has one now: the_site,
+# open from cap_cain_comes (beat_0207), and a hub there (activity_cain_trains). Location + schedule + hub land as
+# one amendment, and his description above was rewritten in the same beat (it said "no schedule").
+# ⚠️ GATED ON the_site_open WITH A `when` (v1.0 — without the version it fails OPEN), so no save before 0.2.3's
+# opening shows him on the Schedules page or puts a badge on a card the player cannot reach.
+# ⚠️ TWO ROWS ACROSS MIDNIGHT, the shipped pattern: the end is exclusive (v2.py isCurrentTimeSlot), so 23:59 and
+# 00:00 meet with no gap; every weekday, so the weekday rollover at midnight cannot drop him.
+# ⚠️ THESE ROWS MUST STAY DIRECTLY UNDER npc_cain. A [[npcs.schedules]] block attaches to the LAST [[npcs]] above
+# it; Grier's block follows, so anything spliced between re-parents these rows with a green build.
+[[npcs.schedules]]
+location   = "the_site"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "23:59"
+activity   = "at the far end of the lab with the lamp on"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "the_site"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "03:00"
+activity   = "at the far end of the lab with the lamp on"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+] }
 
 # ── Grier + Sabin — WHOSE HAND (beat_0122, rev 174). DECLARED, SCHEDULELESS, SPEAKERS ONLY. ───────────
 # ⚠️ NO SCHEDULE ROWS, SAME RULE AS CAIN AND BASTIEN ABOVE. A [[npcs.schedules]] row is unconditional: it
@@ -885,6 +931,57 @@ portrait    = "loder.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The supervisor"]
+
+# ── 0.2.3 (beat_0206) — npc_vega and npc_dace. DECLARED, SCHEDULELESS, SPEAKERS ONLY for now. ─────────
+# ⚠️ APPENDED AT THE END OF THE ARRAY, BEHIND npc_loder, WHO HAS NO ROWS. That is the one insert position
+# that cannot re-parent anybody's [[npcs.schedules]] (the Kess/Marsh bug, and the warnings under Grier and
+# Sabin above). tests/check_the_hunt.py §0206.4 asserts every scheduled NPC still owns its rows.
+# ⚠️ NO SCHEDULE ROWS AT THIS BEAT, the Grier/Sabin rule above: a row parks a portrait badge on a nav card
+# in every save from the moment it exists. Vega never gets one — she is a hunter and appears only inside her
+# own scenes, the way Loder and Cain do. Dace gets his pit row at beat_0213, with the scene that puts him
+# there (design_the_hunt.md, B4).
+# ⚠️ NO LADDER TRAITS BEYOND relation. Neither is a conquest. A trait key is immutable once shipped.
+# ⚠️ PROSE TRUTH — WHERE THE CREW DIED. cap_the_raid (5_scenes) empties the bar BEFORE the units arrive ("a
+# room deciding all at once to be somewhere else") and shows no body on that floor, so the deaths LO's story
+# needs ("many men died there") happened on the strip, where Bastien says "Three of them came down the strip."
+# Dace's description, and every later line about that night, puts them there and never on the bar floor.
+# MEDIA: two new slots, portraits/vega.jpg + portraits/dace.jpg — MISSING until the 0.2.3 harvest.
+[[npcs]]
+id          = "npc_vega"
+name        = "Vega"
+description = "One of the company's three field units, and the one they sent. A complete machine: no human base, nothing behind the eyes, better hardware than Wren in every way that can be measured. She is stronger than any man in the Reach and can kill one with her hands. She feels no pain and forgets nothing, so a trick that worked on her once will never work again. Her orders are to bring Wren in whole, and she will not break them."
+portrait    = "vega.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The hunter"]
+
+[[npcs]]
+id          = "npc_dace"
+name        = "Dace"
+description = "The man Bastien's old crew still listens to. He was out on the strip the night three of the company's machines came down it, and he saw what they did to the men who stood in the way. He drinks at the pit now with what is left of them, and he does not want to hear the word Undertow."
+portrait    = "dace.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The crew's man"]
+
+# ⚠️ ADDED beat_0213 (0.2.3). DACE'S ROW, WITH THE SCENE THAT PUTS HIM THERE (cap_dace_price, B4). Gated with a
+# `when` on crew_refused, so he is on no map and no Schedules page until the men at the Undertow send her to him.
+# ⚠️ AND IT ENDS AT HIS SCENE (dace_met is_false), found at beat_0214 by gates.py's standing-surface check ("DEAD
+# npc_dace @underworld_pit — none of them his"): after he names the price there is nothing of his at the pit, and
+# a portrait badge on a card with nothing behind it is a promise the room does not keep. From the crew night on
+# he is one of Bastien's men again. ONE row, 18:00-23:59 — the end is exclusive.
+# ⚠️ THIS ROW MUST STAY DIRECTLY UNDER npc_dace (the [[npcs.schedules]] orphan trap). npc_dace is the last NPC in
+# the array, so the next [[npcs]] appended to this file goes BELOW this row, never between.
+[[npcs.schedules]]
+location   = "underworld_pit"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "23:59"
+activity   = "at the rail over the pit with a glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "crew_refused", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "dace_met",     operator = "is_false" },
+] }
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at activity_wren_change, the Act-1 change surface in her room
@@ -1227,7 +1324,11 @@ entry_from  = "the_waterfront"
 [[locations]]
 id          = "the_site"
 name        = "The Site"
-description = "Somewhere out past the container stacks. The place Cain just walked away from. She doesn't have it yet."
+# ⚠️ REWRITTEN beat_0207 (0.2.3). The old line ("She doesn't have it yet.") was true only while the card was
+# locked, and a locked card shows blocked_message, not this — so the description is read only once it is
+# open, and must be true from cap_cain_comes on. It names what Cain told her at the cot and nothing more:
+# Marrow, the photo and the lab belong to cap_the_site (beat_0208).
+description = "Out past the last of the strip, where the city stops being a city. A long way down and then a long way out. Cain says it is the place where she was made."
 image       = "locations/the_site.jpg"
 # RE-PARENTED: the deep end of the underworld now (where Cain is), not a Waterfront card. Still locked
 # on the_site_open (never set this chunk) — the frontier far end, reached THROUGH the underworld strip.

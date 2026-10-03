@@ -3127,3 +3127,19 @@ is replaced by it. The chunk ends with a note carried to Rue at the House, an en
 counting money on her blanket: the man who owns the underworld, back in business from her bunk. He stays at
 the cot; he never learns who she is. Its ceiling row, **THE COUNT — Bastien at the cot**, is signed under
 *Content register & ceilings*.
+
+---
+
+## HER FATHER'S HOUSE and THE HUNT (0.2.3) — pointer only
+
+**Not folded into this book.** Its full design record is `games/vesper/design_the_hunt.md` (story agreed with
+LO 2026-10-02 → 2026-10-03; blueprint written 2026-10-03; **BUILT 2026-10-04, rev 240, beats 0206–0218** — media harvest
+pending). Cain takes her to `the_site`, where Marrow
+worked. A photo fills the empty face in her childhood memory: **Marrow was her father.** Cain tells her he
+killed him, at Marrow's request, and it brings them only a little closer. The site is watched, and going there
+sends **Vega** into the underworld to bring her in whole. Her weapon is useless on a machine, so she loses
+again and again. Beating Vega takes BOTH: Wren, trained by Cain, wears her down in a fight, and Bastien's
+men, back once the Undertow is rebuilt (their main man brings ten of them for one night with her), close in
+and take her the way they once took Wren. Neither works alone; Vega can kill a man. Vega ends on Kess's table, killed and taken apart, the body ready
+for the transfer (**0.2.4**, temporary, her feeling goes with her). The *Whose Hand* memory shipped with
+no face; the site fills it with her father's, and no older release changes. The third piece is still Cain.

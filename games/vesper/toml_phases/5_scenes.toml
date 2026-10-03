@@ -5692,6 +5692,17 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "bastien_washed", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "brace_built",    operator = "is_false" },
 ] }
+# ⚠️ 0.2.3 (beat_0209) — THE HUNT's repair. Into kess_patch_up, which carries the price and the damage bands.
+# Shown only once Kess has shown her the seam (the first repair is free, in cap_kess_seam) and only while she
+# carries damage, so it never sits on his card for a player who has not met Vega.
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him fix what she did."
+targetType = "node"
+nodeId     = "kess_patch_up.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "seam_known",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 1 },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him to it."
 targetType = "location"
@@ -9908,11 +9919,38 @@ blocks = [
   # node that only narrates a changed man is the mode defect (rts-flat-prose.md Rule 4).
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 1 },
     ] } }, blocks = [
     { type = "image", props = { file = "scenes/underworld_bar_after.jpg", description = "A burned-out underground bar with the counter under a dust sheet, tape across a hole in the back wall, and an older man in shirtsleeves clearing charred timber with a shovel and a bucket. avoid: fire in progress, avoid: firefighters.", search_queries = ["burned out bar interior man clearing debris shovel", "gutted speakeasy charred timber dust sheet over counter"] } },
     { type = "paragraph", content = "The taps are dry and the counter is under a sheet. Sol works along the back wall with a shovel and a bucket, moving burned timber from one side of the room to the other side of the room." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Place has had owners. Had a few. That's the first one who got took instead of bought out, and I find I've got no idea what a man does about it." },
     { type = "paragraph", content = "He does not ask where she was that night. She does not tell him. He has outlasted every owner this bar has had, and this is the first time it has left him with nothing to do." },
+  ] },
+  # ── BANDS C-E — 0.2.3, THE REBUILD (beat_0212). One per paid stage of activity_rebuild_undertow, so Sol's card
+  # says what the room looks like at every stage. Band B (the ruin) now closes at undertow_build 1. No images:
+  # one asset, one block, and the rebuild card carries the three stage images.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The ash is gone. Swept concrete, and chalk on the floor where a counter is going to stand." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "His money, your coin and my back. Funny old arrangement. I'm not complaining." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A new counter with nothing behind it yet, and a sheet still hanging over the hole in the back wall." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Nearly. The back wall, a door, and I can open." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The taps run again. It smells of new timber and old beer, and Sol is behind the counter where he belongs." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Open. Doesn't feel it yet. A bar wants men in it." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -9931,6 +9969,8 @@ nodeId     = "hub_sol_undertow.bastien"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "raid_done",       operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "bastien_no_body", operator = "is_false" },
+  # 0.2.3 (beat_0212): closes once the rebuild starts — by then Sol knows it is Bastien's money he is spending.
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 1 },
 ] }
 # Ask about a carrier — the Colm lead. pipe_known (the case points her here) + colm_found is_false. Names Colm.
 [[canvases.nodes.exit_block.choices]]
@@ -10113,6 +10153,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "colm_met",  operator = "is_false" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "image", props = { file = "scenes/colm_after.jpg", description = "A tired man sitting alone at the counter of a closed, fire-damaged bar, an empty glass in front of him, tape across a hole in the back wall behind him. avoid: crowd, avoid: bartender serving.", search_queries = ["man alone at counter of closed damaged bar empty glass", "lone drinker in shuttered fire damaged bar dim"] } },
     { type = "paragraph", content = "Three stools down, in a bar with nothing in it to drink: the man Sol pointed her to. Same corner, same boot hooked through the bag strap, and an empty glass he has not put down." },
@@ -10123,6 +10164,7 @@ blocks = [
       { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_true" },
       { type = "flag",  subject = "player", flag_key  = "colm_met",  operator = "is_true" },
       { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 24 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "image", props = { file = "scenes/colm_after.jpg", description = "A tired man sitting alone at the counter of a closed, fire-damaged bar, an empty glass in front of him, tape across a hole in the back wall behind him. avoid: crowd, avoid: bartender serving.", search_queries = ["man alone at counter of closed damaged bar empty glass", "lone drinker in shuttered fire damaged bar dim"] } },
     { type = "paragraph", content = "He is here every evening now, in a room that does not open, because it is the only address anybody has for him. A courier who cannot be found is a courier nobody hires." },
@@ -10132,11 +10174,42 @@ blocks = [
       { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_true" },
       { type = "flag",  subject = "player", flag_key  = "colm_met",  operator = "is_true" },
       { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "image", props = { file = "scenes/colm_after_close.jpg", description = "A man rising from a bar stool to meet a woman in the doorway of a closed, fire-damaged bar, his hand already going to her waist. avoid: crowd, avoid: brightly lit room.", search_queries = ["man standing up to greet woman doorway dim empty bar", "couple meeting in closed bar low light hand on waist"] } },
     { type = "paragraph", content = "He is up off the stool before she is fully through the door, hand at her waist, steering her at the dark end of a room nobody has any reason left to walk into." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Used to be I'd wait for Sol's back to turn. There's no bar to be seen at any more. Whole place is the dark end now." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Don't ask me if I'm alright. Ask me anything else you like." },
+  ] },
+  # ═══ 0.2.3 — THE UNDERTOW REOPENED (beat_0212). The three post-raid bands above close at undertow_build 3
+  # (they describe a room with nothing to drink, a taped hole and no bar), and these three replace them. Same
+  # colm_met / relation split. No images (one asset, one block). Colm carried for Bastien for years; the bar
+  # reopening on money nobody names tells him who, and he says so without saying the name.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true"  },
+      { type = "flag",  subject = "player", flag_key  = "colm_met",       operator = "is_false" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Three stools down, at a counter with drink behind it again: the man Sol pointed her to. Same corner, same boot hooked through the bag strap." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Sol lets me sit. Bar's open and I still can't afford it, so don't sell me anything." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true" },
+      { type = "flag",  subject = "player", flag_key  = "colm_met",       operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "lt", value = 24 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is on the corner stool of a bar that opened again on money nobody names." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Sol says not to ask whose money. I know whose. I'm not asking, and I'm not leaving either." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "raid_done",      operator = "is_true" },
+      { type = "flag",  subject = "player", flag_key  = "colm_met",       operator = "is_true" },
+      { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is up off the stool before she is through the door, hand at her waist." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "There's a back room again. Proper door. Lock that works. I've been looking at it all week." },
   ] },
   # ═══ PRE-RAID BANDS — beat_0066 (rev 98). Unreachable once raid_done is set. ═══════════════════════
   # ⚠️ THE ESTABLISHING SHOT MOVED INSIDE EACH BAND AT beat_0122 AND MUST STAY THERE. It used to sit above
@@ -10254,6 +10327,26 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key  = "colm_met",  operator = "is_true" },
   { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_true" },
   { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+  # 0.2.3 (beat_0212): there is no tape once the back wall is rebuilt (the rebuild's third stage).
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# 0.2.3 (beat_0212) — the back room has a door again. Same loop, same resets as the two choices above.
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in the back."
+targetType = "node"
+nodeId     = "loop_colm_backroom.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "colm_met",  operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key  = "raid_done", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_colm", trait_key = "relation", operator = "gte", value = 24 },
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -10421,11 +10514,23 @@ blocks = [
   # BAND B — after it. Same act, worse room, and he has stopped pretending he has anything to lose.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "video", props = { file = "sex/colm_ruin_t4.webm", description = "A couple pressed against a wall in a dark fire-damaged storeroom, his hands under her clothes, her head back. avoid: bright light, avoid: clean tidy room.", search_queries = ["couple against wall dark derelict room hands under clothes amateur gif", "man pinning woman to wall abandoned dim interior amateur gif", "clothed grinding against wall pitch dark room amateur gif"] } },
     { type = "paragraph", content = "The tape gives at the corner and the back room is black behind it and smells of burnt varnish. He has her against what is left of the shelving before the sheet has stopped swinging, mouth at her throat, hands already under her clothes." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "Nothing left in here to knock over. Nobody left to walk in on us either. I've thought about that more than I'd care to say out loud." },
     { type = "paragraph", content = "The bad bulb went with the rest of it. He gets her clothes open in the dark by feel, rough about all of it now, and she does nothing at all to slow his hands down." },
+  ] },
+  # BAND C — 0.2.3 (beat_0212): the back room rebuilt (undertow_build 3). Band B closes there. Its own clip, one
+  # asset one block. Same act, a room with a door again.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "video", props = { file = "sex/colm_rebuilt_t4.webm", description = "A couple against bare new timber boards in a small empty storeroom, a fresh door bolted behind them, his mouth at her throat and his hands under her clothes. avoid: bright light, avoid: bedroom, avoid: fire damage.", search_queries = ["couple against wall small storeroom hands under clothes amateur gif", "man kissing woman neck against door bolted room amateur gif", "clothed grinding against wooden wall dim room amateur gif"] } },
+    { type = "paragraph", content = "The back room has a door again, and a bolt that works. He has her against the new boards before it is across, hands already under her clothes." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_colm" }, content = "New door. I've been looking at it all week thinking about exactly this." },
+    { type = "dialog", props = { speaker = "player" }, content = "Then stop looking at it." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -11682,8 +11787,109 @@ text       = "Four months on a wall and a week on your bunk, and what is left of
 tip        = "He is at the cot, any hour. Go to him when you want him. He will know if you miss a night."
 terminal      = true
 terminal_text = "He is himself. The nights stay open."
+# 0.2.3 (beat_0212): true until Vega comes down the strip; his section goes on from there (cards 20-21).
 when = [
-  { flag = "bastien_back", op = "is_true" },
+  { flag = "bastien_back",  op = "is_true"  },
+  { flag = "site_ambushed", op = "is_false" },
+]
+
+# ── 20 · 0.2.3, beat_0212. After the ambush: take it to him. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 20
+text       = "Vega came down the strip the way three of them came down it the night they took him. Somebody has to be behind her, and that means men. Bastien used to have a lot of men."
+tip        = "He is at the cot. Tell him about her."
+goals = [
+  { flag = "crew_asked", op = "is_true", label = "Tell Bastien about Vega" },
+]
+when = [
+  { flag = "site_ambushed", op = "is_true"  },
+  { flag = "crew_asked",    op = "is_false" },
+]
+
+# ── 21 · 0.2.3, beat_0212. The bar first. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 21
+text       = "His men will not come to a cot. They came to the Undertow, and the Undertow is a hole with Sol in it. Bastien put in what Rue sent. The rest is yours."
+tip        = "Sol, at the Undertow, from ten in the morning. Coin for each stage: 40, then 60, then 80."
+goals = [
+  { trait = "undertow_build", subject = "player", op = "gte", value = 3, label = "Rebuild the Undertow" },
+]
+when = [
+  { flag = "crew_asked",    op = "is_true"  },
+  { flag = "undertow_open", op = "is_false" },
+]
+
+# ── 22 · 0.2.3, beat_0213. The bar is open; now the men. ──
+# ⚠️ "THE DAY AFTER IT OPENED" IS IN THE TIP BECAUSE THE SCENE WAITS FOR IT (cap_crew_refuses: days_since_flag
+# undertow_open gte 1, evenings). A player who walks straight back in finds an empty bar and must be told why.
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 22
+text       = "The Undertow is open, on his money and yours. A bar wants men in it, and the men it wants are the ones who walked away from the strip."
+tip        = "Go back in the evening, the day after it opened. Word has to get round."
+goals = [
+  { flag = "crew_refused", op = "is_true", label = "Make his offer to his old men" },
+]
+when = [
+  { flag = "undertow_open", op = "is_true"  },
+  { flag = "crew_refused",  op = "is_false" },
+]
+
+# ── 23 · 0.2.3, beat_0213. Dace. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 23
+text       = "They will not come back for money. They will come back if Dace does. He saw what came down the strip that night, and they still listen to him."
+tip        = "Dace drinks at the Pit in the evenings, from six."
+goals = [
+  { flag = "dace_met", op = "is_true", label = "Talk to Dace" },
+]
+when = [
+  { flag = "crew_refused", op = "is_true"  },
+  { flag = "dace_met",     op = "is_false" },
+]
+
+# ── 24 · 0.2.3, beat_0214. The night. ──
+# ⚠️ THE TIP NAMES BOTH WAITS THE SCENE HAS: the next night (days_since_flag dace_met gte 1) and after ten.
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 24
+text       = "Dace will bring about ten of them back. The price is you, with all of them at once, in the bar after Sol shuts. You said yes."
+tip        = "The Undertow, tomorrow night, after ten."
+goals = [
+  { flag = "crew_back", op = "is_true", label = "Pay Dace's price" },
+]
+when = [
+  { flag = "dace_met",  op = "is_true"  },
+  { flag = "crew_back", op = "is_false" },
+]
+
+# ── 25 · 0.2.3, beat_0216. His men are behind you. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 25
+text       = "His men are back, ten of them, Dace's. When you are ready to draw Vega out, they will be behind her."
+tip        = "The Vega card on the Underground opens when you are ready: her habits learned, good enough to stand with her, in one piece."
+goals = [
+  { flag = "vega_taken", op = "is_true", label = "Draw Vega out (the Underground)" },
+]
+when = [
+  { flag = "crew_back",  op = "is_true"  },
+  { flag = "vega_taken", op = "is_false" },
+]
+
+# ── 26 · 0.2.3, beat_0217. Bastien's section closes on the take: his men, his bar, and the thing in his room. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 26
+text       = "His men are his again, his bar is open, and the thing that came down the strip for him is lying in his room. Three of Dace's men paid for it. He paid for the coffins."
+tip        = "He is at the cot, any hour, and he has his habits back. Go to him when you want him."
+terminal      = true
+terminal_text = "He is himself, and he has his men."
+when = [
+  { flag = "vega_taken", op = "is_true" },
 ]
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════
 
@@ -20397,6 +20603,15 @@ blocks = [
     { type = "thought_bubble", props = { speaker = "player" }, content = "Not in this one. Never near him in this one. The bag is under the bench. It comes off behind the hull, out of his sight." },
   ] },
   # BAND BACK — bastien_back. Step 7 has happened: the House answered and he is in business from her bench.
+  # 0.2.3 (beat_0215) — HIS MEN ARE BACK (crew_back). After the face band (which must win first) and before the 0.2.2
+  # band, which says he works "in the brace": loop_bastien_cot's owner intro has the brace on the floor, so this card
+  # must not contradict it one click earlier.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "crew_back", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is at her bench without the brace, and the column of figures under his hand is longer now: wages. His men are back on the strip." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Ten men on my books and not one of them knows which bunk I sleep in. Dace is very good. You were better." },
+  ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "bastien_back", operator = "is_true" },
     ] } }, blocks = [
@@ -20556,12 +20771,61 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
+# ── 0.2.3 B1 (beat_0212) — "Tell him about Vega." One-time: after the ambush, until crew_asked. ──
+# ⚠️ HER MOVE, A HUB CHOICE, like the washing and the brace: she brings it to him. Kess's line ("Nobody fights her
+# from the front") and her own ("Then I will need someone behind her", cap_kess_seam) are what send her here, and
+# card 20 in his Quests section says so.
+# ⚠️ face_worn is_false, like every choice of hers on this card: the bought face is the barmaid who tasered him.
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him about Vega."
+targetType = "node"
+nodeId     = "vega"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "site_ambushed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "crew_asked",    operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "face_worn",     operator = "is_false" },
+] }
 # ── ALWAYS LAST — the shipped exit, now a choice. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him."
 targetType = "location"
 locationId = "the_cot"
 time_progression_minutes = 15
+
+# ── vega — 0.2.3 B1. beat_0212. Bastien hears about Vega and asks for his bar back. Sets crew_asked on render. ──
+# ⚠️ WHERE HIS MEN DIED: ON THE STRIP. cap_the_raid empties the bar before the units arrive and shows no body on
+# that floor, and Bastien himself said "Three of them came down the strip" that night. So the men who stood in
+# the way died out there, and that is the only place this scene puts them (1_metadata, npc_dace's note).
+# ⚠️ NO NUMBERS FOR THE DEAD. Dace brings "about ten" back at beat_0213, so the scene says "not many walked away"
+# and never counts, rather than fixing a total the next beat would have to match.
+# ⚠️ CANON: he never learns who she is, and nothing here asks him to. He knows she is Mercer's asset (the grab).
+# ⚠️ "TAKE RUE'S MONEY TO SOL. NOT WHERE I AM." — The Count's own line ("people on the strip who know I am not
+# dead, and none of them will know where I am") held to the letter.
+[[canvases.nodes]]
+id   = "vega"
+name = "Tell him about Vega"
+blocks = [
+  { type = "paragraph", content = "She tells him at the bench: the strip, the woman walking up the middle of it, Cain through a stall front, her own arm." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Chrome. Nothing behind the eyes. Walks like she has nowhere else to be." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've seen her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Three of them came down the strip the night they took me. My men were out on the strip, and they stood in the way. Not many walked away." },
+  { type = "dialog", props = { speaker = "player" }, content = "Kess says nobody fights her from the front. I need someone behind her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Then you need men, and I had men. They will not come to a cot. They came to the Undertow, and the Undertow is a hole with Sol in it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take Rue's money to Sol. Tell him it is mine and I want my bar back. Not where I am. Never where I am." },
+  { type = "dialog", props = { speaker = "player" }, content = "It won't be enough." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No. The rest is yours. You are the one she is hunting." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He has not asked her for anything since the water. She wants to give him this one. Debt, she decides. That is all it is." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and see Sol."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "crew_asked", op = "set" },
+]
 
 # ── washing — STEP 2, THE WASHING. beat_0196. The first explicit beat of the chunk. WEAK band. ──
 # ⚠️ "The one who washed me in the frame did all of it, every Tuesday" — the plant room's own detail: "somebody
@@ -21023,15 +21287,21 @@ when = [
   { flag = "bastien_back",   op = "is_false" },
 ]
 
-# ── H · THE END CARD. Terminal. Names what is still standing. ──
+# ── H · Bastien back in business. WAS 0.2.2's END CARD; NOT ANY MORE (beat_0207, 0.2.3). ──
+# ⚠️ THE TWO-STEP EDIT, the same one The Count did to the card before it (the beat_0165 lesson: the last
+# release's end card steering the next release's opening): `terminal` and `terminal_text` removed, the tip
+# that said "That is where this build ends" rewritten, and the card upper-gated on site_offered so it hands
+# over to card I in the click that opens it. Checked by check_the_hunt.py §0207.
+# ⚠️ "BE AT THE COT IN THE MORNING" IS WHAT MAKES cap_cain_comes FINDABLE. It fires only at the cot, only in
+# the morning, and only on a later day than this card's own flag — a player who sleeps elsewhere would never
+# meet it, and lostness, not grind, is the genre's disease (the mopoga read).
 [[quest_cards]]
 priority   = 10
 text       = "He counted it out on your blanket, slowly, the way he used to count everything. Four months on a wall, and then your bunk. The man who owns the House and the Undertow is back in business. His office is your bed."
-tip        = "That is where this build ends. Bastien is at the cot and he is himself again. Go to him any night. Renner's office is open and his yard goes four deep. Grier is in his room off the lane from ten. Sabin is on the floor at eight and in his lab from eleven. The Underground, the market, the House and the pit are where you left them. You will hear the rest of it when this picks up. If you want that sooner, Support Us in the sidebar."
-terminal      = true
-terminal_text = "Chapter complete. The story continues in the next release"
+tip        = "Bastien is himself again and doing his books on your blanket. Go to him any night. Be at the cot one morning soon: somebody is coming to see you."
 when = [
-  { flag = "bastien_back", op = "is_true" },
+  { flag = "bastien_back", op = "is_true"  },
+  { flag = "site_offered", op = "is_false" },
 ]
 
 # ═══════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -21151,12 +21421,26 @@ flagEffects = [
 [[canvases]]
 id          = "loop_bastien_cot"
 name        = "Go to him"
-description = "beat_0199 (rev 230), THE COUNT. Bastien's sex loop @the_cot, TRIGGERLESS, reached only from amb_bastien_cot's 'Go to him.' pair (which resets the five loop traits and, once per calendar day, adds 1 to bastien_mend). The loop_grier_room rig: intro, then oral(0) and on-top(1) poses self-looping with loop_npc_pleasure +8..14, climax-elect at gte 50 into loop_bastien_cot_finisher. NO ANAL: sex_stage only ever 0 or 1, anal_active never set, finisher facial(0) / inside(1) only. Two bands per node on bastien_himself: WEAK (she leads) and HIMSELF (he takes over, beat_0200)."
+description = "beat_0199 (rev 230), THE COUNT. Bastien's sex loop @the_cot, TRIGGERLESS, reached only from amb_bastien_cot's 'Go to him.' pair (which resets the five loop traits and, once per calendar day, adds 1 to bastien_mend). The loop_grier_room rig: intro, then oral(0) and on-top(1) poses self-looping with loop_npc_pleasure +8..14, climax-elect at gte 50 into loop_bastien_cot_finisher. NO ANAL: sex_stage only ever 0 or 1, anal_active never set, finisher facial(0) / inside(1) only. Two bands per node on bastien_himself: WEAK (she leads) and HIMSELF (he takes over, beat_0200). 0.2.3 (beat_0215) adds a third, OWNER, first in every node and gated crew_back + bastien_himself: his men are back and he has the habit of owning back. Its clip, sex/bastien_cot_owner_t5.webm, is one file on the intro."
 
 [[canvases.nodes]]
 id   = "intro"
 name = "Go to him"
 blocks = [
+  # BAND OWNER — 0.2.3, beat_0212..0215 (B6). His men are back (crew_back). FIRST, so it wins the chain; it also carries
+  # bastien_himself, so check_the_count.py §7's "first band is HIMSELF" stays true. The signed Leash row, his voice
+  # from the back room ("My floor, my time"), and no anal — the anal finish is the drain.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "crew_back",       operator = "is_true" },
+    ] } }, blocks = [
+    { type = "video", props = { file = "sex/bastien_cot_owner_t5.webm", description = "A man sitting back in a plain wooden chair in a small bare room, watching a woman undress in front of him, unhurried, in charge. Must show: him seated and watching, her stripping on her feet in front of him, a small room. Avoid: a big bright bedroom, avoid: anal, avoid: violence.", search_queries = ["man sitting in chair watching woman undress in front of him amateur gif", "girl stripping slowly for seated man small room homemade gif", "woman taking clothes off in front of man in chair gif"] } },
+    { type = "paragraph", content = "He is in the chair at her bench when she comes in, not on the bunk, and the brace is on the floor. His men are back on the strip, and it is in the way he sits." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Bolt the door. Then strip, there, where I can see you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I owned a building once, and everyone in it. I find I have the habit back." },
+    { type = "dialog", props = { speaker = "player" }, content = "You had me in a cell." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "And now I have you in yours. Slowly." },
+  ] },
   # BAND HIMSELF — he has stopped counting (beat_0200). He takes over, and the signed Leash row is back for him.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
@@ -21202,6 +21486,17 @@ name = "Your mouth"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_cot_oral_t5", pool = 4, description = "A naked woman kneeling on a narrow bunk between the legs of a thin naked man lying on his back or sitting on its edge, sucking his cock, his hand in her hair — resting, or holding her head down. Must show: a narrow bed, her mouth on his cock, his hand in her hair. Avoid: him standing, avoid: a big bright bedroom, avoid: violence or choking.", search_queries = ["woman sucking cock of man lying on narrow bed hand in her hair amateur gif", "slow blowjob man lying still on small bed homemade gif", "girl kneeling on bed blowjob skinny guy on his back gif"] } },
   # BAND HIMSELF — he sets the pace now, and the diction is his again (the signed Leash row).
+  # BAND OWNER — 0.2.3, beat_0212..0215 (B6). His men are back (crew_back). FIRST, so it wins the chain; it also carries
+  # bastien_himself, so check_the_count.py §7's "first band is HIMSELF" stays true. The signed Leash row, his voice
+  # from the back room ("My floor, my time"), and no anal — the anal finish is the drain.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "crew_back",       operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He sits on the edge of the bunk, fists her hair and fucks her mouth, holding her down on his cock until her eyes water, then lets her up to suck at the head." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look up at me. I am paying for the eyes. I always was." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "My men are back, my bar is open, and you are on your knees on my say-so." },
+  ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
     ] } }, blocks = [
@@ -21243,6 +21538,16 @@ id   = "base_ride_bastien"
 name = "On top of him"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_cot_ride_t5", pool = 4, description = "A naked woman riding a thin naked man who lies on his back on a narrow bunk in a small bare room, his hands gripping her thighs, the bed knocking the wall. Must show: her on top, him on his back on a narrow bed, his hands on her thighs. Avoid: him on top, avoid: a big bright bedroom, avoid: anal.", search_queries = ["woman riding man on narrow bed his hands on her thighs amateur gif", "cowgirl on skinny guy small bed homemade gif", "girl on top riding slow hands on her thighs gif"] } },
+  # BAND OWNER — 0.2.3 (B6, beat_0215). His men are back. FIRST, and it carries bastien_himself (check_the_count §7).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "crew_back",       operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She rides him on the bunk and he sets the pace, his mouth on her tits, pulling her down onto his cock hard enough to make her moan." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Like that. No. Slower. You work for me tonight." },
+    { type = "dialog", props = { speaker = "player" }, content = "Since when?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Since my men came back." },
+  ] },
   # BAND HIMSELF — his hips answer him now, and he uses them.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
@@ -21298,6 +21603,15 @@ id   = "base_under_bastien"
 name = "Under him"
 blocks = [
   { type = "video", props = { pool_dir = "sex/bastien_cot_under_t5", pool = 4, description = "A thin man kneeling over a woman who lies on her back on a narrow bunk, fucking her slow and deep with his weight on his arms, looking down at her face. Must show: missionary on a narrow bed, him on his knees over her, eye contact. Avoid: a big bright bedroom, avoid: anal, avoid: choking, avoid: a muscular man.", search_queries = ["slow missionary on narrow bed looking at her face amateur gif", "man on knees over girl slow deep fucking small bed homemade gif", "eye contact missionary skinny man amateur gif"] } },
+  # BAND OWNER — 0.2.3 (B6, beat_0215). His men are back. FIRST, and it carries bastien_himself (check_the_count §7).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "crew_back",       operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He puts her on her back and fucks her deep and hard, his full weight on her, his cock buried in her cunt, watching her face the whole time." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That face. I am still memorising it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make that noise again. I will want it again tomorrow." },
+  ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "bastien_himself", operator = "is_true" },
     ] } }, blocks = [
@@ -21655,4 +21969,1002 @@ locationId               = "the_cot"
 time_progression_minutes = 60
 flagEffects = [
   { targetType = "player", flag = "bastien_back", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+# ═══ 0.2.3 — HER FATHER'S HOUSE and THE HUNT. design_the_hunt.md ("BLUEPRINT") ═══════════════════════════
+# LO, 2026-10-02/03: Cain takes her to the place Marrow made them; the photo fills the empty face in her
+# childhood memory and it is her father; Cain tells her he killed him; only a little closer. Then Vega hunts
+# her through the underworld, and beating Vega takes both the fight (Cain trains her) and Bastien's men
+# (once the Undertow is rebuilt). Vega ends on Kess's table. The transfer is 0.2.4.
+# Guard: games/vesper/tests/check_the_hunt.py — one section per beat, each written red first.
+# ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── cap_cain_comes — PART ONE, SCENE 1. beat_0207. Auto-fire @the_cot, pri 11, ONE-SHOT. ──────────────────
+# ⚠️ A LATER DAY THAN "COUNTING AGAIN", AND IN THE MORNING. cap_bastien_counts_again exits to the_cot and sets
+# bastien_back, so on the bare flag this would fire in the same breath as Bastien's money, and its lead ("Morning")
+# would be a lie about a night that never passed. days_since_flag bastien_back gte 1 is the separator.
+# ⚠️ days_since_flag IS SAFE HERE, unlike the Mercer spine (5_scenes:6644). It fails closed only when a flag has no
+# set_day, and bastien_back has only ever been set by 0.2.2's own canvas, which records set_day — the same
+# mechanism The Count's steps 2-4 ride. A save that reached the end of 0.2.2 has the day on it.
+# ⚠️ face_worn is_false, like every scene at the cot (eight gates in The Count): the bought face is the barmaid
+# who tasered Bastien in his own back room, and he never learns that (5_scenes plant-room banner).
+# ⚠️ AND SO CAIN NEVER SAYS "UNDERTOW" OR "THE RAID" IN THIS ROOM. "Where you were made" is safe in front of
+# Bastien: he has known she is Mercer's asset since the grab ("That's the file Mercer keeps you under").
+# ⚠️ CAIN DOES NOT SAY MARROW'S NAME. The name, the photo and the man belong to cap_the_site (beat_0208).
+# Presence: Bastien's cot row is round the clock; requires_npc would be inert on auto-fire anyway
+# (engine-reference.md:112), so the gate that bites is npc_at_location.
+# Register: loud voice, option B — the feeling is obvious on the page and her own thought misnames it
+# (design_book "Crying = malfunction"; the opening's "Fatigue. It's only fatigue.").
+# The coat over his knees on the end of her bunk is the WHOSE HAND image (5_scenes, "She tells Cain"), on purpose.
+# Narration : dialogue in this canvas is well under the 2.14:1 standing target — three people, all speaking.
+# MEDIA: none new. Cain's and Bastien's portraits carry it; the scene is a room she already has.
+[[canvases]]
+id          = "cap_cain_comes"
+name        = "Cain comes for her"
+description = "beat_0207 (0.2.3). PART ONE, SCENE 1. Auto-fire @the_cot, pri 11, one-shot, gated bastien_back is_true + days_since_flag bastien_back gte 1 + morning (06:00-12:00) + face_worn is_false + site_offered is_false + Bastien present. Cain is on the end of her bunk with his coat over his knees when she wakes; Bastien is at the bench with his ledger. Cain asks her to come and see the place where she was made, out past the strip. She goes. SETS site_offered + the_site_open (the_site's lock since Phase 1); exits to the_site, 120 minutes."
+[canvases.trigger]
+location      = "the_cot"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_back", operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "bastien_back", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "06:00", end_time = "12:00" },
+  { type = "flag", subject = "player", flag_key = "face_worn",    operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "site_offered", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_cot", operator = "is_present", npc_id = "npc_bastien" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cain comes for her"
+blocks = [
+  { type = "paragraph", content = "Morning. Bastien is at the bench with his ledger already open, licking his thumb. And there is a second man on the end of her bunk with his coat over his knees, and she knows the coat before she knows the face." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Morning." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She has not seen him since he carried Bastien up five turns of corridor. She has been counting the days. A habit she picked up from the man at the bench, that is all." },
+    ] },
+    { advance_text = "Look at Bastien.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "He has been sitting there since six. He will not take coffee. I offered twice, which is once more than I offer anybody." },
+        { type = "paragraph", content = "Neither of them says good morning. Eleven years, and they still don't." },
+    ] },
+    { advance_text = "Ask Cain why he's here.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You don't come here." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "No." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "There is a place out past the strip, where the city stops. You have never been. I want you to see it." },
+    ] },
+    { advance_text = "\"What place?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What place?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Where you were made." },
+        { type = "paragraph", content = "He says it to the floor in front of her boots. Her hands stop on the blanket." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Made. A room, a bench, a light, somebody's hands. Her chest does something fast and hard and will not stop doing it. Low charge. She skipped the cradle. That is all it is." },
+    ] },
+    { advance_text = "Look at Bastien again.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Go. I have the House's books to do and the pair of you are in my light." },
+        { type = "paragraph", content = "He turns a page and does not look up. It is the kindest thing he could do, and all three of them know it." },
+    ] },
+    { advance_text = "Stand up.", blocks = [
+        { type = "paragraph", content = "Cain stands, puts his coat on and waits by the door. Not hurrying her. Not leaving." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It is a long way. Down, and then out." },
+        { type = "dialog", props = { speaker = "player" }, content = "Now?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Now." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "site_offered",  op = "set" },
+  { targetType = "player", flag = "the_site_open", op = "set" },
+]
+
+# ── I · CAIN IS WAITING. beat_0207. Live from cap_cain_comes until she has seen the photo (beat_0208). ──
+# ⚠️ ONE CARD LIVE AT A TIME: card H closes on site_offered in the same click that opens this one.
+# ⚠️ THE TIP SAYS WHERE THE SITE IS, because the exit teleports her there and a player who walks back out
+# before the scene (there is nothing yet to stop her at this beat) must be able to find it again.
+[[quest_cards]]
+priority   = 10
+text       = "Cain was on the end of your bunk this morning with his coat over his knees. He said there is a place out past the strip, where the city stops, and that it is where you were made. He wants you to see it."
+tip        = "The Site is open now, off the Underground. Go with him."
+goals = [
+  { flag = "marrow_known", op = "is_true", label = "See the place where you were made" },
+]
+when = [
+  { flag = "site_offered", op = "is_true"  },
+  { flag = "marrow_known", op = "is_false" },
+]
+
+# ── cap_the_site — PART ONE, SCENE 2. beat_0208. Auto-fire @the_site, pri 11, ONE-SHOT, TIER-3. ──────────────
+# The chapter's big written scene (design_the_hunt.md "Part one", "BLUEPRINT · Part one #2"). In order: she knows
+# the room before she sees anything (piece two IS this room) · the photo, and Cain's name for the man in it · the
+# memory again, quoted as it shipped, with his face in it now · she says it: her father · Cain did not know either
+# · she asks how Marrow died, and he tells her · Cain's own line: he hoped the face was his · the two cradles,
+# seen and not explained · out.
+# ⚠️ THE MEMORY IS QUOTED, NOT REWRITTEN. Every phrase of it here is the shipped Whose Hand telling (5_scenes, "She
+# tells Cain": "Late afternoon. Coming in low from one side", "My hands were the wrong size", "I had a knot",
+# "the thumb went along the seam once. The seam that is not there yet", "Vesper, you have got all afternoon").
+# LO, 2026-10-03: "no changes to the older releases for the face" — the shipped memory left a hole and this fills
+# it; nothing earlier is edited.
+# ⚠️ FIRST TIME THE NAME "MARROW" REACHES THE PLAYER. No paragraph, dialog or card used it before this beat
+# (grep of 2_/3_/5_ at beat_0208). Sabin's description already calls him "a method whose author is dead", and
+# Cain ties the two together in one line.
+# ⚠️ CAIN DID NOT KNOW SHE WAS THE DAUGHTER. Marrow told him he had a girl at school in the north. That is what
+# makes "I hoped it was me" true: a man who knew would have guessed the face. The iceberg (design_book World setup)
+# says Marrow built her "a companion for Cain"; it never says Cain knew whose body. LO's line — "only a bit closer
+# to cain not much" — is this scene's end state.
+# ⚠️ WHAT CAIN DOES NOT SAY: that Marrow's plan was also the end of the unfinished girl and of Cain himself (iceberg
+# 3). He answers the question she asks and stops, which is how he has answered every question in the game.
+# ⚠️ NOT THE ROOM THE MEMORY WAS CUT IN. Grier's "three trays" night is never placed here, so nothing in this
+# scene says it happened in this lab.
+# ⚠️ THE TWO CRADLES ARE 0.2.4's PLANT. Named, side by side, lines between them, and nobody explains them.
+# No sex (LO). Narration:dialogue measured by check_the_hunt.py §0208 against the 2.14 standing target.
+# MEDIA: two new slots. The lab rides the node's lead (beat 0 is the lab); the photo rides the beat that shows it
+# (media.md §6a — a cascade appends, so a lead image would illustrate beat 0 only).
+# The exit goes to the strip, and cap_the_ambush (beat_0209) fires there on arrival: a located setter for
+# site_ambushed, which a chained triggerless canvas could not have been.
+[[canvases]]
+id          = "cap_the_site"
+name        = "Where she was made"
+description = "beat_0208 (0.2.3). PART ONE, SCENE 2 — TIER-3, the chapter's big written scene. Auto-fire @the_site, pri 11, one-shot, gated site_offered is_true + marrow_known is_false. She knows the lab before she sees anything; Cain names the man in the photo (Elias Marrow, the first time the name reaches the player); the Whose Hand memory replays with his face in it and she says it out loud: her father. Cain did not know either. She asks how Marrow died; Cain killed him, because Marrow asked. Cain hoped the face was his. Two cradles side by side, unexplained (0.2.4's plant). SETS marrow_known."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "site_offered", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "marrow_known", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Where she was made"
+blocks = [
+  { type = "image", props = { file = "scenes/the_site_lab.jpg", description = "A long abandoned laboratory deep underground, years of dust over steel benches and cabinets with their doors hanging open, one tall window bricked up, a single work lamp still standing. Must show: an empty lab left for years, dust, stripped shelves. Avoid: people, gore, bright clean modern labs.", search_queries = ["abandoned laboratory dust steel benches dark", "derelict underground lab empty shelves lamp"] } },
+  { type = "paragraph", content = "It is an hour down and an hour out, and then a door with no lock left on it. Cain goes in first and puts a light on. She stops on the step." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The long bench, the drains in the floor, the light coming down from too high. Piece two is this room." },
+        { type = "dialog", props = { speaker = "player" }, content = "I know this room. I have been on my back looking at that ceiling for years." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You would have been." },
+    ] },
+    { advance_text = "Go in.", blocks = [
+        { type = "paragraph", content = "The company took everything worth taking. What is left is paper, a kettle, a cardigan on a chair, and under the lamp, a photograph in a cheap frame." },
+    ] },
+    { advance_text = "Pick it up.", blocks = [
+        { type = "image", props = { file = "scenes/marrow_photo.jpg", description = "An old framed photograph on a dusty bench: a tired, kind-faced man in his fifties in shirtsleeves, half laughing at whoever holds the camera, reading glasses pushed up on his head. Must show: one man, a print in a cheap frame, warmth in the face. Avoid: a second person in the photo, a lab coat, anything sinister.", search_queries = ["old framed photograph kind middle aged man laughing", "vintage photo man shirtsleeves glasses on head smiling"] } },
+        { type = "paragraph", content = "A man in shirtsleeves, glasses pushed up on his head, half laughing at whoever holds the camera. Tired. Kind." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Elias Marrow. He made me, and then he made you. The method Sabin is paid to copy is his." },
+    ] },
+    { advance_text = "Look at his face.", blocks = [
+        { type = "paragraph", content = "The room goes away. She is talking before she knows she is, the way she talked on her bunk the night it came back." },
+        { type = "dialog", props = { speaker = "player" }, content = "It is the afternoon. Late afternoon. Coming in low from one side, on my face." },
+    ] },
+    { advance_text = "Stay in it.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "My hands are the wrong size. Short. I have a knot and I cannot get the knot, and nobody does anything about it. Somebody is behind me, watching me get it wrong." },
+    ] },
+    { advance_text = "Turn round.", blocks = [
+        { type = "paragraph", content = "A hand rests on the back of her neck, and the thumb goes along the seam that is not there yet. She turns, and there is a face where the hole was. This face. Glasses pushed up." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Vesper, you have got all afternoon." },
+    ] },
+    { advance_text = "Come back.", blocks = [
+        { type = "paragraph", content = "She is standing by the bench with the frame in both hands. Cain has not moved." },
+        { type = "dialog", props = { speaker = "player" }, content = "It was him. Behind me. It was him the whole time." },
+    ] },
+    { advance_text = "Say what he was.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I was small. He was not making anything. He was watching his daughter do a knot wrong." },
+        { type = "dialog", props = { speaker = "player" }, content = "He was my father." },
+    ] },
+    { advance_text = "Look at Cain.", blocks = [
+        { type = "paragraph", content = "Cain sits down on the end of the bench as though his knees decided it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "He told me he had a girl at school in the north. He wrote her letters. I posted some of them." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "There was no school." },
+    ] },
+    { advance_text = "Ask him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "How did he die?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I killed him. In this room. He asked me to, and I said yes." },
+        { type = "dialog", props = { speaker = "player" }, content = "Why?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Because he asked. That is the only part of it that is mine to tell you." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "paragraph", content = "No sorry. He sits on her father's bench and lets it be true." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She waits for the fault. The shaking, the wet face. Nothing comes. Readings flat. She must be fine, then." },
+    ] },
+    { advance_text = "Ask what he wanted.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "When I told you there was no face. You wanted it to be you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes. I hoped it was me behind you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It was the man I killed." },
+    ] },
+    { advance_text = "Look at the back of the room.", blocks = [
+        { type = "paragraph", content = "In the dark past the bench, two cradles stand side by side, bigger than the one she slept in, joined by a run of lines. Dust on both." },
+        { type = "dialog", props = { speaker = "player" }, content = "Why are there two?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Not today." },
+    ] },
+    { advance_text = "Keep the photograph.", blocks = [
+        { type = "paragraph", content = "She puts the frame inside her coat. When she goes out past him she does not touch him, and she does not go round him either." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It is two hours back." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then walk." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk back with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "marrow_known", op = "set" },
+]
+
+# ── cap_the_ambush — PART TWO OPENS. beat_0209. Auto-fire @underworld_strip, pri 11, ONE-SHOT. ───────────────
+# LO, 2026-10-03: "the part two can simply start with vega attacking them and they running off from there with
+# some good damage." The player's first sight of what Vega is, and the reason for the first trip to Kess.
+# ⚠️ LOCATED ON THE STRIP, NOT CHAINED OFF cap_the_site, which is where the blueprint first put it. site_ambushed
+# is read by TRIGGERS (cap_kess_seam now, rand_vega_street at beat_0210), and the flag-chain validator hard-fails
+# a flag whose only setter is triggerless. cap_the_site already exits to underworld_strip, so this fires the
+# moment they come up off the walk: same story moment, a legal setter.
+# ⚠️ IT SHOWS FOUR OF HER POWERS AND ONE WEAK SPOT, NOTHING MORE (design_the_hunt.md "Vega — what she is"):
+# stronger than a man (Cain through a shutter), no pain (Wren's best hit, nothing), she never forgets (the left
+# hand, from Mercer's floor), she holds back on Wren (an arm, not a neck). The weak spot is Cain's: the wrong
+# move — coals in the face, which cannot hurt her and blinds her for three seconds.
+# ⚠️ CANON: she was in the opening line-up ("Four of them stand in a line on the black floor of Mercer's office.
+# Vega, Lyra, Nova", 2_one_shots:30), so Wren knows the face. Three units came down this strip the night of the
+# raid (cap_the_raid, "Three of them came down the strip"), so the crowd knows what she is.
+# Damage: vega_damage SET to 60 (Body: Badly hurt), not added — whatever she had, this is where it starts.
+# MEDIA: one new slot, scenes/vega_ambush.jpg, on the lead.
+[[canvases]]
+id          = "cap_the_ambush"
+name        = "Vega"
+description = "beat_0209 (0.2.3). PART TWO OPENS. Auto-fire @underworld_strip, pri 11, one-shot, gated marrow_known is_true + site_ambushed is_false. They come up off the walk back from the Site and Vega is walking down the middle of the strip with nobody in her way. Cain goes at her and is thrown through a stall front; Wren lands her best hit and it is like hitting a door; Vega breaks her elbow, remembering she favours the left; Cain puts a brazier of coals into Vega's face and it buys three seconds; they run. Cain gets her to Kess's ladder and leaves. SETS site_ambushed, vega_damage = 60; exits to kess_berth."
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "marrow_known",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "site_ambushed", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Vega"
+blocks = [
+  { type = "image", props = { file = "scenes/vega_ambush.jpg", description = "A crowded underground market street gone suddenly still, people pressed back against the stalls, and down the empty middle of it a tall, perfectly made woman in plain dark clothes walking straight toward the camera, calm, hands empty. Must show: one figure walking, a crowd pressed to the sides, a low industrial ceiling. Avoid: weapons, robots with visible metal, gore.", search_queries = ["woman walking down empty middle of crowded market crowd parting", "tall woman calm walking crowd pressed against walls underground street"] } },
+  { type = "paragraph", content = "Two hours of walking and neither of them says a word. They come up the last stair onto the Underground, and the strip is wrong. People are standing flat against the stalls." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Down the middle, where nobody is, a woman is walking toward them. Chrome-perfect. Hands empty. Nothing moving behind the eyes." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Four of them in a line on Mercer's black floor, her first morning. Vega was the one at the front." },
+    ] },
+    { advance_text = "Stand still.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Asset Wren. You are coming with me. Whole, if you let me." },
+        { type = "dialog", props = { speaker = "player" }, content = "And if I don't?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Then less whole." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Behind me." },
+    ] },
+    { advance_text = "Watch him go.", blocks = [
+        { type = "paragraph", content = "Cain hits her once, with all of him. Any man in the Reach would be on the floor. Her feet do not move." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Designation Cain. You are not my order. Step aside." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "No." },
+    ] },
+    { advance_text = "\"Cain!\"", blocks = [
+        { type = "paragraph", content = "She takes him by the coat and throws him into a stall front. The shutter folds round him like wet card." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain!" },
+    ] },
+    { advance_text = "Go at her.", blocks = [
+        { type = "paragraph", content = "Wren goes in low and lands it under the ribs, everything she has. It is like hitting a door." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "That was your best. Logged." },
+    ] },
+    { advance_text = "Hit her again.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You favour the left. You did on Mercer's floor." },
+        { type = "paragraph", content = "Her hand closes on Wren's arm, and the elbow gives with a sound Wren hears in her teeth. Not the neck. She could have had the neck." },
+    ] },
+    { advance_text = "Get up.", blocks = [
+        { type = "paragraph", content = "Cain comes out of the stall with a market brazier and puts it, coals and all, into the side of Vega's face." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "That does not hurt me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It does not have to. Run!" },
+    ] },
+    { advance_text = "Run.", blocks = [
+        { type = "paragraph", content = "They run, through the market, under the chain, down a stair she has never taken. Nobody follows." },
+        { type = "dialog", props = { speaker = "player" }, content = "My arm. Cain, my arm." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Keep running." },
+    ] },
+    { advance_text = "\"Why isn't she coming?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Why isn't she coming?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "She wants you whole, and a chase through a crowd breaks things. She will come again. She has started learning you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "That is the only reason you still have an arm." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "He gets her to the top of Kess's ladder and stops there, holding his side." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Kess. Now. I cannot be where you are when she comes looking." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Arm wrong, side wrong, hands shaking. It is cold down here, that is all." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get down to Kess."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "set", value = 60, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "site_ambushed", op = "set" },
+]
+
+# ── J0 · GET TO KESS. beat_0209. Live from the ambush until Kess has had her on the bench. ──
+# ⚠️ WHY A CARD FOR TWO SCREENS. The ambush lands her at the berth, and cap_kess_seam fires there — but only in
+# Kess's yard hours (10:00-22:00). Arrive outside them and berth_offhours plays instead, so the player needs to be
+# told he is the one to see and when.
+[[quest_cards]]
+priority   = 10
+text       = "Vega was waiting on the strip when you came back from the Site. She threw Cain through a stall front and broke your arm, and she let you go because she wants you whole. Cain got you to Kess's ladder."
+tip        = "Kess, at the Berth. He keeps the bench from ten in the morning to ten at night."
+goals = [
+  { flag = "seam_known", op = "is_true", label = "Get Kess to put you back together" },
+]
+when = [
+  { flag = "site_ambushed", op = "is_true"  },
+  { flag = "seam_known",    op = "is_false" },
+]
+
+# ── cap_kess_seam — PART TWO, KESS. beat_0209. Auto-fire @kess_berth, pri 11, ONE-SHOT. ───────────────────────
+# The first repair (free), and the seam: Kess shows her where they open her kind, which is where Bastien's men will
+# take Vega at the end (design_the_hunt.md "Her weak spots" 3, "How Wren learns" 3).
+# ⚠️ HIS THUMB ON THE SEAM IS HER FATHER'S THUMB IN THE MEMORY ("the thumb went along the seam once. The seam that
+# is not there yet"), two scenes after she got that memory's face back. Her thought misnames it (option B).
+# ⚠️ npc_at_location IS MANDATORY: Kess keeps 10:00-22:00 yard hours, and a pri-11 one-shot without it outranks
+# berth_offhours and plays to an empty dock (the beat_0068 lesson, cap_file_shape's header).
+# ⚠️ "I WILL NEED SOMEONE BEHIND HER" IS THE SEED FOR BASTIEN'S HALF, said by her, not explained. Kess refuses it
+# as a trade, which is the shape of every refusal he has ever made ("a bare verb plus a reason of trade").
+# Damage: -25, clamp = true (choice/exit effects default to NO clamp, v2.py:15684), so 60 lands on 35, Body: Hurt.
+[[canvases]]
+id          = "cap_kess_seam"
+name        = "The seam"
+description = "beat_0209 (0.2.3). Auto-fire @kess_berth, pri 11, one-shot, gated site_ambushed is_true + seam_known is_false + Kess present. Kess clears the bench and puts her back together without asking; she names Vega; he says Vega is made like her, same family, better parts, and puts his thumb on the seam at the base of her spine: every one of her kind has it, push there hard and the whole thing stops. She says she will need someone behind Vega. First repair free. SETS seam_known, vega_damage -25 (clamped)."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "site_ambushed", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "seam_known",    operator = "is_false" },
+  { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The seam"
+blocks = [
+  { type = "paragraph", content = "Kess takes one look at the arm and clears the bench with his forearm. Plates, a torch, a cup, all of it onto the boards." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "On it. Face down. Do not tell me how yet." },
+    ] },
+    { advance_text = "Lie down.", blocks = [
+        { type = "paragraph", content = "He works without talking. The elbow goes back in with a crack that empties her lungs. Something under her ribs gets prised, pressed and sealed." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Now tell me. A man did not do this. A man does not bend plate." },
+    ] },
+    { advance_text = "Tell him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "One of the company's. A unit. Her name is Vega." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then she is made like you are. Same family. Better parts, and nobody home." },
+    ] },
+    { advance_text = "Stay still.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Lie still. I want to show you something you should have been shown years ago." },
+        { type = "paragraph", content = "His thumb finds the base of her spine and stops there, on the seam, and presses." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A thumb on the seam. Her father's, in the afternoon, before there was a seam to touch. Her eyes sting. Solvent off the bench, she decides." },
+    ] },
+    { advance_text = "Listen.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Every one of your kind has this. It is where they open you. Push here, hard, and the whole of you stops, the way a man stops when you put him to sleep." },
+        { type = "dialog", props = { speaker = "player" }, content = "Every one." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "If she has a back, she has this." },
+    ] },
+    { advance_text = "Think it through.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "You will not get round behind a thing like that on your own. Nobody fights her from the front and lives to come back here." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then I will need someone behind her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That is not my trade. Coming back here with holes in you is. Ten coin a time, after today." },
+    ] },
+    { advance_text = "Sit up.", blocks = [
+        { type = "paragraph", content = "He wipes his hands and goes back to his plate. The arm bends. Her side still burns, and she sits on the edge of the bench a long time." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "add", value = -25, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "seam_known", op = "set" },
+]
+
+# ── rand_vega_street — THE HUNT, ON THE STREETS. beat_0210. Lane-2 random @underworld_strip. ─────────────────
+# LO, 2026-10-03: "vega can catch her in the underworld streets"; "she has to run off"; "lost day but not
+# hideouts"; Vega damages her and Kess repairs her. design_the_hunt.md "BLUEPRINT · Part two".
+# ⚠️ SHE ALWAYS LOSES HERE. Wren alone can only hurt Vega, never bring her in (LO: beating Vega takes the fight AND
+# Bastien's men). A street win would skip Bastien's half, so the take (beat_0216) is the only win and this screen
+# is where the habits come from. Losing is the content; vega_habits is the progress.
+# ⚠️ FIVE BANDS ON vega_habits, NOT THE BLUEPRINT'S FOUR. At 4 she has every habit and still loses, and the
+# fourth-band text ("she will not finish her") would be a lie on the fifth visit. The 4+ band says what is true
+# then: she can stand with Vega now, and it is not enough alone.
+# ⚠️ THE ESCAPE SCREEN'S BANDS READ THE PRE-INCREMENT VALUE. A location exit's effects are passage-level scripts at
+# the bottom of the node (engine-reference.md:230), so the groups above them evaluate first: the habit she learns
+# on this visit is the band she was in when the fight started. Live-checked by the beat_0210 probe.
+# ⚠️ THE DAMAGE OVERLAY IS SEPARATED FROM THE BAND CHAIN BY AN UNGROUPED LINE ("Asset Wren."). Adjacent groups merge
+# into one if/elseif chain (5_scenes, hunt_marsh_sunday's "Lock it."), which would make "badly hurt" and the habit
+# band mutually exclusive.
+# ⚠️ NO npc / requires_npc. Vega has no schedule row, so a presence gate could never pass; she is wherever the
+# scene says she is. Gated seam_known (after Kess has had her on the bench) and vega_taken is_false (closes at the
+# take). Random fires roll only on a real entry, never on a Back re-render, and each fire puts the strip on the
+# engine's per-location cooldown (v2.py checkRandomEncounters).
+# Effects: vega_damage +35 (clamp = true: exit effects default to no clamp, v2.py:15684), vega_habits +1 with
+# cap = 4, 540 minutes (the day), home to the cot.
+# MEDIA: five new slots, scenes/vega_street_t1..t5.jpg, one per band (one asset, one block).
+[[canvases]]
+id          = "rand_vega_street"
+name        = "Vega on the strip"
+description = "beat_0210 (0.2.3). THE HUNT. Lane-2 random @underworld_strip, chance 0.35, once a day, repeatable, gated seam_known is_true + vega_taken is_false. Vega steps out of the crowd and they fight; Wren always loses. Five bands on vega_habits (0-4), each a different fight and a different habit learned (how she opens, which side she cuts off, when she slows, that she will not finish her, and at 4: she knows it all and it is not enough alone); a damage overlay when Wren is badly hurt. 'Run.' -> the escape: the habit, the lost day. vega_damage +35 (clamped), vega_habits +1 (cap 4), 540 min, home to the cot."
+[canvases.trigger]
+location             = "underworld_strip"
+trigger_mode         = "random"
+chance               = 0.35
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seam_known", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vega_taken", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Vega on the strip"
+blocks = [
+  { type = "paragraph", content = "The crowd goes quiet and opens up the middle of the strip. Vega is walking up it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 60 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Wren is still hurt from last time." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You have not been repaired. That is a mistake." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Asset Wren." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/vega_street_t5.jpg", description = "Two women fighting hard in a dim underground market street, the smaller one landing a blow and the taller, perfectly composed one not reacting at all, a crowd at a distance. Must show: an even, fast fight, both on their feet. Avoid: weapons, blood, gore.", search_queries = ["two women fighting street dim market crowd watching", "woman landing punch on calm taller woman fight scene"] } },
+    { type = "paragraph", content = "She knows all of it now. She stays with Vega longer than anybody in the Reach could, and lands four times." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You have improved. It is not enough alone." },
+    { type = "dialog", props = { speaker = "player" }, content = "I know. I know exactly what it is not enough for." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Then come with me and stop paying for it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 4 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/vega_street_t4.jpg", description = "A woman pinned face down on wet stone in a dim street, a tall calm woman kneeling on her back with one hand resting on the back of her neck, not squeezing. Must show: the pin, the hand on the neck, restraint not violence. Avoid: blood, choking, weapons.", search_queries = ["woman pinned face down kneeling on her back hand on neck", "fighter holding opponent down on street calm"] } },
+    { type = "paragraph", content = "Vega puts her on the stones and kneels on her back, one hand on her neck. She never squeezes." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Stay down. I am not permitted to break you." },
+    { type = "dialog", props = { speaker = "player" }, content = "Then you're going to have to let me up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Eventually. I can wait longer than you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/vega_street_t3.jpg", description = "A long close fight between two women in a dark underground street, both moving fast, the taller one a fraction slow on a block. Must show: a sustained exchange, motion. Avoid: weapons, blood.", search_queries = ["two women close quarters fight fast dark alley", "intense hand to hand fight women motion blur street"] } },
+    { type = "paragraph", content = "It runs over a minute. Near the end her hands come a beat late, then fast again." },
+    { type = "dialog", props = { speaker = "player" }, content = "You're slowing. I saw it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "No." },
+    { type = "dialog", props = { speaker = "player" }, content = "You are. Your hands are late." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Output is within tolerance. Get up." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/vega_street_t2.jpg", description = "A woman trying to break away toward a stairway in a crowded underground market and a tall calm woman already standing in her path. Must show: the cut-off, the stair behind. Avoid: weapons, blood.", search_queries = ["woman blocked from escape stairway crowded market", "tall woman standing in the way of fleeing woman stairs"] } },
+    { type = "paragraph", content = "Wren breaks for the stairs, and Vega is already there. She breaks left. Vega is there first." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You run toward the light. Logged." },
+    { type = "dialog", props = { speaker = "player" }, content = "Everybody runs toward the light." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Yes. That is why it is easy." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/vega_street_t1.jpg", description = "A woman knocked down onto wet stones in a dim underground street by a single clean blow from a tall, calm woman who has not changed expression. Must show: one blow, the fall. Avoid: weapons, blood, gore.", search_queries = ["woman knocked down single punch wet street night", "calm woman knocks opponent to the ground one hit"] } },
+    { type = "paragraph", content = "Two steps and the right hand, no feint. Wren is on the stones before she sees it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Get up. We will do this until you come with me." },
+    { type = "dialog", props = { speaker = "player" }, content = "Then we'll be doing it a while." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "I have nowhere else to be." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Run."
+targetType = "node"
+nodeId     = "rand_vega_street.run"
+
+[[canvases.nodes]]
+id   = "run"
+name = "Run"
+blocks = [
+  { type = "paragraph", content = "She gets one chance and takes it: under a stall, through a gap, down a stair, and she does not stop until the strip is a long way above her." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing new. She knows every move Vega has, and knowing is not enough on her own. Somebody has to be behind her." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 4 },
+    ] } }, blocks = [
+    { type = "thought_bubble", props = { speaker = "player" }, content = "She will not finish her. Whatever happens, Vega holds back. So Wren can risk what Vega never will." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Over a minute and she slows. A beat late, then fast again. If Wren can last past that minute, there is a window." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "thought_bubble", props = { speaker = "player" }, content = "She takes away the side Wren wants before Wren wants it. Next time, want the wrong side." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Two steps and the right hand, no feint. Exactly how she opened on Cain the first day. That is something to know." },
+  ] },
+  { type = "paragraph", content = "She lies up in the dark under the docks until it is safe, and the whole day goes. Then she goes home to the cot on legs that do not want to carry her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "add", value = 35, clamp = true },
+  { targetType = "player", trait = "vega_habits", op = "add", value = 1,  clamp = true, cap = 4 },
+]
+
+# ── J · THE HUNT. beat_0210. Live from Kess's seam until the take. ──
+# ⚠️ ONE CARD FOR THE WHOLE HUNT, because the take needs all of it at once (design_the_hunt.md, "Beating her takes
+# both"). Trait goals render "label — current / value" (quests.md), so each label carries the verb and the place.
+# ⚠️ THE CREW GOAL JOINED AT beat_0214, with the scene that sets crew_back (the whole-amendment rule). The fighting goal's place (Cain, at the Site, at night)
+# becomes true at beat_0211 — the tip says only what is true today.
+[[quest_cards]]
+priority   = 10
+text       = "Vega is in the underworld and she will keep coming. You cannot beat her from the front and you cannot hide from her. Every fight teaches you something about how she moves, and costs you."
+tip        = "She finds you on the Underground. Lose, run, learn. Kess fixes the damage for coin. Kess showed you the seam: get behind her and it ends."
+goals = [
+  { trait = "vega_habits", subject = "player", op = "gte", value = 4,  label = "Learn how Vega fights (survive her on the Underground)" },
+  { trait = "fighting",    subject = "player", op = "gte", value = 85, label = "Get good enough to stand with her" },
+  { trait = "vega_damage", subject = "player", op = "lt",  value = 30, label = "Be in one piece (Kess, at the Berth)" },
+  # beat_0214: joins the card now that crew_back has a setter (cap_the_crew_night) — the whole-amendment rule.
+  { flag = "crew_back", op = "is_true", label = "Get men behind her (Bastien's crew, at the Undertow)" },
+]
+when = [
+  { flag = "seam_known", op = "is_true"  },
+  { flag = "vega_taken", op = "is_false" },
+]
+
+# ── cap_crew_refuses — 0.2.3 B3. beat_0213. Auto-fire @underworld_bar, pri 11, ONE-SHOT. ───────────────────────
+# LO, 2026-10-03: "hire those men again with a pay but they say why they again go to bar, there many men died".
+# ⚠️ BASTIEN IS NOT IN THE ROOM. His location is the secret The Count set ("none of them will know where I am"),
+# and a man who walks into his own bar is a man who has been found. So she makes the offer for him, with Rue's
+# money, and they answer her.
+# ⚠️ THE DEAD DIED ON THE STRIP, the one place the shipped raid allows (cap_the_raid empties the bar first;
+# Bastien: "Three of them came down the strip"). The refusal is "why go back to the Undertow, after what came down
+# the strip for it" — never "men died in this bar".
+# ⚠️ A DAY AFTER IT OPENS, IN THE EVENING. The third rebuild stage exits to this room, and on the bare flag this
+# would fire in that same breath; days_since_flag undertow_open gte 1 is safe because undertow_open is new in
+# 0.2.3 and is set through the engine's flag path, which records set_day. Card 22's tip names the wait.
+# ⚠️ THE MEN ARE UNNAMED (speaker = "unknown"), the house pattern for crowd voices (bunker_guards, rev 239). Dace is
+# the only one with a name, and he is not here: they send her to him.
+# MEDIA: one new slot, scenes/undertow_reopened.jpg, on the lead.
+[[canvases]]
+id          = "cap_crew_refuses"
+name        = "The men"
+description = "beat_0213 (0.2.3). B3. Auto-fire @underworld_bar, pri 11, one-shot, gated undertow_open is_true + days_since_flag undertow_open gte 1 + evening (18:00-24:00) + crew_refused is_false + Sol present. Six of Bastien's old men come to the reopened bar; she makes his offer with Rue's money; they will not come back for money after what came down the strip; if Dace comes back, they come back. SETS crew_refused."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "undertow_open", operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "undertow_open", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "18:00", end_time = "00:00" },
+  { type = "flag", subject = "player", flag_key = "crew_refused",  operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_bar", operator = "is_present", npc_id = "npc_sol" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The men"
+blocks = [
+  { type = "image", props = { file = "scenes/undertow_reopened.jpg", description = "A small newly rebuilt underground bar in the evening, half a dozen hard-looking men in work clothes standing at the new counter with drinks, not sitting, wary. Must show: new wood, a group of rough men, low warm light. Avoid: a party, women, fighting.", search_queries = ["group of rough men standing at bar counter evening dim", "working men drinking at new wooden bar wary"] } },
+  { type = "paragraph", content = "Word goes round the strip that the Undertow is open. By evening there are six men at the new counter, standing, not sitting." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Told you a bar wants men in it. These are some of the ones he had." },
+    ] },
+    { advance_text = "Make his offer.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "He wants you back. Same work, better money. Rue's money, if you want to know where it comes from." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "A dead man's money." },
+        { type = "dialog", props = { speaker = "player" }, content = "He isn't dead." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "unknown" }, content = "Then he can come down here and ask us himself." },
+        { type = "dialog", props = { speaker = "player" }, content = "He can't. Not yet." },
+    ] },
+    { advance_text = "Let them talk.", blocks = [
+        { type = "dialog", props = { speaker = "unknown" }, content = "Three of them came down the strip and we stood in the way. I watched one of them turn a man's head round with one hand." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Why would anybody walk back to this bar, after what came down the strip for it?" },
+    ] },
+    { advance_text = "\"For the money.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "For the money." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Money is what we had that night. Money did not stand up when they came." },
+    ] },
+    { advance_text = "Ask what would.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Then what would bring you back?" },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Dace. He was out there with us and he walked off that strip and kept walking. If Dace comes back, we come back." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "He drinks at the pit now. Ask him. He won't say yes." },
+    ] },
+    { advance_text = "Watch them go.", blocks = [
+        { type = "paragraph", content = "They finish the drinks Sol poured, every one of them, and leave the coin on the counter for it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "She has never once had to ask a man for anything with her clothes on. She does not know how it is done." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go and find Dace."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "crew_refused", op = "set" },
+]
+
+# ── cap_dace_price — 0.2.3 B4. beat_0213. Auto-fire @underworld_pit, pri 11, ONE-SHOT. ─────────────────────────
+# LO, 2026-10-03: "there is a main man, she can talk to and get lets say 10 men"; "she gives sex in return to all
+# at once". The price is HIS to name (agreed in the design), and hers to accept, here, before the night.
+# ⚠️ npc_at_location IS THE GATE THAT BITES: his row (1_metadata, under npc_dace) is when-gated on crew_refused and
+# runs 18:00-23:59, and requires_npc is inert on auto-fire (engine-reference.md:112).
+# ⚠️ WHY IT IS NOT MONEY, IN HIS MOUTH: the men need something to remember the Undertow by that is not the night it
+# went. That is the reason the scene gives; the act is the next beat's (cap_the_crew_night).
+# ⚠️ SHE CAN SAY NO, AND DOES NOT. He says it plainly ("You can say no"), because the ceiling row for this chunk
+# asks for the yes on the page; she gives it in her own words.
+# ⚠️ HER THOUGHT IS NOT A MISNAMED FEELING. Sex is the one thing she does feel (design_book "What she is"), so
+# option B's wrong-word device does not apply to wanting it; the thought is honest.
+# MEDIA: none new — Dace's portrait is the face of the scene.
+[[canvases]]
+id          = "cap_dace_price"
+name        = "Dace"
+description = "beat_0213 (0.2.3). B4. Auto-fire @underworld_pit, pri 11, one-shot, gated crew_refused is_true + dace_met is_false + Dace present (his when-gated pit row, 18:00-23:59). Dace will not walk back into the Undertow for coin; the men need something to remember the place by that is not the night it went: her, with all of them at once, about ten, in the bar after Sol shuts. She can say no; she says tomorrow night. SETS dace_met."
+[canvases.trigger]
+location      = "underworld_pit"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "crew_refused", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "dace_met",     operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_pit", operator = "is_present", npc_id = "npc_dace" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dace"
+blocks = [
+  { type = "paragraph", content = "He is at the rail over the pit with a glass, watching two men take each other apart for a purse. He knows who she is before she gets to him." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "You're the one paying Sol. With his money." },
+        { type = "dialog", props = { speaker = "player" }, content = "His money and mine." },
+    ] },
+    { advance_text = "Ask him.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "The lads told me. I'll tell you what I told them. I am not walking back into that place for coin." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then what for?" },
+    ] },
+    { advance_text = "Wait for it.", blocks = [
+        { type = "paragraph", content = "He looks at her for a long time, the whole length of her, and does not pretend he is doing anything else." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "They need a reason to walk past that strip again that isn't money. Something to remember the place by that isn't the night it went." },
+    ] },
+    { advance_text = "\"What reason?\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "You. All of us, at once, in that bar, after Sol shuts. About ten of us. In the morning we're his again." },
+    ] },
+    { advance_text = "\"All of you.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "All of you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "All of us. You can say no. Then the bar stays empty and you go after that thing on your own." },
+    ] },
+    { advance_text = "Think about it.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ten men, all of them at once, and the bar full in the morning. Her cunt is already wet thinking about it. She has done this for less, and liked it more than anyone would believe." },
+    ] },
+    { advance_text = "Answer him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Tomorrow night. After Sol shuts. Bring all ten." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Tomorrow night." },
+        { type = "paragraph", content = "He goes back to watching the pit. Down in it, one of the men stops getting up." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tomorrow night."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_pit"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "dace_met", op = "set" },
+]
+
+# ── cap_the_crew_night — 0.2.3 B5. beat_0214. Auto-fire @underworld_bar, pri 11, ONE-SHOT. TIER-3, EXPLICIT. ──────
+# LO, 2026-10-03: "she gives sex in return to all at once, there is a main man, she can talk to and get lets say
+# 10 men." The release's one explicit capstone (LO: "low sex scenes is fine here").
+# ⚠️ THE NIGHT AFTER DACE'S YES, AFTER SOL SHUTS: days_since_flag dace_met gte 1 (dace_met is new in 0.2.3 and set
+# through the engine's flag path, so it carries set_day) + time_of_day 22:00-04:00 (wraps midnight).
+# ⚠️ HER YES IS ON THE PAGE, FIRST, in her own mouth ("I said yes at the pit"), before anyone touches her — the same
+# discipline The Count's ceiling row asked for.
+# ⚠️ NO ANAL, ANYWHERE. The anal finish IS the drain (design_book "Her secret weapon"); in a room of ten men it
+# would fire the weapon on one of them and turn the scene into a different scene. The Count held the same line.
+# ⚠️ EVERY EXPLICIT BEAT STAYS ON THE BODY (the pivot rule, register.md) and carries 3+ of the scoreboard's frozen
+# words (gates.py:311), checked per beat by check_the_hunt.py §0214, not eyeballed. Her one thought gets its own
+# beat AFTER the act. The men talk the whole way through: ten people in a room, narration:dialogue measured.
+# ⚠️ BASTIEN IS NOT HERE (his location is the secret); Sol has gone home. Dace is the only named man.
+# ⚠️ CEILING ROW: a new one for this scene — "THE CREW NIGHT — Dace's ten" — drafted in design_the_hunt.md for LO to
+# sign: group, consensual, her choosing it, crude vocabulary at the game's maximum, no anal (the weapon).
+# MEDIA: one new clip, sex/crew_night_t5.webm, a single file (a one-time screen — the pool-per-screen rule), riding
+# the first full act beat (the clip-rides-the-beat rule), never the node's lead.
+[[canvases]]
+id          = "cap_the_crew_night"
+name        = "Dace's ten"
+description = "beat_0214 (0.2.3). B5 — TIER-3, the release's explicit capstone. Auto-fire @underworld_bar, pri 11, one-shot, gated dace_met is_true + days_since_flag dace_met gte 1 + 22:00-04:00 + undertow_open + crew_back is_false. Ten of Bastien's old men in the rebuilt bar after Sol shuts; her yes first; stripped, on her knees, over the new counter (Dace first), turns, on the floor, cum on and in her, a second round; her thought after; in the morning they are Bastien's again. No anal. SETS crew_back."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dace_met",      operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "dace_met", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "22:00", end_time = "04:00" },
+  { type = "flag", subject = "player", flag_key = "undertow_open", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "crew_back",     operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dace's ten"
+blocks = [
+  { type = "paragraph", content = "Sol has gone home. Dace bolts the door. Ten men in the new bar, chairs pushed back to the walls, and her in the middle of the floor." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Last chance. Say no and we all go home." },
+        { type = "dialog", props = { speaker = "player" }, content = "I said yes at the pit. Take your coats off." },
+    ] },
+    { advance_text = "Let them.", blocks = [
+        { type = "paragraph", content = "They strip her between them, hands on her tits and her ass before her shirt is over her head. She is naked in the middle of ten men, nipples already hard." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Look at her. She wants it." },
+        { type = "dialog", props = { speaker = "player" }, content = "I do. Get your cocks out." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Turn her round. Let's see the rest of her." },
+    ] },
+    { advance_text = "Get on your knees.", blocks = [
+        { type = "video", props = { file = "sex/crew_night_t5.webm", description = "A naked woman kneeling on a wooden floor in a dim bar after hours, surrounded by standing men, a cock in each hand and one in her mouth. Must show: her kneeling in the middle, several men standing close round her, a bar room. Avoid: a bedroom, bright light, anal, violence.", search_queries = ["woman kneeling surrounded by men gangbang bar amateur gif", "naked girl on knees sucking several cocks in a circle gif", "group blowjob woman in middle of men dim room gif"] } },
+        { type = "paragraph", content = "On her knees on the new boards, a cock in each hand and a third in her mouth. She sucks it to the root while the rest stand close with their cocks out." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Fuck. Look at her go." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Don't hog her mouth. There's ten of us." },
+    ] },
+    { advance_text = "Over the counter.", blocks = [
+        { type = "paragraph", content = "Dace bends her over the new counter and fucks her from behind, hard, his hands on her hips, and the counter takes every thrust. She moans into the wood." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "First thing this counter's been used for. Fitting." },
+        { type = "dialog", props = { speaker = "player" }, content = "Harder. You want them to remember the place." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Christ, listen to her." },
+    ] },
+    { advance_text = "Take the next one.", blocks = [
+        { type = "paragraph", content = "One after another they take turns fucking her cunt across the counter. The ones who have finished stay to watch, and she pushes back onto every cock like she is the one keeping count." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Who's next?" },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Me. Move." },
+        { type = "dialog", props = { speaker = "player" }, content = "Six. I'm counting." },
+    ] },
+    { advance_text = "On the floor.", blocks = [
+        { type = "paragraph", content = "They put her on her back on the floor. A cock in her cunt, another in her mouth, a hand on each tit, and she comes with her mouth full, shaking under them." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "She came. She actually came." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Then don't stop." },
+        { type = "dialog", props = { speaker = "player" }, content = "Don't you dare stop. I'm not done." },
+    ] },
+    { advance_text = "Let them finish.", blocks = [
+        { type = "paragraph", content = "They cum on her and in her: on her tits, across her face, deep in her cunt. She licks it off her lip and holds her mouth open." },
+        { type = "dialog", props = { speaker = "player" }, content = "Is that all ten?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "That's the first round." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Open wide, love. There's more coming." },
+    ] },
+    { advance_text = "Again.", blocks = [
+        { type = "paragraph", content = "The second round is slower. Two at once, a cock in her mouth and one fucking her cunt, and they pass her between them across the floor." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Best night this bar's ever had." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then don't waste it talking." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Wait your turn. She's not going anywhere." },
+    ] },
+    { advance_text = "Lie there.", blocks = [
+        { type = "paragraph", content = "By the end she is sticky from her tits to her knees, her cunt aching, and every one of the ten has had her twice. She lies naked on the floor in the middle of them and does not get up." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Somebody get her a coat." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Leave her. She's earned the floor." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Ten men, every way they wanted, and she wanted all of it. The one thing in her that has always worked, and tonight it bought a bar full of men." },
+    ] },
+    { advance_text = "Morning.", blocks = [
+        { type = "paragraph", content = "In the morning Sol opens up on ten men at the counter and her asleep on the bench under a coat." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Tell him we're back. All of us." },
+        { type = "dialog", props = { speaker = "player" }, content = "Tell him yourself. He's paying you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "He's paying us. You're the reason we came." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home to the cot."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 480
+flagEffects = [
+  { targetType = "player", flag = "crew_back", op = "set" },
+]
+
+# ── cap_the_table — 0.2.3, THE END. beat_0217. Auto-fire @kess_berth, pri 11, ONE-SHOT. ─────────────────────────
+# LO, 2026-10-03: "they take the machine, kill her, dismantle her. Transfer wren to her … she can now use that
+# machine's power and get in the company." The killing and the taking apart are THIS release; the transfer is 0.2.4.
+# ⚠️ CAIN'S PLAN, PLAINLY, IN HIS MOUTH, with every piece already planted: the method is in her head (Sabin's piece,
+# "the making" — design_whose_hand.md:180); the equipment is the TWO CRADLES in her father's lab (cap_the_site, "Why
+# are there two?" / "Not today."); Kess has the hands (he has opened her twice). And the two 0.2.4 decisions LO made
+# on 2026-10-03, said as a plan, not done: her own body stays in the other cradle and Cain sits with it (TEMPORARY);
+# the feeling goes with her is NOT said here — it is what she finds out in 0.2.4.
+# ⚠️ VEGA SHOWS NOTHING (design: "She shows nothing as it happens, because there is nothing in her to show. Wren is
+# the one who feels it"). Her one line is a report about herself, in the third person, the units' register.
+# ⚠️ npc_at_location npc_kess: his yard hours are 10:00-22:00 and the take exits here 12 hours on, so it can land
+# outside them; card K names the hours. Cain needs no gate — he is a speaker in a one-shot, like every scene of his.
+# Kess sees to her damage at the same time: vega_damage set 0 (the take cost her 25).
+# MEDIA: one new slot, scenes/kess_table_vega.jpg, on the dismantling beat.
+[[canvases]]
+id          = "cap_the_table"
+name        = "The table"
+description = "beat_0217 (0.2.3). THE END. Auto-fire @kess_berth, pri 11, one-shot, gated vega_taken is_true + vega_dismantled is_false + Kess present. Dace's men carry Vega down the ladder; Cain lays out the plan: hiding will not reach the third piece, so she goes in as one of theirs — Vega's body, her inside it; the method from Sabin's piece, the two cradles in her father's lab, Kess's hands; her own body in the other cradle with Cain sitting by it. Kess opens the seam; Vega reports herself lost and stops for good; he takes her apart through the night. Wren is the one who feels it. Body ready by morning. SETS vega_dismantled; vega_damage 0."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "vega_taken",      operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vega_dismantled", operator = "is_false" },
+  { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The table"
+blocks = [
+  { type = "paragraph", content = "Four of Dace's men bring her down Kess's ladder in the bag and lay her on the bench he has cleared. Cain is already there, in the corner." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Same family, better parts. I said. Is she off?" },
+        { type = "dialog", props = { speaker = "player" }, content = "Asleep. The seam." },
+    ] },
+    { advance_text = "Look at Cain.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "We can hide. We are good at it. But the third piece is inside the company, and we cannot walk in as we are." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "So you go in as one of theirs." },
+    ] },
+    { advance_text = "\"One of theirs.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "One of theirs." },
+        { type = "paragraph", content = "He looks at the bench. So does she." },
+        { type = "dialog", props = { speaker = "player" }, content = "Her." },
+    ] },
+    { advance_text = "Let him say it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Her body, and you inside it. The method is in your head, from Sabin's piece. The two cradles are in your father's lab. Kess has the hands." },
+    ] },
+    { advance_text = "Look at Kess.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I have opened you twice. I can open her. I have never put anybody back into anything." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Marrow did. Twice." },
+    ] },
+    { advance_text = "\"And my body?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And my body?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Stays in his lab, in the other cradle. I will sit with it until you come back for it." },
+    ] },
+    { advance_text = "Watch Kess.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then she stops first. All the way." },
+        { type = "paragraph", content = "He puts the torch to the seam and opens it. Her eyes come on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "This unit will be reported lost." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nobody is reporting anything." },
+    ] },
+    { advance_text = "Don't look away.", blocks = [
+        { type = "paragraph", content = "He reaches in and takes out what keeps her running, and Vega stops for good. Nothing in her face. There was never going to be." },
+    ] },
+    { advance_text = "Stay.", blocks = [
+        { type = "image", props = { file = "scenes/kess_table_vega.jpg", description = "A cluttered dockside workshop bench under a single hanging lamp, the parts of a dismantled humanoid machine laid out on it in careful rows, plates, an arm, a torso shell, no blood, a mechanic's tools beside them. Must show: careful rows of machine parts, a work lamp, a workshop. Avoid: gore, blood, a human body.", search_queries = ["dismantled humanoid robot parts laid out on workbench lamp", "android parts in rows on mechanic workbench dim workshop"] } },
+        { type = "paragraph", content = "He takes her apart through the night: the arms, the plates, the long careful work round the head, which has to stay whole. He lays the pieces out on the bench in order." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Hand me the small driver. No. The other one." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing in her face, the whole way through. Wren's own hands will not stop shaking. Cold, she decides. Again." },
+    ] },
+    { advance_text = "Morning.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "She's ready. An empty shell in your shape, near enough. I saw to your side while I was in there." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then we take her to the Site." },
+        { type = "dialog", props = { speaker = "player" }, content = "Not yet. Let me sleep first. Then the Site." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 600
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "set", value = 0, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "vega_dismantled", op = "set" },
+]
+
+# ── K · THE BODY ON THE TABLE. beat_0217. Live from the take until Kess has done it. ──
+[[quest_cards]]
+priority   = 10
+text       = "Vega is in Bastien's room, asleep with the seam pushed in. Three of Dace's men died on the strip getting her there. Kess has opened you twice. Now he opens her."
+tip        = "Kess, at the Berth. He keeps the bench from ten in the morning to ten at night."
+goals = [
+  { flag = "vega_dismantled", op = "is_true", label = "Get Vega onto Kess's table" },
+]
+when = [
+  { flag = "vega_taken",      op = "is_true"  },
+  { flag = "vega_dismantled", op = "is_false" },
+]
+
+# ── L · THE END CARD. Terminal. beat_0217. Names what is still standing and the door. ──
+# ⚠️ NO APOSTROPHE IN terminal_text — SugarCube source-byte escaping renders one as &amp;#x27; in the built page.
+# ⚠️ THE ONLY TERMINAL STORY-GOALS CARD IN THE GAME (check_the_hunt.py §0217), the job card H used to have.
+# Every place named in the tip was re-read at beat_0217: Bastien at the cot (round the clock) and his men at the
+# Undertow (open, Sol 10-24); Cain at the Site 21:00-03:00; Renner's office and yard; Grier from ten; Sabin on the
+# floor at eight and in his lab from eleven; Colm at the Undertow in the evenings; the House, the market, the pit.
+[[quest_cards]]
+priority   = 10
+text       = "Vega is in pieces on Kess's bench, and the shell of her is ready: a company machine in your shape, near enough. The method is in your head. The two cradles are in your father's lab. Cain will sit with your body while you wear hers."
+tip        = "That is where this build ends. Bastien is at the cot and his men are back at the Undertow. Cain keeps the nights at the Site. Renner's office is open, Grier is in his room from ten, Sabin is on the floor at eight and in his lab from eleven, and Colm drinks at the Undertow in the evenings. The House, the market and the pit are where you left them. The transfer is the next release. If you want it sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { flag = "vega_dismantled", op = "is_true" },
 ]

@@ -177,8 +177,15 @@ def main() -> int:
         check(len(hits) == 1, f"1: expected one card opening on {opener}"
                               f"{' and closing on ' + closer if closer else ''}, found {len(hits)}")
         if closer is None and hits:
-            check(hits[0].get("terminal") is True and hits[0].get("terminal_text"),
-                  "1: the last card (bastien_back) is not the terminal end card")
+            # 0.2.2's end card until 0.2.3 opened (beat_0207): since then it hands over to card I instead —
+            # not terminal, closing on site_offered, and no longer saying the build ends here.
+            h = hits[0]
+            handed_over = (not h.get("terminal")
+                           and any(cl.get("flag") == "site_offered" and cl.get("op") == "is_false"
+                                   for cl in h.get("when") or [])
+                           and "build ends" not in (h.get("tip") or ""))
+            check((h.get("terminal") is True and h.get("terminal_text")) or handed_over,
+                  "1: the last card (bastien_back) is neither the terminal end card nor handed over to 0.2.3")
     # Exactly one of our cards is live at every point on the chain, from the rescue to the end.
     state = {"bastien_rescued": True}
     walk = [dict(state)]
@@ -481,10 +488,11 @@ def main() -> int:
             check(not [e for e in free[0].get("effects", []) if e.get("trait") == "bastien_mend"]
                   and not free[0].get("flagEffects"),
                   "6: the free 'Go to him.' must not move the meter or the clock — that would be a free night")
-    # Nothing but the located hub ever writes the meter.
+    # Nothing but the located hub ever writes the meter. Dev jumps are exempt by PREFIX, not by name: every
+    # later chunk's jump starts from the end of this one and seeds bastien_mend = 3 (0.2.3's
+    # dev_jump_hunt_start was the first, and a name list failed it with a correct game).
     writers = sorted({cid for cid, cv in canvases.items()
-                      if '"bastien_mend"' in str(cv).replace("'", '"') and cid not in ("dev_jump_count_start",
-                                                                                         "dev_jump_count_one_short")
+                      if '"bastien_mend"' in str(cv).replace("'", '"') and not cid.startswith("dev_jump_")
                       and any(e.get("trait") == "bastien_mend"
                               for n in cv.get("nodes", []) for ch in ((n.get("exit_block") or {}).get("choices") or [])
                               for e in ch.get("effects", []))})
@@ -637,6 +645,9 @@ def main() -> int:
     check(live == ["cap_bastien_counts_again"],
           f"9: with Rue's envelope, counting again must be the only cot auto-fire (got {live})")
     live = cot_oneshots_live(*states["back"])
+    # cap_cain_comes is 0.2.3's opening (beat_0207), not a link of this chain: it is meant to fire here once
+    # he is back, on a later morning. Anything else firing would be the chain replaying.
+    live = [cid for cid in live if cid != "cap_cain_comes"]
     check(live == [], f"9: once he is back, nothing of the chain may fire again at the cot (got {live})")
 
     # ── 10 · beat_0203 — the second dev jump: one night short of him stopping counting ──────────────────

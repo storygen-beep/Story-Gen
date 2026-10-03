@@ -280,6 +280,11 @@ the game is broken. Tracked in §12 so an open decision doesn't ship as a silent
 1. **Cap the market's stat sales?** `underworld_market_shop` sells `fighting +5` / `stealth +5` with no cap
    and no clamp (`:2927`, `:2933`), repeatable — a pre-existing exploit that also launders coin past this
    page's caps (§2). Adding `cap = 40, clamp = true` to both is a two-line game fix. Recommend yes.
+   > **RESOLVED 2026-10-02 — one buy each, not a cap.** LO: "when bought once can't be bought again." Each
+   > choice sets a flag (`market_weapon_bought` / `market_gear_bought`) and is gated `is_false` on it, so the
+   > button is gone after the first buy. The market is now worth exactly +5 fighting and +5 stealth for the
+   > whole game, and the cheat page's caps are the only ceiling again. Old saves get the flags backfilled
+   > false, so a returning player who already bought can buy each once more — harmless, it is 5 points.
 2. **Does the door fix ride along?** §10. Recommend yes.
 3. **Stealth row: cap at 9, or sell the full ladder with a warning?** Capping at 9 preserves every yard route
    including the Tier-5 emitter scene. Selling the full ladder needs the requirement text to say what closes.
@@ -341,3 +346,6 @@ Kept deliberately — these are the failure modes the skill should learn, not ju
 | Money has one writer, zero readers | Starts at 50, and it is visible in the Traits dump (no labels entry). |
 | Clamp/cap at `:12254`/`:12322`/`:12949`; time at `:12860` | Right facts, wrong code paths. Choice path is `:12141` → `:13089`/`:13091`; time is `:12686`/`:12700`. |
 | ⚠️ verify the self-loop | Unnecessary — already shipped in this game at `:4229-4231`. |
+
+
+> **2026-10-04 (0.2.3, beat_0210) — fighting cap 70 → 85.** THE HUNT gates the take on fighting 85 and the build's cheat-page check refused cap 70. Raised to 85 on the rev-227 stealth precedent (sell the full ladder); the hint gains "Vega at 85". Raising fighting still deletes no content: the only new `fighting lt` gate is Cain's training closing at 85. The paid guide's fighting chapter needs the same number at release.
